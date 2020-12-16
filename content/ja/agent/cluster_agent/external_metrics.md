@@ -64,8 +64,8 @@ Datadog Cluster Agent が起動して実行されたら
 
    この変更を適用するには、`kubectl apply -f custom-metric-server.yaml` を実行します
 
-3. [`rbac-hpa.yaml` RBAC ルールファイル][7]をダウンロードします。
-2. サービスを介して Cluster Agent を External Metrics Provider として登録し、上記の RBAC ルールを適用してポート `443` を公開します。
+2. [`rbac-hpa.yaml` RBAC ルールファイル][7]をダウンロードします。
+3. サービスを介して Cluster Agent を External Metrics Provider として登録し、上記の RBAC ルールを適用してポート `443` を公開します。
     ```
     kubectl apply -f rbac-hpa.yaml
     ```
@@ -140,13 +140,13 @@ Kubernetes は 30 秒ごとに Datadog Cluster Agent にクエリを実行して
 1. `DatadogMetric` CRD をクラスターにインストールします。
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-operator/master/deploy/crds/datadoghq.com_datadogmetrics_crd.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics.yaml"
     ```
 
 2. Datadog Cluster Agent RBAC マニフェストを更新します (`DatadogMetric` CRD の使用を許可するために更新されています)。
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent-datadogmetrics/cluster-agent-rbac.yaml"
     ```
 
 3. Datadog Cluster Agent のデプロイで、`DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` を `true` に設定します。
@@ -186,7 +186,7 @@ spec:
   metrics:
     - type: External
       external:
-      metricName: "datadogmetric@<namespace>:<datadogmetric_name>"
+        metricName: "datadogmetric@<namespace>:<datadogmetric_name>"
 ```
 
 **例**: `nginx-requests` という名前の `DatadogMetric` を使用した HPA。両オブジェクトが `nginx-demo` のネームスペースにあることを前提とする。
@@ -267,6 +267,6 @@ status:
 [4]: /ja/agent/cluster_agent/setup/
 [5]: /ja/agent/cluster_agent/setup/#step-3-create-the-cluster-agent-and-its-service
 [6]: https://app.datadoghq.com/account/settings#api
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
 [9]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics

@@ -2,6 +2,10 @@
 title: はじめに
 kind: ドキュメント
 description: Datadog のセキュリティモニタリングに関する主なコンセプトおよび脅威検出を有効にする方法、そして革新的な脅威検出ルールについて学びます。
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/datadog-runtime-security/'
+    tag: ブログ
+    text: Datadog ランタイムセキュリティでインフラストラクチャーを保護する
 ---
 Datadog セキュリティモニタリングを開始するには、次の手順に従います。
 
@@ -22,6 +26,10 @@ Datadog は、環境の脅威をすばやく検出する革新的な[検出ル�
 ## セキュリティシグナルを探索
 
 検出ルールに基づき脅威が検出されると、セキュリティシグナルが生成されます。セキュリティシグナルは、[セキュリティシグナルエクスプローラー][5]で関連付けされトリアージされます。詳細は、[セキュリティシグナルエクスプローラー][6]ドキュメントをご参照ください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/log_collection/
 [2]: https://www.datadoghq.com/blog/logging-without-limits/

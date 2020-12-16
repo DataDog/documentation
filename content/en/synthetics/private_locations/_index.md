@@ -353,7 +353,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 Add a healthcheck mechanism so your orchestrator can ensure the workers are running correctly.
 
-The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (500ms by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
+The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (2s by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
 
 Use the below configuration to set up healthchecks on your containers with:
 
@@ -397,7 +397,7 @@ livenessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+    "CMD-SHELL", "/bin/sh -c '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
   ],
   "timeout": 2,
   "interval": 10,
@@ -413,7 +413,7 @@ livenessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+    "CMD-SHELL", "/bin/sh -c '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
   ],
   "timeout": 2,
   "interval": 10,
@@ -469,7 +469,7 @@ Your private locations can be used just like any other Datadog managed locations
 
 You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
-You can also leverage the [`concurrency` parameter][11] value to adjust the number of tests your private location workers can run in parallel.
+You can also **vertically scale** your private locations using the [`concurrency` parameter][11] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel.
 
 ### Hardware Requirements
 

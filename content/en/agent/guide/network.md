@@ -71,28 +71,10 @@ The information is structured as JSON following this schema:
 }
 ```
 
-{{< site-region region="us" >}}
-
-Each section has a dedicated endpoint at, for example:
-
-- [https://ip-ranges.datadoghq.com/logs.json][1] for the IPs used to receive logs data over TCP for Datadog US region.
-- [https://ip-ranges.datadoghq.com/apm.json][2] for the IPs used to receive APM data for Datadog US region.
-
-[1]: https://ip-ranges.datadoghq.com/logs.json
-[2]: https://ip-ranges.datadoghq.com/apm.json
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
 Each section has a dedicated endpoint, for example:
 
-- [https://ip-ranges.datadoghq.eu/logs.json][1] for the IPs used to receive logs data over TCP for Datadog EU region.
-- [https://ip-ranges.datadoghq.eu/apm.json][2] for the IPs used to receive APM data for Datadog EU region.
-
-[1]: https://ip-ranges.datadoghq.eu/logs.json
-[2]: https://ip-ranges.datadoghq.eu/apm.json
-
-{{< /site-region >}}
+- `https://ip-ranges.{{< region-param key="dd_site" >}}/logs.json` for the IPs used to receive logs data over TCP.
+- `https://ip-ranges.{{< region-param key="dd_site" >}}/apm.json` for the IPs used to receive APM data.
 
 ### Note
 

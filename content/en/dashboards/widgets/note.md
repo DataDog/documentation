@@ -16,7 +16,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The notes and links widget is similar to [free text widget][1], but allows for more formatting options:
+The notes and links widget is similar to [free text widget][1], but allows for more formatting options.
 
 ## Setup
 
@@ -28,40 +28,16 @@ The notes and links widget is similar to [free text widget][1], but allows for m
 
 ## API
 
-The dedicated [widget JSON schema definition][2] for the note widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
 
-```text
-NOTE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["note"]},
-        "content": {"type": "string"},
-        "background_color": {"type": "string"},
-        "font_size": {"type": "string"},
-        "text_align": {"enum": ["center", "left", "right"]}
-        "show_tick": {"type": "boolean"},
-        "tick_pos": {"type": "string"},
-        "tick_edge": {"enum": ["bottom", "left", "right", "top"]}
-    },
-    "required": ["type", "content"],
-    "additionalProperties": false
-}
-```
+The dedicated [widget JSON schema definition][3] for the note widget is:
 
-| Parameter          | Type    | Required | Description                                                                                         |
-|--------------------|---------|----------|-----------------------------------------------------------------------------------------------------|
-| `type`             | string  | yes      | Type of the widget, for the note widget use `note`                                                  |
-| `content`          | string  | yes      | Content of the note                                                                                 |
-| `background_color` | string  | no       | Background color of the note                                                                        |
-| `font_size`        | string  | no       | Size of the text                                                                                    |
-| `text_align`       | string  | no       | How to align the text on the widget. Available values are: `center`, `left`, or `right`             |
-| `show_tick`        | Boolean | no       | Whether to show a tick or not                                                                       |
-| `tick_pos`         | string  | no       | Where to position the tick on an edge                                                               |
-| `tick_edge`        | string  | no       | Edge on which the tick will be displayed. Available values are: `bottom`, `left`, `right`, or `top` |
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/widgets/free_text/
-[2]: /dashboards/graphing_json/widget_json/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/

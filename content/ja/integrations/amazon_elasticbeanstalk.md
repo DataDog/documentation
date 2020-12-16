@@ -81,11 +81,11 @@ Elastic Beanstalk 環境で Docker コンテナを使用する場合は、コン
     "containerDefinitions": [
         {
             "name": "dd-agent",
-            "image": "datadog/agent:7",
+            "image": "gcr.io/datadoghq/agent:7",
             "environment": [
                 {
                     "name": "DD_API_KEY",
-                    "value": "<DD_API_キー>"
+                    "value": "<YOUR_DD_API_KEY>"
                 },
                 {
                     "name": "DD_SITE",
@@ -93,7 +93,7 @@ Elastic Beanstalk 環境で Docker コンテナを使用する場合は、コン
                 },
                 {
                     "name": "DD_TAGS",
-                    "value": "<シンプルタグ>, <キー:値タグ>"
+                    "value": "<SIMPLE_TAG>, <KEY:VALUE_TAG>"
                 }
             ],
             "memory": 256,
@@ -267,7 +267,7 @@ func main() {
 
 #### 複数 Docker コンテナ
 
-1. アプリケーションと同じ `Dockerrun.aws.json` で、`datadog/agent` イメージを使用して Datadog Agent コンテナを追加します。以下を追加します。
+1. アプリケーションと同じ `Dockerrun.aws.json` 内で `gcr.io/datadoghq/agent` イメージを使用して Datadog Agent コンテナを追加します。以下を追加します。
     - `portMappings` セクションで、`containerPort` 8126 と `hostPort` 8126 を追加します。
     - `environment` セクションで、`DD_APM_ENABLED` と `DD_APM_NON_LOCAL_TRAFFIC` を `true` に設定します。
 2. [トレーシングライブラリのセットアップ][17]でインスツルメントされたアプリケーションコンテナで、以下を追加します。
@@ -279,7 +279,7 @@ func main() {
 ```text
  "containerDefinitions": [    {
       "name": "dd-agent",
-      "image": "datadog/agent:latest",
+      "image": "gcr.io/datadoghq/agent:latest",
       "environment": [
           {
               "name": "DD_API_KEY",
@@ -293,7 +293,7 @@ func main() {
              "name": "DD_APM_NON_LOCAL_TRAFFIC",
              "value": "true"
           },
-         # any other environment variables needed 
+         # 他の環境変数が必要 
       ],
       "portMappings": [
         {
@@ -303,7 +303,7 @@ func main() {
       ],
       "memory": 256,
       "mountPoints": [
-          # any mountpoints needed
+          # マウントポイントが必要
          }
       ]
     },
@@ -314,7 +314,7 @@ func main() {
         {
           "name": "DD_AGENT_HOST",
           "value": "dd-agent",
-          # any other environment variables needed
+          # 他の環境変数が必要
         }
       ],
       "links": [
@@ -352,7 +352,7 @@ AWS Elastic Beanstalk インテグレーションには、サービスのチェ�
 [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-cloudwatch.html#health-enhanced-cloudwatch-console
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html
-[6]: https://hub.docker.com/r/datadog/agent/tags
+[6]: https://gcr.io/datadoghq/agent
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
 [8]: https://docs.datadoghq.com/ja/integrations/faq/dogstatsd-and-docker/
 [9]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html

@@ -1,7 +1,6 @@
 ---
 title: Incident Management
 kind: documentation
-disable_toc: true
 description: Create and manage incidents
 ---
 
@@ -103,7 +102,7 @@ You can also update the impact section to specify if there was customer impact, 
 
 In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels (if not using the Datadog Slack App, video conferencing, and attached postmortem (if one has been added).
 
-Timeline data is automatically categorized, so you can use the facets to filter through timeline content. This is particularly useful for long incidents with longer investigations. This makes it easier for ICs and responders to filter through for who is involved, what progress has been made, and what’s already investigated. You can edit the timestamps and message notes as they are created. You can also flag timeline calls to highlight them to other people monitoring the incident.
+Timeline data is automatically categorized, so you can use the facets to filter through timeline content. This is particularly useful for long incidents with longer investigations. This makes it easier for ICs and responders to filter through for who is involved, what progress has been made, and what’s already investigated. As the author of the timeline notes, you can edit the timestamps and message notes as they are created. You can also flag timeline calls to highlight them to other people monitoring the incident.
 
 #### Status levels
 
@@ -172,7 +171,7 @@ Once an incident is moved to resolved, you will be able to generate a postmortem
 
 ### 5. Follow up and learn from the incident
 
-Create mitigation or post-incident remediation tasks. You can track any of your tasks here by adding tasks in the text field. You can complete them by checking off the box when they are done.
+Create mitigation or post-incident remediation tasks. You can track any of your tasks here by adding tasks in the text field, setting a due date, and assigning a team member. You can complete them by checking off the box when they are done.
 
 Link to a postmortem document, look back on exactly what went wrong, and add follow-up tasks. Postmortems created in Datadog [Notebooks][7] support live collaboration; to link to an existing notebook, click the plus under `Other Docs`. Click the linked notebook to edit with teammates in real-time.
 

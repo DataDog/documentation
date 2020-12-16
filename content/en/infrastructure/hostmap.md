@@ -37,8 +37,6 @@ A simple example is grouping your hosts by AWS availability zone. If you add a s
 
 {{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups"  >}}
 
-**Note**: Your Datadog host map is automatically grouped by `availability-zone`. If you would like to change the default grouping, contact Datadog support.
-
 ### Tags
 
 [Tags][1] may be applied automatically by [Datadog integrations][2] or manually applied. You can use these to filter your hosts.

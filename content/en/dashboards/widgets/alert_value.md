@@ -48,37 +48,15 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][1] for the alert value widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
 
-```text
-ALERT_VALUE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["alert_value"]},
-        "alert_id": {"type": "string"},
-        "precision": {"type": "integer"},
-        "unit": {"type": "string"},
-        "text_align": {"enum": ["left", "center", "right"]},
-        "title_size": {"type": "string"},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "alert_id"],
-    "additionalProperties": false
-}
-```
+The dedicated [widget JSON schema definition][2] for the alert value widget is:
 
-| Parameter    | Type    | Required | Description                                                                             |
-|--------------|---------|----------|-----------------------------------------------------------------------------------------|
-| `type`       | string  | yes      | Type of the widget, for the alert value widget use `alert_value`                        |
-| `alert_id`   | string  | yes      | ID of the alert to use in the widget                                                    |
-| `precision`  | integer | no       | Number of decimal places to show. If not defined, uses the raw value                    |
-| `unit`       | string  | no       | Unit to display with the value                                                          |
-| `text_align` | string  | no       | How to align the value in the widget. Available values are: `left`, `center` or `right` |
-| `title_size`  | string  | no       | Size of value in the widget                                                             |
-| `title`      | string  | no       | Title of the widget                                                                     |
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/graphing_json/widget_json/
+[1]: /api/v1/dashboards/
+[2]: /dashboards/graphing_json/widget_json/

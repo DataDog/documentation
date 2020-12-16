@@ -22,7 +22,7 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 1. **Choose the time period** for which you wish to rehydrate log events.
 
-2. **Input the query**. The query syntax is the same as that of the [log explorer search][4], but is limited to log attributes, [reserved attributes][5], and free text search on the message.
+2. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][8] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query. 
 
 3. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
 
@@ -145,3 +145,4 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [5]: /logs/processing/#reserved-attributes
 [6]: /integrations/#cat-notification
 [7]: /logs/archives/
+[8]: /logs/archives/?tab=awss3#datadog-tags

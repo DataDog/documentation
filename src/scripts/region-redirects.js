@@ -89,7 +89,7 @@ function showRegionSnippet(newSiteRegion) {
 
     if (externalLinks) {
         externalLinks.forEach(link => {
-            link.href = `https://app.${config.dd_site[newSiteRegion]}${link.pathname}${link.hash}`;
+            link.href = `https://${config.dd_full_site[newSiteRegion]}${link.pathname}${link.hash}`;
         });
     }
 }

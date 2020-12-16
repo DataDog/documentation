@@ -38,7 +38,7 @@ Datadog Agent のコミュニティ開発のインテグレーションは、[In
 integrations-extra からの Docker Agent とのインテグレーションを使用する最良の方法は、このインテグレーションがインストールされた Agent をビルドすることです。次の Dockerfile を使用して、integrations-extra からの `<インテグレーション名>` インテグレーションを含む Agent の更新バージョンをビルドします。
 
 ```dockerfile
-FROM datadog/agent:latest
+FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 

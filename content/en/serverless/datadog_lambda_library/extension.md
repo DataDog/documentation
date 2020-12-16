@@ -17,9 +17,9 @@ The Datadog Extension supports submitting custom metrics and logs [synchronously
 
 ## Setup
 
-The Datadog Extension is distributed as its own Lambda Layer (separate from the [Datadog Lambda Library][3]) and supports Node.js, Python, and Go runtimes.
+The Datadog Extension is distributed as its own Lambda Layer (separate from the [Datadog Lambda Library][3]) and supports Node.js and Python runtimes.
 
-1. Instrument your [Python][4], [Node.js][5], or [Go][6] application.
+1. Instrument your [Python][4] or [Node.js][5] application.
 
 2. Add the Lambda Layer for the Datadog Extension to your AWS Lambda function:
 
@@ -35,7 +35,7 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
     ```
 
-    The available `RUNTIME` options are `Node8-10`, `Node10-x`, `Node12-x`, `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the latest release for [Node.js][8] or [Python][9].
+    The available `RUNTIME` options are `Node10-x`, `Node12-x`, `Python37`, and `Python38`. For `VERSION`, see the latest release for [Node.js][8] or [Python][9].
 
 4. Reference the [sample code][10] to submit a custom metric.
 

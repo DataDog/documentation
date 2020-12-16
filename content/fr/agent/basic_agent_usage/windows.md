@@ -69,30 +69,32 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 
 Chaque élément de configuration est ajouté en tant que propriété dans la ligne de commande. Les options de configuration en ligne de commande suivantes sont disponibles à l'installation de l'Agent sur Windows :
 
-| Variable                   | Type   | Description                                                                                                                                                                                                                        |
-|----------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `APIKEY`                   | Chaîne | Ajoute la clé d'API Datadog au fichier de configuration.                                                                                                                                                                                |
-| `SITE`                     | Chaîne | Définit le site d'admission Datadog, par exemple : `SITE=datadoghq.eu`.                                                                                                                                                                          |
-| `TAGS`                     | Chaîne | Liste de tags séparés par des virgules à attribuer dans le fichier de configuration. Exemple : `TAGS="key_1:val_1,key_2:val_2"`.                                                                                                                        |
-| `HOSTNAME`                 | Chaîne | Configure le hostname transmis par l'Agent à Datadog (remplace le hostname calculé lors de l'exécution).                                                                                                                           |
-| `LOGS_ENABLED`             | Chaîne | Active (`"true"`) ou désactive (`"false"`) la fonction de collecte de logs dans le fichier de configuration. Les logs sont désactivés par défaut.                                                                                                       |
-| `APM_ENABLED`              | Chaîne | Active (`"true"`) ou désactive (`"false"`) l'Agent APM dans le fichier de configuration. L'APM est désactivé par défaut.                                                                                                                       |
-| `PROCESS_ENABLED`          | Chaîne | Active (`"true"`) ou désactive (`"false"`) l'Agent de processus dans le fichier de configuration. L'Agent de processus est désactivé par défaut.                                                                                                    |
+| Variable                   | Type   | Description                                                                                                                                                                                                                         |
+|----------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `APIKEY`                   | Chaîne | Ajoute la clé d'API Datadog au fichier de configuration.                                                                                                                                                                                 |
+| `SITE`                     | Chaîne | Définit le site d'admission Datadog, par exemple `SITE=`{{< region-param key="dd_site" code="true" >}}.                                                                                                                                     |
+| `TAGS`                     | Chaîne | Liste de tags séparés par des virgules à attribuer dans le fichier de configuration. Exemple : `TAGS="key_1:val_1,key_2:val_2"`.                                                                                                                         |
+| `HOSTNAME`                 | Chaîne | Configure le hostname transmis par l'Agent à Datadog (remplace le hostname calculé lors de l'exécution).                                                                                                                            |
+| `LOGS_ENABLED`             | Chaîne | Active (`"true"`) ou désactive (`"false"`) la fonction de collecte de logs dans le fichier de configuration. Les logs sont désactivés par défaut.                                                                                                        |
+| `APM_ENABLED`              | Chaîne | Active (`"true"`) ou désactive (`"false"`) l'Agent APM dans le fichier de configuration. L'APM est désactivé par défaut.                                                                                                                        |
+| `PROCESS_ENABLED`          | Chaîne | Active (`"true"`) ou désactive (`"false"`) l'Agent de processus dans le fichier de configuration. L'Agent de processus est désactivé par défaut.                                                                                                     |
 | `HOSTNAME_FQDN_ENABLED`    | Chaîne | Active (`"true"`) ou désactive (`"false"`) l'utilisation de FQDN pour le hostname de l'Agent. Cela revient à définir `hostname_fqdn` dans le fichier de configuration de l'Agent. L'utilisation de FQDN pour le hostname est désactivée par défaut. _(v6.20.0+)_ |
-| `CMD_PORT`                 | Nombre | Un numéro de port valide compris entre 0 et 65534. L'Agent Datadog expose une API de commande sur le port 5001. Si ce port est déjà utilisé par un autre programme, la valeur par défaut peut être remplacée ici.                                              |
-| `PROXY_HOST`               | Chaîne | En cas d'utilisation d'un proxy, définit le host de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][7].                                                                                                                                |
-| `PROXY_PORT`               | Nombre | En cas d'utilisation d'un proxy, définit le port de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][7].                                                                                                                                |
-| `PROXY_USER`               | Chaîne | En cas d'utilisation d'un proxy, définit l'utilisateur de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][7].                                                                                                                                |
-| `PROXY_PASSWORD`           | Chaîne | En cas d'utilisation d'un proxy, définit le mot de passe de votre proxy. Pour l'Agent de processus ou de conteneur, cette variable est requise pour la transmission d'un mot de passe d'authentification. Elle ne peut pas être renommée. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][7].                                                                                                                            |
-| `DDAGENTUSER_NAME`         | Chaîne | Remplace le nom d'utilisateur `ddagentuser` par défaut lors de l'installation de l'Agent _(version 6.11.0+)_. [En savoir plus sur l'utilisateur de l'Agent Windows Datadog][2].                                                                                     |
-| `DDAGENTUSER_PASSWORD`     | Chaîne | Remplace le mot de passe chiffré généré pour l'utilisateur `ddagentuser` lors de l'installation de l'Agent _(version 6.11.0+)_. Doit être spécifié pour les installations sur les serveurs DNS. [En savoir plus sur l'utilisateur de l'Agent Windows Datadog][2]. |
-| `APPLICATIONDATADIRECTORY` | Chemin   | Remplace le répertoire à utiliser pour l'arborescence du fichier de configuration. Peut uniquement être spécifié à l'installation initiale, pas lors des mises à jour. Valeur par défaut : `C:\ProgramData\Datadog`. _(version 6.11.0+)_                                          |
-| `PROJECTLOCATION`          | Chemin   | Remplace le répertoire à utiliser pour l'arborescence du binaire. Peut uniquement être spécifié à l'installation initiale, pas lors des mises à jour. Valeur par défaut : `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                 |
+| `CMD_PORT`                 | Nombre | Un numéro de port valide compris entre 0 et 65534. L'Agent Datadog expose une API de commande sur le port 5001. Si ce port est déjà utilisé par un autre programme, la valeur par défaut peut être remplacée ici.                                               |
+| `PROXY_HOST`               | Chaîne | En cas d'utilisation d'un proxy, définit le host de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][3].                                                                                                                                 |
+| `PROXY_PORT`               | Nombre | En cas d'utilisation d'un proxy, définit le port de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][3].                                                                                                                                 |
+| `PROXY_USER`               | Chaîne | En cas d'utilisation d'un proxy, définit l'utilisateur de votre proxy. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][3].                                                                                                                                 |
+| `PROXY_PASSWORD`           | Chaîne | En cas d'utilisation d'un proxy, définit le mot de passe de votre proxy. Pour l'Agent de processus ou de conteneur, cette variable est requise pour la transmission d'un mot de passe d'authentification. Elle ne peut pas être renommée. [En savoir plus sur l'utilisation d'un proxy avec l'Agent Datadog][3]. |
+| `DDAGENTUSER_NAME`         | Chaîne | Remplace le nom d'utilisateur `ddagentuser` par défaut lors de l'installation de l'Agent _(version 6.11.0+)_. [En savoir plus sur l'utilisateur de l'Agent Windows Datadog][2].                                                                                      |
+| `DDAGENTUSER_PASSWORD`     | Chaîne | Remplace le mot de passe chiffré généré pour l'utilisateur `ddagentuser` lors de l'installation de l'Agent _(version 6.11.0+)_. Doit être spécifié pour les installations sur les serveurs DNS. [En savoir plus sur l'utilisateur de l'Agent Windows Datadog][2].  |
+| `APPLICATIONDATADIRECTORY` | Chemin   | Remplace le répertoire à utiliser pour l'arborescence du fichier de configuration. Peut uniquement être spécifié à l'installation initiale, pas lors des mises à jour. Valeur par défaut : `C:\ProgramData\Datadog`. _(version 6.11.0+)_                                           |
+| `PROJECTLOCATION`          | Chemin   | Remplace le répertoire à utiliser pour l'arborescence du binaire. Peut uniquement être spécifié à l'installation initiale, pas lors des mises à jour. Valeur par défaut : `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
 
 **Remarque** : si un fichier `datadog.yaml` valide est trouvé et qu'une clé d'API y est configurée, ce fichier est prioritaire sur toutes les options de ligne de commande spécifiées.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: /fr/agent/faq/windows-agent-ddagent-user/
+[3]: /fr/agent/proxy/
+
 {{% /tab %}}
 {{% tab "Mise à niveau" %}}
 
@@ -399,28 +401,15 @@ Datadog ne surveille pas les métriques des services : il vérifie uniquement l
 
 ### Surveiller la charge système sous Windows
 
-L'Agent Datadog recueille un grand nombre de métriques système par défaut, notamment `system.load.*`, l'une des plus couramment utilisées.
+L'Agent Datadog recueille par défaut un grand nombre de métriques système. Les métriques système les plus souvent utilisées sont les métriques `system.load.*`. Toutefois, celles-ci sont réservées aux environnements **Unix**.
 
-| Métrique                      | Description                                                                    |
-|-----------------------------|--------------------------------------------------------------------------------|
-| system.load.1 (gauge)       | La charge système moyenne sur une minute.                                       |
-| system.load.15 (gauge)      | La charge système moyenne sur quinze minutes.                                  |
-| system.load.5 (gauge)       | La charge système moyenne sur cinq minutes.                                     |
-| system.load.norm.1 (gauge)  | La charge système moyenne sur une minute, normalisée en fonction du nombre de processeurs.      |
-| system.load.norm.15 (gauge) | La charge système moyenne sur quinze minutes, normalisée en fonction du nombre de processeurs. |
-| system.load.norm.5 (gauge)  | La charge système moyenne sur cinq minutes, normalisée en fonction du nombre de processeurs.    |
-
-La métrique `system.load.*` est spécifique à **Unix** : elle représente le nombre moyen de ressources qui attendent d'utiliser ou qui utilisent actuellement le processeur. Chaque processus en attente ou utilisant actuellement le processeur augmente le nombre de charge d'une unité. Le nombre à la fin du nom de la métrique indique le nombre moyen de processus exécutés sur les X dernières minutes. Par exemple, `system.load.5` correspond à la moyenne mesurée sur les 5 dernières minutes. Une valeur de 0 indique que le processeur n'est pas du tout utilisé, tandis qu'un nombre égal au nombre de cœurs du processeur dans l'environnement indique que le processeur traite toutes les requêtes entrantes sans délai. Un nombre supérieur au nombre de cœurs indique que des processus sont en attente.
-
-#### Où se trouve la charge système sous Windows ?
-
-Bien que Windows n'offre pas exactement cette métrique, une option équivalente est disponible par défaut dans les métriques système : `system.proc.queue.length`. La métrique `system.proc.queue.length` vous permet d'afficher le nombre de threads présents dans la file d'attente du processeur (en attente d'exécution).
+Bien que Windows ne propose pas de métriques `system.load.*`, une option équivalente est disponible par défaut : `system.proc.queue.length`. Cette métrique affiche le nombre de threads présents dans la file d'attente du processeur et en attente d'exécution.
 
 ### Surveiller des processus Windows
 
 Vous pouvez surveiller des processus Windows avec la fonctionnalité de [surveillance des Live Process][9]. Pour l'activer dans Windows, modifiez le [fichier de configuration principal de l'Agent][10] en définissant le paramètre suivant sur true :
 
-`datadog.yaml`:
+`datadog.yaml` :
 
 ```yaml
 process_config:

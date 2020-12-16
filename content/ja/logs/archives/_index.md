@@ -77,7 +77,8 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 
 {{% tab "Azure Storage" %}}
 
-[Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前と種類を指定し、**hot** アクセス層を選択します。
+* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前と種類を指定し、**hot** アクセス層を選択します。
+* そのストレージアカウントに **container** サービスを作成します。Datadog アーカイブページに追加する必要があるため、コンテナ名をメモしてください。
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 [2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal

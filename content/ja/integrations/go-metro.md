@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
   metrics_metadata: metadata.csv
@@ -66,7 +68,8 @@ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ### コンフィギュレーション
 
-Agent の `conf.d` ディレクトリにある `go-metro.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル go-metro.yaml][3] を参照してください。以下のサンプルファイルは、app.datadoghq.com と 192.168.0.22 の TCP RTT 回数を表示します。
+Agent の `conf.d` ディレクトリで、`go-metro.yaml` ファイルを編集します。利用可能なすべてのコンフィギュレーションのオプションについては、[サンプル go-metro.yaml][3] を参照してください。
+app.datadoghq.com と 192.168.0.22 について、TCP RTT 時間を示すファイルの例を以下に挙げます。
 
 ```yaml
 init_config:
@@ -86,6 +89,30 @@ instances:
     hosts:
       - app.datadoghq.com
 ```
+
+*注*: go metro を権限のない状態で実行するには、バイナリで CAP_NET_RAW 機能を設定する必要があります。
+```
+# 必要なライブラリをインストール
+$ sudo apt-get install libcap  # Debian
+$ sudo apt-get install libcap2-bin  # Debian の代替alternative
+$ sudo yum install libcap  # Redhat
+$ sudo yum install compat-libcap1  # Redhat の代替
+
+# 機能を設定
+$ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro`
+```
+
+製品ごとにパッケージの名称が異なるため、上記の説明に従っても
+上手く操作できない場合には、`apt-cache search libcap` もしくは `yum search libcap` を発行してください。
+バイナリを提供するパッケージのショートリストが表示されます。
+サポートが必要な場合は、お気軽にお問い合わせください。
+
+また、go-metro は独自のファイルにログを記録することにご注意ください。ログは /var/log/datadog/go-metro.log にあります。
+さらに、go-mtro はスタンドアロンで機能するため、現状では Agent の情報ページには表示 *されません*。
+
+最後に、go-metro バイナリは、Datadog Agent の 64-ビット RPM と DEB 製品のみに同梱されているため
+パッケージ化されたバージョンでのみ使用できます
+(つまり、go-metro は現在ソースインストールや 32-ビットパッケージでは利用できません)。
 
 ### 検証
 

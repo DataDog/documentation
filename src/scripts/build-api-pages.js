@@ -186,12 +186,16 @@ const isTagMatch = (pathObj, tag) => {
  * @param {object} data - the schema object
  * @param {object} parentExample - the example object adjacent to data passed in
  * @param {object} requiredKeys - []
+ * @param {number} level - the depth of recursion
  * returns string
  */
-const filterJson = (actionType, data, parentExample = null, requiredKeys = []) => {
+const filterJson = (actionType, data, parentExample = null, requiredKeys = [], level = 0) => {
   let jsondata = '';
   let iterationHasRequiredKeyMatches = false;
   let childRequiredKeys = [];
+
+  // i've set a hard recurse limit of depth
+  if(level > 10) return [jsondata, iterationHasRequiredKeyMatches];
 
   if (typeof data === 'object') {
     Object.entries(data).forEach(([key, value]) => {
@@ -231,6 +235,17 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
               childRequiredKeys = (value.items.required) ? value.items.required : [];
               prefixType = '[{';
               suffixType = '}]';
+
+              // widgets
+              /*
+              if("definition" in value.items.properties && "oneOf" in value.items.properties.definition) {
+                // childData = value.items.properties.definition.oneOf;
+                const names = value.items.properties.definition.oneOf.map((item) => item.properties.type.default);
+                childData = names
+                  .map((mapkey, indx) => { return {[mapkey]: value.items.properties.definition.oneOf[indx]} })
+                  .reduce((obj, item) => ({...obj, ...item}), {});
+                childRequiredKeys = [];
+              }*/
             }
           } else if (typeof value.items === 'string') {
             childRequiredKeys = (value.items.required) ? value.items.required : [];
@@ -253,7 +268,6 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
           }
         }
 
-
         // choose the example to use
         // parent -> current level -> one deep
         let chosenExample = parentExample;
@@ -266,7 +280,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
         }
 
         if (childData) {
-          const [jstring, childRequiredKeyMatches] = filterJson(actionType, childData, value.example, childRequiredKeys);
+          const [jstring, childRequiredKeyMatches] = filterJson(actionType, childData, value.example, childRequiredKeys, (level + 1));
           iterationHasRequiredKeyMatches = iterationHasRequiredKeyMatches || childRequiredKeyMatches;
           if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
             // skip output
@@ -675,6 +689,20 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             newParentKey = "additionalProperties";
           }
         }
+        // for widgets
+        /*
+        if(key === "definition" && value.discriminator) {
+          childData = Object.keys(value.discriminator.mapping)
+            .map((mapkey, indx) => { return {[mapkey]: value.oneOf[indx]} })
+            .reduce((obj, item) => ({...obj, ...item}), {});
+        }
+        */
+        // console.log(childData);
+        // if(childData && "definition" in childData) {
+        //   console.log("YES!!!!")
+        //   console.log(childData)
+        //   childData = value["oneOf"];
+        // }
 
         const isReadOnly = isReadOnlyRow(value);
 
@@ -822,6 +850,20 @@ const processSpecs = (specs) => {
           updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);
+
+          // for now lets just put the widgets in a file
+          if(deref.components.schemas && deref.components.schemas.WidgetDefinition && deref.components.schemas.WidgetDefinition.oneOf) {
+            const jsonData = {};
+            const pageDir = `./content/en/api/${version}/dashboards/`;
+            deref.components.schemas.WidgetDefinition.oneOf.forEach((widget) => {
+              const requestJson = filterExampleJson("request", widget);
+              const requestCurlJson = filterExampleJson("curl", widget);
+              const html = schemaTable("request", widget);
+              jsonData[widget.properties.type.default] = {"json_curl": requestCurlJson, "json": requestJson, "html": html};
+            });
+            fs.writeFileSync(`${pageDir}widgets.json`, safeJsonStringify(jsonData, null, 2), 'utf-8');
+          }
+
         }).catch((e) => {
           console.log(e);
           process.exitCode = 1;

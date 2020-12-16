@@ -9,9 +9,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
   tag: "Blog"
   text: "Network Performance Monitoring"
-- link: "/integrations/snmp/"
+- link: "https://www.datadoghq.com/blog/npm-windows-support/"
+  tag: "Blog"
+  text: "Monitor Windows hosts with Network Performance Monitoring"
+- link: "/network_performance_monitoring/devices"
   tag: "Documentation"
-  text: "SNMP integration"
+  text: "Network Device Monitoring"
 ---
 
 ## Overview

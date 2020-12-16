@@ -1,11 +1,12 @@
 ---
 title: Datadog Clipboard
 kind: documentation
-disable_toc: true
 description: Create and manage incidents
 ---
 
-**The Datadog Clipboard is currently in public beta**
+<div class="alert alert-warning">
+The Datadog Clipboard is currently in public beta.
+</div>
 
 # Overview
 

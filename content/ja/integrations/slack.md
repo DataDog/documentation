@@ -85,12 +85,20 @@ Slack アプリから送信されるようモニターを更新するには、�
 /datadog incident 
 ```
 
+**注**: Datadog へのアクセス権の有無を問わず、Slack 組織内の誰でもインシデントを宣言できます。
+
 新しいインシデントが作成されると、対応する Slack チャンネル `#incident-(unique number ID)` が作成され、新しいインシデントチャンネルの使用について伝えるメッセージがチャンネルに送信されます。チャンネルのトピックは、インシデントとともに変わります。
 
 次を使用して、インシデントの状態（重大度）を更新します。
 
 ```
-/datadog incident update 
+/datadog incident update
+```
+
+次を使用してオープン（アクティブで安定している）インシデントをリスト表示します。
+
+```
+/datadog incident lists
 ```
 
 メッセージのアクションコマンド (#incident チャンネルで送信されたメッセージにカーソルを合わせると右の方に表示される3点リーダー) を使用して、Incident App Timeline にメッセージを送信します。
@@ -113,7 +121,7 @@ Slack インテグレーションは、Datadog アプリケーション内の[�
 
 ### コンフィギュレーション
 
-1. Slack アカウントで、[アプリケーションページ][2]に移動し、Datadog を検索します。
+1. Slack アカウントで、[アプリケーションページ][2]に移動し、Datadog（レガシー）を検索します。
 2. _Install_ --> _Add Integration_ の順に選択し、次に Slack の **Webhook URL** をコピーします。
 3. [Datadog-Slack インテグレーションタイル][1]の Configuration タブに移動します。
 4. _Add Account_ をクリックします。

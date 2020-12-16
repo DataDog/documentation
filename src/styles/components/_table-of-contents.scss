@@ -79,7 +79,8 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     .toc {
         margin-right: auto;
         top: 100px;
-        padding-bottom: 50px;
+        max-height: 100vh;
+        padding-bottom: 150px;
         overflow-x: hidden;
         overflow-y: auto;
         @media (min-width: 1440px) {
@@ -260,70 +261,65 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
             // level 1 list
             & > ul {
                 & > li {
+                    border-bottom: 1px solid $ddgray;
+                    &.toc_scrolled {
+                        background: none;
+                        & > a {
+                            position: relative;
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                background: $highlightcolor;
+                                top: 0;
+                                bottom: 0;
+                                right: 0;
+                                left: 0;
+                            }
+                        }
+                    }
+                    a {
+                        padding: 10px 60px 10px 30px;
+                        display: flex;
+                        align-items: center;
+
+                        &.toc_open {
+                            padding: 10px 60px 10px 30px;
+                            &:after {
+                                font-family: 'Glyphter' !important;
+                                content: '\34'; // upward chevron
+                                position: absolute;
+                                right: 35px;
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    // First level a tag
+                    & > a:first-child:not(.toc_open) {
+                        color: $dimGreyGrey;
+                        &:after {
+                            font-family: 'Glyphter' !important;
+                            content: '\31'; // downward chevron
+                            position: absolute;
+                            right: 35px;
+                            font-size: 12px;
+                            transform: translateY(2px);
+                        }
+                    }
+
                     // level 2 list
                     & > ul {
+                        display: none;
                         & > li {
-                            border-bottom: 1px solid $ddgray;
-                            &.toc_scrolled {
-                                background: none;
-                                & > a {
-                                    position: relative;
-                                    &:before {
-                                        content: '';
-                                        position: absolute;
-                                        background: $highlightcolor;
-                                        top: 0;
-                                        bottom: 0;
-                                        right: 0;
-                                        left: 0;
-                                    }
-                                }
-                            }
+                            border-bottom: none;
                             a {
-                                padding: 10px 60px 10px 30px;
-                                display: flex;
-                                align-items: center;
-
-                                &.toc_open {
-                                    padding: 10px 60px 10px 30px;
-                                    &:after {
-                                        font-family: 'Glyphter' !important;
-                                        content: '\34'; // upward chevron
-                                        position: absolute;
-                                        right: 35px;
-                                        font-size: 12px;
-                                    }
-                                }
-                            }
-                            // First level a tag
-                            & > a:first-child:not(.toc_open) {
-                                color: $dimGreyGrey;
-                                &:after {
-                                    font-family: 'Glyphter' !important;
-                                    content: '\31'; // downward chevron
-                                    position: absolute;
-                                    right: 35px;
-                                    font-size: 12px;
-                                    transform: translateY(2px);
-                                }
+                                font-weight: normal;
+                                color: $darkGreyGrey;
+                                padding-right: 1rem !important;
                             }
 
                             // level 3 list
                             & > ul {
-                                display: none;
-                                & > li {
-                                    border-bottom: none;
-                                    a {
-                                        font-weight: normal;
-                                        color: $darkGreyGrey;
-                                        padding-right: 1rem !important;
-                                    }
-
-                                    // level 4 list
-                                    & > ul {
-                                        display: none !important;
-                                    }
-                                }
+                                display: none !important;
                             }
                         }
                     }

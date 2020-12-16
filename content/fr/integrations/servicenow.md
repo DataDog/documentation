@@ -36,13 +36,29 @@ Datadog peut être intégré aux outils ServiceNow suivants :
 - ITSM
 - CMDB
 
-## Configuration
+## Configuration de la CMDB
 
-Pour utiliser l'un des modules, commencez par installer le dernier [ensemble de mise à jour de Datadog][2] sur votre instance ServiceNow, puis configurez le carré d'intégration ServiceNow dans Datadog.
+### Configuration du Service Graph Connector
+
+Le [Service Graph Connector pour Datadog][1] peut remplir automatiquement les éléments de configuration (CI) de serveur et de base de données dans la CMDB pour les nouvelles ressources découvertes par Datadog. Le Service Graph Connector est disponible dans le [ServiceNow Store][2].
+
+Pour la configuration, suivez les instructions détaillées du Service Graph Connector.
+
+Types d'éléments de configuration pris en charge :
+* Serveur
+* Amazon RDS
+
+Les remarques ci-dessous s'appliquent uniquement si vous avez déjà configuré l'intégration pour ServiceNow ITOM/ITSM : 
+
+* Le Service Graph Connector n'utilise pas les valeurs `Target table` et `Custom table` provenant du carré de configuration. Vous pouvez enregistrer l'intégration avec les valeurs Target table par défaut.
+* Le même utilisateur ITOM/ITSM peut être utilisé pour le Service Graph Connector en accordant à cet utilisateur le rôle cmdb_import_api_admin, comme décrit dans les instructions de configuration du Service Graph Connector.
+
+## Configuration d'ITOM et ITSM
+
+Pour utiliser l'un des modules, commencez par installer le dernier [ensemble de mise à jour de Datadog][3] sur votre instance ServiceNow, puis configurez le carré d'intégration ServiceNow dans Datadog.
 
 1. [Installer le dernier ensemble de mise à jour Datadog](#install-the-datadog-update-set)
 1. [Définir les autorisations du compte Datadog](#permissions)
-1. [Instructions pour CMDB](#configuring-service-graph-connector)
 1. [Instructions pour ITOM et ITSM](#configuring-for-use-with-itom-and-itsm-modules)
 
 ### Installer l'ensemble de mise à jour Datadog
@@ -53,11 +69,11 @@ Dans ServiceNow :
 - Cherchez **Retrieved Update Sets** dans le menu.
 - Importez manuellement le fichier `Datadog-SNow_Update_Set_vX.X.X.xml`.
 
-Importez l'[ensemble de mise à jour XML Datadog][2] fourni.
+Importez l'[ensemble de mise à jour XML Datadog][3] fourni.
 
 {{< img src="integrations/servicenow/servicenow-import-update-set.png" alt="intégration servicenow" >}}
 
-Une fois le fichier XML téléchargé, l'état `Loaded` s'affiche. Cliquez sur le nom de l'ensemble de mise à jour pour afficher un aperçu et réaliser un commit du code dans le système.
+Une fois le fichier XML importé, l'état `Loaded` s'affiche. Cliquez sur le nom de l'ensemble de mise à jour pour afficher un aperçu et réaliser un commit du code dans le système.
 
 {{< img src="integrations/servicenow/servicenow-loaded-update-set.png" alt="intégration servicenow" >}}
 
@@ -81,48 +97,30 @@ Pour accéder aux tables d'importation et appliquer des transform maps, l'utilis
 - `import_set_loader`
 - `import_transformer`
 
-Pour les utilisateurs d'ITOM et ITSM :
-
 Si vous souhaitez envoyer des notifications directement dans une table **Incident** ou **Event**, les rôles `ITIL` et `evt_mgmt_integration` sont alors nécessaires.
 
-### Configuration du Service Graph Connector
-
-Le [Service Graph Connector pour Datadog][1] peut remplir automatiquement les éléments de configuration (CI) de serveur et de base de données dans la CMDB pour les nouvelles ressources découvertes par Datadog. Le Service Graph Connector est disponible dans le [ServiceNow Store][3].
-
-Pour la configuration, suivez les instructions détaillées du Service Graph Connector.
-
-#### Utiliser les modules ITOM/ITSM et le Service Graph Connector
-
-Le même utilisateur ITOM/ITSM peut être utilisé pour le Service Graph Connector en accordant à cet utilisateur le rôle `cmdb_import_api_admin`, comme décrit dans les instructions de configuration du Service Graph Connector.
-
-#### Utiliser le Service Graph Connector uniquement
-
-Le Service Graph Connector n'utilise pas les valeurs `Target table` et `Custom table` provenant du carré de configuration. Vous pouvez enregistrer l'intégration avec les valeurs `Target table` par défaut.
-
-### Configuration pour l'utilisation des modules ITOM et ITSM
+### Configuration de Datadog pour l'utilisation des modules ITOM et ITSM
 
 Les notifications Datadog mentionnant @servicenow remplissent les tables intermédiaires sélectionnées dans votre carré ServiceNow. Veuillez noter que pour les étapes décrites ci-dessous, nous partons du principe que vous avez déjà configuré le carré d'intégration dans la page d'intégrations Datadog. Procédez ainsi comme suit :
 
 1. Depuis la liste déroulante, sélectionnez la table intermédiaire vers laquelle vous souhaitez envoyer les notifications.
-2. Pour vérifier que l'intégration est correctement configurée, ajoutez `@servicenow` dans une notification de monitor ou d'événement. Les données brutes remplissent les lignes dans la table temporaire et sont transmises à la table ServiceNow spécifiée dans les mappages et les transformations que vous avez créés.
-3. [Utilisez des transform maps](#personnaliser-les-donnees-avec-des-transform-maps) pour personnaliser le format des données envoyées aux tables.
-4. [Configurer le carré d'intégration ServiceNow dans Datadog](#configure-the-servicenow-tile-in-datadog)
+1. Pour vérifier que l'intégration est correctement configurée, ajoutez `@servicenow` dans une notification de monitor ou d'événement. Les données brutes remplissent les lignes dans la table temporaire et sont transmises à la table ServiceNow spécifiée dans les mappages et les transformations que vous avez créés.
+1. [Utilisez des transform maps](#personnaliser-les-donnees-avec-des-transform-maps) pour personnaliser le format des données envoyées aux tables.
+1. [Configurer le carré d'intégration ServiceNow dans Datadog](#configure-the-servicenow-tile-in-datadog)
 
 {{< img src="integrations/servicenow/servicenow-configuration.png" alt="intégration servicenow">}}
 
-### Configurer le carré d'intégration ServiceNow dans Datadog
+### Configurer le carré d'intégration ServiceNow dans Datadog pour ITOM/ITSM
 
 1. Accédez au [carré d'intégration ServiceNow][4] Datadog, depuis la page Integrations.
-2. Ajoutez le nom de l'instance, à savoir le sous-domaine de votre domaine ServiceNow : `<NOM_INSTANCE>.service-now.com`.
-3. Ajoutez le nom d"utilisateur et le mot de passe de votre instance ServiceNow. Si vous utilisez le module ITSM ou ITOM et souhaitez envoyer des notifications à une table intermédiaire, sélectionnez-la dans la liste déroulante.
+1. Ajoutez le nom de l'instance, à savoir le sous-domaine de votre domaine ServiceNow : `<NOM_INSTANCE>.service-now.com`.
+1. Ajoutez le nom d"utilisateur et le mot de passe de votre instance ServiceNow. Si vous utilisez le module ITSM ou ITOM et souhaitez envoyer des notifications à une table intermédiaire, sélectionnez-la dans la liste déroulante.
 
 **Remarque** : vous pouvez créer un utilisateur limité dédié à Datadog dans ServiceNow.
 
 {{< img src="integrations/servicenow/servicenow-configuration.png" alt="intégration servicenow">}}
 
 ### Personnaliser les données avec des transform maps
-
-**Pour ITOM et ITSM**
 
 Les tables **Datadog Incident** et **Datadog Event** utilisent une transform map pour transformer les événements Datadog en incidents et événements correspondants dans ServiceNow.
 
@@ -170,12 +168,6 @@ Des variables peuvent être utilisées dans le corps de vos alertes ou dans les 
 Une fois que l'état normal du monitor est rétabli, le ticket d'assistance associé est automatiquement considéré comme résolu.
 
 {{< img src="integrations/servicenow/servicenow-03-servicenow-resolved.png" alt="Ticket ServiceNow résolu" >}}
-
-### Envoyer des graphiques Datadog à ServiceNow
-
-Outre l'automatisation de la création et de la résolution de tickets, vous pouvez utiliser Datadog pour créer des tickets ServiceNow ponctuels lorsque vous identifiez un problème dans Datadog nécessitant l'attention de l'équipe. Cliquez sur l'icône en forme d'appareil photo pour partager un snapshot de n'importe quel graphique de timeboard, ajoutez du contexte dans la zone de commentaires et mentionnez @servicenow pour envoyer le graphique et vos commentaires à ServiceNow.
-
-{{< img src="integrations/servicenow/servicenow-04-mention-servicenow.png" alt="annotation" >}}
 
 ### Définir des mappages personnalisés
 
@@ -236,7 +228,7 @@ Pour vérifier que l'intégration est correctement configurée, ajoutez `@servic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/26b85b762f6a1010b6a0d49df699b6fe/1.0.4?referer=%2Fstore%2Fsearch%3Flistingtype%3Dallintegrations%25253Bancillary_app%25253Bcertified_apps%25253Bcontent%25253Bindustry_solution%25253Boem%25253Butility%26q%3Ddatadog&sl=sh
-[2]: https://s3.amazonaws.com/dd-servicenow-update-sets/Datadog-SNow_Update_Set_v2.2.1.xml
-[3]: https://store.servicenow.com/
+[2]: https://store.servicenow.com/
+[3]: https://s3.amazonaws.com/dd-servicenow-update-sets/Datadog-SNow_Update_Set_v2.2.2.xml
 [4]: https://app.datadoghq.com/account/settings#integrations/servicenow
 [5]: https://docs.datadoghq.com/fr/help/

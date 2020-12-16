@@ -21,7 +21,7 @@ further_reading:
 
 オートディスカバリーアノテーションロジックは、Agent が JMX チェックコンフィギュレーション要素を「自動的に検出」し、それに応じて JMX チェックを構成できるように、アノテーションを介して JMX チェックコンフィギュレーション要素をポッドに適用します。
 
-1. 通常の `datadog/agent:latest` ではなく、**`datadog/agent:latest-jmx` イメージ名**を使用して、[Kubernetes クラスターで Agent を起動][1]します。
+1. 通常の `gcr.io/datadoghq/agent:latest` ではなく、**`gcr.io/datadoghq/agent:latest-jmx` イメージ名**を使用して、[Kubernetes クラスターで Agent を起動][1]します。
 
 2. JMX アプリケーションを含むコンテナにオートディスカバリーアノテーションを適用します。
 
@@ -128,7 +128,7 @@ Agent がクラスターのコンテナとして実行されているか、ホ�
 
 Agent がクラスターで実行されており、JMX メトリクスを収集するためにコンテナを自動検出する場合:
 
-1. 通常の `datadog/agent:latest` イメージではなく、必ず Agent イメージ **`datadog/agent:latest-jmx`** を実行してください。
+1. 通常の `gcr.io/datadoghq/agent:latest` イメージではなく、必ず Agent イメージ **`gcr.io/datadoghq/agent:latest-jmx`** を実行してください。
 
 2. インテグレーションに関連付けられているコンフィギュレーションファイル `conf.yaml` と `metrics.yaml` を取得します。Datadog-JMX ベースのインテグレーションと関連するファイルのリストを以下に示します。
 
@@ -191,7 +191,7 @@ Agent がクラスターで実行されており、JMX メトリクスを収集�
 7. (任意) - Agent コンテナ (AWS ECS など) で上記のファイルをマウントできない場合は、これら 2 つのコンフィギュレーションファイルを使用して Agent Docker イメージを再構築する必要があります。
 
     ```conf
-    FROM datadog/agent:latest-jmx
+    FROM gcr.io/datadoghq/agent:latest-jmx
     COPY <PATH_JMX_CONF_FILE> conf.d/tomcat.d/
     COPY <PATH_JMX_METRICS_FILE> conf.d/tomcat.d/
     ```

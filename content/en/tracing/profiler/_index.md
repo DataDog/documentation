@@ -13,6 +13,10 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
       text: 'Introducing always-on production profiling in Datadog.'
+    - link: 'https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/'
+      tags: 'Blog'
+      text: 'Datadog GitHub Action for continuous vulnerability analysis.'
+
 ---
 
 {{< img src="tracing/profiling/profiling_flamegraph.gif" alt="Exploring profiling flame graph">}}

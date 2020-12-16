@@ -5,9 +5,9 @@ description: DNS サーバーに関する問題の診断とデバッグ
 aliases:
   - /ja/network_performance_monitoring/network_table
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
+  - link: 'https://www.datadoghq.com/blog/monitor-dns-with-datadog/'
     tag: ブログ
-    text: ネットワークパフォーマンスモニタリング
+    text: Datadog での DNS モニタリング
   - link: 'https://www.datadoghq.com/blog/monitor-coredns-with-datadog/'
     tag: ブログ
     text: Datadog での CoreDNS モニタリング

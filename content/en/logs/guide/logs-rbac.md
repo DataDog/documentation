@@ -385,7 +385,7 @@ Assign the [Write Historical View][19] permission to members of `ACME Admin`. Th
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration"  style="width:60%;">}}
 
-**Note**: **If** you use the [Legacy Read Index Data Permission][21], add the `ACME User` role to ACME archive(s) alongside the `ACME User` role. As `ACME User` role members don't have the permission to perform rehydration, this does not give them sensitive permissions. However, this automatically scopes the Read Index Data permission to the resulting historical view, so that they can access the content.
+**Note**: **If** you use the [Legacy Read Index Data Permission][21], add the `ACME User` role to ACME archive(s) alongside the `ACME Admin` role. As `ACME User` role members don't have the permission to perform rehydration, this does not give them sensitive permissions. However, this automatically scopes the Read Index Data permission to the resulting historical view, so that they can access the content.
 
 {{< img src="logs/guide/rbac/rehydration_index.png" alt="Rehydration Index Permission"  style="width:60%;">}}
 

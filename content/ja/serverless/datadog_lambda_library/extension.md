@@ -12,7 +12,7 @@ further_reading:
 
 AWS Lambda 拡張機能は、Lambda 関数を拡張できるコンパニオンプロセスです。Lambda の実行環境内で、Lambda 関数コードとともに動作します。Datadog 拡張機能は、最低限のパフォーマンスオーバーヘッドでコードと一緒に実行するよう構築された、Datadog Agent の軽量バージョンです。
 
-Datadog 拡張機能は、現在 AWS Lambda 関数の実行中にカスタムメトリクスの[同期的][1]送信をサポートします。つまり、[Datadog Forwarder][2] を使わずにカスタムメトリクスを送信できます。ログおよびトレースを Datadog に送信するには、依然として Datadog Forwarder が必要です。
+Datadog 拡張機能は、AWS Lambda 関数の実行中にカスタムメトリクスおよびログの[同期的][1]送信をサポートします。つまり、[Datadog Forwarder][2] を使わずにテレメトリーデータを送信できます。**注**: トレースを Datadog に送信するには、依然として Datadog Forwarder が必要です。
 
 ## セットアップ
 
@@ -23,7 +23,7 @@ Datadog 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda ライ�
 2. Datadog 拡張機能用 Lambda レイヤーを AWS Lambda 関数に追加します。
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:3
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:4
     ```
 
     Lambda レイヤー ARN のプレイスホルダー `AWS_REGION` を適切な値に置き換えます。
@@ -37,6 +37,10 @@ Datadog 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda ライ�
     使用できる `RUNTIME` オプションは、`Node8-10`、`Node10-x`、`Node12-x`、`Python27`、`Python36`、`Python37`、`Python38` です。`VERSION` については、[Node.js][8] または [Python][9] の最新リリースを参照してください。
 
 4. カスタムメトリクスを送信するには、[サンプルコード][10]を参照します。
+
+### ログの収集
+
+Extension を使用して AWS Lambda ログを Datadog に送信するには、関数の環境変数 `DD_LOGS_ENABLED` を `true` に設定します。さらに、この設定により Datadog の[拡張メトリクス][11]が生成されます。
 
 ## その他の参考資料
 
@@ -53,3 +57,4 @@ Datadog 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda ライ�
 [8]: https://github.com/DataDog/datadog-lambda-js/releases
 [9]: https://github.com/DataDog/datadog-lambda-python/releases
 [10]: /ja/serverless/custom_metrics#custom-metrics-sample-code
+[11]: /ja/serverless/enhanced_lambda_metrics

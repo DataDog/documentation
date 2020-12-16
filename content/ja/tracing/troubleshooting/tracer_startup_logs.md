@@ -30,13 +30,20 @@ Java トレーサーは診断ログを出力しません。このチェックで
 
 #### ファイルの場所
 
-ログファイルは `%PROGRAMDATA%\Datadog .NET Tracer\logs` にあります。
+ログファイルは、デフォルトで以下のディレクトリに保存されます。`DD_TRACE_LOG_DIRECTORY` 設定を使用してこれらのパスを変更できます。
 
-- `dotnet-tracer-{processName}-{timestamp}.log` にはコンフィギュレーションログが含まれます。
+| プラットフォーム | パス                                      |
+|----------|-------------------------------------------|
+| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
+| Linux    | `/var/log/datadog/dotnet/`                |
 
-- `dotnet-profiler.log` には生成された診断ログが含まれます。
+**注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
 
-#### 構成
+- `dotnet-tracer-managed-{processName}-{timestamp}.log` には、コンフィギュレーションログが含まれています。
+
+- `dotnet-tracer-native.log` には、診断ログが（生成されている場合）含まれています。
+
+#### コンフィギュレーション
 
 ```text
 2020-06-29 12:26:39.572 +02:00 [INF] DATADOG TRACER CONFIGURATION -

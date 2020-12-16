@@ -94,8 +94,10 @@ services:
 
 ```
 
-**Note**: When configuring autodiscovery, Datadog recommends using Docker labels to unify telemetry across your containerized environment. Read the [unified service tagging][11] documentation for more information.
+**Note**: When configuring autodiscovery, Datadog recommends using Docker labels to unify telemetry across your containerized environment. Read the [unified service tagging][1] documentation for more information.
 
+
+[1]: /getting_started/tagging/unified_service_tagging/?tab=docker
 {{% /tab %}}
 {{% tab "File" %}}
 

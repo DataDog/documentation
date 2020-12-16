@@ -4,6 +4,38 @@ components:
   headers: {}
   links: {}
   parameters:
+    ApplicationKeyFilterCreatedAtEndParameter:
+      description: Only include application keys created on or before the specified
+        date.
+      in: query
+      name: filter[created_at][end]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    ApplicationKeyFilterCreatedAtStartParameter:
+      description: Only include application keys created on or after the specified
+        date.
+      in: query
+      name: filter[created_at][start]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    ApplicationKeyFilterParameter:
+      description: Filter application keys by the specified string.
+      in: query
+      name: filter
+      required: false
+      schema:
+        type: string
+    ApplicationKeyId:
+      description: The ID of the application key.
+      in: path
+      name: app_key_id
+      required: true
+      schema:
+        type: string
     ArchiveID:
       description: The ID of the archive.
       in: path
@@ -80,6 +112,26 @@ components:
       required: false
       schema:
         example: ExampleTeamName
+        type: string
+    ListApplicationKeysSortParameter:
+      description: 'Application key attribute used to sort results. Sort order is
+        ascending
+
+        by default. In order to specify a descending sort, prefix the
+
+        attribute with a minus sign.'
+      in: query
+      name: sort
+      required: false
+      schema:
+        default: name
+        enum:
+        - created_at
+        - -created_at
+        - last4
+        - -last4
+        - name
+        - -name
         type: string
     PageNumber:
       description: Specific page number to return.
@@ -202,6 +254,100 @@ components:
       required:
       - errors
       type: object
+    ApplicationKeyCreateAttributes:
+      description: Attributes used to create an application Key.
+      properties:
+        name:
+          description: Name of the application key.
+          example: Application Key for submitting metrics
+          type: string
+      required:
+      - name
+      type: object
+    ApplicationKeyCreateData:
+      description: Object used to create an application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationKeyCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationKeyCreateRequest:
+      description: Request used to create an application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationKeyCreateData'
+      required:
+      - data
+      type: object
+    ApplicationKeyRelationships:
+      description: Resources related to the application key.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    ApplicationKeyResponse:
+      description: Response for retrieving an application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/FullApplicationKey'
+        included:
+          description: Array of objects related to the application key.
+          items:
+            $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
+          type: array
+      type: object
+    ApplicationKeyResponseIncludedItem:
+      description: An object related to an application key.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    ApplicationKeyUpdateAttributes:
+      description: Attributes used to update an application Key.
+      properties:
+        name:
+          description: Name of the application key.
+          example: Application Key for submitting metrics
+          type: string
+      required:
+      - name
+      type: object
+    ApplicationKeyUpdateData:
+      description: Object used to update an application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationKeyUpdateAttributes'
+        id:
+          description: ID of the application key.
+          example: 00112233-4455-6677-8899-aabbccddeeff
+          type: string
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    ApplicationKeyUpdateRequest:
+      description: Request used to update an application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationKeyUpdateData'
+      required:
+      - data
+      type: object
+    ApplicationKeysType:
+      default: application_keys
+      description: Application Keys resource type.
+      enum:
+      - application_keys
+      example: application_keys
+      type: string
+      x-enum-varnames:
+      - APPLICATION_KEYS
     Creator:
       description: Creator of the object.
       properties:
@@ -383,6 +529,43 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    FullApplicationKey:
+      description: Datadog application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FullApplicationKeyAttributes'
+        id:
+          description: ID of the application key.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ApplicationKeyRelationships'
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      type: object
+    FullApplicationKeyAttributes:
+      description: Attributes of a full application key.
+      properties:
+        created_at:
+          description: Creation date of the application key.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        key:
+          description: The application key.
+          readOnly: true
+          type: string
+        last4:
+          description: The last four characters of the application key.
+          example: abcd
+          maxLength: 4
+          minLength: 4
+          readOnly: true
+          type: string
+        name:
+          description: Name of the application key.
+          example: Application Key for submitting metrics
+          type: string
+      type: object
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -554,8 +737,9 @@ components:
           readOnly: true
           type: string
         customer_impact_duration:
-          description: Length of the incident's customer impact in seconds. Equals
-            the difference between `customer_impact_start` and `customer_impact_end`.
+          description: 'Length of the incident''s customer impact in seconds.
+
+            Equals the difference between `customer_impact_start` and `customer_impact_end`.'
           format: int64
           readOnly: true
           type: integer
@@ -621,8 +805,9 @@ components:
           nullable: true
           type: string
         time_to_detect:
-          description: The amount of time in seconds to detect the incident. Equals
-            the difference between `customer_impact_start` and `detected`.
+          description: 'The amount of time in seconds to detect the incident.
+
+            Equals the difference between `customer_impact_start` and `detected`.'
           format: int64
           readOnly: true
           type: integer
@@ -1324,6 +1509,20 @@ components:
           type: object
       required:
       - data
+      type: object
+    ListApplicationKeysResponse:
+      description: Response for a list of application keys.
+      properties:
+        data:
+          description: Array of application keys.
+          items:
+            $ref: '#/components/schemas/PartialApplicationKey'
+          type: array
+        included:
+          description: Array of objects related to the application key.
+          items:
+            $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
+          type: array
       type: object
     Log:
       description: Object description of a log after being processed and stored by
@@ -2253,6 +2452,39 @@ components:
           description: Total count of elements matched by the filter.
           format: int64
           type: integer
+      type: object
+    PartialApplicationKey:
+      description: Partial Datadog application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PartialApplicationKeyAttributes'
+        id:
+          description: ID of the application key.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ApplicationKeyRelationships'
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      type: object
+    PartialApplicationKeyAttributes:
+      description: Attributes of a partial application key.
+      properties:
+        created_at:
+          description: Creation date of the application key.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        last4:
+          description: The last four characters of the application key.
+          example: abcd
+          maxLength: 4
+          minLength: 4
+          readOnly: true
+          type: string
+        name:
+          description: Name of the application key.
+          example: Application Key for submitting metrics
+          type: string
       type: object
     Permission:
       description: Permission object.
@@ -3440,8 +3672,9 @@ components:
       x-enum-varnames:
       - SIGNAL
     SecurityMonitoringSignalsListResponse:
-      description: The response object with all security signals matching the request
-        and pagination information.
+      description: 'The response object with all security signals matching the request
+
+        and pagination information.'
       properties:
         data:
           description: An array of security signals matching the request.
@@ -3772,6 +4005,299 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/v2/application_keys:
+    get:
+      description: List all application keys available for your org
+      operationId: ListApplicationKeys
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/ListApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationKeysResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get all application keys
+      tags:
+      - Key Management
+      x-undo:
+        type: safe
+  /api/v2/application_keys/{app_key_id}:
+    delete:
+      description: Delete an application key
+      operationId: DeleteApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete an application key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+    patch:
+      description: Edit an application key
+      operationId: UpdateApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Edit an application key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v2/current_user/application_keys:
+    get:
+      description: List all application keys available for current user
+      operationId: ListCurrentUserApplicationKeys
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/ListApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationKeysResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get all application keys owned by current user
+      tags:
+      - Key Management
+      x-undo:
+        type: safe
+    post:
+      description: Create an application key for current user
+      operationId: CreateCurrentUserApplicationKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create an application key for current user
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-given:
+        application_key:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
+              \ unique }}\n    },\n    \"type\": \"application_keys\"\n  }\n}"
+          step: there is a valid "application_key" in the system
+      x-undo:
+        operationId: DeleteCurrentUserApplicationKey
+        parameters:
+        - name: app_key_id
+          source: data.id
+        type: unsafe
+  /api/v2/current_user/application_keys/{app_key_id}:
+    delete:
+      description: Delete an application key owned by current user
+      operationId: DeleteCurrentUserApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete an application key owned by current user
+      tags:
+      - Key Management
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an application key owned by current user
+      operationId: GetCurrentUserApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get one application key owned by current user
+      tags:
+      - Key Management
+      x-undo:
+        type: safe
+    patch:
+      description: Edit an application key owned by current user
+      operationId: UpdateCurrentUserApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Edit an application key owned by current user
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -3820,6 +4346,8 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: "Fetch the dashboard list\u2019s dashboard definitions."
       operationId: GetDashboardListItems
@@ -3853,6 +4381,8 @@ paths:
       summary: Get a Dashboard List
       tags:
       - Dashboard Lists
+      x-undo:
+        type: safe
     post:
       description: Add dashboards to an existing dashboard list.
       operationId: CreateDashboardListItems
@@ -3900,6 +4430,8 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     put:
       description: Update dashboards of an existing dashboard list.
       operationId: UpdateDashboardListItems
@@ -3947,6 +4479,8 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -3973,6 +4507,8 @@ paths:
       summary: Get a list of incidents
       tags:
       - Incidents
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4005,6 +4541,12 @@ paths:
       tags:
       - Incidents
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteIncident
+        parameters:
+        - name: incident_id
+          source: data.id
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4028,6 +4570,8 @@ paths:
       summary: Delete an existing incident
       tags:
       - Incidents
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4055,6 +4599,8 @@ paths:
       summary: Get the details of an incident
       tags:
       - Incidents
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4090,6 +4636,8 @@ paths:
       tags:
       - Incidents
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4103,6 +4651,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LogsAggregateRequest'
+        required: true
       responses:
         '200':
           content:
@@ -4118,6 +4667,8 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/logs/config/archive-order:
     get:
       description: 'Get the current order of your archives.
@@ -4140,6 +4691,8 @@ paths:
       summary: Get archive order
       tags:
       - Logs Archives
+      x-undo:
+        type: safe
     put:
       description: 'Update the order of your archives. Since logs are processed sequentially,
         reordering an archive may change
@@ -4188,6 +4741,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/logs/config/archives:
     get:
       description: Get the list of configured logs archives with their definitions.
@@ -4208,6 +4763,8 @@ paths:
       summary: Get all archives
       tags:
       - Logs Archives
+      x-undo:
+        type: safe
     post:
       description: Create an archive in your organization.
       operationId: CreateLogsArchive
@@ -4241,6 +4798,12 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteLogsArchive
+        parameters:
+        - name: archive_id
+          source: data.id
+        type: unsafe
   /api/v2/logs/config/archives/{archive_id}:
     delete:
       description: Delete a given archive from your organization.
@@ -4271,6 +4834,8 @@ paths:
       summary: Delete an archive
       tags:
       - Logs Archives
+      x-undo:
+        type: idempotent
     get:
       description: Get a specific archive from your organization.
       operationId: GetLogsArchive
@@ -4304,6 +4869,8 @@ paths:
       summary: Get an archive
       tags:
       - Logs Archives
+      x-undo:
+        type: safe
     put:
       description: 'Update a given archive configuration.
 
@@ -4350,6 +4917,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/logs/config/archives/{archive_id}/readers:
     delete:
       description: Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
@@ -4361,6 +4930,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RelationshipToRole'
+        required: true
       responses:
         '204':
           description: OK
@@ -4386,6 +4956,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4423,6 +4995,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4436,6 +5010,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RelationshipToRole'
+        required: true
       responses:
         '204':
           description: OK
@@ -4461,6 +5036,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4487,6 +5064,8 @@ paths:
       summary: List restriction queries
       tags:
       - Logs Restriction Queries
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4498,6 +5077,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RestrictionQueryCreatePayload'
+        required: true
       responses:
         '200':
           content:
@@ -4521,6 +5101,12 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteRestrictionQuery
+        parameters:
+        - name: restriction_query_id
+          source: data.id
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4552,6 +5138,8 @@ paths:
       summary: Get restriction query for a given role
       tags:
       - Logs Restriction Queries
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4583,6 +5171,8 @@ paths:
       summary: Get all restriction queries for a given user
       tags:
       - Logs Restriction Queries
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4617,6 +5207,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4655,6 +5247,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4668,6 +5262,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RestrictionQueryUpdatePayload'
+        required: true
       responses:
         '200':
           content:
@@ -4697,6 +5292,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4711,6 +5308,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RelationshipToRole'
+        required: true
       responses:
         '204':
           description: OK
@@ -4736,6 +5334,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4775,6 +5375,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4788,6 +5390,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RelationshipToRole'
+        required: true
       responses:
         '204':
           description: OK
@@ -4813,6 +5416,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4911,6 +5516,8 @@ paths:
       summary: Get a quick list of logs
       tags:
       - Logs
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4942,6 +5549,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LogsListRequest'
+        required: false
       responses:
         '200':
           content:
@@ -4957,6 +5565,8 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4987,6 +5597,8 @@ paths:
       summary: List permissions
       tags:
       - Roles
+      x-undo:
+        type: safe
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -5071,6 +5683,8 @@ paths:
       summary: Get all processes
       tags:
       - Processes
+      x-undo:
+        type: safe
   /api/v2/roles:
     get:
       description: Returns all roles, including their names and IDs.
@@ -5112,6 +5726,8 @@ paths:
       summary: List roles
       tags:
       - Roles
+      x-undo:
+        type: safe
     post:
       description: Create a new role for your organization.
       operationId: CreateRole
@@ -5120,6 +5736,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RoleCreateRequest'
+        required: true
       responses:
         '200':
           content:
@@ -5143,6 +5760,12 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteRole
+        parameters:
+        - name: role_id
+          source: data.id
+        type: unsafe
   /api/v2/roles/{role_id}:
     delete:
       description: Disables a role.
@@ -5168,6 +5791,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: "Get a role in the organization specified by the role\u2019s `role_id`."
       operationId: GetRole
@@ -5196,6 +5821,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     patch:
       description: Edit a role. Can only be used with application keys belonging to
         administrators.
@@ -5207,6 +5834,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RoleUpdateRequest'
+        required: true
       responses:
         '200':
           content:
@@ -5242,6 +5870,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/roles/{role_id}/permissions:
     delete:
       description: Removes a permission from a role.
@@ -5253,6 +5883,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RelationshipToPermission'
+        required: true
       responses:
         '200':
           content:
@@ -5282,6 +5913,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: Returns a list of all permissions for a single role.
       operationId: ListRolePermissions
@@ -5310,6 +5943,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     post:
       description: Adds a permission to a role.
       operationId: AddPermissionToRole
@@ -5320,6 +5955,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RelationshipToPermission'
+        required: true
       responses:
         '200':
           content:
@@ -5349,6 +5985,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/roles/{role_id}/users:
     delete:
       description: Removes a user from a role.
@@ -5360,6 +5998,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RelationshipToUser'
+        required: true
       responses:
         '200':
           content:
@@ -5389,6 +6028,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: Gets all users of a role.
       operationId: ListRoleUsers
@@ -5436,6 +6077,8 @@ paths:
       summary: Get all users of a role
       tags:
       - Roles
+      x-undo:
+        type: safe
     post:
       description: Adds a user to a role.
       operationId: AddUserToRole
@@ -5446,6 +6089,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RelationshipToUser'
+        required: true
       responses:
         '200':
           content:
@@ -5475,6 +6119,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/security_monitoring/rules:
     get:
       description: List rules.
@@ -5494,6 +6140,8 @@ paths:
       summary: List rules
       tags:
       - Security Monitoring
+      x-undo:
+        type: safe
     post:
       description: Create a detection rule.
       operationId: CreateSecurityMonitoringRule
@@ -5502,6 +6150,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+        required: true
       responses:
         '200':
           content:
@@ -5517,6 +6166,12 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteSecurityMonitoringRule
+        parameters:
+        - name: rule_id
+          source: data.id
+        type: unsafe
   /api/v2/security_monitoring/rules/{rule_id}:
     delete:
       description: Delete an existing rule. Default rules cannot be deleted.
@@ -5533,6 +6188,8 @@ paths:
       summary: Delete an existing rule
       tags:
       - Security Monitoring
+      x-undo:
+        type: idempotent
     get:
       description: Get a rule's details.
       operationId: GetSecurityMonitoringRule
@@ -5550,6 +6207,8 @@ paths:
       summary: Get a rule's details
       tags:
       - Security Monitoring
+      x-undo:
+        type: safe
     put:
       description: 'Update an existing rule. When updating `cases`, `queries` or `options`,
         the whole field
@@ -5566,6 +6225,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SecurityMonitoringRuleUpdatePayload'
+        required: true
       responses:
         '200':
           content:
@@ -5585,6 +6245,8 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/signals:
     get:
       description: 'The list endpoint returns security signals that match a search
@@ -5656,6 +6318,8 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5672,6 +6336,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SecurityMonitoringSignalListRequest'
+        required: false
       responses:
         '200':
           content:
@@ -5687,6 +6352,8 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5719,6 +6386,8 @@ paths:
       summary: Get a list of all incident services
       tags:
       - Incident Services
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5751,6 +6420,12 @@ paths:
       tags:
       - Incident Services
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteIncidentService
+        parameters:
+        - name: service_id
+          source: data.id
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5774,13 +6449,16 @@ paths:
       summary: Delete an existing incident service
       tags:
       - Incident Services
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
-      description: Get details of an incident service. If the `include[users]` query
-        parameter is provided, the included attribute will contain the users related
-        to these incident services.
+      description: 'Get details of an incident service. If the `include[users]` query
+        parameter is provided,
+
+        the included attribute will contain the users related to these incident services.'
       operationId: GetIncidentService
       parameters:
       - $ref: '#/components/parameters/IncidentServiceIDPathParameter'
@@ -5803,6 +6481,8 @@ paths:
       summary: Get details of an incident service
       tags:
       - Incident Services
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5838,6 +6518,8 @@ paths:
       tags:
       - Incident Services
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5870,6 +6552,8 @@ paths:
       summary: Get a list of all incident teams
       tags:
       - Incident Teams
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5902,6 +6586,12 @@ paths:
       tags:
       - Incident Teams
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteIncidentTeam
+        parameters:
+        - name: team_id
+          source: data.id
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5925,13 +6615,16 @@ paths:
       summary: Delete an existing incident team
       tags:
       - Incident Teams
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
-      description: Get details of an incident team. If the `include[users]` query
-        parameter is provided, the included attribute will contain the users related
-        to these incident teams.
+      description: 'Get details of an incident team. If the `include[users]` query
+        parameter is provided,
+
+        the included attribute will contain the users related to these incident teams.'
       operationId: GetIncidentTeam
       parameters:
       - $ref: '#/components/parameters/IncidentTeamIDPathParameter'
@@ -5954,6 +6647,8 @@ paths:
       summary: Get details of an incident team
       tags:
       - Incident Teams
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5989,6 +6684,8 @@ paths:
       tags:
       - Incident Teams
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -6001,6 +6698,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserInvitationsRequest'
+        required: true
       responses:
         '201':
           content:
@@ -6024,6 +6722,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/user_invitations/{user_invitation_uuid}:
     get:
       description: Returns a single user invitation by its UUID.
@@ -6058,6 +6758,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/users:
     get:
       description: 'Get the list of all users in the organization. This list includes
@@ -6126,6 +6828,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     post:
       description: Create a user for your organization.
       operationId: CreateUser
@@ -6134,6 +6838,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserCreateRequest'
+        required: true
       responses:
         '201':
           content:
@@ -6157,6 +6862,12 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DisableUser
+        parameters:
+        - name: user_id
+          source: data.id
+        type: unsafe
   /api/v2/users/{user_id}:
     delete:
       description: 'Disable a user. Can only be used with an application key belonging
@@ -6184,6 +6895,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: "Get a user in the organization specified by the user\u2019s `user_id`."
       operationId: GetUser
@@ -6212,6 +6925,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     patch:
       description: 'Edit a user. Can only be used with an application key belonging
 
@@ -6224,6 +6939,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserUpdateRequest'
+        required: true
       responses:
         '200':
           content:
@@ -6259,6 +6975,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/users/{user_id}/orgs:
     get:
       description: 'Get a user organization. Returns the user information and all
@@ -6291,6 +7009,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/users/{user_id}/permissions:
     get:
       description: "Get a user permission set. Returns a list of the user\u2019s permissions\n\
@@ -6321,6 +7041,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
 security:
 - apiKeyAuth: []
   appKeyAuth: []
@@ -6393,6 +7115,17 @@ tags:
 - description: Manage incident response.
   name: Incidents
 - description: '[See API version 1](/api/v1/key-management/).'
+  name: Key Management
+- description: 'Manage your Datadog API and application keys.
+
+    You need an API and application key with admin rights
+
+    to interact with this endpoint. The full list of keys can be seen on your
+
+    [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
 - description: 'Search your logs in the Datadog platform over HTTP.
 

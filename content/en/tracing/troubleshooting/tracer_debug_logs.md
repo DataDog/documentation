@@ -144,6 +144,10 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 
 For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
 
+There are two types of logs that are created in these paths:
+1. **Logs from native code:** In 1.21.0 and higher, these logs are saved as `dotnet-tracer-native.log`. In 1.20.x and older versions, this was stored as `dotnet-profiler.log`.
+2. **Logs from managed code:** In 1.21.0 and higher, these logs are saved `dotnet-tracer-managed-<processname>-<date>.log`. In 1.20.x and older versions, this was stored as `dotnet-tracer-<processname>-<date>.log`.
+
 
 [1]: /tracing/setup/dotnet/#configuration
 {{% /tab %}}
@@ -330,14 +334,14 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-### Profiler log
+### Logs from native code
 
 ```shell
 [dotnet] 19861: [debug] JITCompilationStarted: function_id=<function id> token=<token id> name=System.Net.Http.Headers.HttpHeaders.RemoveParsedValue()
 ```
 
 
-### Tracer logs showing spans were generated
+### Logs from managed code showing spans were generated
 
 ```shell
 { MachineName: ".", ProcessName: "dotnet", PID: <process id>, AppDomainName: "test-webapi" }
@@ -347,7 +351,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span closed: [s_id: <span id>, p_id: 
 ```
 
 
-### Tracer logs showing traces couldn't be sent to the Datadog Agent
+### Logs from managed code showing traces couldn't be sent to the Datadog Agent
 
 ```shell
 YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending traces to the agent at System.Net.Http.HttpRequestException: Connection refused ---> System.Net.Sockets.SocketException: Connection refused

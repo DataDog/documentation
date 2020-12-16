@@ -31,7 +31,7 @@
     "FailedDataBucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "AccessControl": "AuthenticatedRead",
+        "AccessControl": "Private",
         "PublicAccessBlockConfiguration": {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,

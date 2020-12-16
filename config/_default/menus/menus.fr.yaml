@@ -63,23 +63,29 @@ main_left:
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
+  - identifier: Incident
+    name: Gestion des incidents
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''Icône Incident''>'
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 11
+    parent: product
   - identifier: serverless
     name: Sans serveur
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''icône sans serveur''>'
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 11
+    weight: 12
     parent: product
   - identifier: alerts
     name: Alertes
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''icône alerte''>'
     url: 'https://www.datadoghq.com/product/platform/alerts/'
-    weight: 12
+    weight: 13
     parent: product
   - identifier: api
     name: API
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''icône api''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 13
+    weight: 14
     parent: product
   - identifier: customers
     name: Clients
@@ -91,7 +97,7 @@ main_left:
     weight: -480
   - identifier: solutions
     name: Solutions
-    url: Version
+    url: '#'
     weight: -460
   - name: Services financiers
     parent: solutions
@@ -1125,6 +1131,11 @@ main:
     parent: alerting
     identifier: incidents
     weight: 8
+  - name: Presse-papiers Datadog
+    url: monitors/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 801
   - name: SLO basés sur des monitors
     url: monitors/service_level_objectives/monitor/
     parent: slos
@@ -1255,7 +1266,7 @@ main:
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
   - name: OpenTracing et OpenTelemetry
-    url: tracing/setup_overview/open_standards/java
+    url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
     weight: 103
@@ -1675,7 +1686,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Mettre en corrélation vos logs et vos métriques
-    url: 'dashboards/timeboards/#menu-graph'
+    url: logs/guide/correlate-logs-with-metrics
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1812,6 +1823,11 @@ main:
     parent: rum_browser
     identifier: rum_advanced
     weight: 102
+  - name: Surveillance des performances de pages
+    url: real_user_monitoring/browser/monitoring_page_performance/
+    parent: rum_browser
+    identifier: page_performance
+    weight: 103
   - name: Surveillance Android
     url: real_user_monitoring/android/
     parent: rum
@@ -1852,7 +1868,7 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_search
     weight: 501
-  - name: Analyses
+  - name: Analytics
     url: real_user_monitoring/explorer/analytics/
     parent: rum_explorer
     identifier: rum_explorer_analytics
@@ -2251,13 +2267,25 @@ api_v1:
     parent: Intégration AWS
     url: '#enumerer-les-regles-d-espace-de-nommage'
     generated: true
+  - name: Supprimer une entrée de filtrage des tags
+    parent: Intégration AWS
+    url: '#supprimer-une-entree-de-filtrage-de-tags'
+    generated: true
+  - name: Récupérer tous les filtres de tags AWS
+    parent: Intégration AWS
+    url: '#recuperer-tous-les-filtres-de-tags-aws'
+    generated: true
+  - name: Définir un filtre de tags AWS
+    parent: Intégration AWS
+    url: '#definir-un-filtre-de-tags-aws'
+    generated: true
   - name: Générer un nouvel ID externe
     parent: Intégration AWS
     url: '#generer-un-nouvel-id-externe'
     generated: true
-  - name: Intégration de logs AWS
+  - name: Intégration Logs AWS
     url: /api/v1/aws-logs-integration/
-    identifier: Intégration de logs AWS
+    identifier: Intégration Logs AWS
     generated: true
   - name: Supprimer une intégration de logs AWS
     parent: Intégration de logs AWS
@@ -2267,7 +2295,7 @@ api_v1:
     parent: Intégration de logs AWS
     url: '#enumerer-toutes-les-integrations-de-logs-aws'
     generated: true
-  - name: Ajouter l'ARN de Lambda aux logs AWS
+  - name: Ajouter l'ARN de Lambda pour les logs AWS
     parent: Intégration de logs AWS
     url: '#ajouter-l-arn-de-lambda-pour-les-logs-aws'
     generated: true
@@ -2276,15 +2304,15 @@ api_v1:
     url: '#verifier-qu-une-fonction-lambda-aws-existe'
     generated: true
   - name: Récupérer la liste des services AWS compatibles avec la collecte de logs
-    parent: Intégration de logs AWS
+    parent: Intégration Logs AWS
     url: '#recuperer-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs'
     generated: true
   - name: Activer une intégration de logs AWS
-    parent: Intégration de logs AWS
+    parent: Intégration Logs AWS
     url: '#activer-une-integration-de-logs-aws'
     generated: true
   - name: Vérifier les autorisations pour les services qui génèrent des logs
-    parent: Intégration de logs AWS
+    parent: Intégration Logs AWS
     url: '#verifier-les-autorisations-pour-les-services-qui-generent-des-logs'
     generated: true
   - name: Authentification
@@ -2482,6 +2510,18 @@ api_v1:
   - name: Énumérer les plages d'IP
     parent: Plages d'IP
     url: '#enumerer-les-plages-d-ip'
+    generated: true
+  - name: Services liés à un incident
+    url: /api/v1/incident-services/
+    identifier: Services liés à un incident
+    generated: true
+  - name: Équipes liées à un incident
+    url: /api/v1/incident-teams/
+    identifier: Équipes liées à un incident
+    generated: true
+  - name: Incidents
+    url: /api/v1/incidents/
+    identifier: Incidents
     generated: true
   - name: Gestion des clés
     url: /api/v1/key-management/
@@ -2735,6 +2775,10 @@ api_v1:
     parent: Intégration PagerDuty
     url: '#mettre-a-jour-un-objet-de-service-unique'
     generated: true
+  - name: Processus
+    url: /api/v1/processes/
+    identifier: Processus
+    generated: true
   - name: Rôles
     url: /api/v1/roles/
     identifier: Rôles
@@ -2859,48 +2903,64 @@ api_v1:
     parent: Synthetics
     url: '#recuperer-tous-les-emplacements-publics-et-prives'
     generated: true
-  - name: Récupérer la liste de tous les tests
+  - name: Créez un emplacement privé
     parent: Synthetics
+    url: '#creer-un-emplacement-prive'
+    generated: true
+  - name: Supprimer un emplacement privé
+    parent: Synthetics
+    url: '#supprimer-un-emplacement-prive'
+    generated: true
+  - name: Récupérer un emplacement privé
+    parent: Synthetics
+    url: '#recuperer-un-emplacement-prive'
+    generated: true
+  - name: Modifier un emplacement privé
+    parent: Synthetics
+    url: '#modifier-un-emplacement-prive'
+    generated: true
+  - name: Récupérer la liste de tous les tests
+    parent: Synthetic
     url: '#recuperer-la-liste-de-tous-les-tests'
     generated: true
   - name: Créer un test
-    parent: Synthetics
+    parent: Synthetic
     url: '#creer-un-test'
     generated: true
   - name: Récupérer une configuration de test (Browser)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-une-configuration-de-test-browser'
     generated: true
   - name: Récupérer les résumés des derniers résultats de test (Browser)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-les-resumes-des-derniers-resultats-de-test-browser'
     generated: true
   - name: Récupérer un résultat de test (Browser)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-un-resultat-de-test-browser'
     generated: true
   - name: Supprimer des tests
-    parent: Synthetics
+    parent: Synthetic
     url: '#supprimer-des-tests'
     generated: true
   - name: Déclencher des tests Synthetic spécifiques pour l'intégration continue
-    parent: Synthetics
+    parent: Synthetic
     url: '#declencher-des-tests-synthetics-pour-ci'
     generated: true
   - name: Récupérer une configuration de test (API)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-une-configuration-de-test-api'
     generated: true
   - name: Modifier un test
-    parent: Synthetics
+    parent: Synthetic
     url: '#modifier-un-test'
     generated: true
   - name: Récupérer les résumés des derniers résultats de test (API)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-les-resumes-des-derniers-resultats-de-test-api'
     generated: true
   - name: Récupérer un résultat de test (API)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-un-resultat-de-test-api'
     generated: true
   - name: Interrompre ou démarrer un test
@@ -2983,6 +3043,10 @@ api_v1:
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-les-logs-analyses'
     generated: true
+  - name: Récupérer l'attribution de l'utilisation
+    parent: Mesure de l'utilisation
+    url: '#recuperer-l-attribution-de-l-utilisation'
+    generated: true
   - name: Récupérer l'utilisation horaire pour Lambda
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-lambda'
@@ -2998,6 +3062,10 @@ api_v1:
   - name: Récupérer l'utilisation horaire pour les hosts et conteneurs
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-les-hosts-et-conteneurs'
+    generated: true
+  - name: Récupérer l'utilisation horaire pour la gestion des incidents
+    parent: Mesure de l'utilisation
+    url: '#recuperer-l-utilisation-horaire-pour-la-gestion-des-incidents'
     generated: true
   - name: Récupérer l'utilisation horaire pour les spans indexées
     parent: Mesure de l'utilisation
@@ -3055,9 +3123,9 @@ api_v1:
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-des-metriques-custom'
     generated: true
-  - name: "Récupérer les 500\_principales métriques custom selon la moyenne horaire"
+  - name: Récupérer les principales métriques custom selon la moyenne horaire
     parent: Mesure de l'utilisation
-    url: '#recuperer-les-500-principales-metriques-custom-selon-la-moyenne-horaire'
+    url: '#recuperer-les-principales-metriques-custom-selon-la-moyenne-horaire'
     generated: true
   - name: Récupérer l'utilisation horaire pour la recherche de traces
     parent: Mesure de l'utilisation
@@ -3281,6 +3349,74 @@ api_v2:
     url: /api/v2/key-management/
     identifier: Gestion des clés
     generated: true
+  - name: Récupérer toutes les clés d'application
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application'
+    generated: true
+  - name: Supprimer une clé d'application
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-application'
+    generated: true
+  - name: Modifier une clé d'application
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-application'
+    generated: true
+  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Créer une clé d'application pour l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-application-pour-l-utilisateur-actuel'
+    generated: true
+  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Gestion des clés
+    url: /api/v2/key-management/
+    identifier: Gestion des clés
+    generated: true
+  - name: Récupérer toutes les clés d'application
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application'
+    generated: true
+  - name: Supprimer une clé d'application
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-application'
+    generated: true
+  - name: Modifier une clé d'application
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-application'
+    generated: true
+  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Créer une clé d'application pour l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-application-pour-l-utilisateur-actuel'
+    generated: true
+  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
   - name: Logs
     url: /api/v2/logs/
     identifier: Logs
@@ -3408,6 +3544,14 @@ api_v2:
   - name: Intégration PagerDuty
     url: /api/v2/pagerduty-integration/
     identifier: Intégration PagerDuty
+    generated: true
+  - name: Processus
+    url: /api/v2/processes/
+    identifier: Processus
+    generated: true
+  - name: Récupérer tous les processus
+    parent: Processus
+    url: '#recuperer-tous-les-processus'
     generated: true
   - name: Rôles
     url: /api/v2/roles/
@@ -3612,7 +3756,10 @@ footer_product:
   - name: Real User Monitoring
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
-  - name: Informatique sans serveur
+  - name: Gestion des incidents
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 136
+  - name: Sans serveur
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140
   - name: Alertes

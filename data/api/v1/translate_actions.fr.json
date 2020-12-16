@@ -223,6 +223,22 @@
     "description": "Énumérez toutes les règles d'espace de nommage pour une intégration Datadog/AWS donnée. Cet endpoint ne prend aucun argument.",
     "summary": "Énumérer les règles d'espace de nommage"
   },
+  "DeleteAWSTagFilter": {
+    "description": "Supprimez une entrée de filtrage de tags.",
+    "summary": "Supprimer une entrée de filtrage de tags",
+    "request_description": "Supprimez une entrée de filtrage de tags pour un compte AWS et un espace de nommage `dd-aws` donnés.",
+    "request_schema_description": "Les objets utilisés pour supprimer une entrée de filtrage de tags AWS."
+  },
+  "ListAWSTagFilters": {
+    "description": "Récupérez tous les filtres de tags AWS.",
+    "summary": "Récupérer tous les filtres de tags AWS"
+  },
+  "CreateAWSTagFilter": {
+    "description": "Définissez un filtre de tags AWS.",
+    "summary": "Définir un filtre de tags AWS",
+    "request_description": "Définissez un filtre de tags AWS à l'aide d'un `aws_account_identifier`, d'un `namespace` et d'une chaîne de filtrage.\nLes options d'espace de nommage sont `application_elb`, `elb`, `lambda`, `network_elb`, `rds`, `sqs`, et `custom`.",
+    "request_schema_description": "Les objets utilisés pour définir un filtre de tags AWS."
+  },
   "CreateNewAWSExternalID": {
     "description": "Générez un nouvel ID externe AWS pour une paire ID de compte AWS/nom de rôle donnée.",
     "summary": "Générer un nouvel ID externe",
@@ -642,6 +658,26 @@
     "description": "Récupérez la liste des emplacements publics et privés disponibles pour les tests Synthetic. Aucun argument n'est nécessaire.",
     "summary": "Récupérer tous les emplacements (publics et privés)"
   },
+  "CreatePrivateLocation": {
+    "description": "Créez un emplacement privé Synthetic.",
+    "summary": "Créer un emplacement privé",
+    "request_description": "Détails de l'emplacement privé à créer.",
+    "request_schema_description": "Objet contenant des informations sur l'emplacement privé à créer."
+  },
+  "DeletePrivateLocation": {
+    "description": "Supprimez un emplacement privé Synthetic.",
+    "summary": "Supprimer un emplacement privé"
+  },
+  "GetPrivateLocation": {
+    "description": "Récupérez un emplacement privé Synthetic.",
+    "summary": "Récupérer un emplacement privé"
+  },
+  "UpdatePrivateLocation": {
+    "description": "Modifiez un emplacement privé Synthetic.",
+    "summary": "Modifier un emplacement privé",
+    "request_description": "Détails de l'emplacement privé à modifier.",
+    "request_schema_description": "Objet contenant des informations concernant l'emplacement privé à créer."
+  },
   "ListTests": {
     "description": "Récupérez la liste de tous les tests Synthetic.",
     "summary": "Récupérer la liste de tous les tests"
@@ -671,7 +707,7 @@
     "request_schema_description": "Liste JSON des ID des tests Synthetic que vous souhaitez supprimer."
   },
   "TriggerCITests": {
-    "description": "Déclencher un ensemble de tests Synthetic pour l'intégration continue",
+    "description": "Déclenchez une série de tests Synthetic pour une intégration continue.",
     "summary": "Déclencher des tests Synthetic spécifiques pour l'intégration continue",
     "request_description": "Détails du test à déclencher.",
     "request_schema_description": "Objet décrivant les tests Synthetic à déclencher."
@@ -747,6 +783,10 @@
   "GetUsageAnalyzedLogs": {
     "description": "Récupérez l'utilisation horaire pour les logs analysés (Security Monitoring).",
     "summary": "Récupérer l'utilisation horaire pour les logs analysés"
+  },
+  "GetUsageAttribution": {
+    "description": "Récupérez l'attribution de l'utilisation.",
+    "summary": "Récupérer l'attribution de l'utilisation"
   },
   "GetUsageLambda": {
     "description": "Récupérez l'utilisation horaire pour Lambda.",
@@ -826,7 +866,7 @@
   },
   "GetUsageTopAvgMetrics": {
     "description": "Récupérez les principales [métriques custom](https://docs.datadoghq.com/developers/metrics/custom_metrics/) selon la moyenne horaire.",
-    "summary": "Récupérer les 500 principales métriques custom selon la moyenne horaire"
+    "summary": "Récupérer les principales métriques custom selon la moyenne horaire"
   },
   "GetUsageTrace": {
     "description": "Récupérez l'utilisation horaire pour la recherche de traces.\n\n**Remarque** : cet endpoint a été renommé `/api/v1/usage/indexed-spans`.",

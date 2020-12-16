@@ -16,7 +16,7 @@ further_reading:
       text: 'Examples of Custom Instrumentation'
 ---
 
-## Compatiblity
+## Compatibility
 
 The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.
 

@@ -283,6 +283,10 @@ REMARQUE : `event_type` est toujours défini sur `security` pour les métriques
 | `jenkins.node_status.count`            | Indique si le nœud est présent ou non.                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
 | `jenkins.node_status.up`               | Une valeur de 1 indique que le nœud est en ligne. Une valeur de 0 indique qu'il ne l'est pas.              | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
 | `jenkins.plugin.count`                 | Nombre de plug-ins.                                                 | `jenkins_url`                                                              |
+| `jenkins.plugin.active`                | Plug-ins actifs.                                                | `jenkins_url`                                                              |
+| `jenkins.plugin.failed`                | Plug-ins ayant échoué.                                                | `jenkins_url`                                                              |
+| `jenkins.plugin.inactivate`            | Plug-ins désactivés.                                              | `jenkins_url`                                                              |
+| `jenkins.plugin.withUpdate`            | Plug-ins avec une mise à jour.                                           | `jenkins_url`                                                              |
 | `jenkins.project.count`                | Nombre de projets.                                                 | `jenkins_url`                                                              |
 | `jenkins.queue.size`                   | Taille de la file d'attente.                                                    | `jenkins_url`                                                              |
 | `jenkins.queue.buildable`              | Nombre d'éléments pouvant être conçus dans la file d'attente.                             | `jenkins_url`                                                              |

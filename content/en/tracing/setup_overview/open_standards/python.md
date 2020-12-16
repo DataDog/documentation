@@ -5,7 +5,6 @@ description: 'Open Standards for Python'
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
-further_reading:
 ---
 
 ## OpenTracing
@@ -136,10 +135,6 @@ Tags that are set directly on individual spans supersede conflicting tags define
 ### OpenTelemetry Links
 
 - See [github][2], [opentelemetry examples][3], or [readthedocs][4] for more OpenTelemetry Python Datadog Exporter usage.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentracing.io/guides/python/
 [2]: https://github.com/open-telemetry/opentelemetry-python/tree/master/ext/opentelemetry-ext-datadog
