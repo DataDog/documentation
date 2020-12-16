@@ -135,7 +135,7 @@ Now that you've configured your application to send traces to Datadog, start get
 [9]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
 [10]: /tracing/trace_search_and_analytics/#live-analytics-for-15-minutes
 [11]: /tracing/trace_retention_and_ingestion/
-[12]: /tracing/span_to_metrics/
+[12]: /tracing/generate_metrics/
 [13]: /tracing/deployment_tracking/
 [14]: /tracing/connect_logs_and_traces/
 [15]: /real_user_monitoring/connect_rum_and_traces

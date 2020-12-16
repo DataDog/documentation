@@ -1389,9 +1389,9 @@ main:
     identifier: trace_retention_and_ingestion_usage_metrics
     weight: 501
   - name: Generate Metrics from Spans
-    url: tracing/span_to_metrics/
+    url: tracing/generate_metrics/
     parent: tracing
-    identifier: span_to_metrics
+    identifier: generate_metrics
     weight: 6
   - name: Deployment Tracking
     url: tracing/deployment_tracking/
