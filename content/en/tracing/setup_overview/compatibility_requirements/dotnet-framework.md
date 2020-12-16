@@ -11,6 +11,9 @@ further_reading:
     - link: 'tracing/setup/dotnet-framework'
       tag: 'Documentation'
       text: 'Instrument Your Application'
+    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+      tag: 'GitHub'
+      text: 'Examples of Custom Instrumentation'
 ---
 
 ## Compatibility
