@@ -33,7 +33,6 @@ To add a Datadog API key or client token, navigate to [Integration -> APIs][1], 
 
 * Your org must have at least one API key and at most five API keys.
 * Key names must be unique across your org.
-* Application key names cannot be blank.
 
 ## Remove API keys or client tokens
 
@@ -49,8 +48,6 @@ To add a Datadog application key, navigate to [Teams -> Application Keys][2]. If
 
 **Note**:
 
-* Your org must have at least one API key and at most five API keys.
-* Key names must be unique across your org.
 * Application key names cannot be blank.
 
 ## Remove application keys
