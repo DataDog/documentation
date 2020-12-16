@@ -269,4 +269,4 @@ Pour les environnements Kubernetes, consultez la [documentation relative aux con
 [7]: /fr/getting_started/tagging/unified_service_tagging
 [8]: /fr/agent/logs/advanced_log_collection/?tab=docker#filter-logs
 [9]: /fr/agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
-[10]: /fr/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[10]: /fr/agent/kubernetes/log/?tab=daemonset#short-lived-containers

@@ -181,5 +181,5 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/docker/apm/#docker-apm-agent-environment-variables
+[1]: /ja/agent/amazon_ecs/
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
