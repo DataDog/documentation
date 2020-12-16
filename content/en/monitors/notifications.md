@@ -162,6 +162,16 @@ If your facet has periods, use brackets around the facet, for example:
 {{ [@network.client.ip].name }}
 ```
 
+#### Composite monitor variables
+
+Composite monitors can access the value associated with the sub-monitors at the time the alert triggers. 
+
+For example, if your composite monitor has sub-monitor `a`, you can include the value of `a` with:
+
+```text
+{{ a.value }}
+```
+
 ### Conditional variables
 
 Conditional variables use `if-else` logic to display a different message depending on the state of the monitor and the details of how it was triggered. These variables can be used within the subject or body of the notification message.
