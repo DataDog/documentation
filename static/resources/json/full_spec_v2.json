@@ -27454,6 +27454,17 @@
           "Incidents"
         ],
         "x-codegen-request-body-name": "body",
+        "x-given": {
+          "incident": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"{{ unique }}\",\n      \"customer_impacted\": false\n     },\n     \"type\": \"incidents\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"incident\" in the system"
+          }
+        },
         "x-undo": {
           "operationId": "DeleteIncident",
           "parameters": [
@@ -35325,6 +35336,12 @@
         "tags": [
           "Roles"
         ],
+        "x-given": {
+          "permission": {
+            "source": "data[0]",
+            "step": "there is a valid \"permission\" in the system"
+          }
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -36098,6 +36115,17 @@
           "Roles"
         ],
         "x-codegen-request-body-name": "body",
+        "x-given": {
+          "role": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\"\n     },\n     \"type\": \"roles\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"role\" in the system"
+          }
+        },
         "x-undo": {
           "operationId": "DeleteRole",
           "parameters": [
@@ -37231,6 +37259,21 @@
           "Roles"
         ],
         "x-codegen-request-body-name": "body",
+        "x-given": {
+          "permission_role": {
+            "parameters": [
+              {
+                "name": "role_id",
+                "source": "role.data.id"
+              },
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"id\": \"{{ permission.id }}\",\n    \"type\": \"{{ permission.type }}\"\n  }\n}"
+              }
+            ],
+            "step": "the \"permission\" is granted to the \"role\""
+          }
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -39098,6 +39141,21 @@
           "Roles"
         ],
         "x-codegen-request-body-name": "body",
+        "x-given": {
+          "permission_role": {
+            "parameters": [
+              {
+                "name": "role_id",
+                "source": "role.data.id"
+              },
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"id\": \"{{ user.data.id }}\",\n    \"type\": \"{{ user.data.type }}\"\n  }\n}"
+              }
+            ],
+            "step": "the \"user\" has the \"role\""
+          }
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -42695,6 +42753,17 @@
           "Incident Services"
         ],
         "x-codegen-request-body-name": "body",
+        "x-given": {
+          "service": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\"\n     },\n     \"type\": \"services\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"service\" in the system"
+          }
+        },
         "x-undo": {
           "operationId": "DeleteIncidentService",
           "parameters": [
@@ -45188,6 +45257,17 @@
           "Incident Teams"
         ],
         "x-codegen-request-body-name": "body",
+        "x-given": {
+          "team": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\"\n     },\n     \"type\": \"teams\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"team\" in the system"
+          }
+        },
         "x-undo": {
           "operationId": "DeleteIncidentTeam",
           "parameters": [
@@ -46691,6 +46771,18 @@
           "Users"
         ],
         "x-codegen-request-body-name": "body",
+        "x-given": {
+          "user_invitation": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": [\n    {\n      \"relationships\": {\"user\": {\"data\": {\n        \"id\": \"{{ user.data.id }}\",\n        \"type\": \"{{ user.data.type }}\"\n      }}},\n      \"type\": \"user_invitations\"\n    }\n  ]\n}"
+              }
+            ],
+            "source": "data[0]",
+            "step": "the \"user\" has a \"user_invitation\""
+          }
+        },
         "x-undo": {
           "type": "safe"
         }
@@ -48076,6 +48168,17 @@
           "Users"
         ],
         "x-codegen-request-body-name": "body",
+        "x-given": {
+          "user": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{ unique }}@datadoghq.com\"\n     },\n     \"type\": \"users\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"user\" in the system"
+          }
+        },
         "x-undo": {
           "operationId": "DisableUser",
           "parameters": [
