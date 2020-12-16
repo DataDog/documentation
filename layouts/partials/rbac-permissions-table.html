@@ -1,3 +1,5 @@
+{{/* Scopable columns may be refactored or moved to a different page later, but should remain hardcoded for now. */}}
+
 {{ $scopable_permissions := slice "logs_read_data" "logs_write_exclusion_filters" "logs_write_processors" "logs_read_archives" "logs_read_index_data" }}
 {{ $is_scopable := false }}
 {{ $hide_scopable_column := false }}
@@ -48,7 +50,7 @@
 {{/* Harcoding the legacy logs section until deprecation */}}
 {{ if eq $permission_group "Logs" }}
   Log Management RBAC also includes two legacy permissions, superseded by finer-grained and more extensive <code>logs_read_data</code> permission:
-  
+
   <table>
     <thead>
       <tr>
