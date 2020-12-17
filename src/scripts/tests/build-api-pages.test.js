@@ -1245,3 +1245,328 @@ describe(`filterExampleJson`, () => {
 
 });
 
+describe(`isReadOnlyRow`, () => {
+
+  it('should return true when object with readonly true', () => {
+    const obj = {readOnly: true};
+    const actual = bp.isReadOnlyRow(obj);
+    const expected = true;
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return false when object with readonly false', () => {
+    const obj = {readOnly: false};
+    const actual = bp.isReadOnlyRow(obj);
+    const expected = false;
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return false when object with no readonly attribute', () => {
+    const obj = {};
+    const actual = bp.isReadOnlyRow(obj);
+    const expected = false;
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return true when array with readonly true', () => {
+    const obj = {type: "array", items: {readOnly: true}};
+    const actual = bp.isReadOnlyRow(obj);
+    const expected = true;
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return false when array with readonly false', () => {
+    const obj = {type: "array", items: {readOnly: false}};
+    const actual = bp.isReadOnlyRow(obj);
+    const expected = false;
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return false when array has no readonly attribute', () => {
+    const obj = {type: "array", items: {}};
+    const actual = bp.isReadOnlyRow(obj);
+    const expected = false;
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return false when array has no items', () => {
+    const obj = {type: "array"};
+    const actual = bp.isReadOnlyRow(obj);
+    const expected = false;
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return false when empty obj', () => {
+    const obj = {};
+    const actual = bp.isReadOnlyRow(obj);
+    const expected = false;
+    expect(actual).toEqual(expected);
+  });
+
+});
+
+describe(`fieldColumn`, () => {
+
+  const anykeyMarkup = "&lt;any&#45;key&gt;";
+  const anykeyResult = `
+    <div class="col-4 column">
+      <p class="key">${anykeyMarkup}</p>
+    </div>
+  `;
+
+  const emptyResult = `
+    <div class="col-4 column">
+      <p class="key"></p>
+    </div>
+  `.trim();
+
+
+  it('should should empty field if key is type and value not object', () => {
+    const actual = bp.fieldColumn("type", "array", "", "");
+    const expected = emptyResult;
+    expect(actual).toEqual(expected);
+  });
+
+});
+
+describe(`typeColumn`, () => {
+
+  it('should show type value', () => {
+    const obj = {description: ""};
+    const actual = bp.typeColumn("type", "array", "");
+    const expected = `<div class="col-2 column"><p>array</p></div>`;
+    expect(actual).toEqual(expected);
+  });
+
+});
+
+describe(`descColumn`, () => {
+
+  const emptyMarkdown = '<div class="col-6 column"></div>';
+
+  it('should return empty column markup when desc empty', () => {
+    const obj = {description: ""};
+    const key = "foo";
+    const actual = bp.descColumn(key, obj);
+    const expected = emptyMarkdown;
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return format markdown', () => {
+    const obj = {description: "# test"};
+    const key = "foo";
+    const actual = bp.descColumn(key, obj);
+    const expected = '<div class="col-6 column"><h1 id="test">test</h1></div>';
+    expect(actual).toEqual(expected);
+  });
+
+  it('should value as description when key is description', () => {
+    // this is for additionalProperties
+    const obj = "TODO";
+    const key = "description";
+    const actual = bp.descColumn(key, obj);
+    const expected = '<div class="col-6 column"><p>TODO</p></div>';
+    expect(actual).toEqual(expected);
+  });
+
+});
+
+describe(`rowRecursive`, () => {
+
+  it('should handle fields named required (properties->required)', () => {
+    /*
+    Required fields are usually an array of string e.g ['foo'.'bar']
+    If a field is named required then the logic should recognise this is a field object and not the array to check against
+    */
+    const mockData = {
+      "description": "A customized field defined by users and attached to a certain object type (incidents, etc).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "a91169ea3eb950dd85cc2a58c5a2d2c6",
+          "description": "The field's ID."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "The field's attributes.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "state",
+              "description": "Name of the field."
+            },
+            "required": {
+              "type": "boolean",
+              "description": "If true, this field is required to create an object of the field's assigned `table_id` type.",
+              "default": false
+            },
+            "created_by_user": {
+              "description": "JSON API relationship for users.",
+              "properties": {
+                "data": {
+                  "description": "The User relationship data.",
+                  "properties": {
+                    "id": {
+                      "description": "A unique identifier that represents the user.",
+                      "example": "00000000-0000-0000-0000-000000000000",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "users",
+                      "description": "Users resource type.",
+                      "enum": [
+                        "users"
+                      ],
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "USERS"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "type": "object"
+    };
+    const mockInitialData = mockData.properties;
+    const t = () => {
+      bp.rowRecursive("request", mockInitialData, false, mockInitialData.required || []);
+    };
+    expect(t).not.toThrow(Error);
+
+  });
+
+});
+
+describe(`schemaTable`, () => {
+
+  xit('should return html table wrapping rows recursively generated', () => {
+
+    // spyOn(build, 'rowRecursive').and.returnValue('FooBar');
+    // const spy = jest.spyOn(build, 'rowRecursive').mockImplementation(() => 'FooBar');
+    // const spy = jest.spyOn(bp, 'rowRecursive').mockImplementation(jest.fn());
+
+    const actual = bp.schemaTable({});
+    const expected = `
+  <div class=" schema-table row">
+    <p class="expand-all js-expand-all text-primary">Expand All</p>
+    <div class="col-12">
+      <div class="row table-header">
+        <div class="col-4 column">
+          <p class="font-semibold">Field</p>
+        </div>
+        <div class="col-2 column">
+          <p class="font-semibold">Type</p>
+        </div>
+        <div class="col-6 column">
+          <p class="font-semibold">Description</p>
+        </div>
+      </div>
+      FooBar
+    </div>
+  </div>`;
+
+    expect(bp.rowRecursive).toHaveBeenCalledTimes(1);
+    expect(actual).toEqual(expected);
+  });
+
+  xit('should work with array of arrays', () => {
+    const mockData = JSON.parse(`
+        {
+          "schema": {
+            "description": "An array of traces.",
+            "items": {
+              "description": "An array of spans.",
+              "items": {
+                "description": "TODO.",
+                "properties": {
+                  "duration": {
+                    "description": "The duration of the request in nanoseconds.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "error": {
+                    "description": "Set this value to 1 to indicate if an error occured.\\n\\nIf an error occurs, you should pass additional information,\\nsuch as the error message, type and stack information in the meta property.",
+                    "format": "int32",
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "trace_id",
+                  "span_id",
+                  "name",
+                  "resource",
+                  "service",
+                  "start",
+                  "duration"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "type": "array"
+          }
+      }`);
+
+    const actual = bp.schemaTable("request", mockData.schema);
+    const expected = `<div class="table-request schema-table row">
+    <p class="expand-all js-expand-all text-primary">Expand All</p>
+    <div class="col-12">
+      <div class="row table-header">
+        <div class="col-4 column">
+          <p class="font-semibold">Field</p>
+        </div>
+        <div class="col-2 column">
+          <p class="font-semibold">Type</p>
+        </div>
+        <div class="col-6 column">
+          <p class="font-semibold">Description</p>
+        </div>
+      </div>
+      <div class="row   ">
+          <div class="col-12 first-column">
+            <div class="row first-row  ">
+              <div class="col-4 column">
+      <p class="key">duration</p>
+    </div>
+              <div class="col-2 column"><p>int64</p></div>
+              <div class="col-6 column"><p>The duration of the request in nanoseconds.</p></div>
+            </div>
+
+          </div>
+            </div>
+
+            <div class="row   ">
+              <div class="col-12 first-column">
+                <div class="row first-row  ">
+
+              <div class="col-4 column">
+      <p class="key">error</p>
+    </div>
+
+                  <div class="col-2 column"><p>int32</p></div>
+                  <div class="col-6 column"><p>Set this value to 1 to indicate if an error occured.</p>
+    <p>If an error occurs, you should pass additional information,
+    such as the error message, type and stack information in the meta property.</p></div>
+                </div>
+
+              </div>
+            </div>
+
+        </div>
+      </div>`.trim();
+    expect(actual).toEqual(expected);
+  });
+
+});
