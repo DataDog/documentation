@@ -5,7 +5,6 @@ description: 'Standards ouverts pour Python'
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
-further_reading:
 ---
 
 ## OpenTracing
@@ -136,10 +135,6 @@ Les tags qui sont définis directement sur des spans spécifiques remplacement l
 ### Liens OpenTelemetry
 
 - Consultez [Github][2], les [exemples OpenTelemetry][3] ou [readthedocs][4] pour en savoir plus sur l'utilisation de l'exportateur Datadog pour OpenTelemetry dans une application Python.
-
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentracing.io/guides/python/
 [2]: https://github.com/open-telemetry/opentelemetry-python/tree/master/ext/opentelemetry-ext-datadog

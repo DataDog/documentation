@@ -382,21 +382,24 @@ com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarde
 
 **注:** パラメーターをカスタマイズするときは、カスタムリソース名が一意であることを確認してください。リソース名が他の Azure リソースのリスト内にまだ存在していないことを確認します。
 
-| -Flag `<Default Parameter>`                                           | 説明                                                                                                                                                      |
-|-----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -DatadogSite `<datadoghq.com>`                                        | このフラグを別の datadog-url を使用してパラメーターとして追加して、Datadog インスタンスをカスタマイズします。(datadoghq.eu、ddog-gov.com、または us3.datadoghq.com を使用できます)      |
-| -ResourceGroupLocation `<westus2>`                                    | 更新された Azure-region を使用してこのフラグを追加することにより、Azure Resource-Group と Resources がデプロイされるリージョンを選択できます。              |
-| -ResourceGroupName `<datadog-log-forwarder-rg>`                       | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure リソースグループ名をカスタマイズします。                                                                          |
-| -EventhubNamespace `<datadog-eventhub-namespace>`                     | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Event-Hub ネームスペースをカスタマイズします。                                                                          |
-| -EventhubName `<datadog-eventhub>`                                    | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Event-Hub 名をカスタマイズします。                                                                               |
-| -FunctionAppName `<datadog-functionapp>`                              | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Function-App 名をカスタマイズします。                                                                            |
-| -FunctionName `<datadog-function>`                                    | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Function 名をカスタマイズします。                                                                                |
-| -DiagnosticSettingName `<datadog-activity-logs-diagnostic-setting>`   | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Diagnostic-Setting 名をカスタマイズします。**(アクティビティログの送信にのみ関連)**                        |
+| -Flag `<Default Parameter>`                                           | 説明                                                                                                                                                             |
+|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -DatadogSite `<datadoghq.com>`                                        | このフラグを別の datadog-url を使用してパラメーターとして追加して、Datadog インスタンスをカスタマイズします。Datadog サイト: {{< region-param key="dd_site" code="true" >}}            |
+| -Environment `<AzureCloud>`                                           | このフラグをパラメーターとして追加して、Azure 独立クラウドのストレージを管理します。追加のオプションは、`AzureChinaCloud`、`AzureGermanCloud`、`AzureUSGovernment` です。               |
+| -ResourceGroupLocation `<westus2>`                                    | 更新された Azure-region を使用してこのフラグを追加することにより、Azure Resource-Group とリソースがデプロイされるリージョンを選択できます。                     |
+| -ResourceGroupName `<datadog-log-forwarder-rg>`                       | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Resource-Group の名前をカスタマイズします。                                                                                 |
+| -EventhubNamespace `<datadog-eventhub-namespace>`                     | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Event-Hub ネームスペースをカスタマイズします。                                                                                 |
+| -EventhubName `<datadog-eventhub>`                                    | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Event-Hub の名前をカスタマイズします。                                                                                      |
+| -FunctionAppName `<datadog-functionapp>`                              | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Function-App の名前をカスタマイズします。                                                                                   |
+| -FunctionName `<datadog-function>`                                    | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Function の名前をカスタマイズします。                                                                                       |
+| -DiagnosticSettingName `<datadog-activity-logs-diagnostic-setting>`   | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Diagnostic-Setting の名前をカスタマイズします。**(アクティビティログの送信にのみ関連)**                               |
 
 
+インストールエラーが発生した場合は、[トラブルシューティングセクション][3]にアクセスすれば、一般的なエラーケースをすばやく解決できます。
 
 [1]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
 [2]: https://app.datadoghq.com/account/settings#api
+[3]: https://docs.datadoghq.com/ja/integrations/azure/#troubleshooting
 {{% /tab %}}
 
 {{% tab "手動インストール" %}}
@@ -570,7 +573,50 @@ Azure インテグレーションメトリクス、イベント、およびサ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][57]までお問合せください。
+### 自動ログ収集
+
+#### 命名の競合
+
+デフォルトパラメーターの 1 つと同じリソース名を持つ Azure リソースがあると、名前の競合が発生する可能性があります。Azure では、リソースが個々のサブスクリプション内でリソース名を共有することは許可されていません。環境内にまだ存在しない一意の名前でデフォルトパラメーターの名前を変更することをお勧めします。
+
+たとえば、'datadog-eventhub' という名前の eventhub を既に所有している場合は、-EventhubName フラグを使用して eventhub リソースのデフォルト名を変更します。
+
+{{< code-block lang="powershell" filename="例" >}}
+
+./resource_deploy.ps1 -ApiKey <your_api_key> -SubscriptionId <your_subscription_id> -EventhubName <new-name>
+
+{{< /code-block >}}
+
+**注:** [オプションのパラメーター][57]セクションに移動して、構成可能なパラメーターのリストを見つけます。
+
+**注:** この失敗が原因でスクリプトを再実行する場合は、リソースグループ全体を削除して、新しい実行を作成することもお勧めします。
+
+
+#### 未登録のリソースプロバイダー
+
+エラー **The subscription is not registered to use namespace ‘Microsoft.EventHub’** が原因でスクリプトの実行が失敗した場合:
+
+Azure には、各サービスのリソースプロバイダーがあります。たとえば、Azure EventHub の場合は `Microsoft.EventHub` です。Azure サブスクリプションが必要なリソースプロバイダーに登録されていない場合、スクリプトは失敗します。この問題は、リソースプロバイダーに登録することで修正できます。CloudShell でこのコマンドを実行します。
+
+{{< code-block lang="powershell" filename="例" >}}
+
+az provider register --namespace Microsoft.EventHub
+
+{{< /code-block >}}
+
+
+#### ログの割り当て超過
+
+スクリプトは正常にインストールされたのに、ログエクスプローラー内にアクティビティ/プラットフォームログが表示されない場合
+
+ログ保持の [1 日の割り当て][58]を超えていないことを確認します。
+
+**注:** スクリプトの実行後、5 分以上経ってからログエクスプローラーでログの検索を開始することをお勧めします。
+
+
+
+
+ご不明な点は、[Datadog のサポートチーム][59]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -632,4 +678,6 @@ Azure インテグレーションメトリクス、イベント、およびサ�
 [54]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
 [55]: https://github.com/DataDog/dogweb/blob/prod/integration/azure/azure_metadata.csv
 [56]: https://docs.datadoghq.com/ja/events/
-[57]: https://docs.datadoghq.com/ja/help/
+[57]: https://docs-staging.datadoghq.com/mitheysh.asokan/FAQ-Forwarder/integrations/azure/#optional-parameters
+[58]: https://docs.datadoghq.com/ja/logs/indexes/#set-daily-quota
+[59]: https://docs.datadoghq.com/ja/help/
