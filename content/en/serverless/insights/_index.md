@@ -5,7 +5,7 @@ kind: documentation
 
 {{< img src="serverless/serverless_actionable_insights_detail.png" alt="Auto-generated insights for your serverless applications" >}}
 
-Datadog automatically generates suggestions to resolve errors, performance problems, and optimize cost for your serverless applications.
+Datadog automatically generates suggestions to resolve errors and performance problems, and optimize cost for your serverless applications.
 
 ## Setup
 
