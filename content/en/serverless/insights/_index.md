@@ -1,7 +1,5 @@
 ---
 title: Serverless Insights
-aliases:
-    - /serverless/insights
 kind: documentation
 ---
 
@@ -13,11 +11,11 @@ Datadog automatically generates suggestions to resolve errors, performance probl
 
 Datadog uses AWS CloudWatch metrics, Datadog enhanced AWS Lambda metrics, and Lambda `REPORT` logs to suggest insights to you. To set these up,
 
- 1. Set up the [Amazon Web Services][1] integration
- 2. Set up the [Datadog Forwarder][2] and ensure your Lambda `REPORT` logs are indexed in Datadog
- 3. Enable [Enhanced Lambda Metrics][3] for your functions
+ 1. Set up the [Amazon Web Services][1] integration.
+ 2. Set up the [Datadog Forwarder][2] and ensure your Lambda `REPORT` logs are indexed in Datadog.
+ 3. Enable [Enhanced Lambda Metrics][3] for your functions.
 
-Note that Datadog will generate the High Errors, High Duration, Throttled, and High Iterator Age insights out of the box after setting up the [AWS integration][1]. All other insights, including those generated on individual invocations, require the [Datadog Forwarder][2] and [Enhanced Lambda Metrics][3].
+**Note**: Datadog generates [High Errors](#high-errors), [High Duration](#high-duration), [Throttled](#throttles), and [High Iterator Age](#high-iterator-age) insights out of the box after setting up the [AWS integration][1]. All other insights, including those generated on individual invocations, require the [Datadog Forwarder][2] and [Enhanced Lambda Metrics][3].
 
 ## Generated Insights
 
@@ -77,7 +75,7 @@ More than 10% of invocations in the selected time range were throttled. Throttli
 
 ### High Iterator Age
 
-The function's iterator was older than two hours. Iterator age measures the age of the last record for each batch of records processed on from a stream. When this value increases, it means your function cannot process data fast enough.
+The function's iterator was older than two hours. Iterator age measures the age of the last record for each batch of records processed from a stream. When this value increases, it means your function cannot process data fast enough.
 
 **Resolution:** Enable [distributed tracing][5] to isolate why your function has so much data being streamed to it. You can also consider increasing the shard count and batch size of the stream your function reads from.
 
@@ -86,6 +84,7 @@ The function's iterator was older than two hours. Iterator age measures the age 
 No invocation in the selected time range used more than 10% of the allocated memory. This means your function has more billable resources allocated to it than it may need.
 
 **Resolution:** Consider decreasing the amount of allocated memory on your Lambda function. Note that this may affect your AWS bill.
+
 
 
 
