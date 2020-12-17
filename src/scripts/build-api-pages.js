@@ -393,6 +393,9 @@ const outputExample = (chosenExample, inputkey) => {
           // output 1 level of example array
           if(inputkey && inputkey in item) {
             ex = outputValue(item[inputkey]);
+          } else {
+            // this isn't a mapping? of example to object
+            ex = JSON.stringify(item);
           }
         } else {
           ex += outputValue(item, true);
