@@ -15,7 +15,7 @@
                     {{ range .Site.Menus.main_left   }}
                     {{ if .HasChildren }}
                     <li class="dropdown {{ .Identifier }}-dropdown nav-item">
-                        <a href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}" class="nav-link dropdown {{ if eq .Name "Solutions" }} solutions pr-lg-6 pr-xl-9 {{ end }}">{{.Name}}</a>
+                        <a href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}" class="nav-link dropdown {{ if eq .Name "Solutions" }} solutions{{ end }}">{{.Name}}</a>
 
                         <!-- Menu: Solutions menu -->
                         {{ if eq .Identifier "solutions" }}
@@ -116,7 +116,11 @@
       <li class="final nav-item {{ if eq .Identifier "get_started" }}nav-button {{ end }}">
           <a {{ if eq .Identifier "get_started" }} class="{{ $SignUpClass }} btn btn-outline-primary sign-up-trigger text-uppercase" href="#" data-toggle="modal" data-target="#signupModal" style="min-width:120px" {{ else }} class="nav-link" href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}"  {{ end }}>
               {{ if eq .Identifier "get_started" }}
-                  <span class="d-none d-xl-block">{{ i18n "get_started_free" }}</span>
+                {{ if eq $.Lang "fr" }}
+                    <span class="d-none d-xl-block">{{ i18n "free_trial" }}</span>
+                {{ else }}
+                    <span class="d-none d-xl-block">{{ i18n "get_started_free" }}</span>
+                {{ end }}
                   <span class="d-block d-xl-none">{{ i18n "get_started_free_short" }}</span>
               {{ else }}
                 <span class="menu-text">{{ .Name | safeHTML }}</span>
