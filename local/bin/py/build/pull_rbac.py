@@ -31,7 +31,7 @@ def pull_rbac():
 
     formatted_permissions_json = json.dumps(formatted_permissions_dict)
 
-    with open('data/permissions.json', 'w') as outfile:
+    with open('data/permissions.json', 'w+') as outfile:
       outfile.write(formatted_permissions_json)
   else:
     print('RBAC api request failed.')
