@@ -295,7 +295,10 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
             ex = ex || null;
           } else {
             if(!ex) {
-              if(value.type) {
+              if(value.oneOf && value.oneOf.length > 0 && !chosenExample) {
+                const firstOneOf = value.oneOf[0];
+                ex = outputValueType(firstOneOf.type, firstOneOf.format);
+              } else if(value.type) {
                 ex = outputValueType(value.type, value.format);
               } else {
                 prefixType = '';

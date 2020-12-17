@@ -10,7 +10,7 @@
                   "<any-key>": "string"
                 },
                 "computes": {
-                  "<any-key>": null
+                  "<any-key>": "string"
                 }
               }
             ]
@@ -95,14 +95,14 @@
               "min": 50
             },
             "limit": "integer",
-            "missing": null,
+            "missing": "string",
             "sort": {
               "aggregation": "pc90",
               "metric": "@duration",
               "order": "asc",
               "type": "string"
             },
-            "total": null
+            "total": false
           }
         ],
         "options": {
