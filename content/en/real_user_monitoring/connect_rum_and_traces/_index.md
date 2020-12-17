@@ -43,7 +43,7 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     ...otherConfig,
-    allowedTracingOrigins: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/]
+    allowedTracingOrigins: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/]
 })
 ```
 
