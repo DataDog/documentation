@@ -13,7 +13,9 @@ If a monitor supports alerting when a given value is above or below a given thre
 Metric `a` reports discrete values from `0` to `10` representing a status and you want to be notified if the metric is not between `4` and `8`.
 Mathematically, the difference between the metric and the center of the range (6) should never be more than 2. 
 
-`8 > a > 4` <=> `abs(6-a) < 2` <=> `abs(6-a) - 2 < 0`
+```
+8 > a > 4 <=> abs(6-a) < 2 <=> abs(6-a) - 2 < 0
+```
 
 - To be notified if the value is outside the range, the monitor condition should be `abs(6-a) - 2 > 0`.
 - To be notified if the value is inside the range, the monitor condition should be `2 - abs(6-a) > 0`.
