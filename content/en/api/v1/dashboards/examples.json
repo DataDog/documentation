@@ -69,7 +69,16 @@
           "widgets": [
             {
               "definition": "[object Object]",
-              "id": "integer",
+              "id": {
+                "definition": {
+                  "requests": {
+                    "fill": {
+                      "q": "system.cpu.user"
+                    }
+                  },
+                  "type": "hostmap"
+                }
+              },
               "layout": {
                 "height": 0,
                 "width": 0,
@@ -146,7 +155,16 @@
         "widgets": [
           {
             "definition": "[object Object]",
-            "id": "integer",
+            "id": {
+              "definition": {
+                "requests": {
+                  "fill": {
+                    "q": "system.cpu.user"
+                  }
+                },
+                "type": "hostmap"
+              }
+            },
             "layout": {
               "height": 0,
               "width": 0,
@@ -225,7 +243,16 @@
           "widgets": [
             {
               "definition": "[object Object]",
-              "id": "integer",
+              "id": {
+                "definition": {
+                  "requests": {
+                    "fill": {
+                      "q": "system.cpu.user"
+                    }
+                  },
+                  "type": "hostmap"
+                }
+              },
               "layout": {
                 "height": 0,
                 "width": 0,
@@ -295,7 +322,16 @@
           "widgets": [
             {
               "definition": "[object Object]",
-              "id": "integer",
+              "id": {
+                "definition": {
+                  "requests": {
+                    "fill": {
+                      "q": "system.cpu.user"
+                    }
+                  },
+                  "type": "hostmap"
+                }
+              },
               "layout": {
                 "height": 0,
                 "width": 0,
@@ -380,7 +416,16 @@
         "widgets": [
           {
             "definition": "[object Object]",
-            "id": "integer",
+            "id": {
+              "definition": {
+                "requests": {
+                  "fill": {
+                    "q": "system.cpu.user"
+                  }
+                },
+                "type": "hostmap"
+              }
+            },
             "layout": {
               "height": 0,
               "width": 0,
