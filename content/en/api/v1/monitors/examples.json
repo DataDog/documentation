@@ -290,13 +290,13 @@
             "status": [
               {
                 "count": "integer",
-                "name": "undefined"
+                "name": null
               }
             ],
             "type": [
               {
                 "count": "integer",
-                "name": "undefined"
+                "name": null
               }
             ]
           },
@@ -351,25 +351,25 @@
             "muted": [
               {
                 "count": "integer",
-                "name": "undefined"
+                "name": null
               }
             ],
             "status": [
               {
                 "count": "integer",
-                "name": "undefined"
+                "name": null
               }
             ],
             "tag": [
               {
                 "count": "integer",
-                "name": "undefined"
+                "name": null
               }
             ],
             "type": [
               {
                 "count": "integer",
-                "name": "undefined"
+                "name": null
               }
             ]
           },

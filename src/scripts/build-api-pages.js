@@ -294,7 +294,15 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
           if(actionType === 'curl') {
             ex = ex || null;
           } else {
-            ex = ex || outputValueType(value.type, value.format);
+            if(!ex) {
+              if(value.type) {
+                ex = outputValueType(value.type, value.format);
+              } else {
+                prefixType = '';
+                suffixType = '';
+                ex = JSON.stringify(chosenExample);
+              }
+            }
           }
           if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
 
@@ -393,9 +401,6 @@ const outputExample = (chosenExample, inputkey) => {
           // output 1 level of example array
           if(inputkey && inputkey in item) {
             ex = outputValue(item[inputkey]);
-          } else {
-            // this isn't a mapping? of example to object
-            ex = JSON.stringify(item);
           }
         } else {
           ex += outputValue(item, true);

@@ -222,12 +222,8 @@
               "query": ""
             }
           },
-          "change_type": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
-          "compare_to": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "change_type": "string",
+          "compare_to": "string",
           "event_query": {
             "compute": {
               "aggregation": "avg",
@@ -257,9 +253,7 @@
               "query": ""
             }
           },
-          "increase_good": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "increase_good": false,
           "log_query": {
             "compute": {
               "aggregation": "avg",
@@ -318,9 +312,7 @@
               "query": ""
             }
           },
-          "order_by": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "order_by": "string",
           "order_dir": "desc",
           "process_query": {
             "filter_by": [],
@@ -328,9 +320,7 @@
             "metric": "",
             "search_by": "string"
           },
-          "q": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "q": "string",
           "rum_query": {
             "compute": {
               "aggregation": "avg",
@@ -389,9 +379,7 @@
               "query": ""
             }
           },
-          "show_present": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          }
+          "show_present": false
         }
       ],
       "time": {
@@ -844,16 +832,7 @@
       "widgets": [
         {
           "definition": "[object Object]",
-          "id": {
-            "definition": {
-              "requests": {
-                "fill": {
-                  "q": "system.cpu.user"
-                }
-              },
-              "type": "hostmap"
-            }
-          },
+          "id": "integer",
           "layout": {
             "height": 0,
             "width": 0,
@@ -2140,9 +2119,7 @@
       "precision": "integer",
       "requests": [
         {
-          "aggregator": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "aggregator": "string",
           "apm_query": {
             "compute": {
               "aggregation": "avg",
@@ -2278,9 +2255,7 @@
             "metric": "",
             "search_by": "string"
           },
-          "q": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "q": "string",
           "rum_query": {
             "compute": {
               "aggregation": "avg",
@@ -3297,12 +3272,8 @@
       "has_search_bar": "auto",
       "requests": [
         {
-          "aggregator": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
-          "alias": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "aggregator": "string",
+          "alias": "string",
           "apm_query": {
             "compute": {
               "aggregation": "avg",
@@ -3393,9 +3364,7 @@
               "query": ""
             }
           },
-          "limit": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "limit": "integer",
           "log_query": {
             "compute": {
               "aggregation": "avg",
@@ -3461,9 +3430,7 @@
             "metric": "",
             "search_by": "string"
           },
-          "q": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "q": "string",
           "rum_query": {
             "compute": {
               "aggregation": "avg",
@@ -3751,9 +3718,7 @@
               "query": ""
             }
           },
-          "display_type": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "display_type": "string",
           "event_query": {
             "compute": {
               "aggregation": "avg",
@@ -3847,18 +3812,14 @@
               "query": ""
             }
           },
-          "on_right_yaxis": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "on_right_yaxis": false,
           "process_query": {
             "filter_by": [],
             "limit": "integer",
             "metric": "",
             "search_by": "string"
           },
-          "q": {
-            "q/apm_query/log_query": "<METRIC_1>{<SCOPE_1>}"
-          },
+          "q": "string",
           "rum_query": {
             "compute": {
               "aggregation": "avg",
@@ -4146,37 +4107,13 @@
           "conditional_formats": [
             {
               "comparator": ">=",
-              "custom_bg_color": {
-                "comparator": ">=",
-                "palette": "blue",
-                "value": 1
-              },
-              "custom_fg_color": {
-                "comparator": ">=",
-                "palette": "blue",
-                "value": 1
-              },
-              "hide_value": {
-                "comparator": ">=",
-                "palette": "blue",
-                "value": 1
-              },
-              "image_url": {
-                "comparator": ">=",
-                "palette": "blue",
-                "value": 1
-              },
-              "metric": {
-                "comparator": ">=",
-                "palette": "blue",
-                "value": 1
-              },
+              "custom_bg_color": "string",
+              "custom_fg_color": "string",
+              "hide_value": false,
+              "image_url": "string",
+              "metric": "string",
               "palette": "blue",
-              "timeframe": {
-                "comparator": ">=",
-                "palette": "blue",
-                "value": 1
-              },
+              "timeframe": "string",
               "value": 0
             }
           ],
