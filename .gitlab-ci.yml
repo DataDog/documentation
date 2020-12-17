@@ -48,8 +48,6 @@ install_dependencies:
   cache:
     <<: *cache
   script:
-    # avoid conflicts in package.json by removing and always install pinned from lockfile
-    - rm package.json
     - yarn install --frozen-lockfile
   only:
     changes:
