@@ -86,7 +86,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 ### Generate Custom Metrics from all Spans
 
-[Generate Metrics][12] with 15 month retention from all ingested spans to create and monitor key business and performance indicators.
+[Generate metrics][12] with 15-month retention from all ingested spans to create and monitor key business and performance indicators.
 
 {{< img src="tracing/index/SpantoMetricsPreview.png" alt="Generate Custom Metrics from ingested spans"  style="width:100%;">}}
 
@@ -104,7 +104,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 ### Connect Real User Monitoring and Traces
 
-[Link between real user sessions][15] and traces to see the exact traces corresponding to user experiences and reported issues.
+[Link between real user sessions][15] and traces to see the exact traces that correspond to user experiences and reported issues.
 
 {{< img src="tracing/index/RumTraces.gif" alt="Connect RUM sessions and traces"  style="width:100%;">}}
 

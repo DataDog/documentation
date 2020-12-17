@@ -13,14 +13,14 @@ further_reading:
       text: 'Use Analytics queries and monitors based on retained traces.'
 ---
 <div class="alert alert-warning">
-This feature is currently in private beta. <a href="https://docs.google.com/forms/d/1RlT0FNdFjiEzkQgxiCf77ugpW0w5a17X7JQ7E286jM4">Fill out this form</a> to request this feature for your account or be notified when it becomes Generally Available.
+This feature is currently in private beta. <a href="https://docs.google.com/forms/d/1RlT0FNdFjiEzkQgxiCf77ugpW0w5a17X7JQ7E286jM4">Fill out this form</a> to request this feature for your account or to be notified when it becomes generally available.
 </div>
 
-## Generate Span-based Metrics
+## Generate span-based metrics
 
-Tracing without Limits™ allows you to generate metrics from 100% of ingested spans, regardless of if they are indexed by a [retention filter][1].
+With Tracing without Limits™, you can generate metrics from 100% of ingested spans, regardless of whether they are indexed by a [retention filter][1].
 
-These metrics can be paired with retention filters and Analytics monitors, or used on their own.
+You can pair these metrics with retention filters and Analytics monitors, or use them on their own.
 
 Use custom metrics for specific fixed queries and comparisons, while creating retention filters to allow arbitrary querying and investigation of the retained trace and its flamegraph.
 
@@ -34,30 +34,30 @@ For example, you may want to use custom metrics to visualize anomalies, create d
 | Granularity of behavior                           | Create custom metrics for important endpoints or other low-cardinality groups.                        | Use [Search and Analytics][4] for specific endpoints, or use the 'Group By' option in [Analytics][5].                    |
 | Forecasting or complex mathematics                          | Create a [Forecast monitor][6] based on generated metrics.                          |   N/A                            |
 
-To generate metrics from span, navigate from the [APM Setup and Configuration][7] page to [Generate Metrics][8] on the top of the page, and click the “+ New Metric” button.
+To generate metrics from spans, on the [APM Setup and Configuration][7] page select the [Generate Metrics][8] tab, and click the **New Metric** button.
 
 <br>
 
 {{< img src="tracing/span_to_metrics/GenerateMetrics.png" style="width:100%;" alt="Generate metrics from ingested spans" >}}
 
 
-### Creating a New Span-based Metric
+### Creating a span-based metric
 
 {{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="How to create a metric" >}}
 
-1. Define the metric query: Start by adding a query for filtering to your required dataset. The [query syntax][9] is the same as APM Search and Analytics.
+1. **Define the metric query:** Start by adding a query for filtering to your required dataset. The [query syntax][9] is the same as APM Search and Analytics.
 
-1. Define the field you want to track: Select * to generate a count of all spans matching your query or enter an attribute (e.g., `@cassandra_row_count`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics. If the attribute type is a measure, the value of the metric is the value of the span attribute.
+1. **Define the field you want to track:** Select `*` to generate a count of all spans matching your query or enter an attribute (for example, `@cassandra_row_count`) to aggregate a numeric value and create its corresponding count, minimum, maximum, sum, and average aggregated metrics. If the attribute type is a measure, the value of the metric is the value of the span attribute.
 
-1. Specify the group-by dimension: By default, metrics generated from spans will not have any tags unless explicitly added. Any attribute or tag that exists in your spans can be used to create metric Tags.
+1. **Specify the group-by dimension:** By default, metrics generated from spans will not have any tags unless explicitly added. Any attribute or tag that exists in your spans can be used to create metric tags.
 
-1. Check the Live Analytics and Search Query preview: You can view the impact of your query in real-time on the data visualization, and the matching spans considered for your query in a live preview.
+1. **Check the Live Analytics and Search Query preview:** You can view the impact of your query in real-time on the data visualization, and the matching spans considered for your query in a live preview.
 
-1. Name your metric: Metric names must follow the [metric naming convention][10]. Metric names beginning with `trace.*` are not permitted and will not be saved.
+1. **Name your metric:** Metric names must follow the [metric naming convention][10]. Metric names that start with `trace.*` are not permitted and will not be saved.
 
 **Important Note**: Span-based metrics are considered custom metrics and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.
 
-### Updating Existing Span-based Metrics
+### Updating existing span-based metrics
 
 {{< img src="tracing/span_to_metrics/editspantometrics.png" style="width:100%;" alt="Edit an existing metrics" >}}
 
@@ -66,9 +66,9 @@ After a metric is created, only two fields can be updated:
 | Field                                 | Reason                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | Stream filter query                  | Change the set of matching spans to be aggregated into metrics.            |
-| Aggregation groups             | Update the tags of manage the cardinality of generated metrics.                                                     |
+| Aggregation groups             | Update the tags to manage the cardinality of generated metrics.                                                     |
 
-**Note**: To change the metric type or name, a new metric must be created
+**Note**: To change the metric type or name, create a new metric and delete the old one.
 
 ## Further Reading
 
