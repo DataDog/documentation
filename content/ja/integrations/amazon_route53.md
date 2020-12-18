@@ -60,13 +60,20 @@ Route 53 が受信する以下のようなクエリに関する情報をログ�
 - DNS レコードタイプ (A、AAAA など)
 - DNS クエリに応答した Route 53 エッジの場所
 - DNS 応答コード (NoError、ServFail など)
+- VPC 用リゾルバークエリのログ
 
-#### Route53 ログの有効化
+#### Route53 DNS クエリのログの有効化
 
 Route 53 AWS コンソールに移動し、ログを構成するホストゾーンを選択します。ラジオボタンをクリックし、「Configure query logging」を選択します。
 {{< img src="integrations/amazon_route53/amazon_route_53_log_enable.png" alt="Route 53 ログの有効化" popup="true" style="width:70%;">}}
 
 次に、Cloudwatch ロググループを選択するか、ログの送信先になる新しいロググループを作成します。ロググループ名には「route53」を入れてください。
+
+#### Route53 Resolver クエリのログの有効化
+
+Route 53 の設定ペインの *Resolver* で *Query Logging* を選択します。
+
+*Configure Query Logging* をクリックして、リゾルバークエリのログを作成する VPC を定義する手順に従い、送信先の CloudWatch ロググループを選択します（オプションでタグを定義します）。ロググループ名に “route53” が含まれていることを確認してください。
 
 #### ログを Datadog に送信する方法
 
