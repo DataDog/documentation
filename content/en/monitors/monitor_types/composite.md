@@ -27,7 +27,7 @@ For configuration purposes, a composite monitor is independent of its constituen
 **Notes**
 
 - The terms `individual monitors`, `constituent monitors`, and `non-composite monitors` all refer to monitors used by a composite monitor to calculate its status.
-- Composite results require common groupings. If you choose monitors that do not have common groupings, note that selected monitors in the expression may not lead to a composite result.
+- Composite results require common groupings. If you choose monitors that do not have common groupings, the selected monitors in the expression may not lead to a composite result.
 - Composite monitors cannot be based on other composite monitors.
 
 ## Monitor creation
