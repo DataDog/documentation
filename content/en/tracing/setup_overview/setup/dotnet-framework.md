@@ -245,7 +245,6 @@ Check out the [Unified Service Tagging][7] documentation for recommendations on 
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 | `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
 | `DD_TRACE_HEADER_TAGS`                              | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Available for version 1.18.3+      |
-| `DD_TRACE_QUEUE_SIZE`                               | Sets the maximum number of traces that can be queued between flushes to the Datadog Agent. Once the size limit of the queue is reached, traces are discarded. Default is `1000` |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
 
