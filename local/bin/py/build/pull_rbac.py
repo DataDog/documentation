@@ -14,14 +14,14 @@ def pull_rbac():
 
   if r.status_code == requests.codes.ok:
     json_result = r.json()
-    data = json_result['data']
+    data = json_result.get('data', []);
 
     for permission in data:
       group_name = permission['attributes']['group_name']
       permission_name = permission['attributes']['name']
 
       # Remove legacy logs permissions from dictionary before converting to JSON.  These legacy permissions are hard-coded in rbac-permissions-table partial until they can be deprecated.
-      if permission_name == 'logs_live_tail' or permission_name == 'logs_read_index_data':
+      if permission_name in ('logs_live_tail', 'logs_read_index_data'):
         del permission
       else:
         if group_name not in formatted_permissions_dict.keys():
