@@ -101,7 +101,7 @@ Datadog offers two types of dashboards: [screenboards][4] and [timeboards][3]. T
 | Time scope                 | All graphs share the same time scope. | Graphs can have individual time scopes.   |
 | Layout                     | Graphs are displayed in a fixed grid. | Graphs are placed anywhere on the canvas. |
 | Share graphs individually  | Yes                                   | No                                        |
-| Share the entire dashboard | No                                    | Yes                                       |
+| Share the entire dashboard | Yes                                   | Yes                                       |
 | Sharing can be read-only   | Yes                                   | Yes                                       |
 
 ### Copy / import / export

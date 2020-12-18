@@ -37,7 +37,7 @@ To send logs manually, use the `telnet` command with your [Datadog API key][5] w
 
 Logs can be a full-text message:
 
-The secure TCP endpoint is {{< region-param key="tcp_endpoint" code="true" >}} (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
+The secure TCP endpoint is {{< region-param key="tcp_endpoint" >}} with port `{{< region-param key="tcp_endpoint_port_ssl" >}}` (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
 
 ```
 telnet {{< region-param key="tcp_endpoint" >}} {{< region-param key="tcp_endpoint_port_ssl" >}}

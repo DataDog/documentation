@@ -5,7 +5,6 @@ code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 70
 description: '.NET のオープン標準'
-further_reading:
 ---
 
 ## OpenTracing
@@ -58,11 +57,6 @@ using (var scope =
      });
 
 ```
-
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://github.com/opentracing/opentracing-csharp

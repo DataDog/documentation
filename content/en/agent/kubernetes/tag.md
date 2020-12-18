@@ -64,6 +64,15 @@ For example, you could set up:
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
+For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
+
+```shell
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+```
+
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][1] for more information.
+
+[1]: /account_management/billing/custom_metrics
 {{% /tab %}}
 {{% tab "Agent" %}}
 
@@ -110,9 +119,9 @@ For Agent v6.8.0+, use the following environment variable configuration to add a
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
 
-**Note**: Using this method may increase the number of [custom metrics][1] for your organization and impact your billing.
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][1] for more information.
 
-[1]: /developers/metrics/
+[1]: /account_management/billing/custom_metrics
 {{% /tab %}}
 {{% tab "Agent" %}}
 
@@ -137,10 +146,10 @@ kubernetes_pod_labels_as_tags:
   *: <PREFIX>_%%label%%
 ```
 
-**Note**: Using this method may [increase the number of metrics][2] for your organization and impact your billing.
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][2] for more information.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /developers/metrics/
+[2]: /account_management/billing/custom_metrics
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -163,6 +172,15 @@ For example, you could set up:
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 ```
 
+For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
+
+```shell
+DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
+```
+
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][1] for more information.
+
+[1]: /account_management/billing/custom_metrics
 {{% /tab %}}
 {{% tab "Agent" %}}
 

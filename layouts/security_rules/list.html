@@ -57,7 +57,7 @@
                             {{ if $this_img.image }}
                                 <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
-                                <img width="40" height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}" />
+                                <img width="40" height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}" alt="{{ $v.Key }}" />
                             {{ end }}
                             {{ .Title }}<br />
                         </a>

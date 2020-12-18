@@ -1273,7 +1273,8 @@ components:
           format: int64
           type: integer
         timezone:
-          description: The timezone for the downtime.
+          description: The timezone in which to display the downtime's start and end
+            times in Datadog applications.
           example: America/New_York
           type: string
         updater_id:
@@ -6788,7 +6789,9 @@ components:
       - is
       - isNot
       - lessThan
+      - lessThanOrEqual
       - moreThan
+      - moreThanOrEqual
       - matches
       - doesNotMatch
       - validates
@@ -6801,7 +6804,9 @@ components:
       - IS
       - IS_NOT
       - LESS_THAN
+      - LESS_THAN_OR_EQUAL
       - MORE_THAN
+      - MORE_THAN_OR_EQUAL
       - MATCHES
       - DOES_NOT_MATCH
       - VALIDATES
@@ -7035,12 +7040,14 @@ components:
       - element
       - email
       - global
+      - javascript
       - text
       type: string
       x-enum-varnames:
       - ELEMENT
       - EMAIL
       - GLOBAL
+      - JAVASCRIPT
       - TEXT
     SyntheticsCITest:
       description: Test configuration for Synthetics CI
@@ -11390,7 +11397,12 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Create a dashboard using the specified options.
+      description: 'Create a dashboard using the specified options. When defining
+        queries in your widgets, take note of which queries should have the `as_count()`
+        or `as_rate()` modifiers appended.
+
+        Refer to the following [documentation](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers)
+        for more information on these modifiers.'
       operationId: CreateDashboard
       requestBody:
         content:
@@ -18142,7 +18154,7 @@ paths:
         type: safe
   /api/v1/usage/billable-summary:
     get:
-      description: Get billable usage across your multi-org account.
+      description: Get billable usage across your account.
       operationId: GetUsageBillableSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -18172,7 +18184,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get billable usage across your multi-org account
+      summary: Get billable usage across your account
       tags:
       - Usage Metering
       x-undo:
@@ -18744,7 +18756,8 @@ paths:
         type: safe
   /api/v1/usage/summary:
     get:
-      description: Get usage across your multi-org account.
+      description: Get usage across your multi-org account. You must have the multi-org
+        feature enabled.
       operationId: GetUsageSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`

@@ -28,6 +28,19 @@ Changes made to a notebook appear automatically, without the need to refresh.
 
 Everyone on your team can open or edit any notebook, but a notebook can only be deleted by the creator or by an administrator.
 
+## Commenting
+
+To add a comment, select some text or hover over a graph. The **Add comment** button will appear to the right of the cell.
+
+{{< img src="notebooks/add_comment.png" alt="add a comment to text"  style="width:100%;">}}
+
+To edit or delete a comment you wrote, click the menu on the top-right of your comment.
+
+{{< img src="notebooks/edit_comment.png" alt="edit comment in notebook"  style="width:100%;">}}
+
+Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
+
+
 ## Notebook List
 
 The [Notebook List][1] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:

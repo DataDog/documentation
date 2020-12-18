@@ -25,7 +25,7 @@ further_reading:
     tag: Documentation
     text: Attribuer des tags à toutes les données émises par un conteneur
 ---
-Activez l'Agent de trace dans le conteneur `datadog/agent` en transmettant `DD_APM_ENABLED=true` en tant que variable d'environnement.
+Activez l'Agent de trace dans le conteneur  `gcr.io/datadoghq/agent` en transmettant `DD_APM_ENABLED=true` en tant que variable d'environnement.
 
 ## Tracing depuis le host
 
@@ -45,7 +45,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \
               -e DD_APM_ENABLED=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -55,7 +55,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \
               -e DD_APM_ENABLED=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -77,12 +77,12 @@ Voici la liste de l'ensemble des variables d'environnements pour le tracing au s
 | `DD_LOG_LEVEL`             | Définit le niveau de journalisation (`trace`, `debug`, `info`, `warn`, `error`, `critical` ou `off`).                                                                                                                                                                                                                                                                      |
 | `DD_APM_ENABLED`           | Lorsque ce paramètre est défini sur `true`, l'Agent Datadog accepte les métriques de trace.                                                                                                                                                                                                                                                                                         |
 | `DD_APM_CONNECTION_LIMIT`  | Définit la limite maximale de connexions sur un intervalle de 30 secondes. La limite par défaut est de 2 000 connexions.                                                                                                                                                                                                                                                    |
-| `DD_APM_DD_URL`            | Endpoint d'API Datadog vers lequel les traces sont envoyées. Pour le site européen de Datadog, définissez `DD_APM_DD_URL` sur `https://trace.agent.datadoghq.eu`.                                                                                                                                                                                                                            |
+| `DD_APM_DD_URL`            | Définissez le endpoint de l'API Datadog sur l'adresse vers laquelle vos traces sont envoyées : `https://trace.agent.{{< region-param key="dd_site" >}}`. Valeur par défaut : `https://trace.agent.datadoghq.com`.                                                                                                                                                                                                                            |
 | `DD_APM_RECEIVER_PORT`     | Port sur lequel le récepteur de traces de l'Agent Datadog effectue son écoute. Valeur par défaut : `8126`.                                                                                                                                                                                                                                                                    |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Autorise le trafic non local pour le [tracing depuis d'autres conteneurs](#tracing-depuis-d-autres-conteneurs).                                                                                                                                                                                                                                                        |
 | `DD_APM_IGNORE_RESOURCES`  | Configurer les ressources que l'Agent doit ignorer. Utilisez des expressions régulières séparées par des virgules, par exemple : <code>GET /ignore-me,(GET\|POST) /and-also-me</code>.                                                                                                                                                                                       |
 | `DD_APM_ANALYZED_SPANS`    | Configurez les spans à analyser pour les transactions. Utilisez des instances de <code>\<NOM_SERVICE>\|;\<NOM_OPÉRATION>=1</code> séparées par des virgules, par exemple : <code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code>. Vous pouvez également [l'activer automatiquement][3] à l'aide du paramètre de configuration dans le client de tracing. |
-| `DD_APM_MAX_EPS`           | Définit le nombre maximum de spans analysées par seconde. La valeur par défaut est de 200 événements par seconde.                                                                                                                                                                                                                                                                        |
+| `DD_APM_MAX_EPS`           | Définit le nombre maximum de spans indexées par seconde. La valeur par défaut est de 200 événements par seconde.                                                                                                                                                                                                                                                                        |
 | `DD_APM_MAX_TPS`           | Définit le nombre maximum de traces par seconde. La valeur par défaut est de 10 traces par seconde.                                                                                                                                                                                                                                                                                 |
 
 ## Tracing depuis d'autres conteneurs
@@ -112,7 +112,7 @@ docker run -d --name datadog-agent \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 
 # Application
 docker run -d --name app \
@@ -130,7 +130,7 @@ docker run -d --name datadog-agent \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 
 # Application
 docker run -d --name app \

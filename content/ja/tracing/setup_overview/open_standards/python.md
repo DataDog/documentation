@@ -5,7 +5,6 @@ description: 'Python のオープン標準'
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
-further_reading:
 ---
 
 ## OpenTracing
@@ -136,10 +135,6 @@ exporter = DatadogSpanExporter(
 ### OpenTelemetry リンク
 
 - OpenTelemetry Python Datadog Exporter の使用法については、[github][2]、[opentelemetry の例][3]、または [readthedocs][4] を参照してください。
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentracing.io/guides/python/
 [2]: https://github.com/open-telemetry/opentelemetry-python/tree/master/ext/opentelemetry-ext-datadog

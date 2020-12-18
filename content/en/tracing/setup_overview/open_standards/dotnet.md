@@ -5,7 +5,6 @@ code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 70
 description: 'Open Standards for .NET'
-further_reading:
 ---
 
 ## OpenTracing
@@ -58,11 +57,6 @@ To trace code running in an asynchronous task, create a new scope within the bac
      });
 
 ```
-
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://github.com/opentracing/opentracing-csharp

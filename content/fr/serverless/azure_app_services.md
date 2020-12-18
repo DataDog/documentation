@@ -28,14 +28,15 @@ L'extension Datadog pour Azure App Services fournit des capacités de surveillan
 - Tracing APM distribué complet via l'instrumentation automatique
 - Prise en charge de l'instrumentation APM manuelle pour personnaliser les spans
 - Injection des `Trace_ID` dans les logs d'application
+- Prise en charge de l'envoi de métriques custom à l'aide de [DogStatsD][6].
 
 ## Configuration
 
 ### Prérequis
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][6].
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][7].
 
-L'extension APM .NET Datadog prend en charge les runtimes .NET suivants (architectures x64 et x86) lorsqu'elle est exécutée dans des instances Windows (AAS ne prend pas encore en charge les extensions sous Linux). Pour en savoir plus sur les bibliothèques à instrumentation automatique, consultez la [documentation relative au traceur][7].
+L'extension APM .NET Datadog prend en charge les runtimes .NET suivants (architectures x64 et x86) lorsqu'elle est exécutée dans des instances Windows (AAS ne prend pas encore en charge les extensions sous Linux). Pour en savoir plus sur les bibliothèques à instrumentation automatique, consultez la [documentation relative au traceur][8].
 
 - .NET Framework 4.7 et versions ultérieures
 - .NET Core 2.1
@@ -45,13 +46,12 @@ L'extension APM .NET Datadog prend en charge les runtimes .NET suivants (archite
 
 ### Installation
 
-1. Ouvrez le [portail Azure][8] et accédez au dashboard de l'instance Azure App Services que vous souhaitez instrumenter avec Datadog.
+1. Ouvrez le [portail Azure][9] et accédez au dashboard de l'instance Azure App Services que vous souhaitez instrumenter avec Datadog.
 2. Accédez à l'onglet Paramètres d'application de la page Configuration.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="Page Configuration" >}}
-3. Ajoutez votre clé d'API Datadog en tant que paramètre d'application `DD_API_KEY`, avec pour valeur votre [clé d'API Datadog][9].
+3. Ajoutez votre clé d'API Datadog en tant que paramètre d'application `DD_API_KEY`, avec pour valeur votre [clé d'API Datadog][10].
     {{< img src="infrastructure/serverless/azure_app_services/api_key.png" alt="Page de la clé d'API" >}}
-4. Si vous utilisez le site européen de Datadog (domaine datadoghq.eu), ajoutez un paramètre d'application `DD_SITE` avec pour valeur datadoghq.eu.
-    Par défaut, l'extension envoie les données au site américain de Datadog (domaine datadoghq.com). Si vous utilisez le site américain, il n'y a donc aucun autre paramètre d'application requis.
+4. Définissez `DD_SITE` sur `{{< region-param key="dd_site" code="true" >}}`. Valeur par défaut : `datadoghq.com`.
 5. Accédez à la page des extensions et cliquez sur **Ajouter**.
 6. Sélectionnez l'extension APM Datadog.
     {{< img src="infrastructure/serverless/azure_app_services/extension.png" alt="Extension Datadog" >}}
@@ -65,13 +65,13 @@ Pour envoyer des logs depuis votre application dans Azure App Services vers Da
 
 **Remarque** : puisque cette opération s'effectue dans votre application, les logs de la plateforme Azure que vous pouvez envoyer avec des paramètres de diagnostic ne contiennent pas l'ID des traces.
 
-Installez le package NuGet du [récepteur Serilog de Datadog][10], afin d'envoyer des événements et des logs à Datadog. Par défaut, le récepteur transfère les logs via HTTPS sur le port 443. Exécutez la commande suivante dans la console de gestion de package de l'application :
+Installez le package NuGet du [récepteur Serilog de Datadog][11], afin d'envoyer des événements et des logs à Datadog. Par défaut, le récepteur transfère les logs via HTTPS sur le port 443. Exécutez la commande suivante dans la console de gestion de package de l'application :
 
 ```
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-Initialisez ensuite le logger directement dans votre application. Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][9].
+Initialisez ensuite le logger directement dans votre application. Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][10].
 
 ```
 using Serilog;
@@ -83,7 +83,7 @@ using Serilog.Sinks.Datadog.Logs;
               .CreateLogger();
 ```
 
-Vous pouvez également remplacer le comportement par défaut et transférer des logs via TCP en précisant manuellement les propriétés requises suivantes : url, port, useSSL et useTCP. Si vous le souhaitez, vous pouvez préciser les [tags source et service ainsi que des tags personnalisés][11].
+Vous pouvez également remplacer le comportement par défaut et transférer des logs via TCP en précisant manuellement les propriétés requises suivantes : url, port, useSSL et useTCP. Si vous le souhaitez, vous pouvez préciser les [tags source et service ainsi que des tags personnalisés][12].
 
 Par exemple, pour transférer des logs vers le site américain de Datadog via TCP, utilisez la configuration de récepteur suivante :
 
@@ -138,6 +138,19 @@ Dans la matrice `Serilog.WriteTo()`, ajoutez une entrée pour DatadogLogs. Exemp
 }
 ```
 
+## Métriques custom avec DogStatsD
+
+Depuis la version `0.3.14-prerelease`, l'extension App Services comprend une instance de [DogStatsD][6] (le service d'agrégation de métriques de Datadog). Grâce à l'extension, vous pouvez ainsi envoyer des métriques custom, des checks de service et des événements directement à Datadog depuis des apps Web Azure.
+
+L'écriture de métriques custom et de checks dans une app Web suit les mêmes lignes que pour une application sur un host exécutant l'Agent Datadog. Toutefois, il n'est pas nécessaire de configurer des ports. Cette étape est effectuée automatiquement par l'extension. Pour envoyer des métriques custom à Datadog depuis Azure App Services à l'aide de l'extension :
+
+1. Ajoutez le [package NuGet DogStatsD][13] à votre projet Visual Studio.
+2. [Initialisez DogStatsD et rédigez des métriques custom][14] dans votre application.
+3. Déployez votre code dans une app Web .NET Azure prise en charge.
+4. Installez l'extension App Service Datadog.
+
+En savoir plus sur les [métriques custom][15].
+
 ## Dépannage
 
 ### Erreurs 5XX
@@ -158,7 +171,7 @@ Le fait de réinstaller l'extension après l'arrêt complet de l'application ré
 
 Si vous ne recevez aucune trace ou seulement une partie d'entre elles, vérifiez que vous n'avez pas modifié les paramètres de port manuellement. Dans l'extension, l'Agent du traceur communique avec votre application pour identifier le bon port à utiliser pour le trafic externe. La modification des paramètres de port peut interférer avec ce processus, empêchant alors les traces d'être envoyées.
 
-Besoin d'aide supplémentaire ? Contactez [l'assistance Datadog][12].
+Besoin d'aide supplémentaire ? Contactez [l'assistance Datadog][16].
 
 ### Pour aller plus loin
 
@@ -170,10 +183,14 @@ Besoin d'aide supplémentaire ? Contactez [l'assistance Datadog][12].
 [3]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/resource-logs
 [4]: /fr/integrations/azure/?tab=eventhub#log-collection
 [5]: https://azure.microsoft.com/en-us/services/app-service/web/
-[6]: /fr/integrations/azure
-[7]: /fr/tracing/setup/dotnet/
-[8]: https://portal.azure.com
-[9]: https://app.datadoghq.com/account/settings#api
-[10]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[11]: /fr/logs/log_collection/#reserved-attributes
-[12]: /fr/help
+[6]: /fr/developers/dogstatsd
+[7]: /fr/integrations/azure
+[8]: /fr/tracing/setup/dotnet/
+[9]: https://portal.azure.com
+[10]: https://app.datadoghq.com/account/settings#api
+[11]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[12]: /fr/logs/log_collection/#reserved-attributes
+[13]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
+[14]: /fr/developers/dogstatsd/?tab=net#code
+[15]: developers/metrics/
+[16]: /fr/help

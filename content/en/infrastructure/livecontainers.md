@@ -57,8 +57,12 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
             value: "true"
         ```
 
-    - Set the Cluster Agent ClusterRole with the following RBAC permissions:
-
+    - Set the Cluster Agent ClusterRole with the following RBAC permissions. 
+Note particularly that for the `apps` apiGroups, Live Containers need permissions 
+to collect common kubernetes resources (`pods`, `services`, `nodes`, etc.), 
+which should be already in the RBAC if you followed [Cluster Agent Setup 
+documentation][2]. But if they are missing, ensure they are added (after 
+`deployments`, `replicasets`):
         ```yaml
           ClusterRole:
           - apiGroups:  # To create the datadog-cluster-id CM
@@ -77,17 +81,20 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
             verbs:
             - get
           ...
-          - apiGroups:  # to collect new resource types
+          - apiGroups:  # To collect new resource types
             - "apps"
             resources:
             - deployments
             - replicasets
+            # Below are in case RBAC was not setup from the above linked "Cluster Agent Setup documentation"
+            - pods 
+            - nodes
+            - services
             verbs:
             - list
             - get
             - watch
         ```
-
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
 
     If the `cluster-id` ConfigMap doesn't get created by the Cluster Agent, the Agent pod will not start, and fall in `CreateContainerConfigError` status. If the Agent pod is stuck because this ConfigMap doesn't exist, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap and the Agent pod will recover automatically.

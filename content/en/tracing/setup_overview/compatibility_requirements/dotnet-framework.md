@@ -11,9 +11,12 @@ further_reading:
     - link: 'tracing/setup/dotnet-framework'
       tag: 'Documentation'
       text: 'Instrument Your Application'
+    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+      tag: 'GitHub'
+      text: 'Examples of Custom Instrumentation'
 ---
 
-## Compatiblity
+## Compatibility
 
 The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.
 

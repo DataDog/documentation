@@ -25,12 +25,7 @@ The *account settings* page also lists all of the organizations you are associat
 
 **Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
-To join an existing organization, you must be invited by an administrator. To request an invite:
-
-1. Log out of Datadog by clicking the button on the [*account settings* page][1].
-2. Visit the [*new user sign up* page][4] and click the *Join an existing team* link.
-3. Enter the email address associated with your Datadog account, your name, and the email address of an administrator in the organization you wish to join.
-4. Click the "Request Invite" to submit the request. The organization administrator receives a notification with instruction on how to add you.
+To join an existing organization, you must be invited by an administrator. Once invited, you'll receive an email with the subject `You've been invited to join <Organization Name>`. Click the **Join Account** button in the email.
 
 If you are an organization administrator, reference the additional documentation to:
 
