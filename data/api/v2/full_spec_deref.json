@@ -5,6 +5,94 @@
     "headers": {},
     "links": {},
     "parameters": {
+      "APIKeyFilterCreatedAtEndParameter": {
+        "description": "Only include API keys created on or before the specified date.",
+        "in": "query",
+        "name": "filter[created_at][end]",
+        "required": false,
+        "schema": {
+          "example": "2020-11-24T18:46:21+00:00",
+          "type": "string"
+        }
+      },
+      "APIKeyFilterCreatedAtStartParameter": {
+        "description": "Only include API keys created on or after the specified date.",
+        "in": "query",
+        "name": "filter[created_at][start]",
+        "required": false,
+        "schema": {
+          "example": "2020-11-24T18:46:21+00:00",
+          "type": "string"
+        }
+      },
+      "APIKeyFilterModifiedAtEndParameter": {
+        "description": "Only include API keys modified on or before the specified date.",
+        "in": "query",
+        "name": "filter[modified_at][end]",
+        "required": false,
+        "schema": {
+          "example": "2020-11-24T18:46:21+00:00",
+          "type": "string"
+        }
+      },
+      "APIKeyFilterModifiedAtStartParameter": {
+        "description": "Only include API keys modified on or after the specified date.",
+        "in": "query",
+        "name": "filter[modified_at][start]",
+        "required": false,
+        "schema": {
+          "example": "2020-11-24T18:46:21+00:00",
+          "type": "string"
+        }
+      },
+      "APIKeyFilterParameter": {
+        "description": "Filter API keys by the specified string.",
+        "in": "query",
+        "name": "filter",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "APIKeyId": {
+        "description": "The ID of the API key.",
+        "in": "path",
+        "name": "api_key_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "APIKeyIncludeParameter": {
+        "description": "Comma separated list of resource paths for related resources to include in the response. Supported resource paths are `created_by` and `modified_by`.",
+        "in": "query",
+        "name": "include",
+        "required": false,
+        "schema": {
+          "example": "created_by,modified_by",
+          "type": "string"
+        }
+      },
+      "APIKeysSortParameter": {
+        "description": "API key attribute used to sort results. Sort order is ascending\nby default. In order to specify a descending sort, prefix the\nattribute with a minus sign.",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "schema": {
+          "default": "name",
+          "enum": [
+            "created_at",
+            "-created_at",
+            "last4",
+            "-last4",
+            "modified_at",
+            "-modified_at",
+            "name",
+            "-name"
+          ],
+          "type": "string"
+        }
+      },
       "ApplicationKeyFilterCreatedAtEndParameter": {
         "description": "Only include application keys created on or before the specified date.",
         "in": "query",
@@ -416,6 +504,1273 @@
           "errors"
         ],
         "type": "object"
+      },
+      "APIKeyCreateAttributes": {
+        "description": "Attributes used to create an API Key.",
+        "properties": {
+          "name": {
+            "description": "Name of the API key.",
+            "example": "API Key for submitting metrics",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "APIKeyCreateData": {
+        "description": "Object used to create an API key.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes used to create an API Key.",
+            "properties": {
+              "name": {
+                "description": "Name of the API key.",
+                "example": "API Key for submitting metrics",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "api_keys",
+            "description": "API Keys resource type.",
+            "enum": [
+              "api_keys"
+            ],
+            "example": "api_keys",
+            "type": "string",
+            "x-enum-varnames": [
+              "API_KEYS"
+            ]
+          }
+        },
+        "required": [
+          "attributes",
+          "type"
+        ],
+        "type": "object"
+      },
+      "APIKeyCreateRequest": {
+        "description": "Request used to create an API key.",
+        "properties": {
+          "data": {
+            "description": "Object used to create an API key.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes used to create an API Key.",
+                "properties": {
+                  "name": {
+                    "description": "Name of the API key.",
+                    "example": "API Key for submitting metrics",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "api_keys",
+                "description": "API Keys resource type.",
+                "enum": [
+                  "api_keys"
+                ],
+                "example": "api_keys",
+                "type": "string",
+                "x-enum-varnames": [
+                  "API_KEYS"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "APIKeyRelationships": {
+        "description": "Resources related to the API key.",
+        "properties": {
+          "created_by": {
+            "description": "Relationship to user.",
+            "properties": {
+              "data": {
+                "description": "Relationship to user object.",
+                "properties": {
+                  "id": {
+                    "description": "A unique identifier that represents the user.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "users",
+                    "description": "Users resource type.",
+                    "enum": [
+                      "users"
+                    ],
+                    "example": "users",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "USERS"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "data"
+            ],
+            "type": "object"
+          },
+          "modified_by": {
+            "description": "Relationship to user.",
+            "properties": {
+              "data": {
+                "description": "Relationship to user object.",
+                "properties": {
+                  "id": {
+                    "description": "A unique identifier that represents the user.",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "users",
+                    "description": "Users resource type.",
+                    "enum": [
+                      "users"
+                    ],
+                    "example": "users",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "USERS"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "data"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "APIKeyResponse": {
+        "description": "Response for retrieving an API key.",
+        "properties": {
+          "data": {
+            "description": "Datadog API key.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes of a full API key.",
+                "properties": {
+                  "created_at": {
+                    "description": "Creation date of the API key.",
+                    "example": "2020-11-23T10:00:00.000Z",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "key": {
+                    "description": "The API key.",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "last4": {
+                    "description": "The last four characters of the API key.",
+                    "example": "abcd",
+                    "maxLength": 4,
+                    "minLength": 4,
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Date the API key was last modified.",
+                    "example": "2020-11-23T10:00:00.000Z",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the API key.",
+                    "example": "API Key for submitting metrics",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the API key.",
+                "type": "string"
+              },
+              "relationships": {
+                "description": "Resources related to the API key.",
+                "properties": {
+                  "created_by": {
+                    "description": "Relationship to user.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationship to user object.",
+                        "properties": {
+                          "id": {
+                            "description": "A unique identifier that represents the user.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "users",
+                            "description": "Users resource type.",
+                            "enum": [
+                              "users"
+                            ],
+                            "example": "users",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "USERS"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  },
+                  "modified_by": {
+                    "description": "Relationship to user.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationship to user object.",
+                        "properties": {
+                          "id": {
+                            "description": "A unique identifier that represents the user.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "users",
+                            "description": "Users resource type.",
+                            "enum": [
+                              "users"
+                            ],
+                            "example": "users",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "USERS"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "api_keys",
+                "description": "API Keys resource type.",
+                "enum": [
+                  "api_keys"
+                ],
+                "example": "api_keys",
+                "type": "string",
+                "x-enum-varnames": [
+                  "API_KEYS"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "included": {
+            "description": "Array of objects related to the API key.",
+            "items": {
+              "description": "An object related to an API key.",
+              "oneOf": [
+                {
+                  "description": "User object returned by the API.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Attributes of user object returned by the API.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Creation time of the user.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "disabled": {
+                          "description": "Whether the user is disabled.",
+                          "type": "boolean"
+                        },
+                        "email": {
+                          "description": "Email of the user.",
+                          "type": "string"
+                        },
+                        "handle": {
+                          "description": "Handle of the user.",
+                          "type": "string"
+                        },
+                        "icon": {
+                          "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the user.",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "Status of the user.",
+                          "type": "string"
+                        },
+                        "title": {
+                          "description": "Title of the user.",
+                          "type": "string"
+                        },
+                        "verified": {
+                          "description": "Whether the user is verified.",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "ID of the user.",
+                      "type": "string"
+                    },
+                    "relationships": {
+                      "description": "Relationships of the user object returned by the API.",
+                      "properties": {
+                        "org": {
+                          "description": "Relationship to an organization.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationship to organization object.",
+                              "properties": {
+                                "id": {
+                                  "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "default": "orgs",
+                                  "description": "Organizations resource type.",
+                                  "enum": [
+                                    "orgs"
+                                  ],
+                                  "example": "orgs",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "ORGS"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "type"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "data"
+                          ],
+                          "type": "object"
+                        },
+                        "other_orgs": {
+                          "description": "Relationship to organizations.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to organization objects.",
+                              "example": [],
+                              "items": {
+                                "description": "Relationship to organization object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "orgs",
+                                    "description": "Organizations resource type.",
+                                    "enum": [
+                                      "orgs"
+                                    ],
+                                    "example": "orgs",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "ORGS"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "data"
+                          ],
+                          "type": "object"
+                        },
+                        "other_users": {
+                          "description": "Relationship to users.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to user objects.",
+                              "example": [],
+                              "items": {
+                                "description": "Relationship to user object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "A unique identifier that represents the user.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "users",
+                                    "description": "Users resource type.",
+                                    "enum": [
+                                      "users"
+                                    ],
+                                    "example": "users",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "USERS"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "data"
+                          ],
+                          "type": "object"
+                        },
+                        "roles": {
+                          "description": "Relationship to roles.",
+                          "properties": {
+                            "data": {
+                              "description": "An array containing type and ID of a role.",
+                              "items": {
+                                "description": "Relationship to role object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the role.",
+                                    "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "roles",
+                                    "description": "Roles type.",
+                                    "enum": [
+                                      "roles"
+                                    ],
+                                    "example": "roles",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "ROLES"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "default": "users",
+                      "description": "Users resource type.",
+                      "enum": [
+                        "users"
+                      ],
+                      "example": "users",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "USERS"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "APIKeyResponseIncludedItem": {
+        "description": "An object related to an API key.",
+        "oneOf": [
+          {
+            "description": "User object returned by the API.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes of user object returned by the API.",
+                "properties": {
+                  "created_at": {
+                    "description": "Creation time of the user.",
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "disabled": {
+                    "description": "Whether the user is disabled.",
+                    "type": "boolean"
+                  },
+                  "email": {
+                    "description": "Email of the user.",
+                    "type": "string"
+                  },
+                  "handle": {
+                    "description": "Handle of the user.",
+                    "type": "string"
+                  },
+                  "icon": {
+                    "description": "URL of the user's icon.",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the user.",
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "Status of the user.",
+                    "type": "string"
+                  },
+                  "title": {
+                    "description": "Title of the user.",
+                    "type": "string"
+                  },
+                  "verified": {
+                    "description": "Whether the user is verified.",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the user.",
+                "type": "string"
+              },
+              "relationships": {
+                "description": "Relationships of the user object returned by the API.",
+                "properties": {
+                  "org": {
+                    "description": "Relationship to an organization.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationship to organization object.",
+                        "properties": {
+                          "id": {
+                            "description": "ID of the organization.",
+                            "example": "00000000-0000-0000-0000-000000000000",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "orgs",
+                            "description": "Organizations resource type.",
+                            "enum": [
+                              "orgs"
+                            ],
+                            "example": "orgs",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "ORGS"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  },
+                  "other_orgs": {
+                    "description": "Relationship to organizations.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationships to organization objects.",
+                        "example": [],
+                        "items": {
+                          "description": "Relationship to organization object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "orgs",
+                              "description": "Organizations resource type.",
+                              "enum": [
+                                "orgs"
+                              ],
+                              "example": "orgs",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "ORGS"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  },
+                  "other_users": {
+                    "description": "Relationship to users.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationships to user objects.",
+                        "example": [],
+                        "items": {
+                          "description": "Relationship to user object.",
+                          "properties": {
+                            "id": {
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-0000-000000000000",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "users",
+                              "description": "Users resource type.",
+                              "enum": [
+                                "users"
+                              ],
+                              "example": "users",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "USERS"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  },
+                  "roles": {
+                    "description": "Relationship to roles.",
+                    "properties": {
+                      "data": {
+                        "description": "An array containing type and ID of a role.",
+                        "items": {
+                          "description": "Relationship to role object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the role.",
+                              "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "roles",
+                              "description": "Roles type.",
+                              "enum": [
+                                "roles"
+                              ],
+                              "example": "roles",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "ROLES"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "users",
+                "description": "Users resource type.",
+                "enum": [
+                  "users"
+                ],
+                "example": "users",
+                "type": "string",
+                "x-enum-varnames": [
+                  "USERS"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "type": "object"
+      },
+      "APIKeyUpdateAttributes": {
+        "description": "Attributes used to update an API Key.",
+        "properties": {
+          "name": {
+            "description": "Name of the API key.",
+            "example": "API Key for submitting metrics",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "APIKeyUpdateData": {
+        "description": "Object used to update an API key.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes used to update an API Key.",
+            "properties": {
+              "name": {
+                "description": "Name of the API key.",
+                "example": "API Key for submitting metrics",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "id": {
+            "description": "ID of the API key.",
+            "example": "00112233-4455-6677-8899-aabbccddeeff",
+            "type": "string"
+          },
+          "type": {
+            "default": "api_keys",
+            "description": "API Keys resource type.",
+            "enum": [
+              "api_keys"
+            ],
+            "example": "api_keys",
+            "type": "string",
+            "x-enum-varnames": [
+              "API_KEYS"
+            ]
+          }
+        },
+        "required": [
+          "attributes",
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
+      "APIKeyUpdateRequest": {
+        "description": "Request used to update an API key.",
+        "properties": {
+          "data": {
+            "description": "Object used to update an API key.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes used to update an API Key.",
+                "properties": {
+                  "name": {
+                    "description": "Name of the API key.",
+                    "example": "API Key for submitting metrics",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the API key.",
+                "example": "00112233-4455-6677-8899-aabbccddeeff",
+                "type": "string"
+              },
+              "type": {
+                "default": "api_keys",
+                "description": "API Keys resource type.",
+                "enum": [
+                  "api_keys"
+                ],
+                "example": "api_keys",
+                "type": "string",
+                "x-enum-varnames": [
+                  "API_KEYS"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "id",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "APIKeysResponse": {
+        "description": "Response for a list of API keys.",
+        "properties": {
+          "data": {
+            "description": "Array of API keys.",
+            "items": {
+              "description": "Partial Datadog API key.",
+              "properties": {
+                "attributes": {
+                  "description": "Attributes of a partial API key.",
+                  "properties": {
+                    "created_at": {
+                      "description": "Creation date of the API key.",
+                      "example": "2020-11-23T10:00:00.000Z",
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "last4": {
+                      "description": "The last four characters of the API key.",
+                      "example": "abcd",
+                      "maxLength": 4,
+                      "minLength": 4,
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "modified_at": {
+                      "description": "Date the API key was last modified.",
+                      "example": "2020-11-23T10:00:00.000Z",
+                      "readOnly": true,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Name of the API key.",
+                      "example": "API Key for submitting metrics",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "ID of the API key.",
+                  "type": "string"
+                },
+                "relationships": {
+                  "description": "Resources related to the API key.",
+                  "properties": {
+                    "created_by": {
+                      "description": "Relationship to user.",
+                      "properties": {
+                        "data": {
+                          "description": "Relationship to user object.",
+                          "properties": {
+                            "id": {
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-0000-000000000000",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "users",
+                              "description": "Users resource type.",
+                              "enum": [
+                                "users"
+                              ],
+                              "example": "users",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "USERS"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "data"
+                      ],
+                      "type": "object"
+                    },
+                    "modified_by": {
+                      "description": "Relationship to user.",
+                      "properties": {
+                        "data": {
+                          "description": "Relationship to user object.",
+                          "properties": {
+                            "id": {
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-0000-000000000000",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "users",
+                              "description": "Users resource type.",
+                              "enum": [
+                                "users"
+                              ],
+                              "example": "users",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "USERS"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "data"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "default": "api_keys",
+                  "description": "API Keys resource type.",
+                  "enum": [
+                    "api_keys"
+                  ],
+                  "example": "api_keys",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "API_KEYS"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "included": {
+            "description": "Array of objects related to the API key.",
+            "items": {
+              "description": "An object related to an API key.",
+              "oneOf": [
+                {
+                  "description": "User object returned by the API.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Attributes of user object returned by the API.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Creation time of the user.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "disabled": {
+                          "description": "Whether the user is disabled.",
+                          "type": "boolean"
+                        },
+                        "email": {
+                          "description": "Email of the user.",
+                          "type": "string"
+                        },
+                        "handle": {
+                          "description": "Handle of the user.",
+                          "type": "string"
+                        },
+                        "icon": {
+                          "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the user.",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "Status of the user.",
+                          "type": "string"
+                        },
+                        "title": {
+                          "description": "Title of the user.",
+                          "type": "string"
+                        },
+                        "verified": {
+                          "description": "Whether the user is verified.",
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "ID of the user.",
+                      "type": "string"
+                    },
+                    "relationships": {
+                      "description": "Relationships of the user object returned by the API.",
+                      "properties": {
+                        "org": {
+                          "description": "Relationship to an organization.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationship to organization object.",
+                              "properties": {
+                                "id": {
+                                  "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "default": "orgs",
+                                  "description": "Organizations resource type.",
+                                  "enum": [
+                                    "orgs"
+                                  ],
+                                  "example": "orgs",
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "ORGS"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "type"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "data"
+                          ],
+                          "type": "object"
+                        },
+                        "other_orgs": {
+                          "description": "Relationship to organizations.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to organization objects.",
+                              "example": [],
+                              "items": {
+                                "description": "Relationship to organization object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "orgs",
+                                    "description": "Organizations resource type.",
+                                    "enum": [
+                                      "orgs"
+                                    ],
+                                    "example": "orgs",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "ORGS"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "data"
+                          ],
+                          "type": "object"
+                        },
+                        "other_users": {
+                          "description": "Relationship to users.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to user objects.",
+                              "example": [],
+                              "items": {
+                                "description": "Relationship to user object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "A unique identifier that represents the user.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "users",
+                                    "description": "Users resource type.",
+                                    "enum": [
+                                      "users"
+                                    ],
+                                    "example": "users",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "USERS"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "data"
+                          ],
+                          "type": "object"
+                        },
+                        "roles": {
+                          "description": "Relationship to roles.",
+                          "properties": {
+                            "data": {
+                              "description": "An array containing type and ID of a role.",
+                              "items": {
+                                "description": "Relationship to role object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the role.",
+                                    "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "roles",
+                                    "description": "Roles type.",
+                                    "enum": [
+                                      "roles"
+                                    ],
+                                    "example": "roles",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "ROLES"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "default": "users",
+                      "description": "Users resource type.",
+                      "enum": [
+                        "users"
+                      ],
+                      "example": "users",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "USERS"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "APIKeysType": {
+        "default": "api_keys",
+        "description": "API Keys resource type.",
+        "enum": [
+          "api_keys"
+        ],
+        "example": "api_keys",
+        "type": "string",
+        "x-enum-varnames": [
+          "API_KEYS"
+        ]
       },
       "ApplicationKeyCreateAttributes": {
         "description": "Attributes used to create an application Key.",
@@ -1816,6 +3171,178 @@
           "INTEGRATION_TIMEBOARD",
           "HOST_TIMEBOARD"
         ]
+      },
+      "FullAPIKey": {
+        "description": "Datadog API key.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes of a full API key.",
+            "properties": {
+              "created_at": {
+                "description": "Creation date of the API key.",
+                "example": "2020-11-23T10:00:00.000Z",
+                "readOnly": true,
+                "type": "string"
+              },
+              "key": {
+                "description": "The API key.",
+                "readOnly": true,
+                "type": "string"
+              },
+              "last4": {
+                "description": "The last four characters of the API key.",
+                "example": "abcd",
+                "maxLength": 4,
+                "minLength": 4,
+                "readOnly": true,
+                "type": "string"
+              },
+              "modified_at": {
+                "description": "Date the API key was last modified.",
+                "example": "2020-11-23T10:00:00.000Z",
+                "readOnly": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of the API key.",
+                "example": "API Key for submitting metrics",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "ID of the API key.",
+            "type": "string"
+          },
+          "relationships": {
+            "description": "Resources related to the API key.",
+            "properties": {
+              "created_by": {
+                "description": "Relationship to user.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to user object.",
+                    "properties": {
+                      "id": {
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "users",
+                        "description": "Users resource type.",
+                        "enum": [
+                          "users"
+                        ],
+                        "example": "users",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              },
+              "modified_by": {
+                "description": "Relationship to user.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to user object.",
+                    "properties": {
+                      "id": {
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "users",
+                        "description": "Users resource type.",
+                        "enum": [
+                          "users"
+                        ],
+                        "example": "users",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "api_keys",
+            "description": "API Keys resource type.",
+            "enum": [
+              "api_keys"
+            ],
+            "example": "api_keys",
+            "type": "string",
+            "x-enum-varnames": [
+              "API_KEYS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "FullAPIKeyAttributes": {
+        "description": "Attributes of a full API key.",
+        "properties": {
+          "created_at": {
+            "description": "Creation date of the API key.",
+            "example": "2020-11-23T10:00:00.000Z",
+            "readOnly": true,
+            "type": "string"
+          },
+          "key": {
+            "description": "The API key.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "last4": {
+            "description": "The last four characters of the API key.",
+            "example": "abcd",
+            "maxLength": 4,
+            "minLength": 4,
+            "readOnly": true,
+            "type": "string"
+          },
+          "modified_at": {
+            "description": "Date the API key was last modified.",
+            "example": "2020-11-23T10:00:00.000Z",
+            "readOnly": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the API key.",
+            "example": "API Key for submitting metrics",
+            "type": "string"
+          }
+        },
+        "type": "object"
       },
       "FullApplicationKey": {
         "description": "Datadog application key.",
@@ -14634,6 +16161,168 @@
         },
         "type": "object"
       },
+      "PartialAPIKey": {
+        "description": "Partial Datadog API key.",
+        "properties": {
+          "attributes": {
+            "description": "Attributes of a partial API key.",
+            "properties": {
+              "created_at": {
+                "description": "Creation date of the API key.",
+                "example": "2020-11-23T10:00:00.000Z",
+                "readOnly": true,
+                "type": "string"
+              },
+              "last4": {
+                "description": "The last four characters of the API key.",
+                "example": "abcd",
+                "maxLength": 4,
+                "minLength": 4,
+                "readOnly": true,
+                "type": "string"
+              },
+              "modified_at": {
+                "description": "Date the API key was last modified.",
+                "example": "2020-11-23T10:00:00.000Z",
+                "readOnly": true,
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of the API key.",
+                "example": "API Key for submitting metrics",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "ID of the API key.",
+            "type": "string"
+          },
+          "relationships": {
+            "description": "Resources related to the API key.",
+            "properties": {
+              "created_by": {
+                "description": "Relationship to user.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to user object.",
+                    "properties": {
+                      "id": {
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "users",
+                        "description": "Users resource type.",
+                        "enum": [
+                          "users"
+                        ],
+                        "example": "users",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              },
+              "modified_by": {
+                "description": "Relationship to user.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to user object.",
+                    "properties": {
+                      "id": {
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "users",
+                        "description": "Users resource type.",
+                        "enum": [
+                          "users"
+                        ],
+                        "example": "users",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "USERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "api_keys",
+            "description": "API Keys resource type.",
+            "enum": [
+              "api_keys"
+            ],
+            "example": "api_keys",
+            "type": "string",
+            "x-enum-varnames": [
+              "API_KEYS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "PartialAPIKeyAttributes": {
+        "description": "Attributes of a partial API key.",
+        "properties": {
+          "created_at": {
+            "description": "Creation date of the API key.",
+            "example": "2020-11-23T10:00:00.000Z",
+            "readOnly": true,
+            "type": "string"
+          },
+          "last4": {
+            "description": "The last four characters of the API key.",
+            "example": "abcd",
+            "maxLength": 4,
+            "minLength": 4,
+            "readOnly": true,
+            "type": "string"
+          },
+          "modified_at": {
+            "description": "Date the API key was last modified.",
+            "example": "2020-11-23T10:00:00.000Z",
+            "readOnly": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the API key.",
+            "example": "API Key for submitting metrics",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "PartialApplicationKey": {
         "description": "Partial Datadog application key.",
         "properties": {
@@ -21546,6 +23235,2152 @@
   },
   "openapi": "3.0.0",
   "paths": {
+    "/api/v2/api_keys": {
+      "get": {
+        "description": "List all API keys available for your account.",
+        "operationId": "ListAPIKeys",
+        "parameters": [
+          {
+            "description": "Size for a given page.",
+            "in": "query",
+            "name": "page[size]",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Specific page number to return.",
+            "in": "query",
+            "name": "page[number]",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "API key attribute used to sort results. Sort order is ascending\nby default. In order to specify a descending sort, prefix the\nattribute with a minus sign.",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "default": "name",
+              "enum": [
+                "created_at",
+                "-created_at",
+                "last4",
+                "-last4",
+                "modified_at",
+                "-modified_at",
+                "name",
+                "-name"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter API keys by the specified string.",
+            "in": "query",
+            "name": "filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only include API keys created on or after the specified date.",
+            "in": "query",
+            "name": "filter[created_at][start]",
+            "required": false,
+            "schema": {
+              "example": "2020-11-24T18:46:21+00:00",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only include API keys created on or before the specified date.",
+            "in": "query",
+            "name": "filter[created_at][end]",
+            "required": false,
+            "schema": {
+              "example": "2020-11-24T18:46:21+00:00",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only include API keys modified on or after the specified date.",
+            "in": "query",
+            "name": "filter[modified_at][start]",
+            "required": false,
+            "schema": {
+              "example": "2020-11-24T18:46:21+00:00",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only include API keys modified on or before the specified date.",
+            "in": "query",
+            "name": "filter[modified_at][end]",
+            "required": false,
+            "schema": {
+              "example": "2020-11-24T18:46:21+00:00",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Comma separated list of resource paths for related resources to include in the response. Supported resource paths are `created_by` and `modified_by`.",
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "example": "created_by,modified_by",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response for a list of API keys.",
+                  "properties": {
+                    "data": {
+                      "description": "Array of API keys.",
+                      "items": {
+                        "description": "Partial Datadog API key.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Attributes of a partial API key.",
+                            "properties": {
+                              "created_at": {
+                                "description": "Creation date of the API key.",
+                                "example": "2020-11-23T10:00:00.000Z",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "last4": {
+                                "description": "The last four characters of the API key.",
+                                "example": "abcd",
+                                "maxLength": 4,
+                                "minLength": 4,
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "modified_at": {
+                                "description": "Date the API key was last modified.",
+                                "example": "2020-11-23T10:00:00.000Z",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "Name of the API key.",
+                                "example": "API Key for submitting metrics",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "ID of the API key.",
+                            "type": "string"
+                          },
+                          "relationships": {
+                            "description": "Resources related to the API key.",
+                            "properties": {
+                              "created_by": {
+                                "description": "Relationship to user.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Relationship to user object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "A unique identifier that represents the user.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "users",
+                                        "description": "Users resource type.",
+                                        "enum": [
+                                          "users"
+                                        ],
+                                        "example": "users",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "USERS"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
+                                    "type": "object"
+                                  }
+                                },
+                                "required": [
+                                  "data"
+                                ],
+                                "type": "object"
+                              },
+                              "modified_by": {
+                                "description": "Relationship to user.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Relationship to user object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "A unique identifier that represents the user.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "users",
+                                        "description": "Users resource type.",
+                                        "enum": [
+                                          "users"
+                                        ],
+                                        "example": "users",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "USERS"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
+                                    "type": "object"
+                                  }
+                                },
+                                "required": [
+                                  "data"
+                                ],
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": {
+                            "default": "api_keys",
+                            "description": "API Keys resource type.",
+                            "enum": [
+                              "api_keys"
+                            ],
+                            "example": "api_keys",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "API_KEYS"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "included": {
+                      "description": "Array of objects related to the API key.",
+                      "items": {
+                        "description": "An object related to an API key.",
+                        "oneOf": [
+                          {
+                            "description": "User object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of user object returned by the API.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the user.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "disabled": {
+                                    "description": "Whether the user is disabled.",
+                                    "type": "boolean"
+                                  },
+                                  "email": {
+                                    "description": "Email of the user.",
+                                    "type": "string"
+                                  },
+                                  "handle": {
+                                    "description": "Handle of the user.",
+                                    "type": "string"
+                                  },
+                                  "icon": {
+                                    "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the user.",
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "description": "Status of the user.",
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "description": "Title of the user.",
+                                    "type": "string"
+                                  },
+                                  "verified": {
+                                    "description": "Whether the user is verified.",
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the user.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the user object returned by the API.",
+                                "properties": {
+                                  "org": {
+                                    "description": "Relationship to an organization.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationship to organization object.",
+                                        "properties": {
+                                          "id": {
+                                            "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
+                                            "type": "string"
+                                          },
+                                          "type": {
+                                            "default": "orgs",
+                                            "description": "Organizations resource type.",
+                                            "enum": [
+                                              "orgs"
+                                            ],
+                                            "example": "orgs",
+                                            "type": "string",
+                                            "x-enum-varnames": [
+                                              "ORGS"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "type"
+                                        ],
+                                        "type": "object"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_orgs": {
+                                    "description": "Relationship to organizations.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to organization objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to organization object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "orgs",
+                                              "description": "Organizations resource type.",
+                                              "enum": [
+                                                "orgs"
+                                              ],
+                                              "example": "orgs",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ORGS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_users": {
+                                    "description": "Relationship to users.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to user objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to user object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "users",
+                                              "description": "Users resource type.",
+                                              "enum": [
+                                                "users"
+                                              ],
+                                              "example": "users",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "USERS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "roles": {
+                                    "description": "Relationship to roles.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "An array containing type and ID of a role.",
+                                        "items": {
+                                          "description": "Relationship to role object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the role.",
+                                              "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "roles",
+                                              "description": "Roles type.",
+                                              "enum": [
+                                                "roles"
+                                              ],
+                                              "example": "roles",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ROLES"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "users",
+                                "description": "Users resource type.",
+                                "enum": [
+                                  "users"
+                                ],
+                                "example": "users",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "USERS"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          }
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "summary": "Get all API keys",
+        "tags": [
+          "Key Management"
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create an API key.",
+        "operationId": "CreateAPIKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request used to create an API key.",
+                "properties": {
+                  "data": {
+                    "description": "Object used to create an API key.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes used to create an API Key.",
+                        "properties": {
+                          "name": {
+                            "description": "Name of the API key.",
+                            "example": "API Key for submitting metrics",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "api_keys",
+                        "description": "API Keys resource type.",
+                        "enum": [
+                          "api_keys"
+                        ],
+                        "example": "api_keys",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "API_KEYS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "attributes",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response for retrieving an API key.",
+                  "properties": {
+                    "data": {
+                      "description": "Datadog API key.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of a full API key.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation date of the API key.",
+                              "example": "2020-11-23T10:00:00.000Z",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "key": {
+                              "description": "The API key.",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "last4": {
+                              "description": "The last four characters of the API key.",
+                              "example": "abcd",
+                              "maxLength": 4,
+                              "minLength": 4,
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Date the API key was last modified.",
+                              "example": "2020-11-23T10:00:00.000Z",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the API key.",
+                              "example": "API Key for submitting metrics",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the API key.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Resources related to the API key.",
+                          "properties": {
+                            "created_by": {
+                              "description": "Relationship to user.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to user object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "users",
+                                      "description": "Users resource type.",
+                                      "enum": [
+                                        "users"
+                                      ],
+                                      "example": "users",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "USERS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            },
+                            "modified_by": {
+                              "description": "Relationship to user.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to user object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "users",
+                                      "description": "Users resource type.",
+                                      "enum": [
+                                        "users"
+                                      ],
+                                      "example": "users",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "USERS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "api_keys",
+                          "description": "API Keys resource type.",
+                          "enum": [
+                            "api_keys"
+                          ],
+                          "example": "api_keys",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "API_KEYS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "included": {
+                      "description": "Array of objects related to the API key.",
+                      "items": {
+                        "description": "An object related to an API key.",
+                        "oneOf": [
+                          {
+                            "description": "User object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of user object returned by the API.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the user.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "disabled": {
+                                    "description": "Whether the user is disabled.",
+                                    "type": "boolean"
+                                  },
+                                  "email": {
+                                    "description": "Email of the user.",
+                                    "type": "string"
+                                  },
+                                  "handle": {
+                                    "description": "Handle of the user.",
+                                    "type": "string"
+                                  },
+                                  "icon": {
+                                    "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the user.",
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "description": "Status of the user.",
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "description": "Title of the user.",
+                                    "type": "string"
+                                  },
+                                  "verified": {
+                                    "description": "Whether the user is verified.",
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the user.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the user object returned by the API.",
+                                "properties": {
+                                  "org": {
+                                    "description": "Relationship to an organization.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationship to organization object.",
+                                        "properties": {
+                                          "id": {
+                                            "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
+                                            "type": "string"
+                                          },
+                                          "type": {
+                                            "default": "orgs",
+                                            "description": "Organizations resource type.",
+                                            "enum": [
+                                              "orgs"
+                                            ],
+                                            "example": "orgs",
+                                            "type": "string",
+                                            "x-enum-varnames": [
+                                              "ORGS"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "type"
+                                        ],
+                                        "type": "object"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_orgs": {
+                                    "description": "Relationship to organizations.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to organization objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to organization object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "orgs",
+                                              "description": "Organizations resource type.",
+                                              "enum": [
+                                                "orgs"
+                                              ],
+                                              "example": "orgs",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ORGS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_users": {
+                                    "description": "Relationship to users.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to user objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to user object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "users",
+                                              "description": "Users resource type.",
+                                              "enum": [
+                                                "users"
+                                              ],
+                                              "example": "users",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "USERS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "roles": {
+                                    "description": "Relationship to roles.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "An array containing type and ID of a role.",
+                                        "items": {
+                                          "description": "Relationship to role object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the role.",
+                                              "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "roles",
+                                              "description": "Roles type.",
+                                              "enum": [
+                                                "roles"
+                                              ],
+                                              "example": "roles",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ROLES"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "users",
+                                "description": "Users resource type.",
+                                "enum": [
+                                  "users"
+                                ],
+                                "example": "users",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "USERS"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          }
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "summary": "Create an API key",
+        "tags": [
+          "Key Management"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-given": {
+          "api_key": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\"\n    },\n    \"type\": \"api_keys\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"api_key\" in the system"
+          }
+        },
+        "x-undo": {
+          "operationId": "DeleteAPIKey",
+          "parameters": [
+            {
+              "name": "api_key_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/api_keys/{api_key_id}": {
+      "delete": {
+        "description": "Delete an API key.",
+        "operationId": "DeleteAPIKey",
+        "parameters": [
+          {
+            "description": "The ID of the API key.",
+            "in": "path",
+            "name": "api_key_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Delete an API key",
+        "tags": [
+          "Key Management"
+        ],
+        "x-undo": {
+          "type": "idempotent"
+        }
+      },
+      "get": {
+        "description": "Get an API key.",
+        "operationId": "GetAPIKey",
+        "parameters": [
+          {
+            "description": "The ID of the API key.",
+            "in": "path",
+            "name": "api_key_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Comma separated list of resource paths for related resources to include in the response. Supported resource paths are `created_by` and `modified_by`.",
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "example": "created_by,modified_by",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response for retrieving an API key.",
+                  "properties": {
+                    "data": {
+                      "description": "Datadog API key.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of a full API key.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation date of the API key.",
+                              "example": "2020-11-23T10:00:00.000Z",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "key": {
+                              "description": "The API key.",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "last4": {
+                              "description": "The last four characters of the API key.",
+                              "example": "abcd",
+                              "maxLength": 4,
+                              "minLength": 4,
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Date the API key was last modified.",
+                              "example": "2020-11-23T10:00:00.000Z",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the API key.",
+                              "example": "API Key for submitting metrics",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the API key.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Resources related to the API key.",
+                          "properties": {
+                            "created_by": {
+                              "description": "Relationship to user.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to user object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "users",
+                                      "description": "Users resource type.",
+                                      "enum": [
+                                        "users"
+                                      ],
+                                      "example": "users",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "USERS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            },
+                            "modified_by": {
+                              "description": "Relationship to user.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to user object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "users",
+                                      "description": "Users resource type.",
+                                      "enum": [
+                                        "users"
+                                      ],
+                                      "example": "users",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "USERS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "api_keys",
+                          "description": "API Keys resource type.",
+                          "enum": [
+                            "api_keys"
+                          ],
+                          "example": "api_keys",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "API_KEYS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "included": {
+                      "description": "Array of objects related to the API key.",
+                      "items": {
+                        "description": "An object related to an API key.",
+                        "oneOf": [
+                          {
+                            "description": "User object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of user object returned by the API.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the user.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "disabled": {
+                                    "description": "Whether the user is disabled.",
+                                    "type": "boolean"
+                                  },
+                                  "email": {
+                                    "description": "Email of the user.",
+                                    "type": "string"
+                                  },
+                                  "handle": {
+                                    "description": "Handle of the user.",
+                                    "type": "string"
+                                  },
+                                  "icon": {
+                                    "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the user.",
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "description": "Status of the user.",
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "description": "Title of the user.",
+                                    "type": "string"
+                                  },
+                                  "verified": {
+                                    "description": "Whether the user is verified.",
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the user.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the user object returned by the API.",
+                                "properties": {
+                                  "org": {
+                                    "description": "Relationship to an organization.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationship to organization object.",
+                                        "properties": {
+                                          "id": {
+                                            "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
+                                            "type": "string"
+                                          },
+                                          "type": {
+                                            "default": "orgs",
+                                            "description": "Organizations resource type.",
+                                            "enum": [
+                                              "orgs"
+                                            ],
+                                            "example": "orgs",
+                                            "type": "string",
+                                            "x-enum-varnames": [
+                                              "ORGS"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "type"
+                                        ],
+                                        "type": "object"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_orgs": {
+                                    "description": "Relationship to organizations.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to organization objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to organization object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "orgs",
+                                              "description": "Organizations resource type.",
+                                              "enum": [
+                                                "orgs"
+                                              ],
+                                              "example": "orgs",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ORGS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_users": {
+                                    "description": "Relationship to users.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to user objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to user object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "users",
+                                              "description": "Users resource type.",
+                                              "enum": [
+                                                "users"
+                                              ],
+                                              "example": "users",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "USERS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "roles": {
+                                    "description": "Relationship to roles.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "An array containing type and ID of a role.",
+                                        "items": {
+                                          "description": "Relationship to role object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the role.",
+                                              "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "roles",
+                                              "description": "Roles type.",
+                                              "enum": [
+                                                "roles"
+                                              ],
+                                              "example": "roles",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ROLES"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "users",
+                                "description": "Users resource type.",
+                                "enum": [
+                                  "users"
+                                ],
+                                "example": "users",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "USERS"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          }
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Get API key",
+        "tags": [
+          "Key Management"
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "patch": {
+        "description": "Update an API key.",
+        "operationId": "UpdateAPIKey",
+        "parameters": [
+          {
+            "description": "The ID of the API key.",
+            "in": "path",
+            "name": "api_key_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request used to update an API key.",
+                "properties": {
+                  "data": {
+                    "description": "Object used to update an API key.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Attributes used to update an API Key.",
+                        "properties": {
+                          "name": {
+                            "description": "Name of the API key.",
+                            "example": "API Key for submitting metrics",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name"
+                        ],
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "ID of the API key.",
+                        "example": "00112233-4455-6677-8899-aabbccddeeff",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "api_keys",
+                        "description": "API Keys resource type.",
+                        "enum": [
+                          "api_keys"
+                        ],
+                        "example": "api_keys",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "API_KEYS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "attributes",
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response for retrieving an API key.",
+                  "properties": {
+                    "data": {
+                      "description": "Datadog API key.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of a full API key.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation date of the API key.",
+                              "example": "2020-11-23T10:00:00.000Z",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "key": {
+                              "description": "The API key.",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "last4": {
+                              "description": "The last four characters of the API key.",
+                              "example": "abcd",
+                              "maxLength": 4,
+                              "minLength": 4,
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Date the API key was last modified.",
+                              "example": "2020-11-23T10:00:00.000Z",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the API key.",
+                              "example": "API Key for submitting metrics",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the API key.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Resources related to the API key.",
+                          "properties": {
+                            "created_by": {
+                              "description": "Relationship to user.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to user object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "users",
+                                      "description": "Users resource type.",
+                                      "enum": [
+                                        "users"
+                                      ],
+                                      "example": "users",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "USERS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            },
+                            "modified_by": {
+                              "description": "Relationship to user.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to user object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "users",
+                                      "description": "Users resource type.",
+                                      "enum": [
+                                        "users"
+                                      ],
+                                      "example": "users",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "USERS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "api_keys",
+                          "description": "API Keys resource type.",
+                          "enum": [
+                            "api_keys"
+                          ],
+                          "example": "api_keys",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "API_KEYS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "included": {
+                      "description": "Array of objects related to the API key.",
+                      "items": {
+                        "description": "An object related to an API key.",
+                        "oneOf": [
+                          {
+                            "description": "User object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of user object returned by the API.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the user.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "disabled": {
+                                    "description": "Whether the user is disabled.",
+                                    "type": "boolean"
+                                  },
+                                  "email": {
+                                    "description": "Email of the user.",
+                                    "type": "string"
+                                  },
+                                  "handle": {
+                                    "description": "Handle of the user.",
+                                    "type": "string"
+                                  },
+                                  "icon": {
+                                    "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the user.",
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "description": "Status of the user.",
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "description": "Title of the user.",
+                                    "type": "string"
+                                  },
+                                  "verified": {
+                                    "description": "Whether the user is verified.",
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the user.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the user object returned by the API.",
+                                "properties": {
+                                  "org": {
+                                    "description": "Relationship to an organization.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationship to organization object.",
+                                        "properties": {
+                                          "id": {
+                                            "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
+                                            "type": "string"
+                                          },
+                                          "type": {
+                                            "default": "orgs",
+                                            "description": "Organizations resource type.",
+                                            "enum": [
+                                              "orgs"
+                                            ],
+                                            "example": "orgs",
+                                            "type": "string",
+                                            "x-enum-varnames": [
+                                              "ORGS"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "type"
+                                        ],
+                                        "type": "object"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_orgs": {
+                                    "description": "Relationship to organizations.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to organization objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to organization object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "orgs",
+                                              "description": "Organizations resource type.",
+                                              "enum": [
+                                                "orgs"
+                                              ],
+                                              "example": "orgs",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ORGS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_users": {
+                                    "description": "Relationship to users.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to user objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to user object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "users",
+                                              "description": "Users resource type.",
+                                              "enum": [
+                                                "users"
+                                              ],
+                                              "example": "users",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "USERS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "roles": {
+                                    "description": "Relationship to roles.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "An array containing type and ID of a role.",
+                                        "items": {
+                                          "description": "Relationship to role object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the role.",
+                                              "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "roles",
+                                              "description": "Roles type.",
+                                              "enum": [
+                                                "roles"
+                                              ],
+                                              "example": "roles",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ROLES"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "users",
+                                "description": "Users resource type.",
+                                "enum": [
+                                  "users"
+                                ],
+                                "example": "users",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "USERS"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          }
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Edit an API key",
+        "tags": [
+          "Key Management"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
     "/api/v2/application_keys": {
       "get": {
         "description": "List all application keys available for your org",
@@ -50252,7 +54087,7 @@
       "name": "Key Management"
     },
     {
-      "description": "Manage your Datadog API and application keys.\nYou need an API and application key with admin rights\nto interact with this endpoint. The full list of keys can be seen on your\n[Datadog API page](https://app.datadoghq.com/account/settings#api).",
+      "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).",
       "externalDocs": {
         "description": "Find out more at",
         "url": "https://docs.datadoghq.com/account_management/api-app-keys/"
