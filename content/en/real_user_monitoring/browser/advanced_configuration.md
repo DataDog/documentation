@@ -29,11 +29,11 @@ Adding user information to your RUM sessions makes it easy to:
 
 The following attributes are **optional** but it is recommended to provide **at least one** of them:
 
-| Attribute  | Description                                                                                              |
-|------------|----------------------------------------------------------------------------------------------------------|
-| usr.id    | Unique user identifier.                                                                                  |
-| usr.name  | User friendly name, displayed by default in the RUM UI.                                                  |
-| usr.email | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| Attribute  | Type | Description                                                                                              |
+|------------|------|----------------------------------------------------------------------------------------------------|
+| usr.id    | String | Unique user identifier.                                                                                  |
+| usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
+| usr.email | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
 To identify user sessions, use the `setUser` API:
 
@@ -41,9 +41,9 @@ To identify user sessions, use the `setUser` API:
 {{% tab "NPM" %}}
 ```javascript
 datadogRum.setUser({
-    id: 1234,
-    name: John Doe,
-    email: john@doe.com
+    id: '1234',
+    name: 'John Doe',
+    email: 'john@doe.com'
 })
 ```
 
@@ -52,9 +52,9 @@ datadogRum.setUser({
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.setUser({
-        id: 1234,
-        name: John Doe,
-        email: john@doe.com
+        id: '1234',
+        name: 'John Doe',
+        email: 'john@doe.com'
     })
 })
 ```
@@ -63,9 +63,9 @@ DD_RUM.onReady(function() {
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setUser({
-    id: 1234,
-    name: John Doe,
-    email: john@doe.com
+    id: '1234',
+    name: 'John Doe',
+    email: 'john@doe.com'
 })
 ```
 
