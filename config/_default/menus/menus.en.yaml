@@ -3384,6 +3384,26 @@ api_v2:
     url: /api/v2/key-management/
     identifier: Key Management
     generated: true
+  - name: Get all API keys
+    parent: Key Management
+    url: '#get-all-api-keys'
+    generated: true
+  - name: Create an API key
+    parent: Key Management
+    url: '#create-an-api-key'
+    generated: true
+  - name: Delete an API key
+    parent: Key Management
+    url: '#delete-an-api-key'
+    generated: true
+  - name: Get API key
+    parent: Key Management
+    url: '#get-api-key'
+    generated: true
+  - name: Edit an API key
+    parent: Key Management
+    url: '#edit-an-api-key'
+    generated: true
   - name: Get all application keys
     parent: Key Management
     url: '#get-all-application-keys'
@@ -3419,6 +3439,26 @@ api_v2:
   - name: Key Management
     url: /api/v2/key-management/
     identifier: Key Management
+    generated: true
+  - name: Get all API keys
+    parent: Key Management
+    url: '#get-all-api-keys'
+    generated: true
+  - name: Create an API key
+    parent: Key Management
+    url: '#create-an-api-key'
+    generated: true
+  - name: Delete an API key
+    parent: Key Management
+    url: '#delete-an-api-key'
+    generated: true
+  - name: Get API key
+    parent: Key Management
+    url: '#get-api-key'
+    generated: true
+  - name: Edit an API key
+    parent: Key Management
+    url: '#edit-an-api-key'
     generated: true
   - name: Get all application keys
     parent: Key Management
