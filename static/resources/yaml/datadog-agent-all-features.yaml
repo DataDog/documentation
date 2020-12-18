@@ -44,7 +44,7 @@ data:
       bpf_debug: false
       enable_tcp_queue_length: false
       enable_oom_kill: false
-      collect_dns_stats: false
+      collect_dns_stats: true
     runtime_security_config:
       enabled: false
       debug: false
