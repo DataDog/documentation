@@ -19,6 +19,59 @@ further_reading:
 
 Find below the different initialization options available with the [Datadog Browser SDK][1].
 
+### Identify user sessions
+Adding user information to your RUM sessions makes it easy to:
+* Follow the journey of a given user
+* Know which users are the most impacted by errors
+* Monitor performance for your most important users
+
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI"  >}}
+
+The following attributes are **optional** but it is recommended to provide **at least one** of them:
+
+| Attribute  | Description                                                                                              |
+|------------|----------------------------------------------------------------------------------------------------------|
+| usr.id    | Unique user identifier.                                                                                  |
+| usr.name  | User friendly name, displayed by default in the RUM UI.                                                  |
+| usr.email | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+
+To identify user sessions, use the `setUser` API:
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setUser({
+    id: 1234,
+    name: John Doe,
+    email: john@doe.com
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.setUser({
+        id: 1234,
+        name: John Doe,
+        email: john@doe.com
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.setUser({
+    id: 1234,
+    name: John Doe,
+    email: john@doe.com
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Sampling
 
 By default, no sampling is applied on the number of collected sessions. To apply a relative sampling (in percent) to the number of sessions collected, use the `sampleRate` parameter when initializing RUM. The following example collects only 90% of all sessions on a given RUM application:
@@ -87,9 +140,9 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
 // Code example
-datadogRum.addRumGlobalContext('usr', {
-    id: 123,
-    plan: 'premium'
+datadogRum.addRumGlobalContext('activity', {
+    hasPaid: true,
+    amount: 23.42
 });
 ```
 
@@ -102,9 +155,9 @@ DD_RUM.onReady(function() {
 
 // Code example
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('usr', {
-        id: 123,
-        plan: 'premium'
+    DD_RUM.addRumGlobalContext('activity', {
+        hasPaid: true,
+        amount: 23.42
     });
 })
 ```
@@ -115,9 +168,9 @@ DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
 // Code example
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('usr', {
-    id: 123,
-    plan: 'premium'
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
+    hasPaid: true,
+    amount: 23.42
 });
 ```
 
