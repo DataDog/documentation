@@ -16,13 +16,21 @@ further_reading:
     text: "RUM Dashboards"
 ---
 
-Metrics for your website’s resources are collected by default: images, XHRs, [XMLHttpRequest][1], CSS files, JS assets, and font files.
+Metrics for resources and assets are collected for every page load. Key resources included are [XMLHttpRequest][1] (XHRs) and Fetch requests, but also images, CSS files, JavaScript assets, and font files.
 
-Detailed network timing data for the loading of an application’s resources are collected with the [Performance Resource Timing API][2].
+RUM Resources contain all context from the active RUM View.
 
-{{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics"  >}}
+## Link RUM Resources to APM traces
+
+Connecting your RUM resource performance metrics with APM traces is a powerful way to troubleshoot your application's performance issues. See [Connect RUM and Traces][2] for information about setting up direct drill-down links from RUM front-end information to backend and infrastructure traces from APM.
 
 ## Resource timing
+
+Detailed network timing data for resources are collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3]. If you are having trouble collecting detailed timing for some resources, see [troubleshooting information](#resource-timing-troubleshooting).
+
+## Performance metrics for resources
+
+For information about the default attributes for all RUM event types, see [RUM Browser Data Collected][4]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][5]. The following table lists Datadog-specific metrics along with performance metrics collected from [Performance Resource Timing API][3].
 
 | Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -51,9 +59,16 @@ Detailed network timing data for the loading of an application’s resources are
 | `resource.provider.domain`      | string | The resource provider domain.                                            |
 | `resource.provider.type`      | string | The resource provider type (for example `first-party`, `cdn`, `ad`, `analytics`).                                            |
 
+## Resource timing troubleshooting
 
+If you get a value of zero for resource metric timestamps such as `redirectStart`, `redirectEnd`, `domainLookupStart`, `domainLookupEnd`, `connectStart`, `connectEnd`, `secureConnectionStart`, `requestStart`, and `responseStart`, it is because the providing server's Cross-Origin Resource Sharing (CORS) same-origin access policy is restricting them. To resolve this, the providing server must send the `Timing-Allow-Origin` HTTP response header with a value that specifies the origins that are allowed to access the restricted timestamp values.
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}[1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[2]: /real_user_monitoring/connect_rum_and_traces
+[3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+[4]: /real_user_monitoring/browser/data_collected/?tab=resource
+[5]: /real_user_monitoring/browser/advanced_configuration/
