@@ -3730,7 +3730,7 @@ footer_product_three:
     url: 'https://www.datadoghq.com/ja/security/'
     weight: 180
 footer_about:
-  - name: COVID-19（新型コロナウイルス感染症）への対応
+  - name: COVID-19 Update
     url: 'https://www.datadoghq.com/coronavirus/'
     weight: 90
   - name: お問い合わせ
