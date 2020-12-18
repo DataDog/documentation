@@ -121,7 +121,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 | `x-datadog-origin: rum`          | To make sure the generated traces from Real User Monitoring don’t affect your APM Index Spans counts.  |
 | `x-datadog-sampling-priority: 1` | To make sure that the Agent keeps the trace.                                                           |
 | `x-datadog-sampling-priority: 1` | To make sure that the Agent keeps the trace.                                                           |  
-| `x-datadog-sampled: 1`           | Generated from the Real User Monitoring SDK. Indicates this request is selected for sampling           |
+| `x-datadog-sampled: 1`           | Generated from the Real User Monitoring SDK. Indicates this request is selected for sampling.          |
 
 ## How are APM quotas affected?
 
