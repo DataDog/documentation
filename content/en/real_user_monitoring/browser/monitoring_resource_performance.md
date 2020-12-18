@@ -1,5 +1,5 @@
 ---
-title: Monitoring Page Performance
+title: Monitoring Resource Performance
 kind: documentation
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
@@ -23,6 +23,8 @@ RUM Resources contain all context from the active RUM View.
 ## Link RUM Resources to APM traces
 
 Connecting your RUM resource performance metrics with APM traces is a powerful way to troubleshoot your application's performance issues. See [Connect RUM and Traces][2] for information about setting up direct drill-down links from RUM front-end information to backend and infrastructure traces from APM.
+
+{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource"  >}}
 
 ## Resource timing
 
@@ -70,5 +72,5 @@ If you get a value of zero for resource metric timestamps such as `redirectStart
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [2]: /real_user_monitoring/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[4]: /real_user_monitoring/browser/data_collected/?tab=resource
+[4]: /real_user_monitoring/browser/data_collected/?tab=resource#default-attributes
 [5]: /real_user_monitoring/browser/advanced_configuration/
