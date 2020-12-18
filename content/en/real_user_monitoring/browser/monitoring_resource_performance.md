@@ -30,6 +30,10 @@ Connecting your RUM resource performance metrics with APM traces is a powerful w
 
 Detailed network timing data for resources are collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3]. If you are having trouble collecting detailed timing for some resources, see [troubleshooting information](#resource-timing-troubleshooting).
 
+## Filter on third-party resources
+
+RUM infers the name and category of the resource provider from the resource URL host part. If the resource URL host matches the current page URL host, the category is set to `first party`. Otherwise, the category will be `cdn`, `analytics`, or `social` for example.
+
 ## Performance metrics for resources
 
 For information about the default attributes for all RUM event types, see [RUM Browser Data Collected][4]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][5]. The following table lists Datadog-specific metrics along with performance metrics collected from [Performance Resource Timing API][3].
@@ -63,7 +67,8 @@ For information about the default attributes for all RUM event types, see [RUM B
 
 ## Resource timing troubleshooting
 
-If you get a value of zero for resource metric timestamps such as `redirectStart`, `redirectEnd`, `domainLookupStart`, `domainLookupEnd`, `connectStart`, `connectEnd`, `secureConnectionStart`, `requestStart`, and `responseStart`, it is because the providing server's Cross-Origin Resource Sharing (CORS) same-origin access policy is restricting them. To resolve this, the providing server must send the `Timing-Allow-Origin` HTTP response header with a value that specifies the origins that are allowed to access the restricted timestamp values.
+If you get a value of zero for resource sizes or timestamps (metrics such as `redirectStart`, `redirectEnd`, `domainLookupStart`, `domainLookupEnd`, `connectStart`, `connectEnd`, `secureConnectionStart`, `requestStart`, and `responseStart`), it is because the providing server's Cross-Origin Resource Sharing (CORS) same-origin access policy is restricting them. To resolve this, enable extended data collection for CORS resources by adding the the `Timing-Allow-Origin` HTTP response header to your cross-origin resources, with a value that specifies the origins that are allowed to access the restricted timestamp values.
+
 
 ## Further Reading
 
