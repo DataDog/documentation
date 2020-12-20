@@ -122,7 +122,7 @@ The following features can be enabled through the [SAML Configuration dialog][4]
 
 ### Just-in-Time (JIT) Provisioning
 
-With Just-in-Time provisioning, a user is created within Datadog the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time.
+With Just-in-Time provisioning, a user is created within Datadog the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time. The invitation email is not sent in this case.
 
 Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][2]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
