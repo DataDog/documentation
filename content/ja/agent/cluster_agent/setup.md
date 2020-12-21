@@ -55,7 +55,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
 {{< tabs >}}
 {{% tab "Secret" %}}
 
-1. 以下のコマンドを実行して、シークレットトークンを作成します。
+1. 次のコマンドを実行して、シークレットトークンを作成します。トークンは 32 文字以上の長さである必要があります。
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -77,7 +77,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
 
-1. 以下のコマンドを実行して、シークレットトークンを作成します。
+1. 次のコマンドを実行して、シークレットトークンを作成します。トークンは 32 文字以上の長さである必要があります。
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -93,7 +93,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-1. 以下のコマンドを実行して、シークレットトークンを作成します。
+1. 次のコマンドを実行して、シークレットトークンを作成します。トークンは 32 文字以上の長さである必要があります。
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -130,6 +130,8 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
 5. 実行: `kubectl apply -f secrets.yaml`
 6. 実行: `kubectl apply -f install_info-configmap.yaml`
 6. 最後に Datadog Cluster Agent `kubectl apply -f cluster-agent-deployment.yaml` をデプロイします。
+
+**注**: Datadog Cluster Agent で、 `<DD_SITE>` を Datadog サイト {{< region-param key="dd_site" code="true" >}} に設定します。デフォルト値は `datadoghq.com` です。
 
 ### 手順 4 - 検証
 
@@ -174,7 +176,7 @@ Datadog Cluster Agent の設定が終了したら、Datadog Agent と Datadog Cl
 
 1. [daemonset.yaml マニフェスト][10]をダウンロードします。
 
-3. `daemonset.yaml` マニフェストで、`<DD_SITE>` を使用中の Datadog サイト（`datadoghq.com` や `datadoghq.eu` など）と置き換えます。この値の初期設定は `datadoghq.com` です。
+3. `daemonset.yaml` マニフェストで、`<DD_SITE>` を Datadog サイト `{{< region-param key="dd_site">}}` に置き換えます。デフォルトは `datadoghq.com` です。
 
 4. `daemonset.yaml` マニフェストで、[手順 2 - Cluster Agent - Agent 間通信のセキュリティ保護](#手順-2-Agent-間通信のセキュリティ保護)のトークンを設定します。その形式は、シークレットの設定方法により異なります。手順はマニフェストを参照してください。
 
