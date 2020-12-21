@@ -2423,6 +2423,34 @@ api_v1:
     parent: Dashboards
     url: '#create-a-new-dashboard'
     generated: true
+  - name: Create a public dashboard
+    parent: Dashboards
+    url: '#create-a-public-dashboard'
+    generated: true
+  - name: Revoke a public dashboard URL
+    parent: Dashboards
+    url: '#revoke-a-public-dashboard-url'
+    generated: true
+  - name: Get a public dashboard
+    parent: Dashboards
+    url: '#get-a-public-dashboard'
+    generated: true
+  - name: Update a public dashboard
+    parent: Dashboards
+    url: '#update-a-public-dashboard'
+    generated: true
+  - name: Revoke public dashboard invitations
+    parent: Dashboards
+    url: '#revoke-public-dashboard-invitations'
+    generated: true
+  - name: Get all invitations for a public dashboard
+    parent: Dashboards
+    url: '#get-all-invitations-for-a-public-dashboard'
+    generated: true
+  - name: Send public dashboard invitation email
+    parent: Dashboards
+    url: '#send-public-dashboard-invitation-email'
+    generated: true
   - name: Delete a dashboard
     parent: Dashboards
     url: '#delete-a-dashboard'
