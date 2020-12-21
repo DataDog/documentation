@@ -36,7 +36,7 @@ datadogRum.init({
     ...,
     beforeSend: (event) => {
         // remove email from view url
-        event.view.url = event.view.url.replace(/\S+@\S+\.\S+/, "REDACTED_EMAIL")
+        event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
     },
     ...
 });
@@ -50,7 +50,7 @@ DD_RUM.onReady(function() {
         ...,
         beforeSend: (event) => {
             // remove email from view url
-            event.view.url = event.view.url.replace(/\S+@\S+\.\S+/, "REDACTED_EMAIL")
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
     })
@@ -65,7 +65,7 @@ window.DD_RUM &&
         ...,
         beforeSend: (event) => {
             // remove email from view url
-            event.view.url = event.view.url.replace(/\S+@\S+\.\S+/, "REDACTED_EMAIL")
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
         },
         ...
     });
@@ -74,7 +74,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-You can update the following fields:
+You can update the following event properties:
 
 |   Attribute           |   Type    |   Description                                                                                       |
 |-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
@@ -85,6 +85,8 @@ You can update the following fields:
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
 |   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
 |   `resource.url`        |   String  |   The resource URL.                                                                                 |
+
+**Note**: The RUM SDK will ignore modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][2].
 
 ### Identify user sessions
 Adding user information to your RUM sessions makes it easy to:
@@ -244,7 +246,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][3] for a better correlation of your data across the product.
 
 ### Replace global context
 
@@ -295,7 +297,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][3] for a better correlation of your data across the product.
 
 ### Read global context
 
@@ -404,7 +406,7 @@ addError(
 );
 ```
 
-**Note**: The [Error Tracking][3] feature processes errors sent with source set to `custom` or `source` and that contain a stacktrace.
+**Note**: The [Error Tracking][4] feature processes errors sent with source set to `custom` or `source` and that contain a stacktrace.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -492,5 +494,6 @@ try {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/browser-sdk
-[2]: /logs/processing/attributes_naming_convention/#user-related-attributes
-[3]: /real_user_monitoring/error_tracking
+[2]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum/src/rumEvent.types.ts
+[3]: /logs/processing/attributes_naming_convention/#user-related-attributes
+[4]: /real_user_monitoring/error_tracking
