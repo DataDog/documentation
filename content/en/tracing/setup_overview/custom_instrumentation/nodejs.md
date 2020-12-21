@@ -153,6 +153,13 @@ app.get('/make-sandwich', (req, res) => {
 
   res.end(sandwich)
 })
+
+// Note: startSpan doesn't activate the span on the current scope
+// Create a span with a resource name, which is the child of parentSpan.
+
+const span = tracer.startSpan('resource', { childOf: parentSpan })
+// do something
+span.finish()
 ```
 
 API details for `tracer.startSpan()` can be found [here][1].
