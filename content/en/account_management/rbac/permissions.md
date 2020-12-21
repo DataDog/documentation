@@ -22,7 +22,7 @@ General permissions provide the base level of access for your role. [Advanced Pe
 
 | Permission Name | Description                                                                                                                                                                                                                                                                                           |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| admin           | This permission gives to the role the ability to view and edit everything in your Datadog organization that does not have an explicitly defined permission. This includes billing and usage, user, key, roles, permissions and organization management. This permission is inclusive of all Standard Access permissions. |
+| admin           | This permission gives to the role the ability to view and edit everything in your Datadog organization that does not have an explicitly defined permission. This includes billing and usage, API keys, and organization management. This permission is inclusive of all Standard Access permissions. |
 | standard        | This permission gives to the role the ability to view and edit components in your Datadog organization that do not have explicitly defined permissions. This includes APM, Events, and other non-Account Management functionality.                                                                    |
 
 **Note**: There is no `read-only` permission as it is defined by the lack of both the `admin` and `standard` permissions for a role.
@@ -43,6 +43,16 @@ Find below the list of permissions for Access Management:
 | ----------------------- | ----------------------------------------------------------------------------------------- | -------- |
 | `user_access_manage`         | Grants the permission to disable users, manage user roles and SAML-to-role mappings. | false    |
 | `user_access_invite`         | Allows users to invite other users to your organization.                             | false    |
+
+## API and application keys
+
+The following permissions are available for API and application keys:
+
+| Name                    | Description                                                                                     | Scopable |
+| ----------------------- | ----------------------------------------------------------------------------------------------- | -------- |
+| `user_app_keys`         | Grants the user the ability to create, view, and manage application keys they own.         | false    |
+| `org_app_keys_read`     | Grants the user the ability to list application keys owned by all users in the organization.       | false    |
+| `org_app_keys_write`    | Grants the user the ability to manage application keys owned by all users in the organization.     | false    |
 
 ## Dashboards
 
