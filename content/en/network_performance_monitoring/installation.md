@@ -24,11 +24,11 @@ Supported **platforms** include:
 - SUSE 15+
 - Amazon AMI 2016.03+
 - Amazon Linux 2
-- [Windows 2016+][2] (in public beta)
+- [Windows Server 2016+][2] (in public beta)
 
 **For Linux OS:** Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.4.0+.
 
-**For Windows OS:** Data collection is available in public beta for Windows versions 2016 or later.
+**For Windows OS:** Data collection is available in public beta for Windows Server 2016 or later.
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][3]. The [DNS Resolution][4] feature is not supported on CentOS/RHEL 7.6. 
 
@@ -129,7 +129,7 @@ If these utilities do not exist in your distribution, follow the same procedure 
 
 ### Windows systems
 
-Data collection for Windows systems is available in public beta for versions 2016 or later. 
+Data collection for Windows systems is available in public beta for Windows Server versions 2016 or later. 
 **Note**: NPM currently monitors Windows hosts only, and not Windows containers. DNS metric collection is not supported for Windows systems.
 
 To enable network performance monitoring for Windows hosts:
