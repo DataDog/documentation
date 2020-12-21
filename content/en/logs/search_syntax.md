@@ -120,9 +120,8 @@ You can search for numerical attribute within a specific range. For instance, re
 Your logs inherit tags from [hosts][2] and [integrations][3] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
-* `("env:prod" OR test)` matches all logs with the tag `#env:prod` or the tag `#test`
-* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` matches all logs that contain tags `#service:srvA` or `#service:srvB`.
-* `("env:prod" AND -"version:beta")` matches all logs that contain `#env:prod` and that do not contain `#version:beta`
+* `env:(prod OR test)` matches all logs with the tag `env:prod` or the tag `env:test`
+* `(env:prod AND -version:beta)` matches all logs that contain tag `env:prod` and that do not contain tag `version:beta`
 
 If your tags don't follow [tags best practices][4] and don't use the `key:value` syntax, use this search query:
 

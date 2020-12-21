@@ -57,7 +57,11 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes �
         ```
 
     - 以下の RBAC アクセス許可を使用して、Cluster Agent ClusterRole を設定します。
-
+特に `apps` apiGroups の場合は、ライブコンテナに
+一般的な Kubernetes リソース (`pods`、`services`、`nodes` など) を収集する権限が必要です。
+これは、[Cluster Agent のセットアップ用ドキュメント][2]に従っていれば、すでに RBAC にあります。
+ない場合は、追加されていることを確認してください
+（`deployments`、`replicasets` の後）。
         ```yaml
           ClusterRole:
           - apiGroups:  # To create the datadog-cluster-id CM
@@ -76,17 +80,20 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes �
             verbs:
             - get
           ...
-          - apiGroups:  # to collect new resource types
+          - apiGroups:  # To collect new resource types
             - "apps"
             resources:
             - deployments
             - replicasets
+            # Below are in case RBAC was not setup from the above linked "Cluster Agent Setup documentation"
+            - pods 
+            - nodes
+            - services
             verbs:
             - list
             - get
             - watch
         ```
-
     これらのアクセス許可は、Agent DaemonSet や Cluster Agent Deployment と同じネームスペースに `datadog-cluster-id` ConfigMap を作成したり、デプロイや ReplicaSets を収集するために必要です。
 
     Cluster Agent により `cluster-id` ConfigMap が作成されない場合、Agent ポッドは起動せず、`CreateContainerConfigError` ステータスに陥ります。この ConfigMap が存在しないために Agent ポッドが動かない場合は、Cluster Agent アクセス許可を更新しポッドを再起動して ConfigMap を作成すると、Agent ポッドは自動的に回復します。

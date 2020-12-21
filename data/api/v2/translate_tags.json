@@ -61,7 +61,7 @@
   },
   "key-management": {
     "name": "Key Management",
-    "description": "Manage your Datadog API and application keys.\nYou need an API and application key with admin rights\nto interact with this endpoint. The full list of keys can be seen on your\n[Datadog API page](https://app.datadoghq.com/account/settings#api)."
+    "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api)."
   },
   "logs": {
     "name": "Logs",

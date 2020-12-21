@@ -1,4 +1,39 @@
 {
+  "ListApplicationKeys": {
+    "description": "組織で利用できるすべてのアプリケーションキーを一覧表示",
+    "summary": "すべてのアプリケーションキーを取得"
+  },
+  "DeleteApplicationKey": {
+    "description": "アプリケーションキーの削除",
+    "summary": "アプリケーションキーの削除"
+  },
+  "UpdateApplicationKey": {
+    "description": "アプリケーションキーの編集",
+    "summary": "アプリケーションキーの編集",
+    "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
+  },
+  "ListCurrentUserApplicationKeys": {
+    "description": "現在のユーザーが利用できるすべてのアプリケーションキーを一覧表示",
+    "summary": "現在のユーザーが所有するすべてのアプリケーションキーを取得する"
+  },
+  "CreateCurrentUserApplicationKey": {
+    "description": "現在のユーザーのアプリケーションキーを作成します",
+    "summary": "現在のユーザーのアプリケーションキーを作成します",
+    "request_schema_description": "アプリケーションキーの作成に使用されるリクエスト。"
+  },
+  "DeleteCurrentUserApplicationKey": {
+    "description": "現在のユーザーが所有するアプリケーションキーを削除します",
+    "summary": "現在のユーザーが所有するアプリケーションキーを削除します"
+  },
+  "GetCurrentUserApplicationKey": {
+    "description": "現在のユーザーが所有するアプリケーションキーを 1 つ取得",
+    "summary": "現在のユーザーが所有するアプリケーションキーを 1 つ取得します"
+  },
+  "UpdateCurrentUserApplicationKey": {
+    "description": "現在のユーザーが所有するアプリケーションキーを編集します",
+    "summary": "現在のユーザーが所有するアプリケーションキーを編集します",
+    "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
+  },
   "DeleteDashboardListItems": {
     "description": "既存のダッシュボードリストからダッシュボードを削除します。",
     "summary": "ダッシュボードリストからアイテムを削除する",
@@ -255,7 +290,7 @@
     "summary": "既存のインシデントサービスを削除する"
   },
   "GetIncidentService": {
-    "description": "インシデントサービスの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",
+    "description": "インシデントサービスの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、\nincluded 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",
     "summary": "インシデントサービスの詳細を取得する"
   },
   "UpdateIncidentService": {
@@ -279,7 +314,7 @@
     "summary": "既存のインシデントチームを削除する"
   },
   "GetIncidentTeam": {
-    "description": "インシデントチームの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
+    "description": "インシデントチームの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、\nincluded 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
     "summary": "インシデントチームの詳細を取得する"
   },
   "UpdateIncidentTeam": {

@@ -6,9 +6,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
       text: 'Network Performance Monitoring'
-    - link: '/integrations/snmp'
+    - link: '/network_performance_monitoring/devices'
       tag: 'Documentation'
-      text: 'SNMP integration'
+      text: 'Network Device Monitoring'
     - link: '/dashboards/widgets/network'
       tag: 'Documentation'
       text: 'Network Widget'
@@ -24,13 +24,13 @@ Supported **platforms** include:
 - SUSE 15+
 - Amazon AMI 2016.03+
 - Amazon Linux 2
-- [Windows 2016+][8] (in public beta)
+- [Windows 2016+][2] (in public beta)
 
 **For Linux OS:** Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.4.0+.
 
 **For Windows OS:** Data collection is available in public beta for Windows versions 2016 or later.
 
-There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][3] feature is not supported on CentOS/RHEL 7.6. 
+There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][3]. The [DNS Resolution][4] feature is not supported on CentOS/RHEL 7.6. 
 
 Network Performance Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
 1) Cilium version 1.6 and above, and
@@ -40,13 +40,13 @@ Network Performance Monitoring is compatible with **Cilium** installations, prov
 
 The following **provisioning systems** are supported:
 
-- Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][4]
-- Chef 12.7+: See the [Datadog Chef recipe][5]
-- Ansible 2.6+: See the [Datadog Ansible role][6]
+- Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][5]
+- Chef 12.7+: See the [Datadog Chef recipe][6]
+- Ansible 2.6+: See the [Datadog Ansible role][7]
 
 ## Setup
 
-To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][7] based on your system setup.
+To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][8] based on your system setup.
 
 Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
@@ -365,10 +365,10 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[3]: /network_performance_monitoring/network_page#dns-resolution
-[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[5]: https://github.com/DataDog/chef-datadog
-[6]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[8]: /network_performance_monitoring/installation/?tab=agent#windows-systems
+[2]: /network_performance_monitoring/installation/?tab=agent#windows-systems
+[3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
+[4]: /network_performance_monitoring/network_page#dns-resolution
+[5]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[6]: https://github.com/DataDog/chef-datadog
+[7]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
+[8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

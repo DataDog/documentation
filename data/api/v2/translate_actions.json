@@ -1,4 +1,28 @@
 {
+  "ListAPIKeys": {
+    "description": "List all API keys available for your account.",
+    "summary": "Get all API keys"
+  },
+  "CreateAPIKey": {
+    "description": "Create an API key.",
+    "summary": "Create an API key",
+    "request_description": "",
+    "request_schema_description": "Request used to create an API key."
+  },
+  "DeleteAPIKey": {
+    "description": "Delete an API key.",
+    "summary": "Delete an API key"
+  },
+  "GetAPIKey": {
+    "description": "Get an API key.",
+    "summary": "Get API key"
+  },
+  "UpdateAPIKey": {
+    "description": "Update an API key.",
+    "summary": "Edit an API key",
+    "request_description": "",
+    "request_schema_description": "Request used to update an API key."
+  },
   "ListApplicationKeys": {
     "description": "List all application keys available for your org",
     "summary": "Get all application keys"

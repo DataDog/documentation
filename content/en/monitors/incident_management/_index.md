@@ -171,7 +171,7 @@ Once an incident is moved to resolved, you will be able to generate a postmortem
 
 ### 5. Follow up and learn from the incident
 
-Create mitigation or post-incident remediation tasks. You can track any of your tasks here by adding tasks in the text field. You can complete them by checking off the box when they are done.
+Create mitigation or post-incident remediation tasks. You can track any of your tasks here by adding tasks in the text field, setting a due date, and assigning a team member. You can complete them by checking off the box when they are done.
 
 Link to a postmortem document, look back on exactly what went wrong, and add follow-up tasks. Postmortems created in Datadog [Notebooks][7] support live collaboration; to link to an existing notebook, click the plus under `Other Docs`. Click the linked notebook to edit with teammates in real-time.
 

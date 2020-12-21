@@ -5,7 +5,6 @@ description: 'NodeJS のオープン標準'
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40
-further_reading:
 ---
 
 ## OpenTracing
@@ -153,9 +152,6 @@ new DatadogExporter({
 
 - OpenTelemetry NodeJS Datadog Exporter の使用法については、[npm][2] または [github][3] を参照してください。
 
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentracing.io/guides/javascript/
 [2]: https://www.npmjs.com/package/opentelemetry-exporter-datadog

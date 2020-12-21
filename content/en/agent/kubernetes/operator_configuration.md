@@ -212,6 +212,7 @@ spec:
 | site                                                                                                       | Set the site of the Datadog intake for Agent data: {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 {{< /table >}}
+
 [1]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
 [2]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
 [3]: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/

@@ -5,7 +5,6 @@ description: Standards ouverts pour Ruby
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
-further_reading: null
 ---
 ## OpenTracing
 
@@ -163,10 +162,6 @@ Les tags qui sont définis directement sur des spans spécifiques remplacement l
 ### Liens OpenTelemetry
 
 - Consultez [rubygems][7] ou [github][8] pour en savoir plus sur l'utilisation de l'exportateur Datadog pour OpenTelemetry dans une application Ruby.
-
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/setup/ruby/#quickstart-for-opentracing
 [2]: /fr/tracing/setup/ruby/#tracer-settings
