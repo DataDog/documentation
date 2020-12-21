@@ -19,6 +19,73 @@ further_reading:
 
 Find below the different initialization options available with the [Datadog Browser SDK][1].
 
+### Scrub sensitive data from your RUM data
+If your RUM data contains sensitive information that need redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize RUM.
+
+This callback function gives you access to every event collected by the RUM SDK before they get sent to Datadog. 
+
+For example, redact email addresses from your web application URLs:
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { Datacenter, datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    beforeSend: (event) => {
+        // remove email from view url
+        event.view.url = event.view.url.replace(/\S+@\S+\.\S+/, "REDACTED_EMAIL")
+    },
+    ...
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            // remove email from view url
+            event.view.url = event.view.url.replace(/\S+@\S+\.\S+/, "REDACTED_EMAIL")
+        },
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            // remove email from view url
+            event.view.url = event.view.url.replace(/\S+@\S+\.\S+/, "REDACTED_EMAIL")
+        },
+        ...
+    });
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+You can update the following fields:
+
+|   Attribute           |   Type    |   Description                                                                                       |
+|-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
+|   `view.url`            |   String  |   The URL of the active web page.                                                                   |
+|   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
+|   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
+|   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
+|   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
+|   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
+|   `resource.url`        |   String  |   The resource URL.                                                                                 |
+
 ### Identify user sessions
 Adding user information to your RUM sessions makes it easy to:
 * Follow the journey of a given user
