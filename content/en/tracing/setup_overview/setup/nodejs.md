@@ -48,18 +48,13 @@ For details about contributing, check out the [development guide][5].
 
 ### Quickstart
 
-<div class="alert alert-warning">
-This library <strong>MUST</strong> be imported and initialized before any instrumented module. When using a transpiler, you <strong>MUST</strong> import and initialize the tracer library in an external file and then import that file as a whole when building your application. This prevents hoisting and ensures that the tracer library gets imported and initialized before importing any other instrumented module.
-</div>
-
-To begin tracing Node.js applications, install the Datadog Tracing library using npm:
+1. To begin tracing Node.js applications, install the Datadog Tracing library using npm:
 
 ```sh
 npm install --save dd-trace
 ```
 
-Next, import and initialize the tracer either in code or via command line
-arguments:
+2. Next, import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any instrumented module in order to patch all of the required libraries for automatic instrumentation. When using a transpiler such as TypeScript, webpack, babel or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
 
 #### In Code
 
