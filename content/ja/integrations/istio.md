@@ -180,7 +180,7 @@ Agent がメトリクスのエンドポイントに到達できない場合は `
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example
 [5]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
-[6]: https://istio.io/latest/docs/tasks/observability/mixer/metrics/collecting-metrics/#before-you-begin
+[6]: https://istio.io/v1.1/docs/tasks/telemetry/
 [7]: https://istio.io/docs/tasks/telemetry/metrics/querying-metrics
 [8]: https://docs.datadoghq.com/ja/agent/kubernetes/
 [9]: https://docs.datadoghq.com/ja/integrations/envoy/#log-collection
