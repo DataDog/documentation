@@ -162,27 +162,21 @@ API details for `tracer.startSpan()` can be found [here][1].
 {{% /tab %}}
 {{< /tabs >}}
 
-## Accessing active spans
-
-The built-in instrumentation and your own custom instrumentation will create spans around meaningful operations. You can access the active span in order to include meaningful data. It's also possible to set the active span on a new scope by using the `activate` method of the scope manager.
-
-```javascript
-tracer.trace('sandwich.make', () => {
-  const span = tracer.scope().active() // the sandwich.make span
-  const child = tracer.startSpan('get_ingredients')
-
-  tracer.scope().activate(child, () => {
-    const span = tracer.scope().active() // the get_ingredients span
-  })
-})
-```
-
-API details for `Scope` can be found [here][3].
-
 ## Adding tags
+
+The built-in instrumentation and your own custom instrumentation will create
+spans around meaningful operations. 
 
 {{< tabs >}}
 {{% tab "Locally" %}}
+
+You can access the active span in order to include meaningful data via tags.
+
+```javascript
+const span = tracer.scope().active()
+```
+
+API details for `Scope` can be found [here][3].
 
 Tags can be added to a span using the `setTag` or `addTags` method on a span. Supported value types are string, number and object.
 
@@ -275,7 +269,7 @@ tracer.use('http', {
 })
 ```
 
-Additionally, traces can be excluded based on their resource name, so that the Agent doesn't send them to Datadog. This and other security and fine-tuning Agent configurations can be found on the [Security][4] page.
+Additionally, traces can be excluded based on their resource name, so that the Agent doesn't send them to Datadog. This and other security and fine-tuning Agent configurations can be found on the [Security][3] page.
 
 ## Further Reading
 
@@ -283,5 +277,4 @@ Additionally, traces can be excluded based on their resource name, so that the A
 
 [1]: /tracing/compatibility_requirements/nodejs/
 [2]: /tracing/visualization/#spans
-[3]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
-[4]: /tracing/security
+[3]: /tracing/security
