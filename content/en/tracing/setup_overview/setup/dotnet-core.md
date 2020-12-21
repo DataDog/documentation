@@ -31,13 +31,13 @@ further_reading:
 
 ## Compatibility Requirements
 
-The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and .NET Core 2.1. It also supports [.NET Framework][6]. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
+The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and .NET Core 2.1. It also supports [.NET Framework][1]. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
 
 ## Getting started
 
 ### Follow the in-app documentation (Recommended)
 
-Follow the [Quickstart instructions][1] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -283,9 +283,9 @@ Once this is set, verify that the environment variables were set with `systemctl
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][3] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][4] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][4].
+For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][5].
 
 Manual instrumentation is supported on .NET Framework 4.5 and above on Windows, on .NET Core 2.0 and above on Windows and Linux, and on .NET 5 on Windows and Linux.
 
@@ -396,7 +396,7 @@ The following tables list the supported configuration variables. Use the first n
 | `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`). Available for versions 1.17.0+                                                                                                                                              |
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][5] documentation for recommendations on how to configure these environment variables.
+Check out the [Unified Service Tagging][6] documentation for recommendations on how to configure these environment variables.
 
 #### Instrumentation
 
@@ -433,9 +433,9 @@ The following table lists configuration variables that are available only when u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/docs
+[1]: /tracing/setup_overview/setup/dotnet-framework
 [2]: /tracing/compatibility_requirements/dotnet-core
-[3]: https://www.nuget.org/packages/Datadog.Trace
-[4]: /tracing/custom_instrumentation/dotnet/
-[5]: /getting_started/tagging/unified_service_tagging/
-[6]: /tracing/setup_overview/setup/dotnet-framework
+[3]: https://app.datadoghq.com/apm/docs
+[4]: https://www.nuget.org/packages/Datadog.Trace
+[5]: /tracing/custom_instrumentation/dotnet/
+[6]: /getting_started/tagging/unified_service_tagging/
