@@ -132,34 +132,6 @@ API details for `tracer.trace()` can be found [here][1].
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
 {{% /tab %}}
-
-{{% tab "Manual" %}}
-
-If the other methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish spans however you may require:
-
-```javascript
-app.get('/make-sandwich', (req, res) => {
-  const sandwichSpan = tracer.startSpan('sandwich.make')
-
-  const ingredientsSpan = tracer.startSpan('get_ingredients')
-  const ingredients = getIngredients()
-  ingredientsSpan.finish()
-
-  const assembleSpan = tracer.startSpan('assemble_sandwich')
-  const assemble = assembleSandwich()
-  assembleSpan.finish()
-
-  sandwichSpan.finish()
-
-  res.end(sandwich)
-})
-```
-
-API details for `tracer.startSpan()` can be found [here][1].
-
-
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#startspan
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Adding tags
@@ -212,8 +184,7 @@ tracer.init({
   }
 })
 
-// this span will have the above tags
-const span = tracer.startSpan()
+// All spans will now have these tags
 ```
 
 {{% /tab %}}
