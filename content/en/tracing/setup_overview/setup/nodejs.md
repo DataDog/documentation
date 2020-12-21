@@ -56,6 +56,8 @@ npm install --save dd-trace
 
 2. Next, import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any instrumented module in order to patch all of the required libraries for automatic instrumentation. When using a transpiler such as TypeScript, webpack, babel or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
 
+3. [Configure the Datadog Agent for APM](#configure-the-datadog-agent-for-apm)
+
 #### In Code
 
 ##### JavaScript
@@ -68,7 +70,7 @@ const tracer = require('dd-trace').init();
 #### TypeScript and Bundlers
 
 For TypeScript and bundlers that support EcmaScript Module syntax, you'll need
-to intialize the tracer in a separate file in order to maintain correct load
+to initialize the tracer in a separate file in order to maintain correct load
 order.
 
 ```typescript
