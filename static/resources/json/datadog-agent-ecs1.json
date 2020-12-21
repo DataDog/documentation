@@ -3,24 +3,24 @@
     {
       "name": "datadog-agent",
       "image": "datadog/agent:latest",
-      "cpu": 10,
-      "memory": 256,
+      "cpu": 100,
+      "memory": 512,
       "essential": true,
       "mountPoints": [
         {
           "containerPath": "/var/run/docker.sock",
           "sourceVolume": "docker_sock",
-          "readOnly": true
+          "readOnly": null
         },
         {
           "containerPath": "/host/sys/fs/cgroup",
           "sourceVolume": "cgroup",
-          "readOnly": true
+          "readOnly": null
         },
         {
           "containerPath": "/host/proc",
           "sourceVolume": "proc",
-          "readOnly": true
+          "readOnly": null
         }
       ],
       "environment": [
