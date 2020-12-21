@@ -7463,57 +7463,6 @@ components:
               type: string
           type: object
       type: object
-    SyntheticsResource:
-      description: Object describing a resource which is the combination of requests
-        (fetch, XHR) and Assets (HTML, CSS, JS, images).
-      properties:
-        duration:
-          description: Number of time the resource was collected.
-          format: double
-          type: number
-        method:
-          description: HTTP method associated to the resource.
-          type: string
-        size:
-          description: Size of the resource in bytes.
-          format: int64
-          type: integer
-        status:
-          description: Status Code of the resource.
-          format: int64
-          type: integer
-        timestamp:
-          description: Timestamp of the resource collection.
-          format: double
-          type: number
-        traceId:
-          description: Trace ID associated with the resource if any.
-          type: string
-        type:
-          $ref: '#/components/schemas/SyntheticsResourceType'
-        url:
-          description: URL of the resource.
-          type: string
-      type: object
-    SyntheticsResourceType:
-      description: Document type to apply an assertion against.
-      enum:
-      - document
-      - stylesheet
-      - fetch
-      - image
-      - script
-      - xhr
-      - other
-      type: string
-      x-enum-varnames:
-      - DOCUMENT
-      - STYLESHEET
-      - FETCH
-      - IMAGE
-      - SCRIPT
-      - XHR
-      - OTHER
     SyntheticsSSLCertificate:
       description: Object describing the SSL certificate used for a Synthetic test.
       properties:
@@ -7641,11 +7590,6 @@ components:
           type: string
         playingTab:
           $ref: '#/components/schemas/SyntheticsPlayingTab'
-        resources:
-          description: Array of resources collected by the test.
-          items:
-            $ref: '#/components/schemas/SyntheticsResource'
-          type: array
         screenshotBucketKey:
           description: Whether or not screenshots where collected by the test.
           type: boolean
