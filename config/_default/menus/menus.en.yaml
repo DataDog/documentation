@@ -2675,6 +2675,10 @@ api_v1:
     parent: Logs Indexes
     url: '#update-an-index'
     generated: true
+  - name: Logs Metrics
+    url: /api/v1/logs-metrics/
+    identifier: Logs Metrics
+    generated: true
   - name: Logs Pipelines
     url: /api/v1/logs-pipelines/
     identifier: Logs Pipelines
@@ -3588,6 +3592,30 @@ api_v2:
   - name: Logs Indexes
     url: /api/v2/logs-indexes/
     identifier: Logs Indexes
+    generated: true
+  - name: Logs Metrics
+    url: /api/v2/logs-metrics/
+    identifier: Logs Metrics
+    generated: true
+  - name: Get all log-based metrics
+    parent: Logs Metrics
+    url: '#get-all-log-based-metrics'
+    generated: true
+  - name: Create a log-based metric
+    parent: Logs Metrics
+    url: '#create-a-log-based-metric'
+    generated: true
+  - name: Delete a log-based metric
+    parent: Logs Metrics
+    url: '#delete-a-log-based-metric'
+    generated: true
+  - name: Get a log-based metric
+    parent: Logs Metrics
+    url: '#get-a-log-based-metric'
+    generated: true
+  - name: Update a log-based metric
+    parent: Logs Metrics
+    url: '#update-a-log-based-metric'
     generated: true
   - name: Logs Pipelines
     url: /api/v2/logs-pipelines/

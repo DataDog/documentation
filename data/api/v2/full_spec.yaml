@@ -209,6 +209,13 @@ components:
         - name
         - -name
         type: string
+    MetricID:
+      description: The name of the log-based metric.
+      in: path
+      name: metric_id
+      required: true
+      schema:
+        type: string
     PageNumber:
       description: Specific page number to return.
       in: query
@@ -292,6 +299,12 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Concurrent Modification
+    ConflictResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Conflict
     ForbiddenResponse:
       content:
         application/json:
@@ -310,6 +323,12 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Not Found
+    TooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Too many requests
     UnauthorizedResponse:
       content:
         application/json:
@@ -2488,6 +2507,211 @@ components:
           type: object
         meta:
           $ref: '#/components/schemas/LogsResponseMetadata'
+      type: object
+    LogsMetricCompute:
+      description: The compute rule to compute the log-based metric.
+      properties:
+        aggregation_type:
+          $ref: '#/components/schemas/LogsMetricComputeAggregationType'
+        path:
+          description: The path to the value the log-based metric will aggregate on
+            (only used if the aggregation type is a "distribution").
+          example: '@duration'
+          type: string
+      required:
+      - aggregation_type
+      type: object
+    LogsMetricComputeAggregationType:
+      description: The type of aggregation to use.
+      enum:
+      - count
+      - distribution
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - DISTRIBUTION
+    LogsMetricCreateAttributes:
+      description: The object describing the Datadog log-based metric to create.
+      properties:
+        compute:
+          $ref: '#/components/schemas/LogsMetricCompute'
+        filter:
+          $ref: '#/components/schemas/LogsMetricFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/LogsMetricGroupBy'
+          type: array
+      required:
+      - compute
+      type: object
+    LogsMetricCreateData:
+      description: The new log-based metric properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LogsMetricCreateAttributes'
+        id:
+          $ref: '#/components/schemas/LogsMetricID'
+        type:
+          $ref: '#/components/schemas/LogsMetricType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    LogsMetricCreateRequest:
+      description: The new log-based metric body.
+      properties:
+        data:
+          $ref: '#/components/schemas/LogsMetricCreateData'
+      required:
+      - data
+      type: object
+    LogsMetricFilter:
+      description: The log-based metric filter. Logs matching this filter will be
+        aggregated in this metric.
+      properties:
+        query:
+          default: '*'
+          description: The search query - following the log search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
+          type: string
+      type: object
+    LogsMetricGroupBy:
+      description: A group by rule.
+      properties:
+        path:
+          description: The path to the value the log-based metric will be aggregated
+            over.
+          example: '@http.status_code'
+          type: string
+        tag_name:
+          description: Eventual name of the tag that gets created. By default, the
+            path attribute is used as the tag name.
+          example: status_code
+          type: string
+      required:
+      - path
+      type: object
+    LogsMetricID:
+      description: The name of the log-based metric.
+      example: logs.page.load.count
+      type: string
+    LogsMetricResponse:
+      description: The log-based metric object.
+      properties:
+        data:
+          $ref: '#/components/schemas/LogsMetricResponseData'
+      type: object
+    LogsMetricResponseAttributes:
+      description: The object describing a Datadog log-based metric.
+      properties:
+        compute:
+          $ref: '#/components/schemas/LogsMetricResponseCompute'
+        filter:
+          $ref: '#/components/schemas/LogsMetricResponseFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/LogsMetricResponseGroupBy'
+          type: array
+      type: object
+    LogsMetricResponseCompute:
+      description: The compute rule to compute the log-based metric.
+      properties:
+        aggregation_type:
+          $ref: '#/components/schemas/LogsMetricResponseComputeAggregationType'
+        path:
+          description: The path to the value the log-based metric will aggregate on
+            (only used if the aggregation type is a "distribution").
+          type: string
+      type: object
+    LogsMetricResponseComputeAggregationType:
+      description: The type of aggregation to use.
+      enum:
+      - count
+      - distribution
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - DISTRIBUTION
+    LogsMetricResponseData:
+      description: The log-based metric properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LogsMetricResponseAttributes'
+        id:
+          $ref: '#/components/schemas/LogsMetricID'
+        type:
+          $ref: '#/components/schemas/LogsMetricType'
+      type: object
+    LogsMetricResponseFilter:
+      description: The log-based metric filter. Logs matching this filter will be
+        aggregated in this metric.
+      properties:
+        query:
+          description: The search query - following the log search syntax.
+          type: string
+      type: object
+    LogsMetricResponseGroupBy:
+      description: A group by rule.
+      properties:
+        path:
+          description: The path to the value the log-based metric will be aggregated
+            over.
+          type: string
+        tag_name:
+          description: Eventual name of the tag that gets created. By default, the
+            path attribute is used as the tag name.
+          type: string
+      type: object
+    LogsMetricType:
+      default: logs_metrics
+      description: The type of the resource. The value should always be logs_metrics.
+      enum:
+      - logs_metrics
+      example: logs_metrics
+      type: string
+      x-enum-varnames:
+      - LOGS_METRICS
+    LogsMetricUpdateAttributes:
+      description: The log-based metric properties that will be updated.
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsMetricFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/LogsMetricGroupBy'
+          type: array
+      type: object
+    LogsMetricUpdateData:
+      description: The new log-based metric properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LogsMetricUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/LogsMetricType'
+      required:
+      - type
+      - attributes
+      type: object
+    LogsMetricUpdateRequest:
+      description: The new log-based metric body.
+      properties:
+        data:
+          $ref: '#/components/schemas/LogsMetricUpdateData'
+      required:
+      - data
+      type: object
+    LogsMetricsResponse:
+      description: All the available log-based metric objects.
+      properties:
+        data:
+          description: A list of log-based metric objects.
+          items:
+            $ref: '#/components/schemas/LogsMetricResponseData'
+          type: array
       type: object
     LogsQueryFilter:
       description: The search and filter query settings
@@ -5496,6 +5720,152 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/metrics:
+    get:
+      description: Get the list of configured log-based metrics with their definitions.
+      operationId: ListLogsMetrics
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all log-based metrics
+      tags:
+      - Logs Metrics
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a metric based on your ingested logs in your organization.
+
+        Returns the log-based metric object from the request body when the request
+        is successful.'
+      operationId: CreateLogsMetric
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsMetricCreateRequest'
+        description: The definition of the new log-based metric.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a log-based metric
+      tags:
+      - Logs Metrics
+      x-codegen-request-body-name: body
+      x-given:
+        logs_metric:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"attributes\"\
+              : {\n      \"filter\": {\n        \"query\": \"source:{{ unique }}\"\
+              \n      },\n      \"compute\": {\n        \"aggregation_type\": \"count\"\
+              \n      }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
+          step: there is a valid "logs_metric" in the system
+      x-undo:
+        operationId: DeleteLogsMetric
+        parameters:
+        - name: metric_id
+          source: data.id
+        type: unsafe
+  /api/v2/logs/config/metrics/{metric_id}:
+    delete:
+      description: Delete a specific log-based metric from your organization.
+      operationId: DeleteLogsMetric
+      parameters:
+      - $ref: '#/components/parameters/MetricID'
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a log-based metric
+      tags:
+      - Logs Metrics
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a specific log-based metric from your organization.
+      operationId: GetLogsMetric
+      parameters:
+      - $ref: '#/components/parameters/MetricID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a log-based metric
+      tags:
+      - Logs Metrics
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a specific log-based metric from your organization.
+
+        Returns the log-based metric object from the request body when the request
+        is successful.'
+      operationId: UpdateLogsMetric
+      parameters:
+      - $ref: '#/components/parameters/MetricID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsMetricUpdateRequest'
+        description: New definition of the log-based metric.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a log-based metric
+      tags:
+      - Logs Metrics
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/logs/config/restriction_queries:
     get:
       description: Returns all restriction queries, including their names and IDs.
@@ -7661,6 +8031,12 @@ tags:
   name: Logs Archives
 - description: '[See API version 1](/api/v1/logs-indexes/).'
   name: Logs Indexes
+- description: Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
+    for your organization.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/logs/logs_to_metrics/
+  name: Logs Metrics
 - description: '[See API version 1](/api/v1/logs-pipelines/).'
   name: Logs Pipelines
 - description: "**Note: This endpoint is in public beta. If you have any feedback,\

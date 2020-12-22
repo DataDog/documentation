@@ -75,6 +75,10 @@
     "name": "Logs Indexes",
     "description": "[See API version 1](/api/v1/logs-indexes/)."
   },
+  "logs-metrics": {
+    "name": "Logs Metrics",
+    "description": "Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics) for your organization."
+  },
   "logs-pipelines": {
     "name": "Logs Pipelines",
     "description": "[See API version 1](/api/v1/logs-pipelines/)."
