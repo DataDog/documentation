@@ -231,8 +231,8 @@ env[DD_ENV] = $DD_ENV
 env[DD_VERSION] = $DD_VERSION
 ```
 
-[1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
 
+[1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
 {{% /tab %}}
 {{< /tabs >}}
 
