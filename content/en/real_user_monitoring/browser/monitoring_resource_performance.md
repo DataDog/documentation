@@ -16,27 +16,24 @@ further_reading:
     text: "RUM Dashboards"
 ---
 
-Metrics for resources and assets are collected for every page load. Key resources included are [XMLHttpRequest][1] (XHRs) and Fetch requests, but also images, CSS files, JavaScript assets, and font files.
+The RUM SDK collects resources and assets for every RUM view (i.e. page load): [XMLHttpRequest][1] (XHRs) and Fetch requests, but also images, CSS files, JavaScript assets, and font files. A RUM Resource event is generated for each one of them, with detailed timings and metadata.
 
-RUM Resources contain all context from the active RUM View.
+RUM Resources inherit from all the context related to the active RUM View at the time of collection.
 
 ## Link RUM Resources to APM traces
 
-Connecting your RUM resource performance metrics with APM traces is a powerful way to troubleshoot your application's performance issues. See [Connect RUM and Traces][2] for information about setting up direct drill-down links from RUM front-end information to backend and infrastructure traces from APM.
+Connect your RUM data with corresponding backend traces to get end-to-end visibility into requests as they move across layers of your stack. This enables you to:
+
+* locate backend problems that resulted in a user-facing error
+* identify the scope of which users are affected by an issue within your stack
+* see complete end-to-end requests on the flame graphs, allowing you to seamlessly navigate between RUM and APM and back with precise context
+
+See the [Connect RUM and Traces documentation page][2] for information about setting up this feature.
 
 {{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource"  >}}
+## Resource timing and metrics
 
-## Resource timing
-
-Detailed network timing data for resources are collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3]. If you are having trouble collecting detailed timing for some resources, see [troubleshooting information](#resource-timing-troubleshooting).
-
-## Filter on third-party resources
-
-RUM infers the name and category of the resource provider from the resource URL host part. If the resource URL host matches the current page URL host, the category is set to `first party`. Otherwise, the category will be `cdn`, `analytics`, or `social` for example.
-
-## Performance metrics for resources
-
-For information about the default attributes for all RUM event types, see [RUM Browser Data Collected][4]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][5]. The following table lists Datadog-specific metrics along with performance metrics collected from [Performance Resource Timing API][3].
+Detailed network timing data for resources are collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
 
 | Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,6 +45,8 @@ For information about the default attributes for all RUM event types, see [RUM B
 | `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart)                                                                      |
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
 | `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
+
+**Note**: If you are having trouble collecting detailed timing for some resources, head to the [Resource timing and CORS section](#resource-timing-and-cors).
 
 ## Resource attributes
 
@@ -65,10 +64,16 @@ For information about the default attributes for all RUM event types, see [RUM B
 | `resource.provider.domain`      | string | The resource provider domain.                                            |
 | `resource.provider.type`      | string | The resource provider type (for example `first-party`, `cdn`, `ad`, `analytics`).                                            |
 
-## Resource timing troubleshooting
+## Identify third-party resources
 
-If you get a value of zero for resource sizes or timestamps (metrics such as `redirectStart`, `redirectEnd`, `domainLookupStart`, `domainLookupEnd`, `connectStart`, `connectEnd`, `secureConnectionStart`, `requestStart`, and `responseStart`), it is because the providing server's Cross-Origin Resource Sharing (CORS) same-origin access policy is restricting them. To resolve this, enable extended data collection for CORS resources by adding the the `Timing-Allow-Origin` HTTP response header to your cross-origin resources, with a value that specifies the origins that are allowed to access the restricted timestamp values.
+RUM infers the name and category of the resource provider from the resource URL host part. If the resource URL host matches the current page URL host, the category is set to `first party`. Otherwise, the category will be `cdn`, `analytics`, or `social` for example.
 
+## Resource timing and CORS
+
+
+The [Resource Timing API][3] is used to collect RUM resource timing. It is subject to the cross-origin security limitations that browsers enforce on scripts. For example, if your web application is hosted on `www.example.com` and it loads your images via `images.example.com`, you will only get timing for resources loaded hosted on `www.example.com` by default.
+
+To resolve this, enable extended data collection for resources subject to CORS by adding the `Timing-Allow-Origin` HTTP response header to your cross-origin resources. For example, to grant access to the resource timing to any origin, use `Timing-Allow-Origin: *`. Find more about CORS on the [MDN Web Docs][4]
 
 ## Further Reading
 
@@ -77,5 +82,4 @@ If you get a value of zero for resource sizes or timestamps (metrics such as `re
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [2]: /real_user_monitoring/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[4]: /real_user_monitoring/browser/data_collected/?tab=resource#default-attributes
-[5]: /real_user_monitoring/browser/advanced_configuration/
+[4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS
