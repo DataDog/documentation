@@ -1,6 +1,10 @@
 ---
 title: Manage Traffic Costs with NPM
-kind: documentation
+kind: guide
+further_reading:
+- link: "/logs/explorer/analytics/?tab=timeseries#overview"
+  tag: "Documentation"
+  text: "Learn more about Log Analytics"
 ---
 
 Datadog can help you reduce your traffic costs by identifying the sources of traffic that are contributing the most to your cloud provider bill. Cloud providers charge differently for traffic within an availability zone, traffic between availability zones (AZs), and traffic between regions (this pricing may differ by region). Cross-regional traffic is not only the most expensive, but also the most vulnerable to errors, latency, and security threats.
