@@ -36,6 +36,29 @@ To capture full details on the Datadog tracer, enable debug mode on your tracer 
 
 These logs can surface instrumentation errors or integration-specific errors.  For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][3].
 
+## Optimal performance guidance
+
+Your profiler can submit spans with timestamps up to 18 hours in the past and two hours in the future from the current time.
+
+To maintain reasonable performance levels, Datadog truncates the following strings if they exceed the indicated number of characters:
+
+| Name       | Characters |
+|------------|------------|
+| service    |  100       |
+| operation  |  100       |
+| type       |  100       |
+| resource   |  5000      |
+| tag key    |  200       |
+| tag value  |  5000      |
+
+Datadog applies the following quotas, per 10 minute interval, which you can optionally increase by contacting [support][1]:
+
+- 1000 unique environments and service combinations
+- 30 unique host groups per environment
+- 100 unique operation names per environment and service
+- 1000 unique resources per environment, service, and operation name
+- 30 unique versions per environment and service
+
 ## APM rate limits
 
 Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][4].  If you have questions, before you change the limits, consult with our [support team][1].
