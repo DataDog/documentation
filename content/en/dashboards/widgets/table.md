@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The table visualization is available on timeboards and screenboards. It displays columns of metrics grouped by tag key. For example, see `system.cpu.system` and `system.cpu.user` grouped by `service`:
+The table visualization is available on dashboards. It displays columns of aggregated data grouped by tag key. For example, see `system.cpu.system` and `system.cpu.user` grouped by `service`:
 
 {{< img src="dashboards/widgets/table/table_widget_1.png" alt="Table widget"  style="width:80%;">}}
 
