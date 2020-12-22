@@ -20424,6 +20424,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
   name: Logs Indexes
+- description: '[Check API version 2](/api/v2/logs-metrics/).'
+  name: Logs Metrics
 - description: "Pipelines and processors operate on incoming logs, parsing\nand transforming\
     \ them into structured attributes for easier querying.\n\n- See the [pipelines\
     \ configuration page](https://app.datadoghq.com/logs/pipelines)\n  for a list\
