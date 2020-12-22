@@ -316,4 +316,4 @@ In addition to default attributes, add [specific global context][8] to all event
 [6]: /real_user_monitoring/data_collected/view#single-page-applications
 [7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 [8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
-[9]: /real_user_monitoring/browser/data_collected/#default-attributes
+[9]: /real_user_monitoring/browser/data_collected/?tab=view#default-attributes
