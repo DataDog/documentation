@@ -36,11 +36,11 @@ To capture full details on the Datadog tracer, enable debug mode on your tracer 
 
 These logs can surface instrumentation errors or integration-specific errors.  For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][3].
 
-## Optimal performance guidance
+## Data schema and quotas
 
-Your profiler can submit spans with timestamps up to 18 hours in the past and two hours in the future from the current time.
+Your instrumented application can submit spans with timestamps up to 18 hours in the past and two hours in the future from the current time.
 
-To maintain reasonable performance levels, Datadog truncates the following strings if they exceed the indicated number of characters:
+Datadog truncates the following strings if they exceed the indicated number of characters:
 
 | Name       | Characters |
 |------------|------------|
