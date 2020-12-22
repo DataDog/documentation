@@ -23,14 +23,14 @@ further_reading:
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
 ## Error Origins
-Front-end errors are split in 4 different categories depending on their `error.origin`:
+Front-end errors are split into four different categories depending on their `error.origin`:
 
-- **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the documentation][1].
+- **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the network errors documentation][1].
 - **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
 - **console**: `console.error()` API calls.
 - **custom**: Errors sent with the [RUM `addError` API][2] default to `custom`.
 
-## Error attributes
+## Error Attributes
 
 For information about the default attributes for all RUM event types, see [Data Collected][3]. For information about configuring for sampling, global context, or custom user actions, see [Advanced Configuration][4].
 
@@ -43,7 +43,7 @@ For information about the default attributes for all RUM event types, see [Data 
 
 ### Network errors
 
-Network errors include information about failing HTTP requests. The following facets are also collected:
+Network errors include information about failing HTTP requests. The following facets are collected:
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
@@ -66,7 +66,7 @@ Source errors include code-level information about the error. More information a
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                   |
 
-## Collect errors manually
+## Collect Errors Manually
 
 Monitor handled exceptions, handled promise rejections and other errors not tracked automatically by the RUM SDK with the `addError()` API:
 
@@ -78,7 +78,7 @@ addError(
 );
 ```
 
-**Note**: The [Error Tracking][6] feature processes errors sent with source set to `custom` or `source` and that contain a stacktrace.
+**Note**: The [Error Tracking][6] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
