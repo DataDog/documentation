@@ -9,7 +9,7 @@ base_integrations_url: https://docs.datadoghq.com/integrations/
 image_map:
   - source:
       - kubernetes
-    image: kube_apiserver_metrics
+    image: kubernetes
     append: false
   - source:
       - azure
