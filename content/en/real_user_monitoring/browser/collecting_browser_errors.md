@@ -28,11 +28,11 @@ Front-end errors are split into four different categories depending on their `er
 - **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the network errors documentation][1].
 - **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
 - **console**: `console.error()` API calls.
-- **custom**: Errors sent with the [RUM `addError` API][2] default to `custom`.
+- **custom**: Errors sent with the [RUM `addError` API](#collect-errors-manually) that default to `custom`.
 
 ## Error Attributes
 
-For information about the default attributes for all RUM event types, see [Data Collected][3]. For information about configuring for sampling, global context, or custom user actions, see [Advanced Configuration][4].
+For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling, global context, or custom user actions, see [Advanced Configuration][3].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -60,7 +60,7 @@ Network errors include information about failing HTTP requests. The following fa
 
 ### Source errors
 
-Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][5].
+Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][4].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -70,24 +70,24 @@ Source errors include code-level information about the error. More information a
 
 Monitor handled exceptions, handled promise rejections and other errors not tracked automatically by the RUM SDK with the `addError()` API:
 
-```javascript
+{{< code-block lang="javascript" >}}
 addError(
     error: unknown,
     context?: Context,
     source: ErrorSource.CUSTOM | ErrorSource.NETWORK | ErrorSource.SOURCE = ErrorSource.CUSTOM
 );
-```
+{{< /code-block >}}
 
-**Note**: The [Error Tracking][6] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace.
+**Note**: The [Error Tracking][5] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```javascript
+{{< code-block lang="javascript" >}}
 import { datadogRum } from '@datadog/browser-rum';
 
 // Send a custom error with context
-const error = new Error('Something wrong occured.');
+const error = new Error('Something wrong occurred.');
 
 datadogRum.addError(error, {
     pageStatus: 'beta',
@@ -104,13 +104,14 @@ try {
 } catch (error) {
     datadogRum.addError(error, undefined, 'source');
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```javascript
+
+{{< code-block lang="javascript" >}}
 // Send a custom error with context
-const error = new Error('Something wrong occured.');
+const error = new Error('Something wrong occurred.');
 
 DD_RUM.onReady(function() {
     DD_RUM.addError(error, {
@@ -133,13 +134,13 @@ try {
         DD_RUM.addError(error, undefined, 'source');
     })
 }
-```
+{{< /code-block >}}
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```javascript
+{{< code-block lang="javascript" >}}
 // Send a custom error with context
-const error = new Error('Something wrong occured.');
+const error = new Error('Something wrong occurred.');
 
 window.DD_RUM && DD_RUM.addError(error, {
     pageStatus: 'beta',
@@ -156,7 +157,7 @@ try {
 } catch (error) {
     window.DD_RUM && DD_RUM.addError(error, undefined, 'source');
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -168,8 +169,7 @@ try {
 
 
 [1]: /real_user_monitoring/data_collected/error/#network-errors
-[2]: /real_user_monitoring/browser/advanced_configuration#custom-errors
-[3]: /real_user_monitoring/browser/data_collected/
-[4]: /real_user_monitoring/browser/advanced_configuration/
-[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[6]: /real_user_monitoring/error_tracking
+[2]: /real_user_monitoring/browser/data_collected/
+[3]: /real_user_monitoring/browser/advanced_configuration/
+[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[5]: /real_user_monitoring/error_tracking
