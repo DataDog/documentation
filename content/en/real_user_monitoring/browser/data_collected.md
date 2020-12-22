@@ -31,7 +31,7 @@ By default, all data collected is kept at full granularity for 15 days. The Data
 - [Error][4]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
 - [User Action][5]: A User Action event is a custom event that can be generated for a given user action.
 
-There are metrics and attributes that are specific to a given Event type. For example the metric `view.loading_time` is associated with "View" RUM Events and the attribute `resource.method` is associated with "Resource" RUM Events. There are also [Default Attributes][6] such as the original page a user is on (`view.url`) as well as user information such as Device and Geolocation, that are present on all the RUM Events. 
+There are metrics and attributes that are specific to a given Event type. For example the metric `view.loading_time` is associated with "View" RUM Events and the attribute `resource.method` is associated with "Resource" RUM Events. There are also [Default Attributes][9] such as the original page a user is on (`view.url`) as well as user information such as Device and Geolocation, that are present on all the RUM Events. 
 
 {{< tabs >}}
 {{% tab "View" %}}
