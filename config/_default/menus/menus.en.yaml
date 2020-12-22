@@ -3748,6 +3748,65 @@ api:
         - GetLogsIndexOrder
       unstable:
         - v1
+  - name: Logs Metrics
+    url: /api/latest/logs-metrics/
+    identifier: logs-metrics
+    generated: true
+  - name: Update a log-based metric
+    url: '#update-a-log-based-metric'
+    identifier: update-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsMetric
+      unstable: []
+  - name: Get a log-based metric
+    url: '#get-a-log-based-metric'
+    identifier: get-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsMetric
+      unstable: []
+  - name: Delete a log-based metric
+    url: '#delete-a-log-based-metric'
+    identifier: delete-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteLogsMetric
+      unstable: []
+  - name: Create a log-based metric
+    url: '#create-a-log-based-metric'
+    identifier: create-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateLogsMetric
+      unstable: []
+  - name: Get all log-based metrics
+    url: '#get-all-log-based-metrics'
+    identifier: get-all-log-based-metrics
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsMetrics
+      unstable: []
   - name: Logs Pipelines
     url: /api/latest/logs-pipelines/
     identifier: logs-pipelines
