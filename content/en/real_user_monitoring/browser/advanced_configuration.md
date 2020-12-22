@@ -22,7 +22,7 @@ Find below the different initialization options available with the [Datadog Brow
 ### Scrub sensitive data from your RUM data
 If your RUM data contains sensitive information that need redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize RUM.
 
-This callback function gives you access to every event collected by the RUM SDK before they get sent to Datadog. 
+This callback function gives you access to every event collected by the RUM SDK before they get sent to Datadog.
 
 For example, redact email addresses from your web application URLs:
 
@@ -30,7 +30,7 @@ For example, redact email addresses from your web application URLs:
 {{% tab "NPM" %}}
 
 ```javascript
-import { Datacenter, datadogRum } from '@datadog/browser-rum';
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     ...,
@@ -149,12 +149,12 @@ By default, no sampling is applied on the number of collected sessions. To apply
 {{% tab "NPM" %}}
 
 ```javascript
-import { Datacenter, datadogRum } from '@datadog/browser-rum';
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
-    datacenter: Datacenter.US,
+    site: '<DATADOG_SITE>',
     sampleRate: 90,
 });
 ```
@@ -172,6 +172,7 @@ datadogRum.init({
     DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
+        site: '<DATADOG_SITE>',
         sampleRate: 90,
     })
   })
@@ -185,6 +186,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
+        site: '<DATADOG_SITE>',
         sampleRate: 90,
     });
 ```
@@ -219,7 +221,7 @@ datadogRum.addRumGlobalContext('activity', {
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
 // Code example
@@ -234,7 +236,7 @@ DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 
 ```javascript
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
 // Code example
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {

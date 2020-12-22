@@ -27,6 +27,9 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run API tests on internal endpoints"
+- link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog"
+  tag: "Blog"
+  text: "Monitor your workflows with Datadog SSL, TLS, and Multistep API tests"
 ---
 
 ## Overview
