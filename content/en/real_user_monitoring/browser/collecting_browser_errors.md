@@ -83,7 +83,7 @@ addError(
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-{{< code-block lang="javascript" >}}
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 // Send a custom error with context
@@ -104,12 +104,11 @@ try {
 } catch (error) {
     datadogRum.addError(error, undefined, 'source');
 }
-{{< /code-block >}}
-
+```
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
-{{< code-block lang="javascript" >}}
+```javascript
 // Send a custom error with context
 const error = new Error('Something wrong occurred.');
 
@@ -134,11 +133,11 @@ try {
         DD_RUM.addError(error, undefined, 'source');
     })
 }
-{{< /code-block >}}
+```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-{{< code-block lang="javascript" >}}
+```javascript
 // Send a custom error with context
 const error = new Error('Something wrong occurred.');
 
@@ -157,8 +156,7 @@ try {
 } catch (error) {
     window.DD_RUM && DD_RUM.addError(error, undefined, 'source');
 }
-{{< /code-block >}}
-
+```
 {{% /tab %}}
 {{< /tabs >}}
 
