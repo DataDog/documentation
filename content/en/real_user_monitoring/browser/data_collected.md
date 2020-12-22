@@ -31,6 +31,8 @@ By default, all data collected is kept at full granularity for 15 days. The Data
 - [Error][4]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
 - [User Action][5]: A User Action event is a custom event that can be generated for a given user action.
 
+There are metrics and attributes that are specific to a given Event type. For example the metric `view.loading_time` is associated with "View" RUM Events and the attribute `resource.method` is associated with "Resource" RUM Events. There are also [Default Attributes][6] such as the original page a user is on (`view.url`) as well as user information such as Device and Geolocation, that are present on all the RUM Events. 
+
 {{< tabs >}}
 {{% tab "View" %}}
 
@@ -58,11 +60,11 @@ To account for modern web applications, loading time watches for network request
 
 Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK automatically. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
-## View timing and metrics
+## View Timing Metrics
 
 {{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
 
-| Attribute                              | Type        | Decription                                                                                                                                                                                                                 |
+| Metric                              | Type        | Decription                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
 | `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from the data collected documentation][8]|
@@ -98,9 +100,9 @@ Detailed network timing data for the loading of an application’s resources are
 
 {{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics"  >}}
 
-## Resource timing
+## Resource Timing Metrics
 
-| Attribute                              | Type           | Description                                                                                                                               |
+| Metric                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | number         | Entire time spent loading the resource.                                                                                                   |
 | `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
@@ -111,7 +113,7 @@ Detailed network timing data for the loading of an application’s resources are
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
 | `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
 
-## Resource attributes
+## Resource Attributes
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
@@ -135,9 +137,9 @@ Detailed network timing data for the loading of an application’s resources are
 
 [Long tasks][1] are tasks that block the main thread for 50 milliseconds or more. They may cause high input latency, delayed time to interaction, etc. Understand what causes these long tasks in your browser performance profiler.
 
-## Long task timing
+## Long Task Timing Metrics
 
-| Attribute  | Type   | Description                |
+| Metric  | Type   | Description                |
 |------------|--------|----------------------------|
 | `long_task.duration` | number | Duration of the long task. |
 
@@ -210,9 +212,9 @@ Once an interaction is detected, the RUM SDK watches for network requests an DOM
 ## Custom User Actions
 Custom User Actions are User Actions declared and sent manually via the [`addUserAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
 
-## Action timing and metrics
+## Action Timing Metrics
 
-| Attribute    | Type   | Description              |
+| Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][4]. |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
@@ -238,7 +240,7 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 
 ## Default attributes
 
-These five event types have attributes attached by default:
+Each of these five event types have the following attributes attached by default. So you can use these regardles of the type of RUM Event you are querying for.
 
 ### Core
 
@@ -314,3 +316,4 @@ In addition to default attributes, add [specific global context][8] to all event
 [6]: /real_user_monitoring/data_collected/view#single-page-applications
 [7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 [8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[9]: /real_user_monitoring/browser/data_collected/#default-attributes
