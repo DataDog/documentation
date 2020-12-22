@@ -49,7 +49,7 @@ The Single Sign-on URL is also displayed on the [Team page][6]. Loading this URL
 
 Users with the Access Management permission can assign or remove Datadog roles based on a user's SAML-assigned attributes:
 
-1. Go to Account Management and click the Mappings tab.
+1. Go to Teams and click the Mappings tab.
 
 2. Click the **New Mapping** button. 
 
