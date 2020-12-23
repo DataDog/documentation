@@ -3,17 +3,15 @@ title: Intro to Profiling
 kind: Documentation
 ---
 
-# Intro to Profiling
+You may have heard that profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler before, it can seem like a bit of a dark art.
 
-You may have heard that profiling can make your services faster, cheaper, and more reliable, but if you haven’t used a profiler before, it can seem like a bit of a dark art.
-
-In this guide, we’ll explain profiling, then profile a sample service that has a performance problem and see how we can use Continuous Profiler to understand and fix the problem!
+In this guide, we'll explain profiling, then profile a sample service that has a performance problem and see how we can use Continuous Profiler to understand and fix the problem!
 
 ## What is Profiling?
 
-A profiler shows how much "work" each line of code is doing by collecting data about the program as it’s running. For example, infrastructure monitoring might show that your app servers are using 80% of their CPU but you may not know why. Profiling could then show you that function `doSomeWork` is using 48% of the CPU, function `renderGraph` is using another 19%, and so on. This is important when working on performance problems because many programs spend a lot of time in very few places and it’s often not obvious which places those are. Guessing at which parts of a program to optimize can often cause engineers to spend a lot of time and not get much in the way of results. By using a profiler, we find exactly which parts of the code we should optimize to get the most bang for our buck.
+A profiler shows how much "work" each line of code is doing by collecting data about the program as it's running. For example, infrastructure monitoring might show that your app servers are using 80% of their CPU but you may not know why. Profiling could then show you that function `doSomeWork` is using 48% of the CPU, function `renderGraph` is using another 19%, and so on. This is important when working on performance problems because many programs spend a lot of time in very few places and it's often not obvious which places those are. Guessing at which parts of a program to optimize can often cause engineers to spend a lot of time and not get much in the way of results. By using a profiler, we find exactly which parts of the code we should optimize to get the most bang for our buck.
 
-If you’ve used an APM tool, you might think of profiling like a "deeper" tracer that provides a very fine grained view of your code without needing any instrumentation.
+If you've used an APM tool, you might think of profiling like a "deeper" tracer that provides a very fine grained view of your code without needing any instrumentation.
 
 Datadog Continuous Profiler can track various types of "work", including CPU usage, amount and types of objects being allocated in memory, time spent waiting to acquire locks, amount of network or file I/O, and more! The profile types available depend on the language being profiled.
 
@@ -21,9 +19,9 @@ We've got an [example service](https://github.com/DataDog/dd-continuous-profiler
 
 ## Prerequisites
 
-You’ll need:
+You'll need:
 1. [docker-compose](https://docs.docker.com/compose/install/)
-2. A Datadog account and [API key](https://app.datadoghq.com/account/settings#api) (you don’t need an application key). If you don’t already have a Datadog account, sign up for a free trial [here](https://app.datadoghq.com/signup).
+2. A Datadog account and [API key](https://app.datadoghq.com/account/settings#api) (you don't need an application key). If you don't already have a Datadog account, sign up for a free trial [here](https://app.datadoghq.com/signup).
 
 ## Run the Example
 
@@ -45,11 +43,11 @@ You can try out the API with:
 curl -s http://movies-api-java:8080/movies?q=wars | jq
 ```
 
-There’s also a Python version of the example service, called `movies-api-py`. If that’s more your style, you can adjust the commands throughout the tutorial accordingly.
+There's also a Python version of the example service, called `movies-api-py`. If that's more your style, you can adjust the commands throughout the tutorial accordingly.
 
 ## Benchmark It
 
-Let’s generate more traffic using the ApacheBench tool, [ab](https://httpd.apache.org/docs/2.4/programs/ab.html). We’ll have it run 10 concurrent HTTP clients sending requests for 20 seconds. Still inside the toolbox container:
+Let's generate more traffic using the ApacheBench tool, [ab](https://httpd.apache.org/docs/2.4/programs/ab.html). We'll have it run 10 concurrent HTTP clients sending requests for 20 seconds. Still inside the toolbox container:
 ```
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ...
@@ -68,11 +66,11 @@ Percentage of the requests served within a certain time (ms)
 
 ## How to Read a Profile
 
-Head on over to https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java and look for a profile covering the period in which we were generating traffic. It may take a minute or so. You’ll be able to tell which profile includes the load test because the CPU usage will be higher:
+Head on over to https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java and look for a profile covering the period in which we were generating traffic. It may take a minute or so. You'll be able to tell which profile includes the load test because the CPU usage will be higher:
 
 {{< img src="tracing/profiling/intro_to_profiling/list.png" alt="List of profiles">}}
 
-When you open it, you’ll see a visualization of the profile that looks like this:
+When you open it, you'll see a visualization of the profile that looks like this:
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph.png" alt="Flame graph">}}
 
@@ -86,13 +84,13 @@ The tooltip shows us that roughly 390ms (0.90%) of CPU time was spent within thi
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_length.png" alt="Flame graph String.length() frame">}}
 
-If we hover over `String.length()`, we see it took about 112ms of CPU time. So we can also tell that 278ms seconds were spent directly in `parse()`: 390ms - 112ms. That’s visually represented by the part of the `parse()` box that doesn’t have anything below it.
+If we hover over `String.length()`, we see it took about 112ms of CPU time. So we can also tell that 278ms seconds were spent directly in `parse()`: 390ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
 
-It’s worth calling out that the flame graph _does not_ represent the progression of time. Looking at this bit of the profile,
+It's worth calling out that the flame graph _does not_ represent the progression of time. Looking at this bit of the profile,
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_write.png" alt="Flame graph section with write() frames next to each other">}}
 
-`Gson$1.write()` didn’t run before `TypeAdapters$16.write()` but it may not have run after it either. They could have been running concurrently, or the program could have run several calls of one, then several calls of the other, and kept switching back and forth. The flame graph merges together all the times that a program was running the same series of functions so you can tell at a glance which parts of the code were using the most CPU without tons of tiny boxes showing each time a function was called.
+`Gson$1.write()` didn't run before `TypeAdapters$16.write()` but it may not have run after it either. They could have been running concurrently, or the program could have run several calls of one, then several calls of the other, and kept switching back and forth. The flame graph merges together all the times that a program was running the same series of functions so you can tell at a glance which parts of the code were using the most CPU without tons of tiny boxes showing each time a function was called.
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_replyjson.png" alt="Flame graph with mouse over replyJSON()">}}
 
@@ -118,7 +116,7 @@ On an Allocated Memory profile, the size of the boxes shows how much memory each
 
 ## Fixing the Problem
 
-Time to look at the code and see what’s going on! Looking again at the CPU flame graph, we can see that these expensive code paths go through a lambda on line 66, which calls `LocalDate.parse()`:
+Time to look at the code and see what's going on! Looking again at the CPU flame graph, we can see that these expensive code paths go through a lambda on line 66, which calls `LocalDate.parse()`:
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_sort_lambda.png" alt="Flame graph with mouse over sort lambda">}}
 
@@ -126,7 +124,7 @@ That corresponds to this bit of code in [`dd-continuous-profiler-example/java/sr
 
 {{< img src="tracing/profiling/intro_to_profiling/slow_sort_code.png" alt="Slow sort code">}}
 
-This is the sorting logic in the API, to return results in order of descending release date. It does this by using the release date converted to a `LocalDate` as the sorting key. We could cache these `LocalDate`s so we only parse each movie’s release date once rather than on every request, but there’s an even easier fix. We can notice that we’re parsing dates in ISO 8601 format (yyyy-mm-dd), which means we can sort them as strings and not parse them at all!
+This is the sorting logic in the API, to return results in order of descending release date. It does this by using the release date converted to a `LocalDate` as the sorting key. We could cache these `LocalDate`s so we only parse each movie's release date once rather than on every request, but there's an even easier fix. We can notice that we're parsing dates in ISO 8601 format (yyyy-mm-dd), which means we can sort them as strings and not parse them at all!
 
 Go ahead and replace the whole try/catch with `return m.releaseDate;` like this:
 
@@ -140,7 +138,7 @@ docker-compose up -d
 
 ## Re-test
 
-Let’s check the results! Generate traffic once more like we did earlier:
+Let's check the results! Generate traffic once more like we did earlier:
 ```
 docker exec -it dd-continuous-profiler-example_toolbox_1 bash
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
@@ -163,13 +161,13 @@ Percentage of the requests served within a certain time (ms)
 
 p99 went from 795ms to 218ms, and overall, this is four to six times faster than before!
 
-If you find the profile containing this new load test and look at the CPU profile, you’ll see that the `replyJSON` parts of the flame graph that we were looking at are now a much smaller percentage of the total CPU usage.
+If you find the profile containing this new load test and look at the CPU profile, you'll see that the `replyJSON` parts of the flame graph that we were looking at are now a much smaller percentage of the total CPU usage.
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="Flame graph with the optimized replyJSON() stack traces">}}
 
 ## Clean up
 
-When you’re done exploring, you can clean up with:
+When you're done exploring, you can clean up with:
 ```
 docker-compose down
 ```
@@ -180,7 +178,7 @@ Improving CPU usage like this can easily translate into saving money. If this ha
 
 ## Do it to Your Service
 
-We’ve only skimmed the surface here but this should give you a sense of how to get started. *[Give it a shot on your services](/tracing/profiler/getting_started/)*!
+We've only skimmed the surface here but this should give you a sense of how to get started. *[Give it a shot on your services](/tracing/profiler/getting_started/)*!
 
 {{< site-region region="us" >}}{{< /site-region >}}
 {{< site-region region="eu" >}}{{< /site-region >}}
