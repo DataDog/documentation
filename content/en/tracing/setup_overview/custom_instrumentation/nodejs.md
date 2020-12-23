@@ -34,7 +34,7 @@ spans around meaningful operations.
 {{< tabs >}}
 {{% tab "Locally" %}}
 
-You can access the active span in order to include meaningful data via tags.
+You can access the active span in order to include meaningful data by adding tags.
 
 ```javascript
 const span = tracer.scope().active()
@@ -42,7 +42,7 @@ const span = tracer.scope().active()
 
 API details for `Scope` can be found [here][1].
 
-Tags can be added to a span using the `setTag` or `addTags` method on a span. Supported value types are string, number and object.
+You can add tags to a span using the `setTag` or `addTags` method on a span. Supported value types are string, number, and object.
 
 ```javascript
 // add a foo:bar tag
@@ -67,7 +67,7 @@ span.addTags({
 
 {{% tab "Globally" %}}
 
-Tags can be added to every span by configuring them directly on the tracer. This can be done with the comma-separated `DD_TAGS` environment variable or with the `tags` option on the tracer initialization.
+You can add tags to every span by configuring them directly on the tracer, either with with the comma-separated `DD_TAGS` environment variable or with the `tags` option on the tracer initialization:
 
 ```javascript
 // equivalent to DD_TAGS=foo:bar,baz:qux
@@ -107,7 +107,7 @@ API details for individual plugins can be found [here][1].
 
 {{% tab "Errors" %}}
 
-Errors can be added to a span with the special `error` tag that supports error objects. This will split the error in 3 different tags: `error.type`, `error.msg` and `error.stack`.
+Errors can be added to a span with the special `error` tag that supports error objects. This will split the error into three tags: `error.type`, `error.msg` and `error.stack`.
 
 ```javascript
 try {
