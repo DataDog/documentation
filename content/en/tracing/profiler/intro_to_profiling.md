@@ -66,7 +66,7 @@ Percentage of the requests served within a certain time (ms)
 
 ## How to Read a Profile
 
-Head on over to https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java and look for a profile covering the period in which we were generating traffic. It may take a minute or so. You'll be able to tell which profile includes the load test because the CPU usage will be higher:
+Head on over to [Profile Search](https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java) and look for a profile covering the period in which we were generating traffic. It may take a minute or so. You'll be able to tell which profile includes the load test because the CPU usage will be higher:
 
 {{< img src="tracing/profiling/intro_to_profiling/list.png" alt="List of profiles">}}
 
