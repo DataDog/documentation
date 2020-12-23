@@ -32,11 +32,13 @@ The following examples are covered in this guide:
 
 - This guide features `curl` examples. Install [curl][3] if you do not have it installed, or reference additional language examples for this API endpoint in the [API documentation][1].
 
+**Note:** By default, all users with Admin, Standard, and Read-Only roles have access to all log data. But the search results might be restricted based on the permissions of the user owning the `<DATADOG_APP_KEY>`.[4]
+
 ## Examples
 
 ### Basic search
 
-To retrieve all log events within a specific time period, use the following [Search Syntax][4] to complete the API call.
+To retrieve all log events within a specific time period, use the following [Search Syntax][5] to complete the API call.
 
 `from` indicates the `start time` and `to` indicates the `end time` for the log data. `query` indicates the search query that must be executed.
 
@@ -534,3 +536,4 @@ In the response, the next two results, `joe` with 500 `pageviews` and `chris` wi
 [2]: /api/v1/authentication/
 [3]: https://curl.haxx.se/download.html
 [4]: /logs/search_syntax/
+[5]: /account_management/rbac/permissions/?tab=ui#log-data-access
