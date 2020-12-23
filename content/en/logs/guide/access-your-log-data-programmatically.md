@@ -247,7 +247,7 @@ Log events are retrieved in ascending order of the `pageViews` facet values as d
 
 #### Timestamp
 
-With the following API call, sort your retrieved log events by `timestamp` in ascending order. Use a `-` hyphen such as `-timestamp` to sort in descending order.
+With the following API call, your retrieved log events are sorted by `timestamp` in ascending order. The default is descending order.
 
 **API call:**
 
