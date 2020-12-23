@@ -144,7 +144,7 @@ The result dataset is comprised of the `data` object, as depicted in the followi
 
 #### Facet
 
-With the following API call, sort your retrieved log events by a facet such as `pageViews` in ascending order. Include `@` for the facet. Use a `-` hyphen in front of the facet name such as `-@pageViews` to sort in descending order.
+With the following API call, sort your retrieved log events by a facet such as `pageViews` in ascending order. Include `@` for the facet. Use a `-` hyphen in front of the facet name such as `-@pageViews` to sort in descending order.[6]
 
 **API call:**
 
@@ -554,3 +554,4 @@ In the response, the next two results, `joe` with 500 `pageviews` and `chris` wi
 [3]: https://curl.haxx.se/download.html
 [4]: /logs/search_syntax/
 [5]: /account_management/rbac/permissions/?tab=ui#log-data-access
+[6]: /logs/explorer/facets/#overview
