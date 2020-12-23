@@ -178,7 +178,7 @@ Improving CPU usage like this can easily translate into saving money. If this ha
 
 ## Do it to Your Service
 
-We've only skimmed the surface here but this should give you a sense of how to get started. *[Give it a shot on your services](/tracing/profiler/getting_started/)*!
+We've only skimmed the surface here but this should give you a sense of how to get started. **[Give it a shot on your services](/tracing/profiler/getting_started/)**!
 
 {{< site-region region="us" >}}{{< /site-region >}}
 {{< site-region region="eu" >}}{{< /site-region >}}
