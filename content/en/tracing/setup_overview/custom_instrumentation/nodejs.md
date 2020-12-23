@@ -40,7 +40,7 @@ You can access the active span in order to include meaningful data via tags.
 const span = tracer.scope().active()
 ```
 
-API details for `Scope` can be found [here][3].
+API details for `Scope` can be found [here][1].
 
 Tags can be added to a span using the `setTag` or `addTags` method on a span. Supported value types are string, number and object.
 
@@ -61,6 +61,8 @@ span.addTags({
 })
 ```
 
+
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
 {{% /tab %}}
 
 {{% tab "Globally" %}}
