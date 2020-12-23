@@ -17,7 +17,7 @@ If you’ve used an APM tool, you might think of profiling like a "deeper" trace
 
 Datadog Continuous Profiler can track various types of "work", including CPU usage, amount and types of objects being allocated in memory, time spent waiting to acquire locks, amount of network or file I/O, and more! The profile types available depend on the language being profiled.
 
-We’ve got an [example service](https://github.com/DataDog/dd-continuous-profiler-example) with a performance problem that you can easily experiment with. The example service has an API which allows searching a "database" of 5000 movies. We’ll fix a performance problem with it! This guide shows you the process, but for the full experience you can follow along with your own shell, browser, and IDE.
+We've got an [example service](https://github.com/DataDog/dd-continuous-profiler-example) with a performance problem that you can easily experiment with. The example service has an API which allows searching a "database" of 5000 movies. In this guide we'll fix a real performance problem with it! This page shows you the process, but for the full experience you can follow along with your own shell, browser, and IDE.
 
 ## Prerequisites
 
