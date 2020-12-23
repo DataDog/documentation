@@ -165,6 +165,36 @@ Select any row from the data table to see associated logs, traces, and processes
 
 {{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Aggregate Connection Details"  style="width:80%;">}}
 
+### Rollups
+
+Rolled up traffic (either port or IP) are displayed with `*`. They represent multiple ports or ips being condensed for a given flow.  
+
+##### IP Addresses:
+
+Rolled up when there are connections to multiple public IPs. For example:
+
+- `hostA` -> `hostB`:`443`
+- `hostA` -> `hostC`:`443`
+- `hostA` -> `hostD`:`443`
+
+**Rollup:** `hostA` -> `*`:`443`, assuming that `hostB`, `hostC`, and `hostD` have public IP addresses.
+
+##### Port: 
+
+Rolled up when there are more than N connections between two hosts with a common port. For example, if `hostA` creations 10 connections to `hostB` on port 80, each connection on `hostA` will have a different ephemeral source port:
+
+- `hostA`:`4566` -> `hostB`:`80`
+- `hostA`:`3432` -> `hostB`:`80`
+- `hostA`:`8761` -> `hostB`:`80`
+
+**Rollup:** `hostA`:`*` -> `hostB`:`80`
+
+Finally, it is possible to see both rollups simultaneously such that you have a record:
+
+- `hostA`:`*` -> `*`:`port`
+
+which represents a host opening connections from multiple ports to multiple public hosts on port 443.  
+
 ## Sidepanel
 
 The sidepanel provides contextual telemetry to help you debug network dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a high retransmit count or latency in traffic between two endpoints is due to:
