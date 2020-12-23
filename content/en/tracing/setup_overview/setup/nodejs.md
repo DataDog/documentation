@@ -32,22 +32,23 @@ The NodeJS Tracer officially supports versions `>=8`. Only even versions like 8.
 
 ## Installation and getting started
 
-1. To begin tracing Node.js applications, install the Datadog Tracing library using npm:
+To add the Datadog tracing library to your Node.js applications, follow the 4 steps below.
+
+1. Install the Datadog Tracing library using npm:
 
 ```sh
 npm install --save dd-trace
 ```
 
-2. Next, import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any instrumented module.  See below for instructions of how to add the tracing library.
+2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any instrumented module.
+
+   Once you have completed setup, if you are not receiving complete traces, including missing url routes for web requests, disconnected or missing spans, re-check this step.  The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
+
+   When using a transpiler such as TypeScript, webpack, babel or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
 
 3. [Configure the Datadog Agent for APM](#configure-the-datadog-agent-for-apm)
 
 4. Add any desired [configuration](#configuration) to the tracer, such as setting `service`, `env` and `version` for [Unified Service Tagging][2].
-
-<div class="alert alert-info">
-If you're having trouble receiving complete traces, such as url routes for web requests, or have disconnected or missing spans, re-check step 2, as this is necessary for the tracer to patch all of the required libraries for automatic instrumentation. When using a transpiler such as TypeScript, webpack, babel or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
-</div>
-
 
 #### In Code
 
