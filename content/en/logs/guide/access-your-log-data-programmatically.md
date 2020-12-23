@@ -431,13 +431,30 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ### Time settings
 
-The `from` and `to` parameters must be:
+The `from` and `to` parameters can be:
 - an ISO-8601 string
 - a unix timestamp (number representing the elapsed millisec since epoch)
-- a date math string such as `+1h` to add one hour, `-2d` to subtract two days, etc. The full list includes `s` for seconds, `m` for minutes, `h` for hours, and `d` for days. 
+- a date math string such as `+1h` to add one hour, `-2d` to subtract two days, etc. The full list includes `s` for seconds, `m` for minutes, `h` for hours, and `d` for days. Optionally, use `now` to indicate current time.
 
-If both offset and timezone are supplied then the offset takes precedence.
-Note that the timezone can be specified both as an offset (eg "UTC+03:00") or a regional zone (eg "Europe/Paris").
+```javascript
+{
+  "filter": {
+    "from": "now",
+    "to": "now-1h"
+  }
+}
+```
+
+The timezone can be specified both as an offset (eg "UTC+03:00") or a regional zone (eg "Europe/Paris"). If both offset and timezone are supplied then the offset takes precedence. The offset must be specified in seconds.
+
+```javascript
+{
+  "options": {
+    "timeOffset": -1000,
+    "timezone": "Europe/Paris"
+  }
+}
+```
 
 
 ### Pagination
