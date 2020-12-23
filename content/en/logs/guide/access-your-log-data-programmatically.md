@@ -23,6 +23,7 @@ The following examples are covered in this guide:
 * [Basic search](#basic-search)
 * [Sort by facet or timestamp](#sort-by-facet-or-timestamp)
 * [Limit the number of results retrieved](#limit-the-number-of-results-retrieved)
+* [Time settings](#time-settings)
 * [Pagination](#pagination)
 
 ## Prerequisites
@@ -425,6 +426,17 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 }
 
 ```
+
+### Time settings
+
+The `from` and `to` parameters must be:
+- an ISO-8601 string
+- a unix timestamp (number representing the elapsed millisec since epoch)
+- a date math string such as `+1h` to add one hour, `-2d` to subtract two days, etc. The full list includes `s` for seconds, `m` for minutes, `h` for hours, and `d` for days. 
+
+If both offset and timezone are supplied then the offset takes precedence.
+Note that the timezone can be specified both as an offset (eg "UTC+03:00") or a regional zone (eg "Europe/Paris").
+
 
 ### Pagination
 
