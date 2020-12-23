@@ -44,6 +44,8 @@ npm install --save dd-trace
 
 3. [Configure the Datadog Agent for APM](#configure-the-datadog-agent-for-apm)
 
+4. Add any desired [configuration](#configuration) to the tracer.
+
 #### In Code
 
 ##### JavaScript
