@@ -144,7 +144,7 @@ The result dataset is comprised of the `data` object, as depicted in the followi
 
 #### Facet
 
-With the following API call, sort your retrieved log events by a facet such as `pageViews` in ascending order. Include `@` for the facet. Use a `-` hyphen in front of the facet name such as `-@pageViews` to sort in descending order.[6]
+With the following API call, sort your retrieved log events by a facet such as `pageViews` in ascending order. Include `@` for the facet. Use a `-` hyphen in front of the facet name such as `-@pageViews` to sort in descending order.[6] The default sort order is descending order by timestamps.
 
 **API call:**
 
