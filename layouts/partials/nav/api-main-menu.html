@@ -28,10 +28,26 @@
             </a>
             <ul class="nav">
                 {{ range .Children }}
+                    {{ $menuChild := . }}
                     <li class="nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
                         <a class="nav-link" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-target="#{{.Identifier}}">
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
+                        {{- with .Params.versions -}}
+                          {{ $versionCount := (len .) }}
+                          {{- if gt $versionCount 1 -}}
+                          <span class="d-inline-block float-right">
+                          {{- range $version := . -}}
+                            {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $version "menuChild" $menuChild) }}
+                            <a class="d-inline-block text-purple font-bold px-0 mx-0 pr-1" href="#{{- (print $menuChild.Name "-" $version) | anchorize -}}">
+                              <!-- * - beta
+                              ~x~ - deprecated -->
+                              {{- $endpointVisibility.labelPrefix -}}{{- $version -}}{{- $endpointVisibility.labelSuffix -}}
+                            </a>
+                          {{- end -}}
+                          </span>
+                          {{- end -}}
+                        {{- end -}}
                     </li>
                 {{ end }}
             </ul>
