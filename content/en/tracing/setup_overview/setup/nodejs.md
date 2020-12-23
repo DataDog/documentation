@@ -40,7 +40,7 @@ To add the Datadog tracing library to your Node.js applications, follow the 4 st
 npm install --save dd-trace
 ```
 
-2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any instrumented module.
+2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
    Once you have completed setup, if you are not receiving complete traces, including missing url routes for web requests, disconnected or missing spans, re-check this step.  The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
 
@@ -61,8 +61,7 @@ const tracer = require('dd-trace').init();
 
 #### TypeScript and Bundlers
 
-For TypeScript and bundlers that support EcmaScript Module syntax, you'll need
-to initialize the tracer in a separate file in order to maintain correct load
+For TypeScript and bundlers that support EcmaScript Module syntax, initialize the tracer in a separate file in order to maintain correct load
 order.
 
 ```typescript
@@ -75,9 +74,9 @@ tracer.init(); // initialized in a different file to avoid hoisting.
 export default tracer;
 ```
 
-As an alternative, if the default config is sufficient, or all config is done
-via environment variables, then you can use `dd-trace/init`, which loads and
-initializes all in one step.
+If the default config is sufficient, or all config is done
+via environment variables, you can also use `dd-trace/init`, which loads and
+initializes in one step.
 
 ```typescript
 import `dd-trace/init`;
@@ -92,7 +91,7 @@ step.
 node --require dd-trace/init app.js
 ```
 
-Note that this approach requires using environment variables for all
+**Note:** This approach requires using environment variables for all
 configuration of the tracer.
 
 ### Configure the Datadog Agent for APM
