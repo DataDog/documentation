@@ -38,13 +38,16 @@ The NodeJS Tracer officially supports versions `>=8`. Only even versions like 8.
 npm install --save dd-trace
 ```
 
-2. Next, import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any instrumented module.
-
-    This is necessary for the tracer to patch all of the required libraries for automatic instrumentation. When using a transpiler such as TypeScript, webpack, babel or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.  See below for instructions of how to add the tracing library.
+2. Next, import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any instrumented module.  See below for instructions of how to add the tracing library.
 
 3. [Configure the Datadog Agent for APM](#configure-the-datadog-agent-for-apm)
 
-4. Add any desired [configuration](#configuration) to the tracer.
+4. Add any desired [configuration](#configuration) to the tracer, such as setting `service`, `env` and `version` for [Unified Service Tagging][2].
+
+<div class="alert alert-info">
+If you're having trouble receiving complete traces, such as url routes for web requests, or have disconnected or missing spans, re-check step 2, as this is necessary for the tracer to patch all of the required libraries for automatic instrumentation. When using a transpiler such as TypeScript, webpack, babel or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
+</div>
+
 
 #### In Code
 
@@ -145,7 +148,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 {{< /tabs >}}
 
 
-See the [tracer settings][2] for the list of initialization options.
+See the [tracer settings][3] for the list of initialization options.
 
 ## Configuration
 
@@ -160,7 +163,7 @@ Tracer settings can be configured as a parameter to the `init()` method or as en
 | version        | `DD_VERSION`            | `null`      | The version number of the application. Defaults to value of the version field in package.json. Available for versions 0.20+
 | tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically: `tracer.init({ tags: { foo: 'bar' } })` Available for versions 0.20+                                                                                                                            |
 
-It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][3] documentation for recommendations on how to configure these environment variables.
+It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][2] documentation for recommendations on how to configure these environment variables.
 
 ### Instrumentation
 
@@ -187,6 +190,6 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/nodejs
-[2]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[3]: /getting_started/tagging/unified_service_tagging/
+[2]: /getting_started/tagging/unified_service_tagging/
+[3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /help/
