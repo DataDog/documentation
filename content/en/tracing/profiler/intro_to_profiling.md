@@ -15,13 +15,13 @@ If you've used an APM tool, you might think of profiling like a "deeper" tracer 
 
 Datadog Continuous Profiler can track various types of "work", including CPU usage, amount and types of objects being allocated in memory, time spent waiting to acquire locks, amount of network or file I/O, and more! The profile types available depend on the language being profiled.
 
-We've got an [example service](https://github.com/DataDog/dd-continuous-profiler-example) with a performance problem that you can easily experiment with. The example service has an API which allows searching a "database" of 5000 movies. In this guide we'll fix a real performance problem with it! This page shows you the process, but for the full experience you can follow along with your own shell, browser, and IDE.
+We've got an [example service][1] with a performance problem that you can easily experiment with. The example service has an API which allows searching a "database" of 5000 movies. In this guide we'll fix a real performance problem with it! This page shows you the process, but for the full experience you can follow along with your own shell, browser, and IDE.
 
 ## Prerequisites
 
 You'll need:
-1. [docker-compose](https://docs.docker.com/compose/install/)
-2. A Datadog account and [API key](https://app.datadoghq.com/account/settings#api) (you don't need an application key). If you don't already have a Datadog account, sign up for a free trial [here](https://app.datadoghq.com/signup).
+1. [docker-compose][2]
+2. A Datadog account and [API key][3] (you don't need an application key). If you don't already have a Datadog account, sign up for a free trial [here][4].
 
 ## Run the Example
 
@@ -47,7 +47,7 @@ There's also a Python version of the example service, called `movies-api-py`. If
 
 ## Benchmark It
 
-Let's generate more traffic using the ApacheBench tool, [ab](https://httpd.apache.org/docs/2.4/programs/ab.html). We'll have it run 10 concurrent HTTP clients sending requests for 20 seconds. Still inside the toolbox container:
+Let's generate more traffic using the ApacheBench tool, [ab][5]. We'll have it run 10 concurrent HTTP clients sending requests for 20 seconds. Still inside the toolbox container:
 ```
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ...
@@ -66,7 +66,7 @@ Percentage of the requests served within a certain time (ms)
 
 ## How to Read a Profile
 
-Head on over to [Profile Search](https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java) and look for a profile covering the period in which we were generating traffic. It may take a minute or so. You'll be able to tell which profile includes the load test because the CPU usage will be higher:
+Head on over to [Profile Search][6] and look for a profile covering the period in which we were generating traffic. It may take a minute or so. You'll be able to tell which profile includes the load test because the CPU usage will be higher:
 
 {{< img src="tracing/profiling/intro_to_profiling/list.png" alt="List of profiles">}}
 
@@ -120,7 +120,7 @@ Time to look at the code and see what's going on! Looking again at the CPU flame
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_sort_lambda.png" alt="Flame graph with mouse over sort lambda">}}
 
-That corresponds to this bit of code in [`dd-continuous-profiler-example/java/src/main/java/movies-api/Server.java`](https://github.com/DataDog/dd-continuous-profiler-example/blob/25819b58c46227ce9a3722fa971702fd5589984f/java/src/main/java/movies/Server.java#L66), where we see the call to `LocalDate.parse()` on line 66:
+That corresponds to this bit of code in [`dd-continuous-profiler-example/java/src/main/java/movies-api/Server.java`][7], where we see the call to `LocalDate.parse()` on line 66:
 
 {{< img src="tracing/profiling/intro_to_profiling/slow_sort_code.png" alt="Slow sort code">}}
 
@@ -182,3 +182,11 @@ We've only skimmed the surface here but this should give you a sense of how to g
 
 {{< site-region region="us" >}}{{< /site-region >}}
 {{< site-region region="eu" >}}{{< /site-region >}}
+
+[1]: https://github.com/DataDog/dd-continuous-profiler-example
+[2]: https://docs.docker.com/compose/install/
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/signup
+[5]: https://httpd.apache.org/docs/2.4/programs/ab.html
+[6]: https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java
+[7]: https://github.com/DataDog/dd-continuous-profiler-example/blob/25819b58c46227ce9a3722fa971702fd5589984f/java/src/main/java/movies/Server.java#L66
