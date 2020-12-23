@@ -545,6 +545,8 @@ In the response, the next two results, `joe` with 500 `pageviews` and `chris` wi
 
 ```
 
+**Note:** Avoid the use of relative timeranges when using pagination as it may lead to missing search results.
+
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
