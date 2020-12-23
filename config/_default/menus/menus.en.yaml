@@ -1388,51 +1388,56 @@ main:
     parent: trace_retention_and_ingestion
     identifier: trace_retention_and_ingestion_usage_metrics
     weight: 501
+  - name: Generate Metrics from Spans
+    url: tracing/generate_metrics/
+    parent: tracing
+    identifier: generate_metrics
+    weight: 6
   - name: Deployment Tracking
     url: tracing/deployment_tracking/
     parent: tracing
     identifier: deployment_tracking
-    weight: 6
+    weight: 7
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
     identifier: tracing_connect_logs_and_traces
-    weight: 7
+    weight: 8
   - name: Java
     url: tracing/connect_logs_and_traces/java
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_java
-    weight: 701
+    weight: 801
   - name: Python
     url: tracing/connect_logs_and_traces/python
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_python
-    weight: 702
+    weight: 802
   - name: Go
     url: tracing/connect_logs_and_traces/go
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_go
-    weight: 703
+    weight: 803
   - name: Ruby
     url: tracing/connect_logs_and_traces/ruby
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_ruby
-    weight: 704
+    weight: 804
   - name: PHP
     url: tracing/connect_logs_and_traces/php
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_php
-    weight: 705
+    weight: 805
   - name: NodeJS
     url: tracing/connect_logs_and_traces/nodejs
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_nodejs
-    weight: 706
+    weight: 806
   - name: .NET
     url: tracing/connect_logs_and_traces/dotnet
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
-    weight: 707
+    weight: 807
   - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
@@ -1858,6 +1863,11 @@ main:
     parent: rum_browser
     identifier: page_performance
     weight: 103
+  - name: Collecting Browser Errors
+    url: real_user_monitoring/browser/collecting_browser_errors/
+    parent: rum_browser
+    identifier: collect_errors
+    weight: 105
   - name: Android Monitoring
     url: real_user_monitoring/android/
     parent: rum
@@ -2418,6 +2428,34 @@ api_v1:
     parent: Dashboards
     url: '#create-a-new-dashboard'
     generated: true
+  - name: Create a public dashboard
+    parent: Dashboards
+    url: '#create-a-public-dashboard'
+    generated: true
+  - name: Revoke a public dashboard URL
+    parent: Dashboards
+    url: '#revoke-a-public-dashboard-url'
+    generated: true
+  - name: Get a public dashboard
+    parent: Dashboards
+    url: '#get-a-public-dashboard'
+    generated: true
+  - name: Update a public dashboard
+    parent: Dashboards
+    url: '#update-a-public-dashboard'
+    generated: true
+  - name: Revoke public dashboard invitations
+    parent: Dashboards
+    url: '#revoke-public-dashboard-invitations'
+    generated: true
+  - name: Get all invitations for a public dashboard
+    parent: Dashboards
+    url: '#get-all-invitations-for-a-public-dashboard'
+    generated: true
+  - name: Send public dashboard invitation email
+    parent: Dashboards
+    url: '#send-public-dashboard-invitation-email'
+    generated: true
   - name: Delete a dashboard
     parent: Dashboards
     url: '#delete-a-dashboard'
@@ -2641,6 +2679,10 @@ api_v1:
   - name: Update an index
     parent: Logs Indexes
     url: '#update-an-index'
+    generated: true
+  - name: Logs Metrics
+    url: /api/v1/logs-metrics/
+    identifier: Logs Metrics
     generated: true
   - name: Logs Pipelines
     url: /api/v1/logs-pipelines/
@@ -3555,6 +3597,30 @@ api_v2:
   - name: Logs Indexes
     url: /api/v2/logs-indexes/
     identifier: Logs Indexes
+    generated: true
+  - name: Logs Metrics
+    url: /api/v2/logs-metrics/
+    identifier: Logs Metrics
+    generated: true
+  - name: Get all log-based metrics
+    parent: Logs Metrics
+    url: '#get-all-log-based-metrics'
+    generated: true
+  - name: Create a log-based metric
+    parent: Logs Metrics
+    url: '#create-a-log-based-metric'
+    generated: true
+  - name: Delete a log-based metric
+    parent: Logs Metrics
+    url: '#delete-a-log-based-metric'
+    generated: true
+  - name: Get a log-based metric
+    parent: Logs Metrics
+    url: '#get-a-log-based-metric'
+    generated: true
+  - name: Update a log-based metric
+    parent: Logs Metrics
+    url: '#update-a-log-based-metric'
     generated: true
   - name: Logs Pipelines
     url: /api/v2/logs-pipelines/

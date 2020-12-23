@@ -163,6 +163,30 @@
     "request_description": "",
     "request_schema_description": "Relationship to role."
   },
+  "ListLogsMetrics": {
+    "description": "Get the list of configured log-based metrics with their definitions.",
+    "summary": "Get all log-based metrics"
+  },
+  "CreateLogsMetric": {
+    "description": "Create a metric based on your ingested logs in your organization.\nReturns the log-based metric object from the request body when the request is successful.",
+    "summary": "Create a log-based metric",
+    "request_description": "The definition of the new log-based metric.",
+    "request_schema_description": "The new log-based metric body."
+  },
+  "DeleteLogsMetric": {
+    "description": "Delete a specific log-based metric from your organization.",
+    "summary": "Delete a log-based metric"
+  },
+  "GetLogsMetric": {
+    "description": "Get a specific log-based metric from your organization.",
+    "summary": "Get a log-based metric"
+  },
+  "UpdateLogsMetric": {
+    "description": "Update a specific log-based metric from your organization.\nReturns the log-based metric object from the request body when the request is successful.",
+    "summary": "Update a log-based metric",
+    "request_description": "New definition of the log-based metric.",
+    "request_schema_description": "The new log-based metric body."
+  },
   "ListRestrictionQueries": {
     "description": "Returns all restriction queries, including their names and IDs.",
     "summary": "List restriction queries"

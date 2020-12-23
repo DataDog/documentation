@@ -99,6 +99,42 @@
     "request_description": "Update a dashboard list request body.",
     "request_schema_description": "Your Datadog Dashboards."
   },
+  "CreatePublicDashboard": {
+    "description": "Make a specified private dashboard public, generating a URL at which it can be publicly viewed.",
+    "summary": "Create a public dashboard",
+    "request_description": "Create a public dashboard request body.",
+    "request_schema_description": "The metadata object associated with how a dashboard has been/will be made public so that it can be shared with others outside of Datadog."
+  },
+  "DeletePublicDashboard": {
+    "description": "Revoke the public URL for a dashboard (rendering it private) associated with the specified token.",
+    "summary": "Revoke a public dashboard URL"
+  },
+  "GetPublicDashboard": {
+    "description": "Fetch an existing public dashboard's sharing metadata associated with the specified token.",
+    "summary": "Get a public dashboard"
+  },
+  "UpdatePublicDashboard": {
+    "description": "Update a public dashboard associated with the specified token.",
+    "summary": "Update a public dashboard",
+    "request_description": "Update Dashboard request body.",
+    "request_schema_description": "Update a public dashboard's settings."
+  },
+  "DeletePublicDashboardInvitation": {
+    "description": "Revoke previously sent invitation emails and active sessions used to access a given public dashboard for specific email addresses.",
+    "summary": "Revoke public dashboard invitations",
+    "request_description": "Public Dashboard Invitation deletion request body.",
+    "request_schema_description": "Invitations data and metadata that exists for a public dashboard returned by the API."
+  },
+  "GetPublicDashboardInvitations": {
+    "description": "Describe the invitations that exist for the given public dashboard (paginated).",
+    "summary": "Get all invitations for a public dashboard"
+  },
+  "SendPublicDashboardInvitation": {
+    "description": "Send emails to specified email addresses containing links to access a given authenticated public dashboard. Email addresses must already belong to the authenticated public dashboard's share_list.",
+    "summary": "Send public dashboard invitation email",
+    "request_description": "Public Dashboard Invitation request body.",
+    "request_schema_description": "Invitations data and metadata that exists for a public dashboard returned by the API."
+  },
   "DeleteDashboard": {
     "description": "Delete a dashboard using the specified ID.",
     "summary": "Delete a dashboard"

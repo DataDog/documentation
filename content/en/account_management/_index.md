@@ -29,15 +29,15 @@ To join an existing organization, you must be invited by an administrator. Once 
 
 If you are an organization administrator, reference the additional documentation to:
 
-* [Manage users in your organization][5]
-* [Configure single sign on with SAML][6]
-* [Rename your organization][7]
-* [Manage multi-organization accounts][8]
-* [Change your Datadog plan and view usage and billing history][9]
+* [Manage users in your organization][4]
+* [Configure single sign on with SAML][5]
+* [Rename your organization][6]
+* [Manage multi-organization accounts][7]
+* [Change your Datadog plan and view usage and billing history][8]
 
 ### Preferences
 
-You can set your timezone, desktop notifications, and email subscriptions from the [*Preferences* tab][10] within the *account settings* page. Under email subscriptions, you have access to the following reports:
+You can set your timezone, desktop notifications, and email subscriptions from the [*Preferences* tab][9] within the *account settings* page. Under email subscriptions, you have access to the following reports:
 
 * Daily Digest
 * Weekly Digest
@@ -55,21 +55,20 @@ To adapt to your computer's appearance setting, select the *System* option. This
 
 ## Connecting to GitHub
 
-If you have installed the [GitHub integration][11] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog are automatically posted back into the corresponding issue or pull request in GitHub.
+If you have installed the [GitHub integration][10] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog are automatically posted back into the corresponding issue or pull request in GitHub.
 
 ## Deleting your account
 
-To delete your Datadog account completely, [contact our support team][12].
+To delete your Datadog account completely, [contact our support team][11].
 
 [1]: https://app.datadoghq.com/account/profile
 [2]: https://gravatar.com
 [3]: https://support.google.com/accounts/answer/19870?hl=en
-[4]: https://app.datadoghq.com/signup
-[5]: /account_management/users/
-[6]: /account_management/saml/
-[7]: /account_management/org_settings/#change-your-organization-name
-[8]: /account_management/multi_organization/
-[9]: /account_management/org_settings/
-[10]: https://app.datadoghq.com/account/preferences
-[11]: /integrations/github/
-[12]: /help/
+[4]: /account_management/users/
+[5]: /account_management/saml/
+[6]: /account_management/org_settings/#change-your-organization-name
+[7]: /account_management/multi_organization/
+[8]: /account_management/org_settings/
+[9]: https://app.datadoghq.com/account/preferences
+[10]: /integrations/github/
+[11]: /help/
