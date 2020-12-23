@@ -176,7 +176,7 @@ docker-compose down
 
 Improving CPU usage like this can easily translate into saving money. If this had been a real service, this small improvement might have enabled us to scale down to half the servers, potentially saving thousands of dollars a year. Not bad for about 10 minutes of work!
 
-## Do it to Your Service
+## Improve Your Service
 
 We've only skimmed the surface here but this should give you a sense of how to get started. **[Give it a shot on your services](/tracing/profiler/getting_started/)**!
 
