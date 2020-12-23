@@ -50,7 +50,7 @@ npm install --save dd-trace
 
 4. Add any desired [configuration](#configuration) to the tracer, such as setting `service`, `env` and `version` for [Unified Service Tagging][2].
 
-#### In Code
+### Adding the tracer in code
 
 ##### JavaScript
 
@@ -83,7 +83,7 @@ initializes all in one step.
 import `dd-trace/init`;
 ```
 
-#### Via Command Line Arguments
+### Adding the tracer via command line arguments
 
 Use the `--require` option to Node.js to load and initialize the tracer in once
 step.
