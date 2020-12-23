@@ -93,7 +93,7 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
     - Modifiez la destination comme suit :
 
         ```conf
-        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
+        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
     Pour en savoir plus sur les paramètres et les fonctionnalités de TLS pour Syslog-ng, consultez la [documentation officielle][1] (en anglais).
@@ -168,7 +168,7 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
     - Modifiez la destination comme suit :
 
         ```conf
-        destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
+        destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
     Pour en savoir plus sur les paramètres et les fonctionnalités de TLS pour Syslog-ng, consultez la [documentation officielle][1] (en anglais).
