@@ -123,7 +123,7 @@ const request = require('request');
 request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
     error,
     resp,
-    body
+    hostname
 ) {
     tracer.setUrl(`http://${hostname}:8126`)
 });
