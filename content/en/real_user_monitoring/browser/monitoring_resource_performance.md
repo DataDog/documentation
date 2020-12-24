@@ -22,7 +22,7 @@ RUM Resources inherit from all the context related to the active RUM View at the
 
 ## Link RUM Resources to APM traces
 
-Connect your RUM data with corresponding backend traces to get end-to-end visibility into requests as they move across layers of your stack. This enables you to:
+To get even more complete, end-to-end visibility into requests as they move across layers of your stack, connect your RUM data with corresponding backend traces. This enables you to:
 
 * Locate backend problems that resulted in a user-facing error.
 * Identify the extent to which users are affected by an issue within your stack.
@@ -40,12 +40,12 @@ Detailed network timing data for resources is collected from the Fetch and XHR n
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | number         | Entire time spent loading the resource.                                                                                                   |
 | `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
-| `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart)                                                            |
-| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart) |
-| `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart)                                               |
-| `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart)                                                                      |
-| `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
-| `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
+| `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                           |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart).|
+| `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart).                                              |
+| `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart).                                                                     |
+| `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart).                                           |
+| `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart).                                                                        |
 
 **Note**: If you are having trouble collecting detailed timing for some resources, see [Resource timing and CORS](#resource-timing-and-cors).
 
@@ -70,7 +70,6 @@ Detailed network timing data for resources is collected from the Fetch and XHR n
 RUM infers the name and category of the resource provider from the resource URL host part. If the resource URL host matches the current page URL host, the category is set to `first party`. Otherwise, the category will be `cdn`, `analytics`, or `social` for example.
 
 ## Resource timing and CORS
-
 
 The [Resource Timing API][3] is used to collect RUM resource timing. It is subject to the cross-origin security limitations that browsers enforce on scripts. For example, if your web application is hosted on `www.example.com` and it loads your images via `images.example.com`, you will only get timing for resources loaded hosted on `www.example.com` by default.
 
