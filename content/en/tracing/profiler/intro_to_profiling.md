@@ -3,7 +3,7 @@ title: Intro to Profiling
 kind: Documentation
 ---
 
-You may have heard that profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler before, it can seem like a bit of a dark art.
+You may have heard that profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler before, it can seem like a dark art.
 
 In this guide, we'll explain profiling, then profile a sample service that has a performance problem and see how we can use Continuous Profiler to understand and fix the problem!
 
@@ -15,13 +15,13 @@ If you've used an APM tool, you might think of profiling like a "deeper" tracer 
 
 Datadog Continuous Profiler can track various types of "work", including CPU usage, amount and types of objects being allocated in memory, time spent waiting to acquire locks, amount of network or file I/O, and more! The profile types available depend on the language being profiled.
 
-We've got an [example service][1] with a performance problem that you can easily experiment with. The example service has an API which allows searching a "database" of 5000 movies. In this guide we'll fix a real performance problem with it! This page shows you the process, but for the full experience you can follow along with your own shell, browser, and IDE.
+We've got an [example service][1] with a performance problem that you can easily experiment with. The example service has an API which allows searching a "database" of 5000 movies. We'll fix a performance problem with it! This guide shows you the process, but for the full experience you can follow along with your own shell, browser, and IDE.
 
 ## Prerequisites
 
 You'll need:
 1. [docker-compose][2]
-2. A Datadog account and [API key][3] (you don't need an application key). If you don't already have a Datadog account, sign up for a free trial [here][4].
+2. A Datadog account and [API key][3] (you don't need an application key). If you don't already have a Datadog account, [sign up for a free trial][4].
 
 ## Run the Example
 
