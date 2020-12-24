@@ -16,7 +16,7 @@ further_reading:
     text: "RUM Dashboards"
 ---
 
-The RUM SDK collects resources and assets for every RUM view (i.e. page load): [XMLHttpRequest][1] (XHRs) and Fetch requests, but also images, CSS files, JavaScript assets, and font files. A RUM Resource event is generated for each one of them, with detailed timings and metadata.
+The RUM SDK collects resources and assets for every RUM view (page load): [XMLHttpRequest][1] (XHRs) and Fetch requests, but also images, CSS files, JavaScript assets, and font files. A RUM Resource event is generated for each one of them, with detailed timings and metadata.
 
 RUM Resources inherit from all the context related to the active RUM View at the time of collection.
 
@@ -24,16 +24,17 @@ RUM Resources inherit from all the context related to the active RUM View at the
 
 Connect your RUM data with corresponding backend traces to get end-to-end visibility into requests as they move across layers of your stack. This enables you to:
 
-* locate backend problems that resulted in a user-facing error
-* identify the scope of which users are affected by an issue within your stack
-* see complete end-to-end requests on the flame graphs, allowing you to seamlessly navigate between RUM and APM and back with precise context
+* Locate backend problems that resulted in a user-facing error.
+* Identify the extent to which users are affected by an issue within your stack.
+* See complete end-to-end requests on the flame graphs, allowing you to seamlessly navigate between RUM and APM and back with precise context.
 
-See the [Connect RUM and Traces documentation page][2] for information about setting up this feature.
+See [Connect RUM and Traces][2] for information about setting up this feature.
 
 {{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource"  >}}
+
 ## Resource timing and metrics
 
-Detailed network timing data for resources are collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
+Detailed network timing data for resources is collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
 
 | Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -46,7 +47,7 @@ Detailed network timing data for resources are collected from the Fetch and XHR 
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
 | `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
 
-**Note**: If you are having trouble collecting detailed timing for some resources, head to the [Resource timing and CORS section](#resource-timing-and-cors).
+**Note**: If you are having trouble collecting detailed timing for some resources, see [Resource timing and CORS](#resource-timing-and-cors).
 
 ## Resource attributes
 
