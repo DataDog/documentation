@@ -25,7 +25,7 @@ further_reading:
 
 ## デフォルトの保存ビュー
 
-{{< img src="logs/explorer/saved_views/default.png" alt="保存ビューの選択"  style="width:50%;" >}}
+{{< img src="logs/explorer/saved_views/default.png" alt="デフォルトビュー"  style="width:50%;" >}}
 
 既存のログエクスプローラービューが、デフォルトの保存ビューになります。このコンフィギュレーションは、ユーザー本人のみがアクセスし表示できます。このコンフィギュレーションを更新しても、組織には何の影響もありません。
 
@@ -39,14 +39,14 @@ Views パネルのデフォルト保存ビューエントリからは、いつ�
 
 ## 組織の保存ビュー
 
-{{< img src="logs/explorer/saved_views/custom.png" alt="保存ビューの選択"  style="width:50%;" >}}
+{{< img src="logs/explorer/saved_views/custom.png" alt="組織全体の保存ビュー"  style="width:50%;" >}}
 
 デフォルトの保存ビュー以外のすべての保存ビューは、組織全体で共有されます。
 
 * Datadog の[ログ管理インテグレーション][7] のほとんどには、すぐに使用できる**インテグレーション保存ビュー**が含まれています。これは読み取り専用で、インテグレーションのロゴで識別されます。
 * **カスタム保存ビュー** は、ユーザーにより作成されます。組織内のユーザーが誰でも編集でき（[読み取り専用ユーザー][8]を除く）、作成したユーザーのアバターで識別されます。エクスプローラーの既存のコンテンツからカスタム保存ビューを新規作成するには、**save** ボタンを押します。
 
-{{< img src="logs/explorer/saved_views/save.png" alt="保存ビューの選択"  style="width:30%;" >}}
+{{< img src="logs/explorer/saved_views/save.png" alt="ログ -- 保存"  style="width:30%;" >}}
 
 Views パネルの保存ビューエントリからは、いつでも以下のアクションが可能です。
 
@@ -56,7 +56,7 @@ Views パネルの保存ビューエントリからは、いつでも以下の�
 * ショートリンクを使用して保存ビューを**共有**。
 * 保存ビューに**スター**を付けて、保存ビューリストの先頭に表示。ナビゲーションメニューから直接アクセス可能になります。
 
-{{< img src="logs/explorer/saved_views/star.png" alt="保存ビューの選択"  style="width:30%;" >}}
+{{< img src="logs/explorer/saved_views/star.png" alt="スター付きビュー"  style="width:50%;" >}}
 
 *注*: インテグレーションの保存ビューおよび[読み取り専用ユーザー][8]には、アクションの更新、名前変更、および削除は無効になっています。
 

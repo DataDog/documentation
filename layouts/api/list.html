@@ -324,18 +324,21 @@
                                                 {{ with $dot.Resources.Match "examples.json" }}
                                                     {{ range . }}
                                                       {{ $data := . | unmarshal}}
-                                                      {{ $req := (index (index $data $context.action.operationId) "request") }}
-                                                      {{ if $req }}
+                                                      {{ with (index $data $context.action.operationId) }}
+                                                          {{ with (index . "request") }}
+                                                              {{ $req := . }}
+                                                              {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
+                                                              {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
 
-                                                          {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
-                                                          {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+                                                              {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
+                                                              {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
 
-                                                          {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
-                                                          {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
-
-                                                          {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
-                                                          {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
-                                                          {{ $dot.Scratch.Set "html" (index $req "html") }}
+                                                              {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
+                                                              {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
+                                                              {{ $dot.Scratch.Set "html" (index $req "html") }}
+                                                          {{ else }}
+                                                              {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
+                                                          {{ end }}
                                                       {{ else }}
                                                           {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
                                                       {{ end }}
@@ -430,16 +433,24 @@
                                                 {{ $dot.Scratch.Set "html" "" }}
                                                 {{ with $dot.Resources.Match "examples.json" }}
                                                     {{ range . }}
-                                                    {{ $data := . | unmarshal}}
-                                                    {{ $res := (index (index (index $data $context.action.operationId) "responses") $response_code) }}
-                                                    {{ if $res }}
-                                                        {{ $jsonifiedData := (index $res "json") | jsonify (dict "indent" "  ") }}
-                                                        {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
-                                                        {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
-                                                        {{ $dot.Scratch.Set "html" (index $res "html") }}
-                                                    {{ else }}
-                                                        {{ warnf "Could not load html/json response code %q in %q" $response_code $context.action.operationId }}
-                                                    {{ end }}
+                                                        {{ $data := . | unmarshal}}
+                                                        {{ with (index $data $context.action.operationId) }}
+                                                            {{ with (index . "responses") }}
+                                                                {{ $res := (index . $response_code) }}
+                                                                {{ if $res }}
+                                                                    {{ $jsonifiedData := (index $res "json") | jsonify (dict "indent" "  ") }}
+                                                                    {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+                                                                    {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
+                                                                    {{ $dot.Scratch.Set "html" (index $res "html") }}
+                                                                {{ else }}
+                                                                    {{ warnf "Could not load html/json response code %q in %q" $response_code $context.action.operationId }}
+                                                                {{ end }}
+                                                            {{ else }}
+                                                                {{ warnf "Could not load html/json responses in data for operation %q" $context.action.operationId }}
+                                                            {{ end }}
+                                                        {{ else }}
+                                                            {{ warnf "Could not load html/json response for %q" $context.action.operationId }}
+                                                        {{ end }}
                                                     {{ end }}
                                                 {{ end }}
                                                 {{ $json := ($dot.Scratch.Get "json") }}

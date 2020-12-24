@@ -2,7 +2,9 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    HAProxy - Overview (Prometheus): assets/dashboards/prometheus_overview.json
+    haproxy: assets/dashboards/overview.json
   logs:
     source: haproxy
   metrics_metadata: metadata.csv
@@ -24,6 +26,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md'
 description: L'intégration HAProxy vous permet de recueillir des métriques sur les performances et la disponibilité à partir de vos instances HAProxy.
 display_name: HAProxy
+draft: false
 git_integration_title: haproxy
 guid: cd935030-131f-4545-8b6a-a4ca21b8565b
 integration_id: haproxy
@@ -33,7 +36,9 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: haproxy.
-metric_to_check: haproxy.frontend.bytes.in_rate
+metric_to_check:
+  - haproxy.frontend.bytes.in_rate
+  - haproxy.frontend.bytes.in.total
 name: haproxy
 process_signatures:
   - haproxy
@@ -53,7 +58,7 @@ supported_os:
 
 Enregistrez l'activité HAProxy dans Datadog pour :
 
-- Visualiser les performances de répartition de charge de HAProxy
+- Visualiser les performances d'équilibrage de charge de HAProxy
 - Être informé lorsqu'un serveur tombe en panne
 - Corréler les performances de HAProxy avec le reste de vos applications
 
@@ -65,7 +70,21 @@ Le check HAProxy est inclus avec le package de l'[Agent Datadog][2] : vous n'av
 
 #### Préparer HAProxy
 
-##### Versions < 2
+##### Utiliser Prometheus
+
+Pour configurer cette intégration, il est recommandé d'activer l'endpoint Prometheus sur HAProxy. Depuis la version 2 (ou la version Enterprise 1.9rc1), cet endpoint est intégré à HAProxy. Si vous utilisez une version antérieure, pensez à configurer l'[exportateur Prometheus HAProxy][3], ou configurez l'ancienne intégration basée sur les sockets décrite dans la section suivante.
+
+1. Configurez votre `haproxy.conf` en suivant le [guide officiel][4].
+
+2. [Activez](#configuration) le paramètre `use_prometheus` dans `haproxy.d/conf.yaml`.
+
+3. [Redémarrez HAProxy pour activer l'endpoint Prometheus][5].
+
+4. [Redémarrez l'Agent][6].
+
+##### Utiliser l'endpoint stats
+
+**Remarque** : cette stratégie de configuration est donnée à titre de référence pour les utilisateurs des versions antérieures. Si vous configurez l'intégration pour la première fois, appliquez plutôt la configuration Prometheus décrite dans la section précédente.
 
 L'Agent recueille des métriques via un endpoint stats :
 
@@ -82,17 +101,7 @@ L'Agent recueille des métriques via un endpoint stats :
      stats auth Username:Password  # Authentication credentials
    ```
 
-2. [Redémarrez HAProxy pour activer l'endpoint stats][3].
-
-##### Versions >= 2
-
-À partir de la version 2 d'HAProxy, ce check prend en charge une implémentation plus récente basée sur un endpoint Prometheus :
-
-1. Configurez votre `haproxy.conf` en suivant le [guide officiel][4].
-
-2. [Activez](#configuration) le paramètre `use_prometheus` dans `haproxy.d/conf.yaml`.
-
-3. [Redémarrez HAProxy pour activer l'endpoint stats][3].
+2. [Redémarrez HAProxy pour activer l'endpoint stats][5].
 
 ### Configuration
 
@@ -125,7 +134,7 @@ Modifiez le fichier `haproxy.d/conf.yaml` dans le dossier `conf.d/` à la racine
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 Par défaut, Haproxy envoie des logs via UDP sur le port 514. L'Agent peut effectuer une écoute afin d'obtenir ces logs sur ce port. Toutefois, il est nécessaire de procéder à une élévation des privilèges pour toute association vers un numéro de port inférieur à 1024. Pour ce faire, suivez les instructions ci-dessous. Vous pouvez également choisir d'utiliser un autre port. Dans ce cas, ignorez l'étape 3.
 
@@ -188,7 +197,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
@@ -203,7 +212,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `haproxy` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][7] et cherchez `haproxy` dans la section Checks.
 
 ## Données collectées
 
@@ -224,24 +233,26 @@ Renvoie `OK` pour les états `maint`, `ok` et tout autre état.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Pour aller plus loin
 
-- [Surveillance des métriques de performance HAProxy][7]
-- [Comment recueillir des métriques HAProxy][8]
-- [Surveiller HAProxy avec Datadog][9]
-- [Configuration multi-processus de HAProxy][10]
-- [Comment recueillir des métriques HAProxy][8]
+- [Surveillance des métriques de performance HAProxy][9]
+- [Comment recueillir des métriques HAProxy][10]
+- [Surveiller HAProxy avec Datadog][11]
+- [Configuration multi-processus de HAProxy][12]
+- [Comment recueillir des métriques HAProxy][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/haproxy/images/haproxy-dash.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://www.haproxy.org/download/1.7/doc/management.txt
+[3]: https://github.com/prometheus/haproxy_exporter
 [4]: https://www.haproxy.com/blog/haproxy-exposes-a-prometheus-metrics-endpoint/
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/help/
-[7]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
-[8]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
-[9]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
-[10]: https://docs.datadoghq.com/fr/integrations/faq/haproxy-multi-process/
+[5]: https://www.haproxy.org/download/1.7/doc/management.txt
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/fr/help/
+[9]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
+[10]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
+[11]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
+[12]: https://docs.datadoghq.com/fr/integrations/faq/haproxy-multi-process/

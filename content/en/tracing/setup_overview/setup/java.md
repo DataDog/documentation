@@ -20,9 +20,9 @@ further_reading:
 ---
 ## Compatibility Requirements
 
-The Java Tracing Library supports all JVMs on all platforms version 7 and higher. To utilize tracing with the [Continuous Profiler][1], OpenJDK 11+, Oracle Java 11+, OpenJDK 8 for most vendors (version 8u262+) and Zulu Java 8+ (minor version 1.8.0_212+) are supported. Starting in version 8u272+, all vendors will be supported for the Profiler. 
+The Java Tracing Library supports all JVMs on all platforms version 7 and higher. To utilize tracing with the [Continuous Profiler][1], OpenJDK 11+, Oracle Java 11+, OpenJDK 8 for most vendors (version 8u262+) and Zulu Java 8+ (minor version 1.8.0_212+) are supported. Starting in version 8u272+, all vendors will be supported for the Profiler.
 
-All JVM-based languages, such as Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure are supported. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
+All JVM-based languages, such as Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure are supported in the Java tracer and profiler. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
 
 ## Installation and Getting Started
 
@@ -203,8 +203,8 @@ For additional details and options, see the [WebSphere docs][1].
    ```
 
      For more information, see the [Oracle documentation][4].
-     
-- Never add `dd-java-agent` to your classpath. It can cause unexpected behavior. 
+
+- Never add `dd-java-agent` to your classpath. It can cause unexpected behavior.
 
 ## Automatic Instrumentation
 

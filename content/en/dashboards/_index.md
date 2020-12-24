@@ -23,6 +23,9 @@ further_reading:
 - link: "/mobile/#dashboards"
   tag: "Documentation"
   text: "View your Dashboards on the Mobile App"
+- link: "https://www.datadoghq.com/blog/datadog-clipboard/"
+  tag: "Blog"
+  text: "Add Dashboard widgets to your clipboard"
 ---
 
 ## Overview

@@ -2,6 +2,9 @@
 title: Getting Started with Dashboards
 kind: documentation
 further_reading:
+- link: "https://www.datadoghq.com/blog/dashboard-sharing/"
+  tag: "Blog"
+  text: "Share dashboards securely with anyone outside of your organization"
 - link: "https://learn.datadoghq.com/enrol/index.php?id=8"
   tag: "Learning"
   text: "Self-paced online learning: Building Better Dashboards"
