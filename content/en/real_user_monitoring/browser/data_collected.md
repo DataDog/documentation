@@ -238,7 +238,7 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 
 ## Default attributes
 
-These five event types have attributes attached by default:
+All RUM event types (views, resources, long tasks, errors, and user actions) have the following attributes attached by default:
 
 ### Core
 
