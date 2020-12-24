@@ -65,23 +65,25 @@
     {{ $anchorStr := $menuChild.Name }}
     {{ $versionCount := (len $menuChild.Params.versions) }}
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 {{ if gt (len $menuChild.Params.versions) 1 }}col-md-6{{ end }}">
           <h2 class="mb-2" id="{{ $anchorStr | anchorize }}">
               <a class="js-collapse-trigger" href="#{{ $anchorStr | anchorize }}">
                 {{- $anchorStr -}}
               </a>
-              {{ if gt (len $menuChild.Params.versions) 1 }}
-                <ul class="nav nav-tabs response-toggle" style="width:210px;float:right;border:none;">
-                  {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
-                    {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild) }}
-                    <li class="nav-item">
-                      <a class="nav-link mr-1 {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" data-toggle="tab" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} ({{ $endpointVisibility.label }})</a>
-                    </li>
-                  {{ end }}
-                </ul>
-              {{ end }}
           </h2>
       </div>
+      {{ if gt (len $menuChild.Params.versions) 1 }}
+      <div class="col-12 col-md-6">
+          <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
+            {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
+              {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild) }}
+              <li class="nav-item">
+                <a class="nav-link mr-1 {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" data-toggle="tab" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} ({{ $endpointVisibility.label }})</a>
+              </li>
+            {{ end }}
+          </ul>
+      </div>
+      {{ end }}
     </div>
 
     <div class="tab-content">

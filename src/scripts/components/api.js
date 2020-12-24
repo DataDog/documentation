@@ -121,6 +121,17 @@ $('.toggle-version-tab').click(function() {
     return false;
 });
 
+// toggle version from nav
+$('a[data-version^="v"]').click(function() {
+    const version = $(this).attr('data-version');
+    const href = $(this).attr('href');
+    const url = `${href}-${version}`;
+    const el = $(`a[href="${url}"]`);
+    if(el) {
+      el.tab('show');
+    }
+});
+
 // Scroll the active top level nav item into view below Docs search input
 if (document.body.classList.contains('api')) {
     const headerHeight = $('body > header').height();
