@@ -1863,6 +1863,16 @@ main:
     parent: rum_browser
     identifier: page_performance
     weight: 103
+  - name: Monitoring Resource Performance
+    url: real_user_monitoring/browser/monitoring_resource_performance/
+    parent: rum_browser
+    identifier: resource_performance
+    weight: 104
+  - name: Collecting Browser Errors
+    url: real_user_monitoring/browser/collecting_browser_errors/
+    parent: rum_browser
+    identifier: collect_errors
+    weight: 105
   - name: Android Monitoring
     url: real_user_monitoring/android/
     parent: rum
@@ -2674,6 +2684,10 @@ api_v1:
   - name: Update an index
     parent: Logs Indexes
     url: '#update-an-index'
+    generated: true
+  - name: Logs Metrics
+    url: /api/v1/logs-metrics/
+    identifier: Logs Metrics
     generated: true
   - name: Logs Pipelines
     url: /api/v1/logs-pipelines/
@@ -3588,6 +3602,30 @@ api_v2:
   - name: Logs Indexes
     url: /api/v2/logs-indexes/
     identifier: Logs Indexes
+    generated: true
+  - name: Logs Metrics
+    url: /api/v2/logs-metrics/
+    identifier: Logs Metrics
+    generated: true
+  - name: Get all log-based metrics
+    parent: Logs Metrics
+    url: '#get-all-log-based-metrics'
+    generated: true
+  - name: Create a log-based metric
+    parent: Logs Metrics
+    url: '#create-a-log-based-metric'
+    generated: true
+  - name: Delete a log-based metric
+    parent: Logs Metrics
+    url: '#delete-a-log-based-metric'
+    generated: true
+  - name: Get a log-based metric
+    parent: Logs Metrics
+    url: '#get-a-log-based-metric'
+    generated: true
+  - name: Update a log-based metric
+    parent: Logs Metrics
+    url: '#update-a-log-based-metric'
     generated: true
   - name: Logs Pipelines
     url: /api/v2/logs-pipelines/

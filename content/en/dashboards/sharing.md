@@ -6,6 +6,9 @@ aliases:
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
     - /graphing/dashboards/shared_graph/
 further_reading:
+- link: "https://www.datadoghq.com/blog/dashboard-sharing/"
+  tag: "Blog"
+  text: "Share dashboards securely with anyone outside of your organization"
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Create Dashboards in Datadog"

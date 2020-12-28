@@ -119,14 +119,12 @@ For more examples of setting the Agent hostname in other languages, refer to the
 
 ```javascript
 const tracer = require('dd-trace').init();
-const request = require('request');
-request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
-    error,
-    resp,
-    body
-) {
-    tracer.setUrl(`http://${hostname}:8126`)
-});
+const axios = require('axios');
+
+(async () => {
+  const { data: hostname } = await axois.get('http://169.254.169.254/latest/meta-data/local-ipv4');
+  tracer.setUrl(`http://${hostname}:8126`);
+})();
 ```
 
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
