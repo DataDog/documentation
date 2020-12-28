@@ -7346,7 +7346,7 @@ components:
           type: string
         name:
           description: Name of the variable.
-          example: ''
+          example: VARIABLE_NAME
           type: string
         pattern:
           description: Pattern of the variable.
@@ -7483,6 +7483,33 @@ components:
       - GREATER_EQUALS
       - LOWER_EQUALS
       - MATCH_REGEX
+    SyntheticsConfigVariable:
+      description: Object defining a variable that can be used in your test configuration.
+      properties:
+        example:
+          description: Example for the variable.
+          type: string
+        name:
+          description: Name of the variable.
+          example: VARIABLE_NAME
+          type: string
+        pattern:
+          description: Pattern of the variable.
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsConfigVariableType'
+      required:
+      - example
+      - type
+      - name
+      type: object
+    SyntheticsConfigVariableType:
+      description: Type of the configuration variable.
+      enum:
+      - text
+      type: string
+      x-enum-varnames:
+      - TEXT
     SyntheticsDeleteTestsPayload:
       description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
 
@@ -8027,10 +8054,15 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
+        configVariables:
+          description: API tests only - array of variables used for the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsConfigVariable'
+          type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
         variables:
-          description: Array of variables used for the test.
+          description: Browser tests only - array of variables used for the test steps.
           items:
             $ref: '#/components/schemas/SyntheticsBrowserVariable'
           type: array
