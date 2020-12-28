@@ -441,6 +441,32 @@ Transform:
 {{% /tab %}}
 
 {{% tab "AWS CDK" %}}
+
+Tag your app, stack or individual Lambda functions using the [Tags class][1]. If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
+
+```javascript
+import * as cdk from "@aws-cdk/core";
+
+class CdkStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+    this.addTransform("DatadogServerless");
+
+    new cdk.CfnMapping(this, "Datadog", {
+      mapping: {
+        Parameters: {
+          service: "<SERVICE>",
+          env: "<ENV>",
+        },
+      },
+    });
+  }
+}
+```
+
+[1]: https://docs.aws.amazon.com/cdk/latest/guide/tagging.html
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
+
 {{% /tab %}}
 
 {{% tab "Custom" %}}
