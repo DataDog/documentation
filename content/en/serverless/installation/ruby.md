@@ -106,7 +106,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 ### Unified Service Tagging
 
-Although it's optional, we highly recommend tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][7].
+Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][7].
 
 ## Explore Datadog Serverless Monitoring
 
