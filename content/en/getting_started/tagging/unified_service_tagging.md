@@ -470,6 +470,11 @@ class CdkStack extends cdk.Stack {
 {{% /tab %}}
 
 {{% tab "Custom" %}}
+
+Apply the `env`, `service` and `version` tags following the AWS instructions for [Tagging Lambda Functions][1].
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
+
 {{% /tab %}}
 
 {{< /tabs >}}
