@@ -363,6 +363,59 @@ to configure the `service` tag only in the configuration of the process check.
 {{% /tab %}}
 {{< /tabs >}}
 
+### Serverless environment
+
+#### AWS Lambda Functions 
+
+Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to the metrics, traces and logs emitted from Lambda functions. 
+
+{{< tabs >}}
+
+{{% tab "Serverless Framework" %}}
+
+Tag your Lambda functions using the [tags][1] option:
+
+```yaml
+# serverless.yml
+service: service-name
+provider:
+  name: aws
+  # to apply the tags to all functions
+  tags:
+    env: "<ENV>"
+    service: "<SERVICE>"
+    version: "<VERSION>"
+
+functions:
+  hello:
+    # this function will inherit the service level tags config above
+    handler: handler.hello
+  world:
+    # this function will overwrite the tags
+    handler: handler.users
+    tags:
+      env: "<ENV>"
+      service: "<SERVICE>"
+      version: "<VERSION>"
+```
+
+If you have installed the [Datadog serverless plugin][2], the plugin automatically tag the Lambda functions with the `service` and `env` tags using the `service` and `stage` values from the serverless application definition, unless a `service` or `env` tag already exists.
+
+[1]: https://www.serverless.com/framework/docs/providers/aws/guide/functions#tags
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
+{{% /tab %}}
+
+{{% tab "AWS SAM" %}}
+{{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{% /tab %}}
+
+{{% tab "Custom" %}}
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
