@@ -4,10 +4,6 @@ kind: documentation
 description: Create and manage incidents
 ---
 
-<div class="alert alert-warning">
-The Datadog Clipboard is currently in public beta.
-</div>
-
 # Overview
 
 The Datadog Clipboard is a cross-platform tool for collecting and sharing signals across contexts. It is personal to each user and stores all copied graphs alongside any saved links. Signals can be grouped and exported to a dashboard, notebook, or incident.
