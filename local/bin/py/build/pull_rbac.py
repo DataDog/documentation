@@ -4,11 +4,12 @@ import sys
 import requests
 import json
 from os import getenv
+from collections import defaultdict
 
 def pull_rbac():
   api_endpoint = 'https://app.datadoghq.com/api/v2/permissions'
   headers = {'DD-API-KEY': sys.argv[1], 'DD-APPLICATION-KEY': sys.argv[2]}
-  formatted_permissions_dict = {}
+  formatted_permissions_dict = defaultdict(list)
 
   r = requests.get(api_endpoint, headers=headers)
 
@@ -22,7 +23,7 @@ def pull_rbac():
 
       # Remove legacy logs permissions from dictionary before converting to JSON.  These legacy permissions are hard-coded in rbac-permissions-table partial until they can be deprecated.
       if permission_name in ('logs_live_tail', 'logs_read_index_data'):
-        del permission
+        continue
       else:
         if group_name not in formatted_permissions_dict.keys():
           formatted_permissions_dict[group_name] = [permission]
@@ -35,6 +36,7 @@ def pull_rbac():
       outfile.write(formatted_permissions_json)
   else:
     print('RBAC api request failed.')
+    print(r)
     
     if getenv("LOCAL") != 'True':
       sys.exit(1)

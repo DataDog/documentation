@@ -3,6 +3,7 @@ title: Datadog Role Permissions
 kind: documentation
 aliases:
   - /account_management/faq/managing-global-role-permissions
+disable_toc: true
 further_reading:
     - link: '/account_management/rbac/'
       tag: 'Documentation'
