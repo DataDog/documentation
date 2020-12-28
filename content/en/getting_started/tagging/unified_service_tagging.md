@@ -367,7 +367,9 @@ to configure the `service` tag only in the configuration of the process check.
 
 #### AWS Lambda Functions 
 
-Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to the metrics, traces and logs emitted from Lambda functions. 
+Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to metrics, traces and logs.
+
+Note, these tags are expected to be specified through AWS resource tags, instead of environment variables. Specifically, the `DD_ENV`, `DD_SERVICE` and `DD_VERSION` environment variables are not supported.
 
 {{< tabs >}}
 
@@ -406,6 +408,36 @@ If you have installed the [Datadog serverless plugin][2], the plugin automatical
 {{% /tab %}}
 
 {{% tab "AWS SAM" %}}
+
+Tag your Lambda functions using the [Tags][1] option:
+
+```yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  MyLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Tags:
+        env: "<ENV>"
+        service: "<SERVICE>"
+        version: "<VERSION>"
+```
+
+If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      service: "<SERVICE>"
+      env: "<ENV>"
+```
+
+[1]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-tags
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
+
 {{% /tab %}}
 
 {{% tab "AWS CDK" %}}
