@@ -7,9 +7,9 @@ from os import getenv
 from collections import defaultdict
 
 def pull_rbac():
-  api_endpoint = 'https://app.datadoghq.com/api/v2/permissionss'
+  api_endpoint = 'https://app.datadoghq.com/api/v2/permissions'
   headers = {'DD-API-KEY': sys.argv[1], 'DD-APPLICATION-KEY': sys.argv[2]}
-  formatted_permissions_dict = defaultdict(list)
+  formatted_permissions_dict = {}
 
   r = requests.get(api_endpoint, headers=headers)
 
@@ -25,10 +25,7 @@ def pull_rbac():
       if permission_name in ('logs_live_tail', 'logs_read_index_data'):
         continue
       else:
-        if group_name not in formatted_permissions_dict.keys():
-          formatted_permissions_dict[group_name] = [permission]
-        else:
-          formatted_permissions_dict[group_name].append(permission)
+        formatted_permissions_dict.setdefault(group_name, []).append(permission)
 
     formatted_permissions_json = json.dumps(formatted_permissions_dict)
 
