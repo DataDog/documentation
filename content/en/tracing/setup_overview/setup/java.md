@@ -110,7 +110,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ### Add the Java Tracer to the JVM
 
-Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
+Use the documentation for your application server to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
 {{< tabs >}}
 {{% tab "Spring Boot" %}}
