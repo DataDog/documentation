@@ -20204,6 +20204,40 @@
           "ROLES"
         ]
       },
+      "SecurityMonitoringFilter": {
+        "description": "The rule's suppression filter.",
+        "properties": {
+          "action": {
+            "description": "The type of filtering action.",
+            "enum": [
+              "require",
+              "suppress"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "REQUIRE",
+              "SUPPRESS"
+            ]
+          },
+          "query": {
+            "description": "Query for selecting logs to apply the filtering action.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringFilterAction": {
+        "description": "The type of filtering action.",
+        "enum": [
+          "require",
+          "suppress"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "REQUIRE",
+          "SUPPRESS"
+        ]
+      },
       "SecurityMonitoringListRulesResponse": {
         "description": "List of rules.",
         "properties": {
@@ -20265,6 +20299,32 @@
                   "description": "User ID of the user who created the rule.",
                   "format": "int64",
                   "type": "integer"
+                },
+                "filters": {
+                  "description": "Additional queries to filter matched events before they are processed.",
+                  "items": {
+                    "description": "The rule's suppression filter.",
+                    "properties": {
+                      "action": {
+                        "description": "The type of filtering action.",
+                        "enum": [
+                          "require",
+                          "suppress"
+                        ],
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "REQUIRE",
+                          "SUPPRESS"
+                        ]
+                      },
+                      "query": {
+                        "description": "Query for selecting logs to apply the filtering action.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
                 },
                 "id": {
                   "description": "The ID of the rule.",
@@ -20609,6 +20669,32 @@
               "required": [
                 "status"
               ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "filters": {
+            "description": "Additional queries to filter matched events before they are processed.",
+            "items": {
+              "description": "The rule's suppression filter.",
+              "properties": {
+                "action": {
+                  "description": "The type of filtering action.",
+                  "enum": [
+                    "require",
+                    "suppress"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "REQUIRE",
+                    "SUPPRESS"
+                  ]
+                },
+                "query": {
+                  "description": "Query for selecting logs to apply the filtering action.",
+                  "type": "string"
+                }
+              },
               "type": "object"
             },
             "type": "array"
@@ -21160,6 +21246,32 @@
             "format": "int64",
             "type": "integer"
           },
+          "filters": {
+            "description": "Additional queries to filter matched events before they are processed.",
+            "items": {
+              "description": "The rule's suppression filter.",
+              "properties": {
+                "action": {
+                  "description": "The type of filtering action.",
+                  "enum": [
+                    "require",
+                    "suppress"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "REQUIRE",
+                    "SUPPRESS"
+                  ]
+                },
+                "query": {
+                  "description": "Query for selecting logs to apply the filtering action.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
           "id": {
             "description": "The ID of the rule.",
             "type": "string"
@@ -21405,6 +21517,32 @@
                     "HIGH",
                     "CRITICAL"
                   ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "filters": {
+            "description": "Additional queries to filter matched events before they are processed.",
+            "items": {
+              "description": "The rule's suppression filter.",
+              "properties": {
+                "action": {
+                  "description": "The type of filtering action.",
+                  "enum": [
+                    "require",
+                    "suppress"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "REQUIRE",
+                    "SUPPRESS"
+                  ]
+                },
+                "query": {
+                  "description": "Query for selecting logs to apply the filtering action.",
+                  "type": "string"
                 }
               },
               "type": "object"
@@ -45145,6 +45283,32 @@
                             "format": "int64",
                             "type": "integer"
                           },
+                          "filters": {
+                            "description": "Additional queries to filter matched events before they are processed.",
+                            "items": {
+                              "description": "The rule's suppression filter.",
+                              "properties": {
+                                "action": {
+                                  "description": "The type of filtering action.",
+                                  "enum": [
+                                    "require",
+                                    "suppress"
+                                  ],
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "REQUIRE",
+                                    "SUPPRESS"
+                                  ]
+                                },
+                                "query": {
+                                  "description": "Query for selecting logs to apply the filtering action.",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
                           "id": {
                             "description": "The ID of the rule.",
                             "type": "string"
@@ -45453,6 +45617,32 @@
                     },
                     "type": "array"
                   },
+                  "filters": {
+                    "description": "Additional queries to filter matched events before they are processed.",
+                    "items": {
+                      "description": "The rule's suppression filter.",
+                      "properties": {
+                        "action": {
+                          "description": "The type of filtering action.",
+                          "enum": [
+                            "require",
+                            "suppress"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "REQUIRE",
+                            "SUPPRESS"
+                          ]
+                        },
+                        "query": {
+                          "description": "Query for selecting logs to apply the filtering action.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "isEnabled": {
                     "description": "Whether the rule is enabled.",
                     "example": true,
@@ -45707,6 +45897,32 @@
                       "description": "User ID of the user who created the rule.",
                       "format": "int64",
                       "type": "integer"
+                    },
+                    "filters": {
+                      "description": "Additional queries to filter matched events before they are processed.",
+                      "items": {
+                        "description": "The rule's suppression filter.",
+                        "properties": {
+                          "action": {
+                            "description": "The type of filtering action.",
+                            "enum": [
+                              "require",
+                              "suppress"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "REQUIRE",
+                              "SUPPRESS"
+                            ]
+                          },
+                          "query": {
+                            "description": "Query for selecting logs to apply the filtering action.",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
                     },
                     "id": {
                       "description": "The ID of the rule.",
@@ -46119,6 +46335,32 @@
                       "format": "int64",
                       "type": "integer"
                     },
+                    "filters": {
+                      "description": "Additional queries to filter matched events before they are processed.",
+                      "items": {
+                        "description": "The rule's suppression filter.",
+                        "properties": {
+                          "action": {
+                            "description": "The type of filtering action.",
+                            "enum": [
+                              "require",
+                              "suppress"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "REQUIRE",
+                              "SUPPRESS"
+                            ]
+                          },
+                          "query": {
+                            "description": "Query for selecting logs to apply the filtering action.",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
                     "id": {
                       "description": "The ID of the rule.",
                       "type": "string"
@@ -46407,6 +46649,32 @@
                     },
                     "type": "array"
                   },
+                  "filters": {
+                    "description": "Additional queries to filter matched events before they are processed.",
+                    "items": {
+                      "description": "The rule's suppression filter.",
+                      "properties": {
+                        "action": {
+                          "description": "The type of filtering action.",
+                          "enum": [
+                            "require",
+                            "suppress"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "REQUIRE",
+                            "SUPPRESS"
+                          ]
+                        },
+                        "query": {
+                          "description": "Query for selecting logs to apply the filtering action.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
                   "isEnabled": {
                     "description": "Whether the rule is enabled.",
                     "type": "boolean"
@@ -46641,6 +46909,32 @@
                       "description": "User ID of the user who created the rule.",
                       "format": "int64",
                       "type": "integer"
+                    },
+                    "filters": {
+                      "description": "Additional queries to filter matched events before they are processed.",
+                      "items": {
+                        "description": "The rule's suppression filter.",
+                        "properties": {
+                          "action": {
+                            "description": "The type of filtering action.",
+                            "enum": [
+                              "require",
+                              "suppress"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "REQUIRE",
+                              "SUPPRESS"
+                            ]
+                          },
+                          "query": {
+                            "description": "Query for selecting logs to apply the filtering action.",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
                     },
                     "id": {
                       "description": "The ID of the rule.",

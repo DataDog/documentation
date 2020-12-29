@@ -9199,6 +9199,11 @@ components:
             (and were NOT running the Datadog Agent).'
           format: int64
           type: integer
+        apm_azure_app_service_host_count:
+          description: Contains the total number of Azure App Services hosts using
+            APM.
+          format: int64
+          type: integer
         apm_host_count:
           description: 'Shows the total number of hosts using APM during the hour,
 
@@ -9242,6 +9247,13 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        infra_azure_app_service:
+          description: 'Contains the total number of hosts that reported via the Azure
+            App Services integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
       type: object
     UsageHostsResponse:
       description: Host usage response.
@@ -9651,6 +9663,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        apm_azure_app_service_host_top99p:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current date all organizations.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
@@ -9810,6 +9827,11 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        apm_azure_app_service_host_top99p:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
@@ -9828,6 +9850,11 @@ components:
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        azure_app_service_top99p:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         billable_ingested_bytes_sum:
@@ -9960,6 +9987,11 @@ components:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        apm_azure_app_service_host_top99p_sum:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current months all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
