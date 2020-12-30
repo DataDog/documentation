@@ -14,7 +14,7 @@ further_reading:
 
 By connecting your serverless traces to metrics, Datadog provides a context-rich picture of your application’s performance, allowing you to better troubleshoot performance issues given the distributed nature of serverless applications. 
 
-The Datadog Python, Node.js, Ruby, Go and Java tracing libraries support distributed tracing for AWS Lambda. The easiest way to add tracing to your application is with the [Datadog Lambda Library][2], which includes the Datadog tracing librarsy as a dependency.
+The Datadog Python, Node.js, Ruby, Go and Java tracing libraries support distributed tracing for AWS Lambda. The easiest way to add tracing to your application is with the [Datadog Lambda Library][2], which includes the Datadog tracing library as a dependency.
 
 ## Choose your Tracing Library
 
@@ -85,6 +85,14 @@ Learn more about tracing through .NET Azure serverless applications [here][16].
 
 *Looking to trace through .NET AWS Lambda serverless applications with Datadog tracing libraries? Open a feature request [here][9].*
 
+### Hybrid Environments
+
+If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces will automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services. 
+
+If `dd-trace` is installed on your hosts with the Datadog Agent, and your serverless functions are traced with AWS X-Ray, trace merging is required to see a single, connected trace across your infrastructure. Learn more about merging traces from `dd-trace` and AWS X-Ray [here][10].
+
+Datadog's [AWS X-Ray integration][12] only provides traces for Lambda functions. Learn more about tracing in container or host-based environments [here][17].
+
 ## Enable Datadog APM
 
 {{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
@@ -113,3 +121,4 @@ To enable Datadog APM without enabling logging for your functions, ensure the `D
 [14]: /tracing/setup_overview/compatibility_requirements/go
 [15]: /serverless/datadog_lambda_library/java#distributed-tracing
 [16]: /serverless/azure_app_services
+[17]: /tracing/setup_overview/
