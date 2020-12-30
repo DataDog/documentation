@@ -17,6 +17,9 @@ further_reading:
   - link: logs/explorer/patterns
     tag: Documentation
     text: ログ内のパターン検出
+  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+    tag: ブログ
+    text: ログエクスプローラーの URL をクリップボードに追加する
 ---
 ## 概要
 

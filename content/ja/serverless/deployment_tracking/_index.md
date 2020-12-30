@@ -27,7 +27,7 @@ Datadog は、AWS CloudTrail からお使いの AWS Lambda 関数におけるコ
 cloudtrail:LookupEvents
 ```
 
-アクセス許可を既に追加していても AWS Lambda 関数のイベントが表示されない場合は、[サポートチーム][3]までお問い合わせください。
+アクセス許可を既に追加していても AWS Lambda 関数のイベントが表示されない場合は、[サポートチーム][3]までお問い合わせの上、Deployment Tracking にオプトインしてください。
 
 ## その他の参考資料
 
