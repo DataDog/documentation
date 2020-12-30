@@ -34,7 +34,7 @@ For instance, you would append those two attributes to your logs with:
   <?php
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
-      \dd_trace_peek_trace_id(),
+      \DDTrace\trace_id(),
       \dd_trace_peek_span_id()
   );
   my_error_logger('Error message.' . $append);
@@ -48,7 +48,7 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
   $logger->pushProcessor(function ($record) {
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
-          \dd_trace_peek_trace_id(),
+          \DDTrace\trace_id(),
           \dd_trace_peek_span_id()
       );
       return $record;
@@ -62,7 +62,7 @@ If your application uses json logs format instead of appending trace_id and span
 <?php
   $logger->pushProcessor(function ($record) {
       $record['dd'] = [
-          'trace_id' => \dd_trace_peek_trace_id(),
+          'trace_id' => \DDTrace\trace_id(),
           'span_id'  => \dd_trace_peek_span_id(),
       ];
 
