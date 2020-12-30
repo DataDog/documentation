@@ -145,6 +145,7 @@ Please see the [full Metrics Summary documentation][20] for more details.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /logs
 [2]: /tracing/
 [3]: /metrics/explorer/
