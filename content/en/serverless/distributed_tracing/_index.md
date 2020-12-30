@@ -106,7 +106,7 @@ To enable Datadog APM without enabling logging for your functions, ensure the `D
 [7]: /tracing/setup_overview/compatibility_requirements/python
 [8]: /serverless/installation/
 [9]: https://docs.datadoghq.com/help/
-[10]: /tracing/setup_overview/serverless_functions/#augment-aws-x-ray-tracing-with-datadog-apm
+[10]: /serverless/distributed_tracing/serverless_trace_merging
 [11]: /tracing/setup_overview/compatibility_requirements/nodejs
 [12]: /integrations/amazon_xray/#overview
 [13]: /tracing/setup_overview/compatibility_requirements/ruby
