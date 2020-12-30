@@ -690,7 +690,9 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             newParentKey = "additionalProperties";
           }
         } else if (typeof value === 'object' && "oneOf" in value) {
-          childData = value.oneOf;
+          childData = value.oneOf
+            .map((obj, indx) => { return {[`Option ${indx + 1}`]: value.oneOf[indx]} })
+            .reduce((obj, item) => ({...obj, ...item}), {});
         }
         // for widgets
         /*
