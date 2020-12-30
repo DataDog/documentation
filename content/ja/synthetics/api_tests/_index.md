@@ -27,6 +27,9 @@ further_reading:
   - link: /synthetics/private_locations
     tag: Documentation
     text: 内部エンドポイントで API テストを実行する
+  - link: 'https://www.datadoghq.com/blog/monitor-apis-with-datadog'
+    tag: ブログ
+    text: Datadog SSL、TLS、Multistep API テストを使用してワークフローを監視する
 ---
 ## 概要
 

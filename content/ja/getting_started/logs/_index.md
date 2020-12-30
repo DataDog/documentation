@@ -36,29 +36,13 @@ Datadog ログ管理は、アプリケーションからログを収集するた
 
 ログは全文メッセージにすることができます。
 
-{{< site-region region="us" >}}
+セキュア TCP エンドポイントはポートが `{{< region-param key="tcp_endpoint_port_ssl" >}}` の {{< region-param key="tcp_endpoint" >}} (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
 
-セキュア TCP エンドポイントは {{< region-param key="tcp_endpoint" code="true" >}} (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
+```
+telnet {{< region-param key="tcp_endpoint" >}} {{< region-param key="tcp_endpoint_port_ssl" >}}
 
-{{< code-block lang="text" >}}
-telnet intake.logs.datadoghq.com 10514
-
-<DATADOG_API_キー> TCP を介して送信されるプレーンテキストログ
-{{< /code-block >}}
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-セキュア TCP エンドポイントは {{< region-param key="tcp_endpoint" code="true" >}} (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
-
-{{< code-block lang="text" >}}
-telnet tcp-intake.logs.datadoghq.eu 1883
-
-<DATADOG_API_キー> TCP を介して送信されるプレーンテキストログ
-{{< /code-block >}}
-
-{{< /site-region >}}
+<DATADOG_API_KEY> Plain text log sent through TCP
+```
 
 これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
 

@@ -6,8 +6,6 @@ description: iOS アプリケーションから RUM データを収集します�
 kind: documentation
 title: iOS RUM 収集
 ---
-<div class="alert alert-info">iOS RUM の収集はベータ版です。ご質問がございましたら、<a href="https://docs.datadoghq.com/help/" target="_blank">サポートチーム</a>までお問い合わせください。</div>
-
 [Datadog の `dd-sdk-ios` クライアント側 RUM SDK][2] を使用すると、iOS アプリケーションから Datadog へ[リアルユーザーモニタリングのデータ][1]を送信すると共に、次の機能を利用できます。
 
 * アプリのパフォーマンスおよびデモグラフィックに関する全体像を把握。
@@ -23,7 +21,7 @@ title: iOS RUM 収集
 
 [CocoaPods][4] を使用して、`dd-sdk-ios` をインストールできます。
 ```
-pod 'DatadogSDK', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :tag => '1.4.0-beta1'
+pod 'DatadogSDK'
 ```
 
 [4]: https://cocoapods.org/
@@ -33,7 +31,7 @@ pod 'DatadogSDK', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :tag => '
 
 Apple の [Swift Package Manager][5] を使用して SDK を統合するには、`Package.swift` に以下を依存関係として追加します。
 ```swift
-.package(url: "https://github.com/DataDog/dd-sdk-ios.git", .exact("1.4.0-beta1"))
+.package(url: "https://github.com/DataDog/dd-sdk-ios.git", .upToNextMajor(from: "1.0.0"))
 ```
 
 [5]: https://swift.org/package-manager/
@@ -43,7 +41,7 @@ Apple の [Swift Package Manager][5] を使用して SDK を統合するには�
 
 [Carthage][6] を使用して、`dd-sdk-ios` をインストールできます。
 ```
-github "DataDog/dd-sdk-ios" "1.4.0-beta1"
+github "DataDog/dd-sdk-ios"
 ```
 
 [6]: https://github.com/Carthage/Carthage
@@ -83,7 +81,7 @@ Datadog.initialize(
             environment: "<environment_name>"
         )
         .set(serviceName: "app-name")
-        .set(rumEndpoint: .eu)
+        .set(endpoint: .eu)
         .build()
 )
 ```
@@ -110,17 +108,17 @@ RUM SDK には、次の 2 つのインスツルメンテーション方法があ
 
 ### RUM ビュー
 
-RUM ビューの追跡を有効にするには、SDK を構成するときに `.trackUIKitRUMViews(using:)` オプションを使用します。
+RUM ビューの追跡を有効にするには、SDK を構成するときに `.trackUIKitRUMViews()` オプションを使用します。
 ```swift
 Datadog.Configuration
    .builderUsing(...)
-   .trackUIKitRUMViews(using: predicate)
+   .trackUIKitRUMViews()
    .build()
 
 Global.rum = RUMMonitor.initialize()
 ```
 
-`predicate` は、`UIKitRUMViewsPredicate` プロトコルに準拠するタイプである必要があります。
+RUM ビューの追跡をカスタマイズするには、`.trackUIKitRUMViews(using: predicate)` を使用し、`UIKitRUMViewsPredicate` プロトコルに準拠する `predicate` の独自の実装を提供します。
 ```swift
 public protocol UIKitRUMViewsPredicate {
     func rumView(for viewController: UIViewController) -> RUMView?
@@ -155,11 +153,11 @@ let session = URLSession(
 
 ### RUM アクション
 
-RUM アクションの追跡を有効にするには、SDK を構成するときに `.trackUIKitActions(_:)` オプションを使用します。
+RUM アクションの追跡を有効にするには、SDK を構成するときに `.trackUIKitActions()` オプションを使用します。
 ```
 Datadog.Configuration
    .builderUsing(...)
-   .trackUIKitActions(true)
+   .trackUIKitActions()
    .build()
 
 Global.rum = RUMMonitor.initialize()
@@ -254,7 +252,7 @@ Global.rum.stopResourceLoading(
 }
 ```
 
-**注**: `.startUserAction(type:name:)` と `.stopUserAction(type:)` を使用する場合。これは、SDK がリソースの開始と完了を一致させるために必要です。
+**注**: `.startUserAction(type:name:)` と `.stopUserAction(type:)` を使用する場合、アクション `type` は同じである必要があります。これは、SDK がリソースの開始と完了を一致させるために必要です。
 
 詳細と使用可能なオプションについては、`DDRUMMonitor` クラスのコードドキュメントのコメントを参照してください。
 
