@@ -130,17 +130,17 @@ To make this concrete with an example, suppose your host reported metric values 
 
 _Count_ would add them up and send the value 15 over to our servers, while _rate_ would take the total sum and divide it by 10 seconds to report a value of 1.5. _Gauge_ would simply report the last value, 3. If your metric is a _histogram_, Datadog would receive five different values: avg = 1.88, count = 8, median = 2, p95 = 3, max = 3.
 
-Metric types also determine which graphs and functions are available to use with the metric in the app. Please see the [metrics types][18] documentation for more detailed examples of each metric type and submission instructions.
+Metric types also determine which graphs and functions are available to use with the metric in the app. Please see the [metrics types][14] documentation for more detailed examples of each metric type and submission instructions.
 
 ### How do I view real-time information about my metrics?
 
-The [Metrics Summary page][19] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
+The [Metrics Summary page][18] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
 
 Click on any metric name to display a sidepanel with more detailed information. The metric panel displays key information for a given metric, including its metadata (type, unit, interval), number of distinct metrics, number of reporting hosts, number of tags submitted, and a table containing all tags submitted on a metric. Seeing which tags are being submitted on a metric helps you understand the number of distinct metrics reporting from it, since this number depends on your tag value combinations.
 
-Note: The number of distinct metrics reported in the details sidepanel on Metrics Summary does not define your bill. Please see your [usage details][20] for a precise accounting of your usage over the past month.
+Note: The number of distinct metrics reported in the details sidepanel on Metrics Summary does not define your bill. Please see your [usage details][19] for a precise accounting of your usage over the past month.
 
-Please see the [full Metrics Summary documentation][21] for more details.
+Please see the [full Metrics Summary documentation][20] for more details.
 
 ## Further reading
 
@@ -148,21 +148,20 @@ Please see the [full Metrics Summary documentation][21] for more details.
 [1]: /logs
 [2]: /tracing/
 [3]: /metrics/explorer/
-[4]: https://docs.datadoghq.com/dashboards/
-[5]: https://docs.datadoghq.com/notebooks/
+[4]: /dashboards/
+[5]: /notebooks/
 [6]: https://www.datadoghq.com/blog/timeseries-metric-graphs-101/
 [7]: /integrations/
-[8]: https://docs.datadoghq.com/integrations/amazon_ec2/
+[8]: /integrations/amazon_ec2/
 [9]: /logs/logs_to_metrics/
 [10]: /developers/metrics/
 [11]: /agent/
 [12]: /developers/metrics/dogstatsd_metrics_submission/
 [13]: /api/
 [14]: /developers/metrics/types/
-[15]: /getting_started/tagging/using_tags/?tab=assignment
+[15]: /getting_started/tagging/using_tags/
 [16]: /dashboards/functions/
 [17]: /metrics/distributions/
-[18]: https://docs.datadoghq.com/developers/metrics/types/?tab=count#overview
-[19]: https://app.datadoghq.com/metric/summary
-[20]: /account_management/billing/usage_details/
-[21]: /metrics/summary/
+[18]: https://app.datadoghq.com/metric/summary
+[19]: /account_management/billing/usage_details/
+[20]: /metrics/summary/
