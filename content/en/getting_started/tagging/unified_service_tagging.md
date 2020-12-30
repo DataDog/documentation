@@ -435,9 +435,9 @@ Transform:
       env: "<ENV>"
 ```
 
+
 [1]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-tags
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-
 {{% /tab %}}
 
 {{% tab "AWS CDK" %}}
@@ -464,20 +464,22 @@ class CdkStack extends cdk.Stack {
 }
 ```
 
+
 [1]: https://docs.aws.amazon.com/cdk/latest/guide/tagging.html
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
-
 {{% /tab %}}
 
 {{% tab "Custom" %}}
 
 Apply the `env`, `service` and `version` tags following the AWS instructions for [Tagging Lambda Functions][1].
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
 {{% /tab %}}
 
 {{< /tabs >}}
+
+Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation stack for your [Datadog Forwarder][14]. This option defaults to `true` since version `3.19.0`.
 
 ## Further Reading
 
@@ -497,3 +499,4 @@ Apply the `env`, `service` and `version` tags following the AWS instructions for
 [11]: /integrations/statsd/
 [12]: https://www.chef.io/
 [13]: https://www.ansible.com/
+[14]: /serverless/forwarder/
