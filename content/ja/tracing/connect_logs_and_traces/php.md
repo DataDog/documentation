@@ -31,10 +31,9 @@ PHP ログとトレースを手動で接続する方法については、以下�
 
 ```php
   <?php
-  $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
-      $span->getTraceId(),
+      \DDTrace\trace_id(),
       \dd_trace_peek_span_id()
   );
   my_error_logger('Error message.' . $append);
@@ -46,13 +45,9 @@ PHP ログとトレースを手動で接続する方法については、以下�
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-      if (null === $span) {
-          return $record;
-      }
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
-          $span->getTraceId(),
+          \DDTrace\trace_id(),
           \dd_trace_peek_span_id()
       );
       return $record;
@@ -65,13 +60,8 @@ PHP ログとトレースを手動で接続する方法については、以下�
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-      if (null === $span) {
-          return $record;
-      }
-
       $record['dd'] = [
-          'trace_id' => $span->getTraceId(),
+          'trace_id' => \DDTrace\trace_id(),
           'span_id'  => \dd_trace_peek_span_id(),
       ];
 
