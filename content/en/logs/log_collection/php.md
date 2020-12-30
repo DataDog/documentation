@@ -446,6 +446,10 @@ monolog:
 
 ### Laravel
 
+<div class="alert alert-warning">
+Note that the function <code>\DDTrace\trace_id()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
+</div>
+
 ```php
 <?php
 
