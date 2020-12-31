@@ -1,4 +1,4 @@
 ---
 title: Tags
-draft: true
+headless: true
 ---

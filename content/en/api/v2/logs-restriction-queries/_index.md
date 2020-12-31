@@ -1,4 +1,4 @@
 ---
 title: Logs Restriction Queries
-draft: true
+headless: true
 ---

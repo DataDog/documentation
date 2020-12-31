@@ -1,4 +1,4 @@
 ---
 title: Incident Teams
-draft: true
+headless: true
 ---

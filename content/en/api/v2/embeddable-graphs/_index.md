@@ -1,4 +1,4 @@
 ---
 title: Embeddable Graphs
-draft: true
+headless: true
 ---

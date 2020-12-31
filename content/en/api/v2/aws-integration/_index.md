@@ -1,4 +1,4 @@
 ---
 title: AWS Integration
-draft: true
+headless: true
 ---

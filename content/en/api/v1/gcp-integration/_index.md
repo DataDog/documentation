@@ -1,4 +1,4 @@
 ---
 title: GCP Integration
-draft: true
+headless: true
 ---
