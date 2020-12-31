@@ -1,10 +1,6 @@
 ---
 title: Manage Traffic Costs with NPM
 kind: guide
-further_reading:
-- link: "/logs/explorer/analytics/?tab=timeseries#overview"
-  tag: "Documentation"
-  text: "Learn more about Log Analytics"
 ---
 Traffic is expensive, especially in the cloud. Cloud providers charge differently for traffic within an availability zone, traffic between availability zones (AZs), and traffic between regions (this pricing may differ by region). Cross-regional traffic is not only the most expensive, but also the most vulnerable to errors, latency, and security threats. 
 
