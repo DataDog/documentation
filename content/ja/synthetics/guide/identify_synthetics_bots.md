@@ -24,21 +24,11 @@ further_reading:
 
 ## IP アドレス
 
-{{< site-region region="us" >}}
+Datadog で管理されている各場所に対応する **Synthetic モニタリング IP 範囲**を使用できます。
 
-Datadog で管理されている各場所に対応する [**Synthetic モニタリング IP 範囲**][1]を使用できます。
-
-[1]: https://ip-ranges.datadoghq.com/synthetics.json
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-Datadog で管理されている各場所に対応する [**Synthetic モニタリング IP 範囲**][1]を使用できます。
-
-[1]: https://ip-ranges.datadoghq.eu/synthetics.json
-
-{{< /site-region >}}
+```
+https://ip-ranges.{{< region-param key="dd_site" >}}/synthetics.json
+```
 
 ## デフォルトのヘッダー
 

@@ -40,7 +40,7 @@ v1.0.0 の時点で、Datadog Cluster Agent のカスタムメトリクスサー
 
 1. Datadog Cluster Agent のデプロイで、`DD_EXTERNAL_METRICS_PROVIDER_ENABLED` を `true` に設定します。
 2. Datadog [API とアカウントのアプリケーションキー][6]を使って、Datadog Cluster Agent のデプロイで、`<DD_APP_KEY>` と `<DD_API_KEY>` を構成します。
-3. 任意: EU アカウントを使用している場合は、`DATADOG_HOST` を `https://app.datadoghq.eu` に設定します。
+3. `DATADOG_HOST` を `https://{{< region-param key="dd_full_site" >}}` に設定します (デフォルトは `https://app.datadoghq.com`)。
 
 ### External Metrics Provider を登録する
 

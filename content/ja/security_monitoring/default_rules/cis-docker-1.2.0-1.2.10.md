@@ -23,6 +23,14 @@ type: security_rules
 
 Linux ファイルシステムおよびシステムのコールを監査するのと同時に、すべての Docker 関連ファイルおよびディレクトリも監査します。Docker daemon はルート権限で実行しその行動は `/etc/docker/daemon.json` を含むキーファイルやディレクトリに依存します。これにより、Docker daemon のさまざまなパラメーターが保持されるため、監査する必要があるのです。
 
+## 監査
+
+`/etc/docker/daemon.json` ファイルに関連付けられた監査ルールがあることを確認します。`/etc/docker/daemon.json` ファイルのルールを表示するには、次のコマンドを実行します。
+
+```
+auditctl -l | grep /etc/docker/daemon.json
+```
+
 ## 修復
 
 You should add a rule for the `/etc/docker/daemon.json` ファイルに規則を追加する必要があります。たとえば、以下の行を `/etc/audit/audit.rules` ファイルに追加します。

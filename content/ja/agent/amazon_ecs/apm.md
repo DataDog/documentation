@@ -118,14 +118,12 @@ tracer.configure(hostname=get_aws_ip())
 
 ```javascript
 const tracer = require('dd-trace').init();
-const request = require('request');
-request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
-    error,
-    resp,
-    body
-) {
-    tracer.setUrl(`http://${hostname}:8126`)
-});
+const axios = require('axios');
+
+(async () => {
+  const { data: hostname } = await axois.get('http://169.254.169.254/latest/meta-data/local-ipv4');
+  tracer.setUrl(`http://${hostname}:8126`);
+})();
 ```
 
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
