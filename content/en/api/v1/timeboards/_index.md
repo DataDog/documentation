@@ -1,4 +1,4 @@
 ---
 title: Timeboards
-draft: true
+headless: true
 ---

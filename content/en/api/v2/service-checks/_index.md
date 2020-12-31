@@ -1,4 +1,4 @@
 ---
 title: Service Checks
-draft: true
+headless: true
 ---

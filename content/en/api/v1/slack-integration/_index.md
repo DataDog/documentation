@@ -1,4 +1,4 @@
 ---
 title: Slack Integration
-draft: true
+headless: true
 ---

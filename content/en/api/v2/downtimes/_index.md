@@ -1,4 +1,4 @@
 ---
 title: Downtimes
-draft: true
+headless: true
 ---

@@ -1,4 +1,4 @@
 ---
 title: Roles
-draft: true
+headless: true
 ---

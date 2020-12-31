@@ -1,4 +1,4 @@
 ---
 title: Events
-draft: true
+headless: true
 ---

@@ -1,4 +1,4 @@
 ---
 title: Usage Metering
-draft: true
+headless: true
 ---

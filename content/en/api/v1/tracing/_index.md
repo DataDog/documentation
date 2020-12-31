@@ -1,4 +1,4 @@
 ---
 title: Tracing
-draft: true
+headless: true
 ---

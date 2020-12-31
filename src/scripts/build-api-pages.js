@@ -118,7 +118,7 @@ const createPages = (apiYaml, deref, apiVersion) => {
     indexYamlStr = `---\n${indexYamlStr}---\n`;
 
     // build page
-    fs.writeFileSync(`./content/en/api/${apiVersion}/${newDirName}/index.md`, indexYamlStr, 'utf8');
+    fs.writeFileSync(`./content/en/api/${apiVersion}/${newDirName}/_index.md`, indexYamlStr, 'utf8');
 
     // create a copy in /latest/
     indexYamlStr = yaml.safeDump(baseFrontMatter);

@@ -1,4 +1,4 @@
 ---
 title: Service Dependencies
-draft: true
+headless: true
 ---

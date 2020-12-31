@@ -1,4 +1,4 @@
 ---
 title: Metrics
-draft: true
+headless: true
 ---

@@ -1,4 +1,4 @@
 ---
 title: PagerDuty Integration
-draft: true
+headless: true
 ---
