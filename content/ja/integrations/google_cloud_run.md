@@ -59,6 +59,8 @@ Google Cloud Run のログは、Stackdriver を使用して収集され、HTTP �
 
 ### APM および DogStatsD
 
+**注:** この機能は、Google Cloud Run for Anthos/GKE でサポートされています (Cloud Run Fully Managed ではサポートされていません)。
+
 [Datadog Admission Controller][6] を使用して、APM トレーサーと DogStatsD クライアントを自動的に構成します。次のいずれかを使用して、環境変数 `DD_AGENT_HOST` および `DD_ENTITY_ID` を挿入します。
 
 - ラベル `admission.datadoghq.com/enabled: "true"` をポッドに追加する。

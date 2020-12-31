@@ -8,7 +8,7 @@ title: Go 向け Datadog Lambda ライブラリ
 [![Code Coverage](https://img.shields.io/codecov/c/github/DataDog/datadog-lambda-go)](https://codecov.io/gh/DataDog/datadog-lambda-go)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
 [![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/DataDog/datadog-lambda-go)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-go/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-go/blob/main/LICENSE)
 
 Datadog Lambda Library for Go は、拡張 Lambda メトリクス、分散型トレーシング、および AWS Lambda 関数からのカスタムメトリクス送信を可能にします。
 
@@ -104,7 +104,7 @@ X-Ray トレースと Datadog トレースの両方を使用している場合�
 
 ## 寄稿
 
-このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/dd-lambda-go/blob/master/CONTRIBUTING.md)に従ってプルリクエストを開いてください。
+このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/dd-lambda-go/blob/main/CONTRIBUTING.md)に従ってプルリクエストを開いてください。
 
 ## ライセンス
 
