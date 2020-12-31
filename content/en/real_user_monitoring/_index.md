@@ -26,15 +26,31 @@ Datadog's Real User Monitoring (RUM) gives you end-to-end visibility into the re
 * **Analytics / Usage**: understand who is using your application (country, device, OS…), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, feature usage…)
 * **Support**: retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors…)
 
-{{< whatsnext desc="Get started with RUM:">}}
-  {{< nextlink href="/real_user_monitoring/browser">}}<u>Browser Monitoring</u>: Create an application by configuring the browser SDK.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/android">}}<u>Android Monitoring</u>: Create an application by configuring the Android SDK.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards">}}<u>Dashboards</u>: Discover all data collected out of the box within an out of the box Dashboard.{{< /nextlink >}}
-{{< /whatsnext >}}
-{{< whatsnext desc="Explore your RUM events:">}}
-  {{< nextlink href="/real_user_monitoring/explorer/">}}<u>RUM Search</u>: Search through your page views.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/explorer/analytics">}}<u>RUM Analytics</u>: Get insights from all your events.{{< /nextlink >}}
-{{< /whatsnext >}}
+## Getting started
+
+Select your application type to start collecting RUM data:
+
+{{< partial name="rum/rum-getting-started.html" >}}
+</br>
+## Explore Datadog RUM
+
+### Out of the Box Dashboards
+
+Discover all data collected automatically and displayed on out of the box dashboards.
+
+{{< img src="real_user_monitoring/dashboards/rum_applications.gif" alt="RUM applications" >}}
+
+### RUM Explorer
+
+Explore through your page views and other user data.
+
+{{< img src="real_user_monitoring/explorer/rum_explorer.png" alt="RUM explorer"  >}}
+
+### RUM Analytics
+
+Get insights from all the events happening in your UI.
+
+{{< img src="real_user_monitoring/explorer/analytics/top_list_rum.png" alt="top list RUM example">}}
 
 ## Further Reading
 
