@@ -1,4 +1,0 @@
----
-title: Organizations
-draft: true
----

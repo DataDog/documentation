@@ -113,12 +113,12 @@ const createPages = (apiYaml, deref, apiVersion) => {
 
     // make version frontmatter
     const baseFrontMatter = {title: tag.name};
-    const indexFrontMatter = {...baseFrontMatter, draft: true};
+    const indexFrontMatter = {...baseFrontMatter, headless: true};
     let indexYamlStr = yaml.safeDump(indexFrontMatter);
     indexYamlStr = `---\n${indexYamlStr}---\n`;
 
     // build page
-    fs.writeFileSync(`./content/en/api/${apiVersion}/${newDirName}/_index.md`, indexYamlStr, 'utf8');
+    fs.writeFileSync(`./content/en/api/${apiVersion}/${newDirName}/index.md`, indexYamlStr, 'utf8');
 
     // create a copy in /latest/
     indexYamlStr = yaml.safeDump(baseFrontMatter);
