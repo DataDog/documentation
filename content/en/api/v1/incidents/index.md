@@ -1,4 +1,0 @@
----
-title: Incidents
-headless: true
----
