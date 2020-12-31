@@ -1,4 +1,4 @@
 ---
 title: Synthetics
-draft: true
+headless: true
 ---

@@ -1,4 +1,4 @@
 ---
 title: Logs Pipelines
-draft: true
+headless: true
 ---

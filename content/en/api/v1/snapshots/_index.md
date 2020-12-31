@@ -1,4 +1,4 @@
 ---
 title: Snapshots
-draft: true
+headless: true
 ---

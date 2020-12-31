@@ -1,4 +1,4 @@
 ---
 title: Dashboard Lists
-draft: true
+headless: true
 ---

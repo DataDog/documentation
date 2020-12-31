@@ -1,4 +1,4 @@
 ---
 title: Processes
-draft: true
+headless: true
 ---
