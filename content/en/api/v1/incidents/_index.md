@@ -1,4 +1,0 @@
----
-title: Incidents
-draft: true
----

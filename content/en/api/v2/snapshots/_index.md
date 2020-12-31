@@ -1,4 +1,0 @@
----
-title: Snapshots
-draft: true
----
