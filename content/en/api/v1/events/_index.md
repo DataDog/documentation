@@ -1,4 +1,0 @@
----
-title: Events
-draft: true
----
