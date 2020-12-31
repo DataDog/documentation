@@ -1,4 +1,4 @@
 ---
 title: Incidents
-draft: true
+headless: true
 ---

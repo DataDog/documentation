@@ -1,4 +1,4 @@
 ---
 title: Incident Services
-draft: true
+headless: true
 ---

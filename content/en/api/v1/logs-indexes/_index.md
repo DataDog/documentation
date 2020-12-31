@@ -1,4 +1,4 @@
 ---
 title: Logs Indexes
-draft: true
+headless: true
 ---

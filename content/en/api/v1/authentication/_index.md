@@ -1,4 +1,4 @@
 ---
 title: Authentication
-draft: true
+headless: true
 ---

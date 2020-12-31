@@ -97,7 +97,7 @@
       {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
 
       <!-- for accessing v1/v2 resources from latest -->
-      {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "/_index.md") }}
+      {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "") }}
 
       {{ range $tag := (first 1 (where $adat.tags ".name" "==" $dot.Params.title)) }}
 

@@ -1,4 +1,4 @@
 ---
 title: Logs Metrics
-draft: true
+headless: true
 ---
