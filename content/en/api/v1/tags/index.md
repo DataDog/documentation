@@ -1,4 +1,0 @@
----
-title: Tags
-headless: true
----
