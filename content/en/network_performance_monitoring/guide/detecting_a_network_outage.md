@@ -4,7 +4,7 @@ kind: guide
 ---
 Network outages are often disguised as infrastructure, application, or container issues, which makes them hard to detect. Without visibility into your regional network performance or that of third-party endpoints you rely on, it may take hours to detect an outage, which could ultimately affect your customers and the bottom line. 
 
-Alternatively with NPM, you can detect network outages in minutes. How? By using network flow data alongside process metrics, traces, logs, and infrastructure metrics, you don’t have to make assumptions about the root of an issue - you can use process of elimination (see the steps below) to determine whether you’re experiencing a network outage.
+Alternatively with NPM, you can detect network outages in minutes by using network flow data alongside process metrics, traces, logs, and infrastructure metrics, you don’t have to make assumptions about the root of an issue - you can use process of elimination (see the steps below) to determine whether you’re experiencing a network outage.
 
 ## Traffic overloading the underlying infrastructure 
 
