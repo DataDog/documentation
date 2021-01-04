@@ -211,9 +211,9 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-{{% notice Beta Notice %}}
+<div class="alert alert-warning">
 The Ruby Profiler is currently in public beta. We strongly advise evaluating the profiler at a smaller scale before deploying in production.
-{{% /notice %}}
+</div>
 
 The Datadog Profiler requires Ruby 2.1+. To begin profiling applications:
 
