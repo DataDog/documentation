@@ -128,13 +128,13 @@ For more information, see the [Spring Boot documentation][1].
 {{% /tab %}}
 {{% tab "Tomcat" %}}
 
-Open your Tomcat startup script file, for example `catalina.sh`, and add:
+Open your Tomcat startup script file, for example `setenv.sh` on Linux, and add:
 
 ```text
 CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
 ```
 
-Or on Windows, `catalina.bat`:
+Or on Windows, `setenv.bat`:
 
 ```text
 set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
