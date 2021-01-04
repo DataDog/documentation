@@ -41,6 +41,8 @@ Metrics can be sent to Datadog from several places.
 
 - Often, you’ll need to track metrics related to your business (e.g. number of user logins/signups). In these cases, you can create [custom metrics][10]. Custom metrics can be submitted through the [agent][11], [DogStatsD][12], or the [HTTP API][13].
 
+- Additionally, the [Datadog Agent][21] automatically sends several standard metrics (such as CPU and disk usage).
+
 For a summary of all metric submission sources and methods, please refer to our [Metrics Types documentation][14].
 
 ## Querying Metrics
@@ -161,3 +163,4 @@ Please see the [full Metrics Summary documentation][20] for more details.
 [18]: https://app.datadoghq.com/metric/summary
 [19]: /account_management/billing/usage_details/
 [20]: /metrics/summary/
+[21]: https://docs.datadoghq.com/agent/basic_agent_usage/
