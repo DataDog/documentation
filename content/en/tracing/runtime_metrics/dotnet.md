@@ -32,7 +32,7 @@ If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL
 
 ## Data Collected
 
-The following metrics are collected by default after enabling JVM metrics.
+The following metrics are collected by default after enabling .NET metrics.
 
 {{< get-metrics-from-git "dotnet" >}}
 
