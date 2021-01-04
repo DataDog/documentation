@@ -10,7 +10,7 @@ kind: faq
 
 Benefits of switching to agent mode:
 
-- Deprecated having to specify an API key: `DD_PROFILING_API_KEY`, `DD_API_KEY`, `DD_PROFILING_API_KEY_FILE`.
+- Deprecated having to specify an API key: `DD_PROFILING_API_KEY`, `DD_API_KEY`, `DD_PROFILING_API_KEY_FILE`, `DD_API_KEY_FILE` (or corresponding system property flags).
 - Deprecated having to specify the uploading endpoint: `DD_SITE`.
 - Added support to send profiles directly through the agent.
 - Added support for including container-id header during profile collection so you can automatically get container tags.
@@ -30,17 +30,14 @@ Perform the following steps to migrate your service to send profiles directly th
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
     ```
 
-3. Clear the `DD_PROFILING_API_KEY_FILE` or `DD_PROFILING_API_KEY` environment variable. The API key files are deprecated as of version 0.55.
+3. Clear the `DD_PROFILING_API_KEY_FILE`, `DD_PROFILING_API_KEY`, `DD_API_KEY_FILE` or `DD_API_KEY` environment variables or equivalent system property flags. The API key files are deprecated as of version 0.55.
 
     ```shell
     unset DD_PROFILING_API_KEY_FILE
-
-    # OR
-
     unset DD_PROFILING_API_KEY
+    unset DD_API_KEY_FILE
+    unset DD_API_KEY
     ```
-
-    **Note** The `-Ddd.profiling.api-key-file` flag is also deprecated as of version 0.55.
 
 4. Ensure the `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable is set to `true`. For example, you can run:
 
@@ -59,7 +56,9 @@ The following arguments and environment variables have been deprecated:
 | Arguments                       | Environment variable        | Description                                      |
 | ------------------------------- | --------------------------- | ------------------------------------------------ |
 | `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | Deprecated in version 0.55. File that should contain the API key as a string. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. |
-| N/A                           | DD_PROFILING_API_KEY      | Deprecated in version 0.55. Datadog API key.                                  |
+| `-Ddd.profiling.api-key`                           | DD_PROFILING_API_KEY      | Deprecated in version 0.55. Datadog API key.
+| `-Ddd.api-key-file` | DD_API_KEY_FILE | Deprecated in version 0.55. File that should contain the API key as a string. |
+| `-Ddd.api-key`                           | DD_API_KEY      | Deprecated in version 0.55. Datadog API key.   |
 | `-Ddd.site`                   | DD_SITE                   | Deprecated in version 0.55. Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. |
 | `-Ddd.profiling.proxy.host`     | DD_PROFILING_PROXY_HOST     | Deprecated in version 0.55. Host for your proxy (`my-proxy.example.com`).    |
 | `-Ddd.profiling.proxy.port`     | DD_PROFILING_PROXY_PORT     | Deprecated in version 0.55. Port used by your proxy. Default port is `8080`. |
