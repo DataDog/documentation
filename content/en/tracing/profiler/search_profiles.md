@@ -109,6 +109,16 @@ Once enabled, the following profile types are collected:
 
 {{% /tab %}}
 
+{{% tab "Ruby" %}}
+
+Once enabled, the following profile types are collected:
+
+| Profile type             | Definition                                                                                                                                                                                                                                                                                         |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU         | Shows the time each function spent running on the CPU, including Ruby and native code.                                                                                                                         |
+| Wall Time | Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running. |
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Further Reading
