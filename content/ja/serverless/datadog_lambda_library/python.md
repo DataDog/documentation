@@ -8,7 +8,7 @@ title: Datadog Lambda Library for Python
 [![PyPI](https://img.shields.io/pypi/v/datadog-lambda)](https://pypi.org/project/datadog-lambda/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/datadog-lambda)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-python/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-python/blob/main/LICENSE)
 
 Datadog Lambda Library for Python (2.7、3.6、3.7、3.8) は、拡張 Lambda メトリクス、分散型トレーシング、および AWS Lambda 関数からのカスタムメトリクス送信を可能にします。
 
@@ -44,7 +44,7 @@ Datadog Lambda Library for Python (2.7、3.6、3.7、3.8) は、拡張 Lambda �
 
 ### DD_FLUSH_TO_LOG
 
-[Datadog Forwarder](https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring) を利用して CloudWatch ログを介してカスタムメトリクスを非同期に (Lambda 関数の実行に追加のレイテンシーなしで) 送信するには、`true` に設定します (推奨)。デフォルトは `false` です。`false` に設定する場合、`DD_API_KEY` と `DD_SITE` も設定する必要があります。
+[Datadog Forwarder](https://github.com/DataDog/datadog-serverless-functions/tree/main/aws/logs_monitoring) を利用して CloudWatch ログを介してカスタムメトリクスを非同期に (Lambda 関数の実行に追加のレイテンシーなしで) 送信するには、`true` に設定します (推奨)。デフォルトは `false` です。`false` に設定する場合、`DD_API_KEY` と `DD_SITE` も設定する必要があります。
 
 ### DD_API_KEY
 
