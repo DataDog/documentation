@@ -15,7 +15,7 @@ Example:
 
 Let's say you have a metric with two tags: `account` and `region`. `account` has three possible values (`prod`, `build` and `N/A`) while `region` has four possible values (`us-east-1`, `us-west-1`, `eu-central-1`, and `N/A`).
 
-When you graph this metric, you would have 3 x 4 = 12 lines on your graph. Applying `exclude_null()` would remove lines with tag combinations containing _any_ N/A values, leaving you with 2 x 3 = 6 groups.
+When you graph this metric as a timeseries, you would have 3 x 4 = 12 lines on your graph. Applying `exclude_null()` would remove lines with tag combinations containing _any_ N/A values, leaving you with 2 x 3 = 6 groups.
 
 ## Other functions
 
