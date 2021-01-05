@@ -199,7 +199,7 @@ This alert was triggered on {{ @machine_id.name }}
 | `{{^is_alert_to_warning}}` | モニターが `ALERT` から `WARNING` に移行しない          |
 | `{{#is_no_data_recovery}}` | モニターが `NO DATA` から回復する                                |
 | `{{^is_no_data_recovery}}` | モニターが `NO DATA` から回復しない                        |
-| `{{is_priority 'value'}}`  | モニターの優先度は `value` です。値の範囲は `P1` から `P5` です   |
+| `{{#is_priority 'value'}}`  | モニターの優先度は `value` です。値の範囲は `P1` から `P5` です   |
 
 #### 例
 

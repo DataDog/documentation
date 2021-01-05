@@ -66,9 +66,10 @@ supported_os:
 
 APCu はデフォルトでメトリクスを公開しないため、このインテグレーションには、次の場所にあるメトリクスエクスポーターが含まれます。
 
-    ```
-    /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_apcu/assets/exporter/apcu-dd-handler.php
-    ```
+```
+/opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_apcu/assets/exporter/apcu-dd-handler.php
+```
+エクスポーターは[こちら][5]からダウンロードできます。
 
 Agent を構成するとき (次に説明する `instances` 設定)、このファイル名でエクスポーターを直接参照するか、Web サーバーで Agent のエイリアスを構成できます。たとえば、Apache を使用している場合、Web サーバーコンフィギュレーションファイルのエイリアスは次のようになります。
 
@@ -82,16 +83,16 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 
 ### コンフィギュレーション
 
-1. `php_apcu` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `php_apcu.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル `php_apcu.d/conf.yaml` ファイル][5]を参照してください。
+1. `php_apcu` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `php_apcu.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル `php_apcu.d/conf.yaml` ファイル][6]を参照してください。
     ```
     instances
       - url: http://localhost/apcu-status
     ```
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][7]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `php_apcu` を探します。
+[Agent の status サブコマンドを実行][8]し、Checks セクションで `php_apcu` を探します。
 
 ## 収集データ
 
@@ -109,14 +110,15 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://www.php.net/manual/en/book.apcu.php
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
 [4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/datadog_checks/php_apcu/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[5]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/datadog_checks/php_apcu/assets/exporter/apcu-dd-handler.php
+[6]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/datadog_checks/php_apcu/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/metadata.csv
+[10]: https://docs.datadoghq.com/ja/help/

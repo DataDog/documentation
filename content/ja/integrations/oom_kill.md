@@ -51,7 +51,10 @@ apt install -y linux-headers-$(uname -r)
 RHEL 系のディストリビューションでは、以下のようにカーネルヘッダーをインストールします。
 ```sh
 yum install -y kernel-headers-$(uname -r)
+yum install -y kernel-devel-$(uname -r)
 ```
+
+**注**: CentOS/RHEL バージョン < 8 はサポートされていません。
 
 ### コンフィギュレーション
 
