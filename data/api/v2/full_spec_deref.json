@@ -28512,7 +28512,7 @@
             "parameters": [
               {
                 "name": "body",
-                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\n    },\n    \"type\": \"application_keys\"\n  }\n}"
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
               }
             ],
             "step": "there is a valid \"application_key\" in the system"
