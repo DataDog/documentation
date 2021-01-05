@@ -478,15 +478,19 @@ class AppServiceProvider extends ServiceProvider
 
         // Injecter l'ID de trace et de span afin d'associer l'entrée de log à la trace APM
         $monolog->pushProcessor(function ($record) use ($useJson) {
+            $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+            if (null === $span) {
+                return $record;
+            }
             if ($useJson === true) {
                 $record['dd'] = [
-                    'trace_id' => \DDTrace\trace_id(),
+                    'trace_id' => $span->getTraceId(),
                     'span_id'  => \dd_trace_peek_span_id(),
                 ];
             } else {
                 $record['message'] .= sprintf(
                     ' [dd.trace_id=%d dd.span_id=%d]',
-                    \DDTrace\trace_id(),
+                    $span->getTraceId(),
                     \dd_trace_peek_span_id()
                 );
             }
