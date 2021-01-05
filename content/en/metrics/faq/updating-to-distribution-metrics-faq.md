@@ -14,7 +14,7 @@ Datadog has released a new pipeline for calculating globally accurate percentile
 
 ## How does this new pipeline for Distributions affect me? 
 
-**Unlocks new query functionalities:**```
+- **Unlocks new query functionalities:**
   - Accurate percentiles in time for any historical timeframe (i.e., the past day, week, month).
   - Boolean filtered queries are now available with distribution metrics with percentiles, so that you can write queries like: `p99:request_latency_distribution{app:A OR app:B} by {app}`.
 - **Easier tag configuration and percentile aggregation workflows**:
