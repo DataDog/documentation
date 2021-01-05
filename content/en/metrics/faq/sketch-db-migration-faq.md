@@ -42,13 +42,13 @@ Clicking the *Manage Tags* button allows you to configure which tags are queryab
 
 Click *edit* and “Include percentile aggregations” on the same queryable tags defined as your baseline distribution.
 
-gif
+{{< img src="metrics/faq/sketch-db-migration-faq/add-percentiles.gif" alt="Add percentiles to a distribution metric">}}
 
 ## How can I add percentiles to multiple Distribution metrics?
 
 Click the *Calculate Percentiles* button on the Metrics Summary page and use * for wildcard metric name(s).
 
-gif
+{{< img src="metrics/faq/sketch-db-migration-faq/bulk-percentiles.gif" alt="Add percentiles to multiple distribution metrics">}}
 
 
 
