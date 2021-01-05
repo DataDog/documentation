@@ -5,5 +5,5 @@ private: true
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
-    {{< nextlink href="/metrics/faq/sketch-db-migration-faq/" >}}SketchDB Migration FAQ{{< /nextlink >}}
+    {{< nextlink href="/metrics/faq/updating-to-distribution-metrics-faq" >}}Updating to Distribution Metrics FAQ{{< /nextlink >}}
 {{< /whatsnext >}}

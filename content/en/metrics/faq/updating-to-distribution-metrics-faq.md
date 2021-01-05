@@ -1,5 +1,5 @@
 ---
-title: SketchDB Migration FAq
+title: Updating to Distribution Metrics FAQ
 kind: faq
 is_beta: true
 further_reading:
