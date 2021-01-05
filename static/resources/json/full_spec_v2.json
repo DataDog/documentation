@@ -2291,6 +2291,97 @@
                     }
                   },
                   "type": "object"
+                },
+                {
+                  "description": "Role object returned by the API.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Attributes of the role.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Creation time of the role.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time of last role modification.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the role.",
+                          "type": "string"
+                        },
+                        "user_count": {
+                          "description": "Number of users with that role.",
+                          "format": "int64",
+                          "readOnly": true,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "ID of the role.",
+                      "type": "string"
+                    },
+                    "relationships": {
+                      "description": "Relationships of the role object returned by the API.",
+                      "properties": {
+                        "permissions": {
+                          "description": "Relationship to multiple permissions objects.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to permission objects.",
+                              "items": {
+                                "description": "Relationship to permission object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the permission.",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "permissions",
+                                    "description": "Permissions resource type.",
+                                    "enum": [
+                                      "permissions"
+                                    ],
+                                    "example": "permissions",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "PERMISSIONS"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "default": "roles",
+                      "description": "Roles type.",
+                      "enum": [
+                        "roles"
+                      ],
+                      "example": "roles",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "ROLES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "type": "object"
                 }
               ],
               "type": "object"
@@ -2523,6 +2614,97 @@
                 ]
               }
             },
+            "type": "object"
+          },
+          {
+            "description": "Role object returned by the API.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes of the role.",
+                "properties": {
+                  "created_at": {
+                    "description": "Creation time of the role.",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time of last role modification.",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the role.",
+                    "type": "string"
+                  },
+                  "user_count": {
+                    "description": "Number of users with that role.",
+                    "format": "int64",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the role.",
+                "type": "string"
+              },
+              "relationships": {
+                "description": "Relationships of the role object returned by the API.",
+                "properties": {
+                  "permissions": {
+                    "description": "Relationship to multiple permissions objects.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationships to permission objects.",
+                        "items": {
+                          "description": "Relationship to permission object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the permission.",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "permissions",
+                              "description": "Permissions resource type.",
+                              "enum": [
+                                "permissions"
+                              ],
+                              "example": "permissions",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "PERMISSIONS"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "roles",
+                "description": "Roles type.",
+                "enum": [
+                  "roles"
+                ],
+                "example": "roles",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ROLES"
+                ]
+              }
+            },
+            "required": [
+              "type"
+            ],
             "type": "object"
           }
         ],
@@ -12114,6 +12296,97 @@
                       ]
                     }
                   },
+                  "type": "object"
+                },
+                {
+                  "description": "Role object returned by the API.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Attributes of the role.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Creation time of the role.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time of last role modification.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the role.",
+                          "type": "string"
+                        },
+                        "user_count": {
+                          "description": "Number of users with that role.",
+                          "format": "int64",
+                          "readOnly": true,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "ID of the role.",
+                      "type": "string"
+                    },
+                    "relationships": {
+                      "description": "Relationships of the role object returned by the API.",
+                      "properties": {
+                        "permissions": {
+                          "description": "Relationship to multiple permissions objects.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to permission objects.",
+                              "items": {
+                                "description": "Relationship to permission object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the permission.",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "permissions",
+                                    "description": "Permissions resource type.",
+                                    "enum": [
+                                      "permissions"
+                                    ],
+                                    "example": "permissions",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "PERMISSIONS"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "default": "roles",
+                      "description": "Roles type.",
+                      "enum": [
+                        "roles"
+                      ],
+                      "example": "roles",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "ROLES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
                   "type": "object"
                 }
               ],
@@ -26883,6 +27156,97 @@
                               }
                             },
                             "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
                           }
                         ],
                         "type": "object"
@@ -27459,6 +27823,97 @@
                               }
                             },
                             "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
                           }
                         ],
                         "type": "object"
@@ -27959,6 +28414,97 @@
                               }
                             },
                             "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
                           }
                         ],
                         "type": "object"
@@ -28438,6 +28984,97 @@
                               }
                             },
                             "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
                           }
                         ],
                         "type": "object"
@@ -28512,7 +29149,7 @@
             "parameters": [
               {
                 "name": "body",
-                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\n    },\n    \"type\": \"application_keys\"\n  }\n}"
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
               }
             ],
             "step": "there is a valid \"application_key\" in the system"
@@ -28948,6 +29585,97 @@
                                 ]
                               }
                             },
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -29419,6 +30147,97 @@
                                 ]
                               }
                             },
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],

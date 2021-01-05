@@ -204,7 +204,7 @@ main_left:
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
     weight: -440
-  - name: 'On-Premises Monitoring'
+  - name: On-Premises Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
