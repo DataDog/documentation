@@ -29,6 +29,8 @@ To eliminate ambiguity and help you make sense of your systems, the following un
 | TEMPERATURE | degree celsius / degree fahrenheit                                                                                                                                                                                                                                                                                         |
 | CPU         | nanocore / microcore / millicore / core / kilocore / megacore / gigacore / teracore / petacore / exacore                                                                                                                                                                                                                   |
 | POWER         | nanowatt / microwatt / milliwatt / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                                   |
+| CURRENT         | milliampere / ampere                                                                                                                                                                                    |
+| POTENTIAL         | millivolt / volt                                                                                                                                                                                      |
 
 Units are displayed automatically on timeseries graphs, query value widgets, and toplists, as shown in the following screenshot of a Redis dashboard:
 
