@@ -31,9 +31,10 @@ Par exemple, ces deux attributs seront ajoutés à vos logs de la manière suiva
 
 ```php
   <?php
+  $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
-      \DDTrace\trace_id(),
+      $span->getTraceId(),
       \dd_trace_peek_span_id()
   );
   my_error_logger('Error message.' . $append);
@@ -45,9 +46,13 @@ Si le logger implémente la [bibliothèque **monolog/monolog**][4], utilisez `Lo
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
+      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+      if (null === $span) {
+          return $record;
+      }
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
-          \DDTrace\trace_id(),
+          $span->getTraceId(),
           \dd_trace_peek_span_id()
       );
       return $record;
@@ -60,8 +65,13 @@ Si votre application utilise des logs au format json, au lieu d'ajouter les ID t
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
+      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+      if (null === $span) {
+          return $record;
+      }
+
       $record['dd'] = [
-          'trace_id' => \DDTrace\trace_id(),
+          'trace_id' => $span->getTraceId(),
           'span_id'  => \dd_trace_peek_span_id(),
       ];
 
