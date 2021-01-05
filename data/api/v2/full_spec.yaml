@@ -509,6 +509,7 @@ components:
       description: An object related to an application key.
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Role'
       type: object
     ApplicationKeyUpdateAttributes:
       description: Attributes used to update an application Key.
@@ -4900,7 +4901,7 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
-              \ unique }}\n    },\n    \"type\": \"application_keys\"\n  }\n}"
+              \ unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "application_key" in the system
       x-undo:
         operationId: DeleteCurrentUserApplicationKey
