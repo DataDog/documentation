@@ -56,14 +56,11 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 Otherwise, to begin tracing .NET applications: 
 
-{{< tabs >}}
-{{% tab "Windows" %}}
-
 #### IIS Applications 
 
-1. Install and configure the [Windows Datadog Agent][3]. 
+1. Install and configure the [Windows Datadog Agent][2]. 
 
-2. Download the .NET Tracer [MSI installer][4].
+2. Download the .NET Tracer [MSI installer][3].
 
 3. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
@@ -77,7 +74,7 @@ Otherwise, to begin tracing .NET applications:
    ```
 6. Create application load. 
 
-7. Visit Datadog's [APM Live Traces][8]. 
+7. Visit Datadog's [APM Live Traces][4]. 
 
 ### Required Environment Variables 
 
@@ -135,16 +132,6 @@ rem Start application
 example.exe
 ```
 
-{{% /tab %}}
-
-{{% tab "Container" %}}
-
-Configuration data.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
 ## Custom Instrumentation
 
 <div class="alert alert-warning" style="font-style: italic;"> 
@@ -153,10 +140,10 @@ Configuration data.
 </div>
 
 To utilize custom instrumentation: 
-1. Add the `Datadog.Trace` [NuGet package][3] to your application.
+1. Add the `Datadog.Trace` [NuGet package][5] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For additional details on custom instrumentation and custom tagging, please visit our [.NET Custom Instrumentation][4] documentation. 
+For additional details on custom instrumentation and custom tagging, please visit our [.NET Custom Instrumentation][6] documentation. 
 
 ## Configuration
 
@@ -262,7 +249,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ### Unified Service Tagging
 
-To utilize [Unified Service Tagging][5] we recommend that to configure the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` settings for your services. 
+To utilize [Unified Service Tagging][7] we recommend that to configure the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` settings for your services. 
 
 | Setting Name                                        |Description                                                                                                                                                                                                       |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -280,7 +267,7 @@ The following table lists configuration variables that are available **only** wh
 | `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                      | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`. |
 | `DD_TRACE_LOG_DIRECTORY`                                        | Sets the directory for .NET Tracer logs.<br/><br/>Default: `%ProgramData%\Datadog .NET Tracer\logs\`                                                                                                                                                                                     |
 | `DD_TRACE_LOG_PATH`                                             | Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.                                                                                                                    |
-| `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames`  | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][6] section.                             |
+| `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames`  | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][8] section.                             |
 | `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) that will be excluded from automatic instrumentation. |
 
 ### Additional Optional Configuration
@@ -293,8 +280,8 @@ The following table lists the supported configuration variables that are availab
 | `DD_AGENT_HOST`                                     | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
-| `DD_TRACE_DEBUG`<br/></br/>`DebugEnabled`           | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
-| `DD_TRACE_HEADER_TAGS`<br/></br/>`HeaderTags`       | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Available for version 1.18.3+      |
+| `DD_TRACE_DEBUG`<br/><br/>`DebugEnabled`           | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
+| `DD_TRACE_HEADER_TAGS`<br/><br/> `HeaderTags`       | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Available for version 1.18.3+      |
 
 ### Disable Integration Configuration
 
@@ -304,7 +291,7 @@ Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment va
 
 | Setting Name                                                            | Description                                                                                                           |
 | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                     | Enables or disables a specific integration. Valid values are: `true` (default) or `false`. Integration names are listed in the [Integrations][6] section.                           |
+| `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                     | Enables or disables a specific integration. Valid values are: `true` (default) or `false`. Integration names are listed in the [Integrations][8] section.                           |
 
 ## Further Reading
 
@@ -312,7 +299,9 @@ Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment va
 
 [1]: /tracing/compatibility_requirements/dotnet-framework
 [2]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=gui
-[3]: https://www.nuget.org/packages/Datadog.Trace
-[4]: /tracing/custom_instrumentation/dotnet/
-[5]: /getting_started/tagging/unified_service_tagging/
-[6]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
+[3]: https://github.com/datadog/dd-trace-dotnet/releases/latest
+[4]: https://app.datadoghq.com/apm/traces
+[5]: https://www.nuget.org/packages/Datadog.Trace
+[6]: /tracing/custom_instrumentation/dotnet/
+[7]: /getting_started/tagging/unified_service_tagging/
+[8]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations

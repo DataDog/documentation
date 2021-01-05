@@ -18,6 +18,8 @@ further_reading:
 
 ## Compatibility
 
+**Note**: The .NET Tracer supports all .NET-based languages (C#, F#, Visual Basic, etc).
+
 The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.
 
 The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and .NET Core 2.1. It also supports [.NET Framework][2].
