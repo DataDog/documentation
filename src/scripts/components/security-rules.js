@@ -1,6 +1,7 @@
 import mixitup from 'mixitup';
 
 export function initializeSecurityRules() {
+    // This is a Test.
     const containerEl = document.querySelector('#rules .list-group');
     const inputSearch = document.querySelector('[data-ref="search"]');
     const controls = document.querySelector('[data-ref="controls"]');
