@@ -98,6 +98,7 @@ _Example: 99% of requests should complete in less than 250 ms over a 30-day wind
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/slo
 [2]: https://app.datadoghq.com/monitors#create/metric
 [3]: /developers/metrics
