@@ -86,10 +86,9 @@ _Example: 99% of requests should complete in less than 250 ms over a 30-day wind
 
 ## 5. Name, describe, and tag your SLOs
 
-1. Name your SLO. We recommend a brief but descriptive name.
-2. Add a description. We recommend describing what the SLO is tracking and why it is
-   important for your end user experience. You can also add links to dashboards for reference.
-3. Add tags. We recommend tagging by team and service.
+1. Name your SLO.
+2. Add a description: describe what the SLO is tracking and why it is important for your end user experience. You can also add links to dashboards for reference.
+3. Add tags: tagging by `team` and `service` is a common practice.
 
 ## 6. View and Search
 
