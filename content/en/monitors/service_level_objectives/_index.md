@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
-  text: "Track the status of your SLOs with the new monitor uptime widget"
+  text: "Track the status and error budget of your SLOs with Datadog"
 - link: "https://learn.datadoghq.com/course/view.php?id=34"
   tag: "Learning Center"
   text: "Introduction to Service Level Objectives (SLOs)"
@@ -34,7 +34,7 @@ framework for defining clear targets around application performance, which ultim
 
 ## Setup
 
-You can use Datadog’s [Service Level Objectives status page][1] to create new SLOs or to view and manage all your existing SLOs. You can also add [SLO Summary widgets][2] to your dashboards to visualize your SLO statuses at a glance. 
+You can use Datadog’s [Service Level Objectives status page][1] to create new SLOs or to view and manage all your existing SLOs. You can also add [SLO Summary widgets][2] to your dashboards to visualize your SLO statuses at a glance.
 
 ### Configuration
 
@@ -112,12 +112,12 @@ Once you are using a saved view, you can update it by selecting that saved view,
 
 ## SLO Audit Events
 
-SLO audit events allow you to track the history of your SLO configurations using the Event Stream. Audit events are added to the Event Stream every time you create, modify or delete an SLO. Each event includes information on an SLO's configuration, and the stream provides a history of the SLO's configuration changes over time. 
+SLO audit events allow you to track the history of your SLO configurations using the Event Stream. Audit events are added to the Event Stream every time you create, modify or delete an SLO. Each event includes information on an SLO's configuration, and the stream provides a history of the SLO's configuration changes over time.
 
 Each event includes the following SLO configuration information:
 
 - Name
-- Description 
+- Description
 - Target percentages and time windows
 - Datasources (monitor IDs or metric query)
 

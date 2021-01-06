@@ -4,14 +4,14 @@ kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
       tag: 'Blog'
-      text: 'Track the status of your SLOs with the new monitor uptime widget'
+      text: 'Track the status and error budget of your SLOs with Datadog'
     - link: 'https://learn.datadoghq.com/course/view.php?id=34'
       tag: 'Learning Center'
       text: 'Introduction to Service Level Objectives (SLOs)'
 ---
 
 <div class="alert alert-info">
-Clich <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> to find a PDF version of this page.
+Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> to find a PDF version of this page.
 </div>
 
 ## 1. Getting Started
