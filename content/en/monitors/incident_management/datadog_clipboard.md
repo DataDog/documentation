@@ -2,6 +2,10 @@
 title: Datadog Clipboard
 kind: documentation
 description: Create and manage incidents
+further_reading:
+    - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
+      tag: "Blog"
+      text: "Explore your data effortlessly with the Datadog Clipboard"
 ---
 
 # Overview
@@ -47,5 +51,9 @@ Items on the Clipboard can be exported to dashboards, notebooks, or incidents. `
 {{< img src="monitors/incidents/exporting.png" alt="Export from the Clipboard"  style="width:80%;">}}
 
 URLs cannot be exported to Dashboards. Only [supported graphs][1] can be exported to Notebooks. 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/notebooks/#visualization
