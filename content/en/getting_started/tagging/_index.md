@@ -69,6 +69,8 @@ Below are Datadog's tagging requirements:
 
 5. Tags shouldn't originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
 
+6. The maximum number of tags per metric is 100.
+
 ## Assigning Tags
 
 ### Tagging methods
