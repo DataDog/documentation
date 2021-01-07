@@ -53,4 +53,4 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/metrics/types/
-[2]: /ja/developers/metrics/custom_metrics/
+[2]: https://app.datadoghq.com/metric/distribution_metrics
