@@ -39,9 +39,9 @@ Logs that provide the "who" (John Doe), "what" (login success), and when (2020-0
 
 Ensure your application write logs in a key-value format using `=` as a separator. Using this format means that a key-value parser, such as Datadog's [Grok Parser][1], can easily process them. For example, if a log is in the following format:
 
-{{< code-snippet lang="bash" wrap="false"  >}}
+{{< code-block lang="bash" >}}
 INFO 2020-01-01 12:00:01 usr.id="John Doe" evt.category=authentication evt.name="google oauth" evt.outcome=success network.client.ip=1.2.3.4
-{{< /code-snippet >}}
+{{< /code-block >}}
 
 Datadog can then parse this as the following JSON:
 
