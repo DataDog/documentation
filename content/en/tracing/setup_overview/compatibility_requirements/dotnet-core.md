@@ -18,7 +18,7 @@ further_reading:
 
 ## Compatibility
 
-**Note**: The .NET Tracer supports all .NET-based languages (C#, F#, Visual Basic, etc).
+**Note**: The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
 The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.
 
