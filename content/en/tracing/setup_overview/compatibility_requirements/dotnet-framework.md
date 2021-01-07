@@ -31,9 +31,7 @@ For both Automatic & Custom Instrumentation, the .NET Datadog Tracer supports .N
 ## Integrations
 
 <div class="alert alert-info" style="font-style: italic;"> 
-  <p style="font-weight: bold; margin-bottom: 0px;">Update:<p/> 
-
-Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required. Remove them from your application when you update the .NET Tracer.</p>
+  <p style="font-weight: bold; margin-bottom: 0px;">**Update:** Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required. Remove them from your application when you update the .NET Tracer.</p>
 </div>
 
 <div class="alert alert-warning" style="font-style: italic;">
