@@ -23,8 +23,7 @@ The .NET Datadog Tracer library is open-source. For more information please view
 For both Automatic & Custom Instrumentation, the .NET Datadog Tracer supports .NET Framework 4.5 and above. 
 
 <div class="alert alert-warning" style="font-style: italic;"> 
-  <p style="font-weight: bold; margin-bottom: 0px;">Note:<p/> 
-    When using both custom and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+  <p style="font-weight: bold; margin-bottom: 0px;">Note: Whether you're using custom or automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.</p>
 </div>
 
 
