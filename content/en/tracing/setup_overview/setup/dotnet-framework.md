@@ -258,7 +258,7 @@ To utilize [Unified Service Tagging][7] we recommend that to configure the `DD_E
 | `DD_VERSION`<br/><br/>`ServiceVersion`              | If specified, sets the version of the service. Available for versions 1.17.0+
 | `DD_TAGS`<br/><br/>`GlobalTags`                     | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`). Available for versions 1.17.0+                                                                                                                                              |
 
-### Automatic Instrumentation Optional Configuration
+### Automatic instrumentation optional configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation.
 
