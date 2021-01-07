@@ -270,7 +270,7 @@ The following table lists configuration variables that are available **only** wh
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames`  | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][8] section.                             |
 | `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) that will be excluded from automatic instrumentation. |
 
-### Additional Optional Configuration
+### Additional optional configuration
 
 The following table lists the supported configuration variables that are available for both automatic (`.MSI`) and custom (`NuGet`) instrumentation.
 
