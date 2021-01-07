@@ -29,9 +29,9 @@ In order to gain visibility into all of your authentication activity, ensure log
 
 By logging [all authentication events](#log-everything) at the application level, you can ensure that your logs contain this level of information. For example:
 
-{{< code-snippet lang="bash">}}
+{{< code-block lang="bash" >}}
 2020-01-01 12:00:01 google oauth login success by John Doe from 1.2.3.4
-{{< /code-snippet >}}
+{{< /code-block >}}
 
 Logs that provide the "who" (John Doe), "what" (login success), and when (2020-01-01 12:00:01) of an event provide the best detail for you to perform complex analysis.
 
@@ -45,7 +45,7 @@ INFO 2020-01-01 12:00:01 usr.id="John Doe" evt.category=authentication evt.name=
 
 Datadog can then parse this as the following JSON:
 
-{{< code-snippet lang="json" wrap="false"  >}}
+{{< code-block lang="json" >}}
 {
   "usr": {
     "id": "John Doe"
@@ -61,7 +61,7 @@ Datadog can then parse this as the following JSON:
     }
   }
 }
-{{< /code-snippet >}}
+{{< /code-block >}}
 
 Use the same format across all of your authentication logs. This allows you to use log attributes to slice and dice log data in Datadog. For example, you can look for which users (`usr.id`) have the highest number of failed logins (`evt.outcome:failure`).
 
