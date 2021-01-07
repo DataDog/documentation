@@ -245,7 +245,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 {{< /tabs >}}
 
-## Configuration Settings
+## Configuration settings
 
 ### Unified Service Tagging
 
