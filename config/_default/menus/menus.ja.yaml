@@ -1749,7 +1749,7 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_detection_rules
     weight: 3
-  - name: Synthetic の監視
+  - name: Synthetic モニタリング
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
