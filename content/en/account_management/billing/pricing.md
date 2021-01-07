@@ -26,6 +26,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.
+* An **Ingested Span** is an individual request against an individual service in your stack.  Datadog charges based on the total number of gigabytes of spans ingested into Datadog APM.
 
 **Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
@@ -64,9 +65,9 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
   * Each host is allowed up to 4 profiled containers for free. Overage containers will be priced at $2 per container. Note: this allotment is aggregated across all hosts so if you have 4 containers on average across all your hosts, you will not be charged overages on host-by-host basis.
 * Datadog measures the total number of containers that are being profiled. A container is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Continuous Profiler service. Datadog charges monthly based on the fractional hours of monitored containers. For Continuous Profiler, Datadog only counts the containers that are running the Continuous Profiler service towards the total monitored container count.
 
-## Incident Management 
+## Incident Management
 
-* Datadog tracks the number of monthly active users who participate in incident management and response. 
+* Datadog tracks the number of monthly active users who participate in incident management and response.
  * An **active user** is only counted if they contribute comments or signals (graphs, links, etc.) to an incident. Anyone who only opens/closes an incident or simply views the incident are not counted. Additionally, these are not named seats, so you do not need to determine which specific users have access.
 
 
