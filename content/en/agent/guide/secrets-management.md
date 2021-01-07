@@ -250,7 +250,7 @@ Kubernetes supports [exposing secrets as files][5] inside a pod.
 If your secrets are mounted in `/etc/secret-volume`, use the following environment variables:
 
 ```
-DD_SECRET_BACKEND_COMMAND=/readsecret.sh
+DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
 
