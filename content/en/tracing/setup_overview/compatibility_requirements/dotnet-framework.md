@@ -18,7 +18,7 @@ further_reading:
 
 ## Compatibility
 
-The .NET Datadog Tracer library is open-source. For more information please view our [Github repository][1].
+The .NET Datadog Tracer library is open-source. For more information see the [tracer Github repository][1].
 
 For both automatic and custom Instrumentation, the .NET Datadog Tracer supports .NET Framework 4.5 and above. 
 
