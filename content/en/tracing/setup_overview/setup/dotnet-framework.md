@@ -249,7 +249,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ### Unified Service Tagging
 
-To utilize [Unified Service Tagging][7] we recommend that to configure the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` settings for your services. 
+To use [Unified Service Tagging][7], configure the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` settings for your services. 
 
 | Setting Name                                        |Description                                                                                                                                                                                                       |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
