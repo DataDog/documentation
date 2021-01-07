@@ -283,7 +283,7 @@ The following table lists the supported configuration variables that are availab
 | `DD_TRACE_DEBUG`<br/><br/>`DebugEnabled`           | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
 | `DD_TRACE_HEADER_TAGS`<br/><br/> `HeaderTags`       | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Available for version 1.18.3+      |
 
-### Disable Integration Configuration
+### Disable integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration. 
 
