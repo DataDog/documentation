@@ -3,6 +3,8 @@ title: Datadog Learning Center
 kind: documentation
 aliases:
   - /video-categories/
+  - /video-categories/datadog-101/
+  - /video-categories/installation/
   - /videos/
   - /videos/anomaly_detection/
   - /videos/apm_dashboards_trace_metrics/
