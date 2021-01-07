@@ -6,8 +6,6 @@ datadog:
     enabled: true
     containerCollectAll: true
   acExclude: "name:datadog-agent"
-  processAgent:
-    enabled: false
 agents:
   rbac:
     create: false

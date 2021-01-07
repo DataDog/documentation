@@ -2,6 +2,10 @@
 title: Getting Started
 kind: documentation
 description: "Learn the main concepts of Datadog Security Monitoring, how to enable threat detection, and discover out of the box threat detection rules."
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
+  tag: "Blog"
+  text: "Secure your infrastructure with Datadog Runtime Security"
 ---
 
 To get started with Datadog Security Monitoring, follow these three steps:
@@ -23,6 +27,10 @@ Datadog provides out of the box [Detection Rules][3], which begin detecting thre
 ## Explore Security Signals
 
 When a threat is detected with a Detection Rule, a Security Signal is generated. The Security Signals can be correlated and triaged in the [Security Signals Explorer][5]. Refer to the [Security Signals Explorer][6] documentation for further details.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_collection/
 [2]: https://www.datadoghq.com/blog/logging-without-limits/

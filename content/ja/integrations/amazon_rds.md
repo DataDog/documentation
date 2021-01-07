@@ -40,27 +40,41 @@ version: '1.0'
 
 Amazon Relational Database Service (RDS) は、クラウドでリレーショナルデータベースのセットアップ、運用、スケーリングに使用される Web サービスです。このインテグレーションを有効にすると、Datadog にすべての RDS メトリクスを表示できます。
 
-**注**: このインテグレーションを EU 用に設定する場合、環境変数 `DD_SITE` を `datadoghq.eu` に設定するコードの外部に設定するか、コードの内部に次のように設定します。
+**注**: 環境変数 `DD_SITE` がコード {{< region-param key="dd_site" code="true" >}} の外のリージョンに設定されていることを確認するか、または次のようにコードで変数を設定します。
 
-`DD_SITE = os.getenv("DD_SITE", default="datadoghq.eu")`
+`DD_SITE = os.getenv("DD_SITE", default="{{< region-param key="dd_site" code="true" >}}")`
 
-RDS インスタンスの監視には 3 つのオプションがあります。標準と拡張のどちらを使用するかを選択してから、オプションでネイティブデータベースインテグレーションを有効にします。
+RDS インスタンスを監視するには、Standard、Enhanced、Native の 3 つのオプションがあります。**コンフィギュレーションを選択する前に、[メトリクスのリスト](#data-collected)全体を確認してください**。各メトリクスには対応するコンフィギュレーションのラベルが付いているためです。さらに、以下の情報を確認して、各コンフィギュレーションの要件とプリセットダッシュボードの詳細を確認してください。
 
 {{< tabs >}}
 {{% tab "標準" %}}
 
-標準インテグレーションの場合、AWS インテグレーションタイルの左側で RDS を選択する必要があります。これにより、ご使用の CloudWatch インテグレーションで利用可能な回数だけ、インスタンスに関するメトリクスを受信できます。すべての RDS エンジンタイプに対応しています。
+標準インテグレーションの場合、[AWS インテグレーションタイル][1]の左側で RDS を選択する必要があります。これにより、ご使用の CloudWatch インテグレーションで利用可能な回数だけ、インスタンスに関するメトリクスを受信できます。すべての RDS エンジンタイプに対応しています。
 
+このインテグレーションのプリセットダッシュボードには、接続、レプリケーションラグ、読み取り操作とレイテンシー、コンピューター、RAM、書き込み操作とレイテンシー、ディスクメトリクスのメトリクス情報が含まれています。
+
+
+[1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 {{% /tab %}}
 {{% tab "Enhanced" %}}
 
  拡張インテグレーションの場合、構成を追加する必要があります。また、MySQL、Aurora、PostgreSQL、MariaDB エンジンでのみ使用できます。メトリクスを追加することができますが、追加したメトリクスを Datadog に送信するには、AWS Lambda が必要です。粒度が高く、追加のサービスが必要になると AWS の追加料金が発生します。
+
+このインテグレーションのプリセットダッシュボードには、負荷、アップタイム、CPU 使用率、タスク、メモリ、SWAP、ネットワーク受信、ネットワーク送信、プロセスごとに使用される CPU、プロセスごとに使用されるメモリ、ディスク操作、使用されるファイルシステム (pct)、 実行中のタスク、システム CPU 使用率のメトリクス情報が含まれています。
 
 {{% /tab %}}
 {{% tab "Native" %}}
 
 ネイティブデータベースインテグレーションはオプションです。MySQL、Aurora、MariaDB、SQL Server、PostgreSQL の各エンジンタイプで使用できます。RDS とネイティブインテグレーションの両方からメトリクスを取得して照合するには、RDS インスタンスに割り当てる識別子に基づいて、ネイティブインテグレーションで `dbinstanceidentifier` タグを使用します。RDS インスタンスには自動的にタグが割り当てられます。
 
+このコンフィギュレーションで使用できるプリセットダッシュボードは、MySQL、Aurora、PostgreSQL の 3 つです。各ダッシュボードには、クエリボリューム、ディスク I/O、接続、レプリケーション、AWS リソースのメトリクスが含まれています。
+
+**注**: これらのダッシュボードには、AWS CloudWatch と個々のデータベースエンジン自体の両方からのメトリクスが表示されます。すべてのインテグレーションメトリクスに対して、インテグレーション ([MySQL][1]、[Aurora][2]、[PostgreSQL][3]) の 1 つを有効にします。
+
+
+[1]: https://docs.datadoghq.com/ja/integrations/mysql/
+[2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_SettingUp_Aurora.html
+[3]: https://docs.datadoghq.com/ja/integrations/postgres/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -81,6 +95,8 @@ RDS インスタンスの監視には 3 つのオプションがあります。�
 
 {{< img src="integrations/awsrds/rds-enhanced-install.png" alt="拡張 RDS のインストール" >}}
 
+次の手順では、KMS と Lambda Management Console を使用して、RDS Enhanced Monitoring Lambda 関数でのみ使用できる Datadog API キーの暗号化バージョンを作成します。[Log Forwarder][1] などの別の Lambda からの暗号化された API キーを既にお持ちの場合、他のオプションについては [Lambda 関数の README][2] を参照してください。
+
 #### KMS キーの作成
 
 1. KMS のホーム (https://console.aws.amazon.com/kms/home) を開きます。
@@ -99,7 +115,7 @@ RDS インスタンスの監視には 3 つのオプションがあります。�
 4. 前のセクションで作成したキーの ID を `KMSKeyId` パラメーターに貼り付け、デプロイします。
 5. アプリケーションがデプロイされたら、新しく作成された Lambda 関数を開きます (「Resource」の下にある関数をクリック)。
   {{< img src="integrations/awsrds/click-function.png" alt="Lambda 関数を開く" >}}
-6. 下にスクロールして `Environment variables` セクションを見つけます。`<YOUR_API_KEY>` は、`{"api_key":"<YOUR_API_KEY>"}` の形式を使用して [Datadog API キー][1]に置き換えます。
+6. `Environment variables` セクションまでスクロールダウンします。書式 `{"api_key":"<API_キー>"}` で、`<API_キー>` を [Datadog API キー][3] に置換します。
   {{< img src="integrations/awsrds/env-variables.png" alt="環境変数" >}}
 7. `Encryption configuration` セクションを開き、`Enable helpers for encryption in transit` を選択します。
 8. `KMS key to encrypt in transit` で、下の `KMS key to encrypt at rest` にあるキーと同じキーを選択します。
@@ -127,7 +143,10 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 
 これは無視してかまいません。Test ボタンはこのセットアップでは機能しません。
 
-[1]: https://app.datadoghq.com/account/settings#api
+
+[1]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[2]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/rds_enhanced_monitoring#setup
+[3]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Native" %}}
 
@@ -227,9 +246,6 @@ instances:
           - 'dbinstanceidentifier:<DB_インスタンス名>'
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
-
 ### 検証
 
 [Agent の status サブコマンドを実行][1]し、Checks セクションでこれに似た値を探します。
@@ -246,36 +262,40 @@ Checks
       - Collected 8 metrics & 0 events
 ```
 
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-information
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 使用方法
 
-数分経つと、RDS メトリクスと [MySQL、Aurora、MariaDB、SQL Server、PostgreSQL の各メトリクス][2]が Datadog のメトリクスエクスプローラー、[ダッシュボード][3]、[アラート][4]からアクセスできようになります。
+数分経つと、RDS メトリクスと [MySQL、Aurora、MariaDB、SQL Server、PostgreSQL の各メトリクス][1]が Datadog のメトリクスエクスプローラー、[ダッシュボード][2]、[アラート][3]からアクセスできようになります。
 下記に RDS と MySQL 双方のインテグレーションから取得した多数のメトリクスを表示する Aurora ダッシュボードの例を示します。インスタンス `quicktestrds` で双方のインテグレーションから取得したメトリクスを `dbinstanceidentifier` タグを使用して一つにまとめています。
-{{< img src="integrations/awsrds/aurora-rds-dash.png" alt="RDS Aurora" popup="true">}}
+{{< img src="integrations/awsrds/aurora-rds-dash.png" alt="rds aurora dash" popup="true">}}
 
 これは、Amazon RDS 上の MySQL のデフォルトのダッシュボードです。
 {{< img src="integrations/awsrds/rds-mysql.png" alt="RDS MySQL デフォルトダッシュボード" responsive="true" popup="true">}}
 
-Amazon RDS のパフォーマンスメトリクスで MySQL を監視する方法については、[一連の記事][5]を参照してください。キーパフォーマンスメトリクス、その収集方法、Datadog を使用して MySQL on Amazon RDS を監視する方法について詳述されています。
+Amazon RDS のパフォーマンスメトリクスで MySQL を監視する方法については、[一連の記事][4]を参照してください。キーパフォーマンスメトリクス、その収集方法、Datadog を使用して MySQL on Amazon RDS を監視する方法について詳述されています。
 
 ### ログの収集
 
 #### RDS ログの有効化
 
-MySQL、MariaDB、および Postgres のログを Amazon CloudWatch に転送することができます。CloudWatch への RDS ログの送信を開始するには、[この手順][6]に従います。
+MySQL、MariaDB、および Postgres のログを Amazon CloudWatch に転送することができます。CloudWatch への RDS ログの送信を開始するには、[この手順][5]に従います。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][7]をまだセットアップしていない場合は、セットアップします。
+1. [Datadog ログコレクション AWS Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで、RDS ログを含む CloudWatch Logs グループに手動でトリガーを追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="CloudWatch Logs グループ" popup="true" style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="Cloudwatch トリガー" popup="true" style="width:70%;">}}
 
-完了したら、[Datadog Log セクション][8]に移動し、ログを確認します。
+完了したら、[Datadog Log セクション][7]に移動し、ログを確認します。
 
 ## 収集データ
 
-[データベースエンジンから収集されたメトリクス][2]のほかに、以下の RDS メトリクスも受信します。
+[データベースエンジンから収集されたメトリクス][1]のほかに、以下の RDS メトリクスも受信します。
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_rds" >}}
@@ -292,7 +312,7 @@ AWS RDS インテグレーションには、DB インスタンス、セキュリ
 ### サービスのチェック
 
 **aws.rds.read_replica_status**  
-[読み取りレプリケーション][10]のステータスを監視します。このチェックは、以下のいずれかのステータスを返します。
+[読み取りレプリケーション][9]のステータスを監視します。このチェックは、以下のいずれかのステータスを返します。
 
 - OK - レプリケート中または接続中
 - CRITICAL - エラーまたは途中終了
@@ -301,20 +321,19 @@ AWS RDS インテグレーションには、DB インスタンス、セキュリ
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-information
-[2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Monitoring.html
-[3]: https://docs.datadoghq.com/ja/dashboards/
-[4]: https://docs.datadoghq.com/ja/monitors/
-[5]: https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics
-[6]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
-[8]: https://app.datadoghq.com/logs
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
-[10]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
-[11]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Monitoring.html
+[2]: https://docs.datadoghq.com/ja/dashboards/
+[3]: https://docs.datadoghq.com/ja/monitors/
+[4]: https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics
+[5]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
+[7]: https://app.datadoghq.com/logs
+[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
+[9]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
+[10]: https://docs.datadoghq.com/ja/help/

@@ -1,4 +1,66 @@
 {
+  "ListAPIKeys": {
+    "description": "List all API keys available for your account.",
+    "summary": "Get all API keys"
+  },
+  "CreateAPIKey": {
+    "description": "Create an API key.",
+    "summary": "Create an API key",
+    "request_description": "",
+    "request_schema_description": "Request used to create an API key."
+  },
+  "DeleteAPIKey": {
+    "description": "Delete an API key.",
+    "summary": "Delete an API key"
+  },
+  "GetAPIKey": {
+    "description": "Get an API key.",
+    "summary": "Get API key"
+  },
+  "UpdateAPIKey": {
+    "description": "Update an API key.",
+    "summary": "Edit an API key",
+    "request_description": "",
+    "request_schema_description": "Request used to update an API key."
+  },
+  "ListApplicationKeys": {
+    "description": "List all application keys available for your org",
+    "summary": "Get all application keys"
+  },
+  "DeleteApplicationKey": {
+    "description": "Delete an application key",
+    "summary": "Delete an application key"
+  },
+  "UpdateApplicationKey": {
+    "description": "Edit an application key",
+    "summary": "Edit an application key",
+    "request_description": "",
+    "request_schema_description": "Request used to update an application key."
+  },
+  "ListCurrentUserApplicationKeys": {
+    "description": "List all application keys available for current user",
+    "summary": "Get all application keys owned by current user"
+  },
+  "CreateCurrentUserApplicationKey": {
+    "description": "Create an application key for current user",
+    "summary": "Create an application key for current user",
+    "request_description": "",
+    "request_schema_description": "Request used to create an application key."
+  },
+  "DeleteCurrentUserApplicationKey": {
+    "description": "Delete an application key owned by current user",
+    "summary": "Delete an application key owned by current user"
+  },
+  "GetCurrentUserApplicationKey": {
+    "description": "Get an application key owned by current user",
+    "summary": "Get one application key owned by current user"
+  },
+  "UpdateCurrentUserApplicationKey": {
+    "description": "Edit an application key owned by current user",
+    "summary": "Edit an application key owned by current user",
+    "request_description": "",
+    "request_schema_description": "Request used to update an application key."
+  },
   "DeleteDashboardListItems": {
     "description": "Delete dashboards from an existing dashboard list.",
     "summary": "Delete items from a dashboard list",
@@ -20,6 +82,30 @@
     "summary": "Update items of a dashboard list",
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
+  },
+  "ListIncidents": {
+    "description": "Get all incidents for the user's organization.",
+    "summary": "Get a list of incidents"
+  },
+  "CreateIncident": {
+    "description": "Create an incident.",
+    "summary": "Create an incident",
+    "request_description": "Incident payload.",
+    "request_schema_description": "Create request for an incident."
+  },
+  "DeleteIncident": {
+    "description": "Deletes an existing incident from the users organization.",
+    "summary": "Delete an existing incident"
+  },
+  "GetIncident": {
+    "description": "Get the details of an incident by `incident_id`.",
+    "summary": "Get the details of an incident"
+  },
+  "UpdateIncident": {
+    "description": "Updates an incident. Provide only the attributes that should be updated as this request is a partial update.",
+    "summary": "Update an existing incident",
+    "request_description": "Incident Payload.",
+    "request_schema_description": "Update request for an incident."
   },
   "AggregateLogs": {
     "description": "The API endpoint to aggregate events into buckets and compute metrics and timeseries.",
@@ -76,6 +162,30 @@
     "summary": "Grant role to an archive",
     "request_description": "",
     "request_schema_description": "Relationship to role."
+  },
+  "ListLogsMetrics": {
+    "description": "Get the list of configured log-based metrics with their definitions.",
+    "summary": "Get all log-based metrics"
+  },
+  "CreateLogsMetric": {
+    "description": "Create a metric based on your ingested logs in your organization.\nReturns the log-based metric object from the request body when the request is successful.",
+    "summary": "Create a log-based metric",
+    "request_description": "The definition of the new log-based metric.",
+    "request_schema_description": "The new log-based metric body."
+  },
+  "DeleteLogsMetric": {
+    "description": "Delete a specific log-based metric from your organization.",
+    "summary": "Delete a log-based metric"
+  },
+  "GetLogsMetric": {
+    "description": "Get a specific log-based metric from your organization.",
+    "summary": "Get a log-based metric"
+  },
+  "UpdateLogsMetric": {
+    "description": "Update a specific log-based metric from your organization.\nReturns the log-based metric object from the request body when the request is successful.",
+    "summary": "Update a log-based metric",
+    "request_description": "New definition of the log-based metric.",
+    "request_schema_description": "The new log-based metric body."
   },
   "ListRestrictionQueries": {
     "description": "Returns all restriction queries, including their names and IDs.",
@@ -138,6 +248,10 @@
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
+  },
+  "ListProcesses": {
+    "description": "Get all processes for your organization.",
+    "summary": "Get all processes"
   },
   "ListRoles": {
     "description": "Returns all roles, including their names and IDs.",
@@ -229,53 +343,53 @@
     "request_description": "",
     "request_schema_description": "The request for a security signal list."
   },
-  "GetServices": {
-    "description": "Get all services for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these services.",
-    "summary": "Get a list of all services"
+  "ListIncidentServices": {
+    "description": "Get all incident services uploaded for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
+    "summary": "Get a list of all incident services"
   },
-  "CreateService": {
-    "description": "Creates a new service.",
-    "summary": "Create a new service",
-    "request_description": "Service Payload.",
-    "request_schema_description": "Create request with a service payload."
+  "CreateIncidentService": {
+    "description": "Creates a new incident service.",
+    "summary": "Create a new incident service",
+    "request_description": "Incident Service Payload.",
+    "request_schema_description": "Create request with an incident service payload."
   },
-  "DeleteService": {
-    "description": "Deletes an existing service.",
-    "summary": "Delete an existing service"
+  "DeleteIncidentService": {
+    "description": "Deletes an existing incident service.",
+    "summary": "Delete an existing incident service"
   },
-  "GetService": {
-    "description": "Get details of a service. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these services",
-    "summary": "Get details of a service"
+  "GetIncidentService": {
+    "description": "Get details of an incident service. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident services.",
+    "summary": "Get details of an incident service"
   },
-  "UpdateService": {
-    "description": "Updates an existing service. Only provide the attributes which should be updated as this request is a partial update.",
-    "summary": "Update an existing service",
-    "request_description": "Service Payload.",
-    "request_schema_description": "Update request with a service payload."
+  "UpdateIncidentService": {
+    "description": "Updates an existing incident service. Only provide the attributes which should be updated as this request is a partial update.",
+    "summary": "Update an existing incident service",
+    "request_description": "Incident Service Payload.",
+    "request_schema_description": "Update request with an incident service payload."
   },
-  "GetTeams": {
-    "description": "Get all teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these teams.",
-    "summary": "Get a list of all teams"
+  "ListIncidentTeams": {
+    "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
+    "summary": "Get a list of all incident teams"
   },
-  "CreateTeam": {
-    "description": "Creates a new team.",
-    "summary": "Create a new team",
-    "request_description": "Teams Payload.",
-    "request_schema_description": "Create request with a team payload."
+  "CreateIncidentTeam": {
+    "description": "Creates a new incident team.",
+    "summary": "Create a new incident team",
+    "request_description": "Incident Team Payload.",
+    "request_schema_description": "Create request with an incident team payload."
   },
-  "DeleteTeam": {
-    "description": "Deletes an existing team.",
-    "summary": "Delete an existing team"
+  "DeleteIncidentTeam": {
+    "description": "Deletes an existing incident team.",
+    "summary": "Delete an existing incident team"
   },
-  "GetTeam": {
-    "description": "Get details of a team. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these teams.",
-    "summary": "Get details of a team"
+  "GetIncidentTeam": {
+    "description": "Get details of an incident team. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident teams.",
+    "summary": "Get details of an incident team"
   },
-  "UpdateTeam": {
-    "description": "Updates an existing team. Only provide the attributes which should be updated as this request is a partial update.",
-    "summary": "Update an existing team",
-    "request_description": "Teams Payload.",
-    "request_schema_description": "Update request with a team payload."
+  "UpdateIncidentTeam": {
+    "description": "Updates an existing incident team. Only provide the attributes which should be updated as this request is a partial update.",
+    "summary": "Update an existing incident team",
+    "request_description": "Incident Team Payload.",
+    "request_schema_description": "Update request with an incident team payload."
   },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",

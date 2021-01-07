@@ -7,6 +7,8 @@ integrations_data
 /examples
 content/en/api/**/*.go
 content/en/api/**/*.java
+content/en/api/**/*.pybeta
+content/en/api/**/*.rbbeta
 
 # Ignoring all automated content
 # Developers/integrations
@@ -21,9 +23,9 @@ content/en/agent/basic_agent_usage/puppet.md
 content/en/agent/basic_agent_usage/saltstack.md
 
 # Tracing
-content/en/tracing/setup/ruby.md
-content/en/tracing/setup/android.md
-content/en/tracing/setup/ios.md
+content/en/tracing/setup_overview/setup/ruby.md
+content/en/tracing/setup_overview/setup/android.md
+content/en/tracing/setup_overview/setup/ios.md
 
 # Log collection
 content/en/logs/log_collection/android.md
@@ -68,6 +70,7 @@ npm-debug.log*
 content/en/real_user_monitoring/android.md
 content/en/real_user_monitoring/browser/_index.md
 content/en/logs/log_collection/javascript.md
+content/en/real_user_monitoring/ios.md
 
 # serverless
 content/en/serverless/forwarder.md

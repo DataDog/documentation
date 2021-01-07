@@ -35,7 +35,10 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Indexed Span](#indexed-span) | Indexed Spans represent all spans indexed by retention filters or legacy App Analytics analyzed spans and can be used to search, query, and monitor in *Analytics*.                                                                                                |
 | [Span tags](#span-tags)         | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Analytics*.                                                                                                    |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
-| [Ingestion Controls](#ingestion-controls) | Ingestion Controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.                                                                                              |
+| [Ingestion Controls](#ingestion-controls) | Ingestion Controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
+| [Sublayer Metric](#sublayer-metric) | A sublayer metric is the execution duration of a given type / service within a trace.
+| [Execution Duration](#execution-duration) | Total time that a span is considered 'active' (not waiting for a child span to complete).
+
 
 **Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
@@ -148,6 +151,17 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 [Send 100% of traces][19] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
 
+## Sublayer Metric
+
+Some [Tracing Application Metrics][20] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution duration for individual services within a trace.
+
+## Execution Duration
+
+The active spans for a given time, for a given trace, are all of the leaf spans (spans without children).
+
+{{< img src="tracing/visualization/execution_duration.png" style="width:50%;" alt="Execution Duration"  style="width:50%;">}}
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -171,3 +185,4 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 [17]: /tracing/trace_search_and_analytics/query_syntax/#facets
 [18]: /tracing/trace_retention_and_ingestion/#retention-filters
 [19]: /tracing/trace_retention_and_ingestion/#ingestion-controls
+[20]: /tracing/guide/metrics_namespace/

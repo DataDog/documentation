@@ -6,6 +6,7 @@ assets:
     Hive Overview: assets/dashboards/overview.json
   logs:
     source: hive
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/hive/README.md'
 display_name: Hive
+draft: false
 git_integration_title: hive
 guid: 3faee302-f293-45de-9eb8-ba6b7fa052a3
 integration_id: hive
@@ -44,7 +46,7 @@ Ce check surveille deux composants de [Hive][1] : Hive Metastore et HiveServer
 
 ### Installation
 
-Le check Hive est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Hive est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
@@ -73,18 +75,23 @@ Le check Hive est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez don
 
     Redémarrez ensuite HiveServer2 ou Hive Metastore. Hive Metastore et HiveServer2 ne peuvent pas partager la même connexion JMX.
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
+
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `hive.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Hive. Consultez le [fichier d'exemple hive.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `hive.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Hive. Consultez le [fichier d'exemple hive.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
     Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué sur la page d'informations. Choisissez les métriques qui vous intéressent en modifiant la configuration ci-dessous.
-    Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][5] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller davantage de métriques, contactez [l'assistance Datadog][6].
+    Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][2] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller davantage de métriques, contactez [l'assistance Datadog][3].
 
-2. [Redémarrez l'Agent][7].
+2. [Redémarrez l'Agent][4].
 
 ##### Collecte de logs
 
@@ -110,31 +117,44 @@ _Disponible à partir des versions > 6.0 de l'Agent_
              pattern: \d{4}\-\d{2}\-\d{2}
    ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple hive.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple hive.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][7].
+3. [Redémarrez l'Agent][4].
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/integrations/java/
+[3]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
-Pour recueillir des métriques avec l'intégration Datadog/Hive, consultez le guide [Autodiscovery avec JMX][9].
+Pour recueillir des métriques avec l'intégration Datadog/Hive, consultez le guide [Autodiscovery avec JMX][2].
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][10].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
 
 | Paramètre      | Valeur                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "hive", "service": "<NOM_SERVICE>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-\d{2}\-\d{2}"}}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][11] et cherchez `Hive` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `Hive` dans la section Checks.
 
 ## Données collectées
 
@@ -145,7 +165,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ### Checks de service
 
  **hive.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance HiveServer2 ou Hive Metastore qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance HiveServer2 ou Hive Metastore qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 
@@ -153,17 +173,11 @@ Le check Hive n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
+
 
 [1]: https://cwiki.apache.org/confluence/display/Hive/Home
 [2]: https://docs.datadoghq.com/fr/agent/
 [3]: https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-Metrics
-[4]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/integrations/java/
-[6]: https://docs.datadoghq.com/fr/help/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[9]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[10]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/hive/metadata.csv
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/help/

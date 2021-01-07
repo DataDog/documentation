@@ -30,7 +30,7 @@ To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a
 
 2. Install the Datadog Operator:
   ```
-  helm install datadog/datadog-operator
+  helm install my-datadog-operator datadog/datadog-operator
   ```
   
 ## Deploy the Datadog Agents with the Operator
@@ -100,7 +100,7 @@ spec:
     appKey: "<DATADOG_APP_KEY>"
   agent:
     image:
-      name: "datadog/agent:latest"
+      name: "gcr.io/datadoghq/agent:latest"
     config:
       tolerations:
        - operator: Exists

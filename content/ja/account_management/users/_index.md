@@ -30,7 +30,7 @@ Datadog の **User Management** セクションでは、ユーザーとそのユ
 2. ページ右上隅 **Invite Users** をクリックします。
 3. Datadog アカウントに招待するユーザーのメールアドレスを入力します。
 4. ユーザーに 1 つ以上の[ユーザーロール][1]を割り当てます。
-**注**: Standard Access 権限を持つユーザーは自分と同じロールにユーザーを招待できます。Privileged Access 権限を持つユーザーはいずれのロールにもユーザーを招待できます。
+**注**: Invite User アクセス許可を持つユーザーは、自分が持っているロールにユーザーを招待できます。Invite User と Access Management の両方のアクセス許可を持つユーザーは、ユーザーをあらゆるロールに招待できます。
 5. **Send Invites** をクリックします。
 
 {{< img src="account_management/users/invite_user.png" alt="オーガニゼーションにユーザーを追加する"  style="width:80%;">}}
@@ -49,7 +49,7 @@ Datadog の **User Management** セクションでは、ユーザーとそのユ
 
 ## ユーザーのロールを編集する
 
-Datadog Admin Role などの Privileged Access 権限を持つユーザーのみが他のユーザーのロールを変更できます。
+Datadog Admin Role などの Access Management アクセス許可を持つユーザーのみが他のユーザーのロールを変更できます。
 
 1. User Management ページに移動します。
 2. ユーザーの行の右にある *Edit* ボタンを選択します。
@@ -62,7 +62,7 @@ Datadog Admin Role などの Privileged Access 権限を持つユーザーのみ
 
 ## 既存のメンバーを無効にする
 
-Datadog Admin Role などの Privileged Access 権限を持つユーザーのみがメンバーを無効化できます。削除してはいけないイベントやダッシュボードをこのメンバーが所有している場合があるため、メンバーを完全に削除することはできません。メンバーを無効化すると、このメンバーが生成したアプリケーションキーが自動的に無効化されます。
+メンバーを無効にできるのは、Datadog Admin Role を持つユーザーなど、Access Management アクセス許可を持つユーザーのみです。ユーザーがダッシュボードまたはモニターを作成した可能性があるため、ユーザーを完全に削除することはできません。ユーザー ID は、ユーザーのアクションの記録を保持するために使用されます。ユーザーが無効になると、ユーザーが生成したアプリケーションキーは自動的に取り消されます。
 
 1. User Management ページに移動します。
 2. ユーザーの行の右にある *Edit* ボタンを選択します。

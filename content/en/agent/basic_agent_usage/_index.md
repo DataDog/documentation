@@ -148,8 +148,11 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [macOS][9]                                      | macOS 10.12+                                      |
 | [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano) |
 | [Windows 64-bit][10]                            | Windows 7+                                        |
+| [Windows Azure Stack HCI OS][10]                | All Versions                                      |
 
-**Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
+**Notes**: 
+- [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
+- Datadog Agent v7+ supports Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
 [2]: /agent/basic_agent_usage/deb/
@@ -179,7 +182,11 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Windows server 64-bit][10]       | Windows Server 2008r2+ |
 | [Windows 64-bit][10]              | Windows 7+             |
 
-**Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
+**Notes**:
+
+- [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
+
+- Windows Server 2008 R2 is supported, but there is a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
 
 [1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
 [2]: /agent/basic_agent_usage/deb/
@@ -192,6 +199,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [9]: /agent/basic_agent_usage/osx/
 [10]: /agent/basic_agent_usage/windows/
 [11]: /agent/basic_agent_usage/source/
+[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 
@@ -326,13 +334,15 @@ Note: If you want to manually update one specific Agent integration refer to the
 
 ### Datadog site
 
-To send your Agent data to the [Datadog EU site][10], edit your [Agent main configuration file][11] `datadog.yaml` and set the `site` parameter to:
+Edit the [Agent's main configuration file][10], `datadog.yaml`, to set the `site` parameter (defaults to `datadoghq.com`).
 
-`site: datadoghq.eu`
+```yaml
+site: {{< region-param key="dd_site" >}}
+```
 
 ### Log location
 
-[See the dedicated documentation for Agent log files][12]
+[See the dedicated documentation for Agent log files][11]
 
 ## Further Reading
 
@@ -347,6 +357,5 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 [7]: https://app.datadoghq.com/account/settings#agent
 [8]: /agent/guide/integration-management/
 [9]: /agent/guide/agent-configuration-files/
-[10]: https://app.datadoghq.eu
-[11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /agent/guide/agent-log-files/
+[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/guide/agent-log-files/

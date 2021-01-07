@@ -19,6 +19,8 @@ After spans have been ingested by Datadog, they will be kept for 15 days accordi
 
 You can also create any number of additional [tag-based retention filters](#create-your-own-retention-filter) for your services.
 
+**Note**: Admin rights are required to create, modify, or disable retention filters.
+
 {{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Retention Filters" >}}
 
 In the Datadog app, on the [Retention Filters tab][1], you can see the following information:
@@ -38,10 +40,12 @@ Intelligent Retention is always active for your services, and it will keep a pro
 
 Intelligent Retention retains:
 
- - Errors, including Error Diversity (for example, response code 400s, 500s).
+ - A representative selection of errors, ensuring error diversity (for example, response code 400s, 500s). 
  - High Latency in the different quartiles `p75`, `p90`, `p95`.
  - All Resources with any traffic will have associated Traces in the past for any time window selection.
  - True maximum duration trace for each time window.
+
+If there are specific tags, facets, or groups of traces that you want to investigate _in detail_, meaning you want to retain more than what Intelligent Retention retains, then [create your own retention filter](#create-your-own-retention-filter). For example, you might want to keep more than a representative selection of errors from your production environment. To ensure _all_ production errors are retained and available for search and analytics for 15 days, create a 100 percent retention filter scoped to `env:prod` and `status:error`. As discussed below, this may have an impact on your bill.
 
 ### Create your own Retention Filter
 
@@ -157,7 +161,7 @@ All existing App Analytics filters have been automatically transitioned to Reten
 [1]: https://app.datadoghq.com/apm/traces/retention-filters
 [2]: /tracing/trace_search_and_analytics/#historical-search-mode
 [3]: /tracing/visualization/#top-level-span
-[4]: https://app.datadoghq.com/apm/traces/ingestion-controls
+[4]: https://app.datadoghq.com/apm/traces/ingestion-control
 [5]: /help/
 [6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml#L736-L741
 [7]: /tracing/trace_search_and_analytics

@@ -42,7 +42,7 @@ Choose your alert grouping:
 
 * The count was `above`, `above or equal to`, `below`, or `below or equal to`
 * `<THRESHOLD_NUMBER>`
-* during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 48 hours.
 
 **Note**: Some providers introduce a significant delay between when an event is **posted**, and when the event is initiated. In this case, Datadog back-dates the event to the time of occurrence, which could place an incoming event outside the current monitor evaluation window. Widening your evaluation window can help account for the time difference.  If you need help adjusting your monitor settings appropriately, reach out to [Datadog Support][2].
 

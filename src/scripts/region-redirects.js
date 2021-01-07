@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie';
 import config from '../../regions.config';
-// import datadogLogs from './components/dd-browser-logs-rum';
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
@@ -90,7 +89,7 @@ function showRegionSnippet(newSiteRegion) {
 
     if (externalLinks) {
         externalLinks.forEach(link => {
-            link.href = `https://app.${config.dd_site[newSiteRegion]}${link.pathname}${link.hash}`;
+            link.href = `https://${config.dd_full_site[newSiteRegion]}${link.pathname}${link.hash}`;
         });
     }
 }

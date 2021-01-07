@@ -117,14 +117,16 @@ Pour installer l'Agent Datadog sur votre cluster Kubernetes :
 
 3. **Créez le manifeste de l'Agent Datadog**. Créez le manifeste `datadog-agent.yaml` à partir de l'un des modèles suivants :
 
-    - [Manifeste avec activation des logs, de l'APM, des processus et de la collecte des métriques][3]
-    - [Manifeste avec activation des logs, de l'APM et de la collecte des métriques][4]
-    - [Manifeste avec activation des logs et de la collecte des métriques][5]
-    - [Manifeste avec activation de l'APM et de la collecte des métriques][6]
-    - [Manifeste avec activation de la surveillance des performances réseau][7]
-    - [Manifeste de base avec activation de la collecte des métriques uniquement][8]
+    | Métriques | Logs | APM | Processus | NPM | Linux                  | Windows                 |
+    |---------|------|-----|---------|-----|------------------------|-------------------------|
+    | X       | X    | X   | X       |     | [Modèle du manifeste][3] | [Modèle du manifeste][4] |
+    | X       | X    | X   |         |     | [Modèle du manifeste][5] | [Modèle du manifeste][6] |
+    | X       | X    |     |         |     | [Modèle du manifeste][7] | [Modèle du manifeste][8] |
+    | X       |      | X   |         |     | [Modèle du manifeste][9] | [Modèle du manifeste][10] |
+    |         |      |     |         | X   | [Modèle du manifeste][11] | Aucun modèle             |
+    | X       |      |     |         |     | [Modèle du manifeste][12] | [Modèle du manifeste][13] |
 
-     Pour activer toutes les fonctionnalités de collecte de traces, [vous devez suivre plusieurs étapes supplémentaires lors de la configuration des pods de votre application][9]. Consultez également les sections relatives aux [logs][10], à l'[APM][11], aux [processus][12] et à la [surveillance des performances réseau][13] pour découvrir comment activer chacune de ces fonctionnalités.
+     Pour activer toutes les fonctionnalités de collecte de traces, [vous devez suivre plusieurs étapes supplémentaires lors de la configuration des pods de votre application][14]. Consultez également les sections relatives aux [logs][15], à l'[APM][16], aux [processus][17] et à la [surveillance des performances réseau][18] pour découvrir comment activer chacune de ces fonctionnalités.
 
      **Remarque** : ces manifestes sont par défaut définis pour l'espace de nommage `default`. Si vous utilisez un espace de nommage personnalisé, modifiez le paramètre `metadata.namespace` avant d'appliquer les manifestes.
 
@@ -149,7 +151,7 @@ Pour installer l'Agent Datadog sur votre cluster Kubernetes :
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. **Configurez des métriques Kubernetes State** (facultatif) : téléchargez le [dossier de manifestes Kube-State][14], puis appliquez-les à votre cluster Kubernetes pour recueillir automatiquement des [métriques kube-state][15] :
+7. **Configurez des métriques Kubernetes State** (facultatif) : téléchargez le [dossier de manifestes Kube-State][19], puis appliquez-les à votre cluster Kubernetes pour recueillir automatiquement des [métriques kube-state][20] :
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -158,26 +160,86 @@ Pour installer l'Agent Datadog sur votre cluster Kubernetes :
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/yaml/datadog-agent-all-features.yaml
-[4]: /resources/yaml/datadog-agent-logs-apm.yaml
-[5]: /resources/yaml/datadog-agent-logs.yaml
-[6]: /resources/yaml/datadog-agent-apm.yaml
-[7]: /resources/yaml/datadog-agent-npm.yaml
-[8]: /resources/yaml/datadog-agent-vanilla.yaml
-[9]: /fr/agent/kubernetes/apm/#setup
-[10]: /fr/agent/kubernetes/log/
-[11]: /fr/agent/kubernetes/apm/
-[12]: /fr/infrastructure/process/?tab=kubernetes#installation
-[13]: /fr/network_performance_monitoring/installation/
-[14]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[15]: /fr/agent/kubernetes/data_collected/#kube-state-metrics
+[4]: /resources/yaml/datadog-agent-windows-all-features.yaml
+[5]: /resources/yaml/datadog-agent-logs-apm.yaml
+[6]: /resources/yaml/datadog-agent-windows-logs-apm.yaml
+[7]: /resources/yaml/datadog-agent-logs.yaml
+[8]: /resources/yaml/datadog-agent-windows-logs.yaml
+[9]: /resources/yaml/datadog-agent-apm.yaml
+[10]: /resources/yaml/datadog-agent-windows-apm.yaml
+[11]: /resources/yaml/datadog-agent-npm.yaml
+[12]: /resources/yaml/datadog-agent-vanilla.yaml
+[13]: /resources/yaml/datadog-agent-windows-vanilla.yaml
+[14]: /fr/agent/kubernetes/apm/#setup
+[15]: /fr/agent/kubernetes/log/
+[16]: /fr/agent/kubernetes/apm/
+[17]: /fr/infrastructure/process/?tab=kubernetes#installation
+[18]: /fr/network_performance_monitoring/installation/
+[19]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[20]: /fr/agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-[L'Operator Datadog][1] est actuellement en bêta publique. Il s'agit d'une fonctionnalité vous permettant de déployer l'Agent Datadog sur Kubernetes et OpenShift. L'Operator transmet des données sur le statut de déploiement, la santé et les erreurs dans le statut de sa ressource personnalisée. Ses paramètres de niveau supérieur permettent également de réduire les erreurs de configuration. Pour commencer à utiliser l'Operator, consultez la [page de présentation][2] dans le [référentiel Datadog Operator][1] ou installez l'Opérator depuis la [page Datadog Operator du site OperatorHub.io][3].
+<div class="alert alert-warning">L'Operator Datadog est en bêta publique. Si vous souhaitez nous faire part de vos remarques ou de vos questions, contactez l'<a href="/help">assistance Datadog</a>.</div>
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
-[2]: https://github.com/DataDog/datadog-operator
-[3]: https://operatorhub.io/operator/datadog-operator
+[L'Operator Datadog][1] est une fonctionnalité permettant de déployer l'Agent Datadog sur Kubernetes et OpenShift. L'Operator transmet des données sur le statut, la santé et les erreurs du déploiement dans le statut de sa ressource personnalisée. Ses paramètres de niveau supérieur permettent également de réduire les erreurs de configuration.
+
+## Prérequis
+
+L'utilisation de l'Operator Datadog nécessite les prérequis suivants :
+
+- **Cluster Kubernetes version >= v1.14.X** : les tests ont été réalisés sur les versions >= `1.14.0`. Néanmoins, les versions `>= v1.11.0` devraient également fonctionner. Pour les versions plus anciennes, en raison de la prise en charge limitée du CRD, il se peut que l'Operator ne fonctionne pas comme prévu.
+- [`Helm`][2] pour le déploiement de `datadog-operator`.
+- [Interface de ligne de commande `Kubectl`][3] pour l'installation de `datadog-agent`.
+
+
+## Déployer un Agent avec l'Operator
+
+Pour déployer un Agent Datadog avec l'Operator en un minimum d'étapes, utilisez le chart Helm [`datadog-agent-with-operator`][4].
+Voici les étapes à suivre :
+
+1. [Téléchargez le chart][5] :
+
+   ```shell
+   curl -Lo datadog-agent-with-operator.tar.gz https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+   ```
+
+2. Créez un fichier avec les spécifications de l'Agent. La configuration la plus simple est la suivante :
+
+   ```yaml
+   credentials:
+     apiKey: <DATADOG_API_KEY>
+     appKey: <DATADOG_APP_KEY>
+   agent:
+     image:
+       name: "datadog/agent:latest"
+   ```
+
+   Remplacez `<CLÉ_API_DATADOG>` et `<CLÉ_APPLICATION_DATADOG>` par vos [clés d'API et d'application Datadog][6].
+
+3. Déployez l'Agent Datadog avec le fichier de configuration ci-dessus :
+   ```shell
+   helm install --set-file agent_spec=/path/to/your/datadog-agent.yaml datadog datadog-agent-with-operator.tar.gz
+   ```
+
+## Nettoyage
+
+La commande suivante permet de supprimer toutes les ressources Kubernetes créées par les instructions ci-dessus :
+
+```shell
+kubectl delete datadogagent datadog
+helm delete datadog
+```
+
+Pour en savoir plus sur la configuration de l'Operator, notamment sur l'utilisation de tolérances, consultez le [guide de configuration avancée de l'Operator Datadog][7].
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://helm.sh
+[3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[4]: https://github.com/DataDog/datadog-operator/tree/master/chart/datadog-agent-with-operator
+[5]: https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+[6]: https://app.datadoghq.com/account/settings#api
+[7]: /fr/agent/guide/operator-advanced
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -202,9 +264,22 @@ Définissez les options `datadog.leaderElection`, `datadog.collectEvents` et `ag
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-Si vous souhaitez recueillir des événements à partir de votre cluster Kubernetes, définissez les variables d'environnement `DD_COLLECT_KUBERNETES_EVENTS` et `DD_LEADER_ELECTION` sur `true` dans le manifeste de votre Agent. Vous pouvez également utiliser le [processus de collecte d'événements de l'Agent de cluster Datadog][1]. 
+Si vous souhaitez recueillir des événements à partir de votre cluster Kubernetes, définissez les variables d'environnement `DD_COLLECT_KUBERNETES_EVENTS` et `DD_LEADER_ELECTION` sur `true` dans le manifeste de votre Agent. Vous pouvez également utiliser le [processus de collecte d'événements de l'Agent de cluster Datadog][1].
 
 [1]: /fr/agent/cluster_agent/event_collection/
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Définissez `agent.config.collectEvents` sur `true` dans votre manifeste `datadog-agent.yaml`.
+
+Par exemple :
+
+```
+agent:
+  config:
+    collectEvents: true
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -239,7 +314,7 @@ Vous trouverez ci-dessous la liste des variables d'environnement disponibles pou
 | `DD_PROXY_HTTP`     | URL HTTP à utiliser comme proxy pour les requêtes `http`.                |
 | `DD_PROXY_HTTPS`    | URL HTTPS à utiliser comme proxy pour les requêtes `https`.              |
 | `DD_PROXY_NO_PROXY` | Une liste d'URL, séparées par des espaces, pour lesquelles aucun proxy ne doit être utilisé. |
-| `DD_SKIP_SSL_VALIDATION` | Option de test permettant de savoir si l'Agent a des difficultés à se connecter à Datadog. |
+| `DD_SKIP_SSL_VALIDATION` | Option de test si l'Agent a des difficultés à se connecter à Datadog. |
 
 Pour en savoir plus sur les paramètres de proxy, consultez la [documentation relative au proxy de l'Agent v6][5].
 
@@ -277,7 +352,7 @@ Datadog recueille automatiquement les tags courants à partir de Kubernetes. Pou
 
 | Variable d'environnement                            | Description             |
 | --------------------------------------- | ----------------------- |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extrait les étiquettes de pod      |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extrait les étiquettes de pod.      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extrait les annotations de pod. |
 
 Consultez la documentation relative à [l'extraction de tags Kubernetes][12] pour en savoir plus.
@@ -288,7 +363,7 @@ Les identifiants des intégrations peuvent être conservés dans des secrets Doc
 
 ### Ignorer des conteneurs
 
-Excluez les conteneurs de la collecte de logs, de la collecte de métriques et d'Autodiscovery. Par défaut, Datadog exclut les conteneurs `pause` de Kubernetes et d'OpenShift. Ces listes d'inclusion et d'exclusion s'appliquent uniquement à Autodiscovery. Elles n'ont aucun impact sur les traces ni sur DogStatsD.
+Excluez les conteneurs de la collecte de logs, de la collecte de métriques et d'Autodiscovery. Par défaut, Datadog exclut les conteneurs `pause` de Kubernetes et d'OpenShift. Ces listes d'inclusion et d'exclusion s'appliquent uniquement à Autodiscovery. Elles n'ont aucun impact sur les traces ni sur DogStatsD. La valeur de ces variables d'environnement prend en charge les expressions régulières.
 
 | Variable d'environnement    | Description                                                                                                                                                                                                        |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

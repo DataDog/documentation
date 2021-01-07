@@ -1,0 +1,330 @@
+{
+  "DeleteDashboardListItems": {
+    "description": "Supprimez des dashboards d'une liste de dashboards existante.",
+    "summary": "Supprimer des éléments d'une liste de dashboards",
+    "request_description": "Dashboards à supprimer de la liste de dashboards.",
+    "request_schema_description": "Requête contenant la liste des dashboards à supprimer."
+  },
+  "GetDashboardListItems": {
+    "description": "Récupérez des définitions de dashboard de la liste de dashboards.",
+    "summary": "Récupérer une liste de dashboards"
+  },
+  "CreateDashboardListItems": {
+    "description": "Ajoutez des dashboards à une liste de dashboards existante.",
+    "summary": "Ajouter des éléments à une liste de dashboards",
+    "request_description": "Dashboards à ajouter à la liste de dashboards.",
+    "request_schema_description": "Requête contenant la liste des dashboards à ajouter."
+  },
+  "UpdateDashboardListItems": {
+    "description": "Mettez à jour les dashboards d'une liste de dashboards existante.",
+    "summary": "Mettre à jour les éléments d'une liste de dashboards",
+    "request_description": "Nouveaux dashboards de la liste de dashboards.",
+    "request_schema_description": "Requête contenant la liste des dashboards à mettre à jour."
+  },
+  "ListIncidents": {
+    "description": "Récupérez tous les incidents de l'organisation de l'utilisateur.",
+    "summary": "Récupérer la liste des incidents"
+  },
+  "CreateIncident": {
+    "description": "Créez un incident.",
+    "summary": "Créer un incident",
+    "request_description": "Charge utile de l'incident.",
+    "request_schema_description": "Requête de création d'un incident."
+  },
+  "DeleteIncident": {
+    "description": "Supprimez un incident existant de l'organisation de l'utilisateur.",
+    "summary": "Supprimer un incident existant"
+  },
+  "GetIncident": {
+    "description": "Récupérez les détails d'un incident en fonction de son `incident_id`.",
+    "summary": "Récupérer les détails d'un incident"
+  },
+  "UpdateIncident": {
+    "description": "Mettez à jour un incident. Cette requête étant une mise à jour partielle, spécifiez uniquement les attributs devant être mis à jour.",
+    "summary": "Mettre à jour un incident existant",
+    "request_description": "Charge utile de l'incident.",
+    "request_schema_description": "Requête de mise à jour d'un incident."
+  },
+  "AggregateLogs": {
+    "description": "Endpoint d'API pour agréger les événements sous la forme de compartiments et calculer les métriques ainsi que les séries temporelles.",
+    "summary": "Événements agrégés",
+    "request_schema_description": "L'objet envoyé avec la requête pour récupérer une liste de logs de votre organisation. "
+  },
+  "GetLogsArchiveOrder": {
+    "description": "Récupérez la séquence actuelle de vos archives. Ce endpoint ne prend aucun argument JSON.",
+    "summary": "Récupérer la séquence des archives"
+  },
+  "UpdateLogsArchiveOrder": {
+    "description": "Mettez à jour la séquence de vos archives. Les logs étant traités de manière séquentielle, la réorganisation d'une archive peut changer la structure et le contenu des données traitées par les autres archives.\n\n**Remarque** : la méthode `PUT` permet de mettre à jour la séquence des archives en remplaçant la séquence actuelle actuelle par la nouvelle.",
+    "summary": "Mettre à jour la séquence des archives",
+    "request_description": "Un objet contenant la nouvelle liste triée des ID d'archive.",
+    "request_schema_description": "Une liste triée d'ID d'archive."
+  },
+  "ListLogsArchives": {
+    "description": "Récupérez la liste des archives de logs configurées avec leurs définitions.",
+    "summary": "Récupérer toutes les archives"
+  },
+  "CreateLogsArchive": {
+    "description": "Créez une archive dans votre organisation.",
+    "summary": "Créer une archive",
+    "request_description": "La définition de la nouvelle archive.",
+    "request_schema_description": "L'archive de logs."
+  },
+  "DeleteLogsArchive": {
+    "description": "Supprimez une archive spécifique de votre organisation.",
+    "summary": "Supprimer une archive"
+  },
+  "GetLogsArchive": {
+    "description": "Récupérez une archive spécifique de votre organisation.",
+    "summary": "Récupérer une archive"
+  },
+  "UpdateLogsArchive": {
+    "description": "Mettez à jour une configuration d'archive donnée.\n\n**Remarque** : cette méthode permet de mettre à jour la configuration de votre archive en **remplaçant** votre configuration actuelle par la nouvelle, envoyée à votre organisation Datadog.",
+    "summary": "Mettre à jour une archive",
+    "request_description": "Nouvelle définition de l'archive.",
+    "request_schema_description": "L'archive de logs."
+  },
+  "RemoveRoleFromArchive": {
+    "description": "Supprime un rôle d'une archive. ([API Roles](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "Révoquer le rôle d'une archive",
+    "request_schema_description": "Relation avec le rôle."
+  },
+  "ListArchiveReadRoles": {
+    "description": "Renvoie tous les rôles de lecture auxquels une archive spécifique est limitée.",
+    "summary": "Énumérer les rôles de lecture pour une archive"
+  },
+  "AddReadRoleToArchive": {
+    "description": "Ajoute un rôle de lecture à une archive ([API Roles](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "Accorder un rôle à une archive",
+    "request_schema_description": "Relation avec le rôle."
+  },
+  "ListRestrictionQueries": {
+    "description": "Renvoie toutes les requêtes de restriction, y compris leurs noms et leurs ID.",
+    "summary": "Énumérer les requêtes de restriction"
+  },
+  "CreateRestrictionQuery": {
+    "description": "Créez une nouvelle requête de restriction pour votre organisation.",
+    "summary": "Créer une requête de restriction",
+    "request_schema_description": "Créez une requête de restriction."
+  },
+  "GetRoleRestrictionQuery": {
+    "description": "Récupérez une requête de restriction pour un rôle donné.",
+    "summary": "Récupérer une requête de restriction pour un rôle donné"
+  },
+  "ListUserRestrictionQueries": {
+    "description": "Récupérez toutes les requêtes de restriction pour un utilisateur donné.",
+    "summary": "Récupérer toutes les requêtes de restriction pour un utilisateur donné"
+  },
+  "DeleteRestrictionQuery": {
+    "description": "Supprime une requête de restriction.",
+    "summary": "Supprimer une requête de restriction"
+  },
+  "GetRestrictionQuery": {
+    "description": "Récupérez une requête de restriction dans l'organisation en spécifiant son `restriction_query_id`.",
+    "summary": "Récupérer une requête de restriction"
+  },
+  "UpdateRestrictionQuery": {
+    "description": "Modifiez une requête de restriction.",
+    "summary": "Mettre à jour une requête de restriction",
+    "request_schema_description": "Mettez à jour une requête de restriction."
+  },
+  "RemoveRoleFromRestrictionQuery": {
+    "description": "Supprime un rôle d'une requête de restriction.",
+    "summary": "Révoquer un rôle d'une requête de restriction",
+    "request_schema_description": "Relation avec le rôle."
+  },
+  "ListRestrictionQueryRoles": {
+    "description": "Renvoie tous les rôles associés à une requête de restriction donnée.",
+    "summary": "Énumérer les rôles d'une requête de restriction"
+  },
+  "AddRoleToRestrictionQuery": {
+    "description": "Ajoute un rôle à une requête de restriction.",
+    "summary": "Accorder un rôle à une requête de restriction",
+    "request_schema_description": "Relation avec le rôle."
+  },
+  "ListLogsGet": {
+    "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs. [Les résultats sont paginés][1].\n\nCet endpoint et l'endpoint POST peuvent tous les deux être utilisés pour énumérer des logs.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que l'API Log List. Consultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Récupérer une liste de logs rapide"
+  },
+  "ListLogs": {
+    "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs. [Les résultats sont paginés][1].\n\nCet endpoint et l'endpoint GET peuvent tous les deux être utilisés pour énumérer des logs.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que l'API Log List. Consultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Récupérer une liste de logs",
+    "request_schema_description": "La requête de récupération d'une liste de logs."
+  },
+  "ListPermissions": {
+    "description": "Renvoie la liste de toutes les autorisations, y compris le nom, la description et l'ID.",
+    "summary": "Énumérer les autorisations"
+  },
+  "ListProcesses": {
+    "description": "Récupérez tous les processus de votre organisation.",
+    "summary": "Récupérer tous les processus"
+  },
+  "ListRoles": {
+    "description": "Renvoie tous les rôles, y compris leurs noms et leurs ID.",
+    "summary": "Énumérer les rôles"
+  },
+  "CreateRole": {
+    "description": "Créez un nouveau rôle pour votre organisation.",
+    "summary": "Créer un rôle",
+    "request_schema_description": "Créez un rôle."
+  },
+  "DeleteRole": {
+    "description": "Désactive un rôle.",
+    "summary": "Supprimer un rôle"
+  },
+  "GetRole": {
+    "description": "Récupérez un rôle dans l'organisation en spécifiant son `role_id`.",
+    "summary": "Récupérer un rôle"
+  },
+  "UpdateRole": {
+    "description": "Modifiez un rôle. Nécessite une clé d'application appartenant à un administrateur.",
+    "summary": "Mettre à jour un rôle",
+    "request_schema_description": "Mettez un jour un rôle."
+  },
+  "RemovePermissionFromRole": {
+    "description": "Supprime une autorisation pour un rôle.",
+    "summary": "Révoquer une autorisation",
+    "request_schema_description": "Relation avec un objet d'autorisations."
+  },
+  "ListRolePermissions": {
+    "description": "Renvoie la liste de toutes les autorisations d'un rôle unique.",
+    "summary": "Énumérer les autorisations d'un rôle"
+  },
+  "AddPermissionToRole": {
+    "description": "Ajoute une autorisation à un rôle.",
+    "summary": "Accorder une autorisation à un rôle",
+    "request_schema_description": "Relation avec un objet d'autorisations."
+  },
+  "RemoveUserFromRole": {
+    "description": "Supprime un utilisateur d'un rôle.",
+    "summary": "Supprimer un utilisateur d'un rôle",
+    "request_schema_description": "Relation avec un utilisateur."
+  },
+  "ListRoleUsers": {
+    "description": "Récupérez tous les utilisateurs associés à un rôle.",
+    "summary": "Récupérer tous les utilisateurs associés à un rôle"
+  },
+  "AddUserToRole": {
+    "description": "Ajoute un utilisateur à un rôle.",
+    "summary": "Ajouter un utilisateur à un rôle",
+    "request_schema_description": "Relation avec un utilisateur."
+  },
+  "ListSecurityMonitoringRules": {
+    "description": "Énumérez les règles.",
+    "summary": "Énumérer les règles"
+  },
+  "CreateSecurityMonitoringRule": {
+    "description": "Créez une règle de détection.",
+    "summary": "Créer une règle de détection",
+    "request_schema_description": "Créez une nouvelle règle."
+  },
+  "DeleteSecurityMonitoringRule": {
+    "description": "Supprimez une règle existante. Les règles par défaut ne peuvent pas être supprimées.",
+    "summary": "Supprimer une règle existante"
+  },
+  "GetSecurityMonitoringRule": {
+    "description": "Récupérez les détails d'une règle.",
+    "summary": "Récupérer les détails d'une règle"
+  },
+  "UpdateSecurityMonitoringRule": {
+    "description": "Mettez à jour une règle existante. Si vous mettez à jour `cases`, `queries` ou `options`, le champ complet doit être inclus. Par exemple, lorsque vous modifiez une requête, toutes les requêtes doivent être incluses. Les règles par défaut peuvent être mises à jour uniquement pour être activées ou pour modifier les notifications.",
+    "summary": "Mettre à jour une règle existante",
+    "request_schema_description": "Mettez à jour une règle existante."
+  },
+  "ListSecurityMonitoringSignals": {
+    "description": "L'endpoint List renvoie les signaux de sécurité qui correspondent à une requête de recherche. Cet endpoint et l'endpoint POST peuvent tous les deux être utilisés pour énumérer des signaux de sécurité.",
+    "summary": "Récupérer une liste rapide de signaux de sécurité"
+  },
+  "SearchSecurityMonitoringSignals": {
+    "description": "Renvoie les signaux de sécurité qui correspondent à une requête de recherche. Cet endpoint et l'endpoint GET peuvent tous les deux être utilisés pour énumérer des signaux de sécurité.",
+    "summary": "Récupérer une liste de signaux de sécurité",
+    "request_schema_description": "La requête de récupération d'une liste de signaux de sécurité."
+  },
+  "ListIncidentServices": {
+    "description": "Récupérez tous les services liés à un incident pour l'organisation de l'utilisateur effectuant la requête. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces services.",
+    "summary": "Récupérer la liste de tous les services liés à un incident"
+  },
+  "CreateIncidentService": {
+    "description": "Crée un service lié à un incident.",
+    "summary": "Créer un service lié à un incident",
+    "request_description": "Charge utile de service lié à un incident.",
+    "request_schema_description": "Requête de création avec une charge utile de service lié à un incident."
+  },
+  "DeleteIncidentService": {
+    "description": "Supprime un service lié à un incident existant.",
+    "summary": "Supprimer un service lié à un incident existant"
+  },
+  "GetIncidentService": {
+    "description": "Récupérez les détails d'un service lié à un incident. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces services.",
+    "summary": "Récupérer les détails d'un service lié à un incident"
+  },
+  "UpdateIncidentService": {
+    "description": "Met à jour un service lié à un incident existant. Cette requête étant une mise à jour partielle, spécifiez uniquement les attributs devant être mis à jour.",
+    "summary": "Mettre à jour un service lié à un incident existant",
+    "request_description": "Charge utile du service lié à un incident.",
+    "request_schema_description": "Requête de mise à jour avec une charge utile de service lié à un incident."
+  },
+  "ListIncidentTeams": {
+    "description": "Récupérez toutes les équipes liées à un incident pour l'organisation de l'utilisateur effectuant la requête. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces équipes.",
+    "summary": "Récupérer la liste de toutes les équipes liées à un incident"
+  },
+  "CreateIncidentTeam": {
+    "description": "Crée une équipe liée à un incident.",
+    "summary": "Créer une équipe liée à un incident",
+    "request_description": "Charge utile d'équipe liée à un incident.",
+    "request_schema_description": "Requête de création avec une charge utile d'équipe liée à un incident."
+  },
+  "DeleteIncidentTeam": {
+    "description": "Supprime une équipe liée à un incident existante.",
+    "summary": "Supprimer une équipe liée à un incident existante"
+  },
+  "GetIncidentTeam": {
+    "description": "Récupérez les détails d'une équipe liée à un incident. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces équipes.",
+    "summary": "Récupérer les détails d'une équipe liée à un incident"
+  },
+  "UpdateIncidentTeam": {
+    "description": "Met à jour une équipe liée à un incident existante. Cette requête étant une mise à jour partielle, spécifiez uniquement les attributs devant être mis à jour.",
+    "summary": "Mettre à jour une équipe liée à un incident existante",
+    "request_description": "Charge utile d'équipe liée à un incident.",
+    "request_schema_description": "Requête de mise à jour avec une charge utile d'équipe liée à un incident."
+  },
+  "SendInvitations": {
+    "description": "Invitez par e-mail un ou plusieurs utilisateurs à rejoindre votre organisation.",
+    "summary": "Envoyer des invitations par e-mail",
+    "request_schema_description": "Objet pour inviter des utilisateurs à rejoindre l'organisation."
+  },
+  "GetInvitation": {
+    "description": "Renvoie une invitation d'utilisateur unique via son UUID.",
+    "summary": "Récupérer une invitation d'utilisateur"
+  },
+  "ListUsers": {
+    "description": "Récupérez la liste de tous les utilisateurs de l'organisation. Cette liste comprend tous les utilisateurs, même s'ils sont désactivés ou si leur compte n'a pas été vérifié.",
+    "summary": "Énumérer tous les utilisateurs"
+  },
+  "CreateUser": {
+    "description": "Créez un utilisateur pour votre organisation.",
+    "summary": "Créer un utilisateur",
+    "request_schema_description": "Créez un utilisateur."
+  },
+  "DisableUser": {
+    "description": "Désactivez un utilisateur. Nécessite une clé d'application appartenant à un administrateur.",
+    "summary": "Désactiver un utilisateur"
+  },
+  "GetUser": {
+    "description": "Récupérez un utilisateur dans l'organisation en spécifiant son `user_id`.",
+    "summary": "Récupérer les détails d'un utilisateur"
+  },
+  "UpdateUser": {
+    "description": "Modifiez un utilisateur. Nécessite une clé d'application appartenant à un administrateur.",
+    "summary": "Mettre à jour un utilisateur",
+    "request_schema_description": "Mettez à jour un utilisateur."
+  },
+  "ListUserOrganizations": {
+    "description": "Récupérez l'organisation d'un utilisateur. Renvoie les informations sur l'utilisateur et l'ensemble des organisations auxquelles il appartient.",
+    "summary": "Récupérer l'organisation d'un utilisateur"
+  },
+  "ListUserPermissions": {
+    "description": "Récupérez l'ensemble des autorisations d'un utilisateur. Renvoie la liste des autorisations de l'utilisateur octroyées par ses rôles.",
+    "summary": "Récupérer les autorisations d'un utilisateur"
+  }
+}

@@ -2,30 +2,32 @@
 "assets":
   "dashboards":
     "Jfrog Artifactory Dashboard": assets/dashboards/jfrog_artifactory_dashboard.json
+  "metrics_metadata": metadata.csv
   "monitors": {}
   "saved_views": {}
   "service_checks": assets/service_checks.json
 "categories":
 - ログの収集
 - セキュリティ
-"creates_events": !!bool "false"
+"creates_events": false
 "ddtype": "check"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/README.md"
 "display_name": "JFrog Platform"
+"draft": false
 "git_integration_title": "jfrog_platform"
 "guid": "2c70552e-b77a-4349-9955-8799b9b57d56"
 "integration_id": "jfrog-platform"
-"integration_title": "JFrog Artifactory および Xray と Datadog のインテグレーション"
-"is_public": !!bool "true"
+"integration_title": "JFrog Artifactory"
+"is_public": true
 "kind": "インテグレーション"
 "maintainer": "integrations@jfrog.com"
 "manifest_version": "1.0.0"
 "metric_prefix": "jfrog."
 "metric_to_check": ""
 "name": "jfrog_platform"
-"public_title": "JFrog Artifactory および Xray と Datadog のインテグレーション"
-"short_description": "Artifactory および Xray イベントを表示、分析します。"
+"public_title": "JFrog Artifactory"
+"short_description": "Artifactory イベントを表示、分析します。"
 "support": "contrib"
 "supported_os":
 - linux
@@ -38,7 +40,7 @@
 ## 概要
 以下では、JFrog Artifactory および JFrog Xray からメトリクスを収集するように Datadog を構成する方法について説明します。
 
-### JFrog Artifactory および Xray とは
+### JFrog Artifactory とは
 JFrog Enterprise with Xray の特徴は Artifactory Enterprise と Xray です。これらを組み合わせることで、DevOps チームは生産性を向上させて速度を上げ、自信を持って高品質のソフトウェアリリースを提供できます。Xray は、業界で最も包括的なインテリジェンスである VulnDB を使用して、既知のオープンソースセキュリティリスクとコンプライアンスをスキャンします。
 
 Artifactory は、複数のビルドパッケージ、アーティファクト、メタデータをサポートしています。DevOps チームは Bower、Chef、CocoaPods、Conan、Conda、CRAN、Debian、Docker、Golang、Gradle、Git LFS、Helm、Ivy、Maven、npm、NuGet、Opkg、P2、PHP Composer、Puppet、PyPI、RPM、RubyGems、SBT、Vagrant & VCS、CI/CD プラットフォーム、および DevOps ツールなどのビルドパッケージを自由に選択できます。
@@ -60,29 +62,20 @@ JFrog Artifactory の Datadog インテグレーションにより、Artifactory
 * Kubernetes クラスター
 * [JFrog Helm Charts][2] を介してインストールされた JFrog Artifactory および/または JFrog Xray
 * [Helm 3][3]
+* [Datadog API キー][4]。
 
-### ログ
+### ステップ 1 FluentD コンフィギュレーション
+Datadog の FluentD プラグインを使用して FluentD から Datadog アカウントへログを直接転送することができます。
 
-Datadog をセットアップするには、Datadog でアカウントを作成してこれらのオンボーディング手順を実行するか、API キーを直接使用します。
+以下のように API キーを指定することで、FluentD インテグレーションをセットアップします。
 
-* Helm チャートを使用してデプロイすることにより、Kubernetes クラスターで Datadog Agent を実行します
-* ログ収集を有効にするには、オンボーディング手順で指定された `datadog-values.yaml` ファイルを更新します
-* Agent がレポートを開始すると、フォーマットされたログを fluentd 経由で送信するために使用する API キーを取得します
-
-Datadog がセットアップされると、UI の **Logs** > **Search** でログにアクセスできます。ログを取得する特定のソースを選択します。
-
-API キーが存在する場合は、Datadog Fluentd プラグインを使用して、ログを Fluentd から Datadog アカウントに直接転送します。
-適切なメタデータを追加することが、Datadog でログの可能性をフルに引き出すためのカギです。デフォルトでは、ホスト名とタイムスタンプフィールドを再マップする必要があります。
-
-### Fluentd コンフィギュレーション
-
-インテグレーションは、API キーを指定することによって行われます
-
-_api_key_ は、Datadog の API キーです
+_api_key_ はお使いの [Datadog API キー][4]です。
 
 _dd_source_ 属性は、Datadog でインテグレーションの自動セットアップをトリガーするために、ログ内のログインテグレーションの名前に設定されます。
 
 _include_tag_key_ のデフォルトは false で、true に設定すると JSON レコードに fluentd タグが追加されます
+
+適切なメタデータの追加は、Datadog でログの可能性をフルに引き出すためのカギとなります。デフォルトでは、ホスト名およびタイムスタンプフィールドが再マップされています。
 
 ```
 <match jfrog.**>
@@ -94,9 +87,9 @@ _include_tag_key_ のデフォルトは false で、true に設定すると JSON
 </match>
 ```
 
-## Datadog デモ
+### ステップ 2 インテグレーションの有効化
 
-このインテグレーションを有効にするには、`artifactory` および `xray` ポッドで td-agent を実行します
+このインテグレーションを有効にするには、`artifactory` ポッドで td-agent を実行します。
 
 ``` 
 td-agent
@@ -106,15 +99,19 @@ API キーは `td-agent` で構成され、これにより Datadog へのログ�
 
 **Facets** > **Add** (ログの画面左側)  > **Search** からすべての属性をファセットとして追加します。
 
-既存の視覚化とフィルターにアクセスするには、ダッシュボードをクリックして新しいスクリーンボードを追加し、[export.json][4] をインポートして既存のダッシュボードを上書きします。
+### ステップ 3 JFrog プラットフォームタイル
+JFrog プラットフォームをまだインストールしていない場合は、タイルをインストールします。
 
-## テスト用データの生成
-[Partner Integration Test Framework][5] を使用して、メトリクスのデータを生成できます。
+### ステップ 4 JFrog Artifactory ダッシュボード
+Dashboard -> Dashboard List の順に移動し、`JFrog Artifactory Dashboard` を探して開きます。
+
+### スタップ 5 ログの検索
+Datadog で[ログ][5]にアクセスします。FluentD コンフィギュレーション (上記はコンフィギュレーションの `fluentd` の例) で言及している特定のソースを選択し、ログを取得します。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/dashboard.png
 [2]: https://github.com/jfrog/charts
 [3]: https://helm.sh/
-[4]: https://github.com/jfrog/log-analytics/blob/master/datadog/export.json
-[5]: https://github.com/jfrog/partner-integration-tests
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: https://app.datadoghq.com/logs
 

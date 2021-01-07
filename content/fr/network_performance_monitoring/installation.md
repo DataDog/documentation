@@ -15,7 +15,7 @@ further_reading:
 ---
 La surveillance des performances réseau nécessite la [version 6.14+ de l'Agent Datadog][1]. Cette fonctionnalité étant basée sur eBPF, la plateforme doit également utiliser une version 4.4.0+ du kernel Linux.
 
-Les plates-formes suivantes sont prises en charge :
+Les **plateformes suivantes** sont prises en charge :
 
 - Ubuntu 16.04+
 - Debian 9+
@@ -26,15 +26,19 @@ Les plates-formes suivantes sont prises en charge :
 
 L'exigence de version pour le kernel Linux (4.4.0+) ne s'applique pas à [CentOS/RHEL 7.6+][2]. La fonction [Résolution DNS][3] n'est pas prise en charge par CentOS/RHEL 7.6.
 
+La surveillance des performances réseau est compatible avec les installations **Cilium**, pour autant que vous disposiez :
+1) d'une version 1.6+ de Cilium, et
+2) d'une version 5.1.16+ du kernel, ou 4.19.57+ pour les kernels 4.19.x.
+
 **Remarque** : la surveillance des performances réseau n'est pas disponible sur Windows et macOS pour le moment.
 
-Les systèmes de provisionnement suivants sont pris en charge :
+Les **systèmes de provisionnement suivants** sont pris en charge :
 
 - Daemonset/Helm 1.38.11+ : voir le [chart Helm Datadog][4]
 - Chef 12.7+ : voir la [recette Chef pour Datadog][5]
 - Ansible 2.6+ : voir le [rôle Ansible pour Datadog][6]
 
-## Implémentation
+## Configuration
 
 Pour activer la solution Network Performance Monitoring, configurez-la dans le [fichier de configuration principal de votre Agent][7] en fonction de la configuration de votre système.
 
@@ -104,7 +108,7 @@ Si vous devez utiliser la solution Network Performance Monitoring sur d'autres s
     semodule -v -i system_probe_policy.pp
     ```
 
-4. Modifiez le type de binaire system-probe afin d'utiliser celui défini dans la stratégie. Si votre répertoire d'installation de l'Agent est `system_probe_policy.te`, utilisez la commande suivante :
+4. Modifiez le type de binaire system-probe afin d'utiliser celui défini dans la stratégie. Si votre répertoire d'installation de l'Agent est `/opt/datadog-agent`, utilisez la commande suivante :
 
     ```shell
     semanage fcontext -a -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
@@ -179,7 +183,7 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                       # (...)
                   volumeMounts:
                       - name: procdir
@@ -279,7 +283,7 @@ datadog/agent:latest
 
 Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
 
-Si vous utilisez `docker-compose`, faites les ajouts suivants au service de l'Agent Datadog.
+Si vous utilisez `docker-compose`, ajoutez ce qui suit au service de l'Agent Datadog.
 
 ```
 version: '3'
@@ -312,7 +316,7 @@ services:
 Pour une configuration sur AWS ECS, consultez la page de documentation relative à [AWS ECS][1].
 
 
-[1]: /fr/integrations/amazon_ecs/#network-performance-monitoring-collection-linux-only
+[1]: /fr/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
 

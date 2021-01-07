@@ -29,7 +29,7 @@ If you’re still unsure about the issue, you may reach out to the [Datadog supp
 
 [1]: /serverless/#getting-started
 [2]: /serverless/forwarder
-[3]: /serverless/installation/installing_the_library
+[3]: /serverless/installation/
 [4]: /integrations/amazon_lambda/#metric-collection
 [5]: /integrations/amazon_lambda/#real-time-enhanced-lambda-metrics
 [6]: /integrations/amazon_lambda/#log-collection

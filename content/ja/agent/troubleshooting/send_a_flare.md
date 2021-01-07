@@ -109,6 +109,17 @@ kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --loc
 {{% /tab %}}
 {{< /tabs >}}
 
+## 手動送信
+
+Agent フレアプロトコルは、コンフィギュレーションとログをまずローカルの `/tmp` ディレクトリにあるアーカイブファイルに収集します。
+Agent のデータ収集に問題がある場合は、このファイルを手動で取得してサポートに送信してください。
+
+### Kubernetes
+Kubernetes でアーカイブファイルを取得するには、kubectl コマンドを使用します。
+```
+kubectl cp datadog-<pod-name>:/tmp/datadog-agent-<date-of-the-flare>.zip flare.zip
+```
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -157,15 +157,20 @@
       globs:
       - 'docs/GettingStarted.md'
       options:
-        dest_path: '/tracing/setup/'
+        dest_path: '/tracing/setup_overview/setup/'
         file_name: 'ruby.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md"]
           title: Tracing Ruby Applications
           kind: documentation
+          code_lang: ruby
+          type: multi-code-lang
+          code_lang_weight: 15
           aliases:
           - /tracing/ruby/
           - /tracing/languages/ruby/
+          - /tracing/setup/ruby/
+          - /tracing/setup_overview/ruby/
           - /agent/apm/ruby/
 
   - repo_name: datadog-serverless-functions
@@ -381,7 +386,7 @@
       globs:
       - 'docs/trace_collection.md'
       options:
-        dest_path: '/tracing/setup/'
+        dest_path: '/tracing/setup_overview/setup/'
         file_name: 'android.md'
         front_matters:
           title: Android Trace Collection
@@ -425,7 +430,7 @@
       globs:
       - 'docs/trace_collection.md'
       options:
-        dest_path: '/tracing/setup/'
+        dest_path: '/tracing/setup_overview/setup/'
         file_name: 'ios.md'
         front_matters:
           title: iOS Trace Collection
@@ -440,6 +445,20 @@
             - link: "tracing/visualization/"
               tag: "Documentation"
               text: "Explore your services, resources and traces"
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/rum_collection.md'
+      options:
+        dest_path: '/real_user_monitoring/'
+        file_name: 'ios.md'
+        front_matters:
+          title: iOS RUM Collection
+          kind: documentation
+          beta: true
+          description: "Collect RUM data from your iOS applications."
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection.md"]
 
   - repo_name: security-monitoring
     contents:

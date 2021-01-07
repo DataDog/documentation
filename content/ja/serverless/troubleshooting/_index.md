@@ -28,7 +28,7 @@ further_reading:
 
 [1]: /ja/serverless/#getting-started
 [2]: /ja/serverless/forwarder
-[3]: /ja/serverless/installation/installing_the_library
+[3]: /ja/serverless/installation/
 [4]: /ja/integrations/amazon_lambda/#metric-collection
 [5]: /ja/integrations/amazon_lambda/#real-time-enhanced-lambda-metrics
 [6]: /ja/integrations/amazon_lambda/#log-collection

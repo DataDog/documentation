@@ -1,22 +1,54 @@
+# Source: datadog/templates/secrets.yaml
+# API Key
+apiVersion: v1
+kind: Secret
+metadata:
+  name: datadog-agent
+  labels: {}
+type: Opaque
+data:
+  api-key: PUT_YOUR_BASE64_ENCODED_API_KEY_HERE
+
+# APP Key
+---
+# Source: datadog/templates/install_info-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datadog-agent-installinfo
+  labels: {}
+  annotations:
+    checksum/install_info: 9f58f4fe71f1b79dfabae5311eb8f5373bd03072d4636e248cd3f581f8752627
+data:
+  install_info: |
+    ---
+    install_method:
+      tool: kubernetes sample manifests
+      tool_version: kubernetes sample manifests
+      installer_version: kubernetes sample manifests
+---
+# Source: datadog/templates/daemonset.yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: datadog-agent-windows
+  name: datadog-agent
+  labels: {}
 spec:
   selector:
     matchLabels:
-      app: datadog-agent-windows
+      app: datadog-agent
   template:
     metadata:
       labels:
-        app: datadog-agent-windows
-      name: datadog-agent-windows
+        app: datadog-agent
+      name: datadog-agent
+      annotations: {}
     spec:
       containers:
         - name: agent
-          image: "datadog/agent:latest"
-          imagePullPolicy: Always
-          command: ["agent", "start"]
+          image: "gcr.io/datadoghq/agent:7.23.1"
+          imagePullPolicy: IfNotPresent
+          command: ["agent", "run"]
           resources: {}
           ports:
             - containerPort: 8125
@@ -26,7 +58,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent-windows"
+                  name: "datadog-agent"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -34,10 +66,18 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
+            - name: DD_AC_EXCLUDE
+              value: "name:datadog-agent"
+            - name: DOCKER_HOST
+              value: npipe:////./pipe/docker_engine
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_DOGSTATSD_PORT
               value: "8125"
+            - name: DD_LEADER_ELECTION
+              value: "true"
+            - name: DD_COLLECT_KUBERNETES_EVENTS
+              value: "true"
             - name: DD_APM_ENABLED
               value: "false"
             - name: DD_LOGS_ENABLED
@@ -49,6 +89,8 @@ spec:
             - name: DD_HEALTH_PORT
               value: "5555"
           volumeMounts:
+            - name: config
+              mountPath: C:/ProgramData/Datadog
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
             - name: pointerdir
@@ -62,21 +104,27 @@ spec:
           livenessProbe:
             failureThreshold: 6
             httpGet:
-              path: /health
+              path: /live
               port: 5555
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /ready
+              port: 5555
+              scheme: HTTP
             initialDelaySeconds: 15
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "datadog/agent:latest"
-          imagePullPolicy: Always
-          command:
-            [
-              "trace-agent",
-              "-foreground",
-              "-config=C:/ProgramData/Datadog/datadog.yaml",
-            ]
+          image: "gcr.io/datadoghq/agent:7.23.1"
+          imagePullPolicy: IfNotPresent
+          command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
           ports:
             - containerPort: 8126
@@ -87,7 +135,7 @@ spec:
             - name: DD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: "datadog-agent-windows"
+                  name: "datadog-agent"
                   key: api-key
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
@@ -95,6 +143,10 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
+            - name: DD_AC_EXCLUDE
+              value: "name:datadog-agent"
+            - name: DOCKER_HOST
+              value: npipe:////./pipe/docker_engine
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_APM_ENABLED
@@ -103,13 +155,66 @@ spec:
               value: "true"
             - name: DD_APM_RECEIVER_PORT
               value: "8126"
+          volumeMounts:
+            - name: config
+              mountPath: C:/ProgramData/Datadog
+            - name: runtimesocket
+              mountPath: \\.\pipe\docker_engine
           livenessProbe:
             initialDelaySeconds: 15
             periodSeconds: 15
             tcpSocket:
               port: 8126
             timeoutSeconds: 5
+      initContainers:
+        - name: init-volume
+          image: "gcr.io/datadoghq/agent:7.23.1"
+          imagePullPolicy: IfNotPresent
+          command: ["pwsh", "-Command"]
+          args:
+            - |
+              Copy-Item -Recurse -Force C:/ProgramData/Datadog C:/Temp
+              Copy-Item -Force C:/Temp/install_info/install_info C:/Temp/Datadog/install_info
+          volumeMounts:
+            - name: config
+              mountPath: C:/Temp/Datadog
+            - name: installinfo
+              mountPath: C:/Temp/install_info
+          resources: {}
+        - name: init-config
+          image: "gcr.io/datadoghq/agent:7.23.1"
+          imagePullPolicy: IfNotPresent
+          command: ["pwsh", "-Command"]
+          args:
+            - Get-ChildItem 'entrypoint-ps1' | ForEach-Object { & $_.FullName if (-Not $?) { exit 1 } }
+          volumeMounts:
+            - name: config
+              mountPath: C:/ProgramData/Datadog
+            - name: runtimesocket
+              mountPath: \\.\pipe\docker_engine
+          env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog-agent"
+                  key: api-key
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: KUBERNETES
+              value: "yes"
+            - name: DD_AC_EXCLUDE
+              value: "name:datadog-agent"
+            - name: DOCKER_HOST
+              value: npipe:////./pipe/docker_engine
+          resources: {}
       volumes:
+        - name: installinfo
+          configMap:
+            name: datadog-agent-installinfo
+        - name: config
+          emptyDir: {}
         - hostPath:
             path: \\.\pipe\docker_engine
           name: runtimesocket
@@ -127,10 +232,15 @@ spec:
           key: node.kubernetes.io/os
           value: windows
           operator: Equal
-      serviceAccountName: datadog-agent-windows
+      affinity: {}
+      serviceAccountName: "datadog-agent"
       nodeSelector:
         kubernetes.io/os: windows
   updateStrategy:
     rollingUpdate:
       maxUnavailable: 10%
     type: RollingUpdate
+
+# Source: datadog/templates/containers-common-env.yaml
+# The purpose of this template is to define a minimal set of environment
+# variables required to operate dedicated containers in the daemonset

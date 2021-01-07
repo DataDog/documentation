@@ -34,8 +34,8 @@ main_left:
     weight: 5
     parent: product
   - identifier: profiler
-    name: Profiler en continu
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''icône profiler''>'
+    name: Profileur en continu
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''icône profileur''>'
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 6
     parent: product
@@ -63,23 +63,29 @@ main_left:
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
+  - identifier: Incident
+    name: Gestion des incidents
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''Icône Incident''>'
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 11
+    parent: product
   - identifier: serverless
     name: Sans serveur
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''icône sans serveur''>'
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 11
+    weight: 12
     parent: product
   - identifier: alerts
     name: Alertes
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''icône alerte''>'
     url: 'https://www.datadoghq.com/product/platform/alerts/'
-    weight: 12
+    weight: 13
     parent: product
   - identifier: api
     name: API
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''icône api''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 13
+    weight: 14
     parent: product
   - identifier: customers
     name: Clients
@@ -91,7 +97,7 @@ main_left:
     weight: -480
   - identifier: solutions
     name: Solutions
-    url: Version
+    url: '#'
     weight: -460
   - name: Services financiers
     parent: solutions
@@ -153,46 +159,51 @@ main_left:
     title: technology
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
+  - name: Red Hat OpenShift
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/openshift/'
+    weight: -448
   - name: Migration vers le cloud
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/cloud-migration/'
-    weight: -448
+    weight: -447
   - name: Unification de la surveillance
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
-    weight: -447
+    weight: -446
   - name: DevOps
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/devops/'
-    weight: -446
+    weight: -445
   - name: Analyse de la sécurité
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -445
+    weight: -444
   - name: Surveillance Cloud hybride
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -444
+    weight: -443
   - name: Surveillance IoT
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -443
+    weight: -442
   - name: Apprentissage automatique
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -442
+    weight: -441
   - name: BI en temps réel
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -441
+    weight: -440
 main_right:
   - identifier: about
     name: Notre entreprise
@@ -333,7 +344,7 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 8
-  - name: Surveillance Synthetics
+  - name: Surveillance Synthetic
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
@@ -834,12 +845,17 @@ main:
   - name: Live Processes
     url: infrastructure/process/
     parent: infrastructure
+    identifier: infrastructure_process
     weight: 5
+  - name: Générer des métriques de processus
+    url: infrastructure/process/generate_process_metrics/
+    parent: infrastructure_process
+    weight: 101
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
     weight: 6
-  - name: Informatique sans serveur
+  - name: Sans serveur
     url: serverless
     pre: nav_serverless
     identifier: serverless
@@ -909,6 +925,10 @@ main:
     parent: serverless_datadog_lambda_library
     identifier: serverless_datadog_lambda_library_java
     weight: 205
+  - name: Extension Lambda Datadog
+    url: serverless/datadog_lambda_library/extension
+    parent: serverless_datadog_lambda_library
+    weight: 206
   - name: Forwarder Datadog
     url: serverless/forwarder
     parent: serverless
@@ -922,44 +942,48 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 5
-  - name: Métriques custom
+  - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
     weight: 6
+  - name: Suivi des déploiements
+    url: serverless/deployment_tracking
+    parent: serverless
+    weight: 7
   - name: Intégrations sans serveur
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: serverless
-    weight: 7
+    weight: 8
   - name: Plug-in Serverless Datadog
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 701
+    weight: 801
   - name: Macro Serverless Datadog
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 702
+    weight: 802
   - name: CLI Serverless Datadog
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 703
+    weight: 803
   - name: Tagging de fonctions sans serveur
     url: serverless/serverless_tagging
     parent: serverless
-    weight: 8
+    weight: 9
   - name: Dépannage
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 9
+    weight: 10
   - name: Extension Azure App Services
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 10
+    weight: 11
   - name: Métriques
     url: metrics/
     identifier: metrics_top_level
@@ -1012,12 +1036,12 @@ main:
     parent: monitor_types
     identifier: monitor_types_anomaly
     weight: 103
-  - name: Singularité
+  - name: Outlier
     url: monitors/monitor_types/outlier/
     parent: monitor_types
     identifier: monitor_types_outlier
     weight: 104
-  - name: Prévision
+  - name: Forecast
     url: monitors/monitor_types/forecasts/
     parent: monitor_types
     identifier: monitor_types_forecasts
@@ -1107,6 +1131,11 @@ main:
     parent: alerting
     identifier: incidents
     weight: 8
+  - name: Presse-papiers Datadog
+    url: monitors/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 801
   - name: SLO basés sur des monitors
     url: monitors/service_level_objectives/monitor/
     parent: slos
@@ -1131,152 +1160,238 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 140000
-  - name: Compatibilité
-    url: tracing/compatibility_requirements/
-    identifier: tracing_compatibility_requirements
+  - name: Envoyer des traces à Datadog
+    url: tracing/setup_overview/
+    identifier: tracing_setup_overview
     parent: tracing
     weight: 1
+  - name: Compatibilité
+    url: tracing/setup_overview/compatibility_requirements/java
+    identifier: tracing_compatibility_requirements
+    parent: tracing_setup_overview
+    weight: 101
   - name: Java
-    url: tracing/compatibility_requirements/java
+    url: tracing/setup_overview/compatibility_requirements/java
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_java
     weight: 101
   - name: Python
-    url: tracing/compatibility_requirements/python
+    url: tracing/setup_overview/compatibility_requirements/python
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_python
     weight: 102
   - name: Ruby
-    url: tracing/compatibility_requirements/ruby
+    url: tracing/setup_overview/compatibility_requirements/ruby
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_ruby
     weight: 103
   - name: Go
-    url: tracing/compatibility_requirements/go
+    url: tracing/setup_overview/compatibility_requirements/go
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_go
     weight: 104
   - name: NodeJS
-    url: tracing/compatibility_requirements/nodejs
+    url: tracing/setup_overview/compatibility_requirements/nodejs
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_nodejs
     weight: 105
   - name: PHP
-    url: tracing/compatibility_requirements/php
+    url: tracing/setup_overview/compatibility_requirements/php
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_php
     weight: 106
   - name: C++
-    url: tracing/compatibility_requirements/cpp
+    url: tracing/setup_overview/compatibility_requirements/cpp
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_cpp
     weight: 107
   - name: .NET Core
-    url: tracing/compatibility_requirements/dotnet-core
+    url: tracing/setup_overview/compatibility_requirements/dotnet-core
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_dotnet_core
     weight: 108
   - name: .NET Framework
-    url: tracing/compatibility_requirements/dotnet-framework
+    url: tracing/setup_overview/compatibility_requirements/dotnet-framework
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_dotnet_framework
     weight: 109
-  - name: Configuration de l'Agent
-    url: tracing/send_traces/
-    identifier: tracing_send_traces
-    parent: tracing
-    weight: 2
-  - name: Instrumenter votre application
-    url: tracing/setup/
-    parent: tracing
-    identifier: tracing_setup
-    weight: 3
+  - name: Ajouter la bibliothèque de tracing Datadog
+    url: tracing/setup_overview/setup/java
+    parent: tracing_setup_overview
+    identifier: tracing_setup_overview_setup
+    weight: 102
   - name: Java
-    url: tracing/setup/java/
-    parent: tracing_setup
-    identifier: tracing_setup_java
-    weight: 301
+    url: tracing/setup_overview/setup/java
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_java
+    weight: 101
   - name: Python
-    url: tracing/setup/python/
-    parent: tracing_setup
-    identifier: tracing_setup_python
-    weight: 302
+    url: tracing/setup_overview/setup/python
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_python
+    weight: 102
   - name: Ruby
-    url: tracing/setup/ruby/
-    parent: tracing_setup
-    identifier: tracing_setup_ruby
-    weight: 303
+    url: tracing/setup_overview/setup/ruby
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_ruby
+    weight: 103
   - name: Go
-    url: tracing/setup/go/
-    parent: tracing_setup
-    identifier: tracing_setup_go
-    weight: 304
-  - name: Node.js
-    url: tracing/setup/nodejs/
-    parent: tracing_setup
-    identifier: tracing_setup_nodejs
-    weight: 305
-  - name: .NET Framework
-    url: tracing/setup/dotnet-framework/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_framework
-    weight: 306
-  - name: .NET Core
-    url: tracing/setup/dotnet-core/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_core
-    weight: 307
+    url: tracing/setup_overview/setup/go
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/setup/nodejs
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_nodejs
+    weight: 105
   - name: PHP
-    url: tracing/setup/php/
-    parent: tracing_setup
-    identifier: tracing_setup_php
-    weight: 308
+    url: tracing/setup_overview/setup/php
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_php
+    weight: 106
   - name: C++
-    url: tracing/setup/cpp/
-    parent: tracing_setup
-    identifier: tracing_setup_cpp
-    weight: 309
-  - name: Envoy
-    url: tracing/setup/envoy/
-    parent: tracing_setup
-    identifier: tracing_setup_envoy
-    weight: 311
-  - name: NGINX
-    url: tracing/setup/nginx/
-    parent: tracing_setup
-    identifier: tracing_setup_nginx
-    weight: 312
-  - name: Istio
-    url: tracing/setup/istio/
-    identifier: tracing_setup_istio
-    parent: tracing_setup
-    weight: 313
-  - name: Suivi de déploiement
+    url: tracing/setup_overview/setup/cpp
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_cpp
+    weight: 107
+  - name: .NET Core
+    url: tracing/setup_overview/setup/dotnet-core
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_dotnet_core
+    weight: 108
+  - name: .NET Framework
+    url: tracing/setup_overview/setup/dotnet-framework
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_dotnet_framework
+    weight: 109
+  - name: OpenTracing et OpenTelemetry
+    url: tracing/setup_overview/open_standards/
+    parent: tracing_setup_overview
+    identifier: tracing_open_standards_open_standards
+    weight: 103
+  - name: Java
+    url: tracing/setup_overview/open_standards/java
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/open_standards/python
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_python
+    weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/open_standards/ruby
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_ruby
+    weight: 108
+  - name: Go
+    url: tracing/setup_overview/open_standards/go
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/open_standards/nodejs
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/open_standards/php
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_php
+    weight: 106
+  - name: .NET
+    url: tracing/setup_overview/open_standards/dotnet
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_dotnet
+    weight: 108
+  - name: Tracer des fonctions sans serveur
+    url: tracing/setup_overview/serverless_functions/
+    parent: tracing_setup_overview
+    identifier: tracing_serverless_functions
+    weight: 104
+  - name: Proxies de traces
+    url: tracing/setup_overview/proxy_setup/
+    parent: tracing_setup_overview
+    identifier: tracing_proxy_setup
+    weight: 105
+  - name: Instrumentation personnalisée
+    url: tracing/setup_overview/custom_instrumentation/java
+    parent: tracing_setup_overview
+    identifier: tracing_setup_overview_custom_instrumentation
+    weight: 106
+  - name: Java
+    url: tracing/setup_overview/custom_instrumentation/java
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/custom_instrumentation/python
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_python
+    weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/custom_instrumentation/ruby
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_ruby
+    weight: 108
+  - name: Go
+    url: tracing/setup_overview/custom_instrumentation/go
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/custom_instrumentation/nodejs
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/custom_instrumentation/php
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_php
+    weight: 106
+  - name: C++
+    url: tracing/setup_overview/custom_instrumentation/cpp
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_cpp
+    weight: 106
+  - name: .NET
+    url: tracing/setup_overview/custom_instrumentation/dotnet
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_dotnet
+    weight: 108
+  - name: Configurer la sécurité des données
+    url: tracing/setup_overview/configure_data_security
+    parent: tracing_setup_overview
+    identifier: tracing_configure_data_security
+    weight: 107
+  - name: Analyse et recherche de traces
+    url: tracing/trace_search_and_analytics/
+    parent: tracing
+    identifier: trace_search_and_analytics
+    weight: 4
+  - name: Syntaxe de requête
+    url: tracing/trace_search_and_analytics/query_syntax/
+    parent: trace_search_and_analytics
+    weight: 403
+  - name: Surveillance d'analyses
+    url: monitors/monitor_types/apm/?tab=appanalytics
+    parent: trace_search_and_analytics
+    weight: 404
+  - name: Rétention et ingestion des traces
+    url: tracing/trace_retention_and_ingestion/
+    parent: tracing
+    identifier: trace_retention_and_ingestion
+    weight: 5
+  - name: Métriques d'utilisation
+    url: tracing/trace_retention_and_ingestion/usage_metrics
+    parent: trace_retention_and_ingestion
+    identifier: trace_retention_and_ingestion_usage_metrics
+    weight: 501
+  - name: Suivi des déploiements
     url: tracing/deployment_tracking/
     parent: tracing
     identifier: deployment_tracking
-    weight: 4
-  - name: App Analytics
-    url: tracing/app_analytics/
-    parent: tracing
-    identifier: app_analytics
-    weight: 5
-  - name: Visualiser les analyses
-    url: tracing/app_analytics/analytics/
-    parent: app_analytics
-    weight: 503
-  - name: Recherche de traces
-    url: tracing/app_analytics/search/
-    parent: app_analytics
-    weight: 504
-  - name: Monitors App Analytics
-    url: monitors/monitor_types/apm/?tab=appanalytics
-    parent: app_analytics
-    weight: 505
-  - name: Live Search
-    url: tracing/livesearch/
-    parent: tracing
-    identifier: Live Search
     weight: 6
   - name: Associer vos logs à vos traces
     url: tracing/connect_logs_and_traces/
@@ -1323,21 +1438,6 @@ main:
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
     weight: 8
-  - name: Tracer des fonctions sans serveur
-    url: tracing/serverless_functions/
-    parent: tracing
-    identifier: tracing_serverless_functions
-    weight: 9
-  - name: Activer l'APM Datadog
-    url: serverless/
-    parent: tracing_serverless_functions
-    identifier: tracing_serverless_functions_enable_datadog_apm
-    weight: 901
-  - name: Activer AWS X-Ray
-    url: tracing/serverless_functions/enable_aws_xray
-    parent: tracing_serverless_functions
-    identifier: tracing_serverless_functions_enable_aws_xray
-    weight: 902
   - name: Métriques runtime
     url: tracing/runtime_metrics/
     parent: tracing
@@ -1368,7 +1468,7 @@ main:
     parent: tracing
     identifier: profiler
     weight: 11
-  - name: Débuter
+  - name: Prise en main
     url: tracing/profiler/getting_started
     parent: profiler
     identifier: profiler_getting_started
@@ -1378,61 +1478,11 @@ main:
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1102
-  - name: Dépannage du profiler
+  - name: Dépannage du profileur
     url: tracing/profiler/profiler_troubleshooting
     parent: profiler
     identifier: profiler_profiler_troubleshooting
     weight: 1103
-  - name: Instrumentation personnalisée
-    url: tracing/custom_instrumentation/
-    parent: tracing
-    identifier: tracing_custom_instrumentation
-    weight: 12
-  - name: Personnalisation de l'Agent
-    url: tracing/custom_instrumentation/agent_customization
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_agent_customization
-    weight: 1201
-  - name: Java
-    url: tracing/custom_instrumentation/java
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_java
-    weight: 1202
-  - name: Python
-    url: tracing/custom_instrumentation/python
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_python
-    weight: 1203
-  - name: Ruby
-    url: tracing/custom_instrumentation/ruby
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_ruby
-    weight: 1204
-  - name: Go
-    url: tracing/custom_instrumentation/go
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_go
-    weight: 1205
-  - name: NodeJS
-    url: tracing/custom_instrumentation/nodejs
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_nodejs
-    weight: 1206
-  - name: PHP
-    url: tracing/custom_instrumentation/php
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_php
-    weight: 1207
-  - name: C++
-    url: tracing/custom_instrumentation/cpp
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_cpp
-    weight: 1208
-  - name: .NET
-    url: tracing/custom_instrumentation/dotnet
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_dotnet
-    weight: 1209
   - name: Glossaire de l'APM
     url: tracing/visualization/
     parent: tracing
@@ -1636,7 +1686,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Mettre en corrélation vos logs et vos métriques
-    url: 'dashboards/timeboards/#menu-graph'
+    url: logs/guide/correlate-logs-with-metrics
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1669,7 +1719,7 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
-  - name: Débuter
+  - name: Prise en main
     url: security_monitoring/getting_started
     parent: security_monitoring
     identifier: security_monitoring_getting_started
@@ -1684,7 +1734,7 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_detection_rules
     weight: 3
-  - name: Surveillance Synthetics
+  - name: Surveillance Synthetic
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
@@ -1761,88 +1811,98 @@ main:
   - name: Surveillance Browser
     url: real_user_monitoring/browser/
     parent: rum
-    identifier: browser
+    identifier: rum_browser
     weight: 1
   - name: Données collectées
     url: real_user_monitoring/browser/data_collected/
-    parent: browser
+    parent: rum_browser
     identifier: rum_data_collected
     weight: 101
   - name: Configuration avancée
     url: real_user_monitoring/browser/advanced_configuration/
-    parent: browser
+    parent: rum_browser
     identifier: rum_advanced
     weight: 102
+  - name: Surveillance des performances de pages
+    url: real_user_monitoring/browser/monitoring_page_performance/
+    parent: rum_browser
+    identifier: page_performance
+    weight: 103
   - name: Surveillance Android
     url: real_user_monitoring/android/
     parent: rum
-    identifier: android
+    identifier: rum_android
     weight: 2
+  - name: Surveillance iOS
+    url: real_user_monitoring/ios/
+    parent: rum
+    identifier: rum_ios
+    weight: 3
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 3
+    weight: 4
   - name: Vue d'ensemble des performances
     url: real_user_monitoring/dashboards/performance_overview_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_performance
-    weight: 301
+    weight: 401
   - name: Ressources
     url: real_user_monitoring/dashboards/resources_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_resources
-    weight: 302
+    weight: 402
   - name: Erreurs
     url: real_user_monitoring/dashboards/errors_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_errors
-    weight: 303
+    weight: 403
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 4
+    weight: 5
   - name: Recherche
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 401
-  - name: Analyses
+    weight: 501
+  - name: Analytics
     url: real_user_monitoring/explorer/analytics/
     parent: rum_explorer
     identifier: rum_explorer_analytics
-    weight: 402
+    weight: 502
   - name: Tâche longue
     url: real_user_monitoring/data_collected/long_task
     parent: rum_data_collected
     identifier: rum_data_collected_long_task
-    weight: 403
+    weight: 503
   - name: Erreur
     url: real_user_monitoring/data_collected/error
     parent: rum_data_collected
     identifier: rum_data_collected_error
-    weight: 404
+    weight: 504
   - name: Action utilisateur
     url: real_user_monitoring/data_collected/user_action
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
-    weight: 405
+    weight: 505
   - name: Suivi des erreurs
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 5
+    weight: 6
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 501
+    weight: 601
   - name: Guides
     url: real_user_monitoring/guide
     parent: rum
     identifier: rum_guides
-    weight: 6
+    weight: 7
   - name: Surveillance réseau
     url: network_performance_monitoring/
     pre: nav_network
@@ -1863,36 +1923,41 @@ main:
     parent: npm
     identifier: npm_map
     weight: 3
+  - name: Surveillance DNS
+    url: network_performance_monitoring/dns_monitoring
+    parent: npm
+    identifier: dns_monitoring
+    weight: 4
   - name: Appareils
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 400
+    weight: 500
   - name: Configuration
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 401
-  - name: Profiles
+    weight: 501
+  - name: Profils
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 402
+    weight: 502
   - name: Données collectées
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 403
+    weight: 503
   - name: Dépannage
     url: network_performance_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 404
+    weight: 504
   - name: Guides
     url: network_performance_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 405
+    weight: 505
   - name: Outils de développement
     url: developers/
     pre: nav_developers
@@ -2202,13 +2267,25 @@ api_v1:
     parent: Intégration AWS
     url: '#enumerer-les-regles-d-espace-de-nommage'
     generated: true
+  - name: Supprimer une entrée de filtrage des tags
+    parent: Intégration AWS
+    url: '#supprimer-une-entree-de-filtrage-de-tags'
+    generated: true
+  - name: Récupérer tous les filtres de tags AWS
+    parent: Intégration AWS
+    url: '#recuperer-tous-les-filtres-de-tags-aws'
+    generated: true
+  - name: Définir un filtre de tags AWS
+    parent: Intégration AWS
+    url: '#definir-un-filtre-de-tags-aws'
+    generated: true
   - name: Générer un nouvel ID externe
     parent: Intégration AWS
     url: '#generer-un-nouvel-id-externe'
     generated: true
-  - name: Intégration de logs AWS
+  - name: Intégration Logs AWS
     url: /api/v1/aws-logs-integration/
-    identifier: Intégration de logs AWS
+    identifier: Intégration Logs AWS
     generated: true
   - name: Supprimer une intégration de logs AWS
     parent: Intégration de logs AWS
@@ -2218,7 +2295,7 @@ api_v1:
     parent: Intégration de logs AWS
     url: '#enumerer-toutes-les-integrations-de-logs-aws'
     generated: true
-  - name: Ajouter l'ARN de Lambda aux logs AWS
+  - name: Ajouter l'ARN de Lambda pour les logs AWS
     parent: Intégration de logs AWS
     url: '#ajouter-l-arn-de-lambda-pour-les-logs-aws'
     generated: true
@@ -2226,16 +2303,16 @@ api_v1:
     parent: Intégration de logs AWS
     url: '#verifier-qu-une-fonction-lambda-aws-existe'
     generated: true
-  - name: Obtenir la liste des services AWS compatibles avec la collecte de logs
-    parent: Intégration de logs AWS
-    url: '#obtenir-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs'
+  - name: Récupérer la liste des services AWS compatibles avec la collecte de logs
+    parent: Intégration Logs AWS
+    url: '#recuperer-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs'
     generated: true
   - name: Activer une intégration de logs AWS
-    parent: Intégration de logs AWS
+    parent: Intégration Logs AWS
     url: '#activer-une-integration-de-logs-aws'
     generated: true
   - name: Vérifier les autorisations pour les services qui génèrent des logs
-    parent: Intégration de logs AWS
+    parent: Intégration Logs AWS
     url: '#verifier-les-autorisations-pour-les-services-qui-generent-des-logs'
     generated: true
   - name: Authentification
@@ -2434,13 +2511,25 @@ api_v1:
     parent: Plages d'IP
     url: '#enumerer-les-plages-d-ip'
     generated: true
+  - name: Services liés à un incident
+    url: /api/v1/incident-services/
+    identifier: Services liés à un incident
+    generated: true
+  - name: Équipes liées à un incident
+    url: /api/v1/incident-teams/
+    identifier: Équipes liées à un incident
+    generated: true
+  - name: Incidents
+    url: /api/v1/incidents/
+    identifier: Incidents
+    generated: true
   - name: Gestion des clés
     url: /api/v1/key-management/
     identifier: Gestion des clés
     generated: true
-  - name: Obtenir toutes les clés d'API
+  - name: Récupérer toutes les clés d'API
     parent: Gestion des clés
-    url: '#obtenir-toutes-les-cles-d-api'
+    url: '#recuperer-toutes-les-cles-d-api'
     generated: true
   - name: Créer une clé d'API
     parent: Gestion des clés
@@ -2450,17 +2539,17 @@ api_v1:
     parent: Gestion des clés
     url: '#supprimer-une-cle-d-api'
     generated: true
-  - name: Obtenir la clé d'API
+  - name: Récupérer une clé d'API
     parent: Gestion des clés
-    url: '#obtenir-une-cle-d-api'
+    url: '#recuperer-une-cle-d-api'
     generated: true
   - name: Modifier une clé d'API
     parent: Gestion des clés
     url: '#modifier-une-cle-d-api'
     generated: true
-  - name: Obtenir toutes les clés d'application
+  - name: Récupérer toutes les clés d'application
     parent: Gestion des clés
-    url: '#obtenir-toutes-les-cles-d-application'
+    url: '#recuperer-toutes-les-cles-d-application'
     generated: true
   - name: Créer une clé d'application
     parent: Gestion des clés
@@ -2470,9 +2559,9 @@ api_v1:
     parent: Gestion des clés
     url: '#supprimer-une-cle-d-application'
     generated: true
-  - name: Obtenir une clé d'application
+  - name: Récupérer une clé d'application
     parent: Gestion des clés
-    url: '#obtenir-une-cle-d-application'
+    url: '#recuperer-une-cle-d-application'
     generated: true
   - name: Modifier une clé d'application
     parent: Gestion des clés
@@ -2500,7 +2589,7 @@ api_v1:
     generated: true
   - name: Récupérer la séquence des index
     parent: Index de logs
-    url: '#obtenir-la-sequence-des-index'
+    url: '#recuperer-la-sequence-des-index'
     generated: true
   - name: Mettre à jour la séquence des index
     parent: Index de logs
@@ -2508,11 +2597,11 @@ api_v1:
     generated: true
   - name: Récupérer tous les index
     parent: Index de logs
-    url: '#obtenir-tous-les-index'
+    url: '#recuperer-tous-les-index'
     generated: true
-  - name: Obtenir un index
+  - name: Récupérer un index
     parent: Index de logs
-    url: '#obtenir-un-index'
+    url: '#recuperer-un-index'
     generated: true
   - name: Mettre à jour un index
     parent: Index de logs
@@ -2524,7 +2613,7 @@ api_v1:
     generated: true
   - name: Récupérer la séquence des pipelines
     parent: Pipelines de logs
-    url: '#obtenir-la-sequence-des-pipelines'
+    url: '#recuperer-la-sequence-des-pipelines'
     generated: true
   - name: Mettre à jour la séquence des pipelines
     parent: Pipelines de logs
@@ -2532,7 +2621,7 @@ api_v1:
     generated: true
   - name: Récupérer tous les pipelines
     parent: Pipelines de logs
-    url: '#obtenir-tous-les-pipelines'
+    url: '#recuperer-tous-les-pipelines'
     generated: true
   - name: Créer un pipeline
     parent: Pipelines de logs
@@ -2544,7 +2633,7 @@ api_v1:
     generated: true
   - name: Récupérer un pipeline
     parent: Pipelines de logs
-    url: '#obtenir-un-pipeline'
+    url: '#recuperer-un-pipeline'
     generated: true
   - name: Mettre à jour un pipeline
     parent: Pipelines de logs
@@ -2558,13 +2647,13 @@ api_v1:
     url: /api/v1/metrics/
     identifier: Métriques
     generated: true
-  - name: Obtenir la liste des métriques actives
+  - name: Récupérer la liste des métriques actives
     parent: Métriques
     url: '#recuperer-la-liste-des-metriques-actives'
     generated: true
-  - name: Obtenir les métadonnées d'une métrique
+  - name: Récupérer les métadonnées d'une métrique
     parent: Métriques
-    url: '#obtenir-les-metadonnees-d-une-metrique'
+    url: '#recuperer-les-metadonnees-d-une-metrique'
     generated: true
   - name: Modifier les métadonnées d'une métrique
     parent: Métriques
@@ -2686,6 +2775,10 @@ api_v1:
     parent: Intégration PagerDuty
     url: '#mettre-a-jour-un-objet-de-service-unique'
     generated: true
+  - name: Processus
+    url: /api/v1/processes/
+    identifier: Processus
+    generated: true
   - name: Rôles
     url: /api/v1/roles/
     identifier: Rôles
@@ -2710,13 +2803,13 @@ api_v1:
     url: /api/v1/service-dependencies/
     identifier: Dépendances de service
     generated: true
-  - name: Récupérer toutes les dépendances de service
+  - name: Récupérer toutes les dépendances de services APM
     parent: Dépendances de service
-    url: '#recuperer-toutes-les-dependances-de-service'
+    url: '#recuperer-toutes-les-dependances-de-services-apm'
     generated: true
-  - name: Récupérer les dépendances d'un service
+  - name: Récupérer les dépendances d'un service APM
     parent: Dépendances de service
-    url: '#recuperer-les-dependances-d-un-service'
+    url: '#recuperer-les-dependances-d-un-service-apm'
     generated: true
   - name: Service Level Objectives
     url: /api/v1/service-level-objectives/
@@ -2774,6 +2867,26 @@ api_v1:
     parent: Intégration Slack
     url: '#ajouter-des-canaux-a-l-integration-slack'
     generated: true
+  - name: Récupérer tous les canaux dans une intégration Slack
+    parent: Intégration Slack
+    url: '#recuperer-tous-les-canaux-dans-une-integration-slack'
+    generated: true
+  - name: Créer un canal dans une intégration Slack
+    parent: Intégration Slack
+    url: '#creer-un-canal-dans-une-integration-slack'
+    generated: true
+  - name: Supprimer un canal dans une intégration Slack
+    parent: Intégration Slack
+    url: '#supprimer-un-canal-dans-une-integration-slack'
+    generated: true
+  - name: Récupérer un canal dans une intégration Slack
+    parent: Intégration Slack
+    url: '#recuperer-un-canal-dans-une-integration-slack'
+    generated: true
+  - name: Mettre à jour un canal dans une intégration Slack
+    parent: Intégration Slack
+    url: '#mettre-a-jour-un-canal-dans-une-integration-slack'
+    generated: true
   - name: Snapshots
     url: /api/v1/snapshots/
     identifier: Snapshots
@@ -2782,76 +2895,92 @@ api_v1:
     parent: Snapshots
     url: '#prendre-des-snapshots-de-graphiques'
     generated: true
-  - name: Synthetics
+  - name: Synthetic
     url: /api/v1/synthetics/
-    identifier: Synthetics
+    identifier: Synthetic
     generated: true
   - name: Récupérer tous les emplacements (publics et privés)
     parent: Synthetics
     url: '#recuperer-tous-les-emplacements-publics-et-prives'
     generated: true
-  - name: Récupérer la liste de tous les tests
+  - name: Créez un emplacement privé
     parent: Synthetics
+    url: '#creer-un-emplacement-prive'
+    generated: true
+  - name: Supprimer un emplacement privé
+    parent: Synthetics
+    url: '#supprimer-un-emplacement-prive'
+    generated: true
+  - name: Récupérer un emplacement privé
+    parent: Synthetics
+    url: '#recuperer-un-emplacement-prive'
+    generated: true
+  - name: Modifier un emplacement privé
+    parent: Synthetics
+    url: '#modifier-un-emplacement-prive'
+    generated: true
+  - name: Récupérer la liste de tous les tests
+    parent: Synthetic
     url: '#recuperer-la-liste-de-tous-les-tests'
     generated: true
   - name: Créer un test
-    parent: Synthetics
+    parent: Synthetic
     url: '#creer-un-test'
     generated: true
   - name: Récupérer une configuration de test (Browser)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-une-configuration-de-test-browser'
     generated: true
   - name: Récupérer les résumés des derniers résultats de test (Browser)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-les-resumes-des-derniers-resultats-de-test-browser'
     generated: true
   - name: Récupérer un résultat de test (Browser)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-un-resultat-de-test-browser'
     generated: true
   - name: Supprimer des tests
-    parent: Synthetics
+    parent: Synthetic
     url: '#supprimer-des-tests'
     generated: true
-  - name: Déclencher des tests Synthetics pour CI
-    parent: Synthetics
+  - name: Déclencher des tests Synthetic spécifiques pour l'intégration continue
+    parent: Synthetic
     url: '#declencher-des-tests-synthetics-pour-ci'
     generated: true
   - name: Récupérer une configuration de test (API)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-une-configuration-de-test-api'
     generated: true
   - name: Modifier un test
-    parent: Synthetics
+    parent: Synthetic
     url: '#modifier-un-test'
     generated: true
   - name: Récupérer les résumés des derniers résultats de test (API)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-les-resumes-des-derniers-resultats-de-test-api'
     generated: true
   - name: Récupérer un résultat de test (API)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-un-resultat-de-test-api'
     generated: true
   - name: Interrompre ou démarrer un test
-    parent: Synthetics
+    parent: Synthetic
     url: '#interrompre-ou-demarrer-un-test'
     generated: true
   - name: Créer une variable globale
-    parent: Synthetics
+    parent: Synthetic
     url: '#creer-une-variable-globale'
     generated: true
   - name: Supprimer une variable globale
-    parent: Synthetics
+    parent: Synthetic
     url: '#supprimer-une-variable-globale'
     generated: true
   - name: Récupérer une variable globale
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-une-variable-globale'
     generated: true
   - name: Modifier une variable globale
-    parent: Synthetics
+    parent: Synthetic
     url: '#modifier-une-variable-globale'
     generated: true
   - name: Tags
@@ -2894,101 +3023,117 @@ api_v1:
     url: /api/v1/usage-metering/
     identifier: Mesure de l'utilisation
     generated: true
-  - name: Obtenir la liste des rapports personnalisés journaliers disponibles
+  - name: Récupérer la liste des rapports personnalisés journaliers disponibles
     parent: Mesure de l'utilisation
-    url: '#obtenir-la liste-des-rapports-personnalises-journaliers-disponibles'
+    url: '#recuperer-la liste-des-rapports-personnalises-journaliers-disponibles'
     generated: true
-  - name: Obtenir les rapports personnalisés journaliers spécifiés
+  - name: Récupérer les rapports personnalisés journaliers spécifiés
     parent: Mesure de l'utilisation
-    url: '#obtenir-les-rapports-personnalises-journaliers-specifies'
+    url: '#recuperer-les-rapports-personnalises-journaliers-specifies'
     generated: true
-  - name: Obtenir la liste des rapports personnalisés mensuels disponibles
+  - name: Récupérer la liste des rapports personnalisés mensuels disponibles
     parent: Mesure de l'utilisation
-    url: '#obtenir-la liste-des-rapports-personnalises-mensuels-disponibles'
+    url: '#recuperer-la liste-des-rapports-personnalises-mensuels-disponibles'
     generated: true
-  - name: Obtenir les rapports personnalisés mensuels spécifiés
+  - name: Récupérer les rapports personnalisés mensuels spécifiés
     parent: Mesure de l'utilisation
-    url: '#obtenir-les-rapports-personnalises-mensuels-specifies'
+    url: '#recuperer-les-rapports-personnalises-mensuels-specifies'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les logs analysés
+  - name: Récupérer l'utilisation horaire pour les logs analysés
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-logs-analyses'
+    url: '#recuperer-l-utilisation-horaire-pour-les-logs-analyses'
     generated: true
-  - name: Obtenir l'utilisation horaire pour Lambda
+  - name: Récupérer l'attribution de l'utilisation
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-lambda'
+    url: '#recuperer-l-attribution-de-l-utilisation'
     generated: true
-  - name: Obtenir l'utilisation facturable de votre compte multi-org
+  - name: Récupérer l'utilisation horaire pour Lambda
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-facturable-de-votre-compte-multi-org'
+    url: '#recuperer-l-utilisation-horaire-pour-lambda'
     generated: true
-  - name: Obtenir l'utilisation horaire pour Fargate
+  - name: Récupérer l'utilisation facturable de votre compte multi-org
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-fargate'
+    url: '#recuperer-l-utilisation-facturable-de-votre-compte-multi-org'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les hosts et conteneurs
+  - name: Récupérer l'utilisation horaire pour Fargate
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-et-conteneurs'
+    url: '#recuperer-l-utilisation-horaire-pour-fargate'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les logs
+  - name: Récupérer l'utilisation horaire pour les hosts et conteneurs
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-des-logs'
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-et-conteneurs'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les logs par index
+  - name: Récupérer l'utilisation horaire pour la gestion des incidents
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-des-logs-par-index'
+    url: '#recuperer-l-utilisation-horaire-pour-la-gestion-des-incidents'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les flux réseau
+  - name: Récupérer l'utilisation horaire pour les spans indexées
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-flux-reseau'
+    url: '#recuperer-l-utilisation-horaire-pour-les-spans-indexees'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les hosts réseau
+  - name: Récupérer l'utilisation horaire pour les spans ingérées
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-reseau'
+    url: '#recuperer-l-utilisation-horaire-pour-les-spans-ingerees'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les hosts profilés
+  - name: Récupérer l'utilisation horaire pour les logs
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-profiles'
+    url: '#recuperer-l-utilisation-horaire-pour-des-logs'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les sessions RUM
+  - name: Récupérer l'utilisation horaire pour les logs par index
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-sessions-rum'
+    url: '#recuperer-l-utilisation-horaire-pour-des-logs-par-index'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les appareils SNMP
+  - name: Récupérer l'utilisation horaire pour les flux réseau
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-appareils-snmp'
+    url: '#recuperer-l-utilisation-horaire-pour-les-flux-reseau'
     generated: true
-  - name: Obtenir l'utilisation de votre compte multi-org
+  - name: Récupérer l'utilisation horaire pour les hosts réseau
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-de-votre-compte-multi-org'
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-reseau'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les hosts profilés
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-checks-synthetics'
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-profiles'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les API checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les sessions RUM
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-api-checks-synthetics'
+    url: '#recuperer-l-utilisation-horaire-pour-les-sessions-rum'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les browser checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les périphériques SNMP
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-browser-checks-synthetics'
+    url: '#recuperer-l-utilisation-horaire-pour-les-appareils-snmp'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les métriques custom
+  - name: Récupérer l'utilisation de votre compte multi-org
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-des-metriques-custom'
+    url: '#recuperer-l-utilisation-de-votre-compte-multi-org'
     generated: true
-  - name: "Obtenir les 500\_principales métriques custom selon la moyenne horaire"
+  - name: Récupérer l'utilisation horaire pour les checks Synthetic
     parent: Mesure de l'utilisation
-    url: '#obtenir-les-500-principales-metriques-custom-selon-la-moyenne-horaire'
+    url: '#recuperer-l-utilisation-horaire-pour-les-checks-synthetics'
     generated: true
-  - name: Obtenir l'utilisation horaire pour la recherche de traces
+  - name: Récupérer l'utilisation horaire pour les checks API Synthetic
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-la-recherche-de-traces'
+    url: '#recuperer-l-utilisation-horaire-pour-les-api-checks-synthetics'
     generated: true
-  - name: Obtenir l'utilisation horaire pour le Tracing without Limits
+  - name: Récupérer l'utilisation horaire pour les checks Browser Synthetic
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-le-tracing-without-limits'
+    url: '#recuperer-l-utilisation-horaire-pour-les-browser-checks-synthetics'
+    generated: true
+  - name: Récupérer l'utilisation horaire pour les métriques custom
+    parent: Mesure de l'utilisation
+    url: '#recuperer-l-utilisation-horaire-pour-des-metriques-custom'
+    generated: true
+  - name: Récupérer les principales métriques custom selon la moyenne horaire
+    parent: Mesure de l'utilisation
+    url: '#recuperer-les-principales-metriques-custom-selon-la-moyenne-horaire'
+    generated: true
+  - name: Récupérer l'utilisation horaire pour la recherche de traces
+    parent: Mesure de l'utilisation
+    url: '#recuperer-l-utilisation-horaire-pour-la-recherche-de-traces'
+    generated: true
+  - name: Récupérer l'utilisation horaire pour le Tracing without Limits
+    parent: Mesure de l'utilisation
+    url: '#recuperer-l-utilisation-horaire-pour-le-tracing-without-limits'
     generated: true
   - name: Utilisateurs
     url: /api/v1/users/
@@ -3042,9 +3187,9 @@ api_v1:
     parent: Intégration Webhooks
     url: '#supprimer-un-webhook'
     generated: true
-  - name: Obtenir une intégration Webhook
+  - name: Récupérer une intégration Webhook
     parent: Intégration Webhooks
-    url: '#obtenir-une-integration-webhook'
+    url: '#recuperer-une-integration-webhook'
     generated: true
   - name: Mettre à jour un webhook
     parent: Intégration Webhooks
@@ -3128,9 +3273,149 @@ api_v2:
     url: /api/v2/ip-ranges/
     identifier: Plages d'IP
     generated: true
+  - name: Services liés à un incident
+    url: /api/v2/incident-services/
+    identifier: Services liés à un incident
+    generated: true
+  - name: Récupérer la liste de tous les services liés à un incident
+    parent: Services liés à un incident
+    url: '#recuperer-une-liste-de-tous-les-services-lies-a-un-incident'
+    generated: true
+  - name: Créer un service lié à un incident
+    parent: Services liés à un incident
+    url: '#creer-un-service-lie-a-un-incident'
+    generated: true
+  - name: Supprimer un service lié à un incident existant
+    parent: Services liés à un incident
+    url: '#supprimer-un-service-lie-a-un-incident-existant'
+    generated: true
+  - name: Récupérer les détails d'un service lié à un incident
+    parent: Services liés à un incident
+    url: '#recuperer-les-details-d-un-service-lie-a-un-incident'
+    generated: true
+  - name: Mettre à jour un service lié à un incident existant
+    parent: Services liés à un incident
+    url: '#mettre-a-jour-un-service-lie-a-un-incident-existant'
+    generated: true
+  - name: Équipes liées à un incident
+    url: /api/v2/incident-teams/
+    identifier: Équipes liées à un incident
+    generated: true
+  - name: Récupérer la liste de toutes les équipes liées à un incident
+    parent: Équipes liées à un incident
+    url: '#recuperer-la-liste-de-toutes-les-equipes-lies-a-un-incident'
+    generated: true
+  - name: Créer une équipe liée à un incident
+    parent: Équipes liées à un incident
+    url: '#creer-une-equipe-liee-a-un-incident'
+    generated: true
+  - name: Supprimer une équipe liée à un incident existante
+    parent: Équipes liées à un incident
+    url: '#supprimer-une-equipe-liee-a-un-incident-existante'
+    generated: true
+  - name: Récupérer les détails d'une équipe liée à un incident
+    parent: Équipes liées à un incident
+    url: '#recuperer-les-details-d-une-equipe-liee-a-un-incident'
+    generated: true
+  - name: Mettre à jour une équipe liée à un incident existante
+    parent: Équipes liées à un incident
+    url: '#mettre-a-jour-une-equipe-liee-a-un-incident-existante'
+    generated: true
+  - name: Incidents
+    url: /api/v2/incidents/
+    identifier: Incidents
+    generated: true
+  - name: Récupérer la liste des incidents
+    parent: Incidents
+    url: '#recuperer-la-liste-des-incidents'
+    generated: true
+  - name: Créer un incident
+    parent: Incidents
+    url: '#creer-un-incident'
+    generated: true
+  - name: Supprimer un incident existant
+    parent: Incidents
+    url: '#supprimer-un-incident-existant'
+    generated: true
+  - name: Récupérer les détails d'un incident
+    parent: Incidents
+    url: '#recuperer-les-details-d-un-incident'
+    generated: true
+  - name: Mettre à jour un incident existant
+    parent: Incidents
+    url: '#mettre-a-jour-un-incident-existant'
+    generated: true
   - name: Gestion des clés
     url: /api/v2/key-management/
     identifier: Gestion des clés
+    generated: true
+  - name: Récupérer toutes les clés d'application
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application'
+    generated: true
+  - name: Supprimer une clé d'application
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-application'
+    generated: true
+  - name: Modifier une clé d'application
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-application'
+    generated: true
+  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Créer une clé d'application pour l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-application-pour-l-utilisateur-actuel'
+    generated: true
+  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Gestion des clés
+    url: /api/v2/key-management/
+    identifier: Gestion des clés
+    generated: true
+  - name: Récupérer toutes les clés d'application
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application'
+    generated: true
+  - name: Supprimer une clé d'application
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-application'
+    generated: true
+  - name: Modifier une clé d'application
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-application'
+    generated: true
+  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Créer une clé d'application pour l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-application-pour-l-utilisateur-actuel'
+    generated: true
+  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
     generated: true
   - name: Logs
     url: /api/v2/logs/
@@ -3152,11 +3437,11 @@ api_v2:
     url: /api/v2/logs-archives/
     identifier: Archives de logs
     generated: true
-  - name: Récupérer l'ordre des archives
+  - name: Récupérer la séquence des archives
     parent: Archives de logs
     url: '#recuperer-l-ordre-des-archives'
     generated: true
-  - name: Mettre à jour l'ordre des archives
+  - name: Mettre à jour la séquence des archives
     parent: Archives de logs
     url: '#mettre-a-jour-l-ordre-des-archives'
     generated: true
@@ -3260,6 +3545,14 @@ api_v2:
     url: /api/v2/pagerduty-integration/
     identifier: Intégration PagerDuty
     generated: true
+  - name: Processus
+    url: /api/v2/processes/
+    identifier: Processus
+    generated: true
+  - name: Récupérer tous les processus
+    parent: Processus
+    url: '#recuperer-tous-les-processus'
+    generated: true
   - name: Rôles
     url: /api/v2/roles/
     identifier: Rôles
@@ -3340,13 +3633,13 @@ api_v2:
     parent: Security Monitoring
     url: '#mettre-a-jour-une-regle-existante'
     generated: true
-  - name: Obtenir une liste rapide de signaux de sécurité
+  - name: Récupérer une liste rapide de signaux de sécurité
     parent: Security Monitoring
-    url: '#obtenir-une-liste-rapide-de-signaux-de-securite'
+    url: '#recuperer-une-liste-rapide-de-signaux-de-securite'
     generated: true
-  - name: Obtenir une liste de signaux de sécurité
+  - name: Récupérer une liste de signaux de sécurité
     parent: Security Monitoring
-    url: '#obtenir-une-liste-de-signaux-de-securite'
+    url: '#recuperer-une-liste-de-signaux-de-securite'
     generated: true
   - name: Checks de service
     url: /api/v2/service-checks/
@@ -3360,30 +3653,6 @@ api_v2:
     url: /api/v2/service-level-objectives/
     identifier: Service Level Objectives
     generated: true
-  - name: Services
-    url: /api/v2/services/
-    identifier: Services
-    generated: true
-  - name: Récupérer une liste de tous les services
-    parent: Services
-    url: '#recuperer-une-liste-de-tous-les-services'
-    generated: true
-  - name: Créer un service
-    parent: Services
-    url: '#creer-un-service'
-    generated: true
-  - name: Supprimer un service existant
-    parent: Services
-    url: '#supprimer-un-service-existant'
-    generated: true
-  - name: Récupérer les détails d'un service
-    parent: Services
-    url: '#recuperer-les-details-d-un-service'
-    generated: true
-  - name: Mettre à jour un service existant
-    parent: Services
-    url: '#mettre-a-jour-un-service-existant'
-    generated: true
   - name: Intégration Slack
     url: /api/v2/slack-integration/
     identifier: Intégration Slack
@@ -3392,37 +3661,13 @@ api_v2:
     url: /api/v2/snapshots/
     identifier: Snapshots
     generated: true
-  - name: Synthetics
+  - name: Synthetic
     url: /api/v2/synthetics/
-    identifier: Synthetics
+    identifier: Synthetic
     generated: true
   - name: Tags
     url: /api/v2/tags/
     identifier: Tags
-    generated: true
-  - name: Équipes
-    url: /api/v2/teams/
-    identifier: Équipes
-    generated: true
-  - name: Récupérer une liste de toutes les équipes
-    parent: Équipes
-    url: '#recuperer-une-liste-de-toutes-les-equipes'
-    generated: true
-  - name: Créer une équipe
-    parent: Équipes
-    url: '#creer-une-equipe'
-    generated: true
-  - name: Supprimer une équipe existante
-    parent: Équipes
-    url: '#supprimer-une-equipe-existante'
-    generated: true
-  - name: Récupérer les détails d'une équipe
-    parent: Équipes
-    url: '#recuperer-les-details-d-une-equipe'
-    generated: true
-  - name: Mettre à jour une équipe existante
-    parent: Équipes
-    url: '#mettre-a-jour-une-equipe-existante'
     generated: true
   - name: Timeboards
     url: /api/v2/timeboards/
@@ -3496,7 +3741,7 @@ footer_product:
   - name: APM
     url: 'https://www.datadoghq.com/product/apm/'
     weight: 120
-  - name: Profiler en continu
+  - name: Profileur en continu
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 121
   - name: Security Monitoring
@@ -3511,7 +3756,10 @@ footer_product:
   - name: Real User Monitoring
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
-  - name: Informatique sans serveur
+  - name: Gestion des incidents
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 136
+  - name: Sans serveur
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140
   - name: Alertes

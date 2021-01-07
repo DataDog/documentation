@@ -10,24 +10,55 @@ code_languages:
   'py':
     extension: py
     name: python
+    syntax: python
+  'pybeta':
+    extension: py
+    name: python-beta
+    syntax: python
   'rb':
     extension: rb
     name: ruby
+    syntax: ruby
+  'rbbeta':
+    extension: rbbeta
+    name: ruby-beta
+    syntax: ruby
   'sh':
     extension: sh
     name: curl
+    syntax: curl
   'go':
     extension: go
     name: go
+    syntax: go
   'java':
     extension: java
     name: java
+    syntax: java
   'cs':
     extension: cs
     name: csharp
+    syntax: csharp
   'php':
     extension: php
     name: php
+    syntax: php
+
+code_language_ids:
+    java: Java
+    cpp: 'C++'
+    php: PHP
+    nodejs: NodeJS
+    python: Python
+    python-beta: Python [beta]
+    ruby: Ruby
+    ruby-beta: Ruby [beta]
+    go: Go
+    ".NET": ".NET"
+    dotnet: ".NET"
+    dotnet-core: ".NET Core"
+    dotnet-framework: ".NET Framework"
+    curl: Curl
 
 branch: ""
 
@@ -45,8 +76,8 @@ footer_scripts:
   - adroll: false
 
 # Docs allowed regions for redirecting
-allowedRegions: 
+allowedRegions:
   - name: US
     value: us
   - name: EU
-    value: eu 
+    value: eu

@@ -20,7 +20,7 @@ const commonConfig = env => {
             publicPath: 'static/'
         }),
         new webpack.DefinePlugin({
-            CI_COMMIT_SHORT_SHA: JSON.stringify(process.env.CI_COMMIT_SHORT_SHA || '00000000')
+            CI_COMMIT_SHORT_SHA: JSON.stringify(process.env.CI_COMMIT_SHORT_SHA || '')
         })
     ];
 

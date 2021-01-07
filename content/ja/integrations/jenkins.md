@@ -58,15 +58,17 @@ Datadog のプラグインを構成するには、お使いの Jenkins の `Mana
 1. **Use Datadog API URL and Key to report to Datadog** (デフォルトで選択されています) の横のラジオボタンを選択します。
 2. Jenkins コンフィギュレーション画面の `API Key` テキストボックスに [Datadog の API キー][4] を貼り付けます。
 3. Jenkins コンフィギュレーション画面の `Test Key` ボタンをクリックして、入力した Datadog の API キーをテストします。ボタンは API Key テキストボックスのすぐ下にあります。
-4. (オプション) [Datadog ログインテーク URL][15] を入力し、Advanced タブで "Enable Log Collection" を選択します。
-5. 構成を保存します。
+4. (オプション) Advanced タブで Jenkins サーバーのホスト名を入力すると、そのサーバーをイベントに含めることができます。
+5. (オプション) [Datadog ログインテーク URL][15] を入力し、Advanced タブで "Enable Log Collection" を選択します。
+6. 構成を保存します。
 
 ##### DogStatsD 転送{#dogstatsd-forwarding-plugin}
 
 1. **Use the Datadog Agent to report to Datadog** の横のラジオボタンを選択します。
 2. DogStatsD サーバーの `hostname` と `port` を指定します。
-3. (オプション) ログ収集ポートを入力し、[ログ収集](#ログ収集)を構成してから Advanced タブで "Enable Log Collection" を選択します。
-4. 構成を保存します。
+3. (オプション) Advanced タブで Jenkins サーバーのホスト名を入力すると、そのサーバーをイベントに含めることができます。
+4. (オプション) ログ収集ポートを入力し、[ログ収集](#ログ収集)を構成してから Advanced タブで "Enable Log Collection" を選択します。
+5. 構成を保存します。
 
 #### Groovy スクリプト
 
@@ -273,6 +275,7 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 | `jenkins.job.pause_duration`            | ビルドジョブの一時停止期間 (秒単位)。                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
 | `jenkins.job.started`                  | ジョブの開始レート                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
 | `jenkins.job.stage_duration`           | 個々のステージの期間。                                 | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
+| `jenkins.job.stage_completed`          | ステージの完了レート                                      | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
 | `jenkins.job.waiting`                  | ジョブ実行までの待ち時間 (ミリ秒単位)            | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
 | `jenkins.node.count`                   | ノード総数                                          | `jenkins_url`                                                              |
 | `jenkins.node.offline`                 | オフラインのノード数                                           | `jenkins_url`                                                              |
@@ -280,6 +283,10 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 | `jenkins.node_status.count`            | このノードが存在する場合。                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
 | `jenkins.node_status.up`               | 特定のノードがオンラインの場合、値は 1。それ以外の場合は 0。              | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
 | `jenkins.plugin.count`                 | プラグイン総数                                                 | `jenkins_url`                                                              |
+| `jenkins.plugin.active`                | プラグインは有効です。                                                | `jenkins_url`                                                              |
+| `jenkins.plugin.failed`                | プラグインに失敗しました。                                                | `jenkins_url`                                                              |
+| `jenkins.plugin.inactivate`            | プラグインは無効です。                                              | `jenkins_url`                                                              |
+| `jenkins.plugin.withUpdate`            | プラグインに更新があります。                                           | `jenkins_url`                                                              |
 | `jenkins.project.count`                | プロジェクト総数                                                 | `jenkins_url`                                                              |
 | `jenkins.queue.size`                   | キューサイズ                                                    | `jenkins_url`                                                              |
 | `jenkins.queue.buildable`              | キュー内のビルド可能なアイテム数                             | `jenkins_url`                                                              |

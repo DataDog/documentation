@@ -5,11 +5,11 @@ ddtype: crawler
 dependencies: []
 description: Office 365 グループと Datadog を使用して、コラボレーション、共有、パフォーマンスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/office_365_groups/'
-draft: false
+draft: true
 git_integration_title: office_365_groups
 has_logo: true
 integration_title: Office 365 グループ
-is_public: true
+is_public: false
 kind: インテグレーション
 manifest_version: '1.0'
 name: office_365_groups
@@ -19,7 +19,7 @@ version: '1.0'
 ---
 ## 概要
 
-Office 365 Groups インテグレーションは、Datadog のイベント、グラフアノテーション、モニター通知などを Office 365 グループのチャンネルに直接提供します。
+Office 365 Groups インテグレーションは、Datadog のイベントやモニター通知などを Office 365 グループのチャンネルに直接提供します。
 これにより、パフォーマンスの問題について常に最新の情報をチームに提供し、グラフを共有できます。また、特定の Office 365 グループチャンネルにアラートやイベントを送信することができます。コネクターは、チーム全体に自動的に最新の情報を提供し続けるための手段を提供します。[Datadog ストリームからチームチャンネル名をメンションする][1]ことで、情報を広く伝えることができ、誰もが常に情報を把握できます。チームメンションを使用してダッシュボードのグラフにアノテーションを追加し、スナップショットをチームで共有できます。
 
 ## セットアップ

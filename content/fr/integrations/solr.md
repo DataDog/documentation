@@ -3,16 +3,21 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: solr
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/solr/README.md'
 display_name: Solr
+draft: false
 git_integration_title: solr
 guid: 0235124a-0207-44dd-aede-f578a6d46b26
 integration_id: solr
@@ -44,19 +49,34 @@ Le check Solr permet de surveiller l'état et les performances d'un cluster Solr
 
 ### Installation
 
-Le check Solr est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Solr.
+Le check Solr est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Solr.
 
 Ce check étant basé sur JMX, vous devez activer les connexions JMX à distance sur vos serveurs Solr. Consultez la [documentation relative au check JMX][3] pour en savoir plus.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `solr.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4]. Consultez le [fichier d'exemple solr.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `solr.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple solr.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
+   init_config:
+
+     ## @param is_jmx - boolean - required
+     ## Whether or not this file is a configuration for a JMX integration.
+     #
+     is_jmx: true
+
+     ## @param collect_default_metrics - boolean - required
+     ## Whether or not the check should collect all default metrics.
+     #
+     collect_default_metrics: true
+
    instances:
      ## @param host - string - required
      ## Solr host to connect to.
@@ -67,7 +87,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
        port: 9999
    ```
 
-2. [Redémarrez l'Agent][6].
+2. [Redémarrez l'Agent][3].
 
 #### Liste des métriques
 
@@ -84,7 +104,7 @@ mydomain:attr0=val0,attr1=val1
 
 Dans cet exemple, votre métrique est `mondomaine` (ou un nom similaire, en fonction de l'attribut au sein du bean). Elle est associée aux tags `attr0:val0`, `attr1:val1` et `domain:mondomaine`.
 
-Si vous spécifiez un alias dans une clé `include` au format _camel case_, il est converti au format _snake case_. Par exemple, `MonNomMétrique` s'affiche sous la forme `mon_nom_métrique` dans Datadog.
+Si vous spécifiez un alias dans une clé `include` au format _camel case_, il est converti au format _snake case_. Par exemple, `MonNomMétrique` devient `mon_nom_métrique` dans Datadog.
 
 ##### Le filtre attribute
 
@@ -147,13 +167,64 @@ La liste de filtres est uniquement prise en charge pour les versions > 5.3.0 de
       bean: deuxieme_nom_bean
 ```
 
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
+
 #### Environnement conteneurisé
 
-Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][7].
+Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][1].
+
+##### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+      ```yaml
+       logs_enabled: true
+     ```
+
+2. Solr utilise le logger `log4j` par défaut. Pour personnaliser le format de logging, modifiez le fichier [`server/resources/log4j2.xml`][2]. Par défaut, le pipeline d'intégration de Datadog prend en charge l'[expression][3] de conversion suivante :
+
+   ```text
+   %maxLen{%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %c{1.} %m%notEmpty{ =>%ex{short}}}{10240}%n
+   ```
+
+    Dupliquez et modifiez le [pipeline d'intégration][4] si vous utilisez un autre format.
+
+
+3. Supprimez la mise en commentaire du bloc de configuration des logs du fichier `solr.d/conf.yaml` et modifiez les paramètres. Modifiez les valeurs des paramètres `type`, `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple solr.d/solr.yaml][5] pour découvrir toutes les options de configuration disponibles.
+
+      ```yaml
+       logs:
+         - type: file
+           path: /var/solr/logs/solr.log
+           source: solr
+           # To handle multi line that starts with yyyy-mm-dd use the following pattern
+           # log_processing_rules:
+           #   - type: multi_line
+           #     pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+           #     name: new_log_start_with_date
+     ```
+
+4. [Redémarrez l'Agent][6].
+
+Consultez la [documentation de Datadog][7] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Docker.
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[2]: https://lucene.apache.org/solr/guide/configuring-logging.html#permanent-logging-settings
+[3]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
+[4]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
+[5]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/docker/log/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][8] et cherchez `solr` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `solr` dans la section Checks.
 
 ## Données collectées
 
@@ -168,7 +239,7 @@ Le check Solr n'inclut aucun événement.
 ### Checks de service
 
 **solr.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance SolR qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance SolR qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -213,12 +284,8 @@ attribute:
       "true": 1
 ```
 
+
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/solr/images/solrgraph.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/integrations/java/
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/solr/metadata.csv
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information

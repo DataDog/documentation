@@ -83,6 +83,8 @@ Examples:
 
 ## Wildcards
 
+### Multi-character wildcard
+
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
 * `service:web*` matches every log message that has a service starting with `web`.
@@ -99,6 +101,10 @@ Wildcard searches can also be used to search in the plain text of a log that is 
 
 However, this search term does not return logs that contain the string `NETWORK` if it is in a facet and not part of the log message.
 
+### Search wildcard
+
+When searching for a facet value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for a facet `my_facet` with the value `hello world`: `@my_facet:hello?world`.
+
 ## Numerical values
 
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
@@ -114,9 +120,8 @@ You can search for numerical attribute within a specific range. For instance, re
 Your logs inherit tags from [hosts][2] and [integrations][3] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
-* `("env:prod" OR test)` matches all logs with the tag `#env:prod` or the tag `#test`
-* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` matches all logs that contain tags `#service:srvA` or `#service:srvB`.
-* `("env:prod" AND -"version:beta")` matches all logs that contain `#env:prod` and that do not contain `#version:beta`
+* `env:(prod OR test)` matches all logs with the tag `env:prod` or the tag `env:test`
+* `(env:prod AND -version:beta)` matches all logs that contain tag `env:prod` and that do not contain tag `version:beta`
 
 If your tags don't follow [tags best practices][4] and don't use the `key:value` syntax, use this search query:
 

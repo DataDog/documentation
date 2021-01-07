@@ -1,6 +1,7 @@
 ---
 title: Top List Widget
 kind: documentation
+widget_type: "toplist"
 aliases:
     - /graphing/widgets/top_list/
 further_reading:
@@ -29,9 +30,9 @@ The top list visualization enables you to display a list of Tag values like `hos
 ### Configuration
 
 1. Choose the data to graph:
-    * Metric: See the documentation [querying][1] to configure a metric query.
+    * Metric: See the [querying][1] documentation to configure a metric query.
     * Indexed Spans: See [the trace search documentation][2] to configure an Indexed Span query.
-    * Log Events: See [the log search documentation][1] to configure a log event query.
+    * Log Events: See [the log search documentation][3] to configure a log event query.
 
 2. Optional: configure conditional formatting depending on your entries' values.
 
@@ -51,50 +52,18 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][3] for the top list widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][4] documentation for additional reference.
 
-```text
-TOPLIST_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["toplist"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+The dedicated [widget JSON schema definition][5] for the top list widget is:
 
-| Parameter  | Type             | Required | Description                                                                                                                                                  |
-|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`     | string           | yes      | Type of widget, for the top list widget use `toplist`.                                                                                                       |
-| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
-| `title`    | string           | no       | Title of your widget.                                                                                                                                        |
-
-Additional properties allowed in the `request` object:
-
-```text
-{
-   "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
-}
-```
-
-| Parameter             | Type   | Required | Description                                                                                                                                                     |
-|-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][5] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/search_syntax/
+[1]: /dashboards/querying/
 [2]: /tracing/app_analytics/search/#search-bar
-[3]: /dashboards/graphing_json/widget_json/
-[4]: /dashboards/graphing_json/request_json/
-[5]: /dashboards/graphing_json/widget_json/#conditional-format-schema
+[3]: /logs/search_syntax/
+[4]: /api/v1/dashboards/
+[5]: /dashboards/graphing_json/widget_json/

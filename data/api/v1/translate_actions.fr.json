@@ -1,0 +1,931 @@
+{
+  "GetIPRanges": {
+    "description": "Récupérez des informations sur les plages d'IP Datadog.",
+    "summary": "Énumérer les plages d'IP"
+  },
+  "ListAPIKeys": {
+    "description": "Récupérez toutes les clés d'API disponibles pour votre compte.",
+    "summary": "Récupérer toutes les clés d'API"
+  },
+  "CreateAPIKey": {
+    "description": "Crée une clé d'API avec un nom donné.",
+    "summary": "Créer une clé d'API",
+    "request_schema_description": "Clé d'API Datadog."
+  },
+  "DeleteAPIKey": {
+    "description": "Supprimez une clé d'API donnée.",
+    "summary": "Supprimer une clé d'API"
+  },
+  "GetAPIKey": {
+    "description": "Récupérez une clé d'API spécifique.",
+    "summary": "Récupérer une clé d'API"
+  },
+  "UpdateAPIKey": {
+    "description": "Modifiez le nom d'une clé d'API.",
+    "summary": "Modifier une clé d'API",
+    "request_schema_description": "Clé d'API Datadog."
+  },
+  "ListApplicationKeys": {
+    "description": "Récupérez toutes les clés d'application disponibles pour votre compte Datadog.",
+    "summary": "Récupérer toutes les clés d'application"
+  },
+  "CreateApplicationKey": {
+    "description": "Créez une clé d'application avec un nom donné.",
+    "summary": "Créer une clé d'application",
+    "request_schema_description": "Une clé d'application avec ses métadonnées associées."
+  },
+  "DeleteApplicationKey": {
+    "description": "Supprimez une clé d'application donnée.",
+    "summary": "Supprimer une clé d'application"
+  },
+  "GetApplicationKey": {
+    "description": "Récupérez une clé d'application spécifique.",
+    "summary": "Récupérer une clé d'application"
+  },
+  "UpdateApplicationKey": {
+    "description": "Modifiez le nom d'une clé d'application.",
+    "summary": "Modifier une clé d'application",
+    "request_schema_description": "Une clé d'application avec ses métadonnées associées."
+  },
+  "SubmitServiceCheck": {
+    "description": "Envoyez une liste de checks de service.\n\n**Remarque** : une clé d'API valide est requise.",
+    "summary": "Envoyer un check de service",
+    "request_description": "Corps de requête pour l'envoi de check de service.",
+    "request_schema_description": "Les checks de service."
+  },
+  "GetDailyCustomReports": {
+    "description": "Récupérez des rapports personnalisés journaliers.",
+    "summary": "Récupérer la liste des rapports personnalisés journaliers disponibles"
+  },
+  "GetSpecifiedDailyCustomReports": {
+    "description": "Récupérez les rapports personnalisés journaliers spécifiés.",
+    "summary": "Récupérer les rapports personnalisés journaliers spécifiés"
+  },
+  "ListDashboards": {
+    "description": "Récupérez tous les dashboards.\n\n**Remarque** : cette requête ne renvoie pas les dashboards prédéfinis, mais uniquement les dashboards personnalisés créés ou clonés.",
+    "summary": "Récupérer tous les dashboards"
+  },
+  "CreateDashboard": {
+    "description": "Créez un dashboard à l'aide des options spécifiées.",
+    "summary": "Créer un dashboard",
+    "request_description": "Corps de requête pour la création d'un dashboard.",
+    "request_schema_description": "Un dashboard est un outil vous permettant de surveiller visuellement, d'analyser et d'afficher des métriques de performance clés dans Datadog. Ces dernières facilitent la surveillance de l'état de votre infrastructure."
+  },
+  "ListDashboardLists": {
+    "description": "Récupérez toutes les définitions d'une liste de dashboards existants.",
+    "summary": "Récupérer toutes les listes de dashboards"
+  },
+  "CreateDashboardList": {
+    "description": "Créez une liste de dashboards vide.",
+    "summary": "Créer une liste de dashboards",
+    "request_description": "Corps de requête pour la création d'une liste de dashboards.",
+    "request_schema_description": "Vos dashboards Datadog."
+  },
+  "DeleteDashboardList": {
+    "description": "Supprimez une liste de dashboards.",
+    "summary": "Supprimer une liste de dashboards"
+  },
+  "GetDashboardList": {
+    "description": "Récupérez la définition d'une liste de dashboards existant.",
+    "summary": "Récupérer une liste de dashboards"
+  },
+  "UpdateDashboardList": {
+    "description": "Mettez à jour le nom d'une liste de dashboards.",
+    "summary": "Mettre à jour une liste de dashboards",
+    "request_description": "Corps de requête pour la mise à jour d'une liste de dashboards.",
+    "request_schema_description": "Vos dashboards Datadog."
+  },
+  "DeleteDashboard": {
+    "description": "Supprimez un dashboard à l'aide de l'ID spécifié.",
+    "summary": "Supprimer un dashboard"
+  },
+  "GetDashboard": {
+    "description": "Récupérez un dashboard à l'aide de l'ID spécifié.",
+    "summary": "Récupérer un dashboard"
+  },
+  "UpdateDashboard": {
+    "description": "Mettez à jour un dashboard à l'aide de l'ID spécifié.",
+    "summary": "Mettre à jour un dashboard",
+    "request_description": "Corps de requête pour la mise à jour d'un dashboard.",
+    "request_schema_description": "Un dashboard est un outil vous permettant de surveiller visuellement, d'analyser et d'afficher des métriques de performance clés dans Datadog. Ces dernières facilitent la surveillance de l'état de votre infrastructure."
+  },
+  "ListDowntimes": {
+    "description": "Récupérez tous les downtimes planifiés.",
+    "summary": "Récupérer tous les downtimes"
+  },
+  "CreateDowntime": {
+    "description": "Planifiez un downtime.",
+    "summary": "Planifier un downtime",
+    "request_description": "Corps de requête pour la planification d'un downtime.",
+    "request_schema_description": "Les downtimes vous permettent de mieux contrôler les notifications d'un monitor en empêchant certains contextes de déclencher des alertes. Les paramètres de downtime, qui peuvent être planifiés avec une heure de début et de fin, désactivent toutes les alertes liées à des tags Datadog spécifiques."
+  },
+  "CancelDowntimesByScope": {
+    "description": "Supprimez tous les downtimes correspondant au contexte `X`.",
+    "summary": "Annuler les downtimes selon le contexte",
+    "request_description": "Contexte pour l'annulation des downtimes.",
+    "request_schema_description": "Annulez les downtimes selon le contexte."
+  },
+  "CancelDowntime": {
+    "description": "Annulez un downtime.",
+    "summary": "Annuler un downtime"
+  },
+  "GetDowntime": {
+    "description": "Récupérez les détails d'un downtime par `downtime_id`.",
+    "summary": "Récupérer un downtime"
+  },
+  "UpdateDowntime": {
+    "description": "Mettez à jour un downtime unique par `downtime_id`.",
+    "summary": "Mettre à jour un downtime",
+    "request_description": "Corps de requête pour la mise à jour d'un downtime.",
+    "request_schema_description": "Les downtimes vous permettent de mieux contrôler les notifications d'un monitor en empêchant certains contextes de déclencher des alertes. Les paramètres de downtime, qui peuvent être planifiés avec une heure de début et de fin, désactivent toutes les alertes liées à des tags Datadog spécifiques."
+  },
+  "ListEvents": {
+    "description": "Le flux d'événements peut être interrogé et filtré par période, priorité, sources et tags.\n\n**Remarques** :\n- Si l'événement que vous interrogez comprend de la mise en forme Markdown, les caractères `%`,`\\`,`n` peuvent s'afficher dans votre sortie.\n\n- Cet endpoint renvoie jusqu'à `1000` résultats parmi les plus récents. Pour renvoyer davantage de résultats, identifiez le dernier timestamp du dernier résultat et définissez-le en tant que `end` de l'intervalle de requête pour paginer les résultats.",
+    "summary": "Interroger le flux d'événements"
+  },
+  "CreateEvent": {
+    "description": "Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, définissez leur priorité et regroupez-les avec d'autres événements.",
+    "summary": "Envoyer un événement",
+    "request_description": "Objet de requête d'événement",
+    "request_schema_description": "Objet représentant un événement."
+  },
+  "GetEvent": {
+    "description": "Cet endpoint vous permet d'interroger un événement pour obtenir des informations à son sujet.\n\n**Remarque** : si l'événement que vous interrogez comprend de la mise en forme Markdown, les caractères « % », « \\ » ou encore « n » peuvent s'afficher dans votre sortie.",
+    "summary": "Récupérer un événement"
+  },
+  "ListEmbeddableGraphs": {
+    "description": "Récupère la liste des graphiques intégrables précédemment créés.",
+    "summary": "Récupérer tous les embeds"
+  },
+  "CreateEmbeddableGraph": {
+    "description": "Crée un nouveau graphique intégrable.\n\nRemarque : si un embed existe déjà pour la même requête dans une organisation donnée, au lieu de créer un nouvel embed, l'embed existant est renvoyé. Si vous souhaitez utiliser des template variables, consultez la section [Graphiques intégrables avec des template variables] (https://docs.datadoghq.com/dashboards/faq/embeddable-graphs-with-template-variables).",
+    "summary": "Créer un embed",
+    "request_description": "Corps de graphique intégrable",
+    "request_schema_description": "Charge utile pour créer un nouveau graphique intégrable."
+  },
+  "GetEmbeddableGraph": {
+    "description": "Récupérez le fragment HTML d'un embed généré précédemment avec `embed_id`.",
+    "summary": "Récupérer un embed spécifique"
+  },
+  "EnableEmbeddableGraph": {
+    "description": "Active un embed spécifié.",
+    "summary": "Activer un embed"
+  },
+  "RevokeEmbeddableGraph": {
+    "description": "Révoque un embed spécifié.",
+    "summary": "Révoquer un embed"
+  },
+  "GetGraphSnapshot": {
+    "description": "Prenez des snapshots de graphiques.\n**Remarque** : lorsqu'un snapshot est créé, vous devez attendre un certain temps avant de pouvoir y accéder.",
+    "summary": "Prendre des snapshots de graphiques"
+  },
+  "MuteHost": {
+    "description": "Désactivez un host.",
+    "summary": "Désactiver un host",
+    "request_description": "Corps de requête pour la désactivation d'un host.",
+    "request_schema_description": "Combinaison de paramètres pour désactiver un host."
+  },
+  "UnmuteHost": {
+    "description": "Réactive un host. Cet endpoint ne prend aucun argument JSON.",
+    "summary": "Réactiver un host"
+  },
+  "ListHosts": {
+    "description": "Cet endpoint permet de rechercher les hosts selon leur nom, alias ou tag. Les hosts actifs au cours des 3 dernières heures sont inclus par défaut. La période de rétention est de 7 jours. Les résultats sont paginés avec un maximum de 1 000 résultats par recherche.",
+    "summary": "Récupérer tous les hosts de votre organisation"
+  },
+  "GetHostTotals": {
+    "description": "Cet endpoint renvoie le nombre total de hosts actifs et disponibles dans votre compte Datadog. Un host est considéré comme actif lorsqu'il a transmis des données au cours de la dernière heure et disponible lorsque sa dernière transmission de données a été effectuée au cours des deux dernières heures.",
+    "summary": "Récupérer le nombre total de hosts actifs"
+  },
+  "DeleteAWSAccount": {
+    "description": "Supprimez une intégration Datadog/AWS correspondant aux valeurs `account_id` et `role_name parameters` indiquées.",
+    "summary": "Supprimer une intégration AWS",
+    "request_description": "Objet de requête AWS",
+    "request_schema_description": "Renvoie le compte AWS associé à cette intégration."
+  },
+  "ListAWSAccounts": {
+    "description": "Énumérez toutes les intégrations Datadog/AWS disponibles au sein de votre organisation Datadog.",
+    "summary": "Énumérer toutes les intégrations AWS"
+  },
+  "CreateAWSAccount": {
+    "description": "Créez une intégration Datadog/Amazon Web Services. La méthode `POST` permet de mettre à jour la configuration de votre intégration en ajoutant votre nouvelle configuration à celle de votre organisation Datadog. Un identifiant de compte AWS unique pour l'authentification basée sur les rôles.",
+    "summary": "Créer une intégration AWS",
+    "request_description": "Objet de requête AWS",
+    "request_schema_description": "Renvoie le compte AWS associé à cette intégration."
+  },
+  "UpdateAWSAccount": {
+    "description": "Mettez à jour une intégration Datadog/Amazon Web Services.",
+    "summary": "Mettre à jour une intégration AWS",
+    "request_description": "Objet de requête AWS",
+    "request_schema_description": "Renvoie le compte AWS associé à cette intégration."
+  },
+  "ListAvailableAWSNamespaces": {
+    "description": "Énumérez toutes les règles d'espace de nommage pour une intégration Datadog/AWS donnée. Cet endpoint ne prend aucun argument.",
+    "summary": "Énumérer les règles d'espace de nommage"
+  },
+  "DeleteAWSTagFilter": {
+    "description": "Supprimez une entrée de filtrage de tags.",
+    "summary": "Supprimer une entrée de filtrage de tags",
+    "request_description": "Supprimez une entrée de filtrage de tags pour un compte AWS et un espace de nommage `dd-aws` donnés.",
+    "request_schema_description": "Les objets utilisés pour supprimer une entrée de filtrage de tags AWS."
+  },
+  "ListAWSTagFilters": {
+    "description": "Récupérez tous les filtres de tags AWS.",
+    "summary": "Récupérer tous les filtres de tags AWS"
+  },
+  "CreateAWSTagFilter": {
+    "description": "Définissez un filtre de tags AWS.",
+    "summary": "Définir un filtre de tags AWS",
+    "request_description": "Définissez un filtre de tags AWS à l'aide d'un `aws_account_identifier`, d'un `namespace` et d'une chaîne de filtrage.\nLes options d'espace de nommage sont `application_elb`, `elb`, `lambda`, `network_elb`, `rds`, `sqs`, et `custom`.",
+    "request_schema_description": "Les objets utilisés pour définir un filtre de tags AWS."
+  },
+  "CreateNewAWSExternalID": {
+    "description": "Générez un nouvel ID externe AWS pour une paire ID de compte AWS/nom de rôle donnée.",
+    "summary": "Générer un nouvel ID externe",
+    "request_description": "Le nom de votre délégation de rôle Datadog. Consultez les [informations sur la configuration de l'intégration Datadog/AWS] pour en savoir plus sur le nom de rôle de votre compte AWS (https://github.com/DataDog/documentation/blob/master/integrations/amazon_web_services/#installation).",
+    "request_schema_description": "Renvoie le compte AWS associé à cette intégration."
+  },
+  "DeleteAWSLambdaARN": {
+    "description": "Supprimez une configuration de logs Datadog/AWS en supprimant l'ARN de Lambda spécifique associé à un compte AWS donné.",
+    "summary": "Supprimer une intégration de logs AWS",
+    "request_description": "Corps de requête pour la suppression d'un ARN de Lambda AWS.",
+    "request_schema_description": "ID de compte AWS et ARN de Lambda."
+  },
+  "ListAWSLogsIntegrations": {
+    "description": "Énumérez toutes les intégrations de logs Datadog/AWS configurées sur votre compte Datadog.",
+    "summary": "Énumérer toutes les intégrations de logs AWS"
+  },
+  "CreateAWSLambdaARN": {
+    "description": "Associez l'ARN de Lambda créé pour la collecte de logs Datadog/AWS à votre ID de compte AWS pour activer la collecte de logs.",
+    "summary": "Ajouter l'ARN de Lambda pour les logs AWS",
+    "request_description": "Corps de requête pour l'ajout asynchrone d'ARN de Lambda pour les logs AWS.",
+    "request_schema_description": "ID de compte AWS et ARN de Lambda."
+  },
+  "CheckAWSLogsLambdaAsync": {
+    "description": "Vérifiez si les autorisations nécessaires à l'ajout d'un déclencheur de transmission de logs pour les services et le compte AWS donnés sont définies. L'entrée est la même que pour l'endpoint Activer la collecte de logs d'un service AWS. Les requêtes ultérieures répéteront toujours ce qui précède, les appels de cet endpoint peuvent donc être effectués par intermittence au lieu d'être bloquants.\n\n- Renvoie un statut `created` lors de la vérification de la présence de la fonction Lambda dans le compte.\n- Renvoie un statut `waiting` lors de la vérification.\n- Renvoie un statut ` checked and ok` si la fonction Lambda existe.\n- Renvoie un statut `error` si la fonction Lambda n'existe pas.",
+    "summary": "Vérifier qu'une fonction Lambda AWS existe",
+    "request_description": "Corps de requête asynchrone pour la vérification de l'existence d'une fonction Lambda.",
+    "request_schema_description": "ID de compte AWS et ARN de Lambda."
+  },
+  "ListAWSLogsServices": {
+    "description": "Récupérez la liste des services AWS actuels pour lesquels Datadog propose la collecte automatique des logs. Utilisez les ID de service renvoyés avec le paramètre de services pour l'endpoint d'API Activer la collecte de logs d'un service AWS.",
+    "summary": "Récupérer la liste des services AWS compatibles avec la collecte de logs"
+  },
+  "EnableAWSLogServices": {
+    "description": "Activez la collecte automatique de logs pour une liste de services. Doit être exécuté après `CreateAWSLambdaARN` pour enregistrer la configuration.",
+    "summary": "Activer une intégration de logs AWS",
+    "request_description": "Corps de requête pour l'activation de la collecte de logs de services AWS.",
+    "request_schema_description": "La liste des services AWS actuels pour lesquels Datadog propose la collecte automatique des logs."
+  },
+  "CheckAWSLogsServicesAsync": {
+    "description": "Vérifiez si les autorisations nécessaires à l'ajout d'un déclencheur de transmission de logs pour les services et le compte AWS donnés sont définies. L'entrée est la même que pour `EnableAWSLogServices`. Les appels sont effectués de manière asynchrone, l'endpoint peut donc être interrogé à plusieurs reprises de façon non bloquante jusqu'à ce que la requête asynchrone se termine.\n\n- Renvoie un statut `created` lors de la vérification de la présence des autorisations dans le compte AWS.\n- Renvoie un statut `waiting` lors de la vérification.\n- Renvoie un statut ` checked and ok` si la fonction Lambda existe.\n- Renvoie un statut `error` si la fonction Lambda n'existe pas.",
+    "summary": "Vérifier les autorisations pour les services qui génèrent des logs",
+    "request_description": "Corps de requête pour la vérification asynchrone des services qui génèrent des logs.",
+    "request_schema_description": "La liste des services AWS actuels pour lesquels Datadog propose la collecte automatique des logs."
+  },
+  "DeleteAzureIntegration": {
+    "description": "Supprimez une intégration Datadog/Azure donnée de votre compte Datadog.",
+    "summary": "Supprimer une intégration Azure",
+    "request_description": "Corps de requête pour la suppression d'une intégration Datadog/Azure donnée.",
+    "request_schema_description": "Intégrations Datadog/Azure configurées pour votre organisation."
+  },
+  "ListAzureIntegration": {
+    "description": "Énumérez toutes les intégrations Datadog/Azure configurées sur votre compte Datadog.",
+    "summary": "Énumérer toutes les intégrations Azure"
+  },
+  "CreateAzureIntegration": {
+    "description": "Créez une intégration Datadog/Azure. La méthode `POST` permet de mettre à jour la configuration de votre intégration en ajoutant votre nouvelle configuration à celle de votre organisation Datadog. La méthode `PUT` permet de mettre à jour la configuration de votre intégration en remplaçant votre configuration actuelle par la nouvelle, envoyée à votre organisation Datadog.",
+    "summary": "Créer une intégration Azure",
+    "request_description": "Corps de requête pour la création d'une intégration Datadog/Azure pour votre compte Datadog.",
+    "request_schema_description": "Intégrations Datadog/Azure configurées pour votre organisation."
+  },
+  "UpdateAzureIntegration": {
+    "description": "Mettez à jour une intégration Datadog/Azure. Les valeurs `tenant_name` et `client_id` doivent exister. Tous les autres champs fournis écraseront les valeurs existantes. Pour écraser `tenant_name` ou `client_id`, utilisez `new_tenant_name` et `new_client_id`. Pour laisser un champ inchangé, ne spécifiez pas ce champ dans la charge utile.",
+    "summary": "Mettre à jour une intégration Azure",
+    "request_description": "Corps de requête pour la mise à jour d'une intégration Datadog/Azure.",
+    "request_schema_description": "Intégrations Datadog/Azure configurées pour votre organisation."
+  },
+  "UpdateAzureHostFilters": {
+    "description": "Mettez à jour la liste définie des filtres de host pour une intégration Datadog/Azure donnée.",
+    "summary": "Mettre à jour les filtres de host d'une intégration Azure",
+    "request_description": "Corps de requête pour la mise à jour des filtres de host d'une intégration Datadog/Azure.",
+    "request_schema_description": "Intégrations Datadog/Azure configurées pour votre organisation."
+  },
+  "DeleteGCPIntegration": {
+    "description": "Supprimez une intégration Datadog/GCP donnée.",
+    "summary": "Supprimer une intégration GCP",
+    "request_description": "Supprimez une intégration Datadog/GCP donnée.",
+    "request_schema_description": "Votre compte Google Cloud Platform."
+  },
+  "ListGCPIntegration": {
+    "description": "Énumérez toutes les intégrations Datadog/GCP configurées sur votre compte Datadog.",
+    "summary": "Énumérer toutes les intégrations GCP"
+  },
+  "CreateGCPIntegration": {
+    "description": "Créez une intégration Datadog/GCP.",
+    "summary": "Créer une intégration GCP",
+    "request_description": "Créez une intégration Datadog/GCP.",
+    "request_schema_description": "Votre compte Google Cloud Platform."
+  },
+  "UpdateGCPIntegration": {
+    "description": "Mettez à jour les filtres de host et/ou la désactivation automatique pour des intégrations Datadog/GCP. Les champs `project_id` et `client_email` sont requis, mais ils ne peuvent pas être mis à jour. Si vous devez mettre à jour ces champs, supprimez-les et utilisez l'endpoint de création (`POST`). Les champs non spécifiés conserveront leurs valeurs originales.",
+    "summary": "Mettre à jour une intégration GCP",
+    "request_description": "Mettez à jour une intégration Datadog/GCP.",
+    "request_schema_description": "Votre compte Google Cloud Platform."
+  },
+  "CreatePagerDutyIntegrationService": {
+    "description": "Créez un objet de service dans l'intégration PagerDuty.",
+    "summary": "Créer un objet de service",
+    "request_description": "Corps de requête pour la création d'un objet de service.",
+    "request_schema_description": "Le service PagerDuty qui peut être intégré avec Datadog."
+  },
+  "DeletePagerDutyIntegrationService": {
+    "description": "Supprimez un objet de service unique dans l'intégration Datadog/PagerDuty.",
+    "summary": "Supprimer un objet de service unique"
+  },
+  "GetPagerDutyIntegrationService": {
+    "description": "Récupérez un nom de service dans l'intégration Datadog/PagerDuty.",
+    "summary": "Récupérer un objet de service unique"
+  },
+  "UpdatePagerDutyIntegrationService": {
+    "description": "Mettez à jour un objet de service unique dans l'intégration Datadog/PagerDuty.",
+    "summary": "Mettre à jour un objet de service unique",
+    "request_description": "Corps de requête pour la mise à jour d'un objet de service existant.",
+    "request_schema_description": "Clé d'objet de service PagerDuty."
+  },
+  "DeleteSlackIntegration": {
+    "description": "Supprimez une intégration Datadog/Slack.",
+    "summary": "Supprimer une intégration Slack"
+  },
+  "GetSlackIntegration": {
+    "description": "Récupérez toutes les informations sur votre intégration Datadog/Slack.",
+    "summary": "Récupérer les informations sur une intégration Slack"
+  },
+  "CreateSlackIntegration": {
+    "description": "Créez une intégration Datadog/Slack. Une fois créée, ajoutez-y un canal avec l'[endpoint Ajouter des canaux à l'intégration Slack](https://docs.datadoghq.com/api/?lang=bash#ajouter-des-canaux-a-l-integration-slack). Cette méthode permet de mettre à jour la configuration de votre intégration en **ajoutant** votre nouvelle configuration à celle déjà existante dans votre organisation Datadog.",
+    "summary": "Créer une intégration Slack",
+    "request_description": "Corps de requête pour la création d'une intégration Datadog/Slack.",
+    "request_schema_description": "Une nouvelle intégration Datadog/Slack."
+  },
+  "UpdateSlackIntegration": {
+    "description": "Ajoutez des canaux à votre intégration Datadog/Slack existante. Cette méthode permet de mettre à jour la configuration de votre intégration en **remplaçant** votre configuration actuelle par la nouvelle, envoyée à votre organisation Datadog.",
+    "summary": "Ajouter des canaux à l'intégration Slack",
+    "request_description": "Corps de requête pour la mise à jour d'une intégration Datadog/Slack existante.",
+    "request_schema_description": "Configuration de vos canaux Slack."
+  },
+  "GetSlackIntegrationChannels": {
+    "description": "Récupérez la liste de tous les canaux configurés pour votre intégration Datadog/Slack.",
+    "summary": "Récupérer tous les canaux dans une intégration Slack"
+  },
+  "CreateSlackIntegrationChannel": {
+    "description": "Ajoutez un canal à votre intégration Datadog/Slack.",
+    "summary": "Créer un canal dans une intégration Slack",
+    "request_description": "Charge utile décrivant le canal Slack à créer",
+    "request_schema_description": "La configuration du canal Slack."
+  },
+  "RemoveSlackIntegrationChannel": {
+    "description": "Supprimez un canal de votre intégration Datadog/Slack.",
+    "summary": "Supprimer un canal dans une intégration Slack"
+  },
+  "GetSlackIntegrationChannel": {
+    "description": "Récupérez un canal configuré pour votre intégration Datadog/Slack.",
+    "summary": "Récupérer un canal dans une intégration Slack"
+  },
+  "UpdateSlackIntegrationChannel": {
+    "description": "Mettez à jour un canal utilisé dans votre intégration Datadog/Slack.",
+    "summary": "Mettre à jour un canal dans une intégration Slack",
+    "request_description": "Charge utile décrivant les champs et valeurs à mettre à jour.",
+    "request_schema_description": "La configuration du canal Slack."
+  },
+  "CreateWebhooksIntegrationCustomVariable": {
+    "description": "Crée un endpoint avec le nom `<NOM_VARIABLE_PERSONNALISÉE>`.",
+    "summary": "Créer une variable personnalisée",
+    "request_description": "Corps de requête pour la définition d'une variable personnalisée.",
+    "request_schema_description": "Variable personnalisée pour l'intégration Webhooks."
+  },
+  "DeleteWebhooksIntegrationCustomVariable": {
+    "description": "Supprime l'endpoint `<NOM_VARIABLE_PERSONNALISÉE>`.",
+    "summary": "Supprimer une variable personnalisée"
+  },
+  "GetWebhooksIntegrationCustomVariable": {
+    "description": "Affiche le contenu de la variable personnalisée `<NOM_VARIABLE_PERSONNALISÉE>`. Si la variable personnalisée est secrète, renvoie `null` pour `<NOM_VARIABLE_PERSONNALISÉE>` dans la charge utile de la réponse.",
+    "summary": "Récupérer une variable personnalisée"
+  },
+  "UpdateWebhooksIntegrationCustomVariable": {
+    "description": "Met à jour l'endpoint `<CUSTOM_VARIABLE_NAME>`.",
+    "summary": "Mettre à jour une variable personnalisée",
+    "request_description": "Corps de requête pour la mise à jour d'une variable personnalisée existante.",
+    "request_schema_description": "Requête de mise à jour d'un objet de variable personnalisée. *Toutes les propriétés sont facultatives.*"
+  },
+  "CreateWebhooksIntegration": {
+    "description": "Crée un endpoint `<NOM_WEBHOOK>`.",
+    "summary": "Créer une intégration Webhooks",
+    "request_description": "Corps de requête pour la création d'une intégration Webhooks.",
+    "request_schema_description": "Intégration Datadog/Webhooks."
+  },
+  "DeleteWebhooksIntegration": {
+    "description": "Supprime l'endpoint `<NOM_WEBHOOK>`.",
+    "summary": "Supprimer un webhook"
+  },
+  "GetWebhooksIntegration": {
+    "description": "Récupère le contenu du Webhook `<NOM_WEBHOOK>`.",
+    "summary": "Récupérer une intégration Webhook"
+  },
+  "UpdateWebhooksIntegration": {
+    "description": "Met à jour l'endpoint `<NOM_WEBHOOK>`.",
+    "summary": "Mettre à jour un webhook",
+    "request_description": "Mettez à jour une intégration Datadog/Webhooks existante.",
+    "request_schema_description": "Requête de mise à jour d'un objet d'intégration Webhooks. *Toutes les propriétés sont facultatives.*"
+  },
+  "ListLogs": {
+    "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs. [Les résultats sont paginés][1].\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que l'API Log List. Consultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Récupérer une liste de logs",
+    "request_description": "Filtre de logs",
+    "request_schema_description": "Objet à envoyer avec la requête pour récupérer une liste de logs de votre organisation."
+  },
+  "GetLogsIndexOrder": {
+    "description": "Récupérez la séquence actuelle de vos index de logs. Cet endpoint ne prend aucun argument JSON.",
+    "summary": "Récupérer la séquence des index"
+  },
+  "UpdateLogsIndexOrder": {
+    "description": "Cet endpoint met à jour la séquence des index de votre organisation. Il renvoie l'objet de séquence des index passé dans le corps de la requête lorsque celle-ci est réussie.",
+    "summary": "Mettre à jour la séquence des index",
+    "request_description": "Objet contenant la nouvelle liste triée des noms d'index",
+    "request_schema_description": "Objet contenant la liste triée des noms d'index de log."
+  },
+  "ListLogIndexes": {
+    "description": "L'objet Index décrit la configuration d'un index de log. Cet endpoint renvoie un tableau des objets `LogIndex` de votre organisation.",
+    "summary": "Récupérer tous les index"
+  },
+  "GetLogsIndex": {
+    "description": "Récupérez un index de log de votre organisation. Cet endpoint ne prend aucun argument JSON.",
+    "summary": "Récupérer un index"
+  },
+  "UpdateLogsIndex": {
+    "description": "Mettez à jour un index identifié par son nom. Renvoie l'objet Index passé dans le corps de la requête lorsque celle-ci est réussie. La méthode `PUT` permet de mettre à jour la configuration de votre index en **remplaçant** votre configuration actuelle par la nouvelle, envoyée à votre organisation Datadog.",
+    "summary": "Mettre à jour un index",
+    "request_description": "Objet contenant le nouveau `LogsIndexUpdateRequest`.",
+    "request_schema_description": "Objet permettant de mettre à jour un index de log Datadog."
+  },
+  "GetLogsPipelineOrder": {
+    "description": "Récupérez la séquence actuelle de vos pipelines. Cet endpoint ne prend aucun argument JSON.",
+    "summary": "Récupérer la séquence des pipelines"
+  },
+  "UpdateLogsPipelineOrder": {
+    "description": "Mettez à jour la séquence de vos pipelines. Les logs étant traités de manière séquentielle, la réorganisation d'un pipeline peut changer la structure et le contenu des données traitées par les autres pipelines et leurs processeurs.\n\n**Remarque** : la méthode `PUT` permet de mettre à jour la séquence des pipelines en remplaçant votre séquence actuelle par la nouvelle, envoyée à votre organisation Datadog.",
+    "summary": "Mettre à jour la séquence des pipelines",
+    "request_description": "Objet contenant la nouvelle liste triée des ID de pipeline.",
+    "request_schema_description": "Objet contenant la liste triée des ID de pipeline."
+  },
+  "ListLogsPipelines": {
+    "description": "Récupérez tous les pipelines de votre organisation. Cet endpoint ne prend aucun argument JSON.",
+    "summary": "Récupérer tous les pipelines"
+  },
+  "CreateLogsPipeline": {
+    "description": "Créez un pipeline dans votre organisation.",
+    "summary": "Créer un pipeline",
+    "request_description": "Définition du nouveau pipeline.",
+    "request_schema_description": "Les pipelines et les processeurs fonctionnent sur les logs entrants : ils effectuent le parsing de ces logs et les transforment en attributs structurés pour faciliter les requêtes.\n\n**Remarque** : ces endpoints sont uniquement disponibles pour les utilisateurs admin.\nVeillez à utiliser une clé d'application créée par un admin."
+  },
+  "DeleteLogsPipeline": {
+    "description": "Supprimez un pipeline donné de votre organisation. Cet endpoint ne prend aucun argument JSON.",
+    "summary": "Supprimer un pipeline"
+  },
+  "GetLogsPipeline": {
+    "description": "Récupérez un pipeline spécifique de votre organisation. Cet endpoint ne prend aucun argument JSON.",
+    "summary": "Récupérer un pipeline"
+  },
+  "UpdateLogsPipeline": {
+    "description": "Mettez à jour une configuration de pipeline donnée pour modifier ses processeurs ou sa séquence.\n\n**Remarque** : cette méthode permet de mettre à jour la configuration de votre pipeline en **remplaçant** votre configuration actuelle par la nouvelle, envoyée à votre organisation Datadog.",
+    "summary": "Mettre à jour un pipeline",
+    "request_description": "Nouvelle définition du pipeline.",
+    "request_schema_description": "Les pipelines et les processeurs fonctionnent sur les logs entrants : ils effectuent le parsing de ces logs et les transforment en attributs structurés pour faciliter les requêtes.\n\n**Remarque** : ces endpoints sont uniquement disponibles pour les utilisateurs admin.\nVeillez à utiliser une clé d'application créée par un admin."
+  },
+  "ListActiveMetrics": {
+    "description": "Récupérez la liste des métriques transmises entre une date précise et maintenant.",
+    "summary": "Récupérer la liste des métriques actives"
+  },
+  "GetMetricMetadata": {
+    "description": "Récupérez les métadonnées d'une métrique spécifique.",
+    "summary": "Récupérer les métadonnées d'une métrique"
+  },
+  "UpdateMetricMetadata": {
+    "description": "Modifiez les métadonnées d'une métrique spécifique. En savoir plus sur les [différents types pris en charge](https://docs.datadoghq.com/developers/metrics).",
+    "summary": "Modifier les métadonnées d'une métrique",
+    "request_description": "Nouvelles métadonnées.",
+    "request_schema_description": "Objet avec toutes les métadonnées associées à la métrique."
+  },
+  "ListMonitors": {
+    "description": "Récupérez les détails du monitor de votre organisation spécifié.",
+    "summary": "Récupérer tous les détails d'un monitor"
+  },
+  "CreateMonitor": {
+    "description": "Créez un monitor à l'aide des options spécifiées.\n\n#### Types de monitors\n\nVoici les types de monitor qui peuvent être sélectionnés :\n\n- Monitor d'anomalies : `query alert`\n- Monitor d'APM : `query alert` ou `trace-analytics alert`\n- Monitor composite : `composite`\n- Monitor personnalisé : `service check`\n- Monitor d'événement : `event alert`\n- Monitor de prévision : `query alert`\n- Monitor de host : `service check`\n- Monitor d'intégration : `query alert` ou `service check`\n- Monitor de live process : `process alert`\n- Log Monitor : `log alert`\n- Monitor de métrique : `metric alert`\n- Monitor réseau : `service check`\n- Monitor outlier : `query alert`\n- Monitor de processus : `service check`\n- Monitor RUM : `rum alert`\n- Monitor Watchdog : `event alert`\n\n#### Types de requête\n\n**Requête d'alerte de métrique**\n\nExemple : `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr` : avg, sum, max, min, change, ou pct_change\n- `time_window` : `last_#m` (où `#` doit être remplacé par 5, 10, 15 ou 30), `last_#h` (où `#` doit être remplacé par 1, 2 ou 4) ou `last_1d`.\n- `space_aggr` : avg, sum, min ou max.\n- `tags`  : un ou plusieurs tags (séparés par des virgules) ou *\n- `key` : la 'key' de la syntaxe de tags key:value. Définit une alerte distincte pour chaque tag du groupe (alertes multiples).\n- `operator` : <, <=, >, >=, == ou !=\n- `#` : un nombre entier ou un chiffre décimal utilisé pour définir le seuil.\n\nSi vous utilisez l'agrégateur temporel `_change_` ou `_pct_change_`, utilisez plutôt `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` avec :\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [En savoir plus](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)\n- `time_window` last\\_#m (1, 5, 10, 15 ou 30), last\\_#h (1, 2 ou 4) ou last_#d (1 ou 2)\n- `timeshift` #m_ago (5, 10, 15 ou 30), #h_ago (1, 2 ou 4), ou 1d_ago.\n\nUtilisez ce paramètre pour créer un monitor outlier à l'aide de la requête suivante :\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**Requête de check de service**\n\nExemple : `\"check\".over(tags).last(count).count_by_status()`\n\n- **`check`** : nom du check, par exemple `datadog.agent.up`\n- **`tags`** : un ou plusieurs tags entre guillemets (séparés par des virgules) ou « * ». Exemple : `.over(\"env:prod\", \"role:db\")`\n- **`count`** : doit être >= à votre seuil maximum (défini dans `options`). Par exemple, si vous souhaitez recevoir une notification à partir de 1 statut Critical, 3 statuts Ok et 2 statuts Warning, « count » doit prendre pour valeur 3. La valeur maximale est de 100.\n\n**Requête d'alerte d'événement**\n\nExemple : `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`** : la chaîne de requête de l'événement.\n- **`string_query`* : requête en texte libre à comparer au titre et au texte de l'événement.\n- **`sources`** : sources des événements (séparées par des virgules).\n- **`status`** : statuts des événements (séparés par des virgules). Valeurs autorisées : error, warn et info.\n- **`priority`** : priorités des événements (séparées par des virgules). Valeurs autorisées : low, normal ou all.\n- **`host`** : hosts transmettant des événements (séparés par des virgules).\n- **`tags`** : tags d'événement (séparés par des virgules).\n- **`excluded_tags`** : tags d'événement exclus (séparés par des virgules).\n- **`rollup`** : la méthode de cumulation des statistiques. `count` est actuellement la seule méthode prise en charge.\n- **`last`** : l'intervalle sur lequel les totaux doivent être cumulés. Exemples : 60s, 4h. Unités de temps prises en charge : s, m, h et j. Cette valeur ne doit pas dépasser 48 heures.\n\n**Requête d'alerte de processus**\n\nExemple : `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** : recherche en texte libre pour interroger les processus. Les processus renvoyés correspondent aux résultats de la page [Live Processes] (https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows).\n- **`tags`** : un ou plusieurs tags (séparés par des virgules)\n- **`timeframe`** : l'intervalle sur lequel les totaux doivent être cumulés. Exemples : 60s, 4h. Unités de temps prises en charge : s, m, h et j.\n- **`operator`** <, <=, >, >=, == ou !=\n- **`#`** : un nombre entier ou un chiffre décimal utilisé pour définir le seuil.\n\n**Requête d'alerte de logs**\n\nExemple : `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** : requête de recherche respectant la [syntaxe de recherche de log].(https://docs.datadoghq.com/logs/search_syntax/).\n- **`index_name`** : pour les organisations avec plusieurs index, l'index de log sur lequel la requête porte.\n- **`rollup_method`** : la méthode de cumulation des statistiques ; prend en charge `count`, `avg` et `cardinality`.\n- **`measure`** Pour `avg` et `cardinality`, indiquez la mesure ou le nom de la facette que vous souhaitez utiliser.\n- **`time_window`** #m (5, 10, 15 ou 30), #h (1, 2 ou 4, 24)\n- **`operator`** `<`, `<=`, `>`, `>=`, `==` ou `!=`.\n- **`#`** : un nombre entier ou un chiffre décimal utilisé pour définir le seuil.\n\n** Requête de monitor composite**\n\nExemple : `12345 && 67890`, où `12345` et `67890` sont les identifiants de monitors non composites.\n\n* **`name`** [*obligatoire*, *valeur par défaut* = **dynamique en fonction de la requête**] : le nom de l'alerte.\n* **`message`** [*obligatoire*, *valeur par défaut* = **dynamique en fonction de la requête**] : un message à inclure avec les notifications pour ce monitor.\nDes e-mails de notification peuvent être envoyés à des utilisateurs spécifiques en utilisant la même notation « @nomutilisateur » que pour les événements.\n* **`tags`** [*facultatif*, *valeur par défaut* = **liste vide**] : la liste des tags à associer à votre monitor. Lorsque vous récupérez tous les détails des monitors via l'API, utilisez l'argument `monitor_tags` pour filtrer les résultats en fonction de ces tags. Ces valeurs ne peuvent être utilisées qu'avec l'API et ne sont ni visibles ni modifiables dans l'interface Datadog.",
+    "summary": "Créer un monitor",
+    "request_description": "Corps de requête pour la création d'un monitor.",
+    "request_schema_description": "Objet décrivant un monitor."
+  },
+  "CheckCanDeleteMonitor": {
+    "description": "Vérifiez si un monitor donné peut être supprimé.",
+    "summary": "Vérifier si un monitor peut être supprimé"
+  },
+  "SearchMonitorGroups": {
+    "description": "Recherchez et filtrez vos groupes de monitors.",
+    "summary": "Rechercher des groupes de monitors"
+  },
+  "SearchMonitors": {
+    "description": "Recherchez et filtrez vos monitors.",
+    "summary": "Rechercher des monitors"
+  },
+  "ValidateMonitor": {
+    "description": "Validez le monitor spécifié dans la requête.",
+    "summary": "Valider un monitor",
+    "request_description": "Objet de requête de monitor",
+    "request_schema_description": "Objet décrivant un monitor."
+  },
+  "DeleteMonitor": {
+    "description": "Supprimer le monitor spécifié",
+    "summary": "Supprimer un monitor"
+  },
+  "GetMonitor": {
+    "description": "Récupérez les détails du monitor de votre organisation spécifié.",
+    "summary": "Récupérer les détails d'un monitor"
+  },
+  "UpdateMonitor": {
+    "description": "Modifiez le monitor spécifié.",
+    "summary": "Modifier un monitor",
+    "request_description": "Corps de requête pour la modification d'un monitor.",
+    "request_schema_description": "Objet décrivant une requête de mise à jour de monitor."
+  },
+  "MuteMonitor": {
+    "description": "Désactivez le monitor spécifié.",
+    "summary": "Désactiver un monitor"
+  },
+  "UnmuteMonitor": {
+    "description": "Réactivez le monitor spécifié.",
+    "summary": "Réactiver un monitor"
+  },
+  "GetMonthlyCustomReports": {
+    "description": "Récupérez des rapports personnalisés mensuels.",
+    "summary": "Récupérer la liste des rapports personnalisés mensuels disponibles"
+  },
+  "GetSpecifiedMonthlyCustomReports": {
+    "description": "Récupérez les rapports personnalisés mensuels spécifiés.",
+    "summary": "Récupérer les rapports personnalisés mensuels spécifiés"
+  },
+  "ListOrgs": {
+    "description": "Énumérez les organisations que vous gérez.",
+    "summary": "Énumérer les organisations que vous gérez"
+  },
+  "CreateChildOrg": {
+    "description": "Créez une organisation enfant. Cet endpoint requiert la fonctionnalité [Compte multi-org] (https://docs.datadoghq.com/account_management/multi_organization/) et doit être activé en [contactant l'assistance](https://docs.datadoghq.com/help/). Une fois votre organisation enfant créée, vous pouvez interagir avec celle-ci en utilisant les valeurs `org.public_id`, `pi_key.key` et `application_key.hash` fournies dans la réponse.",
+    "summary": "Créer une organisation enfant",
+    "request_description": "Objet de l'organisation qui doit être créé",
+    "request_schema_description": "Objet décrivant une organisation à créer."
+  },
+  "GetOrg": {
+    "description": "Récupérez les informations sur une organisation.",
+    "summary": "Récupérer les informations sur une organisation"
+  },
+  "UpdateOrg": {
+    "description": "Mettez à jour votre organisation.",
+    "summary": "Mettre à jour votre organisation",
+    "request_schema_description": "Créez, modifiez et gérez vos organisations."
+  },
+  "UploadIdPForOrg": {
+    "description": "Il existe plusieurs façons de mettre à jour les métadonnées de fournisseur d'identité (IdP) à partir de votre IdP SAML.\n\n**Multipart Form-Data** : envoyer le fichier de métadonnées IdP via un form post.\n\n**XML Body :** envoyer le fichier de métadonnées IdP en tant que corps de la requête.",
+    "summary": "Importer les métadonnées IdP"},
+  "QueryMetrics": {
+    "description": "Interrogez les points de séries temporelles.",
+    "summary": "Interroger les points de séries temporelles"
+  },
+  "ListMetrics": {
+    "description": "Recherchez des métriques parmi celles recueillies au cours des dernières 24 heures dans Datadog.",
+    "summary": "Rechercher des métriques"
+  },
+  "SubmitMetrics": {
+    "description": "L'endpoint de métrique vous permet d'envoyer des données de séries temporelles afin de les représenter graphiquement sur les dashboards de Datadog. La limite de taille des charges utiles compressées est de 3,2 mégaoctets (3 200 000), tandis que celle des charges utiles non compressées est de 62 mégaoctets (62 914 560).\n\nSi vous envoyez directement des métriques à l'API Datadog sans passer par DogStatsD, attendez-vous à :\n\n- 64 bits pour le timestamp\n- 64 bits pour la valeur\n- 20 octets pour les noms de métriques\n- 50 octets pour les séries temporelles\n- La charge utile totale pèse environ 100 octets. Cependant, avec l'API DogStatsD, cette charge est compressée afin de réduire son poids.",
+    "summary": "Envoyer des métriques",
+    "request_schema_description": "La charge utile des métriques."
+  },
+  "ListServiceDependencies": {
+    "description": " Récupérez la liste des services APM et de leurs dépendances. Les services renvoyés sont filtrés en fonction de leur environnement et d'un tag primaire, si un tel tag est défini.",
+    "summary": "Récupérer toutes les dépendances de services APM"
+  },
+  "ListSingleServiceDependencies": {
+    "description": " Récupérez les services situés directement en amont et en aval d'un service spécifique. Les services récupérés sont filtrés en fonction de leur environnement et d'un tag primaire, si un tel tag est défini.",
+    "summary": "Récupérer les dépendances d'un service APM"
+  },
+  "ListSLOs": {
+    "description": "Récupérez plusieurs objets de service level objective grâce à leurs ID.",
+    "summary": "Rechercher des SLO"
+  },
+  "CreateSLO": {
+    "description": "Créez un objet de service level objective.",
+    "summary": "Créer un objet SLO",
+    "request_description": "Objet de requête de service level objective.",
+    "request_schema_description": "Un objet de service level objective comprend un Service Level Indicator, des seuils pour un ou plusieurs intervalles et des métadonnées (`name`, `description`, `tags`, etc.)."
+  },
+  "DeleteSLOTimeframeInBulk": {
+    "description": "Supprimez (totalement ou partiellement) plusieurs objets de service level objective. Cet endpoint facilite la suppression d'un ou plusieurs seuils pour un ou plusieurs objets de service level objective. Si tous les seuils sont supprimés, l'objet de service level objective est également supprimé.",
+    "summary": "Supprimer plusieurs intervalles de SLO",
+    "request_description": "Corps de requête pour la suppression de plusieurs objets de service level objective.",
+    "request_schema_description": "Une carte des mappages entre les ID d'objet de service level objective et les intervalles de temps sous forme de tableau, qui indiquent les seuils à supprimer pour chaque ID."
+  },
+  "CheckCanDeleteSLO": {
+    "description": "Vérifiez si des SLO peuvent être supprimés. Par exemple, assurez-vous qu'un SLO peut être supprimé sans perturber un dashboard.",
+    "summary": "Vérifier si des SLO peuvent être supprimés"
+  },
+  "DeleteSLO": {
+    "description": "Supprimez définitivement l'objet de service level objective spécifié.\n\nSi un SLO est utilisé dans un dashboard, l'endpoint `DELETE /v1/slo/` renvoie une erreur 409 conflict parce que le SLO est intégré à un dashboard.",
+    "summary": "Supprimer un SLO"
+  },
+  "GetSLO": {
+    "description": "Récupérez un objet de service level objective.",
+    "summary": "Récupérer les détails d'un SLO"
+  },
+  "UpdateSLO": {
+    "description": "Mettez à jour l'objet de service level objective spécifié.",
+    "summary": "Mettre à jour un SLO",
+    "request_description": "L'objet de requête de service level objective modifié.",
+    "request_schema_description": "Un objet de service level objective comprend un Service Level Indicator, des seuils pour un ou plusieurs intervalles et des métadonnées (`name`, `description`, `tags`, etc.)."
+  },
+  "GetSLOHistory": {
+    "description": "Récupérez l'historique d'un SLO spécifique, quel que soit son type.\n\nLes données détaillées de l'historique sont structurées en fonction du type de données sources. Par exemple, les données de métrique sont incluses pour les SLO basés sur des événements qui utilisent les métriques comme source, tandis que l'historique de transition des monitors est inclus pour les SLO basés sur des monitors.\n\n**Remarque :** le format de la réponse est différend en fonction du type de SLO (basé sur des événements ou basé sur le temps). Des exemples pour chaque type sont présentés.",
+    "summary": "Récupérer l'historique d'un SLO"
+  },
+  "ListLocations": {
+    "description": "Récupérez la liste des emplacements publics et privés disponibles pour les tests Synthetic. Aucun argument n'est nécessaire.",
+    "summary": "Récupérer tous les emplacements (publics et privés)"
+  },
+  "CreatePrivateLocation": {
+    "description": "Créez un emplacement privé Synthetic.",
+    "summary": "Créer un emplacement privé",
+    "request_description": "Détails de l'emplacement privé à créer.",
+    "request_schema_description": "Objet contenant des informations sur l'emplacement privé à créer."
+  },
+  "DeletePrivateLocation": {
+    "description": "Supprimez un emplacement privé Synthetic.",
+    "summary": "Supprimer un emplacement privé"
+  },
+  "GetPrivateLocation": {
+    "description": "Récupérez un emplacement privé Synthetic.",
+    "summary": "Récupérer un emplacement privé"
+  },
+  "UpdatePrivateLocation": {
+    "description": "Modifiez un emplacement privé Synthetic.",
+    "summary": "Modifier un emplacement privé",
+    "request_description": "Détails de l'emplacement privé à modifier.",
+    "request_schema_description": "Objet contenant des informations concernant l'emplacement privé à créer."
+  },
+  "ListTests": {
+    "description": "Récupérez la liste de tous les tests Synthetic.",
+    "summary": "Récupérer la liste de tous les tests"
+  },
+  "CreateTest": {
+    "description": "Créez un test Synthetic.",
+    "summary": "Créer un test",
+    "request_description": "Détails du test à créer.",
+    "request_schema_description": "Objet contenant les détails de votre test Synthetic."
+  },
+  "GetBrowserTest": {
+    "description": "Récupérez la configuration détaillée (y compris les étapes) associée à un test Browser Synthetic.",
+    "summary": "Récupérer une configuration de test (Browser)"
+  },
+  "GetBrowserTestLatestResults": {
+    "description": "Récupérez les résumés des 50 derniers résultats d'un test Browser Synthetic donné.",
+    "summary": "Récupérer les résumés des derniers résultats de test (Browser)"
+  },
+  "GetBrowserTestResult": {
+    "description": "Récupérez un résultat complet spécifique pour un test Synthetic (Browser) donné.",
+    "summary": "Récupérer un résultat de test (Browser)"
+  },
+  "DeleteTests": {
+    "description": "Supprimez plusieurs tests Synthetic à l'aide de leurs ID.",
+    "summary": "Supprimer des tests",
+    "request_description": "Liste des ID publics des tests Synthetic à supprimer.",
+    "request_schema_description": "Liste JSON des ID des tests Synthetic que vous souhaitez supprimer."
+  },
+  "TriggerCITests": {
+    "description": "Déclenchez une série de tests Synthetic pour une intégration continue.",
+    "summary": "Déclencher des tests Synthetic spécifiques pour l'intégration continue",
+    "request_description": "Détails du test à déclencher.",
+    "request_schema_description": "Objet décrivant les tests Synthetic à déclencher."
+  },
+  "GetTest": {
+    "description": "Récupérez la configuration détaillée associée à un test Synthetic.",
+    "summary": "Récupérer une configuration de test (API)"
+  },
+  "UpdateTest": {
+    "description": "Modifiez la configuration d'un test Synthetic.",
+    "summary": "Modifier un test",
+    "request_description": "Nouveaux détails du test à enregistrer.",
+    "request_schema_description": "Objet contenant les détails de votre test Synthetic."
+  },
+  "GetAPITestLatestResults": {
+    "description": "Récupérez les résumés des 50 derniers résultats d'un test API Synthetic donné.",
+    "summary": "Récupérer les résumés des derniers résultats de test (API)"
+  },
+  "GetAPITestResult": {
+    "description": "Récupérez un résultat complet spécifique pour un test Synthetic (API) donné.",
+    "summary": "Récupérer un résultat de test (API)"
+  },
+  "UpdateTestPauseStatus": {
+    "description": "Interrompez ou démarrez un test Synthetic en modifiant son statut.",
+    "summary": "Interrompre ou démarrer un test",
+    "request_description": "Statut sur lequel le test Synthetic donné doit être défini.",
+    "request_schema_description": "Objet pour démarrer ou interrompre un test Synthetic existant."
+  },
+  "CreateGlobalVariable": {
+    "description": "Créez une variable globale Synthetic.",
+    "summary": "Créer une variable globale",
+    "request_description": "Détails de la variable globale à créer.",
+    "request_schema_description": "Variable globale Synthetic."
+  },
+  "DeleteGlobalVariable": {
+    "description": "Supprimez une variable globale Synthetic.",
+    "summary": "Supprimer une variable globale"
+  },
+  "GetGlobalVariable": {
+    "description": "Récupérez la configuration détaillée d'une variable globale.",
+    "summary": "Récupérer une variable globale"
+  },
+  "EditGlobalVariable": {
+    "description": "Modifiez une variable globale Synthetic.",
+    "summary": "Modifier une variable globale",
+    "request_description": "Détails de la variable globale à mettre à jour.",
+    "request_schema_description": "Variable globale Synthetic."
+  },
+  "ListHostTags": {
+    "description": "Renvoie un mappage des tags et hosts pour l'ensemble de votre infrastructure.",
+    "summary": "Récupérer des tags"
+  },
+  "DeleteHostTags": {
+    "description": "Cet endpoint vous permet de supprimer tous les tags assignés par des utilisateurs pour un host unique.",
+    "summary": "Supprimer les tags d'un host"
+  },
+  "GetHostTags": {
+    "description": "Renvoie la liste des tags qui s'appliquent à un host donné.",
+    "summary": "Récupérer les tags d'un host"
+  },
+  "CreateHostTags": {
+    "description": "Cet endpoint vous permet d'ajouter de nouveaux tags à un host. Vous pouvez également spécifier d'où proviennent ces tags si vous le souhaitez.",
+    "summary": "Ajouter des tags à un host",
+    "request_description": "Corps de requête pour la mise à jour des tags de host.",
+    "request_schema_description": "Ensemble de tags à associer à votre host."
+  },
+  "UpdateHostTags": {
+    "description": "Cet endpoint vous permet de mettre à jour/remplacer tous les tags d'une source d'intégration par les tags spécifiés dans la requête.",
+    "summary": "Mettre à jour les tags d'un host",
+    "request_description": "Ajouter des tags à un host",
+    "request_schema_description": "Ensemble de tags à associer à votre host."
+  },
+  "GetUsageAnalyzedLogs": {
+    "description": "Récupérez l'utilisation horaire pour les logs analysés (Security Monitoring).",
+    "summary": "Récupérer l'utilisation horaire pour les logs analysés"
+  },
+  "GetUsageAttribution": {
+    "description": "Récupérez l'attribution de l'utilisation.",
+    "summary": "Récupérer l'attribution de l'utilisation"
+  },
+  "GetUsageLambda": {
+    "description": "Récupérez l'utilisation horaire pour Lambda.",
+    "summary": "Récupérer l'utilisation horaire pour Lambda"
+  },
+  "GetUsageBillableSummary": {
+    "description": "Récupérez l'utilisation facturable de votre compte multi-org.",
+    "summary": "Récupérer l'utilisation facturable de votre compte multi-org"
+  },
+  "GetUsageFargate": {
+    "description": "Récupérez l'utilisation horaire pour [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).",
+    "summary": "Récupérer l'utilisation horaire pour Fargate"
+  },
+  "GetUsageHosts": {
+    "description": "Récupérez l'utilisation horaire pour les hosts et les conteneurs.",
+    "summary": "Récupérer l'utilisation horaire pour les hosts et conteneurs"
+  },
+  "GetIncidentManagement": {
+    "description": "Récupérez l'utilisation horaire pour la gestion des incidents.",
+    "summary": "Récupérer l'utilisation horaire pour la gestion des incidents"
+  },
+  "GetUsageIndexedSpans": {
+    "description": "Récupérez l'utilisation horaire pour les spans indexées.",
+    "summary": "Récupérer l'utilisation horaire pour les spans indexées"
+  },
+  "GetIngestedSpans": {
+    "description": "Récupérez l'utilisation horaire pour les spans ingérées.",
+    "summary": "Récupérer l'utilisation horaire pour les spans ingérées"
+  },
+  "GetUsageLogs": {
+    "description": "Récupérez l'utilisation horaire pour les logs.",
+    "summary": "Récupérer l'utilisation horaire pour les logs"
+  },
+  "GetUsageLogsByIndex": {
+    "description": "Récupérez l'utilisation horaire pour les logs par index.",
+    "summary": "Récupérer l'utilisation horaire pour les logs par index"
+  },
+  "GetUsageNetworkFlows": {
+    "description": "Récupérez l'utilisation horaire pour les flux réseau.",
+    "summary": "Récupérer l'utilisation horaire pour les flux réseau"
+  },
+  "GetUsageNetworkHosts": {
+    "description": "Récupérez l'utilisation horaire pour les hosts réseau.",
+    "summary": "Récupérer l'utilisation horaire pour les hosts réseau"
+  },
+  "GetUsageProfiling": {
+    "description": "Récupérez l'utilisation horaire pour les hosts profilés.",
+    "summary": "Récupérer l'utilisation horaire pour les hosts profilés"
+  },
+  "GetUsageRumSessions": {
+    "description": "Récupérez l'utilisation horaire pour les sessions [RUM](https://docs.datadoghq.com/real_user_monitoring/).",
+    "summary": "Récupérer l'utilisation horaire pour les sessions RUM"
+  },
+  "GetUsageSNMP": {
+    "description": "Récupérez l'utilisation horaire pour les périphériques SNMP.",
+    "summary": "Récupérer l'utilisation horaire pour les périphériques SNMP"
+  },
+  "GetUsageSummary": {
+    "description": "Récupérez l'utilisation de votre compte multi-org.",
+    "summary": "Récupérer l'utilisation de votre compte multi-org"
+  },
+  "GetUsageSynthetics": {
+    "description": "Récupérez l'utilisation horaire pour les [checks Synthetic](https://docs.datadoghq.com/synthetics/).",
+    "summary": "Récupérer l'utilisation horaire pour les checks Synthetic"
+  },
+  "GetUsageSyntheticsAPI": {
+    "description": "Récupérez l'utilisation horaire pour les [checks API Synthetic](https://docs.datadoghq.com/synthetics/).",
+    "summary": "Récupérer l'utilisation horaire pour les checks API Synthetic"
+  },
+  "GetUsageSyntheticsBrowser": {
+    "description": "Récupérez l'utilisation horaire pour les checks Browser Synthetic.",
+    "summary": "Récupérer l'utilisation horaire pour les checks Browser Synthetic"
+  },
+  "GetUsageTimeseries": {
+    "description": "Récupérez l'utilisation horaire pour les [métriques custom] (https://docs.datadoghq.com/developers/metrics/custom_metrics/).",
+    "summary": "Récupérer l'utilisation horaire pour les métriques custom"
+  },
+  "GetUsageTopAvgMetrics": {
+    "description": "Récupérez les principales [métriques custom](https://docs.datadoghq.com/developers/metrics/custom_metrics/) selon la moyenne horaire.",
+    "summary": "Récupérer les principales métriques custom selon la moyenne horaire"
+  },
+  "GetUsageTrace": {
+    "description": "Récupérez l'utilisation horaire pour la recherche de traces.\n\n**Remarque** : cet endpoint a été renommé `/api/v1/usage/indexed-spans`.",
+    "summary": "Récupérer l'utilisation horaire pour la recherche de traces"
+  },
+  "GetTracingWithoutLimits": {
+    "description": "Récupérez l'utilisation horaire pour le Tracing without Limits.\n\n**Remarque** : cet endpoint a été renommé `/api/v1/usage/ingested-spans`.",
+    "summary": "Récupérer l'utilisation horaire pour le Tracing without Limits"
+  },
+  "ListUsers": {
+    "description": "Énumérez tous les utilisateurs de votre organisation.",
+    "summary": "Énumérer tous les utilisateurs"
+  },
+  "CreateUser": {
+    "description": "Créez un utilisateur pour votre organisation.\n\n**Remarque** : une clé d'application appartenant à un administrateur est nécessaire pour créer un utilisateur avec le rôle admin.",
+    "summary": "Créer un utilisateur",
+    "request_description": "Objet de l'utilisateur qui doit être créé.",
+    "request_schema_description": "Créez, modifiez et désactivez des utilisateurs."
+  },
+  "DisableUser": {
+    "description": "Supprimez un utilisateur d'une organisation.\n\n**Remarque** : une clé d'application appartenant à un administrateur est nécessaire pour utiliser cet endpoint.",
+    "summary": "Désactiver un utilisateur"
+  },
+  "GetUser": {
+    "description": "Récupérez les détails d'un utilisateur.",
+    "summary": "Récupérer les détails d'un utilisateur"
+  },
+  "UpdateUser": {
+    "description": "Mettez à jour les informations d'un utilisateur.\n\n**Remarque** : une clé d'application appartenant à un administrateur est nécessaire pour utiliser cet endpoint.",
+    "summary": "Mettre à jour un utilisateur",
+    "request_description": "Description de la mise à jour.",
+    "request_schema_description": "Créez, modifiez et désactivez des utilisateurs."
+  },
+  "Validate": {
+    "description": "Vérifiez si la clé d'API (et non la clé d'application) est valide. Si elle n'est pas valide, un message d’erreur 403 est renvoyé.",
+    "summary": "Valider la clé d'API"
+  },
+  "ResolveMonitor": {
+    "description": "Résolvez un monitor.",
+    "summary": "Résoudre un monitor",
+    "request_description": "Tableau des groupes à résoudre pour un ID de monitor donné, p. ex. : `{\"id_monitor\": \"groupe_à_résoudre\"}`.\nIl est possible de spécifier plusieurs groupes par monitor, p. ex. : `resolve: [{\"id_monitor\": \"groupe_1\"}, {\"id_monitor\": \"groupe_2\"}]`.\nIl est également possible de résoudre tous les groupes déclenchés à l'aide du pseudo-groupe `ALL_GROUPS` :`resolve: [{\"id_monitor\": \"ALL_GROUPS\"}]`."},
+  "SubmitTraces": {
+    "description": "L'APM de Datadog vous permet de recueillir des métriques de performance en traçant votre code pour identifier les éléments lents ou inefficaces de votre application.\n\nLes données de tracing sont envoyées à l'Agent Datadog via une API HTTP. Nous proposons plusieurs [bibliothèques officielles](https://docs.datadoghq.com/tracing/#instrumenter-votre-application) afin de simplifier l'envoi de métriques à l'Agent Datadog. Toutefois, vous pouvez interagir directement avec l'API pour instrumenter les applications qui ne peuvent pas utiliser les bibliothèques ou qui sont écrites dans des langages qui ne possèdent pas encore de bibliothèque de tracing officielle.",
+    "summary": "Envoyer des traces",
+    "request_description": "Les traces peuvent être envoyées sous forme de tableau de traces :\n\n [ trace1, trace2, trace3 ]\n\noù chaque trace est un tableau de spans : \n\n trace1 = [ span, span2, span3 ]\n\net où chaque span est un dictionnaire avec un `trace_id`, `span_id`, `resource`, etc.\n\n[En savoir plus sur la terminologie de l'APM et du tracing distribué](https://docs.datadoghq.com/tracing/visualization/services_list)\n\n**Remarque :** chaque span dans une trace doit utiliser le même `trace_id`. Cependant, `trace_id` et `span_id` doivent avoir des valeurs différentes.",
+    "request_schema_description": "Un tableau de traces."
+  },
+  "SubmitLog": {
+    "description": "Envoyez vos logs à votre plateforme Datadog par HTTP. Les limites par requête HTTP sont les suivantes :\n\n- Taille maximale du contenu par charge utile : 5 Mo\n- Taille maximale d'un log : 256 Ko\n- Taille maximale d'un tableau en cas d'envoi de plusieurs logs dans un tableau : 500 entrées\n\nTous les logs dépassant 256 Ko sont acceptés et tronqués par le serveur :\n- Pour une requête avec un seul log, l'API réduit le log de façon à ce qu'il fasse 256 Ko et renvoie un code 2xx.\n- Pour une requête avec un plusieurs logs, l'API traite tous les logs, réduit uniquement les logs dépassant 256 Ko et renvoie un code 2xx.\n\nNous vous conseillons d'envoyer des logs compressés. Ajoutez l'en-tête `Content-Encoding: gzip` à la requête lors de l'envoi de logs compressés.",
+    "summary": "Envoyer des logs",
+    "request_description": "Log à envoyer (format JSON).",
+    "request_schema_description": "Message de log structuré."
+  },
+  "MuteAllMonitors": {
+    "description": "Si vous désactivez tous les monitors, ceux-ci n'enverront plus de notifications par e-mail et n'enverront plus d'événements dans le [flux d'événements](https://docs.datadoghq.com/events). Vous devrez consulter la page d'alertes pour vérifier les changements de statut.",
+    "summary": "Désactiver tous les monitors"
+  },
+  "UnmuteAllMonitors": {
+    "description": "Annule la désactivation de tous les monitors. Renvoie une erreur si la fonction de désactivation de tous les monitors n'a pas été utilisée auparavant.",
+    "summary": "Réactiver tous les monitors"
+  }
+}

@@ -22,7 +22,9 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 
 - インデックス化されたログイベント
 - 収集されたログ
-- Indexed span
+- インデックス化されたスパン
+
+**注: Analyzed Span は、2020 年 10 月 20 日の Tracing Without Limits のローンチに伴い、Indexed Span と改名しました。**
 
 ### はじめに
 
@@ -54,6 +56,8 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 - 月次レポートはその月が終わるまで生成されません。月次レポートは、翌月の 2 日には閲覧できます。
 - レポートは 'Export Current View' オプションでダウンロードできます。この `.tsv` レポートには、使用数と使用率の両方が含まれるため、割り当てとチャージバックを簡単に行うことができます。
 
+月次データはツールのパブリック API を使いプルすることもできます ([API エンドポイントドキュメント][1]を参照してください。)
+
 ### 日次使用属性
 
 このセクションでは、日次レポートを時間の粒度で表示し時間枠を丁寧に調べます。また指定した月のすべてのレポートを連結することもできます。
@@ -63,7 +67,7 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 
 {{< img src="account_management/billing/advanced-usage-reporting-04.png" alt="データをダウンロード" >}}
 
-データはツールのパブリック API を使いプルすることもできます ([API エンドポイントドキュメント][1]を参照してください。)
+月次データはツールのパブリック API を使いプルすることもできます（[API エンドポイントドキュメント][2]を参照してください。)
 
 ### データの解釈
 
@@ -78,11 +82,12 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 - 値が`<empty>` というのは、リソースがそれぞれのタグでタグ付けされたものの、そこに値が無いことを意味します。
 - 値が無いというのは、リソースがその特定のタグにタグ付けされていないという意味です。
 - パイプ (|) 区切り値 (例、`service1 | service2`) は、特定のタグがリソースに複数回適用されたことを意味します。
-- 有効なタグの値 ([タグの定義に関するドキュメント]を参照[2]) は、それぞれのタグの実際の値を意味します。
+- 有効なタグの値 ([タグの定義に関するドキュメント]を参照[3]) は、それぞれのタグの実際の値を意味します。
 
 #### 詳細なデータ分析
 
 複数のタグを使用する場合、日次および月次使用属性レポートにはタグの全通りの組み合わデータが含まれるため、詳細なデータ分析タスクのベースデータセットとして使用することができます。たとえば、グループ化やピボットでタグのサブセットに注目したビューを表示したり、任意の日付範囲の中で集計を行うことができます。
 
-[1]: https://docs.datadoghq.com/ja/api/#get-daily-usage-attribution-available-files
-[2]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags
+[1]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-the-list-of-available-monthly-custom-reports
+[2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-the-list-of-available-daily-custom-reports
+[3]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags

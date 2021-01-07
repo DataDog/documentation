@@ -156,7 +156,7 @@ Datadog タイムラインへの Puppet 実行のレポートを有効にする�
 
 5. (オプション) レポートとファクトのタグ付けを有効にします。
 
-   Datadog にイベントとして送られたレポートにタグを追加することができます。これらのタグの源泉は、レポートが関連付けられている任意のノードについての Puppet ファクトです。必ず 1:1 の関係であるものとし、可読性を確保するために構造化ファクト (ハッシュ、配列など) を含むことは禁止されています。タグ付けを有効にするには、パラメーター `datadog_agent::reports::report_fact_tags` をファクトの配列値に設定します。たとえば、 `["virtual","trusted.extensions.pp_role","operatingsystem"]` は 3 つの個別のタグを各レポートイベントに追加する際の例です。
+   Datadog にイベントとして送られたレポートにタグを追加することができます。これらのタグの源泉は、レポートが関連付けられている任意のノードについての Puppet ファクトです。必ず 1:1 の関係であるものとし、可読性を確保するために構造化ファクト (ハッシュ、配列など) を含むことは禁止されています。通常のファクトのタグ付けを有効にするには、パラメーター `datadog_agent::reports::report_fact_tags` をファクトの配列値に設定します (例: `["virtual","operatingsystem"]`)。信頼できるファクトのタグ付けを有効にするには、パラメーター `datadog_agent::reports::report_trusted_fact_tags` をファクトの配列値に設定します (例: `["certname","extensions.pp_role","hostname"]`)。
 
    例: これらの設定を変更するには、pe-puppetserver (または puppetserver) を再起動してレポートのプロセッサを再読み込みする必要があります。サービスを再起動する前に、変更がデプロイされていることをご確認ください。
 
@@ -240,7 +240,7 @@ class { "datadog_agent":
 | `agent_version`                         | インストールする Agent の特定のマイナーバージョンを固定できます（例: `1:7.16.0-1`）。空のままにすると、最新バージョンがインストールされます。                                                             |
 | `collect_ec2_tags`                      | `true` を使用することで、インスタンスのカスタム EC2 タグを Agent タグとして収集します。                                                                                                                             |
 | `collect_instance_metadata`             | `true` を使用することで、インスタンスの EC2 メタデータを Agent タグとして収集します。                                                                                                                                |
-| `datadog_site`                          | レポート先の Datadog サイト (Agent v6 および v7 のみ)。デフォルトは `datadoghq.com` で、`datadoghq.eu` または `us3.datadoghq.com` に設定できます。                                                         |
+| `datadog_site`                          | レポート先の Datadog サイト (Agent v6 および v7 のみ)。デフォルトは `datadoghq.com` で、`datadoghq.eu` または `us3.datadoghq.com` に設定できます。                                                          |
 | `dd_url`                                | Datadog インテークサーバーの URL。これを変更する必要はほとんどありません。`datadog_site` をオーバーライドします                                                                                                 |
 | `host`                                  | ノードのホスト名をオーバーライドします。                                                                                                                                                                  |
 | `local_tags`                            | ノードのタグとして設定される `<キー:値>` 文字列の配列。                                                                                                                             |
@@ -255,7 +255,18 @@ class { "datadog_agent":
 | `agent_extra_options`<sup>1</sup>       | 追加の構成オプションを提供するハッシュ（Agent v6 および v7 のみ）。                                                                                                                       |
 | `hostname_extraction_regex`<sup>2</sup> | Puppet ノード名をレポートする代わりに、ホスト名キャプチャグループを抽出して Datadog での実行を報告するために使用される正規表現。例:<br>`'^(?<hostname>.*\.datadoghq\.com)(\.i-\w{8}\..*)?$'` |
 
-(1) `agent_extra_options` は、追加の Agent v6/v7 構成オプションを細かく制御するために使用されます。`datadog_agent` クラスパラメーターで提供されるオプションをオーバーライドする可能性のあるディープマージが実行されます。
+(1) `agent_extra_options` は、追加の Agent v6/v7 構成オプションを細かく制御するために使用されます。`datadog_agent` クラスパラメーターで提供されるオプションをオーバーライドする可能性のあるディープマージが実行されます。例:
+
+```
+class { "datadog_agent":
+    < your other arguments to the class >,
+    agent_extra_options => {
+        use_http => true,
+        use_compression => true,
+        compression_level => 6,
+    },
+}
+```
 
 (2) `hostname_extraction_regex` は、Puppet モジュールと Datadog Agent がインフラストラクチャーリスト内の同じホストに対して異なるホスト名をレポートしている場合に役立ちます。
 

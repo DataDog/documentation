@@ -245,7 +245,7 @@ Other examples:
 
 | **Raw string**               | **Parsing rule**                                      | **Result**                            |
 |:-----------------------------|:------------------------------------------------------|:--------------------------------------|
-| key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr}                    |
+| key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | key=\<valueStr>              | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | "key"="valueStr"             | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | key:valueStr                 | `%{data::keyvalue(":")}`                              | {"key": "valueStr"}                   |

@@ -35,7 +35,7 @@ The outlier monitor requires a metric with a group (hosts, availability zones, p
 ### Set alert conditions
 
 * Trigger a separate alert for each outlier `<GROUP>`
-* during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 24 hours.
 * Using algorithm `MAD`, `DBSCAN`, `scaledMAD`, or `scaledDBSCAN`
 * tolerance: `0.33`, `1.0`, `3.0`, etc.
 * %: `10`, `20`, `30`, etc. (only for `MAD` algorithms)

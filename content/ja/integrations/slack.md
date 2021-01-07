@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog のアラートとグラフをチームの Slack チャンネルに送信。
 doc_link: 'https://docs.datadoghq.com/integrations/slack/'
+draft: false
 git_integration_title: slack
 has_logo: true
 integration_title: Slack
@@ -26,67 +27,23 @@ Slack を Datadog に接続すると、以下のことを可能にして、チ�
 - チームのプライベートチャンネルまたは公開チャンネルで、同僚とグラフを共有できます。
 - Slack 内で Datadog からのアラートや通知を受けることができます。
 
-<div class="alert alert-warning">
-このドキュメントでは、webhook に依存する標準的な Slack インテグレーションと、ベータ版である Datadog Slack アプリケーションの両方について解説しています。
-
-EU 以外の Slack ユーザーの場合は、Datadog Slack アプリの<a href="https://app.datadoghq.com/incidents/ddslackapp">ベータ版アクセスに登録</a>してください。EU 在住の Slack ユーザーは、Slack アプリの最新情報についてメール (support@datadoghq.com) でお問い合わせください。
-</div>
-
 ## セットアップ
 
 {{< tabs >}}
 
-{{% tab "Standard integration" %}}
+{{% tab "Slack Application - US" %}}
 
 ### インストール
 
-Slack インテグレーションは、Datadog アプリケーション内の[インテグレーションタイル][1]を使用してインストールします。
+US リージョンの Datadog アプリをご使用の場合は、Slack ワークスペースで Datadog Slack アプリをインストールします。
 
-### コンフィギュレーション
+1. Datadog アプリで、「Integrations」の下にある Slack [インテグレーションタイル][1]へ移動し、タイル下部の **Connect Slack Account** ボタンをクリックします。
 
-1. Slack アカウントで、[アプリケーションページ][2]に移動し、Datadog を検索します。
-2. _Install_ --> _Add Integration_ の順に選択し、次に Slack の **Webhook URL** をコピーします。
-3. [Datadog-Slack インテグレーションタイル][1]の Configuration タブに移動します。
-4. _Add Account_ をクリックします。
-5. 選択した **Slack アカウント名**を追加します。
-6. **Slack Account Hook** フィールドに Webhook URL を貼り付けます。
-7. _Save_ をクリックします。
-8. Slack の**ポスト先のチャンネル**を追加します。
-   {{< img src="integrations/slack/slack_configuration.png" alt="Slack コンフィギュレーション" >}}
-9. グラフへのコメントごとに通知を受けるには、各チャンネルの **Transfer all user comments** チェックボックスをオンにします。このチェックボックスをオフのままにする場合、コメントが Slack にポストされるようにするには、`@slack-<ACCOUNT_NAME>-<CHANNEL_NAME>` 構文を使用する必要があります。アカウントを 1 つだけ使用する場合、または最初のアカウントのみを参照する場合は、`@slack-<CHANNEL_NAME>` も使用できます。
+2. Slack と Datadog のアカウントが接続されたことを確認します。**注**: この変更を Datadog ワークスペースの管理者に承認してもらう必要がある場合があります（一度のみ）。
 
-[モニター][3]と[イベントストリーム][4]から Slack にアラートを送信するように構成することもできます。
-
-
-[1]: https://app.datadoghq.com/account/settings#integrations/slack
-[2]: https://slack.com/apps
-[3]: https://docs.datadoghq.com/ja/monitors/notifications/?tab=slackintegration#notification
-[4]: https://docs.datadoghq.com/ja/events/#notifications
-{{% /tab %}}
-
-{{% tab "Slack Application (beta)" %}}
-
-### インストール
-
-Datadog Slack アプリを Slack ワークスペースにインストール:
-
-1. Datadog で Integrations の下にある Slack [インテグレーションタイル][1]へ移動します。タイル下部の "Connect Slack Account" ボタンをクリックします。
-
-2. Slack と Datadog のアカウントが接続されたことを確認します。**注**: この変更をワークスペースの管理者に承認してもらう必要がある場合があります（一度のみ）。
-
-
-[1]: https://app.datadoghq.com/account/settings#integrations/slack
-{{% /tab %}}
-
-{{< /tabs >}}
+**注**: [Slack App ディレクトリでの Slack インテグレーション][2]は、US リージョンの Datadog アプリケーションをご使用の場合のみ可能です。他のリージョンについては、[Slack Webhook][3] ドキュメントを参照してください。
 
 ## Slack アプリの使用
-
-<div class="alert alert-warning">
-以下のセクションは、ベータ版である Datadog Slack アプリのみを対象としています。
-
-EU 以外の Slack ユーザーの場合は、Datadog Slack アプリの<a href="https://app.datadoghq.com/incidents/ddslackapp">ベータ版アクセスに登録</a>してください。EU 在住の Slack ユーザーは、Slack アプリの最新情報についてメール (support@datadoghq.com) でお問い合わせください。
-</div>
 
 アプリがインストールされたら、Slack アプリをチャンネルに招待できます。
 
@@ -128,18 +85,67 @@ Slack アプリから送信されるようモニターを更新するには、�
 /datadog incident 
 ```
 
+**注**: Datadog へのアクセス権の有無を問わず、Slack 組織内の誰でもインシデントを宣言できます。
+
 新しいインシデントが作成されると、対応する Slack チャンネル `#incident-(unique number ID)` が作成され、新しいインシデントチャンネルの使用について伝えるメッセージがチャンネルに送信されます。チャンネルのトピックは、インシデントとともに変わります。
 
 次を使用して、インシデントの状態（重大度）を更新します。
 
 ```
-/datadog incident update 
+/datadog incident update
+```
+
+次を使用してオープン（アクティブで安定している）インシデントをリスト表示します。
+
+```
+/datadog incident lists
 ```
 
 メッセージのアクションコマンド (#incident チャンネルで送信されたメッセージにカーソルを合わせると右の方に表示される3点リーダー) を使用して、Incident App Timeline にメッセージを送信します。
 
 {{< img src="integrations/slack/incidents2.png" alt="Slack コンフィギュレーション" style="width:80%;">}}
 
+
+[1]: https://app.datadoghq.com/account/settings#integrations/slack
+[2]: https://www.datadoghq.com/blog/datadog-slack-app/
+[3]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackwebhookeu
+{{% /tab %}}
+
+{{% tab "Slack Webhook - EU" %}}
+
+US リージョン以外の Datadog アプリケーションをご使用の場合は、Slack Webhook をご利用ください。
+
+### インストール
+
+Slack インテグレーションは、Datadog アプリケーション内の[インテグレーションタイル][1]を使用してインストールします。
+
+### コンフィギュレーション
+
+1. Slack アカウントで、[アプリケーションページ][2]に移動し、Datadog（レガシー）を検索します。
+2. _Install_ --> _Add Integration_ の順に選択し、次に Slack の **Webhook URL** をコピーします。
+3. [Datadog-Slack インテグレーションタイル][1]の Configuration タブに移動します。
+4. _Add Account_ をクリックします。
+5. 選択した **Slack アカウント名**を追加します。
+6. **Slack Account Hook** フィールドに Webhook URL を貼り付けます。
+7. _Save_ をクリックします。
+8. Slack の**ポスト先のチャンネル**を追加します。
+  {{< img src="integrations/slack/slack_configuration.png" alt="Slack コンフィギュレーション" >}}
+9. グラフへのコメントごとに通知を受けるには、各チャンネルの **Transfer all user comments** チェックボックスをオンにします。このチェックボックスをオフのままにする場合、コメントが Slack にポストされるようにするには、`@slack-<ACCOUNT_NAME>-<CHANNEL_NAME>` 構文を使用する必要があります。アカウントを 1 つだけ使用する場合、または最初のアカウントのみを参照する場合は、`@slack-<CHANNEL_NAME>` も使用できます。
+
+[モニター][3]と[イベントストリーム][4]から Slack にアラートを送信するように構成することもできます。
+
+**注**: US 以外の Datadog アプリをご使用で、[Slack App ディレクトリ インテグレーション][5]へのアクセスの追加をご希望の場合は、[サポートチームまでご連絡ください][6]！
+
+
+[1]: https://app.datadoghq.com/account/settings#integrations/slack
+[2]: https://slack.com/apps
+[3]: https://docs.datadoghq.com/ja/monitors/notifications/?tab=slackintegration#notification
+[4]: https://docs.datadoghq.com/ja/events/#notifications
+[5]: https://www.datadoghq.com/blog/datadog-slack-app/
+[6]: https://docs.datadoghq.com/ja/help/
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## モニターアラートからの Slack @ メンション
 
@@ -151,13 +157,10 @@ Slack インテグレーションをセットアップした後、通知メッ�
 
 `<!here>` または `<!channel>` を使用して、それぞれ **@here** または **@channel** をメンションできます。
 
-メッセージの送信時にグループ内のすべてのユーザーに通知するには、`<!subteam^GROUP_ID>` を使用します。
-
-<mrk mid="196" mtype="seg">ユーザーグループに
-は、`&lt;!subteam^GROUP_ID|GROUP_NAME&gt;` を使用します。</mrk><mrk mid="197" mtype="seg">`GROUP_ID` は、[Slack の `usergroups.list` API エンドポイント][2]を検索して見つけられます。</mrk><mrk mid="198" mtype="seg">たとえば、`testers` というユーザーグループでは、次の構文を使用します。</mrk>
+ユーザーグループには、`<!subteam^GROUP_ID>` を使用します。`GROUP_ID` は、[Slack の `usergroups.list` API エンドポイント][2]を検索して見つけられます。たとえば、`12345` という ID を持つユーザーグループでは、次の構文を使用します。
 
 ```text
-<!subteam^GROUP_ID>
+<!subteam^12345>
 ```
 
 注: Slack @ 通知の場合、チャンネル名の後に特殊文字を付けることはサポートされていません。

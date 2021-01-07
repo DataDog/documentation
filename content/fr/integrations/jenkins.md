@@ -58,15 +58,17 @@ Pour configurer votre plug-in Datadog, accédez à `Manage Jenkins -> Configure 
 1. Cliquez sur le bouton radio en regard de l'option **Use Datadog API URL and Key to report to Datadog** (sélectionnée par défaut).
 2. Collez votre [clé d'API Datadog][4] dans la zone de texte `API Key` sur l'écran de configuration de Jenkins.
 3. Testez votre clé d'API Datadog à l'aide du bouton `Test Key` situé en dessous, sur ce même écran.
-4. (Facultatif) Saisissez votre [URL d'admission des logs Datadog][15] et sélectionnez Enable Log Collection dans l'onglet Advanced.
-5. Enregistrez votre configuration.
+4. (Facultatif) Saisissez le hostname du serveur Jenkins dans l'onglet Advanced afin de l'inclure dans les événements.
+5. (Facultatif) Saisissez votre [URL d'admission des logs Datadog][15] et sélectionnez Enable Log Collection dans l'onglet Advanced.
+6. Enregistrez votre configuration.
 
 ##### Transmission avec DogStatsD {#plug-in-transmission-dogstatsd}
 
 1. Cliquez sur le bouton radio correspondant à l'option **Use the Datadog Agent to report to Datadog**.
 2. Indiquez le `hostname` et le `port` de votre serveur DogStatsD.
-3. (Facultatif) Spécifiez votre port de collecte des logs et configurez la [collecte de logs](#collecte-de-logs), puis sélectionnez Enable Log Collection dans l'onglet Advanced.
-4. Enregistrez votre configuration.
+3. (Facultatif) Saisissez le hostname du serveur Jenkins dans l'onglet Advanced afin de l'inclure dans les événements.
+4. (Facultatif) Spécifiez votre port de collecte des logs et configurez la [collecte de logs](#collecte-de-logs), puis sélectionnez Enable Log Collection dans l'onglet Advanced.
+5. Enregistrez votre configuration.
 
 #### Script Groovy
 
@@ -273,6 +275,7 @@ REMARQUE : `event_type` est toujours défini sur `security` pour les métriques
 | `jenkins.job.pause_duration`            | Durée pendant laquelle le build était en pause (en secondes).                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
 | `jenkins.job.started`                  | Taux de tâches commencées.                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
 | `jenkins.job.stage_duration`           | Durée des différentes étapes.                                 | `jenkins_url`, `job`, `user_id`, `stage_name`, `stage_depth`, `stage_parent`, `result` |
+| `jenkins.job.stage_completed`          | Taux d'étapes terminées.                                      | `jenkins_url`, `job`, `user_id`, `stage_name`, `stage_depth`, `stage_parent`, `result` |
 | `jenkins.job.waiting`                  | Délai d'attente d'exécution de la tâche (en millisecondes).           | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
 | `jenkins.node.count`                   | Nombre total de nœuds.                                           | `jenkins_url`                                                              |
 | `jenkins.node.offline`                 | Nombre de nœuds hors ligne.                                           | `jenkins_url`                                                              |
@@ -280,6 +283,10 @@ REMARQUE : `event_type` est toujours défini sur `security` pour les métriques
 | `jenkins.node_status.count`            | Indique si le nœud est présent ou non.                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
 | `jenkins.node_status.up`               | Une valeur de 1 indique que le nœud est en ligne. Une valeur de 0 indique qu'il ne l'est pas.              | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
 | `jenkins.plugin.count`                 | Nombre de plug-ins.                                                 | `jenkins_url`                                                              |
+| `jenkins.plugin.active`                | Plug-ins actifs.                                                | `jenkins_url`                                                              |
+| `jenkins.plugin.failed`                | Plug-ins ayant échoué.                                                | `jenkins_url`                                                              |
+| `jenkins.plugin.inactivate`            | Plug-ins désactivés.                                              | `jenkins_url`                                                              |
+| `jenkins.plugin.withUpdate`            | Plug-ins avec une mise à jour.                                           | `jenkins_url`                                                              |
 | `jenkins.project.count`                | Nombre de projets.                                                 | `jenkins_url`                                                              |
 | `jenkins.queue.size`                   | Taille de la file d'attente.                                                    | `jenkins_url`                                                              |
 | `jenkins.queue.buildable`              | Nombre d'éléments pouvant être conçus dans la file d'attente.                             | `jenkins_url`                                                              |

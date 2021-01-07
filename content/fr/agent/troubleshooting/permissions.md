@@ -6,10 +6,10 @@ aliases:
   - /fr/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
   - /fr/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
 further_reading:
-  - link: /agent/troubleshooting/debug_mode
+  - link: /agent/troubleshooting/debug_mode/
     tag: Dépannage de l'Agent
     text: Mode debugging de l'Agent
-  - link: /agent/troubleshooting/send_a_flare
+  - link: /agent/troubleshooting/send_a_flare/
     tag: Dépannage de l'Agent
     text: Envoyer un flare de l'Agent
 ---
@@ -125,7 +125,7 @@ Si vous exécutez l'Agent v5, essayez d'effectuer une mise à jour vers la [der
 
 3. [Démarrez l'Agent][6].
 
-[1]: /fr/agent/guide/upgrade-to-agent-v6
+[1]: /fr/agent/guide/upgrade-to-agent-v6/
 [2]: https://github.com/DataDog/dd-agent
 [3]: /fr/agent/guide/agent-commands/?tab=agentv5#stop-the-agent
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
@@ -143,10 +143,10 @@ Consultez les issues GitHub suivantes pour en savoir plus à ce sujet et pour d�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/guide/agent-commands
-[2]: /fr/agent/guide/agent-log-files
-[3]: /fr/agent/faq/error-restarting-agent-already-listening-on-a-configured-port
-[4]: /fr/agent/faq/network
+[1]: /fr/agent/guide/agent-commands/
+[2]: /fr/agent/guide/agent-log-files/
+[3]: /fr/agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
+[4]: /fr/agent/faq/network/
 [5]: /fr/agent/guide/agent-commands/#start-the-agent
-[6]: /fr/help
-[7]: /fr/integrations/process
+[6]: /fr/help/
+[7]: /fr/integrations/process/

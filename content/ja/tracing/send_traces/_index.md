@@ -22,7 +22,9 @@ further_reading:
     tag: ドキュメント
     text: ECS Fargate APM のセットアップ
 ---
-APM を使用するには、最初に[トレース][1]を Datadog に送信してから[環境を構成](#configure-your-environment)します。Datadog にトレースを送信するために、システムの設定に応じて選択できる複数の方法が用意されています。たとえば、[Datadog Agent をローカルで](#datadog-agent)使用する、[コンテナで](#containers)使用するなど、[さまざまな方法](#additional-environments)があります。APM のすべてのセットアップ手順については、[APM の概要][2]をご覧ください。
+Datadog に[トレース][1]を送信するようアプリケーションを構成するために、Datadog Agent を構成し、[アプリケーションのインスツルメントを行う][2]という 2 つのメインステップを実行します。
+
+お使いの環境に応じて、Datadog Agent の構成方法は異なります。Datadog Agent を[ローカル](#datadog-agent)、[コンテナ](#containers)、および[その他の環境](#additional-environments)にインストールする手順をそれぞれ参照してください。
 
 ## Datadog Agent
 
@@ -78,14 +80,14 @@ AWS Elastic Beanstalk により監視を行うと、トレースがデフォル�
 
 ## 次のステップ
 
-次に、[アプリケーションのインスツルメント][14]を行います。APM のすべてのセットアップ手順については、[APM の概要][2]を参照してください。
+次に、[アプリケーションのインスツルメント][2]を行います。APM の概要とすべての機能、コンフィギュレーションについて詳しくは、[APM の概要][14]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/visualization/#trace
-[2]: /ja/tracing/
+[2]: /ja/tracing/setup/
 [3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /ja/tracing/send_traces/agent-apm-metrics/
@@ -97,4 +99,4 @@ AWS Elastic Beanstalk により監視を行うと、トレースがデフォル�
 [11]: /ja/integrations/cloud_foundry/#trace-collection
 [12]: /ja/integrations/amazon_elasticbeanstalk/
 [13]: /ja/tracing/guide/setting_primary_tags_to_scope/#definition
-[14]: /ja/tracing/setup/
+[14]: /ja/tracing/

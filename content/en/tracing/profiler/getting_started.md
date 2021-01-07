@@ -17,12 +17,13 @@ further_reading:
 
 Profiler is shipped within the following tracing libraries. Select your language below to learn how to enable profiler for your application:
 
-For **Node**, **Ruby**, **PHP**, or **.NET** Profilers, [sign up][1] to be on the private beta access list. We will notify you when the beta is ready.
+To get notified when a private beta is available for the **Node**, **Ruby**, **PHP**, or **.NET** Profiler, [sign up here][1].
+
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 for most vendors (version 8u262)][2] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
+The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 (version 8u262+)][2] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][3]+ or [6.20.2][3]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
@@ -37,7 +38,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Update to your service invocation should look like:
 
     ```diff
-    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
 4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][4].
@@ -63,7 +64,6 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 | `DD_ENV`                                         | String        | Your [environment][6] name, for example: `production`.|
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
-
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: /tracing/profiler/profiler_troubleshooting/#java-8-support
@@ -104,19 +104,11 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 
 4. After a minute or two, visualize your profiles on the [Datadog APM > Profiler page][2].
 
-**Note**:
-
-- Alternatively, profile your service by running it with the wrapper `pyddprofile`:
-
-    ```shell
-    $ pyddprofile server.py
-    ```
-
 - It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use environment variables to set the parameters:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracker version 0.40+.              |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracer version 0.40+.              |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
@@ -128,7 +120,7 @@ Recommended for advanced usage only.
 
 - When your process forks using `os.fork`, the profiler is stopped in the child process.
 
-  For Python 3.7+ on POSIX platforms, a new profiler is started if you enabled the profiler via `pyddprofile` or `ddtrace.profiling.auto`.
+  For Python 3.7+ on POSIX platforms, a new profiler is started if you enabled the profiler via `ddtrace-run` or `ddtrace.profiling.auto`.
 
   If you manually create a `Profiler()`, use Python < 3.6, or run on a non-POSIX platform, manually restart the profiler in your child with:
 

@@ -25,7 +25,7 @@ left:
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''icône apm''>'
       - name: product_profiler
         link: 'https://www.datadoghq.com/product/code-profiling/'
-        title: Profiler en continu
+        title: Profileur en continu
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''icône profiler''>'
       - name: product_security
         link: 'https://www.datadoghq.com/product/security-monitoring/'
@@ -37,7 +37,7 @@ left:
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''icône réseau''>'
       - name: product_synthetics
         link: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-        title: Surveillance Synthetics
+        title: Surveillance Synthetic
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''icône synthetics''>'
       - name: product_rum
         link: 'https://www.datadoghq.com/product/real-user-monitoring/'

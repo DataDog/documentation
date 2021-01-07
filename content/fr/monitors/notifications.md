@@ -86,6 +86,8 @@ Informez votre équipe par l'intermédiaire des intégrations connectées en uti
 
 Consultez la [liste des intégrations][11] pouvant envoyer des notifications à votre équipe.
 
+**Remarque** : les handles comprenant des parenthèses (`(`, `)`) ne sont pas pris en charge. Lorsqu'un handle comprenant des parenthèses est utilisé, il n'est pas analysé et aucune alerte n'est créée.
+
 ### Via des modifications
 
 Chaque fois qu'un monitor est créé, modifié, désactivé ou supprimé, un [événement][12] est généré. Définissez l'option `Notify` pour envoyer des notifications aux membres de vos équipes ainsi qu'aux services de discussion à propos de ces événements.
@@ -134,6 +136,20 @@ Par exemple, pour un tag `dot.key.test:five` et un monitor regroupé selon `dot.
 
 ```text
 {{[dot.key.test].name}}
+```
+
+#### Variables des facettes de log
+
+Les log monitors peuvent utiliser des facettes en tant que variables lorsqu'ils sont regroupés en fonction de facettes.
+Par exemple, si votre log monitor est regroupé en fonction de la facette `facet`, la variable est :
+
+```text
+{{ facet.name }}
+```
+
+Si votre facette comporte des points, placez-la entre crochets. Par exemple :
+```text
+{{ [facet.with.dot].name }}
 ```
 
 ### Variables conditionnelles
@@ -218,6 +234,36 @@ Pour informer votre équipe DB qu'un host déclencheur dispose du tag `role:db_c
 ```text
 {{#is_match "role.name" "db"}}
   Cela s'affiche si le nom du rôle du host qui a déclenché l'alerte contient `db`. @db-team@company.com
+{{/is_match}}
+```
+
+La condition `is_match` prend également en charge plusieurs chaînes :
+
+```text
+{{#is_match "role.name" "db" "database"}}
+  Cela s'affiche si le nom du rôle du host qui a déclenché l'alerte contient `db` ou `database`.
+  @db-team@company.com
+{{/is_match}}
+```
+
+Pour envoyer une autre notification lorsque le tag ne contient pas `db`, utilisez la négation de la condition tel que suit :
+
+```text
+{{^#is_match "role.name" "db"}}
+  Cela s'affiche si le tag du rôle ne contient pas `db`.
+  @slack-example
+{{/is_match}}
+```
+
+Vous pouvez également utiliser le paramètre `{{else}}` dans le premier exemple :
+
+```text
+{{#is_match "role.name" "db"}}
+  Cela s'affiche si le nom du rôle du host qui a déclenché l'alerte contient `db`.
+  @db-team@company.com
+{{else}}
+  Cela s'affiche si le tag du rôle ne contient pas `db`.
+  @slack-example
 {{/is_match}}
 ```
 

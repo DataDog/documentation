@@ -184,6 +184,11 @@ Classic:
       dogstatsd: true
       authors: Datadog
       notes: Also includes an API client CLI tool, 'dog'.
+    - name: datadog-api-client-python
+      link: https://github.com/DataDog/datadog-api-client-python
+      official: true
+      api: true
+      authors: Datadog
   - R:
     - name: datadogr
       link: https://cran.r-project.org/package=datadogr
@@ -306,6 +311,11 @@ Tracing:
       link: https://github.com/Colisweb/scala-opentracing
       authors: Colisweb
 Log:
+  - Flutter:
+    - name: Datadog Flutter
+      link: https://github.com/greenbits/datadog_flutter
+      authors: tshedor
+      notes: Log-only SDK for Flutter
   - Laravel:
     - name: laravel-datadog-logger
       link: https://github.com/myLocalInfluence/laravel-datadog-logger

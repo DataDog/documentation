@@ -25,7 +25,7 @@ To schedule a [monitor downtime][1] in Datadog use the main navigation: _Monitor
 {{< tabs >}}
 {{% tab "By Monitor Name" %}}
 
-Search or use the drop-down to choose monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag.
+Search or use the drop-down to choose monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Only monitors that have **ALL selected scopes** are silenced.
 
 {{% /tab %}}
 {{% tab "By Monitor Tags" %}}

@@ -3,25 +3,21 @@ title: Intervalles de temps personnalisés
 kind: guide
 ---
 
-<div class="alert alert-warning">
-  L'incrémentation d'intervalles de temps à l'aide du clavier et la saisie d'intervalles de temps personnalisés sont en version bêta. Si vous souhaitez nous faire part de vos remarques, contactez <a href="https://docs.datadoghq.com/help">l'assistance Datadog</a>.
-</div>
-
 De nombreuses vues dans Datadog peuvent être filtrées en fonction d'un intervalle de temps spécifique. Les contrôles de temps comprennent une liste d'intervalles de temps courants et un sélecteur de date permettant une sélection rapide.
 
 Pour incrémenter un intervalle par mois, par jour, par année, par heure ou par minute, sélectionnez un élément de l'intervalle de temps et utilisez les touches `[↑]` et `[↓]` :
 
-{{< img src="dashboards/guide/custom_time_frames/increment_time_with_arrow_keys.mp4" alt="Incrémenter l'intervalle avec les touches fléchées" video="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/increment_with_arrow_keys.mp4" alt="Incrémenter l'intervalle avec les touches fléchées" video="true" width="500" >}}
 
 Vous pouvez également saisir ou coller des dates et timestamps personnalisés, y compris ceux copiés à partir d'autres pages Datadog :
 
-{{< img src="dashboards/guide/custom_time_frames/copy_and_paste_time_frame.mp4" alt="Copier et coller un intervalle de temps" video="true" >}}
+{{< img src="dashboards/guide/custom_time_frames/copy_and_paste.mp4" alt="Copier et coller un intervalle" video="true" >}}
 
 Les intervalles de temps personnalisés fixes et relatifs sont pris en charge :
 
-{{< img src="dashboards/guide/custom_time_frames/type_custom_fixed_time_frame.mp4" alt="Saisir un intervalle de temps fixe personnalisé" video="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/custom_fixed_time_frame.mp4" alt="Saisir un intervalle personnalisé fixe" video="true" width="500" >}}
 
-{{< img src="dashboards/guide/custom_time_frames/type_custom_relative_time_frame.mp4" alt="Saisir un intervalle de temps relatif personnalisé" video="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Saisir un intervalle personnalisé relatif" video="true" width="500" >}}
 
 ## Syntaxes prises en charge
 

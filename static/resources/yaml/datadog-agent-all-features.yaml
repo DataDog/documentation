@@ -18,7 +18,7 @@ metadata:
   name: datadog-agent-installinfo
   labels: {}
   annotations:
-    checksum/install_info: ee293ccedf116ce1ed6e0d9c7f7f9adabd0c230618089bb173c7acffa487e020
+    checksum/install_info: 9f58f4fe71f1b79dfabae5311eb8f5373bd03072d4636e248cd3f581f8752627
 data:
   install_info: |
     ---
@@ -44,7 +44,7 @@ data:
       bpf_debug: false
       enable_tcp_queue_length: false
       enable_oom_kill: false
-      collect_dns_stats: false
+      collect_dns_stats: true
     runtime_security_config:
       enabled: false
       debug: false
@@ -54,7 +54,7 @@ data:
       syscall_monitor:
         enabled: false
 ---
-# Source: datadog/templates/security-configmap.yaml
+# Source: datadog/templates/system-probe-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -264,7 +264,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -341,6 +341,7 @@ spec:
             httpGet:
               path: /live
               port: 5555
+              scheme: HTTP
             initialDelaySeconds: 15
             periodSeconds: 15
             successThreshold: 1
@@ -350,12 +351,13 @@ spec:
             httpGet:
               path: /ready
               port: 5555
+              scheme: HTTP
             initialDelaySeconds: 15
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -400,7 +402,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -450,13 +452,26 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
               add: ["SYS_ADMIN", "SYS_RESOURCE", "SYS_PTRACE", "NET_ADMIN", "NET_BROADCAST", "IPC_LOCK"]
           command: ["/opt/datadog-agent/embedded/bin/system-probe", "--config=/etc/datadog-agent/system-probe.yaml"]
           env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog-agent"
+                  key: api-key
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: KUBERNETES
+              value: "yes"
+            - name: DOCKER_HOST
+              value: unix:///host/var/run/docker.sock
             - name: DD_LOG_LEVEL
               value: "INFO"
           resources: {}
@@ -475,7 +490,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -485,7 +500,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -520,7 +535,7 @@ spec:
               value: unix:///host/var/run/docker.sock
           resources: {}
         - name: seccomp-setup
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json

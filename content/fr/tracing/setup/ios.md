@@ -13,27 +13,29 @@ further_reading:
 kind: documentation
 title: Collecte de traces iOS
 ---
+<div class="alert alert-info">La collecte de traces iOS est en bêta publique. Si vous avez des questions, contactez notre <a href="https://docs.datadoghq.com/help/" target="_blank">équipe d'assistance</a>.</div>
+
 Envoyez des [traces][1] à Datadog à partir de vos applications iOS avec la [bibliothèque de tracing côté client `dd-sdk-ios` de Datadog][2]. Vous pourrez notamment :
 
-* créer des [spans][3] personnalisées pour diverses opérations dans votre application ;
-* envoyer des logs pour chaque span individuellement ;
-* utiliser des attributs par défaut et ajouter des attributs personnalisés à chaque span ;
-* optimiser l'utilisation du réseau grâce aux envois groupés automatiques.
+* Créer des [spans][3] personnalisées pour diverses opérations dans votre application
+* Envoyer des logs pour chaque span individuellement
+* Utiliser des attributs par défaut et ajouter des attributs personnalisés à chaque span
+* Optimiser l'utilisation du réseau grâce aux envois groupés automatiques
 
 ## Configuration
 
-1. Déclarez la bibliothèque en tant que dépendance en fonction de votre gestionnaire de paquets :
+1. Déclarez la bibliothèque en tant que dépendance en fonction de votre gestionnaire de packages :
 
     {{< tabs >}}
     {{% tab "CocoaPods" %}}
 
-Vous pouvez utiliser [CocoaPods][4] pour installer `dd-sdk-ios` :
+Vous pouvez utiliser [CocoaPods][1] pour installer `dd-sdk-ios` :
 ```
 pod 'DatadogSDK'
 ```
 
-[4]: https://cocoapods.org/
 
+[1]: https://cocoapods.org/
     {{% /tab %}}
     {{% tab "Swift Package Manager (SPM)" %}}
 
@@ -45,17 +47,17 @@ Pour réaliser l'intégration grâce au Swift Package Manager d'Apple, ajoutez c
     {{% /tab %}}
     {{% tab "Carthage" %}}
 
-Vous pouvez utiliser [Carthage][5] pour installer `dd-sdk-ios` :
+Vous pouvez utiliser [Carthage][1] pour installer `dd-sdk-ios` :
 ```
 github "DataDog/dd-sdk-ios"
 ```
 
-[5]: https://github.com/Carthage/Carthage
 
+[1]: https://github.com/Carthage/Carthage
     {{% /tab %}}
     {{< /tabs >}}
 
-2. Initialisez la bibliothèque avec le contexte de votre application et votre [token client Datadog][6]. Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][7] pour configurer la bibliothèque `dd-sdk-ios`, car elles risqueraient d'être exposées côté client dans le bytecode de l'IPA de l'application iOS. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][6].
+2. Initialisez la bibliothèque avec le contexte de votre application et votre [token client Datadog][4]. Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][5] pour configurer la bibliothèque `dd-sdk-ios`, car elles risqueraient d'être exposées côté client dans le bytecode de l'IPA de l'application iOS. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][4].
 
     {{< tabs >}}
     {{% tab "Site américain" %}}
@@ -93,7 +95,7 @@ Datadog.initialize(
     Datadog.verbosityLevel = .debug
     ```
 
-3. Le traceur Datadog utilise la [norme Open Tracing][8]. Configurez et enregistrez le `Tracer` globalement via le paramètre `Global.sharedTracer` d'Open Tracing. Vous ne devez effectuer cette opération qu'une seule fois, généralement dans votre code `AppDelegate` :
+3. Le traceur Datadog utilise la [norme Open Tracing][6]. Configurez et enregistrez le `Tracer` globalement via le paramètre `Global.sharedTracer` d'Open Tracing. Vous ne devez effectuer cette opération qu'une seule fois, généralement dans votre code `AppDelegate` :
 
     ```swift
     import Datadog
@@ -131,7 +133,7 @@ Datadog.initialize(
     span.setTag(key: "http.url", value: url)
     ```
 
-7. (Facultatif) Ajoutez une erreur à une span ; pour ce faire, vous pouvez loguer les informations d'erreur à l'aide des [champs de log Open Tracing standard][9] :
+7. (Facultatif) Ajoutez une erreur à une span ; pour ce faire, vous pouvez loguer les informations d'erreur à l'aide des [champs de log Open Tracing standard][7] :
 
     ```swift
     span.log(
@@ -144,7 +146,9 @@ Datadog.initialize(
     )
     ```
 
-8. (Facultatif) Pour distribuer des traces entre vos environnements, par exemple frontend/backend, injectez le contexte du traceur dans la requête client :
+8. (Facultatif) Distribuez vos traces entre vos environnements (par exemple frontend/backend). Vous pouvez le faire manuellement ou en tirant parti de notre instrumentation automatique.
+
+    * Pour propager manuellement la trace, injectez le contexte de span dans les en-têtes `URLRequest` :
 
     ```swift
     import Datadog
@@ -160,7 +164,22 @@ Datadog.initialize(
         request.addValue(value, forHTTPHeaderField: headerField)
     }
     ```
-    Des en-têtes de tracing supplémentaires seront alors définis sur votre requête, afin que votre backend puisse procéder à l'extraction et poursuivre le tracing distribué. Si votre backend est également instrumenté avec [l'APM et le tracing distribué de Datadog][10], vous verrez la trace frontend/backend entière sur le dashboard Datadog. Une fois la requête terminée, appelez `span.finish()` dans un gestionnaire de complétion.
+    Des en-têtes de tracing supplémentaires seront alors définis sur votre requête, afin que votre backend puisse procéder à l'extraction et poursuivre le tracing distribué. Une fois la requête terminée, appelez `span.finish()` dans un gestionnaire de complétion. Si votre backend est également instrumenté avec [l'APM et le tracing distribué de Datadog][8], vous verrez la trace frontend/backend complète sur le dashboard Datadog.
+
+    * Pour que le SDK trace automatiquement toutes les requêtes réseau vers des hosts donnés, spécifiez le tableau `tracedHosts` lors de l'initialisation de Datadog :
+
+    ```swift
+    Datadog.initialize(
+        appContext: .init(),
+        configuration: Datadog.Configuration
+            .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
+            .set(tracedHosts: ["example.com", "api.yourdomain.com"])
+            .build()
+    )
+    ```
+    Vous pourrez ainsi tracer toutes les requêtes acheminées vers `example.com` et `api.yourdomain.com` (par exemple, `https://api.yourdomain.com/v2/users` ou `https://subdomain.example.com/image.png`).
+
+    **Remarque** : l'instrumentation automatique prend uniquement en charge les requêtes effectuées avec `URLSession.dataTask(request:completionHandler:)` et `URLSession.dataTask(url:completionHandler:)`. Elle utilise le swizzling `URLSession`. Ce swizzling est entièrement facultatif : si vous spécifiez pas `tracedHosts`, aucun swizzling n'est appliqué.
 
 
 ## Collecte groupée de spans
@@ -178,8 +197,8 @@ Les données stockées sont automatiquement supprimées si elles sont trop ancie
 [1]: https://docs.datadoghq.com/fr/tracing/visualization/#trace
 [2]: https://github.com/DataDog/dd-sdk-ios
 [3]: https://docs.datadoghq.com/fr/tracing/visualization/#spans
-[6]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#client-tokens
-[7]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#api-keys
-[8]: https://opentracing.io
-[9]: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table
-[10]: https://docs.datadoghq.com/fr/tracing/
+[4]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#client-tokens
+[5]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#api-keys
+[6]: https://opentracing.io
+[7]: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table
+[8]: https://docs.datadoghq.com/fr/tracing/

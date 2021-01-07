@@ -12,73 +12,108 @@ further_reading:
     tag: Graphiques
     text: Découvrir ce qui se passe à tous les niveaux de votre système
 ---
-## Introduction
+## Présentation
 
 [Les live containers de Datadog][1] vous permettent de bénéficier d'une réelle visibilité sur l'ensemble des conteneurs de votre environnement.
 
 Inspirés d'outils Bedrock comme *htop*, *ctop* et *kubectl*, les live containers vous offrent une vue d'ensemble globale de votre infrastructure de conteneurs. Leur tableau, régulièrement mis à jour, présente les métriques de ressources actualisées toutes les deux secondes, dispose d'une fonction de recherche à facettes et affiche les logs de conteneur sous forme de flux.
 
-Associée à des intégrations pour [Docker][2], [Kubernetes][3], [ECS][4] ou d'autres technologies de conteneur, ainsi qu'à la fonction intégrée d'ajout de tags à des composants dynamiques, la vue des live containers fournit une présentation détaillée de la santé de vos conteneurs, de leur consommation en ressources, de leurs logs et de leur déploiement en temps réel :
+Associée à [Docker][2], [Kubernetes][3], [ECS][4] ou d'autres technologies de conteneur, ainsi qu'à la fonction intégrée de tagging de composants dynamiques, la vue des live containers fournit une présentation détaillée de la santé de vos conteneurs, de leur consommation en ressources, de leurs logs et de leur déploiement en temps réel :
 
 {{< img src="infrastructure/livecontainers/livecontainersoverview.png" alt="Live containers avec résumés"  >}}
 
-### Ressources Kubernetes
-
-La fonctionnalité [Ressources Kubernetes pour Live Containers][1] est actuellement en version bêta privée. Remplissez [ce formulaire][5] pour demander à y accéder.
-
-Si vous utilisez Kubernetes, activez la fonctionnalité Ressources Kubernetes pour Live Containers pour obtenir une visibilité multidimensionnelle sur toutes les charges de travail Kubernetes dans vos clusters. Inspirée de l'outil `kubectl`, cette fonctionnalité vous offre une vue d'ensemble globale de votre infrastructure Kubernetes avec un tableau mis à jour en continu qui comprend une sélection de métriques sur vos ressources, une fonction de recherche à facettes, une vue détaillée par charge de travail et des cartes de visualisation.
-
-## Installation
-
-Suivez les instructions d'installation de l'Agent [Docker][6] ou [Kubernetes][7]. Une fois l'Agent installé, aucune autre configuration n'est nécessaire pour accéder aux métriques de conteneur.
-
-**La fonctionnalité Ressources Kubernetes pour Live Containers nécessite l'installation des Agents suivants** :
-
-* [Agent Datadog][8] version 7.21.1 (ou supérieure)
-* [Agent de cluster Datadog][9] version 1.8.0 (ou supérieure)
-
-### Ressources Kubernetes
-
-Pour activer la fonctionnalité Ressources Kubernetes pour Live Containers, suivez les [instructions d'installation de Helm][10] et modifiez votre fichier `values.yaml` comme suit :
-
-{{< code-block lang="yaml" filename="values.yaml" >}}
-datadog:
-  ...
-  processAgent:
-    enabled: true
-  ...
-  orchestratorExplorer:
-    enabled: true
-...
-clusterAgent:
-  enabled: true
-  image:
-    repository: datadog/cluster-agent
-    tag: latest
-    pullPolicy: Always
-...
-agents:
-  image:
-    repository: datadog/agent
-    tag: latest
-    pullPolicy: Always
-...
-{{< /code-block >}}
-
-Si l'Agent n'est pas en mesure de détecter automatiquement le nom du cluster Kubernetes, vous devez le spécifier dans `values.yaml` :
-
-{{< code-block lang="yaml" filename="values.yaml" >}}
-datadog:
-   ...
-   clusterName: <PLACEHOLDER>
-   ...
-{{< /code-block >}}
-
-**Remarque** : le nom du cluster ne doit pas comporter plus de 40 caractères.
-
-Cette étape n'est pas nécessaire sur Google GKE, AWS EKS et Azure AKS, sauf si l'Agent et l'Agent de cluster n'ont pas accès aux API des métadonnées cloud, ou que le nom du cluster comporte plus de 40 caractères.
-
 ## Configuration
+
+### Ressources Kubernetes
+
+L'Agent Datadog et l'Agent de cluster peuvent être configurés afin de récupérer des ressources Kubernetes pour des [live containers][5]. Cela vous permet de surveiller l'état de vos pods, déploiements et autres entités Kubernetes dans un espace de nommage ou une zone de disponibilité précise. Il est également possible de consulter les spécifications de ressources pour les échecs de pods d'un déploiement ou encore de mettre en corrélation l'activité d'un nœud avec les logs associés.
+
+Avant d'effectuer les configurations ci-dessous pour les ressources Kubernetes des live containers, il est nécessaire d'installer au minimum la [version 7.21.1 de l'Agent][6] ainsi que la [version 1.9.0 de l'Agent de cluster][7].
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Si vous utilisez le [chart Helm Datadog][1] officiel :
+
+- Utilisez au minimum la version 2.4.5 du chart.
+  **Remarque** : assurez-vous que les versions de l'Agent et de l'Agent de cluster sont codées en dur, avec les versions minimales requises, dans le fichier [values.yaml][2] de votre chart Helm.
+- Définissez `datadog.orchestratorExplorer.enabled` sur `true` dans [values.yaml][2].
+- Déployez une nouvelle version.
+
+Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de cluster ne parviennent pas à détecter automatiquement un nom de cluster Kubernetes. Lorsque c'est le cas, la fonctionnalité ne démarre pas et une entrée WARN est ajoutée aux logs de l'Agent de cluster, avec le message suivant : `Orchestrator explorer enabled but no cluster name set: disabling`. Vous devez alors définir `datadog.clusterName` sur le nom de votre cluster dans [values.yaml][2].
+
+[1]: https://github.com/DataDog/helm-charts
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+1. La version 1.9.0 ou une version ultérieure de l'[Agent de cluster][1] est requise pour commencer la configuration du DaemonSet. L'Agent de cluster doit être en cours d'exécution et l'Agent doit pouvoir communiquer avec celui-ci. Consultez la section [Configuration de l'Agent de cluster][2] pour en savoir plus.
+
+    - Définissez le conteneur de l'Agent de cluster à l'aide de la variable d'environnement suivante :
+
+        ```yaml
+          - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+            value: "true"
+        ```
+
+    - Définissez le ClusterRole de l'Agent de cluster à l'aide des autorisations RBAC suivantes : 
+
+        ```yaml
+          ClusterRole:
+          - apiGroups:  # To create the datadog-cluster-id CM
+            - ""
+            resources:
+            - configmaps
+            verbs:
+            - create
+            - get
+            - update
+          ...
+          - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
+            - ""
+            resources:
+            - namespaces
+            verbs:
+            - get
+          ...
+          - apiGroups:  # to collect new resource types
+            - "apps"
+            resources:
+            - deployments
+            - replicasets
+            verbs:
+            - list
+            - get
+            - watch
+        ```
+
+    Ces autorisations sont requises pour créer une ConfigMap `datadog-cluster-id` dans le même espace de nommage que le DaemonSet de l'Agent et le déploiement de l'Agent de cluster, mais également pour recueillir les déploiements et les ReplicaSets.
+
+    Si la ConfigMap `cluster-id` n'est pas créée par l'Agent de cluster, le pod de l'Agent n'est pas initié, ce qui génère le statut `CreateContainerConfigError`. Si le pod de l'Agent est bloqué par l'absence de cette ConfigMap, modifiez les autorisations de l'Agent de cluster et redémarrez ses pods pour permettre la création de la CongifMap. Le pod de l'Agent récupèrera automatiquement un statut normal.
+
+2. L'Agent de processus, qui s'exécute dans le DaemonSet de l'Agent, doit être activé et en cours d'exécution. La collecte de processus ne doit pas forcément être en cours. Les options suivantes doivent également être configurées :
+
+    ```yaml
+    - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+      value: "true"
+    - name: DD_ORCHESTRATOR_CLUSTER_ID
+      valueFrom:
+        configMapKeyRef:
+          name: datadog-cluster-id
+          key: id
+    ```
+
+Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de cluster ne parviennent pas à détecter automatiquement un nom de cluster Kubernetes. Lorsque c'est le cas, la fonctionnalité ne démarre pas et une entrée WARN est ajoutée aux logs de l'Agent de cluster, avec le message suivant : `Orchestrator explorer enabled but no cluster name set: disabling`. Vous devez alors définir ajouter les options suivantes dans la section `env` de l'Agent de cluster et de l'Agent de processus :
+
+  ```yaml
+  - name: DD_CLUSTER_NAME
+    value: "<NOM_CLUSTER>"
+  ```
+
+[1]: /fr/agent/cluster_agent/
+[2]: /fr/agent/cluster_agent/setup/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Inclure ou exclure des conteneurs
 
@@ -124,7 +159,7 @@ Rendez-vous sur la [page Containers][1] pour accéder automatiquement à la vue 
 
 Les conteneurs sont, de par leur nature, des objets avec une très forte cardinalité. La recherche de texte flexible de Datadog permet de rechercher des sous-chaînes correspondantes dans le champ name, ID ou image d'un conteneur.
 
-Si vous avez activé la fonctionnalité Ressources Kubernetes, vous avez la possibilité d'effectuer des recherches parmi les chaînes `pod`, `deployment`, `ReplicaSet` et `service name` ainsi que parmi les étiquettes Kubernetes dans une [vue Ressources Kubernetes](#vues-ressources-kubernetes).
+Si vous avez activé la fonctionnalité Ressources Kubernetes, vous avez la possibilité d'effectuer des recherches parmi les chaînes `pod`, `deployment`, `ReplicaSet` et `service name` ainsi que parmi les étiquettes Kubernetes dans une [vue Ressources Kubernetes](#vue-ressources-kubernetes).
 
 Pour combiner plusieurs recherches textuelles au sein d'une requête complexe, vous pouvez utiliser l'un des opérateurs booléens suivants :
 
@@ -155,7 +190,7 @@ Pour les ressources Kubernetes, sélectionnez les tags Datadog à utiliser pour 
 
 ## Tagging
 
-Les conteneurs sont [tagués][11] avec tous les tags de host existants, ainsi qu'avec les métadonnées associées à chaque conteneur.
+Les conteneurs sont [tagués][8] avec tous les tags des hosts existants, ainsi qu'avec les métadonnées associées à chaque conteneur.
 
 Le tag `image_name` est ajouté à tous les conteneurs, y compris les intégrations avec des orchestrateurs couramment utilisés, telles que [ECS][4] et [Kubernetes][3], qui fournissent davantage de tags au niveau des conteneurs. De plus, chaque conteneur est doté d'une icône Docker, ECS ou Kubernetes afin de pouvoir identifier en quelques secondes les conteneurs orchestrés. 
 
@@ -177,14 +212,14 @@ Les conteneurs Kubernetes possèdent les tags suivants :
 * `kube_deployment`
 * `kube_cluster`
 
-SI vous avez configuré le [tagging de service unifié][12], les tags `env`, `service`, et `version` sont également recueillis automatiquement.
-L'utilisation de ces tags vous permet d'assurer la cohésion des données de l'APM, des logs, des métriques et des données Live Containers.
+SI vous avez configuré le [tagging de service unifié][9], les tags `env`, `service`, et `version` sont également recueillis automatiquement.
+L'utilisation de ces tags vous permet d'assurer la cohésion des données de l'APM, des logs, des métriques et des live containers.
 
 ## Vues
 
-### Vue Conteneurs
+### Vue Containers
 
-La vue **Conteneurs** vous permet de visualiser vos données sous forme de [Nuage de points](#nuages-de-points) ou de [Série temporelle][13]. Elle comprend également un tableau pour mieux organiser les données de vos conteneurs par nom de conteneur, statut et date de démarrage ainsi que d'autres champs.
+Grâce à la vue **Containers**, vous pouvez visualiser vos données sous forme de [nuage de points](#nuages-de-points) ou de [série temporelle][10]. La vue comprend également un tableau vous permettant de trier les données de vos conteneurs selon différents champs, comme le nom du conteneur, son statut et sa date de démarrage.
 
 #### Nuage de points
 
@@ -222,28 +257,28 @@ Pour analyser en détail une ressource spécifique depuis la Cluster Map, clique
 
 Cliquez sur une ligne du tableau ou sur un objet de la Cluster Map pour afficher des informations sur une ressource spécifique dans un volet latéral. Ce volet est utile pour le dépannage et pour trouver des informations sur un conteneur ou une ressource, comme par exemple :
 
-* [**Logs**][14] : Visualisez les logs de votre conteneur ou de votre ressource. Cliquez sur l'un de ces logs pour afficher les logs associés dans le Log Explorer.
-* [**Metrics**][15] : Visualisez les métriques de votre conteneur ou ressource, mises à jour en temps réel. Vous avez la possibilité d'afficher n'importe quel graphique en plein écran et d'en partager un snapshot ou de l'exporter depuis cet onglet.
+* [**Logs**][11] : visualisez les logs de votre conteneur ou de votre ressource. Cliquez sur l'un de ces logs pour afficher les logs associés dans le Log Explorer.
+* [**Metrics**][12] : visualisez les métriques de votre conteneur ou ressource, mises à jour en temps réel. Vous avez la possibilité d'afficher n'importe quel graphique en plein écran et d'en partager un snapshot ou de l'exporter depuis cet onglet.
 * **Network** : Visualisez les performances réseau d'un conteneur ou d'une ressource, y compris la source, la destination, le volume envoyé/reçu et le débit. Utilisez le champ **Destination** pour effectuer une recherche par tag tel que `DNS` ou `ip_type`, ou utilisez le filtre **Group by** dans cette vue pour regrouper vos données réseau par tag, tel que `pod_name` ou `service`.
-* [**Traces**][16] : Visualisez les traces de votre conteneur ou ressource, y compris la date, le service, la durée, la méthode et le code de statut d'une trace.
+* [**Traces**][13] : visualisez les traces de votre conteneur ou ressource, y compris la date, le service, la durée, la méthode et le code de statut d'une trace.
 
 Les vues Ressources Kubernetes comprennent également les onglets suivants :
 
 * **Processes** : Visualisez tous les processus en cours d'exécution dans le conteneur de cette ressource.
 * **YAML** : Vue d'ensemble détaillée de la ressource au format YAML.
-* [**Events**][17] : Visualisez tous les événements Kubernetes pour votre ressource.
+* [**Events**][14] : visualisez tous les événements Kubernetes pour votre ressource.
 
 Pour obtenir un dashboard détaillé de cette ressource, cliquez sur l'option **View Dashboard** en haut à droite de ce volet.
 
 ### Logs de conteneur
 
-Visualisez le flux de logs d'un conteneur, tel que `docker logs -f` ou `kubectl logs -f`, dans Datadog. Cliquez sur un conteneur dans le tableau pour afficher davantage d'informations. Cliquez sur l'onglet *Logs* pour visualiser en temps réel les données [Live Tail][18] ou les logs indexés historiques, peu importe leur date.
+Visualisez le flux de logs d'un conteneur, tel que `docker logs -f` ou `kubectl logs -f`, dans Datadog. Cliquez sur un conteneur dans le tableau pour afficher davantage d'informations. Cliquez sur l'onglet *Logs* pour visualiser en temps réel les données [Live Tail][15] ou les logs indexés historiques, peu importe leur date.
 
 #### Live Tail
 
 Avec la fonctionnalité Live Tail, tous les logs de conteneur sont diffusés sous forme de flux. Mettez un flux en pause pour lire facilement le contenu des logs en cours d'écriture. Vous pouvez ensuite réactiver la mise à jour du flux.
 
-Vous pouvez effectuer des recherches parmi les logs du flux à l'aide d'une simple correspondance textuelle. Pour en savoir plus sur Live Tail, consultez la [documentation dédiée][7].
+Vous pouvez effectuer des recherches parmi les logs du flux à l'aide d'une simple correspondance textuelle. Pour en savoir plus sur la fonctionnalité Live Tail, consultez la [documentation dédiée][15].
 
 **Remarque** : les logs diffusés ne sont pas persistants. Si vous saisissez une nouvelle recherche ou actualisez la page, le contenu du flux est effacé.
 
@@ -258,13 +293,13 @@ Choisissez un intervalle pour afficher les logs correspondants que vous avez cho
 ## Remarques et problèmes connus
 
 * La collecte de données en temps réel (toutes les 2 s) est désactivée après 30 minutes. Pour reprendre la collecte en temps réel, actualisez la page.
-* Les réglages RBAC peuvent restreindre la collecte de métadonnées Kubernetes. Consultez les [entités RBAC pour l'Agent Datadog][19].
+* Les réglages RBAC peuvent restreindre la collecte de métadonnées Kubernetes. Consultez les [entités RBAC pour l'Agent Datadog][16].
 * Dans Kubernetes, la valeur de `health` correspond à la sonde de disponibilité des conteneurs, et non à leur sonde d'activité.
 
 ### Ressources Kubernetes
 
 * Les données sont mises à jour automatiquement à des intervalles constants. Les intervalles de mises à jour sont susceptibles de changer durant la bêta.
-* Dans les clusters comprenant plus de 1000 déploiements ou ReplicaSets, l'Agent de cluster est susceptible de fortement solliciter le processeur. Vous avez la possibilité de désactiver le nettoyage des conteneurs dans le chart Helm. Consultez [ce lien][20] pour en savoir plus.
+* Dans les clusters comprenant plus de 1 000 déploiements ou ReplicaSets, l'Agent de cluster est susceptible de fortement solliciter le processeur. Vous avez la possibilité de désactiver le nettoyage des conteneurs dans le chart Helm. Consultez [le référentiel Helm Chart][17] pour en savoir plus.
 
 ## Pour aller plus loin
 
@@ -273,20 +308,17 @@ Choisissez un intervalle pour afficher les logs correspondants que vous avez cho
 [1]: https://app.datadoghq.com/containers
 [2]: /fr/integrations/docker_daemon/
 [3]: /fr/agent/kubernetes/
-[4]: /fr/integrations/amazon_ecs/
-[5]: https://app.datadoghq.com/containers/kubernetes-beta
-[6]: /fr/agent/docker/#run-the-docker-agent
-[7]: /fr/agent/kubernetes/?tab=helm
-[8]: /fr/agent/
-[9]: /fr/agent/cluster_agent/setup/?tab=secret
-[10]: /fr/agent/kubernetes/?tab=helm#installation
-[11]: /fr/getting_started/tagging/
-[12]: /fr/getting_started/tagging/unified_service_tagging
-[13]: /fr/dashboards/widgets/timeseries/
-[14]: /fr/logs
-[15]: /fr/metrics
-[16]: /fr/tracing
-[17]: /fr/events
-[18]: /fr/logs/live_tail/
-[19]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
-[20]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
+[4]: /fr/agent/amazon_ecs/
+[5]: https://app.datadoghq.com/orchestration/overview
+[6]: /fr/agent/
+[7]: /fr/agent/cluster_agent/setup/
+[8]: /fr/tagging/assigning_tags?tab=agentv6v7#host-tags
+[9]: /fr/getting_started/tagging/unified_service_tagging
+[10]: /fr/dashboards/widgets/timeseries/
+[11]: /fr/logs
+[12]: /fr/metrics
+[13]: /fr/tracing
+[14]: /fr/events
+[15]: /fr/logs/live_tail/
+[16]: https://github.com/DataDog/datadog-agent/blob/7.23.1/Dockerfiles/manifests/cluster-agent/rbac.yaml
+[17]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog

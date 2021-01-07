@@ -111,7 +111,7 @@ On Windows, the executable set as `secret_backend_command` must:
 
 * Have read/exec for `ddagentuser` (the user used to run the Agent).
 * Have no rights for any user or group except for the `Administrators` group, the built-in Local System account, or the Agent user context (`ddagentuser` by default)
-* Be a valid Win32 application so the Agent can execute it.
+* Be a valid Win32 application so the Agent can execute it (a PowerShell or Python script would not work for example).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -250,7 +250,7 @@ Kubernetes supports [exposing secrets as files][5] inside a pod.
 If your secrets are mounted in `/etc/secret-volume`, use the following environment variables:
 
 ```
-DD_SECRET_BACKEND_COMMAND=/readsecret.sh
+DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
 

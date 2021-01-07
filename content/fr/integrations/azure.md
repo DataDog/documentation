@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: Recueillez des métriques à partir d'instances et de nombreux services Azure.
 doc_link: 'https://docs.datadoghq.com/integrations/azure/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/'
     tag: Blog
@@ -46,7 +47,7 @@ L'intégration Azure de Datadog est conçue pour recueillir <a href="https://doc
 | Intégration                     | Description                                                                                               |
 |---------------------------------|-----------------------------------------------------------------------------------------------------------|
 | [Analysis Services][1]          | Un service qui fournit des modèles de données dans le cloud.                                                         |
-| [Gestion des API][2]             | Un service pour publier, sécuriser, transformer, protéger et surveiller les API.                                      |
+| [Gestion des API][2]             | Un service pour publier, sécuriser, transformer, maintenir et surveiller les API.                                      |
 | [App Service][3]                | Un service de déploiement et de mise à l'échelle d'applications Web, mobiles, API et de logique métier                      |
 | [App Service Environment][4]    | Un service qui fournit un environnement pour l'exécution sécurisée de vos applications App Service à grande échelle.               |
 | [Plan App Service][5]           | Un ensemble de ressources de calcul nécessaires à l'exécution d'une application Web.                                                          |
@@ -54,10 +55,10 @@ L'intégration Azure de Datadog est conçue pour recueillir <a href="https://doc
 | [Automation][7]                 | Un service conçu pour faciliter la gestion de la configuration et l'automatisation au sein de vos environnements.                 |
 | [Batch Service][8]              | Un planificateur et processeur de tâches gérés                                                                      |
 | [Cognitive Services][9]         | Un ensemble d'API, de SDK et de services mis à votre disposition pour vous permettre de créer des applications sans connaissances en intelligence artificielle ou en science des données.       |
-| [Container Instances][10]       | Un service qui vous permet de déployer des conteneurs sans avoir à approvisionner ou gérer l'infrastructure sous-jacente.     |
+| [Container Instances][10]       | Un service qui vous permet de déployer des conteneurs sans avoir à provisionner ou gérer l'infrastructure sous-jacente.     |
 | [Container Service][11]         | Un cluster Kubernetes, DC/OS ou Docker Swarm prêt pour la production.                                            |
-| [Cosmos DB][12]                 | Une base de données qui prend en charge les modèles de données clé/valeur, en colonnes, document et graphique.                   |
-| [Customer Insights][13]         | Permet aux organisations de regrouper des jeux de données pour bénéficier d'une vue globale sur leurs clients.                |
+| [Cosmos DB][12]                 | Un service de base de données qui prend en charge les bases de données clé-valeur, de documents, en colonnes et graphiques.                   |
+| [Customer Insights][13]         | Permet aux organisations de consolider divers jeux de données pour bénéficier d'une vue globale sur leurs clients.                |
 | [Data Explorer][14]             | Un service d'exploration de données rapide et hautement évolutif.                                                        |
 | [Data Factory][15]              | Un service qui permet de composer des services de stockage, de déplacement et de traitement des données au sein de pipelines de données automatisés.       |
 | [Data Lake Analytics][16]       | Un service d'analyse qui simplifie le traitement des tâches de Big Data.                                                        |
@@ -65,7 +66,7 @@ L'intégration Azure de Datadog est conçue pour recueillir <a href="https://doc
 | [Database for MariaDB][18]      | Un service qui fournit une version communautaire entièrement gérée et prête à l'emploi de MariaDB.                       |
 | [Event Grid][19]                | Un service pour gérer le routage des événements qui permet une consommation d'événements uniforme à l'aide d'un modèle pub/sub.       |
 | [Event Hubs][20]                 | Un service géré de flux de données à grande échelle                                                                   |
-| [ExpressRoute][21]              | Un service pour étendre vos réseaux locaux dans le cloud.                                             |
+| [ExpressRoute][21]              | Un service pour étendre vos réseaux sur site dans le cloud.                                             |
 | [Pare-feu][22]                  | Un service de sécurité réseau basé sur le cloud pour protéger les ressources de votre réseau virtuel Azure.                            |
 | [Functions][23]                 | Un service conçu pour exécuter du code sans serveur en réponse à un événement.                                      |
 | [HDInsights][24]                | Un service cloud conçu pour traiter d'importants volumes de données.                                                   |
@@ -74,7 +75,7 @@ L'intégration Azure de Datadog est conçue pour recueillir <a href="https://doc
 | [Load Balancer][27]             | Permet de mettre à l'échelle vos applications et d'assurer la haute disponibilité de vos services.                                    |
 | [Logic Apps][28]                 | Conception de solutions d'intégration puissantes                                                                      |
 | [Machine Learning][29]          | Service de machine learning pour l'entreprise permettant d'accélérer la création et le déploiement de modèles                              |
-| [Network Interfaces][30]        | Permet la mise en communication d'une machine virtuelle avec Internet, Azure et des ressources locales.                                 |
+| [Network Interfaces][30]        | Permet à une machine virtuelle de communiquer avec des ressources Internet, Azure et locales.                                 |
 | [Notification Hubs][31]         | Un moteur de notifications Push qui vous permet d'envoyer des notifications vers n'importe quelle plateforme depuis n'importe quel backend.                     |
 | [Adresse IP publique][32]         | Une ressource qui permet d'assurer une connectivité entrante et une connectivité sortante à partir d'Internet.                |
 | [Redis Cache][33]               | Cache de données géré                                                                                        |
@@ -125,7 +126,7 @@ az ad sp create-for-rbac --role "Monitoring Reader" --scopes /subscriptions/{id_
 - Cette commande accorde au service principal le rôle `monitoring reader` pour l'abonnement que vous souhaitez surveiller.
 - La valeur `appID` générée à partir de cette commande doit être saisie dans le [carré d'intégration Azure de Datadog][1], sous **Client ID**.
 - Ajoutez `--name <NOM_PERSONNALISÉ>` pour utiliser un nom personnalisé. Autrement, Azure générera un nom unique. Le nom n'est pas utilisé dans le processus de configuration.
-- Ajoutez `--password <MOTDEPASSE_PERSONNALISÉ>` pour utiliser un mot de passe personnalisé. Autrement, Azure générera un mot de passe unique. Ce mot de passe doit être saisi dans le [carré d'intégration Azure de Datadog][1], sous **Client Secret**.
+- Ajoutez `--password <MOTDEPASSE_PERSONNALISÉ>` pour utiliser un mot de passe personnalisé. Autrement, Azure générera un mot de passe unique. Ce mot de passe doit être saisi dans le [carré d'intégration Datadog/Azure][1], sous **Client Secret**.
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
@@ -256,7 +257,7 @@ azure role assignment create --objectId <ID_OBJET> --roleName "Monitoring Reader
 
     {{< img src="integrations/azure/azure-select-role-app.png" alt="Sélection du rôle et de l'app" popup="true" style="width:60%">}}
 
-5. Cliquez sur **Enregistrer**.
+5. Cliquez sur **Save**.
 6. Répétez ce processus pour tout autre abonnement que vous souhaitez surveiller à l'aide de Datadog. **Remarque** : les utilisateurs d'Azure Lighthouse peuvent ajouter les abonnements des locataires clients.
 
 **Remarque** : les diagnostics doivent être activés pour que les machines virtuelles déployées avec ARM puissent recueillir des métriques. Consultez la section [Activer les diagnostics][48].
@@ -307,7 +308,98 @@ Accédez au [dashboard par défaut des machines virtuelles Azure][53] pour visua
 Le meilleur moyen d'envoyer les logs d'Azure à Datadog est d'utiliser l'Agent ou un DaemonSet. Si cela n'est pas possible pour une certaine ressource, Datadog vous conseille de créer un pipeline de transfert de logs en utilisant un Event Hub Azure pour recueillir [les logs de la plateforme Azure][54]. Si une ressource ne prend pas en charge la diffusion des logs de la plateforme Azure à un Event Hub, vous pouvez les transférer via le service Stockage Blob Azure.
 
 {{< tabs >}}
-{{% tab "Event Hub" %}}
+
+{{% tab "Installation automatisée" %}}
+
+Datadog met à votre disposition deux scripts automatisés.
+
+Le premier script crée et configure les ressources Azure requises pour que les logs d'activité soient diffusés vers votre compte Datadog. Ces ressources incluent les paramètres de diagnostic des logs d'activité, les fonctions Azure, les espaces de nommage d'Event Hub et l'Event Hub.
+
+Le second script est une option plus générique qui déploie uniquement l'Event Hub et les fonctions Azure, sans aucun paramètre de diagnostic. Il peut être utilisé pour configurer les sources de diffusion. Dans les deux cas, les Event Hubs peuvent être utilisés par d'autres sources de diffusion.
+
+**Exemple :**
+
+Si vous souhaitez diffuser à la fois les logs d'activité et les logs de ressources provenant de `westus`, exécutez le premier script en spécifiant le paramètre facultatif `-ResourceGroupLocation westus` (les logs d'activité sont une source au niveau de l'abonnement, vous pouvez donc leur créer un pipeline dans n'importe quelle région). Une fois le script déployé, vous pouvez envoyer les logs de ressource via le même Event Hub en ajoutant les paramètres de diagnostic à vos ressources dans `westus`.
+
+
+#### Envoyer vos logs d'activité à Datadog depuis Azure :
+
+*Étape 1 :** dans le portail Azure, accédez à votre **Cloud Shell**.
+
+{{< img src="integrations/azure/azure_cloud_shell.png" alt="cloud shell azure" popup="true" style="width:100%">}}
+
+**Étape 2 :** exécutez la commande ci-dessous pour télécharger le script d'automatisation dans votre environnement Cloud Shell.
+
+{{< code-block lang="powershell" filename="Logs d'activité Étape 1" >}}
+
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1", "activity_logs_deploy.ps1")
+
+{{< /code-block >}}
+
+Vous pouvez également [afficher le contenu du script][1].
+
+**Étape 3 :** invoquez le script en exécutant la commande ci-dessous, en ayant remplacé **`<clé_api>`**, par votre [token d'API Datadog][2], et **`<id_abonnement>`**, par votre ID d'abonnement Azure. Vous pouvez également ajouter des paramètres facultatifs supplémentaires pour configurer votre déploiement. Consultez [Paramètres facultatifs](#parametres-facultatifs).
+
+{{< code-block lang="powershell" filename="Logs d'activité Étape 2" >}}
+
+./activity_logs_deploy.ps1 -ApiKey <clé_api> -SubscriptionId <id_abonnement> 
+
+{{< /code-block >}}
+
+#### Envoyer vos logs de plateforme à Datadog depuis Azure :
+
+Une solution générique pour envoyer des logs de plateforme Azure, y compris les logs de ressource, consiste à déployer uniquement l'Event Hub et le forwarder de logs.
+Une fois ce pipeline déployé, vous pouvez créer des paramètres de diagnostic pour chaque source de log et les configurer pour qu'elles diffusent leur contenu vers Datadog.
+
+*Étape 1 :** dans le portail Azure, accédez à votre **Cloud Shell**.
+
+**Étape 2 :** exécutez la commande ci-dessous pour télécharger le script d'automatisation dans votre environnement Cloud Shell.
+
+{{< code-block lang="powershell" filename="Logs de plateforme Étape 1" >}}
+
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/resource_deploy.ps1", "resource_deploy.ps1")
+
+{{< /code-block >}}
+
+Vous pouvez également [afficher le contenu du script](https://github.
+com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1).
+
+**Étape 3 :** invoquez le script en exécutant la commande ci-dessous, en ayant remplacé **`<clé_api>`**, par votre [token d'API Datadog][2], et **`<id_abonnement>`**, par votre ID d'abonnement Azure. Vous pouvez également ajouter des paramètres facultatifs supplémentaires pour configurer votre déploiement. Consultez [Paramètres facultatifs](#parametres-facultatifs).
+
+{{< code-block lang="powershell" filename="Logs de plateforme Étape 2" >}}
+
+./resource_deploy.ps1 -ApiKey <clé_api> -SubscriptionId <id_abonnement> 
+
+{{< /code-block >}}
+
+**Étape 4 :** créez des paramètres de diagnostic pour toutes les ressources Azure qui enverront des logs à Datadog. Configurez ces paramètres de diagnostic pour démarrer la diffusion des logs vers l'Event Hub que vous venez de créer.
+
+**Remarque :** les ressources peuvent diffuser des logs uniquement aux Event Hubs qui se trouvent dans la même région Azure. Vous devrez donc répéter l'étape 2 pour chaque région à partir de laquelle vous souhaitez diffuser des logs de ressource.
+
+**Remarque :** les valeurs Ressource-Groupe-Emplacement sont ajoutées au nom par défaut de chaque ressource Azure déployée pour le pipeline de logs de plateforme. Exemple : `datadog-eventhub-westus`. Toutefois, vous pouvez modifier cette convention en remplaçant ce paramètre.
+
+#### Paramètres facultatifs
+
+**Remarque :** lorsque vous personnalisez les paramètres, assurez-vous que le nom de chacune de vos ressources personnalisées est unique. Vérifiez que le nom de la ressource ne figure pas déjà dans votre liste de ressources Azure.
+
+| -Flag `<paramètre par défaut>`                                           | Description                                                                                                                                                      |
+|-----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -DatadogSite `<datadoghq.com>`                                        | Personnalisez votre instance Datadog en ajoutant ce flag avec une autre URL datadog comme paramètre. (Vous pouvez utiliser datadoghq.eu, ddog-gov.com, ou us3.datadoghq.com)      |
+| -ResourceGroupLocation `<westus2>`                                    | Vous pouvez sélectionner la région dans laquelle votre groupe de ressources et vos ressources Azure sont déployés en ajoutant ce flag avec la nouvelle région Azure.              |
+| -ResourceGroupName `<gr-forwarder-logs-datadog>`                       | Personnalisez le nom de votre groupe de ressources Azure en ajoutant ce flag avec un paramètre mis à jour.                                                                          |
+| -EventhubNamespace `<espacedenommage-eventhub-datadog>`                     | Personnalisez l'espace de nommage de votre Event-Hub Azure en ajoutant ce flag avec un paramètre mis à jour.                                                                          |
+| -EventhubName `<eventhub-datadog>`                                    | Personnalisez le nom de votre Event-Hub Azure en utilisant ce flag avec un paramètre mis à jour.                                                                               |
+| -FunctionAppName `<application-de-fonction-datadog>`                              | Personnalisez le nom de votre application de fonction Azure en ajoutant ce flag avec un paramètre mis à jour.                                                                            |
+| -FunctionName `<fonction-datadog>`                                    | Personnalisez le nom de votre fonction Azure en utilisant ce flag avec un paramètre mis à jour.                                                                                |
+| -DiagnosticSettingName `<paramètre-diagnostic-logs-activité-datadog>`   | Personnalisez le nom de votre paramètre de diagnostic Azure en utilisant ce flag avec un paramètre mis à jour. **(Est pertinent uniquement pour l'envoi de logs d'activité)**                        |
+
+
+
+[1]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
+[2]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+
+{{% tab "Installation manuelle" %}}
 
 Pour envoyer des logs d'Azure à Datadog, suivez cette méthode globale :
 
@@ -321,37 +413,72 @@ Les instructions qui suivent permettent d'effectuer une première configuration 
 
 Créez un [Event Hub Azure][1] :
 
+Créez un espace de nommage ou ajoutez un nouvel Event Hub à un espace de nommage existant en suivant les instructions ci-dessous.
+
 1. Dans le portail Azure, accédez à la vue d'ensemble *Event Hubs* et cliquez sur **Ajouter**.
 2. Indiquez le nom, le niveau tarifaire, l'abonnement et le groupe de ressources.
 3. Sélectionnez une région. **Remarque** : l'Event Hub doit se trouver dans la même région que la ressource dont les logs doivent être transférés. Pour les logs d'activité ou toute autre source de logs propres à l'ensemble du compte, la région n'a pas d'importance.
-4. Sélectionnez les options de votre choix pour Kafka, la redondance par zone, le débit et l'inflation automatique.
+4. Sélectionnez les options de votre choix pour les unités de débit, les zones de disponibilité et l'inflation automatique.
 5. Cliquez sur **Créer**.
+
+Ajoutez un Event Hub à votre espace de nommage Event Hub.
+
+1. Dans le portail Azure, accédez à un espace de nommage (nouveau ou existant).
+2. Cliquez sur **+ Event Hub**.
+3. Sélectionnez les options de votre choix pour le nom, le nombre de partitions et la rétention des messages.
+4. Cliquez sur **Créer**.
+
 
 #### Fonction Datadog/Azure
 
 Configurez la fonction Datadog/Azure [avec un déclencheur Event Hub][2] pour transmettre les logs à Datadog :
 
+Créez une application de fonctions ou utilisez une application de fonctions existante et passez à la section suivante.
+
 1. Dans le portail Azure, accédez à *Applications de fonctions -> Fonctions* et cliquez sur **Ajouter**.
 2. Sélectionnez un abonnement, un groupe de ressources, une région et nommez votre fonction. 
-3. Sélectionnez **Code** comme valeur du paramètre Publier, et **Node.js** comme valeur du paramètre Pile d'exécution.
-4. Cliquez sur **Suivant : Hébergement**.
+3. Sélectionnez **Code** comme valeur du paramètre Publier, **Node.js** comme valeur du paramètre Runtime, et *12 LTS** comme valeur du paramètre Version.
+4. Cliquez sur **Next:Hosting**.
 5. Sélectionnez un compte de stockage et un type de plan, puis sélectionnez **Windows** comme système d'exploitation.
-6. Passez en revue et créez votre nouvelle fonction.
-7. Une fois le déploiement terminé, sélectionnez votre nouvelle fonction dans la liste des applications de fonctions.
-8. Choisissez de générer votre fonction dans le portail et utilisez le modèle [déclencheur Event Hub][2] sous **Autres modèles…**. Si on vous le demande, installez l'extension `Microsoft.Azure.WebJobs.Extensions.EventHubs`.
-9. Sélectionnez ou ajoutez la Connexion, le Groupe de consommateurs et le Nom de l'Event Hub à partir duquel vous souhaitez récupérer les logs, puis cliquez sur **Créer**.
-10. Créez un fichier `index.js` et ajoutez le [code de la fonction Datadog/Azure][4].
-11. Créez la variable d'environnement `DD_API_KEY` et ajoutez votre [clé d'API Datadog][5] comme valeur.
-12. Enregistrez la fonction.
-13. Dans la section Intégrer, vérifiez que les paramètres suivants sont bien définis :<br>
-    a. Event Parameter Name doit être défini sur `eventHubMessages`.<br>
-    b. Event Hub Cardinality doit être défini sur `Many`.<br>
-    c. Event Hub Data Type doit être défini sur `Default (Json)`.<br>
-    **Remarque** : si cette option n'apparaît pas dans l'éditeur standard, utilisez l'éditeur avancé pour supprimer entièrement le paramètre `dataType`. Il est possible que l'éditeur standard ne reflète pas ce changement, mais cela n'a pas d'importance.
-14. Cliquez sur **Enregistrer**.
-15. Vérifiez que votre configuration est valide en exécutant la fonction et en recherchant le message de test dans le [Log Explorer de Datadog][6].
+6. Passez en revue et créez votre nouvelle application de fonctions.
+7. Attendez que votre déploiement se termine.
 
-#### Paramètre de diagnostic
+Ajoutez une nouvelle fonction à votre application de fonctions en utilisant le modèle de déclencheur Event Hub.
+
+1. Sélectionnez une application de fonctions, nouvelle ou existante, dans la liste des applications de fonctions.
+2. Sélectionnez **Fonctions** dans le menu des fonctions et cliquez sur **Ajouter**. 
+3. Sélectionnez un [déclencheur Azure Event Hub][2] dans le menu des modèles et cliquez sur **Nouveau**.
+4. Sélectionnez votre espace de nommage et votre Event Hub pour la connexion de l'Event Hub et cliquez sur **OK**.
+5. Cliquez sur **Créer une fonction**.
+
+Pointez votre déclencheur Event Hub vers Datadog.
+
+1. Sélectionnez votre nouveau déclencheur Event Hub dans la vue des fonctions.
+2. Cliquez sur **Code + Test** dans le menu latéral pour les développeurs.
+3. Ajoutez le [code de la fonction Datadog/Azure][4] à votre fichier index.js.
+4. Ajoutez votre clé d'API en créant une variable d'environnement `DD_API_KEY` dans l'onglet de configuration de votre application de fonctions, ou copiez-la dans le code de la fonction en remplaçant `<DATADOG_API_KEY>` à la ligne 22.
+5. Enregistrez la fonction.
+6. Cliquez sur **Integration**, puis sur **Azure Event Hubs** sous le déclencheur et vérifiez les paramètres suivants :
+    a. Event Parameter Name doit être défini sur `eventHubMessages`.
+    b. Event Hub Cardinality doit être défini sur `Many`.
+    c. Event Hub Data Type doit être vide.
+7. Cliquez sur **Enregistrer**.
+8. Vérifiez que votre configuration est valide en exécutant la fonction et en recherchant le message de test dans le [Log Explorer de Datadog][5].
+
+#### Logs d'activité
+
+1. Dans le portail Azure, accédez au *Journal d'activité*.
+2. Cliquez sur **Paramètres de diagnostic**.
+3. Cliquez sur **Ajouter un paramètre de diagnostic**.
+4. Dans la section Détails de la catégorie, sélectionnez les catégories de logs à envoyer à Datadog.
+5. Dans la section Détails de la destination, sélectionnez **Diffuser vers un Event Hub**.
+6. Définissez l'espace de nommage et le nom de l'Event Hub. Ces derniers doivent correspondre à l'espace de nommage et au nom de l'Event Hub que vous avez utilisés pour créer votre déclencheur Event Hub.
+7. Définissez la clé d'accès partagé. Celle-ci doit être configurée avec un accès en envoi ou en gestion.
+8. Cliquez sur **Enregistrer**.
+9. Vérifiez que les logs de cette ressource apparaissent dans le [Log Explorer de Datadog][5] pour confirmer que votre configuration est valide.
+
+
+#### Logs de ressource
 
 Configurez vos services Azure de façon à ce que leurs logs soient envoyés au Event Hub en créant un [paramètre de diagnostic][3].
 
@@ -360,18 +487,17 @@ Configurez vos services Azure de façon à ce que leurs logs soient envoyés au 
 3. Cliquez sur **Ajouter un paramètre de diagnostic**.
 4. Dans la section Détails de la catégorie, sélectionnez les catégories de logs à envoyer à Datadog.
 5. Dans la section Détails de la destination, sélectionnez **Diffuser vers un Event Hub**.
-6. Sélectionnez l'espace de nommage et le nom de l'Event Hub. Ces derniers doivent correspondre à l'espace de nommage et au nom définis à l'étape 9 de la section précédente.
+6. Définissez l'espace de nommage et le nom de l'Event Hub. Ces derniers doivent correspondre à l'espace de nommage et au nom de l'Event Hub que vous avez utilisés pour créer votre déclencheur Event Hub.
 7. Définissez la clé d'accès partagé. Celle-ci doit être configurée avec un accès en envoi ou en gestion.
 8. Cliquez sur **Enregistrer**.
-9. Vérifiez que les logs de cette ressource sont présents dans le [Log Explorer de Datadog][6] pour confirmer que votre configuration est valide.
+9. Vérifiez que les logs de cette ressource apparaissent dans le [Log Explorer de Datadog][5] pour confirmer que votre configuration est valide.
 
 
 [1]: https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-create
 [2]: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-event-hubs-trigger
 [3]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
 [4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
-[5]: https://app.datadoghq.com/account/settings#api
-[6]: https://app.datadoghq.com/logs
+[5]: https://app.datadoghq.com/logs
 {{% /tab %}}
 
 {{% tab "Stockage Blob" %}}
@@ -388,8 +514,8 @@ Si vous n'avez jamais utilisé de fonction Azure, consultez la section [Créer v
 
 1. Dans le [portail Azure][2], accédez à _Applications de fonctions -> Fonctions_ et cliquez sur **Ajouter**.
 2. Sélectionnez un abonnement, un groupe de ressources, une région et nommez votre fonction. 
-3. Sélectionnez **Code** comme valeur du paramètre Publier, et **Node.js** comme valeur du paramètre Pile d'exécution.
-4. Cliquez sur **Suivant : Hébergement**.
+3. Sélectionnez **Code** comme valeur du paramètre Publier, et **Node.js** comme valeur du paramètre Runtime.
+4. Cliquez sur **Next:Hosting**.
 5. Sélectionnez un compte de stockage et un type de plan, puis sélectionnez **Windows** comme système d'exploitation.
 6. Passez en revue et créez votre nouvelle fonction en cliquant sur **Create**.
 7. Une fois le déploiement terminé, sélectionnez votre nouvelle fonction dans la liste des Applications de fonction.
@@ -398,7 +524,7 @@ Si vous n'avez jamais utilisé de fonction Azure, consultez la section [Créer v
 10. Créez un fichier `index.js` et ajoutez le [code de la fonction Datadog/Azure][8] (remplacez `<DATADOG_API_KEY>` par votre [clé d'API Datadog][9]).
 11. Enregistrez la fonction.
 12. Pour **Intégrer**, définissez **Nom du paramètre d'objet blob** sur `blobContent`, et cliquez sur **Enregistrer**.
-13. Vérifiez que vos logs sont présents dans le [Log Explorer de Datadog][10] pour confirmer que la fonction est bien configurée.
+13. Vérifiez que vos logs apparaissent dans le [Log Explorer de Datadog][10] pour confirmer que votre configuration est valide.
 
 
 [1]: https://azure.microsoft.com/en-us/services/storage/blobs/

@@ -55,6 +55,10 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 Enable monitor renotification (optional), which is useful to remind your team a problem is not solved. If enabled, you are given the option to include an escalation message sent any time the monitor renotifies. The original notification message is also included.
 
+### Priority
+
+Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
+
 ## Notify your team
 
 Use this section to send notifications to your team through email, Slack, PagerDuty, etc. You can search for team members and connected integrations with the drop-down box. When an `@notification` is added to this section, the notification is automatically added to the [message](#message) field.
@@ -142,15 +146,30 @@ For example, if your tag is `dot.key.test:five` and your monitor is grouped by `
 #### Log facet variables
 
 Log monitors can use facets as variables if the monitor is grouped by the facets.
-For example, if your log monitor is grouped by the facet `@facet`, the variable is:
+For example, if your log monitor is grouped by the `facet`, the variable is:
 
 ```text
-{{@facet.name}}
+{{ facet.name }}
+```
+**Example**: To include the information in a multi alert log monitor group by `@machine_id`: 
+
+```text
+This alert was triggered on {{ @machine_id.name }}
+```
+If your facet has periods, use brackets around the facet, for example:
+
+```text
+{{ [@network.client.ip].name }}
 ```
 
-If your facet has periods, use brackets around the facet, for example:
+#### Composite monitor variables
+
+Composite monitors can access the value associated with the sub-monitors at the time the alert triggers. 
+
+For example, if your composite monitor has sub-monitor `a`, you can include the value of `a` with:
+
 ```text
-{{[@facet.with.dot].name}}
+{{ a.value }}
 ```
 
 ### Conditional variables
@@ -181,6 +200,7 @@ The following conditional variables are available:
 | `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
 | `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
 | `{{^is_no_data_recovery}}` | The monitor does not recover from `NO DATA`                        |
+| `{{#is_priority 'value'}}`  | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
 
 #### Examples
 
@@ -236,6 +256,36 @@ To notify your DB team if a triggering host has the tag `role:db_cassandra` or `
 {{#is_match "role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
+{{/is_match}}
+```
+
+The `is_match` condition also supports matching multiple strings:
+
+```text
+{{#is_match "role.name" "db" "database"}}
+  This displays if the host triggering the alert contains `db` or `database`
+  in the role name. @db-team@company.com
+{{/is_match}}
+```
+
+To send a different notification if the tag doesn't contain `db`, use the negation of the condition as follows:
+
+```text
+{{^#is_match "role.name" "db"}}
+  This displays if the role tag doesn't contain `db`.
+  @slack-example
+{{/is_match}}
+```
+
+Or use the `{{else}}` parameter in the first example:
+
+```text
+{{#is_match "role.name" "db"}}
+  This displays if the host triggering the alert contains `db`
+  in the role name. @db-team@company.com
+{{else}}
+  This displays if the role tag doesn't contain `db`.
+  @slack-example
 {{/is_match}}
 ```
 

@@ -28,20 +28,9 @@ Synthetic CI/CD テストを使用して、**CD プロセスの一部として�
 
 エンドポイントをトリガーするテストは、1 回のリクエストで最大 50 件のテスト実行に対応します。
 
-{{< site-region region="us" >}}
-
-* **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci`
+* **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci`
 * **Method**: `POST`
 * **Argument**: トリガーする全テストのリストと各テストのコンフィギュレーションオーバーライドを含む JSON オブジェクト。
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-* **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci`
-* **Method**: `POST`
-* **Argument**: トリガーする全テストのリストと各テストのコンフィギュレーションオーバーライドを含む JSON オブジェクト。
-
-{{< /site-region >}}
 
 #### リクエストデータの構造
 
@@ -57,8 +46,6 @@ Synthetic CI/CD テストを使用して、**CD プロセスの一部として�
 
 #### リクエスト例
 
-{{< site-region region="us" >}}
-
 ```bash
 #!/bin/sh
 
@@ -87,46 +74,8 @@ curl -X POST \
             "variables": { "titleVariable": "new value" }
         }
     ]
-}' "https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci"
+}' "https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci"
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-
-```bash
-#!/bin/sh
-
-api_key="<DATADOG_API_KEY>"
-app_key="<DATADOG_APPLICATION_KEY>"
-
-curl -X POST \
--H 'Content-Type: application/json' \
--H "DD-API-KEY: ${api_key}" \
--H "DD-APPLICATION-KEY: ${app_key}" \
--d '{
-    "tests": [
-        {
-            "public_id": "abc-def-ghi",
-            "allowInsecureCertificates": true,
-            "basicAuth": { "username": "test", "password": "test" },
-            "body": "{\"fakeContent\":true}",
-            "bodyType": "application/json",
-            "cookies": "name1=value1;name2=value2;",
-            "deviceIds": ["laptop_large"],
-            "followRedirects": true,
-            "headers": { "NEW_HEADER": "NEW VALUE" },
-            "locations": ["aws:us-west-1"],
-            "retry": { "count": 2, "interval": 300 },
-            "startUrl": "http://new.url/",
-            "variables": { "titleVariable": "new value" }
-        }
-    ]
-}' "https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci"
-```
-
-{{< /site-region >}}
-
 
 #### 応答例
 
@@ -147,24 +96,11 @@ curl -X POST \
 
 ### ポーリング結果のエンドポイント
 
-{{< site-region region="us" >}}
-
-* **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/poll_results`
+* **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/poll_results`
 * **Method**: `GET`
 * **Parameters**: 結果の入手元となる結果識別子のリストを含む JSON 配列。
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-* **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results`
-* **Method**: `GET`
-* **Parameters**: 結果の入手元となる結果識別子のリストを含む JSON 配列。
-
-{{< /site-region >}}
 
 #### リクエスト例
-
-{{< site-region region="us" >}}
 
 ```bash
 #!/bin/sh
@@ -173,29 +109,11 @@ api_key="<DATADOG_API_KEY>"
 app_key="<DATADOG_APPLICATION_KEY>"
 
 curl -G \
-    "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
+    "https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
     -d "result_ids=[220123456789012345678]"
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```bash
-#!/bin/sh
-
-api_key="<DATADOG_API_KEY>"
-app_key="<DATADOG_APPLICATION_KEY>"
-
-curl -G \
-    "https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results" \
-    -H "DD-API-KEY: ${api_key}" \
-    -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
-```
-
-{{< /site-region >}}
 
 #### 応答例
 
@@ -368,7 +286,7 @@ yarn add --dev @datadog/datadog-ci
 
     * **apiKey**: Datadog API にクエリーを送信する際に使用される API キー。
     * **appKey**: Datadog API にクエリーを送信する際に使用されるアプリケーションキー。
-    * **datadogSite**: リクエストの送信先となる Datadog インスタンス (`datadoghq.com` または `datadoghq.eu`)。デフォルトは `datadoghq.com` です。
+    * **datadogSite**: リクエストの送信先となる Datadog インスタンス。デフォルトは `datadoghq.com`。Datadog サイトは {{< region-param key="dd_site" code="true" >}} です。
     * **files**: Synthetic テスト用コンフィギュレーションファイルを検出するグロブパターン。
     * **global**: すべてのテストに適用される Synthetic テストのオーバーライド ([各フィールドの説明については下記を参照してください](#テストの構成))。
     * **proxy**: Datadog への発信接続に使用されるプロキシー。`host` と `port` キーは必須の引数で、`protocol` キーの初期値は `http` です。サポートされる `protocol` キーの値は、`http`、`https`、`socks`、`socks4`、`socks4a`、`socks5`、`socks5h`、`pac+data`、`pac+file`、`pac+ftp`、`pac+http`、`pac+https` です。プロキシーの構成に使用されるライブラリーは、[proxy-agent][3] ライブラリーです。

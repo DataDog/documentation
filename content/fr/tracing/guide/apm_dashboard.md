@@ -5,16 +5,16 @@ further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: "3\_minutes"
     text: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
-  - link: tracing/guide/week_over_week_p50_comparison/
+  - link: /tracing/guide/week_over_week_p50_comparison/
     tag: "2\_minutes"
     text: Comparer la latence d'un service avec celle de la semaine précédente
   - link: /tracing/guide/slowest_request_daily/
     tag: "3\_minutes"
     text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
-  - link: tracing/guide/add_span_md_and_graph_it/
+  - link: /tracing/guide/add_span_md_and_graph_it/
     tag: "7\_minutes"
     text: Ajouter des tags de span et filtrer les données de performance de votre application
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: Tous les guides
 ---
@@ -26,11 +26,11 @@ L'APM Datadog vous permet de créer des dashboards en fonction des priorités de
 Vous pouvez créer des widgets sur ces dashboards afin de suivre vos métriques d'infrastructure traditionnelles, vos métriques de log et vos métriques custom, telles que la charge mémoire du host, conjointement à vos métriques APM critiques mesurant le débit, la latence et le taux d'erreur afin de mettre toutes ces données en corrélation.
 Il est également possible de suivre la latence de l'expérience utilisateur pour les clients et les transactions critiques tout en surveillant les performances de votre serveur Web principal en prévision d'un événement majeur, tels que le 1er jour des soldes.
 
-Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques de trace dans un dashboard, les corréler avec vos métriques d'infrastructure, puis exporter une requête App Analytics. L'ajout de widgets dans un dashboard peut se faire de trois façons différentes :
+Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques de trace à un dashboard, les corréler avec vos métriques d'infrastructure, puis exporter une requête Analytics. L'ajout de widgets à un dashboard peut se faire de trois façons différentes :
 
 * En copiant un graphique APM existant _( étapes 1, 2 et 3)_
 * En créant un graphique manuellement _(étapes 4 et 5)_
-* En exportant une requête App Analytics _(étape 7)_
+* En exportant une requête Analytics _(étape 7)_
 
 1. **Ouvrez la [page contenant la liste des services][1]** et sélectionnez le service `web-store`.
 
@@ -84,9 +84,9 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 
     Avec ces paramètres, il est possible de déterminer si un pic de latence est lié à une hausse du nombre de threads Ruby, ce qui expliquerait immédiatement la cause de la latence et permettrait ainsi de résoudre rapidement le problème.
 
-7. **Accédez à [App Analytics][4]**.
+7. **Accédez à [Analytics][4]**.
 
-    Cet exemple illustre la marche à suivre pour mesurer la latence au sein d'une application, en classant les résultats par marchands afin d'identifier les 10 marchands qui présentent la latence la plus élevée. Depuis l'écran App Analytics, exportez le graphique vers le dashboard et affichez-le dans celui-ci :
+    Cet exemple illustre la marche à suivre pour mesurer la latence au sein d'une application, en classant les résultats par marchand afin d'identifier les 10 marchands qui présentent la latence la plus élevée. Depuis l'écran Analytics, exportez le graphique vers le dashboard et affichez-le dans celui-ci :
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6"  style="width:90%;">}}
 
@@ -127,7 +127,7 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /fr/dashboards/widgets/timeseries
-[3]: /fr/tracing/guide/metrics_namespace
-[4]: https://app.datadoghq.com/apm/search/analytics
-[5]: /fr/events
+[2]: /fr/dashboards/widgets/timeseries/
+[3]: /fr/tracing/guide/metrics_namespace/
+[4]: https://app.datadoghq.com/apm/analytics
+[5]: /fr/events/

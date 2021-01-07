@@ -13,7 +13,7 @@ Datadog detects threats out-of-the-box and can notify your team of security issu
 
 {{< img src="security_monitoring/takeover_ex.png" alt="Slack Example"  style="width:75%;">}}
 
-Datadog detects many different sorts of threats to your application or infrastructure. A few examples include a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the [Security Explorer][1]. 
+Datadog detects many different sorts of threats to your application or infrastructure. A few examples include a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the [Security Signals Explorer][1]. 
 
 {{< img src="security_monitoring/explorer.png" alt="Security Signals Explorer"  >}}
 

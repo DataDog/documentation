@@ -6,3 +6,4 @@
 /src/                     @DataDog/corpweb @DataDog/documentation
 /config/                  @DataDog/corpweb @DataDog/documentation
 /config/_default/menus/   @DataDog/documentation
+package.json              @DataDog/corpweb @DataDog/documentation

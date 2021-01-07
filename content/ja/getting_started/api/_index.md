@@ -18,57 +18,68 @@ Datadog API を使用すると、Datadog との間でデータをやり取りで
 
 - Datadog のアクティブな実装。
 - Datadog [API キーとアプリケーションキー][2]へのアクセス権。
-- [Postman API クライアントがインストール済みであること][1]。
 - API 構造と JSON 書式設定に関する基礎知識。
 
 ## セットアップ
 
-### Datadog コレクションのインポート
+### Postman に Datadog コレクションをインポート
+<div class="postman-run-button"
+data-postman-action="collection/import"
+data-postman-var-1="bf4ac0b68b8ff47419c1"
+data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFwaV9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="></div>
+<script type="text/javascript">
+  (function (p,o,s,t,m,a,n) {
+    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+      (n = o.createElement("script")),
+      (n.id = s+t), (n.async = 1), (n.src = m), n
+    ));
+  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+</script>
 
-前提条件を満たしていれば、以下を実行します。
-
-1. [Datadog Postman コレクション][3] (事前に構成された API 呼び出しテンプレート) をダウンロードします。
-   Postman では、コレクションとは編集、保存、再利用を容易に行えるように API 呼び出しを整理してまとめたフォルダーを指します。
-
-2. Datadog Postman コレクションをインポートします。
-    - Postman を開きます。
-    - **Import**をクリックします。
-    - 手順 1 でダウンロードした [datadog_collection.json][3] ファイルを選択します。
-
-さまざまな API サンプルが入った Datadog コレクションが入手できました。
-
-**注**: この時点では API 呼び出しは機能しません。以下を参照して Datadog-Postman 環境を設定してください。
+</br>このコレクションは  Web 用 Postman またはお使いの Postman アプリケーションで動作します。読み込みに数秒かかることがあります。
 
 ### Postman 環境のセットアップ
 
-Postman コレクションをインポートすると、Postman の左ペインに、使用できるすべての Datadog API 呼び出しの一覧がフォルダーで構造化されて示されます。
-フォルダー内の API 呼び出しには、`datadog_site`、`datadog_api_key`、`datadog_application_key` に対する変数が次のように入力されています。
+Postman コレクションをインポートすると、Postman の左ペインに、使用できるすべての Datadog API 呼び出しの一覧がフォルダーごとに構造化されて表示されます。
 
-{{< img src="getting_started/postman/SetAPIKeys.png" alt="Postman API テンプレート変数"  style="width:70%;">}}
+#### Authentication
 
-これにより、[Postman 環境][4]をセットアップして、認証用の Datadog サイト、API、およびアプリケーションキーを保存できます。Datadog オーガニゼーションが複数ある場合は、複数の [Postman 環境][4]をセットアップすることにより、Datadog Postman コレクション内の API 呼び出しは変更しないまま各オーガニゼーションに対して API 呼び出しを実行できます。
+コレクションには、[Postman 環境][3]である `Datadog Authentication` が含まれます。ここに Datadog API キーと認証用のアプリケーションキーを追加します。
 
 以下の手順に従って環境をセットアップします。
 
 1. Postman の右上隅にある **Manage Environments** の歯車アイコンをクリックします。
 
-2. **Add** をクリックし、**Environment Name (環境名)** を入力します。
+2. **Datadog Authentication** を選択します
 
-3. 表に、`datadog_api_key` 変数と `datadog_application_key` 変数を追加します。**Current Value** 列に、実際の [Datadog API キーとアプリケーションキー][2]を入力します。
+3. **Edit** をクリックします。
 
-4. `datadog_site` 変数を追加します。**Current Value** 列に、Datadog US サイトの場合は `com`、Datadog EU サイトの場合は `eu` と入力します。
+4. Datadog [API キー][2]を `api_key` 変数の初期値および現在値として追加し、お使いの Datadog [アプリケーションキー][2]を `application_key` 変数の初期値および現在値として追加します。
 
-5. オプション: Datadog オーガニゼーションが複数ある場合は、オーガニゼーションごとに手順 1 から 4 を繰り返します。
+{{< site-region region="eu" >}}
 
-{{< img src="getting_started/postman/setAPIKeys2.png" alt="Postman API テンプレート変数"  style="width:70%;">}}
+#### EU API エンドポイントに切り替える
+
+デフォルトエンドポイントの URL ではなく、EU リージョンの Datadog アプリケーションにアクセスしている場合は、EU エンドポイント URL `https://api.datadoghq.eu` からアクセスするように Postman コレクションを切り替える必要があります。
+
+以下の手順に従って、EU インスタンスを更新します。
+
+1. 左ペインの Datadog API コレクションフォルダーで、メニュー (3 点リーダー) をクリックし、**Edit** を選択します。
+
+{{< img src="getting_started/postman/view-more-actions.png" alt="他のアクションを表示">}}
+
+2. **Variables** タブで、`datadoghq.com` の値を持つ `site` 変数の選択を解除し、`datadoghq.eu` の変数を持つ `site` を選択します。
+
+{{< img src="getting_started/postman/variables.png" alt="サイト変数の更新">}}
+
+3. **Update** をクリックします。
+
+{{< /site-region >}}
 
 ## コレクションの使用
 
-セットアップが完了したら、いつでも API 呼び出しを行うことができます。Postman -> Datadog フォルダーには、[Datadog API リファレンス][5]に一覧表示されている各 API カテゴリタイプのサブフォルダーがあります。このサブフォルダーを展開すると、HTTP メソッドと API 呼び出し名を確認できます。
-
-**注**: 必ず Postman インターフェイスの右上隅で定義済み環境を設定してください。
-
-{{< img src="getting_started/postman/env_setup.png" alt="環境の設定"  style="width:40%;">}}
+セットアップが完了したら、いつでも API 呼び出しを行うことができます。Postman -> Datadog フォルダーには、[Datadog API リファレンス][4]に一覧表示されている各 API カテゴリタイプのサブフォルダーがあります。このサブフォルダーを展開すると、HTTP メソッドと API 呼び出し名を確認できます。
 
 ### ビルダー
 
@@ -84,7 +95,7 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 ### Params
 
-**Params** タブには、現在 API 呼び出しに存在するすべてのパラメーターと値が表示されます。ここでは、パラメーターと値を追加できます。使用可能な引数は、[Datadog API ドキュメント][6] の対応するセクションで確認してください。
+**Params** タブには、現在 API 呼び出しに存在するすべてのパラメーターと値が表示されます。ここで、パラメーターと値を追加できます。使用可能な引数は、[Datadog API ドキュメント][5] の対応するセクションで確認してください。
 
 {{< img src="getting_started/postman/parameters.png" alt="Postman のパラメーター"  style="width:70%;">}}
 
@@ -97,7 +108,6 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 [1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /resources/json/datadog_collection.json
-[4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
-[5]: /ja/api/v1/organizations/
-[6]: /ja/api/
+[3]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[4]: /ja/api/v1/organizations/
+[5]: /ja/api/

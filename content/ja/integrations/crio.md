@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     crio: assets/dashboards/overview.json
   logs: {}
@@ -64,7 +66,8 @@ CRI-O は、ランタイムによって実行される操作のカウントと�
 
 ### サービスのチェック
 
-CRI-O には、メトリクスエンドポイントの到達可能性に関するサービスのチェック機能が含まれています。
+**crio.prometheus.health**:<br>
+Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。
 
 ### イベント
 

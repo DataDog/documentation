@@ -109,6 +109,17 @@ kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --loc
 {{% /tab %}}
 {{< /tabs >}}
 
+## Envoi manuel
+
+Le protocole flare de l'Agent recueille les configurations et les logs dans un fichier d'archive situé dans le répertoire `/tmp` local.
+Récupérez manuellement ce fichier et envoyez-le à l'équipe d'assistance si l'Agent rencontre des problèmes de connectivité.
+
+### Kubernetes
+Pour récupérer le fichier d'archive dans Kubernetes, utilisez la commande kubectl :
+```
+kubectl cp datadog-<nom-pod>:/tmp/datadog-agent-<date-du-flare>.zip flare.zip
+```
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

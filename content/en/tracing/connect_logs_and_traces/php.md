@@ -24,6 +24,10 @@ See the section below to learn how to connect your PHP Logs and traces manually.
 
 ## Manually Inject Trace and Span IDs
 
+<div class="alert alert-warning">
+Note that the function <code>\DDTrace\trace_id()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
+</div>
+
 To connect your logs and traces together, your logs must contain the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
 
 If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped thanks to the [Trace Remapper][2]. More information can be found in the [Why can't I see my correlated logs in the Trace ID panel?][3] FAQ.
@@ -32,10 +36,9 @@ For instance, you would append those two attributes to your logs with:
 
 ```php
   <?php
-  $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
-      $span->getTraceId(),
+      \DDTrace\trace_id(),
       \dd_trace_peek_span_id()
   );
   my_error_logger('Error message.' . $append);
@@ -47,13 +50,9 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-      if (null === $span) {
-          return $record;
-      }
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
-          $span->getTraceId(),
+          \DDTrace\trace_id(),
           \dd_trace_peek_span_id()
       );
       return $record;
@@ -66,13 +65,8 @@ If your application uses json logs format instead of appending trace_id and span
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-      if (null === $span) {
-          return $record;
-      }
-
       $record['dd'] = [
-          'trace_id' => $span->getTraceId(),
+          'trace_id' => \DDTrace\trace_id(),
           'span_id'  => \dd_trace_peek_span_id(),
       ];
 

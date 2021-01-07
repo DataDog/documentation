@@ -48,10 +48,10 @@ nav_sections:
             link: logs/
             icon: logs.svg
             desc: ログの収集、処理、確認、監視、アーカイブ
-          - title: セキュリティモニタリング
+          - title: セキュリティ & コンプライアンス
             link: security_monitoring/
             icon: siem.svg
-            desc: 脅威をリアルタイムで検出し、セキュリティアラートを調査する
+            desc: アプリケーションとインフラストラクチャー全体の脅威と構成ミスを検出する
           - title: Synthetic の監視
             link: synthetics/
             icon: synthetics.svg

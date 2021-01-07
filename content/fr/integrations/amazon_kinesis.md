@@ -11,6 +11,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Kinesis.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_kinesis/'
+draft: false
 git_integration_title: amazon_kinesis
 has_logo: true
 integration_title: Amazon Kinesis
@@ -28,7 +29,7 @@ Amazon Kinesis est un service entièrement géré dans le cloud assurant en temp
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques et vos tags personnalisés de Kinesis.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -51,17 +52,20 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon Kinesis de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Datadog est l'une des destinations par défaut pour les streams Amazon Kinesis Delivery. Amazon Kinesis Data Firehose est entièrement géré par AWS : vous n'avez donc pas besoin de maintenir une infrastructure supplémentaire ou une configuration de redirection pour le streaming de logs.
 
-**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_kinesis` est défini en tant que _Target prefix_.
+Vous pouvez configurer un stream Kinesis Firehose Delivery dans la console AWS Firehose, ou configurer automatiquement la destination à l'aide d'un modèle CloudFormation :
 
-#### Envoyer des logs à Datadog
+- [Console AWS Firehose][6]
+- [Modèle CloudFormation][7]
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][6].
+Toutefois, si vous envoyez vos logs vers un compartiment S3, utilisez la fonction AWS Lambda. Assurez-vous que `amazon_kinesis` est défini en tant que _Target prefix_.
+
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Kinesis dans la console AWS :
 
-    - [Ajouter un déclencheur manuel sur le compartiment S3][7]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][8]
+    - [Ajouter un déclencheur manuel sur le compartiment S3][9]
+    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][10]
 
 ## Données collectées
 
@@ -81,15 +85,17 @@ L'intégration AWS Kinesis n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_kinesis
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_kinesis/amazon_kinesis_metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
+[6]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
+[7]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=cloudformationtemplate
+[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[10]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_kinesis/amazon_kinesis_metadata.csv
+[12]: https://docs.datadoghq.com/fr/help/

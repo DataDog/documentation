@@ -55,7 +55,7 @@ APM が有効になっているアプリケーションの場合は、[APM Pytho
 ### ファイルへのログの記録
 
 {{< tabs >}}
-{{% tab "JSON_log-formatter" %}}
+{{% tab "JSON-log-formatter" %}}
 
 [JSON-log-formatter][1] の使用例
 
@@ -93,15 +93,18 @@ logger.info('Sign up', extra={'referral_code': '52d6ce'})
 [Python-json-logger][1] の使用例
 
 ```python
-    import logging
-    from pythonjsonlogger import jsonlogger
+import logging
+from pythonjsonlogger import jsonlogger
 
-    logger = logging.getLogger()
+logger = logging.getLogger()
 
-    logHandler = logging.StreamHandler()
-    formatter = jsonlogger.JsonFormatter()
-    logHandler.setFormatter(formatter)
-    logger.addHandler(logHandler)
+logHandler = logging.FileHandler(filename='/var/log/my-log.json')
+formatter = jsonlogger.JsonFormatter()
+logHandler.setFormatter(formatter)
+logger.addHandler(logHandler)
+logger.setLevel(logging.INFO)
+
+logger.info('Sign up', extra={'referral_code': '52d6ce'})
 ```
 
 [ハンドラーが構成される][2]と、ログファイルには次のログレコード (インライン) が含まれます。

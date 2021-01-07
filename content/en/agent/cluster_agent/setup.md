@@ -56,7 +56,7 @@ Setting the value without a secret results in the token being readable in the `P
 {{< tabs >}}
 {{% tab "Secret" %}}
 
-1. Run the following command to create a secret token:
+1. Run the following command to create a secret token. Your token must be at least 32 characters long.
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -72,13 +72,13 @@ Setting the value without a secret results in the token being readable in the `P
 
     `kubectl create -f Dockerfiles/manifests/cluster-agent/agent-secret.yaml`
 
-3. Refer to this secret with the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN` in the manifests of the Cluster Agent. See [Step 3 - Create the Cluster Agent and its service](#step-3-create-the-cluster-agent-and-its-service)) and [Step 2 - Enable the Datadog Cluster Agent](#step-2-enable-the-datadog-agent).
+3. Refer to this secret with the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN` in the manifests of the Cluster Agent. See [Step 3 - Create the Cluster Agent and its service](#step-3---create-the-cluster-agent-and-its-service)) and [Step 2 - Enable the Datadog Cluster Agent](#step-2---enable-the-datadog-agent).
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/agent-secret.yaml
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
 
-1. Run the following command to create a secret token:
+1. Run the following command to create a secret token. Your token must be at least 32 characters long.
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -94,7 +94,7 @@ Setting the value without a secret results in the token being readable in the `P
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-1. Run the following command to create a secret token:
+1. Run the following command to create a secret token. Your token must be at least 32 characters long.
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -126,11 +126,13 @@ Setting the value without a secret results in the token being readable in the `P
     echo -n '<Your API key>' | base64
     ```
 
-3. In the `cluster-agent-deployment.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
+3. In the `cluster-agent-deployment.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2---secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
 4. Run: `kubectl apply -f agent-services.yaml`
 5. Run: `kubectl apply -f secrets.yaml`
 6. Run: `kubectl apply -f install_info-configmap.yaml`
 6. Finally, deploy the Datadog Cluster Agent: `kubectl apply -f cluster-agent-deployment.yaml`
+
+**Note**: In your Datadog Cluster Agent, set `<DD_SITE>` to your Datadog site: {{< region-param key="dd_site" code="true" >}}. The default value is `datadoghq.com`
 
 ### Step 4 - Verification
 
@@ -157,7 +159,7 @@ NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-**Note**: If you already have the Datadog Agent running, you may need to apply the [agent-rbac.yaml manifest](#step-1-set-configure-rbac-permissions-for-node-based-agents) before the Cluster Agent can start running.
+**Note**: If you already have the Datadog Agent running, you may need to apply the [agent-rbac.yaml manifest](#step-1---configure-rbac-permissions) before the Cluster Agent can start running.
 
 ## Configure the Datadog Agent
 
@@ -175,9 +177,9 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 1. Download the [daemonset.yaml manifest][10].
 
-3. In the `daemonset.yaml` manifest, replace `<DD_SITE>` with the Datadog site you are using, i.e. `datadoghq.com` or `datadoghq.eu`. This value defaults to `datadoghq.com`.
+3. In the `daemonset.yaml` manifest, replace `<DD_SITE>` with your Datadog site: `{{< region-param key="dd_site">}}`. Defaults to `datadoghq.com`.
 
-4. In the `daemonset.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
+4. In the `daemonset.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2---secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
 
 5. In the `daemonset.yaml` manifest, check that the environment variable `DD_CLUSTER_AGENT_ENABLED` is set to `true`.
 

@@ -25,8 +25,14 @@ further_reading:
 
   - [APM][1] data is `trace.agent.`{{< region-param key="dd_site" code="true" >}}
   - [Live Containers][2] data is `process.`{{< region-param key="dd_site" code="true" >}}
-  - [Logs][3] data is `agent-intake.logs`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP. Review the list of [logs endpoints][4] for more information.
+  - [Logs][3] data includes `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP, and several others. Review the complete list of [logs endpoints][4] for more information.
   - [Orchestrator Resources][5] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
+  - [HIPPA logs][6] data is the same as for all [Logs][3], but also the following legacy endpoints are supported:
+    - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+  - [Synthetic Private Locations][7] is `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} for version 0.1.6+ and `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} for versions 0.2.0+.
   - All other Agent data:
       - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
       - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
@@ -65,28 +71,10 @@ The information is structured as JSON following this schema:
 }
 ```
 
-{{< site-region region="us" >}}
-
-Each section has a dedicated endpoint at, for example:
-
-- [https://ip-ranges.datadoghq.com/logs.json][1] for the IPs used to receive logs data over TCP for Datadog US region.
-- [https://ip-ranges.datadoghq.com/apm.json][2] for the IPs used to receive APM data for Datadog US region.
-
-[1]: https://ip-ranges.datadoghq.com/logs.json
-[2]: https://ip-ranges.datadoghq.com/apm.json
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
 Each section has a dedicated endpoint, for example:
 
-- [https://ip-ranges.datadoghq.eu/logs.json][1] for the IPs used to receive logs data over TCP for Datadog EU region.
-- [https://ip-ranges.datadoghq.eu/apm.json][2] for the IPs used to receive APM data for Datadog EU region.
-
-[1]: https://ip-ranges.datadoghq.eu/logs.json
-[2]: https://ip-ranges.datadoghq.eu/apm.json
-
-{{< /site-region >}}
+- `https://ip-ranges.{{< region-param key="dd_site" >}}/logs.json` for the IPs used to receive logs data over TCP.
+- `https://ip-ranges.{{< region-param key="dd_site" >}}/apm.json` for the IPs used to receive APM data.
 
 ### Note
 
@@ -155,7 +143,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 ## Using Proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][6].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][8].
 
 ## Further Reading
 
@@ -166,4 +154,6 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [3]: /logs/
 [4]: /logs/log_collection/?tab=http#datadog-logs-endpoints
 [5]: /infrastructure/livecontainers/#kubernetes-resources-1
-[6]: /agent/proxy/
+[6]: /security/logs/#hipaa-enabled-customers
+[7]: /synthetics/private_locations/#datadog-private-locations-endpoints
+[8]: /agent/proxy/

@@ -70,7 +70,7 @@
     "summary": "Get all dashboards"
   },
   "CreateDashboard": {
-    "description": "Create a dashboard using the specified options.",
+    "description": "Create a dashboard using the specified options. When defining queries in your widgets, take note of which queries should have the `as_count()` or `as_rate()` modifiers appended.\nRefer to the following [documentation](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers) for more information on these modifiers.",
     "summary": "Create a new dashboard",
     "request_description": "Create a dashboard request body.",
     "request_schema_description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure."
@@ -98,6 +98,42 @@
     "summary": "Update a dashboard list",
     "request_description": "Update a dashboard list request body.",
     "request_schema_description": "Your Datadog Dashboards."
+  },
+  "CreatePublicDashboard": {
+    "description": "Make a specified private dashboard public, generating a URL at which it can be publicly viewed.",
+    "summary": "Create a public dashboard",
+    "request_description": "Create a public dashboard request body.",
+    "request_schema_description": "The metadata object associated with how a dashboard has been/will be made public so that it can be shared with others outside of Datadog."
+  },
+  "DeletePublicDashboard": {
+    "description": "Revoke the public URL for a dashboard (rendering it private) associated with the specified token.",
+    "summary": "Revoke a public dashboard URL"
+  },
+  "GetPublicDashboard": {
+    "description": "Fetch an existing public dashboard's sharing metadata associated with the specified token.",
+    "summary": "Get a public dashboard"
+  },
+  "UpdatePublicDashboard": {
+    "description": "Update a public dashboard associated with the specified token.",
+    "summary": "Update a public dashboard",
+    "request_description": "Update Dashboard request body.",
+    "request_schema_description": "Update a public dashboard's settings."
+  },
+  "DeletePublicDashboardInvitation": {
+    "description": "Revoke previously sent invitation emails and active sessions used to access a given public dashboard for specific email addresses.",
+    "summary": "Revoke public dashboard invitations",
+    "request_description": "Public Dashboard Invitation deletion request body.",
+    "request_schema_description": "Invitations data and metadata that exists for a public dashboard returned by the API."
+  },
+  "GetPublicDashboardInvitations": {
+    "description": "Describe the invitations that exist for the given public dashboard (paginated).",
+    "summary": "Get all invitations for a public dashboard"
+  },
+  "SendPublicDashboardInvitation": {
+    "description": "Send emails to specified email addresses containing links to access a given authenticated public dashboard. Email addresses must already belong to the authenticated public dashboard's share_list.",
+    "summary": "Send public dashboard invitation email",
+    "request_description": "Public Dashboard Invitation request body.",
+    "request_schema_description": "Invitations data and metadata that exists for a public dashboard returned by the API."
   },
   "DeleteDashboard": {
     "description": "Delete a dashboard using the specified ID.",
@@ -144,7 +180,7 @@
     "request_schema_description": "Downtiming gives you greater control over monitor notifications by\nallowing you to globally exclude scopes from alerting.\nDowntime settings, which can be scheduled with start and end times,\nprevent all alerting related to specified Datadog tags."
   },
   "ListEvents": {
-    "description": "The event stream can be queried and filtered by time, priority, sources and tags.\n\n**Note**: If the event you’re querying contains markdown formatting of any kind, you may see characters such as %,\\,n in your output.",
+    "description": "The event stream can be queried and filtered by time, priority, sources and tags.\n\n**Notes**:\n- If the event you’re querying contains markdown formatting of any kind,\nyou may see characters such as `%`,`\\`,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most recent results. To return additional results,\nidentify the last timestamp of the last result and set that as the `end` query time to\npaginate the results.",
     "summary": "Query the event stream"
   },
   "CreateEvent": {
@@ -226,6 +262,22 @@
   "ListAvailableAWSNamespaces": {
     "description": "List all namespace rules for a given Datadog-AWS integration. This endpoint takes no arguments.",
     "summary": "List namespace rules"
+  },
+  "DeleteAWSTagFilter": {
+    "description": "Delete a tag filtering entry.",
+    "summary": "Delete a tag filtering entry",
+    "request_description": "Delete a tag filtering entry for a given AWS account and `dd-aws` namespace.",
+    "request_schema_description": "The objects used to delete an AWS tag filter entry."
+  },
+  "ListAWSTagFilters": {
+    "description": "Get all AWS tag filters.",
+    "summary": "Get all AWS tag filters"
+  },
+  "CreateAWSTagFilter": {
+    "description": "Set an AWS tag filter.",
+    "summary": "Set an AWS tag filter",
+    "request_description": "Set an AWS tag filter using an `aws_account_identifier`, `namespace`, and filtering string.\nNamespace options are `application_elb`, `elb`, `lambda`, `network_elb`, `rds`, `sqs`, and `custom`.",
+    "request_schema_description": "The objects used to set an AWS tag filter."
   },
   "CreateNewAWSExternalID": {
     "description": "Generate a new AWS external ID for a given AWS account ID and role name pair.",
@@ -361,6 +413,30 @@
     "request_description": "Update an existing Datadog-Slack integration request body.",
     "request_schema_description": "Configuration of your Slack channels."
   },
+  "GetSlackIntegrationChannels": {
+    "description": "Get a list of all channels configured for your Datadog-Slack integration.",
+    "summary": "Get all channels in a Slack integration"
+  },
+  "CreateSlackIntegrationChannel": {
+    "description": "Add a channel to your Datadog-Slack integration.",
+    "summary": "Create a Slack integration channel",
+    "request_description": "Payload describing Slack channel to be created",
+    "request_schema_description": "The Slack channel configuration."
+  },
+  "RemoveSlackIntegrationChannel": {
+    "description": "Remove a channel from your Datadog-Slack integration.",
+    "summary": "Remove a Slack integration channel"
+  },
+  "GetSlackIntegrationChannel": {
+    "description": "Get a channel configured for your Datadog-Slack integration.",
+    "summary": "Get a Slack integration channel"
+  },
+  "UpdateSlackIntegrationChannel": {
+    "description": "Update a channel used in your Datadog-Slack integration.",
+    "summary": "Update a Slack integration channel",
+    "request_description": "Payload describing fields and values to be updated.",
+    "request_schema_description": "The Slack channel configuration."
+  },
   "CreateWebhooksIntegrationCustomVariable": {
     "description": "Creates an endpoint with the name `<CUSTOM_VARIABLE_NAME>`.",
     "summary": "Create a custom variable",
@@ -428,8 +504,8 @@
   "UpdateLogsIndex": {
     "description": "Update an index as identified by its name.\nReturns the Index object passed in the request body when the request is successful.\n\nUsing the `PUT` method updates your index’s configuration by **replacing**\nyour current configuration with the new one sent to your Datadog organization.",
     "summary": "Update an index",
-    "request_description": "Object containing the new `LogsIndex`.",
-    "request_schema_description": "Object describing a Datadog Log index."
+    "request_description": "Object containing the new `LogsIndexUpdateRequest`.",
+    "request_schema_description": "Object for updating a Datadog Log index."
   },
   "GetLogsPipelineOrder": {
     "description": "Get the current order of your pipelines.\nThis endpoint takes no JSON arguments.",
@@ -484,7 +560,7 @@
     "summary": "Get all monitor details"
   },
   "CreateMonitor": {
-    "description": "Create a monitor using the specified options.\n\n#### Monitor Types\n\nThe type of monitor chosen from:\n\n- anomaly: `query alert`\n- APM: `query alert` or `trace-analytics alert`\n- composite: `composite`\n- custom: `service check`\n- event: `event alert`\n- forecast: `query alert`\n- host: `service check`\n- integration: `query alert` or `service check`\n- live process: `process alert`\n- logs: `log alert`\n- metric: `metric alert`\n- network: `service check`\n- outlier: `query alert`\n- process: `service check`\n- rum: `rum alert`\n- watchdog: `event alert`\n\n#### Query Types\n\n**Metric Alert Query**\n\nExample: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n- `time_window`: `last_#m` (with `#` being 5, 10, 15, or 30) or `last_#h`(with `#` being 1, 2, or 4), or `last_1d`\n- `space_aggr`: avg, sum, min, or max\n- `tags`: one or more tags (comma-separated), or *\n- `key`: a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)\n- `operator`: <, <=, >, >=, ==, or !=\n- `#`: an integer or decimal number used to set the threshold\n\nIf you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` with:\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)\n- `time_window` last\\_#m (1, 5, 10, 15, or 30), last\\_#h (1, 2, or 4), or last_#d (1 or 2)\n- `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago\n\nUse this to create an outlier monitor using the following query:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**Service Check Query**\n\nExample: `\"check\".over(tags).last(count).count_by_status()`\n\n- **`check`** name of the check, e.g. `datadog.agent.up`\n- **`tags`** one or more quoted tags (comma-separated), or \"*\". e.g.: `.over(\"env:prod\", \"role:db\")`\n- **`count`** must be at >= your max threshold (defined in the `options`).\ne.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 100.\n\n**Event Alert Query**\n\nExample: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`**, the event query string:\n- **`string_query`** free text query to match against event title and text.\n- **`sources`** event sources (comma-separated).\n- **`status`** event statuses (comma-separated). Valid options: error, warn, and info.\n- **`priority`** event priorities (comma-separated). Valid options: low, normal, all.\n- **`host`** event reporting host (comma-separated).\n- **`tags`** event tags (comma-separated).\n- **`excluded_tags`** excluded event tags (comma-separated).\n- **`rollup`** the stats roll-up method. `count` is the only supported method now.\n- **`last`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d. This value should not exceed 48 hours.\n\n**Process Alert Query**\n\nExample: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** free text search string for querying processes.\nMatching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) page.\n- **`tags`** one or more tags (comma-separated)\n- **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d\n- **`operator`** <, <=, >, >=, ==, or !=\n- **`#`** an integer or decimal number used to set the threshold\n\n**Logs Alert Query**\n\nExample: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- **`index_name`** For multi-index organizations, the log index in which the request is performed.\n- **`rollup_method`** The stats roll-up method - supports `count`, `avg` and `cardinality`.\n- **`measure`** For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24)\n- **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- **`#`** an integer or decimal number used to set the threshold.\n\n**Composite Query**\n\nExample: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors\n\n* **`name`** [*required*, *default* = **dynamic, based on query**]: The name of the alert.\n* **`message`** [*required*, *default* = **dynamic, based on query**]: A message to include with notifications for this monitor.\nEmail notifications can be sent to specific users by using the same '@username' notation as events.\n* **`tags`** [*optional*, *default* = **empty list**]: A list of tags to associate with your monitor.\nWhen getting all monitor details via the API, use the `monitor_tags` argument to filter results by these tags.\nIt is only available via the API and isn't visible or editable in the Datadog UI.",
+    "description": "Create a monitor using the specified options.\n\n#### Monitor Types\n\nThe type of monitor chosen from:\n\n- anomaly: `query alert`\n- APM: `query alert` or `trace-analytics alert`\n- composite: `composite`\n- custom: `service check`\n- event: `event alert`\n- forecast: `query alert`\n- host: `service check`\n- integration: `query alert` or `service check`\n- live process: `process alert`\n- logs: `log alert`\n- metric: `metric alert`\n- network: `service check`\n- outlier: `query alert`\n- process: `service check`\n- rum: `rum alert`\n- watchdog: `event alert`\n\n#### Query Types\n\n**Metric Alert Query**\n\nExample: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n- `time_window`: `last_#m` (with `#` between 1 and 2880 depending on the monitor type) or `last_#h`(with `#` between 1 and 48 depending on the monitor type), or `last_1d`\n- `space_aggr`: avg, sum, min, or max\n- `tags`: one or more tags (comma-separated), or *\n- `key`: a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)\n- `operator`: <, <=, >, >=, ==, or !=\n- `#`: an integer or decimal number used to set the threshold\n\nIf you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` with:\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)\n- `time_window` last\\_#m (between 1 and 2880 depending on the monitor type), last\\_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or 2)\n- `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago\n\nUse this to create an outlier monitor using the following query:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**Service Check Query**\n\nExample: `\"check\".over(tags).last(count).count_by_status()`\n\n- **`check`** name of the check, e.g. `datadog.agent.up`\n- **`tags`** one or more quoted tags (comma-separated), or \"*\". e.g.: `.over(\"env:prod\", \"role:db\")`\n- **`count`** must be at >= your max threshold (defined in the `options`).\ne.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 100.\n\n**Event Alert Query**\n\nExample: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`**, the event query string:\n- **`string_query`** free text query to match against event title and text.\n- **`sources`** event sources (comma-separated).\n- **`status`** event statuses (comma-separated). Valid options: error, warn, and info.\n- **`priority`** event priorities (comma-separated). Valid options: low, normal, all.\n- **`host`** event reporting host (comma-separated).\n- **`tags`** event tags (comma-separated).\n- **`excluded_tags`** excluded event tags (comma-separated).\n- **`rollup`** the stats roll-up method. `count` is the only supported method now.\n- **`last`** the timeframe to roll up the counts. Examples: 45m, 4h. Supported timeframes: m, h and d. This value should not exceed 48 hours.\n\n**Process Alert Query**\n\nExample: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** free text search string for querying processes.\nMatching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) page.\n- **`tags`** one or more tags (comma-separated)\n- **`timeframe`** the timeframe to roll up the counts. Examples: 10m, 4h. Supported timeframes: s, m, h and d\n- **`operator`** <, <=, >, >=, ==, or !=\n- **`#`** an integer or decimal number used to set the threshold\n\n**Logs Alert Query**\n\nExample: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- **`index_name`** For multi-index organizations, the log index in which the request is performed.\n- **`rollup_method`** The stats roll-up method - supports `count`, `avg` and `cardinality`.\n- **`measure`** For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- **`time_window`** #m (between 1 and 1440), #h (between 1 and 24)\n- **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- **`#`** an integer or decimal number used to set the threshold.\n\n**Composite Query**\n\nExample: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors\n\n* **`name`** [*required*, *default* = **dynamic, based on query**]: The name of the alert.\n* **`message`** [*required*, *default* = **dynamic, based on query**]: A message to include with notifications for this monitor.\nEmail notifications can be sent to specific users by using the same '@username' notation as events.\n* **`tags`** [*optional*, *default* = **empty list**]: A list of tags to associate with your monitor.\nWhen getting all monitor details via the API, use the `monitor_tags` argument to filter results by these tags.\nIt is only available via the API and isn't visible or editable in the Datadog UI.",
     "summary": "Create a monitor",
     "request_description": "Create a monitor request body.",
     "request_schema_description": "Object describing a monitor."
@@ -626,6 +702,26 @@
     "description": "Get the list of public and private locations available for Synthetic\ntests. No arguments required.",
     "summary": "Get all locations (public and private)"
   },
+  "CreatePrivateLocation": {
+    "description": "Create a new Synthetics private location.",
+    "summary": "Create a private location",
+    "request_description": "Details of the private location to create.",
+    "request_schema_description": "Object containing information about the private location to create."
+  },
+  "DeletePrivateLocation": {
+    "description": "Delete a Synthetics private location.",
+    "summary": "Delete a private location"
+  },
+  "GetPrivateLocation": {
+    "description": "Get a Synthetics private location.",
+    "summary": "Get a private location"
+  },
+  "UpdatePrivateLocation": {
+    "description": "Edit a Synthetics private location.",
+    "summary": "Edit a private location",
+    "request_description": "Details of the private location to be updated.",
+    "request_schema_description": "Object containing information about the private location to create."
+  },
   "ListTests": {
     "description": "Get the list of all Synthetic tests.",
     "summary": "Get the list of all tests"
@@ -655,7 +751,7 @@
     "request_schema_description": "A JSON list of the ID or IDs of the Synthetic tests that you want\nto delete."
   },
   "TriggerCITests": {
-    "description": "Trigger a set of Synthetics tests for continuous integration",
+    "description": "Trigger a set of Synthetics tests for continuous integration.",
     "summary": "Trigger some Synthetics tests for CI",
     "request_description": "Details of the test to trigger.",
     "request_schema_description": "Object describing the synthetics tests to trigger."
@@ -732,13 +828,17 @@
     "description": "Get hourly usage for analyzed logs (Security Monitoring).",
     "summary": "Get hourly usage for analyzed logs"
   },
+  "GetUsageAttribution": {
+    "description": "Get Usage Attribution.",
+    "summary": "Get Usage Attribution"
+  },
   "GetUsageLambda": {
     "description": "Get hourly usage for lambda.",
     "summary": "Get hourly usage for Lambda"
   },
   "GetUsageBillableSummary": {
-    "description": "Get billable usage across your multi-org account.",
-    "summary": "Get billable usage across your multi-org account"
+    "description": "Get billable usage across your account.",
+    "summary": "Get billable usage across your account"
   },
   "GetUsageFargate": {
     "description": "Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).",
@@ -747,6 +847,18 @@
   "GetUsageHosts": {
     "description": "Get hourly usage for hosts and containers.",
     "summary": "Get hourly usage for hosts and containers"
+  },
+  "GetIncidentManagement": {
+    "description": "Get hourly usage for incident management.",
+    "summary": "Get hourly usage for incident management"
+  },
+  "GetUsageIndexedSpans": {
+    "description": "Get hourly usage for indexed spans.",
+    "summary": "Get hourly usage for indexed spans"
+  },
+  "GetIngestedSpans": {
+    "description": "Get hourly usage for ingested spans.",
+    "summary": "Get hourly usage for ingested spans"
   },
   "GetUsageLogs": {
     "description": "Get hourly usage for logs.",
@@ -777,7 +889,7 @@
     "summary": "Get hourly usage for SNMP devices"
   },
   "GetUsageSummary": {
-    "description": "Get usage across your multi-org account.",
+    "description": "Get usage across your multi-org account. You must have the multi-org feature enabled.",
     "summary": "Get usage across your multi-org account"
   },
   "GetUsageSynthetics": {
@@ -798,14 +910,14 @@
   },
   "GetUsageTopAvgMetrics": {
     "description": "Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average.",
-    "summary": "Get top 500 custom metrics by hourly average"
+    "summary": "Get top custom metrics by hourly average"
   },
   "GetUsageTrace": {
-    "description": "Get hourly usage for trace search.",
+    "description": "Get hourly usage for trace search.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.",
     "summary": "Get hourly usage for Trace Search"
   },
   "GetTracingWithoutLimits": {
-    "description": "Get hourly usage for tracing without limits.",
+    "description": "Get hourly usage for tracing without limits.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/ingested-spans`.",
     "summary": "Get hourly usage for tracing without limits"
   },
   "ListUsers": {

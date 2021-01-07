@@ -1,17 +1,22 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: kyototycoon
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md'
 display_name: Kyoto Tycoon
+draft: false
 git_integration_title: kyototycoon
 guid: 2661668b-d804-4c8d-96a7-8019525add8c
 integration_id: kyoto-tycoon
@@ -59,6 +64,27 @@ KyotoTycoon チェックは [Datadog Agent][1] パッケージに含まれてい
 
 2. [Agent を再起動します][4]。
 
+##### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Kyoto Tycoon のログの収集を開始するには、次の構成ブロックを `kyototycoon.d/conf.yaml` ファイルに追加します。
+
+    ```yaml
+    logs:
+      - type: file
+        path: /var/data/ktserver.log
+        source: kyototycoon
+    ```
+
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[kyototycoon.d/conf.yaml のサンプル][3]を参照してください。
+
+3. [Agent を再起動します][4]。
+
 ### 検証
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `kyototycoon` を検索します。
@@ -75,9 +101,8 @@ KyotoTycoon チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-`kyototycoon.can_connect`:
-
-Agent が KyotoTycoon に接続してメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**kyototycoon.can_connect**:<br>
+Agent が KyotoTycoon に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

@@ -1,7 +1,7 @@
 ---
 title: Résultats de tests Browser
 kind: documentation
-description: Résultats de tests Browser Synthetics
+description: Résultats de tests Browser Synthetic
 aliases:
   - /fr/synthetics/apm/browser_tests
 further_reading:
@@ -33,7 +33,7 @@ Une ressource correspond à une combinaison de requêtes et de biens. Le volet R
 | % Total Time | La durée de la ressource par rapport à la durée totale de l'interaction           |
 | Size         | La taille de la réponse de la requête                                |
 
-Un maximum de 50 ressources peuvent être affichées. Généralement, les ressources avec la plus longue durée (à savoir, les plus lentes à charger) s'affichent d'abord.
+Un maximum de 50 ressources peuvent être affichées. Les ressources sont classées en fonction de l'heure à laquelle elles commencent, et les 50 premières sont ensuite affichées dans Datadog.
 
 #### Filtre et recherche
 
@@ -41,9 +41,9 @@ Les ressources peuvent être filtrées par type. Il est également possible d'ef
 
 ### Traces
 
-Le volet de traces affiche les traces associées au test Browser Synthetics. L'interface est semblable à la [vue Trace][1] de l'APM, à quelques exceptions près :
+Le volet de traces affiche les traces associées au test Browser Synthetic. L'interface est semblable à la [vue Trace][1] de l'APM, à quelques exceptions près :
 
-Une étape Browser peut effectuer plusieurs requêtes sur des URL ou des endpoints distincts, ce qui génère plusieurs traces connexes (en fonction de la configuration du tracing et de la liste blanche). Utilisez le menu déroulant pour choisir la trace à afficher.
+Une étape Browser peut effectuer plusieurs requêtes sur des URL ou des endpoints distincts, ce qui génère plusieurs traces connexes (en fonction de la configuration du tracing et des URL autorisées dans vos [paramètres][2]). Utilisez le menu déroulant pour choisir la trace à afficher.
 
 ## Échec d'un test et erreurs
 
@@ -56,12 +56,13 @@ Les erreurs les plus courantes comprennent :
 | `Element located but it's invisible` | L'élément est présent sur la page, mais il n'est pas possible de cliquer dessus (parce qu'un autre élément est superposé par-dessus, par exemple).       |
 | `Cannot locate element`              | L'élément est introuvable sur la page HTML.                                                                             |
 | `Select did not have option`         | L'option spécifiée ne figure pas dans le menu déroulant.                                                              |
-| `Forbidden URL`                      | Le test a probablement rencontré un protocole non pris en charge. Contactez l'[assistance Datadog][2] pour en savoir plus. |
-| `General test failure`               | Un message d'erreur général. [Contactez l'assistance][2] pour en savoir plus.                                                   |
+| `Forbidden URL`                      | Le test a probablement rencontré un protocole non pris en charge. Contactez l'[assistance Datadog][3] pour en savoir plus. |
+| `General test failure`               | Un message d'erreur général. [Contactez l'assistance][3] pour en savoir plus.                                                   |
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/visualization/trace/
-[2]: /fr/help/
+[2]: /fr/synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
+[3]: /fr/help/

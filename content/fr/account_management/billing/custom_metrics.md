@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /fr/integrations/faq/what-standard-integrations-emit-custom-metrics/
 ---
-Si une métrique n'est pas envoyée depuis l'une des [plus de 400 intégrations Datadog][1], elle est considérée comme une [métrique custom][2]<sup>[(1)](#integrations-standard)</sup>.
+Si une métrique n'est pas envoyée depuis l'une des [plus de {{< translate key="integration_count" >}} intégrations Datadog][1], elle est considérée comme une [métrique custom][2]<sup>[(1)](#integrations-standard)</sup>.
 
 **Les métrique custom se distinguent par une combinaison unique de nom de métrique et de valeurs de tag (tag host inclus)**.
 
@@ -142,7 +142,7 @@ Une fois les agrégations par centile activées pour `request.Latency`, ce nom d
 
 ## Suivi des métriques custom
 
-Les administrateurs (c'est-à-dire les utilisateurs disposant du rôle [Admin de Datadog][4]) peuvent consulter le nombre moyen de métriques custom par heure et les 500 principales métriques custom pour leur compte depuis la [page des détails d'utilisation][5]. Consultez la documentation sur les [détails d'utilisation][6] pour en savoir plus.
+Les administrateurs (c'est-à-dire les utilisateurs disposant du rôle [Admin de Datadog][4]) peuvent consulter le nombre moyen de métriques custom par heure et les 5 000 principales métriques custom pour leur compte depuis la [page des détails d'utilisation][5]. Consultez la documentation sur les [détails d'utilisation][6] pour en savoir plus.
 
 Pour suivre en temps réel le nombre de métriques custom associées à un nom de métrique donné, accédez à la [page Résumé des métriques][7] et cliquez sur le nom de métrique souhaité. Le nombre est affiché à la ligne « Currently reporting X distinct metrics… », comme illustré ci-dessous :
 
@@ -165,16 +165,16 @@ Le nombre de métriques custom facturables est calculé en fonction du nombre mo
 
 Les intégrations standard suivantes peuvent potentiellement générer des métriques custom.
 
-| Types d'intégrations                           | Intégrations                                                                                                                             |
-|------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| Limitées à 350 métriques custom par défaut.      | [ActiveMQ XML][10] / [Go-Expvar][11] / [Java-JMX][12]                                                                                     |
-| Aucune limite appliquée à la collecte de métriques custom par défaut. | [Directory][13] / [Linux Proc Extras][14] /[Nagios][15] / [Check PDH][16] / [Prometheus][17] / [SNMP][18] / [Services Windows][19] / [WMI][20] |
-| Peuvent être configurées pour collecter des métriques custom.   | [MySQL][21] / [Oracle][22] / [Postgres][23] / [SQL Server][24]                                                                              |
-| Métriques custom envoyées depuis des intégrations cloud    | [AWS][25]                                                                                                                                |
+| Types d'intégrations                           | Intégrations                                                                                   |
+|------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Limitées à 350 métriques custom par défaut.      | [ActiveMQ XML][10] / [Go-Expvar][11] / [Java-JMX][12]                                          |
+| Aucune limite appliquée à la collecte de métriques custom par défaut. | [Nagios][13] / [Check PDH][14] / [Prometheus][15] / [SNMP][16] / [Services Windows][17] / [WMI][18] |
+| Peuvent être configurées pour collecter des métriques custom.   | [MySQL][19] / [Oracle][20] / [Postgres][21] / [SQL Server][22]                                    |
+| Métriques custom envoyées depuis des intégrations cloud    | [AWS][23]                                                                                      |
 
 ## Dépannage
 
-Pour toute question technique, contactez [l'assistance Datadog][26].
+Pour toute question technique, contactez [l'assistance Datadog][24].
 
 Pour toute question concernant la facturation, contactez votre [chargé de compte][9].
 
@@ -190,17 +190,15 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [10]: /fr/integrations/activemq/#activemq-xml-integration
 [11]: /fr/integrations/go_expvar/
 [12]: /fr/integrations/java/
-[13]: /fr/integrations/directory/
-[14]: /fr/integrations/linux_proc_extras/
-[15]: /fr/integrations/nagios/
-[16]: /fr/integrations/pdh_check/
-[17]: /fr/integrations/prometheus/
-[18]: /fr/integrations/snmp/
-[19]: /fr/integrations/windows_service/
-[20]: /fr/integrations/wmi_check/
-[21]: /fr/integrations/mysql/
-[22]: /fr/integrations/oracle/
-[23]: /fr/integrations/postgres/
-[24]: /fr/integrations/sqlserver/
-[25]: /fr/integrations/amazon_web_services/
-[26]: /fr/help/
+[13]: /fr/integrations/nagios/
+[14]: /fr/integrations/pdh_check/
+[15]: /fr/integrations/prometheus/
+[16]: /fr/integrations/snmp/
+[17]: /fr/integrations/windows_service/
+[18]: /fr/integrations/wmi_check/
+[19]: /fr/integrations/mysql/
+[20]: /fr/integrations/oracle/
+[21]: /fr/integrations/postgres/
+[22]: /fr/integrations/sqlserver/
+[23]: /fr/integrations/amazon_web_services/
+[24]: /fr/help/

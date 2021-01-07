@@ -13,11 +13,12 @@ ddtype: crawler
 dependencies: []
 description: AWS サービスを Datadog と統合。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_web_services/'
+draft: false
 git_integration_title: amazon_web_services
 has_logo: true
 integration_title: AWS
 is_public: true
-kind: integration
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_web_services
 public_title: Datadog-AWS インテグレーション
@@ -119,7 +120,7 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
 {{< tabs >}}
 {{% tab "自動 - CloudFormation" %}}
 
-1. [Datadog AWS インテグレーション タイル][1]を開きます。
+1. [Datadog AWS インテグレーションタイル][1] を開きます。**Install** ボタンをクリックし、このインテグレーションをインストールします。
 2. _Configuration_ タブで **Automatically Using CloudFormation** を選択します。既に AWS アカウントがアタッチされている場合は、まず **Add another account** をクリックしてください。
 4. AWS コンソールにログインします。
 5. CloudFormation ページでスタックを新規作成し、[Datadog API キー][2]を入力します。
@@ -157,7 +158,7 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
 4. 作成されたロールの名前を入力します。**注:** インテグレーションタイルに入力する名前は大文字と小文字が区別され、AWS 側で作成されるロール名と完全に一致する必要があります。
 5. ダイアログの左側で、メトリクスを収集するサービスを選択します。
 6. オプションで、すべてのホストやメトリクスにタグを追加します。
-7. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。
+7. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
 8. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
 9. **Install Integration** をクリックします。
 
@@ -181,6 +182,7 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
                 "cloudfront:ListDistributions",
                 "cloudtrail:DescribeTrails",
                 "cloudtrail:GetTrailStatus",
+                "cloudtrail:LookupEvents",
                 "cloudwatch:Describe*",
                 "cloudwatch:Get*",
                 "cloudwatch:List*",
@@ -297,12 +299,12 @@ Resource Group Tagging API の主な用途は、カスタム タグの収集に�
 
 ### GovCloud と China
 
-1. [AWS インテグレーション タイル][69]を開きます。
+1. [AWS インテグレーションタイル][69] を開きます。**Install** ボタンをクリックし、このインテグレーションをインストールします。
 2. **Access Keys (GovCloud or China Only)** タブを選択します。
 3. AWS アクセス キーと AWS 秘密キーを入力します。**GovCloud と中国では、アクセス キーと秘密キーのみが許可されます。**
 4. ダイアログの左側で、メトリクスを収集するサービスを選択します。
 5. オプションで、すべてのホストやメトリクスにタグを追加します。
-6. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。
+6. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
 7. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
 8. **Install Integration** をクリックします。
 
@@ -310,10 +312,8 @@ Resource Group Tagging API の主な用途は、カスタム タグの収集に�
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
-- [Kinesis Firehose destination][70]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します
-- [Cloudformation][71]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Lambda 関数をデプロイし、ログを Datadog に転送します
-
-ログを**複数の宛先**に送信する場合、Kinesis Firehose 宛先の利用を強くお勧めします。CloudWatch Log グループは 1 つのサブスクライバーしか持てませんが、Kinesis ストリームは複数のサブスクライバーを持つことができます。Kinesis ストリームをロググループにサブスクライブさせることで、Kinesisストリームをサブスクライブしているログデータのコンシューマーを複数持つことができます。
+- [Kinesis Firehose destination][70]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信するには、このアプローチを使用することをお勧めします。
+- [Forwarder Lambda 関数][71]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合は、このアプローチを使用することをお勧めします。
 
 
 ## 収集データ

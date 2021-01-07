@@ -21,19 +21,22 @@ Datadog provides monitoring capabilities for all Azure App Services resource typ
 
 - Azure Monitor metrics for [Apps][1] and [Functions][2] using the [Azure Integration][1].
 - Custom metrics can be submitted using the API.
-- Logs can be submitted using [Eventhub or Blob storage][3].
+- [Resource logs][3] can be submitted using [Event Hub][4].
 
-The Datadog extension for Azure App Services provides additional monitoring capabilities for [Azure Web Apps][4]. This support includes:
+The Datadog extension for Azure App Services provides additional monitoring capabilities for [Azure Web Apps][5]. This support includes:
 
 - Full distributed APM tracing using automatic instrumentation.
 - Support for manual APM instrumentation to customize spans.
 - `Trace_ID` injection into application logs.
+- Support for submitting custom metrics using [DogStatsD][6].
 
 ## Setup
 
 ### Requirements
 
-The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][5].
+If you haven't already, set up the [Microsoft Azure integration][7] first.
+
+The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][8].
 
 - .NET Framework 4.7 and later
 - .NET Core 2.1
@@ -43,13 +46,12 @@ The Datadog .NET APM extension supports the following .NET runtimes in both x64 
 
 ### Installation
 
-1. Open the [Azure Portal][6] and navigate to the dashboard for the Azure App Services instance you wish to instrument with Datadog.
+1. Open the [Azure Portal][9] and navigate to the dashboard for the Azure App Services instance you wish to instrument with Datadog.
 2. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
-3. Add your Datadog API key as an application setting called `DD_API_KEY` and a value of your [Datadog API Key][7].
+3. Add your Datadog API key as an application setting called `DD_API_KEY` and a value of your [Datadog API Key][10].
     {{< img src="infrastructure/serverless/azure_app_services/api_key.png" alt="api key page" >}}
-4. If you use the EU Datadog site (datadoghq.eu domain), add an application setting `DD_SITE` with datadoghq.eu as the value.
-    By default, the extension submits data to the US Datadog site (the datadoghq.com domain). So if you use the US Datadog site, there is no additional application setting required.
+4. Set the `DD_SITE` to `{{< region-param key="dd_site" code="true" >}}`. Defaults to `datadoghq.com`.
 5. Go to the extensions page and click **Add**.
 6. Select the Datadog APM extension.
     {{< img src="infrastructure/serverless/azure_app_services/extension.png" alt="Datadog extension" >}}
@@ -57,17 +59,97 @@ The Datadog .NET APM extension supports the following .NET runtimes in both x64 
 8. Restart the main application: click **Stop**, wait for a full stop, then click **Start**.
     {{< img src="infrastructure/serverless/azure_app_services/restart.png" alt="Stop and restart page" >}}
 
-### Logging from Azure Web Apps
+### Application logging from Azure Web Apps
 
-Logs for Azure Web Apps can be submitted to Datadog with Eventhub using the process described in the [Azure Integration documentation][8]. **Note**: The Eventhub must be located in the same region as your web application.
+Sending logs from your application in Azure App Services to Datadog requires the use of Serilog. Submitting logs with this method allows for trace ID injection, which makes it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
 
-Once the Eventhub and forwarder function are configured, create a diagnostic setting for your web application. Select the logs you want to send to Datadog:
+**Note**: Since this occurs inside your application, any Azure Platform logs you may be submitting with diagnostic settings does not include the trace ID.
 
-{{< img src="serverless/azure_diagnostics.png" alt="Diagnostics Settings" >}}
+Install the [Datadog Serilog sink][11] NuGet package, which sends events and logs to Datadog. By default, the sink forwards logs through HTTPS on port 443. Run the following command in the application's package manager console:
 
-Once you establish the logging pipeline for your application, Trace ID injection allows you to [connect logs and traces][9] in Datadog. To enable this with the extension, add an application setting `DD_LOGS_INJECTION:true`.
+```
+PM> Install-Package Serilog.Sinks.Datadog.Logs
+```
 
-**Note**: Trace ID injection occurs in the application, so application logs include the trace ID. Other categories of [diagnostic logs available from Azure][10], like HTTP logs and audit logs, do not include the trace ID.
+Next, initialize the logger directly in your application. Replace `<DD_API_KEY>` with your [Datadog API key][10].
+
+```
+using Serilog;
+using Serilog.Sinks.Datadog.Logs;
+
+          Serilog.Log.Logger = new LoggerConfiguration()
+              .WriteTo.DatadogLogs("<DD_API_KEY>")
+              .Enrich.FromLogContext()
+              .CreateLogger();
+```
+
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: url, port, useSSL, and useTCP. Optionally, specify the [source, service, and custom tags][12].
+
+For example, to forward logs to the Datadog US region in TCP use the following sink configuration:
+
+{{< code-block lang="text" wrap="false" disable_copy="true" >}}
+using Serilog; 
+using Serilog.Sinks.Datadog.Logs;
+
+          var config = new DatadogConfiguration(
+              url:"https://http-intake.logs.datadoghq.com", 
+              port:10516, 
+              useSSL:true, 
+              useTCP:false);
+
+          Serilog.Log.Logger = new LoggerConfiguration()
+              .WriteTo.DatadogLogs(
+                  "eb7c615e5fca779871203b7de9209b6c",
+                  source: "<SOURCE_NAME>",
+                  service: "<SERVICE_NAME>",
+                  tags: new string[] { "<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>" },
+                  configuration: config
+              )
+              .Enrich.FromLogContext()
+              .CreateLogger();
+{{< /code-block >}}
+
+New Logs are now directly sent to Datadog.
+
+Alternatively, since 0.2.0, configure the Datadog sink by using an `appsettings.json` file with the Serilog.Settings.Configuration NuGet package.
+
+In the `Serilog.WriteTo()` array, add an entry for DatadogLogs, for example:
+
+```json
+"Serilog": {
+  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
+  "MinimumLevel": "Debug",
+  "WriteTo": [
+    { "Name": "Console" },
+    {
+      "Name": "DatadogLogs",
+      "Args": {
+        "apiKey": "<API_KEY>",
+        "source": "<SOURCE_NAME>",
+        "host": "<HOST_NAME>",
+        "tags": ["<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"],
+      }
+    }
+  ],
+  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+  "Properties": {
+    "Application": "Sample"
+  }
+}
+```
+
+## Custom Metrics with DogStatsD
+
+Starting with version `0.3.14-prerelease`, the App Services extension includes an instance of [DogStatsD][6] (Datadog's metrics aggregation service). This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps with the extension.
+
+Writing custom metrics and checks in your web app is similar to the process for doing so with an application on a host running the Datadog Agent. However, there is no need to configure ports, which is taken care of by the extension automatically. To submit custom metrics to Datadog from Azure App Services using the extension:
+
+1. Add the [DogStatsD Nuget package][13] to your Visual Studio project.
+2. [Initialize DogStatdD and write custom metrics][14] in your application.
+3. Deploy your code to a supported Azure .NET web app.
+4. Install the Datadog App Service extension.
+
+Learn more about [custom metrics][15].
 
 ## Troubleshooting
 
@@ -89,7 +171,7 @@ A clean install to a stopped app typically solves the problem. However, if youâ€
 
 If youâ€™re missing traces or not receiving them at all, make sure you have not manually adjusted any port settings. The Tracer Agent, in the extension, communicates with your application to identify the correct port to use for external traffic. Manual port settings can interfere with this process resulting in missed traces.
 
-Still need help? Contact [Datadog support][11].
+Still need help? Contact [Datadog support][16].
 
 ### Further Reading
 
@@ -98,12 +180,17 @@ Still need help? Contact [Datadog support][11].
 
 [1]: /integrations/azure_app_services/
 [2]: /integrations/azure_functions/
-[3]: /integrations/azure/?tab=azurecliv20#log-collection
-[4]: https://azure.microsoft.com/en-us/services/app-service/web/
-[5]: /tracing/setup/dotnet/
-[6]: https://portal.azure.com
-[7]: https://app.datadoghq.com/account/settings#api
-[8]: /integrations/azure/?tab=eventhub#log-collection
-[9]: /tracing/connect_logs_and_traces/
-[10]: https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs
-[11]: /help/
+[3]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/resource-logs
+[4]: /integrations/azure/?tab=eventhub#log-collection
+[5]: https://azure.microsoft.com/en-us/services/app-service/web/
+[6]: /developers/dogstatsd
+[7]: /integrations/azure
+[8]: /tracing/setup/dotnet/
+[9]: https://portal.azure.com
+[10]: https://app.datadoghq.com/account/settings#api
+[11]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[12]: /logs/log_collection/#reserved-attributes
+[13]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
+[14]: /developers/dogstatsd/?tab=net#code
+[15]: developers/metrics/
+[16]: /help

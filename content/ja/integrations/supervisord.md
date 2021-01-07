@@ -2,19 +2,24 @@
 aliases:
   - /integrations/supervisor
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: supervisord
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md'
 display_name: Supervisord
+draft: false
 git_integration_title: supervisord
 guid: 2b81259b-723e-47be-8612-87e1f64152e9
 integration_id: supervisord
@@ -136,9 +141,31 @@ instances:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Supervisord ログの収集を開始するには、次のコンフィギュレーションブロックを `supervisord.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: /path/to/my/directory/file.log
+       source: supervisord
+   ```
+
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル supervisord.d/conf.yaml][3] を参照してください。
+
+3. [Agent を再起動します][4]。
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `supervisord` を探します。
+[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `supervisord` を探します。
 
 ## 収集データ
 
@@ -152,13 +179,11 @@ Supervisor チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**supervisord.can_connect**:
+**supervisord.can_connect**:<br>
+構成した HTTP サーバーまたは UNIX ソケットに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-構成した HTTP サーバーまたは UNIX ソケットに Agent が接続できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
-
-**supervisord.process.status**:
-
-Agent は、supervisord のすべての子プロセス (`proc_names` と `proc_regex` がどちらも設定されていない場合) または一部の子プロセス (`proc_names`、`proc_regex`、またはその両方で設定されているプロセス) について、このサービスチェックを送信します。各サービスチェックは `supervisord_process:<プロセス名>` でタグ付けされます。
+**supervisord.process.status**:<br>
+Agent は、supervisord のすべての子プロセス (`proc_names` と `proc_regex` がどちらも設定されていない場合) または一部の子プロセス (`proc_names`、`proc_regex`、またはその両方で設定されているプロセス) について、このサービスチェックを送信します。各サービスチェックは `supervisord_process:<process_name>` でタグ付けされます。
 
 以下のテーブルに、supervisord のステータスに対応する `supervisord.process.status` を示します。
 
@@ -175,15 +200,17 @@ Agent は、supervisord のすべての子プロセス (`proc_names` と `proc_r
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
-- [ Supervisor によるプロセスの監視 / Datadog による Supervisor の監視][5]
+- [Supervisor によるプロセスの監視 / Datadog による Supervisor の監視][7]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/supervisord/images/supervisorevent.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
-[5]: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor
+[3]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor

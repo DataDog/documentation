@@ -7,7 +7,10 @@ further_reading:
     text: Présentation des logs dans Datadog
   - link: /logs/log_collection/
     tag: Documentation
-    text: 'Recueillir des logs en provenance de vos applications, conteneurs et fournisseurs de solutions cloud'
+    text: Collecte de logs et intégrations
+  - link: /getting_started/tagging/unified_service_tagging
+    tag: Documentation
+    text: Apprendre à configurer le tagging de service unifié
 ---
 ## Présentation
 
@@ -204,6 +207,8 @@ $ echo "Nouvelle ligne de log dans le fichier de log" >> fichier_log_à_surveill
 On obtient alors ce qui suit sur la [page Log Explorer][2] :
 
 {{< img src="getting_started/logs/file_log_example.png" alt="Exemple de fichier de logs" >}}
+
+**Remarque** : lorsque l'Agent Datadog est utilisé, les événements de logs supérieurs à 256 Ko sont divisés en plusieurs entrées.
 
 ## Pour aller plus loin
 

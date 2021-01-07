@@ -28,46 +28,20 @@ The Agent can be installed on many different platforms either directly on the ho
 
 ### Configuration
 
-{{< site-region region="us" >}}
+The Agent's [main configuration file][9] is `datadog.yaml`. The required parameters are your [Datadog API key][10] which is used to associate your Agent's data with your organization and the Datadog site ({{< region-param key="dd_site" code="true" >}}). See the [sample config_template.yaml][11] for all available configuration options.
 
-The Agent's [main configuration file][1] is `datadog.yaml`. The only required parameter is your [Datadog API key][2] which is used to associate your Agent's data with your organization. See the [sample config_template.yaml][3] for all available configuration options.
-
-For the [container Agent][4], `datadog.yaml` configuration options are passed in with [environment variables][5]. For example, the Datadog API key environment variable is `DD_API_KEY`.
-
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[4]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[5]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent#environment-variables
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-The Agent's [main configuration file][1] is `datadog.yaml`. The required parameters are your [Datadog API key][2] which is used to associate your Agent's data with your organization and the Datadog Site (`datadoghq.eu`). See the [sample config_template.yaml][3] for all available configuration options.
-
-For the [container Agent][4], `datadog.yaml` configuration options are passed in with [environment variables][5], for example:
+For the [container Agent][8], `datadog.yaml` configuration options are passed in with [environment variables][12], for example:
 
 - `DD_API_KEY` for the Datadog API key
 - `DD_SITE` for the Datadog site
 
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: https://app.datadoghq.eu/account/settings#api
-[3]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[4]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[5]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent#environment-variables
-
-{{< /site-region >}}
-
 ### Validation
 
-Run the Agent's [status command][9] to verify installation.
+Run the Agent's [status command][13] to verify installation.
 
 ### Commands
 
-Refer to the [Agent Commands][10] page to [Start][11], [Stop][12] or [Restart][13] your Agent.
+Refer to the [Agent Commands][14] page to [Start][15], [Stop][16] or [Restart][17] your Agent.
 
 ## Data Collected
 
@@ -75,7 +49,7 @@ Refer to the [Agent Commands][10] page to [Start][11], [Stop][12] or [Restart][1
 
 #### Agent
 
-The metrics below are available with Agent v6. For Agent v5, see the [Agent Metrics][14] integration.
+The metrics below are available with Agent v6. For Agent v5, see the [Agent Metrics][18] integration.
 
 | Metric                           | Description                                                                                                          |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -89,19 +63,19 @@ Depending on your platform, the Agent has several core checks enabled by default
 
 | Check       | Metrics       | Platforms          |
 | ----------- | ------------- | ------------------ |
-| CPU         | [System][15]  | All                |
-| Disk        | [Disk][16]    | All                |
-| Docker      | [Docker][17]  | Docker             |
-| File Handle | [System][15]  | All except Mac     |
-| IO          | [System][15]  | All                |
-| Load        | [System][15]  | All except Windows |
-| Memory      | [System][15]  | All                |
-| Network     | [Network][18] | All                |
-| NTP         | [NTP][19]     | All                |
-| Uptime      | [System][15]  | All                |
-| Winproc     | [System][15]  | Windows            |
+| CPU         | [System][19]  | All                |
+| Disk        | [Disk][20]    | All                |
+| Docker      | [Docker][21]  | Docker             |
+| File Handle | [System][19]  | All except Mac     |
+| IO          | [System][19]  | All                |
+| Load        | [System][19]  | All except Windows |
+| Memory      | [System][19]  | All                |
+| Network     | [Network][22] | All                |
+| NTP         | [NTP][23]     | All                |
+| Uptime      | [System][19]  | All                |
+| Winproc     | [System][19]  | Windows            |
 
-To collect metrics from other technologies, see the [Integrations][20] page.
+To collect metrics from other technologies, see the [Integrations][24] page.
 
 ### Events
 
@@ -119,9 +93,9 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 For help troubleshooting the Agent:
 
-- Visit the [Agent Troubleshooting][21] page.
-- View the [Agent Log Files][22]
-- Contact [Datadog support][23]
+- Visit the [Agent Troubleshooting][25] page.
+- View the [Agent Log Files][26]
+- Contact [Datadog support][27]
 
 ## Further Reading
 
@@ -144,18 +118,22 @@ For help troubleshooting the Agent:
 [6]: /tracing/
 [7]: https://www.datadoghq.com
 [8]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[9]: /agent/guide/agent-commands/#agent-status-and-information
-[10]: /agent/guide/agent-commands/
-[11]: /agent/guide/agent-commands/#start-the-agent
-[12]: /agent/guide/agent-commands/#stop-the-agent
-[13]: /agent/guide/agent-commands/#restart-the-agent
-[14]: /integrations/agent_metrics/
-[15]: /integrations/system/#metrics
-[16]: /integrations/disk/#metrics
-[17]: /agent/docker/data_collected/#metrics
-[18]: /integrations/network/#metrics
-[19]: /integrations/ntp/#metrics
-[20]: /getting_started/integrations/
-[21]: /agent/troubleshooting/
-[22]: /agent/guide/agent-log-files/
-[23]: /help/
+[9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[10]: https://app.datadoghq.com/account/settings#api
+[11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[12]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent#environment-variables
+[13]: /agent/guide/agent-commands/#agent-status-and-information
+[14]: /agent/guide/agent-commands/
+[15]: /agent/guide/agent-commands/#start-the-agent
+[16]: /agent/guide/agent-commands/#stop-the-agent
+[17]: /agent/guide/agent-commands/#restart-the-agent
+[18]: /integrations/agent_metrics/
+[19]: /integrations/system/#metrics
+[20]: /integrations/disk/#metrics
+[21]: /agent/docker/data_collected/#metrics
+[22]: /integrations/network/#metrics
+[23]: /integrations/ntp/#metrics
+[24]: /getting_started/integrations/
+[25]: /agent/troubleshooting/
+[26]: /agent/guide/agent-log-files/
+[27]: /help/

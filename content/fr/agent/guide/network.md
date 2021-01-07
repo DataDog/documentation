@@ -19,62 +19,31 @@ further_reading:
 ---
 **Le trafic est toujours généré par l'Agent et envoyé vers Datadog. Aucune session n'est jamais initialisée à partir de Datadog vers l'Agent** :
 
-{{< site-region region="us" >}}
-
 - L'intégralité du trafic est envoyé via SSL
 - Destinations des données :
 
-  - Données de l'[APM][1] : `trace.agent.datadoghq.com`
-  - Données des [live containers][2] : `process.datadoghq.com`
-  - Données des [logs][3] pour le trafic TCP : `agent-intake.logs.datadoghq.com` 
+  - Données de l'[APM][1] : `trace.agent.`{{< region-param key="dd_site" code="true" >}}
+  - Données des [live containers][2] : `process.`{{< region-param key="dd_site" code="true" >}}
+  - Données des [Logs][3] : `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} pour le trafic TCP, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} en HTTP, et plus encore. Consultez la liste d'[endpoints de logs][4] pour en savoir plus.
+  - Données des [ressources de l'orchestrateur][5] : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
+  - La destination des données des [logs HIPPA][6] est identique à celles de l'ensemble des [logs][3]. Toutefois, les endpoints hérités suivants sont également pris en charge :
+    - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+  - [Emplacements privés Synthetic][7] : `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} pour les versions 0.1.6+ et `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} pour les versions 0.2.0+.
   - Toutes les autres données de l'Agent :
-      - **Agents < 5.2.0** : `app.datadoghq.com`
-      - **Agents >= 5.2.0** : `<VERSION>-app.agent.datadoghq.com`
+      - **Agents < 5.2.0** : `app.`{{< region-param key="dd_site" code="true" >}}
+      - **Agents >= 5.2.0** : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
 
-        Cette décision a été prise après la découverte de la vulnérabilité POODLE. Les endpoints avec contrôle des versions commencent à partir de l'Agent v5.2.0, où chaque version de l'Agent appelle un endpoint différent en fonction du _Forwarder_. Par exemple, l'Agent v5.2.0 appelle `5-2-0-app.agent.datadoghq.com`. Par conséquent, vous devez ajouter `*.agent.datadoghq.com` à la liste blanche de vos pare-feu.
+        Cette modification a été apportée après la découverte de la vulnérabilité POODLE. Les endpoints avec contrôle des versions sont disponibles à partir de l'Agent v5.2.0. Chaque version de l'Agent appelle un endpoint différent en fonction de la version du _Forwarder_. Par exemple, l'Agent v5.2.0 appelle `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Par conséquent, vous devez ajouter `*.agent.`{{< region-param key="dd_site" code="true" >}} à la liste blanche de vos pare-feux.
 
 À partir de la version 6.1.0, l'Agent interroge également l'API de Datadog afin de fournir une fonctionnalité non essentielle, par exemple pour afficher la validité de la clé d'API configurée :
 
-- **Agent >= 7.18.0/6.18.0** : `api.datadoghq.com`
-- **Agent < 7.18.0/6.18.0** : `app.datadoghq.com`
+- **Agent >= 7.18.0/6.18.0** : `api.`{{< region-param key="dd_site" code="true" >}}
+- **Agent < 7.18.0/6.18.0** : `app.`{{< region-param key="dd_site" code="true" >}}
 
-Tous ces domaines sont des entrées **CNAME** qui pointent vers un ensemble d'adresses IP statiques. Vous pouvez trouver ces adresses sur les pages suivantes :
-
-- **[https://ip-ranges.datadoghq.com][4]** pour le site américain de Datadog.
-
-[1]: /fr/tracing/
-[2]: /fr/infrastructure/livecontainers/
-[3]: /fr/logs/
-[4]: https://ip-ranges.datadoghq.com
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-- L'intégralité du trafic est envoyé via SSL
-- Destinations des données :
-
-  - Données de l'[APM][1] : `trace.agent.datadoghq.eu`
-  - Données des [live containers][2] : `process.datadoghq.eu`
-  - Données des [logs][3] pour le trafic TCP : `agent-intake.logs.datadoghq.eu`
-  - Toutes les autres données de l'Agent :
-      - **Agents < 5.2.0** : `app.datadoghq.eu`
-      - **Agents >= 5.2.0** : `<VERSION>-app.agent.datadoghq.eu`
-
-        Cette décision a été prise après la découverte de la vulnérabilité POODLE. Les endpoints avec contrôle des versions commencent à partir de l'Agent v5.2.0, où chaque version de l'Agent appelle un endpoint différent en fonction du _Forwarder_. Par exemple, l'Agent v5.2.0 appelle `5-2-0-app.agent.datadoghq.com`. Par conséquent, vous devez ajouter `*.agent.datadoghq.eu` à la liste blanche de vos pare-feu.
-
-À partir de la version 6.1.0, l'Agent interroge également l'API de Datadog afin de fournir une fonctionnalité non essentielle, par exemple pour afficher la validité de la clé d'API configurée :
-
-- **Agent >= 7.18.0/6.18.0** : `api.datadoghq.eu`
-- **Agent < 7.18.0/6.18.0** : `app.datadoghq.eu`
-
-Tous ces domaines sont des entrées **CNAME** qui pointent vers un ensemble d'adresses IP statiques. Vous pouvez trouver ces adresses sur les pages suivantes :
-
-- **[https://ip-ranges.datadoghq.eu][4]** pour le site européen de Datadog.
-
-[1]: /fr/tracing/
-[2]: /fr/infrastructure/livecontainers/
-[3]: /fr/logs/
-[4]: https://ip-ranges.datadoghq.eu
-{{< /site-region >}}
+Tous ces domaines sont des entrées **CNAME** qui pointent vers un ensemble d'adresses IP statiques. Vous pouvez trouver ces adresses sur la page `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
 Les informations sont structurées au format JSON selon le schéma suivant :
 
@@ -91,11 +60,13 @@ Les informations sont structurées au format JSON selon le schéma suivant :
             ...
         ]
     },
+    "api": {...},                       // <-- même chose, mais pour une fonctionnalité non essentielle de l'Agent (demande d'informations à partir de l'API)
     "apm": {...},                       // <-- même structure que « agents », mais il s'agit des adresses IP utilisées pour les données de l'Agent APM
     "logs": {...},                      // <-- même chose, mais pour les données de l'Agent de log
     "process": {...},                   // <-- même chose, mais pour les données de l'Agent de processus
-    "api": {...},                       // <-- même chose, mais pour une fonctionnalité non essentielle de l'Agent (demande d'informations à partir de l'API)
-    "webhooks": {...}                   // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de l'Agent utilisées pour l'envoi des webhooks)
+    "orchestrator": {...},              // <-- même chose, mais pour les données de l'Agent de processus
+    "synthetics": {...},                // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de Datadog pour les bots utilisés pour les tests Synthetics)
+    "webhooks": {...}                   // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de Datadog pour l'envoi des webhooks)
 }
 ```
 
@@ -139,7 +110,7 @@ Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'Agen
 
   - `443/tcp` : port pour la plupart des données de l'Agent (métriques, APM, Live Processes/conteneurs)
   - `123/udp` : NTP [(En savoir plus sur l'importance de NTP)][1]
-  - `10516/tcp` : port pour la [collecte de logs][2] via TCP pour le site américain de Datadog, `443/tcp` pour le site européen de Datadog.
+  - `10516/tcp` : port pour la [collecte de logs][2] via TCP pour le site américain de Datadog, `443/tcp` pour le site européen de Datadog
   - `10255/tcp` : port pour le [kubelet http Kubernetes][3]
   - `10250/tcp` : port pour le [kubelet https Kubernetes][3]
 
@@ -189,10 +160,17 @@ Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'Agen
 
 ## Utilisation d'un proxy
 
-Pour obtenir des instructions détaillées sur la configuration d'un proxy, consultez la [section dédiée][1].
+Pour obtenir des instructions détaillées sur la configuration d'un proxy, consultez la section [Configuration de l'Agent pour un proxy][8].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/proxy/
+[1]: /fr/tracing/
+[2]: /fr/infrastructure/livecontainers/
+[3]: /fr/logs/
+[4]: /fr/logs/log_collection/?tab=http#datadog-logs-endpoints
+[5]: /fr/infrastructure/livecontainers/#kubernetes-resources-1
+[6]: /fr/security/logs/#hipaa-enabled-customers
+[7]: /fr/synthetics/private_locations/#datadog-private-locations-endpoints
+[8]: /fr/agent/proxy/

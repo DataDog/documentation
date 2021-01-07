@@ -2,18 +2,15 @@
 title: RUM ダッシュボード
 kind: documentation
 further_reading:
-  - link: /real_user_monitoring/installation/advanced_configuration
-    tag: ドキュメント
-    text: RUM データ収集の高度な構成
   - link: /real_user_monitoring/explorer
     tag: ドキュメント
     text: Datadog でビューを検索する
 ---
-[RUM アプリケーションを作成][1]すると、すべての[収集データ][2]を分析するためのダッシュボードが Datadog 内に作成されます。RUM ダッシュボードはダッシュボードリストに表示され、Datadog ロゴが付いています。
+RUM アプリケーションを作成すると、すべての[収集データ][1]を分析するためのダッシュボードが Datadog 内に作成されます。RUM ダッシュボードはダッシュボードリストに表示され、Datadog ロゴが付いています。
 
 {{< img src="real_user_monitoring/dashboards/rum_dashboard_in_dashlist.png" alt="ダッシュボードリストに表示された RUM ダッシュボード" >}}
 
-ダッシュボードには、[RUM Applications ページ][3]からアクセスできます。アプリケーションに紐付けられた **Dashboard** リンクをクリックします。
+ダッシュボードには、[RUM Applications ページ][2]からアクセスできます。アプリケーションに紐付けられた **Dashboard** リンクをクリックします。
 
 {{< img src="real_user_monitoring/dashboards/rum_applications.gif" alt="RUM アプリケーション" >}}
 
@@ -25,7 +22,7 @@ further_reading:
 
 ## ダッシュボードの相互関係
 
-[他のダッシュボード][4]と同じようにダッシュボードをカスタマイズできます。また、[RUM エクスプローラー][2]で基礎のデータを直接検索できます。
+[他のダッシュボード][3]と同じようにダッシュボードをカスタマイズできます。また、[RUM エクスプローラー][1]で基礎のデータを直接検索できます。
 
 ### テンプレート変数
 
@@ -33,11 +30,11 @@ further_reading:
 
 {{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="テンプレート変数" style="width:50%;" >}}
 
-### 関連ビューの表示
+### RUM イベントの表示
 
-すべての個別イベントを調査するには、グラフをクリックして _View related views_ を選択すれば、現在選択中のフィルターがかかった状態で RUM Explore にリダイレクトされます。
+すべての個別イベントを調査するには、グラフをクリックして _View RUM views_ を選択すると、現在選択中のフィルターで RUM Explore にリダイレクトされます。
 
-{{< img src="real_user_monitoring/dashboards/view_related_views.gif" alt="関連ビューの表示" style="width:50%;" >}}
+{{< img src="real_user_monitoring/dashboards/view_rum_events.gif" alt="RUM イベントの表示" style="width:80%;" >}}
 
 ### ダッシュボードのカスタマイズ
 
@@ -49,7 +46,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/installation/
-[2]: /ja/real_user_monitoring/data_collected/
-[3]: https://app.datadoghq.com/rum/list
-[4]: /ja/dashboards/
+[1]: /ja/real_user_monitoring/data_collected/
+[2]: https://app.datadoghq.com/rum/list
+[3]: /ja/dashboards/

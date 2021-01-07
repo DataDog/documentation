@@ -32,9 +32,9 @@ v6.14.0 以降、Agent v6 は Python 2 および Python 3 ランタイムと互�
 
 Agent v6.x と Agent v7.x の違いは、Agent v7.x には Python 3 ランタイムが含まれ、Agent v6.x には Python 2 ランタイムのみが含まれるという点だけなので、Agent のバージョンを変更するだけで Python ランタイムを変更することができます。一方の Python ランタイムから他方へ変更するには、該当する Agent イメージを選択します。
 
-* **Python 2** ランタイム: Agent v6 イメージは、`datadog/agent:6.<AGENT_マイナーバージョン>` のフォーマット。JMX チェックをサポートするイメージの場合は `datadog/agent:6.<AGENT_マイナーバージョン>-jmx`。
+* **Python 2** ランタイム: Agent v6 イメージは、`gcr.io/datadoghq/agent:6.<AGENT_MINOR_VERSION>` のフォーマット。JMX チェックをサポートするイメージの場合は `gcr.io/datadoghq/agent:6.<AGENT_MINOR_VERSION>-jmx`。
 
-* **Python 3** ランタイム: Agent v7 イメージは、`datadog/agent:7.<AGENT_マイナーバージョン>` のフォーマット。JMX チェックをサポートするイメージの場合は `datadog/agent:7.<AGENT_マイナーバージョン>-jmx`。
+* **Python 3** ランタイム: Agent v7 イメージは、`gcr.io/datadoghq/agent:7.<AGENT_MINOR_VERSION>` のフォーマット。JMX チェックをサポートするイメージの場合は `gcr.io/datadoghq/agent:7.<AGENT_MINOR_VERSION>-jmx`。
 
 {{% /tab %}}
 {{< /tabs >}}

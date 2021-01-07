@@ -33,7 +33,7 @@ Define the configuration of your browser test.
 1. **Starting URL**: The URL from which your browser test starts the scenario.
 2. **Advanced Options** (optional): Set specific options to your browser test:
     * Headers: Define headers to add to or override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
-    * Authentication: Authenticate through HTTP basic authentication or NTLM with a username and a password.
+    * Authentication: Authenticate through HTTP Basic, Digest or NTLM with a username and a password.
     * Cookies: Define cookies to add to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
     * Proxy URL: URL of the proxy the requests should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
 

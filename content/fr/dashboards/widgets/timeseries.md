@@ -1,7 +1,7 @@
 ---
 title: Widget Série temporelle
 kind: documentation
-description: 'Affichez l''évolution des valeurs de plusieurs métriques, événements de log, spans analysées ou métriques de processus.'
+description: 'Affichez l''évolution des valeurs de plusieurs métriques, événements de log, spans indexées ou métriques de processus.'
 aliases:
   - /fr/graphing/widgets/timeseries/
 further_reading:
@@ -18,7 +18,7 @@ further_reading:
     tag: Blog
     text: Explorer les données sous la forme d'un graphique en plein écran
 ---
-La visualisation de séries temporelles vous permet de consulter l'évolution de plusieurs métriques, événements de log ou spans analysées. La période affichée dépend des éléments sélectionnés sur le [timeboard][1] ou le [screenboard][2] :
+La visualisation de séries temporelles vous permet de consulter l'évolution de plusieurs métriques, événements de log ou spans indexées. La période affichée dépend des éléments sélectionnés sur le [timeboard][1] ou le [screenboard][2] :
 
 {{< img src="dashboards/widgets/timeseries/timeseries.png" alt="Série temporelle" >}}
 
@@ -30,7 +30,7 @@ La visualisation de séries temporelles vous permet de consulter l'évolution de
 
 1. Choisissez les données à représenter :
     * Métrique : consultez la documentation sur les [requêtes][3] pour configurer une requête de métrique.
-    * Spans analysées : consultez la [documentation sur la recherche de traces][4] pour configurer une requête de span analysée.
+    * Spans indexées : consultez la [documentation sur la recherche de traces][4] pour configurer une requête de span indexée.
     * Événements de log : consultez la [documentation sur la recherche de logs][5] pour configurer une requête d'événement de log.
 
 2. Personnalisez votre graphique avec les [options](#options) disponibles.
@@ -85,9 +85,12 @@ Une fois activés, les événements s'affichent en superposition sur vos graphiq
 
 Les commandes de l'axe des ordonnées sont disponibles via l'interface utilisateur et l'éditeur JSON. Grâce à ces commandes, vous pouvez :
 
-* Régler l'axe des ordonnées sur un intervalle donné.
+* Ajoutez un deuxième axe des ordonnées pour les visualisations qui comprennent plusieurs ensembles de données.
+* Régler l'axe des ordonnées sur un intervalle donné
 * Changer automatiquement les limites de l'axe des ordonnées en définissant un pourcentage ou une valeur absolue. Une limite peut être appliquée à l'une des deux extrémités du graphique (inférieure ou supérieure) pour supprimer les singularités.
 * Changer l'échelle de l'axe des ordonnées afin de passer d'une échelle linéaire à une échelle logarithmique, racine carrée ou puissance.
+
+Si votre visualisation comprend plusieurs ensembles de données, vous pouvez ajouter un deuxième axe des ordonnées en développant le bouton *Y-axis controls*. Cliquez sur *+ Add right y-axis*, puis indiquez quel côté correspondra à l'axe des cordonnées de chaque métrique sous les options de configuration des métriques. Pour repérer quelle partie de la visualisation correspond à quel axe des ordonnées sur le graphique, survolez l'axe des ordonnées qui vous intéresse avec votre souris.
 
 Changer l'échelle de l'axe des ordonnées en développant le bouton *Y-Axis Controls*.
 
@@ -140,7 +143,7 @@ TIMESERIES_SCHEMA = {
 | `events`      | objet           | non       | Options de commande de superposition d'événements. Consultez la [documentation relative au schéma JSON des événements][13] pour apprendre à élaborer le `EVENTS_SCHEMA`.                         |
 | `markers`     | objet           | non       | Options de commande de superposition de marqueurs. Consultez la [documentation relative au schéma JSON des marqueurs][14] pour apprendre à élaborer le `MARKERS_SCHEMA`.                     |
 | `title`       | chaîne           | non       | Titre de votre widget.                                                                                                                                     |
-| `show_legend` | booléen          | non       | Afficher la légende pour ce widget (screenboard uniquement)                                                                                                         |
+| `show_legend` | booléen          | non       | Afficher la légende pour ce widget (screenboard uniquement)                                                                                                        |
 
 Propriétés supplémentaires autorisées dans chaque objet `request` :
 

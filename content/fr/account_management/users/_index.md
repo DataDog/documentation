@@ -1,7 +1,7 @@
 ---
 title: Gestion des utilisateurs
 kind: documentation
-description: 'Ajoutez des utilisateurs, modifiez leurs rôles ou supprimez des utilisateurs.'
+description: Ajoutez ou supprimez des utilisateurs et modifiez leurs rôles.
 aliases:
   - /fr/account_management/team/
 further_reading:
@@ -18,20 +18,16 @@ further_reading:
     tag: Documentation
     text: Gérer les utilisateurs à l'aide de l'API Utilisateurs
 ---
-<div class="alert alert-warning">
-La nouvelle interface de gestion des utilisateurs est en version bêta privée. <a href="/help">Contactez l'assistance Datadog</a> afin de l'activer pour votre compte.
-</div>
+La section **User Management** de Datadog vous permet de gérer vos utilisateurs et les rôles qui leur sont associés. Basculez entre la vue sous forme de liste et la vue sous forme de tableau en cliquant sur **List View** ou **Grid View** à droite :
 
-La section **User Management** de Datadog vous permet de gérer vos utilisateurs et les rôles qui leur sont associés :
+{{< img src="account_management/users/user_page_list.png" alt="Page User Management avec vue sous forme de liste" >}}
 
-{{< img src="account_management/users/user_page.png" alt="Page User Management" >}}
-
-## Ajouter de nouveaux membres
+## Ajouter de nouveaux membres et gérer les invitations
 
 Pour ajouter des membres à votre organisation :
 
 1. Accédez à la page User Management.
-2. Sélectionnez **Invite Users** en haut à droite de la page.
+2. Cliquez sur **Invite Users** en haut à droite de la page.
 3. Saisissez l'adresse e-mail de l'utilisateur que vous souhaitez inviter à rejoindre votre compte Datadog.
 4. Attribuez-lui au moins un [rôle d'utilisateur][1].
 **Remarque** : les utilisateurs disposant d'un Standard Access peuvent inviter un utilisateur en lui attribuant le même rôle qui leur est attribué. Les utilisateurs disposant d'un Privileged Access peuvent inviter un utilisateur en lui attribuant le rôle de leur choix.
@@ -39,10 +35,17 @@ Pour ajouter des membres à votre organisation :
 
 {{< img src="account_management/users/invite_user.png" alt="Ajouter un utilisateur à votre organisation"  style="width:80%;">}}
 
-Le nouvel utilisateur reçoit alors un e-mail contenant un lien lui permettant de se connecter. Tant qu'il ne se connecte pas, il possède le statut `Pending`.
-Pour renvoyer une invitation, sélectionnez le bouton *Edit* à droite de la ligne de l'utilisateur en question, puis cliquez sur *Resend Invite* :
+Le nouvel utilisateur reçoit alors un e-mail contenant un lien lui permettant de se connecter. Tant qu'il ne se connecte pas, il possède le statut `Invite Pending`. Pour annuler son invitation avant qu'il se connecte, cliquez sur le bouton *Delete Invite* à droite de la ligne de l'utilisateur en question dans la vue sous forme de liste, ou sur la case de l'utilisateur dans la vue sous forme de tableau.
 
-{{< img src="account_management/users/resend_invite.png" alt="Renvoyer l'invitation"  style="width:80%;">}}
+{{< img src="account_management/users/delete_invite_grid.png" alt="Supprimer une invitation dans la vue sous forme de tableau"  style="width:50%;">}}
+
+Pour renvoyer une invitation dans la vue sous forme de liste, cliquez sur l'utilisateur pour ouvrir le volet latéral dédié, puis cliquez sur **Resend Invite** :
+
+{{< img src="account_management/users/resend_invite_list.png" alt="Renvoyer l'invitation dans la vue sous forme de liste"  style="width:80%;">}}
+
+Dans la vue sous forme de tableau, passez votre curseur sur la case de l'utilisateur et cliquez sur **Resend Invite** :
+
+{{< img src="account_management/users/resend_invite_grid.png" alt="Renvoyer l'invitation dans la vue sous forme de tableau"  style="width:50%;">}}
 
 ## Modifier les rôles d'un utilisateur
 

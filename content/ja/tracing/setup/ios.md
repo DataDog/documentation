@@ -29,13 +29,13 @@ title: iOSトレースの収集
     {{< tabs >}}
     {{% tab "CocoaPods" %}}
 
-[CocoaPods][4] を使用して、`dd-sdk-ios` をインストールできます。
+[CocoaPods][1] を使用して、`dd-sdk-ios` をインストールできます。
 ```
 pod 'DatadogSDK'
 ```
 
-[4]: https://cocoapods.org/
 
+[1]: https://cocoapods.org/
     {{% /tab %}}
     {{% tab "Swift Package Manager (SPM)" %}}
 
@@ -47,17 +47,17 @@ Apple の Swift Package Manager を使用して統合するには、`Package.swi
     {{% /tab %}}
     {{% tab "Carthage" %}}
 
-[Carthage][5] を使用して、`dd-sdk-ios` をインストールできます。
+[Carthage][1] を使用して、`dd-sdk-ios` をインストールできます。
 ```
 github "DataDog/dd-sdk-ios"
 ```
 
-[5]: https://github.com/Carthage/Carthage
 
+[1]: https://github.com/Carthage/Carthage
     {{% /tab %}}
     {{< /tabs >}}
 
-2. アプリケーションコンテキストと [Datadog クライアントトークン][6]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の iOS アプリケーションの IPA バイトコードで公開されてしまうため、[Datadog API キー][7]を使用して `dd-sdk-ios` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][6]を参照してください。
+2. アプリケーションコンテキストと [Datadog クライアントトークン][4]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の iOS アプリケーションの IPA バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-ios` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
 
     {{< tabs >}}
     {{% tab "US" %}}
@@ -95,7 +95,7 @@ Datadog.initialize(
     Datadog.verbosityLevel = .debug
     ```
 
-3. Datadog トレーサーは [Open Tracing 標準][8]を実装します。`Tracer` を Open Tracing `Global.sharedTracer` としてグローバルに構成して登録します。通常、`AppDelegate` コードで 1 回実施するだけです。
+3. Datadog トレーサーは [Open Tracing 標準][6]を実装します。`Tracer` を Open Tracing `Global.sharedTracer` としてグローバルに構成して登録します。通常、`AppDelegate` コードで 1 回実施するだけです。
 
     ```swift
     import Datadog
@@ -133,7 +133,7 @@ Datadog.initialize(
     span.setTag(key: "http.url", value: url)
     ```
 
-7. (任意) スパンにエラーを添付します。これは、[標準 Open Tracing ログフィールド][9]を使用してエラー情報のログを取得することで実施できます。
+7. (任意) スパンにエラーを添付します。これは、[標準 Open Tracing ログフィールド][7]を使用してエラー情報のログを取得することで実施できます。
 
     ```swift
     span.log(
@@ -164,7 +164,7 @@ Datadog.initialize(
         request.addValue(value, forHTTPHeaderField: headerField)
     }
     ```
-     これにより、リクエストにトレーシングヘッダーが追加されるため、バックエンドで抽出して分散型トレーシングを続行できます。リクエストが完了したら、完了ハンドラー内で `span.finish()` をコールします。また、バックエンドが [Datadog APM と分散型トレーシング][10]でインスツルメントされている場合、Datadog ダッシュボードにフロントエンドからバックエンドのすべてのトレースが表示されます。
+     これにより、リクエストにトレーシングヘッダーが追加されるため、バックエンドで抽出して分散型トレーシングを続行できます。リクエストが完了したら、完了ハンドラー内で `span.finish()` をコールします。また、バックエンドが [Datadog APM と分散型トレーシング][8]でインスツルメントされている場合、Datadog ダッシュボードにフロントエンドからバックエンドのすべてのトレースが表示されます。
 
     * SDK が特定のホストに対して行われたすべてのネットワークリクエストを自動的にトレースするようにするには、Datadog の初期化中に `tracedHosts` 配列を指定します。
 
@@ -197,8 +197,8 @@ Datadog.initialize(
 [1]: https://docs.datadoghq.com/ja/tracing/visualization/#trace
 [2]: https://github.com/DataDog/dd-sdk-ios
 [3]: https://docs.datadoghq.com/ja/tracing/visualization/#spans
-[6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
-[7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[8]: https://opentracing.io
-[9]: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table
-[10]: https://docs.datadoghq.com/ja/tracing/
+[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
+[5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
+[6]: https://opentracing.io
+[7]: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table
+[8]: https://docs.datadoghq.com/ja/tracing/

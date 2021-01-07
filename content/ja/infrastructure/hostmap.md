@@ -36,8 +36,6 @@ further_reading:
 
 {{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Datadog ホストマップ - AZ インスタンスグループ"  >}}
 
-**注**: Datadog のホストマップは `availability-zone` で自動的にグループ化されます。デフォルトのグループ化を変更したい場合は、Datadog のサポートチームまでお問合せください。
-
 ### タグ
 
 [タグ][1]は、[Datadog インテグレーション][2]によって自動的に適用することも、手動で適用することもできます。タグを使用してホストをフィルタリングできます。

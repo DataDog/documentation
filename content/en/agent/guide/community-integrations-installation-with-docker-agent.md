@@ -20,56 +20,30 @@ Community developed integrations for the Datadog Agent are stored in the [Integr
 
 To install the `<INTEGRATION_NAME>` check on your host:
 
-1. Install the [developer toolkit][1].
-2. Clone the integrations-extras repository:
+1. [Download and launch the Datadog Agent][1].
+2. Run the following command to install the integrations with the Agent:
 
     ```
-    git clone https://github.com/DataDog/integrations-extras.git.
+    datadog-agent integration install -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
 
-3. Update your `ddev` config with the `integrations-extras/` path:
+3. Configure your integration like [any other packaged integration][2].
+4. [Restart the Agent][3].
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
-
-4. To build the `<INTEGRATION_NAME>` package, run:
-
-    ```
-    ddev -e release build <INTEGRATION_NAME>
-    ```
-
-5. [Download and launch the Datadog Agent][2].
-6. Run the following command to install the integrations wheel with the Agent:
-
-    ```
-    datadog-agent integration install -w <PATH_OF_INTEGRATION_NAME_PACKAGE>/<ARTIFACT_NAME>.whl
-    ```
-
-7. Configure your integration like [any other packaged integration][3].
-8. [Restart the Agent][4].
-
-[1]: /developers/integrations/new_check_howto/#developer-toolkit
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: /getting_started/integrations/
-[4]: /agent/guide/agent-commands/#restart-the-agent
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: /getting_started/integrations/
+[3]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 The best way to use an integration from integrations-extra with the Docker Agent is to build the Agent with this integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` integration from integrations-extras.
 
-```text
-FROM python:3.8 AS wheel_builder
-WORKDIR /wheels
-RUN pip install "datadog-checks-dev[cli]"
-RUN git clone https://github.com/DataDog/integrations-extras.git
-RUN ddev config set extras ./integrations-extras
-RUN ddev -e release build <INTEGRATION_NAME>
-
-FROM datadog/agent:latest
-COPY --from=wheel_builder /wheels/integrations-extras/<INTEGRATION_NAME>/dist/ /dist
-RUN agent -c /etc/datadog-agent/datadog-docker.yaml integration install -r -w /dist/*.whl
+```dockerfile
+FROM gcr.io/datadoghq/agent:latest
+RUN agent integration install -r -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
+
+The `agent integration install` command run inside docker will issue the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. This warning can be ignored.
 
 Then use this new Agent image in combination with [Autodiscovery][1] in order to enable the `<INTEGRATION_NAME>` check.
 

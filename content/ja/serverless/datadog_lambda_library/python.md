@@ -4,11 +4,11 @@ dependencies:
 kind: ドキュメント
 title: Datadog Lambda Library for Python
 ---
-[![CircleCI](https://img.shields.io/circleci/build/github/DataDog/datadog-lambda-python)](https://circleci.com/gh/DataDog/datadog-lambda-python)
+![build](https://github.com/DataDog/datadog-lambda-python/workflows/build/badge.svg)
 [![PyPI](https://img.shields.io/pypi/v/datadog-lambda)](https://pypi.org/project/datadog-lambda/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/datadog-lambda)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-python/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-python/blob/main/LICENSE)
 
 Datadog Lambda Library for Python (2.7、3.6、3.7、3.8) は、拡張 Lambda メトリクス、分散型トレーシング、および AWS Lambda 関数からのカスタムメトリクス送信を可能にします。
 
@@ -44,7 +44,7 @@ Datadog Lambda Library for Python (2.7、3.6、3.7、3.8) は、拡張 Lambda �
 
 ### DD_FLUSH_TO_LOG
 
-[Datadog Forwarder](https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring) を利用して CloudWatch ログを介してカスタムメトリクスを非同期に (Lambda 関数の実行に追加のレイテンシーなしで) 送信するには、`true` に設定します (推奨)。デフォルトは `false` です。`false` に設定する場合、`DD_API_KEY` と `DD_SITE` も設定する必要があります。
+[Datadog Forwarder](https://github.com/DataDog/datadog-serverless-functions/tree/main/aws/logs_monitoring) を利用して CloudWatch ログを介してカスタムメトリクスを非同期に (Lambda 関数の実行に追加のレイテンシーなしで) 送信するには、`true` に設定します (推奨)。デフォルトは `false` です。`false` に設定する場合、`DD_API_KEY` と `DD_SITE` も設定する必要があります。
 
 ### DD_API_KEY
 
@@ -53,6 +53,7 @@ Datadog Lambda Library for Python (2.7、3.6、3.7、3.8) は、拡張 Lambda �
 - DD_API_KEY - プレーンテキストの Datadog API キー、非推奨
 - DD_KMS_API_KEY - KMS で暗号化された API キー。`kms:Decrypt` アクセス許可が必要です
 - DD_API_KEY_SECRET_ARN - Secrets Manager から API キーを取得するための SecretARN。`secretsmanager:GetSecretValue` アクセス許可が必要です (顧客管理の CMK を使用している場合は `kms:Decrypt`)。
+- DD_API_KEY_SSM_NAME - Systems Manager Parameter Store から API キーを取得するためのパラメーター名。`ssm:GetParameter` アクセス許可が必要です (顧客管理の CMK のある SecureString を使用している場合は `kms:Decrypt`)。
 
 ランタイム時に API キーを指定またはオーバーライドすることもできます (非推奨)。
 

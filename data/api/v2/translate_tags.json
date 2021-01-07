@@ -47,9 +47,21 @@
     "name": "IP Ranges",
     "description": "[See API version 1](/api/v1/ip-ranges/)."
   },
+  "incident-services": {
+    "name": "Incident Services",
+    "description": "Create, update, delete, and retrieve services which can be associated with incidents."
+  },
+  "incident-teams": {
+    "name": "Incident Teams",
+    "description": "Create, update, delete and retrieve teams which can be associated with incidents."
+  },
+  "incidents": {
+    "name": "Incidents",
+    "description": "Manage incident response."
+  },
   "key-management": {
     "name": "Key Management",
-    "description": "[See API version 1](/api/v1/key-management/)."
+    "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api)."
   },
   "logs": {
     "name": "Logs",
@@ -62,6 +74,10 @@
   "logs-indexes": {
     "name": "Logs Indexes",
     "description": "[See API version 1](/api/v1/logs-indexes/)."
+  },
+  "logs-metrics": {
+    "name": "Logs Metrics",
+    "description": "Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics) for your organization."
   },
   "logs-pipelines": {
     "name": "Logs Pipelines",
@@ -87,6 +103,10 @@
     "name": "PagerDuty Integration",
     "description": "[See API version 1](/api/v1/pagerduty-integration/)."
   },
+  "processes": {
+    "name": "Processes",
+    "description": "The processes API allows you to query processes data for your organization."
+  },
   "roles": {
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
@@ -111,10 +131,6 @@
     "name": "Service Level Objectives",
     "description": "[See API version 1](/api/v1/service-level-objectives/)."
   },
-  "services": {
-    "name": "Services",
-    "description": "Create, update, delete and retrieve your organizations services."
-  },
   "slack-integration": {
     "name": "Slack Integration",
     "description": "[See API version 1](/api/v1/slack-integration/)."
@@ -130,10 +146,6 @@
   "tags": {
     "name": "Tags",
     "description": "[See API version 1](/api/v1/tags/)."
-  },
-  "teams": {
-    "name": "Teams",
-    "description": "Create, update, delete and retrieve your organizations Teams."
   },
   "timeboards": {
     "name": "Timeboards",

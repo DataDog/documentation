@@ -22,37 +22,53 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 #### Enabling SAML
 
-SAML login requires you to set up and authenticate your SAML provider with Datadog. Before trying to login with SAML, 
+SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the note at the end of this section. To authenticate SAML:
+
+1. Press the “Using Single Sign-On (SAML)?” button.
+2. Enter your company email and send the email.
+3. While on your mobile device, open the email and click on the indicated link.
+4. Enter your org’s SAML credentials, which upon success will reroute to an authenticated session of the Datadog mobile app.
+
+Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
+
+##### QR Code
 
 1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. This pops up a QR code.
-    {{< img src="mobile/link-device.png" alt="monitor page">}}
+    {{< img src="mobile/link-device.png" alt="Account Profiles - Link mobile device">}}
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. The org UDID is automatically inserted into the login screen.
-3. Optionally, you can manually enter the SAML ID by opening the Datadog Mobile app, clicking **login with SAML**, and entering the SAML ID manually.
-4. Now log in using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account. For security purposes, you will have to go through this flow once per month.
 
-**Note**: The mobile app does not currently support IdP-initiated login (authentication starting from the SAML identity provider). Contact [Datadog Support][5] for more information or if you have any issues with SAML authentication.
+##### Manual Entry
+
+1. To manually enter the SAML ID, open the Datadog Mobile app and press the “Using Single Sign-On (SAML)?” button.
+2. Press the “Use another method to login” button, and enter the SAML ID manually.
+
+By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
+
+**Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][14] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
 
 ## Monitors
 
 {{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
-On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
+On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6].
 
-**Note:** To set up or edit monitors and notifications, you need to do it in the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
+For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries. Furthermore, you can filter your monitor list using saved views, which surface when you activate the search bar. Lastly, view and run synthetic tests when viewing your synthetic monitors.
+
+**Note:** To set up or edit monitors, notifications, or saved views, you need to do it in the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
 
 ## Dashboards
 
 {{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. 
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5]. 
+**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][5].
 
 ## Quick Actions
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][10] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
+Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][11] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
 ## Search from Home Screen
 
@@ -74,7 +90,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][11].
+For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][12].
 
 ## Handoff
 
@@ -87,7 +103,7 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information on Handoff, refer to the [Apple Handoff Documentation][12].
+For more information on Handoff, refer to the [Apple Handoff Documentation][13].
 
 ## Account
 
@@ -95,7 +111,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][13]. You can also send a message in the [Datadog public Slack][14] [#mobile-app][15] channel. 
+For help with troubleshooting, [contact Datadog support][14]. You can also send a message in the [Datadog public Slack][15] [#mobile-app][16] channel.
 
 ### Further Reading
 
@@ -109,10 +125,11 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [6]: /monitors/manage_monitor/#search
 [7]: https://app.datadoghq.com/monitors
 [8]: /monitors/monitor_types/
-[9]: https://app.datadoghq.com/dashboard/lists
-[10]: https://app.datadoghq.com/dashboard/lists/preset/5
-[11]: https://support.apple.com/en-us/HT209055
-[12]: https://support.apple.com/en-us/HT209455
-[13]: /help/
-[14]: https://chat.datadoghq.com/
-[15]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[9]: /dashboards/template_variables/#saved-views
+[10]: https://app.datadoghq.com/dashboard/lists
+[11]: https://app.datadoghq.com/dashboard/lists/preset/5
+[12]: https://support.apple.com/en-us/HT209055
+[13]: https://support.apple.com/en-us/HT209455
+[14]: /help/
+[15]: https://chat.datadoghq.com/
+[16]: https://datadoghq.slack.com/archives/C0114D5EHNG

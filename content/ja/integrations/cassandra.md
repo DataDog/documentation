@@ -2,7 +2,11 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    cassandra-overview: assets/dashboards/cassandra_overview.json
+    cassandra-read: assets/dashboards/cassandra_read.json
+    cassandra-sstables: assets/dashboards/cassandra_sstable.json
+    cassandra-write: assets/dashboards/cassandra_write.json
   logs:
     source: cassandra
   metrics_metadata: metadata.csv
@@ -215,8 +219,8 @@ Cassandra_nodetool チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**cassandra.nodetool.node_up**:
-Agent は、監視対象のクラスターのノードごとにこのサービスチェックを送信します。ノードがダウンしている場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**cassandra.nodetool.node_up**:<br>
+Agent は、監視対象のクラスターのノードごとにこのサービスチェックを送信します。ノードがダウンしている場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

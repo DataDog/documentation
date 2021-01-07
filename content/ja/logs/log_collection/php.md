@@ -53,7 +53,6 @@ composer require "monolog/monolog"
       use Monolog\Logger;
       use Monolog\Handler\StreamHandler;
       use Monolog\Formatter\JsonFormatter;
-    ?>
     ```
 
 {{% /tab %}}
@@ -77,7 +76,6 @@ composer require "zendframework/zend-log"
   use Zend\Log\Logger;
   use Zend\Log\Writer\Stream;
   use Zend\Log\Formatter\JsonFormatter;
-?>
 ```
 
 [1]: https://getcomposer.org
@@ -125,9 +123,11 @@ services:
   $log->pushHandler($stream);
 
   // 例
-  $log->info('Adding a new user', array('username' => 'Seldaek'));
-?>
-```
+  $log->info('Adding a new user', array('username' => 'Seldaek'));```
+ 
+ 
+
+ 
 
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
@@ -151,10 +151,7 @@ services:
   $writer->setFormatter($formatter);
 
   // バインド
-  $logger->addWriter($writer);
-  Zend\Log\Logger::registerErrorHandler($logger);
-?>
-```
+  $logger->addWriter($writer); Zend\Log\Logger::registerErrorHandler($logger);```
 
 次に、[ログファイルを Datadog にストリーミングします][1]。
 
@@ -210,7 +207,6 @@ logs:
 ```php
 <?php
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
-?>
 ```
 
 Monolog にはプリプロセッサー機能が付属しています。これは、イベントにメタデータ (セッション ID、リクエスト ID など) を設定して情報を補完できる簡単なコールバックです。
@@ -233,10 +229,7 @@ Monolog にはプリプロセッサー機能が付属しています。これは
       // さまざまな汎用コンテキストを追加
       $record['extra']['key'] = 'value';
 
-      return $record;
-  });
-?>
-```
+      return $record; });```
 
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
@@ -246,7 +239,6 @@ Monolog にはプリプロセッサー機能が付属しています。これは
 ```php
 <?php
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
-?>
 ```
 
 ただし、このライブラリにはプロセッサー機能が付属しています。プロセッサーを使用すると、ログに自動的に追加情報を提供することができます。プロセッサーは、イベントがライターに渡される前にロガーから呼び出され、イベント配列を受け取り、完了時にイベント配列を返します。
@@ -265,7 +257,6 @@ Monolog にはプリプロセッサー機能が付属しています。これは
   $logger->addProcessor(new Zend\Log\Processor\PsrPlaceholder());
   $logger->addProcessor(new Zend\Log\Processor\ReferenceId());
   $logger->addProcessor(new Zend\Log\Processor\RequestId());
-?>
 ```
 
 独自にコードを開発される場合は、[Zend ドキュメントをご参照ください][1]。
@@ -346,7 +337,6 @@ Monolog にはプリプロセッサー機能が付属しています。これは
           return $toReturn;
         }
       }
-    ?>
     ```
 
 2. プロセッサーを Symfony に接続します。
@@ -372,7 +362,7 @@ Monolog は次のフレームワークに含まれます。
 
 * [Symfony2、Symfony3][3]
 * [PPI][4]
-* [Laravel 4 および 5][5]
+* [Laravel][5]
 * [Silex][6]
 * [Lumen][7]
 * [CakePHP][8]
@@ -382,9 +372,9 @@ Monolog をフレームワークに統合し、次にロガーを構成します
 ```php
  <?php
   // Monolog ライブラリのロードが正常か確認
-  //Monolog\Logger; を使用
-  //Monolog\Handler\StreamHandler; を使用
-  //Monolog\Formatter\JsonFormatter; を使用
+  //use Monolog\Logger;
+  //use Monolog\Handler\StreamHandler;
+  //use Monolog\Formatter\JsonFormatter;
 
   // monolog インスタンスを含む
   $monolog = ...
@@ -397,7 +387,6 @@ Monolog をフレームワークに統合し、次にロガーを構成します
 
   $monolog->pushHandler($stream);
   return $r;
-?>
 ```
 
 ### Symfony (v2+, v3+)
@@ -457,15 +446,67 @@ monolog:
 
 ```php
 <?php
-  //file: bootstrap/app.php
-  $app->configureMonologUsing(function($monolog) {
-      $monolog->pushHandler(...);
 
-    // 下記にロガーを構成
-  });
+namespace App\Providers;
 
-  return $app;
-?>
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        // Monolog インスタンスを取得
+        $monolog = logger()->getLogger();
+        if (!$monolog instanceof \Monolog\Logger) {
+            return;
+        }
+
+        // オプション: JSON 形式を使用
+        $useJson = false;
+        foreach ($monolog->getHandlers() as $handler) {
+            if (method_exists($handler, 'setFormatter')) {
+                $handler->setFormatter(new \Monolog\Formatter\JsonFormatter());
+                $useJson = true;
+            }
+        }
+
+        // トレースおよびスパン ID を挿入してログエントリを APM トレースと接続
+        $monolog->pushProcessor(function ($record) use ($useJson) {
+            $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+            if (null === $span) {
+                return $record;
+            }
+            if ($useJson === true) {
+                $record['dd'] = [
+                    'trace_id' => $span->getTraceId(),
+                    'span_id'  => \dd_trace_peek_span_id(),
+                ];
+            } else {
+                $record['message'] .= sprintf(
+                    ' [dd.trace_id=%d dd.span_id=%d]',
+                    $span->getTraceId(),
+                    \dd_trace_peek_span_id()
+                );
+            }
+            return $record;
+        });
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+}
 ```
 
 ### Silex
@@ -478,7 +519,6 @@ monolog:
       // 下記にロガーを構成
       return $monolog;
   });
-?>
 ```
 
 ### Lumen
@@ -492,7 +532,6 @@ monolog:
   });
 
   return $app;
-?>
 ```
 
 ### CakePHP
@@ -509,7 +548,6 @@ monolog:
 ```php
 <?php
   include 'log.php';
-?>
 ```
 
 基本的な構成 (Cake が行うことを Monolog で行う) は次のようになります。
@@ -538,6 +576,7 @@ CakeLog::config('debug', array(
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /ja/agent/logs/
 [2]: /ja/tracing/connect_logs_and_traces/php/
 [3]: /ja/logs/log_collection/php/#symfony-v2-v3

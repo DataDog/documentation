@@ -18,7 +18,7 @@ metadata:
   name: datadog-agent-installinfo
   labels: {}
   annotations:
-    checksum/install_info: ee293ccedf116ce1ed6e0d9c7f7f9adabd0c230618089bb173c7acffa487e020
+    checksum/install_info: 9f58f4fe71f1b79dfabae5311eb8f5373bd03072d4636e248cd3f581f8752627
 data:
   install_info: |
     ---
@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -123,6 +123,7 @@ spec:
             httpGet:
               path: /live
               port: 5555
+              scheme: HTTP
             initialDelaySeconds: 15
             periodSeconds: 15
             successThreshold: 1
@@ -132,12 +133,13 @@ spec:
             httpGet:
               path: /ready
               port: 5555
+              scheme: HTTP
             initialDelaySeconds: 15
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -184,7 +186,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -200,27 +202,34 @@ spec:
                   fieldPath: status.hostIP
             - name: KUBERNETES
               value: "yes"
+            - name: DD_AC_EXCLUDE
+              value: "name:datadog-agent"
             - name: DOCKER_HOST
               value: unix:///host/var/run/docker.sock
             - name: DD_LOG_LEVEL
               value: "INFO"
+            - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+              value: "false"
           volumeMounts:
             - name: config
               mountPath: /etc/datadog-agent
             - name: runtimesocketdir
               mountPath: /host/var/run
+              mountPropagation: None
               readOnly: true
             - name: cgroups
               mountPath: /host/sys/fs/cgroup
+              mountPropagation: None
               readOnly: true
             - name: passwd
               mountPath: /etc/passwd
             - name: procdir
               mountPath: /host/proc
+              mountPropagation: None
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -230,7 +239,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "datadog/agent:7.21.1"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -282,6 +291,9 @@ spec:
           name: cgroups
         - name: s6-run
           emptyDir: {}
+        - hostPath:
+            path: /etc/passwd
+          name: passwd
         - hostPath:
             path: "/var/lib/datadog-agent/logs"
           name: pointerdir

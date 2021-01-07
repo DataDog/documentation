@@ -95,7 +95,7 @@ Asserts that an email was sent and whether specific values (`string`, `number`, 
 
 ### Test your UI with custom JavaScript
 
-Test a custom assertion on the active page using your own JavaScript code. 
+Test a custom assertion on the active page using your own JavaScript code.
 
 **Note**: JavaScript assertions support both synchronous and asynchronous code.
 
@@ -200,14 +200,15 @@ To create a variable, first give it a name then define its value from:
 
 #### A Pattern
 
-Create a variable by defining its value from one of the below available builtins: 
+Create a variable by defining its value from one of the below available builtins:
 
-| Pattern                 | Description                                                                                             |
-|-------------------------|---------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`      | Generates a numeric string with `n` digits.                                                               |
-| `{{ alphabetic(n) }}`   | Generates an alphabetic string with `n` letters.                                                           |
-| `{{ alphanumeric(n) }}` | Generates an alphanumeric string with `n` characters.                                                     |
-| `{{ date(n, format) }}` | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days. |
+| Pattern                    | Description                                                                                                 |
+|----------------------------|-------------------------------------------------------------------------------------------------------------|
+| `{{ numeric(n) }}`         | Generates a numeric string with `n` digits.                                                                 |
+| `{{ alphabetic(n) }}`      | Generates an alphabetic string with `n` letters.                                                            |
+| `{{ alphanumeric(n) }}`    | Generates an alphanumeric string with `n` characters.                                                       |
+| `{{ date(n, format) }}`    | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.        |
+| `{{ timestamp(n, unit) }}` | Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit. |
 
 #### An Element
 
@@ -255,7 +256,7 @@ Generate a random Synthetic email address that can be used in your test steps to
 
 ### Use the variable
 
-All steps input fields with a `{{` indication support variables: 
+All steps input fields with a `{{` indication support variables:
 
 {{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:70%;">}}
 
@@ -263,10 +264,10 @@ If you want to record a step leveraging a variable, you can use the little hand 
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="100%" >}}
 
-At recording, this translates into the actual value of the variable being injected on your website's input (consequently allowing you to move on with the rest of your steps) and creates an associated `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`.   
+At recording, this translates into the actual value of the variable being injected on your website's input (consequently allowing you to move on with the rest of your steps) and creates an associated `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`.
 At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value.
 
-**Note**: In some cases, your variable value only gets computed at runtime (e.g. when creating a variable from an HTTP request, when extracting a variable from a JavaScript step). To move on with the recording of the following steps, you might consequently need to either input `{{ <YOUR_VARIABLE_NAME> }}` directly on your website or to use an actual value.   
+**Note**: In some cases, your variable value only gets computed at runtime (e.g. when creating a variable from an HTTP request, when extracting a variable from a JavaScript step). To move on with the recording of the following steps, you might consequently need to either input `{{ <YOUR_VARIABLE_NAME> }}` directly on your website or to use an actual value.
 If you go for that second option, make sure to replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step before saving your test in order to have the browser test automatically run the step with the variable value generated in the previous step.
 
 {{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Variables autocompletion example" video="true"  width="100%" >}}
@@ -311,12 +312,12 @@ To define your HTTP request:
 
 Optionally, you can base your step success on assertions about the defined HTTP request:
 
-| Type          | Value type                 | Operator                                                                      |
-|---------------|----------------------------|-------------------------------------------------------------------------------|
-| Status Code   | _Integer_                  | `is`, `is not`                                                                 |
-| Response time | _Integer (ms)_             | `lessThan`                                                                     |
-| Headers       | _String_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
-| Body          | _String_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+| Type          | Operator                                                                                               | Value type                                                      |
+|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]                                      |
+| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
+| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
 If you click on **Test URL**, then the basic assertions are automatically filled:
 
@@ -347,7 +348,7 @@ Once created this variable can be used in the following steps of your browser te
 [1]: /synthetics/browser_tests/advanced_options/
 [2]: /synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /synthetics/browser_tests/#create-a-variable
+[4]: /synthetics/guide/email-validation/#create-an-email-variable
 [5]: /synthetics/browser_tests/actions#use-variables-in-javascript-steps
 [6]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 [7]: /synthetics/settings/

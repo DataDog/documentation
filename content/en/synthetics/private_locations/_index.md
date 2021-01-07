@@ -49,8 +49,6 @@ To pull test configurations and push test results, the private location worker n
 | 443  | `intake.synthetics.datadoghq.com` for version 0.1.6+, `api.datadoghq.com` for versions <0.1.5   | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
 | 443  | `intake-v2.synthetics.datadoghq.com` for versions >0.2.0                                             | Used by the private location to push browser test artifacts (screenshots, errors, resources)                                                                         |
 
-**Note**: Check if the endpoint corresponding to your Datadog `site` is available from the host running the worker using `curl intake.synthetics.datadoghq.com` for version 0.1.6+ (`curl https://api.datadoghq.com` for versions <0.1.5).
-
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
 {{< /site-region >}}
@@ -62,7 +60,7 @@ To pull test configurations and push test results, the private location worker n
 | 443  | `api.datadoghq.eu`                                | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
 | 443  | `intake-v2.synthetics.datadoghq.eu` for versions >0.2.0| Used by the private location to push browser test artifacts (screenshots, errors, resources)                                                                            |
 
-**Note**: Check if the endpoint corresponding to your Datadog `site` is available from the host running the worker using `curl https://api.datadoghq.eu`.
+**Note**: These domains are pointing to a set of static IP addresses. These addresses can be found at https://ip-ranges.datadoghq.eu, specifically at https://ip-ranges.datadoghq.eu/api.json for `api.datadoghq.eu` and at https://ip-ranges.datadoghq.eu/synthetics-private-locations.json for `intake-v2.synthetics.datadoghq.eu`.
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -355,7 +353,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 Add a healthcheck mechanism so your orchestrator can ensure the workers are running correctly.
 
-The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (500ms by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
+The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (2s by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
 
 Use the below configuration to set up healthchecks on your containers with:
 
@@ -399,7 +397,7 @@ livenessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+    "CMD-SHELL", "/bin/sh -c '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
   ],
   "timeout": 2,
   "interval": 10,
@@ -415,7 +413,7 @@ livenessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+    "CMD-SHELL", "/bin/sh -c '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
   ],
   "timeout": 2,
   "interval": 10,
@@ -466,11 +464,12 @@ You can then go to any of your API or Browser test creation form, and tick your 
 
 Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][10], etc.
 
+
 ## Scale your private locations
 
 You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
-You can also leverage the [`concurrency` parameter][11] value to adjust the number of tests your private location workers can run in parallel.
+You can also **vertically scale** your private locations using the [`concurrency` parameter][11] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel.
 
 ### Hardware Requirements
 

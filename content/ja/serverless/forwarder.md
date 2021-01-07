@@ -37,6 +37,8 @@ Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を
 5. インストールされた Forwarder へのトリガーを[自動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers)または[手動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#manually-setup-triggers)で設定します。
 6. 複数の AWS リージョンで運用している場合は、別のリージョンで上記の手順を繰り返します。
 
+**注:** 以前に Datadog の AWS インテグレーションタイルから次の [CloudFormation テンプレート](https://github.com/DataDog/cloudformation-template/tree/master/aws)を使用して AWS インテグレーションを有効にしていた場合は、アカウントには、Datadog Lambda Forwarder 関数が既にプロビジョニングされているはずです。
+
 <!-- xxz tab xxx -->
 <!-- xxx tab "Terraform" xxx -->
 
@@ -279,6 +281,10 @@ CloudFormation Stack は、次の IAM ロールを作成します。
 ]
 ```
 
+## コード署名
+
+Datadog Forwarder は Datadog によって署名されています。Forwarder の整合性を確認したい場合は、手動インストール方法を使用してください。Forwarder ZIP ファイルをアップロードする前に、Datadog の署名プロファイル ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を含む[コード署名コンフィギュレーションを作成](https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-console)し、それを Forwarder Lambda 関数に関連付けます。
+
 ## CloudFormation パラメーター
 
 ### 必須
@@ -351,9 +357,7 @@ CloudFormation Stack は、次の IAM ロールを作成します。
 - `SourceZipUrl` - 実行内容を理解できない場合は、変更しないでください。
   関数のソースコードのデフォルトの場所を上書きします。
 - `PermissionBoundaryArn` - Permissions Boundary Policy の ARN
-- `DdApiKeySecretArn` - Secrets Manager にすでに格納されている場合は、Datadog API キーを格納するシークレットの ARN。
-  "DdApiKey" のダミー値を設定して要件を満たす必要がありますが、
-  その値は使用されません。
+- `DdApiKeySecretArn` - Datadog API キーを格納しているシークレットの ARN (すでに Secrets Manager に格納されている場合)。シークレットは、キーと値のペアではなく、プレーンテキストとして保存する必要があります。要件を満たすには、"DdApiKey" にダミー値を設定する必要がありますが、その値は使用されません。
 - `DdUsePrivateLink` - AWS PrivateLink を介したログとメトリクスの送信を有効にするには、true に設定します。
   https://dtdg.co/private-link を参照してください。
 - `VPCSecurityGroupIds` - VPC セキュリティグループ ID のカンマ区切りリスト。AWS PrivateLink が有効な場合に

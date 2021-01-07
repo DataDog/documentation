@@ -1,0 +1,150 @@
+{
+  "aws-integration": {
+    "name": "Intégration AWS",
+    "description": "Configurez votre intégration Datadog/AWS directement via l'API Datadog.\nPour en savoir plus, consultez la [page sur l'intégration AWS](https://docs.datadoghq.com/integrations/amazon_web_services)."
+  },
+  "aws-logs-integration": {
+    "name": "Intégration Logs AWS",
+    "description": "Configurez votre intégration Datadog/Logs AWS directement via l'API Datadog.\nPour en savoir plus, consultez la [page sur l'intégration AWS](https://docs.datadoghq.com/api/?lang=bash#integration-logs-aws)."
+  },
+  "authentication": {
+    "name": "Authentification",
+    "description": "Toutes les requêtes à destination de l'API Datadog doivent être authentifiées.\nLes requêtes qui écrivent des données nécessitent un accès au reporting ainsi qu'une `API key`.\nLes requêtes qui lisent des données nécessitent un accès complet ainsi qu'une `application key`.\n\n**Remarque :** par défaut, tous les clients de l'API Datadog utilisent les API du site américain de Datadog.\nSi vous utilisez le site européen de Datadog, définissez la variable d'environnement `DATADOG_HOST` sur `https://api.datadoghq.eu` ou remplacez directement cette valeur lors de la création de votre client.\n\n[Gérer les clés d'application et d'API de votre compte](https://app.datadoghq.com/account/settings#api)."
+  },
+  "azure-integration": {
+    "name": "Intégration Azure",
+    "description": "Configurez votre intégration Datadog/Azure directement via l'API Datadog. Pour en savoir plus, consultez la [page sur l'intégration Datadog/Azure](https://docs.datadoghq.com/integrations/azure)."
+  },
+  "dashboard-lists": {
+    "name": "Listes de dashboards",
+    "description": "Cet endpoint est obsolète. Utilisez plutôt le [nouvel endpoint de liste de dashboards](https://docs.datadoghq.com/api/v2/dashboard-lists/)."
+  },
+  "dashboards": {
+    "name": "Dashboards",
+    "description": "Interagissez avec vos listes de dashboards via l'API pour faciliter l'organisation, la recherche et le partage de tous vos dashboards avec votre équipe et votre organisation."
+  },
+  "downtimes": {
+    "name": "Downtimes",
+    "description": "Les [downtimes](https://docs.datadoghq.com/monitors/downtimes) vous permettent de mieux contrôler les notifications d'un monitor en empêchant certains contextes de déclencher des alertes. Les paramètres de downtime, qui peuvent être planifiés avec une heure de début et de fin, désactivent toutes les notifications liées à des tags Datadog."
+  },
+  "embeddable-graphs": {
+    "name": "Graphiques intégrables",
+    "description": "Interagissez avec les graphiques intégrables via l'API."
+  },
+  "events": {
+    "name": "Événements",
+    "description": "Le service d'événements vous permet de programmer l'envoi et la récupération d'événements dans le flux d'événements. Les événements sont limités à 4 000 caractères. Si un événement est envoyé avec un message contenant plus de 4 000 caractères, seuls les 4 000 premiers caractères seront affichés."
+  },
+  "gcp-integration": {
+    "name": "Intégration GCP",
+    "description": "Configurez votre intégration Datadog/Google Cloud Platform (GCP) directement via l'API Datadog. Pour en savoir plus, consultez la [page sur l'intégration Datadog/Google Cloud Platform](https://docs.datadoghq.com/integrations/google_cloud_platform)."
+  },
+  "hosts": {
+    "name": "Hosts",
+    "description": "Obtenez des informations sur vos hosts en temps réel dans Datadog."
+  },
+  "ip-ranges": {
+    "name": "Plages d'IP",
+    "description": "Obtenez la liste des préfixes d'adresse IP appartenant à Datadog."
+  },
+  "key-management": {
+    "name": "Gestion des clés",
+    "description": "Gérez vos clés d'application et d'API Datadog.\n\nVous aurez besoin d'une clé d'API et d'application ainsi que de droits administrateur pour interagir avec cet endpoint. La liste complète des clés est visible sur votre [page API Datadog](https://app.datadoghq.com/account/settings#api)."
+  },
+  "logs": {
+    "name": "Logs",
+    "description": "Envoyez vos logs à votre plateforme Datadog via HTTP. Les limites par requête HTTP sont les suivantes :\n\n- Taille maximale du contenu par charge utile : 5 Mo\n- Taille maximale d'un log : 256 Ko\n- Taille maximale d'un tableau en cas d'envoi de plusieurs logs dans un tableau : 500 entrées\n\nTous les logs dépassant 256 Ko sont acceptés et tronqués par Datadog :\n- Pour une requête avec un seul log, l'API réduit le log de façon à ce qu'il fasse 256 Ko et renvoie un code 2xx.\n- Pour une requête avec plusieurs logs, l'API traite tous les logs, réduit uniquement les logs dépassant 256 Ko et renvoie un code 2xx.\n\nNous vous conseillons de compresser vos logs avant de les envoyer. Ajoutez l'en-tête `Content-Encoding: gzip` à la requête pour envoyer vos logs compressés."
+  },
+  "logs-archives": {
+    "name": "Archives de logs",
+    "description": "[Voir la version 2 de l'API](/api/v2/logs-archives/)."
+  },
+  "logs-indexes": {
+    "name": "Index de logs",
+    "description": "Gérez la configuration des [index de logs](https://docs.datadoghq.com/logs/indexes/). Vous aurez besoin d'une clé d'API et d'application ainsi que de droits administrateur pour interagir avec cet endpoint."
+  },
+  "logs-pipelines": {
+    "name": "Pipelines de logs",
+    "description": "Les pipelines et les processeurs fonctionnent sur les logs entrants : ils effectuent le parsing de ces logs et les transforment en attributs structurés pour faciliter les requêtes.\n\n- Consultez la [page de configuration des pipelines] (https://app.datadoghq.com/logs/pipelines) pour obtenir une liste des pipelines et des processeurs actuellement configurés dans notre interface utilisateur.\n\n- Vous trouverez de plus amples informations concernant l'API pour les processeurs dans la [documentation relative aux processeurs](https://docs.datadoghq.com/logs/processing/processors/?tab=api#processeur-de-correspondances).\n\n- Pour en savoir plus sur les pipelines, consultez la [documentation à ce sujet](https://docs.datadoghq.com/logs/processing).\n\n- **Remarque** : ces endpoints sont uniquement disponibles pour les utilisateurs admin. Veillez à utiliser une clé d'application créée par un admin.\n\n**Les règles de parsing Grok peuvent affecter la sortie JSON et nécessitent de configurer les données renvoyées avant leur utilisation dans une requête.**\nPar exemple, si vous utilisez les données renvoyées par une requête dans un autre corps de requête, et que vous avez une règle de parsing qui utilise une expression regex comme `\\s` pour les espaces, vous devrez configurer tous les espaces échappés en tant que `%{space}` pour utiliser les données."
+  },
+  "logs-restriction-queries": {
+    "name": "Requêtes de restriction de logs",
+    "description": "[Voir la version 2 de l'API](/api/v2/logs-restriction-queries/)."
+  },
+  "metrics": {
+    "name": "Métriques",
+    "description": "Les endpoints de métriques vous permettent :\n\n- D'envoyer des données de métriques afin de les représenter graphiquement sur les dashboards de Datadog\n- D'interroger vos métriques sur l'intervalle de votre choix\n\n**Remarque** : un graphique ne peut contenir qu'un nombre défini de points. Lorsque l'intervalle d'affichage d'une métrique augmente, les points sont agrégés afin de ne pas dépasser ce nombre.\n\nDatadog applique une limite souple de 100 séries temporelles par host. Une série temporelle désigne une combinaison unique d'un tag et d'un nom de métrique."
+  },
+  "monitors": {
+    "name": "Monitors",
+    "description": "Les [monitors](https://docs.datadoghq.com/monitors) vous permettent de surveiller une métrique ou un check pertinent, en envoyant une notification à votre équipe lorsque certains seuils définis sont dépassés.\nReportez-vous à la page Créer des monitors pour en savoir plus sur la création de monitors."
+  },
+  "organizations": {
+    "name": "Organisations",
+    "description": "Créez, modifiez et gérez vos organisations. En savoir plus sur les [comptes multi-org](https://docs.datadoghq.com/account_management/multi_organization)."
+  },
+  "pagerduty-integration": {
+    "name": "Intégration PagerDuty",
+    "description": "Configurez votre [intégration Datadog/PagerDuty](https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty) directement via l'API Datadog."
+  },
+  "roles": {
+    "name": "Rôles",
+    "description": "[Voir la version 2 de l'API](/api/v2/roles/)."
+  },
+  "screenboards": {
+    "name": "Screenboards",
+    "description": "Cet endpoint est obsolète. Utilisez plutôt le [nouvel endpoint Dashboards](https://docs.datadoghq.com/api/#dashboards)."
+  },
+  "security-monitoring": {
+    "name": "Security Monitoring",
+    "description": "[Voir la version 2 de l'API](/api/v2/security-monitoring/)."
+  },
+  "service-checks": {
+    "name": "Checks de service",
+    "description": "L'endpoint de check de service vous permet d'envoyer des statuts de check afin de les utiliser avec des monitors.\nLes messages de check de service ne peuvent pas dépasser 500 caractères. Si un check est envoyé avec un message contenant plus de 500 caractères, seuls les 500 premiers caractères seront affichés.\n\n- [En savoir plus sur les monitors de check de service.][1]\n- [En savoir plus sur les monitors de check de processus.][2]\n- [En savoir plus sur les monitors de check réseau.][3]\n- [En savoir plus sur les monitors de check custom.][4]\n\n[1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/monitor_types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert"
+  },
+  "service-dependencies": {
+    "name": "Dépendances de service",
+    "description": "API Service Map de l'APM. Pour en savoir plus, consultez la [documentation relative à la Service Map](https://docs.datadoghq.com/tracing/visualization/services_map/)."
+  },
+  "service-level-objectives": {
+    "name": "Service Level Objectives",
+    "description": "Les [SLO](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration) (Service Level Objectives) constituent un outil essentiel pour optimiser le niveau de fiabilité d'un site. Les SLO fournissent un cadre permettant de définir des objectifs précis relatifs aux performances de l'application, aidant ainsi les équipes à proposer une expérience client homogène, à assurer les développements futurs sans compromettre la stabilité de la plateforme, et à améliorer la communication avec les utilisateurs internes et externes."
+  },
+  "slack-integration": {
+    "name": "Intégration Slack",
+    "description": "Configurez votre [intégration Datadog/Slack](https://docs.datadoghq.com/integrations/slack) directement via l'API Datadog."
+  },
+  "snapshots": {
+    "name": "Snapshots",
+    "description": "Prenez des snapshots de graphiques à l'aide de l'API."
+  },
+  "synthetics": {
+    "name": "Synthetic",
+    "description": "Datadog Synthetic utilise des requêtes utilisateur simulées et le rendu du navigateur pour vous aider à optimiser votre uptime, à identifier les problèmes affectant une région spécifique et à surveiller les performances de l'application. Il existe deux types de tests Datadog Synthetic : les [tests API](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest) et les [tests Browser](https://docs.datadoghq.com/synthetics/browser_tests). Vous pouvez utiliser l'API Datadog pour gérer les deux types de tests automatiquement.\n\nPour en savoir plus sur Synthetic, consultez la [présentation de Synthetic](https://docs.datadoghq.com/synthetics/)."
+  },
+  "tags": {
+    "name": "Tags",
+    "description": "L'endpoint tag vous permet d'assigner des tags à des hosts, par exemple : `role:database`. Ces tags sont appliqués à toutes les métriques envoyées par le host. Pour récupérer et appliquer des tags à un host spécifique, utilisez le nom du host en question (votrehost.exemple.com).\n\nLe composant de votre infrastructure à l'origine d'un tag est identifié par une source. Les sources valides sont notamment nagios, hudson, jenkins, users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.\n\nPour en savoir plus sur les tags, consultez la [page de documentation dédiée](https://docs.datadoghq.com/tagging)."
+  },
+  "timeboards": {
+    "name": "Timeboards",
+    "description": "Cet endpoint est obsolète. Utilisez plutôt le [nouvel endpoint Dashboards](https://docs.datadoghq.com/api/#dashboards)."
+  },
+  "tracing": {
+    "name": "Tracing",
+    "description": "En savoir plus sur le [tracing avec Datadog](https://docs.datadoghq.com/tracing) et [la terminologie APM](https://docs.datadoghq.com/tracing/visualization/services_list).\n\nL'API de tracing est une API d'Agent plutôt qu'une API de service.\nEnvoyez vos traces à l'endpoint local `http://localhost:8126/v0.3/traces` afin que votre Agent puisse ensuite les transférer à Datadog."
+  },
+  "usage-metering": {
+    "name": "Mesure de l'utilisation",
+    "description": "L'API de mesure de l'utilisation vous permet de récupérer des informations sur l'utilisation horaire, journalière et mensuelle de nombreuses facettes de Datadog.\nTous les clients Pro et Enterprise peuvent utiliser cette API.\nSeules les [organisations de niveau parent] peuvent l'utiliser (https://docs.datadoghq.com/account_management/multi_organization/).\n\n **Remarque** : les données d'utilisation peuvent accuser d'un retard de 72 heures après leur collecte. Elles sont conservées pendant 15 mois."
+  },
+  "users": {
+    "name": "Utilisateurs",
+    "description": "Créez, modifiez et désactivez des utilisateurs. [En savoir plus sur la gestion de votre équipe][1].\n\n[1]: https://docs.datadoghq.com/account_management/team"
+  },
+  "webhooks-integration": {
+    "name": "Intégration Webhooks",
+    "description": "Configurez votre intégration Datadog/Webhooks directement via l'API Datadog. Pour en savoir plus sur l'intégration Datadog/Webhooks, consultez la [page dédiée à l'intégration](https://docs.datadoghq.com/integrations/webhooks)."
+  }
+}

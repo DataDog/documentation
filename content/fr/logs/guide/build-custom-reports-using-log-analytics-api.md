@@ -61,7 +61,9 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"status",
            "sort":{
-               "order":"desc"
+               "order":"desc",
+               "type": "measure",
+               "aggregation":"count"
            },
            "limit":3
        }
@@ -138,7 +140,9 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"status",
            "sort":{
-               "order":"desc"
+               "order":"desc",
+               "type": "measure",
+               "aggregation":"count"
            }
        }
    ]
@@ -227,7 +231,10 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"status",
            "sort":{
-               "order":"desc"
+               "order":"desc",    
+               "type": "measure",
+               "aggregation":"avg",
+               "metric":"@http.response_time"
            }
        }
    ]
@@ -301,7 +308,10 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc"
+               "order":"desc",    
+               "type": "measure",
+               "aggregation":"sum",
+               "metric":"@http.response_time"
            }
        }
    ]
@@ -366,7 +376,10 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc"
+               "order":"desc",    
+               "type": "measure",
+               "aggregation":"min",
+               "metric":"@http.response_time"
            }
        }
    ]
@@ -431,7 +444,10 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc"
+               "order":"desc",    
+               "type": "measure",
+               "aggregation":"max",
+               "metric":"@http.response_time"
            }
        }
    ]
@@ -498,7 +514,10 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc"
+               "order":"desc",    
+               "type": "measure",
+               "aggregation":"pc99",
+               "metric":"@http.response_time"
            }
        }
    ]

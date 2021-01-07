@@ -2,13 +2,13 @@
 title: Monitor Real User Monitoring
 kind: documentation
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Vérifier le statut de votre monitor
 ---
@@ -49,9 +49,9 @@ Lorsque vous répartissez le monitor par dimension (tag ou facette) tout en util
 **Exemples** :
 
 * Le monitor suivant se déclenche uniquement s'il n'y a aucun événement RUM pour toutes les applications :
-  {{< img src="monitors/monitor_types/rum/rum_monitor_below_by_application.png" alt="Monitor Below réparti par service"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id.png" alt="Monitor Below réparti par application"  style="width:70%;" >}}
 * Le monitor suivant se déclenche s'il n'y a aucun log pour l'application `Shop.ist` :
-  {{< img src="monitors/monitor_types/rum/rum_monitor_below_condition.png" alt="Monitor Below pour une application spécifique"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="Monitor Below pour une application spécifique"  style="width:70%;" >}}
 
 ### Notifications
 
@@ -61,9 +61,9 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring
+[1]: /fr/real_user_monitoring/
 [2]: https://app.datadoghq.com/monitors#create/rum
-[3]: /fr/real_user_monitoring/explorer/search
+[3]: /fr/real_user_monitoring/explorer/search/
 [4]: /fr/real_user_monitoring/explorer/?tab=facets#setup-facets-measures
 [5]: /fr/real_user_monitoring/explorer/?tab=measures#setup-facets-measures
-[6]: /fr/monitors/notifications
+[6]: /fr/monitors/notifications/

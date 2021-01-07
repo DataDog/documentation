@@ -31,9 +31,15 @@ Any compliant StatsD client works with DogStatsD and the Agent, but you won't be
 
 **Note**: DogStatsD does NOT implement Timers from StatsD as a native metric type (though it [does support them via histograms][2]).
 
+DogStatsD is available on Docker Hub and GCR:
+
+| Docker Hub                                       | GCR                                                       |
+|--------------------------------------------------|-----------------------------------------------------------|
+| [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
+
 ## How it works
 
-DogStatsD accepts [custom metrics][3], [events][4], and [service checks][5] over UDP and periodically aggregates and forwards them to Datadog.
+DogStatsD accepts [custom metrics][5], [events][6], and [service checks][7] over UDP and periodically aggregates and forwards them to Datadog.
 
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't experience an interruption.
 
@@ -86,7 +92,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [Unix domain socket][1]:
@@ -217,7 +223,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 
 #### Install the DogStatsD client
 
-Official Datadog-DogStatsD client libraries are available for the following languages. You _can_ use any [generic StatsD client][6] to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above:
+Official Datadog-DogStatsD client libraries are available for the following languages. You _can_ use any [generic StatsD client][8] to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -394,7 +400,7 @@ using (var dogStatsdService = new DogStatsdService())
 
 ### Client instantiation parameters
 
-**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, refer to the dedicated [unified service tagging][7] documentation.
+**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, refer to the dedicated [unified service tagging][9] documentation.
 
 In addition to the required DogStatsD configuration (`url` and `port`), the following optional parameters are available for your DogStatsD client:
 
@@ -487,13 +493,15 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][8] section, which also explains how to send metrics and events straight from the command line.
+If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][10] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
 [2]: /developers/metrics/dogstatsd_metrics_submission/
-[3]: /developers/metrics/custom_metrics/
-[4]: /developers/events/dogstatsd/
-[5]: /developers/service_checks/dogstatsd_service_checks_submission/
-[6]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[7]: /getting_started/tagging/unified_service_tagging
-[8]: /developers/metrics/
+[3]: https://hub.docker.com/r/datadog/dogstatsd
+[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
+[5]: /developers/metrics/custom_metrics/
+[6]: /developers/events/dogstatsd/
+[7]: /developers/service_checks/dogstatsd_service_checks_submission/
+[8]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[9]: /getting_started/tagging/unified_service_tagging
+[10]: /developers/metrics/

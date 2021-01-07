@@ -240,13 +240,11 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 <div class="alert alert-info">このビューでログを有効化するためには、ログの収集を有効にした後、<a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/" target=_blank>ログとトレースを紐付ける</a>必要があります。</div>
 
-## カスタムスパンタグを App Analytics で活用する
-
-<div class="alert alert-info">このセクションでは<a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>App Analytics が有効化</a>されていることを前提としています</div>
+## カスタムスパンタグを Analytics で活用する
 
 4) **[トレース検索ページ][6]**に移動します。
 
-トレース検索ページでは、関心のある特定の[トレース][1]と Analyzed Span を特定できます。ここでは、時間によってデフォルトタグ (`Env`、`Service`、`Resource` など、[さまざまなタグ][7]) にフィルターをかけることができます。
+トレース検索ページでは、関心のある特定の[トレース][1]とインデックス化スパンを特定できます。ここでは、時間によってデフォルトタグ (`Env`、`Service`、`Resource` など、[さまざまなタグ][7]) にフィルターをかけることができます。
 
 5) **新しいタグが設定されたトレースを探す**。トレースを探すには、左側のファセット検索を使用して本ガイドの始めで設定したリソース名を見つけ、そのうちの 1 行をクリックします。
 
@@ -260,9 +258,9 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 これで、作成したファセットがファセット検索に表示されるようになります。`Search facets` ボックスを使用すると、ファセットを素早く見つけられます。
 
-6) **[App Analytics][8] ページに移動します**。
+6) **[Analytics][8] ページに移動します**。
 
-App Analytics は、クエリを作成し無限濃度でトレースの調査を実施できる視覚的ツールです。ファセットを使用して、クエリにフィルターとスコープを設定します。詳細については、[App Analytics の概要][9]をご確認ください。
+Analytics は、クエリを作成し無限濃度でトレースの調査を実施できる視覚的ツールです。ファセットを使用して、クエリにフィルターとスコープを設定します。詳細については、[トレース検索と Analytics の概要][9]をご確認ください。
 
 7) サービスファセット一覧で作業中の**サービスを選択**し、ファセットのステータスで **Error を選択**したら、group by フィールドで **`customer_id`** (またはスパンに追加した他のタグ) を選択します。
 
@@ -280,7 +278,6 @@ App Analytics は、クエリを作成し無限濃度でトレースの調査を
 
 ## その他の参考資料
 
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/visualization/#trace
@@ -289,7 +286,7 @@ App Analytics は、クエリを作成し無限濃度でトレースの調査を
 [4]: /ja/tracing/visualization/#resources
 [5]: /ja/tracing/visualization/#services
 [6]: https://app.datadoghq.com/apm/search
-[7]: /ja/tracing/app_analytics/search/
-[8]: https://app.datadoghq.com/apm/search/analytics
-[9]: /ja/tracing/app_analytics/analytics/
+[7]: /ja/tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[8]: https://app.datadoghq.com/apm/analytics
+[9]: /ja/tracing/trace_search_and_analytics/query_syntax/
 [10]: /ja/tracing/guide/alert_anomalies_p99_database/

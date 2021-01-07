@@ -17,6 +17,9 @@ further_reading:
     - link: 'logs/explorer/patterns'
       tag: Documentation
       text: 'Detect patterns inside your logs'
+    - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+      tag: Blog
+      text: 'Add a Log Explorer url to your clipboard'
 ---
 
 ## Overview

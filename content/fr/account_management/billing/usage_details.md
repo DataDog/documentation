@@ -19,26 +19,28 @@ Certains onglets contiennent également des outils supplémentaires :
 
 ## Month-to-Date Summary
 
-Cette section résume votre utilisation mensuelle ou MTD. Dans l'onglet « All », vous verrez votre utilisation mensuelle des hosts d'infrastructure, des conteneurs, des métriques custom, des hosts APM, des logs et de toute autre partie de la plateforme que vous avez utilisée au cours du mois.
+Cette section résume votre utilisation pour le mois en cours. L'onglet « All » indique des données sur votre utilisation des hosts d'infrastructure, des conteneurs, des métriques custom, des hosts APM, des logs et de toute autre partie de la plateforme utilisée pendant le mois en cours.
 
-{{< img src="account_management/billing/usage-details-v2-01.png" alt="Résumé de l'utilisation - All" >}}
+{{< img src="account_management/billing/usage-details-v2-01.png" alt="Résumé de l'utilisation - Onglet All" >}}
 
 Chaque onglet spécifique à un produit affiche votre utilisation mensuelle des produits dans cette catégorie.
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Résumé de l'utilisation - Network" >}}
 
-## Overall Usage
+Les données d'utilisation ci-dessus correspondent à l'onglet All. Elles rassemblent des informations sur des éléments non facturables, comme les évaluations de produits. La plupart des comptes peuvent également consulter les données d'utilisation facturables. La vue Billable affiche uniquement les éléments qui sont facturés. Elle détaille également l'utilisation à la demande dépassant vos engagements et vos allocations.
 
-Cette section affiche l'utilisation horaire, quotidienne, mensuelle et annuelle. Dans l'onglet « All », vous verrez votre utilisation horaire, quotidienne, mensuelle et annuelle pour les éléments suivants : 
+{{< img src="account_management/billing/usage-details-v2-07.png" alt="Résumé d'utilisation - Billable" >}}
 
-| Colonne                   | Description                                                                                                                 |
+L'utilisation de chaque produit pour le mois en cours est calculée comme suit :
+
+| Produit                   | Description                                                                                                                |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Infra. Hosts             | Affiche le 99e centile de tous les hosts d'infrastructure distincts pour toutes les heures du mois actuel.                         |
 | Containers               | Affiche la limite supérieure de tous les conteneurs distincts pour toutes les heures du mois actuel.                                    |
 | APM Hosts                | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel.                                    |
-| Analyzed Spans           | Affiche la somme de toutes les spans analysées indexées pour toutes les heures du mois actuel.                                            |
+| Indexed Spans           | Affiche la somme de toutes les spans indexées pour toutes les heures du mois actuel.                                            |
 | Profiled Hosts           | Affiche le 99e centile de tous les hosts profilés distincts pour toutes les heures du mois actuel.                               |
-| Profiled Containers      | Affiche le nombre total moyen de conteneurs profilés distincts pour toutes les heures du mois actuel.                                  |
+| Profiled Containers      | Affiche la moyenne de tous les conteneurs profilés distincts pour toutes les heures du mois actuel.                                  |
 | Custom Metrics           | Affiche le nombre moyen de [métriques custom][2] distinctes pour toutes les heures du mois actuel.                               |
 | Ingested Custom Metrics  | Affiche le nombre moyen de métriques custom INGÉRÉES distinctes pour toutes les heures du mois actuel.                           |
 | Ingested Logs            | Affiche la somme de tous les octets de logs ingérés pour toutes les heures du mois actuel.                                                |
@@ -49,10 +51,13 @@ Cette section affiche l'utilisation horaire, quotidienne, mensuelle et annuelle.
 | Network Hosts            | Affiche le 99e centile de tous les hosts réseau distincts pour toutes les heures du mois actuel.                                |
 | Network Flows            | Affiche la somme de tous les flux réseau indexés pour toutes les heures du mois actuel.                                             |
 | Network Devices          | Affiche le 99e centile de tous les périphériques réseau distincts pour toutes les heures du mois actuel.                              |
-| Synthetics API Test Runs      | Affiche la somme de tous les tests API Synthetic pour toutes les heures du mois actuel.                                               |
-| Synthetics Browser Test Runs  | Affiche la somme de tous les tests Browser Synthetic pour toutes les heures du mois actuel.                                           |
+| Synthetic API Tests      | Affiche la somme de tous les tests API Synthetic pour toutes les heures du mois actuel.                                               |
+| Synthetic Browser Tests  | Affiche la somme de tous les tests Browser Synthetic pour toutes les heures du mois actuel.                                           |
 | RUM Sessions             | Affiche la somme de toutes les sessions RUM distinctes pour toutes les heures du mois actuel.                                             |
 
+## Overall Usage
+
+Cette section contient uniquement les utilisations mesurées en heures, jours, mois et années :
 
 {{< img src="account_management/billing/usage-details-v2-03.png" alt="Utilisation horaire - All" >}}
 
@@ -63,6 +68,7 @@ Chaque onglet spécifique à un produit affiche votre utilisation annuelle des p
 * Azure Hosts
 * GCP Hosts
 * vSphere Hosts
+* Azure App Service
 
 {{< img src="account_management/billing/usage-details-v2-04.png" alt="Utilisation horaire - Infra Hosts" >}}
 
