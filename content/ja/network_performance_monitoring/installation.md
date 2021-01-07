@@ -291,6 +291,8 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                 volumes:
                     - name: s6-run
                       emptyDir: {}
+                    - name: sysprobe-socket-dir
+                      emptyDir: {}
                     - name: debugfs
                       hostPath:
                           path: /sys/kernel/debug

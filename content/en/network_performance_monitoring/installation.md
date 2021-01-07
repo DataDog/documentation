@@ -291,6 +291,8 @@ If you already have the [Agent running with a manifest][3]:
                 volumes:
                     - name: s6-run
                       emptyDir: {}
+                    - name: sysprobe-socket-dir
+                      emptyDir: {}
                     - name: debugfs
                       hostPath:
                           path: /sys/kernel/debug

@@ -250,6 +250,8 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                 volumes:
                     - name: s6-run
                       emptyDir: {}
+                    - name: sysprobe-socket-dir
+                      emptyDir: {}
                     - name: debugfs
                       hostPath:
                           path: /sys/kernel/debug
