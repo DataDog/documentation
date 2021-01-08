@@ -10,6 +10,7 @@ exceptions:
   - CLI
   - Datadog
   - Docker
+  - DogStatsD
   - GitHub
   - I
   - Kubernetes
