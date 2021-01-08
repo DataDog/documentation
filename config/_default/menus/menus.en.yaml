@@ -1730,7 +1730,7 @@ main:
     identifier: compliance_monitoring
     weight: 2
   - name: Default Rules
-    url: security_monitoring/default_rules/
+    url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
@@ -1749,6 +1749,11 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_detection_rules
     weight: 3
+  - name: Guides
+    url: security_monitoring/guides
+    parent: security_monitoring
+    identifier: security_monitoring_guides
+    weight: 4
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
