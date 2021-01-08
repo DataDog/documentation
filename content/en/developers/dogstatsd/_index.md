@@ -498,7 +498,7 @@ If you're interested in learning more about the datagram format used by DogStats
 [1]: https://github.com/etsy/statsd
 [2]: /developers/metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
-[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
+[4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /developers/metrics/custom_metrics/
 [6]: /developers/events/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
