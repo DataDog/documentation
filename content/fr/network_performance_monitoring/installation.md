@@ -170,7 +170,7 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                           - name: DD_SYSTEM_PROBE_EXTERNAL
                             value: 'true'
                           - name: DD_SYSPROBE_SOCKET
-                            value: /var/run/s6/sysprobe.sock
+                            value: /var/run/sysprobe/sysprobe.sock
     ```
 
     Si l'Agent de processus s'exécute dans un conteneur distinct, les variables d'environnement ci-dessus doivent être définies dans ce conteneur.
@@ -194,8 +194,8 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                         readOnly: true
                       - name: debugfs
                         mountPath: /sys/kernel/debug
-                      - name: s6-run
-                        mountPath: /var/run/s6
+                      - name: sysprobe-socket-dir
+                        mountPath: /var/run/sysprobe
     ```
 
 4. Ajoutez un nouveau system-probe en tant que sidecar de l'Agent :
@@ -223,7 +223,7 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
                           - name: DD_SYSPROBE_SOCKET
-                            value: /var/run/s6/sysprobe.sock
+                            value: /var/run/sysprobe/sysprobe.sock
                       resources:
                           requests:
                               memory: 150Mi
@@ -240,8 +240,8 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                             readOnly: true
                           - name: debugfs
                             mountPath: /sys/kernel/debug
-                          - name: s6-run
-                            mountPath: /var/run/s6
+                          - name: sysprobe-socket-dir
+                            mountPath: /var/run/sysprobe
     ```
 
 5. Enfin, ajoutez les volumes suivants à votre manifeste :
@@ -249,6 +249,8 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
     ```yaml
                 volumes:
                     - name: s6-run
+                      emptyDir: {}
+                    - name: sysprobe-socket-dir
                       emptyDir: {}
                     - name: debugfs
                       hostPath:

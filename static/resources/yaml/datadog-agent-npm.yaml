@@ -504,8 +504,6 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
-        - name: s6-run
-          emptyDir: {}
         - name: sysprobe-config
           configMap:
             name: datadog-agent-system-probe-config

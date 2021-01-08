@@ -154,7 +154,7 @@ Windows ホストのネットワークパフォーマンスモニタリングを
     ```
 4. [Agent を再起動します][2]。
 
-   PowerShell (`powershell.exe`) の場合: 
+   PowerShell (`powershell.exe`) の場合:
     ```shell
     restart-service -f datadogagent
     ```
@@ -212,7 +212,7 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                           - name: DD_SYSTEM_PROBE_EXTERNAL
                             value: 'true'
                           - name: DD_SYSPROBE_SOCKET
-                            value: /var/run/s6/sysprobe.sock
+                            value: /var/run/sysprobe/sysprobe.sock
     ```
 
 3. 以下の追加ボリュームを `datadog-agent` コンテナにマウントします。
@@ -234,8 +234,9 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                         readOnly: true
                       - name: debugfs
                         mountPath: /sys/kernel/debug
-                      - name: s6-run
                         mountPath: /var/run/s6
+                      - name: sysprobe-socket-dir
+                        mountPath: /var/run/sysprobe
     ```
 
 4. 新しいシステムプローブを Agent のサイドカーとして追加します。
@@ -263,7 +264,7 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
                           - name: DD_SYSPROBE_SOCKET
-                            value: /var/run/s6/sysprobe.sock
+                            value: /var/run/sysprobe/sysprobe.sock
                       resources:
                           requests:
                               memory: 150Mi
@@ -280,8 +281,8 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                             readOnly: true
                           - name: debugfs
                             mountPath: /sys/kernel/debug
-                          - name: s6-run
-                            mountPath: /var/run/s6
+                          - name: sysprobe-socket-dir
+                            mountPath: /var/run/sysprobe
     ```
 
 5. 最後に、お使いのマニフェストに以下のボリュームを追加します。
@@ -289,6 +290,8 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
     ```yaml
                 volumes:
                     - name: s6-run
+                      emptyDir: {}
+                    - name: sysprobe-socket-dir
                       emptyDir: {}
                     - name: debugfs
                       hostPath:
