@@ -68,7 +68,7 @@ Percentage of the requests served within a certain time (ms)
 
 Head on over to [Profile Search][6] and look for a profile covering the period in which we were generating traffic. It may take a minute or so. You'll be able to tell which profile includes the load test because the CPU usage will be higher:
 
-{{< img src="tracing/profiling/intro_to_profiling/list.png" alt="List of profiles">}}
+{{< img src="tracing/profiling/intro_to_profiling/list.png" alt="List of profiles" style="width:80%;">}}
 
 When you open it, you'll see a visualization of the profile that looks like this:
 
@@ -102,13 +102,13 @@ we can see that `replyJSON()`, and the methods it calls, eventually branch into 
 
 We also see a part of the CPU profile that looks like this:
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_gc.png" alt="Flame graph showing GC (garbage collection)">}}
+{{< img src="tracing/profiling/intro_to_profiling/flame_graph_gc.png" alt="Flame graph showing GC (garbage collection)" style="width:60%;">}}
 
 ## Profile Types
 
 The fact that it spent almost 6% of CPU time in garbage collection suggests that we may be producing a lot of garbage. So hop over to the Allocated Memory profile type:
 
-{{< img src="tracing/profiling/intro_to_profiling/types.png" alt="Profile type selector">}}
+{{< img src="tracing/profiling/intro_to_profiling/types.png" alt="Profile type selector" style="width:60%;">}}
 
 On an Allocated Memory profile, the size of the boxes shows how much memory each function allocated, and again, the call stack that led to the function doing the allocating. Here we can see that during this one minute profile, the `replyJSON()` method and other methods that it called, allocated 17.47 GiB, mostly related to the same date parsing code that we saw in the CPU profile above:
 
@@ -178,7 +178,7 @@ Improving CPU usage like this can easily translate into saving money. If this ha
 
 ## Improve Your Service
 
-We've only skimmed the surface here but this should give you a sense of how to get started. **[Give it a shot on your services](/tracing/profiler/getting_started/)**!
+We've only skimmed the surface here but this should give you a sense of how to get started. **[Give it a shot on your services][8]**!
 
 {{< site-region region="us" >}}{{< /site-region >}}
 {{< site-region region="eu" >}}{{< /site-region >}}
@@ -190,3 +190,4 @@ We've only skimmed the surface here but this should give you a sense of how to g
 [5]: https://httpd.apache.org/docs/2.4/programs/ab.html
 [6]: https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java
 [7]: https://github.com/DataDog/dd-continuous-profiler-example/blob/25819b58c46227ce9a3722fa971702fd5589984f/java/src/main/java/movies/Server.java#L66
+[8]: /tracing/profiler/getting_started/
