@@ -47,8 +47,8 @@ $ddpurple:    #632CA6;
         height:100%;
       }
       .card-title {
-        margin:14px 0 0 0;
-        padding:0 1.25rem;
+        margin: 14px 0 0 0;
+        padding: 0.25rem 1.25rem 0;
       }
       .card-title,
       .card-text {
@@ -67,6 +67,7 @@ $ddpurple:    #632CA6;
         right: 0;
         left: 0;
         height: 18px;
+        border-bottom: 1px solid $ddgray;
 
         p {
           font-size: 12px;
@@ -102,6 +103,7 @@ $ddpurple:    #632CA6;
           font-size:12px;
           height:26px;
           cursor: pointer;
+          padding: 0rem 0.5rem;
         }
       }
     }
@@ -171,6 +173,17 @@ $ddpurple:    #632CA6;
         }
         .title {
           display:none;
+        }
+        .card-banner {
+          border-bottom: 1px solid $brand-primary;
+        }
+      }
+    }
+
+    .cat-marketplace {
+      &:hover {
+        .card-title {
+          padding-top: 0.75rem !important;
         }
       }
     }
