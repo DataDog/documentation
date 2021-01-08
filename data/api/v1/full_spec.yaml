@@ -17074,7 +17074,7 @@ paths:
         \ 3.2 megabytes (3200000). Compressed payloads must have a decompressed size\
         \ of up to 62 megabytes (62914560).\n\nIf you\u2019re submitting metrics directly\
         \ to the Datadog API without using DogStatsD, expect\n\n- 64 bits for the\
-        \ timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50\
+        \ timestamp\n- 32 bits for the value\n- 20 bytes for the metric names\n- 50\
         \ bytes for the timeseries\n- The full payload is approximately ~ 100 bytes.\
         \ However, with the DogStatsD API,\ncompression is applied, which reduces\
         \ the payload size."
