@@ -37,9 +37,10 @@ $ddpurple:    #632CA6;
       justify-content: center;
       width:146px;
       height:142px;
-      //float:left;
       margin:0 19px 19px 0;
       overflow:hidden;
+      border: 1px solid $ddgray;
+      border-radius: 2px;
       .card-body {
         padding:0;
         display:none;
@@ -58,6 +59,19 @@ $ddpurple:    #632CA6;
         &:lang(ja) {
             font-size: 11px !important;
             line-height: 14px !important;
+        }
+      }
+      .card-banner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 18px;
+
+        p {
+          font-size: 12px;
+          line-height: 16px;
+          margin-top: 0.5px;
         }
       }
       .card-img {

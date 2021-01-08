@@ -90,6 +90,11 @@
             {{ if $formatname }}
             <div id="mixid_{{$i}}" class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.Params.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
                 <div id="{{ $v.Params.name | default ($urlname | lower) }}" class="card">
+                    {{ if in $v.Params.categories "marketplace" }}
+                        <div class="card-banner border-bottom">
+                            <p class="font-primary font-weight-bold text-uppercase">Marketplace</p>
+                        </div>
+                    {{ end }}
                     <a class="card-img" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
                         {{ $.Scratch.Set "url" ""}}
                         {{ if $indx }}
