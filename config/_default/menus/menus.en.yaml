@@ -2434,33 +2434,33 @@ api_v1:
     parent: Dashboards
     url: '#create-a-new-dashboard'
     generated: true
-  - name: Create a public dashboard
+  - name: Create a shared dashboard
     parent: Dashboards
-    url: '#create-a-public-dashboard'
+    url: '#create-a-shared-dashboard'
     generated: true
-  - name: Revoke a public dashboard URL
+  - name: Revoke a shared dashboard URL
     parent: Dashboards
-    url: '#revoke-a-public-dashboard-url'
+    url: '#revoke-a-shared-dashboard-url'
     generated: true
-  - name: Get a public dashboard
+  - name: Get a shared dashboard
     parent: Dashboards
-    url: '#get-a-public-dashboard'
+    url: '#get-a-shared-dashboard'
     generated: true
-  - name: Update a public dashboard
+  - name: Update a shared dashboard
     parent: Dashboards
-    url: '#update-a-public-dashboard'
+    url: '#update-a-shared-dashboard'
     generated: true
-  - name: Revoke public dashboard invitations
+  - name: Revoke shared dashboard invitations
     parent: Dashboards
-    url: '#revoke-public-dashboard-invitations'
+    url: '#revoke-shared-dashboard-invitations'
     generated: true
-  - name: Get all invitations for a public dashboard
+  - name: Get all invitations for a shared dashboard
     parent: Dashboards
-    url: '#get-all-invitations-for-a-public-dashboard'
+    url: '#get-all-invitations-for-a-shared-dashboard'
     generated: true
-  - name: Send public dashboard invitation email
+  - name: Send shared dashboard invitation email
     parent: Dashboards
-    url: '#send-public-dashboard-invitation-email'
+    url: '#send-shared-dashboard-invitation-email'
     generated: true
   - name: Delete a dashboard
     parent: Dashboards
