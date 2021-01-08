@@ -289,8 +289,6 @@ If you already have the [Agent running with a manifest][3]:
 
     ```yaml
                 volumes:
-                    - name: s6-run
-                      emptyDir: {}
                     - name: sysprobe-socket-dir
                       emptyDir: {}
                     - name: debugfs
