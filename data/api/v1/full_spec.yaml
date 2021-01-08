@@ -970,12 +970,12 @@ components:
       - PAST_ONE_MONTH
       - PAST_THREE_MONTHS
     DashboardInviteType:
-      description: Type for public dashboard invitation request body.
+      description: Type for shared dashboard invitation request body.
       enum:
       - public_dashboard_invitation
       type: string
       x-enum-varnames:
-      - PAST_FIFTEEN_MINUTES
+      - PUBLIC_DASHBOARD_INVITATION
     DashboardLayoutType:
       description: Layout type of the dashboard.
       enum:
@@ -1130,7 +1130,7 @@ components:
       description: Response containing token of deleted shared dashboard.
       properties:
         deleted_public_dashboard_token:
-          description: Token associated with the public dashboard that was revoked.
+          description: Token associated with the shared dashboard that was revoked.
           type: string
       type: object
     DeletedMonitor:
@@ -5985,9 +5985,9 @@ components:
           description: The tag/attribute key associated with the template variable.
           type: string
         visible_tags:
-          description: List of visible tag values on the public dashboard.
+          description: List of visible tag values on the shared dashboard.
           items:
-            description: Other values for this tag that can be selected on the public
+            description: Other values for this tag that can be selected on the shared
               dashboard.
             type: string
           nullable: true
@@ -6488,29 +6488,29 @@ components:
       - TRACE_SERVICE
     SharedDashboard:
       description: The metadata object associated with how a dashboard has been/will
-        be made public so that it can be shared with others outside of Datadog.
+        be shared.
       properties:
         author:
-          description: User who made the dashboard public.
+          description: User who shared the dashboard.
           properties:
             handle:
-              description: Identifier of the user who made the dashboard public.
+              description: Identifier of the user who shared the dashboard.
               example: test@datadoghq.com
               readOnly: true
               type: string
             name:
-              description: Name of the user who made the dashboard public.
+              description: Name of the user who shared the dashboard.
               readOnly: true
               type: string
           readOnly: true
           type: object
         created_at:
-          description: Date the dashboard was made public.
+          description: Date the dashboard was shared.
           format: date-time
           readOnly: true
           type: string
         dashboard_id:
-          description: ID of the dashboard to make public.
+          description: ID of the dashboard to share.
           example: 123-abc-456
           type: string
         dashboard_type:
@@ -6519,15 +6519,15 @@ components:
           $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
         global_time_selectable_enabled:
           description: Whether to allow viewers to select a different global time
-            setting for the public dashboard.
+            setting for the shared dashboard.
           nullable: true
           type: boolean
         public_url:
-          description: URL of the public dashboard.
+          description: URL of the shared dashboard.
           readOnly: true
           type: string
         selectable_template_vars:
-          description: List of objects representing template variables on the public
+          description: List of objects representing template variables on the shared
             dashboard which can have selectable values.
           example:
           - default_value: '*'
@@ -6542,13 +6542,13 @@ components:
           type: array
         share_list:
           description: List of email addresses that can receive an invitation to access
-            to the public dashboard.
+            to the shared dashboard.
           example:
           - test@datadoghq.com
           - test2@email.com
           items:
             description: Email address that can receive an invitation to access the
-              public dashboard.
+              shared dashboard.
             format: email
             type: string
           nullable: true
@@ -6556,7 +6556,7 @@ components:
         share_type:
           $ref: '#/components/schemas/DashboardShareType'
         token:
-          description: A unique token assigned to the public dashboard.
+          description: A unique token assigned to the shared dashboard.
           readOnly: true
           type: string
       required:
@@ -6564,7 +6564,7 @@ components:
       - dashboard_type
       type: object
     SharedDashboardInvites:
-      description: Invitations data and metadata that exists for a public dashboard
+      description: Invitations data and metadata that exists for a shared dashboard
         returned by the API.
       example:
         data:
@@ -6582,7 +6582,7 @@ components:
                 all pages
               properties:
                 total_count:
-                  description: The total number of invitations on this public board,
+                  description: The total number of invitations on this shared board,
                     across all pages.
                   format: int64
                   type: integer
@@ -6594,7 +6594,7 @@ components:
       type: object
     SharedDashboardInvitesData:
       description: An object or list of objects containing the information for an
-        invitation to a public dashboard.
+        invitation to a shared dashboard.
       example:
       - attributes:
           email: test@datadoghq.com
@@ -6604,7 +6604,7 @@ components:
       - $ref: '#/components/schemas/SharedDashboardInvitesDataList'
     SharedDashboardInvitesDataList:
       description: A list of objects containing the information for an invitation(s)
-        to a public dashboard.
+        to a shared dashboard.
       example:
       - attributes:
           email: test@datadoghq.com
@@ -6613,7 +6613,7 @@ components:
         $ref: '#/components/schemas/SharedDashboardInvitesDataObject'
       type: array
     SharedDashboardInvitesDataObject:
-      description: Object containing the information for an invitation to a public
+      description: Object containing the information for an invitation to a shared
         dashboard.
       example:
         attributes:
@@ -6626,7 +6626,7 @@ components:
         type: public_dashboard_invitation
       properties:
         attributes:
-          description: Attributes of the public dashboard invitation
+          description: Attributes of the shared dashboard invitation
           example:
             created_at: '2020-12-07T20:16:27.846985+00:00'
             email: test@datadoghq.com
@@ -6663,7 +6663,7 @@ components:
               readOnly: true
               type: string
             share_token:
-              description: The unique token of the public dashboard that was (or is
+              description: The unique token of the shared dashboard that was (or is
                 to be) shared.
               readOnly: true
               type: string
@@ -6675,7 +6675,7 @@ components:
       - attributes
       type: object
     SharedDashboardUpdateRequest:
-      description: Update a public dashboard's settings.
+      description: Update a shared dashboard's settings.
       example:
         global_time:
           live_span: 1h
@@ -6685,7 +6685,7 @@ components:
         share_type: invite
       properties:
         global_time:
-          description: Timeframe setting for the public dashboard.
+          description: Timeframe setting for the shared dashboard.
           example:
             live_span: 1h
           nullable: true
@@ -6695,11 +6695,11 @@ components:
           type: object
         global_time_selectable_enabled:
           description: Whether to allow viewers to select a different global time
-            setting for the public dashboard.
+            setting for the shared dashboard.
           nullable: true
           type: boolean
         selectable_template_vars:
-          description: List of objects representing template variables on the public
+          description: List of objects representing template variables on the shared
             dashboard which can have selectable values.
           example:
           - default_value: '*'
@@ -6713,14 +6713,14 @@ components:
           nullable: true
           type: array
         share_list:
-          description: List of email addresses that can be given access to the public
+          description: List of email addresses that can be given access to the shared
             dashboard.
           example:
           - test@datadoghq.com
           - test2@email.com
           items:
             description: Email address that can receive an invitation to access the
-              public dashboard.
+              shared dashboard.
             format: email
             type: string
           nullable: true
@@ -12062,8 +12062,8 @@ paths:
         type: idempotent
   /api/v1/dashboard/public:
     post:
-      description: Make a specified private dashboard public, generating a URL at
-        which it can be publicly viewed.
+      description: Share a specified private dashboard, generating a URL at which
+        it can be publicly viewed.
       operationId: CreatePublicDashboard
       requestBody:
         content:
@@ -12076,7 +12076,7 @@ paths:
                   share_type: open
             schema:
               $ref: '#/components/schemas/SharedDashboard'
-        description: Create a public dashboard request body.
+        description: Create a shared dashboard request body.
         required: true
       responses:
         '200':
@@ -12103,7 +12103,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Dashboard Not Found
-      summary: Create a public dashboard
+      summary: Create a shared dashboard
       tags:
       - Dashboards
       x-codegen-request-body-name: body
@@ -12119,7 +12119,7 @@ paths:
         with the specified token.
       operationId: DeletePublicDashboard
       parameters:
-      - description: The token of the public dashboard.
+      - description: The token of the shared dashboard.
         in: path
         name: token
         required: true
@@ -12143,19 +12143,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Public Dashboard Not Found
-      summary: Revoke a public dashboard URL
+          description: Shared Dashboard Not Found
+      summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
       x-undo:
         type: idempotent
     get:
-      description: Fetch an existing public dashboard's sharing metadata associated
+      description: Fetch an existing shared dashboard's sharing metadata associated
         with the specified token.
       operationId: GetPublicDashboard
       parameters:
-      - description: The token of the public dashboard. Generated when a dashboard
-          is made public.
+      - description: The token of the shared dashboard. Generated when a dashboard
+          is shared.
         in: path
         name: token
         required: true
@@ -12179,17 +12179,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Public Dashboard Not Found
-      summary: Get a public dashboard
+          description: Shared Dashboard Not Found
+      summary: Get a shared dashboard
       tags:
       - Dashboards
       x-undo:
         type: safe
     put:
-      description: Update a public dashboard associated with the specified token.
+      description: Update a shared dashboard associated with the specified token.
       operationId: UpdatePublicDashboard
       parameters:
-      - description: The token of the public dashboard.
+      - description: The token of the shared dashboard.
         in: path
         name: token
         required: true
@@ -12243,7 +12243,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Update a public dashboard
+      summary: Update a shared dashboard
       tags:
       - Dashboards
       x-codegen-request-body-name: body
@@ -12252,10 +12252,10 @@ paths:
   /api/v1/dashboard/public/{token}/invitation:
     delete:
       description: Revoke previously sent invitation emails and active sessions used
-        to access a given public dashboard for specific email addresses.
+        to access a given shared dashboard for specific email addresses.
       operationId: DeletePublicDashboardInvitation
       parameters:
-      - description: The token of the public dashboard.
+      - description: The token of the shared dashboard.
         in: path
         name: token
         required: true
@@ -12273,7 +12273,7 @@ paths:
                     type: public_dashboard_invitation
             schema:
               $ref: '#/components/schemas/SharedDashboardInvites'
-        description: Public Dashboard Invitation deletion request body.
+        description: Shared Dashboard Invitation deletion request body.
         required: true
       responses:
         '204':
@@ -12290,18 +12290,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Revoke public dashboard invitations
+      summary: Revoke shared dashboard invitations
       tags:
       - Dashboards
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
     get:
-      description: Describe the invitations that exist for the given public dashboard
+      description: Describe the invitations that exist for the given shared dashboard
         (paginated).
       operationId: GetPublicDashboardInvitations
       parameters:
-      - description: Token of the public dashboard for which to fetch invitations.
+      - description: Token of the shared dashboard for which to fetch invitations.
         in: path
         name: token
         required: true
@@ -12340,18 +12340,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Get all invitations for a public dashboard
+      summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
       x-undo:
         type: safe
     post:
       description: Send emails to specified email addresses containing links to access
-        a given authenticated public dashboard. Email addresses must already belong
-        to the authenticated public dashboard's share_list.
+        a given authenticated shared dashboard. Email addresses must already belong
+        to the authenticated shared dashboard's share_list.
       operationId: SendPublicDashboardInvitation
       parameters:
-      - description: The token of the public dashboard.
+      - description: The token of the shared dashboard.
         in: path
         name: token
         required: true
@@ -12369,7 +12369,7 @@ paths:
                     type: public_dashboard_invitation
             schema:
               $ref: '#/components/schemas/SharedDashboardInvites'
-        description: Public Dashboard Invitation request body.
+        description: Shared Dashboard Invitation request body.
         required: true
       responses:
         '201':
@@ -12396,7 +12396,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Send public dashboard invitation email
+      summary: Send shared dashboard invitation email
       tags:
       - Dashboards
       x-codegen-request-body-name: body
