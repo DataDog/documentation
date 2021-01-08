@@ -23,7 +23,7 @@ Datadog 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda ライ�
 2. Datadog 拡張機能用 Lambda レイヤーを AWS Lambda 関数に追加します。
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:4
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:5
     ```
 
     Lambda レイヤー ARN のプレイスホルダー `AWS_REGION` を適切な値に置き換えます。
