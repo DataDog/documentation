@@ -1675,20 +1675,20 @@ main:
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 603
+  - name: Log Transactions
+    url: logs/explorer/transactions/
+    parent: log_explorer
+    weight: 604
   - name: Log Analytics
     url: logs/explorer/analytics/
     parent: log_explorer
-    weight: 604
+    weight: 605
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 605
+    weight: 606
   - name: Facets
     url: logs/explorer/facets/
-    parent: log_explorer
-    weight: 606
-  - name: Transactions
-    url: logs/explorer/transactions/
     parent: log_explorer
     weight: 607
   - name: Search Syntax

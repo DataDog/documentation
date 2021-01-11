@@ -187,16 +187,16 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 - By default only the CPU and Heap profile are enabled. Use [profiler.WithProfileTypes][4] to enable additional [profile types][5].
 
-- It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use profiler configuration to set the parameters:
+- You can set profiler parameters in code with these functions:
 
-| Method | Type          | Description                                                                                                  |
+| Function | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithService     | String        | The Datadog [service][6] name, for example `my-web-app`.             |
 |  WithEnv         | String        | The Datadog [environment][7] name, for example, `production`.         |
 |  WithVersion     | String        | The version of your application.                                                                             |
 |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
-- Alternatively you can also set the profiler configuration using environment variables:
+- Alternatively you can set profiler configuration using environment variables:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
