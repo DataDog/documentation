@@ -120,7 +120,7 @@ Once the library is in your classpath, attach the following layout to any target
     <!-- Write logs as Json into a file -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${longdate}" />
+        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
