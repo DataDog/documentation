@@ -57,6 +57,6 @@ We recommend tracking traffic volume metrics over time in dashboards and noteboo
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/timeseries.png" alt="Create a Timeseries">}}
 
-You can also use this data as the source of a monitor - so you can get a notification if traffic volume increases unexpectedly. This can give you a heads up that there’s something unusual happening before you get your cloud bill at the end of the month.
+Dashboards and Notebooks make it easy for you to share any issues with your teammates.
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/network-traffic.png" alt="View your network traffic">}}
