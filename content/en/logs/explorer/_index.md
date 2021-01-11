@@ -38,15 +38,25 @@ The Live Tail displays logs as they flow into Datadog. Live Tail logs do not per
 
 ### Log Lists
 
+
+#### List Individual Logs
+
 The Log List displays indexed logs and offers privileged tools to navigate **individual results**. Find out more in the [Log List section][3].
 
 {{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="Log List" style="width:60%;" >}}
 
-### Log Patterns
+#### List Log Patterns
 
 The Log Patterns automatically aggregate indexed logs into a **handful of groups** with similar structures. Find out more in the [Log Patterns section][4].
 
 {{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
+
+#### List Log Transactions
+
+The Log Patterns automatically aggregate indexed logs into a **handful of groups** with similar structures. Find out more in the [Log Patterns section][4].
+
+{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
+
 
 ### Log Analytics
 
