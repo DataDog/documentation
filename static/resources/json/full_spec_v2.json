@@ -80,6 +80,7 @@
         "required": false,
         "schema": {
           "default": "name",
+          "description": "Sorting options",
           "enum": [
             "created_at",
             "-created_at",
@@ -90,7 +91,17 @@
             "name",
             "-name"
           ],
-          "type": "string"
+          "type": "string",
+          "x-enum-varnames": [
+            "CREATED_AT_ASCENDING",
+            "CREATED_AT_DESCENDING",
+            "LAST4_ASCENDING",
+            "LAST4_DESCENDING",
+            "MODIFIED_AT_ASCENDING",
+            "MODIFIED_AT_DESCENDING",
+            "NAME_ASCENDING",
+            "NAME_DESCENDING"
+          ]
         }
       },
       "ApplicationKeyFilterCreatedAtEndParameter": {
@@ -129,6 +140,33 @@
         "required": true,
         "schema": {
           "type": "string"
+        }
+      },
+      "ApplicationKeysSortParameter": {
+        "description": "Application key attribute used to sort results. Sort order is ascending\nby default. In order to specify a descending sort, prefix the\nattribute with a minus sign.",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "schema": {
+          "default": "name",
+          "description": "Sorting options",
+          "enum": [
+            "created_at",
+            "-created_at",
+            "last4",
+            "-last4",
+            "name",
+            "-name"
+          ],
+          "type": "string",
+          "x-enum-varnames": [
+            "CREATED_AT_ASCENDING",
+            "CREATED_AT_DESCENDING",
+            "LAST4_ASCENDING",
+            "LAST4_DESCENDING",
+            "NAME_ASCENDING",
+            "NAME_DESCENDING"
+          ]
         }
       },
       "ArchiveID": {
@@ -224,24 +262,6 @@
         "required": false,
         "schema": {
           "example": "ExampleTeamName",
-          "type": "string"
-        }
-      },
-      "ListApplicationKeysSortParameter": {
-        "description": "Application key attribute used to sort results. Sort order is ascending\nby default. In order to specify a descending sort, prefix the\nattribute with a minus sign.",
-        "in": "query",
-        "name": "sort",
-        "required": false,
-        "schema": {
-          "default": "name",
-          "enum": [
-            "created_at",
-            "-created_at",
-            "last4",
-            "-last4",
-            "name",
-            "-name"
-          ],
           "type": "string"
         }
       },
@@ -1819,6 +1839,31 @@
         },
         "type": "object"
       },
+      "APIKeysSort": {
+        "default": "name",
+        "description": "Sorting options",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "last4",
+          "-last4",
+          "modified_at",
+          "-modified_at",
+          "name",
+          "-name"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "CREATED_AT_ASCENDING",
+          "CREATED_AT_DESCENDING",
+          "LAST4_ASCENDING",
+          "LAST4_DESCENDING",
+          "MODIFIED_AT_ASCENDING",
+          "MODIFIED_AT_DESCENDING",
+          "NAME_ASCENDING",
+          "NAME_DESCENDING"
+        ]
+      },
       "APIKeysType": {
         "default": "api_keys",
         "description": "API Keys resource type.",
@@ -2816,6 +2861,27 @@
           "data"
         ],
         "type": "object"
+      },
+      "ApplicationKeysSort": {
+        "default": "name",
+        "description": "Sorting options",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "last4",
+          "-last4",
+          "name",
+          "-name"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "CREATED_AT_ASCENDING",
+          "CREATED_AT_DESCENDING",
+          "LAST4_ASCENDING",
+          "LAST4_DESCENDING",
+          "NAME_ASCENDING",
+          "NAME_DESCENDING"
+        ]
       },
       "ApplicationKeysType": {
         "default": "application_keys",
@@ -24643,6 +24709,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "description": "Sorting options",
               "enum": [
                 "created_at",
                 "-created_at",
@@ -24653,7 +24720,17 @@
                 "name",
                 "-name"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "LAST4_ASCENDING",
+                "LAST4_DESCENDING",
+                "MODIFIED_AT_ASCENDING",
+                "MODIFIED_AT_DESCENDING",
+                "NAME_ASCENDING",
+                "NAME_DESCENDING"
+              ]
             }
           },
           {
@@ -26789,6 +26866,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "description": "Sorting options",
               "enum": [
                 "created_at",
                 "-created_at",
@@ -26797,7 +26875,15 @@
                 "name",
                 "-name"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "LAST4_ASCENDING",
+                "LAST4_DESCENDING",
+                "NAME_ASCENDING",
+                "NAME_DESCENDING"
+              ]
             }
           },
           {
@@ -28047,6 +28133,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "description": "Sorting options",
               "enum": [
                 "created_at",
                 "-created_at",
@@ -28055,7 +28142,15 @@
                 "name",
                 "-name"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "LAST4_ASCENDING",
+                "LAST4_DESCENDING",
+                "NAME_ASCENDING",
+                "NAME_DESCENDING"
+              ]
             }
           },
           {

@@ -69,17 +69,7 @@ components:
       name: sort
       required: false
       schema:
-        default: name
-        enum:
-        - created_at
-        - -created_at
-        - last4
-        - -last4
-        - modified_at
-        - -modified_at
-        - name
-        - -name
-        type: string
+        $ref: '#/components/schemas/APIKeysSort'
     ApplicationKeyFilterCreatedAtEndParameter:
       description: Only include application keys created on or before the specified
         date.
@@ -112,6 +102,18 @@ components:
       required: true
       schema:
         type: string
+    ApplicationKeysSortParameter:
+      description: 'Application key attribute used to sort results. Sort order is
+        ascending
+
+        by default. In order to specify a descending sort, prefix the
+
+        attribute with a minus sign.'
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/ApplicationKeysSort'
     ArchiveID:
       description: The ID of the archive.
       in: path
@@ -188,26 +190,6 @@ components:
       required: false
       schema:
         example: ExampleTeamName
-        type: string
-    ListApplicationKeysSortParameter:
-      description: 'Application key attribute used to sort results. Sort order is
-        ascending
-
-        by default. In order to specify a descending sort, prefix the
-
-        attribute with a minus sign.'
-      in: query
-      name: sort
-      required: false
-      schema:
-        default: name
-        enum:
-        - created_at
-        - -created_at
-        - last4
-        - -last4
-        - name
-        - -name
         type: string
     MetricID:
       description: The name of the log-based metric.
@@ -450,6 +432,28 @@ components:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
       type: object
+    APIKeysSort:
+      default: name
+      description: Sorting options
+      enum:
+      - created_at
+      - -created_at
+      - last4
+      - -last4
+      - modified_at
+      - -modified_at
+      - name
+      - -name
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - LAST4_ASCENDING
+      - LAST4_DESCENDING
+      - MODIFIED_AT_ASCENDING
+      - MODIFIED_AT_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
     APIKeysType:
       default: api_keys
       description: API Keys resource type.
@@ -545,6 +549,24 @@ components:
       required:
       - data
       type: object
+    ApplicationKeysSort:
+      default: name
+      description: Sorting options
+      enum:
+      - created_at
+      - -created_at
+      - last4
+      - -last4
+      - name
+      - -name
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - LAST4_ASCENDING
+      - LAST4_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
     ApplicationKeysType:
       default: application_keys
       description: Application Keys resource type.
@@ -4720,7 +4742,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
-      - $ref: '#/components/parameters/ListApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeysSortParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
@@ -4830,7 +4852,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
-      - $ref: '#/components/parameters/ListApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeysSortParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
