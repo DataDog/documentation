@@ -31,6 +31,7 @@ To eliminate ambiguity and help you make sense of your systems, the following un
 | POWER         | nanowatt / microwatt / milliwatt / deciwatt / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                                   |
 | CURRENT         | milliampere / ampere                                                                                                                                                                                    |
 | POTENTIAL         | millivolt / volt                                                                                                                                                                                      |
+| APM         | span                                                                                                                                                                                                                                                                                                                       |
 
 Units are displayed automatically on timeseries graphs, query value widgets, and toplists, as shown in the following screenshot of a Redis dashboard:
 
