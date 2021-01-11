@@ -53,10 +53,9 @@ The Log Patterns automatically aggregate indexed logs into a **handful of groups
 
 #### List Log Transactions
 
-The Log Patterns automatically aggregate indexed logs into a **handful of groups** with similar structures. Find out more in the [Log Patterns section][4].
+The Log Transactions automatically aggregate indexed logs according to instances of a **transactional sequence** such as a user session or a request processed across multiple micro-services. Find out more in the [Log Transactions section][41].
 
-{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
-
+{{< img src="logs/explorer/log_explorer_walkthrough_transactions.png" alt="Log Transactions" style="width:60%;" >}}
 
 ### Log Analytics
 
@@ -167,6 +166,7 @@ Use saved views to automatically configure your log explorer with a preselected 
 [2]: /logs/explorer/live_tail/
 [3]: /logs/explorer/list/
 [4]: /logs/explorer/patterns/
+[41]: /logs/explorer/transactions/
 [5]: /logs/explorer/analytics/
 [6]: /logs/processing/pipelines/
 [7]: /integrations/#cat-log-collection
