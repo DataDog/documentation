@@ -8,7 +8,6 @@ dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md']
 categories:
     - log collection
-    - marketplace
 doc_link: /integrations/adobe_experience_manager/
 aliases:
     - logs/log_collection/adobe_experience_manager

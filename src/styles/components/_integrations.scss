@@ -2,7 +2,21 @@ $ddpurple:    #632CA6;
 
 .integrations {
   input[data-ref="search"] {
-    padding: 1.25rem 0.75rem;
+    padding: 1rem 0.75rem;
+    font-size: 18px;
+    line-height: 27px;
+    border-radius: 2px;
+
+    &::placeholder {
+      color: #888888;
+    }
+  }
+
+  .input-group-text {
+    display: block;
+    background: #c4c4c4;
+    border-radius: 2px 0px 0px 2px;
+    padding: 0.375rem 1rem;
   }
 }
 
@@ -150,8 +164,7 @@ $ddpurple:    #632CA6;
 .integration-search {
   width: 100%;
   margin-right: 19px;
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: .25rem;
+  border: 1px solid $ddgray;
 }
 
 .integration-search:focus {
