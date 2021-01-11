@@ -42,7 +42,7 @@ left:
       - name: product_rum
         link: 'https://www.datadoghq.com/product/real-user-monitoring/'
         title: Real User Monitoring
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''icône rum''>'
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''icône rum''>'
       - name: product_serverless
         link: 'https://www.datadoghq.com/product/serverless-monitoring/'
         title: Informatique sans serveur
