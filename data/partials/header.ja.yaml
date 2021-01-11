@@ -42,7 +42,7 @@ left:
       - name: product_rum
         link: 'https://www.datadoghq.com/product/real-user-monitoring/'
         title: リアルユーザーモニタリング
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''RUM アイコン''>'
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''RUM アイコン''>'
       - name: product_serverless
         link: 'https://www.datadoghq.com/product/serverless-monitoring/'
         title: サーバーレス
