@@ -53,9 +53,11 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
   <strong>Note:</strong> Whether you're using custom or automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
 </div>
 
-Otherwise, to begin tracing .NET applications: 
+If you don't use the in-app documentation to guide you, you can follow these instructions to begin tracing .NET applications: 
 
 #### IIS applications 
+
+To start tracing an IIS application:
 
 1. Install and configure the [Windows Datadog Agent][2]. 
 
@@ -65,7 +67,7 @@ Otherwise, to begin tracing .NET applications:
 
 4. Install the .NET Tracer MSI installer with administrator privileges.
 
-5. Restart IIS using the following command within an a: 
+5. Restart IIS using the following command as an administrator: 
 
    ```text
    net stop /y was
@@ -73,17 +75,17 @@ Otherwise, to begin tracing .NET applications:
    ```
 6. Create application load. 
 
-7. Visit Datadog's [APM Live Traces][4]. 
+7. Visit [APM Live Traces][4]. 
 
-### Required environment variables 
+#### Non-IIS applications
+
+To enable automatic instrumentation on non-IIS Windows applications, you must set two environment variables before starting your application.
+
 <div class="alert alert-warning"> 
   <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
 </div>
 
-#### Non-IIS applications
-
-For Windows applications, set these two environment variables before starting your application to enable automatic instrumentation:
-
+Set these environment variables for the non-IIS applications you want to instrument:
 
 | Name                   | Value                                    |
 | ---------------------- | ---------------------------------------- |
@@ -92,24 +94,18 @@ For Windows applications, set these two environment variables before starting yo
 
 
 #### Windows services
-To automatically instrument a Windows Service:
+To automatically instrument a Windows Service, set the `COR_ENABLE_PROFILING` and `COR_PROFILER` environment variables:
 
-1. Set the environment variables for the Service in the Windows Registry.
-2. Create a multi-sting value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>`
-3. Set the key's data to the value of: 
+1. In the Windows Registry Editor, create a multi-string value named `Environment` in  `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>`
+2. Set the value data to: 
 
    ```text
    COR_ENABLE_PROFILING=1
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
-
-Setting the `COR_ENABLE_PROFILING` & `COR_PROFILER` environment variables can be achieved by:
-
-1. Through the Windows Registry Editor:
-
      {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Registry Editor"  >}}
 
-2. Through a PowerShell snippet:
+Alternatively, you can set the environment variables by using the following PowerShell snippet:
 
    {{< code-block lang="powershell" filename="add-env-var.ps1" >}}
    [String[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
@@ -118,7 +114,7 @@ Setting the `COR_ENABLE_PROFILING` & `COR_PROFILER` environment variables can be
 
 #### Console applications
 
-Set the environment variables from a batch file before starting your application:
+To automatically instrument a console application, set the `COR_ENABLE_PROFILING` and `COR_PROFILER`environment variables from a batch file before starting your application:
 
 ```bat
 rem Set environment variables
@@ -135,20 +131,21 @@ example.exe
   <strong>Note:</strong> Whether you're using custom or automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
 </div>
 
-To use custom instrumentation: 
+To use custom instrumentation in your .NET application:
+
 1. Add the `Datadog.Trace` [NuGet package][5] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For additional details on custom instrumentation and custom tagging, please visit our [.NET Custom Instrumentation][6] documentation. 
+For additional details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation][6]. 
 
 ## Configuration
 
 The .NET Tracer has additional configuration settings which you can set by any of these methods:
 
 - Environment variables
-- The .NET application code
-- The application's `app.config` or `web.config` file (.NET Framework only)
-- A `datadog.json` file
+- Within the .NET application code
+- Within the application's `app.config` or `web.config` file (.NET Framework only)
+- Using a `datadog.json` file
 
 {{< tabs >}}
 
@@ -170,7 +167,7 @@ example.exe
 ```
 
 <div class="alert alert-warning"> 
-<strong>Note:</strong> To set environment variables for a Windows Service, use the multi-string key <code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> in the Windows Registry.
+<strong>Note:</strong> To set environment variables for a Windows Service, use the multi-string key <code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> in the Windows Registry, as described above.
 </div>
 
 {{% /tab %}}
@@ -239,6 +236,8 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ## Configuration settings
 
+Using the methods described above, customize your tracing configuration with these settings. Use the first name (for example, `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (for example, `Enabled`), indicates the name for the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. 
+
 ### Unified Service Tagging
 
 To use [Unified Service Tagging][7], configure the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` settings for your services. 
@@ -278,8 +277,6 @@ The following table lists the supported configuration variables that are availab
 ### Disable integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration. 
-
-Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` propery to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. 
 
 | Setting Name                                                            | Description                                                                                                           |
 | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
