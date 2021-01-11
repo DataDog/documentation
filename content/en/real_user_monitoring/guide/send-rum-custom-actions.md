@@ -5,8 +5,9 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+aliases:
+  - /real_user_monitoring/guide/send-custom-user-actions/
 ---
-
 ## Overview
 
 Real User Monitoring [automatically collects actions][1] on your web application. You may also want to collect additional events and timings such as form completions and business transactions. With custom RUM actions, monitor any interesting event with all the relevant context attached. As an example throughout this guide, we collect user checkouts information from an e-commerce website.
