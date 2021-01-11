@@ -11,60 +11,28 @@ This document details the available metrics and default dashboard for monitoring
 
 ### Trace Analytics Usage Dashboard
 
-{{< img src="tracing/trace_indexing_and_ingestion/AppAnalyticsDashboard.png" style="width:100%;" alt="Indexed span Dashboard" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/AnalyticsDashboardOverview.png" style="width:100%;" alt="Tracing without Limits Usage Dashboard" >}}
 
-Datadog provides an out-of-the-box [Usage Dashboard][5] for monitoring your APM usage, as well as your Ingested and Indexed spans.
+Datadog provides an out-of-the-box [Usage Dashboard][5] for monitoring your APM usage, as well as your ingested and indexed span volumes.
 
-This dashboard is broken up into several groups, each of which we will describe below.  All of these dashboards can be copied to a custom dashboard or used for monitors.
-
-#### APM Overview
-
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview.png" style="width:100%;" alt="Overview section of the Trace Analytics Usage Dashboard" >}}
-
-The first section shows a quick summary of your APM Host count over time, as well as timeseries graphs for Ingested and Indexed spans over time.  This can be very useful to see at-a-glance if you are staying within your expected bounds.
-
-#### Ingestion Overview
-
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardIngestionOverview.png" style="width:100%;" alt="Ingestion for the Trace Analytics Usage Dashboard" >}}
-
-This set of widgets focuses on ingestion, giving a timeseries of bytes ingested per second, total bytes ingested over the time period, as well as breaking the total ingestion down by `env`. The same metrics are repeated for spans.
-
-**Note:** Billing is based on bytes, but spans may be easier to track across your services so these metrics are provided in pairs.
-
-#### Indexing Overview
-
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardIndexingOverview.png" style="width:100%;" alt="Indexed Spans for the Trace Analytics Usage Dashboard" >}}
-
-This set of widgets focuses on indexed spans from retention filters, giving a timeseries of spans indexed per second, total spans indexed over the time period, as well as breaking the total indexing down by `env`.
-
-#### Indexed Spans by Env
-
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardIndexedSpansByEnv.png" style="width:100%;" alt="Indexed Spans for the Trace Analytics Usage Dashboard by Env" >}}
-
-This set of widgets focuses on the `env` tag.  For each environment, a top list is provided of the ingested and indexed spans from that environment, as well as a top list of what this ratio is per environment.
-
-#### Indexed Spans by Service
-
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardIndexedSpansByService.png" style="width:100%;" alt="Indexed Spans for the Trace Analytics Usage Dashboard by Service" >}}
-
-This set of widgets focuses on the `service` tag.  For each environment, a top list is provided of the ingested and indexed spans from that service, as well as a top list of what this ratio is per service.
-
-#### Indexed Spans by Env and Service
-
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardIndexedSpansByEnvAndService.png" style="width:100%;" alt="Indexed Spans for the Trace Analytics Usage Dashboard by Env and Service" >}}
-
-This set of widgets focuses on the `env` and `service` tag combination.  For each unique combination, a top list is provided of the ingested and indexed spans from that environment and service, as well as a top list of what this ratio is per combination.
-
-
-### Create your own monitor or dashboard
-
-To create a custom dashboard or monitor, the key metrics to use are:
+Each metric on this dashboard is powered by one of the below three Datadog standard metrics available in your account.
 
  - `datadog.estimated_usage.apm.ingested_bytes`
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.indexed_spans`
 
-Each of these metrics is tagged by `env` and `service` and can be used in as specific or general a monitor or dashboard as you would like.
+Each of these metrics is also tagged by `env` and `service` to allow easy detection of what services and in which environment any fine-tuning of ingestion or indexing controls should be done in.
+
+The default [Trace Analytics Dashboard][5] groups are below, including the widgets each contains:
+
+| Group                         | Widgets                                                                                            |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Summary | Shows the APM Host count currently and as a timeseries, along with ingested and indexed spans for an at-a-glance determination if filters need to be tuned.  |
+| Ingestion overview           | Shows a detailed view of ingestion, including bytes per second, total bytes ingested during the time period, and a breakdown of ingestion by `env`.  The same graphs are again available for spans instead of bytes.  **Note:** Billing is based on bytes.|
+| Indexing overview          | Shows a detailed view of indexed spans, including a timeseries of spans indexed per second, total spans indexed over the period, and a breakdown of indexed spans by `env`.  |
+| Per env breakdown |   For each environment, a top list is provided of the ingested and indexed spans from that environment, as well as a top list of what this ratio is per environment.                                                         |
+| Per service breakdown         | For each service, a top list is provided of the ingested and indexed spans from that service, as well as a top list of what this ratio is per service.       |
+| Per env and service combination breakdown         | For each unique combination of `env` and `service`, a top list is provided of the ingested and indexed spans from that environment and service, as well as a top list of what this ratio is per combination. |
 
 ### Indexed Spans
 
