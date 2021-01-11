@@ -53,7 +53,7 @@ The Log Patterns automatically aggregate indexed logs into a **handful of groups
 
 #### Log Transactions
 
-The Log Transactions automatically aggregate indexed logs according to instances of a **transactional sequence**, such as a user session or a request processed across multiple micro-services. Find out more in the [Log Transactions section][41].
+The Log Transactions automatically aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. Find out more in the [Log Transactions section][41].
 
 {{< img src="logs/explorer/log_explorer_walkthrough_transactions.png" alt="Log Transactions" style="width:60%;" >}}
 
