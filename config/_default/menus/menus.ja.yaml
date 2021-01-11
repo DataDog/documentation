@@ -59,7 +59,7 @@ main_left:
     parent: product
   - identifier: rum
     name: リアルユーザーモニタリング
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''rum icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''rum icon''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
@@ -1841,7 +1841,7 @@ main:
     weight: 11
   - name: リアルユーザーモニタリング
     url: real_user_monitoring/
-    pre: nav_rum
+    pre: nav_rum_2
     identifier: rum
     weight: 150000
   - name: ブラウザのモニタリング

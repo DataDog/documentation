@@ -59,7 +59,7 @@ main_left:
     parent: product
   - identifier: rum
     name: Real User Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''icône rum''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''icône rum''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
@@ -1805,7 +1805,7 @@ main:
     weight: 10
   - name: Real User Monitoring
     url: real_user_monitoring/
-    pre: nav_rum
+    pre: nav_rum_2
     identifier: rum
     weight: 150000
   - name: Surveillance Browser

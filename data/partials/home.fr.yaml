@@ -58,7 +58,7 @@ nav_sections:
             desc: 'Garantir la disponibilité de l''application, identifier les problèmes locaux et surveiller les performances'
           - title: Real User Monitoring
             link: real_user_monitoring/
-            icon: rum.svg
+            icon: rum-2.svg
             desc: Visualisez et analysez les performances de vos applications frontend
           - title: Surveillance réseau
             link: network_performance_monitoring/

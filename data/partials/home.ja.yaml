@@ -58,7 +58,7 @@ nav_sections:
             desc: アプリケーションの稼働時間確保、局所的な問題の特定、パフォーマンスの追跡
           - title: リアルユーザーモニタリング
             link: real_user_monitoring/
-            icon: rum.svg
+            icon: rum-2.svg
             desc: フロントエンドアプリケーションのパフォーマンスを視覚化して分析します
           - title: ネットワークモニタリング
             link: network_performance_monitoring/
