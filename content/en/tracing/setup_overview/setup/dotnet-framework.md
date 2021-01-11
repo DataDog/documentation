@@ -33,30 +33,29 @@ further_reading:
       tag: "GitHub"
       text: "Examples of Custom Instrumentation"
 ---
-## Compatibility Requirements
+## Compatibility requirements
 
 The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
-## Installation and Getting Started
+## Installation and getting started
 
-### Follow the in-app Documentation (Recommended)
+### Follow the in-app documentation (Recommended)
 
 Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env` and `version` tags.
+- Dynamically set `service`, `env`, and `version` tags.
 - Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
 
-### Automatic Instrumentation
+### Automatic instrumentation
 
-<div class="alert alert-warning" style="font-style: italic;"> 
-  <p style="font-weight: bold; margin-bottom: 0px;">Note:<p/> 
-    When using both custom and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+<div class="alert alert-warning"> 
+  <strong>Note:</strong> Whether you're using custom or automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
 </div>
 
 Otherwise, to begin tracing .NET applications: 
 
-#### IIS Applications 
+#### IIS applications 
 
 1. Install and configure the [Windows Datadog Agent][2]. 
 
@@ -76,14 +75,12 @@ Otherwise, to begin tracing .NET applications:
 
 7. Visit Datadog's [APM Live Traces][4]. 
 
-### Required Environment Variables 
-
-<div class="alert alert-warning" style="font-style: italic;"> 
-  <p style="font-weight: bold; margin-bottom: 0px;">Note:<p/> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. 
-  <p style="font-weight: bold; margin-bottom: 0px">We do not recommend setting these environment variables globally as this causes all .NET processes on the host to load the profiler.<p/>
+### Required environment variables 
+<div class="alert alert-warning"> 
+  <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
 </div>
 
-#### Non-IIS Applications
+#### Non-IIS applications
 
 For Windows applications, set these two environment variables before starting your application to enable automatic instrumentation:
 
@@ -94,7 +91,7 @@ For Windows applications, set these two environment variables before starting yo
 | `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 
 
-#### Windows Services
+#### Windows services
 To automatically instrument a Windows Service:
 
 1. Set the environment variables for the Service in the Windows Registry.
@@ -119,7 +116,7 @@ Setting the `COR_ENABLE_PROFILING` & `COR_PROFILER` environment variables can be
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
    {{< /code-block >}}
 
-#### Console Applications
+#### Console applications
 
 Set the environment variables from a batch file before starting your application:
 
@@ -132,14 +129,13 @@ rem Start application
 example.exe
 ```
 
-## Custom Instrumentation
+## Custom instrumentation
 
-<div class="alert alert-warning" style="font-style: italic;"> 
-  <p style="font-weight: bold; margin-bottom: 0px;">Note:<p/> 
-    When using both custom and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+<div class="alert alert-warning"> 
+  <strong>Note:</strong> Whether you're using custom or automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
 </div>
 
-To utilize custom instrumentation: 
+To use custom instrumentation: 
 1. Add the `Datadog.Trace` [NuGet package][5] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
@@ -147,12 +143,12 @@ For additional details on custom instrumentation and custom tagging, please visi
 
 ## Configuration
 
-The .NET Tracer has additional configuration setting which can be set with these methods:
+The .NET Tracer has additional configuration settings which you can set by any of these methods:
 
-- By setting the environment variables
+- Environment variables
 - The .NET application code
-- By editing the application's `app.config`/`web.config` file (.NET Framework only)
-- By creating a `datadog.json` file
+- The application's `app.config` or `web.config` file (.NET Framework only)
+- A `datadog.json` file
 
 {{< tabs >}}
 
@@ -173,17 +169,15 @@ rem Launch application
 example.exe
 ```
 
-<div class="alert alert-warning" style="font-style: italic;"> 
-<p style="font-weight: bold; margin-bottom: 0px;">Note:</p> 
-
-To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
+<div class="alert alert-warning"> 
+<strong>Note:</strong> To set environment variables for a Windows Service, use the multi-string key <code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> in the Windows Registry.
 </div>
 
 {{% /tab %}}
 
 {{% tab "Code" %}}
 
-To configure the Tracer in application code, create a `TracerSettings` from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
+To configure the Tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
 
 ```csharp
 using Datadog.Trace;
@@ -204,10 +198,8 @@ var tracer = new Tracer(settings);
 Tracer.Instance = tracer;
 ```
 
-<div class="alert alert-warning" style="font-style: italic;"> 
-<p style="font-weight: bold; margin-bottom: 0px;">Note:</p> 
-
-Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
+<div class="alert alert-warning"> 
+<strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properies after the <code>Tracer</code> is created are ignored.
 </div>
 {{% /tab %}}
 
@@ -230,7 +222,7 @@ To configure the Tracer using an `app.config` or `web.config` file, use the `<ap
 
 {{% tab "JSON file" %}}
 
-To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
+To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key-value pair for each setting. For example:
 
 ```json
 {
