@@ -1687,7 +1687,7 @@ main:
     url: logs/explorer/facets/
     parent: log_explorer
     weight: 606
-  - name: Transactions
+  - name: Log Transactions
     url: logs/explorer/transactions/
     parent: log_explorer
     weight: 607
