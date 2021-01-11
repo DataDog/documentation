@@ -7662,6 +7662,11 @@ components:
           description: Parser options to use for retrieving a Synthetics global variable
             from a Synthetics Test. Used in conjunction with `parse_test_public_id`.
           properties:
+            field:
+              description: When type is `http_header`, name of the header to use to
+                extract the value.
+              example: content-type
+              type: string
             parser:
               description: Details of the parser to use for the global variable.
               example:
