@@ -4,6 +4,12 @@ kind: documentation
 aliases:
     - /tracing/profiling/search_profiles
 further_reading:
+    - link: 'tracing/profiler/getting_started'
+      tag: 'Documentation'
+      text: 'Enable continuous profiler for your application.'
+    - link: 'tracing/profiler/intro_to_profiling'
+      tag: 'Documentation'
+      text: 'Intro to profiling.'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
       text: 'Introducing always-on production profiling in Datadog.'

@@ -4,6 +4,9 @@ kind: Documentation
 aliases:
     - /tracing/profiling/getting_started
 further_reading:
+    - link: 'tracing/profiler/intro_to_profiling'
+      tag: 'Documentation'
+      text: 'Intro to profiling.'
     - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
