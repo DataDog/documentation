@@ -7,7 +7,7 @@ assets:
 categories:
   - web
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md'
 display_name: Buddy
