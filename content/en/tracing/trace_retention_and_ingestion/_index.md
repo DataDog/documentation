@@ -34,7 +34,9 @@ In the Datadog app, on the [Retention Filters tab][2], you can see the following
 | Last Updated            | The date and user who last modified the retention filter.  |
 | Enabled toggle                 |  Allows filters to be turned on and off.  |
 
-In addition to the Spans Indexed column available on this page per retention filter, there is also the metric `datadog.estimated_usage.apm.indexed_spans` that can be used to track spans indexed by retention filters. For more information, refer to the [Usage Metrics][1] documentation, or see the [dashboard][3] available in your account.
+In addition to the Spans Indexed column available on this page per retention filter, there is also the metric `datadog.estimated_usage.apm.indexed_spans` that can be used to track spans indexed by retention filters. \
+
+For more information, refer to the [Usage Metrics][1] documentation, or see the [dashboard][3] available in your account.
 
 ### Datadog Intelligent Retention Filter
 
@@ -62,8 +64,6 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 5. Save your new filter.
 
 **Note:** Selecting "Top-Level Spans for Services Only" means the retention filter will retain only the selected proportion of [top level spans][5] of service and index them. Use this if you want to only index top level spans with matching tags. If "All Spans" is selected, the retention filter will retain the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and index them.  This may have an impact on your bill, and the visual indicator within the app while setting a retention filter will inform you how many matching spans have been detected over the time period.
-
-For additional monitoring, the metric `datadog.estimated_usage.apm.indexed_spans` is tagged by `service` and `env`.  These metrics are tagged by `service` and `env`, and top lists are available within the [Trace Analytics Dashboard][3] to see per env, service, or env and service, where the highest indexed span volumes are occurring. See the [Usage Metrics][1] documentation for more information.
 
 For example, you can create filters to keep all traces for:
 
@@ -98,7 +98,7 @@ In the Datadog app, on the ['Ingestion Controls' tab][6], you can see the follow
 | Traces Ingested per Second                |   Average number of traces per second ingested into Datadog for the service over the selected time period.   |
 | Spans Ingested            | Number of spans ingested by Datadog over the selected time period.        |
 
-In addition to the Data Ingestion column available on this page per retention filter, there are also two metrics `datadog.estimated_usage.apm.ingested_spans` and `datadog.estimated_usage.apm.ingested_bytes`. These metrics are tagged by `service` and `env`, and top lists are available within the [Trace Analytics Dashboard][3] to see per env, service, or env and service, where the highest ingestion volumes are occurring. See the [Usage Metrics][1] documentation for more information.
+In addition to the Data Ingestion column available on this page per retention filter, there are also two metrics `datadog.estimated_usage.apm.ingested_spans` and `datadog.estimated_usage.apm.ingested_bytes`. These metrics are tagged by `service` and `env`, and top lists are available within the [Trace Analytics Dashboard][3] to see where the highest ingestion volumes are occurring. See the [Usage Metrics][1] documentation for more information.
 
 ### Change the Default Ingestion Rate
 
