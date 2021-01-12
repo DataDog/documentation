@@ -7,7 +7,7 @@ assets:
 categories:
   - network
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md'
 display_name: VNS3

@@ -9,7 +9,7 @@ assets:
 categories:
   - notification
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md'
 display_name: Flagsmith

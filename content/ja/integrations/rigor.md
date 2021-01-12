@@ -7,7 +7,7 @@
 "categories":
 - モニター
 "creates_events": true
-"ddtype": "check"
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md"
 "display_name": "Rigor"

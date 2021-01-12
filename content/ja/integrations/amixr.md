@@ -10,7 +10,7 @@
 - コラボレーション
 - notification
 "creates_events": false
-"ddtype": "check"
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md"
 "display_name": "Amixr"
