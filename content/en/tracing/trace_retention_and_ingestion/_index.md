@@ -9,7 +9,9 @@ description: "Learn how to control Ingestion and Indexing rates with Tracing wit
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-With Tracing without Limits™, both the ingestion of traces to Datadog as well as the retention of those traces for 15 days are fully customizable. [Usage Metrics][1] and other means of tracking Indexed and Ingested span consumption are also fully available.
+With Tracing without Limits™, both the ingestion of traces to Datadog as well as the retention of those traces for 15 days are fully customizable.
+
+To track or monitor your usage of Tracing without Limits™, see the [Usage Metrics][1] documentation.
 
 ## Retention Filters
 
