@@ -10,6 +10,7 @@ export function initializeSecurityRules() {
     const urlParams = new URLSearchParams(window.location.search);
     const urlHash = window.location.hash;
     const keyword = urlParams.get('q');
+    const form = document.getElementById('rules');
     let keyupTimeout;
     let filters;
 
@@ -119,6 +120,12 @@ export function initializeSecurityRules() {
 
     if (inputSearch) {
         inputSearch.addEventListener('keyup', handleKeyup);
+    }
+
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+        });
     }
 
     allGroupHeaders.forEach(elm => {
