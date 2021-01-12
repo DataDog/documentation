@@ -18,28 +18,16 @@ further_reading:
 
 ## Compatibility
 
-The .NET Datadog Tracer library is open-source. For more information see the [tracer Github repository][1].
+The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][1].
 
-For both automatic and custom Instrumentation, the .NET Datadog Tracer supports .NET Framework 4.5 and above. 
+For both automatic and custom instrumentation, the .NET Datadog Tracer supports .NET Framework 4.5 and above. 
 
 <div class="alert alert-warning"> 
-  <strong>Note:</strong> Whether you're using custom or automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+  <strong>Note:</strong> If you are using both MSI installer and NuGet packages, it is important to keep their versions in sync.
 </div>
 
 
 ## Integrations
-
-<div class="alert alert-info"> 
-  <strong>Update:</strong> Starting with .NET Tracer version 1.12.0, the ASP.NET integration is enabled automatically. The NuGet packages <code>Datadog.Trace.AspNet</code> or <code>Datadog.Trace.ClrProfiler.Managed</code> are no longer required. Remove them from your application when you update the .NET Tracer.
-</div>
-
-<div class="alert alert-warning">
-<strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code>.
-</div>
-
-Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, please contact our amazing [support team][2].
-
-
 
 The .NET Tracer can instrument the following libraries automatically:
 
@@ -58,6 +46,11 @@ The .NET Tracer can instrument the following libraries automatically:
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+   | `MongoDb`            |
 | PostgreSQL                      | `Npgsql` 4.0+                  | `AdoNet`             |
 
+<div class="alert alert-info">
+<strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code>.
+</div>
+
+Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our [Support team][2].
 
 ## Further Reading
 

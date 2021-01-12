@@ -50,51 +50,46 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 ### Automatic instrumentation
 
 <div class="alert alert-warning"> 
-  <strong>Note:</strong> Whether you're using custom or automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+  <strong>Note:</strong> If you are using both MSI installer and NuGet packages, it is important to keep their versions in sync.
 </div>
 
 If you don't use the in-app documentation to guide you, you can follow these instructions to begin tracing .NET applications: 
 
-#### IIS applications 
+#### Applications hosted in IIS
 
-To start tracing an IIS application:
+To start tracing an application hosted in IIS:
 
 1. Install and configure the [Windows Datadog Agent][2]. 
 
-2. Download the .NET Tracer [MSI installer][3].
+2. Download the .NET Tracer [MSI installer][3]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
-3. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+3. Run the .NET Tracer MSI installer with administrator privileges.
 
-4. Install the .NET Tracer MSI installer with administrator privileges.
-
-5. Restart IIS using the following commands as an administrator: 
+4. Restart IIS using the following commands as an administrator: 
 
    ```text
    net stop /y was
    net start w3svc
    ```
-6. Create application load. 
+5. Create application load. 
 
-7. Visit [APM Live Traces][4]. 
+6. Visit [APM Live Traces][4]. 
 
-#### Non-IIS applications
+#### Applications not hosted in IIS
 
-To enable automatic instrumentation on non-IIS Windows applications, you must set two environment variables before starting your application.
-
-<div class="alert alert-warning"> 
-  <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
-</div>
-
-Set these environment variables for the non-IIS applications you want to instrument:
+To enable automatic instrumentation on Windows applications not in IIS, you must set two environment variables before starting your application:
 
 | Name                   | Value                                    |
 | ---------------------- | ---------------------------------------- |
 | `COR_ENABLE_PROFILING` | `1`                                      |
 | `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 
+<div class="alert alert-warning"> 
+  <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
+</div>
 
-#### Windows services
-To automatically instrument a Windows Service, set the `COR_ENABLE_PROFILING` and `COR_PROFILER` environment variables:
+##### Windows services
+To automatically instrument a Windows service, set the `COR_ENABLE_PROFILING` and `COR_PROFILER` environment variables:
 
 1. In the Windows Registry Editor, create a multi-string value named `Environment` in  `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>`
 2. Set the value data to: 
@@ -112,9 +107,9 @@ Alternatively, you can set the environment variables by using the following Powe
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
    {{< /code-block >}}
 
-#### Console applications
+##### Console applications
 
-To automatically instrument a console application, set the `COR_ENABLE_PROFILING` and `COR_PROFILER`environment variables from a batch file before starting your application:
+To automatically instrument a console application, set the `COR_ENABLE_PROFILING` and `COR_PROFILER` environment variables from a batch file before starting your application:
 
 ```bat
 rem Set environment variables
@@ -128,7 +123,7 @@ example.exe
 ## Custom instrumentation
 
 <div class="alert alert-warning"> 
-  <strong>Note:</strong> Whether you're using custom or automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+  <strong>Note:</strong> If you are using both MSI installer and NuGet packages, it is important to keep their versions in sync.
 </div>
 
 To use custom instrumentation in your .NET application:
@@ -140,11 +135,11 @@ For additional details on custom instrumentation and custom tagging, see [.NET C
 
 ## Configuration
 
-The .NET Tracer has additional configuration settings which you can set by any of these methods:
+The .NET Tracer has configuration settings which you can set by any of these methods:
 
 - Environment variables
-- Within the .NET application code
-- Within the application's `app.config` or `web.config` file (.NET Framework only)
+- In the .NET application code
+- In the application's `app.config` or `web.config` file (.NET Framework only)
 - Using a `datadog.json` file
 
 {{< tabs >}}
@@ -264,7 +259,7 @@ The following table lists configuration variables that are available **only** wh
 
 ### Additional optional configuration
 
-The following table lists the supported configuration variables that are available for both automatic (`.MSI`) and custom (`NuGet`) instrumentation.
+The following table lists the supported configuration variables that are available for both automatic and custom instrumentation.
 
 | Setting Name                                        | Description                                                                                                                                                                                                       |
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

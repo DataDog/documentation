@@ -20,12 +20,12 @@ further_reading:
 
 **Note**: The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.
+The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][1].
 
 The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and .NET Core 2.1. It also supports [.NET Framework][2].
 
 <div class="alert alert-warning"> 
-  <strong>Note:</strong> Whether you're using custom or automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+  <strong>Note:</strong> If you are using both MSI installer and NuGet packages, it is important to keep their versions in sync.
 </div>
 
 ## Integrations
@@ -44,7 +44,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
 | PostgreSQL                      | `Npgsql` 4.0+                                                           | `AdoNet`             |
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 <strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code>.
 </div>
 
