@@ -37,10 +37,10 @@ To send logs manually, use the `telnet` command with your [Datadog API key][5] w
 
 Logs can be a full-text message:
 
-The secure TCP endpoint is {{< region-param key="tcp_endpoint" >}} with port `{{< region-param key="tcp_endpoint_port_ssl" >}}` (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
+The secure TCP endpoint is telnet intake.logs.datadoghq.com with port `{{< region-param key="tcp_endpoint_port_ssl" >}}` (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
 
 ```
-telnet {{< region-param key="tcp_endpoint" >}} {{< region-param key="tcp_endpoint_port_ssl" >}}
+telnet intake.logs.datadoghq.com 10516
 
 <DATADOG_API_KEY> Plain text log sent through TCP
 ```
@@ -54,7 +54,7 @@ or a JSON object that is automatically parsed by Datadog:
 {{< site-region region="us" >}}
 
 ```text
-telnet intake.logs.datadoghq.com 10514
+telnet intake.logs.datadoghq.com 10516
 
 <DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
 ```
