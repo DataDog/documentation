@@ -178,6 +178,7 @@ To configure the Tracer in application code, create a `TracerSettings` instance 
 
 ```csharp
 using Datadog.Trace;
+using Datadog.Trace.Configuration;
 
 // read default configuration sources (env vars, web.config, datadog.json)
 var settings = TracerSettings.FromDefaultSources();
