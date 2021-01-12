@@ -137,9 +137,7 @@ components:
       required: false
       schema:
         items:
-          enum:
-          - users
-          type: string
+          $ref: '#/components/schemas/IncidentRelatedObject'
         type: array
     IncidentServiceIDPathParameter:
       description: The ID of the incident service.
@@ -155,9 +153,7 @@ components:
       name: include
       required: false
       schema:
-        enum:
-        - users
-        type: string
+        $ref: '#/components/schemas/IncidentRelatedObject'
     IncidentServiceSearchQueryParameter:
       description: A search query that filters services by name.
       in: query
@@ -180,9 +176,7 @@ components:
       name: include
       required: false
       schema:
-        enum:
-        - users
-        type: string
+        $ref: '#/components/schemas/IncidentRelatedObject'
     IncidentTeamSearchQueryParameter:
       description: A search query that filters teams by name.
       in: query
@@ -984,6 +978,13 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_POSTMORTEMS
+    IncidentRelatedObject:
+      description: Object related to an incident.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
     IncidentResponse:
       description: Response with an incident.
       properties:
@@ -1239,7 +1240,7 @@ components:
       type: object
     IncidentServiceType:
       default: services
-      description: Incident Service resource type.
+      description: Incident service resource type.
       enum:
       - services
       example: services
