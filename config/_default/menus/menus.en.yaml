@@ -2805,33 +2805,87 @@ api:
     url: /api/latest/dashboards/
     identifier: dashboards
     generated: true
-  - name: Create a shared dashboard
-    parent: Dashboards
-    url: '#create-a-shared-dashboard'
+  - name: Update a dashboard
+    url: '#update-a-dashboard'
+    identifier: update-a-dashboard
+    parent: dashboards
     generated: true
-  - name: Revoke a shared dashboard URL
-    parent: Dashboards
-    url: '#revoke-a-shared-dashboard-url'
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateDashboard
+      unstable: []
+  - name: Get a dashboard
+    url: '#get-a-dashboard'
+    identifier: get-a-dashboard
+    parent: dashboards
     generated: true
-  - name: Get a shared dashboard
-    parent: Dashboards
-    url: '#get-a-shared-dashboard'
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetDashboard
+      unstable: []
+  - name: Delete a dashboard
+    url: '#delete-a-dashboard'
+    identifier: delete-a-dashboard
+    parent: dashboards
     generated: true
-  - name: Update a shared dashboard
-    parent: Dashboards
-    url: '#update-a-shared-dashboard'
-    generated: true
-  - name: Revoke shared dashboard invitations
-    parent: Dashboards
-    url: '#revoke-shared-dashboard-invitations'
-    generated: true
-  - name: Get all invitations for a shared dashboard
-    parent: Dashboards
-    url: '#get-all-invitations-for-a-shared-dashboard'
-    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboard
+      unstable: []
   - name: Send shared dashboard invitation email
-    parent: Dashboards
     url: '#send-shared-dashboard-invitation-email'
+    identifier: send-shared-dashboard-invitation-email
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SendPublicDashboardInvitation
+      unstable: []
+  - name: Get all invitations for a shared dashboard
+    url: '#get-all-invitations-for-a-shared-dashboard'
+    identifier: get-all-invitations-for-a-shared-dashboard
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetPublicDashboardInvitations
+      unstable: []
+  - name: Revoke shared dashboard invitations
+    url: '#revoke-shared-dashboard-invitations'
+    identifier: revoke-shared-dashboard-invitations
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeletePublicDashboardInvitation
+      unstable: []
+  - name: Update a shared dashboard
+    url: '#update-a-shared-dashboard'
+    identifier: update-a-shared-dashboard
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdatePublicDashboard
+      unstable: []
+  - name: Get a shared dashboard
+    url: '#get-a-shared-dashboard'
+    identifier: get-a-shared-dashboard
+    parent: dashboards
     generated: true
     params:
       versions:
@@ -2839,9 +2893,9 @@ api:
       operationids:
         - GetPublicDashboard
       unstable: []
-  - name: Revoke a public dashboard URL
-    url: '#revoke-a-public-dashboard-url'
-    identifier: revoke-a-public-dashboard-url
+  - name: Revoke a shared dashboard URL
+    url: '#revoke-a-shared-dashboard-url'
+    identifier: revoke-a-shared-dashboard-url
     parent: dashboards
     generated: true
     params:
@@ -2850,9 +2904,9 @@ api:
       operationids:
         - DeletePublicDashboard
       unstable: []
-  - name: Create a public dashboard
-    url: '#create-a-public-dashboard'
-    identifier: create-a-public-dashboard
+  - name: Create a shared dashboard
+    url: '#create-a-shared-dashboard'
+    identifier: create-a-shared-dashboard
     parent: dashboards
     generated: true
     params:
