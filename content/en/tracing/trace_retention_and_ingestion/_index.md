@@ -36,7 +36,7 @@ In the Datadog app, on the [Retention Filters tab][2], you can see the following
 | Last Updated            | The date and user who last modified the retention filter.  |
 | Enabled toggle                 |  Allows filters to be turned on and off.  |
 
-In addition to the Spans Indexed column available on this page per retention filter, there is also the metric `datadog.estimated_usage.apm.indexed_spans` that can be used to track spans indexed by retention filters. \
+In addition to the 'Spans Indexed' column available on this page per retention filter, there is also the metric `datadog.estimated_usage.apm.indexed_spans` that can be used to track spans indexed by retention filters.
 
 For more information, refer to the [Usage Metrics][1] documentation, or see the [dashboard][3] available in your account.
 
