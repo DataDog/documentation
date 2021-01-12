@@ -50,6 +50,6 @@ Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears a
 [1]: /tracing/trace_retention_and_ingestion/#retention-filters
 [2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
-[4]: /account_management/billing/pricing/apm_distributed_tracing/
+[4]: /account_management/billing/apm_distributed_tracing/
 [5]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [6]: /tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter
