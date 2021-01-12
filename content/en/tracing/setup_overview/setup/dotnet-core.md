@@ -429,7 +429,7 @@ The following table lists configuration variables that are available only when u
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.                            |
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

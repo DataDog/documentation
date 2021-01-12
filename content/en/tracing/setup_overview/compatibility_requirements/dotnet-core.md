@@ -59,7 +59,7 @@ The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached
 | JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to latest patch, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][5] |
 | Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3+                                            | [dotnet/runtime/issues/23938][6]        |
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
