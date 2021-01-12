@@ -20,20 +20,20 @@ further_reading:
 
 ## Overview
 
-ICMP Tests allow you to easily **monitor the availability of your hosts and diagnose network communication issues to verify responsiveness from your application's endpoints**. By asserting on the values received from one or more **ICMP ping(s)** to your endpoint, Datadog can help **detect availability/connectivity issues, above-quota latency or hops, and changes in security firewall configuration**. ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger ICMP pings to your endpoints from outside or inside your network.
+ICMP tests allow you to easily **monitor the availability of your hosts and diagnose network communication issues to verify responsiveness from your application's endpoints**. By asserting on the values received from one or more **ICMP ping(s)** to your endpoint, Datadog can help **detect availability/connectivity issues, above-quota latency or hops, and changes in security firewall configuration**. ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger ICMP pings to your endpoints from outside or inside your network.
 
 ## Configuration
 
-After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], or [`DNS` test][6]), you can define your test's request.
+After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
 
 ### Define Request
 
-![][7]
+![][8]
 
-1. Specify the **domain**** name **or** IP address** to run your test on.
+1. Specify the **domain name** or **IP address** to run your test on.
 2. Select the **number of pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to increase or decrease.
 3. **Name** your ICMP test.
-4. Add env **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
+4. Add env **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
 5. Select the **Locations** to run your ICMP test from: ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger the ICMP pings from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
@@ -44,7 +44,7 @@ ICMP tests can run:
 
 * **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your ICMP test.
 
-* [**Within your CI/CD pipelines**][9].
+* [**Within your CI/CD pipelines**][10].
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
 
@@ -52,11 +52,11 @@ ICMP tests can run:
 
 Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `latency`, `packet loss` and ICMP ping result is added. You must define at least one assertion for your test to monitor.
 
-| Type          | Operator                                                                     | Value Type     |
-|---------------|------------------------------------------------------------------------------|----------------|
-| latency       | is less than, is less than or equal, is, is more than, is more than or equal | _integer (ms)_   |
-| packet loss   | is less than, is less than or equal, is, is more than, is more than or equal | _percentage (%)_ |
-| ICMP ping     | Successful or Failed                                                         | _string_         |
+| Type          | Operator                                                                               | Value Type       |
+|---------------|----------------------------------------------------------------------------------------|------------------|
+| latency       | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer (ms)_   |
+| packet loss   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _percentage (%)_ |
+| ICMP ping     | `Successful` or `Failed`                                                               | _string_         |
 
 You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
@@ -74,7 +74,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][10].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][11].
 
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
@@ -83,9 +83,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -119,7 +119,7 @@ You can create local variables by defining their values from one of the below av
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -133,7 +133,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 | `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.                                                                                                                                                                                                                                                         |
 | DNS               | DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
 | `INVALID_REQUEST` | The configuration of the test is invalid (for example, a typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][15].                                                                                                                                                                                                                                                                                                                                                      |
+| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][7].                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. <br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. <br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
 
 ## Further Reading
@@ -146,7 +146,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [4]: /synthetics/api_tests/ssl_tests
 [5]: /synthetics/api_tests/tcp_tests
 [6]: /synthetics/api_tests/dns_tests
-[7]: RackMultipart20210111-4-1ea38cz_html_4c10205aaad15623.png
+[7]: /synthetics/api_tests/icmp_tests
 [8]: /synthetics/search/#search
 [9]: /synthetics/ci
 [10]: /api/v1/synthetics/#create-a-test

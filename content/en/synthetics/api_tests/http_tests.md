@@ -24,7 +24,7 @@ HTTP tests can be run from [**managed**][1] and [**private locations**][2] depen
 
 ## Configuration
 
-After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], or [`DNS` test][7]), you can define your test's request.
+After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
 
 ### Define request
 
@@ -185,7 +185,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [4]: /synthetics/api_tests/http_tests
 [5]: /synthetics/api_tests/ssl_tests
 [6]: /synthetics/api_tests/tcp_tests
-[7]: /synthetics/api_tests/dns_tests
+[7]: /synthetics/api_tests/icmp_tests
 [8]: /synthetics/search/#search
 [9]: https://restfulapi.net/json-jsonpath/
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
