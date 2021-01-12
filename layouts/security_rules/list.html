@@ -28,6 +28,7 @@
         <input type="input" data-ref="search" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords" />
     </div>
     <div class="list-group">
+        <div class="js-empty-results d-none font-semibold"></div>
         {{ range $i, $v := .Pages.GroupByParam "source" }}
             <div class="js-group js-group-{{ $i }}">
                 <div class="js-group-header mb-1 active">
