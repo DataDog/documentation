@@ -23,7 +23,7 @@ Before you begin monitoring for security threats, follow the best practices belo
 
 ### Log events from all login flows
 
-In order to gain visibility into all of your authentication activity, ensure log events for all login flows are at the application level. This eliminates gaps in your monitoring coverage. It also gives you more control over how you log authentication events and what data you are collecting.
+To gain visibility into all of your authentication activity, ensure log events for all login flows are at the application level. This eliminates gaps in your monitoring coverage. It also gives you more control over how you log authentication events and what data you are collecting.
 
 ### Ensure your logs contain useful data
 
@@ -33,7 +33,7 @@ By logging all authentication events at the application level, you can ensure th
 2020-01-01 12:00:01 google oauth login success by John Doe from 1.2.3.4
 {{< /code-block >}}
 
-Logs that contain the "who" (John Doe), "what" (login success), and when (2020-01-01 12:00:01) of an event provide the best detail for you to perform complex analysis in Datadog.
+Logs that contain the "who" (John Doe), "what" (login success), and when (2020-01-01 12:00:01) of an event provide the best level of detail for you to perform complex analysis in Datadog.
 
 ### Log in a standard, parsable format
 
@@ -79,17 +79,17 @@ A key-value format also makes it easy to add custom attributes to logs. For exam
 
 To properly monitor and detect security threats, there are key patterns you should take note of. For example, if you see a significant number of failed login attempts from a single user within a short period of time, it could indicate a [**brute force attack**][10]. If those failed login attempts are followed by a successful one, it could be a successful account takeover that you should investigate immediately.
 
-Another common authentication attack technique is [**credential stuffing**][11]. Credential stuffing is when an attacker mixes and matches breached login credentials to try to match a real user account. In order to detect this type of attack, look for logins using multiple `usr.id` values all coming from the same `network.client.ip`.
+Another common authentication attack technique is [**credential stuffing**][11]. Credential stuffing is when an attacker mixes and matches breached login credentials to try to match a real user account. To detect this type of attack, look for logins using multiple `usr.id` values all coming from the same `network.client.ip`.
 
 {{< img src="security_monitoring/guide/monitor-authentication-logs-for-security-threats/credential-stuffing-attack-signal.png" alt="A credential stuffing attack signal in the Security Signals Explorer">}}
 
-Datadog offers pre-configured [Detection Rules][12] which scan your ingested logs in real time for common attacker techniques like these two. If any log triggers one of these rules, it automatically generates a [Security Signal][13] which includes key data about the event, such as the type of attack detected and suggestions on how to respond and remedy the situation. You can view, filter, and sort all of your Security Signals in the explorer to triage them and see where to best focus your efforts.
+Datadog offers pre-configured [Detection Rules][12] that scan your ingested logs in real time for common attacker techniques like the two mentioned above. If any log triggers one of these rules, Datadog automatically generates a [Security Signal][13]. This signal includes key data about the event, such as the type of attack detected and suggestions on how to respond and remedy the situation. You can view, filter, and sort all of your Security Signals in the explorer to triage them and see where to best focus your efforts.
 
-For signals triggered from the `Credential Stuffing Attack` Detection Rule, there is an [out-of-the-box runbook][14] available to help with response and remediation. This runbook guides you through investigating a potential credential stuffing attack, and includes graphs of related logs. To use this runbook, save a copy and set the the time frame, document your investigation in markdown, and share it with teammates [for commenting][15].
+For signals triggered from the `Credential Stuffing Attack` Detection Rule, there is an [out-of-the-box runbook][14] available to help with response and remediation. This runbook guides you through investigating a potential credential stuffing attack and includes graphs of related logs. To use this runbook, save a copy and set the the time frame, document your investigation in markdown, and share it with teammates [for commenting][15].
 
 ### Use dashboards to investigate
 
-Datadog provides out-of-the-box dashboards, such as the [IP investigation dashboard][16] and [User investigation dashboard][17]. These correlate key data from your authentication logs with relevant data from the rest of your environment to assist in your investigations.
+Datadog provides out-of-the-box dashboards, such as the [IP investigation dashboard][16] and [user investigation dashboard][17]. These correlate key data from your authentication logs with relevant data from the rest of your environment to assist in your investigations.
 
 For example, if a specific IP address or user is triggering multiple security signals, click on the IP address or user in a dashboard list or graph and select **View related Security Signals**. This populates all triggered security signals for that IP address or user in the Security Signals Explorer. If the data permits, this view is helpful when trying to correlate an IP address to a specific user, or vice versa. From here, you can drill down into each rule to remediate attacks. Click on any rule and review the triage and response information in the **Message** tab to properly assess and remediate the issue.
 
