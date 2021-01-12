@@ -67,7 +67,7 @@ To start tracing an IIS application:
 
 4. Install the .NET Tracer MSI installer with administrator privileges.
 
-5. Restart IIS using the following command as an administrator: 
+5. Restart IIS using the following commands as an administrator: 
 
    ```text
    net stop /y was
