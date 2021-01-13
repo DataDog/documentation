@@ -79,7 +79,10 @@ footer_scripts:
 allowedRegions:
   - name: US
     value: us
+    weight: 10
   - name: EU
     value: eu
+    weight: 20
   - name: GOV
     value: gov
+    weight: 30

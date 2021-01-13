@@ -9,13 +9,13 @@
             <div class="col-12 col-lg-6 pt-2 pt-lg-0">
                 <div id="breadcrumbs">
                     <a class="text-uppercase text-gray-darkish" href="/">Docs</a>
-                    &nbsp;>&nbsp;    
-                    
+                    &nbsp;>&nbsp;
+
                     {{ if .Page.Parent }}
                         <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
-                        &nbsp;>&nbsp;                     
+                        &nbsp;>&nbsp;
                     {{ end }}
-                    
+
                     <a class="text-primary text-uppercase" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
 
                     {{/* range $index, $element := split $url "/" }}
@@ -37,25 +37,25 @@
                                 <option value="v2" {{ if in .Permalink "api/v2" }}selected{{ end }}>Version 2</option>
                             </select>
                         </div>
-                        
+
                     </div>
                     <div class="col-4 col-lg-4 px-0">
                         <div class="d-flex justify-content-start justify-content-lg-end">
                             <select class="js-region-selector d-none" placeholder="Site">
                                 <option value="" disabled>Site</option>
-                                {{ range sort .Site.Params.allowedRegions ".name" "desc" }}
+                                {{ range sort .Site.Params.allowedRegions ".weight" "asc" }}
                                     <option value="{{ .value }}">{{ .name }}</option>
                                 {{ end }}
                               </select>
                         </div>
-                        
+
                     </div>
 
                 </div>
             </div>
-            
+
         </div>
-        
+
     </div>
-    
+
 </div>
