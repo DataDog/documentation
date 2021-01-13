@@ -81,3 +81,5 @@ allowedRegions:
     value: us
   - name: EU
     value: eu
+  - name: GOV
+    value: gov
