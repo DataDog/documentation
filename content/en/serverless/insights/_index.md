@@ -9,7 +9,7 @@ Datadog automatically generates suggestions to resolve errors and performance pr
 
 ## Setup
 
-Datadog uses AWS CloudWatch metrics, Datadog enhanced AWS Lambda metrics, and Lambda `REPORT` logs to suggest insights to you. To set these up,
+Datadog uses AWS CloudWatch metrics, Datadog enhanced AWS Lambda metrics, and [Lambda `REPORT` log lines][9] to suggest insights to you. To set these up,
 
  1. Set up the [Amazon Web Services][1] integration.
  2. Set up the [Datadog Forwarder][2] and ensure your Lambda `REPORT` logs are indexed in Datadog.
@@ -35,7 +35,7 @@ More than 10% of the function's invocations were errors in the selected time ran
 
 At least one invocation in the selected time range used over 95% of the allocated memory.
 
-[Distributed tracing][5] can help you pinpoint parts of your application using excessive amounts of memory.
+[Distributed tracing][5] can help you pinpoint Lambda functions with low memory limits, and parts of your application using excessive amounts of memory.
 
 **Resolution:** Lambda functions using close to their maximum configured memory are at risk of being killed by the Lambda runtime, resulting in user-facing errors. Consider increasing the amount of configured memory on your function. Note that this could affect your AWS bill.
 
@@ -96,3 +96,4 @@ No invocation in the selected time range used more than 10% of the allocated mem
 [6]: /blog/monitor-aws-lambda-provisioned-concurrency/
 [7]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 [8]: /integrations/amazon_lambda/#metrics
+[9]: https://docs.aws.amazon.com/lambda/latest/dg/python-logging.html
