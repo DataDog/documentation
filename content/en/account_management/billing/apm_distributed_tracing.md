@@ -22,7 +22,7 @@ For more information, see the [Pricing page][6].
 
 **Sample cases illustrate annual billing rates with default 15 days Indexed Span retention. Contact [Sales][6] or your [Customer Success][7] Manager to discuss volume discounts for your account.**
 
-### Case 1: Hosts, Indexed Spans and extra Ingested Spans
+### Case 1: Hosts, Indexed Spans, and extra Ingested Spans
 
 Using 5 hosts and sending 30 million Indexed Spans, with 900 GB of total Ingested Spans.
 

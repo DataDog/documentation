@@ -21,7 +21,7 @@ Each metric on this dashboard is powered by one of the below three Datadog stand
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.indexed_spans`
 
-Each of these metrics is also tagged by `env` and `service` to allow easy detection of what services and in which environments any fine-tuning of ingestion or indexing controls should be done in.  Use these metrics within our default dashboard or create your own dashboards and monitors to detect retention filter misconfiguration or set thresholds for monitors.
+These metrics are tagged by `env` and `service` to help you determine if you should fine-tune ingestion or indexing controls for particular environments and services.  Use these metrics within our default dashboard or create your own dashboards and monitors to detect retention filter misconfiguration or set thresholds for monitors.
 
 The default [Trace Analytics Dashboard][5] groups are below, including the widgets each contains:
 
