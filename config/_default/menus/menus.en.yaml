@@ -825,7 +825,7 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 902
-  - name: Mobile
+  - name: Mobile Application
     url: mobile/
     identifier: mobile
     pre: nav_mobile
