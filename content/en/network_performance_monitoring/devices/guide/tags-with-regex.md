@@ -20,22 +20,7 @@ Follow the [setup instructions][1] to install Datadog NDM.
 
 ### Configuration
 
-In the [SNMP conf.yaml][2], you can specify `metric_tags` from a symbol or an OID. To create multiple tags for devices, use regular expressions to separate the resulting value into multiple tags, or get a substring using the regular [Python engine][3].
-
-#### Symbol
-
-The example below creates two tags using Regex matching on the symbol's value. So, if the symbol's value is `router-webserver`, the tags `device_type:router` and `host:webserver` are added to the corresponding metrics.
-
-```yaml
-    metric_tags:
-     - # From a symbol
-       MIB: SNMPv2-MIB
-       symbol: sysName
-       match: (.*)-(.*)
-       tags:
-           host: \2
-           device_type: \1
-```
+In the [SNMP conf.yaml][2], you can specify `metric_tags` from an OID. To create multiple tags for devices, use regular expressions to separate the resulting value into multiple tags, or get a substring using the regular [Python engine][3].
 
 #### OID
 
@@ -44,12 +29,34 @@ The example below creates two tags using Regex matching on the OID's value. So, 
 ```yaml
     metric_tags:
      - # From an OID:
-       OID: 1.3.6.1.2.1.1.5.0
-       symbol: sysName
+       symbol:
+          OID: 1.3.6.1.2.1.1.5.0
+          name: sysName
        match: (\d\d)(.*)
        tags:
            host_prefix: \1
            host: \2
+```
+
+The example below creates tags using Regex for a table:
+
+```yaml
+metrics:
+  - MIB: IF-MIB
+    table:
+      OID: 1.3.6.1.2.1.2.2
+      name: ifTable
+    symbols:
+      - OID: 1.3.6.1.2.1.2.2.1.10
+        name: ifInOctets
+    metric_tags:
+      - column':
+          OID: 1.3.6.1.2.1.2.2.1.2
+          name: ifDescr
+        match: '(\w)(\w+)'
+        tags:
+         - prefix: '\1' 
+         - suffix: '\2'
 ```
 
 ## Further Reading
