@@ -61,4 +61,5 @@ In addition, the functions will not delete datapoints from Datadog entirely; it 
 {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
 {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
+
 [1]: https://www.datadoghq.com/blog/customize-graphs-dashboards-graph-markers/
