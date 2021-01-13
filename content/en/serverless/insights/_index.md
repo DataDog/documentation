@@ -35,7 +35,7 @@ More than 10% of the function's invocations were errors in the selected time ran
 
 At least one invocation in the selected time range used over 95% of the allocated memory.
 
-[Distributed tracing][5] can help you pinpoint Lambda functions with low memory limits, and parts of your application using excessive amounts of memory.
+[Distributed tracing][5] can help you pinpoint Lambda functions with low memory limits and parts of your application using excessive amounts of memory.
 
 **Resolution:** Lambda functions using close to their maximum configured memory are at risk of being killed by the Lambda runtime, resulting in user-facing errors. Consider increasing the amount of configured memory on your function. Note that this could affect your AWS bill.
 
