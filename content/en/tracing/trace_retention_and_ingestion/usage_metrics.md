@@ -23,16 +23,9 @@ Each metric on this dashboard is powered by one of the below three Datadog stand
 
 These metrics are tagged by `env` and `service` to help you determine if you should fine-tune ingestion or indexing controls for particular environments and services.  Use these metrics within our default dashboard or create your own dashboards and monitors to detect retention filter misconfiguration or set thresholds for monitors.
 
-The default [Trace Analytics Dashboard][5] groups are below, including the widgets each contains:
+The default [Trace Analytics Dashboard][5] has several groups of widgets to see at a glance where the most ingested and indexed spans are coming from. This dashboard includes top lists for `env`, `service` and unique `env` and `service` combinations as mentioned above.
 
-| Group                         | Widgets                                                                                            |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| Summary | Shows the APM Host count currently and as a timeseries, along with ingested and indexed spans for an at-a-glance determination if filters need to be tuned.  |
-| Ingestion overview           | Shows a detailed view of ingestion, including bytes per second, total bytes ingested during the time period, and a breakdown of ingestion by `env`.  The same graphs are again available for spans instead of bytes.  **Note:** Billing is based on bytes.|
-| Indexing overview          | Shows a detailed view of indexed spans, including a timeseries of spans indexed per second, total spans indexed over the period, and a breakdown of indexed spans by `env`.  |
-| Per env breakdown |   For each environment, a top list is provided of the ingested and indexed spans from that environment, as well as a top list of what this ratio is per environment.                                                         |
-| Per service breakdown         | For each service, a top list is provided of the ingested and indexed spans from that service, as well as a top list of what this ratio is per service.       |
-| Per env and service combination breakdown         | For each unique combination of `env` and `service`, a top list is provided of the ingested and indexed spans from that environment and service, as well as a top list of what this ratio is per combination. |
+ **Note:** Billing is based on bytes, but both bytes and span breakdowns are available on the dashboard.
 
 ### Indexed Spans
 
