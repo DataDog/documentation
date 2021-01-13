@@ -15,7 +15,7 @@ categories:
   - コンテナ
   - orchestration
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md'
 display_name: Federator.ai

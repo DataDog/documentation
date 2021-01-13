@@ -195,10 +195,14 @@
         "required": false,
         "schema": {
           "items": {
+            "description": "Object related to an incident.",
             "enum": [
               "users"
             ],
-            "type": "string"
+            "type": "string",
+            "x-enum-varnames": [
+              "USERS"
+            ]
           },
           "type": "array"
         }
@@ -218,10 +222,14 @@
         "name": "include",
         "required": false,
         "schema": {
+          "description": "Object related to an incident.",
           "enum": [
             "users"
           ],
-          "type": "string"
+          "type": "string",
+          "x-enum-varnames": [
+            "USERS"
+          ]
         }
       },
       "IncidentServiceSearchQueryParameter": {
@@ -249,10 +257,14 @@
         "name": "include",
         "required": false,
         "schema": {
+          "description": "Object related to an incident.",
           "enum": [
             "users"
           ],
-          "type": "string"
+          "type": "string",
+          "x-enum-varnames": [
+            "USERS"
+          ]
         }
       },
       "IncidentTeamSearchQueryParameter": {
@@ -4632,6 +4644,16 @@
           "INCIDENT_POSTMORTEMS"
         ]
       },
+      "IncidentRelatedObject": {
+        "description": "Object related to an incident.",
+        "enum": [
+          "users"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "USERS"
+        ]
+      },
       "IncidentResponse": {
         "description": "Response with an incident.",
         "properties": {
@@ -6522,7 +6544,7 @@
           },
           "type": {
             "default": "services",
-            "description": "Incident Service resource type.",
+            "description": "Incident service resource type.",
             "enum": [
               "services"
             ],
@@ -6639,7 +6661,7 @@
               },
               "type": {
                 "default": "services",
-                "description": "Incident Service resource type.",
+                "description": "Incident service resource type.",
                 "enum": [
                   "services"
                 ],
@@ -7083,7 +7105,7 @@
               },
               "type": {
                 "default": "services",
-                "description": "Incident Service resource type.",
+                "description": "Incident service resource type.",
                 "enum": [
                   "services"
                 ],
@@ -7474,7 +7496,7 @@
           },
           "type": {
             "default": "services",
-            "description": "Incident Service resource type.",
+            "description": "Incident service resource type.",
             "enum": [
               "services"
             ],
@@ -7493,7 +7515,7 @@
       },
       "IncidentServiceType": {
         "default": "services",
-        "description": "Incident Service resource type.",
+        "description": "Incident service resource type.",
         "enum": [
           "services"
         ],
@@ -7620,7 +7642,7 @@
           },
           "type": {
             "default": "services",
-            "description": "Incident Service resource type.",
+            "description": "Incident service resource type.",
             "enum": [
               "services"
             ],
@@ -7743,7 +7765,7 @@
               },
               "type": {
                 "default": "services",
-                "description": "Incident Service resource type.",
+                "description": "Incident service resource type.",
                 "enum": [
                   "services"
                 ],
@@ -7889,7 +7911,7 @@
                 },
                 "type": {
                   "default": "services",
-                  "description": "Incident Service resource type.",
+                  "description": "Incident service resource type.",
                   "enum": [
                     "services"
                   ],
@@ -31259,10 +31281,14 @@
             "required": false,
             "schema": {
               "items": {
+                "description": "Object related to an incident.",
                 "enum": [
                   "users"
                 ],
-                "type": "string"
+                "type": "string",
+                "x-enum-varnames": [
+                  "USERS"
+                ]
               },
               "type": "array"
             }
@@ -33478,10 +33504,14 @@
             "required": false,
             "schema": {
               "items": {
+                "description": "Object related to an incident.",
                 "enum": [
                   "users"
                 ],
-                "type": "string"
+                "type": "string",
+                "x-enum-varnames": [
+                  "USERS"
+                ]
               },
               "type": "array"
             }
@@ -48663,10 +48693,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           },
           {
@@ -48829,7 +48863,7 @@
                           },
                           "type": {
                             "default": "services",
-                            "description": "Incident Service resource type.",
+                            "description": "Incident service resource type.",
                             "enum": [
                               "services"
                             ],
@@ -49339,7 +49373,7 @@
                       },
                       "type": {
                         "default": "services",
-                        "description": "Incident Service resource type.",
+                        "description": "Incident service resource type.",
                         "enum": [
                           "services"
                         ],
@@ -49485,7 +49519,7 @@
                         },
                         "type": {
                           "default": "services",
-                          "description": "Incident Service resource type.",
+                          "description": "Incident service resource type.",
                           "enum": [
                             "services"
                           ],
@@ -50023,10 +50057,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           }
         ],
@@ -50149,7 +50187,7 @@
                         },
                         "type": {
                           "default": "services",
-                          "description": "Incident Service resource type.",
+                          "description": "Incident service resource type.",
                           "enum": [
                             "services"
                           ],
@@ -50642,7 +50680,7 @@
                       },
                       "type": {
                         "default": "services",
-                        "description": "Incident Service resource type.",
+                        "description": "Incident service resource type.",
                         "enum": [
                           "services"
                         ],
@@ -50789,7 +50827,7 @@
                         },
                         "type": {
                           "default": "services",
-                          "description": "Incident Service resource type.",
+                          "description": "Incident service resource type.",
                           "enum": [
                             "services"
                           ],
@@ -51172,10 +51210,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           },
           {
@@ -52527,10 +52569,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           }
         ],

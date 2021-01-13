@@ -8,7 +8,7 @@ assets:
 categories:
   - 監視
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md'
 display_name: botprise
