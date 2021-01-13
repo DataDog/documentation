@@ -951,44 +951,48 @@ main:
     url: serverless/custom_metrics
     parent: serverless
     weight: 6
+  - name: Insights
+    url: serverless/insights
+    parent: serverless
+    weight: 7
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless
-    weight: 7
+    weight: 8
   - name: Serverless Integrations
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: serverless
-    weight: 8
+    weight: 9
   - name: Datadog Serverless Plugin
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 801
+    weight: 901
   - name: Datadog Serverless Macro
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 802
+    weight: 902
   - name: Datadog Serverless CLI
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 803
+    weight: 903
   - name: Serverless Tagging
     url: serverless/serverless_tagging
     parent: serverless
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 10
+    weight: 11
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 11
+    weight: 12
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
