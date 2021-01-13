@@ -204,6 +204,26 @@ main_left:
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
     weight: -440
+  - identifier: blog
+    name: Blog
+    url: 'https://www.datadoghq.com/blog/'
+    weight: -450
+  - name: Le monitor
+    url: 'https://www.datadoghq.com/blog/'
+    weight: 100
+    parent: blog
+  - name: Ingénierie
+    url: 'https://www.datadoghq.com/blog/engineering/'
+    parent: blog
+    weight: 200
+  - name: Actualité
+    url: 'https://www.datadoghq.com/blog/pup-culture/'
+    parent: blog
+    weight: 300
+  - name: Communauté
+    url: 'https://www.datadoghq.com/blog/community/'
+    parent: blog
+    weight: 400
 main_right:
   - identifier: about
     name: Notre entreprise
@@ -241,26 +261,6 @@ main_right:
     parent: about
     url: 'https://www.datadoghq.com/about/awards/'
     weight: -405
-  - identifier: blog
-    name: Blog
-    url: 'https://www.datadoghq.com/blog/'
-    weight: -480
-  - name: Le monitor
-    url: 'https://www.datadoghq.com/blog/'
-    weight: 100
-    parent: blog
-  - name: Ingénierie
-    url: 'https://www.datadoghq.com/blog/engineering/'
-    parent: blog
-    weight: 200
-  - name: Actualité
-    url: 'https://www.datadoghq.com/blog/pup-culture/'
-    parent: blog
-    weight: 300
-  - name: Communauté
-    url: 'https://www.datadoghq.com/blog/community/'
-    parent: blog
-    weight: 400
   - identifier: docs
     name: Docs
     url: 'https://docs.datadoghq.com/'
