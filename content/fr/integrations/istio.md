@@ -180,7 +180,7 @@ Documentation, liens et articles supplémentaires utiles :
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example
 [5]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
-[6]: https://istio.io/latest/docs/tasks/observability/mixer/metrics/collecting-metrics/#before-you-begin
+[6]: https://istio.io/v1.1/docs/tasks/telemetry/
 [7]: https://istio.io/docs/tasks/telemetry/metrics/querying-metrics
 [8]: https://docs.datadoghq.com/fr/agent/kubernetes/
 [9]: https://docs.datadoghq.com/fr/integrations/envoy/#log-collection

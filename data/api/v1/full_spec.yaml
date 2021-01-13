@@ -947,6 +947,35 @@ components:
           description: ID of the deleted dashboard.
           type: string
       type: object
+    DashboardGlobalTimeLiveSpan:
+      description: Dashboard global time live_span selection
+      enum:
+      - 15m
+      - 1h
+      - 4h
+      - 1d
+      - 2d
+      - 1w
+      - 1mo
+      - 3mo
+      example: 1h
+      type: string
+      x-enum-varnames:
+      - PAST_FIFTEEN_MINUTES
+      - PAST_ONE_HOUR
+      - PAST_FOUR_HOURS
+      - PAST_ONE_DAY
+      - PAST_TWO_DAYS
+      - PAST_ONE_WEEK
+      - PAST_ONE_MONTH
+      - PAST_THREE_MONTHS
+    DashboardInviteType:
+      description: Type for shared dashboard invitation request body.
+      enum:
+      - public_dashboard_invitation
+      type: string
+      x-enum-varnames:
+      - PUBLIC_DASHBOARD_INVITATION
     DashboardLayoutType:
       description: Layout type of the dashboard.
       enum:
@@ -1014,6 +1043,17 @@ components:
             $ref: '#/components/schemas/DashboardList'
           type: array
       type: object
+    DashboardShareType:
+      description: Type of sharing access (either open to anyone who has the public
+        URL or invite-only).
+      enum:
+      - open
+      - invite
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - OPEN
+      - INVITE
     DashboardSummary:
       description: Dashboard summary response.
       properties:
@@ -1074,6 +1114,23 @@ components:
           type: string
         value:
           description: The value of the template variable within the saved view.
+          type: string
+      type: object
+    DashboardType:
+      description: The type of the associated private dashboard.
+      enum:
+      - custom_timeboard
+      - custom_screenboard
+      example: custom_timeboard
+      type: string
+      x-enum-varnames:
+      - CUSTOM_TIMEBOARD
+      - CUSTOM_SCREENBOARD
+    DeleteSharedDashboardResponse:
+      description: Response containing token of deleted shared dashboard.
+      properties:
+        deleted_public_dashboard_token:
+          description: Token associated with the shared dashboard that was revoked.
           type: string
       type: object
     DeletedMonitor:
@@ -5914,6 +5971,28 @@ components:
       type: string
       x-enum-varnames:
       - SCATTERPLOT
+    SelectableTemplateVariableItems:
+      description: Object containing the template variable's name, associated tag/attribute,
+        default value and selectable values.
+      properties:
+        default_value:
+          description: The default value of the template variable.
+          type: string
+        name:
+          description: Name of the template variable.
+          type: string
+        prefix:
+          description: The tag/attribute key associated with the template variable.
+          type: string
+        visible_tags:
+          description: List of visible tag values on the shared dashboard.
+          items:
+            description: Other values for this tag that can be selected on the shared
+              dashboard.
+            type: string
+          nullable: true
+          type: array
+      type: object
     Series:
       description: 'A metric to submit to Datadog.
 
@@ -5937,8 +6016,9 @@ components:
           type: string
         points:
           description: Points relating to a metric. All points must be tuples with
-            timestamp and a scalar value (cannot be a string). Timestamps cannot be
-            more than ten minutes in the future or more than one hour in the past.
+            timestamp and a scalar value (cannot be a string). Timestamps should be
+            in POSIX time in seconds, and cannot be more than ten minutes in the future
+            or more than one hour in the past.
           example:
           - - 1575317847
             - 0.5
@@ -6406,6 +6486,250 @@ components:
       type: string
       x-enum-varnames:
       - TRACE_SERVICE
+    SharedDashboard:
+      description: The metadata object associated with how a dashboard has been/will
+        be shared.
+      properties:
+        author:
+          description: User who shared the dashboard.
+          properties:
+            handle:
+              description: Identifier of the user who shared the dashboard.
+              example: test@datadoghq.com
+              readOnly: true
+              type: string
+            name:
+              description: Name of the user who shared the dashboard.
+              readOnly: true
+              type: string
+          readOnly: true
+          type: object
+        created_at:
+          description: Date the dashboard was shared.
+          format: date-time
+          readOnly: true
+          type: string
+        dashboard_id:
+          description: ID of the dashboard to share.
+          example: 123-abc-456
+          type: string
+        dashboard_type:
+          $ref: '#/components/schemas/DashboardType'
+        global_time:
+          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+        global_time_selectable_enabled:
+          description: Whether to allow viewers to select a different global time
+            setting for the shared dashboard.
+          nullable: true
+          type: boolean
+        public_url:
+          description: URL of the shared dashboard.
+          readOnly: true
+          type: string
+        selectable_template_vars:
+          description: List of objects representing template variables on the shared
+            dashboard which can have selectable values.
+          example:
+          - default_value: '*'
+            name: exampleVar
+            prefix: test
+            visible_tags:
+            - selectableValue1
+            - selectableValue2
+          items:
+            $ref: '#/components/schemas/SelectableTemplateVariableItems'
+          nullable: true
+          type: array
+        share_list:
+          description: List of email addresses that can receive an invitation to access
+            to the shared dashboard.
+          example:
+          - test@datadoghq.com
+          - test2@email.com
+          items:
+            description: Email address that can receive an invitation to access the
+              shared dashboard.
+            format: email
+            type: string
+          nullable: true
+          type: array
+        share_type:
+          $ref: '#/components/schemas/DashboardShareType'
+        token:
+          description: A unique token assigned to the shared dashboard.
+          readOnly: true
+          type: string
+      required:
+      - dashboard_id
+      - dashboard_type
+      type: object
+    SharedDashboardInvites:
+      description: Invitations data and metadata that exists for a shared dashboard
+        returned by the API.
+      example:
+        data:
+        - attributes:
+            email: test@datadoghq.com
+          type: public_dashboard_invitation
+      properties:
+        data:
+          $ref: '#/components/schemas/SharedDashboardInvitesData'
+        meta:
+          description: Pagination metadata returned by the API.
+          properties:
+            page:
+              description: Object containing the total count of invitations across
+                all pages
+              properties:
+                total_count:
+                  description: The total number of invitations on this shared board,
+                    across all pages.
+                  format: int64
+                  type: integer
+              type: object
+          readOnly: true
+          type: object
+      required:
+      - data
+      type: object
+    SharedDashboardInvitesData:
+      description: An object or list of objects containing the information for an
+        invitation to a shared dashboard.
+      example:
+      - attributes:
+          email: test@datadoghq.com
+        type: public_dashboard_invitation
+      oneOf:
+      - $ref: '#/components/schemas/SharedDashboardInvitesDataObject'
+      - $ref: '#/components/schemas/SharedDashboardInvitesDataList'
+    SharedDashboardInvitesDataList:
+      description: A list of objects containing the information for an invitation(s)
+        to a shared dashboard.
+      example:
+      - attributes:
+          email: test@datadoghq.com
+        type: public_dashboard_invitation
+      items:
+        $ref: '#/components/schemas/SharedDashboardInvitesDataObject'
+      type: array
+    SharedDashboardInvitesDataObject:
+      description: Object containing the information for an invitation to a shared
+        dashboard.
+      example:
+        attributes:
+          created_at: '2020-12-07T20:16:27.846985+00:00'
+          email: test@datadoghq.com
+          has_session: false
+          invitation_expiry: '2020-12-07T21:16:27.840542+00:00'
+          session_expiry: null
+          share_token: XXXXXX-123456abcedfg7890hijklmnopqrstuv
+        type: public_dashboard_invitation
+      properties:
+        attributes:
+          description: Attributes of the shared dashboard invitation
+          example:
+            created_at: '2020-12-07T20:16:27.846985+00:00'
+            email: test@datadoghq.com
+            has_session: false
+            invitation_expiry: '2020-12-07T21:16:27.840542+00:00'
+            session_expiry: null
+            share_token: XXXXXX-123456abcedfg7890hijklmnopqrstuv
+          properties:
+            created_at:
+              description: When the invitation was sent.
+              format: date-time
+              readOnly: true
+              type: string
+            email:
+              description: An email address that an invitation has been (or if used
+                in invitation request, will be) sent to.
+              nullable: false
+              type: string
+            has_session:
+              description: Indicates whether an active session exists for the invitation
+                (produced when a user clicks the link in the email).
+              readOnly: true
+              type: boolean
+            invitation_expiry:
+              description: When the invitation expires.
+              format: date-time
+              readOnly: true
+              type: string
+            session_expiry:
+              description: When the invited user's session expires. null if the invitation
+                has no associated session.
+              format: date-time
+              nullable: true
+              readOnly: true
+              type: string
+            share_token:
+              description: The unique token of the shared dashboard that was (or is
+                to be) shared.
+              readOnly: true
+              type: string
+          type: object
+        type:
+          $ref: '#/components/schemas/DashboardInviteType'
+      required:
+      - type
+      - attributes
+      type: object
+    SharedDashboardUpdateRequest:
+      description: Update a shared dashboard's settings.
+      example:
+        global_time:
+          live_span: 1h
+        share_list:
+        - test@datadoghq.com
+        - test2@datadoghq.com
+        share_type: invite
+      properties:
+        global_time:
+          description: Timeframe setting for the shared dashboard.
+          example:
+            live_span: 1h
+          nullable: true
+          properties:
+            live_span:
+              $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+          type: object
+        global_time_selectable_enabled:
+          description: Whether to allow viewers to select a different global time
+            setting for the shared dashboard.
+          nullable: true
+          type: boolean
+        selectable_template_vars:
+          description: List of objects representing template variables on the shared
+            dashboard which can have selectable values.
+          example:
+          - default_value: '*'
+            name: exampleVar
+            prefix: test
+            visible_tags:
+            - selectableValue1
+            - selectableValue2
+          items:
+            $ref: '#/components/schemas/SelectableTemplateVariableItems'
+          nullable: true
+          type: array
+        share_list:
+          description: List of email addresses that can be given access to the shared
+            dashboard.
+          example:
+          - test@datadoghq.com
+          - test2@email.com
+          items:
+            description: Email address that can receive an invitation to access the
+              shared dashboard.
+            format: email
+            type: string
+          nullable: true
+          type: array
+        share_type:
+          $ref: '#/components/schemas/DashboardShareType'
+      required:
+      - global_time
+      type: object
     SingleServiceDependencies:
       description: An object with information on APM services that call, and are called
         by a given service.
@@ -7023,7 +7347,7 @@ components:
           type: string
         name:
           description: Name of the variable.
-          example: ''
+          example: VARIABLE_NAME
           type: string
         pattern:
           description: Pattern of the variable.
@@ -7040,12 +7364,14 @@ components:
       - element
       - email
       - global
+      - javascript
       - text
       type: string
       x-enum-varnames:
       - ELEMENT
       - EMAIL
       - GLOBAL
+      - JAVASCRIPT
       - TEXT
     SyntheticsCITest:
       description: Test configuration for Synthetics CI
@@ -7158,6 +7484,33 @@ components:
       - GREATER_EQUALS
       - LOWER_EQUALS
       - MATCH_REGEX
+    SyntheticsConfigVariable:
+      description: Object defining a variable that can be used in your test configuration.
+      properties:
+        example:
+          description: Example for the variable.
+          type: string
+        name:
+          description: Name of the variable.
+          example: VARIABLE_NAME
+          type: string
+        pattern:
+          description: Pattern of the variable.
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsConfigVariableType'
+      required:
+      - example
+      - type
+      - name
+      type: object
+    SyntheticsConfigVariableType:
+      description: Type of the configuration variable.
+      enum:
+      - text
+      type: string
+      x-enum-varnames:
+      - TEXT
     SyntheticsDeleteTestsPayload:
       description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
 
@@ -7305,6 +7658,41 @@ components:
           description: Name of the global variable.
           example: MY_VARIABLE
           type: string
+        parse_test_options:
+          description: Parser options to use for retrieving a Synthetics global variable
+            from a Synthetics Test. Used in conjunction with `parse_test_public_id`.
+          properties:
+            field:
+              description: When type is `http_header`, name of the header to use to
+                extract the value.
+              example: content-type
+              type: string
+            parser:
+              description: Details of the parser to use for the global variable.
+              example:
+                type: regex
+                value: .*
+              properties:
+                type:
+                  $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
+                value:
+                  description: Regex or JSON path used for the parser. Not used with
+                    type `raw`.
+                  type: string
+              required:
+              - type
+              type: object
+            type:
+              $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+          required:
+          - type
+          - parser
+          type: object
+        parse_test_public_id:
+          description: A Synthetic test ID to use as a test to generate the variable
+            value.
+          example: abc-def-123
+          type: string
         tags:
           description: Tags of the global variable.
           example:
@@ -7322,6 +7710,28 @@ components:
       - tags
       - value
       type: object
+    SyntheticsGlobalVariableParseTestOptionsType:
+      description: Property of the Synthetics Test Response to use for a Synthetics
+        global variable.
+      enum:
+      - http_body
+      - http_header
+      type: string
+      x-enum-varnames:
+      - HTTP_BODY
+      - HTTP_HEADER
+    SyntheticsGlobalVariableParserType:
+      description: Type of parser for a Synthetics global variable from a synthetics
+        test.
+      enum:
+      - raw
+      - json_path
+      - regex
+      type: string
+      x-enum-varnames:
+      - RAW
+      - JSON_PATH
+      - REGEX
     SyntheticsGlobalVariableValue:
       description: Value of the global variable.
       example:
@@ -7461,57 +7871,6 @@ components:
               type: string
           type: object
       type: object
-    SyntheticsResource:
-      description: Object describing a resource which is the combination of requests
-        (fetch, XHR) and Assets (HTML, CSS, JS, images).
-      properties:
-        duration:
-          description: Number of time the resource was collected.
-          format: double
-          type: number
-        method:
-          description: HTTP method associated to the resource.
-          type: string
-        size:
-          description: Size of the resource in bytes.
-          format: int64
-          type: integer
-        status:
-          description: Status Code of the resource.
-          format: int64
-          type: integer
-        timestamp:
-          description: Timestamp of the resource collection.
-          format: double
-          type: number
-        traceId:
-          description: Trace ID associated with the resource if any.
-          type: string
-        type:
-          $ref: '#/components/schemas/SyntheticsResourceType'
-        url:
-          description: URL of the resource.
-          type: string
-      type: object
-    SyntheticsResourceType:
-      description: Document type to apply an assertion against.
-      enum:
-      - document
-      - stylesheet
-      - fetch
-      - image
-      - script
-      - xhr
-      - other
-      type: string
-      x-enum-varnames:
-      - DOCUMENT
-      - STYLESHEET
-      - FETCH
-      - IMAGE
-      - SCRIPT
-      - XHR
-      - OTHER
     SyntheticsSSLCertificate:
       description: Object describing the SSL certificate used for a Synthetic test.
       properties:
@@ -7639,11 +7998,6 @@ components:
           type: string
         playingTab:
           $ref: '#/components/schemas/SyntheticsPlayingTab'
-        resources:
-          description: Array of resources collected by the test.
-          items:
-            $ref: '#/components/schemas/SyntheticsResource'
-          type: array
         screenshotBucketKey:
           description: Whether or not screenshots where collected by the test.
           type: boolean
@@ -7758,10 +8112,15 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
+        configVariables:
+          description: API tests only - array of variables used for the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsConfigVariable'
+          type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
         variables:
-          description: Array of variables used for the test.
+          description: Browser tests only - array of variables used for the test steps.
           items:
             $ref: '#/components/schemas/SyntheticsBrowserVariable'
           type: array
@@ -8898,6 +9257,11 @@ components:
             (and were NOT running the Datadog Agent).'
           format: int64
           type: integer
+        apm_azure_app_service_host_count:
+          description: Contains the total number of Azure App Services hosts using
+            APM.
+          format: int64
+          type: integer
         apm_host_count:
           description: 'Shows the total number of hosts using APM during the hour,
 
@@ -8941,6 +9305,13 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        infra_azure_app_service:
+          description: 'Contains the total number of hosts that reported via the Azure
+            App Services integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
       type: object
     UsageHostsResponse:
       description: Host usage response.
@@ -9214,6 +9585,16 @@ components:
           description: Contains the number of RUM Sessions.
           format: int64
           type: integer
+        session_count_android:
+          description: Contains the number of mobile RUM Sessions on Android (data
+            available beginning December 1, 2020).
+          format: int64
+          type: integer
+        session_count_ios:
+          description: Contains the number of mobile RUM Sessions on iOS (data available
+            beginning December 1, 2020).
+          format: int64
+          type: integer
       type: object
     UsageRumSessionsResponse:
       description: Response containing the number of RUM Sessions for each hour for
@@ -9340,6 +9721,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        apm_azure_app_service_host_top99p:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current date all organizations.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
@@ -9424,6 +9810,16 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_android_sum:
+          description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for all organizations
@@ -9452,6 +9848,11 @@ components:
         rum_session_count_sum:
           description: Shows the sum of all browser RUM Sessions over all hours in
             the current date for all organizations
+          format: int64
+          type: integer
+        rum_total_session_count_sum:
+          description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current date for all organizations.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -9484,6 +9885,11 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        apm_azure_app_service_host_top99p:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
@@ -9502,6 +9908,11 @@ components:
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        azure_app_service_top99p:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         billable_ingested_bytes_sum:
@@ -9561,6 +9972,16 @@ components:
             current date for the given org.
           format: int64
           type: integer
+        mobile_rum_session_count_android_sum:
+          description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for the given org.
@@ -9592,6 +10013,11 @@ components:
             the current date for the given org.
           format: int64
           type: integer
+        rum_total_session_count_sum:
+          description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for the given org.
@@ -9619,6 +10045,11 @@ components:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        apm_azure_app_service_host_top99p_sum:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current months all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
@@ -9721,6 +10152,16 @@ components:
             the current months for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current months for all organizations.
@@ -9744,6 +10185,11 @@ components:
         rum_session_count_agg_sum:
           description: Shows the sum of all browser RUM Sessions over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        rum_total_session_count_agg_sum:
+          description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         start_date:
@@ -11619,6 +12065,352 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
+  /api/v1/dashboard/public:
+    post:
+      description: Share a specified private dashboard, generating a URL at which
+        it can be publicly viewed.
+      operationId: CreatePublicDashboard
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  dashboard_id: 123-abc-456
+                  dashboard_type: custom_timeboard
+                  share_type: open
+            schema:
+              $ref: '#/components/schemas/SharedDashboard'
+        description: Create a shared dashboard request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboard'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Dashboard Not Found
+      summary: Create a shared dashboard
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeletePublicDashboard
+        parameters:
+        - name: token
+          source: token
+        type: unsafe
+  /api/v1/dashboard/public/{token}:
+    delete:
+      description: Revoke the public URL for a dashboard (rendering it private) associated
+        with the specified token.
+      operationId: DeletePublicDashboard
+      parameters:
+      - description: The token of the shared dashboard.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSharedDashboardResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Shared Dashboard Not Found
+      summary: Revoke a shared dashboard URL
+      tags:
+      - Dashboards
+      x-undo:
+        type: idempotent
+    get:
+      description: Fetch an existing shared dashboard's sharing metadata associated
+        with the specified token.
+      operationId: GetPublicDashboard
+      parameters:
+      - description: The token of the shared dashboard. Generated when a dashboard
+          is shared.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboard'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Shared Dashboard Not Found
+      summary: Get a shared dashboard
+      tags:
+      - Dashboards
+      x-undo:
+        type: safe
+    put:
+      description: Update a shared dashboard associated with the specified token.
+      operationId: UpdatePublicDashboard
+      parameters:
+      - description: The token of the shared dashboard.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  global_time:
+                    live_span: 1h
+                  selectable_template_vars:
+                  - default_value: '*'
+                    name: exampleVar
+                    prefix: test
+                    visible_tags:
+                    - selectableValue1
+                    - selectableValue2
+                  share_list:
+                  - test@datadoghq.com
+                  - test2@datadoghq.com
+                  share_type: invite
+            schema:
+              $ref: '#/components/schemas/SharedDashboardUpdateRequest'
+        description: Update Dashboard request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboard'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Update a shared dashboard
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v1/dashboard/public/{token}/invitation:
+    delete:
+      description: Revoke previously sent invitation emails and active sessions used
+        to access a given shared dashboard for specific email addresses.
+      operationId: DeletePublicDashboardInvitation
+      parameters:
+      - description: The token of the shared dashboard.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - attributes:
+                      email: test@datadoghq.com
+                    type: public_dashboard_invitation
+            schema:
+              $ref: '#/components/schemas/SharedDashboardInvites'
+        description: Shared Dashboard Invitation deletion request body.
+        required: true
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Revoke shared dashboard invitations
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+    get:
+      description: Describe the invitations that exist for the given shared dashboard
+        (paginated).
+      operationId: GetPublicDashboardInvitations
+      parameters:
+      - description: Token of the shared dashboard for which to fetch invitations.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      - description: The number of records to return in a single request.
+        in: query
+        name: page_size
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The page to access (base 0).
+        in: query
+        name: page_number
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboardInvites'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get all invitations for a shared dashboard
+      tags:
+      - Dashboards
+      x-undo:
+        type: safe
+    post:
+      description: Send emails to specified email addresses containing links to access
+        a given authenticated shared dashboard. Email addresses must already belong
+        to the authenticated shared dashboard's share_list.
+      operationId: SendPublicDashboardInvitation
+      parameters:
+      - description: The token of the shared dashboard.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - attributes:
+                      email: test@datadoghq.com
+                    type: public_dashboard_invitation
+            schema:
+              $ref: '#/components/schemas/SharedDashboardInvites'
+        description: Shared Dashboard Invitation request body.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboardInvites'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Send shared dashboard invitation email
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeletePublicDashboardInvitation
+        parameters:
+        - name: token
+          source: token
+        type: unsafe
   /api/v1/dashboard/{dashboard_id}:
     delete:
       description: Delete a dashboard using the specified ID.
@@ -16340,7 +17132,7 @@ paths:
         \ 3.2 megabytes (3200000). Compressed payloads must have a decompressed size\
         \ of up to 62 megabytes (62914560).\n\nIf you\u2019re submitting metrics directly\
         \ to the Datadog API without using DogStatsD, expect\n\n- 64 bits for the\
-        \ timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50\
+        \ timestamp\n- 32 bits for the value\n- 20 bytes for the metric names\n- 50\
         \ bytes for the timeseries\n- The full payload is approximately ~ 100 bytes.\
         \ However, with the DogStatsD API,\ncompression is applied, which reduces\
         \ the payload size."
@@ -19809,6 +20601,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
   name: Logs Indexes
+- description: '[Check API version 2](/api/v2/logs-metrics/).'
+  name: Logs Metrics
 - description: "Pipelines and processors operate on incoming logs, parsing\nand transforming\
     \ them into structured attributes for easier querying.\n\n- See the [pipelines\
     \ configuration page](https://app.datadoghq.com/logs/pipelines)\n  for a list\

@@ -11,7 +11,7 @@ categories:
   - cloud
   - 処理
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md'
 display_name: AppKeeper

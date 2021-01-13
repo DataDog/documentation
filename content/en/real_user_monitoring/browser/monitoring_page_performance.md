@@ -39,7 +39,7 @@ These performance metrics are key for helping you start your investigations:
 
 ## All performance metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][6]. The following table lists Datadog-specific metrics along with performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
+For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling, global context, or custom user actions, see [Advanced Configuration][6]. The following table lists Datadog-specific metrics along with performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
 
 | Attribute                              | Type        | Description                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -84,7 +84,7 @@ The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation
 [2]: /real_user_monitoring/dashboards/performance_overview_dashboard
 [3]: /real_user_monitoring/explorer/
 [4]: /real_user_monitoring/browser/advanced_configuration/#add-global-context
-[5]: /real_user_monitoring/browser/data_collected/
+[5]: /real_user_monitoring/browser/data_collected/#default-attributes
 [6]: /real_user_monitoring/browser/advanced_configuration/
 [7]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
 [8]: https://www.w3.org/TR/paint-timing/

@@ -119,14 +119,12 @@ For more examples of setting the Agent hostname in other languages, refer to the
 
 ```javascript
 const tracer = require('dd-trace').init();
-const request = require('request');
-request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
-    error,
-    resp,
-    body
-) {
-    tracer.setUrl(`http://${hostname}:8126`)
-});
+const axios = require('axios');
+
+(async () => {
+  const { data: hostname } = await axois.get('http://169.254.169.254/latest/meta-data/local-ipv4');
+  tracer.setUrl(`http://${hostname}:8126`);
+})();
 ```
 
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
@@ -198,6 +196,41 @@ For more examples of setting the Agent hostname in other languages, refer to the
 ]
 ```
 
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); php-fpm -F"  
+]
+```
+
+#### Apache
+
+For Apache and `mod_php` in VirtualHost or server configuration file, use `PassEnv` to set `DD_AGENT_HOST` and other environment variables, such as the variables for [Unified Service Tagging][1] like the below example:
+
+```
+PassEnv DD_AGENT_HOST
+PassEnv DD_SERVICE
+PassEnv DD_ENV
+PassEnv DD_VERSION
+```
+
+#### PHP fpm
+
+When the ini param is set as `clear_env=on`, in the pool workers file `www.conf` you must also configure environment variables to be read from the host. Use this to also set `DD_AGENT_HOST` and other environment variables, such as the variables for [Unified Service Tagging][1] like the below example:
+
+```
+env[DD_AGENT_HOST] = $DD_AGENT_HOST
+env[DD_SERVICE] = $DD_SERVICE
+env[DD_ENV] = $DD_ENV
+env[DD_VERSION] = $DD_VERSION
+```
+
+
+[1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
 {{% /tab %}}
 {{< /tabs >}}
 

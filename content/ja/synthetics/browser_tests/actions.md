@@ -201,12 +201,13 @@ return jQuery().jquery.startsWith('3.5.1')
 
 以下の利用可能な組み込みの 1 つから値を定義して変数を作成します。
 
-| パターン                 | 説明                                                                                             |
-|-------------------------|---------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`      | `n` 桁の数字列を生成します。                                                               |
-| `{{ alphabetic(n) }}`   | `n` 文字のアルファベット文字列を生成します。                                                           |
-| `{{ alphanumeric(n) }}` | `n` 文字の英数字文字列を生成します。                                                     |
-| `{{ date(n, format) }}` | テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。 |
+| パターン                    | 説明                                                                                                 |
+|----------------------------|-------------------------------------------------------------------------------------------------------------|
+| `{{ numeric(n) }}`         | `n` 桁の数字列を生成します。                                                                 |
+| `{{ alphabetic(n) }}`      | `n` 文字のアルファベット文字列を生成します。                                                            |
+| `{{ alphanumeric(n) }}`    | `n` 文字の英数字文字列を生成します。                                                       |
+| `{{ date(n, format) }}`    | テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。        |
+| `{{ timestamp(n, unit) }}` | テストが +/- `n` 選択単位で開始されたタイムスタンプの値を使用して、許容される単位のいずれかでタイムスタンプを生成します。 |
 
 #### 要素
 
@@ -310,12 +311,12 @@ HTTP リクエストを定義するには、
 
 任意で、定義済みの HTTP リクエストに関するアサーションに基づきステップの成功をテストすることができます。
 
-| タイプ          | 値の型                 | 演算子                                                                      |
-|---------------|----------------------------|-------------------------------------------------------------------------------|
-| ステータスコード   | 整数                  | `is`、`is not`                                                                 |
-| 応答時間 | 整数 (ms)             | `lessThan`                                                                     |
-| ヘッダー       | _文字列_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
-| 本文          | _文字列_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+| タイプ          | 演算子                                                                                               | 値の型                                                      |
+|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_、_[Regex][10]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][10]                                      |
+| response time | `is less than`                                                                                         | 整数 (ms)                                                  |
+| ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
 **注**: **Test URL** をクリックすると、基本のアサーションが自動的に入力されます。
 
@@ -346,7 +347,7 @@ HTTP リクエストを定義するには、
 [1]: /ja/synthetics/browser_tests/advanced_options/
 [2]: /ja/synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /ja/synthetics/browser_tests/#create-a-variable
+[4]: /ja/synthetics/guide/email-validation/#create-an-email-variable
 [5]: /ja/synthetics/browser_tests/actions#use-variables-in-javascript-steps
 [6]: /ja/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 [7]: /ja/synthetics/settings/

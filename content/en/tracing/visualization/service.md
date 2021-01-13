@@ -14,6 +14,9 @@ further_reading:
 - link: "/tracing/visualization/trace/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
+- link: "https://www.datadoghq.com/blog/datadog-clipboard/"
+  tag: "Blog"
+  text: "Add an APM service page url to your clipboard"
 ---
 
 {{< img src="tracing/visualization/service/detailed_service_page.png" alt="Detailed service page"  style="width:90%;">}}

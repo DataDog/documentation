@@ -22,45 +22,16 @@ further_reading:
 
 ## API
 
-グループウィジェットの[ウィジェット JSON スキーマ定義][2]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
 
-```text
-GROUP_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["group"]},
-        "layout_type": {"enum": ["ordered"]},
-        "widgets": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "definition": {
-                        "oneOf": [WIDGET_DEFINITION]
-                    },
-                    "id": {"type": "integer"}
-                },
-                "required": ["definition"],
-                "additionalProperties": false
-            }
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "layout_type", "widgets"],
-    "additionalProperties": false
-}
-```
+変化ウィジェット専用の[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
-| パラメーター     | 種類             | 必須 | 説明                                                                                                                                             |
-|---------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | はい      | ウィジェットのタイプ。グループウィジェットには `group` を使用します。                                                                                                       |
-| `widgets`     | オブジェクトの配列 | はい      | グループウィジェットに属するウィジェットのリスト。`WIDGET_DEFINITION` の構築方法については、[ウィジェット JSON スキーマに関するドキュメント][2]を参照してください。 |
-| `layout_type` | string           | はい      | グループのレイアウトタイプ。有効な値は `ordered` です。                                                                                                  |
-| `title`       | string           | いいえ       | ウィジェットのタイトル。                                                                                                                                   |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/dashboards/timeboard/
-[2]: /ja/dashboards/graphing_json/widget_json/
+[2]: /ja/api/v1/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

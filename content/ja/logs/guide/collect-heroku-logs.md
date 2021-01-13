@@ -19,20 +19,9 @@ Datadog の HTTP API は、コンテンツヘッダー `application/logplex-1` �
 * Heroku プロジェクトに接続します。
 * 以下のコマンドを使用して HTTPS ドレインをセットアップします。
 
-{{< site-region region="us" >}}
-
 ```text
-heroku drains:add 'https://http-intake.logs.datadoghq.com/v1/input/<DD_API_キー>?ddsource=heroku&service=<サービス>&host=<ホスト>' -a <アプリケーション名>
+heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>' -a <APPLICATION_NAME>
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```text
-heroku drains:add 'https://http-intake.logs.datadoghq.eu/v1/input/<DD_API_キー>?ddsource=heroku&service=<サービス>&host=<ホスト>' -a <アプリケーション名>
-```
-
-{{< /site-region >}}
 
 * `<DD_API_KEY>` は [Datadog API キー][2]に置き換えます。
 * `<APPLICATION_NAME>` と `<SERVICE>` はアプリケーション名に置き換えます。
@@ -42,20 +31,9 @@ heroku drains:add 'https://http-intake.logs.datadoghq.eu/v1/input/<DD_API_キー
 
 アプリケーションからのログにカスタム属性を追加するには、ドレイン内の URL を次のように置き換えます。
 
-{{< site-region region="us" >}}
-
 ```text
-https://http-intake.logs.datadoghq.com/v1/input/<DD_API_キー>?ddsource=heroku&service=<サービス>&host=<ホスト>&attribute_name=<値>
+https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```text
-https://http-intake.logs.datadoghq.eu/v1/input/<DD_API_キー>?ddsource=heroku&service=<サービス>&host=<ホスト>&attribute_name=<値>
-```
-
-{{< /site-region >}}
 
 [1]: https://devcenter.heroku.com/articles/log-drains#https-drains
 [2]: https://app.datadoghq.com/account/settings#api

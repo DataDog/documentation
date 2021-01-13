@@ -17,6 +17,9 @@ further_reading:
     - link: 'logs/explorer/patterns'
       tag: Documentation
       text: 'Detect patterns inside your logs'
+    - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+      tag: Blog
+      text: 'Add a Log Explorer url to your clipboard'
 ---
 
 ## Overview
@@ -35,15 +38,24 @@ The Live Tail displays logs as they flow into Datadog. Live Tail logs do not per
 
 ### Log Lists
 
+
+#### Individual Logs
+
 The Log List displays indexed logs and offers privileged tools to navigate **individual results**. Find out more in the [Log List section][3].
 
 {{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="Log List" style="width:60%;" >}}
 
-### Log Patterns
+#### Log Patterns
 
 The Log Patterns automatically aggregate indexed logs into a **handful of groups** with similar structures. Find out more in the [Log Patterns section][4].
 
 {{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
+
+#### Log Transactions
+
+The Log Transactions automatically aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. Find out more in the [Log Transactions section][41].
+
+{{< img src="logs/explorer/log_explorer_walkthrough_transactions.png" alt="Log Transactions" style="width:60%;" >}}
 
 ### Log Analytics
 
@@ -154,6 +166,7 @@ Use saved views to automatically configure your log explorer with a preselected 
 [2]: /logs/explorer/live_tail/
 [3]: /logs/explorer/list/
 [4]: /logs/explorer/patterns/
+[41]: /logs/explorer/transactions/
 [5]: /logs/explorer/analytics/
 [6]: /logs/processing/pipelines/
 [7]: /integrations/#cat-log-collection

@@ -10,4 +10,6 @@ disable_toc: true
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() Monitor Evaluations{{< /nextlink >}}
     {{< nextlink href="monitors/guide/visualize-your-service-check-in-the-datadog-ui" >}}Visualize your service check in the Datadog UI{{< /nextlink >}}
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Template Variable Evaluation{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Monitoring Ranges{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/slo-checklist" >}}SLO Checklist{{< /nextlink >}}
 {{< /whatsnext >}}

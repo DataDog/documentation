@@ -86,6 +86,8 @@ For Error Tracking to properly work with your source maps, you must configure yo
 -   Source maps directly include the related source code. Make sure the <code>sourcesContent</code> attribute is not empty before uploading them.
 -   The size of each source map augmented with the size of the related minified file does not exceed __our limit of 50mb__. This sum can be reduced by configuring your bundler to split the source code into multiple smaller chunks ([see how to do this with WebpackJS][6]).
 
+**Note**: Currently only source maps with the `.min.js` extension will work to correctly unminify stack traces in the Error Tracking UI. Source maps with other extensions (for example, `.mjs`, etc.) while accepted will not unminify stack traces. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

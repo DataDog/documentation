@@ -79,12 +79,15 @@ export JAVA_OPTS=”-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremot
 
 [Agent の `status` サブコマンドを実行][9]し、Checks セクションで `flume` を探します。
 
+### コンポーネントメトリクス
+
+このチェックによって取得されるメトリクスは、Flume Agent が使用するソース、チャネル、シンクによって異なります。各コンポーネントによって公開されるメトリクスの完全なリストについては、Apache Flume ドキュメントの[利用可能なコンポーネントメトリクス][10]を確認してください。Datadog に表示されるメトリクスのリストについては、このページの[メトリクス](#metrics)セクションを参照してください。
+
 ## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "flume" >}}
-は、Flume Agent が使用するソース、チャンネル、シンクに依存します。
-各コンポーネントが公開するメトリクス一覧は、Apache Flume ドキュメントの[使用可能なコンポーネントメトリクス][11] で確認できます。
+
 
 ### サービスのチェック
 
@@ -110,5 +113,5 @@ Flume には、イベントは含まれません。
 [7]: https://docs.datadoghq.com/ja/help/
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-extras/blob/master/flume/metadata.csv
-[11]: https://flume.apache.org/FlumeUserGuide.html#available-component-metrics
+[10]: https://flume.apache.org/FlumeUserGuide.html#available-component-metrics
+[11]: https://github.com/DataDog/integrations-extras/blob/master/flume/metadata.csv

@@ -53,4 +53,4 @@ Pour en savoir plus sur le nombre de métriques custom créées à partir de mé
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/developers/metrics/types/
-[2]: /fr/developers/metrics/custom_metrics/
+[2]: https://app.datadoghq.com/metric/distribution_metrics

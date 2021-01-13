@@ -82,11 +82,15 @@ dependencies {
 1. [まだの場合は、Datadog Forwarder をインストールします][2]。
 2. [Datadog Forwarder を関数のロググループにサブスクライブします][5]。
 
+### 統合サービスタグ付け
+
+これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][6]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
+
 ## Datadog サーバーレスモニタリングの利用
 
-以上の方法で関数を構成すると、[Serverless Homepage][6] でメトリクス、ログ、トレースを確認できるようになるはずです。
+以上の方法で関数を構成すると、[Serverless Homepage][7] でメトリクス、ログ、トレースを確認できるようになるはずです。
 
-### カスタムビジネスロジックの監視
+## カスタムビジネスロジックの監視
 
 カスタムメトリクスの送信をご希望の場合は、以下のコード例をご参照ください。
 
@@ -117,7 +121,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-カスタムメトリクスの送信について、詳しくは[こちら][7]を参照してください。
+カスタムメトリクスの送信について、詳しくは[こちら][8]を参照してください。
 
 ## その他の参考資料
 
@@ -128,5 +132,6 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 [3]: https://img.shields.io/bintray/v/datadog/datadog-maven/datadog-lambda-java
 [4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: https://app.datadoghq.com/functions
-[7]: /ja/serverless/custom_metrics?tab=java
+[6]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[7]: https://app.datadoghq.com/functions
+[8]: /ja/serverless/custom_metrics?tab=java

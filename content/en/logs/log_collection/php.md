@@ -446,6 +446,10 @@ monolog:
 
 ### Laravel
 
+<div class="alert alert-warning">
+Note that the function <code>\DDTrace\trace_id()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
+</div>
+
 ```php
 <?php
 
@@ -479,19 +483,15 @@ class AppServiceProvider extends ServiceProvider
 
         // Inject the trace and span ID to connect the log entry with the APM trace
         $monolog->pushProcessor(function ($record) use ($useJson) {
-            $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-            if (null === $span) {
-                return $record;
-            }
             if ($useJson === true) {
                 $record['dd'] = [
-                    'trace_id' => $span->getTraceId(),
+                    'trace_id' => \DDTrace\trace_id(),
                     'span_id'  => \dd_trace_peek_span_id(),
                 ];
             } else {
                 $record['message'] .= sprintf(
                     ' [dd.trace_id=%d dd.span_id=%d]',
-                    $span->getTraceId(),
+                    \DDTrace\trace_id(),
                     \dd_trace_peek_span_id()
                 );
             }

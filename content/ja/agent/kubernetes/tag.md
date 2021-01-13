@@ -63,6 +63,15 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<ノードラベル>": "<タグキー>"}'
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのノードラベルをタグとしてメトリクスに追加します。この例では、タグ名の前に `<プレフィックス>_` が付いています。
+
+```shell
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+```
+
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][1]を参照してください。
+
+[1]: /ja/account_management/billing/custom_metrics
 {{% /tab %}}
 {{% tab "Agent" %}}
 
@@ -109,9 +118,9 @@ Agent v6.8.0 以降の場合、次の環境変数構成を使用して、すべ�
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<プレフィックス>_%%label%%"}'
 ```
 
-**注**: この方法を使用すると、組織の[カスタムメトリクス][1]数が増加し、請求に影響する可能性があります。
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][1]を参照してください。
 
-[1]: /ja/developers/metrics/
+[1]: /ja/account_management/billing/custom_metrics
 {{% /tab %}}
 {{% tab "Agent" %}}
 
@@ -136,10 +145,10 @@ kubernetes_pod_labels_as_tags:
   *: <プレフィックス>_%%label%%
 ```
 
-**注**: この方法を使用すると、組織の[メトリクス数が増加][2]し、請求に影響する可能性があります。
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][2]を参照してください。
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/developers/metrics/
+[2]: /ja/account_management/billing/custom_metrics
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -162,6 +171,15 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<ポッドアノテーション>": "<�
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 ```
 
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドアノテーションをタグとしてメトリクスに追加します。この例では、タグ名の前に `<プレフィックス>_` が付いています。
+
+```shell
+DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
+```
+
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][1]を参照してください。
+
+[1]: /ja/account_management/billing/custom_metrics
 {{% /tab %}}
 {{% tab "Agent" %}}
 

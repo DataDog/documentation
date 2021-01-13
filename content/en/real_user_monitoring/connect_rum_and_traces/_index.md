@@ -17,10 +17,6 @@ The APM integration with Real User Monitoring allows you to link requests from y
 
 Use frontend data from RUM, and backend, infrastructure, and log information from trace ID injection to quickly pinpoint issues anywhere in your stack and fully understand what your users are experiencing.
 
-<div class="alert alert-warning">
-This feature is currently available for private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
-</div>
-
 ## Usage
 ### Prerequisites
 
@@ -43,7 +39,7 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     ...otherConfig,
-    allowedTracingOrigins: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/]
+    allowedTracingOrigins: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/]
 })
 ```
 
@@ -122,9 +118,9 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 | ------------------------------ | ------------------------------------------------------------------------------------------------------ |
 | `x-datadog-trace-id `            | Generated from the Real User Monitoring SDK. Allows Datadog to link the trace with the RUM resource.   |
 | `x-datadog-parent-id`            | Generated from the Real User Monitoring SDK. Allows Datadog to generate the first span from the trace. |
-| `x-datadog-origin: rum`          | To make sure the generated traces from Real User Monitoring don’t affect your APM Index Spans counts.              |
-| `x-datadog-sampling-priority: 1` | To make sure that the Agent keeps the trace.                                                           |
-| `x-datadog-sampling-priority: 1`       | To make sure that the Agent keeps the trace.                                                                      |  
+| `x-datadog-origin: rum`          | To make sure the generated traces from Real User Monitoring don’t affect your APM Index Spans counts.  |
+| `x-datadog-sampling-priority: 1` | To make sure that the Agent keeps the trace.                                                           |  
+| `x-datadog-sampled: 1`           | Generated from the Real User Monitoring SDK. Indicates this request is selected for sampling.          |
 
 ## How are APM quotas affected?
 

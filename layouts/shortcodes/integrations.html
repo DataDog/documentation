@@ -60,7 +60,7 @@
 
 <div class="input-group mt-4">
     <span class="input-group-prepend">
-        <span class="input-group-text">{{ partial "img.html" (dict "root" . "src" "icons/nav_search.png" "alt" "search" "width" "25") }}</span>
+        <span class="input-group-text">{{ partial "img.html" (dict "root" . "src" "icons/nav_search_2.svg" "alt" "search" "width" "20") }}</span>
     </span>
     <input class="form-control integration-search" data-ref="search" placeholder="Search for an integration..." />
 </div>
@@ -90,6 +90,11 @@
             {{ if $formatname }}
             <div id="mixid_{{$i}}" class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.Params.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
                 <div id="{{ $v.Params.name | default ($urlname | lower) }}" class="card">
+                    {{ if in $v.Params.categories "marketplace" }}
+                        <div class="card-banner">
+                            <p class="font-primary font-weight-bold text-uppercase">Marketplace</p>
+                        </div>
+                    {{ end }}
                     <a class="card-img" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
                         {{ $.Scratch.Set "url" ""}}
                         {{ if $indx }}
@@ -118,7 +123,7 @@
                     <div class="text-center title">{{ $formatname }}</div>
                     <div class="card-body">
                         <a class="card-button" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
-                            <h4 class="card-title pt-2">{{ $formatname }}</h4>
+                            <h4 class="card-title">{{ $formatname }}</h4>
                             <p class="card-text">{{ $v.Params.short_description }}</p>
                             <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>
                         </a>

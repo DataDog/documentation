@@ -25,7 +25,7 @@ Datadog アプリ内には、ログをメトリクスと相関させるいくつ
 1. **Content** 列の下にあるログをクリックします。これにより、ログに関する詳細情報を含むパネルが展開されます。
 2. パネル内の **Metrics** タブをクリックします。
 
-{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.png" alt="ファイルアクセス許可の設定"  >}}
+{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.png" alt="ログエクスプローラーメトリクス"  >}}
 
 ## ダッシュボード
 
@@ -40,7 +40,7 @@ Datadog アプリ内には、ログをメトリクスと相関させるいくつ
 4. ウィジェットに**ログと相関させたいメトリクス**が含まれている場合
     1. **View related logs** を選択します。
 
-{{< img src="logs/guide/correlate-logs-with-metrics/dashboards.gif" alt="ファイルアクセス許可の設定"  >}}
+{{< img src="logs/guide/correlate-logs-with-metrics/dashboards.gif" alt="ダッシュボードのメトリクスとログを関連付ける"  >}}
 
 ## メトリクスエクスプローラー
 
@@ -50,7 +50,7 @@ Datadog アプリ内には、ログをメトリクスと相関させるいくつ
 2. グラフ内の任意のポイントをクリックして、グラフメニューに入力します。
 3. **View related logs** を選択します。
 
-{{< img src="logs/guide/correlate-logs-with-metrics/metrics-explorer.png" alt="ファイルアクセス許可の設定"  >}}
+{{< img src="logs/guide/correlate-logs-with-metrics/metrics-explorer.png" alt="メトリクスエクスプローラー - 関連ログを表示する"  >}}
 
 
 ## その他の参考資料

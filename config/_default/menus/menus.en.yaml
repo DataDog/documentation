@@ -59,7 +59,7 @@ main_left:
     parent: product
   - identifier: rum
     name: Real User Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''rum icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''rum icon''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
@@ -204,6 +204,11 @@ main_left:
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
     weight: -440
+  - name: On-Premises Monitoring
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
+    weight: -439
 main_right:
   - identifier: about
     name: About
@@ -989,23 +994,19 @@ main:
     identifier: metrics_top_level
     pre: nav_metrics
     weight: 110000
-  - name: Introduction
-    url: metrics/introduction/
-    parent: metrics_top_level
-    weight: 901
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
-    weight: 902
+    weight: 901
   - name: Summary
     url: metrics/summary/
     parent: metrics_top_level
-    weight: 903
+    weight: 902
   - name: Distributions
     url: metrics/distributions/
     parent: metrics_top_level
     identifier: metrics_distributions
-    weight: 904
+    weight: 903
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1388,51 +1389,56 @@ main:
     parent: trace_retention_and_ingestion
     identifier: trace_retention_and_ingestion_usage_metrics
     weight: 501
+  - name: Generate Metrics from Spans
+    url: tracing/generate_metrics/
+    parent: tracing
+    identifier: generate_metrics
+    weight: 6
   - name: Deployment Tracking
     url: tracing/deployment_tracking/
     parent: tracing
     identifier: deployment_tracking
-    weight: 6
+    weight: 7
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
     identifier: tracing_connect_logs_and_traces
-    weight: 7
+    weight: 8
   - name: Java
     url: tracing/connect_logs_and_traces/java
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_java
-    weight: 701
+    weight: 801
   - name: Python
     url: tracing/connect_logs_and_traces/python
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_python
-    weight: 702
+    weight: 802
   - name: Go
     url: tracing/connect_logs_and_traces/go
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_go
-    weight: 703
+    weight: 803
   - name: Ruby
     url: tracing/connect_logs_and_traces/ruby
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_ruby
-    weight: 704
+    weight: 804
   - name: PHP
     url: tracing/connect_logs_and_traces/php
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_php
-    weight: 705
+    weight: 805
   - name: NodeJS
     url: tracing/connect_logs_and_traces/nodejs
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_nodejs
-    weight: 706
+    weight: 806
   - name: .NET
     url: tracing/connect_logs_and_traces/dotnet
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
-    weight: 707
+    weight: 807
   - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
@@ -1669,20 +1675,20 @@ main:
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 603
+  - name: Log Transactions
+    url: logs/explorer/transactions/
+    parent: log_explorer
+    weight: 604
   - name: Log Analytics
     url: logs/explorer/analytics/
     parent: log_explorer
-    weight: 604
+    weight: 605
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 605
+    weight: 606
   - name: Facets
     url: logs/explorer/facets/
-    parent: log_explorer
-    weight: 606
-  - name: Transactions
-    url: logs/explorer/transactions/
     parent: log_explorer
     weight: 607
   - name: Search Syntax
@@ -1835,7 +1841,7 @@ main:
     weight: 11
   - name: Real User Monitoring
     url: real_user_monitoring/
-    pre: nav_rum
+    pre: nav_rum_2
     identifier: rum
     weight: 150000
   - name: Browser Monitoring
@@ -1858,6 +1864,16 @@ main:
     parent: rum_browser
     identifier: page_performance
     weight: 103
+  - name: Monitoring Resource Performance
+    url: real_user_monitoring/browser/monitoring_resource_performance/
+    parent: rum_browser
+    identifier: resource_performance
+    weight: 104
+  - name: Collecting Browser Errors
+    url: real_user_monitoring/browser/collecting_browser_errors/
+    parent: rum_browser
+    identifier: collect_errors
+    weight: 105
   - name: Android Monitoring
     url: real_user_monitoring/android/
     parent: rum
@@ -1963,36 +1979,41 @@ main:
     parent: npm
     identifier: dns_monitoring
     weight: 4
+  - name: Guides
+    url: network_performance_monitoring/guide/
+    identifier: npm_guides
+    parent: npm
+    weight: 5
   - name: Devices
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 500
+    weight: 600
   - name: Setup
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 501
+    weight: 601
   - name: Profiles
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 502
+    weight: 602
   - name: Data Collected
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 503
+    weight: 603
   - name: Troubleshooting
     url: network_performance_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 504
+    weight: 604
   - name: Guides
     url: network_performance_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 505
+    weight: 605
   - name: Developer Tools
     url: developers/
     pre: nav_developers
@@ -2418,6 +2439,34 @@ api_v1:
     parent: Dashboards
     url: '#create-a-new-dashboard'
     generated: true
+  - name: Create a shared dashboard
+    parent: Dashboards
+    url: '#create-a-shared-dashboard'
+    generated: true
+  - name: Revoke a shared dashboard URL
+    parent: Dashboards
+    url: '#revoke-a-shared-dashboard-url'
+    generated: true
+  - name: Get a shared dashboard
+    parent: Dashboards
+    url: '#get-a-shared-dashboard'
+    generated: true
+  - name: Update a shared dashboard
+    parent: Dashboards
+    url: '#update-a-shared-dashboard'
+    generated: true
+  - name: Revoke shared dashboard invitations
+    parent: Dashboards
+    url: '#revoke-shared-dashboard-invitations'
+    generated: true
+  - name: Get all invitations for a shared dashboard
+    parent: Dashboards
+    url: '#get-all-invitations-for-a-shared-dashboard'
+    generated: true
+  - name: Send shared dashboard invitation email
+    parent: Dashboards
+    url: '#send-shared-dashboard-invitation-email'
+    generated: true
   - name: Delete a dashboard
     parent: Dashboards
     url: '#delete-a-dashboard'
@@ -2641,6 +2690,10 @@ api_v1:
   - name: Update an index
     parent: Logs Indexes
     url: '#update-an-index'
+    generated: true
+  - name: Logs Metrics
+    url: /api/v1/logs-metrics/
+    identifier: Logs Metrics
     generated: true
   - name: Logs Pipelines
     url: /api/v1/logs-pipelines/
@@ -3384,6 +3437,26 @@ api_v2:
     url: /api/v2/key-management/
     identifier: Key Management
     generated: true
+  - name: Get all API keys
+    parent: Key Management
+    url: '#get-all-api-keys'
+    generated: true
+  - name: Create an API key
+    parent: Key Management
+    url: '#create-an-api-key'
+    generated: true
+  - name: Delete an API key
+    parent: Key Management
+    url: '#delete-an-api-key'
+    generated: true
+  - name: Get API key
+    parent: Key Management
+    url: '#get-api-key'
+    generated: true
+  - name: Edit an API key
+    parent: Key Management
+    url: '#edit-an-api-key'
+    generated: true
   - name: Get all application keys
     parent: Key Management
     url: '#get-all-application-keys'
@@ -3419,6 +3492,26 @@ api_v2:
   - name: Key Management
     url: /api/v2/key-management/
     identifier: Key Management
+    generated: true
+  - name: Get all API keys
+    parent: Key Management
+    url: '#get-all-api-keys'
+    generated: true
+  - name: Create an API key
+    parent: Key Management
+    url: '#create-an-api-key'
+    generated: true
+  - name: Delete an API key
+    parent: Key Management
+    url: '#delete-an-api-key'
+    generated: true
+  - name: Get API key
+    parent: Key Management
+    url: '#get-api-key'
+    generated: true
+  - name: Edit an API key
+    parent: Key Management
+    url: '#edit-an-api-key'
     generated: true
   - name: Get all application keys
     parent: Key Management
@@ -3515,6 +3608,30 @@ api_v2:
   - name: Logs Indexes
     url: /api/v2/logs-indexes/
     identifier: Logs Indexes
+    generated: true
+  - name: Logs Metrics
+    url: /api/v2/logs-metrics/
+    identifier: Logs Metrics
+    generated: true
+  - name: Get all log-based metrics
+    parent: Logs Metrics
+    url: '#get-all-log-based-metrics'
+    generated: true
+  - name: Create a log-based metric
+    parent: Logs Metrics
+    url: '#create-a-log-based-metric'
+    generated: true
+  - name: Delete a log-based metric
+    parent: Logs Metrics
+    url: '#delete-a-log-based-metric'
+    generated: true
+  - name: Get a log-based metric
+    parent: Logs Metrics
+    url: '#get-a-log-based-metric'
+    generated: true
+  - name: Update a log-based metric
+    parent: Logs Metrics
+    url: '#update-a-log-based-metric'
     generated: true
   - name: Logs Pipelines
     url: /api/v2/logs-pipelines/

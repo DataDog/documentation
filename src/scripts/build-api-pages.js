@@ -596,6 +596,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
 const typeColumn = (key, value, readOnlyMarkup) => {
   const validKeys = ['type', 'format'];
   let typeVal = '';
+  const oneOfLabel = (typeof value === 'object' && "oneOf" in value) ? "&nbsp;&lt;oneOf&gt;" : "";
   if(validKeys.includes(key) && (typeof value !== 'object')) {
     typeVal = value;
   } else if(value.enum) {
@@ -607,7 +608,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
     return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-2 column"><p>${typeVal}${readOnlyMarkup}</p></div>`.trim();
+    return `<div class="col-2 column"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim();
   }
 };
 
@@ -688,6 +689,14 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             childData = {"&lt;any-key&gt;": value.additionalProperties};
             newParentKey = "additionalProperties";
           }
+        } else if (typeof value === 'object' && "oneOf" in value) {
+          if(value.oneOf instanceof Array && value.oneOf.length < 20) {
+            childData = value.oneOf
+              .map((obj, indx) => {
+                return {[`Option ${indx + 1}`]: value.oneOf[indx]}
+              })
+              .reduce((obj, item) => ({...obj, ...item}), {});
+          }
         }
         // for widgets
         /*
@@ -714,7 +723,6 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
         const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
         const readOnlyField = (isReadOnly) ? '' : '';
-
 
         // build html
         html += `

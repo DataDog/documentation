@@ -5,7 +5,6 @@ description: Ruby のオープン標準
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
-further_reading: null
 ---
 ## OpenTracing
 
@@ -163,10 +162,6 @@ end
 ### OpenTelemetry リンク
 
 - OpenTelemetry Ruby Datadog Exporter の使用法については、[rubygems][7] または [github][8] を参照してください。
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/setup/ruby/#quickstart-for-opentracing
 [2]: /ja/tracing/setup/ruby/#tracer-settings

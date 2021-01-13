@@ -163,7 +163,7 @@ datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 #### CDN 非同期
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 })
 ```
@@ -262,10 +262,10 @@ Datadog ブラウザログ SDK にはデフォルトのロガーが含まれて�
 
 Datadog ブラウザログ SDK を初期化したら、API `createLogger` を使用して新しいロガーを定義します。
 
-```text
+```typescript
 createLogger (name: string, conf?: {
-    level?: 'debug' | 'info' | 'warn' | 'error'
-    handler?: 'http' | 'console' | 'silent'
+    level?: 'debug' | 'info' | 'warn' | 'error',
+    handler?: 'http' | 'console' | 'silent',
     context?: Context
 })
 ```
@@ -276,8 +276,8 @@ createLogger (name: string, conf?: {
 
 ロガーを作成すると、API を使い JavaScript コードのどこからでもロガーにアクセスすることができます。
 
-```javascript
-getLogger (name: string)
+```typescript
+getLogger(name: string)
 ```
 
 ##### NPM
@@ -304,7 +304,7 @@ signupLogger.info('Test sign up completed')
 たとえば、他のロガーと共に定義された `signupLogger` があります。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
 })
 ```
@@ -312,7 +312,7 @@ DD_LOGS.onReady(function() {
 これで、次のように、このロガーをコードの別の場所で使用できます。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   const signupLogger = DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 })
@@ -358,7 +358,7 @@ NPM の場合は以下を使用します。
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.setLoggerGlobalContext("{'env': 'staging'}")
+datadogLogs.setLoggerGlobalContext({ env: 'staging' })
 
 datadogLogs.addLoggerGlobalContext('referrer', document.referrer)
 
@@ -370,16 +370,16 @@ const context = datadogLogs.getLoggerGlobalContext() // => {env: 'staging', refe
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
 })
 
-DD_LOGS.onReady(function() {
-  window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+DD_LOGS.onReady(function () {
+  DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
 })
 
-DD_LOGS.onReady(function() {
-  var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+DD_LOGS.onReady(function () {
+  var context = DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
 })
 ```
 
@@ -423,11 +423,11 @@ datadogLogs.addContext('referrer', document.referrer)
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.setContext("{'env': 'staging'}")
 })
 
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.addContext('referrer', document.referrer)
 })
 ```
@@ -471,7 +471,7 @@ datadogLogs.logger.setLevel('<LEVEL>')
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.logger.setLevel('<LEVEL>')
 })
 ```
@@ -512,7 +512,7 @@ datadogLogs.logger.setHandler('<HANDLER>')
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.logger.setHandler('<HANDLER>')
 })
 ```
