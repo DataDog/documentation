@@ -5,20 +5,12 @@
 <h1>{{ $translate_tag.name | default $tag.name }}</h1>
 <div class="row">
     <div class="col-12 col-lg-9">
-        <!-- If endpoint is deprecated -->
-        {{ if eq (index $tag "x-deprecated") true}}
-            <div class="alert alert-danger">
-                {{ $translate_tag.description | default $tag.description | markdownify}}
-                {{ $tag.externalDocs.description }} <a href="{{ $tag.externalDocs.url }}">{{ $tag.externalDocs.url }}</a>
-            </div>
+        {{ $markdown := $translate_tag.description | default $tag.description | markdownify }}
+        <!-- need this because hugo sometimes duplicates <p> when using markdownify -->
+        {{ if not ( strings.Contains $markdown "<p>" ) }}
+            <p>{{ $markdown }}</p>
         {{ else }}
-            {{ $markdown := $translate_tag.description | default $tag.description | markdownify }}
-            <!-- need this because hugo sometimes duplicates <p> when using markdownify -->
-            {{ if not ( strings.Contains $markdown "<p>" ) }}
-                <p>{{ $markdown }}</p>
-            {{ else }}
-                {{ $markdown }}
-            {{ end }}
+            {{ $markdown }}
         {{ end }}
     </div>
 </div>
