@@ -24,7 +24,7 @@ In the [SNMP conf.yaml][2], you can specify `metric_tags` from an OID. To create
 
 #### OID
 
-The example below creates two tags using Regex matching on the OID's value. So, if the OID's value is `41ba948911b9`, the tags `host_prefix:41` and `host:ba948911b9` are added to the corresponding metrics.
+The example below creates two tags using regex matching on the OID's value. So, if the OID's value is `41ba948911b9`, the tags `host_prefix:41` and `host:ba948911b9` are added to the corresponding metrics.
 
 ```yaml
     metric_tags:
@@ -38,7 +38,7 @@ The example below creates two tags using Regex matching on the OID's value. So, 
            host: \2
 ```
 
-The example below creates tags using Regex for a table:
+The example below creates tags using regex for a table:
 
 ```yaml
 metrics:
