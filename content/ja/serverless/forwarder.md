@@ -209,7 +209,6 @@ CloudFormation Stack をデフォルトのオプションでデプロイする�
     "lambda:GetLayerVersion",
     "lambda:InvokeFunction",
     "lambda:PutFunctionConcurrency",
-    "lambda:AddPermission",
     "logs:CreateLogGroup",
     "logs:DescribeLogGroups",
     "logs:PutRetentionPolicy"
