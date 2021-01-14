@@ -25,8 +25,8 @@ To start using Datadog APM with your serverless application, you need to first c
 | [Datadog APM with dd-trace][1]          | [Datadog APM with AWS X-Ray][2]           |
 |---------------------------------|-------------------------------------------------------------------------|
 | Uses Datadog APM's integration libraries for end-to-end tracing.  | Pulls traces from AWS X-Ray. |
-| Visualize your traces in Datadog in real-time. | Trace data available in Datadog after 2-5 minutes. |
-| Tail-based sampling and fully customizable tag-based retention filters. | Sampling can be modified from the AWS X-Ray console. |
+| Visualize your traces in Datadog in real-time. | Trace data available in Datadog after a few minutes. |
+| Tail-based sampling and fully customizable tag-based retention filters. | Sampling rate cannot be configured. |
 | Support for Python, Node.js, Ruby, Go, Java. |  Support for all Lambda runtimes. |
 
 ### Runtime Recommendations
@@ -39,8 +39,8 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
 - Automatic correlation of Lambda logs and traces with trace ID and tag injection.
 - Installation without any code changes using Serverless Framework, AWS SAM and AWS CDK integrations.
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
-- Tracing synchronous Lambda invokes with the AWS SDK.
-- Tracing asynchronous Lambda invocations through AWS SQS.
+- Tracing synchronous Lambda invokes with the AWS SDK (coming soon for Node.js).
+- Tracing asynchronous Lambda invocations through AWS SQS (coming soon for Node.js).
 - Tracing dozens of additional out-of-the-box [Python][7] and [Node.js][11] libraries.
 
 For Python and Node.js serverless applications, we recommend you [install Datadog's tracing libraries][8]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, we recommend you augment AWS X-Ray traces with Datadog APM by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described [here][10].
@@ -75,7 +75,7 @@ You can trace your serverless functions in Datadog with [Datadog's tracing libra
 
 The Datadog Lambda Library for Java supports manual correlation of Lambda logs and AWS X-Ray traces with trace ID and tag injection. Datadog's tracing library for Java is currently in [beta][15]. We recommend you configure tracing for your Java serverless applications by [installing our AWS X-Ray integration][12].
 
-*Have feedback on the Datadog's tracing libraries for Java Lambda functions? Make sure to check out discussions going on in the <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> channel in the <a href="https://chat.datadoghq.com/">Datadog Slack community</a>.*
+*Have feedback on the Datadog's tracing libraries for Java Lambda functions? Make sure to check out discussions going on in the [#serverless][18] channel in the [Datadog Slack community][19].*
 
 #### .NET
 
@@ -122,3 +122,5 @@ To enable Datadog APM without enabling logging for your functions, ensure the `D
 [15]: /serverless/datadog_lambda_library/java#distributed-tracing
 [16]: /serverless/azure_app_services
 [17]: /tracing/setup_overview/
+[18]: https://datadoghq.slack.com/archives/CFDPB83M4
+[19]: https://chat.datadoghq.com/
