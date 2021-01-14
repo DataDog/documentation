@@ -42,7 +42,7 @@ For more information, refer to the [Usage Metrics][1] documentation, or see the 
 
 ### Datadog Intelligent Retention Filter
 
-Intelligent Retention is always active for your services, and it will keep a proportion of traces to help you monitor the health of your applications.
+Intelligent Retention is always active for your services, and it will keep a proportion of traces to help you monitor the health of your applications. All [top level spans][12] are indexed for the traces kept by the intelligent retention filter.
 
 Intelligent Retention retains:
 
@@ -177,3 +177,4 @@ All existing App Analytics filters have been automatically transitioned to Reten
 [9]: /tracing/trace_search_and_analytics
 [10]: /tracing/legacy_app_analytics/
 [11]: https://app.datadoghq.com/apm/settings
+[12]: /tracing/visualization/#top-level-span
