@@ -6085,6 +6085,7 @@ components:
       - 2
       - 3
       example: 0
+      format: int32
       type: integer
       x-enum-varnames:
       - OK
@@ -7145,6 +7146,7 @@ components:
           description: The associated assertion property.
           type: string
         target:
+          additionalProperties: false
           description: Value used by the operator.
           type: object
         type:
@@ -7972,7 +7974,8 @@ components:
           type: object
         timeout:
           description: The time before declaring a step failed.
-          type: number
+          format: int64
+          type: integer
         type:
           $ref: '#/components/schemas/SyntheticsStepType'
       type: object
@@ -8448,7 +8451,8 @@ components:
             properties:
               id:
                 description: Unique identifier of the location.
-                type: number
+                format: int64
+                type: integer
               name:
                 description: Name of the location.
                 type: string
@@ -8463,7 +8467,8 @@ components:
                 $ref: '#/components/schemas/SyntheticsDeviceID'
               location:
                 description: The location ID of the test run.
-                type: number
+                format: int64
+                type: integer
               public_id:
                 description: The public ID of the Synthetics test.
                 type: string
