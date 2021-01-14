@@ -57,7 +57,7 @@ Choose your alert grouping:
 * **Simple alert** aggregates all reporting sources. You receive one alert when the aggregated value meets the set conditions.
 * **Multi alert** applies the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions.
 {{< /site-region >}}
-{{< site-region region="eu" >}}
+{{< site-region region="gov" >}}
 
 ### Define the search query
 
