@@ -44,6 +44,8 @@ The following **provisioning systems** are supported:
 - Chef 12.7+: See the [Datadog Chef recipe][6]
 - Ansible 2.6+: See the [Datadog Ansible role][7]
 
+**Istio** versions v1.6.4 and above are supported by [Datadog Agent v7.24.1+][1].
+
 ## Setup
 
 To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][8] based on your system setup.
