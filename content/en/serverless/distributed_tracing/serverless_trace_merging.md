@@ -9,7 +9,7 @@ further_reading:
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;" >}}
 
-## Use Cases
+## Use cases
 
 Serverless trace merging is required to see a single, connected trace when you configure both Datadog's tracing libraries (`dd-trace`) and AWS X-Ray tracing libraries in your application. If you aren't sure which tracing library to use, [read this page on choosing your tracing library][1].
 

@@ -31,7 +31,7 @@ To start using Datadog APM with your serverless application, you can choose betw
 | Tail-based sampling and fully customizable tag-based retention filters. | Sampling rate cannot be configured. |
 | Support for Python, Node.js, Ruby, Go, Java. |  Support for all Lambda runtimes. |
 
-### Runtime Recommendations
+### Runtime recommendations
 
 {{< partial name="serverless/serverless-apm-recommendations.html" >}}
 
@@ -81,13 +81,13 @@ The Datadog Lambda Library for Java supports manual correlation of Lambda logs a
 
 #### .NET
 
-We recommend you configure tracing for your .NET AWS Lambda serverless applications by [installing our AWS X-Ray integration][12].
+Datadog recommends you configure tracing for your .NET AWS Lambda serverless applications by [installing our AWS X-Ray integration][12].
 
 Learn more about tracing through .NET Azure serverless applications [here][16].
 
 *Looking to trace through .NET AWS Lambda serverless applications with Datadog tracing libraries? Open a feature request [here][9].*
 
-### Hybrid Environments
+### Hybrid environments
 
 If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces will automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services. 
 
