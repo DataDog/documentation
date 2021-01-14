@@ -22,6 +22,7 @@ Event monitors allow you to alert on events matching a search query.
 
 To create a [event monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Event*.
 
+{{< site-region region="us" >}}
 ### Select events to count
 
 As you fill in the parameters below, the list of events above the search fields is filtered.
@@ -37,6 +38,52 @@ Choose your alert grouping:
 
 * **Simple alert** aggregates all reporting sources. You receive one alert when the aggregated value meets the set conditions.
 * **Multi alert** applies the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions.
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+### Select events to count
+
+As you fill in the parameters below, the list of events above the search fields is filtered.
+
+* Match events containing `<TEXT>`
+* with status `error`, `warning`, `info`, or `success`
+* and priority `all`, `normal`, or `low`
+* from `<SOURCE>`
+* over `<TAGS>`
+* exclude `<TAGS>`
+
+Choose your alert grouping:
+
+* **Simple alert** aggregates all reporting sources. You receive one alert when the aggregated value meets the set conditions.
+* **Multi alert** applies the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions.
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+### Define the search query
+
+As you fill in the parameters below, the list of events above the search fields is filtered.
+
+* Match events containing `<TEXT>`
+* with status `error`, `warning`, `info`, or `success`
+* and priority `all`, `normal`, or `low`
+* from `<SOURCE>`
+* over `<TAGS>`
+* exclude `<TAGS>`
+
+As you define the search query, the top graph updates.
+
+1. Construct a search query using the same logic as a [log explorer search][1].
+2. Choose to monitor over an event count, facet, or measure:
+    * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of events over a selected time frame, then compares it to the threshold conditions.
+    * **Monitor over a facet**: If a facet is selected, the monitor alerts over the unique value count of the facet.
+    * **Monitor over measure**: If a measure is selected, the monitor alerts over the numerical value of the event facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+3. Configure the alerting grouping strategy (optional):
+    * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
+    * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 100 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
+
+[1]: /logs/explorer
+{{< /site-region >}}
+
 
 ### Set alert conditions
 
