@@ -32,7 +32,7 @@ Supported **platforms** include:
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][3]. The [DNS Resolution][4] feature is not supported on CentOS/RHEL 7.6.
 
-**Istio** versions v1.6.4 and above are supported by [Datadog Agent v7.24.1+][1].
+**Istio** v1.6.4+ is supported by [Datadog Agent v7.24.1+][1].
 
 Network Performance Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
 1) Cilium version 1.6 and above, and
