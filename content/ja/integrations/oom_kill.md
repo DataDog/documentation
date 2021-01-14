@@ -62,7 +62,6 @@ yum install -y kernel-devel-$(uname -r)
 
     ```yaml
     system_probe_config:
-        enabled: true
         enable_oom_kill: true
     ```
 
