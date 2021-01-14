@@ -56,7 +56,7 @@
 {{ $translate_tag := (index $translate_tags $tagSlug) | default (dict) }}
 
 <!-- lets show the intro text, shall we use v1 or v2 text. Lets try v1 for now.. -->
-{{ partial "api/intro.html" (dict "tags" $dot.Site.Data.api.v2.full_spec_deref.tags "title" $dot.Params.title "translate_tag" $translate_tag) }}
+{{ partial "api/intro.html" (dict "tags" $dot.Site.Data.api.v1.full_spec_deref.tags "title" $dot.Params.title "translate_tag" $translate_tag) }}
 
 <!-- Loop over the menu to determine what to pull in -->
 {{ range (where .Sites.First.Menus.api ".Name" "==" .Params.title) }}
@@ -113,6 +113,13 @@
         <div class="row endpoint">
             <div class="col-12 col-lg-9">
                 <div class="endpoint-content">
+
+                    {{ if eq (index $tag "x-deprecated") true}}
+                      <div class="alert alert-danger">
+                          {{ $translate_tag.description | default $tag.description | markdownify}}
+                          {{ $tag.externalDocs.description }} <a href="{{ $tag.externalDocs.url }}">{{ $tag.externalDocs.url }}</a>
+                      </div>
+                    {{ end }}
 
                     <!-- Unstable Notification on this endpoint -->
                     {{ with index $endpoint.action "x-unstable"}}
