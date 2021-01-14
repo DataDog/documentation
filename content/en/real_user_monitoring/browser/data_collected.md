@@ -31,7 +31,7 @@ By default, all data collected is kept at full granularity for 15 days. The Data
 - [Error][4]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
 - [User Action][5]: A User Action event is a custom event that can be generated for a given user action.
 
-There are metrics and attributes that are specific to a given event type. For example, the metric `view.loading_time` is associated with "view" RUM events and the attribute `resource.method` is associated with "resource" RUM events. There are [default attributes][9] such as the original page a user is on (`view.url`) and user information such as `device` and `geolocation`, that are present on all RUM events. 
+There are metrics and attributes that are specific to a given event type. For example, the metric `view.loading_time` is associated with "view" RUM events and the attribute `resource.method` is associated with "resource" RUM events. There are [default attributes][6] such as the original page a user is on (`view.url`) and user information such as `device` and `geolocation`, that are present on all RUM events. 
 
 {{< tabs >}}
 {{% tab "View" %}}
@@ -206,6 +206,20 @@ Real User Monitoring (RUM) SDKs detect user interactions performed during a user
 
 Once an interaction is detected, all new RUM events are attached to the ongoing action until it is considered finished. The action also benefits from its parent view attributes such as browser information, geolocation data, [global context][2].
 
+### Customize action naming
+The SDK determines the name of an action based on what is displayed on the screen. To personalize action names, or to make sure no sensivite or private data gets collected, you can add the `data-dd-action-name` attribute on selected elements (or any of their
+parents).
+
+```html
+<a class="btn btn-default" href="#" role="button" data-dd-action-name="Trial button">Try it out!</a>
+
+<div class="alert alert-danger" role="alert" data-dd-action-name="Dismiss alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  user@example.com is not a valid email address
+</div>
+```
+
 ### How is the action loading time calculated?
 Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
@@ -254,7 +268,7 @@ Each of these event types has the following attributes attached by default. So y
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Randomly generated ID for each page view.                                                                      |
-| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][6].|
+| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][7].|
 | `view.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed.               |
 | `view.url`                     | string | The view URL.                                                                                                  |
 | `view.url_hash`                     | string | The hash part of the URL.|
@@ -292,16 +306,16 @@ The following attributes are related to the geolocation of IP addresses:
 | Fullname                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `geo.country`         | string | Name of the country                                                                                                                  |
-| `geo.country_iso_code`     | string | [ISO Code][7] of the country (for example, `US` for the United States, `FR` for France).                                                  |
+| `geo.country_iso_code`     | string | [ISO Code][8] of the country (for example, `US` for the United States, `FR` for France).                                                  |
 | `geo.country_subdivision`     | string | Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France). |
-| `geo.country_subdivision_iso_code` | string | [ISO Code][7] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
+| `geo.country_subdivision_iso_code` | string | [ISO Code][8] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
 | `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).                                                                 |
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (example `Paris`, `New York`).                                                                                   |
 
 ## Extra Attribute
 
-In addition to default attributes, add [specific global context][8] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
+In addition to default attributes, add [specific global context][9] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
 
 ## Further Reading
 
@@ -313,7 +327,7 @@ In addition to default attributes, add [specific global context][8] to all event
 [3]: /real_user_monitoring/browser/data_collected/?tab=longtask
 [4]: /real_user_monitoring/browser/data_collected/?tab=error
 [5]: /real_user_monitoring/browser/data_collected/?tab=useraction
-[6]: /real_user_monitoring/data_collected/view#single-page-applications
-[7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
-[9]: /real_user_monitoring/browser/data_collected/?tab=view#default-attributes
+[6]: /real_user_monitoring/browser/data_collected/?tab=view#default-attributes
+[7]: /real_user_monitoring/data_collected/view#single-page-applications
+[8]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
