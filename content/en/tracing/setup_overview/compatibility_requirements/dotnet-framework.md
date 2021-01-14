@@ -42,6 +42,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+     | `ElasticsearchNet`   |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+   | `MongoDb`            |
 | PostgreSQL                      | `Npgsql` 4.0+                  | `AdoNet`             |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+       | `RabbitMQ`           |
 
 **Update:** Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required. Remove them from your application when you update the .NET Tracer.
 
