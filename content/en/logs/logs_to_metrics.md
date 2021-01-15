@@ -36,18 +36,18 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
 2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
 3. **Add dimensions to `group by`**: By default, metrics generated from logs will not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs can be used to create metric [Tags][8]. Log-based metrics are considered [custom metrics][9]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing. See the [Log Security][10] page for more information on using this feature for HIPAA-enabled customers.
-4. **Add percentile aggregations (US customers only)**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered customer metrics, and billed accordingly.
-5. **Name your metric**: Log-based metric names must follow the [naming metric convention][11].
+4. **Add percentile aggregations (US customers only)**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][11].
+5. **Name your metric**: Log-based metric names must follow the [naming metric convention][12].
 
 **Note**: Data points for Log-based metrics are generated at ten second intervals.
 
 ### Update a log-based metric
 
-After a metric is created, the folliwing fields can be updated:
+After a metric is created, the following fields can be updated:
 
-- Stream filter query: to change the set of matching logs to be aggregated into metrics
-- Aggregation groups: to update the tags or manage the cardinality of the generated metrics
-- Percentile selection: Check or uncheck the ‘Calculate percentiles’ box to remove or generate percentile metrics.
+- Stream filter query: To change the set of matching logs to be aggregated into metrics
+- Aggregation groups: To update the tags or manage the cardinality of the generated metrics
+- Percentile selection: Check or uncheck the ‘Calculate percentiles’ box to remove or generate percentile metrics
 
 To change the metric type or name, a new metric must be created.
 
@@ -88,4 +88,5 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [8]: /getting_started/tagging/
 [9]: /developers/metrics/custom_metrics/
 [10]: /security/logs/#hipaa-enabled-customers
-[11]: /developers/metrics/#naming-metrics
+[11]: /account_management/billing/custom_metrics/?tab=countrategauge
+[12]: /developers/metrics/#naming-metrics
