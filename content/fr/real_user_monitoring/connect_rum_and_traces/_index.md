@@ -118,7 +118,7 @@ Datadog utilise un protocole de tracing distribué et configure les en-têtes HT
 | `x-datadog-trace-id `            | Généré à partir du SDK RUM. Permet à Datadog d'associer la trace à la ressource RUM.   |
 | `x-datadog-parent-id`            | Généré à partir du SDK RUM. Permet à Datadog de générer la première span depuis la trace. |
 | `x-datadog-origin: rum`          | Permet de s'assurer que les traces générées à partir de la fonctionnalité RUM ne rentrent pas en compte dans le calcul de vos spans indexées de l'APM.  |
-| `x-datadog-sampling-priority: 1` | Permet de s'assurer que l'Agent conserve la trace.                                                           |
+| `x-datadog-sampling-priority: 1` | Permet de s'assurer que l'Agent conserve la trace.                                                           |  
 | `x-datadog-sampled: 1`           | Généré à partir du SDK RUM. Indique que cette requête est sélectionnée pour l'échantillonnage.          |
 
 ## Cela a-t-il une incidence sur les quotas de l'APM ?
