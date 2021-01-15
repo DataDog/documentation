@@ -408,6 +408,7 @@ The following table below lists configuration variables that are available for b
 | `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`        | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
 | `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
 | `DD_TRACE_HEADER_TAGS`                              | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Available for version 1.18.3+  |
+| `DD_TRACE_SERVICE_MAPPING`                          | Accepts a map of service name keys to rename, and the service name to use instead. (e.g. : `mysql:main-mysql-db, mongodb:offsite-mongodb-service`).    |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
 
