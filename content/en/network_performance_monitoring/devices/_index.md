@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-meraki/"
   tag: "Blog"
   text: "Monitor Cisco Meraki with Datadog"
+- link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
+  tag: "Blog"
+  text: "Monitor datacenters and network devices with Datadog"
 ---
 
 ## Overview
