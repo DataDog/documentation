@@ -32,7 +32,7 @@ There is also a [list of available Datadog Log collection endpoints](#datadog-lo
 
 **Note**: When sending logs in a JSON format to Datadog, there is a set of reserved attributes that have a specific meaning within Datadog. See the [Reserved Attributes section](#reserved-attributes) to learn more.
 
-## Configuration
+## Setup
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -51,6 +51,8 @@ Follow the [Datadog Agent installation instructions][1] to start forwarding logs
 After you have [enabled log collection][1], configure your application language to generate logs:
 
 {{< partial name="logs/logs-languages.html" >}}
+
+**Note**: JSON-formatted logging helps handle multi-line application logs, and is automatically parsed by Datadog. If you have control over the log format you send to Datadog, it is recommended to format logs as JSON to avoid the need for custom parsing rules.
 
 [1]: /agent/logs/
 
@@ -98,9 +100,9 @@ Consult the [current list of available supported integrations][4].
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: JSON-formatted logging helps handle multi-line application logs, and is automatically parsed by Datadog. If you have control over the log format you send to Datadog, it is recommended to format logs as JSON to avoid the need for custom parsing rules.
+## Additional configuration options
 
-## Datadog Logs Endpoints
+### Logging endpoints
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections. Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][6].
 
@@ -148,7 +150,7 @@ Endpoints that can be used to send logs to Datadog EU region:
 
 {{< /site-region >}}
 
-### Custom Log Forwarding
+### Custom log forwarding
 
 Any custom process or logging library able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs.
 
@@ -238,7 +240,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 {{% /tab %}}
 {{< /tabs >}}
 
-### Best practices for ingesting log events
+**Notes**:
 
 * For optimal use, Datadog recommends a log event should not exceed 25K bytes in size. When using the Datadog Agent, log events greater than 256KB are split into several entries. When using the Datadog TCP or HTTP API directly, log events up to 1MB are accepted.
 * A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
@@ -247,9 +249,9 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
 
-## Attributes and tags
+### Attributes and tags
 
-Attributes prescribe [logs facets][7], which are used for filtering and searching in Log Explorer. There are few reserved attributes that are automatically ingested with logs, as noted below, and some attributes that require additional configuration if using other parts of the Datadog app such as APM. To ensure you have completed configuration, review the reserved attributes list below after configuring log collection:
+Attributes prescribe [logs facets][7], which are used for filtering and searching in Log Explorer. There are few reserved attributes that are automatically ingested with logs, as noted below, and some attributes that require additional configuration if using other parts of the Datadog app such as APM. Review the reserved attributes list below after configuring log collection:
 
 | Attribute | Description                                                                                                                                                                                                                                |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -259,7 +261,7 @@ Attributes prescribe [logs facets][7], which are used for filtering and searchin
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                                |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in Live Tail, where it is indexed for full text search.                                    |
 
-### Stack traces
+#### Attributes for stack traces
 
 When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself.
 
@@ -279,11 +281,13 @@ To enable these functionalities use the following attribute names:
 
 For more information, see the complete [source code attributes documentation][9].
 
-### Unified service tagging
+#### Unified service tagging
 
 If you're also collecting traces or metrics, it is recommended to configure unified service tagging. This configuration ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. Refer to the dedicated [unified service tagging][10] documentation for more information.
 
-Once logs are collected and ingested, they are available in **Log Explorer**. Within this page, you can search, enrich, and view alert on your logs. Refer to the [Log Explorer][11] documentation for more information.
+## Next steps
+
+Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alert on your logs. See the [Log Explorer][11] documentation to begin analyzing your log data, or check out the additional log management documentation below.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
 
