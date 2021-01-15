@@ -37,7 +37,7 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
 3. **Add dimensions to `group by`**: By default, metrics generated from logs will not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs can be used to create metric [Tags][8]. Log-based metrics are considered [custom metrics][9]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing. See the [Log Security][10] page for more information on using this feature for HIPAA-enabled customers.
 4. **Add percentile aggregations(optional)**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered customer metrics, and billed accordingly.
-4. **Name your metric**: Log-based metric names must follow the [naming metric convention][11].
+5. **Name your metric**: Log-based metric names must follow the [naming metric convention][11].
 
 **Note**: Data points for Log-based metrics are generated at ten second intervals.
 
