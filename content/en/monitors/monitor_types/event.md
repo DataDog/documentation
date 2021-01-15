@@ -61,15 +61,6 @@ Choose your alert grouping:
 
 ### Define the search query
 
-As you fill in the parameters below, the list of events above the search fields is filtered.
-
-* Match events containing `<TEXT>`
-* with status `error`, `warning`, `info`, or `success`
-* and priority `all`, `normal`, or `low`
-* from `<SOURCE>`
-* over `<TAGS>`
-* exclude `<TAGS>`
-
 As you define the search query, the top graph updates.
 
 1. Construct a search query using the same logic as a [log explorer search][1].
