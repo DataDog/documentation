@@ -6085,6 +6085,7 @@ components:
       - 2
       - 3
       example: 0
+      format: int32
       type: integer
       x-enum-varnames:
       - OK
@@ -7145,6 +7146,7 @@ components:
           description: The associated assertion property.
           type: string
         target:
+          additionalProperties: false
           description: Value used by the operator.
           type: object
         type:
@@ -7972,7 +7974,8 @@ components:
           type: object
         timeout:
           description: The time before declaring a step failed.
-          type: number
+          format: int64
+          type: integer
         type:
           $ref: '#/components/schemas/SyntheticsStepType'
       type: object
@@ -8448,7 +8451,8 @@ components:
             properties:
               id:
                 description: Unique identifier of the location.
-                type: number
+                format: int64
+                type: integer
               name:
                 description: Name of the location.
                 type: string
@@ -8463,7 +8467,8 @@ components:
                 $ref: '#/components/schemas/SyntheticsDeviceID'
               location:
                 description: The location ID of the test run.
-                type: number
+                format: int64
+                type: integer
               public_id:
                 description: The public ID of the Synthetics test.
                 type: string
@@ -9475,6 +9480,26 @@ components:
           description: Contains the number of log bytes ingested.
           format: int64
           type: integer
+        logs_live_indexed_count:
+          description: Contains the number of live log events indexed (data available
+            as of December 1, 2020).
+          format: int64
+          type: integer
+        logs_live_ingested_bytes:
+          description: Contains the number of live log bytes ingested (data available
+            as of December 1, 2020).
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_count:
+          description: Contains the number of rehydrated log events indexed (data
+            available as of December 1, 2020).
+          format: int64
+          type: integer
+        logs_rehydrated_ingested_bytes:
+          description: Contains the number of rehydrated log bytes ingested (data
+            available as of December 1, 2020).
+          format: int64
+          type: integer
       type: object
     UsageLogsResponse:
       description: Response containing the number of logs for each hour.
@@ -10147,6 +10172,18 @@ components:
             organizations for which all usages were calculated.
           format: date-time
           type: string
+        live_indexed_events_agg_sum:
+          description: Shows the sum of all live logs indexed over all hours in the
+            current months for all organizations (data available as of December 1,
+            2020).
+          format: int64
+          type: integer
+        live_ingested_bytes_agg_sum:
+          description: Shows the sum of all live logs bytes ingested over all hours
+            in the current months for all organizations (data available as of December
+            1, 2020).
+          format: int64
+          type: integer
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current months for all organizations.
@@ -10180,6 +10217,18 @@ components:
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        rehydrated_indexed_events_agg_sum:
+          description: Shows the sum of all rehydrated logs indexed over all hours
+            in the current months for all organizations (data available as of December
+            1, 2020).
+          format: int64
+          type: integer
+        rehydrated_ingested_bytes_agg_sum:
+          description: Shows the sum of all rehydrated logs bytes ingested over all
+            hours in the current months for all organizations (data available as of
+            December 1, 2020).
           format: int64
           type: integer
         rum_session_count_agg_sum:

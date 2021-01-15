@@ -28,36 +28,6 @@ If the evaluation window includes many "null" buckets (**10/NaN + 10/Nan + ... +
 
 ## Workarounds for sparse and misaligned metrics
 
-### `.rollup()`
-
-You can apply a `.rollup()` function to ensure all time buckets being evaluated have valid values. This function can be similarly useful for any metric with gaps, regardless of whether the query involves arithmetic.
-
-**Original**: `sum:my_metric.is.sparse{*}`
-
-```text
-| Timestamp           | Value |
-|:--------------------|:------|
-| 2019-03-29 11:00:00 | 1     |
-| 2019-03-29 11:00:30 |       |
-| 2019-03-29 11:01:00 | 2     |
-| 2019-03-29 11:01:30 | 1     |
-| 2019-03-29 11:02:00 |       |
-```
-
-**Modified**: `sum:my_metric.is.sparse{*}.rollup(sum,60)`
-
-```text
-| Timestamp           | Value |
-|:--------------------|:------|
-| 2019-03-29 11:00:00 | 1     |
-| 2019-03-29 11:01:00 | 3     |
-| 2019-03-29 11:02:00 | 1*    |
-```
-
-The `rollup()` function creates time buckets based on time intervals you define, which can be useful for ignoring "gaps" in your data if you set a rollup interval greater than the length of the gaps in your metric. In this case, the new buckets are the sums of the values in a 60 second window.
-
-\*Notice that the value at timestamp `2019-03-29 11:02:00` for the modified query doesn't align with the value in the chart above. This is because the `.rollup()` function is aligned to UNIX time. In this case, you can assume there is a value of `1` at `2019-03-29 11:02:30`, which is in the rollup window, but not the monitor evaluation window. To avoid triggering your monitor based on an incomplete rollup interval containing only a small sample of data, add an **Evaluation Delay** to the monitor of at least the length of the rollup interval.
-
 ### `.fill()`
 
 You can apply a `.fill()` function to ensure all time buckets have valid values. For **gauge** metric types, the default interpolation is linear or `.fill(linear)` for 5 minutes. For **count** and **rate** type metrics, the default is `.fill(null)`, which disables interpolation. Datadog generally recommends against using interpolation for count/rate metrics in monitors.

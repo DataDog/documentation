@@ -92,6 +92,7 @@ proxy:
 * A hostname
   - e.g. `webserver1`
 
+**Note**: `NO_PROXY` must match endpoints exactly for agent HTTP(S) requests.  The accepted values above only apply to integrations.
 
 #### Environment variables
 

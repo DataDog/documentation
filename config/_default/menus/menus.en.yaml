@@ -825,7 +825,7 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 902
-  - name: Mobile
+  - name: Mobile Application
     url: mobile/
     identifier: mobile
     pre: nav_mobile
@@ -947,48 +947,56 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 5
+  - name: Trace Merging (Advanced)
+    url: serverless/distributed_tracing/serverless_trace_merging
+    parent: serverless_distributed_tracing
+    weight: 501
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
     weight: 6
+  - name: Insights
+    url: serverless/insights
+    parent: serverless
+    weight: 7
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless
-    weight: 7
+    weight: 8
   - name: Serverless Integrations
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: serverless
-    weight: 8
+    weight: 9
   - name: Datadog Serverless Plugin
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 801
+    weight: 901
   - name: Datadog Serverless Macro
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 802
+    weight: 902
   - name: Datadog Serverless CLI
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 803
+    weight: 903
   - name: Serverless Tagging
     url: serverless/serverless_tagging
     parent: serverless
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 10
+    weight: 11
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 11
+    weight: 12
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1724,30 +1732,35 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring
     weight: 1
+  - name: Getting Started
+    url: security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: Signals Explorer
+    url: security_monitoring/explorer
+    parent: security_monitoring
+    identifier: security_monitoring_explorer
+    weight: 102
+  - name: Threat Detection Rules
+    url: security_monitoring/detection_rules
+    parent: security_monitoring
+    identifier: security_monitoring_detection_rules
+    weight: 103
+  - name: Guides
+    url: security_monitoring/guide
+    parent: security_monitoring
+    identifier: security_monitoring_guides
+    weight: 104
   - name: Compliance Monitoring
     url: compliance_monitoring/
     parent: security_compliance_monitoring
     identifier: compliance_monitoring
     weight: 2
   - name: Default Rules
-    url: security_monitoring/default_rules/
+    url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
-    weight: 3
-  - name: Getting Started
-    url: security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
-    weight: 1
-  - name: Signals Explorer
-    url: security_monitoring/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_explorer
-    weight: 2
-  - name: Threat Detection Rules
-    url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
     weight: 3
   - name: Synthetic Monitoring
     url: synthetics/

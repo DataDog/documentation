@@ -39,6 +39,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
 | PostgreSQL                      | `Npgsql` 4.0+                                                           | `AdoNet`             |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                | `RabbitMQ`           |
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 

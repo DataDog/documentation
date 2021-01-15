@@ -209,6 +209,26 @@ main_left:
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
     weight: -439
+  - identifier: blog
+    name: ブログ
+    url: 'https://www.datadoghq.com/ja/blog/'
+    weight: -460
+  - name: モニター
+    url: 'https://www.datadoghq.com/ja/blog/'
+    weight: 100
+    parent: blog
+  - name: エンジニアリング
+    url: 'https://www.datadoghq.com/ja/blog/engineering/'
+    parent: blog
+    weight: 200
+  - name: 企業文化
+    url: 'https://www.datadoghq.com/ja/blog/pup-culture/'
+    parent: blog
+    weight: 300
+  - name: コミュニティ
+    url: 'https://www.datadoghq.com/ja/blog/community/'
+    parent: blog
+    weight: 400
 main_right:
   - identifier: about
     name: 会社情報
@@ -246,26 +266,6 @@ main_right:
     parent: about
     url: 'https://www.datadoghq.com/about/awards/'
     weight: -405
-  - identifier: blog
-    name: ブログ
-    url: 'https://www.datadoghq.com/ja/blog/'
-    weight: -480
-  - name: モニター
-    url: 'https://www.datadoghq.com/ja/blog/'
-    weight: 100
-    parent: blog
-  - name: エンジニアリング
-    url: 'https://www.datadoghq.com/ja/blog/engineering/'
-    parent: blog
-    weight: 200
-  - name: 企業文化
-    url: 'https://www.datadoghq.com/ja/blog/pup-culture/'
-    parent: blog
-    weight: 300
-  - name: コミュニティ
-    url: 'https://www.datadoghq.com/ja/blog/community/'
-    parent: blog
-    weight: 400
   - identifier: docs
     name: ドキュメント
     url: 'https://docs.datadoghq.com/ja/'

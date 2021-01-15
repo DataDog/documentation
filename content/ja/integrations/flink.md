@@ -60,6 +60,7 @@ Flink チェックは [Datadog Agent][4] パッケージに含まれています
     ```yaml
     metrics.reporter.dghttp.class: org.apache.flink.metrics.datadog.DatadogHttpReporter
     metrics.reporter.dghttp.apikey: <DATADOG_API_KEY>
+    metrics.reporter.dghttp.dataCenter: {{< region-param key="dd_datacenter" >}}
     ```
 
 2. `<FLINK_HOME>/conf/flink-conf.yaml` で、システムのスコープを再マッピングします。
