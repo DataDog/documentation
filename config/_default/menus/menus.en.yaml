@@ -1315,7 +1315,7 @@ main:
     identifier: tracing_open_standards_open_standards_dotnet
     weight: 108
   - name: Trace Serverless Functions
-    url: tracing/setup_overview/serverless_functions/
+    url: serverless/distributed_tracing
     parent: tracing_setup_overview
     identifier: tracing_serverless_functions
     weight: 104
