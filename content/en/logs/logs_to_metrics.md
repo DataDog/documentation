@@ -23,7 +23,7 @@ With log-based metrics, you can generate a count metric of logs that match a que
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric"  style="width:80%;">}}
 
-To generate a new log-based metric, go to the [Configuration page][3] of your Datadog account and select the _[Generate Metrics][4]_ tab, then the **New Metric+** button.
+To generate a new log-based metric, go to the [Configuration page][4] of your Datadog account and select the _[Generate Metrics][5]_ tab, then the **New Metric+** button.
 
 You can also create metrics from an Analytics search by selecting the "Generate new metric" option from the Export menu.
 
@@ -33,11 +33,11 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric"  style="width:80%;">}}
 
-1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][5]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
-2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][6], the value of the metric is the value of the log attribute.
-3. **Add dimensions to `group by`**: By default, metrics generated from logs will not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs can be used to create metric [Tags][7]. Log-based metrics are considered [custom metrics][8]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing. See the [Log Security][9] page for more information on using this feature for HIPAA-enabled customers.
+1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
+2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
+3. **Add dimensions to `group by`**: By default, metrics generated from logs will not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs can be used to create metric [Tags][8]. Log-based metrics are considered [custom metrics][9]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing. See the [Log Security][10] page for more information on using this feature for HIPAA-enabled customers.
 4. **Add percentile aggregations(optional)**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered customer metrics, and billed accordingly.
-4. **Name your metric**: Log-based metric names must follow the [naming metric convention][10].
+4. **Name your metric**: Log-based metric names must follow the [naming metric convention][11].
 
 **Note**: Data points for Log-based metrics are generated at ten second intervals.
 
