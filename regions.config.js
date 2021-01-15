@@ -3,7 +3,7 @@ export default {
     dd_datacenter: {
         us: 'US',
         eu: 'EU',
-        gov: 'GOV'
+        gov: 'US1-FED'
     },
     dd_site: {
         us: 'datadoghq.com',
@@ -18,16 +18,16 @@ export default {
     tcp_endpoint: {
         us: 'agent-intake.logs.datadoghq.com',
         eu: 'agent-intake.logs.datadoghq.eu',
-        gov: ''
+        gov: 'not supported'
     },
     tcp_endpoint_port: {
         us: '10514',
         eu: '443',
-        gov: ''
+        gov: 'not supported'
     },
     tcp_endpoint_port_ssl: {
         us: '10516',
         eu: '1883',
-        gov: ''
+        gov: 'not supported'
     }
 };

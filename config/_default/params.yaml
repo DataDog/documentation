@@ -83,6 +83,6 @@ allowedRegions:
   - name: EU
     value: eu
     weight: 20
-  - name: GOV
+  - name: US1-FED
     value: gov
     weight: 30
