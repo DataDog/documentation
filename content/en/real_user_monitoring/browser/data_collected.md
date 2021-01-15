@@ -207,8 +207,8 @@ Real User Monitoring (RUM) SDKs detect user interactions performed during a user
 Once an interaction is detected, all new RUM events are attached to the ongoing action until it is considered finished. The action also benefits from its parent view attributes such as browser information, geolocation data, [global context][2].
 
 ### Customize action naming
-The SDK determines the name of an action based on what is displayed on the screen. To personalize action names, or to make sure no sensivite or private data gets collected, you can add the `data-dd-action-name` attribute on selected elements (or any of their
-parents).
+The SDK determines the name of an action based on what is displayed on the screen. To personalize action names, or to make sure no sensitive or private data is collected, add the `data-dd-action-name` attribute on selected elements (or any of their
+parents). For example:
 
 ```html
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Trial button">Try it out!</a>
