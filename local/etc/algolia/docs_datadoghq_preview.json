@@ -136,7 +136,6 @@
         "/agent/guide/dogstream/$",
         "/integrations/faq/agent-5-amazon-ecs/$",
         "/integrations/faq/list-of-api-source-attribute-value/$",
-        "/logs/faq/how-to-set-up-only-logs/$",
         "/tracing/guide/agent-5-tracing-setup/$",
         "docs.datadoghq.com/fr/.*/faq/",
         "docs.datadoghq.com/ja/.*/faq/",
