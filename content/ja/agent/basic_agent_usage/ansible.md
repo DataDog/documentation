@@ -346,7 +346,6 @@ Agent を以前のバージョンにダウングレードするには、
       log_level: INFO
       apm_config:
         enabled: true
-        max_traces_per_second: 10
       logs_enabled: true  # Agent v6 および v7 で可能
     datadog_checks:
       process:
