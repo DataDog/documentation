@@ -89,6 +89,10 @@ No invocation in the selected time range used more than 10% of the allocated mem
 
 **Resolution:** Consider decreasing the amount of allocated memory on your Lambda function. Note that this may affect your AWS bill.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/python-logging.html
 [2]: /integrations/amazon_web_services/#setup
 [3]: /serverless/forwarder
