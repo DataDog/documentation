@@ -1,5 +1,7 @@
 ---
 title: Use the Datadog Agent for Log Collection Only
+aliases:
+  - /logs/faq/how-to-set-up-only-logs
 kind: documentation
 ---
 
