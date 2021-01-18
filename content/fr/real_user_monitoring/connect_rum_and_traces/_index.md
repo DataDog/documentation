@@ -24,7 +24,7 @@ Grâce aux données frontend de la fonctionnalité RUM et aux données relatives
 -   Vos serveurs HTTP utilisent [une bibliothèque prenant en charge le tracing distribué](#bibliotheques-prises-en-charge).
 
 ### Configuration de RUM
-{{% /tab %}}
+{{< tabs >}}
 {{% tab "RUM pour Browser" %}}
 
 1.  Configurez la fonctionnalité [Real User Monitoring pour Browser][1].
