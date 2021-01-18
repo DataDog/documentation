@@ -114,17 +114,18 @@
             <div class="col-12 col-lg-9">
                 <div class="endpoint-content">
 
-                    {{ if eq (index $tag "x-deprecated") true}}
-                      <div class="alert alert-danger">
-                          {{ $translate_tag.description | default $tag.description | markdownify}}
-                          {{ $tag.externalDocs.description }} <a href="{{ $tag.externalDocs.url }}">{{ $tag.externalDocs.url }}</a>
-                      </div>
-                    {{ end }}
-
                     <!-- Unstable Notification on this endpoint -->
                     {{ with index $endpoint.action "x-unstable"}}
                       <div class="alert alert-warning mb-2 unstable">
                           <p class="alert-warning">{{ . | markdownify }}</p>
+                      </div>
+                    {{ end }}
+
+                    <!-- if this is deprecated and we have a higher version link to that -->
+                    {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1) (eq (index $tag "x-deprecated") true)) }}}}
+                      {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
+                      <div class="alert alert-danger">
+                        <p class="alert-warning">This endpoint is deprecated use the latest endpoint here <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
                       </div>
                     {{ end }}
 
