@@ -1,4 +1,61 @@
 {
+  "ListAPIKeys": {
+    "description": "Énumérez toutes les clés d'API disponibles pour votre compte.",
+    "summary": "Récupérer toutes les clés d'API"
+  },
+  "CreateAPIKey": {
+    "description": "Créez une clé d'API.",
+    "summary": "Créer une clé d'API",
+    "request_schema_description": "Requête utilisée pour créer une clé d'API."
+  },
+  "DeleteAPIKey": {
+    "description": "Supprimez une clé d'API.",
+    "summary": "Supprimer une clé d'API"
+  },
+  "GetAPIKey": {
+    "description": "Récupérez une clé d'API.",
+    "summary": "Récupérer une clé d'API"
+  },
+  "UpdateAPIKey": {
+    "description": "Mettez à jour une clé d'API.",
+    "summary": "Modifier une clé d'API",
+    "request_schema_description": "Requête utilisée pour mettre à jour une clé d'API."
+  },
+  "ListApplicationKeys": {
+    "description": "Énumérez toutes les clés d'application disponibles pour votre organisation.",
+    "summary": "Récupérer toutes les clés d'application"
+  },
+  "DeleteApplicationKey": {
+    "description": "Supprimez une clé d'application.",
+    "summary": "Supprimer une clé d'application"
+  },
+  "UpdateApplicationKey": {
+    "description": "Modifiez une clé d'application.",
+    "summary": "Modifier une clé d'application",
+    "request_schema_description": "Requête utilisée pour mettre à jour une clé d'application."
+  },
+  "ListCurrentUserApplicationKeys": {
+    "description": "Énumérez toutes les clés d'application disponibles pour l'utilisateur actuel.",
+    "summary": "Récupérer toutes les clés d'application appartenant à l'utilisateur actuel"
+  },
+  "CreateCurrentUserApplicationKey": {
+    "description": "Créez une clé d'application pour l'utilisateur actuel.",
+    "summary": "Créer une clé d'application pour l'utilisateur actuel",
+    "request_schema_description": "Requête utilisée pour créer une clé d'application."
+  },
+  "DeleteCurrentUserApplicationKey": {
+    "description": "Supprimez une clé d'application appartenant à l'utilisateur actuel.",
+    "summary": "Supprimer une clé d'application appartenant à l'utilisateur actuel"
+  },
+  "GetCurrentUserApplicationKey": {
+    "description": "Récupérez une clé d'application appartenant à l'utilisateur actuel",
+    "summary": "Récupérer une clé d'application appartenant à l'utilisateur actuel"
+  },
+  "UpdateCurrentUserApplicationKey": {
+    "description": "Modifiez une clé d'application appartenant à l'utilisateur actuel",
+    "summary": "Modifier une clé d'application appartenant à l'utilisateur actuel",
+    "request_schema_description": "Requête utilisée pour mettre à jour une clé d'application."
+  },
   "DeleteDashboardListItems": {
     "description": "Supprimez des dashboards d'une liste de dashboards existante.",
     "summary": "Supprimer des éléments d'une liste de dashboards",
@@ -97,6 +154,30 @@
     "description": "Ajoute un rôle de lecture à une archive ([API Roles](https://docs.datadoghq.com/api/v2/roles/))",
     "summary": "Accorder un rôle à une archive",
     "request_schema_description": "Relation avec le rôle."
+  },
+  "ListLogsMetrics": {
+    "description": "Récupérez la liste des métriques basées sur des logs configurées avec leurs définitions.",
+    "summary": "Récupérer toutes les métriques basées sur des logs"
+  },
+  "CreateLogsMetric": {
+    "description": "Créez une métrique basée sur les logs ingérés au sein de votre organisation. En cas de requête réussie, l'objet de la métrique basée sur des logs est renvoyé à partir du corps de la requête.",
+    "summary": "Créer une métrique basée sur des logs",
+    "request_description": "La définition de la nouvelle métrique basée sur des logs.",
+    "request_schema_description": "Le corps de la nouvelle métrique basée sur des logs."
+  },
+  "DeleteLogsMetric": {
+    "description": "Supprimez une métrique spécifique basée sur des logs de votre organisation.",
+    "summary": "Supprimer une métrique basée sur des logs"
+  },
+  "GetLogsMetric": {
+    "description": "Récupérez une métrique spécifique basée sur des logs de votre organisation.",
+    "summary": "Récupérer une métrique basée sur des logs"
+  },
+  "UpdateLogsMetric": {
+    "description": "Mettez à jour une métrique spécifique basée sur des logs de votre organisation. En cas de requête réussie, l'objet de la métrique basée sur des logs est renvoyé à partir du corps de la requête.",
+    "summary": "Mettre à jour une métrique basée sur des logs",
+    "request_description": "La nouvelle définition de la métrique basée sur des logs.",
+    "request_schema_description": "Le nouveau corps de la métrique basée sur des logs."
   },
   "ListRestrictionQueries": {
     "description": "Renvoie toutes les requêtes de restriction, y compris leurs noms et leurs ID.",
@@ -255,7 +336,7 @@
     "summary": "Supprimer un service lié à un incident existant"
   },
   "GetIncidentService": {
-    "description": "Récupérez les détails d'un service lié à un incident. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces services.",
+    "description": "Récupérez les détails d'un service lié à un incident. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés au service.",
     "summary": "Récupérer les détails d'un service lié à un incident"
   },
   "UpdateIncidentService": {
@@ -279,7 +360,7 @@
     "summary": "Supprimer une équipe liée à un incident existante"
   },
   "GetIncidentTeam": {
-    "description": "Récupérez les détails d'une équipe liée à un incident. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces équipes.",
+    "description": "Récupérez les détails d'une équipe liée à un incident. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à cette équipe.",
     "summary": "Récupérer les détails d'une équipe liée à un incident"
   },
   "UpdateIncidentTeam": {
