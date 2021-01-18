@@ -119,6 +119,9 @@ SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 rem Start application
 example.exe
 ```
+### Configure the Datadog Agent for APM
+
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
 
 ## Custom instrumentation
 
