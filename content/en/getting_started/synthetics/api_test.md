@@ -11,6 +11,10 @@ further_reading:
     - link: '/synthetics/settings/'
       tag: 'Documentation'
       text: 'Configure advanced Synthetic Monitoring settings'
+    - link: '/api/v1/synthetics/#create-a-test'
+      tag: 'API Docs'
+      text: 'Create an Synthetic test programmatically'
+
 ---
 
 ## Create an API test
