@@ -3214,198 +3214,6 @@ api:
       operationids:
         - GetIPRanges
       unstable: []
-  - name: Incident Services
-    url: /api/latest/incident-services/
-    identifier: incident-services
-    generated: true
-  - name: Update an existing incident service
-    url: '#update-an-existing-incident-service'
-    identifier: update-an-existing-incident-service
-    parent: incident-services
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateIncidentService
-      unstable:
-        - v2
-  - name: Get details of an incident service
-    url: '#get-details-of-an-incident-service'
-    identifier: get-details-of-an-incident-service
-    parent: incident-services
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetIncidentService
-      unstable:
-        - v2
-  - name: Delete an existing incident service
-    url: '#delete-an-existing-incident-service'
-    identifier: delete-an-existing-incident-service
-    parent: incident-services
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteIncidentService
-      unstable:
-        - v2
-  - name: Create a new incident service
-    url: '#create-a-new-incident-service'
-    identifier: create-a-new-incident-service
-    parent: incident-services
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateIncidentService
-      unstable:
-        - v2
-  - name: Get a list of all incident services
-    url: '#get-a-list-of-all-incident-services'
-    identifier: get-a-list-of-all-incident-services
-    parent: incident-services
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListIncidentServices
-      unstable:
-        - v2
-  - name: Incident Teams
-    url: /api/latest/incident-teams/
-    identifier: incident-teams
-    generated: true
-  - name: Update an existing incident team
-    url: '#update-an-existing-incident-team'
-    identifier: update-an-existing-incident-team
-    parent: incident-teams
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateIncidentTeam
-      unstable:
-        - v2
-  - name: Get details of an incident team
-    url: '#get-details-of-an-incident-team'
-    identifier: get-details-of-an-incident-team
-    parent: incident-teams
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetIncidentTeam
-      unstable:
-        - v2
-  - name: Delete an existing incident team
-    url: '#delete-an-existing-incident-team'
-    identifier: delete-an-existing-incident-team
-    parent: incident-teams
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteIncidentTeam
-      unstable:
-        - v2
-  - name: Create a new incident team
-    url: '#create-a-new-incident-team'
-    identifier: create-a-new-incident-team
-    parent: incident-teams
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateIncidentTeam
-      unstable:
-        - v2
-  - name: Get a list of all incident teams
-    url: '#get-a-list-of-all-incident-teams'
-    identifier: get-a-list-of-all-incident-teams
-    parent: incident-teams
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListIncidentTeams
-      unstable:
-        - v2
-  - name: Incidents
-    url: /api/latest/incidents/
-    identifier: incidents
-    generated: true
-  - name: Update an existing incident
-    url: '#update-an-existing-incident'
-    identifier: update-an-existing-incident
-    parent: incidents
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateIncident
-      unstable:
-        - v2
-  - name: Get the details of an incident
-    url: '#get-the-details-of-an-incident'
-    identifier: get-the-details-of-an-incident
-    parent: incidents
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetIncident
-      unstable:
-        - v2
-  - name: Delete an existing incident
-    url: '#delete-an-existing-incident'
-    identifier: delete-an-existing-incident
-    parent: incidents
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteIncident
-      unstable:
-        - v2
-  - name: Create an incident
-    url: '#create-an-incident'
-    identifier: create-an-incident
-    parent: incidents
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateIncident
-      unstable:
-        - v2
-  - name: Get a list of incidents
-    url: '#get-a-list-of-incidents'
-    identifier: get-a-list-of-incidents
-    parent: incidents
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListIncidents
-      unstable:
-        - v2
   - name: Key Management
     url: /api/latest/key-management/
     identifier: key-management
@@ -3634,123 +3442,6 @@ api:
         - ListLogs
       unstable:
         - v2
-  - name: Logs Archives
-    url: /api/latest/logs-archives/
-    identifier: logs-archives
-    generated: true
-  - name: Grant role to an archive
-    url: '#grant-role-to-an-archive'
-    identifier: grant-role-to-an-archive
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - AddReadRoleToArchive
-      unstable:
-        - v2
-  - name: List read roles for an archive
-    url: '#list-read-roles-for-an-archive'
-    identifier: list-read-roles-for-an-archive
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListArchiveReadRoles
-      unstable:
-        - v2
-  - name: Revoke role from an archive
-    url: '#revoke-role-from-an-archive'
-    identifier: revoke-role-from-an-archive
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - RemoveRoleFromArchive
-      unstable:
-        - v2
-  - name: Update an archive
-    url: '#update-an-archive'
-    identifier: update-an-archive
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateLogsArchive
-      unstable: []
-  - name: Get an archive
-    url: '#get-an-archive'
-    identifier: get-an-archive
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetLogsArchive
-      unstable: []
-  - name: Delete an archive
-    url: '#delete-an-archive'
-    identifier: delete-an-archive
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteLogsArchive
-      unstable: []
-  - name: Create an archive
-    url: '#create-an-archive'
-    identifier: create-an-archive
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateLogsArchive
-      unstable: []
-  - name: Get all archives
-    url: '#get-all-archives'
-    identifier: get-all-archives
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListLogsArchives
-      unstable: []
-  - name: Update archive order
-    url: '#update-archive-order'
-    identifier: update-archive-order
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateLogsArchiveOrder
-      unstable: []
-  - name: Get archive order
-    url: '#get-archive-order'
-    identifier: get-archive-order
-    parent: logs-archives
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetLogsArchiveOrder
-      unstable: []
   - name: Logs Indexes
     url: /api/latest/logs-indexes/
     identifier: logs-indexes
@@ -3815,65 +3506,6 @@ api:
         - GetLogsIndexOrder
       unstable:
         - v1
-  - name: Logs Metrics
-    url: /api/latest/logs-metrics/
-    identifier: logs-metrics
-    generated: true
-  - name: Update a log-based metric
-    url: '#update-a-log-based-metric'
-    identifier: update-a-log-based-metric
-    parent: logs-metrics
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateLogsMetric
-      unstable: []
-  - name: Get a log-based metric
-    url: '#get-a-log-based-metric'
-    identifier: get-a-log-based-metric
-    parent: logs-metrics
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetLogsMetric
-      unstable: []
-  - name: Delete a log-based metric
-    url: '#delete-a-log-based-metric'
-    identifier: delete-a-log-based-metric
-    parent: logs-metrics
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteLogsMetric
-      unstable: []
-  - name: Create a log-based metric
-    url: '#create-a-log-based-metric'
-    identifier: create-a-log-based-metric
-    parent: logs-metrics
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateLogsMetric
-      unstable: []
-  - name: Get all log-based metrics
-    url: '#get-all-log-based-metrics'
-    identifier: get-all-log-based-metrics
-    parent: logs-metrics
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListLogsMetrics
-      unstable: []
   - name: Logs Pipelines
     url: /api/latest/logs-pipelines/
     identifier: logs-pipelines
@@ -3955,130 +3587,6 @@ api:
       operationids:
         - GetLogsPipelineOrder
       unstable: []
-  - name: Logs Restriction Queries
-    url: /api/latest/logs-restriction-queries/
-    identifier: logs-restriction-queries
-    generated: true
-  - name: Grant role to a restriction query
-    url: '#grant-role-to-a-restriction-query'
-    identifier: grant-role-to-a-restriction-query
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - AddRoleToRestrictionQuery
-      unstable:
-        - v2
-  - name: List roles for a restriction query
-    url: '#list-roles-for-a-restriction-query'
-    identifier: list-roles-for-a-restriction-query
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListRestrictionQueryRoles
-      unstable:
-        - v2
-  - name: Revoke role from a restriction query
-    url: '#revoke-role-from-a-restriction-query'
-    identifier: revoke-role-from-a-restriction-query
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - RemoveRoleFromRestrictionQuery
-      unstable:
-        - v2
-  - name: Update a restriction query
-    url: '#update-a-restriction-query'
-    identifier: update-a-restriction-query
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateRestrictionQuery
-      unstable:
-        - v2
-  - name: Get a restriction query
-    url: '#get-a-restriction-query'
-    identifier: get-a-restriction-query
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetRestrictionQuery
-      unstable:
-        - v2
-  - name: Delete a restriction query
-    url: '#delete-a-restriction-query'
-    identifier: delete-a-restriction-query
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteRestrictionQuery
-      unstable:
-        - v2
-  - name: Get all restriction queries for a given user
-    url: '#get-all-restriction-queries-for-a-given-user'
-    identifier: get-all-restriction-queries-for-a-given-user
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListUserRestrictionQueries
-      unstable:
-        - v2
-  - name: Get restriction query for a given role
-    url: '#get-restriction-query-for-a-given-role'
-    identifier: get-restriction-query-for-a-given-role
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetRoleRestrictionQuery
-      unstable:
-        - v2
-  - name: Create a restriction query
-    url: '#create-a-restriction-query'
-    identifier: create-a-restriction-query
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateRestrictionQuery
-      unstable:
-        - v2
-  - name: List restriction queries
-    url: '#list-restriction-queries'
-    identifier: list-restriction-queries
-    parent: logs-restriction-queries
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListRestrictionQueries
-      unstable:
-        - v2
   - name: Metrics
     url: /api/latest/metrics/
     identifier: metrics
@@ -4414,244 +3922,10 @@ api:
       operationids:
         - CreatePagerDutyIntegrationService
       unstable: []
-  - name: Processes
-    url: /api/latest/processes/
-    identifier: processes
-    generated: true
-  - name: Get all processes
-    url: '#get-all-processes'
-    identifier: get-all-processes
-    parent: processes
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListProcesses
-      unstable: []
-  - name: Roles
-    url: /api/latest/roles/
-    identifier: roles
-    generated: true
-  - name: Add a user to a role
-    url: '#add-a-user-to-a-role'
-    identifier: add-a-user-to-a-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - AddUserToRole
-      unstable: []
-  - name: Get all users of a role
-    url: '#get-all-users-of-a-role'
-    identifier: get-all-users-of-a-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListRoleUsers
-      unstable: []
-  - name: Remove a user from a role
-    url: '#remove-a-user-from-a-role'
-    identifier: remove-a-user-from-a-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - RemoveUserFromRole
-      unstable: []
-  - name: Grant permission to a role
-    url: '#grant-permission-to-a-role'
-    identifier: grant-permission-to-a-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - AddPermissionToRole
-      unstable: []
-  - name: List permissions for a role
-    url: '#list-permissions-for-a-role'
-    identifier: list-permissions-for-a-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListRolePermissions
-      unstable: []
-  - name: Revoke permission
-    url: '#revoke-permission'
-    identifier: revoke-permission
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - RemovePermissionFromRole
-      unstable: []
-  - name: Update a role
-    url: '#update-a-role'
-    identifier: update-a-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateRole
-      unstable: []
-  - name: Get a role
-    url: '#get-a-role'
-    identifier: get-a-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetRole
-      unstable: []
-  - name: Delete role
-    url: '#delete-role'
-    identifier: delete-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteRole
-      unstable: []
-  - name: Create role
-    url: '#create-role'
-    identifier: create-role
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateRole
-      unstable: []
-  - name: List roles
-    url: '#list-roles'
-    identifier: list-roles
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListRoles
-      unstable: []
-  - name: List permissions
-    url: '#list-permissions'
-    identifier: list-permissions
-    parent: roles
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListPermissions
-      unstable: []
   - name: Screenboards
     url: /api/latest/screenboards/
     identifier: screenboards
     generated: true
-  - name: Security Monitoring
-    url: /api/latest/security-monitoring/
-    identifier: security-monitoring
-    generated: true
-  - name: Get a list of security signals
-    url: '#get-a-list-of-security-signals'
-    identifier: get-a-list-of-security-signals
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - SearchSecurityMonitoringSignals
-      unstable:
-        - v2
-  - name: Get a quick list of security signals
-    url: '#get-a-quick-list-of-security-signals'
-    identifier: get-a-quick-list-of-security-signals
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListSecurityMonitoringSignals
-      unstable:
-        - v2
-  - name: Update an existing rule
-    url: '#update-an-existing-rule'
-    identifier: update-an-existing-rule
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateSecurityMonitoringRule
-      unstable: []
-  - name: Get a rule's details
-    url: '#get-a-rules-details'
-    identifier: get-a-rules-details
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - GetSecurityMonitoringRule
-      unstable: []
-  - name: Delete an existing rule
-    url: '#delete-an-existing-rule'
-    identifier: delete-an-existing-rule
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DeleteSecurityMonitoringRule
-      unstable: []
-  - name: Create a detection rule
-    url: '#create-a-detection-rule'
-    identifier: create-a-detection-rule
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateSecurityMonitoringRule
-      unstable: []
-  - name: List rules
-    url: '#list-rules'
-    identifier: list-rules
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - ListSecurityMonitoringRules
-      unstable: []
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
@@ -5735,4 +5009,730 @@ api:
         - v1
       operationids:
         - CreateWebhooksIntegrationCustomVariable
+      unstable: []
+  - name: Incident Services
+    url: /api/latest/incident-services/
+    identifier: incident-services
+    generated: true
+  - name: Update an existing incident service
+    url: '#update-an-existing-incident-service'
+    identifier: update-an-existing-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentService
+      unstable:
+        - v2
+  - name: Get details of an incident service
+    url: '#get-details-of-an-incident-service'
+    identifier: get-details-of-an-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentService
+      unstable:
+        - v2
+  - name: Delete an existing incident service
+    url: '#delete-an-existing-incident-service'
+    identifier: delete-an-existing-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentService
+      unstable:
+        - v2
+  - name: Create a new incident service
+    url: '#create-a-new-incident-service'
+    identifier: create-a-new-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentService
+      unstable:
+        - v2
+  - name: Get a list of all incident services
+    url: '#get-a-list-of-all-incident-services'
+    identifier: get-a-list-of-all-incident-services
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentServices
+      unstable:
+        - v2
+  - name: Incident Teams
+    url: /api/latest/incident-teams/
+    identifier: incident-teams
+    generated: true
+  - name: Update an existing incident team
+    url: '#update-an-existing-incident-team'
+    identifier: update-an-existing-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentTeam
+      unstable:
+        - v2
+  - name: Get details of an incident team
+    url: '#get-details-of-an-incident-team'
+    identifier: get-details-of-an-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentTeam
+      unstable:
+        - v2
+  - name: Delete an existing incident team
+    url: '#delete-an-existing-incident-team'
+    identifier: delete-an-existing-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentTeam
+      unstable:
+        - v2
+  - name: Create a new incident team
+    url: '#create-a-new-incident-team'
+    identifier: create-a-new-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentTeam
+      unstable:
+        - v2
+  - name: Get a list of all incident teams
+    url: '#get-a-list-of-all-incident-teams'
+    identifier: get-a-list-of-all-incident-teams
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentTeams
+      unstable:
+        - v2
+  - name: Incidents
+    url: /api/latest/incidents/
+    identifier: incidents
+    generated: true
+  - name: Update an existing incident
+    url: '#update-an-existing-incident'
+    identifier: update-an-existing-incident
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncident
+      unstable:
+        - v2
+  - name: Get the details of an incident
+    url: '#get-the-details-of-an-incident'
+    identifier: get-the-details-of-an-incident
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncident
+      unstable:
+        - v2
+  - name: Delete an existing incident
+    url: '#delete-an-existing-incident'
+    identifier: delete-an-existing-incident
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncident
+      unstable:
+        - v2
+  - name: Create an incident
+    url: '#create-an-incident'
+    identifier: create-an-incident
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncident
+      unstable:
+        - v2
+  - name: Get a list of incidents
+    url: '#get-a-list-of-incidents'
+    identifier: get-a-list-of-incidents
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidents
+      unstable:
+        - v2
+  - name: Logs Archives
+    url: /api/latest/logs-archives/
+    identifier: logs-archives
+    generated: true
+  - name: Grant role to an archive
+    url: '#grant-role-to-an-archive'
+    identifier: grant-role-to-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddReadRoleToArchive
+      unstable:
+        - v2
+  - name: List read roles for an archive
+    url: '#list-read-roles-for-an-archive'
+    identifier: list-read-roles-for-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListArchiveReadRoles
+      unstable:
+        - v2
+  - name: Revoke role from an archive
+    url: '#revoke-role-from-an-archive'
+    identifier: revoke-role-from-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveRoleFromArchive
+      unstable:
+        - v2
+  - name: Update an archive
+    url: '#update-an-archive'
+    identifier: update-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsArchive
+      unstable: []
+  - name: Get an archive
+    url: '#get-an-archive'
+    identifier: get-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsArchive
+      unstable: []
+  - name: Delete an archive
+    url: '#delete-an-archive'
+    identifier: delete-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteLogsArchive
+      unstable: []
+  - name: Create an archive
+    url: '#create-an-archive'
+    identifier: create-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateLogsArchive
+      unstable: []
+  - name: Get all archives
+    url: '#get-all-archives'
+    identifier: get-all-archives
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsArchives
+      unstable: []
+  - name: Update archive order
+    url: '#update-archive-order'
+    identifier: update-archive-order
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsArchiveOrder
+      unstable: []
+  - name: Get archive order
+    url: '#get-archive-order'
+    identifier: get-archive-order
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsArchiveOrder
+      unstable: []
+  - name: Logs Metrics
+    url: /api/latest/logs-metrics/
+    identifier: logs-metrics
+    generated: true
+  - name: Update a log-based metric
+    url: '#update-a-log-based-metric'
+    identifier: update-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsMetric
+      unstable: []
+  - name: Get a log-based metric
+    url: '#get-a-log-based-metric'
+    identifier: get-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsMetric
+      unstable: []
+  - name: Delete a log-based metric
+    url: '#delete-a-log-based-metric'
+    identifier: delete-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteLogsMetric
+      unstable: []
+  - name: Create a log-based metric
+    url: '#create-a-log-based-metric'
+    identifier: create-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateLogsMetric
+      unstable: []
+  - name: Get all log-based metrics
+    url: '#get-all-log-based-metrics'
+    identifier: get-all-log-based-metrics
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsMetrics
+      unstable: []
+  - name: Logs Restriction Queries
+    url: /api/latest/logs-restriction-queries/
+    identifier: logs-restriction-queries
+    generated: true
+  - name: Grant role to a restriction query
+    url: '#grant-role-to-a-restriction-query'
+    identifier: grant-role-to-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddRoleToRestrictionQuery
+      unstable:
+        - v2
+  - name: List roles for a restriction query
+    url: '#list-roles-for-a-restriction-query'
+    identifier: list-roles-for-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRestrictionQueryRoles
+      unstable:
+        - v2
+  - name: Revoke role from a restriction query
+    url: '#revoke-role-from-a-restriction-query'
+    identifier: revoke-role-from-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveRoleFromRestrictionQuery
+      unstable:
+        - v2
+  - name: Update a restriction query
+    url: '#update-a-restriction-query'
+    identifier: update-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRestrictionQuery
+      unstable:
+        - v2
+  - name: Get a restriction query
+    url: '#get-a-restriction-query'
+    identifier: get-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRestrictionQuery
+      unstable:
+        - v2
+  - name: Delete a restriction query
+    url: '#delete-a-restriction-query'
+    identifier: delete-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRestrictionQuery
+      unstable:
+        - v2
+  - name: Get all restriction queries for a given user
+    url: '#get-all-restriction-queries-for-a-given-user'
+    identifier: get-all-restriction-queries-for-a-given-user
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListUserRestrictionQueries
+      unstable:
+        - v2
+  - name: Get restriction query for a given role
+    url: '#get-restriction-query-for-a-given-role'
+    identifier: get-restriction-query-for-a-given-role
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRoleRestrictionQuery
+      unstable:
+        - v2
+  - name: Create a restriction query
+    url: '#create-a-restriction-query'
+    identifier: create-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateRestrictionQuery
+      unstable:
+        - v2
+  - name: List restriction queries
+    url: '#list-restriction-queries'
+    identifier: list-restriction-queries
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRestrictionQueries
+      unstable:
+        - v2
+  - name: Processes
+    url: /api/latest/processes/
+    identifier: processes
+    generated: true
+  - name: Get all processes
+    url: '#get-all-processes'
+    identifier: get-all-processes
+    parent: processes
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListProcesses
+      unstable: []
+  - name: Roles
+    url: /api/latest/roles/
+    identifier: roles
+    generated: true
+  - name: Add a user to a role
+    url: '#add-a-user-to-a-role'
+    identifier: add-a-user-to-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddUserToRole
+      unstable: []
+  - name: Get all users of a role
+    url: '#get-all-users-of-a-role'
+    identifier: get-all-users-of-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRoleUsers
+      unstable: []
+  - name: Remove a user from a role
+    url: '#remove-a-user-from-a-role'
+    identifier: remove-a-user-from-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveUserFromRole
+      unstable: []
+  - name: Grant permission to a role
+    url: '#grant-permission-to-a-role'
+    identifier: grant-permission-to-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddPermissionToRole
+      unstable: []
+  - name: List permissions for a role
+    url: '#list-permissions-for-a-role'
+    identifier: list-permissions-for-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRolePermissions
+      unstable: []
+  - name: Revoke permission
+    url: '#revoke-permission'
+    identifier: revoke-permission
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemovePermissionFromRole
+      unstable: []
+  - name: Update a role
+    url: '#update-a-role'
+    identifier: update-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRole
+      unstable: []
+  - name: Get a role
+    url: '#get-a-role'
+    identifier: get-a-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRole
+      unstable: []
+  - name: Delete role
+    url: '#delete-role'
+    identifier: delete-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRole
+      unstable: []
+  - name: Create role
+    url: '#create-role'
+    identifier: create-role
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateRole
+      unstable: []
+  - name: List roles
+    url: '#list-roles'
+    identifier: list-roles
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRoles
+      unstable: []
+  - name: List permissions
+    url: '#list-permissions'
+    identifier: list-permissions
+    parent: roles
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListPermissions
+      unstable: []
+  - name: Security Monitoring
+    url: /api/latest/security-monitoring/
+    identifier: security-monitoring
+    generated: true
+  - name: Get a list of security signals
+    url: '#get-a-list-of-security-signals'
+    identifier: get-a-list-of-security-signals
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchSecurityMonitoringSignals
+      unstable:
+        - v2
+  - name: Get a quick list of security signals
+    url: '#get-a-quick-list-of-security-signals'
+    identifier: get-a-quick-list-of-security-signals
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringSignals
+      unstable:
+        - v2
+  - name: Update an existing rule
+    url: '#update-an-existing-rule'
+    identifier: update-an-existing-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityMonitoringRule
+      unstable: []
+  - name: Get a rule's details
+    url: '#get-a-rules-details'
+    identifier: get-a-rules-details
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityMonitoringRule
+      unstable: []
+  - name: Delete an existing rule
+    url: '#delete-an-existing-rule'
+    identifier: delete-an-existing-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityMonitoringRule
+      unstable: []
+  - name: Create a detection rule
+    url: '#create-a-detection-rule'
+    identifier: create-a-detection-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityMonitoringRule
+      unstable: []
+  - name: List rules
+    url: '#list-rules'
+    identifier: list-rules
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringRules
       unstable: []

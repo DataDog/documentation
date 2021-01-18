@@ -8016,45 +8016,12 @@ servers:
       default: https
       description: The protocol for accessing the API.
 tags:
-- description: '[See API version 1](/api/v1/aws-integration/).'
-  name: AWS Integration
-- description: '[See API version 1](/api/v1/aws-logs-integration/).'
-  name: AWS Logs Integration
-- description: "All requests to Datadog\u2019s API must be authenticated.\nRequests\
-    \ that write data require reporting access and require an `API key`.\nRequests\
-    \ that read data require full access and also require an `application key`.\n\n\
-    **Note:** All Datadog API clients are configured by default to consume Datadog\
-    \ US site APIs.\nIf you are on the Datadog EU site, set the environment variable\
-    \ `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly\
-    \ when creating your client.\n\n[Manage your account\u2019s API and application\
-    \ keys](https://app.datadoghq.com/account/settings#api).\n\n## Validate API key\n\
-    \n[See API version 1](/api/v1/authentication/#validate-api-key)."
-  name: Authentication
-- description: '[See API version 1](/api/v1/azure-integration/).'
-  name: Azure Integration
-- description: 'Interact with your dashboard lists through the API to make it easier
-    to
+- description: 'Interact with your dashboard lists through the API to
 
     organize, find, and share all of your dashboards with your team and
 
-    organization. Note that you can add API v1 Dashboards to Dashboard Lists
-
-    that you create with API v2.'
+    organization.'
   name: Dashboard Lists
-- description: '[See API version 1](/api/v1/dashboards/).'
-  name: Dashboards
-- description: '[See API version 1](/api/v1/downtimes/).'
-  name: Downtimes
-- description: '[See API version 1](/api/v1/embeddable-graphs/).'
-  name: Embeddable Graphs
-- description: '[See API version 1](/api/v1/events/).'
-  name: Events
-- description: '[See API version 1](/api/v1/gcp-integration/).'
-  name: GCP Integration
-- description: '[See API version 1](/api/v1/hosts/).'
-  name: Hosts
-- description: '[See API version 1](/api/v1/ip-ranges/).'
-  name: IP Ranges
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
   name: Incident Services
@@ -8063,8 +8030,6 @@ tags:
   name: Incident Teams
 - description: Manage incident response.
   name: Incidents
-- description: '[See API version 1](/api/v1/key-management/).'
-  name: Key Management
 - description: 'Manage your Datadog API and application keys. You need an API key
     and
 
@@ -8077,10 +8042,29 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
-- description: 'Search your logs in the Datadog platform over HTTP.
+- description: 'Search your logs and send them to your Datadog platform over HTTP.
+    Limits per HTTP request are:
 
 
-    [See API version 1](/api/v1/logs/) for sending logs.'
+    - Maximum content size per payload: 5MB
+
+    - Maximum size for a single log: 256kB
+
+    - Maximum array size if sending multiple logs in an array: 500 entries
+
+
+    Any log exceeding 256KB is accepted and truncated by Datadog:
+
+    - For a single log request, the API truncates the log at 256KB and returns a 2xx.
+
+    - For a multi-logs request, the API processes all logs, truncates only logs larger
+    than 256KB, and returns a 2xx.
+
+
+    Datadog recommends sending your logs compressed.
+
+    Add the `Content-Encoding: gzip` header to the request when sending compressed
+    logs.'
   name: Logs
 - description: 'Archives forward all the logs ingested to a cloud storage system.
 
@@ -8092,16 +8076,12 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
-- description: '[See API version 1](/api/v1/logs-indexes/).'
-  name: Logs Indexes
 - description: Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
     for your organization.
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/logs_to_metrics/
   name: Logs Metrics
-- description: '[See API version 1](/api/v1/logs-pipelines/).'
-  name: Logs Pipelines
 - description: "**Note: This endpoint is in public beta. If you have any feedback,\
     \ contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read\
     \ access on log data at all, you must grant the `logs_read_data` permission.\n\
@@ -8123,14 +8103,6 @@ tags:
     \ are scoped to different team values.\n\nYou need an API and application key\
     \ with Admin rights to interact with this endpoint."
   name: Logs Restriction Queries
-- description: '[See API version 1](/api/v1/metrics/).'
-  name: Metrics
-- description: '[See API version 1](/api/v1/monitors/).'
-  name: Monitors
-- description: '[See API version 1](/api/v1/organizations/).'
-  name: Organizations
-- description: '[See API version 1](/api/v1/pagerduty-integration/).'
-  name: PagerDuty Integration
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
 - description: 'The Roles API is used to create and manage Datadog roles, what
@@ -8148,36 +8120,12 @@ tags:
 
     [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
   name: Roles
-- description: '[See API version 1](/api/v1/screenboards/).'
-  name: Screenboards
 - description: 'Detection rules for generating signals and listing of generated
 
     signals.'
   name: Security Monitoring
-- description: '[See API version 1](/api/v1/service-checks/).'
-  name: Service Checks
-- description: '[See API version 1](/api/v1/service-dependencies/).'
-  name: Service Dependencies
-- description: '[See API version 1](/api/v1/service-level-objectives/).'
-  name: Service Level Objectives
-- description: '[See API version 1](/api/v1/slack-integration/).'
-  name: Slack Integration
-- description: '[See API version 1](/api/v1/snapshots/).'
-  name: Snapshots
-- description: '[See API version 1](/api/v1/synthetics/).'
-  name: Synthetics
-- description: '[See API version 1](/api/v1/tags/).'
-  name: Tags
-- description: '[See API version 1](/api/v1/timeboards/).'
-  name: Timeboards
-- description: '[See API version 1](/api/v1/tracing/).'
-  name: Tracing
-- description: '[See API version 1](/api/v1/usage-metering/).'
-  name: Usage Metering
 - description: Create, edit, and disable users.
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users
   name: Users
-- description: '[See API version 1](/api/v1/webhooks-integration/).'
-  name: Webhooks Integration
 x-group-parameters: true
