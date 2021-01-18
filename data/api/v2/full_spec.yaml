@@ -2551,6 +2551,7 @@ components:
       enum:
       - count
       - distribution
+      example: distribution
       type: string
       x-enum-varnames:
       - COUNT
