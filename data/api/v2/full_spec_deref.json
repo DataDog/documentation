@@ -16285,6 +16285,7 @@
               "count",
               "distribution"
             ],
+            "example": "distribution",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -16308,6 +16309,7 @@
           "count",
           "distribution"
         ],
+        "example": "distribution",
         "type": "string",
         "x-enum-varnames": [
           "COUNT",
@@ -16326,6 +16328,7 @@
                   "count",
                   "distribution"
                 ],
+                "example": "distribution",
                 "type": "string",
                 "x-enum-varnames": [
                   "COUNT",
@@ -16399,6 +16402,7 @@
                       "count",
                       "distribution"
                     ],
+                    "example": "distribution",
                     "type": "string",
                     "x-enum-varnames": [
                       "COUNT",
@@ -16500,6 +16504,7 @@
                           "count",
                           "distribution"
                         ],
+                        "example": "distribution",
                         "type": "string",
                         "x-enum-varnames": [
                           "COUNT",
@@ -39050,6 +39055,7 @@
                                   "count",
                                   "distribution"
                                 ],
+                                "example": "distribution",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "COUNT",

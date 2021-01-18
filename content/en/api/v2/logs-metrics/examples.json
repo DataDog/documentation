@@ -114,7 +114,7 @@
         "data": {
           "attributes": {
             "compute": {
-              "aggregation_type": null
+              "aggregation_type": "distribution"
             },
             "group_by": [
               {
@@ -130,7 +130,7 @@
         "data": {
           "attributes": {
             "compute": {
-              "aggregation_type": "string",
+              "aggregation_type": "distribution",
               "path": "@duration"
             },
             "filter": {
