@@ -24,8 +24,7 @@ Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を
 インストール後、次の[手順](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers)で S3 バケットまたは CloudWatch ロググループなどのログリソースに Forwarder をサブスクライブできます。
 
 <!-- xxx tabs xxx -->
-<!-- xxx tab "Cloud Formation" xxx -->
-
+<!-- xxx tab "CloudFormation" xxx -->
 ### CloudFormation
 
 [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-forwarder&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/forwarder/latest.yaml)
@@ -41,14 +40,13 @@ Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "Terraform" xxx -->
-
 ### Terraform
 
 Terraform リソース [aws_cloudformation_stack](https://www.terraform.io/docs/providers/aws/r/cloudformation_stack.html) を、指定されている CloudFormation テンプレートのラッパーとして使用して、Forwarder をインストールします。
 
 Datadog は、2 つの個別の Terraform コンフィギュレーションを作成することをお勧めします。
 
-- 最初のものを使用して Datadog API キーを AWS Secrets Manager に保存し、出力から適用するシークレット ARN を書き留めます。
+- 最初のものを使用して Datasecret API キーを AWS Secrets Manager に保存し、出力から適用するシークレット ARN を書き留めます。
 - 次に、Forwarder の別のコンフィギュレーションを作成し、`DdApiKeySecretArn` パラメーターを介してシークレット ARN を指定します。
 
 API キーと Forwarder のコンフィギュレーションを分離すると、Forwarder を更新するときに Datadog API キーを指定する必要がなくなります。
@@ -96,7 +94,6 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "手動" xxx -->
-
 ### 手動
 
 指定されている CloudFormation テンプレートを使用して Forwarder をインストールできない場合は、以下の手順に従って Forwarder を手動でインストールできます。テンプレートの機能について改善できる点がございましたら、お気軽に問題やプルリクエストを開いてお知らせください。
@@ -110,39 +107,6 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
-
-## 他の Lambda 関数へのログ送信
-
-Cloudformation パラメーター `AdditionalTargetLambdaARNs` を使用して、ログを他の Lambda 関数に送信することができます。この追加の Lambda 関数は、Datadog Forwarder が受信するのと同一の `event` と非同期で呼び出されます。
-
-## AWS PrivateLink サポート
-
-AWS PrivateLink 使用して、VPC で Forwarder を実行し Datadog に接続します。AWS PrivateLink は、Datadog US サイト (datadoghq.com。datadoghq.eu は不可) を使用している Datadog 組織にのみ構成が可能です。
-
-1. [セットアップ手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)に従って、Datadog の **API** サービス用のエンドポイントを VPC に追加します。
-2. [同様の手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)で、Datadog の **ログ** サービス用に 2 つ目のエンドポイントを VPC に追加します。
-3. [同様の手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)で、Datadog の **トレース** サービス用に 3 つ目のエンドポイントを VPC に追加します。
-4. Forwarder がパブリックサブネットにデプロイされている場合以外は、こちらの[手順](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) に従い Secrets Manager および S3 のエンドポイントを VPC に追加し、Forwarder がこれらのサービスにアクセスできるようにします。
-5. CloudFormation テンプレートで Forwarder をインストールする際は、`DdUsePrivateLink`、`VPCSecurityGroupIds`、`VPCSubnetIds` を設定します。
-6. AWS VPC はまだ Resource Group Tagging API にエンドポイントを提供しないため、`DdFetchLambdaTags` オプションが無効になっていることを確認してください。
-
-## AWS VPC およびプロキシのサポート
-
-パブリックインターネットの直接アクセスを使用せずに Forwarder を VPC にデプロイする必要がある場合で、Datadog EU サイトへの接続に AWS PrivateLink を使用できない場合（所属組織が Datadog EU サイトにホストされている (例: datadoghq.eu) 場合など）は、プロキシを使用してデータを送信できます。
-
-1. Forwarder がパブリックサブネットにデプロイされている場合以外は、こちらの[手順](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) に従い Secrets Manager および S3 のエンドポイントを VPC に追加し、Forwarder がこれらのサービスにアクセスできるようにします。
-2. 以下のコンフィギュレーション ([HAProxy](https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/proxy_conf/haproxy.txt) or [Nginx](https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/proxy_conf/nginx.txt)) でプロキシを更新します。
-3. CloudFormation テンプレートで Forwarder をインストールする際は、`DdUseVPC`、`VPCSecurityGroupIds`、`VPCSubnetIds` を設定します。
-4. AWS VPC はまだ Resource Group Tagging API にエンドポイントを提供しないため、`DdFetchLambdaTags` オプションが無効になっていることを確認してください。
-5. `DdApiUrl` を `http://<proxy_host>:3834` または `https://<proxy_host>:3834` に設定します。
-6. `DdTraceIntakeUrl` を `http://<proxy_host>:3835` または `https://<proxy_host>:3835` に設定します。
-7. `DdUrl` を `<proxy_host>` に、`DdPort` を `3837` に設定します。
-8. `http` を使用したプロキシに接続する場合は、`DdNoSsl` を `true` に設定します。
-9. 自己署名証明書のある `https` を使用したプロキシに接続する場合は `DdSkipSslValidation` を `true` に設定します。
-
-## トラブルシューティング
-
-Forwarder Lambda 関数で環境変数 `DD_LOG_LEVEL` を `debug` に設定して、詳細なログ記録を一時的に有効にします (削除することを忘れないでください)。デバッグログが役に立たない場合は、[Datadog サポート](https://www.datadoghq.com/support/)にお問い合わせください。まだ行っていない場合は、Forwarder を最新バージョンに更新すると役立つ場合があります。
 
 ### 新しいバージョンにアップグレードする
 
@@ -181,106 +145,90 @@ Forwarder および、Forwarder CloudFormation スタックによって作成さ
 
 **注:** Datadog は、Lambda 関数を直接編集するのではなく、CloudFormation を介して Forwarder 設定を調整することをお勧めします。スタックを起動するときに、[template.yaml](https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/template.yaml) と CloudFormation スタック作成ユーザーインターフェイスで設定の説明を確認してください。追加の設定をテンプレートで調整できるように、お気軽にプルリクエストを送信してください。
 
-## アクセス許可
+## トラブルシューティング
 
-CloudFormation Stack をデフォルトのオプションでデプロイするには、Datadog API キーをシークレットとして保存し、Forwarder のコード (zip ファイル) を格納する S3 バケットを作成し、Lambda 関数 (実行ロールとロググループを含む) を作成します。
+最近の[リリース](https://github.com/DataDog/datadog-serverless-functions/releases)で問題がすでに修正されているかどうかを忘れずに確認してください。
 
-**IAM ステートメント**:
+Forwarder Lambda 関数で環境変数 `DD_LOG_LEVEL` を `debug` に設定して、詳細なログ記録を一時的に有効にします (削除することを忘れないでください)。デバッグログには、Lambda 関数が受信する正確なイベントペイロードと、Datadog に送信されるデータ (ログ、メトリクス、またはトレース) ペイロードを表示できる必要があります。
 
-```json
-{
-  "Effect": "Allow",
-  "Action": [
-    "cloudformation:*",
-    "secretsmanager:CreateSecret",
-    "secretsmanager:TagResource",
-    "s3:CreateBucket",
-    "s3:GetObject",
-    "s3:PutEncryptionConfiguration",
-    "s3:PutBucketPublicAccessBlock",
-    "iam:CreateRole",
-    "iam:GetRole",
-    "iam:PassRole",
-    "iam:PutRolePolicy",
-    "iam:AttachRolePolicy",
-    "lambda:CreateFunction",
-    "lambda:GetFunction",
-    "lambda:GetFunctionConfiguration",
-    "lambda:GetLayerVersion",
-    "lambda:InvokeFunction",
-    "lambda:PutFunctionConcurrency",
-    "logs:CreateLogGroup",
-    "logs:DescribeLogGroups",
-    "logs:PutRetentionPolicy"
-  ],
-  "Resource": "*"
-}
-```
+さらに詳細な調査のために、ログやコードを追加することもできます。[寄稿](#contributing)セクションから、ローカルの変更を使用して Forwarder コードを構築する手順を見つけてください。
 
-CloudFormation スタックを作成するには、次の機能が必要です。
+それでもわからない場合は、デバッグログのコピーを使用して [Datadog サポート](https://www.datadoghq.com/support/)のチケットを作成してください。
 
-- CAPABILITY_AUTO_EXPAND、Forwarder テンプレートはマクロを使用するため (特に [AWS SAM](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html) マクロ)
-- CAPABILTY_IAM/NAMED_IAM、Forwarder は IAM ロールを作成するため
+## 寄稿
 
-CloudFormation Stack は、次の IAM ロールを作成します。
+プルリクエストは大歓迎です。こちらがクイックガイドです。
 
-- ForwarderRole: Forwarder Lambda 関数が S3 からログを読み取り、Secrets Manager から Datadog API キーをフェッチし、独自のログを書き込むための実行ロール。
+1. 実装する前に機能やバグ修正について話し合いたい場合は、[Datadog Slack コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルで私たちを見つけてください。
+1. ブランチをフォーク、複製、作成します。
+    ```bash
+    git clone git@github.com:<your-username>/datadog-serverless-functions.git
+    git checkout -b <my-branch>
+    ```
+1. コードを変更します
+1. ローカルの変更で構築します
+    ```bash
+    cd aws/logs_monitoring
+    ./tools/build_bundle.sh <SEMANTIC_VERSION> # any unique version is fine
+    ```
+1. 変更したコードでテスト Forwarder を更新し、テストします
+    ```bash
+    # Upload in the AWS Lambda console if you don't have AWS CLI
+    aws lambda update-function-code \
+        --region <AWS_REGION>
+        --function-name <FORWARDER_NAME> \
+        --zip-file fileb://.forwarder/aws-dd-forwarder-<SEMANTIC_VERSION>.zip
+    ```
+1. 単体テストを実行します
+    ```
+    python -m unittest discover . # for code in Python
+    ./trace_forwarder/scripts/run_tests.sh # for code in Go
+    ```
+1. インテグレーションテストを実行します
+    ```bash
+    ./tools/integration_tests/integration_tests.sh
 
-**IAM ステートメント**
+    # to update the snapshots if changes are expected
+    ./tools/integration_tests/integration_tests.sh --update
+    ```
+1. 変更が CloudFormation テンプレートに影響する場合は、自身の AWS アカウントに対してインストールテストを実行してください
+    ```bash
+    ./tools/installation_test.sh
+    ```
+1. フォークにプッシュして[プルリクエストを送信] [https://github.com/your-username/datadog-serverless-functions/compare/DataDog:master...master]します
 
-```json
-[
-  {
-    "Effect": "Allow",
-    "Action": [
-      "logs:CreateLogGroup",
-      "logs:CreateLogStream",
-      "logs:PutLogEvents"
-    ],
-    "Resource": "*"
-  },
-  {
-    "Action": ["s3:GetObject"],
-    "Resource": "arn:aws:s3:::*",
-    "Effect": "Allow"
-  },
-  {
-    "Action": ["secretsmanager:GetSecretValue"],
-    "Resource": "<ARN of DdApiKeySecret>",
-    "Effect": "Allow"
-  }
-]
-```
+## 高度な検索
 
-- `ForwarderZipCopierRole`: ForwarderZipCopier Lambda 関数が S3 バケットに Forwarder デプロイの zip ファイルをダウンロードするための実行ロール。
+### 他の Lambda 関数へのログ送信
 
-**IAM ステートメント**:
+Cloudformation パラメーター `AdditionalTargetLambdaARNs` を使用して、ログを他の Lambda 関数に送信することができます。この追加の Lambda 関数は、Datadog Forwarder が受信するのと同一の `event` と非同期で呼び出されます。
 
-```json
-[
-  {
-    "Effect": "Allow",
-    "Action": [
-      "logs:CreateLogGroup",
-      "logs:CreateLogStream",
-      "logs:PutLogEvents"
-    ],
-    "Resource": "*"
-  },
-  {
-    "Action": ["s3:PutObject", "s3:DeleteObject"],
-    "Resource": "<S3Bucket to Store the Forwarder Zip>",
-    "Effect": "Allow"
-  },
-  {
-    "Action": ["s3:ListBucket"],
-    "Resource": "<S3Bucket to Store the Forwarder Zip>",
-    "Effect": "Allow"
-  }
-]
-```
+### AWS PrivateLink サポート
 
-## コード署名
+AWS PrivateLink 使用して、VPC で Forwarder を実行し Datadog に接続します。AWS PrivateLink は、Datadog US サイト (datadoghq.com。datadoghq.eu は不可) を使用している Datadog 組織にのみ構成が可能です。
+
+1. [セットアップ手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)に従って、Datadog の **API** サービス用のエンドポイントを VPC に追加します。
+2. [同様の手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)で、Datadog の **ログ** サービス用に 2 つ目のエンドポイントを VPC に追加します。
+3. [同様の手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)で、Datadog の **トレース** サービス用に 3 つ目のエンドポイントを VPC に追加します。
+4. Forwarder がパブリックサブネットにデプロイされている場合以外は、こちらの[手順](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) に従い Secrets Manager および S3 のエンドポイントを VPC に追加し、Forwarder がこれらのサービスにアクセスできるようにします。
+5. CloudFormation テンプレートで Forwarder をインストールする際は、`DdUsePrivateLink`、`VPCSecurityGroupIds`、`VPCSubnetIds` を設定します。
+6. AWS VPC はまだ Resource Group Tagging API にエンドポイントを提供しないため、`DdFetchLambdaTags` オプションが無効になっていることを確認してください。
+
+### AWS VPC およびプロキシのサポート
+
+パブリックインターネットの直接アクセスを使用せずに Forwarder を VPC にデプロイする必要がある場合で、Datadog EU サイトへの接続に AWS PrivateLink を使用できない場合（所属組織が Datadog EU サイトにホストされている (例: datadoghq.eu) 場合など）は、プロキシを使用してデータを送信できます。
+
+1. Forwarder がパブリックサブネットにデプロイされている場合以外は、こちらの[手順](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) に従い Secrets Manager および S3 のエンドポイントを VPC に追加し、Forwarder がこれらのサービスにアクセスできるようにします。
+2. 以下のコンフィギュレーション ([HAProxy](https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/proxy_conf/haproxy.txt) or [Nginx](https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/proxy_conf/nginx.txt)) でプロキシを更新します。
+3. CloudFormation テンプレートで Forwarder をインストールする際は、`DdUseVPC`、`VPCSecurityGroupIds`、`VPCSubnetIds` を設定します。
+4. AWS VPC はまだ Resource Group Tagging API にエンドポイントを提供しないため、`DdFetchLambdaTags` オプションが無効になっていることを確認してください。
+5. `DdApiUrl` を `http://<proxy_host>:3834` または `https://<proxy_host>:3834` に設定します。
+6. `DdTraceIntakeUrl` を `http://<proxy_host>:3835` または `https://<proxy_host>:3835` に設定します。
+7. `DdUrl` を `<proxy_host>` に、`DdPort` を `3837` に設定します。
+8. `http` を使用したプロキシに接続する場合は、`DdNoSsl` を `true` に設定します。
+9. 自己署名証明書のある `https` を使用したプロキシに接続する場合は `DdSkipSslValidation` を `true` に設定します。
+
+### コード署名
 
 Datadog Forwarder は Datadog によって署名されています。Forwarder の整合性を確認したい場合は、手動インストール方法を使用してください。Forwarder ZIP ファイルをアップロードする前に、Datadog の署名プロファイル ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を含む[コード署名コンフィギュレーションを作成](https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-console)し、それを Forwarder Lambda 関数に関連付けます。
 
@@ -290,8 +238,7 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
 
 - `DdApiKey` - Datadog API キー。これは、Datadog の Integrations > APIs > API Keys にあります。
   API キーは AWS Secrets Manager に保存されます。
-- `DdSite` - メトリクスとログの送信先となる Datadog サイト。`datadoghq.com` か
-  `datadoghq.eu` のいずれかである必要があります
+- `DdSite` - メトリクスとログが送信される Datadog サイト。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`ddog-gov.com` です。
 
 ### Lambda 関数 (オプション)
 
@@ -363,3 +310,103 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
   使用されます。
 - `VPCSubnetIds` - VPC サブネット ID のカンマ区切りリスト。AWS PrivateLink が有効な場合に使用されます。
 - `AdditionalTargetLambdaARNs` - Datadog Forwarder が受信するのと同一の `event` と非同期で呼び出される Lambda ARN のコンマ区切りリスト。
+
+## アクセス許可
+
+CloudFormation Stack をデフォルトのオプションでデプロイするには、Datadog API キーをシークレットとして保存し、Forwarder のコード (zip ファイル) を格納する S3 バケットを作成し、Lambda 関数 (実行ロールとロググループを含む) を作成します。
+
+**IAM ステートメント**:
+
+```json
+{
+  "Effect": "Allow",
+  "Action": [
+    "cloudformation:*",
+    "secretsmanager:CreateSecret",
+    "secretsmanager:TagResource",
+    "s3:CreateBucket",
+    "s3:GetObject",
+    "s3:PutEncryptionConfiguration",
+    "s3:PutBucketPublicAccessBlock",
+    "iam:CreateRole",
+    "iam:GetRole",
+    "iam:PassRole",
+    "iam:PutRolePolicy",
+    "iam:AttachRolePolicy",
+    "lambda:CreateFunction",
+    "lambda:GetFunction",
+    "lambda:GetFunctionConfiguration",
+    "lambda:GetLayerVersion",
+    "lambda:InvokeFunction",
+    "lambda:PutFunctionConcurrency",
+    "lambda:AddPermission",
+    "logs:CreateLogGroup",
+    "logs:DescribeLogGroups",
+    "logs:PutRetentionPolicy"
+  ],
+  "Resource": "*"
+}
+```
+
+CloudFormation スタックを作成するには、次の機能が必要です。
+
+- CAPABILITY_AUTO_EXPAND、Forwarder テンプレートはマクロを使用するため (特に [AWS SAM](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html) マクロ)
+- CAPABILTY_IAM/NAMED_IAM、Forwarder は IAM ロールを作成するため
+
+CloudFormation Stack は、次の IAM ロールを作成します。
+
+- ForwarderRole: Forwarder Lambda 関数が S3 からログを読み取り、Secrets Manager から Datadog API キーをフェッチし、独自のログを書き込むための実行ロール。
+
+**IAM ステートメント**
+
+```json
+[
+  {
+    "Effect": "Allow",
+    "Action": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "Resource": "*"
+  },
+  {
+    "Action": ["s3:GetObject"],
+    "Resource": "arn:aws:s3:::*",
+    "Effect": "Allow"
+  },
+  {
+    "Action": ["secretsmanager:GetSecretValue"],
+    "Resource": "<ARN of DdApiKeySecret>",
+    "Effect": "Allow"
+  }
+]
+```
+
+- `ForwarderZipCopierRole`: ForwarderZipCopier Lambda 関数が S3 バケットに Forwarder デプロイの zip ファイルをダウンロードするための実行ロール。
+
+**IAM ステートメント**:
+
+```json
+[
+  {
+    "Effect": "Allow",
+    "Action": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "Resource": "*"
+  },
+  {
+    "Action": ["s3:PutObject", "s3:DeleteObject"],
+    "Resource": "<S3Bucket to Store the Forwarder Zip>",
+    "Effect": "Allow"
+  },
+  {
+    "Action": ["s3:ListBucket"],
+    "Resource": "<S3Bucket to Store the Forwarder Zip>",
+    "Effect": "Allow"
+  }
+]
+```
