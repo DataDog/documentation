@@ -56,8 +56,12 @@ Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de 
             value: "true"
         ```
 
-    - Définissez le ClusterRole de l'Agent de cluster à l'aide des autorisations RBAC suivantes : 
-
+    - Définissez le ClusterRole de l'Agent de cluster à l'aide des autorisations RBAC suivantes.
+Notez bien que pour les apiGroups `apps`, les live containers ont besoin d'autorisations
+pour recueillir des ressources kubernetes (`pods`, `services`, `nodes`, etc.)
+qui devraient déjà se trouver dans le RBAC si vous avez suivi la [documentation relative à la configuration de l'Agent de cluster][2].
+Si elles sont absentes, ajoutez-les (après
+`deployments`, `replicasets`) :
         ```yaml
           ClusterRole:
           - apiGroups:  # To create the datadog-cluster-id CM
@@ -76,17 +80,20 @@ Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de 
             verbs:
             - get
           ...
-          - apiGroups:  # to collect new resource types
+          - apiGroups:  # To collect new resource types
             - "apps"
             resources:
             - deployments
             - replicasets
+            # Below are in case RBAC was not setup from the above linked "Cluster Agent Setup documentation"
+            - pods 
+            - nodes
+            - services
             verbs:
             - list
             - get
             - watch
         ```
-
     Ces autorisations sont requises pour créer une ConfigMap `datadog-cluster-id` dans le même espace de nommage que le DaemonSet de l'Agent et le déploiement de l'Agent de cluster, mais également pour recueillir les déploiements et les ReplicaSets.
 
     Si la ConfigMap `cluster-id` n'est pas créée par l'Agent de cluster, le pod de l'Agent n'est pas initié, ce qui génère le statut `CreateContainerConfigError`. Si le pod de l'Agent est bloqué par l'absence de cette ConfigMap, modifiez les autorisations de l'Agent de cluster et redémarrez ses pods pour permettre la création de la CongifMap. Le pod de l'Agent récupèrera automatiquement un statut normal.
@@ -170,13 +177,13 @@ Pour combiner plusieurs recherches textuelles au sein d'une requête complexe, v
 | `OR`         | **Union** : un des deux termes figure dans les événements sélectionnés.                                                                       | java OR python                                                  |
 | `NOT` / `!`  | **Exclusion** : le terme suivant n'est PAS dans l'événement. Vous pouvez utiliser le mot `NOT` ou le caractère `!` pour effectuer la même opération. | java NOT elasticsearch <br> **équivalent** : java !elasticsearch |
 
-Utilisez des parenthèses pour regrouper les opérateurs. Par exemple, `(NOT (elasticsearch OR kafka) java) OR python`.
+Utilisez des parenthèses pour regrouper des opérateurs. Par exemple, `(NOT (elasticsearch OR kafka) java) OR python`.
 
 ### Filtrer et faire pivoter
 
 La capture d'écran ci-dessous illustre un système filtré de façon à visualiser un cluster Kubernetes composé de neuf nœuds. La charge RSS et la charge processeur des conteneurs sont affichées et comparées aux limites provisionnées pour les conteneurs (le cas échéant). Dans cet exemple, on constate que les conteneurs de ce cluster sont surprovisionnés. Vous pouvez définir des limites plus strictes et faire appel au bin packing pour optimiser l'utilisation des ressources.
 
-{{< img src="infrastructure/livecontainers/overprovisioned.png" alt="Sur-approvisionnement" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/overprovisioned.png" alt="Surprovisionnement" style="width:80%;">}}
 
 Les environnements de conteneur sont dynamiques et peuvent être difficiles à surveiller. La capture d'écran ci-dessous illustre une vue qui a été pivotée par `kube_service` et `host`, et filtrée par `kube_namespace:default` dans le but de réduire les données parasite liées au système. Vous pouvez voir où les différents services sont exécutés, ainsi que le degré de saturation des métriques clés : 
 
@@ -190,7 +197,7 @@ Pour les ressources Kubernetes, sélectionnez les tags Datadog à utiliser pour 
 
 ## Tagging
 
-Les conteneurs sont [tagués][8] avec tous les tags des hosts existants, ainsi qu'avec les métadonnées associées à chaque conteneur.
+Les conteneurs sont [tagués][8] avec tous les tags au niveau des hosts existants, ainsi qu'avec les métadonnées associées à chaque conteneur.
 
 Le tag `image_name` est ajouté à tous les conteneurs, y compris les intégrations avec des orchestrateurs couramment utilisés, telles que [ECS][4] et [Kubernetes][3], qui fournissent davantage de tags au niveau des conteneurs. De plus, chaque conteneur est doté d'une icône Docker, ECS ou Kubernetes afin de pouvoir identifier en quelques secondes les conteneurs orchestrés. 
 
@@ -227,9 +234,9 @@ Utilisez l'analyse de nuage de points pour comparer deux métriques entre elles 
 
 Pour accéder à l'analyse de nuage de points [dans la page Containers][1], cliquez sur le bouton *Show Summary graph*, puis sélectionnez l'onglet « Scatter Plot » :
 
-{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="sélection nuage de points" style="width:60%;">}}
+{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="sélection de nuage de points" style="width:60%;">}}
 
-Par défaut, le graphique effectue un regroupement à partir de la clé de tag `short_image`. La taille de chaque point dépend du nombre de conteneurs du groupe. Lorsque vous cliquez sur un point, cela affiche chaque conteneur et host qui contribue au groupe.
+Par défaut, le graphique regroupe les données à partir de la clé de tag `short_image`. La taille de chaque point dépend du nombre de conteneurs du groupe. Lorsque vous cliquez sur un point, cela affiche chaque conteneur et host qui contribue au groupe.
 
 La requête en haut de la fenêtre vous permet de contrôler les différentes options de l'analyse de nuage de points :
 
@@ -241,7 +248,7 @@ La requête en haut de la fenêtre vous permet de contrôler les différentes op
 
 #### Surveillance en temps réel
 
-Lorsque vous utilisez activement la page des conteneurs, les métriques sont recueillies toutes les deux secondes. Cet aspect est très important pour les métriques hautement volatiles, telles que l'utilisation du processeur. En arrière-plan, pour le contexte historique, les métriques sont recueillies toutes les 10 secondes.
+Lorsque vous utilisez activement la page des conteneurs, les métriques sont recueillies toutes les deux secondes. Cette particularité est très importante pour les métriques hautement volatiles, telles que l'utilisation du processeur. En arrière-plan, pour le contexte historique, les métriques sont recueillies toutes les 10 secondes.
 
 ### Vue Ressources Kubernetes
 
@@ -282,13 +289,13 @@ Vous pouvez effectuer des recherches parmi les logs du flux à l'aide d'une simp
 
 **Remarque** : les logs diffusés ne sont pas persistants. Si vous saisissez une nouvelle recherche ou actualisez la page, le contenu du flux est effacé.
 
-{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Aperçu logs volet latéral" video="true" >}}
+{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Aperçu des logs dans le volet latéral" video="true" >}}
 
 #### Logs indexés
 
-Choisissez un intervalle pour afficher les logs correspondants que vous avez choisis d'indexer et de rendre persistants. L'indexation vous permet de filtrer vos logs à l'aide de tags et de facettes. Par exemple, pour rechercher des logs affichant le statut `Error`, saisissez `status:error` dans la zone de recherche. La fonction de saisie automatique peut vous aider à trouver le tag que vous souhaitez utiliser. Les attributs clés de vos logs sont déjà stockés dans des tags, ce qui vous permet de les rechercher, filtrer et agréger en cas de besoin.
+Choisissez un intervalle pour afficher les logs correspondants que vous avez choisis d'indexer et de rendre persistants. L'indexation vous permet de filtrer vos logs à l'aide de tags et de facettes. Par exemple, pour rechercher des logs affichant le statut `Error`, saisissez `status:error` dans la zone de recherche. La fonction de saisie automatique peut vous aider à trouver le tag de votre choix. Les attributs clés de vos logs sont déjà stockés dans des tags, ce qui vous permet de les rechercher, filtrer et agréger en cas de besoin.
 
-{{< img src="infrastructure/livecontainers/errorlogs.png" alt="Aperçu logs volet latéral" style="width:100%;">}}
+{{< img src="infrastructure/livecontainers/errorlogs.png" alt="Aperçu des logs dans le volet latéral" style="width:100%;">}}
 
 ## Remarques et problèmes connus
 

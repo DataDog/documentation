@@ -4,6 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     RethinkDB Overview: assets/dashboards/overview.json
+  docs:
+    spec: assets/docs/spec.yaml
   logs:
     source: rethinkdb
   metrics_metadata: metadata.csv
@@ -58,16 +60,21 @@ RethinkDB チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 ### コンフィギュレーション
 
-1. RethinkDB 2.4 以降を使用する場合は、`rethinkdb` データベースに対して読み取り専用のアクセス許可を持つ `datadog-agent` ユーザーを追加してください。以下の ReQL コマンドを使用できます。詳しくは、[アクセス許可とユーザーアカウント][4]を参照してください。
+1. RethinkDB 2.4 以降を使用する場合は、`rethinkdb` データベースに対して読み取り専用のアクセス許可を持つ `datadog-agent` ユーザーを追加してください。
+以下の ReQL コマンドを使用できます。詳しくは、[アクセス許可とユーザーアカウント][4]を
+参照してください。
 
     ```python
     r.db('rethinkdb').table('users').insert({'id': 'datadog-agent', 'password': '<PASSWORD>'})
     r.db('rethinkdb').grant('datadog-agent', {'read': True})
     ```
 
-    **注**: RethinkDB 2.3.x の場合、`rethinkdb` データベースに対するアクセス許可の付与はサポートされていません。この手順をスキップし、下記の [管理者アカウント][5] を使用してください。
+    **注**: RethinkDB 2.3.x の場合、`rethinkdb` データベースに対するアクセス許可の付与はサポートされていません。
+   この手順をスキップし、下記の[管理者アカウント][5]を使用してください。
 
-2. [Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `rethinkdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[rethinkdb.d/conf.yaml のサンプル][7]を参照してください。
+2. [Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `rethinkdb.d/conf.yaml` ファイルを編集します。
+使用可能なすべてのコンフィギュレーションオプションについては、[rethinkdb.d/conf.yaml のサンプル][7]を
+参照してください。
 
     ```yaml
     init_config:
@@ -83,7 +90,7 @@ RethinkDB チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 **注**: このインテグレーションはクラスター内のすべてのサーバーからメトリクスを収集します。したがって、Agent は 1 つしか必要ありません。
 
-##### ログの収集
+#### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -103,11 +110,12 @@ _Agent バージョン 6.0 以降で利用可能_
         service: "<SERVICE_NAME>"
     ```
 
-    `path` パラメーターと `service` パラメーターの値を環境に合わせて変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[rethinkdb.d/conf.yaml のサンプル][7]を参照してください。
 
-3. [Agent を再起動します][8]。
+`path` パラメーターと `service` パラメーターの値を環境に合わせて変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、https://github.com/DataDog/integrations-core/blob/master/rethinkdb/datadog_checks/rethinkdb/data/conf.yaml.example を参照してください。
 
-Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][9]を参照してください。
+  3. [Agent を再起動します][8]。
+
+  Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][9]を参照してください。
 
 ### 検証
 
@@ -115,26 +123,20 @@ Kubernetes 環境でログを収集する Agent を構成する追加の情報�
 
 ## 収集データ
 
+
+
 ### メトリクス
 {{< get-metrics-from-git "rethinkdb" >}}
 
 
 ### サービスのチェック
 
-**rethinkdb.can_connect**:<br>
-構成された RethinkDB サーバーに Agent が到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+- `rethinkdb.can_connect`: 構成された RethinkDB サーバーに Agent が到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+- `rethinkdb.table_status.status.ready_for_outdated_reads`: テーブルのすべてのシャードで旧バージョンの読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
+- `rethinkdb.table_status.status.ready_for_outdated_reads`: テーブルのすべてのシャードで読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
+- `rethinkdb.table_status.status.ready_for_writes`: テーブルのすべてのシャードで書き込みクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
+- `rethinkdb.table_status.status.all_replicas_ready`: すべてのレプリカで読み取りと書き込みの処理が可能であれば `OK` を、それ以外の場合（バックフィルが進行中であるなど）は `WARNING` を返します。
 
-**rethinkdb.table_status.status.ready_for_outdated_reads**:<br>
-テーブルのすべてのシャードで旧バージョンの読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-
-**rethinkdb.table_status.status.ready_for_reads**:<br>
-テーブルのすべてのシャードで読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-
-**rethinkdb.table_status.status.ready_for_writes**:<br>
-テーブルのすべてのシャードで読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-
-**rethinkdb.table_status.status.all_replicas_ready**:<br>
-すべてのレプリカで読み取りと書き込みの処理が可能であれば `OK` を、それ以外の場合（バックフィルが進行中であるなど）は `WARNING` を返します。
 
 ### イベント
 
@@ -144,7 +146,7 @@ RethinkDB には、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-[1]: https://rethinkdb.com/
+[1]: https://rethinkdb.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://rethinkdb.com/docs/permissions-and-accounts/
