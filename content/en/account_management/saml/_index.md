@@ -9,6 +9,10 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+{{< /site-region >}}
+
 **This documentation assumes that you already have a SAML Identity Provider up and running.**
 
 Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog account lets you and all your teammates log in to Datadog using the credentials stored in your organization's Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
