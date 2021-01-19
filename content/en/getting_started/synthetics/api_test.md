@@ -11,6 +11,10 @@ further_reading:
     - link: '/synthetics/settings/'
       tag: 'Documentation'
       text: 'Configure advanced Synthetic Monitoring settings'
+    - link: '/api/v1/synthetics/#create-a-test'
+      tag: 'API Docs'
+      text: 'Create a Synthetic test programmatically'
+
 ---
 
 ## Create an API test
@@ -76,6 +80,7 @@ Datadog also has an [APM integration with Synthetic Monitoring][7] which allows 
 {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}Learn more about API tests{{< /nextlink >}}
 {{< nextlink href="/synthetics/identify_synthetics_bots" tag="Documentation" >}}Learn how to identify Synthetic bots for API tests{{< /nextlink >}}
 {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advanced Synthetic Monitoring settings{{< /nextlink >}}
+{{< nextlink href="/api/v1/synthetics/#create-a-test" tag="API Docs" >}}Create a Synthetic test programmatically{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /synthetics/api_tests/
