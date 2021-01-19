@@ -88,6 +88,8 @@ For Error Tracking to properly work with your source maps, you must configure yo
 
 **Note**: Currently only source maps with the `.min.js` extension will work to correctly unminify stack traces in the Error Tracking UI. Source maps with other extensions (for example, `.mjs`, etc.) while accepted will not unminify stack traces. 
 
+<div class="alert alert-info">In some cases, a given JavaScript source file can be served from different subdomains depending on the environment (staging, production, ...). You can upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full url (i.e: specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
