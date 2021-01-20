@@ -20,7 +20,9 @@ further_reading:
 
 ## Overview
 
-ICMP tests allow you to easily **monitor the availability of your hosts and diagnose network communication issues to verify responsiveness from your application's endpoints**. By asserting on the values received from one or more **ICMP ping(s)** to your endpoint, Datadog can help **detect availability/connectivity issues, above-quota latency or hops, and changes in security firewall configuration**. ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger ICMP pings to your endpoints from outside or inside your network.
+ICMP tests allow you to easily **monitor the availability of your hosts** and **diagnose network communication issues**. By asserting on the values received from one or more **ICMP ping(s)** to your endpoint, Datadog can help **detect connectivity issues, above-quota latency or hops, and unexpected changes in security firewall configuration**.  
+ 
+ICMP tests can run from [**managed**][1] and [**private locations**][2] depending on whether you are willing to trigger ICMP pings to your endpoints from outside or inside your network.
 
 ## Configuration
 
@@ -30,10 +32,10 @@ After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][
 
 ![][8]
 
-1. Specify the **domain name** or **IP address** to run your test on.
-2. Select the **number of pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to increase or decrease.
+1. Specify the **Domain Name** or **IP address** to run your test on.
+2. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to increase or decrease.
 3. **Name** your ICMP test.
-4. Add env **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
+4. Add `env` **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
 5. Select the **Locations** to run your ICMP test from: ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger the ICMP pings from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
@@ -50,7 +52,7 @@ ICMP tests can run:
 
 ### Define Assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `latency`, `packet loss` and ICMP ping result is added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `latency`, `packet loss` and `ICMP ping result` is added. You must define at least one assertion for your test to monitor.
 
 | Type          | Operator                                                                               | Value Type       |
 |---------------|----------------------------------------------------------------------------------------|------------------|
