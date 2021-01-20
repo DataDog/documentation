@@ -150,7 +150,7 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
 
   `docker network create <NETWORK_NAME>`
   
-- Run the OpenTelemetry Collector container and Application container in the same network. *Note*: When running the application container, ensure the environment variable `OTEL_EXPORTER_OTLP_SPAN_ENDPOINT` is configured to use the appropriate hostname for the Collector. In the example below this would be `opentelemetry-collector`
+- Run the OpenTelemetry Collector container and Application container in the same network. *Note*: When running the application container, ensure the environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` is configured to use the appropriate hostname for the Collector. In the example below this would be `opentelemetry-collector`
  
   ```
   # Datadog Agent
@@ -165,7 +165,7 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
   # Application
   docker run -d --name app \
             --network <NETWORK_NAME> \
-            -e OTEL_EXPORTER_OTLP_SPAN_ENDPOINT=http://opentelemetry-collector:55680 \
+            -e OTEL_EXPORTER_OTLP_ENDPOINT=http://opentelemetry-collector:55680 \
             company/app:latest
   ```
 
@@ -177,7 +177,7 @@ In order to accurately track the appropriate metadata in Datadog for information
 
 - When deploying the OpenTelemetry Collector as a Daemonset, refer to [the example configuration below](#opentelemetry-kubernetes-example-collector-configuration) as a guide.
 
-- On the application container, use the downward API to pull the host IP; the application container needs an environment variable that points to status.hostIP. The OpenTelemetry Collector container Agent expects this to be named `OTEL_EXPORTER_OTLP_SPAN_ENDPOINT`. Use the [below example snippet](#opentelemetry-kubernetes-example-application-configuration) as a guide.
+- On the application container, use the downward API to pull the host IP; the application container needs an environment variable that points to status.hostIP. The OpenTelemetry Collector container Agent expects this to be named `OTEL_EXPORTER_OTLP_ENDPOINT`. Use the [below example snippet](#opentelemetry-kubernetes-example-application-configuration) as a guide.
 
 ##### OpenTelemetry Kubernetes Example Collector Configuration
 
@@ -453,7 +453,7 @@ spec:
           fieldRef:
             fieldPath: status.hostIP
         # This is picked up by the opentelemetry sdks
-      - name: OTEL_EXPORTER_OTLP_SPAN_ENDPOINT
+      - name: OTEL_EXPORTER_OTLP_ENDPOINT
         value: "http://$(HOST_IP):55680"
 ```
 
