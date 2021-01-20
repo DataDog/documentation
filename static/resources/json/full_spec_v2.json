@@ -16648,6 +16648,7 @@
                           "count",
                           "distribution"
                         ],
+                        "example": "distribution",
                         "type": "string",
                         "x-enum-varnames": [
                           "COUNT",
@@ -16656,6 +16657,7 @@
                       },
                       "path": {
                         "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                        "example": "@duration",
                         "type": "string"
                       }
                     },
@@ -16666,6 +16668,7 @@
                     "properties": {
                       "query": {
                         "description": "The search query - following the log search syntax.",
+                        "example": "service:web* AND @http.status_code:[200 TO 299]",
                         "type": "string"
                       }
                     },
@@ -16678,10 +16681,12 @@
                       "properties": {
                         "path": {
                           "description": "The path to the value the log-based metric will be aggregated over.",
+                          "example": "@http.status_code",
                           "type": "string"
                         },
                         "tag_name": {
                           "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                          "example": "status_code",
                           "type": "string"
                         }
                       },
@@ -16727,6 +16732,7 @@
                   "count",
                   "distribution"
                 ],
+                "example": "distribution",
                 "type": "string",
                 "x-enum-varnames": [
                   "COUNT",
@@ -16735,6 +16741,7 @@
               },
               "path": {
                 "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                "example": "@duration",
                 "type": "string"
               }
             },
@@ -16745,6 +16752,7 @@
             "properties": {
               "query": {
                 "description": "The search query - following the log search syntax.",
+                "example": "service:web* AND @http.status_code:[200 TO 299]",
                 "type": "string"
               }
             },
@@ -16757,10 +16765,12 @@
               "properties": {
                 "path": {
                   "description": "The path to the value the log-based metric will be aggregated over.",
+                  "example": "@http.status_code",
                   "type": "string"
                 },
                 "tag_name": {
                   "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                  "example": "status_code",
                   "type": "string"
                 }
               },
@@ -16780,6 +16790,7 @@
               "count",
               "distribution"
             ],
+            "example": "distribution",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -16788,6 +16799,7 @@
           },
           "path": {
             "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+            "example": "@duration",
             "type": "string"
           }
         },
@@ -16799,6 +16811,7 @@
           "count",
           "distribution"
         ],
+        "example": "distribution",
         "type": "string",
         "x-enum-varnames": [
           "COUNT",
@@ -16820,6 +16833,7 @@
                       "count",
                       "distribution"
                     ],
+                    "example": "distribution",
                     "type": "string",
                     "x-enum-varnames": [
                       "COUNT",
@@ -16828,6 +16842,7 @@
                   },
                   "path": {
                     "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                    "example": "@duration",
                     "type": "string"
                   }
                 },
@@ -16838,6 +16853,7 @@
                 "properties": {
                   "query": {
                     "description": "The search query - following the log search syntax.",
+                    "example": "service:web* AND @http.status_code:[200 TO 299]",
                     "type": "string"
                   }
                 },
@@ -16850,10 +16866,12 @@
                   "properties": {
                     "path": {
                       "description": "The path to the value the log-based metric will be aggregated over.",
+                      "example": "@http.status_code",
                       "type": "string"
                     },
                     "tag_name": {
                       "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                      "example": "status_code",
                       "type": "string"
                     }
                   },
@@ -16889,6 +16907,7 @@
         "properties": {
           "query": {
             "description": "The search query - following the log search syntax.",
+            "example": "service:web* AND @http.status_code:[200 TO 299]",
             "type": "string"
           }
         },
@@ -16899,10 +16918,12 @@
         "properties": {
           "path": {
             "description": "The path to the value the log-based metric will be aggregated over.",
+            "example": "@http.status_code",
             "type": "string"
           },
           "tag_name": {
             "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+            "example": "status_code",
             "type": "string"
           }
         },
@@ -17116,6 +17137,7 @@
                             "count",
                             "distribution"
                           ],
+                          "example": "distribution",
                           "type": "string",
                           "x-enum-varnames": [
                             "COUNT",
@@ -17124,6 +17146,7 @@
                         },
                         "path": {
                           "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                          "example": "@duration",
                           "type": "string"
                         }
                       },
@@ -17134,6 +17157,7 @@
                       "properties": {
                         "query": {
                           "description": "The search query - following the log search syntax.",
+                          "example": "service:web* AND @http.status_code:[200 TO 299]",
                           "type": "string"
                         }
                       },
@@ -17146,10 +17170,12 @@
                         "properties": {
                           "path": {
                             "description": "The path to the value the log-based metric will be aggregated over.",
+                            "example": "@http.status_code",
                             "type": "string"
                           },
                           "tag_name": {
                             "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                            "example": "status_code",
                             "type": "string"
                           }
                         },
@@ -38899,6 +38925,7 @@
                                       "count",
                                       "distribution"
                                     ],
+                                    "example": "distribution",
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "COUNT",
@@ -38907,6 +38934,7 @@
                                   },
                                   "path": {
                                     "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                    "example": "@duration",
                                     "type": "string"
                                   }
                                 },
@@ -38917,6 +38945,7 @@
                                 "properties": {
                                   "query": {
                                     "description": "The search query - following the log search syntax.",
+                                    "example": "service:web* AND @http.status_code:[200 TO 299]",
                                     "type": "string"
                                   }
                                 },
@@ -38929,10 +38958,12 @@
                                   "properties": {
                                     "path": {
                                       "description": "The path to the value the log-based metric will be aggregated over.",
+                                      "example": "@http.status_code",
                                       "type": "string"
                                     },
                                     "tag_name": {
                                       "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                      "example": "status_code",
                                       "type": "string"
                                     }
                                   },
@@ -39172,6 +39203,7 @@
                                     "count",
                                     "distribution"
                                   ],
+                                  "example": "distribution",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
@@ -39180,6 +39212,7 @@
                                 },
                                 "path": {
                                   "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                  "example": "@duration",
                                   "type": "string"
                                 }
                               },
@@ -39190,6 +39223,7 @@
                               "properties": {
                                 "query": {
                                   "description": "The search query - following the log search syntax.",
+                                  "example": "service:web* AND @http.status_code:[200 TO 299]",
                                   "type": "string"
                                 }
                               },
@@ -39202,10 +39236,12 @@
                                 "properties": {
                                   "path": {
                                     "description": "The path to the value the log-based metric will be aggregated over.",
+                                    "example": "@http.status_code",
                                     "type": "string"
                                   },
                                   "tag_name": {
                                     "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                    "example": "status_code",
                                     "type": "string"
                                   }
                                 },
@@ -39511,6 +39547,7 @@
                                     "count",
                                     "distribution"
                                   ],
+                                  "example": "distribution",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
@@ -39519,6 +39556,7 @@
                                 },
                                 "path": {
                                   "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                  "example": "@duration",
                                   "type": "string"
                                 }
                               },
@@ -39529,6 +39567,7 @@
                               "properties": {
                                 "query": {
                                   "description": "The search query - following the log search syntax.",
+                                  "example": "service:web* AND @http.status_code:[200 TO 299]",
                                   "type": "string"
                                 }
                               },
@@ -39541,10 +39580,12 @@
                                 "properties": {
                                   "path": {
                                     "description": "The path to the value the log-based metric will be aggregated over.",
+                                    "example": "@http.status_code",
                                     "type": "string"
                                   },
                                   "tag_name": {
                                     "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                    "example": "status_code",
                                     "type": "string"
                                   }
                                 },
@@ -39782,6 +39823,7 @@
                                     "count",
                                     "distribution"
                                   ],
+                                  "example": "distribution",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
@@ -39790,6 +39832,7 @@
                                 },
                                 "path": {
                                   "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                  "example": "@duration",
                                   "type": "string"
                                 }
                               },
@@ -39800,6 +39843,7 @@
                               "properties": {
                                 "query": {
                                   "description": "The search query - following the log search syntax.",
+                                  "example": "service:web* AND @http.status_code:[200 TO 299]",
                                   "type": "string"
                                 }
                               },
@@ -39812,10 +39856,12 @@
                                 "properties": {
                                   "path": {
                                     "description": "The path to the value the log-based metric will be aggregated over.",
+                                    "example": "@http.status_code",
                                     "type": "string"
                                   },
                                   "tag_name": {
                                     "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                    "example": "status_code",
                                     "type": "string"
                                   }
                                 },
