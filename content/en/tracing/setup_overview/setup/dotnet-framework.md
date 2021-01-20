@@ -227,7 +227,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ## Configuration settings
 
-Using the methods described above, customize your tracing configuration with the variables in the following tables. Use the first name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. Use the second name (for example, `AgentUri`), for the `TracerSettings` property (if present) when changing settings in code.  
+Using the methods described above, customize your tracing configuration with the variables in the following tables. When adding settings by using environment variables or configuration files, use the first name (for example, `DD_TRACE_AGENT_URL`). When adding settings in code, use the `TracerSettings` property that corresponds to the second name, if present  (for example, `AgentUri`). 
 
 ### Unified Service Tagging
 
@@ -237,8 +237,8 @@ To use [Unified Service Tagging][7], configure the following settings for your s
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. Added in version 1.17.0                                           |
 | `DD_SERVICE`<br/><br/>`ServiceName`                 | If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). Added in version 1.17.0      |
-| `DD_VERSION`<br/><br/>`ServiceVersion`              | If specified, sets the version of the service. Added in version 1.17.0
-| `DD_TAGS`<br/><br/>`GlobalTags`                     | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`). Added in version 1.17.0                                                                                                                                              |
+| `DD_VERSION`<br/><br/>`ServiceVersion`              | If specified, sets the version of the service. Added in version 1.17.0  |
+
 ### Additional optional configuration
 
 The following table lists the supported configuration variables that are available for both automatic and custom instrumentation.
@@ -251,6 +251,8 @@ The following table lists the supported configuration variables that are availab
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 | `DD_TRACE_DEBUG`<br/><br/>`DebugEnabled`           | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
 | `DD_TRACE_HEADER_TAGS`<br/><br/> `HeaderTags`       | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Added in version 1.18.3      |
+| `DD_TAGS`<br/><br/>`GlobalTags`                     | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`). Added in version 1.17.0                                  |
+
 
 ### Automatic instrumentation optional configuration
 
