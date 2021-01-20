@@ -35,14 +35,6 @@ The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and
 
 ## Getting started
 
-### Follow the in-app documentation (Recommended)
-
-Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable ingesting 100% of traces and add Trace ID injection into logs during setup.
-
 **Note**: The .NET Tracer supports all .NET-based languages (C#, F#, Visual Basic, etc).
 
 ## Automatic Instrumentation
@@ -62,7 +54,7 @@ Automatic instrumentation captures:
 
 {{% tab "Windows" %}}
 
-Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
 
 To use automatic instrumentation on Windows, install the .NET Tracer on the host by running the [MSI installer for Windows][2] as administrator. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
@@ -388,7 +380,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ### Configuration Variables
 
-The following tables list the supported configuration variables. Use the first name (e.g. `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. The second name, if present (e.g. `AgentUri`), indicates the name the `TracerSettings` propery to use when changing settings in the code.
+Using the methods described above, customize your tracing configuration with the variables in the following tables. Use the first name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. The second name (for example, `AgentUri`), indicates the name for the `TracerSettings` property to use when changing settings in code.
 
 #### Unified Service Tagging
 
