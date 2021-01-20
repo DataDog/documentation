@@ -48,6 +48,6 @@ function onCheckoutButtonClick(cart) {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: real_user_monitoring/browser/data_collected/?tab=useraction#automatic-collection-of-actions
+[1]: /ja/real_user_monitoring/browser/data_collected/?tab=useraction#automatic-collection-of-actions
 [2]: /ja/real_user_monitoring/browser/advanced_configuration/#replace-global-context
 [3]: /ja/real_user_monitoring/explorer
