@@ -34,7 +34,7 @@ The geomap widget graphs any metric that has a country tag or facet.
     * Log Events: See [the log search documentation][3] to configure a log event query.
       * **Note**: The group by tag must include a country ISO Code. You can use the [GeoIP Processor][6] to do this, or manually include the [tags on ingest][8].
     * Metric: See the [querying][1] documentation to configure a metric query. 
-      * Note: The group by tag must include a country ISO Code. You can [Generate Metrics from Injested Logs][7], or manually include the [tags on ingest][8].
+      * **Note**: The group by tag must include a country ISO Code. You can [generate metrics from ingested logs][7], or manually include the [tags on ingest][8].
 
 2. Optional: configure your view box depending on where you'd like to zoom into on the map by defailt.
 
