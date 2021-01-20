@@ -32,7 +32,9 @@ The geomap widget graphs any metric that has a across country tag/facet.
 1. Choose the data to graph:
     * RUM: See [the RUM documentation][2] to configure a RUM query. 
     * Log Events: See [the log search documentation][3] to configure a log event query.
-    * Metric: See the [querying][1] documentation to configure a metric query. Please note that the tag must include a country ISO Cose
+      * Note: The group by tag must include a country ISO Code. You can use the [GeoIP Processor][6] to do this, or manually include the [tags on ingest][8].
+    * Metric: See the [querying][1] documentation to configure a metric query. 
+      * Note: The group by tag must include a country ISO Code. You can [Generate Metrics from Injested Logs][7], or manually include the [tags on ingest][8].
 
 2. Optional: configure your view box depending on where you'd like to zoom into on the map by defailt.
 
@@ -67,3 +69,6 @@ The dedicated [widget JSON schema definition][5] for the top list widget is:
 [3]: /logs/search_syntax/
 [4]: /api/v1/dashboards/
 [5]: /dashboards/graphing_json/widget_json/
+[6]: /logs/processing/processors/?tab=ui#geoip-parser
+[7]: /logs/logs_to_metrics/
+[8]: /getting_started/tagging/#defining-tags
