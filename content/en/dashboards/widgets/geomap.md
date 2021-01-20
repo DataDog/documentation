@@ -19,7 +19,7 @@ further_reading:
   text: "Notebooks"
 ---
 
-The geomap widget graphs any metric that has a across country tag/facet.
+The geomap widget graphs any metric that has a country tag or facet.
 
 {{< img src="dashboards/widgets/geomap/geomap.png" alt="Geomap" >}}
 
