@@ -285,7 +285,7 @@ For more details on manual instrumentation and custom tagging, see [Manual instr
 
 Manual instrumentation is supported on .NET Framework 4.5 and above on Windows, on .NET Core 2.0 and above on Windows and Linux, and on .NET 5 on Windows and Linux.
 
-**Note:** If you are using both MSI installer and NuGet packages, it is important to keep their versions in sync.
+**Note:**  If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 
 ## Configuration
 

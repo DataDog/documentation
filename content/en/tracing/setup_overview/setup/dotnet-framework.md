@@ -42,7 +42,7 @@ The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and abo
 ### Automatic instrumentation
 
 <div class="alert alert-warning"> 
-  <strong>Note:</strong> If you are using both MSI installer and NuGet packages, it is important to keep their versions in sync.
+  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 </div>
 
 Follow these instructions to begin tracing .NET applications: 
@@ -118,7 +118,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 ## Custom instrumentation
 
 <div class="alert alert-warning"> 
-  <strong>Note:</strong> If you are using both MSI installer and NuGet packages, it is important to keep their versions in sync.
+  <strong>Note:</strong>  If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 </div>
 
 To use custom instrumentation in your .NET application:
