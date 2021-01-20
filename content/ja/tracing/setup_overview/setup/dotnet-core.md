@@ -340,6 +340,7 @@ dotnet example.dll
 
 ```csharp
 using Datadog.Trace;
+using Datadog.Trace.Configuration;
 
 // デフォルトの構成ソースを読み取る (env vars、web.config、datadog.json)
 var settings = TracerSettings.FromDefaultSources();
@@ -420,6 +421,8 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 | `DD_TRACE_LOG_DIRECTORY`                                        | .NET Tracer ログのディレクトリを設定します。<br/><br/>Windows のデフォルト: `%ProgramData%\Datadog .NET Tracer\logs\`<br/><br/>Linux のデフォルト: `/var/log/datadog/dotnet/`                                                                                                                                                                                     |
 | `DD_TRACE_LOG_PATH`                                             | 自動インスツルメンテーションログファイルにパスを設定し、他のすべての .NET Tracer ログファイルのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合は、無視されます。                                                                              |
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames`  | 無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][2]セクションでリストされているインテグレーション名です。           |
+| `DD_HTTP_CLIENT_ERROR_STATUSES`                                 | HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。デフォルト値は `400-499` です。 |
+| `DD_HTTP_SERVER_ERROR_STATUSES`                                 | HTTP サーバースパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。デフォルト値は `500-599` です。 |
 | `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | 自動インスツルメンテーションから除外される `AdoNet` タイプ (たとえば、`System.Data.SqlClient.SqlCommand`) のリストを設定します。 |
 
 次の表は、自動インスツルメンテーションの使用時にのみ利用できる構成変数の一覧で、インテグレーションごとに設定できます。環境変数またはコンフィギュレーションファイルの設定には最初の名前 (`DD_<INTEGRATION>_ENABLED` など) を使用します。2 つ目の名前 (`Enabled` など) は、コードの設定を変更する際に使用する `IntegrationSettings` プロパティの名前を示します。これらのプロパティには `TracerSettings.Integrations[]` インデクサを通じてアクセスします。インテグレーション名については、[インテグレーション][2]セクションを参照してください。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
