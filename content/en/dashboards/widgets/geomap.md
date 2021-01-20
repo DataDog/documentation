@@ -32,7 +32,7 @@ The geomap widget graphs any metric that has a country tag or facet.
 1. Choose the data to graph:
     * RUM: See [the RUM documentation][2] to configure a RUM query. 
     * Log Events: See [the log search documentation][3] to configure a log event query.
-      * Note: The group by tag must include a country ISO Code. You can use the [GeoIP Processor][6] to do this, or manually include the [tags on ingest][8].
+      * **Note**: The group by tag must include a country ISO Code. You can use the [GeoIP Processor][6] to do this, or manually include the [tags on ingest][8].
     * Metric: See the [querying][1] documentation to configure a metric query. 
       * Note: The group by tag must include a country ISO Code. You can [Generate Metrics from Injested Logs][7], or manually include the [tags on ingest][8].
 
