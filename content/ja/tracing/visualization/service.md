@@ -14,6 +14,9 @@ further_reading:
   - link: /tracing/visualization/trace/
     tag: Documentation
     text: Datadog トレースの読み方を理解する
+  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+    tag: ブログ
+    text: APM サービス詳細画面の URL をクリップボードに追加する
 ---
 {{< img src="tracing/visualization/service/detailed_service_page.png" alt="サービス詳細画面"  style="width:90%;">}}
 

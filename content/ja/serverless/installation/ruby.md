@@ -47,7 +47,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:5
 ```
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][10]に追加する必要があります。
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][5]に追加する必要があります。
 
 #### Gem の使用
 
@@ -103,11 +103,15 @@ end
 1. [まだの場合は、Datadog Forwarder をインストールします][2]。
 2. [Datadog Forwarder を関数のロググループにサブスクライブします][6]。
 
+### 統合サービスタグ付け
+
+これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][7]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
+
 ## Datadog サーバーレスモニタリングの利用
 
-以上の方法で関数を構成すると、[Serverless Homepage][7] でメトリクス、ログ、トレースを確認できるようになるはずです。
+以上の方法で関数を構成すると、[Serverless Homepage][8] でメトリクス、ログ、トレースを確認できるようになるはずです。
 
-### カスタムビジネスロジックの監視
+## カスタムビジネスロジックの監視
 
 カスタムメトリクスまたはスパンの送信をご希望の場合は、以下のコード例をご参照ください。
 
@@ -152,7 +156,7 @@ def some_operation()
 end
 ```
 
-カスタムメトリクス送信の詳細については、[ここ][8]を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][9]の Datadog APM ドキュメントを参照してください。
+カスタムメトリクス送信の詳細については、[ここ][9]を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][10]の Datadog APM ドキュメントを参照してください。
 
 ## その他の参考資料
 
@@ -162,9 +166,9 @@ end
 [2]: /ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [4]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
-[5]: https://rubygems.org/gems/datadog-lambda
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [6]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://app.datadoghq.com/functions
-[8]: /ja/serverless/custom_metrics?tab=ruby
-[9]: /ja/tracing/custom_instrumentation/ruby/
-[10]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[7]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[8]: https://app.datadoghq.com/functions
+[9]: /ja/serverless/custom_metrics?tab=ruby
+[10]: /ja/tracing/custom_instrumentation/ruby/

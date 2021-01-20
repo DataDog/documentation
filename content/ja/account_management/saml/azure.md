@@ -32,10 +32,10 @@ further_reading:
 
 8. [Datadog SAML ページ][2]から `Service Provider Entity ID` と `Assertion Consumer Service URL` を取得します。デフォルト値は次のとおりです。
 
-    |                                |                                                                            |
-    |--------------------------------|----------------------------------------------------------------------------|
-    | Service Provider Entity ID     | `https://app.{{< region-param key="dd_site" >}}/account/saml/metadata.xml` |
-    | Assertion Consumer Service URL | `https://app.{{< region-param key="dd_site" >}}/account/saml/assertion`    |
+    |                                |                                                                                                                |
+    |--------------------------------|----------------------------------------------------------------------------------------------------------------|
+    | Service Provider Entity ID     | `https://{{< region-param key="dd_full_site" >}}/account/saml/metadata.xml` |
+    | Assertion Consumer Service URL | `https://{{< region-param key="dd_full_site" >}}/account/saml/assertion`    |
 
 9.  Azure で、上記で取得した値を追加し、保存をクリックします。
 

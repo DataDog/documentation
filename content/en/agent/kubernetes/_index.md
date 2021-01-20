@@ -99,6 +99,19 @@ The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` param
 
 If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][11] to map your previous settings with the new fields.
 
+### Unprivileged
+
+(Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
+
+```yaml
+datadog:
+  securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
@@ -180,6 +193,20 @@ To install the Datadog Agent on your Kubernetes cluster:
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
     ```
 
+### Unprivileged
+
+(Optional) To run an unprivileged installation, add the following to your [pod template][2]:
+
+```yaml
+  spec:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
+
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/yaml/datadog-agent-all-features.yaml
@@ -255,6 +282,21 @@ helm delete datadog
 
 For further details on setting up Operator, including information about using tolerations, refer to the [Datadog Operator advanced setup guide][7].
 
+## Unprivileged
+
+(Optional) To run an unprivileged installation, add the following to the [datadog CR][8]:
+
+```yaml
+agent:
+  config:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
+
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -262,19 +304,9 @@ For further details on setting up Operator, including information about using to
 [5]: https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: /agent/guide/operator-advanced
+[8]: https://github.com/DataDog/datadog-operator/blob/master/docs/configuration.md
 {{% /tab %}}
 {{< /tabs >}}
-
-### Unprivileged
-
-(Optional) To run an unprivileged installation, add the following to your [pod template][2]:
-
-```text
-  spec:
-    securityContext:
-      runAsUser: <USER_ID>
-      fsGroup: <DOCKER_GROUP_ID>
-```
 
 ## Additional Configuration
 

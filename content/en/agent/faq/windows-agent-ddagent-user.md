@@ -65,6 +65,8 @@ Every effort has been made to ensure that the transition from `LOCAL_SYSTEM` to 
 
 For example, if the directory check is monitoring a directory that has specific access rights, e.g. allowing only members of the Administrators group read access, then the existing Agent currently can monitor that directory successfully since `LOCAL_SYSTEM` has administrator rights. Upon upgrading, the administrator must add `ddagentuser` to the access control list for that directory in order for the directory check to function.
 
+**Note**: For Windows Server OS, the Windows Service integration cannot check against the DHCP Server service due to the special ACL for the `DHCPServer` service. The check returns `UNKNOWN` in such case.
+
 **Note**: The same considerations apply to the log files that may be monitored by the Logs Collection features of the Agent.
 
 ### JMX-based integrations

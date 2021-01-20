@@ -59,7 +59,7 @@ main_left:
     parent: product
   - identifier: rum
     name: Real User Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''rum icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''rum icon''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
@@ -204,6 +204,11 @@ main_left:
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
     weight: -440
+  - name: On-Premises Monitoring
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
+    weight: -439
 main_right:
   - identifier: about
     name: About
@@ -820,7 +825,7 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 902
-  - name: Mobile
+  - name: Mobile Application
     url: mobile/
     identifier: mobile
     pre: nav_mobile
@@ -942,70 +947,74 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 5
+  - name: Trace Merging (Advanced)
+    url: serverless/distributed_tracing/serverless_trace_merging
+    parent: serverless_distributed_tracing
+    weight: 501
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
     weight: 6
+  - name: Insights
+    url: serverless/insights
+    parent: serverless
+    weight: 7
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless
-    weight: 7
+    weight: 8
   - name: Serverless Integrations
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: serverless
-    weight: 8
+    weight: 9
   - name: Datadog Serverless Plugin
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 801
+    weight: 901
   - name: Datadog Serverless Macro
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 802
+    weight: 902
   - name: Datadog Serverless CLI
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 803
+    weight: 903
   - name: Serverless Tagging
     url: serverless/serverless_tagging
     parent: serverless
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 10
+    weight: 11
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 11
+    weight: 12
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
     pre: nav_metrics
     weight: 110000
-  - name: Introduction
-    url: metrics/introduction/
-    parent: metrics_top_level
-    weight: 901
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
-    weight: 902
+    weight: 901
   - name: Summary
     url: metrics/summary/
     parent: metrics_top_level
-    weight: 903
+    weight: 902
   - name: Distributions
     url: metrics/distributions/
     parent: metrics_top_level
     identifier: metrics_distributions
-    weight: 904
+    weight: 903
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1306,7 +1315,7 @@ main:
     identifier: tracing_open_standards_open_standards_dotnet
     weight: 108
   - name: Trace Serverless Functions
-    url: tracing/setup_overview/serverless_functions/
+    url: serverless/distributed_tracing
     parent: tracing_setup_overview
     identifier: tracing_serverless_functions
     weight: 104
@@ -1674,20 +1683,20 @@ main:
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 603
+  - name: Log Transactions
+    url: logs/explorer/transactions/
+    parent: log_explorer
+    weight: 604
   - name: Log Analytics
     url: logs/explorer/analytics/
     parent: log_explorer
-    weight: 604
+    weight: 605
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 605
+    weight: 606
   - name: Facets
     url: logs/explorer/facets/
-    parent: log_explorer
-    weight: 606
-  - name: Transactions
-    url: logs/explorer/transactions/
     parent: log_explorer
     weight: 607
   - name: Search Syntax
@@ -1723,30 +1732,35 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring
     weight: 1
+  - name: Getting Started
+    url: security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: Signals Explorer
+    url: security_monitoring/explorer
+    parent: security_monitoring
+    identifier: security_monitoring_explorer
+    weight: 102
+  - name: Threat Detection Rules
+    url: security_monitoring/detection_rules
+    parent: security_monitoring
+    identifier: security_monitoring_detection_rules
+    weight: 103
+  - name: Guides
+    url: security_monitoring/guide
+    parent: security_monitoring
+    identifier: security_monitoring_guides
+    weight: 104
   - name: Compliance Monitoring
     url: compliance_monitoring/
     parent: security_compliance_monitoring
     identifier: compliance_monitoring
     weight: 2
   - name: Default Rules
-    url: security_monitoring/default_rules/
+    url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
-    weight: 3
-  - name: Getting Started
-    url: security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
-    weight: 1
-  - name: Signals Explorer
-    url: security_monitoring/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_explorer
-    weight: 2
-  - name: Threat Detection Rules
-    url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
     weight: 3
   - name: Synthetic Monitoring
     url: synthetics/
@@ -1840,7 +1854,7 @@ main:
     weight: 11
   - name: Real User Monitoring
     url: real_user_monitoring/
-    pre: nav_rum
+    pre: nav_rum_2
     identifier: rum
     weight: 150000
   - name: Browser Monitoring
@@ -1863,6 +1877,16 @@ main:
     parent: rum_browser
     identifier: page_performance
     weight: 103
+  - name: Monitoring Resource Performance
+    url: real_user_monitoring/browser/monitoring_resource_performance/
+    parent: rum_browser
+    identifier: resource_performance
+    weight: 104
+  - name: Collecting Browser Errors
+    url: real_user_monitoring/browser/collecting_browser_errors/
+    parent: rum_browser
+    identifier: collect_errors
+    weight: 105
   - name: Android Monitoring
     url: real_user_monitoring/android/
     parent: rum
@@ -1968,36 +1992,41 @@ main:
     parent: npm
     identifier: dns_monitoring
     weight: 4
+  - name: Guides
+    url: network_performance_monitoring/guide/
+    identifier: npm_guides
+    parent: npm
+    weight: 5
   - name: Devices
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 500
+    weight: 600
   - name: Setup
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 501
+    weight: 601
   - name: Profiles
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 502
+    weight: 602
   - name: Data Collected
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 503
+    weight: 603
   - name: Troubleshooting
     url: network_performance_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 504
+    weight: 604
   - name: Guides
     url: network_performance_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 505
+    weight: 605
   - name: Developer Tools
     url: developers/
     pre: nav_developers
@@ -2423,6 +2452,34 @@ api_v1:
     parent: Dashboards
     url: '#create-a-new-dashboard'
     generated: true
+  - name: Create a shared dashboard
+    parent: Dashboards
+    url: '#create-a-shared-dashboard'
+    generated: true
+  - name: Revoke a shared dashboard URL
+    parent: Dashboards
+    url: '#revoke-a-shared-dashboard-url'
+    generated: true
+  - name: Get a shared dashboard
+    parent: Dashboards
+    url: '#get-a-shared-dashboard'
+    generated: true
+  - name: Update a shared dashboard
+    parent: Dashboards
+    url: '#update-a-shared-dashboard'
+    generated: true
+  - name: Revoke shared dashboard invitations
+    parent: Dashboards
+    url: '#revoke-shared-dashboard-invitations'
+    generated: true
+  - name: Get all invitations for a shared dashboard
+    parent: Dashboards
+    url: '#get-all-invitations-for-a-shared-dashboard'
+    generated: true
+  - name: Send shared dashboard invitation email
+    parent: Dashboards
+    url: '#send-shared-dashboard-invitation-email'
+    generated: true
   - name: Delete a dashboard
     parent: Dashboards
     url: '#delete-a-dashboard'
@@ -2639,6 +2696,10 @@ api_v1:
     parent: Logs Indexes
     url: '#get-all-indexes'
     generated: true
+  - name: Create an index
+    parent: Logs Indexes
+    url: '#create-an-index'
+    generated: true
   - name: Get an index
     parent: Logs Indexes
     url: '#get-an-index'
@@ -2646,6 +2707,10 @@ api_v1:
   - name: Update an index
     parent: Logs Indexes
     url: '#update-an-index'
+    generated: true
+  - name: Logs Metrics
+    url: /api/v1/logs-metrics/
+    identifier: Logs Metrics
     generated: true
   - name: Logs Pipelines
     url: /api/v1/logs-pipelines/
@@ -3560,6 +3625,30 @@ api_v2:
   - name: Logs Indexes
     url: /api/v2/logs-indexes/
     identifier: Logs Indexes
+    generated: true
+  - name: Logs Metrics
+    url: /api/v2/logs-metrics/
+    identifier: Logs Metrics
+    generated: true
+  - name: Get all log-based metrics
+    parent: Logs Metrics
+    url: '#get-all-log-based-metrics'
+    generated: true
+  - name: Create a log-based metric
+    parent: Logs Metrics
+    url: '#create-a-log-based-metric'
+    generated: true
+  - name: Delete a log-based metric
+    parent: Logs Metrics
+    url: '#delete-a-log-based-metric'
+    generated: true
+  - name: Get a log-based metric
+    parent: Logs Metrics
+    url: '#get-a-log-based-metric'
+    generated: true
+  - name: Update a log-based metric
+    parent: Logs Metrics
+    url: '#update-a-log-based-metric'
     generated: true
   - name: Logs Pipelines
     url: /api/v2/logs-pipelines/

@@ -9,13 +9,13 @@
 
 <header>
     <div class="container">
-        <div class="mainnav d-none d-lg-flex row align-items-center no-gutters">
+        <div class="mainnav d-none d-xl-flex row align-items-center no-gutters">
             <div class="col">
                 <ul class="nav navbar-left">
                     {{ range .Site.Menus.main_left   }}
                     {{ if .HasChildren }}
                     <li class="dropdown {{ .Identifier }}-dropdown nav-item">
-                        <a href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}" class="nav-link dropdown {{ if eq .Name "Solutions" }} solutions pr-lg-6 pr-xl-9 {{ end }}">{{.Name}}</a>
+                        <a href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}" class="nav-link dropdown {{ if eq .Name "Solutions" }} solutions{{ end }}">{{.Name}}</a>
 
                         <!-- Menu: Solutions menu -->
                         {{ if eq .Identifier "solutions" }}
@@ -116,7 +116,11 @@
       <li class="final nav-item {{ if eq .Identifier "get_started" }}nav-button {{ end }}">
           <a {{ if eq .Identifier "get_started" }} class="{{ $SignUpClass }} btn btn-outline-primary sign-up-trigger text-uppercase" href="#" data-toggle="modal" data-target="#signupModal" style="min-width:120px" {{ else }} class="nav-link" href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}"  {{ end }}>
               {{ if eq .Identifier "get_started" }}
-                  <span class="d-none d-xl-block">{{ i18n "get_started_free" }}</span>
+                {{ if eq $.Lang "fr" }}
+                    <span class="d-none d-xl-block">{{ i18n "free_trial" }}</span>
+                {{ else }}
+                    <span class="d-none d-xl-block">{{ i18n "get_started_free" }}</span>
+                {{ end }}
                   <span class="d-block d-xl-none">{{ i18n "get_started_free_short" }}</span>
               {{ else }}
                 <span class="menu-text">{{ .Name | safeHTML }}</span>
@@ -129,7 +133,7 @@
             </div>
         </div>
     </div>
-    <nav class="navbar d-lg-none navbar-expand-lg navbar-light bg-white rounded">
+    <nav class="navbar d-xl-none navbar-light bg-white rounded">
         <div class="container">
             <a class="navbar-brand text-primary" href="{{ "" | absLangURL }}" title="DataDog">
                 {{ partial "img.html" (dict "root" . "src" "dd_logo_n_70x75.png" "alt" "DataDog" "disable_lazy" "true") }}

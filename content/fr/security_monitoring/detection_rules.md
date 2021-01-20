@@ -42,9 +42,9 @@ Un scénario de règle contient des opérations logiques (`>, >=, &&, ||`) afin 
 
 Renommez chaque scénario de règle sous le champ **name**, par exemple « Scénario 1 ». Ce nom est ajouté en préfixe du nom de la règle lorsqu'un signal est généré.
 
-#### Sévérité et notification
+#### Gravité et notification
 
-Choisissez la sévérité du signal de sécurité en sélectionnant le niveau approprié dans la liste déroulante, parmi les valeurs suivantes : `INFO`, `LOW`, `MEDIUM`, `HIGH` et `CRITICAL`.
+Choisissez la gravité du signal de sécurité en sélectionnant le niveau approprié dans la liste déroulante, parmi les valeurs suivantes : `INFO`, `LOW`, `MEDIUM`, `HIGH` et `CRITICAL`.
 
 Dans la section « Notify », vous pouvez définir une ou plusieurs [cibles de notification][3] pour chaque scénario de règle.
 
@@ -72,7 +72,7 @@ Vous pouvez appliquer différents tags à vos signaux, comme `security:attack` o
 
 ### Rassemblement de requêtes
 
-Lorsque vous rassemblez plusieurs logs au sein d'un intervalle donné, vous pouvez renforcer la fiabilité ou la sévérité d'un signal de sécurité. Par exemple, pour détecter une attaque par force brute réussie, vous devez corréler les logs des échecs et des réussites d'authentification d'un utilisateur.
+Lorsque vous rassemblez plusieurs logs au sein d'un intervalle donné, vous pouvez renforcer la fiabilité ou la gravité d'un signal de sécurité. Par exemple, pour détecter une attaque par force brute réussie, vous devez corréler les logs des échecs et des réussites d'authentification d'un utilisateur.
 
 {{< img src="security_monitoring/detection_rules/joining_queries_define.png" alt="Définir des requêtes de recherche"  >}}
 

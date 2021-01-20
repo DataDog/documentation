@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Agent v6 Manager GUI is browser-based. The port the GUI runs on can be configured in your `datadog.yaml` file. Setting the port to `-1` disables the GUI. By default it is enabled on port 5002 for Windows and Mac and is disabled on Linux.
+The Datadog Agent Manager GUI is browser-based. The port the GUI runs on can be configured in your `datadog.yaml` file. Setting the port to `-1` disables the GUI. By default it is enabled on port 5002 for Windows and Mac and is disabled on Linux.
 
 ### Requirements
 

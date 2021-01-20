@@ -11,7 +11,7 @@ categories:
   - notification
   - モニター
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md'
 display_name: Squadcast

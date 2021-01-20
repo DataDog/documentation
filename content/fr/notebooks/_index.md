@@ -27,9 +27,22 @@ Les modifications apportées à un notebook s'affichent automatiquement, sans qu
 
 Tous les membres de votre équipe peuvent ouvrir ou modifier un notebook. Cependant, un notebook peut uniquement être supprimé par le créateur ou un administrateur.
 
-## Notebook List
+## Publier des commentaires
 
-La [Notebook List][1] vous permet de consulter et de rechercher les notebooks précédemment créés. Le nom, le créateur et la date de dernière modification de chaque notebook sont indiqués. Les notebooks sont regroupés en deux catégories :
+Pour ajouter un commentaire, sélectionnez du texte ou passez le curseur sur un graphique. Le bouton **Add a comment** apparaît alors à droite de la cellule.
+
+{{< img src="notebooks/add_comment.png" alt="ajouter un commentaire au texte"  style="width:100%;">}}
+
+Pour modifier ou supprimer un commentaire que vous avez ajouté, cliquez sur le menu dans le coin supérieur droit du commentaire.
+
+{{< img src="notebooks/edit_comment.png" alt="modifier un commentaire dans le notebook"  style="width:100%;">}}
+
+Des notifications par e-mail sont envoyées aux auteurs de notebook lorsque de nouveaux commentaires sont ajoutés, ainsi qu'aux personnes à l'origine d'un commentaire en cas de réponse. Vous pouvez gérer vos paramètres de notifications en accédant à `Notifications` depuis le menu des réglages du notebook.
+
+
+## Liste des notebooks
+
+La [liste des notebooks][1] vous permet de consulter et de rechercher les notebooks précédemment créés. Le nom, l'identité du créateur et la date de dernière modification de chaque notebook sont indiqués. Les notebooks sont regroupés en deux catégories :
 
 * **My Notebooks** : les notebooks que vous avez créés.
 * **Other Notebooks** : les notebooks créés par d'autres membres de votre équipe.
@@ -40,13 +53,13 @@ Créez un [notebook][2] depuis la navigation principale, en accédant à *Notebo
 
 Par défaut, les nouveaux notebooks ne s'enregistrent pas automatiquement. Vous devez cliquer sur le bouton **Save**.
 
-### Types de contenu
+### Types de contenus
 
 Les notebooks prennent en charge les visualisations et les cellules de texte.
 
 #### Visualisation
 
-Les graphiques dans les notebooks prennent en charge toutes les sources de données Datadog : métriques, événements de log, spans analysées, live processes, trafic réseau, événements RUM, métriques de profiling et signaux de sécurité.
+Les graphiques dans les notebooks prennent en charge toutes les sources de données Datadog : métriques, événements de log, spans indexées, live processes, trafic réseau, événements RUM, métriques de profiling et signaux de sécurité.
 
 {{< img src="notebooks/data_sources.png" alt="collaboration en direct dans les notebooks"  style="width:50%;">}}
 
@@ -66,7 +79,7 @@ Le texte d'un notebook prend en charge le format [Markdown][8], qui permet l'uti
 
 Lorsque vous ouvrez un notebook existant, ses cellules sont « fermées ». Pour ouvrir une cellule afin de la modifier, placez le curseur de la souris dessus et utilisez `CMD + clic`, ou cliquez sur **Edit**. Pour fermer une cellule, cliquez en dehors de celle-ci, appuyez sur `Échap` ou appuyez sur `CMD + Entrée`. Une seule cellule peut être ouverte à la fois.
 
-Pour insérer des cellules, utilisez le bouton **+** qui apparaît à gauche de la cellule. Pour partager, dupliquer ou supprimer des cellules, utilisez la barre d'action qui s'affiche au-dessus de la cellule lorsque vous passez le curseur de la souris dessus, ou utilisez un raccourci clavier. Accédez à liste de tous les raccourcis clavier en cliquant sur le bouton en forme de clavier dans l'en-tête du notebook.
+Pour insérer des cellules, utilisez le bouton **+** qui figure à gauche de la cellule. Pour partager, dupliquer ou supprimer des cellules, utilisez la barre d'action qui s'affiche au-dessus de la cellule lorsque vous passez le curseur dessus. Vous pouvez également utiliser un raccourci clavier. Accédez à la liste de tous les raccourcis clavier en cliquant sur l'icône en forme de clavier dans l'en-tête du notebook.
 
 ### Intervalles de temps
 
@@ -74,7 +87,7 @@ Par défaut, toutes les cellules de graphique respectent le même intervalle de 
 
 Pour définir un intervalle de temps spécifique, cliquez sur l'icône en forme d'horloge dans le coin supérieur droit d'une cellule de graphique. Décochez ensuite la case *Lock this cell to global time frame* et définissez l'intervalle de temps souhaité :
 
-{{< img src="notebooks/time_selector.png" alt="Sélecteur d'intervalle de temps" style="width:60%;">}}
+{{< img src="notebooks/time_selector.png" alt="Sélecteur d'intervalle" style="width:60%;">}}
 
 **Remarque** : si vous cliquez sur une cellule et la faites glisser pour zoomer sur un graphique, cela ne dissocie pas la cellule de l'intervalle de temps global. À la place, cette opération modifie l'intervalle de temps global du notebook.
 
@@ -88,7 +101,7 @@ Pour afficher les options de disposition suivantes, cliquez sur l'icône en form
 
 * **Graph size** : sélectionnez la taille du graphique parmi `XS`, `S`, `M` (par défaut), `L` et `XL`.
 * **Graph legend** : décochez cette case pour masquer la légende. Les légendes sont automatiquement désactivées pour les graphiques `XS` et `S`.
-* **Grouping** : permet d'afficher un graphique par valeur de tag pour voir de petits multiples de votre visualisation.
+* **Grouping** : cette option permet d'afficher un graphique par valeur de tag, afin de visualiser de petits multiples de votre visualisation.
 
 {{< img src="notebooks/layout_options.png" alt="options de disposition" style="width:50%;">}}
 

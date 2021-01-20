@@ -19,6 +19,75 @@ further_reading:
 
 Find below the different initialization options available with the [Datadog Browser SDK][1].
 
+### Scrub sensitive data from your RUM data
+If your RUM data contains sensitive information that need redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize RUM.
+
+This callback function gives you access to every event collected by the RUM SDK before they get sent to Datadog.
+
+For example, redact email addresses from your web application URLs:
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    beforeSend: (event) => {
+        // remove email from view url
+        event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+    },
+    ...
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            // remove email from view url
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+        },
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            // remove email from view url
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+        },
+        ...
+    });
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+You can update the following event properties:
+
+|   Attribute           |   Type    |   Description                                                                                       |
+|-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
+|   `view.url`            |   String  |   The URL of the active web page.                                                                   |
+|   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
+|   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
+|   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
+|   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
+|   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
+|   `resource.url`        |   String  |   The resource URL.                                                                                 |
+
+**Note**: The RUM SDK will ignore modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][2].
+
 ### Identify user sessions
 Adding user information to your RUM sessions makes it easy to:
 * Follow the journey of a given user
@@ -80,12 +149,12 @@ By default, no sampling is applied on the number of collected sessions. To apply
 {{% tab "NPM" %}}
 
 ```javascript
-import { Datacenter, datadogRum } from '@datadog/browser-rum';
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
-    datacenter: Datacenter.US,
+    site: '<DATADOG_SITE>',
     sampleRate: 90,
 });
 ```
@@ -103,6 +172,7 @@ datadogRum.init({
     DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
+        site: '<DATADOG_SITE>',
         sampleRate: 90,
     })
   })
@@ -116,6 +186,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
+        site: '<DATADOG_SITE>',
         sampleRate: 90,
     });
 ```
@@ -150,7 +221,7 @@ datadogRum.addRumGlobalContext('activity', {
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
 // Code example
@@ -165,7 +236,7 @@ DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 
 ```javascript
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
 // Code example
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
@@ -177,7 +248,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][3] for a better correlation of your data across the product.
 
 ### Replace global context
 
@@ -228,7 +299,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][3] for a better correlation of your data across the product.
 
 ### Read global context
 
@@ -326,104 +397,11 @@ window.DD_RUM &&
 With the above example, the RUM SDK would collect the amount of items within a cart, what they are, and how much the cart is worth overall.
 
 
-### Custom errors
-Monitor handled exceptions, handled promise rejections and other errors not tracked automatically by the RUM SDK with the `addError()` API:
-
-```javascript
-addError(
-    error: unknown,
-    context?: Context,
-    source: ErrorSource.CUSTOM | ErrorSource.NETWORK | ErrorSource.SOURCE = ErrorSource.CUSTOM
-);
-```
-
-**Note**: The [Error Tracking][3] feature processes errors sent with source set to `custom` or `source` and that contain a stacktrace.
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-// Send a custom error with context
-const error = new Error('Something wrong occured.');
-
-datadogRum.addError(error, {
-    pageStatus: 'beta',
-});
-
-// Send a network error
-fetch('<SOME_URL>').catch(function(error) {
-    datadogRum.addError(error, undefined, 'network');
-})
-
-// Send a handled exception error
-try {
-    //Some code logic
-} catch (error) {
-    datadogRum.addError(error, undefined, 'source');
-}
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-// Send a custom error with context
-const error = new Error('Something wrong occured.');
-
-DD_RUM.onReady(function() {
-    DD_RUM.addError(error, {
-        pageStatus: 'beta',
-    });
-});
-
-// Send a network error
-fetch('<SOME_URL>').catch(function(error) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'network');
-    });
-})
-
-// Send a handled exception error
-try {
-    //Some code logic
-} catch (error) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'source');
-    })
-}
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```javascript
-// Send a custom error with context
-const error = new Error('Something wrong occured.');
-
-window.DD_RUM && DD_RUM.addError(error, {
-    pageStatus: 'beta',
-});
-
-// Send a network error
-fetch('<SOME_URL>').catch(function(error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'network');
-})
-
-// Send a handled exception error
-try {
-    //Some code logic
-} catch (error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'source');
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://github.com/DataDog/browser-sdk
-[2]: /logs/processing/attributes_naming_convention/#user-related-attributes
-[3]: /real_user_monitoring/error_tracking
+[2]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum/src/rumEvent.types.ts
+[3]: /logs/processing/attributes_naming_convention/#user-related-attributes

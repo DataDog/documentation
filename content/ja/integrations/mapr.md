@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     MapR - Overview: assets/dashboards/mapr_overview.json
   logs:
@@ -121,8 +123,8 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
 
 ### サービスのチェック
 
-- `mapr.can_connect`:
-  Agent がストリームトピックに接続してサブスクライブできない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
+**mapr.can_connect**:
+Agent がストリームトピックに接続してサブスクライブできない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ### イベント
 

@@ -311,8 +311,9 @@ files:
       value:
         type: boolean
         example: false
-    # このテンプレートのコメントを解除して、様子をみてください。
-    #- template: instances/default
+    # これらのテンプレートを転置して、様子をみてください。
+    #- template: instances/http
+- template: instances/default
 ```
 
 `ddev` を使用して、`conf.yaml.example` を生成します。

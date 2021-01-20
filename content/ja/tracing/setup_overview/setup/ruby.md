@@ -241,7 +241,7 @@ end
 | `resource`    | `String` | 操作対象のリソースまたはアクションの名前。同じリソース値を持つトレースは、メトリクスの目的でグループ化されます（ただし、個別に表示可能です）。通常、URL、クエリ、リクエストなどのドメイン固有です（例: `'Article#submit'`、`http://example.com/articles/list`） | スパンの `name`。 |
 | `span_type`   | `String` | スパンのタイプ（`'http'`、`'db'` など） | `nil` |
 | `child_of`    | `Datadog::Span` / `Datadog::Context` | このスパンの親。指定しない場合、自動的に現在のアクティブスパンになります。 | `nil` |
-| `start_time`  | `Integer` | スパンが実際に開始したとき。すでに発生したイベントをトレースするときに役立ちます。 | `Time.now.utc` |
+| `start_time`  | `Time` | スパンが実際に開始したとき。すでに発生したイベントをトレースするときに役立ちます。 | `Time.now` |
 | `tags`        | `Hash` | スパンに追加する必要がある追加のタグ。 | `{}` |
 | `on_error`    | `Proc` | トレースするブロックが指定されたときに呼び出されるハンドラー。これはエラーを発生させます。引数として `span` と `error` が指定されました。デフォルトでスパンにエラーを設定します。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
@@ -1439,6 +1439,7 @@ redis.set 'foo', 'bar'
 | --- | ----------- | ------- |
 | `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `redis` インスツルメンテーションに使用されるサービス名 | `'redis'` |
+| `command_args` | コマンド引数 (例: `GET key` の `key`) をリソース名とタグとして表示します | true |
 
 次のように、*インスタンスごと*のコンフィギュレーションを設定することもできます。
 

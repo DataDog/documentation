@@ -7,7 +7,10 @@ assets:
   logs:
     source: marklogic
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    Marklogic high load: assets/recommended_monitors/marklogic_high_load.json
+    Marklogic long requests: assets/recommended_monitors/marklogic_long_requests.json
+    Marklogic low cache: assets/recommended_monitors/marklogic_low_cache.json
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:

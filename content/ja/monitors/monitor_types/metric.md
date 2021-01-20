@@ -106,7 +106,7 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 * メトリクスが `above`、`above or equal to`、`below`、`below or equal to` の場合にトリガーされる
 * しきい値は、`on average`、`at least once`、`at all times` あるいは `in total`
-* 期間は、直前の `5 minutes`、`15 minutes`、`1 hour` など
+* 過去 `5 minutes`、`15 minutes`、`1 hour` など、または `custom` に 1 分～48 時間の値を設定します。
 
 **定義**:
 
@@ -125,8 +125,8 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 * `average`、`maximum`、`minimum`、または `in total`
 * `change` または `% change`
-* 期間は `5 minutes`、`15 minutes`、`1 hour` など
-* 過去の `5 minutes`、`15 minutes`、`1 hour` などと比較
+* `5 minutes`、`15 minutes`、`1 hour` など、または `custom` に 1 分～48 時間の値を設定します。
+* `5 minutes`、`15 minutes`、`1 hour` などと比較、または `custom` に 1 分～48 時間前の値を設定します。
 * しきい値と比較して `above`、`above or equal to`、`below`、あるいは `below or equal to` か。
 
 **定義**:

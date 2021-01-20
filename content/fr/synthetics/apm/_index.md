@@ -7,7 +7,7 @@ aliases:
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
-    text: Présentation de la surveillance Datadog Synthetic
+    text: Présentation de la surveillance Synthetic Datadog
   - link: /tracing/
     tag: Documentation
     text: APM et tracing distribué

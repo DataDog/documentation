@@ -16,7 +16,7 @@ further_reading:
 
 The NodeJS Datadog Trace library is open source - view the [Github repository][1] for more information.
 
-Node `>=8` is supported by this library. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported.
+Node `>=8` is supported by this library. Even numbered versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported.
 
 ## Supported Integrations
 

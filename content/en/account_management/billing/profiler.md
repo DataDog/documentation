@@ -23,7 +23,7 @@ Using five hosts running one application being profiled in each host. No contain
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
-| Profiled containers  | 0 per host | $0 since there is no overage                                                              | 0 * $2        | $0                    |
+| Profiled containers  | 0 per host | $0 since there is no additional containers                                                              | 0 * $2        | $0                    |
 | Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
@@ -34,7 +34,7 @@ Using five hosts with four profiled containers each. A profiled container is a c
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
-| Profiled containers  | 4 per host | $0 since 4 containers is right at the allotment limit, no overage charge is issued        | 0 * $2        | $0                    |
+| Profiled containers  | 4 per host | $0 since 4 containers is right at the allotment limit, no additional charge is issued        | 0 * $2        | $0                    |
 | Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
@@ -45,7 +45,7 @@ Using five hosts with six profiled containers per each host. A profiled containe
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
-| Profiled containers  | 6 per host | $2 per overage container per host. In this case there are 6 - 4 = 2 overage containers for each host        | 2  * $2 * 5 hosts         | $20                   |
+| Profiled containers  | 6 per host | $2 per additional container per host. In this case there are 6 - 4 = 2 additional containers for each host        | 2  * $2 * 5 hosts         | $20                   |
 | Total          |            |                                                                                                 | $60 + $20      | **$80 per month**    |
 
 
@@ -56,7 +56,7 @@ Using four hosts with five containers per host but only two of them are profiled
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
-| Profiled containers  | 2 per host | $0 since 2 containers is below the allotment limit, no overage charge is issued. The remaining 3 containers not reporting profile data are not counted towards the allotment.         | 0 * $2        | $0                    |
+| Profiled containers  | 2 per host | $0 since 2 containers is below the allotment limit, no additional charge is issued. The remaining 3 containers not reporting profile data are not counted towards the allotment.         | 0 * $2        | $0                    |
 | Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
@@ -67,15 +67,15 @@ Using two profiled hosts - Host A and Host B.
 * Host A is running eight containers
 * Host B is running two containers         
 
-All 10 containers are running application instances that are being profiled, meaning Host A has an overage of four containers and Host B can add two more containers.
+All 10 containers are running application instances that are being profiled, meaning Host A has an four additional containers over the price and Host B can add two more containers.
 
-In this scenario, we aggregate all containers across all hosts (so two hosts, 10 containers). Then we would have eight containers included in price and an overage of two containers. Therefore, the breakdown would be:
+In this scenario, we aggregate all containers across all hosts (so two hosts, 10 containers). Then we would have eight containers included in price and an addition of two containers. Therefore, the breakdown would be:
 
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 2 * $12       | $24                   |
-| Profiled containers  | 10 in aggregate of host A + host B | $2 per overage container. In this case 2 hosts would allow up to 8 containers but we have 2 containers summed across two hosts: 10-8 = 2 overage containers        | $2 * 2 hosts        | $4                    |
+| Profiled containers  | 10 in aggregate of host A + host B | $2 per additional container. In this case 2 hosts would allow up to 8 containers but we have 2 containers summed across two hosts: 10-8 = 2 additional containers        | $2 * 2 hosts        | $4                    |
 | Total          |            |                                                                                                 | $24 + $4      | **$28 per month**    |
 
 

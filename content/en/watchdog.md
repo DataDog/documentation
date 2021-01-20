@@ -14,6 +14,9 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/"
+  tag: "Blog"
+  text: "Automated root cause analysis with Watchdog RCA"
 ---
 
 {{< img src="watchdog/watchdog_page.png" alt="Watchdog page"  >}}

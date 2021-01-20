@@ -5,6 +5,7 @@ private: true
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}
+    {{< nextlink href="logs/guide/access-your-log-data-programmatically" >}}Programmatically access log data using the Logs Search API{{< /nextlink >}}
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}Correlate Logs with Metrics{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-monitors-on-volumes" >}}Monitor your log usage{{< /nextlink >}}
@@ -20,6 +21,7 @@ private: true
     {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}Docker Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Lambda Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Setting File Permissions for Rotating Logs (Linux){{< /nextlink >}}
+    {{< nextlink href="/logs/guide/how-to-set-up-only-logs" >}}Use the Datadog Agent for Log Collection Only{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

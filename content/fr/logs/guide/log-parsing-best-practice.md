@@ -30,7 +30,7 @@ Cet article décrit comment procéder au parsing d'un log à partir du log du Co
     vous n'avez pas besoin de rédiger une règle de parsing du premier coup. Vérifiez un par un les attributs de votre règle en ajoutant un astérisque `.*` à la fin de la règle. Cela vous permet d'obtenir un résultat pour tout contenu suivant la fin de votre règle.
     Ici, vous voulez par exemple parser la date du log, peu importe ce qui suit. Créez la règle ci-dessous :
     {{< img src="logs/faq/parsing_best_practice_2.png" alt="bonne_pratique_parsing_2" >}}
-    Vous savez alors que la date est parsée correctement. Vous pouvez maintenant passer à l'attribut suivant : la sévérité.
+    Vous savez alors que la date est parsée correctement. Vous pouvez maintenant passer à l'attribut suivant : la gravité.
     Vous devez commencer par échapper la barre verticale (il est obligatoire d'échapper les caractères spéciaux), puis faire correspondre le mot :
     {{< img src="logs/faq/parsing_best_practice_3.png" alt="bonne_pratique_parsing_3" >}}
     Vous pouvez ensuite continuer jusqu'à l'extraction de tous les attributs souhaités de ce log.

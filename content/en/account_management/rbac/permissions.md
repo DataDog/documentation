@@ -287,7 +287,7 @@ Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a give
 
 Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][15].
 
-This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive][16] permission.
+This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive](#logs_read_archives) permission.
 
 {{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="Write Historical View"  style="width:70%;">}}
 
@@ -310,10 +310,10 @@ For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the f
 
 Grants the ability to create or modify log configuration through the Datadog API:
 
-* Configure [Archives][17] through the API
-* Configure [Indexes][18] through the API
-* Configure [Pipelines][19] through the API
-* Configure [Restriction Queries][20] through the API
+* Configure [Archives][16] through the API
+* Configure [Indexes][17] through the API
+* Configure [Pipelines][18] through the API
+* Configure [Restriction Queries][19] through the API
 
 The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs-write-exclusion-filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
 
@@ -326,7 +326,7 @@ Grant the following permissions to manage read access on subsets of log data:
 
 #### logs_read_data
 
-Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][20].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][19].
 
 Roles are additive: if a user belongs to multiple roles, the data they have access to is the union of all the permissions from each of the roles.
 
@@ -387,8 +387,8 @@ This page won't display more than 50 restriction queries at once, and more than 
 * with the user filter, which is a convenient way to see what a specific user belonging to multiple roles actually has access to:
 
 {{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="View as Roles"  style="width:70%;">}}
-[1]: https://app.datadoghq.com/logs/pipelines/data-access
 
+[1]: https://app.datadoghq.com/logs/pipelines/data-access
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -455,7 +455,7 @@ curl -X POST \
 
 #### logs_live_tail
 
-Grants a role the ability to use the [Live Tail][21] feature.
+Grants a role the ability to use the [Live Tail][20] feature.
 
 This permission is global, and grants access to the livetail irregardless of [Log Read Index Data](#logs-read-index-data) permission.
 
@@ -481,9 +481,8 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [13]: /logs/processing/pipelines/#pipeline-filters
 [14]: /logs/archives
 [15]: /logs/archives/rehydrating
-[16]: #logs_read_archives
-[17]: /api/v2/logs-archives/
-[18]: /api/v1/logs-indexes/
-[19]: /api/v1/logs-pipelines/
-[20]: /api/v2/logs-restriction-queries/
-[21]: /logs/explorer/live_tail/
+[16]: /api/v2/logs-archives/
+[17]: /api/v1/logs-indexes/
+[18]: /api/v1/logs-pipelines/
+[19]: /api/v2/logs-restriction-queries/
+[20]: /logs/explorer/live_tail/
