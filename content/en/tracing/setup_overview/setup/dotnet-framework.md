@@ -239,7 +239,7 @@ Using the methods described above, customize your tracing configuration with the
 
 ### Unified Service Tagging
 
-To use [Unified Service Tagging][7], configure the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` settings for your services. 
+To use [Unified Service Tagging][7], configure the following settings for your services. 
 
 | Setting Name                                        |Description                                                                                                                                                                                                       |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

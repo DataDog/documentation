@@ -47,10 +47,10 @@ The .NET Tracer can instrument the following libraries automatically:
 | PostgreSQL                      | `Npgsql` 4.0+                  | `AdoNet`             |
 
 <div class="alert alert-info">
-<strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code>.
+<strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code> and <code>NpgsqlCommand</code>.
 </div>
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
+Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
 ## Further reading
 
