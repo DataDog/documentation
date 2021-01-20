@@ -22,7 +22,7 @@ further_reading:
 
 ICMP tests allow you to easily **monitor the availability of your hosts** and **diagnose network communication issues**. By asserting on the values received from one or more **ICMP ping(s)** to your endpoint, Datadog can help **detect connectivity issues, above-quota latency or hops, and unexpected changes in security firewall configuration**.  
 
-ICMP tests can run from [**managed**][1] and [**private locations**][2] depending on whether you are willing to trigger ICMP pings to your endpoints from outside or inside your network.ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand or from within your [CI/CD pipelines][3].
+ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand or from within your [CI/CD pipelines][3].
 
 ## Configuration
 
