@@ -23,13 +23,15 @@ further_reading:
 - SUSE 15 以降
 - Amazon AMI 2016.03 以降
 - Amazon Linux 2
-- [Windows 2016+][2] (公開ベータ版)
+- [Windows Server 2016+][2] (公開ベータ版)
 
 **Linux OS の場合:** データ収集は eBPF を使用して行われるため、Datadog は最低限、基底の Linux カーネルバージョン 4.4.0 以降を備えたプラットフォームを必要とします。
 
-**Windows OS の場合:** データ収集は、Windows バージョン 2016 以降の公開ベータ版で利用できます。
+**Windows OS の場合:** データ収集は、Windows Server 2016 以降の公開ベータ版で利用できます。
 
-[CentOS/RHEL 7.6 以降][3]の要件は、カーネル 4.4.0 以降では適用外です。[DNS 解決][4]機能は CentOS/RHEL 7.6 ではサポートされていません。
+[CentOS/RHEL 7.6 以降][3]の要件は、カーネル 4.4.0 以降ではでは適用外のものがあります。[DNS 解決][4]機能は CentOS/RHEL 7.6 ではサポートされていません。
+
+**Istio** v1.6.4 以降は、[Datadog Agent v7.24.1 以降][1]でサポートされています。
 
 ネットワークパフォーマンスモニタリングは、次の要件が満たされている場合、**Cilium** インストールと互換性があります。
 1) Cilium バージョン 1.6 以降、および
@@ -72,7 +74,7 @@ Datadog Agent を使用してネットワークパフォーマンスのモニタ
         enabled: true
     ```
 
-4. v6.18 または 7.18 より古い Agent を実行している場合は、システムプローブを手動で起動しブート時に有効化します (v6.18 および v7.18 以降では、Agent 起動時にシステムプローブが自動的に起動します)。
+4. **v6.18 または 7.18 より古い Agent を実行している場合は**、システムプローブを手動で起動しブート時に有効化します (v6.18 および v7.18 以降では、Agent 起動時にシステムプローブが自動的に起動します)。
 
     ```shell
     sudo systemctl start datadog-agent-sysprobe
@@ -128,7 +130,7 @@ SELinux を有効にしたその他のシステムでネットワークパフォ
 
 ### Windows システム
 
-Windows システムのデータ収集は、バージョン 2016 以降の公開ベータ版で利用できます。
+Windows システムのデータ収集は、Windows Server バージョン 2016 以降の公開ベータ版で利用できます。
 **注**: NPM は現在、Windows ホストのみを監視し、Windows コンテナは監視していません。DNS メトリクス収集は、Windows システムではサポートされていません。
 
 Windows ホストのネットワークパフォーマンスモニタリングを有効にするには
@@ -154,13 +156,13 @@ Windows ホストのネットワークパフォーマンスモニタリングを
     ```
 4. [Agent を再起動します][2]。
 
-   PowerShell (`powershell.exe`) の場合:
+   PowerShell (`powershell.exe`) の場合: 
     ```shell
     restart-service -f datadogagent
     ```
    コマンドプロンプト (`cmd.exe`) の場合:
     ```shell
-    net /y stop datadogagent && net start datadoagagent
+    net /y stop datadogagent && net start datadogagent
     ```
 
 [1]: /ja/infrastructure/process/?tab=linuxwindows#installation
@@ -234,7 +236,6 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                         readOnly: true
                       - name: debugfs
                         mountPath: /sys/kernel/debug
-                        mountPath: /var/run/s6
                       - name: sysprobe-socket-dir
                         mountPath: /var/run/sysprobe
     ```
@@ -289,8 +290,6 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
 
     ```yaml
                 volumes:
-                    - name: s6-run
-                      emptyDir: {}
                     - name: sysprobe-socket-dir
                       emptyDir: {}
                     - name: debugfs
