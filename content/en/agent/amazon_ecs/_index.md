@@ -90,7 +90,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 
 [1]: /resources/json/datadog-agent-ecs.json
 [2]: /resources/json/datadog-agent-ecs1.json
-[3]: //resources/json/datadog-agent-ecs-win.json
+[3]: /resources/json/datadog-agent-ecs-win.json
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: /agent/amazon_ecs/logs/
 [6]: /agent/amazon_ecs/apm/
