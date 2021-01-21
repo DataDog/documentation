@@ -36,7 +36,7 @@ Configuring log collection depends on your current environment. Choose one of th
 
 - If you cannot deploy the containerized Agent and your container writes **all** logs to `stdout`/`stderr`, follow the [host Agent](?tab=hostagent#installation) installation to enable containerized logging within your Agent configuration file.
 
-- If your container writes logs to files (only partially writes logs to `stdout`/`stderr` and writes logs to files OR fully writes logs to files), follow the [host Agent with custom log collection](?tab=hostagentwithcustomlogging#installation) installation.
+- If your container writes logs to files (only partially writes logs to `stdout`/`stderr` and writes logs to files OR fully writes logs to files), follow the [host Agent with custom log collection](?tab=hostagentwithcustomlogging#installation) installation or follow the [containerized Agent](?tab=containerized-agent#installation) installation and check the [log collection from file with Autodiscovery configuration example](?tab=logcollectionfromfile#examples).
 
 ## Installation
 
@@ -228,6 +228,31 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 
 [1]: /agent/logs/advanced_log_collection/#multi-line-aggregation
+{{% /tab %}}
+{{% tab "From file" %}}
+
+The Agent v7.25.0+/6.25.0+ can directly collect logs from a file based on a container Autodiscovery label. To collect these logs, use the `com.datadoghq.ad.logs` label as shown below on your containers to collect `/logs/app.log`:
+
+```yaml
+labels:
+    com.datadoghq.ad.logs: '[{"type":"file", "source": "sample_app", "service": "sample_service", "path": "/logs/app/prod.log"}]'
+```
+
+Logs collected from a file are tagged with the container metadata. Log collection is linked to the container life cycle, as soon as the container stops, log collection from that file stops.
+
+
+**Notes**:
+
+- The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to file may mount a volume such as `/logs/app` where the log file is written.
+
+- When using this kind of label on a container, its `stderr`/`stdout` logs are not collected automatically. If collection from both `stderr`/`stdout` and a file are needed it should be explicity enabled by using a label, for example:
+```yaml
+labels:
+    com.datadoghq.ad.logs: '[{"type":"file", "source": "java", "service": "app", "path": "/logs/app/prod.log"}, {"type": "docker", "source": "app_container", "service": "app"}]'
+```
+
+- When using this kind of combination, `source` and `service` have no default value and should be explicitly set in the Autodiscovery label.   
+
 {{% /tab %}}
 {{< /tabs >}}
 

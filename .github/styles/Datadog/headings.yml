@@ -1,23 +1,53 @@
 extends: capitalization
 message: "'%s' should use sentence-style capitalization."
-link: 'https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#headers'
+link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#headers"
 level: warning
 scope: heading
 match: $sentence
 exceptions:
   - Agent
+  - Amazon
+  - API
+  - Autodiscovery
   - Azure
+  - CentOS
   - CLI
+  - Cluster Agent
+  - Data Collected
   - Datadog
+  - Datadog Operator
   - Docker
   - DogStatsD
+  - ECS
+  - FAQ
+  - Fargate
+  - Further Reading
   - GitHub
+  - Google
+  - HAProxy
   - I
+  - IdP
+  - Java
   - Kubernetes
+  - Lambda
   - Linux
   - macOS
+  - MongoDB
+  - Network Performance Monitoring
+  - OkHttp
+  - OpenTelemetry
+  - OpenTracing
+  - Python
+  - Rails
+  - Real User Monitoring
+  - Red Hat
+  - Redis
   - REPL
+  - RHEL
+  - SafeNet
+  - SAML
+  - Trello
   - TypeScript
+  - Unix
   - URLs
   - Windows
-  - Reading

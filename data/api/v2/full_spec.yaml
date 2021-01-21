@@ -2442,6 +2442,7 @@ components:
         limit:
           default: 10
           description: The maximum buckets to return for this group by
+          format: int64
           type: integer
         missing:
           $ref: '#/components/schemas/LogsGroupByMissing'
@@ -2550,6 +2551,7 @@ components:
       enum:
       - count
       - distribution
+      example: distribution
       type: string
       x-enum-varnames:
       - COUNT
@@ -2648,6 +2650,7 @@ components:
         path:
           description: The path to the value the log-based metric will aggregate on
             (only used if the aggregation type is a "distribution").
+          example: '@duration'
           type: string
       type: object
     LogsMetricResponseComputeAggregationType:
@@ -2655,6 +2658,7 @@ components:
       enum:
       - count
       - distribution
+      example: distribution
       type: string
       x-enum-varnames:
       - COUNT
@@ -2675,6 +2679,7 @@ components:
       properties:
         query:
           description: The search query - following the log search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
           type: string
       type: object
     LogsMetricResponseGroupBy:
@@ -2683,10 +2688,12 @@ components:
         path:
           description: The path to the value the log-based metric will be aggregated
             over.
+          example: '@http.status_code'
           type: string
         tag_name:
           description: Eventual name of the tag that gets created. By default, the
             path attribute is used as the tag name.
+          example: status_code
           type: string
       type: object
     LogsMetricType:
@@ -2778,6 +2785,7 @@ components:
       properties:
         timeOffset:
           description: The time offset (in seconds) to apply to the query.
+          format: int64
           type: integer
         timezone:
           default: UTC
@@ -2792,6 +2800,7 @@ components:
         elapsed:
           description: The time elapsed in milliseconds
           example: 132
+          format: int64
           type: integer
         page:
           description: Paging attributes.

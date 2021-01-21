@@ -947,6 +947,10 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 5
+  - name: Trace Merging (Advanced)
+    url: serverless/distributed_tracing/serverless_trace_merging
+    parent: serverless_distributed_tracing
+    weight: 501
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
@@ -1311,7 +1315,7 @@ main:
     identifier: tracing_open_standards_open_standards_dotnet
     weight: 108
   - name: Trace Serverless Functions
-    url: tracing/setup_overview/serverless_functions/
+    url: serverless/distributed_tracing
     parent: tracing_setup_overview
     identifier: tracing_serverless_functions
     weight: 104
@@ -1728,30 +1732,35 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring
     weight: 1
+  - name: Getting Started
+    url: security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: Signals Explorer
+    url: security_monitoring/explorer
+    parent: security_monitoring
+    identifier: security_monitoring_explorer
+    weight: 102
+  - name: Threat Detection Rules
+    url: security_monitoring/detection_rules
+    parent: security_monitoring
+    identifier: security_monitoring_detection_rules
+    weight: 103
+  - name: Guides
+    url: security_monitoring/guide
+    parent: security_monitoring
+    identifier: security_monitoring_guides
+    weight: 104
   - name: Compliance Monitoring
     url: compliance_monitoring/
     parent: security_compliance_monitoring
     identifier: compliance_monitoring
     weight: 2
   - name: Default Rules
-    url: security_monitoring/default_rules/
+    url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
-    weight: 3
-  - name: Getting Started
-    url: security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
-    weight: 1
-  - name: Signals Explorer
-    url: security_monitoring/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_explorer
-    weight: 2
-  - name: Threat Detection Rules
-    url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
     weight: 3
   - name: Synthetic Monitoring
     url: synthetics/
@@ -2686,6 +2695,10 @@ api_v1:
   - name: Get all indexes
     parent: Logs Indexes
     url: '#get-all-indexes'
+    generated: true
+  - name: Create an index
+    parent: Logs Indexes
+    url: '#create-an-index'
     generated: true
   - name: Get an index
     parent: Logs Indexes

@@ -133,22 +133,22 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| OS                                              | Supported versions                                |
-|-------------------------------------------------|---------------------------------------------------|
-| [Amazon][1]                                     | Amazon Linux 2                                    |
-| [Debian x86_64][2] with systemd                 | Debian 7 (wheezy)+                                |
-| [Debian x86_64][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                |
-| [Ubuntu x86_64][3]                              | Ubuntu 14.04+                                     |
-| [RedHat/CentOS x86_64][4]                       | RedHat/CentOS 6+                                  |
-| [Docker][5]                                     | Version 1.12+                                     |
-| [Kubernetes][6]                                 | Version 1.3+                                      |
-| [SUSE Enterprise Linux x86_64][7] with systemd  | SUSE 11 SP4+                                      |
-| [SUSE Enterprise Linux x86_64][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                      |
-| [Fedora x86_64][8]                              | Fedora 26+                                        |
-| [macOS][9]                                      | macOS 10.12+                                      |
-| [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano) |
-| [Windows 64-bit][10]                            | Windows 7+                                        |
-| [Windows Azure Stack HCI OS][10]                | All Versions                                      |
+| OS                                              | Supported versions                                        |
+|-------------------------------------------------|-----------------------------------------------------------|
+| [Amazon][1]                                     | Amazon Linux 2                                            |
+| [Debian x86_64][2] with systemd                 | Debian 7 (wheezy)+                                        |
+| [Debian x86_64][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                        |
+| [Ubuntu x86_64][3]                              | Ubuntu 14.04+                                             |
+| [RedHat/CentOS x86_64][4]                       | RedHat/CentOS 6+                                          |
+| [Docker][5]                                     | Version 1.12+                                             |
+| [Kubernetes][6]                                 | Version 1.3+                                              |
+| [SUSE Enterprise Linux x86_64][7] with systemd  | SUSE 11 SP4+                                              |
+| [SUSE Enterprise Linux x86_64][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                              |
+| [Fedora x86_64][8]                              | Fedora 26+                                                |
+| [macOS][9]                                      | macOS 10.12+                                              |
+| [Windows Server 64-bit][10]                     | Windows Server 2008 R2+ and Server Core (not Nano Server) |
+| [Windows 64-bit][10]                            | Windows 7+                                                |
+| [Windows Azure Stack HCI OS][10]                | All Versions                                              |
 
 **Notes**: 
 - [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
@@ -165,6 +165,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [9]: /agent/basic_agent_usage/osx/
 [10]: /agent/basic_agent_usage/windows/
 [11]: /agent/basic_agent_usage/source/
+[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

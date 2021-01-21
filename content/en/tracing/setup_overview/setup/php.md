@@ -60,7 +60,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-See [tracer configuration][2] for more information on how to set these variables.
+See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /tracing/setup/php/#environment-variable-configuration

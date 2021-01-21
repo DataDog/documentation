@@ -34,7 +34,7 @@ Cliquez sur un signal de sécurité pour afficher plus de détails dans un volet
 
 {{< img src="security_monitoring/explorer/signal_1.png" alt="Signal de sécurité"  >}}
 
-Les détails les plus importants de votre problème figurent en haut du volet. Ils vous permettent de déterminer la sévérité du signal et sa date de création, mais également d'accéder aux réglages de la règle et de partager en quelques secondes ce signal à un collègue.
+Les détails les plus importants de votre problème figurent en haut du volet. Ils vous permettent de déterminer la gravité du signal et sa date de création, mais également d'accéder aux réglages de la règle et de partager en quelques secondes ce signal à un collègue.
 
 Les dates de première et de dernière réalisation sont mises à jour lorsque de nouvelles données historiques sont transmises, ou lorsque l'attaque n'a pas pris fin. Cette section présente également tous les critères de regroupement configurés pour la règle. Dans cet exemple de règle, le critère de regroupement `usr.name` est appliqué. Enfin, tous les tags définis pour la règle s'affichent sous les critères de regroupement.
 

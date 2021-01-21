@@ -52,7 +52,9 @@ For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated 
 
 ## Setting up SAML
 
-To configure SAML for multi-organizations, use the following procedure:
+SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually. 
+
+To configure SAML for multi-organizations:
 
 1. Create a new organization as a different user, with a different username/password.
 2. Invite SAML users.

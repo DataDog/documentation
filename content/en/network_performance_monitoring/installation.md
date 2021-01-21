@@ -32,6 +32,8 @@ Supported **platforms** include:
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][3]. The [DNS Resolution][4] feature is not supported on CentOS/RHEL 7.6.
 
+**Istio** v1.6.4+ is supported by [Datadog Agent v7.24.1+][1].
+
 Network Performance Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
 1) Cilium version 1.6 and above, and
 2) Kernel version 5.1.16 and above, or 4.19.57 and above for 4.19.x kernels
@@ -161,7 +163,7 @@ To enable network performance monitoring for Windows hosts:
     ```
     For Command Prompt (`cmd.exe`):
     ```shell
-    net /y stop datadogagent && net start datadoagagent
+    net /y stop datadogagent && net start datadogagent
     ```
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
