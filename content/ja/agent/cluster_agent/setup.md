@@ -125,7 +125,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
     echo -n '<Your API key>' | base64
     ```
 
-3. `cluster-agent-deployment.yaml` マニフェストで、[手順 2 - Cluster Agent - Agent 間通信のセキュリティ保護](#手順-2-Agent-間通信のセキュリティ保護)のトークンを設定します。その形式は、シークレットの設定方法により異なります。手順はマニフェストを参照してください。
+3. `cluster-agent-deployment.yaml` マニフェストで、[手順 2 - Cluster Agent - Agent 間通信のセキュリティ保護](#step-2---secure-cluster-agent-to-agent-communication)のトークンを設定します。その形式は、シークレットの設定方法により異なります。手順はマニフェストを参照してください。
 4. 実行: `kubectl apply -f agent-services.yaml`
 5. 実行: `kubectl apply -f secrets.yaml`
 6. 実行: `kubectl apply -f install_info-configmap.yaml`
@@ -158,7 +158,7 @@ NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-**注**: すでに Datadog Agent を実行中の場合、[agent-rbac.yaml マニフェスト](#step-1-set-configure-rbac-permissions-for-node-based-agents) を適用しないとCluster Agent が実行されない可能性があります。
+**注**: すでに Datadog Agent を実行中の場合、[agent-rbac.yaml マニフェスト](#step-1---configure-rbac-permissions) を適用しないとCluster Agent が実行されない可能性があります。
 
 ## Datadog Agent の構成
 
@@ -178,7 +178,7 @@ Datadog Cluster Agent の設定が終了したら、Datadog Agent と Datadog Cl
 
 3. `daemonset.yaml` マニフェストで、`<DD_SITE>` を Datadog サイト `{{< region-param key="dd_site">}}` に置き換えます。デフォルトは `datadoghq.com` です。
 
-4. `daemonset.yaml` マニフェストで、[手順 2 - Cluster Agent - Agent 間通信のセキュリティ保護](#手順-2-Agent-間通信のセキュリティ保護)のトークンを設定します。その形式は、シークレットの設定方法により異なります。手順はマニフェストを参照してください。
+4. `daemonset.yaml` マニフェストで、[手順 2 - Cluster Agent - Agent 間通信のセキュリティ保護](#step-2---secure-cluster-agent-to-agent-communication)のトークンを設定します。その形式は、シークレットの設定方法により異なります。手順はマニフェストを参照してください。
 
 5. `daemonset.yaml` マニフェストで、環境変数 `DD_CLUSTER_AGENT_ENABLED` が `true` に設定されていることを確認します。
 

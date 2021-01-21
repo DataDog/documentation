@@ -94,7 +94,7 @@ Vous pouvez également utiliser les monitors Datadog en tant que portes pour [co
 
 8. Répétez les étapes 5 à 7 pour ajouter d'autres portes dans votre pipeline de déploiement.
 
-**Remarque** : utilisez les [monitors composites][7] pour surveiller plusieurs conditions pour les portes de votre pipeline via un seul état d'intégrité pour chaque phase.
+**Remarque** : utilisez les [monitors composite][7] pour surveiller plusieurs conditions pour les portes de votre pipeline via un seul état d'intégrité pour chaque phase.
 
 Pour afficher le code source, consultez le [référentiel de l'extension Monitor Gate d'Azure Devops][8].
 

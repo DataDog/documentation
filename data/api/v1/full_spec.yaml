@@ -20666,25 +20666,38 @@ tags:
     request are:
 
 
-    - Maximum content size per payload: 5MB
+    - Maximum content size per payload (uncompressed): 5MB
 
-    - Maximum size for a single log: 256kB
+    - Maximum size for a single log: 1MB
 
-    - Maximum array size if sending multiple logs in an array: 500 entries
+    - Maximum array size if sending multiple logs in an array: 1000 entries
 
 
-    Any log exceeding 256KB is accepted and truncated by Datadog:
+    Any log exceeding 1MB is accepted and truncated by Datadog:
 
-    - For a single log request, the API truncates the log at 256KB and returns a 2xx.
+    - For a single log request, the API truncates the log at 1MB and returns a 2xx.
 
     - For a multi-logs request, the API processes all logs, truncates only logs larger
-    than 256KB, and returns a 2xx.
+    than 1MB, and returns a 2xx.
 
 
     We encourage you to send your logs compressed.
 
     Add the `Content-Encoding: gzip` header to the request when sending compressed
-    logs.'
+    logs.
+
+
+    Status code answered by the HTTP API:
+
+    - 200: OK
+
+    - 400: Bad request (likely an issue in the payload formatting)
+
+    - 403: Permission issue (likely using an invalid API Key)
+
+    - 413: Payload too large (batch is above 5MB uncompressed)
+
+    - 5xx: Internal error, request should be retried after some time'
   name: Logs
 - description: '[Check API version 2](/api/v2/logs-archives/).'
   name: Logs Archives

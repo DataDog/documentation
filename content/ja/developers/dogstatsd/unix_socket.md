@@ -27,13 +27,14 @@ UDP は`ローカルホスト`ではたいへんよく機能しますが、コ�
 
 `IP:port` ペアを使用して接続を確立する代わりに、Unix ドメインソケットは、プレースホルダーソケットファイルを使用します。いったん接続が開かれると、データは UDP と同じ[データグラム形式][1]で転送されます。Agent が再起動した場合、既存のソケットは削除され、新しいソケットに置き換わります。クライアントライブラリはこの変化を検出し、新しいソケットにシームレスに接続します。
 
-**注:** UDS は、その目的上、トラフィックがホスト内に制限されます。したがって、メトリクスの送信元となるそれぞれのホストで Datadog Agent を実行する必要があります。
+**注:**
+
+* UDS は、その目的上、トラフィックがホスト内に制限されます。したがって、メトリクスの送信元となるそれぞれのホストで Datadog Agent を実行する必要があります。
+* UDS はWindows ではサポートされません。
 
 ## セットアップ
 
 Unix Domain Socket で DogStatsD をセットアップするには、`dogstatsd_socket` パラメーターを使用して DogStatsD サーバーを有効にします。次に、コードで [DogStatsD クライアント](#dogstatsd-client-configuration) を構成します。
-
-**注**: Goは [unixgram の `dogstatsd_socket`][2] をサポートしていないため、これは Windows では機能しません。
 
 Agent DogStatsD UDS を有効にするには
 
@@ -60,7 +61,7 @@ Agent DogStatsD UDS を有効にするには
 
 1. Agent コンテナの環境変数 `DD_DOGSTATSD_SOCKET=<あなたの UDS パス>` でソケットパスを設定します。
 
-2. クライアントコンテナ (読み取り専用) と Agent コンテナ (読み書き) の両側でホストディレクトリをマウントし、クライアントコンテナからソケットファイルにアクセスできるようにします。個別のソケットではなく親フォルダーをマウントすることで、DogStatsD が再起動してもソケット通信を維持することができます。
+2. アプリケーションコンテナ (読み取り専用) と Agent コンテナ (読み書き) の両側でホストディレクトリをマウントし、ソケットファイルをアプリケーションコンテナへアクセスできるようにします。個別のソケットではなく親フォルダーをマウントすることで、DogStatsD が再起動してもソケット通信を維持することができます。
 
     - `-v /var/run/datadog:/var/run/datadog` で Agent コンテナを起動します。
     - `-v /var/run/datadog:/var/run/datadog:ro` でアプリケーションコンテナを起動します。
@@ -68,9 +69,9 @@ Agent DogStatsD UDS を有効にするには
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-1. Agent コンテナの環境変数 `DD_DOGSTATSD_SOCKET=<あなたの UDS パス>` でソケットパスを設定します。
+1. Agent コンテナの環境変数 `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` でソケットパスを設定します (例: `/var/run/datadog/dsd.socket`)。
 
-2. クライアントコンテナ (読み取り専用) と Agent コンテナ (読み書き) の両側でホストディレクトリをマウントし、クライアントコンテナからソケットファイルにアクセスできるようにします。個別のソケットではなく親フォルダーをマウントすることで、DogStatsD が再起動してもソケット通信を維持することができます。
+2. アプリケーションコンテナ (読み取り専用) と Agent コンテナ (読み書き) の両側でホストディレクトリをマウントし、ソケットファイルをアプリケーションコンテナへアクセスできるようにします。個別のソケットではなく親フォルダーをマウントすることで、DogStatsD が再起動してもソケット通信を維持することができます。
 
     - `datadog-agent` コンテナでソケットフォルダーをマウントします。
 
@@ -85,7 +86,7 @@ Agent DogStatsD UDS を有効にするには
               name: dsdsocket
         ```
 
-    - 同じフォルダーをクライアントコンテナで公開します。
+    - 同じフォルダーをアプリケーションコンテナで公開します。
 
         ```yaml
         volumeMounts:
@@ -99,7 +100,7 @@ Agent DogStatsD UDS を有効にするには
               name: dsdsocket
         ```
 
-      **注**: クライアントコンテナでソケットへの書き込みアクセス許可が必要な場合は、 `readOnly: true` を削除してください。
+      **注**: アプリケーションコンテナでソケットへの書き込みアクセス許可が必要な場合は、 `readOnly: true` を削除してください。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -196,7 +197,7 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
 {{% /tab %}}
 {{< /tabs >}}
 
-**注:** `container_id`、`container_name`、`pod_name` タグは、[カスタムメトリクス][3]が多くなりすぎないようにデフォルトでは追加されていません。
+**注:** `container_id`、`container_name`、`pod_name` タグは、[カスタムメトリクス][2]が多くなりすぎないようにデフォルトでは追加されていません。
 
 ## DogStatsD クライアントコンフィギュレーション
 
@@ -206,12 +207,12 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
 
 | 言語 | ライブラリ                              |
 | -------- | ------------------------------------ |
-| Golang   | [DataDog/datadog-go][4]              |
-| Java     | [DataDog/java-dogstatsd-client][5]   |
-| Python   | [DataDog/datadogpy][6]               |
-| Ruby     | [DataDog/dogstatsd-ruby][7]          |
-| PHP      | [DataDog/php-datadogstatsd][8]       |
-| C#       | [DataDog/dogstatsd-csharp-client][9] |
+| Golang   | [DataDog/datadog-go][3]              |
+| Java     | [DataDog/java-dogstatsd-client][4]   |
+| Python   | [DataDog/datadogpy][5]               |
+| Ruby     | [DataDog/dogstatsd-ruby][6]          |
+| PHP      | [DataDog/php-datadogstatsd][7]       |
+| C#       | [DataDog/dogstatsd-csharp-client][8] |
 
 ### socat プロキシ
 
@@ -221,19 +222,18 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 ```
 
-追加の実装オプションの作成に関するガイドラインについては、[datadog-agent github wiki][10] を参照してください。
+追加の実装オプションの作成に関するガイドラインについては、[datadog-agent github wiki][9] を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/metrics/dogstatsd_metrics_submission/
-[2]: https://github.com/DataDog/datadog-agent/blob/c9588a61e1fef100c61deb39a5145f3b471d107a/pkg/dogstatsd/listeners/uds_common_test.go#L7
-[3]: /ja/developers/metrics/custom_metrics/
-[4]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
-[5]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
-[6]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds
-[7]: https://github.com/DataDog/dogstatsd-ruby#configuration
-[8]: https://github.com/DataDog/php-datadogstatsd
-[9]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
-[10]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
+[2]: /ja/developers/metrics/custom_metrics/
+[3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
+[4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
+[5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds
+[6]: https://github.com/DataDog/dogstatsd-ruby#configuration
+[7]: https://github.com/DataDog/php-datadogstatsd
+[8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
+[9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
