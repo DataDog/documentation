@@ -3437,9 +3437,16 @@ api:
     identifier: delete-an-application-key-owned-by-current-user
     parent: key-management
     generated: true
-  - name: Get an index
-    parent: Logs Indexes
-    url: '#get-an-index'
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCurrentUserApplicationKey
+      unstable: []
+  - name: Create an application key for current user
+    url: '#create-an-application-key-for-current-user'
+    identifier: create-an-application-key-for-current-user
+    parent: key-management
     generated: true
     params:
       versions:
@@ -3770,6 +3777,18 @@ api:
         - v1
       operationids:
         - GetLogsIndex
+      unstable:
+        - v1
+  - name: Create an index
+    url: '#create-an-index'
+    identifier: create-an-index
+    parent: logs-indexes
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateLogsIndex
       unstable:
         - v1
   - name: Get all indexes
