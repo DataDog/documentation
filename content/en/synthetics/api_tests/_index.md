@@ -45,7 +45,7 @@ API tests are useful to help you **proactively monitor that your most important 
 - [`DNS` test][4]
 - [`ICMP` test][5]
 
-{{< img src="synthetics/api_tests/api_tests.mp4" alt="API Test subtypes" video="true"  width="100%" >}}
+{{< img src="synthetics/api_tests/api_test.mp4" alt="API Test subtypes" video="true"  width="100%" >}}
 
 If your service starts answering more slowly, or in an unexpected way (for example, unexpected response body, wrong A record, etc.), your test can [**alert your team**][6], [**block your CI pipeline**][7], or even [**roll back the faulty deployment**][7].
 

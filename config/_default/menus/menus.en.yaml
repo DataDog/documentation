@@ -1776,7 +1776,7 @@ main:
     parent: api_tests
     weight: 104
   - name: ICMP
-    url: syntheticsapi_tests/icmp_tests
+    url: synthetics/api_tests/icmp_tests
     parent: api_tests
     weight: 105
   - name: Multistep API Tests
