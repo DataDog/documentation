@@ -113,7 +113,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                            |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                            |
 | `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts the key value pattern and returns a JSON object. See the [key-value filter examples](#key-value-or-logfmt).                                                         |
-| `xml`                                                          |  Parses properly formatted XML. See the [XML filter examples](#parsing-xml).                                                                                | 
+| `xml`                                                          |  Parses properly formatted XML. See the [XML filter examples](#parsing-xml).                                                                                |
 | `csv(headers[, separator[, quotingcharacter]])`                | Parses properly formatted CSV or TSV lines. See the [CSV filter examples](#parsing-csv).                                                                    |
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
@@ -185,7 +185,7 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[
 
 * `separatorStr`: defines the separator between key and values. Defaults to `=`.
 * `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
-* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`. 
+* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
 * `delimiter`: defines the separator between the different key values pairs (e.g.`|`is the delimiter in `key1=value1|key2=value2`). Default to ` ` (normal space), `,` and `;`.
 
 Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
@@ -302,11 +302,11 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
 
-<sup>1</sup> Use the `timezone` parameter if you perform your own localizations and your timestamps are _not_ in UTC. 
+<sup>1</sup> Use the `timezone` parameter if you perform your own localizations and your timestamps are _not_ in UTC.
 The supported format for timezones are:
 
 * `GMT`, `UTC`, `UT` or `Z`
-* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive. 
+* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive.
 * Timezones starting with `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
 * Timezone IDs pulled from the TZ database. For more information, see [TZ database names][1].
 
@@ -378,8 +378,6 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
 
 ### Regex
 
-Use the regex matcher to match any substring of your log message.
-
 **Log**:
 
 ```text
@@ -393,6 +391,8 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 ```
 
 {{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
+
+**Note**: A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][3].
 
 ### List and Arrays
 
@@ -458,15 +458,15 @@ And extracted JSON:
 
 ### Parsing XML
 
-The XML parser transforms XML formatted messages into JSON. 
+The XML parser transforms XML formatted messages into JSON.
 
 **Log:**
 
 ```text
-<book category="CHILDREN">  
-  <title lang="en">Harry Potter</title>  
-  <author>J K. Rowling</author>  
-  <year>2005</year>  
+<book category="CHILDREN">
+  <title lang="en">Harry Potter</title>
+  <author>J K. Rowling</author>
+  <year>2005</year>
 </book>
 ```
 
@@ -505,14 +505,14 @@ The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` whe
 
 * `headers`: Defines the keys name separated by `,`. Keys names must start with alphabetical character and can contain any alphanumerical character in addition to `_`.
 * `separator`: Defines separators used to separate the different values. Only one character is accepted. Default: `,` . **Note**: Use `tab` to represent the tabulation character.
-* `quotingcharacter`: Defines the quoting character. Only one character is accepted. Default: `"` 
+* `quotingcharacter`: Defines the quoting character. Only one character is accepted. Default: `"`
 
 **Note**:
 
 * Values containing a separator character must be quoted.
 * Quoted Values containing a quoting character must be escaped with a quoting characters. For example, `""` within a quoted value represents `"`.
 * If the log doesn't contain the same number of value as the number of keys in the header, the CSV parser will match the first ones.
-* Intergers and Double are automatically casted if possible. 
+* Intergers and Double are automatically casted if possible.
 
 **Log**:
 
@@ -559,3 +559,4 @@ Other examples:
 
 [1]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [2]: /logs/processing/processors/#log-date-remapper
+[3]: https://github.com/google/re2/wiki/Syntax
