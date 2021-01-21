@@ -252,7 +252,7 @@ The following table lists the supported configuration variables that are availab
 | `DD_TRACE_DEBUG`<br/><br/>`DebugEnabled`           | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
 | `DD_TRACE_HEADER_TAGS`<br/><br/> `HeaderTags`       | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Added in version 1.18.3      |
 | `DD_TAGS`<br/><br/>`GlobalTags`                     | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`). Added in version 1.17.0                                  |
-| `DD_TRACE_SERVICE_MAPPING`                          | Accepts a map of service name keys to rename, and the service name to use instead. (e.g. : `mysql:main-mysql-db, mongodb:offsite-mongodb-service`).    |
+| `DD_TRACE_SERVICE_MAPPING`                          | Rename services using configuration. Accepts a map of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]` e.g. : `mysql:main-mysql-db, mongodb:offsite-mongodb-service`. `from-key` is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0  |
 
 
 ### Automatic instrumentation optional configuration
