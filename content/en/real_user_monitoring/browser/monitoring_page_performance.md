@@ -39,7 +39,7 @@ These performance metrics are key for helping you start your investigations:
 
 ## All performance metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling, global context, or custom user actions, see [Advanced Configuration][6]. The following table lists Datadog-specific metrics along with performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
+For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling or global context see [Advanced Configuration][6]. The following table lists Datadog-specific metrics along with performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
 
 | Attribute                              | Type        | Description                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
