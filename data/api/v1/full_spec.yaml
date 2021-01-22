@@ -16773,7 +16773,7 @@ paths:
         type: safe
   /api/v1/monitor/{monitor_id}/unmute:
     post:
-      description: Mute the specified monitor.
+      description: Unmute the specified monitor.
       operationId: UnmuteMonitor
       parameters:
       - description: The id of the monitor
