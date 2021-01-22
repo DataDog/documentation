@@ -284,7 +284,7 @@ For further details on setting up Operator, including information about using to
 
 ## Unprivileged
 
-(Optional) To run an unprivileged installation, add the following to the [datadog CR][8]:
+(Optional) To run an unprivileged installation, add the following to the [Datadog custom resource (CR)][8]:
 
 ```yaml
 agent:
@@ -295,7 +295,7 @@ agent:
         - <DOCKER_GROUP_ID>
 ```
 
-where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the Docker or containerd socket.
 
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
