@@ -1,7 +1,6 @@
 ---
 title: Geomap Widget
 kind: documentation
-widget_type: "geomap"
 aliases:
     - /graphing/widgets/geomap/
 further_reading:
@@ -52,13 +51,6 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
-## API
-
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][4] documentation for additional reference.
-
-The dedicated [widget JSON schema definition][5] for the top list widget is:
-
-{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
