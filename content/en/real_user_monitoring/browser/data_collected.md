@@ -25,12 +25,14 @@ further_reading:
 
 The Datadog Real User Monitoring SDK generates six types of events:
 
-- [Session][1]: A user session begins when a user starts browsing the web application. It contains high-level information about the user (browser, device, geolocation). It aggregates all RUM events collected during the user journey with a unique `session.id` attribute.
-- [View][2]: Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute.
-- [Resource][3]: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.
-- [Long task][4]: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.
-- [Error][5]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
-- [User Action][6]: A User Action event is a custom event that can be generated for a given user action.
+| Event Type | Description                                                                                                                                                                                                                                                   |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Session][1]    | A user session begins when a user starts browsing the web application. It contains high-level information about the user (browser, device, geolocation). It aggregates all RUM events collected during the user journey with a unique `session.id` attribute. |
+| [View][2]       | Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute.                                                             |
+| [Resource][3]   | A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.                                                                                 |
+| [Long Task][4]  | Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.                                                                                                                          |
+| [Error][5]     | Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.                                                                                                                                              |
+| [Action][6]     | A User Action event is a custom event that can be generated for a given user action.                                                                                                                                                                          |
 
 The following diagram illustrates the RUM event hierarchy:
 
