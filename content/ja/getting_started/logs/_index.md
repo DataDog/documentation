@@ -36,12 +36,12 @@ Datadog ログ管理は、アプリケーションからログを収集するた
 
 ログは全文メッセージにすることができます。
 
-セキュア TCP エンドポイントはポートが `{{< region-param key="tcp_endpoint_port_ssl" >}}` の {{< region-param key="tcp_endpoint" >}} (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
+セキュア TCP エンドポイントはポートが `{{< region-param key="tcp_endpoint_port_ssl" >}}` の telnet intake.logs.datadoghq.com (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
 
 ```
-telnet {{< region-param key="tcp_endpoint" >}} {{< region-param key="tcp_endpoint_port_ssl" >}}
+telnet intake.logs.datadoghq.com 10516
 
-<DATADOG_API_KEY> Plain text log sent through TCP
+<DATADOG_API_KEY> TCP 経由で送信されるプレーンテキストログ
 ```
 
 これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
@@ -53,7 +53,7 @@ telnet {{< region-param key="tcp_endpoint" >}} {{< region-param key="tcp_endpoin
 {{< site-region region="us" >}}
 
 ```text
-telnet intake.logs.datadoghq.com 10514
+telnet intake.logs.datadoghq.com 10516
 
 <DATADOG_API_キー> {"message":"TCP 経由で直接送信される JSON 形式ログ", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
 ```

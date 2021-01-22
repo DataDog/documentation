@@ -100,7 +100,8 @@ type: multi-code-lang
 
 | タイプ  | Documentation              | バージョン | サポートの種類                         | Gem バージョンのサポート |
 | ----- | -------------------------- | -----   | ------------------------------------ | ------------------- |
-| MRI   | https://www.ruby-lang.org/ | 2.7     | フル                                 | 最新              |
+| MRI   | https://www.ruby-lang.org/ | 3.0     | フル                                 | 最新              |
+|       |                            | 2.7     | フル                                 | 最新              |
 |       |                            | 2.6     | フル                                 | 最新              |
 |       |                            | 2.5     | フル                                 | 最新              |
 |       |                            | 2.4     | フル                                 | 最新              |
@@ -138,11 +139,20 @@ type: multi-code-lang
 
 次の手順は、Ruby アプリケーションのトレースをすばやく開始するのに役立ちます。
 
-### Datadog Agent の設定
+### APM に Datadog Agent を構成する
 
 アプリケーションにトレースをダウンロードする前に、Datadog Agent をインストールします。Ruby APM トレーサーは、Datadog Agent を介してトレースデータを送信します。
 
-[Datadog Agent をインストールして構成します](https://docs.datadoghq.com/tracing/setup)。[Docker アプリケーションのトレース](https://docs.datadoghq.com/tracing/setup/docker/)に関する追加のドキュメントをご覧ください。
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `datadog.yaml` ファイルの `apm_enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下の手順に従って、Datadog Agent 内でトレース収集を有効にします。
+
+#### コンテナ
+
+1. メインの [`datadog.yaml` コンフィギュレーションファイル](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-main-configuration-file)で `apm_non_local_traffic: true` を設定します。
+
+2. [Docker](https://docs.datadoghq.com/agent/docker/apm/?tab=ruby)、[Kubernetes](https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm)、[Amazon ECS](https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ruby)、または [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/#trace-collection) 用の特定のセットアップ手順で、コンテナ化環境でトレースを受信するよう Agent が構成されていることを確認します。
+
+3. アプリケーションをインスツルメント化した後、トレースクライアントはデフォルトでトレースを `localhost:8126` に送信します。これが正しいホストとポートでない場合は、環境変数 `DD_AGENT_HOST` および `DD_TRACE_AGENT_PORT` を設定して変更します。
+
 
 ### Rails アプリケーションのクイックスタート
 
@@ -1348,8 +1358,9 @@ end
 |  2.1          |                |  3.0 - 4.2     |
 |  2.2 - 2.3    |                |  3.0 - 5.2     |
 |  2.4          |                |  4.2.8 - 5.2   |
-|  2.5          |                |  4.2.8 - 6.0   |
-|  2.6 - 2.7    |  9.2           |  5.0 - 6.0     |
+|  2.5          |                |  4.2.8 - 6.1   |
+|  2.6 - 2.7    |  9.2           |  5.0 - 6.1     |
+|  3.0          |                |  6.1           |
 
 ### Rake
 

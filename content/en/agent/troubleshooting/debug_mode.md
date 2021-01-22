@@ -61,6 +61,8 @@ For Agent v6.19+ / v7.19+, set the Agent log level at runtime using:
 agent config set log_level debug
 ```
 
+If the trace-agent is in a dedicated container, you **cannot** change the log level for the trace-agent container at runtime like you can do for the agent container. A redeployment after setting `dd_log_level` variable to `debug` is still necessary for the dedicated trace-agent container. 
+
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

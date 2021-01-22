@@ -1,13 +1,6 @@
 {{ $dot := . }}
-{{ .Scratch.Set "apiVersion" "v1"}}
 
-{{ if in .Permalink "api/v2" }}
-    {{ .Scratch.Set "apiVersion" "v2"}}
-{{ end }}
-
-{{ $apiVersion := .Scratch.Get "apiVersion"}}
-
-{{ $apiMenu := print "api_" $apiVersion}}
+{{ $apiMenu := "api" }}
 
 <!-- if no api menu in other languages fallback to english -->
 {{ with index .Site.Menus $apiMenu }}
@@ -35,9 +28,10 @@
             </a>
             <ul class="nav">
                 {{ range .Children }}
-                    <li class="nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
-                        <a class="nav-link" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-target="#{{.Identifier}}">
-                            <span class="d-inline-block">{{ .Name }}</span>
+                    {{ $menuChild := . }}
+                    <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
+                        <a class="col nav-link d-inline-block" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-target="#{{.Identifier}}">
+                          <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>
                 {{ end }}
