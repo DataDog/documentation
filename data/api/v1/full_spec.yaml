@@ -11336,6 +11336,7 @@ paths:
             enum:
             - datadoghq.com
             - datadoghq.eu
+            - ddog-gov.com
           subdomain:
             default: ip-ranges
             description: The subdomain where the API is deployed.
@@ -20479,6 +20480,7 @@ paths:
             enum:
             - datadoghq.com
             - datadoghq.eu
+            - ddog-gov.com
           subdomain:
             default: http-intake.logs
             description: The subdomain where the API is deployed.
@@ -20567,6 +20569,7 @@ servers:
       enum:
       - datadoghq.com
       - datadoghq.eu
+      - ddog-gov.com
     subdomain:
       default: api
       description: The subdomain where the API is deployed.

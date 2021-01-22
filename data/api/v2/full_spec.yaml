@@ -8010,6 +8010,7 @@ servers:
       enum:
       - datadoghq.com
       - datadoghq.eu
+      - ddog-gov.com
     subdomain:
       default: api
       description: The subdomain where the API is deployed.
