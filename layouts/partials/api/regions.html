@@ -8,7 +8,7 @@
     {{ $serverURL = replace $servers.url "{subdomain}" $servers.variables.subdomain.default  }}
     {{ $serverURL = replace $serverURL "{site}" .  }}
     {{ $region := index (split . ".") 1 }}
-    {{ if eq $region "com"}}
+    {{ if in . "hq.com"}}
         {{ $region = "us"}}
     {{ end }}
     {{ $s.SetInMap "regions" $region $serverURL }}

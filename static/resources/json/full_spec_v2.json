@@ -57373,7 +57373,8 @@
           "description": "The regional site for our customers.",
           "enum": [
             "datadoghq.com",
-            "datadoghq.eu"
+            "datadoghq.eu",
+            "ddog-gov.com"
           ]
         },
         "subdomain": {
