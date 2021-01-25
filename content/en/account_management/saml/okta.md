@@ -14,7 +14,7 @@ further_reading:
 
 It's recommended that you set up Datadog as an Okta application manually, as opposed to using a 'pre-configured' configuration.
 
-## General Details
+## General details
 
 * **Single Sign On URL**: https://app.datadoghq.com/account/saml/assertion
     (NOTE: If using IdP initiated login, use a public ID-specific URL which is generated after enabling IdP initiated login in Datadog. Find this URL at the '[Configure SAML][1]' page, in the 'Assertion Consumer Service URL' field. Example URL: `https://app.datadoghq.com/account/saml/assertion/id/` This also applies to the **Recipient URL** and the **Destination URL** fields respectively.)
@@ -42,7 +42,7 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 * **Honor Force Authentication**: Yes
 * **SAML Issuer ID**: `http://www.okta.com/`
 
-## Attribute Statements Details
+## Attribute statements details
 
 * **NameFormat**: urn:oasis:names:tc:SAML:2.0:attrname-format:uri
 * **sn**: user.lastName

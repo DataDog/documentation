@@ -35,7 +35,7 @@ By default, existing users are already associated with one of the three out-of-t
 
 In addition of the general permissions, it is possible to define more granular permissions for specific assets or data types. Permissions can be either global or scoped to a subset of elements. Find below the details of these options and the impact they have on each available permission.
 
-## Access Management
+## Access management
 
 Find below the list of permissions for Access Management:
 
