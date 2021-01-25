@@ -101,7 +101,7 @@ For the example below, the top level spans are:
 
 ## Trace Metrics
 
-Trace metrics are automatically collected and kept at a 15-month retention policy similar to any other [Datadog metric][2]. They can be used to identify and alert on hits, errors, or latency. Trace metrics are tagged by the host receiving traces along with the service or resource. For example, after instrumenting a web service trace metrics are collected for the entry-point span `web.request` in the [Metric Summary][15].
+[Trace metrics][20] are automatically collected and kept at a 15-month retention policy similar to any other [Datadog metric][2]. They can be used to identify and alert on hits, errors, or latency. Trace metrics are tagged by the host receiving traces along with the service or resource. For example, after instrumenting a web service trace metrics are collected for the entry-point span `web.request` in the [Metric Summary][15].
 
 {{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="trace metrics" >}}
 
