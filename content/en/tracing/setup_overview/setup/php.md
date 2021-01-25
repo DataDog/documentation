@@ -60,10 +60,9 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-See [tracer configuration][2] for more information on how to set these variables.
+See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /tracing/setup/php/#environment-variable-configuration
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
@@ -301,6 +300,11 @@ Patterns can be applied to a part of a specific fragment. For example `path/*-fi
 
 Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requests (for example web frameworks) while `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` only applies to outgoing requests (for example `curl` and `guzzle` requests).
 
+### `open_basedir` restrictions
+
+When [`open_basedir`][11] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
+
 ## Upgrading
 
 To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
@@ -353,3 +357,4 @@ If no core dump was generated, check the following configurations and change the
 [8]: /tracing/faq/php-tracer-manual-installation
 [9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [10]: /tracing/setup/nginx/#nginx-and-fastcgi
+[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

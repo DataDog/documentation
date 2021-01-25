@@ -497,6 +497,12 @@
     "description": "The Index object describes the configuration of a log index.\nThis endpoint returns an array of the `LogIndex` objects of your organization.",
     "summary": "Get all indexes"
   },
+  "CreateLogsIndex": {
+    "description": "Creates a new index. Returns the Index object passed in the request body when the request is successful.",
+    "summary": "Create an index",
+    "request_description": "Object containing the new index.",
+    "request_schema_description": "Object describing a Datadog Log index."
+  },
   "GetLogsIndex": {
     "description": "Get one log index from your organization. This endpoint takes no JSON arguments.",
     "summary": "Get an index"
@@ -602,7 +608,7 @@
     "summary": "Mute a monitor"
   },
   "UnmuteMonitor": {
-    "description": "Mute the specified monitor.",
+    "description": "Unmute the specified monitor.",
     "summary": "Unmute a monitor"
   },
   "GetMonthlyCustomReports": {

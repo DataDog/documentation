@@ -163,7 +163,7 @@ To enable network performance monitoring for Windows hosts:
     ```
     For Command Prompt (`cmd.exe`):
     ```shell
-    net /y stop datadogagent && net start datadoagagent
+    net /y stop datadogagent && net start datadogagent
     ```
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation

@@ -12,12 +12,12 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-Follow these steps to configure Azure AD as a SAML identity provider (IdP) within Datadog. **Note**: An Azure AD premium subscription is required.
+Follow these steps to configure Azure AD as a SAML identity provider (IdP) within Datadog. **Note**: An Azure AD subscription is required. If you don't have a subscription, sign up for a [free account][1].
 
 ## Configuration
 ### Azure
 
-1. Open the [Azure portal][1] and sign in as a global administrator or co-admin.
+1. Open the [Azure portal][2] and sign in as a global administrator or co-admin.
 
 2. Navigate to _Azure Active Directory_ -> _Enterprise applications_ -> _New application_.
 
@@ -31,7 +31,7 @@ Follow these steps to configure Azure AD as a SAML identity provider (IdP) withi
 
 7. On the **Select a single sign-on method** page, click on **SAML**. 
 
-8. Retrieve your `Service Provider Entity ID` and `Assertion Consumer Service URL` from the [Datadog SAML page][2]. The default values are:
+8. Retrieve your `Service Provider Entity ID` and `Assertion Consumer Service URL` from the [Datadog SAML page][3]. The default values are:
 
     |                                |                                                                                                                |
     |--------------------------------|----------------------------------------------------------------------------------------------------------------|
@@ -51,7 +51,7 @@ Follow these steps to configure Azure AD as a SAML identity provider (IdP) withi
 
 ### Datadog
 
-1. Go to the [Datadog SAML page][2].
+1. Go to the [Datadog SAML page][3].
 
 2. Choose and upload the **SAML XML Metadata** file downloaded from Azure.
 
@@ -67,7 +67,7 @@ Follow these steps to configure Azure AD as a SAML identity provider (IdP) withi
 
 If you are using SSO with a Datadog button or link, a sign-on URL is required:
 
-1. Retrieve your Single Sign-on URL from the [Datadog SAML page][2]:
+1. Retrieve your Single Sign-on URL from the [Datadog SAML page][3]:
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13"  style="width:70%;">}}
 
@@ -79,5 +79,6 @@ If you are using SSO with a Datadog button or link, a sign-on URL is required:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://portal.azure.com
-[2]: https://app.datadoghq.com/saml/saml_setup
+[1]: https://azure.microsoft.com/free/
+[2]: https://portal.azure.com
+[3]: https://app.datadoghq.com/saml/saml_setup

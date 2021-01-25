@@ -119,7 +119,7 @@ PM> Install-Package NLog
     <!-- ログを Json 形式でファイルに書き込みます -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${longdate}" />
+        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -309,18 +309,24 @@ PM> Install-Package Serilog.Sinks.Datadog.Logs
 {{< site-region region="us" >}}
 
 ```csharp
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.com" })
-    .CreateLogger();
+    .CreateLogger())
+{
+    // コード
+}
 ```
 
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
 ```csharp
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.eu" })
-    .CreateLogger();
+    .CreateLogger())
+{
+    // コード
+}
 ```
 
 {{< /site-region >}}
@@ -333,7 +339,7 @@ var log = new LoggerConfiguration()
 
 ```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<API_KEY>",
         source: "<SOURCE_NAME>",
@@ -342,7 +348,10 @@ var log = new LoggerConfiguration()
         tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
         configuration: config
     )
-    .CreateLogger();
+    .CreateLogger())
+{
+    // コード
+}
 ```
 
 {{< /site-region >}}
@@ -352,16 +361,19 @@ var log = new LoggerConfiguration()
 
 ```csharp
 var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
-        "<API_キー>",
-        source: "<ソース名>",
-        service: "<サービス名>",
-        host: "<ホスト名>",
-        tags: new string[] {"<タグ_1>:<値_1>", "<タグ_2>:<値_2>"},
+        "<API_KEY>",
+        source: "<SOURCE_NAME>",
+        service: "<SERVICE_NAME>",
+        host: "<HOST_NAME>",
+        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
         configuration: config
     )
-    .CreateLogger();
+    .CreateLogger())
+{
+    // コード
+}
 ```
 
 {{< /site-region >}}

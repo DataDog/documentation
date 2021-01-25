@@ -6,7 +6,12 @@ assets:
   logs:
     source: sqlserver
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    SQLServer ao not healthy: assets/recommended_monitors/sqlserver_ao_not_healthy.json
+    SQLServer db not in sync: assets/recommended_monitors/sqlserver_db_not_sync.json
+    SQLServer db not online: assets/recommended_monitors/sqlserver_db_not_online.json
+    SQLServer high failed auto param: assets/recommended_monitors/sqlserver_high_number_failed_auto_param.json
+    SQLServer high processes blocked: assets/recommended_monitors/sqlserver_high_processes_blocked.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -66,6 +71,12 @@ _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode
     ```
 
 2. SQL Server インスタンスが、特定の固定ポートをリッスンしていることを確認します。デフォルトでは、名前付きインスタンスおよび SQL Server Express は動的ポート用に構成されています。詳細は、[Microsoft のドキュメント][3] をご参照ください。
+
+3. (AlwaysOn メトリクスに必須)  AlwaysOn メトリクスを収集するには、追加の権限が必要です。
+
+    ```text
+        GRANT VIEW ANY DEFINITION to datadog;
+    ```
 
 ### コンフィギュレーション
 
@@ -193,7 +204,7 @@ SQL Server チェックには、イベントは含まれません。
 ### サービスのチェック
 
 **sqlserver.can_connect**:<br>
-Agent が SQL Server に接続してメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+Agent が SQL Server に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

@@ -1,4 +1,26 @@
 {
+  "ListAPIKeys": {
+    "description": "アカウントで利用できるすべての API キーを一覧表示します。",
+    "summary": "すべての API キーを取得"
+  },
+  "CreateAPIKey": {
+    "description": "API キーを作成します。",
+    "summary": "API キーの作成",
+    "request_schema_description": "API キーの作成に使用されるリクエスト。"
+  },
+  "DeleteAPIKey": {
+    "description": "API キーを削除します。",
+    "summary": "API キーの削除"
+  },
+  "GetAPIKey": {
+    "description": "API キーを取得します。",
+    "summary": "API キーを取得する"
+  },
+  "UpdateAPIKey": {
+    "description": "API キーを更新します。",
+    "summary": "API キーの編集",
+    "request_schema_description": "API キーの更新に使用されるリクエスト。"
+  },
   "ListApplicationKeys": {
     "description": "組織で利用できるすべてのアプリケーションキーを一覧表示",
     "summary": "すべてのアプリケーションキーを取得"
@@ -132,6 +154,30 @@
     "description": "アーカイブに読み取りロールを追加する。([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
     "summary": "アーカイブにロールを付与する",
     "request_schema_description": "ロールとの関係。"
+  },
+  "ListLogsMetrics": {
+    "description": "構成されたログベースのメトリクスとその定義のリストを取得します。",
+    "summary": "すべてのログベースのメトリクスを取得する"
+  },
+  "CreateLogsMetric": {
+    "description": "オーガニゼーションで収集されたログに基づきメトリクスを作成します。\nリクエストが正常に完了すると、リクエスト本文からログベースのメトリクスオブジェクトを返します。",
+    "summary": "ログベースのメトリクスを作成する",
+    "request_description": "新しいログベースメトリクスの定義。",
+    "request_schema_description": "新しいログベースのメトリクス本文。"
+  },
+  "DeleteLogsMetric": {
+    "description": "オーガニゼーションから特定のログベースメトリクスを削除します。",
+    "summary": "ログベースのメトリクスを削除する"
+  },
+  "GetLogsMetric": {
+    "description": "オーガニゼーションから特定のログベースメトリクスを取得します。",
+    "summary": "ログベースのメトリクスを取得する"
+  },
+  "UpdateLogsMetric": {
+    "description": "オーガニゼーションの特定のログベースメトリクスを更新します。\nリクエストが正常に完了すると、リクエスト本文からログベースのメトリクスオブジェクトを返します。",
+    "summary": "ログベースのメトリクスを更新する",
+    "request_description": "ログベースメトリクスの新しい定義。",
+    "request_schema_description": "新しいログベースのメトリクス本文。"
   },
   "ListRestrictionQueries": {
     "description": "名前と ID を含むすべての制限クエリを返します。",

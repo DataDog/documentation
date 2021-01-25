@@ -29,7 +29,7 @@ Par exemple, si votre monitor de métrique est configuré pour lancer une alerte
 
 **Types de monitors pris en charge** :
 
-- Types de monitors de métrique (métrique, intégration, APM, anomalie, prévision, outlier)
+- Types de monitors de métrique (métrique, intégration, APM, anomalie, prévisions, outlier)
 - Synthetic
 - Checks de service (fonctionnalité en bêta ouverte)
 

@@ -207,7 +207,6 @@ Pour déployer la pile CloudFormation avec les options par défaut, vous devez d
     "lambda:GetLayerVersion",
     "lambda:InvokeFunction",
     "lambda:PutFunctionConcurrency",
-    "lambda:AddPermission",
     "logs:CreateLogGroup",
     "logs:DescribeLogGroups",
     "logs:PutRetentionPolicy"

@@ -111,7 +111,7 @@ Cliquez sur **Save** pour enregistrer votre test. Datadog se charge alors de son
 
 ### Créer des variables locales
 
-Vous pouvez créer des variables locales en définissant leurs valeurs sur l'un des patterns intégrés disponibles ci-dessous :
+Vous pouvez créer des variables locales en définissant leurs valeurs sur l'un des builtins disponibles ci-dessous :
 
 | Pattern                    | Description                                                                                                 |
 |----------------------------|-------------------------------------------------------------------------------------------------------------|

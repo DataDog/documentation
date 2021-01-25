@@ -38,11 +38,12 @@ Follow the [Quickstart instructions][3] within the Datadog app for the best expe
 
 Otherwise, to begin tracing applications written in any language:
 
-1. Download `dd-java-agent.jar` that contains the Agent class files:
+1. Download `dd-java-agent.jar` that contains the latest Agent class files:
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
+   To access a specific version of the tracer, visit Datadog's [Maven repository][16].
 
 2. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
 
@@ -139,6 +140,7 @@ Or on Windows, `setenv.bat`:
 ```text
 set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
+If a `setenv` file does not exist, create it in the `./bin` directory of the Tomcat project folder.
 
 {{% /tab %}}
 {{% tab "JBoss" %}}
@@ -491,3 +493,4 @@ Java APM has minimal impact on the overhead of an application:
 [13]: /tracing/compatibility_requirements/java#disabling-integrations
 [14]: /integrations/java/?tab=host#metric-collection
 [15]: https://github.com/openzipkin/b3-propagation
+[16]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
