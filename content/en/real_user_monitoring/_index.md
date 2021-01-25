@@ -26,6 +26,16 @@ Datadog's Real User Monitoring (RUM) gives you end-to-end visibility into the re
 * **Analytics / Usage**: Understand who is using your application (country, device, OS…), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, feature usage…)
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors…)
 
+{{< whatsnext desc="Get started with RUM:">}}
+  {{< nextlink href="/real_user_monitoring/browser">}}<u>Browser Monitoring</u>: Create an application by configuring the browser SDK.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/android">}}<u>Android Monitoring</u>: Create an application by configuring the Android SDK.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards">}}<u>Dashboards</u>: Discover all data collected out of the box within an out of the box Dashboard.{{< /nextlink >}}
+{{< /whatsnext >}}
+{{< whatsnext desc="Explore your RUM events:">}}
+  {{< nextlink href="/real_user_monitoring/explorer/">}}<u>RUM Search</u>: Search through your page views.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/explorer/analytics">}}<u>RUM Analytics</u>: Get insights from all your events.{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Getting started
 
 Select your application type to start collecting RUM data:
@@ -62,3 +72,5 @@ Get automated alerts on outliers and groups of errors, timeouts, crashes to sign
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
