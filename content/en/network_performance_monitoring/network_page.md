@@ -87,11 +87,11 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 | Metric                    |  Description                                                                                                                           |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **Retransmits**           | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
-| **Round-trip Time (RTT)** | Round-trip time is a proxy for latency. Measured as the time between a TCP frame being sent and acknowledged.                          |
-|  **RTT Variance**         | RTT is a proxy for jitter.                                                                                                             |
-|  **Established Connections**         | The number of TCP connections in an established state. Measured in connections per second from the `source`.                                                                                                              |
-|  **Closed Connections**         | The number of TCP connections in a closed state. Measured in connections per second from the `source`.                                                                                                            |
+| **TCP Retransmits** | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
+| **TCP Latency** | Measured as TCP round-trip time, that is the time between a TCP frame being sent and acknowledged. |
+| **TCP Jitter** | Measured as TCP round-trip time variance. |
+| **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the `source`. |
+| **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the `source`. |
 
 ### DNS Resolution
 
@@ -113,11 +113,11 @@ To view pre-NAT and post-NAT IPs, use the _Show pre-NAT IPs_ toggle in the table
 
 NPM users may configure their networks to have overlapping IP spaces. For instance, you may want to deploy in multiple VPCs (virtual private clouds) which have overlapping address ranges and communicate only through load balancers or cloud gateways.
 
-To correctly classify traffic destinations, NPM uses the concept of a network ID, which is represented as a tag. A network ID is an alphanumeric identifier for a set of IP addresses that can communicate with one another. When an IP address mapping to several hosts with different network IDs is detected, this identifier is used to determine the particular host network traffic is going to or coming from. 
+To correctly classify traffic destinations, NPM uses the concept of a network ID, which is represented as a tag. A network ID is an alphanumeric identifier for a set of IP addresses that can communicate with one another. When an IP address mapping to several hosts with different network IDs is detected, this identifier is used to determine the particular host network traffic is going to or coming from.
 
 In AWS and GCP, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
 
-  ```shell 
+  ```shell
   network:
      Id: <your-network-id>
   ```
