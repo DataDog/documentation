@@ -6,7 +6,6 @@ kind: faq
 <div class="alert alert-warning">
 <b>Agentless profiling will no longer be supported from August 15th, 2020.</b>
 </div>
-****
 
 Benefits of switching to agent mode:
 
@@ -162,7 +161,7 @@ Within a few minutes of migrating, you can see the data on the [Datadog APM > Pr
 
 ### Deprecated arguments
 
-The following arguments and environment variables have been deprecated:
+The following arguments and environment variables have been **deprecated**:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
