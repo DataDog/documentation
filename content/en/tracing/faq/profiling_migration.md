@@ -161,7 +161,7 @@ Within a few minutes of migrating, you can see the data on the [Datadog APM > Pr
 
 ### Deprecated arguments
 
-The following arguments and environment variables have been **deprecated**:
+The following arguments and environment variables have been deprecated:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
