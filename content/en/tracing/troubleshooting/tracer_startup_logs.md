@@ -10,8 +10,8 @@ Tracer startup logs capture all obtainable information at startup and log it eit
 
 If you see any `DIAGNOSTICS` log lines, confirm from the indicated log that settings and configurations are applied correctly.  If you do not see logs at all, ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,.NET,php,go,nodejs,python,ruby,cpp" >}}
+{{< programming-lang lang="java" >}}
 
 #### Configuration
 
@@ -25,8 +25,8 @@ The Java tracer does not output Diagnostics logs.  For this check, run the trace
 
 
 [1]: /tracing/troubleshooting/tracer_debug_logs/
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 #### File Location
 
@@ -37,7 +37,7 @@ Log files are saved in the following directories by default. Use the `DD_TRACE_L
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 | Linux    | `/var/log/datadog/dotnet/`                |
 
-**Note:**: On Linux, you must create the logs directory before you enable debug mode.
+**Note:** On Linux, you must create the logs directory before you enable debug mode.
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
@@ -74,8 +74,8 @@ DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: unable to set event mask
 DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 #### PHP Info
 Obtain the startup logs JSON string from a `phpinfo()` page next to "DATADOG TRACER CONFIGURATION". Create the following PHP file and access it from a browser on the host machine.
@@ -139,9 +139,8 @@ echo \DDTrace\startup_logs() . PHP_EOL;
 ```
 
 [1]: /tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
-{{% /tab %}}
-
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 #### Configuration
 
@@ -160,9 +159,8 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
     at index 4 ....
 ```
 
-{{% /tab %}}
-
-{{% tab "NodeJS" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
 
 #### Configuration
 
@@ -184,8 +182,8 @@ The NodeJS Tracer prints a diagnostic line when the Agent cannot be reached.
 DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 #### Log location
 
@@ -207,8 +205,8 @@ The Python tracer prints a diagnostic line when the Agent cannot be reached.
 DATADOG TRACER DIAGNOSTIC - Agent not reachable. Exception raised: [Errno 61] Connection refused
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 #### Configuration
 
@@ -224,8 +222,8 @@ The Ruby tracer prints a diagnostic line when the Agent cannot be reached.
 W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER DIAGNOSTIC - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
 ```
 
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
 
 #### File Location
 
@@ -243,8 +241,8 @@ For C++, the startup log file is created in `/var/tmp/dd-opentracing-cpp`, for e
 
 For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors will appear in your application logs. Alternately, in Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Diagnostics Errors
 

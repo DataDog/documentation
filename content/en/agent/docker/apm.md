@@ -148,8 +148,10 @@ Your application tracers must be configured to submit traces to this address. Se
 
 Alternately, see the examples below to set the Agent host manually in each supported language:
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodeJS,.NET" >}}
+
+{{< programming-lang lang="java" >}}
+
 Either update the Java Agent configuration via environment variables:
 
 ```bash
@@ -167,8 +169,9 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -jar /your/app.jar
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
 
 ```python
 from ddtrace import tracer
@@ -179,8 +182,9 @@ tracer.configure(
 )
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 ```ruby
 Datadog.configure do |c|
@@ -189,8 +193,9 @@ Datadog.configure do |c|
 end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 ```go
 package main
@@ -203,8 +208,9 @@ func main() {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodeJS" >}}
 
 ```javascript
 const tracer = require('dd-trace').init({
@@ -213,9 +219,9 @@ const tracer = require('dd-trace').init({
 });
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab ".NET" %}}
+{{< programming-lang lang=".NET" >}}
 
 Set the environment variables before running your instrumented app:
 
@@ -235,8 +241,9 @@ export DD_TRACE_AGENT_PORT=8126
 dotnet example.dll
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 ### Docker host IP
 

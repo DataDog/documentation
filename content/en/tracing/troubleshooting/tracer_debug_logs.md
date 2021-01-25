@@ -9,21 +9,29 @@ Use Datadog debug settings to diagnose issues or audit trace data. We don't reco
 
 Debug mode is disabled by default. To enable it, follow the corresponding language tracer instructions:
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+
+{{< programming-lang lang="java" >}}
 
 To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
-**Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file: `-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+**Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file: 
+```
+-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+```
 
 [1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
-{{% /tab %}}
-{{% tab "Python" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
 
 To enable debug mode for the Datadog Python Tracer, set the environment variable `DATADOG_TRACE_DEBUG=true` when using `ddtrace-run`.
+<p></p>
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 To enable debug mode for the Datadog Ruby Tracer, set the `debug` option to `true` in the tracer initialization configuration:
 
@@ -53,8 +61,10 @@ Datadog::Tracer.log.info { "this is typically called by tracing code" }
 See [the API documentation][1] for more details.
 
 [1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
-{{% /tab %}}
-{{% tab "Go" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 To enable debug mode for the Datadog Go Tracer, enable the debug mode during the `Start` config:
 
@@ -69,9 +79,9 @@ func main() {
 }
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab "Node" %}}
+{{< programming-lang lang="nodejs" >}}
 
 To enable debug mode for the Datadog Node.js Tracer, enable it during its `init`:
 
@@ -120,8 +130,10 @@ For more tracer settings, check out the [API documentation][5].
 [3]: /help/
 [4]: /agent/troubleshooting/#send-a-flare
 [5]: https://datadog.github.io/dd-trace-js/#tracer-settings
-{{% /tab %}}
-{{% tab ".NET" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
 
 To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), or in a `datadog.json` file. Alternatively, you can enable debug mode by calling `GlobalSettings.SetDebugEnabled(true)`:
 
@@ -150,8 +162,10 @@ There are two types of logs that are created in these paths:
 
 
 [1]: /tracing/setup/dotnet/#configuration
-{{% /tab %}}
-{{% tab "PHP" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="php" >}}
 
 To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
@@ -162,8 +176,10 @@ If you are using an NGINX server, use the `error_log` directive.
 If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
 [1]: https://www.php-fig.org/psr/psr-3
-{{% /tab %}}
-{{% tab "C++" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="cpp" >}}
 
 The release binary libraries are all compiled with debug symbols added to the optimized release. You can use GDB or LLDB to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
 
@@ -174,8 +190,9 @@ make
 make install
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 ### Review Tracer debug logs
 
@@ -183,9 +200,9 @@ When debug mode for your tracer is enabled, tracer-specific log messages report 
 
 If there are errors that you don't understand, or if traces are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][2].
 
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang lang="java" >}}
 
 ### Intialization log for the tracer
 
@@ -209,9 +226,9 @@ If there are errors that you don't understand, or if traces are reported as flus
 [dd-trace-writer] DEBUG datadog.trace.agent.common.writer.DDApi - Successfully sent 1 of 2 traces to the DD agent.
 ```
 
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< programming-lang lang="python" >}}
 
 For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
 
@@ -256,8 +273,10 @@ For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
 ```
 
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+
 
 ### Span is generated
 
@@ -291,8 +310,10 @@ Metrics: [
 ```
 
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+
 
 ###  Trace submission attempt to the Agent
 
@@ -308,8 +329,9 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 ```
 
 
-{{% /tab %}}
-{{% tab "Node" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
 
 ### Issue sending trace to the Agent
 
@@ -331,8 +353,10 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 ```
 
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
 
 ### Logs from native code
 
@@ -360,8 +384,10 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 ```
 
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="php" >}}
+
 
 ### Generating a span
 
@@ -385,8 +411,10 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 ```
 
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
 
 
 [1]: /help/
