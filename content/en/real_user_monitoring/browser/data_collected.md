@@ -120,7 +120,7 @@ Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK autom
 | `view.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][10]                                                                                                               |
 | `view.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
 | `view.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][12]                                                                             |
-| `view.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
+| `view.load_event`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
 | `view.error.count`            | number      | Count of all errors collected for this view.                                                                                                                                                                        |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
@@ -349,7 +349,7 @@ The following attributes are related to the geolocation of IP addresses:
 
 ## Extra Attribute
 
-In addition to default attributes, add [specific global context][8] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
+In addition to default attributes, add [specific global context][9] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
 
 ## Data Retention
 By default, all data collected is kept at full granularity for 15 days. 
@@ -365,5 +365,4 @@ By default, all data collected is kept at full granularity for 15 days.
 [4]: /real_user_monitoring/browser/data_collected/?tab=longtask
 [5]: /real_user_monitoring/browser/data_collected/?tab=error
 [6]: /real_user_monitoring/browser/data_collected/?tab=useraction
-[7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context

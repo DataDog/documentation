@@ -608,7 +608,7 @@
     "summary": "Mute a monitor"
   },
   "UnmuteMonitor": {
-    "description": "Mute the specified monitor.",
+    "description": "Unmute the specified monitor.",
     "summary": "Unmute a monitor"
   },
   "GetMonthlyCustomReports": {
