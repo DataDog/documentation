@@ -303,7 +303,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 ### `open_basedir` restrictions
 
 When [`open_basedir`][11] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
-When the application runs in a docker container, the path `/proc/self/cgroup` should also be added to the list of allowed directories.
+When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ## Upgrading
 
