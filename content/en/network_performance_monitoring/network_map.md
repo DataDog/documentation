@@ -36,9 +36,11 @@ Use the page header to configure your network map:
 
     - Throughput sent
     - Throughput received
-    - Retransmits
-    - Round-trip time
-    - Round-trip time variance
+    - TCP Retransmits
+    - TCP Latency
+    - TCP Jitter
+    - Established Connnections
+    - Closed Connections
 
 3. Filter the connections you want to display. You can choose whether or not to:
 
