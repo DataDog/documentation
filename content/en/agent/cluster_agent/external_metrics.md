@@ -43,7 +43,7 @@ To enable the Custom Metrics Server, follow the instructions to [set up the Data
 2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the deployment of the Datadog Cluster Agent with the Datadog [API and application keys for your account][6].
 3. Set `DATADOG_HOST` to `https://{{< region-param key="dd_full_site" >}}` (defaults to `https://app.datadoghq.com`).
 
-### Register the External Metrics Provider
+### Register the external metrics provider
 
 Once the Datadog Cluster Agent is up and running:
 
@@ -221,7 +221,7 @@ The Datadog Cluster Agent will take care of automatically creating `DatadogMetri
 
 If you choose to migrate an HPA later on to reference a `DatadogMetric`, the automatically generated resource will be cleaned up by the Datadog Cluster Agent after few hours.
 
-### Troubleshooting DatadogMetric issues
+### Troubleshooting
 
 The Datadog Cluster Agent will take care of updating the `status` subresource of all `DatadogMetric` resources to reflect results from queries to Datadog. This is the main source of information to understand what happens if something is failing.
 

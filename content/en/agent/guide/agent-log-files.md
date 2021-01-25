@@ -70,7 +70,7 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent Installation Log Files
+## Agent installation log files
 
 | Platform                             | Location and file name        |
 |--------------------------------------|-------------------------------|

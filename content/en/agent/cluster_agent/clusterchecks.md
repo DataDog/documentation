@@ -9,7 +9,7 @@ further_reading:
       text: 'Cluster Agent documentation'
 ---
 
-## How it Works
+## Overview
 
 The Datadog Agent can Autodiscover containers and create check configurations with [the Autodiscovery mechanism][1].
 
@@ -79,11 +79,11 @@ Running [custom Agent checks][5] as cluster checks is supported, as long as all 
 
 The Cluster Agent can be configured to use an advanced dispatching logic for cluster checks, which takes into account the execution time and metric samples from check instances. This logic enables the Cluster Agent to optimize dispatching and distribution between cluster check runners.
 
-#### Advanced Dispatching - Cluster Agent setup
+#### Cluster Agent setup
 
 In addition to the steps mentioned in the [Cluster Agent Setup][3] section, you must set `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` to `true`.
 
-#### Advanced Dispatching - Cluster Check Runner setup
+#### Cluster check runner setup
 
 The following environment variables are required to configure the cluster check runners (or node Agents) to expose their check stats. The stats are consumed by the Cluster Agent and are used to optimize the cluster checks' dispatching logic.
 
@@ -103,7 +103,7 @@ The following environment variables are required to configure the cluster check 
 
 When the IP of a given resource is constant (eg. external service endpoint, public URL, etc.), a static configuration can be passed to the Cluster Agent as YAML files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the addition of the `cluster_check: true` line.
 
-#### Example: MySQL check on a CloudSQL database
+#### MySQL check on a CloudSQL database
 
 After setting up a CloudSQL instance and a [Datadog user][6], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
 
@@ -119,7 +119,7 @@ instances:
 
 The `cluster_check` field informs the Cluster Agent to delegate this check to one node-based Agent.
 
-### Template Source: Kubernetes Service Annotations
+### Template source: Kubernetes service annotations
 
 You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][1]:
 
@@ -131,7 +131,7 @@ ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 
 The `%%host%%` [template variable][7] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
-### Template Source: Standard Labels
+### Template source: standard labels
 
 ```yaml
 tags.datadoghq.com/env: "<ENV>"

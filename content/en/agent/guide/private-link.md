@@ -194,7 +194,7 @@ To forward your trace metrics to Datadog using this new VPC endpoint, configure 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Advanced Usage
+## Advanced usage
 
 ### Inter-region peering
 

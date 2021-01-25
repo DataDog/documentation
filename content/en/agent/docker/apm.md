@@ -62,7 +62,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Docker APM Agent Environment Variables
+## Docker APM Agent environment variables
 
 List of all environment variables available for tracing within the Docker Agent:
 
@@ -89,7 +89,7 @@ List of all environment variables available for tracing within the Docker Agent:
 
 As with DogStatsD, traces can be submitted to the Agent from other containers either using [Docker networks](#docker-network) or with the [Docker host IP](#docker-host-ip).
 
-### Docker Network
+### Docker network
 
 As a first step, create a user-defined bridge network:
 
