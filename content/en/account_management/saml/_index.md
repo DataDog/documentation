@@ -140,7 +140,7 @@ If you do not use the updated SP Metadata, Datadog is not able to associate the 
 
 ### SAML strict
 
-With SAML Strict mode enabled, all users must log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account.
+With SAML strict mode enabled, all users must log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account.
 
 ## Further Reading
 
