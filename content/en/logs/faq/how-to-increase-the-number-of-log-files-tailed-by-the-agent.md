@@ -22,4 +22,6 @@ logs_config:
   open_files_limit: 100
 ```
 
+For containerized environments you can set the `DD_LOGS_CONFIG_OPEN_FILES_LIMIT` environment variable.
+
 **Note**: Increasing the tailed logs files limit might increase the resource consumption of the Agent.
