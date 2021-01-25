@@ -130,8 +130,8 @@ Organize and share views of traffic data. Saved Views make debugging faster and 
 
 - To save a view: click the `+ Save` button and name the view to record your current query, table configuration, and graph metric selections.
 - To load a view: click `Views` at the top left to see your Saved Views and select a view from the list.
-- To rename a view: hover over a view in the Saved Views list and click the gear icon to **Edit name**.
-- To share a view: hover over a view in the Saved Views list and click the link icon to **Copy permalink**.
+- To rename a view: hover over a view in the Saved Views list and click the gear icon to *Edit name*.
+- To share a view: hover over a view in the Saved Views list and click the link icon to *Copy permalink*.
 
 To learn more, see our documentation on [Saved Views][1].
 
