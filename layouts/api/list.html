@@ -95,6 +95,7 @@
 
       <!-- Get the general API server url for this version -->
       {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+      {{ $dot.Scratch.Set "regions" $generalRegions }}
 
       <!-- for accessing v1/v2 resources from latest -->
       {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "") }}
