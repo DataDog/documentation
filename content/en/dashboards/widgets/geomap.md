@@ -29,11 +29,11 @@ The geomap widget graphs any metric that has a country tag or facet.
 ### Configuration
 
 1. Choose the data to graph:
-    * RUM: See [the RUM documentation][2] to configure a RUM query. 
-    * Log Events: See [the log search documentation][3] to configure a log event query.
-      * **Note**: The group by tag must include a country ISO Code. You can use the [GeoIP Processor][6] to do this, or manually include the [tags on ingest][8].
-    * Metric: See the [querying][1] documentation to configure a metric query. 
-      * **Note**: The group by tag must include a country ISO Code. You can [generate metrics from ingested logs][7], or manually include the [tags on ingest][8].
+    * RUM: See [the RUM documentation][1] to configure a RUM query. 
+    * Log Events: See [the log search documentation][2] to configure a log event query.
+      * **Note**: The group by tag must include a country ISO Code. You can use the [GeoIP Processor][3] to do this, or manually include the [tags on ingest][4].
+    * Metric: See the [querying][5] documentation to configure a metric query. 
+      * **Note**: The group by tag must include a country ISO Code. You can [generate metrics from ingested logs][6], or manually include the [tags on ingest][4].
 
 2. Optional: configure your view box depending on where you'd like to zoom into on the map by defailt.
 
@@ -56,11 +56,9 @@ Optionally define its size and alignment.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/querying/
-[2]: /real_user_monitoring/explorer/analytics/?tab=timeseries#build-an-analytics-query
-[3]: /logs/search_syntax/
-[4]: /api/v1/dashboards/
-[5]: /dashboards/graphing_json/widget_json/
-[6]: /logs/processing/processors/?tab=ui#geoip-parser
-[7]: /logs/logs_to_metrics/
-[8]: /getting_started/tagging/#defining-tags
+[1]: /real_user_monitoring/explorer/analytics/?tab=timeseries#build-an-analytics-query
+[2]: /logs/search_syntax/
+[3]: /logs/processing/processors/?tab=ui#geoip-parser
+[4]: /getting_started/tagging/#defining-tags
+[5]: /dashboards/querying/
+[6]: /logs/logs_to_metrics/
