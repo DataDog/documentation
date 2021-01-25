@@ -41,6 +41,10 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">AWS Role Delegation is not supported on the Datadog for Government site. Access keys must be used.</div>
+{{< /site-region >}}
+
 If not already configured, set up the [AWS integration][1] for the AWS account that holds your S3 bucket.
 
 * In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
