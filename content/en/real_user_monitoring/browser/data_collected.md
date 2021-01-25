@@ -40,7 +40,7 @@ The following diagram illustrates the RUM event hierarchy:
 
 ## Event-specific and default attributes
 
-There are metrics and attributes that are specific to a given event type. For example, the metric `view.loading_time` is associated with "view" RUM events and the attribute `resource.method` is associated with "resource" RUM events. And there are [default attributes][7] that are present on all RUM events. For example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
+There are metrics and attributes that are specific to a given event type. For example, the metric `view.loading_time` is associated with "view" RUM events and the attribute `resource.method` is associated with "resource" RUM events. And there are [default attributes](#default-attributes) that are present on all RUM events. For example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
 
 ## Event-specific attributes
 
@@ -302,7 +302,7 @@ Each of these event types has the following attributes attached by default. So y
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Randomly generated ID for each page view.                                                                      |
-| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][8].|
+| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs](#single-page-applications).|
 | `view.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed.               |
 | `view.url`                     | string | The view URL.                                                                                                  |
 | `view.url_hash`                     | string | The hash part of the URL.|
@@ -340,16 +340,16 @@ The following attributes are related to the geolocation of IP addresses:
 | Fullname                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `geo.country`         | string | Name of the country                                                                                                                  |
-| `geo.country_iso_code`     | string | [ISO Code][9] of the country (for example, `US` for the United States, `FR` for France).                                                  |
+| `geo.country_iso_code`     | string | [ISO Code][7] of the country (for example, `US` for the United States, `FR` for France).                                                  |
 | `geo.country_subdivision`     | string | Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France). |
-| `geo.country_subdivision_iso_code` | string | [ISO Code][9] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
+| `geo.country_subdivision_iso_code` | string | [ISO Code][7] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
 | `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).                                                                 |
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (example `Paris`, `New York`).                                                                                   |
 
 ## Extra Attribute
 
-In addition to default attributes, add [specific global context][10] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
+In addition to default attributes, add [specific global context][8] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
 
 ## Data Retention
 By default, all data collected is kept at full granularity for 15 days. 
@@ -365,7 +365,5 @@ By default, all data collected is kept at full granularity for 15 days.
 [4]: /real_user_monitoring/browser/data_collected/?tab=longtask
 [5]: /real_user_monitoring/browser/data_collected/?tab=error
 [6]: /real_user_monitoring/browser/data_collected/?tab=useraction
-[7]: /real_user_monitoring/browser/data_collected/?tab=view#default-attributes
-[8]: /real_user_monitoring/data_collected/view#single-page-applications
-[9]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
