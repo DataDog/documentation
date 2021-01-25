@@ -136,7 +136,7 @@ def example_method
   raise StandardError.new "This is a exception"
 end
 
-Datadog.tracer.trace('example.trace', on_error: custom_error_handler) do |span|
+Datadog.tracer.trace('example.trace') do |span|
   example_method()
 end
 ```
