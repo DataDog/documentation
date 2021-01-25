@@ -49,6 +49,10 @@ The dedicated [widget JSON schema definition][3] for the event stream widget is:
 
 {{< dashboards-widgets-api >}}
 
+[1]: /events/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/
+[4]: /events/#event-explorer
 
 {{< /site-region >}}
 
@@ -88,7 +92,10 @@ The dedicated [widget JSON schema definition][3] for the event stream widget is:
 
 {{< dashboards-widgets-api >}}
 
-
+[1]: /events/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/
+[4]: /events/#event-explorer
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -119,7 +126,10 @@ The dedicated [widget JSON schema definition][3] for the event stream widget is:
 
 {{< dashboards-widgets-api >}}
 
-
+[1]: /events/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/
+[4]: /events/#event-explorer
 {{< /site-region >}}
 ## Further Reading
 
