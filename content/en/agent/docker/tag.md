@@ -23,7 +23,7 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
 
-## Extract Labels as Tags
+## Extract labels as tags
 
 Starting with Agent v6.0+, the Agent can collect labels for a given container and use them as tags to attach to all data emitted by this container.
 
@@ -66,7 +66,7 @@ docker_labels_as_tags:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Extract Environment Variables as Tags
+## Extract environment variables as tags
 Starting with Agent v7.20+, a containerized Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container without modifying the Agent `datadog.yaml` file.
 
 Tags should be added using the following format:

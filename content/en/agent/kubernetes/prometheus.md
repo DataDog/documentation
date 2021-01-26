@@ -82,7 +82,7 @@ With the following configuration placeholder values:
 For a full list of available parameters for instances, including `namespace` and `metrics`, see the table in the [Prometheus host collection guide][9].
 
 
-## Getting Started
+## Getting started
 
 ### Simple metric collection
 

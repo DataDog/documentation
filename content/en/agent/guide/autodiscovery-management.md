@@ -134,7 +134,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 
 **Note**: If you are using Kubernetes, the container `<NAME>` is the one in your manifest `.spec.containers[0].name`.
 
-## Include Containers
+## Include containers
 
 Include containers from the Agent Autodiscovery perimeter with an include rule based on their `name` or `image` to collect data **ONLY** from those containers. If a container matches an include rule, it's always included in the Autodiscovery perimeter.
 

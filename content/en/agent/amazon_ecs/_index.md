@@ -38,7 +38,7 @@ To begin setup, run the [Datadog Agent][5] on every EC2 instance in your ECS clu
 
 **Note:** Datadog's [Autodiscovery][7] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
-### Create an ECS Task
+### Create an ECS task
 
 This task launches the Datadog container. When you need to modify the configuration, update this task definition as described [further down in this guide](#create-or-modify-your-iam-policy).
 
@@ -134,11 +134,11 @@ Add the following permissions to your [Datadog IAM policy][13] to collect Amazon
 | `ecs:ListServices`               | Lists the services that are running in a specified cluster.   |
 | `ecs:DescribeContainerInstances` | Describes Amazon ECS container instances.                     |
 
-### Run the Agent as a Daemon Service
+### Run the Agent as a daemon service
 
 Ideally, you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [Daemon Service][15].
 
-#### Schedule a Daemon Service in AWS using Datadog's ECS Task
+#### Schedule a daemon service in AWS using Datadog's ECS task
 
 1. Log in to the AWS console and navigate to the ECS Clusters section. Click into your cluster you run the Agent on.
 2. Create a new service by clicking the **Create** button under Services.

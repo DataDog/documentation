@@ -19,7 +19,7 @@ further_reading:
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
-## Agent Architecture
+## Agent architecture
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -51,11 +51,11 @@ By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 | 5002 | Serves the GUI server on Windows and OSX.                                                   |
 | 8125 | Used for the DogStatsD server to receive external metrics.                                  |
 
-### The Collector
+### Collector
 
 The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python 2.7 interpreter to run integrations and [custom checks][4].
 
-### The Forwarder
+### Forwarder
 
 The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents network splits from affecting metric reporting. Metrics are buffered in memory until a limit in size or number of outstanding send requests are reached. Afterwards, the oldest metrics are discarded to keep the forwarder's memory footprint manageable. Logs are sent over an SSL-encrypted TCP connection to Datadog.
 
@@ -83,7 +83,7 @@ Agent v5 is composed of four major components, each written in Python running as
 
 **Note**: For Windows users, all four Agent processes appear as instances of `ddagent.exe` with the description `DevOps’ best friend`.
 
-### Supervision, Privileges, and Network Ports
+### Supervision, privileges, and network ports
 
 A SupervisorD master process runs as the `dd-agent` user, and all forked subprocesses run as the same user. This also applies to any system call (`iostat`/`netstat`) initiated by the Datadog Agent. The Agent configuration resides at `/etc/dd-agent/datadog.conf` and `/etc/dd-agent/conf.d`. All configuration must be readable by `dd-agent`. The recommended permissions are 0600 since configuration files contain your API key and other credentials needed to access metrics.
 
@@ -249,7 +249,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 <AGENT_BIN_PATH> check --help
 ```
 
-## Agent Overhead
+## Agent overhead
 
 An example of the Datadog Agent resource consumption is below. Tests were made on an AWS EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM). The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
 Enabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.

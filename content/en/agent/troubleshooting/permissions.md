@@ -21,7 +21,7 @@ The Agent needs a specific set of permission in order to collect your data on yo
 * [Process Metrics permission issue](#process-metrics-permission-issue)
 * [Further Reading](#further-reading)
 
-## Agent Logging permission issues
+## Agent logging permission issues
 
 When running the Datadog Agent on a given host, you may encounter some permissions related issues that would prevent the Agent from logging properly, such as:
 
@@ -55,7 +55,7 @@ sudo chown -R dd-agent:dd-agent /var/log/datadog/
 
 [More information on the Agent logs locations][2].
 
-## Agent Socket permission issues
+## Agent socket permission issues
 
 When starting the Agent, the following socket permission issue might appear:
 
@@ -79,7 +79,7 @@ chown dd-agent -R /opt/datadog-agent/run
 
 After making this change, the [Agent Start command][5] should successfully be able to start the Agent. If you continue to see this issue despite having taken these steps, contact [Datadog support][6] for additional direction.
 
-## Process Metrics permission issue
+## Process metrics permission issue
 
 If you enabled the [process check][7] in the Agent running on a Linux OS you may notice that the `system.processes.open_file_descriptors` metric is not collected or reported by default.
 This occurs when processes being monitored by the process check runs under a different user than the Agent user: `dd-agent`. In fact, `dd-agent` user doesn't have full access to all files in `/proc`, which is where the Agent looks to collect data for this metric.
