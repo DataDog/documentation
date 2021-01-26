@@ -63,7 +63,7 @@ Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptib
 
 [This extension][25] takes your Auth0 logs and ships them to Datadog.
 
-### CLI Management
+### CLI management
 
 A [set of tools][26] to backup/restore dashboards and monitors, and configure users via a command line interface.
 
@@ -106,10 +106,10 @@ K6, a load and performance regression testing tool developed by Load Impact, can
 
 A [LaunchDarkly][41] webhook handler that records changes as Datadog events.
 
-### Logstash Output
+### Logstash output
 
-* [Logstash Output for Datadog][42]
-* [Logstash Output for DogStatsD][43]
+* [Logstash output for Datadog][42]
+* [Logstash output for DogStatsD][43]
 
 ### Moogsoft
 
