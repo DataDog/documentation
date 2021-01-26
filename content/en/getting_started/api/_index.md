@@ -78,7 +78,7 @@ Follow these steps to update to the EU instance:
 
 {{< /site-region >}}
 
-## Working with the Collection
+## Working with the collection
 
 After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder, there are subfolders for each type of API category listed in the [Datadog API Reference][4]. Expand the subfolders to see the HTTP methods and API call names.
 
