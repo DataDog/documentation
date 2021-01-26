@@ -40,7 +40,7 @@ After defining the metric, the forecast monitor provides two preview graphs in t
 * Alert threshold: >= `<NUMBER>`
 * Alert [recovery threshold][3]: < `<NUMBER>`
 
-#### Advanced Options
+#### Advanced options
 
 Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available to edit under **Advanced Options**:
 

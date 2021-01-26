@@ -67,11 +67,11 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on a SLO, click its table row to open its details side panel.
 
-### SLO Tags
+### SLO tags
 
 When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][7].
 
-### SLO Default View
+### SLO default view
 
 The default SLO view is loaded when you land on the SLO list view.
 
@@ -81,7 +81,7 @@ The default view includes:
 - A list of all defined SLOs in your organization
 - A list of available facets in left side facet list
 
-### Saved Views
+### Saved views
 
 Saved views allow you to save and share customized searches in the SLO list view for SLOs that are most relevant for you and your team by sharing:
 
@@ -98,19 +98,19 @@ To add a saved view:
 2. Click **Save View +** at the top left of the page.
 3. Name your view and save.
 
-#### Load a Saved View
+#### Load a saved view
 
 To load a saved view, open the *Saved Views* panel by pressing the **Show Views** button at the top left of the page and select a saved view from the list. You can also search for saved views in the *Filter Saved Views* search box at the top of that same *Saved Views* panel.
 
-#### Share a Saved View
+#### Share a saved view
 
 Hover over a saved view from the list and select the hyperlink icon to copy the link to the saved view to share it with your teammates.
 
-#### Manage Saved Views
+#### Manage saved views
 
 Once you are using a saved view, you can update it by selecting that saved view, modifying the query, and clicking the *Update* button below its name in the *Saved Views* panel. To change the saved view's name or delete a saved view, hover over its row in the *Saved Views* panel and click the pencil icon or trash can icon, respectively.
 
-## SLO Audit Events
+## SLO audit events
 
 SLO audit events allow you to track the history of your SLO configurations using the Event Stream. Audit events are added to the Event Stream every time you create, modify or delete an SLO. Each event includes information on an SLO's configuration, and the stream provides a history of the SLO's configuration changes over time.
 
@@ -141,7 +141,7 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 {{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor"  >}}
 
-## SLO Widgets
+## SLO widgets
 
 After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][2] page.
 
