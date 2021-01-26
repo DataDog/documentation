@@ -26,7 +26,7 @@ Follow the [main SAML configuration instructions][2].
 3. On the **Metadata upload** window, click **Browse** to search and select the Datadog metadata obtained previously. The service provider metadata information displays under **Account Details**.
 4. Click **Save Configuration** to save the details and activate the Datadog application in SafeNet Trusted Access.
 
-## Verify Authentication
+## Verify authentication
 
 ### Using STA console
 

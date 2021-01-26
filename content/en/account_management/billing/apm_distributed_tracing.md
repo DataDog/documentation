@@ -18,11 +18,11 @@ Note: If you're using a container based environment, you get billed for underlyi
 
 For more information, see the [Pricing page][6].
 
-## Sample Deployment Scenarios
+## Deployment scenarios
 
 **Sample cases illustrate annual billing rates with default 15 days Indexed Span retention. Contact [Sales][6] or your [Customer Success][7] Manager to discuss volume discounts for your account.**
 
-### Case 1: Hosts, Indexed Spans, and extra Ingested Spans
+### Hosts, indexed spans, and extra ingested Spans
 
 Using 5 hosts and sending 30 million Indexed Spans, with 900 GB of total Ingested Spans.
 
@@ -33,7 +33,7 @@ Using 5 hosts and sending 30 million Indexed Spans, with 900 GB of total Ingeste
 | Ingested Spans | 900 GB          | 750 GB included with 5 APM hosts. $.10 per GB for additional 150 GB of Ingested Spans.                                                                                 | 150 * $.10      | $15                  |
 | Total          |            |                                                                                                 | $155 + $42.50 + $15 | **$212.50 per month** |
 
-### Case 2: Hosts, Fargate, and Indexed Spans
+### Hosts, Fargate, and indexed spans
 
 Using 5 hosts, sending 20 million Indexed Spans, and have deployed APM on average 20 Fargate Tasks over the month.
 
@@ -44,7 +44,7 @@ Using 5 hosts, sending 20 million Indexed Spans, and have deployed APM on averag
 | Indexed Spans | 20 million | 5 million included with 5 APM hosts. 1.3 million included with 20 Fargate tasks. $1.70 per million for additional 13.7 million Indexed Spans | 13.7 * $1.70          | $23.29                |
 | Total          |            |                                                                                                 | $155 + $40 + $23.29 | **$218.29 per month** |
 
-### Case 3: Services, Containers and Indexed Spans
+### Services, containers, and indexed spans
 
 Service 1 running on container 1, service 2 running on container 2. Both Containers are running on 1 host and are sending 20 million Indexed Spans on App Analytics.
 
@@ -54,7 +54,7 @@ Service 1 running on container 1, service 2 running on container 2. Both Contain
 | Indexed Spans | 20 million | 1 million included with 1 APM host. $1.70 per million for additional 19 million Indexed Spans | 19 * $1.70   | $32.30               |
 | Total          |            |                                                                                                | $31 + $32.30 | **$63.30 per month** |
 
-### Case 4: Dynamic Scaling Hosts, Containers, Fargate and no Indexed Spans
+### Dynamic scaling hosts, containers, Fargate, and no indexed spans
 
 App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 2 running on 10-30 Fargate tasks and you're not using App Analytics. Assuming, the 99th percentile usage of EC2 instances is 7, and average of Fargate Tasks over the month is 28.
 
@@ -66,7 +66,7 @@ App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 
 
 Note that the container count will not matter if the deployed agent is on the EC2 instances.
 
-### Case 5: Kubernetes Nodes and Indexed Spans
+### Kubernetes nodes and indexed spans
 
 Agent running on 20 worker nodes in Kubernetes sending 20 million Indexed Spans.
 
@@ -78,7 +78,7 @@ Agent running on 20 worker nodes in Kubernetes sending 20 million Indexed Spans.
 
 For Kubernetes, APM is priced by nodes not by pods.
 
-### Case 6: Lambda Functions and Indexed Spans
+### Lambda functions and indexed spans
 
 Continuously invoking 20 Lambda functions every hour for an entire month while sending 10 million Indexed Spans.
 
@@ -89,7 +89,7 @@ Continuously invoking 20 Lambda functions every hour for an entire month while s
 | Total             |            |                                                                             | $100 + $11.90 | **$119.90 per month** |
 
 
-## FAQs
+## FAQ
 
 **1. What is classified as an APM host for billing?**
 

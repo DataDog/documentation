@@ -64,11 +64,11 @@ Using multiple API keys lets you rotate keys as part of your security practice, 
 
 If your organization needs more than the built-in limit of five API keys, contact [Support][6] to ask about increasing your limit.
 
-## Disabling a User Account
+## Disabling a user account
 
 If a user's account is disabled, any application keys that the user created are deleted. Any API keys that were created by the disabled account are not deleted, and are still valid.
 
-## Transferring API/Application Keys
+## Transferring keys
 
 Due to security reasons, Datadog does not transfer API/application keys from one user to another. The recommended best practice is to keep track of API/application keys and rotate those keys once a user has left the company. This way, a user that has left the company no longer has access to your account and Datadog’s API. Transferring the API/application key allows a user that no longer remains with the company to continue to send and receive data from the Datadog API. Customers have also asked to change the handle that the API/application keys are associated with. This, however, does not resolve the inherent issue: that a user that no longer remains with the company continues to have the ability to send and retrieve data from the Datadog API.
 
