@@ -696,7 +696,7 @@ With the following API call, build a `table` to display the breakdown of your lo
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=172' --data-raw '{
+curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -780,7 +780,7 @@ To paginate and access the next set of results, use `page` option and set the `c
 
 **API call:**
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=172' --data-raw '{
+curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -863,7 +863,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 }
 ```
 
-**Note:** Paging is only supported if `sort` is `alphabetical`.
+**Note:** Paging is only supported if `sort` is `alphabetical` for at least one facet as shown in above example.
 
 ### Further Reading
 
