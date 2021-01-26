@@ -32,7 +32,7 @@ further_reading:
 
 A dashboard is Datadog's tool for visually tracking, analyzing, and displaying key performance metrics, which enable you to monitor the health of your infrastructure.
 
-## Dashboard List
+## Dashboard list
 
 Search, view, or create dashboards and lists on the [Dashboard List][1] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][2].
 
@@ -52,11 +52,11 @@ To add dashboards to a list, select their corresponding check boxes in the main 
 
 The left sidebar displays favorite, preset, and shared, editable lists. You can hide this sidebar using the **Hide Controls** link.
 
-#### Favorite Lists
+#### Favorite lists
 
 Favorite lists are dashboard lists starred by the current logged in user. **Note**: If you have no starred lists, the *Favorite Lists* category is hidden.
 
-#### Preset Lists
+#### Preset lists
 
 Preset lists are default dashboard lists in Datadog:
 
@@ -68,11 +68,11 @@ Preset lists are default dashboard lists in Datadog:
 | Created By You           | Custom dashboards created by the currently logged in user.                |
 | Frequently Viewed By You | All dashboards frequently viewed by the currently logged in user.         |
 
-#### Shared, Editable Lists
+#### Shared, editable lists
 
 This section displays shared, editable dashboard lists with the number of dashboards in each list.
 
-### All Dashboards
+### All dashboards
 
 All dashboards listed are sortable using the column headers *Star*, *Name*, *Modified*, and *Popularity*. All columns with descriptions are listed below:
 
@@ -91,7 +91,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 **Note**: Traffic to public dashboard URLs is ignored for popularity.
 
-## New Dashboard
+## New dashboard
 
 To create a dashboard, click on the **New Dashboard +** button in the upper right. Enter a dashboard name and choose between creating a [timeboard][3] or a [screenboard][4].
 

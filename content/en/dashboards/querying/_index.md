@@ -127,9 +127,9 @@ If you do not enter a title, one is automatically generated based on your select
 
 Click **Done** to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click **Cancel**.
 
-## Configuring an APM Stats graph
+## Configuring an APM stats graph
 
-To configure your graph using APM Stats data, follow these steps:
+To configure your graph using APM stats data, follow these steps:
 
 1. [Select your visualization](#select-your-visualization) (same as for Metrics)
 2. [Choose your level of detail](#level-of-detail)
@@ -139,7 +139,7 @@ To configure your graph using APM Stats data, follow these steps:
 ### Level of detail
 Choose what level of detail you want to see statistics for: one or more services, resources, or spans. (Not all of these are available for every widget type.)
 
-### APM Stats parameters
+### APM stats parameters
 Select the following parameters from the graphing editor: Environment (`env`), Primary tag (`primary_tag`), Service (`service`), and Operation name (`name`).
 
 If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.

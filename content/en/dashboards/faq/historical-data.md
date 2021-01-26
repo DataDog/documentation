@@ -28,7 +28,7 @@ If you're planning to frequently churn hosts, add a tag to the [Agent][2] in `da
 
 ## Deleting
 
-### Metrics and Tags
+### Metrics and tags
 
 There is no way to delete a metric or tag immediately. The list above shows how long a metric or tag stays in the UI if it is no longer reporting.
 
