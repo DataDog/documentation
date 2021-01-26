@@ -389,8 +389,8 @@ if __name__ == '__main__':
 
     (options, args) = parser.parse_args()
 
-    regex_skip_sections_end = r"(```|\{\{< \/code-block >\}\})"
-    regex_skip_sections_start = r"(```|\{\{< code-block)"
+    regex_skip_sections_end = r"(```|\{\{< \/code-block >\}\}|\{\{< \/programming-lang-wrapper >\}\})"
+    regex_skip_sections_start = r"(```|\{\{< code-block|\{\{< programming-lang-wrapper)"
 
     if options.file:
         try:
