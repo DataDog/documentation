@@ -55,9 +55,9 @@ For information about the default attributes for all RUM event types, see [Data 
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
 | `view.action.count`      | number      | Count of all actions collected for this view.                                                                                     
 
-## Monitoring Single Page Applications
+## Monitoring single page applications
 
-For Single Page Applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][14].
+For single page applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][14].
 
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
 
