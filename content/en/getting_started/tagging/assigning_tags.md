@@ -44,7 +44,7 @@ If Autodiscovery is not in use, the Agent automatically assigns the [host tag](#
 {{% /tab %}}
 {{< /tabs >}}
 
-## Methods for Assigning Tags
+## Methods for assigning tags
 
 ### Configuration file
 

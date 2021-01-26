@@ -143,9 +143,9 @@ To configure [Kubernetes State Metrics][2]:
           tags.datadoghq.com/version: "<VERSION>"
   ```
 
-###### APM Tracer / StatsD client
+###### APM tracer and StatsD client
 
-To configure [APM Tracer][4] and [StatsD client][5] environment variables, use the [Kubernetes's downward API][1] in the format below:
+To configure [APM tracer][4] and [StatsD client][5] environment variables, use the [Kubernetes's downward API][1] in the format below:
 
 ```yaml
 containers:
@@ -365,7 +365,7 @@ to configure the `service` tag only in the configuration of the process check.
 
 ### Serverless environment
 
-#### AWS Lambda Functions 
+#### AWS Lambda functions
 
 Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to metrics, traces and logs.
 
