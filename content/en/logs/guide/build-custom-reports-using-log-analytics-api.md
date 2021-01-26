@@ -24,6 +24,7 @@ The following examples are covered in this guide:
 * [Getting stats](#getting-stats)
 * [Getting percentiles](#getting-percentiles)
 * [Multiple group-bys, unique counts, and metrics](#multiple-group-bys-unique-counts-and-metrics) 
+* [Pagination](#pagination)
 
 ## Prerequisites
 
@@ -687,6 +688,140 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 
 ```
 In the response, `c0` represents the unique count of `useragent`, `c1` represents the `pc90` of metric `duration`, `c2` represents the `avg` of metric `network.bytes_written`, and `c3` represents the total `count` of log events.
+
+### Pagination
+
+With the following API call, build a `table` to display the breakdown of your log data by `facets` such as `service`, sort the results by `service` in ascending order and paginate over the result set using `limit`.
+
+**API call:**
+
+```bash
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
+   "compute":[
+   {
+       "type":"total",
+       "aggregation":"count"
+   }],
+   "filter": {
+       "from":"1611118800000",
+       "to":"1611205140000",
+       "query":"*"
+           },
+   "group_by":[
+       {
+           "type":"facet",
+           "facet":"service",
+           "sort":{
+               "order":"asc"
+           },
+           "limit":2
+       }
+   ]
+}'
+
+```
+
+**Response:**
+
+```json
+{
+    "meta": {
+        "status": "done",
+        "request_id": "TGhNOFRzZGhRNk9lSlJLUl9fdkZtQXxCQ0pvYkdvaFIzMXZadm5lVUNGTWpB",
+        "page": {
+            "after": "eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iXX19"
+        },
+        "elapsed": 1491
+    },
+    "data": {
+        "buckets": [
+            {
+                "computes": {
+                    "c0": 312
+                },
+                "by": {
+                    "service": "activator"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 405730
+                },
+                "by": {
+                    "service": "ad-auction"
+                }
+            }
+        ]
+    }
+}
+
+```
+To paginate and access the next set of results, use `page` option and set the `cursor` value to the `after` value from the previous call. 
+
+**API call:**
+```bash
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
+   "compute":[
+   {
+       "type":"total",
+       "aggregation":"count"
+   }],
+   "filter": {
+       "from":"1611118800000",
+       "to":"1611205140000",
+       "query":"*"
+           },
+   "group_by":[
+       {
+           "type":"facet",
+           "facet":"service",
+           "sort":{
+               "order":"asc"
+           },
+           "limit":2
+       }
+   ],
+   "page":{
+       "cursor":"eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iXX19"
+   }
+}'
+
+```
+
+**Response:**
+
+```json
+{
+    "meta": {
+        "status": "done",
+        "request_id": "dHhvZkNZMVZTVlN5cTNsSHRIa3p5QXxCQ0pvYkdvaFIzMXZadm5lVUNGTWpB",
+        "page": {
+            "after": "eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iLCJhZC1zZXJ2ZXIiLCJhZGRvbi1yZXNpemVyIl19fQ"
+        },
+        "elapsed": 1236
+    },
+    "data": {
+        "buckets": [
+            {
+                "computes": {
+                    "c0": 27595090
+                },
+                "by": {
+                    "service": "ad-server"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 139
+                },
+                "by": {
+                    "service": "addon-resizer"
+                }
+            }
+        ]
+    }
+}
+```
 
 **Note:** Paging is only supported if `sort` is `alphabetical`.
 
