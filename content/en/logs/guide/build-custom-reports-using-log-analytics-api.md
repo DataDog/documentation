@@ -691,12 +691,12 @@ In the response, `c0` represents the unique count of `useragent`, `c1` represent
 
 ### Pagination
 
-With the following API call, build a `table` to display the breakdown of your log data by `facets` such as `service`, sort the results by `service` in ascending order and paginate over the result set using `limit`.
+With the following API call, build a `table` to display the breakdown of your log data by `facets` such as `service` and `status`, sort the results by `service` in ascending order and paginate over the result set using `limit`.
 
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=172' --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -715,6 +715,15 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
                "order":"asc"
            },
            "limit":2
+       },
+       {
+           "type":"facet",
+           "facet":"status",
+           "sort":{
+               "order":"desc",
+               "type":"measure",
+               "aggregation":"count"
+           }
        }
    ]
 }'
@@ -727,11 +736,11 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 {
     "meta": {
         "status": "done",
-        "request_id": "TGhNOFRzZGhRNk9lSlJLUl9fdkZtQXxCQ0pvYkdvaFIzMXZadm5lVUNGTWpB",
+        "request_id": "MjZUNF9qRG1TaG1Tb01JenhBV2tYd3x3VTNjTUhIQUdaRUZKajQ0YTBqdmZn",
         "page": {
             "after": "eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iXX19"
         },
-        "elapsed": 1491
+        "elapsed": 5923
     },
     "data": {
         "buckets": [
@@ -740,14 +749,25 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
                     "c0": 312
                 },
                 "by": {
+                    "status": "info",
                     "service": "activator"
                 }
             },
             {
                 "computes": {
-                    "c0": 405730
+                    "c0": 405606
                 },
                 "by": {
+                    "status": "info",
+                    "service": "ad-auction"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 124
+                },
+                "by": {
+                    "status": "error",
                     "service": "ad-auction"
                 }
             }
@@ -760,7 +780,7 @@ To paginate and access the next set of results, use `page` option and set the `c
 
 **API call:**
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=172' --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -779,6 +799,15 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
                "order":"asc"
            },
            "limit":2
+       },
+       {
+           "type":"facet",
+           "facet":"status",
+           "sort":{
+               "order":"desc",
+               "type":"measure",
+               "aggregation":"count"
+           }
        }
    ],
    "page":{
@@ -794,19 +823,29 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 {
     "meta": {
         "status": "done",
-        "request_id": "dHhvZkNZMVZTVlN5cTNsSHRIa3p5QXxCQ0pvYkdvaFIzMXZadm5lVUNGTWpB",
+        "request_id": "aVM2Y2VVMUZReVNmLVU4ZzUwV1JnUXxRWkVjamNHZU9Ka21ubjNDbHVYbXJn",
         "page": {
             "after": "eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iLCJhZC1zZXJ2ZXIiLCJhZGRvbi1yZXNpemVyIl19fQ"
         },
-        "elapsed": 1236
+        "elapsed": 6645
     },
     "data": {
         "buckets": [
             {
                 "computes": {
-                    "c0": 27595090
+                    "c0": 24740759
                 },
                 "by": {
+                    "status": "info",
+                    "service": "ad-server"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 2854331
+                },
+                "by": {
+                    "status": "error",
                     "service": "ad-server"
                 }
             },
@@ -815,6 +854,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
                     "c0": 139
                 },
                 "by": {
+                    "status": "error",
                     "service": "addon-resizer"
                 }
             }
