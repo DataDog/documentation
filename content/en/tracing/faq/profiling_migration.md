@@ -109,6 +109,8 @@ The following arguments and environment variables have been deprecated:
 | `DD_PROFILING_API_KEY`                           | String        | Deprecated in version 0.39. The [Datadog API key][1] to use when uploading profiles. |
 | `DD_SITE`                                        | String        | Deprecated in version 0.39. If your organization is on the Datadog EU site, set this to `datadoghq.eu`. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead.                          |
 | `DD_PROFILING_TAGS`                              | String        | Deprecated in 0.38 in favor of `DD_TAGS`. Tags to apply to an uploaded profile. Must be a list a `key:value` comma-separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
+
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install
 
