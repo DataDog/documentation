@@ -37,7 +37,7 @@ Once you click on the action, all metadata is available in the side panel. You c
 
 **Note**: Use facets for distinctive values (IDs) and measures for quantitative values (timings, latency, etc.).
 
-## Use your attributes in the explorer, dashboards and monitors
+## Use your attributes in the explorer, dashboards, and monitors
 Now that facets and measures have been created, you can use your action attributes in RUM queries. This means you can build dashboards widgets, monitors and advanced queries in [RUM Explorer/Analytics][3].
 
 As an example, the following screenshot shows the average cart value per country for the last day. Using the dropdown menu on the top right corner, you can export this query as a dashboard widget or as a monitor.
