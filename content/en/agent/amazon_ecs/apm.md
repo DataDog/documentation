@@ -94,8 +94,9 @@ os.environ['DD_AGENT_HOST'] = <EC2_PRIVATE_IP>
 
 In cases where variables on your ECS application are set at launch time, you **must** set the hostname as an environment variable with `DD_AGENT_HOST`. Otherwise, you can set the hostname in your application's source code for Python, Javascript, or Ruby. For Java and .NET, you can set the hostname in the ECS task. For example:
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,nodeJS,ruby,go,java,.NET,PHP" >}}
+
+{{< programming-lang lang="python" >}}
 
 ```python
 import requests
@@ -113,9 +114,10 @@ For more examples of setting the Agent hostname in other languages, refer to the
 
 
 [1]: https://docs.datadoghq.com/tracing/setup/python/#change-agent-hostname
-{{% /tab %}}
 
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodeJS" >}}
 
 ```javascript
 const tracer = require('dd-trace').init();
@@ -130,9 +132,10 @@ const axios = require('axios');
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
 [1]: https://docs.datadoghq.com/tracing/setup/nodejs/#change-agent-hostname
-{{% /tab %}}
 
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 ```ruby
 require 'ddtrace'
@@ -143,9 +146,9 @@ Datadog.configure do |c|
 end
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab "Go" %}}
+{{< programming-lang lang="go" >}}
 
 ```go
 package main
@@ -167,9 +170,9 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
         defer tracer.Stop()
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab "Java" %}}
+{{< programming-lang lang="java" >}}
 
 Copy this script into the `entryPoint` field of your ECS task definition, updating the values with your application jar and argument flags.
 
@@ -184,9 +187,10 @@ Copy this script into the `entryPoint` field of your ECS task definition, updati
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
 [1]: https://docs.datadoghq.com/tracing/setup/java/#change-agent-hostname
-{{% /tab %}}
 
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
 
 ```json
 "entryPoint": [
@@ -196,8 +200,9 @@ For more examples of setting the Agent hostname in other languages, refer to the
 ]
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="PHP" >}}
 
 ```json
 "entryPoint": [
@@ -231,8 +236,10 @@ env[DD_VERSION] = $DD_VERSION
 
 
 [1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
-{{% /tab %}}
-{{< /tabs >}}
+
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 ## Further reading
 
