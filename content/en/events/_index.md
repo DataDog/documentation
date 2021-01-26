@@ -220,11 +220,11 @@ By default, related events are aggregated when displayed in the events stream. T
 
 ### Notifications
 
-Datadog supports `@notifications` in the event stream, for example:
+Datadog supports `@notifications`, for example:
 
 | Example                                 | Description                                                                                      |
 |-----------------------------------------|--------------------------------------------------------------------------------------------------|
-| `@support-datadog`                      | Creates a Datadog support ticket when posted directly to your event stream (including comments). |
+| `@support-datadog`                      | Creates a Datadog support ticket when posted directly to your events (including comments). |
 | `@all`                                  | Sends a notification to all members of your organization.                                        |
 | `@john`                                 | Notifies the user named `john`.                                                                  |
 | `@test@example.com`                     | Sends an email to `test@example.com`.                                                            |
