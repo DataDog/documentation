@@ -64,7 +64,6 @@ The following arguments and environment variables have been deprecated:
 | `-Ddd.profiling.proxy.password` | DD_PROFILING_PROXY_PASSWORD | Deprecated in version 0.55. Password used by your proxy.                     |
 
 
-
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
