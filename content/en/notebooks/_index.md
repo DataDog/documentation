@@ -18,7 +18,7 @@ Notebooks combine graphs and text in a linear, cell-based format. They are desig
 
 {{< img src="notebooks/demo_notebook.png" alt="demo notebook"  style="width:100%;">}}
 
-## Live Collaboration
+## Live collaboration
 
 Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time; indicators also appear beside any cell that another user is currently editing.
 

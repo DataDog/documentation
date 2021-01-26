@@ -37,13 +37,13 @@ You can set the timeframe over which traffic is aggregated using the time select
 
 {{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}}
 
-### Facet Panels
+### Facet panels
 
 Facet panels mirror the tags in your search bar query. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
 
 {{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination panel"  style="width:20%;">}}
 
-#### Custom Facets
+#### Custom facets
 
 Aggregate and filter your traffic data by any tags in Datadog network page. A whitelist of tags is provided by default, which you can find in the search bar dropdown menu:
 
@@ -57,7 +57,7 @@ Whitelisted tags include `service`, `availability zone`, `env`, `environment`, `
 
 Once the custom facet is created, use this tag to filter and aggregate traffic in the network page and map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
 
-## Network Data
+## Network data
 
 {{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data"  style="width:90%;" >}}
 
@@ -72,7 +72,7 @@ Values displayed might be different for `sent_metric(source to destination)` and
 
 ### Metrics
 
-#### Network Load
+#### Network load
 
 The following network load metrics are available:
 
@@ -93,7 +93,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the `source`. |
 | **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the `source`. |
 
-### DNS Resolution
+### DNS resolution
 
 Starting with Agent 7.17+, the Agent resolves IPs to human-readable domain names for external and internal traffic. Domain allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and APIs. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **Domain is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
@@ -122,7 +122,7 @@ In AWS and GCP, the network ID is automatically set to the VPC ID. For other env
      Id: <your-network-id>
   ```
 
-### Saved Views
+### Saved views
 
 Organize and share views of traffic data. Saved Views make debugging faster and empower collaboration. For instance, you can create a view, save it for the future for common queries, and copy its link to share network data with your teammates.
 
@@ -150,7 +150,7 @@ Congifure the traffic shown with the `Filter Traffic` button.
 
 External traffic (to public IPs) and Datadog Agent traffic is shown by default. To narrow down your view, you can choose to toggle off the `Show Datadog Traffic` and `Show External Traffic` toggles.
 
-### Unresolved Traffic
+### Unresolved traffic
 
 Unresolved source and destination tags are marked as `N/A`. A traffic source or destination endpoint may be unresolved because:
 
