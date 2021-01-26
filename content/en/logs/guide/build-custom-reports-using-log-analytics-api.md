@@ -691,7 +691,7 @@ In the response, `c0` represents the unique count of `useragent`, `c1` represent
 
 ### Pagination
 
-With the following API call, build a `table` to display the breakdown of your log data by `facets` such as `service` and `status`, sort the results by `service` in ascending order and paginate over the result set using `limit`.
+The following API call builds a `table` to display the breakdown of your log data by facets (such as `service` and `status`), sorts the results by `service` in ascending order, and paginates over the result set using `limit`.
 
 **API call:**
 
