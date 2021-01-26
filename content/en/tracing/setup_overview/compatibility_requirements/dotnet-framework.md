@@ -23,7 +23,7 @@ The .NET Tracer library for Datadog is open-source. For more information see the
 For both automatic and custom instrumentation, the .NET Datadog Tracer supports .NET Framework 4.5 and above. 
 
 <div class="alert alert-warning"> 
-  <strong>Note:</strong>  If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
+  <strong>Notes:</strong><br>- Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API only allows one subscriber (e.g. APM product). We strongly recommend only running a single APM solution within your applications' environment to eliminate the risk or laps of visibility.<br>- If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 </div>
 
 
