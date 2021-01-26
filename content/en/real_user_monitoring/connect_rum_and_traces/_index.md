@@ -96,7 +96,7 @@ let session =  URLSession(
 {{% /tab %}}
 {{< /tabs >}}
 
-## Supported Libraries
+## Supported libraries
 
 The following Datadog tracing libraries are supported:
 

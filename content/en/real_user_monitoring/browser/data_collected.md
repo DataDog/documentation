@@ -88,9 +88,9 @@ A page view represents a user visiting a page from your website. During that pag
 
 For page views, loading performance metrics are collected from both the [Paint Timing API][5] and the [Navigation Timing API][6].
 
-### Single Page Applications
+### Single page applications
 
-For Single Page Applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigations with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][7].
+For single page applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigations with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][7].
 
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works both for `initial_load` and `route_change` navigations.
 
@@ -198,7 +198,7 @@ Detailed network timing data for the loading of an application’s resources are
 
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
-### Error Origins
+### Error origins
 Front-end errors are split in 4 different categories depending on their `error.origin`:
 
 - **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the documentation][1].
@@ -257,8 +257,8 @@ Once an interaction is detected, all new RUM events are attached to the ongoing 
 #### How is the action loading time calculated?
 Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
-### Custom User Actions
-Custom User Actions are User Actions declared and sent manually via the [`addUserAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
+### Custom user actions
+Custom user actions are user actions declared and sent manually via the [`addUserAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
 
 ### Action timing metrics
 
@@ -269,7 +269,7 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 | `action.resource.count`         | number      | Count of all resources collected for this action. |
 | `action.error.count`      | number      | Count of all errors collected for this action.|
 
-### Action Attributes
+### Action attributes
 
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -333,9 +333,9 @@ The following OS-related attributes are attached automatically to all events col
 | `os.version`  | string | The OS version as reported by the User-Agent.  |
 | `os.version_major`   | string | The OS version major as reported by the User-Agent.   |
 
-### Geolocation
+### Geo-location
 
-The following attributes are related to the geolocation of IP addresses:
+The following attributes are related to the geo-location of IP addresses:
 
 | Fullname                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
@@ -347,11 +347,11 @@ The following attributes are related to the geolocation of IP addresses:
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (example `Paris`, `New York`).                                                                                   |
 
-## Extra Attribute
+## Extra attribute
 
 In addition to default attributes, add [specific global context][9] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
 
-## Data Retention
+## Data retention
 By default, all data collected is kept at full granularity for 15 days. 
 
 ## Further Reading
