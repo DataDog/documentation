@@ -286,7 +286,7 @@ Or manually clone the repository at [github.com/DataDog/php-datadogstatsd][1] an
 
 {{< programming-lang lang=".NET" >}}
 
-Get [the package from NuGet][1] to install it.
+- Get [the package from NuGet][1] to install it.
 
 [1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 
