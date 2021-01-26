@@ -14,7 +14,7 @@ further_reading:
 Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> to find a PDF version of this page.
 </div>
 
-## 1. Getting Started
+## Getting started
 
 1. Navigate to the SLO page: [Monitors › Service Level Objectives][1]
 
@@ -25,7 +25,7 @@ Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> t
     * Which parts of your infrastructure do these journeys interact with?
     * What are they expecting from your systems and what are they hoping to accomplish?
 
-## 2. Select the relevant SLI(s)
+## Select the relevant SLI(s)
 
 ### STEP 1
 
@@ -72,25 +72,25 @@ If you need to create a new monitor go to the [Monitor create][2] page.
 
 _Example: 99% of requests should complete in less than 250 ms over a 30-day window._
 
-## 3. Implementing your SLIs
+## Implementing your SLIs
 
 1. [Custom metrics][3] (e.g., counters)
 2. [Integration metrics][4] (e.g., load balancer, http requests)
 3. [Datadog APM][5] (e.g., errors, latency on services and resources)
 4. [Datadog Logs][6] (e.g., metrics generated from logs for a count of particular occurence)
 
-## 4. Set your target objective and time window
+## Set your target objective and time window
 
 1. Select your target: `99%`, `99.5%`, `99.9%`, `99.95%`, or whatever makes sense for your requirements.
 2. Select your time window: over the last `7`, `30`, or `90 days`
 
-## 5. Name, describe, and tag your SLOs
+## Name, describe, and tag your SLOs
 
 1. Name your SLO.
 2. Add a description: describe what the SLO is tracking and why it is important for your end user experience. You can also add links to dashboards for reference.
 3. Add tags: tagging by `team` and `service` is a common practice.
 
-## 6. View and Search
+## View and search
 
 [Use tags to search for your SLOs from the SLO list view][7].
 

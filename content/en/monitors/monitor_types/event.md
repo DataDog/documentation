@@ -63,7 +63,7 @@ Event monitors have specific template variables you can include in the notificat
 | `{{event.tags}}`           | A list of tags attached to the event.                                          |
 | `{{event.tags.<TAG_KEY>}}` | The value for a specific tag key attached to the event. See the example below. |
 
-##### {{event.tags.&lt;TAG_KEY&gt;}}
+##### Tags `key:value` syntax
 
 For the tags `env:test`, `env:staging`, and `env:prod`:
 

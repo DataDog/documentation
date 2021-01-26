@@ -9,7 +9,7 @@ aliases:
 
 Creating an alert based on a query with arithmetic is a common practice. There are some tools and behaviors that should be considered to ensure a monitor's settings are appropriate for evaluating these queries as intended.
 
-## Sparse Metrics
+## Sparse metrics
 
 In the case of sparse or _0_ metrics in the denominator, some results can be rejected.
 
