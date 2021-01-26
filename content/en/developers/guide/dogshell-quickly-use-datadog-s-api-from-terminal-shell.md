@@ -53,7 +53,7 @@ apikey = <DATADOG_API_KEY>
 appkey = <YOUR_APPLICATION_KEY>
 ```
 
-## The Dogshell Commands:
+## Dogshell commands
 
 For reference, [find the code for Dogshell][4]. But once you have Dogshell installed and initialized, you can append the `-h` option to the following commands to get more information on specific Dogshell usage:
 
@@ -69,7 +69,7 @@ For reference, [find the code for Dogshell][4]. But once you have Dogshell insta
 * `dog search`
 * `dog comment`
 
-### Example: Dogshell in Use
+### Dogshell in use
 
 You can post metrics to your Datadog account by using:
 

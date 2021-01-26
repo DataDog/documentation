@@ -194,7 +194,7 @@ For more information and code examples, see [DogStatsD "Sample Rate" Parameter E
 
 UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
-## Operating System kernel buffers
+## Operating system kernel buffers
 
 Most operating systems add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once the max is reached, datagrams containing your metrics start getting dropped. It is possible to adjust the values to give the Agent more time to process incoming metrics:
 
