@@ -863,7 +863,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 ```
 
-**Note:** Paging is only supported if `sort` is `alphabetical` for at least one facet as shown in above example.
+**Note:** Paging is only supported if `sort` is `alphabetical` for at least one facet as shown in above example. To build a report with multiple group-bys with high cardinality facets, make separate API calls. For example, to build a report showing different metrics for `url paths` for every `session id`, make separate API calls. The first call would return all `sessions ids` sorted and you would use these results to get the metrics for `url paths` for each `session id`.
 
 ### Further Reading
 
