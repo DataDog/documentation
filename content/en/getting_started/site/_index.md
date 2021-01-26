@@ -8,7 +8,6 @@ Datadog offers different sites throughout the world. Each site is completely ind
 | Site    | Site URL                   | Location |
 |---------|----------------------------|----------|
 | US1     | https://app.datadoghq.com/ | US       |
-| US3     | https://us3.datadoghq.com  | US       |
 | EU1     | https://app.datadoghq.eu/  | EU       |
 | US1-FED | https://app.ddog-gov.com   | US       |
 
