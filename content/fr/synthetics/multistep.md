@@ -58,7 +58,7 @@ Cliquez sur **Create Your First Request** pour commencer à concevoir les requê
 
   {{% tab "Options de requête" %}}
 
-  * **Follow redirects** : activez cette option pour que votre test API à plusieurs étapes suive jusqu'à dix redirections lors de l'exécution de la requête.
+  * **Follow redirects** : activez cette option pour que votre test HTTP suive jusqu'à dix redirections lors de l'exécution de la requête.
   * **Request headers** : définissez les en-têtes à ajouter à votre requête HTTP. Vous pouvez également remplacer les en-têtes par défaut (par exemple, l'en-tête `user-agent`).
   * **Cookies** : définissez les cookies à ajouter à votre requête HTTP. Définissez plusieurs cookies en suivant le format `<COOKIE_NOM1>=<COOKIE_VALEUR1>; <COOKIE_NOM2>=<COOKIE_VALEUR2>`.
   * **HTTP Basic Auth** : ajoutez des identifiants d'authentification basique HTTP.
@@ -74,7 +74,7 @@ Cliquez sur **Create Your First Request** pour commencer à concevoir les requê
 
   {{% tab "Certificat" %}}
 
-  * **Ignore server certificate error** : activez cette option pour que votre test API à plusieurs étapes poursuive son processus de connexion même lorsque des erreurs de validation du certificat SSL surviennent.
+  * **Ignore server certificate error** : activez cette option pour que votre test HTTP poursuive son processus de connexion même lorsque des erreurs de validation du certificat SSL surviennent.
   * **Client certificate** : authentifiez-vous via mTLS en important votre certificat client et la clé privée associée.
 
   {{% /tab %}}
@@ -101,7 +101,7 @@ Les assertions définissent un résultat de test escompté. Lorsque vous cliquez
 | response time | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Nombre entier_                                                      |
 
-**Remarque** : les tests API à plusieurs étapes peuvent décompresser les corps de réponse contenant les en-têtes `content-encoding` suivants : `br`, `deflate`, `gzip` et `identity`.
+**Remarque** : les tests HTTP peuvent décompresser les corps de réponse contenant les en-têtes `content-encoding` suivants : `br`, `deflate`, `gzip` et `identity`.
 
 Vous pouvez créer jusqu'à 10 assertions par étape en cliquant sur **New assertion** ou en cliquant directement sur l'aperçu de la réponse :
 
@@ -198,7 +198,7 @@ Vous pouvez créer des variables locales en définissant leurs valeurs sur l'un 
 
 ### Utiliser des variables
 
-Les [variables globales définies sur la page `Settings`][13] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests API à plusieurs étapes.
+Les [variables globales définies sur la page `Settings`][13] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests HTTP.
 Pour afficher la liste de vos variables, saisissez `{{` dans le champ souhaité.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Utilisation de variables dans les tests API à plusieurs étapes" video="true" width="90%" >}}
