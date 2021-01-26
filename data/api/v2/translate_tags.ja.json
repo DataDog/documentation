@@ -61,7 +61,7 @@
   },
   "key-management": {
     "name": "Key Management",
-    "description": "[API バージョン 1 を参照](/api/v1/key-management/)してください。"
+    "description": "Datadog API とアプリケーションキーを管理します。このエンドポイントとやり取りするには、必要な権限を持つユーザー用の API キーとアプリケーションキーが必要です。API およびアプリケーションキーの完全なリストは、[Datadog API ページ](https://app.datadoghq.com/account/settings#api)で確認できます。"
   },
   "logs": {
     "name": "ログ",
@@ -74,6 +74,10 @@
   "logs-indexes": {
     "name": "ログインデックス",
     "description": "[API バージョン 1 を参照](/api/v1/logs-indexes/)してください。"
+  },
+  "logs-metrics": {
+    "name": "ログメトリクス",
+    "description": "オーガニゼーションの[ログベースメトリクスlog-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)のコンフィギュレーションのを管理します。"
   },
   "logs-pipelines": {
     "name": "ログパイプライン",
@@ -98,6 +102,10 @@
   "pagerduty-integration": {
     "name": "PagerDuty インテグレーション",
     "description": "[API バージョン 1 を参照](/api/v1/pagerduty-integration/)してください。"
+  },
+  "processes": {
+    "name": "プロセス",
+    "description": "処理 API により、オーガニゼーションのプロセスデータのクエリを作成できます。"
   },
   "roles": {
     "name": "ロール",

@@ -91,6 +91,7 @@ proxy:
 * ホスト名
   - 例: `webserver1`
 
+**注**: `NO_PROXY` は、Agent の HTTP(S) リクエストに対し、エンドポイントにぴったり一致する必要があります。上記の許可される値は、インテグレーションにのみ適用されます。
 
 #### 環境変数
 
@@ -165,7 +166,6 @@ defaults
     timeout client 5s
     timeout server 5s
     timeout connect 5s
-
 # これは、ポート 3833 での HAProxy 統計の表示を宣言します
 # このページを表示するために資格情報は必要ありません。
 # セットアップが完了したら、このページをオフにすることができます。
@@ -176,11 +176,11 @@ listen stats
     stats uri /
 
 # このセクションでは、DNS レコードを再読み込みします
-# <DNS_サーバー_IP> と <DNS_セカンダリサーバー_IP> を DNS サーバーの IP アドレスに置き換えます。
+# <DNS_SERVER_IP> と <DNS_SECONDARY_SERVER_IP> を DNS サーバーの IP アドレスに置き換えます。
 # HAProxy 1.8 以降の場合
 resolvers my-dns
-    nameserver dns1 <DNS_サーバー_IP>:53
-    nameserver dns2 <DNS_セカンダリサーバー_IP>:53
+    nameserver dns1 <DNS_SERVER_IP>:53
+    nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
     resolve_retries 3
     timeout resolve 2s
     timeout retry 1s

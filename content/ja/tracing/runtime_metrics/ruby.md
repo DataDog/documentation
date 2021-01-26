@@ -32,14 +32,14 @@ require 'datadog/statsd'
 require 'ddtrace'
 
 Datadog.configure do |c|
-# ランタイムメトリクス収集を有効にするには、`true` を設定します。デフォルトは `false` です。
-# DD_RUNTIME_METRICS_ENABLED=true に設定して構成することもできます。
-c.runtime_metrics_enabled = true
+  # ランタイムメトリクス収集を有効にするには、`true` を設定します。デフォルトは `false` です。
+  # DD_RUNTIME_METRICS_ENABLED=true に設定して構成することもできます。
+  c.runtime_metrics.enabled = true
 
-# 必要に応じて、ランタイムメトリクスの送信に使用される DogStatsD インスタンスを構成できます。
-# `dogstatsd-ruby` が利用可能な場合、DogStatsD は自動的にデフォルト設定になります。
-# Datadog Agent のホストとポートを使用して構成できます。デフォルトは 'localhost:8125' です。
-c.runtime_metrics statsd: Datadog::Statsd.new
+  # 必要に応じて、ランタイムメトリクスの送信に使用される DogStatsD インスタンスを構成できます。
+  # `dogstatsd-ruby` が利用可能な場合、DogStatsD は自動的にデフォルト設定になります。
+  # Datadog Agent のホストとポートを使用して構成できます。デフォルトは 'localhost:8125' です。
+  c.runtime_metrics statsd: Datadog::Statsd.new
 end
 ```
 

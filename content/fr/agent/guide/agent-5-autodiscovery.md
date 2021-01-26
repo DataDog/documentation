@@ -55,14 +55,14 @@ Si vous utilisez Docker Swarm, exécutez la commande suivante sur l'un de vos n�
       --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
       -e API_KEY=<VOTRE_CLÉ_API_DATADOG> \
       -e SD_BACKEND=docker \
-      datadog/docker-dd-agent:latest
+      gcr.io/datadoghq/docker-dd-agent:latest
 
 Sinon, consultez la documentation de docker-dd-agent pour obtenir des instructions détaillées ainsi que la liste complète des [variables d'environnement][6] prises en charge.
 
 **Si vous souhaitez que l'Agent découvre automatiquement les checks basés sur JMX** :
 
-1. Utilisez l'image `datadog/docker-dd-agent:latest-jmx`. Elle est basée sur `latest` mais comprend une JVM, dont l'Agent a besoin pour exécuter [jmxfetch][7].
-2. Envoyez la variable d'environnement `SD_JMX_ENABLE=yes` au démarrage de `datadog/docker-dd-agent:latest-jmx`.
+1. Utilisez l'image `gcr.io/datadoghq/docker-dd-agent:latest-jmx`. Elle est basée sur `latest`, mais comprend une JVM dont l'Agent a besoin pour exécuter [jmxfetch][7].
+2. Envoyez la variable d'environnement `SD_JMX_ENABLE=yes` au démarrage de `gcr.io/datadoghq/docker-dd-agent:latest-jmx`.
 
 ## Configuration des modèles de checks
 
@@ -157,12 +157,12 @@ docker service create \
   --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
   --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
   --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
-  -e API_KEY=<VOTRE CLÉ API> \
+  -e API_KEY=<VOTRE_CLÉ_API> \
   -e SD_BACKEND=docker \
   -e SD_CONFIG_BACKEND=etcd \
   -e SD_BACKEND_HOST=127.0.0.1 \
   -e SD_BACKEND_PORT=4001 \
-  datadog/docker-dd-agent:latest
+  gcr.io/datadoghq/docker-dd-agent:latest
 ```
 
 Notez que l'option permettant d'activer Autodiscovery est appelée `service_discovery_backend` dans `datadog.conf`, mais simplement `SD_BACKEND` en tant que variable d'environnement.
@@ -388,7 +388,7 @@ checks:
 
 [1]: https://www.datadoghq.com/docker-adoption
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
-[3]: https://hub.docker.com/r/datadog/docker-dd-agent
+[3]: https://gcr.io/datadoghq/docker-dd-agent
 [4]: /fr/agent/kubernetes/
 [5]: /fr/integrations/amazon_ecs/#installation
 [6]: https://github.com/DataDog/docker-dd-agent#environment-variables

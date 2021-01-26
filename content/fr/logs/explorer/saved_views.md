@@ -25,7 +25,7 @@ Techniquement, une vue enregistrée permet de surveiller les éléments suivants
 
 ## Votre vue enregistrée par défaut
 
-{{< img src="logs/explorer/saved_views/default.png" alt="Sélection de vues enregistrées"  style="width:50%;" >}}
+{{< img src="logs/explorer/saved_views/default.png" alt="Vue par défaut"  style="width:50%;" >}}
 
 La vue que vous utilisez dans le Log Explorer est votre vue enregistrée par défaut. Vous seul pouvez accéder à cette vue et la consulter. Toute modification de la vue n'entraîne aucune conséquence pour votre organisation.
 
@@ -39,14 +39,14 @@ Vous pouvez exécuter les actions suivantes à tout moment depuis l'entrée de l
 
 ## Vues enregistrées de votre organisation
 
-{{< img src="logs/explorer/saved_views/custom.png" alt="Sélection de vues enregistrées"  style="width:50%;" >}}
+{{< img src="logs/explorer/saved_views/custom.png" alt="Vues enregistrées de toute l'organisation"  style="width:50%;" >}}
 
 En dehors de votre vue enregistrée par défaut, toutes les vues enregistrées sont partagées avec toute votre organisation :
 
 * Les **vues enregistrées des intégrations** sont fournies par défaut avec la majorité des [intégrations Log Management][7] de Datadog. Elles peuvent uniquement être consultées et sont identifiées par le logo de l'intégration.
 * Les **vues enregistrées personnalisées** sont créées par les utilisateurs. Elles peuvent être modifiées par n'importe quel utilisateur de votre organisation (à l'exception des [utilisateurs en lecture seule][8]) et sont identifiées par l'avatar de l'utilisateur qui les a créées. Cliquez sur le bouton d'**enregistrement** pour créer une vue enregistrée personnalisée à partir du contenu actuel de votre vue Log Explorer.
 
-{{< img src="logs/explorer/saved_views/save.png" alt="Sélection de vues enregistrées"  style="width:30%;" >}}
+{{< img src="logs/explorer/saved_views/save.png" alt="Enregistrement des logs"  style="width:30%;" >}}
 
 Vous pouvez exécuter les actions suivantes à tout moment depuis l'entrée de la vue enregistrée dans le volet des vues :
 
@@ -56,7 +56,7 @@ Vous pouvez exécuter les actions suivantes à tout moment depuis l'entrée de l
 * **Partager** une vue enregistrée à l'aide d'un lien simplifié.
 * **Ajouter une étoile** à une vue enregistrée pour qu'elle fasse partie de vos favoris. Les vues enregistrées favorites s'affichent en haut de votre liste de vues enregistrées et sont directement accessibles à partir du menu de navigation.
 
-{{< img src="logs/explorer/saved_views/star.png" alt="Sélection de vues enregistrées"  style="width:30%;" >}}
+{{< img src="logs/explorer/saved_views/star.png" alt="Vues favorites"  style="width:50%;" >}}
 
 *Remarque* : les actions de mise à jour, de renommage et de suppression sont désactivées pour les vues enregistrées des intégrations et les [utilisateurs en lecture seule][8].
 

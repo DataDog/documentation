@@ -36,54 +36,62 @@ title: Android ログの収集
     }
     ```
 
-2. アプリケーションコンテキストと [Datadog クライアントトークン][2]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][6]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
+2. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][2]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][6]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
 
     {{< tabs >}}
     {{% tab "US" %}}
-
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val config = DatadogConfig.Builder("<クライアントトークン>", "<環境名>", "<アプリケーション_ID>")
+        val config = DatadogConfig.Builder("<CLIENT_TOKEN>", "<ENVIRONMENT_NAME>", "<APPLICATION_ID>")
                         .build()
-        Datadog.initialize(this, config)
+        Datadog.initialize(this, trackingConsent, config)
     }
 }
 ```
-
     {{% /tab %}}
     {{% tab "EU" %}}
-
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val config = DatadogConfig.Builder("<クライアントトークン>", "<環境名>", "<アプリケーション_ID>")
+        val config = DatadogConfig.Builder("<CLIENT_TOKEN>", "<ENVIRONMENT_NAME>", "<APPLICATION_ID>")
                         .useEUEndpoints()
                         .build()
-        Datadog.initialize(this, config)
+        Datadog.initialize(this, trackingConsent, config)
     }
 }
 ```
-
     {{% /tab %}}
     {{< /tabs >}}
 
-     SDK の現在の状態を表示するユーティリティメソッドもあります。これを使用して、初期化が正しく行われたかを確認できます。
+   GDPR 既成を遵守するために、SDK は初期化時に追跡に関する同意を求めます。
+   追跡に関する同意は以下のいずれかの値で示されます。
+    * `TrackingConsent.PENDING`: SDK はデータの収集とバッチ処理を開始しますが、データは送信されません
+     収集エンドポイントへの送信は行われません。SDK はバッチ処理が完了したデータをどうするかについての新たな同意値が得られるまで待機します。
+    * `TrackingConsent.GRANTED`: SDK はデータの収集を開始し、それをデータ収集エンドポイントに送信します。
+    * `TrackingConsent.NOT_GRANTED`: SDK がデータを収集することはありません。手動でログやトレース、
+     RUM イベントを送信することもできません。
+
+    SDK の初期化後に追跡に関する同意を更新する場合は、 `Datadog.setTrackingConsent(<NEW CONSENT>)` の呼び出しを行います。
+    SDK は新しい同意に応じて動作を変更します。たとえば、現在の同意内容が `TrackingConsent.PENDING` で、それを
+    * `TrackingConsent.GRANTED` に更新した場合: SDK は現在のバッチデータと将来的なデータをすべてデータ収集エンドポイントに直接送信します。
+    * `TrackingConsent.NOT_GRANTED`: SDK はすべてのバッチデータを消去し、以後のデータも収集しません。
+
+   **注**: ユーティリティメソッド `isInitialized` を使用して SDK が適切に初期化されているかを確認します。
 
     ```kotlin
-        if(Datadog.isInitialized()){
-          // ここにあなたのコードを挿入
-        }
+    if (Datadog.isInitialized()) {
+        // your code here
+    }
     ```
-
-     アプリケーションを書く際、開発ログを有効にできます。指定したレベル以上の優先度を持つライブラリ内のすべての内部メッセージが Android の Logcat に記録されます。
+   アプリケーションを書く際、`setVerbosity` メソッドを呼び出すことで開発ログを有効にできます。指定したレベル以上の優先度を持つライブラリ内のすべての内部メッセージが Android の Logcat に記録されます。
 
     ```kotlin
-        Datadog.setVerbosity(Log.INFO)
+    Datadog.setVerbosity(Log.INFO)
     ```
 
 3. Android ロガーの構成：

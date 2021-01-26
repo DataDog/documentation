@@ -12,8 +12,7 @@ further_reading:
     tag: Documentation
     text: Créer des dashboards avec JSON
 ---
-Les valeurs de requête affichent la valeur actuelle d'une requête de métrique, d'APM ou de log donnée. Elles disposent d'une mise en forme conditionnelle (comme un arrière-plan vert/jaune/rouge) pour indiquer si la valeur figure dans la plage attendue.
-Les valeurs affichées par une valeur de requête ne représentent pas nécessairement une mesure instantanée.
+Les valeurs de requête affichent la valeur actuelle d'une requête de métrique, d'APM ou de log donnée. Elles disposent d'une mise en forme conditionnelle (comme un arrière-plan vert/jaune/rouge) pour indiquer si la valeur figure dans la plage attendue. Les valeurs affichées par une valeur de requête ne représentent pas nécessairement une mesure instantanée.
 
 Le widget peut afficher la dernière valeur transmise, ou une agrégation calculée à partir de toutes les valeurs de requête de l'intervalle. Ces visualisations offrent un aperçu limité mais explicite de votre requête d'infrastructure. 
 
@@ -21,15 +20,15 @@ Le widget peut afficher la dernière valeur transmise, ou une agrégation calcul
 
 ## Configuration
 
-{{< img src="dashboards/widgets/query_value/query_value_setup.png" alt="Configuration du widget Valeur de requête" style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query-value-widget-setup.png" alt="Configuration du widget Valeur de requête"  style="width:80%;">}}
 
 ### Configuration
 
 1. Choisissez les données à représenter :
     * Métrique : consultez la documentation sur les [requêtes][1] pour configurer une requête de métrique.
-    * Spans analysées : consultez la [documentation sur la recherche de traces][2] pour configurer une requête de span analysée.
+    * Spans indexées : consultez la [documentation sur la recherche de traces][2] pour configurer une requête de span indexée.
     * Événements de log : consultez la [documentation sur la recherche de logs][3] pour configurer une requête d'événement de log.
-2. Choisissez les unités et la mise en forme.
+2. Choisissez les unités et la mise en forme. L'option de mise en forme automatique adapte la taille du dashboard en tenant compte des unités.
 3. Facultatif : configurez une mise en forme conditionnelle en fonction de la valeur affichée.
 
 ### Options
@@ -48,53 +47,11 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][4] utilisé pour le widget Valeur de requête est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la documentation relative à l'[API Dashboards][4] pour en savoir plus.
 
-```text
-QUERY_VALUE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["query_value"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "autoscale":   {"type": "boolean"},
-        "custom_unit": {"type": "string"},
-        "precision":   {"type": "integer"},
-        "text_align":  {"enum": ["center", "left", "right"]},
-        "title":       {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][5] utilisé pour le widget Valeur de requête est le suivant :
 
-| Paramètre     | Type             | Obligatoire | Description                                                                                                                                                  |
-|---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | chaîne           | oui      | Type de widget (utilisez `query_value` pour le widget Valeur de requête)                                                                                                |
-| `requests`    | tableau d'objets | oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][5] pour apprendre à élaborer le `REQUEST_SCHEMA`. |
-| `autoscale`   | Booléen          | non       | Indique si la mise à l'échelle automatique doit être utilisée ou non.                                                                                                                           |
-| `custom_unit` | chaîne           | non       | Affichez une unité au choix sur le widget.                                                                                                                 |
-| `precision`   | nombre entier          | non       | Nombre de décimales à afficher. Si vous ne définissez pas ce paramètre, le widget utilise une valeur brute.                                                                                   |
-| `text_align`  | chaîne           | non       | Alignement de la valeur dans le widget. Valeurs disponibles : `center`, `left` ou `right`.                                                                     |
-| `title`       | chaîne           | non       | Titre de votre widget.                                                                                                                                        |
-
-Propriétés supplémentaires autorisées dans l'objet `request` :
-
-```text
-{
-    "conditional_formats": CONDITIONAL_FORMATS_SCHEMA,
-    "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}
-}
-```
-
-| Paramètre             | Type   | Obligatoire | Description                                                                                                                                                     |
-|-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional_formats` | objet | non       | Options de commande de mise en forme conditionnelle. Consultez la [documentation relative au schéma JSON de mise en forme conditionnelle][6] pour apprendre à élaborer le `CONDITIONAL_FORMATS_SCHEMA`. |
-| `aggregator`          | enum   | non       | Agrégateur utilisé pour la requête. Valeurs disponibles : `avg`, `last`, `max`, `min` ou `sum`.                                                                   |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
@@ -103,6 +60,5 @@ Propriétés supplémentaires autorisées dans l'objet `request` :
 [1]: /fr/dashboards/querying/#overview
 [2]: /fr/tracing/app_analytics/search/#search-bar
 [3]: /fr/logs/search_syntax/
-[4]: /fr/dashboards/graphing_json/widget_json/
-[5]: /fr/dashboards/graphing_json/request_json/
-[6]: /fr/dashboards/graphing_json/widget_json/#conditional-format-schema
+[4]: /fr/api/v1/dashboards/
+[5]: /fr/dashboards/graphing_json/widget_json/
