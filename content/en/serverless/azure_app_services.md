@@ -99,7 +99,7 @@ using Serilog.Sinks.Datadog.Logs;
 
           Serilog.Log.Logger = new LoggerConfiguration()
               .WriteTo.DatadogLogs(
-                  "eb7c615e5fca779871203b7de9209b6c",
+                  "<DD_API_KEY>",
                   source: "<SOURCE_NAME>",
                   service: "<SERVICE_NAME>",
                   tags: new string[] { "<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>" },
