@@ -4,14 +4,14 @@
 {{ $s.Set "regions" dict }}
 {{ $serverURL := ""}}
 
-{{ range $servers.variables.site.enum }}
+{{ range $domain := $servers.variables.site.enum }}
     {{ $serverURL = replace $servers.url "{subdomain}" $servers.variables.subdomain.default  }}
-    {{ $serverURL = replace $serverURL "{site}" .  }}
-    {{ $region := index (split . ".") 1 }}
-    {{ if in . "hq.com"}}
-        {{ $region = "us"}}
+    {{ $serverURL = replace $serverURL "{site}" $domain  }}
+    {{ range $allowedRegion := site.Params.allowedRegions }}
+        {{ if eq $allowedRegion.domain $domain }}
+            {{ $s.SetInMap "regions" $allowedRegion.value $serverURL }}
+        {{ end }}
     {{ end }}
-    {{ $s.SetInMap "regions" $region $serverURL }}
 {{ end }}
 
 {{ return ($s.Get "regions") }}

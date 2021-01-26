@@ -38,6 +38,10 @@ To quickly get started with error tracking:
 1. Download the latest version of the [RUM Browser SDK][3].
 2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][4].
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">The Datadog for Government site does not support sending alerts for new error tracking issues.</div>
+{{< /site-region >}}
+
 ### Upload mapping files
 
 The source code of some applications is obfuscated or minified when deployed to production for performance optimization and security concerns.

@@ -79,5 +79,13 @@ footer_scripts:
 allowedRegions:
   - name: US
     value: us
+    weight: 10
+    domain: datadoghq.com
   - name: EU
     value: eu
+    weight: 20
+    domain: datadoghq.eu
+  - name: US1-FED
+    value: gov
+    weight: 30
+    domain: ddog-gov.com
