@@ -118,7 +118,7 @@ A Moogsoft [listener][44] that ingests Datadog notifications.
 ### NGINX LUA
 
 * Emit [custom metrics][45] directly from NGINX configurations using the [nginx_lua_datadog][46] module in your LUA scripts.
-* [lua-resty-dogstatsd][47] is an extension developed by [mediba inc][48], which enables emiting metrics, events, and service checks to [DogStatsD][1] protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
+* [lua-resty-dogstatsd][47] is an extension developed by [mediba inc][48] (now forked by [dailymotion][64]). It enables emiting metrics, events, and service checks to [DogStatsD][1] protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 ### OpenVPN
 
@@ -183,7 +183,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [19]: https://www.terraform.io
 [20]: https://github.com/intercom/datadog-to-terraform
 [21]: https://github.com/intercom
-[22]: https://docs.ansible.com/ansible/list_of_monitoring_modules.html
+[22]: https://docs.ansible.com/ansible/2.9/modules/list_of_monitoring_modules.html
 [23]: https://github.com/ansible/ansible-modules-extras
 [24]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html
 [25]: https://github.com/BetaProjectWave/auth0-logs-to-datadog
@@ -197,7 +197,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [33]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog
 [34]: /logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
-[36]: https://corp.oz.com
+[36]: https://web.oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
 [39]: https://github.com/evernote/jiradog
@@ -205,10 +205,10 @@ If you've written a Datadog library and would like to add it to this page, send 
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [43]: https://github.com/brigade/logstash-output-dogstatsd
-[44]: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak
+[44]: https://docs.moogsoft.com/AIOps.6.2.0/Datadog-Solution-Pak_13737047.html
 [45]: /developers/metrics/custom_metrics/
 [46]: https://github.com/simplifi/ngx_lua_datadog
-[47]: https://github.com/mediba-system/lua-resty-dogstatsd
+[47]: https://github.com/dailymotion/lua-resty-dogstatsd
 [48]: http://www.mediba.jp
 [49]: https://github.com/byronwolfman/dd-openvpn
 [50]: https://github.com/denniswebb/datadog-openvpn
@@ -225,3 +225,4 @@ If you've written a Datadog library and would like to add it to this page, send 
 [61]: https://github.com/urosgruber/dd-agent-FreeBSD
 [62]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
 [63]: mailto:opensource@datadoghq.com
+[64]: https://www.dailymotion.com/us

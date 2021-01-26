@@ -357,7 +357,7 @@ Then, edit the `pom.xml` file with the following content:
 
 **note:** As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][1].
 
-[1]: https://logback.qos.ch/translator
+[1]: http://logback.qos.ch/translator
 {{% /tab %}}
 
 {{% tab "Log4j2" %}}
