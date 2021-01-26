@@ -35,7 +35,7 @@ aliases:
 |:---------|:-------------------------------|:-------------------------|
 | `diff()` | Graph the delta of the metric. | `diff(<METRIC_NAME>{*})` |
 
-## Monotonic Delta value
+## Monotonic delta value
 
 | Function           | Description                                                                     | Example                            |
 |:-------------------|:--------------------------------------------------------------------------------|:-----------------------------------|

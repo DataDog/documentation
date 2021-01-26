@@ -5,7 +5,7 @@ aliases:
     - /graphing/functions/exclusion/
 ---
 
-## Exclude Null
+## Exclude null
 
 | Function         | Description                                                    | Example                                        |
 | ---------------- | -------------------------------------------------------------- | ---------------------------------------------- |

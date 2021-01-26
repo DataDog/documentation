@@ -91,7 +91,7 @@ To copy multiple screenboard widgets (edit mode only), `shift + click` on the wi
 
 **Note**: This only works when sharing within Datadog. It does not generate a preview image.
 
-## Export Graphs
+## Export graphs
 
 ### PNG
 
