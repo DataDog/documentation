@@ -92,7 +92,7 @@ Data in the Host Map is refreshed about once a minute—unless you are continuou
 
 ## Use cases
 
-### Resource Optimization
+### Resource optimization
 
 If you are an AWS user, you probably use a variety of instance types. Some instances are optimized for memory, some for compute, some are small, some are big.  
 If you want to reduce your AWS spend, you might start by figuring out what the expensive instances are used for. First group by `instance-type` and then group by `role` or `name`. Take a look at your expensive instance types, such as **c3.8xlarge**. Are there any host roles whose CPU is underutilized? If so, zoom in to individual hosts and see whether all that computational horsepower has been needed in the last several months, or whether this group of hosts is a candidate for migrating to a cheaper instance type.  
@@ -105,7 +105,7 @@ As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role
 
 {{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="Datadog Host Maps Instance-Role Groups"  style="width:80%;">}}
 
-### Availability Zone Placement
+### Availability zone placement
 
 Host maps enable you to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. 
 
@@ -113,7 +113,7 @@ In the example seen below, there is an uneven distribution of hosts with `role:d
 
 {{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Datadog Host Maps AZ Balance"  style="width:80%;" >}}
 
-### Problem Investigation
+### Problem investigation
 
 Imagine you are having a problem in production. Maybe the CPUs on some of your hosts are pegged, which is causing long response times. Host Maps can help you quickly see whether there is anything different about the loaded and not-loaded hosts. You can rapidly group by dimensions you would like to investigate, and visually determine whether the problem servers belong to a certain group.  
 For example, you can group by availability zone, region, instance type, image, or any tags that you use within your system. 
