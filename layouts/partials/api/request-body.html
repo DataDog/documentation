@@ -1,3 +1,4 @@
+{{ $context := .context }}
 {{ $dot := . }}
 {{ $body := .body }}
 {{ $operationid := .operationid }}
@@ -36,7 +37,7 @@
                                           {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
 
                                           {{ $s.Set "json" (highlight ($jsonifiedData) "json" "") }}
-                                          {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
+                                          {{ $context.Scratch.Set "jsonRequestBody" $json_curl }}
                                           {{ $s.Set "html" (index $req "html") }}
                                       {{ else }}
                                           {{ warnf "Could not load html/json request for %q" $operationid }}
