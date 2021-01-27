@@ -1,3 +1,4 @@
 ---
 title: ログパイプライン
+headless: true
 ---

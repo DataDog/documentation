@@ -1,3 +1,4 @@
 ---
 title: Hosts
+headless: true
 ---

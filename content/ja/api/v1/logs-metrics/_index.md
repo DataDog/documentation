@@ -1,3 +1,4 @@
 ---
 title: ログメトリクス
+headless: true
 ---
