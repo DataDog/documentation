@@ -331,6 +331,11 @@ Serverless:
       link: https://github.com/DataDog/datadog-lambda-java
       authors: Datadog
       notes: Official Datadog Java Lambda library
+    - name: serverless-plugin-datadog
+      official: true
+      link: https://github.com/DataDog/serverless-plugin-datadog
+      authors: Datadog
+      notes: Plugin to automatically instrument your Lambda functions with Datadog.
     - name: serverless-datadog-metrics
       link: https://github.com/DanteInc/serverless-datadog-metrics
       api: true
