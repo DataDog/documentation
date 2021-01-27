@@ -354,7 +354,7 @@ public class DogStatsdClient {
     public static void main(String[] args) throws Exception {
 
         StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
-            .prefix("statsd").
+            .prefix("statsd")
             .hostname("localhost")
             .port(8125)
             .build();
