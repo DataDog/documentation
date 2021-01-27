@@ -32,7 +32,15 @@ Supported **platforms** include:
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][3]. The [DNS Resolution][4] feature is not supported on CentOS/RHEL 7.6.
 
-**Istio** v1.6.4+ is supported by [Datadog Agent v7.24.1+][1].
+**Istio** v1.6.4+ is supported by [Datadog Agent v7.24.1+][1]. To use Istio, download the correct version of the Agent.
+
+Datadog monitors every aspect of your Istio setup, including:
+
+- [Container and pod-level flow data][5] (using NPM)
+- [Metrics and logs][6] (using the Istio Agent Check)
+- [Application distributed traces][7] (using APM)
+
+To learn more about monitoring your Istio environment with Datadog, see the [Istio blog][8].
 
 Network Performance Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
 1) Cilium version 1.6 and above, and
@@ -42,13 +50,13 @@ Network Performance Monitoring is compatible with **Cilium** installations, prov
 
 The following **provisioning systems** are supported:
 
-- Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][5]
-- Chef 12.7+: See the [Datadog Chef recipe][6]
-- Ansible 2.6+: See the [Datadog Ansible role][7]
+- Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][9]
+- Chef 12.7+: See the [Datadog Chef recipe][10]
+- Ansible 2.6+: See the [Datadog Ansible role][11]
 
 ## Setup
 
-To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][8] based on your system setup.
+To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][12] based on your system setup.
 
 Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
@@ -370,7 +378,11 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [2]: /network_performance_monitoring/installation/?tab=agent#windows-systems
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [4]: /network_performance_monitoring/network_page#dns-resolution
-[5]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[6]: https://github.com/DataDog/chef-datadog
-[7]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
+[6]: https://docs.datadoghq.com/integrations/istio/
+[7]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
+[8]: https://www.datadoghq.com/blog/istio-datadog/
+[9]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[10]: https://github.com/DataDog/chef-datadog
+[11]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
+[12]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
