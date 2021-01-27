@@ -1,3 +1,4 @@
 ---
 title: Downtimes
+headless: true
 ---

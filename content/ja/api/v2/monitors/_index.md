@@ -1,3 +1,4 @@
 ---
 title: モニター
+headless: true
 ---

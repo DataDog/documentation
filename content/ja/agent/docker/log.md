@@ -35,7 +35,7 @@ Datadog Agent 6 以降は、コンテナからログを収集します。2 通�
 
 - コンテナ化された Agent をデプロイできず、コンテナが**すべて**のログを `stdout`/`stderr` に書き込む場合は、[ホスト Agent](?tab=hostagent#installation) のインストールに従って、Agent コンフィギュレーションファイル内でコンテナ化されたログを有効にします。 
 
-- コンテナがログをファイルに書き込む場合 (ログを `stdout`/`stderr` に部分的にのみ書き込み、ログをファイルに書き込むか、ログをファイルに完全に書き込む)、[カスタムログ収集を使用するホスト Agent](?tab=hostagentwithcustomlogging#installation) のインストールに従ってください。
+- コンテナがログをファイルに書き込む場合 (ログを `stdout`/`stderr` に部分的にのみ書き込み、ログをファイルに書き込むか、ログをファイルに完全に書き込む)、[カスタムログ収集を使用するホスト Agent](?tab=hostagentwithcustomlogging#installation) のインストールまたは[コンテナ化された Agent](?tab=containerized-agent#installation) のインストール手順に従い、[オートディスカバリーコンフィギュレーションの例があるファイルからのログ収集](?tab=logcollectionfromfile#examples)を確認します。
 
 ## インストール
 
@@ -227,6 +227,31 @@ labels:
 
 
 [1]: /ja/agent/logs/advanced_log_collection/#multi-line-aggregation
+{{% /tab %}}
+{{% tab "From file" %}}
+
+Agent v7.25.0 以降/6.25.0 以降では、コンテナのオートディスカバリーラベルに基づくファイルから直接ログを収集できます。このようなログを収集するには、以下のようにコンテナに `com.datadoghq.ad.logs` ラベルを使用して `/logs/app.log` を収集します。
+
+```yaml
+labels:
+    com.datadoghq.ad.logs: '[{"type":"file", "source": "sample_app", "service": "sample_service", "path": "/logs/app/prod.log"}]'
+```
+
+ファイルから収集されたログは、コンテナのメタデータとともにタグ付けされます。ログ収集はコンテナのライフサイクルにリンクされ、コンテナが停止するとそのファイルからのログ収集も停止します。
+
+
+**注**:
+
+- ファイルパスは Agent に**相対的**であるため、ファイルを含むディレクトリは、アプリケーションを実行しているコンテナと Agent コンテナの間で共有される必要があります。たとえば、コンテナが `/logs` をマウントする場合、ファイルにログを作成する各コンテナはログファイルが書き込まれる場所に `/logs/app` のようなボリュームをマウントすることがあります。
+
+- このようなラベルをコンテナに使用する場合、その `stderr`/`stdout` ログは自動的に収集されません。`stderr`/`stdout` およびファイルの両方から収集する必要がある場合は、ラベルを使用して明示的に有効にします。たとえば、
+```yaml
+labels:
+    com.datadoghq.ad.logs: '[{"type":"file", "source": "java", "service": "app", "path": "/logs/app/prod.log"}, {"type": "docker", "source": "app_container", "service": "app"}]'
+```
+
+- このような組み合わせを使用しているとき、`source` と `service` にデフォルト値はなく、オートディスカバリーのラベルで明示的に設定する必要があります。
+
 {{% /tab %}}
 {{< /tabs >}}
 
