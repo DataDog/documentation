@@ -146,7 +146,6 @@ Grants a role the ability to use the [Create, Edit, and Delete facets][5].
 
 This permission is global and enables both the creation of new facets, and the edition or deletion of existing ones.
 
-This permission has no effect on the management of [standard attributes][6] or [aliasing facets][7].
 
 #### logs_modify_indexes
 
@@ -194,6 +193,7 @@ Grants a role the ability to create and modify [log processing pipelines][12]. T
 - Setting [pipelines filters][13] for what logs should enter the processing pipeline
 - Reorder pipelines
 - Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline
+- Managing [standard attributes][6] or [aliasing facets][7]
 
 **Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
 
