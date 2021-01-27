@@ -66,6 +66,9 @@ Here is an example trace pipeline configured with an `otlp` receiver, `batch` pr
 ```
 receivers:
   otlp:
+    protocols:
+      grpc:
+      http:
 
 processors:
   batch:
