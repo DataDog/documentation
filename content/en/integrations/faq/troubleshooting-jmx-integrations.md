@@ -24,28 +24,32 @@ If you're able to connect using the command above, run: `beans` and send to the 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-* Content of `/var/log/datadog/agent.log`
-* Output of the [info command][1]
+* [Agent Flare][1]
+* Output of the [status command][2]. (Included in the flare)
+* Content of `/var/log/datadog/agent.log` (Included in the flare)
+* Content of `/var/log/datadog/jmxfetch.log` (Included in the flare)
+* A copy of the YAML integration. (Included in the flare)
 * Output of: `ps aux | grep jmxfetch`
-* A copy of the YAML integration (send the file)
+* Output of: `sudo -u dd-agent datadog-agent jmx list everything -l debug` (Appending `--flare` includes the output in the flare for version 6.26.x/7.26.x)
 
-[1]: /agent/guide/agent-commands/#agent-status-and-information
+[1]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[2]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-* [Agent logs][1]
-* Output of the [info command][2]
+* [Agent Flare][1]
+* Output of the [info command][2]. (Included in the flare)
+* Content of `/var/log/datadog/jmxfetch.log` (Included in the flare)
+* A copy of the YAML integration. (Included in the flare)
 * Output of: `ps aux | grep jmxfetch`
-* Content of `/var/log/datadog/jmxfetch.log`
 * Output of: `sudo /etc/init.d/datadog-agent jmx list_everything`
-* A copy of the YAML integration.
 
-**Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
-
-[1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command/
-[2]: /agent/guide/agent-commands/#agent-status-and-information
+[1]: /agent/troubleshooting/send_a_flare/?tab=agentv5
+[2]: /agent/guide/agent-commands/?tab=agentv5#agent-status-and-information
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
 ## Agent troubleshooting
 
@@ -63,9 +67,19 @@ These commands are available since v6.2.0:
 | `sudo -u dd-agent datadog-agent jmx list everything`   | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
 | `sudo -u dd-agent datadog-agent jmx collect`           | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
 
-By default theses commands run on all the configured jmx checks. If you want to use them for specific checks, specify them using the `--checks` flag :
+**Notes**:
 
-`sudo datadog-agent jmx list collected --checks tomcat`
+- By default theses commands run on all the configured jmx checks. If you want to use them for specific checks, specify them using the `--checks` flag : 
+
+  ```shell
+  sudo -u dd-agent datadog-agent jmx list collected --checks tomcat
+  ```
+
+- On 6.26.x/7.26.x, appending `--flare` writes the output of the above commands under `/var/log/datadog/jmxinfo/` which gets included in the flare.
+
+  ```shell
+  sudo -u dd-agent datadog-agent jmx list everything -l debug --flare
+  ```
 
 {{% /tab %}}
 {{% tab "Agent v6.0 and v6.1" %}}
@@ -120,14 +134,14 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 
 To check whether Autodiscovery is loading JMX-based checks:
 
-```text
-docker exec -it <AGENT_CONTAINER_NAME> datadog-agent configcheck
+```shell
+$ docker exec -it <AGENT_CONTAINER_NAME> agent configcheck
 ```
 
 To see JMX-based checks status from the Agent:
 
-```text
-$ docker exec -it <AGENT_CONTAINER_NAME> datadog-agent status
+```shell
+$ docker exec -it <AGENT_CONTAINER_NAME> agent status
 ```
 
 {{% /tab %}}
