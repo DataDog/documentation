@@ -91,10 +91,13 @@ Or when users first scroll:
 
 ```javascript
 document.addEventListener("scroll", function handler(e) {
-    e.currentTarget.removeEventListener(e.type, handler); //Remove the event listener so that it only triggers once
+    //Remove the event listener so that it only triggers once
+    e.currentTarget.removeEventListener(e.type, handler);
     DD_RUM.addTiming('first_scroll');
 });
 ```
+
+Once the timing is sent, you must [create a measure][15] before graphing it in RUM analytics or in dashboards.
 
 **Note**: For Single Page Applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing will equal 8-5 = 3 seconds.
 ## Further Reading
@@ -115,3 +118,4 @@ document.addEventListener("scroll", function handler(e) {
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/History
+[15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
