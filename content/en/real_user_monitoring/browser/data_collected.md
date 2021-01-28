@@ -349,7 +349,7 @@ The following attributes are related to the geo-location of IP addresses:
 
 ## Extra attribute
 
-In addition to default attributes, add [specific global context][9] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
+In addition to default attributes, add [specific global context][8] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
 
 ## Data retention
 By default, all data collected is kept at full granularity for 15 days. 
@@ -365,4 +365,5 @@ By default, all data collected is kept at full granularity for 15 days.
 [4]: /real_user_monitoring/browser/data_collected/?tab=longtask
 [5]: /real_user_monitoring/browser/data_collected/?tab=error
 [6]: /real_user_monitoring/browser/data_collected/?tab=useraction
-[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
