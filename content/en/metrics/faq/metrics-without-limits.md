@@ -19,12 +19,10 @@ Click on any metric name to open its details sidepanel. Then click on the **Mana
 
 ## What is the pricing of Metrics without Limits?
 
-Configuring your tags gives you control over what custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Given this new functionality, your custom metrics contract will include:
-- **Ingested custom metrics**: custom metrics you send to Datadog in code; priced at $0.10/100 ingested custom metrics
-- **Indexed custom metrics** : remaining custom metrics available for query after you’ve configured tags in-app; priced at your current contract price for custom metrics/100 indexed custom metrics
+Configuring your tags gives you control over what custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Given this new functionality, your contract for custom metrics will include:
+- **Ingested custom metrics**: custom metrics you send to Datadog in code
+- **Indexed custom metrics** : remaining custom metrics available for query after you’ve configured tags in-app
 
-{{< img src="metrics/faq/pricing.jpg" alt="Metrics without Limits pricing">}}
-
-Please reach out to your Customer Support Manager if you're interested in this private beta feature.
+Please reach out to your Customer Support Manager if you're interested in this private beta and for further pricing details of this feature.
 
 [1]: https://app.datadoghq.com/metric/summary
