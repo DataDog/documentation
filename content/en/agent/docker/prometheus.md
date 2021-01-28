@@ -95,12 +95,17 @@ LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PRO
 labels:
     com.datadoghq.ad.check_names: '["openmetrics"]'
     com.datadoghq.ad.init_configs: '[{}]'
-    com.datadoghq.ad.instances:  >
+    com.datadoghq.ad.instances: |
     [
-      "{\
-        "prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",
-        \"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]
-      }"
+      {
+        "prometheus_url": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>",
+        "namespace": "<NAMESPACE>",
+        "metrics": [
+          {
+            "<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"
+          }
+        ]
+      }
     ]
 ```
 
