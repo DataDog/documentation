@@ -8,10 +8,19 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
-  text: "Real User Monitoring"
-- link: "/logs/processing/attributes_naming_convention/"
+  text: "Introducing Datadog Real User Monitoring"
+- link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
+  tag: "Blog"
+  text: "Improve mobile user experience with Datadog Mobile Real User Monitoring"
+- link: "https://www.datadoghq.com/blog/error-tracking/"
+  tag: "Blog"
+  text: "Make sense of application issues with Datadog Error Tracking"
+- link: "https://www.datadoghq.com/blog/unify-apm-rum-datadog/"
+  tag: "Blog"
+  text: "Unify APM and RUM data for full-stack visibility"
+- link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
-  text: "Datadog Standard Attributes"
+  text: "RUM Browser Data Collected"
 ---
 
 {{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM Dashboard"  >}}
@@ -50,7 +59,7 @@ Slice and dice user sessions by segments such as checking when latency impacts y
 
 ### Seamless integration with Logs, APM and Profiler
 
-View your [backend traces, logs, infrastructure metrics][3] to line of code impacting your application performance that correspond  to user experiences and reported issues.
+View your [backend traces, logs, infrastructure metrics][1] to line of code impacting your application performance that correspond  to user experiences and reported issues.
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM">}}
 
@@ -67,8 +76,8 @@ Get automated alerts on outliers and groups of errors, timeouts, crashes to sign
 
 [1]:/real_user_monitoring/dashboards
 [2]:/real_user_monitoring/explorer/analytics
-[3]: real_user_monitoring/connect_rum_and_traces
 [4]:/real_user_monitoring/error_tracking
 
 
 
+[1]: real_user_monitoring/connect_rum_and_traces
