@@ -14,12 +14,12 @@ Appending the `.rollup()` function at the end of a query allows you to perform c
 * The time intervals for a given graph  ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * How data points are aggregated within a given time interval.
 
-The function takes two parameters, `<METHOD>` and `<TIME>`: `.rollup(<METHOD>,<TIME>)`.
+The function takes two parameters, `<METHOD>` and optionally `<TIME>`: `.rollup(<METHOD>,<TIME>)` or `.rollup(<METHOD>)`.
 
 | Parameter  | Description                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------|
 | `<METHOD>` | Can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within a given time interval. |
-| `<TIME>`   | Time (in seconds) of the interval between two data points displayed.                                            |
+| `<TIME>`   | Time (in seconds) of the interval between two data points displayed. Optional.                                            |
 
 You can use them individually or together, for instance `.rollup(sum,120)`. The following bar graph displays a week's worth of CPU usage for a host **without** using the `.rollup()` function:
 
