@@ -49,7 +49,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
+**Note**: If you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
 ## Agent troubleshooting
 
@@ -69,13 +69,13 @@ These commands are available since v6.2.0:
 
 **Notes**:
 
-- By default theses commands run on all the configured jmx checks. If you want to use them for specific checks, specify them using the `--checks` flag : 
+- By default these commands run on all the configured JMX checks. To limit the commands to specific checks, use the `--checks` flag, for example:
 
   ```shell
   sudo -u dd-agent datadog-agent jmx list collected --checks tomcat
   ```
 
-- On 6.26.x/7.26.x, appending `--flare` writes the output of the above commands under `/var/log/datadog/jmxinfo/` which gets included in the flare.
+- For Agent v6.26.+ / v7.26+, appending `--flare` writes the output of the above commands under `/var/log/datadog/jmxinfo/`, which is included in the flare.
 
   ```shell
   sudo -u dd-agent datadog-agent jmx list everything -l debug --flare
