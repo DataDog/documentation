@@ -76,6 +76,30 @@ To account for modern web applications, loading time watches for network request
 
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
+## Add your own performance timing
+On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing. For example, you can add a timing when your hero image has appeared:
+
+```html
+<html>
+  <body>
+    <img onload="DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
+  </body>
+</html>
+```
+
+Or when users first scroll:
+
+```javascript
+document.addEventListener("scroll", function handler() {
+    //Remove the event listener so that it only triggers once
+    document.removeEventListener("scroll", handler);
+    DD_RUM.addTiming('first_scroll');
+});
+```
+
+Once the timing is sent, the timing will be accessible as `@view.custom_timings.<timing_name>` (For example, `@view.custom_timings.first_scroll`). You must [create a measure][15] before graphing it in RUM analytics or in dashboards.
+
+**Note**: For Single Page Applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing will equal 8-5 = 3 seconds.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -94,3 +118,4 @@ The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/History
+[15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
