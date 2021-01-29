@@ -84,6 +84,35 @@ Find below the list of permissions for the Security Monitoring assets:
 | `security_monitoring_rules_write`  | Ability to create, edit, and delete detection rules | false    |
 | `security_monitoring_signals_read` | Ability to view security signals                    | false    |
 
+## APM
+
+Below is a list of the permissions currently available for APM:
+
+| Name                             | Description                                         | Scopable |
+| -------------------------------- | --------------------------------------------------- | -------- |
+| `apm_read` | The ability to read and query APM and Trace Analytics. | false |
+| `apm_service_ingest_read` | The ability to access Service Ingestion pages. A user with this permission can view the service ingestion page, list of root service, their statistics, and creation info. | false |
+| `apm_service_ingest_write` | The ability to edit Service Ingestion pages root services. A user with this permission can edit the root service ingestion and generate a code snippet to increase ingestion per service. | false |
+| `apm_retention_filter_read` | The ability to read trace retention filters. A user with this permission can view the retention filters page, list of filters, their statistics, and creation info. | false |
+| `apm_retention_filter_write` | The ability to create, edit and delete trace retention filters. A user with this permission can create new retention filters, and update or delete to existing retention filters. | false |
+
+## Real User Monitoring
+
+Below is a list of the permissions currently available for Real User Monitoring:
+
+| Name                             | Description                                         | Scopable |
+| -------------------------------- | --------------------------------------------------- | -------- |
+| `rum_apps_write` | The ability to create, edit and delete RUM Applications. | false |
+
+## Metrics
+
+Below is a list of the permissions currently available for the Metrics Management:
+
+| Name                             | Description                                         | Scopable |
+| -------------------------------- | --------------------------------------------------- | -------- |
+| `metric_tags_read` | The ability to view the tag configuration modal for any custom metric. A user with this permission will be able to view the relevant tag configuration applied to any custom metric. | false |
+| `metric_tags_write` | The ability to edit and save tag configurations for custom metrics. | false |
+
 ## Log Management
 
 Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you'd assign this permission to. See the recommendations on how to assign permissions to team members in the [Logs RBAC guide][3].
