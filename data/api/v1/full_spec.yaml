@@ -4424,6 +4424,13 @@ components:
         query:
           description: The monitor query.
           type: string
+        restricted_roles:
+          description: A list of role identifiers that can be pulled from the Roles
+            API. Cannot be used with `locked` option.
+          items:
+            description: A role UUID.
+            type: string
+          type: array
         state:
           $ref: '#/components/schemas/MonitorState'
         tags:
@@ -4680,13 +4687,6 @@ components:
             \ to `false` for sparse metrics,\notherwise some evaluations are skipped.\
             \ Default is false."
           type: boolean
-        restricted_roles:
-          description: A list of role identifiers that can be pulled from the Roles
-            API. Cannot be used with `locked`.
-          items:
-            description: A role UUID.
-            type: string
-          type: array
         silenced:
           additionalProperties:
             description: ID of the downtime applied to the monitor.
