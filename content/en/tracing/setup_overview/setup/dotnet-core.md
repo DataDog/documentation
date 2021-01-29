@@ -182,7 +182,7 @@ dotnet.exe example.dll
 4. The following environment variables are required to enable automatic instrumentation on Linux:
 
     <div class="alert alert-info"> 
-      <strong>Note:</strong> If the .NET Tracer is installed into a path other than the default `/opt/datadog` path, ensure the paths are changed to match.
+      <strong>Note:</strong> If the .NET Tracer is installed into a path other than the default <code>/opt/datadog</code> path, ensure the paths are changed to match.
     </div>
 
     Name                       | Value
