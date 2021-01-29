@@ -90,9 +90,9 @@ On top of RUM's default performance timing, you may measure where your applicati
 Or when users first scroll:
 
 ```javascript
-document.addEventListener("scroll", function handler(e) {
+document.addEventListener("scroll", function handler() {
     //Remove the event listener so that it only triggers once
-    e.currentTarget.removeEventListener(e.type, handler);
+    document.removeEventListener("scroll", handler);
     DD_RUM.addTiming('first_scroll');
 });
 ```
