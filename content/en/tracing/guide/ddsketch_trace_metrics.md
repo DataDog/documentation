@@ -15,10 +15,6 @@ further_reading:
   text: "Learn more about Trace Metrics"
 ---
 
-<div class="alert alert-warning">
-DDSketch trace metrics are currently in private beta.
-</div>
-
 Trace metrics are collected automatically for your services and resources and are retained for 15 months. The latency percentiles exist as individual timeseries. These percentiles are also available as a [Datadog Distribution Metric][1] (in beta). Instead of having a different metric for each percentile; and separate metrics for services, resources, or second primary tags; Datadog offers a simple metric:
 
 - `trace.<SPAN_NAME>`:
