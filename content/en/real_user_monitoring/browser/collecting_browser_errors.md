@@ -32,7 +32,7 @@ Front-end errors are split into four different categories depending on their `er
 
 ## Error attributes
 
-For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling, global context, or custom user actions, see [Advanced Configuration][3].
+For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Advanced Configuration][3].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|

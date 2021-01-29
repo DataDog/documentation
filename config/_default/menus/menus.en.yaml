@@ -1892,6 +1892,11 @@ main:
     parent: rum_browser
     identifier: collect_errors
     weight: 105
+  - name: Tracking User Actions
+    url: real_user_monitoring/browser/tracking_user_actions/
+    parent: rum_browser
+    identifier: track_actions
+    weight: 106
   - name: Android Monitoring
     url: real_user_monitoring/android/
     parent: rum
