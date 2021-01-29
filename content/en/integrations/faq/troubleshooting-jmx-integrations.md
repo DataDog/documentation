@@ -24,11 +24,11 @@ If you're able to connect using the command above, run: `beans` and send to the 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-* [Agent Flare][1]
-* Output of the [status command][2]. (Included in the flare)
-* Content of `/var/log/datadog/agent.log` (Included in the flare)
-* Content of `/var/log/datadog/jmxfetch.log` (Included in the flare)
-* A copy of the YAML integration. (Included in the flare)
+* [Agent Flare][1], which includes:
+  * Output of the [status command][2].
+  * Content of `/var/log/datadog/agent.log`
+  * Content of `/var/log/datadog/jmxfetch.log`
+  * A copy of the YAML integration.
 * Output of: `ps aux | grep jmxfetch`
 * Output of: `sudo -u dd-agent datadog-agent jmx list everything -l debug` (Appending `--flare` includes the output in the flare for version 6.26.x/7.26.x)
 
@@ -37,10 +37,10 @@ If you're able to connect using the command above, run: `beans` and send to the 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-* [Agent Flare][1]
-* Output of the [info command][2]. (Included in the flare)
-* Content of `/var/log/datadog/jmxfetch.log` (Included in the flare)
-* A copy of the YAML integration. (Included in the flare)
+* [Agent Flare][1], which includes:
+  * Output of the [info command][2].
+  * Content of `/var/log/datadog/jmxfetch.log`
+  * A copy of the YAML integration.
 * Output of: `ps aux | grep jmxfetch`
 * Output of: `sudo /etc/init.d/datadog-agent jmx list_everything`
 
