@@ -6322,10 +6322,7 @@ paths:
         [Results are paginated][1].
 
 
-        Both this endpoint and the POST endpoint can be used interchangeably when
-        listing
-
-        logs.
+        Use this endpoint to see your latest logs.
 
 
         **If you are considering archiving logs for your organization,
@@ -6407,7 +6404,7 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
-      summary: Get a quick list of logs
+      summary: Get a list of logs
       tags:
       - Logs
       x-undo:
@@ -6422,9 +6419,7 @@ paths:
         [Results are paginated][1].
 
 
-        Both this endpoint and the GET endpoint can be used interchangeably when listing
-
-        logs.
+        Use this endpoint to build complex logs filtering and search.
 
 
         **If you are considering archiving logs for your organization,
@@ -6455,7 +6450,7 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
-      summary: Get a list of logs
+      summary: Search logs
       tags:
       - Logs
       x-codegen-request-body-name: body
