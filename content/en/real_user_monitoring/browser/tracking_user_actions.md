@@ -22,9 +22,9 @@ further_reading:
 
 Real User Monitoring (RUM) SDKs detect user interactions performed during a user journey. Set the `trackInteractions` [initialization parameter][1] to `true` to enable this feature.
 
-**Note**:  The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
+**Note**: The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
 
-Once an interaction is detected, all new RUM events are attached to the ongoing action until it is considered finished. The action also benefits from its parent view attributes such as browser information, geolocation data, [global context][2].
+Once an interaction is detected, all new RUM events are attached to the ongoing action until it is considered finished. The action also benefits from its parent view attributes such as browser information, geolocation data, and [global context][2].
 
 ## Action timing metrics
 
@@ -39,7 +39,7 @@ For information about the default attributes for all RUM event types, see [Data 
 
 ### How action loading time is calculated
 
-Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
+Once an interaction is detected, the RUM SDK watches for network requests and DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
 ## Action attributes
 
@@ -47,7 +47,7 @@ Once an interaction is detected, the RUM SDK watches for network requests an DOM
 |--------------|--------|--------------------------|
 | `action.id` | string | UUID of the user action. |
 | `action.type` | string | Type of the user action. For custom user actions, it is set to `custom`. |
-| `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions |
+| `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 | `action.name` | string | User-friendly name created (for example `Click on #checkout`). For custom user actions, the action name given in the API call. |
 
 ## Declaring a name for click actions 
@@ -67,9 +67,9 @@ parents) that will be used to name the action. For example:
 ```
 ## Custom user actions
 
-Custom user actions are user actions declared and sent manually by using the `addUserAction` API. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
+Custom user actions are user actions declared and sent manually by using the `addUserAction` API. They can send information relative to an event occurring during a user journey (for example, a custom timing or customer cart information).
 
-Once RUM is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction(name: string, context: Context)` API. In the following examples, the RUM SDK collects the amount of items within a cart, what they are, and how much the cart is worth overall.
+Once RUM is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction(name: string, context: Context)` API call. In the following examples, the RUM SDK collects the number of items within a cart, what they are, and how much the cart is worth overall.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
