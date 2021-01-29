@@ -103,6 +103,7 @@ Below is a list of the permissions currently available for Real User Monitoring:
 | Name                             | Description                                         | Scopable |
 | -------------------------------- | --------------------------------------------------- | -------- |
 | `rum_apps_write` | The ability to create, edit and delete RUM Applications. | false |
+
 ## Metrics
 
 Below is a list of the permissions currently available for the Metrics Management:
