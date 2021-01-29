@@ -113,9 +113,10 @@ Example:
 /usr/bin/java -Xmx200m -Xms50m -classpath /usr/lib/jvm/java-8-oracle/lib/tools.jar:/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch-0.18.2-jar-with-dependencies.jar org.datadog.jmxfetch.App --check cassandra.d/conf.yaml jmx.d/conf.yaml --conf_directory /etc/datadog-agent/conf.d --log_level INFO --log_location /var/log/datadog/jmxfetch.log --reporter console list_everything
 ```
 
-Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.jar` in the example) might reside elsewhere in your system. You should be able to easily find it with `sudo find / -type f -name 'tools.jar'`.
+**Notes**:
 
-**Note**: you may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
+- The location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.jar` in the example) might reside elsewhere in your system. You should be able to easily find it with `sudo find / -type f -name 'tools.jar'`.
+- You may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -158,11 +159,10 @@ A best practice is to limit your metrics to less than 350 by creating filters to
 
 The default Agent installation does not come with a bundled JVM and uses the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the Agent.
 
-**Note**: The `gcr.io/datadoghq/agent:latest-jmx` Docker image does include a JVM, which the Agent needs to run jmxfetch.
+**Notes**:
 
-Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
-
-**Note**: Only one valid Java path needs to be specified for JMXFetch.
+- The `gcr.io/datadoghq/agent:latest-jmx` Docker image does include a JVM, which the Agent needs to run jmxfetch. Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
+- Only one valid Java path needs to be specified for JMXFetch.
 
 ### JVM metrics
 
