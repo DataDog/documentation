@@ -9672,6 +9672,28 @@ components:
             $ref: '#/components/schemas/UsageIngestedSpansHour'
           type: array
       type: object
+    UsageIoTHour:
+      description: IoT usage for a given organization for a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        iot_device_count:
+          description: The total number of IoT device hours from the start of the
+            given hour's month until the given hour.
+          format: int64
+          type: integer
+      type: object
+    UsageIoTResponse:
+      description: Response containing the IoT usage for each hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for IoT.
+          items:
+            $ref: '#/components/schemas/UsageIoTHour'
+          type: array
+      type: object
     UsageLambdaHour:
       description: 'Number of lambda functions and sum of the invocations of all lambda
         functions
@@ -10111,6 +10133,16 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        iot_device_agg_sum:
+          description: Shows the sum of all IoT devices over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
+        iot_device_top99p_sum:
+          description: Shows the 99th percentile of all IoT devices over all hours
+            in the current date all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_android_sum:
           description: Shows the sum of all mobile RUM Sessions on Android over all
             hours in the current date for all organizations.
@@ -10271,6 +10303,16 @@ components:
         ingested_events_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for the given org.
+          format: int64
+          type: integer
+        iot_device_agg_sum:
+          description: Shows the sum of all IoT devices over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        iot_device_top99p_sum:
+          description: Shows the 99th percentile of all IoT devices over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         mobile_rum_session_count_android_sum:
@@ -10441,6 +10483,16 @@ components:
         ingested_events_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current months for all organizations.
+          format: int64
+          type: integer
+        iot_device_agg_sum:
+          description: Shows the sum of all IoT devices over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        iot_device_top99p_sum:
+          description: Shows the 99th percentile of all IoT devices over all hours
+            in the current months of all organizations.
           format: int64
           type: integer
         last_updated:
@@ -15647,7 +15699,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
-      summary: Get a list of logs
+      summary: Search logs
       tags:
       - Logs
       x-codegen-request-body-name: body
@@ -17729,7 +17781,7 @@ paths:
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v1/slo:
     get:
-      description: Get multiple service level objective objects by their IDs.
+      description: Get a list of service level objective objects for your organization.
       operationId: ListSLOs
       parameters:
       - description: A comma separated list of the IDs of the service level objectives
@@ -17737,7 +17789,29 @@ paths:
         example: id1, id2, id3
         in: query
         name: ids
-        required: true
+        required: false
+        schema:
+          type: string
+      - description: The query string to filter results based on SLO names.
+        example: monitor
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      - description: The query string to filter results based on SLO tags.
+        example: env:prod
+        in: query
+        name: tags_query
+        required: false
+        schema:
+          type: string
+      - description: The query string to filter results based on SLO numerator and
+          denominator.
+        example: aws.elb.request_count
+        in: query
+        name: metrics_query
+        required: false
         schema:
           type: string
       responses:
@@ -17765,7 +17839,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Search SLOs
+      summary: Get all SLOs
       tags:
       - Service Level Objectives
       x-undo:
@@ -19596,6 +19670,53 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
       summary: Get hourly usage for ingested spans
+      tags:
+      - Usage Metering
+      x-undo:
+        type: safe
+  /api/v1/usage/iot:
+    get:
+      description: Get hourly usage for IoT.
+      operationId: GetUsageInternetOfThings
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIoTResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for IoT
       tags:
       - Usage Metering
       x-undo:

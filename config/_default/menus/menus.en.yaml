@@ -3400,9 +3400,9 @@ api:
     url: /api/latest/logs/
     identifier: logs
     generated: true
-  - name: Get a quick list of logs
-    url: '#get-a-quick-list-of-logs'
-    identifier: get-a-quick-list-of-logs
+  - name: Get a list of logs
+    url: '#get-a-list-of-logs'
+    identifier: get-a-list-of-logs
     parent: logs
     generated: true
     params:
@@ -3434,9 +3434,9 @@ api:
       operationids:
         - SubmitLog
       unstable: []
-  - name: Get a list of logs
-    url: '#get-a-list-of-logs'
-    identifier: get-a-list-of-logs
+  - name: Search logs
+    url: '#search-logs'
+    identifier: search-logs
     parent: logs
     generated: true
     params:
@@ -4068,9 +4068,9 @@ api:
       operationids:
         - CreateSLO
       unstable: []
-  - name: Search SLOs
-    url: '#search-slos'
-    identifier: search-slos
+  - name: Get all SLOs
+    url: '#get-all-slos'
+    identifier: get-all-slos
     parent: service-level-objectives
     generated: true
     params:
@@ -4678,6 +4678,17 @@ api:
         - v1
       operationids:
         - GetUsageLogs
+      unstable: []
+  - name: Get hourly usage for IoT
+    url: '#get-hourly-usage-for-iot'
+    identifier: get-hourly-usage-for-iot
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageInternetOfThings
       unstable: []
   - name: Get hourly usage for ingested spans
     url: '#get-hourly-usage-for-ingested-spans'
