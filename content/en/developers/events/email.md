@@ -71,11 +71,9 @@ Body: This is a test message showing that env:test is at 50% CPU - #test
 
 ### Datadog event {#datadog-event-2}
 
-The subject of the email becomes the title of the event and the body of the email becomes the event message. The sender of the email appears at the bottom of the event. Example event sent with plain text:
+The subject of the email becomes the title of the event and the body of the email becomes the event message. The sender of the email appears at the bottom of the event. Tags can be added by using `#` in message body. Example event sent with plain text:
 
 {{< img src="developers/events/plain-event.png" alt="plain event"  >}}
-
-**Note**: Although it looks like a tag appears at the end of the title and body of the event, neither instance are actually tags.
 
 {{% /tab %}}
 {{< /tabs >}}
