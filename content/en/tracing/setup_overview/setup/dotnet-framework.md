@@ -166,6 +166,10 @@ example.exe
 
 To configure the Tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
 
+<div class="alert alert-warning"> 
+  <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
+</div>
+
 ```csharp
 using Datadog.Trace;
 using Datadog.Trace.Configuration;
@@ -186,9 +190,6 @@ var tracer = new Tracer(settings);
 Tracer.Instance = tracer;
 ```
 
-<div class="alert alert-warning"> 
-<strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properies after the <code>Tracer</code> is created are ignored.
-</div>
 {{% /tab %}}
 
 {{% tab "web.config" %}}
