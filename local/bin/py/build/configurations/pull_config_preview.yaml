@@ -304,11 +304,11 @@
   - repo_name: dd-sdk-android
     contents:
     - action: pull-and-push-file
-      branch: master
+      branch: priyanshi-gupta:priyanshi/rum_docs_revamp
       globs:
       - 'docs/rum_collection.md'
       options:
-        dest_path: '/real_user_monitoring/setup.md'
+        dest_path: '/real_user_monitoring/android/setup.md'
         file_name: 'setup.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md"]
@@ -319,7 +319,7 @@
       globs:
       - 'docs/configure_android_sdk.md'
       options:
-        dest_path: '/real_user_monitoring/configure_android_sdk.md'
+        dest_path: '/real_user_monitoring/android/configure_android_sdk.md'
         file_name: 'configure_android_sdk.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_android_sdk.md"]
