@@ -55,7 +55,7 @@ A RUM session represents a real user journey on your web application. It begins 
 |------------|--------|----------------------------|
 | `session.time_spent` | number (ns) | Duration of the user session. |
 | `session.view.count`        | number      | Count of all views collected for this session. |
-| `session.error.count`      | number      | Count of all actions collected for this session.  |  
+| `session.error.count`      | number      | Count of all errors collected for this session.  |  
 | `session.resource.count`         | number      | Count of all resources collected for this session. |
 | `session.action.count`      | number      | Count of all actions collected for this session. |
 | `session.long_task.count`      | number      | Count of all long tasks collected for this session. |
