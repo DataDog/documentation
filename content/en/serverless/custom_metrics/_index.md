@@ -11,7 +11,7 @@ With log-based metrics, you can record a count of logs that match a query or sum
 
 You can also generate metrics from 100% of ingested spans, regardless of whether they are indexed by a retention filter. Learn more about creating span-based metrics [here][2].
 
-## Sending custom metrics from the Datadog Lambda Library
+## Sending custom metrics from the Datadog Lambda library
 
 {{< img src="integrations/amazon_lambda/lambda_custom_metrics.png" alt="architecture diagram for collecting custom metrics from AWS Lambda" >}}
 

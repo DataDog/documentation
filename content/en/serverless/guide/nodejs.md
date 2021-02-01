@@ -250,7 +250,7 @@ To instrument your Node libraries and customize your traces, consult the [Datado
 {{% /tab %}}
 {{% /tabs %}}
 
-## Root cause analysis using traces, metrics and logs
+## Root cause analysis using traces, metrics, and logs
 
 View the Datadog Serverless page to see the Lambda functions. Navigate to a specific function to see the traces being emitted from the function. Expand each trace to view a flame graph of the duration of the total request across Lambda functions, and correlated logs and Lambda metrics at the time of the request.
 
