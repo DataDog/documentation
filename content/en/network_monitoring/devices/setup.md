@@ -1,5 +1,5 @@
 ---
-title: NDM Setup
+title: Network Device Monitoring Setup
 kind: documentation
 aliases:
     - /network_performance_monitoring/devices/setup/
