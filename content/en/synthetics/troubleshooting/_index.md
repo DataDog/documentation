@@ -41,6 +41,17 @@ To be able to record your steps without logging out from your application, just 
 
 The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are consequently automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
+### My browser test has a `None or multiple elements detected` step warning
+
+One of your Browser test steps is showing a `None or multiple elements detected` step warning:
+
+{{< img src="synthetics/step_warning.png" alt="User locator step warning" style="width:100%;" >}}
+
+This means that the user locator defined for that step is either targeting several elements, or none of them, consequently preventing the Browser test from knowing which element needs to be interacted with.   
+To fix it, go edit your recording, open the advanced options of the step that is having the issue, go to the page the step is testing, and click on `Test`. This highlights the located element or prints an error message. You can then go ahead and fix your user locator to have it match a single element of the page:
+
+{{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true"  width="100%" >}}
+
 ## API & Browser Tests
 
 ### Unauthorized errors
