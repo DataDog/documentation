@@ -63,9 +63,9 @@ The following arguments and environment variables have been deprecated:
 | `-Ddd.profiling.proxy.username` | DD_PROFILING_PROXY_USERNAME | Deprecated in version 0.55. Username used by your proxy.                     |
 | `-Ddd.profiling.proxy.password` | DD_PROFILING_PROXY_PASSWORD | Deprecated in version 0.55. Password used by your proxy.                     |
 
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install
-
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -111,10 +111,10 @@ The following arguments and environment variables have been deprecated:
 | `DD_PROFILING_TAGS`                              | String        | Deprecated in 0.38 in favor of `DD_TAGS`. Tags to apply to an uploaded profile. Must be a list a `key:value` comma-separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 
+
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install
-
-
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -185,9 +185,10 @@ Deprecated code level Profiler configuration:
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithAPIKey      | String        | Deprecated in version 0.39. The Datadog [Datadog API key][2].                                                                             |
 
+
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install
-
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
