@@ -22647,7 +22647,7 @@
         "properties": {
           "email": {
             "description": "The email of the user.",
-            "example": "joe.doe@example.com",
+            "example": "jane.doe@example.com",
             "type": "string"
           },
           "name": {
@@ -22672,7 +22672,7 @@
             "properties": {
               "email": {
                 "description": "The email of the user.",
-                "example": "joe.doe@example.com",
+                "example": "jane.doe@example.com",
                 "type": "string"
               },
               "name": {
@@ -22758,7 +22758,7 @@
                 "properties": {
                   "email": {
                     "description": "The email of the user.",
-                    "example": "joe.doe@example.com",
+                    "example": "jane.doe@example.com",
                     "type": "string"
                   },
                   "name": {
@@ -54775,7 +54775,7 @@
                         "properties": {
                           "email": {
                             "description": "The email of the user.",
-                            "example": "joe.doe@example.com",
+                            "example": "jane.doe@example.com",
                             "type": "string"
                           },
                           "name": {

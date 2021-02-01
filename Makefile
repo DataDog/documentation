@@ -200,17 +200,23 @@ clean-ruby-examples:
 clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples
 	@rm -rf examples
 
+BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
+
 examples/datadog-api-client-go:
-	@git clone https://github.com/DataDog/datadog-api-client-go.git examples/datadog-api-client-go
+	@git clone https://github.com/DataDog/datadog-api-client-go.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
 examples/datadog-api-client-java:
-	@git clone https://github.com/DataDog/datadog-api-client-java.git examples/datadog-api-client-java
+	@git clone https://github.com/DataDog/datadog-api-client-java.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
 examples/datadog-api-client-python:
-	@git clone https://github.com/DataDog/datadog-api-client-python.git examples/datadog-api-client-python
+	@git clone https://github.com/DataDog/datadog-api-client-python.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
 examples/datadog-api-client-ruby:
-	@git clone https://github.com/DataDog/datadog-api-client-ruby.git examples/datadog-api-client-ruby
+	@git clone https://github.com/DataDog/datadog-api-client-ruby.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
 .PHONY: examples/go examples/java examples/python examples/ruby examples
 

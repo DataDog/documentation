@@ -271,7 +271,7 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "email": "joe.doe@example.com"
+            "email": "jane.doe@example.com"
           },
           "type": "users"
         }
@@ -279,7 +279,7 @@
       "json": {
         "data": {
           "attributes": {
-            "email": "joe.doe@example.com",
+            "email": "jane.doe@example.com",
             "name": "string",
             "title": "string"
           },
