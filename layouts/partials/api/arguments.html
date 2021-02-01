@@ -1,3 +1,4 @@
+{{ $context := .context }}
 {{ $s := newScratch }}
 {{ $parameters := .parameters }}
 {{ $s.Set "queryStrings" slice }}
@@ -20,6 +21,10 @@
     {{ $queryStrings := $s.Get "queryStrings" }}
     {{ $pathParams := $s.Get "pathParams" }}
     {{ $headerParams := $s.Get "headerParams" }}
+    <!-- Set for curl to use via dollarscratch -->
+    {{ $context.Scratch.Set "queryStrings" $queryStrings }}
+    {{ $context.Scratch.Set "pathParams" $pathParams }}
+    {{ $context.Scratch.Set "headerParams" $headerParams }}
 
     {{ with $pathParams }}
         <h4 class="text-capitalize">{{ i18n "path_parameters" }}</h4>

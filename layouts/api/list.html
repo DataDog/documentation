@@ -153,7 +153,7 @@
                     <p>{{ $translate_action.description | default $endpoint.action.description | markdownify }}</p>
 
                     <!-- querystring, path params, header params -->
-                    {{ partial "api/arguments.html" (dict "parameters" $endpoint.action.parameters) }}
+                    {{ partial "api/arguments.html" (dict "context" $dot "parameters" $endpoint.action.parameters) }}
 
                     <!-- request body -->
                     {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action) }}
