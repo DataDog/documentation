@@ -1,6 +1,8 @@
 ---
 title: Detecting a Network Outage
 kind: guide
+aliases:
+    - /network_performance_monitoring/guide/detecting_a_network_outage/
 ---
 Network outages are often disguised as infrastructure, application, or container issues, which makes them hard to detect. Without visibility into your regional network performance or that of third-party endpoints you rely on, it may take hours to detect third-party or cloud regional outages, which could ultimately affect your customers. 
 

@@ -300,4 +300,4 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
-[11]: /network_performance_monitoring/network_page
+[11]: /network_monitoring/performance/network_page

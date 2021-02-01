@@ -4,14 +4,15 @@ kind: documentation
 description: Explore your Network data between each source and destination across your stack.
 aliases:
     - /network_performance_monitoring/network_table
+    - /network_performance_monitoring/network_page
 further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
       text: 'Network Performance Monitoring'
-    - link: '/network_performance_monitoring/devices'
+    - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
-    - link: '/network_performance_monitoring/installation'
+    - link: '/network_monitoring/performance/setup'
       tag: 'Documentation'
       text: 'Collect your Network Data with the Datadog Agent.'
     - link: '/dashboards/widgets/network'

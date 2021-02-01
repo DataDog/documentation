@@ -1,6 +1,8 @@
 ---
 title: Build a NDM Profile
 kind: guide
+aliases:
+    - /network_performance_monitoring/devices/guide/build-ndm-profile
 further_reading:
 - link: "https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/"
   tag: "Documentation"
@@ -15,7 +17,7 @@ Datadog Network Device Monitoring uses profiles for collecting metrics from netw
 NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [terminology][1].
 
 <div class="alert alert-warning">
-This guide is for advanced users. Most devices can be configured using the <a href="/network_performance_monitoring/devices/profiles#metric-definition-by-profile">Datadog profiles</a>.
+This guide is for advanced users. Most devices can be configured using the <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog profiles</a>.
 </div>
 
 ## Research
@@ -78,7 +80,7 @@ Second, test the profile by targeting an IP address of a device that will use th
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_performance_monitoring/devices/troubleshooting#terminology
+[1]: /network_monitoring/devices/troubleshooting#terminology
 [2]: https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out
 [3]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
 [4]: https://en.wikipedia.org/wiki/Networking_hardware

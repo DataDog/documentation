@@ -1,8 +1,10 @@
 ---
 title: NDM Setup
 kind: documentation
+aliases:
+    - /network_performance_monitoring/devices/setup/
 further_reading:
-- link: "/network_performance_monitoring/devices/profiles"
+- link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Using Profiles with Network Device Monitoring"
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
@@ -138,7 +140,7 @@ instances:
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /network_performance_monitoring/devices/profiles#sysoid-mapped-devices
+[2]: /network_monitoring/devices/profiles#sysoid-mapped-devices
 [3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
 [5]: /agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent

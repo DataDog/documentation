@@ -145,7 +145,7 @@ Datadog [Security Monitoring][23] automatically detects threats to your applicat
 [17]: /dashboards/functions/
 [18]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
 [19]: /monitors/
-[20]: /network_performance_monitoring/
+[20]: /network_monitoring/performance
 [21]: /real_user_monitoring/
 [22]: /infrastructure/serverless/
 [23]: /security_monitoring/

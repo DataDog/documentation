@@ -1,12 +1,14 @@
 ---
-title: Network Performance Monitoring Installation
+title: Network Performance Monitoring Setup
 kind: documentation
 description: Collect your Network Data with the Agent.
+aliases:
+    - /network_performance_monitoring/installation/
 further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
       text: 'Network Performance Monitoring'
-    - link: '/network_performance_monitoring/devices'
+    - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
     - link: '/dashboards/widgets/network'
@@ -375,9 +377,9 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /network_performance_monitoring/installation/?tab=agent#windows-systems
+[2]: /network_monitoring/performance/setup/
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[4]: /network_performance_monitoring/network_page#dns-resolution
+[4]: /network_monitoring/performance/network_page#dns-resolution
 [5]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
 [6]: https://docs.datadoghq.com/integrations/istio/
 [7]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio

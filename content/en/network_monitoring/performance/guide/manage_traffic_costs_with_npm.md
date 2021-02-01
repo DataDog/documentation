@@ -1,6 +1,8 @@
 ---
 title: Manage Cloud Traffic Costs with NPM
 kind: guide
+aliases:
+    - /network_performance_monitoring/guide/manage_traffic_costs_with_npm/
 ---
 Traffic is expensive, especially in the cloud. Cloud providers charge different prices for traffic, depending on whether it is flowing within an availability zone (AZ), between AZs, between particular regions, or to the open internet. Cross-regional and egress traffic is not only the most expensive, but also the most vulnerable to errors, latency, and security threats. 
 

@@ -5,6 +5,7 @@ description: Explore metrics for point to point communication on your infrastruc
 aliases:
   - /monitors/network_flow_monitors/
   - /graphing/infrastructure/network_performance_monitor/
+  - /network_performance_monitoring/
 further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
   tag: "Blog"
@@ -12,7 +13,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/npm-windows-support/"
   tag: "Blog"
   text: "Monitor Windows hosts with Network Performance Monitoring"
-- link: "/network_performance_monitoring/devices"
+- link: "/network_monitoring/devices"
   tag: "Documentation"
   text: "Network Device Monitoring"
 ---
@@ -31,10 +32,9 @@ Datadog Network Performance Monitoring (NPM) is designed to give you visibility 
 NPM makes it simple to monitor complex networks with built in support for Linux and [Windows OS][3] as well as containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
 
 {{< whatsnext desc="This section includes the following topics:">}}
-    {{< nextlink href="network_performance_monitoring/installation" >}}<u>Installation</u>: Configure the Agent to collect network data.{{< /nextlink >}}
-    {{< nextlink href="network_performance_monitoring/network_page" >}}<u>Network Page</u>: Graph your network data between each source and destination available.{{< /nextlink >}}
-    {{< nextlink href="network_performance_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
-    {{< nextlink href="network_performance_monitoring/dns_monitoring" >}}<u>DNS Monitoring</u>: Diagnose and debug DNS server issues.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_page" >}}<u>Network Page</u>: Graph your network data between each source and destination available.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

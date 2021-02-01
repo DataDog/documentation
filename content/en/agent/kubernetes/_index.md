@@ -224,7 +224,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [15]: /agent/kubernetes/log/
 [16]: /agent/kubernetes/apm/
 [17]: /infrastructure/process/?tab=kubernetes#installation
-[18]: /network_performance_monitoring/installation/
+[18]: /network_monitoring/performance/setup/
 [19]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [20]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}

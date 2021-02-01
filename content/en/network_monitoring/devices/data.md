@@ -1,6 +1,8 @@
 ---
 title: NDM Data Collected
 kind: documentation
+aliases:
+    - /network_performance_monitoring/devices/data/
 ---
 
 ## Metrics

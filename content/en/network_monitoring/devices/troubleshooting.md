@@ -1,6 +1,8 @@
 ---
 title: NDM Troubleshooting
 kind: documentation
+aliases:
+    - /network_performance_monitoring/devices/troubleshooting/
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"

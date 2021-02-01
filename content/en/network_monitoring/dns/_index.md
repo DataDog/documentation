@@ -4,6 +4,7 @@ kind: documentation
 description: Diagnose and debug DNS server issues  
 aliases:
     - /network_performance_monitoring/network_table
+    - /network_performance_monitoring/dns_monitoring
 further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-dns-with-datadog/'
       tag: 'Blog'
@@ -11,7 +12,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-coredns-with-datadog/'
       tag: 'Blog'
       text: 'Monitor CoreDNS with Datadog'
-    - link: '/network_performance_monitoring/network_page'
+    - link: '/network_monitoring/performance/network_page'
       tag: 'Documentation'
       text: 'Explore network data between each source and destination.'
     - link: 'https://www.datadoghq.com/blog/dns-resolution-datadog/'
@@ -96,4 +97,4 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/network_performance_monitoring/network_page#table
+[1]: /network_monitoring/performance/network_page#table

@@ -1987,65 +1987,70 @@ main:
     identifier: rum_guides
     weight: 8
   - name: Network Monitoring
-    url: network_performance_monitoring/
+    url: network_monitoring/
     pre: nav_network
-    identifier: npm
+    identifier: nm_parent
     weight: 190000
-  - name: Installation
-    url: network_performance_monitoring/installation
+  - name: Network Performance Monitoring
+    url: network_monitoring/performance/
+    parent: nm_parent
+    identifier: npm
+    weight: 100
+  - name: Setup
+    url: network_monitoring/performance/setup/
     parent: npm
-    identifier: npm_installation
-    weight: 1
+    identifier: npm_setup
+    weight: 101
   - name: Network Page
-    url: network_performance_monitoring/network_page
+    url: network_monitoring/performance/network_page/
     parent: npm
     identifier: npm_page
-    weight: 2
+    weight: 102
   - name: Network Map
-    url: network_performance_monitoring/network_map
+    url: network_monitoring/performance/network_map/
     parent: npm
     identifier: npm_map
-    weight: 3
-  - name: DNS Monitoring
-    url: network_performance_monitoring/dns_monitoring
-    parent: npm
-    identifier: dns_monitoring
-    weight: 4
+    weight: 103
   - name: Guides
-    url: network_performance_monitoring/guide/
+    url: network_monitoring/performance/guide/
     identifier: npm_guides
     parent: npm
-    weight: 5
-  - name: Devices
-    url: network_performance_monitoring/devices
-    parent: npm
+    weight: 104
+  - name: DNS Monitoring
+    url: network_monitoring/dns/
+    parent: nm_parent
+    identifier: dns_monitoring
+    weight: 200
+  - name: Network Device Monitoring
+    url: network_monitoring/devices
+    parent: nm_parent
     identifier: ndm
-    weight: 600
+    weight: 300
   - name: Setup
-    url: network_performance_monitoring/devices/setup
+    url: network_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 601
+    weight: 301
   - name: Profiles
-    url: network_performance_monitoring/devices/profiles
+    url: network_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 602
+    weight: 302
   - name: Data Collected
-    url: network_performance_monitoring/devices/data
+    url: network_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 603
+    weight: 303
   - name: Troubleshooting
-    url: network_performance_monitoring/devices/troubleshooting
+    url: network_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 604
+    weight: 304
   - name: Guides
-    url: network_performance_monitoring/devices/guide/
+    url: network_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 605
+    weight: 305
   - name: Developer Tools
     url: developers/
     pre: nav_developers

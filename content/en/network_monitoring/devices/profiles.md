@@ -1,8 +1,10 @@
 ---
 title: NDM Profiles
 kind: documentation
+aliases:
+    - /network_performance_monitoring/devices/profiles/
 further_reading:
-- link: "/network_performance_monitoring/devices/data"
+- link: "/network_monitoring/devices/data"
   tag: "Documentation"
   text: "Data Collected with Network Device Monitoring"
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"

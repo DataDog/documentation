@@ -1,6 +1,8 @@
 ---
 title: NDM with the Cluster Agent
 kind: guide
+aliases:
+    - /network_performance_monitoring/devices/guide/cluster-agent/
 further_reading:
 - link: "/agent/cluster_agent"
   tag: "Documentation"
