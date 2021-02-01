@@ -27,13 +27,13 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 * The pods or services making DNS requests and the servers receiving those requests.
 * The endpoints making the most requests or making requests at the highest rate.
 * If a DNS server’s response time to requests has gradually or suddenly increased.
-* The DNS servers with a high error rate and the type of errors being emitted.
-
-DNS Monitoring is currently in public beta. 
+* The DNS servers with a high error rate and the type of errors being emitted. 
 
 ## Setup
 
-DNS Monitoring metrics are collected automatically by the system probe with agent v7.23+. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product by default - no extra steps are necessary. 
+DNS Monitoring metrics are collected automatically by the system probe with agent v7.23+. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product by default - no extra steps are necessary.
+
+Are you looking for Network Performance Monitoring instead? See the [NPM setup instructions][2].
 
 ## Queries
 
@@ -98,3 +98,4 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 
 
 [1]: /network_monitoring/performance/network_page#table
+[2]: /network_monitoring/devices/setup?tab=snmpv2
