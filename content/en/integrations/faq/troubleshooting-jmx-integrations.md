@@ -133,14 +133,14 @@ $ docker exec -it <AGENT_CONTAINER_NAME> datadog-agent status
 {{% /tab %}}
 {{< /tabs >}}
 
-## FAQs
+## FAQ
 
 ### The 350 metric limit
 
 Datadog accepts a maximum of 350 metrics.
 A best practice is to limit your metrics to less than 350 by creating filters to refine those metrics collected, but if you need more than 350 metrics, contact [Datadog support][2].
 
-### Java Path
+### Java path
 
 The default Agent installation does not come with a bundled JVM and uses the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the Agent.
 
@@ -154,7 +154,7 @@ Alternatively, you can specify the JVM path in the integration's configuration f
 
 Datadog's Java APM library is capable of collecting JVM metrics without the JMX integration. See [Runtime Metrics][3], for more details.
 
-### Monitoring JBoss/WildFly applications
+### Monitoring JBoss or WildFly applications
 
 The following instructions work on Agent v5.6.0+.
 
@@ -188,11 +188,11 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
 
 * [Restart the Agent][4].
 
-### Monitoring Tomcat with JMX Remote Lifecycle Listener enabled
+### Monitoring Tomcat with JMX remote lifecycle listener enabled
 
 The following instructions work on Agent v5.6.0+.
 
-If you're using Tomcat with JMX Remote Lifecycle Listener enabled (see the [Tomcat documentation][5] for more information), JMXFetch needs an additional setup to be able to connect to your Tomcat application.
+If you're using Tomcat with JMX remote lifecycle listener enabled (see the [Tomcat documentation][5] for more information), JMXFetch needs an additional setup to be able to connect to your Tomcat application.
 
 * Locate the `catalina-jmx-remote.jar` file on your Tomcat server (by default, its path should be `$CATALINA_HOME/lib`).
 * If JMXFetch is running on a different host than the Tomcat application, copy `catalina-jmx-remote.jar` to a location on the host JMXFetch is running on.

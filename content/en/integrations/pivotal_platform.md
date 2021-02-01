@@ -42,7 +42,7 @@ For kubelet cluster based workloads, utilize the [pivotal_pks integration][3] to
 
 Use the [Cluster Monitoring Tile][1] to install the Datadog Agent on each non worker VM in your PKS environment. In environments without PAS installed, select the `Resource Config` section of the tile and set `instances` of the `datadog-firehose-nozzle` to `0`.
 
-## Monitor Your Applications on Pivotal Platform
+## Monitor your applications
 
 Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][4] for Pivotal Platform that installs a [Datadog DogStatsD binary][5] and Datadog Agent in the container your app is running on.
 
@@ -108,7 +108,7 @@ If you are a [meta-buildpack][11] user, Datadog's buildpack can be used as a dec
 
 ### Configuration
 
-#### Metric Collection
+#### Metric collection
 
 **Set an API Key in your environment to enable the buildpack**:
 
@@ -119,13 +119,13 @@ cf set-env <YOUR_APP> DD_API_KEY <DATADOG_API_KEY>
 cf restage <YOUR_APP>
 ```
 
-#### Trace Collection
+#### Trace collection
 
 The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM Setup][12].
 
-#### Log Collection
+#### Log collection
 
-##### Enable log collection
+##### Enable
 
 To start collecting logs from your application in Pivotal Platform, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
@@ -142,7 +142,7 @@ cf set-env <YOUR_APP_NAME> LOGS_CONFIG '[{"type":"tcp","port":"<PORT>","source":
 cf restage <YOUR_APP_NAME>
 ```
 
-##### Configure log collection
+##### Configure
 
 The following parameters can be used to configure log collection:
 
@@ -178,7 +178,7 @@ To build this buildpack, edit the relevant files and run the `./build` script. T
 
 See [the DogStatsD documentation][5] for more information. There is [a list of DogStatsD libraries][14] compatible with a wide range of applications.
 
-## Monitor Your Pivotal Platform Cluster
+## Monitor your Pivotal Platform cluster
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
@@ -193,7 +193,7 @@ These integrations are meant for Pivotal Platform deployment administrators, not
 
 You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][15] or [v2][16].
 
-### Install the Datadog Agent BOSH Release
+### Install the Datadog Agent BOSH release
 
 Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][17] (the same way a Director deploys the BOSH Agent to all nodes).
 
@@ -272,7 +272,7 @@ Everything you configure in `runtime.yml` applies to every node. You cannot conf
 
 To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][19] for the Datadog Agent BOSH release.
 
-#### Sync the runtime configuration to the Director
+#### Sync the runtime configuration to the BOSH Director
 
 ```text
 # BOSH CLI v1
@@ -339,7 +339,7 @@ uaa:
 
 Redeploy the deployment to add the user.
 
-#### Add Nozzle jobs
+#### Add Firehose Nozzle jobs
 
 Configure one or more Nozzle jobs in your main Pivotal Platform deployment manifest (e.g. cf-manifest.yml):
 
@@ -410,7 +410,7 @@ bosh -n deploy --recreate
 bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 ```
 
-#### Verify the Nozzle is collecting
+#### Verify the Firehose Nozzle is collecting
 
 On the [Metrics explorer][23] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
