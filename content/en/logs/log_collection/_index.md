@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-Choose a configuration option below to begin ingesting your logs. If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
+Choose a configuration option below to begin ingesting your logs. If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], or [Logstash][5].
 
 There is also a [list of available Datadog Log collection endpoints](#datadog-logs-endpoints) if you want to send your logs directly to Datadog.
 
@@ -37,7 +37,7 @@ There is also a [list of available Datadog Log collection endpoints](#datadog-lo
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces. The Agent can [tail log files][2] or [listen for logs sent over UDP / TCP][2], and you can configure it to [filter out logs][3], [scrub sensitive data][3], or  aggregate [multi line logs][4].
+Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces. The Agent can [tail log files][2] or [listen for logs sent over UDP/TCP][2], and you can configure it to [filter out logs][3], [scrub sensitive data][3], or aggregate [multi line logs][4].
 
 [1]: /agent/logs/
 [2]: /agent/logs/#custom-log-collection
@@ -52,7 +52,7 @@ After you have [enabled log collection][1], configure your application language 
 
 {{< partial name="logs/logs-languages.html" >}}
 
-**Note**: JSON-formatted logging helps handle multi-line application logs, and is automatically parsed by Datadog. If you have control over the log format you send to Datadog, it is recommended to format logs as JSON to avoid the need for custom parsing rules.
+**Note**: JSON-formatted logging helps handle multi-line application logs. JSON-formatted logs are automatically parsed by Datadog. If you have control over the log format you send to Datadog, it is recommended that you format logs as JSON to avoid the need for custom parsing rules.
 
 [1]: /agent/logs/
 
@@ -88,9 +88,9 @@ Select your Cloud provider below to see how to automatically collect your logs a
 
 {{< partial name="logs/logs-cloud.html" >}}
 
-Datadog Integrations and Log Collection are tied together. Use an integration default configuration file to enable its dedicated [processing][1], [parsing][2], and [facets][3] in Datadog.
+Datadog integrations and log collection are tied together. Use an integration default configuration file to enable dedicated [processing][1], [parsing][2], and [facets][3] in Datadog.
 
-Consult the [current list of available supported integrations][4].
+Consult the [list of available supported integrations][4].
 
 [1]: /logs/processing/
 [2]: /logs/processing/parsing/
@@ -108,7 +108,7 @@ Datadog provides logging endpoints for both SSL-encrypted connections and unencr
 
 {{< site-region region="us" >}}
 
-Endpoints that can be used to send logs to Datadog US region:
+Endpoints that can be used to send logs to the Datadog US region:
 
 | Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -243,7 +243,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 **Notes**:
 
 * For optimal use, Datadog recommends a log event should not exceed 25K bytes in size. When using the Datadog Agent, log events greater than 256KB are split into several entries. When using the Datadog TCP or HTTP API directly, log events up to 1MB are accepted.
-* A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
+* A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
 * A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * Log events can be submitted up to 18h in the past and 2h in the future.
 
@@ -251,7 +251,7 @@ Log events that do not comply with these limits might be transformed or truncate
 
 ### Attributes and tags
 
-Attributes prescribe [logs facets][7], which are used for filtering and searching in Log Explorer. There are few reserved attributes that are automatically ingested with logs, as noted below, and some attributes that require additional configuration if using other parts of the Datadog app such as APM. Review the reserved attributes list below after configuring log collection:
+Attributes prescribe [logs facets][7], which are used for filtering and searching in Log Explorer. There are a few reserved attributes that are automatically ingested with logs, as noted below, and some attributes that require additional configuration if using other parts of Datadog such as APM. Review the reserved attributes list below after configuring log collection:
 
 | Attribute | Description                                                                                                                                                                                                                                |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -287,7 +287,7 @@ If you're also collecting traces or metrics, it is recommended to configure unif
 
 ## Next steps
 
-Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alert on your logs. See the [Log Explorer][11] documentation to begin analyzing your log data, or check out the additional log management documentation below.
+Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][11] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
 
