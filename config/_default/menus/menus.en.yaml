@@ -1007,19 +1007,28 @@ main:
     identifier: metrics_top_level
     pre: nav_metrics
     weight: 110000
+  - name: Introduction
+    url: metrics/introduction/
+    parent: metrics_top_level
+    weight: 901
+  - name: Advanced Filtering
+    url: metrics/advanced-filtering/
+    parent: metrics_top_level
+    identifier: metrics_advanced_filtering
+    weight: 902
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
-    weight: 901
+    weight: 903
   - name: Summary
     url: metrics/summary/
     parent: metrics_top_level
-    weight: 902
+    weight: 904
   - name: Distributions
     url: metrics/distributions/
     parent: metrics_top_level
     identifier: metrics_distributions
-    weight: 903
+    weight: 905
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
