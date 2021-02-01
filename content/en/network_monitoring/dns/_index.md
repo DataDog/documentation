@@ -33,7 +33,7 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 DNS Monitoring metrics are collected automatically by the system probe with agent v7.23+. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product by default - no extra steps are necessary.
 
-Are you looking for Network Performance Monitoring instead? See the NPM setup instructions [here][2].
+Are you looking for Network Performance Monitoring instead? See the [NPM setup instructions][2].
 
 ## Queries
 
