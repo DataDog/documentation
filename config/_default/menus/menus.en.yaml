@@ -1497,16 +1497,11 @@ main:
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1102
-  - name: Intro to Profiling
-    url: tracing/profiler/intro_to_profiling
-    parent: profiler
-    identifier: intro_to_profiling
-    weight: 1103
   - name: Profiler Troubleshooting
     url: tracing/profiler/profiler_troubleshooting
     parent: profiler
     identifier: profiler_profiler_troubleshooting
-    weight: 1104
+    weight: 1103
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
