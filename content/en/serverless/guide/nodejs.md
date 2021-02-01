@@ -185,9 +185,9 @@ If something is already subscribing to a Log Group that you want to monitor with
 
 If your logs still aren’t appearing in Datadog, you can [follow the troubleshooting steps here][9].  
 
-## Triage your lambda errors in the log explorer
+## Triage your Lambda errors in the log explorer
 
-Visit the Datadog Serverless view to view all of the lambda functions. Navigate to a specific function to see the logs being emitted from the function. Then navigate to the log explorer to learn more about the log.
+Visit the Datadog Serverless view to view all of the Lambda functions. Navigate to a specific function to see the logs being emitted from the function. Then navigate to the log explorer to learn more about the log.
 
 {{< img src="serverless/guides/end-to-end_serverless_monitoring_database/guide_video_3-compressed.mp4" video="true" alt="Serverless Page Logs"  style="width:90%;">}}
 
