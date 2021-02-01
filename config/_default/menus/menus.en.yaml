@@ -1911,6 +1911,11 @@ main:
     parent: rum
     identifier: rum_android
     weight: 2
+  - name: Configuring the Android SDK
+    url: real_user_monitoring/android/configure_android_sdk/
+    parent: rum_android
+    identifier: rum_configuring
+    weight: 201
   - name: iOS Monitoring
     url: real_user_monitoring/ios/
     parent: rum

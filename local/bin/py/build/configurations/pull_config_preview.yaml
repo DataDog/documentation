@@ -308,11 +308,22 @@
       globs:
       - 'docs/rum_collection.md'
       options:
-        dest_path: '/real_user_monitoring/'
-        file_name: 'android.md'
+        dest_path: '/real_user_monitoring/setup.md'
+        file_name: 'setup.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md"]
           title: Getting Started with Android RUM Collection
+          kind: documentation
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/configure_android_sdk.md'
+      options:
+        dest_path: '/real_user_monitoring/configure_android_sdk.md'
+        file_name: 'configure_android_sdk.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_android_sdk.md"]
+          title: Configuring the Android SDK
           kind: documentation
 
   - repo_name: browser-sdk
