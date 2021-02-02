@@ -30,6 +30,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [asgi][3]                 | >= 2.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
 | [aiohttp][4]              | >= 1.2            | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
 | [Bottle][5]               | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
+| [CherryPy][6]            | >= 11.2.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
 | [Django][6]               | >= 1.8            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
 | [djangorestframework][6]  | >= 3.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
 | [Falcon][7]               | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
@@ -50,6 +51,7 @@ The `ddtrace` library includes support for the following data stores:
 
 | Datastore                          | Supported Version | Library Documentation                                                                         |
 | ---------------------------------- | ----------------- | --------------------------------------------------------------------------------------------- |
+<<<<<<< HEAD
 | [algoliasearch][17]                | >= 1.20.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
 | [Cassandra][18]                    | >= 3.5            | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
 | [Elasticsearch][19]                | >= 1.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
@@ -70,6 +72,28 @@ The `ddtrace` library includes support for the following data stores:
 | [SQLAlchemy][38]                   | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
 | [SQLite3][39]                      | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][40]                      | >= 0.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
+=======
+| [algoliasearch][6]                | >= 1.20.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
+| [Cassandra][17]                    | >= 3.5            | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
+| [Elasticsearch][18]                | >= 1.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Flask Cache][19]                  | >= 0.12           | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
+| [Memcached][20] [pylibmc][21]      | >= 1.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
+| [Memcached][20] [pymemcache][22]   | >= 1.3            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymemcache                          |
+| [MongoDB][23] [Mongoengine][24]    | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/integrations.html#mongoengine                         |
+| [MongoDB][23] [Pymongo][25]        | >= 3.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymongo                             |
+| [MySQL][26] [MySQL-python][27]     | >= 1.2.3          | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
+| [MySQL][26] [mysqlclient][28]      | >= 1.3            | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
+| [MySQL][26] [mysql-connector][29]  | >= 2.1            | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
+| [Postgres][30] [aiopg][31]         | >= 0.12.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
+| [Postgres][30] [psycopg][32]       | >= 2.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
+| [PynamoDB][33]                     | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pynamodb                               |
+| [PyODBC][34]                       | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyodbc                               |
+| [Redis][35]                        | >= 2.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
+| [Redis][35] [redis-py-cluster][36] | >= 1.3.5          | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
+| [SQLAlchemy][37]                   | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
+| [SQLite3][38]                      | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
+| [Vertica][39]                      | >= 0.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
+>>>>>>> 7dfc4aeab (Add cherrypy to compatibility table, update ja/fr tables)
 
 
 ### Library Compatibility
@@ -103,10 +127,17 @@ The `ddtrace` library includes support for the following libraries:
 [3]: http://asgi.readthedocs.io/
 [4]: https://aiohttp.readthedocs.io
 [5]: https://bottlepy.org
+<<<<<<< HEAD
 [6]: https://www.djangoproject.com
 [7]: https://falconframework.org
 [8]: http://flask.pocoo.org
 [9]: https://fastapi.tiangolo.com/
+=======
+[6]: https://www.algolia.com/doc/
+[7]: https://www.djangoproject.com
+[8]: https://falconframework.org
+[9]: http://flask.pocoo.org
+>>>>>>> 7dfc4aeab (Add cherrypy to compatibility table, update ja/fr tables)
 [10]: https://moltenframework.com
 [11]: http://pylonsproject.org
 [12]: https://trypyramid.com
@@ -114,6 +145,7 @@ The `ddtrace` library includes support for the following libraries:
 [14]: https://sanic.readthedocs.io/en/latest/
 [15]: https://www.starlette.io/
 [16]: http://www.tornadoweb.org
+<<<<<<< HEAD
 [17]: https://www.algolia.com/doc/
 [18]: https://cassandra.apache.org
 [19]: https://www.elastic.co/products/elasticsearch
@@ -152,3 +184,42 @@ The `ddtrace` library includes support for the following libraries:
 [52]: https://kombu.readthedocs.io/en/latest
 [53]: https://www.makotemplates.org
 [54]: https://requests.readthedocs.io/en/master/
+=======
+[17]: https://cassandra.apache.org
+[18]: https://www.elastic.co/products/elasticsearch
+[19]: https://pythonhosted.org/Flask-Cache
+[20]: https://memcached.org
+[21]: http://sendapatch.se/projects/pylibmc
+[22]: https://pymemcache.readthedocs.io
+[23]: https://www.mongodb.com/what-is-mongodb
+[24]: http://mongoengine.org
+[25]: https://api.mongodb.com/python/current
+[26]: https://www.mysql.com
+[27]: https://pypi.org/project/MySQL-python
+[28]: https://pypi.org/project/mysqlclient
+[29]: https://dev.mysql.com/doc/connector-python/en/
+[30]: https://www.postgresql.org
+[31]: https://aiopg.readthedocs.io
+[32]: http://initd.org/psycopg
+[33]: https://pynamodb.readthedocs.io/en/latest/
+[34]: https://pypi.org/project/pyodbc/
+[35]: https://redis.io
+[36]: https://redis-py-cluster.readthedocs.io
+[37]: https://www.sqlalchemy.org
+[38]: https://www.sqlite.org
+[39]: https://www.vertica.com
+[40]: https://pypi.org/project/aiobotocore/
+[41]: https://docs.python.org/3/library/asyncio.html
+[42]: https://pypi.org/project/botocore/
+[43]: http://docs.pythonboto.org/en/latest
+[44]: http://www.celeryproject.org
+[45]: https://python-consul.readthedocs.io/en/latest/
+[46]: https://docs.python.org/3/library/concurrent.futures.html
+[47]: http://www.gevent.org
+[48]: https://grpc.io
+[49]: https://docs.python.org/2/library/httplib.html
+[50]: http://jinja.pocoo.org
+[51]: https://kombu.readthedocs.io/en/latest
+[52]: https://www.makotemplates.org
+[53]: https://requests.readthedocs.io/en/master/
+>>>>>>> 7dfc4aeab (Add cherrypy to compatibility table, update ja/fr tables)
