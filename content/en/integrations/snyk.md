@@ -13,6 +13,7 @@ name: snyk
 public_title: Datadog-Snyk Integration
 short_description: Profile and report on vulnerabilities with Snyk
 version: '1.0'
+integration_id: "snyk"
 further_reading:
 - link: "https://www.datadoghq.com/partner/snyk/"
   tag: "Partner page"
@@ -21,7 +22,7 @@ further_reading:
 
 ## Overview
 
-The Snyk integration allows [Datadog Continuous Profiler][1] to report on vulnerabilities in your Java libraries. The CVE Analysis (Common Vulnerabilities and Exposures) is performed using [Snyk’s Intel Vulnerability DB][2]. 
+The Snyk integration allows [Datadog Continuous Profiler][1] to report on vulnerabilities in your Java libraries. The CVE Analysis (Common Vulnerabilities and Exposures) is performed using [Snyk’s Intel Vulnerability DB][2].
 
 ## Setup
 
@@ -32,7 +33,7 @@ The Snyk integration allows [Datadog Continuous Profiler][1] to report on vulner
 2. Enable the [Datadog Continuous Profiler][1] by following the [setup guide][4]. The integration is only available for Datadog Continues Profiler customers.
 
 3. Install [`datadog-ci`][5] and [`snyk`][6]:
-	
+
 {{< code-block lang="bash" >}}
 npm install --save-dev @datadog/datadog-ci snyk
 {{< /code-block >}}
@@ -63,7 +64,7 @@ datadog-ci dependencies upload deps.json --source snyk --service <SERVICE> --rel
 
 By default, this command sends requests to Datadog US. To use Datadog EU, set the `DATADOG_SITE` environment variable to `datadoghq.eu`.
 
-A minute or two after you deploy your service, the “Vulnerability” column on the [Profiles][11] page is populated with the highest classification of vulnerability for that service. Details about the CVE vulnerabilities for the service can be found in the Analysis tab on the sidebar (detailed view of the service). 
+A minute or two after you deploy your service, the “Vulnerability” column on the [Profiles][11] page is populated with the highest classification of vulnerability for that service. Details about the CVE vulnerabilities for the service can be found in the Analysis tab on the sidebar (detailed view of the service).
 
 ## Troubleshooting
 

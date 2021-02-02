@@ -16,9 +16,9 @@
                 <div class="rule-list mb-1 active">
                     <div class="rule-list__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
                         {{ range first 1 $v.Pages }}
-                            {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "ctx" $dot) }}
-                            {{ if $this_img.image }}
-                                <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
+                            {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (.Params.source | default .Params.scope) "variant" "avatar") }}
+                            {{ if $int_logo }}
+                                <img srcset="{{ $int_logo }}?w=80&auto-enhance 2x" src="{{ $int_logo }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
                                 <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="40" alt="missing"/>
                             {{ end }}
@@ -36,9 +36,9 @@
                 <div class="group-{{ .Key }} mb-2 ml-5 d-none">
                     {{ range $v.Pages }}
                         <a class="mb-1 font-semibold js-page" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
-                            {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope "ctx" $dot) }}
-                            {{ if $this_img.image }}
-                                <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
+                            {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (.Params.source | default .Params.scope) "variant" "avatar") }}
+                            {{ if $int_logo }}
+                                <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $int_logo }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
                                 <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="40" alt="missing"/>
                             {{ end }}

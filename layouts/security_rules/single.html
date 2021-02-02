@@ -6,11 +6,11 @@
 	{{ partial "translate_status_banner/translate_status_banner.html" . }}
 
 	<div class="rule-specification row align-items-center mb-3">
-		{{ $meta_image := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope "ctx" .) }}
+		{{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (.Params.source | default .Params.scope) "variant" "avatar") }}
 
-		{{ if $meta_image.image }}
+		{{ if $int_logo }}
 			<div class="col-3 col-lg-2 d-flex justify-content-center">
-				<img src="{{ $meta_image.image }}?auto=format&width=120" width="120px" max-height="100px" alt="{{ htmlEscape .Params.Source }}" />
+				<img src="{{ $int_logo }}?auto=format&width=120" width="80px" max-height="100px" alt="{{ htmlEscape .Params.Source }}" />
 			</div>
 		{{ end }}
 		<div class="col-9 col-lg-10">
@@ -46,8 +46,8 @@
 	</div>
 
 	{{ if isset .Params "source" }}
-		{{ with .Site.GetPage (print "/" $meta_image.rellink) }}
-			<p>Set up the <a href="{{ $meta_image.link }}">{{ $dot.Params.source }}</a> integration.</p>
+		{{ with .Site.GetPage (print "/integrations/" .Params.source ) }}
+			<p>Set up the <a href="{{ (printf "integrations/%s" $dot.Params.source) | absLangURL }}">{{ $dot.Params.source }}</a> integration.</p>
 		{{ end }}
 	{{ end }}
 
