@@ -49,7 +49,7 @@ On each OpenTelemetry-instrumented application, set the resource attributes `dev
 1. Fully qualified domain name
 1. Operating system host name
 
-### Ingesting OpenTelemetry Traces with the Collector
+### Ingesting OpenTelemetry traces with the collector
 
 The OpenTelemetry Collector is configured by adding a [pipeline][8] to your `otel-collector-configuration.yml` file. Supply the relative path to this configuration file when you start the collector by passing it in via the `--config=<path/to/configuration_file>` command line argument. For examples of supplying a configuration file, see the [environment specific setup](#environment-specific-setup) section below or the [OpenTelemetry Collector documentation][9].
 
@@ -104,7 +104,7 @@ service:
 
 2. Create a `otel_collector_config.yaml` file. [Here is an example template](#ingesting-opentelemetry-traces-with-the-collector) to get started. It enables the collector's OTLP Receiver and Datadog Exporter.
 
-3. Run on the host with the configration yaml file set via the `--config` parameter. For example,
+3. Run the download on the host, specifying  the configration yaml file set via the `--config` parameter. For example:
 
   ```
     otelcontribcol_linux_amd64 --config otel_collector_config.yaml
@@ -114,13 +114,13 @@ service:
 
 Run an Opentelemetry Collector container to receive traces either from the [installed host](#receive-traces-from-host), or from [other containers](#receive-traces-from-other-containers).
 
-##### Receive Traces from host
+##### Receive traces from host
 
 1. Create a `otel_collector_config.yaml` file. [Here is an example template](#ingesting-opentelemetry-traces-with-the-collector) to get started. It enables the collector's OTLP receiver and the Datadog exporter.
 
-2. Choose a published docker image such as [`otel/opentelemetry-collector-contrib:latest`][12].
+2. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib:latest`][12].
 
-3.  Determine which ports to open on your container. OpenTelemetry Traces are sent to the OpenTelemetry Collector over TCP or UDP on a number of ports, which must be exposed on the container.  By default traces are sent over OTLP/gRPC on port `55680`, but common protocols and their ports include: 
+3.  Determine which ports to open on your container. OpenTelemetry traces are sent to the OpenTelemetry Collector over TCP or UDP on a number of ports, which must be exposed on the container.  By default, traces are sent over OTLP/gRPC on port `55680`, but common protocols and their ports include: 
 
   - Zipkin/HTTP on port `9411`
   - Jaeger/gRPC on port `14250`
@@ -135,23 +135,23 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
    $ docker run \
     -p 55680:55680 \
     -v $(pwd)/otel_collector_config.yaml:/etc/otel/config.yaml \
-    otel/opentelemetry-collector-contrib:latest
+    otel/opentelemetry-collector-contrib
   ```
   
-5. Configure your application with the appropriate Resource attributes for unified service tagging by [adding metadata](#opentelemetry-collector-datadog-exporter)
+5. Configure your application with the appropriate resource attributes for unified service tagging by [adding metadata](#opentelemetry-collector-datadog-exporter)
 
 ##### Receive traces from other containers
 
-1. Create a `otel_collector_config.yaml` file. [Here is an example template](#ingesting-opentelemetry-traces-with-the-collector) to get started. It enables the collector's otlp receiver and datadog exporter.
+1. Create an `otel_collector_config.yaml` file. [Here is an example template](#ingesting-opentelemetry-traces-with-the-collector) to get started. It enables the collector's OTLP receiver and Datadog exporter.
 
 
-2. Configure your application with the appropriate Resource attributes for unified service tagging by adding the metadata [described here](#opentelemetry-collector-datadog-exporter)
+2. Configure your application with the appropriate resource attributes for unified service tagging by adding the metadata [described here](#opentelemetry-collector-datadog-exporter)
 
 3. Create a docker network:
 
   `docker network create <NETWORK_NAME>`
   
-4. Run the OpenTelemetry Collector container and application container in the same network. *Note*: When running the application container, ensure the environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` is configured to use the appropriate hostname for the OpenTelemetry Collector. In the example below, this is `opentelemetry-collector`
+4. Run the OpenTelemetry Collector container and application container in the same network. **Note**: When running the application container, ensure the environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` is configured to use the appropriate hostname for the OpenTelemetry Collector. In the example below, this is `opentelemetry-collector`.
  
   ```
   # Datadog Agent
@@ -169,104 +169,104 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
 
 #### Kubernetes
 
-The OpenTelemetry Collector can be run in two types of [deployment scenarios][13].
+The OpenTelemetry Collector can be run in two types of [deployment scenarios][13]:
 
-- As an OpenTelemetry Collector "agent" running on the same host as the application in a sidecar or daemonset; or 
+- As an OpenTelemetry Collector agent running on the same host as the application in a sidecar or daemonset; or 
 
-- As a standalone service, e.g. a container or deployment, typically per-cluster, -datacenter or -region.
+- As a standalone service, for example a container or deployment, typically per-cluster, per-datacenter, or per-region.
 
 To accurately track the appropriate metadata in Datadog, run the OpenTelemetry Collector in agent mode on each of the Kubernetes nodes.
 
 When deploying the OpenTelemetry Collector as a daemonset, refer to [the example configuration below](#opentelemetry-kubernetes-example-collector-configuration) as a guide.
 
-On the application container, use the downward API to pull the host IP. The application container needs an environment variable that points to `status.hostIP`. The OpenTelemetry Application SDKs expects this to be named `OTEL_EXPORTER_OTLP_ENDPOINT`. Use the [below example snippet](#opentelemetry-kubernetes-example-application-configuration) as a guide.
+On the application container, use the downward API to pull the host IP. The application container needs an environment variable that points to `status.hostIP`. The OpenTelemetry Application SDKs expect this to be named `OTEL_EXPORTER_OTLP_ENDPOINT`. Use the [below example snippet](#opentelemetry-kubernetes-example-application-configuration) as a guide.
 
 ##### Example Kubernetes OpenTelemetry Collector configuration
 
-A full example k8s manifest for deploying the OpenTelemetry Collector as both daemonset and standalone collector [can be found here][14]. Depending on your environment this example may be modified, however the important sections to note specific to Datadog are as follows.
+A full example Kubernetes manifest for deploying the OpenTelemetry Collector as both daemonset and standalone collector [can be found here][14]. Modify the example to suit your environment. The key sections that are specific to Datadog are as follows:
 
-1. The example demonstrates deploying the OpenTelemetry Collectors in ["agent" mode via daemonset][15], which collect relevant k8s node and pod specific metadata, and then forward telemetry data to an OpenTelemetry Collector in ["standalone collector" mode][16]. This OpenTelemetry Collector in "standalone collector" mode then exports to the Datadog backend. A diagram of this deployment model [can be found here][17].
+1. The example demonstrates deploying the OpenTelemetry Collectors in [agent mode via daemonset][15], which collect relevant k8s node and pod specific metadata, and then forward telemetry data to an OpenTelemetry Collector in [standalone collector mode][16]. This OpenTelemetry Collector in standalone collector mode then exports to the Datadog backend. See [this diagram of this deployment model][17].
 
-2. For OpenTelemetry Collectors deployed as agent via daemonset, in the Daemonset, `spec.containers.env` should use the downward API to capture `status.podIP` and add it as part of the `OTEL_RESOURCE` environment variable. This is used by the OpenTelemetry Collector's `resourcedetection` and `k8s_tagger` processors, which should be included along with a `batch` processor and added to the `traces` pipeline.
+2. For OpenTelemetry Collectors deployed as agent via daemonset, in the daemonset, `spec.containers.env` should use the downward API to capture `status.podIP` and add it as part of the `OTEL_RESOURCE` environment variable. This is used by the OpenTelemetry Collector's `resourcedetection` and `k8s_tagger` processors, which should be included along with a `batch` processor and added to the `traces` pipeline.
 
-- In the DaemonSet's `spec.containers.env` section
+    In the daemonset's `spec.containers.env` section:
 
-```
-  # ...
-  env:
-     # Get pod ip so that k8s_tagger can tag resources
-    - name: POD_IP
-      valueFrom:
-        fieldRef:
-          fieldPath: status.podIP
-      # This is picked up by the resource detector
-    - name: OTEL_RESOURCE
-      value: "k8s.pod.ip=$(POD_IP)"
-  # ...
-```
+    ```yaml
+      # ...
+      env:
+         # Get pod ip so that k8s_tagger can tag resources
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+          # This is picked up by the resource detector
+        - name: OTEL_RESOURCE
+          value: "k8s.pod.ip=$(POD_IP)"
+      # ...
+    ```
 
-- In the `otel-agent-conf` ConfigMap's `data.otel-agent-config` `processors` section
+    In the `otel-agent-conf` ConfigMap's `data.otel-agent-config` `processors` section:
 
-```
-  # ...
-  # The resource detector injects the pod IP
-  # to every metric so that the k8s_tagger can
-  # fetch information afterwards.
-  resourcedetection:
-    detectors: [env]
-    timeout: 5s
-    override: false
-  # The k8s_tagger in the Agent is in passthrough mode
-  # so that it only tags with the minimal info for the
-  # collector k8s_tagger to complete
-  k8s_tagger:
-    passthrough: true
-  batch:
-  # ...
-```
+    ```yaml
+      # ...
+      # The resource detector injects the pod IP
+      # to every metric so that the k8s_tagger can
+      # fetch information afterwards.
+      resourcedetection:
+        detectors: [env]
+        timeout: 5s
+        override: false
+      # The k8s_tagger in the Agent is in passthrough mode
+      # so that it only tags with the minimal info for the
+      # collector k8s_tagger to complete
+      k8s_tagger:
+        passthrough: true
+      batch:
+      # ...
+    ```
 
-- In the `otel-agent-conf` ConfigMap's `data.otel-agent-config` `service.pipelines.traces` section
+    In the `otel-agent-conf` ConfigMap's `data.otel-agent-config` `service.pipelines.traces` section:
 
-```
-  # ...
-  # resourcedetection must come before k8s_tagger
-  processors: [resourcedetection, k8s_tagger, batch]
-  # ...
-```
+    ```yaml
+      # ...
+      # resourcedetection must come before k8s_tagger
+      processors: [resourcedetection, k8s_tagger, batch]
+      # ...
+    ```
 
-3. For any OpenTelemetry-Collector's in "standalone collector" mode, which receive traces from downstream collectors and export to Datadog's backend, include a `batch` processor configured with a `timeout` of `10s` as well as the `k8s_tagger` enabled. These should be included along with the `datadog` exporter and added to the `traces` pipeline. 
+3. For OpenTelemetry Collectors in standalone collector mode, which receive traces from downstream collectors and export to Datadog's backend, include a `batch` processor configured with a `timeout` of `10s` as well as the `k8s_tagger` enabled. These should be included along with the `datadog` exporter and added to the `traces` pipeline.
 
-- In the `otel-collector-conf` ConfigMap's `data.otel-collector-config` `processors` section
+    In the `otel-collector-conf` ConfigMap's `data.otel-collector-config` `processors` section:
 
-```
-  # ...
-  batch:
-    timeout: 10s
-  k8s_tagger:
-  # ...
-```
+    ```yaml
+      # ...
+      batch:
+        timeout: 10s
+      k8s_tagger:
+      # ...
+    ```
 
-- In the `otel-collector-conf` ConfigMap's `data.otel-collector-config` `exporters` section
+    In the `otel-collector-conf` ConfigMap's `data.otel-collector-config` `exporters` section:
 
-```
-  exporters:
-    datadog:
-      api:
-        key: <YOUR_API_KEY>
-```
+    ```yaml
+      exporters:
+        datadog:
+          api:
+            key: <YOUR_API_KEY>
+    ```
 
-- In the `otel-agent-conf` ConfigMap's `data.otel-agent-config` `service.pipelines.traces` section
+    In the `otel-collector-conf` ConfigMap's `data.otel-collector-config` `service.pipelines.traces` section:
 
-```
-  # ...
-  processors: [k8s_tagger, batch]
-  exporters: [datadog]
-  # ...
-```
+    ```yaml
+      # ...
+      processors: [k8s_tagger, batch]
+      exporters: [datadog]
+      # ...
+    ```
 
 ##### Example Kubernetes OpenTelemetry application configuration
 
-In addition to the OpenTelemetry Collector configuration, ensure OpenTelemetry SDKs installed in an application transmit telemetry data to the Collector by configuring the environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` with the host IP. Use the downward API to pull the host IP, and set it as an environment variable, which is then interpolated when setting the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable.
+In addition to the OpenTelemetry Collector configuration, ensure that OpenTelemetry SDKs that are installed in an application transmit telemetry data to the collector, by configuring the environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` with the host IP. Use the downward API to pull the host IP, and set it as an environment variable, which is then interpolated when setting the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
 
 ```
 apiVersion: apps/v1
