@@ -135,7 +135,7 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
    $ docker run \
     -p 55680:55680 \
     -v $(pwd)/otel_collector_config.yaml:/etc/otel/config.yaml \
-    otel/opentelemetry-collector-contrib:latest
+    otel/opentelemetry-collector-contrib
   ```
   
 5. Configure your application with the appropriate Resource attributes for unified service tagging by [adding metadata](#opentelemetry-collector-datadog-exporter)
