@@ -34,11 +34,11 @@
                 <div class="js-group-header mb-1 active">
                     <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
                         {{ range first 1 $v.Pages }}
-                            {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "ctx" $dot) }}
-                            {{ if $this_img.image }}
-                                <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
+                            {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (.Params.source | default .Params.scope) "variant" "avatar") }}
+                            {{ if $int_logo }}
+                                <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
-                                <img width="40" height="20" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
+                                <img height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
                             {{ end }}
                         {{ end }}
                     </div>
@@ -51,16 +51,16 @@
                     </div>
                     <div class="js-group-header__arrow">></div>
                 </div>
-                <div class="group-{{ .Key }} mb-2 ml-5 d-none">
+                <div class="group-{{ .Key }} mb-2 ml-4 d-none">
                     {{ range $v.Pages }}
                         <a class="mb-1 font-semibold mix js-single-rule {{ range $i, $e := .Params.rule_category }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
-                            {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope "ctx" $dot) }}
-                            {{ if $this_img.image }}
-                                <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
+                            {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (.Params.source | default .Params.scope) "variant" "avatar") }}
+                            {{ if $int_logo }}
+                                <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
-                                <img width="40" height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}" alt="{{ $v.Key }}" />
+                                <img height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}" alt="{{ $v.Key }}" />
                             {{ end }}
-                            {{ .Title }}<br />
+                            <span class="pl-1">{{ .Title }}</span><br />
                         </a>
                     {{ end }}
                 </div>
