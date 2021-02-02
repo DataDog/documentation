@@ -124,7 +124,7 @@ To configure for 100% ingestion on every service instrumented with a Datadog tra
 DD_TRACE_SAMPLE_RATE=1.0
 ```
 
-**Note:** This may impact your bill if your total ingestion exceeds the included GBs.  For more information, see the [APM Billing][7] page.
+**Note:** This may impact your bill if your total ingestion exceeds the included GBs. For more information, see the [APM Billing][7] page.
 
 ### Ingestion Breakdown
 
@@ -164,7 +164,7 @@ Before October 20, 2020, Datadog offered App Analytics to index spans for perfor
 
 All existing App Analytics filters have been automatically transitioned to Retention Filters. You can continue to use the unchanged filters or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters.
 
-**Note:** Existing App Analytics filters can be edited within Datadog, but only by editing the transitioned [retention filters][2].  Legacy filters are now read only on the [settings][12] page in-app.
+**Note:** Existing App Analytics filters can be edited within Datadog, but only by editing the transitioned [retention filters][2]. Legacy filters are read only on the [settings][12] page in-app.
 
 {{< img src="tracing/trace_indexing_and_ingestion/MigratedRetentionFilter.png" style="width:100%;" alt="Visual indicator of App Analytics filter migrated to a retention filter" >}}
 
