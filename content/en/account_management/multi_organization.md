@@ -50,6 +50,8 @@ If you are a member of multiple organizations, custom sub-domains help you ident
 
 For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][1], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
+Note: when using a custom subdomain, you will have to manually edit the links from the Datadog documentation with your subdomain name. For example a link redirecting to `https://**app**.datadoghq.com/account/settings` will become `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
+
 ## Setting up SAML
 
 SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually. 
