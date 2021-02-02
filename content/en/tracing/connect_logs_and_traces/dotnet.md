@@ -21,7 +21,7 @@ further_reading:
 
 The .NET Tracer can automatically inject trace IDs, span IDs, `env`, `service`, and `version` into your application logs. If you haven't done so already, Datadog recommends configuring the .NET tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This provides the best experience when adding `env`, `service`, and `version` (see [Unified Service Tagging][3] for more details).
 
-We support [Serilog][4], [NLog][5] (version 2.0.0.2000+), or [log4net][6]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger (see examples below).
+We support [Serilog][4], [NLog][5] (version 2.0.0.2000+), or [log4net][6]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger.
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
