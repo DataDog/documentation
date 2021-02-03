@@ -31,7 +31,7 @@ further_reading:
 
 ## Compatibility requirements
 
-The .NET Tracer supports automatic instrumentation on:
+The .NET Tracer supports instrumentation on:
   - .NET 5
   - .NET Core 3.1
   - .NET Core 2.1. 
@@ -120,7 +120,7 @@ By default, tracing is enabled in your `datadog.yaml` file under `apm_enabled: t
 
 #### Applications not hosted in IIS
 
-To enable automatic instrumentation on For Windows applications not in IIS, you must set two environment variables before starting your application:
+To enable automatic instrumentation for Windows applications not hosted in IIS, you must set two environment variables before starting your application:
 
 Name                       | Value
 ---------------------------|------
@@ -131,7 +131,7 @@ Name                       | Value
   <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
 </div>
 
-#### Windows services
+##### Windows services
 
 To automatically instrument a Windows service, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables: 
 
@@ -150,7 +150,7 @@ Alternatively, you can set the environment variables by using the following Powe
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
 ```
 
-#### Console applications
+##### Console applications
 
 To automatically instrument a console application, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables from a batch file before starting your application:
 
@@ -174,7 +174,7 @@ dotnet.exe example.dll
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port, change it by setting these environment variables:
+3. While it is instrumenting your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port, change it by setting these environment variables:
 
     - `DD_AGENT_HOST`
     - `DD_TRACE_AGENT_PORT`
@@ -267,7 +267,7 @@ When using `systemctl` to run .NET applications as a service, you can also set e
     ```
 2. Verify that the environment variables were set by running `systemctl show-environment`.
 
-3. Restart the .NET service for the environment variable settings to take effect.
+3. Restart the .NET service for the environment variables to take effect.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
@@ -366,7 +366,7 @@ Tracer.Instance = tracer;
 
 {{% tab "JSON file" %}}
 
-To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be hashed with a key/value pair for each setting. For example:
+To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be an object with a key/value pair for each setting. For example:
 
 ```json
 {
