@@ -389,7 +389,6 @@ Datadog monitors every aspect of your Istio environment, so you can:
 - Map network communication between containers, pods, and services over the mesh with [Network Performance Monitoring][2].
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][10].
-Datadog monitors every aspect of your Istio setup, including:
 
 ## Configuration
 
