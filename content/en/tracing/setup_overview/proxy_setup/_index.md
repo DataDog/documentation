@@ -382,11 +382,11 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 {{% /tab %}}
 {{% tab "Istio" %}}
 
-Datadog monitors every aspect of your Istio environment, so you can
-- Drill into distributed traces for applications transacting over the mesh with APM (see below)
-- Assess the health of Envoy and Istio control plane with [logs][1]
-- Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][1]
-- Map network communication between containers, pods, and services over the mesh with [Network Performance Monitoring][2] 
+Datadog monitors every aspect of your Istio environment, so you can:
+- Drill into distributed traces for applications transacting over the mesh with APM (see below).
+- Assess the health of Envoy and Istio control plane with [logs][1].
+- Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][1].
+- Map network communication between containers, pods, and services over the mesh with [Network Performance Monitoring][2].
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][10].
 Datadog monitors every aspect of your Istio setup, including:
@@ -513,4 +513,3 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
