@@ -98,6 +98,6 @@ Datadog の[拡張メトリクス][4]および[分散型トレーシング][6]�
 [4]: /ja/serverless/enhanced_lambda_metrics
 [5]: /ja/serverless/deployment_tracking
 [6]: /ja/serverless/distributed_tracing
-[7]: /ja/blog/monitor-aws-lambda-provisioned-concurrency/
+[7]: https://www.datadoghq.com/blog/monitor-aws-lambda-provisioned-concurrency/
 [8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 [9]: /ja/integrations/amazon_lambda/#metrics

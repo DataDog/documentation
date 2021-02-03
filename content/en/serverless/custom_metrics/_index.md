@@ -44,8 +44,8 @@ In your function code, you must import the necessary methods from the Lambda Lib
 - `<METRIC_VALUE>` MUST be a number (i.e. integer or float).
 - `<TAG_LIST>` is optional and formatted, for example: `['owner:Datadog', 'env:demo', 'cooltag']`.
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,other" >}}
+{{< programming-lang lang="python" >}}
 
 ```python
 from datadog_lambda.metric import lambda_metric
@@ -60,9 +60,8 @@ def lambda_handler(event, context):
         tags=['product:latte', 'order:online']  # Associated tags
     )
 ```
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodeJS" >}}
 
 ```javascript
 const { datadog, sendDistributionMetric } = require('datadog-lambda-js');
@@ -88,9 +87,8 @@ module.exports.myHandler = datadog(myHandler, {
 });
 */
 ```
-
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 ```go
 package main
@@ -121,8 +119,8 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 ```ruby
 require 'datadog/lambda'
@@ -140,8 +138,8 @@ def handler(event:, context:)
 end
 ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
 
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
@@ -160,9 +158,8 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-{{% /tab %}}
-{{% tab "Other Runtimes" %}}
-
+{{< /programming-lang >}}
+{{< programming-lang lang="other" >}}
 
 Emitting [asynchronous custom metrics](#synchronous-vs-asynchronous-custom-metrics) is possible for any language or custom runtime. It works by printing a special JSON-formatted string in your Lambda function that the [Datadog Forwarder][1] identifies and submits to Datadog. To use this:
 
@@ -192,8 +189,8 @@ For example:
 **Note:** These custom metrics are submitted as [distributions](#custom-metrics). If you were previously submitting custom metrics another way, [consult the documentation on the implications of upgrading to distributions](#understanding-distribution-metrics).
 
 [1]: /serverless/forwarder/
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### Tagging Custom Metrics
 

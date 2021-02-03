@@ -1,3 +1,4 @@
 ---
 title: Organisations
+headless: true
 ---

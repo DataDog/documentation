@@ -390,7 +390,7 @@ The following options and tags are deprecated:
 
 Agent v6 ships JMXFetch, with the following changes:
 
-#### JMXTerm JAR
+#### Jmxterm
 
 Agent v6 does not ship the `jmxterm` JAR. To download and use `jmxterm`, refer to the [upstream project][1].
 

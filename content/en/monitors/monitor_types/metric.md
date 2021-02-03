@@ -181,7 +181,7 @@ Alternatively, if you are monitoring a metric over an auto-scaling group of host
 
 For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
 
-#### Auto Resolve
+#### Auto resolve
 
 `[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.
 

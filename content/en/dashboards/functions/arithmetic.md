@@ -21,7 +21,7 @@ into this one `abs(sin{*})`:
 
 ## Logarithm
 
-### log2
+### Log base 2
 
 | Function | Description                               | Example                  |
 | :----    | :-------                                  | :---------               |
@@ -33,7 +33,7 @@ If we have a metric `x{*}` that just increments itself by 1 for each data point,
 
 {{< img src="dashboards/functions/arithmetic/log2.png" alt=" log2 function"  style="width:80%;">}}
 
-### log10
+### Log base 10
 
 | Function  | Description                                | Example                   |
 | :----     | :-------                                   | :---------                |
@@ -45,7 +45,7 @@ If we have a metric `x{*}` that just increments itself by 1 for each data point,
 
 {{< img src="dashboards/functions/arithmetic/log10.png" alt="log10 function"  style="width:80%;">}}
 
-## Cumulative Sum
+## Cumulative sum
 
 | Function   | Description                                                          | Example                    |
 | :----      | :-------                                                             | :---------                 |

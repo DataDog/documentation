@@ -24,7 +24,7 @@ The Docker Agent produces the following events:
 - Restart Daemon
 - Update
 
-## Service Checks
+## Service checks
 
 - **docker.service_up**:
     Returns `CRITICAL` if the Agent is unable to collect the list of containers from the Docker daemon, otherwise returns `OK`.

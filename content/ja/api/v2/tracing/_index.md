@@ -1,3 +1,4 @@
 ---
 title: トレーシング
+headless: true
 ---

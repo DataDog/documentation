@@ -18,7 +18,7 @@ Certain product tabs also contain additional tools:
 * Custom Metrics Tab: Top Custom Metrics
 * Log Management Tab: Logs Usage by Index
 
-## Month-to-Date Summary
+## Month-to-date summary
 
 This section summarizes your month-to-date usage. In the "All" tab, you will see your month-to-date usage of infrastructure hosts, containers, custom metrics, APM hosts, logs and any other part of the platform you've used during the month. 
 
@@ -56,7 +56,7 @@ Month-to-date usage of each product is calculated as follows:
 | Synthetic Browser Tests  | Shows the sum of all Synthetic browser tests over all hours in the current month.                                           |
 | RUM Sessions             | Shows the sum of all distinct RUM sessions over all hours in the current month.                                             |
 
-## Overall Usage
+## Overall usage
 
 This section contains hourly, daily, monthly, and annual usage:
 
@@ -73,7 +73,7 @@ In product specific tabs, you will see your hourly, daily, monthly, and annual u
 
 {{< img src="account_management/billing/usage-details-v2-04.png" alt="Hourly Usage - Infra Hosts" >}}
 
-## Top Custom Metrics
+## Top custom metrics
 
 In the Custom Metrics tab, this table lists the following information about your Top 5000 custom metrics month-to-date usage and most recent day usage (i.e., usage on the date of the last update):
 
@@ -86,7 +86,7 @@ This data can be downloaded as a CSV file.
 
 {{< img src="account_management/billing/usage-details-v2-05.png" alt="Custom Metrics" >}}
 
-## Logs Usage by Index
+## Logs usage by index
 
 In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. The following information is provided:
 

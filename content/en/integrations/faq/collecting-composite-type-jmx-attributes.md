@@ -13,11 +13,11 @@ In the Agent, the yaml files for the following integrations are all read by JMXF
 * [Solr][4]
 * [Tomcat][5]
 
-## JMXFetch 'Simple' vs 'Composite' attributes
+## JMXFetch attributes
 
-There are two kinds of JMX attributes that JMXFetch is able to collect:
+There are two kinds of JMX attributes that JMXFetch is able to collect (simple and composite).
 
-### 'Simple attributes'
+### Simple attributes
 
 These are `integer`, `float`, `double`, `long`, `boolean` etc ...
 
@@ -42,7 +42,7 @@ That would give you the following configuration:
 
 JMXFetch extracts the attribute value directly and use it as the metric value. See [the JMX documentation][3] to learn how to collect it.
 
-### 'Composite' attributes
+### Composite attributes
 
 These can be seen as an array, a hashmap, or an object composed of 'simple' attributes.
 

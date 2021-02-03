@@ -49,39 +49,19 @@ Aqua チェックは [Datadog Agent][2] パッケージに含まれていない�
 
 Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Aqua チェックをインストールしてください。[バージョン 6.8 以前の Agent][4] または [Docker Agent][5] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][3]に関する Agent のガイドを参照してください。
 
-1. [開発ツールキット][6]をインストールします。
-2. integrations-extras リポジトリを複製します。
+1. [Datadog Agent をダウンロードして起動][2]します。
+2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
    ```shell
-   git clone https://github.com/DataDog/integrations-extras.git.
+   datadog-agent integration install -t datadog-aqua==<INTEGRATION_VERSION>
    ```
-
-3. `ddev` 構成を `integrations-extras/` パスで更新します。
-
-   ```shell
-   ddev config set extras ./integrations-extras
-   ```
-
-4. `aqua` パッケージをビルドします。
-
-   ```shell
-   ddev -e release build aqua
-   ```
-
-5. [Datadog Agent をダウンロードして起動][2]します。
-6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
-
-   ```shell
-   datadog-agent integration install -w <PATH_OF_AQUA_ARTIFACT>/<AQUA_ARTIFACT_NAME>.whl
-   ```
-
-7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
+3. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
 #### メトリクスの収集
 
-1. Aqua の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][8]のルートにある `conf.d/` フォルダーの `aqua.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル conf.yaml][9] を参照してください。
+1. Aqua の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーの `aqua.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル conf.yaml][8] を参照してください。
 
    ```yaml
    instances:
@@ -92,7 +72,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
    `api_user` パラメーターと `password` パラメーターの値を変更し、環境に合わせて構成してください。
 
-2. [Agent を再起動します][10]。
+2. [Agent を再起動します][9]。
 
 #### ログの収集
 
@@ -108,12 +88,12 @@ Aqua 監査ログを収集するには、以下の手順に従います。
 3. Webhook インテグレーションをアクティブにします。
 4. このインテグレーションを有効にし、エンドポイント `https://http-intake.logs.datadoghq.com/v1/input/<DATADOG_API_KEY>?ddsource=aqua` を追加します。
 
-   - `<DATADOG_API_キー>` は、ご使用の [Datadog API キー][11]に置き換えます。
+   - `<DATADOG_API_KEY>` は、ご使用の [Datadog API キー][10]に置き換えます。
    - _注_: EU リージョンの場合は、エンドポイントの `.com` を `.eu` に置き換えます。
 
     Aqua エンフォーサーログを収集するには、以下のようにします (**Agent 6.0 以上で有効**)。
 
-5. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[daemonset 構成][12]でこれを有効にします。
+5. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[daemonset コンフィギュレーション][11]でこれを有効にします。
 
    ```yaml
      # (...)
@@ -126,13 +106,13 @@ Aqua 監査ログを収集するには、以下の手順に従います。
      # (...)
    ```
 
-   [こちらのマニフェスト][13]のように、Docker ソケットを Datadog Agent にマウントします。
+    [こちらのマニフェスト][12]のように、Docker ソケットを Datadog Agent にマウントします。
 
-6. [Agent を再起動します][10]。
+6. [Agent を再起動します][9]。
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][14]し、Checks セクションで `aqua` を探します。
+[Agent の `status` サブコマンドを実行][13]し、Checks セクションで `aqua` を探します。
 
 ## 収集データ
 
@@ -152,21 +132,20 @@ Aqua には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][16]までお問合せください。
+ご不明な点は [Datadog サポート][15]までお問い合わせください。
 
 [1]: https://www.aquasec.com
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[6]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[7]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[8]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
-[9]: https://github.com/DataDog/integrations-extras/blob/master/aqua/datadog_checks/aqua/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
-[11]: https://app.datadoghq.com/account/settings#api
-[12]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
-[13]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#create-manifest
-[14]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[15]: https://github.com/DataDog/integrations-extras/blob/master/aqua/metadata.csv
-[16]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[7]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
+[8]: https://github.com/DataDog/integrations-extras/blob/master/aqua/datadog_checks/aqua/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
+[10]: https://app.datadoghq.com/account/settings#api
+[11]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
+[12]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#create-manifest
+[13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
+[14]: https://github.com/DataDog/integrations-extras/blob/master/aqua/metadata.csv
+[15]: https://docs.datadoghq.com/ja/help/

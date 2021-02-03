@@ -1,3 +1,4 @@
 ---
 title: インシデントサービス
+headless: true
 ---

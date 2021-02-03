@@ -8,15 +8,15 @@ aliases:
 
 Interact with your dashboard lists through the API to make it easier to organize, find, and share all of your dashboards with your team and organization.
 
-- [Get Items of a Dashboard List](#get-items-of-a-dashboard-list)
-- [Add Items to a Dashboard List](#add-items-to-a-dashboard-list)
-- [Update Items of a Dashboard List](#update-items-of-a-dashboard-list)
-- [Delete Items from a Dashboard List](#delete-items-from-a-dashboard-list)
+- [Get items of a dashboard list](#get-items-of-a-dashboard-list)
+- [Add items to a dashboard list](#add-items-to-a-dashboard-list)
+- [Update items of a dashboard list](#update-items-of-a-dashboard-list)
+- [Delete items from a dashboard list](#delete-items-from-a-dashboard-list)
 
-## Get Items of a Dashboard List
+## Get items of a dashboard list
 
 <div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#get-items-of-a-dashboard-list"> Get Items of a Dashboard List V2 endpoint</a> instead.
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#get-items-of-a-dashboard-list">get items of a dashboard list v2 endpoint</a> instead.
 </div>
 
 ### Signature
@@ -25,7 +25,7 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#get-i
 
 ### Examples
 
-#### Example Request
+#### Example request
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -75,7 +75,7 @@ curl -X GET \
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Example Response
+#### Example response
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -373,10 +373,10 @@ curl -X GET \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Add Items to a Dashboard List
+## Add items to a dashboard list
 
 <div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#add-items-to-a-dashboard-list"> Add Items to a Dashboard List V2 endpoint</a> instead.
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#add-items-to-a-dashboard-list">add items to a dashboard list v2 endpoint</a> instead.
 </div>
 
 ### Signature
@@ -402,7 +402,7 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#add-i
 
 ### Examples
 
-#### Example Request
+#### Example request
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -524,7 +524,7 @@ curl -X ADD -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Example Response
+#### Example response
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -624,10 +624,10 @@ curl -X ADD -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Update Items of a Dashboard List
+## Update items of a dashboard list
 
 <div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list"> Update Items of a Dashboard List V2 endpoint</a> instead.
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list">update items of a dashboard list v2 endpoint</a> instead.
 </div>
 
 ### Signature
@@ -653,7 +653,7 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#updat
 
 ### Examples
 
-#### Example Request
+#### Example request
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -778,7 +778,7 @@ curl -X UPDATE -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Example Response
+##### Example response
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -877,10 +877,10 @@ curl -X UPDATE -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Delete Items from a Dashboard List
+## Delete items from a dashboard list
 
 <div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list"> Delete Items from a Dashboard List V2 endpoint</a> instead.
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list">delete items from a dashboard list v2 endpoint</a> instead.
 </div>
 
 ### Signature
@@ -906,7 +906,7 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#delet
 
 ### Examples
 
-#### Example Request
+#### Example request
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1031,7 +1031,7 @@ curl -X DELETE -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Example Response
+#### Example response
 
 {{< tabs >}}
 {{% tab "Python" %}}

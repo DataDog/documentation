@@ -8,7 +8,7 @@ private: true
 
 * [Datadog data collection, resolution, and retention][1]
 
-## APIs, Libraries and Community Contributions
+## APIs, libraries, and community contributions
 
 ### API
 
@@ -17,7 +17,7 @@ private: true
 * [Data aggregation with DogStatsD/Threadstats][4]
 * [Is there an alternative to DogStatsD and the api to submit metrics? Threadstats][5]
 
-### Libraries and Community Contributions
+### Libraries and community contributions
 
 * [OmniOS (and possibly OpenIndiana/Nexenta): install from source by tweaking the Agent install script ][6]
 * [Is it possible to integrate with ThousandEyes?][7]

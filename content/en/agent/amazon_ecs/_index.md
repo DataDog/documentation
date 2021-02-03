@@ -38,7 +38,7 @@ To begin setup, run the [Datadog Agent][5] on every EC2 instance in your ECS clu
 
 **Note:** Datadog's [Autodiscovery][7] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
-### Create an ECS Task
+### Create an ECS task
 
 This task launches the Datadog container. When you need to modify the configuration, update this task definition as described [further down in this guide](#create-or-modify-your-iam-policy).
 
@@ -88,9 +88,9 @@ Configure the task using either the [AWS CLI tools][12] or using the Amazon Web 
 aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.json>
 ```
 
-[1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
-[2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
-[3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
+[1]: /resources/json/datadog-agent-ecs.json
+[2]: /resources/json/datadog-agent-ecs1.json
+[3]: /resources/json/datadog-agent-ecs-win.json
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: /agent/amazon_ecs/logs/
 [6]: /agent/amazon_ecs/apm/
@@ -110,6 +110,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 11. For **Image** enter `gcr.io/datadoghq/agent:latest`.
 12. For **Maximum memory** enter `256`. **Note**: For high resource usage, you may need a higher memory limit.
 13. Scroll down to the **Advanced container configuration** section and enter `10` in **CPU units**.
+**Note**: For Windows, enter at least `512` in **CPU units** to avoid getting the error `Timeout while starting the service`.
 14. For **Env Variables**, add a **Key** of `DD_API_KEY` and enter your Datadog API Key in the value. *If you feel more comfortable storing secrets like this in s3, take a look at the [ECS Configuration guide][1].*
 15. Add another Environment Variable for any tags you want to add using the key `DD_TAGS`.
 16. Scroll down to the **Storage and Logging** section.
@@ -134,11 +135,11 @@ Add the following permissions to your [Datadog IAM policy][13] to collect Amazon
 | `ecs:ListServices`               | Lists the services that are running in a specified cluster.   |
 | `ecs:DescribeContainerInstances` | Describes Amazon ECS container instances.                     |
 
-### Run the Agent as a Daemon Service
+### Run the Agent as a daemon service
 
 Ideally, you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [Daemon Service][15].
 
-#### Schedule a Daemon Service in AWS using Datadog's ECS Task
+#### Schedule a daemon service in AWS using Datadog's ECS task
 
 1. Log in to the AWS console and navigate to the ECS Clusters section. Click into your cluster you run the Agent on.
 2. Create a new service by clicking the **Create** button under Services.

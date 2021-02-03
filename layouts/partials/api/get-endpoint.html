@@ -1,0 +1,41 @@
+{{ $dot := . }}
+{{ $s := newScratch }}
+{{ $operationids := .operationids }}
+{{ $spec := .spec }}
+{{ $generalRegions := .generalRegions }}
+
+{{ range $path_key, $path_object := $spec.paths }}
+    {{ range $action_type, $action := $path_object }}
+        {{ if in $operationids $action.operationId }}
+            {{ $s.SetInMap "data" "pathKey" $path_key }}
+            {{ $s.SetInMap "data" "actionType" $action_type }}
+            {{ $s.SetInMap "data" "action" $action }}
+            {{ $s.Set "regions" dict }}
+            {{ with $action.servers }}
+                {{ $servers := index . 0 }}
+                {{ $serverURL := ""}}
+                {{ if isset $servers.variables.site "enum" }}
+                    <!-- If we have an enum for the site variable, we have several regions -->
+                    {{ range $domain := $servers.variables.site.enum }}
+                        {{ $serverURL = replace $servers.url "{subdomain}" $servers.variables.subdomain.default  }}
+                        {{ $serverURL = replace $serverURL "{site}" $domain  }}
+                        {{ range $allowedRegion := site.Params.allowedRegions }}
+                            {{ if eq $allowedRegion.domain $domain }}
+                                {{ $s.SetInMap "regions" $allowedRegion.value $serverURL }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ else }}
+                    <!-- If not, we're in a case where we talk to the local agent endpoint, like for tracing -->
+                    {{ $serverURL = replace $servers.url "{site}" $servers.variables.site.default }}
+                    {{ $s.SetInMap "regions" "local" $serverURL }}
+                {{ end }}
+            {{ else }}
+                {{ $s.Set "regions" $generalRegions }}
+            {{ end }}
+            {{ $s.SetInMap "data" "regions" ($s.Get "regions") }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ return ($s.Get "data") }}

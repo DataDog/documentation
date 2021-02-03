@@ -33,7 +33,7 @@ Live processes do not appear in containers (except for the Datadog Agent).
 
 Live processes do not appear in containers (except for the Datadog Agent).
 
-### Scheduling of the Datadog Agent and Kube State Metrics on mixed clusters (Linux + Windows)
+### Mixed clusters (Linux + Windows)
 
 The recommended way of deploying the Datadog Agent on a mixed cluster is to perform two installations of our Helm chart with a different `targetSystem`.
 
@@ -57,7 +57,7 @@ kube-state-metrics:
 
 **Note**: When using two Datadog installations (one with `targetSystem: linux`, one with `targetSystem: windows`), make sure the second one has `datadog.kubeStateMetricsEnabled` set to `false` to avoid deploying two instances of Kube State Metrics.
 
-### HostPort for APM/DogStatsD
+### HostPort for APM or DogStatsD
 
 `HostPort` is partially supported on Kubernetes, depending on the underlying OS version and CNI plugin.
 Requirements to have `HostPort` working are the following:

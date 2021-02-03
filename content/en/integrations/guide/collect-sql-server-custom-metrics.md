@@ -97,7 +97,7 @@ Collecting metrics from a custom procedure produces a large amount of custom met
 
 **Note**: If you are using Agent < 6.11, you need to have set up the `adodbapi` driver in order for this to work.
 
-### Setup a Stored Procedure
+### Setup a stored procedure
 
 A temporary table must be setup to collect the custom metrics for reporting to Datadog. The table needs the following columns:
 

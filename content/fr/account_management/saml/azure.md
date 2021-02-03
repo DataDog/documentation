@@ -11,12 +11,12 @@ further_reading:
     tag: Documentation
     text: Configurer des équipes et organisations avec plusieurs comptes
 ---
-Suivez les étapes ci-dessous pour configurer Azure AD en tant que fournisseur d'identité (IdP) SAML dans Datadog. **Remarque** : un abonnement Azure AD Premium est requis.
+Suivez les étapes ci-dessous pour configurer Azure AD en tant que fournisseur d'identité SAML dans Datadog. **Remarque** : un abonnement Azure AD est requis. Si vous n'avez pas d'abonnement, créez un [compte gratuit][1].
 
 ## Configuration
 ### Azure
 
-1. Ouvrez le [portail Azure][1] et connectez-vous en tant qu'administrateur ou coadministrateur général.
+1. Ouvrez le [portail Azure][2] et connectez-vous en tant qu'administrateur ou co-administrateur global.
 
 2. Accédez à _Azure Active Directory_ -> _Enterprise applications_ -> _New application_.
 
@@ -30,12 +30,12 @@ Suivez les étapes ci-dessous pour configurer Azure AD en tant que fournisseur 
 
 7. Sur la page **Select a single sign-on method**, cliquez sur **SAML**. 
 
-8. Récupérez vos informations `Service Provider Entity ID` et `Assertion Consumer Service URL` depuis la [page SAML de Datadog][2]. Les valeurs par défaut sont les suivantes :
+8. Récupérez vos informations `Service Provider Entity ID` et `Assertion Consumer Service URL` depuis la [page SAML de Datadog][3]. Les valeurs par défaut sont les suivantes :
 
-    |                                |                                                                            |
-    |--------------------------------|----------------------------------------------------------------------------|
-    | Service Provider Entity ID     | `https://app.{{< region-param key="dd_site" >}}/account/saml/metadata.xml` |
-    | Assertion Consumer Service URL | `https://app.{{< region-param key="dd_site" >}}/account/saml/assertion`    |
+    |                                |                                                                                                                |
+    |--------------------------------|----------------------------------------------------------------------------------------------------------------|
+    | Service Provider Entity ID     | `https://{{< region-param key="dd_full_site" >}}/account/saml/metadata.xml` |
+    | Assertion Consumer Service URL | `https://{{< region-param key="dd_full_site" >}}/account/saml/assertion`    |
 
 9.  Dans Azure, ajoutez les valeurs récupérées ci-dessus et cliquez sur Save :
 
@@ -50,7 +50,7 @@ Suivez les étapes ci-dessous pour configurer Azure AD en tant que fournisseur 
 
 ### Datadog
 
-1. Accédez à la [page SAML de Datadog][2].
+1. Accédez à la [page SAML de Datadog][3].
 
 2. Choisissez et importez le fichier **SAML XML Metadata** téléchargé depuis Azure.
 
@@ -66,7 +66,7 @@ Suivez les étapes ci-dessous pour configurer Azure AD en tant que fournisseur 
 
 Si vous utilisez l'authentification unique à l'aide d'un bouton ou d'un lien Datadog, une URL d'authentification est requise :
 
-1. Récupérez votre URL d'authentification unique depuis la [page SAML de Datadog][2] :
+1. Récupérez votre URL d'authentification unique depuis la [page SAML de Datadog][3] :
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13"  style="width:70%;">}}
 
@@ -78,5 +78,6 @@ Si vous utilisez l'authentification unique à l'aide d'un bouton ou d'un lien Da
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://portal.azure.com
-[2]: https://app.datadoghq.com/saml/saml_setup
+[1]: https://azure.microsoft.com/free/
+[2]: https://portal.azure.com
+[3]: https://app.datadoghq.com/saml/saml_setup

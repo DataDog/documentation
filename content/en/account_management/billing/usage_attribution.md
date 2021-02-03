@@ -45,7 +45,7 @@ The **Applied Tags** section enables the following:
 - If tags are changed, the new reports will reflect the new tags. However, the previous reports will keep the old ones.
 - Monthly reports reflect the latest set of tags. If you change tags mid-month, the usage percentages might not match up.
 
-### Monthly Usage Attribution
+### Monthly usage attribution
 
 Once the reports start being generated, they are updated daily and aggregated monthly in this table.
 
@@ -59,7 +59,7 @@ Once the reports start being generated, they are updated daily and aggregated mo
 
 Monthly data can also be pulled using the tool's public API. (See the [API endpoint documentation][1]).
 
-### Daily Usage Attribution
+### Daily usage attribution
 
 This section provides daily reports at an hourly granularity to dig into timeframes. It also provides a concatenation of all reports during a given month.
 
@@ -85,7 +85,7 @@ The table below shows a sample daily report for Custom Metrics usage two tags: `
 - `|` (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
 - A valid tag value (see the [Defining Tags documentation][3]) refers to the actual value of the respective tag.
 
-#### Further Data Analysis
+#### Further data analysis
 
 When using multiple tags, both the Daily and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
 

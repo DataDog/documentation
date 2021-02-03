@@ -9,7 +9,7 @@ further_reading:
 
 {{< img src="monitors/faq/Require_screen.png" alt="Require_screen"  >}}
 
-There are 2 main scenarios for which you'll likely need to **require a full window of data** for evaluation:
+Sometimes, you do not want evaluation to occur on sparse data. There are 2 main scenarios for which you'll likely need to **require a full window of data** for evaluation:
 
 * Multi-alert [monitors][1] triggering a separate alert per {group}, where new groups can appear.
 * [Monitors][1] using the alerting method **In total**.

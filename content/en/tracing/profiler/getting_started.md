@@ -22,9 +22,8 @@ Profiler is shipped within the following tracing libraries. Select your language
 
 To get notified when a private beta is available for the **Node**, **Ruby**, **PHP**, or **.NET** Profiler, [sign up here][1].
 
-
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,go" >}}
+{{< programming-lang lang="java" >}}
 
 The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 (version 8u262+)][2] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
 
@@ -74,9 +73,8 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 [4]: https://app.datadoghq.com/profiling
 [5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [6]: /tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
-
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 The Datadog Profiler requires Python 2.7+. Memory profiling is available on Python 3.5+. To begin profiling applications:
 
@@ -147,9 +145,9 @@ Recommended for advanced usage only.
 [2]: https://app.datadoghq.com/profiling
 [3]: /tracing/visualization/#services
 [4]: /tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
-{{% tab "Go" %}}
 
 The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
@@ -215,9 +213,9 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
 [6]: /tracing/visualization/#services
 [7]: /tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
-{{< /tabs >}}
 
 
 ## Further Reading

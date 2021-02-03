@@ -34,7 +34,7 @@ The private location worker is available on Docker Hub:
 |---------------------------------------------------------------------------|
 | [hub.docker.com/r/datadog/synthetics-private-location-worker][3]          |
 
-## Create your Private Location
+## Create your private location
 
 1. Set up a [Vagrant Ubuntu 16.04 virtual machine][2].
 2. Install [Docker][4] on that machine.
@@ -65,7 +65,7 @@ The private location worker is available on Docker Hub:
 
 You are now able to use your new private location as any other Datadog managed locations to run Synthetic tests.
 
-## Run Synthetic Tests with your Private Location
+## Run synthetic tests with your private location
 
 1. Create an API or a Browser on any internal endpoint or application you want to monitor.
 2. Select the new private location under **Private Locations**:

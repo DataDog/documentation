@@ -14,7 +14,7 @@ Read APM documentation on [APM Billing][2] to understand how billing works for A
 
 App Analytics is billed on the basis of [Indexed Span][3] count. You can choose to configure [App Analytics][4] per service to manually control the number of Indexed Spans being generated using the following tools. Note that this, however, limits App Analytics functionality on those services or integration.
 
-## Choose Indexed Span Retention
+## Indexed span retention
 
 App Analytics Pricing depends on the retention policy of Indexed Spans. You can control your bill by choosing the duration Indexed Spans are retained for.
 
@@ -27,7 +27,7 @@ App Analytics Pricing depends on the retention policy of Indexed Spans. You can 
 
 Prices reflect annual billing. Contact [Sales][5] or your [Customer Success][6] Manager to discuss volume discounts for your account.
 
-## Indexed Span Estimator
+## Indexed span estimator
 
 [Indexed Span Estimator][7] is designed to help you decide which services to configure with App Analytics while keeping usage and cost in your control.
 
@@ -45,7 +45,7 @@ For example, if you have 1,750,000,000 Indexed Spans per month for 15 days (defa
 
 1,750,000,000 Indexed Spans per month * $1.70 / 1 million Indexed Spans = **$2,975 per month** for App Analytics
 
-## Indexed Span Filtering
+## Indexed span filtering
 
 [Span filtering][9] is configured to send Indexed Spans at 100% throughput by default. For example, a Java service with 100 requests generates 100 Indexed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Indexed Span.
 

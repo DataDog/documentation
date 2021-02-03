@@ -1,3 +1,4 @@
 ---
 title: ホスト
+headless: true
 ---

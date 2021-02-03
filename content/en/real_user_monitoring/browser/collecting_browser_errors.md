@@ -22,7 +22,7 @@ further_reading:
 
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
-## Error Origins
+## Error origins
 Front-end errors are split into four different categories depending on their `error.origin`:
 
 - **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the network errors documentation][1].
@@ -30,9 +30,9 @@ Front-end errors are split into four different categories depending on their `er
 - **console**: `console.error()` API calls.
 - **custom**: Errors sent with the [RUM `addError` API](#collect-errors-manually) that default to `custom`.
 
-## Error Attributes
+## Error attributes
 
-For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling, global context, or custom user actions, see [Advanced Configuration][3].
+For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Advanced Configuration][3].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -66,7 +66,7 @@ Source errors include code-level information about the error. More information a
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                   |
 
-## Collect Errors Manually
+## Collect errors manually
 
 Monitor handled exceptions, handled promise rejections and other errors not tracked automatically by the RUM SDK with the `addError()` API:
 

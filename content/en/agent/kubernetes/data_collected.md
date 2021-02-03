@@ -38,17 +38,17 @@ Metrics collected by the Agent when deployed on your Kubernetes cluster:
 
 {{< get-metrics-from-git "kubelet" >}}
 
-### kube-state-metrics
+### Kubernetes state
 
 Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics` API.
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
-### kube-dns
+### Kubernetes DNS
 
 {{< get-metrics-from-git "kube_dns" >}}
 
-### Kubernetes Proxy
+### Kubernetes proxy
 
 {{< get-metrics-from-git "kube_proxy" >}}
 
@@ -83,7 +83,7 @@ As the 5.17.0 release, Datadog Agent now supports built in [leader election opti
 - Unable
 - Unhealthy
 
-## Service Checks
+## Service checks
 
 The Kubernetes check includes the following service checks:
 

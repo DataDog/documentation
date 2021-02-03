@@ -263,7 +263,7 @@ Comme indiqué dans le [rapport Bilan sur l'adoption de l'informatique sans serv
 
 Par exemple, Datadog propose une [intégration DynamoDB][11] qui recueille les métriques et les logs de performance des tables DynamoDB. Datadog offre également une intégration Amazon SQS permettant d'ingérer les métriques SQS et de recueillir les logs lors des appels d'API SQS. Ces deux intégrations sont associées respectivement à des dashboards prêts à l'emploi pour les [tables DynamoDB][11] et [SQS][12]. Les intégrations disponibles pour d'autres services communs sans serveur sont énumérées ci-dessous : 
 
-**Data Stores :** RDS, Aurora, auto-hébergé, S3  
+**Data Stores :** RDS, Aurora, auto-hébergement, S3  
 **Files d'attente de messages :** SNS, SQS, Kinesis  
 **Fonctions Lambda :** [AWS Step Functions][13]  
 

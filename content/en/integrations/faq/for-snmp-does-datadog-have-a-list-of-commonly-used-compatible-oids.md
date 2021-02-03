@@ -13,7 +13,9 @@ To see the available OIDs for your system, login to your Cisco account and searc
 
 Linux OIDs (these tend to work for network devices like F5 too)
 
-### CPU Statistics
+## Statistics
+
+### CPU
 
 * 1 minute Load: .1.3.6.1.4.1.2021.10.1.3.1
 * 5 minute Load: .1.3.6.1.4.1.2021.10.1.3.2
@@ -26,7 +28,7 @@ Linux OIDs (these tend to work for network devices like F5 too)
 * raw idle cpu time: .1.3.6.1.4.1.2021.11.53.0
 * raw nice cpu time: .1.3.6.1.4.1.2021.11.51.0
 
-### Memory Statistics
+### Memory
 
 * Total Swap Size: .1.3.6.1.4.1.2021.4.3.0
 * Available Swap Space: .1.3.6.1.4.1.2021.4.4.0
@@ -37,7 +39,7 @@ Linux OIDs (these tend to work for network devices like F5 too)
 * Total RAM Buffered: .1.3.6.1.4.1.2021.4.14.0
 * Total Cached Memory: .1.3.6.1.4.1.2021.4.15.0
 
-### Disk Statistics
+### Disk
 
 * Path where the disk is mounted: .1.3.6.1.4.1.2021.9.1.2.1
 * Path of the device for the partition: .1.3.6.1.4.1.2021.9.1.3.1

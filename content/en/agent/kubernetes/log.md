@@ -400,7 +400,7 @@ The following ConfigMap defines the integration template for `redis` containers 
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: redis-config-map
+  name: redisdb-config-map
   namespace: default
 data:
   redisdb-config: |-

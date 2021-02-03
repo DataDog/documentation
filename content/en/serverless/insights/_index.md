@@ -99,6 +99,6 @@ No invocation in the selected time range used more than 10% of the allocated mem
 [4]: /serverless/enhanced_lambda_metrics
 [5]: /serverless/deployment_tracking
 [6]: /serverless/distributed_tracing
-[7]: /blog/monitor-aws-lambda-provisioned-concurrency/
+[7]: https://www.datadoghq.com/blog/monitor-aws-lambda-provisioned-concurrency/
 [8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 [9]: /integrations/amazon_lambda/#metrics

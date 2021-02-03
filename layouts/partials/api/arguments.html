@@ -1,0 +1,138 @@
+{{ $context := .context }}
+{{ $s := newScratch }}
+{{ $parameters := .parameters }}
+{{ $s.Set "queryStrings" slice }}
+{{ $s.Set "pathParams" slice }}
+{{ $s.Set "headerParams" slice }}
+
+{{ with $parameters }}
+    <h3 class="mb-2">{{ i18n "arguments" }}</h3>
+
+    {{ range . }}
+        {{ if eq .in "query"}}
+            {{ $s.Add "queryStrings" .  }}
+        {{ else if eq .in "path"}}
+            {{ $s.Add "pathParams" .  }}
+        {{ else if eq .in "header"}}
+            {{ $s.Add "headerParams" .  }}
+        {{ end }}
+    {{ end }}
+
+    {{ $queryStrings := $s.Get "queryStrings" }}
+    {{ $pathParams := $s.Get "pathParams" }}
+    {{ $headerParams := $s.Get "headerParams" }}
+    <!-- Set for curl to use via dollarscratch -->
+    {{ $context.Scratch.Set "queryStrings" $queryStrings }}
+    {{ $context.Scratch.Set "pathParams" $pathParams }}
+    {{ $context.Scratch.Set "headerParams" $headerParams }}
+
+    {{ with $pathParams }}
+        <h4 class="text-capitalize">{{ i18n "path_parameters" }}</h4>
+        <div class=" schema-table row">
+            <div class="col-12">
+              <div class="row table-header">
+                <div class="col-4 column">
+                  <p class="font-semibold">{{ i18n "name" }}</p>
+                </div>
+                <div class="col-2 column">
+                  <p class="font-semibold">{{ i18n "type" }}</p>
+                </div>
+                <div class="col-6 column">
+                  <p class="font-semibold">{{ i18n "description" }}</p>
+                </div>
+              </div>
+              {{ range . }}
+                    <div class="row ">
+                        <div class="col-12 first-column">
+                        <div class="row first-row ">
+                            <div class="col-4 column">
+                                <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
+                            </div>
+                            <div class="col-2 column">
+                                <p>{{ .schema.type }}</p>
+                            </div>
+                            <div class="col-6 column">
+                                <p>{{ .description | markdownify }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+              {{ end }}
+            </div>
+        </div>
+    {{ end }}
+
+    {{ with $queryStrings }}
+        <h4 class="text-capitalize">{{ i18n "query_strings" }}</h4>
+        <div class=" schema-table row">
+            <div class="col-12">
+              <div class="row table-header">
+                <div class="col-4 column">
+                  <p class="font-semibold">{{ i18n "name" }}</p>
+                </div>
+                <div class="col-2 column">
+                  <p class="font-semibold">{{ i18n "type" }}</p>
+                </div>
+                <div class="col-6 column">
+                  <p class="font-semibold">{{ i18n "description" }}</p>
+                </div>
+              </div>
+              {{ range . }}
+                    <div class="row ">
+                        <div class="col-12 first-column">
+                        <div class="row first-row ">
+                            <div class="col-4 column">
+                                <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
+                            </div>
+                            <div class="col-2 column">
+                                <p>{{ .schema.type }}</p>
+                            </div>
+                            <div class="col-6 column">
+                                <p>{{ .description | markdownify }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+              {{ end }}
+            </div>
+        </div>
+    {{ end }}
+
+
+    {{ with $headerParams }}
+        <h4 class="text-capitalize">{{ i18n "header_parameters" }}</h4>
+        <div class=" schema-table row">
+            <div class="col-12">
+              <div class="row table-header">
+                <div class="col-4 column">
+                  <p class="font-semibold">{{ i18n "name" }}</p>
+                </div>
+                <div class="col-2 column">
+                  <p class="font-semibold">{{ i18n "type" }}</p>
+                </div>
+                <div class="col-6 column">
+                  <p class="font-semibold">{{ i18n "description" }}</p>
+                </div>
+              </div>
+              {{ range . }}
+                    <div class="row ">
+                        <div class="col-12 first-column">
+                        <div class="row first-row ">
+                            <div class="col-4 column">
+                                <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
+                            </div>
+                            <div class="col-2 column">
+                                <p>{{ .schema.type }}</p>
+                            </div>
+                            <div class="col-6 column">
+                                <p>{{ .description | markdownify }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+              {{ end }}
+            </div>
+        </div>
+    {{ end }}
+
+{{ end }}

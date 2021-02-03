@@ -17,11 +17,11 @@ To install Datadog and integrate it with the JBoss EAP 7, ensure the following c
 * JBoss EAP 7 has been configured and is functioning.
 * NTPD has been installed and configured, and is running on each of the systems to be used.
 
-### Datadog Agent Installation
+### Datadog Agent installation
 
 [Follow the Agent installations for CentOS/RedHat][1]
 
-### JBoss EAP 7 Edits
+### JBoss EAP 7 edits
 
 Add the following lines to the `domain.xml` file:
 

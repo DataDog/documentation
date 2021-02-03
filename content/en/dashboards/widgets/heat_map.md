@@ -37,7 +37,7 @@ Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your da
 
 ### Options
 
-#### Event Overlay
+#### Event overlay
 
 Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][1], for example:
 

@@ -77,6 +77,20 @@ $ddpurple: #632ca6;
             display: none;
         }
     }
+
+    .endpoint {
+      &.isCollapsed {
+        a.js-collapse-trigger {
+          padding-left:20px;
+        }
+      }
+      .toggle-arrow {
+        position:absolute;
+        &.expanded {
+          transform: rotate(90deg);
+        }
+      }
+    }
 }
 
 .api {
