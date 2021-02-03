@@ -91,6 +91,6 @@ For more information, see the [Secrets Management][20] documentation.
 [15]: https://access.redhat.com/containers
 [16]: mailto:security@datadoghq.com
 [17]: https://www.datadoghq.com/8869756E.asc.txt
-[18]: https://docs.datadoghq.com/agent/faq/windows-agent-ddagent-user/
+[18]: /agent/faq/windows-agent-ddagent-user/
 [19]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
 [20]: /agent/guide/secrets-management/
