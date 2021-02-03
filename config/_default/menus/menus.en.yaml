@@ -1843,7 +1843,7 @@ main:
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 6 
+    weight: 6
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
