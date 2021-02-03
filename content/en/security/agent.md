@@ -20,7 +20,7 @@ Customers can send data to the Datadog service by using a locally installed [Age
 
 The official repositories and/or binary packages of the Agent are signed. Verify the distribution channel by checking the signature against one of the following public keys:
 
-- Linux DEB pacakges and repo metadata:
+- Linux DEB packages and repo metadata:
   - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][4]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][5]
 - Linux RPM packages and repo metadata:
