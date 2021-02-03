@@ -30,38 +30,68 @@ The Logs Explorer is your home base for troubleshooting and exploration:
 
 Different views offer different types of insights from your log data, matching a [search query][1].
 
-### Live Tail
+## Live Queries
 
 The Live Tail displays logs as they flow into Datadog. Live Tail logs do not persist, but the view provides visibility on **all** logs, whether they are indexed or not. Find out more in the [Log Live Tail section][2].
 
 {{< img src="logs/explorer/log_explorer_walkthrough_livetail.gif" alt="Log Livetail" style="width:60%;" >}}
 
-### Log Lists
+## Queries on Indexed Data
+
+Navigate all [indexed logs][31] in the Log Explorer: filter and aggregate your logs and visualise the outcome of these queries.
+
+### Filters
 
 
-#### Individual Logs
 
-The Log List displays indexed logs and offers privileged tools to navigate **individual results**. Find out more in the [Log List section][3].
+### Aggregations and Measures
 
-{{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="Log List" style="width:60%;" >}}
+Logs can be valuable as individual events. However, the information valuable for troubleshooting or reporting resides on higher level entities aggregated from logs. With the Log Explorer, aggregate logs on-the-fly and derive consolidated information from there.
 
-#### Log Patterns
+#### Simple Groups
 
-The Log Patterns automatically aggregate indexed logs into a **handful of groups** with similar structures. Find out more in the [Log Patterns section][4].
+With the simple group aggregation, all logs matching the query filter are aggregated into groups based on the value of that facet for logs. 
 
-{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
+On top of these groups, you can extract the following measures:
+* **count of logs** per group
+* **unique count** of coded values for a facet
+* **statistical operations** (min/max, avg and percentiles) on numerical values of a facet
 
-#### Log Transactions
+Groups support the [Timeseries](#timeseries), [Toplist](#toplist) and [Table](#table) visualizations.
+
+Note that individual logs having multiple values for a single facet would belong to that many groups. For instance, a log having the `team:sre` and the `team:marketplace` tags would be counted once in the `team:sre` group and once in the `team:marketplace` group.
+
+#### Patterns
+
+With pattern aggregation, logs having messages with similar structures are grouped altogether.
+
+Patterns support the List visualisation.
+
+#### Transactions
 
 The Log Transactions automatically aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. Find out more in the [Log Transactions section][5].
 
 {{< img src="logs/explorer/log_explorer_walkthrough_transactions.png" alt="Log Transactions" style="width:60%;" >}}
 
-### Log Analytics
+Transaction support the [List](#lists) visualisation.
+
+### Visualisations
 
 The Log Analytics **graph** log queries and see maximums, averages, percentiles, unique counts, and more. Follow the [log graphing guide][6] to learn more about all the graphing options.
 
-{{< img src="logs/explorer/log_explorer_walkthrough_analytics.png" alt="Log Analytics" style="width:60%;" >}}
+#### Lists
+
+The Log List displays indexed logs and offers privileged tools to navigate **individual results**. Find out more in the [Log List section][3].
+
+
+#### Timeseries
+
+#### Toplists
+
+#### Nested Tables
+
+
+
 
 ## The Log Side Panel
 
@@ -183,3 +213,5 @@ Use saved views to automatically configure your log explorer with a preselected 
 [19]: /logs/processing/
 [20]: /dashboards/guide/custom_time_frames
 [21]: /logs/explorer/saved_views/
+
+[31]: /logs/indexes
