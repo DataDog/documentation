@@ -16,7 +16,7 @@ further_reading:
       text: 'Network Widget'
 ---
 
-Datadog Network Performance Monitoring (NPM) is designed to give you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can: 
+Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can: 
 
 - Pinpoint unexpected or latent service dependencies
 - Optimize costly cross-regional or multi-cloud communication
