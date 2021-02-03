@@ -52,7 +52,7 @@ Datadog Network Performance Monitoring does not currently support macOS platform
 
 ### Container Setups
 
-NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][13], [Kubernetes][14], [ECS][15], and other container technologies. Datadog’s container integrations enable you to aggregate traffic by meaningful entities -- such as containers, tasks, pods, clusters, and deployments -- with out of the box tags (e.g. `container_name`, `task_name`, `kube_service`). 
+NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][13], [Kubernetes][14], [ECS][15], and other container technologies. Datadog’s container integrations enable you to aggregate traffic by meaningful entities -- such as containers, tasks, pods, clusters, and deployments -- with out-of-the -box tags (such as `container_name`, `task_name`, `kube_service`). 
 
 ### Network Routing Tools
 
