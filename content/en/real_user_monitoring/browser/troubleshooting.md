@@ -43,11 +43,11 @@ The Browser RUM SDK sends batches of data periodically to the Datadog intake. Yo
 
 ## RUM Cookies
 
-To follow a [user session][7] across different pages, the Browser RUM SDK relies on cookies to store session information. The cookies are 1st party (they are set on your domain) and are not used for cross-site tracking. Here are the cookies set by the Browser RUM SDK:
+The Browser RUM SDK relies on cookies to store session information and follow a [user session][7] across different pages. The cookies are 1st party (they are set on your domain) and are not used for cross-site tracking. Here are the cookies set by the Browser RUM SDK:
 
 | Cookie name        | Details                                                                                                                                                                                                                                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `_dd_s`             | Cookie used to group all events generated from a unique user session across multiple pages. It is extended for an extra 15 minutes when the user interacts with the website, in the limit of the maximum user session duration of 4 hours. It also contains whether the session should be sampled. |
+| `_dd_s`             | Cookie used to group all events generated from a unique user session across multiple pages. It contains the current session id, whether the session is excluded due to sampling and the expiration date of the session. The cookie is extended for an extra 15 minutes every time the user interacts with the website, in the limit of the maximum user session duration of 4 hours.|
 | `dd_site_test_*`   | Temporary cookie used to test for cookie support. Expires instantly.                                                                                                                                                                                                                                     |
 | `dd_cookie_test_*` | Temporary cookie used to test for cookie support. Expires instantly.                                                                                                                                                                                                                                     |
 
