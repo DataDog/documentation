@@ -28,7 +28,7 @@ Lancez l'exemple de service avec la commande suivante :
 ```
 git clone https://github.com/DataDog/dd-continuous-profiler-example.git
 cd dd-continuous-profiler-example
-echo "DD_API_KEY=VOTRE_CLÉ_API" > docker.env
+echo "DD_API_KEY=YOUR_API_KEY" > docker.env
 docker-compose up -d
 ```
 
