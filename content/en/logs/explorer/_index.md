@@ -69,7 +69,7 @@ Datadog displays individual logs following this general side-panel layout:
 
 {{< img src="logs/explorer/log_side_panel.png" alt="Log Side Panel"  style="width:60%;">}}
 
-### Log structured information
+### Log structured information 
 
 - The upper part of the panel displays general **context** information.
 - The lower part of the panel displays the actual **content** of the log.
