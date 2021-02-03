@@ -13,7 +13,7 @@ further_reading:
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-## Required Setup
+## Required setup
 
 If not already configured:
 
@@ -64,7 +64,7 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure the Function
+### Configure the function
 
 1. Enable [AWS X-Ray active tracing][4] for your Lambda function.
 2. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
@@ -76,22 +76,22 @@ dependencies {
     }
     ```
 
-### Subscribe the Datadog Forwarder to the Log Groups
+### Subscribe the Datadog Forwarder to the log groups
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
 2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
-### Unified Service Tagging
+### Unified service tagging
 
 Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
 
-## Explore Datadog Serverless Monitoring
+## Explore Datadog serverless monitoring
 
 After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][7].
 
-## Monitor Custom Business Logic
+## Monitor custom business logic
 
 If you would like to submit a custom metric, see the sample code below:
 
