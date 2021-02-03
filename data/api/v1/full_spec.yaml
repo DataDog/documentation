@@ -8794,34 +8794,37 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
         group_by:
           description: Group by options.
-          properties:
-            facet:
-              description: Event facet.
-              example: status.
-              type: string
-            limit:
-              description: Number of groups to return.
-              example: 10
-              format: int64
-              type: integer
-            sort:
-              description: Options for sorting group by results.
-              properties:
-                aggregation:
-                  $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
-                metric:
-                  description: Metric used for sorting group by results.
-                  type: string
-                order:
-                  $ref: '#/components/schemas/QuerySortOrder'
-                type:
-                  $ref: '#/components/schemas/FormulaAndFunctionEventsSortType'
-              required:
-              - aggregation
-              type: object
-          required:
-          - facet
-          type: object
+          items:
+            description: List of objects used to group by.
+            properties:
+              facet:
+                description: Event facet.
+                example: status.
+                type: string
+              limit:
+                description: Number of groups to return.
+                example: 10
+                format: int64
+                type: integer
+              sort:
+                description: Options for sorting group by results.
+                properties:
+                  aggregation:
+                    $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+                  metric:
+                    description: Metric used for sorting group by results.
+                    type: string
+                  order:
+                    $ref: '#/components/schemas/QuerySortOrder'
+                  type:
+                    $ref: '#/components/schemas/FormulaAndFunctionEventsSortType'
+                required:
+                - aggregation
+                type: object
+            required:
+            - facet
+            type: object
+          type: array
         indexes:
           description: An array of index names to query in the stream. Omit or use
             `[]` to query all indexes at once.
