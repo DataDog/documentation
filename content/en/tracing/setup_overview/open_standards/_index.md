@@ -106,9 +106,9 @@ service:
 
 3. Run the download on the host, specifying  the configration yaml file set via the `--config` parameter. For example:
 
-  ```
+    ```
     otelcontribcol_linux_amd64 --config otel_collector_config.yaml
-  ```
+    ```
 
 #### Docker
 
@@ -122,21 +122,21 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
 
 3.  Determine which ports to open on your container. OpenTelemetry traces are sent to the OpenTelemetry Collector over TCP or UDP on a number of ports, which must be exposed on the container.  By default, traces are sent over OTLP/gRPC on port `55680`, but common protocols and their ports include: 
 
-  - Zipkin/HTTP on port `9411`
-  - Jaeger/gRPC on port `14250`
-  - Jaeger/HTTP on port `14268`
-  - Jaeger/Compact on port (UDP) `6831` 
-  - OTLP/gRPC on port `55680`
-  - OTLP/HTTP on port `55681`
+    - Zipkin/HTTP on port `9411`
+    - Jaeger/gRPC on port `14250`
+    - Jaeger/HTTP on port `14268`
+    - Jaeger/Compact on port (UDP) `6831` 
+    - OTLP/gRPC on port `55680`
+    - OTLP/HTTP on port `55681`
 
 4. Run the container with the configured ports and an `otel_collector_config.yaml` file. For example:
 
-  ```
+    ```
    $ docker run \
     -p 55680:55680 \
     -v $(pwd)/otel_collector_config.yaml:/etc/otel/config.yaml \
     otel/opentelemetry-collector-contrib
-  ```
+    ```
   
 5. Configure your application with the appropriate resource attributes for unified service tagging by [adding metadata](#opentelemetry-collector-datadog-exporter)
 
@@ -149,7 +149,9 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
 
 3. Create a docker network:
 
-  `docker network create <NETWORK_NAME>`
+    ```
+  docker network create <NETWORK_NAME>
+    ```
   
 4. Run the OpenTelemetry Collector container and application container in the same network. **Note**: When running the application container, ensure the environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` is configured to use the appropriate hostname for the OpenTelemetry Collector. In the example below, this is `opentelemetry-collector`.
  
