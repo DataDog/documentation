@@ -19,8 +19,8 @@ further_reading:
 ## Compatibility
 
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
-
-- The .NET Tracer supports automatic instrumentation on:
+ 
+- The .NET Tracer supports instrumentation on:
   - .NET 5
   - .NET Core 3.1
   - .NET Core 2.1. 
