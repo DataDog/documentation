@@ -18,10 +18,10 @@ further_reading:
 
 Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can: 
 
-- Pinpoint unexpected or latent service dependencies
-- Optimize costly cross-regional or multi-cloud communication
-- Identify outages of cloud provider regions and third-party tools
-- Troubleshoot faulty service discovery with DNS server metrics 
+- Pinpoint unexpected or latent service dependencies.
+- Optimize costly cross-regional or multi-cloud communication.
+- Identify outages of cloud provider regions and third-party tools.
+- Troubleshoot faulty service discovery with DNS server metrics.
 
 Network performance monitoring requires [Datadog Agent v6.14+][1].
 
