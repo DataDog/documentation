@@ -10,18 +10,18 @@ further_reading:
       text: 'Content Security Policy'
 ---
 
-If you experience unexpected behavior with Datadog Browser RUM, there are a few common issues you can investigate and this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance. We also recommend regularly updating to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
+If you experience unexpected behavior with Datadog Browser RUM, this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
 
 ## Missing data
 
-If you can't see any RUM data or that data is missing for some users, here are the common causes and recommended fixes:
+If you can't see any RUM data or if data is missing for some users:
 
 | Common causes                                                                                               | Recommended fix                                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Ad blockers][3] prevent the Browser RUM SDK from being downloaded or from sending the data to Datadog.     | Some ad blockers extend their restrictions to performance and marketing tracking tools. We recommend [installing the Browser RUM SDK via npm][4] and [forwarding the collected data through a proxy][5]. |
-| Network rules or VPN prevent the Browser RUM SDK from being downloaded or sending data to Datadog. | You may need to grant access to the endpoints required to download the SDK or to send data. The list of endpoints is available in our [CSP documentation][6].                                        |
+| Ad blockers prevent the Browser RUM SDK from being downloaded or from sending the data to Datadog.     | Some ad blockers extend their restrictions to performance and marketing tracking tools. [Install the Browser RUM SDK with npm][3] and [forward the collected data through a proxy][4]. |
+| Network rules or VPN prevent the Browser RUM SDK from being downloaded or sending data to Datadog. | Grant access to the endpoints required to download the SDK or to send data. The list of endpoints is available in the [Content Security Policy documentation][5].                                        |
 
-You may also want to check our [Content Security Policy guidelines][6] to make sure your website successfully grants access to the Browser RUM SDK CDN and the intake endpoint.
+Read the [Content Security Policy guidelines][6] and ensure your website grants access to the Browser RUM SDK CDN and the intake endpoint.
 
 ### Check that the Browser RUM SDK is initialized
 
@@ -37,17 +37,17 @@ You can also check your browser developer tools console or network tab if you no
 
 ### Check that data is sent to the Datadog intake
 
-The Browser RUM SDK sends batches of data periodically to the Datadog intake. You should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser Developer Tools:
+The Browser RUM SDK sends batches of data periodically to the Datadog intake. You should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
 
 {{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="RUM requests to Datadog intake">}}
 
 ## RUM Cookies
 
-The Browser RUM SDK relies on cookies to store session information and follow a [user session][7] across different pages. The cookies are 1st party (they are set on your domain) and are not used for cross-site tracking. Here are the cookies set by the Browser RUM SDK:
+The Browser RUM SDK relies on cookies to store session information and follow a [user session][6] across different pages. The cookies are first-party (they are set on your domain) and are not used for cross-site tracking. Here are the cookies set by the Browser RUM SDK:
 
 | Cookie name        | Details                                                                                                                                                                                                                                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `_dd_s`             | Cookie used to group all events generated from a unique user session across multiple pages. It contains the current session id, whether the session is excluded due to sampling and the expiration date of the session. The cookie is extended for an extra 15 minutes every time the user interacts with the website, in the limit of the maximum user session duration of 4 hours.|
+| `_dd_s`             | Cookie used to group all events generated from a unique user session across multiple pages. It contains the current session ID, whether the session is excluded due to sampling, and the expiration date of the session. The cookie is extended for an extra 15 minutes every time the user interacts with the website, up to the maximum user session duration (4 hours).|
 | `dd_site_test_*`   | Temporary cookie used to test for cookie support. Expires instantly.                                                                                                                                                                                                                                     |
 | `dd_cookie_test_*` | Temporary cookie used to test for cookie support. Expires instantly.                                                                                                                                                                                                                                     |
 
@@ -59,8 +59,7 @@ The Browser RUM SDK relies on cookies to store session information and follow a 
 
 [1]: /help
 [2]: https://github.com/DataDog/browser-sdk/blob/master/CHANGELOG.md
-[3]: https://en.wikipedia.org/wiki/Ad_blocking
-[4]: /real_user_monitoring/browser/#npm
-[5]: /real_user_monitoring/faq/proxy_rum_data/?tab=npm
-[6]: /real_user_monitoring/faq/content_security_policy/
-[7]: /real_user_monitoring/browser/data_collected/?tab=session
+[3]: /real_user_monitoring/browser/#npm
+[4]: /real_user_monitoring/faq/proxy_rum_data/?tab=npm
+[5]: /real_user_monitoring/faq/content_security_policy/
+[6]: /real_user_monitoring/browser/data_collected/?tab=session
