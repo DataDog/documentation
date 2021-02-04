@@ -1685,34 +1685,14 @@ main:
     parent: log_management
     identifier: log_explorer
     weight: 6
-  - name: Live Tail
-    url: logs/explorer/live_tail/
-    parent: log_explorer
-    weight: 601
-  - name: Log List
-    url: logs/explorer/list/
-    parent: log_explorer
-    weight: 602
-  - name: Log Patterns
-    url: logs/explorer/patterns/
-    parent: log_explorer
-    weight: 603
-  - name: Log Transactions
-    url: logs/explorer/transactions/
-    parent: log_explorer
-    weight: 604
-  - name: Log Analytics
-    url: logs/explorer/analytics/
-    parent: log_explorer
-    weight: 605
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 606
+    weight: 601
   - name: Facets
     url: logs/explorer/facets/
     parent: log_explorer
-    weight: 607
+    weight: 602
   - name: Search Syntax
     url: logs/search_syntax/
     parent: log_management
