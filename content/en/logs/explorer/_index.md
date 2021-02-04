@@ -9,84 +9,71 @@ aliases:
     - /logs/explorer/analytics
     - /logs/explorer/transactions/
 further_reading:
-    - link: 'logs/explorer/analytics'
-      tag: 'Documentation'
-      text: 'Perform Log Analytics'
     - link: 'logs/processing'
       tag: 'Documentation'
       text: 'Learn how to process your logs'
     - link: 'logs/explorer/saved_views'
       tag: Documentation
       text: 'Automatically configure your Log Explorer'
-    - link: 'logs/explorer/patterns'
-      tag: Documentation
-      text: 'Detect patterns inside your logs'
     - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
       tag: Blog
       text: 'Add a Log Explorer url to your clipboard'
 ---
 
-The Logs Explorer is your home base for troubleshooting and exploration with different types of visualistions built out of your log data.
+The **Log Explorer** is your home base for troubleshooting and exploration. Whether you start from scratch, from a [Saved View][32] or landing there from any other context (a monitor notification, a widget in a dashboard or whichever even with related logs), the Logs Explorer is designed to incrementally:
 
-## Search Filter
+* Narrow down, broaden or shift your [search query](#search-filters-on-logs) to focus and refocus the subset of logs of current interest,
+* [Aggregate](#aggregations-and-measures) queried logs on-the-fly into higher-level entities in order to derive or consolidate information,
+* [Visualize](#visualisations) the outcome of filters and aggregations with different visual representations that put your logs into the right perspective to bubble up decisive information. 
 
-The search filter defines the subset of your logs you want to focus on. It consists of a [timerange][3] (`Past 5 minutes` in the example below) and a search query (`service:payment status:error rejected` in the example below). Refer to our [search syntax][1] documentation for all details on how to use full-text and faceted search.
+
+## Search Filters on Logs
+
+The search filter practically consists of a [timerange][3] (`Past 5 minutes` in the example below) and a search query (`service:payment status:error rejected` in the example below). Refer to our [search syntax][1] documentation for all details on how to use full-text and key:value (a.k.a. faceted) search.
 
 [1]: /logs/search-syntax
+[3]: /dashboards/guide/custom_time_frames
 
 {{< img src="logs/explorer/search_filter.png" alt="Search Filter" style="width:100%;" >}}
 
+In the Log Explorer, queries can be performed:
 
-## Live and Indexed Data
+* either on the stream of all ingested logs - see [Live Logs](#live-logs) 
+* or on the set of all indexed logs (indexed at first place, or rehydrated) - see [Indexed Logs](#indexed-logs)   
 
-### Livetail
+Those two different datasets address slightly different use-cases with slightly different capabilities.
+
+### Indexed Logs
+
+[Indexed Logs][31] support both full-text search and key:value search queries. However, key:value queries require that you [declare a facet][90] beforehand to enable queries on log content (attributes) or accelerate queries on log context (tags).
+
+[31]: /logs/indexes
+[90]: /logs/explorer/facets/
+
+### Live Logs
 
 Choose the Livetail option in the **Timerange** to query logs as they flow into Datadog. 
 
 {{< img src="logs/explorer/livetail.gif" alt="Log Livetail" style="width:60%;" >}}
 
-Live Tail logs do not persist, but the view provides visibility on **all** logs, whether you choose to index them or not - see our section on [Exclusion Filters][2] on Logs Indexes. The Livetail is specifically useful, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
+Live Tail logs do not persist, but the live tail view provides visibility on **all** logs, whether you choose to index them or not - see also [Exclusion Filters][2] on Logs Indexes. The Livetail is specifically useful, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
 
 [2]: /logs/indexes#exclusion-filters
 
-Any query that works in other views works in the Live Tail view, but you can even go further and **filter on attributes that are not defined as facets**.
+Contrary to queries on [indexed logs](#indexed-logs), queries in the livetail do *not* require that you [declare a facet][90] beforehand.
 
-For example, to filter on the following `filename` attribute there are two options:
-
-{{< img src="logs/explorer/live_tail_save.png" alt="Live tail save"  style="width:50%;">}}
-
-1. Click on the attribute and add it to the search:
-
-    {{< img src="logs/explorer/live_tail_click_attribute.png" alt="Live tail click attribute"  style="width:50%;">}}
-
-2. Use the following query `@filename:runner.go`:
-
-To filter on all logs with a line number above 150 use the following query: `@linenumber:>150`
-
-
-*Note*. For the sake of readability, the livetail output is sampled when too many logs matching the query are flowing in. The sampling applied is uniformly random. Scope your query down with additional search filters if you need visibility on every single log flowing in.    
+*Note*. For the sake of readability, the livetail output is sampled when too many logs matching the query are flowing in. The sampling applied is uniformly random so that your livetail logs are statistically representative of your actual log throughput. Scope your query down with additional search filters if you need visibility on every single log flowing in.    
 
 The livetail is compatible with the [List](#list-of-logs) Visualisation.
 
 
-### Indexed Data
-
-All **Timerange** options but the Livetail ()
-
-[3]: /dashboards/guide/custom_time_frames
-
-
-Navigate all [indexed logs][31] in the Log Explorer: filter and aggregate your logs and visualise the outcome of these queries.
-[31]: /logs/indexes
-
-
 ## Aggregations and Measures
 
-Logs can be valuable as individual events. However, the information valuable for troubleshooting or reporting resides on higher level entities aggregated from logs. With the Log Explorer, aggregate logs on-the-fly and derive consolidated information from there.
+Logs can be valuable as individual events but sometimes the valuable information resideslive on higher level entities aggregated from logs.
 
 {{< img src="logs/explorer/aggregations.png" alt="Log Livetail" style="width:60%;" >}}
 
-Aggregation are supported for indexed logs only. If you need to perform aggregation on non-indexed logs, consider [temporary disabling exclusion filters][2], using [logs to metrics][4] or running a [rehydration][5] on your archives.
+Aggregations are supported for indexed logs only. If you need to perform aggregation on non-indexed logs, consider [temporary disabling exclusion filters][2], using [logs to metrics][4] and/or running a [rehydration][5] on your archives.
 
 [4]: /logs/logs_to_metrics
 [5]: /logs/archives/rehydrating
@@ -94,16 +81,14 @@ Aggregation are supported for indexed logs only. If you need to perform aggregat
 
 ### Simple Groups
 
-With the simple group aggregation, all logs matching the query filter are aggregated into groups based on the value of that facet for logs.
-
-On top of these groups, you can extract the following measures:
+With the simple group aggregation, all logs matching the query filter are aggregated into groups based on the value of that facet for logs. On top of these groups, you can extract the following measures:
 * **count of logs** per group
 * **unique count** of coded values for a facet
 * **statistical operations** (min/max, avg and percentiles) on numerical values of a facet
 
-Groups support the [Timeseries](#timeseries), [Toplist](#toplist) and [Table](#table) visualizations.
-
 *Note*. Individual logs having multiple values for a single facet would belong to that many groups. For instance, a log having the `team:sre` and the `team:marketplace` tags would be counted once in the `team:sre` group and once in the `team:marketplace` group.
+
+Groups support the [Timeseries](#timeseries), [Toplist](#toplist) and [Table](#table) visualizations.
 
 ### Patterns
 
@@ -111,42 +96,43 @@ With pattern aggregation, logs having messages with similar structures are group
 
 {{< img src="logs/explorer/aggregations_patterns.png" alt="Log Livetail" style="width:60%;" >}}
 
-Note that the pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
+*Note*. The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
+
+[6]: /logs/processing/processors/?tab=ui#grok-parser
 
 Patterns support the [List Aggregates](#list-aggregates-of-logs) visualisation. Clicking a pattern in the list would open the pattern side panel from which you can:
-
 * access a sample of logs from that pattern
 * append the search filter to scope it down to logs from this pattern only
 * get a kickstart for a [Grok parsing rule][6] to extract structured information logs of that pattern  
 
-{{< img src="logs/explorer/patterns_side_panel.png" alt="Log Livetail" style="width:60%;" >}}
-
-[6]: /logs/processing/processors/?tab=ui#grok-parser
+{{< img src="logs/explorer/patterns_side_panel.png" alt="Log Livetail" style="width:80%;" >}}
 
 ### Transactions
 
 The Log Transactions automatically aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. For example, an e-commerce website would group log events across various user actions, such as catalog search, add to cart, and checkout, to build a transaction view using a common attribute such as `requestId` or `orderId`.
 
-{{< img src="logs/explorer/aggregations_transactions.png" alt="Log Livetail" style="width:60%;" >}}
+{{< img src="logs/explorer/aggregations_transactions.png" alt="Log Livetail" style="width:80%;" >}}
 
 *Note*. The transaction aggregation differs from the natural group aggregation, in the sense that resulting aggregates not only include logs matching the query, but also all logs belonging to the related transactions.    
 
 - **Finding key items:** For any `facet` with string values, calculate specific log event information using the operations `count unique`, `latest`, `earliest` and `most frequent`.
 - **Getting Statistics:** For any `measure`, calculate statistical information using the operations `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99`.
 
-Transaction support the [List Aggregates](#list-aggregates-of-logs) visualisation.
+Transaction support the [List Aggregates](#list-aggregates-of-logs) visualisation. Clicking a pattern in the list would open the pattern side panel from which you can:
+* access all logs within that transaction
+* search specific logs within that transaction
+
+{{< img src="logs/explorer/transactions_side_panel.png" alt="Log Livetail" style="width:80%;" >}}
 
 ## Visualisations
 
-The Log Analytics **graph** log queries and see maximums, averages, percentiles, unique counts, and more. Follow the [log graphing guide][6] to learn more about all the graphing options.
+Visualisations define how the outcome of filter and aggregates are displayed.
 
 ### Lists
 
-The Log List displays indexed logs and offers privileged tools to navigate **individual results**.
+List are paginated results of logs or aggregates. They are specifically valuable when individual results matter, but when you have no prior or clear knowledge on what defines a matching result, so that you need to examine a bunch of them.
 
 #### List of Logs
-
-The Log Search is displayed in the logs table.
 
 Manage the columns of the table using either:
 
