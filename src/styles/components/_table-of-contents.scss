@@ -184,6 +184,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
     @media (min-width: 992px) {
         display: block;
+        padding: 0 1rem;
     }
 }
 

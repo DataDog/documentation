@@ -4,7 +4,7 @@ kind: guide
 aliases:
     - /network_performance_monitoring/guide/
 private: true
-disable_toc: true
+disable_sidebar: true
 ---
 
 {{< whatsnext desc="General Guides:" >}}

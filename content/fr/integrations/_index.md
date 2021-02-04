@@ -1,7 +1,7 @@
 ---
 title: Intégrations
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /fr/integrations/verisign_openhybrid/
 description: 'Rassembler des données de tous vos systèmes, toutes vos applications et tous vos services'

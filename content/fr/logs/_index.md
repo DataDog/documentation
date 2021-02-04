@@ -2,7 +2,7 @@
 title: Log Management
 kind: Documentation
 description: 'Configurez votre Agent Datadog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /fr/guides/logs/
   - /fr/logs/logging_without_limits

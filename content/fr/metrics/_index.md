@@ -1,7 +1,7 @@
 ---
 title: Métriques
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /fr/graphing/metrics/
   - /fr/metrics/introduction/
@@ -22,7 +22,7 @@ Les métriques vous aident également à ajuster la taille de votre environnemen
 
 Dans l'application Datadog, vous pouvez visualiser vos métriques et créer des graphiques depuis le [Metrics Explorer][3], les [dashboards][4] ou les [notebooks][5].
 
-Voici un exemple de visualisation représentant une série temporelle : 
+Voici un exemple de visualisation représentant une série temporelle :
 
 {{< img src="metrics/introduction/timeseries_example.png" alt="Exemple de série temporelle" >}}
 

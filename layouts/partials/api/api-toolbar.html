@@ -1,20 +1,14 @@
 {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
 {{ $.Scratch.Add "path" .Site.BaseURL }}
 
+<div class="api-toolbar pt-2 mb-lg-1 d-lg-flex justify-content-between">
+    <div id="breadcrumbs">
+        <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>&nbsp;>&nbsp;
 
-<div class="bg-white row align-items-center mb-0 mb-lg-2 api-toolbar">
-    <div class="col-12">
-
-        <div class="row align-items-center">
-            <div class="col-12 col-lg-6 pt-2 pt-lg-0">
-                <div id="breadcrumbs">
-                    <a class="text-uppercase text-gray-darkish" href="/">Docs</a>
-                    &nbsp;>&nbsp;
-
-                    {{ if .Page.Parent }}
-                        <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
-                        &nbsp;>&nbsp;
-                    {{ end }}
+        {{ if .Page.Parent }}
+            <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
+            &nbsp;>&nbsp;
+        {{ end }}
 
                     <a class="text-primary text-uppercase" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
 
@@ -41,8 +35,5 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
+    {{ partial "language-region-select.html" . }}
 </div>

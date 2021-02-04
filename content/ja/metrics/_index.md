@@ -1,7 +1,7 @@
 ---
 title: メトリクス
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /ja/graphing/metrics/
   - /ja/metrics/introduction/

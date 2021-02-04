@@ -1,7 +1,7 @@
 ---
 title: Datadog Data Collection, Resolution, and Retention
 kind: faq
-disable_toc: true
+disable_sidebar: true
 ---
 
 Find below a summary of Datadog data collection, resolution, and retention:

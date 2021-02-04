@@ -1,7 +1,7 @@
 ---
 title: Metrics
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /graphing/metrics/
   - /metrics/introduction/
@@ -113,7 +113,7 @@ There are four aggregations that can be applied when using space aggregation: _s
 
 ### What metric types can I submit to Datadog?
 
-Datadog supports several different metric types that serve distinct use cases: count, gauge, rate, histogram, and distribution. Metric types determine which graphs and functions are available to use with the metric in the app. 
+Datadog supports several different metric types that serve distinct use cases: count, gauge, rate, histogram, and distribution. Metric types determine which graphs and functions are available to use with the metric in the app.
 
 ### What’s the difference between each metric type?
 
