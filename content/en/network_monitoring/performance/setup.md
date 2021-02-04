@@ -65,7 +65,7 @@ Datadog monitors every aspect of your Istio environment, so you can also:
 - Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][6].
 - Drill into distributed traces for applications transacting over the mesh with [APM][7].
 
-NPM supports Istio v1.6.4+ with [Datadog Agent v7.24.1+][1]
+NPM supports Istio v1.6.4+ with [Datadog Agent v7.24.1+][1].
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][8].
 
