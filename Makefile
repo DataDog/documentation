@@ -89,7 +89,9 @@ clean-integrations:  ## Remove built integrations files.
 	@find ./content/en/security_monitoring/default_rules -type f -maxdepth 1 \
 		-a -not -name '_index.md' \
 		-exec rm -rf {} \;
-	@find ./static/images/marketplace -type f -exec rm -rf {} \;
+	@if [ -d static/images/marketplace ]; then \
+		find ./static/images/marketplace -type f \
+	    -exec rm -rf {} \; ;fi
 
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
