@@ -24,11 +24,28 @@ further_reading:
 
 ## Overview
 
-The Logs Explorer is your home base for troubleshooting and exploration:
+The Logs Explorer is your home base for troubleshooting and exploration with different types of insights from your log data, matching a [search filter][1].
 
 {{< img src="logs/explorer/log_explorer_walkthrough.gif" alt="Explore view with comments" style="width:80%;" >}}
 
-Different views offer different types of insights from your log data, matching a [search query][1].
+
+**Time Range**
+
+The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period.
+It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the Logstream option panel.
+
+Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][20]):
+
+{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange"  >}}
+
+**Search**
+
+Use facets, measures, tags, or even [free text search][1] to filter your Logstream and Log Analytics with dedicated context. The search bar and URL automatically reflect your selections.
+
+Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
+
+A search filter 
+
 
 ## Live Queries
 
@@ -40,7 +57,7 @@ The Live Tail displays logs as they flow into Datadog. Live Tail logs do not per
 
 Navigate all [indexed logs][31] in the Log Explorer: filter and aggregate your logs and visualise the outcome of these queries.
 
-### Filters
+
 
 
 
@@ -167,22 +184,6 @@ Use the **Share** button to share the log opened in side panel to other contexts
 
 ### Search Filter
 
-Build up a context to explore your logs in your log explorer view. First, select the proper time range. Then, use the search bar to filter your Logstream and Log Analytics.
-
-**Time Range**
-
-The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period.
-It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the Logstream option panel.
-
-Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][20]):
-
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange"  >}}
-
-**Search**
-
-Use facets, measures, tags, or even [free text search][1] to filter your Logstream and Log Analytics with dedicated context. The search bar and URL automatically reflect your selections.
-
-Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
 
 ### Saved views
 
