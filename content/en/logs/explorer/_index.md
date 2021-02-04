@@ -4,6 +4,10 @@ kind: documentation
 description: 'Search through all of your logs and perform Log Analytics'
 aliases:
     - /logs/explore
+    - /logs/explorer/list
+    - /logs/explorer/patterns
+    - /logs/explorer/analytics
+    - /logs/explorer/transactions/
 further_reading:
     - link: 'logs/explorer/analytics'
       tag: 'Documentation'
@@ -24,27 +28,11 @@ further_reading:
 
 ## Overview
 
-The Logs Explorer is your home base for troubleshooting and exploration with different types of insights from your log data, matching a [search filter][1].
+The Logs Explorer is your home base for troubleshooting and exploration with different types of insights from your log data scoped by a search filter.
 
-{{< img src="logs/explorer/log_explorer_walkthrough.gif" alt="Explore view with comments" style="width:80%;" >}}
+A search filter consists of a timerange (`Past 5 minutes` in the example below) and a search query (`service:payment status:error rejected` in the example below). Refer to our [search syntax][1] documentation for all details on how to use full-text and faceted search.
 
-
-**Time Range**
-
-The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period.
-It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the Logstream option panel.
-
-Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][20]):
-
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange"  >}}
-
-**Search**
-
-Use facets, measures, tags, or even [free text search][1] to filter your Logstream and Log Analytics with dedicated context. The search bar and URL automatically reflect your selections.
-
-Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
-
-A search filter 
+{{< img src="logs/explorer/search_filter.png" alt="Explore view with comments" style="width:80%;" >}}
 
 
 ## Live Queries
