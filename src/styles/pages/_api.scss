@@ -133,6 +133,13 @@ $ddpurple: #632ca6;
             top: 95px;
             height: 65px;
         }
+
+        #breadcrumbs {
+            &:lang(ja) {
+                font-size: 15px;
+                padding-left: 15px;
+            }
+        }
     }
 
     .api-content {

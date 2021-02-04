@@ -17,7 +17,9 @@ const toggleChevronArrowIcon = (dropdownBtnElement) => {
 const initBootstrapCustomDropdowns = () => {
   bootstrapCustomDropdownBtnNodeList.forEach(dropdown => {
     dropdown.addEventListener('click', (event) => {
-      toggleChevronArrowIcon(event.target);
+      const targetClassList = event.target.classList.value;
+      const dropdownBtnElement = targetClassList.includes('chevron') ? event.target.closest('button') : event.target;
+      toggleChevronArrowIcon(dropdownBtnElement);
     })
   })
 
