@@ -167,7 +167,7 @@ dotnet.exe example.dll
 
 {{% tab "Linux" %}}
 
-1. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -213,17 +213,17 @@ dotnet example.dll
 
 To set the required environment variables on a Linux Docker container:
 
-```docker
-# Set environment variables
-ENV CORECLR_ENABLE_PROFILING=1
-ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
-ENV DD_DOTNET_TRACER_HOME=/opt/datadog
+    ```docker
+    # Set environment variables
+    ENV CORECLR_ENABLE_PROFILING=1
+    ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+    ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+    ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
+    ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 
-# Start your application
-CMD ["dotnet", "example.dll"]
-```
+    # Start your application
+    CMD ["dotnet", "example.dll"]
+    ```
 
 #### SystemCTL (per service)
 
