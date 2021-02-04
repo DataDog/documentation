@@ -347,4 +347,4 @@ Custom user actions are user actions declared and sent manually via the [`addUse
 [5]: /real_user_monitoring/browser/data_collected/?tab=error
 [6]: /real_user_monitoring/browser/data_collected/?tab=useraction
 [7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-user-sessions
