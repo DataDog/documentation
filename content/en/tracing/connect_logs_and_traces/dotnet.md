@@ -21,7 +21,7 @@ further_reading:
 
 The .NET Tracer can automatically inject trace IDs, span IDs, `env`, `service`, and `version` into your application logs. If you haven't done so already, Datadog recommends configuring the .NET tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This provides the best experience when adding `env`, `service`, and `version` (see [Unified Service Tagging][3] for more details).
 
-We support [Serilog][4], [NLog][5] (version 2.0.0.2000+), or [log4net][6]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger.
+We support [Serilog][4], [NLog][5] (version 4.0+), or [log4net][6]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger.
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
@@ -75,17 +75,30 @@ For NLog version 4.6+:
   </layout>
 ```
 
-For NLog version 4.5:
+For NLog version 4.0 - 4.5:
 
 ```xml
-  <!-- Add includeMdc="true" to emit MDC properties -->
+  <!-- If using version 4.4.10+, you may add includeMdc="true" to emit MDC properties -->
   <layout xsi:type="JsonLayout" includeMdc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
     <attribute name="message" layout="${message}" />
     <attribute name="exception" layout="${exception:format=ToString}" />
   </layout>
+
+  <!-- If using version below 4.4.10, you must explicitly extract the 'dd.trace_id' and 'dd.span_id' values using new <attribute> nodes -->
+  <layout xsi:type="JsonLayout">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+
+    <attribute name="dd.trace_id" layout="${mdc:item=dd.trace_id}"/>
+    <attribute name="dd.span_id" layout="${mdc:item=dd.span_id}"/>
+  </layout>
 ```
+
+For NLog version lower than 4.0, there is no built-in JSON layout.
 
 {{% /tab %}}
 {{< /tabs >}}
