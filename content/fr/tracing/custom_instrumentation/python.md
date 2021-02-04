@@ -345,6 +345,6 @@ Les tags qui sont définis directement sur des spans spécifiques remplacement l
 [1]: /fr/tracing/compatibility_requirements/python
 [2]: /fr/tracing/security
 [3]: https://opentracing.io/guides/python/
-[4]: https://github.com/open-telemetry/opentelemetry-python/tree/master/ext/opentelemetry-ext-datadog
-[5]: https://github.com/open-telemetry/opentelemetry-python/tree/master/docs/examples/datadog_exporter
+[4]: https://github.com/open-telemetry/opentelemetry-python/tree/main/ext/opentelemetry-ext-datadog
+[5]: https://github.com/open-telemetry/opentelemetry-python/tree/main/docs/examples/datadog_exporter
 [6]: https://opentelemetry-python.readthedocs.io/en/stable/ext/datadog/datadog.html

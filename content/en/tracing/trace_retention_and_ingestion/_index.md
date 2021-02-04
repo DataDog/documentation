@@ -42,7 +42,7 @@ For more information, refer to the [Usage Metrics][1] documentation, or see the 
 
 ### Datadog intelligent retention filter
 
-Intelligent retention is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [top level spans][12] are indexed for the traces kept by the intelligent retention filter.
+Intelligent retention is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [top level spans][4] are indexed for the traces kept by the intelligent retention filter.
 
 Intelligent Retention retains:
 
@@ -57,15 +57,15 @@ If there are specific tags, facets, or groups of traces that you want to investi
 
 {{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.gif" style="width:100%;" alt="Span Indexing" >}}
 
-To customize what spans are indexed and retained for 15 days, you can create, modify, and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained will have its corresponding trace saved as well, and when it is viewed, the complete trace will be available.  In order to be searched by tag in [Search and Analytics][4], however, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
+To customize what spans are indexed and retained for 15 days, you can create, modify, and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained will have its corresponding trace saved as well, and when it is viewed, the complete trace will be available.  In order to be searched by tag in [Search and Analytics][5], however, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
 
 1. Name your filter.
 2. Set the tags you would like to index spans that match **all** of.
-3. Select whether this filter will retain any span that matches the criteria, or only [top level spans][5].
+3. Select whether this filter will retain any span that matches the criteria, or only [top level spans][4].
 4. Set a percentage of spans matching these tags to be indexed.
 5. Save your new filter.
 
-**Note:** Selecting "Top-Level Spans for Services Only" means the retention filter will retain only the selected proportion of [top level spans][5] of service and index them. Use this if you want to only index top level spans with matching tags. If "All Spans" is selected, the retention filter will retain the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and index them.  This may have an impact on your bill, and the visual indicator within the app while setting a retention filter will inform you how many matching spans have been detected over the time period.
+**Note:** Selecting "Top-Level Spans for Services Only" means the retention filter will retain only the selected proportion of [top level spans][4] of service and index them. Use this if you want to only index top level spans with matching tags. If "All Spans" is selected, the retention filter will retain the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and index them.  This may have an impact on your bill, and the visual indicator within the app while setting a retention filter will inform you how many matching spans have been detected over the time period.
 
 For example, you can create filters to keep all traces for:
 
@@ -124,6 +124,8 @@ To configure for 100% ingestion on every service instrumented with a Datadog tra
 DD_TRACE_SAMPLE_RATE=1.0
 ```
 
+**Note:** This may impact your bill if your total ingestion exceeds the included GBs. For more information, see the [APM Billing][7] page.
+
 ### Ingestion Breakdown
 
 The Ingestion Breakdown column breaks down the destination of all traces originating from the service. It can help you understand lower than expected ingestion rates and missing traces.
@@ -138,9 +140,9 @@ The breakdown is composed of the following parts:
     1. By default, the agent and the tracers intelligently set the service ingestion rate. See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) to configure this behavior.
     2. When you change the default ingestion rate to less than 100%.
 
-- **Complete traces dropped by the tracer rate limiter** (orange): When you choose to [configure the ingestion rate of a service](#change-the-default-ingestion-rate), you explicitly define the ingestion rate that your service should have. However, as a protection mechanism, a rate limiter set to 100 traces per second by default is automatically enabled. To configure this rate limiter, [open a support ticket][7] so we can guide you through the process.
+- **Complete traces dropped by the tracer rate limiter** (orange): When you choose to [configure the ingestion rate of a service](#change-the-default-ingestion-rate), you explicitly define the ingestion rate that your service should have. However, as a protection mechanism, a rate limiter set to 100 traces per second by default is automatically enabled. To configure this rate limiter, [open a support ticket][8] so we can guide you through the process.
 
-- **Traces dropped due to the agent CPU limit** (red): The agent has a configuration option allowing users to limit the usage of the CPU. After this limit is reached the agent will stop accepting traces from the tracers. Change the [agent configuration][8] to configure how much CPU to allocate to the agent.
+- **Traces dropped due to the agent CPU limit** (red): The agent has a configuration option allowing users to limit the usage of the CPU. After this limit is reached the agent will stop accepting traces from the tracers. Change the [agent configuration][9] to configure how much CPU to allocate to the agent.
 
 ### Traces dropped before ingestion
 
@@ -151,30 +153,30 @@ You won't get 100% trace ingestion if you have not set the environment variable 
 
 In this case, some traces will be dropped by the Datadog Agent *after* stats are computed, so that metrics calculated will be based on 100% of your traces.
 
-If you are seeing ingestion rates below 100% within Datadog and would like to send all your traces, enable Tracing without Limits by setting the environment variable as described above. If you have questions, contact our [support team][7].
+If you are seeing ingestion rates below 100% within Datadog and would like to send all your traces, enable Tracing without Limits by setting the environment variable as described above. If you have questions, contact our [support team][8].
 
 {{< img src="tracing/trace_indexing_and_ingestion/VisualIndicator.png" style="width:100%;" alt="Root services not sending 100% of traces" >}}
 
 
 ## App Analytics to Tracing Without Limits
 
-Before October 20, 2020, Datadog offered App Analytics to index spans for performing analytics. While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][9], the legacy instructions are available within the [App Analytics][10] setup page.
+Before October 20, 2020, Datadog offered App Analytics to index spans for performing analytics. While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][10], the legacy instructions are available within the [App Analytics][11] setup page.
 
 All existing App Analytics filters have been automatically transitioned to Retention Filters. You can continue to use the unchanged filters or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters.
 
-**Note:** Existing App Analytics filters can be edited within Datadog, but only by editing the transitioned [retention filters][2].  Legacy filters are now read only on the [settings][11] page in-app.
+**Note:** Existing App Analytics filters can be edited within Datadog, but only by editing the transitioned [retention filters][2]. Legacy filters are read only on the [settings][12] page in-app.
 
 {{< img src="tracing/trace_indexing_and_ingestion/MigratedRetentionFilter.png" style="width:100%;" alt="Visual indicator of App Analytics filter migrated to a retention filter" >}}
 
 [1]: /tracing/trace_retention_and_ingestion/usage_metrics
 [2]: https://app.datadoghq.com/apm/traces/retention-filters
 [3]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[4]: /tracing/trace_search_and_analytics/#historical-search-mode
-[5]: /tracing/visualization/#top-level-span
+[4]: /tracing/visualization/#top-level-span
+[5]: /tracing/trace_search_and_analytics/#historical-search-mode
 [6]: https://app.datadoghq.com/apm/traces/ingestion-control
-[7]: /help/
-[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml#L736-L741
-[9]: /tracing/trace_search_and_analytics
-[10]: /tracing/legacy_app_analytics/
-[11]: https://app.datadoghq.com/apm/settings
-[12]: /tracing/visualization/#top-level-span
+[7]: /account_management/billing/apm_distributed_tracing/
+[8]: /help/
+[9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml#L736-L741
+[10]: /tracing/trace_search_and_analytics
+[11]: /tracing/legacy_app_analytics/
+[12]: https://app.datadoghq.com/apm/settings

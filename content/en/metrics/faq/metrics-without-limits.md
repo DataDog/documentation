@@ -1,5 +1,5 @@
 ---
-title: Metrics without Limits\* FAQ
+title: Metrics without Limits FAQ
 kind: faq
 is_beta: true
 further_reading:
@@ -25,6 +25,6 @@ Configuring your tags gives you control over what custom metrics can be queried 
 
 Please reach out to your Customer Support Manager if you're interested in this private beta and for further pricing details of this feature.
 
-[1]: https://app.datadoghq.com/metric/summary
 
 \*Metrics without Limits is a trademark of Datadog, Inc.
+[1]: https://app.datadoghq.com/metric/summary
