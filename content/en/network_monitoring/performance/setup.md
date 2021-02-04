@@ -60,8 +60,8 @@ NPM helps you visualize the architecture and performance of your containerized a
 
 With NPM, you can map network communication between containers, pods, and services over the Istio service mesh.  
 
-Datadog monitors every aspect of your Istio environment, so you can also
-- Assess the health of Envoy and Istio control plane with [logs][6]
+Datadog monitors every aspect of your Istio environment, so you can also:
+- Assess the health of Envoy and the Istio control plane with [logs][6]
 - Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][6]
 - Drill into distributed traces for applications transacting over the mesh with [APM][7]
 
