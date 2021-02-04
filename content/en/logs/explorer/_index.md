@@ -26,24 +26,26 @@ further_reading:
       text: 'Add a Log Explorer url to your clipboard'
 ---
 
-## Overview
+The Logs Explorer is your home base for troubleshooting and exploration with different types of visualistions built out of your log data.
 
-The Logs Explorer is your home base for troubleshooting and exploration with different types of insights from your log data scoped by a search filter.
+## Search Filter
 
-A search filter consists of a timerange (`Past 5 minutes` in the example below) and a search query (`service:payment status:error rejected` in the example below). Refer to our [search syntax][1] documentation for all details on how to use full-text and faceted search.
+The search filter defines the subset of your logs you want to focus on. It consists of a [timerange][3] (`Past 5 minutes` in the example below) and a search query (`service:payment status:error rejected` in the example below). Refer to our [search syntax][1] documentation for all details on how to use full-text and faceted search.
 
 [1]: /logs/search-syntax
 
-{{< img src="logs/explorer/search_filter.png" alt="Explore view with comments" style="width:80%;" >}}
+{{< img src="logs/explorer/search_filter.png" alt="Search Filter" style="width:100%;" >}}
 
 
 ## Live and Indexed Data
 
 ### Livetail
 
-Choose the Livetail option in the **Timerange** to access logs as they flow into Datadog. 
+Choose the Livetail option in the **Timerange** to query logs as they flow into Datadog. 
 
-Live Tail logs do not persist, but the view provides visibility on **all** logs, whether you choose to index them or not - see our section on [Exclusion Filters][2] on Logs Indexes.
+{{< img src="logs/explorer/livetail.gif" alt="Log Livetail" style="width:60%;" >}}
+
+Live Tail logs do not persist, but the view provides visibility on **all** logs, whether you choose to index them or not - see our section on [Exclusion Filters][2] on Logs Indexes. The Livetail is specifically useful, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
 
 [2]: /logs/indexes#exclusion-filters
 
@@ -51,24 +53,20 @@ Any query that works in other views works in the Live Tail view, but you can eve
 
 For example, to filter on the following `filename` attribute there are two options:
 
-{{< img src="logs/explorer/livetail/live_tail_save.png" alt="Live tail save"  style="width:50%;">}}
+{{< img src="logs/explorer/live_tail_save.png" alt="Live tail save"  style="width:50%;">}}
 
 1. Click on the attribute and add it to the search:
 
-    {{< img src="logs/explorer/livetail/live_tail_click_attribute.png" alt="Live tail click attribute"  style="width:50%;">}}
+    {{< img src="logs/explorer/live_tail_click_attribute.png" alt="Live tail click attribute"  style="width:50%;">}}
 
 2. Use the following query `@filename:runner.go`:
 
 To filter on all logs with a line number above 150 use the following query: `@linenumber:>150`
 
 
-{{< img src="logs/explorer/livetail.gif" alt="Log Livetail" style="width:60%;" >}}
+*Note*. For the sake of readability, the livetail output is sampled when too many logs matching the query are flowing in. The sampling applied is uniformly random. Scope your query down with additional search filters if you need visibility on every single log flowing in.    
 
-This feature allows you, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
-
-For the sake of readability, the livetail output is sampled when too many logs matching the query are flowing in. The sampling applied is uniformly random. Scope your query down with additional search filters if you need visibility on every single log flowing in.    
-
-The livetail is compatible with the [List](#lists) Visualisation.
+The livetail is compatible with the [List](#list-of-logs) Visualisation.
 
 
 ### Indexed Data
@@ -105,7 +103,7 @@ On top of these groups, you can extract the following measures:
 
 Groups support the [Timeseries](#timeseries), [Toplist](#toplist) and [Table](#table) visualizations.
 
-Note that individual logs having multiple values for a single facet would belong to that many groups. For instance, a log having the `team:sre` and the `team:marketplace` tags would be counted once in the `team:sre` group and once in the `team:marketplace` group.
+*Note*. Individual logs having multiple values for a single facet would belong to that many groups. For instance, a log having the `team:sre` and the `team:marketplace` tags would be counted once in the `team:sre` group and once in the `team:marketplace` group.
 
 ### Patterns
 
@@ -131,7 +129,7 @@ The Log Transactions automatically aggregate indexed logs according to instances
 
 {{< img src="logs/explorer/aggregations_transactions.png" alt="Log Livetail" style="width:60%;" >}}
 
-The transaction aggregation differs from the natural group aggregation, in the sense that resulting aggregates not only include logs matching the query, but also all logs belonging to the related transactions.    
+*Note*. The transaction aggregation differs from the natural group aggregation, in the sense that resulting aggregates not only include logs matching the query, but also all logs belonging to the related transactions.    
 
 - **Finding key items:** For any `facet` with string values, calculate specific log event information using the operations `count unique`, `latest`, `earliest` and `most frequent`.
 - **Getting Statistics:** For any `measure`, calculate statistical information using the operations `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99`.
@@ -157,13 +155,13 @@ Manage the columns of the table using either:
 
 With the _Options_ button, control the **number of lines** displayed in the table per log event.
 
-{{< img src="logs/explorer/list/table_controls.gif" alt="configure display table"  style="width:80%;">}}
+{{< img src="logs/explorer/table_controls.gif" alt="configure display table"  style="width:80%;">}}
 
 The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][32]
 
 **Export View**
 
-{{< img src="logs/explorer/list/list_share.png" alt="configure display table"  style="width:80%;">}}
+{{< img src="logs/explorer/list_share.png" alt="configure display table"  style="width:80%;">}}
 
 - Export to **Monitor**: Export the query applied to your Logstream to create a query for a new [log monitor][35].
 - Export to **CSV**: Export your current Logstream view with its selected columns to a CSV file. You can export up to 5,000 logs at once.
@@ -181,10 +179,12 @@ TODO
 
 Visualize the evolution of a single [measure][1] (or a [facet][1] unique count of values) over a selected time frame, and (optionally) split by an available [facet][1].
 
+{{< img src="logs/explorer/timeseries.png" alt="timeserie example"  style="width:90%;">}}
+
 You have additional display options for timeseries:
 
+- The roll-up interval
 - Whether you display lines, bars, or areas
-- Data stacking option, by value, or by percentage
 - Color set
 
 Noteworthy facts about stacking:
@@ -198,7 +198,6 @@ Noteworthy facts about stacking:
 The following timeseries Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
-{{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
 
 ### Toplists
 
@@ -207,7 +206,7 @@ Visualize the top values from a [facet][1] according to the chosen [measure][1]:
 The following Top List Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
-{{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
+{{< img src="logs/explorer/toplists.png" alt="top list example"  style="width:90%;">}}
 
 ### Nested Tables
 
@@ -221,7 +220,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][1] (t
 
 The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
-{{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example"  style="width:90%;">}}
+{{< img src="logs/explorer/nested_table.png" alt="table example"  style="width:90%;">}}
 
 
 ## The Log Side Panel
