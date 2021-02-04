@@ -497,7 +497,7 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 
 
 [1]: /integrations/istio/
-[2]: https://docs.datadoghq.com/network_monitoring/performance/setup/#istio
+[2]: /network_monitoring/performance/setup/#istio
 [3]: /agent/kubernetes/
 [4]: /agent/kubernetes/apm/
 [5]: https://istio.io/docs/setup/install/istioctl/
