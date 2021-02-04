@@ -46,19 +46,25 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 
 ### Installation
 
+By default, tracing is enabled in your `datadog.yaml` file under `apm_enabled: true` and the Agent listens for trace traffic at `localhost:8126`.
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
 1. [Install and configure the Windows Datadog Agent][1].
+
 2. Download the [.NET Tracer MSI installer][2]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+
 3. Run the .NET Tracer MSI installer with administrator privileges.
+
 4. Restart IIS by running the following commands as an administrator:
     ```cmd
     net stop /y was
     net start w3svc
     ```
+
 5. Create application load.
+
 6. Visit [APM Live Traces][3].
 
 
@@ -110,7 +116,6 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 
 {{< /tabs >}}
 
-By default, tracing is enabled in your `datadog.yaml` file under `apm_enabled: true` and the Agent listens for trace traffic at `localhost:8126`.
 
 ### Required environment variables
 
