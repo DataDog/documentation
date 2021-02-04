@@ -179,9 +179,9 @@ The OpenTelemetry Collector can be run in two types of [deployment scenarios][4]
 
 To accurately track the appropriate metadata in Datadog, run the OpenTelemetry Collector in agent mode on each of the Kubernetes nodes.
 
-When deploying the OpenTelemetry Collector as a daemonset, refer to [the example configuration below](#opentelemetry-kubernetes-example-collector-configuration) as a guide.
+When deploying the OpenTelemetry Collector as a daemonset, refer to [the example configuration below](#example-kubernetes-opentelemetry-collector-configuration) as a guide.
 
-On the application container, use the downward API to pull the host IP. The application container needs an environment variable that points to `status.hostIP`. The OpenTelemetry Application SDKs expect this to be named `OTEL_EXPORTER_OTLP_ENDPOINT`. Use the [below example snippet](#opentelemetry-kubernetes-example-application-configuration) as a guide.
+On the application container, use the downward API to pull the host IP. The application container needs an environment variable that points to `status.hostIP`. The OpenTelemetry Application SDKs expect this to be named `OTEL_EXPORTER_OTLP_ENDPOINT`. Use the [below example snippet](#example-kubernetes-opentelemetry-application-configuration) as a guide.
 
 ##### Example Kubernetes OpenTelemetry Collector configuration
 
@@ -296,17 +296,17 @@ To see more information and additional examples of how you might configure your 
 
 [1]: https://opentracing.io/docs/
 [2]: https://opentelemetry.io/docs/
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/master/exporter/datadogexporter
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [4]: https://opentelemetry.io/docs/collector/getting-started/#deployment
 [5]: https://opentelemetry.io/docs/collector/configuration/
 [6]: https://app.datadoghq.com/account/settings#api
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/master/exporter/datadogexporter/example/config.yaml
-[8]: https://github.com/open-telemetry/opentelemetry-collector/blob/master/docs/design.md#pipelines
-[9]: https://github.com/open-telemetry/opentelemetry-collector/tree/master/examples
-[10]: https://github.com/open-telemetry/opentelemetry-collector/tree/master/processor/batchprocessor#batch-processor
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/example/config.yaml
+[8]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#pipelines
+[9]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/examples
+[10]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor#batch-processor
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/latest
 [12]: https://hub.docker.com/r/otel/opentelemetry-collector-contrib/tags
-[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/master/exporter/datadogexporter/example/example_k8s_manifest.yaml
-[14]: https://github.com/open-telemetry/opentelemetry-collector/blob/master/docs/design.md#running-as-an-agent
-[15]: https://github.com/open-telemetry/opentelemetry-collector/blob/master/docs/design.md#running-as-a-standalone-collector
-[16]: https://github.com/open-telemetry/opentelemetry-collector/blob/master/docs/images/opentelemetry-service-deployment-models.png
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/example/example_k8s_manifest.yaml
+[14]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-an-agent
+[15]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-a-standalone-collector
+[16]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/images/opentelemetry-service-deployment-models.png
