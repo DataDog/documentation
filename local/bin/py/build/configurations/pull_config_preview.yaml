@@ -77,7 +77,7 @@
     contents:
 
     - action: marketplace-integrations
-      branch: documentation/site
+      branch: master
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
