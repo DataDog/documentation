@@ -76,6 +76,11 @@ After the widget is saved, the value of the template variable is the one selecte
 
 {{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables"  style="width:75%;">}}
 
+#### Associated Template Variables
+When selecting a template variable value, you will see two sections for **Associated Values** and **Other Values**. Associated Values are calculated by taking into  the other template variable values selected on the page, and seamlessly identifies the related values without any configuration. 
+
+{{< img src="dashboards/template_variables/associated_template_variables.png" alt="Associated template variables"  style="width:75%;">}}
+
 #### Text
 
 For text based widgets, you can display a template variable name and value with `$<TEMPLATE_VARIABLE_NAME>` or display just the value with `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `env` and a selected value of `dev`:
