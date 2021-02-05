@@ -17837,7 +17837,7 @@ paths:
         required: false
         schema:
           type: string
-      - description: The query string to filter results based on SLO tags.
+      - description: The query string to filter results based on a single SLO tag.
         example: env:prod
         in: query
         name: tags_query
