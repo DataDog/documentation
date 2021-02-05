@@ -22,56 +22,59 @@ further_reading:
 
 The **Log Explorer** is your home base for troubleshooting and exploration. Whether you start from scratch, from a [Saved View][32] or landing there from any other context (a monitor notification, a widget in a dashboard or whichever even with related logs), the Logs Explorer is designed to incrementally:
 
-* Narrow down, broaden or shift your [search query](#search-filters-on-logs) to focus and refocus the subset of logs of current interest,
-* [Aggregate](#aggregations-and-measures) queried logs on-the-fly into higher-level entities in order to derive or consolidate information,
-* [Visualize](#visualisations) the outcome of filters and aggregations with different visual representations that put your logs into the right perspective to bubble up decisive information. 
+1. [**Filter**](#filters-logs) to narrow down, broaden or shift your focus on the subset of logs of current interest,
+2. [**Aggregate**](#aggregations-and-measures) queried logs on-the-fly into higher-level entities in order to derive or consolidate information,
+3. [**Visualize**](#visualisations) the outcome of filters and aggregations with different visual representations that put your logs into the right perspective to bubble up decisive information. 
 
 
-## Search Filters on Logs
+## Filters Logs
 
-The search filter practically consists of a [timerange][3] (`Past 5 minutes` in the example below) and a search query (`service:payment status:error rejected` in the example below). Refer to our [search syntax][1] documentation for all details on how to use full-text and key:value (a.k.a. faceted) search.
+The search filter practically consists of a [timerange][3] (`Past 5 minutes` in the example below) and a search query (`service:payment status:error rejected` in the example below).
 
 [1]: /logs/search-syntax
 [3]: /dashboards/guide/custom_time_frames
 
 {{< img src="logs/explorer/search_filter.png" alt="Search Filter" style="width:100%;" >}}
 
+Refer to our [search syntax][1] documentation for all details on how to use full-text and key:value (a.k.a. faceted) search.
+
+
 In the Log Explorer, queries can be performed:
 
-* either on the stream of all ingested logs - see [Live Logs](#live-logs) 
+* either on the stream of all ingested logs - see [Live Tail](#live-tail) 
 * or on the set of all indexed logs (indexed at first place, or rehydrated) - see [Indexed Logs](#indexed-logs)   
 
 Those two different datasets address slightly different use-cases with slightly different capabilities.
 
 ### Indexed Logs
 
-[Indexed Logs][31] support both full-text search and key:value search queries. However, key:value queries require that you [declare a facet][90] beforehand to enable queries on log content (attributes) or accelerate queries on log context (tags).
+[Indexed Logs][31] support both full-text search and key:value search queries. However, key:value queries require that you [declare a facet][90] beforehand to enable queries on attributes (log content), or accelerate queries on tags (log context).
 
 [31]: /logs/indexes
 [90]: /logs/explorer/facets/
 
-### Live Logs
+### Live Tail
 
-Choose the Livetail option in the **Timerange** to query logs as they flow into Datadog. 
+Choose the Live Tail option in the Timerange to query logs as they flow into Datadog. Live Tail logs do not persist, but the Live Tail view provides visibility on **all** logs, whether you choose to index them or not - see also [Exclusion Filters][2] on Logs Indexes. 
 
-{{< img src="logs/explorer/livetail.gif" alt="Log Livetail" style="width:60%;" >}}
+{{< img src="logs/explorer/livetail.gif" alt="Log Livetail" style="width:80%;" >}}
 
-Live Tail logs do not persist, but the live tail view provides visibility on **all** logs, whether you choose to index them or not - see also [Exclusion Filters][2] on Logs Indexes. The Livetail is specifically useful, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
+The Livetail is specifically useful, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
 
 [2]: /logs/indexes#exclusion-filters
 
-Contrary to queries on [indexed logs](#indexed-logs), queries in the livetail do *not* require that you [declare a facet][90] beforehand.
+Contrary to queries on [indexed logs](#indexed-logs), queries in the Live Tail do *not* require that you [declare a facet][90] beforehand.
 
-*Note*. For the sake of readability, the livetail output is sampled when too many logs matching the query are flowing in. The sampling applied is uniformly random so that your livetail logs are statistically representative of your actual log throughput. Scope your query down with additional search filters if you need visibility on every single log flowing in.    
+*Note*. For the sake of readability, the Live Tail output is sampled when too many logs matching the query are flowing in. The sampling applied is uniformly random, so that your livetail logs are statistically representative of your actual log throughput. Scope your query down with additional search filters if you need visibility on every single log flowing in.    
 
 The livetail is compatible with the [List](#list-of-logs) Visualisation.
 
 
-## Aggregations and Measures
+## Aggregate and Measure
 
 Logs can be valuable as individual events but sometimes the valuable information resideslive on higher level entities aggregated from logs.
 
-{{< img src="logs/explorer/aggregations.png" alt="Log Livetail" style="width:60%;" >}}
+{{< img src="logs/explorer/aggregations.png" alt="Log Livetail" style="width:100%;" >}}
 
 Aggregations are supported for indexed logs only. If you need to perform aggregation on non-indexed logs, consider [temporary disabling exclusion filters][2], using [logs to metrics][4] and/or running a [rehydration][5] on your archives.
 
@@ -124,7 +127,7 @@ Transaction support the [List Aggregates](#list-aggregates-of-logs) visualisatio
 
 {{< img src="logs/explorer/transactions_side_panel.png" alt="Log Livetail" style="width:80%;" >}}
 
-## Visualisations
+## Visualise
 
 Visualisations define how the outcome of filter and aggregates are displayed.
 
@@ -206,7 +209,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][1] (t
 
 The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
-{{< img src="logs/explorer/nested_table.png" alt="table example"  style="width:90%;">}}
+{{< img src="logs/explorer/nested_tables.png" alt="table example"  style="width:90%;">}}
 
 
 ## The Log Side Panel
@@ -279,7 +282,7 @@ Use the **Share** button to share the log opened in side panel to other contexts
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="Upper Log Panel"  style="width:50%;">}}
 
-## Share View
+
 ### Search Filter
 
 Export your current log visualization with the _share_ functionality:
