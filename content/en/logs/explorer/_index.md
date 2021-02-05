@@ -12,6 +12,12 @@ further_reading:
     - link: 'logs/processing'
       tag: 'Documentation'
       text: 'Learn how to process your logs'
+    - link: 'logs/explorer/live_tail'
+      tag: 'Documentation'
+      text: 'The Log Live Tail'
+    - link: 'logs/explorer/side_panel'
+      tag: 'Documentation'
+      text: 'The log side panel'
     - link: 'logs/explorer/saved_views'
       tag: Documentation
       text: 'Automatically configure your Log Explorer'
@@ -20,54 +26,27 @@ further_reading:
       text: 'Add a Log Explorer url to your clipboard'
 ---
 
-The **Log Explorer** is your home base for troubleshooting and exploration. Whether you start from scratch, from a [Saved View][32] or landing there from any other context (a monitor notification, a widget in a dashboard or whichever even with related logs), the Logs Explorer is designed to incrementally:
+The **Log Explorer** is your home base for troubleshooting and exploration. Whether you start from scratch, from a [Saved View][10] or landing there from any other context (a monitor notification, a widget in a dashboard or whichever even with related logs), the Logs Explorer is designed to incrementally:
 
 1. [**Filter**](#filters-logs) to narrow down, broaden or shift your focus on the subset of logs of current interest,
 2. [**Aggregate**](#aggregations-and-measures) queried logs on-the-fly into higher-level entities in order to derive or consolidate information,
 3. [**Visualize**](#visualisations) the outcome of filters and aggregations with different visual representations that put your logs into the right perspective to bubble up decisive information. 
 
+At any moment, [**Export**](#export) your exploration to reuse later or in different contexts.
 
 ## Filters Logs
 
-The search filter practically consists of a [timerange][3] (`Past 5 minutes` in the example below) and a search query (`service:payment status:error rejected` in the example below).
+The search filter practically consists of a timerange (`Past 5 minutes` in the example below) and a search query mixing key:value and full-text search (`service:payment status:error rejected` in the example below). Refer to our [log search syntax][1] and [timerange][2] documentation for details on advanced use-cases.
 
 [1]: /logs/search-syntax
-[3]: /dashboards/guide/custom_time_frames
+[2]: /dashboards/guide/custom_time_frames
 
 {{< img src="logs/explorer/search_filter.png" alt="Search Filter" style="width:100%;" >}}
 
-Refer to our [search syntax][1] documentation for all details on how to use full-text and key:value (a.k.a. faceted) search.
+[Indexed Logs][3] support both full-text search and key:value search queries. Note that key:value queries require that you [declare a facet][4] beforehand to enable queries on attributes (log content), or accelerate queries on tags (log context).
 
-
-In the Log Explorer, queries can be performed:
-
-* either on the stream of all ingested logs - see [Live Tail](#live-tail) 
-* or on the set of all indexed logs (indexed at first place, or rehydrated) - see [Indexed Logs](#indexed-logs)   
-
-Those two different datasets address slightly different use-cases with slightly different capabilities.
-
-### Indexed Logs
-
-[Indexed Logs][31] support both full-text search and key:value search queries. However, key:value queries require that you [declare a facet][90] beforehand to enable queries on attributes (log content), or accelerate queries on tags (log context).
-
-[31]: /logs/indexes
-[90]: /logs/explorer/facets/
-
-### Live Tail
-
-Choose the Live Tail option in the Timerange to query logs as they flow into Datadog. Live Tail logs do not persist, but the Live Tail view provides visibility on **all** logs, whether you choose to index them or not - see also [Exclusion Filters][2] on Logs Indexes. 
-
-{{< img src="logs/explorer/livetail.gif" alt="Log Livetail" style="width:80%;" >}}
-
-The Livetail is specifically useful, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
-
-[2]: /logs/indexes#exclusion-filters
-
-Contrary to queries on [indexed logs](#indexed-logs), queries in the Live Tail do *not* require that you [declare a facet][90] beforehand.
-
-*Note*. For the sake of readability, the Live Tail output is sampled when too many logs matching the query are flowing in. The sampling applied is uniformly random, so that your livetail logs are statistically representative of your actual log throughput. Scope your query down with additional search filters if you need visibility on every single log flowing in.    
-
-The livetail is compatible with the [List](#list-of-logs) Visualisation.
+[3]: /logs/indexes
+[4]: /logs/explorer/facets/
 
 
 ## Aggregate and Measure
@@ -164,6 +143,7 @@ The configuration of the log table is stored alongside other elements of your tr
 
 TODO
 
+
 ### Timeseries
 
 Visualize the evolution of a single [measure][1] (or a [facet][1] unique count of values) over a selected time frame, and (optionally) split by an available [facet][1].
@@ -205,104 +185,28 @@ Visualize the top values from a [facet][1] according to a chosen [measure][1] (t
 - When there are multiple measures, the top or bottom list is determined according to the first measure.
 - The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
-    **Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
+**Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
 
 The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
 {{< img src="logs/explorer/nested_tables.png" alt="table example"  style="width:90%;">}}
 
+## Export
 
-## The Log Side Panel
-
-Datadog displays individual logs following this general side-panel layout:
-
-{{< img src="logs/explorer/log_side_panel.png" alt="Log Side Panel"  style="width:60%;">}}
-
-### Log structured information 
-
-- The upper part of the panel displays general **context** information.
-- The lower part of the panel displays the actual **content** of the log.
-
-**Context** refers to the infrastructure and application context in which the log has been generated. Information is gathered from tags—whether automatically attached (host name, container name, log file name, serverless function name, etc.)—or added through custom tags (team in charge, environment, application version, etc.) on the log by the Datadog Agent or Log Forwarder.
-
-**Content** refers to the log itself. This includes the log message, as well as all structured information extracted and enriched from the logs through [Log Pipelines][7]. For logs generated by common components of a technical stack, parsing and enriching comes out-of-the-box:
-
-- For file log collection, make sure you properly set up the source field, which triggers file log collection. See Datadog's [100+ Log Integrations][8] for reference.
-- For container log collection, use [Autodiscovery][9].
-
-Some standard fields—for instance, `error.stack`, `http.method`, or `duration`—have specific enhanced displays in the Log Panel for better readability. Make sure you extract corresponding information from your logs and remap your attributes with [standard attribute remappers][10].
-
-### A hub to other data sources
-
-#### Correlation with Infrastructure (Host, Container, Serverless) data
-
-The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
-
-Click on the **Metrics Tab** and access underlying infrastructure metrics in a 30 minutes timeframe around the log.
-
-Interact with **Host** in the upper reserved attributes section, the related [host dashboard][11] or [network page][12]. Interact with **Container** sections to jump to the [container page][13] scoped with the underlying parameters.
-
-{{< img src="logs/explorer/log_side_panel_infra.gif" alt="Hub to Infra" style="width:60%;">}}
-
-In case logs comes from a serverless source, the Host Section is replaced with a Serverless section that links jump to the corresponding [serverless page][14].
-
-{{< img src="logs/explorer/log_side_panel_infra-serverless.png" alt="Hub to Serverless" style="width:60%;">}}
-
-
-#### Correlation with APM data
-
-Make sure you enable [trace injection in logs][15] and follow our [Unified Service Tagging][16] best practices to benefit from all the capabilities of Logs and APM correlation.
-
-Click on the **APM Tab** and see the log in the context of its whole trace, with upstream and downstream services running. Deep dive in the APM data and the [trace in APM][17].
-
-Interact with the **Service** section to refocus the search in the log explorer and see all other logs from the same trace.
-
-{{< img src="logs/explorer/log_side_panel_infra.gif" alt="Hub to APM" style="width:60%;">}}
-
-
-### Configure your troubleshooting context
-
-Interact with the attributes names and values in the lower JSON section to:
-
-- Add or remove a column from the logs table.
-- Append the search request with specific values (include or exclude)
-
-{{< img src="logs/explorer/side_panel_context.gif" alt="Side Panel context"  style="width:60%;">}}
-
-- Build or edit a facet or measure from an attribute. See [Log Facets][18].
-
-{{< img src="logs/explorer/side_panel_facets.gif" alt="Side Panel Facets"  style="width:60%;">}}
-
-### Share a log
-
-Use the **Share** button to share the log opened in side panel to other contexts.
-
-- **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
-- **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][19] available.
-
-{{< img src="logs/explorer/upper_log_panel.png" alt="Upper Log Panel"  style="width:50%;">}}
-
-
-### Search Filter
-
-Export your current log visualization with the _share_ functionality:
-
-- Export to **Monitor**: Export the query applied to your log analytics to create the query for a new [log monitor][62].
-- Export to **Dashboard**: Export the current analytics as a widget to an existing or new [dashboard][63].
-- Generate a new **Metric**: [Generate a new metric][64] out of the current analytic query.
-
-{{< img src="logs/explorer/analytics/analytics_share.png" alt="table example"  style="width:90%;">}}
+At any moment, and depending on your current aggregation, **export** your exploration:
+* as a [Saved View][10] as an investigation starting point for future-yourself or your teammates,
+* as a [Dashboard widget][63] for reporting or consolidation purpose,
+* as a [Monitor][62] in order to trigger alerts on predefined thresholds 
+* as a [Metric][64]
+* as a CSV
 
 [62]: /monitors/monitor_types/log/
 [63]: /dashboards/
 [64]: /logs/logs_to_metrics/
+[32]: /logs/explorer/saved_views/
 
+{{< img src="logs/explorer/export.png" alt="Search Filter" style="width:100%;" >}}
 
-### Saved views
-
-Use saved views to automatically configure your log explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][21] to learn more.
-
-[21]: /logs/explorer/saved_views/
 
 ## Further Reading
 
