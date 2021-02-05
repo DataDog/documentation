@@ -46,7 +46,7 @@ Datadog strongly recommends setting up your logging libraries to produce your lo
 
 Here are setup examples for the `log4j`, `log4j2`, and `logback` logging libraries:
 
-## Configure Your Logger
+## Configure your logger
 
 ### Raw format
 
