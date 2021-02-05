@@ -16,43 +16,22 @@ further_reading:
       tag: 'Blog'
       text: 'Correlate request logs with traces automatically'
 ---
+## Configure Your Logger
+
+The first step to correlating logs and traces is to [configure your logger][4].  Follow the configuration instructions for your specific logging framework.
 
 ## Automatically Inject Trace and Span IDs
 
-Enable injection in the Java tracer's [configuration][1] by adding `-Ddd.logs.injection=true` as a jvm startup argument or through environment variable `DD_LOGS_INJECTION=true`.
-
-If your logs are JSON formated and you are using Logback there is nothing left to do. Otherwise with other logging libraries you need to activate MDC attributes autoinjection into your logs.
-
-If your logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
-
-{{< tabs >}}
-{{% tab "Log4j2" %}}
-
-```xml
-<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
-```
-
-{{% /tab %}}
-{{% tab "slf4j/logback" %}}
-
-```xml
-<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+Enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property or through the environment variable `DD_LOGS_INJECTION=true`.  Full configuration details can be found on the [Java tracer configuration][1] page.
 
 **Note**: If the `attribute.path` for your trace ID is **not** `dd.trace_id`, ensure your trace ID reserved attribute settings account for the `attribute.path`. More information can be found in the [FAQ on this topic][2].
 
 ## Manually Inject Trace and Span IDs
 
-If you prefer to manually correlate your [traces][3] with your logs, leverage the Datadog API to retrieve correlation identifiers:
+If you prefer to manually correlate your traces with your logs, leverage the Java tracer's API to retrieve correlation identifiers:
 
-- Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning and end of each [span][4] to log (see examples below).
-- Configure MDC to use the injected Keys:
-
-    - `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
-    - `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
+- Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning of span being logged
+- Remove the identifiers when the span is complete
 
 {{< tabs >}}
 {{% tab "Log4j2" %}}
@@ -63,26 +42,19 @@ import datadog.trace.api.CorrelationIdentifier;
 
 // there must be spans started and active before this block.
 try {
-    ThreadContext.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
-    ThreadContext.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
-}
+    ThreadContext.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    ThreadContext.put("dd.span_id", CorrelationIdentifier.getSpanId());
 
 // Log something
 
-finally {
+} finally {
     ThreadContext.remove("dd.trace_id");
     ThreadContext.remove("dd.span_id");
 }
 ```
 
-Then update your logger configuration to include `dd.trace_id` and `dd.span_id` in your log pattern:
-
-```xml
-<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
-```
-
 {{% /tab %}}
-{{% tab "slf4j/logback" %}}
+{{% tab "Slf4j/Logback" %}}
 
 ```java
 import org.slf4j.MDC;
@@ -90,8 +62,8 @@ import datadog.trace.api.CorrelationIdentifier;
 
 // there must be spans started and active before this block.
 try {
-    MDC.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
-    MDC.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
+    MDC.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    MDC.put("dd.span_id", CorrelationIdentifier.getSpanId());
 }
 
 // Log something
@@ -101,13 +73,6 @@ finally {
     MDC.remove("dd.span_id");
 }
 ```
-
-Then update your logger configuration to include `dd.trace_id` and `dd.span_id` in your log pattern:
-
-```xml
-<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
-```
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -121,7 +86,6 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 
 [1]: /tracing/setup/java/#configuration
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=jsonlogs#trace-id-option
-[3]: /tracing/connect_logs_and_traces/
 [4]: /logs/log_collection/java/?tab=log4j
 [5]: /logs/log_collection/java/#raw-format
 [6]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
