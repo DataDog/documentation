@@ -74,7 +74,7 @@ Choose your environment below to get dedicated log collection instructions:
 
 {{% /tab %}}
 
-{{% tab "Severless" %}}
+{{% tab "Serverless" %}}
 
 Datadog collects logs from AWS Lambda. To enable this, refer to the [serverless monitoring documentation][17].
 
