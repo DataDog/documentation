@@ -1925,15 +1925,6 @@ components:
       - RUM
       - SECURITY_SIGNALS
       - PROFILES
-    FormulaAndFunctionEventsSortType:
-      description: Method for sorting event platform results.
-      enum:
-      - alphabetical
-      - measure
-      type: string
-      x-enum-varnames:
-      - ALPHABETICAL
-      - MEASURE
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -8855,8 +8846,6 @@ components:
                     type: string
                   order:
                     $ref: '#/components/schemas/QuerySortOrder'
-                  type:
-                    $ref: '#/components/schemas/FormulaAndFunctionEventsSortType'
                 required:
                 - aggregation
                 type: object
@@ -17926,11 +17915,21 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-given:
+        slo:
+          parameters:
+          - name: body
+            value: "{\n  \"type\": \"metric\",\n  \"name\": \"{{ unique }}\",\n  \"\
+              thresholds\": [{\n    \"timeframe\": \"7d\",\n    \"target\": 95.0,\n\
+              \    \"warning\": 98.0\n  }],\n  \"query\": {\n    \"numerator\": \"\
+              sum:httpservice.hits{code:2xx}.as_count()\",\n    \"denominator\": \"\
+              sum:httpservice.hits{!code:3xx}.as_count()\"\n  }\n}"
+          step: there is a valid "slo" in the system
       x-undo:
         operationId: DeleteSLO
         parameters:
         - name: slo_id
-          source: data.id
+          source: data[0].id
         type: unsafe
   /api/v1/slo/bulk_delete:
     post:
