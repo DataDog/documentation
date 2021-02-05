@@ -35,7 +35,7 @@ We support [Serilog][4], [NLog][5] (version 4.0+), or [log4net][6]. Automatic in
 
 ```csharp
 var log = new LoggerConfiguration()
-    // Add Enrich.FromLogContext to emit MDC properties
+    // Add Enrich.FromLogContext to emit Datadog properties
     .Enrich.FromLogContext()
     .WriteTo.File(new JsonFormatter(), "log.json")
     .CreateLogger();
@@ -55,7 +55,7 @@ var log = new LoggerConfiguration()
     <member value="message:messageobject" />
     <!--add raw message-->
 
-    <!-- Add value='properties' to emit MDC properties -->
+    <!-- Add value='properties' to emit Datadog properties -->
     <member value='properties'/>
   </layout>
 ```
@@ -66,7 +66,7 @@ var log = new LoggerConfiguration()
 For NLog version 4.6+:
 
 ```xml
-  <!-- Add includeMdlc="true" to emit MDC properties -->
+  <!-- Add includeMdlc="true" to emit Datadog properties -->
   <layout xsi:type="JsonLayout" includeMdlc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -78,7 +78,7 @@ For NLog version 4.6+:
 For NLog version 4.0 - 4.5:
 
 ```xml
-  <!-- If using version 4.4.10+, you may add includeMdc="true" to emit MDC properties -->
+  <!-- If using version 4.4.10+, you may add includeMdc="true" to emit Datadog properties -->
   <layout xsi:type="JsonLayout" includeMdc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -86,13 +86,16 @@ For NLog version 4.0 - 4.5:
     <attribute name="exception" layout="${exception:format=ToString}" />
   </layout>
 
-  <!-- If using version below 4.4.10, you must explicitly extract the 'dd.trace_id' and 'dd.span_id' values using new <attribute> nodes -->
+  <!-- If using version below 4.4.10, you must extract the Datadog properties individually by adding <attribute> nodes -->
   <layout xsi:type="JsonLayout">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
     <attribute name="message" layout="${message}" />
     <attribute name="exception" layout="${exception:format=ToString}" />
 
+    <attribute name="dd.env" layout="${mdc:item=dd.env}"/>
+    <attribute name="dd.service" layout="${mdc:item=dd.service}"/>
+    <attribute name="dd.version" layout="${mdc:item=dd.version}"/>
     <attribute name="dd.trace_id" layout="${mdc:item=dd.trace_id}"/>
     <attribute name="dd.span_id" layout="${mdc:item=dd.span_id}"/>
   </layout>
