@@ -26,9 +26,6 @@ further_reading:
     - link: 'tracing/visualization/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
-    - link: 'tracing/'
-      tag: 'Advanced Usage'
-      text: 'Advanced Usage'
     - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/samples"
       tag: "GitHub"
       text: "Examples of Custom Instrumentation"
