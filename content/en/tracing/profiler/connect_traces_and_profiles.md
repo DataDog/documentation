@@ -13,7 +13,7 @@ further_reading:
       text: 'Introduction to Profiling'
 ---
 
-If your application is showing performance problems in production, it's helpful to connect the distributed trace information from APM with the full profile of the code stack. Application processes that have both APM distributed tracing and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues.
+If your application is showing performance problems in production, it's helpful to connect the distributed trace information from APM with the full profile of the code stack. Application processes that have both APM distributed tracing and continuous profiler enabled are automatically linked. So you can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues.
 
 {{< img src="tracing/profiling/code_hotspots_tab.gif" alt="Code Hotspots tab shows profiling information for a APM trace span">}}
 
@@ -21,7 +21,7 @@ If your application is showing performance problems in production, it's helpful 
 
 {{< programming-lang-wrapper langs="java,python" >}}
 {{< programming-lang lang="java" >}}
-Code Hotspots identification is enabled by default when you [turn on Profiling for your service][1]. For manually instrumented code, Continuous Profiler requires Scope activation of spans:
+Code Hotspots identification is enabled by default when you [turn on Profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
 ```java
 final Span span = tracer.buildSpan("ServicehandlerSpan").start();
@@ -70,11 +70,11 @@ Click on one of these types to see a corresponding list, ordered by time, of the
 
 It is not uncommon to have a small amount of **Other** unexplained time (less than 10%). Potential reasons for Other time include:
 
-  - The span you selected isn't directly mapped to any execution. Profiling data is associated uniquely to spans when they are executing on a specific thread. For example, some spans are created/used uniquely as virtual containers of a series of related processing steps and never actually directly associated with any thread execution.
-  - Your application process cannot access CPU resources to execute and is paused. There is no way for profiler to know about competing resources from other processes or containers.
-  - The application is locked in synchronization or in I/O events that are individually lower than 10ms: Java profiler gets data for paused thread events (locks, I/O, parks) that are larger than 10ms. If you want to reduce that threshold, see [the documentation for changing setup defaults][1].
+  - The span you selected isn't directly mapped to any execution. Profiling data is associated uniquely to spans when they are executing on a specific thread. For example, some spans are created and used uniquely as virtual containers of a series of related processing steps and never directly associated with any thread execution.
+  - Your application process cannot access CPU resources to execute and is paused. There is no way for the profiler to know about competing resources from other processes or containers.
+  - The application is locked in synchronization or in I/O events that are individually lower than 10ms: the Java profiler receives data for paused thread events (locks, I/O, parks) that are larger than 10ms. If you want to reduce that threshold, see [the documentation for changing setup defaults][1].
   - The span you selected is short. Profiling is a sampling mechanism that regularly looks at how your code behaves. There might not be enough representative data for spans shorter than 50ms
-  - Missing instrumentation: Profiling breakdown requires that spans are associated with executing threads by activating these spans in the ScopeManager. Some custom instrumentations don't activate these spans properly and so we can't map them to executing threads. If this span comes from a custom integration, see the [Custom Instrumentation docs][2] for information on how to improve this.
+  - Missing instrumentation: Profiling breakdown requires that spans are associated with executing threads by activating these spans in the ScopeManager. Some custom instrumentations don't activate these spans properly, so we can't map them to executing threads. If this span comes from a custom integration, see the [Custom Instrumentation docs][2] for information on how to improve this.
 
 ## Viewing a profile from a trace
 
