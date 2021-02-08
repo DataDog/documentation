@@ -1910,6 +1910,11 @@ main:
     parent: rum_browser
     identifier: track_actions
     weight: 106
+  - name: Troubleshooting
+    url: real_user_monitoring/browser/troubleshooting/
+    parent: rum_browser
+    identifier: troubleshooting
+    weight: 107
   - name: Android Monitoring
     url: real_user_monitoring/android/
     parent: rum
