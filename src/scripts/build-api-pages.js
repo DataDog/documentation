@@ -720,6 +720,14 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               childData = value.items.properties;
               newRequiredFields = (value.items.required) ? value.items.required : newRequiredFields;
             }
+            // for items -> oneOf
+            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
+              childData = value.items.oneOf
+              .map((obj, indx) => {
+                return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
+              })
+              .reduce((obj, item) => ({...obj, ...item}), {});
+            }
           } else if(typeof value.items === 'string') {
             if(value.items === '[Circular]') {
               childData = null;
@@ -735,6 +743,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             newParentKey = "additionalProperties";
           }
         } else if (typeof value === 'object' && "oneOf" in value) {
+          // for properties -> oneOf
           if(value.oneOf instanceof Array && value.oneOf.length < 20) {
             childData = value.oneOf
               .map((obj, indx) => {
