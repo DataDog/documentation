@@ -5,7 +5,7 @@ description: Control the volume of logs indexed by Datadog
 aliases:
   - /logs/dynamic_volume_control
 further_reading:
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualise"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/processing/"

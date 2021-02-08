@@ -7,10 +7,10 @@ aliases:
     - /logs/search-syntax
     - /logs/explorer/search/
 further_reading:
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualise"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "/logs/explorer/patterns/"
+- link: "/logs/explorer/#patterns"
   tag: "Documentation"
   text: "Detect patterns inside your logs"
 - link: "/logs/processing/"
