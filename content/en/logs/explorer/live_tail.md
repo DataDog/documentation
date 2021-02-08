@@ -31,7 +31,7 @@ The Livetail is specifically useful, for instance, to check if a process has cor
 
 Choose the Live Tail option in the timerange from the [Log Explorer][3] to query logs as they flow into Datadog.
 
-{{< img src="logs/explorer/live_tail/livetail.gif" alt="Log Livetail" style="width:100%;" >}}
+{{< img src="logs/explorer/live_tail/livetail.gif" alt="Log Live Tail" style="width:100%;" >}}
 
 Contrary to queries on indexed logs happening in the [Log Explorer][3], queries in the Live Tail do *not* require that you [declare a facet][4] beforehand.
 
