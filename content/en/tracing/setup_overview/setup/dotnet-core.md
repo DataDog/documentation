@@ -46,7 +46,6 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 
 ### Installation
 
-By default, tracing is enabled in your `datadog.yaml` file under `apm_enabled: true` and the Agent listens for trace traffic at `localhost:8126`.
 {{< tabs >}}
 
 {{% tab "Windows" %}}
@@ -279,6 +278,10 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### Configure the Datadog Agent for APM
+
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
 
 ## Custom Instrumentation
 
