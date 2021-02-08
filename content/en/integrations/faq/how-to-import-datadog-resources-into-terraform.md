@@ -79,7 +79,7 @@ All example commands require the `--api-key` and `--app-key` flags.
 
 ## Generating resources with Terraform v0.13+
 
-Terraformer currently generates `tf`/`json` and `tfstate` files using Terraform `v0.12.29`. To ensure compatibility, run the upgrade command `terraform 0.13upgrade .` using Terraform `v0.13.x`. See [official Terraform docs][4] for upgrading.
+As of version `0.8.10`, Terraformer generates `tf`/`json` and `tfstate` files using Terraform `v0.12.29`. To ensure compatibility, run the upgrade command `terraform 0.13upgrade .` using Terraform `v0.13.x`. See [official Terraform docs][4] for upgrading.
 
 ##### Upgrading the generated files for Terraform v0.13+:
 
