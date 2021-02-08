@@ -21,7 +21,7 @@ If your application is showing performance problems in production, it's helpful 
 
 {{< programming-lang-wrapper langs="java,python" >}}
 {{< programming-lang lang="java" >}}
-Code Hotspots identification is enabled by default when you [turn on Profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
+Code Hotspots identification is enabled by default when you [turn on profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
 ```java
 final Span span = tracer.buildSpan("ServicehandlerSpan").start();
@@ -41,7 +41,7 @@ Requires tracing library version 0.65.0 or greater.
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Code Hotspots identification is enabled by default when you [turn on Profiling for your service][1].
+Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
 
 Requires tracing library version 0.44.0 or greater.
 
