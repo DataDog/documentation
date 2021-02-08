@@ -9,17 +9,11 @@
     {{ partial "rbac-permissions-table.html" (dict "data" $permissions_data "group" $single_permission_group) }}
   {{ else }}
     {{- range $group_name, $group_permissions_data := $permissions_data -}}
-      {{- if ne $group_name "General" -}}
+      {{- if and (ne $group_name "General") (ne $group_name "Logs") -}}
         <h2 id="{{ anchorize $group_name }}">
           {{- $group_name -}}
         </h2>
-        <p>
-          {{- if eq $group_name "Logs" -}}
-            Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you’d assign this permission to. See the recommendations on how to assign permissions to team members in the <a href="https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=ui#overview">Logs RBAC guide</a>.
-          {{- else -}}
-            Find below the list of permissions for the {{ lower $group_name }} assets:
-          {{- end -}}
-        </p>
+        <p>Find below the list of permissions for the {{ lower $group_name }} assets:</p>
         {{ partial "rbac-permissions-table.html" (dict "data" $group_permissions_data "group" $group_name) }}
       {{- end -}}
     {{- end -}}
