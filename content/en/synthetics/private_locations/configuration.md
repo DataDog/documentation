@@ -83,6 +83,7 @@ You can upload custom root certificates to your private locations to have your A
 
 | Option | Type | Default | Description |
 | -------| ---- | ------- | ----------- |
+| `config` | String | `/etc/datadog/synthetics-check-runner.json` | Path to JSON configuration file. |
 | `logFormat` | String | `pretty` | Format log output between `"pretty"`, and `"json"`. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog. |
 | `verbosity` | Number | `3` | Verbosity level (e.g., `-v`, `-vv`, `-vvv`, ...). |
 | `dumpConfig` | Boolean | `none` | Display worker configuration parameters without secrets. |

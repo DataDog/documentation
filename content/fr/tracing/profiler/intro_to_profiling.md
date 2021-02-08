@@ -14,7 +14,7 @@ Si vous utilisez un outil d'APM, le profiling s'apparente à un traceur plus pr�
 
 Le profileur en continu Datadog peut surveiller un grand nombre d'opérations, notamment l'utilisation du CPU, les types et la quantité d'objets alloués à la mémoire, le volume de l'E/S du réseau ou des fichiers, et plus encore. Les types de profils disponibles varient en fonction du langage en question.
 
-Nous avons conçu un [exemple de service][1] avec un problème de performance. Vous pouvez vous en servir pour tester le profiling. Ce service dispose d'une API permettant d'interroger une « base de données » composée de 5 000 films. Nous nous baserons sur cette API pour résoudre le problème de performance. Ce guide vous explique la démarche à suivre. Toutefois, si vous souhaitez suivre de votre côté les étapes, vous pouvez le faire depuis vos propres shell, navigateur et IDE.
+Nous avons conçu un [exemple de service][1] avec un problème de performance. Vous pouvez vous en servir pour tester le profiling. Ce service dispose d'une API permettant d'interroger une « base de données » composée de 5 000 films. Nous nous baserons sur cette API pour résoudre le problème de performance. Ce guide vous explique la marche à suivre. Toutefois, si vous souhaitez suivre de votre côté les étapes, vous pouvez le faire depuis vos propres shell, navigateur et IDE.
 
 ## Prérequis
 
@@ -28,7 +28,7 @@ Lancez l'exemple de service avec la commande suivante :
 ```
 git clone https://github.com/DataDog/dd-continuous-profiler-example.git
 cd dd-continuous-profiler-example
-echo "DD_API_KEY=VOTRE_CLÉ_API" > docker.env
+echo "DD_API_KEY=YOUR_API_KEY" > docker.env
 docker-compose up -d
 ```
 

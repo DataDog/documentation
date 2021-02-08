@@ -13,7 +13,7 @@ further_reading:
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-## Required Setup
+## Required setup
 
 If not already configured:
 
@@ -30,7 +30,7 @@ The Datadog Lambda Library can be installed as a layer or a gem. For most functi
 
 The minor version of the `datadog-lambda` gem always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
 
-#### Using the Layer
+#### Using the layer
 
 [Configure the layers][3] for your Lambda function using the ARN in the following format.
 
@@ -50,9 +50,9 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:5
 
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][5] before you can add the Datadog Lambda library as a layer.
 
-#### Using the Gem
+#### Using the gem
 
-Add the following to your Gemfile.
+Add the following to your Gemfile:
 
 ```Gemfile
 gem 'datadog-lambda'
@@ -79,7 +79,7 @@ RUN bundle config set path 'vendor/bundle'
 RUN bundle install
 ```
 
-### Configure the Function
+### Configure the function
 
 Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
 
@@ -97,22 +97,22 @@ def handler(event:, context:)
 end
 ```
 
-### Subscribe the Datadog Forwarder to the Log Groups
+### Subscribe the Datadog Forwarder to the log groups
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
 2. [Subscribe the Datadog Forwarder to your function's log groups][6].
 
-### Unified Service Tagging
+### Unified service tagging
 
 Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][7].
 
-## Explore Datadog Serverless Monitoring
+## Explore Datadog serverless monitoring
 
 After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][8].
 
-## Monitor Custom Business Logic
+## Monitor custom business logic
 
 If you would like to submit a custom metric or span, see the sample code below:
 

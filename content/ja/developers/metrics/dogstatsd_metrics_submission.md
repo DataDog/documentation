@@ -415,9 +415,9 @@ end
 package main
 
 import (
+    "fmt"
     "log"
     "math/rand"
-    "strconv"
     "time"
 
     "github.com/DataDog/datadog-go/statsd"
@@ -431,8 +431,8 @@ func main() {
     var i float64
     for {
         i += 1
-        statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
-        time.Sleep(rand.Intn(10) * time.Second)
+        statsd.Set("example_metric.set", fmt.Sprintf("%f", i), []string{"environment:dev"}, 1)
+        time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
     }
 }
 ```

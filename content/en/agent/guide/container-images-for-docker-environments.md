@@ -59,4 +59,3 @@ If you are currently using Docker, there are several container images available 
 {{< /tabs >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
-
