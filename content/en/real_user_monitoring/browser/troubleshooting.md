@@ -10,7 +10,7 @@ further_reading:
       text: 'Content Security Policy'
 ---
 
-If you experience unexpected behavior with Datadog Browser RUM, this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
+If you experience unexpected behavior with Datadog Browser RUM, this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes. 
 
 ## Missing data
 
