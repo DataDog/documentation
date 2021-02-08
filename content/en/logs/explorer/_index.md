@@ -29,117 +29,119 @@ further_reading:
       text: 'Add a Log Explorer url to your clipboard'
 ---
 
-The **Log Explorer** is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][1] or land here from any other context like monitor notifications or dashboard widgets, the Log Explorer is designed to iteratively:
+The **Log Explorer** is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][1], or land here from any other context like monitor notifications or dashboard widgets, the Log Explorer is designed to iteratively:
 
-1. [**Filter**](#filters-logs) to narrow down, broaden, or shift your focus on the subset of logs of current interest.
-2. [**Aggregate**](#aggregations-and-measures) queried logs on-the-fly into higher-level entities in order to derive or consolidate information.
-3. [**Visualize**](#visualisations) the outcome of filters and aggregations with different visual representations that put your logs into the right perspective to bubble up decisive information.
+1. [**Filter**](#filters-logs) logs; to narrow down, broaden, or shift your focus on the subset of logs of current interest.
+2. [**Aggregate**](#aggregations-and-measures) queried logs into higher-level entities in order to derive or consolidate information.
+3. [**Visualize**](#visualizations) the outcome of filters and aggregations to put your logs into the right perspective and bubble up decisive information.
 
-At any moment, [**Export**](#export) your exploration to reuse it later or in different contexts.
+At any moment, [**Export**](#export) your Log Explorer view to reuse it later or in different contexts.
 
 ## Filters Logs
 
-The search filter consists of a timerange and a search query mixing `key:value` and full-text search. Refer to our [log search syntax][2] and [timerange][3] documentation for details on advanced use-cases. Find below an example of the search query `service:payment status:error rejected` over a `Past 5 minutes` timerange
+The search filter consists of a timerange and a search query mixing `key:value` and full-text search. Refer to our [log search syntax][2] and [timerange][3] documentation for details on advanced use cases. For example, the search query `service:payment status:error rejected` over a `Past 5 minutes` timerange:
 
 {{< img src="logs/explorer/search_filter.png" alt="Search Filter" style="width:100%;" >}}
 
-[Indexed Logs][4] support both full-text search and `key:value` search queries. Note that `key:value` queries require that you [declare a facet][5] beforehand.
+[Indexed Logs][4] support both full-text search and `key:value` search queries.
+
+**Note**: `key:value` queries require that you [declare a facet][5] beforehand.
 
 ## Aggregate and Measure
 
-Logs can be valuable as individual events but sometimes the valuable information lives on higher level entities, in order to expose this information you must aggregate your logs.
+Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, aggregate your logs.
 
 {{< img src="logs/explorer/aggregations.png" alt="Log Livetail" style="width:100%;" >}}
 
-Aggregations are supported for indexed logs only. If you need to perform aggregation on non-indexed logs, consider [temporary disabling exclusion filters][3], using [logs to metrics][6] and/or running a [rehydration][7] on your archives.
+**Note**: Aggregations are supported for **indexed logs only**. If you need to perform aggregation on non-indexed logs, consider [temporary disabling exclusion filters][3], using [logs to metrics][6] and/or running a [rehydration][7] on your archives.
 
-### Simple Groups
+### Simple groups
 
-With the simple group aggregation, all logs matching the query filter are aggregated into groups based on the value of that log facet. On top of these groups, you can extract the following measures:
+With the simple group aggregation, all logs matching the query filter are aggregated into groups based on the value of a log facet. On top of these groups, you can extract the following measures:
 
-- **count of logs** per group,
-- **unique count** of coded values for a facet per group,
-- **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a facet per group,
+- **count of logs** per group
+- **unique count** of coded values for a facet per group
+- **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a facet per group
 
-_Note_: Individual logs having multiple values for a single facet would belong to that many groups. For instance, a log having the `team:sre` and the `team:marketplace` tags would be counted once in the `team:sre` group and once in the `team:marketplace` group.
+**Note**: Individual logs having multiple values for a single facet belong to that many groups. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` group and once in the `team:marketplace` group.
 
 Groups support the [Timeseries](#timeseries), [Toplist](#toplist) and [Table](#table) visualizations.
 
 ### Patterns
 
-With pattern aggregation, logs having a `message` with similar structures, belonging to the same `service` and having the same `status` are grouped altogether. The patterns view is helpful for detecting and filtering noisy error patterns that might cause you to miss other issues:
+With pattern aggregation, logs that have a `message` with similar structures, belong to the same `service` and have the same `status` are grouped altogether. The patterns view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues:
 
 {{< img src="logs/explorer/aggregations_patterns.png" alt="Log Livetail" style="width:60%;" >}}
 
-_Note_: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
+**Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
 
-Patterns support the [List Aggregates](#list-aggregates-of-logs) visualisation. Clicking a pattern in the list opens the pattern side panel from which you can:
+Patterns support the [List Aggregates](#list-aggregates-of-logs) visualization. Clicking a pattern in the list opens the pattern side panel from which you can:
 
-- Access a sample of logs from that pattern.
-- Append the search filter to scope it down to logs from this pattern only.
-- Get a kickstart for a [grok parsing rule][7] to extract structured information logs of that pattern.
+- Access a sample of logs from that pattern
+- Append the search filter to scope it down to logs from this pattern only
+- Get a kickstart for a [grok parsing rule][7] to extract structured information logs of that pattern
 
 {{< img src="logs/explorer/patterns_side_panel.png" alt="Log Livetail" style="width:80%;" >}}
 
 ### Transactions
 
-Transactions aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. For example, an e-commerce website would group log events across various user actions, such as catalog search, add to cart, and checkout, to build a transaction view using a common attribute such as `requestId` or `orderId`.
+Transactions aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. For example, an e-commerce website groups log events across various user actions, such as catalog search, add to cart, and checkout, to build a transaction view using a common attribute such as `requestId` or `orderId`.
 
 {{< img src="logs/explorer/aggregations_transactions.png" alt="Log Livetail" style="width:80%;" >}}
 
-_Note_: the transaction aggregation differs from the natural group aggregation, in the sense that resulting aggregates not only include logs matching the query, but also all logs belonging to the related transactions.
+**Note**: The transaction aggregation differs from the natural group aggregation, in the sense that resulting aggregates not only include logs matching the query, but also all logs belonging to the related transactions.
 
-- **Duration**, the difference of timestamps for the last and first log in the transaction. _This measure is automatically added_.
+- **Duration**: The difference of timestamps for the last and first log in the transaction. _This measure is automatically added_.
 - **Maximum Severity** found in logs in the transaction. _This measure is automatically added_.
 - **Finding key items:** For any `facet` with string values, calculate specific log event information using the operations `count unique`, `latest`, `earliest` and `most frequent`.
 - **Getting Statistics:** For any `measure`, calculate statistical information using the operations `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99`.
 
-Transaction support the [List Aggregates](#list-aggregates-of-logs) visualisation. Clicking a pattern in the list would open the pattern side panel from which you can:
+Transactions support the [List Aggregates](#list-aggregates-of-logs) visualization. Clicking a pattern in the list opens the pattern side panel from which you can:
 
-- Access all logs within that transaction.
-- Search specific logs within that transaction.
+- Access all logs within that transaction
+- Search specific logs within that transaction
 
 {{< img src="logs/explorer/transactions_side_panel.png" alt="Log Livetail" style="width:80%;" >}}
 
-## Visualise
+## Visualize
 
-Visualisations define how the outcome of filter and aggregates are displayed.
+Visualizations define how the outcome of filter and aggregates are displayed.
 
 ### Lists
 
-Lists are **paginated** results of logs or aggregates. They are specifically valuable when individual results matter, but when you have no prior or clear knowledge on what defines a matching result, so that you need to examine a bunch of them.
+Lists are **paginated** results of logs or aggregates. They are valuable when individual results matter, but you have no prior or clear knowledge on what defines a matching result. Lists allow you examine a group of results.
 
 Lists displaying individual logs and lists displaying aggregates of logs have slightly different capabilities.
 
-#### List of Logs
+#### List of logs
 
-For list of individual logs, choose which information of interest to display as colums. **Manage the columns** of the table using either:
+For a list of individual logs, choose which information of interest to display as columns. **Manage the columns** of the table using either:
 
-- The _table itself_, with interactions available in the first row. This is the preferred option to **sort**, **rearrange**, or **remove** columns.
-- The _facet panel_ the the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
+- The **table**, with interactions available in the first row. This is the preferred method to **sort**, **rearrange**, or **remove** columns.
+- The **facet panel** the the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
 
-With the _Options_ button, control the **number of lines** displayed in the table per log event.
+With the **Options** button, control the **number of lines** displayed in the table per log event.
 
 {{< img src="logs/explorer/table_controls.gif" alt="configure display table"  style="width:80%;">}}
 
-The default **sort** for logs in the list visualisation is by timestamp, most recent logs on top. This is the fastet and therefore recommended sorting method in the general case. Surface logs with lowest/highest value for a measure first, or sort you logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that sorting your table according to a specific field requires that you [declare a facet][5] boeforehand.
+The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that sorting your table according to a specific field requires that you [declare a facet][5] beforehand.
 
 The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][1]
 
-#### List Aggregates of Logs
+#### List aggregates of logs
 
 The columns displayed in list of aggregates are columns **derived from the aggregation**.
 
 Results are sorted according to:
 
-- Number of matching events per aggregate for **pattern** aggregation (default to descending: more to less),
-- Lexocigraphic order of the transaction id for **transaction** aggregation (default to ascending: A to Z).
+- Number of matching events per aggregate for **pattern** aggregation (default to descending: more to less)
+- Lexicographic order of the transaction id for **transaction** aggregation (default to ascending: A to Z)
 
 ### Timeseries
 
 Visualize the evolution of a single [measure][2] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
 
-The following timeseries Log Analytics shows the evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
+The following Timeseries log analytics shows the evolution of the **top 5 URL Paths** according to the number of **unique client IPs** over the last month.
 
 {{< img src="logs/explorer/timeseries.png" alt="timeserie example"  style="width:90%;">}}
 
@@ -149,22 +151,21 @@ Choose additional display options for timeseries: the **roll-up interval**, whet
 
 Visualize the top values from a [facet][2] according to the chosen [measure][2]:
 
-The following Top List Log Analytics shows:
-The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
+The following Toplist log analytics shows the evolution of the **top 5 URL Paths** according to the number of **unique client IPs** over the last month.
 
 {{< img src="logs/explorer/toplists.png" alt="top list example"  style="width:90%;">}}
 
 ### Nested Tables
 
-Visualize the top values from a [facet][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
+Visualize the top values from a [facet][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update a search query or drill through logs corresponding to either dimension.
 
 - When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 - When there are multiple measures, the top or bottom list is determined according to the first measure.
 - The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
-**Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
+**Note**: A table visualization used for one single measure and one single dimension is the same as a Toplist, just with a different display.
 
-The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
+The following table log analytics show the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
 {{< img src="logs/explorer/nested_tables.png" alt="table example"  style="width:90%;">}}
 
@@ -172,12 +173,12 @@ The following Table Log Analytics shows the evolution of the **top Status Codes*
 
 At any moment, and depending on your current aggregation, **export** your exploration as a:
 
-- [**Saved View**][1] as an investigation starting point for future-yourself or your teammates,
-- [**Dashboard widget**][8] for reporting or consolidation purpose,
-- [**Monitor**][9] to trigger alerts on predefined thresholds,
-- [**Metric**][6] to aggregate your logs into long term KPIs, as they are ingested in Dtadog,
-- **CSV** (for Inidividual Logs and Transactions). You can export up to 5,000 logs at once for individual logs, 500 for Transactions,
-- **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all [Datadog notification integrations][10] available.
+- [**Saved View**][1] to use as an investigation starting point for future-yourself or your teammates
+- [**Dashboard widget**][8] for reporting or consolidation purpose
+- [**Monitor**][9] to trigger alerts on predefined thresholds
+- [**Metric**][6] to aggregate your logs into long term KPIs, as they are ingested in Datadog
+- **CSV** (for individual logs and transactions). You can export up to 5,000 logs at once for individual logs, 500 for Transactions.
+- **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][10] available for this feature.
 
 {{< img src="logs/explorer/export.png" alt="Search Filter" style="width:100%;" >}}
 
