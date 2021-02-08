@@ -71,7 +71,7 @@ Groups support the [Timeseries](#timeseries), [Toplist](#toplist) and [Table](#t
 
 With pattern aggregation, logs that have a `message` with similar structures, belong to the same `service` and have the same `status` are grouped altogether. The patterns view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues:
 
-{{< img src="logs/explorer/aggregations_patterns.png" alt="Log Livetail" style="width:60%;" >}}
+{{< img src="logs/explorer/aggregations_patterns.png" alt="Log Livetail" style="width:80%;" >}}
 
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
 
