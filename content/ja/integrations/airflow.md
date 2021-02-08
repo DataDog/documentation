@@ -380,5 +380,5 @@ Airflow チェックには、イベントは含まれません。
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://airflow.apache.org/docs/stable/_modules/airflow/contrib/hooks/datadog_hook.html
+[5]: https://airflow.apache.org/docs/apache-airflow-providers-datadog/stable/_modules/airflow/providers/datadog/hooks/datadog.html
 [6]: https://docs.datadoghq.com/ja/help/
