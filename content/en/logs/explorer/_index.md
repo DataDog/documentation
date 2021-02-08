@@ -130,7 +130,7 @@ The columns displayed in list of aggregates are columns **derived from the aggre
 
 Results are sorted according to:
 * number of matching events per aggregate for **pattern** aggregation (default to descending: more to less),
-* lexocigraphic order of the transaction id for transaction aggregation (default to ascending: A to Z).
+* lexocigraphic order of the transaction id for **transaction** aggregation (default to ascending: A to Z).
 
 ### Timeseries
 
@@ -173,7 +173,7 @@ At any moment, and depending on your current aggregation, **export** your explor
 * [**Monitor**][12] to trigger alerts on predefined thresholds, 
 * [**Metric**][7] to aggregate your logs into long term KPIs, as they are ingested in Dtadog, 
 * **CSV** (for Inidividual Logs and Transactions). You can export up to 5,000 logs at once for individual logs, 500 for Transactions,
-- **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all [Datadog notification integrations][11] available.
+*-* **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all [Datadog notification integrations][11] available.
 
 [1]: /logs/search-syntax
 [2]: /dashboards/guide/custom_time_frames

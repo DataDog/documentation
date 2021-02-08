@@ -18,7 +18,7 @@ further_reading:
 
 Datadog displays individual logs following this general side-panel layout:
 
-{{< img src="logs/explorer/overview.png" alt="Log Side Panel"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/overview.png" alt="Log Side Panel"  style="width:60%;">}}
 
 ## Log structured information 
 
