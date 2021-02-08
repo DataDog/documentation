@@ -641,7 +641,16 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
 const typeColumn = (key, value, readOnlyMarkup) => {
   const validKeys = ['type', 'format'];
   let typeVal = '';
-  const oneOfLabel = (typeof value === 'object' && "oneOf" in value) ? "&nbsp;&lt;oneOf&gt;" : "";
+  let oneOfLabel = "";
+  if(typeof value === 'object' && "oneOf" in value) {
+    // oneof label if properties -> oneOf
+    oneOfLabel = "&nbsp;&lt;oneOf&gt;";
+  } else if(value.type === 'array' && typeof value.items === 'object' && "oneOf" in value.items) {
+    // oneof label if items -> oneOf
+    oneOfLabel = "&nbsp;&lt;oneOf&gt;";
+  } else {
+    oneOfLabel = "";
+  }
   if(validKeys.includes(key) && (typeof value !== 'object')) {
     typeVal = value;
   } else if(value.enum) {
@@ -650,7 +659,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
       typeVal = (value.format || value.type || '');
     }
   if(value.type === 'array') {
-    return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
     return `<div class="col-2 column"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim();
