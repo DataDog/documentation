@@ -274,7 +274,7 @@ components:
     AWSTagFilterDeleteRequest:
       description: The objects used to delete an AWS tag filter entry.
       properties:
-        aws_account_identifier:
+        account_id:
           description: The unique identifier of your AWS account.
           example: FAKEAC0FAKEAC2FAKEAC
           type: string
@@ -1925,15 +1925,6 @@ components:
       - RUM
       - SECURITY_SIGNALS
       - PROFILES
-    FormulaAndFunctionEventsSortType:
-      description: Method for sorting event platform results.
-      enum:
-      - alphabetical
-      - measure
-      type: string
-      x-enum-varnames:
-      - ALPHABETICAL
-      - MEASURE
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -5735,8 +5726,19 @@ components:
               description: Query scope.
               type: string
             unit:
-              description: Query units (if available).
-              type: string
+              description: 'An array of metric units that contains up to two unit
+                objects.
+
+                For example, bytes represents one unit object and bytes per second
+                represents two unit objects.
+
+                If a metric query only has one unit object, the second array element
+                is null.'
+              example: '[{"family":"bytes","scale_factor":1.0,"name":"byte","short_name":"B","plural":"bytes","id":2},null]'
+              items:
+                $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
+              nullable: true
+              type: array
           type: object
         sum:
           description: Total sum of the query.
@@ -5756,6 +5758,34 @@ components:
       - sum
       - values
       - metadata
+      type: object
+    SLOHistoryMetricsSeriesMetadataUnit:
+      description: An Object of metric units.
+      properties:
+        family:
+          description: The family of metric unit, for example `bytes` is the family
+            for `kibibyte`, `byte`, and `bit` units.
+          type: string
+        id:
+          description: The ID of the metric unit.
+          format: int64
+          type: integer
+        name:
+          description: The unit of the metric, for instance `byte`.
+          type: string
+        plural:
+          description: The plural Unit of metric, for instance `bytes`.
+          nullable: true
+          type: string
+        scale_factor:
+          description: The scale factor of metric unit, for instance `1.0`.
+          format: double
+          type: number
+        short_name:
+          description: A shorter and abbreviated version of the metric unit, for instance
+            `B`.
+          nullable: true
+          type: string
       type: object
     SLOHistoryResponse:
       description: A service level objective history response.
@@ -8794,34 +8824,35 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
         group_by:
           description: Group by options.
-          properties:
-            facet:
-              description: Event facet.
-              example: status.
-              type: string
-            limit:
-              description: Number of groups to return.
-              example: 10
-              format: int64
-              type: integer
-            sort:
-              description: Options for sorting group by results.
-              properties:
-                aggregation:
-                  $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
-                metric:
-                  description: Metric used for sorting group by results.
-                  type: string
-                order:
-                  $ref: '#/components/schemas/QuerySortOrder'
-                type:
-                  $ref: '#/components/schemas/FormulaAndFunctionEventsSortType'
-              required:
-              - aggregation
-              type: object
-          required:
-          - facet
-          type: object
+          items:
+            description: List of objects used to group by.
+            properties:
+              facet:
+                description: Event facet.
+                example: status.
+                type: string
+              limit:
+                description: Number of groups to return.
+                example: 10
+                format: int64
+                type: integer
+              sort:
+                description: Options for sorting group by results.
+                properties:
+                  aggregation:
+                    $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+                  metric:
+                    description: Metric used for sorting group by results.
+                    type: string
+                  order:
+                    $ref: '#/components/schemas/QuerySortOrder'
+                required:
+                - aggregation
+                type: object
+            required:
+            - facet
+            type: object
+          type: array
         indexes:
           description: An array of index names to query in the stream. Omit or use
             `[]` to query all indexes at once.
@@ -17806,7 +17837,7 @@ paths:
         required: false
         schema:
           type: string
-      - description: The query string to filter results based on SLO tags.
+      - description: The query string to filter results based on a single SLO tag.
         example: env:prod
         in: query
         name: tags_query
@@ -17884,11 +17915,21 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-given:
+        slo:
+          parameters:
+          - name: body
+            value: "{\n  \"type\": \"metric\",\n  \"name\": \"{{ unique }}\",\n  \"\
+              thresholds\": [{\n    \"timeframe\": \"7d\",\n    \"target\": 95.0,\n\
+              \    \"warning\": 98.0\n  }],\n  \"query\": {\n    \"numerator\": \"\
+              sum:httpservice.hits{code:2xx}.as_count()\",\n    \"denominator\": \"\
+              sum:httpservice.hits{!code:3xx}.as_count()\"\n  }\n}"
+          step: there is a valid "slo" in the system
       x-undo:
         operationId: DeleteSLO
         parameters:
         - name: slo_id
-          source: data.id
+          source: data[0].id
         type: unsafe
   /api/v1/slo/bulk_delete:
     post:

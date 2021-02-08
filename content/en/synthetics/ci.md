@@ -83,15 +83,26 @@ curl -X POST \
 
 ```json
 {
+  "batch_id": null,
   "results": [
     {
       "result_id": "0123456789012345678",
       "public_id": "abc-def-ghi",
-      "location": 1
-    },
+      "location": 30019
+    }
   ],
   "triggered_check_ids": [
     "abc-def-ghi"
+  ],
+  "locations": [
+    {
+      "display_name": "N. California (AWS)",
+      "name": "aws:us-west-1",
+      "region": "Americas",
+      "is_active": true,
+      "is_public": true,
+      "id": 30019
+    }
   ]
 }
 ```
@@ -127,28 +138,120 @@ curl -G \
 {
   "results": [
     {
-      "check_id": "123456",
-      "timestamp": 1585841351642,
+      "check": {
+        "config": {
+          "assertions": [
+            {
+              "operator": "lessThan",
+              "target": 2000,
+              "type": "responseTime"
+            }
+          ],
+          "configVariables": [],
+          "request": {
+            "basicAuth": {
+              "password": "test",
+              "username": "test"
+            },
+            "body": "{\"fakeContent\":true}",
+            "headers": {
+              "Content-Type": "application/json",
+              "Cookie": "name1=value1;name2=value2;",
+              "NEW_HEADER": "NEW VALUE"
+            },
+            "method": "GET",
+            "timeout": 30,
+            "url": "http://new.url/"
+          }
+        },
+        "locations": [
+          30019
+        ],
+        "options": {
+          "allow_insecure": true,
+          "follow_redirects": true,
+          "min_failure_duration": 0,
+          "min_location_failed": 1,
+          "monitor_options": {
+            "include_tags": true,
+            "locked": false,
+            "new_host_delay": 300,
+            "notify_audit": false,
+            "notify_no_data": false,
+            "renotify_interval": 0
+          },
+          "retry": {
+            "count": 2,
+            "interval": 300
+          },
+          "tick_every": 60
+        },
+        "subtype": "http",
+        "type": "api"
+      },
+      "check_id": "7654321",
+      "check_version": 2,
+      "config_override": {
+        "allowInsecureCertificates": true,
+        "basicAuth": {
+          "password": "test",
+          "username": "test"
+        },
+        "body": "{\"fakeContent\":true}",
+        "bodyType": "application/json",
+        "cookies": "name1=value1;name2=value2;",
+        "deviceIds": [
+          "laptop_large"
+        ],
+        "followRedirects": true,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cookie": "name1=value1;name2=value2;",
+          "NEW_HEADER": "NEW VALUE"
+        },
+        "locations": [
+          "aws:us-west-1"
+        ],
+        "public_id": "abc-def-ghi",
+        "retry": {
+          "count": 2,
+          "interval": 300
+        },
+        "startUrl": "http://example.org/",
+        "variables": {
+          "titleVariable": "new value"
+        }
+      },
+      "dc_id": 30019,
       "orgID": 2,
       "result": {
-        "unhealthy": false,
+        "assertionResults": [
+          {
+            "actual": 27.92,
+            "valid": true
+          }
+        ],
+        "dnsServer": "8.8.8.8",
         "eventType": "finished",
-        "timings": {
-          "firstByte": 14.7,
-          "tcp": 11.6,
-          "ssl": 45.7,
-          "dns": 12.484235048294067,
-          "download": 0.2,
-          "total": 84.7
-        },
+        "healthCheckRatio": 1,
+        "httpStatusCode": 400,
         "mainDC": "us1.prod",
+        "passed": true,
+        "resolvedIp": "93.184.216.34",
+        "responseSize": 349,
         "runType": 2,
-        "httpStatusCode": 200,
-        "responseSize": 9201,
-        "healthCheckRatio": 1
+        "subtype": "http",
+        "timings": {
+          "dns": 24.6,
+          "download": 0.1,
+          "firstByte": 1.4,
+          "tcp": 1.8,
+          "total": 27.9
+        },
+        "unhealthy": false
       },
-      "dc_id": 1,
-      "resultID": "0123456789012345678"
+      "resultID": "220123456789012345678",
+      "timestamp": 1612404331304
     }
   ]
 }

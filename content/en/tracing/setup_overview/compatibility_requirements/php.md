@@ -57,7 +57,6 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Laravel        | 4.2, 5.x, 6.x | All supported PHP versions |
 | Laravel 8      | 8.x (as of `0.52.0`) | All supported PHP versions |
 | Lumen          | 5.2+          | All supported PHP versions |
-| Slim           | 3.x           | All supported PHP versions |
 | Symfony 3      | 3.3, 3.4      | All supported PHP versions |
 | Symfony 4      | 4.x           | All supported PHP versions |
 | Symfony 5      | 5.x (as of `0.50.0`) | All supported PHP versions |
@@ -67,7 +66,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Drupal         |               | All supported PHP versions |
 | Magento        | 1, 2          | All supported PHP versions |
 | Phalcon        | 1.3, 3.4      | All supported PHP versions |
-| Slim           | 2.x           | All supported PHP versions |
+| Slim           | 2.x, 3.x, 4.x | All supported PHP versions |
 | Neos Flow      | 1.1           | All supported PHP versions |
 | FuelPHP        | 1.1           | PHP 7+                     |
 

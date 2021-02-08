@@ -1,5 +1,5 @@
 ---
-title: Metrics without Limits\* FAQ
+title: Metrics without Limits FAQ
 kind: faq
 is_beta: true
 further_reading:

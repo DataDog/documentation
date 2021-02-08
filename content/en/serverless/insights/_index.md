@@ -21,7 +21,7 @@ Datadog uses AWS CloudWatch metrics, Datadog enhanced AWS Lambda metrics, and [L
 
 **Note**: Datadog generates [High Errors](#high-errors), [High Duration](#high-duration), [Throttled](#throttles), and [High Iterator Age](#high-iterator-age) insights out of the box after setting up the [AWS integration][2]. All other insights, including those generated on individual invocations, require the [Datadog Forwarder][3] and [Enhanced Lambda Metrics][4].
 
-## Generated Insights
+## Generated insights
 
 ### Errors
 
@@ -29,13 +29,13 @@ More than 1% of the function's invocations were errors in the selected time rang
 
 **Resolution:** Examine the function's logs, check for recent code or configuration changes with [Deployment Tracking][5], or look for failures across microservices with [distributed tracing][6].
 
-### High Errors
+### High errors
 
 More than 10% of the function's invocations were errors in the selected time range.
 
 **Resolution:** Examine the function's logs, check for recent code or configuration changes with [Deployment Tracking][5], or look for failures across microservices with [distributed tracing][6].
 
-### High Memory Usage
+### High memory usage
 
 At least one invocation in the selected time range used over 95% of the allocated memory.
 
@@ -43,7 +43,7 @@ At least one invocation in the selected time range used over 95% of the allocate
 
 **Resolution:** Lambda functions using close to their maximum configured memory are at risk of being killed by the Lambda runtime, resulting in user-facing errors. Consider increasing the amount of configured memory on your function. Note that this could affect your AWS bill.
 
-### High Duration
+### High duration
 
 At least one invocation in the selected time range exceeded 95% of the configured timeout.
 
@@ -51,7 +51,7 @@ At least one invocation in the selected time range exceeded 95% of the configure
 
 **Resolution:** Lambda functions running for close to their configured timeout are at risk of being killed by the Lambda runtime. This could lead to slow or failed responses to incoming requests. Consider increasing the configured timeout if you expect your function to need more execution time. Note that this could affect your AWS bill.
 
-### Cold Starts
+### Cold starts
 
 More than 1% of the function's invocations were cold starts in the selected time range.
 
@@ -59,7 +59,7 @@ Datadog's [enhanced metrics][4] and [distributed tracing][6] can help you unders
 
 **Resolution:** Cold starts occur when your serverless applications receive sudden increases in traffic, and can occur when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. To get ahead of cold starts, consider enabling [provisioned concurrency][7] on your impacted Lambda functions. Note that this could affect your AWS bill.
 
-### Out of Memory
+### Out of memory
 
 At least one invocation in the selected time range ran out of memory.
 
@@ -77,13 +77,13 @@ More than 10% of invocations in the selected time range were throttled. Throttli
 
 **Resolution:** Check your [Lambda concurrency metrics][9] and confirm if `aws.lambda.concurrent_executions.maximum` is approaching your AWS account concurrency level. If so, consider configuring reserved concurrency, or request a service quota increase from AWS. Note that this may affect your AWS bill.
 
-### High Iterator Age
+### High iterator age
 
 The function's iterator was older than two hours. Iterator age measures the age of the last record for each batch of records processed from a stream. When this value increases, it means your function cannot process data fast enough.
 
 **Resolution:** Enable [distributed tracing][6] to isolate why your function has so much data being streamed to it. You can also consider increasing the shard count and batch size of the stream your function reads from.
 
-### Over Provisioned
+### Over provisioned
 
 No invocation in the selected time range used more than 10% of the allocated memory. This means your function has more billable resources allocated to it than it may need.
 

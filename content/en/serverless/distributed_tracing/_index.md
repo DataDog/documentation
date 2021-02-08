@@ -19,7 +19,7 @@ By connecting your serverless traces to metrics, Datadog provides a context-rich
 
 The Datadog Python, Node.js, Ruby, Go and Java tracing libraries support distributed tracing for AWS Lambda. The easiest way to add tracing to your application is with the [Datadog Lambda Library][1], which includes the Datadog tracing library as a dependency.
 
-## Choose your Tracing Library
+## Choose your tracing library
 
 {{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="architecture diagram for tracing AWS Lambda with Datadog" >}}
 

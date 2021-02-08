@@ -1,0 +1,24 @@
+{{ $permissions_data := $.Site.Data.permissions }}
+{{ $single_permission_group := .Get "group" }}
+
+{{/* Passing a single permission group name allows us to render one set of permissions at a time.   Currently this is used to separate General from Advanced Permissions on the account_management/rbac/permissions page, but could be re-used elsewhere in the future. */}}
+
+{{ if ne $permissions_data nil }}
+  {{ if ne $single_permission_group nil }}
+    {{ $permissions_data := index $permissions_data $single_permission_group }}
+    {{ partial "rbac-permissions-table.html" (dict "data" $permissions_data "group" $single_permission_group) }}
+  {{ else }}
+    {{- range $group_name, $group_permissions_data := $permissions_data -}}
+      {{- if and (ne $group_name "General") (ne $group_name "Logs") -}}
+        <h2 id="{{ anchorize $group_name }}">
+          {{- $group_name -}}
+        </h2>
+        <p>Find below the list of permissions for the {{ lower $group_name }} assets:</p>
+        {{ partial "rbac-permissions-table.html" (dict "data" $group_permissions_data "group" $group_name) }}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{ warnf "Could not load RBAC permission set" }}
+{{- end -}}
+
