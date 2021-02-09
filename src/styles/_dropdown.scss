@@ -9,6 +9,10 @@
 
 .chevron-down {
   transform: rotate(45deg);
+
+  &:lang(ja) {
+    margin-top: -1px;
+  }
 }
 
 .chevron-up {

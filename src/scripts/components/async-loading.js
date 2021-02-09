@@ -145,7 +145,7 @@ function loadPage(newUrl) {
             initializeSecurityRules();
 
             // if newly requested TOC is NOT disabled
-            if (newTOC.querySelector('#TableOfContents') && currentTOC) {
+            if (newTOC && newTOC.querySelector('#TableOfContents') && currentTOC) {
                 currentTOC.replaceWith(newTOC);
                 buildTOCMap();
                 updateTOC();
@@ -162,12 +162,15 @@ function loadPage(newUrl) {
                 updateTOC();
             }
 
-            // If there wasn't a sidebar on the previous page, but a sidebar element exists in the response from the HTTP request,
-            // we need to manually append it to the DOM.   I'm certain we can implement a better strategy for much of the logic in here,
-            // but this should hold us over until then.
-            if (newSidebar && !currentSidebar) {                
+            // Ensure sidebar is displayed or hidden properly based on HTTP response.  I'm certain we can implement a better strategy for what's happening in this script, but this should hold us over until then.
+            if (newSidebar && !currentSidebar) {              
                 const jsContentContainer = document.querySelector('.js-content-container');
                 jsContentContainer.appendChild(newSidebar);
+            }
+
+            if (!newSidebar && currentSidebar) {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.style.display = 'none';
             }
 
             const pathName = new URL(newUrl).pathname;

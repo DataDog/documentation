@@ -64,10 +64,8 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 // Desktop TOC
 .toc-container {
     display: none;
-    &:lang(ja) {
-        padding-left: 30px;
-    }
     padding-top: 95px;
+    
     &.mobile-open {
         top: 60px;
         position: sticky;

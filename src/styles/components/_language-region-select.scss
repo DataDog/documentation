@@ -127,6 +127,8 @@ aside.sidebar {
   }
 
   &:lang(ja) {
-    padding-left: 15px;
+    @include media-breakpoint-up(lg) {
+      padding-left: 15px;
+    }
   }
 }
