@@ -85,7 +85,7 @@ As of version `0.8.10`, Terraformer generates `tf`/`json` and `tfstate` files us
 
 1. Import resource using terraformer.
 
-2. Using Terraform `v0.13.x`, CD into the generated resource directory and run `terraform 0.13upgrade .`.
+2. Using Terraform `v0.13.x`, `cd` into the generated resource directory and run `terraform 0.13upgrade .`.
 
 3. Run `terraform init` to re-run the provider installer.
 
