@@ -163,14 +163,22 @@ function loadPage(newUrl) {
             }
 
             // Ensure sidebar is displayed or hidden properly based on HTTP response.  I'm certain we can implement a better strategy for what's happening in this script, but this should hold us over until then.
-            if (newSidebar && !currentSidebar) {              
+            if (newSidebar && !currentSidebar) {            
                 const jsContentContainer = document.querySelector('.js-content-container');
                 jsContentContainer.appendChild(newSidebar);
             }
 
             if (!newSidebar && currentSidebar) {
                 const sidebar = document.querySelector('.sidebar');
-                sidebar.style.display = 'none';
+                sidebar.classList.add('d-none');
+            }
+
+            if (newSidebar && currentSidebar) {
+                const sidebar = document.querySelector('.sidebar');
+
+                if (sidebar.classList.value.includes('d-none')) {
+                    sidebar.classList.remove('d-none');
+                }
             }
 
             const pathName = new URL(newUrl).pathname;
