@@ -19,6 +19,17 @@ if [ ${RUN_SERVER} = true ]; then
 
   update_pre_build.py "${args}"
 
+	# rbac permissions 
+	if [ ${PULL_RBAC_PERMISSIONS} == true ]; then
+		echo "Pulling RBAC permissions."
+
+		if [ ${DD_API_KEY} != false ] && [ ${DD_APP_KEY} != false ]; then
+			pull_rbac.py ${DD_API_KEY} ${DD_APP_KEY}
+		else
+			echo "Api or application keys were not found. Skipping RBAC permissions."
+		fi
+	fi
+
   # placeholders
 	if [ ${CREATE_I18N_PLACEHOLDERS} == true ]; then
 		echo "Creating i18n placeholder pages."
