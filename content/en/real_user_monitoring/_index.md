@@ -33,7 +33,7 @@ Datadog's Real User Monitoring (RUM) gives you end-to-end visibility into the re
 * **Performance**: Track the performance of web pages, mobile application screens, user actions, network requests, and your front-end code
 * **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, feature usage…)
-* **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors…)
+* **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors)
 
 
 
