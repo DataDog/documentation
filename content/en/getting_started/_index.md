@@ -1,7 +1,7 @@
 ---
 title: Getting started
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 aliases:
     - /overview
     - /getting_started/faq/

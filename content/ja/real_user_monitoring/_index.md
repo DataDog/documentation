@@ -2,7 +2,7 @@
 title: リアルユーザーモニタリング
 kind: documentation
 description: ユーザーから見たフロントエンドアプリケーションのパフォーマンスを視覚化して分析します。
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /ja/real_user_monitoring/installation
 further_reading:
@@ -27,7 +27,7 @@ Datadog のリアルユーザーモニタリング (RUM) は、個々のユー�
 
 {{< whatsnext desc="RUM の概要:">}}
   {{< nextlink href="/real_user_monitoring/browser">}}<u>ブラウザの監視</u>: ブラウザ SDK を構成してアプリケーションを作成します。{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/android">}}<u>Android の監視</u>: Android SDK を構成してアプリケーションを作成します。{{< /nextlink >}} 
+  {{< nextlink href="/real_user_monitoring/android">}}<u>Android の監視</u>: Android SDK を構成してアプリケーションを作成します。{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/dashboards">}}<u>ダッシュボード</u>: すぐに使用できるダッシュボード内で収集されたすべてのデータを利用開始後すぐに発見します。{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="RUM イベントを探索する:">}}

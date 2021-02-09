@@ -2,6 +2,7 @@
 title: RUM エラー追跡
 kind: ドキュメント
 beta: true
+disable_sidebar: true
 further_reading:
   - link: /real_user_monitoring/error_tracking/explorer
     tag: Documentation

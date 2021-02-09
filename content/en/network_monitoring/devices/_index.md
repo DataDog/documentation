@@ -1,7 +1,7 @@
 ---
 title: Network Device Monitoring
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 description: Gain visibility into your network-connected devices, such as routers, switches, servers, and firewalls.
 aliases:
     - /network_performance_monitoring/devices/

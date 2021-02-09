@@ -1,3 +1,24 @@
+.chevron {
+  width: 8px;
+  height: 8px;
+  border: 2px solid $brand-primary;
+  display: inline-block;
+  border-top: none;
+  border-left: none;
+}
+
+.chevron-down {
+  transform: rotate(45deg);
+
+  &:lang(ja) {
+    margin-top: -1px;
+  }
+}
+
+.chevron-up {
+  transform: rotate(-135deg);
+  margin-top: 5px;
+}
 
 // Detect lightness
 @function detectLightness($color) {
@@ -197,10 +218,10 @@ $responsive-breakpoint: 768px
       border: none;
       z-index: 999;
       max-width: 100% !important;
-      
+
       @include layout-width($layout-width);
       box-shadow: 0px 1px 0px rgba(30, 5, 36, 0.16), 0px 23px 32px -8px rgba(0, 0, 0, 0.26);
-      
+
       // Arrow
       &:before {
         display: none;
