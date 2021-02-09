@@ -178,7 +178,7 @@ dotnet.exe example.dll
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. While it is instrumenting your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port, change it by setting these environment variables:
+3. While it is instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting these environment variables:
 
     - `DD_AGENT_HOST`
     - `DD_TRACE_AGENT_PORT`
@@ -286,7 +286,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 ## Custom Instrumentation
 
 <div class="alert alert-warning"> 
-  <strong>Note:</strong>  If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
+  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 </div>
 
 To use custom instrumentation in your .NET application:
@@ -445,7 +445,7 @@ The following table lists the configuration variables that are available **only*
 
 | Setting Name                                                                  | Description                                                                                                           |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| `DD_TRACE_<INTEGRATION_NAME>_ENABLED`<br/><br/>`Integrations[<INTEGRATION_NAME>].Enabled`            | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.  Integration names are listed in the [Integrations][5] section.                          |
+| `DD_TRACE_<INTEGRATION_NAME>_ENABLED`<br/><br/>`Integrations[<INTEGRATION_NAME>].Enabled`            | Enables or disables a specific integration. Valid values are: `true` (default) or `false`. Integration names are listed in the [Integrations][5] section.                          |
 
 ## Further reading
 
