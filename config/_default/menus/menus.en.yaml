@@ -3443,8 +3443,7 @@ api:
         - v2
       operationids:
         - ListLogsGet
-      unstable:
-        - v2
+      unstable: []
   - name: Aggregate events
     url: '#aggregate-events'
     identifier: aggregate-events
@@ -3478,8 +3477,7 @@ api:
         - v2
       operationids:
         - ListLogs
-      unstable:
-        - v2
+      unstable: []
   - name: Logs Indexes
     url: /api/latest/logs-indexes/
     identifier: logs-indexes
@@ -3494,8 +3492,7 @@ api:
         - v1
       operationids:
         - UpdateLogsIndex
-      unstable:
-        - v1
+      unstable: []
   - name: Get an index
     url: '#get-an-index'
     identifier: get-an-index
@@ -3506,8 +3503,7 @@ api:
         - v1
       operationids:
         - GetLogsIndex
-      unstable:
-        - v1
+      unstable: []
   - name: Create an index
     url: '#create-an-index'
     identifier: create-an-index
@@ -3518,8 +3514,7 @@ api:
         - v1
       operationids:
         - CreateLogsIndex
-      unstable:
-        - v1
+      unstable: []
   - name: Get all indexes
     url: '#get-all-indexes'
     identifier: get-all-indexes
@@ -3530,8 +3525,7 @@ api:
         - v1
       operationids:
         - ListLogIndexes
-      unstable:
-        - v1
+      unstable: []
   - name: Update indexes order
     url: '#update-indexes-order'
     identifier: update-indexes-order
@@ -3542,8 +3536,7 @@ api:
         - v1
       operationids:
         - UpdateLogsIndexOrder
-      unstable:
-        - v1
+      unstable: []
   - name: Get indexes order
     url: '#get-indexes-order'
     identifier: get-indexes-order
@@ -3554,8 +3547,7 @@ api:
         - v1
       operationids:
         - GetLogsIndexOrder
-      unstable:
-        - v1
+      unstable: []
   - name: Logs Pipelines
     url: /api/latest/logs-pipelines/
     identifier: logs-pipelines
@@ -5277,8 +5269,7 @@ api:
         - v2
       operationids:
         - AddReadRoleToArchive
-      unstable:
-        - v2
+      unstable: []
   - name: List read roles for an archive
     url: '#list-read-roles-for-an-archive'
     identifier: list-read-roles-for-an-archive
@@ -5289,8 +5280,7 @@ api:
         - v2
       operationids:
         - ListArchiveReadRoles
-      unstable:
-        - v2
+      unstable: []
   - name: Revoke role from an archive
     url: '#revoke-role-from-an-archive'
     identifier: revoke-role-from-an-archive
@@ -5301,8 +5291,7 @@ api:
         - v2
       operationids:
         - RemoveRoleFromArchive
-      unstable:
-        - v2
+      unstable: []
   - name: Update an archive
     url: '#update-an-archive'
     identifier: update-an-archive
