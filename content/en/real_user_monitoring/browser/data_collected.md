@@ -250,7 +250,7 @@ Detailed network timing data for the loading of an application’s resources are
 ### Error sources
 Front-end errors are split in 4 different categories depending on their `error.source`:
 
-- **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found in the documentation.
+- **network**: XHR or Fetch errors resulting from AJAX requests.
 - **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
 - **console**: `console.error()` API calls.
 - **custom**: Errors sent with the [RUM `addError` API][1] default to `custom`.
