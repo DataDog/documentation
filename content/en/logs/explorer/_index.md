@@ -149,9 +149,9 @@ Choose additional display options for timeseries: the **roll-up interval**, whet
 
 ### Toplists
 
-Visualize the top values from a [facet][2] according to the chosen [measure][2]:
+Visualize the top values from a [facet][2] according to the chosen [measure][2].
 
-The following Toplist log analytics shows the evolution of the **top 5 URL Paths** according to the number of **unique client IPs** over the last month.
+For example, the following Toplist shows the **top 15 Customers** on a merchant website according to the number of **unique sessions** they had over the last day.
 
 {{< img src="logs/explorer/toplists.png" alt="top list example"  style="width:90%;">}}
 
@@ -165,7 +165,7 @@ Visualize the top values from a [facet][2] according to a chosen [measure][2] (t
 
 **Note**: A table visualization used for one single measure and one single dimension is the same as a Toplist, just with a different display.
 
-The following table log analytics show the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
+The following table log analytics show the evolution of the **Top 10 Availability zones**, and for each Availability Zone the **Top 10 Versions** according to their **number or error logs**, along with the number of unique count of **Hosts** and **Container ID** for each.
 
 {{< img src="logs/explorer/nested_tables.png" alt="table example"  style="width:90%;">}}
 
