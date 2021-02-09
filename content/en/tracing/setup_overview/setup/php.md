@@ -288,7 +288,7 @@ There are two classes of scenarios that are not covered by automatic normalizati
 
 ###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
-This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`. 
+This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`.
 
 | URL                          | regex     | Expected Resource Name       |
 |:-----------------------------|:----------|:-----------------------------|
@@ -312,6 +312,8 @@ When the application runs in a docker container, the path `/proc/self` should al
 ## Upgrading
 
 To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
+
+Once the installation is completed restart PHP (PHP-FPM or the Apache SAPI).
 
 **Note**: If you are using second level caching in OPcache by setting the parameter `opcache.file_cache`, remove the cache folder.
 
