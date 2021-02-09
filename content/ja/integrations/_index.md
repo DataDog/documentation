@@ -1,7 +1,7 @@
 ---
 title: インテグレーション
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /ja/integrations/verisign_openhybrid/
   - /ja/integrations/tcp_queue_length/

@@ -2,7 +2,7 @@
 title: Monitor Guides
 kind: guide
 private: true
-disable_toc: true
+disable_sidebar: true
 ---
 
 {{< whatsnext desc="General Guides:" >}}

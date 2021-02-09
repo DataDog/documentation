@@ -7,5 +7,5 @@ aliases:
   - /ja/faq/
   - /ja/docs/
   - /ja/guides/overview/
-disable_toc: true
+disable_sidebar: true
 ---

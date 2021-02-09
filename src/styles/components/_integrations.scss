@@ -18,6 +18,14 @@ $ddpurple:    #632CA6;
     border-radius: 2px 0px 0px 2px;
     padding: 0.375rem 1rem;
   }
+
+  .sidebar {
+    display: none;
+
+    @include media-breakpoint-up(xl) {
+      display: flex;
+    }
+  }
 }
 
 .integrations-single {

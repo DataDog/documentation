@@ -1,7 +1,7 @@
 ---
 title: Network Monitoring
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 description: Explore Datadog Network Monitoring Products
 further_reading:
   - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
