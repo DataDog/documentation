@@ -15766,9 +15766,6 @@ paths:
       - Logs Indexes
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta.**
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     put:
       description: 'This endpoint updates the index order of your organization.
 
@@ -15807,9 +15804,6 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
-      x-unstable: '**Note: This endpoint is in public beta.**
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/logs/config/indexes:
     get:
       description: 'The Index object describes the configuration of a log index.
@@ -15834,9 +15828,6 @@ paths:
       - Logs Indexes
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Creates a new index. Returns the Index object passed in the request
         body when the request is successful.
@@ -15875,9 +15866,6 @@ paths:
         operationId: TODO
         parameters: []
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/logs/config/indexes/{name}:
     get:
       description: Get one log index from your organization. This endpoint takes no
@@ -15914,9 +15902,6 @@ paths:
       - Logs Indexes
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     put:
       description: "Update an index as identified by its name.\nReturns the Index\
         \ object passed in the request body when the request is successful.\n\nUsing\
@@ -15968,9 +15953,6 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
-      x-unstable: '**Note: This endpoint is in public beta.**
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/logs/config/pipeline-order:
     get:
       description: 'Get the current order of your pipelines.

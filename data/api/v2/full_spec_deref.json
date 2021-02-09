@@ -38522,8 +38522,7 @@
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "idempotent"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       },
       "get": {
         "description": "Returns all read roles a given archive is restricted to.",
@@ -38753,8 +38752,7 @@
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       },
       "post": {
         "description": "Adds a read role to an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
@@ -38893,8 +38891,7 @@
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "unsafe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       }
     },
     "/api/v2/logs/config/metrics": {
@@ -41897,8 +41894,7 @@
         ],
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       }
     },
     "/api/v2/logs/events/search": {
@@ -42233,8 +42229,7 @@
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       }
     },
     "/api/v2/permissions": {
