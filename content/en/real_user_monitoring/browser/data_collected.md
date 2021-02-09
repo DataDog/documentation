@@ -27,12 +27,12 @@ The Datadog Real User Monitoring SDK generates six types of events:
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Session][1]   | 30 days   | A user session begins when a user starts browsing the web application. It contains high-level information about the user (browser, device, geolocation). It aggregates all RUM events collected during the user journey with a unique `session.id` attribute. |
-| [View][2]      | 30 days   | A view event is generated each time a user visits a page of the web application. While the user remains on the same page, resource, long-task, error and action events are linked to the related RUM view with the `view.id` attribute.                       |
-| [Resource][3]  | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a webpage. It includes detailed loading timing information.                                                                                                              |
-| [Long Task][4] | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                    |
-| [Error][5]     | 30 days   | RUM collects every frontend error emitted by the browser.                                                                                                                                                                                                     |
-| [Action][6]    | 30 days   | RUM action events track user interactions during a user journey and can also be manually sent to monitor custom user actions.                                                                                                                                 |
+| Session   | 30 days   | A user session begins when a user starts browsing the web application. It contains high-level information about the user (browser, device, geolocation). It aggregates all RUM events collected during the user journey with a unique `session.id` attribute. |
+| View      | 30 days   | A view event is generated each time a user visits a page of the web application. While the user remains on the same page, resource, long-task, error and action events are linked to the related RUM view with the `view.id` attribute.                       |
+| Resource  | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a webpage. It includes detailed loading timing information.                                                                                                              |
+| Long Task | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                    |
+| Error     | 30 days   | RUM collects every frontend error emitted by the browser.                                                                                                                                                                                                     |
+| Action    | 30 days   | RUM action events track user interactions during a user journey and can also be manually sent to monitor custom user actions.                                                                                                                                 |
 
 The following diagram illustrates the RUM event hierarchy:
 
@@ -97,15 +97,15 @@ The following attributes are related to the geo-location of IP addresses:
 | Fullname                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `geo.country`         | string | Name of the country                                                                                                                  |
-| `geo.country_iso_code`     | string | [ISO Code][7] of the country (for example, `US` for the United States, `FR` for France).                                                  |
+| `geo.country_iso_code`     | string | [ISO Code][1] of the country (for example, `US` for the United States, `FR` for France).                                                  |
 | `geo.country_subdivision`     | string | Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France). |
-| `geo.country_subdivision_iso_code` | string | [ISO Code][7] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
+| `geo.country_subdivision_iso_code` | string | [ISO Code][1] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
 | `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).                                                                 |
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (example `Paris`, `New York`).                                                                                   |
 ## User attributes
 
-In addition to default attributes, add user related data to all RUM event types by [identifying user sessions][8]. This lets you follow the journey of a given user, figure out which users are the most impacted by errors and monitor performance for your most important users.
+In addition to default attributes, add user related data to all RUM event types by [identifying user sessions][2]. This lets you follow the journey of a given user, figure out which users are the most impacted by errors and monitor performance for your most important users.
 
 ## Event-specific attributes
 
@@ -190,7 +190,7 @@ RUM view performance metrics are collected from both the [Paint Timing API][2] a
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [2]: https://www.w3.org/TR/paint-timing/
 [3]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
-[4]: /real_user_monitoring/browser/data_collected/?tab=view#how-is-loading-time-calculated
+[4]: /real_user_monitoring/browser/monitoring_page_performance/#how-is-loading-time-calculated
 [5]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
@@ -322,14 +322,14 @@ Custom user actions are user actions declared and sent manually via the [`addUse
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `action.id` | string | UUID of the user action. |
-| `action.type` | string | Type of the user action. For [Custom User Actions][5], it is set to `custom`. |
+| `action.type` | string | Type of the user action. For [Custom User Actions][3], it is set to `custom`. |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions |
 | `action.name` | string | User-friendly name created (for example `Click on #checkout`). For [Custom User Actions][3], the action name given in the API call. |
 
 [1]: /real_user_monitoring/browser/?tab=us#initialization-parameters
 [2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
 [3]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-user-actions
-[4]: /real_user_monitoring/browser/data_collected/?tab=useraction#how-is-the-action-loading-time-calculated
+[4]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -337,12 +337,5 @@ Custom user actions are user actions declared and sent manually via the [`addUse
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /real_user_monitoring/browser/data_collected/?tab=session
-[2]: /real_user_monitoring/browser/data_collected/?tab=view
-[3]: /real_user_monitoring/browser/data_collected/?tab=resource
-[4]: /real_user_monitoring/browser/data_collected/?tab=longtask
-[5]: /real_user_monitoring/browser/data_collected/?tab=error
-[6]: /real_user_monitoring/browser/data_collected/?tab=useraction
-[7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-user-sessions
+[1]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-user-sessions
