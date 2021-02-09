@@ -1511,11 +1511,16 @@ main:
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1102
+  - name: Investigate Code Hotspots from Traces
+    url: tracing/profiler/connect_traces_and_profiles
+    parent: profiler
+    identifier: profiler_traces_profiles
+    weight: 1103
   - name: Profiler Troubleshooting
     url: tracing/profiler/profiler_troubleshooting
     parent: profiler
     identifier: profiler_profiler_troubleshooting
-    weight: 1103
+    weight: 1104
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
@@ -1910,6 +1915,11 @@ main:
     parent: rum_browser
     identifier: track_actions
     weight: 106
+  - name: Troubleshooting
+    url: real_user_monitoring/browser/troubleshooting/
+    parent: rum_browser
+    identifier: troubleshooting
+    weight: 107
   - name: Android Monitoring
     url: real_user_monitoring/android/
     parent: rum

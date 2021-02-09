@@ -34,6 +34,8 @@ We recommend that you use the latest version of the [official DogStatsD clients]
 
 Some StatsD and DogStatsD clients, by default, send one metric per datagram. This adds considerable overhead on the client, the operating system, and the Agent. If your client supports buffering multiple metrics in one datagram, enabling this option brings noticeable improvements.
 
+If you are using a community-supported DogStatsD client that supports buffering, make sure to configure a max datagram size that does not exceed the Agent-side per-datagram buffer size (8KB by default, configurable on the Agent with `dogstatsd_buffer_size`) and the network/OS max datagram size.
+
 Here are a few examples for [official DogStatsD supported clients][3]:
 
 {{< programming-lang-wrapper langs="go,python,ruby,java,.NET,PHP" >}}
