@@ -231,8 +231,8 @@ clusterAgent:
       instances:
         - cluster_arn: arn:aws:kafka:us-west-2:*************:cluster/gen-kafka/*******-8e12-4fde-a5ce-******-3
           region_name: us-west-2
-{{< /code-block> }}
-      
+{{< /code-block >}}
+
 
 
 ## Further Reading
