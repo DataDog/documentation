@@ -18,9 +18,11 @@ further_reading:
 
 ## Compatibility
 
-- The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][1].
+- The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-- For both automatic and custom instrumentation, the .NET Datadog Tracer supports .NET Framework 4.5 and above. 
+- The .NET Tracer supports instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][1].
+
+- The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][2].
 
 <div class="alert alert-warning"> 
   <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
@@ -52,11 +54,12 @@ The .NET Tracer can instrument the following libraries automatically:
 <strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code> and <code>NpgsqlCommand</code>.
 </div>
 
-Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
+Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-dotnet
-[2]: /help/
+[1]: /tracing/compatibility_requirements/dotnet-core/
+[2]: https://github.com/DataDog/dd-trace-dotnet
+[3]: /help/
