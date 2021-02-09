@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function replaceButtonInnerText(value) {
-    const selectedRegion = value === 'gov' ? 'US1-FED' : value.toUpperCase();
+    const selectedRegion = config.dd_datacenter[value];
     const regionSelector = document.querySelector('.js-region-select');
     const buttonInner = regionSelector.querySelector('.btn-inner');
     buttonInner.innerText = selectedRegion;
