@@ -10,6 +10,14 @@
 
       p {
         margin-right: 10px;
+
+        @-moz-document url-prefix() {
+          margin-top: 8px;
+        }
+      }
+
+      @-moz-document url-prefix() {
+        align-items: center;
       }
     }
 
