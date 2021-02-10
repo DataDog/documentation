@@ -17,7 +17,7 @@ For security purposes, you must have a valid session for each org you switch to.
 
 A password is shared across orgs for each multi-org user. If you reset your password, the reset affects all the orgs to which you belong.
 
-You cannot use the same password twice.
+Note that you cannot use the same password twice.
 
 ## Troubleshooting
 
