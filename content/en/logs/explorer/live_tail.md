@@ -4,6 +4,7 @@ kind: documentation
 description: 'Search through all of your logs and perform Log Analytics'
 aliases:
     - /logs/explore/livetail
+    - /logs/live_tail
 further_reading:
     - link: 'logs/processing'
       tag: 'Documentation'
