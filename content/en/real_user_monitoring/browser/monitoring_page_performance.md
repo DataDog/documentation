@@ -20,40 +20,43 @@ further_reading:
 
 ## Performance metrics for views
 RUM view events collect extensive performance metrics for every single page view. We recommend analyzing the performance metrics in the following ways:
-- Dashboards provide you with a bird-eye view of your application's performance. For example, the out-of-the-box [Performance Overview dashboard][1] can be filtered on [default attributes][] collected by RUM to surface issues affecting only a subset of users. This dashboard can be cloned and customized to your specific needs. All [RUM performance metrics] can be used in dashboard queries.
-- The RUM waterfall, accessible for every single RUM view event in the [RUM Explorer][2], lets you troubleshoot the performance of a specific page view. It shows how your website assets and resources, long tasks, and frontend errors affect performance for your end users.
+- **Dashboards**: they provide you with a bird-eye view of your application's performance. For example, the out-of-the-box [Performance Overview dashboard][1] can be filtered on [default attributes][2] collected by RUM to surface issues affecting only a subset of users. This dashboard can be cloned and customized to your specific needs. All [RUM performance metrics](#all-performance-metrics) can be used in dashboard queries.
+- **RUM waterfall**: accessible for every single RUM view event in the [RUM Explorer][3], it lets you troubleshoot the performance of a specific page view. It shows how your website assets and resources, long tasks, and frontend errors affect performance for your end users.
 
 ### Core Web Vitals
 
-[Google's Core Web Vitals][3] are a set of three metrics designed to monitor a site's user experience. These metrics, which focus on load performance, interactivity, and visual stability, give you an overview of what matters the most to your users. Each metric comes with guidance on the range of values that translate to good user experience. We recommend monitoring the 75th percentile for these metrics.
+[Google's Core Web Vitals][4] are a set of three metrics designed to monitor a site's user experience. These metrics, which focus on load performance, interactivity, and visual stability, give you an overview of what matters the most to your users. Each metric comes with guidance on the range of values that translate to good user experience. We recommend monitoring the 75th percentile for these metrics.
 
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
-| [Largest Contentful Paint][4] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (i.e. visible on screen) is rendered.         | <2.5s       |
-| [First Input Delay][5]        | Interactivity    | Time elapsed between a user’s first interaction with the page and the browser’s response.             | <100ms      |
-| [Cumulative Layout Shift][6]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads). | <0.1        |
+| [Largest Contentful Paint][5] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (i.e. visible on screen) is rendered.         | <2.5s       |
+| [First Input Delay][6]        | Interactivity    | Time elapsed between a user’s first interaction with the page and the browser’s response.             | <100ms      |
+| [Cumulative Layout Shift][7]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts happening. | <0.1        |
 
 **Note**: Metrics collected from your real users can differ from those calculated for pages loaded in a synthetic environment.
 
 ### All performance metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][7]. For information about configuring for sampling or global context see [Advanced Configuration][8]. The following table lists Datadog-specific metrics along with performance metrics collected from the [Navigation Timing API][9] and [Paint Timing API][10]:
+RUM view performance metrics are collected from the [Navigation Timing API][8], the [Paint Timing API][9], the [web-vitals library][10] or in-house algorithms.
 
-| Attribute                              | Type        | Description                                                                                                                                                                                                                 |
-|----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `view.time_spent`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
-| `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info](#how-is-loading-time-calculated).|
-| `view.first_contentful_paint` | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][11].                                                                                            |
-| `view.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][12]                                                                                                               |
-| `view.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][13]. |
-| `view.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][14]                                                                             |
-| `view.load_event`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][15]                                                                                   |
-| `view.error.count`            | number      | Count of all errors collected for this view.                                                                                                                                                                        |
-| `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
-| `view.resource.count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
-| `view.action.count`      | number      | Count of all actions collected for this view.                                                                                     
+| Attribute                       | Type        | Description                                                                                                                                                                                                           |
+|---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                       |
+| `view.largest_contentful_paint` | number (ns) | Moment in the page load timeline in which the largest DOM object in the viewport (i.e. visible on screen) is rendered.                                                                                                |
+| `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                             |
+| `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts happening.                                                                               |
+| `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info](#how-is-loading-time-calculated).                                                                             |
+| `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][11].                               |
+| `view.dom_interactive`          | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][12]                                                                                                         |
+| `view.dom_content_loaded`       | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][13]. |
+| `view.dom_complete`             | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][14]                                                                       |
+| `view.load_event`               | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][15]                                                                             |
+| `view.error.count`              | number      | Count of all errors collected for this view.                                                                                                                                                                          |
+| `view.long_task.count`          | number      | Count of all long tasks collected for this view.                                                                                                                                                                      |
+| `view.resource.count`           | number      | Count of all resources collected for this view.                                                                                                                                                                       |
+| `view.action.count`             | number      | Count of all actions collected for this view.                                                                                                                                                                         |
 
 ## Monitoring single page applications (SPA)
 
@@ -105,15 +108,15 @@ Once the timing is sent, the timing will be accessible as `@view.custom_timings.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/dashboards/performance_overview_dashboard
-[2]: /real_user_monitoring/explorer/
-[3]: https://web.dev/vitals/
-[4]: https://web.dev/lcp/
-[5]: https://web.dev/fid/
-[6]: https://web.dev/cls/
-[7]: /real_user_monitoring/browser/data_collected/#default-attributes
-[8]: /real_user_monitoring/browser/advanced_configuration/
-[9]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
-[10]: https://www.w3.org/TR/paint-timing/
+[2]: /real_user_monitoring/browser/data_collected/#default-attributes
+[3]: /real_user_monitoring/explorer/
+[4]: https://web.dev/vitals/
+[5]: https://web.dev/lcp/
+[6]: https://web.dev/fid/
+[7]: https://web.dev/cls/
+[8]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
+[9]: https://www.w3.org/TR/paint-timing/
+[10]: https://github.com/GoogleChrome/web-vitals
 [11]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
