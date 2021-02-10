@@ -76,7 +76,20 @@
               <div class="code-button-wrapper position-absolute">
                   <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
               </div>
-              {{ highlight $file_content $lang.syntax "" }}
+              {{ $highlightedContent := highlight $file_content $lang.syntax "" }}
+
+              <!-- replace "https://api.datadoghq.com" -->
+              {{ $old := (print "\"https://api.datadoghq.com\"") | htmlEscape }}
+              {{ $new := "\"https://api.<span class=\"js-region-param region-param\" data-region-param=\"dd_site\"></span>\"" }}
+              {{ $highlightedContent = (replace $highlightedContent $old $new) }}
+
+              <!-- replace 'https://api.datadoghq.com' -->
+              {{ $old = (print "'https://api.datadoghq.com'") | htmlEscape }}
+              {{ $new = "'https://api.<span class=\"js-region-param region-param\" data-region-param=\"dd_site\"></span>'" }}
+              {{ $highlightedContent := (replace $highlightedContent $old $new) }}
+
+              <!-- run through safehtml to output correctly -->
+              {{ $highlightedContent | safeHTML }}
           </div>
           </div>
           {{ $count = add $count 1 }}
