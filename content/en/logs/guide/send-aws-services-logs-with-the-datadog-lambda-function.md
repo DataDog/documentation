@@ -5,7 +5,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/processing/"
@@ -122,7 +122,7 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-For AWS CloudFormation users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below. 
+For AWS CloudFormation users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below.
 
 The sample code also work for AWS [SAM][2] and [Serverless Framework][3]. For Serverless Framework, put the code under the [resources][4] section within your `serverless.yml`.
 
