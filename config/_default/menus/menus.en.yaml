@@ -2759,6 +2759,17 @@ api:
       operationids:
         - CreateDashboardListItems
       unstable: []
+  - name: Get items of a Dashboard List
+    url: '#get-items-of-a-dashboard-list'
+    identifier: get-items-of-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetDashboardListItems
+      unstable: []
   - name: Delete items from a dashboard list
     url: '#delete-items-from-a-dashboard-list'
     identifier: delete-items-from-a-dashboard-list
@@ -2789,10 +2800,8 @@ api:
     params:
       versions:
         - v1
-        - v2
       operationids:
         - GetDashboardList
-        - GetDashboardListItems
       unstable: []
   - name: Delete a dashboard list
     url: '#delete-a-dashboard-list'

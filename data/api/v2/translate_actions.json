@@ -69,7 +69,7 @@
   },
   "GetDashboardListItems": {
     "description": "Fetch the dashboard list’s dashboard definitions.",
-    "summary": "Get a Dashboard List"
+    "summary": "Get items of a Dashboard List"
   },
   "CreateDashboardListItems": {
     "description": "Add dashboards to an existing dashboard list.",
