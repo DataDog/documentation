@@ -21,7 +21,7 @@ further_reading:
 ## Performance metrics for views
 RUM view events collect extensive performance metrics for every single page view. We recommend analyzing the performance metrics in the following ways:
 - **Dashboards**: they provide you with a bird-eye view of your application's performance. For example, the out-of-the-box [Performance Overview dashboard][1] can be filtered on [default attributes][2] collected by RUM to surface issues affecting only a subset of users. This dashboard can be cloned and customized to your specific needs. All [RUM performance metrics](#all-performance-metrics) can be used in dashboard queries.
-- **RUM waterfall**: accessible for every single RUM view event in the [RUM Explorer][3], it lets you troubleshoot the performance of a specific page view. It shows how your website assets and resources, long tasks, and frontend errors affect performance for your end users.
+- **RUM waterfall**: accessible for every single RUM view event in the [RUM Explorer][3], it lets you troubleshoot the performance of a specific page view. It shows how your website assets and resources, long tasks, and frontend errors affect performance for your end users, at the page level.
 
 ### Core Web Vitals
 
