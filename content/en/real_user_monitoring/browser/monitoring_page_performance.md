@@ -39,8 +39,6 @@ RUM view events collect extensive performance metrics for every single page view
 
 ### All performance metrics
 
-RUM view performance metrics are collected from the [Navigation Timing API][8], the [Paint Timing API][9], the [web-vitals library][10] or in-house algorithms.
-
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                       |
@@ -48,11 +46,11 @@ RUM view performance metrics are collected from the [Navigation Timing API][8], 
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                             |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts happening.                                                                               |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info](#how-is-loading-time-calculated).                                                                             |
-| `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][11].                               |
-| `view.dom_interactive`          | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][12]                                                                                                         |
-| `view.dom_content_loaded`       | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][13]. |
-| `view.dom_complete`             | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][14]                                                                       |
-| `view.load_event`               | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][15]                                                                             |
+| `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][8].                               |
+| `view.dom_interactive`          | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][9]                                                                                                         |
+| `view.dom_content_loaded`       | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][10]. |
+| `view.dom_complete`             | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][11]                                                                       |
+| `view.load_event`               | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][12]                                                                             |
 | `view.error.count`              | number      | Count of all errors collected for this view.                                                                                                                                                                          |
 | `view.long_task.count`          | number      | Count of all long tasks collected for this view.                                                                                                                                                                      |
 | `view.resource.count`           | number      | Count of all resources collected for this view.                                                                                                                                                                       |
@@ -60,7 +58,7 @@ RUM view performance metrics are collected from the [Navigation Timing API][8], 
 
 ## Monitoring single page applications (SPA)
 
-For single page applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][16].
+For single page applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][13].
 
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
 
@@ -100,7 +98,7 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-Once the timing is sent, the timing will be accessible as `@view.custom_timings.<timing_name>` (For example, `@view.custom_timings.first_scroll`). You must [create a measure][17] before graphing it in RUM analytics or in dashboards.
+Once the timing is sent, the timing will be accessible as `@view.custom_timings.<timing_name>` (For example, `@view.custom_timings.first_scroll`). You must [create a measure][14] before graphing it in RUM analytics or in dashboards.
 
 **Note**: For Single Page Applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing will equal 8-5 = 3 seconds.
 ## Further Reading
@@ -114,13 +112,10 @@ Once the timing is sent, the timing will be accessible as `@view.custom_timings.
 [5]: https://web.dev/lcp/
 [6]: https://web.dev/fid/
 [7]: https://web.dev/cls/
-[8]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
-[9]: https://www.w3.org/TR/paint-timing/
-[10]: https://github.com/GoogleChrome/web-vitals
-[11]: https://www.w3.org/TR/paint-timing/#sec-terminology
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
-[13]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-[14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
-[15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
-[16]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[17]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[8]: https://www.w3.org/TR/paint-timing/#sec-terminology
+[9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+[11]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+[12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+[13]: https://developer.mozilla.org/en-US/docs/Web/API/History
+[14]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
