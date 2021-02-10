@@ -2,7 +2,7 @@
 title: Real User Monitoring
 kind: documentation
 description: 'Visualisez et analysez les performances de vos applications frontend, telles qu''elles sont perçues par vos utilisateurs.'
-disable_sidebar: true
+disable_toc: true
 aliases:
   - /fr/real_user_monitoring/installation
 further_reading:

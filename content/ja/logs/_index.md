@@ -2,7 +2,7 @@
 title: ログ管理
 kind: Documentation
 description: Datadog Agent を設定して、ホスト、コンテナー、およびサービスからログを収集します。
-disable_sidebar: true
+disable_toc: true
 aliases:
   - /ja/guides/logs/
   - /ja/logs/logging_without_limits
