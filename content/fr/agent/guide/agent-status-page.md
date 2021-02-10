@@ -29,7 +29,7 @@ Les informations générales sur l'Agent s'affichent sous la version de l'Agent,
   Log Level: info
 ```
 
-### Chemins
+### Paths
 
 Cette section affiche les chemins vers le fichier de configuration Datadog, le répertoire `conf.d` et le répertoire `checks.d`, par exemple :
 ```text
@@ -38,7 +38,7 @@ Cette section affiche les chemins vers le fichier de configuration Datadog, le r
     checks.d: /etc/datadog-agent/checks.d
 ```
 
-### Horloges
+### Clocks
 
 Cette section affiche le [décalage avec NTP][2] et l'heure au format UTC du système, par exemple :
 ```text
@@ -46,7 +46,7 @@ Cette section affiche le [décalage avec NTP][2] et l'heure au format UTC du sys
     System UTC time: 2019-08-29 18:16:41.526203 UTC
 ```
 
-### Host Info
+### Host info
 
 Cette section affiche les informations du host sur lequel l'Agent s'exécute, par exemple :
 ```text
@@ -79,7 +79,7 @@ Cette section affiche les hostnames découverts par l'Agent (voir l'exemple ci-d
 
 ## Collector
 
-### Checks en cours d'exécution
+### Running checks
 
 Cette section affiche une liste des instances de check en cours d'exécution, par exemple :
 
@@ -107,7 +107,7 @@ Termes et descriptions :
 | Last Run               | Le nombre durant la dernière exécution du check.                            |
 | Total                  | Le nombre total depuis le démarrage ou redémarrage de l'Agent le plus récent. |
 
-### Erreurs de configuration
+### Config errors
 
 Cette section s'affiche uniquement en cas de checks avec des erreurs de configuration, par exemple :
 
@@ -117,7 +117,7 @@ Cette section s'affiche uniquement en cas de checks avec des erreurs de configur
       Configuration file contains no valid instances
 ```
 
-### Erreurs de chargement
+### Loading errors
 
 Cette section s'affiche uniquement en cas de checks avec des erreurs de chargement, par exemple :
 
@@ -188,7 +188,7 @@ Termes et descriptions :
 | DroppedOnInput | Le nombre de transactions abandonnées lorsque tous les workers étaient occupés.  |
 | Dropped        | Le nombre de transactions abandonnées après un nombre de tentatives trop élevé. |
 
-### Statut des clés d'API
+### API keys status
 
 Cette section affiche le statut de votre clé d'API configurée, par exemple :
 

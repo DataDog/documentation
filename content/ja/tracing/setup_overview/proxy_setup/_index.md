@@ -381,20 +381,28 @@ data:
 {{% /tab %}}
 {{% tab "Istio" %}}
 
-Datadog APM は Istio v1.1.3 以降のバージョンに対応しており、Kubernetes クラスター上でご利用いただけます。
+Datadog は、Istio 環境のあらゆる側面を監視するため、以下を実現できます。
+- APM でメッシュを実行してアプリケーションの分散型トレースの詳細を確認（以下を参照）。
+- [ログ][1]を使用して、Envoy および Istio の Control Plane の健全性を評価。
+- リクエスト、帯域幅、リソース消費の[メトリクス][1]でサービスメッシュのパフォーマンスを詳しく確認。
+- [ネットワークパフォーマンスモニタリング][2]で、コンテナ、ポッド、サービス間のネットワークコミュニケーションをメッシュ状にマッピング。
+
+Datadog を使用した Istio 環境の監視について、詳しくは [Istio ブログ][10]を参照してください。
 
 ## コンフィギュレーション
 
+Datadog APM は、Kubernetes クラスターの Istio v1.1.3 以降で使用可能です。
+
 ### Datadog Agent のインストール
 
-1. [Agent をインストールします][1]。
-2. [APM が Agent に対して有効化されていることを確認します][2]。
+1. [Agent のインストール][3]
+2. [Agent に APM が有効になっていることを確認します][4]。
 3. `hostPort` 設定のコメントを解除し、Istio のサイドカーが Agent に接続してトレースを送信できるようにします。
 
 
 ### Istio のコンフィギュレーションとインストール
 
-Datadog APM を有効化するには、[Istio のカスタムインストール][3]で Istio のインストール時に 2 つのオプションを設定する必要があります。
+Datadog APM を有効にするには、[Istio をカスタムインストール][5]して、Istio のインストール時に 2 つの追加オプションを設定する必要があります。
 
 - `--set values.global.proxy.tracer=datadog`
 - `--set values.pilot.traceSampling=100.0`
@@ -409,8 +417,8 @@ istioctl manifest apply --set values.global.proxy.tracer=datadog --set values.pi
 kubectl label namespace example-ns istio-injection=enabled
 ```
 
-トラフィックに HTTP ベースのプロトコルが使用されていることを Istio が確認するとトレースが生成されます。
-デフォルトでは、Istio はこの検知を自動で行います。お使いのアプリケーションのデプロイとサービスでポートに名前を設定し、手動で構成することも可能です。詳しくは[プロトコルの選択][4]に関する Istio のドキュメントを参照してください。
+Istio で、トラフィックが HTTP ベースのプロトコルを使用していることが判断できると、トレースが生成されます。
+デフォルトで、Istio は自動的にこれを検出します。アプリケーションのデプロイメントおよびサービスでポートに名前を付けることで、手動で構成することも可能です。詳細は、Istio のドキュメントの[プロトコルの選択][6]をご確認ください。
 
 デフォルトの場合、トレース作成時に用いられるサービス名はデプロイ名とネームスペースをもとに生成されます。これは
 デプロイのポッドテンプレートに `app` ラベルを追加することで手動で設定できます。
@@ -422,8 +430,7 @@ template:
       app: <SERVICE_NAME>
 ```
 
-[CronJobs][5] では、`app` ラベルはジョブテンプレートに追加されます。これは生成される名称が、より高い階層に位置する `CronJob` ではなく
-`Job` に由来するためです。
+[CronJobs][7] の場合、生成された名前がより高レベルの `CronJob` ではなく `Job` から来る場合があるため、`app` ラベルをジョブテンプレートに追加する必要があります
 
 ### 環境変数
 
@@ -434,7 +441,7 @@ Istio サイドカーの環境変数は `apm.datadoghq.com/env` アノテーシ�
         apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_TRACE_ANALYTICS_ENABLED": "true" }'
 ```
 
-利用可能な[環境変数][6]は、Istio サイドカーのプロキシに埋め込まれた C++ トレーサーのバージョンによって異なります。
+使用可能な[環境変数][8]は、Istio サイドカーのプロキシに埋め込まれた C++ トレーサーのバージョンによって異なります。
 
 | Istio バージョン | C++ トレーサーバージョン |
 |---------------|--------------------|
@@ -478,19 +485,23 @@ spec:
       mode: DISABLE
 ```
 
-プロトコルの自動選択でサイドカーと Agent 間のトラフィックが HTTP であることを確認し、トレーシングを有効にすることができます。この機能を利用すると、この特定のサービスについての[プロトコルの手動選択][7]が無効化されます。`datadog-agent` サービス内のポート名は `tcp-traceport` に変更可能です。
+プロトコルの自動選択でサイドカーと Agent 間のトラフィックが HTTP であることを確認し、トレーシングを有効にすることができます。
+この機能は、この特定のサービスについての[プロトコルの手動選択][9]を使用することで無効にすることが可能です。`datadog-agent` サービス内のポート名は `tcp-traceport` に変更できます。
 Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProtocol: tcp` を追加できます。
 
 
 
 
-[1]: /ja/agent/kubernetes/
-[2]: /ja/agent/kubernetes/apm/
-[3]: https://istio.io/docs/setup/install/istioctl/
-[4]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
-[5]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[6]: /ja/tracing/setup/cpp/#environment-variables
-[7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[1]: /ja/integrations/istio/
+[2]: /ja/network_monitoring/performance/setup/#istio
+[3]: /ja/agent/kubernetes/
+[4]: /ja/agent/kubernetes/apm/
+[5]: https://istio.io/docs/setup/install/istioctl/
+[6]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
+[7]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+[8]: /ja/tracing/setup/cpp/#environment-variables
+[9]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[10]: https://www.datadoghq.com/blog/istio-datadog/
 {{% /tab %}}
 {{< /tabs >}}
 
