@@ -12,10 +12,10 @@ further_reading:
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
-  
+
 ---
 
-In addition to running tests at predefined intervals, you can also run Datadog Synthetic tests on-demand using API endpoints. You can run Datadog Synthetic tests in your continuous integration (CI) pipelines, letting you block the deployment of branches that would break your product. 
+In addition to running tests at predefined intervals, you can also run Datadog Synthetic tests on-demand using API endpoints. You can run Datadog Synthetic tests in your continuous integration (CI) pipelines, letting you block the deployment of branches that would break your product.
 Synthetic CI/CD testing can also be used to **run tests as part of your CD process**, evaluating the state of your production application immediately after a deployment finishes. This lets you detect potential regressions that could impact your users—and automatically trigger a rollback whenever a critical test fails.
 
 This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
@@ -459,16 +459,16 @@ The default configurations used for the tests are the original tests' configurat
 
 However, in the context of your CI deployment, you can optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file](#setup-the-client) level.
 
-* **allowInsecureCertificates**: (_boolean_) Disable certificate checks in API tests.
-* **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
+* **allowInsecureCertificates**: (_boolean_) Disable certificate checks in HTTP tests.
+* **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered in HTTP or browser tests.
      * **username**: (_string_) Username to use in basic authentication.
      * **password**: (_string_) Password to use in basic authentication.
-* **body**: (_string_) Data to send in a synthetic API test.
-* **bodyType**: (_string_) Type of the data sent in a synthetic API test.
-* **cookies**: (_string_) Use provided string as cookie header in API or browser test.
+* **body**: (_string_) Data to send in HTTP tests.
+* **bodyType**: (_string_) Type of the data sent in HTTP tests.
+* **cookies**: (_string_) Use provided string as cookie header in HTTP or browser tests.
 * **deviceIds**: (_array_) List of devices on which to run the browser test.
-* **followRedirects**: (_boolean_) Indicates whether to follow HTTP redirections in API tests.
-* **headers**: (_object_) Headers to replace in the test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
+* **followRedirects**: (_boolean_) Indicates whether to follow redirections in HTTP tests.
+* **headers**: (_object_) Headers to replace in the HTTP or browser test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
 * **locations**: (_array_) List of locations from which the test should be run.
 * **retry**: (_object_) Retry policy for the test:
      * **count**: (_integer_) Number of attempts to perform in case of test failure.
@@ -477,7 +477,7 @@ However, in the context of your CI deployment, you can optionally decide to over
      * **blocking**: The CLI returns an error if the test fails.
      * **non_blocking**: The CLI only prints a warning if the test fails.
      * **skipped**: The test is not executed at all.
-* **startUrl**: (_string_) New start URL to provide to the test.
+* **startUrl**: (_string_) New start URL to provide to the HTTP or browser test.
 * **variables**: (_object_) Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
 * **pollingTimeout**: (_integer_) Duration after which synthetic tests are considered failed (in milliseconds).
 
