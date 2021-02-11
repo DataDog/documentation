@@ -21,6 +21,7 @@ $ddpurple: #632ca6;
     h2 {
         margin-top: -80px;
         padding-top: 80px;
+        scroll-margin-top: 95px;
         pointer-events: none;
         background-clip: content-box;
         margin-right: 0;
@@ -39,8 +40,6 @@ $ddpurple: #632ca6;
         top: 2px;
         font-size: 16px;
     }
-
-
 
     a {
         color: #4a4a4a;
