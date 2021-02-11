@@ -3,10 +3,10 @@ title: Datadog Windows Agent User
 kind: faq
 ---
 
-Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under the a dedicated user account, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
+Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under a dedicated user account, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
 
 The Agent installer creates a new account by default (`ddagentuser`) but it can also use a user-supplied account.
-It gains the following rights during installation:
+The account gains the following rights during installation:
 
 * It can start and stop the APM and Process Agent
 * It becomes a member of the “Performance Monitor Users” group
@@ -17,13 +17,13 @@ It gains the following rights during installation:
 * It has remote login disabled
 * It has network login disabled
 
-**Note**: Since the user is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
+**Note**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
 
 ## Installation
 
-If no user is specified on the command line, the installer will attempt to create a local user named `ddagentuser` with a randomly generated password.
+If no user account is specified on the command line, the installer will attempt to create a local user account named `ddagentuser` with a randomly generated password.
 
-If a user is specified on the command line, but this user is not found on the system, the installer will attempt to create it.
+If a user account is specified on the command line, but this user account is not found on the system, the installer will attempt to create it.
 If a password was specified, the installer will use that password, otherwise it will generate a random password.
 
 To specify the optional username and password on the command line pass the following properties to the `msiexec` command:
@@ -41,7 +41,7 @@ msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWOR
 ### Installation with group policy
 
 The installer changes the local group policy to allow the newly created user account to **run as a service**.
-If the domain group policy disallows that, then the installation setting is overridden, and you must update the domain group policy to allow the user to run as a service.
+If the domain group policy disallows that, then the installation setting is overridden, and you must update the domain group policy to allow the user account to run as a service.
 
 ### Installation in a domain environment
 
@@ -51,7 +51,7 @@ On domain joined machines, the Agent installer can use a user supplied account, 
 
 If a domain account is specified on the command line, it must exist prior to the installation since only domain controllers can create domain accounts.
 
-If a user is specified on the command line, but this user is not found on the system, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
 
 To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 
@@ -70,15 +70,15 @@ It must be separated from the `<USERNAME>` with a backslash `\`.
 
 ##### Primary and backup domain controllers
 
-When installing the Agent on a domain controller, there is no notion of local user. So if the installer creates a user, it will be a domain user rather than a local one.
+When installing the Agent on a domain controller, there is no notion of local user account. So if the installer creates a user account, it will be a domain user rather than a local one.
 
-If no user is specified on the command line, the installer will create a *domain* account named `ddagentuser` in the controller's domain.
+If no user account is specified on the command line, the installer will create a *domain* account named `ddagentuser` in the controller's domain.
 
-If a user is specified on the command line, but this user is not found in the domain, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
+If a user account is specified on the command line, but this user account is not found in the domain, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
 
-If the specified user is from a parent domain, the installer will use that user.
-If the user doesn't exist, it will create the user in the child domain (the domain that the controller is joined to).
-The installer will never create a user in the parent domain.
+If the specified user account is from a parent domain, the installer will use that user account.
+If the user account doesn't exist, it will create the user account in the child domain (the domain that the controller is joined to).
+The installer will never create a user account in the parent domain.
 
 ##### Read-only domain controllers
 
