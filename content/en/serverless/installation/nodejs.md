@@ -132,7 +132,7 @@ The Datadog CDK Constructs library is now downloaded and ready to use.
 
 ### Instrument the function
 
-Import the `datadog-cdk-construct` module in your AWS CDK app and add the following configurations. See the sample code below in TypeScript (the usage in other language should be similar).
+Import the `datadog-cdk-construct` module in your AWS CDK app and add the following configurations (this example is TypeScript, but usage in other languages is similar):
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
