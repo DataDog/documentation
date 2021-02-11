@@ -9244,13 +9244,11 @@ components:
       enum:
       - api_percentage
       - snmp_usage
-      - lambda_percentage
       - apm_host_usage
       - api_usage
       - container_usage
       - custom_timeseries_percentage
       - container_percentage
-      - lambda_usage
       - apm_host_percentage
       - npm_host_percentage
       - browser_percentage
@@ -9260,17 +9258,21 @@ components:
       - npm_host_usage
       - infra_host_usage
       - custom_timeseries_usage
+      - lambda_functions_usage
+      - lambda_functions_percentage
+      - lambda_invocations_usage
+      - lambda_invocations_percentage
+      - lambda_usage
+      - lambda_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
       - SNMP_USAGE
-      - LAMBDA_PERCENTAGE
       - APM_HOST_USAGE
       - API_USAGE
       - CONTAINER_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
       - CONTAINER_PERCENTAGE
-      - LAMBDA_USAGE
       - APM_HOST_PERCENTAGE
       - NPM_HOST_PERCENTAGE
       - BROWSER_PERCENTAGE
@@ -9280,6 +9282,12 @@ components:
       - NPM_HOST_USAGE
       - INFRA_HOST_USAGE
       - CUSTOM_TIMESERIES_USAGE
+      - LAMBDA_FUNCTIONS_USAGE
+      - LAMBDA_FUNCTIONS_PERCENTAGE
+      - LAMBDA_INVOCATIONS_USAGE
+      - LAMBDA_INVOCATIONS_PERCENTAGE
+      - LAMBDA_USAGE
+      - LAMBDA_PERCENTAGE
     UsageAttributionTagNames:
       additionalProperties:
         description: A list of tag values.
@@ -9341,12 +9349,34 @@ components:
           description: The infrastructure host usage by tag(s).
           format: double
           type: number
+        lambda_functions_percentage:
+          description: The percentage of Lambda function usage by tag(s).
+          format: double
+          type: number
+        lambda_functions_usage:
+          description: The Lambda function usage by tag(s).
+          format: double
+          type: number
+        lambda_invocations_percentage:
+          description: The percentage of Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        lambda_invocations_usage:
+          description: The Lambda invocation usage by tag(s).
+          format: double
+          type: number
         lambda_percentage:
-          description: The percentage of lambda function usage by tag(s).
+          description: 'The percentage of Lambda function usage by tag(s).
+
+
+            **Note** this field is deprecated. Use lambda_functions_percentage instead.'
           format: double
           type: number
         lambda_usage:
-          description: The lambda function usage by tag(s).
+          description: 'The Lambda function usage by tag(s).
+
+
+            **Note** this field is deprecated. Use lambda_functions_usage instead.'
           format: double
           type: number
         npm_host_percentage:
@@ -9458,6 +9488,8 @@ components:
         npm_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         rum_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_invocation_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         siem_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
