@@ -26,32 +26,32 @@ If no user is specified on the command line, the installer will attempt to creat
 If a user is specified on the command line, but this user is not found on the system, the installer will attempt to create it.
 If a password was specified, the installer will use that password, otherwise it will generate a random password.
 
-To specify a username and/or password on the command line pass the following properties to the msiexec:
+To specify the optional username and password on the command line pass the following properties to the `msiexec` command:
 
 ```shell
 msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
-**Note**: The `<USERNAME>` must be 20 characters or less in order to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+**Note**: The `<USERNAME>` must be 20 characters or fewer, to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
 
-**Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character ';'.
+**Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
 
-**Note**: If encountering permission issues with system and winproc checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
+**Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
 
 ### Installation with group policy
 
 The installer changes the local group policy to allow the newly created user account to **run as a service**.
-If the domain group policy disallows that, then the installation setting is overridden, and the domain group policy has to be updated to allow the user to run as a service.
+If the domain group policy disallows that, then the installation setting is overridden, and you must update the domain group policy to allow the user to run as a service.
 
 ### Installation in a domain environment
 
 #### Domain joined machines
 
-On domain joined machines the Agent installer can use a user supplied account, whether it is a domain or local one, or create a local account.
+On domain joined machines, the Agent installer can use a user supplied account, whether it is a domain or local one, or create a local account.
 
-If a domain account is specified on the command line, it must exist prior to the installation since only Domain Controllers can create Domain Accounts.
+If a domain account is specified on the command line, it must exist prior to the installation since only domain controllers can create domain accounts.
 
-If a user is specified on the command line, but this user is not found on the system, the installer will attempt to create it. If a password was specified, the installer will use that password, otherwise it will generate a random password.
+If a user is specified on the command line, but this user is not found on the system, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
 
 To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 
@@ -59,34 +59,34 @@ To specify a username from a domain account, use the following form for the `DDA
 msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
-The `<DOMAIN>` can either be a fully-qualified domain name (e.g. `mydomain.com`) or the NETBIOS name (also known as pre-Windows 2000 name).
-It must be separated from the `<USERNAME>` with a `\`.
+The `<DOMAIN>` can either be a fully-qualified domain name (in the form `mydomain.com`) or the NETBIOS name (the pre-Windows 2000 name).
+It must be separated from the `<USERNAME>` with a backslash `\`.
 
-**Note**: The `<USERNAME>` must be 20 characters or less in order to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+**Note**: The `<USERNAME>` must be 20 characters or fewer, to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
 
-**Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character ';'.
+**Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
 
 #### Domain controllers
 
-##### Primary and backup Domain Controllers
+##### Primary and backup domain controllers
 
-When installing the Agent on a Domain Controller, there is no notion of 'local user', therefore if the installer creates a user it will be a domain user rather than a local one.
+When installing the Agent on a domain controller, there is no notion of local user. So if the installer creates a user, it will be a domain user rather than a local one.
 
-If no user is specified on the command line, the installer will create a *Domain* account named 'ddagentuser' in the controller's domain.
+If no user is specified on the command line, the installer will create a *domain* account named `ddagentuser` in the controller's domain.
 
-If a user is specified on the command line, but this user is not found in the Domain, the installer will attempt to create it. If a password was specified, the installer will use that password, otherwise it will generate a random password.
+If a user is specified on the command line, but this user is not found in the domain, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
 
-If the specified user is from a parent Domain, the installer will use that user.
+If the specified user is from a parent domain, the installer will use that user.
 If the user doesn't exist, it will create the user in the child domain (the domain that the controller is joined to).
-The installer will never create a user in the parent Domain.
+The installer will never create a user in the parent domain.
 
-##### Read-Only Domain Controllers
+##### Read-only domain controllers
 
-The installer can only use an existing domain account when installing on a Read-Only Domain Controller.
+The installer can use only an existing domain account when installing on a read-only domain controller.
 
 ## Upgrade
 
-When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, it's only required to supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
+When you upgrade the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you must supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
 
 ### Installation with Chef
 
