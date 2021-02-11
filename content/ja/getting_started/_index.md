@@ -1,7 +1,7 @@
 ---
 title: はじめに
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /ja/overview
   - /ja/getting_started/faq/

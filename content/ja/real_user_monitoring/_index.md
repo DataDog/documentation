@@ -2,7 +2,7 @@
 title: リアルユーザーモニタリング
 kind: documentation
 description: ユーザーから見たフロントエンドアプリケーションのパフォーマンスを視覚化して分析します。
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /ja/real_user_monitoring/installation
 further_reading:

@@ -19,6 +19,7 @@ La résolution de problèmes dépend grandement du contexte. Les vues enregistr�
 {{< img src="logs/explorer/saved_views/overview.png" alt="Sélection de vues enregistrées"  style="width:90%;" >}}
 
 Techniquement, une vue enregistrée permet de surveiller les éléments suivants :
+
 - Une [requête de recherche][3]
 - Une visualisation par défaut personnalisée ([flux de logs][4], [pattern de logs][5] ou [analyse de logs][6] avec leurs propriétés de visualisation spécifiques)
 - Un [sous-ensemble de facettes][1] à afficher dans la liste de facettes
