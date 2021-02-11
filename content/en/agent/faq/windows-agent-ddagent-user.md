@@ -17,7 +17,7 @@ It gains the following rights during installation:
 * It has remote login disabled
 * It has network login disabled
 
-Since the user is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
+**Note**: Since the user is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
 
 ## Installation
 
@@ -33,7 +33,9 @@ Msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWOR
 ```
 
 **Note**: The `<USERNAME>` must be 20 characters or less in order to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+
 **Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character ';'.
+
 **Note**: If encountering permission issues with system and winproc checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
 
 ### Installation with group policy
@@ -61,13 +63,14 @@ The `<DOMAIN>` can either be a fully-qualified domain name (e.g. `mydomain.com`)
 It must be separated from the `<USERNAME>` with a `\`.
 
 **Note**: The `<USERNAME>` must be 20 characters or less in order to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+
 **Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character ';'.
 
 #### Domain controllers
 
 ##### Primary and backup Domain Controllers
 
-When installing the Agent on a Domain Controller, there is no notion of 'local user', therefore if the installer creates a user it will be domain user rather than a local one.
+When installing the Agent on a Domain Controller, there is no notion of 'local user', therefore if the installer creates a user it will be a domain user rather than a local one.
 
 If no user is specified on the command line, the installer will create a *Domain* account named 'ddagentuser' in the controller's domain.
 
@@ -75,7 +78,7 @@ If a user is specified on the command line, but this user is not found in the Do
 
 If the specified user is from a parent Domain, the installer will use that user.
 If the user doesn't exist, it will create the user in the child domain (the domain that the controller is joined to).
-The installer will never creat a user in the parent Domain.
+The installer will never create a user in the parent Domain.
 
 ##### Read-Only Domain Controllers
 
@@ -83,7 +86,7 @@ The installer can only use an existing domain account when installing on a Read-
 
 ## Upgrade
 
-When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, it's only required to supply the `<DDAGENTUSER_NAME>` but not the `<DDAGENTUSER_PASSWORD>`.
+When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, it's only required to supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
 
 ### Installation with Chef
 
