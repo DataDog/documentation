@@ -84,13 +84,13 @@ The installer will never create a user in the parent domain.
 
 The installer can use only an existing domain account when installing on a read-only domain controller.
 
+#### Installation with Chef
+
+If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent’s configuration files have the correct permissions
+
 ## Upgrade
 
 When you upgrade the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you must supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
-
-### Installation with Chef
-
-If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent’s configuration files have the correct permissions
 
 ## Agent integrations
 
