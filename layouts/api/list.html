@@ -78,7 +78,7 @@
             {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
               {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild) }}
               <li class="nav-item">
-                <a class="nav-link mr-1 {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" data-toggle="tab" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} ({{ $endpointVisibility.label }})</a>
+                <a class="nav-link mr-1 {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if eq (len $menuChild.Params.versions) 1 }}disabled{{ end }}" data-toggle="tab" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} ({{ $endpointVisibility.label }})</a>
               </li>
             {{ end }}
           </ul>
