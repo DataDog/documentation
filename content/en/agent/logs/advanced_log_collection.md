@@ -36,7 +36,7 @@ To apply a processing rule to all logs collected by a Datadog Agent, see the [Gl
 
 To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
 
-### exclude_at_match
+### Exclude at match
 
 | Parameter          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
@@ -122,7 +122,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### include_at_match
+### Include at match
 
 | Parameter          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
@@ -410,7 +410,7 @@ More examples:
 
 **Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
 
-## Commonly Used Log Processing Rules
+## Commonly used log processing rules
 
 See the dedicated [Commonly Used Log Processing Rules FAQ][1] to see a list of examples.
 
@@ -431,13 +431,13 @@ Configuration example:
 
 ```yaml
 logs:
- - type: file
-   path: /var/log/myapp/*.log
-   exclude_paths:
-     - /var/log/myapp/debug.log
-     - /var/log/myapp/trace.log
-   service: mywebapp
-   source: go
+  - type: file
+    path: /var/log/myapp/*.log
+    exclude_paths:
+      - /var/log/myapp/debug.log
+      - /var/log/myapp/trace.log
+    service: mywebapp
+    source: go
 ```
 
 The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log` will never be tailed.
@@ -452,12 +452,12 @@ Configuration example:
 
 ```yaml
 logs:
- - type: file
-   path: /test/log/hello-world.log
-   tags: key:value
-   service: utf-16-logs
-   source: mysql
-   encoding: utf-16-be
+  - type: file
+    path: /test/log/hello-world.log
+    tags: key:value
+    service: utf-16-logs
+    source: mysql
+    encoding: utf-16-be
 ```
 
 **Note**: The `encoding` parameter is only applicable when the `type` parameter is set to `file`.
@@ -474,13 +474,13 @@ In the `datadog.yaml` file:
 ```yaml
 logs_config:
   processing_rules:
-     - type: exclude_at_match
-       name: exclude_healthcheck
-       pattern: healthcheck
-     - type: mask_sequences
-       name: mask_user_email
-       pattern: \w+@datadoghq.com
-       replace_placeholder: "MASKED_EMAIL"
+    - type: exclude_at_match
+      name: exclude_healthcheck
+      pattern: healthcheck
+    - type: mask_sequences
+      name: mask_user_email
+      pattern: \w+@datadoghq.com
+      replace_placeholder: "MASKED_EMAIL"
 ```
 
 {{% /tab %}}

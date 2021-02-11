@@ -11,15 +11,24 @@ further_reading:
     - link: 'tracing/setup/dotnet-framework'
       tag: 'Documentation'
       text: 'Instrument Your Application'
+    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+      tag: 'GitHub'
+      text: 'Examples of Custom Instrumentation'
 ---
 
-## Compatiblity
+## Compatibility
 
-The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.
+- The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][2].
+- The .NET Tracer supports instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][1].
 
-**Note:** When using both manual and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+- The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][2].
+
+<div class="alert alert-warning"> 
+  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
+
+</div>
+
 
 ## Integrations
 
@@ -39,17 +48,18 @@ The .NET Tracer can instrument the following libraries automatically:
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+     | `ElasticsearchNet`   |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+   | `MongoDb`            |
 | PostgreSQL                      | `Npgsql` 4.0+                  | `AdoNet`             |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+       | `RabbitMQ`           |
 
-**Update:** Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required. Remove them from your application when you update the .NET Tracer.
+<div class="alert alert-info">
+<strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code> and <code>NpgsqlCommand</code>.
+</div>
 
-**Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
+Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][3].
-
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-dotnet
-[2]: /tracing/compatibility_requirements/dotnet-core/
+[1]: /tracing/compatibility_requirements/dotnet-core/
+[2]: https://github.com/DataDog/dd-trace-dotnet
 [3]: /help/

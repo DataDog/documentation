@@ -12,7 +12,7 @@ further_reading:
     tag: ドキュメント
     text: JSON を使用したダッシュボードの構築
 ---
-イメージウィジェットを使用すると、ダッシュボードにイメージを埋め込むことができます。イメージには、PNG、JPG、またはアニメーション GIF を使用できます。
+イメージウィジェットを使用すると、ダッシュボードにイメージを埋め込むことができます。イメージには、URLでアクセスできる場所でホストされている PNG、JPG、またはアニメーション GIF を使用できます。
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="イメージ" video="true"  width="80%" >}}
 
@@ -28,31 +28,15 @@ further_reading:
 
 ## API
 
-イメージウィジェットの[ウィジェット JSON スキーマ定義][1]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][1] ドキュメントをご参照ください。
 
-```text
-IMAGE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["image"]},
-        "url": {"type": "string"},
-        "sizing": {"enum": ["zoom", "fit", "center"]},
-        "margin": {"enum": ["small", "large"]}
-    },
-    "required": ["type", "url"],
-    "additionalProperties": false
-}
-```
+イメージウィジェットの[ウィジェット JSON スキーマ定義][2]は次のとおりです。
 
-| パラメーター | 種類   | 必須 | 説明                                                                          |
-|-----------|--------|----------|--------------------------------------------------------------------------------------|
-| `type`    | string | はい      | ウィジェットのタイプ。イメージウィジェットには `image` を使用します。                                 |
-| `url`     | string | はい      | イメージの URL                                                                     |
-| `sizing`  | string | いいえ       | ウィジェット内のイメージのサイズ変更方法。有効な値は、`zoom`、`fit`、`center` です。 |
-| `margin`  | string | いいえ       | イメージ周囲のマージンのサイズ。有効な値は `small` または `large` です。       |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/graphing_json/widget_json/
+[1]: /ja/api/v1/dashboards/
+[2]: /ja/dashboards/graphing_json/widget_json/

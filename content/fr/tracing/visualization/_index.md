@@ -102,7 +102,7 @@ Dans l'exemple ci-dessous, les spans de premier niveau sont :
 
 ## Métriques de trace
 
-Tout comme les autres types de [métriques Datadog][2], les métriques de trace sont automatiquement collectées et conservées pendant une durée de 15 mois. Elles peuvent être utilisées pour identifier et recevoir des alertes relatives aux hits, aux erreurs ou à la latence. Les métriques de trace sont taguées par le host qui reçoit les traces ainsi que par le service ou la ressource. Par exemple, après avoir instrumenté un service Web, des métriques de trace sont recueillies pour la span de point d'entrée `web.request` dans le [Résumé des métriques][15].
+Tout comme les autres types de [métriques Datadog][2], les [métriques de trace][5] sont automatiquement recueillies et conservées pendant une durée de 15 mois. Elles peuvent être utilisées pour identifier des hits, des erreurs ou une latence et envoyer des alertes à ce sujet. Le host qui reçoit les traces, ainsi que le service ou la ressource, sont ajoutés en tant que tag aux métriques de service. Par exemple, après avoir instrumenté un service Web, des métriques de trace sont recueillies pour la span de point d'entrée `web.request` dans le [Metric Summary][16].
 
 {{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="métriques de trace" >}}
 
@@ -114,7 +114,7 @@ Les métriques de trace peuvent être exportées vers un dashboard à partir de 
 
 ### Monitoring
 
-Les métriques de trace sont idéales pour la surveillance. Il est possible de définir des monitors d'APM depuis les pages [Nouveau monitor][16], [Service][6] ou [Ressource][7]. Des suggestions de monitors sont affichées sur la page [Service][6] ou [Ressource][7].
+Les métriques de trace sont idéales pour la surveillance. Il est possible de définir des monitors d'APM depuis les pages [New monitor][17], [Service][6] ou [Resource][7]. Des suggestions de monitors sont affichées sur la page [Service][6] ou [Resource][7].
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="monitor de métriques de trace" >}}
 
@@ -140,21 +140,21 @@ Appliquez des tags à vos spans sous forme de paires clé-valeur pour corréler 
 
 Pour commencer à taguer des spans dans votre application, consultez ce [guide][12].
 
-Une fois qu'un tag a été ajouté à une span, recherchez et interrogez le tag dans Analytics en cliquant sur le tag pour l'ajouter en tant que [facette][17]. Cela fait, la valeur de ce tag est stockée pour toutes les nouvelles traces et peut être utilisée dans la barre de recherche, le volet Facettes et la requête de graphique de traces.
+Une fois qu'un tag a été ajouté à une span, recherchez et interrogez ce tag dans Analytics en cliquant sur le tag pour l'ajouter en tant que [facette][18]. La valeur de ce tag est alors stockée pour toutes les nouvelles traces et peut être utilisée dans la barre de recherche, le volet Facettes et la requête du graphique des traces.
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Créer une facette" style="width:50%;">}}
 
 ## Filtres de rétention
 
-[Définissez des [filtres basés sur des tags][18] dans l'interface utilisateur de Datadog afin d'indexer les spans pendant 15 jours et de les utiliser avec la fonctionnalité Analyse et recherche de traces.](#trace-search-and-analytics)
+[Définissez des [filtres basés sur des tags][19] dans l'interface de Datadog afin d'indexer les spans pendant 15 jours et de les utiliser avec la fonctionnalité d'[analyse et de recherche de traces](#analyse-et-recherche-de-traces).](#trace-search-and-analytics)
 
 ## Contrôles de l'ingestion
 
-[Envoyez 100 % des traces][19] de vos services à Datadog et tirez parti des [filtres de rétention basés sur des tags](#filtres-de-retention) afin de conserver uniquement les traces qui intéressent votre entreprise pendant 15 jours.
+[Envoyez toutes les traces][20] de vos services à Datadog et tirez parti des [filtres de rétention basés sur des tags](#filtres-de-retention) afin de conserver uniquement les traces qui intéressent votre entreprise pendant 15 jours.
 
 ## Métrique de sous-couche
 
-Certaines [métriques d'application de tracing][20] reçoivent les tags `sublayer_service` et `sublayer_type`, ce qui vous permet de connaître le temps d'exécution d'un service spécifique au sein d'une trace.
+Certaines [métriques d'application de tracing][15] possèdent les tags `sublayer_service` et `sublayer_type`, qui vous permettent de calculer le temps d'exécution d'un service spécifique au sein d'une trace.
 
 ## Durée d'exécution
 
@@ -181,9 +181,9 @@ Les spans actives à un moment donné et pour une trace donnée regroupent toute
 [12]: /fr/tracing/guide/adding_metadata_to_spans/
 [13]: /fr/tracing/runtime_metrics/
 [14]: /fr/tracing/trace_search_and_analytics/
-[15]: https://app.datadoghq.com/metric/summary
-[16]: https://app.datadoghq.com/monitors#/create
-[17]: /fr/tracing/trace_search_and_analytics/query_syntax/#facets
-[18]: /fr/tracing/trace_retention_and_ingestion/#retention-filters
-[19]: /fr/tracing/trace_retention_and_ingestion/#ingestion-controls
-[20]: /fr/tracing/guide/metrics_namespace/
+[15]: /fr/tracing/guide/metrics_namespace/
+[16]: https://app.datadoghq.com/metric/summary
+[17]: https://app.datadoghq.com/monitors#/create
+[18]: /fr/tracing/trace_search_and_analytics/query_syntax/#facets
+[19]: /fr/tracing/trace_retention_and_ingestion/#retention-filters
+[20]: /fr/tracing/trace_retention_and_ingestion/#ingestion-controls

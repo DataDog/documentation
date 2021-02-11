@@ -4,6 +4,12 @@ kind: documentation
 aliases:
     - /tracing/profiling/search_profiles
 further_reading:
+    - link: 'tracing/profiler/getting_started'
+      tag: 'Documentation'
+      text: 'Enable continuous profiler for your application.'
+    - link: 'tracing/profiler/intro_to_profiling'
+      tag: 'Documentation'
+      text: 'Intro to profiling.'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
       text: 'Introducing always-on production profiling in Datadog.'
@@ -59,8 +65,8 @@ Four tabs are below the profile header:
 
 In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs.
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,go" >}}
+{{< programming-lang lang="java" >}}
 
 {{< img src="tracing/profiling/profile.png" alt="A specific profile">}}
 
@@ -76,9 +82,8 @@ Once enabled, the following profile types are collected:
 | File I/O                 | Shows the time each method spent reading from and writing to files.                                                                                                                                                                                                                                        |
 | Lock                     | Shows the time each method spent waiting for a lock.                                                                                                                                                                                                                                                                                                                           |
 | Socket I/O               | Shows the time each method spent reading from and writing to socket I/O.                                                                                                                                                                                                                                              |
-{{% /tab %}}
-
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 Once enabled, the following profile types are collected:
 
@@ -93,9 +98,8 @@ Once enabled, the following profile types are collected:
 | Uncaught Exceptions      | Shows the exceptions that were not caught by any try/except block. |
 | Exceptions              | Shows the exceptions that were raised during program execution. |
 
-{{% /tab %}}
-
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 Once enabled, the following profile types are collected:
 
@@ -107,9 +111,9 @@ Once enabled, the following profile types are collected:
 | Heap                     | Shows the amount of heap memory allocated by each function that remained allocated since the start of the application and lived since the last garbage collection. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.               |
 | Heap Count               | Shows the number of objects allocated in heap memory by each function, and which objects remained allocated since the start of the application and lived since the last garbage collection. This is useful for investigating the overall memory usage of your service.                              |
 
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
-{{< /tabs >}}
 
 ## Further Reading
 

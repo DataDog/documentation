@@ -1,6 +1,7 @@
 ---
 title: トップリストウィジェット
 kind: documentation
+widget_type: トップリスト
 aliases:
   - /ja/graphing/widgets/top_list/
 further_reading:
@@ -28,9 +29,9 @@ further_reading:
 ### コンフィギュレーション
 
 1. グラフ化するデータを選択します。
-    * Metric: メトリクスのクエリを構成するには、[クエリ作成][6]のドキュメントを参照してください。
+    * メトリクス: メトリクスのクエリを構成するには、[クエリ作成][1]のドキュメントを参照してください。
     * Indexed Span : Indexed Span クエリの構成については、[トレース検索に関するドキュメント][2]を参照してください。
-    * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][1]を参照してください。
+    * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][3]を参照してください。
 
 2. オプション: エントリの値に応じて、条件付き書式を構成します。
 
@@ -50,51 +51,18 @@ further_reading:
 
 ## API
 
-トップリストウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][4] ドキュメントをご参照ください。
 
-```text
-TOPLIST_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["toplist"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+トップリストウィジェットの[ウィジェット JSON スキーマ定義][5]は次のとおりです。
 
-| パラメーター  | 型             | 必須 | 説明                                                                                                                                                  |
-|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`     | 文字列           | はい      | ウィジェットのタイプ。トップリストウィジェットには `toplist` を使用します。                                                                                                       |
-| `requests` | オブジェクトの配列 | はい      | ウィジェットに表示する 1 つの `request` オブジェクトの配列。`REQUEST_SCHEMA` の作成方法については、[リクエスト JSON スキーマに関するドキュメント][4]を参照してください。 |
-| `title`    | 文字列           | いいえ       | ウィジェットのタイトル。                                                                                                                                        |
-
-`request` オブジェクトでは、以下のプロパティも使用できます。
-
-```text
-{
-   "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
-}
-```
-
-| パラメーター             | 型   | 必須 | 説明                                                                                                                                                     |
-|-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional_formats` | object | いいえ       | 条件付き書式コントロールのオプション。`CONDITIONAL_FORMATS_SCHEMA` の作成方法については、[条件付き書式 JSON スキーマに関するドキュメント][5]を参照してください。 |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/search_syntax/
+[1]: /ja/dashboards/querying/
 [2]: /ja/tracing/app_analytics/search/#search-bar
-[3]: /ja/dashboards/graphing_json/widget_json/
-[4]: /ja/dashboards/graphing_json/request_json/
-[5]: /ja/dashboards/graphing_json/widget_json/#conditional-format-schema
-[6]: /ja/dashboards/querying/
+[3]: /ja/logs/search_syntax/
+[4]: /ja/api/v1/dashboards/
+[5]: /ja/dashboards/graphing_json/widget_json/

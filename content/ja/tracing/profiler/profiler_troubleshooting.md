@@ -30,6 +30,17 @@ jdk.InitialSystemProperty#enabled=false
 {{< code-block lang="text" filename="example-template.jfp" >}}
 jdk.ObjectAllocationInNewTLAB#enabled=false
 jdk.ObjectAllocationOutsideTLAB#enabled=false
+jdk.OldObjectSample#enabled=false
+{{< /code-block >}}
+
+[オーバーライドテンプレートの使用方法を学ぶ。](#creating-and-using-a-jfr-template-override-file)
+
+## ガベージコレクターの速度を低下させるメモリリーク検出
+
+メモリリーク検出をオフにするには、`jfp` [オーバーライドテンプレートファイル](#large-allocation-events-overwhelming-the-profiler)で次のイベントを無効にします。
+
+{{< code-block lang="text" filename="example-template.jfp" >}}
+jdk.OldObjectSample#enabled=false
 {{< /code-block >}}
 
 [オーバーライドテンプレートの使用方法を学ぶ。](#creating-and-using-a-jfr-template-override-file)

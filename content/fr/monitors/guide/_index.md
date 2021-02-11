@@ -2,7 +2,7 @@
 title: Guides sur les monitors
 kind: guide
 private: true
-disable_toc: true
+disable_sidebar: true
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

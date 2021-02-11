@@ -99,5 +99,5 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 [3]: /ja/agent/proxy/#environment-variables
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
 [5]: https://docs.datadoghq.com/ja/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env.go
+[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env_test.go
 [7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/process/config/config.go

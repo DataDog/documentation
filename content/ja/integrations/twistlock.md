@@ -22,7 +22,7 @@ draft: false
 git_integration_title: twistlock
 guid: 59082b73-62f4-48d4-83f8-af3d5576eae1
 integration_id: twistlock
-integration_title: Twistlock
+integration_title: Prisma Cloud Compute Edition
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: twistlock.
 metric_to_check: twistlock.images.cve.details
 name: twistlock
-public_title: Datadog-Twistlock インテグレーション
+public_title: Datadog-Prisma Cloud Compute Edition インテグレーション
 short_description: Twistlock はコンテナセキュリティスキャナ
 support: コア
 supported_os:
@@ -40,13 +40,13 @@ supported_os:
 ---
 ## 概要
 
-[Twistlock][1] はセキュリティスキャナです。コンテナ、ホスト、パッケージをスキャンして、脆弱性やコンプライアンス問題を発見します。
+[Prisma Cloud Compute Edition][1] はセキュリティスキャナです。コンテナ、ホスト、パッケージをスキャンして、脆弱性やコンプライアンス問題を発見します。
 
 ## セットアップ
 
 ### インストール
 
-Twistlock チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
+Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
@@ -182,18 +182,18 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### イベント
 
-Twistlock は、新しい CVE が見つかると、イベントを送信します。
+Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベントを送信します。
 
 ### サービスのチェック
 
-Twistlock は、スキャンに失敗すると、サービスチェックを送信します。
+Prisma Cloud Compute Edition は、スキャンに失敗すると、サービスチェックを送信します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
-[1]: https://www.twistlock.com
+[1]: https://www.paloaltonetworks.com/prisma/cloud
 [2]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

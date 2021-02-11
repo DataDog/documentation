@@ -33,9 +33,9 @@ These examples walk through tracing the entire `BackupLedger.write` method to me
 {{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Analytics View"  style="width:90%;">}}
 
 The `http.request POST /charge/` span is taking a lot of time without having any direct child spans. This is a clue that this request requires further instrumentation to gain better insights into its behavior. Depending on the programming language you are using, you need to decorate your functions differently:
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
 
-{{< tabs >}}
-{{% tab "Java" %}}
 In Java, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
 **Instument a method with a decorator**:
@@ -90,8 +90,8 @@ public class BackupLedger {
 ```
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 In Python, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
@@ -136,8 +136,9 @@ class BackupLedger:
 ```
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
   In Ruby, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
   This example creates a new span for the call to the `BackupLedger.write` method and a child span for every transaction posted to the ledger with a [custom tag][1] with the specific transaction ID.
@@ -165,8 +166,9 @@ end
 ```
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
   In Go, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
   This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
@@ -210,8 +212,9 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 ```
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
   In Node.js, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
 This example creates a new span for the call to the `BackupLedger.write` method and a child span for every transaction posted to the ledger with a [custom tag][1] with the specific transaction ID.
@@ -234,8 +237,9 @@ function write (transactions) {
 ```
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
   In .NET, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
 This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
@@ -264,8 +268,8 @@ public void Write(List<Transaction> transactions)
 ```
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 In PHP, Datadog APM allows you to instrument your code to generate custom spans—either by using method wrappers, or by instrumenting specific code blocks.
 
@@ -334,8 +338,8 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 ```
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Leverage the Datadog UI to see your new custom spans
 

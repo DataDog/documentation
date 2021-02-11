@@ -38,6 +38,8 @@ clean-all: stop  ## Clean everything.
 
 clean-build:  ## Remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
+	@if [ static/images/integrations_logos/2020w2.pdf ]; then \
+	rm -f static/images/integrations_logos/2020w2.pdf ;fi
 
 clean-exe:  ## Remove execs.
 	@rm -rf ${EXE_LIST}
@@ -87,6 +89,9 @@ clean-integrations:  ## Remove built integrations files.
 	@find ./content/en/security_monitoring/default_rules -type f -maxdepth 1 \
 		-a -not -name '_index.md' \
 		-exec rm -rf {} \;
+	@if [ -d static/images/marketplace ]; then \
+		find ./static/images/marketplace -type f \
+	    -exec rm -rf {} \; ;fi
 
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
@@ -164,8 +169,11 @@ start: clean source-helpers examples ## Build the documentation with all externa
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
 		GITHUB_TOKEN=${GITHUB_TOKEN} \
+		DD_API_KEY=${DD_API_KEY} \
+		DD_APP_KEY=${DD_APP_KEY} \
 		RUN_SERVER=${RUN_SERVER} \
 		CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS} \
+		PULL_RBAC_PERMISSIONS=${PULL_RBAC_PERMISSIONS} \
 		CONFIGURATION_FILE=${CONFIGURATION_FILE} \
 		LOCAL=${LOCAL}\
 		run-site.sh; \
@@ -200,17 +208,23 @@ clean-ruby-examples:
 clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples
 	@rm -rf examples
 
+BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
+
 examples/datadog-api-client-go:
-	@git clone https://github.com/DataDog/datadog-api-client-go.git examples/datadog-api-client-go
+	@git clone https://github.com/DataDog/datadog-api-client-go.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
 examples/datadog-api-client-java:
-	@git clone https://github.com/DataDog/datadog-api-client-java.git examples/datadog-api-client-java
+	@git clone https://github.com/DataDog/datadog-api-client-java.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
 examples/datadog-api-client-python:
-	@git clone https://github.com/DataDog/datadog-api-client-python.git examples/datadog-api-client-python
+	@git clone https://github.com/DataDog/datadog-api-client-python.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
 examples/datadog-api-client-ruby:
-	@git clone https://github.com/DataDog/datadog-api-client-ruby.git examples/datadog-api-client-ruby
+	@git clone https://github.com/DataDog/datadog-api-client-ruby.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
 .PHONY: examples/go examples/java examples/python examples/ruby examples
 

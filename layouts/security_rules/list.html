@@ -22,16 +22,17 @@
 <form id="rules">
     <div class="controls" data-ref="controls">
         <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
-        {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
+        {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter="cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
     </div>
     <div class="form-group clearfix">
         <input type="input" data-ref="search" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords" />
     </div>
     <div class="list-group">
+        <div class="js-empty-results d-none font-semibold"></div>
         {{ range $i, $v := .Pages.GroupByParam "source" }}
             <div class="js-group js-group-{{ $i }}">
-                <div class="rule-list mb-1 active">
-                    <div class="rule-list__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
+                <div class="js-group-header mb-1 active">
+                    <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
                         {{ range first 1 $v.Pages }}
                             {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "ctx" $dot) }}
                             {{ if $this_img.image }}
@@ -48,16 +49,16 @@
                             {{ title $v.Key | humanize | title }}
                         {{ end }}
                     </div>
-                    <div class="rule-list__arrow">></div>
+                    <div class="js-group-header__arrow">></div>
                 </div>
                 <div class="group-{{ .Key }} mb-2 ml-5 d-none">
                     {{ range $v.Pages }}
-                        <a class="mb-1 font-semibold mix {{ range $i, $e := .Params.rule_category }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
+                        <a class="mb-1 font-semibold mix js-single-rule {{ range $i, $e := .Params.rule_category }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
                             {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope "ctx" $dot) }}
                             {{ if $this_img.image }}
                                 <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
-                                <img width="40" height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}" />
+                                <img width="40" height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}" alt="{{ $v.Key }}" />
                             {{ end }}
                             {{ .Title }}<br />
                         </a>

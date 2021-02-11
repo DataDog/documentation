@@ -6,14 +6,14 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
     tag: ブログ
     text: ネットワークパフォーマンスのモニタリング
-  - link: /integrations/snmp
+  - link: /network_performance_monitoring/devices
     tag: ドキュメント
-    text: SNMP インテグレーション
+    text: ネットワークデバイスモニタリング
   - link: /dashboards/widgets/network
     tag: ドキュメント
     text: ネットワークウィジェット
 ---
-ネットワークパフォーマンスのモニタリングには [Datadog Agent v6.14 以降][1]が必要です。この製品は eBPF に構築されているため、Datadog では最小要件として基盤プラットフォームに Linux kernel バージョン4.4.0 以降が必要です。
+ネットワークパフォーマンスのモニタリングには、[Datadog Agent v6.14 以降][1]が必要です。
 
 サポート対象の**プラットフォーム**
 
@@ -23,24 +23,31 @@ further_reading:
 - SUSE 15 以降
 - Amazon AMI 2016.03 以降
 - Amazon Linux 2
+- [Windows Server 2016+][2] (公開ベータ版)
 
-[CentOS/RHEL 7.6 以降][2]の要件は、kernel 4.4.0 以降では適用外です。[DNS 解決][3]機能は CentOS/RHEL 7.6 ではサポートされていません。
+**Linux OS の場合:** データ収集は eBPF を使用して行われるため、Datadog は最低限、基底の Linux カーネルバージョン 4.4.0 以降を備えたプラットフォームを必要とします。
+
+**Windows OS の場合:** データ収集は、Windows Server 2016 以降の公開ベータ版で利用できます。
+
+[CentOS/RHEL 7.6 以降][3]の要件は、カーネル 4.4.0 以降ではでは適用外のものがあります。[DNS 解決][4]機能は CentOS/RHEL 7.6 ではサポートされていません。
+
+**Istio** v1.6.4 以降は、[Datadog Agent v7.24.1 以降][1]でサポートされています。
 
 ネットワークパフォーマンスモニタリングは、次の要件が満たされている場合、**Cilium** インストールと互換性があります。
 1) Cilium バージョン 1.6 以降、および
 2) カーネルバージョン 5.1.16 以降、または 4.19.x カーネルの場合は 4.19.57 以降
 
-**注**: 現在 Datadog では、Windows プラットフォームおよび macOS プラットフォームのネットワークパフォーマンスのモニタリングをサポートしていません。
+**注**: Datadog では、macOS プラットフォームのネットワークパフォーマンスのモニタリングをサポートしていません。
 
 次の**プロビジョニングシステム**はサポート対象です。
 
-- Daemonset / Helm 1.38.11 以降: [Datadog Helm チャート][4] を参照してください
-- Chef 12.7 以降: [Datadog Chef レシピ][5] を参照してください
-- Ansible 2.6 以降: [Datadog Ansible ロール][6]を参照してください
+- Daemonset / Helm 1.38.11 以降: [Datadog Helm チャート][5]を参照してください
+- Chef 12.7 以降: [Datadog Chef レシピ][6]を参照してください
+- Ansible 2.6 以降: [Datadog Ansible ロール][7]を参照してください
 
 ## セットアップ
 
-ネットワークパフォーマンスモニタリングを有効にするには、ご使用中のシステム設定に基づいて、[Agent の主要コンフィギュレーションファイル][7]で構成します。
+ネットワークパフォーマンスモニタリングを有効にするには、ご使用中のシステム設定に基づいて、[Agent の主要コンフィギュレーションファイル][8]で構成します。
 
 このツールの狙いと強みが、ネットワークエンドポイント間のトラフィック分析とネットワークの依存関係のマッピングであるため、価値を最大化するために、インフラストラクチャーの重要なサブセット、そして**_少なくとも 2 つのホスト_**にインストールすることが推奨されます。
 
@@ -67,7 +74,7 @@ Datadog Agent を使用してネットワークパフォーマンスのモニタ
         enabled: true
     ```
 
-4. v6.18 または 7.18 より古い Agent を実行している場合は、システムプローブを手動で起動しブート時に有効化します (v6.18 および v7.18 以降では、Agent 起動時にシステムプローブが自動的に起動します)。
+4. **v6.18 または 7.18 より古い Agent を実行している場合は**、システムプローブを手動で起動しブート時に有効化します (v6.18 および v7.18 以降では、Agent 起動時にシステムプローブが自動的に起動します)。
 
     ```shell
     sudo systemctl start datadog-agent-sysprobe
@@ -121,10 +128,47 @@ SELinux を有効にしたその他のシステムでネットワークパフォ
 
 お使いのディストリビューション内にこれらのユーティリティが存在しない場合は、現在のディストリビューションで利用可能なユーティリティを使って同じ手順を実行してください。
 
+### Windows システム
+
+Windows システムのデータ収集は、Windows Server バージョン 2016 以降の公開ベータ版で利用できます。
+**注**: NPM は現在、Windows ホストのみを監視し、Windows コンテナは監視していません。DNS メトリクス収集は、Windows システムではサポートされていません。
+
+Windows ホストのネットワークパフォーマンスモニタリングを有効にするには
+
+1. Datadog Agent の[このカスタムビルド][4]をインストールします。
+2. `C:\ProgramData\Datadog\system-probe.yaml` を編集し、有効フラグを `true` に設定します。
+
+    ```yaml
+    system_probe_config:
+        ## @param enabled - boolean - optional - default: false
+        ## Set to true to enable the System Probe.
+        #
+        enabled: true
+    ```
+3. `C:\ProgramData\Datadog\datadog.yaml` を編集し、有効フラグを `true` に設定します。
+
+    ```yaml
+    process_config:
+        ## @param enabled - boolean - optional - default: false
+        ## Set to true to enable the System Probe.
+        #
+        enabled: true
+    ```
+4. [Agent を再起動します][2]。
+
+   PowerShell (`powershell.exe`) の場合: 
+    ```shell
+    restart-service -f datadogagent
+    ```
+   コマンドプロンプト (`cmd.exe`) の場合:
+    ```shell
+    net /y stop datadogagent && net start datadogagent
+    ```
 
 [1]: /ja/infrastructure/process/?tab=linuxwindows#installation
 [2]: /ja/agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
+[4]: https://s3.amazonaws.com/ddagent-windows-unstable/datadog-agent-7.23.2-beta1-1-x86_64.msi
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -157,7 +201,7 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Agent コンテナの以下の環境変数を使用して、プロセス収集とシステムプローブを有効化します。Agent を単一コンテナで稼働させている場合は、以下を使用してください:
+2. Agent DaemonSet で次の環境変数を使用して、プロセス収集とシステムプローブを有効にします。Agent プロセスごとにコンテナを実行している場合は、次の環境変数を Process Agent コンテナに追加します。それ以外の場合は、環境変数を Agent コンテナに追加します。
 
     ```yaml
       # (...)
@@ -170,10 +214,8 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                           - name: DD_SYSTEM_PROBE_EXTERNAL
                             value: 'true'
                           - name: DD_SYSPROBE_SOCKET
-                            value: /var/run/s6/sysprobe.sock
+                            value: /var/run/sysprobe/sysprobe.sock
     ```
-
-   プロセス Agent を別のコンテナで稼働させている場合は、上記の環境変数をそのコンテナに設定する必要があります。
 
 3. 以下の追加ボリュームを `datadog-agent` コンテナにマウントします。
 
@@ -194,8 +236,8 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                         readOnly: true
                       - name: debugfs
                         mountPath: /sys/kernel/debug
-                      - name: s6-run
-                        mountPath: /var/run/s6
+                      - name: sysprobe-socket-dir
+                        mountPath: /var/run/sysprobe
     ```
 
 4. 新しいシステムプローブを Agent のサイドカーとして追加します。
@@ -223,7 +265,7 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
                           - name: DD_SYSPROBE_SOCKET
-                            value: /var/run/s6/sysprobe.sock
+                            value: /var/run/sysprobe/sysprobe.sock
                       resources:
                           requests:
                               memory: 150Mi
@@ -240,15 +282,15 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                             readOnly: true
                           - name: debugfs
                             mountPath: /sys/kernel/debug
-                          - name: s6-run
-                            mountPath: /var/run/s6
+                          - name: sysprobe-socket-dir
+                            mountPath: /var/run/sysprobe
     ```
 
 5. 最後に、お使いのマニフェストに以下のボリュームを追加します。
 
     ```yaml
                 volumes:
-                    - name: s6-run
+                    - name: sysprobe-socket-dir
                       emptyDir: {}
                     - name: debugfs
                       hostPath:
@@ -324,9 +366,10 @@ AWS ECS での設定については、[AWS ECS][1] ドキュメントページ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[3]: /ja/network_performance_monitoring/network_page#dns-resolution
-[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[5]: https://github.com/DataDog/chef-datadog
-[6]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[7]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /ja/network_performance_monitoring/installation/?tab=agent#windows-systems
+[3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
+[4]: /ja/network_performance_monitoring/network_page#dns-resolution
+[5]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[6]: https://github.com/DataDog/chef-datadog
+[7]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
+[8]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file

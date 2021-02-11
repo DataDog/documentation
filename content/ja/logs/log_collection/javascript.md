@@ -163,7 +163,7 @@ datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 #### CDN 非同期
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 })
 ```
@@ -254,6 +254,70 @@ window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
 
 ## 高度な使用方法
 
+### Browser ログの機密データのスクラビング
+
+Browser ログに編集が必要な機密情報が含まれている場合は、Browser Log Collector を初期化するときに `beforeSend` コールバックを使用して、機密シーケンスをスクラブするように Browser SDK を構成します。
+
+`beforeSend` コールバック関数を使用すると、Datadog に送信される前に Browser SDK によって収集された各イベントにアクセスでき、一般的に編集されたプロパティを更新できます。
+
+たとえば、Web アプリケーションの URL からメールアドレスを編集するには
+
+#### NPM
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs'
+
+datadogLogs.init({
+    ...,
+    beforeSend: (event) => {
+        // ビューの URL からメールを削除します
+        event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+    },
+    ...
+});
+```
+
+#### CDN 非同期
+
+```javascript
+DD_LOGS.onReady(function() {
+    DD_LOGS.init({
+        ...,
+        beforeSend: (event) => {
+            // ビューの URL からメールを削除します
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+        },
+        ...
+    })
+})
+```
+
+#### CDN 同期
+
+```javascript
+window.DD_LOGS &&
+    window.DD_LOGS.init({
+        ...,
+        beforeSend: (event) => {
+            // ビューの URL からメールを削除します
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+        },
+        ...
+    });
+```
+
+次のイベントプロパティを更新できます。
+
+| 属性       | タイプ   | 説明                                                                                      |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------ |
+| `view.url`      | 文字列 | アクティブな Web ページの URL。                                                                  |
+| `view.referrer` | 文字列 | 現在リクエストされているページへのリンクがたどられた前のウェブページの URL。 |
+| `message`       | 文字列 | ログの内容。                                                                          |
+| `error.stack`   | 文字列 | スタックトレースまたはエラーに関する補足情報。                                    |
+| `http.url`      | 文字列 | HTTP URL。                                                                                    |
+
+**注**: Browser SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。イベントプロパティの詳細については、[Browser SDK リポジトリ][5]を参照してください。
+
 ### 複数のロガーの定義
 
 Datadog ブラウザログ SDK にはデフォルトのロガーが含まれていますが、さまざまなロガーを定義することもできます。
@@ -262,10 +326,10 @@ Datadog ブラウザログ SDK にはデフォルトのロガーが含まれて�
 
 Datadog ブラウザログ SDK を初期化したら、API `createLogger` を使用して新しいロガーを定義します。
 
-```text
+```typescript
 createLogger (name: string, conf?: {
-    level?: 'debug' | 'info' | 'warn' | 'error'
-    handler?: 'http' | 'console' | 'silent'
+    level?: 'debug' | 'info' | 'warn' | 'error',
+    handler?: 'http' | 'console' | 'silent',
     context?: Context
 })
 ```
@@ -276,8 +340,8 @@ createLogger (name: string, conf?: {
 
 ロガーを作成すると、API を使い JavaScript コードのどこからでもロガーにアクセスすることができます。
 
-```javascript
-getLogger (name: string)
+```typescript
+getLogger(name: string)
 ```
 
 ##### NPM
@@ -304,7 +368,7 @@ signupLogger.info('Test sign up completed')
 たとえば、他のロガーと共に定義された `signupLogger` があります。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
 })
 ```
@@ -312,7 +376,7 @@ DD_LOGS.onReady(function() {
 これで、次のように、このロガーをコードの別の場所で使用できます。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   const signupLogger = DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 })
@@ -358,7 +422,7 @@ NPM の場合は以下を使用します。
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.setLoggerGlobalContext("{'env': 'staging'}")
+datadogLogs.setLoggerGlobalContext({ env: 'staging' })
 
 datadogLogs.addLoggerGlobalContext('referrer', document.referrer)
 
@@ -370,16 +434,16 @@ const context = datadogLogs.getLoggerGlobalContext() // => {env: 'staging', refe
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
 })
 
-DD_LOGS.onReady(function() {
-  window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+DD_LOGS.onReady(function () {
+  DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
 })
 
-DD_LOGS.onReady(function() {
-  var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+DD_LOGS.onReady(function () {
+  var context = DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
 })
 ```
 
@@ -423,11 +487,11 @@ datadogLogs.addContext('referrer', document.referrer)
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.setContext("{'env': 'staging'}")
 })
 
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.addContext('referrer', document.referrer)
 })
 ```
@@ -471,7 +535,7 @@ datadogLogs.logger.setLevel('<LEVEL>')
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.logger.setLevel('<LEVEL>')
 })
 ```
@@ -512,7 +576,7 @@ datadogLogs.logger.setHandler('<HANDLER>')
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.logger.setHandler('<HANDLER>')
 })
 ```
@@ -533,3 +597,4 @@ window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 [2]: /ja/account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
 [4]: https://github.com/DataDog/browser-sdk/blob/master/packages/logs/BROWSER_SUPPORT.md
+[5]: https://github.com/DataDog/browser-sdk/blob/master/packages/logs/src/logsEvent.types.ts

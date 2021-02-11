@@ -58,8 +58,9 @@ The X-Ray client library offers insights into your HTTP requests to APIs and int
 
 Install the library, import it into your Lambda projects, and patch the services you wish to instrument.
 
-{{< tabs >}}
-{{% tab "Node.js" %}}
+{{< programming-lang-wrapper langs="nodejs,python,go,ruby,java,.NET" >}}
+
+{{< programming-lang lang="nodejs" >}}
 
 Install the X-Ray tracing library:
 
@@ -106,8 +107,9 @@ var connection = mysql.createConnection(config);
 For further configuration, creating subsegments, and recording annotations, see the [X-Ray Node.js docs][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
 
 Install the X-Ray tracing library:
 
@@ -131,23 +133,39 @@ For further configuration, creating subsegments, and recording annotations, see 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-patching.html
 [2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-httpclients.html
 [3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python.html
-{{% /tab %}}
-{{% tab "Go, Ruby, Java, .NET" %}}
+{{< /programming-lang >}}
 
-For all other runtimes, see the X-Ray SDK docs:
-
-- [X-Ray SDK for Go][1]
-- [X-Ray SDK for Ruby][2]
-- [X-Ray SDK for Java][3]
-- [X-Ray SDK for .NET & Core][4]
-
+{{< programming-lang lang="go" >}}
+See:
+- [X-Ray SDK for Go docs][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-go.html
-[2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
-[3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
-[4]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+See:
+- [X-Ray SDK for Ruby docs][1].
+
+[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
+
+See:
+- [X-Ray SDK for Java docs][1].
+
+[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
+See:
+- [X-Ray SDK for .Net docs][1].
+
+[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 [1]: integrations/amazon_web_services/#setup
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_xray

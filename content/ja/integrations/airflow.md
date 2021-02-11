@@ -108,6 +108,10 @@ Airflow の `statsd` 機能を使用して Airflow を (Datadog Agent に含ま�
            name: "airflow.job.end"
            tags:
              job_name: "$1"
+         - match: "aiflow.*_<job_name>_heartbeat_failure"
+           name: airflow.job.heartbeat.failure
+           tags:
+             job_name: "$1"
          - match: "airflow.operator_failures_*"
            name: "airflow.operator_failures"
            tags:
@@ -131,6 +135,10 @@ Airflow の `statsd` 機能を使用して Airflow を (Datadog Agent に含ま�
            name: "airflow.dag.loading_duration"
            tags:
              dag_file: "$1"
+         - match: "airflow.dagrun.*.first_task_scheduling_delay"
+           name: "airflow.dagrun.first_task_scheduling_delay"
+           tags:
+             dag_id: "$1"
          - match: "airflow.pool.open_slots.*"
            name: "airflow.pool.open_slots"
            tags:
@@ -380,5 +388,5 @@ Airflow チェックには、イベントは含まれません。
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://airflow.apache.org/docs/stable/_modules/airflow/contrib/hooks/datadog_hook.html
+[5]: https://airflow.apache.org/docs/apache-airflow-providers-datadog/stable/_modules/airflow/providers/datadog/hooks/datadog.html
 [6]: https://docs.datadoghq.com/ja/help/

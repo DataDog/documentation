@@ -80,7 +80,7 @@ Each section has a dedicated endpoint, for example:
 
 You should whitelist all of these IPs. While only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
 
-## Open Ports
+## Open ports
 
 **All outbound traffic is sent over SSL via TCP / UDP.**
 
@@ -141,7 +141,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Using Proxies
+## Using proxies
 
 For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][8].
 

@@ -21,7 +21,7 @@ The `fill()` function has two parameters:
 
 * `LIMIT` [*optional*, *default*=**300**, *maximum*=**600**]: The interpolation limit (in seconds) that represents the maximum size of a gap you want to interpolate.
 
-## Default Zero
+## Default zero
 
 | Function         | Description                             | Example                          |
 | ---------------- | --------------------------------------- | -------------------------------- |
@@ -29,7 +29,7 @@ The `fill()` function has two parameters:
 
 The `default_zero()` function fills empty time intervals using the value 0 or, if interpolation is enabled, with interpolation. Note that interpolation is enabled by default for `GAUGE` type metrics. Like most functions, `default_zero()` is applied **after** [time and space aggregation][1].
 
-### Use Cases
+### Use cases
 
 The `default_zero()` function is intended to address the following use cases (though it may also work for other use cases):
 

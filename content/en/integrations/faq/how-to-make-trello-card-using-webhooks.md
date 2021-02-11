@@ -7,7 +7,7 @@ You can easily use our [Webhook Integration][1] to instantly create a trello car
 
 This flow uses the Trello REST POST card api endpoint to post the @notification to a relevant Trello list.
 
-### Steps to Success
+### Steps to success
 
 * Get the Trello App key and Token
 
@@ -15,7 +15,7 @@ This flow uses the Trello REST POST card api endpoint to post the @notification 
 
 * Configure Webhook
 
-#### Getting the Keys
+#### Getting the keys
 
 To get the Trello App Key and Token, [navigate to Trello's relevant page][2]. If you are logged in, you should be able to see the [App key][3] immediately:
 
@@ -23,7 +23,7 @@ NOTE: Trello mentions API key in the url. For this article, API and APP keys are
 
 Authorize a token with the Trello Account you are currently logged into, [the Green Arrow][3].
 
-#### Designate the Trello List
+#### Designate the Trello list
 
 In trello, click on a [card][4] in the list you'd like to add cards to and append `.json` to the url and navigate to that url.
 From there, find the [value][5] for idList.

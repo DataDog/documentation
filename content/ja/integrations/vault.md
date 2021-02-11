@@ -55,61 +55,59 @@ Vault チェックは [Datadog Agent][2] パッケージに含まれています
 
 #### 前提条件
 
-Vault チェックが正しく機能するには、a) Vault メトリクスへの未認証アクセスを有効にするか、b) Vault クライアントトークンを指定する必要があります。
+1. [Vault コンフィギュレーションで Prometheus メトリクス][3]が有効になっていることを確認します。
 
-a) Vault [`unauthenticated_metrics_access`][3] コンフィギュレーションを `true` に設定します。
+2. Vault チェックが正しく機能するには、Vault メトリクスへの未認証アクセスを有効にするか、Vault クライアントトークンを指定する必要があります。
 
-これにより、`/v1/sys/metrics` エンドポイントへの未認証アクセスが許可されます。
+   **未認証アクセスを有効にするには**、Vault の [`unauthenticated_metrics_access`][4] コンフィギュレーションを `true` に設定します。これにより、`/v1/sys/metrics` エンドポイントへの未認証アクセスが許可されます。
 
-**注**: `/sys/metrics` エンドポイントでメトリクスを収集するには Vault v1.1.0 以降が必要です。
+     **注**: `/sys/metrics` エンドポイントでメトリクスを収集するには Vault v1.1.0 以降が必要です。
 
-b) Vault クライアントトークンを使用します。
+    **Vault クライアントトークンを使用するには**、以下の例を参照してください。JWT 認証方法を使用した例ですが、他の[認証方法][5]を使用することもできます。
 
-以下は JWT 認証方法を使用した例ですが、他の[認証方法][4]を使用することもできます。
+Vault インテグレーションには以下の機能が必要です。
 
-Vault インテグレーションが正しく機能するために必要な機能は次のとおりです。
+     `metrics_policy.hcl` のコンテンツ:
+   ```text
+   path "sys/metrics*" {
+     capabilities = ["read", "list"]
+   }
+   ```
 
-`metrics_policy.hcl` のコンテンツ:
-```text
-path "sys/metrics*" {
-  capabilities = ["read", "list"]
-}
-```
+      セットアップポリシーとロール:
 
-セットアップポリシーとロール:
+   ```text
+   $ vault policy write metrics /path/to/metrics_policy.hcl
+   $ vault auth enable jwt
+   $ vault write auth/jwt/config jwt_supported_algs=RS256 jwt_validation_pubkeys=@<PATH_TO_PUBLIC_PEM>
+   $ vault write auth/jwt/role/datadog role_type=jwt bound_audiences=<AUDIENCE> user_claim=name token_policies=metrics
+   $ vault agent -config=/path/to/agent_config.hcl
+   ```
 
-```text
-$ vault policy write metrics /path/to/metrics_policy.hcl
-$ vault auth enable jwt
-$ vault write auth/jwt/config jwt_supported_algs=RS256 jwt_validation_pubkeys=@<公開_PEM_へのパス>
-$ vault write auth/jwt/role/datadog role_type=jwt bound_audiences=<オーディエンス> user_claim=name token_policies=metrics
-$ vault agent -config=/path/to/agent_config.hcl
-```
+   `agent_config.hcl` のコンテンツ:
+   ```
+   exit_after_auth = true
+   pid_file = "/tmp/agent_pid"
 
-`agent_config.hcl` のコンテンツ:
-```
-exit_after_auth = true
-pid_file = "/tmp/agent_pid"
+   auto_auth {
+     method "jwt" {
+       config = {
+         path = "<JWT_CLAIM_PATH>"
+         role = "datadog"
+       }
+     }
 
-auto_auth {
-  method "jwt" {
-    config = {
-      path = "<JWT_クレームパス>"
-      role = "datadog"
-    }
-  }
+     sink "file" {
+       config = {
+         path = "<CLIENT_TOKEN_PATH>"
+       }
+     }
+   }
 
-  sink "file" {
-    config = {
-      path = "<クライアントトークンパス>"
-    }
-  }
-}
-
-vault {
-  address = "http://0.0.0.0:8200"
-}
-```
+   vault {
+     address = "http://0.0.0.0:8200"
+   }
+   ```
 
 ### コンフィギュレーション
 
@@ -234,7 +232,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `vault` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `vault` を探します。
 
 ## 収集データ
 
@@ -263,19 +261,20 @@ Vault がまだ初期化されていない場合は、`CRITICAL` を返します
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した HashiCorp Vault の監視][7]
+- [Datadog を使用した HashiCorp Vault の監視][8]
 
 
 [1]: https://www.vaultproject.io
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
-[4]: https://www.vaultproject.io/docs/auth
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
+[3]: https://www.vaultproject.io/docs/configuration/telemetry#prometheus
+[4]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
+[5]: https://www.vaultproject.io/docs/auth
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog

@@ -1,3 +1,4 @@
 ---
 title: スクリーンボード
+headless: true
 ---

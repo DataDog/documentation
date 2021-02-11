@@ -90,11 +90,12 @@ var AWSXRay = require('aws-xray-sdk-core');
 var AWS = AWSXRay.captureAWS(require('aws-sdk'));
 ```
 
-すべてのダウンストリーム HTTP コールをインスツルメントするには
+すべてのダウンストリーム HTTP および HTTPS コールをインスツルメントするには
 
 ```js
 var AWSXRay = require('aws-xray-sdk');
 AWSXRay.captureHTTPsGlobal(require('http'));
+AWSXRay.captureHTTPsGlobal(require('https'));
 var http = require('http');
 ```
 
@@ -113,6 +114,23 @@ var AWSXRay = require('aws-xray-sdk');
 var mysql = AWSXRay.captureMySQL(require('mysql'));
 //...
 var connection = mysql.createConnection(config);
+```
+
+チェーンされたネイティブ Promise 内のサブセグメントをキャプチャするには
+
+```js
+AWSXRay.capturePromise();
+```
+
+すべての発信 Axios リクエストをキャプチャするには
+
+```js
+const AWSXRay = require('aws-xray-sdk');
+
+AWSXRay.captureHTTPsGlobal(require('http'));
+AWSXRay.capturePromise();
+
+const AxiosWithXray = require('axios');
 ```
 
 その他のコンフィギュレーション、サブセグメントの作成、アノテーションの記録については、[Node.js 対応 X-Ray ドキュメント][1]を参考にしてください。

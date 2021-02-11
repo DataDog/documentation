@@ -1,3 +1,4 @@
 ---
 title: Dashboards
+headless: true
 ---

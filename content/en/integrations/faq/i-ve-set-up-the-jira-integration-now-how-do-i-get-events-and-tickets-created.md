@@ -25,7 +25,7 @@ In DataDog, you can use the @-style notification to reference and push a ticket 
 
 All 'Task' issues created in JIRA for the project designated by the key 'TEST2' will be pulled into the Datadog event stream and tagged with the tags defined on the integration tile.
 
-## Important Notes:
+## Important notes
 
 * Our integration scrapes JIRA about every five minutes, but issue types can vary in the amount of time they take to appear in Datadog. Generally, larger issue types like 'Stories' take longer to pull in than smaller ones like 'Tasks'.
 * You can pull in multiple issue types from one project, or one issue type from multiple projects.

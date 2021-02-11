@@ -17,7 +17,7 @@ further_reading:
 ---
 ## Présentation
 
-La liste des infrastructures affiche l'ensemble des hosts surveillés par Datadog actifs au cours des 2 dernières heures. Vous pouvez y rechercher des hôtes, les regrouper par tags, ou trier la liste en cliquant sur le titre d'une colonne.
+La liste des infrastructures affiche l'ensemble des hosts surveillés par Datadog actifs au cours des 2 dernières heures. Vous pouvez y rechercher des hosts, les regrouper par tags, ou trier la liste en cliquant sur le titre d'une colonne.
 
 {{< img src="infrastructure/index/infrastructure_list.png" alt="Liste des infrastructures" >}}
 

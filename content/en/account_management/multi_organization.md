@@ -20,7 +20,7 @@ further_reading:
 
 It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1]. The parent-organization can view the usage of individual child-organizations, allowing them to track trends in usage.
 
-Account settings, such as whitelisted IP addresses, are not inherited by child-organizations from their parent-organization.
+Account settings, such as allow-listed IP addresses, are not inherited by child-organizations from their parent-organization.
 
 The Multi-organization Account feature is not enabled by default. Contact [Datadog support][2] to have it enabled.
 
@@ -50,15 +50,19 @@ If you are a member of multiple organizations, custom sub-domains help you ident
 
 For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][1], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
+Note: when using a custom subdomain, you will have to manually edit the links from the Datadog documentation with your subdomain name. For example a link redirecting to `https://**app**.datadoghq.com/account/settings` will become `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
+
 ## Setting up SAML
 
-To configure SAML for multi-organizations, use the following procedure:
+SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually. 
+
+To configure SAML for multi-organizations:
 
 1. Create a new organization as a different user, with a different username/password.
 2. Invite SAML users.
 3. Login as a SAML user and set SAML.
 
-## Multi-Org Usage
+## Multi-org usage
 
 The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left and then navigating to: `Plan & Usage`--> `Multi-Org Usage`.
 
@@ -67,7 +71,7 @@ The Multi-Org Usage tab shows the aggregate usage of the parent-organization and
 * Month-to-date Usage
 * Long-Term Trends
 
-### Month-to-Date Usage
+### Month-to-date usage
 
 This view contains an Overall Usage section and an Individual Organization Usage section.
 
@@ -83,13 +87,13 @@ To view only the usage that will count toward your bill, you can switch to the "
 
 The month-to-date usage and last month’s usage can be downloaded as a CSV file.
 
-### Long-Term Trends
+### Long-term trends
 
 This tab shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill.
 
 This information can be downloaded as a CSV file.
 
-## Usage Attribution
+## Usage attribution
 
 The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 

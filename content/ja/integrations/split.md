@@ -7,7 +7,7 @@ assets:
 categories:
   - notification
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/split/README.md'
 display_name: Split

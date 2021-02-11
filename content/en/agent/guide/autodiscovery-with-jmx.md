@@ -116,13 +116,13 @@ spec:
                 -Djava.rmi.server.hostname=$(POD_IP)
 ```
 
-## Autodiscovery Container Identifiers
+## Autodiscovery container identifiers
 
 If you need to pass a more complex configuration for your Datadog-JMX integration, leverage [Autodiscovery Container Identifiers][11] to pass custom integration configuration file or custom `metrics.yaml` file.
 
 ### Agent preparation
 
-Choose wether your Agent is running as a container in your cluster, or on your host directly:
+Choose whether your Agent is running as a container in your cluster, or on your host directly:
 
 {{< tabs >}}
 {{% tab "Container Agent" %}}
@@ -285,7 +285,7 @@ If your Agent is running on a host and you want to autodiscover your container t
 {{% /tab %}}
 {{< /tabs >}}
 
-### Container Preparation
+### Container preparation
 
 #### Docker
 

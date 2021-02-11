@@ -17,7 +17,7 @@
   },
   "dashboard-lists": {
     "name": "ダッシュボードリスト",
-    "description": "このエンドポイントは非推奨です。代わりに、[新しいダッシュボードリストエンドポイント](https://docs.datadoghq.com/api/v2/dashboard-lists/)を使用してください。"
+    "description": "API を介してすべてのダッシュボードを整理、検索、およびチームや組織と共有できます。"
   },
   "dashboards": {
     "name": "ダッシュボード",
@@ -47,29 +47,13 @@
     "name": "IP 範囲",
     "description": "Datadog に属する IP プレフィックスのリストを取得します。"
   },
-  "incident-services": {
-    "name": "インシデントサービス",
-    "description": "[API バージョン 2 を確認します](/api/v2/incident-services/)。"
-  },
-  "incident-teams": {
-    "name": "インシデントチーム",
-    "description": "[API バージョン 2 を確認します](/api/v2/incident-teams/)。"
-  },
-  "incidents": {
-    "name": "インシデント",
-    "description": "[API バージョン 2 を確認します](/api/v2/incidents/)。"
-  },
   "key-management": {
     "name": "Key Management",
-    "description": "Datadog API とアプリケーションキーを管理します。\n\nこのエンドポイントとやり取りするには、管理者権限を持つ API とアプリケーションキーが必要です。キーの完全なリストは、[Datadog API ページ](https://app.datadoghq.com/account/settings#api)で確認できます。"
+    "description": "Datadog API とアプリケーションキーを管理します。このエンドポイントとやり取りするには、必要な権限を持つユーザー用の API キーとアプリケーションキーが必要です。API およびアプリケーションキーの完全なリストは、[Datadog API ページ](https://app.datadoghq.com/account/settings#api)で確認できます。"
   },
   "logs": {
     "name": "ログ",
-    "description": "ログを HTTP 経由で Datadog プラットフォームに送信します。HTTP リクエストあたりの制限は次のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ: 5MB\n- 単一ログの最大サイズ: 256kB\n- アレイで複数のログを送信する場合の最大アレイサイズ: 500 エントリ\n\n256KB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 256KB で切り捨て、2xx を返します。\n- マルチログリクエストの場合、API はすべてのログを処理し、256KB を超えるログのみを切り捨て、2xx を返します。\n\n圧縮されたログを送信することをお勧めします。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。"
-  },
-  "logs-archives": {
-    "name": "ログアーカイブ",
-    "description": "[API バージョン 2 を確認します](/api/v2/logs-archives/)。"
+    "description": "ログを検索し HTTP 経由で Datadog プラットフォームに送信します。HTTP リクエストあたりの制限は次のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ（非圧縮）: 5MB\n- 単一ログの最大サイズ: 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ: 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します。\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\n\nHTTP API により回答されるステータスコード:\n- 200: OK\n- 400: Bad request（ペイロードの形式の問題など）\n- 403: Permission issue（無効な API キーの使用など）\n- 413: Payload too large（バッチのサイズが非圧縮で 5MB 以上）\n- 5xx: Internal error, request should be retried after some time"
   },
   "logs-indexes": {
     "name": "ログインデックス",
@@ -78,10 +62,6 @@
   "logs-pipelines": {
     "name": "ログパイプライン",
     "description": "パイプラインとプロセッサは受信ログを操作し、クエリを簡単にするためにそれを解析して構造化属性に変換します。\n\n- 現在 UI で構成されているパイプラインとプロセッサの一覧については、[パイプラインコンフィギュレーションページ](https://app.datadoghq.com/logs/pipelines)を参照してください。\n\n- プロセッサに関する追加の API 関連情報は、[プロセッサのドキュメント](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor)にあります。\n\n- パイプラインの詳細については、[パイプラインのドキュメント](https://docs.datadoghq.com/logs/processing)を参照してください。\n\n**注:**\n\nこれらのエンドポイントは管理者ユーザーのみが利用できます。\n管理者が作成したアプリケーションキーを使用してください。\n\n**Grok パース規則は JSON 出力に影響を与える場合があり、\nリクエスト内で使用する前に、返されたデータが構成済みである必要があります。**\nたとえば、別のリクエスト本文のリクエスト\nから返されたデータを使用していて、スペースに `\\s` のような\n正規表現パターンを使用するパース規則がある場合、\nすべてのエスケープしたスペースを `%{space}` と構成して\n本文データに使用する必要があります。"
-  },
-  "logs-restriction-queries": {
-    "name": "ログ制限クエリ",
-    "description": "[API バージョン 2 を確認します](/api/v2/logs-restriction-queries/)。"
   },
   "metrics": {
     "name": "メトリクス",
@@ -99,17 +79,9 @@
     "name": "PagerDuty インテグレーション",
     "description": "[Datadog-PagerDuty インテグレーション](https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty)を Datadog API を介して直接構成します。"
   },
-  "roles": {
-    "name": "ロール",
-    "description": "[API バージョン 2 を確認します](/api/v2/roles/)。"
-  },
   "screenboards": {
     "name": "スクリーンボード",
     "description": "このエンドポイントは旧バージョンです。代わりに、[新しいダッシュボードエンドポイント](https://docs.datadoghq.com/api/#dashboards)を使用してください。"
-  },
-  "security-monitoring": {
-    "name": "セキュリティモニタリング",
-    "description": "[API バージョン 2 を確認します](/api/v2/security-monitoring/)。"
   },
   "service-checks": {
     "name": "サービスのチェック",
@@ -153,7 +125,7 @@
   },
   "users": {
     "name": "ユーザー",
-    "description": "ユーザーを作成、編集、および無効にします。[チーム管理についてもっと読む][1]。\n\n[1]: https://docs.datadoghq.com/account_management/team"
+    "description": "ユーザーを作成、編集、無効化します。"
   },
   "webhooks-integration": {
     "name": "Webhook インテグレーション",

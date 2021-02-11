@@ -6,7 +6,7 @@ Built with [hugo][1], a static website generation tool.
 
 ### Installation
 
-1. [Install npm][2]
+1. [Install node / npm][2]
 
 2. [Install Python3][3] (you can also use [pyenv][4])
 

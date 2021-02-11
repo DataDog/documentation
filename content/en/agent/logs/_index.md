@@ -24,7 +24,7 @@ Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do 
 
 ## Activate log collection
 
-Collecting logs is **disabled** by default in the Datadog Agent. To learn how to enable it with the host Agent, see the instructions below. If you are running the Agent in a Kuberentes or Docker environment, see the dedicated [Kubernetes Log Collection][2] or [Docker Log Collection][3] documentation.
+Collecting logs is **disabled** by default in the Datadog Agent. To learn how to enable it with the host Agent, see the instructions below. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][2] or [Docker Log Collection][3] documentation.
 
 To enable log collection with an Agent running on your host, update the Agent's [main configuration file][4] (`datadog.yaml`) with:
 
@@ -72,8 +72,6 @@ logs:
     service: "<APP_NAME>"
     source: "<SOURCE>"
 ```
-
-**Note**: When tailing files for logs, the Datadog Agent v6 and v7 for **Windows** requires the log files have UTF8 encoding.
 
 [1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}

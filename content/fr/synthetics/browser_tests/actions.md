@@ -94,7 +94,7 @@ Vérifie qu'un e-mail a été envoyé et si certaines valeurs spécifiques (`str
 
 ### Test your UI with custom JavaScript
 
-Testez une assertion personnalisée sur la page active en utilisant votre propre code JavaScript. 
+Testez une assertion personnalisée sur la page active en utilisant votre propre code JavaScript.
 
 **Remarque** : les assertions JavaScript prennent en charge le code synchrone et asynchrone.
 
@@ -201,20 +201,21 @@ Pour créer une variable, donnez-lui d'abord un nom, puis définissez sa valeur 
 
 Créez une variable en définissant sa valeur sur l'un des builtins disponibles ci-dessous :
 
-| Pattern                 | Description                                                                                             |
-|-------------------------|---------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`      | Génère une chaîne numérique de `n` chiffres.                                                               |
-| `{{ alphabetic(n) }}`   | Génère une chaîne alphabétique de `n` lettres.                                                           |
-| `{{ alphanumeric(n) }}` | Génère une chaîne alphanumérique de `n` caractères.                                                     |
-| `{{ date(n, format) }}` | Génère une date dans l'un de nos formats acceptés, sa valeur étant la date d'initiation du test + `n` jours. |
+| Pattern                    | Description                                                                                                 |
+|----------------------------|-------------------------------------------------------------------------------------------------------------|
+| `{{ numeric(n) }}`         | Génère une chaîne numérique de `n` chiffres.                                                                 |
+| `{{ alphabetic(n) }}`      | Génère une chaîne alphabétique de `n` lettres.                                                            |
+| `{{ alphanumeric(n) }}`    | Génère une chaîne alphanumérique de `n` caractères.                                                       |
+| `{{ date(n, format) }}`    | Génère une date dans l'un de nos formats acceptés, sa valeur étant la date d'initiation du test + `n` jours.        |
+| `{{ timestamp(n, unit) }}` | Génère un timestamp dans l'une des unités acceptées. Sa valeur correspond au timestamp d'initiation du test +/- `n` unités choisies. |
 
 #### Element
 
-Créez une variable à partir d'un `span`, `div`, ou d'un autre élément en extrayant le texte de cet élément.
+Créez une variable à partir d'un `span`, d'un `div` ou d'un autre élément en extrayant le texte de cet élément.
 
 #### JavaScript
 
-Écrivez le code JavaScript personnalisé qui renvoie la valeur à laquelle vous souhaitez que votre variable soit assignée.
+Rédigez le code JavaScript personnalisé qui renvoie la valeur à laquelle vous souhaitez que votre variable soit assignée.
 
 **Remarque** : les étapes JavaScript prennent en charge le code synchrone et asynchrone.
 
@@ -228,7 +229,7 @@ La fonction JavaScript accepte les paramètres suivants et nécessite une instru
 
 {{< img src="synthetics/browser_tests/js_variable.mp4" alt="Variable JavaScript de test Browser" video="true" width="100%">}}
 
-Étant donné que les assertions JavaScript s'exécutent dans le contexte de la page active, ces étapes peuvent également accéder à tous les objets définis dans la page active (bibliothèques, builtins, variables globales, etc.). Pour charger des bibliothèques externes, utilisez une promise. Par exemple :
+Étant donné que les assertions JavaScript s'exécutent dans le contexte de la page active, ces étapes peuvent également accéder à tous les objets définis dans la page active (bibliothèques, builtins, variables globales, etc.). Pour charger des bibliothèques externes, utilisez une promesse. Par exemple :
 
 ```javascript
 const script = document.createElement('script');
@@ -244,57 +245,57 @@ await promise
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
-#### Global Variable
+#### Variable globale
 
 Choisissez n'importe quelle variable globale définie à l'aide des [paramètres de surveillance Synthetic][7].
 
-#### Email
+#### Adresse e-mail
 
-Générez une adresse e-mail Synthetic aléatoire et utilisez-la dans vos étapes de test pour [vérifier si un e-mail a bien été envoyé][8] ou pour [accéder à un lien présent dans l'e-mail][9] (par exemple, cliquer sur un lien de confirmation). Une boîte de messagerie unique est générée à chaque exécution du test pour éviter tout conflit d'une exécution à l'autre.
+Générez une adresse e-mail Synthetic aléatoire et utilisez-la dans vos étapes de test pour [vérifier si un e-mail a bien été envoyé][8] ou pour [accéder à un lien présent dans l'e-mail][9] (par exemple, en cliquant sur un lien de confirmation). Une boîte de réception unique est générée à chaque exécution du test pour éviter tout conflit d'une exécution à l'autre.
 
 ### Utiliser la variable
 
 Tous les champs comportant l'indicateur `{{` prennent en charge des variables :
 
-{{< img src="synthetics/browser_tests/autocomplete.png" alt="Indicateur d'autocomplétion de variable"  style="width:70%;">}}
+{{< img src="synthetics/browser_tests/autocomplete.png" alt="Indicateur de saisie automatique de variable"  style="width:70%;">}}
 
 Si vous souhaitez enregistrer une étape utilisant une variable, vous pouvez utiliser l'icône en forme de main dans la case de votre variable :
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Saisie via une variable" video="true"  width="100%" >}}
 
-Lors de l'enregistrement, cette action entraîne l'injection de la valeur réelle de la variable dans le champ de saisie de votre site Web (ce qui vous permet ensuite de passer aux étapes restantes) et crée une étape `Type text` associée contenant `{{ <VOTRE_NOM_VARIABLE> }}`.   
+Lors de l'enregistrement, cette action entraîne l'injection de la valeur réelle de la variable dans le champ de saisie de votre site Web (ce qui vous permet ensuite de passer aux étapes restantes) et crée une étape `Type text` associée contenant `{{ <VOTRE_NOM_VARIABLE> }}`.
 Lors de l'exécution du test, `{{ <VOTRE_NOM_VARIABLE> }}` est systématiquement remplacé par la valeur associée de votre variable.
 
-**Remarque** : dans certains cas, la valeur de votre variable n'est calculée qu'à l'exécution du test (par exemple lorsque la variable est créée à partir d'une requête HTTP ou extraite d'une étape JavaScript). Pour passer à l'enregistrement des étapes suivantes, il sera peut-être nécessaire d'entrer `{{ <VOTRE_NOM_VARIABLE> }}` directement sur votre site Web ou d'utiliser une valeur réelle.   
+**Remarque** : dans certains cas, la valeur de votre variable n'est calculée qu'à l'exécution du test (p. ex., lorsque la variable est créée à partir d'une requête HTTP ou extraite d'une étape JavaScript). Pour passer à l'enregistrement des étapes suivantes, il sera peut-être nécessaire d'entrer `{{ <VOTRE_NOM_VARIABLE> }}` directement sur votre site Web ou d'utiliser une valeur réelle.
 Si vous choisissez cette seconde option, assurez-vous de remplacer la valeur réelle par `{{ <VOTRE_NOM_VARIABLE> }}` dans votre étape avant d'enregistrer votre test. De cette façon, le test Browser exécutera automatiquement l'étape avec la valeur de variable générée à l'étape précédente.
 
-{{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Exemple d'autocomplétion de variable" video="true"  width="100%" >}}
+{{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Exemple de saisie automatique de variable" video="true"  width="100%" >}}
 
 ## Wait
 
 Par défaut, Datadog attend que la page soit complètement chargée avant d'effectuer une étape ou de passer à l'étape suivante, avec un délai d'expiration de 60 secondes. Toutefois, dans certains cas, il peut être préférable de définir un temps d'attente personnalisé. Par exemple, si vous savez que le chargement d'une page ou d'un élément d'une page peut prendre plus de 60 secondes, vous pouvez utiliser une étape Wait pour rallonger le délai d'expiration par défaut. Si vous choisissez d'utiliser cette fonctionnalité, la valeur de votre étape Wait ne doit pas dépasser 300 secondes. 
 
-**Remarque** : le temps supplémentaire est rajouté de manière systématique à **chaque exécution** du scénario de votre test Browser.
+**Remarque** : le temps supplémentaire est systématiquement rajouté à **chaque exécution** du scénario de votre test Browser.
 
 ## Sous-tests
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="Sous-test de test Browser"  style="width:60%;">}}
 
-Vous pouvez exécuter des tests Browser au sein d'autres tests Browser afin de réutiliser des parcours existants. Cette fonctionnalité est particulièrement utile pour réduire le nombre le nombre de tests à maintenir. Les tests Browser prennent en charge jusqu'à deux niveaux d'imbrication. Vous pouvez également utiliser les [options avancées][10] pour sélectionner l'onglet dans lequel votre sous-test doit être exécuté.
+Vous pouvez exécuter des tests Browser au sein d'autres tests Browser afin de réutiliser des workflows existants. Cette fonctionnalité est particulièrement utile pour réduire le nombre de tests à gérer. Les tests Browser prennent en charge jusqu'à deux niveaux d'imbrication. Vous pouvez également utiliser les [options avancées][10] pour sélectionner l'onglet dans lequel votre sous-test doit être exécuté.
 
-**Remarque** : si vous souhaitez exécuter un sous-test de façon indépendante, vous avez la possibilité de le mettre en pause. Il recevra toujours des appels dans le cadre du test principal, mais ne sera pas exécuté de façon individuelle.
+**Remarque** : s'il n'est pas pertinent d'exécuter un sous-test de façon indépendante dans votre scénario, vous avez la possibilité de le mettre en pause. Il recevra toujours des appels dans le cadre du test principal, mais ne sera pas exécuté de façon individuelle.
 
 ## Requêtes HTTP
 
 Vous pouvez exécuter des requêtes HTTP au sein de vos tests Browser.
 
-{{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="Étape HTTP Request"  style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="Étape requête HTTP"  style="width:70%;" >}}
 
 ### Configuration
 
 Pour définir votre requête HTTP :
 
-1. Choisissez la **Method** et l'**URL** à interroger. Les méthodes disponibles sont les suivantes : `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` et `OPTIONS`.
+1. Choisissez la méthode et l'URL à interroger à l'aide des options **Method** et l'**URL**. Les méthodes disponibles sont `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` et `OPTIONS`.
 2. Si vous le souhaitez, cliquez sur **Advanced Options** pour définir des options avancées :
      * Follow redirects : activez cette fonction pour que l'endpoint surveillé suive jusqu'à dix redirections.
      * Allow insecure certificates : activez cette fonction pour que votre test HTTP poursuive son processus de connexion même lorsqu'une erreur de validation du certificat survient.
@@ -302,7 +303,7 @@ Pour définir votre requête HTTP :
      * Authentication : authentification HTTP basique avec nom d'utilisateur et mot de passe.
      * Body : corps de la requête et type de corps (`text/plain`, `application/json`, `text/xml`, `text/html` ou `None`). **Remarque** : la taille du corps de la requête est limitée à 50 Ko.
      * Cookies : les cookies définis sont ajoutés aux cookies de navigateur par défaut. Définissez plusieurs cookies en suivant le format `<COOKIE_NOM1>=<COOKIE_VALEUR1>; <COOKIE_NOM2>=<COOKIE_VALEUR2>`.
-3. Cliquez sur **Test URL** pour tester la configuration de votre requête. Un aperçu des données de réponse s'affiche alors.
+3. Cliquez sur **Test URL** pour tester la configuration de votre requête. Un aperçu des données de la réponse s'affiche alors.
 
 {{< img src="synthetics/browser_tests/http_request.png" alt="Créer une requête HTTP"  style="width:60%;" >}}
 
@@ -310,12 +311,12 @@ Pour définir votre requête HTTP :
 
 Si vous le souhaitez, vous pouvez également évaluer la réussite de l'étape en fonction d'assertions exécutées sur la requête HTTP définie :
 
-| Type          | Type de valeur                 | Opérateur                                                                      |
-|---------------|----------------------------|-------------------------------------------------------------------------------|
-| Code de statut   | _Nombre entier_                  | `is`, `is not`                                                                 |
-| Temps de réponse | _Nombre entier (ms)_             | `lessThan`                                                                     |
-| En-têtes       | _Chaîne_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
-| Corps          | _Chaîne_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+| Type          | Opérateur                                                                                               | Type de valeur                                                      |
+|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][9] | _Chaîne_ <br> _[Regex][10]_ <br> _Chaîne_, _[Regex][10]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Regex][10]                                      |
+| response time | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
+| status code   | `is`, `is not`                                                                                         | _Nombre entier_                                                      |
 
 Si vous cliquez sur **Test URL**, les assertions de base sont automatiquement renseignées :
 
@@ -332,12 +333,12 @@ Pour parser votre variable :
 1. Donnez un nom à votre variable en renseignant le champ **Variable Name**. Ce nom doit comporter au moins trois caractères et peut uniquement contenir des lettres majuscules, des chiffres et des underscores.
 2. Indiquez si la variable doit être extraite à partir des en-têtes ou du corps de la réponse :
 
-    * Extraire la valeur à partir du **Response Header** : utiliser l'en-tête de réponse complet de votre requête HTTP comme valeur de variable, ou parsez l'en-tête à l'aide d'une [expression régulière][11].
-    * Extraire la valeur à partir du **Response Body** : utiliser le corps de réponse complet de votre requête HTTP comme valeur de variable, ou parser le corps avec une [expression régulière][11] ou une expression [JSONPath][12].
+    * Extraction de la valeur à partir du **Response Header** : utilisez l'en-tête de réponse complet de votre requête HTTP comme valeur de variable, ou parsez l'en-tête à l'aide d'une [expression régulière][11].
+    * Extraction de la valeur à partir du **Response Body** : utilisez le corps de réponse complet de votre requête HTTP comme valeur de variable, ou parsez le corps avec une [expression régulière][11] ou une expression [JSONPath][12].
 
 {{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="Créer une variable à partir d'une requête HTTP dans un test Browser" video="true"  width="80%" >}}
 
-Une fois créée, cette variable peut être utilisée dans les étapes suivantes de votre test Browser.:
+Une fois créée, cette variable peut être utilisée dans les étapes suivantes de votre test Browser.
 
 ## Pour aller plus loin
 
@@ -346,7 +347,7 @@ Une fois créée, cette variable peut être utilisée dans les étapes suivantes
 [1]: /fr/synthetics/browser_tests/advanced_options/
 [2]: /fr/synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /fr/synthetics/browser_tests/#create-a-variable
+[4]: /fr/synthetics/guide/email-validation/#create-an-email-variable
 [5]: /fr/synthetics/browser_tests/actions#use-variables-in-javascript-steps
 [6]: /fr/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 [7]: /fr/synthetics/settings/

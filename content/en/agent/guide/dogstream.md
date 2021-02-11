@@ -17,14 +17,14 @@ Unfortunately, this value is oftentimes never realized because log files go
 ignored. The Datadog Agent can help remedy this by parsing metrics and events from
 logs, so the data within can be graphed in real-time, all the time.
 
-## Parsing Metrics
+## Parsing metrics
 
 The Datadog Agent can read metrics directly from your log files:
 
 - from the Datadog canonical log format, without any additional programming
 - from any other log format, with a customized log parsing function
 
-### Datadog Canonical Log Format
+### Datadog canonical log format
 
 Datadog logs are formatted as follows:
 
@@ -43,7 +43,7 @@ You can also specify multiple log files like this:
 
     dogstreams: /var/log/web.log, /var/log/db.log, /var/log/cache.log
 
-### Parsing Custom Log Formats
+### Parsing custom log formats
 
 If you want to parse a different log format—say for a piece of vendor or legacy software—you can use a custom Python function to extract the proper fields from the log by specifying your log file in your Agent configuration file in the following format:
 
@@ -67,7 +67,7 @@ If your custom log parser is not working, the first thing to check are the Agent
 To test that dogstreams are working, append a line-don't edit an existing one-to any log file you've configured the Agent to watch. The Agent only tails the end of each log file, so it won't notice any changes you make elsewhere in the file.
 </div>
 
-### Writing Parsing Functions
+### Writing parsing functions
 
 Custom parsing functions must:
 
@@ -80,7 +80,7 @@ Custom parsing functions must:
 
     If the line doesn't match, instead return `None`.
 
-### Example for Metrics Collecting
+### Metrics collection
 
 Let's imagine that you're collecting metrics from logs that are not canonically formatted, but which are intelligently delimited by a unique character, logged as the following:
 
@@ -120,7 +120,7 @@ This example would collect a gauge-type metric called "user.crashes" with a valu
 
 A word of warning: there is a limit to how many times the same metric can be collected in the same log-pass; effectively the Agent starts to overwrite logged metrics with the subsequent submissions of the same metric, even if they have different attributes (like tags). This can be somewhat mitigated if the metrics collected from the logs have sufficiently different timestamps, but it is generally recommended to only submit one metric to the logs for collection once every 10 seconds or so. This overwriting is not an issue for metrics collected with differing names.
 
-## Parsing Events
+## Parsing events
 
 Event parsing is done via the same custom parsing functions as described above, except if you return a
 `dict` (or a `list` of `dict`) from your custom parsing function, Datadog treats it as an event instead of a metric.
@@ -147,7 +147,7 @@ The aggregation key is a combination of the following fields:
 
 For an example of an event parser, see our [Cassandra compaction event parser][3] that is bundled with the Agent.
 
-### Example for Events Collecting
+### Events collection
 
 Imagine that you want to collect events from logging where you have enough control to add all sorts of relevant information, intelligently delimited by a unique character, logged as the following:
 
@@ -236,7 +236,7 @@ In my configuration file you would have:
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
 ```
 
-## Troubleshooting Your Custom Log-Parser
+## Troubleshooting
 
 Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the Agent with its [Agent logs][6] set at the "DEBUG" level. The Agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line][7], and then [restarting the Agent][8]. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your Agent logs][6]), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the Agent code where the error is likely to be thrown][9]).
 

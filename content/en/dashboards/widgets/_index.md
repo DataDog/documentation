@@ -18,6 +18,7 @@ aliases:
     {{< nextlink href="/dashboards/widgets/event_stream" >}}Event Stream{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/event_timeline" >}}Event Timeline{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/free_text" >}}Free Text{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/geomap" >}}Geomap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/group" >}}Group{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map" >}}Heat Map{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
@@ -90,7 +91,7 @@ To copy multiple screenboard widgets (edit mode only), `shift + click` on the wi
 
 **Note**: This only works when sharing within Datadog. It does not generate a preview image.
 
-## Export Graphs
+## Export graphs
 
 ### PNG
 

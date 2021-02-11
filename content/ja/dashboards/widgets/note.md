@@ -27,40 +27,16 @@ further_reading:
 
 ## API
 
-ノートウィジェットの[ウィジェット JSON スキーマ定義][2]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
 
-```text
-NOTE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["note"]},
-        "content": {"type": "string"},
-        "background_color": {"type": "string"},
-        "font_size": {"type": "string"},
-        "text_align": {"enum": ["center", "left", "right"]}
-        "show_tick": {"type": "boolean"},
-        "tick_pos": {"type": "string"},
-        "tick_edge": {"enum": ["bottom", "left", "right", "top"]}
-    },
-    "required": ["type", "content"],
-    "additionalProperties": false
-}
-```
+ノートウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
-| パラメーター          | 種類    | 必須 | 説明                                                                                         |
-|--------------------|---------|----------|-----------------------------------------------------------------------------------------------------|
-| `type`             | string  | はい      | ウィジェットのタイプ。ノートウィジェットには `note` を使用します。                                                  |
-| `content`          | string  | はい      | ノートのコンテンツ                                                                                 |
-| `background_color` | string  | いいえ       | ノートの背景色                                                                        |
-| `font_size`        | string  | いいえ       | テキストのサイズ                                                                                    |
-| `text_align`       | string  | いいえ       | ウィジェットにテキストを配置する方法。有効な値は `center`、`left`、`right` です。             |
-| `show_tick`        | Boolean | いいえ       | 目盛を表示するかどうか                                                                       |
-| `tick_pos`         | string  | いいえ       | 辺上の目盛を配置する位置                                                               |
-| `tick_edge`        | string  | いいえ       | 4 辺のうち、目盛を表示する辺。有効な値は `bottom`、`left`、`right`、`top` です。 |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/dashboards/widgets/free_text/
-[2]: /ja/dashboards/graphing_json/widget_json/
+[2]: /ja/api/v1/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

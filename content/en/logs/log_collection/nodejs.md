@@ -13,7 +13,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
@@ -136,15 +136,12 @@ logs:
 
 You can stream your logs from your application to Datadog without installing an Agent on your Host. Note that using an Agent to forward your logs is recommended as it provides a native connection management.
 
-{{< tabs >}}
-{{% tab "Winston 3.0" %}}
-
-Use [Winston HTTP transport][1] to send your logs directly through the [Datadog Log API][2].
+Use [Winston HTTP transport][4] to send your logs directly through the [Datadog Log API][5].
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 {{< site-region region="us" >}}
 
-```js
+```javascript
 const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
@@ -176,7 +173,7 @@ Note: you can also check the community supported [Datadog Transport][1].
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-```js
+```javascript
 const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
@@ -201,12 +198,10 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-{{< /site-region >}}
-
 [1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
 [2]: /api/v1/logs/#send-logs
-{{% /tab %}}
-{{< /tabs >}}
+
+{{< /site-region >}}
 
 ## Troubleshooting
 
@@ -229,3 +224,5 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
 [3]: /tracing/connect_logs_and_traces/nodejs/
+[4]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
+[5]: /api/v1/logs/#send-logs

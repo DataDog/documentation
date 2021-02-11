@@ -35,7 +35,7 @@ Collect Adobe Experience Manager logs to track errors, request response time, an
 
 [Install the agent][1] on the instance that runs Adobe Experience Manager.
 
-#### Log Collection
+#### Log collection
 
 _Available for Agent version >6.0_
 

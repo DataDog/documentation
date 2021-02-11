@@ -17,6 +17,9 @@ further_reading:
   - link: logs/explorer/patterns
     tag: Documentation
     text: ログ内のパターン検出
+  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+    tag: ブログ
+    text: ログエクスプローラーの URL をクリップボードに追加する
 ---
 ## 概要
 
@@ -34,15 +37,24 @@ Live Tail は Datadog に入る時にログを表示します。Live Tail ログ
 
 ### ログリスト
 
+
+#### 個別のログ
+
 Log List はインデックス化されたログを表示し、**個々の結果**に移動するための権限を持つツールを提供します。詳細は、[ログリストのセクション][3]を参照してください。
 
 {{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="ログリスト" style="width:60%;" >}}
 
-### ログパターン
+#### ログパターン
 
 Log Patterns はインデックス化されたログを同じような構造を持つ**一握りのグループ**に自動的に集約します。詳細は、[Log Patterns セクション][4]を参照してください。
 
 {{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
+
+#### ログトランザクション
+
+Log Transactions は、複数のマイクロサービス全体で処理されたユーザーセッションまたはリクエストのような、イベント**シーケンス**のインスタンスに従い、自動的にインデックス化されたログを収集します。詳しくは、[Log Transactions セクション][41]を参照してください。
+
+{{< img src="logs/explorer/log_explorer_walkthrough_transactions.png" alt="Log Transactions" style="width:60%;" >}}
 
 ### ログ分析
 
@@ -153,6 +165,7 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 [2]: /ja/logs/explorer/live_tail/
 [3]: /ja/logs/explorer/list/
 [4]: /ja/logs/explorer/patterns/
+[41]: /ja/logs/explorer/transactions/
 [5]: /ja/logs/explorer/analytics/
 [6]: /ja/logs/processing/pipelines/
 [7]: /ja/integrations/#cat-log-collection

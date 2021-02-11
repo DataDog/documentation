@@ -9,7 +9,7 @@ further_reading:
 
 Choose your platform to see dedicated instructions to uninstall the Agent:
 
-## Debian/Ubuntu
+## Debian and Ubuntu
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -54,7 +54,7 @@ sudo apt-get --purge remove datadog-agent -y
 {{% /tab %}}
 {{< /tabs >}}
 
-## CentOS/RHEL/Fedora/Amazon Linux
+## CentOS, RHEL, Fedora, and Amazon Linux
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -87,7 +87,7 @@ This command removes the Agent, but does not remove:
 {{% /tab %}}
 {{< /tabs >}}
 
-## openSUSE/SLES
+## openSUSE and SLES
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -120,7 +120,7 @@ This command removes the Agent, but does not remove:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Mac OS
+## macOS
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}

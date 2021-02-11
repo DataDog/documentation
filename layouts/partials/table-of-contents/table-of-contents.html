@@ -1,21 +1,14 @@
 {{ $ctx := . }}
 
-
-<div class="col-4 col-lg-2 js-toc-container toc-container ">
-
-    
-    <div class="sticky toc">
-
+<div class="js-toc-container toc-container">
+    <div class="toc">
         <div class="js-toc {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">
-            {{ if eq .Params.disable_edit true }} 
-            {{ else }}
+            {{ if ne .Params.disable_edit true }}
                 {{ partial "page-edit.html" (dict "ctx" $ctx "type" "edit") }}
             {{ end }}
             <p class="text-uppercase text-gray-darkish font-semibold mb-2 toc-title js-toc-title {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">{{ i18n "table_of_contents_heading"}}</p>
             {{ if ne .Params.disable_toc true }}{{ .TableOfContents }}{{ end }}
-
         </div>
-        
     </div>
 </div>
 

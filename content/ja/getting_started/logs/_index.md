@@ -36,29 +36,13 @@ Datadog ログ管理は、アプリケーションからログを収集するた
 
 ログは全文メッセージにすることができます。
 
-{{< site-region region="us" >}}
+セキュア TCP エンドポイントはポートが `{{< region-param key="tcp_endpoint_port_ssl" >}}` の telnet intake.logs.datadoghq.com (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
 
-セキュア TCP エンドポイントは {{< region-param key="tcp_endpoint" code="true" >}} (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
+```
+telnet intake.logs.datadoghq.com 10516
 
-{{< code-block lang="text" >}}
-telnet intake.logs.datadoghq.com 10514
-
-<DATADOG_API_キー> TCP を介して送信されるプレーンテキストログ
-{{< /code-block >}}
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-セキュア TCP エンドポイントは {{< region-param key="tcp_endpoint" code="true" >}} (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
-
-{{< code-block lang="text" >}}
-telnet tcp-intake.logs.datadoghq.eu 1883
-
-<DATADOG_API_キー> TCP を介して送信されるプレーンテキストログ
-{{< /code-block >}}
-
-{{< /site-region >}}
+<DATADOG_API_KEY> TCP 経由で送信されるプレーンテキストログ
+```
 
 これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
 
@@ -69,7 +53,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 {{< site-region region="us" >}}
 
 ```text
-telnet intake.logs.datadoghq.com 10514
+telnet intake.logs.datadoghq.com 10516
 
 <DATADOG_API_キー> {"message":"TCP 経由で直接送信される JSON 形式ログ", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
 ```

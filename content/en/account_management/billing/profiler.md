@@ -12,74 +12,74 @@ kind: documentation
 
 **Note:** One profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled. For instance, a DNS service container that is NOT profiled, running concurrently with your application container that IS profiled, will not be counted towards the four profiler containers allotment.
 
-## Sample Deployment Scenarios
+## Deployment scenarios
 
 These sample cases demonstrate common use cases using annual billing rates. Contact Sales or your [Customer Success Manager][3] to discuss volume discounts for your account.
 
-### Case 1: Hosts with no Containers
+### Hosts with no containers
 
 Using five hosts running one application being profiled in each host. No containers.  
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
-| Profiled containers  | 0 per host | $0 since there is no overage                                                              | 0 * $2        | $0                    |
+| Profiled containers  | 0 per host | $0 since there is no additional containers                                                              | 0 * $2        | $0                    |
 | Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
-### Case 2: Hosts with four Profiled Containers
+### Hosts with four profiled containers
 
 Using five hosts with four profiled containers each. A profiled container is a container that is running the Continuous Profiler service by sending profiling data from the container to the Datadog Agent. This does not include containers that are not being profiled.
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
-| Profiled containers  | 4 per host | $0 since 4 containers is right at the allotment limit, no overage charge is issued        | 0 * $2        | $0                    |
+| Profiled containers  | 4 per host | $0 since 4 containers is right at the allotment limit, no additional charge is issued        | 0 * $2        | $0                    |
 | Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
-### Case 3: Hosts with 6 Profiled Containers
+### Hosts with six profiled containers
 
 Using five hosts with six profiled containers per each host. A profiled container is a container that is running the Continuous Profiler service by sending profiling data from the container to the Datadog Agent. This does not include containers that are not being profiled.
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
-| Profiled containers  | 6 per host | $2 per overage container per host. In this case there are 6 - 4 = 2 overage containers for each host        | 2  * $2 * 5 hosts         | $20                   |
+| Profiled containers  | 6 per host | $2 per additional container per host. In this case there are 6 - 4 = 2 additional containers for each host        | 2  * $2 * 5 hosts         | $20                   |
 | Total          |            |                                                                                                 | $60 + $20      | **$80 per month**    |
 
 
-### Case 4: Hosts with 5 Containers but only 2 are Profiled
+### Hosts with five containers but only two are profiled
 
 Using four hosts with five containers per host but only two of them are profiled containers . A profiled container is a container that is running the Continuous Profiler service by sending profiling data from the container to the Datadog Agent. This does not include containers that are not being profiled.
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
-| Profiled containers  | 2 per host | $0 since 2 containers is below the allotment limit, no overage charge is issued. The remaining 3 containers not reporting profile data are not counted towards the allotment.         | 0 * $2        | $0                    |
+| Profiled containers  | 2 per host | $0 since 2 containers is below the allotment limit, no additional charge is issued. The remaining 3 containers not reporting profile data are not counted towards the allotment.         | 0 * $2        | $0                    |
 | Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
-### Case 5: Hosts with Varying Numbers of Profiled Containers
+### Hosts with varying numbers of profiled containers
 
 Using two profiled hosts - Host A and Host B.
 
 * Host A is running eight containers
 * Host B is running two containers         
 
-All 10 containers are running application instances that are being profiled, meaning Host A has an overage of four containers and Host B can add two more containers.
+All 10 containers are running application instances that are being profiled, meaning Host A has an four additional containers over the price and Host B can add two more containers.
 
-In this scenario, we aggregate all containers across all hosts (so two hosts, 10 containers). Then we would have eight containers included in price and an overage of two containers. Therefore, the breakdown would be:
+In this scenario, we aggregate all containers across all hosts (so two hosts, 10 containers). Then we would have eight containers included in price and an addition of two containers. Therefore, the breakdown would be:
 
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 2 * $12       | $24                   |
-| Profiled containers  | 10 in aggregate of host A + host B | $2 per overage container. In this case 2 hosts would allow up to 8 containers but we have 2 containers summed across two hosts: 10-8 = 2 overage containers        | $2 * 2 hosts        | $4                    |
+| Profiled containers  | 10 in aggregate of host A + host B | $2 per additional container. In this case 2 hosts would allow up to 8 containers but we have 2 containers summed across two hosts: 10-8 = 2 additional containers        | $2 * 2 hosts        | $4                    |
 | Total          |            |                                                                                                 | $24 + $4      | **$28 per month**    |
 
 
-## FAQs
+## FAQ
 **1. What is classified as a Continuous Profiler host for billing?**
 
 A host is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing a Continuous Profiler, the number of hosts with a Profiler library installed and sending profiles are calculated every hour. These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).

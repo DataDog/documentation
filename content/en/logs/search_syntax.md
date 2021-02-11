@@ -7,10 +7,10 @@ aliases:
     - /logs/search-syntax
     - /logs/explorer/search/
 further_reading:
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "/logs/explorer/patterns/"
+- link: "/logs/explorer/#patterns"
   tag: "Documentation"
   text: "Detect patterns inside your logs"
 - link: "/logs/processing/"
@@ -69,9 +69,9 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
-2. Searching for a facet value that contains special characters requires escaping or double quotes. To match a single special character or space, use the `?` wildcard. For example, a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
-
-3. Avoid using spaces in log facets. If a log facet does contain a space, perform a facet search by escaping the space: `@user.first\ name:myvalue` or using the single character wildcard: `@user.first?name:myvalue`.
+2. Searching for a facet value that contains special characters requires escaping or double quotes.
+For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
+To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
 
 Examples:
 
@@ -120,9 +120,8 @@ You can search for numerical attribute within a specific range. For instance, re
 Your logs inherit tags from [hosts][2] and [integrations][3] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
-* `("env:prod" OR test)` matches all logs with the tag `#env:prod` or the tag `#test`
-* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` matches all logs that contain tags `#service:srvA` or `#service:srvB`.
-* `("env:prod" AND -"version:beta")` matches all logs that contain `#env:prod` and that do not contain `#version:beta`
+* `env:(prod OR test)` matches all logs with the tag `env:prod` or the tag `env:test`
+* `(env:prod AND -version:beta)` matches all logs that contain tag `env:prod` and that do not contain tag `version:beta`
 
 If your tags don't follow [tags best practices][4] and don't use the `key:value` syntax, use this search query:
 

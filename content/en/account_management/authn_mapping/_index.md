@@ -22,7 +22,7 @@ All the API endpoints below are using the following host endpoint:
 
 * `https://api.{{< region-param key="dd_site" >}}/api/` for your Datadog region.
 
-### Create a new Authentication mapping
+### Create a new authentication mapping
 
 Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Mapping.
 
@@ -141,7 +141,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Get all AuthN Mappings
+### Get all AuthN mappings
 
 Returns a list of AuthN Mappings
 
@@ -246,7 +246,7 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Get a specific AuthN Mapping
+### Get a specific AuthN mapping
 
 Returns a specific AuthN Mapping by UUID.
 
@@ -499,9 +499,9 @@ HTTP/2 204
 {{% /tab %}}
 {{< /tabs >}}
 
-### Get Authn Mapping Enablement
+### Get AuthN mapping enablement
 
-Check whether Authn Mappings are enabled or disabled.
+Check whether AuthN Mappings are enabled or disabled.
 
 | Method   | Endpoint path              | Required payload |
 |----------|----------------------------|------------------|
@@ -541,7 +541,7 @@ curl -X GET \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Enable/Disable All Mappings
+### Enable or disable all mappings
 
 <div class="alert alert-warning">
 When enabled all users logging in with SAML will be stripped of any roles they have currently and reassigned roles based on the values in their SAML Assertion. It's important that you confirm you are receiving the expected SAML Assertions in your login before enabling the Mapping enforcement.

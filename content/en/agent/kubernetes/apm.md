@@ -130,7 +130,7 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][3] for more examples.
 
-## Agent Environment Variables
+## Agent environment variables
 
 **Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][4] documentation.
 
@@ -155,7 +155,6 @@ List of all environment variables available for tracing within the Agent running
 | `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>\|;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][6] with the configuration parameter in the Tracing Client. |
 | `DD_ENV`                   | Sets the global `env` for all data emitted by the Agent. If `env` is not present in your trace data, this variable will be used. See [APM environment setup][7] for more details.                                                                                                                                                                                                                                                                         |
 | `DD_APM_MAX_EPS`           | Sets the maximum Indexed Spans per second. Default is 200 events per second.                                                                                                                                                                                                                                               |
-| `DD_APM_MAX_TPS`           | Sets the maximum traces per second. Default is 10 traces per second.                                                                                                                                                                                                                                                        |
 
 ### Operator environment variables
 | Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |

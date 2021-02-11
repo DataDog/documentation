@@ -5,10 +5,11 @@ kind: guide
 
 ## Common options 
 
-- **`silenced`** dictionary of scopes to timestamps or `None`. Each scope is muted until the given POSIX timestamp or forever if the value is `None`. Default: **None**
-        Examples:
-        - To mute the alert completely: `{'*': None}`
-        - To mute `role:db` for a short time: `{'role:db': 1412798116}`
+- **`silenced`** dictionary of scopes to timestamps or `None`. Each scope is muted until the given POSIX timestamp or forever if the value is `None`. Default: **None**. Examples:
+
+  - To mute the alert completely: `{'*': None}`
+  - To mute `role:db` for a short time: `{'role:db': 1412798116}`
+
 - **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: **300**
 - **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
 - **`no_data_timeframe`** The number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, 2x the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
@@ -18,11 +19,12 @@ kind: guide
 - **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification we allow elsewhere. Not applicable if `renotify_interval` is `None`. Default: **None**.
 - **`notify_audit`** a Boolean indicating whether tagged users is notified on changes to this monitor. Default: **False**
 - **`locked`** a Boolean indicating whether changes to to this monitor should be restricted to the creator or admins. Default: **False**
-- **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True** Examples:
-        - True: `[Triggered on {host:h1}] Monitor Title`
-        - False: `[Triggered] Monitor Title`
+- **`include_tags`** a Boolean indicating whether notifications from this monitor automatically inserts its triggering tags into the title. Default: **True**. Examples:
 
-## Anomaly Options
+  - `True`: `[Triggered on {host:h1}] Monitor Title`
+  - `False`: `[Triggered] Monitor Title`
+
+## Anomaly options
 
 _These options only apply to anomaly monitors and are ignored for other monitor types._
 
@@ -33,17 +35,17 @@ _These options only apply to anomaly monitors and are ignored for other monitor 
 
 Example: `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window': 'last_15m'}}`
 
-## Metric Alert Options
+## Metric alert options
 
 _These options only apply to metric alerts._
 
-- **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][6] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
+- **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][1] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
 
 Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
 - **`evaluation_delay`** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the timeframe is set to last_5m and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.
 
-## Service Check Options
+## Service check options
 
 _These options only apply to service checks and are ignored for other monitor types._
 
@@ -51,7 +53,7 @@ _These options only apply to service checks and are ignored for other monitor ty
 
 Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
-## Logs Alert Options
+## Logs alert options
 
 _These options only apply to logs alerts._
 
@@ -66,4 +68,6 @@ Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
 Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 
-- **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `True`
+- **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `False`
+
+[1]: ../../faq/what-are-recovery-thresholds/

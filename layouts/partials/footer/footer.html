@@ -14,7 +14,7 @@
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
 
-<footer class="pt-3">
+<footer class="pt-3 position-relative">
     <div class="container">
         <div class="row pt-3 pb-0 pb-lg-6">
             <div class="col-12 col-lg-9">
@@ -179,7 +179,7 @@
                 </div>
 
             </div>
-            
+
         </div>
     </div>
     <div class="mt-3 mt-lg-0">
@@ -196,7 +196,11 @@
                                 <label class="sr-only" for="mobile-lang-select">Language Selection</label>
                                 <select class="mobile-lang-select" id="mobile-lang-select" id="" onchange="javascript:location.href = this.value;">
                                     <option value="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
-                                    {{ range .Translations }}
+                                    {{ if ne .Sites.First .Site }}
+                                        <!-- if non eng site manually add english entry -->
+                                        <option value="{{ replace .Permalink (printf "/%s/" $dot.Language.Lang) "/" }}?lang_pref=en">English</a>
+                                    {{ end }}
+                                    {{ range where .Translations "Language.Lang" "!=" "en" }}
                                         <option value="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
                                     {{ end }}
                                 </select>
@@ -210,7 +214,11 @@
                                 </div>
                                 <div class="js-lang-popup lang-popup">
                                     <a class="active" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</span></a>
-                                    {{ range .Translations }}
+                                    {{ if ne .Sites.First .Site }}
+                                        <!-- if non eng site manually add english entry -->
+                                        <a href="{{ replace .Permalink (printf "/%s/" $dot.Language.Lang) "/" }}?lang_pref=en">English</a>
+                                    {{ end }}
+                                    {{ range where .Translations "Language.Lang" "!=" "en" }}
                                         <a href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
                                     {{ end }}
                                </div>

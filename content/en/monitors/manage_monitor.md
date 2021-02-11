@@ -110,7 +110,7 @@ Attribute differences for the triggered monitors page:
 * The `triggered` attribute lets you filter monitors by how long they have been triggered.
 * The `group` attribute helps you narrow down search results for monitors grouped by more than one tag. For example, a monitor is grouped by `host` and `env`. After searching, you see four rows with the groups `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod`, and `host:web02,env:prod`. Use the `group` attribute to only show prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
 
-### Monitor Tags
+### Monitor tags
 
 Monitor tags are independent of tags sent by the Agent or integrations. Add up to 32 tags directly to your monitors for filtering on the [manage monitors][1], [triggered monitors][8], or [manage downtime][9] pages. Learn more about monitor tags in the [tagging documentation][10].
 

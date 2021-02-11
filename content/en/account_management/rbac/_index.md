@@ -28,7 +28,7 @@ By granting permissions to roles, any user who is associated with that role rece
 
   **Note** If you use a SAML identity provider, you can integrate it with Datadog for authentication, and you can map identity attributes to Datadog default and custom roles. For more information, see [Single Sign On With SAML][1].
 
-## Datadog Default Roles
+## Datadog default roles
 
 | Role                       | Description                                                                                                                                                                                                                                  |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -36,7 +36,7 @@ By granting permissions to roles, any user who is associated with that role rece
 | **Datadog Standard Role**  | Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][2], [monitors][3], [events][4], and [notebooks][5]. Standard users can also invite other users to organizations.                      |
 | **Datadog Read Only Role** | Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][2] with someone outside their unit. |
 
-## Custom Roles
+## Custom roles
 
 <div class="alert alert-warning">
 Creating and modifying custom roles is an opt-in Enterprise feature. <a href="/help">Contact Datadog support</a> to get it enabled for your account.
@@ -76,7 +76,7 @@ Find an example of how to create a Role in the [Datadog Create Role API document
 {{% /tab %}}
 {{< /tabs >}}
 
-### Update a Role
+### Update a role
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -105,7 +105,7 @@ Find an example of how to update a Role in the [Datadog Create Role API document
 {{% /tab %}}
 {{< /tabs >}}
 
-### Delete a Role
+### Delete a role
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}

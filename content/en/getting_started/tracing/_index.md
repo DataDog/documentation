@@ -53,7 +53,7 @@ After a few minutes, verify the Agent is connected to your account by checking t
 
 ## Datadog APM
 
-### Follow the in-app documentation (Recommended)
+### Follow the in-app documentation (recommended)
 
 For the remaining steps, follow the [Quickstart instructions][10] within the Datadog app for the best experience, including:
 

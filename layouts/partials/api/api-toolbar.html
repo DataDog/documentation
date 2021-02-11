@@ -1,61 +1,17 @@
 {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
 {{ $.Scratch.Add "path" .Site.BaseURL }}
 
+<div class="api-toolbar pt-2 mb-lg-1 d-lg-flex justify-content-between">
+    <div id="breadcrumbs">
+        <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>&nbsp;>&nbsp;
 
-<div class="bg-white row align-items-center mb-0 mb-lg-2 api-toolbar">
-    <div class="col-12">
+        {{ if .Page.Parent }}
+            <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
+            &nbsp;>&nbsp;
+        {{ end }}
 
-        <div class="row align-items-center">
-            <div class="col-12 col-lg-6 pt-2 pt-lg-0">
-                <div id="breadcrumbs">
-                    <a class="text-uppercase text-gray-darkish" href="/">Docs</a>
-                    &nbsp;>&nbsp;    
-                    
-                    {{ if .Page.Parent }}
-                        <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
-                        &nbsp;>&nbsp;                     
-                    {{ end }}
-                    
-                    <a class="text-primary text-uppercase" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
-
-                    {{/* range $index, $element := split $url "/" }}
-                    {{ $.Scratch.Add "path" $element }}
-                        {{ if ne $element "" }}
-                        > <a href='{{ $.Scratch.Get "path" }}'>{{ . }}</a>
-                        {{ $.Scratch.Add "path" "/" }}
-                        {{ end }}
-                    {{ end */}}
-                </div>
-            </div>
-            <div class="col-12 col-lg-6 px-lg-0">
-                <div class="row justify-content-start justify-content-lg-end">
-
-                    <div class="col-5 col-sm-3 col-lg-4 px-lg-0">
-                        <div class="d-flex justify-content-start justify-content-lg-end">
-                            <select class="form-control js-api-version-select d-none" id="versionSelect">
-                                <option value="v1" {{ if in .Permalink "api/v1" }}selected{{ end }}>Version 1</option>
-                                <option value="v2" {{ if in .Permalink "api/v2" }}selected{{ end }}>Version 2</option>
-                            </select>
-                        </div>
-                        
-                    </div>
-                    <div class="col-4 col-lg-4 px-0">
-                        <div class="d-flex justify-content-start justify-content-lg-end">
-                            <select class="js-region-selector d-none" placeholder="Site">
-                                <option value="" disabled>Site</option>
-                                {{ range sort .Site.Params.allowedRegions ".name" "desc" }}
-                                    <option value="{{ .value }}">{{ .name }}</option>
-                                {{ end }}
-                              </select>
-                        </div>
-                        
-                    </div>
-
-                </div>
-            </div>
-            
-        </div>
-        
+        <a class="text-primary text-uppercase" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
     </div>
-    
+
+    {{ partial "language-region-select.html" . }}
 </div>

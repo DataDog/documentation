@@ -1,7 +1,7 @@
 ---
 title: Presse-papiers Datadog
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 description: Créer et gérer des incidents
 ---
 **Le presse-papiers Datadog est actuellement disponible en version bêta.**

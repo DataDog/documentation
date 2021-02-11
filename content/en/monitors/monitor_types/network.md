@@ -22,7 +22,7 @@ Network monitors cover the TCP and HTTP checks available in the Agent. For detai
 
 To create a [network monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Network*.
 
-### Network Status
+### Network status
 
 #### Pick a check
 
@@ -79,7 +79,7 @@ See the [metric monitor][4] documentation for information on [No data][5], [Auto
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
 
-### Network Metric
+### Network metric
 
 Create a network metric monitor by following the instructions in the [metric monitor][8] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
 

@@ -66,7 +66,7 @@ This logger uses the common Apache Access format and generates logs in the follo
 127.0.0.1 - - [15/Jul/2018 23:40:31] "GET /uptime_status HTTP/1.1" 200 6997 1.8096
 ```
 
-#### Log Collection
+#### Log collection
 
 _Available for Agent versions >6.0_
 

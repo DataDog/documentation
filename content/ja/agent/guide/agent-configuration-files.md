@@ -23,7 +23,7 @@ Agent v6 の構成ファイルは、**YAML** を使用することで、複雑�
 | Source                               | `/etc/datadog-agent/datadog.yaml`    |
 | Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
 | Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
-| Windows Server 2008/Vista 以降 | `\\ProgramData\Datadog\datadog.yaml` |
+| Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\datadog.yaml` |
 | Windows Server 2003/XP 以前     | サポートされないプラットフォーム               |
 
 {{% /tab %}}
@@ -40,7 +40,7 @@ Agent v6 の構成ファイルは、**YAML** を使用することで、複雑�
 | Source                               | `/etc/dd-agent/datadog.conf`                                               |
 | Suse                                 | `/etc/dd-agent/datadog.conf`                                               |
 | Ubuntu                               | `/etc/dd-agent/datadog.conf`                                               |
-| Windows Server 2008/Vista 以降 | `\\ProgramData\Datadog\datadog.conf`                                       |
+| Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003/XP 以前     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 
 {{% /tab %}}
@@ -67,7 +67,7 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 | Source                               | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
-| Windows Server 2008/Vista 以降 | `\\ProgramData\Datadog\conf.d` |
+| Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\conf.d` |
 | Windows Server 2003/XP 以前     | サポートされないプラットフォーム         |
 
 ### Agent 6 のチェック構成ファイル
@@ -108,7 +108,7 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 | ソース                               | `/etc/dd-agent/conf.d/`                                              |
 | Suse                                 | `/etc/dd-agent/conf.d/`                                              |
 | Ubuntu                               | `/etc/dd-agent/conf.d/`                                              |
-| Windows Server 2008/Vista 以降 | `\\ProgramData\Datadog\conf.d`                                       |
+| Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\conf.d`                                       |
 | Windows Server 2003/XP 以前     | `\\Documents and Settings\All Users\Application Data\Datadog\conf.d` |
 
 {{% /tab %}}

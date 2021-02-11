@@ -21,7 +21,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 
 ## Setup
 
-{{< img src="dashboards/widgets/query_value/query_value_setup.png" alt="Query value widget setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query-value-widget-setup.png" alt="Query value widget setup"  style="width:80%;">}}
 
 ### Configuration
 
@@ -29,7 +29,7 @@ The widget can display the latest value reported, or an aggregate computed from 
     * Metric: See the documentation [querying][1] to configure a metric query.
     * Indexed Spans: See [the trace search documentation][2] to configure an Indexed Span query.
     * Log Events: See [the log search documentation][3] to configure a log event query.
-2. Choose the units and the formatting.
+2. Choose the units and the formatting. Autoformat scales the Dashboard for you based on the units.
 3. Optional: configure a conditional format depending on the value displayed.
 
 ### Options

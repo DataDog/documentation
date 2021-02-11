@@ -274,7 +274,7 @@ components:
     AWSTagFilterDeleteRequest:
       description: The objects used to delete an AWS tag filter entry.
       properties:
-        aws_account_identifier:
+        account_id:
           description: The unique identifier of your AWS account.
           example: FAKEAC0FAKEAC2FAKEAC
           type: string
@@ -947,6 +947,35 @@ components:
           description: ID of the deleted dashboard.
           type: string
       type: object
+    DashboardGlobalTimeLiveSpan:
+      description: Dashboard global time live_span selection
+      enum:
+      - 15m
+      - 1h
+      - 4h
+      - 1d
+      - 2d
+      - 1w
+      - 1mo
+      - 3mo
+      example: 1h
+      type: string
+      x-enum-varnames:
+      - PAST_FIFTEEN_MINUTES
+      - PAST_ONE_HOUR
+      - PAST_FOUR_HOURS
+      - PAST_ONE_DAY
+      - PAST_TWO_DAYS
+      - PAST_ONE_WEEK
+      - PAST_ONE_MONTH
+      - PAST_THREE_MONTHS
+    DashboardInviteType:
+      description: Type for shared dashboard invitation request body.
+      enum:
+      - public_dashboard_invitation
+      type: string
+      x-enum-varnames:
+      - PUBLIC_DASHBOARD_INVITATION
     DashboardLayoutType:
       description: Layout type of the dashboard.
       enum:
@@ -1014,6 +1043,17 @@ components:
             $ref: '#/components/schemas/DashboardList'
           type: array
       type: object
+    DashboardShareType:
+      description: Type of sharing access (either open to anyone who has the public
+        URL or invite-only).
+      enum:
+      - open
+      - invite
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - OPEN
+      - INVITE
     DashboardSummary:
       description: Dashboard summary response.
       properties:
@@ -1074,6 +1114,23 @@ components:
           type: string
         value:
           description: The value of the template variable within the saved view.
+          type: string
+      type: object
+    DashboardType:
+      description: The type of the associated private dashboard.
+      enum:
+      - custom_timeboard
+      - custom_screenboard
+      example: custom_timeboard
+      type: string
+      x-enum-varnames:
+      - CUSTOM_TIMEBOARD
+      - CUSTOM_SCREENBOARD
+    DeleteSharedDashboardResponse:
+      description: Response containing token of deleted shared dashboard.
+      properties:
+        deleted_public_dashboard_token:
+          description: Token associated with the shared dashboard that was revoked.
           type: string
       type: object
     DeletedMonitor:
@@ -1273,7 +1330,8 @@ components:
           format: int64
           type: integer
         timezone:
-          description: The timezone for the downtime.
+          description: The timezone in which to display the downtime's start and end
+            times in Datadog applications.
           example: America/New_York
           type: string
         updater_id:
@@ -1821,6 +1879,105 @@ components:
       type: string
       x-enum-varnames:
       - EVENT_TIMELINE
+    FormulaAndFunctionEventAggregation:
+      description: Aggregation methods for event platform queries.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      example: avg
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+    FormulaAndFunctionEventsDataSource:
+      description: Data source for event platform-based queries.
+      enum:
+      - logs
+      - spans
+      - network
+      - rum
+      - security_signals
+      - profiles
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - SPANS
+      - NETWORK
+      - RUM
+      - SECURITY_SIGNALS
+      - PROFILES
+    FormulaAndFunctionMetricAggregation:
+      description: The aggregation methods available for metrics queries.
+      enum:
+      - avg
+      - min
+      - max
+      - sum
+      - last
+      - area
+      - l2norm
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - MIN
+      - MAX
+      - SUM
+      - LAST
+      - AREA
+      - L2NORM
+    FormulaAndFunctionMetricDataSource:
+      description: Data source for metrics queries.
+      enum:
+      - metrics
+      example: metrics
+      type: string
+      x-enum-varnames:
+      - METRICS
+    FormulaAndFunctionProcessQueryDataSource:
+      description: Data sources that rely on the process backend.
+      enum:
+      - process
+      - container
+      type: string
+      x-enum-varnames:
+      - PROCESS
+      - CONTAINER
+    FormulaAndFunctionQueryDefinition:
+      description: A formula and function query.
+      oneOf:
+      - $ref: '#/components/schemas/TimeSeriesFormulaAndFunctionMetricQueryDefinition'
+      - $ref: '#/components/schemas/TimeSeriesFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/TimeSeriesFormulaAndFunctionProcessQueryDefinition'
+      type: object
+    FormulaAndFunctionResponseFormat:
+      description: Timeseries or Scalar response. This feature is currently in beta.
+      enum:
+      - timeseries
+      - scalar
+      type: string
+      x-enum-varnames:
+      - TIMESERIES
+      - SCALAR
     FreeTextWidgetDefinition:
       description: Free text is a widget that allows you to add headings to your screenboard.
         Commonly used to state the overall purpose of the dashboard. Only available
@@ -3265,6 +3422,7 @@ components:
         daily_limit:
           description: The number of log events you can send in this index per day
             before you are rate-limited.
+          example: 300000000
           format: int64
           type: integer
         exclusion_filters:
@@ -3285,20 +3443,23 @@ components:
             logs than the daily limit have been sent.
 
             Rate limit is reset every-day at 2pm UTC.'
+          example: false
           readOnly: true
           type: boolean
         name:
           description: The name of the index.
-          readOnly: true
+          example: main
           type: string
         num_retention_days:
           description: 'The number of days before logs are deleted from this index.
             Available values depend on
 
             retention plans specified in your organization''s contract/subscriptions.'
+          example: 15
           format: int64
           type: integer
       required:
+      - name
       - filter
       type: object
     LogsIndexListResponse:
@@ -4254,6 +4415,13 @@ components:
         query:
           description: The monitor query.
           type: string
+        restricted_roles:
+          description: A list of role identifiers that can be pulled from the Roles
+            API. Cannot be used with `locked` option.
+          items:
+            description: A role UUID.
+            type: string
+          type: array
         state:
           $ref: '#/components/schemas/MonitorState'
         tags:
@@ -4510,13 +4678,6 @@ components:
             \ to `false` for sparse metrics,\notherwise some evaluations are skipped.\
             \ Default is false."
           type: boolean
-        restricted_roles:
-          description: A list of role identifiers that can be pulled from the Roles
-            API. Cannot be used with `locked`.
-          items:
-            description: A role UUID.
-            type: string
-          type: array
         silenced:
           additionalProperties:
             description: ID of the downtime applied to the monitor.
@@ -4979,6 +5140,13 @@ components:
         query:
           description: The monitor query.
           type: string
+        restricted_roles:
+          description: A list of role identifiers that can be pulled from the Roles
+            API. Cannot be used with `locked` option.
+          items:
+            description: A role UUID.
+            type: string
+          type: array
         state:
           $ref: '#/components/schemas/MonitorState'
         tags:
@@ -5275,6 +5443,16 @@ components:
       required:
       - metric
       type: object
+    QuerySortOrder:
+      default: desc
+      description: Direction of sort.
+      enum:
+      - asc
+      - desc
+      type: string
+      x-enum-varnames:
+      - ASC
+      - DESC
     QueryValueWidgetDefinition:
       description: Query values display the current value of a given metric, APM,
         or log query.
@@ -5548,8 +5726,19 @@ components:
               description: Query scope.
               type: string
             unit:
-              description: Query units (if available).
-              type: string
+              description: 'An array of metric units that contains up to two unit
+                objects.
+
+                For example, bytes represents one unit object and bytes per second
+                represents two unit objects.
+
+                If a metric query only has one unit object, the second array element
+                is null.'
+              example: '[{"family":"bytes","scale_factor":1.0,"name":"byte","short_name":"B","plural":"bytes","id":2},null]'
+              items:
+                $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
+              nullable: true
+              type: array
           type: object
         sum:
           description: Total sum of the query.
@@ -5569,6 +5758,34 @@ components:
       - sum
       - values
       - metadata
+      type: object
+    SLOHistoryMetricsSeriesMetadataUnit:
+      description: An Object of metric units.
+      properties:
+        family:
+          description: The family of metric unit, for example `bytes` is the family
+            for `kibibyte`, `byte`, and `bit` units.
+          type: string
+        id:
+          description: The ID of the metric unit.
+          format: int64
+          type: integer
+        name:
+          description: The unit of the metric, for instance `byte`.
+          type: string
+        plural:
+          description: The plural Unit of metric, for instance `bytes`.
+          nullable: true
+          type: string
+        scale_factor:
+          description: The scale factor of metric unit, for instance `1.0`.
+          format: double
+          type: number
+        short_name:
+          description: A shorter and abbreviated version of the metric unit, for instance
+            `B`.
+          nullable: true
+          type: string
       type: object
     SLOHistoryResponse:
       description: A service level objective history response.
@@ -5913,6 +6130,28 @@ components:
       type: string
       x-enum-varnames:
       - SCATTERPLOT
+    SelectableTemplateVariableItems:
+      description: Object containing the template variable's name, associated tag/attribute,
+        default value and selectable values.
+      properties:
+        default_value:
+          description: The default value of the template variable.
+          type: string
+        name:
+          description: Name of the template variable.
+          type: string
+        prefix:
+          description: The tag/attribute key associated with the template variable.
+          type: string
+        visible_tags:
+          description: List of visible tag values on the shared dashboard.
+          items:
+            description: Other values for this tag that can be selected on the shared
+              dashboard.
+            type: string
+          nullable: true
+          type: array
+      type: object
     Series:
       description: 'A metric to submit to Datadog.
 
@@ -5936,8 +6175,9 @@ components:
           type: string
         points:
           description: Points relating to a metric. All points must be tuples with
-            timestamp and a scalar value (cannot be a string). Timestamps cannot be
-            more than ten minutes in the future or more than one hour in the past.
+            timestamp and a scalar value (cannot be a string). Timestamps should be
+            in POSIX time in seconds, and cannot be more than ten minutes in the future
+            or more than one hour in the past.
           example:
           - - 1575317847
             - 0.5
@@ -6004,6 +6244,7 @@ components:
       - 2
       - 3
       example: 0
+      format: int32
       type: integer
       x-enum-varnames:
       - OK
@@ -6405,6 +6646,250 @@ components:
       type: string
       x-enum-varnames:
       - TRACE_SERVICE
+    SharedDashboard:
+      description: The metadata object associated with how a dashboard has been/will
+        be shared.
+      properties:
+        author:
+          description: User who shared the dashboard.
+          properties:
+            handle:
+              description: Identifier of the user who shared the dashboard.
+              example: test@datadoghq.com
+              readOnly: true
+              type: string
+            name:
+              description: Name of the user who shared the dashboard.
+              readOnly: true
+              type: string
+          readOnly: true
+          type: object
+        created_at:
+          description: Date the dashboard was shared.
+          format: date-time
+          readOnly: true
+          type: string
+        dashboard_id:
+          description: ID of the dashboard to share.
+          example: 123-abc-456
+          type: string
+        dashboard_type:
+          $ref: '#/components/schemas/DashboardType'
+        global_time:
+          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+        global_time_selectable_enabled:
+          description: Whether to allow viewers to select a different global time
+            setting for the shared dashboard.
+          nullable: true
+          type: boolean
+        public_url:
+          description: URL of the shared dashboard.
+          readOnly: true
+          type: string
+        selectable_template_vars:
+          description: List of objects representing template variables on the shared
+            dashboard which can have selectable values.
+          example:
+          - default_value: '*'
+            name: exampleVar
+            prefix: test
+            visible_tags:
+            - selectableValue1
+            - selectableValue2
+          items:
+            $ref: '#/components/schemas/SelectableTemplateVariableItems'
+          nullable: true
+          type: array
+        share_list:
+          description: List of email addresses that can receive an invitation to access
+            to the shared dashboard.
+          example:
+          - test@datadoghq.com
+          - test2@email.com
+          items:
+            description: Email address that can receive an invitation to access the
+              shared dashboard.
+            format: email
+            type: string
+          nullable: true
+          type: array
+        share_type:
+          $ref: '#/components/schemas/DashboardShareType'
+        token:
+          description: A unique token assigned to the shared dashboard.
+          readOnly: true
+          type: string
+      required:
+      - dashboard_id
+      - dashboard_type
+      type: object
+    SharedDashboardInvites:
+      description: Invitations data and metadata that exists for a shared dashboard
+        returned by the API.
+      example:
+        data:
+        - attributes:
+            email: test@datadoghq.com
+          type: public_dashboard_invitation
+      properties:
+        data:
+          $ref: '#/components/schemas/SharedDashboardInvitesData'
+        meta:
+          description: Pagination metadata returned by the API.
+          properties:
+            page:
+              description: Object containing the total count of invitations across
+                all pages
+              properties:
+                total_count:
+                  description: The total number of invitations on this shared board,
+                    across all pages.
+                  format: int64
+                  type: integer
+              type: object
+          readOnly: true
+          type: object
+      required:
+      - data
+      type: object
+    SharedDashboardInvitesData:
+      description: An object or list of objects containing the information for an
+        invitation to a shared dashboard.
+      example:
+      - attributes:
+          email: test@datadoghq.com
+        type: public_dashboard_invitation
+      oneOf:
+      - $ref: '#/components/schemas/SharedDashboardInvitesDataObject'
+      - $ref: '#/components/schemas/SharedDashboardInvitesDataList'
+    SharedDashboardInvitesDataList:
+      description: A list of objects containing the information for an invitation(s)
+        to a shared dashboard.
+      example:
+      - attributes:
+          email: test@datadoghq.com
+        type: public_dashboard_invitation
+      items:
+        $ref: '#/components/schemas/SharedDashboardInvitesDataObject'
+      type: array
+    SharedDashboardInvitesDataObject:
+      description: Object containing the information for an invitation to a shared
+        dashboard.
+      example:
+        attributes:
+          created_at: '2020-12-07T20:16:27.846985+00:00'
+          email: test@datadoghq.com
+          has_session: false
+          invitation_expiry: '2020-12-07T21:16:27.840542+00:00'
+          session_expiry: null
+          share_token: XXXXXX-123456abcedfg7890hijklmnopqrstuv
+        type: public_dashboard_invitation
+      properties:
+        attributes:
+          description: Attributes of the shared dashboard invitation
+          example:
+            created_at: '2020-12-07T20:16:27.846985+00:00'
+            email: test@datadoghq.com
+            has_session: false
+            invitation_expiry: '2020-12-07T21:16:27.840542+00:00'
+            session_expiry: null
+            share_token: XXXXXX-123456abcedfg7890hijklmnopqrstuv
+          properties:
+            created_at:
+              description: When the invitation was sent.
+              format: date-time
+              readOnly: true
+              type: string
+            email:
+              description: An email address that an invitation has been (or if used
+                in invitation request, will be) sent to.
+              nullable: false
+              type: string
+            has_session:
+              description: Indicates whether an active session exists for the invitation
+                (produced when a user clicks the link in the email).
+              readOnly: true
+              type: boolean
+            invitation_expiry:
+              description: When the invitation expires.
+              format: date-time
+              readOnly: true
+              type: string
+            session_expiry:
+              description: When the invited user's session expires. null if the invitation
+                has no associated session.
+              format: date-time
+              nullable: true
+              readOnly: true
+              type: string
+            share_token:
+              description: The unique token of the shared dashboard that was (or is
+                to be) shared.
+              readOnly: true
+              type: string
+          type: object
+        type:
+          $ref: '#/components/schemas/DashboardInviteType'
+      required:
+      - type
+      - attributes
+      type: object
+    SharedDashboardUpdateRequest:
+      description: Update a shared dashboard's settings.
+      example:
+        global_time:
+          live_span: 1h
+        share_list:
+        - test@datadoghq.com
+        - test2@datadoghq.com
+        share_type: invite
+      properties:
+        global_time:
+          description: Timeframe setting for the shared dashboard.
+          example:
+            live_span: 1h
+          nullable: true
+          properties:
+            live_span:
+              $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+          type: object
+        global_time_selectable_enabled:
+          description: Whether to allow viewers to select a different global time
+            setting for the shared dashboard.
+          nullable: true
+          type: boolean
+        selectable_template_vars:
+          description: List of objects representing template variables on the shared
+            dashboard which can have selectable values.
+          example:
+          - default_value: '*'
+            name: exampleVar
+            prefix: test
+            visible_tags:
+            - selectableValue1
+            - selectableValue2
+          items:
+            $ref: '#/components/schemas/SelectableTemplateVariableItems'
+          nullable: true
+          type: array
+        share_list:
+          description: List of email addresses that can be given access to the shared
+            dashboard.
+          example:
+          - test@datadoghq.com
+          - test2@email.com
+          items:
+            description: Email address that can receive an invitation to access the
+              shared dashboard.
+            format: email
+            type: string
+          nullable: true
+          type: array
+        share_type:
+          $ref: '#/components/schemas/DashboardShareType'
+      required:
+      - global_time
+      type: object
     SingleServiceDependencies:
       description: An object with information on APM services that call, and are called
         by a given service.
@@ -6788,7 +7273,9 @@ components:
       - is
       - isNot
       - lessThan
+      - lessThanOrEqual
       - moreThan
+      - moreThanOrEqual
       - matches
       - doesNotMatch
       - validates
@@ -6801,7 +7288,9 @@ components:
       - IS
       - IS_NOT
       - LESS_THAN
+      - LESS_THAN_OR_EQUAL
       - MORE_THAN
+      - MORE_THAN_OR_EQUAL
       - MATCHES
       - DOES_NOT_MATCH
       - VALIDATES
@@ -6816,6 +7305,7 @@ components:
           description: The associated assertion property.
           type: string
         target:
+          additionalProperties: false
           description: Value used by the operator.
           type: object
         type:
@@ -7018,7 +7508,7 @@ components:
           type: string
         name:
           description: Name of the variable.
-          example: ''
+          example: VARIABLE_NAME
           type: string
         pattern:
           description: Pattern of the variable.
@@ -7035,12 +7525,14 @@ components:
       - element
       - email
       - global
+      - javascript
       - text
       type: string
       x-enum-varnames:
       - ELEMENT
       - EMAIL
       - GLOBAL
+      - JAVASCRIPT
       - TEXT
     SyntheticsCITest:
       description: Test configuration for Synthetics CI
@@ -7153,6 +7645,33 @@ components:
       - GREATER_EQUALS
       - LOWER_EQUALS
       - MATCH_REGEX
+    SyntheticsConfigVariable:
+      description: Object defining a variable that can be used in your test configuration.
+      properties:
+        example:
+          description: Example for the variable.
+          type: string
+        name:
+          description: Name of the variable.
+          example: VARIABLE_NAME
+          type: string
+        pattern:
+          description: Pattern of the variable.
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsConfigVariableType'
+      required:
+      - example
+      - type
+      - name
+      type: object
+    SyntheticsConfigVariableType:
+      description: Type of the configuration variable.
+      enum:
+      - text
+      type: string
+      x-enum-varnames:
+      - TEXT
     SyntheticsDeleteTestsPayload:
       description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
 
@@ -7300,6 +7819,41 @@ components:
           description: Name of the global variable.
           example: MY_VARIABLE
           type: string
+        parse_test_options:
+          description: Parser options to use for retrieving a Synthetics global variable
+            from a Synthetics Test. Used in conjunction with `parse_test_public_id`.
+          properties:
+            field:
+              description: When type is `http_header`, name of the header to use to
+                extract the value.
+              example: content-type
+              type: string
+            parser:
+              description: Details of the parser to use for the global variable.
+              example:
+                type: regex
+                value: .*
+              properties:
+                type:
+                  $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
+                value:
+                  description: Regex or JSON path used for the parser. Not used with
+                    type `raw`.
+                  type: string
+              required:
+              - type
+              type: object
+            type:
+              $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+          required:
+          - type
+          - parser
+          type: object
+        parse_test_public_id:
+          description: A Synthetic test ID to use as a test to generate the variable
+            value.
+          example: abc-def-123
+          type: string
         tags:
           description: Tags of the global variable.
           example:
@@ -7317,6 +7871,28 @@ components:
       - tags
       - value
       type: object
+    SyntheticsGlobalVariableParseTestOptionsType:
+      description: Property of the Synthetics Test Response to use for a Synthetics
+        global variable.
+      enum:
+      - http_body
+      - http_header
+      type: string
+      x-enum-varnames:
+      - HTTP_BODY
+      - HTTP_HEADER
+    SyntheticsGlobalVariableParserType:
+      description: Type of parser for a Synthetics global variable from a synthetics
+        test.
+      enum:
+      - raw
+      - json_path
+      - regex
+      type: string
+      x-enum-varnames:
+      - RAW
+      - JSON_PATH
+      - REGEX
     SyntheticsGlobalVariableValue:
       description: Value of the global variable.
       example:
@@ -7456,57 +8032,6 @@ components:
               type: string
           type: object
       type: object
-    SyntheticsResource:
-      description: Object describing a resource which is the combination of requests
-        (fetch, XHR) and Assets (HTML, CSS, JS, images).
-      properties:
-        duration:
-          description: Number of time the resource was collected.
-          format: double
-          type: number
-        method:
-          description: HTTP method associated to the resource.
-          type: string
-        size:
-          description: Size of the resource in bytes.
-          format: int64
-          type: integer
-        status:
-          description: Status Code of the resource.
-          format: int64
-          type: integer
-        timestamp:
-          description: Timestamp of the resource collection.
-          format: double
-          type: number
-        traceId:
-          description: Trace ID associated with the resource if any.
-          type: string
-        type:
-          $ref: '#/components/schemas/SyntheticsResourceType'
-        url:
-          description: URL of the resource.
-          type: string
-      type: object
-    SyntheticsResourceType:
-      description: Document type to apply an assertion against.
-      enum:
-      - document
-      - stylesheet
-      - fetch
-      - image
-      - script
-      - xhr
-      - other
-      type: string
-      x-enum-varnames:
-      - DOCUMENT
-      - STYLESHEET
-      - FETCH
-      - IMAGE
-      - SCRIPT
-      - XHR
-      - OTHER
     SyntheticsSSLCertificate:
       description: Object describing the SSL certificate used for a Synthetic test.
       properties:
@@ -7608,7 +8133,8 @@ components:
           type: object
         timeout:
           description: The time before declaring a step failed.
-          type: number
+          format: int64
+          type: integer
         type:
           $ref: '#/components/schemas/SyntheticsStepType'
       type: object
@@ -7634,11 +8160,6 @@ components:
           type: string
         playingTab:
           $ref: '#/components/schemas/SyntheticsPlayingTab'
-        resources:
-          description: Array of resources collected by the test.
-          items:
-            $ref: '#/components/schemas/SyntheticsResource'
-          type: array
         screenshotBucketKey:
           description: Whether or not screenshots where collected by the test.
           type: boolean
@@ -7753,10 +8274,15 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
+        configVariables:
+          description: API tests only - array of variables used for the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsConfigVariable'
+          type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
         variables:
-          description: Array of variables used for the test.
+          description: Browser tests only - array of variables used for the test steps.
           items:
             $ref: '#/components/schemas/SyntheticsBrowserVariable'
           type: array
@@ -8084,7 +8610,8 @@ components:
             properties:
               id:
                 description: Unique identifier of the location.
-                type: number
+                format: int64
+                type: integer
               name:
                 description: Name of the location.
                 type: string
@@ -8099,7 +8626,8 @@ components:
                 $ref: '#/components/schemas/SyntheticsDeviceID'
               location:
                 description: The location ID of the test run.
-                type: number
+                format: int64
+                type: integer
               public_id:
                 description: The public ID of the Synthetics test.
                 type: string
@@ -8272,6 +8800,147 @@ components:
       - STRING
       - INTEGER
       - DOUBLE
+    TimeSeriesFormulaAndFunctionEventQueryDefinition:
+      description: A timeseries formula and functions events query.
+      properties:
+        compute:
+          description: Compute options.
+          properties:
+            aggregation:
+              $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+            interval:
+              description: A time interval in milliseconds.
+              example: 60000
+              format: int64
+              type: integer
+            metric:
+              description: Measurable attribute to compute.
+              example: '@duration'
+              type: string
+          required:
+          - aggregation
+          type: object
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
+        group_by:
+          description: Group by options.
+          items:
+            description: List of objects used to group by.
+            properties:
+              facet:
+                description: Event facet.
+                example: status.
+                type: string
+              limit:
+                description: Number of groups to return.
+                example: 10
+                format: int64
+                type: integer
+              sort:
+                description: Options for sorting group by results.
+                properties:
+                  aggregation:
+                    $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+                  metric:
+                    description: Metric used for sorting group by results.
+                    type: string
+                  order:
+                    $ref: '#/components/schemas/QuerySortOrder'
+                required:
+                - aggregation
+                type: object
+            required:
+            - facet
+            type: object
+          type: array
+        indexes:
+          description: An array of index names to query in the stream. Omit or use
+            `[]` to query all indexes at once.
+          example:
+          - days-3
+          - days-7
+          items:
+            description: A log index set up for your organization. For additional
+              indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
+              documentation.
+            type: string
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: query_errors
+          type: string
+        search:
+          description: Search options.
+          properties:
+            query:
+              description: Events search string.
+              example: service:query
+              type: string
+          required:
+          - query
+          type: object
+      required:
+      - data_source
+      - compute
+      type: object
+    TimeSeriesFormulaAndFunctionMetricQueryDefinition:
+      description: A timeseries formula and functions metrics query.
+      example:
+        data_source: metrics
+        query: avg:system.cpu.user{*}
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: my_query
+          type: string
+        query:
+          description: Metrics query definition.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+      - data_source
+      - query
+      type: object
+    TimeSeriesFormulaAndFunctionProcessQueryDefinition:
+      description: Process query using formulas and functions.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDataSource'
+        is_normalized_cpu:
+          description: Whether to normalize the CPU percentages.
+          type: boolean
+        limit:
+          description: Number of hits to return.
+          format: int64
+          type: integer
+        metric:
+          description: Process metric name.
+          example: avg:system.cpu.user{*}
+          type: string
+        name:
+          description: Name of query for use in formulas.
+          type: string
+        sort:
+          $ref: '#/components/schemas/QuerySortOrder'
+        tag_filters:
+          description: An array of tags to filter by.
+          items:
+            description: One of the tags to filter by.
+            type: string
+          type: array
+        text_filter:
+          description: Text to use as filter.
+          type: string
+      required:
+      - data_source
+      - metric
+      type: object
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Indexed Spans over time.
@@ -8342,6 +9011,12 @@ components:
           $ref: '#/components/schemas/WidgetDisplayType'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries. This feature is currently
+            in beta.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         metadata:
@@ -8370,6 +9045,14 @@ components:
         q:
           description: Widget query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            This feature is currently in beta.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -8893,6 +9576,11 @@ components:
             (and were NOT running the Datadog Agent).'
           format: int64
           type: integer
+        apm_azure_app_service_host_count:
+          description: Contains the total number of Azure App Services hosts using
+            APM.
+          format: int64
+          type: integer
         apm_host_count:
           description: 'Shows the total number of hosts using APM during the hour,
 
@@ -8936,6 +9624,13 @@ components:
           description: The hour for the usage.
           format: date-time
           type: string
+        infra_azure_app_service:
+          description: 'Contains the total number of hosts that reported via the Azure
+            App Services integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
       type: object
     UsageHostsResponse:
       description: Host usage response.
@@ -9013,6 +9708,28 @@ components:
           description: Get hourly usage for ingested spans.
           items:
             $ref: '#/components/schemas/UsageIngestedSpansHour'
+          type: array
+      type: object
+    UsageIoTHour:
+      description: IoT usage for a given organization for a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        iot_device_count:
+          description: The total number of IoT device hours from the start of the
+            given hour's month until the given hour.
+          format: int64
+          type: integer
+      type: object
+    UsageIoTResponse:
+      description: Response containing the IoT usage for each hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for IoT.
+          items:
+            $ref: '#/components/schemas/UsageIoTHour'
           type: array
       type: object
     UsageLambdaHour:
@@ -9097,6 +9814,26 @@ components:
           type: integer
         ingested_events_bytes:
           description: Contains the number of log bytes ingested.
+          format: int64
+          type: integer
+        logs_live_indexed_count:
+          description: Contains the number of live log events indexed (data available
+            as of December 1, 2020).
+          format: int64
+          type: integer
+        logs_live_ingested_bytes:
+          description: Contains the number of live log bytes ingested (data available
+            as of December 1, 2020).
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_count:
+          description: Contains the number of rehydrated log events indexed (data
+            available as of December 1, 2020).
+          format: int64
+          type: integer
+        logs_rehydrated_ingested_bytes:
+          description: Contains the number of rehydrated log bytes ingested (data
+            available as of December 1, 2020).
           format: int64
           type: integer
       type: object
@@ -9207,6 +9944,16 @@ components:
           type: string
         session_count:
           description: Contains the number of RUM Sessions.
+          format: int64
+          type: integer
+        session_count_android:
+          description: Contains the number of mobile RUM Sessions on Android (data
+            available beginning December 1, 2020).
+          format: int64
+          type: integer
+        session_count_ios:
+          description: Contains the number of mobile RUM Sessions on iOS (data available
+            beginning December 1, 2020).
           format: int64
           type: integer
       type: object
@@ -9335,6 +10082,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        apm_azure_app_service_host_top99p:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current date all organizations.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
@@ -9419,6 +10171,26 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        iot_device_agg_sum:
+          description: Shows the sum of all IoT devices over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
+        iot_device_top99p_sum:
+          description: Shows the 99th percentile of all IoT devices over all hours
+            in the current date all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_android_sum:
+          description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for all organizations
@@ -9447,6 +10219,11 @@ components:
         rum_session_count_sum:
           description: Shows the sum of all browser RUM Sessions over all hours in
             the current date for all organizations
+          format: int64
+          type: integer
+        rum_total_session_count_sum:
+          description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current date for all organizations.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -9479,6 +10256,11 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        apm_azure_app_service_host_top99p:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
@@ -9497,6 +10279,11 @@ components:
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        azure_app_service_top99p:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         billable_ingested_bytes_sum:
@@ -9556,6 +10343,26 @@ components:
             current date for the given org.
           format: int64
           type: integer
+        iot_device_agg_sum:
+          description: Shows the sum of all IoT devices over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        iot_device_top99p_sum:
+          description: Shows the 99th percentile of all IoT devices over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_android_sum:
+          description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for the given org.
@@ -9587,6 +10394,11 @@ components:
             the current date for the given org.
           format: int64
           type: integer
+        rum_total_session_count_sum:
+          description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for the given org.
@@ -9614,6 +10426,11 @@ components:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        apm_azure_app_service_host_top99p_sum:
+          description: Shows the 99th percentile of all Azure app services using APM
+            over all hours in the current months all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
@@ -9706,14 +10523,46 @@ components:
             current months for all organizations.
           format: int64
           type: integer
+        iot_device_agg_sum:
+          description: Shows the sum of all IoT devices over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        iot_device_top99p_sum:
+          description: Shows the 99th percentile of all IoT devices over all hours
+            in the current months of all organizations.
+          format: int64
+          type: integer
         last_updated:
           description: Shows the the most recent hour in the current months for all
             organizations for which all usages were calculated.
           format: date-time
           type: string
+        live_indexed_events_agg_sum:
+          description: Shows the sum of all live logs indexed over all hours in the
+            current months for all organizations (data available as of December 1,
+            2020).
+          format: int64
+          type: integer
+        live_ingested_bytes_agg_sum:
+          description: Shows the sum of all live logs bytes ingested over all hours
+            in the current months for all organizations (data available as of December
+            1, 2020).
+          format: int64
+          type: integer
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on Android over all
+            hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
@@ -9736,9 +10585,26 @@ components:
             in the current months for all organizations.
           format: int64
           type: integer
+        rehydrated_indexed_events_agg_sum:
+          description: Shows the sum of all rehydrated logs indexed over all hours
+            in the current months for all organizations (data available as of December
+            1, 2020).
+          format: int64
+          type: integer
+        rehydrated_ingested_bytes_agg_sum:
+          description: Shows the sum of all rehydrated logs bytes ingested over all
+            hours in the current months for all organizations (data available as of
+            December 1, 2020).
+          format: int64
+          type: integer
         rum_session_count_agg_sum:
           description: Shows the sum of all browser RUM Sessions over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        rum_total_session_count_agg_sum:
+          description: Shows the sum of RUM Sessions (browser and mobile) over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         start_date:
@@ -10368,6 +11234,29 @@ components:
       - column
       - order
       type: object
+    WidgetFormula:
+      description: Formula to be used in a widget query.
+      properties:
+        alias:
+          description: Expression alias.
+          type: string
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: func(a) + b
+          type: string
+        limit:
+          description: Options for limiting results returned.
+          properties:
+            count:
+              description: Number of results to return.
+              format: int64
+              type: integer
+            order:
+              $ref: '#/components/schemas/QuerySortOrder'
+          type: object
+      required:
+      - formula
+      type: object
     WidgetGrouping:
       description: The kind of grouping to use.
       enum:
@@ -10745,6 +11634,7 @@ components:
       - previous_week
       - month_to_date
       - previous_month
+      - global_time
       type: string
       x-enum-varnames:
       - SEVEN_DAYS
@@ -10754,6 +11644,7 @@ components:
       - PREVIOUS_WEEK
       - MONTH_TO_DATE
       - PREVIOUS_MONTH
+      - GLOBAL_TIME
     WidgetViewMode:
       description: Define how you want the SLO to be displayed.
       enum:
@@ -10832,6 +11723,7 @@ paths:
             enum:
             - datadoghq.com
             - datadoghq.eu
+            - ddog-gov.com
           subdomain:
             default: ip-ranges
             description: The subdomain where the API is deployed.
@@ -11390,7 +12282,12 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Create a dashboard using the specified options.
+      description: 'Create a dashboard using the specified options. When defining
+        queries in your widgets, take note of which queries should have the `as_count()`
+        or `as_rate()` modifiers appended.
+
+        Refer to the following [documentation](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers)
+        for more information on these modifiers.'
       operationId: CreateDashboard
       requestBody:
         content:
@@ -11609,6 +12506,352 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
+  /api/v1/dashboard/public:
+    post:
+      description: Share a specified private dashboard, generating a URL at which
+        it can be publicly viewed.
+      operationId: CreatePublicDashboard
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  dashboard_id: 123-abc-456
+                  dashboard_type: custom_timeboard
+                  share_type: open
+            schema:
+              $ref: '#/components/schemas/SharedDashboard'
+        description: Create a shared dashboard request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboard'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Dashboard Not Found
+      summary: Create a shared dashboard
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeletePublicDashboard
+        parameters:
+        - name: token
+          source: token
+        type: unsafe
+  /api/v1/dashboard/public/{token}:
+    delete:
+      description: Revoke the public URL for a dashboard (rendering it private) associated
+        with the specified token.
+      operationId: DeletePublicDashboard
+      parameters:
+      - description: The token of the shared dashboard.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSharedDashboardResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Shared Dashboard Not Found
+      summary: Revoke a shared dashboard URL
+      tags:
+      - Dashboards
+      x-undo:
+        type: idempotent
+    get:
+      description: Fetch an existing shared dashboard's sharing metadata associated
+        with the specified token.
+      operationId: GetPublicDashboard
+      parameters:
+      - description: The token of the shared dashboard. Generated when a dashboard
+          is shared.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboard'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Shared Dashboard Not Found
+      summary: Get a shared dashboard
+      tags:
+      - Dashboards
+      x-undo:
+        type: safe
+    put:
+      description: Update a shared dashboard associated with the specified token.
+      operationId: UpdatePublicDashboard
+      parameters:
+      - description: The token of the shared dashboard.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  global_time:
+                    live_span: 1h
+                  selectable_template_vars:
+                  - default_value: '*'
+                    name: exampleVar
+                    prefix: test
+                    visible_tags:
+                    - selectableValue1
+                    - selectableValue2
+                  share_list:
+                  - test@datadoghq.com
+                  - test2@datadoghq.com
+                  share_type: invite
+            schema:
+              $ref: '#/components/schemas/SharedDashboardUpdateRequest'
+        description: Update Dashboard request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboard'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Update a shared dashboard
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v1/dashboard/public/{token}/invitation:
+    delete:
+      description: Revoke previously sent invitation emails and active sessions used
+        to access a given shared dashboard for specific email addresses.
+      operationId: DeletePublicDashboardInvitation
+      parameters:
+      - description: The token of the shared dashboard.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - attributes:
+                      email: test@datadoghq.com
+                    type: public_dashboard_invitation
+            schema:
+              $ref: '#/components/schemas/SharedDashboardInvites'
+        description: Shared Dashboard Invitation deletion request body.
+        required: true
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Revoke shared dashboard invitations
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+    get:
+      description: Describe the invitations that exist for the given shared dashboard
+        (paginated).
+      operationId: GetPublicDashboardInvitations
+      parameters:
+      - description: Token of the shared dashboard for which to fetch invitations.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      - description: The number of records to return in a single request.
+        in: query
+        name: page_size
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The page to access (base 0).
+        in: query
+        name: page_number
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboardInvites'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get all invitations for a shared dashboard
+      tags:
+      - Dashboards
+      x-undo:
+        type: safe
+    post:
+      description: Send emails to specified email addresses containing links to access
+        a given authenticated shared dashboard. Email addresses must already belong
+        to the authenticated shared dashboard's share_list.
+      operationId: SendPublicDashboardInvitation
+      parameters:
+      - description: The token of the shared dashboard.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - attributes:
+                      email: test@datadoghq.com
+                    type: public_dashboard_invitation
+            schema:
+              $ref: '#/components/schemas/SharedDashboardInvites'
+        description: Shared Dashboard Invitation request body.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedDashboardInvites'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Send shared dashboard invitation email
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeletePublicDashboardInvitation
+        parameters:
+        - name: token
+          source: token
+        type: unsafe
   /api/v1/dashboard/{dashboard_id}:
     delete:
       description: Delete a dashboard using the specified ID.
@@ -14494,7 +15737,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
-      summary: Get a list of logs
+      summary: Search logs
       tags:
       - Logs
       x-codegen-request-body-name: body
@@ -14523,9 +15766,6 @@ paths:
       - Logs Indexes
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta.**
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     put:
       description: 'This endpoint updates the index order of your organization.
 
@@ -14564,9 +15804,6 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
-      x-unstable: '**Note: This endpoint is in public beta.**
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/logs/config/indexes:
     get:
       description: 'The Index object describes the configuration of a log index.
@@ -14591,9 +15828,44 @@ paths:
       - Logs Indexes
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new index. Returns the Index object passed in the request
+        body when the request is successful.
+      operationId: CreateLogsIndex
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsIndex'
+        description: Object containing the new index.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsIndex'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsAPIErrorResponse'
+          description: Invalid Parameter Error
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create an index
+      tags:
+      - Logs Indexes
+      x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/logs/config/indexes/{name}:
     get:
       description: Get one log index from your organization. This endpoint takes no
@@ -14630,9 +15902,6 @@ paths:
       - Logs Indexes
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     put:
       description: "Update an index as identified by its name.\nReturns the Index\
         \ object passed in the request body when the request is successful.\n\nUsing\
@@ -14684,9 +15953,6 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
-      x-unstable: '**Note: This endpoint is in public beta.**
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/logs/config/pipeline-order:
     get:
       description: 'Get the current order of your pipelines.
@@ -15876,7 +17142,7 @@ paths:
         type: safe
   /api/v1/monitor/{monitor_id}/unmute:
     post:
-      description: Mute the specified monitor.
+      description: Unmute the specified monitor.
       operationId: UnmuteMonitor
       parameters:
       - description: The id of the monitor
@@ -16330,7 +17596,7 @@ paths:
         \ 3.2 megabytes (3200000). Compressed payloads must have a decompressed size\
         \ of up to 62 megabytes (62914560).\n\nIf you\u2019re submitting metrics directly\
         \ to the Datadog API without using DogStatsD, expect\n\n- 64 bits for the\
-        \ timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50\
+        \ timestamp\n- 32 bits for the value\n- 20 bytes for the metric names\n- 50\
         \ bytes for the timeseries\n- The full payload is approximately ~ 100 bytes.\
         \ However, with the DogStatsD API,\ncompression is applied, which reduces\
         \ the payload size."
@@ -16535,7 +17801,7 @@ paths:
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v1/slo:
     get:
-      description: Get multiple service level objective objects by their IDs.
+      description: Get a list of service level objective objects for your organization.
       operationId: ListSLOs
       parameters:
       - description: A comma separated list of the IDs of the service level objectives
@@ -16543,7 +17809,29 @@ paths:
         example: id1, id2, id3
         in: query
         name: ids
-        required: true
+        required: false
+        schema:
+          type: string
+      - description: The query string to filter results based on SLO names.
+        example: monitor
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      - description: The query string to filter results based on a single SLO tag.
+        example: env:prod
+        in: query
+        name: tags_query
+        required: false
+        schema:
+          type: string
+      - description: The query string to filter results based on SLO numerator and
+          denominator.
+        example: aws.elb.request_count
+        in: query
+        name: metrics_query
+        required: false
         schema:
           type: string
       responses:
@@ -16571,7 +17859,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Search SLOs
+      summary: Get all SLOs
       tags:
       - Service Level Objectives
       x-undo:
@@ -16609,11 +17897,21 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-given:
+        slo:
+          parameters:
+          - name: body
+            value: "{\n  \"type\": \"metric\",\n  \"name\": \"{{ unique }}\",\n  \"\
+              thresholds\": [{\n    \"timeframe\": \"7d\",\n    \"target\": 95.0,\n\
+              \    \"warning\": 98.0\n  }],\n  \"query\": {\n    \"numerator\": \"\
+              sum:httpservice.hits{code:2xx}.as_count()\",\n    \"denominator\": \"\
+              sum:httpservice.hits{!code:3xx}.as_count()\"\n  }\n}"
+          step: there is a valid "slo" in the system
       x-undo:
         operationId: DeleteSLO
         parameters:
         - name: slo_id
-          source: data.id
+          source: data[0].id
         type: unsafe
   /api/v1/slo/bulk_delete:
     post:
@@ -18142,7 +19440,7 @@ paths:
         type: safe
   /api/v1/usage/billable-summary:
     get:
-      description: Get billable usage across your multi-org account.
+      description: Get billable usage across your account.
       operationId: GetUsageBillableSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -18172,7 +19470,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get billable usage across your multi-org account
+      summary: Get billable usage across your account
       tags:
       - Usage Metering
       x-undo:
@@ -18402,6 +19700,53 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
       summary: Get hourly usage for ingested spans
+      tags:
+      - Usage Metering
+      x-undo:
+        type: safe
+  /api/v1/usage/iot:
+    get:
+      description: Get hourly usage for IoT.
+      operationId: GetUsageInternetOfThings
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIoTResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for IoT
       tags:
       - Usage Metering
       x-undo:
@@ -18744,7 +20089,8 @@ paths:
         type: safe
   /api/v1/usage/summary:
     get:
-      description: Get usage across your multi-org account.
+      description: Get usage across your multi-org account. You must have the multi-org
+        feature enabled.
       operationId: GetUsageSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -19464,29 +20810,42 @@ paths:
   /v1/input:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
-        HTTP request are as follows.
-
-        - Maximum content size per payload is 5MB.
-
-        - Maximum size for a single log is 256kB.
-
-        - Maximum array size if sending multiple logs in an array is 500 entries.
+        HTTP request are:
 
 
-        Any log exceeding 256KB is accepted and truncated by server
+        - Maximum content size per payload (uncompressed): 5MB
 
-        - For a single log request, the API truncates the log at 256KB and returns
-        a 2xx.
+        - Maximum size for a single log: 1MB
 
-        - For a multi-logs request, the API processes all logs,
-
-        truncates only logs larger than 256KB, and returns a 2xx.
+        - Maximum array size if sending multiple logs in an array: 1000 entries
 
 
-        We encourage you to send your logs compressed.
+        Any log exceeding 1MB is accepted and truncated by Datadog:
+
+        - For a single log request, the API truncates the log at 1MB and returns a
+        2xx.
+
+        - For a multi-logs request, the API processes all logs, truncates only logs
+        larger than 1MB, and returns a 2xx.
+
+
+        Datadog recommends sending your logs compressed.
 
         Add the `Content-Encoding: gzip` header to the request when sending compressed
-        logs.'
+        logs.
+
+
+        The status codes answered by the HTTP API are:
+
+        - 200: OK
+
+        - 400: Bad request (likely an issue in the payload formatting)
+
+        - 403: Permission issue (likely using an invalid API Key)
+
+        - 413: Payload too large (batch is above 5MB uncompressed)
+
+        - 5xx: Internal error, request should be retried after some time'
       operationId: SubmitLog
       parameters:
       - description: HTTP header used to compress the media-type.
@@ -19582,6 +20941,7 @@ paths:
             enum:
             - datadoghq.com
             - datadoghq.eu
+            - ddog-gov.com
           subdomain:
             default: http-intake.logs
             description: The subdomain where the API is deployed.
@@ -19670,6 +21030,7 @@ servers:
       enum:
       - datadoghq.com
       - datadoghq.eu
+      - ddog-gov.com
     subdomain:
       default: api
       description: The subdomain where the API is deployed.
@@ -19710,8 +21071,11 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/azure
   name: Azure Integration
-- description: This endpoint is deprecated. Use the [new dashboard list endpoint](https://docs.datadoghq.com/api/v2/dashboard-lists/)
-    instead.
+- description: 'Interact with your dashboard lists through the API to
+
+    organize, find, and share all of your dashboards with your team and
+
+    organization.'
   name: Dashboard Lists
   x-deprecated: true
 - description: 'Interact with your dashboard lists through the API to make it easier
@@ -19747,50 +21111,20 @@ tags:
   name: Hosts
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges
-- description: '[Check API version 2](/api/v2/incident-services/).'
-  name: Incident Services
-- description: '[Check API version 2](/api/v2/incident-teams/).'
-  name: Incident Teams
-- description: '[Check API version 2](/api/v2/incidents/).'
-  name: Incidents
-- description: 'Manage your Datadog API and application keys.
+- description: 'Manage your Datadog API and application keys. You need an API key
+    and
 
+    an application key for a user with the required permissions to interact
 
-    You need an API and applications key with Admin rights
+    with these endpoints. The full list of API and application keys can be
 
-    to interact with this endpoint. The full list of keys can be seen on your
-
-    [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
-- description: 'Send your logs to your Datadog platform over HTTP. Limits per HTTP
-    request are:
-
-
-    - Maximum content size per payload: 5MB
-
-    - Maximum size for a single log: 256kB
-
-    - Maximum array size if sending multiple logs in an array: 500 entries
-
-
-    Any log exceeding 256KB is accepted and truncated by Datadog:
-
-    - For a single log request, the API truncates the log at 256KB and returns a 2xx.
-
-    - For a multi-logs request, the API processes all logs, truncates only logs larger
-    than 256KB, and returns a 2xx.
-
-
-    We encourage you to send your logs compressed.
-
-    Add the `Content-Encoding: gzip` header to the request when sending compressed
-    logs.'
+- description: Search your logs and send them to your Datadog platform over HTTP.
   name: Logs
-- description: '[Check API version 2](/api/v2/logs-archives/).'
-  name: Logs Archives
 - description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
 
     You need an API and application key with Admin rights to interact with this endpoint.'
@@ -19816,8 +21150,6 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/processing/
   name: Logs Pipelines
-- description: '[Check API version 2](/api/v2/logs-restriction-queries/).'
-  name: Logs Restriction Queries
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can\
     \ be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n\
     \n**Note**: A graph can only contain a set number of points\nand as the timeframe\
@@ -19848,10 +21180,6 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty
   name: PagerDuty Integration
-- description: '[Check API version 2](/api/v2/processes/).'
-  name: Processes
-- description: '[Check API version 2](/api/v2/roles/).'
-  name: Roles
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
     instead.
   externalDocs:
@@ -19859,8 +21187,6 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
   name: Screenboards
   x-deprecated: true
-- description: '[Check API version 2](/api/v2/security-monitoring/).'
-  name: Security Monitoring
 - description: 'The service check endpoint allows you to post check statuses for use
     with monitors.
 
@@ -19978,10 +21304,9 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/
   name: Usage Metering
-- description: 'Create, edit, and disable users. [Read more about team management][1].
-
-
-    [1]: https://docs.datadoghq.com/account_management/team'
+- description: Create, edit, and disable users.
+  externalDocs:
+    url: https://docs.datadoghq.com/account_management/users
   name: Users
 - description: 'Configure your Datadog-Webhooks integration directly through the Datadog
     API.

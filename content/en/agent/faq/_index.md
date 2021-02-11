@@ -2,6 +2,7 @@
 title: Agent FAQ
 kind: faq
 private: true
+disable_sidebar: true
 aliases:
 - /agent/faq/agent-5-vs-agent-6-for-docker-kubernetes
 ---
@@ -19,7 +20,7 @@ aliases:
     {{< nextlink href="agent/faq/kubernetes-secrets" >}}How do I use Kubernetes secrets to set my API key?{{< /nextlink >}}
     {{< nextlink href="agent/faq/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
     {{< nextlink href="agent/faq/kubernetes-state-cluster-check" >}}How do I run the kubernetes_state check as a cluster check?{{< /nextlink >}}
-    {{< nextlink href="agent/faq/rpm-gpg-key-rotation-agent-6" >}}RPM GPG Key Rotation for Agent v6{{< /nextlink >}}
+    {{< nextlink href="agent/faq/rpm-gpg-key-rotation-agent-6" >}}RPM GPG Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/faq/agent-v6-changes" >}}Datadog Agent v6 Changes{{< /nextlink >}}
     {{< nextlink href="agent/faq/ec2-use-win-prefix-detection" >}}Windows EC2 hostnames starting with EC2AMAZ-{{< /nextlink >}}
     {{< nextlink href="agent/faq/auto_conf" >}}Auto-configuration for Autodiscovery.{{< /nextlink >}}

@@ -52,7 +52,7 @@ nav_sections:
         link: logs/
         icon: logs.svg
         desc: Collect, process, explore, monitor, & archive your logs
-      - title: Security & Compliance 
+      - title: Security & Compliance
         link: security_monitoring/
         icon: siem.svg
         desc: Detect threats and misconfigurations across applications and infrastructure
@@ -62,10 +62,10 @@ nav_sections:
         desc: Ensure application uptime, identify regional issues, & track performance
       - title: Real User Monitoring
         link: real_user_monitoring/
-        icon: rum.svg
+        icon: rum-2.svg
         desc: Visualize and analyze the performance of your front end applications
       - title: Network Monitoring
-        link: network_performance_monitoring/
+        link: network_monitoring/
         icon: network.svg
         desc: Gain visibility into your network traffic using tagged objects
       - title: Serverless

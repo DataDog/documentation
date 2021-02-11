@@ -6,10 +6,10 @@ aliases:
   - /fr/graphing/guide/timeboard-api-doc
 ---
 <div class="alert alert-danger">
-Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/?lang=python#dashboards">nouvel endpoint Dashboard</a>.
+Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/v1/dashboards/">nouvel endpoint Dashboards</a>.
 </div>
 
-L'endpoint Timeboard vous permet de programmer la création, la mise à jour, la suppression et la récupération de timeboards. [En apprendre plus sur les timeboards][1].
+L'endpoint `Timeboard` vous permet de programmer la création, la mise à jour, la suppression et la récupération de timeboards. [En savoir plus sur les timeboards][1].
 
 ## Créer un timeboard
 
@@ -560,4 +560,4 @@ curl "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=$
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /fr/dashboards/timeboard
+[1]: /fr/dashboards/timeboard/

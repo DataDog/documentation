@@ -1037,7 +1037,7 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should show oneOf', () => {
+  it('should show oneOf examples', () => {
     const mockSchema = {
       "description": "Structured log message.",
       "oneOf": [

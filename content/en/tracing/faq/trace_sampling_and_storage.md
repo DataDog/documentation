@@ -93,9 +93,8 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
 ## Manually Control Trace Priority
 
 APM enables distributed tracing by default to allow trace propagation between tracing headers across multiple services/hosts. Tracing headers include a priority tag to ensure complete traces between upstream and downstream services during trace propagation. You can override this tag to manually keep a trace (critical transaction, debug mode, etc.) or drop a trace (health checks, static assets, etc).
-
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang lang="java" >}}
 
 Manually keep a trace:
 
@@ -137,8 +136,8 @@ public class MyClass {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 Manually keep a trace:
 
@@ -168,8 +167,8 @@ def handler():
     //method impl follows
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 Manually keep a trace:
 
@@ -192,8 +191,8 @@ Datadog.tracer.trace(name, options) do |span|
 end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 Manually keep a trace:
 
@@ -243,8 +242,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
 
 Manually keep a trace:
 
@@ -274,8 +273,8 @@ span.setTag(tags.MANUAL_DROP)
 
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 Manually keep a trace:
 
@@ -307,8 +306,9 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 }
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
 
 Manually keep a trace:
 
@@ -340,8 +340,8 @@ Manually drop a trace:
 ?>
 ```
 
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
 
 Manually keep a trace:
 
@@ -372,8 +372,8 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 //method impl follows
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by Agent or server location based on the [sampling rules](#sampling-rules).
 

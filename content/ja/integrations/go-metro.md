@@ -90,7 +90,7 @@ instances:
       - app.datadoghq.com
 ```
 
-*注*: go metro を権限のない状態で実行するには、バイナリで CAP_NET_RAW 機能を設定する必要があります。
+*注*: go-metro を権限のない状態で実行するには、バイナリで CAP_NET_RAW 機能を設定する必要があります。
 ```
 # 必要なライブラリをインストール
 $ sudo apt-get install libcap  # Debian
@@ -99,7 +99,7 @@ $ sudo yum install libcap  # Redhat
 $ sudo yum install compat-libcap1  # Redhat の代替
 
 # 機能を設定
-$ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro`
+$ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
 製品ごとにパッケージの名称が異なるため、上記の説明に従っても
@@ -107,8 +107,8 @@ $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro`
 バイナリを提供するパッケージのショートリストが表示されます。
 サポートが必要な場合は、お気軽にお問い合わせください。
 
-また、go-metro は独自のファイルにログを記録することにご注意ください。ログは /var/log/datadog/go-metro.log にあります。
-さらに、go-mtro はスタンドアロンで機能するため、現状では Agent の情報ページには表示 *されません*。
+また、go-metro は独自のファイルにログを記録することにご注意ください。ログは `/var/log/datadog/go-metro.log` にあります。
+さらに、go-metro はスタンドアロンで機能するため、現状では Agent の情報ページには表示 *されません*。
 
 最後に、go-metro バイナリは、Datadog Agent の 64-ビット RPM と DEB 製品のみに同梱されているため
 パッケージ化されたバージョンでのみ使用できます

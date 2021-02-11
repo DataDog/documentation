@@ -9,9 +9,12 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
     tag: ブログ
     text: ネットワークパフォーマンスのモニタリング
-  - link: /integrations/snmp/
-    tag: ドキュメント
-    text: SNMP インテグレーション
+  - link: 'https://www.datadoghq.com/blog/npm-windows-support/'
+    tag: ブログ
+    text: ネットワークパフォーマンスモニタリングで Windows ホストを監視する
+  - link: /network_performance_monitoring/devices
+    tag: Documentation
+    text: ネットワークデバイスモニタリング
 ---
 ## 概要
 

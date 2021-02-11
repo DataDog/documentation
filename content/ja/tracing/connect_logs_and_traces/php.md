@@ -23,6 +23,10 @@ PHP ログとトレースを手動で接続する方法については、以下�
 
 ## トレースおよびスパン ID を手動で挿入する
 
+<div class="alert alert-warning">
+注: 関数 <code>\DDTrace\trace_id()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a> で導入されています。
+</div>
+
 ログとトレースを一緒に接続するには、ログに、それぞれトレース ID とスパン ID を含む `dd.trace_id` 属性と `dd.span_id` 属性が含まれている必要があります。
 
 [Datadog ログインテグレーション][1]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされ、[トレースリマッパー][2]のおかげで再マップされていることを確実にする必要があります。詳細については、FAQ [トレース ID パネルに相関ログが表示されないのはなぜですか？][3]を参照してください。
@@ -31,10 +35,9 @@ PHP ログとトレースを手動で接続する方法については、以下�
 
 ```php
   <?php
-  $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
-      $span->getTraceId(),
+      \DDTrace\trace_id(),
       \dd_trace_peek_span_id()
   );
   my_error_logger('Error message.' . $append);
@@ -46,13 +49,9 @@ PHP ログとトレースを手動で接続する方法については、以下�
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-      if (null === $span) {
-          return $record;
-      }
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
-          $span->getTraceId(),
+          \DDTrace\trace_id(),
           \dd_trace_peek_span_id()
       );
       return $record;
@@ -65,13 +64,8 @@ PHP ログとトレースを手動で接続する方法については、以下�
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-      if (null === $span) {
-          return $record;
-      }
-
       $record['dd'] = [
-          'trace_id' => $span->getTraceId(),
+          'trace_id' => \DDTrace\trace_id(),
           'span_id'  => \dd_trace_peek_span_id(),
       ];
 

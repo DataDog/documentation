@@ -3,7 +3,7 @@ import codeTabs from './codetabs';
 import { redirectToRegion } from '../region-redirects';
 import { initializeIntegrations } from './integrations';
 import { initializeSecurityRules } from './security-rules';
-import {updateMainContentAnchors, reloadWistiaVidScripts, gtag } from '../helpers/helpers';
+import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
 import {redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav} from './code-languages'; // eslint-disable-line import/no-cycle
 
@@ -50,6 +50,9 @@ function loadPage(newUrl) {
             const newTOC = httpRequest.responseXML.querySelector(
                 '.js-toc-container'
             );
+
+            const currentSidebar = document.querySelector('.sidebar'); 
+            const newSidebar = httpRequest.responseXML.querySelector('.sidebar');
 
             if (newContent === null) {
                 return;
@@ -103,7 +106,7 @@ function loadPage(newUrl) {
             // update data-relPermalink
             document.documentElement.dataset.relpermalink =
                 newDocument.documentElement.dataset.relpermalink;
-            
+
             // update data-type
             document.documentElement.dataset.type =
                 newDocument.documentElement.dataset.type;
@@ -142,7 +145,7 @@ function loadPage(newUrl) {
             initializeSecurityRules();
 
             // if newly requested TOC is NOT disabled
-            if (newTOC.querySelector('#TableOfContents')) {
+            if (newTOC && newTOC.querySelector('#TableOfContents') && currentTOC) {
                 currentTOC.replaceWith(newTOC);
                 buildTOCMap();
                 updateTOC();
@@ -159,15 +162,36 @@ function loadPage(newUrl) {
                 updateTOC();
             }
 
+            // Ensure sidebar is displayed or hidden properly based on HTTP response.  I'm certain we can implement a better strategy for what's happening in this script, but this should hold us over until then.
+            if (newSidebar && !currentSidebar) {            
+                const jsContentContainer = document.querySelector('.js-content-container');
+                jsContentContainer.appendChild(newSidebar);
+            }
+
+            if (!newSidebar && currentSidebar) {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.add('d-none');
+            }
+
+            if (newSidebar && currentSidebar) {
+                const sidebar = document.querySelector('.sidebar');
+
+                if (sidebar.classList.value.includes('d-none')) {
+                    sidebar.classList.remove('d-none');
+                }
+            }
+
             const pathName = new URL(newUrl).pathname;
 
             // sets query params if code tabs are present
 
             codeTabs();
 
-            const regionSelector = document.querySelector('.js-region-selector');
+            const regionSelector = document.querySelector('.js-region-select');
+
             if (regionSelector) {
-                redirectToRegion(regionSelector.value);
+                const region = getCookieByName('site');
+                redirectToRegion(region);
             }
 
             const {pageCodeLang} = document.documentElement.dataset;

@@ -13,7 +13,7 @@ further_reading:
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-## Required Setup
+## Required setup
 
 If not already configured:
 
@@ -64,7 +64,7 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure the Function
+### Configure the function
 
 1. Enable [AWS X-Ray active tracing][4] for your Lambda function.
 2. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
@@ -76,18 +76,22 @@ dependencies {
     }
     ```
 
-### Subscribe the Datadog Forwarder to the Log Groups
+### Subscribe the Datadog Forwarder to the log groups
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
 2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
-## Explore Datadog Serverless Monitoring
+### Unified service tagging
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][6].
+Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
 
-### Monitor Custom Business Logic
+## Explore Datadog serverless monitoring
+
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][7].
+
+## Monitor custom business logic
 
 If you would like to submit a custom metric, see the sample code below:
 
@@ -118,7 +122,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-For more information on custom metric submission, see [here][7].
+For more information on custom metric submission, see [here][8].
 
 ## Further Reading
 
@@ -129,5 +133,6 @@ For more information on custom metric submission, see [here][7].
 [3]: https://img.shields.io/bintray/v/datadog/datadog-maven/datadog-lambda-java
 [4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: https://app.datadoghq.com/functions
-[7]: /serverless/custom_metrics?tab=java
+[6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[7]: https://app.datadoghq.com/functions
+[8]: /serverless/custom_metrics?tab=java

@@ -92,8 +92,8 @@ Cliquez sur la span d'un service pour voir les dépendances réseau du service �
 
 {{< img src="tracing/visualization/trace/trace_networks.png" alt="Tracer les dépendances réseau" style="width:90%;">}}
 
-[1]: https://docs.datadoghq.com/fr/network_performance_monitoring/network_page
-[2]: https://docs.datadoghq.com/fr/network_performance_monitoring/installation?tab=agent
+[1]: /fr/network_monitoring/performance/network_page
+[2]: /fr/network_monitoring/performance/setup
 {{% /tab %}}
 {{< /tabs >}}
 

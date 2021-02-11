@@ -15,7 +15,7 @@ further_reading:
 For Linux based systems where the <code>service</code> wrapper command is not available, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consult the list of alternatives</a>.
 </div>
 
-## Start, Stop, and Restart the Agent
+## Start, stop, and restart the Agent
 
 ### Start the Agent
 
@@ -27,12 +27,12 @@ List of commands to start the Datadog Agent:
 | Platform | Command                                                        |
 |----------|----------------------------------------------------------------|
 | AIX      | `startsrc -s datadog-agent`                                    |
-| Linux    | [See the dedicated documentation for your OS][1]               |
-| Docker   | [See the dedicated Docker documentation][2]                    |
+| Linux    | [See the dedicated documentation for your OS][1].               |
+| Docker   | Use the [installation command][2].                    |
 | Kubernetes | `kubectl create -f datadog-agent.yaml`                        |
 | macOS    | `launchctl start com.datadoghq.agent` *or* via the systray app |
 | Source   | `sudo service datadog-agent start`                             |
-| Windows  | [See the dedicated Windows documentation][3]                   |
+| Windows  | [See the dedicated Windows documentation][3].                   |
 
 [1]: /agent/
 [2]: /agent/docker/
@@ -43,10 +43,10 @@ List of commands to start the Datadog Agent:
 | Platform | Command                                      |
 |----------|----------------------------------------------|
 | Linux    | `sudo service datadog-agent start`           |
-| Docker   | [See the dedicated Docker documentation][1]  |
+| Docker   | [See the dedicated Docker documentation][1].  |
 | macOS    | `/usr/local/bin/datadog-agent start`         |
 | Source   | `sudo ~/.datadog-agent/bin/agent start`      |
-| Windows  | [See the dedicated Windows documentation][2] |
+| Windows  | [See the dedicated Windows documentation][2]. |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /agent/basic_agent_usage/windows/
@@ -63,26 +63,25 @@ List of commands to stop the Datadog Agent:
 | Platform | Command                                                       |
 |----------|---------------------------------------------------------------|
 | AIX      | `stopsrc -s datadog-agent`                                    |
-| Linux    | [See the dedicated documentation for your OS][1]              |
-| Docker   | [See the dedicated Docker documentation][2]                   |
+| Linux    | [See the dedicated documentation for your OS][1].              |
+| Docker   | `docker exec -it <CONTAINER_NAME> agent stop`                   |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
 | macOS    | `launchctl stop com.datadoghq.agent` *or* via the systray app |
 | Source   | `sudo service datadog-agent stop`                             |
-| Windows  | [See the dedicated Windows documentation][3]                  |
+| Windows  | [See the dedicated Windows documentation][2].                  |
 
 [1]: /agent/
-[2]: /agent/docker/
-[3]: /agent/basic_agent_usage/windows/
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | Platform | Command                                      |
 |----------|----------------------------------------------|
 | Linux    | `sudo service datadog-agent stop`            |
-| Docker   | [See the dedicated Docker documentation][1]  |
+| Docker   | [See the dedicated Docker documentation][1].  |
 | macOS    | `/usr/local/bin/datadog-agent stop`          |
 | Source   | `sudo ~/.datadog-agent/bin/agent stop`       |
-| Windows  | [See the dedicated Windows documentation][2] |
+| Windows  | [See the dedicated Windows documentation][2]. |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /agent/basic_agent_usage/windows/
@@ -98,15 +97,15 @@ List of commands to restart the Datadog Agent:
 
 | Platform | Command                                           |
 |----------|---------------------------------------------------|
-| Linux    | [See the dedicated documentation for your OS][1]  |
-| Docker   | [See the dedicated Docker documentation][2]       |
+| Linux    | [See the dedicated documentation for your OS][1].  |
+| Docker   | Use the [installation command][2].       |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
 | macOS    | run `stop` then `start`, *or* via the systray app |
 | Source   | *unsupported Platform*                            |
-| Windows  | [See the dedicated Windows documentation][3]      |
+| Windows  | [See the dedicated Windows documentation][3].      |
 
 [1]: /agent/
-[2]: /agent/docker/
+[2]: /agent/docker/?tab=standard#setup
 [3]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -114,19 +113,19 @@ List of commands to restart the Datadog Agent:
 | Platform | Command                                      |
 |----------|----------------------------------------------|
 | Linux    | `sudo service datadog-agent restart`         |
-| Docker   | [See the dedicated Docker documentation][1]  |
+| Docker   | [See the dedicated Docker documentation][1].  |
 | macOS    | `/usr/local/bin/datadog-agent restart`       |
 | Source   | `sudo ~/.datadog-agent/bin/agent restart`    |
-| Windows  | [See the dedicated Windows documentation][2] |
+| Windows  | [See the dedicated Windows documentation][2]. |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent Status and Information
+## Agent status and information
 
-### Service Status
+### Service status
 
 List of commands to display the status of the Datadog Agent:
 
@@ -167,7 +166,7 @@ List of commands to display the status of the Datadog Agent:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Agent Information
+### Agent information
 
 List of commands to display the status of your Datadog Agent and enabled integrations.
 

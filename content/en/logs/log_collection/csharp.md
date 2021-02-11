@@ -16,7 +16,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
@@ -51,10 +51,10 @@ var log = new LoggerConfiguration()  // using Serilog;
 
     // using Serilog.Formatting.Json;
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
-    
+
     // using Serilog.Formatting.Compact;
     // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
-    
+
     .CreateLogger();
 
 // An example
@@ -120,7 +120,7 @@ Once the library is in your classpath, attach the following layout to any target
     <!-- Write logs as Json into a file -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${longdate}" />
+        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -311,18 +311,24 @@ Then, initialize the logger directly in your application. Do not forget to [add 
 {{< site-region region="us" >}}
 
 ```csharp
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.com" })
-    .CreateLogger();
+    .CreateLogger())
+{
+    // Some code
+}
 ```
 
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
 ```csharp
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.eu" })
-    .CreateLogger();
+    .CreateLogger())
+{
+    // Some code
+}
 ```
 
 {{< /site-region >}}
@@ -335,7 +341,7 @@ For instance to forward logs to the Datadog US region in TCP you would use the f
 
 ```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<API_KEY>",
         source: "<SOURCE_NAME>",
@@ -344,7 +350,10 @@ var log = new LoggerConfiguration()
         tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
         configuration: config
     )
-    .CreateLogger();
+    .CreateLogger())
+{
+    // Some code
+}
 ```
 
 {{< /site-region >}}
@@ -354,7 +363,7 @@ For instance to forward logs to the Datadog EU region in TCP you would use the f
 
 ```csharp
 var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<API_KEY>",
         source: "<SOURCE_NAME>",
@@ -363,7 +372,10 @@ var log = new LoggerConfiguration()
         tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
         configuration: config
     )
-    .CreateLogger();
+    .CreateLogger())
+{
+    // Some code
+}
 ```
 
 {{< /site-region >}}

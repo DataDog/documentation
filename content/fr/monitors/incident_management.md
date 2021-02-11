@@ -1,7 +1,7 @@
 ---
 title: Gestion des incidents
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 description: Créer et gérer des incidents
 ---
 {{< img src="monitors/incidents/incidents-top-1.png" alt="Gestion des incidents"  style="width:80%;">}}
@@ -74,7 +74,7 @@ Pour les clients non européens qui utilisent Slack, [demandez à accéder à la
 
 #### 4. Mise à jour de l'incident
 
-Mettez à jour l'incident à mesure que la situation évolue. Définissez le statut sur `Stable` pour indiquer que le problème a été atténué, et remplissez le champ concernant l'impact sur les clients afin que votre organisation sache dans quelle mesure le problème a affecté les clients. Ensuite, définissez le statut sur `Resolved` une fois que l'incident a été complètement résolu. Il existe un quatrième statut facultatif, `Completed`, qui peut être utilisé pour indiquer que toutes les étapes de remédiation ont été réalisées. Ce statut peut être activé dans les [Paramètres d'incident][2]. 
+Mettez à jour l'incident à mesure que la situation évolue. Définissez le statut sur `Stable` pour indiquer que le problème a été atténué, et remplissez le champ concernant l'impact sur les clients afin que votre organisation sache dans quelle mesure le problème a affecté les clients. Ensuite, définissez le statut sur `Resolved` une fois que l'incident a été complètement résolu. Il existe un quatrième statut facultatif, `Completed`, qui peut être utilisé pour indiquer que toutes les étapes de remédiation ont été réalisées. Ce statut peut être activé dans les [Paramètres d'incident][2].
 
 {{< img src="monitors/incidents/workflow-4-update-2.png" alt="Mise à jour de l'incident"  style="width:60%;">}}
 

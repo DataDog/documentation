@@ -3,14 +3,28 @@ import config from '../../regions.config';
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
-    const regionSelector = document.querySelector('.js-region-selector');
+    const regionSelector = document.querySelector('.js-region-select');
 
     if (regionSelector) {
-        regionSelector.addEventListener('change', regionOnChangeHandler);
+        const options = regionSelector.querySelectorAll('.dropdown-item');
+
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                const region = option.dataset.value;
+                regionOnChangeHandler(region)
+            })
+        })
     }
 });
 
-function isReferrerEU(){
+function replaceButtonInnerText(value) {
+    const selectedRegion = config.dd_datacenter[value];
+    const regionSelector = document.querySelector('.js-region-select');
+    const buttonInner = regionSelector.querySelector('.btn-inner');
+    buttonInner.innerText = selectedRegion;
+}
+
+function isReferrerEU() {
     if (window.document.referrer.includes('datadoghq.eu') &&
     window.document.referrer.indexOf(
         `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
@@ -21,32 +35,33 @@ function isReferrerEU(){
     return false;
 }
 
-function regionOnChangeHandler(event) {
+function regionOnChangeHandler(region) {
     const queryParams = new URLSearchParams(window.location.search);
-    let siteRegion = '';
 
-    siteRegion = event.target.value;
     // on change, if query param exists, update the param
     if (config.allowedRegions.includes(queryParams.get('site'))) {
-        queryParams.set('site', siteRegion);
+        queryParams.set('site', region);
 
         window.history.replaceState(
             {},
             '',
             `${window.location.pathname}?${queryParams}`
         );
-        showRegionSnippet(siteRegion);
-        Cookies.set('site', siteRegion, { path: '/' });
-    } else if (isReferrerEU()){
+
+        showRegionSnippet(region);
+        replaceButtonInnerText(region);
+        Cookies.set('site', region, { path: '/' });
+    } else if (isReferrerEU()) {
         // need to reload the page if referrer is from EU to reset window.document.referrer
-        Cookies.set('site', siteRegion, { path: '/' });
+        Cookies.set('site', region, { path: '/' });
         window.location.reload();
     }
-    else if (config.allowedRegions.includes(siteRegion)){
-        showRegionSnippet(siteRegion);
-        Cookies.set('site', siteRegion, { path: '/' });
+    else if (config.allowedRegions.includes(region)){
+        showRegionSnippet(region);
+        replaceButtonInnerText(region);
+        Cookies.set('site', region, { path: '/' });
     } else {
-        redirectToRegion(siteRegion);
+        redirectToRegion(region);
     }
 }
 
@@ -96,8 +111,7 @@ function showRegionSnippet(newSiteRegion) {
 
 // have option to pass new site region to function.
 function redirectToRegion(region = '') {
-    const regionSelector = document.querySelector('.js-region-selector');
-
+    const regionSelector = document.querySelector('.js-region-select');
     const queryParams = new URLSearchParams(window.location.search);
 
     let newSiteRegion = region;
@@ -144,7 +158,7 @@ function redirectToRegion(region = '') {
     }
 
     if (regionSelector) {
-        regionSelector.value = newSiteRegion;
+        replaceButtonInnerText(newSiteRegion);
     }
 }
 

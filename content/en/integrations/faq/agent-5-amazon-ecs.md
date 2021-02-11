@@ -20,7 +20,7 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 
 This documentation assume you already have a working EC2 Container Service cluster configured. If not, review the [Getting Started section in the ECS documentation][1].
 
-#### Create an ECS Task
+#### Create an ECS task
 
 This task launches the Datadog container. When you need to modify the configuration, update this Task Definition as described further down in this guide. If you're using APM or Logs, set the appropriate flags in the Task Definition.
 
@@ -58,7 +58,7 @@ Amazon Elastic Container Service register-task-definition --cli-input-json file:
 18. Add another mount point for **proc** and enter `/host/proc/` in the Container path. Check the **Read only** checkbox.
 19. Add a third mount point for **cgroup** and enter `/host/sys/fs/cgroup` in the Container path. Check the **Read only** checkbox.
 
-#### Create or Modify your IAM Policy
+#### Create or modify your IAM policy
 
 1. Add those permissions to your [Datadog IAM policy][7] in order to collect Amazon ECS metrics:
 
@@ -99,11 +99,11 @@ Amazon Elastic Container Service register-task-definition --cli-input-json file:
 
 9. Click **Create Policy**
 
-#### Run the Agent as a Daemon Service
+#### Run the Agent as a daemon service
 
-Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [Daemon Service][9].
+Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [daemon service][9].
 
-##### Schedule a Daemon Service in AWS using Our ECS Task
+##### Schedule a daemon service in AWS with an ECS task
 
 1. Log in to the AWS console and navigate to the ECS Clusters section. Click into the cluster you want to run the Agent on.
 2. Create a new service by clicking the **Create** button under Services.
