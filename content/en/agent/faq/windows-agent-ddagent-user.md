@@ -29,7 +29,7 @@ If a password was specified, the installer will use that password, otherwise it 
 To specify a username and/or password on the command line pass the following properties to the msiexec:
 
 ```shell
-Msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
+msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
 **Note**: The `<USERNAME>` must be 20 characters or less in order to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
@@ -56,7 +56,7 @@ If a user is specified on the command line, but this user is not found on the sy
 To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 
 ```shell
-Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
+msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
 The `<DOMAIN>` can either be a fully-qualified domain name (e.g. `mydomain.com`) or the NETBIOS name (also known as pre-Windows 2000 name).
