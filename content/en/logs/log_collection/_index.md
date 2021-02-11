@@ -30,7 +30,7 @@ Choose a configuration option below to begin ingesting your logs. If you are alr
 
 Consult the [list of available Datadog log collection endpoints](#datadog-logs-endpoints) if you want to send your logs directly to Datadog.
 
-**Note**: When sending logs in a JSON format to Datadog, there is a set of reserved attributes that have a specific meaning within Datadog. See the [Reserved Attributes section](#reserved-attributes) to learn more.
+**Note**: When sending logs in a JSON format to Datadog, there is a set of reserved attributes that have a specific meaning within Datadog. See the [Reserved Attributes section](#attributes-and-tags) to learn more.
 
 ## Setup
 
