@@ -118,7 +118,7 @@ The [Datadog CDK Constructs][1] automatically configures ingestion of metrics, t
 
 ### Install the Datadog CDK Constructs Library
 
-Run the following Yarn or NPM command in your CDK project
+Run the following Yarn or NPM command in your CDK project:
 
 ```sh
 #Yarn
