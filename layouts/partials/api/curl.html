@@ -1,18 +1,17 @@
 {{- $securitySchemes := .securitySchemes -}}
 {{- $dollarScratch := .dollarScratch }}
-{{- $pathParams := $dollarScratch.Get "pathParams" -}}
-{{- $queryStrings := $dollarScratch.Get "queryStrings" -}}
 {{- $endpoint := .endpoint }}
+{{- $parameters := partial "api/arguments-data.html" (dict "endpoint" $endpoint) -}}
 {{- $count := 0 -}}
 
-{{- with $pathParams -}}
+{{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
     {{- range . -}}
         <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span><br/>
     {{- end -}}
 {{- end -}}
 
-{{- with $queryStrings -}}
+{{- with $parameters.queryStrings -}}
     {{- $i := 0 -}}
     {{- range . -}}
         {{- if eq .required true -}}
@@ -36,7 +35,7 @@
 
 <span class="c1"># Curl command</span>
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
-{{- range $qi, $q := $queryStrings -}}
+{{- range $qi, $q := $parameters.queryStrings -}}
     {{- if eq .required true -}}
         <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
     {{- end -}}
