@@ -146,7 +146,7 @@ Une fois qu'un tag a été ajouté à une span, recherchez et interrogez ce tag 
 
 ## Filtres de rétention
 
-[Définissez des [filtres basés sur des tags][19] dans l'interface de Datadog afin d'indexer les spans pendant 15 jours et de les utiliser avec la fonctionnalité d'[analyse et de recherche de traces].](#trace-search-and-analytics)
+[Définissez des [filtres basés sur des tags][19] dans l'interface de Datadog afin d'indexer les spans pendant 15 jours et de les utiliser avec la fonctionnalité d'[analyse et de recherche de traces](#analyse-et-recherche-de-traces).](#trace-search-and-analytics)
 
 ## Contrôles de l'ingestion
 

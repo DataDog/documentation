@@ -2,7 +2,7 @@
 title: Surveillance Synthetic
 kind: documentation
 description: Utilisez des tests automatisés pour vous assurer que les aspects les plus importants de vos systèmes et applications fonctionnent correctement à différents endroits du monde.
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /fr/integrations/synthetics/
 further_reading:
