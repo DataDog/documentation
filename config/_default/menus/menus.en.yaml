@@ -3630,6 +3630,66 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
+  - name: Create a Tag Configuration
+    url: '#create-a-tag-configuration'
+    identifier: create-a-tag-configuration
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateTagConfiguration
+      unstable:
+        - v2
+  - name: Update a Tag Configuration
+    url: '#update-a-tag-configuration'
+    identifier: update-a-tag-configuration
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateTagConfiguration
+      unstable:
+        - v2
+  - name: List Tag Configuration by Name
+    url: '#list-tag-configuration-by-name'
+    identifier: list-tag-configuration-by-name
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagConfigurationByName
+      unstable:
+        - v2
+  - name: Delete a Tag Configuration
+    url: '#delete-a-tag-configuration'
+    identifier: delete-a-tag-configuration
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteTagConfiguration
+      unstable:
+        - v2
+  - name: List Tag Configurations
+    url: '#list-tag-configurations'
+    identifier: list-tag-configurations
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagConfigurations
+      unstable:
+        - v2
   - name: Submit metrics
     url: '#submit-metrics'
     identifier: submit-metrics

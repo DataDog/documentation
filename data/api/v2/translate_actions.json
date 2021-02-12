@@ -245,6 +245,30 @@
     "request_description": "",
     "request_schema_description": "The request for a logs list."
   },
+  "ListTagConfigurations": {
+    "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
+    "summary": "List Tag Configurations"
+  },
+  "DeleteTagConfiguration": {
+    "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
+    "summary": "Delete a Tag Configuration"
+  },
+  "ListTagConfigurationByName": {
+    "description": "Returns the tag configuration for the given metric name.",
+    "summary": "List Tag Configuration by Name"
+  },
+  "UpdateTagConfiguration": {
+    "description": "Update the tag configuration of a metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
+    "summary": "Update a Tag Configuration",
+    "request_description": "",
+    "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
+  },
+  "CreateTagConfiguration": {
+    "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "summary": "Create a Tag Configuration",
+    "request_description": "",
+    "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
