@@ -398,6 +398,8 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em></div>
+
 More examples:
 
 | **Raw string**           | **Pattern**                                   |
@@ -407,8 +409,7 @@ More examples:
 | Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
 | 20180228                 | `\d{8}`                                       |
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
-
-**Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
 ## Commonly used log processing rules
 
