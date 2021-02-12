@@ -472,7 +472,7 @@ spec:
 
 **Notes**:
 
-- The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to file may mount a volume such as `/logs/app` where the log file is written. Please check Kubernetes documentation for further detail on sharing volumes between pods/containers.
+- The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to a file may mount a volume such as `/logs/app`, where the log file is written. Please check Kubernetes documentation for further detail on sharing volumes between pods/containers.
 
 - When using this kind of annotation on for a container, its ouptut logs are not collected automatically. If collection from both the container and a file are needed it should be explicity enabled in the annotation, for example:
 ```yaml
