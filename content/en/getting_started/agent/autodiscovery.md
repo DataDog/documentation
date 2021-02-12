@@ -34,7 +34,7 @@ Autodiscovery lets you define configuration templates for Agent checks and speci
 
 The Agent watches for events like container creation, destruction, starts, and stops. The Agent then enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][1] from any loaded templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][2] with the matching container's specific values. Then it enables the check using the static configuration.
 
-## How It Works
+## How it works
 
 {{< img src="agent/autodiscovery/ad_1.png" alt="Autodiscovery Overview"  style="width:80%;">}}
 
@@ -147,7 +147,7 @@ ECS_FARGATE=true
 {{% /tab %}}
 {{< /tabs >}}
 
-### Integration Templates
+### Integration templates
 
 Once Autodiscovery is enabled, the Datadog Agent automatically attempts Autodiscovery [for a number of services][4], including Apache and Redis, based on default Autodiscovery configuration files.
 

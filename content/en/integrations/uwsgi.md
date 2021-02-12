@@ -41,7 +41,7 @@ uwsgi --socket :3031 --logger file:logfile=/var/log/uwsgi/uwsgi.log,maxsize=2000
 
 Create the `uwsgi.d/conf.yaml` file in the root of your Agent's configuration directory.
 
-#### Log Collection
+#### Log collection
 
 _Available for Agent versions >6.0_
 

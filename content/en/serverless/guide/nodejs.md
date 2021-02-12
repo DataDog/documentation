@@ -7,9 +7,9 @@ kind: guide
 
 This startup guide will walk you through all the steps to power visibility across metrics, traces, and logs in your serverless ecosystem. First, set up **Datadog Lambda Enhanced Metrics** to illustrate how to graph cold starts across your Lambda infrastructure. Second, enable Lambda **logs ingestion** to gather Lambda error logs. Third, perform root cause analysis using Lambda **distributed tracing**. Last, monitor **custom metrics** and services across your serverless ecosystem.
 
-# Section 1: Graph Lambda Cold Starts
+# Section 1: Graph Lambda cold starts
 
-## Ingest Lambda Metrics
+## Ingest Lambda metrics
 
 You need to enable the Amazon Web Services integration to begin collecting CloudWatch metrics from Lambda functions. To do this, [follow these steps][1].  
     
@@ -23,7 +23,7 @@ At this step, Datadog automatically starts collecting key Lambda metrics such as
 
 You can also view all of your Lambda functions in the Datadog Serverless view. Only CloudWatch metrics are available out of the box - this guide teaches expanding this view to to bring together enhanced metrics, traces, and logs from your AWS Lambda functions running serverless applications.
 
-## Graph Lambda Cold Starts with Enhanced Metrics
+## Graph Lambda cold starts with enhanced metrics
 
 Datadog built two tools that we refer to throughout this guide:  
 - Datadog Forwarder (used for logs, enhanced metrics, custom metrics, and tracing)  
@@ -31,9 +31,9 @@ Datadog built two tools that we refer to throughout this guide:
 
 The Lambda Layer generates data that is then sent to Datadog by the Forwarder. The Datadog Lambda Layer also packages Datadog’s tracing library, `dd-trace`, for your runtime.
 
-Start by setting up these two tools to enable enhanced Lambda metrics, which are required to ingest additional metrics and tags, such as cold starts.
+Start by setting up these two tools to enable enhanced lambda metrics, which are required to ingest additional metrics and tags, such as cold starts.
 
-What are enhanced Lambda metrics?
+What are enhanced lambda metrics?
 - Real-time, second-level granularity serverless runtime metrics
 - Include new tags, such as `cold_start`
 - Include new metrics such as billed duration and estimated cost
@@ -132,7 +132,7 @@ Now, the Lambda Layer is installed on this function. Repeat these steps to insta
 {{% /tabs %}}
 
 
-## Graph Lambda Cold Starts
+## Graph Lambda cold starts
 
 Once you configure both the Datadog Forwarder and the Datadog Lambda Layer, navigate to the out-of-the-box [Enhanced Lambda Metrics dashboard][8].
 
@@ -142,18 +142,18 @@ The dashboard shows “Cold Starts by Function”, which expands into an in-dept
 
 Recognize any enhanced Lambda metric by the prefix `aws.lambda.enhanced.*`. For example, the above graph measures `aws.lambda.enhanced.invocations`, with the tag `cold_start:true`.
 
-# Section 2: Navigate Lambda Error Logs
+# Section 2: Navigate Lambda error logs
 
-## Enable Lambda Log Ingestion
+## Enable Lambda log ingestion
 
 In the previous section, we set up the Datadog Forwarder to enable enhanced metrics. The Datadog Forwarder is also required to send logs from your Lambda function to Datadog.
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-At this point, the Datadog Forwarder is enabled, and Lambda logs should already automatically be flowing through to Datadog. If  logs aren’t yet appearing in Datadog, [refer to the Lambda logs troubleshooting steps][1].
+At this point, the Datadog Forwarder is enabled, and lambda logs should already automatically be flowing through to Datadog. If logs aren’t yet appearing in Datadog, [refer to the Lambda logs troubleshooting steps][1].
 
-If something is already subscribing to a Log Group that you want to monitor with the Datadog Lambda Function, you can add the ARN of the Forwarder to the ‘forwarder’ field in your serverless.yml file. When set, the plugin will try to subscribe the function’s CloudWatch log groups to the Forwarder. For example, your serverless.yml could now look like this:
+If something is already subscribing to a log group that you want to monitor with the Datadog Lambda Function, you can add the ARN of the Forwarder to the ‘forwarder’ field in your serverless.yml file. When set, the plugin will try to subscribe the function’s CloudWatch log groups to the Forwarder. For example, your serverless.yml could now look like this:
 
 ```bash
 custom:
@@ -185,9 +185,9 @@ If something is already subscribing to a Log Group that you want to monitor with
 
 If your logs still aren’t appearing in Datadog, you can [follow the troubleshooting steps here][9].  
 
-## Triage your Lambda Errors in the Log Explorer
+## Triage your Lambda errors in the log explorer
 
-Visit the Datadog Serverless view to view all of the Lambda functions. Navigate to a specific function to see the logs being emitted from the function. Then navigate to the Log Explorer to learn more about the log.
+Visit the Datadog Serverless view to view all of the Lambda functions. Navigate to a specific function to see the logs being emitted from the function. Then navigate to the log explorer to learn more about the log.
 
 {{< img src="serverless/guides/end-to-end_serverless_monitoring_database/guide_video_3-compressed.mp4" video="true" alt="Serverless Page Logs"  style="width:90%;">}}
 
@@ -195,9 +195,9 @@ You may be interested in knowing which errors are most frequently impacting your
 
 {{< img src="serverless/guides/end-to-end_serverless_monitoring_database/guide_video_4-compressed.mp4" video="true" alt="Log Patterns"  style="width:90%;">}}
 
-# Section 3: Root Cause Analysis for Lambda Functions
+# Section 3: Root cause analysis for Lambda functions
 
-## Enable Lambda Distributed Tracing
+## Enable Lambda distributed tracing
 
 In the first section, we set up the Datadog Forwarder and Lambda Layer to enable enhanced metrics. Both the Datadog Forwarder and Lambda Layer are also required to surface distributed traces from your functions in Datadog.
 
@@ -250,7 +250,7 @@ To instrument your Node libraries and customize your traces, consult the [Datado
 {{% /tab %}}
 {{% /tabs %}}
 
-## Root Cause Analysis using Traces, Metrics and Logs
+## Root cause analysis using traces, metrics, and logs
 
 View the Datadog Serverless page to see the Lambda functions. Navigate to a specific function to see the traces being emitted from the function. Expand each trace to view a flame graph of the duration of the total request across Lambda functions, and correlated logs and Lambda metrics at the time of the request.
 
@@ -262,9 +262,9 @@ Use the traces surfaced in the flame graph to identify that the current Lambda f
 
 With logs, traces, and enhanced metrics all in one place, we are able to efficiently identify the root cause of an issue across our serverless requests.
 
-# Section 4: Serverless Integrations & Custom Metrics
+# Section 4: Serverless integrations and custom metrics
 
-## Datadog’s Serverless Integrations
+## Datadog’s serverless integrations
 
 As outlined in Datadog’s [State of Serverless report][10], monitoring health across your serverless ecosystem requires visibility over more than just your Lambda functions. Most notably, Lambda functions will often interact with SQS and DynamoDB in the same request. Datadog offers integrations and dashboards with all the services interacting with your Lambda functions.
 
@@ -276,7 +276,7 @@ For example, Datadog has a [DynamoDB integration][11] which collects DynamoDB ta
 
 You can customize any of the default dashboards offered by the above integrations by pulling information from different services all into the same dashboard.
 
-## Submit Custom Metrics
+## Submit custom metrics
 
 Custom metrics give additional insights into use cases that are unique to your application workflows, such as a user logging into your application, purchasing an item, or updating a user profile.
 

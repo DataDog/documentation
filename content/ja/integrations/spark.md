@@ -172,13 +172,18 @@ Agent が Spark インスタンスの ResourceManager に接続できない場�
 
 ### AWS EMR 上の Spark
 
-AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][9] をインストールし、[各 EMR ノードに正しい値が指定][10]された `/etc/dd-agent/conf.d/spark.yaml` 構成ファイルを作成します。
+AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][10] をインストールします。
+
+Agent v5 の場合は、[各 EMR ノードに正しい値が指定][9]された `/etc/dd-agent/conf.d/spark.yaml` 構成ファイルを作成します。
+
+Agent v6/7 の場合は、[各 EMR ノードに正しい値が指定][11]された `/etc/datadog-agent/conf.d/spark.d/conf.yaml` 構成ファイルを作成します。
+
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した Hadoop と Spark の監視][11]
+- [Datadog を使用した Hadoop と Spark の監視][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/spark/images/sparkgraph.png
@@ -189,6 +194,5 @@ AWS EMR 上の Spark のメトリクスを受信するには、[ブートスト�
 [6]: 
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
-[9]: https://docs.datadoghq.com/ja/agent/
-[10]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
-[11]: https://www.datadoghq.com/blog/monitoring-spark
+[9]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
+[10]: https://www.datadoghq.com/blog/monitoring-spark

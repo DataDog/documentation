@@ -1,51 +1,7 @@
 {
-  "aws-integration": {
-    "name": "AWS Integration",
-    "description": "[See API version 1](/api/v1/aws-integration/)."
-  },
-  "aws-logs-integration": {
-    "name": "AWS Logs Integration",
-    "description": "[See API version 1](/api/v1/aws-logs-integration/)."
-  },
-  "authentication": {
-    "name": "Authentication",
-    "description": "All requests to Datadog’s API must be authenticated.\nRequests that write data require reporting access and require an `API key`.\nRequests that read data require full access and also require an `application key`.\n\n**Note:** All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly when creating your client.\n\n[Manage your account’s API and application keys](https://app.datadoghq.com/account/settings#api).\n\n## Validate API key\n\n[See API version 1](/api/v1/authentication/#validate-api-key)."
-  },
-  "azure-integration": {
-    "name": "Azure Integration",
-    "description": "[See API version 1](/api/v1/azure-integration/)."
-  },
   "dashboard-lists": {
     "name": "Dashboard Lists",
-    "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization. Note that you can add API v1 Dashboards to Dashboard Lists\nthat you create with API v2."
-  },
-  "dashboards": {
-    "name": "Dashboards",
-    "description": "[See API version 1](/api/v1/dashboards/)."
-  },
-  "downtimes": {
-    "name": "Downtimes",
-    "description": "[See API version 1](/api/v1/downtimes/)."
-  },
-  "embeddable-graphs": {
-    "name": "Embeddable Graphs",
-    "description": "[See API version 1](/api/v1/embeddable-graphs/)."
-  },
-  "events": {
-    "name": "Events",
-    "description": "[See API version 1](/api/v1/events/)."
-  },
-  "gcp-integration": {
-    "name": "GCP Integration",
-    "description": "[See API version 1](/api/v1/gcp-integration/)."
-  },
-  "hosts": {
-    "name": "Hosts",
-    "description": "[See API version 1](/api/v1/hosts/)."
-  },
-  "ip-ranges": {
-    "name": "IP Ranges",
-    "description": "[See API version 1](/api/v1/ip-ranges/)."
+    "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
   "incident-services": {
     "name": "Incident Services",
@@ -65,23 +21,15 @@
   },
   "logs": {
     "name": "Logs",
-    "description": "Search your logs in the Datadog platform over HTTP.\n\n[See API version 1](/api/v1/logs/) for sending logs."
+    "description": "Search your logs and send them to your Datadog platform over HTTP."
   },
   "logs-archives": {
     "name": "Logs Archives",
     "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in our UI."
   },
-  "logs-indexes": {
-    "name": "Logs Indexes",
-    "description": "[See API version 1](/api/v1/logs-indexes/)."
-  },
   "logs-metrics": {
     "name": "Logs Metrics",
     "description": "Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics) for your organization."
-  },
-  "logs-pipelines": {
-    "name": "Logs Pipelines",
-    "description": "[See API version 1](/api/v1/logs-pipelines/)."
   },
   "logs-restriction-queries": {
     "name": "Logs Restriction Queries",
@@ -89,19 +37,7 @@
   },
   "metrics": {
     "name": "Metrics",
-    "description": "[See API version 1](/api/v1/metrics/)."
-  },
-  "monitors": {
-    "name": "Monitors",
-    "description": "[See API version 1](/api/v1/monitors/)."
-  },
-  "organizations": {
-    "name": "Organizations",
-    "description": "[See API version 1](/api/v1/organizations/)."
-  },
-  "pagerduty-integration": {
-    "name": "PagerDuty Integration",
-    "description": "[See API version 1](/api/v1/pagerduty-integration/)."
+    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nDatadog has a soft limit of 100 timeseries per host\nwhere a timeseries is defined as a unique combination of metric name and tag.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
   },
   "processes": {
     "name": "Processes",
@@ -111,60 +47,12 @@
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
   },
-  "screenboards": {
-    "name": "Screenboards",
-    "description": "[See API version 1](/api/v1/screenboards/)."
-  },
   "security-monitoring": {
     "name": "Security Monitoring",
     "description": "Detection rules for generating signals and listing of generated\nsignals."
   },
-  "service-checks": {
-    "name": "Service Checks",
-    "description": "[See API version 1](/api/v1/service-checks/)."
-  },
-  "service-dependencies": {
-    "name": "Service Dependencies",
-    "description": "[See API version 1](/api/v1/service-dependencies/)."
-  },
-  "service-level-objectives": {
-    "name": "Service Level Objectives",
-    "description": "[See API version 1](/api/v1/service-level-objectives/)."
-  },
-  "slack-integration": {
-    "name": "Slack Integration",
-    "description": "[See API version 1](/api/v1/slack-integration/)."
-  },
-  "snapshots": {
-    "name": "Snapshots",
-    "description": "[See API version 1](/api/v1/snapshots/)."
-  },
-  "synthetics": {
-    "name": "Synthetics",
-    "description": "[See API version 1](/api/v1/synthetics/)."
-  },
-  "tags": {
-    "name": "Tags",
-    "description": "[See API version 1](/api/v1/tags/)."
-  },
-  "timeboards": {
-    "name": "Timeboards",
-    "description": "[See API version 1](/api/v1/timeboards/)."
-  },
-  "tracing": {
-    "name": "Tracing",
-    "description": "[See API version 1](/api/v1/tracing/)."
-  },
-  "usage-metering": {
-    "name": "Usage Metering",
-    "description": "[See API version 1](/api/v1/usage-metering/)."
-  },
   "users": {
     "name": "Users",
     "description": "Create, edit, and disable users."
-  },
-  "webhooks-integration": {
-    "name": "Webhooks Integration",
-    "description": "[See API version 1](/api/v1/webhooks-integration/)."
   }
 }

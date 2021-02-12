@@ -79,7 +79,7 @@ Les tests HTTP peuvent être exécutés :
 
 * **Selon un programme**, pour vous assurer que vos utilisateurs peuvent toujours accéder à vos principaux endpoints. Sélectionnez la fréquence à laquelle vous souhaitez que Datadog exécute votre test HTTP.
 
-{{< img src="synthetics/api_tests/schedule.png" alt="Exécuter des tests HTTP selon un programme"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/schedule.png" alt="Exécuter des tests API selon un programme"  style="width:90%;" >}}
 
 * [**Dans vos pipelines de CI/CD**][3], pour déployer votre code sans crainte de dégrader l'expérience de vos utilisateurs.
 * **À la demande**, afin d'exécuter les tests au moment le plus opportun pour vos équipes.
@@ -97,7 +97,7 @@ Les assertions définissent un résultat de test escompté. Lorsque vous cliquez
 
 **Remarque** : les tests HTTP peuvent décompresser les corps de réponse contenant les en-têtes `content-encoding` suivants : `br`, `deflate`, `gzip` et `identity`.
 
-Vous pouvez créer jusqu'à 10 assertions par test HTTP en cliquant sur **New assertion** ou directement sur l'aperçu de la réponse :
+Vous pouvez créer jusqu'à 10 assertions par test API en cliquant sur **New assertion** ou directement sur l'aperçu de la réponse :
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Définir les assertions pour votre test HTTP" style="width:90%;" >}}
 
@@ -161,7 +161,7 @@ Vous pouvez créer des variables locales en définissant leurs valeurs sur l'un 
 Les [variables globales définies sur la page `Settings`][15] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests HTTP.
 Pour afficher la liste de vos variables, saisissez `{{` dans le champ souhaité :
 
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="Utiliser des variables dans les tests HTTP" video="true" width="90%" >}}
+{{< img src="synthetics/api_tests/use_variable.mp4" alt="Utiliser des variables dans les tests API" video="true" width="90%" >}}
 
 ## Échec de test
 

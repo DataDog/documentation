@@ -36,7 +36,7 @@ If you haven't already, create a [Datadog account][2].
 - [Create a browser test][4]
 - [Create an API test][5]
 
-## Next Steps
+## Next steps
 
 {{< whatsnext desc="After you set up your first Synthetic test:">}}
 {{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}Learn more about browser tests{{< /nextlink >}}

@@ -1,7 +1,7 @@
 ---
 title: インシデント管理
 kind: ドキュメント
-disable_toc: true
+disable_sidebar: true
 description: インシデントの作成と管理
 ---
 {{< img src="monitors/incidents/incidents-top-1.png" alt="インシデント管理"  style="width:80%;">}}

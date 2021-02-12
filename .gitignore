@@ -53,6 +53,9 @@ data/integrations/
 !content/en/integrations/apigee.md
 !content/en/integrations/snyk.md
 
+# Ignore the marketplace images that get pulled
+static/images/marketplace
+
 # security rules
 content/en/security_monitoring/default_rules/*.md
 !content/en/security_monitoring/default_rules/_index.md
@@ -154,5 +157,13 @@ Temporary Items
 /hugpython/
 .python-version
 
+# python Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+
 /DataDog-dogweb-*/
 Makefile.config
+data/permissions.json
+
+static/images/integrations_logos/2020w2.pdf
+

@@ -36,7 +36,7 @@ To apply a processing rule to all logs collected by a Datadog Agent, see the [Gl
 
 To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
 
-### exclude_at_match
+### Exclude at match
 
 | Parameter          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
@@ -122,7 +122,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### include_at_match
+### Include at match
 
 | Parameter          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
@@ -398,6 +398,8 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em></div>
+
 More examples:
 
 | **Raw string**           | **Pattern**                                   |
@@ -407,10 +409,9 @@ More examples:
 | Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
 | 20180228                 | `\d{8}`                                       |
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
-**Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
-
-## Commonly Used Log Processing Rules
+## Commonly used log processing rules
 
 See the dedicated [Commonly Used Log Processing Rules FAQ][1] to see a list of examples.
 

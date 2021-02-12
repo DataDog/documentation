@@ -68,7 +68,7 @@ Each query or formula can be aliased. The alias overrides the display on the gra
 
 {{< img src="dashboards/querying/metric_alias.png" alt="metric alias"  style="width:75%;" >}}
 
-##### Event Overlay
+##### Event overlay
 
 Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][6], for example:
 

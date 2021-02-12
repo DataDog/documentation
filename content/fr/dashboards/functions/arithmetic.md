@@ -20,7 +20,7 @@ en la fonction `abs(sin{*})` :
 
 ## Opérations logarithmiques
 
-### log2
+### Logarithme binaire
 
 | Fonction | Description                               | Exemple                  |
 | :----    | :-------                                  | :---------               |
@@ -32,7 +32,7 @@ Si vous avez une métrique `x{*}` qui s'incrémente de 1 pour chaque point de do
 
 {{< img src="dashboards/functions/arithmetic/log2.png" alt="fonction log2" style="width:80%;">}}
 
-### log10
+### Logarithme décimal
 
 | Fonction  | Description                                | Exemple                   |
 | :----     | :-------                                   | :---------                |
@@ -69,12 +69,13 @@ Si vous avez une métrique `const_1{*}` qui est une constante de valeur `1`, alo
 ## Autres fonctions
 
 {{< whatsnext desc="Consultez les autres fonctions disponibles :" >}}
-    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmes : mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/count" >}}Total : comptez les valeurs différentes de zéro ou de null de votre métrique. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion : excluez certaines valeurs de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut pour votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}Taux : calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/regression" >}}Régression : appliquez une fonction d'apprentissage automatique sur votre métrique.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/regression" >}}Régression : appliquez une fonction d'apprentissage automatique à votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rollup" >}}Cumul : contrôlez le nombre de points bruts utilisés dans votre métrique. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/smoothing" >}}Lissage : lissez les variations de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}

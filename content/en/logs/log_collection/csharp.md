@@ -16,7 +16,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
@@ -51,10 +51,10 @@ var log = new LoggerConfiguration()  // using Serilog;
 
     // using Serilog.Formatting.Json;
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
-    
+
     // using Serilog.Formatting.Compact;
     // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
-    
+
     .CreateLogger();
 
 // An example

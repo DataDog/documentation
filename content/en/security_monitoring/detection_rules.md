@@ -61,7 +61,7 @@ Additional cases can be added by clicking the **Add Case** button.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`. 
 
-### Security Signal Message
+### Security signal message
 
 The notification box has the same Markdown and preview features as those of [monitor notifications][4].
 
@@ -97,7 +97,7 @@ The [Security Configuration Detection Rules][5] page lets you search of all Dete
 
 The free text search filters Detection Rules by text in the rule name or query. Query results update in real time when the query is edited—there is no “Search” button to click.
 
-### Detection Rules Table
+### Detection rules table
 
 {{< img src="security_monitoring/detection_rules/rules_table2.png" alt="Detection Rules Table"  >}}
 

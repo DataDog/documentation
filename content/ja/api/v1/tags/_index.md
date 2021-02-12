@@ -1,3 +1,4 @@
 ---
 title: タグ
+headless: true
 ---

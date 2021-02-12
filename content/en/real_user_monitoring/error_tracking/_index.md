@@ -19,7 +19,7 @@ further_reading:
 
 {{< img src="real_user_monitoring/error_tracking/page.png" alt="Error Tracking Page"  >}}
 
-## What is Error Tracking?
+## What is error tracking?
 
 Datadog collects a lot of errors. It's critical to the health of your system to monitor these errors, but there can be so many individual error events that it’s hard to identify which ones matter the most and should be fixed first. 
 
@@ -37,6 +37,10 @@ To quickly get started with error tracking:
 
 1. Download the latest version of the [RUM Browser SDK][3].
 2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][4].
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">The Datadog for Government site does not support sending alerts for new error tracking issues.</div>
+{{< /site-region >}}
 
 ### Upload mapping files
 

@@ -12,11 +12,11 @@ kind: documentation
 
 **Note:** One profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled. For instance, a DNS service container that is NOT profiled, running concurrently with your application container that IS profiled, will not be counted towards the four profiler containers allotment.
 
-## Sample Deployment Scenarios
+## Deployment scenarios
 
 These sample cases demonstrate common use cases using annual billing rates. Contact Sales or your [Customer Success Manager][3] to discuss volume discounts for your account.
 
-### Case 1: Hosts with no Containers
+### Hosts with no containers
 
 Using five hosts running one application being profiled in each host. No containers.  
 
@@ -27,7 +27,7 @@ Using five hosts running one application being profiled in each host. No contain
 | Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
-### Case 2: Hosts with four Profiled Containers
+### Hosts with four profiled containers
 
 Using five hosts with four profiled containers each. A profiled container is a container that is running the Continuous Profiler service by sending profiling data from the container to the Datadog Agent. This does not include containers that are not being profiled.
 
@@ -38,7 +38,7 @@ Using five hosts with four profiled containers each. A profiled container is a c
 | Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
-### Case 3: Hosts with 6 Profiled Containers
+### Hosts with six profiled containers
 
 Using five hosts with six profiled containers per each host. A profiled container is a container that is running the Continuous Profiler service by sending profiling data from the container to the Datadog Agent. This does not include containers that are not being profiled.
 
@@ -49,7 +49,7 @@ Using five hosts with six profiled containers per each host. A profiled containe
 | Total          |            |                                                                                                 | $60 + $20      | **$80 per month**    |
 
 
-### Case 4: Hosts with 5 Containers but only 2 are Profiled
+### Hosts with five containers but only two are profiled
 
 Using four hosts with five containers per host but only two of them are profiled containers . A profiled container is a container that is running the Continuous Profiler service by sending profiling data from the container to the Datadog Agent. This does not include containers that are not being profiled.
 
@@ -60,7 +60,7 @@ Using four hosts with five containers per host but only two of them are profiled
 | Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
-### Case 5: Hosts with Varying Numbers of Profiled Containers
+### Hosts with varying numbers of profiled containers
 
 Using two profiled hosts - Host A and Host B.
 
@@ -79,7 +79,7 @@ In this scenario, we aggregate all containers across all hosts (so two hosts, 10
 | Total          |            |                                                                                                 | $24 + $4      | **$28 per month**    |
 
 
-## FAQs
+## FAQ
 **1. What is classified as a Continuous Profiler host for billing?**
 
 A host is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing a Continuous Profiler, the number of hosts with a Profiler library installed and sending profiles are calculated every hour. These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).

@@ -5,7 +5,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/processing/"
@@ -122,7 +122,7 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-For AWS CloudFormation users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below. 
+For AWS CloudFormation users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below.
 
 The sample code also work for AWS [SAM][2] and [Serverless Framework][3]. For Serverless Framework, put the code under the [resources][4] section within your `serverless.yml`.
 
@@ -156,10 +156,10 @@ If you are collecting logs from an S3 bucket, configure the trigger to the [Data
 1. Once the Lambda function is installed, manually add a trigger on the S3 bucket that contains your logs in the AWS console:
   {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" popup="true"style="width:80%;">}}
 
-1. Select the bucket and then follow the AWS instructions:
+2. Select the bucket and then follow the AWS instructions:
   {{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" popup="true" style="width:80%;">}}
 
-1. Set the correct event type on S3 buckets:
+3. Set the correct event type on S3 buckets:
   {{< img src="logs/aws/object_created.png" alt="Object Created" popup="true" style="width:80%;">}}
 
 Once done, go into your [Datadog Log section][1] to start exploring your logs!

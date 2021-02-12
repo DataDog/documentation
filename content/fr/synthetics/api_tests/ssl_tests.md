@@ -46,7 +46,7 @@ Les tests SSL peuvent être exécutés :
 
 * **Selon un programme**, pour vous assurer que vos certificats SSL/TLS sont toujours valides et que vos utilisateurs peuvent toujours se connecter de façon sécurisée à vos principaux services. Sélectionnez la fréquence à laquelle vous souhaitez que Datadog exécute votre test SSL.
 
-{{< img src="synthetics/api_tests/schedule.png" alt="Exécuter des tests SSL selon un programme"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/schedule.png" alt="Exécuter des tests API selon un programme"  style="width:90%;" >}}
 
 * [**Dans vos pipelines de CI/CD**][8].
 * **À la demande**, afin d'exécuter les tests au moment le plus opportun pour vos équipes.
@@ -62,7 +62,7 @@ Les assertions définissent un résultat de test escompté. Lorsque vous cliquez
 | response time | `is less than`                                                                         | _Nombre entier (ms)_             |
 | TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Nombre décimal_                  |
 
-Vous pouvez créer jusqu'à 10 assertions par test SSL en cliquant sur **New assertion** ou directement sur l'aperçu de la réponse :
+Vous pouvez créer jusqu'à 10 assertions par test API en cliquant sur **New assertion** ou directement sur l'aperçu de la réponse :
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Définir les assertions pour votre test SSL" style="width:90%;" >}}
 
@@ -103,7 +103,7 @@ Votre test envoie une notification selon les [conditions d'alerte](#definir-des-
 Les notifications par e-mail incluent le message défini dans cette section ainsi qu'un résumé des assertions qui ont échoué.
 Exemples de notification :
 
-{{< img src="synthetics/api_tests/notifications-example.png" alt="Notifications de test SSL" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/notifications-example.png" alt="Notifications de test API" style="width:90%;" >}}
 
 Cliquez sur **Save** pour enregistrer votre test. Datadog se charge alors de son exécution.
 
@@ -126,7 +126,7 @@ Vous pouvez créer des variables locales en définissant leurs valeurs sur l'un 
 Les [variables globales définies sur la page `Settings`][14] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests SSL.
 Pour afficher la liste de vos variables, saisissez `{{` dans le champ souhaité :
 
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="Utiliser des variables dans les tests SSL" video="true" width="90%" >}}
+{{< img src="synthetics/api_tests/use_variable.mp4" alt="Utiliser des variables dans les tests API" video="true" width="90%" >}}
 
 ## Échec de test
 

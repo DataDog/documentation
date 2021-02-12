@@ -14,7 +14,7 @@ The Datadog Clipboard is a cross-platform tool for collecting and sharing signal
 
 {{< img src="monitors/incidents/clipboard-full.png" alt="The main clipboard">}}
 
-## Cross-Page Exploration
+## Cross-page exploration
 
 The Clipboard works on all pages in Datadog and keeps a record of all graphs copied by an individual user. The Clipboard does not automatically copy query text, event JSON, or other text-based content. 
 
@@ -28,7 +28,7 @@ Or, click “`Cmd/Ctrl + Shift + X` to open” on the minimized Clipboard.
 
 The Clipboard can also be opened and closed using `Cmd/Ctrl + Shift + X`. To minimize the Clipboard, click the Minimize icon. The minimized Clipboard persists on all pages of Datadog.
 
-## Adding Clips
+## Adding clips
 
 To add a graph, copy it with `Cmd/Ctrl + C` or click “Copy” in the export menu. Once the Clipboard is open, copied graphs get added automatically. 
 
@@ -36,7 +36,7 @@ To add a URL, open the Clipboard and click “Add Current URL.”
 
 {{< img src="monitors/incidents/add-dashboard.png" alt="Add a dashboard to the Clipboard"  style="width:80%;">}}
 
-## Managing Clips
+## Managing clips
 
 Each item in the Clipboard can be opened, cloned, or deleted; these options are available when you hover over any signal. Opening an item navigates to the link of the original signal. Open the source of any graph (like the dashboard it was clipped from) by clicking the title at the bottom of the item.
 

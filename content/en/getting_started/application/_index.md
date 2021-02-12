@@ -40,18 +40,18 @@ This page gives a high level overview of the capabilities for the [Datadog site]
 - You can see the tags applied to each machine. Tagging allows you to indicate which machines have a particular purpose.
 - Datadog attempts to automatically categorize your servers. If a new machine is tagged, you can immediately see the stats for that machine based on what was previously set up for that tag. [Read more on tagging][8].
 
-## Host Map
+## Host map
 
 {{< img src="getting_started/hostmap-overview.png" alt="hostmap overview"  >}}
 
-[The Host Map][9] can be found under the Infrastructure menu. It offers the ability to:
+The [host map][9] can be found under the Infrastructure menu. It offers the ability to:
 
 - Quickly visualize your environment
 - Identify outliers
 - Detect usage patterns
 - Optimize resources
 
-To learn more about the Host Map, visit the [Host Map dedicated documentation page][9].
+To learn more about the host map, visit the [host map documentation][9].
 
 ## Events
 
@@ -145,7 +145,7 @@ Datadog [Security Monitoring][23] automatically detects threats to your applicat
 [17]: /dashboards/functions/
 [18]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
 [19]: /monitors/
-[20]: /network_performance_monitoring/
+[20]: /network_monitoring/performance
 [21]: /real_user_monitoring/
 [22]: /infrastructure/serverless/
 [23]: /security_monitoring/

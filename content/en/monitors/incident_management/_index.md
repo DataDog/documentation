@@ -4,6 +4,10 @@ kind: documentation
 description: Create and manage incidents
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
+{{< /site-region >}}
+
 Any event that may lead to a disruption in your organization’s services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog’s Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
 
 Incidents live in Datadog alongside the metrics, traces, and logs you are collecting. You can view and filter incidents that are relevant to you.
@@ -129,19 +133,19 @@ Assessment fields are the metadata and context that you can define per incident.
 
 ## Example workflow
 
-### 1. Discover an issue
+### Discover an issue
 
 Consider a scenario in which you are looking at a dashboard, and you notice that one particular service is showing an especially high error count. Using the Export button in the upper right of a widget, you can declare an incident.
 
 {{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph"  style="width:80%;">}}
 
-### 2. Declare an incident and assemble your team
+### Declare an incident and assemble your team
 
 Use the New Incident modal to assemble your team and notify them. The graph from which you created the incident is automatically attached as a signal. Attach any other signals that would give your team the necessary context to begin resolving this issue. The Slack and PagerDuty integrations enable you to send notifications through those services.
 
 {{< img src="monitors/incidents/workflow-2-modal-1.png" alt="New Incident"  style="width:60%;">}}
 
-### 3. Communicate and begin troubleshooting
+### Communicate and begin troubleshooting
 
 If you have the [Datadog Slack app][3] installed, the Slack integration can automatically create a new channel dedicated to the incident, so you can consolidate communication with your team and begin troubleshooting.
 
@@ -149,7 +153,7 @@ For non-EU customers who use Slack, [sign up for beta access][6] to the Datadog 
 
 {{< img src="monitors/incidents/workflow-3-slack-1-1.png" alt="Communicate"  style="width:80%;">}}
 
-### 4. Update the incident and generate a postmortem
+### Update the incident and generate a postmortem
 
 Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed. There is an optional fourth status, `Completed`, that can be used to track if all remediation steps are complete. This status can be enabled in [Incident Settings][2].
 
@@ -169,7 +173,7 @@ Once an incident is moved to resolved, you will be able to generate a postmortem
 
 {{< img src="monitors/incidents/postmortem.png" alt="Automatically generate a postmortem" style="width:80%;">}}
 
-### 5. Follow up and learn from the incident
+### Follow up and learn from the incident
 
 Create mitigation or post-incident remediation tasks. You can track any of your tasks here by adding tasks in the text field, setting a due date, and assigning a team member. You can complete them by checking off the box when they are done.
 

@@ -41,6 +41,10 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">AWS Role Delegation is not supported on the Datadog for Government site. Access keys must be used.</div>
+{{< /site-region >}}
+
 If not already configured, set up the [AWS integration][1] for the AWS account that holds your S3 bucket.
 
 * In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
@@ -316,7 +320,7 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
 
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
 

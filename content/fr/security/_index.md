@@ -2,16 +2,16 @@
 title: Catégories de données
 kind: documentation
 further_reading:
-  - link: security/tracing
+  - link: /security/tracing/
     tag: Documentation
     text: Sécurité de l'APM
-  - link: security/logs
+  - link: /security/logs/
     tag: Documentation
     text: Sécurité des logs
-  - link: security/agent
+  - link: /security/agent/
     tag: Documentation
     text: Sécurité de l'Agent
-  - link: security/other
+  - link: /security/other/
     tag: Documentation
     text: Considérations de sécurité supplémentaires
 ---
@@ -51,17 +51,17 @@ Les [événements][14] sont regroupés à partir de plusieurs sources au sein d'
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent
-[2]: /fr/api
-[3]: /fr/integrations
+[1]: /fr/agent/
+[2]: /fr/api/
+[3]: /fr/integrations/
 [4]: https://www.datadoghq.com/security
 [5]: https://www.datadoghq.com/legal/privacy
-[6]: /fr/tagging
-[7]: /fr/tracing/visualization
-[8]: /fr/security/tracing
-[9]: /fr/logs/log_collection
-[10]: /fr/security/logs
-[11]: /fr/infrastructure/process
-[12]: /fr/security/other
-[13]: /fr/monitors
-[14]: /fr/events
+[6]: /fr/getting_started/tagging/
+[7]: /fr/tracing/visualization/
+[8]: /fr/security/tracing/
+[9]: /fr/logs/log_collection/
+[10]: /fr/security/logs/
+[11]: /fr/infrastructure/process/
+[12]: /fr/security/other/
+[13]: /fr/monitors/
+[14]: /fr/events/

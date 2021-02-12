@@ -57,7 +57,7 @@ To set this up in your webhook, add the following to your **Headers** section:
 {"Authorization": "Basic <BASE64_ENCODED_CREDENTIALS>"}
 ```
 
-### Finishing Up
+### Finishing up
 
 In the Webhook integration tile, click **Install Integration** or **Update Configuration** (if you previously entered a webhook definition) to save your changes.
 
@@ -78,11 +78,11 @@ When your monitor triggers an alert, a new ticket appears in your Freshservice d
 
 ## Limitations
 
-### Ticket Creation
+### Ticket creation
 
 The Webhooks integration can only create tickets. Updating an existing ticket requires a `PUT` method and the Webhooks integration only supports `POST` methods.
 
-### Status and Priority
+### Status and priority
 
 The `$ALERT_STATUS` and `$PRIORITY` variables return strings (such as `ALERT` and `NORMAL`) instead of a numerical value expected by Freshservice’s API. To setup different levels of status and priorities, create duplicate webhooks with hard-coded status and priority fields. Then, `@-mention` those webhooks inside of related conditional statements, for example:
 

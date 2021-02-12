@@ -5,13 +5,13 @@ aliases:
   - /integrations/faq/producer-and-consumer-metrics-don-t-appear-in-my-datadog-application
 ---
 
-## What is Kafka ?
+## Overview
 
 "Kafka™ is used for building real-time data pipelines and streaming apps. It is horizontally scalable, fault-tolerant, wicked fast, and runs in production in thousands of companies." - [Official Kafka Site][1]
 
 Kafka is essentially a powerful, fast message brokering system used to transfer a payload/message from many applications to many applications. This is a Java based application that exposes metrics through mBeans.
 
-## Kafka Components:
+## Kafka components
 
 There are four main components to Kafka:
 
@@ -22,7 +22,7 @@ There are four main components to Kafka:
 
 [A more full dive into Kafka][2] as well as on [a Datadog Blogpost][3].
 
-## Datadog Kafka Integrations:
+## Datadog Kafka integrations
 
 It is important to note that Datadog has two distinct Kafka Integrations. The first is named [Kafka][4] while the second is [Kafka_Consumer][4].
 
@@ -30,7 +30,7 @@ The [Kafka Integration][4] uses [Datadog's JMXFetch][5] application to pull metr
 
 The [Kafka_Consumer Integration][6] collects metrics like our standard Python based checks. This uses an internal Zookeeper API. Zookeeper is an Apache application that is responsible for managing the configuration for the cluster of nodes known as the Kafka broker. (In version 0.9 of Kafka things are a bit different, Zookeeper is no longer required, see the Troubleshooting section for more information). This check picks up only three metrics, and these do not come from JMXFetch.
 
-## Troubleshooting:
+## Troubleshooting
 
 ### Older Agent versions
 

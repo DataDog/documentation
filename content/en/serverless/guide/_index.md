@@ -9,7 +9,7 @@ Use these guides to set up metrics, traces, and logs in your serverless ecosyste
 - Second, we’ll enable Lambda **logs ingestion** and show you how to navigate Lambda error logs. Third, we’ll demonstrate some tools for fast root cause analysis by enabling Lambda **distributed tracing**. 
 - Last, we’ll demonstrate how to monitor **custom metrics** and services across your serverless ecosystem.
 
-# Pick your Language
+# Pick your language
 
 {{< partial name="serverless/serverless-guide.html" >}}
   

@@ -101,7 +101,7 @@ For the example below, the top level spans are:
 
 ## Trace Metrics
 
-Trace metrics are automatically collected and kept at a 15-month retention policy similar to any other [Datadog metric][2]. They can be used to identify and alert on hits, errors, or latency. Trace metrics are tagged by the host receiving traces along with the service or resource. For example, after instrumenting a web service trace metrics are collected for the entry-point span `web.request` in the [Metric Summary][15].
+[Trace metrics][15] are automatically collected and kept at a 15-month retention policy similar to any other [Datadog metric][2]. They can be used to identify and alert on hits, errors, or latency. Trace metrics are tagged by the host receiving traces along with the service or resource. For example, after instrumenting a web service trace metrics are collected for the entry-point span `web.request` in the [Metric Summary][16].
 
 {{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="trace metrics" >}}
 
@@ -113,7 +113,7 @@ Trace metrics can be exported to a dashboard from the *Service* or *Resource* pa
 
 ### Monitoring
 
-Trace metrics are useful for monitoring. APM monitors can be set up on the [New Monitors][16], [Service][6], or [Resource][7] page. A set of suggested monitors is available on the [Service][6], or [Resource][7] page.
+Trace metrics are useful for monitoring. APM monitors can be set up on the [New Monitors][17], [Service][6], or [Resource][7] page. A set of suggested monitors is available on the [Service][6], or [Resource][7] page.
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="trace metrics monitor" >}}
 
@@ -139,21 +139,21 @@ Tag spans in the form of key-value pairs to correlate a request in the *Trace Vi
 
 To get started tagging spans in your application, check out this [walkthrough][12].
 
-After a tag has been added to a span, search and query on the tag in Analytics by clicking on the tag to add it as a [facet][17]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
+After a tag has been added to a span, search and query on the tag in Analytics by clicking on the tag to add it as a [facet][18]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:50%;">}}
 
 ## Retention Filters
 
-[Set tag-based filters][18] in the Datadog UI to index spans for 15 days for use with [Trace Search and Analytics](#trace-search-and-analytics)
+[Set tag-based filters][19] in the Datadog UI to index spans for 15 days for use with [Trace Search and Analytics](#trace-search-and-analytics)
 
 ## Ingestion Controls
 
-[Send 100% of traces][19] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
+[Send 100% of traces][20] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
 
 ## Sublayer Metric
 
-Some [Tracing Application Metrics][20] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution duration for individual services within a trace.
+Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution duration for individual services within a trace.
 
 ## Execution Duration
 
@@ -180,9 +180,9 @@ The active spans for a given time, for a given trace, are all of the leaf spans 
 [12]: /tracing/guide/adding_metadata_to_spans/
 [13]: /tracing/runtime_metrics/
 [14]: /tracing/trace_search_and_analytics/
-[15]: https://app.datadoghq.com/metric/summary
-[16]: https://app.datadoghq.com/monitors#/create
-[17]: /tracing/trace_search_and_analytics/query_syntax/#facets
-[18]: /tracing/trace_retention_and_ingestion/#retention-filters
-[19]: /tracing/trace_retention_and_ingestion/#ingestion-controls
-[20]: /tracing/guide/metrics_namespace/
+[15]: /tracing/guide/metrics_namespace/
+[16]: https://app.datadoghq.com/metric/summary
+[17]: https://app.datadoghq.com/monitors#/create
+[18]: /tracing/trace_search_and_analytics/query_syntax/#facets
+[19]: /tracing/trace_retention_and_ingestion/#retention-filters
+[20]: /tracing/trace_retention_and_ingestion/#ingestion-controls

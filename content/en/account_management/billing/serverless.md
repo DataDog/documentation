@@ -9,7 +9,7 @@ Purchase Serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog 
 
 **Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
-## Serverless Functions
+## Serverless functions
 
 Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded.
 
@@ -17,7 +17,7 @@ The billed number of functions is almost always significantly lower than the num
 
 For Serverless pricing information, see the infrastructure section in [Datadog's pricing page][1].
 
-## Tracking Usage
+## Tracking usage
 
 You can track the number of billable Serverless functions in your account by checking the [Datadog Usage Page][4]. You can see both the Month-To-Date summary, as well as usage over time.
 

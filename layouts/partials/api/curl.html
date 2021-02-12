@@ -1,16 +1,17 @@
 {{- $securitySchemes := .securitySchemes -}}
-{{- $pathParams := .dollarScratch.Get "pathParams" -}}
-{{- $queryStrings := .dollarScratch.Get "queryStrings" -}}
+{{- $dollarScratch := .dollarScratch }}
+{{- $endpoint := .endpoint }}
+{{- $parameters := partial "api/arguments-data.html" (dict "endpoint" $endpoint) -}}
 {{- $count := 0 -}}
 
-{{- with $pathParams -}}
+{{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
     {{- range . -}}
         <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span><br/>
     {{- end -}}
 {{- end -}}
 
-{{- with $queryStrings -}}
+{{- with $parameters.queryStrings -}}
     {{- $i := 0 -}}
     {{- range . -}}
         {{- if eq .required true -}}
@@ -33,15 +34,15 @@
 {{- end -}}
 
 <span class="c1"># Curl command</span>
-<span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ .context.actionType | upper }}</span> {{ range $region, $url := .dollarScratch.Get "regions" }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace .context.pathKey "{" "${" }}</span>
-{{- range $qi, $q := $queryStrings -}}
+<span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
+{{- range $qi, $q := $parameters.queryStrings -}}
     {{- if eq .required true -}}
         <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
     {{- end -}}
 {{- end -}}
 
 {{- /* Render authentication query parameters "?api_key=XXX" */ -}}
-{{- with .context.action.security -}}
+{{- with $endpoint.action.security -}}
     {{- $i := 0 -}}
     {{- range . -}}
         {{- range $key, $val := . -}}
@@ -60,9 +61,9 @@
 <span class="o">-H</span> <span class="s1">"Content-Type: {{ default "application/json" .contentType }}"</span>
 
 {{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
-{{- if isset .context.action "security" -}}
+{{- if isset $endpoint.action "security" -}}
     {{- /* Find authentication per operationId */ -}}
-    {{- range .context.action.security -}}
+    {{- range $endpoint.action.security -}}
         {{- range $key, $val := . -}}
             {{ $authSchema := (index $securitySchemes $key) }}
             {{- if eq $authSchema.in "header" -}}
@@ -79,7 +80,7 @@
 {{- end -}}
 
 {{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
-{{- if .context.action.requestBody -}}
+{{- if $endpoint.action.requestBody -}}
 &nbsp;\
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
 <span class="s1">{{ .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>

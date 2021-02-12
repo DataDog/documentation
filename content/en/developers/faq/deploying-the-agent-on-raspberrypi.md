@@ -38,9 +38,6 @@ nohup sh /root/.datadog-agent/bin/agent &
 You now see metrics being ingested from your Raspberry PI device:
 {{< img src="developers/faq/rasberry_dashboard.png" alt="raspberry_dashboard"   >}}
 
-Thank you to Karim Vaes for the [excellent blog post][2]!
-
 **Note**: Datadog does not officially support Raspbian.
 
 [1]: https://app.datadoghq.com/account/settings#agent/source
-[2]: https://kvaes.wordpress.com/2015/12/29/datadog-on-raspberry-pi

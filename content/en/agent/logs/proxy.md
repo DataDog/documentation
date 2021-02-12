@@ -67,7 +67,7 @@ The parameter above can also be set with the following environment variable:
 
 {{< tabs >}}
 {{% tab "HAProxy" %}}
-### Using HAProxy as a TCP Proxy for Logs
+### Using HAProxy as a TCP proxy for logs
 
 This example explains how to configure the Datadog Agent to send logs in TCP to a server with HAProxy installed and listening on port `10514` to then forward the logs to Datadog.
 

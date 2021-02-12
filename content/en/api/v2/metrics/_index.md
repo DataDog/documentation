@@ -1,3 +1,4 @@
 ---
 title: Metrics
+headless: true
 ---

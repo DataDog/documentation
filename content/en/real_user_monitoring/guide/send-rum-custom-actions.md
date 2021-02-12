@@ -12,7 +12,7 @@ aliases:
 
 Real User Monitoring [automatically collects actions][1] on your web application. You may also want to collect additional events and timings such as form completions and business transactions. With custom RUM actions, monitor any interesting event with all the relevant context attached. As an example throughout this guide, we collect user checkouts information from an e-commerce website.
 
-## 1. Instrument your code
+## Instrument your code
 To create a new RUM action, use the `addAction` API. Give your action a name and then attach context attributes in the form of a JavaScript object. In the following example, a `checkout` action is created with details about the user cart when the user clicks on the checkout button.
 
 ```javascript
@@ -26,7 +26,7 @@ function onCheckoutButtonClick(cart) {
 
 All RUM context will be automatically attached (current page view information, geoIP data, browser information, etc.) along with extra attributes provided with the [Global Context API][2].
 
-## 2. Create facets and measures on your new attributes
+## Create facets and measures on your new attributes
 Once you have deployed the code that creates your custom actions, you will start seeing actions appear in the [RUM Explorer][3], in the **Actions** tab.
 
 To easily filter on your new custom Actions, use the `Action Target Name` attribute as follow: `@action.target.name:<ACTION_NAME>`. In the example, we use the following filter: `@action.target.name:checkout`
@@ -37,7 +37,7 @@ Once you click on the action, all metadata is available in the side panel. You c
 
 **Note**: Use facets for distinctive values (IDs) and measures for quantitative values (timings, latency, etc.).
 
-## 3. Use your attributes in the Explorer, Dashboards and Monitors
+## Use your attributes in the explorer, dashboards, and monitors
 Now that facets and measures have been created, you can use your action attributes in RUM queries. This means you can build dashboards widgets, monitors and advanced queries in [RUM Explorer/Analytics][3].
 
 As an example, the following screenshot shows the average cart value per country for the last day. Using the dropdown menu on the top right corner, you can export this query as a dashboard widget or as a monitor.

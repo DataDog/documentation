@@ -136,7 +136,6 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 | `CONNRESET`       | 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。                                                                                                                                                                                                                                                         |
 | DNS               | テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤り、DNS エントリの構成の誤りなどの原因が考えられます。                                                                                                                                                                                                                                                                                                                  |
 | `INVALID_REQUEST` | テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][15]。                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。<br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、タイムアウトが TCP ソケットの接続レベルで発生したことを示します。<br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` は、タイムアウトがリクエストの実行全体 (TCP ソケット接続、データ転送、アサーション) で発生したことを示します。 |
 
 ## その他の参考資料
@@ -157,4 +156,3 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 [12]: https://www.markdownguide.org/basic-syntax/
 [13]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [14]: /ja/synthetics/settings/#global-variables
-[15]: /ja/synthetics/api_tests/errors/#ssl-errors

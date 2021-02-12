@@ -1,3 +1,4 @@
 ---
 title: Synthetics
+headless: true
 ---

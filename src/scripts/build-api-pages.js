@@ -14,47 +14,84 @@ const supportedLangs = ['en'];
  * @param {object} apiYaml - object with data
  * @param {string} apiVersion - string with version e.g v1
  */
-const updateMenu = (apiYaml, apiVersion, languages) => {
+const updateMenu = (specData, specs, languages) => {
 
   languages.forEach((language) => {
     const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/menus.${language}.yaml`, 'utf8'));
 
   // filter out auto generated menu items so we just have hardcoded ones
-  const newMenuArray = currentMenuYaml[`api_${apiVersion}`].filter((entry => !entry.hasOwnProperty("generated")));
+  const newMenuArray = (currentMenuYaml[`api`] || []).filter((entry => !entry.hasOwnProperty("generated")));
 
-  // now add back in all the auto generated menu items from specs
-  apiYaml.tags.forEach((tag) => {
+  specData.forEach((apiYaml, index) => {
+    const apiVersion = specs[index].split('/')[3];
+    // now add back in all the auto generated menu items from specs
+    apiYaml.tags.forEach((tag) => {
 
-    newMenuArray.push({
-      name: tag.name,
-      url: (language === 'en' ? `/api/${apiVersion}/${getTagSlug(tag.name)}/` : `/${language}/api/${apiVersion}/${getTagSlug(tag.name)}/` ),
-      identifier: tag.name,
-      generated: true
-    });
-
-    // just get this sections data
-    Object.keys(apiYaml.paths)
-      .filter((path) => isTagMatch(apiYaml.paths[path], tag.name))
-      .map((path) => Object.values(apiYaml.paths[path]))
-      .reduce((obj, item) => ([...obj, ...item]), [])
-      .forEach((action) => {
+      const existingMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === getTagSlug(tag.name));
+      if(existingMenuItemIndex > -1) {
+        // already exists
+        // newMenuArray[existingMenuItemIndex].params["versions"].push()
+      } else {
+        // doesn't exist lets add it
         newMenuArray.push({
-          name: action.summary,
-          parent: tag.name,
-          url: `#` + getTagSlug(action.summary),
+          name: tag.name,
+          url: (language === 'en' ? `/api/latest/${getTagSlug(tag.name)}/` : `/${language}/api/latest/${getTagSlug(tag.name)}/` ),
+          identifier: getTagSlug(tag.name),
           generated: true
         });
-    });
+      }
 
+      // just get this sections data
+      Object.keys(apiYaml.paths)
+        .filter((path) => isTagMatch(apiYaml.paths[path], tag.name))
+        .map((path) => Object.values(apiYaml.paths[path]))
+        .reduce((obj, item) => ([...obj, ...item]), [])
+        .forEach((action) => {
+
+          const existingSubMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === getTagSlug(action.summary));
+          if(existingSubMenuItemIndex > -1) {
+            // already exists
+            const existingParams = newMenuArray[existingSubMenuItemIndex].params;
+            if(!existingParams["versions"].includes(apiVersion)) {
+              newMenuArray[existingSubMenuItemIndex].params["versions"].push(apiVersion);
+            }
+            if(!existingParams["operationids"].includes(action.operationId)) {
+              newMenuArray[existingSubMenuItemIndex].params["operationids"].push(action.operationId);
+            }
+            if(!existingParams["unstable"].includes(apiVersion) && action.hasOwnProperty("x-unstable")) {
+              newMenuArray[existingSubMenuItemIndex].params["unstable"].push(apiVersion);
+            }
+          } else {
+            // instead of push we need to insert after last parent: tag.name
+            const indx = newMenuArray.findIndex((i) => i.identifier === getTagSlug(tag.name));
+            const item = {
+              name: action.summary,
+              url: `#` + getTagSlug(action.summary),
+              identifier: `${getTagSlug(action.summary)}`,
+              parent: getTagSlug(tag.name),
+              generated: true,
+              params: {
+                "versions": [apiVersion],
+                "operationids": [`${action.operationId}`],
+                "unstable": action.hasOwnProperty("x-unstable") ? [apiVersion] : []
+              }
+            };
+            newMenuArray.splice(indx + 1, 0, item);
+          }
+      });
+
+    });
   });
 
+
+
   // generate new yaml menu
-  currentMenuYaml[`api_${apiVersion}`] = newMenuArray;
+  currentMenuYaml[`api`] = newMenuArray;
   const newMenuYaml = yaml.dump(currentMenuYaml, {lineWidth: -1});
 
   // save new yaml menu
   fs.writeFileSync(`./config/_default/menus/menus.${language}.yaml`, newMenuYaml, 'utf8');
-  console.log(`successfully updated ${apiVersion} ./config/_default/menus/menus.${language}.yaml`);
+  console.log(`successfully updated ./config/_default/menus/menus.${language}.yaml`);
   })
 
 
@@ -74,13 +111,21 @@ const createPages = (apiYaml, deref, apiVersion) => {
     const newDirName = getTagSlug(tag.name);
     fs.mkdirSync(`./content/en/api/${apiVersion}/${newDirName}`, {recursive: true});
 
-    // make frontmatter
-    const indexFrontMatter = {title: tag.name};
+    // make version frontmatter
+    const baseFrontMatter = {title: tag.name};
+    const indexFrontMatter = {...baseFrontMatter, headless: true};
     let indexYamlStr = yaml.safeDump(indexFrontMatter);
     indexYamlStr = `---\n${indexYamlStr}---\n`;
 
     // build page
     fs.writeFileSync(`./content/en/api/${apiVersion}/${newDirName}/_index.md`, indexYamlStr, 'utf8');
+
+    // create a copy in /latest/
+    indexYamlStr = yaml.safeDump(baseFrontMatter);
+    indexYamlStr = `---\n${indexYamlStr}---\n`;
+    fs.mkdirSync(`./content/en/api/latest/${newDirName}`, {recursive: true});
+    fs.writeFileSync(`./content/en/api/latest/${newDirName}/_index.md`, indexYamlStr, 'utf8');
+
     console.log(`successfully wrote ./content/en/api/${apiVersion}/${newDirName}/_index.md`);
   });
 
@@ -596,7 +641,16 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
 const typeColumn = (key, value, readOnlyMarkup) => {
   const validKeys = ['type', 'format'];
   let typeVal = '';
-  const oneOfLabel = (typeof value === 'object' && "oneOf" in value) ? "&nbsp;&lt;oneOf&gt;" : "";
+  let oneOfLabel = "";
+  if(typeof value === 'object' && "oneOf" in value) {
+    // oneof label if properties -> oneOf
+    oneOfLabel = "&nbsp;&lt;oneOf&gt;";
+  } else if(value.type === 'array' && typeof value.items === 'object' && "oneOf" in value.items) {
+    // oneof label if items -> oneOf
+    oneOfLabel = "&nbsp;&lt;oneOf&gt;";
+  } else {
+    oneOfLabel = "";
+  }
   if(validKeys.includes(key) && (typeof value !== 'object')) {
     typeVal = value;
   } else if(value.enum) {
@@ -605,7 +659,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
       typeVal = (value.format || value.type || '');
     }
   if(value.type === 'array') {
-    return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
     return `<div class="col-2 column"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim();
@@ -675,6 +729,14 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               childData = value.items.properties;
               newRequiredFields = (value.items.required) ? value.items.required : newRequiredFields;
             }
+            // for items -> oneOf
+            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
+              childData = value.items.oneOf
+              .map((obj, indx) => {
+                return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
+              })
+              .reduce((obj, item) => ({...obj, ...item}), {});
+            }
           } else if(typeof value.items === 'string') {
             if(value.items === '[Circular]') {
               childData = null;
@@ -690,6 +752,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             newParentKey = "additionalProperties";
           }
         } else if (typeof value === 'object' && "oneOf" in value) {
+          // for properties -> oneOf
           if(value.oneOf instanceof Array && value.oneOf.length < 20) {
             childData = value.oneOf
               .map((obj, indx) => {
@@ -855,7 +918,7 @@ const processSpecs = (specs) => {
           const jsonStringStripEmptyTags = safeJsonStringify(derefStripEmptyTags, null, 2);
           fs.writeFileSync(`./static/resources/json/full_spec_${version}.json`, jsonStringStripEmptyTags, 'utf8');
 
-          updateMenu(fileData, version, supportedLangs);
+          //updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);
 
@@ -877,6 +940,10 @@ const processSpecs = (specs) => {
           process.exitCode = 1;
         })
     });
+
+  // update menu with all specs
+  const specData = specs.map((spec) => yaml.safeLoad(fs.readFileSync(spec, 'utf8')));
+  updateMenu(specData, specs, supportedLangs);
 };
 
 

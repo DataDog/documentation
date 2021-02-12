@@ -10,7 +10,7 @@ further_reading:
 If you are using [Content Security Policy (CSP)][1] on your websites, add the following URLs to your existing directives depending on how you setup your Real User Monitoring or browser log collection:
 
 
-## CDN async Setup
+## CDN async setup
 
 If you have the CDN async setup for [Real User Monitoring][2] or [browser log collection][3]:
 
@@ -39,7 +39,7 @@ connect-src https://*.logs.datadoghq.eu
     script-src https://www.datadoghq-browser-agent.com
     ```
 
-## CDN sync Setup
+## CDN sync setup
 
 If you have the CDN sync setup for [Real User Monitoring][4] or [browser log collection][5]:
 
@@ -68,7 +68,7 @@ connect-src https://*.logs.datadoghq.eu
     script-src https://www.datadoghq-browser-agent.com
     ```
 
-## NPM Setup
+## NPM setup
 
 If you have the NPM setup for [Real User Monitoring][6] or [browser log collection][7], add only the `connect-src` directive:
 

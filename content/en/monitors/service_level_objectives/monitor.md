@@ -48,7 +48,7 @@ While the SLO remains above the target percentage, the SLO's status will be disp
 
 Here you can add contextual information about the purpose of the SLO, including any related information or resources in the description and tags you would like to associate with the SLO.
 
-## Overall Status Calculation
+## Overall status calculation
 
 {{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation"  >}}
 
@@ -65,7 +65,7 @@ Consider the following example for 3 monitors (this is also applicable to a moni
 
 This can result in the overall status being lower than the average of the individual statuses.
 
-### Exceptions for Synthetic Tests
+### Exceptions for synthetic tests
 In certain cases, there is an exception to the status calculation for monitor-based SLOs that are comprised of one grouped Synthetic test. Synthetic tests have optional special alerting conditions that change the behavior of when the test enters the ALERT state and consequently impact the overall uptime:
 
 - Wait until the groups are failing for a specified number of minutes (default: 0)
