@@ -31,10 +31,12 @@ const { algoliaConfig } = getConfig();
 
 let algoliaTimer;
 
+const isApiPage = () => document.body.classList.value.includes('api');
+
 const searchDesktop = docsearch({
     appId: algoliaConfig.appId,
     apiKey: algoliaConfig.apiKey,
-    indexName: algoliaConfig.index,
+    indexName: isApiPage() ? algoliaConfig.api_index : algoliaConfig.index,
     inputSelector: '.docssearch-input',
     algoliaOptions: {
         facetFilters: [`language:${lang}`]
