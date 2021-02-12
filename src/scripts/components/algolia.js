@@ -33,6 +33,17 @@ let algoliaTimer;
 
 const isApiPage = () => document.body.classList.value.includes('api');
 
+const handleApiResultStyleUpdates = () => {
+    const headers = document.querySelectorAll('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
+
+    headers.forEach(header => {
+        if (header.textContent.toLowerCase().includes('api latest')) {
+            header.style.fontWeight = '800';
+            header.style.color = '#632ca6';
+        }
+    })
+}
+
 const searchDesktop = docsearch({
     appId: algoliaConfig.appId,
     apiKey: algoliaConfig.apiKey,
@@ -97,6 +108,12 @@ if (searchBtn) {
         }
     });
 }
+
+searchDesktop.autocomplete.on('autocomplete:shown', function() {
+    if (isApiPage()) {
+        handleApiResultStyleUpdates();
+    }
+})
 
 searchDesktop.autocomplete.on('autocomplete:closed', function(e) {
     if ($('.algolia-docsearch-suggestion').length > 0) {
