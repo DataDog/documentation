@@ -398,7 +398,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Very important note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line. *A never matching pattern may cause log line losses*.
+<div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em></div>
 
 More examples:
 
