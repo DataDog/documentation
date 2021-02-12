@@ -3,7 +3,7 @@
     {
       "name": "datadog-agent",
       "image": "datadog/agent:latest",
-      "cpu": 100,
+      "cpu": 512,
       "memory": 512,
       "essential": true,
       "mountPoints": [
