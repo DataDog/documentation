@@ -453,7 +453,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 The Agent v7.26.0+/6.26.0+ can directly collect logs from a file based on an annotation. To collect these logs, use the `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a file type configuration. Logs collected from file with such an annotation will automatically be tagged with same set of tags that logs coming from the container itself.
 
-So to collect logs from `/logs/app/prod.log` from a container named `webapp` inside a Kubernetes pod, the pod definition would have to be:
+For example, to collect logs from `/logs/app/prod.log` from a container named `webapp` inside a Kubernetes pod, the pod definition would be:
 
 ```yaml
 apiVersion: v1
