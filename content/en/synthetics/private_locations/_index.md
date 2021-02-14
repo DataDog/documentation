@@ -168,7 +168,7 @@ docker-compose -f docker-compose.yml up
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes Deployment" %}}
 
 1. Create a Kubernetes ConfigMap with the previously created JSON file by executing the following:
 
@@ -216,6 +216,28 @@ docker-compose -f docker-compose.yml up
     ```
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+{{% /tab %}}
+
+{{% tab "Helm Chart" %}}
+
+1. Add the [Datadog Synthetics Private Location][1] to your Helm repositories:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com 
+    helm repo update
+    ```
+
+2. Install the chart with the release name `<RELEASE_NAME>`, using the previously created JSON file by executing the following:
+
+    ```shell
+    helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
+    ```
+
+    **Note:** If you blocked reserved IPs, make sure to add the `NET_ADMIN` [Linux capabilities][2] to your private location container.
+
+[1]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
+[2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}
 
