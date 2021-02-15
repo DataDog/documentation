@@ -90,7 +90,10 @@ If you use Chef and the official `datadog` cookbook to deploy the Agent on Windo
 
 ## Upgrade
 
-When you upgrade the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you must supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
+For Agent version < `7.25.0` when you upgrade the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you must supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
+
+Starting with Agent version `7.25.0` the installer will retain the username used to install the Agent and re-use it during upgrades.
+It is still possible to override the saved value with `DDAGENTUSER_NAME`.
 
 ## Agent integrations
 
