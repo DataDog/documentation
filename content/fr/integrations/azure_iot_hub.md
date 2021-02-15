@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure IoT Hub.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_iot_hub/'
+draft: false
 git_integration_title: azure_iot_hub
 has_logo: true
 integration_title: Microsoft Azure IoT Hub
@@ -28,7 +29,7 @@ Recueillez des métriques d'Azure IoT Hub pour :
 
 Azure Provisioning Service est un service d'assistance pour IoT Hub qui permet un approvisionnement juste à temps et sans intervention sur le bon hub IoT. Aucune intervention humaine n'est requise, ce qui permet aux clients d'approvisionner des millions de périphériques de manière sécurisée et évolutive.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

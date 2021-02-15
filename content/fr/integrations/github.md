@@ -6,6 +6,7 @@ categories:
 dependencies: []
 description: Identifiez les commits et pull requests qui affectent les performances de vos services.
 doc_link: 'https://docs.datadoghq.com/integrations/github/'
+draft: false
 git_integration_title: github
 has_logo: true
 integration_title: GitHub

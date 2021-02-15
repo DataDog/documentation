@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Envoyez les alertes et les graphiques Datadog de votre choix sur le canal Campfire de votre équipe.
 doc_link: 'https://docs.datadoghq.com/integrations/campfire/'
+draft: false
 git_integration_title: campfire
 has_logo: true
 integration_title: Campfire
@@ -13,7 +14,7 @@ kind: integration
 manifest_version: '1.0'
 name: campfire
 public_title: Intégration Datadog/Campfire
-short_description: Envoyez certaines alertes et certains graphiques Datadog sur le canal Campfire de votre équipe.
+short_description: Envoyez les alertes et les graphiques Datadog de votre choix sur le canal Campfire de votre équipe.
 version: '1.0'
 ---
 ## Présentation
@@ -23,7 +24,7 @@ Intégrez Campfire à Datadog pour :
 - Être averti lorsque quelqu'un publie sur votre flux
 - Recevoir une notification lorsqu'une alerte de métrique se déclenche
 
-## Implémentation
+## Configuration
 
 ### Installation
 

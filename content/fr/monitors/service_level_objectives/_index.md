@@ -8,8 +8,8 @@ aliases:
 further_reading:
   - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
     tag: Blog
-    text: Suivez le statut de vos SLO avec le nouveau widget Disponibilité des monitors
-  - link: 'https://learn.datadoghq.com/enrol/index.php?id=30'
+    text: Surveiller le statut et le budget d'indisponibilité de vos SLO avec Datadog
+  - link: 'https://learn.datadoghq.com/course/view.php?id=34'
     tag: Centre d'apprentissage
     text: Présentation des Service Level Objectives (SLO)
 ---
@@ -32,7 +32,7 @@ Les SLO (Service Level Objectives) constituent un outil essentiel pour optimiser
 
 ## Configuration
 
-Vous pouvez utiliser la [page de statut des Service Level Objectives][1] de Datadog pour créer des SLO ou consulter et gérer tous vos SLO existants. Vous pouvez également ajouter des [widgets Résumé des SLO][2] à vos dashboards pour visualiser les statuts de vos SLO d'un seul coup d'œil.
+Vous pouvez utiliser la [page de statut des Service Level Objectives][1] de Datadog pour créer des SLO ou consulter et gérer tous vos SLO existants. Vous pouvez également ajouter des [widgets Résumé des SLO][2] à vos dashboards pour visualiser immédiatement les statuts de vos SLO.
 
 ### Configuration
 
@@ -110,12 +110,12 @@ Lorsque vous utilisez une vue enregistrée, vous pouvez la mettre à jour en la 
 
 ## Événements d'audit SLO
 
-Les événements d'audit SLO vous permettent de suivre l'historique de vos configurations SLO à l'aide du flux d'événements. Les événements d'audit sont ajoutés au flux d'événements chaque fois que vous créez, modifiez ou supprimez un SLO. Chaque événement inclut des informations sur la configuration du SLO, et le flux fournit un historique des modifications de la configuration du SLO au fil du temps. 
+Les événements d'audit SLO vous permettent de suivre l'historique de vos configurations SLO à l'aide du flux d'événements. Les événements d'audit sont ajoutés au flux d'événements chaque fois que vous créez, modifiez ou supprimez un SLO. Chaque événement inclut des informations sur la configuration du SLO, et le flux fournit un historique de l'évolution des modifications de la configuration du SLO.
 
 Chaque événement inclut les informations de configuration du SLO suivantes :
 
 - Nom
-- Description 
+- Description
 - Pourcentages cibles et intervalles de temps
 - Sources de données (identifiants de monitor ou requête de métrique)
 

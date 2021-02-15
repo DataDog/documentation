@@ -21,7 +21,7 @@ Datadog アプリの UI（User Management の **Mappings** タブ）からも、
 
 * Datadog リージョンには `https://api.{{< region-param key="dd_site" >}}/api/` 。
 
-### 新しい認証マッピングを作成する
+### 新しい認証マッピングを作成
 
 AuthN Mapping を JSON の本文から新しく作成します。新規作成された AuthN Mapping を返します。
 
@@ -140,7 +140,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-### AuthN Mapping をすべて取得する
+### すべての AuthN マッピングを取得
 
 AuthN Mapping のリストを返します
 
@@ -245,7 +245,7 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
 {{% /tab %}}
 {{< /tabs >}}
 
-### AuthN Mapping を指定して取得する
+### 指定した AuthN マッピングを削除
 
 UUID で指定した AuthN Mapping を返します。
 
@@ -498,9 +498,9 @@ HTTP/2 204
 {{% /tab %}}
 {{< /tabs >}}
 
-### Authn Mapping を有効にする
+### AuthN マッピングの有効化を取得
 
-Authn Mapping 機能が有効または無効のどちらに設定されているかを確認します。
+AuthN Mappings が有効/無効であることを確認します。
 
 | メソッド   | エンドポイントのパス              | ペイロードの要件 |
 |----------|----------------------------|------------------|
@@ -540,7 +540,7 @@ curl -X GET \
 {{% /tab %}}
 {{< /tabs >}}
 
-### 全マッピングの有効化/無効化
+### すべてのマッピングを有効化/無効化
 
 <div class="alert alert-warning">
 すべてのユーザーの SAML ログインを有効にすると、それらのユーザーが現在保持するロールが消去され、各 SAML のアサーション値に基づいてロールの再割り当てが行われます。マッピング機能を有効化する前に、ログインに関して想定通りの SAML アサーションを受領していることを必ず確認してください。

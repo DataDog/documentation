@@ -38,10 +38,10 @@ Lorsque vous attribuez des autorisations à un rôle, tous les utilisateurs asso
 ## Rôles personnalisés
 
 <div class="alert alert-warning">
-La création et la modification de rôles personnalisés sont réservées aux utilisateurs Enterprise en version bêta. <a href="/help">Contactez l'assistance Datadog</a> pour activer ces fonctionnalités sur votre compte.
+La création et la modification de rôles personnalisés sont des fonctionnalités réservées aux utilisateurs Enterprise et nécessitant une activation. <a href="/help">Contactez l'assistance Datadog</a> pour activer ces fonctionnalités sur votre compte.
 </div>
 
-Gérez vos rôles personnalisés sur l'application Datadog, avec l'[API Role Datadog][6] ou directement via SAML. Poursuivez votre lecture pour découvrir comment créer, mettre à jour et supprimer un rôle. Consultez la section [Autorisations des rôles Datadog][7] pour en savoir plus sur les autorisations disponibles.
+Gérez vos rôles personnalisés sur l'application Datadog, avec l'[API Role Datadog][6] ou directement via SAML. Poursuivez votre lecture pour découvrir comment créer, mettre à jour et supprimer un rôle. Consultez la section [Autorisations des rôles Datadog][7] pour en savoir plus sur les autorisations disponibles. Seuls les utilisateurs disposant de l'autorisation Access Management peuvent créer ou modifier des rôles dans Datadog.
 
 ### Créer un rôle personnalisé
 

@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez les performances de lecture/écriture de Datastore, le nombre de requêtes, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_datastore/'
+draft: false
 git_integration_title: google_cloud_datastore
 has_logo: true
 integration_title: Google Datastore
@@ -28,7 +29,7 @@ Recueillez des métriques de Google Datastore pour :
 - Visualiser les performances de vos datastores
 - Corréler les performances de vos datastores avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 
