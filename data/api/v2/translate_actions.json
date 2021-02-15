@@ -258,13 +258,13 @@
     "summary": "List Tag Configuration by Name"
   },
   "UpdateTagConfiguration": {
-    "description": "Update the tag configuration of a metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
+    "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
     "summary": "Update a Tag Configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
   },
   "CreateTagConfiguration": {
-    "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
     "summary": "Create a Tag Configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
