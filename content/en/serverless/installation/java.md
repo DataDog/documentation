@@ -44,7 +44,6 @@ Include the following dependency in your `pom.xml`:
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-lambda-java</artifactId>
   <version>n.n.n</version>
-  <type>pom</type>
 </dependency>
 ```
 
