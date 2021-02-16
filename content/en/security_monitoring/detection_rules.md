@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Detection Rules define conditional logic that is applied to all ingested logs. When at least one case defined in a Detection Rule is matched over a given period of time, Datadog generates a Security Signal. Datadog provides [Default Rules][1], which begin detecting threats in your environment immediately.
+Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a Detection Rule is matched over a given period of time, Datadog generates a Security Signal. Datadog provides [Default Rules][1], which begin detecting threats in your environment immediately.
 
 ## Create Detection Rules
 
@@ -28,7 +28,7 @@ Analyze ingested logs in real time with **Log Detection** or continuously scan t
 
 #### Threshold
 
-Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal will occur when the condition is met.
+Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal occurs when the condition is met.
 
 #### New term
 
@@ -106,7 +106,6 @@ In this example, when greater than 5 failed logins and a successful login exist 
 
 {{< img src="security_monitoring/detection_rules/gbv2.png" alt="Set rule cases" >}}
 
-
 [1]: /logs/explorer/#filters-logs
 [2]: /monitors/notifications/?tab=is_alert#integrations
 [3]: /monitors/notifications/?tab=is_alert
@@ -117,7 +116,7 @@ In this example, when greater than 5 failed logins and a successful login exist 
 
 #### Threshold
 
-Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal will occur whenever the threshold is exceeded.
+Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal occurs when the condition is met.
 
 ### Define configuration query
 

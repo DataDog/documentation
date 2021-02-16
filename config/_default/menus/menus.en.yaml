@@ -1734,41 +1734,31 @@ main:
     pre: nav_security_monitoring
     identifier: security_compliance_monitoring
     weight: 160000
-  - name: Security Monitoring
-    url: security_monitoring/
-    parent: security_compliance_monitoring
-    identifier: security_monitoring
-    weight: 1
   - name: Getting Started
     url: security_monitoring/getting_started
-    parent: security_monitoring
+    parent: security_compliance_monitoring
     identifier: security_monitoring_getting_started
-    weight: 101
-  - name: Signals Explorer
-    url: security_monitoring/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_explorer
-    weight: 102
+    weight: 160001
   - name: Threat Detection Rules
     url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
-    weight: 103
-  - name: Guides
-    url: security_monitoring/guide
-    parent: security_monitoring
-    identifier: security_monitoring_guides
-    weight: 104
-  - name: Compliance Monitoring
-    url: compliance_monitoring/
     parent: security_compliance_monitoring
-    identifier: compliance_monitoring
-    weight: 2
+    identifier: security_monitoring_detection_rules
+    weight: 160002
   - name: Default Rules
     url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
-    weight: 3
+    weight: 160003
+  - name: Signals Explorer
+    url: security_monitoring/explorer
+    parent: security_compliance_monitoring
+    identifier: security_monitoring_explorer
+    weight: 160004
+  - name: Guides
+    url: security_monitoring/guide
+    parent: security_compliance_monitoring
+    identifier: security_monitoring_guides
+    weight: 160005
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
