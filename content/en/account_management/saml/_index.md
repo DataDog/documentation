@@ -59,6 +59,12 @@ Users with the Access Management permission can assign or remove Datadog roles b
 3. Specify the SAML identity provider key-value pair that you want to associate with an existing Datadog role (either default or custom). For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`: 
 
     {{< img src="account_management/saml/create_mapping.png" alt="Creating a SAML mapping to Datadog Role"  >}}
+    
+    <div class="alert alert-info">
+      <strong>Azure users:</strong> The mapping attributes will be similar to the following:
+        Attribute key: `http://schemas.microsoft.com/ws/2008/06/identity/claims/groups`
+        Attribute value: `[group id]`
+    </div>
 
 4. If you have not already done so, enable mappings by clicking **Enable Mappings**. 
 
