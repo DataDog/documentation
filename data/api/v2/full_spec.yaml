@@ -6753,9 +6753,10 @@ paths:
       - Metrics
       x-undo:
         type: safe
-      x-unstable: "**Note: This endpoint is in public beta and is only accessible\
-        \ for customers who have Metrics Without Limits&trade;.\nIf you\u2019re interested\
-        \ in this feature, please contact your Customer Support Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: 'Deletes a metric''s tag configuration. Can only be used with application
@@ -6790,9 +6791,10 @@ paths:
       - Metrics
       x-undo:
         type: idempotent
-      x-unstable: "**Note: This endpoint is in public beta and is only accessible\
-        \ for customers who have Metrics Without Limits&trade;.\nIf you\u2019re interested\
-        \ in this feature, please contact your Customer Support Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
     get:
       description: Returns the tag configuration for the given metric name.
       operationId: ListTagConfigurationByName
@@ -6828,11 +6830,13 @@ paths:
       - Metrics
       x-undo:
         type: safe
-      x-unstable: "**Note: This endpoint is in public beta and is only accessible\
-        \ for customers who have Metrics Without Limits&trade;.\nIf you\u2019re interested\
-        \ in this feature, please contact your Customer Support Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
     patch:
-      description: 'Update the tag configuration of a metric. Can only be used with
+      description: 'Update the tag configuration of a metric or percentile aggregations
+        of a distribution metric. Can only be used with
 
         application keys from users with the `Manage Tags for Metrics` permission.'
       operationId: UpdateTagConfiguration
@@ -6881,12 +6885,13 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
-      x-unstable: "**Note: This endpoint is in public beta and is only accessible\
-        \ for customers who have Metrics Without Limits&trade;.\nIf you\u2019re interested\
-        \ in this feature, please contact your Customer Support Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
     post:
       description: 'Create and define a list of queryable tag keys for a count/gauge/rate/distribution
-        metric.
+        metric. Optionally, include percentile aggregations on any distribution metric.
 
         Can only be used with application keys of users with the `Manage Tags for
         Metrics` permission.'
@@ -6951,9 +6956,10 @@ paths:
         - name: metric_name
           source: data.id
         type: unsafe
-      x-unstable: "**Note: This endpoint is in public beta and is only accessible\
-        \ for customers who have Metrics Without Limits&trade;.\nIf you\u2019re interested\
-        \ in this feature, please contact your Customer Support Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
