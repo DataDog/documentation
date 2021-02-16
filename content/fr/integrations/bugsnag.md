@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez de manière centralisée l'évolution des taux d'erreur au sein de l'ensemble de vos applications
 doc_link: 'https://docs.datadoghq.com/integrations/bugsnag/'
+draft: false
 git_integration_title: bugsnag
 has_logo: true
 integration_title: Bugsnag
@@ -25,9 +26,9 @@ Utilisez cette intégration pour :
 
 - Recevoir un résumé des erreurs dans votre flux d'événements Datadog
 - Être informé des pics de taux d'erreur pour un projet
-- Filtrer les notifications selon leur sévérité et leur statut de lancement
+- Filtrer les notifications selon leur gravité et leur statut de lancement
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -42,7 +43,7 @@ Pour intégrer Bugsnag à Datadog :
 3. Choisissez les notifications qui s'afficheront dans Datadog en sélectionnant les déclencheurs de notification d'erreur.
    {{< img src="integrations/bugsnag/bugsnag_1.png" alt="bugsnag_notification_réglage" popup="true">}}
 
-4. Appliquez des filtres personnalisés à vos déclencheurs de notification pour afficher les erreurs dotées d'un certain statut de lancement ou d'une certaine sévérité.
+4. Appliquez des filtres personnalisés à vos déclencheurs de notification pour afficher les erreurs dotées d'un certain statut de lancement ou d'une certaine gravité.
    {{< img src="integrations/bugsnag/bugsnag_2.png" alt="bugsnag_filtres_réglage" popup="true">}}
 
 5. Saisissez votre clé d'API Datadog.

@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Enregistrez et recherchez des déploiements pour les superposer sur des graphiques de métriques clés.
 doc_link: 'https://docs.datadoghq.com/integrations/capistrano/'
+draft: false
 git_integration_title: capistrano
 has_logo: true
 integration_title: Capistrano
@@ -27,7 +28,7 @@ Installez l'intégration Capistrano/Datadog pour :
 
 Lorsque vous activez cette intégration pour un `Capfile` donné, chaque tâche Capistrano terminée est envoyée sous forme d'événement à Datadog. Les informations sur les rôles ainsi que le résultat de la journalisation sont également transmis.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

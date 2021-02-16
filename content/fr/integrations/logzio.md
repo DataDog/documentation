@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - monitoring
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md'
 display_name: Logz.io
+draft: false
 git_integration_title: logzio
 guid: 0e44f9bd-8c7b-426a-a0ba-8f4302808191
 integration_id: logz-io
@@ -39,7 +41,7 @@ Intégrez les alertes Logz.io pour visualiser les événements en temps réel.
 
 ![dashboard][2]
 
-## Implémentation
+## Configuration
 
 ### Installation
 

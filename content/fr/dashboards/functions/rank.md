@@ -53,4 +53,4 @@ Par exemple, `bottom10_min()` récupère les 10 séries de plus faible valeur a
 {{< /whatsnext >}}
 
 
-[1]: http://en.wikipedia.org/wiki/Norm_(mathematics
+[1]: http://en.wikipedia.org/wiki/Norm_(mathematics)

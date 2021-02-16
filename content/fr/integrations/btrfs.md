@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md'
 display_name: Btrfs
+draft: false
 git_integration_title: btrfs
 guid: 54f9329a-8270-4f5a-bd4b-cd169abfc791
 integration_id: btrfs
@@ -44,7 +46,7 @@ Recueillez des métriques de Btrfs en temps réel pour :
 
 ### Installation
 
-Le check Btrfs est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs qui utilisent au moins un système de fichiers Btrfs.
+Le check Btrfs est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs qui utilisent au moins un système de fichiers Btrfs.
 
 ### Configuration
 

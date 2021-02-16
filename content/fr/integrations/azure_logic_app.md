@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez les workflows de déclenchement, la latence des actions, les actions échouées, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/azure_logic_app/'
+draft: false
 git_integration_title: azure_logic_app
 has_logo: true
 integration_title: Microsoft Azure Logic App
@@ -28,7 +29,7 @@ Recueillez des métriques d'Azure Logic App pour :
 - Visualiser les performances de vos workflows Logic App
 - Corréler les performances de vos workflows Logic App avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

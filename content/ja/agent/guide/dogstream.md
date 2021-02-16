@@ -79,7 +79,7 @@ dogstreams が動作していることをテストする場合は、Agent の監
 
     行が該当しない場合は、`None` を返します。
 
-### メトリクスの収集例
+### メトリクスの収集
 
 標準形式ではないが、特定の文字で合理的に区切られたログからメトリクスを収集する例を考えます。このログは、次のように記録されています。
 
@@ -146,7 +146,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 イベントパーサーの例については、Agent に付属している [Cassandra 圧縮イベントパーサー][3]を参照してください。
 
-### イベントの収集例
+### イベント収集
 
 任意の関連情報を自由に追加できる場合に、ログからイベントを収集するとします。このログは、次のように特定の文字で合理的に区切られて記録されています。
 
@@ -235,7 +235,7 @@ def custom_parser(logger, line, parser_state, *parser_args):
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
 ```
 
-## カスタムログパーサーのトラブルシューティング
+## トラブルシューティング
 
 バグが発生した場合、ログパーサーからのトレースバックを確認できることがたいへん重要です。それには、[Agent ログ][6]を "DEBUG" レベルに設定して Agent を実行します。Agent のログレベルを設定するには、`datadog.conf` で、[この行][7]のコメントを解除して編集した後、[Agent を再起動][8]します。適切に設定すると、カスタムログパーサーのエラーから生成されたトレースバックを collector.log ファイルで確認できます ([Agent ログの場所については、こちらを参照してください][6])。通常、トレースバックには "checks.collector(datadog.py:278) | Error while parsing line" のような文字列が含まれます。([エラーを生成する Agent コードサンプルはこちら][9])。
 
