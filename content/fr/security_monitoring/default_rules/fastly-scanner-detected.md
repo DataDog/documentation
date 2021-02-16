@@ -3,6 +3,8 @@ aliases:
   - /fr/216-b0c-f83
 disable_edit: true
 kind: documentation
+rule_category:
+  - Log Detection
 scope: fastly
 security: attack
 source: fastly

@@ -3,13 +3,13 @@ title: Statut des monitors
 kind: documentation
 description: Visualiser l'évolution du statut de votre monitor au fil du temps
 further_reading:
-  - link: monitors/monitor_types
+  - link: /monitors/monitor_types/
     tag: Documentation
     text: Apprendre à créer un monitor
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour un monitor
 ---
@@ -27,7 +27,7 @@ L'en-tête contient le statut du monitor, sa date et son heure, et son titre. À
 
 ### Mute
 
-Désactivez un monitor directement depuis sa page de statut. Utilisez le champ **Scope** pour préciser votre downtime. Consultez la [documentation relative aux downtimes][2] pour en savoir plus sur la désactivation de plusieurs contextes ou monitors à la fois.
+Utilisez le bouton de désactivation pour désactiver entièrement un monitor. Vous pouvez également le désactiver temporairement avec le champ **Scope**. Les contextes disponibles sont basés sur les tags du groupe du monitor. Consultez la section [Downtime][2] pour en savoir plus sur la désactivation simultanée de plusieurs contextes ou monitors.
 
 **Remarque** : si vous désactivez ou réactivez un monitor via l'IU, les downtimes planifiés associés à ce monitor seront supprimés.
 
@@ -69,9 +69,9 @@ La section Properties présente des informations générales sur votre monitor 
 | Query        | En savoir plus sur les [requêtes][4].                                                       |
 | Message      | Le message spécifié dans la section de [notification][5] du monitor.                |
 
-## Status and History
+## Status and history
 
-La section Status and History affiche la requête et les changements d'état de votre monitor au fil du temps. Pour filtrer les informations, utilisez la barre de recherche, les statuts et le sélecteur d'intervalle au-dessus de la section.
+La section Status and history affiche la requête et les changements d'état de votre monitor au fil du temps. Pour filtrer les informations, utilisez la barre de recherche, les statuts et le sélecteur d'intervalle au-dessus de la section.
 
 ### Status
 
@@ -79,6 +79,7 @@ Le graphique de statut affiche le statut de votre monitor au fil du temps, répa
 
 * Le monitor vient d'être créé et n'a pas encore été évalué.
 * La requête du monitor a récemment été modifiée.
+* L'intervalle du monitor est trop restreint pour une métrique qui transmet peu fréquemment des données.
 * Le nom d'un host précédemment inclus dans la requête a été modifié. Les modifications de hostnames ne sont plus affichées dans l'interface d'utilisateur après 24 heures.
 
 ### History
@@ -99,11 +100,11 @@ Les événements générés à partir de votre monitor (alertes, avertissements,
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/monitors/monitor_types
-[2]: /fr/monitors/downtimes
-[3]: /fr/api/?lang=python#monitors
-[4]: /fr/dashboards/querying
-[5]: /fr/monitors/notifications
-[6]: /fr/dashboards
-[7]: /fr/notebooks
-[8]: /fr/events
+[1]: /fr/monitors/monitor_types/
+[2]: /fr/monitors/downtimes/
+[3]: /fr/api/v1/monitors/
+[4]: /fr/dashboards/querying/
+[5]: /fr/monitors/notifications/
+[6]: /fr/dashboards/
+[7]: /fr/notebooks/
+[8]: /fr/events/

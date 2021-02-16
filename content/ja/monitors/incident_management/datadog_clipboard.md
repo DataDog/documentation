@@ -2,6 +2,10 @@
 title: Datadog クリップボード
 kind: documentation
 description: インシデントの作成と管理
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+    tag: ブログ
+    text: Datadog クリップボードでデータを楽に検索
 ---
 # 概要
 
@@ -46,5 +50,9 @@ URL を追加するには、クリップボードを開き、“Add Current URL�
 {{< img src="monitors/incidents/exporting.png" alt="クリップボードからエクスポート"  style="width:80%;">}}
 
 URL はダッシュボードにエクスポートできません。[サポート対象のグラフ][1]のみ、ノートブックにエクスポートできます。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/notebooks/#visualization

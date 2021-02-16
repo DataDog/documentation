@@ -60,10 +60,9 @@ PHP トレーサーのオープンソースに対する貢献に関しては、[
 
 `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT`
 
-変数の設定方法については、[トレーサーコンフィギュレーション][2]を参照してください。
+変数の設定方法については、[環境変数のコンフィギュレーション](#environment-variable-configuration) を参照してください。
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/tracing/setup/php/#environment-variable-configuration
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
@@ -271,7 +270,7 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=false` を使用してこの機能をオフにすることも可能です。
 
-##### カスタム URL からリソースマッピング
+##### URL からリソースへのマッピングをカスタマイズ
 
 適用された自動正規化ではカバーされないケースがいくつかあります。
 
@@ -289,9 +288,13 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 ###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
-この設定は、各パスフラグメントに個々に適用される正規表現の CSV です。たとえば、最初の例、 `/using/prefix/id123/for/id` で `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` を `^id\d+$` に設定すると、すべてのフラグメント（`using`、`prefix`、`id123`、`for`、`id`）に正規表現が適用されます。最終的な正規化されたリソース名は、`GET /using/prefix/?/for/id` になります。
+この設定は、各パスフラグメントに個々に適用される正規表現の CSV です。たとえば、 `/using/prefix/id123/for/id` のパスとして `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` を `^id\d+$` に設定すると、各フラグメント（`using`、`prefix`、`id123`、`for`、`id`）に正規表現が適用されます。
 
-カンマで区切られた複数の正規表現を `^id\d+$,code\d+$` に追加することができますが、カンマ文字 `,` はエスケープされないので正規表現では使用できないことに注意してください。
+| URL                          | 正規表現     | 考えられるリソース名       |
+|:-----------------------------|:----------|:-----------------------------|
+| `/using/prefix/id123/for/id` | `^id\d+$` | `GET /using/prefix/?/for/id` |
+
+この変数の形式は CSV であるため、カンマ記号 `,` はエスケープされず、正規表現では使用できないことに注意してください。
 
 ###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` および `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 
@@ -301,9 +304,16 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` は受信リクエスト（ウェブフレームワークなど）のみに適用され、`DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` は発信リクエスト（`curl` や `guzzle` リクエストなど）のみに適用されることに、ご注意ください。
 
+### `open_basedir` 制限
+
+[`open_basedir`][11] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
+アプリケーションを Docker コンテナで実行する場合は、許可されるディレクトリにパス `/proc/self` も追加する必要があります。
+
 ## アップグレード
 
 PHP トレーサーをアップグレードするには、[最新のリリースをダウンロード][5]し、[拡張機能のインストール](#install-the-extension)と同じ手順に従います。
+
+インストールが完了したら、PHP (PHP-FPM または Apache SAPI) を再起動します。
 
 **注**: OPcache でパラメーターを `opcache.file_cache` に設定してセカンドレベルキャッシングを使用する場合は、キャッシュフォルダーを削除します。
 
@@ -353,3 +363,4 @@ PHP アプリケーションのコアダンプを取得することは、特に 
 [8]: /ja/tracing/faq/php-tracer-manual-installation
 [9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [10]: /ja/tracing/setup/nginx/#nginx-and-fastcgi
+[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

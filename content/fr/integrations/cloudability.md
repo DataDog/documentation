@@ -12,10 +12,7 @@ categories:
     - cloud
     - Gestion des coûts
 ddtype: crawler
-further_reading:
-    - link: "https://support.cloudability.com/hc/en-us/articles/360011041074-Integration-with-Datadog-how-to-add-your-Datadog-Credentials-to-Cloudability"
-      tag: Documentation externe
-      text: Comment ajouter vos identifiants Datadog dans Cloudability
+
 ---
 
 ## Présentation
@@ -28,9 +25,5 @@ Pour associer votre application Datadog à votre compte Cloudability :
 
 - Connectez-vous en accédant à Cloudability >> Settings >> Vendor Credentials.
 - [Ajoutez vos clés d'API et d'application Datadog][1].
-
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#api
