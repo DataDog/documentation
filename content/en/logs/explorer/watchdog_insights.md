@@ -13,33 +13,34 @@ further_reading:
 
 ## Overview
 
+With Watchdog Insights, find your way faster to the root cause of problems with contextual insights you receive as you explore logs. Watchdog insights complements your expertise and gut-feeling, giving nudges on where you could focus your troubleshooting attention. 
+
 <div class="alert alert-warning">
 Watchdog Insights for the Log Explorer is a BETA feature, available for customers using Log Management.
 </div>
 
-With Watchdog Insights, find your way faster to the root cause of problems with contextual insights you receive as explore logs. Watchdog insights complements your expertise and gut-feeling, giving nudges on where you could focus your troubleshooting attention. 
-
-On the following example, Watchog Insights immediately highlight that a specific version of a containerized application causes most of errors observed in a specific timerange. 
+On the following example, Watchog Insights highlights that `version:2.9.7` of a containerized Ruby application causes most of errors observed in a specific timerange. 
 
 {{< img src="logs/explorer/watchdog_insights/overview.png" alt="Watchdog Insights" style="width:100%;" >}}
 
-### Watchdog Insights Banner
-
-The
+## Navigating Watchdog Insights 
 
 {{< img src="logs/explorer/watchdog_insights/banner_collapsed.png" alt="Watchdog Insights banner (collapsed)" style="width:100%;" >}}
 
+The Watchdog Insights banner comes on top of Log Explorer results. It runs in background, and eventually surfaces insights relevant to the current query. If you seek for troubleshooting inspiration:
+ 
+* Either **expand** the Watchdog Insight banner, meant for a quick overview on insights,
+
 {{< img src="logs/explorer/watchdog_insights/banner_expanded.png" alt="Watchdog Insights banner (expanded)" style="width:100%;" >}}
 
-
-### Watchdog Insights Side Panel
+* Or click **view all** to open the Watchdog Insight side panel, meant to navigate insights displayed with richer summary, 
 
 {{< img src="logs/explorer/watchdog_insights/side_panel.png" alt="Watchdog Insights side panel" style="width:100%;" >}}
 
-### Insight Side Panel
+Each insight comes with its own embedded interactions and Side Panel with detailed troubleshooting material. The insight interactions and side panel vary depending on the [sort of Watchdog Insight](#watchdog-insight-collection).
 
 
-## Different Type of Insights
+## Watchdog Insights Collection
 
 ### Error Outliers
 
