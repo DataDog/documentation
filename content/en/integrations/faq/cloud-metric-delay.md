@@ -28,7 +28,7 @@ When using any Datadog cloud integration (AWS, Azure, GCP, etc.), metrics are pu
 
 These are specifics related to particular cloud providers.
 
-## Alibaba
+### Alibaba
 
 Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
 
