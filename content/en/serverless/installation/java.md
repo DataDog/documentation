@@ -70,7 +70,7 @@ dependencies {
     ```java
     public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
         public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-            DDLambda dd = new DDLambda(request, lambda);
+            DDLambda dd = new DDLambda(request, context);
         }
     }
     ```
@@ -98,7 +98,7 @@ If you would like to submit a custom metric, see the sample code below:
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         Map<String,String> myTags = new HashMap<String, String>();
             myTags.put("product", "latte");
