@@ -68,6 +68,6 @@ _これらのオプションはログアラートにのみ適用されます。_
 
 例: `{"metric": "count","type": "count","groupBy": "core_service"}`
 
-- **`enable_logs_sample`** 通知メッセージにサンプルまたは値を追加するための Boolean。デフォルトは `True`
+- **`enable_logs_sample`** 通知メッセージにサンプルまたは値を追加するための Boolean。デフォルトは `False`
 
 [1]: ../../faq/what-are-recovery-thresholds/
