@@ -10,7 +10,7 @@ rule_category:
 scope: kubernetes
 security: compliance
 source: kubernetes
-title: Vérifier que les autorisations du fichier de spécification de pod de serveur d'API sont définies sur 644 ou sur une valeur plus restrictive
+title: Les autorisations du fichier de spécification de pod de serveur d'API sont définies sur 644 ou sur une valeur plus restrictive
 type: security_rules
 ---
 ## Présentation
@@ -22,6 +22,16 @@ Vérifiez que les autorisations du fichier de spécification de pod de serveur d
 ## Meilleure pratique
 
 Le fichier de spécification de pod de serveur d'API contrôle divers paramètres qui définissent le comportement du serveur d'API. Il est conseillé de restreindre les autorisations du fichier pour garantir son intégrité. Seuls les administrateurs système doivent bénéficier de droits d'écriture sur ce fichier.
+
+## Audit
+
+Exécutez la commande ci-dessous (selon l'emplacement du fichier dans votre système) sur le nœud master :
+
+```bash
+stat -c %a /etc/kubernetes/manifests/kube-apiserver.yaml
+```
+
+Vérifiez que les autorisations sont définies sur `644` ou sur une valeur plus restrictive.
 
 ## Remédiation
 

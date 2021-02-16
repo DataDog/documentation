@@ -101,7 +101,7 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 
 ## トレースメトリクス
 
-トレースメトリクスは自動的に収集され、他の [Datadog メトリクス][2]と同様の 15 か月の保持ポリシーで保持されます。これを使用して、ヒット、エラー、またはレイテンシーを特定し、アラートを発信することができます。トレースメトリクスは、サービスまたはリソースとともにトレースを受信するホストによってタグ付けされます。たとえば、ウェブサービスをインスツルメントした後、[Metric Summary][15] のエントリポイントスパン `web.request` のトレースメトリクスが収集されます。
+[トレースメトリクス][15]は自動的に収集され、他の [Datadog メトリクス][2]と同様の 15 か月の保持ポリシーで保持されます。これを使用して、ヒット、エラー、またはレイテンシーを特定し、アラートを発信することができます。トレースメトリクスは、サービスまたはリソースとともにトレースを受信するホストによってタグ付けされます。たとえば、ウェブサービスをインスツルメントした後、[Metric Summary][16] のエントリポイントスパン `web.request` のトレースメトリクスが収集されます。
 
 {{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="トレースメトリクス" >}}
 
@@ -113,7 +113,7 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 
 ### モニタリング
 
-トレースメトリクスは、監視に役立ちます。APM モニターは、[New Monitors][16]、[Service][6]、または [Resource][7] ページで設定できます。推奨されるモニターのセットは、[Service][6] または [Resource][7] ページで利用できます。
+トレースメトリクスは、監視に役立ちます。APM モニターは、[New Monitors][17]、[Service][6]、または [Resource][7] ページで設定できます。推奨されるモニターのセットは、[Service][6] または [Resource][7] ページで利用できます。
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="トレースメトリクスモニター" >}}
 
@@ -139,21 +139,21 @@ Indexed Span は、Datadog に 15 日間保管された [Retention Filter](#Rete
 
 アプリケーションのスパンをタグ付けするには、この[チュートリアル][12]をご覧ください。
 
-タグがスパンに追加されたら、タグをクリックして[ファセット][17]として追加し、Analytics でタグを検索およびクエリします。これが完了すると、このタグの値はすべての新しいトレースに保存され、検索バー、ファセットパネル、トレースグラフクエリで使用できます。
+タグがスパンに追加されたら、タグをクリックして[ファセット][18]として追加し、Analytics でタグを検索およびクエリします。これが完了すると、このタグの値はすべての新しいトレースに保存され、検索バー、ファセットパネル、トレースグラフクエリで使用できます。
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="ファセットの作成"  style="width:50%;">}}
 
 ## Retention Filters
 
-[Datadog UI で[タグベースのフィルター][18]を設定して 15 日間のスパンをインデックスし、トレース検索と Analytics で使用できるようにします。](#trace-search-and-analytics)
+[Datadog UI で[タグベースのフィルター][19]を設定して 15 日間のスパンをインデックスし、トレース検索と Analytics で使用できるようにします。](#trace-search-and-analytics)
 
 ## Ingestion Controls
 
-サービスから Datadog に[トレースの 100% を送信][19]し、[タグベースの Retention Filter](#Retention Filters) と結合させて 15 日間で最もビジネス的に重要なトレースを維持します。
+サービスから Datadog に[トレースの 100% を送信][20]し、[タグベースの Retention Filter](#Retention Filters) と結合させて 15 日間で最もビジネス的に重要なトレースを維持します。
 
 ## サブレイヤーメトリクス
 
-[トレーシングアプリケーションメトリクス][20]を `sublayer_service` と `sublayer_type` でタグ付けし、トレース内のサービスの実行時間を個別に確認することもできます。
+[トレーシングアプリケーションメトリクス][15]を `sublayer_service` と `sublayer_type` でタグ付けし、トレース内のサービスの実行時間を個別に確認することもできます。
 
 ## 実行時間
 
@@ -180,9 +180,9 @@ Indexed Span は、Datadog に 15 日間保管された [Retention Filter](#Rete
 [12]: /ja/tracing/guide/adding_metadata_to_spans/
 [13]: /ja/tracing/runtime_metrics/
 [14]: /ja/tracing/trace_search_and_analytics/
-[15]: https://app.datadoghq.com/metric/summary
-[16]: https://app.datadoghq.com/monitors#/create
-[17]: /ja/tracing/trace_search_and_analytics/query_syntax/#facets
-[18]: /ja/tracing/trace_retention_and_ingestion/#retention-filters
-[19]: /ja/tracing/trace_retention_and_ingestion/#ingestion-controls
-[20]: /ja/tracing/guide/metrics_namespace/
+[15]: /ja/tracing/guide/metrics_namespace/
+[16]: https://app.datadoghq.com/metric/summary
+[17]: https://app.datadoghq.com/monitors#/create
+[18]: /ja/tracing/trace_search_and_analytics/query_syntax/#facets
+[19]: /ja/tracing/trace_retention_and_ingestion/#retention-filters
+[20]: /ja/tracing/trace_retention_and_ingestion/#ingestion-controls
