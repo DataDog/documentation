@@ -48,7 +48,7 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character.
 
-**Note**: These characters can be escaped, but are not searchable in logs search. To search for special characters, parse them into an attribute with the grok parser (https://docs.datadoghq.com/logs/processing/parsing/?tab=matcher), and then search for logs that contain the attribute.
+**Note**: These characters can be escaped, but are not searchable in logs search. To search for special characters, parse them into an attribute with the grok parser[6], and then search for logs that contain the attribute.
 
 ## Attributes search
 
