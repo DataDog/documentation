@@ -43460,7 +43460,7 @@
         "x-undo": {
           "type": "safe"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       }
     },
     "/api/v2/metrics/{metric_name}/tags": {
@@ -43566,7 +43566,7 @@
         "x-undo": {
           "type": "idempotent"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "get": {
         "description": "Returns the tag configuration for the given metric name.",
@@ -43768,10 +43768,10 @@
         "x-undo": {
           "type": "safe"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "patch": {
-        "description": "Update the tag configuration of a metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
+        "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
         "operationId": "UpdateTagConfiguration",
         "parameters": [
           {
@@ -44075,10 +44075,10 @@
         "x-undo": {
           "type": "idempotent"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "post": {
-        "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+        "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
         "operationId": "CreateTagConfiguration",
         "parameters": [
           {
@@ -44425,7 +44425,7 @@
           ],
           "type": "unsafe"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       }
     },
     "/api/v2/permissions": {
