@@ -28,7 +28,7 @@ Analyze ingested logs in real time with **Log Detection** or continuously scan t
 
 #### Threshold
 
-Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal will occur whenever the threshold is exceeded.
+Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal will occur when the condition is met.
 
 #### New term
 
@@ -135,12 +135,9 @@ In the “Notify” section, configure zero or more [notification targets][3] fo
 
 The notification box has the same Markdown and preview features as those of [monitor notifications][4].
 
-The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the Security Signal.
-
 Tag your signals with different tags, for example `security:attack` or `technique:T1110-brute-force`.
 
-**Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
-
+**Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
 [1]: https://docs.datadoghq.com/integrations/amazon_cloudtrail/#overview
 [2]: https://docs.datadoghq.com/security_monitoring/default_rules
