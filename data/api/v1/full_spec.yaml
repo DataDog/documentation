@@ -711,6 +711,8 @@ components:
           $ref: '#/components/schemas/WidgetSort'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: Query definition.
           type: string
@@ -1210,6 +1212,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: Widget query.
           type: string
@@ -2398,6 +2402,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: Widget query.
           type: string
@@ -2541,6 +2547,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: Query definition.
           type: string
@@ -5640,6 +5648,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: TODO.
           type: string
@@ -6174,6 +6184,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: Query definition.
           type: string
@@ -8878,6 +8890,8 @@ components:
           $ref: '#/components/schemas/WidgetSort'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: Query definition.
           type: string
@@ -9166,6 +9180,8 @@ components:
           type: boolean
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: Widget query.
           type: string
@@ -9249,6 +9265,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: Widget query.
           type: string
