@@ -19,13 +19,14 @@ further_reading:
 {{< img src="real_user_monitoring/browser/waterfall.png" alt="Real User Monitoring page load waterfall" style="width:75%;" >}}
 
 ## Performance metrics for views
-RUM view events collect extensive performance metrics for every single page view. We recommend analyzing the performance metrics in the following ways:
-- **Dashboards**: they provide you with a bird-eye view of your application's performance. For example, the out-of-the-box [Performance Overview dashboard][1] can be filtered on [default attributes][2] collected by RUM to surface issues affecting only a subset of users. This dashboard can be cloned and customized to your specific needs. All [RUM performance metrics](#all-performance-metrics) can be used in dashboard queries.
+
+RUM view events collect extensive performance metrics for every single page view. Datadog recommends analyzing the performance metrics in the following ways:
+- **Dashboards**: provides you with a high-level view of your application's performance. For example, the out-of-the-box [Performance Overview dashboard][1] can be filtered on [default attributes][2] collected by RUM to surface issues impacting a subset of users. This dashboard can be cloned and customized to your specific needs. All [RUM performance metrics](#all-performance-metrics) can be used in dashboard queries.
 - **RUM waterfall**: accessible for every single RUM view event in the [RUM Explorer][3], it lets you troubleshoot the performance of a specific page view. It shows how your website assets and resources, long tasks, and frontend errors affect performance for your end users, at the page level.
 
 ### Core Web Vitals
 
-[Google's Core Web Vitals][4] are a set of three metrics designed to monitor a site's user experience. These metrics, which focus on load performance, interactivity, and visual stability, give you an overview of what matters the most to your users. Each metric comes with guidance on the range of values that translate to good user experience. We recommend monitoring the 75th percentile for these metrics.
+[Google's Core Web Vitals][4] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
 
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
 
