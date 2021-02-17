@@ -20,7 +20,7 @@ If the default setup overhead is not acceptable, you can use the profiler with m
 - Increases sampling threshold to 500ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
 - Disables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
 
-To use the minimal configuration ensure you have `dd-trace-java` version `0.70.0` then change your service invocation to the following:
+To use the minimal configuration ensure you have `dd-java-agent` version `0.70.0` then change your service invocation to the following:
 
 ```
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=minimal -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
