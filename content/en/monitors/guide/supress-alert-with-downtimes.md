@@ -51,8 +51,8 @@ curl -X POST "https://api.datadoghq.com/api/v1/downtime" \
 
 Replace the `start` and `end` parameter to match your wanted schedule. Feel free to use parameter such as:
 
-* start=$(date +%s)
-* end=$(date -v+24H +%s)
+* `start=$(date +%s)`
+* `end=$(date -v+24H +%s)`
 
 And then in the curl command use it with: `"start": '"${start}"'`.
 
@@ -92,7 +92,7 @@ And then in the curl command use it with: `"start": '"${start}"'`.
 
 Open the [manage Downtime page](https://app.datadoghq.com/monitors#downtime) and add a new downtime. Select `recurring`:
 
-{{< img src="monitors/guide/downtimes_weekend.png" alt="Downtimes over the week end" style="width:60%;" >}}
+{{< img src="monitors/guide/downtimes_weekend.jpg" alt="Downtimes over the week end" style="width:60%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -151,7 +151,7 @@ curl -X POST "https://api.datadoghq.com/api/v1/downtime" \
 
 Open the [manage Downtime page](https://app.datadoghq.com/monitors#downtime) and add a new downtime. Select `recurring`:
 
-{{< img src="monitors/guide/downtime_businesshour.png" alt="Downtimes outside of business hours" style="width:60%;" >}}
+{{< img src="monitors/guide/downtime_businesshour.jpg" alt="Downtimes outside of business hours" style="width:60%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
