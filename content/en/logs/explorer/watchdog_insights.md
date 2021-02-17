@@ -42,15 +42,38 @@ Each insight comes with its own embedded interactions and Side Panel with detail
 
 ## Watchdog Insights Collection
 
+
 ### Error Outliers
 
+Error Outliers surface fields ([faceted][1] tags or attributes) that are characteristic of errors matching the current query.They are meant to accelerate troubleshooting by casting light on `key:value` that are statiscally over-represented among the errors, giving you hints on the possible root cause of problems.
+
+Typical error outliers examples are `env:staging`, `docker_image:acme:3.1` `http.useragent_details.browser.family:curl`.
+
+* The **banner card** version of the insight shows
+
+  * the field
+  * to what proportion of errors and overall logs this field is contributing,
+
+{{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier card (S)" style="width:40%;" >}}
+
+* The **side panel card** of the insight shows, in addition,
+
+  * the main [log pattern][2] for error logs having that field,
+
+{{< img src="logs/explorer/watchdog_insights/error_outlier_l_card.png" alt="Error Outlier card (L)" style="width:60%;" >}}
+
+* The **full side panel** of the card shows, in addition, 
+
+  * the timeseries for error logs having that field,
+  * other fields often associated with those logs,
+  * the comprehensive list of [log patterns][2] for those logs
+
+{{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:60%;" >}}
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/indexes#exclusion-filters
-[2]: /logs/processing
-[3]: /logs/explorer
-[4]: /logs/explorer/facets/
+[1]: /logs/explorer/facets/
+[2]: https://docs.datadoghq.com/logs/explorer/#patterns
