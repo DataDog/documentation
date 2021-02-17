@@ -9,7 +9,7 @@ assets:
 categories:
   - security
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md'
 display_name: PerimeterX

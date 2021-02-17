@@ -9,7 +9,7 @@ categories:
   - log collection
   - security
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md'
 display_name: Auth0

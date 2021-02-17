@@ -92,7 +92,7 @@ spec:
 
 **注**: このマニフェストは、オートディスカバリーの自動構成機能を有効にします。無効にするには、`SD_BACKEND` 環境変数の定義を削除します。オートディスカバリーの構成方法については、[オートディスカバリーのドキュメント][9]を参照してください。
 
-#### ホストインストール
+#### ホストのインストール
 
 `dd-check-kubernetes` パッケージを手動または任意の構成マネージャーを使用してインストールします。
 
@@ -140,7 +140,7 @@ Checks
       - Collected 39 metrics, 0 events & 7 service checks
 ```
 
-## Kubernetes Stateのセットアップ
+## Kubernetes State のセットアップ
 
 ### インストール
 
@@ -205,7 +205,7 @@ kubectl create -f kube-state-metrics.yaml
 Kubernetes State Metrics サービスを別の URL またはポートで実行するように構成する場合は、`conf.d/kubernetes_state.yaml` で `kube_state_url` パラメーターを設定し、Datadog Agent を再起動することで構成を行います。
 詳細については、[kubernetes_state.yaml.example ファイル][14]を参照してください。[オートディスカバリー][9]を有効にしている場合は、kube state URL が自動的に構成および管理されます。
 
-#### ホストインストール
+#### ホストのインストール
 
 `dd-check-kubernetes_state` パッケージを手動または任意の構成マネージャーを使用してインストールします (CentOS/AWS 上)。[こちらで rpm パッケージを検索][15]できます。インストールの詳細については、[こちらのページ][16]を参照してください。
 次に、`kubernetes_state.yaml` ファイルを編集して、サーバーとポートを指定し、監視するマスターを設定します。使用可能なすべての構成オプションの詳細については、[kubernetes_state.yaml のサンプル][14] を参照してください。

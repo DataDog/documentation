@@ -32,9 +32,9 @@ Datadog は、ウェブサービス、データベース、キャッシュなど
 {{< img src="tracing/guide/custom_span/custom_span_2.png" alt="分析ビュー"  style="width:90%;">}}
 
 `http.request POST /charge/` スパンは、直接の子スパンがないと多くの時間がかかります。これは、このリクエストがその動作に対するより優れた情報を得るために、さらなるインスツルメンテーションを必要とする手がかりです。使用しているプログラミング言語に応じて、関数を異なる方法で装飾する必要があります。
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
 
-{{< tabs >}}
-{{% tab "Java" %}}
 Java の場合、Datadog APM により、メソッドデコレータを使用するか、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
 **デコレータを使用してメソッドをインスツルメントする**
@@ -89,8 +89,8 @@ public class BackupLedger {
 ```
 
 [1]: /ja/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 Python の場合、Datadog APM により、メソッドデコレータを使用するか、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
@@ -135,8 +135,9 @@ class BackupLedger:
 ```
 
 [1]: /ja/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
   Ruby の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
 この例では、`BackupLedger.write` メソッドの呼び出し用に新しいスパンを作成し、特定のトランザクション ID を持つ[カスタムタグ][1]で台帳に投稿されたすべてのトランザクションに子スパンを作成します。
@@ -164,8 +165,9 @@ end
 ```
 
 [1]: /ja/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
   Go の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
 この例では、台帳に投稿されたすべてのトランザクションに対して新しいスパンを作成し、特定のトランザクション ID を持つ[カスタムタグ][1]をスパンに追加します。
@@ -209,8 +211,9 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 ```
 
 [1]: /ja/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
   Node.js の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
 この例では、`BackupLedger.write` メソッドの呼び出し用に新しいスパンを作成し、特定のトランザクション ID を持つ[カスタムタグ][1]で台帳に投稿されたすべてのトランザクションに子スパンを作成します。
@@ -233,8 +236,9 @@ function write (transactions) {
 ```
 
 [1]: /ja/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
   .NET の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
 この例では、台帳に投稿されたすべてのトランザクションに対して新しいスパンを作成し、特定のトランザクション ID を持つ[カスタムタグ][1]をスパンに追加します。
@@ -263,8 +267,8 @@ public void Write(List<Transaction> transactions)
 ```
 
 [1]: /ja/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 PHP の場合、Datadog APM により、メソッドラッパーを使用するか、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
 
@@ -333,8 +337,8 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 ```
 
 [1]: /ja/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Datadog UI を活用して新しいカスタムスパンを表示する
 
@@ -355,7 +359,6 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 これで、カスタムスパンがコードベースに正常に追加され、フレームグラフと [App Analytics][3] で利用できるようになりました。これは、Datadog のツールを最大限に活用するための最初のステップです。次に[カスタムタグをスパンに追加][4]すれば、さらに強力にすることができます。
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 

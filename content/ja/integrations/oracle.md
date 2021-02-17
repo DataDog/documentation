@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     oracle: assets/dashboards/oracle_overview.json
   logs: {}
@@ -48,17 +50,11 @@ Oracle Database サーバーからメトリクスをリアルタイムに取得�
 
 Oracle インテグレーションを使用するには、Oracle Instant Client ライブラリをインストールするか、Oracle JDBC Driver をダウンロードする必要があります。ライセンスの制約により、これらのライブラリは Datadog Agent に含まれていませんが、Oracle から直接ダウンロードできます。
 
-**注**: JDBC Driver を使用する際に Agent が使用するライブラリの 1 つである JPype には、システムに以下のランタイムを必要とします。
-
-- Java 8 以降
-- [Microsoft Visual C++ Runtime 2015][2]
-
-
 ##### Oracle Instant Client
 
 Oracle チェックは、`cx_Oracle` Python モジュールまたは Oracle JDBC Driver にアクセスする必要があります。
 
-1. [ダウンロードページ][3]にアクセスして、Instant Client Basic パッケージと SDK パッケージをインストールします。
+1. [ダウンロードページ][2]にアクセスして、Instant Client Basic パッケージと SDK パッケージをインストールします。
 
     Linux を使用している場合は、Instant Client ライブラリのインストール後に、ランタイムリンカがライブラリを見つけることができることを確認します。たとえば、`ldconfig` を使用します。
 
@@ -83,8 +79,15 @@ Oracle チェックは、`cx_Oracle` Python モジュールまたは Oracle JDBC
 
 ##### JDBC Driver
 
-- [JDBC Driver jar ファイルをダウンロード][4]します。
-- ダウンロードしたファイルのパスを `$CLASSPATH` に追加するか、チェックコンフィギュレーションファイルの `jdbc_driver_path` の下に追加します ([サンプル oracle.yaml][5] を参照)。
+JDBC Driver を使用する際に Agent が使用するライブラリの 1 つである JPype には、システムに以下のランタイムを必要とします。
+
+- Java 8 以降
+- Windows では [Microsoft Visual C++ Runtime 2015][3]。
+
+すべてインストールしたら、以下のステップに進みます。
+
+1. [JDBC Driver jar ファイルをダウンロード][4]します。
+2. ダウンロードしたファイルのパスを `$CLASSPATH` に追加するか、チェックコンフィギュレーションファイルの `jdbc_driver_path` の下に追加します ([サンプル oracle.yaml][5] を参照)。
 
 #### Datadog ユーザーの作成
 
@@ -353,7 +356,7 @@ Oracle Database チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**oracle.can_connect**
+**oracle.can_connect**<br>
 データベースが使用可能で接続を受け入れているかを検証します。
 
 ## トラブルシューティング
@@ -362,8 +365,8 @@ Oracle Database チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
-[2]: https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
-[3]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
+[2]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
+[3]: https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 [4]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

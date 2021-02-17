@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure SQL Database.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_database/'
+draft: false
 git_integration_title: azure_sql_database
 has_logo: true
 integration_title: Microsoft Azure SQL Database
@@ -28,7 +29,7 @@ Recueillez des métriques d'Azure SQL Database pour :
 - Visualiser les performances de votre base de données SQL
 - Corréler les performances de votre base de données SQL avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

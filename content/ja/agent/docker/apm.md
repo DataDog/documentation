@@ -147,8 +147,10 @@ docker run -d --name app \
 
 または、サポートされている言語ごとに、以下の例を参照して Agent ホストを手動で設定します。
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodeJS,.NET" >}}
+
+{{< programming-lang lang="java" >}}
+
 環境変数を使用して Java Agent 構成を更新します。
 
 ```bash
@@ -166,8 +168,9 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -jar /your/app.jar
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
 
 ```python
 from ddtrace import tracer
@@ -178,8 +181,9 @@ tracer.configure(
 )
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 ```ruby
 Datadog.configure do |c|
@@ -188,8 +192,9 @@ Datadog.configure do |c|
 end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 ```go
 package main
@@ -202,8 +207,9 @@ func main() {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodeJS" >}}
 
 ```javascript
 const tracer = require('dd-trace').init({
@@ -212,9 +218,9 @@ const tracer = require('dd-trace').init({
 });
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab ".NET" %}}
+{{< programming-lang lang=".NET" >}}
 
 インスツルメンテーションされたアプリを起動する前に変数を設定します。
 
@@ -234,8 +240,9 @@ export DD_TRACE_AGENT_PORT=8126
 dotnet example.dll
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 ### Docker ホスト IP
 

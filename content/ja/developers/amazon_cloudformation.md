@@ -51,27 +51,30 @@ title: Datadog-Amazon CloudFormation
 
 次の Datadog リソースは、AWS アカウント内で登録できます。それぞれの構成方法については、専用のドキュメントを参照してください。
 
-| Resource                | Name                          | 説明                                             | フォルダー                      | S3 パッケージリンク              |
-|-------------------------|-------------------------------|---------------------------------------------------------|-----------------------------|-------------------------------|
-| Datadog AWSインテグレーション | `Datadog::Integrations::AWS`  | [Datadog と Amazon Web Service のインテグレーションを管理][5] | `datadog-integrations-aws`  | [スキーマハンドラーのバージョン][6]  |
-| モニター                | `Datadog::Monitors::Monitor`  | [Datadogモニターの作成、更新および削除][7]。       | `datadog-monitors-monitor`  | [スキーマハンドラーのバージョン][8]  |
-| ダウンタイム               | `Datadog::Monitors::Downtime` | [モニターのダウンタイムを有効化/無効化][9]。     | `datadog-monitors-downtime` | [スキーマハンドラーのバージョン][10] |
-| ユーザー                    | `Datadog::IAM::User`          | [Datadog ユーザーの作成と管理][11]。                 | `datadog-iam-user`          | [スキーマハンドラーのバージョン][12] |
+| Resource                | Name                              | 説明                                             | フォルダー                      | S3 パッケージリンク              |
+|-------------------------|-----------------------------------|---------------------------------------------------------|---------------------------------|-------------------------------|
+| ダッシュボード              | `Datadog::Dashboards::Dashboard`  | [Datadog ダッシュボードの作成、更新および削除][5]。      | `datadog-dashboards-dashboard`  | [スキーマハンドラーのバージョン][6]  |
+| Datadog AWSインテグレーション | `Datadog::Integrations::AWS`      | [Datadog と Amazon Web Service のインテグレーションを管理][7] | `datadog-integrations-aws`      | [スキーマハンドラーのバージョン][8]  |
+| モニター                | `Datadog::Monitors::Monitor`      | [Datadog モニターの作成、更新および削除][9]。       | `datadog-monitors-monitor`      | [スキーマハンドラーのバージョン][10] |
+| ダウンタイム               | `Datadog::Monitors::Downtime`     | [モニターのダウンタイムを有効化/無効化][11]。    | `datadog-monitors-downtime`     | [スキーマハンドラーのバージョン][12] |
+| ユーザー                    | `Datadog::IAM::User`              | [Datadog ユーザーの作成と管理][13]。                 | `datadog-iam-user`              | [スキーマハンドラーのバージョン][14] |
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は [Datadog サポート][15]までお問い合わせください。
 
 [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html
 [2]: https://aws.amazon.com/cli/
 [3]: https://console.aws.amazon.com/cloudformation/home
 [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
-[5]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-integrations-aws-handler
-[6]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-integrations-aws-handler/CHANGELOG.md
-[7]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-monitor-handler
-[8]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-monitors-monitor-handler/CHANGELOG.md
-[9]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-downtime-handler
-[10]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-monitors-downtime-handler/CHANGELOG.md
-[11]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-iam-user-handler
-[12]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-iam-user-handler/CHANGELOG.md
-[13]: https://docs.datadoghq.com/ja/help/
+[5]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-dashboards-dashboard-handler
+[6]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-dashboards-dashboard-handler/CHANGELOG.md
+[7]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-integrations-aws-handler
+[8]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-integrations-aws-handler/CHANGELOG.md
+[9]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-monitor-handler
+[10]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-monitors-monitor-handler/CHANGELOG.md
+[11]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-downtime-handler
+[12]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-monitors-downtime-handler/CHANGELOG.md
+[13]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-iam-user-handler
+[14]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-iam-user-handler/CHANGELOG.md
+[15]: https://docs.datadoghq.com/ja/help/

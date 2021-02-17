@@ -29,7 +29,7 @@ Les live processes de Datadog vous offrent une visibilité en temps réel sur le
 
 ## Installation
 
-Si vous utilisez l'Agent v5, [suivez ce processus d'installation][2]. Si vous utilisez les versions 6 ou 7, [consultez les instructions ci-dessous][1].
+Si vous utilisez l'Agent v5, [suivez ce processus d'installation][1]. Si vous utilisez les versions 6 ou 7, [consultez les instructions ci-dessous][2].
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
@@ -154,7 +154,7 @@ process_config:
 
 ## Requêtes
 
-### Déterminer le contexte des processus
+### Déterminer le contexte des processus 
 
 De par leur nature, les processus sont des objets caractérisés par une très forte cardinalité. Vous pouvez utiliser les filtres de texte et de tag pour préciser votre contexte afin d'afficher uniquement les processus pertinents.
 
@@ -186,7 +186,7 @@ Datadog génère automatiquement un tag `command`, afin que vous puissiez appliq
 * Les logiciels de gestion de conteneurs (p. ex., `command:docker` ou `command:kubelet`)
 * Les charges de travail habituelles (p. ex, `command:ssh` ou `command:CRON`)
 
-### Agrégation de processus
+### Agréger des processus
 
 Le [tagging][3] améliore la navigation. En plus de tous les tags de host existants, les processus présentent le tag `user`.
 
@@ -248,7 +248,7 @@ Vous pouvez représenter graphiquement des métriques de processus dans des dash
 
 ## Intégrations détectées automatiquement
 
-Datadog utilise la collecte de processus pour détecter automatiquement les technologies qui s'exécutent sur vos hosts. Cette opération permet d'identifier les intégrations Datadog qui peuvent vous aider à surveiller ces technologies. Les intégrations détectées automatiquement s'affichent dans la [recherche d'intégrations][2] :
+Datadog utilise la collecte de processus pour détecter automatiquement les technologies qui s'exécutent sur vos hosts. Cette opération permet d'identifier les intégrations Datadog qui peuvent vous aider à surveiller ces technologies. Les intégrations détectées automatiquement s'affichent dans la [recherche d'intégrations][1] :
 
 {{< img src="getting_started/integrations/ad_integrations.png" alt="Intégrations détectées automatiquement" >}}
 
@@ -263,15 +263,15 @@ Les hosts qui exécutent l'intégration, mais sur lesquels l'intégration n'est 
 
 {{< img src="infrastructure/process/process_platform.gif" alt="Processus de la plateforme Datadog" >}}
 
-### Processus des live containers
+### Live containers
 
 Les live processes vous aident à gagner en visibilité sur les déploiements de vos conteneurs, en surveillant les processus en cours d'exécution sur chacun de vos conteneurs. Cliquez sur un conteneur depuis la page [Live Containers][9] pour afficher l'arborescence des processus, y compris les commandes en cours d'exécution et leur consommation de ressources. Lorsqu'elles sont utilisées conjointement à d'autres métriques de conteneur, ces données vous permettent de déterminer l'origine des échecs de conteneurs ou de déploiement.
 
-### Processus de l'APM
+### APM
 
 Dans les [traces de l'APM][10], vous pouvez cliquer sur la span d'un service pour afficher les processus qui s'exécutent sur son infrastructure sous-jacente. Les processus d'une span de service sont mis en corrélation avec les hosts ou pods sur lesquels le service s'exécute au moment de la requête. Vous pouvez analyser des métriques de processus, comme le processeur et la mémoire RSS, en consultant parallèlement les erreurs au niveau du code. Vous pourrez ainsi distinguer les problèmes spécifiques à l'application des problèmes d'infrastructure globaux. Lorsque vous cliquez sur un processus, vous êtes redirigé vers la [page Live Processes][1]. Les processus associés ne sont actuellement pas pris en charge pour les traces sans serveur et Browser. 
 
-### Processus de la solution Network Performance Monitoring
+### Network Performance Monitoring 
 
 Lorsque vous étudiez une dépendance dans la [vue d'ensemble de la page Network][11], vous pouvez consulter les processus exécutés sur l'infrastructure sous-jacente des endpoints (p. ex, les services) qui communiquent entre eux. Utilisez les métadonnées des processus pour déterminer si une mauvaise connexion réseau (caractérisée par un nombre élevé de retransmissions TCP) ou une forte latence des appels réseau (caractérisée par une longue durée d'aller-retour TCP) peut être causée par de lourdes charges de travail utilisant les ressources de ces endpoints. Un tel dysfonctionnement peut nuire à l'intégrité et à l'efficacité des communications.
 
@@ -289,8 +289,8 @@ Lorsque vous utilisez activement la fonctionnalité Live Processes, les métriqu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/
-[2]: /fr/agent/faq/agent-5-process-collection/
+[1]: /fr/agent/faq/agent-5-process-collection/
+[2]: /fr/agent/
 [3]: /fr/getting_started/tagging/
 [4]: /fr/getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
@@ -299,4 +299,4 @@ Lorsque vous utilisez activement la fonctionnalité Live Processes, les métriqu
 [8]: /fr/dashboards/widgets/timeseries/#pagetitle
 [9]: /fr/infrastructure/livecontainers/
 [10]: /fr/tracing/
-[11]: /fr/network_performance_monitoring/network_page
+[11]: /fr/network_monitoring/performance/network_page

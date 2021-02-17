@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez le statut du tunnel VPN, le débit, le nombre de sessions, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_vpn/'
+draft: false
 git_integration_title: google_cloud_vpn
 has_logo: true
 integration_title: Google VPN
@@ -28,7 +29,7 @@ Recueillez des métriques de Google VPN pour :
 - Visualiser les performances de vos VPN
 - Corréler les performances de vos VPN avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

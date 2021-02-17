@@ -54,15 +54,11 @@ Account Owner または Admin 権限を持つユーザーのみが、Squadcast �
 
 1. サイドバーから **Services** ページを開きます。
 
-2. **Add Service** をクリックします。
+2. 既存のサービスを選択するか、**Add Service** ボタンをクリックして新しいサービスを作成します。
 
-3. 意味のある **Service Name** とオプションの **Service Description** を入力します。
+3. **Alert Sources** をクリックして、ドロップダウンメニューから **Datadog** を選択します。
 
-4. **Integration Type** ドロップダウンメニューから**Datadog** を選択します。
-
-5. 下で生成された **Datadog Webhook URL** をコピーし、"Save" をクリックします。
-
-![Squadcast Service][1]
+5. 表示された **Datadog Webhook URL** をコピーし、**Done** をクリックします。
 
 ### Datadog で以下の手順に従います。
 
@@ -76,7 +72,7 @@ Account Owner または Admin 権限を持つユーザーのみが、Squadcast �
 
 5. **Name and URL** セクションで、意味のある名前を入力し、Squadcast が提供する **Datadog Webhook URL** を貼り付けます。
 
-    ![Squadcast Webhook][2]
+    ![Squadcast Webhook][1]
 
 6. **Use custom payload** の下にあるチェックボックスに印を入れます。
 7. 次の JSON をコピーして、**Custom Payload** セクションの下のテキストボックスに貼り付けます。
@@ -93,7 +89,7 @@ Account Owner または Admin 権限を持つユーザーのみが、Squadcast �
 
 8. "Install Integration" をクリックし、サービスインテグレーションを完了させます。
 
-    手順に関する詳細は、Squadcast の[公式ドキュメント][3]を参照してください。
+    手順に関する詳細は、Squadcast の[公式ドキュメント][2]を参照してください。
 
 ## 収集データ
 ### メトリクス
@@ -109,9 +105,8 @@ Squadcast インテグレーションには、メトリクスは含まれませ�
 Squadcast インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/squadcast/images/datadog-service.png
-[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/squadcast/images/datadog-webhook.png
-[3]: https://support.squadcast.com/docs/datadog
-[4]: https://docs.datadoghq.com/ja/help/
+[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/squadcast/images/datadog-webhook.png
+[2]: https://support.squadcast.com/docs/datadog
+[3]: https://docs.datadoghq.com/ja/help/

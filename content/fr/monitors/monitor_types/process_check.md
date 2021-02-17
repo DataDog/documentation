@@ -3,13 +3,13 @@ title: Monitor de check de processus
 kind: documentation
 description: Vérifier si un processus est en cours d'exécution sur un host
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Vérifier le statut de votre monitor
 ---
@@ -73,10 +73,10 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/integrations/process
+[1]: /fr/integrations/process/
 [2]: https://app.datadoghq.com/monitors#create/process
-[3]: /fr/monitors/monitor_types/metric
+[3]: /fr/monitors/monitor_types/metric/
 [4]: /fr/monitors/monitor_types/metric/#no-data
 [5]: /fr/monitors/monitor_types/metric/#auto-resolve
 [6]: /fr/monitors/monitor_types/metric/#evaluation-delay
-[7]: /fr/monitors/notifications
+[7]: /fr/monitors/notifications/
