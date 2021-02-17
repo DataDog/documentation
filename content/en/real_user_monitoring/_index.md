@@ -53,7 +53,7 @@ Analyze information about your user journeys, performance, network requests, and
 
 ### RUM Explorer and Analytics
 
-Slice and dice user sessions by segments such as checking when latency impacts your premium customers with [customizable analytics widgets][2]. Explore, save views and create monitors on your customized searches.
+View user sessions in segments, such as checking when latency impacts your premium customers with [customizable analytics widgets][2]. Explore, save views, and create monitors on your customized searches.
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_analytics.gif" alt="RUM Analytics"  >}}
 
