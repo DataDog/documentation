@@ -25,10 +25,10 @@ On the following example, Watchog Insights highlights that `version:2.9.7` of a 
 
 ## Navigating Watchdog Insights 
 
-{{< img src="logs/explorer/watchdog_insights/banner_collapsed.png" alt="Watchdog Insights banner (collapsed)" style="width:100%;" >}}
-
 The Watchdog Insights banner comes on top of Log Explorer results. It runs in background, and eventually surfaces insights relevant to the current query. If you seek for troubleshooting inspiration:
  
+{{< img src="logs/explorer/watchdog_insights/banner_collapsed.png" alt="Watchdog Insights banner (collapsed)" style="width:100%;" >}}
+
 * Either **expand** the Watchdog Insight banner, meant for a quick overview on insights,
 
 {{< img src="logs/explorer/watchdog_insights/banner_expanded.png" alt="Watchdog Insights banner (expanded)" style="width:100%;" >}}
@@ -54,7 +54,7 @@ Typical error outliers examples are `env:staging`, `docker_image:acme:3.1` `http
   * the field
   * to what proportion of errors and overall logs this field is contributing,
 
-{{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier card (S)" style="width:40%;" >}}
+{{< img src="logs/explorer/watchdog_insights/error_outlier_s_card.png" alt="Error Outlier card (S)" style="width:40%;" >}}
 
 * The **side panel card** of the insight shows, in addition,
 
