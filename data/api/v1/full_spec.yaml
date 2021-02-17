@@ -16794,7 +16794,7 @@ paths:
         - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 1440), #h (between 1 and 24)
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48)
 
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
