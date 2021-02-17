@@ -59,7 +59,7 @@ instances:
       port: 6379
 ```
 
-The `Dockerfile` is used to instruct Docker compose to build a Datadog Agent image including the `redisdb.yaml` file at the right locatiom:
+The `Dockerfile` is used to instruct Docker compose to build a Datadog Agent image including the `redisdb.yaml` file at the right location:
 
 ```
 FROM gcr.io/datadoghq/agent:latest
@@ -69,7 +69,7 @@ ADD conf.d/redisdb.yaml /etc/datadog-agent/conf.d/redisdb.yaml
 
 ### Log collection
 
-The `docker-compose.yml` can be extended to allow the Datadog agent to collect container logs.
+The `docker-compose.yml` can be extended to allow the Datadog Agent to collect container logs.
 
 ```yaml
 version: '3'
@@ -94,7 +94,7 @@ services:
      - /var/lib/docker/containers:/var/lib/docker/containers:ro
 ```
 
-**Note**: This only collect logs from the `Redis` container, logs can be collected from the Datadog agent by addign a similar `com.datadoghq.ad.logs` label. Log collection can be also explicitely enabled for all container by setting the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true`. See the complete [docker log collection documentation][4] for additional details.
+**Note**: This only collect logs from the `Redis` container. Logs can be collected from the Datadog Agent by adding a similar `com.datadoghq.ad.logs` label. Log collection can be also explicitly enabled for all containers by setting the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true`. See the complete [Docker log collection documentation][4] for additional details.
 
 
 ## Further Reading
