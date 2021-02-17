@@ -76,7 +76,7 @@ After the widget is saved, the value of the template variable is the one selecte
 
 {{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables"  style="width:75%;">}}
 
-#### Associated Template Variables
+#### Associated template variables
 When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated by taking into  the other template variable values selected on the page, and seamlessly identifies the related values without any configuration. 
 
 {{< img src="dashboards/template_variables/associated_template_variables.png" alt="Associated template variables"  style="width:75%;">}}
