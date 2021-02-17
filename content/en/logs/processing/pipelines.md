@@ -91,7 +91,7 @@ Open *Pre processing for JSON logs* and change the default mapping to this:
 
 {{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Reserved attribute remapper"  style="width:70%;">}}
 
-Would then produce the following log:
+This produces the following log:
 
 {{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping"  style="width:70%;">}}
 
