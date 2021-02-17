@@ -82,10 +82,43 @@ Target specific event properties using these prefixes:
 | `@evt.name:foo`                | Show the event named `foo`.  |
 
 {{< /site-region >}}
+{{< site-region region="us3" >}}
+| Filter                          | Description                                                                    |
+|---------------------------------|--------------------------------------------------------------------------------|
+| `source:github,chef`           | Show events from GitHub OR Chef.                                               |
+| `host:i-0ade23e6,db.myapp.com` | Show events from i-0ade23e6 OR db.myapp.com.                                   |
+| `service:kafka`                | Show events from the `kafka` service.    |
+| `status:error`                 | Show events with an error status (supports: `error`, `warning`, `success`).    |
+| `role:`                        |     |
+| `availability-zone:us-east-1a` | Show events in the `us-east-1a` AWS availability zone (AZ).  |
+| `container_id:foo`             | Show events from the container with the ID `foo`.   |
+| `@evt.name:foo`                | Show the event named `foo`.  |
+
+{{< /site-region >}}
 
 **Note**: Filters perform an exact match search. Partial strings are not considered.
 
 {{< site-region region="gov" >}}
+#### Context
+
+Build up a context to explore your events in your Event Explorer page first by selecting the proper time range, and then by using the search bar to filter your events and analytics.
+
+#### Facets and measures
+
+After being collected, your events attributes can be indexed as facets or measures. On the left side, you can use facets and measures to filter your results. You can create new facets or measures from existing event tags or attributes.
+
+A **facet** displays all the distinct members of an attribute or a tag and provides some basic analytics, such as the number of events represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see. to start using an attribute as a facet, click on it. Use the option to **Create facet**.The value of this attribute is stored for all new events.
+
+A **measure** is an attribute with a numerical value contained in your event. To start using an attribute as a measure, click on a numerical attribute. Use the option to **Create measure**. The value of this attribute is stored for all new events.
+
+#### Saved views
+
+Use saved views to automatically configure your event explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][5] to learn more.
+
+
+[5]: logs/explorer/saved_views/
+{{< /site-region >}}
+{{< site-region region="us3" >}}
 #### Context
 
 Build up a context to explore your events in your Event Explorer page first by selecting the proper time range, and then by using the search bar to filter your events and analytics.
@@ -187,6 +220,22 @@ sources:nagios,chef status:error cassandra
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
+#### Advanced
+
+For a more advanced search, use the Datadog log query language. See the [Log Search Syntax][6] documentation for more details.
+
+To combine multiple terms into a complex query, use the following Boolean operators:
+
+| Operator | Description                                                                                                           | Example                                   |
+|----------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| `AND`    | **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is the default).        | `redis_* AND down`                        |
+| `OR`     | **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               | `sources:nagios,chef directory OR Mixlib` |
+| `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
+
+[6]: logs/search_syntax/
+
+{{< /site-region >}}
+{{< site-region region="us3" >}}
 #### Advanced
 
 For a more advanced search, use the Datadog log query language. See the [Log Search Syntax][6] documentation for more details.
