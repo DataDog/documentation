@@ -71,12 +71,11 @@ It is possible to drag and drop a Pipeline into another Pipeline to transform it
 
 ## Special Pipelines
 
-### Reserved attribute Pipeline
+### Pre processing for JSON logs
 
-Datadog has [a list of reserved attributes][3] such as `timestamp`, `status`, `host`, `service`, and even the log `message`, those attributes have a specific behavior within Datadog.
-If you have different attribute names for those in your JSON logs, use the reserved attribute Pipeline to remap your logs attribute to one of the reserved attribute list.
+Datadog has [a list of reserved attributes][3] such as `timestamp`, `status`, `host`, `service`, and `message`. Those attributes have a specific behavior within Datadog. If you have different attribute names in your JSON logs, use *Pre processing for JSON logs* to map your log attribute names to those in the reserved attribute list.
 
-For example: A service that generates the below logs:
+For example, consider a service that generates this log:
 
 ```json
 {
@@ -88,15 +87,17 @@ For example: A service that generates the below logs:
 }
 ```
 
-Going into the reserved attribute Pipeline and changing the default mapping to this one:
+Open *Pre processing for JSON logs* and change the default mapping to this:
 
 {{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Reserved attribute remapper"  style="width:70%;">}}
 
-Would then produce the following log:
+This produces the following log:
 
 {{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping"  style="width:70%;">}}
 
-If you want to remap an attribute to one of the reserved attributes in a custom Pipeline, use the [Log Status Remapper][4] or the [Log Date Remapper][5].
+To map an attribute to one of the reserved attributes in a custom Pipeline, use the [Log Status Remapper][4], [Log Date Remapper][5], or the [Log message Remapper][6].
+
+**Note:** *Pre processing for JSON logs* is the only way to define one of your log attributes as `host` for your logs.
 
 ### Integration Pipelines
 
@@ -106,14 +107,14 @@ Datadog’s integration processing Pipelines are available for the certain sourc
 
 ### Integration Pipeline Library
 
-To see the full list of Integration Pipelines that Datadog offers, browse the [Integration Pipeline Library][6].
+To see the full list of Integration Pipelines that Datadog offers, browse the [Integration Pipeline Library][7].
 The Pipeline Library shows how Datadog processes different log formats by default.
 
 {{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Integration Pipeline Library"  style="width:80%;">}}
 
-To use one Integration Pipeline, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation will be automatically triggered and the Integration Pipeline will be added to the processing pipelines list. To configure the log source, please refer to the corresponding [Integration documentation][7].
+To use one Integration Pipeline, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation will be automatically triggered and the Integration Pipeline will be added to the processing pipelines list. To configure the log source, please refer to the corresponding [Integration documentation][8].
 
-It's also possible to copy an integration pipeline using the copy button. 
+It's also possible to copy an integration pipeline using the copy button.
 
 {{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="Cloning pipeline from Library"  style="width:80%;">}}
 
@@ -121,11 +122,11 @@ It's also possible to copy an integration pipeline using the copy button.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /logs/processing/processors/
 [2]: /logs/explorer/search/
 [3]: /logs/processing/#reserved-attributes
 [4]: /logs/processing/processors/#log-status-remapper
 [5]: /logs/processing/processors/#log-date-remapper
-[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[7]: /integrations/#cat-log-collection
+[6]: /logs/processing/processors/#log-message-remapper
+[7]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[8]: /integrations/#cat-log-collection
