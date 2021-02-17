@@ -95,7 +95,7 @@ Would then produce the following log:
 
 {{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping"  style="width:70%;">}}
 
-If you want to remap an attribute to one of the reserved attributes in a custom Pipeline, use the [Log Status Remapper][4] , [Log Date Remapper][5] or the [Log message Remapper][6].
+If you want to remap an attribute to one of the reserved attributes in a custom Pipeline, use the [Log Status Remapper][4], [Log Date Remapper][5], or the [Log message Remapper][6].
 
 Note: the *Pre processing for JSON logs* is the only way to define one of your log attribute as the `host` for your logs.
 
