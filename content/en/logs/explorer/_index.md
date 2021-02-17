@@ -37,7 +37,7 @@ The **Log Explorer** is your home base for log troubleshooting and exploration. 
 
 At any moment, [**Export**](#export) your Log Explorer view to reuse it later or in different contexts.
 
-With [Watchdog Insights][2] (Beta), kickstart, unlock or accelerate your troubleshooting sessions with contextual hints on where you could focus your attention.
+With [Watchdog Insights][11] (Beta), kickstart, unlock, or accelerate your troubleshooting sessions with contextual hints on where you could focus your attention.
 
 
 ## Filters Logs
@@ -200,4 +200,3 @@ At any moment, and depending on your current aggregation, **export** your explor
 [9]: /monitors/monitor_types/log/
 [10]: /integrations/#cat-notification
 [11]: /logs/explorer/watchdog-insights
-
