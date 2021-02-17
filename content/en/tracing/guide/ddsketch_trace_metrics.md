@@ -46,24 +46,24 @@ The APM Service and Resource pages use this metric type automatically. This mean
 - We recommend changing these to use the new DDSketch-based metrics that offer [better precision][4].
 - See the below examples for how to update your terraform definitions.
 
-p99 Before:
+Percentiles before:
 ```
 avg:trace.http.request.duration.by.resource_service.99p{service:foo, resource:abcdef1234}
 avg:trace.sample_span.duration.by.datacenter_resource_service.75p{datacenter:production, service:bar, resource:ghijk5678}
 ```
 
-p99 After:
+Percentiles after:
 ```
 p99:trace.http.request{service:foo, resource:abcdef1234}
 p75:trace.sample_span{datacenter:production, service:bar, resource:ghijk5678}
 ```
 
-p100 Before:
+p100 before:
 ```
 avg:trace.http.request.duration.by.resource_service.100p{service:foo, resource:abcdef1234}
 avg:trace.sample_span.duration.by.datacenter_resource_service.100p{datacenter:production, service:bar, resource:ghijk5678}
 ```
-p100 After:
+p100 after:
 ```
 max:trace.http.request{service:foo, resource:abcdef1234}
 max:trace.sample_span{datacenter:production, service:bar, resource:ghijk5678}
