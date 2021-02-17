@@ -1,4 +1,4 @@
----
+    ---
 title: DDSketch-based Metrics in APM
 kind: guide
 aliases:
@@ -20,8 +20,8 @@ Trace metrics are collected automatically for your services and resources and ar
 - `trace.<SPAN_NAME>`:
   - *Prerequisite:* This metric exists for any APM service .
   - *Description:* Represents latency distributions for all services, resources and versions across different environments and second primary tags.
-  - *Metric type:* [DISTRIBUTION][3]
-  - *Tags:* `env`, `service`, `version`, `resource`, and [the second primary tag][2].
+  - *Metric type:* [DISTRIBUTION][2]
+  - *Tags:* `env`, `service`, `version`, `resource`, and [the second primary tag][3].
 
 The APM Service and Resource pages use this metric type automatically. This means you can use these metrics to power your dashboards and monitors.
 
@@ -41,9 +41,35 @@ The APM Service and Resource pages use this metric type automatically. This mean
 - Distribution Metrics now power APM Service and Resource pages as Datadog rolls this out for more customers.
 - Datadog has migrated all manual queries from dashboards and monitors to the new metrics automatically on your behalf, while retaining the existing metrics to support historical views.
 
+**I'm using Terraform, what does this change mean for me?**
+- The existing metrics are not going away, this means that your Terraform definitions are still in place and still work well.
+- We recommend changing these to use the new DDSketch-based metrics that offer [better precision][4].
+- See the below examples for how to update your terraform definitions.
+
+p99 Before:
+```
+avg:trace.http.request.duration.by.resource_service.99p{service:foo, resource:abcdef1234}
+avg:trace.sample_span.duration.by.datacenter_resource_service.75p{datacenter:production, service:bar, resource:ghijk5678}
+```
+
+p99 After:
+```
+p99:trace.http.request{service:foo, resource:abcdef1234}
+p75:trace.sample_span{datacenter:production, service:bar, resource:ghijk5678}
+```
+
+p100 Before:
+```
+avg:trace.http.request.duration.by.resource_service.100p{service:foo, resource:abcdef1234}
+avg:trace.sample_span.duration.by.datacenter_resource_service.100p{datacenter:production, service:bar, resource:ghijk5678}
+```
+p100 After:
+max:trace.http.request{service:foo, resource:abcdef1234}
+max:trace.sample_span{datacenter:production, service:bar, resource:ghijk5678}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/distributions/
-[2]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[3]: /developers/metrics/types/?tab=distribution#metric-types
+[2]: /developers/metrics/types/?tab=distribution#metric-types
+[3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
