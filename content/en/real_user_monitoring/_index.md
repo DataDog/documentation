@@ -65,7 +65,7 @@ View your [backend traces, logs, infrastructure metrics][1] to line of code impa
 
 ### Error tracking and crash reporting
 
-Get automated alerts on outliers and groups of errors, timeouts, crashes to significantly reduce your MTTR with [Error Tracking][4].
+Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][4].
 
 {{< img src="real_user_monitoring/error_tracking/rum_errors.gif" alt="RUM error tracking">}}
 
