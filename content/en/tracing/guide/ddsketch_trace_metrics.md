@@ -64,8 +64,10 @@ avg:trace.http.request.duration.by.resource_service.100p{service:foo, resource:a
 avg:trace.sample_span.duration.by.datacenter_resource_service.100p{datacenter:production, service:bar, resource:ghijk5678}
 ```
 p100 After:
+```
 max:trace.http.request{service:foo, resource:abcdef1234}
 max:trace.sample_span{datacenter:production, service:bar, resource:ghijk5678}
+```
 
 {{< partial name="whats-next/whats-next.html" >}}
 
