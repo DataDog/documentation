@@ -1,4 +1,4 @@
-    ---
+---
 title: DDSketch-based Metrics in APM
 kind: guide
 aliases:
@@ -41,10 +41,9 @@ The APM Service and Resource pages use this metric type automatically. This mean
 - Distribution Metrics now power APM Service and Resource pages as Datadog rolls this out for more customers.
 - Datadog has migrated all manual queries from dashboards and monitors to the new metrics automatically on your behalf, while retaining the existing metrics to support historical views.
 
-**I'm using Terraform, what does this change mean for me?**
-- The existing metrics are not going away, this means that your Terraform definitions are still in place and still work well.
-- We recommend changing these to use the new DDSketch-based metrics that offer [better precision][4].
-- See the below examples for how to update your terraform definitions.
+**I'm using Terraform. What does this change mean for me?**
+The existing metrics are not going away; your Terraform definitions are still in place and still work.
+ To take advantage of the [better precision][4] offered by the new DDSketch-based metrics, change your Terraform definitions as shown in the following examples.
 
 Percentiles before:
 ```
