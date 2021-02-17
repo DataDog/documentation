@@ -150,7 +150,7 @@ Dans la section précédente, nous avons configuré le Forwarder Datadog pour ac
 {{< tabs >}}
 {{% tab "Framework Serverless" %}}
 
-À ce stade, le Forwarder Datadog est activé et les logs Lambda devraient déjà être automatiquement transmis à Datadog. Si les logs ne s'affichent pas encore dans Datadog, [consultez les étapes de dépannage des logs Lambda][1].
+À ce stade, le Forwarder Datadog est activé et les logs Lambda devraient déjà être automatiquement transmis à Datadog. Si les logs ne s'affichent pas encore dans Datadog, [consultez les étapes de dépannage concernant les logs Lambda][1].
 
 Si une ressource est déjà abonnée à un groupe de logs que vous souhaitez surveiller avec la fonction Lambda Datadog, vous pouvez ajouter l'ARN du Forwarder dans le champ ‘forwarder’ de votre fichier serverless.yml. Une fois configuré, le plug-in essaiera d'abonner les groupes de logs CloudWatch de la fonction au Forwarder. Par exemple, votre fichier serverless.yml ressemblera à ce qui suit :
 
