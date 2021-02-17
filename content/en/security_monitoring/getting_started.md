@@ -8,13 +8,15 @@ further_reading:
   text: "Secure your infrastructure with Datadog Runtime Security"
 ---
 
-To get started with Datadog Security Monitoring, follow these three steps:
+To get started with Datadog Security Monitoring, follow these steps:
 
 * [Ingest logs](#ingest-logs)
 * [Review Detection Rules](#review-detection-rules)
 * [Explore Security Signals](#explore-security-signals)
 
 ## Ingest logs
+
+If you already have a logging source, follow the [in-app onboarding][7] to begin collecting logs from that source.
 
 Datadog’s [Log Collection documentation][1] provides detailed information on collecting logs from many different sources into Datadog. All ingested logs are first parsed and enriched. In real time, Detection Rules apply to all processed logs to maximize detection coverage without any of the traditionally associated performance or cost concerns of indexing all of your log data. [Read more about Datadog’s Logging without Limits™][2].
 
@@ -32,6 +34,7 @@ When a threat is detected with a Detection Rule, a Security Signal is generated.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[7]:
 [1]: /logs/log_collection/
 [2]: https://www.datadoghq.com/blog/logging-without-limits/
 [3]: /security_monitoring/default_rules/
