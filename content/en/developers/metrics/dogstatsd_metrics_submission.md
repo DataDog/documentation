@@ -663,7 +663,7 @@ The above instrumentation produces the following metrics:
 | Metric                                  | Description                             |
 |-----------------------------------------|-----------------------------------------|
 | `example_metric.histogram.count`        | Number of times this metric was sampled |
-| `example_metric.histogram.avg`          | Average time of the sampled values      |
+| `example_metric.histogram.avg`          | Average of the sampled values           |
 | `example_metric.histogram.median`       | Median sampled value                    |
 | `example_metric.histogram.max`          | Maximum sampled value                   |
 | `example_metric.histogram.95percentile` | 95th percentile sampled value           |
@@ -769,7 +769,7 @@ As DogStatsD receives the timer metric data, it calculates the statistical distr
 | Metric                              | Description                             |
 |-------------------------------------|-----------------------------------------|
 | `example_metric.timer.count`        | Number of times this metric was sampled |
-| `example_metric.timer.avg`          | Average time of the sampled values      |
+| `example_metric.timer.avg`          | Average of the sampled values           |
 | `example_metric.timer.median`       | Median sampled value                    |
 | `example_metric.timer.max`          | Maximum sampled value                   |
 | `example_metric.timer.95percentile` | 95th percentile sampled value           |
