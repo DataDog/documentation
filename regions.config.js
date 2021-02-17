@@ -20,7 +20,7 @@ export default {
     },
     tcp_endpoint: {
         us: 'agent-intake.logs.datadoghq.com',
-        us3: '',
+        us3: 'agent-intake.logs.us3datadoghq.com',
         eu: 'agent-intake.logs.datadoghq.eu',
         gov: 'not supported'
     },
