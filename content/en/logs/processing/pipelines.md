@@ -73,9 +73,9 @@ It is possible to drag and drop a Pipeline into another Pipeline to transform it
 
 ### Pre processing for JSON logs
 
-Datadog has [a list of reserved attributes][3] such as `timestamp`, `status`, `host`, `service`, and `message`. Those attributes have a specific behavior within Datadog. If you have different attribute names in your JSON logs, use the *Pre processing for JSON logs* to remap your logs attribute to one of the reserved attribute list.
+Datadog has [a list of reserved attributes][3] such as `timestamp`, `status`, `host`, `service`, and `message`. Those attributes have a specific behavior within Datadog. If you have different attribute names in your JSON logs, use *Pre processing for JSON logs* to map your log attribute names to those in the reserved attribute list.
 
-For example: A service that generates the log below:
+For example, consider a service that generates this log:
 
 ```json
 {
@@ -87,7 +87,7 @@ For example: A service that generates the log below:
 }
 ```
 
-Going into the *Pre processing for JSON logs* and changing the default mapping to this one:
+Open *Pre processing for JSON logs* and change the default mapping to this:
 
 {{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Reserved attribute remapper"  style="width:70%;">}}
 
@@ -95,9 +95,9 @@ Would then produce the following log:
 
 {{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping"  style="width:70%;">}}
 
-If you want to remap an attribute to one of the reserved attributes in a custom Pipeline, use the [Log Status Remapper][4], [Log Date Remapper][5], or the [Log message Remapper][6].
+To map an attribute to one of the reserved attributes in a custom Pipeline, use the [Log Status Remapper][4], [Log Date Remapper][5], or the [Log message Remapper][6].
 
-Note: the *Pre processing for JSON logs* is the only way to define one of your log attribute as the `host` for your logs.
+**Note:** *Pre processing for JSON logs* is the only way to define one of your log attributes as `host` for your logs.
 
 ### Integration Pipelines
 
