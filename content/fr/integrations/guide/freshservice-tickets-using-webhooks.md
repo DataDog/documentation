@@ -3,7 +3,7 @@ title: Tickets Freshservice avec Webhooks
 kind: guide
 author: Trevor Veralrud
 further_reading:
-  - link: integrations/webhooks/
+  - link: /integrations/webhooks/
     tag: Documentation
     text: Intégration Webhooks
 ---
@@ -25,11 +25,9 @@ Dans le champ URL, entrez l'endpoint suivant :
 
 `https://<VOTRE_DOMAINE>.freshservice.com/api/v2/tickets`
 
-### Charge utile personnalisée
+### Charge utile
 
-Cochez d'abord la case **Use custom payload** pour utiliser une charge utile JSON personnalisée. Si cette case n'est pas cochée, la charge utile Datadog standard est envoyée à Freshservice, ce qui entraîne un échec de la requête.
-
-Ensuite, entrez une nouvelle charge utile JSON de ticket. L'exemple suivant utilise uniquement les champs obligatoires. Consultez [l'endpoint de ticket de Freshservice][2] pour découvrir d'autres options de personnalisation de votre charge utile :
+Saisissez une nouvelle charge utile de ticket au format JSON. L'exemple suivant utilise uniquement les champs obligatoires. Consultez [l'endpoint de ticket de Freshservice][2] pour découvrir d'autres options de personnalisation de votre charge utile :
 
 ```json
 {
@@ -41,7 +39,7 @@ Ensuite, entrez une nouvelle charge utile JSON de ticket. L'exemple suivant util
 }
 ```
 
-**Remarque** :
+**Remarques** :
 
 * Les valeurs telles que `$EVENT_TITLE` sont des variables utilisées par notre intégration Webhook. Pour obtenir la liste complète de ces variables ainsi que leur signification, consultez le carré d'intégration Webhook ou notre [documentation sur l'intégration Webhook][3].
 * Entrez manuellement une adresse e-mail pour le champ email au lieu d'utiliser la variable `$EMAIL` : cette dernière est uniquement renseignée lorsque le webhook est mentionné dans un commentaire du *flux d'événements* et ne peut pas être utilisée dans les *alertes de monitor*. 
@@ -79,7 +77,7 @@ Lorsque votre monitor déclenche une alerte, un nouveau ticket s'affiche dans vo
 
 ## Limites
 
-### Création de ticket
+### Création de tickets
 
 L'intégration Webhooks peut uniquement créer des tickets. La mise à jour d'un ticket existant requiert une méthode `PUT`, et l'intégration Webhooks prend uniquement en charge les méthodes `POST`.
 

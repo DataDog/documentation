@@ -67,11 +67,10 @@ Datadog Agent を停止するためのコマンドを以下に示します。
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—注: ポッドは自動的にリスケジュールされます |
 | macOS    | `launchctl stop com.datadoghq.agent` または systray アプリを使用 |
 | ソース   | `sudo service datadog-agent stop`                             |
-| Windows  | [Windows ドキュメントを参照してください][3]。                  |
+| Windows  | [Windows ドキュメント][2]を参照してください。                  |
 
 [1]: /ja/agent/
-[2]: /ja/agent/docker/?tab=standard#setup
-[3]: /ja/agent/basic_agent_usage/windows/
+[2]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
