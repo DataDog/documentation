@@ -89,6 +89,8 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 | `dumpFullConfig` | Boolean | `none` | 完全なワーカーコンフィギュレーションパラメーターを表示します。 |
 | `help` | Boolean | `none` | ヘルプを表示します。 |
 
+**注**: プライベートロケーションコンテナログはコンテナ内に保存されず、stdout/stderrに出力されます。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
