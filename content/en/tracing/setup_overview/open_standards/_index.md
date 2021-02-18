@@ -13,9 +13,9 @@ aliases:
 
 
 ---
-Datadog supports a variety of open standards, including [OpenTracing][1] and [OpenTelemetry][2]. Each of the following languages has support for sending Open Tracing data to Datadog. They all also have support for sending OpenTelemetry data to Datadog via the [OpenTelemetry Collector Datadog exporter](#opentelemetry-collector-datadog-exporter). Additionally, Python, Ruby, and NodeJS have dedicated OpenTelemetry Datadog span exporters, which export traces from OpenTelemetry tracing clients to a Datadog Agent. 
+Datadog supports a variety of open standards, including [OpenTracing][1] and [OpenTelemetry][2]. Each of the following languages has support for sending Open Tracing data to Datadog. They all also have support for sending OpenTelemetry data to Datadog via the [OpenTelemetry Collector Datadog exporter](#opentelemetry-collector-datadog-exporter), as well as [connecting OpenTelemetry Traces with Logs from the Application](#connect-opentelemetry-traces-and-logs). It's recommended to use the OpenTelemetry Collector Datadog exporter in conjunction with OpenTelemetry tracing clients. However, Python, Ruby, and NodeJS also have dedicated OpenTelemetry Datadog span exporters, which export traces directly from OpenTelemetry tracing clients to a Datadog Agent.
 
-Click your language to see instructions for setting up OpenTracing or language-specific OpenTelemetry exporters. See below for setting up the [OpenTelemetry Collector Datadog exporter](#opentelemetry-collector-datadog-exporter):
+Click your language to see instructions for setting up OpenTracing or language-specific OpenTelemetry exporters. See below for setting up the [OpenTelemetry Collector Datadog exporter](#opentelemetry-collector-datadog-exporter) as well as [connecting traces and logs](#connect-opentelemetry-traces-and-logs):
 
 {{< partial name="apm/apm-opentracing.html" >}}
 
@@ -290,6 +290,10 @@ spec:
 
 To see more information and additional examples of how you might configure your collector, see [the OpenTelemetry Collector configuration documentation][5].
 
+## Connect OpenTelemetry Traces and Logs
+
+To connect OpenTelemetry Traces and Logs, refer to the [OpenTelemetry language specific documentation for example code snippets and instructions][17].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -310,3 +314,4 @@ To see more information and additional examples of how you might configure your 
 [14]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-an-agent
 [15]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-a-standalone-collector
 [16]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/images/opentelemetry-service-deployment-models.png
+[17]: tracing/connect_logs_and_traces/opentelemetry

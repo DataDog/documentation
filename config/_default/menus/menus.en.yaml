@@ -1461,6 +1461,11 @@ main:
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
     weight: 807
+  - name: OpenTelemetry
+    url: tracing/connect_logs_and_traces/opentelemetry
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_opentelemetry
+    weight: 807
   - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
