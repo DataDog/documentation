@@ -163,11 +163,13 @@ To plan more advanced maintenance schedules, you can use RRULE.
 RRULE - or recurrence rule - is a property name from [iCalendar RFC][3], which is the standard for defining recurring events.
 Any RRULE according to RFC are supported. You can use [this tool][4] to generate RRULE and paste them into your API call.
 
-**Example**: The ERP app is updated every 2nd tuesday of the month to apply patches and fixes.
-With the following API call, setup a downtime for this service that will suppress alerts every 2nd tuesday of the month between 8am to 10am:
+**Example**: The ERP app is updated every 2nd tuesday of the month to apply patches and fixes between 8AM and 10AM. Monitors for this are scoped with `app:erp` so we use this in the downtime scope.
 
 {{< tabs >}}
 {{% tab "API " %}}
+
+The `type` parameter must be set to `rrule`. 
+The `start` and `end` parameters must match the expected start and end of the first day of the recurring rule. So in our case let's assume the first 2nd Tuesday of our rule is Tuesday March 9th, the start date has to be March 9th 08:00 AM and end date March 9th at 10:00AM:
 
 **API call:**
 
@@ -176,7 +178,7 @@ curl -X POST "https://api.datadoghq.com/api/v1/downtime" \
 -H "Content-type: application/json" \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
--d '{"scope": "env:prod","start":"1615276800","end":"1615284000", {"type":"months","period":1,"rrule":"FREQ=MONTHLY;INTERVAL=1;BYDAY=2TU"}}'
+-d '{"scope": "app:erp","start":"1615276800","end":"1615284000", "recurrence": {"type":"rrule","rrule":"FREQ=MONTHLY;INTERVAL=1;BYDAY=2TU"}}'
 ```
 
 **Response:**
@@ -184,11 +186,8 @@ curl -X POST "https://api.datadoghq.com/api/v1/downtime" \
 ```json
 {
 	"recurrence": {
-		"until_date": null,
-		"until_occurrences": null,
-		"week_days": null,
-		"type": "months",
-		"period": 1
+		"type": "rrule",
+		"rrule": "FREQ=MONTHLY;INTERVAL=1;BYDAY=2TU"
 	},
 	"end": 1615284000,
 	"monitor_tags": ["*"],
@@ -202,7 +201,7 @@ curl -X POST "https://api.datadoghq.com/api/v1/downtime" \
 	"parent_id": null,
 	"timezone": "UTC",
 	"active": false,
-	"scope": ["env:prod"],
+	"scope": ["app:erp"],
 	"message": null,
 	"downtime_type": 2,
 	"id": 123456789,
