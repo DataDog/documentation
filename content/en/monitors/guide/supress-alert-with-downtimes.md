@@ -13,8 +13,8 @@ further_reading:
 
 ## Overview
 
-Use Downtimes to eliminate unnecessary alerts during scheduled maintenance, testing or auto scaling events.
-Use the [Downtime API][1] to manage advanced maintenance schedules format or to dynamically mute monitors, for example when resizing cloud instances.
+Use Downtimes to eliminate unnecessary alerts during scheduled maintenance, testing, or auto-scaling events.
+Use the [Downtime API][1] to manage advanced maintenance schedules format, or to dynamically mute monitors, for example when resizing cloud instances.
 
 This guide describes how to configure downtimes for the following use cases:
 
@@ -24,18 +24,17 @@ This guide describes how to configure downtimes for the following use cases:
 
 ## Prerequisites
 
-Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][2].
-Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
+Since this guide describes the usage of the API, you will need an API key and an application key with admin privileges. These are available in your [Datadog account API key page][2].
+Replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
 
 This guide also assumes that you have a terminal with `CURL` and have reviewed the main [Downtime documentation page][5]
 
-**Note:** If you are in the Datadog EU site, use https://api.datadoghq.eu/api/  as the endpoint.
 
 ## Examples
 
 ### Downtime over the week-end
 
-If you monitor services used only during the week such as your company's ERP or accounting software, you may want to receive alerts only during the week.
+If you monitor services used only during the week, such as your company's ERP or accounting software, you may want to receive alerts only during the week.
 With the following API call, you can mute alert during the weekend for all monitors over the `env:prod` tag. 
 
 {{< tabs >}}
@@ -49,12 +48,12 @@ curl -X POST "https://api.datadoghq.com/api/v1/downtime" \
 -d '{"scope": "env:prod","start":"1613779200","end":"1613865599", "recurrence": {"type": "weeks","period": 1,"week_days": ["Sat","Sun"]}}'
 ```
 
-Replace the `start` and `end` parameter to match your wanted schedule. Feel free to use parameter such as:
+Replace the `start` and `end` parameter to match your wanted schedule. For example:
 
 * `start=$(date +%s)`
 * `end=$(date -v+24H +%s)`
 
-And then in the curl command use it with: `"start": '"${start}"'`.
+And then in the cURL command, use: `"start": '"${start}"'`.
 
 **Response:**
 
@@ -156,20 +155,20 @@ Open the [manage Downtime page](https://app.datadoghq.com/monitors#downtime) and
 {{% /tab %}}
 {{< /tabs >}}
 
-### Recurring Downtime on nth weekday of the month
+### Recurring Downtime on the Nth weekday of the month
 
 To plan more advanced maintenance schedules, you can use RRULE.
 
 RRULE - or recurrence rule - is a property name from [iCalendar RFC][3], which is the standard for defining recurring events.
-Any RRULE according to RFC are supported. You can use [this tool][4] to generate RRULE and paste them into your API call.
+Any RRULE listed in the [RFC][3] is supported. You can use [this tool][4] to generate RRULE and paste them into your API call.
 
-**Example**: The ERP app is updated every 2nd tuesday of the month to apply patches and fixes between 8AM and 10AM. Monitors for this are scoped with `app:erp` so we use this in the downtime scope.
+**Example**: The ERP app is updated every 2nd Tuesday of the month to apply patches and fixes between 8AM and 10AM. Monitors for this are scoped with `app:erp`, so we use this in the downtime scope.
 
 {{< tabs >}}
 {{% tab "API " %}}
 
 The `type` parameter must be set to `rrule`. 
-The `start` and `end` parameters must match the expected start and end of the first day of the recurring rule. So in our case let's assume the first 2nd Tuesday of our rule is Tuesday March 9th, the start date has to be March 9th 08:00 AM and end date March 9th at 10:00AM:
+The `start` and `end` parameters must match the expected start and end of the recurring rule's first day. So, assuming the first 2nd Tuesday of our rule is Tuesday, March 9th, the start date has to be March 9th 08:00 AM and end date March 9th at 10:00AM:
 
 **API call:**
 
