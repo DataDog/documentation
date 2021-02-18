@@ -36,7 +36,6 @@ L'interface de l'APM fournit de nombreux outils permettant de dépanner les perf
 | [Tags de span](#span-tags)         | Appliquez des tags à vos spans sous forme de paires clé-valeur pour corréler une requête dans la *Vue Trace* ou pour filtrer vos données dans *Analytics*.                                                                                                    |
 | [Filtres de rétention](#retention-filters) | Les filtres de rétention sont des règles basées sur des tags définies au sein de l'interface utilisateur de Datadog. Elles déterminent les spans à indexer dans Datadog pendant 15 jours.                                                                                              |
 | [Contrôles de l'ingestion](#ingestion-controls) | Les contrôles de l'ingestion servent à envoyer jusqu'à 100 % des traces à Datadog pour effectuer des recherches et des analyses en temps réel pendant 15 minutes.
-| [Métrique de sous-couche](#sublayer-metric) | Une métrique de sous-couche correspond à la durée d'exécution d'un type/service donné au sein d'une trace.
 | [Durée d'exécution](#execution-duration) | Temps total pendant lequel une span est considérée comme « active » (c.-à-d. qu'elle n'attend pas la finalisation d'une span enfant).
 
 
@@ -151,10 +150,6 @@ Une fois qu'un tag a été ajouté à une span, recherchez et interrogez ce tag 
 ## Contrôles de l'ingestion
 
 [Envoyez toutes les traces][20] de vos services à Datadog et tirez parti des [filtres de rétention basés sur des tags](#filtres-de-retention) afin de conserver uniquement les traces qui intéressent votre entreprise pendant 15 jours.
-
-## Métrique de sous-couche
-
-Certaines [métriques d'application de tracing][15] possèdent les tags `sublayer_service` et `sublayer_type`, qui vous permettent de calculer le temps d'exécution d'un service spécifique au sein d'une trace.
 
 ## Durée d'exécution
 

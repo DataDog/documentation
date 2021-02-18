@@ -34,7 +34,7 @@ Les paramètres sont définis comme suit :
 | `<NOM_SPAN>`                | Le nom de l'opération ou `span.name` (par exemple : `redis.command`, `pylons.request`, `rails.request`, `mysql.query`).                                                                                            |
 | `<SUFFIXE_MÉTRIQUE>`       | Le nom de la métrique (par exemple : `duration`, `hits`, `span_count`). Référez-vous à la section ci-dessous.                                                                                                                                               |
 | `<2E_TAG_PRIM>` | Si le nom de la métrique prend en compte le [deuxième tag primaire][4], ce tag fait partie du nom de la métrique.                                                                                                                       |
-| `<TAGS>`                | Tags des métriques de trace. Les tags possibles sont : `env`, `service`, `version`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class` et les tags de l'Agent Datadog (y compris le tag host et le deuxième tag primaire). **Remarque :** les tags définis sur des spans ne sont pas pris en compte et ne seront pas disponibles comme tags pour vos métriques de trace. |
+| `<TAGS>`                | Tags des métriques de trace. Les tags possibles sont : `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class` et les tags de l'Agent Datadog (y compris le tag host et le deuxième tag primaire). **Remarque :** les tags définis sur des spans ne sont pas pris en compte et ne seront pas disponibles comme tags pour vos métriques de trace. |
 
 ## Suffixes des métriques
 
@@ -96,24 +96,6 @@ Les paramètres sont définis comme suit :
   - *Type de métrique :* [COUNT][5]
   - *Tags :* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
 
-
-### Span count
-
-**Remarque** : cet espace de nommage est obsolète.
-
-- `trace.<NOM_SPAN>.span_count` :
-  - *Prérequis :* Cette métrique est disponible pour tous les services APM.
-  - *Description :* Représente le nombre de spans collectées dans un intervalle donné.
-  - *Type de métrique :* [COUNT][5]
-  - *Tags :* `env`, `service`, `resource`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
-
-- `trace.<NOM_SPAN>.span_count.by_http_status` :
-  - *Prérequis :* Cette métrique est disponible pour les services APM HTTP/WEB si des métadonnées http existent.
-  - *Description :* Représente le nombre de spans collectées dans un intervalle donné et pour chaque statut HTTP.
-  - *Type de métrique :* [COUNT][5]
-  - *Tags :* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
-
-
 ### Duration
 
 - `trace.<NOM_SPAN>.duration` :
@@ -128,30 +110,6 @@ Les paramètres sont définis comme suit :
   - *Description :* Mesure le temps total mesuré pour un groupe de spans pour chaque statut HTTP. Plus précisément, il s'agit de la part de temps de traitement mesurée pour toutes les spans dans un intervalle donné et pour un statut HTTP donné, y compris le temps passé à attendre les processus enfants.
   - *Type de métrique :* [GAUGE][6]
   - *Tags :* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
-
-- `trace.<NOM_SPAN>.duration.by_service` :
-  - *Prérequis :* Cette métrique est disponible pour tous les services APM.
-  - *Description :* Mesure le temps de traitement réel total pour chaque service (c'est-à-dire en excluant le temps passé à attendre les processus enfants).
-  - *Type de métrique :* [GAUGE][6]
-  - *Tags :* `env`, `service`, `resource`, `sublayer_service`, `http.status_code`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
-
-- `trace.<NOM_SPAN>.duration.by_type` :
-  - *Prérequis :* Cette métrique est disponible pour tous les services APM.
-  - *Description :* Mesure le temps de traitement réel total pour chaque [type de service][7].
-  - *Type de métrique :* [GAUGE][6]
-  - *Tags :* `env`, `service`, `resource`, `sublayer_type`, `http.status_code`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
-
-- `trace.<NOM_SPAN>.duration.by_type.by_http_status` :
-  - *Prérequis :* Cette métrique est disponible pour les services APM HTTP/WEB si des métadonnées http existent.
-  - *Description :* Mesure le temps de traitement réel total pour chaque [type de service][7] et chaque statut HTTP.
-  - *Type de métrique :* [GAUGE][6]
-  - *Tags :* `env`, `service`, `resource`, `sublayer_type`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
-
-- `trace.<NOM_SPAN>.duration.by_service.by_http_status` :
-  - *Prérequis :* Cette métrique est disponible pour les services APM HTTP/WEB si des métadonnées http existent.
-  - *Description :* Mesure le temps de traitement réel total pour chaque [service][8] et chaque statut HTTP.
-  - *Type de métrique :* [GAUGE][6]
-  - *Tags :* `env`, `service`, `resource`, `sublayer_service`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
 
 ### Apdex
 

@@ -35,7 +35,7 @@ With the following definitions:
 | `<SPAN_NAME>`                | The name of the operation or `span.name` (examples: `redis.command`, `pylons.request`, `rails.request`, `mysql.query`).                                                                                            |
 | `<METRIC_SUFFIX>`       | The name of the metric (examples: `duration`, `hits`, `span_count`). See the section below.                                                                                                                                               |
 | `<2ND_PRIM_TAG>` | If the metric name accounts for the [second primary tag][4], this tag is part of the metric name.                                                                                                                       |
-| `<TAGS>`                | Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag).  **Note:** Tags set on spans do not count and will not be available as tags for your traces metrics. |
+| `<TAGS>`                | Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag).  **Note:** Tags set on spans do not count and will not be available as tags for your traces metrics. |
 
 ## Metric Suffix
 
@@ -129,30 +129,6 @@ With the following definitions:
   - *Description:* Measure the total time for a collection of spans for each HTTP status. Specifically, it is the relative share of time spent by all spans over an interval and a given HTTP status - including time spent waiting on child processes.
   - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
-
-- `trace.<SPAN_NAME>.duration.by_service`:
-  - *Prerequisite:* This metric exists for any APM service.
-  - *Description:* Measure the total time spent actually processing for each service (i.e. it excludes time spent waiting on child processes).
-  - *Metric type:* [GAUGE][6]
-  - *Tags:* `env`, `service`, `resource`, `sublayer_service`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
-
-- `trace.<SPAN_NAME>.duration.by_type`:
-  - *Prerequisite:* This metric exists for any APM service.
-  - *Description:* Measure the total time spent actually processing for each [Service type][7].
-  - *Metric type:* [GAUGE][6]
-  - *Tags:* `env`, `service`, `resource`, `sublayer_type`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
-
-- `trace.<SPAN_NAME>.duration.by_type.by_http_status`:
-  - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
-  - *Description:* Measure the total time spent actually processing for each [Service type][7] and HTTP status.
-  - *Metric type:* [GAUGE][6]
-  - *Tags:* `env`, `service`, `resource`, `sublayer_type`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
-
-- `trace.<SPAN_NAME>.duration.by_service.by_http_status`:
-  - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
-  - *Description:* Measure the total time spent actually processing for each [Service][8] and HTTP status.
-  - *Metric type:* [GAUGE][6]
-  - *Tags:* `env`, `service`, `resource`, `sublayer_service`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 ### Apdex
 

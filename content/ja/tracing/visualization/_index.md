@@ -36,7 +36,6 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 | [スパンタグ](#span-tags)         | *Trace View* でリクエストを関連付けたり、*Analytics* でフィルターしたりするためのキーと値のペアの形式のタグスパン。                                                                                                    |
 | [Retention Filters](#retention-filters) | Retention Filter は Datadog UI 内に設定されたタグベースのコントロールで、15 日間にわたって Datadog でインデックスするスパンの種類を決定します。                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion Controls は Datadog に最大 100% のトレースを送信し、 15 分間の Live Search および分析を行う際に使用されます。
-| [サブレイヤーメトリクス](#sublayer-metric) | サブレイヤーメトリクスはトレース内における任意のタイプ / サービスの実行時間を指します。
 | [実行時間](#execution-duration) | スパンが 'active' と判断される合計時間 (子スパンの完了まで待機しません) 。
 
 
@@ -150,10 +149,6 @@ Indexed Span は、Datadog に 15 日間保管された [Retention Filter](#Rete
 ## Ingestion Controls
 
 サービスから Datadog に[トレースの 100% を送信][20]し、[タグベースの Retention Filter](#Retention Filters) と結合させて 15 日間で最もビジネス的に重要なトレースを維持します。
-
-## サブレイヤーメトリクス
-
-[トレーシングアプリケーションメトリクス][15]を `sublayer_service` と `sublayer_type` でタグ付けし、トレース内のサービスの実行時間を個別に確認することもできます。
 
 ## 実行時間
 

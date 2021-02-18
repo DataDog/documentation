@@ -36,7 +36,6 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Span tags](#span-tags)         | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Analytics*.                                                                                                    |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion Controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
-| [Sublayer Metric](#sublayer-metric) | A sublayer metric is the execution duration of a given type / service within a trace.
 | [Execution Duration](#execution-duration) | Total time that a span is considered 'active' (not waiting for a child span to complete).
 
 
@@ -150,10 +149,6 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 ## Ingestion Controls
 
 [Send 100% of traces][20] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
-
-## Sublayer Metric
-
-Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution duration for individual services within a trace.
 
 ## Execution Duration
 
