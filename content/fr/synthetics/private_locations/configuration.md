@@ -89,6 +89,9 @@ Vous pouvez importer des certificats racine privés dans vos emplacements privé
 | `dumpFullConfig` | Booléen | `none` | Afficher les paramètres de configuration du worker complets. |
 | `help` | Booléen | `none` | Afficher les informations d'aide. |
 
+**Remarque** : Pour les conteneurs des Emplacements Privés, les logs sortants sont écrits sur stdout/stderr et ne sont pas sauvegardés au sein des conteneurs. 
+
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
