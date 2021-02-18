@@ -9331,6 +9331,9 @@ components:
           description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM].'
           format: date-time
           type: string
+        org_name:
+          description: The name of the organization.
+          type: string
         public_id:
           description: The organization public ID.
           type: string
