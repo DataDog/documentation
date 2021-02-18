@@ -6,6 +6,9 @@ aliases:
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
     - /graphing/dashboards/template_variables/
 further_reading:
+- link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
+  tag: "Blog"
+  text: "Use associated template variables to refine your dashboards"
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Create Dashboards in Datadog"
