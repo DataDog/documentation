@@ -24,8 +24,6 @@ L'étude de grands volumes de données de log est un processus souvent chronopha
 
 Dans le Log Explorer, les patterns peuvent être identifiés automatiquement afin de structurer le problème et vous aider à mettre rapidement en avant les données pertinentes, tout en ignorant les informations non pertinentes.
 
-{{< img src="logs/explorer/patterns/log_patterns_nav.png" alt="Accéder aux patterns de logs;">}}
-
 La vue Patterns vous permet de détecter et filtrer les patterns irréguliers les plus communs afin de repérer les problèmes qui vous intéressent vraiment. Elle affiche le nombre de logs correspondants au pattern, ceux-ci étant classés par service et par statut.
 
 ## Afficher les nouveaux logs et les tendances des logs au fil du temps
@@ -37,21 +35,15 @@ Basculez vers la vue Patterns pour voir automatiquement les patterns de logs pou
 
 Cliquez sur un pattern pour afficher des exemples de logs correspondants. Vous pouvez également visualiser un log spécifique plus en détail.
 
-{{< img src="logs/explorer/patterns/patterns_overview.mp4" alt="Patterns de log" video="true" width="90%" >}}
-
 **Remarque** : les patterns présentés sont ceux détectés au sein d'un volume de 10 000 logs. Affinez la recherche pour afficher les modèles correspondants à un sous-ensemble de logs spécifiques.
 
 ## Actions de pattern
-
-{{< img src="logs/explorer/patterns/patterns_action.png" alt="Actions de patterns de logs"  style="width:80%;">}}
 
 Lorsque vous sélectionnez un pattern, un volet contextuel s'ouvre pour afficher des exemples de logs sous-jacents. Trois boutons sont disponibles dans le coin supérieur droit :
 
 * **Parsing Rule** : permet d'afficher une règle de parsing générée automatiquement associée à ce pattern (voir la capture d'écran ci-dessous).
 * **View All** : permet d'afficher tous les logs correspondant à la requête de pattern.
 * **Graph** : permet de tracer un graphique illustrant l'évolution de ce pattern au fil du temps.
-
-{{< img src="logs/explorer/patterns/patterns_parsing.png" alt="Règles de parsing de patterns de logs" style="width:80%;">}}
 
 ## Pour aller plus loin
 
