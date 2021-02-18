@@ -1739,12 +1739,12 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring_getting_started
     weight: 160001
-  - name: Threat Detection Rules
+  - name: Detection Rules
     url: security_monitoring/detection_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_detection_rules
     weight: 160002
-  - name: Default Rules
+  - name: Default Detection Rules
     url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules

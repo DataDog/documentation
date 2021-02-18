@@ -1,5 +1,5 @@
 ---
-title: Security and Compliance Rules
+title: Detection Rules
 kind: documentation
 aliases:
   - /security_monitoring/detection_rules/
@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Security Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, Datadog generates a Security Signal. Datadog provides [Default Rules][1], which begin detecting threats in your environment immediately.
+Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, Datadog generates a Security Signal. Datadog provides [Default Rules][1], which begin detecting threats in your environment immediately.
 
 ## Create a New Rule
 
