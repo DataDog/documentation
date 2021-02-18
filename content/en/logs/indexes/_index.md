@@ -144,7 +144,7 @@ Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs/indexes/
+[1]: https://app.datadoghq.com/logs/pipelines/
 [2]: /logs/explorer/#visualization
 [3]: /logs/explorer/patterns/
 [4]: /logs/explorer/analytics/
