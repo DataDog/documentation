@@ -1,5 +1,5 @@
 ---
-title: Rollup
+title: Cumul
 kind: documentation
 aliases:
   - /fr/graphing/functions/rollup/
@@ -13,12 +13,12 @@ Ajoutez la fonction `.rollup()` à la fin d'une requête pour effectuer une [agr
 * L'intervalle de temps pour un graphique donné ([si cet intervalle est plus étendu que l'intervalle de cumul imposé par la requête](#intervalle-de-cumul-impose-ou-personnalise)).
 * La façon dont les points de données sont agrégés dans un intervalle de temps donné.
 
-La fonction accepte deux paramètres, `<MÉTHODE>` et `<INTERVALLE>` : `.rollup(<MÉTHODE>,<INTERVALLE>)`.
+La fonction accepte deux paramètres, `<MÉTHODE>` et `<INTERVALLE>` (facultatif) : `.rollup(<MÉTHODE>,<INTERVALLE>)` ou `.rollup(<MÉTHODE>)`.
 
 | Paramètre  | Description                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------|
 | `<MÉTHODE>` | Ce paramètre détermine la façon dont les points de données sont agrégés dans un intervalle de temps donné. Il peut être défini sur `sum`/`min`/`max`/`count`/`avg`. |
-| `<INTERVALLE>`   | Intervalle (en secondes) entre deux points de données affichés.                                            |
+| `<INTERVALLE>`   | Intervalle (en secondes) entre deux points de données affichés. Paramètre facultatif.                                            |
 
 Ces paramètres peuvent être utilisés séparément ou ensemble, par exemple `.rollup(sum,120)`. Le graphique à barres suivant affiche l'évolution de la charge CPU sur une semaine pour un host **sans** utiliser la fonction `.rollup()` :
 
@@ -28,12 +28,12 @@ Le graphique à barres suivant affiche la même métrique, mais un cumul d'une j
 
 {{< img src="dashboards/functions/rollup/smooth_2.png" alt="smooth_2"  style="width:60%;" >}}
 
-## Rollup mobile
+## Cumul mobile
 
 
 | Fonction        | Description                                    | Exemple |
 |------------------|------------------------------------------------|------------------|
-| `moving_rollup` | Effectuer un rollup pour combiner les points recueillis sur les X dernières secondes. | `moving_rollup(<NOM_MÉTRIQUE>, <INTERVALLE> , <MÉTHODE>)` |
+| `moving_rollup` | Effectuer un cumul pour combiner les points recueillis sur les X dernières secondes. | `moving_rollup(<NOM_MÉTRIQUE>, <INTERVALLE> , <MÉTHODE>)` |
 
 
 Lorsque vous appliquez la fonction `moving_rollup()` à une requête, vous pouvez combiner plusieurs points provenant de l'intervalle spécifié le plus récent, c'est-à-dire les X dernières secondes. Comme avec `.rollup()`, la valeur de `<MÉTHODE>` peut être `sum`/`min`/`max`/`count`/`avg` et définit la façon dont les points de données sont agrégés dans un intervalle de temps donné.
@@ -50,9 +50,9 @@ Une fonction `.rollup()` personnalisée peut être utilisée pour obliger Datado
 
 Pour en savoir plus sur l'utilisation des modificateurs `.as_count()` et `.as_rate()`, consultez cet [article de blog][2] (en anglais) ou lisez la [documentation sur les modificateurs intégrés à l'application][3] pour mieux comprendre les effets de ces fonctions.
 
-## Fonction rollup dans les monitors
+## Cumuls dans les monitors
 
-L'utilisation d'une fonction rollup dans une requête de [monitor][4] est généralement à éviter en raison du risque de décalage entre l'intervalle de cumul et la fenêtre d'évaluation du monitor. Le début et la fin des intervalles de cumul sont alignés sur l'heure UNIX, et non sur le début et la fin des requêtes du monitor : les monitors sont par conséquent susceptibles d'évaluer un intervalle de cumul incomplet contenant uniquement un faible volume de données, et donc de se déclencher par erreur. Pour éviter ce problème, il est nécessaire de retarder l'évaluation du monitor pendant une durée correspondant à l'intervalle de cumul (au minimum).
+L'utilisation d'un cumul dans une requête de [monitor][4] est généralement à éviter en raison du risque de décalage entre l'intervalle de cumul et la fenêtre d'évaluation du monitor. Le début et la fin des intervalles de cumul sont alignés sur l'heure UNIX, et non sur le début et la fin des requêtes du monitor : les monitors sont par conséquent susceptibles d'évaluer un intervalle de cumul incomplet contenant uniquement un faible volume de données, et donc de se déclencher par erreur. Pour éviter ce problème, il est nécessaire de retarder l'évaluation du monitor pendant une durée correspondant à l'intervalle de cumul (au minimum).
 
 ## Autres fonctions
 

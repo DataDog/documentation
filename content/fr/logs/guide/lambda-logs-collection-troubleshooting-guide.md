@@ -47,7 +47,7 @@ Pour en savoir plus sur ces métriques AWS Lambda et en découvrir d'autres, con
 
 ### Gérer vos déclencheurs de fonction
 
-La fonction Lambda du Forwarder (logs CloudWatch ou S3) doit inclure des déclencheurs pour que les logs soient transmis. Suivez les étapes ci-dessous pour veiller à ce que les déclencheurs soient correctement configurés.
+La fonction Lambda du Forwarder doit inclure des déclencheurs (CloudWatch Logs ou S3) pour que les logs soient transmis. Suivez les étapes ci-dessous pour veiller à ce que les déclencheurs soient correctement configurés.
 
 1. La source de votre log (groupe de logs CloudWatch ou compartiment S3) s'affiche-t-elle dans la liste Triggers de la console Lambda du Forwarder ? Si c'est le cas, assurez-vous qu'elle est activée. Sinon, suivez les étapes ci-dessous pour vérifier dans la console de groupe de logs CloudWatch ou S3. En effet, cette liste affichée dans la console Lambda semble être incomplète.
 
@@ -69,7 +69,7 @@ Pour le groupe de logs CloudWatch, vous pouvez utiliser les métriques suivantes
 
 | Métrique                          | Description                                                                                        |
 |---------------------------------|----------------------------------------------------------------------------------------------------|
-| `aws.logs.incoming_log_events`  | Le nombre d'événements de log chargés dans les logs CloudWatch                                               |
+| `aws.logs.incoming_log_events`  | Le nombre d'événements de log chargés dans CloudWatch Logs                                               |
 | `aws.logs.forwarded_log_events` | Le nombre d'événements de log transmis à la destination de l'abonnement                                 |
 | `aws.logs.delivery_errors`      | Le nombre d'échecs d'envoi des événements de log vers la destination de l'abonnement                    |
 | `aws.logs.delivery_throttling`  | Le nombre d'événements de log limités pour la livraison à la destination de l'abonnement                  |
