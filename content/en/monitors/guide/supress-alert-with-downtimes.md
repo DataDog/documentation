@@ -32,7 +32,7 @@ This guide also assumes that you have a terminal with `CURL` and have reviewed t
 
 ## Examples
 
-### Downtime over the week-end
+### Downtime over the weekend
 
 If you monitor services used only during the week, such as your company's ERP or accounting software, you may want to receive alerts only during the week.
 With the following API call, you can mute alert during the weekend for all monitors over the `env:prod` tag. 
