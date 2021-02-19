@@ -28,7 +28,7 @@ further_reading:
 
 Choose a configuration option below to begin ingesting your logs. If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], or [Logstash][5].
 
-Consult the [list of available Datadog log collection endpoints](#datadog-logs-endpoints) if you want to send your logs directly to Datadog.
+Consult the [list of available Datadog log collection endpoints](#logging-endpoints) if you want to send your logs directly to Datadog.
 
 **Note**: When sending logs in a JSON format to Datadog, there is a set of reserved attributes that have a specific meaning within Datadog. See the [Reserved Attributes section](#attributes-and-tags) to learn more.
 
