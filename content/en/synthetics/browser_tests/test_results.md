@@ -19,9 +19,9 @@ Each step where a full URL is loaded will contain page performance information.
 
 ### Core Web Vitals
 
-[Google's Core Web Vitals][1] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience.
+[Google's Core Web Vitals][1] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to a good user experience.
 
-Synthetic monitoring include the two available lab metrics: [Largest Contentful Paint][2] and [Cumulative Layout Shift][3].
+Synthetic monitoring includes two available lab metrics: [Largest Contentful Paint][2] and [Cumulative Layout Shift][3].
 
 [First Input Delay][4] is available when using Real User Monitoring where real user or field data is available.
 
