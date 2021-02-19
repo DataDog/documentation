@@ -54,6 +54,14 @@ DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s
 
 {{< /site-region >}}
 
+{{< site-region region="gov" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="ddog-gov.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
+
 ### Validation
 
 Verify the Agent is running with the [status command][8]:
