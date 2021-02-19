@@ -543,12 +543,12 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
     weight: 307
-    - name: IoT
+  - name: IoT
     url: agent/iot/
     parent: agent
     identifier: agent_iot
     weight: 4
-    - name: Amazon ECS
+  - name: Amazon ECS
     url: agent/amazon_ecs/
     parent: agent
     identifier: agent_amazon_ecs
