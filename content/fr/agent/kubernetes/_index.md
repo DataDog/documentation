@@ -223,7 +223,7 @@ Pour installer l'Agent Datadog sur votre cluster Kubernetes :
 [15]: /fr/agent/kubernetes/log/
 [16]: /fr/agent/kubernetes/apm/
 [17]: /fr/infrastructure/process/?tab=kubernetes#installation
-[18]: /fr/network_performance_monitoring/installation/
+[18]: /fr/network_monitoring/performance/setup/
 [19]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [20]: /fr/agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
@@ -294,7 +294,7 @@ agent:
         - <ID_GROUPE_DOCKER>
 ```
 
-`<USER_ID>` correspond à l'UID utilisé pour exécuter l'agent et `<DOCKER_GROUP_ID>` à l'ID du groupe auquel appartient le socket containerd ou docker.
+`<USER_ID>` correspond à l'UID utilisé pour exécuter l'agent et `<DOCKER_GROUP_ID>` à l'ID du groupe auquel appartient le socket containerd ou Docker.
 
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
@@ -311,9 +311,9 @@ agent:
 
 ### Ressources Kubernetes pour les live containers
 
-L'[Agent Datadog][3] et l'[Agent de cluster][4] peuvent être configurés afin de récupérer des ressources Kubernetes pour des [live containers][5]. Cela vous permet de surveiller l'état de vos pods, déploiements et autres entités Kubernetes dans un espace de nommage ou une zone de disponibilité précise. Il est également possible de consulter les spécifications de ressources pour les échecs de pods d'un déploiement ou encore de mettre en corrélation l'activité d'un nœud avec les logs associés.
+L'[Agent Datadog][2] et l'[Agent de cluster][3] peuvent être configurés afin de récupérer des ressources Kubernetes pour des [live containers][4]. Cela vous permet de surveiller l'état de vos pods, déploiements et autres entités Kubernetes dans un espace de nommage ou une zone de disponibilité précise. Il est également possible de consulter les spécifications de ressources pour les échecs de pods d'un déploiement ou encore de mettre en corrélation l'activité d'un nœud avec les logs associés.
 
-Consultez la documentation relative aux [live containers][6] pour obtenir des instructions de configuration ainsi que des informations supplémentaires.
+Consultez la documentation relative aux [live containers][5] pour obtenir des instructions de configuration ainsi que des informations supplémentaires.
 
 ## Collecte d'événements
 
@@ -346,11 +346,11 @@ agent:
 
 ## Intégrations
 
-Dès lors que votre Agent s'exécute dans votre cluster, vous pouvez utiliser la [fonctionnalité Autodiscovery de Datadog][7] pour recueillir automatiquement des métriques et des logs à partir de vos pods.
+Dès lors que votre Agent s'exécute dans votre cluster, vous pouvez utiliser la [fonctionnalité Autodiscovery de Datadog][6] pour recueillir automatiquement des métriques et des logs à partir de vos pods.
 
 ## Variables d'environnement
 
-Vous trouverez ci-dessous la liste des variables d'environnement disponibles pour l'Agent Datadog. Si vous souhaitez configurer ces variables avec Helm, consultez la liste complète des options de configuration pour le fichier `datadog-value.yaml` dans le [référentiel helm/charts GitHub][8].
+Vous trouverez ci-dessous la liste des variables d'environnement disponibles pour l'Agent Datadog. Si vous souhaitez configurer ces variables avec Helm, consultez la liste complète des options de configuration pour le fichier `datadog-value.yaml` dans le [référentiel helm/charts GitHub][7].
 
 ### Options globales
 
@@ -376,7 +376,7 @@ Depuis la version 6.4.0 de l'Agent (et 6.5.0 de l'Agent de trace), vous pouvez 
 | `DD_PROXY_NO_PROXY`      | Liste d'URL, séparées par des espaces, pour lesquelles aucun proxy ne doit être utilisé.      |
 | `DD_SKIP_SSL_VALIDATION` | Option permettant de tester si l'Agent a des difficultés à se connecter à Datadog. |
 
-Pour en savoir plus sur les paramètres de proxy, consultez la [documentation relative au proxy de l'Agent v6][9].
+Pour en savoir plus sur les paramètres de proxy, consultez la [documentation relative au proxy de l'Agent v6][8].
 
 ### Agents de collecte facultatifs
 
@@ -384,16 +384,16 @@ Par défaut, les Agents de collecte facultatifs sont désactivés pour des raiso
 
 | Variable d'environnement                    | Description                                                                                                                                                                                                                                                  |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_ENABLED`                | Active la [collecte de traces][6] via l'Agent de trace.                                                                                                                                                                                                           |
-| `DD_LOGS_ENABLED`               | Active la [collecte de logs][7] via l'Agent de log.                                                                                                                                                                                                              |
-| `DD_PROCESS_AGENT_ENABLED`      | Active la [collecte de live processes][8] via l'Agent de processus. Par défaut, la [vue Live Container][9] est déjà activée si le socket Docker est disponible. Si cette variable d'environnement est définie sur `false`, la [collecte de live processes][8] et la [vue Live Container][9] sont désactivées. |
+| `DD_APM_ENABLED`                | Active la [collecte de traces][5] via l'Agent de trace.                                                                                                                                                                                                           |
+| `DD_LOGS_ENABLED`               | Active la [collecte de logs][6] via l'Agent de log.                                                                                                                                                                                                              |
+| `DD_PROCESS_AGENT_ENABLED`      | Active la [collecte de live processes][7] via l'Agent de processus. Par défaut, la [vue Live Container][8] est déjà activée si le socket Docker est disponible. Si cette variable d'environnement est définie sur `false`, la [collecte de live processes][7] et la [vue Live Container][8] sont désactivées. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Active la collecte d'événements via l'Agent. Si vous exécutez plusieurs Agents dans votre cluster, définissez également `DD_LEADER_ELECTION` sur `true`.                                                                                                                       |
 
 Pour activer la vue Live Container, assurez-vous d'exécuter l'Agent de processus en ayant défini DD_PROCESS_AGENT_ENABLED sur `true`.
 
 ### DogStatsD (métriques custom)
 
-Envoyez des métriques custom avec le [protocole StatsD][10] :
+Envoyez des métriques custom avec le [protocole StatsD][9] :
 
 | Variable d'environnement                     | Description                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -404,7 +404,7 @@ Envoyez des métriques custom avec le [protocole StatsD][10] :
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Active la détection de conteneurs et le tagging pour les métriques de socket Unix.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Les tags supplémentaires à ajouter à l'ensemble des métriques, événements et checks de service reçus par ce serveur DogStatsD. Par exemple : `["env:golden", "group:retrievers"]`. |
 
-En savoir plus sur l'utilisation de [DogStatsD sur des sockets de domaine Unix][11].
+En savoir plus sur l'utilisation de [DogStatsD sur des sockets de domaine Unix][10].
 
 ### Tagging
 
@@ -415,11 +415,11 @@ Datadog recueille automatiquement les tags courants à partir de Kubernetes. Pou
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extrait les étiquettes de pod.      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extrait les annotations de pod. |
 
-Consultez la documentation relative à [l'extraction de tags Kubernetes][12] pour en savoir plus.
+Consultez la documentation relative à [l'extraction de tags Kubernetes][11] pour en savoir plus.
 
 ### Utiliser des secrets
 
-Les identifiants des intégrations peuvent être conservés dans des secrets Docker ou Kubernetes et utilisés dans des modèles Autodiscovery. Pour en savoir plus, consultez la [documentation sur la gestion des secrets][13].
+Les identifiants des intégrations peuvent être conservés dans des secrets Docker ou Kubernetes et utilisés dans les modèles Autodiscovery. Pour en savoir plus, consultez la [documentation sur la gestion des secrets][12].
 
 ### Ignorer des conteneurs
 
@@ -436,7 +436,7 @@ Vous pouvez exclure des conteneurs de la collecte de logs, de la collecte de mé
 | `DD_AC_INCLUDE` | **Obsolète**. Liste des conteneurs à inclure (séparés par des espaces). Utilisez `.*` pour tous les inclure. Exemple : `"image:nom_image_1 image:nom_image_2"`, `image:.*`.  |
 | `DD_AC_EXCLUDE` | **Obsolète**. Liste des conteneurs à exclure (séparés par des espaces). Utilisez `.*` pour tous les exclure. Exemple : `"image:nom_image_3 image:nom_image_4"` (cette variable est seulement traitée pour Autodiscovery), `image:.*`. |
 
-Des exemples supplémentaires sont disponibles sur la page [Gestion de la découverte de conteneurs][14].
+Des exemples supplémentaires sont disponibles sur la page [Gestion de la découverte de conteneurs][13].
 
 **Remarque** : ces paramètres n'ont aucun effet sur les métriques `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` et `.stopped.total`, qui prennent en compte l'ensemble des conteneurs. Cela n'a aucune incidence sur le nombre de conteneurs facturés.
 
@@ -452,24 +452,23 @@ Vous pouvez ajouter d'autres écouteurs et fournisseurs de configuration à l'ai
 
 ## Commandes
 
-Consultez le [guide sur les commandes de l'Agent][15] pour découvrir toutes les commandes de l'Agent Docker.
+Consultez le [guide sur les commandes de l'Agent][14] pour découvrir toutes les commandes de l'Agent Docker.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/faq/kubernetes-legacy/
-[2]: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/#pod-templates
-[3]: /fr/agent/
-[4]: /fr/agent/cluster_agent/
-[5]: https://app.datadoghq.com/containers
-[6]: /fr/infrastructure/livecontainers/?tab=helm#configuration
-[7]: /fr/agent/kubernetes/integrations/
-[8]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
-[9]: /fr/agent/proxy/#agent-v6
-[10]: /fr/developers/dogstatsd/
-[11]: /fr/developers/dogstatsd/unix_socket/
-[12]: /fr/agent/kubernetes/tag/
-[13]: /fr/security/agent/#secrets-management
-[14]: /fr/agent/guide/autodiscovery-management/
-[15]: /fr/agent/guide/agent-commands/
+[2]: /fr/agent/
+[3]: /fr/agent/cluster_agent/
+[4]: https://app.datadoghq.com/containers
+[5]: /fr/infrastructure/livecontainers/?tab=helm#configuration
+[6]: /fr/agent/kubernetes/integrations/
+[7]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
+[8]: /fr/agent/proxy/#agent-v6
+[9]: /fr/developers/dogstatsd/
+[10]: /fr/developers/dogstatsd/unix_socket/
+[11]: /fr/agent/kubernetes/tag/
+[12]: /fr/security/agent/#secrets-management
+[13]: /fr/agent/guide/autodiscovery-management/
+[14]: /fr/agent/guide/agent-commands/
