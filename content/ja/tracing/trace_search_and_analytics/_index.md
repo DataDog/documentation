@@ -38,6 +38,9 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 サービスおよび取り込まれたトレースのインスツルメントが完了したら、タグベースの[保持フィルター][3]を Datadog アプリ内に設定すると、関連性の高いスパンを Datadog で保持できます。
 
+**注:** Ingested Span および Indexed Span はどちらも請求に影響を与える場合があります。詳細は [APM 料金][7]ページを参照してください。
+
+
 ## 15 分間の Live Search
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
@@ -94,7 +97,7 @@ Live Search は Traces ページのデフォルトのビューです。保持済
 
 たとえば、保持フィルターによりインデックス化されていないスパンにのみ表示されるタグでフィルタリングした場合、検索結果は返されませんが、Live Search を使用すると返されます。
 
-保持されるスパンと保持率をカスタマイズできます。デフォルトでは、[Datadog Intelligent Retention][4] が適用されます。デフォルトのスパン保持フィルターの詳細と独自の追加フィルターの作成方法については、[保持フィルター][3]のドキュメントを参照してください。独自のフィルターを作成または変更するには、Datadog アプリの [Retention Filters][7] ページにアクセスしてください。
+保持されるスパンと保持率をカスタマイズできます。デフォルトでは、[Datadog Intelligent Retention][4] が適用されます。デフォルトのスパン保持フィルターの詳細と独自の追加フィルターの作成方法については、[保持フィルター][3]のドキュメントを参照してください。独自のフィルターを作成または変更するには、Datadog アプリの [Retention Filters][8] ページにアクセスしてください。
 
 ## 15分間の Live Analytics
 
@@ -130,7 +133,7 @@ Retained Analytics は、Live Analytics と同じページから利用できま�
 
 **注:** 2020 年 10 月 20 日現在、App Analytics に代わり Tracing without Limits が、よりフレキシブルにトレースを 100% 取り込み、ビジネスに最も重要なものを保持する方法として使用されています。
 
-保持されるスパンと保持率をカスタマイズできます。デフォルトでは、[Datadog Intelligent Retention][4] が適用され、エラーおよびレイテンシーの多様性や、低スループットのリソースを含むトレースを自動的に保持します。デフォルトのスパン保持フィルターの詳細と独自の追加フィルターの作成方法については、[保持フィルター][3]のドキュメントを参照してください。独自のフィルターを作成または変更するには、Datadog アプリの [Retention Filters][7] ページにアクセスしてください。
+保持されるスパンと保持率をカスタマイズできます。デフォルトでは、[Datadog Intelligent Retention][4] が適用され、エラーおよびレイテンシーの多様性や、低スループットのリソースを含むトレースを自動的に保持します。デフォルトのスパン保持フィルターの詳細と独自の追加フィルターの作成方法については、[保持フィルター][3]のドキュメントを参照してください。独自のフィルターを作成または変更するには、Datadog アプリの [Retention Filters][8] ページにアクセスしてください。
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /ja/tracing/trace_retention_and_ingestion/#ingestion-controls
@@ -138,4 +141,5 @@ Retained Analytics は、Live Analytics と同じページから利用できま�
 [4]: /ja/tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter
 [5]: /ja/tracing/visualization/#indexed-span
 [6]: /ja/tracing/trace_retention_and_ingestion/
-[7]: https://app.datadoghq.com/apm/traces/retention-filters
+[7]: /ja/account_management/billing/apm_distributed_tracing/
+[8]: https://app.datadoghq.com/apm/traces/retention-filters
