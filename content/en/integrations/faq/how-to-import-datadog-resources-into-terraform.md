@@ -73,7 +73,7 @@ All example commands require the `--api-key` and `--app-key` flags.
 
 * Import all monitors: `terraformer import datadog --resources=monitor`
 * Import monitor with id 1234: `terraformer import datadog --resources=monitor --filter=monitor=1234`
-* Import monitors with id 1234 and 1234: `terraformer import datadog --resources=monitor --filter=monitor=1234:12345`
+* Import monitors with id 1234 and 12345: `terraformer import datadog --resources=monitor --filter=monitor=1234:12345`
 * Import all monitors and dashboards: `terraformer import datadog --resources=monitor,dashboard`
 * Import monitor with id 1234 and dashboard with id abc-def-ghi: `terraformer import datadog --resources=monitor,dashboard --filter=monitor=1234,dashboard=abc-def-ghi`
 
