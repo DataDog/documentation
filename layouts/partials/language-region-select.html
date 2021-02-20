@@ -23,7 +23,12 @@
   </div>
 
   <div class="region-select-container">
-    <p class="text-uppercase">Site</p>
+    <div class="d-flex">
+      <p class="text-uppercase">Site</p>
+      <a href="{{ .Site.Params.base_url }}getting_started/site/" class="ml-1 d-inline-flex">
+        <img src="{{ .Site.Params.img_url }}images/icons/help-druids.svg" height="18" width="18" />
+      </a>
+    </div>
     <div class="dropdown bootstrap-dropdown-custom js-region-select">
       <button class="btn d-flex align-items-center justify-content-between" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="btn-inner"></span>
