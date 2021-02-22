@@ -59564,6 +59564,7 @@
           "description": "The regional site for our customers.",
           "enum": [
             "datadoghq.com",
+            "us3.datadoghq.com",
             "datadoghq.eu",
             "ddog-gov.com"
           ]
