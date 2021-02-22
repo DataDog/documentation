@@ -1809,7 +1809,7 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 301
-  - name: Test Results
+  - name: Test Results & Performance
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 302
