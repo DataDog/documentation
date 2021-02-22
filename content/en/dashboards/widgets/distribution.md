@@ -13,21 +13,21 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The Distribution visualization is another way of showing metrics aggregated across one or several tags, such as *hosts*. Unlike the [heat map][1], a distribution graph's x-axis is quantity rather than time.
+The Distribution visualization shows data aggregated across one or several tags, such as *hosts*. Unlike the [heat map][1], a distribution graph's x-axis is quantity rather than time.
 
-This visualization displays only a single metric query; additional queries are disregarded.
+This visualization displays only a single query; additional queries are disregarded.
 
 **Note**: Outlier detection cannot be performed for this visualization.
 
-{{< img src="dashboards/widgets/distribution/distribution.png" alt="Distribution"  >}}
+{{< img src="dashboards/widgets/distribution/distribution.png" alt="Distribution graph">}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="Distribution"  style="width:80%;">}}
+{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="Distribution graph editor view"  style="width:100%;">}}
 
 ### Configuration
 
-Configure your metric query as usual. Note that this visualization type is useful only when metrics are aggregated across tag keys, e.g. for each `host`.
+Configure your query as usual. The Distribution visualization supports metrics, live processes, APM request latency, log events, and RUM events. Note that this visualization type is useful only when data is aggregated across tag keys, e.g. for each `host`.
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
@@ -52,11 +52,18 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 Optionally define its size and alignment.
 
+## Full screen
+
+In addition to the [standard full screen options][2], you can use x-axis controls to zoom in to a specific percentile.
+
+{{< img src="dashboards/widgets/distribution/distribution_fullscreen.png" alt="Distribution full screen graph"  style="width:80%;">}}
+
+
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][3] for the distribution widget is:
+The dedicated [widget JSON schema definition][4] for the distribution widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -65,5 +72,6 @@ The dedicated [widget JSON schema definition][3] for the distribution widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/widgets/heat_map/
-[2]: /api/v1/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[2]: /dashboards/widgets/#full-screen
+[3]: /api/v1/dashboards/
+[4]: /dashboards/graphing_json/widget_json/
