@@ -71,13 +71,13 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 ### Latency distribution
 
-In addition to all those graphs there is a service latency distribution graph:
+The service page also displays a service latency distribution graph:
 
-{{< img src="tracing/visualization/service/latency_distribution.png" alt="latency distribution"  style="width:90%;">}}
+{{< img src="tracing/visualization/service/service_latency_distribution.png" alt="latency distribution"  style="width:90%;">}}
 
-Use the top right selector of this graph to zoom on a given percentile of latency distribution:
+Use the top right percentile selectors to zoom into a given percentile, or hover over the sidebar to view percentile markers.
 
-{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="latency distribution selector"  style="width:20%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution sidebar"  style="width:20%;">}}
 
 ## Resources
 
