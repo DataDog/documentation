@@ -53,11 +53,11 @@ On the upper-right corner of each graph, click on the up arrow in order to expor
 
 The resource page also displays a resource latency distribution graph:
 
-{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Latency distribution"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Latency distribution"  style="width:100%;">}}
 
 Use the top right percentile selectors to zoom into a given percentile, or hover over the sidebar to view percentile markers.
 
-{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector"  style="width:20%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector"  style="width:50%;">}}
 
 ## Span Summary
 
