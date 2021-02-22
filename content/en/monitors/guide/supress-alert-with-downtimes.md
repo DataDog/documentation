@@ -219,3 +219,5 @@ Replace the placeholder value `<DATADOG_SITE>` with {{< region-param key="dd_sit
 [1]: https://docs.datadoghq.com/api/v1/downtimes/
 [2]: https://docs.datadoghq.com/api/v1/authentication/
 [3]: https://docs.datadoghq.com/monitors/downtimes/?tab=bymonitorname
+[4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[5]: https://icalendar.org/rrule-tool.html
