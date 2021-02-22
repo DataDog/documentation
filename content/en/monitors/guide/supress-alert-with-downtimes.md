@@ -146,7 +146,70 @@ Replace the placeholder value `<DATADOG_SITE>` with {{< region-param key="dd_sit
 ```
 
 {{% /tab %}}
+{{% tab "UI" %}}
+
+Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
+
+{{< img src="monitors/guide/downtime_businesshour.jpg" alt="Downtimes outside of business hours" style="width:60%;" >}}
+
+[1]: https://app.datadoghq.com/monitors#downtime
+{{% /tab %}}
 {{< /tabs >}}
+
+### Recurring Downtime on the Nth weekday of the month
+
+To plan more advanced maintenance schedules, you can use RRULE.
+
+RRULE - or recurrence rule - is a property name from [iCalendar RFC][4], which is the standard for defining recurring events.
+
+Any RRULE listed in the [RFC][4] is supported. You can use [this tool][5] to generate RRULEs and paste them into your API call.
+
+**Example**: The ERP app is updated every 2nd Tuesday of the month to apply patches and fixes between 8AM and 10AM. Monitors for this are scoped with `app:erp`, so we use this in the downtime scope.
+
+#### API 
+
+The `type` parameter must be set to `rrule`. 
+The `start` and `end` parameters must match the expected start and end of the recurring rule's first day. So, assuming the first 2nd Tuesday of our rule is Tuesday, March 9th, the start date has to be March 9th 08:00 AM and end date March 9th at 10:00AM:
+
+**API call:**
+
+```bash
+curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
+-H "Content-type: application/json" \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+-d '{"scope": "app:erp","start":"1615276800","end":"1615284000", "recurrence": {"type":"rrule","rrule":"FREQ=MONTHLY;INTERVAL=1;BYDAY=2TU"}}'
+```
+
+Replace the placeholder value `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. Replace the `start` and `end` parameter to match your wanted schedule.
+
+**Response:**
+
+```json
+{
+	"recurrence": {
+		"type": "rrule",
+		"rrule": "FREQ=MONTHLY;INTERVAL=1;BYDAY=2TU"
+	},
+	"end": 1615284000,
+	"monitor_tags": ["*"],
+	"child_id": null,
+	"canceled": null,
+	"monitor_id": null,
+	"org_id": 1111111,
+	"disabled": false,
+	"start": 1615276800,
+	"creator_id": 987654321,
+	"parent_id": null,
+	"timezone": "UTC",
+	"active": false,
+	"scope": ["app:erp"],
+	"message": null,
+	"downtime_type": 2,
+	"id": 123456789,
+	"updater_id": null
+}
+```
 
 
 ### Further Reading
