@@ -31,7 +31,7 @@ For more information, see the [Serverless billing page][5] and the [Datadog Pric
 
 ### IoT
 
-Datadog meters the count of IoT devices hourly. The billable count of IoT devices is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. We exclude the top 1% to reduce the impact of spikes in usage on your bill.
+Datadog meters the count of IoT devices hourly. The billable count of IoT devices is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours, excluding the top 1% to reduce the impact of spikes in usage on your bill.
 
 For more information about IoT billing, see the [Datadog Pricing page][7].
 
