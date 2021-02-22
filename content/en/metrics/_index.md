@@ -9,7 +9,6 @@ aliases:
 
 
 {{< whatsnext desc="This section includes the following topics:">}}
-    {{< nextlink href="/metrics/introduction" >}}<u>Metrics Introduction</u> - Learn about data, aggregation, and graphing metrics.{{< /nextlink >}}
     {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explore all of your metrics and perform Analytics.{{< /nextlink >}}
     {{< nextlink href="/developers/metrics/types" >}}<u>Metrics Types</u> - Types of metrics that can be submitted to Datadog.{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
