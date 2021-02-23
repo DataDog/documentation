@@ -36,7 +36,7 @@ To capture full details on the Datadog tracer, enable debug mode on your tracer 
 
 These logs can surface instrumentation errors or integration-specific errors.  For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][3].
 
-## Data schema and quotas
+## Data volume guidelines
 
 Your instrumented application can submit spans with timestamps up to 18 hours in the past and two hours in the future from the current time.
 
@@ -51,7 +51,7 @@ Datadog truncates the following strings if they exceed the indicated number of c
 | [tag key][6]    |  200       |
 | [tag value][6]  |  5000      |
 
-Datadog applies the following quotas, per 10 minute interval, which you can optionally increase by contacting [support][1]:
+For a given 10 minute interval, Datadog accepts the following combinations. To accomodate larger volumes, please contact [support][1] to discuss your use case.
 
 - 1000 unique environments and service combinations
 - 30 unique host groups per environment
