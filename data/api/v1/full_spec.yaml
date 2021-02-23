@@ -4,17 +4,17 @@ components:
   headers: {}
   links: {}
   parameters:
+    SlackAccountNamePathParameter:
+      description: Your Slack account name.
+      in: path
+      name: account_name
+      required: true
+      schema:
+        type: string
     SlackChannelNamePathParameter:
       description: The name of the Slack channel being operated on.
       in: path
       name: channel_name
-      required: true
-      schema:
-        type: string
-    SlackTeamNamePathParameter:
-      description: Your Slack team name.
-      in: path
-      name: team_name
       required: true
       schema:
         type: string
@@ -15357,12 +15357,12 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
-  /api/v1/integration/slack/configuration/accounts/{team_name}/channels:
+  /api/v1/integration/slack/configuration/accounts/{account_name}/channels:
     get:
       description: Get a list of all channels configured for your Datadog-Slack integration.
       operationId: GetSlackIntegrationChannels
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       responses:
         '200':
           content:
@@ -15397,7 +15397,7 @@ paths:
       description: Add a channel to your Datadog-Slack integration.
       operationId: CreateSlackIntegrationChannel
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       requestBody:
         content:
           application/json:
@@ -15435,19 +15435,13 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-undo:
-        operationId: RemoveSlackIntegrationChannel
-        parameters:
-        - name: team_name
-          source: TODO
-        - name: channel_name
-          source: name
         type: unsafe
-  /api/v1/integration/slack/configuration/accounts/{team_name}/channels/{channel_name}:
+  /api/v1/integration/slack/configuration/accounts/{account_name}/channels/{channel_name}:
     delete:
       description: Remove a channel from your Datadog-Slack integration.
       operationId: RemoveSlackIntegrationChannel
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       - $ref: '#/components/parameters/SlackChannelNamePathParameter'
       responses:
         '204':
@@ -15479,7 +15473,7 @@ paths:
       description: Get a channel configured for your Datadog-Slack integration.
       operationId: GetSlackIntegrationChannel
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       - $ref: '#/components/parameters/SlackChannelNamePathParameter'
       responses:
         '200':
@@ -15515,7 +15509,7 @@ paths:
       description: Update a channel used in your Datadog-Slack integration.
       operationId: UpdateSlackIntegrationChannel
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       - $ref: '#/components/parameters/SlackChannelNamePathParameter'
       requestBody:
         content:
