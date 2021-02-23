@@ -47,33 +47,14 @@ Ping チェックは [Datadog Agent][2] パッケージに**含まれていま�
 
 Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Ping チェックをインストールしてください。[バージョン 6.8 以前の Agent][4] または [Docker Agent][5] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][3]に関する Agent のガイドを参照してください。
 
-1. [開発ツールキット][6]をインストールします。
-2. integrations-extras リポジトリを複製します。
+1. [Datadog Agent をダウンロードして起動][2]します。
+2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
    ```shell
-   git clone https://github.com/DataDog/integrations-extras.git
+      datadog-agent integration install -t datadog-ping==<INTEGRATION_VERSION>
    ```
-
-3. `ddev` 構成を `integrations-extras/` パスで更新します。
-
-   ```shell
-   ddev config set extras ./integrations-extras
-   ```
-
-4. `ping` パッケージをビルドします。
-
-   ```shell
-   ddev -e release build ping
-   ```
-
-5. [Datadog Agent をダウンロードして起動][2]します。
-6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
-
-   ```shell
-   sudo -u dd-agent datadog-agent integration install -w <PATH_OF_PING_ARTIFACT_>/<PING_ARTIFACT_NAME>.whl
-   ```
-
-7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
+   <INTEGRATION_VERSION> はインテグレーションのバージョンです。datadog-ping の最初のバージョンは 1.0.0 で、その他のバージョンは [CHANGELOG][6] でご確認いただけます。
+3. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
@@ -105,12 +86,12 @@ Ping チェックには、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-[1]: https://en.wikipedia.org/wiki/Ping_(networking_utility
+[1]: https://en.wikipedia.org/wiki/Ping_(networking_utility%29
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[6]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
+[6]: https://github.com/DataDog/integrations-extras/blob/master/ping/CHANGELOG.md
 [7]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [8]: https://github.com/DataDog/integrations-extras/blob/master/ping/datadog_checks/ping/data/conf.yaml.example
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

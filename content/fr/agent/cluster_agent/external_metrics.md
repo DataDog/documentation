@@ -40,7 +40,7 @@ Pour activer le serveur de métriques custom, suivez les instructions relatives 
 
 1. Définissez `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` sur `true` dans le déploiement de l'Agent de cluster Datadog.
 2. Configurez la `<CLÉ_APP_DD>` ainsi que la `<CLÉ_API_DD>` dans le déploiement de l'Agent de cluster Datadog à l'aide des [clés d'API et d'application de votre compte Datadog][6].
-3. Facultatif : configurez `DATADOG_HOST` sur `https://app.datadoghq.eu` si vous utilisez un compte européen.
+3. Définissez `DATADOG_HOST` sur `https://{{< region-param key="dd_full_site" >}}` (valeur par défaut : `https://app.datadoghq.com`).
 
 ### Enregistrer le fournisseur de métriques externes
 
@@ -186,7 +186,7 @@ spec:
   metrics:
     - type: External
       external:
-      metricName: "datadogmetric@<espacedenommage>:<nom_métriquedatadog>"
+        metricName: "datadogmetric@<espace_de_nommage>:<nom_métrique_datadog>"
 ```
 
 **Exemple** : un Autoscaler de pods horizontaux utilisant l'objet `DatadogMetric` nommé `nginx-requests`, en partant du principe que les deux objets se trouvent dans l'espace de nommage `nginx-demo` :
@@ -220,7 +220,7 @@ L'Agent de cluster Datadog s'adapte en créant automatiquement des ressources `D
 
 Si vous choisissez de migrer un Autoscaler de pods horizontaux ultérieurement pour appeler un objet `DatadogMetric`, la ressource créée automatiquement sera nettoyée par l'Agent de cluster Datadog quelques heures plus tard.
 
-### Résolution des problèmes liés à DatadogMetric
+### Dépannage
 
 L'Agent de cluster Datadog se charge de mettre à jour la sous-ressource `status` de toutes les ressources `DatadogMetric` afin de refléter les résultats des requêtes envoyées à Datadog. Ces informations sont à examiner en priorité afin de comprendre ce qui se passe en cas de dysfonctionnement.
 

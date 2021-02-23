@@ -3,16 +3,20 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: cacti
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - monitoring
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cacti/README.md'
 display_name: Cacti
+draft: false
 git_integration_title: cacti
 guid: 566466b0-1422-44ef-b14f-493a64e7b58a
 integration_id: cacti
@@ -41,7 +45,7 @@ Recueillez des métriques de Cacti en temps réel pour :
 
 ### Installation
 
-Le check Cacti est inclus avec le paquet de l'[Agent Datadog][1]. Pour commencer à rassembler des métriques, vous devez d'abord :
+Le check Cacti est inclus avec le package de l'[Agent Datadog][1]. Pour commencer à rassembler des métriques, vous devez d'abord :
 
 1. Installer les bibliothèques et en-têtes `librrd`
 2. Installer les liaisons python vers `rrdtool`
@@ -152,6 +156,27 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 ### Métriques
 {{< get-metrics-from-git "cacti" >}}
 
+
+### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `cacti.d/conf.yaml` pour commencer à recueillir vos logs Cacti :
+
+    ```yaml
+    logs:
+      - type: file
+        path: /opt/cacti/log/cacti.log
+        source: cacti
+    ```
+
+    Modifiez la valeur du paramètre `path` en fonction de votre environnement. Consultez le [fichier d'exemple cacti.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][3].
 
 ### Événements
 
