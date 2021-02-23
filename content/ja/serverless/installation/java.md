@@ -43,7 +43,6 @@ further_reading:
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-lambda-java</artifactId>
   <version>n.n.n</version>
-  <type>pom</type>
 </dependency>
 ```
 
@@ -70,7 +69,7 @@ dependencies {
     ```java
     public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
         public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-            DDLambda dd = new DDLambda(request, lambda);
+            DDLambda dd = new DDLambda(request, context);
         }
     }
     ```
@@ -98,7 +97,7 @@ dependencies {
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         Map<String,String> myTags = new HashMap<String, String>();
             myTags.put("product", "latte");

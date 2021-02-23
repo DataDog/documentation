@@ -7,10 +7,10 @@ aliases:
   - /ja/logs/search-syntax
   - /ja/logs/explorer/search/
 further_reading:
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualize'
     tag: ドキュメント
     text: ログ分析の実行
-  - link: /logs/explorer/patterns/
+  - link: '/logs/explorer/#patterns'
     tag: ドキュメント
     text: ログ内のパターン検出
   - link: /logs/processing/
@@ -47,6 +47,8 @@ further_reading:
 
 `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`、および `/` は特殊文字と見なされ、`\` 文字を使用してエスケープする必要があります。
 
+**注**: これらの文字はエスケープできますが、ログ検索の結果には表示されません。特殊文字を検索する場合は、対象の文字の属性値を [Grok パーサー][1]でパースし、その属性を含むログを検索します。
+
 ## 属性検索
 
 ### メッセージ属性検索
@@ -57,7 +59,7 @@ further_reading:
 
 ### ファセット検索
 
-特定の属性を検索するには、まず[それをファセットとして追加][1]し、次に `@` を追加してファセット検索を指定します。
+特殊な属性を検索するには、まず[それをファセットとして追加][2]し、`@` を追加してファセットを検索していることを明確にします。
 
 たとえば、ファセット名が **url** で、**url** の値 www.datadoghq.com で絞り込む場合は、次のように入力します。
 
@@ -68,9 +70,9 @@ further_reading:
 
 1. ファセット検索では大文字と小文字が区別されます。大文字と小文字を区別したくない場合はフリーテキスト検索を使用してください。または、Grok パーサーでのパース実行中に `lowercase` フィルターを適用すれば、文字の種類に関わらない検索結果を得ることができます。
 
-2. 特殊文字を含むファセット値を検索するには、エスケープまたは二重引用符が必要です。単一の特殊文字またはスペースに一致させるには、`?` ワイルドカードを使用します。たとえば、値が `hello world` のファセット `my_facet` は、`@my_facet:hello?world` を使用して検索します。
-
-3. ログファセットでスペースを使用することは避けてください。ログファセットにスペースが含まれている場合は、スペースをエスケープする (`@user.first\ name:myvalue`) か、1 文字のワイルドカードを使用 (`@user.first?name:myvalue`) して、ファセット検索を実行します。
+2. 特殊文字を含むファセット値を検索するには、エスケープ処理または二重引用符が必要です。
+たとえば、値が `hello:world` のファセット `my_facet` は、`@my_facet:hello\:world` または `@my_facet:"hello:world"` を使用して検索します。
+単一の特殊文字またはスペースに一致させるには、`?` ワイルドカードを使用します。たとえば、値が `hello world` のファセット `my_facet` は、`@my_facet:hello?world` を使用して検索します。
 
 例:
 
@@ -116,13 +118,13 @@ further_reading:
 
 ## タグ
 
-ログは、タグを生成する[ホスト][2]と[インテグレーション][3]からタグを引き継ぎます。これらも、ファセットとして検索で使用できます。
+ログは、タグを生成する[ホスト][3]と[インテグレーション][4]からタグを引き継ぎます。これらも、ファセットとして検索で使用できます。
 
 * `test` は文字列「test」を検索します。
 * `env:(prod OR test)` は、タグ `env:prod` またはタグ `env:test` を含むすべてのログに一致します。
 * `(env:prod AND -version:beta)` は、タグ `env:prod` を含み、タグ `version:beta` は含まないすべてのログに一致します。
 
-タグが[タグのベストプラクティス][4]に従わず、`key:value` 構文も使用していない場合は、次の検索クエリを使用します。
+タグが[タグのベストプラクティス][5]に従わず、`key:value` 構文も使用していない場合は、次の検索クエリを使用します。
 
 * `tags:<MY_TAG>`
 
@@ -136,14 +138,15 @@ further_reading:
 
 ## 検索の保存
 
-[保存ビュー][5]に、検索クエリ、列、対象期間、およびファセットが格納されます。
+[保存ビュー][6]に、検索クエリ、列、対象期間、およびファセットが格納されます。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/explorer/facets/
-[2]: /ja/infrastructure/
-[3]: /ja/integrations/#cat-log-collection
-[4]: /ja/getting_started/tagging/#tags-best-practices
-[5]: /ja/logs/explorer/saved_views/
+[1]: /ja/logs/processing/parsing/?tab=matcher
+[2]: /ja/logs/explorer/facets/
+[3]: /ja/infrastructure/
+[4]: /ja/integrations/#cat-log-collection
+[5]: /ja/getting_started/tagging/#tags-best-practices
+[6]: /ja/logs/explorer/saved_views/

@@ -21,7 +21,7 @@ Log Rehydration* を使用すると、顧客が所有している、ストレー
 
 1. ログイベントをリハイドレートする **期間を選択** します。
 
-2. **クエリを入力します**。クエリの構文は、[ログエクスプローラー検索][4]の構文と同じです。リハイドレートクエリでタグ (`env:prod` や `version:x.y.z` など) を使用する場合は、ログが[タグとともにアーカイブ][8]されていることを確認してください。
+2. **クエリを入力します**。クエリの構文は、[ログエクスプローラー検索][4]の構文と同じです。リハイドレートクエリでタグ (`env:prod` や `version:x.y.z` など) を使用する場合は、ログが[タグとともにアーカイブ][5]されていることを確認してください。
 
 3. ログイベントをリハイドレートする**アーカイブを選択**します。リハイドレートできるのは、[ロールの委任を使用するよう構成された](#アクセス許可)アーカイブだけです。
 
@@ -75,6 +75,9 @@ Datadog は、アーカイブからコンテンツをリハイドレートする
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
+{{< /site-region >}}
 
 ログイベントをアーカイブからリハイドレートするために、Datadog は [AWS インテグレーション][1]で構成する AWS アカウントの IAM ロールを使用します。このロールをまだ作成していない場合は、[こちらの手順に従って作成してください][2]。このロールに対してアーカイブからのログイベントのリハイドレートを許可するには、以下のアクセス許可ステートメントを IAM ポリシーに追加する必要があります。バケット名を編集し、必要であればログアーカイブへのパスを指定してください。
 
@@ -141,7 +144,6 @@ Datadog は、アーカイブのストレージアカウントのスコープを
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
 [4]: /ja/logs/explorer/search/
-[5]: /ja/logs/processing/#reserved-attributes
+[5]: /ja/logs/archives/?tab=awss3#datadog-tags
 [6]: /ja/integrations/#cat-notification
 [7]: /ja/logs/archives/
-[8]: /ja/logs/archives/?tab=awss3#datadog-tags

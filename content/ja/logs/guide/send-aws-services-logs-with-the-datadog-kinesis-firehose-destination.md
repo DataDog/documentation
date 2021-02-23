@@ -5,7 +5,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualize'
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/processing/
