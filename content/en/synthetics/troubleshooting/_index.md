@@ -14,7 +14,7 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact our AWESOME support team][1].
+If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact Datadog's support team][1].
 
 ## Browser Tests
 
@@ -45,21 +45,21 @@ The freshly opened incognito pop up ignores all your previous browser history: c
 
 ### Test Results
 
-#### My Mobile Small/Tablet browser test results keep failing
+#### My Mobile Small or Tablet browser test results keep failing
 
 If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a very different architecture when running from a `Tablet` or a `Mobile Small`.  
-What this means is that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
+This means that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
 
 {{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
 
-For this type of cases, we recommend creating a **separate `Mobile Small` and `Tablet` specific test** where the recorded steps will match the viewport your test will be set to at runtime.  
+For these types of cases, Datadog recommends creating **separate `Mobile Small` or `Tablet` specific tests** where the recorded steps match the viewport your test is set to at runtime.  
 To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Small` or `Tablet` in the recorder dropdown before hitting the **Start Recording** button.
 
 {{< img src="synthetics/record_device.png" alt="Recording steps on mobile tablet" style="width:100%;" >}}
 
-Additionally, our browsers run in **headless**, meaning Browser tests do not support features such as `touch` and for instance cannot use them to detect the website should appear with its mobile design.
+Additionally, Datadog's test browsers run in **headless**, meaning Browser tests do not support some features. For example, Browser tests do not support `touch` and cannot use `touch` to detect whether the website should appear with its mobile design.
 
-#### My browser test has a `None or multiple elements detected` step warning
+#### My Browser test has a `None or multiple elements detected` step warning
 
 One of your Browser test steps is showing a `None or multiple elements detected` step warning:
 
