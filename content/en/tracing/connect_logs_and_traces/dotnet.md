@@ -105,7 +105,7 @@ For NLog version 4.5:
     <attribute name="exception" layout="${exception:format=ToString}" />
   </layout>
 ```
-For additional examples, see the automatic trace ID injection projects [for NLog45][1] or [for NLog46][2] on GitHub.
+For additional examples, see the automatic trace ID injection projects using [NLog 4.5][1] or [NLog 4.6][2] on GitHub.
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
