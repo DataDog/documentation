@@ -52,7 +52,8 @@ What this means is that the steps you recorded from a `Laptop Large` viewport mi
 
 {{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
 
-For this type of cases, we recommend creating a separate `Mobile Small` and `Tablet` specific test where the recorded steps will match the viewport your test will be set to at runtime. To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Small` or `Tablet` in the recorder dropdown before hitting the **Start Recording** button.
+For this type of cases, we recommend creating a **separate `Mobile Small` and `Tablet` specific test** where the recorded steps will match the viewport your test will be set to at runtime.  
+To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Small` or `Tablet` in the recorder dropdown before hitting the **Start Recording** button.
 
 {{< img src="synthetics/record_device.png" alt="Recording steps on mobile tablet" style="width:100%;" >}}
 
