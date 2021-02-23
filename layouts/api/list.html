@@ -56,10 +56,10 @@
 {{ $translate_tag := (index $translate_tags $tagSlug) | default (dict) }}
 
 <!-- lets show the intro text, shall we use v1 or v2 text. Lets try v1 for now.. -->
-{{ partial "api/intro.html" (dict "tags" $dot.Site.Data.api.v1.full_spec_deref.tags "title" $dot.Params.title "translate_tag" $translate_tag) }}
+{{ partial "api/intro.html" (dict "tags" $dot.Site.Data.api.v1.full_spec_deref.tags "title" $ParamTitleEn "translate_tag" $translate_tag) }}
 
 <!-- Loop over the menu to determine what to pull in -->
-{{ range (where .Sites.First.Menus.api ".Name" "==" .Params.title) }}
+{{ range (where .Sites.First.Menus.api ".Name" "==" $ParamTitleEn) }}
   {{ range $menuChild := .Children }}
 
     {{ $anchorStr := $menuChild.Name }}
@@ -100,7 +100,7 @@
       <!-- for accessing v1/v2 resources from latest -->
       {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "") }}
 
-      {{ range $tag := (first 1 (where $adat.tags ".name" "==" $dot.Params.title)) }}
+      {{ range $tag := (first 1 (where $adat.tags ".name" "==" $ParamTitleEn)) }}
 
         {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
 
