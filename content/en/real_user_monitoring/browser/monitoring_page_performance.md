@@ -14,6 +14,9 @@ further_reading:
   - link: "/real_user_monitoring/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
+  - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/"
+    tag: "Blog"
+    text: "Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring"
 ---
 
 {{< img src="real_user_monitoring/browser/waterfall.png" alt="Real User Monitoring page load waterfall" style="width:75%;" >}}
