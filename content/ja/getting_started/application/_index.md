@@ -144,7 +144,7 @@ Datadog [セキュリティモニタリング][23]は、アプリケーション
 [17]: /ja/dashboards/functions/
 [18]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
 [19]: /ja/monitors/
-[20]: /ja/network_performance_monitoring/
+[20]: /ja/network_monitoring/performance
 [21]: /ja/real_user_monitoring/
 [22]: /ja/infrastructure/serverless/
 [23]: /ja/security_monitoring/
