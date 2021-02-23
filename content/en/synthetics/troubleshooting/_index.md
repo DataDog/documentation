@@ -57,7 +57,7 @@ To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Sm
 
 {{< img src="synthetics/record_device.png" alt="Recording steps on mobile tablet" style="width:100%;" >}}
 
-Additionally, our browsers run in headless, meaning Browser tests do not support features such as `touch` and for instance cannot use them to detect the website should appear with its mobile design.
+Additionally, our browsers run in **headless**, meaning Browser tests do not support features such as `touch` and for instance cannot use them to detect the website should appear with its mobile design.
 
 #### My browser test has a `None or multiple elements detected` step warning
 
