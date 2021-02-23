@@ -76,70 +76,103 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-The Datadog Profiler requires Python 2.7+. Memory profiling is available on Python 3.5+. To begin profiling applications:
+### Requirements
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.
+The Datadog Profiler requires Python 2.7+ and agent to version [7.20.2][1]+ or
+[6.20.2][1]+.
 
-2. Install `ddtrace` which contains both tracing and profiler:
+Those profiling features are available depending on your Python version:
 
-    ```shell
-    pip install ddtrace
-    ```
+|      Feature         | Supported Python Versions          |
+|----------------------|------------------------------------|
+| Wall time profiling  | Python >= 2.7                      |
+| CPU time profiling   | Python >= 2.7 on POSIX platforms   |
+| Exception profiling  | Python >= 3.7 on POSIX platforms   |
+| Lock profiling       | Python >= 2.7                      |
+| Memory profiling     | Python >= 3.5                      |
 
-     **Note**: Profiler is available in the `ddtrace` library for versions 0.36+.
+### Installation
 
-3. To automatically profile your code, set `DD_PROFILING_ENABLED` environment variable to `true` when you use `ddtrace-run`:
+Install `ddtrace` which provides both tracing and profiling functionalities:
 
-    ```
+```shell
+pip install ddtrace
+```
+
+**Note**: Profiling requires the `ddtrace` library versions 0.40+.
+
+If you're using a platform where `ddtrace` binary distribution is not
+available, you will need to install a development environment.
+
+For example, on Alpine Linux, this can be done with:
+```shell
+apk install gcc musl-dev linux-headers
+```
+
+### Usage
+
+To automatically profile your code, set `DD_PROFILING_ENABLED` environment
+variable to `true` when you use `ddtrace-run`:
+
     DD_PROFILING_ENABLED=true ddtrace-run python app.py
-    ```
-    **Note:** `DD_PROFILING_ENABLED` is only supported in `dd-trace` version 0.40+. Use the alternate method if you are running an older version of `dd-trace`.
 
-    **Alternate method**
+It is strongly recommended to add tags like `service` or `version` as it
+provides the ability to slice and dice your profiles across these dimensions,
+enhancing your overall product experience. See Configuration below.
 
-    If you prefer to instrument the profiler through code, import `ddtrace.profile.auto`. After import, the Profiler starts:
+After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][2].
 
-    ```python
-    import ddtrace.profiling.auto
-    ```
+If you want to manually control the lifecycle of the profiler, use the
+`ddtrace.profiling.profiler.Profiler` object:
 
-4. After a minute or two, visualize your profiles on the [Datadog APM > Profiler page][2].
+```python
+from ddtrace.profiling import Profiler
 
-- It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use environment variables to set the parameters:
+prof = Profiler()
+prof.start()
+
+# At shutdown
+prof.stop()
+```
+
+<div class="alert alert-warning">
+The profiler has been designed to be turned on continuously. Only use the
+`start` and `stop` method to start and stop the profiler at the beginning and
+end of your program, not to selectively profile parts of your program.
+</div>
+
+#### Caveats
+
+When your process forks using `os.fork`, the profiler is actually stopped in
+the child process and needs to be restarted. For Python 3.7+ on Unix platforms,
+a new profiler is automatically started.
+
+If you use Python < 3.7, or run on a non-Unix platform, you need to manually
+start a new profiler in your child.
+
+```python
+# For ddtrace-run users, call this in your child process
+ddtrace.profiling.auto.start_profiler()
+
+# Alternatively, for manual instrumentation,
+# create a new profiler in your child process:
+from ddtrace.profiling import Profiler
+
+prof = Profiler()
+prof.start()
+```
+
+### Configuration
+
+You can configure the profiler using the following environment variable:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracer version 0.40+.              |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
-
-<div class="alert alert-info">
-Recommended for advanced usage only.
-</div>
-
-- When your process forks using `os.fork`, the profiler is stopped in the child process.
-
-  For Python 3.7+ on POSIX platforms, a new profiler is started if you enabled the profiler via `ddtrace-run` or `ddtrace.profiling.auto`.
-
-  If you manually create a `Profiler()`, use Python < 3.6, or run on a non-POSIX platform, manually restart the profiler in your child with:
-
-   ```python
-   ddtrace.profiling.auto.start_profiler()
-   ```
-
-- If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.profiler.Profiler` object:
-
-    ```python
-    from ddtrace.profiling import Profiler
-
-    prof = Profiler()
-    prof.start()
-
-    # At shutdown
-    prof.stop()
-    ```
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/profiling
