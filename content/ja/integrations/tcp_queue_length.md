@@ -12,17 +12,17 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md'
 display_name: TCP Queue Length
-draft: true
+draft: false
 git_integration_title: tcp_queue_length
 guid: 0468b098-43bd-4157-8a01-14065cfdcb7b
 integration_id: tcp-queue-length
 integration_title: TCP Queue Length
-is_public: false
+is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: tcp_queue.
-metric_to_check: tcp_queue.rqueue.size
+metric_to_check: tcp_queue.read_buffer_max_usage_pct
 name: tcp_queue_length
 public_title: Datadog-TCP Queue Length インテグレーション
 short_description: Datadog で、TCP バッファのサイズを追跡します。
@@ -32,13 +32,13 @@ supported_os:
 ---
 ## 概要
 
-このチェックは、Linux TCP によるキューの送受信サイズを監視します。
+このチェックは、Linux TCP によるキューの送受信の使用方法を監視し、キューを送受信する TCP が個々のコンテナに対して満杯の状態であるかどうかを検知します。
 
 ## セットアップ
 
 ### インストール
 
-`tcp_queue_length` は、`system-probe` で実装された eBPF パーツに依存するコア Agent 6/7 チェックです。
+`tcp_queue_length` はコア Agent 6/7 のチェックで、`system-probe` に実装された eBPF パートに依存します。Agent バージョン 7.24.1/6.24.1 以上が必要です。
 
 `system-probe` により使用される eBPF プログラムはランタイムでコンパイルされ、適切なカーネルヘッダーへのアクセスを必要とします。
 
@@ -50,7 +50,10 @@ apt install -y linux-headers-$(uname -r)
 RHEL 系のディストリビューションでは、以下のようにカーネルヘッダーをインストールします。
 ```sh
 yum install -y kernel-headers-$(uname -r)
+yum install -y kernel-devel-$(uname -r)
 ```
+
+**注**: CentOS/RHEL バージョン < 8 はサポートされていません。
 
 ### コンフィギュレーション
 
@@ -59,15 +62,12 @@ yum install -y kernel-headers-$(uname -r)
 `system-probe.yaml` コンフィギュレーションファイル内で、以下のパラメーターを必ず設定してください。
 ```yaml
 system_probe_config:
-  enabled: true
   enable_tcp_queue_length: true
 ```
 
 1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `tcp_queue_length.d/conf.yaml` ファイルを編集して、
    tcp_queue_length パフォーマンスデータの収集を開始します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル tcp_queue_length.d/conf.yaml][1] を参照してください。
-
-    デフォルトでは、`only_count_nb_contexts` パラメーターが有効化されており、通常収集される時系列のみを収集します。無効にすると、チェックによりすべてのデータ（1 回の接続に対する TCP キューのサイズ）が収集されます。
 
 2. [Agent を再起動します][2]。
 

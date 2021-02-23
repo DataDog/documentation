@@ -4,6 +4,12 @@ kind: ドキュメント
 aliases:
   - /ja/tracing/profiling/search_profiles
 further_reading:
+  - link: tracing/profiler/getting_started
+    tag: Documentation
+    text: アプリケーションの継続的なプロファイラーを有効にします。
+  - link: tracing/profiler/intro_to_profiling
+    tag: Documentation
+    text: プロファイリング入門
   - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
     tags: ブログ
     text: Datadog に常時接続型の本番環境プロファイリングが登場。

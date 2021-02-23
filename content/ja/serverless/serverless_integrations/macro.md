@@ -5,6 +5,7 @@ kind: ドキュメント
 title: Datadog のサーバーレスマクロ
 ---
 ![build_serverless](https://github.com/DataDog/datadog-cloudformation-macro/workflows/build_serverless/badge.svg)
+[![Slack](https://chat.datadoghq.com/badge.svg?bg=632CA6)](https://chat.datadoghq.com/)
 
 Datadog では、AWS SAM または AWS CDK をご利用のお客様のサーバーレスアプリケーションのデプロイに、サーバーレスの CloudFormation マクロをおすすめしています。
 
@@ -120,7 +121,7 @@ class CdkStack(core.Stack):
 | `forwarderArn:`         | 設定すると、プラグインにより関数のロググループが自動的に Datadog Forwarder にサブスクライブされます。または、[AWS::Logs::SubscriptionFilter][7] リソースを使用してログサブスクリプションを定義できます。**注**: ロググループおよびサブスクリプションフィルターの作成にはマクロに関数名が必要なため、初めてデプロイされる関数には 'FunctionName' プロパティが定義されている必要があります。'FunctionName' に、`!Sub` などの CloudFormation 関数を含めることはできません。 |
 | `stackName`             | デプロイする CloudFormation スタックの名前。`forwarderArn` が提供されていて、Lambda 関数が動的に命名されている (`FunctionName` プロパティが Lambda に提供されていない) 場合のみ必須。このパラメーターを SAM および CDK に追加する方法については、以下の例を参照してください。                                                                                                                                                                                           |
 | `flushMetricsToLogs`    | Datadog Forwarder Lambda 関数を使用して、ログ経由でカスタムメトリクスを送信します (推奨)。デフォルトは `true`。`false` に設定した場合、Datadog API キーを `apiKey` または `apiKMSKey` を使用して定義する必要があります。                                                                                                                                                                                                                                                                                       |
-| `site`                  | データを送信する Datadog サイトを設定します。flushMetricsToLogs が `false` の場合のみ必要。デフォルトは `datadoghq.com`。Datadog EU サイトには `datadoghq.eu` を設定。                                                                                                                                                                                                                                                                                                                                 |
+| `site`                  | データを送信する Datadog サイトを設定します。flushMetricsToLogs が `false` の場合にのみ必要です。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。                                                                                                                                                                                                                                                                                                                                 |
 | `apiKey`                | Datadog API キー。`flushMetricsToLogs` が `false` の場合のみ必要。                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `apiKMSKey`             | KMS を使用して暗号化された Datadog API キー。`flushMetricsToLogs` が「false」で、KMS 暗号化を使用している場合、`apiKey` の代わりにこのパラメーターを使用します。                                                                                                                                                                                                                                                                                                                                               |
 | `enableEnhancedMetrics` | Lambda 関数の拡張メトリクスを有効にします。デフォルトは `true`。Datadog Forwarder Lambda 関数が関数ロググループにサブスクライブする必要があります。                                                                                                                                                                                                                                                                                                                                            |
@@ -215,6 +216,10 @@ const subscription = new CfnSubscriptionFilter(this, `DatadogForwarderSubscripti
     filterPattern: ''
 });
 ```
+
+## コミュニティ
+
+製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 
 [1]: https://github.com/DataDog/datadog-lambda-layer-python
 [2]: https://github.com/DataDog/datadog-lambda-layer-js

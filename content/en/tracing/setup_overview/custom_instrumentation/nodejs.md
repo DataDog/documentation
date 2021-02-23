@@ -233,12 +233,12 @@ API details for `tracer.trace()` can be found [here][1].
 
 ## Request filtering
 
-You may not want some requests of an application to be instrumented. A common case would be health checks or other synthetic traffic. These can be ignored by using the `blacklist` or `whitelist` option on the `http` plugin.
+You may not want some requests of an application to be instrumented. A common case would be health checks or other synthetic traffic. These can be ignored by using the `blocklist` or `allowlist` option on the `http` plugin.
 
 ```javascript
 // at the top of the entry point right after tracer.init()
 tracer.use('http', {
-  blacklist: ['/health', '/ping']
+  blocklist: ['/health', '/ping']
 })
 ```
 

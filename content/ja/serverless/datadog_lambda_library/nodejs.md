@@ -7,7 +7,7 @@ title: Datadog Lambda Library for Node.js
 ![build](https://github.com/DataDog/datadog-lambda-js/workflows/build/badge.svg)
 [![Code Coverage](https://img.shields.io/codecov/c/github/DataDog/datadog-lambda-js)](https://codecov.io/gh/DataDog/datadog-lambda-js)
 [![NPM](https://img.shields.io/npm/v/datadog-lambda-js)](https://www.npmjs.com/package/datadog-lambda-js)
-[![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
+[![Slack](https://chat.datadoghq.com/badge.svg?bg=632CA6)](https://chat.datadoghq.com/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-js/blob/main/LICENSE)
 
 Datadog Lambda Library for Node.js は、拡張 Lambda メトリクス、分散型トレーシング、および AWS Lambda 関数からのカスタムメトリクス送信を可能にします。
@@ -120,6 +120,10 @@ X-Ray トレースと Datadog トレースの両方を使用するときに、X-
 ## 寄稿
 
 このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/dd-lambda-js/blob/main/CONTRIBUTING.md)に従ってプルリクエストを開いてください。
+
+## コミュニティ
+
+製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 
 ## ライセンス
 

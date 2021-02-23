@@ -2,7 +2,7 @@
 title: Agent FAQ
 kind: faq
 private: true
-disable_toc: true
+disable_sidebar: true
 aliases:
 - /agent/faq/agent-5-vs-agent-6-for-docker-kubernetes
 ---

@@ -30,7 +30,7 @@ You can also build a [custom check][10] to define and send metrics to Datadog fr
 
 The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12], and to use those, you need to download the [developer toolkit][13]. For more information on installing or managing these integrations, see the [integrations management guide][14].
 
-### API and Application keys
+### API and application keys
 
 To [install the Datadog Agent][15], you need an [API key][16]. If the Agent is already downloaded, make sure to set up the API key in the `datadog.yaml` file. To use most additional Datadog functionality besides submitting metrics and events, you need an [application key][16]. You can manage your accounts API and application keys in the [API Settings page][17].
 

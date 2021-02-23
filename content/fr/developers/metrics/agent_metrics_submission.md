@@ -142,7 +142,7 @@ Suivez les étapes ci-dessous pour créer un [check custom d'Agent][2] qui trans
 
 3. À un niveau supérieur du dossier `conf.d/`, accédez au dossier `checks.d/`. Créez un fichier de check custom `metrics_example.py` avec le contenu ci-dessous :
 
-    {{< code-block lang="python" filename="metrics_example.py" >}}
+    ```python
     import random
 
     from datadog_checks.base import AgentCheck
@@ -194,7 +194,7 @@ Suivez les étapes ci-dessous pour créer un [check custom d'Agent][2] qui trans
                 random.randint(0, 10),
                 tags=["env:dev","metric_submission_type:histogram"],
             )
-    {{< /code-block >}}
+    ```
 
 4. [Redémarrez l'Agent][4].
 5. Vérifiez que votre check custom s'exécute correctement avec la [sous-commande status de l'Agent][5]. Cherchez `metrics_example` dans la section Checks :

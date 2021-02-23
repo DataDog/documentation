@@ -55,7 +55,7 @@ Les besoins exacts en ressources dépendent de l'utilisation faite de l'Agent Io
 Pour télécharger et installer automatiquement l'Agent IoT adapté à votre système d'exploitation et à l'architecture de votre chipset, utilisez la commande suivante :
 
 ```shell
-DD_API_KEY=<VOTRE_CLÉ_API_DD> DD_SITE="{{< region-param key="dd_site" code="true" >}}" DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<VOTRE_CLÉ_API_DD> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
 #### Méthode manuelle
@@ -71,10 +71,11 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     sudo apt-get install apt-transport-https
     ```
 
-2. Configurez le référentiel deb de Datadog sur votre système et importez la clé apt de Datadog :
+2. Configurez le référentiel Debian de Datadog sur votre système et importez la clé apt de Datadog :
     ```bash
     sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
     ```
 
 3. Mettez à jour `apt` et installez l'Agent IoT :
@@ -83,33 +84,20 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     sudo apt-get install datadog-iot-agent
     ```
 
-{{< site-region region="us" >}}
+4. Copiez l'exemple de configuration et spécifiez votre clé d'API :
+    ```bash
+    DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
+    ```
 
-<ol start="4">
-  <li><p>Copiez l'exemple de configuration et rajoutez votre clé API :</p>
-  <pre><code>DD_API_KEY=&lt;VOTRE_CLÉ_API_DD&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
-  </li>
-  <li><p>Lancez l'Agent IoT :</p>
-  <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
-  </li>
-</ol>
+5. Définissez votre site Datadog sur `{{< region-param key="dd_site" code="true" >}}`. Valeur par défaut : `datadoghq.com`.
+    ```bash
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
+    ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-<ol start="4">
-  <li><p>Copiez l'exemple de configuration et rajoutez votre clé API :</p>
-  <pre><code>DD_API_KEY=&lt;VOTRE_CLÉ_API_DD&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
-  </li>
-  <li><p>Définissez votre site Datadog :</p>
-  <pre><code>sudo sh -c "sed 's/# site:.*/site: datadoghq.eu/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml</code></pre>
-  </li>
-  <li><p>Lancez l'Agent IoT :</p>
-  <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
-  </li>
-</ol>
-
-{{< /site-region >}}
+6. Démarrez l'Agent IoT :
+    ```bash
+    sudo systemctl restart datadog-agent.service
+    ```
 
 {{% /tab %}}
 {{% tab "RPM" %}}
@@ -124,46 +112,34 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
    `baseurl` dépend du système d'exploitation de votre host :
-    - x86_64 - `https://yum.datadoghq.com/stable/7/x86_64/`
-    - arm64 - `https://yum.datadoghq.com/stable/7/aarch64/`
-    - ARMv7 - `https://yum.datadoghq.com/stable/7/armv7hl/`
+    - x86_64 : `https://yum.datadoghq.com/stable/7/x86_64/`
+    - arm64 : `https://yum.datadoghq.com/stable/7/aarch64/`
+    - ARMv7 : `https://yum.datadoghq.com/stable/7/armv7hl/`
 
-2. Mettez à jour votre référentiel yum et installez l'Agent :
+2. Mettez à jour votre référentiel yum local et installez l'Agent :
     ```
     sudo yum makecache
     sudo yum install datadog-iot-agent
     ```
 
-{{< site-region region="us" >}}
+3. Copiez l'exemple de configuration et spécifiez votre clé d'API :
+    ```
+    DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
+    ```
 
-<ol start="3">
-  <li>Copiez l'exemple de configuration et rajoutez votre clé API :</p>
-  <pre><code>DD_API_KEY=&lt;VOTRE_CLÉ_API_DD&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
-  </li>
-  <li><p>Lancez l'Agent IoT :</p>
-  <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
-  </li>
-</ol>
+4. Définissez votre site Datadog sur {{< region-param key="dd_site" code="true" >}}. Valeur par défaut : `datadoghq.com`.
+    ```bash
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
+    ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-<ol start="3">
-  <li><p>Copiez l'exemple de configuration et rajoutez votre clé API :</p>
-  <pre><code>DD_API_KEY=&lt;VOTRE_CLÉ_API_DD&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
-  </li>
-  <li><p>Définissez votre site Datadog :</p>
-  <pre><code>sudo sh -c "sed 's/# site:.*/site: datadoghq.eu/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml</code></pre>
-  </li>
-  <li><p>Lancez l'Agent IoT :</p>
-  <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
-  </li>
-</ol>
-
-{{< /site-region >}}
+5. Démarrez l'Agent IoT :
+    ```bash
+    sudo systemctl restart datadog-agent.service
+    ```
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -25,7 +25,7 @@ While Live Processes data is stored for 36 hours, you can generate global and pe
 
 {{< img src="infrastructure/process/process2metrics_overview.png" alt="Generate process-based metrics"  style="width:80%;">}}
 
-Generating process-based metrics is currently in [private beta][1].
+Generating process-based metrics is currently in public beta for all US customers. EU customers can request access [using this form][1].
 
 ## Generate a process-based metric
 

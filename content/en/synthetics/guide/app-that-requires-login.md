@@ -1,5 +1,5 @@
 ---
-title: Using Synthetic tests to monitor an application that requires a login
+title: Running tests on an application that requires authentication
 kind: guide
 further_reading:
     - link: 'synthetics/browser_tests'
@@ -63,7 +63,7 @@ The second way to ensure that your Datadog Browser tests can login into your app
 
 - Specific headers
 - Cookies
-- Basic, Digest or NTLM credentials
+- Basic, Digest, Bearer or NTLM credentials
 
 These are set at every test execution and consequently allow you to start the recording of your steps directly post login. 
 

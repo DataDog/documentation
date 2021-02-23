@@ -80,7 +80,7 @@ Agent v6 で使用できるメトリクスを下記に示します。Agent v5 �
 
 Agent の起動または再起動の際に、Agent はイベントを Datadog に送信します。
 
-### サービスのチェック
+### サービスチェック
 
 **datadog.agent.up**:
 Agent が Datadog に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。

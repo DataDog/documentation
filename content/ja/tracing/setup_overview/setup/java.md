@@ -38,11 +38,12 @@ Datadog アプリ内の[クイックスタート手順][3]に従って、最高�
 
 もしくは、各言語で作成されたアプリケーションをトレースする場合は以下の操作を行ってください。
 
-1. Agent クラスファイルが含まれる `dd-java-agent.jar` をダウンロードします:
+1. 最新の Agent クラスファイルが含まれる `dd-java-agent.jar` をダウンロードします:
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
+   トレーサーの特定のバージョンにアクセスするには、Datadog の [Maven リポジトリ][16]を参照してください。
 
 2. アプリケーションの起動時に IDE、Maven または Gradle アプリケーションスクリプト、または `java -jar` コマンドに次の JVM 引数を追加します:
 
@@ -128,17 +129,18 @@ JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
 {{% /tab %}}
 {{% tab "Tomcat" %}}
 
-Tomcat 起動スクリプトファイル (たとえば、`catalina.sh`) を開き、次を追加します。
+Tomcat 起動スクリプトファイル (たとえば、Linux では `setenv.sh`) を開き、次を追加します。
 
 ```text
 CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
 ```
 
-または Windows では、`catalina.bat`:
+Windows では、`setenv.bat`:
 
 ```text
 set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
+`setenv` ファイルが存在しない場合は、Tomcat プロジェクトフォルダーの `./bin` ディレクトリで作成します。
 
 {{% /tab %}}
 {{% tab "JBoss" %}}
@@ -241,7 +243,7 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 | `dd.trace.agent.timeout`               | `DD_TRACE_AGENT_TIMEOUT`               | `10`                              | Datadog Agent とのネットワークインタラクションのタイムアウト (秒)。                                                                                                                                                                                                   |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (例: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) 名前をタグ付けするヘッダーキーのマップ。ヘッダー値がトレースのタグとして自動的に提供されます。                                                                                                               |
 | `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([こちらを参照][8])               | (例: `com.some.Trace;io.other.Trace`) `@Trace` として処理するメソッドアノテーションのリスト。                                            |
-| `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (例: `"package.ClassName[method1,method2,...];AnonymousClass$1[call]"`) トレースするクラス/インターフェイスとメソッドのリスト。`@Trace` の追加と似ていますが、コードの変更はありません。                                                                                       |
+| `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (例: `"package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]"`) トレースするクラス/インターフェイスとメソッドのリスト。`@Trace` の追加と似ていますが、コードの変更はありません。**注:** ワイルドカード型メソッドのサポート (`[*]`) は、コンストラクター、get アクセス操作子、set アクセス操作子、synthetic、toString、等号、ハッシュコード、またはファイナライザーメソッドのコールに対応しません。    |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | フラッシュする部分スパンの数を設定します。大量のトラフィック処理や長時間のトレース実行時にメモリのオーバーヘッドを軽減する際に役立ちます。     |
 | `dd.trace.split-by-tags`               | `DD_TRACE_SPLIT_BY_TAGS`               | `null`                            | (例: `aws.service`) 対応するサービスタグで特定されるよう、スパンの名前を変えるために使われます                                       |
 | `dd.trace.db.client.split-by-instance` | `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` | `false`                           | `true` に設定すると、db スパンにインスタンス名がサービス名として割り当てられます                                                                     |
@@ -491,3 +493,4 @@ Java APM がアプリケーションのオーバーヘッドに与える影響�
 [13]: /ja/tracing/compatibility_requirements/java#disabling-integrations
 [14]: /ja/integrations/java/?tab=host#metric-collection
 [15]: https://github.com/openzipkin/b3-propagation
+[16]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent

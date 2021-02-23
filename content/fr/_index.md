@@ -7,5 +7,5 @@ aliases:
   - /fr/faq/
   - /fr/docs/
   - /fr/guides/overview/
-disable_toc: true
+disable_sidebar: true
 ---

@@ -22,8 +22,6 @@ La liste des logs affiche les logs indexés et propose des outils efficaces pour
 
 Filtrez vos logs en définissant une requête de recherche (consultez les sections [Recherche à facettes][1] et [Syntaxe des requêtes de recherche][2] pour les cas d'utilisation avancés) et en choisissant un intervalle de temps. Explorez les logs filtrés dans le tableau, et visualisez n'importe quel log plus en détail depuis le [volet latéral des logs][3].
 
-{{< img src="logs/explorer/list/list_walkthrough.gif" alt="configurer le tableau d'affichage"  style="width:80%;">}}
-
 ## Tableau des logs
 
 Les logs correspondant à votre recherche sont affichés dans le tableau des logs.
@@ -35,13 +33,11 @@ Les colonnes du tableau peuvent être personnalisées de deux façons :
 
 Le bouton _Options_ vous permet de modifier le **nombre de lignes** affichées sur le tableau pour chaque événement de log.
 
-{{< img src="logs/explorer/list/table_controls.gif" alt="configurer le tableau d'affichage"  style="width:80%;">}}
+{{< img src="logs/explorer/table_controls.gif" alt="configurer le tableau d'affichage"  style="width:80%;">}}
 
 La configuration du tableau des logs est enregistrée avec les autres paramètres de votre contexte de dépannage dans les [Vues enregistrées][4].
 
 ## Exporter une vue
-
-{{< img src="logs/explorer/list/list_share.gif" alt="configurer le tableau d'affichage"  style="width:80%;">}}
 
 - **Export to Monitor** : exportez la requête appliquée à votre flux de logs pour créer la requête de votre nouveau [log monitor][5].
 - **Download as CSV** : exportez votre vue du flux de logs actuelle avec les colonnes sélectionnées vers un fichier CSV. Vous pouvez exporter jusqu'à 5 000 logs à la fois.

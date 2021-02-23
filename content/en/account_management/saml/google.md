@@ -16,7 +16,7 @@ further_reading:
 
 [See the dedicated Google instructions][1]
 
-## For the "Service Provider Details"
+## Service provider details
 
 **Pre-requisite**: IDP initiated SSO must be checked on Datadog SAML Configuration page
 
@@ -28,7 +28,7 @@ further_reading:
 * **Signed Response**: Leave unchecked
 * **Name ID**: "Basic Information" "Primary Email"
 
-## For the "Attribute Mapping"
+## Attribute mapping
 
 * "urn:oid:1.3.6.1.4.1.5923.1.1.1.6" "Basic Information" "Primary Email"
 

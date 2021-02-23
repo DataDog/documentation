@@ -16,7 +16,7 @@ SLO error budget monitors are threshold based and notify you when a certain perc
 **Note:** Error budget monitors are only available for [metric-based SLOs][1].
 
 
-## Monitor Creation
+## Monitor creation
 
 1. Navigate to the [SLO status page][2].
 2. Create a new metric-based SLO or edit an existing one, then click the ‘Save and Set Alert’ button. For existing SLOs, you can also click the “Enable Alerts” link in the SLO detail side panel to take you directly to the alert configuration.
@@ -60,7 +60,7 @@ resource "datadog_monitor" "metric-based-slo" {
 
 Replace `slo_id` with the alphanumeric ID of the metric-based SLO you wish to configure an error budget monitor on and replace `time_window` with one of `7d`, `30d` or `90d`- depending on which target is used to configure your metric-based SLO.
 
-## Beta Restrictions
+## Beta restrictions
 
 - Alerting is available for only metric-based SLOs.
 - The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel.

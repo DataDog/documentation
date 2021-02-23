@@ -26,19 +26,34 @@
 {{ end }}
 
 {{ if .Params.supported_os }}
-<div class="row integration-os">
-    <div class="agent col-12">
-        <p class="mb-3"><strong class="supported-os-text">Supported OS:</strong>
-            <a href="{{ .Site.BaseURL }}agent/#supported-oss-versions">
+    <div class="row integration-os">
+        <div class="agent col-12">
+            <p class="mb-3">
                 {{ range .Params.supported_os }}
-                    {{ if eq . "linux"}}<span>{{ partial "img.html" (dict "root" $dot "src" "os-linux.png" "class" "static" "alt" "Linux" "width" "28") }}</span>{{end}}
-                    {{ if eq . "mac_os"}}<span class="mr-1">{{ partial "img.html" (dict "root" $dot "src" "os-macos.png" "class" "static" "alt" "Mac OS" "width" "28") }}</span>{{end}}
-                    {{ if eq . "windows"}}<span>{{ partial "img.html" (dict "root" $dot "src" "os-windows-bw.png" "class" "static" "alt" "Windows" "width" "28") }}</span>{{end}}
-                {{end}}
-            </a>
-        </p>
+                    {{ if eq . "linux" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-linux.png" "class" "static" "alt" "Linux" "width" "24") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "mac_os" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-macos.png" "class" "static" "alt" "Mac OS" "width" "24") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "windows" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "os-windows-bw.png" "class" "static" "alt" "Windows" "width" "24") }}
+                        </span>
+                    {{ end }}
+                {{ end }}
+                <strong class="supported-os-text">OS Supported</strong>
+            </p>
+        </div>
     </div>
-</div>
 {{ end }}
 
-<div class="mb-3"></div>
+{{ if in .Params.categories "marketplace" }}
+    {{ partial "badge.html" (dict "context" . "text" "marketplace") }}
+{{ end }}
+
+<div class="mb-2"></div>

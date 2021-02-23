@@ -7,7 +7,7 @@ assets:
 categories:
   - monitoring
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md'
 display_name: Logz.io

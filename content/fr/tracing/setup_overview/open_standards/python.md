@@ -137,6 +137,6 @@ Les tags qui sont définis directement sur des spans spécifiques remplacement l
 - Consultez [Github][2], les [exemples OpenTelemetry][3] ou [readthedocs][4] pour en savoir plus sur l'utilisation de l'exportateur Datadog pour OpenTelemetry dans une application Python.
 
 [1]: https://opentracing.io/guides/python/
-[2]: https://github.com/open-telemetry/opentelemetry-python/tree/master/ext/opentelemetry-ext-datadog
-[3]: https://github.com/open-telemetry/opentelemetry-python/tree/master/docs/examples/datadog_exporter
+[2]: https://github.com/open-telemetry/opentelemetry-python/tree/main/ext/opentelemetry-ext-datadog
+[3]: https://github.com/open-telemetry/opentelemetry-python/tree/main/docs/examples/datadog_exporter
 [4]: https://opentelemetry-python.readthedocs.io/en/stable/ext/datadog/datadog.html

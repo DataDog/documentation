@@ -15,7 +15,7 @@ Datadog Agent は、オートディスカバリー機能を使用して、どの
 
 Agent は、コンテナの状態が移り変わるにしたがって、静的チェック構成を有効化、無効化、またはテンプレートから再生成します。たとえば、NGINX コンテナが 10.0.0.6 から 10.0.0.17 に移動すると、Agent は、オートディスカバリー機能を利用して、NGINX チェック構成を新しい IP アドレスに更新します。このため、ユーザー側から操作をせずに、NGINX メトリクスを収集し続けることができます。
 
-## オートディスカバリーの動作
+## 概要
 
 従来の非コンテナ環境では、Datadog Agent の設定は、その環境と同じく静的です。Agent は、起動時にディスクからチェック構成を読み取り、実行中に構成されているすべてのチェックを継続的に実行します。
 
@@ -23,7 +23,7 @@ Agent は、コンテナの状態が移り変わるにしたがって、静的�
 
 オートディスカバリーを有効にした場合、Agent は異なる方法でチェックを実行します。
 
-### 異なる構成
+### 異なるコンフィギュレーション
 
 静的構成ファイルは、常に変化するネットワークエンドポイントからデータを収集するチェックには適していません。そこでオートディスカバリーは、チェック構成に**テンプレート**を使用します。Agent は、各テンプレートで 2 つのテンプレート変数 `%%host%%` および `%%port%%` を探します。これらは、通常はハードコードされるネットワークオプションの代わりに置かれています。たとえば、Agent の [Go Expvar チェック][2]のテンプレートには、オプション `expvar_url: http://%%host%%:%%port%%` が含まれます。複数の IP アドレスまたは公開ポートを持つコンテナの場合は、オートディスカバリーが[テンプレート変数インデックス](#supported-template-variables)を使用して正しいアドレス/ポートを選択するように指示することができます。
 
@@ -64,11 +64,11 @@ Docker Swarm を使用する場合は、マネージャーノードのいずれ�
 1. `gcr.io/datadoghq/docker-dd-agent:latest-jmx` イメージを使用します。このイメージは `latest` に基づいていますが、Agent が [jmxfetch][7] を実行するために必要な JVM を含んでいます。
 2. `gcr.io/datadoghq/docker-dd-agent:latest-jmx` の起動時に、環境変数 `SD_JMX_ENABLE=yes` を渡します。
 
-## チェックテンプレートの設定
+## チェックテンプレート
 
 以下の各**テンプレートソース**セクションで、チェックテンプレートとそのコンテナ識別子を構成する方法を示します。
 
-### テンプレートソース: ファイル (Auto-conf)
+### ファイル (Auto-conf)
 
 テンプレートをローカルファイルとして保存する方法はわかりやすく、外部サービスやオーケストレーションプラットフォームを必要としません。この方法の欠点は、テンプレートを変更、追加、または削除するたびに、Agent コンテナを再起動する必要がある点です。
 
@@ -93,7 +93,7 @@ Agent は、自分の `conf.d/auto_conf` ディレクトリでオートディス
 2. docker-dd-agent に基づいて独自の Docker イメージをビルドし、カスタムテンプレートを `/etc/dd-agent/conf.d/auto_conf` に追加する
 3. Kubernetes で、ConfigMap を使用してファイルを追加する
 
-### 例: Apache チェック
+### Apache チェック
 
 以下に、docker-dd-agent を使用してパッケージ化された `apache.yaml` テンプレートを示します。
 
@@ -113,7 +113,7 @@ _すべての_ `httpd` イメージです。あるコンテナが `library/httpd
 
 この制限が問題になる場合、つまり同じイメージを実行する複数のコンテナにそれぞれ異なるチェック構成を適用する必要がある場合は、ラベルを使用してコンテナを特定します。各コンテナに異なるラベルを指定し、各ラベルをテンプレートファイルの `docker_images` リストに追加します。`docker_images` は、イメージに限らず、すべての種類のコンテナ識別子を配置する場所です。
 
-### テンプレートソース: key-value ストア
+### key-value ストア
 
 オートディスカバリーは、Consul、etcd、および Zookeeper をテンプレートソースとして使用できます。key-value ストアを使用するには、`datadog.conf` で構成するか、docker-dd-agent コンテナに渡される環境変数で構成する必要があります。
 
@@ -183,7 +183,7 @@ key-value ストアがテンプレートソースとして有効になってい�
 
 各テンプレートは、チェック名、`init_config`、`instances` の 3 つが組になっています。ここでは、前のセクションのようにオートディスカバリーにコンテナ識別子を指定するための `docker_images` オプションは必要ありません。key-value ストアの場合は、コンテナ識別子が `check_config` の最初のレベルのキーになります。(また、前のセクションで説明したファイルベースのテンプレートでは、この例のようなチェック名は必要なく、Agent はチェック名をファイル名から推測していました。)
 
-#### 例: Apache チェック
+#### Apache チェック
 
 以下の etcd コマンドを実行すると、前のセクションの例と同等の Apache チェックテンプレートが作成されます。
 
@@ -198,7 +198,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http
 
 auto-conf ファイルとは異なり、**key-value ストアの場合は、コンテナ識別子として短いイメージ名 (`httpd` など) も長いイメージ名 (`library/httpd:latest` など) も使用できます**。以下の例では、長いイメージ名が使用されています。
 
-#### 例: Web サイトの可用性を監視する Apache チェック
+#### Web サイトの可用性を監視する Apache チェック
 
 以下の etcd コマンドを実行すると、同じ Apache テンプレートが作成され、Apache コンテナによって作成された Web サイトが使用可能かどうかを監視する [HTTP チェック][23]テンプレートが追加されます。
 
@@ -210,7 +210,7 @@ etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_sta
 
 ここでも、各リストの順番が重要です。Agent は、構成の各部分が 3 つのリストの同じインデックスにある場合にのみ、HTTP チェック構成を正しく生成します (この例では、同じインデックス 1)。
 
-### テンプレートソース: Kubernetes ポッドアノテーション
+### Kubernetes ポッドアノテーション
 
 バージョン 5.12 以降の Datadog Agent では、チェックテンプレートを Kubernetes ポッドアノテーションに保存できます。オートディスカバリーが有効な場合、Agent は、Kubernetes 上で実行されているかどうかを検出し、実行されている場合はすべてのポッドアノテーションから自動的にチェックテンプレートを検索します。key-value ストアの場合のように、テンプレートソースとして Kubernetes を (`SD_CONFIG_BACKEND` で) 構成する必要はありません。
 
@@ -230,7 +230,7 @@ annotations:
 
 Kubernetes ポッドを直接定義する (`kind: Pod`) 場合は、各ポッドアノテーションをその `metadata` セクションの直下に追加します (以下の最初の例を参照)。ポッドを Replication Controller、Replica Set、または Deployment を介して**間接的に**定義する場合は、ポッドアノテーションを `.spec.templates.metadata` の下に追加します (以下の 2 つめの例を参照)。
 
-#### ポッドの例: Web サイトの可用性を監視する Apache チェック
+#### Web サイトの可用性を監視する Apache チェック
 
 以下のポッドアノテーションは、`apache` コンテナ用の 2 つのテンプレート (前のセクションの最後のテンプレートと同等) を定義します。
 
@@ -253,7 +253,7 @@ spec:
         - containerPort: 80
 ```
 
-#### Deployment の例: Apache チェックと HTTP チェック
+#### Apache チェックと HTTP チェック
 
 Deployment からポッドを定義する場合は、テンプレートアノテーションを Deployment のメタデータに追加しないでください。Agent はこれを参照しません。以下のように指定して、アノテーションを追加します。
 
@@ -280,7 +280,7 @@ spec:
         - containerPort: 80
 ```
 
-### テンプレートソース: Docker ラベルアノテーション
+### Docker ラベルアノテーション
 
 バージョン 5.17 以降の Datadog Agent では、チェックテンプレートを Docker ラベルに保存できます。オートディスカバリーが有効な場合、Agent は、Docker 上で実行されているかどうかを検出し、すべてのラベルから自動的にチェックテンプレートを検索します。key-value ストアの場合のように、テンプレートソースを (`SD_CONFIG_BACKEND` で) 構成する必要はありません。
 
@@ -309,7 +309,7 @@ labels:
 -l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
 ```
 
-#### Docker の例: NGINX Dockerfile
+#### NGINX Dockerfile
 
 以下の Dockerfile は、オートディスカバリーを有効にして NGINX コンテナを起動します。
 
@@ -344,7 +344,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 - コンテナ名: `container_name` (5.15.x で追加)
   - `%%container_name%%`: コンテナ名を取得します。
 
-### 代替コンテナ識別子: ラベル
+### ラベル
 
 コンテナは、コンテナの名前やイメージではなく、ラベルで識別できます。それには、コンテナに `com.datadoghq.sd.check.id: <SOME_LABEL>` というラベルを付け、通常はコンテナの名前やイメージを置く場所に `<SOME_LABEL>` を置きます。たとえば、コンテナに `com.datadoghq.sd.check.id: special-container` というラベルを付けた場合、オートディスカバリーは、`docker_images` リストに `special-container` を含む auto-conf テンプレートをそのコンテナに適用します。
 

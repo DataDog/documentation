@@ -12,7 +12,7 @@
 - コラボレーション
 - source-control
 "creates_events": false
-"ddtype": "check"
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md"
 "display_name": "Sleuth"

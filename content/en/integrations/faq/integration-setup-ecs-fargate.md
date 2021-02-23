@@ -15,11 +15,11 @@ further_reading:
 
 Set up integrations for [ECS Fargate][1] with [Docker Label Annotations][2].
 
-## Add an Integration
+## Add an integration
 
 If you already [set up the Container Agent][3] in ECS Fargate, follow these steps to add an integration to your existing cluster.
 
-### Update the Task Definition
+### Update the task definition
 
 1. Log in to your [AWS Web Console][4] and navigate to the ECS section.
 2. Choose the cluster the Datadog Agent is running on.
@@ -36,7 +36,7 @@ If you already [set up the Container Agent][3] in ECS Fargate, follow these step
 
 7. Click the **Add** button, then click the **Create** button.
 
-### Update the Service
+### Update the service
 
 1. Within the cluster, click the **Services** tab, then click the **Service Name**.
 2. Click the **Update** button.

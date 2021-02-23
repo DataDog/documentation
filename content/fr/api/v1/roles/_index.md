@@ -1,3 +1,4 @@
 ---
 title: Rôles
+headless: true
 ---

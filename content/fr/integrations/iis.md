@@ -1,6 +1,10 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    IIS-Overview: assets/dashboards/iis_overview.json
+    iis: assets/dashboards/iis_dashboard.json
   logs:
     source: iis
   metrics_metadata: metadata.csv
@@ -21,6 +25,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/iis/README.md'
 display_name: IIS
+draft: false
 git_integration_title: iis
 guid: 6ad932f0-8816-467a-8860-72af44d4f3ba
 integration_id: iis
@@ -59,7 +64,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `iis.d/conf.yaml` dans le [dossier `conf.d` de l'Agent][1] à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir vos données de site IIS. Consultez le [fichier d'exemple iis.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `iis.d/conf.yaml` dans le [dossier `conf.d` de l'Agent][1] à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir les données de vos sites IIS. Consultez le [fichier d'exemple iis.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][4] pour commencer à envoyer vos métriques IIS à Datadog.
 
@@ -134,7 +139,7 @@ Le check IIS n'inclut aucun événement.
 ### Checks de service
 
 **iis.site_up** :<br>
-L'Agent envoie ce check de service pour chaque site configuré dans `iis.yaml`. Il renvoie `Critical` si l'uptime du site est à zéro, et `OK` dans les autres cas.
+L'Agent envoie ce check de service pour chaque site configuré dans `iis.yaml`. Cela renvoie `CRITICAL` si l'uptime du site est égal à zéro. SI ce n'est pas le cas, cela renvoie `OK`.
 
 ## Dépannage
 

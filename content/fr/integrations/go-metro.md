@@ -90,7 +90,7 @@ instances:
       - app.datadoghq.com
 ```
 
-*REMARQUE* : pour que go metro s'exécute sans privilèges, vous devez définir les capacités CAP_NET_RAW  sur le binaire :
+*REMARQUE* : pour que go-metro s'exécute sans privilèges, vous devez définir les capacités CAP_NET_RAW sur le binaire :
 ```
 # Installer les bibliothèques requises
 $ sudo apt-get install libcap  # debian
@@ -99,15 +99,15 @@ $ sudo yum install libcap  # redhat
 $ sudo yum install compat-libcap1  # autre bibliothèque redhat
 
 # Définir les capacités
-$ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro`
+$ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
 Étant donné que les noms des packages varient selon les distributions, si les instructions ci-dessus ne fonctionnent pas dans votre environnement, exécutez `apt-cache search libcap` ou `yum search libcap` pour afficher une sélection des packages qui peuvent fournir le binaire. N'hésitez pas à nous contacter si vous avez besoin d'aide.
 
-Veuillez également noter que go-metro enregistre ses entrées dans son propre fichier de log, qui se trouve à l'emplacement /var/log/datadog/go-metro.log.
+Veuillez également noter que go-metro enregistre ses entrées dans son propre fichier de log, qui se trouve à l'emplacement `/var/log/datadog/go-metro.log`.
 De plus, go-metro s'exécute indépendamment. Il ne s'affiche donc *PAS* dans la page d'informations de l'Agent.
 
-Enfin, puisque le binaire go-metro est inclus avec les distributions RPM et DEB 64 bits de datadog-agent, il est uniquement disponible dans ces versions. Ainsi, il n'est actuellement pas disponible avec l'installation depuis les sources ou les packages 32 bits.
+Enfin, puisque le binaire go-metro est inclus avec les distributions RPM et DEB 64 bits de l'Agent Datadog, il est uniquement disponible pour ces versions. Ainsi, il n'est actuellement pas disponible avec l'installation depuis les sources ou les packages 32 bits.
 
 ### Validation
 

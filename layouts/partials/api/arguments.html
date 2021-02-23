@@ -1,0 +1,116 @@
+{{ $context := .context }}
+{{ $endpoint := .endpoint }}
+{{ $parameters := partial "api/arguments-data.html" (dict "endpoint" $endpoint) }}
+
+{{ with $parameters.isExists }}
+    <h3 class="mb-2">{{ i18n "arguments" }}</h3>
+
+    {{ with $parameters.pathParams }}
+        <h4 class="text-capitalize">{{ i18n "path_parameters" }}</h4>
+        <div class=" schema-table row">
+            <div class="col-12">
+              <div class="row table-header">
+                <div class="col-4 column">
+                  <p class="font-semibold">{{ i18n "name" }}</p>
+                </div>
+                <div class="col-2 column">
+                  <p class="font-semibold">{{ i18n "type" }}</p>
+                </div>
+                <div class="col-6 column">
+                  <p class="font-semibold">{{ i18n "description" }}</p>
+                </div>
+              </div>
+              {{ range . }}
+                    <div class="row ">
+                        <div class="col-12 first-column">
+                        <div class="row first-row ">
+                            <div class="col-4 column">
+                                <p>{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
+                            </div>
+                            <div class="col-2 column">
+                                <p>{{ .schema.type }}</p>
+                            </div>
+                            <div class="col-6 column">
+                                <p>{{ .description | markdownify }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+              {{ end }}
+            </div>
+        </div>
+    {{ end }}
+
+    {{ with $parameters.queryStrings }}
+        <h4 class="text-capitalize">{{ i18n "query_strings" }}</h4>
+        <div class=" schema-table row">
+            <div class="col-12">
+              <div class="row table-header">
+                <div class="col-4 column">
+                  <p class="font-semibold">{{ i18n "name" }}</p>
+                </div>
+                <div class="col-2 column">
+                  <p class="font-semibold">{{ i18n "type" }}</p>
+                </div>
+                <div class="col-6 column">
+                  <p class="font-semibold">{{ i18n "description" }}</p>
+                </div>
+              </div>
+              {{ range . }}
+                    <div class="row ">
+                        <div class="col-12 first-column">
+                        <div class="row first-row ">
+                            <div class="col-4 column">
+                                <p>{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
+                            </div>
+                            <div class="col-2 column">
+                                <p>{{ .schema.type }}</p>
+                            </div>
+                            <div class="col-6 column">
+                                <p>{{ .description | markdownify }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+              {{ end }}
+            </div>
+        </div>
+    {{ end }}
+
+    {{ with $parameters.headerParams }}
+        <h4 class="text-capitalize">{{ i18n "header_parameters" }}</h4>
+        <div class=" schema-table row">
+            <div class="col-12">
+              <div class="row table-header">
+                <div class="col-4 column">
+                  <p class="font-semibold">{{ i18n "name" }}</p>
+                </div>
+                <div class="col-2 column">
+                  <p class="font-semibold">{{ i18n "type" }}</p>
+                </div>
+                <div class="col-6 column">
+                  <p class="font-semibold">{{ i18n "description" }}</p>
+                </div>
+              </div>
+              {{ range . }}
+                    <div class="row ">
+                        <div class="col-12 first-column">
+                        <div class="row first-row ">
+                            <div class="col-4 column">
+                                <p>{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
+                            </div>
+                            <div class="col-2 column">
+                                <p>{{ .schema.type }}</p>
+                            </div>
+                            <div class="col-6 column">
+                                <p>{{ .description | markdownify }}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+              {{ end }}
+            </div>
+        </div>
+    {{ end }}
+
+{{ end }}

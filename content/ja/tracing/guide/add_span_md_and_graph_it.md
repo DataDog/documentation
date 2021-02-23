@@ -34,8 +34,8 @@ Datadog APM を使用すると、[トレース][1]をカスタマイズして、
 
 **注**: 作業中のサービスと[リソース名][4]をメモしておくと、後で便利です。上記の例では、サービスは Ruby サーバーの `web-store`、リソース (エンドポイント) は `ShoppingCartController#checkout` です。
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
 
 Datadog の UI では、タグを使用してスパンレベルのメタデータを設定します。グローバルトレーサーからアクティブスパンを取得して `setTag` メソッドでタグを設定することで、自動インスツルメンテーションにカスタムタグを設定できます。
 
@@ -59,8 +59,8 @@ class ShoppingCartServlet extends AbstractHttpServlet {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 Datadog の UI は、タグを使用してスパンレベルのメタデータを設定します。グローバルトレーサーからアクティブスパンを取得して `set_tag` メソッドでタグを設定することで、自動インスツルメンテーションにカスタムタグを設定できます。
 
@@ -79,8 +79,8 @@ def shopping_cart(customer_id):
     # [...]
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 Datadog の UI は、タグを使用してスパンレベルのメタデータを設定します。グローバルトレーサーからアクティブスパンを取得して `set_tag` メソッドでタグを設定することで、自動インスツルメンテーションにカスタムタグを設定できます。
 
@@ -106,8 +106,8 @@ class ShoppingCartController < ApplicationController
 end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 Datadog の UI は、タグを使用してスパンレベルのメタデータを設定します。グローバルトレーサーからアクティブスパンを取得して `SetTag` メソッドでタグを設定することで、自動インスツルメンテーションにカスタムタグを設定できます。
 
@@ -141,8 +141,9 @@ func main() {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
 
 Datadog の UI では、タグを使用してスパンレベルのメタデータを設定します。グローバルトレーサーからアクティブスパンを取得して `setTag` メソッドでタグを設定することで、自動インスツルメンテーションにカスタムタグを設定できます。
 
@@ -159,8 +160,9 @@ app.get('/shopping_cart/:customer_id', (req, res) => {
 })
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
 
 `Span.SetTag()` を呼び出すことで、`Datadog.Trace.Span` オブジェクトにタグを直接追加します。下記に例を示します。
 
@@ -190,8 +192,8 @@ public class ShoppingCartController : Controller
 
 **注**: アクティブスパンがない場合、`Datadog.Trace.Tracer.Instance.ActiveScope` は `null` を返します。
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 Datadog の UI では、タグを使用してスパンレベルのメタデータを設定します。グローバルトレーサーからアクティブスパンを取得して `setTag` メソッドでタグを設定することで、自動インスツルメンテーションにカスタムタグを設定できます。
 
@@ -217,8 +219,8 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 ?>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 <div class="alert alert-info">更新したコードをデプロイしてから新しいタグが Datadog の UI に表示されるまで、数分かかることがあります。</div>
 

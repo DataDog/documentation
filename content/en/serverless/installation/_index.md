@@ -12,21 +12,19 @@ further_reading:
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-### 1. Install the AWS Integration
+### Install the AWS integration
 
 Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS CloudWatch. 
-
-### 2. Install the Datadog Forwarder
+### Install the Datadog Forwarder
 
 Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
 
 **Note**: Skip this step if you already have the Forwarder function installed as part of the [AWS integration][1] CloudFormation Stack.
+### Instrument your application
 
-### 3. Instrument Your Application
+3. Select the Lambda runtime below for instructions to instrument your serverless application.
 
-Select the Lambda runtime below for instructions to instrument your serverless application.
-
-{{< partial name="serverless/getting-started-languages.html" >}}
+   {{< partial name="serverless/getting-started-languages.html" >}}
 
 [1]: /integrations/amazon_web_services/#setup
 [2]: /serverless/forwarder

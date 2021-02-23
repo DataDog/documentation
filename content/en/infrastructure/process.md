@@ -30,7 +30,7 @@ Datadog’s Live Processes gives you real-time visibility into the process runni
 
 ## Installation
 
-If you are using Agent 5, [follow this specific installation process][2]. If you are using Agent 6 or 7, [see the intructions below][1]. 
+If you are using Agent 5, [follow this specific installation process][1]. If you are using Agent 6 or 7, [see the intructions below][2]. 
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
@@ -120,7 +120,7 @@ datadog:
 
 {{< /tabs >}}
 
-### Process Arguments Scrubbing
+### Process arguments scrubbing
 
 In order to hide sensitive data on the Live Processes page, the Agent scrubs sensitive arguments from the process command line. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
 
@@ -155,11 +155,11 @@ process_config:
 
 ## Queries
 
-### Scoping Processes
+### Scoping processes
 
 Processes are, by nature, extremely high cardinality objects. To refine your scope to view relevant processes, you can use text and tag filters. 
 
-#### Text Filters
+#### Text filters
 
 When you input a text string into the search bar, fuzzy string search is used to query processes containing that text string in their command lines or paths. Enter a string of two or more characters to see results. Below is Datadog's demo environment, filtered with the string `postgres /9.`.
 
@@ -178,7 +178,7 @@ To combine multiple string searches into a complex query, use any of the followi
 
 Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
 
-#### Tag Filters
+#### Tag filters
 
 You can also filter your processes using Datadog [tags][3], such as `host`, `pod`, `user`, and `service`. Input tag filters directly into the search bar, or select them in the facet panel on the left of the page.
 
@@ -187,7 +187,7 @@ Datadog automatically generates a `command` tag, so that you can filter for
 * container management software (e.g. `command:docker`, `command:kubelet`)
 * common workloads (e.g. `command:ssh`, `command:CRON`)
 
-### Aggregating Processes
+### Aggregating processes
 
 [Tagging][3] enhances navigation. In addition to all existing host-level tags, processes are tagged by `user`.
 
@@ -197,7 +197,7 @@ Furthermore, processes in ECS containers are also tagged by:
 - `task_version`
 - `ecs_cluster`
 
-Processeses in Kubernetes containers are tagged by:
+Processes in Kubernetes containers are tagged by:
 
 - `pod_name`
 - `kube_pod_ip`
@@ -213,7 +213,7 @@ If you have configuration for [Unified Service Tagging][4] in place, `env`, `ser
 Having these tags available will let you tie together APM, logs, metrics, and process data.
 Note that this setup applies to containerized environments only.
 
-## Scatter Plot
+## Scatter plot
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
@@ -231,13 +231,13 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 {{< img src="infrastructure/process/scatterplot.png" alt="container inspect"  style="width:80%;">}}
 
-## Process Monitors
+## Process monitors
 
 Use the [Live Process Monitor][6] to generate alerts based on the count of any group of processes across hosts or tags. You can configure process alerts in the [Monitors page][7]. To learn more, see our [Live Process Monitor documentation][6]. 
 
 {{< img src="infrastructure/process/process_monitor.png" alt="Process Monitor"  style="width:80%;">}}
 
-## Processes in Dashboards and Notebooks
+## Processes in dashboards and notebooks
 
 You can graph process metrics in dashboards and notebooks using the [Timeseries widget][8]. To configure: 
 1. Select Live Processes as a data source 
@@ -247,9 +247,9 @@ You can graph process metrics in dashboards and notebooks using the [Timeseries 
 
 {{< img src="infrastructure/process/process_widget.png" alt="Processes widget"  style="width:80%;">}}
 
-## Autodetected Integrations
+## Autodetected integrations
 
-Datadog uses process collection to autodetect the technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2]:
+Datadog uses process collection to autodetect the technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][1]:
 
 {{< img src="getting_started/integrations/ad_integrations.png" alt="Autodetected integrations" >}}
 
@@ -260,19 +260,19 @@ Each integration has one of two status types:
 
 Hosts that are running the integration, but where the integration is not enabled, can be found in the **Hosts** tab of the integrations tile.
 
-## Processes across the Platform 
+## Processes across the platform
 
 {{< img src="infrastructure/process/process_platform.gif" alt="Processes across the Platform" >}}
 
-### In Live Containers
+### Live containers
 
 Live Processes adds extra visibility to your container deployments by monitoring the processes running on each of your containers. Click on a container in the [Live Containers][9] page to view its process tree, including the commands it is running and their resource consumption. Use this data alongside other container metrics to determine the root cause of failing containers or deployments.
 
-### In APM
+### APM
 
 In [APM Traces][10], you can click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the Live Processes page. Related processes are not currently supported for serverless and browser traces.
 
-### In Network Performance Monitoring 
+### Network Performance Monitoring 
 
 When you inspect a dependency in the [Network Overview][11], you can view processes running on the underlying infrastructure of the endpoints (e.g. services) communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication. 
 
@@ -280,7 +280,7 @@ When you inspect a dependency in the [Network Overview][11], you can view proces
 
 While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
 
-## Additional Information
+## Additional information
 
 - Collection of open files and current working directory is limited based on the level of privilege of the user running `dd-process-agent`. In the event that `dd-process-agent` is able to access these fields, they are collected automatically.
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
@@ -290,8 +290,8 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: /agent/faq/agent-5-process-collection/
+[1]: /agent/faq/agent-5-process-collection/
+[2]: /agent/
 [3]: /getting_started/tagging/
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
@@ -300,4 +300,4 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
-[11]: /network_performance_monitoring/network_page
+[11]: /network_monitoring/performance/network_page

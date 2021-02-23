@@ -125,6 +125,8 @@ await promise
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
+**Note**: The way Browser tests load external JavaScript is by adding it to the page, so it will only work if your website accepts it.
+
 ### Test a downloaded file
 
 Perform verifications on files downloaded in previous steps. You can check that a file was correctly downloaded and assert on: the file name, size, and MD5 value.
@@ -245,6 +247,8 @@ await promise
 
 return jQuery().jquery.startsWith('3.5.1')
 ```
+
+**Note**: The way Browser tests load external JavaScript is by adding it to the page, so it will only work if your website accepts it.
 
 #### A Global Variable
 

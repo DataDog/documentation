@@ -72,6 +72,10 @@ datadog-ci lambda instrument -f functionname -r us-east-1 -v 10 --dry
 | --forwarder | | この関数の LogGroup をアタッチする [Datadog Forwarder](https://docs.datadoghq.com/serverless/forwarder/) の ARN。 | |
 | --dry | -d | コマンドを実行している変更のプレビューが適用されます。 | false |
 
+## コミュニティ
+
+製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
+
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://github.com/DataDog/datadog-ci
 [3]: https://github.com/DataDog/datadog-lambda-layer-js/releases

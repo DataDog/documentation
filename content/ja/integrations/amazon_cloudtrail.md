@@ -32,6 +32,8 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
 
 他の AWS サービスについては、[Amazon Web Services インテグレーションのページ][1]を参照してください
 
+**注**: CloudTrail インテグレーションは、[Organization Trails][2] をサポート**しません**。
+
 ## セットアップ
 
 ### インストール
@@ -40,7 +42,7 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
 
 ### イベント収集
 
-1. AWS Cloudtrail のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。CloudTrail ポリシーの詳細については、[AWS ウェブサイトのドキュメント][3]を参照してください。CloudTrail の証跡にアクセスするには、S3 のアクセス許可もいくつか必要です。**このアクセス許可は CloudTrail バケットでのみ必要です**。Amazon S3 ポリシーの詳細については、[AWS ウェブサイトに関するドキュメント][4]を参照してください。
+1. AWS Cloudtrail のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。CloudTrail ポリシーの詳細については、[AWS ウェブサイトのドキュメント][4]を参照してください。CloudTrail の証跡にアクセスするには、S3 のアクセス許可もいくつか必要です。**このアクセス許可は CloudTrail バケットでのみ必要です**。Amazon S3 ポリシーの詳細については、[AWS ウェブサイトに関するドキュメント][5]を参照してください。
 
     | AWS アクセス許可              | 説明                                                     |
     | --------------------------- | --------------------------------------------------------------- |
@@ -68,10 +70,10 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
     }
     ```
 
-    **注**: プリンシパル ARN は、[メイン AWS インテグレーションのインストールプロセス中][5]にリストされる ARN です。(新しいポリシーを追加するのではなく) ポリシーを更新する場合、`SID` または `Principal` は必要ありません。
+    **注**: プリンシパル ARN は、[メイン AWS インテグレーションのインストールプロセス中][6]にリストされる ARN です。(新しいポリシーを追加するのではなく) ポリシーを更新する場合、`SID` または `Principal` は必要ありません。
 
-2. [Datadog - AWS Cloudtrail インテグレーション][2]をインストールします。
-   インテグレーションタイルで、Datadog のイベントストリームに標準の優先度 (デフォルトのフィルター) で表示するイベントのタイプを選択します。Amazon Web Services タイルで構成したアカウントもここに表示されます。ここに記載されていないイベントの確認を希望する場合は、[Datadog のサポートチーム][6]までお問い合わせください。
+2. [Datadog - AWS Cloudtrail インテグレーション][3]をインストールします。
+   インテグレーションタイルで、Datadog のイベントストリームに標準の優先度 (デフォルトのフィルター) で表示するイベントのタイプを選択します。Amazon Web Services タイルで構成したアカウントもここに表示されます。ここに記載されていないイベントの確認を希望する場合は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 ### ログの収集
 
@@ -83,13 +85,13 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
 
 #### Datadog へのログの送信
 
-1. [Datadog ログコレクション AWS Lambda 関数][7]をまだセットアップしていない場合は、セットアップします。
+1. [Datadog ログコレクション AWS Lambda 関数][8]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで Cloudtrail ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
    {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
    Cloudtrail ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
    {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
 
-終了すると、[Datadog のログエクスプローラー][8]にログが表示されます。
+終了すると、[Datadog のログエクスプローラー][9]にログが表示されます。
 
 ## 収集データ
 
@@ -99,7 +101,40 @@ AWS Cloudtrail インテグレーションには、メトリクスは含まれ�
 
 ### イベント
 
-AWS Cloudtrail インテグレーションは、AWS Cloudtrail の監査証跡に基づいて多種多様なイベントを作成します。すべてのイベントは、Datadog の[イベントストリーム][9]で `#cloudtrail` でタグ付けされます。
+AWS Cloudtrail インテグレーションは、AWS Cloudtrail の監査証跡に基づいて多種多様なイベントを作成します。すべてのイベントは、Datadog の[イベントストリーム][10]で `#cloudtrail` でタグ付けされます。インテグレーションコンフィギュレーションで、優先度を設定できます。
+
+優先度を標準に設定された Cloudtrail イベント (デフォルトのフィルターのイベントストリームに表示されます):
+
+* apigateway 
+* autoscaling 
+* cloudformation 
+* cloudfront 
+* cloudsearch 
+* cloudtrail 
+* codedeploy 
+* codepipeline 
+* config 
+* datapipeline  
+* ds 
+* ec2 
+* ecs 
+* elasticache 
+* elasticbeanstalk 
+* elasticfilesystem 
+* elasticloadbalancing 
+* elasticmapreduce 
+* iam 
+* kinesis 
+* lambda 
+* monitoring 
+* opsworks 
+* rds 
+* redshift 
+* route53 
+* s3 
+* ses 
+* signin 
+* ssm
 
 ### サービスのチェック
 
@@ -109,15 +144,16 @@ AWS Cloudtrail インテグレーションには、サービスのチェック�
 
 ### CloudTrail タイルが表示されません。または、アカウントがリストされません
 
-まず [Amazon Web Services タイル][10]を構成する必要があります。その後、CloudTrail タイルを構成することができます。
+まず [Amazon Web Services タイル][11]を構成する必要があります。その後、CloudTrail タイルを構成することができます。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
-[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_cloudtrail.html
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
-[8]: https://app.datadoghq.com/logs
-[9]: https://docs.datadoghq.com/ja/events/
-[10]: https://docs.datadoghq.com/ja/integrations/aws/
+[2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html
+[3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
+[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_cloudtrail.html
+[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_s3.html
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
+[9]: https://app.datadoghq.com/logs
+[10]: https://docs.datadoghq.com/ja/events/
+[11]: https://docs.datadoghq.com/ja/integrations/aws/

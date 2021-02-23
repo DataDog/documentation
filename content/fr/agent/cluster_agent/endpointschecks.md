@@ -131,9 +131,20 @@ ad.datadoghq.com/endpoints.logs: '[<CONFIG_LOGS>]'
 
 La [template variable][7] `%%host%%` est prise en charge et remplacée par les IP des endpoints. Les tags `kube_namespace`, `kube_service` et `kube_endpoint_ip` sont automatiquement ajoutés aux instances.
 
+### Source du modèle : Étiquettes standard
+
+```yaml
+tags.datadoghq.com/env: "<ENV>"
+tags.datadoghq.com/service: "<SERVICE>"
+tags.datadoghq.com/version: "<VERSION>"
+```
+
+Les étiquettes `tags.datadoghq.com` définissent  `env`, `service` et même `version` en tant que tags sur les données générées par le check.
+Ces étiquettes standard font partie du [tagging de service unifié][8].
+
 #### Exemple : check HTTP sur un service basé sur NGINX avec le check NGINX sur les endpoints du service
 
-La définition de service suivante expose les pods d'un déploiement `my-nginx`. Elle exécute ensuite un [check HTTP][8] afin de mesurer la latence du service à charge équilibrée, ainsi qu'un [check NGINX][9] sur les pods qui exposent le ou les endpoints du service dans le but de recueillir des métriques `NGINX` et des checks de service au niveau des pods :
+La définition de service suivante expose les pods d'un déploiement `my-nginx`. Elle exécute ensuite un [check HTTP][9] afin de mesurer la latence du service à charge équilibrée, ainsi qu'un [check NGINX][10] sur les pods qui exposent le ou les endpoints du service dans le but de recueillir des métriques `NGINX` et des checks de service au niveau des pods :
 
 ```yaml
 apiVersion: v1
@@ -142,6 +153,9 @@ metadata:
     name: my-nginx
     labels:
         run: my-nginx
+        tags.datadoghq.com/env: "prod"
+        tags.datadoghq.com/service: "my-nginx"
+        tags.datadoghq.com/version: "1.19.0"
     annotations:
         ad.datadoghq.com/service.check_names: '["http_check"]'
         ad.datadoghq.com/service.init_configs: '[{}]'
@@ -173,7 +187,7 @@ spec:
 
 ## Dépannage
 
-Le dépannage de checks d'endpoint est semblable au [dépannage de checks de cluster][10]. La seule différence se situe au niveau des Agents de nœud, où les checks d'endpoint planifiés apparaissent à côté du check de cluster.
+Le dépannage de checks d'endpoint est semblable au [dépannage de checks de cluster][11]. La seule différence se situe au niveau des Agents de nœud. Pour ces Agents, les checks d'endpoint planifiés apparaissent à côté du check de cluster.
 
 **Remarque** : les checks d'endpoint sont planifiés par des Agents qui s'exécutent sur le même nœud que le ou les pods qui exposent le ou les endpoints du service. Si un endpoint n'est pas exposé par un pod, l'Agent de cluster convertit le check en check de cluster. Le check de cluster peut être exécuté par n'importe quel Agent de nœud.
 
@@ -267,6 +281,7 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 [5]: /fr/agent/guide/agent-commands/
 [6]: /fr/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
 [7]: /fr/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
-[8]: /fr/integrations/http_check/
-[9]: /fr/integrations/nginx/
-[10]: /fr/agent/cluster_agent/troubleshooting/
+[8]: /fr/getting_started/tagging/unified_service_tagging
+[9]: /fr/integrations/http_check/
+[10]: /fr/integrations/nginx/
+[11]: /fr/agent/cluster_agent/troubleshooting/

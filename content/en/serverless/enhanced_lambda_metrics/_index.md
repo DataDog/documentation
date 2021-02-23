@@ -32,7 +32,7 @@ The following real-time enhanced Lambda metrics are available, and they are tagg
 
 **Note**: Enhanced metrics are sent to the Datadog Forwarder via CloudWatch Logs, meaning you’ll see an increased volume of logs in CloudWatch. This may affect your AWS bill. To opt-out, set the `DD_ENHANCED_METRICS` environment variable to `false` on your AWS Lambda functions.
 
-## Enable Enhanced Lambda Metrics
+## Enable enhanced Lambda metrics
 
 {{< img src="serverless/integration/lambda_metrics.png" alt="Lambda Metrics Collection" >}}
 

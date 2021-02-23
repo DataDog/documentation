@@ -10,9 +10,9 @@ aliases:
 This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/v1/dashboards/"> new Dashboard endpoint</a> instead.
 </div>
 
-The Timeboard endpoint allows you to programmatically create, update delete and query Timeboards. [Find more about Timeboard][1].
+The `Timeboard` endpoint allows you to programmatically create, update delete and query timeboards. [Find more about timeboards][1].
 
-## Create a Timeboard
+## Create a timeboard
 
 ### Signature
 
@@ -156,7 +156,7 @@ curl  -X POST -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Update a Timeboard
+## Update a timeboard
 
 ### Signature
 
@@ -312,7 +312,7 @@ curl  -X PUT -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Delete a Timeboard
+## Delete a timeboard
 
 Delete an existing [timeboard][1].
 *This end point takes no JSON arguments.*
@@ -420,7 +420,7 @@ curl -X DELETE "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_k
 {{% /tab %}}
 {{< /tabs >}}
 
-## Get a Timeboard
+## Get a timeboard
 
 Fetch an existing dashboard's definition.
 
@@ -503,7 +503,7 @@ curl "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&applic
 {{% /tab %}}
 {{< /tabs >}}
 
-## Get all Timeboards
+## Get all timeboards
 
 Fetch all of your [timeboard][1]' definitions.
 

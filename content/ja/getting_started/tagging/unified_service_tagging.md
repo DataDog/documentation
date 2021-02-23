@@ -27,7 +27,7 @@ further_reading:
 
 ### 要件
 
-- 統合サービスタグ付けには、[Datadog Agent][2] のセットアップが必要です。
+- 統合サービスタグ付けには、[Datadog Agent][2] 6.19.x/7.19.x 以上のセットアップが必要です。
 
 - 統合サービスタグ付けには、[予約済みタグ][1]の新しいコンフィギュレーションに対応するトレーサーのバージョンが必要です。詳細は、言語別の[セットアップ手順][3]をご覧ください。
 
@@ -42,7 +42,7 @@ further_reading:
 
 ### コンテナ化環境
 
-コンテナ化環境では、`env`、`service`、`version` は、Datadog Agent コンフィギュレーションファイルの環境変数または標準ラベルを介して設定されます。Agent は収集されたデータを特定のコンテナに関連付けるため、これらのタグのコンフィギュレーションはコンテナのメタデータ内に置くことができます。
+コンテナ化環境では、`env`、`service`、`version` は、サービスの環境変数またはラベル（Kubernetes のデプロイやポッドラベル、Docker コンテナラベルなど）を介して設定されます。Datadog Agent はこのタグ付けコンフィギュレーションを検出し、コンテナから収集するデータに適用します。
 
 コンテナ化環境で統合サービスタグ付けをセットアップするには
 
@@ -164,7 +164,7 @@ containers:
               fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#the-downward-api
+[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
 [2]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [4]: /ja/tracing/send_traces/
@@ -361,6 +361,124 @@ instances:
 {{% /tab %}}
 {{< /tabs >}}
 
+### サーバーレス環境
+
+#### AWS Lambda 関数
+
+AWS Lambda ベースのサーバーレスアプリケーションの構築およびデプロイ方法により、`env`、`service`、`version` タグをメトリクス、トレース、およびログに適用する方法はいくつかあります。
+
+*注*: これらのタグは、環境変数の代わりに AWS リソースタグにより指定されます。特に、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` の環境変数には対応していません。
+
+{{< tabs >}}
+
+{{% tab "Serverless Framework" %}}
+
+[タグ][1]オプションを使用して Lambda 関数をタグ付けします。
+
+```yaml
+# serverless.yml
+service: service-name
+provider:
+  name: aws
+  # タグをすべての関数に適用するには
+  tags:
+    env: "<ENV>"
+    service: "<SERVICE>"
+    version: "<VERSION>"
+
+functions:
+  hello:
+    # この関数は、上記で構成されたサービスレベルのタグを継承します
+    handler: handler.hello
+  world:
+    # この関数は、タグを上書きします
+    handler: handler.users
+    tags:
+      env: "<ENV>"
+      service: "<SERVICE>"
+      version: "<VERSION>"
+```
+
+[Datadog サーバーレスプラグイン][2]がインストールされている場合、プラグインがサーバーレスアプリケーション定義の `service` 値と `stage` 値を使用して、Lambda 関数に `service` タグと `env` タグを自動的にタグ付けします（`service` または `env` タグがすでに存在する場合を除く）。
+
+[1]: https://www.serverless.com/framework/docs/providers/aws/guide/functions#tags
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
+{{% /tab %}}
+
+{{% tab "AWS SAM" %}}
+
+[タグ][1]オプションを使用して Lambda 関数をタグ付けします。
+
+```yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  MyLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Tags:
+        env: "<ENV>"
+        service: "<SERVICE>"
+        version: "<VERSION>"
+```
+
+[Datadog サーバーレスマクロ][2]がインストールされている場合は、`service` および `env` タグをパラーメーターとして指定することも可能です。
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      service: "<SERVICE>"
+      env: "<ENV>"
+```
+
+
+[1]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-tags
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
+{{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+
+[タグのクラス][1]を使用して、アプリ、スタックまたは個別の Lambda 関数をタグ付けします。[Datadog サーバーレスマクロ][2]がインストールされている場合は、`service` および `env` タグをパラーメーターとして指定することも可能です。
+
+```javascript
+import * as cdk from "@aws-cdk/core";
+
+class CdkStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+    this.addTransform("DatadogServerless");
+
+    new cdk.CfnMapping(this, "Datadog", {
+      mapping: {
+        Parameters: {
+          service: "<SERVICE>",
+          env: "<ENV>",
+        },
+      },
+    });
+  }
+}
+```
+
+
+[1]: https://docs.aws.amazon.com/cdk/latest/guide/tagging.html
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
+{{% /tab %}}
+
+{{% tab "Custom" %}}
+
+[Lambda 関数のタグ付け][1]に関する AWS のガイドに従い、`env`、`service`、`version` タグを適用します。
+
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
+{{% /tab %}}
+
+{{< /tabs >}}
+
+CloudFormation スタックで、[Datadog Forwarder][14] 用に `DdFetchLambdaTags` オプションが `true` に設定されていることを確認します。バージョン `3.19.0` 以降、このオプションはデフォルトで `true` になっています。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -379,3 +497,4 @@ instances:
 [11]: /ja/integrations/statsd/
 [12]: https://www.chef.io/
 [13]: https://www.ansible.com/
+[14]: /ja/serverless/forwarder/

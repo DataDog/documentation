@@ -14,7 +14,7 @@ Office hours will be held in #integrations in the [Datadog Community Slack][1] (
 * 2nd Wednesday of each month at 10:00 AM Eastern Time (New York).
 * 4th Wednesday of each month at 3:00 PM Eastern Time (New York).
 
-### Guidelines and Caveats
+### Guidelines and caveats
 
 - Review and feedback during office hours is offered on a first come, first served basis. We may not get to every review each week. We appreciate your patience and understanding.
 
@@ -30,6 +30,6 @@ Discover the full list of [Datadog open-source projects at GitHub][5].
 
 [1]: https://datadoghq.slack.com
 [2]: http://chat.datadoghq.com
-[3]: https://datadog.zoom.us/j/312430886
+[3]: https://datadog.zoom.us/j/312430886?pwd=SkJxaks5QzRWdXBCN3A5aVFPdjBHQT09
 [4]: /help/
 [5]: https://github.com/DataDog

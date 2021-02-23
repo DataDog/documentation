@@ -43,7 +43,7 @@ QR コードを使用または手動入力で認証することも可能です�
 
 ログイン時に **Authorize** をクリックすると、このモバイルデバイスがアカウントにリンクされます。セキュリティ上の理由から、このフローを月に 1 回実行する必要があります。
 
-**注**: モバイルアプリの SAML IdP 始動ログインは、現在ベータ版です。 SAML IdP 始動のベータアクセスをリクエストする、または SAML 認証に問題がある場合は、[Datadog サポート][14]までお問い合わせください。
+**注**: モバイルアプリの SAML IdP 始動ログインは、現在ベータ版です。 SAML IdP 始動のベータアクセスをリクエストする、または SAML 認証に問題がある場合は、[Datadog サポート][5]までお問い合わせください。
 
 ## モニター
 
@@ -61,14 +61,14 @@ QR コードを使用または手動入力で認証することも可能です�
 
 ダッシュボードページでは、Datadog 組織でアクセスできるすべてのダッシュボードを表示、検索し、Datadog Web アプリで設定したものと同じテンプレート変数を使用してそれらをフィルタリングできます。個々のダッシュボードをクリックして表示します。テンプレート変数の保存済みビューを使用して、ダッシュボードをすばやくフィルタリングします。テンプレート変数の保存済みビューの詳細については、[ダッシュボードの保存済みビュー][9]を参照してください。個々のダッシュボードをクリックして表示します。
 
-**注:** ダッシュボードを設定または編集するには、[Datadog ブラウザアプリにログイン][10]する必要があります。詳細については、[ダッシュボード][5]を参照してください。
+**注:** ダッシュボードを設定または編集するには、[Datadog ブラウザアプリにログイン][10]する必要があります。詳細については、[ダッシュボード][11]を参照してください。
 
 ## クイックアクション
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="クイックアクション">}}
 
 
-アプリアイコンを長押しすると、iOS 用の上位 5 つの [Frequently Viewed By Me][11] ダッシュボード (表示数と最新性で測定) と Android 用モバイルで最も開いている 5 つのダッシュボードのクイックアクションシートが表示されます。結果を押して、アプリ内ダッシュボードを開きます。
+アプリアイコンを長押しすると、iOS 用の上位 5 つの [Frequently Viewed By Me][12] ダッシュボード (表示数と最新性で測定) と Android 用モバイルで最も開いている 5 つのダッシュボードのクイックアクションシートが表示されます。結果を押して、アプリ内ダッシュボードを開きます。
 
 ## ホーム画面から検索
 
@@ -90,7 +90,7 @@ QR コードを使用または手動入力で認証することも可能です�
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ショートカット">}}
 
-Siri のショートカットと提案の詳細については、[Apple Siri のドキュメント][12]を参照してください。
+Siri のショートカットと提案の詳細については、[Apple Siri のドキュメント][13]を参照してください。
 
 ## Handoff
 
@@ -103,7 +103,7 @@ Handoff が機能するには、各デバイスが次の条件を満たしてい
 - Wi-Fi が有効になっている
 - Handoff が有効になっている
 
-Handoff の詳細については、[Apple Handoff のドキュメント][13]を参照してください。
+Handoff の詳細については、[Apple Handoff のドキュメント][14]を参照してください。
 
 ## アカウント
 
@@ -111,7 +111,7 @@ Handoff の詳細については、[Apple Handoff のドキュメント][13]を�
 
 ## トラブルシューティング
 
-トラブルシューティングのヘルプについては、[Datadog のサポートチームにお問い合わせください][14]。また、[Datadog 公開 Slack][15] [#mobile-app][16] チャンネルでメッセージをお送りいただくことも可能です。
+トラブルシューティングのヘルプについては、[Datadog のサポートチームにお問い合わせください][5]。また、[Datadog 公開 Slack][15] [#mobile-app][16] チャンネルでメッセージをお送りいただくことも可能です。
 
 ### その他の参考資料
 
@@ -121,15 +121,15 @@ Handoff の詳細については、[Apple Handoff のドキュメント][13]を�
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /ja/account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
-[5]: /ja/dashboards/
+[5]: /ja/help/
 [6]: /ja/monitors/manage_monitor/#search
 [7]: https://app.datadoghq.com/monitors
 [8]: /ja/monitors/monitor_types/
 [9]: /ja/dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
-[11]: https://app.datadoghq.com/dashboard/lists/preset/5
-[12]: https://support.apple.com/en-us/HT209055
-[13]: https://support.apple.com/en-us/HT209455
-[14]: /ja/help/
+[11]: /ja/dashboards/
+[12]: https://app.datadoghq.com/dashboard/lists/preset/5
+[13]: https://support.apple.com/en-us/HT209055
+[14]: https://support.apple.com/en-us/HT209455
 [15]: https://chat.datadoghq.com/
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG

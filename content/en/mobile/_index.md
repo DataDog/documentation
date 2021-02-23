@@ -31,20 +31,20 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 
 Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
 
-##### QR Code
+##### QR code
 
 1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. This pops up a QR code.
     {{< img src="mobile/link-device.png" alt="Account Profiles - Link mobile device">}}
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. The org UDID is automatically inserted into the login screen.
 
-##### Manual Entry
+##### Manual entry
 
 1. To manually enter the SAML ID, open the Datadog Mobile app and press the “Using Single Sign-On (SAML)?” button.
 2. Press the “Use another method to login” button, and enter the SAML ID manually.
 
 By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
 
-**Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][14] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
+**Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][5] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
 
 ## Monitors
 
@@ -62,21 +62,21 @@ For example, to filter on metric monitors related to the SRE team that is being 
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. 
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][5].
+**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
 
-## Quick Actions
+## Quick actions
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][11] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
+Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][12] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
-## Search from Home Screen
+## Search from home screen
 
 {{< img src="mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}}
 
 **iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the “Search in App” button to open the search query in the in-app Dashboard List page.
 
-## Shortcuts and Siri Suggestions
+## Shortcuts and Siri suggestions
 
 **Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shorcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
 
@@ -90,7 +90,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][12].
+For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][13].
 
 ## Handoff
 
@@ -103,7 +103,7 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information on Handoff, refer to the [Apple Handoff Documentation][13].
+For more information on Handoff, refer to the [Apple Handoff Documentation][14].
 
 ## Account
 
@@ -111,7 +111,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][14]. You can also send a message in the [Datadog public Slack][15] [#mobile-app][16] channel.
+For help with troubleshooting, [contact Datadog support][5]. You can also send a message in the [Datadog public Slack][15] [#mobile-app][16] channel.
 
 ### Further Reading
 
@@ -121,15 +121,15 @@ For help with troubleshooting, [contact Datadog support][14]. You can also send 
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
-[5]: /dashboards/
+[5]: /help/
 [6]: /monitors/manage_monitor/#search
 [7]: https://app.datadoghq.com/monitors
 [8]: /monitors/monitor_types/
 [9]: /dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
-[11]: https://app.datadoghq.com/dashboard/lists/preset/5
-[12]: https://support.apple.com/en-us/HT209055
-[13]: https://support.apple.com/en-us/HT209455
-[14]: /help/
+[11]: /dashboards/
+[12]: https://app.datadoghq.com/dashboard/lists/preset/5
+[13]: https://support.apple.com/en-us/HT209055
+[14]: https://support.apple.com/en-us/HT209455
 [15]: https://chat.datadoghq.com/
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG

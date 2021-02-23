@@ -1,3 +1,4 @@
 ---
 title: メトリクス
+headless: true
 ---

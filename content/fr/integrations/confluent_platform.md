@@ -6,6 +6,7 @@ assets:
     Confluent Platform Overview: assets/dashboards/overview.json
   logs:
     source: confluent_platform
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -19,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md'
 display_name: Confluent Platform
+draft: false
 git_integration_title: confluent_platform
 guid: 8e4a6d7e-44bc-440c-aafa-a0f98df87cc0
 integration_id: confluent-platform
@@ -57,7 +59,7 @@ Cette intégration recueille des métriques JMX pour les composants suivants :
 
 ### Installation
 
-Le check Confluent Platform est inclus avec le paquet de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer sur le serveur du composant Confluent Platform.
+Le check Confluent Platform est inclus avec le package de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer sur le serveur du composant Confluent Platform.
 
 **Remarque** : ce check recueille des métriques via JMX, une JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse exécuter [jmxfetch][2]. Nous vous conseillons d'utiliser un JVM fourni par Oracle.
 
@@ -145,7 +147,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 ### Checks de service
 
 **confluentplatform.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au composant Confluent Platform/Kafka qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au composant Confluent Platform/Kafka qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 

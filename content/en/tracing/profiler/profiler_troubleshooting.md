@@ -13,6 +13,32 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 14.04.3)
 - Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
 
+## Reduce overhead from default setup
+
+If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings.  Minimal configuration has the following changes compared to the default:
+
+- Increases sampling threshold to 500ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
+- Disables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
+
+To use the minimal configuration ensure you have `dd-java-agent` version `0.70.0` then change your service invocation to the following:
+
+```
+java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=minimal -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+```
+
+## Increase profiler information granularity
+
+If you want more granularity in your profiling data, you can specify `comprehensive` configuration. Note that this approach will increase your profiler overhead at the cost of further granularity. Comprehensive configuration has the following changes compared to the default:
+
+- Reduces sampling threshold to 10ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
+- Enables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
+
+To use the comprehensive configuration ensure you have `dd-trace-java` version `0.70.0` then change your service invocation to the following:
+
+```
+java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=comprehensive -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+```
+
 ## Removing sensitive information from profiles
 
 If your system properties contain sensitive information such as user names or passwords, turn off the system property event by creating a `jfp` [override template file](#creating-and-using-a-jfr-template-override-file) with `jdk.InitialSystemProperty` disabled:

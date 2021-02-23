@@ -7,7 +7,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn more about Log Explorer"
-- link: "/logs/explorer/patterns/"
+- link: "/logs/explorer/#patterns"
   tag: "Documentation"
   text: "Get familiar with the Logs pattern view"
 - link: "/logs/live_tail/"

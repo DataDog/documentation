@@ -7,16 +7,16 @@
             {
               "attributes": {
                 "compute": {
-                  "aggregation_type": "string",
-                  "path": "string"
+                  "aggregation_type": "distribution",
+                  "path": "@duration"
                 },
                 "filter": {
-                  "query": "string"
+                  "query": "service:web* AND @http.status_code:[200 TO 299]"
                 },
                 "group_by": [
                   {
-                    "path": "string",
-                    "tag_name": "string"
+                    "path": "@http.status_code",
+                    "tag_name": "status_code"
                   }
                 ]
               },
@@ -57,16 +57,16 @@
           "data": {
             "attributes": {
               "compute": {
-                "aggregation_type": "string",
-                "path": "string"
+                "aggregation_type": "distribution",
+                "path": "@duration"
               },
               "filter": {
-                "query": "string"
+                "query": "service:web* AND @http.status_code:[200 TO 299]"
               },
               "group_by": [
                 {
-                  "path": "string",
-                  "tag_name": "string"
+                  "path": "@http.status_code",
+                  "tag_name": "status_code"
                 }
               ]
             },
@@ -114,7 +114,7 @@
         "data": {
           "attributes": {
             "compute": {
-              "aggregation_type": null
+              "aggregation_type": "distribution"
             },
             "group_by": [
               {
@@ -130,7 +130,7 @@
         "data": {
           "attributes": {
             "compute": {
-              "aggregation_type": "string",
+              "aggregation_type": "distribution",
               "path": "@duration"
             },
             "filter": {
@@ -190,16 +190,16 @@
           "data": {
             "attributes": {
               "compute": {
-                "aggregation_type": "string",
-                "path": "string"
+                "aggregation_type": "distribution",
+                "path": "@duration"
               },
               "filter": {
-                "query": "string"
+                "query": "service:web* AND @http.status_code:[200 TO 299]"
               },
               "group_by": [
                 {
-                  "path": "string",
-                  "tag_name": "string"
+                  "path": "@http.status_code",
+                  "tag_name": "status_code"
                 }
               ]
             },
@@ -247,16 +247,16 @@
           "data": {
             "attributes": {
               "compute": {
-                "aggregation_type": "string",
-                "path": "string"
+                "aggregation_type": "distribution",
+                "path": "@duration"
               },
               "filter": {
-                "query": "string"
+                "query": "service:web* AND @http.status_code:[200 TO 299]"
               },
               "group_by": [
                 {
-                  "path": "string",
-                  "tag_name": "string"
+                  "path": "@http.status_code",
+                  "tag_name": "status_code"
                 }
               ]
             },

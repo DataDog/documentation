@@ -1,3 +1,4 @@
 ---
 title: タイムボード
+headless: true
 ---

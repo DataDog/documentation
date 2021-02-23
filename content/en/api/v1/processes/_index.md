@@ -1,3 +1,4 @@
 ---
 title: Processes
+headless: true
 ---

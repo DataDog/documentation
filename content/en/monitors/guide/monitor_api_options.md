@@ -24,7 +24,7 @@ kind: guide
   - `True`: `[Triggered on {host:h1}] Monitor Title`
   - `False`: `[Triggered] Monitor Title`
 
-## Anomaly Options
+## Anomaly options
 
 _These options only apply to anomaly monitors and are ignored for other monitor types._
 
@@ -35,7 +35,7 @@ _These options only apply to anomaly monitors and are ignored for other monitor 
 
 Example: `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window': 'last_15m'}}`
 
-## Metric Alert Options
+## Metric alert options
 
 _These options only apply to metric alerts._
 
@@ -45,7 +45,7 @@ Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_rec
 
 - **`evaluation_delay`** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the timeframe is set to last_5m and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.
 
-## Service Check Options
+## Service check options
 
 _These options only apply to service checks and are ignored for other monitor types._
 
@@ -53,7 +53,7 @@ _These options only apply to service checks and are ignored for other monitor ty
 
 Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
-## Logs Alert Options
+## Logs alert options
 
 _These options only apply to logs alerts._
 
@@ -68,6 +68,6 @@ Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
 Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 
-- **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `True`
+- **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `False`
 
 [1]: ../../faq/what-are-recovery-thresholds/

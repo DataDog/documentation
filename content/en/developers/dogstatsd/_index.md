@@ -224,30 +224,33 @@ To gather custom metrics with [DogStatsD][1] with helm:
 #### Install the DogStatsD client
 
 Official Datadog-DogStatsD client libraries are available for the following languages. You _can_ use any [generic StatsD client][8] to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above:
+{{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang lang="python" >}}
 
 ```shell
 pip install datadog
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 ```shell
 gem install dogstatsd-ruby
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 ```shell
 go get github.com/DataDog/datadog-go/statsd
 ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
 
 The Java DataDog StatsD Client is distributed with maven central, and can be [downloaded from Maven][1]. Start by adding the following configuration to your `pom.xml`:
 
@@ -261,8 +264,10 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 
 
 [1]: https://search.maven.org/search?q=g:com.datadoghq%20a:java-dogstatsd-client
-{{% /tab %}}
-{{% tab "PHP" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="PHP" >}}
 
 Add the following to your `composer.json`:
 
@@ -276,22 +281,26 @@ Or manually clone the repository at [github.com/DataDog/php-datadogstatsd][1] an
 
 
 [1]: https://github.com/DataDog/php-datadogstatsd#php-datadog-statsd-client
-{{% /tab %}}
-{{% tab ".NET" %}}
 
-[Get the package from NuGet][1] to install it.
+{{< /programming-lang >}}
 
+{{< programming-lang lang=".NET" >}}
+
+- Get [the package from NuGet][1] to install it.
 
 [1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
-{{% /tab %}}
-{{< /tabs >}}
+
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
 
 #### Instantiate the DogStatsD client
 
 Once your DogStatsD client is installed, instantiate it in your code:
+{{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang lang="python" >}}
 
 ```python
 from datadog import initialize, statsd
@@ -304,8 +313,9 @@ options = {
 initialize(**options)
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 ```ruby
 # Import the library
@@ -315,8 +325,9 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 ```go
 dogstatsd_client, err := statsd.New("127.0.0.1:8125")
@@ -329,8 +340,10 @@ For more options, see [Datadog's GoDoc][1].
 
 
 [1]: https://godoc.org/github.com/DataDog/datadog-go/statsd
-{{% /tab %}}
-{{% tab "Java" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
 
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
@@ -341,7 +354,7 @@ public class DogStatsdClient {
     public static void main(String[] args) throws Exception {
 
         StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
-            .prefix("statsd").
+            .prefix("statsd")
             .hostname("localhost")
             .port(8125)
             .build();
@@ -350,8 +363,9 @@ public class DogStatsdClient {
 }
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="PHP" >}}
 
 Instantiate a new DogStatsd object using composer:
 
@@ -369,8 +383,9 @@ $statsd = new DogStatsd(
   );
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
 
 Configure the DogStatsd class:
 
@@ -393,8 +408,9 @@ using (var dogStatsdService = new DogStatsdService())
 } // Flush metrics not yet sent
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 **Note**: If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the `$DD_DOGSTATSD_SOCKET` environment variable if using a Unix Domain Socket, or with the `$DD_AGENT_HOST` environment variable if you are using the host port binding method.
 
@@ -404,9 +420,8 @@ using (var dogStatsdService = new DogStatsdService())
 
 In addition to the required DogStatsD configuration (`url` and `port`), the following optional parameters are available for your DogStatsD client:
 
-{{< tabs >}}
-{{% tab "Python" %}}
-
+{{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
+{{< programming-lang lang="python" >}}
 | Parameter              | Type            | Default     | Description                                                                                                    |
 | ---------------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | `statsd_host`          | String          | `localhost` | The host of your DogStatsD server.                                                                             |
@@ -419,8 +434,8 @@ For more information, see the [DogStatsD module][1] documentation.
 
 
 [1]: https://datadogpy.readthedocs.io/en/latest
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 | Parameter     | Type            | Default     | Description                                                                                                    |
 | ------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
@@ -430,8 +445,8 @@ For more information, see the [DogStatsD module][1] documentation.
 | `tags`        | List of strings | `null`      | Tags to apply to all metrics, events, and service checks.                                                      |
 | `namespace`   | String          | `null`      | Namespace to prefix to all metrics, events, and service checks.                                                |
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 | Parameter               | Type            | Description                                                                                                                                                                                                         |
 | ----------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -446,8 +461,8 @@ For more options, see [Datadog's GoDoc][1].
 
 
 [1]: https://godoc.org/github.com/DataDog/datadog-go/statsd#Option
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
 
 | Parameter      | Type            | Description                                                          |
 | -------------- | --------------- | -------------------------------------------------------------------- |
@@ -460,8 +475,8 @@ For more information, see the [NonBlockingStatsDClient Class][1] documentation.
 
 
 [1]: https://jar-download.com/artifacts/com.datadoghq/java-dogstatsd-client/2.1.1/documentation
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="PHP" >}}
 
 | Parameter     | Type            | Default     | Description                                                                                                                                                         |
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -470,8 +485,8 @@ For more information, see the [NonBlockingStatsDClient Class][1] documentation.
 | `socket_path` | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`). This is only supported with Agent v6+.                                                  |
 | `global_tags` | List of Strings | `null`      | Tags to apply to all metrics, events, and service checks. The `@dd.internal.entity_id` tag is appended to global_tags from the `DD_ENTITY_ID` environment variable. |
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 | Parameter          | Type            | Default     | Description                                                          |
 | ------------------ | --------------- | ----------- | -------------------------------------------------------------------- |
@@ -480,8 +495,8 @@ For more information, see the [NonBlockingStatsDClient Class][1] documentation.
 | `Prefix`           | String          | `null`      | Prefix to apply to every metric, event, and service check.           |
 | `ConstantTags`     | List of strings | `null`      | Global tags to be applied to every metric, event, and service check. |
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Dive into DogStatsD
 

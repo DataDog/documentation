@@ -40,7 +40,7 @@ Choose your [primary tags][1], [service][2], and [resource][3] from the drop-dow
 
 Choose a **Threshold** or **Anomaly** alert:
 
-#### Threshold Alert
+#### Threshold alert
 
 An alert is triggered whenever a metric crosses a threshold.
 
@@ -50,7 +50,7 @@ An alert is triggered whenever a metric crosses a threshold.
 * Warning threshold `<NUMBER>`
 * over the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
 
-#### Anomaly Alert
+#### Anomaly alert
 
 An alert is triggered whenever a metric deviates from an expected pattern.
 
@@ -77,7 +77,7 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 ### Select alert conditions
 
 * Trigger when the metric is `above` or `above or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 24 hours.
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 48 hours.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 

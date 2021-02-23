@@ -1,0 +1,17 @@
+{{ $tags := .tags }}
+{{ $title := .title }}
+{{ $translate_tag := .translate_tag }}
+{{ range $tag := first 1 (where $tags ".name" "==" $title) }}
+<h1>{{ $translate_tag.name | default $tag.name }}</h1>
+<div class="row">
+    <div class="col-12 col-lg-9">
+        {{ $markdown := $translate_tag.description | default $tag.description | markdownify }}
+        <!-- need this because hugo sometimes duplicates <p> when using markdownify -->
+        {{ if not ( strings.Contains $markdown "<p>" ) }}
+            <p>{{ $markdown }}</p>
+        {{ else }}
+            {{ $markdown }}
+        {{ end }}
+    </div>
+</div>
+{{ end }}

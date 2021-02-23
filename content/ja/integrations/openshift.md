@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openshift/README.md'
 display_name: OpenShift
+draft: false
 git_integration_title: OpenShift
 guid: ea7f642f-263f-4ed1-8da0-9bb96c7df1f0
 integration_id: OpenShift
@@ -22,7 +23,9 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: openshift.
-metric_to_check: openshift.clusterquota.cpu.used
+metric_to_check:
+  - openshift.clusterquota.cpu.requests.used
+  - openshift.clusterquota.cpu.used
 name: OpenShift
 public_title: Datadog-OpenShift インテグレーション
 short_description: ビッグアイデア用の Kubernetes プラットフォーム
@@ -44,7 +47,31 @@ Agent のインストールには、Kubernetes の [Agent のインストール�
 
 ### コンフィギュレーション
 
-バージョン 6.1 から、Datadog Agent は、OpenShift Origin および Enterprise のクラスターの監視をサポートするようになりました。お客様のニーズとクラスターの[セキュリティ上の制約][3]に応じて、次の 3 つのデプロイシナリオがサポートされています。
+
+上記のインストール手順にリンクされている方法のいずれかを使用して Datadog Agent をデプロイする場合は、Agent がデータを収集するために SCC (セキュリティコンテキスト制約) を含める必要があります。デプロイに関連する以下の手順に従ってください。
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+SCC は、Datadog Agent の `values.yaml` 内で直接適用できます。ファイルの `agents:` セクションの下に次のブロックを追加します。
+
+```yaml
+...
+agents:
+...
+  podSecurity:
+    securityContextConstraints:
+      create: true
+...
+```
+
+これは、Agent を最初にデプロイするときに適用できます。または、この変更を行った後に `helm upgrade` を実行して、SCC を適用することもできます。
+
+{{% /tab %}}
+{{% tab "Daemonset" %}}
+
+
+ニーズとクラスターの[セキュリティ制約][1]に応じて、次の 3 つのデプロイシナリオがサポートされます。
 
 - [制限付き SCC オペレーション](#restricted-scc-operations)
 - [ホストネットワーク SCC オペレーション](#host)
@@ -66,14 +93,17 @@ Agent のインストールには、Kubernetes の [Agent のインストール�
 <div class="alert alert-warning">
 <bold>OpenShift 4.0+</bold>: OpenShift インストーラーを、サポート対象のクラウドプロバイダーで使用した場合は、ホストタグとエイリアスを取得するために、<code>datadog.yaml</code>コンフィギュレーションファイルに <code>hostNetwork: true</code> を定義して Agent をデプロイする必要があります。定義しないと、ポッドのネットワークからメタデータサーバーへのアクセスが制限されます。
 </div>
+[1]: https://docs.openshift.com/enterprise/3.0/admin_guide/manage_scc.html
+{{% /tab %}}
+{{< /tabs >}} 
 
 #### ログの収集
 
-詳細については、[Kubernetes のログ収集][4]に関するドキュメントを参照してください。
+詳細については、[Kubernetes のログ収集][3]に関するドキュメントを参照してください。
 
 #### 制限付き SCC オペレーション
 
-このモードでは、kubelet と APIserver へのアクセスに必要な [RBAC][6] を除き、[`datadog-agent` daemonset][5] への付与が必要なアクセス許可は特にありません。[この kubelet 専用テンプレート][7]を使用して始めることもできます。
+このモードでは、kubelet と APIserver へのアクセスに必要な [RBAC][5] を除き、[`datadog-agent` daemonset][4] への付与が必要なアクセス許可は特にありません。[この kubelet 専用テンプレート][6]を使用して始めることもできます。
 
 DogStatsD、APM、およびログの収集には、Datadog Agent をホストのポートにバインドする方法をお勧めします。そうすれば、ターゲット IP が変化せず、アプリケーションから簡単に検出できるからです。デフォルトの制限付き OpenShift SCC は、ホストポートへのバインドを許可しません。自身の IP でリッスンするように Agent を設定できますが、その IP を検出する処理をアプリケーションに作成する必要があります。
 
@@ -95,13 +125,13 @@ ports:
 
 #### すべての機能に使用できるカスタム Datadog SCC
 
-SELinux が permissive モードか、無効になっている場合、すべての機能を使用するには `hostaccess` SCC を有効にする必要があります。
-SELinux が enforcing モードの場合は、datadog-agent ポッドに [`spc_t` タイプ][8]を付与することをお勧めします。[こちらの datadog-agent SCC][9] を使用して Agent をデプロイしてください。[datadog-agent サービスアカウントを作成][6]した後でも、この SCC を適用できます。これにより、以下のアクセス許可が付与されます。
+SELinux が permissive モードか、無効になっている場合、すべての機能を使用するには `hostaccess` SCC を有効にする必要があります。 
+SELinux が enforcing モードの場合は、datadog-agent ポッドに [`spc_t` タイプ][7]を付与することをお勧めします。[こちらの datadog-agent SCC][8] を使用して Agent をデプロイしてください。[datadog-agent サービスアカウントを作成][5]した後でも、この SCC を適用できます。これにより、以下のアクセス許可が付与されます。
 
 - `allowHostPorts: true`: Dogstatsd / APM / ログインテークの、ノード IP へのバインドを許可します。
 - `allowHostPID: true`: UNIX ソケットによって送信された DogStatsD メトリクスに対する発信点検出を許可します。
 - `volumes: hostPath`: メトリクス収集に必要な、Docker ソケット、およびホストの `proc` と `cgroup` フォルダーへのアクセスを許可します。
-- `SELinux type: spc_t`: メトリクス収集に必要な Docker ソケット、およびすべてのプロセスの `proc` と `cgroup` フォルダーへのアクセスを許可します。このタイプについて詳しくは、[Red Hat による記事][8]を参照してください。
+- `SELinux type: spc_t`: メトリクス収集に必要な Docker ソケット、およびすべてのプロセスの `proc` と `cgroup` フォルダーへのアクセスを許可します。このタイプについて詳しくは、[Red Hat による記事][7]を参照してください。
 
 <div class="alert alert-info">
 新しく作成した <a href="https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml">datadog-agent SCC</a> に、<a href="https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions">datadog-agent サービスアカウント</a>を追加することを忘れないでください。それには、<code>system:serviceaccount:<datadog-agent namespace>:<datadog-agent service account name></code> を <code>users</code> セクションに追加する必要があります。
@@ -138,16 +168,15 @@ OpenShift チェックには、サービスのチェック機能は含まれま�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/kubernetes_apiserver.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/
-[3]: https://docs.openshift.org/latest/admin_guide/manage_scc.html
-[4]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/agent-kubelet-only.yaml
-[8]: https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept
-[9]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml
-[10]: https://github.com/DataDog/integrations-core/blob/master/openshift/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
+[6]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/agent-kubelet-only.yaml
+[7]: https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept
+[8]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml
+[9]: https://docs.datadoghq.com/ja/help/

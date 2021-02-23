@@ -5,6 +5,7 @@ categories:
 dependencies: []
 description: 'Affichez, recherchez et échangez sur des exceptions Airbrake dans votre flux d''événements.'
 doc_link: 'https://docs.datadoghq.com/integrations/airbrake/'
+draft: false
 git_integration_title: airbrake
 has_logo: true
 integration_title: Airbrake
@@ -26,7 +27,7 @@ Associez Airbrake à Datadog pour :
 - Rechercher des exceptions sur vos graphiques
 - Discuter des exceptions avec votre équipe
 
-## Implémentation
+## Configuration
 
 ### Configuration
 

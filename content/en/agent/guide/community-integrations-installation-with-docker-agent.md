@@ -24,7 +24,7 @@ To install the `<INTEGRATION_NAME>` check on your host:
 2. Run the following command to install the integrations with the Agent:
 
     ```
-    datadog-agent integration install -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
+    datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
 
 3. Configure your integration like [any other packaged integration][2].
@@ -40,7 +40,7 @@ The best way to use an integration from integrations-extra with the Docker Agent
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
-RUN agent integration install -r -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
+RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
 The `agent integration install` command run inside docker will issue the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. This warning can be ignored.

@@ -8,7 +8,7 @@ categories:
   - セキュリティ
   - ログの収集
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md'
 display_name: Lacework

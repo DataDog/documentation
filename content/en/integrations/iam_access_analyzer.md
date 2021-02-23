@@ -27,7 +27,7 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 ## Setup
 
-### Log Collection
+### Log collection
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 

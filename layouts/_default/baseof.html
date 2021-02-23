@@ -52,12 +52,12 @@
   {{ partial "header/header.html" . }}
 
   <div class="container h-100 pt-1">
-    <div class="row h-100 position-relative">
+    <div class="row h-100 position-relative js-content-container">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
         {{ partial "sidenav/main-sidenav.html" . }}
       </div>
 
-      <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_toc true}} col-lg-9 {{ else }} col-lg-7 {{end}} main">
+      <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
         <div class="{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}"
           id="mainContent">
           {{ block "main" . }}{{ end }}
@@ -65,19 +65,17 @@
         </div>
       </div>
 
-      <div class="region-selector-container">
-        <select class="js-region-selector d-none" placeholder="Site">
-          <option value="" disabled>Site</option>
-          {{ range sort .Site.Params.allowedRegions ".name" "desc" }}
-              <option value="{{ .value }}">{{ .name }}</option>
-          {{ end }}
-        </select>
-      </div>
-      {{ partial "table-of-contents/table-of-contents.html" . }}
+      {{ if ne .Params.disable_sidebar true }}
+        <aside class="sidebar col-lg-2">
+          {{ partial "language-region-select.html" . }}
 
+          {{ if ne .Params.disable_toc true }}
+            {{ partial "table-of-contents/table-of-contents.html" . }}
+          {{ end }}
+        </aside>
+      {{ end }}
     </div>
   </div>
-
 
   {{ partial "footer/footer.html" . }}
 

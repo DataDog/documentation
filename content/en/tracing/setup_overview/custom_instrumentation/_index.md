@@ -13,6 +13,7 @@ aliases:
     - /tracing/guide/adding_metadata_to_spans
     - /tracing/advanced/adding_metadata_to_spans/
     - /tracing/custom_instrumentation
+    - /tracing/setup_overview/custom_instrumentation/undefined
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'

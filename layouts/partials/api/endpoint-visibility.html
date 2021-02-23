@@ -1,0 +1,50 @@
+{{ $dot := . }}
+{{ $s := newScratch }}
+{{ $versionCount := .versionCount }}
+{{ $versionNum := .versionNum }}
+{{ $menuChild := .menuChild }}
+
+{{- $s.SetInMap "output" "isVisibleVersion" true -}}
+{{- $s.SetInMap "output" "label" "latest" -}}
+{{- $s.SetInMap "output" "labelPrefix" "" -}}
+{{- $s.SetInMap "output" "labelSuffix" "" -}}
+
+{{ if gt $versionCount 1 }}
+    <!-- we have multiple versions for this endpoint -->
+    {{ if eq $versionNum "v1" }}
+        {{ if in $menuChild.Params.unstable $versionNum }}
+          <!-- if we are outputting v1 and its unstable set beta label -->
+          {{- $s.SetInMap "output" "labelPrefix" "" -}}
+          {{- $s.SetInMap "output" "labelSuffix" "*" -}}
+          {{- $s.SetInMap "output" "label" "beta" -}}
+        {{ end }}
+        {{ if in $menuChild.Params.unstable "v2" }}
+          <!-- if we are outputting v1 and we know v2 is unstable we are ok to make v1 visible -->
+          {{- $s.SetInMap "output" "isVisibleVersion" true -}}
+        {{ else }}
+          <!-- if we are outputting v1 and we know v2 is stable we should collapse v1 -->
+          {{- $s.SetInMap "output" "isVisibleVersion" false -}}
+          <!-- if v1 and v2 are both stable, we should deprecate v1 -->
+          {{- $s.SetInMap "output" "labelPrefix" "~" -}}
+          {{- $s.SetInMap "output" "labelSuffix" "~" -}}
+          {{- $s.SetInMap "output" "label" "deprecated" -}}
+        {{ end }}
+    {{ else if eq $versionNum "v2" }}
+        {{ if in $menuChild.Params.unstable "v2" }}
+            <!-- if we are outputting v2 and its unstable set beta label -->
+            {{- $s.SetInMap "output" "labelPrefix" "" -}}
+            {{- $s.SetInMap "output" "labelSuffix" "*" -}}
+            {{- $s.SetInMap "output" "label" "beta" -}}
+            <!-- if we are outputting v2 and its unstable we should collapse/hide  -->
+            {{- $s.SetInMap "output" "isVisibleVersion" false -}}
+        {{ else }}
+            <!-- if we are outputting v2 and its stable we should show  -->
+            {{- $s.SetInMap "output" "isVisibleVersion" true -}}
+        {{ end }}
+    {{ end }}
+{{ else }}
+    <!-- we only have one version for this endpoint, so just show it -->
+    {{- $s.SetInMap "output" "isVisibleVersion" true -}}
+    {{- $s.SetInMap "output" "label" "latest" -}}
+{{ end }}
+{{ return ($s.Get "output") }}

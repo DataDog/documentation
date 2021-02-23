@@ -25,7 +25,7 @@ further_reading:
 ---
 ## Présentation
 
-Rédigez vos logs PHP dans un fichier, puis [utilisez l'Agent][1] pour les transmettre à Datadog. Vous avez la possibilité de choisir parmi les bibliothèques de journalisation suivantes : Monolog, Zend-Log ou Symfonie.
+Rédigez vos logs PHP dans un fichier, puis [utilisez l'Agent][1] pour les transmettre à Datadog. Vous avez la possibilité de choisir parmi les bibliothèques de journalisation suivantes : Monolog, Zend-Log ou Symfony.
 
 ## Implémentation
 

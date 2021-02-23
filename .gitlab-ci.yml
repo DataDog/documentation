@@ -71,8 +71,9 @@ build_preview:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - touch Makefile.config
-    - make examples
+    - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
@@ -220,6 +221,7 @@ build_live:
     - make examples
     - sync_integration_descriptions
     - sync_integration_metrics
+    - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
     - placehold_translations
     - yarn run build:live
     - in-isolation deploy_live

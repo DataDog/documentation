@@ -111,7 +111,7 @@ Containerd チェックは、イベントを収集できます。`filters` を�
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.example
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default
 [2]: https://docs.datadoghq.com/ja/help/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/containerd/metadata.csv

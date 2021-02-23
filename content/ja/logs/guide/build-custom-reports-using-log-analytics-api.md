@@ -22,6 +22,7 @@ further_reading:
 * [分析の取得](#getting-stats)
 * [パーセンタイルの取得](#getting-percentiles)
 * [複数のグループ化、ユニークカウント、メトリクス](#複数のグループ化、ユニークカウント、メトリクス) 
+* [ページ区切り](#pagination)
 
 ## 前提条件
 
@@ -686,7 +687,181 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 ```
 応答で、`c0` は `useragent` のユニークカウントを、`c1` はメトリクスの `duration` の `pc90` を、`c2` はメトリクスの `network.bytes_written` の `avg` を、`c3` はログイベントの合計 `count` を表します。
 
-**注:** ページングは、`sort` が `alphabetical` の場合のみサポートされます。
+### ページ区切り
+
+以下の API 呼び出しで、`service` や `status` などファセット別のログデータの詳細を表示する `table` を構築し、結果を `service` ごとに昇順で並べ替え、`limit` を使用して結果セットをページに軸切ります。
+
+**API call:**
+
+```bash
+curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
+   "compute":[
+   {
+       "type":"total",
+       "aggregation":"count"
+   }],
+   "filter": {
+       "from":"1611118800000",
+       "to":"1611205140000",
+       "query":"*"
+           },
+   "group_by":[
+       {
+           "type":"facet",
+           "facet":"service",
+           "sort":{
+               "order":"asc"
+           },
+           "limit":2
+       },
+       {
+           "type":"facet",
+           "facet":"status",
+           "sort":{
+               "order":"desc",
+               "type":"measure",
+               "aggregation":"count"
+           }
+       }
+   ]
+}'
+
+```
+
+**Response:**
+
+```json
+{
+    "meta": {
+        "status": "done",
+        "request_id": "MjZUNF9qRG1TaG1Tb01JenhBV2tYd3x3VTNjTUhIQUdaRUZKajQ0YTBqdmZn",
+        "page": {
+            "after": "eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iXX19"
+        },
+        "elapsed": 5923
+    },
+    "data": {
+        "buckets": [
+            {
+                "computes": {
+                    "c0": 312
+                },
+                "by": {
+                    "status": "info",
+                    "service": "activator"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 405606
+                },
+                "by": {
+                    "status": "info",
+                    "service": "ad-auction"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 124
+                },
+                "by": {
+                    "status": "error",
+                    "service": "ad-auction"
+                }
+            }
+        ]
+    }
+}
+
+```
+ページを区切り次の結果セットにアクセスするには、 `page` オプションを使用して `cursor` の値を以前の呼び出しから `after` の値に設定します。
+
+**API call:**
+```bash
+curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
+   "compute":[
+   {
+       "type":"total",
+       "aggregation":"count"
+   }],
+   "filter": {
+       "from":"1611118800000",
+       "to":"1611205140000",
+       "query":"*"
+           },
+   "group_by":[
+       {
+           "type":"facet",
+           "facet":"service",
+           "sort":{
+               "order":"asc"
+           },
+           "limit":2
+       },
+       {
+           "type":"facet",
+           "facet":"status",
+           "sort":{
+               "order":"desc",
+               "type":"measure",
+               "aggregation":"count"
+           }
+       }
+   ],
+   "page":{
+       "cursor":"eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iXX19"
+   }
+}'
+
+```
+
+**Response:**
+
+```json
+{
+    "meta": {
+        "status": "done",
+        "request_id": "aVM2Y2VVMUZReVNmLVU4ZzUwV1JnUXxRWkVjamNHZU9Ka21ubjNDbHVYbXJn",
+        "page": {
+            "after": "eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iLCJhZC1zZXJ2ZXIiLCJhZGRvbi1yZXNpemVyIl19fQ"
+        },
+        "elapsed": 6645
+    },
+    "data": {
+        "buckets": [
+            {
+                "computes": {
+                    "c0": 24740759
+                },
+                "by": {
+                    "status": "info",
+                    "service": "ad-server"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 2854331
+                },
+                "by": {
+                    "status": "error",
+                    "service": "ad-server"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 139
+                },
+                "by": {
+                    "status": "error",
+                    "service": "addon-resizer"
+                }
+            }
+        ]
+    }
+}
+```
+
+**注:** ページングは、上記の例で示されるとおり、1 つ以上のファセットで `sort` が `alphabetical` の場合のみサポートされます。細かい粒度のファセットを持つ複数のグループ化を含むレポートを構築するには、別々の API 呼び出しを作成します。たとえば、各 `session id` に対し `url paths` の異なるメトリクスを表示するレポートを構築する場合は、別々の API 呼び出しを作成します。最初の呼び出しは、`sessions ids` がソートされて返されるため、この結果を使用して各 `session id` に対する `url paths` のメトリクスを取得できます。
 
 ### その他の参考資料
 

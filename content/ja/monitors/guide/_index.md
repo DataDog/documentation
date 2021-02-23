@@ -2,7 +2,7 @@
 title: モニターガイド
 kind: ガイド
 private: true
-disable_toc: true
+disable_sidebar: true
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}

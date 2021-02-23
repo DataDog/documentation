@@ -5,7 +5,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/processing/"

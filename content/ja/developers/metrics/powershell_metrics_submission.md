@@ -149,7 +149,7 @@ $http_request.responseText
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: /ja/developers/metrics/dogstatsd_metrics_submission/
-[3]: https://developer.mozilla.org/en-US/docs/Glossary/XHR_(XMLHttpRequest
+[3]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [4]: /ja/api/v1/hosts/
 [5]: /ja/api/v1/metrics/
 [6]: https://github.com/ncracker/dd_metric

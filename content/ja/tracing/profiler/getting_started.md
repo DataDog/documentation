@@ -4,6 +4,9 @@ kind: Documentation
 aliases:
   - /ja/tracing/profiling/getting_started
 further_reading:
+  - link: tracing/profiler/intro_to_profiling
+    tag: Documentation
+    text: プロファイリング入門
   - link: tracing/profiler/search_profiles
     tag: Documentation
     text: 使用可能なプロファイルタイプの詳細
@@ -184,29 +187,33 @@ Datadog Profiler には Go 1.12 以降が必要です。アプリケーション
 
 **注**:
 
-- `service` や `version` のようなタグ追加すると、プロファイルのさまざまな側面をすばやく詳細に解明でき操作性の向上につながるため、強くお勧めします。プロファイラコンフィギュレーションを使用してパラメータを設定します。
+- デフォルトでは、CPU とヒーププロファイルのみが有効になっています。その他の[プロファイルタイプ][5]を有効にするには、[profiler.WithProfileTypes][4] を使用します。
 
-| メソッド | タイプ          | 説明                                                                                                  |
+- 以下の関数で、コードにプロファイラーパラメーターを設定できます。
+
+| 関数 | タイプ          | 説明                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
-|  WithService     | 文字列        | Datadog [サービス][4] 名（例、`my-web-app`）。             |
-|  WithEnv         | 文字列        | Datadog [環境][5]名（例、`production`）。         |
+|  WithService     | 文字列        | Datadog [サービス][6]名（例: `my-web-app`)。             |
+|  WithEnv         | 文字列        | Datadog [環境][7]名（例: `production`）。         |
 |  WithVersion     | 文字列        | アプリケーションのバージョン                                                                             |
 |  WithTags        | 文字列        | アップロードされたプロファイルに適用するタグ。`<キー1>:<値1>,<キー2>:<値2>` 形式のリストである必要があります。 |
 
-- または、環境変数を使いプロファイラコンフィギュレーションを設定することもできます。
+- または、環境変数を使用してプロファイラーコンフィギュレーションを設定することも可能です。
 
 | 環境変数                             | タイプ          | 説明                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_SERVICE`                                     | 文字列        | Datadog [サービス][4]名。     |
-| `DD_ENV`                                         | 文字列        | Datadog [環境][5]名（例、`production`）。 |
+| `DD_SERVICE`                                     | 文字列        | Datadog [サービス][6]名。     |
+| `DD_ENV`                                         | 文字列        | Datadog [環境][7]名（例: `production`）。 |
 | `DD_VERSION`                                     | 文字列        | アプリケーションのバージョン                             |
 | `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります（例、`layer:api,team:intake`）。   |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
 [3]: https://app.datadoghq.com/profiling
-[4]: /ja/tracing/visualization/#services
-[5]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
+[6]: /ja/tracing/visualization/#services
+[7]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
 
 {{< /tabs >}}

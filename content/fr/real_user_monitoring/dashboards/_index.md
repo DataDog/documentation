@@ -30,7 +30,7 @@ Les dashboards RUM sont générés pour toutes vos applications avec un ensemble
 
 {{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="Template variable" style="width:50%;" >}}
 
-### Afficher les événements RUM
+### Événements de vue RUM
 
 Pour explorer chacun événement, cliquez sur un graphique et sélectionnez l'option _View RUM events_. Vous serez alors redirigé vers le RUM Explorer. Les filtres que vous aviez sélectionnés sont conservés.
 

@@ -25,39 +25,44 @@ further_reading:
 
 ログエクスプローラーを起点として、トラブルシューティングと調査を行うことができます。
 
-{{< img src="logs/explorer/log_explorer_walkthrough.gif" alt="コメントの付いた Log Explorer ビュー" style="width:80%;" >}}
-
 さまざまな視点により、[検索クエリ][1]と一致するログデータからの色々な種類のインサイトが得られます。
 
 ### Live Tail
 
 Live Tail は Datadog に入る時にログを表示します。Live Tail ログは残りませんが、そのビューは、インデックス化されているかに関わらず**すべて**のログを表示します。詳細は、[Log Live Tail セクション][2]を参照してください。
 
-{{< img src="logs/explorer/log_explorer_walkthrough_livetail.gif" alt="Log Livetail" style="width:60%;" >}}
+{{< img src="logs/explorer/live_tail/livetail.gif" alt="Log Livetail" style="width:60%;" >}}
 
 ### ログリスト
 
+
+#### 個別のログ
+
 Log List はインデックス化されたログを表示し、**個々の結果**に移動するための権限を持つツールを提供します。詳細は、[ログリストのセクション][3]を参照してください。
 
-{{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="ログリスト" style="width:60%;" >}}
+{{< img src="logs/explorer/toplists.png" alt="ログリスト" style="width:60%;" >}}
 
-### ログパターン
+#### ログパターン
 
 Log Patterns はインデックス化されたログを同じような構造を持つ**一握りのグループ**に自動的に集約します。詳細は、[Log Patterns セクション][4]を参照してください。
 
-{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
+{{< img src="logs/explorer/patterns_side_panel.png" alt="Log Patterns" style="width:60%;" >}}
+
+#### ログトランザクション
+
+Log Transactions は、複数のマイクロサービス全体で処理されたユーザーセッションまたはリクエストのような、イベント**シーケンス**のインスタンスに従い、自動的にインデックス化されたログを収集します。詳しくは、[Log Transactions セクション][41]を参照してください。
+
+{{< img src="logs/explorer/transactions_side_panel.png" alt="Log Transactions" style="width:60%;" >}}
 
 ### ログ分析
 
 Log Analytics はログクエリを**グラフ**し、最大値、平均値、パーセンタイル、ユニーク数などを表示します。グラフの作成方法のオプションに関する詳細は、[ログのグラフガイド][5]を参照してください。
 
-{{< img src="logs/explorer/log_explorer_walkthrough_analytics.png" alt="Log Analytics" style="width:60%;" >}}
-
 ## Log Side Panel
 
 Datadog は次の一般的なサイドパネルレイアウトに従い、個々のログを表示します。
 
-{{< img src="logs/explorer/log_side_panel.png" alt="Log Side Panel"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/overview.png" alt="Log Side Panel"  style="width:60%;">}}
 
 ### ログの構造化された情報
 
@@ -81,13 +86,13 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 
 **メトリクスタブ** をクリックし、ログの 30 分の時間枠で基底のインフラストラクチャーメトリクスにアクセスします。
 
-上部の予約済み属性セクション、関連する[ホストダッシュボード][10]、[ネットワークページ][11]の  **ホスト** を操作します。**コンテナ**セクションを操作し、基底のパラメータにスコープされた[コンテナページ][12]に移動します。 
+上部の予約済み属性セクション、関連する[ホストダッシュボード][10]、[ネットワークページ][11]の  **ホスト** を操作します。**コンテナ**セクションを操作し、基底のパラメータにスコープされた[コンテナページ][12]に移動します。
 
-{{< img src="logs/explorer/log_side_panel_infra.gif" alt="インフラへのハブ" style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/infra.gif" alt="インフラへのハブ" style="width:60%;">}}
 
 サーバレスのソースからのログの場合、ホストセクションは対応する[サーバレスページ][13]へのリンクを持つサーバレスセクションに置き換えられます。
 
-{{< img src="logs/explorer/log_side_panel_infra-serverless.png" alt="サーバレスへのハブ" style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/infra-serverless.png" alt="サーバレスへのハブ" style="width:60%;">}}
 
 
 #### APM データとの相関
@@ -98,7 +103,7 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 
 **サービス**セクションを操作して、ログエクスプローラでの検索に再注目し同じトレースからのすべてのログを確認します。
 
-{{< img src="logs/explorer/log_side_panel_infra.gif" alt="APM へのハブ" style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/apm.gif" alt="APM へのハブ" style="width:60%;">}}
 
 
 ### トラブルシューティングのコンテキストを構成
@@ -108,11 +113,11 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 - ログテーブルに列を追加または削除します。
 - 検索リクエストに特定の値 (include または exclude) を付加します。
 
-{{< img src="logs/explorer/side_panel_context.gif" alt="サイドパネルコンテキスト"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/context.gif" alt="サイドパネルコンテキスト"  style="width:60%;">}}
 
 - 属性からファセットまたはメジャーを作成/編集します。[ログファセット][17]を参照してください。
 
-{{< img src="logs/explorer/side_panel_facets.gif" alt="サイドパネルファセット"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/facets.gif" alt="サイドパネルファセット"  style="width:60%;">}}
 
 ### ログの共有
 
@@ -121,7 +126,7 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 - **Copy to clipboard** または `Ctrl+C` / `Cmd+C` を使用して、ログの JSON をクリップボードにコピーします。
 - **Share Event** では、電子メールや Slack などを使って、ログを (基底のビューと一緒に) チームメイトと共有できます。使用可能なすべての [Datadog 通知インテグレーション][18]を参照してください。
 
-{{< img src="logs/explorer/upper_log_panel.png" alt="上部ログパネル"  style="width:50%;">}}
+{{< img src="logs/explorer/side_panel/upper_log_panel.png" alt="上部ログパネル"  style="width:50%;">}}
 
 ## トラブルシューティングのコンテキスト
 
@@ -136,7 +141,7 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 
 タイムレンジをすばやく変更するには、プリセットされたレンジをドロップダウンから選択します (または、[カスタムタイムフレームを入力します][19]):
 
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="タイムレンジ"  >}}
+{{< img src="logs/explorer/timeseries.png" style="width:50%;" alt="タイムレンジ"  >}}
 
 **検索**
 
@@ -156,6 +161,7 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 [2]: /ja/logs/explorer/live_tail/
 [3]: /ja/logs/explorer/list/
 [4]: /ja/logs/explorer/patterns/
+[41]: /ja/logs/explorer/transactions/
 [5]: /ja/logs/explorer/analytics/
 [6]: /ja/logs/processing/pipelines/
 [7]: /ja/integrations/#cat-log-collection

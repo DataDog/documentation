@@ -89,7 +89,7 @@ First, download the [Cluster Agent RBAC permissions][2] manifest, and add the fo
 Add the following to the bottom of `agent-services.yaml`:
 
 {{< code-block lang="yaml" filename="agent-services.yaml" disable_copy="true" >}}
----
+
 apiVersion: v1
 kind: Service
 metadata:

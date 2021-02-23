@@ -37,7 +37,7 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 |---------------------------------------------------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | COUNT メトリクスをインクリメントするのに使用。                         | Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。 |
 | `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | COUNT メトリクスをデクリメントするのに使用。                         | Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。 |
-| `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 任意の `Value` から COUNT メトリクスをインクリメントするのに使用。 | Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。 |
+| `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 任意の `Value` から COUNT メトリクスをインクリメントするのに使用。 | Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。<br/><br/>**注:** `count` は Python ではサポートされません。</p>|
 
 **注**: `COUNT` タイプのメトリクスは、フラッシュ間隔で正規化され 1 秒あたりの単位数を報告するため、Datadog 内で少数を表示できます。
 
@@ -66,6 +66,9 @@ while(1):
   statsd.decrement('example_metric.decrement', tags=["environment:dev"])
   time.sleep(10)
 ```
+
+**注:** `statsd.count` は Python ではサポートされません。
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -415,9 +418,9 @@ end
 package main
 
 import (
+    "fmt"
     "log"
     "math/rand"
-    "strconv"
     "time"
 
     "github.com/DataDog/datadog-go/statsd"
@@ -431,8 +434,8 @@ func main() {
     var i float64
     for {
         i += 1
-        statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
-        time.Sleep(rand.Intn(10) * time.Second)
+        statsd.Set("example_metric.set", fmt.Sprintf("%f", i), []string{"environment:dev"}, 1)
+        time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
     }
 }
 ```
@@ -659,7 +662,7 @@ while (TRUE) {
 | メトリクス                                  | 説明                             |
 |-----------------------------------------|-----------------------------------------|
 | `example_metric.histogram.count`        | このメトリクスがサンプリングされた回数 |
-| `example_metric.histogram.avg`          | サンプリングされた値の平均時間      |
+| `example_metric.histogram.avg`          | サンプリングされた値の平均           |
 | `example_metric.histogram.median`       | サンプリングされた値の中央値                    |
 | `example_metric.histogram.max`          | サンプリングされた値の最大値                   |
 | `example_metric.histogram.95percentile` | サンプリングされた値の 95 パーセンタイル           |

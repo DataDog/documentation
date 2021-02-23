@@ -28,7 +28,7 @@ With these three tags you can:
 
 ### Requirements
 
-- Unified service tagging requires setup of the [Datadog Agent][2].
+- Unified service tagging requires setup of a [Datadog Agent][2] that is 6.19.x/7.19.x or higher.
 
 - Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][3].
 
@@ -143,9 +143,9 @@ To configure [Kubernetes State Metrics][2]:
           tags.datadoghq.com/version: "<VERSION>"
   ```
 
-###### APM Tracer / StatsD client
+###### APM tracer and StatsD client
 
-To configure [APM Tracer][4] and [StatsD client][5] environment variables, use the [Kubernetes's downward API][1] in the format below:
+To configure [APM tracer][4] and [StatsD client][5] environment variables, use the [Kubernetes's downward API][1] in the format below:
 
 ```yaml
 containers:
@@ -165,7 +165,7 @@ containers:
               fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#the-downward-api
+[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
 [2]: /agent/kubernetes/data_collected/#kube-state-metrics
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [4]: /tracing/send_traces/
@@ -365,7 +365,7 @@ to configure the `service` tag only in the configuration of the process check.
 
 ### Serverless environment
 
-#### AWS Lambda Functions 
+#### AWS Lambda functions
 
 Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to metrics, traces and logs.
 
