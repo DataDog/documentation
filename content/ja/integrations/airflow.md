@@ -108,7 +108,7 @@ Airflow の `statsd` 機能を使用して Airflow を (Datadog Agent に含ま�
            name: "airflow.job.end"
            tags:
              job_name: "$1"
-         - match: "aiflow.*_<job_name>_heartbeat_failure"
+         - match: "airflow.*_<job_name>_heartbeat_failure"
            name: airflow.job.heartbeat.failure
            tags:
              job_name: "$1"
