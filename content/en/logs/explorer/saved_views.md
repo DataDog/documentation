@@ -20,6 +20,7 @@ Troubleshooting is highly contextual, and Saved Views enable you and your teamma
 {{< img src="logs/explorer/saved_views/overview.png" alt="Saved Views selection"  style="width:90%;" >}}
 
 Technically, a Saved View keeps track of:
+
 - A [search query][3]
 - A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties)
 - A [selected subset of facets][1] to be displayed in the facet list

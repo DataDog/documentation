@@ -108,7 +108,7 @@ If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a mo
 {{% /tab %}}
 {{< /tabs >}}
 
-### Installation Log Files
+### Installation log files
 
 You can find Agent installation log files at `%TEMP%\MSI*.LOG`.
 
@@ -116,7 +116,7 @@ You can find Agent installation log files at `%TEMP%\MSI*.LOG`.
 
 To verify your installation, follow the instructions in the [Agent Status and Information](#agent-status-and-information) section.
 
-## Agent Commands
+## Agent commands
 
 The execution of the Agent is controlled by the Windows Service Control Manager.
 
@@ -210,7 +210,7 @@ Configuration files for [integrations][1] are in:
 
 ## Troubleshooting
 
-### Agent Status and Information
+### Agent status and information
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -383,9 +383,9 @@ Example:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Use Cases
+## Use cases
 
-###  Monitoring a Windows Service
+###  Monitoring a Windows service
 
 On your target host, launch the Datadog Agent Manager and select the "Windows Service" Integration from the list. For this, there is an out-of-the-box example; however, this example uses DHCP.
 
@@ -407,7 +407,7 @@ The Datadog Agent collects a large number of system metrics by default. The most
 
 While Windows does not offer the `system.load.*` metrics, an equivalent option that's available by default is `system.proc.queue.length`. This metric shows the number of threads observed as delayed in the processor ready queue that are waiting to be executed.
 
-### Monitoring Windows Processes
+### Monitoring Windows processes
 
 You can monitor Windows processes with [Live Process Monitoring][9]. To enable this on Windows, edit the [Agent main configuration file][10] by setting the following parameter to true:
 

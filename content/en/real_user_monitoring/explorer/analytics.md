@@ -118,7 +118,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 {{< /tabs >}}
 
-## Related Events
+## Related events
 
 Select or click on a section of the graph to either zoom in the graph or see the list of events corresponding to your selection:
 

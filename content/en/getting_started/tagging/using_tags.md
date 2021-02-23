@@ -1,5 +1,5 @@
 ---
-title: Using tags
+title: Using Tags
 kind: documentation
 aliases:
 - /tagging/using_tags/
@@ -298,7 +298,7 @@ Additionally, tags are used to filter a logs [Pipeline][14]. In the example belo
 {{< img src="tagging/using_tags/logpipelinetags.png" alt="Pipeline Tags"  style="width:80%;">}}
 
 
-## Service Level Objectives
+## Service level objectives
 
 {{< tabs >}}
 {{% tab "Manage SLOs" %}}

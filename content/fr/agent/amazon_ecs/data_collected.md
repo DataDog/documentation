@@ -8,7 +8,7 @@ further_reading:
   - link: /agent/amazon_ecs/apm/
     tag: Documentation
     text: Recueillir les traces de vos applications
-  - link: /agent/amazon_ecs/metrics/
+  - link: '/agent/amazon_ecs/data_collected/#metriques'
     tag: Documentation
     text: Recueillir des métriques ECS
 ---
@@ -16,15 +16,9 @@ further_reading:
 
 ### Métriques
 
-Les métriques Amazon ECS sont recueillies via l'Agent Datadog ou l'[intégration AWS][1].
+Amazon ECS sur EC2 est un service de gestion de conteneurs pour les conteneurs Docker s'exécutant sur des instances EC2. Lorsque l'Agent est déployé dans un conteneur Docker, il recueille les mêmes métriques que l'intégration Docker. Pour obtenir la liste complète des métriques recueillies, consultez la documentation relative aux [métriques d'intégration Docker][1].
 
-Les métriques recueillies à l'aide de l'intégration AWS contiennent le préfixe `aws.*`. Les métriques recueillies par l'Agent contiennent le préfixe `ecs.*`. Consultez le tableau ci-dessous :
-
-{{< get-metrics-from-git "amazon_ecs" >}}
-
-Chacune des métriques récupérées à partir d'AWS se voit attribuer les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
-
-**Remarque** : les métriques commençant par `ecs.containerinsights.*` proviennent de l'[agent CloudWatch d'AWS][2].
+**Remarque** : les tags `container_name`, `task_arn`, `task_family`, `task_name` et `task_version` sont appliqués aux métriques Docker. Aucune configuration supplémentaire n'est requise.
 
 ### Événements
 
@@ -32,16 +26,11 @@ Pour réduire les données parasites, l'intégration Amazon ECS est automatique
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Événements AWS ECS" >}}
 
-Pour supprimer ce filtre et recevoir tous les événements de votre intégration Datadog/Amazon ECS, contactez [l'assistance Datadog][3].
-
-### Checks de service
-
-- **aws.ecs.agent_connected** : renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter. Si ce n'est pas le cas, renvoie `OK`.
+Pour supprimer cette liste d'inclusion et recevoir tous les événements générés par votre intégration Datadog/Amazon ECS, contactez l'[assistance Datadog][2].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/integrations/amazon_web_services/
-[2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html
-[3]: https://docs.datadoghq.com/fr/help/
+[1]: https://docs.datadoghq.com/fr/agent/docker/data_collected/#metrics
+[2]: https://docs.datadoghq.com/fr/help/

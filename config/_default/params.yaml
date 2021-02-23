@@ -59,6 +59,8 @@ code_language_ids:
     dotnet-core: ".NET Core"
     dotnet-framework: ".NET Framework"
     curl: Curl
+    nginx: Nginx
+    other: Other
 
 branch: ""
 
@@ -79,5 +81,17 @@ footer_scripts:
 allowedRegions:
   - name: US
     value: us
+    weight: 10
+    domain: datadoghq.com
+  - name: US3
+    value: us3
+    weight: 15
+    domain: us3.datadoghq.com
   - name: EU
     value: eu
+    weight: 20
+    domain: datadoghq.eu
+  - name: US1-FED
+    value: gov
+    weight: 30
+    domain: ddog-gov.com

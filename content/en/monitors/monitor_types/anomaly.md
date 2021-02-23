@@ -49,7 +49,7 @@ After defining the metric, the anomaly detection monitor provides two preview gr
 
 **Recovery window** - How much time is required for the metric to not be considered anomalous so the alert recovers.
 
-#### Advanced Options
+#### Advanced options
 
 Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
 
@@ -74,7 +74,7 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 
 **Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
 
-##### Anomaly Detection Algorithms
+##### Anomaly detection algorithms
 
 | Option | Use case                                                                                       | Description                                                                                                                                                                                                                                                           |
 |--------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -84,7 +84,7 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms can avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
-**Examples**:<br>
+**Examples:**<br>
 The graphs below illustrate how and when these three algorithms behave differently from one another.
 
 In this example, `basic` successfully identifies anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, `robust` and `agile` both recognize the seasonal pattern and can detect more nuanced anomalies, for example if the metric was to flat-line near its minimum value.

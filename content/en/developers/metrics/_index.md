@@ -76,7 +76,7 @@ You can also use one of the [Datadog official and community contributed API and 
 [4]: /developers/metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /account_management/billing/custom_metrics/#counting-custom-metrics
-[7]: /graphing/metrics/introduction/
+[7]: /metrics
 [8]: /developers/metrics/types/
 [9]: /developers/metrics/types/?tab=rate#metric-types
 [10]: /developers/metrics/types/?tab=count#metric-types

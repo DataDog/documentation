@@ -33,41 +33,63 @@ title: Android トレース収集
     }
     ```
 
-2. アプリケーションコンテキストと [Datadog クライアントトークン][4]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
+2. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][2]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][6]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
 
     {{< tabs >}}
     {{% tab "US" %}}
-
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val config = DatadogConfig.Builder("<クライアントトークン>", "<環境名>", "<アプリケーション_ID>")
+        val config = DatadogConfig.Builder("<CLIENT_TOKEN>", "<ENVIRONMENT_NAME>", "<APPLICATION_ID>")
                         .build()
-        Datadog.initialize(this, config)
+        Datadog.initialize(this, trackingConsent, config)
     }
 }
 ```
-
     {{% /tab %}}
     {{% tab "EU" %}}
-
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val config = DatadogConfig.Builder("<クライアントトークン>", "<環境名>", "<アプリケーション_ID>")
+        val config = DatadogConfig.Builder("<CLIENT_TOKEN>", "<ENVIRONMENT_NAME>", "<APPLICATION_ID>")
                         .useEUEndpoints()
                         .build()
-        Datadog.initialize(this, config)
+        Datadog.initialize(this, trackingConsent, config)
     }
 }
 ```
-
     {{% /tab %}}
     {{< /tabs >}}
+
+    GDPR 規制を遵守するため、SDK は初期化時に追跡に関する同意を求めます。
+    追跡に関する同意は以下のいずれかの値で示されます。
+    * `TrackingConsent.PENDING`: SDK はデータの収集とバッチ処理を開始しますが、データ
+     収集エンドポイントへの送信は行われません。SDK はバッチ処理が完了したデータをどうするかについての新たな同意値が得られるまで待機します。
+    * `TrackingConsent.GRANTED`: SDK はデータの収集を開始し、それをデータ収集エンドポイントに送信します。
+    * `TrackingConsent.NOT_GRANTED`: SDK がデータを収集することはありません。手動でログやトレース、
+     RUM イベントを送信することもできません。
+
+    SDK の初期化後に追跡に関する同意を更新する場合は、 `Datadog.setTrackingConsent(<NEW CONSENT>)` を呼び出してください。
+    SDK は新しい同意に応じて動作を変更します。たとえば、現在の同意内容が `TrackingConsent.PENDING` で、それを
+    * `TrackingConsent.GRANTED` に更新した場合: SDK は現在のバッチデータと将来的なデータをすべてデータ収集エンドポイントに直接送信します。
+    * `TrackingConsent.NOT_GRANTED`: SDK はすべてのバッチデータを消去し、以後のデータも収集しません。
+
+   **注**: ユーティリティメソッド `isInitialized` を使用して SDK が適切に初期化されているかを確認します。
+
+    ```kotlin
+    if (Datadog.isInitialized()) {
+        // your code here
+    }
+    ```
+   アプリケーションを書く際、`setVerbosity` メソッドを呼び出すことで開発ログを有効にできます。指定したレベル以上の優先度を持つライブラリ内のすべての内部メッセージが Android の Logcat に記録されます。
+
+    ```kotlin
+    Datadog.setVerbosity(Log.INFO)
+    ```
 
 3. Android Tracer を構成して登録します。通常はアプリケーションの `onCreate()` メソッドで、一度だけ実行する必要があります。
 
@@ -95,7 +117,7 @@ class SampleApplication : Application() {
     span.finish()
 
     ```
-7. スコープの使用:
+6. 同期呼び出しでスコープを使用する:
    ```kotlin
    val span = tracer.buildSpan("<SPAN_NAME1>").start()
    try {
@@ -126,7 +148,7 @@ class SampleApplication : Application() {
    }
 
    ```
-8. 非同期呼び出しでスコープを使用する:
+7. 非同期呼び出しでスコープを使用する:
    ```kotlin
    val span = tracer.buildSpan("<SPAN_NAME1>").start()
    try{
@@ -150,7 +172,7 @@ class SampleApplication : Application() {
    }
 
    ```  
-9. (オプション) フロントエンド - バックエンドなど、環境間でトレースを手動で分散する方法:
+8. (任意) フロントエンド - バックエンドなど、環境間でトレースを手動で分散する:
 
    * ステップ 1: クライアントリクエストにトレーサーコンテキストを挿入します。
 
@@ -190,14 +212,12 @@ class SampleApplication : Application() {
 
 **注**: OkHttp クライアントを使用するコードベースの場合、Datadog は以下の実装を提供します。
 
-10. (オプション) - スパンと一緒に追加のタグを指定します。
+9. (任意) スパンと一緒に追加のタグを指定する:
 
     ```kotlin
     span.setTag("http.url", url)
     ```
-11. (オプション) エラー情報をスパンにアタッチします。
-
-    スパンにエラーがあるとマークしたい場合は、公式の OpenTracing タグを使用してログに記録することでできます。
+10. (任意) スパンをエラーがあるとマークし、OpenTracing タグを使用してログに記録する:
 
     ```kotlin
     span.log(mapOf(Fields.ERROR_OBJECT to throwable))
@@ -282,3 +302,4 @@ val request = Request.Builder()
 [4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
 [5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [6]: https://square.github.io/okhttp/interceptors/
+[7]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=us

@@ -210,7 +210,7 @@ spec:
 
 ## Nettoyer les données sensibles de vos logs
 
-Si vos logs contiennent des informations confidentielles que vous souhaitez effacer, configurez l'Agent Datadog pour nettoyer les séquences sensibles en utilisant le paramètre `log_processing_rules` dans votre fichier de configuration avec le `type` **mask_sequences**.
+Si vos logs contiennent des informations confidentielles que vous souhaitez censurer, configurez l'Agent Datadog pour nettoyer les séquences sensibles en utilisant le paramètre `log_processing_rules` dans votre fichier de configuration avec le `type` **mask_sequences**.
 
 Cette action remplace tous les groupes correspondants par la valeur du paramètre `replace_placeholder`.
 
@@ -430,13 +430,13 @@ Exemple de configuration :
 
 ```yaml
 logs:
- - type: file
-   path: /var/log/myapp/*.log
-   exclude_paths:
-     - /var/log/myapp/debug.log
-     - /var/log/myapp/trace.log
-   service: mywebapp
-   source: go
+  - type: file
+    path: /var/log/myapp/*.log
+    exclude_paths:
+      - /var/log/myapp/debug.log
+      - /var/log/myapp/trace.log
+    service: mywebapp
+    source: go
 ```
 
 L'exemple ci-dessus permet de surveiller `/var/log/myapp/log/myfile.log`, mais `/var/log/myapp/log/debug.log` et `/var/log/myapp/log/trace.log` seront toujours exclus.
@@ -451,12 +451,12 @@ Exemple de configuration :
 
 ```yaml
 logs:
- - type: file
-   path: /test/log/hello-world.log
-   tags: key:value
-   service: utf-16-logs
-   source: mysql
-   encoding: utf-16-be
+  - type: file
+    path: /test/log/hello-world.log
+    tags: key:value
+    service: utf-16-logs
+    source: mysql
+    encoding: utf-16-be
 ```
 
 **Remarque** : le paramètre `encoding` est uniquement applicable lorsque le paramètre `type` est défini sur `file`.
@@ -473,13 +473,13 @@ Dans le fichier `datadog.yaml` : 
 ```yaml
 logs_config:
   processing_rules:
-     - type: exclude_at_match
-       name: exclude_healthcheck
-       pattern: healthcheck
-     - type: mask_sequences
-       name: mask_user_email
-       pattern: \w+@datadoghq.com
-       replace_placeholder: "MASKED_EMAIL"
+    - type: exclude_at_match
+      name: exclude_healthcheck
+      pattern: healthcheck
+    - type: mask_sequences
+      name: mask_user_email
+      pattern: \w+@datadoghq.com
+      replace_placeholder: "EMAIL_MASQUÉ"
 ```
 
 {{% /tab %}}

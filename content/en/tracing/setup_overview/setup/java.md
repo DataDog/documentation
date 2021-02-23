@@ -36,13 +36,14 @@ Follow the [Quickstart instructions][3] within the Datadog app for the best expe
 
 ### Java Installation Steps
 
-Otherwise, to begin tracing applications written in any language:
+Otherwise, to begin tracing your applications:
 
-1. Download `dd-java-agent.jar` that contains the Agent class files:
+1. Download `dd-java-agent.jar` that contains the latest Agent class files:
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
+   To access a specific version of the tracer, visit Datadog's [Maven repository][16].
 
 2. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
 
@@ -139,6 +140,7 @@ Or on Windows, `setenv.bat`:
 ```text
 set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
+If a `setenv` file does not exist, create it in the `./bin` directory of the Tomcat project folder.
 
 {{% /tab %}}
 {{% tab "JBoss" %}}
@@ -257,7 +259,7 @@ System properties can be set as JVM flags.
 | `dd.jmxfetch.config.dir`               | `DD_JMXFETCH_CONFIG_DIR`               | `null`                            | (Example: `/opt/datadog-agent/etc/conf.d`) Additional configuration directory for JMX metrics collection. The Java Agent looks for `jvm_direct:true` in the `instance` section in the `yaml` file to change configuration.                                            |
 | `dd.jmxfetch.config`                   | `DD_JMXFETCH_CONFIG`                   | `null`                            | (Example: `activemq.d/conf.yaml,jmx.d/conf.yaml`) Additional metrics configuration file for JMX metrics collection. The Java Agent looks for `jvm_direct:true` in the `instance` section in the `yaml` file to change configuration.                                  |
 | `dd.jmxfetch.check-period`             | `DD_JMXFETCH_CHECK_PERIOD`             | `1500`                            | How often to send JMX metrics (in ms).                                                                                                   |
-| `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                             | How often to refresh list of avalable JMX beans (in seconds).                                                                             |
+| `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                             | How often to refresh list of available JMX beans (in seconds).                                                                             |
 | `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | same as `agent.host`              | Statsd host to send JMX metrics to. If you are using Unix Domain Sockets, use an argument like 'unix://PATH_TO_UDS_SOCKET'. Example: `unix:///var/datadog-agent/dsd.socket`                                                                                                            |
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                              | StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 0.                                                                                                                                                                                                                              |
 | `dd.integration.opentracing.enabled`              | `DD_INTEGRATION_OPENTRACING_ENABLED`              | true                              | By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.                                                                                                                                                                                                                              |
@@ -491,3 +493,4 @@ Java APM has minimal impact on the overhead of an application:
 [13]: /tracing/compatibility_requirements/java#disabling-integrations
 [14]: /integrations/java/?tab=host#metric-collection
 [15]: https://github.com/openzipkin/b3-propagation
+[16]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent

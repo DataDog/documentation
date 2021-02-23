@@ -3,7 +3,7 @@ title: デフォルトの脅威検出ルール
 kind: ドキュメント
 type: security_rules
 description: "Datadog セキュリティ検出ルール"
-disable_toc: true
+disable_sidebar: true
 ---
 
 [検出ルール][1]は、取り込んだすべてのログに適用される条件付きロジックを定義します。対象期間内において、検出ルールで定義された少なくとも 1 つのケースが一致した場合に Datadog でセキュリティシグナルが生成されます。

@@ -26,7 +26,7 @@ To get the Trello app key and token, [navigate to Trello's application key page]
 To get the token, click the token link (green arrow) above, authorize a token with the Trello account you are currently logged into, and grab the token in the subsequent link:
 {{< img src="developers/faq/trello_api_key.png" alt="trello_api_key"  >}}
 
-## Designate the Trello List
+## Designate the Trello list
 
 Click on a card in the list you'd like to add cards to. Append `.json` to the URL, and then navigate to that URL.
 {{< img src="developers/faq/card_url.png" alt="card_url"  >}}

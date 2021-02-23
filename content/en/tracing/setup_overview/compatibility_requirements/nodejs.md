@@ -75,6 +75,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [amqp10][37]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
 | [amqplib][38]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
 | [generic-pool][39]         | `>=2`    | Fully supported |                                                        |
+| [kafkajs][52]         | `>=1.4`    | Fully supported |                                                        |
 | [kafka-node][40]           |          | Coming Soon     |                                                        |
 | [rhea][41]                 | `>=1`    | Fully supported |                                                        |
 
@@ -158,3 +159,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [49]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
 [50]: http://getpino.io
 [51]: https://github.com/winstonjs/winston
+[52]: https://github.com/tulios/kafkajs

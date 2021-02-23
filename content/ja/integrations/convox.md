@@ -7,7 +7,7 @@ assets:
 categories:
   - cloud
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/convox/README.md'
 display_name: Convox
@@ -82,6 +82,6 @@ Convox チェックには、サービスのチェック機能は含まれませ�
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/convox/images/snapshot.png
-[2]: https://docs.convox.com/external-services/datadog
+[2]: https://docs.convox.com/integrations/monitoring/datadog
 [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_cwet.html
 [4]: https://docs.datadoghq.com/ja/help/

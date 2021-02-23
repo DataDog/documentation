@@ -41,6 +41,9 @@ Datadog Agent をホストにデプロイするには、Datadog のロールと 
 | `datadog_agent_version`                    | インストールする Agent のバージョンを固定します（例: `7.16.0`）。設定は任意ですが、推奨されています。`datadog_agent_version` を使用する場合、`datadog_agent_major_version` の設定は不要です。**注**: ダウングレードは、Windows プラットフォームではサポートされていません。                                                       |
 | `datadog_agent_major_version`              | インストールする Agent のメジャーバージョン。5、6、または 7（デフォルト）を設定できます。`datadog_agent_version` を設定している場合はそれが優先されますが、そうでなければ、指定されたメジャーバージョンの中で最新のバージョンがインストールされます。`datadog_agent_version` を使用する場合、`datadog_agent_major_version` の設定は不要です。 |
 | `datadog_checks`                           | Agent チェックのために追加する YAML コンフィギュレーション。<br> - Agent v6 および v7 では `/etc/datadog-agent/conf.d/<check_name>.d/conf.yaml` <br> - Agent v5 では `/etc/dd-agent/conf.d`                                                                                                                            |
+| `datadog_disable_untracked_checks` | `datadog_checks` および `datadog_additional_checks` に存在しないすべてのチェックを削除するには `true` に設定します。 |
+| `datadog_additional_checks` | `datadog_disable_untracked_checks` が `true` に設定されている場合に削除されない、その他のチェックの一覧。 |
+| `datadog_disable_default_checks` | すべてのデフォルトチェックを削除するには、`true` に設定します。 |
 | `datadog_config`                           | メインの Agent コンフィギュレーションの設定。<br> - Agent v6 および v7 では `/etc/datadog-agent/datadog.yaml` <br> - Agent v5 では `/etc/dd-agent/datadog.conf`（`[Main]` セクションの下）                                                                                                               |
 | `datadog_config_ex`                        | （任意）`/etc/dd-agent/datadog.conf` に追加する INI セクション（Agent v5 のみ）。                                                                                                                                                                                                                      |
 | `datadog_apt_repo`                         | デフォルトの Datadog `apt` レポジトリを上書きします。                                                                                                                                                                                                                                                            |
@@ -337,16 +340,15 @@ Agent を以前のバージョンにダウングレードするには、
   roles:
     - { role: datadog.datadog, become: yes }
   vars:
-    datadog_api_key: "<DD_API_キー>"
+    datadog_api_key: "<YOUR_DD_API_KEY>"
     datadog_agent_version: "7.16.0"
     datadog_config:
       tags:
-        - "<キー>:<値>"
-        - "<キー>:<値>"
+        - "<KEY>:<VALUE>"
+        - "<KEY>:<VALUE>"
       log_level: INFO
       apm_config:
         enabled: true
-        max_traces_per_second: 10
       logs_enabled: true  # Agent v6 および v7 で可能
     datadog_checks:
       process:
@@ -365,7 +367,7 @@ Agent を以前のバージョンにダウングレードするには、
           - host: localhost
             port: 22
             username: root
-            password: <パスワード>
+            password: <YOUR_PASSWORD>
             sftp_check: True
             private_key_file:
             add_missing_keys: True
@@ -379,7 +381,7 @@ Agent を以前のバージョンにダウングレードするには、
           - nginx_status_url: http://example2.com:1234/nginx_status/
             tags:
               - "source:nginx"
-              - "<キー>:<値>"
+              - "<KEY>:<VALUE>"
 
         #ログ収集はAgent 6 および 7 で可能
         logs:
@@ -393,7 +395,7 @@ Agent を以前のバージョンにダウングレードするには、
             service: nginx
             source: nginx
             sourcecategory: http_web_access
-    # datadogインテグレーションは Agent 6.8 以降で可能
+    # datadog_integration は Agent 6.8 以降で可能
     datadog_integration:
       datadog-elastic:
         action: install

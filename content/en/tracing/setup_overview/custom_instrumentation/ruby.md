@@ -45,7 +45,7 @@ class ShoppingCartController < ApplicationController
     # Get the active span
     current_span = Datadog.tracer.active_span
     # customer_id -> 254889
-    current_span.set_tag('customer.id', params.permit([:customer_id])) unless current_span.nil?
+    current_span&.set_tag('customer.id', params.permit([:customer_id]))
 
     # [...]
   end
@@ -136,7 +136,7 @@ def example_method
   raise StandardError.new "This is a exception"
 end
 
-Datadog.tracer.trace('example.trace', on_error: custom_error_handler) do |span|
+Datadog.tracer.trace('example.trace') do |span|
   example_method()
 end
 ```

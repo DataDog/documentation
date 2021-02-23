@@ -137,7 +137,6 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 | `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.                                                                                                                                                                                                                                                         |
 | DNS               | DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
 | `INVALID_REQUEST` | The configuration of the test is invalid (for example, a typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][16].                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. <br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. <br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
 
 ## Further Reading
@@ -149,7 +148,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [3]: /synthetics/api_tests/http_tests
 [4]: /synthetics/api_tests/ssl_tests
 [5]: /synthetics/api_tests/tcp_tests
-[6]: /synthetics/api_tests/dns_tests
+[6]: /synthetics/api_tests/dns_test
 [7]: /synthetics/api_tests/icmp_tests
 [8]: /synthetics/search/#search
 [9]: /synthetics/ci
@@ -159,4 +158,3 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [13]: https://www.markdownguide.org/basic-syntax/
 [14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [15]: /synthetics/settings/#global-variables
-[16]: /synthetics/api_tests/errors/#ssl-errors

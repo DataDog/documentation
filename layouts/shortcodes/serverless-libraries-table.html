@@ -1,0 +1,44 @@
+<!-- get lang specific data file -->
+{{ $.Scratch.Set "data" "" }}
+{{ if ne $.Page.Lang "en"}}
+    {{ if (fileExists (print "data/libraries." $.Page.Lang ".yaml")) }}
+      {{ $.Scratch.Set "data" (index $.Site.Data (print "libraries." $.Page.Lang)) }}
+    {{ else }}
+      {{ $.Scratch.Set "data" $.Site.Data.libraries }}
+    {{ end }}
+{{ else }}
+    {{ $.Scratch.Set "data" $.Site.Data.libraries }}
+{{ end }}
+{{ $datafile := ($.Scratch.Get "data") }}
+
+<div class="table-responsive-container">
+  <div class="table-scroll">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>{{ i18n "language" }}</th>
+          <th>{{ i18n "library" }}</th>
+          <th>{{ i18n "official" }}</th>
+          <th>{{ i18n "author" }}</th>
+          <th>{{ i18n "notes" }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {{ range $e := $datafile.Serverless }}
+        {{ range $libName, $info := . }}
+            {{ range $i, $el := $info }}
+              <tr>
+                <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>
+                <td><a href="{{ $el.link }}">{{ $el.name }}</a></td>
+                <td>{{ if $el.official}}<i class="icon-tick"></i>{{ end }}</td>
+                <td>{{if $el.authors }}{{ $el.authors }}{{ end }}</td>
+                <td>{{ if $el.notes }}{{ $el.notes }}{{ end }}</td>
+              </tr>
+            {{ end }}
+        {{ end }}
+      {{ end }}
+      </tbody>
+    </table>
+  </div>
+</div>

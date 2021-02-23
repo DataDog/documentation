@@ -48,7 +48,7 @@ The System check is included in the [Datadog Agent][4] package. No additional in
 
 The System check does not include any events.
 
-### Service Checks
+### Service checks
 
 The System check does not include any service checks.
 
@@ -101,7 +101,7 @@ Depending on the platform, the check may collect other CPU time metrics, e.g. `s
 
 The System Core check does not include any events.
 
-#### Service Checks
+#### Service checks
 
 The System Core check does not include any service checks.
 
@@ -135,7 +135,7 @@ The system swap check is included in the [Datadog Agent][4] package. No addition
 
 The System Swap check does not include any events.
 
-#### Service Checks
+#### Service checks
 
 The System Swap check does not include any service checks.
 

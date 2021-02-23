@@ -15,6 +15,22 @@ further_reading:
 
 お客様は、ローカルにインストールされた [Agent][2] または [HTTP API][3] を使用して Datadog サービスにデータを送信できます。Datadog を使用する上で Datadog Agent を必ず使用しなければならないわけではありませんが、大半のお客様が Agent を利用しています。ここでは、安全な環境を維持するためにお客様が利用できる主なセキュリティ機能について説明します。
 
+## Agent ディストリビューション
+
+Agent の公式リポジトリおよび/またはバイナリパッケージは署名されています。次の公開鍵のいずれかに対して署名を確認して、ディストリビューションチャンネルを確認します。
+
+- APT リポジトリメタデータ:
+  - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE](https://keyserver.ubuntu.com/pks/lookup?op=hget&search=d1402d39517b9f8888abfc98d6936dab)
+  - [D75CEA17048B9ACBF186794B32637D44F14F620E](https://keyserver.ubuntu.com/pks/lookup?op=hget&search=3e8510ce571008616b42bd67916e83f8)
+- RPM packages and repo metadata:
+  - [C6559B690CA882F023BDF3F63F4D1729FD4BF915](https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public)
+  - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3](https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public)
+  - [60A389A44A0C32BAE3C03F0B069B56F54172A230](https://yum.datadoghq.com/DATADOG_RPM_KEY.public) (Agent 6 and older only)
+- Windows MSI:
+  - DigiCert certificate fingerprint 21fe8679bdfb16b879a87df228003758b62abf5e
+- MacOS PKG:
+  - Apple 証明書のフィンガープリント FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA
+
 ## 情報セキュリティ
 
 Datadog Agent は、デフォルトで、TLS で暗号化された TCP 接続を介して Datadog にデータを送信します。バージョン 6 では、Datadog への接続時に TLS 1.2 を強制するように Agent を設定できます。たとえば、PCI の要件を満たすために、"強力な暗号化" を使用する必要がある場合は、Agent v6 を使用し、Agent の構成ファイルで `force_tls_12: true` を設定してください。

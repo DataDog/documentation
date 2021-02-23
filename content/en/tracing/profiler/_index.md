@@ -6,7 +6,10 @@ aliases:
 further_reading:
     - link: 'tracing/profiler/getting_started'
       tag: 'Documentation'
-      text: 'Enable continuous profiler for your application.'  
+      text: 'Enable continuous profiler for your application.'
+    - link: 'tracing/profiler/intro_to_profiling'
+      tag: 'Documentation'
+      text: 'Intro to profiling.'
     - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
@@ -55,9 +58,17 @@ Obtain key profiling metrics from services such as top CPU usage by method, top 
 
 {{< img src="tracing/profiling/profiling-metric-dashboard.gif" alt="Add profiling metrics to your dashboards.">}}
 
+### Connect traces to profiling data
+
+Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][4] to find specific lines of code related to performance issues.
+
+{{< img src="tracing/profiling/code_hotspots_tab.gif" alt="Code Hotspots tab shows profiling information for a APM trace span">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
 [2]: /tracing/profiling/search_profiles
+[3]: /tracing/
+[4]: /tracing/profiler/connect_traces_and_profiles/

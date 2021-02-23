@@ -72,7 +72,7 @@ default       datadog-cluster-agent           ClusterIP   192.168.254.197   <non
 
 ```
 
-### Register the External Metrics Provider
+### External metrics provider
 
 Once the Datadog Cluster Agent is up and running, register it as an External Metrics Provider with the service, exposing the port `443`. To do so, apply the following RBAC rules:
 

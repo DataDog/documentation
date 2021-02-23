@@ -3,7 +3,7 @@ title: Connection Issues with the SQL Server Integration
 kind: faq
 ---
 
-## Common SQL Server Connection Troubles
+## Common SQL Server connection issues
 
 You can configure the Datadog Agent to collect metrics from SQL Server by following the instructions in the [SQL Server integration tile][1] in your account. This integration offers a number of basic [SQL Server metrics][2], which you can expand to [your own liking][3].
 
@@ -32,7 +32,7 @@ Here's an example of some SQL Server IP/TCP settings that have worked just fine 
 
 {{< img src="integrations/faq/sql_server_test_2.png" alt="sql_server_test_2"  >}}
 
-## Empty Connection String?
+## Empty connection string
 
 Our SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `sqlserver.yaml` probably includes some character that causes issues with adodbapi.
 
@@ -42,7 +42,7 @@ OperationalError: (KeyError('Python string format error in connection string->',
 
 At the moment, the only character we know of that causes this specific connectivity issue is the "%" character. If you want to use the "%" character in your `sqlserver.yaml` (e.g, if your Datadog SQL Server user password includes a "%"), you will have to escape that character by including a double "%%" in place of each single "%".
 
-## Connecting to SQL Server on a Linux Host?
+## Connecting to SQL Server on a Linux host
 
 In order to connect to SQL Server (either hosted on Linux or Windows) from a Linux host, you first must install the Microsoft ODBC Driver for your Linux distribution by following the instructions on the following page:
 

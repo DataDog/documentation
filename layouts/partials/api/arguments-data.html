@@ -1,0 +1,17 @@
+{{- $endpoint := .endpoint -}}
+{{- $queryStrings := slice -}}
+{{- $pathParams := slice -}}
+{{- $headerParams := slice -}}
+{{- with $endpoint.action.parameters -}}
+    {{- range . -}}
+        {{- if eq .in "query" -}}
+            {{- $queryStrings = $queryStrings | append . -}}
+        {{- else if eq .in "path" -}}
+            {{- $pathParams = $pathParams | append . -}}
+        {{- else if eq .in "header" -}}
+            {{- $headerParams = $headerParams | append . -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $exists := (or (gt (len $queryStrings) 0) (gt (len $pathParams) 0) (gt (len $headerParams) 0)) -}}
+{{- return (dict "isExists" $exists "queryStrings" $queryStrings "pathParams" $pathParams "headerParams" $headerParams) -}}

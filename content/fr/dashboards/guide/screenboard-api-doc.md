@@ -9,7 +9,7 @@ aliases:
 Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/v1/dashboards/">nouvel endpoint Dashboards</a>.
 </div>
 
-L'endpoint Screenboard vous permet de programmer la création, la mise à jour, la suppression et la récupération de screenboards. [En savoir plus sur les screenboards][1].
+L'endpoint `Screenboard` vous permet de programmer la création, la mise à jour, la suppression et la récupération de screenboards. [En savoir plus sur les screenboards][1].
 
 ## Créer un screenboard
 

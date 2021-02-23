@@ -13,6 +13,9 @@ further_reading:
     - link: '/real_user_monitoring/rum_analytics'
       tag: 'Documentation'
       text: 'Build analytics upon your events'
+    - link: 'real_user_monitoring/browser/tracking_user_actions'
+      tag: 'Documentation'
+      text: 'Tracking custom user actions'
 ---
 
 ## Initialization
@@ -331,70 +334,6 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{% /tab %}}
 {{< /tabs >}}
 
-### Custom user actions
-
-Once Real User Monitoring (RUM) is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction(name: string, context: Context)` API:
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.addUserAction('<NAME>', '<JSON_OBJECT>');
-
-// Code example
-datadogRum.addUserAction('checkout', {
-    cart: {
-        amount: 42,
-        currency: '$',
-        nb_items: 2,
-        items: ['socks', 't-shirt'],
-    },
-});
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('<NAME>', '<JSON_OBJECT>');
-})
-
-// Code example
-DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('checkout', {
-        cart: {
-            amount: 42,
-            currency: '$',
-            nb_items: 2,
-            items: ['socks', 't-shirt'],
-        },
-    });
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```javascript
-window.DD_RUM && DD_RUM.addUserAction('<NAME>', '<JSON_OBJECT>');
-
-// Code example
-window.DD_RUM &&
-    DD_RUM.addUserAction('checkout', {
-        cart: {
-            amount: 42,
-            currency: '$',
-            nb_items: 2,
-            items: ['socks', 't-shirt'],
-        },
-    });
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-With the above example, the RUM SDK would collect the amount of items within a cart, what they are, and how much the cart is worth overall.
 
 
 ## Further Reading

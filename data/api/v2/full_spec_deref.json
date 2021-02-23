@@ -80,6 +80,7 @@
         "required": false,
         "schema": {
           "default": "name",
+          "description": "Sorting options",
           "enum": [
             "created_at",
             "-created_at",
@@ -90,7 +91,17 @@
             "name",
             "-name"
           ],
-          "type": "string"
+          "type": "string",
+          "x-enum-varnames": [
+            "CREATED_AT_ASCENDING",
+            "CREATED_AT_DESCENDING",
+            "LAST4_ASCENDING",
+            "LAST4_DESCENDING",
+            "MODIFIED_AT_ASCENDING",
+            "MODIFIED_AT_DESCENDING",
+            "NAME_ASCENDING",
+            "NAME_DESCENDING"
+          ]
         }
       },
       "ApplicationKeyFilterCreatedAtEndParameter": {
@@ -131,6 +142,33 @@
           "type": "string"
         }
       },
+      "ApplicationKeysSortParameter": {
+        "description": "Application key attribute used to sort results. Sort order is ascending\nby default. In order to specify a descending sort, prefix the\nattribute with a minus sign.",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "schema": {
+          "default": "name",
+          "description": "Sorting options",
+          "enum": [
+            "created_at",
+            "-created_at",
+            "last4",
+            "-last4",
+            "name",
+            "-name"
+          ],
+          "type": "string",
+          "x-enum-varnames": [
+            "CREATED_AT_ASCENDING",
+            "CREATED_AT_DESCENDING",
+            "LAST4_ASCENDING",
+            "LAST4_DESCENDING",
+            "NAME_ASCENDING",
+            "NAME_DESCENDING"
+          ]
+        }
+      },
       "ArchiveID": {
         "description": "The ID of the archive.",
         "in": "path",
@@ -157,10 +195,14 @@
         "required": false,
         "schema": {
           "items": {
+            "description": "Object related to an incident.",
             "enum": [
               "users"
             ],
-            "type": "string"
+            "type": "string",
+            "x-enum-varnames": [
+              "USERS"
+            ]
           },
           "type": "array"
         }
@@ -180,10 +222,14 @@
         "name": "include",
         "required": false,
         "schema": {
+          "description": "Object related to an incident.",
           "enum": [
             "users"
           ],
-          "type": "string"
+          "type": "string",
+          "x-enum-varnames": [
+            "USERS"
+          ]
         }
       },
       "IncidentServiceSearchQueryParameter": {
@@ -211,10 +257,14 @@
         "name": "include",
         "required": false,
         "schema": {
+          "description": "Object related to an incident.",
           "enum": [
             "users"
           ],
-          "type": "string"
+          "type": "string",
+          "x-enum-varnames": [
+            "USERS"
+          ]
         }
       },
       "IncidentTeamSearchQueryParameter": {
@@ -227,28 +277,20 @@
           "type": "string"
         }
       },
-      "ListApplicationKeysSortParameter": {
-        "description": "Application key attribute used to sort results. Sort order is ascending\nby default. In order to specify a descending sort, prefix the\nattribute with a minus sign.",
-        "in": "query",
-        "name": "sort",
-        "required": false,
-        "schema": {
-          "default": "name",
-          "enum": [
-            "created_at",
-            "-created_at",
-            "last4",
-            "-last4",
-            "name",
-            "-name"
-          ],
-          "type": "string"
-        }
-      },
       "MetricID": {
         "description": "The name of the log-based metric.",
         "in": "path",
         "name": "metric_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "MetricName": {
+        "description": "The name of the metric.",
+        "example": "dist.http.endpoint.request",
+        "in": "path",
+        "name": "metric_name",
         "required": true,
         "schema": {
           "type": "string"
@@ -1819,6 +1861,31 @@
         },
         "type": "object"
       },
+      "APIKeysSort": {
+        "default": "name",
+        "description": "Sorting options",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "last4",
+          "-last4",
+          "modified_at",
+          "-modified_at",
+          "name",
+          "-name"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "CREATED_AT_ASCENDING",
+          "CREATED_AT_DESCENDING",
+          "LAST4_ASCENDING",
+          "LAST4_DESCENDING",
+          "MODIFIED_AT_ASCENDING",
+          "MODIFIED_AT_DESCENDING",
+          "NAME_ASCENDING",
+          "NAME_DESCENDING"
+        ]
+      },
       "APIKeysType": {
         "default": "api_keys",
         "description": "API Keys resource type.",
@@ -2816,6 +2883,27 @@
           "data"
         ],
         "type": "object"
+      },
+      "ApplicationKeysSort": {
+        "default": "name",
+        "description": "Sorting options",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "last4",
+          "-last4",
+          "name",
+          "-name"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "CREATED_AT_ASCENDING",
+          "CREATED_AT_DESCENDING",
+          "LAST4_ASCENDING",
+          "LAST4_DESCENDING",
+          "NAME_ASCENDING",
+          "NAME_DESCENDING"
+        ]
       },
       "ApplicationKeysType": {
         "default": "application_keys",
@@ -4564,6 +4652,16 @@
         "type": "string",
         "x-enum-varnames": [
           "INCIDENT_POSTMORTEMS"
+        ]
+      },
+      "IncidentRelatedObject": {
+        "description": "Object related to an incident.",
+        "enum": [
+          "users"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "USERS"
         ]
       },
       "IncidentResponse": {
@@ -6456,7 +6554,7 @@
           },
           "type": {
             "default": "services",
-            "description": "Incident Service resource type.",
+            "description": "Incident service resource type.",
             "enum": [
               "services"
             ],
@@ -6573,7 +6671,7 @@
               },
               "type": {
                 "default": "services",
-                "description": "Incident Service resource type.",
+                "description": "Incident service resource type.",
                 "enum": [
                   "services"
                 ],
@@ -7017,7 +7115,7 @@
               },
               "type": {
                 "default": "services",
-                "description": "Incident Service resource type.",
+                "description": "Incident service resource type.",
                 "enum": [
                   "services"
                 ],
@@ -7408,7 +7506,7 @@
           },
           "type": {
             "default": "services",
-            "description": "Incident Service resource type.",
+            "description": "Incident service resource type.",
             "enum": [
               "services"
             ],
@@ -7427,7 +7525,7 @@
       },
       "IncidentServiceType": {
         "default": "services",
-        "description": "Incident Service resource type.",
+        "description": "Incident service resource type.",
         "enum": [
           "services"
         ],
@@ -7554,7 +7652,7 @@
           },
           "type": {
             "default": "services",
-            "description": "Incident Service resource type.",
+            "description": "Incident service resource type.",
             "enum": [
               "services"
             ],
@@ -7677,7 +7775,7 @@
               },
               "type": {
                 "default": "services",
-                "description": "Incident Service resource type.",
+                "description": "Incident service resource type.",
                 "enum": [
                   "services"
                 ],
@@ -7823,7 +7921,7 @@
                 },
                 "type": {
                   "default": "services",
-                  "description": "Incident Service resource type.",
+                  "description": "Incident service resource type.",
                   "enum": [
                     "services"
                   ],
@@ -12777,6 +12875,7 @@
                 "limit": {
                   "default": 10,
                   "description": "The maximum buckets to return for this group by",
+                  "format": "int64",
                   "type": "integer"
                 },
                 "missing": {
@@ -12897,6 +12996,7 @@
             "properties": {
               "timeOffset": {
                 "description": "The time offset (in seconds) to apply to the query.",
+                "format": "int64",
                 "type": "integer"
               },
               "timezone": {
@@ -12908,10 +13008,10 @@
             },
             "type": "object"
           },
-          "paging": {
+          "page": {
             "description": "Paging settings",
             "properties": {
-              "after": {
+              "cursor": {
                 "description": "The returned paging point to use to get the next results",
                 "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
                 "type": "string"
@@ -12999,6 +13099,7 @@
               "elapsed": {
                 "description": "The time elapsed in milliseconds",
                 "example": 132,
+                "format": "int64",
                 "type": "integer"
               },
               "page": {
@@ -15761,6 +15862,7 @@
           "limit": {
             "default": 10,
             "description": "The maximum buckets to return for this group by",
+            "format": "int64",
             "type": "integer"
           },
           "missing": {
@@ -15976,6 +16078,7 @@
             "properties": {
               "timeOffset": {
                 "description": "The time offset (in seconds) to apply to the query.",
+                "format": "int64",
                 "type": "integer"
               },
               "timezone": {
@@ -16120,6 +16223,7 @@
               "elapsed": {
                 "description": "The time elapsed in milliseconds",
                 "example": 132,
+                "format": "int64",
                 "type": "integer"
               },
               "page": {
@@ -16191,6 +16295,7 @@
               "count",
               "distribution"
             ],
+            "example": "distribution",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -16214,6 +16319,7 @@
           "count",
           "distribution"
         ],
+        "example": "distribution",
         "type": "string",
         "x-enum-varnames": [
           "COUNT",
@@ -16232,6 +16338,7 @@
                   "count",
                   "distribution"
                 ],
+                "example": "distribution",
                 "type": "string",
                 "x-enum-varnames": [
                   "COUNT",
@@ -16305,6 +16412,7 @@
                       "count",
                       "distribution"
                     ],
+                    "example": "distribution",
                     "type": "string",
                     "x-enum-varnames": [
                       "COUNT",
@@ -16406,6 +16514,7 @@
                           "count",
                           "distribution"
                         ],
+                        "example": "distribution",
                         "type": "string",
                         "x-enum-varnames": [
                           "COUNT",
@@ -16549,6 +16658,7 @@
                           "count",
                           "distribution"
                         ],
+                        "example": "distribution",
                         "type": "string",
                         "x-enum-varnames": [
                           "COUNT",
@@ -16557,6 +16667,7 @@
                       },
                       "path": {
                         "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                        "example": "@duration",
                         "type": "string"
                       }
                     },
@@ -16567,6 +16678,7 @@
                     "properties": {
                       "query": {
                         "description": "The search query - following the log search syntax.",
+                        "example": "service:web* AND @http.status_code:[200 TO 299]",
                         "type": "string"
                       }
                     },
@@ -16579,10 +16691,12 @@
                       "properties": {
                         "path": {
                           "description": "The path to the value the log-based metric will be aggregated over.",
+                          "example": "@http.status_code",
                           "type": "string"
                         },
                         "tag_name": {
                           "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                          "example": "status_code",
                           "type": "string"
                         }
                       },
@@ -16628,6 +16742,7 @@
                   "count",
                   "distribution"
                 ],
+                "example": "distribution",
                 "type": "string",
                 "x-enum-varnames": [
                   "COUNT",
@@ -16636,6 +16751,7 @@
               },
               "path": {
                 "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                "example": "@duration",
                 "type": "string"
               }
             },
@@ -16646,6 +16762,7 @@
             "properties": {
               "query": {
                 "description": "The search query - following the log search syntax.",
+                "example": "service:web* AND @http.status_code:[200 TO 299]",
                 "type": "string"
               }
             },
@@ -16658,10 +16775,12 @@
               "properties": {
                 "path": {
                   "description": "The path to the value the log-based metric will be aggregated over.",
+                  "example": "@http.status_code",
                   "type": "string"
                 },
                 "tag_name": {
                   "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                  "example": "status_code",
                   "type": "string"
                 }
               },
@@ -16681,6 +16800,7 @@
               "count",
               "distribution"
             ],
+            "example": "distribution",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -16689,6 +16809,7 @@
           },
           "path": {
             "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+            "example": "@duration",
             "type": "string"
           }
         },
@@ -16700,6 +16821,7 @@
           "count",
           "distribution"
         ],
+        "example": "distribution",
         "type": "string",
         "x-enum-varnames": [
           "COUNT",
@@ -16721,6 +16843,7 @@
                       "count",
                       "distribution"
                     ],
+                    "example": "distribution",
                     "type": "string",
                     "x-enum-varnames": [
                       "COUNT",
@@ -16729,6 +16852,7 @@
                   },
                   "path": {
                     "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                    "example": "@duration",
                     "type": "string"
                   }
                 },
@@ -16739,6 +16863,7 @@
                 "properties": {
                   "query": {
                     "description": "The search query - following the log search syntax.",
+                    "example": "service:web* AND @http.status_code:[200 TO 299]",
                     "type": "string"
                   }
                 },
@@ -16751,10 +16876,12 @@
                   "properties": {
                     "path": {
                       "description": "The path to the value the log-based metric will be aggregated over.",
+                      "example": "@http.status_code",
                       "type": "string"
                     },
                     "tag_name": {
                       "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                      "example": "status_code",
                       "type": "string"
                     }
                   },
@@ -16790,6 +16917,7 @@
         "properties": {
           "query": {
             "description": "The search query - following the log search syntax.",
+            "example": "service:web* AND @http.status_code:[200 TO 299]",
             "type": "string"
           }
         },
@@ -16800,10 +16928,12 @@
         "properties": {
           "path": {
             "description": "The path to the value the log-based metric will be aggregated over.",
+            "example": "@http.status_code",
             "type": "string"
           },
           "tag_name": {
             "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+            "example": "status_code",
             "type": "string"
           }
         },
@@ -17017,6 +17147,7 @@
                             "count",
                             "distribution"
                           ],
+                          "example": "distribution",
                           "type": "string",
                           "x-enum-varnames": [
                             "COUNT",
@@ -17025,6 +17156,7 @@
                         },
                         "path": {
                           "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                          "example": "@duration",
                           "type": "string"
                         }
                       },
@@ -17035,6 +17167,7 @@
                       "properties": {
                         "query": {
                           "description": "The search query - following the log search syntax.",
+                          "example": "service:web* AND @http.status_code:[200 TO 299]",
                           "type": "string"
                         }
                       },
@@ -17047,10 +17180,12 @@
                         "properties": {
                           "path": {
                             "description": "The path to the value the log-based metric will be aggregated over.",
+                            "example": "@http.status_code",
                             "type": "string"
                           },
                           "tag_name": {
                             "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                            "example": "status_code",
                             "type": "string"
                           }
                         },
@@ -17130,6 +17265,7 @@
         "properties": {
           "timeOffset": {
             "description": "The time offset (in seconds) to apply to the query.",
+            "format": "int64",
             "type": "integer"
           },
           "timezone": {
@@ -17147,6 +17283,7 @@
           "elapsed": {
             "description": "The time elapsed in milliseconds",
             "example": 132,
+            "format": "int64",
             "type": "integer"
           },
           "page": {
@@ -17262,6 +17399,943 @@
             "type": "string"
           }
         },
+        "type": "object"
+      },
+      "Metric": {
+        "description": "Object for a single metric tag configuration.",
+        "example": {
+          "id": "metric.foo.bar",
+          "type": "metric"
+        },
+        "properties": {
+          "id": {
+            "description": "The metric name for this resource.",
+            "example": "test.metric.latency",
+            "type": "string"
+          },
+          "type": {
+            "default": "metrics",
+            "description": "The metric resource type.",
+            "enum": [
+              "metrics"
+            ],
+            "example": "metrics",
+            "type": "string",
+            "x-enum-varnames": [
+              "METRICS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "MetricName": {
+        "description": "The metric name for this resource.",
+        "example": "test.metric.latency",
+        "type": "string"
+      },
+      "MetricTagConfiguration": {
+        "description": "Object for a single metric tag configuration.",
+        "example": {
+          "attributes": {
+            "created_at": "2020-03-31T09:48:37.463835Z",
+            "metric_type": "gauge",
+            "modified_at": "2020-04-31T09:48:37.463835Z",
+            "tags": [
+              "app",
+              "datacenter"
+            ]
+          },
+          "id": "http.request.latency",
+          "type": "manage_tags"
+        },
+        "properties": {
+          "attributes": {
+            "description": "Object containing the definition of a metric tag configuration attributes.",
+            "properties": {
+              "created_at": {
+                "description": "Timestamp when the tag configuration was created.",
+                "example": "2020-03-31T09:48:37.463835Z",
+                "format": "date-time",
+                "type": "string"
+              },
+              "include_percentiles": {
+                "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+                "example": true,
+                "type": "boolean"
+              },
+              "metric_type": {
+                "default": "gauge",
+                "description": "The metric's type.",
+                "enum": [
+                  "gauge",
+                  "count",
+                  "distribution"
+                ],
+                "example": "count",
+                "type": "string",
+                "x-enum-varnames": [
+                  "GAUGE",
+                  "COUNT",
+                  "DISTRIBUTION"
+                ]
+              },
+              "modified_at": {
+                "description": "Timestamp when the tag configuration was last modified.",
+                "example": "2020-03-31T09:48:37.463835Z",
+                "format": "date-time",
+                "type": "string"
+              },
+              "tags": {
+                "description": "List of tag keys on which to group.",
+                "example": [
+                  "app",
+                  "datacenter"
+                ],
+                "items": {
+                  "description": "Tag keys to group by.",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The metric name for this resource.",
+            "example": "test.metric.latency",
+            "type": "string"
+          },
+          "type": {
+            "default": "manage_tags",
+            "description": "The metric tag configuration resource type.",
+            "enum": [
+              "manage_tags"
+            ],
+            "example": "manage_tags",
+            "type": "string",
+            "x-enum-varnames": [
+              "MANAGE_TAGS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "MetricTagConfigurationAttributes": {
+        "description": "Object containing the definition of a metric tag configuration attributes.",
+        "properties": {
+          "created_at": {
+            "description": "Timestamp when the tag configuration was created.",
+            "example": "2020-03-31T09:48:37.463835Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "include_percentiles": {
+            "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+            "example": true,
+            "type": "boolean"
+          },
+          "metric_type": {
+            "default": "gauge",
+            "description": "The metric's type.",
+            "enum": [
+              "gauge",
+              "count",
+              "distribution"
+            ],
+            "example": "count",
+            "type": "string",
+            "x-enum-varnames": [
+              "GAUGE",
+              "COUNT",
+              "DISTRIBUTION"
+            ]
+          },
+          "modified_at": {
+            "description": "Timestamp when the tag configuration was last modified.",
+            "example": "2020-03-31T09:48:37.463835Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "tags": {
+            "description": "List of tag keys on which to group.",
+            "example": [
+              "app",
+              "datacenter"
+            ],
+            "items": {
+              "description": "Tag keys to group by.",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "MetricTagConfigurationCreateAttributes": {
+        "description": "Object containing the definition of a metric tag configuration to be created.",
+        "properties": {
+          "include_percentiles": {
+            "default": false,
+            "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
+            "example": true,
+            "type": "boolean"
+          },
+          "metric_type": {
+            "default": "gauge",
+            "description": "The metric's type.",
+            "enum": [
+              "gauge",
+              "count",
+              "distribution"
+            ],
+            "example": "count",
+            "type": "string",
+            "x-enum-varnames": [
+              "GAUGE",
+              "COUNT",
+              "DISTRIBUTION"
+            ]
+          },
+          "tags": {
+            "default": [],
+            "description": "A list of tag keys that will be queryable for your metric.",
+            "example": [
+              "app",
+              "datacenter"
+            ],
+            "items": {
+              "description": "Tag keys to group by.",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "tags",
+          "metric_type"
+        ],
+        "type": "object"
+      },
+      "MetricTagConfigurationCreateData": {
+        "description": "Object for a single metric to be configure tags on.",
+        "example": {
+          "attributes": {
+            "include_percentiles": false,
+            "metric_type": "distribution",
+            "tags": [
+              "app",
+              "datacenter"
+            ]
+          },
+          "id": "http.endpoint.request",
+          "type": "manage_tags"
+        },
+        "properties": {
+          "attributes": {
+            "description": "Object containing the definition of a metric tag configuration to be created.",
+            "properties": {
+              "include_percentiles": {
+                "default": false,
+                "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
+                "example": true,
+                "type": "boolean"
+              },
+              "metric_type": {
+                "default": "gauge",
+                "description": "The metric's type.",
+                "enum": [
+                  "gauge",
+                  "count",
+                  "distribution"
+                ],
+                "example": "count",
+                "type": "string",
+                "x-enum-varnames": [
+                  "GAUGE",
+                  "COUNT",
+                  "DISTRIBUTION"
+                ]
+              },
+              "tags": {
+                "default": [],
+                "description": "A list of tag keys that will be queryable for your metric.",
+                "example": [
+                  "app",
+                  "datacenter"
+                ],
+                "items": {
+                  "description": "Tag keys to group by.",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "tags",
+              "metric_type"
+            ],
+            "type": "object"
+          },
+          "id": {
+            "description": "The metric name for this resource.",
+            "example": "test.metric.latency",
+            "type": "string"
+          },
+          "type": {
+            "default": "manage_tags",
+            "description": "The metric tag configuration resource type.",
+            "enum": [
+              "manage_tags"
+            ],
+            "example": "manage_tags",
+            "type": "string",
+            "x-enum-varnames": [
+              "MANAGE_TAGS"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
+      "MetricTagConfigurationCreateRequest": {
+        "description": "Request object that includes the metric that you would like to configure tags for.",
+        "properties": {
+          "data": {
+            "description": "Object for a single metric to be configure tags on.",
+            "example": {
+              "attributes": {
+                "include_percentiles": false,
+                "metric_type": "distribution",
+                "tags": [
+                  "app",
+                  "datacenter"
+                ]
+              },
+              "id": "http.endpoint.request",
+              "type": "manage_tags"
+            },
+            "properties": {
+              "attributes": {
+                "description": "Object containing the definition of a metric tag configuration to be created.",
+                "properties": {
+                  "include_percentiles": {
+                    "default": false,
+                    "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "metric_type": {
+                    "default": "gauge",
+                    "description": "The metric's type.",
+                    "enum": [
+                      "gauge",
+                      "count",
+                      "distribution"
+                    ],
+                    "example": "count",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "GAUGE",
+                      "COUNT",
+                      "DISTRIBUTION"
+                    ]
+                  },
+                  "tags": {
+                    "default": [],
+                    "description": "A list of tag keys that will be queryable for your metric.",
+                    "example": [
+                      "app",
+                      "datacenter"
+                    ],
+                    "items": {
+                      "description": "Tag keys to group by.",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "tags",
+                  "metric_type"
+                ],
+                "type": "object"
+              },
+              "id": {
+                "description": "The metric name for this resource.",
+                "example": "test.metric.latency",
+                "type": "string"
+              },
+              "type": {
+                "default": "manage_tags",
+                "description": "The metric tag configuration resource type.",
+                "enum": [
+                  "manage_tags"
+                ],
+                "example": "manage_tags",
+                "type": "string",
+                "x-enum-varnames": [
+                  "MANAGE_TAGS"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "MetricTagConfigurationMetricTypes": {
+        "default": "gauge",
+        "description": "The metric's type.",
+        "enum": [
+          "gauge",
+          "count",
+          "distribution"
+        ],
+        "example": "count",
+        "type": "string",
+        "x-enum-varnames": [
+          "GAUGE",
+          "COUNT",
+          "DISTRIBUTION"
+        ]
+      },
+      "MetricTagConfigurationResponse": {
+        "description": "Response object which includes a single metric's tag configuration.",
+        "properties": {
+          "data": {
+            "description": "Object for a single metric tag configuration.",
+            "example": {
+              "attributes": {
+                "created_at": "2020-03-31T09:48:37.463835Z",
+                "metric_type": "gauge",
+                "modified_at": "2020-04-31T09:48:37.463835Z",
+                "tags": [
+                  "app",
+                  "datacenter"
+                ]
+              },
+              "id": "http.request.latency",
+              "type": "manage_tags"
+            },
+            "properties": {
+              "attributes": {
+                "description": "Object containing the definition of a metric tag configuration attributes.",
+                "properties": {
+                  "created_at": {
+                    "description": "Timestamp when the tag configuration was created.",
+                    "example": "2020-03-31T09:48:37.463835Z",
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "include_percentiles": {
+                    "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "metric_type": {
+                    "default": "gauge",
+                    "description": "The metric's type.",
+                    "enum": [
+                      "gauge",
+                      "count",
+                      "distribution"
+                    ],
+                    "example": "count",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "GAUGE",
+                      "COUNT",
+                      "DISTRIBUTION"
+                    ]
+                  },
+                  "modified_at": {
+                    "description": "Timestamp when the tag configuration was last modified.",
+                    "example": "2020-03-31T09:48:37.463835Z",
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "tags": {
+                    "description": "List of tag keys on which to group.",
+                    "example": [
+                      "app",
+                      "datacenter"
+                    ],
+                    "items": {
+                      "description": "Tag keys to group by.",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The metric name for this resource.",
+                "example": "test.metric.latency",
+                "type": "string"
+              },
+              "type": {
+                "default": "manage_tags",
+                "description": "The metric tag configuration resource type.",
+                "enum": [
+                  "manage_tags"
+                ],
+                "example": "manage_tags",
+                "type": "string",
+                "x-enum-varnames": [
+                  "MANAGE_TAGS"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        },
+        "readOnly": true,
+        "type": "object"
+      },
+      "MetricTagConfigurationType": {
+        "default": "manage_tags",
+        "description": "The metric tag configuration resource type.",
+        "enum": [
+          "manage_tags"
+        ],
+        "example": "manage_tags",
+        "type": "string",
+        "x-enum-varnames": [
+          "MANAGE_TAGS"
+        ]
+      },
+      "MetricTagConfigurationUpdateAttributes": {
+        "description": "Object containing the definition of a metric tag configuration to be updated.",
+        "properties": {
+          "include_percentiles": {
+            "default": false,
+            "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
+            "example": true,
+            "type": "boolean"
+          },
+          "tags": {
+            "default": [],
+            "description": "A list of tag keys that will be queryable for your metric.",
+            "example": [
+              "app",
+              "datacenter"
+            ],
+            "items": {
+              "description": "Tag keys to group by.",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "MetricTagConfigurationUpdateData": {
+        "description": "Object for a single tag configuration to be edited.",
+        "example": {
+          "attributes": {
+            "group_by": [
+              "app",
+              "datacenter"
+            ],
+            "include_percentiles": false
+          },
+          "id": "http.endpoint.request",
+          "type": "manage_tags"
+        },
+        "properties": {
+          "attributes": {
+            "description": "Object containing the definition of a metric tag configuration to be updated.",
+            "properties": {
+              "include_percentiles": {
+                "default": false,
+                "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
+                "example": true,
+                "type": "boolean"
+              },
+              "tags": {
+                "default": [],
+                "description": "A list of tag keys that will be queryable for your metric.",
+                "example": [
+                  "app",
+                  "datacenter"
+                ],
+                "items": {
+                  "description": "Tag keys to group by.",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The metric name for this resource.",
+            "example": "test.metric.latency",
+            "type": "string"
+          },
+          "type": {
+            "default": "manage_tags",
+            "description": "The metric tag configuration resource type.",
+            "enum": [
+              "manage_tags"
+            ],
+            "example": "manage_tags",
+            "type": "string",
+            "x-enum-varnames": [
+              "MANAGE_TAGS"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
+      "MetricTagConfigurationUpdateRequest": {
+        "description": "Request object that includes the metric that you would like to edit the tag configuration on.",
+        "properties": {
+          "data": {
+            "description": "Object for a single tag configuration to be edited.",
+            "example": {
+              "attributes": {
+                "group_by": [
+                  "app",
+                  "datacenter"
+                ],
+                "include_percentiles": false
+              },
+              "id": "http.endpoint.request",
+              "type": "manage_tags"
+            },
+            "properties": {
+              "attributes": {
+                "description": "Object containing the definition of a metric tag configuration to be updated.",
+                "properties": {
+                  "include_percentiles": {
+                    "default": false,
+                    "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "tags": {
+                    "default": [],
+                    "description": "A list of tag keys that will be queryable for your metric.",
+                    "example": [
+                      "app",
+                      "datacenter"
+                    ],
+                    "items": {
+                      "description": "Tag keys to group by.",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The metric name for this resource.",
+                "example": "test.metric.latency",
+                "type": "string"
+              },
+              "type": {
+                "default": "manage_tags",
+                "description": "The metric tag configuration resource type.",
+                "enum": [
+                  "manage_tags"
+                ],
+                "example": "manage_tags",
+                "type": "string",
+                "x-enum-varnames": [
+                  "MANAGE_TAGS"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "MetricType": {
+        "default": "metrics",
+        "description": "The metric resource type.",
+        "enum": [
+          "metrics"
+        ],
+        "example": "metrics",
+        "type": "string",
+        "x-enum-varnames": [
+          "METRICS"
+        ]
+      },
+      "MetricsAndMetricTagConfigurations": {
+        "description": "Object for a metrics and metric tag configurations.",
+        "oneOf": [
+          {
+            "description": "Object for a single metric tag configuration.",
+            "example": {
+              "id": "metric.foo.bar",
+              "type": "metric"
+            },
+            "properties": {
+              "id": {
+                "description": "The metric name for this resource.",
+                "example": "test.metric.latency",
+                "type": "string"
+              },
+              "type": {
+                "default": "metrics",
+                "description": "The metric resource type.",
+                "enum": [
+                  "metrics"
+                ],
+                "example": "metrics",
+                "type": "string",
+                "x-enum-varnames": [
+                  "METRICS"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          {
+            "description": "Object for a single metric tag configuration.",
+            "example": {
+              "attributes": {
+                "created_at": "2020-03-31T09:48:37.463835Z",
+                "metric_type": "gauge",
+                "modified_at": "2020-04-31T09:48:37.463835Z",
+                "tags": [
+                  "app",
+                  "datacenter"
+                ]
+              },
+              "id": "http.request.latency",
+              "type": "manage_tags"
+            },
+            "properties": {
+              "attributes": {
+                "description": "Object containing the definition of a metric tag configuration attributes.",
+                "properties": {
+                  "created_at": {
+                    "description": "Timestamp when the tag configuration was created.",
+                    "example": "2020-03-31T09:48:37.463835Z",
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "include_percentiles": {
+                    "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "metric_type": {
+                    "default": "gauge",
+                    "description": "The metric's type.",
+                    "enum": [
+                      "gauge",
+                      "count",
+                      "distribution"
+                    ],
+                    "example": "count",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "GAUGE",
+                      "COUNT",
+                      "DISTRIBUTION"
+                    ]
+                  },
+                  "modified_at": {
+                    "description": "Timestamp when the tag configuration was last modified.",
+                    "example": "2020-03-31T09:48:37.463835Z",
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "tags": {
+                    "description": "List of tag keys on which to group.",
+                    "example": [
+                      "app",
+                      "datacenter"
+                    ],
+                    "items": {
+                      "description": "Tag keys to group by.",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The metric name for this resource.",
+                "example": "test.metric.latency",
+                "type": "string"
+              },
+              "type": {
+                "default": "manage_tags",
+                "description": "The metric tag configuration resource type.",
+                "enum": [
+                  "manage_tags"
+                ],
+                "example": "manage_tags",
+                "type": "string",
+                "x-enum-varnames": [
+                  "MANAGE_TAGS"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "type": "object"
+      },
+      "MetricsAndMetricTagConfigurationsResponse": {
+        "description": "Response object that includes metrics and metric tag configurations.",
+        "properties": {
+          "data": {
+            "description": "Array of metrics and metric tag configurations.",
+            "items": {
+              "description": "Object for a metrics and metric tag configurations.",
+              "oneOf": [
+                {
+                  "description": "Object for a single metric tag configuration.",
+                  "example": {
+                    "id": "metric.foo.bar",
+                    "type": "metric"
+                  },
+                  "properties": {
+                    "id": {
+                      "description": "The metric name for this resource.",
+                      "example": "test.metric.latency",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "metrics",
+                      "description": "The metric resource type.",
+                      "enum": [
+                        "metrics"
+                      ],
+                      "example": "metrics",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "METRICS"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                {
+                  "description": "Object for a single metric tag configuration.",
+                  "example": {
+                    "attributes": {
+                      "created_at": "2020-03-31T09:48:37.463835Z",
+                      "metric_type": "gauge",
+                      "modified_at": "2020-04-31T09:48:37.463835Z",
+                      "tags": [
+                        "app",
+                        "datacenter"
+                      ]
+                    },
+                    "id": "http.request.latency",
+                    "type": "manage_tags"
+                  },
+                  "properties": {
+                    "attributes": {
+                      "description": "Object containing the definition of a metric tag configuration attributes.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Timestamp when the tag configuration was created.",
+                          "example": "2020-03-31T09:48:37.463835Z",
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "include_percentiles": {
+                          "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "metric_type": {
+                          "default": "gauge",
+                          "description": "The metric's type.",
+                          "enum": [
+                            "gauge",
+                            "count",
+                            "distribution"
+                          ],
+                          "example": "count",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "GAUGE",
+                            "COUNT",
+                            "DISTRIBUTION"
+                          ]
+                        },
+                        "modified_at": {
+                          "description": "Timestamp when the tag configuration was last modified.",
+                          "example": "2020-03-31T09:48:37.463835Z",
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "tags": {
+                          "description": "List of tag keys on which to group.",
+                          "example": [
+                            "app",
+                            "datacenter"
+                          ],
+                          "items": {
+                            "description": "Tag keys to group by.",
+                            "type": "string"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "The metric name for this resource.",
+                      "example": "test.metric.latency",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "manage_tags",
+                      "description": "The metric tag configuration resource type.",
+                      "enum": [
+                        "manage_tags"
+                      ],
+                      "example": "manage_tags",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "MANAGE_TAGS"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                }
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "readOnly": true,
         "type": "object"
       },
       "Organization": {
@@ -22520,7 +23594,7 @@
         "properties": {
           "email": {
             "description": "The email of the user.",
-            "example": "joe.doe@example.com",
+            "example": "jane.doe@example.com",
             "type": "string"
           },
           "name": {
@@ -22545,7 +23619,7 @@
             "properties": {
               "email": {
                 "description": "The email of the user.",
-                "example": "joe.doe@example.com",
+                "example": "jane.doe@example.com",
                 "type": "string"
               },
               "name": {
@@ -22631,7 +23705,7 @@
                 "properties": {
                   "email": {
                     "description": "The email of the user.",
-                    "example": "joe.doe@example.com",
+                    "example": "jane.doe@example.com",
                     "type": "string"
                   },
                   "name": {
@@ -24643,6 +25717,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "description": "Sorting options",
               "enum": [
                 "created_at",
                 "-created_at",
@@ -24653,7 +25728,17 @@
                 "name",
                 "-name"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "LAST4_ASCENDING",
+                "LAST4_DESCENDING",
+                "MODIFIED_AT_ASCENDING",
+                "MODIFIED_AT_DESCENDING",
+                "NAME_ASCENDING",
+                "NAME_DESCENDING"
+              ]
             }
           },
           {
@@ -26789,6 +27874,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "description": "Sorting options",
               "enum": [
                 "created_at",
                 "-created_at",
@@ -26797,7 +27883,15 @@
                 "name",
                 "-name"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "LAST4_ASCENDING",
+                "LAST4_DESCENDING",
+                "NAME_ASCENDING",
+                "NAME_DESCENDING"
+              ]
             }
           },
           {
@@ -28047,6 +29141,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "description": "Sorting options",
               "enum": [
                 "created_at",
                 "-created_at",
@@ -28055,7 +29150,15 @@
                 "name",
                 "-name"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "LAST4_ASCENDING",
+                "LAST4_DESCENDING",
+                "NAME_ASCENDING",
+                "NAME_DESCENDING"
+              ]
             }
           },
           {
@@ -30736,7 +31839,7 @@
             "description": "Not Found"
           }
         },
-        "summary": "Get a Dashboard List",
+        "summary": "Get items of a Dashboard List",
         "tags": [
           "Dashboard Lists"
         ],
@@ -31164,10 +32267,14 @@
             "required": false,
             "schema": {
               "items": {
+                "description": "Object related to an incident.",
                 "enum": [
                   "users"
                 ],
-                "type": "string"
+                "type": "string",
+                "x-enum-varnames": [
+                  "USERS"
+                ]
               },
               "type": "array"
             }
@@ -33383,10 +34490,14 @@
             "required": false,
             "schema": {
               "items": {
+                "description": "Object related to an incident.",
                 "enum": [
                   "users"
                 ],
-                "type": "string"
+                "type": "string",
+                "x-enum-varnames": [
+                  "USERS"
+                ]
               },
               "type": "array"
             }
@@ -35581,6 +36692,7 @@
                         "limit": {
                           "default": 10,
                           "description": "The maximum buckets to return for this group by",
+                          "format": "int64",
                           "type": "integer"
                         },
                         "missing": {
@@ -35701,6 +36813,7 @@
                     "properties": {
                       "timeOffset": {
                         "description": "The time offset (in seconds) to apply to the query.",
+                        "format": "int64",
                         "type": "integer"
                       },
                       "timezone": {
@@ -35712,10 +36825,10 @@
                     },
                     "type": "object"
                   },
-                  "paging": {
+                  "page": {
                     "description": "Paging settings",
                     "properties": {
-                      "after": {
+                      "cursor": {
                         "description": "The returned paging point to use to get the next results",
                         "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
                         "type": "string"
@@ -35811,6 +36924,7 @@
                         "elapsed": {
                           "description": "The time elapsed in milliseconds",
                           "example": 132,
+                          "format": "int64",
                           "type": "integer"
                         },
                         "page": {
@@ -38355,8 +39469,7 @@
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "idempotent"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       },
       "get": {
         "description": "Returns all read roles a given archive is restricted to.",
@@ -38586,8 +39699,7 @@
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       },
       "post": {
         "description": "Adds a read role to an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
@@ -38726,8 +39838,7 @@
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "unsafe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       }
     },
     "/api/v2/logs/config/metrics": {
@@ -38758,6 +39869,7 @@
                                       "count",
                                       "distribution"
                                     ],
+                                    "example": "distribution",
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "COUNT",
@@ -38766,6 +39878,7 @@
                                   },
                                   "path": {
                                     "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                    "example": "@duration",
                                     "type": "string"
                                   }
                                 },
@@ -38776,6 +39889,7 @@
                                 "properties": {
                                   "query": {
                                     "description": "The search query - following the log search syntax.",
+                                    "example": "service:web* AND @http.status_code:[200 TO 299]",
                                     "type": "string"
                                   }
                                 },
@@ -38788,10 +39902,12 @@
                                   "properties": {
                                     "path": {
                                       "description": "The path to the value the log-based metric will be aggregated over.",
+                                      "example": "@http.status_code",
                                       "type": "string"
                                     },
                                     "tag_name": {
                                       "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                      "example": "status_code",
                                       "type": "string"
                                     }
                                   },
@@ -38914,6 +40030,7 @@
                                   "count",
                                   "distribution"
                                 ],
+                                "example": "distribution",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "COUNT",
@@ -39030,6 +40147,7 @@
                                     "count",
                                     "distribution"
                                   ],
+                                  "example": "distribution",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
@@ -39038,6 +40156,7 @@
                                 },
                                 "path": {
                                   "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                  "example": "@duration",
                                   "type": "string"
                                 }
                               },
@@ -39048,6 +40167,7 @@
                               "properties": {
                                 "query": {
                                   "description": "The search query - following the log search syntax.",
+                                  "example": "service:web* AND @http.status_code:[200 TO 299]",
                                   "type": "string"
                                 }
                               },
@@ -39060,10 +40180,12 @@
                                 "properties": {
                                   "path": {
                                     "description": "The path to the value the log-based metric will be aggregated over.",
+                                    "example": "@http.status_code",
                                     "type": "string"
                                   },
                                   "tag_name": {
                                     "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                    "example": "status_code",
                                     "type": "string"
                                   }
                                 },
@@ -39369,6 +40491,7 @@
                                     "count",
                                     "distribution"
                                   ],
+                                  "example": "distribution",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
@@ -39377,6 +40500,7 @@
                                 },
                                 "path": {
                                   "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                  "example": "@duration",
                                   "type": "string"
                                 }
                               },
@@ -39387,6 +40511,7 @@
                               "properties": {
                                 "query": {
                                   "description": "The search query - following the log search syntax.",
+                                  "example": "service:web* AND @http.status_code:[200 TO 299]",
                                   "type": "string"
                                 }
                               },
@@ -39399,10 +40524,12 @@
                                 "properties": {
                                   "path": {
                                     "description": "The path to the value the log-based metric will be aggregated over.",
+                                    "example": "@http.status_code",
                                     "type": "string"
                                   },
                                   "tag_name": {
                                     "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                    "example": "status_code",
                                     "type": "string"
                                   }
                                 },
@@ -39640,6 +40767,7 @@
                                     "count",
                                     "distribution"
                                   ],
+                                  "example": "distribution",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
@@ -39648,6 +40776,7 @@
                                 },
                                 "path": {
                                   "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                  "example": "@duration",
                                   "type": "string"
                                 }
                               },
@@ -39658,6 +40787,7 @@
                               "properties": {
                                 "query": {
                                   "description": "The search query - following the log search syntax.",
+                                  "example": "service:web* AND @http.status_code:[200 TO 299]",
                                   "type": "string"
                                 }
                               },
@@ -39670,10 +40800,12 @@
                                 "properties": {
                                   "path": {
                                     "description": "The path to the value the log-based metric will be aggregated over.",
+                                    "example": "@http.status_code",
                                     "type": "string"
                                   },
                                   "tag_name": {
                                     "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                    "example": "status_code",
                                     "type": "string"
                                   }
                                 },
@@ -41395,7 +42527,7 @@
     },
     "/api/v2/logs/events": {
       "get": {
-        "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nlogs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+        "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest logs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
         "operationId": "ListLogsGet",
         "parameters": [
           {
@@ -41585,6 +42717,7 @@
                         "elapsed": {
                           "description": "The time elapsed in milliseconds",
                           "example": 132,
+                          "format": "int64",
                           "type": "integer"
                         },
                         "page": {
@@ -41702,19 +42835,18 @@
             "description": "Not Authorized"
           }
         },
-        "summary": "Get a quick list of logs",
+        "summary": "Get a list of logs",
         "tags": [
           "Logs"
         ],
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        }
       }
     },
     "/api/v2/logs/events/search": {
       "post": {
-        "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nBoth this endpoint and the GET endpoint can be used interchangeably when listing\nlogs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+        "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex logs filtering and search.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
         "operationId": "ListLogs",
         "requestBody": {
           "content": {
@@ -41766,6 +42898,7 @@
                     "properties": {
                       "timeOffset": {
                         "description": "The time offset (in seconds) to apply to the query.",
+                        "format": "int64",
                         "type": "integer"
                       },
                       "timezone": {
@@ -41918,6 +43051,7 @@
                         "elapsed": {
                           "description": "The time elapsed in milliseconds",
                           "example": 132,
+                          "format": "int64",
                           "type": "integer"
                         },
                         "page": {
@@ -42035,15 +43169,1263 @@
             "description": "Not Authorized"
           }
         },
-        "summary": "Get a list of logs",
+        "summary": "Search logs",
         "tags": [
           "Logs"
         ],
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "safe"
+        }
+      }
+    },
+    "/api/v2/metrics": {
+      "get": {
+        "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
+        "operationId": "ListTagConfigurations",
+        "parameters": [
+          {
+            "description": "Filter metrics that have configured tags.",
+            "example": true,
+            "in": "query",
+            "name": "filter[configured]",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Filter tag configurations by configured tags.",
+            "example": "app",
+            "in": "query",
+            "name": "filter[tags_configured]",
+            "required": false,
+            "schema": {
+              "description": "Tag keys to filter by.",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter tag configurations by metric type.",
+            "in": "query",
+            "name": "filter[metric_type]",
+            "required": false,
+            "schema": {
+              "default": "gauge",
+              "description": "The metric's type.",
+              "enum": [
+                "gauge",
+                "count",
+                "distribution"
+              ],
+              "example": "count",
+              "type": "string",
+              "x-enum-varnames": [
+                "GAUGE",
+                "COUNT",
+                "DISTRIBUTION"
+              ]
+            }
+          },
+          {
+            "description": "Filter distributions with additional percentile\naggregations enabled or disabled.",
+            "example": true,
+            "in": "query",
+            "name": "filter[include_percentiles]",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object that includes metrics and metric tag configurations.",
+                  "properties": {
+                    "data": {
+                      "description": "Array of metrics and metric tag configurations.",
+                      "items": {
+                        "description": "Object for a metrics and metric tag configurations.",
+                        "oneOf": [
+                          {
+                            "description": "Object for a single metric tag configuration.",
+                            "example": {
+                              "id": "metric.foo.bar",
+                              "type": "metric"
+                            },
+                            "properties": {
+                              "id": {
+                                "description": "The metric name for this resource.",
+                                "example": "test.metric.latency",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "metrics",
+                                "description": "The metric resource type.",
+                                "enum": [
+                                  "metrics"
+                                ],
+                                "example": "metrics",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "METRICS"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          {
+                            "description": "Object for a single metric tag configuration.",
+                            "example": {
+                              "attributes": {
+                                "created_at": "2020-03-31T09:48:37.463835Z",
+                                "metric_type": "gauge",
+                                "modified_at": "2020-04-31T09:48:37.463835Z",
+                                "tags": [
+                                  "app",
+                                  "datacenter"
+                                ]
+                              },
+                              "id": "http.request.latency",
+                              "type": "manage_tags"
+                            },
+                            "properties": {
+                              "attributes": {
+                                "description": "Object containing the definition of a metric tag configuration attributes.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Timestamp when the tag configuration was created.",
+                                    "example": "2020-03-31T09:48:37.463835Z",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "include_percentiles": {
+                                    "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+                                    "example": true,
+                                    "type": "boolean"
+                                  },
+                                  "metric_type": {
+                                    "default": "gauge",
+                                    "description": "The metric's type.",
+                                    "enum": [
+                                      "gauge",
+                                      "count",
+                                      "distribution"
+                                    ],
+                                    "example": "count",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "GAUGE",
+                                      "COUNT",
+                                      "DISTRIBUTION"
+                                    ]
+                                  },
+                                  "modified_at": {
+                                    "description": "Timestamp when the tag configuration was last modified.",
+                                    "example": "2020-03-31T09:48:37.463835Z",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "tags": {
+                                    "description": "List of tag keys on which to group.",
+                                    "example": [
+                                      "app",
+                                      "datacenter"
+                                    ],
+                                    "items": {
+                                      "description": "Tag keys to group by.",
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "The metric name for this resource.",
+                                "example": "test.metric.latency",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "manage_tags",
+                                "description": "The metric tag configuration resource type.",
+                                "enum": [
+                                  "manage_tags"
+                                ],
+                                "example": "manage_tags",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "MANAGE_TAGS"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          }
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "readOnly": true,
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          }
         },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        "summary": "List Tag Configurations",
+        "tags": [
+          "Metrics"
+        ],
+        "x-undo": {
+          "type": "safe"
+        },
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+      }
+    },
+    "/api/v2/metrics/{metric_name}/tags": {
+      "delete": {
+        "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
+        "operationId": "DeleteTagConfiguration",
+        "parameters": [
+          {
+            "description": "The name of the metric.",
+            "example": "dist.http.endpoint.request",
+            "in": "path",
+            "name": "metric_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          }
+        },
+        "summary": "Delete a Tag Configuration",
+        "tags": [
+          "Metrics"
+        ],
+        "x-undo": {
+          "type": "idempotent"
+        },
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+      },
+      "get": {
+        "description": "Returns the tag configuration for the given metric name.",
+        "operationId": "ListTagConfigurationByName",
+        "parameters": [
+          {
+            "description": "The name of the metric.",
+            "example": "dist.http.endpoint.request",
+            "in": "path",
+            "name": "metric_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object which includes a single metric's tag configuration.",
+                  "properties": {
+                    "data": {
+                      "description": "Object for a single metric tag configuration.",
+                      "example": {
+                        "attributes": {
+                          "created_at": "2020-03-31T09:48:37.463835Z",
+                          "metric_type": "gauge",
+                          "modified_at": "2020-04-31T09:48:37.463835Z",
+                          "tags": [
+                            "app",
+                            "datacenter"
+                          ]
+                        },
+                        "id": "http.request.latency",
+                        "type": "manage_tags"
+                      },
+                      "properties": {
+                        "attributes": {
+                          "description": "Object containing the definition of a metric tag configuration attributes.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Timestamp when the tag configuration was created.",
+                              "example": "2020-03-31T09:48:37.463835Z",
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "include_percentiles": {
+                              "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+                              "example": true,
+                              "type": "boolean"
+                            },
+                            "metric_type": {
+                              "default": "gauge",
+                              "description": "The metric's type.",
+                              "enum": [
+                                "gauge",
+                                "count",
+                                "distribution"
+                              ],
+                              "example": "count",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "GAUGE",
+                                "COUNT",
+                                "DISTRIBUTION"
+                              ]
+                            },
+                            "modified_at": {
+                              "description": "Timestamp when the tag configuration was last modified.",
+                              "example": "2020-03-31T09:48:37.463835Z",
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "tags": {
+                              "description": "List of tag keys on which to group.",
+                              "example": [
+                                "app",
+                                "datacenter"
+                              ],
+                              "items": {
+                                "description": "Tag keys to group by.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The metric name for this resource.",
+                          "example": "test.metric.latency",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "manage_tags",
+                          "description": "The metric tag configuration resource type.",
+                          "enum": [
+                            "manage_tags"
+                          ],
+                          "example": "manage_tags",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "MANAGE_TAGS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "readOnly": true,
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          }
+        },
+        "summary": "List Tag Configuration by Name",
+        "tags": [
+          "Metrics"
+        ],
+        "x-undo": {
+          "type": "safe"
+        },
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+      },
+      "patch": {
+        "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
+        "operationId": "UpdateTagConfiguration",
+        "parameters": [
+          {
+            "description": "The name of the metric.",
+            "example": "dist.http.endpoint.request",
+            "in": "path",
+            "name": "metric_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request object that includes the metric that you would like to edit the tag configuration on.",
+                "properties": {
+                  "data": {
+                    "description": "Object for a single tag configuration to be edited.",
+                    "example": {
+                      "attributes": {
+                        "group_by": [
+                          "app",
+                          "datacenter"
+                        ],
+                        "include_percentiles": false
+                      },
+                      "id": "http.endpoint.request",
+                      "type": "manage_tags"
+                    },
+                    "properties": {
+                      "attributes": {
+                        "description": "Object containing the definition of a metric tag configuration to be updated.",
+                        "properties": {
+                          "include_percentiles": {
+                            "default": false,
+                            "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
+                            "example": true,
+                            "type": "boolean"
+                          },
+                          "tags": {
+                            "default": [],
+                            "description": "A list of tag keys that will be queryable for your metric.",
+                            "example": [
+                              "app",
+                              "datacenter"
+                            ],
+                            "items": {
+                              "description": "Tag keys to group by.",
+                              "type": "string"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "The metric name for this resource.",
+                        "example": "test.metric.latency",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "manage_tags",
+                        "description": "The metric tag configuration resource type.",
+                        "enum": [
+                          "manage_tags"
+                        ],
+                        "example": "manage_tags",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "MANAGE_TAGS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object which includes a single metric's tag configuration.",
+                  "properties": {
+                    "data": {
+                      "description": "Object for a single metric tag configuration.",
+                      "example": {
+                        "attributes": {
+                          "created_at": "2020-03-31T09:48:37.463835Z",
+                          "metric_type": "gauge",
+                          "modified_at": "2020-04-31T09:48:37.463835Z",
+                          "tags": [
+                            "app",
+                            "datacenter"
+                          ]
+                        },
+                        "id": "http.request.latency",
+                        "type": "manage_tags"
+                      },
+                      "properties": {
+                        "attributes": {
+                          "description": "Object containing the definition of a metric tag configuration attributes.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Timestamp when the tag configuration was created.",
+                              "example": "2020-03-31T09:48:37.463835Z",
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "include_percentiles": {
+                              "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+                              "example": true,
+                              "type": "boolean"
+                            },
+                            "metric_type": {
+                              "default": "gauge",
+                              "description": "The metric's type.",
+                              "enum": [
+                                "gauge",
+                                "count",
+                                "distribution"
+                              ],
+                              "example": "count",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "GAUGE",
+                                "COUNT",
+                                "DISTRIBUTION"
+                              ]
+                            },
+                            "modified_at": {
+                              "description": "Timestamp when the tag configuration was last modified.",
+                              "example": "2020-03-31T09:48:37.463835Z",
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "tags": {
+                              "description": "List of tag keys on which to group.",
+                              "example": [
+                                "app",
+                                "datacenter"
+                              ],
+                              "items": {
+                                "description": "Tag keys to group by.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The metric name for this resource.",
+                          "example": "test.metric.latency",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "manage_tags",
+                          "description": "The metric tag configuration resource type.",
+                          "enum": [
+                            "manage_tags"
+                          ],
+                          "example": "manage_tags",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "MANAGE_TAGS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "readOnly": true,
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          }
+        },
+        "summary": "Update a Tag Configuration",
+        "tags": [
+          "Metrics"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        },
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+      },
+      "post": {
+        "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+        "operationId": "CreateTagConfiguration",
+        "parameters": [
+          {
+            "description": "The name of the metric.",
+            "example": "dist.http.endpoint.request",
+            "in": "path",
+            "name": "metric_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request object that includes the metric that you would like to configure tags for.",
+                "properties": {
+                  "data": {
+                    "description": "Object for a single metric to be configure tags on.",
+                    "example": {
+                      "attributes": {
+                        "include_percentiles": false,
+                        "metric_type": "distribution",
+                        "tags": [
+                          "app",
+                          "datacenter"
+                        ]
+                      },
+                      "id": "http.endpoint.request",
+                      "type": "manage_tags"
+                    },
+                    "properties": {
+                      "attributes": {
+                        "description": "Object containing the definition of a metric tag configuration to be created.",
+                        "properties": {
+                          "include_percentiles": {
+                            "default": false,
+                            "description": "Toggle to include/exclude percentiles for a distribution metric.\nDefaults to false. Can only be applied to metrics that have a `metric_type` of `distribution`.",
+                            "example": true,
+                            "type": "boolean"
+                          },
+                          "metric_type": {
+                            "default": "gauge",
+                            "description": "The metric's type.",
+                            "enum": [
+                              "gauge",
+                              "count",
+                              "distribution"
+                            ],
+                            "example": "count",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "GAUGE",
+                              "COUNT",
+                              "DISTRIBUTION"
+                            ]
+                          },
+                          "tags": {
+                            "default": [],
+                            "description": "A list of tag keys that will be queryable for your metric.",
+                            "example": [
+                              "app",
+                              "datacenter"
+                            ],
+                            "items": {
+                              "description": "Tag keys to group by.",
+                              "type": "string"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "tags",
+                          "metric_type"
+                        ],
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "The metric name for this resource.",
+                        "example": "test.metric.latency",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "manage_tags",
+                        "description": "The metric tag configuration resource type.",
+                        "enum": [
+                          "manage_tags"
+                        ],
+                        "example": "manage_tags",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "MANAGE_TAGS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object which includes a single metric's tag configuration.",
+                  "properties": {
+                    "data": {
+                      "description": "Object for a single metric tag configuration.",
+                      "example": {
+                        "attributes": {
+                          "created_at": "2020-03-31T09:48:37.463835Z",
+                          "metric_type": "gauge",
+                          "modified_at": "2020-04-31T09:48:37.463835Z",
+                          "tags": [
+                            "app",
+                            "datacenter"
+                          ]
+                        },
+                        "id": "http.request.latency",
+                        "type": "manage_tags"
+                      },
+                      "properties": {
+                        "attributes": {
+                          "description": "Object containing the definition of a metric tag configuration attributes.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Timestamp when the tag configuration was created.",
+                              "example": "2020-03-31T09:48:37.463835Z",
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "include_percentiles": {
+                              "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+                              "example": true,
+                              "type": "boolean"
+                            },
+                            "metric_type": {
+                              "default": "gauge",
+                              "description": "The metric's type.",
+                              "enum": [
+                                "gauge",
+                                "count",
+                                "distribution"
+                              ],
+                              "example": "count",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "GAUGE",
+                                "COUNT",
+                                "DISTRIBUTION"
+                              ]
+                            },
+                            "modified_at": {
+                              "description": "Timestamp when the tag configuration was last modified.",
+                              "example": "2020-03-31T09:48:37.463835Z",
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "tags": {
+                              "description": "List of tag keys on which to group.",
+                              "example": [
+                                "app",
+                                "datacenter"
+                              ],
+                              "items": {
+                                "description": "Tag keys to group by.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The metric name for this resource.",
+                          "example": "test.metric.latency",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "manage_tags",
+                          "description": "The metric tag configuration resource type.",
+                          "enum": [
+                            "manage_tags"
+                          ],
+                          "example": "manage_tags",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "MANAGE_TAGS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "readOnly": true,
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          }
+        },
+        "summary": "Create a Tag Configuration",
+        "tags": [
+          "Metrics"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-given": {
+          "metric_tag_configuration": {
+            "parameters": [
+              {
+                "name": "metric_name",
+                "value": "\"{{ unique_alnum }}\""
+              },
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\", \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"distribution\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum }}\"\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"metric_tag_configuration\" in the system"
+          }
+        },
+        "x-undo": {
+          "operationId": "DeleteTagConfiguration",
+          "parameters": [
+            {
+              "name": "metric_name",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        },
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       }
     },
     "/api/v2/permissions": {
@@ -48568,10 +50950,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           },
           {
@@ -48734,7 +51120,7 @@
                           },
                           "type": {
                             "default": "services",
-                            "description": "Incident Service resource type.",
+                            "description": "Incident service resource type.",
                             "enum": [
                               "services"
                             ],
@@ -49244,7 +51630,7 @@
                       },
                       "type": {
                         "default": "services",
-                        "description": "Incident Service resource type.",
+                        "description": "Incident service resource type.",
                         "enum": [
                           "services"
                         ],
@@ -49390,7 +51776,7 @@
                         },
                         "type": {
                           "default": "services",
-                          "description": "Incident Service resource type.",
+                          "description": "Incident service resource type.",
                           "enum": [
                             "services"
                           ],
@@ -49928,10 +52314,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           }
         ],
@@ -50054,7 +52444,7 @@
                         },
                         "type": {
                           "default": "services",
-                          "description": "Incident Service resource type.",
+                          "description": "Incident service resource type.",
                           "enum": [
                             "services"
                           ],
@@ -50547,7 +52937,7 @@
                       },
                       "type": {
                         "default": "services",
-                        "description": "Incident Service resource type.",
+                        "description": "Incident service resource type.",
                         "enum": [
                           "services"
                         ],
@@ -50694,7 +53084,7 @@
                         },
                         "type": {
                           "default": "services",
-                          "description": "Incident Service resource type.",
+                          "description": "Incident service resource type.",
                           "enum": [
                             "services"
                           ],
@@ -51077,10 +53467,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           },
           {
@@ -52432,10 +54826,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           }
         ],
@@ -54568,7 +56966,7 @@
                         "properties": {
                           "email": {
                             "description": "The email of the user.",
-                            "example": "joe.doe@example.com",
+                            "example": "jane.doe@example.com",
                             "type": "string"
                           },
                           "name": {
@@ -57166,7 +59564,9 @@
           "description": "The regional site for our customers.",
           "enum": [
             "datadoghq.com",
-            "datadoghq.eu"
+            "us3.datadoghq.com",
+            "datadoghq.eu",
+            "ddog-gov.com"
           ]
         },
         "subdomain": {
@@ -57191,52 +59591,8 @@
   ],
   "tags": [
     {
-      "description": "[See API version 1](/api/v1/aws-integration/).",
-      "name": "AWS Integration"
-    },
-    {
-      "description": "[See API version 1](/api/v1/aws-logs-integration/).",
-      "name": "AWS Logs Integration"
-    },
-    {
-      "description": "All requests to Datadog’s API must be authenticated.\nRequests that write data require reporting access and require an `API key`.\nRequests that read data require full access and also require an `application key`.\n\n**Note:** All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly when creating your client.\n\n[Manage your account’s API and application keys](https://app.datadoghq.com/account/settings#api).\n\n## Validate API key\n\n[See API version 1](/api/v1/authentication/#validate-api-key).",
-      "name": "Authentication"
-    },
-    {
-      "description": "[See API version 1](/api/v1/azure-integration/).",
-      "name": "Azure Integration"
-    },
-    {
-      "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization. Note that you can add API v1 Dashboards to Dashboard Lists\nthat you create with API v2.",
+      "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization.",
       "name": "Dashboard Lists"
-    },
-    {
-      "description": "[See API version 1](/api/v1/dashboards/).",
-      "name": "Dashboards"
-    },
-    {
-      "description": "[See API version 1](/api/v1/downtimes/).",
-      "name": "Downtimes"
-    },
-    {
-      "description": "[See API version 1](/api/v1/embeddable-graphs/).",
-      "name": "Embeddable Graphs"
-    },
-    {
-      "description": "[See API version 1](/api/v1/events/).",
-      "name": "Events"
-    },
-    {
-      "description": "[See API version 1](/api/v1/gcp-integration/).",
-      "name": "GCP Integration"
-    },
-    {
-      "description": "[See API version 1](/api/v1/hosts/).",
-      "name": "Hosts"
-    },
-    {
-      "description": "[See API version 1](/api/v1/ip-ranges/).",
-      "name": "IP Ranges"
     },
     {
       "description": "Create, update, delete, and retrieve services which can be associated with incidents.",
@@ -57251,10 +59607,6 @@
       "name": "Incidents"
     },
     {
-      "description": "[See API version 1](/api/v1/key-management/).",
-      "name": "Key Management"
-    },
-    {
       "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).",
       "externalDocs": {
         "description": "Find out more at",
@@ -57263,7 +59615,7 @@
       "name": "Key Management"
     },
     {
-      "description": "Search your logs in the Datadog platform over HTTP.\n\n[See API version 1](/api/v1/logs/) for sending logs.",
+      "description": "Search your logs and send them to your Datadog platform over HTTP.",
       "name": "Logs"
     },
     {
@@ -57275,10 +59627,6 @@
       "name": "Logs Archives"
     },
     {
-      "description": "[See API version 1](/api/v1/logs-indexes/).",
-      "name": "Logs Indexes"
-    },
-    {
       "description": "Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics) for your organization.",
       "externalDocs": {
         "description": "Find out more at",
@@ -57287,28 +59635,12 @@
       "name": "Logs Metrics"
     },
     {
-      "description": "[See API version 1](/api/v1/logs-pipelines/).",
-      "name": "Logs Pipelines"
-    },
-    {
       "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read access on log data at all, you must grant the `logs_read_data` permission.\nFrom there you can limit what data a role grants read access to by associating a Restriction Query with that role.\n\nA Restriction Query is a logs query that restricts which logs the `logs_read_data` permission grants read access to.\nFor users whose roles have Restriction Queries, any log query they make only returns those log events that also match\none of their Restriction Queries. This is true whether the user queries log events from any log-related feature, including\nthe log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently only support use of the following components of log events:\n\n- Reserved attributes\n- The log message\n- Tags\n\nThe recommended way to manage restricted read access on log data for customers with large or complicated organizational structures\nis to add a team tag to log events to indicate which team(s) own(s) them, and then to scope Restriction Queries to the appropriate\nvalues of the team tag. Tags can be applied to log events in many ways, and a log event can have multiple tags with the same key (like team)\nand different values—in this way the same log event can be visible to roles whose restriction queries are scoped to different team values.\n\nYou need an API and application key with Admin rights to interact with this endpoint.",
       "name": "Logs Restriction Queries"
     },
     {
-      "description": "[See API version 1](/api/v1/metrics/).",
+      "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nDatadog has a soft limit of 100 timeseries per host\nwhere a timeseries is defined as a unique combination of metric name and tag.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.",
       "name": "Metrics"
-    },
-    {
-      "description": "[See API version 1](/api/v1/monitors/).",
-      "name": "Monitors"
-    },
-    {
-      "description": "[See API version 1](/api/v1/organizations/).",
-      "name": "Organizations"
-    },
-    {
-      "description": "[See API version 1](/api/v1/pagerduty-integration/).",
-      "name": "PagerDuty Integration"
     },
     {
       "description": "The processes API allows you to query processes data for your organization.",
@@ -57319,52 +59651,8 @@
       "name": "Roles"
     },
     {
-      "description": "[See API version 1](/api/v1/screenboards/).",
-      "name": "Screenboards"
-    },
-    {
       "description": "Detection rules for generating signals and listing of generated\nsignals.",
       "name": "Security Monitoring"
-    },
-    {
-      "description": "[See API version 1](/api/v1/service-checks/).",
-      "name": "Service Checks"
-    },
-    {
-      "description": "[See API version 1](/api/v1/service-dependencies/).",
-      "name": "Service Dependencies"
-    },
-    {
-      "description": "[See API version 1](/api/v1/service-level-objectives/).",
-      "name": "Service Level Objectives"
-    },
-    {
-      "description": "[See API version 1](/api/v1/slack-integration/).",
-      "name": "Slack Integration"
-    },
-    {
-      "description": "[See API version 1](/api/v1/snapshots/).",
-      "name": "Snapshots"
-    },
-    {
-      "description": "[See API version 1](/api/v1/synthetics/).",
-      "name": "Synthetics"
-    },
-    {
-      "description": "[See API version 1](/api/v1/tags/).",
-      "name": "Tags"
-    },
-    {
-      "description": "[See API version 1](/api/v1/timeboards/).",
-      "name": "Timeboards"
-    },
-    {
-      "description": "[See API version 1](/api/v1/tracing/).",
-      "name": "Tracing"
-    },
-    {
-      "description": "[See API version 1](/api/v1/usage-metering/).",
-      "name": "Usage Metering"
     },
     {
       "description": "Create, edit, and disable users.",
@@ -57372,10 +59660,6 @@
         "url": "https://docs.datadoghq.com/account_management/users"
       },
       "name": "Users"
-    },
-    {
-      "description": "[See API version 1](/api/v1/webhooks-integration/).",
-      "name": "Webhooks Integration"
     }
   ],
   "x-group-parameters": true

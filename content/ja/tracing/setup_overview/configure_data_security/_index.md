@@ -294,6 +294,6 @@ DD_APM_REPLACE_TAGS=[
 [5]: /ja/agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
 [6]: /ja/tracing/custom_instrumentation/nodejs/#request-filtering
 [7]: /ja/api/v1/tracing/
-[8]: /ja/tracing/custom_instrumentation/java/#extending-tracers
-[9]: /ja/tracing/custom_instrumentation/ruby?tab=activespan#post-processing-traces
+[8]: /ja/tracing/setup_overview/custom_instrumentation/java/#extending-tracers
+[9]: /ja/tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering

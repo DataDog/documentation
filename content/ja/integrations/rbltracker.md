@@ -7,7 +7,7 @@ assets:
 categories:
   - monitoring
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md'
 display_name: RBLTracker

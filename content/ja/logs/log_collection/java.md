@@ -356,7 +356,7 @@ Log4j を使用してリモートサーバーに JSON 形式でログを記録�
 
 **注:** この移行の結果、Log4j 構成ファイルは使用されなくなります。[Log4j トランスレーター][1] を使用して `log4j.properties` ファイルを `logback.xml` に移行してください。
 
-[1]: https://logback.qos.ch/translator
+[1]: http://logback.qos.ch/translator
 {{% /tab %}}
 
 {{% tab "Log4j2" %}}

@@ -11,6 +11,7 @@ import markdown2
 
 from json import JSONDecodeError
 from itertools import chain
+from shutil import copyfile
 from os import sep, makedirs, getenv, remove
 from os.path import (
     exists,
@@ -203,8 +204,7 @@ class Integrations:
 
         return integration_content_with_link_inlined
 
-
-    def process_integrations(self, content):
+    def process_integrations(self, content, marketplace=False):
         """
         Goes through all files needed for integrations build
         and triggers the right function for the right type of file.
@@ -226,7 +226,10 @@ class Integrations:
                 self.process_service_checks(file_name)
 
             elif file_name.endswith(".md"):
-                self.process_integration_readme(file_name)
+                self.process_integration_readme(file_name, marketplace)
+
+            elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
+                self.process_images(file_name)
 
     def merge_integrations(self):
         """ Merges integrations that come under one """
@@ -405,7 +408,82 @@ class Integrations:
             self.data_service_checks_dir + new_file_name,
         )
 
-    def process_integration_readme(self, file_name):
+    # file_name should be an extracted image file
+    # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png
+    def process_images(self, file_name):
+        """
+        Copies a single image file to the static/images/ folder, creating a new directory if needed.
+        """
+        image_filename = basename(file_name) # img.png
+        integration_image_path = file_name.replace('../', '') # if it found local marketplace repo
+        integration_image_path = integration_image_path.replace('./integrations_data/extracted/', '') # marketplace/nerdvision/images/img.png
+        integration_image_directory = dirname(integration_image_path) # marketplace/nerdvision/images/
+        destination_directory = './static/images/{}'.format(integration_image_directory) # static/images/marketplace/nerdvision/images/
+        full_destination_path = '{}/{}'.format(destination_directory, image_filename) # static/images/marketplace/nerdvision/images/img.png
+
+        makedirs(destination_directory, exist_ok=True)
+        copyfile(file_name, full_destination_path)
+
+    @staticmethod
+    def replace_image_src(markdown_string):
+        """
+        Takes a markdown string and replaces any image markdown with our img shortcode, pointing to the static/images folder.
+        This is needed when dealing with Marketplace Integrations to properly display images pulled from a private repo.
+        """
+        markdown_img_search_regex = r"!\[(.*?)\]\((.*?)\)"
+        img_shortcode = "{{< img src=\"\\2\" alt=\"\\1\" >}}"
+        integration_img_prefix = 'https://raw.githubusercontent.com/DataDog/marketplace/master/'
+
+        replaced_markdown_string = markdown_string.replace(integration_img_prefix, 'marketplace/')
+        regex_result = re.sub(markdown_img_search_regex, img_shortcode, replaced_markdown_string, 0, re.MULTILINE)
+
+        if regex_result:
+            return regex_result
+        else:
+            return markdown_string
+
+    @staticmethod
+    def remove_markdown_section(markdown_string, h2_header_string):
+        """
+        Removes a section from markdown by deleting all content starting from provided h2_header_string argument and ending one index before the next h2 header.
+        h2_header_string argument is expected in markdown format; e.g. '## Steps'
+        """
+
+        if not h2_header_string.startswith('##'):
+            return markdown_string
+
+        h2_markdown_regex = r"(^|\n)(#{2}) (\w+)"
+        h2_list = re.finditer(h2_markdown_regex, markdown_string)
+        replaced_result = ''
+
+        for match in h2_list:
+            group = match.group(0)
+            start = match.start()
+            end = match.end() - 1
+
+            if h2_header_string in group:
+                start_index = start
+                end_index = next(h2_list).start()
+                content_to_remove = markdown_string[start_index:end_index]
+                replaced_result = markdown_string.replace(content_to_remove, '')
+
+        if replaced_result:
+            return replaced_result
+        else:
+            return markdown_string
+
+    @staticmethod
+    def validate_marketplace_integration_markdown(markdown_string):
+        """
+        Validates marketplace integration markdown string does not contain sensitive content.
+        The build should fail if we found any sections that should not be displayed in Docs.
+        Current exclude list: ["Setup", "Pricing", "Tiered Pricing"]
+        """
+        setup_header_markdown_regex = r"(#{1,6})(\s*)(Setup|Pricing|Tiered Pricing)"
+        matches = re.search(setup_header_markdown_regex, markdown_string, re.MULTILINE | re.IGNORECASE)
+        return matches == None
+
+    def process_integration_readme(self, file_name, marketplace=False):
         """
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
@@ -471,10 +549,23 @@ class Integrations:
         regex_skip_sections_start = r"(```|\{\{< code-block)"
 
         ## Formating all link as reference to avoid any corner cases
-        try:
-            result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
-        except Exception as e:
-            print(e)
+        ## Replace image filenames in markdown for marketplace interations
+        if not marketplace:
+            try:
+                result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
+            except Exception as e:
+                print(e)
+        else:
+            with open(file_name, 'r+') as f:
+                markdown_string = f.read()
+                markdown_with_replaced_images = self.replace_image_src(markdown_string)
+                updated_markdown = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
+                is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
+
+                if not is_marketplace_integration_markdown_valid:
+                    raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
+                else:
+                    result = updated_markdown
 
         ## Check if there is a integration tab logic in the integration file:
         if "<!-- xxx tabs xxx -->" in result:

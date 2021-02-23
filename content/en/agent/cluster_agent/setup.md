@@ -26,7 +26,7 @@ To set up the Datadog Cluster Agent on your Kubernetes cluster, follow these ste
 
 ## Configure the Datadog Cluster Agent
 
-### Step 1 - Configure RBAC permissions
+### Configure RBAC permissions
 
 The Datadog Cluster Agent needs a proper RBAC to be up and running:
 
@@ -43,7 +43,7 @@ The Datadog Cluster Agent needs a proper RBAC to be up and running:
 
 If you are using Azure Kubernetes Service (AKS), you may require extra permissions. See the [RBAC for DCA on AKS][3] FAQ.
 
-### Step 2 - Secure Cluster-Agent-to-Agent Communication
+### Secure Cluster Agent to Agent communication
 
 Use one of the following options to secure communication between the Datadog Agent and the Datadog Cluster Agent.
 
@@ -111,7 +111,7 @@ Setting the value without a secret results in the token being readable in the `P
 
 **Note**: This needs to be set in the manifest of the Cluster Agent **and** the node agent.
 
-### Step 3 - Create the Cluster Agent and its service
+### Create the Cluster Agent and its service
 
 1. Download the following manifests:
 
@@ -134,7 +134,7 @@ Setting the value without a secret results in the token being readable in the `P
 
 **Note**: In your Datadog Cluster Agent, set `<DD_SITE>` to your Datadog site: {{< region-param key="dd_site" code="true" >}}. The default value is `datadoghq.com`
 
-### Step 4 - Verification
+### Verification
 
 At this point, you should see:
 
@@ -167,13 +167,13 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 ### Setup
 
-#### Step 1 - Set Configure RBAC permissions for node-based Agents
+#### Set RBAC permissions for node-based Agents
 
 1. Download the the [agent-rbac.yaml manifest][9]. **Note**: When using the Cluster Agent, your node Agents are not able to interact with the Kubernetes API server—only the Cluster Agent is able to do so.
 
 2. Run: `kubectl apply -f agent-rbac.yaml`
 
-#### Step 2 - Enable the Datadog Agent
+#### Enable the Datadog Agent
 
 1. Download the [daemonset.yaml manifest][10].
 
@@ -210,6 +210,30 @@ datadog-cluster-agent-8568545574-x9tc9   1/1       Running   0          2h
 ```
 
 Kubernetes events are beginning to flow into your Datadog account, and relevant metrics collected by your Agents are tagged with their corresponding cluster level metadata.
+
+#### Monitoring AWS managed services
+
+To monitor an AWS managed service like MSK, ElastiCache, or RDS, create a pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart.
+
+{{< code-block lang="yaml" >}}
+clusterChecksRunner:
+  enabled: true
+  rbac:
+    # clusterChecksRunner.rbac.create -- If true, create & use RBAC resources
+    create: true
+    dedicated: true
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::***************:role/ROLE-NAME-WITH-MSK-READONLY-POLICY
+clusterAgent:
+  confd:
+    amazon_msk.yaml: |-
+      cluster_check: true
+      instances:
+        - cluster_arn: arn:aws:kafka:us-west-2:*************:cluster/gen-kafka/*******-8e12-4fde-a5ce-******-3
+          region_name: us-west-2
+{{< /code-block >}}
+
+
 
 ## Further Reading
 

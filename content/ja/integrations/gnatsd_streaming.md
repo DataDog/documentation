@@ -43,44 +43,25 @@ gnatsd_streaming サービスからメトリクスをリアルタイムに取得
 
 Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに gnatsd_streaming チェックをインストールしてください。[バージョン 6.8 以前の Agent][2] または [Docker Agent][3] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][1]に関する Agent のガイドを参照してください。
 
-1. [開発ツールキット][4]をインストールします。
-2. integrations-extras リポジトリを複製します。
+1. [Datadog Agent をダウンロードして起動][4]します。
+2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
    ```shell
-   git clone https://github.com/DataDog/integrations-extras.git.
+   datadog-agent integration install -t datadog-gnatsd_streaming==<INTEGRATION_VERSION>
    ```
 
-3. `ddev` 構成を `integrations-extras/` パスで更新します。
-
-   ```shell
-   ddev config set extras ./integrations-extras
-   ```
-
-4. `gnatsd_streaming` パッケージをビルドします。
-
-   ```shell
-   ddev -e release build gnatsd_streaming
-   ```
-
-5. [Datadog Agent をダウンロードして起動][5]します。
-6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
-
-   ```shell
-   datadog-agent integration install -w <PATH_OF_GNATSD_STREAMING_ARTIFACT_>/<GNATSD_STREAMING_ARTIFACT_NAME>.whl
-   ```
-
-7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
+3. [他のパッケージ化されたインテグレーション][5]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
-1. GnatsD のストリーミング[メトリクス](#metric-collection)の収集を開始するには、[Agent の構成ディレクトリ][7]のルートにある `conf.d/` フォルダーの `gnatsd_streaming.d/conf.yaml` ファイルを編集します。
-   使用可能なすべての構成オプションの詳細については、[サンプル gnatsd_streaming.d/conf.yaml][8] を参照してください。
+1. GnatsD のストリーミング[メトリクス](#metric-collection)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `gnatsd_streaming.d/conf.yaml` ファイルを編集します。
+   使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル gnatsd_streaming.d/conf.yaml][7] を参照してください。
 
-2. [Agent を再起動します][9]
+2. [Agent を再起動します][8]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `gnatsd_streaming` を探します。
+[Agent の status サブコマンドを実行][9]し、Checks セクションで `gnatsd_streaming` を探します。
 
 ## 互換性
 
@@ -111,17 +92,16 @@ Agent が _monitoring_ エンドポイントから 200 を受信できない場�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[4]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[8]: https://github.com/DataDog/integrations-extras/blob/master/gnatsd_streaming/datadog_checks/gnatsd_streaming/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[11]: https://github.com/DataDog/datadog-sdk-testing/blob/master/lib/config/metadata.csv
-[12]: http://docs.datadoghq.com/help
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: https://github.com/DataDog/integrations-extras/blob/master/gnatsd_streaming/datadog_checks/gnatsd_streaming/data/conf.yaml.example
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
+[10]: https://github.com/DataDog/datadog-sdk-testing/blob/master/lib/config/metadata.csv
+[11]: http://docs.datadoghq.com/help

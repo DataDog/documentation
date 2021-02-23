@@ -22,7 +22,7 @@ draft: false
 git_integration_title: twistlock
 guid: 59082b73-62f4-48d4-83f8-af3d5576eae1
 integration_id: twistlock
-integration_title: Twistlock
+integration_title: Prisma Cloud Compute Edition
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -30,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: twistlock.
 metric_to_check: twistlock.images.cve.details
 name: twistlock
-public_title: Intégration Datadog/Twistlock
+public_title: Intégration Datadog/Prisma Cloud Compute Edition
 short_description: Twistlock est un scanner de sécurité pour conteneur.
 support: core
 supported_os:
@@ -40,13 +40,13 @@ supported_os:
 ---
 ## Présentation
 
-[Twistlock][1] est un scanner de sécurité. Il peut scanner des conteneurs, des hosts et des paquets afin de détecter les vulnérabilités et les problèmes de conformité.
+[Prisma Cloud Compute Edition][1] est un scanner de sécurité. Il peut analyser des conteneurs, des hosts et des packages afin de détecter les vulnérabilités et les problèmes de conformité.
 
 ## Configuration
 
 ### Installation
 
-Le check Twistlock est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Prisma Cloud Compute Edition est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
@@ -182,18 +182,18 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Événements
 
-Twistlock envoie un événement lorsque de nouvelles vulnérabilités et problèmes de sécurité.
+Prisma Cloud Compute Edition envoie un événement lorsqu'une nouvelle vulnérabilité ou un nouveau problème de sécurité est détecté.
 
 ### Checks de service
 
-Twistlock envoie des checks de service en cas d'échec d'un scan.
+Prisma Cloud Compute Edition envoie des checks de service en cas d'échec d'une analyse.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 
-[1]: https://www.twistlock.com
+[1]: https://www.paloaltonetworks.com/prisma/cloud
 [2]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/fr/help/

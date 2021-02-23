@@ -54,7 +54,12 @@ After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][
   {{% tab "Certificate" %}}
 
   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-  * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
+  * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+  
+  ```
+  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts 
+  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+  ```
 
   {{% /tab %}}
 

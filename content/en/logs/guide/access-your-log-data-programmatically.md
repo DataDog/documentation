@@ -32,7 +32,7 @@ The following examples are covered in this guide:
 
 - This guide features `curl` examples. Install [curl][3] if you do not have it installed, or reference additional language examples for this API endpoint in the [API documentation][1].
 
-**Note:** By default, all users with Admin, Standard, and Read-Only roles have access to all log data. But the search results might be restricted based on the permissions of the user owning the `<DATADOG_APP_KEY>`.[4]
+**Note:** By default, all users with Admin, Standard, and Read-Only roles have access to all log data. But the search results might be restricted based on the permissions of the user owning the `<DATADOG_APP_KEY>`.
 
 ## Examples
 
@@ -144,7 +144,7 @@ The result dataset is comprised of the `data` object, as depicted in the followi
 
 #### Facet
 
-With the following API call, sort your retrieved log events by a facet such as `pageViews` in ascending order. Include `@` for the facet. Use a `-` hyphen in front of the facet name such as `-@pageViews` to sort in descending order.[6] The default sort order is descending order by timestamps.
+With the following API call, sort your retrieved log events by a facet such as `pageViews` in ascending order. Include `@` for the facet. Use a `-` hyphen in front of the facet name such as `-@pageViews` to sort in descending order. The default sort order is descending order by timestamps.
 
 **API call:**
 
@@ -459,7 +459,7 @@ The timezone can be specified both as an offset (eg "UTC+03:00") or a regional z
 
 ### Pagination
 
-To retrieve a log list longer than the `1000` logs limit[7](#limit-the-number-of-results-retrieved), use the pagination feature. 
+To retrieve a log list longer than the `1000` [logs limit](#limit-the-number-of-results-retrieved), use the pagination feature. 
 
 The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter is `50` by default, but can be set up to `1000`.
 

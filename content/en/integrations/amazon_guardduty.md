@@ -25,7 +25,7 @@ Datadog integrates with AWS GuardDuty via a Lambda function that ships GuardDuty
 
 ## Setup
 
-### Log Collection
+### Log collection
 
 #### Enable GuardDuty logging
 
@@ -41,7 +41,7 @@ Datadog integrates with AWS GuardDuty via a Lambda function that ships GuardDuty
 
 4. Save your rule.
 
-#### Send your Logs to Datadog
+#### Send your logs to Datadog
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 

@@ -70,7 +70,7 @@ The properties section is the overview of your monitor's:
 | Query        | Learn more about [querying][4].                                                       |
 | Message      | The message specified in the [notification][5] section of the monitor.                |
 
-## Status & History
+## Status and history
 
 The status and history section displays the query and state changes of your monitor over time. To filter the information, use the search box, statuses, and time selector above the section.
 

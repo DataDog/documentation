@@ -72,7 +72,7 @@ dogstatsd($metric)
 
 ## Exemples
 
-Voici deux exemples traduits en tant que script PowerShell. Ils utilisent l'objet `Msxml2.XMLHTTP`, qui est entièrement documenté sur le [site de Mozilla][2] :
+Voici deux exemples traduits en tant que script PowerShell. Ils utilisent l'objet `Msxml2.XMLHTTP`, qui est entièrement documenté sur le [site de Mozilla][3] :
 
 ### Le code qui envoie l'appel d'API
 
@@ -99,7 +99,7 @@ $http_request.responseText
     $app_key = "<DATADOG_APPLICATION_KEY>"
     ```
 
-2. Définissez vos paramètres selon la [description de l'API Hosts][3] :
+2. Définissez vos paramètres selon la [description de l'API Hosts][4] :
 
     ```powershell
     $host_name = "test.host"
@@ -124,7 +124,7 @@ $http_request.responseText
     $app_key = "<DATADOG_APPLICATION_KEY>"
     ```
 
-2. Définissez vos paramètres selon la [description de l'API Metrics][4] :
+2. Définissez vos paramètres selon la [description de l'API Metrics][5] :
 
     ```powershell
     $http_method = "POST"
@@ -145,10 +145,11 @@ $http_request.responseText
 
 3. Exécutez le code présenté dans la [première section](#le-code-qui-envoie-l-appel-d-api).
 
-[Consultez le référentiel GitHub ncracker/dd_metric pour découvrir d'autres exemples de code][5].
+[Consultez le référentiel GitHub ncracker/dd_metric pour découvrir d'autres exemples de code][6].
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: /fr/developers/metrics/dogstatsd_metrics_submission/
-[3]: /fr/api/v1/hosts/
-[4]: /fr/api/v1/metrics/
-[5]: https://github.com/ncracker/dd_metric
+[3]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[4]: /fr/api/v1/hosts/
+[5]: /fr/api/v1/metrics/
+[6]: https://github.com/ncracker/dd_metric

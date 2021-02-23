@@ -11,7 +11,7 @@ Datadog generates two additional metrics for each resource monitored with the [A
 
 The `azure.*.count` metric is an improvement over `azure.*.status`, which will be deprecated.
 
-## .count metric
+## Count metric
 
 The `azure.*.count` metric provides two fundamental pieces of information:
 
@@ -51,7 +51,7 @@ Virtual machines have more detailed statuses, including:
 
 If you see a status of `query_failed` you need to enable the [Resource Health provider](#troubleshooting) in Azure.
 
-## .status metric
+## Status metric
 
 The `azure.*.status` metric is the previous solution for this same type of information. It reports the number of available resources for each Azure resource type.
 

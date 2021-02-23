@@ -52,14 +52,14 @@ main_left:
     weight: 8
     parent: product
   - identifier: synthetics
-    name: Synthetic の監視
+    name: Synthetic モニタリング
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics icon''>'
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 9
     parent: product
   - identifier: rum
     name: リアルユーザーモニタリング
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''rum icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''RUM アイコン''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
@@ -825,7 +825,7 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 902
-  - name: モバイル
+  - name: モバイルアプリケーション
     url: mobile/
     identifier: モバイル
     pre: nav_mobile
@@ -947,48 +947,56 @@ main:
     identifier: serverless_distributed_tracing
     parent: サーバーレス
     weight: 5
+  - name: トレースのマージ（詳細）
+    url: serverless/distributed_tracing/serverless_trace_merging
+    parent: serverless_distributed_tracing
+    weight: 501
   - name: カスタムメトリクス
     url: serverless/custom_metrics
     parent: サーバーレス
     weight: 6
+  - name: インサイト
+    url: serverless/insights
+    parent: サーバーレス
+    weight: 7
   - name: デプロイ追跡
     url: serverless/deployment_tracking
     parent: サーバーレス
-    weight: 7
+    weight: 8
   - name: サーバーレスインテグレーション
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: サーバーレス
-    weight: 8
+    weight: 9
   - name: Datadog サーバーレスプラグイン
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 801
+    weight: 901
   - name: Datadog のサーバーレスマクロ
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 802
+    weight: 902
   - name: Datadog サーバーレス CLI
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 803
+    weight: 903
   - name: サーバーレスタグ付け
     url: serverless/serverless_tagging
     parent: サーバーレス
-    weight: 9
+    weight: 10
   - name: トラブルシューティング
     url: serverless/troubleshooting
     parent: サーバーレス
     identifier: serverless_troubleshooting
-    weight: 10
+    weight: 11
   - name: Azure App Service 拡張機能
     url: serverless/azure_app_services
     parent: サーバーレス
     identifier: serverless_app_services
-    weight: 11
+    weight: 12
   - name: メトリクス
     url: metrics/
     identifier: metrics_top_level
@@ -1307,7 +1315,7 @@ main:
     identifier: tracing_open_standards_open_standards_dotnet
     weight: 108
   - name: サーバーレス関数のトレース
-    url: tracing/setup_overview/serverless_functions/
+    url: serverless/distributed_tracing
     parent: tracing_setup_overview
     identifier: tracing_serverless_functions
     weight: 104
@@ -1675,20 +1683,20 @@ main:
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 603
+  - name: ログトランザクション
+    url: logs/explorer/transactions/
+    parent: log_explorer
+    weight: 604
   - name: ログ分析
     url: logs/explorer/analytics/
     parent: log_explorer
-    weight: 604
+    weight: 605
   - name: 保存ビュー
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 605
+    weight: 606
   - name: ファセット
     url: logs/explorer/facets/
-    parent: log_explorer
-    weight: 606
-  - name: トランザクション
-    url: logs/explorer/transactions/
     parent: log_explorer
     weight: 607
   - name: 検索構文
@@ -1724,30 +1732,35 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring
     weight: 1
+  - name: はじめに
+    url: security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: シグナルエクスプローラー
+    url: security_monitoring/explorer
+    parent: security_monitoring
+    identifier: security_monitoring_explorer
+    weight: 102
+  - name: 脅威検知の規則
+    url: security_monitoring/detection_rules
+    parent: security_monitoring
+    identifier: security_monitoring_detection_rules
+    weight: 103
+  - name: ガイド
+    url: security_monitoring/guide
+    parent: security_monitoring
+    identifier: security_monitoring_guides
+    weight: 104
   - name: コンプライアンスのモニタリング
     url: compliance_monitoring/
     parent: security_compliance_monitoring
     identifier: compliance_monitoring
     weight: 2
   - name: デフォルトの規則
-    url: security_monitoring/default_rules/
+    url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
-    weight: 3
-  - name: はじめに
-    url: security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
-    weight: 1
-  - name: シグナルエクスプローラー
-    url: security_monitoring/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_explorer
-    weight: 2
-  - name: 脅威検知の規則
-    url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
     weight: 3
   - name: Synthetic モニタリング
     url: synthetics/
@@ -1841,7 +1854,7 @@ main:
     weight: 11
   - name: リアルユーザーモニタリング
     url: real_user_monitoring/
-    pre: nav_rum
+    pre: nav_rum_2
     identifier: rum
     weight: 150000
   - name: ブラウザのモニタリング
@@ -1979,36 +1992,41 @@ main:
     parent: npm
     identifier: dns_monitoring
     weight: 4
+  - name: ガイド
+    url: network_performance_monitoring/guide/
+    identifier: npm_guides
+    parent: npm
+    weight: 5
   - name: デバイス
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 500
+    weight: 600
   - name: セットアップ
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 501
+    weight: 601
   - name: プロファイル
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 502
+    weight: 602
   - name: 収集データ
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 503
+    weight: 603
   - name: トラブルシューティング
     url: network_performance_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 504
+    weight: 604
   - name: ガイド
     url: network_performance_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 505
+    weight: 605
   - name: 開発ツール
     url: developers/
     pre: nav_developers
@@ -2434,33 +2452,33 @@ api_v1:
     parent: ダッシュボード
     url: '#create-a-new-dashboard'
     generated: true
-  - name: 公開ダッシュボードを作成する
+  - name: 共有ダッシュボードの作成
     parent: ダッシュボード
-    url: '#create-a-public-dashboard'
+    url: '#create-a-shared-dashboard'
     generated: true
-  - name: 公開ダッシュボードの URL を取り消す
+  - name: 共有ダッシュボード URL の無効化
     parent: ダッシュボード
-    url: '#revoke-a-public-dashboard-url'
+    url: '#revoke-a-shared-dashboard-url'
     generated: true
-  - name: 公開ダッシュボードを取得する
+  - name: 共有ダッシュボードの取得
     parent: ダッシュボード
-    url: '#get-a-public-dashboard'
+    url: '#get-a-shared-dashboard'
     generated: true
-  - name: 公開ダッシュボードを更新する
+  - name: 共有ダッシュボードの更新
     parent: ダッシュボード
-    url: '#update-a-public-dashboard'
+    url: '#update-a-shared-dashboard'
     generated: true
-  - name: 公開ダッシュボードの招待を取り消す
+  - name: 共有ダッシュボードの招待を取り消す
     parent: ダッシュボード
-    url: '#revoke-public-dashboard-invitations'
+    url: '#revoke-shared-dashboard-invitations'
     generated: true
-  - name: 公開ダッシュボードへのすべての招待を取得する
+  - name: 共有ダッシュボードへのすべての招待の取得
     parent: ダッシュボード
-    url: '#get-all-invitations-for-a-public-dashboard'
+    url: '#get-all-invitations-for-a-shared-dashboard'
     generated: true
-  - name: 公開ダッシュボードの招待メールを送信する
+  - name: 共有ダッシュボードの招待メールの送信
     parent: ダッシュボード
-    url: '#send-public-dashboard-invitation-email'
+    url: '#send-shared-dashboard-invitation-email'
     generated: true
   - name: ダッシュボードを削除する
     parent: ダッシュボード
@@ -2678,6 +2696,10 @@ api_v1:
     parent: ログインデックス
     url: '#get-all-indexes'
     generated: true
+  - name: インデックスを作成
+    parent: ログインデックス
+    url: '#create-an-index'
+    generated: true
   - name: インデックスを取得する
     parent: ログインデックス
     url: '#get-an-index'
@@ -2870,9 +2892,9 @@ api_v1:
     url: /api/v1/screenboards/
     identifier: スクリーンボード
     generated: true
-  - name: セキュリティ監視
+  - name: セキュリティモニタリング
     url: /api/v1/security-monitoring/
-    identifier: セキュリティ監視
+    identifier: セキュリティモニタリング
     generated: true
   - name: サービスのチェック
     url: /api/v1/service-checks/

@@ -54,5 +54,6 @@ Error Tracking により、問題は事前定義された属性リストに自�
 
 {{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.gif" alt="エラー追跡のモニターへエクスポート"  >}}
 
+
 [1]: /ja/events
 [2]: /ja/monitors/monitor_types/event/

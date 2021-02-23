@@ -38,7 +38,7 @@ After [installing DogStatsD][1], the functions below are available for submittin
 |---------------------------------------------------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to increment a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. |
 | `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to decrement a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. |
-| `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Use to increment a COUNT metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. |
+| `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Use to increment a COUNT metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. <br/><br/>**Note:** `count` is not supported in Python.</p>|
 
 **Note**: `COUNT` type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report per-second units.
 
@@ -67,6 +67,9 @@ while(1):
   statsd.decrement('example_metric.decrement', tags=["environment:dev"])
   time.sleep(10)
 ```
+
+**Note:** `statsd.count` is not supported in Python.
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -416,9 +419,9 @@ end
 package main
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
-	"strconv"
 	"time"
 
 	"github.com/DataDog/datadog-go/statsd"
@@ -432,8 +435,8 @@ func main() {
 	var i float64
 	for {
 		i += 1
-		statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
-		time.Sleep(rand.Intn(10) * time.Second)
+		statsd.Set("example_metric.set", fmt.Sprintf("%f", i), []string{"environment:dev"}, 1)
+		time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 	}
 }
 ```
@@ -660,7 +663,7 @@ The above instrumentation produces the following metrics:
 | Metric                                  | Description                             |
 |-----------------------------------------|-----------------------------------------|
 | `example_metric.histogram.count`        | Number of times this metric was sampled |
-| `example_metric.histogram.avg`          | Average time of the sampled values      |
+| `example_metric.histogram.avg`          | Average of the sampled values           |
 | `example_metric.histogram.median`       | Median sampled value                    |
 | `example_metric.histogram.max`          | Maximum sampled value                   |
 | `example_metric.histogram.95percentile` | 95th percentile sampled value           |

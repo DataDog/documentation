@@ -6,7 +6,6 @@ kind: faq
 <div class="alert alert-warning">
 <b>Agentless profiling will no longer be supported from August 15th, 2020.</b>
 </div>
-****
 
 Benefits of switching to agent mode:
 
@@ -16,9 +15,8 @@ Benefits of switching to agent mode:
 - Added support for including container-id header during profile collection so you can automatically get container tags.
 
 ## Migrating from Agentless to the Agent Setup
-
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,go" >}}
+{{< programming-lang lang="java" >}}
 
 Perform the following steps to migrate your service to send profiles directly through the Datadog Agent:
 
@@ -65,11 +63,11 @@ The following arguments and environment variables have been deprecated:
 | `-Ddd.profiling.proxy.username` | DD_PROFILING_PROXY_USERNAME | Deprecated in version 0.55. Username used by your proxy.                     |
 | `-Ddd.profiling.proxy.password` | DD_PROFILING_PROXY_PASSWORD | Deprecated in version 0.55. Password used by your proxy.                     |
 
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install
-{{% /tab %}}
-
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 Perform the following steps to migrate your service to send profiles directly through the Datadog Agent:
 
@@ -112,11 +110,13 @@ The following arguments and environment variables have been deprecated:
 | `DD_SITE`                                        | String        | Deprecated in version 0.39. If your organization is on the Datadog EU site, set this to `datadoghq.eu`. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead.                          |
 | `DD_PROFILING_TAGS`                              | String        | Deprecated in 0.38 in favor of `DD_TAGS`. Tags to apply to an uploaded profile. Must be a list a `key:value` comma-separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
+
+
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install
-{{% /tab %}}
-
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 Perform the following steps to migrate your service to send profiles directly through the Datadog Agent:
 
@@ -185,7 +185,10 @@ Deprecated code level Profiler configuration:
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithAPIKey      | String        | Deprecated in version 0.39. The Datadog [Datadog API key][2].                                                                             |
 
+
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+

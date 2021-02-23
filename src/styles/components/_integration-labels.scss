@@ -29,7 +29,12 @@ $labelcolors: (
   display: inline-block;
   padding-top: 16px;
   margin-left: 10px;
-  border-left: 1px solid gray;
+
+  .supported-os-text {
+    margin-left: 10px;
+    font-size: 18px;
+    line-height: 21px;
+  }
 
   @media screen and (max-width: 767px){
     .supported-os-text{

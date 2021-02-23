@@ -11,7 +11,7 @@ Datadog meters the count of hosts and custom metrics hourly. The billable count 
 
 ### Hosts
 
-Hosts are defined as any instances with the Datadog Agent installed plus any AWS EC2s, GCP, Azure, or vSphere VMs monitored with our integrations. Any EC2s or VMs with the Agent installed count as a single instance (no double-billing).
+A host is any physical or virtual OS instance that you monitor with Datadog. It could be a server, VM, node (in the case of Kubernetes), or App Service Plan instance (in the case of Azure App Services). Hosts can be instances with the Datadog Agent installed plus any AWS EC2s, GCP, Azure, or vSphere VMs monitored with our integrations. Any EC2s or VMs with the Agent installed count as a single instance (no double-billing).
 
 Non-reporting hosts (status `???` in your [Infrastructure list][2]) do not count towards billing. It could take up to 2 hours for these hosts to drop out of the [Infrastructure List][2]. Datadog retains the historical data for these hosts (paid accounts). Metrics can be graphed on a dashboard by knowing the specific host name or tags.
 
@@ -29,15 +29,21 @@ Pro and Enterprise plans include 150,000 Indexed Spans and 5 custom metrics per 
 
 For more information, see the [Serverless billing page][5] and the [Datadog Pricing page][6].
 
+### IoT
+
+Datadog meters the count of IoT devices hourly. The billable count of IoT devices is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours, excluding the top 1% to reduce the impact of spikes in usage on your bill.
+
+For more information about IoT billing, see the [Datadog Pricing page][7].
+
 ## Invoicing
 
-If you pay by credit card, receipts are available to [Administrators][7] for previous months under [Billing History][8].
+If you pay by credit card, receipts are available to [Administrators][8] for previous months under [Billing History][9].
 
-If you pay by check or wire, invoices are emailed to the billing email addresses when due. If you need an additional copy, email [Datadog billing][9].
+If you pay by check or wire, invoices are emailed to the billing email addresses when due. If you need an additional copy, email [Datadog billing][10].
 
 ### Billing emails
 
-You can set specific email addresses to receive invoices on the [Plan][10] page under **Manage Billing Emails**:
+You can set specific email addresses to receive invoices on the [Plan][11] page under **Manage Billing Emails**:
 
 {{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
 
@@ -72,7 +78,8 @@ You can set specific email addresses to receive invoices on the [Plan][10] page 
 [4]: https://docs.datadoghq.com/account_management/billing/pricing/#apm
 [5]: https://docs.datadoghq.com/account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/#included_serverless_functions-d
-[7]: /account_management/users/default_roles/
-[8]: https://app.datadoghq.com/account/billing_history
-[9]: mailto:billing@datadoghq.com
-[10]: https://app.datadoghq.com/account/billing
+[7]: https://www.datadoghq.com/pricing/
+[8]: /account_management/users/default_roles/
+[9]: https://app.datadoghq.com/account/billing_history
+[10]: mailto:billing@datadoghq.com
+[11]: https://app.datadoghq.com/account/billing

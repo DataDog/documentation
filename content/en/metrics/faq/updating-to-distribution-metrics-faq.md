@@ -8,7 +8,7 @@ further_reading:
   text: "How to Send Logs to Datadog via External Log Shippers?"
 ---
 
-## Why has my Distribution Metrics page been deprecated?
+## Why has my distribution metrics page been deprecated?
 
 Datadog has released a new pipeline for calculating globally accurate percentiles for your distribution metrics --- this unlocks more query functionality and an easier configuration workflow for distributions.
 

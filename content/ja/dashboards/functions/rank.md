@@ -53,4 +53,4 @@ aliases:
 {{< /whatsnext >}}
 
 
-[1]: http://en.wikipedia.org/wiki/Norm_(mathematics
+[1]: http://en.wikipedia.org/wiki/Norm_(mathematics)

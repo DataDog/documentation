@@ -37,7 +37,7 @@ Paramètres de la fonction check de service :
 
 Choisissez votre langage pour obtenir un exemple de code de check de service :
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -143,7 +143,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 

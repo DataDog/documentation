@@ -21,6 +21,7 @@ private: true
     {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}Docker Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Lambda Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Setting File Permissions for Rotating Logs (Linux){{< /nextlink >}}
+    {{< nextlink href="/logs/guide/how-to-set-up-only-logs" >}}Use the Datadog Agent for Log Collection Only{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

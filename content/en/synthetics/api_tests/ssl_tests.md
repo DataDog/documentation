@@ -33,7 +33,12 @@ After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
 2. Add **Advanced Options** (optional) to your test:
     * **Accept self-signed certificates**: Bypass any server error related to a self-signed certificate.
-    * **Client certificate**: Authenticate through mTLS by uploading your client certificate and associated private key.
+    * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+  
+  ```
+  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts 
+  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+  ```
 
 3. **Name** your SSL test.
 4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
@@ -56,12 +61,13 @@ SSL tests can run:
 
 Assertions define what an expected test result is. When hitting `Test URL` basic assertions on certificate validity, expiration data, TLS version, and `response time` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
-| Type          | Operator                                                                               | Value type                 |
-|---------------|----------------------------------------------------------------------------------------|----------------------------|
-| certificate   | `expires in more than`, `expires in less than`                                         | _Integer (number of days)_ |
-| property      | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | _String_ <br> _[Regex][10]_ |
-| response time | `is less than`                                                                         | _Integer (ms)_             |
-| TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
+| Type                  | Operator                                                                               | Value type                 |
+|-----------------------|----------------------------------------------------------------------------------------|----------------------------|
+| certificate           | `expires in more than`, `expires in less than`                                         | _Integer (number of days)_ |
+| property              | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | _String_ <br> _[Regex][9]_ |
+| response time         | `is less than`                                                                         | _Integer (ms)_             |
+| maximum TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
+| minimum TLS version   | `is more than`, `is more than or equal`                                                | _Decimal_                  |
 
 You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 

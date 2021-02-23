@@ -1,7 +1,7 @@
 ---
 title: アラート設定
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /ja/guides/monitors/
   - /ja/guides/monitoring/

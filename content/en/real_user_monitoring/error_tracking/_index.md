@@ -19,7 +19,7 @@ further_reading:
 
 {{< img src="real_user_monitoring/error_tracking/page.png" alt="Error Tracking Page"  >}}
 
-## What is Error Tracking?
+## What is error tracking?
 
 Datadog collects a lot of errors. It's critical to the health of your system to monitor these errors, but there can be so many individual error events that it’s hard to identify which ones matter the most and should be fixed first. 
 
@@ -37,6 +37,10 @@ To quickly get started with error tracking:
 
 1. Download the latest version of the [RUM Browser SDK][3].
 2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][4].
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">The Datadog for Government site does not support sending alerts for new error tracking issues.</div>
+{{< /site-region >}}
 
 ### Upload mapping files
 
@@ -87,6 +91,8 @@ For Error Tracking to properly work with your source maps, you must configure yo
 -   The size of each source map augmented with the size of the related minified file does not exceed __our limit of 50mb__. This sum can be reduced by configuring your bundler to split the source code into multiple smaller chunks ([see how to do this with WebpackJS][6]).
 
 **Note**: Currently only source maps with the `.min.js` extension will work to correctly unminify stack traces in the Error Tracking UI. Source maps with other extensions (for example, `.mjs`, etc.) while accepted will not unminify stack traces. 
+
+<div class="alert alert-info">A given JavaScript source file can be served from different subdomains depending on the environment (for example, staging or production). You can upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full url (specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).</div>
 
 ## Further Reading
 

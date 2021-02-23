@@ -1,3 +1,4 @@
 ---
 title: ダウンタイム
+headless: true
 ---

@@ -13,7 +13,7 @@ further_reading:
       text: 'Cluster Agent documentation'
 ---
 
-## How it Works
+## Overview
 
 The cluster check feature provides the ability to Autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services).
 
@@ -119,7 +119,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 [Restart the Agent][5] to apply the configuration change.
 
-## Setting up Check Configurations via Kubernetes Service Annotations
+## Setting up check configurations with Kubernetes service annotations
 
 Similar to [annotating Kubernetes Pods][6], services can be annotated with the following syntax:
 
@@ -132,7 +132,7 @@ ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 
 The `%%host%%` [template variable][7] is supported and is replaced by the endpoints' IPs. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip` tags are automatically added to the instances.
 
-### Template Source: Standard Labels
+### Template source: standard labels
 
 ```yaml
 tags.datadoghq.com/env: "<ENV>"

@@ -175,7 +175,7 @@ def check(self, instance):
     self.process(instance)
 ```
 
-### Putting It All Together
+### Putting it all together
 
 ```python
 from datadog_checks.base import ConfigurationError, OpenMetricsBaseCheck

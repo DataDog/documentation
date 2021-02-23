@@ -27,7 +27,7 @@ Collect Apigee proxy logs to track errors, response time, duration, latency and 
 
 ## Setup
 
-#### Log Collection
+#### Log collection
 
 
 Send Apigee proxy logs to Datadog using Apigee's [JavaScript policy][1].

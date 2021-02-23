@@ -11,7 +11,7 @@ This guide walks you through all the steps to achieving visibility across metric
 
 ### Ingest Lambda metrics
 
-You need to enable the Amazon Web Services integration to begin collecting CloudWatch metrics from Lambda functions. To do this, [follow the steps on the Amazon Web Services documentation][1].  
+You need to enable the Amazon Web Services integration to begin collecting CloudWatch metrics from Lambda functions. To do this, [follow the steps on the Amazon Web Services documentation][1].
     
 If you set up the AWS integration prior to reading this guide, ensure that:  
 - In the AWS integration tile, Lambda is checked under metric collection.  
@@ -185,7 +185,7 @@ If something is already subscribing to a Log Group that you want to monitor with
 
 If your logs still aren’t appearing in Datadog, you can [follow the troubleshooting steps here][9].  
 
-### Triage your Lambda Errors in the Log Explorer
+### Triage your Lambda errors in the log explorer
 
 You can visit the Datadog Serverless view again to view all of your Lambda functions. Now, if you navigate to a specific function, you are able to see the logs being emitted from the function. From here, you can navigate to the Log Explorer to learn more about the log.
 
@@ -258,7 +258,7 @@ With logs, traces and enhanced metrics all in one place, you can efficiently ide
 
 ## Serverless integrations and custom metrics
 
-### Datadog’s Serverless integrations
+### Datadog’s serverless integrations
 
 As outlined in Datadog’s [State of Serverless report][10], monitoring health across your serverless ecosystem requires visibility over more than just your Lambda functions. Most notably, Lambda functions will often interact with SQS and DynamoDB in the same request. Datadog offers integrations and dashboards with all the services interacting with your Lambda functions.
 
