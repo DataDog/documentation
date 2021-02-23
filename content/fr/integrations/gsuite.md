@@ -1,23 +1,23 @@
 ---
-"categories":
-- log collection
-- security
-"ddtype": "crawler"
-"dependencies": []
-"description": "Importez vos logs de sécurité et d'audit G Suite dans Datadog."
-"doc_link": "https://docs.datadoghq.com/integrations/gsuite/"
-"git_integration_title": "gsuite"
-"has_logo": !!bool "true"
-"integration_title": "G Suite"
-"is_public": !!bool "true"
-"kind": "integration"
-"manifest_version": "1.0"
-"name": "gsuite"
-"public_title": "Intégration Datadog/G Suite"
-"short_description": "Importez vos logs de sécurité et d'audit G Suite dans Datadog."
-"version": "1.0"
+categories:
+  - log collection
+  - security
+ddtype: crawler
+dependencies: []
+description: "Importez vos logs de sécurité et d'audit G\_Suite dans Datadog."
+doc_link: 'https://docs.datadoghq.com/integrations/gsuite/'
+draft: false
+git_integration_title: gsuite
+has_logo: true
+integration_title: G Suite
+is_public: true
+kind: integration
+manifest_version: '1.0'
+name: gsuite
+public_title: "Intégration Datadog/G\_Suite"
+short_description: "Importez vos logs de sécurité et d'audit G\_Suite dans Datadog."
+version: '1.0'
 ---
-
 ## Présentation
 
 Cette intégration permet d'importer vos logs de sécurité G Suite dans Datadog. Une fois activée, Datadog commence automatiquement à recueillir les logs à partir des services G Suite suivants :
@@ -40,12 +40,14 @@ Cette intégration permet d'importer vos logs de sécurité G Suite dans Datado
 ## Implémentation
 ### Installation
 
-Pour configurer l'intégration Datadog/G Suite, cliquez sur le bouton *Connect a new G Suite domain* dans votre [carré d'intégration Datadog/G Suite](https://app.datadoghq.com/account/settings#integrations/gsuite) et autorisez Datadog à accéder à l'API d'administration G Suite.
+Pour configurer l'intégration Datadog/G Suite, cliquez sur le bouton *Connect a new G Suite domain* dans votre [carré d'intégration Datadog/G Suite][1] et autorisez Datadog à accéder à l'API d'administration G Suite.
 
 ## Données collectées
 ### Logs
 
-Consultez la [documentation sur le SDK G Suite Admin](https://developers.google.com/admin-sdk/reports/v1/reference/activities/list) pour obtenir la liste complète des logs recueillis ainsi que leur contenu.
+Consultez la [documentation sur le SDK G Suite Admin][2] (en anglais) pour obtenir la liste complète des logs recueillis ainsi que leur contenu.
+
+**Remarque** : les logs de sécurité G Suite sont indexés toutes les 90 minutes, car Google s'impose une limite de fréquence pour la récupération de ces logs. Les logs de cette intégration sont transmis toutes les 90 à 120 minutes.
 
 ### Métriques
 
@@ -61,5 +63,8 @@ L'intégration G Suite n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
+[1]: https://app.datadoghq.com/account/settings#integrations/gsuite
+[2]: https://developers.google.com/admin-sdk/reports/v1/reference/activities/list
+[3]: https://docs.datadoghq.com/fr/help/

@@ -42,9 +42,6 @@ func main() {
 }
 ```
 
-**Remarque** : vous pouvez utiliser l'[API OpenTracing][1] conjointement avec l'API normale ou les intégrations Datadog. Elles se basent toutes sur le même traceur. Consultez la [documentation relative à l'API][2] pour obtenir davantage d'exemples et de détails.
-
-
 [1]: https://github.com/opentracing/opentracing-go
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
 [3]: http://opentracing.io
