@@ -129,10 +129,10 @@ To manually correlate your [APM traces][9] with application logs:
     | Required key   | Description                                  |
     | -------------- | -------------------------------------------- |
     | `dd.env`       | Globally configures the `env` for the tracer. Defaults to `""` if not set. |
-    | `dd.service`   | Globally configures the root service name. Ddefaults to the name of the application or IIS site name if not set.  |
+    | `dd.service`   | Globally configures the root service name. Defaults to the name of the application or IIS site name if not set.  |
     | `dd.version`   | Globally configures `version` for the service. Defaults to `""` if not set.  |
     | `dd.trace_id`  | Active trace ID during the log statement. Defaults to `0` if no trace.  |
-    | `dd.span_id`   | Active span ID during the log statement. Default to 0 if no trace. |
+    | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
 
 Examples of adding correlation identifiers to the log context:
 
