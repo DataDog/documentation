@@ -144,7 +144,7 @@ La solution [Security Monitoring][23] de Datadog détecte automatiquement les me
 [17]: /fr/dashboards/functions/
 [18]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
 [19]: /fr/monitors/
-[20]: /fr/network_performance_monitoring/
+[20]: /fr/network_monitoring/performance
 [21]: /fr/real_user_monitoring/
 [22]: /fr/infrastructure/serverless/
 [23]: /fr/security_monitoring/

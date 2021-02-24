@@ -21,11 +21,11 @@ Datadog permet aux clients d'envoyer des données de différentes façons, par e
 
 ## Métadonnées
 
-Les métadonnées regroupent principalement les [tags][6], qui respectent généralement le format `key:value` (par exemple, `env:prod`). Les métadonnées permettent de filtrer et de regrouper des données client comme les métriques d'infrastructures, l'APM et les logs. Les métadonnées ne doivent pas contenir de données personnelles pour l'utilisation prévue du service.
+Les métadonnées regroupent principalement les [tags][6], qui respectent généralement le format `key:value` (par exemple, `env:prod`). Les métadonnées permettent de filtrer et de regrouper des données client comme les métriques d'infrastructure, l'APM et les logs. Les métadonnées ne doivent pas contenir de données personnelles pour l'utilisation prévue du service.
 
-## Métriques d'infrastructures
+## Métriques d'infrastructure
 
-Les métriques d'infrastructures sont des séries temporelles représentant des noms de métriques donnés. Associées aux métadonnées, elles permettent de remplir des graphiques. Les noms de métriques et les séries temporelles ne doivent pas contenir de données personnelles pour l'utilisation prévue du service.
+Les métriques d'infrastructure sont des séries temporelles représentant des noms de métriques donnés. Associées aux métadonnées, elles permettent de remplir des graphiques. Les noms de métriques et les séries temporelles ne doivent pas contenir de données personnelles pour l'utilisation prévue du service.
 
 ## APM
 
