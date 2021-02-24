@@ -131,11 +131,44 @@ For a full list of available parameters for instances, including `namespace` and
 
     {{< img src="integrations/guide/prometheus_kubernetes/prometheus_collected_metric_kubernetes.png" alt="Prometheus metric collected kubernetes">}}
 
+## Metric collection with Prometheus annotations
+
+With Prometheus Autodiscovery, the Datadog Agent is able to detect native Prometheus annotations (for example: `prometheus.io/scrape`, `prometheus.io/path`, `prometheus.io/port`) and schedule OpenMetrics checks automatically to collect Prometheus metrics in Kubernetes.
+
+### Requirements
+
+- Datadog Agent 7 or 6.26+ (for Pod checks)
+- Datadog Cluster Agent 1.11+ (for service and endpoint checks)
+
+### Configuration
+
+In your Helm `values.yaml`, add the following:
+
+```
+...
+datadog:
+...
+  prometheusScrape:
+    enabled: true
+...
+```
+
+This instructs the Datadog Agent to detect the pods that have native Prometheus annotations and generate corresponding OpenMetrics checks.
+
+It also instructs the Datadog Cluster Agent (if enabled) to detect the services that have native Prometheus annotations and generate corresponding OpenMetrics checks.
+
+- `prometheus.io/scrape=true`: Required.
+- `prometheus.io/path`: Optional, defaults to `/metrics`.
+- `prometheus.iioi/port`: Optional, default is `%%port%%`, a [template variable][13] that is replaced by the container/service port.
+
+This configuration generates a check that collects all metrics exposed using the default configuration of the [OpenMetrics integration][1].
+
+
 ## From custom to official integration
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][13] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][14] integration.
 
 ## Further Reading
 
@@ -153,4 +186,5 @@ Official integrations have their own dedicated directories. There's a default in
 [10]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [11]: /resources/yaml/prometheus.yaml
 [12]: https://app.datadoghq.com/metric/summary
-[13]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[13]: /agent/faq/template_variables/
+[14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
