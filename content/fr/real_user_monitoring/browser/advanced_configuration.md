@@ -332,7 +332,7 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 
 ### Actions utilisateur personnalisées
 
-Une fois la fonctionnalité Real User Monitoring (RUM) initialisée, générez des actions utilisateur lorsque vous souhaitez surveiller des interactions spécifiques sur les pages de votre application ou mesurer des délais personnalisés avec l'API `addUserAction(name: string, context: Context)` :
+Une fois la fonctionnalité Real User Monitoring (RUM) initialisée, générez des actions utilisateur lorsque vous souhaitez surveiller des interactions spécifiques sur les pages de votre application ou mesurer des délais personnalisés avec l'API `addAction(name: string, context: Context)` :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -340,10 +340,10 @@ Une fois la fonctionnalité Real User Monitoring (RUM) initialisée, générez d
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addUserAction('<NOM>', '<OBJET_JSON>');
+datadogRum.addAction('<NOM>', '<OBJET_JSON>');
 
 // Exemple de code
-datadogRum.addUserAction('checkout', {
+datadogRum.addAction('checkout', {
     cart: {
         amount: 42,
         currency: '$',
@@ -357,12 +357,12 @@ datadogRum.addUserAction('checkout', {
 {{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('<NOM>', '<OBJET_JSON>');
+    DD_RUM.addAction('<NOM>', '<OBJET_JSON>');
 })
 
 // Exemple de code
 DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',
@@ -376,11 +376,11 @@ DD_RUM.onReady(function() {
 {{% tab "CDN synchrone" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addUserAction('<NOM>', '<OBJET_JSON>');
+window.DD_RUM && DD_RUM.addAction('<NOM>', '<OBJET_JSON>');
 
 // Exemple de code
 window.DD_RUM &&
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',
