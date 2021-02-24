@@ -118,7 +118,7 @@ In addition to default attributes, add user related data to all RUM event types 
 |------------|--------|----------------------------|
 | `session.time_spent` | number (ns) | Duration of the user session. |
 | `session.view.count`        | number      | Count of all views collected for this session. |
-| `session.error.count`      | number      | Count of all errors collected for this session.  |  
+| `session.error.count`      | number      | Count of all errors collected for this session.  |
 | `session.resource.count`         | number      | Count of all resources collected for this session. |
 | `session.action.count`      | number      | Count of all actions collected for this session. |
 | `session.long_task.count`      | number      | Count of all long tasks collected for this session. |
@@ -188,7 +188,7 @@ RUM view performance metrics are collected from both the [Paint Timing API][2] a
 | `view.error.count`            | number      | Count of all errors collected for this view.                                                                                                                                                                        |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
-| `view.action.count`      | number      | Count of all actions collected for this view.                                                                                     
+| `view.action.count`      | number      | Count of all actions collected for this view.
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [2]: https://www.w3.org/TR/paint-timing/
@@ -309,7 +309,7 @@ Once an interaction is detected, all new RUM events are attached to the ongoing 
 Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
 ### Custom user actions
-Custom user actions are user actions declared and sent manually via the [`addUserAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
+Custom user actions are user actions declared and sent manually via the [`addAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
 
 ### Action timing metrics
 
