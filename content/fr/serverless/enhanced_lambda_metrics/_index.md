@@ -29,15 +29,15 @@ Les métriques Lambda optimisées en temps réel suivantes sont disponibles. Ell
 | **aws.lambda.enhanced.timeouts**  | Mesure le nombre de fois qu'une fonction a expiré.                        |
 | **aws.lambda.enhanced.out_of_memory**  | Mesure le nombre de fois qu'une fonction est arrivée à court de mémoire.                        |
 
-**Remarque :** les métriques optimisées sont envoyées au Forwarder Datadog via CloudWatch Logs. Votre volume de logs dans CloudWatch sera donc amené à augmenter, ce qui peut avoir une incidence sur votre facture AWS. Pour désactiver l'envoi des métriques optimisées, définissez la variable d'environnement `DD_ENHANCED_METRICS` sur `false` sur vos fonctions Lambda AWS.
+**Remarque :** les métriques optimisées sont envoyées au Forwarder Datadog via CloudWatch Logs. Votre volume de logs dans CloudWatch sera donc amené à augmenter, ce qui peut avoir une incidence sur votre facture AWS. Pour désactiver l'envoi des métriques optimisées, définissez la variable d'environnement `DD_ENHANCED_METRICS` sur `false` sur vos fonctions Lambda AWS.
 
 ## Activer les métriques Lambda optimisées
 
 {{< img src="serverless/integration/lambda_metrics.png" alt="Collecte de métriques Lambda" >}}
 
-Suivez les [instructions d'installation][3] pour configurer l'instrumentation de vos applications sans serveur. Les métriques Lambda optimisées seront alors activées par défaut.
+Suivez les [instructions d'installation][5] pour configurer l'instrumentation de vos applications sans serveur. Les métriques Lambda optimisées seront alors activées par défaut.
 
-**Remarque** : pour activer les métriques Lambda optimisées sans envoyer les logs de vos fonctions à Datadog, assurez-vous que la variable d'environnement `DdForwarderLog` est définie sur `false` sur le [Forwarder Datadog][5].
+**Remarque** : pour activer les métriques Lambda optimisées sans envoyer les logs de vos fonctions à Datadog, assurez-vous que la variable d'environnement `DdForwardLog` est définie sur `false` sur le [Forwarder Datadog][2].
 
 ## Consulter votre dashboard
 
@@ -45,7 +45,7 @@ Une fois que vous avez activé les métriques Lambda optimisées, consultez votr
 
 [1]: /fr/serverless/datadog_lambda_library
 [2]: /fr/serverless/forwarder/
-[3]: /fr/integrations/amazon_lambda/?tab=nodejs#metric-collection
-[4]: /fr/serverless/installation/
-[5]: /fr/integrations/amazon_web_services/#setup
-[6]: /fr/serverless/forwarder
+[3]: /fr/integrations/amazon_lambda/#metric-collection
+[4]: /fr/metrics/distributions/
+[5]: /fr/serverless/installation/
+[6]: https://app.datadoghq.com/screen/integration/30306
