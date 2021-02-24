@@ -387,13 +387,13 @@ Example:
 
 ###  Monitoring a Windows service
 
-On your target host, launch the Datadog Agent Manager and select the "Windows Service" Integration from the list. For this, there is an out-of-the-box example; however, this example uses DHCP.
+On your target host, launch the Datadog Agent Manager and select the "Windows Service" integration from the list. There is an out-of-the-box example; however, this example uses DHCP.
 
 To get the name of the service, open `services.msc` and locate your target service. Using DHCP as the target, you can see the service name at the top of the service properties window:
 
 {{< img src="agent/faq/DHCP.png" alt="DHCP"  style="width:75%;">}}
 
-When adding your own services, be sure to follow the formatting exactly as shown. If formatting is not correct the integration fails.
+When adding your own services, be sure to follow the formatting exactly as shown. If formatting is not correct the integration fails. **Note**: Special characters in a service name must be escaped. For example, the name `MSSQL$BILLING` can be added with `MSSQL\$BILLING`.
 
 {{< img src="agent/faq/windows_DHCP_service.png" alt="Windows DHCP Service"  style="width:75%;">}}
 
