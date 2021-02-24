@@ -1740,7 +1740,7 @@ main:
     identifier: security_monitoring_getting_started
     weight: 1
   - name: Detection Rules
-    url: security_monitoring/detection_rules
+    url: security_monitoring/detection_rules/
     parent: security_compliance_monitoring
     identifier: detection_rules
     weight: 2
