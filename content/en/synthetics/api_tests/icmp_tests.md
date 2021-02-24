@@ -32,7 +32,6 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 
 {{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
-
 1. Specify the **Domain Name** or **IP address** to run your test on.
 2. Select/Deselect option to **track number of network hops (TTL)**.
 3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to increase or decrease.
@@ -84,7 +83,6 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 #### Fast retry
 
 Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][10].
-
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
