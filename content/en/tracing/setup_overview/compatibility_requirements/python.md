@@ -34,7 +34,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [djangorestframework][6]  | >= 3.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
 | [Falcon][7]               | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
 | [Flask][8]                | >= 0.10           | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask   |
-| [Fastapi][9]             | >= 0.51           | https://ddtrace.readthedocs.io/en/stable/integrations.html#fastapi |
+| [FastAPI][9]              | >= 0.51           | https://ddtrace.readthedocs.io/en/stable/integrations.html#fastapi |
 | [Molten][10]               | >= 0.7.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
 | [Pylons][11]              | >= 0.9.6          | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
 | [Pyramid][12]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
