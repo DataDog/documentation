@@ -1,42 +1,45 @@
 ---
-title: Detection Rules
-kind: documentation
-aliases:
-  - /security_monitoring/detection_rules/
+title: Create and Manage Security Monitoring Rules
 further_reading:
+- link: "/security_monitoring/default_rules/"
+  tag: "Documentation"
+  text: "Configure default Security Monitoring rules"
 - link: "/security_monitoring/explorer/"
   tag: "Documentation"
-  text: "Security Signals Explorer"
+  text: "Learn about the Security Signals Explorer"
 ---
 
-## Overview
+## Create a New Detection Rule
 
-Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, Datadog generates a Security Signal. Datadog provides [Default Rules][1], which begin detecting threats in your environment immediately.
+To create a new Security Monitoring detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
 
-## Create a New Rule
+## Select a detection rule type
 
-To create a new rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
+For Security Monitoring, select **Log Detection** to analyze ingested logs in real time.
 
-### Select a rule type
+## Choose a detection method
 
-There are two rule types available: `Log Detection` and `Cloud Configuration`.
-
-Analyze ingested logs in real time with **Log Detection** or continuously scan the state of your cloud environment with the **Cloud Configuration**.
-
-{{< tabs >}}
-{{% tab "Log Detection" %}}
-
-### Detection method
-
-#### Threshold
+### Threshold
 
 Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal occurs when the condition is met.
 
-#### New term
+#### Count unique
+#### Roll up window
+
+### New term
 
 Detect when an attribute changes to a new value. For example, if you create a trigger based on a specific attribute, such as `protocol` or `IP address`, a security signal will occur whenever the value of that attribute changes from it's original state.
 
-### Define the search query
+#### detect new value
+#### learning duration
+#### a TTL on the time we keep the values
+
+### Define the search query and rule case
+
+{{< tabs >}}
+{{% tab "Threshold" %}}
+
+#### Search query
 
 {{< img src="security_monitoring/detection_rules/define_search_query.png" alt="Define the search query" >}}
 
@@ -47,8 +50,6 @@ Optionally, define a signal grouping. The defined group-by generates a signal fo
 Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
-
-### Define the rule cases
 
 {{< img src="security_monitoring/detection_rules/define_rule_case.png" alt="Define the rule case" >}}
 
@@ -62,11 +63,29 @@ A rule case contains logical operations (`>, >=, &&, ||`) to determine if a sign
 
 Provide a **name**, for example "Case 1", for each rule case. This name is appended to the rule name when a signal is generated.
 
+{{% /tab %}}
+
+{{% tab "New Term" %}}
+
+#### Search query
+
+{{< img src="security_monitoring/detection_rules/define_search_query.png" alt="Define the search query" >}}
+
+Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
+
+Optionally, define a signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (e.g. user, IP, etc.). The group-by is also used to [join the queries together](#joining-queries).
+
+**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 #### Severity and notification
 
 Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 
-In the “Notify” section, configure zero or more [notification targets][2] for each rule case.
+In the “Notify” section, configure zero or more [notification targets][1] for each rule case.
 
 #### Time windows
 
@@ -82,7 +101,7 @@ Additional cases can be added by clicking the **Add Case** button.
 
 ### Security signal message
 
-The notification box has the same Markdown and preview features as those of [monitor notifications][3].
+The notification box has the same Markdown and preview features as those of [monitor notifications][2].
 
 The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the Security Signal.
 
@@ -108,52 +127,9 @@ In this example, when greater than 5 failed logins and a successful login exist 
 
 {{< img src="security_monitoring/detection_rules/gbv2.png" alt="Set rule cases" >}}
 
-[1]: /logs/explorer/#filters-logs
-[2]: /monitors/notifications/?tab=is_alert#integrations
-[3]: /monitors/notifications/?tab=is_alert
-{{% /tab %}}
-{{% tab "Cloud Configuration" %}}
-
-<div class="alert alert-warning">
-Compliance Monitoring is currently available for private beta. Use this <a href="https://docs.google.com/forms/d/e/1FAIpQLScTA913tNGptcAeNNdWlvgECjekYoDVJwR-OkMtZYnJnq-FWw/viewform">form</a> to request access.
-</div>
-
-### Detection method
-
-#### Threshold
-
-Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal occurs when the condition is met.
-
-### Define configuration query
-
-The configuration query is automatically configured and grouped by `resource_type` and `resource_id`. For example, if you are using the [AWS Cloudtrail][1] integration, all security signals are automatically tagged and populated based on that integration. There are also default rules available based on [cloud configuration][2].
-
-Set a custom severity and notification for all rules, as detailed below, or use a default rule for better control over individual cloud configurations.
-
-### Set severity and notifications
-
-Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the “Notify” section, configure zero or more [notification targets][3] for each rule case.
-
-### Say what's happening
-
-The notification box has the same Markdown and preview features as those of [monitor notifications][4].
-
-Tag your signals with different tags, for example `security:attack` or `technique:T1110-brute-force`.
-
-**Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
-
-[1]: https://docs.datadoghq.com/integrations/amazon_cloudtrail/#overview
-[2]: https://docs.datadoghq.com/security_monitoring/default_rules
-[3]: https://app.datadoghq.com/security/configuration/rules/new
-[4]: /monitors/notifications/?tab=is_alert
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Manage Rules
 
-The [Security Configuration Detection Rules][2] page lets you search of all Detection Rules. Quickly enable, disable, edit, delete, clone, or view signals generated by any of these rules. Create a [new rule][3] from scratch from this view.
+The [Security Configuration Detection Rules][1] page lets you search all Detection Rules. Quickly enable, disable, edit, delete, clone, or view signals generated by any of these rules. Create a [new rule][2] from scratch from this view.
 
 ### Finding rules
 
@@ -192,6 +168,5 @@ Delete a rule by hovering over the rule and clicking the **Delete** button.
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_monitoring/default_rules/
-[2]: https://app.datadoghq.com/security/configuration/rules
-[3]: https://app.datadoghq.com/security/configuration/rules/new
+[1]: /monitors/notifications/?tab=is_alert#integrations
+[2]: /monitors/notifications/?tab=is_alert
