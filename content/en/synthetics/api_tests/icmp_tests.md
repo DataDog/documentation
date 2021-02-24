@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-ICMP tests allow you to easily **monitor the availability of your hosts** and **diagnose network communication issues**. By asserting on the values received from one or more **ICMP ping(s)** to your endpoint, Datadog can help **detect connectivity issues, above-quota latency or hops, and unexpected changes in security firewall configuration**.  
+ICMP tests allow you to easily **monitor the availability of your hosts** and **diagnose network communication issues**. By asserting on the values received from one or more **ICMP ping(s)** to your endpoint, Datadog can help **detect connectivity issues, above-quota latency for round trip times, and unexpected changes in security firewall configuration**. The tests can also track the **number of network hops (TTL)** required to connect to your host and view **traceroute** results to **discover details on each network hop** along the path.
 
 ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand or from within your [CI/CD pipelines][3].
 
@@ -34,10 +34,11 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 
 
 1. Specify the **Domain Name** or **IP address** to run your test on.
-2. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to increase or decrease.
-3. **Name** your ICMP test.
-4. Add `env` **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
-5. Select the **Locations** to run your ICMP test from: ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger the ICMP pings from outside or inside your network.
+2. Select/Deselect option to **track number of network hops (TTL)**.
+3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to increase or decrease.
+4. **Name** your ICMP test.
+5. Add `env` **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
+6. Select the **Locations** to run your ICMP test from: ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger the ICMP pings from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
 
@@ -58,10 +59,11 @@ ICMP tests can run:
 Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `latency`, `packet loss` and `ICMP ping result` is added. You must define at least one assertion for your test to monitor.
 
 | Type          | Aggregation    |Operator                                                                               | Value Type       |
-|---------------|----------------|------------------------------------------------------------------------|------------------|
-| latency       | `avg`, `max`, `min` or `jitter` |`is less than`, `is less than or equal`, <br> `is`, `is more than`, `is more than or equal` | _integer (ms)_   |
-| packet loss   | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _percentage (%)_ |
-| ICMP ping     | - |`Successful` or `Failed`                                                               | _string_         |
+|-----------------|----------------|------------------------------------------------------------------------|------------------|
+| latency         | `avg`, `max`, `min` or `jitter` |`is less than`, `is less than or equal`, <br> `is`, `is more than`, `is more than or equal` | _integer (ms)_    |
+| packet loss     | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _percentage (%)_ |
+| packet received | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
+| network hops    | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 
 You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
@@ -140,7 +142,6 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 | `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.                                                                                                                                                                                                                                                         |
 | DNS               | DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
 | `INVALID_REQUEST` | The configuration of the test is invalid (for example, a typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][8].                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. <br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. <br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
 
 ## Further Reading
@@ -160,4 +161,3 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [11]: https://www.markdownguide.org/basic-syntax/
 [12]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [13]: /synthetics/settings/#global-variables
-[14]: /synthetics/api_tests/errors/#ssl-errors
