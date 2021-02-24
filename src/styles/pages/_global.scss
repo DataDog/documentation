@@ -255,6 +255,8 @@ code + code.region-param {
     margin-bottom: 20px;
     &.nav-tabs {
         .nav-item {
+            z-index: 3;
+            
             &:before {
                 content: none;
             }
