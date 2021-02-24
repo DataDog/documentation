@@ -1,5 +1,5 @@
 ---
-title: Use the Datadog Agent for Log/Trace Collection Only
+title: Use the Datadog Agent for Log or Trace Collection Only
 aliases:
   - /logs/faq/how-to-set-up-only-logs
 kind: documentation
