@@ -217,7 +217,7 @@ Exemple :
 // dans votre client réseau :
 
 Global.rum.startResourceLoading(
-    resourceKey: "resource-key", 
+    resourceKey: "resource-key",
     request: request
 )
 
@@ -234,7 +234,7 @@ Pour en savoir plus et découvrir toutes les options disponibles, référez-vous
 ### Actions RUM
 
 Pour enregistrer manuellement les actions RUM instantanées (par exemple : `.tap`), utilisez :
-* `.addUserAction(type:name:)`
+* `.addAction(type:name:)`
 
 Pour enregistrer des actions RUM continues (par exemple : `.scroll`), utilisez :
 * `.startUserAction(type:name:)`
@@ -247,7 +247,7 @@ Exemple :
 // dans votre `UIViewController` :
 
 @IBAction func didTapDownloadResourceButton(_ sender: Any) {
-    Global.rum.addUserAction(
+    Global.rum.addAction(
         type: .tap,
         name: (sender as? UIButton).currentTitle ?? "",
     )

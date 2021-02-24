@@ -14,11 +14,11 @@ further_reading:
 Le service RUM de Datadog peut collecter des événements et des calculs de temps pertinentes grâce aux actions utilisateur personnalisées. À titre d'exemple, tout au long de ce guide, nous recueillons des informations sur les paiements des utilisateurs à partir d'un site Web de e-commerce.
 
 ## 1. Instrumenter votre code
-L'API `addUserAction` vous permet d'associer autant d'attributs que vous le souhaitez sous la forme d'un objet JavaScript. Dans l'exemple, des informations sur le panier sont envoyées lorsque l'utilisateur clique sur le bouton de paiement.
+L'API `addAction` vous permet d'associer autant d'attributs que vous le souhaitez sous la forme d'un objet JavaScript. Dans l'exemple, des informations sur le panier sont envoyées lorsque l'utilisateur clique sur le bouton de paiement.
 
 ```
 function onCheckoutButtonClick(cart) {
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         'amount': cart.amount, // p. ex. 42.12
         'items': cart.items, // p. ex. ['tomate', 'fraises']
     })

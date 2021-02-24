@@ -148,11 +148,11 @@ class SampleApplication : Application() {
 
    ```kotlin
       fun onResume(){
-        GlobalRum.get().startView(viewKey, viewName, viewAttributes)        
+        GlobalRum.get().startView(viewKey, viewName, viewAttributes)
       }
 
       fun onPause(){
-        GlobalRum.get().stopView(viewKey, viewAttributes)        
+        GlobalRum.get().stopView(viewKey, viewAttributes)
       }
    ```
 
@@ -170,11 +170,11 @@ class SampleApplication : Application() {
       }
    ```
 
-  ユーザーアクションを追跡するには、以下のように、`RumMonitor#addUserAction` を呼び出します。継続的なアクションの場合は `RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を呼び出します。
+  ユーザーアクションを追跡するには、以下のように、`RumMonitor#addAction` を呼び出します。継続的なアクションの場合は `RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を呼び出します。
 
    ```kotlin
       fun onUserInteraction(){
-        GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
+        GlobalRum.get().addAction(resourceKey, method, url, resourceAttributes)
       }
    ```
 
@@ -244,7 +244,7 @@ RUM データを追跡するために RumMonitor を作成する場合、`RumMon
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `startView(<key>, <name>, <attributes>)`   | 新しいビューが開始されたことを RumMonitor に通知します。ほとんどの場合、このメソッドは、最前面の `Activity` または `Fragment` の `onResume()` メソッドで呼び出す必要があります。 |
 | `stopView(<key>, <attributes>)`   | 現在のビューが停止したことを RumMonitor に通知します。ほとんどの場合、このメソッドは、最前面の `Activity` または `Fragment` の `onPause()` メソッドで呼び出す必要があります。 |
-| `addUserAction(<type>, <name>, <attributes>)`   | ユーザーアクションが発生したことを RumMonitor に通知します。 |
+| `addAction(<type>, <name>, <attributes>)`   | ユーザーアクションが発生したことを RumMonitor に通知します。 |
 | `startUserAction(<type>, <name>, <attributes>)`   | 継続的なユーザーアクションが開始されたことを RumMonitor に通知します (たとえば、ユーザーがリストをスクロールする)。 |
 | `stopUserAction(<type>, <name>, <attributes>)`   | 継続的なユーザーアクションが停止したことを RumMonitor に通知します。 |
 | `startResource(<key>, <method>, <url>, <attributes>)`   | アプリケーションが指定された URL で指定されたメソッド (例: `GET` または `POST`) を使用してリソースのロードを開始したことを RumMonitor に通知します。 |
@@ -256,7 +256,7 @@ RUM データを追跡するために RumMonitor を作成する場合、`RumMon
 
 ### ウィジェットの追跡
 
-通常の場合、ウィジェットは HomeScreen アプリケーションにより提供される `AppWidgetHostView` に表示されます。このコンポーネントに自動インスツルメンテーションは提供されません。ウィジェットから UI インタラクション情報を送信するには、Datadog の API を手動で呼び出します。サンプルアプリケーションで、例をご参照ください: 
+通常の場合、ウィジェットは HomeScreen アプリケーションにより提供される `AppWidgetHostView` に表示されます。このコンポーネントに自動インスツルメンテーションは提供されません。ウィジェットから UI インタラクション情報を送信するには、Datadog の API を手動で呼び出します。サンプルアプリケーションで、例をご参照ください:
 [ウィジェットの追跡](https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget)
 
 ## バッチコレクション
@@ -315,10 +315,10 @@ SQLiteOpenHelper の[生成された API ドキュメント][8]に従って、�
 これを行うと、データベースが破損している場合は常に検出され、関連する RUM エラーイベントが送信されます。
 
 ```kotlint
-   class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(<Context>, 
-                                                     <DATABASE_NAME>, 
-                                                     <CursorFactory>, 
-                                                     <DATABASE_VERSION>, 
+   class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(<Context>,
+                                                     <DATABASE_NAME>,
+                                                     <CursorFactory>,
+                                                     <DATABASE_VERSION>,
                                                      DatadogDatabaseErrorHandler()) {
                                 // …
 
