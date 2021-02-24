@@ -130,7 +130,7 @@ Update or remove this quota at any time when editing the Index:
 
 {{< img src="logs/indexes/index_quota.png" alt="index details"  style="width:70%;">}}
 
-**Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
+**Note**: Indexes daily quotas reset automatically at 2:00pm UTC (3:00pm CET, 10:00am EDT, 7:00am PDT).
 
 An event is generated when the daily quota is reached:
 
