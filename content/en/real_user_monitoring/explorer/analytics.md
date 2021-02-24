@@ -6,6 +6,9 @@ aliases:
   - /real_user_monitoring/rum_analytics
   - /real_user_monitoring/analytics
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-geomaps/"
+  tag: "Blog"
+  text: "Use geomaps to visualize your app data by location"
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
