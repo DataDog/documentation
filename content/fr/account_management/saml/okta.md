@@ -47,7 +47,7 @@ Il est conseillé de configurer Datadog en tant qu'application Okta manuellement
 * **sn** : user.lastName
 * **givenName** : user.firstName
 
-Pour en savoir plus sur la configuration du SAML pour votre compte Datadog, consultez la [page de la documentation dédiée au SAML][2].
+Pour en savoir plus sur la configuration du SAML pour votre compte Datadog, consultez la [page de la documentation dédiée au SAML][2]. Si vous utilisez la fonctionnalité de sous-domaine personnalisé, les détails associés figurent également sur cette page.
 
 Si vous devez importer un fichier `IDP.XML` dans Datadog et que vous n'êtes pas en mesure de configurer entièrement l'application dans Okta, consultez l'article [Acquérir le fichier de métadonnées idp.xml pour une application de modèle SAML][3] (en anglais). Vous y trouverez des instructions concernant les placeholders des différents champs.
 
