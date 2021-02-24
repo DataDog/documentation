@@ -80,10 +80,11 @@
             </div>
 
             <h4>Instructions</h4>
+            <p>Save example to <code>{{ $lang.example_file }}</code> and run following commands.</p>
 
             <pre class="chroma">
               <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="kn">export</span> <span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"{{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">{{ $url }}</span>{{ else }}{{ $url }}</span>{{ end }}{{ end }}"</span>
-<span class="n">{{ $lang.command }}</span></div></code></pre>
+<span class="n">{{ $lang.command }}</span> <span class="s1">"{{ $lang.example_file }}"</span></div></code></pre>
 
           </div>
           {{ $count = add $count 1 }}
