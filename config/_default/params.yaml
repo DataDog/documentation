@@ -11,18 +11,22 @@ code_languages:
     extension: py
     name: python
     syntax: python
+    command: python example.py
   'pybeta':
     extension: py
     name: python-beta
     syntax: python
+    command: python3 example.py
   'rb':
     extension: rb
     name: ruby
     syntax: ruby
+    command: ruby example.rb
   'rbbeta':
     extension: rbbeta
     name: ruby-beta
     syntax: ruby
+    command: ruby example.rb
   'sh':
     extension: sh
     name: curl
@@ -31,10 +35,12 @@ code_languages:
     extension: go
     name: go
     syntax: go
+    command: go main.go
   'java':
     extension: java
     name: java
     syntax: java
+    command: java Example.java
   'cs':
     extension: cs
     name: csharp
