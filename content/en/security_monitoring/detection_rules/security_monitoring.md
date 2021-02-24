@@ -28,7 +28,7 @@ Define when events exceed a user-defined threshold. For example, if you create a
 
 ### New term
 
-Detect when an attribute changes to a new value. For example, if you create a trigger based on a specific attribute, such as `protocol` or `IP address`, a security signal will occur whenever the value of that attribute changes from it's original state.
+Detect when an attribute changes to a new value. For example, if you create a trigger based on a specific attribute, such as `country` or `IP address`, a security signal will be generated whenever a new value is seen which has not been seen before.
 
 #### detect new value
 #### learning duration
