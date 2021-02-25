@@ -25,7 +25,7 @@ To control the functions whose invocations Datadog is monitoring, filter out par
 
 ### UI
 
-To use the UI to control which functions Datadog is monitoring, navigate to the [AWS Integration page][5] and add tags as `key:value` sets to the **to Lambdas with tag:** field.
+To use the UI to control which AWS Lambda functions Datadog is monitoring, navigate to the [AWS Integration page][5] and add tags as `key:value` sets to the **to Lambdas with tag:** field.
 
 To exclude functions with a given tag, add a `!` before the tag key. For example:
 
@@ -35,57 +35,11 @@ This filter excludes anything that is tagged with `env:staging` or `env:test1`.
 
 ### API
 
-{{< site-region region="us" >}}
-
-**Listing the current tag filter rules**:
-
-```shell
-curl -X GET 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<API_KEY>&application_key=<APPLICATION_KEY>' --data '{"account_id": "<AWS_ACCOUNT_ID>"}'
-
->{"filters":[{"tag_filter_str":"!copper:educated","namespace":"application_elb"}]}
-```
-
-**Setting the tag filter rule for a namespace**: namespace options are `"application_elb"`, `"elb"`, `"lambda"`, `"network_elb"`, `"rds"`, `"sqs"`, and `"custom"`.
-
-```shell
-curl -X POST 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<API_KEY>&application_key=<APPLICATION_KEY>' --data '{"account_id": "<AWS_ACCOUNT_ID>", "namespace": "application_elb", "tag_filter_str": "!copper:educated"}'  -H "Content-Type: text/plain"
-```
-
-**Deleting the tag filter rule for a namespace**:
-
-```shell
-curl -X DELETE 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<API_KEY>&application_key=<APPLICATION_KEY>'  --data '{"account_id": "<AWS_ACCOUNT_ID>","namespace":"<NAMESPACE>"}'
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-**Listing the current tag filter rules**:
-
-```shell
-curl -X GET 'https://app.datadoghq.eu/api/v1/integration/aws/filtering?api_key=<API_KEY>&application_key=<APPLICATION_KEY>' --data '{"account_id": "<AWS_ACCOUNT_ID>"}'
-
->{"filters":[{"tag_filter_str":"!copper:educated","namespace":"application_elb"}]}
-```
-
-**Setting the tag filter rule for a namespace**: namespace options are `"application_elb"`, `"elb"`, `"lambda"`, `"network_elb"`, `"rds"`, `"sqs"`, and `"custom"`.
-
-```shell
-curl -X POST 'https://app.datadoghq.eu/api/v1/integration/aws/filtering?api_key=<API_KEY>&application_key=<APPLICATION_KEY>' --data '{"account_id": "<AWS_ACCOUNT_ID>", "namespace": "application_elb", "tag_filter_str": "!copper:educated"}'  -H "Content-Type: text/plain"
-```
-
-**Deleting the tag filter rule for a namespace**:
-
-```shell
-curl -X DELETE 'https://app.datadoghq.eu/api/v1/integration/aws/filtering?api_key=<API_KEY>&application_key=<APPLICATION_KEY>'  --data '{"account_id": "<AWS_ACCOUNT_ID>","namespace":"<NAMESPACE>"}'
-```
-
-{{< /site-region >}}
+To use the API to control limit which AWS Lambda functions Datadog is monitoring, reference the [tag filter documentation][6].
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][6].
+For technical questions, contact [Datadog support][7].
 
 For billing questions, contact your [Customer Success][3] Manager.
 
@@ -94,4 +48,5 @@ For billing questions, contact your [Customer Success][3] Manager.
 [3]: mailto:success@datadoghq.com
 [4]: https://app.datadoghq.com/account/usage
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[6]: /help/
+[6]: /api/latest/aws-integration/#set-an-aws-tag-filter
+[7]: /help/
