@@ -23,13 +23,13 @@ code_languages:
     extension: rb
     name: ruby
     syntax: ruby
-    command: ruby
+    command: rb
     example_file: example.rb
   'rbbeta':
     extension: rbbeta
     name: ruby-beta
     syntax: ruby
-    command: ruby
+    command: rb
     example_file: example.rb
   'sh':
     extension: sh
