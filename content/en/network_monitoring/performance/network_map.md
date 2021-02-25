@@ -52,7 +52,7 @@ Use the page header to configure your network map:
 
     - **Show unresolved traffic**.
     - Hide network traffic outside a specified percentile range of the active network metric.
-        {{< img src="network_performance_monitoring/network_map/filtering_network_map.mp4" alt="Filtering network map flows" video="true"  width="50%" >}}
+      {{< img src="network_performance_monitoring/network_map/filtering_network_map.mp4" alt="Filtering network map flows" video="true"  width="50%" >}}
 
 ## Inspection
 
@@ -64,11 +64,11 @@ Click on a node and select _Inspect_ from the menu to contextualize it within th
 
 {{< img src="network_performance_monitoring/network_map/network_entity_zoom.mp4" alt="Network entity zoom" video="true" width="70%">}}
 
-## Network map hotkey list
+## Network map hotkeys list
 
 Change the layout of your network map with the following hotkey combinations:
 
-| Combination                 | Description                                                         |
+| Hotkey                      | Description                                                         |
 | --------------------------- | ------------------------------------------------------------------- |
 | `shift + ctrl + 3`          | 3D projection ON/OFF                                                |
 | `shift + ctrl + A`          | Arrows color (normal / edge)                                        |

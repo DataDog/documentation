@@ -82,11 +82,11 @@ If a monitor is enabled for a service, the circumference has a weighted border c
 
 Monitors are not constrained to APM monitors. The service tag, described above, can be used to associate any monitor type with a service.
 
-## Service map hotkey list
+## Service map hotkeys list
 
 Change the layout of your service map with the following hotkey combinations:
 
-| Combination                 | Description                                                         |
+| Hotkey                      | Description                                                         |
 | --------------------------- | ------------------------------------------------------------------- |
 | `shift + ctrl + 3`          | 3D projection ON/OFF                                                |
 | `shift + ctrl + A`          | Arrows color (normal / edge)                                        |
