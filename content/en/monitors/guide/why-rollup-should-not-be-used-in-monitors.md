@@ -29,6 +29,9 @@ For instance, if the rollup period is 1h and the evaluation timeframe is last 4h
 ## Example
 
 A monitor is defined on a metric such as `max(last_10m):sum:aws.s3_getRequests{*}.rollup(sum, 60) < 1` and for that example let's assume that a point is sent every second. 
+
+{{< img src="monitors/guide/monitor_rollup_example.jpg" alt="spaghetti" style="width:80%;">}}
+
 All the points have a value of 0 except one that is sent every 9min30s and has the value 100:
 
 | Timestamp    | value       |
