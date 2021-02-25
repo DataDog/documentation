@@ -44,28 +44,7 @@ Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
 
-
-[1]: /logs/search_syntax/
-{{% /tab %}}
-
-{{% tab "New Term" %}}
-
-### Search query
-
-{{< img src="security_monitoring/detection_rules/new_term.png" alt="Define the search query" >}}
-
-Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
-
-Optionally, you can select a value to detect and define a signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (e.g. user, IP, etc.). The group-by is also used to [join the queries together](#joining-queries).
-
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
-
-
-[1]: /logs/search_syntax/
-{{% /tab %}}
-{{< /tabs >}}
-
-### Joining queries
+#### Joining queries
 
 Joining together logs that span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
 
@@ -82,6 +61,25 @@ The Detection Rule cases join these queries together based on their group by val
 In this example, when greater than 5 failed logins and a successful login exist for the same `@usr.name`, the first case is matched and a Security Signal is generated.
 
 {{< img src="security_monitoring/detection_rules/gbv2.png" alt="Set rule cases" >}}
+
+[1]: /logs/search_syntax/
+{{% /tab %}}
+
+{{% tab "New Term" %}}
+
+### Search query
+
+{{< img src="security_monitoring/detection_rules/new_term.png" alt="Define the search query" >}}
+
+Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
+
+Select a value to detect and, optionally, define a signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (e.g. user, IP, etc.).
+
+**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+
+[1]: /logs/search_syntax/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Set a Rule Case
 
