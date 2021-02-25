@@ -192,7 +192,7 @@ At any moment, and depending on your current aggregation, **export** your explor
 [4]: /logs/indexes
 [5]: /logs/explorer/facets/
 [6]: /logs/logs_to_metrics
-[7]: /logs/archives/rehydrating
+[7]: /logs/processing/processors/#grok-parser
 [8]: /dashboards/
 [9]: /monitors/monitor_types/log/
 [10]: /integrations/#cat-notification
