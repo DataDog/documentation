@@ -129,7 +129,7 @@ window.DD_RUM &&
 
 ### カスタムユーザーアクション
 
-リアルユーザーモニタリング (RUM) を初期化したら、`addUserAction(name: string, context: Context)` API を使用してアプリケーションページの特定のインタラクションを監視したり、カスタムタイミングを測定したりする場合のユーザーアクションを生成します。
+リアルユーザーモニタリング (RUM) を初期化したら、`addAction(name: string, context: Context)` API を使用してアプリケーションページの特定のインタラクションを監視したり、カスタムタイミングを測定したりする場合のユーザーアクションを生成します。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -137,10 +137,10 @@ window.DD_RUM &&
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addUserAction('<名前>', '<JSON_オブジェクト>');
+datadogRum.addAction('<名前>', '<JSON_オブジェクト>');
 
 // Code example
-datadogRum.addUserAction('checkout', {
+datadogRum.addAction('checkout', {
     cart: {
         amount: 42,
         currency: '$',
@@ -154,11 +154,11 @@ datadogRum.addUserAction('checkout', {
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addUserAction('<名前>', '<JSON_オブジェクト>');
+window.DD_RUM && DD_RUM.addAction('<名前>', '<JSON_オブジェクト>');
 
 // Code example
 window.DD_RUM &&
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',

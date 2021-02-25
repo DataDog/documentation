@@ -143,7 +143,7 @@ Consultez notre [guide sur l'utilisation des logs][19] pour découvrir comment s
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
-[1]: /fr/logs/indexes/
+[1]: https://app.datadoghq.com/logs/pipelines/
 [2]: /fr/logs/explorer/#visualization
 [3]: /fr/logs/explorer/patterns/
 [4]: /fr/logs/explorer/analytics/

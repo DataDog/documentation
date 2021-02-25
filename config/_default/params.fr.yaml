@@ -4,8 +4,8 @@ meta_title: Débuter avec Datadog
 meta_description: 'Datadog, le principal prestataire de services de surveillance à l''échelle du cloud.'
 disclaimer: 'Cette page n''est pas encore disponible en français, sa traduction est en cours. <br> Si vous avez des questions ou des retours sur notre projet  de traduction actuel, <a href="https://docs.datadoghq.com/fr/help/">n''hésitez pas à nous contacter</a>.'
 announcement_banner:
-  desktop_message: "Rapport de recherche Datadog\_: Bilan sur l'adoption de l'informatique sans serveur"
-  mobile_message: "Rapport\_: Bilan sur l'adoption de l'informatique sans serveur"
-  link: 'https://www.datadoghq.com/state-of-serverless/'
-  exclude: []
+  desktop_message: "La gestion des incidents est désormais disponible pour tous\_!"
+  mobile_message: "La gestion des incidents est désormais disponible pour tous\_!"
+  link: 'https://www.datadoghq.com/blog/incident-response-with-datadog/'
+exclude: []
 translate_status_banner: 'Cette traduction n''est pas à jour. Pour consulter la dernière version en anglais, cliquez ici'
