@@ -21,9 +21,7 @@ It is recommended that containers are monitored with a single containerized Agen
 
 ### Serverless
 
-Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded.
-
-Pro and Enterprise plans include 150,000 Indexed Spans and 5 custom metrics per billed function. Billing for serverless APM depends on the total number of [Indexed Spans][4] exceeding the bundled quantity submitted to the Datadog APM service at the end of the month. There are no billable [APM Hosts][4] when using serverless.
+Datadog bills based on the sum of AWS Lambda invocations across the month for your accounts. Pro and Enterprise plans include 150,000 Indexed Spans and 5 custom metrics per million invocations. Billing for serverless APM depends on the total number of [Indexed Spans][4] exceeding the bundled quantity submitted to the Datadog APM service at the end of the month. There are no billable [APM Hosts][4] when using serverless.
 
 **Note** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
@@ -77,7 +75,7 @@ You can set specific email addresses to receive invoices on the [Plan][11] page 
 [3]: /agent/
 [4]: https://docs.datadoghq.com/account_management/billing/pricing/#apm
 [5]: https://docs.datadoghq.com/account_management/billing/serverless
-[6]: https://www.datadoghq.com/pricing/#included_serverless_functions-d
+[6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
 [8]: /account_management/users/default_roles/
 [9]: https://app.datadoghq.com/account/billing_history
