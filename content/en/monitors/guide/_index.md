@@ -13,4 +13,5 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Monitoring Ranges{{< /nextlink >}}
     {{< nextlink href="monitors/guide/supress-alert-with-downtimes" >}}Downtimes common use cases{{< /nextlink >}}
     {{< nextlink href="monitors/guide/slo-checklist" >}}SLO Checklist{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/why-rollup-should-not-be-used-in-monitors" >}}The reason rollup should not be used in monitors {{< /nextlink >}}
 {{< /whatsnext >}}
