@@ -215,7 +215,7 @@ override func viewDidDisappear(_ animated: Bool) {
 // ネットワーククライアントで:
 
 Global.rum.startResourceLoading(
-    resourceKey: "resource-key", 
+    resourceKey: "resource-key",
     request: request
 )
 
@@ -232,7 +232,7 @@ Global.rum.stopResourceLoading(
 ### RUM アクション
 
 瞬間的な RUM アクション (例: `.tap`) を手動で登録するには、次を使用します。
-* `.addUserAction(type:name:)`
+* `.addAction(type:name:)`
 
 または、継続的な RUM アクション (例: `.scroll`) の場合は、次を使用します。
 * `.startUserAction(type:name:)`
@@ -245,7 +245,7 @@ Global.rum.stopResourceLoading(
 // `UIViewController` で:
 
 @IBAction func didTapDownloadResourceButton(_ sender: Any) {
-    Global.rum.addUserAction(
+    Global.rum.addAction(
         type: .tap,
         name: (sender as? UIButton).currentTitle ?? "",
     )

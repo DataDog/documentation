@@ -35,6 +35,12 @@ Grâce à l'Agent de cluster Datadog, vous pouvez :
 * activer la collecte de données au niveau du cluster, telles que les données de surveillance de services, les SPOF et les événements ;
 * tirer parti de l'autoscaling de pods horizontaux en fonction de métriques Kubernetes custom. Consultez le [guide dédié][1] pour en savoir plus sur cette fonctionnalité.
 
+Si vous utilisez Docker, l'Agent de cluster Datadog est disponible sur Docker Hub et GCR :
+
+| Docker Hub                                       | GCR                                                       |
+|--------------------------------------------------|-----------------------------------------------------------|
+| [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
+
 **Remarque** : pour bénéficier de toutes les fonctionnalités de l'Agent de cluster Datadog, vous devez exécuter la version 1.10+ de Kubernetes.
 
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
@@ -53,3 +59,5 @@ Grâce à l'Agent de cluster Datadog, vous pouvez :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/CUSTOM_METRICS_SERVER.md
+[2]: https://hub.docker.com/r/datadog/cluster-agent
+[3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent

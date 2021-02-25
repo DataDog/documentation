@@ -207,7 +207,7 @@ Une fois qu'une interaction est détectée, tous les nouveaux événements RUM s
 Une fois qu'une interaction est détectée, le SDK RUM surveille les requêtes réseau et les mutations DOM. L'action utilisateur est considérée comme terminée lorsqu'aucune activité n'est effectuée sur la page pendant plus de 100 ms (une activité étant définie comme des requêtes réseau en cours ou une mutation DOM).
 
 ## Actions utilisateur personnalisées
-Les actions utilisateur personnalisées sont des actions utilisateur déclarées et envoyées manuellement via l'[API `addUserAction`][3]. Elles permettent d'envoyer des informations relatives à un événement qui a lieu au cours d'un parcours utilisateur, telles qu'une durée personnalisée ou des informations sur le panier client.
+Les actions utilisateur personnalisées sont des actions utilisateur déclarées et envoyées manuellement via l'[API `addAction`][3]. Elles permettent d'envoyer des informations relatives à un événement qui a lieu au cours d'un parcours utilisateur, telles qu'une durée personnalisée ou des informations sur le panier client.
 
 ## Durées et métriques des actions
 

@@ -109,57 +109,64 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-[Datadog CloudFormation マクロ][1]は、AWS CDK によって生成された CloudFormation テンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
+以下を行うことで、[Datadog CDK コンストラクト][1]でサーバーレスアプリケーションからのメトリクス、トレース、ログの収集を自動的に構成できます。
 
-### Datadog CloudFormation マクロのインストール
+- Python および Node.js Lambda 関数用に Datadog Lambda ライブラリをインストールし構成。
+- Lambda 関数からのトレースおよびカスタムメトリクスの収集を有効化。
+- Datadog Forwarder から Lambda 関数ロググループへのサブスクリプションを管理。
 
-[AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定のリージョンに**一度だけ**マクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
+### Datadog CDK コンストラクトライブラリのインストール
+
+CDK プロジェクトで以下の Yarn または NPM コマンドを実行します。
 
 ```sh
-aws cloudformation create-stack \
-  --stack-name datadog-serverless-macro \
-  --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
-  --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
+#Yarn
+yarn add --dev datadog-cdk-constructs
+
+#NPM
+npm install datadog-cdk-constructs --save-dev
 ```
 
-マクロが表示され、使用を開始できます。
+Datadog CDK コンストラクトライブラリがダウンロードされ、使用の準備ができました。
 
 ### 関数をインスツルメントする
 
-AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の TypeScript のサンプルコードを参照してください (他の言語での使用方法も同様です)。
+AWS CDK アプリで `datadog-cdk-construct` モジュールをインポートして、以下のコンフィギュレーションを追加します（この例では TypeScript ですが、他の言語でも使用する場合も同様です）。
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
+import { Datadog } from "datadog-cdk-constructs";
 
 class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    this.addTransform("DatadogServerless");
-
-    new cdk.CfnMapping(this, "Datadog", {
-      mapping: {
-        Parameters: {
-          nodeLayerVersion: "<LAYER_VERSION>",
-          forwarderArn: "<FORWARDER_ARN>",
-          stackName: this.stackName,
-          service: "<SERVICE>", // オプション
-          env: "<ENV>", // オプション
-        },
-      },
+    const datadog = new Datadog(this, "Datadog", {
+      nodeLayerVersion: <LAYER_VERSION>,
+      pythonLayerVersion: <LAYER_VERSION>,
+      addLayers: <BOOLEAN>,
+      forwarderArn: "<FORWARDER_ARN>",
+      flushMetricsToLogs: <BOOLEAN>,
+      site: "<SITE>",
+      apiKey: "{Datadog_API_Key}",
+      apiKMSKey: "{Encrypted_Datadog_API_Key}",
+      enableDDTracing: <BOOLEAN>,
+      injectLogContext: <BOOLEAN>
     });
+    datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
   }
 }
 ```
 
-`<SERVICE>` と `<ENV>` を適切な値に置き換え、`<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][3]を参照)、`<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
+`<SERVICE>` および `<ENV>` を適切な値に、`<LAYER_VERSION>` を Datadog Lambda レイヤーの希望バージョン（[最新リリース][2]を参照）に、`<FORWARDER_ARN>` を Forwarder ARN（[Forwarder ドキュメント][3]を参照）に置き換えます。
 
 Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][4]に追加する必要があります。
 
-[マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
+さらに詳しい情報や、追加パラメーターについては、[Datadog CDK NPM ページ][1]をご覧ください。
 
-[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
-[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
-[3]: https://github.com/DataDog/datadog-lambda-js/releases
+
+[1]: https://www.npmjs.com/package/datadog-cdk-constructs
+[2]: https://github.com/DataDog/datadog-lambda-js/releases
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}

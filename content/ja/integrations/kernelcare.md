@@ -47,22 +47,25 @@ supported_os:
 
 ### インストール
 
-KernelCare チェックをホストにインストールするには
+Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Kernelcare チェックをインストールしてください。[バージョン 6.8 以前の Agent][4] または [Docker Agent][5] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][3]に関する Agent のガイドを参照してください。
 
-1. マシンに[開発ツールキット][3]をインストールします。
-2. `ddev release build kernelcare` を実行してパッケージをビルドします。
-3. [Datadog Agent をダウンロードします][4]。
-4. ビルドアーティファクトを Agent のあるホストにアップロードし、`datadog-agent integration install -w path/to/kernelcare/dist/<ARTIFACT_NAME>.whl` を実行します。
+1. [Datadog Agent をダウンロードして起動][6]します。
+2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
+   ```shell
+   datadog-agent integration install -t datadog-kernelcare==<INTEGRATION_VERSION>
+   ```
+
+3. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 ### コンフィギュレーション
 
-1. KernelCare のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kernelcare.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[kernelcare.d/conf.yaml のサンプル][5]を参照してください。
+1. KernelCare のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kernelcare.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[kernelcare.d/conf.yaml のサンプル][8]を参照してください。
 
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][9]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `kernelcare` を探します。
+[Agent の status サブコマンドを実行][10]し、Checks セクションで `kernelcare` を探します。
 
 ## 収集データ
 
@@ -82,14 +85,17 @@ KernelCare には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://www.kernelcare.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/datadog_checks/kernelcare/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
+[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[8]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/datadog_checks/kernelcare/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/metadata.csv
+[12]: https://docs.datadoghq.com/ja/help/

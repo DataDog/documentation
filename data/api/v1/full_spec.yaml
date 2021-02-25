@@ -4,17 +4,17 @@ components:
   headers: {}
   links: {}
   parameters:
+    SlackAccountNamePathParameter:
+      description: Your Slack account name.
+      in: path
+      name: account_name
+      required: true
+      schema:
+        type: string
     SlackChannelNamePathParameter:
       description: The name of the Slack channel being operated on.
       in: path
       name: channel_name
-      required: true
-      schema:
-        type: string
-    SlackTeamNamePathParameter:
-      description: Your Slack team name.
-      in: path
-      name: team_name
       required: true
       schema:
         type: string
@@ -1920,6 +1920,91 @@ components:
       - MIN
       - MAX
       - AVG
+    FormulaAndFunctionEventQueryDefinition:
+      description: A formula and functions events query.
+      properties:
+        compute:
+          description: Compute options.
+          properties:
+            aggregation:
+              $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+            interval:
+              description: A time interval in milliseconds.
+              example: 60000
+              format: int64
+              type: integer
+            metric:
+              description: Measurable attribute to compute.
+              example: '@duration'
+              type: string
+          required:
+          - aggregation
+          type: object
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
+        group_by:
+          description: Group by options.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupBy'
+          type: array
+        indexes:
+          description: An array of index names to query in the stream. Omit or use
+            `[]` to query all indexes at once.
+          example:
+          - days-3
+          - days-7
+          items:
+            description: A log index set up for your organization. For additional
+              indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
+              documentation.
+            type: string
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: query_errors
+          type: string
+        search:
+          description: Search options.
+          properties:
+            query:
+              description: Events search string.
+              example: service:query
+              type: string
+          required:
+          - query
+          type: object
+      required:
+      - data_source
+      - compute
+      type: object
+    FormulaAndFunctionEventQueryGroupBy:
+      description: List of objects used to group by.
+      properties:
+        facet:
+          description: Event facet.
+          example: status.
+          type: string
+        limit:
+          description: Number of groups to return.
+          example: 10
+          format: int64
+          type: integer
+        sort:
+          description: Options for sorting group by results.
+          properties:
+            aggregation:
+              $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
+            metric:
+              description: Metric used for sorting group by results.
+              type: string
+            order:
+              $ref: '#/components/schemas/QuerySortOrder'
+          required:
+          - aggregation
+          type: object
+      required:
+      - facet
+      type: object
     FormulaAndFunctionEventsDataSource:
       description: Data source for event platform-based queries.
       enum:
@@ -1966,6 +2051,28 @@ components:
       type: string
       x-enum-varnames:
       - METRICS
+    FormulaAndFunctionMetricQueryDefinition:
+      description: A formula and functions metrics query.
+      example:
+        data_source: metrics
+        query: avg:system.cpu.user{*}
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: my_query
+          type: string
+        query:
+          description: Metrics query definition.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+      - data_source
+      - query
+      type: object
     FormulaAndFunctionProcessQueryDataSource:
       description: Data sources that rely on the process backend.
       enum:
@@ -1975,12 +2082,48 @@ components:
       x-enum-varnames:
       - PROCESS
       - CONTAINER
+    FormulaAndFunctionProcessQueryDefinition:
+      description: Process query using formulas and functions.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDataSource'
+        is_normalized_cpu:
+          description: Whether to normalize the CPU percentages.
+          type: boolean
+        limit:
+          description: Number of hits to return.
+          format: int64
+          type: integer
+        metric:
+          description: Process metric name.
+          example: avg:system.cpu.user{*}
+          type: string
+        name:
+          description: Name of query for use in formulas.
+          type: string
+        sort:
+          $ref: '#/components/schemas/QuerySortOrder'
+        tag_filters:
+          description: An array of tags to filter by.
+          items:
+            description: One of the tags to filter by.
+            type: string
+          type: array
+        text_filter:
+          description: Text to use as filter.
+          type: string
+      required:
+      - data_source
+      - metric
+      type: object
     FormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
-      - $ref: '#/components/schemas/TimeSeriesFormulaAndFunctionMetricQueryDefinition'
-      - $ref: '#/components/schemas/TimeSeriesFormulaAndFunctionEventQueryDefinition'
-      - $ref: '#/components/schemas/TimeSeriesFormulaAndFunctionProcessQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries or Scalar response. This feature is currently in beta.
@@ -5197,6 +5340,7 @@ components:
       - synthetics alert
       - trace-analytics alert
       - slo alert
+      - event-v2 alert
       type: string
       x-enum-varnames:
       - COMPOSITE
@@ -5210,6 +5354,7 @@ components:
       - SYNTHETICS_ALERT
       - TRACE_ANALYTICS_ALERT
       - SLO_ALERT
+      - EVENT_V2_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -8938,149 +9083,6 @@ components:
       - STRING
       - INTEGER
       - DOUBLE
-    TimeSeriesFormulaAndFunctionEventQueryDefinition:
-      description: A timeseries formula and functions events query.
-      properties:
-        compute:
-          description: Compute options.
-          properties:
-            aggregation:
-              $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
-            interval:
-              description: A time interval in milliseconds.
-              example: 60000
-              format: int64
-              type: integer
-            metric:
-              description: Measurable attribute to compute.
-              example: '@duration'
-              type: string
-          required:
-          - aggregation
-          type: object
-        data_source:
-          $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
-        group_by:
-          description: Group by options.
-          items:
-            $ref: '#/components/schemas/TimeSeriesFormulaAndFunctionEventQueryGroupBy'
-          type: array
-        indexes:
-          description: An array of index names to query in the stream. Omit or use
-            `[]` to query all indexes at once.
-          example:
-          - days-3
-          - days-7
-          items:
-            description: A log index set up for your organization. For additional
-              indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
-              documentation.
-            type: string
-          type: array
-        name:
-          description: Name of the query for use in formulas.
-          example: query_errors
-          type: string
-        search:
-          description: Search options.
-          properties:
-            query:
-              description: Events search string.
-              example: service:query
-              type: string
-          required:
-          - query
-          type: object
-      required:
-      - data_source
-      - compute
-      type: object
-    TimeSeriesFormulaAndFunctionEventQueryGroupBy:
-      description: List of objects used to group by.
-      properties:
-        facet:
-          description: Event facet.
-          example: status.
-          type: string
-        limit:
-          description: Number of groups to return.
-          example: 10
-          format: int64
-          type: integer
-        sort:
-          description: Options for sorting group by results.
-          properties:
-            aggregation:
-              $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
-            metric:
-              description: Metric used for sorting group by results.
-              type: string
-            order:
-              $ref: '#/components/schemas/QuerySortOrder'
-          required:
-          - aggregation
-          type: object
-      required:
-      - facet
-      type: object
-    TimeSeriesFormulaAndFunctionMetricQueryDefinition:
-      description: A timeseries formula and functions metrics query.
-      example:
-        data_source: metrics
-        query: avg:system.cpu.user{*}
-      properties:
-        aggregator:
-          $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
-        data_source:
-          $ref: '#/components/schemas/FormulaAndFunctionMetricDataSource'
-        name:
-          description: Name of the query for use in formulas.
-          example: my_query
-          type: string
-        query:
-          description: Metrics query definition.
-          example: avg:system.cpu.user{*}
-          type: string
-      required:
-      - data_source
-      - query
-      type: object
-    TimeSeriesFormulaAndFunctionProcessQueryDefinition:
-      description: Process query using formulas and functions.
-      properties:
-        aggregator:
-          $ref: '#/components/schemas/FormulaAndFunctionMetricAggregation'
-        data_source:
-          $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDataSource'
-        is_normalized_cpu:
-          description: Whether to normalize the CPU percentages.
-          type: boolean
-        limit:
-          description: Number of hits to return.
-          format: int64
-          type: integer
-        metric:
-          description: Process metric name.
-          example: avg:system.cpu.user{*}
-          type: string
-        name:
-          description: Name of query for use in formulas.
-          type: string
-        sort:
-          $ref: '#/components/schemas/QuerySortOrder'
-        tag_filters:
-          description: An array of tags to filter by.
-          items:
-            description: One of the tags to filter by.
-            type: string
-          type: array
-        text_filter:
-          description: Text to use as filter.
-          type: string
-      required:
-      - data_source
-      - metric
-      type: object
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Indexed Spans over time.
@@ -15355,12 +15357,12 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
-  /api/v1/integration/slack/configuration/accounts/{team_name}/channels:
+  /api/v1/integration/slack/configuration/accounts/{account_name}/channels:
     get:
       description: Get a list of all channels configured for your Datadog-Slack integration.
       operationId: GetSlackIntegrationChannels
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       responses:
         '200':
           content:
@@ -15395,7 +15397,7 @@ paths:
       description: Add a channel to your Datadog-Slack integration.
       operationId: CreateSlackIntegrationChannel
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       requestBody:
         content:
           application/json:
@@ -15433,19 +15435,13 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-undo:
-        operationId: RemoveSlackIntegrationChannel
-        parameters:
-        - name: team_name
-          source: TODO
-        - name: channel_name
-          source: name
         type: unsafe
-  /api/v1/integration/slack/configuration/accounts/{team_name}/channels/{channel_name}:
+  /api/v1/integration/slack/configuration/accounts/{account_name}/channels/{channel_name}:
     delete:
       description: Remove a channel from your Datadog-Slack integration.
       operationId: RemoveSlackIntegrationChannel
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       - $ref: '#/components/parameters/SlackChannelNamePathParameter'
       responses:
         '204':
@@ -15477,7 +15473,7 @@ paths:
       description: Get a channel configured for your Datadog-Slack integration.
       operationId: GetSlackIntegrationChannel
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       - $ref: '#/components/parameters/SlackChannelNamePathParameter'
       responses:
         '200':
@@ -15513,7 +15509,7 @@ paths:
       description: Update a channel used in your Datadog-Slack integration.
       operationId: UpdateSlackIntegrationChannel
       parameters:
-      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackAccountNamePathParameter'
       - $ref: '#/components/parameters/SlackChannelNamePathParameter'
       requestBody:
         content:
@@ -16657,6 +16653,8 @@ paths:
 
         - watchdog: `event alert`
 
+        - event-v2: `event-2 alert`
+
 
         #### Query Types
 
@@ -16756,6 +16754,34 @@ paths:
 
         - **`last`** the timeframe to roll up the counts. Examples: 45m, 4h. Supported
         timeframes: m, h and d. This value should not exceed 48 hours.
+
+
+        **NOTE** Only available on US1 and EU.
+
+
+        **Event V2 Alert Query**
+
+
+        Example: `events(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
+        `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Only available on US1-FED, US3, and in closed beta on EU and US1.
 
 
         **Process Alert Query**

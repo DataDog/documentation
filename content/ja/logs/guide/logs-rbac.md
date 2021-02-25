@@ -7,7 +7,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログエクスプローラーの詳細
-  - link: /logs/explorer/patterns/
+  - link: '/logs/explorer/#patterns'
     tag: Documentation
     text: ログパターンビューの概要
   - link: /logs/live_tail/
