@@ -10,7 +10,7 @@ further_reading:
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
-
+{{< site-region region="us" >}}
 ## Overview
 
 Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
@@ -49,6 +49,10 @@ Distribution metrics with percentile aggregations (`p50`, `p75`, `p90`, `p95`, `
 
 For more information on counting custom metrics created from gauge, count, histogram, or distribution metrics with nonpercentile aggregations, refer to the [Custom Metrics][2] page.
 
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+{{< /site-region >}}
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
