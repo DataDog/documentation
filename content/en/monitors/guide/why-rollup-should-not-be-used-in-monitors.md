@@ -6,7 +6,7 @@ kind: guide
 ## Overview
 
 This guide assumes you already know what rollups are. If you don't, check the [rollup documentation page][3].
-Rollups should usually be avoided in [monitor queries][2], because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. 
+It is strongly recommended to avoid using Rollups in [monitor queries][2], because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. 
 
 **Rollups are aligned on UNIX time.** 
 
@@ -20,7 +20,7 @@ Monitors are evaluated every minute always at the same second with intervals tha
 
 **Leading to alignment problems.**
 
-For instance, the evaluation might use points from 17:13:02 to 17:23:02. In that case, the monitor won’t consider the 17:13:00 bucket since the start of the query (17:13:02) is after the start of the bucket (17:13:00). So using a rollup leads to ignoring all the points from `17:13:00 to 17:13:59`.
+For instance, the evaluation might use points from `17:13:02 to 17:23:02`. In that case, the monitor won’t consider the `17:13:00` bucket since the start of the query (`17:13:02`) is after the start of the bucket (`17:13:00`). So using a rollup leads to ignoring all the points from `17:13:00 to 17:13:59`.
 This is particularly problematic when the rollup period is close to the timeframe. 
 For instance, if the rollup period is 1h and the evaluation timeframe is last 4h, the monitor might ignore up to 1 hour of points, which represent 25% of the total points that are present in that 4h timeframe.
 
@@ -53,6 +53,7 @@ To see that let’s look at the following table, with evaluation examples. As a 
 | 17:15:02     | 17:25:02    |17:16:00, 17:17:00, 17:18:00, 17:19:00, 17:20:00, 17:21:00, 17:22:00, 17:23:00, 17:24:00, 17:25:00 |100 - OK |
 | 17:16:02     | 17:26:02    |17:17:00, 17:18:00, 17:19:00, 17:20:00, 17:21:00, 17:22:00, 17:23:00, 17:24:00, 17:25:00, 17:26:00 |100 - OK |
 
+Therefore we strongly advice **against using rollups in monitors** and let the monitor use the data contained within the `From` and `To`. 
 
 ## Troubleshooting
 
