@@ -40,6 +40,8 @@ Datadog truncates the following strings if they exceed the indicated number of c
 | [tag key][6]    |  200       |
 | [tag value][6]  |  5000      |
 
+Additionally, the number of [span tags][6] present on any span cannot exceed 250.
+
 For a given 10 minute interval, Datadog accepts the following combinations. To accomodate larger volumes, please contact [support][1] to discuss your use case.
 
 - 1000 unique environments and service combinations
