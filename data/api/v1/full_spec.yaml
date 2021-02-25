@@ -1370,10 +1370,11 @@ components:
           maximum: 2147483647
           type: integer
         rrule:
-          description: 'The `RRULE` standard for defining recurring events. For example,
-            to have a recurring event on the first day of each month,
+          description: 'The `RRULE` standard for defining recurring events (**requires
+            to set "type" to rrule**)
 
-            select a type of `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY`
+            For example, to have a recurring event on the first day of each month,
+            set the type to `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY`
             to `1`.
 
             Most common `rrule` options from the [iCalendar Spec](https://tools.ietf.org/html/rfc5545)
@@ -1381,12 +1382,14 @@ components:
 
 
             **Note**: Attributes specifying the duration in `RRULE` are not supported
-            (for example, `DTSTART`, `DTEND`, `DURATION`).'
+            (for example, `DTSTART`, `DTEND`, `DURATION`).
+
+            More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/supress-alert-with-downtimes/?tab=api)'
           example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
           type: string
         type:
           description: The type of recurrence. Choose from `days`, `weeks`, `months`,
-            `years`.
+            `years`, `rrule`.
           example: weeks
           type: string
         until_date:
