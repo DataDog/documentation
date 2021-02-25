@@ -17,18 +17,7 @@ If you experience unexpected behavior with Datadog APM, there are a few common i
 
 ## Confirm APM setup and Agent status
 
-During startup, all Datadog tracing libraries past the versions listed below emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible.  If your tracer version includes these [startup logs][2], start your troubleshooting there.
-
-| Language | Version |
-|----------|---------|
-| Java    |  0.59+  |
-| .NET | 1.18.2+  |
-| PHP | 0.47.0+  |
-| Go | 1.26.0+  |
-| NodeJS | 0.23.0+  |
-| Python | 0.41+  |
-| Ruby | 0.38+  |
-| C++ | 1.2.0+ |
+During startup, Datadog tracing libraries emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible.  Some languages require these startup logs to be enabled via the environment variable `DD_TRACE_STARTUP_LOGS=true`.  For more information on startup logs, see the dedicated [page][2] to start your troubleshooting.
 
 ## Tracer debug logs
 
