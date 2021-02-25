@@ -1,19 +1,19 @@
 ---
 title: Service Map
 kind: documentation
-description: "The Service Map visualizes data that is being collected by Datadog APM."
+description: 'The Service Map visualizes data that is being collected by Datadog APM.'
 aliases:
-  - /tracing/servicemap
+    - /tracing/servicemap
 further_reading:
-- link: "/tracing/setup/"
-  tag: "Documentation"
-  text: "Learn how to setup APM tracing with your application"
-- link: "https://www.datadoghq.com/blog/service-map/"
-  tag: "Blog"
-  text: "Introducing the Service Map in Datadog"
-- link: "https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/"
-  tag: "Blog"
-  text: "Creating context with service maps (Datadog + Airbnb)"
+    - link: '/tracing/setup/'
+      tag: 'Documentation'
+      text: 'Learn how to setup APM tracing with your application'
+    - link: 'https://www.datadoghq.com/blog/service-map/'
+      tag: 'Blog'
+      text: 'Introducing the Service Map in Datadog'
+    - link: 'https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/'
+      tag: 'Blog'
+      text: 'Creating context with service maps (Datadog + Airbnb)'
 ---
 
 The Service Map decomposes your application into all its component [services][1] and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture.
@@ -32,7 +32,7 @@ The Service Map was built to provide an overview of your services and their heal
 
 The Service Map can be filtered based on the type of service (webserver, database, cache, etc.) or based on a fuzzy string match. This is particularly useful in a microservices environment with hundreds or thousands of nodes. In addition, the service can be scoped to a specific time range, helpful for keeping track of your evolving architecture.
 
-Services are also scoped by `env`, and, optionally, a [Second Primary Tag][2].  Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
+Services are also scoped by `env`, and, optionally, a [Second Primary Tag][2]. Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
 
 ## Inspection
 
@@ -72,15 +72,44 @@ Additionally, monitors can be tagged by service in the “Say what’s happening
 
 Nodes represent services exactly as instrumented in APM and match those in your [Services][3] page. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][4].
 
-New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for 30 days.  This takes into account services that do work infrequently, but are an important part of a functioning system.
+New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for 30 days. This takes into account services that do work infrequently, but are an important part of a functioning system.
 
 {{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="Service Map nodes" video="true"  width="90%">}}
 
 ### Color
 
-If a monitor is enabled for a service, the circumference has a weighted border colored with green, yellow, red, or grey, based on the status of that monitor.  If multiple monitors are defined, the status of the monitor in the most severe state is used.
+If a monitor is enabled for a service, the circumference has a weighted border colored with green, yellow, red, or grey, based on the status of that monitor. If multiple monitors are defined, the status of the monitor in the most severe state is used.
 
 Monitors are not constrained to APM monitors. The service tag, described above, can be used to associate any monitor type with a service.
+
+## Service map hotkey list
+
+Change the layout of your service map with the following hotkey combinations:
+
+| Combination                 | Description                                                         |
+| --------------------------- | ------------------------------------------------------------------- |
+| `shift + ctrl + 3`          | 3D projection ON/OFF                                                |
+| `shift + ctrl + A`          | Arrows color (normal / edge)                                        |
+| `shift + ctrl + B`          | Edges type (normal / proj3d / bundle / railway / detail1 / detail2) |
+| `shift + ctrl + C`          | Edges color (normal / cluster / path / magnitude / source)          |
+| `shift + ctrl + D`          | Demo mode ON/OFF                                                    |
+| `shift + ctrl + E`          | Edges scale (linear / pow / sqrt / log / custom)                    |
+| `shift + ctrl + F`          | Fullscreen / windowed                                               |
+| `shift + ctrl + J`          | Colors/icons debug view ON/OFF                                      |
+| `shift + ctrl + L`          | Nodes layout (cluster / railway / detail)                           |
+| `shift + ctrl + M`          | Minimap ON/OFF                                                      |
+| `shift + ctrl + N`          | Nodes scale (linear / pow / sqrt / log / custom)                    |
+| `shift + ctrl + O`          | Nodes/edges outlier exclusion ON/OFF                                |
+| `shift + ctrl + P`          | Picture mode ON/OFF                                                 |
+| `shift + ctrl + Q`          | Map randomizer (randomize all settings)                             |
+| `shift + ctrl + R`          | Rendertime ON/OFF                                                   |
+| `shift + ctrl + S`          | Star-map ON/OFF                                                     |
+| `shift + ctrl + T`          | Random data (keep all others parameters the same)                   |
+| `shift + ctrl + U`          | Update node metadata                                                |
+| `shift + ctrl + W`          | Edges hover detection ON/OFF                                        |
+| `shift + ctrl + X`          | Map reset (empty all data)                                          |
+| `shift + ctrl + Y`          | Edges metric value ON/OFF                                           |
+| `shift + ctrl + left/right` | Rotate the layout -/+1° (-/+10° with alt)                           |
 
 ## Further Reading
 

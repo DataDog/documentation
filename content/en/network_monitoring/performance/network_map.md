@@ -64,6 +64,35 @@ Click on a node and select _Inspect_ from the menu to contextualize it within th
 
 {{< img src="network_performance_monitoring/network_map/network_entity_zoom.mp4" alt="Network entity zoom" video="true" width="70%">}}
 
+## Network map hotkey list
+
+Change the layout of your network map with the following hotkey combinations:
+
+| Combination                 | Description                                                         |
+| --------------------------- | ------------------------------------------------------------------- |
+| `shift + ctrl + 3`          | 3D projection ON/OFF                                                |
+| `shift + ctrl + A`          | Arrows color (normal / edge)                                        |
+| `shift + ctrl + B`          | Edges type (normal / proj3d / bundle / railway / detail1 / detail2) |
+| `shift + ctrl + C`          | Edges color (normal / cluster / path / magnitude / source)          |
+| `shift + ctrl + D`          | Demo mode ON/OFF                                                    |
+| `shift + ctrl + E`          | Edges scale (linear / pow / sqrt / log / custom)                    |
+| `shift + ctrl + F`          | Fullscreen / windowed                                               |
+| `shift + ctrl + J`          | Colors/icons debug view ON/OFF                                      |
+| `shift + ctrl + L`          | Nodes layout (cluster / railway / detail)                           |
+| `shift + ctrl + M`          | Minimap ON/OFF                                                      |
+| `shift + ctrl + N`          | Nodes scale (linear / pow / sqrt / log / custom)                    |
+| `shift + ctrl + O`          | Nodes/edges outlier exclusion ON/OFF                                |
+| `shift + ctrl + P`          | Picture mode ON/OFF                                                 |
+| `shift + ctrl + Q`          | Map randomizer (randomize all settings)                             |
+| `shift + ctrl + R`          | Rendertime ON/OFF                                                   |
+| `shift + ctrl + S`          | Star-map ON/OFF                                                     |
+| `shift + ctrl + T`          | Random data (keep all others parameters the same)                   |
+| `shift + ctrl + U`          | Update node metadata                                                |
+| `shift + ctrl + W`          | Edges hover detection ON/OFF                                        |
+| `shift + ctrl + X`          | Map reset (empty all data)                                          |
+| `shift + ctrl + Y`          | Edges metric value ON/OFF                                           |
+| `shift + ctrl + left/right` | Rotate the layout -/+1° (-/+10° with alt)                           |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
