@@ -64,7 +64,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
     This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
 
-2. **[Tracer Startup Logs](https://docs.datadoghq.com/tracing/troubleshooting/tracer_startup_logs/)**
+2. **[Tracer Startup Logs](#confirm-apm-setup-and-agent-status)**
 
     Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, we can identify areas where a setting is not being properly applied.
 
