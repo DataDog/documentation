@@ -46,29 +46,33 @@ PHP APM supports the following SAPI's:
 
 By default, Datadog **supports all PHP web frameworks** out of the box, which allows you to see traces for spans of supported libraries—for example: database and HTTP clients.
 
+For a growing set of web frameworks Datadog offers full instrumentation, including internals methods. Other frameworks still benefit from our generic web tracing, until Datadog will instrument the framework's internal methods.
+
 The following table enumerates some of the frameworks and versions Datadog successfully traces.
 
-**Web frameworks**:
+**Web frameworks with internals tracing**:
 
-| Module         | Versions      | Support Type               |
-|:---------------|:--------------|:---------------------------|
-| CakePHP        | 2.x           | All supported PHP versions |
-| CodeIgniter    | 2.x, 3.x      | PHP 7+                     |
-| Laravel        | 4.2, 5.x, 6.x | All supported PHP versions |
-| Laravel 8      | 8.x (as of `0.52.0`) | All supported PHP versions |
-| Lumen          | 5.2+          | All supported PHP versions |
-| Symfony 3      | 3.3, 3.4      | All supported PHP versions |
-| Symfony 4      | 4.x           | All supported PHP versions |
-| Symfony 5      | 5.x (as of `0.50.0`) | All supported PHP versions |
-| WordPress      | 4.x, 5.x      | PHP 7+                     |
-| Zend Framework | 1.12          | All supported PHP versions |
-| Yii            | 1.1, 2.0      | All supported PHP versions |
-| Drupal         |               | All supported PHP versions |
-| Magento        | 1, 2          | All supported PHP versions |
-| Phalcon        | 1.3, 3.4      | All supported PHP versions |
-| Slim           | 2.x, 3.x, 4.x | All supported PHP versions |
-| Neos Flow      | 1.1           | All supported PHP versions |
-| FuelPHP        | 1.1           | PHP 7+                     |
+| Module         | Versions             | Support Type               | Instrumentation level   |
+|:-------------- |:---------------------|:---------------------------|:------------------------|
+| CakePHP        | 2.x                  | All supported PHP versions | Fully instrumented      |
+| CodeIgniter    | 2.x                  | PHP 7+                     | Fully instrumented      |
+| CodeIgniter    | 3.x                  | PHP 7+                     | Generic instrumentation |
+| Laravel        | 4.2, 5.x, 6.x        | All supported PHP versions | Fully instrumented      |
+| Laravel 8      | 8.x (as of `0.52.0`) | All supported PHP versions | Fully instrumented      |
+| Lumen          | 5.2+                 | All supported PHP versions | Fully instrumented      |
+| Symfony 3      | 3.3, 3.4             | All supported PHP versions | Fully instrumented      |
+| Symfony 4      | 4.x                  | All supported PHP versions | Fully instrumented      |
+| Symfony 5      | 5.x (as of `0.50.0`) | All supported PHP versions | Fully instrumented      |
+| WordPress      | 4.x, 5.x             | PHP 7+                     | Fully instrumented      |
+| Zend Framework | 1.12                 | All supported PHP versions | Fully instrumented      |
+| Zend Framework | 2.x                  | All supported PHP versions | Generic instrumentation |
+| Yii            | 1.1, 2.0             | All supported PHP versions | Fully instrumented      |
+| Drupal         |                      | All supported PHP versions | Generic instrumentation |
+| Magento        | 1, 2                 | All supported PHP versions | Generic instrumentation |
+| Phalcon        | 1.3, 3.4             | All supported PHP versions | Generic instrumentation |
+| Slim           | 2.x, 3.x, 4.x        | All supported PHP versions | Fully instrumented      |
+| Neos Flow      | 1.1                  | All supported PHP versions | Generic instrumentation |
+| FuelPHP        | 1.1                  | PHP 7+                     | Generic instrumentation |
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
 
@@ -129,6 +133,10 @@ The call stack is limited on PHP 5. See the [deep call stack troubleshooting pag
 
 Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
+### PCNTL (Process control)
+
+We currently do not offer support for [pcntl][7]. Tracing applications that use functions like `pcntl_fork` will result in unpredictable results.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -139,3 +147,4 @@ Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 [4]: https://pecl.php.net/package/mongodb
 [5]: /tracing/troubleshooting/php_5_deep_call_stacks
 [6]: https://www.php.net/manual/en/language.generators.overview.php
+[7]: https://www.php.net/manual/en/book.pcntl.php
