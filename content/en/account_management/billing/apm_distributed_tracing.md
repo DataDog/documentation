@@ -86,8 +86,8 @@ An AWS-Lambda based serverless application being invoked 10 million times in a m
 | Billable Unit                  | Quantity   | Price                                                                       | Formula   | Subtotal           |
 |--------------------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
 | Lambda Function Invocations    | 10 million | [$5 per month][8]                                                           | 10 * $5  | $50               |
-| Indexed Spans                  | 10 million | 150,000 Indexed Spans included with each 1 million Lambda invocations. $1.70 per million additional Indexed Spans | 9 * $1.70 | $15.30               |
-| Total                          |            |                                                                             | $50 + $15.30 | **$65.30 per month** |
+| Indexed Spans                  | 10 million | 150,000 Indexed Spans included with each 1 million Lambda invocations. $1.70 per million additional Indexed Spans | 8.5 * $1.70 | $14.45               |
+| Total                          |            |                                                                             | $50 + $14.45 | **$64.45 per month** |
 
 
 ## FAQ
