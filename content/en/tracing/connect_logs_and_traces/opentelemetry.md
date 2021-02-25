@@ -14,19 +14,21 @@ further_reading:
   text: "Datadog's partnership with OpenTelemetry"
 ---
 
-Connecting OpenTelemetry Language SDKs Logs and Traces within Datadog is similar to connecting [Datadog SDK Logs and Traces][1], with a few caveats:
+Connecting OpenTelemetry Language SDKs Logs and Traces within Datadog is similar to connecting [Datadog SDK Logs and Traces][1], with a few additional steps:
 
-First, OpenTelemetry `TraceId` and `SpanId` properties differ from Datadog conventions. Therefore it's necessary to translate `TraceId` and `SpanId` from their OpenTelemetry formats ([a 128bit unsigned int and 64bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string, respectively][2]) into their Datadog Formats([a 64bit unsigned int][3]). 
+1. OpenTelemetry `TraceId` and `SpanId` properties differ from Datadog conventions. Therefore it's necessary to translate `TraceId` and `SpanId` from their OpenTelemetry formats ([a 128bit unsigned int and 64bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string, respectively][2]) into their Datadog Formats([a 64bit unsigned int][3]). 
 
-Second, most OpenTelemetry Language SDKs lack the automatic trace-log correlation that Datadog SDKs offer, so it's necessary to manually patch your particular logging module or library with a processor that adds the aforementioned translated `TraceId` and `SpanId` as Log attributes marked `dd.trace_id` and `dd.span_id`, respectively. 
+2. OpenTelemetry Language SDKs lack the automatic trace-log correlation that Datadog SDKs offer, so it's necessary to manually patch your particular logging module or library with a processor that adds the aforementioned translated `TraceId` and `SpanId` as Log attributes marked `dd.trace_id` and `dd.span_id`, respectively. 
 
-Last, ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
+3. Ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
 
-Below are language-specific examples of how to correlate your OpenTelemetry traces and logs.
+See the following examples for language-specific information about how to correlate your OpenTelemetry traces and logs.
 
-#### Python
+{{< programming-lang-wrapper langs="python,nodejs,ruby,java,php,go,dotnet" >}}
 
-To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The below example uses the [structlog logging library][4], however for other Logging libraries, it may be more appropriate to [modify the Datadog SDKs examples][5]. You can also find [an example OpenTelemetry instrumented python application with trace and log correlation][6] in our trace-examples repository.
+{{< programming-lang lang="python" >}}
+
+To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses the [structlog logging library][1]. For other logging libraries, it may be more appropriate to [modify the Datadog SDKs examples][2]. You can also find [an example OpenTelemetry instrumented Python application with trace and log correlation][3] in the `trace-examples` GitHub repository.
 
 ```python
 # ########## injection.py
@@ -62,9 +64,15 @@ log = structlog.getLogger()
 log.info("There is as yet insufficient data for a meaningful answer")
 ```
 
-#### Node
 
-To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The below example uses the [winston logging library][7], however for other Logging libraries, it may be more appropriate to [modify the Datadog SDKs examples][8]. You can also find [an example OpenTelemetry instrumented NodeJS application with trace and log correlation][9] in our trace-examples repository.
+[1]: https://www.structlog.org/en/stable/standard-library.html
+[2]: /tracing/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
+[3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+
+To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses the [winston logging library][1]. For other logging libraries, it may be more appropriate to [modify the Datadog SDKs examples][2]. You can also find [an example OpenTelemetry instrumented NodeJS application with trace and log correlation][3] in the `trace-examples` GitHub repository.
 
 ```js
 // ########## logger.js
@@ -186,11 +194,15 @@ const logger = require('./logger')
 logger.info("There is as yet insufficient data for a meaningful answer")
 ```
 
-#### Ruby
 
-To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The below example uses the [Ruby Standard Logging Library][10], however for Rails Applications or other Logging Libraries, it may be more appropriate to [modify the Datadog SDKs examples][11]. 
+[1]: https://github.com/winstonjs/winston
+[2]: /tracing/connect_logs_and_traces/nodejs/#manually-inject-trace-and-span-ids
+[3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/node-microservice/logger.js#L86
+{{< /programming-lang >}}
 
-You can also find [an example OpenTelemetry instrumented Ruby application with trace and log correlation][12] in our trace-examples repository.
+{{< programming-lang lang="ruby" >}}
+
+To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses the [Ruby Standard Logging Library][1]. For Rails applications or other logging libraries, it may be more appropriate to [modify the Datadog SDKs examples][12]. You can also find [an example OpenTelemetry instrumented Ruby application with trace and log correlation][13] in the `trace-examples` GitHub repository.
 
 ```ruby
 logger = Logger.new(STDOUT)
@@ -212,9 +224,13 @@ end
 logger.info("There is as yet insufficient data for a meaningful answer")
 ```
 
-#### Java
 
-To manually correlate your traces with your logs, first enable the [openTelemetry-java-instrumentation Logger MDC Instrumentation][13]. Then, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The below example uses [Spring Boot and Logback][14], however for other Logging Libraries, it may be more appropriate to [modify the Datadog SDKs examples][15]. 
+[1]: https://ruby-doc.org/stdlib-3.0.0/libdoc/logger/rdoc/index.html
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
+
+To manually correlate your traces with your logs, first enable the [openTelemetry-java-instrumentation Logger MDC Instrumentation][1]. Then, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses [Spring Boot and Logback][2]. For other logging libraries, it may be more appropriate to [modify the Datadog SDKs examples][3]. 
 
 ```java
 String traceIdValue = Span.current().getSpanContext().getTraceIdAsHexString()
@@ -225,38 +241,45 @@ String datadogTraceIdString = Long.toUnsignedString(datadogTraceId)
 logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{spanId} %n
 ```
 
-#### PHP
+[1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
+[2]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
+[3]: /tracing/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
+{{< /programming-lang >}}
 
-For Trace and Log Correlation in PHP, it may be possible to modify the [Datadog SDK PHP examples][16] according to the [steps above][#connect-opentelemetry-traces-and-logs]. Please [contact Datadog support][17] with any questions.
+{{< programming-lang lang="php" >}}
 
-#### Go
+For trace and log correlation in PHP, modify the [Datadog SDK PHP examples][1] to include the additional steps discussed above. [Contact Datadog support][2] with any questions.
 
-For Trace and Log Correlation in Go, it may be possible to modify the [Datadog SDK Go examples][18] according to the [steps above][#connect-opentelemetry-traces-and-logs]. Please [contact Datadog support][17] with any questions.
 
-#### .NET
+[1]: /tracing/connect_logs_and_traces/php/
+[2]: /help/
+{{< /programming-lang >}}
 
-For Trace and Log Correlation in .NET, it may be possible to modify the [Datadog SDK .NET examples][19] according to the [steps above][#connect-opentelemetry-traces-and-logs]. Please [contact Datadog support][17] with any questions.
+{{< programming-lang lang="go" >}}
+
+For trace and log correlation in Go, modify the [Datadog SDK Go examples][1] to include the additional steps discussed above.[Contact Datadog support][2] with any questions.
+
+
+[1]: /tracing/connect_logs_and_traces/go/
+[2]: /help/
+{{< /programming-lang >}}
+
+{{< programming-lang lang="dotnet" >}}
+
+For trace and log correlation in .NET, modify the [Datadog SDK .NET examples][1] to include the additional steps discussed above. [Contact Datadog support][2] with any questions.
+
+
+[1]: /tracing/connect_logs_and_traces/dotnet/
+[2]: /help/
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/
+[1]: /tracing/connect_logs_and_traces/
 [2]: https://github.com/open-telemetry/opentelemetry-specification/blob/eeef21259a12d61100804eff2e12ba06523821c3/specification/trace/api.md#retrieving-the-traceid-and-spanid
-[3]: https://docs.datadoghq.com/api/latest/tracing/#send-traces
-[4]: https://www.structlog.org/en/stable/standard-library.html
-[5]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
-[6]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
-[7]: https://github.com/winstonjs/winston
-[8]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/nodejs/#manually-inject-trace-and-span-ids
-[9]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/node-microservice/logger.js#L86
-[10]: https://ruby-doc.org/stdlib-3.0.0/libdoc/logger/rdoc/index.html
-[11]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/ruby/#manually-inject-trace-and-span-ids
-[12]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/ruby-microservice/app.rb#L21-L35
-[13]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
-[14]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
-[15]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
-[16]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/php/
-[17]: https://docs.datadoghq.com/help/
-[18]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/go/
-[19]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/dotnet/
+[3]: /api/latest/tracing/#send-traces
