@@ -1465,7 +1465,7 @@ main:
     url: tracing/connect_logs_and_traces/opentelemetry
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_opentelemetry
-    weight: 807
+    weight: 808
   - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
