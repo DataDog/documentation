@@ -33,13 +33,14 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 {{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
 1. Specify the **Domain Name** or **IP address** to run your test on.
-2. Select/Deselect option to **track number of network hops (TTL)**.
+2. Select/Deselect option to **Track number of network hops (TTL)**.
 3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to increase or decrease.
 4. **Name** your ICMP test.
 5. Add `env` **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
 6. Select the **Locations** to run your ICMP test from: ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger the ICMP pings from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
+
 
 ### Specify test frequency
 
@@ -55,7 +56,7 @@ ICMP tests can run:
 
 ### Define Assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `latency`, `packet loss` and `ICMP ping result` is added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `latency`, `packet loss` and `packet received` is added. You must define at least one assertion for your test to monitor.
 
 | Type          | Aggregation    |Operator                                                                               | Value Type       |
 |-----------------|----------------|------------------------------------------------------------------------|------------------|
