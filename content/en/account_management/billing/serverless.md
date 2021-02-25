@@ -7,6 +7,8 @@ kind: documentation
 
 Purchase Serverless function invocations on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the sum of AWS Lambda invocations across the month for your accounts. Pro and Enterprise plans include 150,000 Indexed Spans and 5 custom metrics per billed million invocations. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
 
+**Note:** If you are using a previous billing model for Datadog's Serverless Monitoring and would like to move to invocation-based billing, contact your [Customer Success Manager][3].
+
 **Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
 ## Serverless invocations
