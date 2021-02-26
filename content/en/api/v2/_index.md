@@ -33,7 +33,7 @@ By default, the Datadog API Docs show examples in cURL. Select one of our offici
 {{< programming-lang lang="java" >}}
 #### Installation
 Maven - Add this dependency to your project's POM:
-```java
+```xml
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-api-client</artifactId>
@@ -43,13 +43,12 @@ Maven - Add this dependency to your project's POM:
 ```
 
 Gradle - Add this dependency to your project's build file:
-```java
+```gradle
 compile "com.datadoghq:datadog-api-client:1.0.0"
 ```
 
 #### Usage
 
-Make sure that `CLASSPATH` variable contains all dependencies.
 ```java
 import com.datadog.api.<VERSION>.client.ApiClient;
 import com.datadog.api.<VERSION>.client.ApiException;
@@ -59,6 +58,53 @@ import com.datadog.api.v2.client.model.*;
 import com.datadog.api.<VERSION>.client.api.*;
 ```
 **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
+
+#### Examples
+
+Maven `pom.xml` for running examples:
+```xml
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>example</artifactId>
+  <version>1</version>
+  <dependencies>
+    <dependency>
+      <groupId>com.datadoghq</groupId>
+      <artifactId>datadog-api-client</artifactId>
+      <version>1.0.0-beta.2</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project
+```
+Make sure that `CLASSPATH` variable contains all dependencies.
+
+```sh
+export CLASSPATH=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args="%classpath")
+```
+
+Gradle `build.gradle` for running examples:
+```gradle
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.datadoghq:datadog-api-client:1.0.0-beta.2'
+}
+
+application {
+    mainClassName = 'Example.java'
+}
+```
+Execute example by running `gradle run` command.
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
