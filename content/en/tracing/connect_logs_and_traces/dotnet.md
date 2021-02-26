@@ -42,6 +42,16 @@ The .NET Tracer supports:
 
 4. Update the logging configuration based on the logging library:
 
+    | Required key   | Description                                  |
+    | -------------- | -------------------------------------------- |
+    | `dd.env`       | Globally configures the `env` for the tracer. Defaults to `""` if not set. |
+    | `dd.service`   | Globally configures the root service name. Defaults to the name of the application or IIS site name if not set.  |
+    | `dd.version`   | Globally configures `version` for the service. Defaults to `""` if not set.  |
+    | `dd.trace_id`  | Active trace ID during the log statement. Defaults to `0` if no trace.  |
+    | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
+
+Examples:
+
 {{< tabs >}}
 {{% tab "Serilog" %}}
 Trace and span IDs are injected into application logs only after you enable log context enrichment, as shown in the following example code: 
@@ -124,7 +134,7 @@ To manually correlate your [APM traces][9] with application logs:
 
 2. Use the `CorrelationIdentifier` API to retrieve correlation identifiers and add them to the log context while a span is active.
 
-3. Configure mapped diagnostic context (MDC) to use the following injected keys:
+3. Update the logging configuration based on the logging library:
 
     | Required key   | Description                                  |
     | -------------- | -------------------------------------------- |
