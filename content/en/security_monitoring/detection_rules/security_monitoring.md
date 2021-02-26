@@ -143,6 +143,8 @@ To forget a value if it is not seen over a period of time, select an option from
 
 Set a maximum duration to keep updating a value if detected within a set time frame. For example, the same signal will update if any new value is detected within `1 hour`, for a maximum duration of `24 hours`.
 
+**Note**: If a unique signal is required every new value, configure this value to `0 minutes`.
+
 [1]: /monitors/notifications/?tab=is_alert#integrations
 {{% /tab %}}
 {{< /tabs >}}
