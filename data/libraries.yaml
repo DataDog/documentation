@@ -65,7 +65,7 @@ Classic:
     - name: dogstatsde
       link: https://github.com/waisbrot/dogstatsde
       dogstatsd: true
-      authors: waisbrot    
+      authors: waisbrot
   - Go:
     - name: datadog-go
       link: https://github.com/DataDog/datadog-go
@@ -202,6 +202,11 @@ Classic:
   - Ruby:
     - name: DogApi
       link: https://github.com/DataDog/dogapi-rb
+      official: true
+      api: true
+      authors: Datadog
+    - name: datadog_api_client
+      link: https://github.com/DataDog/datadog-api-client-ruby
       official: true
       api: true
       authors: Datadog
