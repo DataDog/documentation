@@ -27,7 +27,7 @@ DNS tests can run from [managed][1] and [private locations][2] allowing you to r
 
 ## Configuration
 
-After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
+After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
 
 ### Define request
 
