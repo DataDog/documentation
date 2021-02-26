@@ -31,16 +31,14 @@ The .NET Tracer supports:
 
 ### Getting started
 
-1. In the .NET Tracer’s environment variables, enable  `DD_LOGS_INJECTION=true`. For alternative ways to configure the .NET Tracer, see [Configuring the .NET Tracer][5].
-
-2. Configure the .NET Tracer with the following tracer settings:
+1. Configure the .NET Tracer with the following tracer settings:
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
 
-3. In the [logs Agent configuration][6] for the specified files to tail, set `source: csharp` so that log pipelines can parse the log files.
+2. In the [logs Agent configuration][6] for the specified files to tail, set `source: csharp` so that log pipelines can parse the log files.
 
-4. Update the logging configuration based on the logging library:
+3. Update the logging configuration based on the logging library:
 
 Examples:
 
@@ -115,6 +113,7 @@ For additional examples, see the automatic trace ID injection projects using [NL
 {{% /tab %}}
 {{< /tabs >}}
 
+4. In the .NET Tracer’s environment variables, enable  `DD_LOGS_INJECTION=true`. For alternative ways to configure the .NET Tracer, see [Configuring the .NET Tracer][5].
 
 ## Manually inject trace and span IDs
 
@@ -122,9 +121,12 @@ For additional examples, see the automatic trace ID injection projects using [NL
 
 To manually correlate your [APM traces][9] with application logs:
 
-1. Reference the [`Datadog.Trace` NuGet package][10] in your project.
+1. Configure the .NET Tracer with the following tracer settings:
+    - `DD_ENV`
+    - `DD_SERVICE`
+    - `DD_VERSION`
 
-2. Use the `CorrelationIdentifier` API to retrieve correlation identifiers and add them to the log context while a span is active.
+2. In the [logs Agent configuration][6] for the specified files to tail, set `source: csharp` so that log pipelines can parse the log files.
 
 3. Update the logging configuration based on the logging library:
 
@@ -199,7 +201,9 @@ For additional examples, see the automatic trace ID injection projects using [NL
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Add the correlation identifiers to the log context based on the logging library:
+4. Reference the [`Datadog.Trace` NuGet package][10] in your project.
+
+5. Use the `CorrelationIdentifier` API to retrieve correlation identifiers and add them to the log context while a span is active.
 
 Examples:
 
