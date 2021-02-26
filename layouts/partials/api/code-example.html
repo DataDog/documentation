@@ -72,12 +72,20 @@
 
         {{ if ne $file_extension "sh"}}
           <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
-              <div class="code-snippet">
+            <div class="code-snippet">
               <div class="code-button-wrapper position-absolute">
                   <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
               </div>
               {{ highlight $file_content $lang.syntax "" }}
-          </div>
+            </div>
+
+            <h4>Instructions</h4>
+            <p>First <a href="{{ "api/latest/" | absLangURL }}?code-lang={{ $lang.name }}">install the library and its dependencies</a> and then save the example to <code>{{ $lang.example_file }}</code> and run following commands:</p>
+
+            <pre class="chroma">
+              <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="kn">export</span> <span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"{{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">{{ $url }}</span>{{ else }}{{ $url }}</span>{{ end }}{{ end }}"</span>
+<span class="n">{{ $lang.command }}</span> <span class="s1">"{{ $lang.example_file }}"</span></div></code></pre>
+
           </div>
           {{ $count = add $count 1 }}
         {{ end }}
