@@ -32,54 +32,72 @@ By default, the Datadog API Docs show examples in cURL. Select one of our offici
 
 {{< programming-lang lang="java" >}}
 Maven - Add this dependency to your project's POM:
- ```java
+```java
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-api-client</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
- ```
+```
 
- Gradle - Add this dependency to your project's build file:
- ```java
+Gradle - Add this dependency to your project's build file:
+```java
 compile "com.datadoghq:datadog-api-client:1.0.0"
- ```
+```
 
 Make sure that `CLASSPATH` variable contains all dependencies.
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
- ```python
-pip install datadog
- ```
+```console
+$ pip install datadog
+```
 
+```python
+import datadog
+```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python-beta" >}}
- ```python
-pip install datadog-api-client --pre
- ```
+```console
+$ pip3 install datadog-api-client --pre
+```
 
+```python
+import datadog_api_client
+```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
- ```ruby
-gem install dogapi
- ```
+```console
+$ gem install dogapi
+```
+
+```ruby
+require 'dogapi'
+```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby-beta" >}}
- ```ruby
-gem install datadog_api_client -v 1.0.0.beta.2 --pre
- ```
+```console
+$ gem install datadog_api_client -v 1.0.0.beta.2 --pre
+```
+
+```ruby
+require 'datadog_api_client'
+```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
- ```go
+```console
+$ go get github.com/DataDog/datadog-api-client-go
+```
+
+```go
 import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
- ```
+```
  **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
 {{< /programming-lang >}}
 
