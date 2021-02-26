@@ -248,7 +248,10 @@ logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_
 
 {{< programming-lang lang="php" >}}
 
-For trace and log correlation in PHP, modify the [Datadog SDK PHP examples][1] to include the additional steps discussed above. [Contact Datadog support][2] with any questions.
+For trace and log correlation in PHP, modify the [Datadog SDK PHP examples][1] to include the additional steps discussed above.
+
+[Contact Datadog support][2] with any questions.
+
 
 
 [1]: /tracing/connect_logs_and_traces/php/
@@ -257,7 +260,9 @@ For trace and log correlation in PHP, modify the [Datadog SDK PHP examples][1] t
 
 {{< programming-lang lang="go" >}}
 
-For trace and log correlation in Go, modify the [Datadog SDK Go examples][1] to include the additional steps discussed above.[Contact Datadog support][2] with any questions.
+For trace and log correlation in Go, modify the [Datadog SDK Go examples][1] to include the additional steps discussed above.
+
+[Contact Datadog support][2] with any questions.
 
 
 [1]: /tracing/connect_logs_and_traces/go/
@@ -266,7 +271,9 @@ For trace and log correlation in Go, modify the [Datadog SDK Go examples][1] to 
 
 {{< programming-lang lang="dotnet" >}}
 
-For trace and log correlation in .NET, modify the [Datadog SDK .NET examples][1] to include the additional steps discussed above. [Contact Datadog support][2] with any questions.
+For trace and log correlation in .NET, modify the [Datadog SDK .NET examples][1] to include the additional steps discussed above. 
+
+[Contact Datadog support][2] with any questions.
 
 
 [1]: /tracing/connect_logs_and_traces/dotnet/
