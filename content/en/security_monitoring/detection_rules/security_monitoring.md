@@ -73,9 +73,15 @@ In this example, when greater than 5 failed logins and a successful login exist 
 
 Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
 
-Select a value to detect and, optionally, define a signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (e.g. user, IP, etc.).
-
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+
+#### Learned value
+
+{{< img src="security_monitoring/detection_rules/learning_duration.png" alt="Define the learned value" >}}\
+
+Select a value to detect, learning duration, and, optionally, define a signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (e.g. user, IP, etc.).
+
+For example, create a query for successful user authentication and set **detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated and the new value is learned to prevent future signals with this value.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -116,7 +122,6 @@ Additional cases can be added by clicking the **Add Case** button.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-
 [1]: /monitors/notifications/?tab=is_alert#integrations
 {{% /tab %}}
 
@@ -134,8 +139,7 @@ In the “Notify” section, configure zero or more [notification targets][1] fo
 
 To forget a value if it is not seen over a period of time, select a time window from the drop down menu.
 
-To keep updating the same signal if new values are detected, select the time window for if a signal is detected and the maximum duration you wish to keep updating the signal.
-
+To keep updating the same signal if any new values are detected, select the time window for if a signal is detected and the maximum duration you wish to keep updating the signal.
 
 [1]: /monitors/notifications/?tab=is_alert#integrations
 {{% /tab %}}
