@@ -29,6 +29,14 @@ The [Security Configuration Rules][2] page lets you search all Detection Rules. 
 
 The free text search filters Detection Rules by text in the rule name or query. Query results update in real time when the query is edited—there is no “Search” button to click.
 
+#### Filter by facet
+
+{{< img src="security_monitoring/detection_rules/facets-panel.png" alt="Facets panel" width="75%">}}
+
+Use facets in the left panel to scope a search query by value. For example, if you have several rule sources and need to troubleshoot on rules provided by one source, hover over a source value in the panel, such as `cloudtrail` or `kubernetes`, and click **only** to narrow the search to that source.
+
+By default, all facets are selected. To remove a facet from search, deselect the checkbox.
+
 ### Rules table
 
 {{< img src="security_monitoring/detection_rules/rules_table2.png" alt="Rules Table"  >}}
