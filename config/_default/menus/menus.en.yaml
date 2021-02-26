@@ -1749,11 +1749,6 @@ main:
     parent: detection_rules
     identifier: security_monitoring_detection_rules
     weight: 201
-  - name: Compliance Monitoring
-    url: security_monitoring/detection_rules/compliance_monitoring
-    parent: detection_rules
-    identifier: compliance_monitoring_detection_rules
-    weight: 202
   - name: Default Detection Rules
     url: security_monitoring/default_rules
     parent: security_compliance_monitoring

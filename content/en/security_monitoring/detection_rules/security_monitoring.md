@@ -77,7 +77,7 @@ Construct a search query using the same logic as a [log explorer search][1]. Eac
 
 #### Learned value
 
-{{< img src="security_monitoring/detection_rules/learning_duration.png" alt="Define the learned value" >}}\
+{{< img src="security_monitoring/detection_rules/learning_duration.png" alt="Define the learned value" >}}
 
 Select a value to detect, learning duration, and, optionally, define a signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (e.g. user, IP, etc.).
 
