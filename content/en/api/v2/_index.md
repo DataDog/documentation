@@ -76,7 +76,7 @@ Maven `pom.xml` for running examples:
       <scope>compile</scope>
     </dependency>
   </dependencies>
-</project
+</project>
 ```
 Make sure that `CLASSPATH` variable contains all dependencies.
 
