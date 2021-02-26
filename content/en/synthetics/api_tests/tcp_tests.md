@@ -20,11 +20,11 @@ further_reading:
 ## Overview
 
 TCP tests allow you to easily **monitor that low-level TCP connections can be established on the ports of given hosts**, ensuring availability of a variety of key services: e.g., `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. Thanks to built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.
-TCP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to launch your TCP connections from **outside or inside your network**.
+TCP tests can run from [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from **outside or inside your network**.
 
 ## Configuration
 
-After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
+After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
 
 ### Define request
 
@@ -152,4 +152,3 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [12]: https://www.markdownguide.org/basic-syntax/
 [13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [14]: /synthetics/settings/#global-variables
-[15]: /synthetics/api_tests/errors/#ssl-errors

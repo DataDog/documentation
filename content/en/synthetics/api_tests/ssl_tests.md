@@ -20,11 +20,11 @@ further_reading:
 ## Overview
 
 SSL tests allow you to **proactively monitor the validity and expiration of your SSL/TLS certificates** to ensure secure connections between your key services and your users. If your certificate is about to expire or becomes compromised, Datadog sends you an **alert with details on the failure**, allowing you to quickly pinpoint the root cause of the issue and fix it.
-SSL tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor certificates of **public or internal hosts**.
+SSL tests can run from [managed][1] and [private locations][2] depending on whether you want to monitor certificates of **public or internal hosts**.
 
 ## Configuration
 
-After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
+After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
 
 ### Define request
 
@@ -34,9 +34,9 @@ After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][
 2. Add **Advanced Options** (optional) to your test:
     * **Accept self-signed certificates**: Bypass any server error related to a self-signed certificate.
     * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
-  
+
   ```
-  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts 
+  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
   ```
 
@@ -86,7 +86,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][11].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][10].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -94,9 +94,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -130,7 +130,7 @@ You can create local variables by defining their values from one of the below av
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -144,7 +144,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 | `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.                                                                                                                                                                                                                                                         |
 | DNS               | DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
 | `INVALID_REQUEST` | The configuration of the test is invalid (for example, a typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][16].                                                                                                                                                                                                                                                                                                                                                      |
+| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][15].                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. <br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. <br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
 
 ## Further Reading
@@ -160,10 +160,9 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [7]: /synthetics/api_tests/icmp_tests
 [8]: /synthetics/search/#search
 [9]: /synthetics/ci
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /api/v1/synthetics/#create-a-test
-[12]: /monitors/notifications/?tab=is_alert#notification
-[13]: https://www.markdownguide.org/basic-syntax/
-[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[15]: /synthetics/settings/#global-variables
-[16]: /synthetics/api_tests/errors/#ssl-errors
+[10]: /api/v1/synthetics/#create-a-test
+[11]: /monitors/notifications/?tab=is_alert#notification
+[12]: https://www.markdownguide.org/basic-syntax/
+[13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[14]: /synthetics/settings/#global-variables
+[15]: /synthetics/api_tests/errors/#ssl-errors

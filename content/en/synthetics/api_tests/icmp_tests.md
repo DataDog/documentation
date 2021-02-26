@@ -22,19 +22,19 @@ further_reading:
 
 ICMP tests allow you to easily **monitor the availability of your hosts** and **diagnose network communication issues**. By asserting on the values received from one or more **ICMP ping(s)** to your endpoint, Datadog can help **detect connectivity issues, above-quota latency for round trip times, and unexpected changes in security firewall configuration**. The tests can also track the **number of network hops (TTL)** required to connect to your host and view **traceroute** results to **discover details on each network hop** along the path.
 
-ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand or from within your [CI/CD pipelines][3].
+ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand or from within your [CI/CD pipelines][3].
 
 ## Configuration
 
-After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][7], or [`ICMP` test][8]), you can define your test's request.
+After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][7], or [`ICMP` test][8]), you can define your test's request.
 
 ### Define Request
 
 {{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
 1. Specify the **Domain Name** or **IP address** to run your test on.
-2. Select/Deselect option to **Track number of network hops (TTL)**.
-3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to increase or decrease.
+2. Select/Deselect option to **Track number of network hops (TTL)**. This will turn on a "traceroute" probe to discover all gateways along the path to the host destination.
+3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to decrease or increase up to 10.
 4. **Name** your ICMP test.
 5. Add `env` **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
 6. Select the **Locations** to run your ICMP test from: ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger the ICMP pings from outside or inside your network.
@@ -60,7 +60,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Aggregation    |Operator                                                                               | Value Type       |
 |-----------------|----------------|------------------------------------------------------------------------|------------------|
-| latency         | `avg`, `max`, `min` or `jitter` |`is less than`, `is less than or equal`, <br> `is`, `is more than`, `is more than or equal` | _integer (ms)_    |
+| latency         | `avg`, `max`, `min` or `stddev` (aka `jitter`) |`is less than`, `is less than or equal`, <br> `is`, `is more than`, `is more than or equal` | _integer (ms)_    |
 | packet loss     | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _percentage (%)_ |
 | packet received | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 | network hops    | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
