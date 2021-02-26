@@ -18,6 +18,12 @@ export default {
         eu: 'app.datadoghq.eu',
         gov: 'app.ddog-gov.com'
     },
+    dd_site_name: {
+        us: 'US',
+        us3: 'US3',
+        eu: 'EU',
+        gov: 'Government'
+    },
     tcp_endpoint: {
         us: 'agent-intake.logs.datadoghq.com',
         us3: 'agent-intake.logs.us3.datadoghq.com',
