@@ -80,13 +80,14 @@ For Kubernetes, APM is priced by nodes not by pods.
 
 ### Lambda functions and indexed spans
 
-Continuously invoking 20 Lambda functions every hour for an entire month while sending 10 million Indexed Spans.
+An AWS-Lambda based serverless application being invoked 10 million times in a month while sending 10 million Indexed Spans.
 
-| Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
-|-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| Lambda Function   | 20          | [$5 per month][8]                                               | 20 * $5  | $100               |
-| Indexed Spans    | 10 million | 150,000 Indexed Spans included with each Lambda Function. $1.70 per million additional Indexed Spans | 7 * $1.70 | $11.90               |
-| Total             |            |                                                                             | $100 + $11.90 | **$119.90 per month** |
+
+| Billable Unit                  | Quantity   | Price                                                                       | Formula   | Subtotal           |
+|--------------------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
+| Lambda Function Invocations    | 10 million | [$5 per month][8]                                                           | 10 * $5  | $50               |
+| Indexed Spans                  | 10 million | 150,000 Indexed Spans included with each 1 million Lambda invocations. $1.70 per million additional Indexed Spans | 8.5 * $1.70 | $14.45               |
+| Total                          |            |                                                                             | $50 + $14.45 | **$64.45 per month** |
 
 
 ## FAQ

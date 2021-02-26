@@ -110,7 +110,7 @@ More information and additional parameters can be found in the [macro documentat
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-The [Datadog CDK Constructs][1] automatically configures ingestion of metrics, traces, and logs from your serverless applications by:
+The [Datadog CDK Constructs][1] automatically configure ingestion of metrics, traces, and logs from your serverless applications by:
 
 - Installing and configuring the Datadog Lambda library for your Python and Node.js Lambda functions.
 - Enabling the collection of traces and custom metrics from your Lambda functions.

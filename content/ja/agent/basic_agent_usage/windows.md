@@ -382,7 +382,7 @@ print tempfile.gettempdir()
 {{% /tab %}}
 {{< /tabs >}}
 
-## 使用例
+## ユースケース
 
 ###  Windows サービスの監視
 

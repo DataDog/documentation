@@ -48,6 +48,8 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character.
 
+**Note**: These characters can be escaped, but are not searchable in logs search. To search for special characters, parse them into an attribute with the [grok parser][1], and then search for logs that contain the attribute.
+
 ## Attributes search
 
 ### Message attribute search
@@ -58,7 +60,7 @@ To search for logs that contain `user=JaneDoe` in the message attribute use the 
 
 ### Facets search
 
-To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
+To search on a specific attribute, first [add it as a facet][2] and then add `@` to specify you are searching on a facet.
 
 For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
 
@@ -117,13 +119,13 @@ You can search for numerical attribute within a specific range. For instance, re
 
 ## Tags
 
-Your logs inherit tags from [hosts][2] and [integrations][3] that generate them. They can be used in the search and as facets as well:
+Your logs inherit tags from [hosts][3] and [integrations][4] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
 * `env:(prod OR test)` matches all logs with the tag `env:prod` or the tag `env:test`
 * `(env:prod AND -version:beta)` matches all logs that contain tag `env:prod` and that do not contain tag `version:beta`
 
-If your tags don't follow [tags best practices][4] and don't use the `key:value` syntax, use this search query:
+If your tags don't follow [tags best practices][5] and don't use the `key:value` syntax, use this search query:
 
 * `tags:<MY_TAG>`
 
@@ -137,14 +139,15 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 ## Saved Searches
 
-[Saved Views][5] contain your search query, columns, time horizon, and facet.
+[Saved Views][6] contain your search query, columns, time horizon, and facet.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/facets/
-[2]: /infrastructure/
-[3]: /integrations/#cat-log-collection
-[4]: /getting_started/tagging/#tags-best-practices
-[5]: /logs/explorer/saved_views/
+[1]: /logs/processing/parsing/?tab=matcher
+[2]: /logs/explorer/facets/
+[3]: /infrastructure/
+[4]: /integrations/#cat-log-collection
+[5]: /getting_started/tagging/#tags-best-practices
+[6]: /logs/explorer/saved_views/

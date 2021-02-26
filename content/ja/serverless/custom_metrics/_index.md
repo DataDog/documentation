@@ -43,8 +43,8 @@ Datadog ログを使用していない場合でも、非同期のカスタムメ
 - `<METRIC_VALUE>` は、数値 (整数または浮動小数点数) でなければなりません。
 - `<TAG_LIST>` はオプションです。`['owner:Datadog', 'env:demo', 'cooltag']` のように書式設定されます。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,other" >}}
+{{< programming-lang lang="python" >}}
 
 ```python
 from datadog_lambda.metric import lambda_metric
@@ -59,9 +59,8 @@ def lambda_handler(event, context):
         tags=['product:latte', 'order:online']  # 関連付けられたタグ
     )
 ```
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodeJS" >}}
 
 ```javascript
 const { datadog, sendDistributionMetric } = require('datadog-lambda-js');
@@ -87,9 +86,8 @@ module.exports.myHandler = datadog(myHandler, {
 });
 */
 ```
-
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 ```go
 package main
@@ -120,8 +118,8 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 ```ruby
 require 'datadog/lambda'
@@ -139,8 +137,8 @@ def handler(event:, context:)
 end
 ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
 
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
@@ -159,9 +157,8 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-{{% /tab %}}
-{{% tab "他のランタイム" %}}
-
+{{< /programming-lang >}}
+{{< programming-lang lang="other" >}}
 
 [非同期カスタムメトリクス](#synchronous-vs-asynchronous-custom-metrics)の発行は、任意の言語またはカスタムランタイムで可能です。[Datadog Forwarder][1] が識別し、Datadog に送信する Lambda 関数に特別な JSON 形式の文字列を出力することで機能します。これを使用するには:
 
@@ -191,8 +188,8 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 **注:** これらのカスタムメトリクスは、[ディストリビューション](#custom-metrics)として送信されます。以前に別の方法でカスタムメトリクスを送信していた場合は、[ディストリビューションへのアップグレードの影響に関するドキュメントを参照してください](#understanding-distribution-metrics)。
 
 [1]: /ja/serverless/forwarder/
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### カスタムメトリクスのタグ付け
 

@@ -188,3 +188,4 @@ Link to a postmortem document, look back on exactly what went wrong, and add fol
 [5]: /tracing/#2-instrument-your-application
 [6]: https://app.datadoghq.com/incidents/ddslackapp
 [7]: https://app.datadoghq.com/notebook/list
+[8]: https://docs.datadoghq.com/integrations/slack/?tab=slackapplicationus

@@ -64,7 +64,7 @@ Si votre parser de log personnalisé ne fonctionne pas, vérifiez tout d'abord l
 Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez pas une ligne existante) à n'importe quel fichier de log surveillé par l'Agent. L'Agent surveille uniquement la fin de chaque fichier de log et ne remarquera donc pas les modifications effectuées ailleurs dans le fichier.
 </div>
 
-### Écrire des fonctions de parsing
+### Rédaction de fonctions de parsing
 
 Les fonctions de parsing personnalisées doivent :
 
@@ -77,7 +77,7 @@ Les fonctions de parsing personnalisées doivent :
 
     Si la ligne ne correspond pas, la valeur renvoyée doit être `None`.
 
-### Exemple pour la collecte de métriques
+### Collecte de métriques
 
 Imaginons que vous recueillez des métriques à partir de logs qui ne sont pas formatés canoniquement, mais intelligemment délimités par un caractère unique. Les logs se présentent de la manière suivante :
 
@@ -143,7 +143,7 @@ La clé d'agrégation est une combinaison des champs suivants :
 
 Pour obtenir un exemple de parser d'événements, découvrez notre [parser d'événements de compactage Cassandra][3] livré avec l'Agent.
 
-### Exemple pour la collecte d'événements
+### Collecte d'événements
 
 Imaginons que vous souhaitez recueillir des événements à partir de logs auxquels vous pouvez ajouter toutes sortes d'informations pertinentes. Ces logs sont intelligemment délimités par un caractère unique et se présentent de la façon suivante :
 
@@ -232,7 +232,7 @@ Votre fichier de configuration contiendrait alors ceci :
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
 ```
 
-## Dépannage de votre parser de log personnalisé
+## Dépannage
 
 Personne n'étant à l'abri d'un bug, il est très important de pouvoir voir le traceback de vos parsers de log. Cela est possible si le niveau des [logs de votre Agent][6] est défini sur « DEBUG ». Le niveau de log de l'Agent peut être défini dans `datadog.conf` en supprimant la mise en commentaire de [cette ligne][7] et en la modifiant, puis en [redémarrant l'Agent][8]. Une fois ces modifications effectuées, le traceback associé aux erreurs dans votre parser de log personnalisé se trouvera dans le fichier *collector.log* ([lisez cet article pour savoir où se trouvent les logs de votre Agent][6]). Ce traceback comprend généralement la chaîne checks.collector(datadog.py:278) | Error while parsing line in them ([le code de l'Agent où l'erreur sera probablement générée se trouve ici][9]).
 

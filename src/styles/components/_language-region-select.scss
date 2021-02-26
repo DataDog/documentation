@@ -23,6 +23,13 @@
 
     .region-select-container {
       margin-left: 30px;
+
+      a:first-of-type {
+
+        @-moz-document url-prefix() {
+          margin-top: 9px;
+        }
+      }
     }
 
     @include media-breakpoint-up(lg) {

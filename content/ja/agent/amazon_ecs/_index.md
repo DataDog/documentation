@@ -87,9 +87,9 @@ EC2 インスタンスでセキュリティグループ設定を再度チェッ�
 aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.json>
 ```
 
-[1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
-[2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
-[3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
+[1]: /resources/json/datadog-agent-ecs.json
+[2]: /resources/json/datadog-agent-ecs1.json
+[3]: /resources/json/datadog-agent-ecs-win.json
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: /ja/agent/amazon_ecs/logs/
 [6]: /ja/agent/amazon_ecs/apm/
@@ -109,6 +109,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 11. **Image** に `gcr.io/datadoghq/agent:latest` と入力します。
 12. **Maximum memory** に `256` と入力します。**注**: 多くのリソースを使用する場合は、メモリの上限を上げる必要があります。
 13. **Advanced container configuration** セクションまでスクロールし、**CPU units** に `10` と入力します。
+**注**: Windows の場合は、`Timeout while starting the service` のエラーが発生しないよう **CPU units** に `512` 以上を入力します。
 14. **Env Variables** に、**Key** `DD_API_KEY` を追加し、値に Datadog API キーを入力します。こうした守秘性の高い情報を S3 に保管したい場合は、[ECS の構成ガイド][1]を参照してください。*
 15. `DD_TAGS` キーを使用して、追加するタグに別の環境変数を追加します。
 16. **Storage and Logging** セクションまで下へスクロールします。
@@ -133,11 +134,11 @@ Amazon ECS のメトリクスを収集するために、次のアクセス許可
 | `ecs:ListServices`               | 指定したクラスターで実行されているサービスを一覧表示します。   |
 | `ecs:DescribeContainerInstances` | Amazon ECS コンテナインスタンスについて説明します。                     |
 
-### Agent をデーモンサービスとして実行
+### Agent を Daemon サービスとして実行
 
 Datadog Agent は、各 EC2 インスタンス上の 1 つのコンテナーで実行するのが理想的です。最も簡単なのは、Datadog Agent を[デーモン サービス][15]として実行する方法です。
 
-#### Datadog の ECS タスクを使用して、AWS でデーモンサービスをスケジューリングする
+#### Datadog の ECS タスクを使用して、AWS でDaemon サービスをスケジューリング
 
 1. AWS コンソールにログインし、ECS クラスターページに移動します。Agent を実行するクラスターをクリックします。
 2. 新しいサービスを作成するには、「サービス」で **Create** ボタンをクリックします。

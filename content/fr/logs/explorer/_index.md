@@ -22,39 +22,35 @@ further_reading:
 
 Le Log Explorer vous permet d'effectuer un premier dépannage et de commencer à plonger au cœur de vos logs :
 
-{{< img src="logs/explorer/log_explorer_walkthrough.gif" alt="Vue exploration avec commentaires" style="width:80%;" >}}
-
 Chaque vue vous permet d'analyser un aspect précis de vos données de log, à partir d'une [requête de recherche][1].
 
 ### Live Tail
 
 La vue Live Tail affiche les logs qui transitent dans Datadog. Les logs Live Tail sont éphémères, mais la vue vous permet d'explorer **tous** les logs, qu'ils soient indexés ou non. Consultez la [section Live Tail][2] pour en savoir plus.
 
-{{< img src="logs/explorer/log_explorer_walkthrough_livetail.gif" alt="Live tailing de log" style="width:60%;" >}}
+{{< img src="logs/explorer/live_tail/livetail.gif" alt="Live tailing de log" style="width:60%;" >}}
 
 ### Listes de logs
 
 La liste de logs affiche les logs indexés et propose des outils efficaces pour parcourir les **résultats individuels**. Consultez la [section Liste de logs][3] pour en savoir plus.
 
-{{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="Liste de logs" style="width:60%;" >}}
+{{< img src="logs/explorer/toplists.png" alt="Liste de logs" style="width:60%;" >}}
 
 ### Log Patterns
 
 Les Log Patterns agrègent automatiquement les logs indexés en **plusieurs groupes** avec des structures similaires. Consultez la [section Log Patterns][4] pour en savoir plus.
 
-{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
+{{< img src="logs/explorer/patterns_side_panel.png" alt="Log Patterns" style="width:60%;" >}}
 
 ### Analyse de logs
 
 La vue d'analyse de logs propose des **représentations graphiques** des requêtes de log ainsi que des maximums, moyennes, centiles, nombres uniques de valeurs, et bien plus encore. Consultez le [guide relatif aux graphiques de log][5] pour en savoir plus sur les différents graphiques disponibles.
 
-{{< img src="logs/explorer/log_explorer_walkthrough_analytics.png" alt="Analyse de logs" style="width:60%;" >}}
-
 ## Volet latéral des logs
 
 Datadog affiche les informations sur les logs individuels dans le volet latéral, avec la disposition suivante :
 
-{{< img src="logs/explorer/log_side_panel.png" alt="Volet latéral des logs"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/overview.png" alt="Volet latéral des logs"  style="width:60%;">}}
 
 ### Informations structurées des logs
 
@@ -80,11 +76,11 @@ Cliquez sur l'onglet **Metrics** pour accéder aux métriques de votre infrastru
 
 Interagissez avec la section **Host** en haut des attributs réservés pour accéder au [dashboard du host][10] ou à la [page Network][11]. Interagissez avec les sections **Container** pour accéder à la [page des conteneurs][12], filtrés en fonction des paramètres sous-jacents.
 
-{{< img src="logs/explorer/log_side_panel_infra.gif" alt="Hub vers l'infrastructure" style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/infra.gif" alt="Hub vers l'infrastructure" style="width:60%;">}}
 
 Si les logs proviennent d'une source sans serveur, la section Host est remplacée par une section Serverless avec un lien permettant d'accéder directement à la [page Serverless correspondante][13].
 
-{{< img src="logs/explorer/log_side_panel_infra-serverless.png" alt="Hub vers la page Serverless" style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/infra-serverless.png" alt="Hub vers la page Serverless" style="width:60%;">}}
 
 
 #### Corrélation avec les données d'APM
@@ -95,7 +91,7 @@ Cliquez sur l'onglet **APM** pour afficher le log dans le contexte de sa trace c
 
 Interagissez avec la section **Service** pour recentrer la recherche dans le Log Explorer et afficher tous les autres logs provenant de la même trace.
 
-{{< img src="logs/explorer/log_side_panel_infra.gif" alt="Hub vers l'APM" style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/apm.gif" alt="Hub vers l'APM" style="width:60%;">}}
 
 
 ### Configurer votre contexte de dépannage
@@ -105,11 +101,11 @@ Interagissez avec les noms et les valeurs des attributs, à l'aide de la section
 - Ajouter ou supprimer une colonne du tableau des logs
 - Ajouter des valeurs particulières à la requête de recherche (inclusion ou exclusion)
 
-{{< img src="logs/explorer/side_panel_context.gif" alt="Contexte du volet latéral"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/context.gif" alt="Contexte du volet latéral"  style="width:60%;">}}
 
 - Créer ou modifier une facette ou une mesure à partir d'un attribut (voir la section [Facettes de log][17])
 
-{{< img src="logs/explorer/side_panel_facets.gif" alt="Facettes du volet latéral"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel/facets.gif" alt="Facettes du volet latéral"  style="width:60%;">}}
 
 ### Partager un log
 
@@ -118,7 +114,7 @@ Utilisez le bouton de **partage** pour partager le log ouvert dans le volet lat�
 - Sélectionnez **Copy to clipboard** ou appuyez sur les touches `Ctrl + C` ou `Cmd + C` pour copier le JSON du log dans votre presse-papiers.
 - L'option **Share Event** permet de partager le log (ainsi que la vue sous-jacente) avec vos collègues par e-mail, via Slack, etc. Découvrez toutes les [intégrations de notification Datadog][18] disponibles.
 
-{{< img src="logs/explorer/upper_log_panel.png" alt="Volet supérieur des logs"  style="width:50%;">}}
+{{< img src="logs/explorer/side_panel/upper_log_panel.png" alt="Volet supérieur des logs"  style="width:50%;">}}
 
 ## Contexte de dépannage
 
@@ -133,7 +129,7 @@ Cette fonction apparaît directement dans la barre de recherche sous la forme d'
 
 Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans la liste déroulante. Vous pouvez également [saisir un intervalle personnalisé][19] :
 
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Intervalle de temps" >}}
+{{< img src="logs/explorer/timeseries.png" style="width:50%;" alt="Intervalle de temps" >}}
 
 **Recherche**
 

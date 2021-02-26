@@ -33,7 +33,16 @@ There are two options when configuring triggers on the Datadog Forwarder Lambda 
 
 ### Automatically set up triggers
 
-If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can automatically manage triggers for you.
+Datadog can automatically configure triggers on the Datadog Forwarder Lambda function to collect AWS logs from the following sources and locations:
+
+| Source                          | Location       |
+| ------------------------------- | ---------------|
+| S3 Access Logs                  | S3             |
+| Classic ELB Access Logs         | S3             |
+| Application ELB Access Logs     | S3             |
+| CloudFront Access Logs          | S3             |
+| Redshift Logs                   | S3             |
+| Lambda Logs                     | CloudWatch     |
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 2. Ensure the policy of the IAM role used for [Datadog-AWS integration][3] has the following permissions. Information on how these permissions are used can be found in the descriptions below:

@@ -71,25 +71,24 @@ Datadog <> Google Cloud インテグレーションは、サービスアカウ�
 **注**: 監視するプロジェクトで、[Google Cloud の課金][29]、[Stackdriver Monitoring API][30]、[Compute Engine API][31]、[Cloud Asset API][32] がすべて有効になっている必要があります。
 
 1. Datadog インテグレーションをセットアップする Google Cloud プロジェクトの [Google Cloud 認証情報ページ][33]に移動します。
-2. _認証情報を作成_を押し、次に_サービスアカウントキー_を選択します。
+2. _Create credentials_ (画面上付近) をクリックし、_Service account_ を選択します。
 
-    {{< img src="integrations/google_cloud_platform/SelectServiceAccount.png" alt="設定" popup="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/SelectServiceAccount2.png" alt="設定" popup="true" style="width:80%;">}}
 
-3. _サービスアカウント_のドロップダウンで、_サービスアカウント_を選択します。
-4. サービスアカウントに一意の名前を付けます。
-5. _役割_では、Compute Engine —> Compute 閲覧者、モニタリング —> モニタリング閲覧者、および Cloud Asset —> Cloud Asset 閲覧者 を選択します。Continue を押します。
+3. サービスアカウントに一意の名前を付け、_Create_ をクリックします。
+4. 役割に Compute 閲覧者、モニタリング閲覧者、Cloud Asset 閲覧者を追加し、_Done_ をクリックします。
 
    **注**: Compute Engine と Cloud Asset の役割を選択するには、サービスアカウントキー管理者である必要があります。選択されたすべての役割により、Datadog はユーザーに代わってメトリクス、タグ、イベント、ユーザーラベルを収集できます。
 
-6. **CREATE キー**を押します、キーのタイプとして _JSON_ を選択し、_作成_を押します。このファイルはインストールを完了するために必要になるため、ファイルの保存場所をメモしておいてください。
-7. [Datadog Google Cloud インテグレーションタイル][34]に移動します。
-8. **Configuration** タブで、_Upload Key File_ を選択して、このプロジェクトを Datadog と統合します。
-9. オプションで、タグを使用して、このインテグレーションから特定のホストを除外することもできます。この手順の詳細については、[下記](#configuration)を参照してください。
+5. ページ下部に表示されるサービスアカウントの中から、先ほど作成したものを選択します。_Add Key_ -> _Create new key_ の順にクリックし、種類として _JSON_ を選択します。その後 _Create_　および _Save_ をクリックします。インストールの完了に必要となるため、このファイルの保存場所をメモしておいてください。
+6. [Datadog Google Cloud インテグレーションタイル][34]に移動します。
+7. **Configuration** タブで、_Upload Key File_ を選択して、このプロジェクトを Datadog と統合します。
+8. オプションで、タグを使用して、このインテグレーションから特定のホストを除外することもできます。この手順の詳細については、[下記](#configuration)を参照してください。
 
     {{< img src="integrations/google_cloud_platform/ServiceAccountAdded.png" alt="設定" popup="true" style="width:80%;">}}
 
-10. _Install/Update_ を押します。
-11. 複数のプロジェクトを監視する場合は、次の方法のいずれかを使用します。
+9. _Install/Update_ を押します。
+10. 複数のプロジェクトを監視する場合は、次の方法のいずれかを使用します。
 
     - 複数のサービスアカウントを使用する場合は、上のプロセスを繰り返します。
     - 同じサービスアカウントを使用する場合は、手順 6 でダウンロードした JSON ファイルで `project_id` を更新します。次に、手順 7 ～ 10 の説明に従って、このファイルを Datadog にアップロードします。
@@ -154,13 +153,14 @@ GCE または GKE で実行されているアプリケーションの場合は�
 
 #### Stackdriver から Pub/Sub へログをエクスポートする
 
-1. [Stackdriver ページ][37]に移動し、エクスポートするログを絞り込みます。
-2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+1. [ログエクスプローラーページ][37]に移動し、エクスポートするログを絞り込みます。
+2. **Actions** メニューから **Create Sink** を選択します。
+3. シンクに名前を設定します。
+4. エクスポート先として _Cloud Pub/Sub_ を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+5. **Create Sink**をクリックし、確認メッセージが表示されるまで待ちます。
 
 **注**: 異なるシンクを使用して、Stackdriver から同じ Pub/Sub への複数のエクスポートを作成することができます。
 

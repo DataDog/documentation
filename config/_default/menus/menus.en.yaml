@@ -543,178 +543,183 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
     weight: 307
+  - name: IoT
+    url: agent/iot/
+    parent: agent
+    identifier: agent_iot
+    weight: 4
   - name: Amazon ECS
     url: agent/amazon_ecs/
     parent: agent
     identifier: agent_amazon_ecs
-    weight: 4
+    weight: 5
   - name: Log collection
     url: agent/amazon_ecs/logs/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_logs
-    weight: 401
+    weight: 501
   - name: APM
     url: agent/amazon_ecs/apm/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_apm
-    weight: 402
+    weight: 502
   - name: Tag extraction
     url: agent/amazon_ecs/tags/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_tags
-    weight: 403
+    weight: 503
   - name: Data collected
     url: agent/amazon_ecs/data_collected/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_data_collected
-    weight: 404
+    weight: 504
   - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
     identifier: agent_cluster
-    weight: 5
+    weight: 6
   - name: Setup
     url: agent/cluster_agent/setup/
     parent: agent_cluster
     identifier: cluster_agent_setup
-    weight: 501
+    weight: 601
   - name: Event Collection
     url: agent/cluster_agent/event_collection/
     parent: agent_cluster
     identifier: cluster_agent_event_collection
-    weight: 502
+    weight: 602
   - name: Custom & External Metrics
     url: agent/cluster_agent/external_metrics/
     parent: agent_cluster
     identifier: cluster_agent_external_metrics
-    weight: 503
+    weight: 603
   - name: Cluster Checks
     url: agent/cluster_agent/clusterchecks/
     parent: agent_cluster
-    weight: 504
+    weight: 604
   - name: Endpoints Checks
     url: agent/cluster_agent/endpointschecks/
     parent: agent_cluster
-    weight: 505
+    weight: 605
   - name: Admission Controller
     url: agent/cluster_agent/admission_controller/
     parent: agent_cluster
-    weight: 506
+    weight: 606
   - name: Commands & Options
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
-    weight: 507
+    weight: 607
   - name: Cluster metadata provider
     url: agent/cluster_agent/metadata_provider/
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
-    weight: 508
+    weight: 608
   - name: Build
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
-    weight: 509
+    weight: 609
   - name: Cluster Checks Runner
     url: agent/cluster_agent/clusterchecksrunner
     identifier: cluster_agent_clcr
     parent: agent_cluster
-    weight: 510
+    weight: 610
   - name: Troubleshooting
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 511
+    weight: 611
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 6
+    weight: 7
   - name: Advanced Log Collection
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 601
+    weight: 701
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 602
+    weight: 702
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 603
+    weight: 703
   - name: Proxy
     url: agent/proxy/
     parent: agent
     identifier: agent_proxy
-    weight: 7
+    weight: 8
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 8
+    weight: 9
   - name: Upgrade to Agent v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 801
+    weight: 901
   - name: Upgrade to Agent v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 802
+    weight: 902
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 9
+    weight: 10
     identifier: agent_troubleshooting
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 901
+    weight: 1001
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 902
+    weight: 1002
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 903
+    weight: 1003
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 904
+    weight: 1004
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 905
+    weight: 1005
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 906
+    weight: 1006
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 907
+    weight: 1007
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 908
+    weight: 1008
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 909
+    weight: 1009
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 910
+    weight: 1010
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 10
+    weight: 11
   - name: Security
     identifier: agent_security
     url: security/agent/
     parent: agent
-    weight: 11
+    weight: 12
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
@@ -1007,28 +1012,24 @@ main:
     identifier: metrics_top_level
     pre: nav_metrics
     weight: 110000
-  - name: Introduction
-    url: metrics/introduction/
-    parent: metrics_top_level
-    weight: 901
   - name: Advanced Filtering
     url: metrics/advanced-filtering/
     parent: metrics_top_level
     identifier: metrics_advanced_filtering
-    weight: 902
+    weight: 901
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
-    weight: 903
+    weight: 902
   - name: Summary
     url: metrics/summary/
     parent: metrics_top_level
-    weight: 904
+    weight: 903
   - name: Distributions
     url: metrics/distributions/
     parent: metrics_top_level
     identifier: metrics_distributions
-    weight: 905
+    weight: 904
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1809,7 +1810,7 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 301
-  - name: Test Results
+  - name: Test Results & Performance
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 302

@@ -10,7 +10,7 @@
 - log collection
 - security
 "creates_events": false
-"ddtype": "check"
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/README.md"
 "display_name": "Plateforme JFrog"
