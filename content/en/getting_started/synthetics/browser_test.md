@@ -15,7 +15,7 @@ further_reading:
 
 ## Create a browser test
 
-[Browser tests][1] are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
+[Browser tests][1] are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks **verify both that your applications are up and responding to requests**, and that any conditions defined in your scenarios are met.
 
 In this example, a browser test is configured to map a user's journey from adding an item to cart to successful checkout. If any step during the browser test fails, it throws an error that is recorded in Datadog as a **Test Result**.
 
@@ -28,12 +28,13 @@ In this example, a browser test is configured to map a user's journey from addin
 3. Select **Browser Test**.
 4. Define the configuration of your browser test:
 
-    - Add the URL of the website you’re interested in monitoring. If you don’t know what to start with, you can use `https://www.shopist.io` as a test web application.
-    - Name the test.
-    - You can set tags such as `prod` and `shopist` on your test. Tags will help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
-    - Choose devices and locations for testing. In this example, the test is only run on **Large Laptops** and on **English speaking countries**.
-    - Specify a test frequency.
-    - Set alert conditions to determine the circumstances under which you want a test to send a notification alert.
+    - **Starting URL**: Add the URL of the website you’re interested in monitoring. If you don’t know what to start with, you can use `https://www.shopist.io` as a test web application.
+    - **Name**: Name the test.
+    - **Tags**: You can set tags such as `prod` and `shopist` on your test. Tags will help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
+    - **Browsers & Devices**: Choose the devices you want to use for testing. In this example, the test is only run on **Large Laptops**.
+    - **Locations**: Choose one of the **managed locations** to run your test from. In this example, the test is run in **Americas and Europe**.
+    - **Specify a test frequency**: Select how often you would like the test to run.
+    - **Alert Conditions**: Set alert conditions to determine the circumstances under which you want a test to send a notification alert.
 
         - To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
 
@@ -47,9 +48,9 @@ In this example, a browser test is configured to map a user's journey from addin
         Retry 1 time before location is marked as failed
         ```
 
-        **Note**: By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][3].
+         **Note**: By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][3].
 
-    - Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][4], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
+    - **Notify**: Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][4], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
     - Click **Save & Edit Recording**.
 
 {{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Configured browser test"  style="width:90%;">}}

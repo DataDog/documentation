@@ -19,7 +19,7 @@ further_reading:
 
 ## Create an API test
 
-[API tests][1] help you monitor your API endpoints and alert you when they are failing or too slow. These checks verify that your applications are responding to requests and meet any conditions you define, such as response time, HTTP status code, and header or body contents. Use the [Datadog API][2] to see the full list.
+[API tests][1] help you **monitor your API endpoints and alert** you when they are failing or too slow. These checks verify that your applications are responding to requests and meet any conditions you define, such as **response time**, **HTTP status code**, and **header or body contents**. Use the [Datadog API][2] to see the full list.
 
 In this example, an API test is created to ensure your website is constantly up and providing responses in a specific amount of time.
 
@@ -32,8 +32,8 @@ In this example, an API test is created to ensure your website is constantly up 
 
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, which is a test web application.
     - Select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
-    - Add some tags to help organize and filter tests.
-    - Select locations for testing.
+    - You can set tags such as `prod` and `shopist` on your test. Tags will help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
+    - Choose from the **managed locations** to run your test from.
     - Click the **Test URL** button.
 
 {{< img src="getting_started/synthetics/api-test-config.png" alt="API test configuration"  style="width:60%;">}}

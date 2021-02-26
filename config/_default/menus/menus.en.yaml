@@ -359,21 +359,21 @@ main:
     url: getting_started/synthetics/
     parent: getting_started
     weight: 10
-  - name: Private Locations
-    identifier: getting_started_private_location
-    url: getting_started/synthetics/private_location
-    parent: getting_started_synthetics
-    weight: 1001
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1002
+    weight: 1001
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1003
+    weight: 1002
+  - name: Private Locations
+    identifier: getting_started_private_location
+    url: getting_started/synthetics/private_location
+    parent: getting_started_synthetics
+    weight: 1003  
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
