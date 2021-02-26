@@ -31,6 +31,7 @@ By default, the Datadog API Docs show examples in cURL. Select one of our offici
 {{< programming-lang-wrapper langs="java,python,python-beta,ruby,ruby-beta,go" >}}
 
 {{< programming-lang lang="java" >}}
+#### Installation
 Maven - Add this dependency to your project's POM:
 ```java
 <dependency>
@@ -46,55 +47,70 @@ Gradle - Add this dependency to your project's build file:
 compile "com.datadoghq:datadog-api-client:1.0.0"
 ```
 
-Make sure that `CLASSPATH` variable contains all dependencies.
+#### Usage
 
+Make sure that `CLASSPATH` variable contains all dependencies.
+```java
+import com.datadog.api.<VERSION>.client.ApiClient;
+import com.datadog.api.<VERSION>.client.ApiException;
+import com.datadog.api.<VERSION>.client.Configuration;
+import com.datadog.api.v2.client.auth.*;
+import com.datadog.api.v2.client.model.*;
+import com.datadog.api.<VERSION>.client.api.*;
+```
+**Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-```console
-$ pip install datadog
+#### Installation
+```sh
+pip install datadog
 ```
-
+#### Usage
 ```python
 import datadog
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python-beta" >}}
+#### Installation
 ```console
-$ pip3 install datadog-api-client --pre
+pip3 install datadog-api-client --pre
 ```
-
+#### Usage
 ```python
 import datadog_api_client
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
-```console
-$ gem install dogapi
+#### Installation
+```sh
+gem install dogapi
 ```
-
+#### Usage
 ```ruby
 require 'dogapi'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby-beta" >}}
-```console
-$ gem install datadog_api_client -v 1.0.0.beta.2 --pre
+#### Installation
+```sh
+gem install datadog_api_client -v 1.0.0.beta.2 --pre
 ```
-
+#### Usage
 ```ruby
 require 'datadog_api_client'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-```console
-$ go get github.com/DataDog/datadog-api-client-go
+#### Installation
+```sh
+go get github.com/DataDog/datadog-api-client-go
 ```
-
+#### Usage
 ```go
 import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
 ```
