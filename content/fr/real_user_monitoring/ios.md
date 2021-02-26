@@ -234,7 +234,7 @@ Pour en savoir plus et découvrir toutes les options disponibles, référez-vous
 ### Actions RUM
 
 Pour enregistrer manuellement les actions RUM instantanées (par exemple : `.tap`), utilisez :
-* `.addAction(type:name:)`
+* `.addUserAction(type:name:)`
 
 Pour enregistrer des actions RUM continues (par exemple : `.scroll`), utilisez :
 * `.startUserAction(type:name:)`
@@ -247,7 +247,7 @@ Exemple :
 // dans votre `UIViewController` :
 
 @IBAction func didTapDownloadResourceButton(_ sender: Any) {
-    Global.rum.addAction(
+    Global.rum.addUserAction(
         type: .tap,
         name: (sender as? UIButton).currentTitle ?? "",
     )
