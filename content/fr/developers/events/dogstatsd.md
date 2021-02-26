@@ -39,10 +39,11 @@ event(<TITRE>, <TEXTE>, <TIMESTAMP>, <HOSTNAME>, <CLÉ_AGRÉGATION>, <PRIORITÉ>
 
 Visualisez les erreurs et les exceptions dans Datadog avec un événement DogStatsD :
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
-{{< code-block lang="python" filename="event.py" >}}
+{{< programming-lang lang="python" >}}
+
+```python
 from datadog import initialize, statsd
 
 options = {
@@ -53,23 +54,22 @@ options = {
 initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-{{< code-block lang="ruby" filename="event.rb" >}}
+{{< programming-lang lang="ruby" >}}
+```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
 
-{{< code-block lang="go" filename="event.go" >}}
+{{< programming-lang lang="go" >}}
+```go
 package main
 
 import (
@@ -91,12 +91,11 @@ func main() {
         time.Sleep(10 * time.Second)
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
-
-{{< code-block lang="java" filename="event.java" >}}
+{{< programming-lang lang="java" >}}
+```java
 import com.timgroup.statsd.Event;
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -120,37 +119,36 @@ public class DogStatsdClient {
         Statsd.recordEvent(event);
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< programming-lang lang=".NET" >}}
+```csharp
+using StatsdClient; 
 
-{{< code-block lang="csharp" filename="event.cs" >}}
-using StatsdClient;
+public class DogStatsdClient    
+{   
+    public static void Main()   
+    {   
+        var dogstatsdConfig = new StatsdConfig  
+        {   
+            StatsdServerName = "127.0.0.1", 
+            StatsdPort = 8125,  
+        };  
 
-public class DogStatsdClient
-{
-    public static void Main()
-    {
-        var dogstatsdConfig = new StatsdConfig
-        {
-            StatsdServerName = "127.0.0.1",
-            StatsdPort = 8125,
-        };
-
-        using (var dogStatsdService = new DogStatsdService())
-        {
-            dogStatsdService.Configure(dogstatsdConfig);
-            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", tags: new[] { "env:dev" });
-        }
-    }
+        using (var dogStatsdService = new DogStatsdService())   
+        {   
+            dogStatsdService.Configure(dogstatsdConfig);    
+            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" }); 
+        }   
+    }   
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< programming-lang lang="php" >}}
 
-{{< code-block lang="php" filename="event.php" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -168,12 +166,12 @@ $statsd->event('An error occurred.',
            'alert_type' => 'error'
     )
   );
-{{< /code-block >}}
+```
 
 La bibliothèque DogStatsD-PHP vous permet d'envoyer des événements à l'API Datadog directement via TCP. Cette méthode est plus lente mais aussi plus fiable que lorsque vous faites appel à l'instance DogStatsD de l'Agent, les événements étant transmis de votre application à l'Agent via UDP.
 Pour l'utiliser, vous devez configurer la bibliothèque avec vos [clés d'API et d'application Datadog][1] au lieu de l'instance DogStatsD locale :
 
-{{< code-block lang="php" filename="event_through_api.php" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -181,8 +179,8 @@ require __DIR__ . '/vendor/autoload.php';
 use DataDog\DogStatsd;
 
 $statsd = new DogStatsd(
-    array('api_key' => '<CLÉ_API_DATADOG>',
-          'app_key' => '<CLÉ_APPLICATION_DATADOG>',
+    array('api_key' => '<DATADOG_API_KEY>',
+          'app_key' => '<DATADOG_APPLICATION_KEY>',
      )
   );
 
@@ -191,16 +189,19 @@ $statsd->event('An error occurred.',
            'alert_type' => 'error'
     )
   );
-{{< /code-block >}}
+```
+
+[1]: https://app.datadoghq.com/account/settings#api
+
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 **Remarques** :
 
 * L'envoi d'événements via cette méthode fait appel à cURL pour les requêtes d'API.
 * Nous vous conseillons d'utiliser un bloc de code `try`/`catch` pour éviter d'envoyer des avertissements ou des erreurs en cas de problème de communication avec l'API Datadog.
 
-[1]: https://app.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Pour aller plus loin
 

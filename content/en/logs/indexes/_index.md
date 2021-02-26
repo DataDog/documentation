@@ -130,13 +130,13 @@ Update or remove this quota at any time when editing the Index:
 
 {{< img src="logs/indexes/index_quota.png" alt="index details"  style="width:70%;">}}
 
-**Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
+**Note**: Indexes daily quotas reset automatically at [2:00pm UTC][19].
 
 An event is generated when the daily quota is reached:
 
 {{< img src="logs/indexes/index_quota_event.png" alt="index quota notification"  style="width:70%;">}}
 
-Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
+Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 
 ## Further Reading
 
@@ -144,7 +144,7 @@ Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs/indexes/
+[1]: https://app.datadoghq.com/logs/pipelines/
 [2]: /logs/explorer/#visualization
 [3]: /logs/explorer/patterns/
 [4]: /logs/explorer/analytics/
@@ -162,4 +162,5 @@ Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
 [16]: /logs/processing/processors/?tab=ui#trace-remapper
 [17]: /help/
 [18]: /logs/live_tail/#overview
-[19]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
+[19]: https://www.timeanddate.com/worldclock/converter.html
+[20]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold

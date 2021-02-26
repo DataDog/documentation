@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés du service Azure\_Batch."
 doc_link: 'https://docs.datadoghq.com/integrations/azure_batch/'
+draft: false
 git_integration_title: azure_batch
 has_logo: true
 integration_title: Microsoft Azure Batch

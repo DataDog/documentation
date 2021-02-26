@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez les hits, miss, expulsions, clients connectés, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/azure_redis_cache/'
+draft: false
 git_integration_title: azure_redis_cache
 has_logo: true
 integration_title: Microsoft Azure Redis Cache
@@ -28,7 +29,7 @@ Recueillez des métriques d'Azure Redis Cache pour :
 - Visualiser les performances de vos caches Redis
 - Corréler les performances de vos caches Redis avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

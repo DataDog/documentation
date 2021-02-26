@@ -11,11 +11,11 @@ further_reading:
 Datadog の RUM では、カスタムユーザーアクション機能で興味深いイベントやタイミングのデータを収集できます。このガイドでは、例として e コマースのウェブサイトからユーザーのチェックアウト情報を収集します。
 
 ## 1. コードのインスツルメンテーション
-`addUserAction` API を使用すると、属性をいくつでも JavaScript オブジェクトの形式でアタッチできます。この例では、ユーザーがチェックアウトボタンをクリックした時、カードに関する情報が送信されます。
+`addAction` API を使用すると、属性をいくつでも JavaScript オブジェクトの形式でアタッチできます。この例では、ユーザーがチェックアウトボタンをクリックした時、カードに関する情報が送信されます。
 
 ```
 function onCheckoutButtonClick(cart) {
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         'amount': cart.amount, // e.g. 42.12
         'items': cart.items, // e.g. ['tomato', 'strawberries']
     })

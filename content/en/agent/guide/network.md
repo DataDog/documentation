@@ -27,7 +27,7 @@ further_reading:
   - [Live Containers][2] data is `process.`{{< region-param key="dd_site" code="true" >}}
   - [Logs][3] data includes `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP, and several others. Review the complete list of [logs endpoints][4] for more information.
   - [Orchestrator Resources][5] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
-  - [HIPPA logs][6] data is the same as for all [Logs][3], but also the following legacy endpoints are supported:
+  - [HIPAA logs][6] data is the same as for all [Logs][3], but also the following legacy endpoints are supported:
     - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}

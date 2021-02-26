@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Envoyez des alertes et graphiques Datadog sur les flux de votre équipe.
 doc_link: 'https://docs.datadoghq.com/integrations/flowdock/'
+draft: false
 git_integration_title: flowdock
 has_logo: true
 integration_title: Flowdock
@@ -27,7 +28,7 @@ Intégrez FlowDock pour :
 
 Datadog tire parti des fils de Flowdock pour éviter de polluer vos flux avec des notifications. Toutes les notifications d'un flux, et leurs notifications connexes, sont stockées dans leur propre fil. Par exemple, si une alerte de monitor est déclenchée puis résolue, les notifications correspondantes seront regroupées dans Flowdock.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

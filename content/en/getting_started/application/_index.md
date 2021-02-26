@@ -5,6 +5,10 @@ further_reading:
     - link: 'https://learn.datadoghq.com/course/view.php?id=2'
       tag: 'Learning Center'
       text: 'Introduction to Datadog'
+    - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
+      tag: 'Blog'
+      text: 'Introducing the Datadog quick nav menu'
+      
 ---
 
 This page gives a high level overview of the capabilities for the [Datadog site][1].

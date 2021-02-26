@@ -10,7 +10,7 @@ further_reading:
     text: Créer un sous-test Browser
   - link: /synthetics/settings/
     tag: Documentation
-    text: Configurer les paramètres Synthetics avancés
+    text: Configurer les paramètres de surveillance Synthetics avancés
 ---
 ## Créer un test Browser
 
@@ -22,7 +22,7 @@ Dans cet exemple, un test Browser est créé pour simuler le parcours utilisateu
 
 ## Configurer votre test
 
-1. Dans l'application Datadog, passez votre curseur sur l'option **[UX Monitoring][2]** du menu de gauche et sélectionnez **Synthetics Test**.
+1. Dans l'application Datadog, passez votre curseur sur l'option **[UX Monitoring][2]** du menu de gauche et sélectionnez **Synthetic Test**.
 2. Cliquez sur le bouton **New Test** en haut à droite.
 3. Sélectionnez **Browser Test**.
 4. Définissez la configuration de votre test Browser :
@@ -81,12 +81,12 @@ L'onglet **Errors & Warnings** affiche la liste des erreurs réseau et Javascrip
 
 {{< img src="getting_started/synthetics/browser-test-failure.png" alt="Échec du test Browser" style="width:100%;">}}
 
-L'onglet **Traces** est accessible une fois l'[intégration de l'APM avec Synthetics][8] configurée. Il vous permet ensuite d'identifier la cause de l'échec du test en visualisant les traces générées durant son exécution. Pour lier les résultats des tests Browser à l'APM, spécifiez les URL auxquelles vous souhaitez que les en-têtes d'intégration de l'APM soient ajoutés. Vous pouvez utiliser le wildcard `*` : `https://*.datadoghq.com/*`.
+L'onglet **Traces** est accessible une fois l'[intégration de l'APM avec la surveillance Synthetic][8] configurée. Il vous permet ensuite d'identifier la cause de l'échec d'un test en visualisant les traces générées durant son exécution. Pour lier les résultats des tests Browser à l'APM, spécifiez les URL auxquelles vous souhaitez que les en-têtes d'intégration de l'APM soient ajoutés. Vous pouvez utiliser le wildcard `*` : `https://*.datadoghq.com/*`.
 
-{{< whatsnext desc="Après avoir configuré votre premier test Browser :">}}
-{{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}En savoir plus sur les tests Browser{{< /nextlink >}}
-{{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Créer un sous-test Browser{{< /nextlink >}}
-{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configurer les paramètres Synthetics avancés{{< /nextlink >}}
+{{< whatsnext desc="Après avoir configuré votre premier test Browser, vous pouvez :">}}
+{{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}Consulter la documentation sur les tests Browser{{< /nextlink >}}
+{{< nextlink href="/synthetics/browser_tests/#sous-tests" tag="Documentation" >}}Créer un sous-test Browser{{< /nextlink >}}
+{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configurer les paramètres de surveillance Synthetic avancés{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /fr/synthetics/browser_tests/

@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Recueillez des données d'Immunio pour visualiser et surveiller les schémas d'attaque.
 doc_link: 'https://docs.datadoghq.com/integrations/immunio/'
+draft: false
 git_integration_title: immunio
 has_logo: true
 integration_title: Immunio
@@ -29,7 +30,7 @@ IMMUNIO surveille vos applications afin de détecter les attaques suivantes et d
 - Les attaques personnalisées ciblant l'entreprise comme la fraude par carte de crédit et d'autres abus
 - Les mauvais comportements généraux, comme le balayage et le scraping.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -33,7 +33,7 @@ Les Live Processes ne s'affichent pas dans les conteneurs (à l'exception de l'A
 
 Les Live Processes ne s'affichent pas dans les conteneurs (à l'exception de l'Agent Datadog).
 
-### Planification de l'Agent Datadog et de Kube State Metrics sur un cluster mixte (Linux + Windows)
+### Clusters mixte (Linux + Windows)
 
 Pour déployer l'Agent Datadog sur un cluster mixte, il est conseillé d'effectuer deux installations de notre chart Helm avec un `targetSystem` différent.
 
@@ -57,7 +57,7 @@ kube-state-metrics:
 
 **Remarque** : lorsque vous utilisez deux installations de Datadog (une avec `targetSystem: linux` et une autre avec `targetSystem: windows`), assurez-vous que le paramètre `datadog.kubeStateMetricsEnabled` est défini sur `false` pour la deuxième installation afin d'empêcher le déploiement de deux instances de Kube State Metrics.
 
-### HostPort pour l'APM/DogStatsD
+### HostPort pour l'APM ou DogStatsD
 
 `HostPort` est partiellement pris en charge sur Kubernetes, en fonction de la version du système d'exploitation sous-jacent et du plug-in CNI.
 Pour que `HostPort` fonctionne, les exigences suivantes doivent être satisfaites :

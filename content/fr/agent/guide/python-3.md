@@ -2,10 +2,10 @@
 title: Migration de checks custom vers Python 3
 kind: guide
 further_reading:
-- link: agent/versions/upgrade_to_agent_v7
+- link: /agent/versions/upgrade_to_agent_v7/
   tag: Documentation
   text: Upgrade vers l'Agent v7
-- link: agent/guide/agent-v6-python-3
+- link: /agent/guide/agent-v6-python-3/
   tag: Documentation
   text: Utiliser Python 3 avec l'Agent v6 de Datadog
 ---
@@ -22,9 +22,9 @@ Ce guide tente de maintenir la rétrocompatibilité de vos checks custom en perm
 
 ## Éditeurs et outils
 
-### pylint
+### Pylint
 
-`pylint` est doté de fonctions qui vous permettront de [vérifier si vos checks custom sont compatibles avec Python 3][2].
+Pylint est doté de fonctions qui vous permettent de [vérifier si vos checks custom sont compatibles avec Python 3][2].
 
 #### Installation
 
@@ -79,7 +79,7 @@ La plupart des EDI et des éditeurs modernes fournissent automatiquement des fon
 
 ## Migration de Python
 
-### Importations de paquets
+### Importations de packages
 
 Pour normaliser l'espace de nommage des paquets Datadog avec Python 3, toutes les ressources résident dans le sous-paquet de base. Par exemple :
 
@@ -164,7 +164,7 @@ En Python 3, print est explicitement traité comme une fonction. Pour que print
 
 En Python 2, l'opérateur `/` effectue une division euclidienne de nombres entiers.
 
-#### Python 2 :
+#### Python 2
 
 ```python
 >> 5/2
@@ -173,7 +173,7 @@ En Python 2, l'opérateur `/` effectue une division euclidienne de nombres entie
 
 En Python 3, l'opérateur `/` effectue une division réelle (sans reste), tandis que l'opérateur `//` effectue une division euclidienne.
 
-#### Python 3 :
+#### Python 3
 
 ```python
 >> 5/2
@@ -188,7 +188,7 @@ Pour reproduire le même comportement que pour Python 3, quelle que soit la vers
 
 En Python 2, la bibliothèque standard arrondit les nombres de façon arithmétique (arrondi supérieur si le chiffre vaut au moins 5). À l'inverse, Python 3 arrondit les nombres au chiffre pair le plus proche.
 
-#### Python 2 :
+#### Python 2
 
 ```python
 >> round(2.5)
@@ -197,7 +197,7 @@ En Python 2, la bibliothèque standard arrondit les nombres de façon arithmét
 4
 ```
 
-#### Python 3 :
+#### Python 3
 
 ```python
 >> round(2.5)

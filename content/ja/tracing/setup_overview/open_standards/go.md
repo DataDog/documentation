@@ -42,9 +42,6 @@ func main() {
 }
 ```
 
-**注**: [OpenTracing API][1] を通常の API または Datadog インテグレーションと並行して使用することは完全にサポートされています。内部的には、それらはすべて同じトレーサーを使用します。その他の例と詳細については、[API ドキュメント][2]を参照してください。
-
-
 [1]: https://github.com/opentracing/opentracing-go
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
 [3]: http://opentracing.io
