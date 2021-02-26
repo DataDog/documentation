@@ -42,14 +42,6 @@ The .NET Tracer supports:
 
 4. Update the logging configuration based on the logging library:
 
-    | Required key   | Description                                  |
-    | -------------- | -------------------------------------------- |
-    | `dd.env`       | Globally configures the `env` for the tracer. Defaults to `""` if not set. |
-    | `dd.service`   | Globally configures the root service name. Defaults to the name of the application or IIS site name if not set.  |
-    | `dd.version`   | Globally configures `version` for the service. Defaults to `""` if not set.  |
-    | `dd.trace_id`  | Active trace ID during the log statement. Defaults to `0` if no trace.  |
-    | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
-
 Examples:
 
 {{< tabs >}}
@@ -136,15 +128,80 @@ To manually correlate your [APM traces][9] with application logs:
 
 3. Update the logging configuration based on the logging library:
 
-    | Required key   | Description                                  |
-    | -------------- | -------------------------------------------- |
-    | `dd.env`       | Globally configures the `env` for the tracer. Defaults to `""` if not set. |
-    | `dd.service`   | Globally configures the root service name. Defaults to the name of the application or IIS site name if not set.  |
-    | `dd.version`   | Globally configures `version` for the service. Defaults to `""` if not set.  |
-    | `dd.trace_id`  | Active trace ID during the log statement. Defaults to `0` if no trace.  |
-    | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
+{{< tabs >}}
+{{% tab "Serilog" %}}
+Trace and span IDs are injected into application logs only after you enable log context enrichment, as shown in the following example code: 
 
-Examples of adding correlation identifiers to the log context:
+```csharp
+var log = new LoggerConfiguration()
+    // Add Enrich.FromLogContext to emit Datadog properties
+    .Enrich.FromLogContext()
+    .WriteTo.File(new JsonFormatter(), "log.json")
+    .CreateLogger();
+```
+For additional examples, see [the Serilog automatic trace ID injection project][1] on GitHub.
+
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/SerilogExample/Program.cs
+{{% /tab %}}
+{{% tab "log4net" %}}
+Trace and span IDs are injected into application logs only after you enable mapped diagnostic context (MDC), as shown in the following example code:
+
+```xml
+  <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
+    <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
+    <default />
+    <!--explicit default members-->
+    <remove value="ndc" />
+    <!--remove the default preformatted message member-->
+    <remove value="message" />
+    <!--add raw message-->
+    <member value="message:messageobject" />
+    <!-- Add value='properties' to emit Datadog properties -->
+    <member value='properties'/>
+  </layout>
+```
+For additional examples, see [the log4net automatic trace ID injection project][1] on GitHub.
+
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
+{{% /tab %}}
+{{% tab "NLog" %}}
+
+Trace and span IDs are injected into application logs only after you enable mapped diagnostic context (MDC), as shown in the following example code for NLog version 4.6+:
+
+```xml
+ <!-- Add includeMdlc="true" to emit MDC properties -->
+  <layout xsi:type="JsonLayout" includeMdlc="true">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+  </layout>
+```
+
+For NLog version 4.5:
+
+```xml
+ <!-- Add includeMdc="true" to emit MDC properties -->
+  <layout xsi:type="JsonLayout" includeMdc="true">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+  </layout>
+```
+For additional examples, see the automatic trace ID injection projects using [NLog 4.5][1] or [NLog 4.6][2] on GitHub.
+
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
+[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
+{{% /tab %}}
+{{< /tabs >}}
+
+4. Add the correlation identifiers to the log context based on the logging library:
+
+Examples:
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
