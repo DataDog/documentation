@@ -28,7 +28,7 @@ To try out the API [![Run in Postman][3]](https://app.getpostman.com/run-collect
 
 By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][6] languages in each endpoint to see code examples from that library. To install each library:
 
-{{< programming-lang-wrapper langs="java,python,ruby,go" >}}
+{{< programming-lang-wrapper langs="java,python,python-beta,ruby,ruby-beta,go" >}}
 
 {{< programming-lang lang="java" >}}
 Maven - Add this dependency to your project's POM:
@@ -46,6 +46,8 @@ Maven - Add this dependency to your project's POM:
 compile "com.datadoghq:datadog-api-client:1.0.0"
  ```
 
+Make sure that `CLASSPATH` variable contains all dependencies.
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -55,9 +57,22 @@ pip install datadog
 
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python-beta" >}}
+ ```python
+pip install datadog-api-client --pre
+ ```
+
+{{< /programming-lang >}}
+
 {{< programming-lang lang="ruby" >}}
  ```ruby
 gem install dogapi
+ ```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby-beta" >}}
+ ```ruby
+gem install datadog_api_client -v 1.0.0.beta.2 --pre
  ```
 {{< /programming-lang >}}
 
@@ -72,7 +87,7 @@ import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
 
 Or check out the libraries directly:
 
-{{< partial name="api/sdk-languages.html" >}} 
+{{< partial name="api/sdk-languages.html" >}}
 </br>
 Trying to get started with the application instead? Check out our general [Getting Started docs][7].
 
