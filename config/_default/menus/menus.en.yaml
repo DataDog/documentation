@@ -1289,7 +1289,7 @@ main:
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
-  - name: OpenTracing and OpenTelemetry
+  - name: OpenTelemetry and OpenTracing
     url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
@@ -1462,6 +1462,11 @@ main:
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
     weight: 807
+  - name: OpenTelemetry
+    url: tracing/connect_logs_and_traces/opentelemetry
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_opentelemetry
+    weight: 808
   - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
