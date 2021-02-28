@@ -495,7 +495,7 @@ Your private locations can be used just like any other Datadog managed locations
 
 You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
-You can also **vertically scale** your private locations using the [`concurrency` parameter][11] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel. Whenever updating the [`concurrency` parameter][11] of your private location, make sure to [size your workers accordingly](#hardware-requirements).
+You can also **vertically scale** your private locations using the [`concurrency` parameter][11] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel. Whenever updating the [`concurrency` parameter][11] of your private location, make sure to also update [the resources allocated to your workers](#hardware-requirements).
 
 ### Hardware Requirements
 
