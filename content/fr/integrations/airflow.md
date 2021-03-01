@@ -108,7 +108,7 @@ Connectez Airflow à DogStatsD (inclus avec l'Agent Datadog) via la fonctionnali
            name: "airflow.job.end"
            tags:
              job_name: "$1"
-         - match: "airflow.*_<job_name>_heartbeat_failure"
+         - match: "airflow.*_heartbeat_failure"
            name: airflow.job.heartbeat.failure
            tags:
              job_name: "$1"
