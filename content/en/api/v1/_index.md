@@ -96,7 +96,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.datadoghq:datadog-api-client:1.0.0-beta.2'
+    implementation 'com.datadoghq:datadog-api-client:1.0.0-beta.9'
 }
 
 application {
