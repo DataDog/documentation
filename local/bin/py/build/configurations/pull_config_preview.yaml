@@ -36,7 +36,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: cswatt/cloudflare-logs
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
