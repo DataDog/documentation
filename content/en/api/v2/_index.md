@@ -72,7 +72,7 @@ Maven `pom.xml` for running examples:
     <dependency>
       <groupId>com.datadoghq</groupId>
       <artifactId>datadog-api-client</artifactId>
-      <version>1.0.0-beta.2</version>
+      <version>1.0.0-beta.9</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
