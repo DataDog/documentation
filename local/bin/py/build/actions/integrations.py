@@ -622,14 +622,16 @@ class Integrations:
         )
 
         if not exist_already and no_integration_issue:
-            with open(self.content_integrations_dir + new_file_name, "w", ) as out:
-                out.write(result)
+            # lets only write out file.md if its going to be public
+            if manifest_json.get("is_public", False):
+                with open(self.content_integrations_dir + new_file_name, "w", ) as out:
+                    out.write(result)
 
-            ## Reformating all links now that all processing is done
-            if tab_logic:
-                final_text = format_link_file(self.content_integrations_dir + new_file_name,regex_skip_sections_start,regex_skip_sections_end)
-                with open(self.content_integrations_dir + new_file_name, 'w') as final_file:
-                    final_file.write(final_text)
+                ## Reformating all links now that all processing is done
+                if tab_logic:
+                    final_text = format_link_file(self.content_integrations_dir + new_file_name,regex_skip_sections_start,regex_skip_sections_end)
+                    with open(self.content_integrations_dir + new_file_name, 'w') as final_file:
+                        final_file.write(final_text)
 
     def add_integration_frontmatter(
         self, file_name, content, dependencies=[]
