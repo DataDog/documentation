@@ -39,7 +39,7 @@ code_languages:
     extension: go
     name: go
     syntax: go
-    command: go
+    command: go run
     example_file: main.go
   'java':
     extension: java
