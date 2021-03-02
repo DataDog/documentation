@@ -43,7 +43,7 @@ By default, all facets are selected. To remove a facet from search, deselect the
 
 Rules are displayed in the rules table.
 
-Configure the rules table content and preferences with the Options button. Only "Date created" and "Rule ID" are available for additional columns.
+Columns can be added or removed with the options menu.
 
 Rules are sorted alphabetically—ascending by default (A-Z). The rules can be inverse-sorted by name, query name, creation date, or rule ID.
 
