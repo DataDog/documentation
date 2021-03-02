@@ -67,7 +67,7 @@ avg:system.disk.in_use{!device:/dev/loop*} by {device}
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcards2.png" alt="Example 2"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="Example 2"  style="width:80%;" >}}
 
 ## Further Reading
 
