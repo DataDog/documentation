@@ -23,7 +23,7 @@ If not already configured:
 - Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send [enhanced Lambda metrics][3], logs, and traces to Datadog. 
-To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`Java8.al2`) or Java 11 (`Java11.al2`) runtimes.
+To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes.
 
 ## Configuration
 
