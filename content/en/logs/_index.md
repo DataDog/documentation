@@ -17,6 +17,8 @@ further_reading:
 
 {{< vimeo 293195142 >}}
 
+![](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/NQuJ5Z2Z/6399898c-4bce-45c0-a040-2c7a1c5c2768.png?v=ef32b41e41c761071f56249790d692eb)
+
 </br>
 
 Sometimes, your infrastructure may generate a volume of log events that is too large or has significant fluctuations. In this situation, you may need to choose which logs to send to a log management solution, and which logs to archive. Filtering your logs before sending them, however, may lead to gaps in coverage or the accidental removal of valuable data.
