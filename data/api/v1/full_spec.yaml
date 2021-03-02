@@ -7423,6 +7423,66 @@ components:
       - DB
       - CACHE
       - CUSTOM
+    SyntheticsAPITest:
+      description: Object containing details about a Synthetic API test.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsAPITestConfig'
+        locations:
+          description: Array of locations used to run the test.
+          items:
+            description: A location from which the test was run.
+            type: string
+          type: array
+        message:
+          description: Notification message associated with the test.
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          format: int64
+          type: integer
+        name:
+          description: Name of the test.
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsTestOptions'
+        public_id:
+          description: The public ID for the test.
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsTestDetailsSubType'
+        tags:
+          description: Array of tags attached to the test.
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsAPITestType'
+      type: object
+    SyntheticsAPITestConfig:
+      description: Configuration object for a Synthetic API test.
+      properties:
+        assertions:
+          default: []
+          description: Array of assertions used for the test.
+          example: []
+          items:
+            $ref: '#/components/schemas/SyntheticsAssertion'
+          type: array
+        configVariables:
+          description: Array of variables used for the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsConfigVariable'
+          type: array
+        request:
+          $ref: '#/components/schemas/SyntheticsTestRequest'
+      required:
+      - request
+      - assertions
+      type: object
     SyntheticsAPITestResultData:
       description: Object containing results for your Synthetic API test.
       properties:
@@ -7513,6 +7573,15 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
       type: object
+    SyntheticsAPITestType:
+      default: api
+      description: Type of the Synthetic test, `api`.
+      enum:
+      - api
+      example: api
+      type: string
+      x-enum-varnames:
+      - API
     SyntheticsAssertion:
       description: 'Object describing the assertions type, their associated operator,
 
@@ -7675,6 +7744,69 @@ components:
       x-enum-varnames:
       - NETWORK
       - JS
+    SyntheticsBrowserTest:
+      description: Object containing details about a Synthetic browser test.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsBrowserTestConfig'
+        locations:
+          description: Array of locations used to run the test.
+          items:
+            description: A location from which the test was run.
+            type: string
+          type: array
+        message:
+          description: Notification message associated with the test.
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          format: int64
+          type: integer
+        name:
+          description: Name of the test.
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsTestOptions'
+        public_id:
+          description: The public ID of the test.
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        steps:
+          description: The steps of the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsStep'
+          type: array
+        tags:
+          description: Array of tags attached to the test.
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsBrowserTestType'
+      type: object
+    SyntheticsBrowserTestConfig:
+      description: Configuration object for a Synthetic browser test.
+      properties:
+        assertions:
+          default: []
+          description: Array of assertions used for the test.
+          example: []
+          items:
+            $ref: '#/components/schemas/SyntheticsAssertion'
+          type: array
+        request:
+          $ref: '#/components/schemas/SyntheticsTestRequest'
+        variables:
+          description: Array of variables used for the test steps.
+          items:
+            $ref: '#/components/schemas/SyntheticsBrowserVariable'
+          type: array
+      required:
+      - request
+      - assertions
+      type: object
     SyntheticsBrowserTestResultData:
       description: Object containing results for your Synthetic browser test.
       properties:
@@ -7789,6 +7921,15 @@ components:
       - from_ts
       - to_ts
       type: object
+    SyntheticsBrowserTestType:
+      default: browser
+      description: Type of the Synthetic test, `browser`.
+      enum:
+      - browser
+      example: browser
+      type: string
+      x-enum-varnames:
+      - BROWSER
     SyntheticsBrowserVariable:
       description: 'Object defining a variable that can be used in your browser test.
 
@@ -18627,6 +18768,7 @@ paths:
       x-undo:
         type: safe
     post:
+      deprecated: true
       description: Create a Synthetic test.
       operationId: CreateTest
       requestBody:
@@ -18671,6 +18813,145 @@ paths:
         operationId: TODO
         parameters: []
         type: unsafe
+  /api/v1/synthetics/tests/api:
+    post:
+      description: Create a Synthetic API test.
+      operationId: CreateSyntheticsAPITest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsAPITest'
+        description: Details of the test to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsAPITest'
+          description: OK - Returns the created test details.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Creation failed'
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Test quota is reached
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create an API test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/api/{public_id}:
+    put:
+      description: Edit the configuration of a Synthetic API test.
+      operationId: UpdateAPITest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsAPITest'
+        description: New test details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsAPITest'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+      summary: Edit an API test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v1/synthetics/tests/browser:
+    post:
+      description: Create a Synthetic browser test.
+      operationId: CreateSyntheticsBrowserTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsBrowserTest'
+        description: Details of the test to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsBrowserTest'
+          description: OK - Returns the created test details.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Creation failed'
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Test quota is reached
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create a browser test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
       description: 'Get the detailed configuration (including steps) associated with
@@ -18710,6 +18991,60 @@ paths:
       - Synthetics
       x-undo:
         type: safe
+    put:
+      description: Edit the configuration of a Synthetic browser test.
+      operationId: UpdateBrowserTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsBrowserTest'
+        description: New test details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsBrowserTest'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+      summary: Edit a browser test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
     get:
       description: Get the last 50 test results summaries for a given Synthetics Browser
@@ -18935,6 +19270,7 @@ paths:
       x-undo:
         type: safe
     put:
+      deprecated: true
       description: Edit the configuration of a Synthetic test.
       operationId: UpdateTest
       parameters:

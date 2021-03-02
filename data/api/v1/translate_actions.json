@@ -738,9 +738,33 @@
     "request_description": "Details of the test to create.",
     "request_schema_description": "Object containing details about your Synthetic test."
   },
+  "CreateSyntheticsAPITest": {
+    "description": "Create a Synthetic API test.",
+    "summary": "Create an API test",
+    "request_description": "Details of the test to create.",
+    "request_schema_description": "Object containing details about a Synthetic API test."
+  },
+  "UpdateAPITest": {
+    "description": "Edit the configuration of a Synthetic API test.",
+    "summary": "Edit an API test",
+    "request_description": "New test details to be saved.",
+    "request_schema_description": "Object containing details about a Synthetic API test."
+  },
+  "CreateSyntheticsBrowserTest": {
+    "description": "Create a Synthetic browser test.",
+    "summary": "Create a browser test",
+    "request_description": "Details of the test to create.",
+    "request_schema_description": "Object containing details about a Synthetic browser test."
+  },
   "GetBrowserTest": {
     "description": "Get the detailed configuration (including steps) associated with\na Synthetic browser test.",
     "summary": "Get a test configuration (browser)"
+  },
+  "UpdateBrowserTest": {
+    "description": "Edit the configuration of a Synthetic browser test.",
+    "summary": "Edit a browser test",
+    "request_description": "New test details to be saved.",
+    "request_schema_description": "Object containing details about a Synthetic browser test."
   },
   "GetBrowserTestLatestResults": {
     "description": "Get the last 50 test results summaries for a given Synthetics Browser test.",
