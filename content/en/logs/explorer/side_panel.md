@@ -33,7 +33,7 @@ Datadog displays individual logs following this general side panel layout:
 
 Some standard fields, for instance `error.stack`, `http.method`, or `duration`, have specific enhanced displays in the Log Panel for better readability. Extract corresponding information from your logs and remap your attributes with [standard attribute remappers][4].
 
-## A Hub To Other Data Sources
+## Hub to other data sources
 
 ### Correlate with infrastructure data
 

@@ -37,7 +37,7 @@ The **Log Explorer** is your home base for log troubleshooting and exploration. 
 
 At any moment, [**Export**](#export) your Log Explorer view to reuse it later or in different contexts.
 
-## Filters Logs
+## Filters logs
 
 The search filter consists of a timerange and a search query mixing `key:value` and full-text search. Refer to our [log search syntax][2] and [timerange][3] documentation for details on advanced use cases. For example, the search query `service:payment status:error rejected` over a `Past 5 minutes` timerange:
 
@@ -47,7 +47,7 @@ The search filter consists of a timerange and a search query mixing `key:value` 
 
 **Note**: `key:value` queries require that you [declare a facet][5] beforehand.
 
-## Aggregate and Measure
+## Aggregate and measure
 
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, aggregate your logs.
 
@@ -155,7 +155,7 @@ For example, the following Toplist shows the **top 15 Customers** on a merchant 
 
 {{< img src="logs/explorer/toplists.png" alt="top list example"  style="width:90%;">}}
 
-### Nested Tables
+### Nested tables
 
 Visualize the top values from a [facet][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update a search query or drill through logs corresponding to either dimension.
 

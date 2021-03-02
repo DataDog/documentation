@@ -97,9 +97,9 @@ logs:
     sourcecategory: sourcecode
 ```
 
-## Getting Further
+## Getting further
 
-Here are some little advices:
+Tips for getting further with Go log collection:
 
 * Always give a name to the logger corresponding to the functionality or service you try to deliver.
 * Log a lot in the DEBUG level and log accurately in the INFO, WARNING and FATAL levels; since these are the log levels you'll get in your production environments.
