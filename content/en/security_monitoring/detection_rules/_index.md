@@ -15,11 +15,11 @@ further_reading:
 
 ## Overview
 
-Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, Datadog generates a Security Signal.
+Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule that is matched over a given period of time, Datadog generates a Security Signal.
 
 {{< img src="security_monitoring/detection_rules/detection_rules.png" alt="Detection Rules" width="75%">}}
 
-Security Monitoring uses Log Detection to analyze ingested logs in real time. Compliance Monitoring uses Cloud Configuration to scan the state of your cloud environment. For each monitoring option, there are [default detection rules][1] that work out-of-the-box with integration configuration. You can also create new rules to tailor to your environment.
+Security Monitoring uses Log Detection to analyze ingested logs in real-time. Compliance Monitoring uses Cloud Configuration to scan the state of your cloud environment. For each monitoring option, there are [default detection rules][1] that work out-of-the-box with integration configuration. You can also create new rules to tailor to your environment.
 
 ## Creating and Managing Rules
 
@@ -27,7 +27,7 @@ The [Security Configuration Rules][2] page lets you search all Detection Rules. 
 
 ### Finding rules
 
-The free text search filters Detection Rules by text in the rule name or query. Query results update in real time when the query is edited—there is no “Search” button to click.
+The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no “Search” button to click.
 
 #### Filter by facet
 
@@ -43,9 +43,9 @@ By default, all facets are selected. To remove a facet from search, deselect the
 
 Rules are displayed in the rules table.
 
-Configure the rules table content and preferences with the Options button. Only date created and rule ID are available for additional columns.
+Configure the rules table content and preferences with the Options button. Only "Date created" and "Rule ID" are available for additional columns.
 
-Rules are sorted alphabetically—ascending by default (A-Z). The rules can be inverse-sorted by name, as well as sort by query name, creation date, or rule ID.
+Rules are sorted alphabetically—ascending by default (A-Z). The rules can be inverse-sorted by name, query name, creation date, or rule ID.
 
 #### Enabling or disabling a rule
 
