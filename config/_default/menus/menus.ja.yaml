@@ -99,112 +99,134 @@ main_left:
     name: ソリューション
     url: '#'
     weight: -460
-  - name: 金融サービス
+  - identifier: industry-financial
+    name: 金融サービス
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/financial-services/'
     weight: -460
-  - name: 製造 / 物流
+  - identifier: industry-manufacturing
+    name: 製造 / 物流
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/manufacturing-logistics/'
     weight: -459
-  - name: 医療 / ライフサイエンス
+  - identifier: industry-healthcare
+    name: 医療 / ライフサイエンス
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/healthcare/'
     weight: -458
-  - name: 小売業 / e コマース
+  - identifier: industry-retail
+    name: 小売業 / e コマース
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/retail-ecommerce/'
     weight: -457
-  - name: 官業
+  - identifier: industry-public
+    name: 官業
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/solutions/public-sector/'
     weight: -456
-  - name: メディア / エンターテインメント
+  - identifier: industry-media
+    name: メディア / エンターテインメント
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/media-entertainment/'
     weight: -455
-  - name: テクノロジー
+  - identifier: industry-technology
+    name: テクノロジー
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/solutions/technology/'
     weight: -454
-  - name: ゲーム業界
+  - identifier: industry-gaming
+    name: ゲーム業界
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/gaming/'
     weight: -453
-  - name: Amazon Web Services
+  - identifier: technology-aws
+    name: Amazon Web Services
     parent: solutions
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/aws/'
     weight: -452
-  - name: Azure
+  - identifier: technology-azure
+    name: Azure
     parent: solutions
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/azure/'
     weight: -451
-  - name: Google Cloud Platform
+  - identifier: technology-gcp
+    name: Google Cloud Platform
     parent: solutions
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/gcp/'
     weight: -450
-  - name: Kubernetes
+  - identifier: technology-kubernetes
+    name: Kubernetes
     parent: solutions
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
-  - name: Red Hat OpenShift
+  - identifier: technology-openshift
+    name: Red Hat OpenShift
     parent: solutions
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/openshift/'
     weight: -448
-  - name: クラウド移行
+  - identifier: usecase-migration
+    name: クラウド移行
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/cloud-migration/'
     weight: -447
-  - name: 統合監視
+  - identifier: usecase-consolidate
+    name: 統合監視
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/monitoring-consolidation/'
     weight: -446
-  - name: DevOps
+  - identifier: usecase-devops
+    name: DevOps
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/devops/'
     weight: -445
-  - name: セキュリティ分析
+  - identifier: usecase-security
+    name: セキュリティ分析
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
     weight: -444
-  - name: ハイブリッドクラウドモニタリング
+  - identifier: usecase-hybrid
+    name: ハイブリッドクラウドモニタリング
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
     weight: -443
-  - name: IoT モニタリング
+  - identifier: usecase-iot
+    name: IoT モニタリング
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
     weight: -442
-  - name: 機械学習
+  - identifier: usecase-machine
+    name: 機械学習
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
     weight: -441
-  - name: リアルタイム BI
+  - identifier: usecase-analytics
+    name: リアルタイム BI
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
     weight: -440
-  - name: オンプレミスモニタリング
+  - identifier: usecase-onprem
+    name: オンプレミスモニタリング
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
