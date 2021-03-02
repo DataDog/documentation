@@ -95,18 +95,23 @@ This section uses examples to show how trigger conditions are computed, and the 
 
 Datadog computes `A && B && C` in the way you would expect, but which monitor statuses are considered alert-worthy? There are six different statuses a composite monitor considers:
 
-| Status    | Alert-worthy                             |
-|-----------|------------------------------------------|
-| `Ok`      | False                                    |
-| `Warn`    | True                                     |
-| `Alert`   | True                                     |
-| `Skipped` | False                                    |
-| `No Data` | False (true if `notify_no_data` is true) |
-| `Unknown` | True                                     |
+| Status    | Alert-worthy         |Severity           |
+|-----------|----------------------|-------------------|
+| `Alert`   | True                 |5 (Most severe)    |
+| `Warn`    | True                 |4                  |
+| `Unknown` | True                 |3                  |
+| `No Data` | True                 |2                  |
+| `Ok`      | False                |1 (Least severe)   |
+| `Skipped` | False                |1                  |
 
-When a composite monitor evaluates as alert-worthy, it inherits the most severe status from among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
+The boolean operators used (`&&`, `||`, `!`) operate on the alert-worthiness of the composite monitor status. 
 
-The not (`!`) operator causes a individual or composite monitor status to be `Ok`, `Alert`, or `No Data`. For example, if monitor `A` has any alert-worthy status, `!A` is `OK`. If monitor `A` has any alert-**un**worthy status, `!A` is `Alert`. If monitor `A` has a status of `No Data`, `!A` is also `No Data`.
+If `A && B` is alert-worthy, the result will be the **least** severe status between A and B. 
+If `A || B` is alert-worthy, the result will be the **most** severe status between A and B. 
+
+If `A` is `No Data`, `!A` is `No Data`
+If `A` is alert-worthy, `!A` is `OK`
+If `A` is no alert-worthy, `!A` is `Alert`
 
 Consider a composite monitor that uses three individual monitors (`A`, `B`, `C`) and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
@@ -118,19 +123,6 @@ Consider a composite monitor that uses three individual monitors (`A`, `B`, `C`)
 | Skipped (F) | No Data (F) | Unknown (T) | Skipped (F)      |                  |
 
 Two of the four scenarios trigger an alert, even though not all of the individual monitors have the most severe status (`Alert`).
-
-### Component monitor status
-
-Composite monitors are evaluated by using a sliding window of monitor results for each component monitor. Specifically, **they use the most severe status from the past five minutes for each component monitor**. For example, if you have a composite monitor defined as `A && B` with the following component results (timestamps are one minute apart), the composite monitor triggers at T1 even though `A` is technically in an `OK` state.
-
-| Monitor | T0    | T1    | T2    |
-|---------|-------|-------|-------|
-| A       | Alert | OK    | OK    |
-| B       | OK    | Alert | Alert |
-
-The justification for this behavior is that defining simultaneity is a surprisingly difficult problem for alerting systems. Monitors are evaluated according to different schedules and metric latencies can cause two events, which were likely simultaneous, to occur at different times when monitors are finally evaluated. Merely sampling the current state would likely lead to missed alerts in the composite monitor.
-
-As a consequence of this behavior, composite monitors may take several minutes to resolve after their component monitors have resolved.
 
 ### Number of alerts
 
