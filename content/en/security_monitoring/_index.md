@@ -21,7 +21,7 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 
 Enable runtime security and continuous Compliance Monitoring for your containers and hosts. Use **File Integrity Monitoring (FIM)** to watch for changes to key files and directories on hosts or containers in real time, or **Continuous Compliance** to check against your containers and Kubernetes clusters in order to find configuration issues, as defined in the popular CIS compliance benchmarks for Docker and Kubernetes.
 
-{{< img src="compliance_monitoring/compliance-overview.png" alt="Datadog Compliance Monitoring" >}}
+{{< img src="compliance_monitoring/compliance-dashboard.png" alt="Datadog Compliance Monitoring" >}}
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/security_monitoring/getting_started">}}<u>Getting Started</u>: Learn the main concepts of Datadog Security Monitoring, how to enable threat detection, and discover out of the box threat detection rules.{{< /nextlink >}}
