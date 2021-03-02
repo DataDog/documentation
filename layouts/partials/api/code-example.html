@@ -83,7 +83,13 @@
             <p>First <a href="{{ "api/latest/" | absLangURL }}?code-lang={{ $lang.name }}">install the library and its dependencies</a> and then save the example to <code>{{ $lang.example_file }}</code> and run following commands:</p>
 
             <pre class="chroma">
-              <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="kn">export</span> <span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"{{ range $context.Site.Params.allowedRegions }}<span class="d-none" data-region="{{ .value }}">{{ .domain }}</span>{{ end }}"</span>
+              <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="kn">export</span> <span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"{{- range $context.Site.Params.allowedRegions -}}
+                {{- if not (index ($endpoint.regions) .value) -}}
+                  <span class="d-none" data-region="{{ .value }}">Not supported in the {{ .name }} region</span>
+                {{- else -}}
+                  <span class="d-none" data-region="{{ .value }}">{{ .domain }}</span>
+                {{- end -}}
+            {{- end -}}"</span>
 <span class="n">{{ $lang.command }}</span> <span class="s1">"{{ $lang.example_file }}"</span></div></code></pre>
 
           </div>
