@@ -107,11 +107,11 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 ### Monitor Java Lambda function cold starts
 
-Cold starts occur when your serverless applications receive sudden increases in traffic, and can occur when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. Datadog highly recommends you configure a monitor on Java Lambda function cold starts, and use Datadog Serverless Insights to [keep cold starts to a minimum][7].
+Cold starts occur when your serverless applications receive sudden increases in traffic, including when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. Datadog highly recommends you configure a monitor on Java Lambda function cold starts, and use Datadog Serverless Insights to [keep cold starts to a minimum][7].
 
 {{< img src="serverless/java-monitor-cold-starts.png" alt="Monitor Java Lambda Function Cold Starts"  style="width:100%;">}}
 
-To create a Datadog monitor on Java Lambda function cold starts, follow the monitor creation steps [here][8] with the following criteria:
+To create a Datadog monitor on Java Lambda function cold starts, follow the [monitor creation steps][8] with the following criteria:
 - Metric Name: `aws.lambda.enhanced.invocations`
 - From: `runtime:java*` and `cold_start:true`
 - Alert Grouping: Multi Alert, trigger a separate alert for each `function_arn`
@@ -152,11 +152,11 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-For more information on custom metric submission, see [here][11].
+See the [custom metrics documentation][11] for more information on custom metric submission.
 
 ### Connect logs and traces
 
-Follow the instructions [here][12] to automatically connect Java Lambda function logs and traces.
+To automatically connect Java Lambda function logs and traces, see the [Connecting Java Logs and Traces][12] for instructions.
 
 ## Further Reading
 
