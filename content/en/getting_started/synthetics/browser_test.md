@@ -30,7 +30,7 @@ In this example, a browser test is configured to map a user's journey from addin
 
     - **Starting URL**: Add the URL of the website you’re interested in monitoring. If you don’t know what to start with, you can use `https://www.shopist.io` as a test web application.
     - **Name**: Name the test.
-    - **Tags**: You can set tags such as `env:prod` and `app:shopist` on your test. Tags will help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
+    - **Tags**: You can set tags such as `env:prod` and `app:shopist` on your test. Tags help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
     - **Browsers & Devices**: Choose the devices and browsers you want to use for testing. In this example, the test is only run from **Chrome** and on **Large Laptops**.
     - **Locations**: Choose one of the **Managed Locations** to run your test from. In this example, the test is run in **Americas and Europe**.
     - **Specify a test frequency**: Select how often you would like the test to run.

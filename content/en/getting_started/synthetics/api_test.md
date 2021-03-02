@@ -32,7 +32,7 @@ In this example, an API test is created to ensure your website is constantly up 
 
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, which is a test web application.
     - Select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
-    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags will help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
+    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
     - Choose from the **Managed Locations** to run your test from.
     - Click the **Test URL** button.
 
@@ -68,7 +68,7 @@ Once alert conditions are set, create a message for the alert and specify what s
 
 The API test details page includes details about the test configuration, uptime associated with the tested endpoint, historical graphs for response time and network timings, as well as the list of individual test results and events.
 
-To troubleshoot a failed test, scroll to the Test Results section and click on one of the failing Test Results. Review the failed assertions and response details such as returned status code, response time, and associated headers and body to diagnose the issue.
+To troubleshoot a failed test, scroll to the Test Results section and click on one of the failing test results. Review the failed assertions and response details such as returned status code, response time, and associated headers and body to diagnose the issue.
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure"  style="width:90%;">}}
 
