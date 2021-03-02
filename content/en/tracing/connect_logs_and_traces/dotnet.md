@@ -106,11 +106,12 @@ For NLog version 4.5:
     <attribute name="exception" layout="${exception:format=ToString}" />
   </layout>
 ```
-For additional examples, see the automatic trace ID injection projects using [NLog 4.5][1] or [NLog 4.6][2] on GitHub.
+For additional examples, see the automatic trace ID injection projects using [NLog 4.0][1], [NLog 4.5][2], or [NLog 4.6][3] on GitHub.
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
-[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
+[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
+[3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
 {{% /tab %}}
 {{< /tabs >}}
 
