@@ -40,6 +40,10 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
+{{< /site-region >}}
+
 まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][1]をセットアップします。
 
 * 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
