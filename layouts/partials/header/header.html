@@ -24,7 +24,7 @@
                               <div class="col-4">
                                 <p class="text-gray-dark small text-uppercase font-weight-bold no-event">Industry</p>
                                 {{ range .Children }}
-                                  {{ if in (slice "業種" "industry") .Title }}
+                                  {{ if hasPrefix .Identifier "industry-" }}
                                     <li class="nav-item">
                                         <a class="d-block " href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}"><span class="menu-text">{{ .Name | safeHTML }}</span></a>
                                     </li>
@@ -34,7 +34,7 @@
                               <div class="col-4">
                                 <p class="text-gray-dark small text-uppercase font-weight-bold no-event">Technology</p>
                                 {{ range .Children }}
-                                  {{ if in (slice "テクノロジー" "technology") .Title }}
+                                  {{ if hasPrefix .Identifier "technology-" }}
                                     <li class="nav-item">
                                         <a class="d-block " href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}"><span class="menu-text">{{ .Name | safeHTML }}</span></a>
                                     </li>
@@ -44,7 +44,7 @@
                               <div class="col-4">
                                 <p class="text-gray-dark small text-uppercase font-weight-bold no-event">Use-Case</p>
                                 {{ range .Children }}
-                                  {{ if in (slice "ユースケース" "usecase") .Title }}
+                                  {{ if hasPrefix .Identifier "usecase-" }}
                                     <li class="nav-item">
                                         <a class="d-block " href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}"><span class="menu-text">{{ .Name | safeHTML }}</span></a>
                                     </li>

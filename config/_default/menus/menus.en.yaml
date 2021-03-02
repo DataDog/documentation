@@ -99,112 +99,134 @@ main_left:
     name: Solutions
     url: '#'
     weight: -460
-  - name: Financial Services
+  - identifier: industry-financial
+    name: Financial Services
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/financial-services/'
     weight: -460
-  - name: Manufacturing & Logistics
+  - identifier: industry-manufacturing
+    name: Manufacturing & Logistics
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
     weight: -459
-  - name: Healthcare/Life Sciences
+  - identifier: industry-healthcare
+    name: Healthcare/Life Sciences
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/healthcare/'
     weight: -458
-  - name: Retail/E-Commerce
+  - identifier: industry-retail
+    name: Retail/E-Commerce
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
     weight: -457
-  - name: Public Sector
+  - identifier: industry-public
+    name: Public Sector
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/public-sector/'
     weight: -456
-  - name: Media & Entertainment
+  - identifier: industry-media
+    name: Media & Entertainment
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/media-entertainment/'
     weight: -455
-  - name: Technology
+  - identifier: industry-technology
+    name: Technology
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/technology/'
     weight: -454
-  - name: Gaming
+  - identifier: industry-gaming
+    name: Gaming
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/gaming/'
     weight: -453
-  - name: Amazon Web Services
+  - identifier: technology-aws
+    name: Amazon Web Services
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/aws/'
     weight: -452
-  - name: Azure
+  - identifier: technology-azure
+    name: Azure
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/azure/'
     weight: -451
-  - name: Google Cloud Platform
+  - identifier: technology-gcp
+    name: Google Cloud Platform
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/gcp/'
     weight: -450
-  - name: Kubernetes
+  - identifier: technology-kubernetes
+    name: Kubernetes
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
-  - name: Red Hat OpenShift
+  - identifier: technology-openshift
+    name: Red Hat OpenShift
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/openshift/'
     weight: -448
-  - name: Cloud Migration
+  - identifier: usecase-migration
+    name: Cloud Migration
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/cloud-migration/'
     weight: -447
-  - name: Monitoring Consolidation
+  - identifier: usecase-consolidate
+    name: Monitoring Consolidation
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
     weight: -446
-  - name: DevOps
+  - identifier: usecase-devops
+    name: DevOps
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/devops/'
     weight: -445
-  - name: Security Analytics
+  - identifier: usecase-security
+    name: Security Analytics
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
     weight: -444
-  - name: Hybrid Cloud Monitoring
+  - identifier: usecase-hybrid
+    name: Hybrid Cloud Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
     weight: -443
-  - name: IoT Monitoring
+  - identifier: usecase-iot
+    name: IoT Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
     weight: -442
-  - name: Machine Learning
+  - identifier: usecase-machine
+    name: Machine Learning
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
     weight: -441
-  - name: Real-Time BI
+  - identifier: usecase-analytics
+    name: Real-Time BI
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
     weight: -440
-  - name: On-Premises Monitoring
+  - identifier: usecase-onprem
+    name: On-Premises Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
