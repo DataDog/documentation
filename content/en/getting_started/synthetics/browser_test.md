@@ -15,9 +15,9 @@ further_reading:
 
 ## Create a browser test
 
-[Browser tests][1] are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
+[Browser tests][1] are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These tests **verify both that your applications are up and responding to requests**, and that key business transactions can be performed by users as expected.
 
-In this example, a browser test is configured to map a user's journey from adding an item to cart to successful checkout. If any step during the browser test fails, it throws an error that is recorded in Datadog as a **Test Result**.
+In this example, a browser test is configured to map a user's journey from adding an item to cart to successful checkout. Each test execution is recorded in Datadog as a **Test Result**.
 
 {{< img src="getting_started/synthetics/browser-test.png" alt="Browser test"  style="width:90%;" >}}
 
@@ -28,12 +28,13 @@ In this example, a browser test is configured to map a user's journey from addin
 3. Select **Browser Test**.
 4. Define the configuration of your browser test:
 
-    - Add the URL of the website you’re interested in monitoring. If you don’t know what to start with, you can use `https://www.shopist.io` as a test web application.
-    - Name the test.
-    - You can set tags such as `prod` and `shopist` on your test. Tags will help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
-    - Choose devices and locations for testing. In this example, the test is only run on **Large Laptops** and on **English speaking countries**.
-    - Specify a test frequency.
-    - Set alert conditions to determine the circumstances under which you want a test to send a notification alert.
+    - **Starting URL**: Add the URL of the website you’re interested in monitoring. If you don’t know what to start with, you can use `https://www.shopist.io` as a test web application.
+    - **Name**: Name the test.
+    - **Tags**: You can set tags such as `env:prod` and `app:shopist` on your test. Tags will help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
+    - **Browsers & Devices**: Choose the devices and browsers you want to use for testing. In this example, the test is only run from **Chrome** and on **Large Laptops**.
+    - **Locations**: Choose one of the **Managed Locations** to run your test from. In this example, the test is run in **Americas and Europe**.
+    - **Specify a test frequency**: Select how often you would like the test to run.
+    - **Alert Conditions**: Set alert conditions to determine the circumstances under which you want a test to send a notification alert.
 
         - To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
 
@@ -47,9 +48,9 @@ In this example, a browser test is configured to map a user's journey from addin
         Retry 1 time before location is marked as failed
         ```
 
-        **Note**: By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][3].
+         **Note**: By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][3].
 
-    - Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][4], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
+    - **Notify**: Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][4], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
     - Click **Save & Edit Recording**.
 
 {{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Configured browser test"  style="width:90%;">}}
@@ -64,8 +65,10 @@ For example, to record test steps that map a user's journey from adding an item 
 
 1. Navigate to one of the furniture sections, for instance **Chairs**, and select **Add to cart**.
 2. Click on **Cart**, click **Checkout**.
-3. Add the **assertion** “Test text is present on the active page” to confirm the words “Thank you” are on the page.
+3. Manually add the **Assertion** “Test text is present on the active page” to confirm the words “Thank you” are on the page.
+
    **Note**: Your final browser test step must be an **assertion**. This will ensure your test ended up on an expected page and found the expected element.
+
 4. Save the test.
 
 {{< img src="getting_started/synthetics/record-test.gif" alt="Record test steps"  style="width:90%;">}}
@@ -74,9 +77,9 @@ For example, to record test steps that map a user's journey from adding an item 
 
 ## Test results
 
-A **browser test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results. Test results include screenshots, errors, resources, and traces for each step.
+The browser test details page includes details about your test configuration, test uptime, historical graphs for response time and time to interactive for the first page, sample successful and failed results, and a list of test results corresponding to the selected timeframe. Each individual test result includes screenshots, core web vitals, potential errors, resources, and traces for each step.
 
-Wait for your test to generate several test results or hit `Run test now` to trigger them more quickly. Then look for a failed test result under **Test Results** or in your mailbox. The failed test step in is highlighted with a red `x`. Click the failed step to begin troubleshooting.
+Wait for your test to generate several test results or hit `Run test now` to trigger them more quickly. Then look for a failed test result under **Test Results** or in your mailbox. You can start your troubleshooting by looking at the screenshots to try to understand what went wrong. Don't forget to look at screenshots of steps that happened before the failed step as these often contain the root cause of the failure.
 
 The **Errors & Warnings** tab provides a list of Javascript and network errors, the **Resources** tab locates the resource providing this status, and the **Traces** tab maps the entirety of the request in seconds. This test failed as the result of a server timeout. The resource, `https://api.shopist.io/checkout.json`, posted the status ,and the targeted source of the problem is a controller linked to checkout. You have now successfully found the route of the problem.
 
