@@ -156,7 +156,7 @@ See the [custom metrics documentation][11] for more information on custom metric
 
 ### Connect logs and traces
 
-To automatically connect Java Lambda function logs and traces, see the [Connecting Java Logs and Traces][12] for instructions.
+To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][12] for instructions.
 
 ## Further Reading
 
