@@ -141,7 +141,7 @@ To forget a value if it is not seen over a period of time, select an option from
 
 ### Update the same signal
 
-Set a maximum duration to keep updating a value if detected within a set time frame. For example, the same signal will update if any new value is detected within `1 hour`, for a maximum duration of `24 hours`.
+Set a maximum duration to keep updating a signal if new values are detected within a set time frame. For example, the same signal will update if any new value is detected within `1 hour`, for a maximum duration of `24 hours`.
 
 **Note**: If a unique signal is required for every new value, configure this value to `0 minutes`.
 
