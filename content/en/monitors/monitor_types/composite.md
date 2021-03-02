@@ -104,11 +104,11 @@ Datadog computes `A && B && C` in the way you would expect, but which monitor st
 | `Ok`      | False                |1 (Least severe)   |
 | `Skipped` | False                |1                  |
 
-The boolean operators used (`&&`, `||`, `!`) operate on the alert-worthiness of the composite monitor status. 
+The Boolean operators used (`&&`, `||`, `!`) operate on the alert-worthiness of the composite monitor status. 
 
-If `A && B` is alert-worthy, the result will be the **least** severe status between A and B. 
+If `A && B` is alert-worthy, the result is the **least** severe status between A and B. 
 
-If `A || B` is alert-worthy, the result will be the **most** severe status between A and B. 
+If `A || B` is alert-worthy, the result is the **most** severe status between A and B. 
 
 
 If `A` is `No Data`, `!A` is `No Data`
