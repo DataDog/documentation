@@ -31,7 +31,7 @@ For the log above, use the following rule with the `word()` [matcher][1] to extr
 
 {{< img src="logs/faq/processor.png" alt="Processor"  style="width:50%;">}}
 
-### Define a Log Status Remapper
+### Define a log status remapper
 
 The value is now stored in a `log_status` attribute. [Add a Log Status remapper][2] to make sure the official log status is overridden with the value in the `log_status` attribute.
 

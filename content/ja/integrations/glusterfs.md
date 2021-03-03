@@ -4,7 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Red Hat Gluster Storage: assets/dashboards/red_hat_gluster_storage.json
-  logs: {}
+  logs:
+    source: glusterfs
   metrics_metadata: metadata.csv
   monitors:
     brick status: assets/monitors/brick_status.json
@@ -12,17 +13,18 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - data store
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/glusterfs/README.md'
 display_name: GlusterFS
-draft: true
+draft: false
 git_integration_title: glusterfs
 guid: 1cb9a21c-8cc4-4727-a4b1-ab7015c7ae24
 integration_id: glusterfs
 integration_title: Red Hat Gluster Storage
-is_public: false
+is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
@@ -89,9 +91,37 @@ GlusterFS チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 2. [Agent を再起動します][5]。
 
+#### ログの収集
+
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. GlusterFS のログの収集を開始するには、`glusterfs.d/conf.yaml` ファイルでこのコンフィギュレーションブロックを編集します。
+
+    ```yaml
+    logs:
+      - type: file
+        path: /var/log/glusterfs/glusterd.log
+        source: glusterfs
+      - type: file
+        path: /var/log/glusterfs/cli.log
+        source: glusterfs
+    ```
+
+
+ `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[conf.yaml のサンプル][3]を参照してください。
+
+  3. [Agent を再起動します][5]。
+
+  Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][6]を参照してください。
+
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `glusterfs` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `glusterfs` を探します。
 
 ## 収集データ
 
@@ -116,13 +146,14 @@ GlusterFS には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://www.redhat.com/en/technologies/storage/gluster
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/datadog_checks/glusterfs/data/conf.yaml.example
 [4]: https://github.com/gluster/gstatus#install
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[6]: 
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/metadata.csv
+[9]: https://docs.datadoghq.com/ja/help/

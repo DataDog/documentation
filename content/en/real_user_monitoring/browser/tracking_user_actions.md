@@ -50,7 +50,7 @@ Once an interaction is detected, the RUM SDK watches for network requests and DO
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 | `action.name` | string | User-friendly name created (for example `Click on #checkout`). For custom user actions, the action name given in the API call. |
 
-## Declaring a name for click actions 
+## Declaring a name for click actions
 
 The RUM library uses various strategies to get a name for click actions, but if you want more
 control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their
@@ -67,9 +67,9 @@ parents) that will be used to name the action. For example:
 ```
 ## Custom user actions
 
-Custom user actions are user actions declared and sent manually by using the `addUserAction` API. They can send information relative to an event occurring during a user journey (for example, a custom timing or customer cart information).
+Custom user actions are user actions declared and sent manually by using the `addAction` API. They can send information relative to an event occurring during a user journey (for example, a custom timing or customer cart information).
 
-Once RUM is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction(name: string, context: Context)` API call. In the following examples, the RUM SDK collects the number of items within a cart, what they are, and how much the cart is worth overall.
+Once RUM is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addAction(name: string, context: Context)` API call. In the following examples, the RUM SDK collects the number of items within a cart, what they are, and how much the cart is worth overall.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -77,10 +77,10 @@ Once RUM is initialized, generate user actions when you want to monitor specific
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addUserAction('<NAME>', '<JSON_OBJECT>');
+datadogRum.addAction('<NAME>', '<JSON_OBJECT>');
 
 // Code example
-datadogRum.addUserAction('checkout', {
+datadogRum.addAction('checkout', {
     cart: {
         amount: 42,
         currency: '$',
@@ -94,12 +94,12 @@ datadogRum.addUserAction('checkout', {
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('<NAME>', '<JSON_OBJECT>');
+    DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
 })
 
 // Code example
 DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',
@@ -113,11 +113,11 @@ DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addUserAction('<NAME>', '<JSON_OBJECT>');
+window.DD_RUM && DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
 
 // Code example
 window.DD_RUM &&
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',

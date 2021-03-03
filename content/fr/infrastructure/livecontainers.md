@@ -224,9 +224,9 @@ L'utilisation de ces tags vous permet d'assurer la cohésion des données de l'A
 
 ## Vues
 
-### Vue Containers
+### Vue Conteneurs
 
-Grâce à la vue **Containers**, vous pouvez visualiser vos données sous forme de [nuage de points](#nuages-de-points) ou de [série temporelle][10]. La vue comprend également un tableau vous permettant de trier les données de vos conteneurs selon différents champs, comme le nom du conteneur, son statut et sa date de démarrage.
+Grâce à la vue **Conteneurs**, vous pouvez visualiser vos données sous forme de [nuage de points](#nuages-de-points) ou de [série temporelle][10]. La vue comprend également un tableau vous permettant de trier les données de vos conteneurs selon différents champs, comme le nom du conteneur, son statut et sa date de démarrage.
 
 #### Nuage de points
 
@@ -281,7 +281,7 @@ Pour obtenir un dashboard détaillé de cette ressource, cliquez sur l'option **
 
 Visualisez le flux de logs d'un conteneur, tel que `docker logs -f` ou `kubectl logs -f`, dans Datadog. Cliquez sur un conteneur dans le tableau pour afficher davantage d'informations. Cliquez sur l'onglet *Logs* pour visualiser en temps réel les données [Live Tail][15] ou les logs indexés historiques, peu importe leur date.
 
-#### Live Tail
+#### Live Tail
 
 Avec la fonctionnalité Live Tail, tous les logs de conteneur sont diffusés sous forme de flux. Mettez un flux en pause pour lire facilement le contenu des logs en cours d'écriture. Vous pouvez ensuite réactiver la mise à jour du flux.
 

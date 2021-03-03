@@ -172,13 +172,18 @@ Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au ResourceManager
 
 ### Spark sur AWS EMR
 
-Pour recueillir des métriques Spark lorsque Spark est configuré sur AWS EMR, [utilisez les actions Bootstrap][8] pour installer l'[Agent Datadog][9] puis créez le fichier de configuration `/etc/dd-agent/conf.d/spark.yaml` avec [les valeurs appropriées pour chaque nœud EMR][10].
+Pour recueillir des métriques Spark lorsque Spark est configuré sur AWS EMR, [utilisez les actions Bootstrap][8] pour installer l'[Agent Datadog][10] :
+
+Pour l'Agent v5, créez le fichier de configuration `/etc/dd-agent/conf.d/spark.yaml` avec les [valeurs appropriées pour chaque nœud EMR][9].
+
+Pour l'Agent v6 ou v7, créez le fichier de configuration `/etc/datadog-agent/conf.d/spark.d/conf.yaml` avec les [valeurs appropriées pour chaque nœud EMR][11].
+
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller Hadoop et Spark avec Datadog][11]
+- [Surveiller Hadoop et Spark avec Datadog][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/spark/images/sparkgraph.png
@@ -189,6 +194,5 @@ Documentation, liens et articles supplémentaires utiles :
 [6]: 
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
-[9]: https://docs.datadoghq.com/fr/agent/
-[10]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
-[11]: https://www.datadoghq.com/blog/monitoring-spark
+[9]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
+[10]: https://www.datadoghq.com/blog/monitoring-spark

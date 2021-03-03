@@ -33,10 +33,12 @@ DogStatsD を使用して大量のメトリクスを 1 つの Agent に送信す
 
 StatsD や DogStatsD のクライアントが、デフォルトで 1 つのデータグラムごとに 1 つのメトリクスを送信する場合がありますが、これによりクライアントやオペレーティングシステム、そして Agent のオーバーヘッドは非常に高くなります。複数のメトリクスを 1 つのダイアグラムにバッファリングできるようにクライアントを作成し、このオプションを有効にすることで問題を著しく改善できます。
 
+バッファリングをサポートする、コミュニティサポートの DogStatsD クライアントを使用している場合、Agent 側のデータごとのバッファサイズ (デフォルトで 8KB、`dogstatsd_buffer_size` を使用して Agent で構成可能) およびネットワーク/OS の最大データグラムサイズを超えない最大データグラムサイズを構成するようにしてください。
+
 [DogStatsD が公式にサポートするクライアント][3]の例をご紹介します。
 
-{{< tabs >}}
-{{% tab "Go" %}}
+{{< programming-lang-wrapper langs="go,python,ruby,java,.NET,PHP" >}}
+{{< programming-lang lang="go" >}}
 
 デフォルトでは、Datadog の公式 Golang ライブラリ [DataDog/datadog-go][1] はバッファリングを使用します。各パケットのサイズとメッセージの数は、`UDS` と `UDP` に異なるデフォルト値を使用します。クライアントコンフィギュレーションの詳細については、[DataDog/datadog-go][1] を参照してください。
 
@@ -60,9 +62,8 @@ func main() {
 ```
 
 [1]: https://github.com/DataDog/datadog-go
-{{% /tab %}}
-
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 以下のコードブロックは、Datadog 公認の Python ライブラリである [datadogpy][1] を使用し、最大 `25` のメトリクスを 1 つのパケットで送信するようバッファリングされた DogStatsD クライアントインスタンスを作成します。
 
@@ -76,9 +77,8 @@ with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
 
 
 [1]: https://github.com/DataDog/datadogpy
-{{% /tab %}}
-
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 以下のコードブロックは、Datadog 公認の Ruby ライブラリである [dogstatsd-ruby][1] を使用し、複数のメトリクスを 1 つのパケットで送信するようバッファリングされた DogStatsD クライアントインスタンスを作成します。
 
@@ -95,9 +95,9 @@ end
 
 
 [1]: https://github.com/DataDog/dogstatsd-ruby
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
 
-{{% tab "Java" %}}
 
 以下の例では、Datadog 公認の Java ライブラリである [java-dogstatsd-client][1] を使用して、最大のパケットサイズが 1500 バイトのバッファリングされた DogStatsD クライアントインスタンスを作成します。このクライアントインスタンスから送信されるメトリクスはすべてバッファリングされ、最大で `1500` パケット長のパッケージに入れて送信されます。
 
@@ -125,8 +125,8 @@ public class DogStatsdClient {
 
 
 [1]: https://github.com/DataDog/java-dogstatsd-client
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 以下の例では、Datadog 公認の C# ライブラリである [dogstatsd-csharp-client][1] を使用し、UDP で転送を行う DogStatsD クライアントを作成します。
 
 ```csharp
@@ -156,8 +156,8 @@ public class DogStatsdClient
 
 
 [1]: https://github.com/DataDog/dogstatsd-csharp-client
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="PHP" >}}
 
 以下のコードブロックは、Datadog 公認の PHP ライブラリである [php-datadogstatsd][1] を使用し、複数のメトリクスを 1 つのパケットで送信するようバッファリングされた DogStatsD クライアントインスタンスを作成します。
 
@@ -180,8 +180,8 @@ $client->increment('example_metric.increment', $sampleRate->0.5 , array('environ
 
 
 [1]: https://github.com/DataDog/php-datadogstatsd
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### メトリクスのサンプリング
 
@@ -332,8 +332,8 @@ DogStatsD クライアントは、デフォルトでテレメトリーメトリ�
 
 **注**: UDP を使用すると、クライアントがネットワークエラーを検出できないため、バイトやパケットがドロップしてもメトリクスには反映されません。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
+{{< programming-lang lang="python" >}}
 
 バージョン `0.34.0` 以降の Python クライアントが必要です。
 
@@ -357,8 +357,8 @@ statsd.disable_telemetry()
 
 
 [1]: https://github.com/DataDog/datadogpy
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 バージョン `4.6.0` 以降の Ruby クライアントが必要です。
 
@@ -382,8 +382,8 @@ Datadog::Statsd.new('localhost', 8125, disable_telemetry: true)
 
 
 [1]: https://github.com/DataDog/dogstatsd-ruby
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 バージョン `3.4.0` 以降の Go クライアントが必要です。
 
@@ -412,8 +412,8 @@ statsd, err: = statsd.New("127.0.0.1:8125", statsd.WithoutTelemetry())
 
 
 [1]: https://github.com/DataDog/datadog-go
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
 
 バージョン `2.10.0` 以降の Java クライアントが必要です。
 
@@ -442,8 +442,8 @@ StatsDClient client = new NonBlockingStatsDClientBuilder()
 
 
 [1]: https://github.com/DataDog/java-dogstatsd-client
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="PHP" >}}
 
 PHP クライアントのバージョン `1.5.0` 以降、テレメトリーは `BatchedDogStatsd` クライアントに対してデフォルトで有効になり、`DogStatsd` クライアントに対してデフォルトで無効になります。
 
@@ -489,8 +489,8 @@ $statsd = new BatchedDogStatsd(
 クライアントコンフィギュレーションについて詳しくは、[DataDog/php-datadogstatsd][1] を参照してください。
 
 [1]: https://github.com/DataDog/php-datadogstatsd
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 バージョン `5.0.0` 以降の .NET クライアントが必要です。
 
@@ -523,8 +523,8 @@ dogstatsdConfig.Advanced.TelemetryFlushInterval = null;
 
 
 [1]: https://github.com/DataDog/dogstatsd-csharp-client
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## その他の参考資料
 

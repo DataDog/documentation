@@ -20,7 +20,7 @@ Regardless of whether you’re using the Metrics Explorer, monitors, dashboards,
 
 {{< img src="metrics/advanced-filtering/tags.png" alt="Filter with tags"  style="width:80%;" >}}
 
-You can also perform advanced filtering with Boolean filters.
+You can also perform advanced filtering with Boolean or Wildcard tag value filters.
 
 ### Boolean filtered queries 
 
@@ -34,7 +34,7 @@ The following syntax is supported for Boolean filtered metric queries:
 - `IN`, `in`
 - `NOT IN`, `not in`
 
-#### Boolean query examples
+#### Boolean filtered query examples
 
 ```
 avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}
@@ -48,11 +48,26 @@ avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1
 
 {{< img src="metrics/advanced-filtering/ex2.gif" alt="Example 2"  style="width:80%;" >}}
 
+
+### Wildcard filtered queries 
+
+Tag value prefix and suffix wildcard matching is supported: 
+-  `pod_name: web-*` 
+-  `cluster:*-trace`.
+
+#### Wildcard filtered query examples
+
 ```
-avg:system.cpu.user{app NOT IN (village)} by {app}
+avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/ex3.gif" alt="Example 3"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/wildcards1.gif" alt="Example 1"  style="width:80%;" >}}
+
+```
+sum:kubernetes.pods.running{service:*-canary} by {service}
+```
+
+{{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="Example 2"  style="width:80%;" >}}
 
 ## Further Reading
 

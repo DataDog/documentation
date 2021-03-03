@@ -11,7 +11,7 @@
 "categories":
 - monitoring
 "creates_events": false
-"ddtype": "check"
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md"
 "display_name": "Algorithmia"

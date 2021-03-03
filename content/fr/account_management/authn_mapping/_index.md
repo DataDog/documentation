@@ -540,7 +540,7 @@ curl -X GET \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Activer/désactiver tous les mappages
+### Activer ou désactiver tous les mappages
 
 <div class="alert alert-warning">
 Lorsque les mappages sont activés, tous les utilisateurs qui se connectent via SAML verront leur rôles retirés puis réattribués en fonction des valeurs dans leur assertion SAML. Assurez-vous de vérifier que vous recevez bien les assertions SAML prévues dans votre connexion avant d'activer l'application des mappages.

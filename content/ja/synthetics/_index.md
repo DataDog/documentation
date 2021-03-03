@@ -2,7 +2,7 @@
 title: Synthetic の監視
 kind: documentation
 description: 自動テストを使用して、システムとアプリケーションの最も重要な部分が世界各地で正常に稼働していることを確認します。
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /ja/integrations/synthetics/
 further_reading:

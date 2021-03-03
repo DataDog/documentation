@@ -72,6 +72,13 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 | `com.amazonaws.vpce.us-east-1.vpce-svc-07672d13af0033c24` |
 
 {{% /tab %}}
+{{% tab "Kubernetes Resources" %}}
+
+| Datadog Kubernetes Explorer Service Name                  |
+| --------------------------------------------------------- |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0b03d6756bf6c2ec3` |
+
+{{% /tab %}}
 {{< /tabs >}}
 
 4. Hit the _verify_ button. If it does not return _Service name found_, reach out to the [Datadog support team][2].
@@ -191,6 +198,30 @@ To forward your trace metrics to Datadog using this new VPC endpoint, configure 
 2. [Restart your Agent][2] to send traces to Datadog through AWS PrivateLink.
 
 **Note**: If you are using the container Agent, set the environment variable instead: `DD_APM_DD_URL="https://trace-pvtlink.agent.datadoghq.com"`. Configure this environment variable on _both_ the Cluster Agent & Node Agent if using the Cluster Agent to monitor a Kubernetes environment.
+
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}
+{{% tab "Kubernetes Resources" %}}
+
+To forward your Kubernetes resources to Datadog using this new VPC endpoint, configure `orchestrator-pvtlink.datadoghq.com` as your new orchestrator data destination:
+
+1. Update the `dd_url` parameter in the [Agent `datadog.yaml` configuration file][1]:
+
+    ```yaml
+    dd_url: orchestrator-pvtlink.datadoghq.com
+    ```
+
+   For the container Agent, set the following environment variable instead:
+
+   ```
+   DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_DD_URL="orchestrator-pvtlink.datadoghq.com"
+   ```
+
+   Set this for the process Agent as well. If you are using the Cluster Agent to monitor a Kubernetes environment, also configure this environment variable for the Cluster Agent and the node Agent.
+
+2. [Restart your Agent][2] to send Kubernetes resources to Datadog through AWS PrivateLink.
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

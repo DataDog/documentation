@@ -24,8 +24,6 @@ further_reading:
 ログ分析は、ログ検索ページを拡張して、トラブルシューティングや監視のためのログの集約および分割機能を提供します。
 分析ページにアクセスするには、いずれかのログエクスプローラービューで検索クエリバーの横にある "分析" アイコンをクリックします。
 
-{{< img src="logs/explorer/analytics/explorer-button.png" alt="ログエクスプローラー" style="width:50%;" >}}
-
 以下を制御することができます。
 
 - 分析するログセットをフィルタリングするクエリ
@@ -46,30 +44,20 @@ further_reading:
 
 1. グラフ化する[メジャー][1]または[ファセット][1]を選択します。[メジャー][1]を選ぶと、集計関数を選択できます。[ファセット][1]を選ぶと、ユニーク数が表示されます。
 
-    {{< img src="logs/explorer/analytics/choose_measure_facet.png" alt="メジャーまたはファセットの選択"  style="width:50%;">}}
+    {{< img src="logs/explorer/facet/measure_facet.png" alt="メジャーまたはファセットの選択"  style="width:50%;">}}
 
 2. グラフ化する[メジャー][1]の集計関数を選択します。
 
-    {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="ログ分析の集計関数"  style="width:50%;">}}
-
 3. [ファセット][1]を使用して、グラフを分割します。
 
-    {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="ログ分析の分割"  style="width:50%;">}}
-
 4. 選択した[メジャー][1]に応じて、上位 (**top**) _X_ 個と下位 (**bottom**) _X_ 個のどちらの値を表示するかを選択します。
-
-    {{< img src="logs/explorer/analytics/top_bottom_button.png" alt="上位/下位ボタン"  style="width:20%;">}}
 
 5. グラフのタイムステップ値を選択します。
    グローバルタイムフレームを変更すると、使用可能なタイムステップ値のリストも変更されます。
 
-    {{< img src="logs/explorer/analytics/timesteps.png" alt="タイムステップ"  style="width:30%;">}}
-
 ## 可視化方法
 
 グラフセレクターを使用して、ログ分析の可視化タイプを選択します。
-
-{{< img src="logs/explorer/analytics/graph_selector.png" alt="ログ分析セレクター"  style="width:30%;">}}
 
 使用できる可視化タイプは以下のとおりです。
 
@@ -95,7 +83,7 @@ further_reading:
 次の時系列ログ分析は、
 **ユニーククライアント IP** の数に基づいて、過去 1 か月の**上位 5 の URL パス**の動きを示しています。
 
-{{< img src="logs/explorer/analytics/timeserie_example.png" alt="時系列の例"  style="width:90%;">}}
+{{< img src="logs/explorer/timeseries.png" alt="時系列の例"  style="width:90%;">}}
 
 
 [1]: /ja/logs/explorer/facets/
@@ -108,7 +96,7 @@ further_reading:
 次のトップリストログ分析は、
 **ユニーククライアント IP** の数に基づいて、過去 1 か月の**上位 5 の URL パス**の動きを示しています。
 
-{{< img src="logs/explorer/analytics/top_list_example.png" alt="トップリストの例"  style="width:90%;">}}
+{{< img src="logs/explorer/toplists.png" alt="トップリストの例"  style="width:90%;">}}
 
 
 [1]: /ja/logs/explorer/facets/
@@ -126,9 +114,6 @@ further_reading:
 
 次のテーブルログ分析は、**スループット**に基づいて、過去 15 分間の**上位ステータスコード**の動きをユニーク**クライアント IP** の数と共に示しています。
 
-{{< img src="logs/explorer/analytics/logs_table_example.png" alt="テーブルの例"  style="width:90%;">}}
-
-
 [1]: /ja/logs/explorer/facets/
 {{% /tab %}}
 {{< /tabs >}}
@@ -136,8 +121,6 @@ further_reading:
 ## 関連ログ
 
 グラフの一部を選択またはクリックすると、グラフをズームインしたり、選択範囲に対応するログのリストを表示したりすることができます。
-
-{{< img src="logs/explorer/analytics/view_logs.mp4" alt="ログの表示" video="true"  width="80%" >}}
 
 ## 共有ビュー
 
@@ -147,8 +130,6 @@ _共有_ 機能を使用して、現在のログ表示をエクスポートし�
 - **ダッシュボード**へエクスポート: 既存または新しい[ダッシュボード][3]に現在の分析をウィジェットとしてエクスポートします。
 - 新しい**メトリクス**を生成: 現在の分析クエリから[新しいメトリクスを生成][4]します。
 
-{{< img src="logs/explorer/analytics/analytics_share.png" alt="テーブルの例"  style="width:90%;">}}
-
 ## 集計機能の動作の詳細
 
 Datadog は、対象のタイムフレームに含まれる一連のログを使用して、集計値 (平均、合計、パーセンタイルなど) を計算します。
@@ -156,8 +137,6 @@ Datadog は、対象のタイムフレームに含まれる一連のログを使
 以下では、それぞれが 1 つの時間間隔を表している架空のバータイムラインについて説明します。この例で、Datadog は、ログセット全体から時間間隔ごとに 1 つの集計値を作成します。ログイベントは、時間的に常に均一に分散しているわけではありません。そのため、常に同じ量のログから集計値が作成されるわけではありません。
 
 次の例では、各ドットが 1 つのログイベントを表します。X 軸はログのタイムスタンプ、Y 軸はログが持つ duration 属性の値です。この時系列は、最大値集計を表示しています。タイムラインはロールアップパラメーターと共に表示されます。たとえば、ここではタイムフレーム全体に 4 つの棒が表示されています。
-
-{{< img src="logs/explorer/analytics/aggregation_howto.mp4" alt="上位リストの例" video="true"  >}}
 
 ## その他の参考資料
 

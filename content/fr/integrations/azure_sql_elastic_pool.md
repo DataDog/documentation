@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure SQL Elastic Pool.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/'
+draft: false
 git_integration_title: azure_sql_elastic_pool
 has_logo: true
 integration_title: Microsoft Azure SQL Elastic Pool
@@ -29,7 +30,7 @@ Recueillez des métriques d'Azure SQL Elastic Pool pour :
 - Visualiser les performances de vos pools élastiques SQL
 - Corréler les performances de vos pools élastiques SQL avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

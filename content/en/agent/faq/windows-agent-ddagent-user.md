@@ -3,9 +3,10 @@ title: Datadog Windows Agent User
 kind: faq
 ---
 
-Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under the `ddagentuser` account, created at install time, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
+Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under a dedicated user account, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
 
-The user `ddagentuser` is created at install time for the Datadog Windows Agent. When installed on an Active Directory server, the username and password must be provided to the installer. The new user is a non-privileged user. It gains the following rights during installation:
+The Agent installer creates a new account by default (`ddagentuser`) but it can also use a user-supplied account.
+The account gains the following rights during installation:
 
 * It can start and stop the APM and Process Agent
 * It becomes a member of the “Performance Monitor Users” group
@@ -16,46 +17,83 @@ The user `ddagentuser` is created at install time for the Datadog Windows Agent.
 * It has remote login disabled
 * It has network login disabled
 
+**Note**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
+
 ## Installation
+
+If no user account is specified on the command line, the installer will attempt to create a local user account named `ddagentuser` with a randomly generated password.
+
+If a user account is specified on the command line, but this user account is not found on the system, the installer will attempt to create it.
+If a password was specified, the installer will use that password, otherwise it will generate a random password.
+
+To specify the optional username and password on the command line pass the following properties to the `msiexec` command:
+
+```shell
+msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
+```
+
+**Note**: The `<USERNAME>` must be 20 characters or fewer, to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+
+**Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
+
+**Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
 
 ### Installation with group policy
 
-The installer changes the local group policy to allow the newly created user account, `ddagentuser`, to **run as a service**.  If the domain group policy disallows that, then the installation setting is overridden, and the domain group policy has to be updated to allow the user to run as a service.
+The installer changes the local group policy to allow the newly created user account to **run as a service**.
+If the domain group policy disallows that, then the installation setting is overridden, and you must update the domain group policy to allow the user account to run as a service.
 
 ### Installation in a domain environment
 
-The Agent installer creates the `ddagentuser` at install time, and then registers the service (with the randomly generated password). The user is created as a local user, even in a domain environment, so that every machine on which the Agent is installed has a unique user and password.
+#### Domain joined machines
 
-The exception is on domain controllers (primary and backup). There is no notion of a local user on a domain controller. Therefore, the created user becomes a domain user rather than a local one.
+On domain joined machines, the Agent installer can use a user supplied account, whether it is a domain or local one, or create a local account.
 
-To support this environment, the Agent installer requires that the administrator provides a username and password under which the Agent run. The username and password are provided as properties on the installation command line, i.e.
+If a domain account is specified on the command line, it must exist prior to the installation since only domain controllers can create domain accounts.
 
-```shell
-Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
-```
+If a user account is specified on the command line, but this user account is not found on the system, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
 
-For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied should **never** be an existing "real" (human) user. The installation process changes the rights of the user and they are denied login access. The installer currently does not support passwords containing `;`.
-
-Additionally, the installer adds the user to the following groups:
-
-* Performance Monitoring
-* Event Log Viewer
-
-**Note**: These options are honored even in a non-domain environment, if the user wishes to supply a username/password to use rather than have the installer generate one.
-
-**Note**: The `<USERNAME>` must be 20 characters or less in order to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
-
-**Note**: When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you need to supply the `<DDAGENTUSER_NAME>` but not the `<DDAGENTUSER_PASSWORD>`:
-
-**Note**: If encountering permission issues with system and winproc checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
+To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 
 ```shell
-Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME>
+msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
+
+The `<DOMAIN>` can either be a fully-qualified domain name (in the form `mydomain.com`) or the NETBIOS name (the pre-Windows 2000 name).
+It must be separated from the `<USERNAME>` with a backslash `\`.
+
+**Note**: The `<USERNAME>` must be 20 characters or fewer, to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+
+**Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
+
+#### Domain controllers
+
+##### Primary and backup domain controllers
+
+When installing the Agent on a domain controller, there is no notion of local user account. So if the installer creates a user account, it will be a domain user rather than a local one.
+
+If no user account is specified on the command line, the installer will create a *domain* account named `ddagentuser` in the controller's domain.
+
+If a user account is specified on the command line, but this user account is not found in the domain, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
+
+If the specified user account is from a parent domain, the installer will use that user account.
+If the user account doesn't exist, it will create the user account in the child domain (the domain that the controller is joined to).
+The installer will never create a user account in the parent domain.
+
+##### Read-only domain controllers
+
+The installer can use only an existing domain account when installing on a read-only domain controller.
 
 ### Installation with Chef
 
 If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent’s configuration files have the correct permissions
+
+## Upgrade
+
+For Agent version < `7.25.0` when you upgrade the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you must supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
+
+Starting with Agent version `7.25.0` the installer will retain the username used to install the Agent and re-use it during upgrades.
+It is still possible to override the saved value with `DDAGENTUSER_NAME`.
 
 ## Agent integrations
 

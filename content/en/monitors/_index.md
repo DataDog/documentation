@@ -1,7 +1,7 @@
 ---
 title: Alerting
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 aliases:
     - /guides/monitors/
     - /guides/monitoring/

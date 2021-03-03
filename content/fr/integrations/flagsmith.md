@@ -9,7 +9,7 @@ assets:
 categories:
   - notification
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md'
 display_name: Flagsmith
@@ -35,7 +35,7 @@ supported_os:
 
 [Flagsmith][1] simplifie la gestion des fonctionnalités des applications Web, mobiles, et serveur. L'intégration Datadog/Flagsmith vous permet d'afficher des informations concernant les changements de flag directement dans Datadog.
 
-Tous les événements de changement de flag sont envoyés à Datadog. Le nouvel environnement est ajouté en tant que tag aux événements.
+Tous les événements de changement de flag sont envoyés à Datadog. L'ancien environnement est ajouté en tant que tag aux événements.
 
 ## Configuration
 

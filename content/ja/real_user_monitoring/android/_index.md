@@ -109,11 +109,11 @@ class SampleApplication : Application() {
 
    ```kotlin
       fun onResume(){
-        GlobalRum.get().startView(viewKey, viewName, viewAttributes)        
+        GlobalRum.get().startView(viewKey, viewName, viewAttributes)
       }
 
       fun onPause(){
-        GlobalRum.get().stopView(viewKey, viewAttributes)        
+        GlobalRum.get().stopView(viewKey, viewAttributes)
       }
    ```
 
@@ -141,7 +141,7 @@ class SampleApplication : Application() {
 
 ## ウィジェットの追跡
 
-通常の場合、ウィジェットは HomeScreen アプリケーションにより提供される `AppWidgetHostView` に表示されます。このコンポーネントに自動インスツルメンテーションは提供されません。ウィジェットから UI インタラクション情報を送信するには、Datadog の API を手動で呼び出します。サンプルアプリケーションで、例をご参照ください: 
+通常の場合、ウィジェットは HomeScreen アプリケーションにより提供される `AppWidgetHostView` に表示されます。このコンポーネントに自動インスツルメンテーションは提供されません。ウィジェットから UI インタラクション情報を送信するには、Datadog の API を手動で呼び出します。サンプルアプリケーションで、例をご参照ください:
 [ウィジェットの追跡](https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget)
 
 ## バッチコレクション

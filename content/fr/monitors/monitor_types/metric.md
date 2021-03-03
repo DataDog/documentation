@@ -68,7 +68,7 @@ Une alerte de prévision prédit le comportement futur d'une métrique et le com
 
 À chaque évaluation de l'alerte, Datadog prédit les valeurs futures de la métrique ainsi que les limites de l'écart-type attendu. Une alerte se déclenche lorsque l'une de ces limites dépasse le seuil configuré.
 
-Pour en savoir plus, consultez la page [Monitor de prévision][1].
+Pour en savoir plus, consultez la page [Monitor de prévisions][1].
 
 [1]: /fr/monitors/monitor_types/forecasts/
 {{% /tab %}}
@@ -104,9 +104,9 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 {{< tabs >}}
 {{% tab "Seuil" %}}
 
-* Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieur ou égale à, inférieure ou égale à)
+* Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieure ou égale à, inférieure ou égale à)
 * la valeur seuil `on average`, `at least once`, `at all times` ou `in total` (en moyenne, au moins une fois, en permanence ou au total)
-* sur `5 minutes`, `15 minutes`, `1 hour`, etc.
+* sur un intervalle de `5 minutes`, `15 minutes` ou `1 hour` ou encore lors d'une période `custom` (comprise entre 1 minute et 48 heures).
 
 **Définitions** :
 
@@ -125,8 +125,8 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 
 * La valeur `average`, `maximum`, `minimum` ou `in total` (moyenne, maximale, minimale ou totale)
 * du `change` ou `% change` (changement ou changement relatif)
-* mesurée sur `5 minutes`, `15 minutes`, `1 hour`, etc.
-* par rapport à la valeur mesurée `5 minutes`, `15 minutes`, `1 hour`, etc. plus tôt
+* sur un intervalle de `5 minutes`, `15 minutes` ou `1 hour` ou encore lors d'une période `custom` (comprise entre 1 minute et 48 heures).
+* par rapport aux valeurs d'une intervalle de `5 minutes`, `15 minutes` ou `1 hour` ou encore à celles d'une période `custom` (comprise entre 1 minute et 48 heures auparavant).
 * est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieure ou égale à, inférieure, inférieure ou égale à) la valeur seuil.
 
 **Définitions** :
@@ -180,7 +180,7 @@ En revanche, si vous surveillez une métrique pour un groupe de hosts avec mise 
 
 Lorsqu'un monitor n'envoie pas de notifications d'absence de données et qu'un groupe n'envoie pas de données, le monitor n'effectue aucune évaluation et finit par mettre de côté le groupe. Pendant cette période, la barre sur la page des résultats reste verte. Lorsque les groupes recommencent à envoyer des données, la barre verte affiche un statut OK et se remplit comme si aucune interruption n'avait eu lieu.
 
-#### Auto Resolve
+#### Rétablissement automatique
 
 Utilisez les options `[Never]`, `After 1 hour`, `After 2 hours`, etc. pour choisir si et au bout de combien de temps un monitor doit être automatiquement rétabli après s'être déclenché.
 

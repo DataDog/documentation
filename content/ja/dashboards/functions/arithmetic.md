@@ -20,7 +20,7 @@ aliases:
 
 ## 対数
 
-### log2
+### ログベース 2
 
 | 関数 | 説明                               | 例                  |
 | :----    | :-------                                  | :---------               |
@@ -32,7 +32,7 @@ aliases:
 
 {{< img src="dashboards/functions/arithmetic/log2.png" alt=" log2 関数"  style="width:80%;">}}
 
-### log10
+### ログベース 10
 
 | 関数  | 説明                                | 例                   |
 | :----     | :-------                                   | :---------                |

@@ -5,22 +5,22 @@ aliases:
   - /fr/agent/faq/agent-s-are-no-longer-reporting-data
   - /fr/agent/faq/common-windows-agent-installation-error-1721
 further_reading:
-  - link: /agent/troubleshooting/debug_mode
+  - link: /agent/troubleshooting/debug_mode/
     tag: Documentation
     text: Mode debugging de l'Agent
-  - link: /agent/troubleshooting/send_a_flare
+  - link: /agent/troubleshooting/send_a_flare/
     tag: Documentation
     text: Envoyer un flare de l'Agent
-  - link: /agent/troubleshooting/permissions
+  - link: /agent/troubleshooting/permissions/
     tag: Documentation
     text: Problèmes d'autorisations de l'Agent
-  - link: /agent/troubleshooting/site
+  - link: /agent/troubleshooting/site/
     tag: Documentation
     text: Vérifier le site de l'Agent
-  - link: /agent/troubleshooting/ntp
+  - link: /agent/troubleshooting/ntp/
     tag: Documentation
     text: Problèmes NTP de l'Agent
-  - link: /agent/troubleshooting/agent_check_status
+  - link: /agent/troubleshooting/agent_check_status/
     tag: Documentation
     text: Obtenir le statut d'un check de l'Agent
 ---
@@ -45,11 +45,11 @@ Si vous n'avez toujours pas résolu votre problème, vous pouvez contacter l'[é
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://app.datadoghq.com/metric/explorer
-[3]: /fr/agent/proxy
+[3]: /fr/agent/proxy/
 [4]: https://app.datadoghq.com/account/settings#api
-[5]: /fr/agent/troubleshooting/site
+[5]: /fr/agent/troubleshooting/site/
 [6]: /fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: /fr/agent/guide/agent-log-files
-[8]: /fr/agent/troubleshooting/debug_mode
-[9]: /fr/help
-[10]: /fr/agent/troubleshooting/send_a_flare
+[7]: /fr/agent/guide/agent-log-files/
+[8]: /fr/agent/troubleshooting/debug_mode/
+[9]: /fr/help/
+[10]: /fr/agent/troubleshooting/send_a_flare/

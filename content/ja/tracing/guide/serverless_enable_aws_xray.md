@@ -58,8 +58,9 @@ X-Ray クライアントライブラリから、API への HTTP リクエスト�
 
 ライブラリをインストールして Lambda プロジェクトにインポートし、インスツルメントするサービスにパッチを適用します。
 
-{{< tabs >}}
-{{% tab "Node.js" %}}
+{{< programming-lang-wrapper langs="nodejs,python,go,ruby,java,.NET" >}}
+
+{{< programming-lang lang="nodejs" >}}
 
 X-Ray トレーシングライブラリをインストールする
 
@@ -106,8 +107,9 @@ var connection = mysql.createConnection(config);
 その他のコンフィギュレーション、サブセグメントの作成、アノテーションの記録については、[X-Ray Node.js ドキュメント][1]を参照してください。
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
 
 X-Ray トレーシングライブラリをインストールする
 
@@ -131,23 +133,39 @@ patch_all()
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-patching.html
 [2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-httpclients.html
 [3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python.html
-{{% /tab %}}
-{{% tab "Go, Ruby, Java, .NET" %}}
+{{< /programming-lang >}}
 
-その他のランタイムについては、X-Ray SDK ドキュメントを参照してください。
-
-- [Go 対応 X-Ray SDK][1]
-- [Ruby 対応 X-Ray SDK][2]
-- [Java 対応 X-Ray SDK][3]
-- [.NET 対応 X-Ray SDK][4]
-
+{{< programming-lang lang="go" >}}
+参照:
+- [Go 対応 X-Ray SDK ドキュメント][1]。
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-go.html
-[2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
-[3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
-[4]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+参照:
+- [Ruby 対応 X-Ray SDK ドキュメント][1]。
+
+[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
+
+参照:
+- [Java 対応 X-Ray SDK ドキュメント][1]。
+
+[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
+参照:
+- [.Net 対応 X-Ray SDK ドキュメント][1]。
+
+[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 [1]: integrations/amazon_web_services/#setup
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_xray

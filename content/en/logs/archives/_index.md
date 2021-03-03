@@ -204,9 +204,9 @@ Input your bucket name. **Optional**: Input a prefix directory for all the conte
 {{% /tab %}}
 {{< /tabs >}}
 
-### Advanced Settings
+### Advanced settings
 
-#### Datadog Permissions
+#### Datadog permissions
 
 By default:
 
@@ -222,7 +222,7 @@ Use this optional configuration step to assign roles on that archive and restric
 
 {{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs"  style="width:75%;">}}
 
-#### Datadog Tags
+#### Datadog tags
 
 Use this configuration optional step to:
 
@@ -231,7 +231,7 @@ Use this configuration optional step to:
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
 
-#### Storage Class
+#### Storage class
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -336,7 +336,7 @@ In case Datadog detects some broken configuration, the corresponding archive is 
 
 {{< img src="logs/archives/archive_validation.png" alt="Check that your archives are properly set up."  style="width:75%;">}}
 
-## Configure Multiple Archives
+## Multiple archives
 
 In case multiple archives are defined, logs enter the first archive whose filter they match on. So it is important to order your archives carefully.
 
@@ -344,7 +344,7 @@ For example, if you create a first archive filtered to the `env:prod` tag and a 
 
 {{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on."  style="width:75%;">}}
 
-## Format of the Archives
+## Format of the archives
 
 The log archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Under whatever prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, like so:
 

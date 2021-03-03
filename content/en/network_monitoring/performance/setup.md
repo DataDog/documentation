@@ -105,9 +105,9 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 3. Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to `true`:
 
     ```yaml
-    system_probe_config:
+    network_config:   # use system_probe_config for Agent's older than 7.24.1
         ## @param enabled - boolean - optional - default: false
-        ## Set to true to enable the System Probe.
+        ## Set to true to enable Network Performance Monitoring.
         #
         enabled: true
     ```
@@ -210,7 +210,15 @@ To enable network performance monitoring for Windows hosts:
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To enable Network Performance Monitoring with Kubernetes from scratch:
+To enable Network Performance Monitoring with Kubernetes using Helm, add:
+
+  ```yaml
+  networkMonitoring:
+      enabled: true
+  ```
+to your values.yaml. Helm chart version 2.4.39 or higher is required. See the [Datadog Helm Chart][4] for further information.
+
+If you are not using Helm, you can enable Network Performance Monitoring with Kubernetes from scratch:
 
 1. Download the [datadog-agent.yaml manifest][1] template.
 2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][2].
@@ -339,6 +347,7 @@ If you already have the [Agent running with a manifest][3]:
 [1]: /resources/yaml/datadog-agent-npm.yaml
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /agent/kubernetes/
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 {{% /tab %}}
 {{% tab "Docker" %}}
 

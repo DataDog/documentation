@@ -24,6 +24,8 @@ You can pair these metrics with retention filters and Analytics monitors, or use
 
 Use custom metrics for specific fixed queries and comparisons, while creating retention filters to allow arbitrary querying and investigation of the retained trace and its flamegraph.
 
+**Billing Note:** Metrics created from ingested spans are billed as [Custom Metrics][11].
+
 For example, you may want to use custom metrics to visualize anomalies, create dashboards and monitors, and see trends across any parameters that are important to your business context. All generated metrics are available for 15 months as Datadog [custom metrics][2].
 
 | Reason                        | Custom Metrics Generated from Spans                   | Retention Filters                           |
@@ -85,3 +87,4 @@ After a metric is created, only two fields can be updated:
 [8]: https://app.datadoghq.com/apm/traces/generate-metrics
 [9]: /tracing/trace_search_and_analytics/query_syntax/
 [10]: /developers/metrics/#naming-metrics
+[11]: /account_management/billing/custom_metrics/

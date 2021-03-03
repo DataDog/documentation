@@ -29,7 +29,7 @@ Datadog のライブプロセスにより、インフラストラクチャー上
 
 ## インストール
 
-Agent 5 の場合、[こちらのバージョン固有のインストール手順に従ってください。][2]。Agent 6 または 7 をご利用の場合は、[以下の手順を参照してください][1]。 
+Agent 5 の場合は、[こちらのバージョン固有のインストール手順に従ってください][1]。Agent 6 または 7 をご利用の場合は、[以下の手順を参照してください][2]。 
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
@@ -236,7 +236,7 @@ Kubernetes コンテナ内のプロセスは、以下でタグ付けされます
 
 {{< img src="infrastructure/process/process_monitor.png" alt="プロセスモニター"  style="width:80%;">}}
 
-## ダッシュボードとノートブックの処理
+## ダッシュボードおよびノートブックでのプロセス
 
 ダッシュボードやノートブックでプロセスメトリクスをグラフ化するには、[時系列ウィジェット][8]を使用します。構成するには、
 1. ライブプロセスをデータソースとして選択
@@ -248,7 +248,7 @@ Kubernetes コンテナ内のプロセスは、以下でタグ付けされます
 
 ## 自動検出インテグレーション
 
-Datadog はプロセス収集を使用して、ホストで実行されているテクノロジーを自動検出します。これにより、こうしたテクノロジーの監視に役立つ Datadog インテグレーションが識別されます。この自動検出されたインテグレーションは、[インテグレーション検索][2]に表示されます。
+Datadog ではプロセス収集を使用して、ホストで実行されているテクノロジーを自動検出します。これにより、こうしたテクノロジーの監視に役立つ Datadog インテグレーションが識別されます。この自動検出されたインテグレーションは、[インテグレーション検索][1]に表示されます。
 
 {{< img src="getting_started/integrations/ad_integrations.png" alt="自動検出されたインテグレーション" >}}
 
@@ -289,8 +289,8 @@ Datadog はプロセス収集を使用して、ホストで実行されている
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/
-[2]: /ja/agent/faq/agent-5-process-collection/
+[1]: /ja/agent/faq/agent-5-process-collection/
+[2]: /ja/agent/
 [3]: /ja/getting_started/tagging/
 [4]: /ja/getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
@@ -299,4 +299,4 @@ Datadog はプロセス収集を使用して、ホストで実行されている
 [8]: /ja/dashboards/widgets/timeseries/#pagetitle
 [9]: /ja/infrastructure/livecontainers/
 [10]: /ja/tracing/
-[11]: /ja/network_performance_monitoring/network_page
+[11]: /ja/network_monitoring/performance/network_page
