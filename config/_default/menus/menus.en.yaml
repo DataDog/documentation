@@ -195,42 +195,54 @@ main_left:
     title: usecase
     url: 'https://www.datadoghq.com/solutions/devops/'
     weight: -445
+  - identifier: usecase-testing
+    name: 'Shift-Left Testing'
+    parent: 'solutions'
+    title: 'usecase'
+    url: 'https://www.datadoghq.com/solutions/shift-left-testing/'
+    weight: -444
   - identifier: usecase-security
     name: Security Analytics
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -444
+    weight: -443
+  - identifier: usecase-compliance
+    name: 'Compliance for CIS Benchmarks'
+    parent: 'solutions'
+    title: 'usecase'
+    url: 'https://www.datadoghq.com/solutions/security/cis-benchmarks/'
+    weight: -442
   - identifier: usecase-hybrid
     name: Hybrid Cloud Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -443
+    weight: -441
   - identifier: usecase-iot
     name: IoT Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -442
+    weight: -440
   - identifier: usecase-machine
     name: Machine Learning
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -441
+    weight: -439
   - identifier: usecase-analytics
     name: Real-Time BI
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -440
+    weight: -438
   - identifier: usecase-onprem
     name: On-Premises Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
-    weight: -439
+    weight: -437
 main_right:
   - identifier: about
     name: About
