@@ -4449,6 +4449,17 @@ api:
       operationids:
         - GetBrowserTestLatestResults
       unstable: []
+  - name: Edit a browser test
+    url: '#edit-a-browser-test'
+    identifier: edit-a-browser-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateBrowserTest
+      unstable: []
   - name: Get a test configuration (browser)
     url: '#get-a-test-configuration-browser'
     identifier: get-a-test-configuration-browser
@@ -4459,6 +4470,39 @@ api:
         - v1
       operationids:
         - GetBrowserTest
+      unstable: []
+  - name: Create a browser test
+    url: '#create-a-browser-test'
+    identifier: create-a-browser-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSyntheticsBrowserTest
+      unstable: []
+  - name: Edit an API test
+    url: '#edit-an-api-test'
+    identifier: edit-an-api-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAPITest
+      unstable: []
+  - name: Create an API test
+    url: '#create-an-api-test'
+    identifier: create-an-api-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSyntheticsAPITest
       unstable: []
   - name: Create a test
     url: '#create-a-test'
