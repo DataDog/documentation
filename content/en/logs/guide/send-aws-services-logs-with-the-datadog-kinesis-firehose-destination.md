@@ -21,7 +21,6 @@ You can set up a Kinesis Firehose Delivery Stream in the AWS Firehose console, o
 ​
 {{< tabs >}}
 {{% tab "Kinesis Firehose Delivery stream" %}}
-## Setup the Datadog Destination in the Kinesis Firehose Delivery Stream
 ​
 Datadog recommends using a Kinesis stream as input when using the Datadog Kinesis destination. It gives you the ability to forward your logs to multiple destinations in case Datadog is not the only consumer for those logs.
 ​
@@ -44,7 +43,6 @@ If you only want to send logs to Datadog, or if you already have a Kinesis Datas
 
 To ensure that logs that fail through the Delivery Stream are still sent to Datadog, [configure the Datadog Lambda function to trigger on this S3 bucket][4].
 
-
 [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/app-hotspots-prepare.html#app-hotspots-create-two-streams
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/account/settings#api
@@ -52,13 +50,10 @@ To ensure that logs that fail through the Delivery Stream are still sent to Data
 {{% /tab %}}
 
 {{% tab "CloudFormation template" %}}
-## Upload with a CloudFormation Template
 ​
 Alternatively, customize this CloudFormation template and install it from the AWS Console:
 ​
-[See the full Kinesis CloudFormation template here.][1]
-​
-​
+See the full [Kinesis CloudFormation template][1].
 
 [1]: /resources/json/kinesis-logs-cloudformation-template.json
 {{% /tab %}}
@@ -73,7 +68,6 @@ Alternatively, customize this CloudFormation template and install it from the AW
   b. Create a permissions policy allowing the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord` and `kinesis:PutRecordBatch` actions.
   c. Attach the permissions policy to your newly created IAM role using the `aws iam put-role-policy` command.
   d. Use the `aws logs put-subscription-filter` command to subscribe your Kinesis stream to each CloudWatch log group you want to ingest into Datadog.
-​
 ​
     Example of subscription filter:
 ​

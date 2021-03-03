@@ -143,7 +143,7 @@ Once this is done, the `Pattern` to use becomes:
 {{% /tab %}}
 {{< /tabs >}}
 
-### JSON Format
+### JSON format
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
@@ -481,9 +481,9 @@ More information available on the prefix parameter in the [Logback documentation
 
 Enrich your log events with contextual attributes.
 
-### Using the Key/Value parser
+### Using the key value parser
 
-The [Key/Value parser][5] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
+The [key value parser][5] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
@@ -499,7 +499,7 @@ You can change it to:
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-With the [Key/Value parser][5] enabled, **Datadog** automatically extracts each pair from your final JSON document:
+With the [key value parser][5] enabled, **Datadog** automatically extracts each pair from your final JSON document:
 
 ```json
 {
@@ -512,7 +512,7 @@ With the [Key/Value parser][5] enabled, **Datadog** automatically extracts each 
 
 So you can exploit *scope* as a field, and *durationInMs* and *quantity* as log measures.
 
-### MDC (Mapped Diagnostic Context)
+### MDC
 
 Another option to enrich your logs is to use Java's [MDC (Mapped Diagnostic Contexts)][1].
 
