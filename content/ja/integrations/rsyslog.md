@@ -26,7 +26,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 ### ログの収集
 
-#### Rsyslog バージョン 8 以上
+#### Rsyslog バージョン 8 以上 
 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}

@@ -277,8 +277,8 @@ Par défaut, le tracing de base de données n'est pas pris en charge par la fonc
 
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple :
 
-* Configuration du traceur : `ddtrace.config.psycopg.analytics_enabled = True`
-* Variable d'environnement : `DD_PSYCOPG_ANALYTICS_ENABLED=true`
+* Configuration du traceur : `ddtrace.config.postgres.analytics_enabled = True`
+* Variable d'environnement : `DD_POSTGRES_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
