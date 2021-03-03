@@ -3,6 +3,9 @@ title: Watchdog Insights for Logs
 kind: documentation
 description: 'Get Insights on where to Start or Follow-Up your Investigations'
 further_reading:
+    - link: 'https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/'
+      tag: 'Blog'
+      text: 'Accelerate your logs investigations with Watchdog Insights'
     - link: 'logs/explorer/side_panel'
       tag: 'Documentation'
       text: 'The log side panel'
