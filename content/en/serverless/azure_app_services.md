@@ -70,13 +70,13 @@ The Datadog extension for Azure App Services provides additional monitoring capa
     - Set `DD_SERVICE` to specify a service name (defaults to your web app name).
     - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your web app.
     - See a full list of [optional configuration variables][12].
-6. Click **Save** (this will restart your application).
-7. Stop your application: click **Stop**. This step is required, or the the install process will not complete.
+6. Click **Save** (this restarts your application).
+7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>
 8. Go to the Azure extensions page and select the Datadog APM extension.
     {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Datadog extension" >}}
 9. Accept the legal terms, click **OK**, and wait for the installation to complete. **Note**: the web app must be in a stopped state for this step to complete successfully.
-10. Start the main application: click **Restart**.
-    {{< img src="infrastructure/serverless/azure_app_services/restart.png" alt="Stop and restart page" >}}
+10. Start the main application, click **Start**:
+    {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Start" >}}
 
 ### Application logging from Azure web apps
 
