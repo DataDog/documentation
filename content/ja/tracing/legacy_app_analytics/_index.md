@@ -278,8 +278,8 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
-* トレーサー構成: `ddtrace.config.psycopg.analytics_enabled = True`
-* 環境変数: `DD_PSYCOPG_ANALYTICS_ENABLED=true`
+* トレーサー構成: `ddtrace.config.postgres.analytics_enabled = True`
+* 環境変数: `DD_POSTGRES_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
