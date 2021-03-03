@@ -127,7 +127,7 @@ Here are setup examples for the `log4j`, `log4j2`, and `logback` logging librari
 
 **Inject trace IDs in your logs**
 
-If APM is enabled for this application, you can correlate logs and traces by [following these instructions][6] to enable trace id injection.
+If APM is enabled for this application, you can correlate logs and traces by  referring to [Connecting Java Logs and Traces][6] to enable trace id injection.
 
 If you are _not_ correlating logs and traces, you can remove the MDC placeholders ( `%X{dd.trace_id} %X{dd.span_id}` ) from your log patterns.
 
@@ -138,7 +138,7 @@ If you are _not_ correlating logs and traces, you can remove the MDC placeholder
 
 It can be difficult to log in JSON with log4j. Because of this, we advise you to use an slf4j module called [log4j-over-slf4j][1] along with Logback for JSON formatted logs.
 
-`log4j-over-slf4j` seamlessly replaces log4j in your application so you do not have to make any code changes.  To use it
+`log4j-over-slf4j` seamlessly replaces log4j in your application so you do not have to make any code changes. To use it:
 
 1. Replace your `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency
 2. Add the Logback dependencies
@@ -217,7 +217,7 @@ Then, add the JSON layout dependencies to your `pom.xml`:
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-We recommend using the [logstash-logback-encoder][1] for JSON formatted logs in Logback. Configure a file appender using the JSON layout in `logback.xml`:
+You can use the [logstash-logback-encoder][1] for JSON formatted logs in Logback. To configure a file appender using the JSON layout in `logback.xml`:
 
 ```xml
 <configuration>
@@ -252,7 +252,7 @@ Then, add the logstash encoder dependency to your `pom.xml` file:
 {{< /tabs >}}
 
 **Inject trace IDs in your logs**
-If APM is enabled for this application, you can correlate logs and traces by [following these instructions][6] to enable trace id injection.
+If APM is enabled for this application, you can correlate logs and traces by referring to [Connecting Java Logs and Traces][6] to enable trace id injection.
 
 
 ## Configure the Datadog Agent
@@ -292,7 +292,7 @@ Most common logging libraries can be bridged to Logback
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-We advise you to use an slf4j module called [log4j-over-slf4j][1] along with Logback.
+Logging to a remote server in JSON may be difficult. You can use the slf4j module [log4j-over-slf4j][1] with Logback to simplify this process.
 
 `log4j-over-slf4j` seamlessly replaces log4j in your application so you do not have to make any code changes.  To use it:
 
@@ -330,7 +330,7 @@ Your `pom.xml` file should have the following dependencies:
 
 Log4j2 allows logging to a remote host, but it does not offer the ability to prefix the logs by an API key. Because of this, it is recommended that you use a SLF4J  module called `log4j-over-slf4j` and Logback.
 
-`log4j-to-slf4j.jar` seamlessly replaces log4j2 in your application so you do not have to make any code changes.  To use it
+`log4j-to-slf4j.jar` seamlessly replaces log4j2 in your application so you do not have to make any code changes. To use it:
 
 1. Replace your `log4j.jar` dependency with a `log4j-to-slf4j.jar` dependency
 2. Add the logback dependencies

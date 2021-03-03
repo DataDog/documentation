@@ -16,11 +16,11 @@ further_reading:
       tag: 'Blog'
       text: 'Correlate request logs with traces automatically'
 ---
-## Configure Your Logger
+## Configure your logger
 
 The first step to correlating logs and traces is to configure your logger.  Follow the [configuration instructions][4] for Log4j, Log4j2, or Logback.
 
-## Automatically Inject Trace and Span IDs
+## Automatically inject trace and span IDs
 
 As of version 0.74.0, the Java tracer automatically injects correlation identifiers into logs.  For versions <= 0.73.0, enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property or through the environment variable `DD_LOGS_INJECTION=true`.  Full configuration details can be found on the [Java tracer configuration][1] page.
 
