@@ -59,7 +59,7 @@ After processing, the following structured log is generated:
 * The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 * Properties with null or empty values are not displayed.
 
-### Matcher and Filter
+### Matcher and filter
 
 Here is a list of all the matchers and filters natively implemented by Datadog:
 
@@ -124,9 +124,9 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Advanced Settings
+## Advanced settings
 
-At the bottom of your Grok processor tiles, there is an Advanced Settings section:
+At the bottom of your Grok processor tiles, there is an **Advanced Settings** section:
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings"  style="width:80%;">}}
 
@@ -394,7 +394,7 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 
 **Note**: A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][3].
 
-### List and Arrays
+### List to array
 
 Use the `array` matcher to extract a list into an array in a single attribute.
 

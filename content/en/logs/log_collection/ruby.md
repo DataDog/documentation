@@ -107,7 +107,7 @@ This section describe the minimum setup required in order to forward your Rails 
 
 ## Getting further
 
-### Connect Logs and Traces
+### Connect logs and traces
 
 If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Ruby logging instructions][7] to automatically add trace and span IDs in your logs.
 
@@ -140,7 +140,7 @@ The hash is going to get converted into JSON and you'll then be able to do analy
 }
 ```
 
-### RocketPant's suggested logging configuration
+### RocketPants suggested logging configuration
 
 In the file `config/initializers/lograge_rocketpants.rb` (it can change depending on your project):
 

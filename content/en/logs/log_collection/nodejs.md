@@ -132,7 +132,7 @@ logs:
     sourcecategory: sourcecode
 ```
 
-## Agentless Logging
+## Agentless logging
 
 You can stream your logs from your application to Datadog without installing an Agent on your Host. Note that using an Agent to forward your logs is recommended as it provides a native connection management.
 
