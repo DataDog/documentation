@@ -36,7 +36,7 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 {{< img src="security_monitoring/detection_rules/threshold.png" alt="Define the search query" >}}
 
-Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
+Construct a search query using the same logic as a [log explorer search][1].
 
 Optionally, define a unique count and signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
