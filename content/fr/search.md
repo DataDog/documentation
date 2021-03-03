@@ -1,7 +1,7 @@
 ---
 title: Résultats de la recherche
 kind: search
-disable_toc: true
+disable_sidebar: true
 ---
 
 <div id="tipue_search_content">

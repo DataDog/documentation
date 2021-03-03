@@ -209,7 +209,7 @@ Les fichiers de configuration pour les [intégrations][1] se situent à l'emplac
 
 ## Dépannage
 
-### Statut et informations de l'Agent
+### Statut et informations sur l'Agent
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}

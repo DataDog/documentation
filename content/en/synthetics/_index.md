@@ -2,7 +2,7 @@
 title: Synthetic Monitoring
 kind: documentation
 description: "Use automated testing to ensure the most critical parts of your systems and applications are up and running from various locations around the world."
-disable_toc: true
+disable_sidebar: true
 aliases:
   - /integrations/synthetics/
 further_reading:

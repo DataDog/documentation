@@ -1,9 +1,9 @@
 ---
-title: Default Threat Detection Rules
+title: Default Rules
 kind: documentation
 type: security_rules
-description: "Datadog Security Detection Rules"
-disable_toc: true
+description: "Datadog Security and Compliance Rules"
+disable_sidebar: true
 ---
 
 [Detection rules][1] define conditional logic that is applied to all ingested logs. When at least one case defined in a detection rule is matched over a given period of time, Datadog generates a security signal.

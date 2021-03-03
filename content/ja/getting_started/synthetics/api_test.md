@@ -11,6 +11,9 @@ further_reading:
   - link: /synthetics/settings/
     tag: ドキュメント
     text: 高度な Synthetics モニタリング設定を構成する
+  - link: '/api/v1/synthetics/#create-a-test'
+    tag: API ドキュメント
+    text: Synthetic テストをプログラムで作成
 ---
 ## API テストの作成
 
@@ -75,6 +78,8 @@ Datadog の [Synthetic モニタリングとの APM インテグレーション]
     {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}API テストについてより詳しく学ぶ{{< /nextlink >}}
     {{< nextlink href="/synthetics/identify_synthetics_bots" tag="Documentation" >}}API テスト用の Synthetic ボットを特定する方法を学ぶ{{< /nextlink >}}
     {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}高度な Synthetic モニタリング設定を構成する{{< /nextlink >}}
+{{< nextlink href="/api/v1/synthetics/#create-a-test" tag="API Docs" >}}Synthetic テストをプログラムで作成する{{< /nextlink >}}
+{{< /whatsnext >}}
 
 [1]: /ja/synthetics/api_tests/
 [2]: /ja/api/v1/synthetics/#create-or-clone-test

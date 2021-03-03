@@ -2,7 +2,7 @@
 title: NDM Guides
 kind: guide
 private: true
-disable_toc: true
+disable_sidebar: true
 aliases:
     - /network_performance_monitoring/devices/guide/
 further_reading:

@@ -189,7 +189,7 @@ DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent
 
 The Python tracer logs configuration information as INFO-level. It logs diagnostics information, if found, as ERROR.
 
-If there is no logging configuration, only Diagnostics will be output to `Stderr`. To see tracer startup logs, either add a logger, or set `DATADOG_TRACE_DEBUG=true` in your configuration and run your application with `dd-trace-run`.  This adds a logger, and exposes both debug and startup tracer logs.
+If there is no logging configuration, only Diagnostics will be output to `Stderr`. To see tracer startup logs, either add a logger, or set `DATADOG_TRACE_DEBUG=true` in your configuration and run your application with `ddtrace-run`.  This adds a logger, and exposes both debug and startup tracer logs.
 
 **Configuration:**
 

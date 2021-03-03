@@ -5,7 +5,7 @@ description: Contrôler le volume de logs indexés par Datadog
 aliases:
   - /fr/logs/dynamic_volume_control
 further_reading:
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualiser-les-donnees'
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /logs/processing/
@@ -131,13 +131,19 @@ Ce quota peut être modifié ou supprimé à tout moment en modifiant l'index :
 
 **Remarque** : le quota journalier d'un index est automatiquement réinitialisé à 14 h 00 UTC (16 h 00 CET, 10 h 00 EDT, 7 h 00 PDT).
 
+Un événement est généré lorsque le quota journalier est atteint :
+
+{{< img src="logs/indexes/index_quota_event.png" alt="notification de quota pour un index"  style="width:70%;">}}
+
+Consultez notre [guide sur l'utilisation des logs][19] pour découvrir comment surveiller votre utilisation et envoyer des alertes à ce sujet.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
-[1]: /fr/logs/indexes/
+[1]: https://app.datadoghq.com/logs/pipelines/
 [2]: /fr/logs/explorer/#visualization
 [3]: /fr/logs/explorer/patterns/
 [4]: /fr/logs/explorer/analytics/
@@ -155,3 +161,4 @@ Ce quota peut être modifié ou supprimé à tout moment en modifiant l'index :
 [16]: /fr/logs/processing/processors/?tab=ui#trace-remapper
 [17]: /fr/help/
 [18]: /fr/logs/live_tail/#overview
+[19]: /fr/logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold

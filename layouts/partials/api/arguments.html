@@ -1,32 +1,11 @@
 {{ $context := .context }}
-{{ $s := newScratch }}
-{{ $parameters := .parameters }}
-{{ $s.Set "queryStrings" slice }}
-{{ $s.Set "pathParams" slice }}
-{{ $s.Set "headerParams" slice }}
+{{ $endpoint := .endpoint }}
+{{ $parameters := partial "api/arguments-data.html" (dict "endpoint" $endpoint) }}
 
-{{ with $parameters }}
+{{ with $parameters.isExists }}
     <h3 class="mb-2">{{ i18n "arguments" }}</h3>
 
-    {{ range . }}
-        {{ if eq .in "query"}}
-            {{ $s.Add "queryStrings" .  }}
-        {{ else if eq .in "path"}}
-            {{ $s.Add "pathParams" .  }}
-        {{ else if eq .in "header"}}
-            {{ $s.Add "headerParams" .  }}
-        {{ end }}
-    {{ end }}
-
-    {{ $queryStrings := $s.Get "queryStrings" }}
-    {{ $pathParams := $s.Get "pathParams" }}
-    {{ $headerParams := $s.Get "headerParams" }}
-    <!-- Set for curl to use via dollarscratch -->
-    {{ $context.Scratch.Set "queryStrings" $queryStrings }}
-    {{ $context.Scratch.Set "pathParams" $pathParams }}
-    {{ $context.Scratch.Set "headerParams" $headerParams }}
-
-    {{ with $pathParams }}
+    {{ with $parameters.pathParams }}
         <h4 class="text-capitalize">{{ i18n "path_parameters" }}</h4>
         <div class=" schema-table row">
             <div class="col-12">
@@ -46,7 +25,7 @@
                         <div class="col-12 first-column">
                         <div class="row first-row ">
                             <div class="col-4 column">
-                                <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
+                                <p>{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
                             </div>
                             <div class="col-2 column">
                                 <p>{{ .schema.type }}</p>
@@ -62,7 +41,7 @@
         </div>
     {{ end }}
 
-    {{ with $queryStrings }}
+    {{ with $parameters.queryStrings }}
         <h4 class="text-capitalize">{{ i18n "query_strings" }}</h4>
         <div class=" schema-table row">
             <div class="col-12">
@@ -82,7 +61,7 @@
                         <div class="col-12 first-column">
                         <div class="row first-row ">
                             <div class="col-4 column">
-                                <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
+                                <p>{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
                             </div>
                             <div class="col-2 column">
                                 <p>{{ .schema.type }}</p>
@@ -98,8 +77,7 @@
         </div>
     {{ end }}
 
-
-    {{ with $headerParams }}
+    {{ with $parameters.headerParams }}
         <h4 class="text-capitalize">{{ i18n "header_parameters" }}</h4>
         <div class=" schema-table row">
             <div class="col-12">
@@ -119,7 +97,7 @@
                         <div class="col-12 first-column">
                         <div class="row first-row ">
                             <div class="col-4 column">
-                                <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
+                                <p>{{- .name -}}{{- with .required -}}{{- cond (eq . false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}{{- end -}}</p>
                             </div>
                             <div class="col-2 column">
                                 <p>{{ .schema.type }}</p>

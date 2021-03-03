@@ -1,51 +1,7 @@
 {
-  "aws-integration": {
-    "name": "AWS インテグレーション",
-    "description": "[API バージョン 1 を参照](/api/v1/aws-integration/)してください。"
-  },
-  "aws-logs-integration": {
-    "name": "AWS ログインテグレーション",
-    "description": "[API バージョン 1 を参照](/api/v1/aws-logs-integration/)してください。"
-  },
-  "authentication": {
-    "name": "Authentication",
-    "description": "Datadog の API に対するリクエストはすべて認証される必要があります。\nデータを書き込むリクエストにはレポートアクセスが必要で、`API key` が必要です。\nデータを読み取るリクエストにはフルアクセスが必要で、`application key` も必要です。\n\n**注:** すべての Datadog API クライアントは、デフォルトで Datadog US サイト API を使用するように構成されています。\nDatadog EU サイトを使用している場合は、環境変数 `DATADOG_HOST` を `https://api.datadoghq.eu`に設定するか、クライアントを作成するときにこの値を直接オーバーライドします。\n\n[アカウントの API とアプリケーションキーを管理します](https://app.datadoghq.com/account/settings#api)。\n\n##API キーを検証します。\n\n[API バージョン 1 を参照](/api/v1/authentication/#validate-api-key)してください。"
-  },
-  "azure-integration": {
-    "name": "Azure インテグレーション",
-    "description": "[API バージョン 1 を参照](/api/v1/azure-integration/)してください。"
-  },
   "dashboard-lists": {
     "name": "ダッシュボードリスト",
-    "description": "API を介してすべてのダッシュボードを簡単に整理、検索、およびチームや組織と共有できます。なお、API v2 で作成したダッシュボードリストに API v1 ダッシュボードを追加することが可能です。"
-  },
-  "dashboards": {
-    "name": "ダッシュボード",
-    "description": "[API バージョン 1 を参照](/api/v1/dashboards/)してください。"
-  },
-  "downtimes": {
-    "name": "ダウンタイム",
-    "description": "[API バージョン 1 を参照](/api/v1/downtimes/)してください。"
-  },
-  "embeddable-graphs": {
-    "name": "埋め込み可能なグラフ",
-    "description": "[API バージョン 1 を参照](/api/v1/embeddable-graphs/)してください。"
-  },
-  "events": {
-    "name": "イベント",
-    "description": "[API バージョン 1 を参照](/api/v1/events/)してください。"
-  },
-  "gcp-integration": {
-    "name": "GCP インテグレーション",
-    "description": "[API バージョン 1 を参照](/api/v1/gcp-integration/)してください。"
-  },
-  "hosts": {
-    "name": "ホスト",
-    "description": "[API バージョン 1 を参照](/api/v1/hosts/)してください。"
-  },
-  "ip-ranges": {
-    "name": "IP 範囲",
-    "description": "[API バージョン 1 を参照](/api/v1/ip-ranges/)してください。"
+    "description": "API を介してすべてのダッシュボードを整理、検索、およびチームや組織と共有できます。"
   },
   "incident-services": {
     "name": "インシデントサービス",
@@ -65,43 +21,19 @@
   },
   "logs": {
     "name": "ログ",
-    "description": "HTTP を介して Datadog プラットフォームでログを検索します。\n\nログの送信については、[API バージョン 1 を参照](/api/v1/logs/)してください。"
+    "description": "ログを検索し HTTP 経由で Datadog プラットフォームに送信します。HTTP リクエストあたりの制限は次のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ（非圧縮）: 5MB\n- 単一ログの最大サイズ: 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ: 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します。\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\n\nHTTP API により回答されるステータスコード:\n- 200: OK\n- 400: Bad request（ペイロードの形式の問題など）\n- 403: Permission issue（無効な API キーの使用など）\n- 413: Payload too large（バッチのサイズが非圧縮で 5MB 以上）\n- 5xx: Internal error, request should be retried after some time"
   },
   "logs-archives": {
     "name": "ログアーカイブ",
     "description": "アーカイブは、取り込んだすべてのログをクラウドストレージシステムに転送します。\n\nUI で現在構成されているアーカイブのリストについては、[アーカイブページ](https://app.datadoghq.com/logs/pipelines/archives)を参照してください。"
   },
-  "logs-indexes": {
-    "name": "ログインデックス",
-    "description": "[API バージョン 1 を参照](/api/v1/logs-indexes/)してください。"
-  },
   "logs-metrics": {
     "name": "ログメトリクス",
     "description": "オーガニゼーションの[ログベースメトリクスlog-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)のコンフィギュレーションのを管理します。"
   },
-  "logs-pipelines": {
-    "name": "ログパイプライン",
-    "description": "[API バージョン 1 を参照](/api/v1/logs-pipelines/)してください。"
-  },
   "logs-restriction-queries": {
     "name": "ログ制限クエリ",
     "description": "**注: このエンドポイントは公開ベータ版です。フィードバックがある場合は、[Datadog サポート](https://docs.datadoghq.com/help/)にご連絡ください。**\n\nログデータへの読み取りアクセスを許可するには、`logs_read_data` 権限を付与する必要があります。\nそこから、制限クエリをそのロールに関連付けることで、ロールが読み取りアクセスを許可するデータを制限できます。\n\n制限クエリは、`logs_read_data` 権限が読み取りアクセスを許可するログを制限するログクエリです。\nロールに制限クエリがあるユーザーの場合、ユーザーが行うログクエリは、制限クエリの 1 つにも一致するログイベントのみを返します。これは、ユーザーがログエクスプローラー、Live Tail、再ハイドレーション、ダッシュボードウィジェットなどのログ関連機能からログイベントをクエリするかどうかに関係なく当てはまります。\n\n制限クエリは現在、ログイベントの次のコンポーネントの使用のみをサポートしています。\n\n- 予約済み属性\n- ログメッセージ\n- タグ\n\n大規模または複雑な組織構造を持つ顧客のログデータに対する制限付き読み取りアクセスを管理するための推奨される方法は、ログイベントにチームタグを追加して、どのチームがそれらを所有しているかを示し、制限クエリをチームタグの適切な値にスコープすることです。タグはさまざまな方法でログイベントに適用できます。ログイベントには、同じキー (チームなど) と異なる値を持つ複数のタグを含めることができます。このようにして、制限クエリが異なるチームの値にスコープされているロールに同じログイベントを表示できます。\n\nこのエンドポイントとやり取りするには、管理者権限を持つ API とアプリケーションキーが必要です。"
-  },
-  "metrics": {
-    "name": "メトリクス",
-    "description": "[API バージョン 1 を参照](/api/v1/metrics/)してください。"
-  },
-  "monitors": {
-    "name": "モニター",
-    "description": "[API バージョン 1 を参照](/api/v1/monitors/)してください。"
-  },
-  "organizations": {
-    "name": "Organizations",
-    "description": "[API バージョン 1 を参照](/api/v1/organizations/)してください。"
-  },
-  "pagerduty-integration": {
-    "name": "PagerDuty インテグレーション",
-    "description": "[API バージョン 1 を参照](/api/v1/pagerduty-integration/)してください。"
   },
   "processes": {
     "name": "プロセス",
@@ -111,60 +43,12 @@
     "name": "ロール",
     "description": "Roles API は、Datadog ロール、ロールに付与する[グローバルアクセス許可](https://docs.datadoghq.com/account_management/rbac/)、そしてそのロールに属するユーザーを作成し、管理するために使用します。\n\n特定のアカウントアセットに関連したアクセス許可は、この API を使用しなくても Datadog アプリケーションでロールに付与することができます。たとえば、ロールに特定のログインデックスの読み取りアクセス権限を付与する場合、Datadog の[パイプラインページ](https://app.datadoghq.com/logs/pipelines)から実行できます。"
   },
-  "screenboards": {
-    "name": "スクリーンボード",
-    "description": "[API バージョン 1 を参照](/api/v1/screenboards/)してください。"
-  },
   "security-monitoring": {
     "name": "セキュリティモニタリング",
     "description": "信号を生成し、生成された信号を一覧表示するための検出ルール。"
   },
-  "service-checks": {
-    "name": "サービスのチェック",
-    "description": "[API バージョン 1 を参照](/api/v1/service-checks/)してください。"
-  },
-  "service-dependencies": {
-    "name": "サービスの依存関係",
-    "description": "[API バージョン 1 を参照](/api/v1/service-dependencies/)してください。"
-  },
-  "service-level-objectives": {
-    "name": "サービスレベル目標",
-    "description": "[API バージョン 1 を参照](/api/v1/service-level-objectives/)してください。"
-  },
-  "slack-integration": {
-    "name": "Slack インテグレーション",
-    "description": "[API バージョン 1 を参照](/api/v1/slack-integration/)してください。"
-  },
-  "snapshots": {
-    "name": "スナップショット",
-    "description": "[API バージョン 1 を参照](/api/v1/snapshots/)してください。"
-  },
-  "synthetics": {
-    "name": "Synthetics",
-    "description": "[API バージョン 1 を参照](/api/v1/synthetics/)してください。"
-  },
-  "tags": {
-    "name": "タグ",
-    "description": "[API バージョン 1 を参照](/api/v1/tags/)してください。"
-  },
-  "timeboards": {
-    "name": "タイムボード",
-    "description": "[API バージョン 1 を参照](/api/v1/timeboards/)してください。"
-  },
-  "tracing": {
-    "name": "トレーシング",
-    "description": "[API バージョン 1 を参照](/api/v1/tracing/)してください。"
-  },
-  "usage-metering": {
-    "name": "使用料のメータリング",
-    "description": "[API バージョン 1 を参照](/api/v1/usage-metering/)してください。"
-  },
   "users": {
     "name": "ユーザー",
     "description": "ユーザーを作成、編集、無効化します。"
-  },
-  "webhooks-integration": {
-    "name": "Webhook インテグレーション",
-    "description": "[API バージョン 1 を参照](/api/v1/webhooks-integration/)してください。"
   }
 }

@@ -26,7 +26,7 @@ Vous pouvez également vous contenter d'[exécuter l'Agent Datadog sur votre hos
 
 ### Installation
 
-#### Installation de conteneur
+#### Installation sur un conteneur
 
 Grâce à Kubernetes, vous pouvez tirer profit des DaemonSets pour déployer automatiquement l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce aux nodeSelectors). 
 
@@ -50,7 +50,7 @@ spec:
       name: dd-agent
     spec:
       containers:
-      - image: datadog/docker-dd-agent:latest
+      - image: gcr.io/datadoghq/docker-dd-agent:latest
         imagePullPolicy: Always
         name: dd-agent
         ports:
@@ -92,7 +92,7 @@ Remplacez `CLÉ_API_DATADOG` par [votre clé d'API][6] ou utilisez les [secrets 
 
 **Remarque** : ce manifeste active la fonctionnalité de configuration automatique d'Autodiscovery. Pour la désactiver, retirez la définition de la variable d'environnement `SD_BACKEND`. Pour découvrir comment configurer Autodiscovery, consultez la [documentation dédiée][9].
 
-#### Installation du host
+#### Installation sur un host
 
 Installez le paquet `dd-check-kubernetes` manuellement ou avec votre gestionnaire de configuration préféré.
 
@@ -112,7 +112,7 @@ Consultez le [fichier d'exemple kubernetes.yaml][10] pour découvrir toutes les 
 
 ### Validation
 
-#### Exécution de conteneur
+#### Exécution du conteneur
 
 Pour vérifier que l'Agent Datadog s'exécute dans votre environnement en tant que DaemonSet, exécutez :
 
@@ -140,11 +140,11 @@ Checks
       - Collected 39 metrics, 0 events & 7 service checks
 ```
 
-## Configurer Kubernetes State
+## Configurer Kubernetes State
 
 ### Installation
 
-#### Installation de conteneur
+#### Installation sur un conteneur
 
 Si vous exécutez Kubernetes >= 1.2.0, vous pouvez utiliser le projet [kube-state-metrics][12] pour fournir des métriques supplémentaires (identifiées par le préfixe `kubernetes_state` dans la liste de métriques ci-dessous) à Datadog.
 
@@ -284,7 +284,7 @@ Checks
 ```
 
 [1]: https://github.com/DataDog/docker-dd-agent
-[2]: https://hub.docker.com/r/datadog/docker-dd-agent
+[2]: https://gcr.io/datadoghq/docker-dd-agent
 [3]: /fr/#host-setup
 [4]: /fr/integrations/docker_daemon/
 [5]: /fr/agent/kubernetes/

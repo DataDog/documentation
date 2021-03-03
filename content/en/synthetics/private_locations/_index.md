@@ -76,7 +76,11 @@ Go in _Synthetic Monitoring_ -> _Settings_ -> _Private Locations_ and click **Ad
 
 **Note**: Only **Admin** users can create private locations.
 
-Fill out your private location details: specify your private location's **Name** and **Description**, add any **Tags** you would like to associate with your private location, and choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, you can click **Generate API key** and create one on the dedicated page.
+Fill out your private location details: 
+
+1. Specify your private location's **Name** and **Description**.
+2. Add any **Tags** you would like to associate with your private location.
+3. Choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, you can click **Generate API key** and create one on the dedicated page.
 
 **Note:** Only `Name` and `API key` fields are mandatory.
 
@@ -168,7 +172,7 @@ docker-compose -f docker-compose.yml up
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes Deployment" %}}
 
 1. Create a Kubernetes ConfigMap with the previously created JSON file by executing the following:
 
@@ -216,6 +220,28 @@ docker-compose -f docker-compose.yml up
     ```
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+{{% /tab %}}
+
+{{% tab "Helm Chart" %}}
+
+1. Add the [Datadog Synthetics Private Location][1] to your Helm repositories:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com 
+    helm repo update
+    ```
+
+2. Install the chart with the release name `<RELEASE_NAME>`, using the previously created JSON file by executing the following:
+
+    ```shell
+    helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
+    ```
+
+    **Note:** If you blocked reserved IPs, make sure to add the `NET_ADMIN` [Linux capabilities][2] to your private location container.
+
+[1]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
+[2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}
 
@@ -374,7 +400,24 @@ healthcheck:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes Deployment" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
+
+{{% /tab %}}
+
+{{% tab "Helm Chart" %}}
 
 ```yaml
 livenessProbe:
@@ -469,7 +512,7 @@ Your private locations can be used just like any other Datadog managed locations
 
 You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
-You can also **vertically scale** your private locations using the [`concurrency` parameter][11] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel.
+You can also **vertically scale** your private locations using the [`concurrency` parameter][11] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel. Whenever updating the [`concurrency` parameter][11] of your private location, make sure to also update [the resources allocated to your workers](#hardware-requirements).
 
 ### Hardware Requirements
 
@@ -505,4 +548,4 @@ The recommendation for disk size is to allocate ~ 10MiB/slot (1MiB/slot for API-
 [8]: /synthetics/private_locations/configuration/#reserved-ips-configuration
 [9]: /synthetics/private_locations/configuration/
 [10]: /synthetics/metrics
-[11]: /synthetics/private_locations/configuration/#parallelization-configuration
+[11]: /synthetics/private_locations/configuration#advanced-configuration

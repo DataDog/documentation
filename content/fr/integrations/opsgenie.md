@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Utilisez OpsGenie comme canal de notification pour les alertes et les événements Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/opsgenie/'
+draft: false
 git_integration_title: opsgenie
 has_logo: true
 integration_title: OpsGenie
@@ -25,7 +26,7 @@ Utilisez `@opsgenie` pour créer des alertes :
 - En prenant un snapshot
 - Lorsqu'une alerte de métrique est déclenchée
 
-## Implémentation
+## Configuration
 
 ### Configuration
 

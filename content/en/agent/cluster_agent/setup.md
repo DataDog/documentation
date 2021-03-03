@@ -211,6 +211,30 @@ datadog-cluster-agent-8568545574-x9tc9   1/1       Running   0          2h
 
 Kubernetes events are beginning to flow into your Datadog account, and relevant metrics collected by your Agents are tagged with their corresponding cluster level metadata.
 
+#### Monitoring AWS managed services
+
+To monitor an AWS managed service like MSK, ElastiCache, or RDS, create a pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart.
+
+{{< code-block lang="yaml" >}}
+clusterChecksRunner:
+  enabled: true
+  rbac:
+    # clusterChecksRunner.rbac.create -- If true, create & use RBAC resources
+    create: true
+    dedicated: true
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::***************:role/ROLE-NAME-WITH-MSK-READONLY-POLICY
+clusterAgent:
+  confd:
+    amazon_msk.yaml: |-
+      cluster_check: true
+      instances:
+        - cluster_arn: arn:aws:kafka:us-west-2:*************:cluster/gen-kafka/*******-8e12-4fde-a5ce-******-3
+          region_name: us-west-2
+{{< /code-block >}}
+
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

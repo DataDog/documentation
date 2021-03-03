@@ -3,13 +3,13 @@ title: Monitor d'intégration
 kind: documentation
 description: Surveiller les valeurs des métriques ou des statuts de santé à partir d'une intégration spécifique
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Vérifier le statut de votre monitor
 ---
@@ -26,13 +26,15 @@ Pour créer un [monitor d'intégration][2] dans Datadog :
 3. Choisissez un monitor de type **Integration metric** ou **Integration status** :
     {{< img src="monitors/monitor_types/integration/metric_or_status.png" alt="Métrique ou Statut"  style="width:90%;">}}
 
-### Integration Metric
+### Métrique d'intégration
 
 Créez un monitor de métrique d'intégration en suivant les instructions dans la documentation relative aux [monitors de métrique][3]. Sélectionnez cette option pour permettre à la facette correspondant au type de monitor d'intégration de sélectionner le monitor sur la page [Gérer les monitors][4].
 
-### Integration Status
+### Statut d'intégration
 
 Si l'intégration comprend un check de service, l'onglet **Integration Status** devient actif.
+
+**Remarque** : si l'intégration n'envoie pas de métrique ni de check de service, elle est considérée comme « Misconfigured ».
 
 #### Choisir un check
 
@@ -92,11 +94,11 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/integrations
+[1]: /fr/integrations/
 [2]: https://app.datadoghq.com/monitors#create/integration
-[3]: /fr/monitors/monitor_types/metric
+[3]: /fr/monitors/monitor_types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /fr/monitors/monitor_types/metric/#no-data
 [6]: /fr/monitors/monitor_types/metric/#auto-resolve
 [7]: /fr/monitors/monitor_types/metric/#evaluation-delay
-[8]: /fr/monitors/notifications
+[8]: /fr/monitors/notifications/

@@ -19,8 +19,12 @@ further_reading:
 ## Compatibility
 
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
-
-- The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and .NET Core 2.1. It also supports [.NET Framework][1].
+ 
+- The .NET Tracer supports instrumentation on:
+  - .NET 5
+  - .NET Core 3.1
+  - .NET Core 2.1. 
+  It also supports [.NET Framework][1].
 
 - The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][2].
 
@@ -55,10 +59,10 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][4] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
-| Issue                                         | Affected .NET Core Versions               | Workaround                                                             | More information                        |
+| Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
-| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to latest patch, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][5] |
-| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3+                                            | [dotnet/runtime/issues/23938][6]        |
+| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][5] |
+| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][6]        |
 
 ## Further reading
 

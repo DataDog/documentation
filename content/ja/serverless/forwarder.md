@@ -33,16 +33,16 @@ Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を
 2. `DdApiKey` を入力し、適切な `DdSite` を選択します。他のすべてのパラメーターはオプションです。
 3. **Create stack** をクリックし、作成が完了するまで待ちます。
 4. スタックの "Resources" タブで、論理 ID が `Forwarder` のインストール済みの Forwarder Lambda 関数を見つけます。
-5. インストールされた Forwarder へのトリガーを[自動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers)または[手動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#manually-setup-triggers)で設定します。
+5. [インストールされた Forwarder へのトリガーを設定](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#set-up-triggers)します。
 6. 複数の AWS リージョンで運用している場合は、別のリージョンで上記の手順を繰り返します。
 
-**注:** 以前に Datadog の AWS インテグレーションタイルから次の [CloudFormation テンプレート](https://github.com/DataDog/cloudformation-template/tree/master/aws)を使用して AWS インテグレーションを有効にしていた場合は、アカウントには、Datadog Lambda Forwarder 関数が既にプロビジョニングされているはずです。
+**注:** 以前に Datadog の AWS インテグレーションタイルから次の [CloudFormation テンプレート](https://github.com/DataDog/cloudformation-template/tree/master/aws) を使用して AWS インテグレーションを有効にしていた場合は、アカウントには、Datadog Lambda Forwarder 関数が既にプロビジョニングされているはずです。
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "Terraform" xxx -->
 ### Terraform
 
-Terraform リソース [aws_cloudformation_stack](https://www.terraform.io/docs/providers/aws/r/cloudformation_stack.html) を、指定されている CloudFormation テンプレートのラッパーとして使用して、Forwarder をインストールします。
+Terraform リソース[aws_cloudformation_stack](https://www.terraform.io/docs/providers/aws/r/cloudformation_stack.html) を、指定されている CloudFormation テンプレートのラッパーとして使用して、Forwarder をインストールします。
 
 Datadog は、2 つの個別の Terraform コンフィギュレーションを作成することをお勧めします。
 
@@ -199,9 +199,9 @@ Forwarder Lambda 関数で環境変数 `DD_LOG_LEVEL` を `debug` に設定し�
 
 ## 高度な検索
 
-### 他の Lambda 関数へのログ送信
+### 複数の宛先へのログ送信
 
-Cloudformation パラメーター `AdditionalTargetLambdaARNs` を使用して、ログを他の Lambda 関数に送信することができます。この追加の Lambda 関数は、Datadog Forwarder が受信するのと同一の `event` と非同期で呼び出されます。
+複数の Datadog オーガニゼーションまたはその他の送信先にログを送信する必要がある場合は、`AdditionalTargetLambdaARNs` Cloudformation パラメーターを構成し、Datadog Forwarder で受信ログを指定の Lambda 関数にコピーします。これらの追加された Lambda 関数は、Datadog Forwarder が受信するものとまったく同じ `event` で非同期的に呼び出されます。
 
 ### AWS PrivateLink サポート
 
@@ -293,10 +293,12 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
 
 - `ExcludeAtMatch` - 指定された正規表現に一致するログを送信しません。
   ログが ExcludeAtMatch と IncludeAtMatch の両方に一致する場合、そのログは除外されます。
-  フィルタリングルールは、関数によって自動的に追加されるメタデータを含む、完全な JSON 形式のログに適用されます。
-  `.*` など、非効率な正規表現を使用すると、Lambda 関数の遅延につながりますのでご注意ください。
 - `IncludeAtMatch` - 指定された正規表現に一致し、ExcludeAtMatch により除外されていないログのみを送信します。
-  `.*` など、非効率な正規表現を使用すると、Lambda 関数の遅延につながりますのでご注意ください。
+   
+
+フィルタリング規則は、完全な JSON 形式のログに適用されます。これには、Forwarder によって自動的に
+追加されたメタデータも含まれます。`.*` など、非効率な正規表現を使用すると、Forwarder の遅延につながりますのでご注意ください。
+ログでこれらの正規表現をデバッグするには、[デバッグログ](#トラブルシューティング) をオンにしてください。
 
 ### 高度 (オプション)
 

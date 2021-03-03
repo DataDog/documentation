@@ -39,7 +39,7 @@ Therefore, you don't need to change how you log, and you don't need to deploy ch
 
 The other benefit to implement a log processing strategy is to implement an [attribute naming convention][6] for your organization.
 
-## Log Processing
+## Log processing
 
 ### Integration logs
 
@@ -73,9 +73,9 @@ For optimal usage of the Log Management solution, Datadog recommends using at mo
 Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
 
-## JSON Logs Pre processing
+## JSON logs preprocessing
 
-JSON Logs preprocessing applies on all logs before they actually enter [Log Pipelines][1] processing. Preprocessing runs a series of operations based on reserved attributes:
+JSON logs preprocessing applies on all logs before they actually enter [Log Pipelines][1] processing. Preprocessing runs a series of operations based on reserved attributes:
 
 * Trigger new [log integrations][12] based on the **source** of incoming logs.
 * Append incoming logs with all [**host** tags][13].
@@ -85,15 +85,13 @@ JSON Logs pre processing comes with a default configuration that works for stand
 
 {{< img src="logs/processing/json_logs_preprocessing.gif" alt="JSON Logs Preprocessing Tile"  style="width:80%;">}}
 
-
-### *source* attribute
+### Source attribute
 
 If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][12].
 
 **Note**: Logs coming from a containerized environment require the use of an [environment variable][19] to override the default source and service values.
 
-
-### *host* attribute
+### Host attribute
 
 Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's host:
 
@@ -101,8 +99,7 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 * `hostname`
 * `syslog.hostname`
 
-
-### *date* attribute
+### Date attribute
 
 By default Datadog generates a timestamp and appends it in a date attribute when logs are received. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the log's official date:
 
@@ -123,11 +120,11 @@ You can also specify alternate attributes to use as the source of a log's date b
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-### *message* attribute
+### Message attribute
 
 By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][20], where it is indexed for [full text search][21].
 
-### *status* attribute
+### Status attribute
 
 Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the log's official status:
 
@@ -138,20 +135,19 @@ Each log entry may specify a status level which is made available for faceted se
 
 If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][15].
 
-### *service* attribute
+### Service attribute
 
 Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's service:
 
 * `service`
 * `syslog.appname`
 
-### *trace_id* attribute
+### Trace ID attribute
 
 By default, [Datadog tracers can automatically inject trace and span IDs in the logs][22]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
-
 
 ## Further Reading
 

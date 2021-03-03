@@ -127,6 +127,6 @@ OpenTelemetry コレクターには、イベントは含まれません。
 [1]: https://opentelemetry.io/docs/collector/getting-started/
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://docs.datadoghq.com/ja/tracing/setup_overview/open_standards/#opentelemetry-collector-datadog-exporter
-[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/hostmetricsreceiver
-[5]: https://github.com/DataDog/integrations-core/blob/main/opentelemetry/metadata.csv
+[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/master/receiver/hostmetricsreceiver
+[5]: https://github.com/DataDog/integrations-core/blob/master/opentelemetry/metadata.csv
 [6]: https://docs.datadoghq.com/ja/help/

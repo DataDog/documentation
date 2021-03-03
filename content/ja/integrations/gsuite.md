@@ -64,6 +64,7 @@ G Suite インテグレーションにサービスチェックは含まれませ
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 [1]: https://app.datadoghq.com/account/settings#integrations/gsuite
 [2]: https://developers.google.com/admin-sdk/reports/v1/reference/activities/list
 [3]: https://docs.datadoghq.com/ja/help/

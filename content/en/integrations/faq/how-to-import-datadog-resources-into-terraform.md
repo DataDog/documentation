@@ -73,10 +73,25 @@ All example commands require the `--api-key` and `--app-key` flags.
 
 * Import all monitors: `terraformer import datadog --resources=monitor`
 * Import monitor with id 1234: `terraformer import datadog --resources=monitor --filter=monitor=1234`
-* Import monitors with id 1234 and 1234: `terraformer import datadog --resources=monitor --filter=monitor=1234:12345`
+* Import monitors with id 1234 and 12345: `terraformer import datadog --resources=monitor --filter=monitor=1234:12345`
 * Import all monitors and dashboards: `terraformer import datadog --resources=monitor,dashboard`
 * Import monitor with id 1234 and dashboard with id abc-def-ghi: `terraformer import datadog --resources=monitor,dashboard --filter=monitor=1234,dashboard=abc-def-ghi`
+
+## Generating resources with Terraform v0.13+
+
+As of version `0.8.10`, Terraformer generates `tf`/`json` and `tfstate` files using Terraform `v0.12.29`. To ensure compatibility, run the upgrade command `terraform 0.13upgrade .` using Terraform `v0.13.x`. See [official Terraform docs][4] for upgrading.
+
+##### Upgrading the generated files for Terraform v0.13+:
+
+1. Import resource using terraformer.
+
+2. Using Terraform `v0.13.x`, `cd` into the generated resource directory and run `terraform 0.13upgrade .`.
+
+3. Run `terraform init` to re-run the provider installer.
+
+4. Run `terraform apply` to apply upgrades to Terraform state files.
 
 [1]: https://www.terraform.io/docs/import/index.html
 [2]: https://github.com/GoogleCloudPlatform/terraformer
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
+[4]: https://www.terraform.io/upgrade-guides/0-13.html

@@ -31,7 +31,9 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 ## Setup
 
-DNS Monitoring metrics are collected automatically by the system probe with agent v7.23+. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product by default - no extra steps are necessary.
+If you are using the most recent version of the Agent, including on a host, DNS Monitoring metrics are collected automatically by the system probe with agent v7.23+. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product by default - no extra steps are necessary.
+
+If you are using [Kubernetes on Helm][3], to enable DNS monitoring, you need to set `collectDNSStats:` to `true` in the [values.yaml][4].
 
 Are you looking for Network Performance Monitoring instead? See the [NPM setup instructions][2].
 
@@ -99,3 +101,5 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 
 [1]: /network_monitoring/performance/network_page#table
 [2]: /network_monitoring/devices/setup?tab=snmpv2
+[3]: /agent/kubernetes/?tab=helm
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L299-L300

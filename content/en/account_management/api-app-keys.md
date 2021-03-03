@@ -31,7 +31,7 @@ To add a Datadog API key or client token, navigate to [Integration -> APIs][1], 
 
 **Note**:
 
-* Your org must have at least one API key and at most five API keys.
+* Your org must have at least one API key and at most 50 API keys.
 * Key names must be unique across your org.
 
 ## Remove API keys or client tokens
@@ -62,7 +62,7 @@ Consider setting up multiple API keys for your organization. For example, use di
 
 Using multiple API keys lets you rotate keys as part of your security practice, or revoke a specific key if it's inadvertently exposed or if you want to stop using the service it's associated with. 
 
-If your organization needs more than the built-in limit of five API keys, contact [Support][6] to ask about increasing your limit.
+If your organization needs more than the built-in limit of 50 API keys, contact [Support][6] to ask about increasing your limit.
 
 ## Disabling a user account
 

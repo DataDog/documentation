@@ -34,8 +34,8 @@ La méthode à employer pour ajouter des [tags][3] à vos spans dépend du langa
 
 **Remarque** : prenez note du nom du service et du [nom de la ressource][4] sur lesquels vous travaillez : ils vous seront utiles plus tard. Dans cet exemple, le serveur Ruby `web-store` correspond au service et `ShoppingCartController#checkout` correspond à la ressource (l'endpoint).
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
 
 L'interface utilisateur de Datadog utilise les tags pour définir des métadonnées au niveau des spans. Vous pouvez configurer une instrumentation automatique pour les tags personnalisés en récupérant la span active à partir du traceur global et en définissant un tag avec `setTag`.
 
@@ -59,8 +59,8 @@ class ShoppingCartServlet extends AbstractHttpServlet {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 L'interface utilisateur de Datadog utilise les tags pour définir des métadonnées au niveau des spans. Vous pouvez configurer une instrumentation automatique pour les tags personnalisés en récupérant la span active à partir du traceur global et en définissant un tag avec `setTag`.
 
@@ -79,8 +79,8 @@ def shopping_cart(customer_id):
     # [...]
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 L'interface utilisateur de Datadog utilise les tags pour définir des métadonnées au niveau des spans. Vous pouvez configurer une instrumentation automatique pour les tags personnalisés en récupérant la span active à partir du traceur global et en définissant un tag avec `setTag`.
 
@@ -106,8 +106,8 @@ class ShoppingCartController < ApplicationController
 end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 L'interface utilisateur de Datadog utilise les tags pour définir des métadonnées au niveau des spans. Vous pouvez configurer une instrumentation automatique pour les tags personnalisés en récupérant la span active à partir du traceur global et en définissant un tag avec `setTag`.
 
@@ -141,8 +141,9 @@ func main() {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
 
 L'interface utilisateur de Datadog utilise les tags pour définir des métadonnées au niveau des spans. Vous pouvez configurer une instrumentation automatique pour les tags personnalisés en récupérant la span active à partir du traceur global et en définissant un tag avec `setTag`.
 
@@ -159,8 +160,9 @@ app.get('/shopping_cart/:customer_id', (req, res) => {
 })
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
 
 Ajoutez directement des tags à un objet `Datadog.Trace.Span` en appelant `Span.SetTag()`. Par exemple :
 
@@ -190,8 +192,8 @@ public class ShoppingCartController : Controller
 
 **Remarque** : `Datadog.Trace.Tracer.Instance.ActiveScope` renvoie`null` si aucune span n'est active.
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 L'interface utilisateur de Datadog utilise les tags pour définir des métadonnées au niveau des spans. Vous pouvez configurer une instrumentation automatique pour les tags personnalisés en récupérant la span active à partir du traceur global et en définissant un tag avec `setTag`.
 
@@ -217,8 +219,8 @@ L'interface utilisateur de Datadog utilise les tags pour définir des métadonn�
 ?>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 <div class="alert alert-info">Une fois votre nouveau code déployé, quelques minutes peuvent être nécessaires pour que les nouveaux tags s'affichent dans l'interface utilisateur de Datadog.</div>
 
