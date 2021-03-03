@@ -75,7 +75,7 @@ The graph in this story shows the latency values of the ELB in three different a
 
 Selecting *Show expected bounds* in the upper-right corner reveals upper and lower thresholds of expected behavior on the graph.
 
-##### Archiving Stories
+##### Archiving stories
 
 Use the folder icon in the upper-right corner of a story to archive it. Archiving hides the story from the feed, as well as other places in the Datadog application, like the home page. If a story is archived, the yellow Watchdog binoculars icon does not show up next to the relevant service or resource.
 
@@ -83,7 +83,7 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 
 **Note**: Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
 
-##### Dependency Map
+##### Dependency map
 
 When an anomaly appears in one service, there’s often a corresponding anomaly in a related service. For example, if one service’s database queries get throttled, any downstream service will experience elevated latency. You need to troubleshoot this not as two separate issues, but rather as one issue stemming from a single root cause.
 
@@ -93,7 +93,7 @@ The screenshot below shows a Watchdog story, starting with a summary of the issu
 
 (screenshot tk)
 
-##### Related Dashboards
+##### Related dashboards
 
 To speed up further investigations, Datadog may suggest some of your dashboards that are related to the story. In this case, Datadog will highlight which of the dashboard's metrics are related to the insights in the story. 
 
@@ -105,7 +105,7 @@ Monitors associated with your stories are displayed at the bottom. Each monitor 
 
 Additionally, Watchdog suggests one or more monitors that are configured to trigger if the story happens again. Click the **Enable Monitor** button to enable them for your organization. See the [Watchdog monitor documentation][13] to learn how to create a Watchdog monitor.
 
-## Filter Stories
+## Filter stories
 
 You can use the time range, search bar, or facets to filter your Watchdog stories:
 
@@ -129,9 +129,9 @@ Facets are associated with your Watchdog stories, allowing you to filter them by
 | APM Primary Tag | The [defined APM primary tag][15] to display stories from.                         |
 | APM Service     | The [APM Service][16] to display stories from.                                     |
 
-## Watchdog in the Services List
+## Watchdog in the services list
 
-When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][17]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
+When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM services list][17]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
 
 {{< img src="watchdog/service_list.png" alt="Watchdog service list" style="width:75%;" >}}
 

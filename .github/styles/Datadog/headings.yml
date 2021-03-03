@@ -52,6 +52,7 @@ exceptions:
   - IdP
   - IDs
   - Incident Management
+  - IoT
   - IPs
   - Java
   - JMXFetch
@@ -91,6 +92,7 @@ exceptions:
   - Red Hat
   - Redis
   - RocketPants
+  - Root Cause Analysis
   - RumMonitor
   - SafeNet
   - Security Monitoring
