@@ -36,22 +36,21 @@ The private location worker is available on Docker Hub:
 
 ## Create your private location
 
-1. Set up a [Vagrant Ubuntu 16.04 virtual machine][2].
-2. Install [Docker][4] on that machine.
-3. In the Datadog app, hover over **[UX Monitoring][5]** and select *Settings* -> *Private Locations*. Click **Add Private Location**.
-4. Fill out your private location details (only `Name` and `API key` fields are mandatory). Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker.
-5. Specify the proxy URL if the traffic between your private location and Datadog needs to go through a proxy. You can also optionally toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]).
-6. Copy and paste your private location configuration file to your working directory.
+1. Install [Docker][4] on the machine you would like. You can also install it on a virtual machine like [Vagrant Ubuntu 16.04][2] to get started quickly.
+2. In the Datadog app, hover over **[UX Monitoring][5]** and select *Settings* -> *Private Locations*. Click **Add Private Location**.
+3. Fill out your private location details (only `Name` and `API key` fields are mandatory). Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker.
+4. Specify the proxy URL if the traffic between your private location and Datadog needs to go through a proxy. You can also optionally toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]).
+5. Copy and paste your private location configuration file to your working directory.
 
     **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen. **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
 
-7. Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
+6. Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
-8. If your private location reports correctly to Datadog, you will see an `OK` health status on your private locations list, in the **Settings** section:
+7. If your private location reports correctly to Datadog, you will see an `OK` health status on your private locations list, in the **Settings** section:
 
     {{< img src="synthetics/private_locations/pl_health.png" alt="Private Location Health"  style="width:100%;">}}
 
