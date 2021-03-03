@@ -19,7 +19,7 @@ further_reading:
 
 ## Create an API test
 
-[API tests][1] help you monitor your API endpoints and alert you when they are failing or too slow. These checks verify that your applications are responding to requests and meet any conditions you define, such as response time, HTTP status code, and header or body contents. Use the [Datadog API][2] to see the full list.
+[API tests][1] help you **monitor your API endpoints and alert** you when they are failing or become too slow. These tests verify that your applications are responding to requests and meet any conditions you define, such as **response time**, **HTTP status code**, and **header or body contents**.
 
 In this example, an API test is created to ensure your website is constantly up and providing responses in a specific amount of time.
 
@@ -32,21 +32,19 @@ In this example, an API test is created to ensure your website is constantly up 
 
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, which is a test web application.
     - Select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
-    - Add some tags to help organize and filter tests.
-    - Select locations for testing.
+    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
+    - Choose from the **Managed Locations** to run your test from.
     - Click the **Test URL** button.
 
 {{< img src="getting_started/synthetics/api-test-config.png" alt="API test configuration"  style="width:60%;">}}
 
 #### Define your alert conditions
 
-Now that the test is completed, if you did not create any [assertions][4], they are automatically populated. API tests require at least one assertion to be monitored by Datadog. An assertion is defined by a parameter, an optional property, a comparator, and a target value.
-
-In this example, three default assertions are populated when testing the URL:
+After clicking Test URL, basic assertions based on your endpoint's response are automatically populated. Assertions define the alert condition and can be customized. In this example, three default assertions are populated when testing the URL:
 
 {{< img src="getting_started/synthetics/assertions-example.png" alt="Browser test failure"  style="width:90%;">}}
 
-These assertions define the alert condition and can be customized. To add a custom assertion, click on any response header in the response preview. You can also click the **New Assertion** button to add an assertion manually (e.g., `body` contains `Shop.ist`.)
+These assertions define the alert condition and can be customized. To add a custom assertion, directly click on the response preview or click the New Assertion button to add an assertion manually (e.g., body contains Shop.ist)
 
 {{< img src="getting_started/synthetics/api-test-configuration.gif" alt="Browser test failure"  style="width:90%;">}}
 
@@ -68,9 +66,9 @@ Once alert conditions are set, create a message for the alert and specify what s
 
 ### Test results
 
-An **API test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results.
+The API test details page includes details about the test configuration, uptime associated with the tested endpoint, historical graphs for response time and network timings, as well as the list of individual test results and events.
 
-To troubleshoot a failed test, scroll to the Test Results section and click on the **Test Results** tab. Click on the failed test, labeled as `Alert`, to view detailed test results. Review the failed assertions and response details such as returned status code, response time, and associated headers and body to resolve the issue.
+To troubleshoot a failed test, scroll to the Test Results section and click on one of the failing test results. Review the failed assertions and response details such as returned status code, response time, and associated headers and body to diagnose the issue.
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure"  style="width:90%;">}}
 

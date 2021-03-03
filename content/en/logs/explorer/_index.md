@@ -37,7 +37,7 @@ The **Log Explorer** is your home base for log troubleshooting and exploration. 
 
 At any moment, [**Export**](#export) your Log Explorer view to reuse it later or in different contexts.
 
-## Filters logs
+## Filters Logs
 
 The search filter consists of a timerange and a search query mixing `key:value` and full-text search. Refer to our [log search syntax][2] and [timerange][3] documentation for details on advanced use cases. For example, the search query `service:payment status:error rejected` over a `Past 5 minutes` timerange:
 
@@ -196,3 +196,4 @@ At any moment, and depending on your current aggregation, **export** your explor
 [8]: /dashboards/
 [9]: /monitors/monitor_types/log/
 [10]: /integrations/#cat-notification
+[11]: /logs/explorer/watchdog-insights
