@@ -38,7 +38,7 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 Construct a search query using the same logic as a [log explorer search][1].
 
-Optionally, define a unique count and signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
 Add additional queries with the Add Query button.
 
