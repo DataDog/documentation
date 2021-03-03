@@ -44,9 +44,10 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
 - Automatic correlation of Lambda logs and traces with trace ID and tag injection.
 - Installation without any code changes using Serverless Framework, AWS SAM and AWS CDK integrations.
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
-- Tracing synchronous Lambda invokes with the AWS SDK.
+- Tracing consecutive Lambda invocations made via the AWS SDK.
 - Tracing asynchronous Lambda invocations through AWS SQS.
 - Tracing dozens of additional out-of-the-box [Python][4] and [Node.js][5] libraries.
+- Tracing non-HTTP requests made through SNS, Kinesis, EventBridge, MQTT and more (requires additional instrumention outlined [here][]).
 
 For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][6]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, we recommend you augment AWS X-Ray traces with Datadog APM by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described [here][7].
 
