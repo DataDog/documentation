@@ -1746,6 +1746,10 @@ main:
     url: logs/explorer/facets/
     parent: log_explorer
     weight: 604
+  - name: Watchdog Insights
+    url: logs/explorer/watchdog_insights/
+    parent: log_explorer
+    weight: 605
   - name: Search Syntax
     url: logs/search_syntax/
     parent: log_management
