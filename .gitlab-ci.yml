@@ -171,11 +171,6 @@ index_algolia_preview:
   environment: "preview"
   script:
     - |-
-        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
-        export DISPLAY=:99
-        Xvfb :99 -ac &
-        echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
         ALGOLIA_APP_ID=$(get_secret 'ci.documentation.algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_preview
