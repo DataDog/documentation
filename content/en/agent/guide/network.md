@@ -151,8 +151,7 @@ If the network becomes unavailable, the Agent stores traffic in memory.
 The maximum memory usage for storing traffic is defined by the `forwarder_retry_queue_payloads_max_size` configuration setting. When this limit is reached, the traffic is dropped.
 
 Agent version 7.27.0 and above can store traffic on disk when the memory limit is reached.
-This feature is enabled by setting `forwarder_storage_max_size_in_bytes` to a positive value.
-`forwarder_storage_max_size_in_bytes` defines the maximum amount of storage space the Agent can use to store the traffic on the disk.
+Enable this capability by setting `forwarder_storage_max_size_in_bytes` to a positive value indicating the maximum amount of storage space, in bytes, that the Agent can use to store traffic on disk.
 
 The traffic is stored in the folder defined by `forwarder_storage_path` which is by default `/opt/datadog-agent/run/transactions_to_retry` on Unix systems and `C:\ProgramData\Datadog\run\transactions_to_retry` on Windows.
 
