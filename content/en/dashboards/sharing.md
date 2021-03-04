@@ -36,6 +36,8 @@ To share an entire dashboard publicly, generate a URL:
 3. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well which tags are visible for selectable template variables.
 4. Copy the URL and click **Done**.
 
+**Note**: Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other Log-based queries do.
+
 ### Share a dashboard with individual email addresses
 
  To authorize one or more specific email addresses to view a dashboard page:
@@ -48,7 +50,11 @@ To share an entire dashboard publicly, generate a URL:
 6. (Optional) You can copy the URL to share; the specified email addresses will also receive an email with a link.
 7. Click **Done**.
 
-**Note**: Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other Log-based queries do.
+**Note**:
+- Individuals who are added to the allowlist for a dashboard will receive a link to their email. If they the link isn't clicked on within 1 hour, they will be able to self request a new link on the dashboard landing page. If the email is on the allowlist, they will receive a new email. 
+- Once clicked, this device will be authorized to see the dashboard for up to 30 days. Once that time is up, the user will be able request a new link on the dashboard landing page. If the email is on the allowlist, they will receive a new email. 
+- If a user is removed from the allowlist, access will be removed.
+- Widgets based on APM traces queries do not display data on shared dashboards. The Log Stream widget doesn't show data either, but other Log-based queries do.
 
 ### Revoke
 
