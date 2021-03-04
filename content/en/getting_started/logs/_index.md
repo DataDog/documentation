@@ -81,9 +81,10 @@ This produces the following result in the [Log Explorer Page][2]:
 
 To install the Datadog Agent within your Vagrant host, use the [one line install command][6] updated with your [Datadog API key][5]:
 
+
 {{< site-region region="us" >}}
 
-```text
+```shell
 DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
@@ -91,8 +92,24 @@ DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-age
 
 {{< site-region region="eu" >}}
 
-```text
+```shell
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="ddog-gov.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="us3.datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
 {{< /site-region >}}
