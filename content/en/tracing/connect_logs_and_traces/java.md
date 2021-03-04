@@ -61,11 +61,10 @@ import datadog.trace.api.CorrelationIdentifier;
 try {
     MDC.put("dd.trace_id", CorrelationIdentifier.getTraceId());
     MDC.put("dd.span_id", CorrelationIdentifier.getSpanId());
-}
 
 // Log something
 
-finally {
+} finally {
     MDC.remove("dd.trace_id");
     MDC.remove("dd.span_id");
 }
