@@ -147,7 +147,7 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 
 ## Agent-side data buffering on network unavailability
 
-When the network becomes unavailable, the Agent stores the traffic in the memory.
+If the network becomes unavailable, the Agent stores traffic in memory.
 The maximum memory usage for storing the traffic is defined by the configuration `forwarder_retry_queue_payloads_max_size`. When this limit is reached, the traffic is dropped.
 
 The Agent `7.27.0` and above can store the traffic on the disk when the memory limit is reached.
