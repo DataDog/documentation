@@ -300,7 +300,7 @@ Most common logging libraries can be bridged to Logback.
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Use the SLf4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so you do not have to make any code changes.  To use it:
+Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so you do not have to make any code changes.  To use it:
 
 1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
     ```xml
@@ -522,4 +522,4 @@ To generate this JSON:
 [3]: /tracing/connect_logs_and_traces/java/
 [4]: https://github.com/logstash/logstash-logback-encoder
 [5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[6]: /logs/processing/parsing/#key-value
+[6]: /logs/processing/parsing/#key-value-or-logfmt
