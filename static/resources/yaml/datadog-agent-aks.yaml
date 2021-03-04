@@ -421,8 +421,6 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
-        - name: s6-run
-          emptyDir: {}
         - hostPath:
             path: /etc/passwd
           name: passwd
