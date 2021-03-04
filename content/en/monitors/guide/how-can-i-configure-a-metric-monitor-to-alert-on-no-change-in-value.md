@@ -1,5 +1,5 @@
 ---
-title: How can I configure a metric monitor to alert on NO change in value?
+title: Configure a metric monitor to alert on NO change in value
 kind: faq
 further_reading:
 - link: "/monitors/monitor_types/"
