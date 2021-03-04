@@ -16,6 +16,9 @@ further_reading:
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
+- link: "/tracing/connect_logs_and_traces/java/"
+  tag: "Documentation"
+  text: "Connect Logs and Traces"
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
@@ -24,7 +27,7 @@ further_reading:
   text: "How to collect, customize, and standardize Java logs"
 ---
 
-Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:
+Stack traces from typical Java logs are split into multiple lines, which makes them difficult to associate to the original log event:
 
 ```java
 //4 events generated when only one is expected!
@@ -34,26 +37,155 @@ Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-By asking your logging library to log into JSON, you will:
+To alleviate this complexity, configure your logging library to produce your logs in JSON format. By logging to JSON, you:
 
-* Ensure to have a stack_trace properly wrapped into the proper LogEvent
-* Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
-* You'll have access to [MDC][2], which are attributes you can attach to any log events
+* Ensure that the stack trace is properly wrapped into the its log event.
+* Ensure that all log event attributes (such as severity, logger name, and thread name) are properly extracted.
+* Gain access to [Mapped Diagnostic Context (MDC)][1] attributes, which you can attach to any log events.
+* Avoid the need for [custom parsing rules][2].
 
-**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent.**
+**To send your logs to Datadog, log to a file and tail that file with your Datadog Agent.**
 
-Datadog strongly recommends setting up your logging libraries to produce your logs in JSON format to avoid the need for [custom parsing rules][2].
-
-Here are setup examples for the `log4j`, `log4j2`, and `logback` logging libraries:
+The following instructions show setup examples for the Log4j, Log4j 2, and Logback logging libraries.
 
 ## Configure your logger
+
+### JSON format
+
+{{< tabs >}}
+{{% tab "Log4j" %}}
+
+For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] combined with Logback. `log4j-over-slf4j` cleanly replaces Log4j in your application so you do not have to make any code changes. To use it:
+
+1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
+    ```xml
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+      <version>1.7.13</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>4.5.1</version>
+    </dependency>
+    ```
+2. Configure a file appender using the JSON layout in `logback.xml`:
+
+    ```xml
+    <configuration>
+      <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+      </appender>
+
+      <root level="INFO">
+        <appender-ref ref="FILE"/>
+      </root>
+    </configuration>
+    ```
+
+[1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
+{{% /tab %}}
+{{% tab "Log4j 2" %}}
+
+Log4j 2 includes a JSON layout. 
+
+1. Configure a file appender using the JSON layout in `log4j2.xml`:
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Configuration>
+      <Appenders>
+        <File name="FILE" fileName="logs/app.log" >
+          <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
+        </File>
+      </Appenders>
+
+      <Loggers>
+        <Root level="INFO">
+          <AppenderRef ref="FILE"/>
+        </Root>
+      </Loggers>
+    </Configuration>
+    ```
+2. Add the JSON layout dependencies to your `pom.xml`:
+    ```xml
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.7</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.8.3</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.8.3</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>2.8.3</version>
+    </dependency>
+    ```
+
+{{% /tab %}}
+{{% tab "Logback" %}}
+
+Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback. 
+
+1. Configure a file appender using the JSON layout in `logback.xml`:
+
+    ```xml
+    <configuration>
+      <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+      </appender>
+
+      <root level="INFO">
+        <appender-ref ref="FILE"/>
+      </root>
+    </configuration>
+    ```
+
+2. Add the Logstash encoder dependency to your `pom.xml` file:
+
+    ```xml
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>4.5.1</version>
+    </dependency>
+    ```
+
+[1]: https://github.com/logstash/logstash-logback-encoder
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Inject trace IDs in your logs
+
+If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3] for more information.
 
 ### Raw format
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-**Configure a file appender in `log4j.xml`**:
+Configure a file appender in `log4j.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -78,9 +210,9 @@ Here are setup examples for the `log4j`, `log4j2`, and `logback` logging librari
 ```
 
 {{% /tab %}}
-{{% tab "Log4j2" %}}
+{{% tab "Log4j 2" %}}
 
-**Configure a file appender in `log4j2.xml`**:
+Configure a file appender in `log4j2.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -102,7 +234,7 @@ Here are setup examples for the `log4j`, `log4j2`, and `logback` logging librari
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-**Configure a file appender in `logback.xml`**:
+Configure a file appender in `logback.xml`:
 
 ```xml
 <configuration>
@@ -125,134 +257,11 @@ Here are setup examples for the `log4j`, `log4j2`, and `logback` logging librari
 {{% /tab %}}
 {{< /tabs >}}
 
-**Inject trace IDs in your logs**
+#### Inject trace IDs in your logs
 
-If APM is enabled for this application, you can correlate logs and traces by  referring to [Connecting Java Logs and Traces][6] to enable trace id injection.
+If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3].
 
-If you are _not_ correlating logs and traces, you can remove the MDC placeholders ( `%X{dd.trace_id} %X{dd.span_id}` ) from your log patterns.
-
-### JSON format
-
-{{< tabs >}}
-{{% tab "Log4j" %}}
-
-It can be difficult to log in JSON with log4j. Because of this, we advise you to use an slf4j module called [log4j-over-slf4j][1] along with Logback for JSON formatted logs.
-
-`log4j-over-slf4j` seamlessly replaces log4j in your application so you do not have to make any code changes. To use it:
-
-1. Replace your `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency
-2. Add the Logback dependencies
-3. Configure Logback
-
-Your `pom.xml` file should have the following dependencies:
-
-```xml
-<dependency>
-  <groupId>org.slf4j</groupId>
-  <artifactId>log4j-over-slf4j</artifactId>
-  <version>1.7.13</version>
-</dependency>
-<dependency>
-  <groupId>ch.qos.logback</groupId>
-  <artifactId>logback-classic</artifactId>
-  <version>1.1.3</version>
-</dependency>
-<dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
-</dependency>
-```
-
-* Finally, edit your `logback.xml` file as described in the `Logback` section.
-
-[1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
-{{% /tab %}}
-{{% tab "Log4j2" %}}
-
-log4j2 includes a JSON layout. Configure a file appender using the JSON layout in `log4j2.xml`:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
-  <Appenders>
-    <File name="FILE" fileName="logs/app.log" >
-      <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
-    </File>
-  </Appenders>
-
-  <Loggers>
-    <Root level="INFO">
-      <AppenderRef ref="FILE"/>
-    </Root>
-  </Loggers>
-</Configuration>
-```
-
-Then, add the JSON layout dependencies to your `pom.xml`:
-
-```xml
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-core</artifactId>
-    <version>2.7</version>
-</dependency>
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>2.8.3</version>
-</dependency>
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.8.3</version>
-</dependency>
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-annotations</artifactId>
-    <version>2.8.3</version>
-</dependency>
-```
-
-{{% /tab %}}
-{{% tab "Logback" %}}
-
-You can use the [logstash-logback-encoder][1] for JSON formatted logs in Logback. To configure a file appender using the JSON layout in `logback.xml`:
-
-```xml
-<configuration>
-  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>logs/app.log</file>
-    <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-  </appender>
-
-  <root level="INFO">
-    <appender-ref ref="FILE"/>
-  </root>
-</configuration>
-```
-
-Then, add the logstash encoder dependency to your `pom.xml` file:
-
-```xml
-<dependency>
-  <groupId>ch.qos.logback</groupId>
-  <artifactId>logback-classic</artifactId>
-  <version>1.1.3</version>
-</dependency>
-<dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
-</dependency>
-```
-
-[1]: https://github.com/logstash/logstash-logback-encoder
-{{% /tab %}}
-{{< /tabs >}}
-
-**Inject trace IDs in your logs**
-If APM is enabled for this application, you can correlate logs and traces by referring to [Connecting Java Logs and Traces][6] to enable trace id injection.
+If you are _not_ correlating logs and traces, you can remove the MDC placeholders (`%X{dd.trace_id} %X{dd.span_id}`) from the log patterns included in the above configuration examples.
 
 
 ## Configure the Datadog Agent
@@ -260,7 +269,6 @@ If APM is enabled for this application, you can correlate logs and traces by ref
 Create a file `java.yaml` in the Agent's `conf.d/` directory with the following content:
 
 ```yaml
-
 #Log section
 logs:
 
@@ -278,179 +286,173 @@ logs:
 
 ## Agentless logging
 
-It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup, as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
+In the exceptional case where your application is running on a machine that cannot be accessed or cannot log to a file, it is possible to stream logs to Datadog or to the Datadog Agent directly. This is not the recommended setup, because it requires that your application handles connection issues.
 
-There are two steps to configure the Java application to stream logs directly to Datadog:
+To stream logs directly to Datadog:
 
-1. Add the Logback logging library to your code (or build a bridge from your current logger to it)
-2. Configure Logback to send logs to Datadog
+1. Add the Logback logging library to your code, or **bridge your current logger to Logback**.
+2. **Configure Logback** to send logs to Datadog.
 
 ### Bridge from Java logging libraries to Logback
 
-Most common logging libraries can be bridged to Logback
+Most common logging libraries can be bridged to Logback.
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Logging to a remote server in JSON may be difficult. You can use the slf4j module [log4j-over-slf4j][1] with Logback to simplify this process.
+Use the SLf4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so you do not have to make any code changes.  To use it:
 
-`log4j-over-slf4j` seamlessly replaces log4j in your application so you do not have to make any code changes.  To use it:
+1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
+    ```xml
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+      <version>1.7.13</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>4.5.1</version>
+    </dependency>
+    ```
+2. Configure Logback.
 
-1. Replace your `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency
-2. Add the logback dependencies
-3. Configure logback
+**Note:** As a result of this change, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][2].
 
-Your `pom.xml` file should have the following dependencies:
 
-```xml
-<dependency>
-  <groupId>org.slf4j</groupId>
-  <artifactId>log4j-over-slf4j</artifactId>
-  <version>1.7.13</version>
-</dependency>
-<dependency>
-  <groupId>ch.qos.logback</groupId>
-  <artifactId>logback-classic</artifactId>
-  <version>1.1.3</version>
-</dependency>
-<dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
-</dependency>
-```
-
-**note:** As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][1].
-
-[1]: http://logback.qos.ch/translator
-[2]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
+[1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
+[2]: http://logback.qos.ch/translator
 {{% /tab %}}
 
-{{% tab "Log4j2" %}}
+{{% tab "Log4j 2" %}}
 
-Log4j2 allows logging to a remote host, but it does not offer the ability to prefix the logs by an API key. Because of this, it is recommended that you use a SLF4J  module called `log4j-over-slf4j` and Logback.
+Log4j 2 allows logging to a remote host, but it does not offer the ability to prefix the logs with an API key. Because of this, use the SLF4J module [log4j-over-slf4j][1] and Logback. `log4j-to-slf4j.jar` cleanly replaces Log4j 2 in your application so you do not have to make any code changes. To use it:
 
-`log4j-to-slf4j.jar` seamlessly replaces log4j2 in your application so you do not have to make any code changes. To use it:
+1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
+    ```xml
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-to-slf4j</artifactId>
+        <version>2.11.0</version>
+    </dependency>
+    <dependency>
+        <groupId>net.logstash.logback</groupId>
+        <artifactId>logstash-logback-encoder</artifactId>
+        <version>4.5.1</version>
+    </dependency>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.1.3</version>
+    </dependency>
+    ```
+2. Configure Logback.
 
-1. Replace your `log4j.jar` dependency with a `log4j-to-slf4j.jar` dependency
-2. Add the logback dependencies
-3. Configure logback
+**Notes:**
 
-Your `pom.xml` file should have the following dependencies:
+- Make sure that `log4j-slf4j-impl.jar` is **not** used as described here: https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html
+- As a result of this migration, Log4j 2 configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][2].
 
-```xml
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-to-slf4j</artifactId>
-    <version>2.11.0</version>
-</dependency>
-<dependency>
-    <groupId>net.logstash.logback</groupId>
-    <artifactId>logstash-logback-encoder</artifactId>
-    <version>4.5.1</version>
-</dependency>
-<dependency>
-    <groupId>ch.qos.logback</groupId>
-    <artifactId>logback-classic</artifactId>
-    <version>1.1.3</version>
-</dependency>
-```
-
-**notes:**
-
-- Make sure that `log4j-slf4j-impl.jar` is **not** used as explained here: https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html
-- As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][1].
-
-[1]: https://logback.qos.ch/translator
+[1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
+[2]: http://logback.qos.ch/translator
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Logback configuration
+### Configure Logback
 
-* The recommended logging library to stream logs directly is Logback with [logstash-logback-encoder][3].
-Configure a TCP appender in your `logback.xml` file:
+Use the [logstash-logback-encoder][4] logging library along with Logback to stream logs directly. 
 
-{{< site-region region="us" >}}
+1. Configure a TCP appender in your `logback.xml` file, replacing `<API_KEY>` with your Datadog API key value:
 
-```xml
-<configuration>
-  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>logs/app.log</file>
-    <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-  </appender>
-  <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-    <remoteHost>intake.logs.datadoghq.com</remoteHost>
-    <port>10514</port>
-    <keepAliveDuration>20 seconds</keepAliveDuration>
-    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-        <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="ch.qos.logback.classic.PatternLayout">
-                <pattern><APIKEY> %mdc{keyThatDoesNotExist}</pattern>
-            </layout>
-          </prefix>
-    </encoder>
-  </appender>
+    {{< site-region region="us" >}}
 
-  <root level="DEBUG">
-    <appender-ref ref="FILE"/>
-    <appender-ref ref="JSON_TCP" />
-  </root>
-</configuration>
-```
+  ```xml
+  <configuration>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+      <file>logs/app.log</file>
+      <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+    <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+      <remoteHost>intake.logs.datadoghq.com</remoteHost>
+      <port>10514</port>
+      <keepAliveDuration>20 seconds</keepAliveDuration>
+      <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+          <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+              <layout class="ch.qos.logback.classic.PatternLayout">
+                  <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+              </layout>
+            </prefix>
+      </encoder>
+    </appender>
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+    <root level="DEBUG">
+      <appender-ref ref="FILE"/>
+      <appender-ref ref="JSON_TCP" />
+    </root>
+  </configuration>
+  ```
 
-```xml
-<configuration>
-  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>logs/app.log</file>
-    <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-  </appender>
-  <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-    <remoteHost>tcp-intake.logs.datadoghq.eu</remoteHost>
-    <port>1883</port>
-    <keepAliveDuration>20 seconds</keepAliveDuration>
-    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-        <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="ch.qos.logback.classic.PatternLayout">
-                <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
-            </layout>
-          </prefix>
-    </encoder>
-  </appender>
+    {{< /site-region >}}
 
-  <root level="DEBUG">
-    <appender-ref ref="FILE"/>
-    <appender-ref ref="JSON_TCP" />
-  </root>
-</configuration>
-```
+    {{< site-region region="eu" >}}
 
-{{< /site-region >}}
+  ```xml
+  <configuration>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+      <file>logs/app.log</file>
+      <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+    <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+      <remoteHost>tcp-intake.logs.datadoghq.eu</remoteHost>
+      <port>1883</port>
+      <keepAliveDuration>20 seconds</keepAliveDuration>
+      <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+          <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+              <layout class="ch.qos.logback.classic.PatternLayout">
+                  <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+              </layout>
+            </prefix>
+      </encoder>
+    </appender>
 
-Then, add the logstash encoder dependency to your `pom.xml` file:
+    <root level="DEBUG">
+      <appender-ref ref="FILE"/>
+      <appender-ref ref="JSON_TCP" />
+    </root>
+  </configuration>
+  ```
 
-```xml
-<dependency>
-  <groupId>ch.qos.logback</groupId>
-  <artifactId>logback-classic</artifactId>
-  <version>1.1.3</version>
-</dependency>
-<dependency>
-  <groupId>net.logstash.logback</groupId>
-  <artifactId>logstash-logback-encoder</artifactId>
-  <version>4.5.1</version>
-</dependency>
-```
+    {{< /site-region >}}
 
-**Notes:**
+    {{< site-region region="us3" >}}
+  Not supported.
+    {{< /site-region >}}
+    {{< site-region region="gov" >}}
+  Not supported.
+    {{< /site-region >}}
 
-* Replace `<API_KEY>` with your Datadog API key value.
-* `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here][4].
+    **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][5].
 
-More information available on the prefix parameter in the [Logback documentation][4].
+2. Add the Logstash encoder dependency to your `pom.xml` file:
+
+    ```xml
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>4.5.1</version>
+    </dependency>
+    ```
 
 ## Getting further
 
@@ -458,7 +460,7 @@ Enrich your log events with contextual attributes.
 
 ### Using the key value parser
 
-The [key value parser][5] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
+The [key value parser][6] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
@@ -474,7 +476,7 @@ You can change it to:
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-With the [key value parser][5] enabled, **Datadog** automatically extracts each pair from your final JSON document:
+With the key value parser enabled, each pair is extracted from the JSON:
 
 ```json
 {
@@ -489,9 +491,9 @@ So you can exploit *scope* as a field, and *durationInMs* and *quantity* as log 
 
 ### MDC
 
-Another option to enrich your logs is to use Java's [MDC (Mapped Diagnostic Contexts)][1].
+Another option to enrich your logs is to use Java's [Mapped Diagnostic Contexts (MDC)][1].
 
-If you use Slf4j, use the following Java code:
+If you use SLF4J, use the following Java code:
 
 ```java
 ...
@@ -500,7 +502,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 ...
 ```
 
-To generate this final JSON document:
+To generate this JSON:
 
 ```json
 {
@@ -509,7 +511,7 @@ To generate this final JSON document:
 }
 ```
 
-**MDC are great but only string types are allowed. Therefore, providing numerical values for metrics with MDCs would be a bad idea**
+**Note:** MDC allows only string types, so don't use them for numerical value metrics.
 
 ## Further Reading
 
@@ -517,7 +519,7 @@ To generate this final JSON document:
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /logs/processing/parsing/
-[3]: https://github.com/logstash/logstash-logback-encoder
-[4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[5]: /logs/processing/parsing/#key-value
-[6]: /tracing/connect_logs_and_traces/java/
+[3]: /tracing/connect_logs_and_traces/java/
+[4]: https://github.com/logstash/logstash-logback-encoder
+[5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
+[6]: /logs/processing/parsing/#key-value
