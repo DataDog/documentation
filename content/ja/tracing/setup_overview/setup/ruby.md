@@ -57,6 +57,7 @@ type: multi-code-lang
      - [GraphQL](#graphql)
      - [gRPC](#grpc)
      - [http.rb](#http-rb)
+     - [httpclient](#httpclient)
      - [MongoDB](#mongodb)
      - [MySQL2](#mysql2)
      - [Net/HTTP](#net-http)
@@ -156,6 +157,21 @@ type: multi-code-lang
 
 ### Rails アプリケーションのクイックスタート
 
+#### Rails 自動インスツルメンテーションのすべてのインテグレーション
+
+1. `ddtrace` gem を Gemfile に追加します。
+
+    ```ruby
+    source 'https://rubygems.org'
+    gem 'ddtrace', require: 'ddtrace/auto_instrument'
+    ```
+
+2. `bundle install` で gem をインストールします
+
+3. [Rails 手動コンフィギュレーション](#rails-manual-configuration)ファイルを追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
+
+#### Rails 手動コンフィギュレーション
+
 1. `ddtrace` gem を Gemfile に追加します。
 
     ```ruby
@@ -176,6 +192,25 @@ type: multi-code-lang
    ここで追加のインテグレーションをアクティブ化することもできます（[インテグレーションインスツルメンテーション](#integration-instrumentation)を参照）。
 
 ### Ruby アプリケーションのクイックスタート
+
+#### Ruby 自動インスツルメンテーションのすべてのインテグレーション
+
+1. `gem install ddtrace` で gem をインストールします
+2. インスツルメントする必要のある[サポートされているライブラリまたはフレームワーク](#integration-instrumentation)が必要です。
+3. アプリケーションに `require 'ddtrace/auto_instrument'` を追加します。_注:_ これは、サポートされているライブラリまたはフレームワークが必要になった_後_に実行する必要があります。
+
+    ```ruby
+    # Example frameworks and libraries
+    require 'sinatra'
+    require 'faraday'
+    require 'redis'
+
+    require 'ddtrace/auto_instrument'
+    ```
+
+   [Ruby 手動コンフィギュレーションブロック](#ruby-manual-configuration)を追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
+
+#### Ruby 手動コンフィギュレーション
 
 1. `gem install ddtrace` で gem をインストールします
 2. Ruby アプリケーションにコンフィギュレーションブロックを追加します。
@@ -374,6 +409,7 @@ end
 | GraphQL                  | `graphql`                  | `>= 1.7.9`               | `>= 1.7.9`                | *[リンク](#graphql)*                  | *[リンク](https://github.com/rmosolgo/graphql-ruby)*                             |
 | gRPC                     | `grpc`                     | `>= 1.7`                 | *gem の利用不可*       | *[リンク](#grpc)*                     | *[リンク](https://github.com/grpc/grpc/tree/master/src/rubyc)*                   |
 | http.rb                  | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[Link](#http-rb)*                  | *[リンク](https://github.com/httprb/http)*                                       |
+| httpclient                | `httpclient`              | `>= 2.2`                 | `>= 2.2`                  | *[リンク](#httpclient)*               | *[リンク](https://github.com/nahi/httpclient)*                                     |
 | Kafka                    | `ruby-kafka`               | `>= 0.7.10`              | `>= 0.7.10`               | *[リンク](#kafka)*                    | *[Link](https://github.com/zendesk/ruby-kafka)*                                |
 | MongoDB                  | `mongo`                    | `>= 2.1`                 | `>= 2.1`                  | *[リンク](#mongodb)*                  | *[リンク](https://github.com/mongodb/mongo-ruby-driver)*                         |
 | MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *gem の利用不可*       | *[リンク](#mysql2)*                   | *[リンク](https://github.com/brianmario/mysql2)*                                 |
@@ -1027,6 +1063,32 @@ end
 | `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `httprb` インスツルメンテーションのサービス名。 | `'httprb'` |
+| `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
+
+### httpclient
+
+httpclient インテグレーションは、httpclient gem を使用して HTTP 呼び出しをトレースします。
+
+```ruby
+require 'http'
+require 'ddtrace'
+Datadog.configure do |c|
+  c.use :httpclient, options
+  # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
+  c.use :httpclient, describes: /user-[^.]+\.example\.com/ do |httpclient|
+    httpclient.service_name = 'user.example.com'
+    httpclient.split_by_domain = false # split_by_domain がデフォルトで true の場合にのみ必要
+  end
+end
+```
+
+ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+
+| キー | 説明 | デフォルト |
+| --- | ----------- | ------- |
+| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
+| `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
+| `service_name` | `httpclient` インスツルメンテーションのサービス名。 | `'httpclient'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
 
 ### Kafka
@@ -2037,6 +2099,7 @@ Service C:
 - [Rails](#rails)
 - [Sinatra](#sinatra)
 - [http.rb](#http-rb)
+- [httpclient](#httpclient)
 
 **HTTP プロパゲーターの使用**
 
@@ -2065,9 +2128,7 @@ end
 
 HTTP リクエストから発生するトレースは、リクエストが Ruby アプリケーションに到達する前にフロントエンドウェブサーバーまたはロードバランサーキューで費やされた時間を含むように構成できます。
 
-この機能は**試験的**なもので、デフォルトでは無効になっています。
-
-この機能を有効にするには、ウェブサーバー（Nginx）から `X-Request-Start` または `X-Queue-Start` ヘッダーを追加する必要があります。以下は Nginx のコンフィギュレーション例です。
+この機能はデフォルトで無効になっています。有効にするには、ウェブサーバー（Nginx）から `X-Request-Start` または `X-Queue-Start` ヘッダーを追加する必要があります。以下は Nginx のコンフィギュレーション例です。
 
 ```
 # /etc/nginx/conf.d/ruby_service.conf
@@ -2081,9 +2142,7 @@ server {
 }
 ```
 
-次に、リクエストを処理するインテグレーションでリクエストキューイング機能を有効にする必要があります。
-
-Rack ベースのアプリケーションの場合、この機能を有効にする方法の詳細については、[ドキュメント](#rack)を参照してください。
+次に、リクエストを処理するインテグレーションで `request_queuing: true` を設定して、リクエストキューイング機能を有効にする必要があります。Rack ベースのアプリケーションの詳細については、[ドキュメント](#rack)を参照してください。
 
 ### 処理パイプライン
 
