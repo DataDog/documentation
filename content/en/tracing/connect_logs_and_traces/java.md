@@ -16,31 +16,28 @@ further_reading:
       tag: 'Blog'
       text: 'Correlate request logs with traces automatically'
 ---
-## Configure your logger
+## Before you begin
 
-The first step to correlating logs and traces is to configure your logger.  Follow the [configuration instructions][4] for Log4j, Log4j2, or Logback.
+Ensure log collection is configured.  See [Java Log Collection][1] for Log4j, Log4j 2, or Logback instructions.
 
 ## Automatically inject trace and span IDs
 
-As of version 0.74.0, the Java tracer automatically injects correlation identifiers into logs.  For versions <= 0.73.0, enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property or through the environment variable `DD_LOGS_INJECTION=true`.  Full configuration details can be found on the [Java tracer configuration][1] page.
+Starting in version 0.74.0, the Java tracer automatically injects trace correlation identifiers into logs.  For earlier versions, enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property, or through the environment variable `DD_LOGS_INJECTION=true`.  Full configuration details can be found on the [Java tracer configuration][2] page.
 
-**Note**: If the `attribute.path` for your trace ID is **not** `dd.trace_id`, ensure your trace ID reserved attribute settings account for the `attribute.path`. More information can be found in the [FAQ on this topic][2].
+**Note**: If the `attribute.path` for your trace ID is *not* `dd.trace_id`, ensure that your trace ID reserved attribute settings account for the `attribute.path`. For more information, see the [FAQ on this topic][3].
 
-## Manually Inject Trace and Span IDs
+## Manually inject trace and span IDs
 
-If you prefer to manually correlate your traces with your logs, leverage the Java tracer's API to retrieve correlation identifiers:
-
-- Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning of span being logged
-- Remove the identifiers when the span is complete
+If you prefer to manually correlate your traces with your logs, use the Java tracer's API to retrieve correlation identifiers. Use `CorrelationIdentifier.getTraceId` and `CorrelationIdentifier.getSpanId` methods to inject identifiers at the beginning of the span being logged, and remove the identifiers when the span is complete.
 
 {{< tabs >}}
-{{% tab "Log4j2" %}}
+{{% tab "Log4j 2" %}}
 
 ```java
 import org.apache.logging.log4j.ThreadContext;
 import datadog.trace.api.CorrelationIdentifier;
 
-// there must be spans started and active before this block.
+// There must be spans started and active before this block.
 try {
     ThreadContext.put("dd.trace_id", CorrelationIdentifier.getTraceId());
     ThreadContext.put("dd.span_id", CorrelationIdentifier.getSpanId());
@@ -54,13 +51,13 @@ try {
 ```
 
 {{% /tab %}}
-{{% tab "Slf4j/Logback" %}}
+{{% tab "SLF4J and Logback" %}}
 
 ```java
 import org.slf4j.MDC;
 import datadog.trace.api.CorrelationIdentifier;
 
-// there must be spans started and active before this block.
+// There must be spans started and active before this block.
 try {
     MDC.put("dd.trace_id", CorrelationIdentifier.getTraceId());
     MDC.put("dd.span_id", CorrelationIdentifier.getSpanId());
@@ -76,16 +73,16 @@ finally {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you are not using a [Datadog Log Integration][5] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][6].
+**Note**: If you are [not using a Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. For more information, see the [FAQ on this topic][5].
 
-[See the Java logging documentation][4] for more details about specific logger implementation or to learn how to log in JSON.
+[See the Java log collection documentation][1] for more details about specific logger implementation and instructions for logging in JSON format.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup/java/#configuration
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=jsonlogs#trace-id-option
-[4]: /logs/log_collection/java/?tab=log4j
-[5]: /logs/log_collection/java/#raw-format
-[6]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[1]: /logs/log_collection/java/
+[2]: /tracing/setup_overview/setup/java/
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=jsonlogs#trace_id-option
+[4]: /logs/log_collection/java/#raw-format
+[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

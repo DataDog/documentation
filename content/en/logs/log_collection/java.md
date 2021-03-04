@@ -1,5 +1,5 @@
 ---
-title: Java log collection
+title: Java Log Collection
 kind: documentation
 aliases:
   - /logs/languages/java
