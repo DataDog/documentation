@@ -44,15 +44,15 @@ PHP APM supports the following SAPI's:
 
 #### Web Framework Compatibility
 
-By default, Datadog **supports all PHP web frameworks** out of the box, with either Framework-Level instrumentation, or Generic Web Tracing.
+By default, Datadog **supports all PHP web frameworks** out of the box, with either framework-level instrumentation, or generic web tracing.
 
-Framework-Level instrumentation includes tracing of internals methods and framework specific tagging.
+Framework-level instrumentation includes tracing of internal methods and framework specific tagging.
 
-Generic web tracing will include a `web.request` span to track latency and errors that originated from the call, in addition to spans for supported libraries — for example: database and HTTP clients.
+Generic web tracing includes a `web.request` span to track latency and errors that originated from the call, in addition to spans for supported libraries — for example: database and HTTP clients.
 
 The following table enumerates some of the frameworks and versions Datadog successfully traces.
 
-**Web frameworks with internals tracing**:
+**Web frameworks**:
 
 | Module         | Versions             | Support Type               | Instrumentation level           |
 |:-------------- |:---------------------|:---------------------------|:--------------------------------|
@@ -137,7 +137,7 @@ Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
 ### PCNTL (Process control)
 
-We currently do not offer support for [pcntl][7]. Tracing applications that use functions like `pcntl_fork` will result in unpredictable results.
+We currently do not offer support for [pcntl][7]. Tracing applications that use functions such as `pcntl_fork` may result in unpredictable results.
 
 ## Further Reading
 
