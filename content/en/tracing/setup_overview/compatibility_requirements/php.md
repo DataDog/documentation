@@ -56,23 +56,23 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 | Module         | Versions             | Support Type               | Instrumentation level           |
 |:-------------- |:---------------------|:---------------------------|:--------------------------------|
-| CakePHP        | 2.x                  | All supported PHP versions | Framework-Level instrumentation |
-| CodeIgniter    | 2.x                  | PHP 7+                     | Framework-Level instrumentation |
+| CakePHP        | 2.x                  | All supported PHP versions | Framework-level instrumentation |
+| CodeIgniter    | 2.x                  | PHP 7+                     | Framework-level instrumentation |
 | CodeIgniter    | 3.x                  | PHP 7+                     | Generic web tracing             |
-| Laravel        | 4.2, 5.x, 6.x        | All supported PHP versions | Framework-Level instrumentation |
-| Laravel 8      | 8.x (as of `0.52.0`) | All supported PHP versions | Framework-Level instrumentation |
-| Lumen          | 5.2+                 | All supported PHP versions | Framework-Level instrumentation |
-| Symfony 3      | 3.3, 3.4             | All supported PHP versions | Framework-Level instrumentation |
-| Symfony 4      | 4.x                  | All supported PHP versions | Framework-Level instrumentation |
-| Symfony 5      | 5.x (as of `0.50.0`) | All supported PHP versions | Framework-Level instrumentation |
-| WordPress      | 4.x, 5.x             | PHP 7+                     | Framework-Level instrumentation |
-| Zend Framework | 1.12                 | All supported PHP versions | Framework-Level instrumentation |
+| Laravel        | 4.2, 5.x, 6.x        | All supported PHP versions | Framework-level instrumentation |
+| Laravel 8      | 8.x (as of `0.52.0`) | All supported PHP versions | Framework-level instrumentation |
+| Lumen          | 5.2+                 | All supported PHP versions | Framework-level instrumentation |
+| Symfony 3      | 3.3, 3.4             | All supported PHP versions | Framework-level instrumentation |
+| Symfony 4      | 4.x                  | All supported PHP versions | Framework-level instrumentation |
+| Symfony 5      | 5.x (as of `0.50.0`) | All supported PHP versions | Framework-level instrumentation |
+| WordPress      | 4.x, 5.x             | PHP 7+                     | Framework-level instrumentation |
+| Zend Framework | 1.12                 | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 2.x                  | All supported PHP versions | Generic web tracing             |
-| Yii            | 1.1, 2.0             | All supported PHP versions | Framework-Level instrumentation |
+| Yii            | 1.1, 2.0             | All supported PHP versions | Framework-level instrumentation |
 | Drupal         |                      | All supported PHP versions | Generic web tracing             |
 | Magento        | 1, 2                 | All supported PHP versions | Generic web tracing             |
 | Phalcon        | 1.3, 3.4             | All supported PHP versions | Generic web tracing             |
-| Slim           | 2.x, 3.x, 4.x        | All supported PHP versions | Framework-Level instrumentation |
+| Slim           | 2.x, 3.x, 4.x        | All supported PHP versions | Framework-level instrumentation |
 | Neos Flow      | 1.1                  | All supported PHP versions | Generic web tracing             |
 | FuelPHP        | 1.1                  | PHP 7+                     | Generic web tracing             |
 
