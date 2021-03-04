@@ -1,7 +1,6 @@
 ---
 title: IoT Agent
 kind: ドキュメント
-beta: true
 further_reading:
   - link: /getting_started/agent/
     tag: Documentation
@@ -10,10 +9,6 @@ further_reading:
 ## 概要
 
 Datadog IoT Agent は、IoT デバイスおよび埋め込み型アプリケーションの監視に最適化された、Agent の バージョンです。IoT Agent を使用すると、デジタルディスプレイからセキュリティデバイスまで、画像検知アルゴリズムを実行するさまざまなデバイスを監視することができます。
-
-<div class="alert alert-warning">
-IoT Agent は、現在非公開ベータ版でご利用いただけます。アクセスをご希望の場合は、<a href="https://docs.google.com/forms/d/e/1FAIpQLSfaoqr9Pgievq7f2WE6wcQMF1YjsOwiXHbmO2FehUlQwmNu0A/viewform?usp=sf_link">フォーム</a>にご記入ください。
-</div>
 
 ## 機能
 

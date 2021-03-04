@@ -135,11 +135,11 @@ En fonction de l'architecture de votre application, vous pouvez choisir l'une de
       }
    ```
 
-  Pour effectuer le suivi d'actions utilisateur, appelez `RumMonitor#addAction`, ou `RumMonitor#startUserAction` et `RumMonitor#stopUserAction` s'il s'agit d'actions continues, comme suit :
+  Pour effectuer le suivi d'actions utilisateur, appelez `RumMonitor#addUserAction`, ou `RumMonitor#startUserAction` et `RumMonitor#stopUserAction` s'il s'agit d'actions continues, comme suit :
 
    ```kotlin
       fun onUserInteraction(){
-        GlobalRum.get().addAction(resourceKey, method, url, resourceAttributes)
+        GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
       }
    ```
 

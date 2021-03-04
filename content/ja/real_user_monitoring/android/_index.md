@@ -131,11 +131,11 @@ class SampleApplication : Application() {
       }
    ```
 
-  ユーザーアクションを追跡するには、以下のように、`RumMonitor#addAction` を呼び出します。継続的なアクションの場合は `RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を呼び出します。
+  ユーザーアクションを追跡するには、以下のように、`RumMonitor#addUserAction` を呼び出します。継続的なアクションの場合は `RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を呼び出します。
 
    ```kotlin
       fun onUserInteraction(){
-        GlobalRum.get().addAction(resourceKey, method, url, resourceAttributes)
+        GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
       }
    ```
 

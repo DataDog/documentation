@@ -99,116 +99,150 @@ main_left:
     name: Solutions
     url: '#'
     weight: -460
-  - name: Financial Services
+  - identifier: industry-financial
+    name: Financial Services
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/financial-services/'
     weight: -460
-  - name: Manufacturing & Logistics
+  - identifier: industry-manufacturing
+    name: Manufacturing & Logistics
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
     weight: -459
-  - name: Healthcare/Life Sciences
+  - identifier: industry-healthcare
+    name: Healthcare/Life Sciences
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/healthcare/'
     weight: -458
-  - name: Retail/E-Commerce
+  - identifier: industry-retail
+    name: Retail/E-Commerce
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
     weight: -457
-  - name: Public Sector
+  - identifier: industry-public
+    name: Public Sector
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/public-sector/'
     weight: -456
-  - name: Media & Entertainment
+  - identifier: industry-media
+    name: Media & Entertainment
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/media-entertainment/'
     weight: -455
-  - name: Technology
+  - identifier: industry-technology
+    name: Technology
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/technology/'
     weight: -454
-  - name: Gaming
+  - identifier: industry-gaming
+    name: Gaming
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/gaming/'
     weight: -453
-  - name: Amazon Web Services
+  - identifier: technology-aws
+    name: Amazon Web Services
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/aws/'
     weight: -452
-  - name: Azure
+  - identifier: technology-azure
+    name: Azure
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/azure/'
     weight: -451
-  - name: Google Cloud Platform
+  - identifier: technology-gcp
+    name: Google Cloud Platform
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/gcp/'
     weight: -450
-  - name: Kubernetes
+  - identifier: technology-kubernetes
+    name: Kubernetes
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
-  - name: Red Hat OpenShift
+  - identifier: technology-openshift
+    name: Red Hat OpenShift
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/openshift/'
     weight: -448
-  - name: Cloud Migration
+  - identifier: usecase-migration
+    name: Cloud Migration
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/cloud-migration/'
     weight: -447
-  - name: Monitoring Consolidation
+  - identifier: usecase-consolidate
+    name: Monitoring Consolidation
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
     weight: -446
-  - name: DevOps
+  - identifier: usecase-devops
+    name: DevOps
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/devops/'
     weight: -445
-  - name: Security Analytics
+  - identifier: usecase-testing
+    name: 'Shift-Left Testing'
+    parent: 'solutions'
+    title: 'usecase'
+    url: 'https://www.datadoghq.com/solutions/shift-left-testing/'
+    weight: -444
+  - identifier: usecase-security
+    name: Security Analytics
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -444
-  - name: Hybrid Cloud Monitoring
+    weight: -443
+  - identifier: usecase-compliance
+    name: 'Compliance for CIS Benchmarks'
+    parent: 'solutions'
+    title: 'usecase'
+    url: 'https://www.datadoghq.com/solutions/security/cis-benchmarks/'
+    weight: -442
+  - identifier: usecase-hybrid
+    name: Hybrid Cloud Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -443
-  - name: IoT Monitoring
+    weight: -441
+  - identifier: usecase-iot
+    name: IoT Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -442
-  - name: Machine Learning
+    weight: -440
+  - identifier: usecase-machine
+    name: Machine Learning
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -441
-  - name: Real-Time BI
+    weight: -439
+  - identifier: usecase-analytics
+    name: Real-Time BI
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -440
-  - name: On-Premises Monitoring
+    weight: -438
+  - identifier: usecase-onprem
+    name: On-Premises Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
-    weight: -439
+    weight: -437
 main_right:
   - identifier: about
     name: About
@@ -1289,7 +1323,7 @@ main:
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
-  - name: OpenTracing and OpenTelemetry
+  - name: OpenTelemetry and OpenTracing
     url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
@@ -1462,6 +1496,11 @@ main:
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
     weight: 807
+  - name: OpenTelemetry
+    url: tracing/connect_logs_and_traces/opentelemetry
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_opentelemetry
+    weight: 808
   - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
@@ -1707,6 +1746,10 @@ main:
     url: logs/explorer/facets/
     parent: log_explorer
     weight: 604
+  - name: Watchdog Insights
+    url: logs/explorer/watchdog_insights/
+    parent: log_explorer
+    weight: 605
   - name: Search Syntax
     url: logs/search_syntax/
     parent: log_management
@@ -1735,41 +1778,36 @@ main:
     pre: nav_security_monitoring
     identifier: security_compliance_monitoring
     weight: 160000
-  - name: Security Monitoring
-    url: security_monitoring/
-    parent: security_compliance_monitoring
-    identifier: security_monitoring
-    weight: 1
   - name: Getting Started
     url: security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
-    weight: 101
-  - name: Signals Explorer
-    url: security_monitoring/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_explorer
-    weight: 102
-  - name: Threat Detection Rules
-    url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
-    weight: 103
-  - name: Guides
-    url: security_monitoring/guide
-    parent: security_monitoring
-    identifier: security_monitoring_guides
-    weight: 104
-  - name: Compliance Monitoring
-    url: compliance_monitoring/
     parent: security_compliance_monitoring
-    identifier: compliance_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 1
+  - name: Detection Rules
+    url: security_monitoring/detection_rules/
+    parent: security_compliance_monitoring
+    identifier: detection_rules
     weight: 2
-  - name: Default Rules
+  - name: Security Monitoring
+    url: security_monitoring/detection_rules/security_monitoring
+    parent: detection_rules
+    identifier: security_monitoring_detection_rules
+    weight: 201
+  - name: Default Detection Rules
     url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
+  - name: Signals Explorer
+    url: security_monitoring/explorer
+    parent: security_compliance_monitoring
+    identifier: security_monitoring_explorer
+    weight: 4
+  - name: Guides
+    url: security_monitoring/guide
+    parent: security_compliance_monitoring
+    identifier: security_monitoring_guides
+    weight: 5
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
@@ -4431,6 +4469,17 @@ api:
       operationids:
         - GetBrowserTestLatestResults
       unstable: []
+  - name: Edit a browser test
+    url: '#edit-a-browser-test'
+    identifier: edit-a-browser-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateBrowserTest
+      unstable: []
   - name: Get a test configuration (browser)
     url: '#get-a-test-configuration-browser'
     identifier: get-a-test-configuration-browser
@@ -4441,6 +4490,39 @@ api:
         - v1
       operationids:
         - GetBrowserTest
+      unstable: []
+  - name: Create a browser test
+    url: '#create-a-browser-test'
+    identifier: create-a-browser-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSyntheticsBrowserTest
+      unstable: []
+  - name: Edit an API test
+    url: '#edit-an-api-test'
+    identifier: edit-an-api-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAPITest
+      unstable: []
+  - name: Create an API test
+    url: '#create-an-api-test'
+    identifier: create-an-api-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSyntheticsAPITest
       unstable: []
   - name: Create a test
     url: '#create-a-test'

@@ -187,3 +187,4 @@ Slack をご利用の EU 外のお客様は、Datadog Slack アプリに[ベー�
 [5]: /ja/tracing/#2-instrument-your-application
 [6]: https://app.datadoghq.com/incidents/ddslackapp
 [7]: https://app.datadoghq.com/notebook/list
+[8]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackapplicationus

@@ -137,7 +137,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
 
-## Saved Searches
+## Saved searches
 
 [Saved Views][6] contain your search query, columns, time horizon, and facet.
 
