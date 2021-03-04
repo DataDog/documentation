@@ -278,8 +278,8 @@ Database tracing is not captured by App Analytics by default and you must enable
 
 Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example:
 
-* Tracer Configuration: `ddtrace.config.postgres.analytics_enabled = True`
-* Environment Variable: `DD_POSTGRES_ANALYTICS_ENABLED=true`
+* Tracer Configuration: `ddtrace.config.psycopg.analytics_enabled = True`
+* Environment Variable: `DD_PSYCOPG_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}

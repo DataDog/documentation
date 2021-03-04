@@ -181,7 +181,8 @@ body > header {
                     width: 480px;
 
                     @include media-breakpoint-up(lg) {
-                        width: 720px;
+                        width: 850px;
+                        
                         &:lang(ja) {
                             width: 800px;
                         }

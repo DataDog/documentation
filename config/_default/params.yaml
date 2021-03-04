@@ -11,18 +11,26 @@ code_languages:
     extension: py
     name: python
     syntax: python
+    command: python
+    example_file: example.py
   'pybeta':
     extension: py
     name: python-beta
     syntax: python
+    command: python3
+    example_file: example.py
   'rb':
     extension: rb
     name: ruby
     syntax: ruby
+    command: rb
+    example_file: example.rb
   'rbbeta':
     extension: rbbeta
     name: ruby-beta
     syntax: ruby
+    command: rb
+    example_file: example.rb
   'sh':
     extension: sh
     name: curl
@@ -31,10 +39,14 @@ code_languages:
     extension: go
     name: go
     syntax: go
+    command: go run
+    example_file: main.go
   'java':
     extension: java
     name: java
     syntax: java
+    command: java
+    example_file: Example.java
   'cs':
     extension: cs
     name: csharp

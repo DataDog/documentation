@@ -19,34 +19,32 @@ further_reading:
 
 ## Create an API test
 
-[API tests][1] help you monitor your API endpoints and alert you when they are failing or too slow. These checks verify that your applications are responding to requests and meet any conditions you define, such as response time, HTTP status code, and header or body contents. Use the [Datadog API][2] to see the full list.
+[API tests][1] help you **monitor your API endpoints and alert** you when they are failing or become too slow. These tests verify that your applications are responding to requests and meet any conditions you define, such as **response time**, **HTTP status code**, and **header or body contents**.
 
 In this example, an API test is created to ensure your website is constantly up and providing responses in a specific amount of time.
 
 ### Configure the request
 
-1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **Synthetic Test**.
+1. In the Datadog application, hover over **[UX Monitoring][2]** in the left hand menu and select **Synthetic Test**.
 2. In the top right corner, click the **New Test** button.
 3. Select **API test**.
 4. Define the configuration of your API test:
 
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, which is a test web application.
     - Select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
-    - Add some tags to help organize and filter tests.
-    - Select locations for testing.
+    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
+    - Choose from the **Managed Locations** to run your test from.
     - Click the **Test URL** button.
 
 {{< img src="getting_started/synthetics/api-test-config.png" alt="API test configuration"  style="width:60%;">}}
 
 #### Define your alert conditions
 
-Now that the test is completed, if you did not create any [assertions][4], they are automatically populated. API tests require at least one assertion to be monitored by Datadog. An assertion is defined by a parameter, an optional property, a comparator, and a target value.
-
-In this example, three default assertions are populated when testing the URL:
+After clicking Test URL, basic assertions based on your endpoint's response are automatically populated. Assertions define the alert condition and can be customized. In this example, three default assertions are populated when testing the URL:
 
 {{< img src="getting_started/synthetics/assertions-example.png" alt="Browser test failure"  style="width:90%;">}}
 
-These assertions define the alert condition and can be customized. To add a custom assertion, click on any response header in the response preview. You can also click the **New Assertion** button to add an assertion manually (e.g., `body` contains `Shop.ist`.)
+These assertions define the alert condition and can be customized. To add a custom assertion, directly click on the response preview or click the New Assertion button to add an assertion manually (e.g., body contains Shop.ist)
 
 {{< img src="getting_started/synthetics/api-test-configuration.gif" alt="Browser test failure"  style="width:90%;">}}
 
@@ -62,19 +60,19 @@ You can also decide after how many failures you want a location to be considered
 Retry x time before location is marked as failed
 ```
 
-**Note**: By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][5].
+**Note**: By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][3].
 
-Once alert conditions are set, create a message for the alert and specify what services and team members receive the alert notification email and click **Save Test**. You can also use [integrations][6], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
+Once alert conditions are set, create a message for the alert and specify what services and team members receive the alert notification email and click **Save Test**. You can also use [integrations][4], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
 
 ### Test results
 
-An **API test** homepage will automatically populate after save. This page includes property information, historical graphs for response time and uptime, sample results, and all events and test results.
+The API test details page includes details about the test configuration, uptime associated with the tested endpoint, historical graphs for response time and network timings, as well as the list of individual test results and events.
 
-To troubleshoot a failed test, scroll to the Test Results section and click on the **Test Results** tab. Click on the failed test, labeled as `Alert`, to view detailed test results. Review the failed assertions and response details such as returned status code, response time, and associated headers and body to resolve the issue.
+To troubleshoot a failed test, scroll to the Test Results section and click on one of the failing test results. Review the failed assertions and response details such as returned status code, response time, and associated headers and body to diagnose the issue.
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure"  style="width:90%;">}}
 
-Datadog also has an [APM integration with Synthetic Monitoring][7] which allows you to go from a test run that failed to the root cause of the issue by looking at the trace generated by that test run.
+Datadog also has an [APM integration with Synthetic Monitoring][5] which allows you to go from a test run that failed to the root cause of the issue by looking at the trace generated by that test run.
 
 {{< whatsnext desc="After you set up your first API test:">}}
 {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}Learn more about API tests{{< /nextlink >}}
@@ -84,9 +82,7 @@ Datadog also has an [APM integration with Synthetic Monitoring][7] which allows 
 {{< /whatsnext >}}
 
 [1]: /synthetics/api_tests/
-[2]: /api/v1/synthetics/#create-or-clone-test
-[3]: https://app.datadoghq.com/synthetics/list
-[4]: /synthetics/api_tests/?tab=httptest#assertions
-[5]: /api/v1/synthetics/#create-or-clone-a-test
-[6]: /integrations/
-[7]: /synthetics/apm/
+[2]: https://app.datadoghq.com/synthetics/list
+[3]: /api/v1/synthetics/#create-or-clone-a-test
+[4]: /integrations/
+[5]: /synthetics/apm/

@@ -56,22 +56,24 @@ Agent v7.19 以降を使用し、Datadog Helm Chart を[最新バージョン][4
 kubectl exec -it <agent-pod-name> -c agent -- agent flare <case-id>
 ```
 
-### process-agent
+### プロセスエージェント
 
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --local
 ```
 
-### trace-agent
+### トレースエージェント
 
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
 ```
 
-### system-probe
+### システムプローブ
+
+system-probe コンテナはフレアを送信できないため、代わりにコンテナログを取得します:
 
 ```bash
-kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --local
+kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
 ```
 
 [1]: /ja/agent/basic_agent_usage/#gui

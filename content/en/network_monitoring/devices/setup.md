@@ -47,7 +47,7 @@ To monitor individual devices:
 {{% /tab %}}
 {{% tab "SNMPv3" %}}
 
-- For SNMPv3, configure an instance specifying the IP address and SNMPv3 credentials of the device (as appropriate), for example: `user`, `auth_protocol`, `auth_key`, `priv_protocol`, and `priv_key`:
+- For SNMPv3, configure an instance specifying the IP address and SNMPv3 credentials of the device (as appropriate), for example: `user`, `authProtocol`, `authKey`, `privProtocol`, and `privKey`:
 
     ```yaml
     instances:

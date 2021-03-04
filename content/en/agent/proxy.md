@@ -92,7 +92,11 @@ proxy:
 * A hostname
   - e.g. `webserver1`
 
-**Note**: `NO_PROXY` must match endpoints exactly for agent HTTP(S) requests.  The accepted values above only apply to integrations.
+`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests. Enable `no_proxy_nonexact_match` to allow the Agent to match `NO_PROXY` values with the same rules (above) used for integrations. 
+
+```yaml
+no_proxy_nonexact_match: true
+```
 
 #### Environment variables
 
