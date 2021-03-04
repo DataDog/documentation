@@ -8,8 +8,13 @@ datadog:
   processAgent:
     enabled: true
     processCollection: true
-  systemProbe:
+  networkMonitoring:
     enabled: true
+  securityAgent:
+    compliance:
+      enabled: true
+    runtime:
+      enabled: true
 agents:
   rbac:
     create: false
