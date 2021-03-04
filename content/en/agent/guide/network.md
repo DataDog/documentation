@@ -153,7 +153,7 @@ The maximum memory usage for storing traffic is defined by the `forwarder_retry_
 Agent version 7.27.0 and above can store traffic on disk when the memory limit is reached.
 Enable this capability by setting `forwarder_storage_max_size_in_bytes` to a positive value indicating the maximum amount of storage space, in bytes, that the Agent can use to store traffic on disk.
 
-The traffic is stored in the folder defined by `forwarder_storage_path` which is by default `/opt/datadog-agent/run/transactions_to_retry` on Unix systems and `C:\ProgramData\Datadog\run\transactions_to_retry` on Windows.
+The traffic is stored in the folder defined by the `forwarder_storage_path` setting, which is by default `/opt/datadog-agent/run/transactions_to_retry` on Unix systems and `C:\ProgramData\Datadog\run\transactions_to_retry` on Windows.
 
 Note: In order to avoid running out of storage space, the Agent can store the traffic on the disk only if the total storage space used is less than 95%. This limit is defined by `forwarder_storage_max_disk_ratio`.
 
