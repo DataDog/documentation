@@ -89,7 +89,7 @@ DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
               gcr.io/datadoghq/agent:latest
@@ -263,8 +263,8 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 ```
 
 
-[1]: https://search.maven.org/search?q=g:com.datadoghq%20a:java-dogstatsd-client
 
+[1]: https://search.maven.org/search?q=g:com.datadoghq%20a:java-dogstatsd-client
 {{< /programming-lang >}}
 
 {{< programming-lang lang="PHP" >}}
@@ -280,16 +280,16 @@ Add the following to your `composer.json`:
 Or manually clone the repository at [github.com/DataDog/php-datadogstatsd][1] and set it up with `require './src/DogStatsd.php'`.
 
 
-[1]: https://github.com/DataDog/php-datadogstatsd#php-datadog-statsd-client
 
+[1]: https://github.com/DataDog/php-datadogstatsd#php-datadog-statsd-client
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
 
 - Get [the package from NuGet][1] to install it.
 
-[1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 
+[1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
@@ -339,8 +339,8 @@ if err != nil {
 For more options, see [Datadog's GoDoc][1].
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd
 
+[1]: https://godoc.org/github.com/DataDog/datadog-go/statsd
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
