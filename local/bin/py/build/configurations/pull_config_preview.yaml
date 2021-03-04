@@ -47,7 +47,7 @@
     contents:
 
     - action: integrations
-      branch: master
+      branch: cswatt/containerized-nginx
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
