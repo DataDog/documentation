@@ -6,7 +6,11 @@ datadog:
     enabled: true
     containerCollectAll: true
   acExclude: "name:datadog-agent"
+  orchestratorExplorer:
+    enabled: false
 agents:
   rbac:
     create: false
     serviceAccountName: datadog-agent
+clusterAgent:
+  enabled: false
