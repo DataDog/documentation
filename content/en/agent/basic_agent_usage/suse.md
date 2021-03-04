@@ -20,6 +20,8 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for SUSE. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
+Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+
 **Note**: SUSE 11 SP4 and above are supported.
 
 ## Commands
