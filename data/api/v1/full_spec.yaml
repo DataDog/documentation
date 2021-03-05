@@ -8107,6 +8107,21 @@ components:
       type: string
       x-enum-varnames:
       - TEXT
+    SyntheticsCoreWebVitals:
+      description: Core Web Vitals attached to a browser test step.
+      properties:
+        cls:
+          description: Cumulative Layout Shift.
+          format: int64
+          type: integer
+        lcp:
+          description: Largest Contentful Paint in milliseconds.
+          format: int64
+          type: integer
+        url:
+          description: URL attached to the metrics.
+          type: string
+      type: object
     SyntheticsDeleteTestsPayload:
       description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
 
@@ -8629,6 +8644,11 @@ components:
         value:
           description: Value for the step.
           type: object
+        vitalsMetrics:
+          description: Array of Core Web Vitals metrics for the step.
+          items:
+            $ref: '#/components/schemas/SyntheticsCoreWebVitals'
+          type: array
         warnings:
           description: Warning collected that didn't failed the step.
           items:
@@ -21734,11 +21754,12 @@ tags:
   name: Logs Pipelines
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can\
     \ be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n\
-    - Modify tag configurations for metrics\n\n**Note**: A graph can only contain\
-    \ a set number of points\nand as the timeframe over which a metric is viewed increases,\n\
-    aggregation between points occurs to stay below that set number.\n\nThe Post,\
-    \ Patch, and Delete `manage_tags` API methods can only be performed by\na user\
-    \ who has the `Manage Tags for Metrics` permission."
+    - Modify tag configurations for metrics\n- View tags and volumes for metrics\n\
+    \n**Note**: A graph can only contain a set number of points\nand as the timeframe\
+    \ over which a metric is viewed increases,\naggregation between points occurs\
+    \ to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags`\
+    \ API methods can only be performed by\na user who has the `Manage Tags for Metrics`\
+    \ permission."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
     a metric or check that you care about,
