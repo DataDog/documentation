@@ -111,7 +111,7 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
-    
+
     The `baseurl` is dependent on your host OS:
     - x86_64 - `https://yum.datadoghq.com/stable/7/x86_64/`
     - arm64 - `https://yum.datadoghq.com/stable/7/aarch64/`

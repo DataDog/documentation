@@ -38,7 +38,7 @@ If you are using the container Agent, set the environment variable `DD_ENABLE_PA
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \

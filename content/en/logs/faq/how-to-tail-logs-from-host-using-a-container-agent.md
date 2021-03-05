@@ -118,7 +118,7 @@ Your Agent’s Docker installation command should look like this:
 
 ```
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
