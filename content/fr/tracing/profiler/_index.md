@@ -14,7 +14,9 @@ further_reading:
     tags: Blog
     text: Présentation du profiling continu en production dans Datadog
 ---
-{{< img src="tracing/profiling/profiling_flamegraph.gif" alt="Explorer le flamegraph de profiling">}}
+{{< vimeo 441865141 >}}
+
+</br>
 
 Identifiez les goulots d'étranglement au niveau du processeur, de la mémoire et des E/S, répartis par nom de méthode, nom de classe et numéro de ligne, afin de réduire considérablement la latence pour l'utilisateur final et les coûts d'infrastructure.
 
