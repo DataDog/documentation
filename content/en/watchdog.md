@@ -163,7 +163,7 @@ Need help? Contact [Datadog support][18].
 [8]: /integrations/amazon_cloudfront/
 [9]: /integrations/amazon_dynamodb/
 [10]: /monitors/
-[11]: https://app.datadoghq.com/apm/watchdog
+[11]: https://app.datadoghq.com/watchdog
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: /monitors/monitor_types/watchdog/
 [14]: /tracing/send_traces/#configure-your-environment
