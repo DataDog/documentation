@@ -25,6 +25,8 @@ further_reading:
 
 {{< vimeo 447241955 >}}
 
+<br/>
+
 Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog **tracks the performance of your webpages and APIs** from the backend to the frontend, and at various network levels (`HTTP`, `TCP`, `SSL`, and `DNS`) in a controlled and stable way, alerting you in case of faulty behavior (regression, broken feature, high response time, unexpected status code, etc.). **End-to-end testing production and CI environments** increases development teams’ speed as it puts an end to the fear of defective code making it to production. **Computing SLOs** on your key endpoints and user journeys makes it easier to stick to your application performance targets and ultimately provide a consistent customer experience.
 
 ## Getting Started
