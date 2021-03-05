@@ -1,5 +1,5 @@
 ---
-title: Logging into the Mobile App when using IdP Initiated SAML
+title: Logging Into the Mobile App When Using IdP-Initiated SAML
 kind: documentation
 aliases:
   - /account_management/faq/how-do-i-use-the-mobile-app-with-saml/
