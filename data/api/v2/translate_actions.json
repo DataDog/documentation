@@ -247,27 +247,35 @@
   },
   "ListTagConfigurations": {
     "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
-    "summary": "List Tag Configurations"
+    "summary": "List tag configurations"
+  },
+  "ListTagsByMetricName": {
+    "description": "View indexed tag key-value pairs for a given metric name.",
+    "summary": "List tags by metric name"
   },
   "DeleteTagConfiguration": {
     "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
-    "summary": "Delete a Tag Configuration"
+    "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
     "description": "Returns the tag configuration for the given metric name.",
-    "summary": "List Tag Configuration by Name"
+    "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
     "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
-    "summary": "Update a Tag Configuration",
+    "summary": "Update a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
   },
   "CreateTagConfiguration": {
     "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
-    "summary": "Create a Tag Configuration",
+    "summary": "Create a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
+  },
+  "ListVolumesByMetricName": {
+    "description": "View distinct metrics volumes for the given metric name.\n\nCustom distribution metrics will return both ingested and indexed custom metrics.\nFor Metrics without Limits beta customers, all metrics will return both ingested/indexed volumes.\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+    "summary": "List distinct metric volumes by metric name"
   },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
