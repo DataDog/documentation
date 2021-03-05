@@ -316,7 +316,11 @@ Create a new Fargate task definition matching the below. Make sure to replace ea
 }
 ```
 
-**Note:** The private location firewall option is not supported on AWS Fargate - the `enableDefaultBlockedIpRanges` parameter can consequently not be set to `true`.
+**Notes:** 
+
+If you wish to use environment variables in your task definition, note that Fargate Private Location deployment uses different environment variables than other parts of Datadog. For Fargate, use the following environment variables: `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PRIVATE_KEY`.
+
+The private location firewall option is not supported on AWS Fargate—the `enableDefaultBlockedIpRanges` parameter can consequently not be set to `true`.
 
 {{% /tab %}}
 
