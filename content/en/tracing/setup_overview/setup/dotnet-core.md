@@ -30,6 +30,9 @@ further_reading:
   - link: "/tracing/connect_logs_and_traces/dotnet/"
     tag: "Documentation"
     text: "Connect .NET application logs to traces"
+  - link: "/serverless/azure_app_services/"
+    tag: "Documentation"
+    text: "Microsoft Azure App Services Extension"
 ---
 
 ## Compatibility requirements
