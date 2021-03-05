@@ -137,8 +137,8 @@ With Prometheus Autodiscovery, the Datadog Agent is able to detect native Promet
 
 ### Requirements
 
-- Datadog Agent 7 or 6.26+ (for Pod checks)
-- Datadog Cluster Agent 1.11+ (for service and endpoint checks)
+- Datadog Agent v7 or v6.26+ (for Pod checks)
+- Datadog Cluster Agent v1.11+ (for service and endpoint checks)
 
 ### Configuration
 
