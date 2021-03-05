@@ -36,7 +36,7 @@ To share an entire dashboard publicly, generate a URL:
 3. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well which tags are visible for selectable template variables.
 4. Copy the URL and click **Done**.
 
-**Note**: Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other Log-based queries do.
+**Note**: Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other log-based queries do.
 
 ### Share a dashboard with individual email addresses
 
