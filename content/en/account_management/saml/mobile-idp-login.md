@@ -12,7 +12,7 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-# Using the Datadog Mobile App with your IdP-Initiated SAML (SSO) Provider
+## Using the Datadog Mobile App with your IdP-Initiated SAML (SSO) Provider
 
 <div class="alert alert-warning">
 Logging into the Datadog mobile app with IdP-initiated SAML is an opt-in feature. Reach out to <a href="https://docs.datadoghq.com/help/">Support</a> to have the feature enabled for your account before you alter your SAML configuration.
