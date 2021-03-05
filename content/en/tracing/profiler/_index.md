@@ -22,7 +22,7 @@ further_reading:
 
 ---
 
-{{< img src="tracing/profiling/profiling_flamegraph.gif" alt="Exploring profiling flame graph">}}
+{{< vimeo 441865141 >}}
 
 Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.
 
