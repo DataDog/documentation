@@ -12,7 +12,7 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-# Using the Datadog Mobile App with your IdP-Initiated SAML (SSO) Provider
+## Using the Datadog Mobile App with your IdP-Initiated SAML (SSO) Provider
 
 <div class="alert alert-warning">
 Logging into the Datadog mobile app with IdP-initiated SAML is an opt-in feature. Reach out to <a href="https://docs.datadoghq.com/help/">Support</a> to have the feature enabled for your account before you alter your SAML configuration.
@@ -25,22 +25,22 @@ In order to use the Datadog Mobile App with Identity Provider (IdP) Initiated SA
 
 {{< img src="account_management/saml/datadog-mobile-idp-saml-landing-page.png" alt="Datadog Mobile SAML Interstitial" >}}
 
-## OneLogin
+### OneLogin
 
 When configuring your OneLogin App, set the Relay State value on the **Application Details** page to `dd_m_idp`.
 {{< img src="account_management/saml/one-login-mobile-idp-relay-state.png" alt="One Login's Application Details Page" >}}
 
-## Okta
+### Okta
 
 When configuring your Okta App, set the Default RelayState value on the **Configure SAML** page to `dd_m_idp`.
 {{< img src="account_management/saml/okta-mobile-idp-relay-state.png" alt="Okta's Application Details Page" >}}
 
-## Google
+### Google
 
 When configuring your Google App for Work SAML App, set the **Start URL** under the Service Provider Details to `dd_m_idp`.
 {{< img src="account_management/saml/google-mobile-idp-relay-state.png" alt="Google's Service Provider Details Page" >}}
 
-### Troubleshooting
+#### Troubleshooting
 
 If you see a `403 Forbidden` error on login after configuring the Relay State, contact [Support][1] to ensure that the feature has been enabled for your organization.
 
