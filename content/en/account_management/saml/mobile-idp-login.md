@@ -1,6 +1,7 @@
 ---
 title: Logging Into the Mobile App When Using IdP-Initiated SAML
 kind: documentation
+is_public: true
 aliases:
   - /account_management/faq/how-do-i-use-the-mobile-app-with-saml/
 further_reading:
