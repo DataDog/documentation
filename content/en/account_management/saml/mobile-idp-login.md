@@ -32,4 +32,6 @@ When configuring your Google App for Work SAML App, set the **Start URL** under 
 {{< img src="account_management/saml/google-mobile-idp-relay-state.png" alt="Google's Service Provider Details Page" >}}
 
 # Troubleshooting
-If you see a "403 Forbidden" error on login after configuring the Relay State - contact Support to ensure that the feature has been enabled for your organization.
+If you see a `403 Forbidden` error on login after configuring the Relay State, contact [Support][1] to ensure that the feature has been enabled for your organization.
+
+[1]: /help/
