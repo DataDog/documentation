@@ -231,7 +231,7 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 {{% /tab %}}
 {{% tab "From file" %}}
 
-The Agent v7.25.0+/6.25.0+ can directly collect logs from a file based on a container Autodiscovery label. To collect these logs, use the `com.datadoghq.ad.logs` label as shown below on your containers to collect `/logs/app.log`:
+The Agent v7.25.0+/6.25.0+ can directly collect logs from a file based on a container Autodiscovery label. To collect these logs, use the `com.datadoghq.ad.logs` label as shown below on your containers to collect `/logs/app/prod.log`:
 
 ```yaml
 labels:
