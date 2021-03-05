@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Datadog automatically parses JSON-formatted logs. When logs are not JSON-formatted, Datadog enables adding value to raw logs by sending them through a processing pipeline.
+Datadog automatically parses JSON-formatted logs. When logs are not JSON-formatted, you can add values to your raw logs by sending them through a processing pipeline.
 
 With pipelines, logs are parsed and enriched by chaining them sequentially through [processors][1]. This extracts meaningful information or attributes from semi-structured text to reuse as [facets][2].
 
@@ -71,13 +71,13 @@ It is possible to drag and drop a pipeline into another pipeline to transform it
 
 ### Preprocessing for JSON logs
 
-Preprocessing of JSON logs occurs before logs enter Log Pipelines processing. Preprocessing runs a series of operations based on [reserved attributes][4], such as `timestamp`, `status`, `host`, `service`, and `message`. If you have different attribute names in your JSON logs, use preprocessing to map your log attribute names to those in the reserved attribute list.
+Preprocessing of JSON logs occurs before logs enter pipeline processing. Preprocessing runs a series of operations based on [reserved attributes][4], such as `timestamp`, `status`, `host`, `service`, and `message`. If you have different attribute names in your JSON logs, use preprocessing to map your log attribute names to those in the reserved attribute list.
 
 With preprocessing:
 
 * Trigger new [log integrations](#integration-pipelines) based on the [source](#source-attribute) of incoming logs.
 * Append incoming logs with all [host](#host-attribute) tags.
-* Apply reserved attribute remapper processors (namely [**date** remapper](#date-attribute), [**status** remapper](#status-attribute), [**service** remapper](#service-attribute), [**message** remapper](#message-attribute) and [**trace ID** remapper](#trace-id-attribute)) for the related JSON attributes of all incoming JSON logs.
+* Apply reserved attribute remapper processors (namely [date remapper](#date-attribute), [status remapper](#status-attribute), [service remapper](#service-attribute), [message remapper](#message-attribute), and [trace ID remapper](#trace-id-attribute)) for the related JSON attributes of all incoming JSON logs.
 
 For example, consider a service that generates this log:
 
@@ -91,7 +91,7 @@ For example, consider a service that generates this log:
 }
 ```
 
-JSON Logs preprocessing comes with a default configuration that works for standard log forwarders. Edit this configuration at any time to adapt to custom or specific log forwarding approaches.
+JSON log preprocessing comes with a default configuration that works for standard log forwarders. Edit this configuration to adapt custom or specific log forwarding approaches.
 
 Open **Pre processing for JSON logs** and change the default mapping:
 
@@ -130,7 +130,7 @@ By default Datadog generates a timestamp and appends it in a date attribute when
 * `published_date`
 * `syslog.timestamp`
 
-You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][7].
+Specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][7].
 
 **Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
 
@@ -153,7 +153,7 @@ Each log entry may specify a status level which is made available for faceted se
 * `level`
 * `syslog.severity`
 
-If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][11].
+To remap a status existing in the `status` attribute, use the [log status remapper][11].
 
 #### Service attribute
 
@@ -166,7 +166,7 @@ Specify alternate attributes to use as the source of a log's service by setting 
 
 #### Trace ID attribute
 
-By default, [Datadog tracers can automatically inject trace and span IDs in the logs][13]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
+By default, [Datadog tracers can automatically inject trace and span IDs into your logs][13]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
@@ -176,10 +176,10 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 ### Integration pipelines
 
 <div class="alert alert-info">
-Consult the current <a href="/integrations/#cat-log-collection">list of supported integrations</a>.
+See the <a href="/integrations/#cat-log-collection">list of supported integrations</a>.
 </div>
 
-Integration processing pipelines are available for the certain sources when they are set up to collect logs. For integration logs, an integration pipeline is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Logs Explorer.
+Integration processing pipelines are available for certain sources when they are set up to collect logs. For integration logs, an integration pipeline is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Logs Explorer.
 
 These pipelines are **read-only** and parse out your logs in ways appropriate for the particular source. To edit an integration pipeline, clone it and then edit the clone:
 
@@ -195,7 +195,7 @@ To see the full list of integration pipelines that Datadog offers, browse the [i
 
 {{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Integration pipeline library" style="width:80%;">}}
 
-To use one integration pipeline, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation will be automatically triggered and the integration pipeline will be added to the processing pipelines list. To configure the log source, refer to the corresponding [integration documentation][15].
+To use an integration pipeline, Datadog recommends installing the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation is automatically triggered and the integration pipeline is added to the processing pipelines list. To configure the log source, refer to the corresponding [integration documentation][15].
 
 It's also possible to copy an integration pipeline using the copy button.
 

@@ -10,7 +10,7 @@ further_reading:
   text: "Discover Datadog Pipelines"
 - link: "/logs/processing/processors/"
   tag: "Documentation"
-  text: "Consult the full list of available Processors"
+  text: "Log Processors"
 - link: "/logs/processing/attributes_naming_convention/"
   tag: "Documentation"
   text: "Datadog log attributes naming convention"
@@ -23,12 +23,12 @@ further_reading:
 
 Control how your logs are processed from the [log configuration page][1].
 
-* A [Pipeline][2] takes a filtered subset of incoming logs and applies a list of sequential processors.
-* A [Processor][3] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][4], [Grok parsing][5], etc.) on a log.
+* A [pipeline][2] takes a filtered subset of incoming logs and applies a list of sequential processors.
+* A [processor][3] executes within a [pipeline][2] to complete a data-structuring action ([remapping an attribute][4], [Grok parsing][5], etc.) on a log.
 
 {{< img src="logs/processing/processors/processing_overview.png" alt="Processing" >}}
 
-Pipelines and Processors can be applied to any type of log. You don't need to change logging configuration or deploy changes to any server-side processing rules. Everything can be configured within the [Pipeline configuration page][1].
+Pipelines and processors can be applied to any type of log. You don't need to change logging configuration or deploy changes to any server-side processing rules. Everything can be configured within the [pipeline configuration page][1].
 
 Implementing a log processing strategy is beneficial as it introduces an [attribute naming convention][6] for your organization.
 
@@ -44,21 +44,21 @@ Into this one:
 
 {{< img src="logs/processing/log_post_processing.png" alt="Log post processing"  style="width:50%;">}}
 
-Consult the [Pipelines documentation page][2] to learn more about how to perform actions on a subset of your logs with the [Pipeline filters][7].
+See the [pipelines documentation][2] to learn more about performing actions on a subset of your logs with the [pipeline filters][7].
 
-To discover the full list of Processors available, refer to the dedicated [Processor documentation page][3].
+See the [processor documentation][3] for a full list of processors available.
 
-If you want to learn more about parsing capabilities, follow the [parsing][8] docs. There is also a [parsing best practices][9] and [parsing troubleshooting][10] guide.
+If you want to learn more about parsing capabilities, see the [parsing][8] docs. There is also a [parsing best practices][9] and [parsing troubleshooting][10] guide.
 
 **Notes**:
 
-- For optimal use of the Log Management solution, Datadog recommends using at most 20 processors per pipeline and 10 parsing rules within a grok processor.
+- For optimal use of the Log Management solution, Datadog recommends using at most 20 processors per pipeline and 10 parsing rules within a Grok processor.
 
 - Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
 ## Processing pipelines
 
-A processing pipeline takes a filtered subset of incoming logs and applies them over a list of sequential Processors. See the [Logs pipelines][11] docs to learn more about preprocessing for JSON logs and integrations pipelines.
+A processing pipeline takes a filtered subset of incoming logs and applies them over a list of sequential processors. See the [log pipelines documentation][11] to learn more about preprocessing for JSON logs and integrations pipelines.
 
 ## Further Reading
 
