@@ -28,11 +28,11 @@ Metrics that track system health come automatically through Datadog's integratio
 
 In addition, metrics can help you adjust the scale of your environment to meet the demand from your customers. Knowing exactly how much you need to consume in resources can help you save money or improve performance.
 
-### How do I use metrics in Datadog?
+### Visualizing metrics in Datadog
 
 You can visualize your metrics and create graphs throughout the Datadog app: in [Metrics Explorer][3], [Dashboards][4], or [Notebooks][5].
 
-Here’s an example of how a timeseries visualization would look:
+Here’s an example of a timeseries visualization:
 
 {{< img src="metrics/introduction/timeseries_example.png" alt="Timeseries example" >}}
 
@@ -40,7 +40,7 @@ This line graph plots latency (in milliseconds) experienced by users on the y-ax
 
 Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][6].
 
-### How do I submit metrics to Datadog?
+### Submitting metrics to Datadog
 
 Metrics can be sent to Datadog from several places.
 
@@ -48,7 +48,7 @@ Metrics can be sent to Datadog from several places.
 
 - You can generate metrics directly within the Datadog platform. For instance, you can count error status codes appearing in your logs and [store that as a new metric][9] in Datadog.
 
-- Often, you’ll need to track metrics related to your business (e.g. number of user logins/signups). In these cases, you can create [custom metrics][10]. Custom metrics can be submitted through the [Agent][11], [DogStatsD][12], or the [HTTP API][13].
+- Often, you’ll need to track metrics related to your business (for example, number of user logins or signups). In these cases, you can create [custom metrics][10]. Custom metrics can be submitted through the [Agent][11], [DogStatsD][12], or the [HTTP API][13].
 
 - Additionally, the [Datadog Agent][14] automatically sends several standard metrics (such as CPU and disk usage).
 
@@ -56,13 +56,13 @@ For a summary of all metric submission sources and methods, refer to the [Metric
 
 ## Querying metrics
 
-The graphing experience is consistent whether you are using dashboards, notebooks, or monitors. You can create graphs either by using the graphing editor UI or by directly changing the raw query string. To edit the query string, hit the `</>` button on the far right.
+The graphing experience is consistent whether you are using dashboards, notebooks, or monitors. You can create graphs by using the graphing editor UI or by directly changing the raw query string. To edit the query string, use the `</>` button on the far right.
 
 ### Anatomy of a metric query
 
 A metric query in Datadog looks like this:
 
-{{< img src="metrics/introduction/color-query2.png" alt="Query explained"  style="width:70%;">}}
+{{< img src="metrics/introduction/color-query2.png" alt="Example query with color-coded sections"  style="width:70%;">}}
 
 You can break this query into a few steps:
 
@@ -72,7 +72,7 @@ First, choose the specific metric that you’d like to graph by searching or sel
 
 #### Filter your metric
 
-After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, refer to the [Tagging][16] documentation.
+After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, refer to the [tagging documentation][16].
 
 #### Configure time
 
@@ -88,7 +88,7 @@ _Aggregation_ defines how the metrics in each group are combined. There are four
 
 #### Apply functions (optional)
 
-You can modify your graph values with mathematical [functions][17]. This can mean performing arithmetic between an integer and a metric (e.g. multiply a metric by 2), or between two metrics (for example, create a new timeseries for the memory utilization rate like this: `jvm.heap_memory / jvm.heap_memory_max`).
+You can modify your graph values with mathematical [functions][17]. This can mean performing arithmetic between an integer and a metric (for example, multiplying a metric by 2), or between two metrics (for example, creating a new timeseries for the memory utilization rate like this: `jvm.heap_memory / jvm.heap_memory_max`).
 
 ### Time and space aggregation
 
@@ -96,7 +96,7 @@ _Time aggregation_ and _space aggregation_ are two important components of any q
 
 #### Time aggregation
 
-Datadog stores a large volume of points, and in most cases it’s not possible to display them all on a graph—there would be more datapoints than pixels. Therefore, Datadog uses time aggregation to solve this problem by combining data points into time buckets. This is called a _rollup_. As the time interval you’ve defined for your query increases, the granularity of your data becomes coarser.
+Datadog stores a large volume of points, and in most cases it’s not possible to display them all on a graph—there would be more datapoints than pixels. Datadog uses time aggregation to solve this problem by combining data points into time buckets. This is called a _rollup_. As the time interval you’ve defined for your query increases, the granularity of your data becomes coarser.
 
 There are five aggregations you can apply to combine your data in each time bucket: sum, min, max, avg, and count.
 
@@ -104,17 +104,15 @@ It’s important to remember that time aggregation is _always_ applied in every 
 
 #### Space aggregation
 
-Space aggregation splits a single metric into multiple time series by tags such as host, container, region, etc. For instance, if you were interested in viewing the latency of your EC2 instances by region, you would need to use space aggregation to combine each region’s hosts.
+Space aggregation splits a single metric into multiple time series by tags such as host, container, and region. For instance, if you were interested in viewing the latency of your EC2 instances by region, you would need to use space aggregation to combine each region’s hosts.
 
 There are four aggregations that can be applied when using space aggregation: _sum_, _min_, _max_, and _avg_. Using the above example, say that your hosts are spread across four regions: us-east-1, us-east-2, us-west-1, and us-west-2. The hosts in each region need to be combined using an aggregator function. Using the _max_ aggregator would result in the maximum latency experienced across hosts in each region, while the _avg_ aggregator would yield the average latency per region.
 
 ## Metric types and real-time metrics visibility
 
-### What metric types can I submit to Datadog?
+### Metric types
 
 Datadog supports several different metric types that serve distinct use cases: count, gauge, rate, histogram, and distribution. Metric types determine which graphs and functions are available to use with the metric in the app.
-
-### What’s the difference between each metric type?
 
 The Datadog Agent doesn’t make a separate request to Datadog's servers for every single data point you send. Instead, it reports values collected over a _flush time interval_. The metric’s type determines how the values collected from your host over this interval are aggregated for submission.
 
@@ -128,11 +126,9 @@ A **_histogram_** reports five different values summarizing the submitted values
 
 A **_distribution_** is similar to a histogram, but it summarizes values submitted during a time interval across all hosts in your environment. You can also choose to report multiple percentiles: p50, p75, p90, p95, and p99. You can learn more about this powerful feature in the [Distributions documentation][18].
 
-
-
 See the [metrics types][15] documentation for more detailed examples of each metric type and submission instructions.
 
-### How do I view real-time information about my metrics?
+### View real-time information about metrics
 
 The [Metrics Summary page][19] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
 
