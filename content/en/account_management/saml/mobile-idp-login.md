@@ -24,7 +24,7 @@ When configuring your OneLogin App, set the Relay State value on the **Applicati
 {{< img src="account_management/saml/one-login-mobile-idp-relay-state.png" alt="One Login's Application Details Page" >}}
 
 # Okta
-When configuring your Okta App, set the Default RelayState value on the "Configure SAML" page to "dd_m_idp".
+When configuring your Okta App, set the Default RelayState value on the **Configure SAML** page to `dd_m_idp`.
 {{< img src="account_management/saml/okta-mobile-idp-relay-state.png" alt="Okta's Application Details Page" >}}
 
 # Google
