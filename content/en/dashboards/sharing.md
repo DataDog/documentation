@@ -51,7 +51,7 @@ To share an entire dashboard publicly, generate a URL:
 7. Click **Done**.
 
 **Note**:
-- Individuals who are added to the allowlist for a dashboard will receive a link to their email. If they the link isn't clicked on within 1 hour, they will be able to self request a new link on the dashboard landing page. If the email is on the allowlist, they will receive a new email. 
+- Individuals who are added to the allowlist for a dashboard receive a link in their email. If the link isn't clicked on within one hour, they can request a new link on the dashboard landing page. If their email address is on the allowlist, a new email is sent.
 - Once clicked, this device will be authorized to see the dashboard for up to 30 days. Once that time is up, the user will be able request a new link on the dashboard landing page. If the email is on the allowlist, they will receive a new email. 
 - If a user is removed from the allowlist, access will be removed.
 - Widgets based on APM traces queries do not display data on shared dashboards. The Log Stream widget doesn't show data either, but other Log-based queries do.
