@@ -196,9 +196,9 @@ main_left:
     url: 'https://www.datadoghq.com/solutions/devops/'
     weight: -445
   - identifier: usecase-testing
-    name: 'Shift-Left Testing'
-    parent: 'solutions'
-    title: 'usecase'
+    name: Shift-Left Testing
+    parent: solutions
+    title: usecase
     url: 'https://www.datadoghq.com/solutions/shift-left-testing/'
     weight: -444
   - identifier: usecase-security
@@ -208,9 +208,9 @@ main_left:
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
     weight: -443
   - identifier: usecase-compliance
-    name: 'Compliance for CIS Benchmarks'
-    parent: 'solutions'
-    title: 'usecase'
+    name: Compliance for CIS Benchmarks
+    parent: solutions
+    title: usecase
     url: 'https://www.datadoghq.com/solutions/security/cis-benchmarks/'
     weight: -442
   - identifier: usecase-hybrid
@@ -3669,7 +3669,19 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
-  - name: Create a Tag Configuration
+  - name: List distinct metric volumes by metric name
+    url: '#list-distinct-metric-volumes-by-metric-name'
+    identifier: list-distinct-metric-volumes-by-metric-name
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListVolumesByMetricName
+      unstable:
+        - v2
+  - name: Create a tag configuration
     url: '#create-a-tag-configuration'
     identifier: create-a-tag-configuration
     parent: metrics
@@ -3681,7 +3693,7 @@ api:
         - CreateTagConfiguration
       unstable:
         - v2
-  - name: Update a Tag Configuration
+  - name: Update a tag configuration
     url: '#update-a-tag-configuration'
     identifier: update-a-tag-configuration
     parent: metrics
@@ -3693,7 +3705,7 @@ api:
         - UpdateTagConfiguration
       unstable:
         - v2
-  - name: List Tag Configuration by Name
+  - name: List tag configuration by name
     url: '#list-tag-configuration-by-name'
     identifier: list-tag-configuration-by-name
     parent: metrics
@@ -3705,7 +3717,7 @@ api:
         - ListTagConfigurationByName
       unstable:
         - v2
-  - name: Delete a Tag Configuration
+  - name: Delete a tag configuration
     url: '#delete-a-tag-configuration'
     identifier: delete-a-tag-configuration
     parent: metrics
@@ -3717,7 +3729,19 @@ api:
         - DeleteTagConfiguration
       unstable:
         - v2
-  - name: List Tag Configurations
+  - name: List tags by metric name
+    url: '#list-tags-by-metric-name'
+    identifier: list-tags-by-metric-name
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagsByMetricName
+      unstable:
+        - v2
+  - name: List tag configurations
     url: '#list-tag-configurations'
     identifier: list-tag-configurations
     parent: metrics
