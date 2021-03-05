@@ -47,7 +47,7 @@ To run a [Docker container][1] that embeds the Datadog Agent to monitor your hos
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
@@ -62,7 +62,7 @@ docker run -d --name datadog-agent \
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
@@ -251,7 +251,7 @@ labels:
     com.datadoghq.ad.logs: '[{"type":"file", "source": "java", "service": "app", "path": "/logs/app/prod.log"}, {"type": "docker", "source": "app_container", "service": "app"}]'
 ```
 
-- When using this kind of combination, `source` and `service` have no default value and should be explicitly set in the Autodiscovery label.   
+- When using this kind of combination, `source` and `service` have no default value and should be explicitly set in the Autodiscovery label.
 
 {{% /tab %}}
 {{< /tabs >}}

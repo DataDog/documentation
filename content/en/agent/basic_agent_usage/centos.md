@@ -20,6 +20,8 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for CentOS. To install the Datadog Agent, follow the [Agent Installation Instructions][1] for CentOs.
 
+Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+
 **Note**: CentOS 6 and above are supported.
 
 ## Commands
