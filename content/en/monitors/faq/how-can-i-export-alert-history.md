@@ -7,7 +7,7 @@ Download a history of monitor alerts through the [hourly monitor data][1], which
 
 **Notes**:
 
-- This feature is US only.
+- This feature is only supported for the Datadog US site.
 - You need to be an administrator of your organization to access the CSV file.
 
 {{< site-region region="us" >}}
