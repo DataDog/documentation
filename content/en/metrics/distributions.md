@@ -31,7 +31,7 @@ Like other metric types, such as `gauges` or `histograms`, distributions have th
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
 
-{{< img src="metrics/distributions/graph.png" alt="Distribution metric aggregations"  style="width:80%;">}}
+{{< img src="metrics/distributions/percentilesgraph.jpg" alt="Distribution metric aggregations"  style="width:80%;">}}
 
 ## Customize tagging
 
@@ -60,7 +60,7 @@ Like other metric types, such as `gauges` or `histograms`, distributions have th
 {{< img src="metrics/distributions/revised_global_metrics_selection.png" alt="Distribution Metric UI"  style="width:80%;">}}
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
-{{< img src="metrics/distributions/graph.png" alt="Distribution metric aggregations"  style="width:80%;">}}
+{{< img src="metrics/distributions/percentilesgraph.jpg" alt="Distribution metric aggregations"  style="width:80%;">}}
 
 ## Customize tagging
 Distributions provide functionality that allows you to control the tagging for custom metrics where host-level granularity does not make sense.
