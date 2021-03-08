@@ -49,7 +49,7 @@ Filters let you limit what kinds of logs a pipeline applies to.
 
 The filter syntax is the same as the [search bar][3].
 
-**Note**: The pipeline filtering is applied before any of the pipeline's Processors, hence you cannot filter on an attribute that is extracted in the pipeline itself**
+**Note**: The pipeline filtering is applied before any of the pipeline's processors, hence you cannot filter on an attribute that is extracted in the pipeline itself.
 
 The logstream shows which logs your pipeline applies to:
 
