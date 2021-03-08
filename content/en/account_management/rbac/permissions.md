@@ -59,20 +59,19 @@ More details about these permissions below.
 
 ### Log configuration access
 
-#### logs_generate_metrics
+#### `logs_generate_metrics`
 
 Grants a role the ability to use the [Generate Metrics][3] feature.
 
 This permission is global and enables both the creation of new metrics, and the edition or deletion of existing ones.
 
-#### logs_write_facets
+#### `logs_write_facets`
 
 Grants a role the ability to use the [Create, Edit, and Delete facets][4].
 
 This permission is global and enables both the creation of new facets, and the edition or deletion of existing ones.
 
-
-#### logs_modify_indexes
+#### `logs_modify_indexes`
 
 Grants a role the ability to create and modify [log indexes][5]. This includes:
 
@@ -85,7 +84,7 @@ This permission is global and enables both the creation of new indexes, and the 
 **Note**: This permission also grants [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exlcusion Filters](#logs-write-exclusion-filters) permissions behind the scenes.
 
 
-#### logs_write_exclusion_filters
+#### `logs_write_exclusion_filters`
 
 Grants a role the ability to create or modify [exclusion filters][8] within an index.
 
@@ -110,7 +109,7 @@ This configuration is only supported through the UI.
 {{< /tabs >}}
 
 
-#### logs_write_pipelines
+#### `logs_write_pipelines`
 
 Grants a role the ability to create and modify [log processing pipelines][9]. This includes:
 
@@ -123,7 +122,7 @@ Grants a role the ability to create and modify [log processing pipelines][9]. Th
 **Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
 
 
-#### logs_write_processors
+#### `logs_write_processors`
 
 Grants a role the ability to create, edit or delete processors and nested pipelines[12].
 
@@ -165,7 +164,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-#### logs_write_archives
+#### `logs_write_archives`
 
 Grants the ability to create, edit or delete [Log Archives][13]. This includes:
 
@@ -176,7 +175,7 @@ Grants the ability to create, edit or delete [Log Archives][13]. This includes:
 
 This permission is global and enables the creation of new archives, and the edition and deletion of existing ones.
 
-#### logs_read_archives
+#### `logs_read_archives`
 
 Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs-write-historical-view), this permission also grants the ability to trigger a [Rehydration][14] from Archives.
 
@@ -208,7 +207,7 @@ Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a give
 {{% /tab %}}
 {{< /tabs >}}
 
-#### logs_write_historical_views
+#### `logs_write_historical_views`
 
 Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][14].
 
@@ -231,7 +230,7 @@ For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the f
 * If you **do** use the [Log Read Index Data](#logs-read-index-data) legacy permission, these logs are not accessible for `CI-CD` role members, as the resulting historical view is restricted to `PROD` and `ADMIN` role members.
 
 
-#### logs_public_config_api
+#### `logs_public_config_api`
 
 Grants the ability to create or modify log configuration through the Datadog API:
 
@@ -249,7 +248,7 @@ Grant the following permissions to manage read access on subsets of log data:
 * [Logs Read Data](#logs-read-data) (Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries.
 * [Logs Read Index Data](#logs-read-index-data) is the legacy approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission enabled to access indexed data).
 
-#### logs_read_data
+#### `logs_read_data`
 
 Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][18].
 
@@ -335,7 +334,7 @@ These permissions are globally enabled by default for all users.
 * If this user has [livetail](#logs-livetail) permission, this users sees only sees `service:api` logs in the livetail.
 
 
-#### logs_read_index_data
+#### `logs_read_index_data`
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
 
@@ -378,7 +377,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-#### logs_live_tail
+#### `logs_live_tail`
 
 Grants a role the ability to use the [Live Tail][19] feature.
 
