@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - exceptions
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/rookout/README.md'
 display_name: Rookout
+draft: false
 git_integration_title: rookout
 guid: ad342dd9-4fe8-44e6-8bee-1e1cc64b1d28
 integration_id: rookout
@@ -36,7 +38,7 @@ Recueillez des métriques custom pour votre application en quelques clics et env
 
 **Remarque : étant donné que cette intégration vous permet de recueillir des métriques custom, une facturation supplémentaire peut s'appliquer en fonction du nombre de métriques custom recueillies. [Cliquez ici][1] pour en savoir plus sur les métriques custom.**
 
-## Implémentation
+## Configuration
 
 ### Installation
 

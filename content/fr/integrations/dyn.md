@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez les changements de zone et mesurez le nombre de requêtes par seconde, selon une zone ou un enregistrement.'
 doc_link: 'https://docs.datadoghq.com/integrations/dyn/'
+draft: false
 git_integration_title: dyn
 has_logo: true
 integration_title: Dyn
@@ -26,7 +27,7 @@ Surveillez vos zones grâce aux événements et graphiques avancés.
 - Surveillez les changements apportés lors de la mise à jour d'une zone.
 - Analysez le nombre de requêtes par seconde par zone ou type d'enregistrement grâce aux outils graphiques avancés.
 
-## Implémentation
+## Configuration
 
 ### Configuration
 

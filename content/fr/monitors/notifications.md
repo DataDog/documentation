@@ -54,7 +54,11 @@ Vous pouvez choisir d'ajouter des tags à votre monitor. Les tags de monitors ne
 
 Vous pouvez configurer le renvoi des notifications du monitor. Cette option vous permet de rappeler à votre équipe qu'un problème n'est pas résolu. Si vous activez cette fonction, vous pouvez choisir d'inclure un message de réaffectation à envoyer lorsque le monitor renvoie une notification. Le message d'origine est également inclus.
 
-## Notify your team
+### Priorité
+
+Ajoutez une priorité (facultative) à vos monitors. Pour ce faire, choisissez une valeur entre P1 et P5. P1 correspond à la priorité la plus élevée, tandis que P5 correspond à la priorité la plus faible.
+
+## Informer votre équipe
 
 Utilisez cette section pour envoyer des notifications à votre équipe par e-mail, Slack, PagerDuty, etc. La liste déroulante vous permet de rechercher des membres d'équipe et des intégrations connectées. Lorsqu'une `@notification` est ajoutée à cette section, celle-ci est automatiquement ajoutée au champ de [message](#message) :
 
@@ -68,12 +72,12 @@ Espace disque faible @ops-team@company.com
 
 Vous pouvez envoyer des `@notifications` de différentes façons :
 
-#### Par e-mail
+#### E-mail
 
 * Informez un utilisateur Datadog par e-mail en ajoutant `@<ADRESSE_EMAIL_UTILISATEUR_DD>`. **Remarque** : une adresse e-mail associée à une invitation utilisateur Datadog en attente est considérée comme inactive et ne reçoit aucune notification.
 * Pour informer par e-mail un utilisateur en dehors de Datadog, ajoutez `@<EMAIL>`.
 
-#### Via des intégrations
+#### Intégrations
 
 Informez votre équipe par l'intermédiaire des intégrations connectées en utilisant la syntaxe `@<NOM_INTÉGRATION>-<VALEURS>`. Vous trouverez ci-dessous la liste des préfixes ainsi que des exemples de liens :
 
@@ -146,10 +150,25 @@ Par exemple, si votre log monitor est regroupé en fonction de la facette `facet
 ```text
 {{ facet.name }}
 ```
+**Exemple** : pour inclure les informations dans un groupe de log monitors à alertes multiples, effectuez un regroupement selon `@machine_id` :
 
-Si votre facette comporte des points, placez-la entre crochets. Par exemple :
 ```text
-{{ [facet.with.dot].name }}
+Cette alerte a été déclenchée sur {{ @machine_id.name }}
+```
+Si votre facette comporte des points, placez-la entre crochets. Par exemple :
+
+```text
+{{ [@network.client.ip].name }}
+```
+
+#### Variables des monitors composite
+
+Les monitors composite peuvent accéder à la valeur associée aux sous-monitors au moment du déclenchement de l'alarme.
+
+Par exemple, si votre monitor composite possède un sous-monitor `a`, vous pouvez inclure la valeur de `a` avec :
+
+```text
+{{ a.value }}
 ```
 
 ### Variables conditionnelles
@@ -180,6 +199,7 @@ Voici la liste des variables conditionnelles disponibles :
 | `{{^is_alert_to_warning}}` | Le monitor ne passe pas d'un état `ALERT` à un état `WARNING`.          |
 | `{{#is_no_data_recovery}}` | Le monitor est rétabli depuis un état `NO DATA`.                                |
 | `{{^is_no_data_recovery}}` | Le monitor n'est pas rétabli depuis un état `NO DATA`.                        |
+| `{{#is_priority 'valeur'}}`  | Le monitor possède la priorité `valeur`, qui va de `P1` à `P5`.   |
 
 #### Exemples
 

@@ -5,11 +5,11 @@ description: Description détaillée des erreurs de test API
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: Blog
-  text: Présentation de Datadog Synthetics
-- link: synthetics/
+  text: Présentation de la surveillance Synthetic Datadog
+- link: /synthetics/
   tag: Documentation
   text: Gérer vos checks
-- link: synthetics/browser_tests
+- link: /synthetics/browser_tests/
   tag: Documentation
   text: Configurer un test Browser
 ---

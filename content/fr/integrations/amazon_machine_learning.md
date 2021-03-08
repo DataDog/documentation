@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez le nombre de prédictions et les échecs d'AWS\_Machine\_Learning."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_machine_learning/'
+draft: false
 git_integration_title: amazon_machine_learning
 has_logo: true
 integration_title: Amazon Machine Learning
@@ -26,7 +27,7 @@ Amazon Machine Learning est un service qui facilite l'utilisation de la technolo
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de Machine Learning.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

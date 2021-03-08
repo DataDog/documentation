@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Consultez et commentez des stories dans votre flux d'événements Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/pivotal/'
+draft: false
 git_integration_title: pivotal
 has_logo: true
 integration_title: "Pivotal\_Tracker"
@@ -26,7 +27,7 @@ Connectez Pivotal Tracker à Datadog pour :
 - Consulter et discuter de la progression de vos articles dans votre flux d'événements.
 - Corréler l'achèvement de votre story avec d'autres événements et métriques de votre système.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

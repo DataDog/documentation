@@ -18,6 +18,10 @@ further_reading:
     tag: Documentation
     text: Gérer les utilisateurs à l'aide de l'API Utilisateurs
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
+{{< /site-region >}}
+
 La section **User Management** de Datadog vous permet de gérer vos utilisateurs et les rôles qui leur sont associés. Basculez entre la vue sous forme de liste et la vue sous forme de tableau en cliquant sur **List View** ou **Grid View** à droite :
 
 {{< img src="account_management/users/user_page_list.png" alt="Page User Management avec vue sous forme de liste" >}}
@@ -30,7 +34,7 @@ Pour ajouter des membres à votre organisation :
 2. Cliquez sur **Invite Users** en haut à droite de la page.
 3. Saisissez l'adresse e-mail de l'utilisateur que vous souhaitez inviter à rejoindre votre compte Datadog.
 4. Attribuez-lui au moins un [rôle d'utilisateur][1].
-**Remarque** : les utilisateurs disposant d'un Standard Access peuvent inviter un utilisateur en lui attribuant le même rôle qui leur est attribué. Les utilisateurs disposant d'un Privileged Access peuvent inviter un utilisateur en lui attribuant le rôle de leur choix.
+**Remarque** : les utilisateurs disposant de l'autorisation Invite User peuvent attribuer à un utilisateur un rôle dont ils disposent. Les utilisateurs qui disposent à la fois des autorisations Invite User et Access Management peuvent attribuer à un utilisateur n'importe quel rôle.
 5. Cliquez sur **Send Invites**.
 
 {{< img src="account_management/users/invite_user.png" alt="Ajouter un utilisateur à votre organisation"  style="width:80%;">}}
@@ -49,7 +53,7 @@ Dans la vue sous forme de tableau, passez votre curseur sur la case de l'utilisa
 
 ## Modifier les rôles d'un utilisateur
 
-Seuls les utilisateurs disposant d'un Privileged Access, comme les utilisateurs avec le rôle Admin Datadog, peuvent modifier le rôle d'un utilisateur :
+Seuls les utilisateurs disposant de l'autorisation Access Management, comme les utilisateurs avec le rôle Admin Datadog, peuvent modifier le rôle d'un utilisateur :
 
 1. Accédez à la page User Management.
 2. Sélectionnez le bouton *Edit* à droite de la ligne de l'utilisateur en question.
@@ -62,7 +66,7 @@ Consultez la section dédiée au [contrôle d'accès en fonction des rôles][2] 
 
 ## Désactiver des membres existants
 
-Seuls les utilisateurs disposant d'un Privileged Access, comme les utilisateurs avec le rôle Admin Datadog, peuvent désactiver des membres. Vous ne pouvez pas supprimer définitivement les utilisateurs, car ils peuvent être propriétaires d'événements ou encore de dashboards à ne pas supprimer. Lorsqu'un utilisateur est désactivé, toutes les clés d'application qu'il a générées sont automatiquement révoquées.
+Seuls les utilisateurs disposant de l'autorisation Access Management, comme les utilisateurs avec le rôle Admin Datadog, peuvent désactiver des membres. Il est impossible de supprimer définitivement des utilisateurs, car ils peuvent être propriétaires de dashboards ou de monitors. De plus, leur ID est utilisé pour consigner leurs actions. Lorsqu'un utilisateur est désactivé, toutes les clés d'application qu'il a générées sont automatiquement révoquées.
 
 1. Accédez à la page User Management.
 2. Sélectionnez le bouton *Edit* à droite de la ligne de l'utilisateur en question.

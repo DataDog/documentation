@@ -23,6 +23,10 @@ Consultez la section ci-dessous pour savoir comment associer vos logs PHP et vos
 
 ## Injecter manuellement des ID de trace et de span
 
+<div class="alert alert-warning">
+Veuillez noter que la fonction <code>\DDTrace\trace_id()</code> a été ajoutée avec la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
+</div>
+
 Pour associer vos logs et vos traces, vos logs doivent contenir les attributs `dd.trace_id` et `dd.span_id`, qui contiennent respectivement votre ID de trace et votre ID de span.
 
 Si vous n'utilisez pas une [intégration de log de Datadog][1] pour analyser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `dd.trace_id` et  `dd.span_id` sont analysés en tant que chaînes de caractères et remappés grâce au [remappeur de traces][2]. Pour en savoir plus, consultez la FAQ [Pourquoi mes logs mis en corrélation ne figurent-ils pas dans le volet des ID de trace ?][3].
@@ -31,10 +35,9 @@ Par exemple, ces deux attributs seront ajoutés à vos logs de la manière suiva
 
 ```php
   <?php
-  $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
-      $span->getTraceId(),
+      \DDTrace\trace_id(),
       \dd_trace_peek_span_id()
   );
   my_error_logger('Error message.' . $append);
@@ -46,13 +49,9 @@ Si le logger implémente la [bibliothèque **monolog/monolog**][4], utilisez `Lo
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-      if (null === $span) {
-          return $record;
-      }
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
-          $span->getTraceId(),
+          \DDTrace\trace_id(),
           \dd_trace_peek_span_id()
       );
       return $record;
@@ -65,13 +64,8 @@ Si votre application utilise des logs au format json, au lieu d'ajouter les ID t
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
-      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-      if (null === $span) {
-          return $record;
-      }
-
       $record['dd'] = [
-          'trace_id' => $span->getTraceId(),
+          'trace_id' => \DDTrace\trace_id(),
           'span_id'  => \dd_trace_peek_span_id(),
       ];
 

@@ -12,6 +12,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez le statut et le nombre d'instances dans vos groupes Auto\_Scaling."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_auto_scaling/'
+draft: false
 git_integration_title: amazon_auto_scaling
 has_logo: true
 integration_title: AWS Auto Scaling
@@ -32,7 +33,7 @@ Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'
 - Recueilliez des métriques EC2 pour les hosts des groupes Auto Scaling comportant le tag `autoscaling_group`.
 - Recueilliez des métriques Auto Scaling sur le groupe associé aux tags `autoscaling_group` et `autoscalinggroupname`.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

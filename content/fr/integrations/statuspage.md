@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Intégration Datadog/StatusPage.io.
 doc_link: 'https://docs.datadoghq.com/integrations/statuspage/'
+draft: false
 git_integration_title: statuspage
 has_logo: true
 integration_title: StatusPage.io
@@ -15,14 +16,14 @@ kind: integration
 manifest_version: '1.0'
 name: statuspage
 public_title: Intégration Datadog/StatusPage.io
-short_description: Intégration Datadog/StatusPage.io
+short_description: Intégration Datadog/StatusPage.io.
 version: '1.0'
 ---
 ## Présentation
 
 Enregistrez les incidents de la StatusPage de vos services tiers afin de les corréler avec vos propres métriques et événements. Vous n'avez pas besoin de posséder votre propre compte StatusPage.io pour bénéficier de cette intégration.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

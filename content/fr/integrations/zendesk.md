@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez le nombre de nouveaux tickets par rapport aux tickets résolus et générez automatiquement des tickets à partir des monitors Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/zendesk/'
+draft: false
 git_integration_title: zendesk
 has_logo: true
 integration_title: Zendesk
@@ -30,7 +31,7 @@ Intégrez Zendesk à Datadog pour :
 - Recevoir un événement Datadog chaque fois qu'un nouveau ticket Zendesk est ouvert.
 - Créer et mettre à jour des tickets en mentionnant `@zendesk`.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -60,7 +61,7 @@ Les administrateurs Zendesk peuvent utiliser l'[endpoint HTTP][3] du log Datadog
 
 Pour créer une cible :
 
-1. Accédez à `https://<VOTRE_DOMAINE>.zendesk.com/agent/admin/extensions`.
+1. Accédez `https://<VOTRE_DOMAINE>.zendesk.com/agent/admin/extensions`.
 2. Ajoutez une nouvelle cible avec l'argument URL `https://http-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DATADOG>?ddsource=zendesk`. Indiquez la **Method** POST et le**Content Type** JSON.
 
 {{% /tab %}}

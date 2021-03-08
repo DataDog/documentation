@@ -83,11 +83,24 @@ Contrairement à de nombreux checks, le check Process ne surveille aucun process
 
 [Lancez la sous-commande `status` de l'Agent][4] et cherchez `process` dans la section Checks.
 
+### Précisions sur les métriques
+
+**Remarque** : certaines métriques ne sont pas disponibles sous Linux ou OSX :
+
+- Les métriques E/S de processus ne sont **pas** disponibles sous Linux ou OSX. En effet, seul le propriétaire du processus peut lire les fichiers que l'Agent doit lire (`/proc//io`). Pour en savoir plus, [consultez la FAQ sur l'Agent][5].
+- `system.cpu.iowait` n'est pas disponible sous Windows.
+
+Toutes les métriques sont envoyées pour chaque `instance` configurée dans process.yaml et reçoivent le tag `nom_processus:<nom_instance>`.
+
+La métrique `system.processes.cpu.pct` envoyée par ce check est uniquement fiable pour les processus actifs pendant plus de 30 secondes. Sa valeur ne doit pas être considérée comme exacte pour les processus actifs sur de plus courtes périodes.
+
+Pour obtenir la liste des métriques, consultez la section [Métriques](#metriques).
+
 ## Données collectées
 
 ### Métriques
 {{< get-metrics-from-git "process" >}}
-Fiable uniquement pour les processus actifs pendant plus de 30 secondes. Sa valeur ne doit pas être considérée comme exacte pour les processus actifs sur de plus courtes périodes.
+
 
 ### Événements
 
