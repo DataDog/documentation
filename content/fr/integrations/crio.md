@@ -1,6 +1,11 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    crio: assets/dashboards/overview.json
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/crio/README.md'
 display_name: CRI-O
+draft: false
 git_integration_title: crio
 guid: 40fd8230-d178-4e8e-9e6a-6ce4acc19a85
 integration_id: cri-o
@@ -33,7 +39,7 @@ supported_os:
 
 Ce check surveille [CRI-O][1].
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -41,13 +47,13 @@ L'intégration repose sur l'option `--enable-metrics` de CRI-O, qui est désacti
 
 ### Configuration
 
-1. Modifiez le fichier `crio.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance CRI-O. Consultez le [fichier d'exemple crio.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `crio.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance CRI-O. Consultez le [fichier d'exemple crio.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][4].
+2. [Redémarrez l'Agent][3].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `crio` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `crio` dans la section Checks.
 
 ## Données collectées
 
@@ -60,7 +66,8 @@ L'intégration Datadog/CRI-O recueille des métriques sur l'utilisation du proce
 
 ### Checks de service
 
-CRI-O comprend un check de service relatif à l'accessibilité au endpoint des métriques.
+**crio.prometheus.health** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de métriques.
 
 ### Événements
 
@@ -68,12 +75,11 @@ CRI-O n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: http://cri-o.io
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://github.com/DataDog/integrations-core/blob/master/crio/datadog_checks/crio/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/crio/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[2]: https://github.com/DataDog/integrations-core/blob/master/crio/datadog_checks/crio/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-information
+[5]: https://github.com/DataDog/integrations-core/blob/master/crio/metadata.csv
+[6]: https://docs.datadoghq.com/fr/help/

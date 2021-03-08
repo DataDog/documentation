@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Envoyez des métriques depuis Pusher vers Datadog pour consulter et surveiller l'engagement d'une app.
 doc_link: 'https://docs.datadoghq.com/integrations/pusher/'
+draft: false
 git_integration_title: pusher
 has_logo: true
 integration_title: Pusher
@@ -26,7 +27,7 @@ Surveillez vos données de connexion et vos messages en temps réel sur l'ensemb
 - Obtenir des données statistiques détaillées concernant la taille du message, notamment la moyenne, la médiane, le maximum et le 95e centile
 - Surveiller l'utilisation des ressources en fonction des calendriers de facturation
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -1,16 +1,18 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - collaboration
   - issue tracking
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md'
 display_name: Gremlin
+draft: false
 git_integration_title: gremlin
 guid: 087cb38a-d119-4db6-8c54-30700fc1f355
 integration_id: gremlin
@@ -39,7 +41,7 @@ Intégrez Gremlin à vos [événements][1] Datadog pour fournir davantage de con
 
 ![snapshot][3]
 
-## Implémentation
+## Configuration
 
 ### Configuration
 

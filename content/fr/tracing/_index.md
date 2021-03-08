@@ -82,27 +82,39 @@ Lors d'une panne, [analysez les performances par tag sur n'importe quelle span][
 
 {{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Rétention et ingestion des traces"  style="width:100%;">}}
 
+### Générer des métriques custom à partir de l'ensemble des spans
+
+[Générez des métriques][12] avec une période de rétention de 15 mois à partir de l'ensemble des spans ingérées, afin de créer et de surveiller des indicateurs de performance et d'activité clés.
+
+{{< img src="tracing/index/SpantoMetricsPreview.png" alt="Générer des métriques custom à partir des spans ingérées"  style="width:100%;">}}
+
 ### Suivi des déploiements
 
-[Surveillez les performances de vos services][12] et comparez les versions pour les déploiements progressifs, bleus/verts, fantômes et Canary.
+[Surveillez les performances de vos services][13] et comparez les versions pour les déploiements progressifs, bleus/verts, fantômes et Canary.
 
 {{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions sur la page Service"  style="width:100%;">}}
 
 ### Associer vos logs à vos traces distribuées
 
-[Visualisez vos logs d'application][13] en même temps que la trace associée pour une requête distribuée spécifique grâce à l'injection automatique de l'ID de trace.
+[Visualisez vos logs d'application][14] en même temps que la trace associée pour une requête distribuée spécifique grâce à l'injection automatique de l'ID de trace.
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Associer vos logs à vos traces"  style="width:100%;">}}
 
+### Associer la fonctionnalité RUM aux traces
+
+[Associez vos sessions RUM][15] à vos traces pour visualiser les traces spécifiques qui correspondent aux expériences utilisateur ainsi qu'aux problèmes signalés.
+
+{{< img src="tracing/index/RumTraces.gif" alt="Associer les sessions RUM aux traces"  style="width:100%;">}}
+
 ### Associer vos données de test Synthetic à vos traces
 
-[Associez les tests d'API simulés][14] aux traces pour identifier l'origine des échecs parmi vos requêtes front-end, réseau et back-end.
+[Associez les tests API simulés][16] aux traces pour identifier l'origine des échecs parmi vos requêtes frontend, réseau et backend.
 
 {{< img src="tracing/index/Synthetics.gif" alt="Tests Synthetics"  style="width:100%;">}}
 
 ### Profileur en continu
 
-[Améliorez l'efficacité du code][15] avec le profiling continu en production, qui vous permet d'identifier les lignes de code qui sollicitent le plus le processeur, la mémoire et l'E/S.
+[Améliorez l'efficacité du code][17] avec le profiling continu en production, qui vous permet d'identifier les lignes de code qui sollicitent le plus le processeur, la mémoire et l'E/S.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
@@ -121,7 +133,9 @@ Lors d'une panne, [analysez les performances par tag sur n'importe quelle span][
 [9]: /fr/tracing/trace_search_and_analytics/#live-search-for-15-minutes
 [10]: /fr/tracing/trace_search_and_analytics/#live-analytics-for-15-minutes
 [11]: /fr/tracing/trace_retention_and_ingestion/
-[12]: /fr/tracing/deployment_tracking/
-[13]: /fr/tracing/connect_logs_and_traces/
-[14]: /fr/synthetics/apm/
-[15]: /fr/tracing/profiler/
+[12]: /fr/tracing/generate_metrics/
+[13]: /fr/tracing/deployment_tracking/
+[14]: /fr/tracing/connect_logs_and_traces/
+[15]: /fr/real_user_monitoring/connect_rum_and_traces
+[16]: /fr/synthetics/apm/
+[17]: /fr/tracing/profiler/

@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Consultez les alertes Opsmatic et validez-les dans votre flux d'événements Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/opsmatic/'
+draft: false
 git_integration_title: opsmatic
 has_logo: true
 integration_title: Opsmatic
@@ -24,7 +25,7 @@ Associez Opsmatic à Datadog pour :
 - Être immédiatement informé de toutes les modifications critiques
 - Obtenir une visibilité complète de l'historique et de l'état en direct de tous vos hosts
 
-## Implémentation
+## Configuration
 
 ### Installation
 

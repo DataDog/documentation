@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez des métriques liées au cache, les requêtes d''origine, les codes de réponse, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/fastly/'
+draft: false
 git_integration_title: fastly
 has_logo: true
 integration_title: Fastly
@@ -23,7 +24,7 @@ version: '1.0'
 
 Connectez-vous à Fastly pour consulter les principales métriques Fastly (telles que la taille de l'en-tête et la couverture de cache) en contexte avec le reste de vos métriques Datadog.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -63,7 +64,7 @@ Configurez l'endpoint Datadog de façon à transmettre les logs Fastly à votre 
 
 ##### Configurer l'endpoint Syslog
 
-1. Attribuez un nom au endpoint, p. ex. `Datadog`.
+1. Attribuez un nom à l'endpoint, p. ex. `Datadog`.
 2. Configurez le format de log de façon à inclure **[le format de log Datadog/Fastly conseillé][2]** en précisant d'abord [votre clé d'API Datadog][3].
 
     ```text

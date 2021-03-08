@@ -13,6 +13,32 @@ Si vous avez configuré le profileur et que vous ne voyez pas les profils sur la
 - Type et version du système d'exploitation (par exemple, Linux Ubuntu 14.04.3)
 - Type, version et fournisseur du runtime (par exemple, Java OpenJDK 11 AdoptOpenJDK)
 
+## Réduire la charge de la configuration par défaut
+
+Si la charge de la configuration par défaut n'est pas acceptable, vous pouvez utiliser le profileur avec les paramètres de configuration minimale. Voici ce qui distingue la configuration minimale par rapport à la configuration par défaut :
+
+- Augmentation du seuil d'échantillonnage à 500 ms pour les événements `ThreadSleep`, `ThreadPark` et `JavaMonitorWait`, contre 100 ms par défaut
+- Désactivation des événements `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample` et `ExceptionCount`
+
+Pour utiliser la configuration minimale, assurez-vous que vous disposez de la version `0.70.0` de `dd-java-agent`, puis remplacez l'appel de votre service par ce qui suit :
+
+```
+java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=minimal -jar <VOTRE_SERVICE>.jar <VOS_FLAGS_DE_SERVICE>
+```
+
+## Augmenter la granularité des informations du profileur
+
+Si vous souhaitez augmenter la granularité de vos données de profiling, vous pouvez spécifier une configuration `comprehensive`. Veuillez noter que cette approche améliore la granularité, mais augmente également la charge du profileur. Voici ce qui distingue cette configuration de la configuration par défaut :
+
+- Réduction du seuil d'échantillonnage à 10 ms pour les événements `ThreadSleep`, `ThreadPark` et `JavaMonitorWait`, contre 100 ms par défaut
+- Activation des événements `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample` et `ExceptionCount`
+
+Pour utiliser cette configuration, assurez-vous que vous disposez de la version `0.70.0` de `dd-trace-java`, puis remplacez l'appel de votre service par ce qui suit :
+
+```
+java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=comprehensive -jar <VOTRE_SERVICE>.jar <VOS_FLAGS_DE_SERVICE>
+```
+
 ## Supprimer les données sensibles des profils
 
 Si vos propriétés système contiennent des données sensibles comme des noms d'utilisateurs ou des mots de passe, désactivez l'événement de propriété système en créant un [fichier modèle de remplacement](#creation-et-utilisation-d-un-fichier-modele-de-remplacement-jfr) `jfp` avec `jdk.InitialSystemProperty` désactivé :
@@ -30,6 +56,17 @@ Pour désactiver le profiling d'allocations, désactivez les événements suivan
 {{< code-block lang="text" filename="example-template.jfp" >}}
 jdk.ObjectAllocationInNewTLAB#enabled=false
 jdk.ObjectAllocationOutsideTLAB#enabled=false
+jdk.OldObjectSample#enabled=false
+{{< /code-block >}}
+
+[Découvrez comment utiliser des modèles de remplacement.](#creating-and-using-a-jfr-template-override-file)
+
+## Détection d'une fuite de mémoire ralentissant le récupérateur de mémoire
+
+Pour désactiver la détection des fuites de mémoire, désactivez l'événement suivant dans votre [fichier modèle de remplacement](evenements-d-allocation-importante-entrainant-une-surcharge-du-profileur) `jfp` :
+
+{{< code-block lang="text" filename="example-template.jfp" >}}
+jdk.OldObjectSample#enabled=false
 {{< /code-block >}}
 
 [Découvrez comment utiliser des modèles de remplacement.](#creating-and-using-a-jfr-template-override-file)

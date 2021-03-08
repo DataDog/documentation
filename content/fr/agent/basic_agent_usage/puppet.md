@@ -156,7 +156,7 @@ Pour activer l'envoi de rapports sur les exécutions Puppet vers votre flux Data
 
 5. (Facultatif) Activez le tagging des rapports avec des faits :
 
-    Vous pouvez ajouter des tags aux rapports qui sont envoyés à Datadog sous la forme d'événements. Ces tags peuvent provenir de faits Puppet propres au nœud sur lequel porte le rapport. Ils doivent être individuels et ne pas comprendre de faits structurés (hashs, tableaux, etc.) pour garantir la lisibilité. Pour activer le tagging, définissez le paramètre `datadog_agent::reports::report_fact_tags` sur la valeur de tableau des faits. Par exemple, `["virtual","trusted.extensions.pp_role","operatingsystem"]` donne trois tags distincts par événement de rapport.
+    Vous pouvez ajouter des tags aux rapports qui sont envoyés à Datadog sous la forme d'événements. Ces tags peuvent provenir de faits Puppet propres au nœud sur lequel porte le rapport. Ils doivent être individuels et ne pas comprendre de faits structurés (hashs, tableaux, etc.) pour garantir la lisibilité. Pour activer le tagging des faits standard, définissez le paramètre `datadog_agent::reports::report_fact_tags` sur la valeur de tableau des faits, par exemple `["virtual","operatingsystem"]`. Pour activer le tagging des faits de confiance, définissez le paramètre `datadog_agent::reports::report_trusted_fact_tags` sur la valeur de tableau des faits, par exemple `["certname","extensions.pp_role","hostname"]`.
 
     Remarque : la modification de ces paramètres nécessite un redémarrage de pe-puppetserver (ou de puppetserver) pour lancer une relecture du processeur de rapports. Assurez-vous que les changements sont déployés avant de redémarrer le(s) service(s).
 
@@ -240,7 +240,7 @@ Ces variables peuvent être définies dans la classe `datadog_agent` afin de con
 | `agent_version`                         | Cette variable vous permet d'imposer l'installation d'une version mineure spécifique de l'Agent, par exemple :`1:7.16.0-1`. Pour installer la dernière version, n'indiquez aucune valeur.                                                             |
 | `collect_ec2_tags`                      | Définissez cette variable sur `true` pour recueillir les tags EC2 personnalisés d'une instance en tant que tags de l'Agent.                                                                                                                             |
 | `collect_instance_metadata`             | Définissez cette variable sur `true` pour recueillir les métadonnées EC2 personnalisées d'une instance en tant que tags de l'Agent.                                                                                                                                |
-| `datadog_site`                          | Le site Datadog auquel envoyer les données (Agents v6 et v7 uniquement). Valeur par défaut : `datadoghq.com`, peut être définie sur `datadoghq.eu` ou `us3.datadoghq.com`.                                                         |
+| `datadog_site`                          | Le site Datadog auquel envoyer les données (Agents v6 et v7 uniquement). Valeur par défaut : `datadoghq.com`, peut être définie sur `datadoghq.eu` ou `us3.datadoghq.com`.                                                          |
 | `dd_url`                                | L'URL du serveur entrant de Datadog. Il est peu probable que vous deviez la modifier. Cette variable remplace `datadog_site`.                                                                                                 |
 | `host`                                  | Remplace le hostname du nœud.                                                                                                                                                                  |
 | `local_tags`                            | Un tableau de chaînes `<KEY:VALUE>` définies en tant que tags pour le nœud.                                                                                                                             |
@@ -255,7 +255,18 @@ Ces variables peuvent être définies dans la classe `datadog_agent` afin de con
 | `agent_extra_options`<sup>1</sup>       | Un hash permettant de fournir des options de configuration supplémentaires (Agent v6 et v7 uniquement).                                                                                                                       |
 | `hostname_extraction_regex`<sup>2</sup> | Une expression régulière utilisée pour extraire le groupe de capture associé au hostname, afin de transmettre les résultats de l'exécution dans Datadog, plutôt que de transmettre le nom du nœud Puppet. Exemple :<br>`'^(?<hostname>.*\.datadoghq\.com)(\.i-\w{8}\..*)?$'` |
 
-(1) La variable `agent_extra_options` est utilisée pour contrôler précisément des options de configuration supplémentaires de l'Agent v6 ou v7. Le deep merge effectué est susceptible de remplacer les options des paramètres de la classe `datadog_agent`.
+(1) La variable `agent_extra_options` est utilisée pour contrôler précisément des options de configuration supplémentaires de l'Agent v6 ou v7. Le deep merge effectué est susceptible de remplacer les options des paramètres de la classe `datadog_agent`. Exemple :
+
+```
+class { "datadog_agent":
+    < vos autres arguments de la classe >,
+    agent_extra_options => {
+        use_http => true,
+        use_compression => true,
+        compression_level => 6,
+    },
+}
+```
 
 (2) La variable `hostname_extraction_regex` s'avère utile lorsque le module Puppet et l'Agent Datadog transmettent des hostnames différents pour un même host dans la liste d'infrastructures.
 

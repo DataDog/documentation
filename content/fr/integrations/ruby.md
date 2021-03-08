@@ -6,6 +6,7 @@ ddtype: library
 dependencies: []
 description: Envoyez des métriques custom à partir de vos applications Ruby grâce aux bibliothèques client de Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/ruby/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitoring-rails-with-datadog/'
     tag: Blog

@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez l''utilisation de vos index, le nombre de requêtes réussies, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/awscloudsearch/'
+draft: false
 git_integration_title: amazon_cloudsearch
 has_logo: true
 integration_title: Amazon CloudSearch
@@ -27,7 +28,7 @@ Amazon CloudSearch est un service géré économique qui est basé sur le cloud
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de CloudSearch.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

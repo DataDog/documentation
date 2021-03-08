@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Redshift."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_redshift/'
+draft: false
 git_integration_title: amazon_redshift
 has_logo: true
 integration_title: Amazon Redshift
@@ -26,7 +27,7 @@ Amazon Redshift est un service d'entrepôt de données entièrement géré qui 
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de Redshift.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

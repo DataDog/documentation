@@ -1,6 +1,7 @@
 ---
 "assets":
   "dashboards": {}
+  "metrics_metadata": metadata.csv
   "monitors": {}
   "saved_views": {}
   "service_checks": assets/service_checks.json
@@ -8,16 +9,17 @@
 - monitoring
 - collaboration
 - notification
-"creates_events": !!bool "false"
-"ddtype": "check"
+"creates_events": false
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md"
 "display_name": "Amixr"
+"draft": false
 "git_integration_title": "amixr"
 "guid": "56e3b585-27b4-4a04-b528-9c1adfecf387"
 "integration_id": "amixr"
 "integration_title": "Amixr"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "integration"
 "maintainer": "ildar@amixr.io"
 "manifest_version": "1.0.0"
