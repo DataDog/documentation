@@ -27,7 +27,7 @@ To get notified when a private beta is available for the **Node**, **Ruby**, **P
 
 The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 (version 8u262+)][2] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][3]+ or [6.20.2][3]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. If you are already using Datadog, upgrade your Agent to version [7.20.2][3]+ or [6.20.2][3]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
@@ -37,13 +37,13 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 
      **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
-3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Update to your service invocation should look like:
+3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. The update to your service invocation should look like:
 
     ```diff
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][4].
+4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][4].
 
 
 **Note**:
@@ -57,7 +57,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
     java -jar my-service.jar -javaagent:dd-java-agent.jar ...
     ```
 
-- We strongly recommend that you specify the `service` and `version` as this gives you the ability to slice and dice your profiles across these dimensions. Use environment variables to set the parameters:
+- Datadog strongly recommends that you specify the `service` and `version` as this gives you the ability to slice and dice your profiles across these dimensions. Use environment variables to set the parameters:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
@@ -101,8 +101,7 @@ pip install ddtrace
 
 **Note**: Profiling requires the `ddtrace` library version 0.40+.
 
-If you're using a platform where `ddtrace` binary distribution is not
-available, you will need to install a development environment.
+If you are using a platform where `ddtrace` binary distribution is not available, install a development environment.
 
 For example, on Alpine Linux, this can be done with:
 ```shell
@@ -111,8 +110,7 @@ apk install gcc musl-dev linux-headers
 
 **Usage**
 
-To automatically profile your code, set the `DD_PROFILING_ENABLED` environment
-variable to `true` when you use `ddtrace-run`:
+To automatically profile your code, set the `DD_PROFILING_ENABLED` environment variable to `true` when you use `ddtrace-run`:
 
     DD_PROFILING_ENABLED=true \
     DD_ENV=prod \
@@ -120,14 +118,11 @@ variable to `true` when you use `ddtrace-run`:
     DD_VERSION=1.0.3 \
     dd-trace-run python app.py
 
-It is strongly recommended that you add tags like `service` or `version`, as they
-provide the ability to slice and dice your profiles across these dimensions,
-enhancing your overall product experience. See [Configuration][#configuration] below.
+It is strongly recommended that you add tags like `service` or `version`, as they provide the ability to slice and dice your profiles across these dimensions. See [Configuration][#configuration] below.
 
 After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][2].
 
-If you want to manually control the lifecycle of the profiler, use the
-`ddtrace.profiling.profiler.Profiler` object:
+If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.profiler.Profiler` object:
 
 ```python
 from ddtrace.profiling import Profiler
@@ -171,7 +166,7 @@ You can configure the profiler using the following environment variables:
 | `DD_SERVICE`            | `service`                      | String                     | The Datadog [service][3] name.                                      |
 | `DD_ENV`                | `env`                          | String                     | The Datadog [environment][4] name, for example, `production`.       |
 | `DD_VERSION`            | `version`                      | String                     | The version of your application.                                    |
-| `DD_TAGS`               | `tags`                         | String / Dictionary        | Tags to apply to an uploaded profile. If set via environment variable Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`. If set via keyword argument, must be a dictionary where keys are tag names and values are tag values such as:`{"layer": "api", "team": "intake"}`.  |
+| `DD_TAGS`               | `tags`                         | String / Dictionary        | Tags to apply to an uploaded profile. If set with an environment variable, it must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`. If set with keyword argument, it must be a dictionary where keys are tag names and values are tag values such as:`{"layer": "api", "team": "intake"}`.  |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/profiling
