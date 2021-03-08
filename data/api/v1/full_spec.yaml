@@ -1979,6 +1979,7 @@ components:
       required:
       - data_source
       - compute
+      - name
       type: object
     FormulaAndFunctionEventQueryGroupBy:
       description: List of objects used to group by.
@@ -2075,6 +2076,7 @@ components:
       required:
       - data_source
       - query
+      - name
       type: object
     FormulaAndFunctionProcessQueryDataSource:
       description: Data sources that rely on the process backend.
@@ -2105,6 +2107,7 @@ components:
           type: string
         name:
           description: Name of query for use in formulas.
+          example: query_errors
           type: string
         sort:
           $ref: '#/components/schemas/QuerySortOrder'
@@ -2120,6 +2123,7 @@ components:
       required:
       - data_source
       - metric
+      - name
       type: object
     FormulaAndFunctionQueryDefinition:
       description: A formula and function query.
