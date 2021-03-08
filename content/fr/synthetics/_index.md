@@ -22,9 +22,7 @@ further_reading:
     tag: Documentation
     text: Dépannage de la surveillance Synthetic
 ---
-{{< vimeo 447241955 >}}
-
-<br/>
+{{< img src="synthetics/synthetics_home.png" alt="Page d'accueil Surveillance Synthetic" >}}
 
 Les tests Synthetic vous permettent d'observer le fonctionnement de vos systèmes et applications à l'aide de **requêtes et actions simulées dans le monde entier**. Datadog **surveille le fonctionnement de vos pages Web et de vos API** du backend au frontend, et à différents niveaux du réseau (`HTTP`, `TCP`, `SSL` et `DNS`) de manière contrôlée et stable, en vous envoyant des alertes en cas de comportement anormal (régression, fonctionnalité défaillante, temps de réponse élevé, code de statut inattendu, etc.). **Les tests de bout en bout dans les environnements de production et d'intégration continue** améliorent la rapidité des équipes de développement, car ils éliminent tout risque que le code défectueux soit mis en production. **La configuration de SLO** sur les principaux endpoints et parcours utilisateur permet de mieux répondre aux objectifs de performance des applications et, à terme, de proposer une expérience client robuste.
 

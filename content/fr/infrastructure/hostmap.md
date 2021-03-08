@@ -36,8 +36,6 @@ Pour illustrer cela, imaginons que vous regroupez vos hosts en fonction de leur 
 
 {{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Groupes d'instances AZ hostmaps Datadog" >}}
 
-**Remarque** : votre hostmap Datadog est automatiquement regroupée par `availability-zone`. Si vous souhaitez modifier le regroupement par défaut, contactez l'assistance Datadog.
-
 ### Tags
 
 Des [tags][1] peuvent être appliqués automatiquement par des [intégrations Datadog][2] ou manuellement. Vous pouvez les utiliser pour filtrer vos hosts.
@@ -106,7 +104,7 @@ Comme vous pouvez le voir ci-dessous, si vous cliquez sur le groupe c3.2xlarge e
 
 {{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="Groupes rôles/instances hostmaps Datadog" style="width:80%;">}}
 
-### Placement d'une zone de disponibilité
+### Placement des zones de disponibilité
 
 Les hostmaps vous permettent de visualiser les distributions de machines dans chacune de vos zones de disponibilité. Filtrez les hosts pour afficher ceux qui vous intéressent et regroupez-les par zone de disponibilité pour découvrir immédiatement si les ressources doivent être rééquilibrées.
 
@@ -114,7 +112,7 @@ Dans l'exemple ci-dessous, la distribution des hosts est inégale avec `role:dan
 
 {{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Équilibre AZ hostmaps Datadog" style="width:80%;" >}}
 
-### Enquête sur un problème
+### Résolution de problèmes
 
 Imaginez que vous rencontrez un problème en production. Par exemple, les processeurs de certains de vos hosts sont encombrés, résultat : les temps de réponse sont longs. Les hostmaps peuvent vous aider à visualiser rapidement s'il y a une différence entre les hosts chargés et non chargés. Vous pouvez les regrouper par dimension que vous souhaitez étudier et déterminer visuellement si les serveurs posant problème appartiennent à un certain groupe.  
 Ainsi, vous pouvez procéder à un regroupement selon une zone de disponibilité, une région, un type d'instance, une image ou n'importe quel tag utilisé au sein de votre système.

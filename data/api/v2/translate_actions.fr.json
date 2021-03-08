@@ -64,7 +64,7 @@
   },
   "GetDashboardListItems": {
     "description": "Récupérez des définitions de dashboard de la liste de dashboards.",
-    "summary": "Récupérer une liste de dashboards"
+    "summary": "Récupérer les éléments d'une liste de dashboards"
   },
   "CreateDashboardListItems": {
     "description": "Ajoutez des dashboards à une liste de dashboards existante.",
@@ -224,13 +224,35 @@
     "request_schema_description": "Relation avec le rôle."
   },
   "ListLogsGet": {
-    "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs. [Les résultats sont paginés][1].\n\nCet endpoint et l'endpoint POST peuvent tous les deux être utilisés pour énumérer des logs.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que l'API Log List. Consultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "Récupérer une liste de logs rapide"
+    "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour visualiser vos logs les plus récents.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que cette API.\nConsultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Récupérer une liste de logs"
   },
   "ListLogs": {
-    "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs. [Les résultats sont paginés][1].\n\nCet endpoint et l'endpoint GET peuvent tous les deux être utilisés pour énumérer des logs.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que l'API Log List. Consultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "Récupérer une liste de logs",
+    "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs.\n[Les résultats sont paginés][1].\n\nUtilisez cet endpoint pour effectuer des recherches de logs complexes et leur appliquer des filtres avancés.\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que cette API.\nConsultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Search logs",
     "request_schema_description": "La requête de récupération d'une liste de logs."
+  },
+  "ListTagConfigurations": {
+    "description": "Renvoie tous les noms des métriques count, gauge, rate et de distribution configurées\n(avec des filtres supplémentaires, lorsqu'ils sont spécifiés).",
+    "summary": "Lister les configurations de tag"
+  },
+  "DeleteTagConfiguration": {
+    "description": "Supprime la configuration des tags d'une métrique. Ne peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
+    "summary": "Supprimer une configuration de Tag"
+  },
+  "ListTagConfigurationByName": {
+    "description": "Renvoie la configuration des tags pour le nom de métrique donné.",
+    "summary": "Lister les configurations de tag par nom"
+  },
+  "UpdateTagConfiguration": {
+    "description": "Mettez à jour la configuration des tags d'une métrique ou les agrégations en centile d'une métrique de distribution. Ne peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
+    "summary": "Mettre à jour une configuration de tag",
+    "request_schema_description": "Objet de requête qui inclut la métrique pour laquelle vous souhaitez modifier la configuration des tags."
+  },
+  "CreateTagConfiguration": {
+    "description": "Créez et définissez une liste des clés de tag pouvant être interrogées pour une métrique count, gauge, rate ou de distribution. Si vous le souhaitez, vous pouvez inclure des agrégations en centile sur n'importe quelle métrique de distribution. Ne peut être utilisé qu'avec des clés d'application provenant d'utilisateurs qui disposent de l'autorisation `Manage Tags for Metrics`.",
+    "summary": "Créer une configuration de Tag",
+    "request_schema_description": "Objet de requête qui inclut la métrique pour laquelle vous souhaitez configurer les tags."
   },
   "ListPermissions": {
     "description": "Renvoie la liste de toutes les autorisations, y compris le nom, la description et l'ID.",

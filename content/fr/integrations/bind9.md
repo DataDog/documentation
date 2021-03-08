@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/bind9/README.md'
 display_name: "BIND\_9"
+draft: false
 git_integration_title: bind9
 guid: bce6961c-4312-11e9-b210-d663bd873d93
 integration_id: bind9
@@ -36,45 +38,26 @@ Recueillez les métriques de votre serveur DNS Bind9.
 
 ![Snap][1]
 
-## Implémentation
+## Configuration
 
-Le check Bind9 n'est **PAS** inclus avec le paquet de l'[Agent Datadog][2].
+Le check Bind9 n'est **PAS** inclus avec le package de l'[Agent Datadog][2].
 
 ### Installation
 
-Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Bind9 sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][3] pour installer des checks avec une [version < 6.8 de l'Agent][4] ou avec l'[Agent Docker][5] :
+Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Bind9 sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][3] pour installer des checks avec une [version < 6.8 de l'Agent][4] ou avec l'[Agent Docker][5] :
 
-1. Installez le [kit de développement][6].
-2. Clonez le dépôt integrations-extras :
-
-   ```shell
-   git clone https://github.com/DataDog/integrations-extras.git.
-   ```
-
-3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
+1. [Téléchargez et lancez l'Agent Datadog][2].
+2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
    ```shell
-   ddev config set extras ./integrations-extras
+   datadog-agent integration install -t datadog-bind9==<INTEGRATION_VERSION>
    ```
 
-4. Pour générer le paquet `bind9`, exécutez :
-
-   ```shell
-   ddev -e release build bind9
-   ```
-
-5. [Téléchargez et lancez l'Agent Datadog][2].
-6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
-
-   ```shell
-   datadog-agent integration install -w <PATH_OF_BIND9_ARTIFACT>/<BIND9_ARTIFACT_NAME>.whl
-   ```
-
-7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
+3. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
 
 ### Configuration
 
-1. Modifiez le fichier `bind9.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#metriques) Bind9. Consultez le [fichier d'exemple bind9.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `bind9.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos [métriques](#metriques) Bind9. Consultez le [fichier d'exemple bind9.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
@@ -83,11 +66,11 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
      - URL: "<BIND_9_STATS_URL>"
    ```
 
-2. [Redémarrez l'Agent][10].
+2. [Redémarrez l'Agent][9].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][11] et cherchez `bind9` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][10] et cherchez `bind9` dans la section Checks.
 
 ## Compatibilité
 
@@ -110,18 +93,17 @@ Le check bind9 n'inclut actuellement aucun événement.
 
 ## Développement
 
-Consultez la [documentation principale sur les outils de développement][13] pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
+Consultez la [documentation principale sur les outils de développement][12] pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bind9/images/snapshot.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
 [4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [5]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[6]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[7]: https://docs.datadoghq.com/fr/getting_started/integrations/
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[9]: https://github.com/DataDog/integrations-extras/blob/master/bind9/datadog_checks/bind9/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
-[12]: https://github.com/DataDog/cookiecutter-datadog-check/blob/master/%7B%7Bcookiecutter.check_name%7D%7D/metadata.csv
-[13]: https://docs.datadoghq.com/fr/developers/
+[6]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: https://github.com/DataDog/integrations-extras/blob/master/bind9/datadog_checks/bind9/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
+[11]: https://github.com/DataDog/integrations-extras/blob/master/bind9/metadata.csv
+[12]: https://docs.datadoghq.com/fr/developers/

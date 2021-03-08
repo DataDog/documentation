@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Internet of Things.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_iot/'
+draft: false
 git_integration_title: amazon_iot
 has_logo: true
 integration_title: Amazon Internet of Things
@@ -22,11 +23,11 @@ version: '1.0'
 ---
 ## Présentation
 
-AWS IoT est une plateforme sur le cloud gérée qui permet aux appareils connectés d'interagir facilement et en toute sécurité avec des applications sur le cloud et d'autres appareils.
+AWS IoT est une plateforme cloud gérée qui permet aux appareils connectés d'interagir facilement et en toute sécurité avec des applications cloud et d'autres appareils.
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'IOT.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

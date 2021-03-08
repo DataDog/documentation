@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Simple Workflow Service.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_swf/'
+draft: false
 git_integration_title: amazon_swf
 has_logo: true
 integration_title: "Amazon\_Simple\_Workflow\_Service"
@@ -27,7 +28,7 @@ Amazon SWF aide les développeurs à concevoir, exécuter et mettre à l'échell
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de SWF.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

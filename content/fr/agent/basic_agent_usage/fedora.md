@@ -19,6 +19,8 @@ further_reading:
 
 Cette page présente les fonctionnalités de base de l'Agent Datadog pour Fedora. Si vous n'avez pas encore installé l'Agent, vous trouverez des instructions dans la documentation relative à l'[intégration de l'Agent Datadog][1].
 
+Les paquets sont disponibles en versions pour architectures x86 64 bits et Arm v8. Pour toute autre architecture, utilisez l'installation depuis les sources.
+
 **Remarque** : les versions 26 et ultérieures de Fedora sont prises en charge.
 
 ## Commandes
@@ -28,7 +30,7 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Description                        | Commandes                                                |
+| Rôle                        | Commande                                                |
 |------------------------------------|--------------------------------------------------------|
 | Démarrer l'Agent en tant que service           | `sudo systemctl start datadog-agent`                   |
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo systemctl stop datadog-agent`                    |
@@ -40,9 +42,9 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 | Exécuter un check                        | `sudo -u dd-agent -- datadog-agent check <NOM_CHECK>` |
 
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
-| Description                        | Commandes                                           |
+| Rôle                        | Commande                                           |
 |------------------------------------|---------------------------------------------------|
 | Démarrer l'Agent en tant que service           | `sudo service datadog-agent start`                |
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                 |
@@ -77,7 +79,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 [1]: /fr/integrations/
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
 Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 

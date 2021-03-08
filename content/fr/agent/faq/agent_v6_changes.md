@@ -37,9 +37,9 @@ Le [fichier de configuration principal de l'Agent][1] est désormais au format *
 Agent v5 `datadog.conf` --> Agent v6 `datadog.yaml`
 
 Pour appliquer le nouveau format et les nouveaux chemins de configuration de l'Agent, utilisez la commande suivante :
-{{< code-block lang="bash" >}}
+```bash
 sudo -u dd-agent -- datadog-agent import
-{{< /code-block >}}
+```
 
 Cette commande analyse le fichier `datadog.conf` existant et convertit les paramètres pris en charge au nouveau format dans `datadog.yaml`. Elle copie également les fichiers de configuration des checks actuellement activés. Pour en savoir plus, consultez [Upgrade l'Agent v6 de Datadog][2].
 
@@ -100,12 +100,12 @@ Les options de configuration de l'Agent suivantes ont été modifiées ou suppri
 
 L'Agent v6 charge tous les fichiers YAML valides présents dans `<RÉPERTOIRE_AGENT>/conf.d/<NOM_CHECK>.d/`. Vous avez ainsi la possibilité de créer des configurations complexes décomposées en plusieurs fichiers.
 
-Par exemple, le check `http_check` peut utiliser les fichiers de configuration suivants :
-{{< code-block lang="text" >}}
+Par exemple, les fichiers de configuration pour le `http_check` peuvent être :
+```text
 /etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
 └── frontend.yaml
-{{< /code-block >}}
+```
 
 L'Agent ne charge pas les fichiers de configuration présents dans les sous-répertoires du dossier `<NOM_CHECK>.d`. Par exemple, le fichier suivant ne sera **pas** chargé :
 ```text
@@ -389,7 +389,7 @@ Les options et tags suivants sont désormais obsolètes :
 
 L'Agent v6 intègre JMXFetch. Les changements sont les suivants :
 
-#### JAR JMXTerm
+#### Jmxterm
 
 L'Agent v6 n'intègre pas le JAR `jmxterm`. Pour télécharger et utiliser `jmxterm`, référez-vous au [projet upstream][1].
 

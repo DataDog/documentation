@@ -1,9 +1,12 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Vertica Overview: assets/dashboards/overview.json
   logs:
     source: vertica
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/vertica/README.md'
 display_name: Vertica
+draft: false
 git_integration_title: vertica
 guid: 884d1895-6791-487c-ac8e-7ccaad45db0b
 integration_id: vertica
@@ -41,11 +45,17 @@ Ce check permet de surveiller [Vertica][1] avec l'Agent Datadog.
 
 ### Installation
 
-Le check Vertica est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Vertica est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
 Modifiez le fichier `vertica.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Vertica. Consultez le [fichier d'exemple vertica.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+
+#### Activation de l'authentification SSL
+
+L'intégration Vertica prend en charge les connexions SSL vers Vertica. Pour activer cette fonctionnalité, définissez `use_tls` sur `true` dans le fichier `conf.yaml`.
+
+Remarque : pour la version 1.9.0 ou les versions antérieures de l'intégration Vertica, définissez plutôt `tls_verify` sur `true`. Pour l'ancienne configuration, si `tls_verify` est explicitement défini sur `true`, alors `use_tls` est défini sur `true`.
 
 #### Préparer Vertica
 
@@ -67,7 +77,7 @@ En outre, comme les métriques relatives à l'utilisation actuelle des licences 
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -99,8 +109,11 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 ### Checks de service
 
-- `vertica.can_connect` : renvoie `OK` si l'Agent est capable de se connecter à la base de données Vertica qu'il surveille. Si ce n'est pas le cas, renvoie `CRITICAL`.
-- `vertica.node_state` : renvoie `OK` pour les nœuds disponibles et `WARNING` pour ceux qui semblent être sur le point de devenir disponibles. Si ce n'est pas le cas, renvoie `CRITICAL`.
+**vertica.can_connect** :<br>
+Renvoie `OK` si l'Agent parvient à se connecter à la base de données Vertica qu'il surveille. Si ce n'est pas le cas, renvoie `CRITICAL`.
+
+**vertica.node_state** :<br>
+Renvoie `OK` pour les nœuds disponibles, `WARNING` pour ceux qui semblent être sur le point de devenir disponibles et `CRITICAL` pour les autres cas.
 
 ### Événements
 

@@ -71,25 +71,24 @@ L'intégration Google Cloud <> Datadog utilise des comptes de service pour crée
 **Remarque** : vous devez avoir activé [Google Cloud Billing][29], l'[API Stackdriver Monitoring][30], l'[API Compute Engine][31] et l'[API Cloud Asset][32] pour le ou les projets que vous souhaitez surveiller.
 
 1. Consultez la [page des identifiants Google Cloud][33] pour le projet Google Cloud que vous souhaitez configurer dans le cadre de l'intégration Datadog.
-2. Cliquez sur _Create credentials_ et sélectionnez _Service account key_.
+2. Cliquez sur _Create credentials_(en haut de la page) et sélectionnez _Service account_.
 
-    {{< img src="integrations/google_cloud_platform/SelectServiceAccount.png" alt="paramètres" popup="true" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/SelectServiceAccount2.png" alt="Paramètres" popup="true" style="width:80%;">}}
 
-3. Dans la liste déroulante _Service account_, sélectionnez _Service account_.
-4. Saisissez un nom unique pour le compte de service.
-5. Pour _Role_, sélectionnez Compute engine —> Compute Viewer, Monitoring —> Monitoring Viewer et Cloud Asset —> Cloud Asset Viewer. Appuyez sur Continue.
+3. Saisissez un nom unique pour le compte de service, puis cliquez sur _Create_.
+4. Ajoutez les rôles suivants : Compute Viewer, Monitoring Viewer et Cloud Asset Viewer. Cliquez sur_Done_.
 
    **Remarque** : vous devez être un administrateur clé de compte de service pour sélectionner les rôles Compute Engin et Cloud Asset. Tous les rôles sélectionnés permettent à Datadog de recueillir des métriques, des tags, des événements et des étiquettes utilisateur à votre place.
 
-6. Appuyez sur **CREATE KEY**, sélectionnez _JSON_ comme type de clé, puis appuyez sur _create_. Notez l'emplacement de sauvegarde du fichier : vous en aurez besoin pour la suite.
-7. Accédez au [carré d'intégration Datadog/Google Cloud][34].
-8. Dans l'onglet **Configuration**, sélectionnez _Upload Key File_ pour intégrer ce projet à Datadog.
-9. Si vous le souhaitez, vous pouvez utiliser des tags pour exclure des hosts de cette intégration. Vous trouverez des instructions détaillées à ce sujet [ci-dessous](#configuration).
+5. En bas de la page, parcourez vos comptes de service et sélectionnez celui que vous venez de créer. Cliquez sur _Add Key_ -> _Create new key_, puis sélectionnez le type _JSON_. Cliquez sur _Create_ et sur _Save_. Notez l'emplacement de sauvegarde du fichier : vous en aurez besoin par la suite.
+6. Accédez au [carré d'intégration Datadog/Google Cloud][34].
+7. Dans l'onglet **Configuration**, sélectionnez _Upload Key File_ pour intégrer ce projet à Datadog.
+8. Si vous le souhaitez, vous pouvez utiliser des tags pour exclure des hosts de cette intégration. Vous trouverez des instructions détaillées à ce sujet [ci-dessous](#configuration).
 
     {{< img src="integrations/google_cloud_platform/ServiceAccountAdded.png" alt="paramètres" popup="true" style="width:80%;">}}
 
-10. Cliquez sur _Install/Update_.
-11. Si vous souhaitez surveiller plusieurs projets, utilisez l'une des méthodes suivantes :
+9. Cliquez sur _Install/Update_.
+10. Si vous souhaitez surveiller plusieurs projets, utilisez l'une des méthodes suivantes :
 
     - Répétez les étapes ci-dessus pour utiliser plusieurs comptes de service.
     - Utilisez le même compte de service en modifiant la valeur de `project_id` dans le fichier JSON téléchargé à l'étape 6. Importez ensuite le fichier dans Datadog, tel que décrit aux étapes 7 à 10.
@@ -154,13 +153,14 @@ Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre �
 
 #### Exporter les logs de Stackdriver vers le Pub/Sub
 
-1. Accédez à la [page Stackdriver][37] et filtrez les logs à exporter.
-2. Cliquez sur **Create Sink** et nommez le récepteur.
-3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
+1. Accédez à la [page Log Explorer][37] et filtrez les logs à exporter.
+2. Depuis le menu **Action**, sélectionnez **Create Sink**.
+3. Nommez le récepteur.
+4. Choisissez _Cloud Pub/Sub_ comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
-4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
+5. Cliquez sur **Create Sink** et patientez jusqu'à ce que le message de confirmation apparaisse.
 
 **Remarque** : il est possible de créer plusieurs exportations de Stackdriver vers le même Pub/Sub en utilisant plusieurs récepteurs.
 

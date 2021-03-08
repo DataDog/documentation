@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez l'utilisation des ressources de vos conteneurs GCE.
 doc_link: 'https://docs.datadoghq.com/integrations/google_container_engine/'
+draft: false
 git_integration_title: google_container_engine
 has_logo: true
 integration_title: Google Container Engine
@@ -28,7 +29,7 @@ Recueillez des métriques de Google Container Engine pour :
 - Visualiser les performances de vos conteneurs Container Engine
 - Corréler les performances de vos conteneurs Container Engine avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Collecte de métriques
 
@@ -46,7 +47,7 @@ Une fois cette opération effectuée, exportez vos logs Google Container Engin
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 

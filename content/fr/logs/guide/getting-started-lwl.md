@@ -5,7 +5,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: "En savoir plus sur la vue Log\_Explorer"
-  - link: /logs/explorer/patterns/
+  - link: '/logs/explorer/#patterns'
     tag: Documentation
     text: Se familiariser avec la vue Log Pattern
   - link: /logs/live_tail/
