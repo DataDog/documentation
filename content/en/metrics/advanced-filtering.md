@@ -56,7 +56,7 @@ avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1
 avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 ```
 
-{{< img src="metrics/advanced-filtering/NOTIN.jpg" alt="Example 2"  style="width:80%;" >}}
+{{< img src="metrics/advanced-filtering/NOTIN.jpg" alt="Example 3"  style="width:80%;" >}}
 
 
 ### Wildcard filtered queries 
@@ -79,19 +79,6 @@ sum:kubernetes.pods.running{service:*-canary} by {service}
 
 {{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="Example 2"  style="width:80%;" >}}
 
-
-```
-sum:kubernetes.pods.running{service:*-canary} by {service}
-```
-
-{{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="Example 2"  style="width:80%;" >}}
-
-
-```
-sum:kubernetes.pods.running{service:*-canary} by {service}
-```
-
-{{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="Example 2"  style="width:80%;" >}}
 
 ## Further Reading
 
