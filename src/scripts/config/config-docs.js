@@ -18,7 +18,7 @@ export default {
         loggingHandler: 'http',
         algoliaConfig: {
             index: 'docsearch_docs_preview',
-            api_index: 'docsearch_docs_prod_api_preview',
+            api_index: 'docsearch_docs_preview_api',
             appId: 'EOIG7V0A2O',
             apiKey: 'c7ec32b3838892b10610af30d06a4e42'
         },
@@ -30,7 +30,7 @@ export default {
         loggingHandler: 'console',
         algoliaConfig: {
             index: 'docsearch_docs_preview',
-            api_index: 'docsearch_docs_prod_api_preview',
+            api_index: 'docsearch_docs_preview_api',
             appId: 'EOIG7V0A2O',
             apiKey: 'c7ec32b3838892b10610af30d06a4e42'
         },

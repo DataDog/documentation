@@ -186,6 +186,22 @@ index_algolia_preview:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
+replica_algolia_preview:
+  <<: *base_template
+  stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
+  environment: "preview"
+  script:
+    - ALGOLIA_APP_ID=$(get_secret 'ci.documentation.algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') yarn run algolia:config
+  dependencies:
+    - build_preview
+  when: manual
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
+
 sourcemaps_preview:
   <<: *base_template
   stage: post-deploy
@@ -325,6 +341,20 @@ index_algolia:
       Xvfb :99 -ac &
       echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
       ALGOLIA_APP_ID=$(get_secret 'ci.documentation.algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') yarn run algolia:config
+  dependencies:
+    - build_live
+  only:
+    - schedules
+
+replica_algolia:
+  <<: *base_template
+  stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
+  environment: "live"
+  script:
+    - ALGOLIA_APP_ID=$(get_secret 'ci.documentation.algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
   only:
