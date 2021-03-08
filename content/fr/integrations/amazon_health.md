@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez les événements du service AWS Health en temps quasi réel.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_health'
+draft: false
 git_integration_title: amazon_health
 has_logo: true
 integration_title: Amazon Health
@@ -26,7 +27,7 @@ AWS Health fournit une visibilité continue sur l'état de vos ressources, servi
 
 **Remarque** : cette intégration ne fonctionne que pour les clients AWS disposant d'un programme support Business ou Enterprise.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

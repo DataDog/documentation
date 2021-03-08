@@ -6,6 +6,10 @@ aliases:
   - /fr/guides/billing
   - /fr/account_management/settings
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
+{{< /site-region >}}
+
 ## Paramètres du compte
 
 La *[page des paramètres du compte][1]* de Datadog vous permet de contrôler les informations à votre sujet que les autres membres de votre organisation peuvent consulter, de changer d'organisation, de quitter une organisation, de gérer vos préférences de notification et plus encore.
@@ -24,24 +28,19 @@ La page *des paramètres du compte* répertorie également toutes les organisati
 
 **Remarque** : si vous quittez une organisation, vous ne pourrez pas la rejoindre à nouveau à moins d'être invité par un administrateur de cette organisation.
 
-Pour rejoindre une organisation existante, vous devez être invité par un administrateur. Pour demander une invitation :
-
-1. Déconnectez-vous de Datadog en cliquant sur le bouton correspondant sur la [page des *paramètres du compte*][1].
-2. Accédez à la [page d'*inscription*][4] et cliquez sur le lien *Join an existing team*.
-3. Saisissez l'adresse e-mail associée à votre compte Datadog, votre nom et l'adresse e-mail d'un administrateur de l'organisation que vous souhaitez rejoindre.
-4. Cliquez sur "Request Invite" pour envoyer la demande. L'administrateur de l'organisation reçoit alors une notification lui indiquant comment vous ajouter.
+Pour rejoindre une organisation existante, un administrateur doit vous inviter. Vous recevez alors un e-mail avec l'objet `You've been invited to join <nom_organisation>`. Cliquez sur le bouton **Join Account** de l'e-mail.
 
 Si vous êtes un administrateur d'organisation, consultez les ressources suivantes pour obtenir davantage d'informations :
 
-* [Gérer les utilisateurs de votre organisation][5]
-* [Configurer l'authentification unique avec SAML][6]
-* [Renommer votre organisation][7]
-* [Gérer des comptes multi-organisations][8]
-* [Modifier votre plan Datadog et consulter l'historique d'utilisation et de facturation][9]
+* [Gérer les utilisateurs de votre organisation][4]
+* [Configurer l'authentification unique avec SAML][5]
+* [Renommer votre organisation][6]
+* [Gérer des comptes multi-organisations][7]
+* [Modifier votre formule Datadog et consulter l'historique d'utilisation et de facturation][8]
 
 ### Préférences
 
-Vous pouvez définir votre fuseau horaire, vos notifications sur ordinateur et vos abonnements par e-mail dans l'[onglet *Preferences*][10] de la page des *paramètres du compte*. Vous pouvez choisir de recevoir les rapports suivants :
+Vous pouvez définir votre fuseau horaire, vos notifications sur ordinateur et vos abonnements par e-mail dans l'[onglet *Preferences*][9] de la page des *paramètres du compte*. Vous pouvez également choisir de recevoir les rapports suivants :
 
 * Daily Digest
 * Weekly Digest
@@ -59,21 +58,20 @@ Pour faire en sorte que l'apparence du site s'adapte automatiquement à celle de
 
 ## Connexion à GitHub
 
-Si vous avez installé l'[intégration GitHub][11] pour créer des événements dans Datadog, associez votre compte personnel GitHub à votre compte utilisateur Datadog. En associant vos comptes, les commentaires que vous publiez dans les événements GitHub via Datadog seront automatiquement publiés dans l'issue ou la pull request correspondante dans GitHub.
+Si vous avez installé l'[intégration GitHub][10] pour créer des événements dans Datadog, associez votre compte GitHub personnel à votre compte utilisateur Datadog. Ainsi, les commentaires que vous publierez dans les événements GitHub de Datadog seront automatiquement publiés dans l'issue ou la pull request correspondante dans GitHub.
 
 ## Supprimer votre compte
 
-Pour supprimer complètement votre compte Datadog, [contactez notre équipe d'assistance][12].
+Pour supprimer complètement votre compte Datadog, [contactez notre équipe d'assistance][11].
 
 [1]: https://app.datadoghq.com/account/profile
 [2]: https://gravatar.com
 [3]: https://support.google.com/accounts/answer/19870?hl=en
-[4]: https://app.datadoghq.com/signup
-[5]: /fr/account_management/users/
-[6]: /fr/account_management/saml/
-[7]: /fr/account_management/org_settings/#change-your-organization-name
-[8]: /fr/account_management/multi_organization/
-[9]: /fr/account_management/org_settings/
-[10]: https://app.datadoghq.com/account/preferences
-[11]: /fr/integrations/github/
-[12]: /fr/help/
+[4]: /fr/account_management/users/
+[5]: /fr/account_management/saml/
+[6]: /fr/account_management/org_settings/#change-your-organization-name
+[7]: /fr/account_management/multi_organization/
+[8]: /fr/account_management/org_settings/
+[9]: https://app.datadoghq.com/account/preferences
+[10]: /fr/integrations/github/
+[11]: /fr/help/

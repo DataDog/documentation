@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez la taille des logs ingérés dans Google\_Stackdriver."
 doc_link: 'https://docs.datadoghq.com/integrations/google_stackdriver_logging/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/collect-stackdriver-logs-with-datadog/'
     tag: Blog
@@ -31,7 +32,7 @@ Datadog récupère les **métriques** provenant de Google Stackdriver Logging 
 - Visualiser les performances de vos logs Stackdriver.
 - Corréler les performances de vos logs Stackdriver avec vos applications.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

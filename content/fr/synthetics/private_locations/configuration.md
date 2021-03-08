@@ -83,14 +83,14 @@ Vous pouvez importer des certificats racine privés dans vos emplacements privé
 
 | Option | Type | Valeur par défaut | Description |
 | -------| ---- | ------- | ----------- |
+| `config` | Chaîne | `/etc/datadog/synthetics-check-runner.json` | Chemin du fichier de configuration JSON. |
 | `logFormat` | Chaîne | `pretty` | Format des logs sortants (`"pretty"` ou `"json"`). Le format de log `json` vous permet de parser automatiquement ces logs lors de leur collecte par Datadog. |
 | `verbosity` | Nombre | `3` | Niveau de verbosité (p. ex. `-v`, `-vv`, `-vvv`, etc.). |
 | `dumpConfig` | Booléen | `none` | Afficher les paramètres de configuration du worker sans les secrets. |
 | `dumpFullConfig` | Booléen | `none` | Afficher les paramètres de configuration du worker complets. |
 | `help` | Booléen | `none` | Afficher les informations d'aide. |
 
-**Remarque** : Pour les conteneurs des Emplacements Privés, les logs sortants sont écrits sur stdout/stderr et ne sont pas sauvegardés au sein des conteneurs. 
-
+**Remarque** : les conteneurs d'emplacement privé écrivent les logs dans stdout/stderr sans les enregistrer dans le conteneur.
 
 ## Pour aller plus loin
 
