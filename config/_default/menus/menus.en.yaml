@@ -995,6 +995,10 @@ main:
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
     weight: 501
+  - name: Trace Propagation (Advanced)
+    url: serverless/distributed_tracing/serverless_trace_propagation
+    parent: serverless_distributed_tracing
+    weight: 502
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
