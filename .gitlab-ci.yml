@@ -191,7 +191,7 @@ replica_algolia_preview:
     policy: pull
   environment: "preview"
   script:
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_preview
   when: manual
@@ -350,7 +350,7 @@ replica_algolia:
     policy: pull
   environment: "live"
   script:
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
   only:
