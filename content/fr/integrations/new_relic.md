@@ -6,10 +6,11 @@
 "dependencies": []
 "description": "Consultez les métriques et événements de New Relic dans Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/new_relic/"
+"draft": false
 "git_integration_title": "new_relic"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "New Relic"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "integration"
 "manifest_version": "1.0"
 "name": "new_relic"
@@ -27,7 +28,7 @@ Associez New Relic pour :
 - Visualiser les métriques New Relic clés (comme le délai de réponse et le score Apdex) en contexte avec le reste de vos métriques Datadog<br> **(fonctionne uniquement avec les comptes New Relic Pro et formules supérieures)**
 - Configurer des alertes New Relic dans votre flux d'événements
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -37,7 +37,7 @@
   },
   "metrics": {
     "name": "Metrics",
-    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nDatadog has a soft limit of 100 timeseries per host\nwhere a timeseries is defined as a unique combination of metric name and tag.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
   },
   "processes": {
     "name": "Processes",

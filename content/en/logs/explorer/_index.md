@@ -47,7 +47,7 @@ The search filter consists of a timerange and a search query mixing `key:value` 
 
 **Note**: `key:value` queries require that you [declare a facet][5] beforehand.
 
-## Aggregate and Measure
+## Aggregate and measure
 
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, aggregate your logs.
 
@@ -155,7 +155,7 @@ For example, the following Toplist shows the **top 15 Customers** on a merchant 
 
 {{< img src="logs/explorer/toplists.png" alt="top list example"  style="width:90%;">}}
 
-### Nested Tables
+### Nested tables
 
 Visualize the top values from a [facet][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update a search query or drill through logs corresponding to either dimension.
 
@@ -192,7 +192,8 @@ At any moment, and depending on your current aggregation, **export** your explor
 [4]: /logs/indexes
 [5]: /logs/explorer/facets/
 [6]: /logs/logs_to_metrics
-[7]: /logs/archives/rehydrating
+[7]: /logs/processing/processors/#grok-parser
 [8]: /dashboards/
 [9]: /monitors/monitor_types/log/
 [10]: /integrations/#cat-notification
+[11]: /logs/explorer/watchdog-insights

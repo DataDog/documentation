@@ -59,7 +59,7 @@ With a plain text formatted email, the following fields are controllable:
 |----------------------|----------|---------------------------------|
 | Sender email address | Yes      | The email address of the sender |
 | Subject              | Yes      | The subject of the email        |
-| Body                 | No       | The body of the email           |
+| Body                 | Yes      | The body of the email           |
 
 For example, the email below is a valid submission:
 

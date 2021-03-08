@@ -2,10 +2,11 @@
 title: Widget Réseau
 kind: documentation
 description: Affiche des données réseau sous forme de série temporelle.
+widget_type: timeseries
 aliases:
   - /fr/graphing/widgets/network/
 further_reading:
-  - link: /network_performance_monitoring/
+  - link: /network_monitoring/performance/
     tag: Documentation
     text: Surveillance des performances réseau
   - link: /dashboards/screenboards/
@@ -45,48 +46,16 @@ Le widget Réseau vient compléter la fonctionnalité de [surveillance des perfo
 
 ## API
 
-Le [schéma JSON][2] utilisé pour le widget Réseau est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][2] pour en savoir plus.
 
-```text
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "network_query": {
-        "index": "netflow-search",
-        "search": {
-          "query": ""
-        },
-        "groupBy": [
-          {
-            "facet": {type_entité_source}
-          },
-          {
-            "facet": {type_entité_destination}
-          }
-        ],
-        "compute": {
-          "aggregation": "sum",
-          "facet": {type de données à afficher}
-        }
-      },
-      "style": {
-        "palette": {color},
-        "type": "solid",
-        "width": "normal"
-      },
-      "type": "area",
-      "conditional_formats": [],
-      "aggregator": "avg"
-    }
-  ],
-  "autoscale": true
-}
-```
+Le [schéma JSON][3] utilisé pour le widget Réseau est le suivant :
+
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/network_performance_monitoring/
-[2]: /fr/dashboards/graphing_json/widget_json/
+[1]: /fr/network_monitoring/performance
+[2]: /fr/api/v1/dashboards/
+[3]: /fr/dashboards/graphing_json/widget_json/

@@ -381,20 +381,28 @@ Ce qui précède remplace le nom de service par défaut `nginx-ingress-controlle
 {{% /tab %}}
 {{% tab "Istio" %}}
 
-L'APM Datadog est disponible pour Istio 1.1.3 et ultérieur sur les clusters Kubernetes.
+Datadog surveille chaque aspect de votre environnement Istio, afin que vous puissiez :
+- Plonger au cœur des traces distribuées pour les applications qui effectuent des transactions sur le maillage avec l'APM (voir ci-dessous).
+- Évaluer la santé d'Envoy et du plan de contrôle Istio grâce aux [logs][1].
+- Consulter en détail les performances de votre maillage de services avec des [métriques][1] sur les requêtes, la bande passante et la consommation de ressources
+- Mapper les communications réseau entre les conteneurs, pods et services sur le maillage avec la solution [Network Performance Monitoring][2]
+
+Pour en savoir plus sur la surveillance de votre environnement Istio avec Datadog, [consultez l'article du blog à ce sujet][10] (en anglais).
 
 ## Configuration
 
+L'APM Datadog est disponible pour Istio 1.1.3 et ultérieur sur les clusters Kubernetes.
+
 ### Installation de l'Agent Datadog
 
-1. [Installez l'Agent][1].
-2. [Veillez à ce que l'APM soit activé pour votre Agent][2].
+1. [Installez l'Agent][3].
+2. [Veillez à ce que l'APM soit activé pour votre Agent][4].
 3. Supprimez la mise en commentaire du paramètre `hostPort` pour que les sidecars Istio puissent se connecter à l'Agent et envoyer des traces.
 
 
 ### Installation et configuration d'Istio
 
-Pour activer l'APM Datadog, une [installation Istio personnalisée][3] est requise afin de configurer deux options supplémentaires.
+Pour activer l'APM Datadog, une [installation Istio personnalisée][5] est requise afin de configurer deux options supplémentaires.
 
 - `--set values.global.proxy.tracer=datadog`
 - `--set values.pilot.traceSampling=100.0`
@@ -410,8 +418,7 @@ l'étiquette `istio-injection=enabled`.
 kubectl label namespace example-ns istio-injection=enabled
 ```
 
-Les traces sont générées lorsque Istio est en mesure de déterminer si le trafic utilise un protocole basé sur HTTP.
-Par défaut, Istio effectue automatiquement cette vérification. Vous pouvez configurer manuellement cette vérification en nommant les ports dans le service et le déploiement de votre application. Reportez-vous à la section relative à la [sélection de protocole][4] de la documentation Istio (en anglais) pour en savoir plus.
+Les traces sont générées lorsque Istio est en mesure de déterminer si le trafic utilise un protocole basé sur HTTP. Par défaut, Istio effectue automatiquement cette vérification. Vous pouvez la configurer manuellement en nommant les ports dans le service et le déploiement de votre application. Reportez-vous à la section relative à la [sélection de protocole][6] de la documentation Istio (en anglais) pour en savoir plus.
 
 Par défaut, le nom de service utilisé lors de la création des traces est généré à partir de l'espace de nommage et du nom du déploiement. Vous pouvez le définir manuellement en ajoutant une étiquette `app` au modèle de pod du déploiement :
 
@@ -422,7 +429,7 @@ template:
       app: <NOM_SERVICE>
 ```
 
-Pour les [CronJobs][5], l'étiquette `app` doit être ajoutée au modèle du job, car le nom généré provient du `Job`, et non du `CronJob` de niveau supérieur.
+Pour les [CronJobs][7], l'étiquette `app` doit être ajoutée au modèle du job, car le nom généré provient du `Job`, et non du `CronJob` de niveau supérieur.
 
 ### Variables d'environnement
 
@@ -433,7 +440,7 @@ Les variables d'environnement des sidecars Istio peuvent être configurées pour
         apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_TRACE_ANALYTICS_ENABLED": "true" }'
 ```
 
-Les [variables d'environnement][6] dépendent de la version du traceur C++ intégré au proxy du sidecar d'Istio.
+Les [variables d'environnement][8] disponibles dépendent de la version du traceur C++ intégré au proxy du sidecar Istio.
 
 | Version d'Istio | Version du traceur C++ |
 |---------------|--------------------|
@@ -477,20 +484,21 @@ spec:
       mode: DISABLE
 ```
 
-Le processus de sélection automatique du protocole peut déterminer que le trafic entre le sidecar et l'Agent s'effectue via HTTP, et ainsi activer le tracing.
-Cette fonction peut être désactivée en utilisant la [sélection manuelle du protocole][7] du service spécifique. Le nom du port dans le service `datadog-agent` peut être remplacé par `tcp-traceport`.
-Si vous utilisez Kubernetes 1.18+, vous pouvez ajouter `appProtocol: tcp` à la spécification du port.
+Le processus de sélection automatique du protocole peut déterminer que le trafic entre le sidecar et l'Agent s'effectue via HTTP, et ainsi activer le tracing. Cette fonction peut être désactivée en utilisant la [sélection manuelle du protocole][9] du service spécifique. Le nom du port dans le service `datadog-agent` peut être remplacé par `tcp-traceport`. Si vous utilisez Kubernetes 1.18+, vous pouvez ajouter `appProtocol: tcp` à la spécification du port.
 
 
 
 
-[1]: /fr/agent/kubernetes/
-[2]: /fr/agent/kubernetes/apm/
-[3]: https://istio.io/docs/setup/install/istioctl/
-[4]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
-[5]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[6]: /fr/tracing/setup/cpp/#environment-variables
-[7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[1]: /fr/integrations/istio/
+[2]: /fr/network_monitoring/performance/setup/#istio
+[3]: /fr/agent/kubernetes/
+[4]: /fr/agent/kubernetes/apm/
+[5]: https://istio.io/docs/setup/install/istioctl/
+[6]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
+[7]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+[8]: /fr/tracing/setup/cpp/#environment-variables
+[9]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[10]: https://www.datadoghq.com/blog/istio-datadog/
 {{% /tab %}}
 {{< /tabs >}}
 

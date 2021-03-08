@@ -38,7 +38,7 @@ The Log Explorer supports [queries across multiple indexes][7].
 <a href="/help">Contact Datadog support</a> to enable multiple-indexes for your account.
 </div>
 
-### Add Indexes
+### Add indexes
 
 If multiple indexes is activated, use the "New Index" button to create a new index.
 
@@ -46,7 +46,7 @@ If multiple indexes is activated, use the "New Index" button to create a new ind
 
 **Note**: Index names must start with a letter and can only contain lowercase letters, numbers, or the '-' character.
 
-## Indexes Filters
+## Indexes filters
 
 Index filters allow dynamic control over which logs flow into which indexes.  For example, if you create a first index filtered on the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your `status:notice` logs would go to the first index, all your `status:error` logs to the second index, and the rest would go to the final one.
 
@@ -54,7 +54,7 @@ Index filters allow dynamic control over which logs flow into which indexes.  Fo
 
 **Note**: **Logs enter the first index whose filter they match on**, use drag and drop on the list of indexes to reorder them according to your use-case.
 
-## Exclusion Filters
+## Exclusion filters
 
 By default, logs indexes have no exclusion filter: that is to say all logs matching the Index Filter are indexed.
 
@@ -72,7 +72,7 @@ Use drag and drop on the list of exclusion filters to reorder them according to 
 
 {{< img src="logs/indexes/reorder_index_filters.png" alt="reorder index filters"  style="width:80%;">}}
 
-### Examples of Exclusion Filters
+### Examples
 
 #### Switch off, switch on
 
@@ -113,7 +113,6 @@ In the following example:
 * `DEBUG` logs are indexed consistently with the `request_id` sampling rule, unless the debug logs exclusion filter is enabled in which case they are sampled.
 * 50% of the `2XX` web access logs with an actual `request_id` are kept. All other `2XX` web access logs are sampled based on the 90% exclusion filter rule.
 
-
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
@@ -130,13 +129,13 @@ Update or remove this quota at any time when editing the Index:
 
 {{< img src="logs/indexes/index_quota.png" alt="index details"  style="width:70%;">}}
 
-**Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
+**Note**: Indexes daily quotas reset automatically at [2:00pm UTC][19].
 
 An event is generated when the daily quota is reached:
 
 {{< img src="logs/indexes/index_quota_event.png" alt="index quota notification"  style="width:70%;">}}
 
-Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
+Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 
 ## Further Reading
 
@@ -162,4 +161,5 @@ Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
 [16]: /logs/processing/processors/?tab=ui#trace-remapper
 [17]: /help/
 [18]: /logs/live_tail/#overview
-[19]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
+[19]: https://www.timeanddate.com/worldclock/converter.html
+[20]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold

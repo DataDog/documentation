@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -10,10 +11,11 @@ categories:
   - notification
   - monitoring
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md'
 display_name: Squadcast
+draft: false
 git_integration_title: squadcast
 guid: a2b0e9fe-f824-460b-864a-50c4bda759a0
 integration_id: squadcast
@@ -52,15 +54,11 @@ Au moins une politique d'escalade doit être configurée pour que vous puissiez 
 
 1. Ouvrez la page **Services** à partir de la barre latérale.
 
-2. Cliquez sur « Add Service ».
+2. Choisissez un service existant ou cliquez sur **Add Service** pour créer un service.
 
-3. Saisissez une valeur pour **Service Name** et éventuellement pour **Service Description**.
+3. Cliquez sur **Alert Sources** et sélectionnez **Datadog** dans le menu déroulant.
 
-4. Sélectionnez **Datadog** dans le menu déroulant **Integration Type**.
-
-5. Copiez le lien **Datadog Webhook URL** généré plus bas et cliquez sur « Save ».
-
-![Service Squadcast][1]
+5. Copiez le lien **Datadog Webhook URL** indiqué et cliquez sur **Done**.
 
 ### Suivez ces étapes dans Datadog :
 
@@ -74,7 +72,7 @@ Au moins une politique d'escalade doit être configurée pour que vous puissiez 
 
 5. Dans la section **Name and URL**, saisissez un nom approprié et collez le lien **Datadog Webhook URL** à partir de Squadcast.
 
-    ![Webhook Squadcast][2]
+    ![Webhook Squadcast][1]
 
 6. Cochez la case dans la section **Use custom payload**.
 7. Copiez-collez le JSON suivant dans la zone de texte de la section **Custom Payload** :
@@ -91,7 +89,7 @@ Au moins une politique d'escalade doit être configurée pour que vous puissiez 
 
 8. Cliquez sur « Install Integration » pour terminer l'intégration du service.
 
-    Consultez la [documentation officielle][3] de Squadcast pour en savoir plus sur la configuration.
+    Consultez la [documentation officielle][2] de Squadcast (en anglais) pour en savoir plus sur la configuration.
 
 ## Données collectées
 ### Métriques
@@ -107,9 +105,8 @@ Vos événements Squadcast déclenchés/résolus s'affichent sur le dashboard de
 L'intégration Squadcast n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/squadcast/images/datadog-service.png
-[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/squadcast/images/datadog-webhook.png
-[3]: https://support.squadcast.com/docs/datadog
-[4]: https://docs.datadoghq.com/fr/help/
+[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/squadcast/images/datadog-webhook.png
+[2]: https://support.squadcast.com/docs/datadog
+[3]: https://docs.datadoghq.com/fr/help/

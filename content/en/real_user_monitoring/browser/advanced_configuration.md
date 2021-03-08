@@ -342,5 +342,5 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 
 
 [1]: https://github.com/DataDog/browser-sdk
-[2]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum/src/rumEvent.types.ts
+[2]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum-core/src/rumEvent.types.ts
 [3]: /logs/processing/attributes_naming_convention/#user-related-attributes

@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Elasticsearch."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_es/'
+draft: false
 git_integration_title: amazon_es
 has_logo: true
 integration_title: Amazon Elasticsearch
@@ -26,7 +27,7 @@ Amazon Elasticsearch Service est un service géré qui facilite le déploiement,
 
 Activez cette intégration pour visualiser dans Datadog les métriques et tags personnalisés pour vos clusters ES.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -59,7 +60,7 @@ Configurez Amazon Elasticsearch de façon à ce que ses logs soient envoyés ver
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Elasticsearch dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][7]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][8]
+    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][7]
 
 ## Données collectées
 
@@ -79,7 +80,7 @@ L'intégration AWS ES n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
@@ -87,7 +88,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_es
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_es/amazon_es_metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
+[7]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers
+[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_es/amazon_es_metadata.csv
+[9]: https://docs.datadoghq.com/fr/help/

@@ -31,7 +31,7 @@ Network performance monitoring requires [Datadog Agent v6.14+][1].
 
 #### Linux OS
 
-Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.4.0+. NPM supports the following Linux distributions:
+Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.4.0+ or have eBPF features backported. NPM supports the following Linux distributions:
 
 - Ubuntu 16.04+
 - Debian 9+
@@ -39,8 +39,9 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 - SUSE 15+
 - Amazon AMI 2016.03+
 - Amazon Linux 2
+- CentOS/RHEL 7.6+
 
-**Note:** There is an exception to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][3]. The [DNS Resolution][4] feature is not supported on CentOS/RHEL 7.6.
+**Note:** The [DNS Resolution][4] feature is not supported on [CentOS/RHEL 7.6][3], but is supported on CentOS/RHEL 8+.
 
 #### Windows OS
 
@@ -105,9 +106,9 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 3. Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to `true`:
 
     ```yaml
-    system_probe_config:
+    network_config:   # use system_probe_config for Agent's older than 7.24.1
         ## @param enabled - boolean - optional - default: false
-        ## Set to true to enable the System Probe.
+        ## Set to true to enable Network Performance Monitoring.
         #
         enabled: true
     ```

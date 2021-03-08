@@ -15,7 +15,7 @@ Interagissez avec vos listes de dashboards via l'API pour faciliter l'organisati
 ## Récupérer les éléments d'une liste de dashboards
 
 <div class="alert alert-danger">
-Cet endpoint est obsolète. Utilisez plutôt l'<a href="https://docs.datadoghq.com/api#get-items-of-a-dashboard-list">endpoint V2 Obtenir des éléments d'une liste de dashboards</a>.
+Cet endpoint est obsolète. Utilisez plutôt la <a href="https://docs.datadoghq.com/api#recuperer-les-elements-d-une-liste-de-dashboards">version 2 de cet endpoint</a>.
 </div>
 
 ### Signature
@@ -375,7 +375,7 @@ curl -X GET \
 ## Ajouter des éléments à une liste de dashboards
 
 <div class="alert alert-danger">
-Cet endpoint est obsolète. Utilisez plutôt l'<a href="https://docs.datadoghq.com/api#add-items-to-a-dashboard-list">endpoint Ajouter des éléments à une liste de dashboards (V2)</a>.
+Cet endpoint est obsolète. Utilisez plutôt la <a href="https://docs.datadoghq.com/api#ajouter-des-elements-a-une-liste-de-dashboards">version 2 de cet endpoint</a>.
 </div>
 
 ### Signature
@@ -626,7 +626,7 @@ curl -X ADD -H "Content-type: application/json" \
 ## Mettre à jour les éléments d'une liste de dashboards
 
 <div class="alert alert-danger">
-Cet endpoint est obsolète. Utilisez plutôt l'<a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list">endpoint Mettre à jour les éléments d'une liste de dashboards (V2)</a>.
+Cet endpoint est obsolète. Utilisez plutôt la<a href="https://docs.datadoghq.com/api#mettre-a-jour-les-elements-d-une-liste-de-dashboards">version 2 de cet endpoint</a>.
 </div>
 
 ### Signature
@@ -879,7 +879,7 @@ curl -X UPDATE -H "Content-type: application/json" \
 ## Supprimer des éléments d'une liste de dashboards
 
 <div class="alert alert-danger">
-Cet endpoint est obsolète. Utilisez plutôt l'<a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list">endpoint Supprimer des éléments d'une liste de dashboards (V2)</a>.
+Cet endpoint est obsolète. Utilisez plutôt la <a href="https://docs.datadoghq.com/api#supprimer-des-elements-d-une-liste-de-dashboards">version 2 de cet endpoint</a>.
 </div>
 
 ### Signature

@@ -4,12 +4,15 @@ kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
-- link: "/real_user_monitoring/explorer/search/"
-  tag: "Documentation"
-  text: "Explore your views within Datadog"
 - link: "/real_user_monitoring/rum_explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
+- link: "/real_user_monitoring/explorer/search/"
+  tag: "Documentation"
+  text: "Learn more about search in RUM Explorer"
+- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
+  tag: "Blog"
+  text: "Monitor Core Web Vitals with RUM"
 ---
 
 {{< img src="real_user_monitoring/explorer/rum_explorer.png" alt="RUM explorer"  >}}
@@ -23,7 +26,7 @@ The Real User Monitoring (RUM) Explorer allows you to explore all data collected
 
 {{< img src="real_user_monitoring/explorer/explorer_tabs.png" alt="RUM explorer tabs"  >}}
 
-The RUM explorer displays all event types by default. Each tab gives you access to a customized list with relevant columns for the selected RUM event type. 
+The RUM explorer displays all event types by default. Each tab gives you access to a customized list with relevant columns for the selected RUM event type.
 
 ### Event side panel
 

@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'AWS\_Polly."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_polly/'
+draft: false
 git_integration_title: amazon_polly
 has_logo: true
 integration_title: Amazon Polly
@@ -26,7 +27,7 @@ Amazon Polly est un service qui transforme le texte en paroles réalistes.
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de Polly.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
