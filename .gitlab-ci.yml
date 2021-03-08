@@ -171,14 +171,11 @@ index_algolia_preview:
   environment: "preview"
   script:
     - |-
-        # echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
-        # echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
-        # export DISPLAY=:99
-        # Xvfb :99 -ac &
-        # echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
-        npm install yarn
-        npm install algoliasearch
-        ALGOLIA_APP_ID=$(get_secret 'ci.documentation.algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') yarn run algolia:config
+        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+        export DISPLAY=:99
+        Xvfb :99 -ac &
+        echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
   dependencies:
     - build_preview
   when: manual
@@ -194,7 +191,7 @@ replica_algolia_preview:
     policy: pull
   environment: "preview"
   script:
-    - ALGOLIA_APP_ID=$(get_secret 'ci.documentation.algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_preview
   when: manual
@@ -340,7 +337,6 @@ index_algolia:
       export DISPLAY=:99
       Xvfb :99 -ac &
       echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
-      ALGOLIA_APP_ID=$(get_secret 'ci.documentation.algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
   only:
@@ -354,7 +350,7 @@ replica_algolia:
     policy: pull
   environment: "live"
   script:
-    - ALGOLIA_APP_ID=$(get_secret 'ci.documentation.algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_api_key') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
   only:
