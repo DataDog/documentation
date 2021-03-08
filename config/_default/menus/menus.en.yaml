@@ -4151,9 +4151,9 @@ api:
         - GetSLOHistory
       unstable:
         - v1
-  - name: Update a SLO
-    url: '#update-a-slo'
-    identifier: update-a-slo
+  - name: Update an SLO
+    url: '#update-an-slo'
+    identifier: update-an-slo
     parent: service-level-objectives
     generated: true
     params:
@@ -4162,9 +4162,9 @@ api:
       operationids:
         - UpdateSLO
       unstable: []
-  - name: Get a SLO's details
-    url: '#get-a-slos-details'
-    identifier: get-a-slos-details
+  - name: Get an SLO's details
+    url: '#get-an-slos-details'
+    identifier: get-an-slos-details
     parent: service-level-objectives
     generated: true
     params:
@@ -4173,9 +4173,9 @@ api:
       operationids:
         - GetSLO
       unstable: []
-  - name: Delete a SLO
-    url: '#delete-a-slo'
-    identifier: delete-a-slo
+  - name: Delete an SLO
+    url: '#delete-an-slo'
+    identifier: delete-an-slo
     parent: service-level-objectives
     generated: true
     params:
@@ -4206,9 +4206,9 @@ api:
       operationids:
         - DeleteSLOTimeframeInBulk
       unstable: []
-  - name: Create a SLO object
-    url: '#create-a-slo-object'
-    identifier: create-a-slo-object
+  - name: Create an SLO object
+    url: '#create-an-slo-object'
+    identifier: create-an-slo-object
     parent: service-level-objectives
     generated: true
     params:
