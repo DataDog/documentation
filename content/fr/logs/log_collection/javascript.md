@@ -23,7 +23,7 @@ Utilisez le SDK de collecte de logs à partir des navigateurs afin d'envoyer des
 
 **SDK Datadog de collecte de logs à partir des navigateurs** : configurez le SDK via [NPM](#npm) ou utilisez les extraits de code [CDN asynchrone](#cdn-asynchrone) ou [CDN synchrone](#cdn-synchrone) dans le tag head.
 
-**Navigateurs pris en charge** : le SDK de collecte de logs à partir des navigateurs prend en charge tous les navigateurs modernes pour ordinateurs et appareils mobiles, y compris IE10 et IE11. Consultez le tableau des [navigateurs pris en charge][4].
+**Navigateurs pris en charge** : le SDK Browser prend en charge tous les navigateurs modernes pour ordinateurs et appareils mobiles, y compris IE11. Consultez le tableau des [navigateurs pris en charge][4].
 
 ### Choisir la bonne méthode d'installation
 
@@ -163,7 +163,7 @@ datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 #### CDN asynchrone
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 })
 ```
@@ -254,18 +254,82 @@ Les placeholders dans les exemples ci-dessus sont décrits plus bas :
 
 ## Utilisation avancée
 
+### Nettoyer les données sensibles de vos logs recueillis à partir des navigateurs
+
+Si vos logs recueillis à partir des navigateurs contiennent des informations confidentielles que vous souhaitez censurer, configurez le SDK Browser pour nettoyer les séquences sensibles en utilisant le rappel `beforeSend` à l'initialisation du collecteur de logs.
+
+La fonction de rappel `beforeSend` vous permet d'accéder à chaque événement recueilli par le SDK Browser avant qu'il ne soit envoyé à Datadog. De plus, elle vous aide à mettre à jour les propriétés généralement censurées.
+
+Par exemple, pour censurer les adresses e-mail de vos URL d'applications Web :
+
+#### NPM
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs'
+
+datadogLogs.init({
+    ...,
+    beforeSend: (event) => {
+        // supprimer l'adresse e-mail de l'URL de la vue
+        event.view.url = event.view.url.replace(/email=[^&]*/, "email=CENSURÉ")
+    },
+    ...
+});
+```
+
+#### CDN asynchrone
+
+```javascript
+DD_LOGS.onReady(function() {
+    DD_LOGS.init({
+        ...,
+        beforeSend: (event) => {
+            // supprimer l'adresse e-mail de l'URL de la vue
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=CENSURÉ")
+        },
+        ...
+    })
+})
+```
+
+#### CDN synchrone
+
+```javascript
+window.DD_LOGS &&
+    window.DD_LOGS.init({
+        ...,
+        beforeSend: (event) => {
+            // supprimer l'adresse e-mail de l'URL de la vue
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=CENSURÉ")
+        },
+        ...
+    });
+```
+
+Vous pouvez modifier les propriétés d'événement suivantes :
+
+| Attribut       | Type   | Description                                                                                      |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------ |
+| `view.url`      | Chaîne | L'URL de la page Web active.                                                                  |
+| `view.referrer` | Chaîne | L'URL de la page web précédente, à partir de laquelle un lien vers la page demandée à été sélectionné. |
+| `message`       | Chaîne | Le contenu du log.                                                                          |
+| `error.stack`   | Chaîne | La stack trace ou toutes informations complémentaires relatives à l'erreur.                                    |
+| `http.url`      | Chaîne | L'URL HTTP.                                                                                    |
+
+**Remarque** : le SDK Browser ne tient pas compte des modifications apportées aux propriétés d'événement non répertoriées ci-dessus. Pour en savoir plus les propriétés d'événement, consultez le [référentiel du SDK Browser][5].
+
 ### Définir plusieurs loggers
 
-Le SDK Datadog de collecte de logs à partir des navigateurs contient un logger par défaut, mais vous pouvez également définir d'autres loggers.
+Le SDK Browser Datadog contient un logger par défaut, mais vous pouvez également définir d'autres loggers.
 
 #### Créer un logger
 
-Une fois le SDK Datadog de collecte de logs à partir des navigateurs lancé, utilisez l'API `createLogger` pour définir un nouveau logger :
+Une fois le SDK Browser Datadog lancé, utilisez l'API `createLogger` pour définir un nouveau logger :
 
-```text
+```typescript
 createLogger (name: string, conf?: {
-    level?: 'debug' | 'info' | 'warn' | 'error'
-    handler?: 'http' | 'console' | 'silent'
+    level?: 'debug' | 'info' | 'warn' | 'error',
+    handler?: 'http' | 'console' | 'silent',
     context?: Context
 })
 ```
@@ -276,8 +340,8 @@ createLogger (name: string, conf?: {
 
 Une fois votre logger créé, accédez-y dans n'importe quelle partie de votre code JavaScript avec l'API :
 
-```javascript
-getLogger (name: chaîne)
+```typescript
+getLogger(name: string)
 ```
 
 ##### NPM
@@ -304,7 +368,7 @@ signupLogger.info('Test sign up completed')
 Par exemple, imaginons que vous disposez d'un `signupLogger`, défini avec tous les autres loggers :
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
 })
 ```
@@ -312,7 +376,7 @@ DD_LOGS.onReady(function() {
 Vous pouvez à présent l'utiliser dans une autre partie du code avec :
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   const signupLogger = DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 })
@@ -345,7 +409,7 @@ if (window.DD_LOGS) {
 
 #### Contexte global
 
-Une fois le SDK Datadog de collecte de logs à partir des navigateurs lancé, vous pouvez :
+Une fois le SDK Browser Datadog lancé, vous pouvez :
 
 - Définir l'intégralité du contexte pour tous vos loggers avec l'API `setLoggerGlobalContext (context: Context)`
 - Ajouter un contexte à l'ensemble de vos loggers avec l'API `addLoggerGlobalContext (key: string, value: any)`
@@ -358,7 +422,7 @@ Pour NPM, utilisez :
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.setLoggerGlobalContext("{'env': 'staging'}")
+datadogLogs.setLoggerGlobalContext({ env: 'staging' })
 
 datadogLogs.addLoggerGlobalContext('referrer', document.referrer)
 
@@ -370,16 +434,16 @@ const context = datadogLogs.getLoggerGlobalContext() // => {env: 'staging', refe
 Pour CDN asynchrone, utilisez :
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
 })
 
-DD_LOGS.onReady(function() {
-  window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+DD_LOGS.onReady(function () {
+  DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
 })
 
-DD_LOGS.onReady(function() {
-  var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+DD_LOGS.onReady(function () {
+  var context = DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
 })
 ```
 
@@ -423,11 +487,11 @@ datadogLogs.addContext('referrer', document.referrer)
 Pour CDN asynchrone, utilisez :
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.setContext("{'env': 'staging'}")
 })
 
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.addContext('referrer', document.referrer)
 })
 ```
@@ -448,7 +512,7 @@ window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer)
 
 ### Filtrer par statut
 
-Une fois le SDK Datadog de collecte de logs à partir des navigateurs lancé, définissez le niveau de log minimum pour votre logger avec l'API :
+Une fois le SDK Browser Datadog lancé, définissez le niveau de log minimum pour votre logger avec l'API :
 
 ```
 setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
@@ -471,7 +535,7 @@ datadogLogs.logger.setLevel('<NIVEAU>')
 Pour CDN asynchrone, utilisez :
 
 ```javascript
-DD_LOGS.onReady(function() {
+DD_LOGS.onReady(function () {
   DD_LOGS.logger.setLevel('<NIVEAU>')
 })
 ```
@@ -490,7 +554,7 @@ window.DD_LOGS && DD_LOGS.logger.setLevel('<NIVEAU>')
 
 ### Modifier la destination
 
-Par défaut, les loggers créés par le SDK Datadog de collecte de logs à partir des navigateurs envoient les logs à Datadog. Une fois le SDK lancé, il est possible de configurer le logger de façon à ce que les logs soient envoyés à la `console` ou qu'ils ne soient pas envoyés du tout (`silent`) avec l'API :
+Par défaut, les loggers créés par le SDK Browser Datadog envoient les logs à Datadog. Une fois le SDK lancé, il est possible de configurer le logger de façon à ce que les logs soient envoyés à la `console` ou qu'ils ne soient pas envoyés du tout (`silent`) avec l'API :
 
 ```
 setHandler (handler?: 'http' | 'console' | 'silent')
@@ -511,8 +575,8 @@ datadogLogs.logger.setHandler('<HANDLER>')
 Pour CDN asynchrone, utilisez :
 
 ```javascript
-DD_LOGS.onReady(function() {
-  DD_LOGS.logger.setHandler('<HANDLER>')
+DD_LOGS.onReady(function () {
+  DD_LOGS.logger.setHandler('<GESTIONNAIRE>')
 })
 ```
 
@@ -532,3 +596,4 @@ window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 [2]: /fr/account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
 [4]: https://github.com/DataDog/browser-sdk/blob/master/packages/logs/BROWSER_SUPPORT.md
+[5]: https://github.com/DataDog/browser-sdk/blob/master/packages/logs/src/logsEvent.types.ts

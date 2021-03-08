@@ -35,7 +35,7 @@ Pour appliquer une règle de traitement à tous les logs recueillis par un Agent
 
 Pour envoyer uniquement un sous-ensemble spécifique de logs à Datadog, utilisez le paramètre `log_processing_rules` dans votre fichier de configuration avec le `type` **exclude_at_match** ou **include_at_match**.
 
-### exclude_at_match
+### Exclude at match
 
 | Paramètre          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
@@ -121,7 +121,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### include_at_match
+### Include at match
 
 | Paramètre          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
@@ -397,6 +397,8 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning"><strong>Attention :</strong> les expressions régulières pour les logs multiligne doivent commencer au <em>début</em> d'un log. Elles ne peuvent pas être recherchées en milieu de ligne. <em>Une expression sans aucune correspondance peut entraîner la perte de la ligne de log.</em></div>
+
 Exemples supplémentaires :
 
 | **Chaîne brute**           | **Pattern**                                   |
@@ -406,10 +408,9 @@ Exemples supplémentaires :
 | Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
 | 20180228                 | `\d{8}`                                       |
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
-**Remarque** : les expressions régulières pour les logs multiligne doivent commencer au **début** d'un log. Les expressions ne peuvent pas être recherchées en milieu de ligne.
-
-## Règles de traitement des logs couramment utilisées
+## Règles de traitement de log couramment utilisées
 
 Consultez la section [FAQ sur les règles de traitement des logs couramment utilisées][1] pour obtenir une liste d'exemples.
 

@@ -1,10 +1,12 @@
 ---
 title: Opérations primaires dans les services
 kind: guide
+aliases:
+  - /fr/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
   - link: /tracing/setup/
     tag: Documentation
-    text: Découvrir comment configurer le tracing d'APM avec votre application
+    text: Configurer le tracing d'APM avec votre application
   - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Découvrir la liste des services transmettant des données à Datadog
@@ -88,5 +90,5 @@ opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/getting_further/metrics_namespace/
+[1]: /fr/tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings

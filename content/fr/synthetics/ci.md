@@ -13,8 +13,8 @@ further_reading:
     tag: Documentation
     text: Configurer un test API
 ---
-En plus d'exécuter des tests à des intervalles prédéfinis, vous avez la possibilité d'exécuter des tests Datadog Synthetics ponctuellement à l'aide d'endpoints d'API. Ces tests peuvent être exécutés au sein de vos pipelines d'intégration continue (CI), de façon à bloquer le déploiement des branches susceptibles de nuire au bon fonctionnement de votre produit.
-Les tests CI/CD Synthetics peuvent également être utilisés pour **exécuter des tests dans le cadre de votre processus CD**, afin d'évaluer l'état de votre application de production dès la fin d'un déploiement. Cela vous permet de détecter les régressions éventuelles susceptibles d'avoir un impact sur vos utilisateurs et de déclencher automatiquement un rollback si un test critique échoue.
+En plus d'exécuter des tests à des intervalles prédéfinis, vous avez la possibilité d'exécuter des tests Datadog Synthetic ponctuellement à l'aide d'endpoints d'API. Ces tests peuvent être exécutés au sein de vos pipelines d'intégration continue (CI), de façon à bloquer le déploiement des branches susceptibles de nuire au bon fonctionnement de votre produit.
+Les tests CI/CD Synthetic peuvent également être utilisés pour **exécuter des tests dans le cadre de votre processus CD**, afin d'évaluer l'état de votre application de production dès la fin d'un déploiement. Cela vous permet de détecter les régressions éventuelles susceptibles d'avoir un impact sur vos utilisateurs et de déclencher automatiquement un rollback si un test critique échoue.
 
 Cette fonction réduit les pertes de temps liées à la correction de problèmes en production et vous aide à identifier le plus tôt possible les bugs et régressions qui surviennent.
 
@@ -28,20 +28,9 @@ L'endpoint de déclenchement fournit la liste des checks déclenchés ainsi que 
 
 L'endpoint de déclenchement de tests peut lancer jusqu'à 50 tests par requête.
 
-{{< site-region region="us" >}}
-
-* **Endpoint** : `https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci`
-* **Méthode** : `POST`
+* **Endpoint** : `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci`.
+* **Méthode** : `POST`.
 * **Argument** : un objet JSON contenant la liste de tous les tests à déclencher et la configuration à appliquer.
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-* **Endpoint** : `https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci`
-* **Méthode** : `POST`
-* **Argument** : un objet JSON contenant la liste de tous les tests à déclencher et la configuration à appliquer.
-
-{{< /site-region >}}
 
 #### Structure de données des requêtes
 
@@ -57,8 +46,6 @@ L'identifiant public d'un test correspond à l'identifiant du test fourni dans l
 
 #### Exemple de requête
 
-{{< site-region region="us" >}}
-
 ```bash
 #!/bin/sh
 
@@ -75,96 +62,56 @@ curl -X POST \
             "public_id": "abc-def-ghi",
             "allowInsecureCertificates": true,
             "basicAuth": { "username": "test", "password": "test" },
-            "body": "{\"contenuFictif\":true}",
+            "body": "{\"fakeContent\":true}",
             "bodyType": "application/json",
             "cookies": "name1=value1;name2=value2;",
             "deviceIds": ["laptop_large"],
             "followRedirects": true,
-            "headers": { "NOUVEL_ENTÊTE": "NOUVELLE_VALEUR" },
+            "headers": { "NEW_HEADER": "NEW VALUE" },
             "locations": ["aws:us-west-1"],
             "retry": { "count": 2, "interval": 300 },
-            "startUrl": "http://nouvelle.url/",
-            "variables": { "titleVariable": "nouvelle valeur" }
+            "startUrl": "http://new.url/",
+            "variables": { "titleVariable": "new value" }
         }
     ]
-}' "https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci"
+}' "https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci"
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-
-```bash
-#!/bin/sh
-
-api_key="<CLÉ_API_DATADOG>"
-app_key="<CLÉ_APPLICATION_DATADOG>"
-
-curl -X POST \
--H 'Content-Type: application/json' \
--H "DD-API-KEY: ${api_key}" \
--H "DD-APPLICATION-KEY: ${app_key}" \
--d '{
-    "tests": [
-        {
-            "public_id": "abc-def-ghi",
-            "allowInsecureCertificates": true,
-            "basicAuth": { "username": "test", "password": "test" },
-            "body": "{\"contenuFictif\":true}",
-            "bodyType": "application/json",
-            "cookies": "name1=value1;name2=value2;",
-            "deviceIds": ["laptop_large"],
-            "followRedirects": true,
-            "headers": { "NOUVEL_ENTÊTE": "NOUVELLE_VALEUR" },
-            "locations": ["aws:us-west-1"],
-            "retry": { "count": 2, "interval": 300 },
-            "startUrl": "http://nouvelle.url/",
-            "variables": { "titleVariable": "nouvelle valeur" }
-        }
-    ]
-}' "https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci"
-```
-
-{{< /site-region >}}
-
 
 #### Exemple de réponse
 
 ```json
 {
+  "batch_id": null,
   "results": [
     {
       "result_id": "0123456789012345678",
       "public_id": "abc-def-ghi",
-      "location": 1
-    },
+      "location": 30019
+    }
   ],
   "triggered_check_ids": [
     "abc-def-ghi"
+  ],
+  "locations": [
+    {
+      "display_name": "N. California (AWS)",
+      "name": "aws:us-west-1",
+      "region": "Americas",
+      "is_active": true,
+      "is_public": true,
+      "id": 30019
+    }
   ]
 }
 ```
 
 ### Endpoint de récupération des résultats
 
-{{< site-region region="us" >}}
-
-* **Endpoint** : `https://api.datadoghq.com/api/v1/synthetics/tests/poll_results`
-* **Méthode** : `GET`
+* **Endpoint** : `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/poll_results`.
+* **Méthode** : `GET`.
 * **Paramètres** : un tableau JSON contenant la liste des identifiants des résultats permettant de récupérer ces résultats.
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-* **Endpoint** : `https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results`
-* **Méthode** : `GET`
-* **Paramètres** : un tableau JSON contenant la liste des identifiants des résultats permettant de récupérer ces résultats.
-
-{{< /site-region >}}
 
 #### Exemple de requête
-
-{{< site-region region="us" >}}
 
 ```bash
 #!/bin/sh
@@ -173,29 +120,11 @@ api_key="<CLÉ_API_DATADOG>"
 app_key="<CLÉ_APPLICATION_DATADOG>"
 
 curl -G \
-    "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
+    "https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
     -d "result_ids=[220123456789012345678]"
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```bash
-#!/bin/sh
-
-api_key="<CLÉ_API_DATADOG>"
-app_key="<CLÉ_APPLICATION_DATADOG>"
-
-curl -G \
-    "https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results" \
-    -H "DD-API-KEY: ${api_key}" \
-    -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
-```
-
-{{< /site-region >}}
 
 #### Exemple de réponse
 
@@ -207,28 +136,120 @@ curl -G \
 {
   "results": [
     {
-      "check_id": "123456",
-      "timestamp": 1585841351642,
+      "check": {
+        "config": {
+          "assertions": [
+            {
+              "operator": "lessThan",
+              "target": 2000,
+              "type": "responseTime"
+            }
+          ],
+          "configVariables": [],
+          "request": {
+            "basicAuth": {
+              "password": "test",
+              "username": "test"
+            },
+            "body": "{\"fakeContent\":true}",
+            "headers": {
+              "Content-Type": "application/json",
+              "Cookie": "name1=value1;name2=value2;",
+              "NOUVEL_ENTÊTE": "NOUVELLE_VALEUR"
+            },
+            "method": "GET",
+            "timeout": 30,
+            "url": "http://new.url/"
+          }
+        },
+        "locations": [
+          30019
+        ],
+        "options": {
+          "allow_insecure": true,
+          "follow_redirects": true,
+          "min_failure_duration": 0,
+          "min_location_failed": 1,
+          "monitor_options": {
+            "include_tags": true,
+            "locked": false,
+            "new_host_delay": 300,
+            "notify_audit": false,
+            "notify_no_data": false,
+            "renotify_interval": 0
+          },
+          "retry": {
+            "count": 2,
+            "interval": 300
+          },
+          "tick_every": 60
+        },
+        "subtype": "http",
+        "type": "api"
+      },
+      "check_id": "7654321",
+      "check_version": 2,
+      "config_override": {
+        "allowInsecureCertificates": true,
+        "basicAuth": {
+          "password": "test",
+          "username": "test"
+        },
+        "body": "{\"fakeContent\":true}",
+        "bodyType": "application/json",
+        "cookies": "name1=value1;name2=value2;",
+        "deviceIds": [
+          "laptop_large"
+        ],
+        "followRedirects": true,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cookie": "name1=value1;name2=value2;",
+          "NEW_HEADER": "NEW VALUE"
+        },
+        "locations": [
+          "aws:us-west-1"
+        ],
+        "public_id": "abc-def-ghi",
+        "retry": {
+          "count": 2,
+          "interval": 300
+        },
+        "startUrl": "http://example.org/",
+        "variables": {
+          "titleVariable": "new value"
+        }
+      },
+      "dc_id": 30019,
       "orgID": 2,
       "result": {
-        "unhealthy": false,
+        "assertionResults": [
+          {
+            "actual": 27.92,
+            "valid": true
+          }
+        ],
+        "dnsServer": "8.8.8.8",
         "eventType": "finished",
-        "timings": {
-          "firstByte": 14.7,
-          "tcp": 11.6,
-          "ssl": 45.7,
-          "dns": 12.484235048294067,
-          "download": 0.2,
-          "total": 84.7
-        },
+        "healthCheckRatio": 1,
+        "httpStatusCode": 400,
         "mainDC": "us1.prod",
+        "passed": true,
+        "resolvedIp": "93.184.216.34",
+        "responseSize": 349,
         "runType": 2,
-        "httpStatusCode": 200,
-        "responseSize": 9201,
-        "healthCheckRatio": 1
+        "subtype": "http",
+        "timings": {
+          "dns": 24.6,
+          "download": 0.1,
+          "firstByte": 1.4,
+          "tcp": 1.8,
+          "total": 27.9
+        },
+        "unhealthy": false
       },
-      "dc_id": 1,
-      "resultID": "0123456789012345678"
+      "resultID": "220123456789012345678",
+      "timestamp": 1612404331304
     }
   ]
 }
@@ -368,7 +389,7 @@ Pour configurer votre client, les clés d'API et d'application Datadog doivent �
 
     * **apiKey** : la clé d'API utilisée pour interroger l'API Datadog.
     * **appKey** : la clé d'application utilisée pour interroger l'API Datadog.
-    * **datadogSite** : l'instance Datadog vers laquelle la requête est envoyée (valeurs autorisées : `datadoghq.com` ou `datadoghq.eu`). Valeur par défaut : `datadoghq.com`.
+    * **datadogSite** : l'instance Datadog à laquelle la requête est envoyée. Valeur par défaut : `datadoghq.com`. Votre site Datadog est {{< region-param key="dd_site" code="true" >}}.
     * **files** : l'expression globale utilisée pour les fichiers de configuration des tests Synthetic.
     * **global** : les configurations à appliquer à tous les tests Synthetic ([consultez ci-dessous la description de chaque champ](#configurer-des-tests)).
     * **proxy** : le proxy à utiliser pour les connexions sortantes vers Datadog. Les clés `host` et `port` sont des arguments obligatoires. Par défaut, la clé `protocol` a pour valeur `http`. Elle peut prendre pour valeur `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` ou `pac+https`. La bibliothèque [proxy-agent][3] est utilisée pour configurer le proxy.
@@ -436,16 +457,16 @@ Par défaut, les tests utilisent leur configuration d'origine. Vous pouvez la co
 
 Cependant, dans le cadre de votre déploiement CI, vous pouvez choisir de remplacer certains (ou l'ensemble) des paramètres de vos tests en utilisant les paramètres ci-dessous. Si vous souhaitez modifier la configuration de tous vos tests, ces mêmes paramètres peuvent être définis au niveau du [fichier de configuration globale](#configurer-le-client).
 
-* **allowInsecureCertificates** (_booléen_) : désactive les vérifications de certificat dans les tests API.
-* **basicAuth** (_objet_) : identifiants à utiliser pour une authentification basique.
+* **allowInsecureCertificates** (booléen) : désactiver les vérifications de certificat lors des tests HTTP.
+* **basicAuth** (_objet_) : identifiants à utiliser lorsqu'une authentification basique est nécessaire lors d'un test HTTP ou Browser.
      * **username** (_chaîne_) : nom d'utilisateur à utiliser pour l'authentification basique.
      * **password** (_chaîne_) : mot de passe à utiliser lors de l'authentification basique.
-* **body** (_chaîne_) : données à envoyer avec le test API Synthetic.
-* **bodyType** (_chaîne_) : type de données envoyées avec le test API Synthetic.
-* **cookies** (_chaîne_) : chaîne utilisée en tant qu'en-tête de cookie dans un test Browser ou API.
+* **body** (_chaîne_) : données à envoyer avec les tests HTTP.
+* **bodyType** (_chaîne_) : type de données envoyées avec les tests HTTP.
+* **cookies** (_chaîne_) : chaîne utilisée en tant qu'en-tête de cookie dans un test HTTP ou Browser.
 * **deviceIds** (_tableau_) : liste des appareils sur lesquels le test Browser s'exécute.
-* **followRedirects** (_booléen_) : indique s'il faut suivre ou non les redirections HTTP dans les tests API.
-* **headers** (_objet_) : en-têtes à remplacer dans le test. La clé de cet objet est définie sur le nom de l'en-tête à remplacer, et sa valeur sur la nouvelle valeur de l'en-tête.
+* **followRedirects** (_booléen_) : indique s'il faut suivre ou non les redirections dans les tests HTTP.
+* **headers** (_objet_) : en-têtes à remplacer dans le test HTTP ou Browser. La clé de cet objet est définie sur le nom de l'en-tête à remplacer, et sa valeur sur la nouvelle valeur de l'en-tête.
 * **locations** (_tableau_) : liste des emplacements à partir desquels le test s'exécute.
 * **retry** (_objet_) : stratégie définissant le comportement à adopter pour les nouvelles tentatives de test.
      * **count** (_nombre entier_) : nombre de tentatives à effectuer en cas d'échec d'un test.
@@ -454,7 +475,7 @@ Cependant, dans le cadre de votre déploiement CI, vous pouvez choisir de rempla
      * **blocking** : l'interface de ligne de commande renvoie une erreur si le test échoue.
      * **non_blocking** : l'interface de ligne de commande affiche seulement un avertissement si le test échoue.
      * **skipped** : le test n'est pas du tout exécuté.
-* **startUrl** (_chaîne_) : nouvelle URL de départ à fournir au test.
+* **startUrl** (_chaîne_) : nouvelle URL de départ à fournir au test HTTP ou Browser.
 * **variables** (_objet_) : variables à remplacer dans le test. La clé de cet objet est définie sur le nom de la variable à remplacer, et sa valeur sur la nouvelle valeur de la variable.
 * **pollingTimeout** (_entier_) : la durée après laquelle un test Synthetic est considéré comme un échec (en millisecondes).
 

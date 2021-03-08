@@ -3,6 +3,7 @@ assets:
   dashboards: {}
   logs:
     source: azure.active_directory
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -15,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md'
 display_name: Azure Active Directory
+draft: false
 git_integration_title: azure_active_directory
 guid: 1f6dbea8-db4a-4b0e-bfe8-f69efb3e877b
 integration_id: azure-active-directory

@@ -8,9 +8,9 @@
   "service_checks": assets/service_checks.json
 "categories":
 - orchestration
-- issue-tracking
+- issue tracking
 - collaboration
-- source-control
+- source control
 "creates_events": false
 "ddtype": "crawler"
 "dependencies":

@@ -16,7 +16,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualiser-les-donnees'
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /logs/faq/log-collection-troubleshooting-guide/

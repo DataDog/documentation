@@ -6,6 +6,7 @@ assets:
     HiveMQ: assets/dashboards/hivemq.json
   logs:
     source: hivemq
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -18,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md'
 display_name: HiveMQ
+draft: false
 git_integration_title: hivemq
 guid: 905e4d87-2777-4253-ad44-f91ee66ad888
 integration_id: hivemq
@@ -45,27 +47,30 @@ supported_os:
 
 ### Installation
 
-Le check HiveMQ est inclus avec le paquet de l'[Agent Datadog][2].
+Le check HiveMQ est inclus avec le package de l'[Agent Datadog][2].
 Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
 1. Modifiez le fichier `hivemq.d/conf.yaml` dans le dossier `conf.d/` à la racine du
    répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance HiveMQ.
-   Consultez le [fichier d'exemple hivemq.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+   Consultez le [fichier d'exemple hivemq.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
    Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué sur la page d'informations.
    Choisissez les métriques qui vous intéressent en modifiant la configuration ci-dessous.
-   Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][4] afin d'obtenir des instructions détaillées.
-   Si vous souhaitez surveiller davantage de métriques, contactez [l'assistance Datadog][5].
+   Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][2] afin d'obtenir des instructions détaillées.
+   Si vous devez surveiller davantage de métriques, contactez [l'assistance Datadog][3].
 
-2. [Redémarrez l'Agent][6].
+2. [Redémarrez l'Agent][4].
 
 ##### Collecte de logs
 
@@ -75,7 +80,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
    logs_enabled: true
    ```
 
-2. Ajoutez le bloc de configuration suivant à votre fichier `hivemq.d/conf.yaml`. Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple hivemq.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+2. Ajoutez le bloc de configuration suivant à votre fichier `hivemq.d/conf.yaml`. Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple hivemq.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    logs:
@@ -89,17 +94,24 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
            pattern: \d{4}\.\d{2}\.\d{2}
    ```
 
-3. [Redémarrez l'Agent][6].
+3. [Redémarrez l'Agent][4].
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/hivemq/datadog_checks/hivemq/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/integrations/java
+[3]: https://docs.datadoghq.com/fr/help
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
 ##### Collecte de métriques
 
-Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][7].
+Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][1].
 
 ##### Collecte de logs
 
-La collecte de logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][8].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][2].
 
 | Paramètre      | Valeur                                              |
 | -------------- | -------------------------------------------------- |
@@ -107,7 +119,7 @@ La collecte de logs est désactivée par défaut dans l'Agent Datadog. Pour l'ac
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][9] et cherchez `hivemq` dans la section **JMXFetch** :
+[Lancez la sous-commande status de l'Agent][3] et cherchez `hivemq` dans la section **JMXFetch** :
 
 ```text
 ========
@@ -123,6 +135,12 @@ JMXFetch
       status : OK
 ```
 
+[1]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[2]: https://docs.datadoghq.com/fr/agent/docker/log/
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Données collectées
 
 ### Métriques
@@ -132,7 +150,7 @@ JMXFetch
 ### Checks de service
 
 **hivemq.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance HiveMQ qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance HiveMQ qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 
@@ -140,15 +158,9 @@ HiveMQ n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 [1]: https://www.hivemq.com/hivemq/
 [2]: https://docs.datadoghq.com/fr/agent/
-[3]: https://github.com/DataDog/integrations-core/blob/master/hivemq/datadog_checks/hivemq/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/integrations/java
-[5]: https://docs.datadoghq.com/fr/help
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[8]: https://docs.datadoghq.com/fr/agent/docker/log/
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/hivemq/metadata.csv
+[3]: https://docs.datadoghq.com/fr/help

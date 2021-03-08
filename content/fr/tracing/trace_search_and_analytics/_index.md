@@ -38,6 +38,9 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 Après avoir instrumenté vos services et ingéré des traces, définissez des [filtres de rétention][3] basés sur des tags dans l'application Datadog pour que Datadog conserve uniquement les spans qui vous intéressent.
 
+**Remarque** : les spans ingérées et indexées peuvent augmenter vos coûts. Pour en savoir plus, consultez la page [Tarification de l'APM][7].
+
+
 ## Live Search pendant 15 minutes
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Parcours d'une trace" >}}
@@ -94,7 +97,7 @@ Toutes les spans indexées par des filtres de rétention ou d'anciens filtres Ap
 
 Par exemple, si vous filtrez en fonction d'un tag qui figure uniquement dans des spans non indexées par un filtre de rétention, votre recherche n'affichera aucun résultat, ce qui n'est pas le cas avec Live Search.
 
-Vous pouvez personnaliser les spans qui sont conservées et leurs taux de rétention. Par défaut, la [rétention intelligente de Datadog][4] est appliquée. Pour en savoir plus sur le filtre de rétention des spans par défaut et découvrir comment créer vos propres filtres, consultez la documentation [Filtres de rétention][3]. Accédez à la page [Retention Filters][7] dans l'application Datadog pour créer ou modifier vos propres filtres.
+Vous pouvez personnaliser les spans qui sont conservées et leurs taux de rétention. Par défaut, la fonctionnalité de [rétention intelligente de Datadog][4] est appliquée. Pour en savoir plus sur le filtre de rétention des spans par défaut et découvrir comment créer vos propres filtres, consultez la section relative aux [filtres de rétention][3]. Accédez à la page [Retention Filters][8] dans l'application Datadog pour créer ou modifier vos propres filtres.
 
 ## Live Analytics pendant 15 minutes
 
@@ -130,7 +133,7 @@ Toutes les spans indexées par des filtres de rétention ou d'anciens filtres Ap
 
 **Remarque :** À compter du 20 octobre 2020, la fonctionnalité App Analytics a été remplacée par Tracing without Limits, une façon plus flexible d'ingérer 100 % de vos traces et de conserver celles qui intéressent le plus votre entreprise.
 
-Vous pouvez personnaliser les spans qui sont conservées et leurs taux de rétention. Par défaut, la [rétention intelligente de Datadog][4] est appliquée et conserve automatiquement les traces associées à une diversité d'erreurs et de latences ainsi que de ressources dont le débit est faible. Pour en savoir plus sur le filtre de rétention des spans par défaut et découvrir comment créer vos propres filtres, consultez la documentation [Filtres de rétention][3]. Accédez à la page [Retention Filters][7] dans l'application Datadog pour créer ou modifier vos propres filtres.
+Vous pouvez personnaliser les spans qui sont conservées et leurs taux de rétention. Par défaut, la fonctionnalité de [rétention intelligente de Datadog][4] est appliquée. Elle conserve automatiquement les traces associées à une variété d'erreurs et de latences ainsi que les traces liées à des ressources présentant un débit faible. Pour en savoir plus sur le filtre de rétention des spans par défaut et découvrir comment créer vos propres filtres, consultez la section relative aux [filtres de rétention][3]. Accédez à la page [Retention Filters][8] dans l'application Datadog pour créer ou modifier vos propres filtres.
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /fr/tracing/trace_retention_and_ingestion/#ingestion-controls
@@ -138,4 +141,5 @@ Vous pouvez personnaliser les spans qui sont conservées et leurs taux de réten
 [4]: /fr/tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter
 [5]: /fr/tracing/visualization/#indexed-span
 [6]: /fr/tracing/trace_retention_and_ingestion/
-[7]: https://app.datadoghq.com/apm/traces/retention-filters
+[7]: /fr/account_management/billing/apm_distributed_tracing/
+[8]: https://app.datadoghq.com/apm/traces/retention-filters
