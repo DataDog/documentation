@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     live: {
         ddClientToken: 'pub16bb5ef3e9bf55f156338987e27246c7',
         ddApplicationId: '3493b4e7-ab12-4852-8836-ba96af7bc745',
