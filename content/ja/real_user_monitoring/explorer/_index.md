@@ -4,12 +4,15 @@ kind: documentation
 aliases:
   - /ja/real_user_monitoring/rum_explorer
 further_reading:
-  - link: /real_user_monitoring/explorer/search/
-    tag: ドキュメント
-    text: Datadog でビューを検索する
   - link: /real_user_monitoring/rum_explorer/
     tag: ドキュメント
     text: Datadog でビューを検索する
+  - link: /real_user_monitoring/explorer/search/
+    tag: ドキュメント
+    text: RUM エクスプローラーでの検索について
+  - link: 'https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals'
+    tag: ブログ
+    text: RUM でウェブに関する主な指標を監視
 ---
 {{< img src="real_user_monitoring/explorer/rum_explorer.png" alt="RUM エクスプローラー"  >}}
 
@@ -51,7 +54,7 @@ RUM は、デフォルトでコンテキスト情報を収集します。その�
 すべての検索パラメーターは URL の中に含まれています。URL を共有することで、ビューを共有できます。
 
 
-## セットアップ - ファセットとメジャー
+## ファセットとメジャーの設定
 
 情報を収集したら、RUM イベントの属性にファセットまたはメジャーのインデックスを付けると、[コンテキスト](#context)の作成時や[分析][3]時に使用できます。
 
