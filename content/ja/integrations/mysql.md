@@ -2,12 +2,17 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    mysql: assets/dashboards/overview.json
+    mysql-screenboard: assets/dashboards/overview-screenboard.json
   logs:
     source: mysql
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    replica running: assets/monitors/replica_running.json
+    select query rate: assets/monitors/select_query_rate.json
   saved_views:
+    mysql_processes: assets/saved_views/mysql_processes.json
     operations: assets/saved_views/operations.json
     operations_overview: assets/saved_views/operations_overview.json
     slow_operations: assets/saved_views/slow_operations.json
@@ -235,6 +240,13 @@ _Agent バージョン 6.0 以降で利用可能_
            pattern: "# Time:"
            # If mysqld was started with `--log-short-format`, use:
            # pattern: "# Query_time:"
+           # If using mysql version <5.7, use the following rules instead:
+           # - type: multi_line
+           #   name: new_slow_query_log_entry
+           #   pattern: "# Time|# User@Host"
+           # - type: exclude_at_match
+           #   name: exclude_timestamp_only_line
+           #   pattern: "# Time:"
 
      - type: file
        path: "<GENERAL_LOG_FILE_PATH>"
@@ -452,8 +464,11 @@ MySQL チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
+**mysql.replication.replica_running**:<br>
+`Replica_IO_Running` および `Replica_SQL_Running` の両方を実行していないレプリカに `CRITICAL` を、いずれかのみが実行していない場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。詳細については、[こちら][7]を参照してください。
+
 **mysql.replication.slave_running**:<br>
-監視対象の MySQL インスタンスに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。詳細については、[こちら][7]を参照してください。
+`mysql.replication.replica_running` に置き換えられ、非推奨となりました。`Replica_IO_Running` および `Replica_SQL_Running` の両方を実行していないレプリカに `CRITICAL` を、いずれかのみが実行していない場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。詳細については、[こちら][7]を参照してください。
 
 **mysql.can_connect**:<br>
 Agent が MySQL に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
