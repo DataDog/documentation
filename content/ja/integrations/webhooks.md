@@ -37,38 +37,42 @@ Webhook を使用するには、Webhook をトリガーするメトリクスア�
 
 ペイロードフィールドに独自のペイロードを指定して、リクエストに独自のカスタムフィールドを追加することもできます。ペイロードを URL エンコードする場合は、**Encode as form** をオンにし、JSON 形式でペイロードを指定します。以下の変数を使用できます。
 
-| 変数           | 意味                                                                                                                                       |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| $AGGREG_KEY       | 所属が同じイベントを集約するための ID _(例: 9bd4ac313a4d1e8fae2482df7b77628)_。                                                          |
-| $ALERT_CYCLE_KEY  | アラートがトリガーした時点から解決するまでイベントにリンクする ID                                                                          |
-| $ALERT_ID         | アラートの ID _(例: 1234)_                                                                                                                   |
-| $ALERT_METRIC     | メトリクスがアラートの場合は、メトリクスの名前 _(例: `system.load.1`)_                                                                                |
-| $ALERT_PRIORITY   | モニターのアラート設定優先度 _(例: `P1`、`P2`)_                                                                                        |
-| $ALERT_QUERY      | Webhook をトリガーしたモニターのクエリ                                                                                              |
-| $ALERT_SCOPE      | アラートをトリガーしたタグのカンマ区切りリスト _(例: `availability-zone:us-east-1a, role:computing-node`)_                              |
-| $ALERT_STATUS     | アラートステータスのサマリー _(例: system.load.1 over host:my-host was > 0 at least once during the last 1m)_                               |
-| $ALERT_TITLE      | アラートのタイトル                                                                                                                           |
-| $ALERT_TRANSITION | アラート通知のタイプ _(値: `Recovered`, `Triggered`/`Re-Triggered`, `No Data`/`Re-No Data`, `Warn`/`Re-Warn`, `Null`, `Renotify`)_ |
-| $ALERT_TYPE       | アラートのタイプ                                                                                                                            |
-| $DATE             | イベントが発生した日付 _(epoch)_(例: 1406662672000)_                                                                              |
-| $EMAIL            | Webhook をトリガーしたイベントをポストしたユーザーの電子メール                                                                               |
-| $EVENT_MSG        | イベントのテキスト _(例: @webhook-url Sending to the webhook)_                                                                              |
-| $EVENT_TITLE      | イベントのタイトル _(例: \[Triggered] \[Memory Alert])_                                                                                    |
-| $EVENT_TYPE       | イベントのタイプ (値: `metric_alert_monitor`, `event_alert`, または `service_check`)                                                         |
-| $HOSTNAME         | イベントに関連付けられたサーバーのホスト名 (ある場合)                                                                        |
-| $ID               | イベントの ID _(例: 1234567)_                                                                                                            |
-| $LAST_UPDATED     | イベントが最後に更新された日付                                                                                                         |
-| $LINK             | イベントの URL _(例: `https://app.datadoghq.com/event/jump_to?event_id=123456`)_                                                         |
-| $LOGS_SAMPLE      | ログモニターアラートからのログサンプル                                                                                                          |
-| $METRIC_NAMESPACE | メトリクスがアラートの場合は、メトリクスのネームスペース                                                                                                     |
-| $ORG_ID           | オーガニゼーションの ID _(例: 11023)_                                                                                                      |
-| $ORG_NAME         | オーガニゼーションの名前 _(例: Datadog)_                                                                                                  |
-| $PRIORITY         | イベントの優先度 _(値:`normal` または `low`)_                                                                                           |
-| $SNAPSHOT         | イベントにスナップショットが含まれている場合は、そのイメージの URL _(例: `https://url.to.snpashot.com/`)_                                                   |
-| $TAGS             | イベントタグのカンマ区切りリスト _(例: `monitor, name:myService, role:computing-node`)_                                              |
-| $TEXT_ONLY_MSG    | マークダウン書式設定なしのイベントのテキスト                                                                                                |
-| $USER             | Webhook をトリガーしたイベントをポストしたユーザー _(例: rudy)_                                                                             |
-| $USERNAME         | Webhook をトリガーしたイベントをポストしたユーザーのユーザー名                                                                            |
+| 変数            | 意味                                                                                                                                       |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| $AGGREG_KEY         | 所属が同じイベントを集約するための ID _(例: 9bd4ac313a4d1e8fae2482df7b77628)_。                                                          |
+| $ALERT_CYCLE_KEY    | アラートがトリガーした時点から解決するまでイベントにリンクする ID                                                                          |
+| $ALERT_ID           | アラートの ID _(例: 1234)_                                                                                                                   |
+| $ALERT_METRIC       | メトリクスがアラートの場合は、メトリクスの名前 _(例: `system.load.1`)_                                                                                |
+| $ALERT_PRIORITY     | モニターのアラート設定優先度 _(例: `P1`、`P2`)_                                                                                        |
+| $ALERT_QUERY        | Webhook をトリガーしたモニターのクエリ                                                                                              |
+| $ALERT_SCOPE        | アラートをトリガーしたタグのカンマ区切りリスト _(例: `availability-zone:us-east-1a, role:computing-node`)_                              |
+| $ALERT_STATUS       | アラートステータスのサマリー _(例: system.load.1 over host:my-host was > 0 at least once during the last 1m)_                               |
+| $ALERT_TITLE        | アラートのタイトル                                                                                                                           |
+| $ALERT_TRANSITION   | アラート通知のタイプ _(値: `Recovered`, `Triggered`/`Re-Triggered`, `No Data`/`Re-No Data`, `Warn`/`Re-Warn`, `Renotify`)_         |
+| $ALERT_TYPE         | アラートのタイプ                                                                                                                            |
+| $DATE               | イベントが発生した日付 _(epoch)_(例: 1406662672000)_                                                                              |
+| $EMAIL              | Webhook をトリガーしたイベントをポストしたユーザーの電子メール                                                                               |
+| $EVENT_MSG          | イベントのテキスト _(例: @webhook-url Sending to the webhook)_                                                                              |
+| $EVENT_TITLE        | イベントのタイトル _(例: \[Triggered] \[Memory Alert])_                                                                                    |
+| $EVENT_TYPE         | イベントのタイプ (値: `metric_alert_monitor`, `event_alert`, または `service_check`)                                                         |
+| $HOSTNAME           | イベントに関連付けられたサーバーのホスト名 (ある場合)                                                                        |
+| $ID                 | イベントの ID _(例: 1234567)_                                                                                                            |
+| $INCIDENT_COMMANDER | JSON オブジェクトとインシデントコマンダーのハンドル、uuid、名前、メール、およびアイコン                                                                 |
+| $INCIDENT_FIELDS    | インシデントフィールドからその値に対する、それぞれの JSON オブジェクトマッピング _(例: `{"state": "active", "datadenter": ["eu1", "us1"]}`)_                 |
+| $INCIDENT_PUBLIC_ID | 関連するインシデントのパブリック ID _(例: 123)_                                                                                            |
+| $INCIDENT_TITLE     | インシデントのタイトル                                                                                                                        |
+| $LAST_UPDATED       | イベントが最後に更新された日付                                                                                                         |
+| $LINK               | イベントの URL _(例: `https://app.datadoghq.com/event/jump_to?event_id=123456`)_                                                         |
+| $LOGS_SAMPLE        | ログモニターアラートからのログサンプル                                                                                                          |
+| $METRIC_NAMESPACE   | メトリクスがアラートの場合は、メトリクスのネームスペース                                                                                                     |
+| $ORG_ID             | オーガニゼーションの ID _(例: 11023)_                                                                                                      |
+| $ORG_NAME           | オーガニゼーションの名前 _(例: Datadog)_                                                                                                  |
+| $PRIORITY           | イベントの優先度 _(値:`normal` または `low`)_                                                                                           |
+| $SNAPSHOT           | イベントにスナップショットが含まれている場合は、そのイメージの URL _(例: `https://url.to.snpashot.com/`)_                                                   |
+| $TAGS               | イベントタグのカンマ区切りリスト _(例: `monitor, name:myService, role:computing-node`)_                                              |
+| $TEXT_ONLY_MSG      | マークダウン書式設定なしのイベントのテキスト                                                                                                |
+| $USER               | Webhook をトリガーしたイベントをポストしたユーザー _(例: rudy)_                                                                             |
+| $USERNAME           | Webhook をトリガーしたイベントをポストしたユーザーのユーザー名                                                                            |
 
 ### Authentication
 
