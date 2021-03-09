@@ -116,7 +116,7 @@ To automatically profile your code, set the `DD_PROFILING_ENABLED` environment v
     DD_ENV=prod \
     DD_SERVICE=my-web-app \
     DD_VERSION=1.0.3 \
-    dd-trace-run python app.py
+    ddtrace-run python app.py
 
 It is strongly recommended that you add tags like `service` or `version`, as they provide the ability to slice and dice your profiles across these dimensions. See [Configuration] below.
 
