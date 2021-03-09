@@ -27,7 +27,7 @@ From these names, a canonical name is chosen for the host. The Agent uses this n
 
 The canonical hostname is chosen according to the following rules. The first match is selected.
 
-1. **agent-hostname**: A hostname explicitly set in the [Agent configuration file][2] if it does not start with ip or domu.
+1. **agent-hostname**: A hostname explicitly set in the [Agent configuration file][2] if it does not start with ip- or domu.
 2. **hostname** (`hostname -f` on Linux): If the DNS hostname is not an EC2 default (e.g. ip-192-0-0-1).
 3. **instance-id**: If the Agent can reach the EC2 metadata endpoint from the host.
 4. **hostname**: Fall back on the DNS hostname even if it is an EC2 default.
