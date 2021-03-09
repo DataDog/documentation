@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
+  - link: "/real_user_monitoring/browser/data_collected/"
+    tag: "Documentation"
+    text: "Collecting Browser Data and Context"
   - link: "/real_user_monitoring/explorer/"
     tag: "Documentation"
     text: "Explore your views within Datadog"
@@ -28,7 +31,7 @@ Once an interaction is detected, all new RUM events are attached to the ongoing 
 
 ## Action timing metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][3]. For information about configuring for sampling or global context see [Advanced Configuration][4].
+For information about the default attributes, global context, and sampling see [Collecting Browser Data and Context][3].
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -135,7 +138,6 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/browser/?tab=us#initialization-parameters
-[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
-[3]: /real_user_monitoring/browser/data_collected/#default-attributes
-[4]: /real_user_monitoring/browser/advanced_configuration/
+[1]: /real_user_monitoring/browser/#initialization-parameters
+[2]: /real_user_monitoring/browser/data_collected/#add-global-context
+[3]: /real_user_monitoring/browser/data_collected/

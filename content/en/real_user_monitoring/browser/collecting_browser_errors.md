@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
+  - link: "/real_user_monitoring/browser/data_collected/"
+    tag: "Documentation"
+    text: "Collecting Browser Data and Context"
   - link: "/real_user_monitoring/explorer/"
     tag: "Documentation"
     text: "Explore your views within Datadog"
@@ -25,14 +28,14 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 ## Error origins
 Front-end errors are split into four different categories depending on their `error.origin`:
 
-- **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the network errors documentation][1].
+- **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the network errors documentation](#network-errors).
 - **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
 - **console**: `console.error()` API calls.
 - **custom**: Errors sent with the [RUM `addError` API](#collect-errors-manually) that default to `custom`.
 
 ## Error attributes
 
-For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Advanced Configuration][3].
+For information about the default attributes, global context, and sampling see [Collecting Browser Data and Context][1].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -60,7 +63,7 @@ Network errors include information about failing HTTP requests. The following fa
 
 ### Source errors
 
-Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][4].
+Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][2].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -78,7 +81,7 @@ addError(
 );
 {{< /code-block >}}
 
-**Note**: The [Error Tracking][5] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace.
+**Note**: The [Error Tracking][3] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -166,8 +169,6 @@ try {
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/data_collected/error/#network-errors
-[2]: /real_user_monitoring/browser/data_collected/
-[3]: /real_user_monitoring/browser/advanced_configuration/
-[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[5]: /real_user_monitoring/error_tracking
+[1]: /real_user_monitoring/browser/data_collected/
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[3]: /real_user_monitoring/error_tracking

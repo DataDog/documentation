@@ -1916,41 +1916,36 @@ main:
     parent: rum
     identifier: rum_browser
     weight: 1
-  - name: Data Collected
+  - name: Collecting Browser Data and Context
     url: real_user_monitoring/browser/data_collected/
     parent: rum_browser
     identifier: rum_data_collected
     weight: 101
-  - name: Advanced Configuration
-    url: real_user_monitoring/browser/advanced_configuration/
-    parent: rum_browser
-    identifier: rum_advanced
-    weight: 102
   - name: Monitoring Page Performance
     url: real_user_monitoring/browser/monitoring_page_performance/
     parent: rum_browser
     identifier: page_performance
-    weight: 103
+    weight: 102
   - name: Monitoring Resource Performance
     url: real_user_monitoring/browser/monitoring_resource_performance/
     parent: rum_browser
     identifier: resource_performance
-    weight: 104
+    weight: 103
   - name: Collecting Browser Errors
     url: real_user_monitoring/browser/collecting_browser_errors/
     parent: rum_browser
     identifier: collect_errors
-    weight: 105
+    weight: 104
   - name: Tracking User Actions
     url: real_user_monitoring/browser/tracking_user_actions/
     parent: rum_browser
     identifier: track_actions
-    weight: 106
+    weight: 105
   - name: Troubleshooting
     url: real_user_monitoring/browser/troubleshooting/
     parent: rum_browser
     identifier: troubleshooting
-    weight: 107
+    weight: 106
   - name: Android Monitoring
     url: real_user_monitoring/android/
     parent: rum

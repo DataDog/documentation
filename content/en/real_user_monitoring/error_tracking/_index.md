@@ -31,12 +31,12 @@ Error Tracking makes it easier to monitor these errors by:
 
 ## Getting started
 
-Error Tracking processes errors collected from the browser by the RUM SDK: whenever a [source][1] or [custom][2] error containing a stack trace is collected, Error Tracking processes and groups it under an issue (group of similar errors).
+Error Tracking processes errors collected from the browser by the RUM SDK: whenever a [source or custom error][1] containing a stack trace is collected, Error Tracking processes and groups it under an issue (group of similar errors).
 
 To quickly get started with error tracking:
 
-1. Download the latest version of the [RUM Browser SDK][3].
-2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][4].
+1. Download the latest version of the [RUM Browser SDK][2].
+2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][3].
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">The Datadog for Government site does not support sending alerts for new error tracking issues.</div>
@@ -49,7 +49,7 @@ The consequence is that stack traces of errors fired from those applications are
 
 #### Javascript source maps
 
-Source maps are mapping files generated when minifying Javascript source code. The [Datadog CLI][5] can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps with their related minified files. Upload your source maps directly from your CI pipeline:
+Source maps are mapping files generated when minifying Javascript source code. The [Datadog CLI][4] can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps with their related minified files. Upload your source maps directly from your CI pipeline:
 
 {{< tabs >}}
 {{% tab "US" %}}
@@ -88,7 +88,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 For Error Tracking to properly work with your source maps, you must configure your Javascript bundler so that:
 
 -   Source maps directly include the related source code. Make sure the <code>sourcesContent</code> attribute is not empty before uploading them.
--   The size of each source map augmented with the size of the related minified file does not exceed __our limit of 50mb__. This sum can be reduced by configuring your bundler to split the source code into multiple smaller chunks ([see how to do this with WebpackJS][6]).
+-   The size of each source map augmented with the size of the related minified file does not exceed __our limit of 50mb__. This sum can be reduced by configuring your bundler to split the source code into multiple smaller chunks ([see how to do this with WebpackJS][5]).
 
 **Note**: Currently only source maps with the `.min.js` extension will work to correctly unminify stack traces in the Error Tracking UI. Source maps with other extensions (for example, `.mjs`, etc.) while accepted will not unminify stack traces. 
 
@@ -98,9 +98,8 @@ For Error Tracking to properly work with your source maps, you must configure yo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/?tab=error#error-origins
-[2]: /real_user_monitoring/browser/advanced_configuration#custom-errors
-[3]: https://www.npmjs.com/package/@datadog/browser-rum
-[4]: /real_user_monitoring/browser/#initialization-parameters
-[5]: https://github.com/DataDog/datadog-ci/
-[6]: https://webpack.js.org/guides/code-splitting/
+[1]: /real_user_monitoring/browser/collecting_browser_errors/
+[2]: https://www.npmjs.com/package/@datadog/browser-rum
+[3]: /real_user_monitoring/browser/#initialization-parameters
+[4]: https://github.com/DataDog/datadog-ci/
+[5]: https://webpack.js.org/guides/code-splitting/
