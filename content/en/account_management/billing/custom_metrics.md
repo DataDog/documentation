@@ -110,6 +110,7 @@ The number of unique tag value combinations submitted for a DISTRIBUTION metric 
 The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. This results in `request.Latency` reporting a total of **5\*4 = 20 custom metrics**.
 
 ##### Adding percentile aggregations
+
 You can include percentile aggregations (`p50`, `p75`, `p90`, `p95`, and `p99`) on your distribution metric. Including these additional percentile aggregations results in an additional volume of five times the unique combination of metric name and tag values (**5\*4 = 20 custom metrics**). Therefore the total number of custom metrics emitted from this distribution metric with percentile aggregationos is **2 * (5\*4 = 20 custom metrics)** .
 
 This table summarizes the effect of adding percentile aggregations to any distribution metric. 
