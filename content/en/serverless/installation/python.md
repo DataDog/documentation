@@ -223,7 +223,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
     }
     ```
 1. Add `datadog_lambda` to your `requirements.txt`.
-1. Register `datadog_lambda_wrapper` as a [middleware][1]:
+1. Register `datadog_lambda_wrapper` as a [middleware][1] in your `app.py`:
     ```python
     from chalice import Chalice, ConvertToMiddleware
     from datadog_lambda.wrapper import datadog_lambda_wrapper
