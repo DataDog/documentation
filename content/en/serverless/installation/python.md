@@ -216,7 +216,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
           "api_gateway_stage": "api",
           "environment_variables": {
             "DD_TRACE_ENABLED": "true",
-      	    "DD_FLUSH_TO_LOG": "true"
+            "DD_FLUSH_TO_LOG": "true"
           }
         }
       }
