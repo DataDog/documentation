@@ -8,6 +8,9 @@ further_reading:
 - link: "/tracing/trace_search_and_analytics/#live-search-for-15-minutes"
   tag: "Documentation"
   text: "Live Search"
+- link: "https://www.datadoghq.com/blog/aws-serverless-tracing-datadog-apm/"
+  tag: "Blog"
+  text: "Trace AWS event-driven serverless applications with Datadog APM"
 ---
 
 
@@ -254,6 +257,10 @@ exports.eventBridge = (event, context) => {
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/installation
 [2]: /serverless/distributed_tracing
