@@ -449,6 +449,38 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 {{% /tab %}}
 {{< /tabs >}}
 
+### Examples - Log collection from file configured in an annotation
+
+The Agent v7.26.0+/6.26.0+ can directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a file type configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
+
+For example, to collect logs from `/logs/app/prod.log` from a container named `webapp` inside a Kubernetes pod, the pod definition would be:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+  annotations:
+    ad.datadoghq.com/webapp.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}]'
+  labels:
+    name: webapp
+spec:
+  containers:
+    - name: webapp
+      image: webapp:latest
+```
+
+**Notes**:
+
+- The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to a file may mount a volume such as `/logs/app`, where the log file is written. Please check Kubernetes documentation for further detail on sharing volumes between pods/containers.
+
+- When using this kind of annotation with a container, output logs are not collected automatically. If collection from both the container and a file are needed it should be explicitly enabled in the annotation, for example:
+```yaml
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}, {"source": "container", "service": "app"}]'
+```
+
+- When using this kind of combination, `source` and `service` have no default value for logs collected from a file and should be explicitly set in the annotation.
+
 
 ## Advanced log collection
 

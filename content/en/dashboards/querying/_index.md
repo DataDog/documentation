@@ -51,9 +51,9 @@ Your chosen metric can be filtered by host or tag using the **from** dropdown to
 
 {{< img src="dashboards/querying/filter.png" alt="Graphing Filter"  style="width:75%;" >}}
 
-You can also use advanced filtering within the `from` dropdown to evaluate boolean filtered queries such as:
+You can also use [advanced filtering][11] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries such as:
 
-{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}}
+{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}} 
 
 To learn more about tags, refer to the [Tagging][6] documentation.
 
@@ -164,3 +164,4 @@ View event correlations by using the **Event Overlays** section in the graphing 
 [8]: /dashboards/functions/rollup/
 [9]: /dashboards/functions/#apply-functions-optional
 [10]: /events/#event-query-language
+[11]: /metrics/advanced-filtering/

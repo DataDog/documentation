@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Event Hubs.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_event_hub/'
+draft: false
 git_integration_title: azure_event_hub
 has_logo: true
 integration_title: Microsoft Azure Event Hub
@@ -29,7 +30,7 @@ Recueillez des métriques d'Azure Event Hubs pour :
 - Visualiser les performances de vos hubs d'événements
 - Corréler les performances de vos hubs d'événements avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

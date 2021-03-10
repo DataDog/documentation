@@ -16,8 +16,6 @@ further_reading:
 
 ログエクスプローラーで、前処理やセットアップを行わずに、ログデータからトランザクションを構築します。
 
-{{< img src="logs/explorer/transactions_walkthrough.gif" alt="ログエクスプローラーでトランザクションクエリを構築する" style="width:80%;" >}}
-
 ## トランザクションテーブルビュー
 
 トランザクションビューに切り替えて、トランザクションを構築するファセットを選択します。トランザクションに一般的に使用されるファセットは、`requestId`、`sessionId`、`transactionId`、`clientIP`、`userId` などのデータソース全体で使用可能な一意の識別子です。表のトランザクションごとに、次の情報が表示されます。
@@ -29,7 +27,7 @@ further_reading:
 
 トランザクション行をクリックして、基底のログイベントにドリルダウンします。
 
-{{< img src="logs/explorer/transactions_details.png" alt="ドリルダウンしてトランザクションログイベントを確認する" style="width:80%;" >}}
+{{< img src="logs/explorer/transactions_side_panel.png" alt="ドリルダウンしてトランザクションログイベントを確認する" style="width:80%;" >}}
 
 ## トランザクション操作
 

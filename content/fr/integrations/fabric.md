@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Consultez et recherchez des tâches Fabric depuis votre flux d'événements Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/fabric/'
+draft: false
 git_integration_title: fabric
 has_logo: true
 integration_title: Fabric
@@ -25,7 +26,7 @@ Associez Fabric à Datadog pour :
 - Enregistrer et rechercher des événements de déploiement dans le flux d'événements
 - Corréler les événements de déploiement avec les changements de métriques sur les dashboards
 
-## Implémentation
+## Configuration
 
 ### Configuration
 

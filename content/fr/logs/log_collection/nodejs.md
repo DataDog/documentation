@@ -13,7 +13,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualiser-les-donnees'
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -133,15 +133,12 @@ logs:
 
 Vous pouvez transmettre vos logs depuis votre application à Datadog sans installer d'Agent sur votre host. Veuillez cependant noter qu'il est conseillé d'utiliser un Agent pour l'envoi de vos logs, en raison de ses capacités natives de gestion de la connexion.
 
-{{< tabs >}}
-{{% tab "Winston 3.0" %}}
-
-Utilisez le [transport HTTP Winston][1] pour envoyer vos logs directement via l'[API Log Datadog][2].
+Utilisez le [transport HTTP Winston][4] pour envoyer vos logs directement via l'[API Log Datadog][5].
 Dans votre fichier Bootstrap ou dans votre code, déclarez le logger comme suit :
 
 {{< site-region region="us" >}}
 
-```js
+```javascript
 const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
@@ -163,7 +160,7 @@ module.exports = logger;
 
 // Exemples de log
 logger.log('info', 'Voici un log simple !');
-logger.info('Voici un log avec des métadonnées',{color: 'blue' });
+logger.info('Voici un log avec des métadonnées !',{color: 'blue' });
 ```
 
 Remarque : vous pouvez également tester le [transport Datadog][1] créé par la communauté.
@@ -173,7 +170,7 @@ Remarque : vous pouvez également tester le [transport Datadog][1] créé par l
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-```js
+```javascript
 const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
@@ -195,15 +192,13 @@ module.exports = logger;
 
 // Exemples de log
 logger.log('info', 'Voici un log simple !');
-logger.info('Voici un log avec des métadonnées',{color: 'blue' });
+logger.info('Voici un log avec des métadonnées !',{color: 'blue' });
 ```
-
-{{< /site-region >}}
 
 [1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
 [2]: /fr/api/v1/logs/#send-logs
-{{% /tab %}}
-{{< /tabs >}}
+
+{{< /site-region >}}
 
 ## Dépannage
 
@@ -226,3 +221,5 @@ Assurez-vous de ne pas définir le paramètre `max_connect_retries` sur `1` (val
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
 [3]: /fr/tracing/connect_logs_and_traces/nodejs/
+[4]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
+[5]: /fr/api/v1/logs/#send-logs

@@ -54,7 +54,7 @@ Lambda Java Client Library は、インスツルメントされた HTTP 接続�
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         URL url = new URL("https://example.com");
         HttpURLConnection instrumentedUrlConnection = dd.makeUrlConnection(url); //含まれるトレースヘッダー
@@ -71,12 +71,12 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         URL url = new URL("https://example.com");
         HttpURLConnection hc = (HttpURLConnection)url.openConnection();
 
-        //分散型トレーシングヘッダーを追加します
+        //分散型トレーシングヘッダーを追加
         hc = (HttpURLConnection) dd.addTraceHeaders(hc);
 
         hc.connect();
@@ -91,7 +91,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
 
@@ -108,12 +108,12 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet hg = new HttpGet("https://example.com");
 
-        //分散型トレーシングヘッダーを追加します
+        //分散型トレーシングヘッダーを追加
         hg = (HttpGet) dd.addTraceHeaders(hg);
 
         HttpResponse hr = client.execute(hg);
@@ -128,7 +128,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
@@ -148,7 +148,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
@@ -156,7 +156,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
             .url("https://example.com")
             .build();
 
-        //分散型トレーシングヘッダーを追加します
+        //分散型トレーシングヘッダーを追加
         okHttpRequest = dd.addTraceHeaders(okHttpRequest);
 
         Response resp = okHttpClient.newCall(okHttpRequest).execute();

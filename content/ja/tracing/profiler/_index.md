@@ -17,7 +17,9 @@ further_reading:
     tags: ブログ
     text: 継続的な脆弱性分析のための Datadog GitHub アクション。
 ---
-{{< img src="tracing/profiling/profiling_flamegraph.gif" alt="プロファイリングのフレームグラフ">}}
+{{< vimeo 441865141 >}}
+
+</br>
 
 発見した CPU、メモリ、IO のボトルネックをメソッド名、クラス名、行番号で分類して、エンドユーザー側での遅延とインフラストラクチャーにかかるコストを大幅に削減することができます。
 

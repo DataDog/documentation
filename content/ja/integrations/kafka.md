@@ -2,14 +2,18 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    kafka: assets/dashboards/kafka_dashboard.json
   logs:
     source: kafka
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Kafka] High producer request rate': assets/recommended_monitors/kafka_high_producer_request_rate.json
+    '[Kafka] Offline partition': assets/recommended_monitors/kafka_offline_partition.json
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     kafka_patterns: assets/saved_views/kafka_patterns.json
+    kafka_processes: assets/saved_views/kafka_processes.json
     logger_overview: assets/saved_views/logger_overview.json
   service_checks: assets/service_checks.json
 categories:
@@ -235,16 +239,22 @@ Agent の Kafka コンシューマーチェックは [Datadog Agent][4] パッ�
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
+##### メトリクスの収集
+
 1. [Agent のコンフィギュレーションディレクトリ][14]のルートにある `conf.d/` フォルダーの `kafka_consumer.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル kafka_consumer.d/conf.yaml][15] を参照してください。
 
 2. [Agent を再起動します][16]。
+
+##### ログの収集
+
+このチェックは、その他のログを収集しません。Kafka ブローカーからログを収集するには、[Kafka のログコレクション手順][17]をご参照ください。
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "コンテナ化" xxx -->
 
 #### コンテナ化
 
-コンテナ環境の場合は、[JMX を使用したオートディスカバリー][17]のガイドを参照してください。
+コンテナ化された環境については、[JMX のオートディスカバリー][18]ガイドをご参照ください。
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
@@ -297,4 +307,5 @@ Kafka コンシューマーチェックには、サービスのチェック機�
 [14]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [15]: https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/datadog_checks/kafka_consumer/data/conf.yaml.example
 [16]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[17]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[17]: https://docs.datadoghq.com/ja/integrations/kafka/#log-collection
+[18]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

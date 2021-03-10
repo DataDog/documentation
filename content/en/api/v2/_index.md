@@ -28,43 +28,138 @@ To try out the API [![Run in Postman][3]](https://app.getpostman.com/run-collect
 
 By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][6] languages in each endpoint to see code examples from that library. To install each library:
 
-{{< programming-lang-wrapper langs="java,python,ruby,go" >}}
+{{< programming-lang-wrapper langs="java,python,python-beta,ruby,ruby-beta,go" >}}
 
 {{< programming-lang lang="java" >}}
+#### Installation
 Maven - Add this dependency to your project's POM:
- ```java
+```xml
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-api-client</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
- ```
+```
 
- Gradle - Add this dependency to your project's build file:
- ```java
+Gradle - Add this dependency to your project's build file:
+```gradle
 compile "com.datadoghq:datadog-api-client:1.0.0"
- ```
+```
+
+#### Usage
+
+```java
+import com.datadog.api.<VERSION>.client.ApiClient;
+import com.datadog.api.<VERSION>.client.ApiException;
+import com.datadog.api.<VERSION>.client.Configuration;
+import com.datadog.api.v2.client.auth.*;
+import com.datadog.api.v2.client.model.*;
+import com.datadog.api.<VERSION>.client.api.*;
+```
+**Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
+
+#### Examples
+
+Maven `pom.xml` for running examples:
+```xml
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>example</artifactId>
+  <version>1</version>
+  <dependencies>
+    <dependency>
+      <groupId>com.datadoghq</groupId>
+      <artifactId>datadog-api-client</artifactId>
+      <version>1.0.0-beta.9</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
+```
+Make sure that `CLASSPATH` variable contains all dependencies.
+
+```sh
+export CLASSPATH=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args="%classpath")
+```
+
+Gradle `build.gradle` for running examples:
+```gradle
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.datadoghq:datadog-api-client:1.0.0-beta.9'
+}
+
+application {
+    mainClassName = 'Example.java'
+}
+```
+Execute example by running `gradle run` command.
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
- ```python
+#### Installation
+```sh
 pip install datadog
- ```
+```
+#### Usage
+```python
+import datadog
+```
+{{< /programming-lang >}}
 
+{{< programming-lang lang="python-beta" >}}
+#### Installation
+```console
+pip3 install datadog-api-client --pre
+```
+#### Usage
+```python
+import datadog_api_client
+```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
- ```ruby
+#### Installation
+```sh
 gem install dogapi
- ```
+```
+#### Usage
+```ruby
+require 'dogapi'
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby-beta" >}}
+#### Installation
+```sh
+gem install datadog_api_client -v 1.0.0.beta.2 --pre
+```
+#### Usage
+```ruby
+require 'datadog_api_client'
+```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
- ```go
+#### Installation
+```sh
+go get github.com/DataDog/datadog-api-client-go
+```
+#### Usage
+```go
 import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
- ```
+```
  **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
 {{< /programming-lang >}}
 
@@ -72,7 +167,7 @@ import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
 
 Or check out the libraries directly:
 
-{{< partial name="api/sdk-languages.html" >}} 
+{{< partial name="api/sdk-languages.html" >}}
 </br>
 Trying to get started with the application instead? Check out our general [Getting Started docs][7].
 

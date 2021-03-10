@@ -90,6 +90,22 @@ Pour activer la collecte de logs avec votre DaemonSet :
 
    Le `pointdir` est utilisé pour stocker un fichier avec un pointeur vers tous les conteneurs à partir desquels l'Agent recueille des logs. Ce volume permet de s'assurer qu'aucun log n'est perdu lorsque l'Agent est redémarré ou lors d'un problème réseau.
 
+### Sans privilèges
+
+(Facultatif) Pour exécuter une installation sans privilèges, ajoutez le bloc suivant à votre [modèle de pod][2] :
+
+```yaml
+  spec:
+    securityContext:
+      runAsUser: <ID_UTILISATEUR>
+      supplementalGroups:
+        - <ID_GROUPE_DOCKER>
+```
+
+`<USER_ID>` est l'UID pour exécuter l'agent et `<DOCKER_GROUP_ID>` est l'ID du groupe auquel appartient le docker ou le socket containerd.
+
+Lorsque l'Agent s'exécute avec un utilisateur non root, il ne peut pas lire directement les fichiers de log contenus dans `/var/lib/docker/containers`. Dans la plupart des cas, il est nécessaire de monter le socket Docker sur le conteneur de l'Agent, afin de pouvoir récupérer les logs du conteneur depuis le daemon Docker.
+
 [1]: /fr/agent/guide/autodiscovery-management/
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -113,6 +129,20 @@ datadog:
     containerCollectAll: true
 ```
 
+### Sans privilèges
+
+(Facultatif) Pour exécuter une installation sans privilèges, ajoutez le bloc suivant au fichier `values.yaml` :
+
+```yaml
+datadog:
+  securityContext:
+      runAsUser: <ID_UTILISATEUR>
+      supplementalGroups:
+        - <ID_GROUPE_DOCKER>
+```
+
+`<USER_ID>` est l'UID pour exécuter l'agent et `<DOCKER_GROUP_ID>` est l'ID du groupe auquel appartient le docker ou le socket containerd.
+
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Operator" %}}
@@ -122,7 +152,7 @@ Mettez à jour votre manifeste `datadog-agent.yaml` comme suit :
 ```
 agent:
   image:
-    name: "datadog/agent:latest"
+    name: "gcr.io/datadoghq/agent:latest"
   log:
     enabled: true
 ```
@@ -135,9 +165,28 @@ Ensuite, appliquez la nouvelle configuration :
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
+## Sans privilèges
+
+(Facultatif) Pour exécuter une installation sans privilèges, ajoutez le bloc suivant au [CR Datadog][8] :
+
+```yaml
+agent:
+  config:
+    securityContext:
+      runAsUser: <ID_UTILISATEUR>
+      supplementalGroups:
+        - <ID_GROUPE_DOCKER>
+```
+
+`<USER_ID>` est l'UID pour exécuter l'agent et `<DOCKER_GROUP_ID>` est l'ID du groupe auquel appartient le docker ou le socket containerd.
+
 [1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
+
+**Attention **: si vous exécutez une installation sans privilèges, l'Agent doit pouvoir lire les fichiers de log dans `/var/log/pods`.
+Avec `containerd`, les fichiers de log qui sont dans `/var/log/pods` peuvent être lus par les membres du groupe `root`. Si vous avez suivi les instructions ci-dessus, l'Agent s'exécute avec le groupe `root`. Il peut donc lire les fichiers.
+Avec `docker`, les fichiers de log qui sont dans `/var/log/pods` correspondent à des liens symboliques vers `/var/lib/docker/containers` qui sont seulement accessibles par l'utilisateur `root`. Ainsi, pour `docker`, seul un Agent `root` peut lire les logs des pods dans `/var/log/pods`. Le socket Docker doit être monté sur le conteneur de l'Agent afin de pouvoir récupérer les logs des pods via le daemon Docker.
 
 Remarque : si vous souhaitez recueillir les logs à partir de `/var/log/pods` même lorsque le socket Docker est monté, vous pouvez définir la variable d'environnement `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (ou `logs_config.k8s_container_use_file` dans `datadog.yaml`) sur `true` pour forcer l'Agent à passer par les fichiers.
 
@@ -350,7 +399,7 @@ La ConfigMap suivante définit le modèle d'intégration pour les conteneurs `re
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: redis-config-map
+  name: redisdb-config-map
   namespace: default
 data:
   redisdb-config: |-

@@ -129,7 +129,7 @@ window.DD_RUM &&
 
 ### Actions utilisateur personnalisées
 
-Une fois le Real User Monitoring (RUM) lancé, générez des actions utilisateur lorsque vous souhaitez surveiller des interactions spécifiques sur les pages de votre application ou mesurer des délais personnalisés avec l'API `addUserAction(name: string, context: Context)` :
+Une fois le Real User Monitoring (RUM) lancé, générez des actions utilisateur lorsque vous souhaitez surveiller des interactions spécifiques sur les pages de votre application ou mesurer des délais personnalisés avec l'API `addAction(name: string, context: Context)` :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -137,10 +137,10 @@ Une fois le Real User Monitoring (RUM) lancé, générez des actions utilisateur
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addUserAction('<NOM>', '<OBJET_JSON>');
+datadogRum.addAction('<NOM>', '<OBJET_JSON>');
 
 // Exemple de code
-datadogRum.addUserAction('checkout', {
+datadogRum.addAction('checkout', {
     cart: {
         amount: 42,
         currency: '$',
@@ -154,11 +154,11 @@ datadogRum.addUserAction('checkout', {
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addUserAction('<NOM>', '<OBJET_JSON>');
+window.DD_RUM && DD_RUM.addAction('<NOM>', '<OBJET_JSON>');
 
 // Exemple de code
 window.DD_RUM &&
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',

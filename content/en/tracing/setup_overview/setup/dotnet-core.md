@@ -27,6 +27,12 @@ further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/samples"
     tag: "GitHub"
     text: "Examples of Custom Instrumentation"
+  - link: "/tracing/connect_logs_and_traces/dotnet/"
+    tag: "Documentation"
+    text: "Connect .NET application logs to traces"
+  - link: "/serverless/azure_app_services/"
+    tag: "Documentation"
+    text: "Microsoft Azure App Services Extension"
 ---
 
 ## Compatibility requirements

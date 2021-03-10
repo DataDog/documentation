@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez l'utilisation du réseau et de l'entrepôt de données attribuable à vos services Firebase.
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_firebase/'
+draft: false
 git_integration_title: google_cloud_firebase
 has_logo: true
 integration_title: Google Cloud Firebase
@@ -28,7 +29,7 @@ Recueillez des métriques de Google Firebase pour :
 - Visualiser les performances de vos bases de données Firebase et de vos services hébergés
 - Corréler les performances de vos outils Firebase avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

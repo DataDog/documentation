@@ -48,15 +48,15 @@
   },
 
   "email_support_sentence": {
-    "other": "Vous pouvez contacter l'équipe d'assistance par e-mail à l'adresse <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>."
+    "other": "Vous pouvez contacter l'équipe d'assistance Datadog par e-mail à l'adresse <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a> (pour tous les sites)."
   },
 
   "live_chat_support_sentence": {
-    "other": "Discutez avec notre équipe d'assistance du lundi au vendredi entre 16 h 00 et 3 h 00  HNEC via le chat intégré à l'application ou sur Slack : <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>."
+    "other": "Discutez avec notre équipe d'assistance du lundi au vendredi entre 16 h et 3 h CET via le chat intégré à l'application ou sur le canal <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Datadog</a> (États-Unis et Europe)."
   },
 
   "event_stream_support_sentence": {
-    "other": "Les messages de votre <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">flux d'événement</a> contenant la mention <code>@support-datadog</code> créent automatiquement un ticket à l'intention de notre équipe d'assistance. Il s'agit du moyen le plus pratique pour transmettre un snapshot de graphique."
+    "other": "Les messages de votre <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">flux d'événements</a> contenant la mention <code>@support-datadog</code> créent automatiquement un ticket à l'intention de notre équipe d'assistance. Il s'agit du moyen le plus pratique pour transmettre un snapshot de graphique (États-Unis et Europe)."
   },
 
   "agent_started_sentence": {

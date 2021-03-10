@@ -11,6 +11,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez les dépenses réelles et estimées sur votre compte AWS.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_billing/'
+draft: false
 git_integration_title: amazon_billing
 has_logo: true
 integration_title: AWS Billing
@@ -28,7 +29,7 @@ AWS Billing vous permet de surveiller vos prévisions et vos coûts de facturat
 
 Activez cette intégration pour visualiser dans Datadog vos métriques de facturation.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

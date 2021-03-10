@@ -43,6 +43,7 @@
                     "tracing",
                     "logs",
                     "synthetics",
+                    "serverless",
                     "real_user_monitoring",
                     "developers"
                 ],
@@ -99,9 +100,9 @@
                     "real_user_monitoring",
                     "security",
                     "security_monitoring",
-                    "serverless",
                     "synthetics",
                     "tracing",
+                    "serverless",
                     "watchdog"
                 ]
             },

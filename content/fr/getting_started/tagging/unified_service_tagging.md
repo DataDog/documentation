@@ -27,7 +27,7 @@ Avec ces trois tags, vous pouvez :
 
 ### Prérequis
 
-- Vous devez configurer l'[Agent Datadog][2] pour pouvoir utiliser le tagging de service unifié.
+- Vous devez configurer la version 6.19.x/7.19.x ou une version ultérieure de l'[Agent Datadog][2] pour pouvoir utiliser le tagging de service unifié.
 
 - Le tagging de service unifié nécessite une version du traceur qui prend en charge les nouvelles configurations des [tags réservés][1]. Vous trouverez davantage d'informations pour chaque langage dans les [instructions de configuration][3].
 
@@ -42,7 +42,7 @@ Pour commencer la configuration du tagging de service unifié, choisissez votre 
 
 ### Environnement conteneurisé
 
-Dans les environnements conteneurisés, les tags `env`, `service` et `version` sont définis via des variables d'environnement ou des étiquettes standard dans le fichier de configuration de votre Agent Datadog. Puisque l'Agent associe les données collectées à un conteneur spécifique, la configuration de ces tags peut être définie dans les métadonnées du conteneur.
+Dans les environnements conteneurisés, les tags `env`, `service` et `version` sont définis via les variables d'environnement du service ou à l'aide d'étiquettes (par exemple, les étiquettes de pod et de déploiement Kubernetes ou encore les étiquettes des conteneurs Docker). L'Agent Datadog détecte cette configuration de tagging et l'applique aux données recueillies à partir des conteneurs.
 
 Pour configurer le tagging de service unifié dans un environnement conteneurisé :
 
@@ -142,9 +142,9 @@ Pour configurer des [métriques Kubernetes State][2], procédez comme suit :
           tags.datadoghq.com/version: "<VERSION>"
   ```
 
-###### Traceur d'APM/Client StatsD
+###### Traceur de l'APM et client StatsD
 
-Pour configurer les variables d'environnement du [Traceur de l'APM][4] et du [Client StatsD][5], utilisez l'[API Downward de Kubernetes][1] en suivant le format ci-dessous :
+Pour configurer les variables d'environnement du [traceur de l'APM][4] et du [client StatsD][5], utilisez l'[API Downward de Kubernetes][1] en suivant le format ci-dessous :
 
 ```yaml
 containers:
@@ -164,7 +164,7 @@ containers:
               fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#the-downward-api
+[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
 [2]: /fr/agent/kubernetes/data_collected/#kube-state-metrics
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [4]: /fr/tracing/send_traces/
@@ -324,7 +324,7 @@ Définissez la configuration suivante dans le [fichier de configuration principa
 ```yaml
 env: <ENV>
 tags:
-    - service: <SERVICE>
+    - service:<SERVICE>
 ```
 
 Avec cette configuration, les tags `env` et `service` resteront cohérents pour toutes les données émises par l'Agent.
@@ -359,6 +359,124 @@ instances:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Environnement sans serveur
+
+#### Fonctions Lambda AWS
+
+Selon la méthode que vous employez pour concevoir et déployer vos applications sans serveur basées sur des fonctions Lambda AWS, il existe plusieurs options pour appliquer les tags `env`, `service` et `version` aux métriques, traces et logs.
+
+*Remarque* : ces tags sont fournis à l'aide des tags de ressource AWS, et non via les variables d'environnement. Ainsi, les variables d'environnement `DD_ENV`, `DD_SERVICE` et `DD_VERSION` ne sont pas prises en charge.
+
+{{< tabs >}}
+
+{{% tab "Framework sans serveur" %}}
+
+Ajoutez des tags à vos fonctions Lambda à l'aide de l'option [tags][1] :
+
+```yaml
+# serverless.yml
+service: service-name
+provider:
+  name: aws
+  # pour appliquer les tags à l'ensemble des fonctions
+  tags:
+    env: "<ENV>"
+    service: "<SERVICE>"
+    version: "<VERSION>"
+
+functions:
+  hello:
+    # cette fonction hérite des tags de service configurés ci-dessus
+    handler: handler.hello
+  world:
+    # cette fonction remplace les tags
+    handler: handler.users
+    tags:
+      env: "<ENV>"
+      service: "<SERVICE>"
+      version: "<VERSION>"
+```
+
+Si vous avez installé le [plug-in Serverless Datadog][2], celui-ci ajoute automatique les tags `service` et `env` aux fonctions Lambda. Le plug-in se base sur les valeurs `service` et `stage` de la définition de l'application sans serveur, sauf si un tag `service` ou `env` existe déjà.
+
+[1]: https://www.serverless.com/framework/docs/providers/aws/guide/functions#tags
+[2]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
+{{% /tab %}}
+
+{{% tab "AWS SAM" %}}
+
+Ajoutez des tags à vos fonctions Lambda à l'aide de l'option [Tags][1] :
+
+```yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  MyLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Tags:
+        env: "<ENV>"
+        service: "<SERVICE>"
+        version: "<VERSION>"
+```
+
+Si vous avez installé la [macro Serverless Datadog][2], vous pouvez également spécifier des tags `service` et `env` en tant que paramètres :
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      service: "<SERVICE>"
+      env: "<ENV>"
+```
+
+
+[1]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-tags
+[2]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/macro
+{{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+
+Ajoutez des tags à votre app, votre pile ou à une fonction Lambda à l'aide de la [classe Tags][1]. Si vous avez installé la [macro Serverless Datadog][2], vous pouvez également spécifier des tags `service` et `env` en tant que paramètres :
+
+```javascript
+import * as cdk from "@aws-cdk/core";
+
+class CdkStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+    this.addTransform("DatadogServerless");
+
+    new cdk.CfnMapping(this, "Datadog", {
+      mapping: {
+        Parameters: {
+          service: "<SERVICE>",
+          env: "<ENV>",
+        },
+      },
+    });
+  }
+}
+```
+
+
+[1]: https://docs.aws.amazon.com/cdk/latest/guide/tagging.html
+[2]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/macro
+{{% /tab %}}
+
+{{% tab "Méthode personnalisée" %}}
+
+Suivez les instructions AWS concernant le [tagging des fonctions Lambda][1] pour appliquer les tags `env`, `service` et `version`.
+
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-tags.html
+{{% /tab %}}
+
+{{< /tabs >}}
+
+Vérifiez que l'option `DdFetchLambdaTags` est définie sur `true` sur la pile CloudFormation de votre [Forwarder Datadog][14]. Depuis la version `3.19.0`, cette option est par défaut définie sur `true`.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -377,3 +495,4 @@ instances:
 [11]: /fr/integrations/statsd/
 [12]: https://www.chef.io/
 [13]: https://www.ansible.com/
+[14]: /fr/serverless/forwarder/

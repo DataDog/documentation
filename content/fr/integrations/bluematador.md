@@ -1,20 +1,22 @@
 ---
 "assets":
   "dashboards": {}
+  "metrics_metadata": metadata.csv
   "monitors": {}
   "service_checks": assets/service_checks.json
 "categories":
 - monitoring
-"creates_events": !!bool "true"
-"ddtype": "check"
+"creates_events": true
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md"
 "display_name": "Blue Matador"
+"draft": false
 "git_integration_title": "bluematador"
 "guid": "db258635-5063-4a06-85c6-b15c1ea3df4b"
 "integration_id": "blue-matador"
 "integration_title": "Blue Matador"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "integration"
 "maintainer": "support@bluematador.com"
 "manifest_version": "1.0.0"

@@ -6,6 +6,7 @@ ddtype: library
 dependencies: []
 description: 'Recueillez des métriques, des traces et des logs à partir de vos applications PHP.'
 doc_link: 'https://docs.datadoghq.com/integrations/php/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitor-php-performance/'
     tag: Blog

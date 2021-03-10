@@ -43,7 +43,7 @@ Si vous le souhaitez, vous pouvez également vous authentifier à l'aide d'un co
 
 En cliquant sur **Authorize** lors de la connexion, vous associez l'appareil mobile utilisé à votre compte. Pour des raisons de sécurité, vous devrez effectuer ce processus une fois par mois.
 
-**Remarque** : la connexion SAML initiée par un fournisseur d'identité pour l'app mobile est actuellement disponible en version bêta. Contactez l'[assistance Datadog][14] pour exiger un accès à la bêta, ou si vous rencontrez des problèmes lors du processus d'authentification SAML.
+**Remarque** : la connexion SAML initiée par un fournisseur d'identité pour l'app mobile est actuellement disponible en version bêta. Contactez l'[assistance Datadog][5] pour exiger un accès à la bêta, ou si vous rencontrez des problèmes lors du processus d'authentification SAML.
 
 ## Monitors
 
@@ -61,13 +61,13 @@ Par exemple, pour filtrer les monitors de métrique associés à l'équipe SRE q
 
 Sur la page Dashboards, vous pouvez consulter et rechercher tous les dashboards accessibles de votre organisation Datadog, et les filtrer à l'aide des template variables définies dans l'application Web Datadog. Filtrez rapidement vos dashboards à l'aide des vues enregistrées des templates variables. Pour en savoir plus sur les vues enregistrées des templates variables, consultez la section relative aux[ vues enregistrées des dashboards][9]. Cliquez sur un dashboard pour ces vues.
 
-**Remarque :** pour configurer ou modifier un dashboard, vous devez [vous connecter depuis un navigateur][10]. Pour en savoir plus, consultez la section [Dashboards][5].
+**Remarque :** pour configurer ou modifier un dashboard, vous devez [vous connecter depuis un navigateur][10]. Pour en savoir plus, consultez la section [Dashboards][11].
 
 ## Actions rapides
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Actions rapides">}}
 
-Appuyez longuement sur l'icône de l'application pour faire apparaître un menu d'actions rapides permettant d'accéder aux cinq dashboards [consultés le plus fréquemment][11] sous iOS (d'après le nombre de vues récentes), ou les cinq dashboards les plus ouverts sur mobile sous Android. Appuyez sur un résultat pour ouvrir le dashboard dans l'application.
+Appuyez longuement sur l'icône de l'application pour faire apparaître un menu d'actions rapides permettant d'accéder aux cinq dashboards [les plus fréquemment consultés][12] sous iOS (d'après le nombre de vues et l'activité récente), ou les cinq dashboards les plus ouverts sur mobile sous Android. Appuyez sur un résultat pour ouvrir le dashboard dans l'application.
 
 ## Recherche depuis l'écran d'accueil
 
@@ -89,7 +89,7 @@ Avec le raccourci, vous pouvez accéder à vos dashboards et à vos monitors de 
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Raccourcis">}}
 
-Pour en savoir plus sur les raccourcis et les suggestions Siri, consultez la [documentation d'Apple dédiée à Siri][12].
+Pour en savoir plus sur les raccourcis et les suggestions Siri, consultez la [documentation d'Apple dédiée à Siri][13].
 
 ## Handoff
 
@@ -102,7 +102,7 @@ Pour que la fonctionnalité Handoff fonctionne, chaque appareil doit :
 - avoir le Wi-Fi activé 
 - avoir Handoff activé.
 
-Pour en savoir plus sur Handoff, consultez la [documentation d'Apple dédiée à Handoff][13].
+Pour en savoir plus sur Handoff, consultez la [documentation d'Apple dédiée à Handoff][14].
 
 ## Compte
 
@@ -110,7 +110,7 @@ Changez d'organisation ou déconnectez-vous sur la page Account.
 
 ## Dépannage
 
-Si vous avez besoin d'aide pour résoudre d'éventuels problèmes, [contactez l'assistance Datadog][14]. Vous pouvez aussi envoyer un message sur le canal [Slack public de Datadog][15] [#mobile-app][16].
+Si vous avez besoin d'aide pour résoudre d'éventuels problèmes, [contactez l'assistance Datadog][5]. Vous pouvez aussi envoyer un message sur le canal [Slack public de Datadog][15] [#mobile-app][16].
 
 ### Pour aller plus loin
 
@@ -120,15 +120,15 @@ Si vous avez besoin d'aide pour résoudre d'éventuels problèmes, [contactez l'
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /fr/account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
-[5]: /fr/dashboards/
+[5]: /fr/help/
 [6]: /fr/monitors/manage_monitor/#search
 [7]: https://app.datadoghq.com/monitors
 [8]: /fr/monitors/monitor_types/
 [9]: /fr/dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
-[11]: https://app.datadoghq.com/dashboard/lists/preset/5
-[12]: https://support.apple.com/en-us/HT209055
-[13]: https://support.apple.com/en-us/HT209455
-[14]: /fr/help/
+[11]: /fr/dashboards/
+[12]: https://app.datadoghq.com/dashboard/lists/preset/5
+[13]: https://support.apple.com/en-us/HT209055
+[14]: https://support.apple.com/en-us/HT209455
 [15]: https://chat.datadoghq.com/
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG

@@ -6,7 +6,7 @@ assets:
 categories:
   - notification
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md'
 description: L'intégration Datadog/ConfigCat permet de s'assurer que chaque modification des paramètres dans ConfigCat est envoyée à Datadog en tant qu'événement. Il est ainsi possible de surveiller le comportement de votre système après la modification des paramètres. Vous pouvez configurer l'intégration Datadog pour un produit dans ConfigCat.

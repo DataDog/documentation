@@ -82,9 +82,18 @@ Les monitors déclenchent des événements lorsque leur statut, à savoir `ALERT
 
 **Remarque** : si vous désactivez ou réactivez un monitor via l'IU, les downtimes planifiés associés à ce monitor ne sont pas supprimés. Pour modifier ou supprimer un downtime, utilisez la page [Manage Downtimes][1] ou passez par l'[API][6].
 
-Si le statut d'un monitor change durant un downtime (en passant par exemple de `OK` à `ALERT`, `WARNING` ou `NO DATA`) et reste identique après la fin d'un downtime planifié, le rétablissement du monitor s'effectue automatiquement. Le monitor est ensuite à nouveau déclenché, peu de temps après son rétablissement.
+Si un monitor possède un état nécessitant l'envoi d'une alerte (`ALERT`, `WARNING` ou `NO DATA`) lorsque le downtime prend fin, le monitor se rétablit automatiquement et se déclenche à nouveau peu de temps après si les conditions d'alerte sont remplies. Cette logique s'applique aux monitors qui changent d'état lors d'un downtime (en passant par exemple de l'état `OK` à l'état `ALERT`, `WARNING` ou `NO DATA`), mais également aux monitors qui possédaient déjà un état nécessitant l'envoi d'une alerte au début du downtime.
 
-Si un monitor déclenche une alerte **avant** un downtime et que le statut est rétabli **pendant** ce downtime, un événement de rétablissement est envoyé pendant ce downtime (s'il s'agit du premier rétablissement).
+**1er exemple :** monitor possédant un état d'alerte *avant* le début du downtime et conservant le *même état* pendant la durée du downtime :
+1. Pendant le downtime, les notifications pour cette alerte sont désactivées.
+2. Le monitor conserve son état d'alerte, car les conditions sont toujours remplies.
+3. Le downtime prend fin.
+4. Le monitor est automatiquement rétabli.
+5. Les conditions d'alerte sont toujours remplies, ce qui déclenche l'envoi d'une notification.
+
+**2e exemple :** monitor possédant un état d'alerte *avant* le début d'un downtime et rétabli *pendant* le downtime :
+1. Le monitor passe d'un état d'alerte à l'état `OK`.
+2. La notification de rétablissement est envoyée pendant le downtime, mais uniquement pour le premier rétablissement de ce downtime.
 
 ### Rapport sur les monitors
 

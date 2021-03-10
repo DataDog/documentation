@@ -1,8 +1,8 @@
 ---
-title: Default Threat Detection Rules
+title: Default Rules
 kind: documentation
 type: security_rules
-description: "Datadog Security Detection Rules"
+description: "Datadog Security and Compliance Rules"
 disable_sidebar: true
 ---
 

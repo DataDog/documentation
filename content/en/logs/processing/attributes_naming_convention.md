@@ -86,13 +86,13 @@ The standard attribute panel appears when you add a new standard attribute or ed
 
 {{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute"  style="width:80%;">}}
 
-## Standard Attributes in The Log Explorer
+## Standard attributes in the Log Explorer
 
-Alias attributes directly from the log explorer. See the [associated documentation][5] for reference.
+Alias attributes directly from the Log Explorer. See the [associated documentation][5] for reference.
 
 ## Default standard attribute list
 
-The default standard attribute list is split into 7 functional domains:
+The default standard attribute list is split into the functional domains:
 
 - [Network/communications](#network)
 - [HTTP Requests](#http-requests)

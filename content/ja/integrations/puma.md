@@ -44,22 +44,28 @@ supported_os:
 
 ### インストール
 
-Puma チェックをホストにインストールするには
+Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Puma チェックをインストールしてください。[バージョン 6.8 以前の Agent][5] または [Docker Agent][6] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][4]に関する Agent のガイドを参照してください。
 
-1. マシンに[開発ツールキット][4]をインストールします。
-2. `ddev release build puma` を実行してパッケージをビルドします。
-3. [Datadog Agent をダウンロードします][5]。
-4. ビルドアーティファクトを Agent のあるホストにアップロードし、`datadog-agent integration install -w path/to/puma/dist/<ARTIFACT_NAME>.whl` を実行します。
+1. [Datadog Agent をダウンロードします][7]。
+
+2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
+
+   ```shell
+      datadog-agent integration install -t datadog-puma==<INTEGRATION_VERSION>
+   ```
+
+3. [他のパッケージ化されたインテグレーション][8]と同様にインテグレーションを構成します。
+
 
 ### コンフィギュレーション
 
-1. Puma のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `puma.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル puma.d/conf.yaml][6] を参照してください。
+1. Puma のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `puma.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル puma.d/conf.yaml][9] を参照してください。
 
-2. [Agent を再起動します][7]。
+2. [Agent を再起動します][10]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションの `puma` を探します。
+[Agent の status サブコマンドを実行][11]し、Checks セクションの `puma` を探します。
 
 ## 収集データ
 
@@ -77,15 +83,18 @@ Puma には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 [1]: https://puma.io/
 [2]: https://github.com/puma/puma#controlstatus-server
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[4]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://github.com/DataDog/integrations-extras/blob/master/puma/datadog_checks/puma/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-extras/blob/master/puma/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
+[5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[6]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[7]: https://app.datadoghq.com/account/settings#agent
+[8]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[9]: https://github.com/DataDog/integrations-extras/blob/master/puma/datadog_checks/puma/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://github.com/DataDog/integrations-extras/blob/master/puma/metadata.csv
+[13]: https://docs.datadoghq.com/ja/help/

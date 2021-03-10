@@ -17,7 +17,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 * A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Infrastructure service. Datadog charges monthly based on the fractional hours of monitored containers.
 * A [**custom metric**][2] is a single, unique combination of a metric name, host ID and any tags. Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
 * A **device** is a physical sensor comprising one or more single-board computers in a frame. Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
-* A **serverless function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function). The Datadog Infrastructure service records the number of functions executed or invoked one or more times each hour. Datadog charges based on the average number of functions across all hours in a month.
+* A **serverless function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function). Datadog charges based on the total number of Lambda function invocations in a month.
 * An AWS **Fargate task** is a collection of containers setup through AWS’s ECS container orchestration platform. Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
 
 ## APM
@@ -64,7 +64,7 @@ You can put controls in place for both Indexed and Ingested span volumes.  For m
 
 * Datadog records the number of unique Continuous Profiler hosts you are concurrently monitoring with the Datadog Continuous Profiler service once per hour.
   * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).
-  * Each host is allowed up to 4 profiled containers for free. Containers over this will be priced at $2 per container. 
+  * Each host is allowed up to 4 profiled containers for free. Containers over this will be priced at $2 per container.
     **Note**: this allotment is aggregated across all hosts so if you have 4 containers on average across all your hosts, you will not be charged as if you have more on host-by-host basis.
 * Datadog measures the total number of containers that are being profiled. A container is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Continuous Profiler service. Datadog charges monthly based on the fractional hours of monitored containers. For Continuous Profiler, Datadog only counts the containers that are running the Continuous Profiler service towards the total monitored container count.
 

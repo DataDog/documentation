@@ -6,6 +6,7 @@ ddtype: library
 dependencies: []
 description: 'Recueillez des métriques, des traces et des logs à partir de vos applications Python.'
 doc_link: 'https://docs.datadoghq.com/integrations/python/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/tracing-async-python-code/'
     tag: Blog

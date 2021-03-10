@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: "Optimisez CloudHealth\_: offrez-lui les métriques propres à chaque instance depuis Datadog."
 doc_link: 'https://docs.datadoghq.com/integrations/cloudhealth/'
+draft: false
 git_integration_title: cloudhealth
 has_logo: true
 integration_title: Cloudhealth
@@ -25,7 +26,7 @@ Si vous utilisez Cloudhealth et Datadog, vous pouvez configurer votre compte Clo
 
 Cette intégration n'envoie **AUCUNE** donnée depuis CloudHealth à Datadog. Elle permet simplement à CloudHealth de récupérer les métriques de votre compte Datadog.
 
-## Implémentation
+## Configuration
 
 ### Configuration
 

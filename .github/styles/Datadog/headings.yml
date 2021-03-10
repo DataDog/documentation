@@ -5,6 +5,7 @@ level: warning
 scope: heading
 match: $sentence
 exceptions:
+  - ACLs
   - Agent
   - Agents
   - Amazon
@@ -14,11 +15,13 @@ exceptions:
   - Autodiscovery
   - Azure
   - Azure App Service Plan
+  - CakePHP
   - Cassandra Nodetool
   - CentOS
   - Chef
   - Clipboard
   - CloudSQL
+  - CloudWatch
   - Cluster Agent
   - Continuous Profiler
   - DaemonSet
@@ -36,6 +39,7 @@ exceptions:
   - FreeBSD
   - FreeSwitch
   - Further Reading
+  - GeoIP
   - GitHub
   - Google
   - Google Analytics
@@ -46,18 +50,24 @@ exceptions:
   - HostPort
   - I
   - IdP
+  - IDs
   - Incident Management
+  - IoT
   - IPs
   - Java
   - JMXFetch
+  - Journald
   - Kubernetes
   - Kubernetes Pod
   - Lambda
   - LaunchDarkly
   - Linux
+  - Live Tail
+  - Log Explorer
   - Log Management
   - Log Rehydration
   - macOS
+  - Metrics Explorer
   - MongoDB
   - MySQL
   - Network Device Monitoring
@@ -67,6 +77,7 @@ exceptions:
   - Notebook List
   - npm
   - OkHttp
+  - OneLogin
   - OpenMetrics
   - openSUSE
   - OpenTelemetry
@@ -81,6 +92,8 @@ exceptions:
   - Real User Monitoring
   - Red Hat
   - Redis
+  - RocketPants
+  - Root Cause Analysis
   - RumMonitor
   - SafeNet
   - Security Monitoring
