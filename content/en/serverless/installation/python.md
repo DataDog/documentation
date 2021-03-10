@@ -240,7 +240,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 ### Subscribe the Datadog Forwarder to the log groups
 
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces, and logs to Datadog.
+You need to subscribe the Datadog Forwarder Lambda function for each of your function’s log groups, to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder][3] if you haven't.
 2. [Subscribe the Datadog Forwarder to your function's log groups][4].
