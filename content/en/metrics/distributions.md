@@ -43,6 +43,8 @@ To customize tagging, click on your custom distribution metric name in the Metri
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution"  style="width:80%;">}}
 
+[1]: /developers/metrics/types/
+[2]: https://app.datadoghq.com/metric/distribution_metrics
 
 {{< /site-region >}}
 
@@ -51,17 +53,17 @@ To customize tagging, click on your custom distribution metric name in the Metri
 
 Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
 
-Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
+Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][3] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
 * **Calculation of percentile aggregations**: Percentile aggregations (p50, p75, p90, p95, p99) are calculated from the raw data across all hosts, and are therefore globally accurate.
 
 * **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (e.g. transactions per second for a checkout service).
 
-See the [Developer Tools section][1] for more implementation details. Please note that since distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
+See the [Developer Tools section][3] for more implementation details. Please note that since distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
 
 ## Aggregations
 
-Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for all queryable tags on your distribution, specified on the [Metrics Summary][2] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
+Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for all queryable tags on your distribution, specified on the [Metrics Summary][4] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
 
 {{< img src="metrics/distributions/percentiles.gif" alt="Enable Percentiles"  style="width:80%;">}}
 
@@ -78,6 +80,9 @@ To customize tagging, click on your custom distribution metric name in the Metri
 **Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution"  style="width:80%;">}}
+
+[3]: /developers/metrics/types/
+[4]: https://app.datadoghq.com/metric/distribution_metrics
 
 {{< /site-region >}}
 
@@ -86,17 +91,17 @@ To customize tagging, click on your custom distribution metric name in the Metri
 
 Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
 
-Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
+Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][5] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 
 * **Calculation of percentile aggregations**: Percentile aggregations (p50, p75, p90, p95, p99) are calculated from the raw data across all hosts, and are therefore globally accurate.
 
 * **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (e.g. transactions per second for a checkout service).
 
-See the [Developer Tools section][1] for more implementation details. Please note that since distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
+See the [Developer Tools section][5] for more implementation details. Please note that since distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
 
 ## Aggregations
 
-Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for all queryable tags on your distribution, specified on the [Metrics Summary][2] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
+Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for all queryable tags on your distribution, specified on the [Metrics Summary][6] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
 
 {{< img src="metrics/distributions/percentiles.gif" alt="Enable Percentiles"  style="width:80%;">}}
 
@@ -114,6 +119,8 @@ To customize tagging, click on your custom distribution metric name in the Metri
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution"  style="width:80%;">}}
 
+[5]: /developers/metrics/types/
+[6]: https://app.datadoghq.com/metric/distribution_metrics
 
 {{< /site-region >}}
 
@@ -121,13 +128,13 @@ To customize tagging, click on your custom distribution metric name in the Metri
 ## Overview
 
 Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
-Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
+Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][7] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side. Because the underlying data structure has not been aggregated and represents raw data, distributions provide two major features:
 * **Calculation of percentile aggregations**: Percentile aggregations (p50, p75, p90, p95, p99) are calculated from the raw data across all hosts, and are therefore globally accurate.
 * **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (e.g. transactions per second for a checkout service).
-See the [Developer Tools section][1] for more implementation details. Please note that since distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
+See the [Developer Tools section][7] for more implementation details. Please note that since distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
 
 ## Aggregations
-Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for a set of tags (up to ten) specified on the [Distribution Metrics][2] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
+Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for a set of tags (up to ten) specified on the [Distribution Metrics][8] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
 
 {{< img src="metrics/distributions/revised_global_metrics_selection.png" alt="Distribution Metric UI"  style="width:80%;">}}
 
@@ -143,8 +150,10 @@ To customize tagging, hover over your metric in the table, and click on the penc
 ## Counting distribution metrics
 Distribution metrics with percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) generate custom metrics or timeseries differently than gauges, counts, histograms, and distributions with nonpercentile aggregations (`sum`, `count`, `min`, `max`, `avg`). Because percentiles aren't reaggregatable, Datadog preserves five timeseries for every potentially queryable tag combination. This is different from the number of custom metrics generated from gauges, counts, histograms, or distributions with nonpercentile aggregations (dependent on the unique number of tag value combinations that appear in your data).
 
-For more information on counting custom metrics created from gauge, count, histogram, or distribution metrics with nonpercentile aggregations, refer to the [Custom Metrics][2] page.
+For more information on counting custom metrics created from gauge, count, histogram, or distribution metrics with nonpercentile aggregations, refer to the [Custom Metrics][8] page.
 
+[7]: /developers/metrics/types/
+[8]: https://app.datadoghq.com/metric/distribution_metrics
 
 {{< /site-region >}}
 
