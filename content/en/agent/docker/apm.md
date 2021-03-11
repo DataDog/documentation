@@ -146,7 +146,7 @@ docker run -d --name app \
 This exposes the hostname `datadog-agent` in your `app` container.
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
-Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers (in this example case above, respectively `datadog-agent` and `8126` (default value so you can avoid setting it)).
+Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. The example above uses host `datadog-agent` and port `8126` (the default value so you don't have to set it).
 
 Alternately, see the examples below to set the Agent host manually in each supported language:
 
