@@ -8,6 +8,7 @@ aliases:
     - /developers/getting_started/tagging/
     - /tagging
     - /guides/tagging/
+    - - /faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events/
 further_reading:
     - link: '/getting_started/tagging/assigning_tags/'
       tag: 'Documentation'
