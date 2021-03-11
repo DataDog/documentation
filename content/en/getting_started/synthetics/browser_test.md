@@ -19,7 +19,7 @@ further_reading:
 
 In this example, a browser test is configured to map a user's journey from adding an item to cart to successful checkout. Each test execution is recorded in Datadog as a **Test Result**.
 
-{{< img src="getting_started/synthetics/browser-test.png" alt="Browser test"  style="width:90%;" >}}
+{{< img src="getting_started/synthetics/browser-test-results.png" alt="Browser test"  style="width:100%;" >}}
 
 ## Configure your test
 
@@ -36,30 +36,30 @@ In this example, a browser test is configured to map a user's journey from addin
     - **Specify a test frequency**: Select how often you would like the test to run.
     - **Alert Conditions**: Set alert conditions to determine the circumstances under which you want a test to send a notification alert.
 
-        - To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
-
-        ```text
-        An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations
-        ```
-
         - To ensure that a test execution is only considered a failure after two failed test runs, specify how many times you want your test to be re-run before being considered a failure:
 
-        ```text
-        Retry 1 time before location is marked as failed
-        ```
+            ```text
+            Retry 1 time before location is marked as failed
+            ```
 
-         **Note**: By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][3].
+        - To avoid being alerted on network blips that might happen on specific locations, this test is configured as:
 
-    - **Notify**: Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][4], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
+            ```text
+            An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations
+            ```
+
+       
+
+    - **Notify**: Write an alert message and specify which email addresses should be notified when the alert is triggered. No additional set up is required to start receiving alert emails from Datadog. You can also use [integrations][3], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
     - Click **Save & Edit Recording**.
 
-{{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Configured browser test"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/browser-test-config.mp4" alt="Configured browser test" video="true"  width="80%">}}
 
 ## Record your test steps
 
-Once the test configuration is saved, Datadog will prompt you to download the [Datadog test recorder][5] extension. Browser tests can be only recorded on **[Google Chrome][6]**. Download and install the extension.
+Once the test configuration is saved, Datadog will prompt you to download the [Datadog test recorder][4] extension. Browser tests can be only recorded on **[Google Chrome][5]**. Download and install the extension.
 
-Once this extension is installed, begin recording your test steps by clicking the **Start Recording** button. Navigate your page in the iframe to the right of the recording options. When you select a div, image, or any area of your page, the steps are recorded and used to create steps within the browser test. Learn more about each step in the [browser test steps doc][7].
+Once this extension is installed, begin recording your test steps by clicking the **Start Recording** button. Navigate your page in the iframe to the right of the recording options. When you select a div, image, or any area of your page, the steps are recorded and used to create steps within the browser test. Learn more about each step in the [browser test steps doc][6].
 
 For example, to record test steps that map a user's journey from adding an item to cart to successful checkout:
 
@@ -71,7 +71,7 @@ For example, to record test steps that map a user's journey from adding an item 
 
 4. Save the test.
 
-{{< img src="getting_started/synthetics/record-test.gif" alt="Record test steps"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/record-test.gif" alt="Record test steps"  style="width:100%;">}}
 
 **Note**: the website used in this example regularly throws an error causing it to intentionally fail. If you set your email address in the message box, you should consequently receive a notification email when the test failure occurs.
 
@@ -81,11 +81,11 @@ The browser test details page includes details about your test configuration, te
 
 Wait for your test to generate several test results or hit `Run test now` to trigger them more quickly. Then look for a failed test result under **Test Results** or in your mailbox. You can start your troubleshooting by looking at the screenshots to try to understand what went wrong. Don't forget to look at screenshots of steps that happened before the failed step as these often contain the root cause of the failure.
 
-The **Errors & Warnings** tab provides a list of Javascript and network errors, the **Resources** tab locates the resource providing this status, and the **Traces** tab maps the entirety of the request in seconds. This test failed as the result of a server timeout. The resource, `https://api.shopist.io/checkout.json`, posted the status ,and the targeted source of the problem is a controller linked to checkout. You have now successfully found the route of the problem.
+The **Errors & Warnings** tab provides a list of Javascript and network errors. The **Resources** tab displays the requests and assets that contribute to the duration of the test. The **Traces** tab shows all the requests made to the different URLs/endpoints associated with the test. We can use all this information to find the root cause of a failed broswer test. For example, in this failed test we can identify the cause as a server timeout issue. We see the resource, `https://api.shopist.io/checkout.json`, posted a 500 status, and looking at the Trace tab we can identify that the Payment Service was rate limited.
 
-{{< img src="getting_started/synthetics/browser-test-failure.png" alt="Browser test failure"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/browser-test-failed.png" alt="Browser test failure"  style="width:100%;">}}
 
-The **Traces** tab is accessible with Datadog [APM integration with Synthetic Monitoring][8]. Once configured, it allows you to go from a test run that failed to the root cause of the issue by looking at the trace generated by that test run. To link browser test results with APM, whitelist the URLs you want the APM integration headers added to. Use `*` for wildcards: `https://*.datadoghq.com/*`
+The **Traces** tab is accessible with Datadog's [APM integration with Synthetic Monitoring][7]. Once configured, it allows you to go from a test run that failed to the root cause of the issue by looking at the trace generated by that test run. To link browser test results with APM, whitelist the URLs you want the APM integration headers added to. Use `*` for wildcards: `https://*.datadoghq.com/*`
 
 {{< whatsnext desc="After you set up your first browser test:">}}
 {{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}Learn more about browser tests{{< /nextlink >}}
@@ -95,9 +95,8 @@ The **Traces** tab is accessible with Datadog [APM integration with Synthetic Mo
 
 [1]: /synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
-[3]: /api/v1/synthetics/#create-or-clone-a-test
-[4]: /integrations/
-[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[6]: https://www.google.com/chrome/
-[7]: /synthetics/browser_tests/#actions
-[8]: /synthetics/apm/
+[3]: /integrations/
+[4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[5]: https://www.google.com/chrome/
+[6]: /synthetics/browser_tests/#actions
+[7]: /synthetics/apm/
