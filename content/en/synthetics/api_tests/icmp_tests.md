@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-ICMP tests allow you to easily **monitor the availability of your hosts** and **diagnose network communication issues**. By asserting on the values received from one or more **ICMP ping(s)** to your endpoint, Datadog can help **detect connectivity issues, above-quota latency for round trip times, and unexpected changes in security firewall configuration**. The tests can also track the **number of network hops (TTL)** required to connect to your host and view **traceroute** results to **discover details on each network hop** along the path.
+ICMP tests allow you to easily monitor the availability of your hosts and diagnose network communication issues. By asserting on the values received from one or more ICMP pings to your endpoint, Datadog can help detect connectivity issues, above-quota latency for round trip times, and unexpected changes in security firewall configuration. The tests can also track the number of network hops (TTL) required to connect to your host and view traceroute results to discover details on each network hop along the path.
 
 ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand or from within your [CI/CD pipelines][3].
 
@@ -33,13 +33,13 @@ After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`T
 {{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
 1. Specify the **Domain Name** or **IP address** to run your test on.
-2. Select/Deselect option to **Track number of network hops (TTL)**. This will turn on a "traceroute" probe to discover all gateways along the path to the host destination.
+2. Select or Deselect **Track number of network hops (TTL)**. This option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
 3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to decrease or increase up to 10.
 4. **Name** your ICMP test.
 5. Add `env` **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
-6. Select the **Locations** to run your ICMP test from: ICMP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to trigger the ICMP pings from outside or inside your network.
+6. Select the **Locations** to run your ICMP test from: ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
 
-Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
+Click **Test URL** to try out the request configuration. A response preview should be displayed on the right side of your screen.
 
 
 ### Specify test frequency
@@ -54,7 +54,7 @@ ICMP tests can run:
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
 
-### Define Assertions
+### Define assertions
 
 Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `latency`, `packet loss` and `packet received` is added. You must define at least one assertion for your test to monitor.
 
@@ -65,14 +65,14 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | packet received | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 | network hops    | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 
-You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 10 assertions per API test by selecting **New Assertion** or by selecting the response preview directly:
 
 {{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test" style="width:90%;" >}}
 
 
 ### Define alert conditions
 
-Set alert conditions to determine the circumstances under which you want a test to fail and trigger an alert.
+You can set alert conditions to determine the circumstances when a test should fail and trigger an alert.
 
 #### Alerting rule
 
@@ -83,7 +83,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][10].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 milliseconds after the first failed test result. This interval can be configured via the [API][10].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -91,7 +91,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
 
@@ -109,13 +109,13 @@ Notifications example:
 
 {{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications"  style="width:90%;" >}}
 
-Click on **Save** to save your test and have Datadog start executing it.
+Click **Save** to save your test and have Datadog start executing it.
 
 ## Variables
 
 ### Create local variables
 
-You can create local variables by defining their values from one of the below available builtins:
+You can create local variables by defining their values from one of the below available built-ins:
 
 | Pattern                    | Description                                                                                                 |
 |----------------------------|-------------------------------------------------------------------------------------------------------------|
@@ -134,7 +134,7 @@ To display your list of variables, type `{{` in your desired field:
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
+A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can fail without being able to test the assertions against the endpoint, these reasons include:
 
 | Error             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                                                                                                                                                                                                          |
