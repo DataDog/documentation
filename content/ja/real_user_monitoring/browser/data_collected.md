@@ -30,6 +30,8 @@ further_reading:
 - [Error][4]: ブラウザによってフロントエンドエラーが発生するたびに、RUM はそれをキャッチし、Error Event として Datadog に送信します。
 - [User Action][5]: User Action イベントは、特定のユーザーアクションに対して生成できるカスタムイベントです。
 
+特定のイベントタイプに固有のメトリクスと属性があります。たとえば、メトリクス `view.loading_time` は "view" RUM イベントに関連付けられ、属性 `resource.method` は "resource" RUM イベントに関連付けられます。ユーザーがいる元のページ (`view.url`) や `device` や `geolocation` などのユーザー情報などの[デフォルト属性][9]があり、これらはすべての RUM イベントに存在します。
+
 {{< tabs >}}
 {{% tab "ビュー" %}}
 
@@ -57,11 +59,11 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
 
 ハッシュ (`#`) ナビゲーションは RUM SDK によって自動で監視されます。SDK は `HashChangeEvent` を監視し、新しいビューを表示します。現在のビューのコンテキストに影響しない HTML アンカータグからくるイベントは無視されます。
 
-## タイミングとメトリクスの表示
+## ビュータイミングメトリクス
 
 {{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="タイミングの概要"  >}}
 
-| 属性                              | タイプ        | 説明                                                                                                                                                                                                                 |
+| メトリクス                              | タイプ        | 説明                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`                             | 数値（ns） | 現在のビューに費やした時間。                                                                                                                                                                                                  |
 | `view.loading_time`                             | 数値（ns） | ページの準備が整い、ネットワークリクエストまたは DOM ミューテーションが現在発生していない状態になるまでの時間。[収集データドキュメントの詳細][8]|
@@ -97,9 +99,9 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
 
 {{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="リソースメトリクス"  >}}
 
-## リソースのタイミング
+## リソースタイミングメトリクス
 
-| 属性                              | タイプ           | 説明                                                                                                                               |
+| メトリクス                              | タイプ           | 説明                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | 数値         | リソースのロードにかかった全時間。                                                                                                   |
 | `resource.size`                | 数値（バイト） | リソースのサイズ。                                                                                                                            |
@@ -134,9 +136,9 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
 
 [ロングタスク][1]とは、メインスレッドを 50 ミリ秒以上ブロックするタスクのことです。インプットの高レイテンシーやインタラクションの遅延などの原因となります。ブラウザのパフォーマンスプロファイラーで、ロングタスクの原因を理解しましょう。
 
-## ロングタスクのタイミング
+## ロングタスクタイミングメトリクス
 
-| 属性  | タイプ   | 説明                |
+| メトリクス  | タイプ   | 説明                |
 |------------|--------|----------------------------|
 | `long_task.duration` | 数値 | ロングタスクの時間。 |
 
@@ -209,9 +211,9 @@ Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行さ�
 ## カスタムユーザーアクション
 カスタムユーザーアクションは、[`addUserAction` API][3] を介して手動で宣言および送信されるユーザーアクションです。カスタムタイミングや顧客のカート情報など、ユーザージャーニー中に発生するイベントに関連する情報を送信できます。
 
-## アクションのタイミングとメトリクス
+## アクションタイミングメトリクス
 
-| 属性    | タイプ   | 説明              |
+| メトリクス    | タイプ   | 説明              |
 |--------------|--------|--------------------------|
 | `action.loading_time` | 数値（ns） | アクションの読み込み時間。[ユーザーアクションのドキュメント][4]で計算方法を確認してください。 |
 | `action.long_task.count`        | 数値      | このアクションについて収集されたすべてのロングタスクの数。 |
@@ -237,7 +239,7 @@ Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行さ�
 
 ## デフォルト属性
 
-以下の 5 つのイベントタイプには、デフォルトで属性がアタッチされています。
+これらの各イベントタイプには、デフォルトで次の属性が付加されています。したがって、照会される RUM イベントタイプに関係なくそれらを使用できます。
 
 ### コア
 
@@ -298,17 +300,19 @@ Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行さ�
 
 ## 追加属性
 
-デフォルトの属性に加えて、収集されたすべてのイベントに[特定のグローバルコンテキスト][1]を追加します。これにより、ユーザーのサブセットのデータを分析することができます。たとえば、ユーザーメール別のグループエラー、パフォーマンスが最も悪い顧客の把握などです。
+デフォルトの属性に加えて、収集されたすべてのイベントに[特定のグローバルコンテキスト][8]を追加します。これにより、ユーザーのサブセットのデータを分析することができます。たとえば、ユーザーメール別のグループエラー、パフォーマンスが最も悪い顧客の把握などです。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/real_user_monitoring/browser/advanced_configuration/
+[1]: /ja/real_user_monitoring/browser/data_collected/?tab=view
 [2]: /ja/real_user_monitoring/browser/data_collected/?tab=resource
 [3]: /ja/real_user_monitoring/browser/data_collected/?tab=longtask
 [4]: /ja/real_user_monitoring/browser/data_collected/?tab=error
 [5]: /ja/real_user_monitoring/browser/data_collected/?tab=useraction
 [6]: /ja/real_user_monitoring/data_collected/view#single-page-applications
-[7]: /ja/logs/processing/attributes_naming_convention/#user-agent-attributes
+[7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[8]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[9]: /ja/real_user_monitoring/browser/data_collected/?tab=view#default-attributes

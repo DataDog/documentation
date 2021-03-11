@@ -38,11 +38,12 @@ Follow the [Quickstart instructions][3] within the Datadog app for the best expe
 
 Otherwise, to begin tracing applications written in any language:
 
-1. Download `dd-java-agent.jar` that contains the Agent class files:
+1. Download `dd-java-agent.jar` that contains the latest Agent class files:
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
+   To access a specific version of the tracer, visit Datadog's [Maven repository][16].
 
 2. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
 
@@ -128,17 +129,18 @@ For more information, see the [Spring Boot documentation][1].
 {{% /tab %}}
 {{% tab "Tomcat" %}}
 
-Open your Tomcat startup script file, for example `catalina.sh`, and add:
+Open your Tomcat startup script file, for example `setenv.sh` on Linux, and add:
 
 ```text
 CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
 ```
 
-Or on Windows, `catalina.bat`:
+Or on Windows, `setenv.bat`:
 
 ```text
 set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
+If a `setenv` file does not exist, create it in the `./bin` directory of the Tomcat project folder.
 
 {{% /tab %}}
 {{% tab "JBoss" %}}
@@ -241,7 +243,7 @@ System properties can be set as JVM flags.
 | `dd.trace.agent.timeout`               | `DD_TRACE_AGENT_TIMEOUT`               | `10`                              | Timeout in seconds for network interactions with the Datadog Agent.                                                                                                                                                                                                   |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names. Automatically apply header values as tags on traces.                                                                                                               |
 | `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][8])               | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                            |
-| `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Example: `"package.ClassName[method1,method2,...];AnonymousClass$1[call]"`) List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code.                                                                                       |
+| `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Example: `"package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]"`) List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls    |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | Set a number of partial spans to flush on. Useful to reduce memory overhead when dealing with heavy traffic or long running traces.     |
 | `dd.trace.split-by-tags`               | `DD_TRACE_SPLIT_BY_TAGS`               | `null`                            | (Example: `aws.service`) Used to rename spans to be identified with the corresponding service tag                                       |
 | `dd.trace.db.client.split-by-instance` | `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` | `false`                           | When set to `true` db spans get assigned the instance name as the service name                                                                     |
@@ -491,3 +493,4 @@ Java APM has minimal impact on the overhead of an application:
 [13]: /tracing/compatibility_requirements/java#disabling-integrations
 [14]: /integrations/java/?tab=host#metric-collection
 [15]: https://github.com/openzipkin/b3-propagation
+[16]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent

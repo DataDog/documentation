@@ -22,7 +22,7 @@ Custom check monitors include any service check not reported by one of the [more
 
 To create a [custom check monitor][5] in Datadog, use the main navigation: *Monitors --> New Monitor --> Custom Check*.
 
-### Pick a Custom Check
+### Pick a custom check
 
 Choose a custom check from the drop-down box.
 

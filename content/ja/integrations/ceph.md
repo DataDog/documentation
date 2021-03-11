@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    ceph: assets/dashboards/overview.json
   logs:
     source: ceph
   metrics_metadata: metadata.csv

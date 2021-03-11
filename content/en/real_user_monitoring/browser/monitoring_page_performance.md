@@ -39,7 +39,7 @@ These performance metrics are key for helping you start your investigations:
 
 ## All performance metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling, global context, or custom user actions, see [Advanced Configuration][6]. The following table lists Datadog-specific metrics along with performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
+For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling or global context see [Advanced Configuration][6]. The following table lists Datadog-specific metrics along with performance metrics collected from the [Navigation Timing API][7] and [Paint Timing API][8]:
 
 | Attribute                              | Type        | Description                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -49,15 +49,15 @@ For information about the default attributes for all RUM event types, see [Data 
 | `view.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][10]                                                                                                               |
 | `view.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
 | `view.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][12]                                                                             |
-| `view.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
+| `view.load_event`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
 | `view.error.count`            | number      | Count of all errors collected for this view.                                                                                                                                                                        |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
 | `view.action.count`      | number      | Count of all actions collected for this view.                                                                                     
 
-## Monitoring Single Page Applications
+## Monitoring single page applications
 
-For Single Page Applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][14].
+For single page applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][14].
 
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
 
@@ -76,6 +76,30 @@ To account for modern web applications, loading time watches for network request
 
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
+## Add your own performance timing
+On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing. For example, you can add a timing when your hero image has appeared:
+
+```html
+<html>
+  <body>
+    <img onload="DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
+  </body>
+</html>
+```
+
+Or when users first scroll:
+
+```javascript
+document.addEventListener("scroll", function handler() {
+    //Remove the event listener so that it only triggers once
+    document.removeEventListener("scroll", handler);
+    DD_RUM.addTiming('first_scroll');
+});
+```
+
+Once the timing is sent, the timing will be accessible as `@view.custom_timings.<timing_name>` (For example, `@view.custom_timings.first_scroll`). You must [create a measure][15] before graphing it in RUM analytics or in dashboards.
+
+**Note**: For Single Page Applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing will equal 8-5 = 3 seconds.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -94,3 +118,4 @@ The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/History
+[15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures

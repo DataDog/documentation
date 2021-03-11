@@ -5,7 +5,7 @@ aliases:
     - /agent/kubernetes/host_setup
 ---
 
-## Setup the Kube state integration
+## Setup the Kubernetes state integration
 
 If you decide to run your Agent on your host to monitor kubernetes, in order to start collecting your Kubernetes metrics you should:
 

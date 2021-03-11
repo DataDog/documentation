@@ -15,6 +15,9 @@ further_reading:
   - link: /integrations/amazon_lambda/
     tag: AWS Lambda インテグレーション
     text: AWS Lambda インテグレーション
+  - link: 'https://www.datadoghq.com/blog/monitoring-lambda-containers/'
+    tag: ブログ
+    text: コンテナイメージを使用してデプロイされた AWS Lambda 関数を監視する
 ---
 {{< img src="serverless/datadog_serverless_overview.png" alt="Datadog サーバレスの概要"  style="width:100%;">}}
 

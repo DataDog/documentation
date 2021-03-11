@@ -1,3 +1,4 @@
 ---
 title: ログアーカイブ
+headless: true
 ---

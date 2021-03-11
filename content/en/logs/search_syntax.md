@@ -69,9 +69,9 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
-2. Searching for a facet value that contains special characters requires escaping or double quotes. To match a single special character or space, use the `?` wildcard. For example, a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
-
-3. Avoid using spaces in log facets. If a log facet does contain a space, perform a facet search by escaping the space: `@user.first\ name:myvalue` or using the single character wildcard: `@user.first?name:myvalue`.
+2. Searching for a facet value that contains special characters requires escaping or double quotes. 
+For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`. 
+To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
 
 Examples:
 

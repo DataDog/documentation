@@ -35,8 +35,8 @@ Depending on the programming language you are you using, you’ll need to set th
 
 **Note**: take note of the service and [resource names][4] you are working on, these will come in handy later. In this example, the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
 
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `setTag` method.
 
@@ -60,8 +60,8 @@ class ShoppingCartServlet extends AbstractHttpServlet {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `set_tag` method.
 
@@ -80,8 +80,8 @@ def shopping_cart(customer_id):
     # [...]
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `set_tag` method.
 
@@ -107,8 +107,8 @@ class ShoppingCartController < ApplicationController
 end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `SetTag` method.
 
@@ -142,8 +142,9 @@ func main() {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
 
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `setTag` method.
 
@@ -160,8 +161,9 @@ app.get('/shopping_cart/:customer_id', (req, res) => {
 })
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
 
 Add tags directly to a `Datadog.Trace.Span` object by calling `Span.SetTag()`. For example:
 
@@ -191,8 +193,8 @@ public class ShoppingCartController : Controller
 
 **Note**: `Datadog.Trace.Tracer.Instance.ActiveScope` returns `null` if there is no active span.
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `setTag` method.
 
@@ -218,8 +220,8 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
 ?>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 <div class="alert alert-info">You might have to wait a few minutes between deploying your updated code and seeing the new tags in the Datadog UI</div>
 

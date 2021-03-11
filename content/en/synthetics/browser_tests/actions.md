@@ -125,6 +125,8 @@ await promise
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
+**Note**: The way Browser tests load external JavaScript is by adding it to the page, so it will only work if your website accepts it.
+
 ### Test a downloaded file
 
 Perform verifications on files downloaded in previous steps. You can check that a file was correctly downloaded and assert on: the file name, size, and MD5 value.
@@ -246,6 +248,8 @@ await promise
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
+**Note**: The way Browser tests load external JavaScript is by adding it to the page, so it will only work if your website accepts it.
+
 #### A Global Variable
 
 Pick any global variables that was defined through [Synthetic  Monitoring Settings][7].
@@ -348,7 +352,7 @@ Once created this variable can be used in the following steps of your browser te
 [1]: /synthetics/browser_tests/advanced_options/
 [2]: /synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /synthetics/browser_tests/#create-a-variable
+[4]: /synthetics/guide/email-validation/#create-an-email-variable
 [5]: /synthetics/browser_tests/actions#use-variables-in-javascript-steps
 [6]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 [7]: /synthetics/settings/

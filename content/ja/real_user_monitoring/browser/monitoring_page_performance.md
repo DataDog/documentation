@@ -38,7 +38,7 @@ further_reading:
 
 ## すべてのパフォーマンスメトリクス
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][5]をご覧ください。サンプリング、グローバルコンテキスト、カスタムユーザーアクション、カスタムエラーの構成に関する情報は、[高度なコンフィギュレーション][6]をご覧ください。下記の表には、Datadog 専用のメトリクスと、[Navigation Timing API][7] および [Paint Timing API][8] から収集されるパフォーマンスメトリクスが示されています。
+すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][5]をご覧ください。サンプリング、グローバルコンテキスト、カスタムユーザーアクションの構成に関する情報は、[高度なコンフィギュレーション][6]をご覧ください。下記の表には、Datadog 専用のメトリクスと、[Navigation Timing API][7] および [Paint Timing API][8] から収集されるパフォーマンスメトリクスが示されています。
 
 | 属性                              | タイプ        | 説明                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -83,7 +83,7 @@ RUM SDK は、ハッシュ (`#`) ナビゲーションに依存するフレー�
 [2]: /ja/real_user_monitoring/dashboards/performance_overview_dashboard
 [3]: /ja/real_user_monitoring/explorer/
 [4]: /ja/real_user_monitoring/browser/advanced_configuration/#add-global-context
-[5]: /ja/real_user_monitoring/browser/data_collected/
+[5]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
 [6]: /ja/real_user_monitoring/browser/advanced_configuration/
 [7]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
 [8]: https://www.w3.org/TR/paint-timing/

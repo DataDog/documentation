@@ -68,7 +68,7 @@
       <div class="region-selector-container">
         <select class="js-region-selector d-none" placeholder="Site">
           <option value="" disabled>Site</option>
-          {{ range sort .Site.Params.allowedRegions ".name" "desc" }}
+          {{ range sort .Site.Params.allowedRegions ".weight" "asc" }}
               <option value="{{ .value }}">{{ .name }}</option>
           {{ end }}
         </select>

@@ -20,7 +20,7 @@ further_reading:
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/query_value/query_value_setup.png" alt="クエリ値ウィジェットのセットアップ"  style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query-value-widget-setup.png" alt="クエリ値ウィジェットのセットアップ"  style="width:80%;">}}
 
 ### コンフィギュレーション
 
@@ -28,7 +28,7 @@ further_reading:
     * メトリクス:  メトリクスクエリの構成については、[クエリ][1]に関するドキュメントを参照してください。
     * Indexed Span : Indexed Span クエリの構成については、[トレース検索に関するドキュメント][2]を参照してください。
     * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][3]を参照してください。
-2. 単位と書式を選択します。
+2. 単位とフォーマットを選択します。自動フォーマットは、単位に基づいてダッシュボードをスケーリングします。
 3. オプション: 表示される値に応じて条件付き書式を構成します。
 
 ### オプション

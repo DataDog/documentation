@@ -24,16 +24,19 @@ further_reading:
   - link: /tracing/
     tag: 高度な使用方法
     text: 高度な使用方法
+  - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+    tag: GitHub
+    text: カスタムインスツルメンテーションの例
 ---
 ## 互換性要件
 
-.NET トレーサーは、.NET 5、.NET Core 3.1、.NET Core 2.1 の自動インスツルメンテーション、そして [.NET Framework][2] をサポートします。サポート対象のライブラリについては、[互換性要件][1]ページをご覧ください。
+.NET トレーサーは、.NET 5、.NET Core 3.1、.NET Core 2.1 の自動インスツルメンテーション、そして [.NET Framework][1] をサポートします。サポート対象のライブラリについては、[互換性要件][2]ページをご覧ください。
 
 ## はじめに
 
 ### アプリ内のドキュメントに従ってください (推奨)
 
-Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
+Datadog アプリ内の[クイックスタート手順][3]に従って、最高のエクスペリエンスを実現します。例:
 
 - デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
 - `service`、`env`、`version` タグを動的に設定します。
@@ -43,7 +46,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 
 ## 自動でデータと収集
 
-自動インスツルメンテーションは、ゼロコード変更と最小限のコンフィギュレーションでアプリケーションのパフォーマンスデータを収集します。.NET トレーサーはすべての[サポートライブラリ][1]のインスツルメンテーションをすぐに、そして自動的に行います。
+自動インスツルメンテーションは、ゼロコード変更と最小限のコンフィギュレーションでアプリケーションのパフォーマンスデータを収集します。.NET トレーサーはすべての[サポートライブラリ][2]のインスツルメンテーションをすぐに、そして自動的に行います。
 
 自動インスツルメンテーションは以下を取得します。
 
@@ -60,7 +63,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 
 それ以外の場合、何らかの言語で記述されたアプリケーションのトレースを始めるには、まず [Datadog Agent をインストール、構成します][1]。.NET トレーサーはプロセス中に実行し、アプリケーションをインスツルメントし、トレースをアプリケーションから Agent に送信します。
 
-Windows で自動インスツルメンテーションを使用するには、 [Windows 用 MSI インストーラー][2]を使ってホストに .NET トレーサーをインストールします。OS のアーキテクチャ (x64 または x86) に合致するインストーラーを選択してください。
+Windows で自動インスツルメンテーションを使用するには、 [Windows 用 MSI インストーラー][2]を管理者として使用し、ホストに .NET トレーサーをインストールします。OS のアーキテクチャ (x64 または x86) に合致するインストーラーを選択してください。
 
 .NET トレーサーをインストールしたら、アプリケーションを再起動して新しい環境変数の読み込みを行います。IIS を再起動する際は、以下のコマンドを管理者として実行します。
 
@@ -279,9 +282,9 @@ systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
 
 ## 手動インスツルメンテーション
 
-コードのインスツルメンテーションを手動で行うには、`Datadog.Trace` [NuGet パッケージ][35]をアプリケーションに追加します。コード内で、`Datadog.Trace.Tracer.Instance` プロパティを通じてグローバルトレーサーにアクセスし、スパンを新規作成します。
+コードのインスツルメンテーションを手動で行うには、`Datadog.Trace` [NuGet パッケージ][4]をアプリケーションに追加します。コード内で、`Datadog.Trace.Tracer.Instance` プロパティを通じてグローバルトレーサーにアクセスし、スパンを新規作成します。
 
-手動インスツルメンテーションとカスタムタグの詳細については、[手動インスツルメンテーションのドキュメント][4]を参照してください。
+手動インスツルメンテーションとカスタムタグの詳細については、[手動インスツルメンテーションのドキュメント][5]を参照してください。
 
 手動インスツルメンテーションは、Windows の .NET Framework 4.5 以降、Windows と Linux の .NET Core 2.0 以降、および Windows と Linux の .NET5 でサポートされています。
 
@@ -337,6 +340,7 @@ dotnet example.dll
 
 ```csharp
 using Datadog.Trace;
+using Datadog.Trace.Configuration;
 
 // デフォルトの構成ソースを読み取る (env vars、web.config、datadog.json)
 var settings = TracerSettings.FromDefaultSources();
@@ -392,7 +396,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 | `DD_TAGS`<br/><br/>`GlobalTags`       | 指定された場合、指定されたすべてのタグを生成されたすべてのスパンに追加します (例、`layer:api,team:intake`)。バージョン 1.17.0 以降で利用可能。                                                                                                                                              |
 
 サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することを強くおすすめします。
-このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][5]のドキュメントをご参照ください。
+このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][6]のドキュメントをご参照ください。
 
 #### インスツルメンテーション
 
@@ -412,13 +416,16 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 | 設定名                                                   | 説明                                                                                                                                                                                                                                                                              |
 |----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                     | すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` (デフォルト) または `false` です。 |
-| `DD_TRACE_DEBUG`                                               | トレーサーのデバッグログを有効または無効にします。有効な値は、`true` または `false`（デフォルト）です。これを環境変数として設定すると、CLR プロファイラーのデバッグログも有効になります。                                                                                                        |
-| `DD_TRACE_LOG_DIRECTORY`                                       | .NET Tracer ログのディレクトリを設定します。<br/><br/>Windows のデフォルト: `%ProgramData%\Datadog .NET Tracer\logs\`<br/><br/>Linux のデフォルト: `/var/log/datadog/dotnet/`                                                                                                                                                                                     |
-| `DD_TRACE_LOG_PATH`                                            | 自動インスツルメンテーションログファイルにパスを設定し、他のすべての .NET Tracer ログファイルのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合は、無視されます。                                                                              |
-| `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | 無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、上記の[インテグレーション](#integrations)セクションでリストされているインテグレーション名です。           |
+| `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                      | すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` (デフォルト) または `false` です。 |
+| `DD_TRACE_DEBUG`                                                | トレーサーのデバッグログを有効または無効にします。有効な値は、`true` または `false`（デフォルト）です。これを環境変数として設定すると、CLR プロファイラーのデバッグログも有効になります。                                                                                                        |
+| `DD_TRACE_LOG_DIRECTORY`                                        | .NET Tracer ログのディレクトリを設定します。<br/><br/>Windows のデフォルト: `%ProgramData%\Datadog .NET Tracer\logs\`<br/><br/>Linux のデフォルト: `/var/log/datadog/dotnet/`                                                                                                                                                                                     |
+| `DD_TRACE_LOG_PATH`                                             | 自動インスツルメンテーションログファイルにパスを設定し、他のすべての .NET Tracer ログファイルのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合は、無視されます。                                                                              |
+| `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames`  | 無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][2]セクションでリストされているインテグレーション名です。           |
+| `DD_HTTP_CLIENT_ERROR_STATUSES`                                 | HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。デフォルト値は `400-499` です。 |
+| `DD_HTTP_SERVER_ERROR_STATUSES`                                 | HTTP サーバースパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。デフォルト値は `500-599` です。 |
+| `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | 自動インスツルメンテーションから除外される `AdoNet` タイプ (たとえば、`System.Data.SqlClient.SqlCommand`) のリストを設定します。 |
 
-次の表は、自動インスツルメンテーションの使用時にのみ利用できる構成変数の一覧で、インテグレーションごとに設定できます。環境変数またはコンフィギュレーションファイルの設定には最初の名前 (`DD_<INTEGRATION>_ENABLED` など) を使用します。2 つ目の名前 (`Enabled` など) は、コードの設定を変更する際に使用する `IntegrationSettings` プロパティの名前を示します。これらのプロパティには `TracerSettings.Integrations[]` インデクサを通じてアクセスします。インテグレーション名については、[インテグレーション][1]セクションを参照してください。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
+次の表は、自動インスツルメンテーションの使用時にのみ利用できる構成変数の一覧で、インテグレーションごとに設定できます。環境変数またはコンフィギュレーションファイルの設定には最初の名前 (`DD_<INTEGRATION>_ENABLED` など) を使用します。2 つ目の名前 (`Enabled` など) は、コードの設定を変更する際に使用する `IntegrationSettings` プロパティの名前を示します。これらのプロパティには `TracerSettings.Integrations[]` インデクサを通じてアクセスします。インテグレーション名については、[インテグレーション][2]セクションを参照してください。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
 
 | 設定名                                                                  | 説明                                                                                                           |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -428,8 +435,9 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/compatibility_requirements/dotnet-core
-[2]: https://app.datadoghq.com/apm/docs
-[3]: https://www.nuget.org/packages/Datadog.Trace
-[4]: /ja/tracing/custom_instrumentation/dotnet/
-[5]: /ja/getting_started/tagging/unified_service_tagging/
+[1]: /ja/tracing/setup_overview/setup/dotnet-framework
+[2]: /ja/tracing/compatibility_requirements/dotnet-core
+[3]: https://app.datadoghq.com/apm/docs
+[4]: https://www.nuget.org/packages/Datadog.Trace
+[5]: /ja/tracing/custom_instrumentation/dotnet/
+[6]: /ja/getting_started/tagging/unified_service_tagging/

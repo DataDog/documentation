@@ -122,7 +122,7 @@ logs:
           - sshd.service
 ```
 
-##### Collect Container tags
+##### Collect container tags
 
 Tags are critical for finding information in highly dynamic containerized environments, which is why the Agent can collect container tags in journald logs.
 

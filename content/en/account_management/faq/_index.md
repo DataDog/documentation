@@ -4,7 +4,7 @@ kind: faq
 private: true
 ---
 
-## Account Management
+## Account management
 
 * [Are my data and credentials safe?][1]
 * [Help! My Password email never came through!][2]
@@ -12,13 +12,13 @@ private: true
 * [What are Datadog's password requirements?][4]
 * [How do I access my support ticket?][5]
 
-## Service Providers
+## Service providers
 
 * [How do I add new users to sub-organizations?][6]
 * [As a parent account admin, how do I create new sub-organizations?][7]
 * [Do you support custom domains for each of my sub-organizations?][8]
 
-## Communication and Security
+## Communication and security
 
 * [How do I configure Azure AD as a SAML IdP?][9]
 * [Why are users being added as "none none"?][10]

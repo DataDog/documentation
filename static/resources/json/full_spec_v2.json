@@ -80,6 +80,7 @@
         "required": false,
         "schema": {
           "default": "name",
+          "description": "Sorting options",
           "enum": [
             "created_at",
             "-created_at",
@@ -90,7 +91,17 @@
             "name",
             "-name"
           ],
-          "type": "string"
+          "type": "string",
+          "x-enum-varnames": [
+            "CREATED_AT_ASCENDING",
+            "CREATED_AT_DESCENDING",
+            "LAST4_ASCENDING",
+            "LAST4_DESCENDING",
+            "MODIFIED_AT_ASCENDING",
+            "MODIFIED_AT_DESCENDING",
+            "NAME_ASCENDING",
+            "NAME_DESCENDING"
+          ]
         }
       },
       "ApplicationKeyFilterCreatedAtEndParameter": {
@@ -131,6 +142,33 @@
           "type": "string"
         }
       },
+      "ApplicationKeysSortParameter": {
+        "description": "Application key attribute used to sort results. Sort order is ascending\nby default. In order to specify a descending sort, prefix the\nattribute with a minus sign.",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "schema": {
+          "default": "name",
+          "description": "Sorting options",
+          "enum": [
+            "created_at",
+            "-created_at",
+            "last4",
+            "-last4",
+            "name",
+            "-name"
+          ],
+          "type": "string",
+          "x-enum-varnames": [
+            "CREATED_AT_ASCENDING",
+            "CREATED_AT_DESCENDING",
+            "LAST4_ASCENDING",
+            "LAST4_DESCENDING",
+            "NAME_ASCENDING",
+            "NAME_DESCENDING"
+          ]
+        }
+      },
       "ArchiveID": {
         "description": "The ID of the archive.",
         "in": "path",
@@ -157,10 +195,14 @@
         "required": false,
         "schema": {
           "items": {
+            "description": "Object related to an incident.",
             "enum": [
               "users"
             ],
-            "type": "string"
+            "type": "string",
+            "x-enum-varnames": [
+              "USERS"
+            ]
           },
           "type": "array"
         }
@@ -180,10 +222,14 @@
         "name": "include",
         "required": false,
         "schema": {
+          "description": "Object related to an incident.",
           "enum": [
             "users"
           ],
-          "type": "string"
+          "type": "string",
+          "x-enum-varnames": [
+            "USERS"
+          ]
         }
       },
       "IncidentServiceSearchQueryParameter": {
@@ -211,10 +257,14 @@
         "name": "include",
         "required": false,
         "schema": {
+          "description": "Object related to an incident.",
           "enum": [
             "users"
           ],
-          "type": "string"
+          "type": "string",
+          "x-enum-varnames": [
+            "USERS"
+          ]
         }
       },
       "IncidentTeamSearchQueryParameter": {
@@ -224,24 +274,6 @@
         "required": false,
         "schema": {
           "example": "ExampleTeamName",
-          "type": "string"
-        }
-      },
-      "ListApplicationKeysSortParameter": {
-        "description": "Application key attribute used to sort results. Sort order is ascending\nby default. In order to specify a descending sort, prefix the\nattribute with a minus sign.",
-        "in": "query",
-        "name": "sort",
-        "required": false,
-        "schema": {
-          "default": "name",
-          "enum": [
-            "created_at",
-            "-created_at",
-            "last4",
-            "-last4",
-            "name",
-            "-name"
-          ],
           "type": "string"
         }
       },
@@ -1819,6 +1851,31 @@
         },
         "type": "object"
       },
+      "APIKeysSort": {
+        "default": "name",
+        "description": "Sorting options",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "last4",
+          "-last4",
+          "modified_at",
+          "-modified_at",
+          "name",
+          "-name"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "CREATED_AT_ASCENDING",
+          "CREATED_AT_DESCENDING",
+          "LAST4_ASCENDING",
+          "LAST4_DESCENDING",
+          "MODIFIED_AT_ASCENDING",
+          "MODIFIED_AT_DESCENDING",
+          "NAME_ASCENDING",
+          "NAME_DESCENDING"
+        ]
+      },
       "APIKeysType": {
         "default": "api_keys",
         "description": "API Keys resource type.",
@@ -2291,6 +2348,97 @@
                     }
                   },
                   "type": "object"
+                },
+                {
+                  "description": "Role object returned by the API.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Attributes of the role.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Creation time of the role.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time of last role modification.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the role.",
+                          "type": "string"
+                        },
+                        "user_count": {
+                          "description": "Number of users with that role.",
+                          "format": "int64",
+                          "readOnly": true,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "ID of the role.",
+                      "type": "string"
+                    },
+                    "relationships": {
+                      "description": "Relationships of the role object returned by the API.",
+                      "properties": {
+                        "permissions": {
+                          "description": "Relationship to multiple permissions objects.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to permission objects.",
+                              "items": {
+                                "description": "Relationship to permission object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the permission.",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "permissions",
+                                    "description": "Permissions resource type.",
+                                    "enum": [
+                                      "permissions"
+                                    ],
+                                    "example": "permissions",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "PERMISSIONS"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "default": "roles",
+                      "description": "Roles type.",
+                      "enum": [
+                        "roles"
+                      ],
+                      "example": "roles",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "ROLES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "type": "object"
                 }
               ],
               "type": "object"
@@ -2524,6 +2672,97 @@
               }
             },
             "type": "object"
+          },
+          {
+            "description": "Role object returned by the API.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes of the role.",
+                "properties": {
+                  "created_at": {
+                    "description": "Creation time of the role.",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time of last role modification.",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the role.",
+                    "type": "string"
+                  },
+                  "user_count": {
+                    "description": "Number of users with that role.",
+                    "format": "int64",
+                    "readOnly": true,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the role.",
+                "type": "string"
+              },
+              "relationships": {
+                "description": "Relationships of the role object returned by the API.",
+                "properties": {
+                  "permissions": {
+                    "description": "Relationship to multiple permissions objects.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationships to permission objects.",
+                        "items": {
+                          "description": "Relationship to permission object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the permission.",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "permissions",
+                              "description": "Permissions resource type.",
+                              "enum": [
+                                "permissions"
+                              ],
+                              "example": "permissions",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "PERMISSIONS"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "roles",
+                "description": "Roles type.",
+                "enum": [
+                  "roles"
+                ],
+                "example": "roles",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ROLES"
+                ]
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "type": "object"
           }
         ],
         "type": "object"
@@ -2634,6 +2873,27 @@
           "data"
         ],
         "type": "object"
+      },
+      "ApplicationKeysSort": {
+        "default": "name",
+        "description": "Sorting options",
+        "enum": [
+          "created_at",
+          "-created_at",
+          "last4",
+          "-last4",
+          "name",
+          "-name"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "CREATED_AT_ASCENDING",
+          "CREATED_AT_DESCENDING",
+          "LAST4_ASCENDING",
+          "LAST4_DESCENDING",
+          "NAME_ASCENDING",
+          "NAME_DESCENDING"
+        ]
       },
       "ApplicationKeysType": {
         "default": "application_keys",
@@ -4382,6 +4642,16 @@
         "type": "string",
         "x-enum-varnames": [
           "INCIDENT_POSTMORTEMS"
+        ]
+      },
+      "IncidentRelatedObject": {
+        "description": "Object related to an incident.",
+        "enum": [
+          "users"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "USERS"
         ]
       },
       "IncidentResponse": {
@@ -6274,7 +6544,7 @@
           },
           "type": {
             "default": "services",
-            "description": "Incident Service resource type.",
+            "description": "Incident service resource type.",
             "enum": [
               "services"
             ],
@@ -6391,7 +6661,7 @@
               },
               "type": {
                 "default": "services",
-                "description": "Incident Service resource type.",
+                "description": "Incident service resource type.",
                 "enum": [
                   "services"
                 ],
@@ -6835,7 +7105,7 @@
               },
               "type": {
                 "default": "services",
-                "description": "Incident Service resource type.",
+                "description": "Incident service resource type.",
                 "enum": [
                   "services"
                 ],
@@ -7226,7 +7496,7 @@
           },
           "type": {
             "default": "services",
-            "description": "Incident Service resource type.",
+            "description": "Incident service resource type.",
             "enum": [
               "services"
             ],
@@ -7245,7 +7515,7 @@
       },
       "IncidentServiceType": {
         "default": "services",
-        "description": "Incident Service resource type.",
+        "description": "Incident service resource type.",
         "enum": [
           "services"
         ],
@@ -7372,7 +7642,7 @@
           },
           "type": {
             "default": "services",
-            "description": "Incident Service resource type.",
+            "description": "Incident service resource type.",
             "enum": [
               "services"
             ],
@@ -7495,7 +7765,7 @@
               },
               "type": {
                 "default": "services",
-                "description": "Incident Service resource type.",
+                "description": "Incident service resource type.",
                 "enum": [
                   "services"
                 ],
@@ -7641,7 +7911,7 @@
                 },
                 "type": {
                   "default": "services",
-                  "description": "Incident Service resource type.",
+                  "description": "Incident service resource type.",
                   "enum": [
                     "services"
                   ],
@@ -12115,6 +12385,97 @@
                     }
                   },
                   "type": "object"
+                },
+                {
+                  "description": "Role object returned by the API.",
+                  "properties": {
+                    "attributes": {
+                      "description": "Attributes of the role.",
+                      "properties": {
+                        "created_at": {
+                          "description": "Creation time of the role.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time of last role modification.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Name of the role.",
+                          "type": "string"
+                        },
+                        "user_count": {
+                          "description": "Number of users with that role.",
+                          "format": "int64",
+                          "readOnly": true,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "ID of the role.",
+                      "type": "string"
+                    },
+                    "relationships": {
+                      "description": "Relationships of the role object returned by the API.",
+                      "properties": {
+                        "permissions": {
+                          "description": "Relationship to multiple permissions objects.",
+                          "properties": {
+                            "data": {
+                              "description": "Relationships to permission objects.",
+                              "items": {
+                                "description": "Relationship to permission object.",
+                                "properties": {
+                                  "id": {
+                                    "description": "ID of the permission.",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "default": "permissions",
+                                    "description": "Permissions resource type.",
+                                    "enum": [
+                                      "permissions"
+                                    ],
+                                    "example": "permissions",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "PERMISSIONS"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": {
+                      "default": "roles",
+                      "description": "Roles type.",
+                      "enum": [
+                        "roles"
+                      ],
+                      "example": "roles",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "ROLES"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "type": "object"
                 }
               ],
               "type": "object"
@@ -12504,6 +12865,7 @@
                 "limit": {
                   "default": 10,
                   "description": "The maximum buckets to return for this group by",
+                  "format": "int64",
                   "type": "integer"
                 },
                 "missing": {
@@ -12624,6 +12986,7 @@
             "properties": {
               "timeOffset": {
                 "description": "The time offset (in seconds) to apply to the query.",
+                "format": "int64",
                 "type": "integer"
               },
               "timezone": {
@@ -12635,10 +12998,10 @@
             },
             "type": "object"
           },
-          "paging": {
+          "page": {
             "description": "Paging settings",
             "properties": {
-              "after": {
+              "cursor": {
                 "description": "The returned paging point to use to get the next results",
                 "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
                 "type": "string"
@@ -12726,6 +13089,7 @@
               "elapsed": {
                 "description": "The time elapsed in milliseconds",
                 "example": 132,
+                "format": "int64",
                 "type": "integer"
               },
               "page": {
@@ -15488,6 +15852,7 @@
           "limit": {
             "default": 10,
             "description": "The maximum buckets to return for this group by",
+            "format": "int64",
             "type": "integer"
           },
           "missing": {
@@ -15703,6 +16068,7 @@
             "properties": {
               "timeOffset": {
                 "description": "The time offset (in seconds) to apply to the query.",
+                "format": "int64",
                 "type": "integer"
               },
               "timezone": {
@@ -15847,6 +16213,7 @@
               "elapsed": {
                 "description": "The time elapsed in milliseconds",
                 "example": 132,
+                "format": "int64",
                 "type": "integer"
               },
               "page": {
@@ -15918,6 +16285,7 @@
               "count",
               "distribution"
             ],
+            "example": "distribution",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -15941,6 +16309,7 @@
           "count",
           "distribution"
         ],
+        "example": "distribution",
         "type": "string",
         "x-enum-varnames": [
           "COUNT",
@@ -15959,6 +16328,7 @@
                   "count",
                   "distribution"
                 ],
+                "example": "distribution",
                 "type": "string",
                 "x-enum-varnames": [
                   "COUNT",
@@ -16032,6 +16402,7 @@
                       "count",
                       "distribution"
                     ],
+                    "example": "distribution",
                     "type": "string",
                     "x-enum-varnames": [
                       "COUNT",
@@ -16133,6 +16504,7 @@
                           "count",
                           "distribution"
                         ],
+                        "example": "distribution",
                         "type": "string",
                         "x-enum-varnames": [
                           "COUNT",
@@ -16276,6 +16648,7 @@
                           "count",
                           "distribution"
                         ],
+                        "example": "distribution",
                         "type": "string",
                         "x-enum-varnames": [
                           "COUNT",
@@ -16284,6 +16657,7 @@
                       },
                       "path": {
                         "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                        "example": "@duration",
                         "type": "string"
                       }
                     },
@@ -16294,6 +16668,7 @@
                     "properties": {
                       "query": {
                         "description": "The search query - following the log search syntax.",
+                        "example": "service:web* AND @http.status_code:[200 TO 299]",
                         "type": "string"
                       }
                     },
@@ -16306,10 +16681,12 @@
                       "properties": {
                         "path": {
                           "description": "The path to the value the log-based metric will be aggregated over.",
+                          "example": "@http.status_code",
                           "type": "string"
                         },
                         "tag_name": {
                           "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                          "example": "status_code",
                           "type": "string"
                         }
                       },
@@ -16355,6 +16732,7 @@
                   "count",
                   "distribution"
                 ],
+                "example": "distribution",
                 "type": "string",
                 "x-enum-varnames": [
                   "COUNT",
@@ -16363,6 +16741,7 @@
               },
               "path": {
                 "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                "example": "@duration",
                 "type": "string"
               }
             },
@@ -16373,6 +16752,7 @@
             "properties": {
               "query": {
                 "description": "The search query - following the log search syntax.",
+                "example": "service:web* AND @http.status_code:[200 TO 299]",
                 "type": "string"
               }
             },
@@ -16385,10 +16765,12 @@
               "properties": {
                 "path": {
                   "description": "The path to the value the log-based metric will be aggregated over.",
+                  "example": "@http.status_code",
                   "type": "string"
                 },
                 "tag_name": {
                   "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                  "example": "status_code",
                   "type": "string"
                 }
               },
@@ -16408,6 +16790,7 @@
               "count",
               "distribution"
             ],
+            "example": "distribution",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -16416,6 +16799,7 @@
           },
           "path": {
             "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+            "example": "@duration",
             "type": "string"
           }
         },
@@ -16427,6 +16811,7 @@
           "count",
           "distribution"
         ],
+        "example": "distribution",
         "type": "string",
         "x-enum-varnames": [
           "COUNT",
@@ -16448,6 +16833,7 @@
                       "count",
                       "distribution"
                     ],
+                    "example": "distribution",
                     "type": "string",
                     "x-enum-varnames": [
                       "COUNT",
@@ -16456,6 +16842,7 @@
                   },
                   "path": {
                     "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                    "example": "@duration",
                     "type": "string"
                   }
                 },
@@ -16466,6 +16853,7 @@
                 "properties": {
                   "query": {
                     "description": "The search query - following the log search syntax.",
+                    "example": "service:web* AND @http.status_code:[200 TO 299]",
                     "type": "string"
                   }
                 },
@@ -16478,10 +16866,12 @@
                   "properties": {
                     "path": {
                       "description": "The path to the value the log-based metric will be aggregated over.",
+                      "example": "@http.status_code",
                       "type": "string"
                     },
                     "tag_name": {
                       "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                      "example": "status_code",
                       "type": "string"
                     }
                   },
@@ -16517,6 +16907,7 @@
         "properties": {
           "query": {
             "description": "The search query - following the log search syntax.",
+            "example": "service:web* AND @http.status_code:[200 TO 299]",
             "type": "string"
           }
         },
@@ -16527,10 +16918,12 @@
         "properties": {
           "path": {
             "description": "The path to the value the log-based metric will be aggregated over.",
+            "example": "@http.status_code",
             "type": "string"
           },
           "tag_name": {
             "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+            "example": "status_code",
             "type": "string"
           }
         },
@@ -16744,6 +17137,7 @@
                             "count",
                             "distribution"
                           ],
+                          "example": "distribution",
                           "type": "string",
                           "x-enum-varnames": [
                             "COUNT",
@@ -16752,6 +17146,7 @@
                         },
                         "path": {
                           "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                          "example": "@duration",
                           "type": "string"
                         }
                       },
@@ -16762,6 +17157,7 @@
                       "properties": {
                         "query": {
                           "description": "The search query - following the log search syntax.",
+                          "example": "service:web* AND @http.status_code:[200 TO 299]",
                           "type": "string"
                         }
                       },
@@ -16774,10 +17170,12 @@
                         "properties": {
                           "path": {
                             "description": "The path to the value the log-based metric will be aggregated over.",
+                            "example": "@http.status_code",
                             "type": "string"
                           },
                           "tag_name": {
                             "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                            "example": "status_code",
                             "type": "string"
                           }
                         },
@@ -16857,6 +17255,7 @@
         "properties": {
           "timeOffset": {
             "description": "The time offset (in seconds) to apply to the query.",
+            "format": "int64",
             "type": "integer"
           },
           "timezone": {
@@ -16874,6 +17273,7 @@
           "elapsed": {
             "description": "The time elapsed in milliseconds",
             "example": 132,
+            "format": "int64",
             "type": "integer"
           },
           "page": {
@@ -22247,7 +22647,7 @@
         "properties": {
           "email": {
             "description": "The email of the user.",
-            "example": "joe.doe@example.com",
+            "example": "jane.doe@example.com",
             "type": "string"
           },
           "name": {
@@ -22272,7 +22672,7 @@
             "properties": {
               "email": {
                 "description": "The email of the user.",
-                "example": "joe.doe@example.com",
+                "example": "jane.doe@example.com",
                 "type": "string"
               },
               "name": {
@@ -22358,7 +22758,7 @@
                 "properties": {
                   "email": {
                     "description": "The email of the user.",
-                    "example": "joe.doe@example.com",
+                    "example": "jane.doe@example.com",
                     "type": "string"
                   },
                   "name": {
@@ -24370,6 +24770,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "description": "Sorting options",
               "enum": [
                 "created_at",
                 "-created_at",
@@ -24380,7 +24781,17 @@
                 "name",
                 "-name"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "LAST4_ASCENDING",
+                "LAST4_DESCENDING",
+                "MODIFIED_AT_ASCENDING",
+                "MODIFIED_AT_DESCENDING",
+                "NAME_ASCENDING",
+                "NAME_DESCENDING"
+              ]
             }
           },
           {
@@ -26516,6 +26927,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "description": "Sorting options",
               "enum": [
                 "created_at",
                 "-created_at",
@@ -26524,7 +26936,15 @@
                 "name",
                 "-name"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "LAST4_ASCENDING",
+                "LAST4_DESCENDING",
+                "NAME_ASCENDING",
+                "NAME_DESCENDING"
+              ]
             }
           },
           {
@@ -26882,6 +27302,97 @@
                                 ]
                               }
                             },
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -27459,6 +27970,97 @@
                               }
                             },
                             "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
                           }
                         ],
                         "type": "object"
@@ -27592,6 +28194,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "description": "Sorting options",
               "enum": [
                 "created_at",
                 "-created_at",
@@ -27600,7 +28203,15 @@
                 "name",
                 "-name"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "CREATED_AT_ASCENDING",
+                "CREATED_AT_DESCENDING",
+                "LAST4_ASCENDING",
+                "LAST4_DESCENDING",
+                "NAME_ASCENDING",
+                "NAME_DESCENDING"
+              ]
             }
           },
           {
@@ -27958,6 +28569,97 @@
                                 ]
                               }
                             },
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -28438,6 +29140,97 @@
                               }
                             },
                             "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
                           }
                         ],
                         "type": "object"
@@ -28512,7 +29305,7 @@
             "parameters": [
               {
                 "name": "body",
-                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\n    },\n    \"type\": \"application_keys\"\n  }\n}"
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{ unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
               }
             ],
             "step": "there is a valid \"application_key\" in the system"
@@ -28948,6 +29741,97 @@
                                 ]
                               }
                             },
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -29419,6 +30303,97 @@
                                 ]
                               }
                             },
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -30345,10 +31320,14 @@
             "required": false,
             "schema": {
               "items": {
+                "description": "Object related to an incident.",
                 "enum": [
                   "users"
                 ],
-                "type": "string"
+                "type": "string",
+                "x-enum-varnames": [
+                  "USERS"
+                ]
               },
               "type": "array"
             }
@@ -32564,10 +33543,14 @@
             "required": false,
             "schema": {
               "items": {
+                "description": "Object related to an incident.",
                 "enum": [
                   "users"
                 ],
-                "type": "string"
+                "type": "string",
+                "x-enum-varnames": [
+                  "USERS"
+                ]
               },
               "type": "array"
             }
@@ -34762,6 +35745,7 @@
                         "limit": {
                           "default": 10,
                           "description": "The maximum buckets to return for this group by",
+                          "format": "int64",
                           "type": "integer"
                         },
                         "missing": {
@@ -34882,6 +35866,7 @@
                     "properties": {
                       "timeOffset": {
                         "description": "The time offset (in seconds) to apply to the query.",
+                        "format": "int64",
                         "type": "integer"
                       },
                       "timezone": {
@@ -34893,10 +35878,10 @@
                     },
                     "type": "object"
                   },
-                  "paging": {
+                  "page": {
                     "description": "Paging settings",
                     "properties": {
-                      "after": {
+                      "cursor": {
                         "description": "The returned paging point to use to get the next results",
                         "example": "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==",
                         "type": "string"
@@ -34992,6 +35977,7 @@
                         "elapsed": {
                           "description": "The time elapsed in milliseconds",
                           "example": 132,
+                          "format": "int64",
                           "type": "integer"
                         },
                         "page": {
@@ -37939,6 +38925,7 @@
                                       "count",
                                       "distribution"
                                     ],
+                                    "example": "distribution",
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "COUNT",
@@ -37947,6 +38934,7 @@
                                   },
                                   "path": {
                                     "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                    "example": "@duration",
                                     "type": "string"
                                   }
                                 },
@@ -37957,6 +38945,7 @@
                                 "properties": {
                                   "query": {
                                     "description": "The search query - following the log search syntax.",
+                                    "example": "service:web* AND @http.status_code:[200 TO 299]",
                                     "type": "string"
                                   }
                                 },
@@ -37969,10 +38958,12 @@
                                   "properties": {
                                     "path": {
                                       "description": "The path to the value the log-based metric will be aggregated over.",
+                                      "example": "@http.status_code",
                                       "type": "string"
                                     },
                                     "tag_name": {
                                       "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                      "example": "status_code",
                                       "type": "string"
                                     }
                                   },
@@ -38095,6 +39086,7 @@
                                   "count",
                                   "distribution"
                                 ],
+                                "example": "distribution",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "COUNT",
@@ -38211,6 +39203,7 @@
                                     "count",
                                     "distribution"
                                   ],
+                                  "example": "distribution",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
@@ -38219,6 +39212,7 @@
                                 },
                                 "path": {
                                   "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                  "example": "@duration",
                                   "type": "string"
                                 }
                               },
@@ -38229,6 +39223,7 @@
                               "properties": {
                                 "query": {
                                   "description": "The search query - following the log search syntax.",
+                                  "example": "service:web* AND @http.status_code:[200 TO 299]",
                                   "type": "string"
                                 }
                               },
@@ -38241,10 +39236,12 @@
                                 "properties": {
                                   "path": {
                                     "description": "The path to the value the log-based metric will be aggregated over.",
+                                    "example": "@http.status_code",
                                     "type": "string"
                                   },
                                   "tag_name": {
                                     "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                    "example": "status_code",
                                     "type": "string"
                                   }
                                 },
@@ -38550,6 +39547,7 @@
                                     "count",
                                     "distribution"
                                   ],
+                                  "example": "distribution",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
@@ -38558,6 +39556,7 @@
                                 },
                                 "path": {
                                   "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                  "example": "@duration",
                                   "type": "string"
                                 }
                               },
@@ -38568,6 +39567,7 @@
                               "properties": {
                                 "query": {
                                   "description": "The search query - following the log search syntax.",
+                                  "example": "service:web* AND @http.status_code:[200 TO 299]",
                                   "type": "string"
                                 }
                               },
@@ -38580,10 +39580,12 @@
                                 "properties": {
                                   "path": {
                                     "description": "The path to the value the log-based metric will be aggregated over.",
+                                    "example": "@http.status_code",
                                     "type": "string"
                                   },
                                   "tag_name": {
                                     "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                    "example": "status_code",
                                     "type": "string"
                                   }
                                 },
@@ -38821,6 +39823,7 @@
                                     "count",
                                     "distribution"
                                   ],
+                                  "example": "distribution",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
@@ -38829,6 +39832,7 @@
                                 },
                                 "path": {
                                   "description": "The path to the value the log-based metric will aggregate on (only used if the aggregation type is a \"distribution\").",
+                                  "example": "@duration",
                                   "type": "string"
                                 }
                               },
@@ -38839,6 +39843,7 @@
                               "properties": {
                                 "query": {
                                   "description": "The search query - following the log search syntax.",
+                                  "example": "service:web* AND @http.status_code:[200 TO 299]",
                                   "type": "string"
                                 }
                               },
@@ -38851,10 +39856,12 @@
                                 "properties": {
                                   "path": {
                                     "description": "The path to the value the log-based metric will be aggregated over.",
+                                    "example": "@http.status_code",
                                     "type": "string"
                                   },
                                   "tag_name": {
                                     "description": "Eventual name of the tag that gets created. By default, the path attribute is used as the tag name.",
+                                    "example": "status_code",
                                     "type": "string"
                                   }
                                 },
@@ -40576,7 +41583,7 @@
     },
     "/api/v2/logs/events": {
       "get": {
-        "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nlogs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+        "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest logs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
         "operationId": "ListLogsGet",
         "parameters": [
           {
@@ -40766,6 +41773,7 @@
                         "elapsed": {
                           "description": "The time elapsed in milliseconds",
                           "example": 132,
+                          "format": "int64",
                           "type": "integer"
                         },
                         "page": {
@@ -40883,7 +41891,7 @@
             "description": "Not Authorized"
           }
         },
-        "summary": "Get a quick list of logs",
+        "summary": "Get a list of logs",
         "tags": [
           "Logs"
         ],
@@ -40895,7 +41903,7 @@
     },
     "/api/v2/logs/events/search": {
       "post": {
-        "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nBoth this endpoint and the GET endpoint can be used interchangeably when listing\nlogs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+        "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex logs filtering and search.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
         "operationId": "ListLogs",
         "requestBody": {
           "content": {
@@ -40947,6 +41955,7 @@
                     "properties": {
                       "timeOffset": {
                         "description": "The time offset (in seconds) to apply to the query.",
+                        "format": "int64",
                         "type": "integer"
                       },
                       "timezone": {
@@ -41099,6 +42108,7 @@
                         "elapsed": {
                           "description": "The time elapsed in milliseconds",
                           "example": 132,
+                          "format": "int64",
                           "type": "integer"
                         },
                         "page": {
@@ -41216,7 +42226,7 @@
             "description": "Not Authorized"
           }
         },
-        "summary": "Get a list of logs",
+        "summary": "Search logs",
         "tags": [
           "Logs"
         ],
@@ -47749,10 +48759,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           },
           {
@@ -47915,7 +48929,7 @@
                           },
                           "type": {
                             "default": "services",
-                            "description": "Incident Service resource type.",
+                            "description": "Incident service resource type.",
                             "enum": [
                               "services"
                             ],
@@ -48425,7 +49439,7 @@
                       },
                       "type": {
                         "default": "services",
-                        "description": "Incident Service resource type.",
+                        "description": "Incident service resource type.",
                         "enum": [
                           "services"
                         ],
@@ -48571,7 +49585,7 @@
                         },
                         "type": {
                           "default": "services",
-                          "description": "Incident Service resource type.",
+                          "description": "Incident service resource type.",
                           "enum": [
                             "services"
                           ],
@@ -49109,10 +50123,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           }
         ],
@@ -49235,7 +50253,7 @@
                         },
                         "type": {
                           "default": "services",
-                          "description": "Incident Service resource type.",
+                          "description": "Incident service resource type.",
                           "enum": [
                             "services"
                           ],
@@ -49728,7 +50746,7 @@
                       },
                       "type": {
                         "default": "services",
-                        "description": "Incident Service resource type.",
+                        "description": "Incident service resource type.",
                         "enum": [
                           "services"
                         ],
@@ -49875,7 +50893,7 @@
                         },
                         "type": {
                           "default": "services",
-                          "description": "Incident Service resource type.",
+                          "description": "Incident service resource type.",
                           "enum": [
                             "services"
                           ],
@@ -50258,10 +51276,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           },
           {
@@ -51613,10 +52635,14 @@
             "name": "include",
             "required": false,
             "schema": {
+              "description": "Object related to an incident.",
               "enum": [
                 "users"
               ],
-              "type": "string"
+              "type": "string",
+              "x-enum-varnames": [
+                "USERS"
+              ]
             }
           }
         ],
@@ -53749,7 +54775,7 @@
                         "properties": {
                           "email": {
                             "description": "The email of the user.",
-                            "example": "joe.doe@example.com",
+                            "example": "jane.doe@example.com",
                             "type": "string"
                           },
                           "name": {
@@ -56347,7 +57373,8 @@
           "description": "The regional site for our customers.",
           "enum": [
             "datadoghq.com",
-            "datadoghq.eu"
+            "datadoghq.eu",
+            "ddog-gov.com"
           ]
         },
         "subdomain": {
@@ -56372,7 +57399,7 @@
   ],
   "tags": [
     {
-      "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization. Note that you can add API v1 Dashboards to Dashboard Lists\nthat you create with API v2.",
+      "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization.",
       "name": "Dashboard Lists"
     },
     {
@@ -56394,6 +57421,10 @@
         "url": "https://docs.datadoghq.com/account_management/api-app-keys/"
       },
       "name": "Key Management"
+    },
+    {
+      "description": "Search your logs and send them to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\n\nThe status codes answered by the HTTP API are:\n- 200: OK\n- 400: Bad request (likely an issue in the payload formatting)\n- 403: Permission issue (likely using an invalid API Key)\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 5xx: Internal error, request should be retried after some time",
+      "name": "Logs"
     },
     {
       "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in our UI.",

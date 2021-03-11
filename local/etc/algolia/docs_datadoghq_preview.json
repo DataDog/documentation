@@ -2,21 +2,12 @@
     "index_name": "docsearch_docs_preview",
     "start_urls": [
         {
-            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/v1/",
-            "selectors_key": "api_v1",
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/latest/",
+            "selectors_key": "api_latest",
             "variables": {
                 "localisation": ["", "/fr", "/ja"]
             },
-            "tags": ["api_v1"],
-            "page_rank": 0
-        },
-        {
-            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/v2/",
-            "selectors_key": "api_v2",
-            "variables": {
-                "localisation": ["", "/fr", "/ja"]
-            },
-            "tags": ["api_v2"],
+            "tags": ["api_latest"],
             "page_rank": 5
         },
         {
@@ -103,7 +94,7 @@
                     "metrics",
                     "mobile",
                     "monitors",
-                    "network_performance_monitoring",
+                    "network_monitoring",
                     "notebooks",
                     "real_user_monitoring",
                     "security",
@@ -136,34 +127,17 @@
         "/agent/guide/dogstream/$",
         "/integrations/faq/agent-5-amazon-ecs/$",
         "/integrations/faq/list-of-api-source-attribute-value/$",
-        "/logs/faq/how-to-set-up-only-logs/$",
         "/tracing/guide/agent-5-tracing-setup/$",
         "docs.datadoghq.com/fr/.*/faq/",
         "docs.datadoghq.com/ja/.*/faq/",
         "docs.datadoghq.com/resources/"
     ],
     "selectors": {
-        "api_v1": {
+        "api_latest": {
             "lvl0": {
                 "selector": "",
                 "global": true,
-                "default_value": "API V1"
-            },
-            "lvl1": ".main-api > h1",
-            "lvl2": ".main-api h2 a",
-            "lvl3": ".main-api h3",
-            "text": ".main-api p, .main-api ul > li",
-            "language": {
-                "selector": "/html/@lang",
-                "type": "xpath",
-                "global": true
-            }
-        },
-        "api_v2": {
-            "lvl0": {
-                "selector": "",
-                "global": true,
-                "default_value": "API V2"
+                "default_value": "API Latest"
             },
             "lvl1": ".main-api > h1",
             "lvl2": ".main-api h2 a",

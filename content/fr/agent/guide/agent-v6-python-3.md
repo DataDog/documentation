@@ -2,7 +2,7 @@
 title: "Utiliser Python\_3 avec l'Agent\_v6 de Datadog"
 kind: guide
 further_reading:
-  - link: agent/versions/upgrade_to_agent_v7
+  - link: /agent/versions/upgrade_to_agent_v7/
     tag: Documentation
     text: "Upgrade vers l'Agent\_v7"
 ---
@@ -32,9 +32,9 @@ Il s'agit d'une option de configuration au niveau de l'Agent : **tous les check
 
 La seule différence entre l'Agent v6.x et l'Agent v7.x concerne leur version du runtime Python. L'Agent v7.x prend en charge le runtime Python 3, tandis que l'Agent v6.x prend en charge le runtime Python 2. Ainsi, vous pouvez changer de runtime Python en passant d'une version de l'Agent à une autre. Pour ce faire, choisissez l'image de l'Agent pertinente :
 
-* Runtime **Python 2** : les images de l'Agent v6 suivent le format `datadog/agent:6.<VERSION_MINEURE_AGENT>`, ou `datadog/agent:6.<VERSION_MINEURE_AGENT>-jmx` pour les images prenant en charge les checks JMX.
+* Runtime **Python 2** : les images de l'Agent v6 suivent le format `gcr.io/datadoghq/agent:6.<VERSION_MINEURE_AGENT>`, ou `gcr.io/datadoghq/agent:6.<VERSION_MINEURE_AGENT>-jmx` pour les images prenant en charge les checks JMX.
 
-* Runtime **Python 3** : les images de l'Agent v7 suivent le format `datadog/agent:7.<VERSION_MINEURE_AGENT>`, ou `datadog/agent:7.<VERSION_MINEURE_AGENT>-jmx` pour les images prenant en charge les checks JMX.
+* Runtime **Python 3** : les images de l'Agent v7 suivent le format `gcr.io/datadoghq/agent:7.<VERSION_MINEURE_AGENT>`, ou `gcr.io/datadoghq/agent:7.<VERSION_MINEURE_AGENT>-jmx` pour les images prenant en charge les checks JMX.
 
 {{% /tab %}}
 {{< /tabs >}}

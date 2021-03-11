@@ -132,7 +132,7 @@ GlobalSettings.SetDebugEnabled(true);
 
 ```
 
-ログファイルは、デフォルトで次のディレクトリに保存されます。`DD_TRACE_LOG_PATH` 設定を使用してこれらのパスを変更できます。
+ログファイルは、デフォルトで以下のディレクトリに保存されます。`DD_TRACE_LOG_DIRECTORY` 設定を使用してこれらのパスを変更できます。
 
 | プラットフォーム | パス                                      |
 |----------|-------------------------------------------|
@@ -142,6 +142,10 @@ GlobalSettings.SetDebugEnabled(true);
 **注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
 
 .NET Tracer の構成方法の詳細については、[構成][1]セクションを参照してください。
+
+これらのパスで作成されるログには、次の 2 つのタイプがあります。
+1. **ネイティブコードからのログ:** 1.21.0 以降では、これらのログは `dotnet-tracer-native.log` として保存されます。1.20.x 以前のバージョンでは、これは `dotnet-profiler.log` として保存されていました。
+2. **マネージコードからのログ:** 1.21.0 以降では、これらのログは `dotnet-tracer-managed-<processname>-<date>.log` に保存されます。1.20.x 以前のバージョンでは、これは `dotnet-tracer-<processname>-<date>.log` として保存されていました。
 
 
 [1]: /ja/tracing/setup/dotnet/#configuration
@@ -329,14 +333,14 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <バージョン> DEBUG: Sending payload: siz
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-### プロファイラーログ
+### ネイティブコードからのログ
 
 ```shell
 [dotnet] 19861: [debug] JITCompilationStarted: function_id=<関数 id> token=<トークン id> name=System.Net.Http.Headers.HttpHeaders.RemoveParsedValue()
 ```
 
 
-### スパンが生成されたことを示すトレーサーログ
+### スパンを示すマネージコードからのログが生成されました
 
 ```shell
 { MachineName: ".", ProcessName: "dotnet", PID: <プロセス id>, AppDomainName: "test-webapi" }
@@ -346,7 +350,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span closed: [s_id: <スパン id>, p
 ```
 
 
-### トレースを Datadog Agent に送信できなかったことを示すトレーサーログ
+### トレースを示すマネージコードからのログを Datadog Agent に送信できませんでした
 
 ```shell
 YYYY-MM-DD HH:MM:SS.<整数> +00:00 [ERR] An error occurred while sending traces to the agent at System.Net.Http.HttpRequestException: Connection refused ---> System.Net.Sockets.SocketException: Connection refused

@@ -35,14 +35,6 @@ The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and
 
 ## Getting started
 
-### Follow the in-app documentation (Recommended)
-
-Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable ingesting 100% of traces and add Trace ID injection into logs during setup.
-
 **Note**: The .NET Tracer supports all .NET-based languages (C#, F#, Visual Basic, etc).
 
 ## Automatic Instrumentation
@@ -62,7 +54,7 @@ Automatic instrumentation captures:
 
 {{% tab "Windows" %}}
 
-Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
 
 To use automatic instrumentation on Windows, install the .NET Tracer on the host by running the [MSI installer for Windows][2] as administrator. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
@@ -281,6 +273,10 @@ Once this is set, verify that the environment variables were set with `systemctl
 
 **Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
 
+### Configure the Datadog Agent for APM
+
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the in-app [Quickstart instructions][3] to enable trace collection within the Datadog Agent.
+
 ## Manual Instrumentation
 
 To manually instrument your code, add the `Datadog.Trace` [NuGet package][4] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
@@ -289,7 +285,7 @@ For more details on manual instrumentation and custom tagging, see [Manual instr
 
 Manual instrumentation is supported on .NET Framework 4.5 and above on Windows, on .NET Core 2.0 and above on Windows and Linux, and on .NET 5 on Windows and Linux.
 
-**Note:** When using both manual and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+**Note:**  If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 
 ## Configuration
 
@@ -341,6 +337,7 @@ To configure the Tracer in application code, create a `TracerSettings` from the 
 
 ```csharp
 using Datadog.Trace;
+using Datadog.Trace.Configuration;
 
 // read default configuration sources (env vars, web.config, datadog.json)
 var settings = TracerSettings.FromDefaultSources();
@@ -384,7 +381,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ### Configuration Variables
 
-The following tables list the supported configuration variables. Use the first name (e.g. `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. The second name, if present (e.g. `AgentUri`), indicates the name the `TracerSettings` propery to use when changing settings in the code.
+Using the methods described above, customize your tracing configuration with the variables in the following tables. Use the first name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. The second name (for example, `AgentUri`), indicates the name for the `TracerSettings` property to use when changing settings in code.
 
 #### Unified Service Tagging
 
@@ -421,6 +418,8 @@ The following table lists configuration variables that are available only when u
 | `DD_TRACE_LOG_DIRECTORY`                                        | Sets the directory for .NET Tracer logs.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\`<br/><br/>Linux default: `/var/log/datadog/dotnet/`                                                                                                                                                                                     |
 | `DD_TRACE_LOG_PATH`                                             | Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.                                                                              |
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames`  | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][2] section.           |
+| `DD_HTTP_CLIENT_ERROR_STATUSES`                                 | Sets status code ranges that will cause HTTP client spans to be marked as errors. Default value is `400-499`. |
+| `DD_HTTP_SERVER_ERROR_STATUSES`                                 | Sets status code ranges that will cause HTTP server spans to be marked as errors. Default value is `500-599`. |
 | `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) that will be excluded from automatic instrumentation. |
 
 The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations][2] section. **Note:** On Linux, the names of environment variables are case-sensitive.
@@ -429,7 +428,7 @@ The following table lists configuration variables that are available only when u
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.                            |
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

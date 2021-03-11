@@ -31,7 +31,7 @@ annotations:
   ad.datadoghq.com/tags: '{"<CLÉ_TAG>": "<VALEUR_TAG>","<CLÉ_TAG_1>": "<VALEUR_TAG_1>"}'
 ```
 
-Si vous souhaitez appliquer un tag `<CLÉ_TAG>":<VALEUR_TAG>` à un conteneur spécifique `<IDENTIFICATEUR_CONTENEUR>` dans un pod, utilisez l'annotation suivante sur votre pod :
+Si vous souhaitez appliquer un tag `<CLÉ_TAG>:<VALEUR_TAG>` à un conteneur `<IDENTIFICATEUR_CONTENEUR>` spécifique dans un pod, utilisez l'annotation suivante sur votre pod :
 
 ```yaml
 annotations:
@@ -63,6 +63,15 @@ Par exemple, il est possible d'utiliser la configuration suivante :
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
+Pour les versions 7.24.0 et ultérieures de l'Agent, utilisez la configuration de variable d'environnement suivante pour appliquer l'ensemble des étiquettes de nœud en tant que tags à vos métriques. Dans cet exemple, les noms des tags sont précédés de `<PRÉFIXE>_` :
+
+```shell
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PRÉFIXE>_%%label%%"}'
+```
+
+**Remarque** : les métriques custom peuvent avoir une incidence sur votre facturation. Consultez la [page de facturation des métriques custom][1] pour en savoir plus.
+
+[1]: /fr/account_management/billing/custom_metrics
 {{% /tab %}}
 {{% tab "Agent" %}}
 
@@ -109,9 +118,9 @@ Pour la version >= 6.8.0 de l'Agent, utilisez la configuration de variable d'env
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PRÉFIXE>_%%label%%"}'
 ```
 
-**Remarque** : l'utilisation de cette méthode est susceptible d'accroître le nombre de [métriques custom][1] de votre organisation et d'augmenter vos frais.
+**Remarque** : les métriques custom peuvent avoir une incidence sur votre facturation. Consultez la [page de facturation des métriques custom][1] pour en savoir plus.
 
-[1]: /fr/developers/metrics/
+[1]: /fr/account_management/billing/custom_metrics
 {{% /tab %}}
 {{% tab "Agent" %}}
 
@@ -136,10 +145,10 @@ kubernetes_pod_labels_as_tags:
   *: <PRÉFIXE>_%%label%%
 ```
 
-**Remarque** : l'utilisation de cette méthode est susceptible d'[accroître le nombre de métriques][2] de votre organisation et d'augmenter vos frais.
+**Remarque** : les métriques custom peuvent avoir une incidence sur votre facturation. Consultez la [page de facturation des métriques custom][2] pour en savoir plus.
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /fr/developers/metrics/
+[2]: /fr/account_management/billing/custom_metrics
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -162,6 +171,15 @@ Par exemple, il est possible d'utiliser la configuration suivante :
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 ```
 
+Pour les versions 7.24.0 et ultérieures de l'Agent, utilisez la configuration de variable d'environnement suivante pour appliquer l'ensemble des annotations de pod en tant que tags à vos métriques. Dans cet exemple, les noms des tags sont précédés de `<PRÉFIXE>_` :
+
+```shell
+DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PRÉFIXE>_%%annotation%%"}'
+```
+
+**Remarque** : les métriques custom peuvent avoir une incidence sur votre facturation. Consultez la [page de facturation des métriques custom][1] pour en savoir plus.
+
+[1]: /fr/account_management/billing/custom_metrics
 {{% /tab %}}
 {{% tab "Agent" %}}
 

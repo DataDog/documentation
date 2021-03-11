@@ -91,6 +91,22 @@ To enable log collection with your DaemonSet:
 
     The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
+### Unprivileged
+
+(Optional) To run an unprivileged installation, add the following to your [pod template][2]:
+
+```yaml
+  spec:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
+
+When the agent is running with a non-root user, it cannot directly read the log files contained in `/var/lib/docker/containers`. In this case, it is necessary to mount the docker socket in the agent container so that it can fetch the container logs from the docker daemon.
+
 [1]: /agent/guide/autodiscovery-management/
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -114,6 +130,20 @@ datadog:
     containerCollectAll: true
 ```
 
+### Unprivileged
+
+(Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
+
+```yaml
+datadog:
+  securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
+
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Operator" %}}
@@ -136,9 +166,28 @@ Then apply the new configuration:
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
+## Unprivileged
+
+(Optional) To run an unprivileged installation, add the following to the [datadog CR][8]:
+
+```yaml
+agent:
+  config:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
+
 [1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
+
+**Warning**: When running an unprivileged installation, the agent needs to be able to read the log files in `/var/log/pods`.
+With `containerd`, the log files in `/var/log/pods` are readable by members of the `root` group. With the above instructions, the `agent` is still running with the `root` group so, it works.
+With `docker`, the logs files in `/var/log/pods` are symbolic links to `/var/lib/docker/containers` which is traversable only by the `root` user. As a consequence, with `docker`, it’s not possible for a non-`root` agent to read pod logs in `/var/log/pods`. The docker socket must be mounted in the agent container so that it can get pods logs through the docker daemon.
 
 **Note**: If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, set the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to `true` in order to force the Agent to go for the file collection mode.
 
@@ -351,7 +400,7 @@ The following ConfigMap defines the integration template for `redis` containers 
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: redis-config-map
+  name: redisdb-config-map
   namespace: default
 data:
   redisdb-config: |-

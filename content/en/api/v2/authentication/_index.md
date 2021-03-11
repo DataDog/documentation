@@ -1,3 +1,4 @@
 ---
 title: Authentication
+headless: true
 ---

@@ -52,13 +52,15 @@ For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated 
 
 ## Setting up SAML
 
-To configure SAML for multi-organizations, use the following procedure:
+SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually. 
+
+To configure SAML for multi-organizations:
 
 1. Create a new organization as a different user, with a different username/password.
 2. Invite SAML users.
 3. Login as a SAML user and set SAML.
 
-## Multi-Org Usage
+## Multi-org usage
 
 The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left and then navigating to: `Plan & Usage`--> `Multi-Org Usage`.
 
@@ -67,7 +69,7 @@ The Multi-Org Usage tab shows the aggregate usage of the parent-organization and
 * Month-to-date Usage
 * Long-Term Trends
 
-### Month-to-Date Usage
+### Month-to-date usage
 
 This view contains an Overall Usage section and an Individual Organization Usage section.
 
@@ -83,13 +85,13 @@ To view only the usage that will count toward your bill, you can switch to the "
 
 The month-to-date usage and last month’s usage can be downloaded as a CSV file.
 
-### Long-Term Trends
+### Long-term trends
 
 This tab shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill.
 
 This information can be downloaded as a CSV file.
 
-## Usage Attribution
+## Usage attribution
 
 The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 

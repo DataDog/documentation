@@ -26,7 +26,7 @@ Via the "histogram_percentiles" line of the configuration file of the Agent, get
 
 [More about histogram][4]
 
-## Local Aggregations
+## Local aggregations
 
 Histograms are computed every 10 seconds on a host per host basis by the Datadog Agent. This collection model comes with its advantages and its limitations.
 

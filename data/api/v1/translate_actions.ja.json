@@ -95,6 +95,42 @@
     "request_description": "ダッシュボードリストのリクエスト本文を更新します。",
     "request_schema_description": "ご利用いただいている Datadog のダッシュボードです。"
   },
+  "CreatePublicDashboard": {
+    "description": "指定した非公開ダッシュボードを共有し、公開表示できる URL を生成します。",
+    "summary": "共有ダッシュボードの作成",
+    "request_description": "共有ダッシュボードのリクエスト本文を作成します。",
+    "request_schema_description": "ダッシュボードが公開された/公開される方法に関連付けられたメタデータオブジェクト。"
+  },
+  "DeletePublicDashboard": {
+    "description": "指定されたトークンに関連付けられているダッシュボードのパブリック URL を取り消します (プライベートにレンダリングします)。",
+    "summary": "共有ダッシュボード URL を取り消す"
+  },
+  "GetPublicDashboard": {
+    "description": "指定されたトークンに関連付けられている既存の共有ダッシュボードの共有メタデータをフェッチします。",
+    "summary": "共有ダッシュボードの取得"
+  },
+  "UpdatePublicDashboard": {
+    "description": "指定されたトークンに関連付けられている共有ダッシュボードを更新します。",
+    "summary": "共有ダッシュボードの更新",
+    "request_description": "ダッシュボードのリクエスト本文を更新します。",
+    "request_schema_description": "共有ダッシュボードの設定を更新します。"
+  },
+  "DeletePublicDashboardInvitation": {
+    "description": "特定のメールアドレスの指定された共有ダッシュボードにアクセスするために使用された、以前に送信された招待メールとアクティブなセッションを取り消します。",
+    "summary": "共有ダッシュボードの招待を取り消す",
+    "request_description": "共有ダッシュボードの招待削除のリクエスト本文。",
+    "request_schema_description": "API によって返される共有ダッシュボードに存在する招待データとメタデータ。"
+  },
+  "GetPublicDashboardInvitations": {
+    "description": "特定の共有ダッシュボードに存在する招待について記述します (ページ区切り)。",
+    "summary": "共有ダッシュボードへのすべての招待の取得"
+  },
+  "SendPublicDashboardInvitation": {
+    "description": "特定の認証済み共有ダッシュボードにアクセスするためのリンクを含む指定されたメールアドレスにメールを送信します。メールアドレスは、認証された共有ダッシュボードの share_list にすでに属している必要があります。",
+    "summary": "共有ダッシュボードの招待メールの送信",
+    "request_description": "共有ダッシュボードの招待リクエスト本文。",
+    "request_schema_description": "API によって返される共有ダッシュボードに存在する招待データとメタデータ。"
+  },
   "DeleteDashboard": {
     "description": "指定の ID を使用してダッシュボードを削除します。",
     "summary": "ダッシュボードを削除する"
@@ -604,7 +640,7 @@
     "summary": "メトリクスの検索"
   },
   "SubmitMetrics": {
-    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 3.2 メガバイト (3200000) です。非圧縮ペイロードの場合、サイズ上限は 62 メガバイト (62914560) です。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 64 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでですが、DogStatsD API を使用する場合は\n圧縮が適用されるためペイロードのサイズも小さくなります。",
+    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 3.2 メガバイト (3200000) です。非圧縮ペイロードの場合、サイズ上限は 62 メガバイト (62914560) です。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 32 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでですが、DogStatsD API を使用する場合は\n圧縮が適用されるためペイロードのサイズも小さくなります。",
     "summary": "メトリクスを送信する",
     "request_schema_description": "メトリクスのペイロード。"
   },

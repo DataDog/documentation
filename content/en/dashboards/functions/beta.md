@@ -7,7 +7,7 @@ aliases:
 
 Beta functions are available by editing the query JSON directly.
 
-## Rolling Average
+## Rolling average
 
 | Function          | Description                                    | Example                           |
 |-------------------|------------------------------------------------|-----------------------------------|

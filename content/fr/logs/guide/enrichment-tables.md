@@ -22,15 +22,55 @@ Définissez de nouvelles entités dans Datadog (telles que des informations clie
 
 ## Créer une table d'enrichissement
 
-Pour créer une table d'enrichissement, importez un fichier CSV en nommant les colonnes appropriées et en définissant la clé primaire. Cette clé sera utilisée pour les correspondances.
+{{< tabs >}}
+{{% tab "Importation manuelle" %}}
 
-{{< img src="logs/guide/enrichment-tables/configure-enrichment-table.png" alt="Créer une table d'enrichissement" style="width:100%;">}}
+Cliquez sur **New Enrichment Table +**, puis importez un fichier CSV. Nommez les colonnes appropriées et définissez la clé primaire utilisée pour les correspondances.
+
+{{< img src="logs/guide/enrichment-tables/configure-enrichment-table.png" alt="Créer une table d'enrichissement" style="width:100%;">}}{{% /tab %}}
+
+{{% tab "Importation AWS S3" %}}
+
+Les tables d'enrichissement peuvent automatiquement récupérer un fichier CSV à partir d'un compartiment S3 AWS afin de garder vos données à jour. L'intégration recherche les modifications apportées au fichier CSV dans S3. Une fois le fichier à jour, les nouvelles données intègrent la table d'enrichissement. Cela permet également de mettre à jour l'API à partir de l'API de S3, une fois la table d'enrichissement initiale configurée.
+
+Pour mettre à jour les tables d'enrichissement depuis S3, Datadog utilise le rôle IAM du compte AWS que vous avez configuré pour [l'intégration AWS][1]. Si vous n'avez pas encore créé ce rôle, [suivez ces étapes][2] pour y remédier. Pour autoriser ce rôle à mettre à jour vos tables d'enrichissement, ajoutez la déclaration d'autorisation suivante à ses stratégies IAM. Veillez à modifier les noms des compartiments afin qu'ils correspondent à votre environnement.
+
+
+```json
+{
+    "Statement": [
+        {
+            "Sid": "EnrichmentTablesS3",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<NOM_DU_BUCKET_1>",
+                "arn:aws:s3:::<NOM_DU_BUCKET_2>"
+            ]
+        }
+    ],
+    "Version": "2012-10-17"
+}
+```
+### Définir la table
+
+Cliquez sur **New Enrichment Table +**, puis nommez la table. Sélectionnez AWS S3, remplissez tous les champs, cliquez sur Import, puis définissez la clé primaire utilisée pour les correspondances.
+
+{{< img src="logs/guide/enrichment-tables/configure-s3-enrichment-table.png" alt="Créer une table d'enrichissement" style="width:100%;">}}
+
+[1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=automaticcloudformation#installation
+{{% /tab %}}
+{{< /tabs >}}
 
 Cette table d'enrichissement peut ensuite être utilisée pour ajouter des attributs supplémentaires aux logs via le [processeur de correspondances][1].
 
 ## Modifier une table d'enrichissement
 
-Pour modifier une table d'enrichissement existante et y appliquer de nouvelles données, cliquez sur le bouton **Update Data +** en haut à droite. Les données de la table seront écrasées par celles du CSV sélectionné, ce qui signifie que toutes les lignes existantes avec la même clé primaire seront mises à jour, et que toutes les nouvelles lignes seront ajoutées. Une fois la table enregistrée, les lignes modifiées seront traitées de façon asynchrone et mises à jour dans l'aperçu. Les lignes mises à jour peuvent mettre jusqu'à 10 minutes à apparaître dans les logs affectés.
+Pour modifier une table d'enrichissement existante en ajoutant de nouvelles données, sélectionnez une table, puis cliquez sur **Update Data +** en haut à droite. Les données du fichier CSV sont alors intégrées à la table. Cela signifie que toutes les lignes existantes avec la même clé primaire sont mises à jour, et que toutes les nouvelles lignes sont ajoutées. Une fois la table enregistrée, les lignes modifiées sont traitées de façon asynchrone et mises à jour dans l'aperçu. Vous devrez peut-être patienter jusqu'à 10 minutes avant de pouvoir les visualiser dans les logs concernés.
 
 ## Pour aller plus loin
 

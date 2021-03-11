@@ -54,17 +54,40 @@ further_reading:
 
     [Agent トレースの収集に使用できるすべての環境変数を参照してください][1]。
 
-2. アプリケーションコンテナでコンテナが実行されている基底の各インスタンスのプライベート IP アドレスを `DD_AGENT_HOST` 環境変数に割り当てます。これにより、アプリケーショントレースを Agent に送信できます。[Amazon の EC2 メタデータエンドポイント][2]では、プライベート IP アドレスを検出できます。各ホストのプライベート IP アドレスを取得するには、次の URL に curl を実行します。
+2. アプリケーションコンテナでコンテナが実行されている基底の各インスタンスのプライベート IP アドレスを `DD_AGENT_HOST` 環境変数に割り当てます。これにより、アプリケーショントレースを Agent に送信できます。
 
-    {{< code-block lang="curl" >}}
-    curl http://169.254.169.254/latest/meta-data/local-ipv4
-    {{< /code-block >}}
+{{< tabs >}}
+{{% tab "EC2 メタデータエンドポイント" %}}
 
-    APM に渡される各アプリケーションコンテナのトレースエージェントのホスト名の環境変数として結果を設定します。
+[Amazon の EC2 メタデータエンドポイント][1]を使用すると、プライベート IP アドレスを検出できます。各ホストのプライベート IP アドレスを取得するには、次の URL をカールします。
 
-    {{< code-block lang="curl" >}}
-    os.environ['DD_AGENT_HOST'] = <EC2_PRIVATE_IP>
-    {{< /code-block >}}
+{{< code-block lang="curl" >}}
+curl http://169.254.169.254/latest/meta-data/local-ipv4
+{{< /code-block >}}
+
+
+[1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+{{% /tab %}}
+{{% tab "ECS コンテナメタデータファイル" %}}
+
+[Amazon の ECS コンテナメタデータファイル][1]を使用すると、プライベート IP アドレスを検出できます。各ホストのプライベート IP アドレスを取得するには、次のコマンドを実行します。
+
+{{< code-block lang="curl" >}}
+cat $ECS_CONTAINER_METADATA_FILE | jq .HostPrivateIPv4Address
+{{< /code-block >}}
+
+
+[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-metadata.html#metadata-file-format
+{{% /tab %}}
+{{< /tabs >}}
+
+ APM に渡される各アプリケーションコンテナのトレースエージェントのホスト名の環境変数として結果を設定します。
+
+{{< code-block lang="curl" >}}
+os.environ['DD_AGENT_HOST'] = <EC2_PRIVATE_IP>
+{{< /code-block >}}
+
+
 
 ## 起動時間の変数
 
@@ -95,14 +118,12 @@ tracer.configure(hostname=get_aws_ip())
 
 ```javascript
 const tracer = require('dd-trace').init();
-const request = require('request');
-request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
-    error,
-    resp,
-    body
-) {
-    tracer.setUrl(`http://${hostname}:8126`)
-});
+const axios = require('axios');
+
+(async () => {
+  const { data: hostname } = await axois.get('http://169.254.169.254/latest/meta-data/local-ipv4');
+  tracer.setUrl(`http://${hostname}:8126`);
+})();
 ```
 
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
@@ -175,6 +196,41 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 ```
 
 {{% /tab %}}
+{{% tab "PHP" %}}
+
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); php-fpm -F"  
+]
+```
+
+#### Apache
+
+VirtualHost またはサーバーコンフィギュレーションファイルの Apache および `mod_php` の場合、`PassEnv` を使用して、`DD_AGENT_HOST` およびその他の環境変数 (次の例のように[統合サービスタグ付け][1]の変数など) を設定します。
+
+```
+PassEnv DD_AGENT_HOST
+PassEnv DD_SERVICE
+PassEnv DD_ENV
+PassEnv DD_VERSION
+```
+
+#### PHP fpm
+
+ini パラメーターが `clear_env=on` に設定されている場合、プールワーカーファイル `www.conf` で、ホストから読み取られるように環境変数も構成する必要があります。これを使用して、`DD_AGENT_HOST` およびその他の環境変数 (次の例のように[統合サービスタグ付け][1]の変数など) も設定します。
+
+```
+env[DD_AGENT_HOST] = $DD_AGENT_HOST
+env[DD_SERVICE] = $DD_SERVICE
+env[DD_ENV] = $DD_ENV
+env[DD_VERSION] = $DD_VERSION
+```
+
+
+[1]: https://docs.datadoghq.com/ja/getting_started/tagging/unified_service_tagging/
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料
@@ -182,4 +238,3 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/amazon_ecs/
-[2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html

@@ -27,7 +27,7 @@ You can also just [run the Datadog Agent on your host][3] and configure it to ga
 
 ### Installation
 
-#### Container Installation
+#### Container installation
 
 Thanks to Kubernetes, you can take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes (or on specific nodes by using nodeSelectors).
 
@@ -93,7 +93,7 @@ Replace `DATADOG_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] 
 
 **Note**:  This manifest enables Autodiscovery's auto-configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure Autodiscovery, see the [dedicated Autodiscovery documentation][9].
 
-#### Host Installation
+#### Host installation
 
 Install the `dd-check-kubernetes` package manually or with your favorite configuration manager.
 
@@ -113,7 +113,7 @@ See the [example kubernetes.yaml][10] for all available configuration options.
 
 ### Validation
 
-#### Container Running
+#### Container running
 
 To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
@@ -141,11 +141,11 @@ Checks
       - Collected 39 metrics, 0 events & 7 service checks
 ```
 
-## Setup Kubernetes State
+## Setup Kubernetes state
 
 ### Installation
 
-#### Container Installation
+#### Container installation
 
 If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics][12] project to provide additional metrics (identified by the `kubernetes_state` prefix in the metrics list below) to Datadog.
 
@@ -206,7 +206,7 @@ The manifest above uses Google's publicly available `kube-state-metrics` contain
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
 For more information, see the [kubernetes_state.yaml.example file][14]. If you have enabled [Autodiscovery][9], the kube state URL is configured and managed automatically.
 
-#### Host Installation
+#### Host installation
 
 Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here][15], and information on installation on [this page][16].
 Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml][14] for all available configuration options.

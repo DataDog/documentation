@@ -35,7 +35,7 @@ By default, existing users are already associated with one of the three out-of-t
 
 In addition of the general permissions, it is possible to define more granular permissions for specific assets or data types. Permissions can be either global or scoped to a subset of elements. Find below the details of these options and the impact they have on each available permission.
 
-## Access Management
+## Access management
 
 Find below the list of permissions for Access Management:
 
@@ -83,6 +83,35 @@ Find below the list of permissions for the Security Monitoring assets:
 | `security_monitoring_rules_read`   | Ability to view detection rules                     | false    |
 | `security_monitoring_rules_write`  | Ability to create, edit, and delete detection rules | false    |
 | `security_monitoring_signals_read` | Ability to view security signals                    | false    |
+
+## APM
+
+Below is a list of the permissions currently available for APM:
+
+| Name                             | Description                                         | Scopable |
+| -------------------------------- | --------------------------------------------------- | -------- |
+| `apm_read` | The ability to read and query APM and Trace Analytics. | false |
+| `apm_service_ingest_read` | The ability to access Service Ingestion pages. A user with this permission can view the service ingestion page, list of root service, their statistics, and creation info. | false |
+| `apm_service_ingest_write` | The ability to edit Service Ingestion pages root services. A user with this permission can edit the root service ingestion and generate a code snippet to increase ingestion per service. | false |
+| `apm_retention_filter_read` | The ability to read trace retention filters. A user with this permission can view the retention filters page, list of filters, their statistics, and creation info. | false |
+| `apm_retention_filter_write` | The ability to create, edit and delete trace retention filters. A user with this permission can create new retention filters, and update or delete to existing retention filters. | false |
+
+## Real User Monitoring
+
+Below is a list of the permissions currently available for Real User Monitoring:
+
+| Name                             | Description                                         | Scopable |
+| -------------------------------- | --------------------------------------------------- | -------- |
+| `rum_apps_write` | The ability to create, edit and delete RUM Applications. | false |
+
+## Metrics
+
+Below is a list of the permissions currently available for the Metrics Management:
+
+| Name                             | Description                                         | Scopable |
+| -------------------------------- | --------------------------------------------------- | -------- |
+| `metric_tags_read` | The ability to view the tag configuration modal for any custom metric. A user with this permission will be able to view the relevant tag configuration applied to any custom metric. | false |
+| `metric_tags_write` | The ability to edit and save tag configurations for custom metrics. | false |
 
 ## Log Management
 
@@ -146,7 +175,6 @@ Grants a role the ability to use the [Create, Edit, and Delete facets][5].
 
 This permission is global and enables both the creation of new facets, and the edition or deletion of existing ones.
 
-This permission has no effect on the management of [standard attributes][6] or [aliasing facets][7].
 
 #### logs_modify_indexes
 
@@ -194,6 +222,7 @@ Grants a role the ability to create and modify [log processing pipelines][12]. T
 - Setting [pipelines filters][13] for what logs should enter the processing pipeline
 - Reorder pipelines
 - Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline
+- Managing [standard attributes][6] or [aliasing facets][7]
 
 **Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
 

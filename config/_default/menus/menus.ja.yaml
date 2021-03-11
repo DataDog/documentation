@@ -52,14 +52,14 @@ main_left:
     weight: 8
     parent: product
   - identifier: synthetics
-    name: Synthetic の監視
+    name: Synthetic モニタリング
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics icon''>'
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 9
     parent: product
   - identifier: rum
     name: リアルユーザーモニタリング
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''rum icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''RUM アイコン''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
@@ -204,6 +204,11 @@ main_left:
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
     weight: -440
+  - name: オンプレミスモニタリング
+    parent: solutions
+    title: ユースケース
+    url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
+    weight: -439
 main_right:
   - identifier: about
     name: 会社情報
@@ -219,7 +224,7 @@ main_right:
     weight: -480
   - name: 最新ニュース
     parent: about
-    url: 'https://www.datadoghq.com/about/latest-news/'
+    url: 'https://www.datadoghq.com/about/latest-news/press-releases/'
     weight: -460
   - name: 経営陣
     parent: about
@@ -820,7 +825,7 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 902
-  - name: モバイル
+  - name: モバイルアプリケーション
     url: mobile/
     identifier: モバイル
     pre: nav_mobile
@@ -942,70 +947,74 @@ main:
     identifier: serverless_distributed_tracing
     parent: サーバーレス
     weight: 5
+  - name: トレースのマージ（詳細）
+    url: serverless/distributed_tracing/serverless_trace_merging
+    parent: serverless_distributed_tracing
+    weight: 501
   - name: カスタムメトリクス
     url: serverless/custom_metrics
     parent: サーバーレス
     weight: 6
+  - name: インサイト
+    url: serverless/insights
+    parent: サーバーレス
+    weight: 7
   - name: デプロイ追跡
     url: serverless/deployment_tracking
     parent: サーバーレス
-    weight: 7
+    weight: 8
   - name: サーバーレスインテグレーション
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: サーバーレス
-    weight: 8
+    weight: 9
   - name: Datadog サーバーレスプラグイン
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 801
+    weight: 901
   - name: Datadog のサーバーレスマクロ
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 802
+    weight: 902
   - name: Datadog サーバーレス CLI
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 803
+    weight: 903
   - name: サーバーレスタグ付け
     url: serverless/serverless_tagging
     parent: サーバーレス
-    weight: 9
+    weight: 10
   - name: トラブルシューティング
     url: serverless/troubleshooting
     parent: サーバーレス
     identifier: serverless_troubleshooting
-    weight: 10
+    weight: 11
   - name: Azure App Service 拡張機能
     url: serverless/azure_app_services
     parent: サーバーレス
     identifier: serverless_app_services
-    weight: 11
+    weight: 12
   - name: メトリクス
     url: metrics/
     identifier: metrics_top_level
     pre: nav_metrics
     weight: 110000
-  - name: はじめに
-    url: metrics/introduction/
-    parent: metrics_top_level
-    weight: 901
   - name: エクスプローラー
     url: metrics/explorer/
     parent: metrics_top_level
-    weight: 902
+    weight: 901
   - name: Summary
     url: metrics/summary/
     parent: metrics_top_level
-    weight: 903
+    weight: 902
   - name: ディストリビューション
     url: metrics/distributions/
     parent: metrics_top_level
     identifier: metrics_distributions
-    weight: 904
+    weight: 903
   - name: ノートブック
     url: notebooks/
     identifier: ノートブック
@@ -1306,7 +1315,7 @@ main:
     identifier: tracing_open_standards_open_standards_dotnet
     weight: 108
   - name: サーバーレス関数のトレース
-    url: tracing/setup_overview/serverless_functions/
+    url: serverless/distributed_tracing
     parent: tracing_setup_overview
     identifier: tracing_serverless_functions
     weight: 104
@@ -1388,56 +1397,66 @@ main:
     parent: trace_retention_and_ingestion
     identifier: trace_retention_and_ingestion_usage_metrics
     weight: 501
+  - name: スパンからメトリクスを生成する
+    url: tracing/generate_metrics/
+    parent: トレーシング
+    identifier: generate_metrics
+    weight: 6
   - name: デプロイ追跡
     url: tracing/deployment_tracking/
     parent: トレーシング
     identifier: deployment_tracking
-    weight: 6
+    weight: 7
   - name: ログとトレースの接続
     url: tracing/connect_logs_and_traces/
     parent: トレーシング
     identifier: tracing_connect_logs_and_traces
-    weight: 7
+    weight: 8
   - name: Java
     url: tracing/connect_logs_and_traces/java
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_java
-    weight: 701
+    weight: 801
   - name: Python
     url: tracing/connect_logs_and_traces/python
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_python
-    weight: 702
+    weight: 802
   - name: Go
     url: tracing/connect_logs_and_traces/go
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_go
-    weight: 703
+    weight: 803
   - name: Ruby
     url: tracing/connect_logs_and_traces/ruby
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_ruby
-    weight: 704
+    weight: 804
   - name: PHP
     url: tracing/connect_logs_and_traces/php
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_php
-    weight: 705
+    weight: 805
   - name: NodeJS
     url: tracing/connect_logs_and_traces/nodejs
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_nodejs
-    weight: 706
+    weight: 806
   - name: .NET
     url: tracing/connect_logs_and_traces/dotnet
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
-    weight: 707
+    weight: 807
   - name: Synthetics テストとトレースの接続
     url: synthetics/apm
     parent: トレーシング
     identifier: tracing_connect_synthetics_and_traces
     weight: 8
+  - name: RUM とトレースの接続
+    url: real_user_monitoring/connect_rum_and_traces
+    parent: トレーシング
+    identifier: tracing_connect_rum_and_traces
+    weight: 9
   - name: ランタイムメトリクス
     url: tracing/runtime_metrics/
     parent: トレーシング
@@ -1463,7 +1482,7 @@ main:
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
     weight: 1004
-  - name: Continuous Profiler
+  - name: 継続的なプロファイラー
     url: tracing/profiler/
     parent: トレーシング
     identifier: プロファイラー
@@ -1664,18 +1683,22 @@ main:
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 603
+  - name: ログトランザクション
+    url: logs/explorer/transactions/
+    parent: log_explorer
+    weight: 604
   - name: ログ分析
     url: logs/explorer/analytics/
     parent: log_explorer
-    weight: 604
+    weight: 605
   - name: 保存ビュー
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 605
+    weight: 606
   - name: ファセット
     url: logs/explorer/facets/
     parent: log_explorer
-    weight: 606
+    weight: 607
   - name: 検索構文
     url: logs/search_syntax/
     parent: log_management
@@ -1709,32 +1732,37 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring
     weight: 1
+  - name: はじめに
+    url: security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: シグナルエクスプローラー
+    url: security_monitoring/explorer
+    parent: security_monitoring
+    identifier: security_monitoring_explorer
+    weight: 102
+  - name: 脅威検知の規則
+    url: security_monitoring/detection_rules
+    parent: security_monitoring
+    identifier: security_monitoring_detection_rules
+    weight: 103
+  - name: ガイド
+    url: security_monitoring/guide
+    parent: security_monitoring
+    identifier: security_monitoring_guides
+    weight: 104
   - name: コンプライアンスのモニタリング
     url: compliance_monitoring/
     parent: security_compliance_monitoring
     identifier: compliance_monitoring
     weight: 2
-  - name: デフォルトのルール
-    url: security_monitoring/default_rules/
+  - name: デフォルトの規則
+    url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
-  - name: はじめに
-    url: security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
-    weight: 1
-  - name: シグナルエクスプローラー
-    url: security_monitoring/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_explorer
-    weight: 2
-  - name: 脅威検知の規則
-    url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
-    weight: 3
-  - name: Synthetic の監視
+  - name: Synthetic モニタリング
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
@@ -1743,69 +1771,90 @@ main:
     url: synthetics/api_tests/
     parent: synthetics
     weight: 1
-    id: api_tests
+    identifier: api_tests
+  - name: HTTP
+    url: synthetics/api_tests/http_tests
+    parent: api_tests
+    weight: 101
+  - name: SSL
+    url: synthetics/api_tests/ssl_tests
+    parent: api_tests
+    weight: 102
+  - name: TCP
+    url: synthetics/api_tests/tcp_tests
+    parent: api_tests
+    weight: 103
+  - name: DNS
+    url: synthetics/api_tests/dns_tests
+    parent: api_tests
+    weight: 104
+  - name: Multistep API テスト
+    url: synthetics/multistep
+    parent: synthetics
+    identifier: synthetics_multistep
+    weight: 2
   - name: ブラウザテスト
     url: synthetics/browser_tests/
     parent: synthetics
     identifier: synthetics_browser_tests
-    weight: 2
+    weight: 3
   - name: ステップ
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
-    weight: 201
-  - name: ステップの高度なオプション
-    url: synthetics/browser_tests/advanced_options
-    parent: synthetics_browser_tests
-    weight: 203
+    weight: 301
   - name: テスト結果
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
-    weight: 202
+    weight: 302
+  - name: ステップの高度なオプション
+    url: synthetics/browser_tests/advanced_options
+    parent: synthetics_browser_tests
+    weight: 303
   - name: プライベートロケーション
     url: synthetics/private_locations
     parent: synthetics
     identifier: synthetics_private_location
-    weight: 3
+    weight: 4
   - name: コンフィギュレーション
     url: synthetics/private_locations/configuration
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
-    weight: 301
+    weight: 401
   - name: CI/CD テスト
     url: /synthetics/ci/
     parent: synthetics
     identifier: synthetics_ci
-    weight: 4
+    weight: 5
   - name: APM インテグレーション
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 5
+    weight: 6
   - name: 検索と管理
     url: synthetics/search/
     parent: synthetics
-    weight: 6
+    weight: 7
   - name: メトリクス
     url: synthetics/metrics/
     parent: synthetics
-    weight: 7
+    weight: 8
   - name: 設定
     url: synthetics/settings/
     parent: synthetics
-    weight: 8
+    weight: 9
   - name: ガイド
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 9
+    weight: 10
   - name: トラブルシューティング
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 10
+    weight: 11
   - name: リアルユーザーモニタリング
     url: real_user_monitoring/
-    pre: nav_rum
+    pre: nav_rum_2
     identifier: rum
     weight: 150000
   - name: ブラウザのモニタリング
@@ -1828,6 +1877,16 @@ main:
     parent: rum_browser
     identifier: page_performance
     weight: 103
+  - name: リソースパフォーマンスの監視
+    url: real_user_monitoring/browser/monitoring_resource_performance/
+    parent: rum_browser
+    identifier: resource_performance
+    weight: 104
+  - name: ブラウザエラーの収集
+    url: real_user_monitoring/browser/collecting_browser_errors/
+    parent: rum_browser
+    identifier: collect_errors
+    weight: 105
   - name: Android モニタリング
     url: real_user_monitoring/android/
     parent: rum
@@ -1888,21 +1947,26 @@ main:
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
     weight: 505
+  - name: RUM とトレースの接続
+    url: real_user_monitoring/connect_rum_and_traces
+    parent: rum
+    identifier: rum_connect_rum_and_traces
+    weight: 6
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 6
+    weight: 7
   - name: エクスプローラー
     url: real_user_monitoring/error_tracking/explorer
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 601
+    weight: 701
   - name: ガイド
     url: real_user_monitoring/guide
     parent: rum
     identifier: rum_guides
-    weight: 7
+    weight: 8
   - name: ネットワークモニタリング
     url: network_performance_monitoring/
     pre: nav_network
@@ -1928,36 +1992,41 @@ main:
     parent: npm
     identifier: dns_monitoring
     weight: 4
+  - name: ガイド
+    url: network_performance_monitoring/guide/
+    identifier: npm_guides
+    parent: npm
+    weight: 5
   - name: デバイス
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 500
+    weight: 600
   - name: セットアップ
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 501
+    weight: 601
   - name: プロファイル
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 502
+    weight: 602
   - name: 収集データ
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 503
+    weight: 603
   - name: トラブルシューティング
     url: network_performance_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 504
+    weight: 604
   - name: ガイド
     url: network_performance_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 505
+    weight: 605
   - name: 開発ツール
     url: developers/
     pre: nav_developers
@@ -2383,6 +2452,34 @@ api_v1:
     parent: ダッシュボード
     url: '#create-a-new-dashboard'
     generated: true
+  - name: 共有ダッシュボードの作成
+    parent: ダッシュボード
+    url: '#create-a-shared-dashboard'
+    generated: true
+  - name: 共有ダッシュボード URL の無効化
+    parent: ダッシュボード
+    url: '#revoke-a-shared-dashboard-url'
+    generated: true
+  - name: 共有ダッシュボードの取得
+    parent: ダッシュボード
+    url: '#get-a-shared-dashboard'
+    generated: true
+  - name: 共有ダッシュボードの更新
+    parent: ダッシュボード
+    url: '#update-a-shared-dashboard'
+    generated: true
+  - name: 共有ダッシュボードの招待を取り消す
+    parent: ダッシュボード
+    url: '#revoke-shared-dashboard-invitations'
+    generated: true
+  - name: 共有ダッシュボードへのすべての招待の取得
+    parent: ダッシュボード
+    url: '#get-all-invitations-for-a-shared-dashboard'
+    generated: true
+  - name: 共有ダッシュボードの招待メールの送信
+    parent: ダッシュボード
+    url: '#send-shared-dashboard-invitation-email'
+    generated: true
   - name: ダッシュボードを削除する
     parent: ダッシュボード
     url: '#delete-a-dashboard'
@@ -2599,6 +2696,10 @@ api_v1:
     parent: ログインデックス
     url: '#get-all-indexes'
     generated: true
+  - name: インデックスを作成
+    parent: ログインデックス
+    url: '#create-an-index'
+    generated: true
   - name: インデックスを取得する
     parent: ログインデックス
     url: '#get-an-index'
@@ -2607,12 +2708,16 @@ api_v1:
     parent: ログインデックス
     url: '#update-an-index'
     generated: true
+  - name: ログメトリクス
+    url: /api/v1/logs-metrics/
+    identifier: ログメトリクス
+    generated: true
   - name: ログパイプライン
     url: /api/v1/logs-pipelines/
     identifier: ログパイプライン
     generated: true
   - name: パイプライン順序を取得する
-    parent: "ログパイプライン\n\_"
+    parent: ログパイプライン
     url: '#get-pipeline-order'
     generated: true
   - name: パイプライン順序を更新する
@@ -3051,9 +3156,9 @@ api_v1:
     parent: 使用料のメータリング
     url: '#get-hourly-usage-for-lambda'
     generated: true
-  - name: マルチオーガニゼーションのアカウント全体の請求対象使用量を取得します
+  - name: アカウント全体の請求対象使用量を取得します
     parent: 使用料のメータリング
-    url: '#get-billable-usage-across-your-multi-org-account'
+    url: '#get-billable-usage-across-your-account'
     generated: true
   - name: Fargate の 1 時間あたり使用量の取得
     parent: 使用料のメータリング
@@ -3349,6 +3454,114 @@ api_v2:
     url: /api/v2/key-management/
     identifier: Key Management
     generated: true
+  - name: すべての API キーを取得
+    parent: Key Management
+    url: '#get-all-api-keys'
+    generated: true
+  - name: API キーの作成
+    parent: Key Management
+    url: '#create-an-api-key'
+    generated: true
+  - name: API キーの削除
+    parent: Key Management
+    url: '#delete-an-api-key'
+    generated: true
+  - name: API キーを取得する
+    parent: Key Management
+    url: '#get-api-key'
+    generated: true
+  - name: API キーの編集
+    parent: Key Management
+    url: '#edit-an-api-key'
+    generated: true
+  - name: すべてのアプリケーションキーを取得
+    parent: Key Management
+    url: '#get-all-application-keys'
+    generated: true
+  - name: アプリケーションキーの削除
+    parent: Key Management
+    url: '#delete-an-application-key'
+    generated: true
+  - name: アプリケーションキーの編集
+    parent: Key Management
+    url: '#edit-an-application-key'
+    generated: true
+  - name: 現在のユーザーが所有するすべてのアプリケーションキーを取得します
+    parent: Key Management
+    url: '#get-all-application-keys-owned-by-current-user'
+    generated: true
+  - name: 現在のユーザーのアプリケーションキーを作成します
+    parent: Key Management
+    url: '#create-an-application-key-for-current-user'
+    generated: true
+  - name: 現在のユーザーが所有するアプリケーションキーを削除します
+    parent: Key Management
+    url: '#delete-an-application-key-owned-by-current-user'
+    generated: true
+  - name: 現在のユーザーが所有するアプリケーションキーを 1 つ取得します
+    parent: Key Management
+    url: '#get-one-application-key-owned-by-current-user'
+    generated: true
+  - name: 現在のユーザーが所有するアプリケーションキーを編集します
+    parent: Key Management
+    url: '#edit-an-application-key-owned-by-current-user'
+    generated: true
+  - name: Key Management
+    url: /api/v2/key-management/
+    identifier: Key Management
+    generated: true
+  - name: すべての API キーを取得
+    parent: Key Management
+    url: '#get-all-api-keys'
+    generated: true
+  - name: API キーの作成
+    parent: Key Management
+    url: '#create-an-api-key'
+    generated: true
+  - name: API キーの削除
+    parent: Key Management
+    url: '#delete-an-api-key'
+    generated: true
+  - name: API キーを取得する
+    parent: Key Management
+    url: '#get-api-key'
+    generated: true
+  - name: API キーの編集
+    parent: Key Management
+    url: '#edit-an-api-key'
+    generated: true
+  - name: すべてのアプリケーションキーを取得
+    parent: Key Management
+    url: '#get-all-application-keys'
+    generated: true
+  - name: アプリケーションキーの削除
+    parent: Key Management
+    url: '#delete-an-application-key'
+    generated: true
+  - name: アプリケーションキーの編集
+    parent: Key Management
+    url: '#edit-an-application-key'
+    generated: true
+  - name: 現在のユーザーが所有するすべてのアプリケーションキーを取得します
+    parent: Key Management
+    url: '#get-all-application-keys-owned-by-current-user'
+    generated: true
+  - name: 現在のユーザーのアプリケーションキーを作成します
+    parent: Key Management
+    url: '#create-an-application-key-for-current-user'
+    generated: true
+  - name: 現在のユーザーが所有するアプリケーションキーを削除します
+    parent: Key Management
+    url: '#delete-an-application-key-owned-by-current-user'
+    generated: true
+  - name: 現在のユーザーが所有するアプリケーションキーを 1 つ取得します
+    parent: Key Management
+    url: '#get-one-application-key-owned-by-current-user'
+    generated: true
+  - name: 現在のユーザーが所有するアプリケーションキーを編集します
+    parent: Key Management
+    url: '#edit-an-application-key-owned-by-current-user'
+    generated: true
   - name: ログ
     url: /api/v2/logs/
     identifier: ログ
@@ -3412,6 +3625,30 @@ api_v2:
   - name: ログインデックス
     url: /api/v2/logs-indexes/
     identifier: ログインデックス
+    generated: true
+  - name: ログメトリクス
+    url: /api/v2/logs-metrics/
+    identifier: ログメトリクス
+    generated: true
+  - name: すべてのログベースのメトリクスを取得する
+    parent: ログメトリクス
+    url: '#get-all-log-based-metrics'
+    generated: true
+  - name: ログベースのメトリクスを作成する
+    parent: ログメトリクス
+    url: '#create-a-log-based-metric'
+    generated: true
+  - name: ログベースのメトリクスを削除する
+    parent: ログメトリクス
+    url: '#delete-a-log-based-metric'
+    generated: true
+  - name: ログベースのメトリクスを取得する
+    parent: ログメトリクス
+    url: '#get-a-log-based-metric'
+    generated: true
+  - name: ログベースのメトリクスを更新する
+    parent: ログメトリクス
+    url: '#update-a-log-based-metric'
     generated: true
   - name: ログパイプライン
     url: /api/v2/logs-pipelines/
@@ -3481,7 +3718,7 @@ api_v2:
     url: /api/v2/processes/
     identifier: プロセス
     generated: true
-  - name: 処理すべてを取得
+  - name: すべてのプロセスを取得
     parent: プロセス
     url: '#get-all-processes'
     generated: true
@@ -3541,36 +3778,36 @@ api_v2:
     url: /api/v2/screenboards/
     identifier: スクリーンボード
     generated: true
-  - name: セキュリティモニタリング
+  - name: セキュリティ監視
     url: /api/v2/security-monitoring/
-    identifier: セキュリティモニタリング
+    identifier: セキュリティ監視
     generated: true
   - name: 規則のリスト
-    parent: セキュリティモニタリング
+    parent: セキュリティ監視
     url: '#list-rules'
     generated: true
   - name: 検出ルールを作成する
-    parent: セキュリティモニタリング
+    parent: セキュリティ監視
     url: '#create-a-detection-rule'
     generated: true
   - name: 既存の規則を削除します
-    parent: セキュリティモニタリング
+    parent: セキュリティ監視
     url: '#delete-an-existing-rule'
     generated: true
   - name: 規則の詳細を取得する
-    parent: セキュリティモニタリング
+    parent: セキュリティ監視
     url: '#get-a-rules-details'
     generated: true
   - name: 既存の規則を更新します
-    parent: セキュリティモニタリング
+    parent: セキュリティ監視
     url: '#update-an-existing-rule'
     generated: true
   - name: セキュリティシグナルの簡易リストの取得
-    parent: セキュリティモニタリング
+    parent: セキュリティ監視
     url: '#get-a-quick-list-of-security-signals'
     generated: true
   - name: セキュリティシグナルのリストの取得
-    parent: セキュリティモニタリング
+    parent: セキュリティ監視
     url: '#get-a-list-of-security-signals'
     generated: true
   - name: サービスのチェック
@@ -3685,7 +3922,7 @@ footer_product:
   - name: Synthetic の監視
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 130
-  - name: Real User Monitoring
+  - name: リアルユーザーモニタリング
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
   - name: インシデント管理
@@ -3730,7 +3967,7 @@ footer_product_three:
     url: 'https://www.datadoghq.com/ja/security/'
     weight: 180
 footer_about:
-  - name: COVID-19 Update
+  - name: COVID-19（新型コロナウイルス感染症）への対応
     url: 'https://www.datadoghq.com/coronavirus/'
     weight: 90
   - name: お問い合わせ

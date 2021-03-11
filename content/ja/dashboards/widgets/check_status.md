@@ -52,37 +52,15 @@ further_reading:
 
 ## API
 
-チェックステータスウィジェット専用の[ウィジェット JSON スキーマ定義][1]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][1] ドキュメントをご参照ください。
 
-```text
-CHECK_STATUS_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["check_status"]},
-        "check": {"type": "string"},
-        "grouping": {"enum": ["check", "cluster"]},
-        "group": {"type": "string"},
-        "tags":  {"type": "array", "items": {"type": "string"}},
-        "group_by":  {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "check", "grouping"],
-    "additionalProperties": false
-}
-```
+チェックステータスウィジェット専用の[ウィジェット JSON スキーマ定義][2]は次のとおりです。
 
-| パラメーター  | 種類             | 必須 | 説明                                                                                                  |
-|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------|
-| `type`     | string           | はい      | ウィジェットのタイプ。チェックステータスウィジェットには `check_status` を使用します。                                           |
-| `check`    | string           | はい      | ウィジェットで使用するチェックの名前                                                                       |
-| `grouping` | string           | はい      | 使用するグループ化の種類 (単一チェックまたはチェッククラスター)。有効な値は `check` または `cluster` です。 |
-| `group`    | string           | いいえ       | 単一チェックを報告するグループ                                                                               |
-| `tags`     | 文字列の配列 | いいえ       | クラスターチェックを報告するグループのフィルター処理に使用されるタグのリスト                                             |
-| `group_by` | 文字列の配列 | いいえ       | クラスターチェックの場合に、グループ化の基準にするタグプレフィックスのリスト                                              |
-| `title`    | string           | いいえ       | ウィジェットのタイトル                                                                                          |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/graphing_json/widget_json/
+[1]: /ja/api/v1/dashboards/
+[2]: /ja/dashboards/graphing_json/widget_json/

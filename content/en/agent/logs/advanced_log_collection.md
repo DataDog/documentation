@@ -36,7 +36,7 @@ To apply a processing rule to all logs collected by a Datadog Agent, see the [Gl
 
 To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
 
-### exclude_at_match
+### Exclude at match
 
 | Parameter          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
@@ -122,7 +122,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### include_at_match
+### Include at match
 
 | Parameter          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
@@ -410,7 +410,7 @@ More examples:
 
 **Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
 
-## Commonly Used Log Processing Rules
+## Commonly used log processing rules
 
 See the dedicated [Commonly Used Log Processing Rules FAQ][1] to see a list of examples.
 

@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
-    text: Présentation de la surveillance Datadog Synthetic
+    text: Présentation de la surveillance Synthetic Datadog
   - link: /synthetics/api_tests/
     tag: Documentation
     text: Configurer un test API
@@ -71,7 +71,7 @@ Remarque : les valeurs de variables sont mises à jour lors de chaque exécutio
 
 ### Localisations par défaut
 
-Sélectionnez les localisations par défaut des informations de tests API et Browser. Les options comprennent toutes les localisations gérées disponibles proposées par Datadog et les localisations privées que vous avez configurées pour votre compte.
+Sélectionnez les emplacements par défaut des informations de tests API et Browser. Les options comprennent tous les emplacements gérés disponibles proposés par Datadog, ainsi que les emplacements privés que vous avez configurés pour votre compte.
 
 ### Intégration APM pour les tests Browser
 

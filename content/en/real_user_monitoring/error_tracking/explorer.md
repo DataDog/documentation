@@ -55,5 +55,6 @@ Each event generated is tagged with the version, the service, and the environmen
 
 {{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.gif" alt="Export to monitor in Error Tracking"  >}}
 
+
 [1]: /events
 [2]: /monitors/monitor_types/event/

@@ -18,11 +18,11 @@ The user `ddagentuser` is created at install time for the Datadog Windows Agent.
 
 ## Installation
 
-### Installation with Group Policy
+### Installation with group policy
 
 The installer changes the local group policy to allow the newly created user account, `ddagentuser`, to **run as a service**.  If the domain group policy disallows that, then the installation setting is overridden, and the domain group policy has to be updated to allow the user to run as a service.
 
-### Installation in a Domain environment
+### Installation in a domain environment
 
 The Agent installer creates the `ddagentuser` at install time, and then registers the service (with the randomly generated password). The user is created as a local user, even in a domain environment, so that every machine on which the Agent is installed has a unique user and password.
 
@@ -34,7 +34,7 @@ To support this environment, the Agent installer requires that the administrator
 Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
-For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied should **never** be an existing "real" (human) user. The installation process changes the rights of the user and they are denied login access.
+For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied should **never** be an existing "real" (human) user. The installation process changes the rights of the user and they are denied login access. The installer currently does not support passwords containing `;`.
 
 Additionally, the installer adds the user to the following groups:
 
@@ -57,13 +57,15 @@ Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME>
 
 If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent’s configuration files have the correct permissions
 
-## Agent Integrations
+## Agent integrations
 
-### General Permissions
+### General permissions
 
 Every effort has been made to ensure that the transition from `LOCAL_SYSTEM` to `ddagentuser` is seamless. However, there is a class of problems that requires specific, configuration-specific modification upon installation of the Agent. These problems arise where the Windows Agent previously relied on administrator rights that the new Agent lacks by default.
 
 For example, if the directory check is monitoring a directory that has specific access rights, e.g. allowing only members of the Administrators group read access, then the existing Agent currently can monitor that directory successfully since `LOCAL_SYSTEM` has administrator rights. Upon upgrading, the administrator must add `ddagentuser` to the access control list for that directory in order for the directory check to function.
+
+**Note**: For Windows Server OS, the Windows Service integration cannot check against the DHCP Server service due to the special ACL for the `DHCPServer` service. The check returns `UNKNOWN` in such case.
 
 **Note**: The same considerations apply to the log files that may be monitored by the Logs Collection features of the Agent.
 
@@ -101,7 +103,7 @@ For the Cassandra Nodetool integration to continue working, apply the following 
 * Grant access to the Nodetool installation directory to the `ddagentuser`.
 * Set the environment variables of the Nodetool installation directory (e.g. `CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables instead of variables only for the user doing the Nodetool installation.
 
-## Security Logs channel
+## Security logs channel
 
 If you are using the [Datadog- Win 32 event log Integration][10], the Datadog user `ddagentuser` must be added to the Event Log Reader Group to collect logs from the Security logs channel:
 

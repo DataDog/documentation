@@ -1,0 +1,111 @@
+extends: capitalization
+message: "'%s' should use sentence-style capitalization."
+link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#headers"
+level: warning
+scope: heading
+match: $sentence
+exceptions:
+  - Agent
+  - Agents
+  - Amazon
+  - APIs
+  - APM & Distributed Tracing
+  - AuthN
+  - Autodiscovery
+  - Azure
+  - Azure App Service Plan
+  - Cassandra Nodetool
+  - CentOS
+  - Chef
+  - Clipboard
+  - CloudSQL
+  - Cluster Agent
+  - Continuous Profiler
+  - DaemonSet
+  - Data Collected
+  - Datadog
+  - Datadog Agent Manager
+  - Datadog Operator
+  - Debian
+  - Detection Rules
+  - Docker
+  - Docker Swarm
+  - Dockerfile
+  - DogStatsD
+  - Fargate
+  - FreeBSD
+  - FreeSwitch
+  - Further Reading
+  - GitHub
+  - Google
+  - Google Analytics
+  - Google Cloud
+  - Google Cloud Functions
+  - GraphQL
+  - HAProxy
+  - HostPort
+  - I
+  - IdP
+  - Incident Management
+  - IPs
+  - Java
+  - JMXFetch
+  - Kubernetes
+  - Kubernetes Pod
+  - Lambda
+  - LaunchDarkly
+  - Linux
+  - Log Management
+  - Log Rehydration
+  - macOS
+  - MongoDB
+  - MySQL
+  - Network Device Monitoring
+  - Network Performance Monitoring
+  - NixOS
+  - Notebook
+  - Notebook List
+  - npm
+  - OkHttp
+  - OpenMetrics
+  - openSUSE
+  - OpenTelemetry
+  - OpenTracing
+  - OpenVPN
+  - Phusion Passenger
+  - pre-NAT
+  - Prometheus
+  - Python
+  - Python
+  - Rails
+  - Real User Monitoring
+  - Red Hat
+  - Redis
+  - RumMonitor
+  - SafeNet
+  - Security Monitoring
+  - Security Signal
+  - Security Signals
+  - SELinux
+  - Siri
+  - Slack
+  - SLIs
+  - SLOs
+  - socat
+  - Social Security
+  - SQLDelight
+  - SQLite
+  - StackStorm
+  - StatsD
+  - sysOID
+  - Terraform
+  - Trello
+  - TypeScript
+  - Ubuntu
+  - Unix
+  - Unix Domain Socket
+  - URLs
+  - User Datagram Protocol
+  - vSphere
+  - Webhook
+  - Windows

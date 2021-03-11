@@ -14,6 +14,10 @@ further_reading:
 Datadog exposes AWS PrivateLink endpoints in <b>us-east-1</b>.
 </div>
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog PrivateLink does not support the Datadog for Government site.</div>
+{{< /site-region >}}
+
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.
 
 ## Overview
@@ -194,7 +198,7 @@ To forward your trace metrics to Datadog using this new VPC endpoint, configure 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Advanced Usage
+## Advanced usage
 
 ### Inter-region peering
 

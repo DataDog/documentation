@@ -4,7 +4,7 @@ kind: faq
 private: true
 ---
 
-## Standard Agent Configuration
+## Standard Agent configuration
 
 **Live Processes is available in Datadog Agent version 5.16.0.**
 Refer to the instructions for standard [Agent installation][1] for platform-specific details.

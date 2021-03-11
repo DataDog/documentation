@@ -1,5 +1,5 @@
 ---
-title: Commonly Used Log Processing Rules
+title: Commonly Used Log Scrubbing Rules
 kind: faq
 further_reading:
 - link: "logs/processing"
@@ -21,7 +21,7 @@ further_reading:
 
 Find on this page examples of commonly used log processing rules.
 
-## Generic String: "sensitive-info"
+## Generic string: "sensitive-info"
 
 Lines containing the string `sensitive-info` are not sent to Datadog.
 
@@ -31,7 +31,7 @@ Lines containing the string `sensitive-info` are not sent to Datadog.
     pattern: (?:sensitive\-info)
 ```
 
-## my_key=value
+## My key
 
 When the string "my_key=" is found, letters, numbers, spaces, and underscores following the string are redacted with `my_key=[VALUE REDACTED]`.
 
@@ -51,9 +51,9 @@ When the string "my_key=" is found, all characters following the string until th
   pattern: (?:my_key=[^.])
 ```
 
-## Social Security Numbers
+## Social Security numbers
 
-Redact Social Security Numbers.
+Redact Social Security numbers.
 
 ```yaml
   - type: mask_sequences
@@ -62,7 +62,7 @@ Redact Social Security Numbers.
     replace_placeholder: "[SSN REDACTED]"
 ```
 
-## Email Address
+## Email address
 
 Redact email addresses using the RFC 5322 regex specification.
 
@@ -73,7 +73,7 @@ Redact email addresses using the RFC 5322 regex specification.
     replace_placeholder: "[EMAIL REDACTED]"
 ```
 
-## Credit Card (Visa, MC, AMEX, DINERS, DISCOVER, JCB)
+## Credit card numbers
 
 Redact credit card numbers for Visa, Mastercard, American Express, Diner's Club, Discover Card, and JCB.
 
@@ -84,7 +84,7 @@ Redact credit card numbers for Visa, Mastercard, American Express, Diner's Club,
   pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
-## Postal Codes
+## Postal codes
 
 Redact postal codes (US).
 
@@ -95,7 +95,7 @@ Redact postal codes (US).
   pattern: (?:\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z] \d[A-Z]\d)
 ```
 
-## Between Parentheses
+## Between parentheses
 
 Redact characters after string `ExampleConfig(` until the closing paranthesis.
 
@@ -106,7 +106,7 @@ Redact characters after string `ExampleConfig(` until the closing paranthesis.
   pattern: (?:ExampleConfig\([^\)]+)
 ```
 
-## Between Brackets
+## Between brackets
 
 Redact characters after string `on Example [` until the closing bracket.
 
@@ -117,9 +117,9 @@ Redact characters after string `on Example [` until the closing bracket.
   pattern: (?:on Example\s?[^\s]+)
 ```
 
-## Class A IP Address
+## Class A IP addresses
 
-Redact Class A IP Addresses, range 1.0.0.1 to 126.255.255.254.
+Redact Class A IP addresses, range 1.0.0.1 to 126.255.255.254.
 
 ```yaml
 - type: mask_sequences

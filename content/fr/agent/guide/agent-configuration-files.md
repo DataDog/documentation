@@ -23,7 +23,7 @@ Le fichier de configuration de l'Agent v6 utilise le format **YAML** pour mieux
 | Source                               | `/etc/datadog-agent/datadog.yaml`    |
 | Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
 | Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
-| Windows Server 2008, Vista et versions ultérieures | `\\ProgramData\Datadog\datadog.yaml` |
+| Windows Server 2008, Vista et versions ultérieures | `%ProgramData%\Datadog\datadog.yaml` |
 | Windows Server 2003, XP ou versions antérieures     | *Plateforme non prise en charge*               |
 
 {{% /tab %}}
@@ -40,7 +40,7 @@ Le fichier de configuration de l'Agent v6 utilise le format **YAML** pour mieux
 | Source                               | `/etc/dd-agent/datadog.conf`                                               |
 | Suse                                 | `/etc/dd-agent/datadog.conf`                                               |
 | Ubuntu                               | `/etc/dd-agent/datadog.conf`                                               |
-| Windows Server 2008, Vista et versions ultérieures | `\\ProgramData\Datadog\datadog.conf`                                       |
+| Windows Server 2008, Vista et versions ultérieures | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003, XP ou versions antérieures     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 
 {{% /tab %}}
@@ -67,18 +67,20 @@ Les anciennes versions de l'Agent Datadog stockaient les fichiers de configurati
 | Source                               | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
-| Windows Server 2008, Vista et versions ultérieures | `\\ProgramData\Datadog\conf.d` |
+| Windows Server 2008, Vista et versions ultérieures | `%ProgramData%\Datadog\conf.d` |
 | Windows Server 2003, XP ou versions antérieures     | *Plateforme non prise en charge*         |
 
 ### Fichiers de configuration des checks pour l'Agent 6
 
-Pour chaque check de l'Agent, un exemple de configuration se trouve dans le fichier `conf.yaml.example` du répertoire `<NOM_CHECK>.d/` correspondant. Renommez ce fichier `conf.yaml` pour activer le check associé. Notez que l'Agent charge tous les fichiers YAML valides qui se trouvent dans le répertoire `/etc/datadog-agent/conf.d/<NOM_CHECK>.d/`. De cette manière, les configurations complexes peuvent être décomposées en plusieurs fichiers. Par exemple, la configuration de `http_check` peut ressembler à ceci :
+Pour chaque check de l'Agent, un exemple de configuration se trouve dans le fichier `conf.yaml.example` du dossier `<NOM_CHECK>.d/` correspondant. Renommez ce fichier `conf.yaml` pour activer le check associé. Notez que l'Agent charge tous les fichiers YAML valides qui se trouvent dans le répertoire `/etc/datadog-agent/conf.d/<NOM_CHECK>.d/`. Cela permet de décomposer les configurations complexes en plusieurs fichiers. Voici un exemple de configuration de `http_check` :
 
 ```text
 /etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
 └── frontend.yaml
 ```
+
+Les fichiers YAML avec le suffixe `.default` fonctionnent différemment. Ils sont chargés par défaut par l'Agent et aident à définir l'ensemble des checks de base qui sont toujours activés (processeur, mémoire, disponibilité, etc.). Lorsqu'un check comporte une autre configuration, ces fichiers YAML sont ignorés. Vous n'avez donc pas à vous en soucier. Si vous souhaitez désactiver l'un des checks par défaut, il vous suffit de supprimer ce fichier YAML. Pour configurer ces checks, les fichiers `conf.yaml.example` doivent être utilisés comme point de départ.
 
 Les fichiers de modèle Autodiscovery sont stockés dans le répertoire de configuration avec le fichier `auto_conf.yaml`. Par exemple, pour le check Redis, la configuration dans `redisdb.d/` est la suivante :
 
@@ -106,7 +108,7 @@ Pour préserver la compatibilité avec les versions précédentes, l'Agent récu
 | Source                               | `/etc/dd-agent/conf.d/`                                              |
 | Suse                                 | `/etc/dd-agent/conf.d/`                                              |
 | Ubuntu                               | `/etc/dd-agent/conf.d/`                                              |
-| Windows Server 2008, Vista et versions ultérieures | `\\ProgramData\Datadog\conf.d`                                       |
+| Windows Server 2008, Vista et versions ultérieures | `%ProgramData%\Datadog\conf.d`                                       |
 | Windows Server 2003, XP ou versions antérieures     | `\\Documents and Settings\All Users\Application Data\Datadog\conf.d` |
 
 {{% /tab %}}

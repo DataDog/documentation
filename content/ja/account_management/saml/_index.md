@@ -46,9 +46,9 @@ Datadog で SAML を構成し、Datadog からのリクエストを受け付け�
 
 ## SAML 属性の Datadog ロールへのマッピング
 
-ユーザーの SAML 属性に基づき、Datadog のロールを割り当てまたは削除することができます。
+Access Management アクセス許可を持つユーザーは、ユーザーの SAML 属性に基づき、Datadog のロールを割り当てまたは削除することができます。
 
-1. Account Management で Mappings タブをクリックします。
+1. Teams で Mappings タブをクリックします。
 
 2. **New Mapping** ボタンをクリックします。
 
@@ -121,7 +121,7 @@ IdP が基本 NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic` を
 
 ### ジャストインタイム (JIT) プロビジョニング
 
-JIT プロビジョニングを使用すると、初めてログインしようとしたときに Datadog 内にユーザーアカウントが作成されます。したがって、管理者がユーザーアカウントを 1 つずつ手動で作成する必要がなくなります。
+JIT プロビジョニングを使用すると、初めてログインしようとしたときに Datadog 内にユーザーアカウントが作成されます。したがって、管理者がユーザーアカウントを 1 つずつ手動で作成する必要がなくなります。この場合、招待メールは送信されません。
 
 <mrk mid="82" mtype="seg">オーガニゼーションによっては、一部のユーザーを Datadog に招待したくない場合があります。</mrk><mrk mid="83" mtype="seg">アカウントに対する SAML の動作を変更したい場合は、[Datadog のサポートチーム][2]にお問い合わせください。</mrk><mrk mid="84" mtype="seg">特定のユーザーが Datadog にアクセスできないようにする場合は、オーガニゼーション側で、Datadog にアサーションを送信しないように IdP を構成する必要があります。</mrk>
 

@@ -69,17 +69,7 @@ components:
       name: sort
       required: false
       schema:
-        default: name
-        enum:
-        - created_at
-        - -created_at
-        - last4
-        - -last4
-        - modified_at
-        - -modified_at
-        - name
-        - -name
-        type: string
+        $ref: '#/components/schemas/APIKeysSort'
     ApplicationKeyFilterCreatedAtEndParameter:
       description: Only include application keys created on or before the specified
         date.
@@ -112,6 +102,18 @@ components:
       required: true
       schema:
         type: string
+    ApplicationKeysSortParameter:
+      description: 'Application key attribute used to sort results. Sort order is
+        ascending
+
+        by default. In order to specify a descending sort, prefix the
+
+        attribute with a minus sign.'
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/ApplicationKeysSort'
     ArchiveID:
       description: The ID of the archive.
       in: path
@@ -135,9 +137,7 @@ components:
       required: false
       schema:
         items:
-          enum:
-          - users
-          type: string
+          $ref: '#/components/schemas/IncidentRelatedObject'
         type: array
     IncidentServiceIDPathParameter:
       description: The ID of the incident service.
@@ -153,9 +153,7 @@ components:
       name: include
       required: false
       schema:
-        enum:
-        - users
-        type: string
+        $ref: '#/components/schemas/IncidentRelatedObject'
     IncidentServiceSearchQueryParameter:
       description: A search query that filters services by name.
       in: query
@@ -178,9 +176,7 @@ components:
       name: include
       required: false
       schema:
-        enum:
-        - users
-        type: string
+        $ref: '#/components/schemas/IncidentRelatedObject'
     IncidentTeamSearchQueryParameter:
       description: A search query that filters teams by name.
       in: query
@@ -188,26 +184,6 @@ components:
       required: false
       schema:
         example: ExampleTeamName
-        type: string
-    ListApplicationKeysSortParameter:
-      description: 'Application key attribute used to sort results. Sort order is
-        ascending
-
-        by default. In order to specify a descending sort, prefix the
-
-        attribute with a minus sign.'
-      in: query
-      name: sort
-      required: false
-      schema:
-        default: name
-        enum:
-        - created_at
-        - -created_at
-        - last4
-        - -last4
-        - name
-        - -name
         type: string
     MetricID:
       description: The name of the log-based metric.
@@ -450,6 +426,28 @@ components:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
       type: object
+    APIKeysSort:
+      default: name
+      description: Sorting options
+      enum:
+      - created_at
+      - -created_at
+      - last4
+      - -last4
+      - modified_at
+      - -modified_at
+      - name
+      - -name
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - LAST4_ASCENDING
+      - LAST4_DESCENDING
+      - MODIFIED_AT_ASCENDING
+      - MODIFIED_AT_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
     APIKeysType:
       default: api_keys
       description: API Keys resource type.
@@ -509,6 +507,7 @@ components:
       description: An object related to an application key.
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Role'
       type: object
     ApplicationKeyUpdateAttributes:
       description: Attributes used to update an application Key.
@@ -544,6 +543,24 @@ components:
       required:
       - data
       type: object
+    ApplicationKeysSort:
+      default: name
+      description: Sorting options
+      enum:
+      - created_at
+      - -created_at
+      - last4
+      - -last4
+      - name
+      - -name
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - LAST4_ASCENDING
+      - LAST4_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
     ApplicationKeysType:
       default: application_keys
       description: Application Keys resource type.
@@ -961,6 +978,13 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_POSTMORTEMS
+    IncidentRelatedObject:
+      description: Object related to an incident.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
     IncidentResponse:
       description: Response with an incident.
       properties:
@@ -1216,7 +1240,7 @@ components:
       type: object
     IncidentServiceType:
       default: services
-      description: Incident Service resource type.
+      description: Incident service resource type.
       enum:
       - services
       example: services
@@ -1914,10 +1938,10 @@ components:
           type: array
         options:
           $ref: '#/components/schemas/LogsQueryOptions'
-        paging:
+        page:
           description: Paging settings
           properties:
-            after:
+            cursor:
               description: The returned paging point to use to get the next results
               example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
               type: string
@@ -2418,6 +2442,7 @@ components:
         limit:
           default: 10
           description: The maximum buckets to return for this group by
+          format: int64
           type: integer
         missing:
           $ref: '#/components/schemas/LogsGroupByMissing'
@@ -2526,6 +2551,7 @@ components:
       enum:
       - count
       - distribution
+      example: distribution
       type: string
       x-enum-varnames:
       - COUNT
@@ -2624,6 +2650,7 @@ components:
         path:
           description: The path to the value the log-based metric will aggregate on
             (only used if the aggregation type is a "distribution").
+          example: '@duration'
           type: string
       type: object
     LogsMetricResponseComputeAggregationType:
@@ -2631,6 +2658,7 @@ components:
       enum:
       - count
       - distribution
+      example: distribution
       type: string
       x-enum-varnames:
       - COUNT
@@ -2651,6 +2679,7 @@ components:
       properties:
         query:
           description: The search query - following the log search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
           type: string
       type: object
     LogsMetricResponseGroupBy:
@@ -2659,10 +2688,12 @@ components:
         path:
           description: The path to the value the log-based metric will be aggregated
             over.
+          example: '@http.status_code'
           type: string
         tag_name:
           description: Eventual name of the tag that gets created. By default, the
             path attribute is used as the tag name.
+          example: status_code
           type: string
       type: object
     LogsMetricType:
@@ -2754,6 +2785,7 @@ components:
       properties:
         timeOffset:
           description: The time offset (in seconds) to apply to the query.
+          format: int64
           type: integer
         timezone:
           default: UTC
@@ -2768,6 +2800,7 @@ components:
         elapsed:
           description: The time elapsed in milliseconds
           example: 132
+          format: int64
           type: integer
         page:
           description: Paging attributes.
@@ -4293,7 +4326,7 @@ components:
       properties:
         email:
           description: The email of the user.
-          example: joe.doe@example.com
+          example: jane.doe@example.com
           type: string
         name:
           description: The name of the user.
@@ -4719,7 +4752,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
-      - $ref: '#/components/parameters/ListApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeysSortParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
@@ -4829,7 +4862,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
-      - $ref: '#/components/parameters/ListApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeysSortParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
@@ -4900,7 +4933,7 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
-              \ unique }}\n    },\n    \"type\": \"application_keys\"\n  }\n}"
+              \ unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "application_key" in the system
       x-undo:
         operationId: DeleteCurrentUserApplicationKey
@@ -6289,10 +6322,7 @@ paths:
         [Results are paginated][1].
 
 
-        Both this endpoint and the POST endpoint can be used interchangeably when
-        listing
-
-        logs.
+        Use this endpoint to see your latest logs.
 
 
         **If you are considering archiving logs for your organization,
@@ -6374,7 +6404,7 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
-      summary: Get a quick list of logs
+      summary: Get a list of logs
       tags:
       - Logs
       x-undo:
@@ -6389,9 +6419,7 @@ paths:
         [Results are paginated][1].
 
 
-        Both this endpoint and the GET endpoint can be used interchangeably when listing
-
-        logs.
+        Use this endpoint to build complex logs filtering and search.
 
 
         **If you are considering archiving logs for your organization,
@@ -6422,7 +6450,7 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
-      summary: Get a list of logs
+      summary: Search logs
       tags:
       - Logs
       x-codegen-request-body-name: body
@@ -7977,6 +8005,7 @@ servers:
       enum:
       - datadoghq.com
       - datadoghq.eu
+      - ddog-gov.com
     subdomain:
       default: api
       description: The subdomain where the API is deployed.
@@ -7989,45 +8018,12 @@ servers:
       default: https
       description: The protocol for accessing the API.
 tags:
-- description: '[See API version 1](/api/v1/aws-integration/).'
-  name: AWS Integration
-- description: '[See API version 1](/api/v1/aws-logs-integration/).'
-  name: AWS Logs Integration
-- description: "All requests to Datadog\u2019s API must be authenticated.\nRequests\
-    \ that write data require reporting access and require an `API key`.\nRequests\
-    \ that read data require full access and also require an `application key`.\n\n\
-    **Note:** All Datadog API clients are configured by default to consume Datadog\
-    \ US site APIs.\nIf you are on the Datadog EU site, set the environment variable\
-    \ `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly\
-    \ when creating your client.\n\n[Manage your account\u2019s API and application\
-    \ keys](https://app.datadoghq.com/account/settings#api).\n\n## Validate API key\n\
-    \n[See API version 1](/api/v1/authentication/#validate-api-key)."
-  name: Authentication
-- description: '[See API version 1](/api/v1/azure-integration/).'
-  name: Azure Integration
-- description: 'Interact with your dashboard lists through the API to make it easier
-    to
+- description: 'Interact with your dashboard lists through the API to
 
     organize, find, and share all of your dashboards with your team and
 
-    organization. Note that you can add API v1 Dashboards to Dashboard Lists
-
-    that you create with API v2.'
+    organization.'
   name: Dashboard Lists
-- description: '[See API version 1](/api/v1/dashboards/).'
-  name: Dashboards
-- description: '[See API version 1](/api/v1/downtimes/).'
-  name: Downtimes
-- description: '[See API version 1](/api/v1/embeddable-graphs/).'
-  name: Embeddable Graphs
-- description: '[See API version 1](/api/v1/events/).'
-  name: Events
-- description: '[See API version 1](/api/v1/gcp-integration/).'
-  name: GCP Integration
-- description: '[See API version 1](/api/v1/hosts/).'
-  name: Hosts
-- description: '[See API version 1](/api/v1/ip-ranges/).'
-  name: IP Ranges
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
   name: Incident Services
@@ -8036,8 +8032,6 @@ tags:
   name: Incident Teams
 - description: Manage incident response.
   name: Incidents
-- description: '[See API version 1](/api/v1/key-management/).'
-  name: Key Management
 - description: 'Manage your Datadog API and application keys. You need an API key
     and
 
@@ -8050,10 +8044,42 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
-- description: 'Search your logs in the Datadog platform over HTTP.
+- description: 'Search your logs and send them to your Datadog platform over HTTP.
+    Limits per HTTP request are:
 
 
-    [See API version 1](/api/v1/logs/) for sending logs.'
+    - Maximum content size per payload (uncompressed): 5MB
+
+    - Maximum size for a single log: 1MB
+
+    - Maximum array size if sending multiple logs in an array: 1000 entries
+
+
+    Any log exceeding 1MB is accepted and truncated by Datadog:
+
+    - For a single log request, the API truncates the log at 1MB and returns a 2xx.
+
+    - For a multi-logs request, the API processes all logs, truncates only logs larger
+    than 1MB, and returns a 2xx.
+
+
+    Datadog recommends sending your logs compressed.
+
+    Add the `Content-Encoding: gzip` header to the request when sending compressed
+    logs.
+
+
+    The status codes answered by the HTTP API are:
+
+    - 200: OK
+
+    - 400: Bad request (likely an issue in the payload formatting)
+
+    - 403: Permission issue (likely using an invalid API Key)
+
+    - 413: Payload too large (batch is above 5MB uncompressed)
+
+    - 5xx: Internal error, request should be retried after some time'
   name: Logs
 - description: 'Archives forward all the logs ingested to a cloud storage system.
 
@@ -8065,16 +8091,12 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
-- description: '[See API version 1](/api/v1/logs-indexes/).'
-  name: Logs Indexes
 - description: Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
     for your organization.
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/logs_to_metrics/
   name: Logs Metrics
-- description: '[See API version 1](/api/v1/logs-pipelines/).'
-  name: Logs Pipelines
 - description: "**Note: This endpoint is in public beta. If you have any feedback,\
     \ contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read\
     \ access on log data at all, you must grant the `logs_read_data` permission.\n\
@@ -8096,14 +8118,6 @@ tags:
     \ are scoped to different team values.\n\nYou need an API and application key\
     \ with Admin rights to interact with this endpoint."
   name: Logs Restriction Queries
-- description: '[See API version 1](/api/v1/metrics/).'
-  name: Metrics
-- description: '[See API version 1](/api/v1/monitors/).'
-  name: Monitors
-- description: '[See API version 1](/api/v1/organizations/).'
-  name: Organizations
-- description: '[See API version 1](/api/v1/pagerduty-integration/).'
-  name: PagerDuty Integration
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
 - description: 'The Roles API is used to create and manage Datadog roles, what
@@ -8121,36 +8135,12 @@ tags:
 
     [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
   name: Roles
-- description: '[See API version 1](/api/v1/screenboards/).'
-  name: Screenboards
 - description: 'Detection rules for generating signals and listing of generated
 
     signals.'
   name: Security Monitoring
-- description: '[See API version 1](/api/v1/service-checks/).'
-  name: Service Checks
-- description: '[See API version 1](/api/v1/service-dependencies/).'
-  name: Service Dependencies
-- description: '[See API version 1](/api/v1/service-level-objectives/).'
-  name: Service Level Objectives
-- description: '[See API version 1](/api/v1/slack-integration/).'
-  name: Slack Integration
-- description: '[See API version 1](/api/v1/snapshots/).'
-  name: Snapshots
-- description: '[See API version 1](/api/v1/synthetics/).'
-  name: Synthetics
-- description: '[See API version 1](/api/v1/tags/).'
-  name: Tags
-- description: '[See API version 1](/api/v1/timeboards/).'
-  name: Timeboards
-- description: '[See API version 1](/api/v1/tracing/).'
-  name: Tracing
-- description: '[See API version 1](/api/v1/usage-metering/).'
-  name: Usage Metering
 - description: Create, edit, and disable users.
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users
   name: Users
-- description: '[See API version 1](/api/v1/webhooks-integration/).'
-  name: Webhooks Integration
 x-group-parameters: true

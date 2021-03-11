@@ -44,9 +44,7 @@ If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can
     "elasticloadbalancing:DescribeLoadBalancers",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "lambda:List*",
-    "lambda:AddPermission",
     "lambda:GetPolicy",
-    "lambda:RemovePermission",
     "redshift:DescribeClusters",
     "redshift:DescribeLoggingStatus",
     "s3:GetBucketLogging",
@@ -66,9 +64,7 @@ If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
     | `lambda:List*`                                              | List all Lambda functions. |
-    | `lambda:AddPermission`                                      | Add permission allowing a particular S3 bucket to trigger a Lambda function. |
     | `lambda:GetPolicy`                                          | Gets the Lambda policy when triggers are to be removed.                      |
-    | `lambda:RemovePermission`                                   | Remove permissions from a Lambda policy.                                     |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
     | `s3:GetBucketLogging`                                       | Get the name of the S3 bucket containing S3 access logs.                     |
@@ -160,10 +156,10 @@ If you are collecting logs from an S3 bucket, configure the trigger to the [Data
 1. Once the Lambda function is installed, manually add a trigger on the S3 bucket that contains your logs in the AWS console:
   {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" popup="true"style="width:80%;">}}
 
-1. Select the bucket and then follow the AWS instructions:
+2. Select the bucket and then follow the AWS instructions:
   {{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" popup="true" style="width:80%;">}}
 
-1. Set the correct event type on S3 buckets:
+3. Set the correct event type on S3 buckets:
   {{< img src="logs/aws/object_created.png" alt="Object Created" popup="true" style="width:80%;">}}
 
 Once done, go into your [Datadog Log section][1] to start exploring your logs!

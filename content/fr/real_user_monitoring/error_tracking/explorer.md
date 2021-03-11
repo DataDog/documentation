@@ -54,5 +54,6 @@ Chaque événement généré reçoit automatiquement les tags de version, de ser
 
 {{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.gif" alt="Exporter vers un monitor depuis le suivi des erreurs"  >}}
 
+
 [1]: /fr/events
 [2]: /fr/monitors/monitor_types/event/

@@ -119,9 +119,8 @@ further_reading:
 ログは、タグを生成する[ホスト][2]と[インテグレーション][3]からタグを引き継ぎます。これらも、ファセットとして検索で使用できます。
 
 * `test` は文字列「test」を検索します。
-* `("env:prod" OR test)` は、タグ `#env:prod` またはタグ `#test` を含むすべてのログに一致します。
-* `(service:srvA OR service:srvB)` または `(service:(srvA OR srvB))` は、タグ `#service:srvA` または `#service:srvB` を含むすべてのログに一致します。
-* `("env:prod" AND -"version:beta")` は、`#env:prod` を含み、`#version:beta` は含まないすべてのログに一致します。
+* `env:(prod OR test)` は、タグ `env:prod` またはタグ `env:test` を含むすべてのログに一致します。
+* `(env:prod AND -version:beta)` は、タグ `env:prod` を含み、タグ `version:beta` は含まないすべてのログに一致します。
 
 タグが[タグのベストプラクティス][4]に従わず、`key:value` 構文も使用していない場合は、次の検索クエリを使用します。
 

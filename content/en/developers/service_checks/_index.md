@@ -33,7 +33,7 @@ Service checks can be visualized and used in 3 Datadog sections:
 - [Screenboards][2]
 - [Custom check Monitor][3]
 
-### Check Summary
+### Check summary
 
 Click on the _Monitors_ tab, and then on _Check Summary_ to see the [Check Summary][1] page.
 

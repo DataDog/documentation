@@ -41,7 +41,7 @@ RUM collects context information by default. You can add any additional context 
 
 Build up a context to explore your RUM events in your RUM Explorer page first by selecting the proper [time range](#time-range), and then by using the [search bar][1] to filter your RUM events and analytics.
 
-### Time Range
+### Time range
 
 The time range appears directly under the search bar as a timeline. This feature allows you to display RUM events in the explorer stream or analytics within a given time period.
 
@@ -52,7 +52,7 @@ Quickly change the time range by selecting a preset range from the dropdown (or 
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
 
-## Setup - Facets & Measures
+## Setup facets and measures
 
 After being collected, your RUM events attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][3].
 

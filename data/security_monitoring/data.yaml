@@ -64,3 +64,19 @@ image_map:
     image: twistlock_sm
     link: twistlock
     append: false
+  - source:
+      - microsoft-365
+    image: microsoft_365
+    append: false
+  - source:
+      - azure-active-directory
+    image: azure_active_directory
+    append: false
+  - source:
+      - microsoft-teams
+    image: microsoft_teams
+    append: false
+  - source:
+      - exchange-server
+    image: exchange_server
+    append: false

@@ -22,7 +22,7 @@ The Service Map decomposes your application into all its component [services][1]
 
 ## Setup
 
-The Service Map visualizes data collected by Datadog APM. Setup is not required to view [services][1].
+The Service Map visualizes data collected by Datadog APM and RUM. Setup is not required to view [services][1].
 
 ## Ways to use it
 

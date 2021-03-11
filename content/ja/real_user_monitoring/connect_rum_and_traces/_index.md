@@ -16,10 +16,6 @@ APM と Real User Monitoring のインテグレーションにより、Web お�
 
 RUM のフロントエンドデータ、トレース ID 挿入のバックエンド、インフラストラクチャー、ログ情報を使用して、スタック内の問題をすばやく特定し、ユーザーに起こっていることを完全に理解します。
 
-<div class="alert alert-warning">
-この機能はクローズドベータ版でご利用いただけます。ご使用のアカウントでこの機能を有効にするには、<a href="https://docs.datadoghq.com/help/">サポートチームまでお問い合わせください。</a>
-</div>
-
 ## 使用方法
 ### 前提条件
 
@@ -42,7 +38,7 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     ...otherConfig,
-    allowedTracingOrigins: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/]
+    allowedTracingOrigins: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/]
 })
 ```
 
@@ -121,9 +117,9 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 | ------------------------------ | ------------------------------------------------------------------------------------------------------ |
 | `x-datadog-trace-id `            | Real User Monitoring SDK から生成されます。Datadog がトレースを RUM リソースにリンクできるようにします。   |
 | `x-datadog-parent-id`            | Real User Monitoring SDK から生成されます。Datadog がトレースから最初のスパンを生成できるようにします。 |
-| `x-datadog-origin: rum`          | Real User Monitoring から生成されたトレースが、APM インデックススパン数に影響を与えないようにするため。              |
-| `x-datadog-sampling-priority: 1` | Agent がトレースを維持するようにします。                                                           |
-| `x-datadog-sampling-priority: 1`       | Agent がトレースを維持するようにします。                                                                      |  
+| `x-datadog-origin: rum`          | Real User Monitoring から生成されたトレースが、APM インデックススパン数に影響を与えないようにするため。  |
+| `x-datadog-sampling-priority: 1` | Agent がトレースを維持するようにします。                                                           |  
+| `x-datadog-sampled: 1`           | Real User Monitoring SDK から生成されます。このリクエストがサンプリング用に選択されていることを示します。          |
 
 ## APM クオータへの影響
 

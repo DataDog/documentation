@@ -273,7 +273,7 @@ Par exemple, Datadog propose une [intégration DynamoDB][11] qui recueille les m
 **Files d'attente de messages :** SNS, SQS, Kinesis  
 **Fonctions Lambda :** [AWS Step Functions][13]  
 
-Vous pouvez personnaliser n'importe quel dashboard par défaut proposé par les intégrations ci-dessus en regroupant des informations de différents services dans le même tableau de bord.
+Vous pouvez personnaliser n'importe quel dashboard par défaut proposé par les intégrations ci-dessus en regroupant des informations de différents services dans le même dashboard.
 
 ## Envoyer des métriques custom
 

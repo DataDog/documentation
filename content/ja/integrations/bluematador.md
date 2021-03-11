@@ -7,7 +7,7 @@
 "categories":
 - 監視
 "creates_events": true
-"ddtype": "check"
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md"
 "display_name": "Blue Matador"

@@ -75,7 +75,7 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 [4]: /ja/developers/metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /ja/account_management/billing/custom_metrics/#counting-custom-metrics
-[7]: /ja/graphing/metrics/introduction/
+[7]: /ja/metrics
 [8]: /ja/developers/metrics/types/
 [9]: /ja/developers/metrics/types/?tab=rate#metric-types
 [10]: /ja/developers/metrics/types/?tab=count#metric-types

@@ -52,7 +52,7 @@ nav_sections:
             link: security_monitoring/
             icon: siem.svg
             desc: アプリケーションとインフラストラクチャー全体の脅威と構成ミスを検出する
-          - title: Synthetic の監視
+          - title: Synthetic モニタリング
             link: synthetics/
             icon: synthetics.svg
             desc: アプリケーションの稼働時間確保、局所的な問題の特定、パフォーマンスの追跡

@@ -43,7 +43,7 @@ The first seen and last seen date are updated, if new data is made available fro
 
 Below the overview of the signal are 3 tabs with detailed information related to the signal. The first tab, `Message`, displays the text configured in the rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The second tab, `Samples`, includes a list of log samples to provide context on why the signal triggered. Click on any of the samples to see the full log. The third tab, `Related Signals`, includes a list of other signals which contain the same group by values to assist with triaging the signal.  
 
-## Visualize your Security Signals Analytics
+## Visualize your security signals analytics
 
 Switch between the Security Signals Table and the Security Signals Analytics modes by clicking on the _Signal Mode_ button in the upper left corner of the page:
 

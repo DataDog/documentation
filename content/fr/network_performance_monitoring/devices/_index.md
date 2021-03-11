@@ -1,5 +1,5 @@
 ---
-title: Surveillance d'appareils réseau
+title: Network Device Monitoring
 kind: documentation
 disable_toc: true
 further_reading:
@@ -12,7 +12,7 @@ further_reading:
 ---
 ## Présentation
 
-Le service de surveillance d'appareils réseau de Datadog est conçu pour vous offrir une visibilité optimale sur les périphériques connectés à votre réseau, tels que les routeurs, les switchs, les serveurs et les pare-feu qui utilisent le protocole SNMP.
+La fonctionnalité Network Device Monitoring Datadog est conçue pour vous offrir une visibilité optimale sur les périphériques connectés à votre réseau, tels que les routeurs, les switchs, les serveurs et les pare-feu qui utilisent le protocole SNMP.
 
 Configurez l'Agent Datadog pour qu'il découvre automatiquement les périphériques connectés à un réseau et recueille des métriques les concernant, tel que des métriques liées à la bande passante, au débit des requêtes et au statut de disponibilité des périphériques. Représentez les métriques sous forme de graphique sur un [dashboard][1] Datadog ou créez un [monitor][2] pour être averti en cas de problème.
 

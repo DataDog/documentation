@@ -430,13 +430,13 @@ spec:
 
 ```yaml
 logs:
- - type: file
-   path: /var/log/myapp/*.log
-   exclude_paths:
-     - /var/log/myapp/debug.log
-     - /var/log/myapp/trace.log
-   service: mywebapp
-   source: go
+  - type: file
+    path: /var/log/myapp/*.log
+    exclude_paths:
+      - /var/log/myapp/debug.log
+      - /var/log/myapp/trace.log
+    service: mywebapp
+    source: go
 ```
 
 上の例は `/var/log/myapp/log/myfile.log` と一致しますが `/var/log/myapp/log/debug.log` と `/var/log/myapp/log/trace.log` が追尾されることはありません。
@@ -451,12 +451,12 @@ Datadog Agent **v6.23/v7.23** 以降でアプリケーションログが UTF-16 
 
 ```yaml
 logs:
- - type: file
-   path: /test/log/hello-world.log
-   tags: key:value
-   service: utf-16-logs
-   source: mysql
-   encoding: utf-16-be
+  - type: file
+    path: /test/log/hello-world.log
+    tags: key:value
+    service: utf-16-logs
+    source: mysql
+    encoding: utf-16-be
 ```
 
 **注**: `encoding` パラメーターは `type` パラメーターが `file` に設定されている場合のみ適用可能です。
@@ -473,13 +473,13 @@ Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`ma
 ```yaml
 logs_config:
   processing_rules:
-     - type: exclude_at_match
-       name: exclude_healthcheck
-       pattern: healthcheck
-     - type: mask_sequences
-       name: mask_user_email
-       pattern: \w+@datadoghq.com
-       replace_placeholder: "MASKED_EMAIL"
+    - type: exclude_at_match
+      name: exclude_healthcheck
+      pattern: healthcheck
+    - type: mask_sequences
+      name: mask_user_email
+      pattern: \w+@datadoghq.com
+      replace_placeholder: "MASKED_EMAIL"
 ```
 
 {{% /tab %}}

@@ -71,7 +71,7 @@ build_preview:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - touch Makefile.config
-    - make examples
+    - make BRANCH=${CI_COMMIT_REF_NAME} examples
     - sync_integration_descriptions
     #- sync_integration_descriptions_cached
     - placehold_translations
@@ -87,6 +87,7 @@ build_preview:
       - ./integrations_data
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
 
 # build_preview_legacy:
 #   <<: *base_template
@@ -140,6 +141,7 @@ link_checks_preview:
     - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
 
 missing_tms_preview:
   <<: *base_template
@@ -154,6 +156,7 @@ missing_tms_preview:
     - check_missing_tms
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
 
 index_algolia_preview:
   image:
@@ -177,6 +180,7 @@ index_algolia_preview:
   when: manual
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
 
 sourcemaps_preview:
   <<: *base_template
@@ -193,6 +197,7 @@ sourcemaps_preview:
   allow_failure: true
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
 
 # ================== live ================== #
 build_live:

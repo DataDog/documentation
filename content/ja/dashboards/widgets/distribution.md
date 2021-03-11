@@ -53,54 +53,16 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 ## API
 
-分布ウィジェット専用の[ウィジェット JSON スキーマ定義][2]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
 
-```text
-DISTIBUTION_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["distribution"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "title":   {"type": "string"},
-        "show_legend": {"type": "boolean"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+分布ウィジェット専用の[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
-| パラメーター     | 種類             | 必須 | 説明                                                                                                                                                  |
-|---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | はい      | ウィジェットのタイプ。分布ウィジェットには `distribution` を使用します。                                                                                              |
-| `requests`    | オブジェクトの配列 | はい      | ウィジェットに表示する 1 つの `request` オブジェクトの配列。`REQUEST_SCHEMA` の作成方法については、[リクエスト JSON スキーマに関するドキュメント][3]を参照してください。 |
-| `title`       | string           | いいえ       | ウィジェットのタイトル。                                                                                                                                        |
-| `show_legend` | boolean          | いいえ       | （スクリーンボードのみ）このウィジェットのレジェンドを表示                                                                                                           |
-
-`request` オブジェクトでは、以下のプロパティも使用できます。
-
-```json
-{
-  "style": {
-    "type": "object",
-    "properties": {"palette": {"type": "string"}},
-    "additionalProperties": false
-  }
-}
-```
-
-| パラメーター       | 種類   | 必須 | 説明                           |
-|-----------------|--------|----------|---------------------------------------|
-| `style.palette` | string | いいえ       | ウィジェットに適用するカラーパレット。 |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/dashboards/widgets/heat_map/
-[2]: /ja/dashboards/graphing_json/widget_json/
-[3]: /ja/dashboards/graphing_json/request_json/
+[2]: /ja/api/v1/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

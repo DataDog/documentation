@@ -4,6 +4,9 @@ kind: Documentation
 aliases:
     - /tracing/profiling/getting_started
 further_reading:
+    - link: 'tracing/profiler/intro_to_profiling'
+      tag: 'Documentation'
+      text: 'Intro to profiling.'
     - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
@@ -19,9 +22,8 @@ Profiler is shipped within the following tracing libraries. Select your language
 
 To get notified when a private beta is available for the **Node**, **Ruby**, **PHP**, or **.NET** Profiler, [sign up here][1].
 
-
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,go" >}}
+{{< programming-lang lang="java" >}}
 
 The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 (version 8u262+)][2] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
 
@@ -71,9 +73,8 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 [4]: https://app.datadoghq.com/profiling
 [5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [6]: /tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
-
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 The Datadog Profiler requires Python 2.7+. Memory profiling is available on Python 3.5+. To begin profiling applications:
 
@@ -144,9 +145,9 @@ Recommended for advanced usage only.
 [2]: https://app.datadoghq.com/profiling
 [3]: /tracing/visualization/#services
 [4]: /tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
-{{% tab "Go" %}}
 
 The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
@@ -185,32 +186,36 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 **Note**:
 
-- It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use profiler configuration to set the parameters:
+- By default only the CPU and Heap profile are enabled. Use [profiler.WithProfileTypes][4] to enable additional [profile types][5].
 
-| Method | Type          | Description                                                                                                  |
+- You can set profiler parameters in code with these functions:
+
+| Function | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
-|  WithService     | String        | The Datadog [service][4] name, for example `my-web-app`.             |
-|  WithEnv         | String        | The Datadog [environment][5] name, for example, `production`.         |
+|  WithService     | String        | The Datadog [service][6] name, for example `my-web-app`.             |
+|  WithEnv         | String        | The Datadog [environment][7] name, for example, `production`.         |
 |  WithVersion     | String        | The version of your application.                                                                             |
 |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
-- Alternatively you can also set the profiler configuration using environment variables:
+- Alternatively you can set profiler configuration using environment variables:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_SERVICE`                                     | String        | The Datadog [service][4] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][5] name, for example, `production`. |
+| `DD_SERVICE`                                     | String        | The Datadog [service][6] name.     |
+| `DD_ENV`                                         | String        | The Datadog [environment][7] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
 [3]: https://app.datadoghq.com/profiling
-[4]: /tracing/visualization/#services
-[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
+[6]: /tracing/visualization/#services
+[7]: /tracing/guide/setting_primary_tags_to_scope/#environment
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
-{{< /tabs >}}
 
 
 ## Further Reading

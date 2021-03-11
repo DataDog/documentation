@@ -10,25 +10,25 @@ Tracer startup logs capture all obtainable information at startup and log it eit
 
 If you see any `DIAGNOSTICS` log lines, confirm from the indicated log that settings and configurations are applied correctly.  If you do not see logs at all, ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,.NET,php,go,nodejs,python,ruby,cpp" >}}
+{{< programming-lang lang="java" >}}
 
-#### Configuration
+**Configuration:**
 
 ```text
 {"os_name":"Mac OS X","os_version":"10.15.4","architecture":"x86_64","lang":"jvm","lang_version":"11.0.6","jvm_vendor":"AdoptOpenJDK","jvm_version":"11.0.6+10","java_class_version":"55.0","enabled":true,"service":"unnamed-java-app","agent_url":"http://localhost:8126","agent_error":false,"debug":false,"analytics_enabled":false,"sampling_rules":[{},{}],"priority_sampling_enabled":true,"logs_correlation_enabled":false,"profiling_enabled":false,"dd_version":"null","health_checks_enabled":false,"configuration_file":"no config file present","runtime_id":"b69deb26-8bc3-4c00-8952-d42bf8c2123b"}
 ```
 
-#### Diagnostics
+**Diagnostics:**
 
 The Java tracer does not output Diagnostics logs.  For this check, run the tracer in [debug mode][1].
 
 
 [1]: /tracing/troubleshooting/tracer_debug_logs/
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
-#### File Location
+**File Location:**
 
 Log files are saved in the following directories by default. Use the `DD_TRACE_LOG_DIRECTORY` setting to change these paths.
 
@@ -37,13 +37,13 @@ Log files are saved in the following directories by default. Use the `DD_TRACE_L
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 | Linux    | `/var/log/datadog/dotnet/`                |
 
-**Note:**: On Linux, you must create the logs directory before you enable debug mode.
+**Note:** On Linux, you must create the logs directory before you enable debug mode.
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
 - `dotnet-tracer-native.log` contains the diagnostics logs, if any are generated.
 
-#### Configuration
+**Configuration:**
 
 ```text
 2020-06-29 12:26:39.572 +02:00 [INF] DATADOG TRACER CONFIGURATION -
@@ -57,7 +57,7 @@ Log files are saved in the following directories by default. Use the `DD_TRACE_L
 "runtime_metrics_enabled":false,"disabled_integrations":[]}
 ```
 
-#### Diagnostics
+**Diagnostics:**
 
 The .NET tracer prints the following diagnostic lines:
 
@@ -74,10 +74,10 @@ DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: unable to set event mask
 DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
-#### PHP Info
+**PHP Info:**
 Obtain the startup logs JSON string from a `phpinfo()` page next to "DATADOG TRACER CONFIGURATION". Create the following PHP file and access it from a browser on the host machine.
 
 ```php
@@ -88,7 +88,7 @@ Diagnostic information is displayed in a separate table to help diagnose common 
 
 {{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP Info"  >}}
 
-#### CLI SAPI
+**CLI SAPI:**
 
 Get the info from the CLI SAPI by running `php --ri=ddtrace`.
 
@@ -113,7 +113,7 @@ ddtrace.disable => Off => Off
 ...
 ```
 
-#### Configuration
+**Configuration:**
 
 If the tracer is in [DEBUG mode][1], the startup logs will appear in the `error_log` once per process on the first request.
 
@@ -121,7 +121,7 @@ If the tracer is in [DEBUG mode][1], the startup logs will appear in the `error_
 DATADOG TRACER CONFIGURATION - {"agent_error":"Couldn't connect to server","ddtrace.request_init_hook_reachable":false,"date":"2020-07-01T17:42:50Z","os_name":"Linux 49b1cb4bdd12 4.19.76-linuxkit #1 SMP Tue May 26 11:42:35 UTC 2020 x86_64","os_version":"4.19.76-linuxkit","version":"1.0.0-nightly","lang":"php","lang_version":"7.4.5","env":null,"enabled":true,"service":null,"enabled_cli":false,"agent_url":"https://localhost:8126","debug":false,"analytics_enabled":false,"sample_rate":1.000000,"sampling_rules":null,"tags":null,"service_mapping":null,"distributed_tracing_enabled":true,"priority_sampling_enabled":true,"dd_version":null,"architecture":"x86_64","sapi":"cgi-fcgi","ddtrace.request_init_hook":null,"open_basedir_configured":false,"uri_fragment_regex":null,"uri_mapping_incoming":null,"uri_mapping_outgoing":null,"auto_flush_enabled":false,"generate_root_span":true,"http_client_split_by_domain":false,"measure_compile_time":true,"report_hostname_on_root_span":false,"traced_internal_functions":null,"auto_prepend_file_configured":false,"integrations_disabled":null,"enabled_from_env":true,"opcache.file_cache":null}
 ```
 
-#### Diagnostics
+**Diagnostics:**
 
 Failed diagnostics for the PHP tracer print in the `error_log` if the tracer is in [DEBUG mode][1].
 
@@ -130,7 +130,7 @@ DATADOG TRACER DIAGNOSTICS - agent_error: Couldn't connect to server
 DATADOG TRACER DIAGNOSTICS - ddtrace.request_init_hook_reachable: false
 ```
 
-#### Runtime
+**Runtime:**
 
 Access the startup logs as a JSON string at runtime with `\DDTrace\startup_logs()`.
 
@@ -139,17 +139,16 @@ echo \DDTrace\startup_logs() . PHP_EOL;
 ```
 
 [1]: /tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
-{{% tab "Go" %}}
-
-#### Configuration
+**Configuration:**
 
 ```text
 2020/07/09 15:57:07 Datadog Tracer v1.26.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2020-07-09T15:57:07-05:00","os_name":"darwin","os_version":"10.15.4","version":"v1.26.0","lang":"Go","lang_version":"go1.14.2","env":"","service":"splittest2","agent_url":"http://127.0.0.1:8126/v0.4/traces","agent_error":"","debug":true,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","tags":{"runtime-id":"d269781c-b1bf-4d7b-9a55-a8174930554f"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"dd_version":"","architecture":"amd64","global_service":""}
 ```
 
-#### Diagnostics
+**Diagnostics:**
 
 The Go Tracer prints one of two possible diagnostic lines, one for when the Agent cannot be reached, and the other for trace sampling errors.
 
@@ -160,11 +159,10 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
     at index 4 ....
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
 
-{{% tab "NodeJS" %}}
-
-#### Configuration
+**Configuration:**
 
 ```text
 [2020-07-02 14:51:16.421] [INFO] app - host:port==localhost:9080
@@ -176,7 +174,7 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
 DATADOG TRACER CONFIGURATION - {"date":"2020-07-02T18:51:18.294Z","os_name":"Darwin","os_version":"19.2.0","architecture":"x64","version":"0.23.0","lang":"nodejs","lang_version":"12.18.1","enabled":true,"service":"acmeair","agent_url":"http://localhost:8126","agent_error":"Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126","debug":false,"analytics_enabled":false,"sample_rate":1,"sampling_rules":[],"tags":{"service":"acmeair","version":"0.0.4"},"dd_version":"0.0.4","log_injection_enabled":false,"runtime_metrics_enabled":false,"integrations_loaded":["http","fs","net","dns","express@4.17.1"]}
 ```
 
-#### Diagnostics
+**Diagnostics:**
 
 The NodeJS Tracer prints a diagnostic line when the Agent cannot be reached.
 
@@ -184,22 +182,22 @@ The NodeJS Tracer prints a diagnostic line when the Agent cannot be reached.
 DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
-#### Log location
+**Log location:**
 
 The Python tracer logs configuration information as INFO-level. It logs diagnostics information, if found, as ERROR.
 
 If there is no logging configuration, only Diagnostics will be output to `Stderr`. To see tracer startup logs, either add a logger, or set `DATADOG_TRACE_DEBUG=true` in your configuration and run your application with `dd-trace-run`.  This adds a logger, and exposes both debug and startup tracer logs.
 
-#### Configuration
+**Configuration:**
 
 ```text
 2020-07-09 11:04:08,098 INFO [ddtrace.tracer] [tracer.py:338] - - DATADOG TRACER CONFIGURATION - {"date": "2020-07-09T15:04:08.092797", "os_name": "Darwin", "os_version": "19.5.0", "is_64_bit": true, "architecture": "64bit", "vm": "CPython", "version": "0.38.1.dev79+gd22e2972.d20200707", "lang": "python", "lang_version": "3.7.6", "pip_version": "20.0.2", "in_virtual_env": true, "agent_url": "http://localhost:1234", "agent_error": "Agent not reachable. Exception raised: [Errno 61] Connection refused", "env": "", "is_global_tracer": true, "enabled_env_setting": null, "tracer_enabled": true, "sampler_type": "DatadogSampler", "priority_sampler_type": "RateByServiceSampler", "service": "", "debug": true, "enabled_cli": true, "analytics_enabled": false, "log_injection_enabled": false, "health_metrics_enabled": false, "dd_version": "", "priority_sampling_enabled": true, "global_tags": "", "tracer_tags": "", "integrations": {"asyncio": "N/A", "boto": "N/A", "botocore": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.15.32", "module_imported": false, "config": "N/A"}, "bottle": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "0.12.18", "module_imported": false, "config": null}, "cassandra": "N/A", "celery": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "4.2.2", "module_imported": false, "config": "N/A"}, "consul": "N/A", "django": "N/A", "elasticsearch": "N/A", "algoliasearch": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "2.2.0", "module_imported": false, "config": "N/A"}, "futures": "N/A", "grpc": "N/A", "mongoengine": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.19.1", "module_imported": false, "config": "N/A"}, "mysql": "N/A", "mysqldb": "N/A", "pymysql": "N/A", "psycopg": "N/A", "pylibmc": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.6.1", "module_imported": false, "config": "N/A"}, "pymemcache": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.4.4", "module_imported": false, "config": "N/A"}, "pymongo": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.10.1", "module_imported": false, "config": "N/A"}, "redis": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.5.3", "module_imported": false, "config": "N/A"}, "rediscluster": "N/A", "requests": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "2.23.0", "module_imported": false, "config": "N/A"}, "sqlalchemy": "N/A", "sqlite3": "N/A", "aiohttp": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.6.2", "module_imported": false, "config": "N/A"}, "aiopg": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.15.0", "module_imported": false, "config": "N/A"}, "aiobotocore": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.0.1", "module_imported": false, "config": null}, "httplib": "N/A", "vertica": "N/A", "molten": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.7.4", "module_imported": false, "config": "N/A"}, "jinja2": "N/A", "mako": "N/A", "flask": "N/A", "kombu": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "4.3.0", "module_imported": false, "config": null}, "falcon": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.4.1", "module_imported": false, "config": null}, "pylons": "N/A", "pyramid": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.10.4", "module_imported": false, "config": null}, "logging": "N/A"}}
 ```
 
-#### Diagnostics
+**Diagnostics:**
 
 The Python tracer prints a diagnostic line when the Agent cannot be reached.
 
@@ -207,16 +205,16 @@ The Python tracer prints a diagnostic line when the Agent cannot be reached.
 DATADOG TRACER DIAGNOSTIC - Agent not reachable. Exception raised: [Errno 61] Connection refused
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
-#### Configuration
+**Configuration:**
 
 ```text
 W, [2020-07-08T21:14:25.281615 #137]  WARN -- ddtrace: [ddtrace] DATADOG TRACER CONFIGURATION - {"date":"2020-07-08T21:14:25+00:00","os_name":"x86_64-pc-linux-gnu","version":"0.37.0","lang":"ruby","lang_version":"2.7.0","enabled":true,"agent_url":"http://ddagent:8126?timeout=1","debug":false,"analytics_enabled":false,"runtime_metrics_enabled":false,"vm":"ruby-2.7.0","partial_flushing_enabled":false,"priority_sampling_enabled":false,"health_metrics_enabled":false}
 ```
 
-#### Diagnostics
+**Diagnostics:**
 
 The Ruby tracer prints a diagnostic line when the Agent cannot be reached.
 
@@ -224,14 +222,14 @@ The Ruby tracer prints a diagnostic line when the Agent cannot be reached.
 W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER DIAGNOSTIC - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
 ```
 
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
 
-#### File Location
+**File Location:**
 
 For C++, the startup log file is created in `/var/tmp/dd-opentracing-cpp`, for example: `/var/tmp/dd-opentracing-cpp/startup_options-1593737077369521386.json`.
 
-#### Configuration
+**Configuration:**
 
 ```text
 
@@ -239,12 +237,12 @@ For C++, the startup log file is created in `/var/tmp/dd-opentracing-cpp`, for e
 
 ```
 
-#### Diagnostics
+**Diagnostics:**
 
 For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors will appear in your application logs. Alternately, in Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Diagnostics Errors
 

@@ -15,7 +15,7 @@ further_reading:
   text: "Collect your traces"
 ---
 
-## Why use a Proxy
+## Overview
 
 If your network configuration restricted outbound traffic, proxy all Agent traffic through one or several hosts that have more permissive outbound policies.
 
@@ -25,7 +25,7 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 2. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the same proxy)
 3. Using the Agent as a proxy (for **up to 16 Agents** per proxy, **only on Agent v5** )
 
-## Using a Web Proxy as Proxy
+## Web proxy
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
@@ -92,6 +92,7 @@ proxy:
 * A hostname
   - e.g. `webserver1`
 
+**Note**: `NO_PROXY` must match endpoints exactly for agent HTTP(S) requests.  The accepted values above only apply to integrations.
 
 #### Environment variables
 
@@ -134,7 +135,7 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Using HAProxy as a Proxy
+## HAProxy
 
 [HAProxy][1] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
 
@@ -514,7 +515,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Using NGINX as a Proxy
+## NGINX
 
 [NGINX][3] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
 
@@ -641,7 +642,7 @@ logs_config:
 When sending logs over TCP, refer to <a href="/agent/logs/proxy">TCP Proxy for Logs</a> page.
 
 
-## Using the Agent as a Proxy
+## Datadog Agent
 
 **This feature is only available for Agent v5**
 

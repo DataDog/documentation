@@ -347,7 +347,7 @@ HTTP リクエストを定義するには、
 [1]: /ja/synthetics/browser_tests/advanced_options/
 [2]: /ja/synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /ja/synthetics/browser_tests/#create-a-variable
+[4]: /ja/synthetics/guide/email-validation/#create-an-email-variable
 [5]: /ja/synthetics/browser_tests/actions#use-variables-in-javascript-steps
 [6]: /ja/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 [7]: /ja/synthetics/settings/

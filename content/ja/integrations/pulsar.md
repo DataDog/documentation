@@ -19,7 +19,7 @@ draft: false
 git_integration_title: pulsar
 guid: 799b35dd-d481-4d71-825e-83c92a5227c4
 integration_id: pulsar
-integration_title: pulsar
+integration_title: Pulsar
 is_public: true
 kind: インテグレーション
 maintainer: ming.luo@kesque.com
@@ -27,7 +27,7 @@ manifest_version: 1.0.0
 metric_prefix: kesque.pulsar.
 metric_to_check: kesque.pulsar.consumer.available_permits
 name: pulsar
-public_title: pulsar
+public_title: Pulsar
 short_description: Apache Pulsar メトリクス
 support: contrib
 supported_os:
