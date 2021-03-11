@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    activemq: assets/dashboards/activemq_dashboard.json
   logs:
     source: activemq
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    activemq_processes: assets/saved_views/activemq_processes.json
   service_checks: assets/service_checks.json
 categories:
   - log collection
@@ -43,6 +46,8 @@ supported_os:
 ## 概要
 
 ActiveMQ チェックは、ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集します。
+
+**注:** このチェックは ActiveMQ Artemis (今後の ActiveMQ バージョン `6`) もサポートし、`activemq.artemis` ネームスペースのメトリクスを報告します。詳細は[メトリクス][#metrics]をご参照ください。
 
 **注**: バージョン 5.8.0 以前の ActiveMQ を実行している場合は、[Agent 5.10.x リリースのサンプルファイル][1]を参照してください。
 
@@ -150,7 +155,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### メトリクス
 {{< get-metrics-from-git "activemq" >}}
-
+  ActiveMQ Artemis フレーバーに関連付けられたメトリクスは、メトリクス名に `artemis` が含まれています。その他すべては ActiveMQ "classic" に報告されます。
 
 ### イベント
 
