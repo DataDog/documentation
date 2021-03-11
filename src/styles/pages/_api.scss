@@ -6,8 +6,8 @@ $ddpurple: #632ca6;
 }
 
 .announcement_banner.open ~ .container .main-api h2 {
-    margin-top: -110px;
-    padding-top: 110px;
+    margin-top: -175px;
+    padding-top: 175px;
 }
 
 .main-api {
@@ -19,8 +19,8 @@ $ddpurple: #632ca6;
     }
 
     h2 {
-        margin-top: -80px;
-        padding-top: 80px;
+        margin-top: -145px;
+        padding-top: 145px;
         pointer-events: none;
         background-clip: content-box;
         margin-right: 0;
@@ -40,8 +40,6 @@ $ddpurple: #632ca6;
         font-size: 16px;
     }
 
-
-
     a {
         color: #4a4a4a;
         border-bottom: 1px solid #6c757d;
@@ -57,7 +55,7 @@ $ddpurple: #632ca6;
             margin-right: -180px;
         }
         @media (min-width: 1200px) {
-            margin-right: -220px;
+            margin-right: -216px;
         }
     }
 
@@ -94,32 +92,50 @@ $ddpurple: #632ca6;
 }
 
 .api {
+    // These are temporary fixes until we refactor the announcement banner.
     .announcement_banner.open ~ .container {
         padding-top: 40px;
-        @media (min-width: 992px) {
+
+        @include media-breakpoint-up(lg) {
+            padding-top: 0px;
+            margin-top: -20px;
+        }
+
+        @include media-breakpoint-up(xl) {
             padding-top: 30px;
+            margin-top: 0;
         }
     }
 
     .announcement_banner ~ .container {
         padding-top: 20px;
+
         @media (min-width: 992px) {
             padding-top: 0px;
         }
     }
 
     .api-toolbar {
-        height: auto;
-        // position: sticky;
-        // z-index: 1;
-        // top: 105px;
         font-weight: 600;
-        @media (min-width: 992px) {
-            top: 95px;
-            height: 51px;
-        }
+        height: auto;
+
         a {
             border-bottom: none;
+        }
+
+        @include media-breakpoint-up(lg) {
+            align-items: baseline;
+            background: white;
+            position: sticky;
+            z-index: 5;
+            top: 94px;
+            height: 65px;
+        }
+
+        #breadcrumbs {
+            &:lang(ja) {
+                font-size: 15px;
+            }
         }
     }
 

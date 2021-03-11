@@ -68,6 +68,6 @@ Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
 Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 
-- **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `True`
+- **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `False`
 
 [1]: ../../faq/what-are-recovery-thresholds/

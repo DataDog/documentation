@@ -92,13 +92,15 @@ Datadog の Azure インテグレーションは、<a href="https://docs.microso
 
 ## セットアップ
 
+**注**: Azure Marketplace から購入した US3 Datadog サイトを使用しているお客様の場合、Azure インテグレーションには別のセットアッププロセスがあります。[Azure サブスクリプションを Datadog にリンクする][47]手順を参照するか、Azure ポータルに埋め込まれたワークフローの[完全な概要][48]をご確認ください。
+
 ### インストール
 
 Azure CLI ツールまたは Azure ポータルを使用して、Microsoft Azure アカウントを Datadog と統合します。このインテグレーション方法は、すべての Azure クラウド (パブリック、中国、ドイツ、政府) で自動的に機能します。以下の手順に従うと、Datadog は、使用されているクラウドを自動的に検出してインテグレーションを完了します。
 
 #### Azure CLI を使用して統合する
 
-Azure CLI を使用して Datadog を Azure と統合するには、[Azure CLI をインストール][47]しておく必要があります。
+Azure CLI を使用して Datadog を Azure と統合するには、[Azure CLI をインストール][49]しておく必要があります。
 
 {{< tabs >}}
 {{% tab "Azure CLI v2.0" %}}
@@ -260,17 +262,17 @@ azure role assignment create --objectId <オブジェクト_ID> --roleName "Moni
 5. **保存**をクリックします。
 6. Datadog を使用して監視する他のサブスクリプションについても、この手順を繰り返します。**注**: Azure Lighthouse のユーザーは、顧客テナントからサブスクリプションを追加できます。
 
-**注**: ARM によってデプロイされた VM がメトリクスを収集できるようにするには、診断を有効にする必要があります。[診断の有効化][48]を参照してください。
+**注**: ARM によってデプロイされた VM がメトリクスを収集できるようにするには、診断を有効にする必要があります。[診断の有効化][50]を参照してください。
 
 ##### インテグレーションを完了する
 
-1. **App Registrations** で、作成したアプリを選択します。**Application ID** と **Tenant ID** をコピーし、[Datadog Azure インテグレーションタイル][46]の **Client ID** と **Tenant ID** に貼り付けます。
+1. **App Registrations** で、作成したアプリを選択します。**Application ID** と **Tenant ID** をコピーし、[Datadog Azure インテグレーションタイル][51]の **Client ID** と **Tenant ID** に貼り付けます。
 2. 同じアプリで、**Manage** -> **Certificates and secrets** と移動します。
 3. `datadogClientSecret` という新しい _Client Secret_ を追加し、 _Expires_ を選択し、**Add** をクリックします。
 
     {{< img src="integrations/azure/Azure_client_secret.png" alt="Azure のクライアントシークレット" popup="true" style="width:80%">}}
 
-4. キー値が表示されたら、コピーして [Datadog Azure インテグレーションタイル][49]の **Client Secret** に貼り付け、**Install Integration** または **Update Configuration** をクリックします。
+4. キー値が表示されたら、コピーして [Datadog Azure インテグレーションタイル][51]の **Client Secret** に貼り付け、**Install Integration** または **Update Configuration** をクリックします。
 
 ### コンフィギュレーション
 
@@ -288,10 +290,10 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 #### Agent のインストール
 
-1. [Azure ポータル][47]で、 _VM -> Settings -> Extensions -> Add_ と移動し、Datadog Agent を選択します。
-2. **作成**をクリックし、[Datadog API キー][51]を入力して、**OK**をクリックします。
+1. [Azure ポータル][52]で、 _VM -> Settings -> Extensions -> Add_ と移動し、Datadog Agent を選択します。
+2. **作成**をクリックし、[Datadog API キー][53]を入力して、**OK**をクリックします。
 
-オペレーティングシステムまたは CICD ツールに応じた Agent のインストール方法については、アプリ内の [Datadog Agent のインストール手順][52]を参照してください。
+オペレーティングシステムまたは CICD ツールに応じた Agent のインストール方法については、アプリ内の [Datadog Agent のインストール手順][54]を参照してください。
 
 **注**: Azure の拡張機能と併せて Datadog Agent をインストールする場合、ドメインコントローラーはご利用いただけません。
 
@@ -299,13 +301,13 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 新しいサブスクリプションでアプリケーションから取得したメトリクスが表示されるまで数分かかる場合があります。
 
-[Azure VM のデフォルトのダッシュボード][53]に移動し、このダッシュボードにインフラストラクチャーのデータが表示されていることを確認します。
+[Azure VM のデフォルトのダッシュボード][55]に移動し、このダッシュボードにインフラストラクチャーのデータが表示されていることを確認します。
 
 {{< img src="integrations/azure/azure_vm_screenboard.png" alt="Azure VM のスクリーンボード" popup="true" style="width:70%">}}
 
 ### ログの収集
 
-Azure から Datadog へログを送信する最適な方法は、Agent または DaemonSet を使うことです。一部のリソースではできない場合があります。その場合、Azure Event Hub を使いログ転送パイプラインを作成し、[Azure プラットフォームログ][54]を収集することをお勧めします。Azure プラットフォームログを Event Hub にストリーミングできないリソースには、Blob Storage 転送オプションを使用できます。
+Azure から Datadog へログを送信する最適な方法は、Agent または DaemonSet を使うことです。一部のリソースではできない場合があります。その場合、Azure Event Hub を使いログ転送パイプラインを作成し、[Azure プラットフォームログ][56]を収集することをお勧めします。Azure プラットフォームログを Event Hub にストリーミングできないリソースには、Blob Storage 転送オプションを使用できます。
 
 {{< tabs >}}
 
@@ -551,7 +553,7 @@ Azure 関数に精通していない場合は、[Azure Portal で初めての関
 
 ### イベント
 
-Azure インテグレーションは、すべての Azure イベントを Datadog の[イベントストリーム][56]に送信します。
+Azure インテグレーションは、すべての Azure イベントを Datadog の[イベントストリーム][58]に送信します。
 
 ### サービスのチェック
 
@@ -587,7 +589,7 @@ Azure インテグレーションメトリクス、イベント、およびサ�
 
 {{< /code-block >}}
 
-**注:** [オプションのパラメーター][57]セクションに移動して、構成可能なパラメーターのリストを見つけます。
+**注:** [オプションのパラメーター][59]セクションに移動して、構成可能なパラメーターのリストを見つけます。
 
 **注:** この失敗が原因でスクリプトを再実行する場合は、リソースグループ全体を削除して、新しい実行を作成することもお勧めします。
 
@@ -609,14 +611,14 @@ az provider register --namespace Microsoft.EventHub
 
 スクリプトは正常にインストールされたのに、ログエクスプローラー内にアクティビティ/プラットフォームログが表示されない場合
 
-ログ保持の [1 日の割り当て][58]を超えていないことを確認します。
+ログ保持の [1 日の割り当て][60]を超えていないことを確認します。
 
 **注:** スクリプトの実行後、5 分以上経ってからログエクスプローラーでログの検索を開始することをお勧めします。
 
 
 
 
-ご不明な点は、[Datadog のサポートチーム][59]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][61]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -668,16 +670,18 @@ az provider register --namespace Microsoft.EventHub
 [44]: https://docs.datadoghq.com/ja/integrations/azure_vm/
 [45]: https://docs.datadoghq.com/ja/integrations/azure_vm_scale_set/
 [46]: https://docs.datadoghq.com/ja/integrations/azure_virtual_networks/
-[47]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
-[48]: https://docs.datadoghq.com/ja/integrations/faq/azure-troubleshooting/#enable-diagnostics
-[49]: https://app.datadoghq.com/account/settings#integrations/azure
-[50]: https://portal.azure.com
-[51]: https://app.datadoghq.com/account/settings#api
-[52]: https://app.datadoghq.com/account/settings#agent
-[53]: https://app.datadoghq.com/screen/integration/azure_vm
-[54]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
-[55]: https://github.com/DataDog/dogweb/blob/prod/integration/azure/azure_metadata.csv
-[56]: https://docs.datadoghq.com/ja/events/
-[57]: https://docs-staging.datadoghq.com/mitheysh.asokan/FAQ-Forwarder/integrations/azure/#optional-parameters
-[58]: https://docs.datadoghq.com/ja/logs/indexes/#set-daily-quota
-[59]: https://docs.datadoghq.com/ja/help/
+[47]: https://docs.microsoft.com/en-us/azure/partner-solutions/datadog/create#link-to-existing-datadog-organization
+[48]: http://aka.ms/datadogwithazure
+[49]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
+[50]: https://docs.datadoghq.com/ja/integrations/faq/azure-troubleshooting/#enable-diagnostics
+[51]: https://app.datadoghq.com/account/settings#integrations/azure
+[52]: https://portal.azure.com
+[53]: https://app.datadoghq.com/account/settings#api
+[54]: https://app.datadoghq.com/account/settings#agent
+[55]: https://app.datadoghq.com/screen/integration/azure_vm
+[56]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
+[57]: https://github.com/DataDog/dogweb/blob/prod/integration/azure/azure_metadata.csv
+[58]: https://docs.datadoghq.com/ja/events/
+[59]: https://docs-staging.datadoghq.com/mitheysh.asokan/FAQ-Forwarder/integrations/azure/#optional-parameters
+[60]: https://docs.datadoghq.com/ja/logs/indexes/#set-daily-quota
+[61]: https://docs.datadoghq.com/ja/help/

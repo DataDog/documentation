@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Direct Connect.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_directconnect/'
+draft: false
 git_integration_title: amazon_directconnect
 has_logo: true
 integration_title: Amazon Direct Connect
@@ -24,7 +25,7 @@ version: '1.0'
 
 Cette intégration récupère des métriques à partir d'AWS Direct Connect (par exemple, l'état de connexion, les débits binaires d'entrée et de sortie, les débits de paquets d'entrée et de sortie, etc.).
 
-## Implémentation
+## Configuration
 
 ### Installation
 

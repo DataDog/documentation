@@ -9,7 +9,7 @@ You can use the [Webhooks integration][1] to trigger webhooks from Datadog monit
 
 You can also set up webhook notifications to call on [Datadog's API][3] if, for example, you wanted to submit a metric or event to your Datadog account every time a monitor triggered.
 
-## How do to this
+## How to do this
 
 Each webhook must be set up with a name (to be referenced in monitors) and a URL (to be pinged by the webhook). For submitting a call to the Datadog API, select "Use custom payload" and add your custom payload to the subsequent field.
 

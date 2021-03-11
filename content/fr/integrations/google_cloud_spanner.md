@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez l'utilisation des ressources de vos instances Spanner.
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_spanner/'
+draft: false
 git_integration_title: google_cloud_spanner
 has_logo: true
 integration_title: Google Spanner
@@ -28,7 +29,7 @@ Recueillez des métriques de Google Spanner pour :
 - Visualiser les performances de vos bases de données Spanner
 - Corréler les performances de vos bases de données Spanner avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Collecte de métriques
 
@@ -46,7 +47,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Spanner d
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 

@@ -20,11 +20,12 @@ Troubleshooting is highly contextual, and Saved Views enable you and your teamma
 {{< img src="logs/explorer/saved_views/overview.png" alt="Saved Views selection"  style="width:90%;" >}}
 
 Technically, a Saved View keeps track of:
+
 - A [search query][3]
 - A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties)
 - A [selected subset of facets][1] to be displayed in the facet list
 
-## Your Default Saved View
+## Default view
 
 {{< img src="logs/explorer/saved_views/default.png" alt="Default view"  style="width:50%;" >}}
 
@@ -38,7 +39,7 @@ At any moment, from the default view entry in the Views panel:
 * **Update** your default view with the current parameters.
 * **Reset** your default view to Datadog's defaults for a fresh restart.
 
-## Your Organization's Saved Views
+## Saved views
 
 {{< img src="logs/explorer/saved_views/custom.png" alt="Saved views across organizations"  style="width:50%;" >}}
 

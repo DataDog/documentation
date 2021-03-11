@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez la taille des tables, la capacité de lecture/écriture, la latence des requêtes, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_dynamodb/'
+draft: false
 git_integration_title: amazon_dynamodb
 has_logo: true
 integration_title: Amazon DynamoDB
@@ -29,7 +30,7 @@ Amazon DynamoDB est un service de gestion de base de données NoSQL dans le clo
 
 Pour savoir comment surveiller les métriques de performance DynamoDB, consultez [notre série d'articles à ce sujet][1]. Vous y trouverez des informations supplémentaires sur les principales métriques de performance, ainsi que des conseils pour les recueillir, et découvrirez comment [Medium][2] surveille DynamoDB à l'aide de Datadog.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -20,17 +20,17 @@ Customers can send data to the Datadog service by using a locally installed [Age
 
 The official repositories and/or binary packages of the Agent are signed. Verify the distribution channel by checking the signature against one of the following public keys:
 
-- APT repo metadata:
+- Linux DEB packages and repo metadata:
   - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][4]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][5]
-- RPM packages and repo metadata:
+- Linux RPM packages and repo metadata:
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][6]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][7]
   - [60A389A44A0C32BAE3C03F0B069B56F54172A230][8] (Agent 6 and older only)
 - Windows MSI:
-  - DigiCert certificate fingerprint 21fe8679bdfb16b879a87df228003758b62abf5e
+  - DigiCert certificate fingerprint `21fe8679bdfb16b879a87df228003758b62abf5e`
 - MacOS PKG:
-  - Apple certificate fingerprint FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA
+  - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
 ## Information security
 
@@ -60,11 +60,15 @@ Regarding its Container Agent specifically, Datadog performs regular vulnerabili
 
 If you believe you've discovered a bug in Datadog's security, get in touch at [security@datadoghq.com][16] and we will get back to you within 24 hours. Datadog's [PGP key][17] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
 
+## Running as an unprivileged user
+
+By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][18]. Note the `system-probe` and `security-agent` services are an exception to this, and still need to run as `root` on Linux and `LOCAL_SYSTEM` on Windows.
+
 ## Secrets management
 
-Customers with a requirement to avoid storing secrets in plaintext in the Agent's configuration files can leverage the [secrets management][18] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
+Customers with a requirement to avoid storing secrets in plaintext in the Agent's configuration files can leverage the [secrets management][19] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
 
-For more information, see the [Secrets Management][19] documentation.
+For more information, see the [Secrets Management][20] documentation.
 
 ### Further Reading
 
@@ -87,5 +91,6 @@ For more information, see the [Secrets Management][19] documentation.
 [15]: https://access.redhat.com/containers
 [16]: mailto:security@datadoghq.com
 [17]: https://www.datadoghq.com/8869756E.asc.txt
-[18]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[19]: /agent/guide/secrets-management/
+[18]: /agent/faq/windows-agent-ddagent-user/
+[19]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
+[20]: /agent/guide/secrets-management/

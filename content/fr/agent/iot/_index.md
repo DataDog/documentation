@@ -1,7 +1,6 @@
 ---
 title: Agent IoT
 kind: documentation
-beta: true
 further_reading:
   - link: /getting_started/agent/
     tag: Documentation
@@ -10,9 +9,6 @@ further_reading:
 ## Présentation
 
 L'Agent IoT Datadog est une version de l'Agent optimisée pour surveiller les périphériques IoT et les applications intégrées. Les clients se servent de l'Agent IoT pour surveiller un grand nombre de périphériques, tels que des écrans numériques ou des appareils de sécurité exécutant des algorithmes de détection d'images.
-
-<div class="alert alert-warning">L'Agent IoT est actuellement accessible sous la forme d'une bêta privée. Demandez l'accès en remplissant ce <a href="https://docs.google.com/forms/d/e/1FAIpQLSfaoqr9Pgievq7f2WE6wcQMF1YjsOwiXHbmO2FehUlQwmNu0A/viewform?usp=sf_link">formulaire</a>.
-</div>
 
 ## Fonctionnalités
 
@@ -50,7 +46,7 @@ Les besoins exacts en ressources dépendent de l'utilisation faite de l'Agent Io
 
 ### Installation
 
-#### Méthode automatique
+#### Configuration automatique
 
 Pour télécharger et installer automatiquement l'Agent IoT adapté à votre système d'exploitation et à l'architecture de votre chipset, utilisez la commande suivante :
 
@@ -89,7 +85,7 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. Définissez votre site Datadog sur `{{< region-param key="dd_site" code="true" >}}`. Valeur par défaut : `datadoghq.com`.
+5. Définissez votre site Datadog sur {{< region-param key="dd_site" code="true" >}}. Valeur par défaut : `datadoghq.com`.
     ```bash
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```

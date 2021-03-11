@@ -25,20 +25,20 @@ Multistep API テストを使用すると、**[HTTP テスト][1]**をチェー�
 
 サービスの 1 つが応答遅延を起こしたり、予期しない方法 (たとえば、予期しない応答本文、ステータスコードなど) で応答を開始した場合、テストは[**チームに警告する**][2]、[**CI パイプラインをブロックする**][3]、または[**障害のあるデプロイをロールバックする**][3]ことができます。
 
-Multistep API テストは、現在 Datadog が[管理する場所][4]からのみ実行できます。
+Multistep API テストは、Datadog [管理ロケーション][4]および[プライベートロケーション][5]から実行できるため、外部と内部の両方で**システムを完全にカバー**できます。
 
-**注**: Multistep API テストを使用すると、1 つのテストで複数の HTTP リクエストをリンクできます。サービスに対する単一のリクエストを実行する場合は、[API テスト][5]を利用できます。
+**注**: Multistep API テストを使用すると、1 つのテストで複数の HTTP リクエストをリンクできます。サービスに対する単一のリクエストを実行する場合は、[API テスト][6]を利用できます。
 
 ## コンフィギュレーション
 
 ### テストに名前を付けてタグを付ける
 
 1. Multistep API テストに**名前**を付けます。
-2. Multistep API テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][6]で Synthetic テストをすばやくフィルタリングできます。
+2. Multistep API テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][7]で Synthetic テストをすばやくフィルタリングできます。
 
 ### ロケーションを選択する
 
-Multistep API テストを実行する**場所**を選択します。現在、Multistep API テストを実行できるのは、[管理されている場所][4]からのみです。
+Multistep API テストを実行する**ロケーション**を選択します。Multistep API テストは、ネットワークの外部または内部のどちらからテストを実行するかによって、[管理ロケーション][4]と[プライベートロケーション][5]の両方から実行できます。
 
 ### リクエストを定義する
 
@@ -96,8 +96,8 @@ Multistep API テストを実行する**場所**を選択します。現在、Mu
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][7] | _String_ <br> _[Regex][8]_ <br> _String_、_[Regex][8]_ |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][9]                                      |
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][8] | _String_ <br> _[Regex][9]_ <br> _String_、_[Regex][9]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][10]                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
 | ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
@@ -116,8 +116,8 @@ Multistep API テストを実行する**場所**を選択します。現在、Mu
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。また、3 文字以上にする必要があります。
 2. 変数を応答ヘッダーから抽出するか、本文から抽出するか決定します。
 
-    * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[正規表現][9]によりパースします。
-    * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[正規表現][9]または [JSONPath][7] によりパースします。
+    * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[正規表現][10]によりパースします。
+    * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[正規表現][10]または [JSONPath][8] によりパースします。
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Multistep API テストで HTTP リクエストから変数を抽出する" style="width:90%;" >}}
 
@@ -147,7 +147,7 @@ Multistep API テストは次の頻度で実行できます。
 
 #### 高速再試行
 
-テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][8] を介して構成できます。
+テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][9] を介して構成できます。
 
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
@@ -156,9 +156,9 @@ Multistep API テストは次の頻度で実行できます。
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
-1. [モニターと同様][10]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
+1. [モニターと同様][11]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
 
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][11]のほか、以下の[条件付き変数][12]を使用できます。
+2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][12]のほか、以下の[条件付き変数][13]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -198,7 +198,7 @@ Multistep API テストは次の頻度で実行できます。
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][13]と[ローカルで定義された変数](#create-local-variables)を使用できます。
+HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][14]と[ローカルで定義された変数](#create-local-variables)を使用できます。
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Multistep API テストでの変数の使用" video="true" width="90%" >}}
@@ -212,7 +212,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 | `CONNRESET`       | 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。                                                                                                                                                                                                                                                         |
 | DNS               | テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤り、DNS エントリの構成の誤りなどの原因が考えられます。                                                                                                                                                                                                                                                                                                                  |
 | `INVALID_REQUEST` | テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][14]。                                                                                                                                                                                                                                                                                                                                                      |
+| `SSL`             | SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][15]。                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。<br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、タイムアウトが TCP ソケットの接続レベルで発生したことを示します。<br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` は、タイムアウトがリクエストの実行全体 (TCP ソケット接続、データ転送、アサーション) で発生したことを示します。 |
 
 ## その他の参考資料
@@ -223,13 +223,14 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 [2]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
 [3]: /ja/synthetics/ci
 [4]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
-[5]: /ja/synthetics/api_tests/
-[6]: /ja/synthetics/search/#search
-[7]: https://restfulapi.net/json-jsonpath/
-[8]: /ja/api/v1/synthetics/#create-a-test
-[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[10]: /ja/monitors/notifications/?tab=is_alert#notification
-[11]: http://daringfireball.net/projects/markdown/syntax
-[12]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[13]: /ja/synthetics/settings/#global-variables
-[14]: /ja/synthetics/api_tests/errors/#ssl-errors
+[5]: /ja/synthetics/private_locations
+[6]: /ja/synthetics/api_tests/
+[7]: /ja/synthetics/search/#search
+[8]: https://restfulapi.net/json-jsonpath/
+[9]: /ja/api/v1/synthetics/#create-a-test
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[11]: /ja/monitors/notifications/?tab=is_alert#notification
+[12]: http://daringfireball.net/projects/markdown/syntax
+[13]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[14]: /ja/synthetics/settings/#global-variables
+[15]: /ja/synthetics/api_tests/errors/#ssl-errors

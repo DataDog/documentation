@@ -38,7 +38,7 @@ further_reading:
 
 ## すべてのパフォーマンスメトリクス
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][5]をご覧ください。サンプリング、グローバルコンテキスト、カスタムユーザーアクションの構成に関する情報は、[高度なコンフィギュレーション][6]をご覧ください。下記の表には、Datadog 専用のメトリクスと、[Navigation Timing API][7] および [Paint Timing API][8] から収集されるパフォーマンスメトリクスが示されています。
+すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][5]をご覧ください。サンプリングまたはグローバルコンテキストに関する情報は、[高度なコンフィギュレーション][6]をご覧ください。下記の表には、Datadog 専用のメトリクスと、[Navigation Timing API][7] および [Paint Timing API][8] から収集されるパフォーマンスメトリクスが示されています。
 
 | 属性                              | タイプ        | 説明                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,7 +48,7 @@ further_reading:
 | `view.dom_interactive`        | 数値（ns） | パーサーによりメインドキュメントの作業が終了する瞬間。[MDN ドキュメントの詳細][10]                                                                                                               |
 | `view.dom_content_loaded`     | 数値（ns） | 最初の HTML ドキュメントがレンダリング以外のブロッキングスタイルシート、画像、サブフレームの読み込み完了を待たずに完全に読み込まれ解析される際に発生するイベント。[MDN ドキュメントの詳細][11]。 |
 | `view.dom_complete`           | 数値（ns） | ページとすべてのサブリソースの準備が完了。ユーザー側では、ローディングスピナーの回転が停止。[MDN ドキュメントの詳細][12]                                                                             |
-| `view.load_event_end`         | 数値（ns） | ページが完全に読み込まれた際に発生するイベント。通常は追加のアプリケーションロジックのトリガー。[MDN ドキュメントの詳細][13]                                                                                   |
+| `view.load_event`         | 数値（ns） | ページが完全に読み込まれた際に発生するイベント。通常は追加のアプリケーションロジックのトリガー。[MDN ドキュメントの詳細][13]                                                                                   |
 | `view.error.count`            | 数値      | このビューについて収集されたすべてのエラーの数。                                                                                                                                                                        |
 | `view.long_task.count`        | 数値      | このビューについて収集されたすべてのロングタスクの数。                                                                                                                                                                           |
 | `view.resource.count`         | 数値      | このビューについて収集されたすべてのリソースの数。                                                                                                                                                                            |
@@ -75,6 +75,30 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
 
 RUM SDK は、ハッシュ (`#`) ナビゲーションに依存するフレームワークを自動的に監視します。SDK は `HashChangeEvent` を監視し、新しいビューを表示します。現在のビューのコンテキストに影響しない HTML アンカータグからくるイベントは無視されます。
 
+## 独自のパフォーマンスタイミングを追加
+RUM のデフォルトのパフォーマンスタイミングに加えて、アプリケーションで時間がかかっている場所をより柔軟に計測することが可能です。`addTiming` API を使用すると、パフォーマンスタイミングを簡単に追加できます。たとえば、ヒーロー画像が表示されたときのタイミングを追加します。
+
+```html
+<html>
+  <body>
+    <img onload="DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
+  </body>
+</html>
+```
+
+または、ユーザーが初めてスクロールしたとき:
+
+```javascript
+document.addEventListener("scroll", function handler() {
+    //1度だけトリガーするよう、イベントリスナーを削除
+    document.removeEventListener("scroll", handler);
+    DD_RUM.addTiming('first_scroll');
+});
+```
+
+タイミングが送信されると、タイミングは `@view.custom_timings.<timing_name>` (たとえば `@view.custom_timings.first_scroll`) としてアクセス可能になります。RUM 分析またはダッシュボードでグラフを作成する前に、[メジャーを作成][15]する必要があります。
+
+**注**: シングルページアプリケーションの場合、`addTiming` API により現在の RUM ビューの開始の相対的なタイミングが発行されます。たとえば、ユーザーがアプリケーションを表示し（初期ロード）、次に別のページを 5 秒間表示して（ルート変更）、8 秒後に `addTiming` をトリガーした場合、タイミングは 8-5 = 3 秒となります。
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -93,3 +117,4 @@ RUM SDK は、ハッシュ (`#`) ナビゲーションに依存するフレー�
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/History
+[15]: /ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures

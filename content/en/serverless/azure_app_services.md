@@ -10,6 +10,9 @@ further_reading:
 - link: "/integrations/azure_app_service_environment/"
   tag: "Documentation"
   text: "Azure App Service Environment"
+- link: "https://www.datadoghq.com/blog/azure-app-service-extension/"
+  tag: "Blog"
+  text: "Monitor .NET web apps with the Datadog extension for Azure App Service"
 - link: "https://www.datadoghq.com/pricing/?product=apm#apm-what-is-considered-as-a-host-for-azure-app-services"
   tag: "Pricing"
   text: "Azure App Service APM Pricing"
@@ -67,15 +70,15 @@ The Datadog extension for Azure App Services provides additional monitoring capa
     - Set `DD_SERVICE` to specify a service name (defaults to your web app name).
     - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your web app.
     - See a full list of [optional configuration variables][12].
-6. Click **Save** (this will restart your application).
-7. Stop your application: click **Stop**.
-8. Go to the Azure extenstions page and select the Datadog APM extension.
-    {{< img src="infrastructure/serverless/azure_app_services/extension.png" alt="Datadog extension" >}}
-9. Accept the legal terms, click **OK**, and wait for the installation to complete.
-10. Start the main application: click **Start**.
-    {{< img src="infrastructure/serverless/azure_app_services/restart.png" alt="Stop and restart page" >}}
+6. Click **Save** (this restarts your application).
+7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>
+8. Go to the Azure extensions page and select the Datadog APM extension.
+    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Datadog extension" >}}
+9. Accept the legal terms, click **OK**, and wait for the installation to complete. **Note**: the web app must be in a stopped state for this step to complete successfully.
+10. Start the main application, click **Start**:
+    {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Start" >}}
 
-## Application logging from Azure Web Apps
+### Application logging from Azure web apps
 
 Sending logs from your application in Azure App Services to Datadog requires the use of Serilog. Submitting logs with this method allows for trace ID injection, which makes it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
 

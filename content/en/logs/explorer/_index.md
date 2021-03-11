@@ -4,182 +4,196 @@ kind: documentation
 description: 'Search through all of your logs and perform Log Analytics'
 aliases:
     - /logs/explore
+    - /logs/patterns
+    - /logs/graph
+    - /logs/analytics
+    - /logs/explorer/list
+    - /logs/explorer/patterns
+    - /logs/explorer/analytics
+    - /logs/explorer/transactions/
 further_reading:
-    - link: 'logs/explorer/analytics'
-      tag: 'Documentation'
-      text: 'Perform Log Analytics'
     - link: 'logs/processing'
       tag: 'Documentation'
       text: 'Learn how to process your logs'
+    - link: 'logs/explorer/live_tail'
+      tag: 'Documentation'
+      text: 'The Log Live Tail'
+    - link: 'logs/explorer/side_panel'
+      tag: 'Documentation'
+      text: 'The log side panel'
     - link: 'logs/explorer/saved_views'
       tag: Documentation
       text: 'Automatically configure your Log Explorer'
-    - link: 'logs/explorer/patterns'
-      tag: Documentation
-      text: 'Detect patterns inside your logs'
     - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
       tag: Blog
       text: 'Add a Log Explorer url to your clipboard'
 ---
 
-## Overview
+The **Log Explorer** is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][1], or land here from any other context like monitor notifications or dashboard widgets, the Log Explorer is designed to iteratively:
 
-The Logs Explorer is your home base for troubleshooting and exploration:
+1. [**Filter**](#filters-logs) logs; to narrow down, broaden, or shift your focus on the subset of logs of current interest.
+2. [**Aggregate**](#aggregations-and-measures) queried logs into higher-level entities in order to derive or consolidate information.
+3. [**Visualize**](#visualizations) the outcome of filters and aggregations to put your logs into the right perspective and bubble up decisive information.
 
-{{< img src="logs/explorer/log_explorer_walkthrough.gif" alt="Explore view with comments" style="width:80%;" >}}
+At any moment, [**Export**](#export) your Log Explorer view to reuse it later or in different contexts.
 
-Different views offer different types of insights from your log data, matching a [search query][1].
+## Filters Logs
 
-### Live Tail
+The search filter consists of a timerange and a search query mixing `key:value` and full-text search. Refer to our [log search syntax][2] and [timerange][3] documentation for details on advanced use cases. For example, the search query `service:payment status:error rejected` over a `Past 5 minutes` timerange:
 
-The Live Tail displays logs as they flow into Datadog. Live Tail logs do not persist, but the view provides visibility on **all** logs, whether they are indexed or not. Find out more in the [Log Live Tail section][2].
+{{< img src="logs/explorer/search_filter.png" alt="Search Filter" style="width:100%;" >}}
 
-{{< img src="logs/explorer/log_explorer_walkthrough_livetail.gif" alt="Log Livetail" style="width:60%;" >}}
+[Indexed Logs][4] support both full-text search and `key:value` search queries.
 
-### Log Lists
+**Note**: `key:value` queries require that you [declare a facet][5] beforehand.
 
+## Aggregate and measure
 
-#### Individual Logs
+Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, aggregate your logs.
 
-The Log List displays indexed logs and offers privileged tools to navigate **individual results**. Find out more in the [Log List section][3].
+{{< img src="logs/explorer/aggregations.png" alt="Log Livetail" style="width:100%;" >}}
 
-{{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="Log List" style="width:60%;" >}}
+**Note**: Aggregations are supported for **indexed logs only**. If you need to perform aggregation on non-indexed logs, consider [temporary disabling exclusion filters][3], using [logs to metrics][6] and/or running a [rehydration][7] on your archives.
 
-#### Log Patterns
+### Fields
 
-The Log Patterns automatically aggregate indexed logs into a **handful of groups** with similar structures. Find out more in the [Log Patterns section][4].
+With the field aggregation, all logs matching the query filter are aggregated into groups based on the value of a log facet. On top of these aggregates, you can extract the following measures:
 
-{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
+- **count of logs** per group
+- **unique count** of coded values for a facet per group
+- **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a facet per group
 
-#### Log Transactions
+**Note**: Individual logs having multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-The Log Transactions automatically aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. Find out more in the [Log Transactions section][5].
+Groups support the [Timeseries](#timeseries), [Toplist](#toplist) and [Table](#table) visualizations.
 
-{{< img src="logs/explorer/log_explorer_walkthrough_transactions.png" alt="Log Transactions" style="width:60%;" >}}
+### Patterns
 
-### Log Analytics
+With pattern aggregation, logs that have a `message` with similar structures, belong to the same `service` and have the same `status` are grouped altogether. The patterns view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues:
 
-The Log Analytics **graph** log queries and see maximums, averages, percentiles, unique counts, and more. Follow the [log graphing guide][6] to learn more about all the graphing options.
+{{< img src="logs/explorer/aggregations_patterns.png" alt="Log Livetail" style="width:80%;" >}}
 
-{{< img src="logs/explorer/log_explorer_walkthrough_analytics.png" alt="Log Analytics" style="width:60%;" >}}
+**Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
 
-## The Log Side Panel
+Patterns support the [List Aggregates](#list-aggregates-of-logs) visualization. Clicking a pattern in the list opens the pattern side panel from which you can:
 
-Datadog displays individual logs following this general side-panel layout:
+- Access a sample of logs from that pattern
+- Append the search filter to scope it down to logs from this pattern only
+- Get a kickstart for a [grok parsing rule][7] to extract structured information logs of that pattern
 
-{{< img src="logs/explorer/log_side_panel.png" alt="Log Side Panel"  style="width:60%;">}}
+{{< img src="logs/explorer/patterns_side_panel.png" alt="Log Livetail" style="width:80%;" >}}
 
-### Log structured information
+### Transactions
 
-- The upper part of the panel displays general **context** information.
-- The lower part of the panel displays the actual **content** of the log.
+Transactions aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. For example, an e-commerce website groups log events across various user actions, such as catalog search, add to cart, and checkout, to build a transaction view using a common attribute such as `requestId` or `orderId`.
 
-**Context** refers to the infrastructure and application context in which the log has been generated. Information is gathered from tags—whether automatically attached (host name, container name, log file name, serverless function name, etc.)—or added through custom tags (team in charge, environment, application version, etc.) on the log by the Datadog Agent or Log Forwarder.
+{{< img src="logs/explorer/aggregations_transactions.png" alt="Log Livetail" style="width:80%;" >}}
 
-**Content** refers to the log itself. This includes the log message, as well as all structured information extracted and enriched from the logs through [Log Pipelines][7]. For logs generated by common components of a technical stack, parsing and enriching comes out-of-the-box:
+**Note**: The transaction aggregation differs from the natural group aggregation, in the sense that resulting aggregates not only include logs matching the query, but also all logs belonging to the related transactions.
 
-- For file log collection, make sure you properly set up the source field, which triggers file log collection. See Datadog's [100+ Log Integrations][8] for reference.
-- For container log collection, use [Autodiscovery][9].
+- **Duration**: The difference of timestamps for the last and first log in the transaction. _This measure is automatically added_.
+- **Maximum Severity** found in logs in the transaction. _This measure is automatically added_.
+- **Finding key items:** For any `facet` with string values, calculate specific log event information using the operations `count unique`, `latest`, `earliest` and `most frequent`.
+- **Getting Statistics:** For any `measure`, calculate statistical information using the operations `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99`.
 
-Some standard fields—for instance, `error.stack`, `http.method`, or `duration`—have specific enhanced displays in the Log Panel for better readability. Make sure you extract corresponding information from your logs and remap your attributes with [standard attribute remappers][10].
+Transactions support the [List Aggregates](#list-aggregates-of-logs) visualization. Clicking a pattern in the list opens the pattern side panel from which you can:
 
-### A hub to other data sources
+- Access all logs within that transaction
+- Search specific logs within that transaction
 
-#### Correlation with Infrastructure (Host, Container, Serverless) data
+{{< img src="logs/explorer/transactions_side_panel.png" alt="Log Livetail" style="width:80%;" >}}
 
-The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
+## Visualize
 
-Click on the **Metrics Tab** and access underlying infrastructure metrics in a 30 minutes timeframe around the log.
+Visualizations define how the outcome of filter and aggregates are displayed.
 
-Interact with **Host** in the upper reserved attributes section, the related [host dashboard][11] or [network page][12]. Interact with **Container** sections to jump to the [container page][13] scoped with the underlying parameters.
+### Lists
 
-{{< img src="logs/explorer/log_side_panel_infra.gif" alt="Hub to Infra" style="width:60%;">}}
+Lists are **paginated** results of logs or aggregates. They are valuable when individual results matter, but you have no prior or clear knowledge on what defines a matching result. Lists allow you examine a group of results.
 
-In case logs comes from a serverless source, the Host Section is replaced with a Serverless section that links jump to the corresponding [serverless page][14].
+Lists displaying individual logs and lists displaying aggregates of logs have slightly different capabilities.
 
-{{< img src="logs/explorer/log_side_panel_infra-serverless.png" alt="Hub to Serverless" style="width:60%;">}}
+#### List of logs
 
+For a list of individual logs, choose which information of interest to display as columns. **Manage the columns** of the table using either:
 
-#### Correlation with APM data
+- The **table**, with interactions available in the first row. This is the preferred method to **sort**, **rearrange**, or **remove** columns.
+- The **facet panel** the the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
 
-Make sure you enable [trace injection in logs][15] and follow our [Unified Service Tagging][16] best practices to benefit from all the capabilities of Logs and APM correlation.
+With the **Options** button, control the **number of lines** displayed in the table per log event.
 
-Click on the **APM Tab** and see the log in the context of its whole trace, with upstream and downstream services running. Deep dive in the APM data and the [trace in APM][17].
+{{< img src="logs/explorer/table_controls.gif" alt="configure display table"  style="width:80%;">}}
 
-Interact with the **Service** section to refocus the search in the log explorer and see all other logs from the same trace.
+The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that sorting your table according to a specific field requires that you [declare a facet][5] beforehand.
 
-{{< img src="logs/explorer/log_side_panel_infra.gif" alt="Hub to APM" style="width:60%;">}}
+The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][1]
 
+#### List aggregates of logs
 
-### Configure your troubleshooting context
+The columns displayed in list of aggregates are columns **derived from the aggregation**.
 
-Interact with the attributes names and values in the lower JSON section to:
+Results are sorted according to:
 
-- Add or remove a column from the logs table.
-- Append the search request with specific values (include or exclude)
+- Number of matching events per aggregate for **pattern** aggregation (default to descending: more to less)
+- Lexicographic order of the transaction id for **transaction** aggregation (default to ascending: A to Z)
 
-{{< img src="logs/explorer/side_panel_context.gif" alt="Side Panel context"  style="width:60%;">}}
+### Timeseries
 
-- Build or edit a facet or measure from an attribute. See [Log Facets][18].
+Visualize the evolution of a single [measure][2] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
 
-{{< img src="logs/explorer/side_panel_facets.gif" alt="Side Panel Facets"  style="width:60%;">}}
+The following Timeseries log analytics shows the evolution of the **top 5 URL Paths** according to the number of **unique client IPs** over the last month.
 
-### Share a log
+{{< img src="logs/explorer/timeseries.png" alt="timeserie example"  style="width:90%;">}}
 
-Use the **Share** button to share the log opened in side panel to other contexts.
+Choose additional display options for timeseries: the **roll-up interval**, whether you **display** results as **bars** (recommended for counts and unique counts), **lines** (recommended for statistical aggregations) or **areas**, and the **colorset**.
 
-- **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
-- **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][19] available.
+### Toplists
 
-{{< img src="logs/explorer/upper_log_panel.png" alt="Upper Log Panel"  style="width:50%;">}}
+Visualize the top values from a [facet][2] according to the chosen [measure][2].
 
-## Troubleshooting Context
+For example, the following Toplist shows the **top 15 Customers** on a merchant website according to the number of **unique sessions** they had over the last day.
 
-### Search Filter
+{{< img src="logs/explorer/toplists.png" alt="top list example"  style="width:90%;">}}
 
-Build up a context to explore your logs in your log explorer view. First, select the proper time range. Then, use the search bar to filter your Logstream and Log Analytics.
+### Nested tables
 
-**Time Range**
+Visualize the top values from a [facet][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update a search query or drill through logs corresponding to either dimension.
 
-The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period.
-It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the Logstream option panel.
+- When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+- When there are multiple measures, the top or bottom list is determined according to the first measure.
+- The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
-Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][20]):
+**Note**: A table visualization used for one single measure and one single dimension is the same as a Toplist, just with a different display.
 
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange"  >}}
+The following table log analytics show the evolution of the **Top 10 Availability zones**, and for each Availability Zone the **Top 10 Versions** according to their **number or error logs**, along with the number of unique count of **Hosts** and **Container ID** for each.
 
-**Search**
+{{< img src="logs/explorer/nested_tables.png" alt="table example"  style="width:90%;">}}
 
-Use facets, measures, tags, or even [free text search][1] to filter your Logstream and Log Analytics with dedicated context. The search bar and URL automatically reflect your selections.
+## Export
 
-Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
+At any moment, and depending on your current aggregation, **export** your exploration as a:
 
-### Saved views
+- [**Saved View**][1] to use as an investigation starting point for future-yourself or your teammates
+- [**Dashboard widget**][8] for reporting or consolidation purpose
+- [**Monitor**][9] to trigger alerts on predefined thresholds
+- [**Metric**][6] to aggregate your logs into long term KPIs, as they are ingested in Datadog
+- **CSV** (for individual logs and transactions). You can export up to 5,000 logs at once for individual logs, 500 for Transactions.
+- **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][10] available for this feature.
 
-Use saved views to automatically configure your log explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][21] to learn more.
+{{< img src="logs/explorer/export.png" alt="Search Filter" style="width:100%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/search-syntax/
-[2]: /logs/explorer/live_tail/
-[3]: /logs/explorer/list/
-[4]: /logs/explorer/patterns/
-[5]: /logs/explorer/transactions/
-[6]: /logs/explorer/analytics/
-[7]: /logs/processing/pipelines/
-[8]: /integrations/#cat-log-collection
-[9]: /agent/autodiscovery/integrations/?tab=kubernetes
-[10]: /logs/processing/attributes_naming_convention/
-[11]: /dashboards/#preset-lists
-[12]: /network_monitoring/performance/network_page/
-[13]: /infrastructure/livecontainers/?tab=linuxwindows#introduction
-[14]: /infrastructure/serverless/#function-detail-view
-[15]: /tracing/connect_logs_and_traces/
-[16]: /getting_started/tagging/unified_service_tagging
-[17]: /tracing/app_analytics/search/#displaying-a-full-trace
-[18]: /logs/explorer/facets/#overview
-[19]: /logs/processing/
-[20]: /dashboards/guide/custom_time_frames
-[21]: /logs/explorer/saved_views/
+[1]: /logs/explorer/saved_views/
+[2]: /logs/search-syntax
+[3]: /dashboards/guide/custom_time_frames
+[4]: /logs/indexes
+[5]: /logs/explorer/facets/
+[6]: /logs/logs_to_metrics
+[7]: /logs/processing/processors/#grok-parser
+[8]: /dashboards/
+[9]: /monitors/monitor_types/log/
+[10]: /integrations/#cat-notification
+[11]: /logs/explorer/watchdog-insights

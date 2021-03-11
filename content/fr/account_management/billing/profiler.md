@@ -11,70 +11,70 @@ Le service [Profileur en continu de Datadog][1] vous permet d'analyser les perfo
 
 **Remarque :** un conteneur profilé est un conteneur qui exécute le service Profileur en continu. Les conteneurs non profilés ne sont pas inclus. Par exemple, si un conteneur de service DNS qui n'est pas profilé s'exécute en même temps qu'un conteneur d'application profilé, le premier conteneur sera pas comptabilisé dans le quota de quatre conteneurs profilés.
 
-## Exemples de scénarios de déploiement
+## Scénarios de déploiement
 
 Ces exemples illustrent des cas d'utilisation courants avec des tarifs correspondant à une facturation annuelle. Contactez votre représentant commercial ou votre [chargé de compte][3] pour discuter d'éventuels tarifs préférentiels.
 
-### Cas nº 1 : hosts sans conteneurs
+### Hosts sans conteneurs
 
 Utilisation de 5 hosts exécutant une application profilée dans chaque host. Aucun conteneur.
 
 | Unité de facturation  | Quantité   | Prix                                                                                           | Formule       | Sous-total              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | Hosts APM      | 5          | 12 $ par host                                                                                    | 5 * 12 $       | 60 $                   |
-| Conteneurs profilés  | 0 par host | 0  $, car il n'y a aucun surplus                                                              | 0 * 2 $        | 0 $                    |
+| Conteneurs profilés  | 0 par host | 0 $, car il n'y a aucun conteneur supplémentaire                                                              | 0 * 2 $        | 0 $                    |
 | Total          |            |                                                                                                 | 60 $ + 0 $      | **60 $ par mois**    |
 
 
-### Cas nº 2 : hosts avec 4 conteneurs profilés
+### Hosts avec 4 conteneurs profilés
 
 Utilisation de 5 hosts exécutant chacun 4 conteneurs profilés. Un conteneur profilé est un conteneur qui exécute le service Profileur en continu et envoie des données de profiling à l'Agent Datadog. Les conteneurs non profilés ne sont pas pris en compte.
 
 | Unité de facturation  | Quantité   | Prix                                                                                           | Formule       | Sous-total              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | Hosts APM      | 5          | 12 $ par host                                                                                    | 5 * 12 $       | 60 $                   |
-| Conteneurs profilés  | 4 par host | 0 $, car l'utilisation de 4 conteneurs rentre exactement dans le quota. Aucun conteneur en surplus n'est facturé.        | 0 * 2 $        | 0 $                    |
+| Conteneurs profilés  | 4 par host | 0 $, car l'utilisation de 4 conteneurs rentre exactement dans le quota. Aucuns frais supplémentaires ne sont facturés.        | 0 * 2 $        | 0 $                    |
 | Total          |            |                                                                                                 | 60 $ + 0 $      | **60 $ par mois**    |
 
 
-### Cas nº 3 : hosts avec 6 conteneurs profilés
+### Hosts avec 6 conteneurs profilés
 
 Utilisation de 5 hosts exécutant chacun 6 conteneurs profilés. Un conteneur profilé est un conteneur qui exécute le service Profileur en continu et envoie des données de profiling à l'Agent Datadog. Les conteneurs non profilés ne sont pas pris en compte.
 
 | Unité de facturation  | Quantité   | Prix                                                                                           | Formule       | Sous-total              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | Hosts APM      | 5          | 12 $ par host                                                                                    | 5 * 12 $       | 60 $                   |
-| Conteneurs profilés  | 6 par host | 2 $ par conteneur en surplus par host. Ici, il y a 6-4 = 2 conteneurs en surplus pour chaque host.        | 2  * 2 $ * 5 hosts         | 20 $                   |
+| Conteneurs profilés  | 6 par host | 2 $ par conteneur supplémentaire par host. Ici, il y a 6 - 4 = 2 conteneurs supplémentaires pour chaque host.        | 2  * 2 $ * 5 hosts         | 20 $                   |
 | Total          |            |                                                                                                 | 60 $ + 20 $      | **80 $ par mois**    |
 
 
-### Cas nº 4 : hosts avec 5 conteneurs, dont 2 seulement sont profilés
+### Hosts avec 5 conteneurs, dont 2 seulement sont profilés
 
 Utilisation de 4 hosts exécutant chacun 5 conteneurs, mais seulement deux d'entre eux sont des conteneurs profilés. Un conteneur profilé est un conteneur qui exécute le service Profileur en continu et envoie des données de profiling à l'Agent Datadog. Les conteneurs non profilés ne sont pas pris en compte.
 
 | Unité de facturation  | Quantité   | Prix                                                                                           | Formule       | Sous-total              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | Hosts APM      | 5          | 12 $ par host                                                                                    | 5 * 12 $       | 60 $                   |
-| Conteneurs profilés  | 2 par host | 0 $, car  avec 2 conteneurs, on reste en dessous du quota et aucuns frais liés à un surplus ne sont émis. Les 3 conteneurs restants qui n'envoient pas de données de profiling ne sont pas comptabilisés dans le quota.         | 0 * 2 $        | 0 $                    |
+| Conteneurs profilés  | 2 par host | 0 $, car avec 2 conteneurs, on reste en dessous du quota. Aucuns frais supplémentaires ne sont facturés. Les 3 conteneurs restants qui n'envoient pas de données de profiling ne sont pas comptabilisés dans le quota.         | 0 * 2 $        | 0 $                    |
 | Total          |            |                                                                                                 | 60 $ + 0 $      | **60 $ par mois**    |
 
 
-### Cas nº 5 : hosts exécutant des nombres différents de conteneurs profilés
+### Hosts exécutant des nombres différents de conteneurs profilés
 
 Utilisation de deux hosts profilés : Host A et Host B.
 
 * Host A exécute 8 conteneurs
 * Host B exécute 2 conteneurs
 
-Les 10 conteneurs exécutent des instances d'applications qui sont profilées, ce qui signifie que Host A exécute 4 conteneurs en surplus et que Host B peut ajouter 2 conteneurs supplémentaires.
+Les 10 conteneurs exécutent des instances d'applications qui sont profilées, ce qui signifie que Host A exécute 4 conteneurs supplémentaires non compris dans l'offre et que Host B peut ajouter 2 conteneurs supplémentaires.
 
-Dans ce scénario, tous les conteneurs de tous les hosts (soit 2 hosts et 10 conteneurs) sont agrégés. Huit conteneurs sont alors inclus dans le prix, et 2 conteneurs sont en surplus. Le calcul détaillé est le suivant :
+Dans ce scénario, tous les conteneurs de tous les hosts (soit 2 hosts et 10 conteneurs) sont agrégés. Le prix inclut alors 8 conteneurs, et 2 conteneurs sont ajoutés. Le calcul détaillé est le suivant :
 
 
 | Unité de facturation  | Quantité   | Prix                                                                                           | Formule       | Sous-total              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | Hosts APM      | 5          | 12 $ par host                                                                                    | 2 * 12 $       | 24 $                   |
-| Conteneurs profilés  | 10 après agrégation de host A et de host B | 2 $ par conteneur en surplus. Ici, 2 hosts permettent d'utiliser jusqu'à 8 conteneurs, mais on a calculé 2 conteneurs en surplus pour les 2 hosts : 10-8 = 2 conteneurs en surplus.        | 2 $ * 2 hosts        | 4 $                    |
+| Conteneurs profilés  | 10 après agrégation de host A et de host B | 2 $ par conteneur supplémentaire. Ici, 2 hosts permettent d'utiliser jusqu'à 8 conteneurs, mais il faut ajouter 2 conteneurs en surplus pour les 2 hosts : 10 - 8 = 2 conteneurs supplémentaires.        | 2 $ * 2 hosts        | 4 $                    |
 | Total          |            |                                                                                                 | 24 $ + 4 $      | **28 $ par mois**    |
 
 

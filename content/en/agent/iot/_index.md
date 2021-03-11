@@ -1,7 +1,6 @@
 ---
 title: IoT Agent
 kind: documentation
-beta: true
 further_reading:
   - link: "/getting_started/agent/"
     tag: "Documentation"
@@ -11,10 +10,6 @@ further_reading:
 ## Overview
 
 The Datadog IoT Agent is a version of the Agent optimized for monitoring IoT devices and embedded applications. Customers use the IoT Agent to monitor a wide variety of devices from digital displays to security devices running image detection algorithms.
-
-<div class="alert alert-warning">
-The IoT Agent is currently available for private beta. Request access by completing the <a href="https://docs.google.com/forms/d/e/1FAIpQLSfaoqr9Pgievq7f2WE6wcQMF1YjsOwiXHbmO2FehUlQwmNu0A/viewform?usp=sf_link">form</a>.
-</div>
 
 ## Capabilities
 
@@ -116,7 +111,7 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
-    
+
     The `baseurl` is dependent on your host OS:
     - x86_64 - `https://yum.datadoghq.com/stable/7/x86_64/`
     - arm64 - `https://yum.datadoghq.com/stable/7/aarch64/`

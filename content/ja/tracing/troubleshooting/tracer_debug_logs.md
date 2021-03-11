@@ -8,21 +8,29 @@ Datadog デバッグ設定を使用して、問題を診断したり、トレー
 
 <mrk mid="28" mtype="seg"/><mrk mid="29" mtype="seg"/>
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+
+{{< programming-lang lang="java" >}}
 
 Datadog Java トレーサーのデバッグモードを有効にするには、JVM の起動時にフラグ `-Ddd.trace.debug=true` を設定するか、環境変数として `DD_TRACE_DEBUG=true` を追加します。
 
-**注**: Datadog Java トレーサーは SL4J SimpleLogger を実装するため、[そのすべての設定を適用できます][1]。例えば、専用のログファイルにロギングするには次のようにします。`-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+**注**: Datadog Java トレーサーは SL4J SimpleLogger を実装するため、[そのすべての設定を適用できます][1]。例えば、専用のログファイルにロギングするには次のようにします。
+```
+-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+```
 
 [1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
-{{% /tab %}}
-{{% tab "Python" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
 
 Datadog Python トレーサーのデバッグモードを有効にするには、`ddtrace-run` を使用するときに環境変数 `DATADOG_TRACE_DEBUG=true` を設定します。
+<p></p>
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 Datadog Rubyトレーサーのデバッグモードを有効にするには、トレーサー初期化構成で `debug` オプションを `true` に設定します。
 
@@ -52,8 +60,10 @@ Datadog::Tracer.log.info { &quot;this is typically called by tracing code&quot; 
 詳細については、[API に関するドキュメント][1]を参照してください。
 
 [1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
-{{% /tab %}}
-{{% tab "Go" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 Datadog Goトレーサのデバッグモードを有効にするには、`Start` 構成中にデバッグモードを有効にします。
 
@@ -68,9 +78,9 @@ func main() {
 }
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab "Node" %}}
+{{< programming-lang lang="nodejs" >}}
 
 Datadog Node.js トレーサーのデバッグモードを有効にするには、`init` 中にそれを有効にします。
 
@@ -119,8 +129,10 @@ const tracer = require('dd-trace').init({
 [3]: /ja/help/
 [4]: /ja/agent/troubleshooting/#send-a-flare
 [5]: https://datadog.github.io/dd-trace-js/#tracer-settings
-{{% /tab %}}
-{{% tab ".NET" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
 
 Datadog .NET トレーサーのデバッグモードを有効化するには、`DD_TRACE_DEBUG` コンフィギュレーションの設定を `true` に設定します。この設定は、`web.config` ファイル、`app.config` ファイル (.NET Framework のみ)、`datadog.json` ファイルで環境変数として設定できます。デバッグモードは、`GlobalSettings.SetDebugEnabled(true)` を呼び出すことで有効化することもできます。
 
@@ -149,8 +161,10 @@ GlobalSettings.SetDebugEnabled(true);
 
 
 [1]: /ja/tracing/setup/dotnet/#configuration
-{{% /tab %}}
-{{% tab "PHP" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="php" >}}
 
 <mrk mid="78" mtype="seg"/><mrk mid="79" mtype="seg">この環境変数値をトレーサーが適切に処理できるように設定する方法とタイミングについては、[PHP 構成に関するドキュメント][1]を参照してください。</mrk>
 
@@ -161,8 +175,10 @@ GlobalSettings.SetDebugEnabled(true);
 <mrk mid="83" mtype="seg">PHP レベルで構成する場合は、PHP の `error_log` 初期化パラメーターを使用します。</mrk>
 
 [1]: https://www.php-fig.org/psr/psr-3
-{{% /tab %}}
-{{% tab "C++" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="cpp" >}}
 
 すべてのリリースバイナリライブラリは、最適化されたリリースにデバッグシンボルが追加されコンパイルされています。GDB または LLDB を使用してライブラリをデバッグしたり、コアダンプを読み取ることができます。ソースからライブラリを構築する場合は、引数 `-DCMAKE_BUILD_TYPE=RelWithDebInfo` を cmake に渡して、最適化されたビルドをデバッグシンボル付きでコンパイルします。
 
@@ -173,8 +189,9 @@ make
 make install
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 ### トレーサーデバッグログのレビュー
 
@@ -182,17 +199,16 @@ make install
 
 理解できないエラーがある場合、またはトレースが Datadog にフラッシュされたと報告されたものの　Datadog UI に表示されない場合は、[Datadog サポートに連絡][1]し、[フレア][2] で関連するログエントリを入力します。
 
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
 
-{{< tabs >}}
-{{% tab "Java" %}}
-
-### トレーサーの初期化ログ
+**トレーサーの初期化ログ:**
 
 ```java
 [main] DEBUG datadog.trace.agent.ot.DDTracer - Using config: Config(runtimeId=<ランタイム ID>, serviceName=<サービス名>, traceEnabled=true, writerType=DDAgentWriter, agentHost=<ここに IP>, agentPort=8126, agentUnixDomainSocket=null, prioritySamplingEnabled=true, traceResolverEnabled=true, serviceMapping={}, globalTags={env=none}, spanTags={}, jmxTags={}, excludedClasses=[], headerTags={}, httpServerErrorStatuses=[512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511], httpClientErrorStatuses=[400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499], httpClientSplitByDomain=false, partialFlushMinSpans=1000, runtimeContextFieldInjection=true, propagationStylesToExtract=[DATADOG], propagationStylesToInject=[DATADOG], jmxFetchEnabled=true, jmxFetchMetricsConfigs=[], jmxFetchCheckPeriod=null, jmxFetchRefreshBeansPeriod=null, jmxFetchStatsdHost=null, jmxFetchStatsdPort=8125, logsInjectionEnabled=false, reportHostName=false)
 ```
 
-### 生成されるトレースの例
+**生成されるトレースの例:**
 
 ```java
 [http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.DDSpan - Finished: DDSpan [ t_id=<トレース id>, s_id=<スパン id>, p_id=<親 id>] trace=SpringBoot_Service/OperationHandler.handle/OperationHandler.handle metrics={} tags={component=spring-web-controller, env=none, span.kind=server, thread.id=33, thread.name=http-nio-8080-exec-1}, duration_ns=92808848
@@ -201,27 +217,25 @@ make install
 [http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - Writing 2 spans to DDAgentWriter { api=DDApi { tracesUrl=http://<IP アドレス>/v0.4/traces } }.
 ```
 
-### トレースが Datadog Agent に送信された
+**トレースが Datadog Agent に送信されました:**
 
 ```java
 [http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - traceId: <トレース id> -- Expired reference. count = 0
 [dd-trace-writer] DEBUG datadog.trace.agent.common.writer.DDApi - Successfully sent 1 of 2 traces to the DD agent.
 ```
 
-
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 さらに表示するには、`DD_LOGGING_RATE_LIMIT=0` を含めます。
 
-### トレースが生成された
+**トレースが生成されました:**
 
 ```shell
 <YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:470] - writing 8 spans (enabled:True)
 ```
 
-
-### Python トレーサーによって生成されたスパン
+**Python トレーサーによって生成されたスパン:**
 
 ```text
 <YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:472] -
@@ -248,17 +262,16 @@ make install
 ```
 
 
-### トレースが Datadog Agent に送信された
+**トレースが Datadog Agent に送信されました:**
 
 ```shell
 <YYYY-MM-DD> 16:01:11,637 DEBUG [ddtrace.api] [api.py:236] - reported 1 traces in 0.00207s
 ```
 
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-### スパンが生成される
+**スパンが生成されます:**
 
 ```shell
 D, [<YYYY-MM-DD>T16:42:51.147563 #476] DEBUG -- ddtrace: [ddtrace] (/usr/local/bundle/gems/ddtrace-<version>/lib/ddtrace/tracer.rb:371:in `write') Writing 4 spans (enabled: true)
@@ -290,27 +303,30 @@ Metrics: [
 ```
 
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
 
-### Agent へのトレース送信試行
+{{< programming-lang lang="go" >}}
+
+
+**Agent へのトレース送信試行:**
 
 ```shell
 YYYY/MM/DD 16:06:35 Datadog Tracer <バージョン> DEBUG: Sending payload: size: <トレースのサイズ> traces: <トレースの数>.
 ```
 
 
-### トレースを Agent に送信できなかった
+**トレースを Agent に送信できませんでした:**
 
 ```shell
 2019/08/07 16:12:27 Datadog Tracer <バージョン> ERROR: lost <トレースの数> traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused, 4 additional messages skipped (first occurrence: DD MM YY 16:11 UTC)
 ```
 
 
-{{% /tab %}}
-{{% tab "Node" %}}
+{{< /programming-lang >}}
 
-### Agent へのトレース送信の問題
+{{< programming-lang lang="nodejs" >}}
+
+**Agent へのトレース送信の問題:**
 
 ```json
 {
@@ -330,17 +346,19 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <バージョン> DEBUG: Sending payload: siz
 ```
 
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
 
-### ネイティブコードからのログ
+{{< programming-lang lang=".NET" >}}
+
+
+**ネイティブコードからのログ:**
 
 ```shell
 [dotnet] 19861: [debug] JITCompilationStarted: function_id=<関数 id> token=<トークン id> name=System.Net.Http.Headers.HttpHeaders.RemoveParsedValue()
 ```
 
 
-### スパンを示すマネージコードからのログが生成されました
+**スパンを示すマネージコードからのログが生成されました:**
 
 ```shell
 { MachineName: ".", ProcessName: "dotnet", PID: <プロセス id>, AppDomainName: "test-webapi" }
@@ -349,8 +367,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span started: [s_id: <スパン id>, 
 YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span closed: [s_id: <スパン id>, p_id: <親スパン id>, t_id: <トレース id>] for (Service: test-webapi, Resource: custom, Operation: custom.function, Tags: [<スパンタグ>])
 ```
 
-
-### トレースを示すマネージコードからのログを Datadog Agent に送信できませんでした
+**トレースを示すマネージコードからのログを Datadog Agent に送信できませんでした:**
 
 ```shell
 YYYY-MM-DD HH:MM:SS.<整数> +00:00 [ERR] An error occurred while sending traces to the agent at System.Net.Http.HttpRequestException: Connection refused ---> System.Net.Sockets.SocketException: Connection refused
@@ -359,10 +376,12 @@ YYYY-MM-DD HH:MM:SS.<整数> +00:00 [ERR] An error occurred while sending traces
 ```
 
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
 
-### スパンの生成
+{{< programming-lang lang="php" >}}
+
+
+**スパンの生成:**
 
 ```shell
 [Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <スパン id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
@@ -370,23 +389,23 @@ YYYY-MM-DD HH:MM:SS.<整数> +00:00 [ERR] An error occurred while sending traces
 
 
 
-### Agent へのトレース送信試行
+**Agent へのトレース送信試行:**
 
 ```shell
 [Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
 ```
 
 
-### トレースが Agent に正常に送信された
+**トレースが Agent に正常に送信されました:**
 
 ```shell
 [Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
 ```
 
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
 
+{{< /programming-lang-wrapper >}}
 
 [1]: /ja/help/
 [2]: /ja/agent/troubleshooting/#send-a-flare

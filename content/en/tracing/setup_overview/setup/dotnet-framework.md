@@ -26,12 +26,15 @@ further_reading:
     - link: 'tracing/visualization/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
-    - link: 'tracing/'
-      tag: 'Advanced Usage'
-      text: 'Advanced Usage'
     - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/samples"
       tag: "GitHub"
       text: "Examples of Custom Instrumentation"
+    - link: "/tracing/connect_logs_and_traces/dotnet/"
+      tag: "Documentation"
+      text: "Connect .NET application logs to traces"
+    - link: "/serverless/azure_app_services/"
+      tag: "Documentation"
+      text: "Microsoft Azure App Services Extension"
 ---
 ## Compatibility requirements
 
@@ -166,6 +169,10 @@ example.exe
 
 To configure the Tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
 
+<div class="alert alert-warning"> 
+  <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
+</div>
+
 ```csharp
 using Datadog.Trace;
 using Datadog.Trace.Configuration;
@@ -186,9 +193,6 @@ var tracer = new Tracer(settings);
 Tracer.Instance = tracer;
 ```
 
-<div class="alert alert-warning"> 
-<strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properies after the <code>Tracer</code> is created are ignored.
-</div>
 {{% /tab %}}
 
 {{% tab "web.config" %}}
@@ -252,6 +256,7 @@ The following table lists the supported configuration variables that are availab
 | `DD_TRACE_DEBUG`<br/><br/>`DebugEnabled`           | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
 | `DD_TRACE_HEADER_TAGS`<br/><br/> `HeaderTags`       | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Added in version 1.18.3      |
 | `DD_TAGS`<br/><br/>`GlobalTags`                     | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`). Added in version 1.17.0                                  |
+| `DD_TRACE_SERVICE_MAPPING`                          | Rename services using configuration. Accepts a map of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. For example: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`. `from-key` is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0  |
 
 
 ### Automatic instrumentation optional configuration

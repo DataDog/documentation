@@ -8,7 +8,11 @@ datadog:
   acExclude: "name:datadog-agent"
   apm:
     enabled: true
+  orchestratorExplorer:
+    enabled: false
 agents:
   rbac:
     create: false
     serviceAccountName: datadog-agent
+clusterAgent:
+  enabled: false

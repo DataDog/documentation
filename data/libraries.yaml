@@ -65,7 +65,7 @@ Classic:
     - name: dogstatsde
       link: https://github.com/waisbrot/dogstatsde
       dogstatsd: true
-      authors: waisbrot    
+      authors: waisbrot
   - Go:
     - name: datadog-go
       link: https://github.com/DataDog/datadog-go
@@ -205,6 +205,11 @@ Classic:
       official: true
       api: true
       authors: Datadog
+    - name: datadog_api_client
+      link: https://github.com/DataDog/datadog-api-client-ruby
+      official: true
+      api: true
+      authors: Datadog
     - name: dogstatsd-ruby
       link: https://github.com/DataDog/dogstatsd-ruby
       official: true
@@ -225,6 +230,12 @@ Classic:
       api: true
       authors: NomadBlacky
       notes: Datadog API client for Scala.
+  - Swift:
+    - name: DatadogSDK
+      link: https://github.com/DataDog/dd-sdk-ios
+      api: true
+      official: true
+      authors: Datadog
   - Swift:
     - name: SwiftDog
       link: https://github.com/jaronoff97/SwiftDog

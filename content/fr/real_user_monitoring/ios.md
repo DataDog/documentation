@@ -217,7 +217,7 @@ Exemple :
 // dans votre client réseau :
 
 Global.rum.startResourceLoading(
-    resourceKey: "resource-key", 
+    resourceKey: "resource-key",
     request: request
 )
 

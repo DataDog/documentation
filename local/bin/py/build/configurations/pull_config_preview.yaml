@@ -73,6 +73,21 @@
       - "*/assets/service_checks.json"
       - "*/README.md"
 
+  - repo_name: marketplace
+    contents:
+
+    - action: marketplace-integrations
+      branch: master
+      globs:
+      - "*/metadata.csv"
+      - "*/manifest.json"
+      - "*/assets/service_checks.json"
+      - "*/README.md"
+      - "*/images/*.png"
+      - "*/images/*.jpg"
+      - "*/images/*.jpeg"
+      - "*/images/*.svg"
+
   - repo_name: ansible-datadog
     contents:
 

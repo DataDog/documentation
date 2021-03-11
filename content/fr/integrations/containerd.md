@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/containerd/README.md'
 display_name: Containerd
+draft: false
 git_integration_title: containerd
 guid: 5cdc0363-a0df-469b-8346-2da4ab84128c
 integration_id: containerd
@@ -32,7 +34,7 @@ supported_os:
 
 Ce check surveille le délai de runtime de conteneur de Containerd.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -109,7 +111,7 @@ Le check Containerd peut recueillir des événements. Utilisez `filters` pour s
 
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.example
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default
 [2]: https://docs.datadoghq.com/fr/help/
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/containerd/metadata.csv

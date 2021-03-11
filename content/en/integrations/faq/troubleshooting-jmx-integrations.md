@@ -24,28 +24,32 @@ If you're able to connect using the command above, run: `beans` and send to the 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-* Content of `/var/log/datadog/agent.log`
-* Output of the [info command][1]
+* [Agent Flare][1], which includes:
+  * Output of the [status command][2].
+  * Content of `/var/log/datadog/agent.log`
+  * Content of `/var/log/datadog/jmxfetch.log`
+  * A copy of the YAML integration.
 * Output of: `ps aux | grep jmxfetch`
-* A copy of the YAML integration (send the file)
+* Output of: `sudo -u dd-agent datadog-agent jmx list everything -l debug` (Appending `--flare` includes the output in the flare for version 6.26.x/7.26.x)
 
-[1]: /agent/guide/agent-commands/#agent-status-and-information
+[1]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[2]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-* [Agent logs][1]
-* Output of the [info command][2]
+* [Agent Flare][1], which includes:
+  * Output of the [info command][2].
+  * Content of `/var/log/datadog/jmxfetch.log`
+  * A copy of the YAML integration.
 * Output of: `ps aux | grep jmxfetch`
-* Content of `/var/log/datadog/jmxfetch.log`
 * Output of: `sudo /etc/init.d/datadog-agent jmx list_everything`
-* A copy of the YAML integration.
 
-**Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
-
-[1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command/
-[2]: /agent/guide/agent-commands/#agent-status-and-information
+[1]: /agent/troubleshooting/send_a_flare/?tab=agentv5
+[2]: /agent/guide/agent-commands/?tab=agentv5#agent-status-and-information
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: If you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
 ## Agent troubleshooting
 
@@ -63,9 +67,19 @@ These commands are available since v6.2.0:
 | `sudo -u dd-agent datadog-agent jmx list everything`   | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
 | `sudo -u dd-agent datadog-agent jmx collect`           | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
 
-By default theses commands run on all the configured jmx checks. If you want to use them for specific checks, specify them using the `--checks` flag :
+**Notes**:
 
-`sudo datadog-agent jmx list collected --checks tomcat`
+- By default these commands run on all the configured JMX checks. To limit the commands to specific checks, use the `--checks` flag, for example:
+
+  ```shell
+  sudo -u dd-agent datadog-agent jmx list collected --checks tomcat
+  ```
+
+- For Agent v6.26.+ / v7.26+, appending `--flare` writes the output of the above commands under `/var/log/datadog/jmxinfo/`, which is included in the flare.
+
+  ```shell
+  sudo -u dd-agent datadog-agent jmx list everything -l debug --flare
+  ```
 
 {{% /tab %}}
 {{% tab "Agent v6.0 and v6.1" %}}
@@ -99,9 +113,10 @@ Example:
 /usr/bin/java -Xmx200m -Xms50m -classpath /usr/lib/jvm/java-8-oracle/lib/tools.jar:/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch-0.18.2-jar-with-dependencies.jar org.datadog.jmxfetch.App --check cassandra.d/conf.yaml jmx.d/conf.yaml --conf_directory /etc/datadog-agent/conf.d --log_level INFO --log_location /var/log/datadog/jmxfetch.log --reporter console list_everything
 ```
 
-Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.jar` in the example) might reside elsewhere in your system. You should be able to easily find it with `sudo find / -type f -name 'tools.jar'`.
+**Notes**:
 
-**Note**: you may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
+- The location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.jar` in the example) might reside elsewhere in your system. You should be able to easily find it with `sudo find / -type f -name 'tools.jar'`.
+- You may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -120,14 +135,14 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 
 To check whether Autodiscovery is loading JMX-based checks:
 
-```text
-docker exec -it <AGENT_CONTAINER_NAME> datadog-agent configcheck
+```shell
+$ docker exec -it <AGENT_CONTAINER_NAME> agent configcheck
 ```
 
 To see JMX-based checks status from the Agent:
 
-```text
-$ docker exec -it <AGENT_CONTAINER_NAME> datadog-agent status
+```shell
+$ docker exec -it <AGENT_CONTAINER_NAME> agent status
 ```
 
 {{% /tab %}}
@@ -144,11 +159,10 @@ A best practice is to limit your metrics to less than 350 by creating filters to
 
 The default Agent installation does not come with a bundled JVM and uses the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the Agent.
 
-**Note**: The `gcr.io/datadoghq/agent:latest-jmx` Docker image does include a JVM, which the Agent needs to run jmxfetch.
+**Notes**:
 
-Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
-
-**Note**: Only one valid Java path needs to be specified for JMXFetch.
+- The `gcr.io/datadoghq/agent:latest-jmx` Docker image does include a JVM, which the Agent needs to run jmxfetch. Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
+- Only one valid Java path needs to be specified for JMXFetch.
 
 ### JVM metrics
 

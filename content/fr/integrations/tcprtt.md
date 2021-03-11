@@ -93,7 +93,7 @@ Si le check TCP RTT a démarré, une ligne go-metro similaire à celle ci-dessu
 
 Il s'agit d'un check passif. Ainsi, les métriques sont uniquement transmises si des paquets sont activement envoyés aux hosts mentionnés dans le fichier yaml.
 
-## Données recueillies
+## Données collectées
 
 ### Métriques
 

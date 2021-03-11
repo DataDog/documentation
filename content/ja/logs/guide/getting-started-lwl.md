@@ -5,7 +5,7 @@ further_reading:
   - link: /logs/explorer/
     tag: ドキュメント
     text: ログエクスプローラーの詳細
-  - link: /logs/explorer/patterns/
+  - link: '/logs/explorer/#patterns'
     tag: ドキュメント
     text: ログパターンビューの概要
   - link: /logs/live_tail/

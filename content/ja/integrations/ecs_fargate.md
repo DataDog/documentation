@@ -287,7 +287,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
    }
    ```
 
-    これにより、シリアル化された JSON が `log:` フィールドから上位レベルのフィールドに変換されます。詳細については、[JSON がシリアル化されたコンテナの stdout ログをパースしている][5] AWS サンプルを参照してください。
+    これにより、シリアル化された JSON が `log:` フィールドから上位レベルのフィールドに変換されます。詳細については、[JSON がシリアル化されたコンテナの stdout ログをパースしている][4] AWS サンプルを参照してください。
 
 2. 次に、同じ Fargate タスクで、AWS FireLens をログドライバーとして使用し、Fluent Bit にデータが出力されるようにログコンフィギュレーションを定義します。下記に、ログドライバーに FireLens が使用され、Fluent Bit にデータを出力しているタスク定義の例を示します。
 
@@ -310,20 +310,19 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
    }
    ```
 
-    **注**: Datadog EU サイトのオーガニゼーションをご利用の場合は、代わりに `Host` オプションとして `http-intake.logs.datadoghq.eu` を使用してください。ご利用可能なパラメーターの全リストは [Datadog Fluentbit ドキュメント][6]に記載されています。
+    **注**: Datadog EU サイトのオーガニゼーションをご利用の場合は、代わりに `Host` オプションとして `http-intake.logs.datadoghq.eu` を使用してください。ご利用可能なパラメーターの全リストは [Datadog Fluentbit ドキュメント][5]に記載されています。
 
-3. これで、Fargate タスクの実行中は常に、Fargate タスクが管理するコンテナの情報を監視しながら、Fluent Bit から Datadog にコンテナログが送信されるようになります。生ログは [Log Explorer ページ][7]や [Live Container ビュー][9]から確認できるほか、[モニターを作成][8]して確認することもできます。
+3. これで、Fargate タスクの実行中は常に、Fargate タスクが管理するコンテナの情報を監視しながら、Fluent Bit から Datadog にコンテナログが送信されるようになります。[Log Explorer ページ][6]で生ログを確認したり、ログ用の[モニターを作成][7]し [Live Container ビュー][8]で確認したりすることが可能です。
 
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definitions
 [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-using-fluentbit
 [4]: https://github.com/aws-samples/amazon-ecs-firelens-examples/tree/master/examples/fluent-bit/parse-json
-[5]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
-[6]: https://docs.datadoghq.com/ja/integrations/fluentbit/#configuration-parameters
-[7]: https://app.datadoghq.com/logs
-[8]: https://docs.datadoghq.com/ja/monitors/monitor_types/
-[9]: https://docs.datadoghq.com/ja/infrastructure/livecontainers/?tab=linuxwindows
+[5]: https://docs.datadoghq.com/ja/integrations/fluentbit/#configuration-parameters
+[6]: https://app.datadoghq.com/logs
+[7]: https://docs.datadoghq.com/ja/monitors/monitor_types/
+[8]: https://docs.datadoghq.com/ja/infrastructure/livecontainers/?tab=linuxwindows
 {{% /tab %}}
 {{% tab "logDriver" %}}
 

@@ -13,7 +13,7 @@ assets:
 categories:
   - cloud
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md'
 display_name: N2WS Backup & Recovery

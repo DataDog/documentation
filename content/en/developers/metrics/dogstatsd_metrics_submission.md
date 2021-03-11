@@ -419,9 +419,9 @@ end
 package main
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
-	"strconv"
 	"time"
 
 	"github.com/DataDog/datadog-go/statsd"
@@ -435,8 +435,8 @@ func main() {
 	var i float64
 	for {
 		i += 1
-		statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
-		time.Sleep(rand.Intn(10) * time.Second)
+		statsd.Set("example_metric.set", fmt.Sprintf("%f", i), []string{"environment:dev"}, 1)
+		time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
 	}
 }
 ```
@@ -663,7 +663,7 @@ The above instrumentation produces the following metrics:
 | Metric                                  | Description                             |
 |-----------------------------------------|-----------------------------------------|
 | `example_metric.histogram.count`        | Number of times this metric was sampled |
-| `example_metric.histogram.avg`          | Average time of the sampled values      |
+| `example_metric.histogram.avg`          | Average of the sampled values           |
 | `example_metric.histogram.median`       | Median sampled value                    |
 | `example_metric.histogram.max`          | Maximum sampled value                   |
 | `example_metric.histogram.95percentile` | 95th percentile sampled value           |

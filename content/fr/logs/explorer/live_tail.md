@@ -1,86 +1,42 @@
 ---
 title: "Live\_Tail"
 kind: documentation
-description: Visualisez tous vos logs en temps réel.
+description: Effectuer des recherches sur l'ensemble de vos logs et réaliser des analyses de logs
 aliases:
+  - /fr/logs/explore/livetail
   - /fr/logs/live_tail
 further_reading:
-  - link: logs/explorer/analytics
-    tag: Documentation
-    text: Effectuer des analyses de logs
   - link: logs/processing
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: logs/processing/parsing
+  - link: logs/explorer/side_panel
     tag: Documentation
-    text: En savoir plus sur le parsing
+    text: Volet latéral des logs
+  - link: 'logs/explorer/#list-of-logs'
+    tag: Documentation
+    text: Liste des logs
 ---
-{{< img src="logs/explorer/livetail/live_tail_demo.mp4" alt="Live tail" video="true"  >}}
-
 ## Présentation
 
-La fonctionnalité Live Tail vous offre la possibilité de visualiser tous vos événements de log à n'importe quel endroit de votre infrastructure, et ce quasiment en temps réel. Les logs sont affichés dès leur sortie de la [section Pipeline][1] et avant [leur indexation][2] par Datadog. Ainsi :
+Grâce à la fonctionnalité Live Tail, vous pouvez accéder à tous les événements de log de votre infrastructure, quasiment en temps réel. La vue Live Tail offre une visibilité sur **tous** les logs, qu'ils soient indexés ou non (voir également les [Filtres d'exclusion][1] pour les index de logs). Les logs qui transitent par la fonctionnalité Live Tail sont tous structurés, traités et enrichis à partir des [pipelines de logs][2].
 
-1. Tous les logs ingérés par Datadog sont affichés. ([La fonctionnalité Logging without Limits s'applique][2]\*)
-2. Les logs affichés ont déjà été traités.
-3. Le flux peut être interrompu.
-4. Vous ne pouvez pas consulter les données historiques.
-
-Cette fonctionnalité vous permet par exemple de vérifier si un processus a démarré correctement, ou si un déploiement récent s'est déroulé sans erreur.
+La solution Live Tail s'avère par exemple particulièrement utile pour vérifier si un processus a démarré correctement, ou si un déploiement récent s'est déroulé sans erreur.
 
 ## Vue Live Tail
 
-Choisissez l'option `Live Tail` dans le sélecteur d'intervalle pour activer la vue Live Tail :
+Dans le [Log Explorer][3], sélectionnez l'option Live Tail dans l'intervalle pour interroger les logs qui transitent par Datadog.
 
-{{< img src="logs/explorer/livetail/live_tail_time_selector.png" alt="Sélecteur d'intervalle Live Tail"  >}}
+{{< img src="logs/explorer/live_tail/livetail.gif" alt="Live Tail des logs" style="width:100%;" >}}
 
-Le nombre d'événements reçus par seconde apparaît en haut à gauche, ainsi que la fréquence d'échantillonnage. Étant donné qu'il est impossible pour un humain d'interpréter un flux de plusieurs milliers de logs par seconde, les flux de logs à haut débit sont échantillonnés.
+Contrairement aux requêtes sur les logs indexés dans le [Log Explorer][3], il n'est *pas* nécessaire de [déclarer une facette][4] avant de pouvoir créer une requête dans la vue Live Tail.
 
-Utilisez les [fonctions de filtres de la barre de recherche Live Tail](#filtrer-le-flux-de-logs) pour filtrer le flux de logs et le bouton **Pause/Play** en haut à droite pour interrompre ou relancer le flux.
-
-**Remarque** : lorsque vous sélectionnez un log, le flux est interrompu et les détails du log sélectionné sont affichés.
-
-### Options d'affichage
-
-Personnalisez la vue Live Tail pour mieux mettre en évidence les informations pertinentes de vos logs.
-Cliquez sur l'icône en forme d'engrenage en haut à droite de la page pour activer l'une des options ci-dessous :
-
-{{< img src="logs/explorer/livetail/live_tail_column.png" alt="Colonne Live Tail"  style="width:30%;">}}
-
-1. Choisissez d'afficher une, trois ou dix lignes à partir de vos attributs de logs dans votre flux de logs.
-2. Activez ou désactivez les colonnes Date et Message.
-3. Ajoutez n'importe quel attribut de log dans ce volet ou en cliquant directement sur l'attribut :
-
-{{< img src="logs/explorer/livetail/live_tail_add_as_column.png" alt="Ajouter en tant que colonne Live Tail"  style="width:50%;">}}
-
-## Filtrer le flux de logs
-
-Une requête valide dans la barre de recherche affiche les logs qui correspondent à vos critères de recherche.
-La syntaxe de recherche de la vue Live Tail est la même que celle des autres vues de logs. Toutefois, avec la vue Live Tail, la recherche se fait dans tous les logs ingérés, et non pas uniquement dans ceux qui ont été indexés.
-
-### Attributs JSON
-
-Toutes les requêtes valides dans les autres vues le sont également dans la vue Live Tail. Vous pouvez toutefois aller encore plus loin en **recherchant les attributs qui ne sont pas définis en tant que facettes**.
-
-Par exemple, pour rechercher l'attribut `filename` suivant, deux options s'offrent à vous :
-
-{{< img src="logs/explorer/livetail/live_tail_save.png" alt="Enregistrement Live tail"  style="width:50%;">}}
-
-1. Cliquez sur l'attribut et ajoutez-le à votre recherche :
-
-    {{< img src="logs/explorer/livetail/live_tail_click_attribute.png" alt="Cliquer sur l'attribut Live Tail"  style="width:50%;">}}
-
-2. Utilisez la requête `@filename:runner.go` :
-
-    {{< img src="logs/explorer/livetail/live_tail_filtered.png" alt="Filtre Live Tail appliqué"  style="width:50%;">}}
-
-Pour rechercher tous les logs dont le nombre de lignes est supérieur à 150, utilisez la requête suivante : `@linenumber:>150`.
+**Remarque** : par souci de lisibilité, la sortie de la fonctionnalité Live Tail est échantillonnée en cas de réception d'un trop grand nombre de logs correspondant à la requête. L'échantillonnage est appliqué de façon aléatoire et uniforme, afin que vos logs Live Tail constituent un échantillon statistiquement représentatif de votre débit de logs réel. Si vous avez besoin de visualiser chaque log entrant, vous pouvez affiner davantage votre requête en appliquant des filtres de recherche supplémentaires.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-<br>
-\*Logging without Limits est une marque déposée de Datadog, Inc.
 
-[1]: /fr/logs/processing/pipelines/
-[2]: /fr/logs/
+[1]: /fr/logs/indexes#exclusion-filters
+[2]: /fr/logs/processing
+[3]: /fr/logs/explorer
+[4]: /fr/logs/explorer/facets/

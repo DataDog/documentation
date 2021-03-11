@@ -61,12 +61,14 @@ SSL tests can run:
 
 Assertions define what an expected test result is. When hitting `Test URL` basic assertions on certificate validity, expiration data, TLS version, and `response time` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
-| Type          | Operator                                                                               | Value type                 |
-|---------------|----------------------------------------------------------------------------------------|----------------------------|
-| certificate   | `expires in more than`, `expires in less than`                                         | _Integer (number of days)_ |
-| property      | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | _String_ <br> _[Regex][9]_ |
-| response time | `is less than`                                                                         | _Integer (ms)_             |
-| TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
+| Type                  | Operator                                                                               | Value type                 |
+|-----------------------|----------------------------------------------------------------------------------------|----------------------------|
+| certificate           | `expires in more than`, `expires in less than`                                         | _Integer (number of days)_ |
+| property              | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | _String_ <br> _[Regex][9]_ |
+| response time         | `is less than`                                                                         | _Integer (ms)_             |
+| maximum TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
+| minimum TLS version   | `is more than`, `is more than or equal`                                                | _Decimal_                  |
+
 
 You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 

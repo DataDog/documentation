@@ -18,20 +18,23 @@ further_reading:
 ---
 ## トレースおよびスパン ID を自動的に挿入します
 
-環境変数またはコンフィギュレーションファイルを通じて `DD_LOGS_INJECTION=true` を設定することで、.NET トレーサーの[コンフィギュレーション][1]の挿入を有効にします。
-
 .NET トレーサーはトレース ID、スパン ID、`env`、`service`、`version` をアプリケーションログに自動的に挿入できます。まだこれを行っていない場合は、.NET トレーサーを `DD_ENV`, `DD_SERVICE`、および `DD_VERSION` で構成することが推奨されます。`env`、`service`、`version` を追加する際に違いを感じられるはずです（詳細は、[統合サービスタグ付け][3]を参照してください）。
 
-[Serilog][4]、[NLog][5] (バージョン 2.0.0.2000+)、[log4net][6] に対応しています。.NET トレーサーは [LibLog][2] ライブラリを使用してトレース ID をアプリケーションログに自動的に挿入します。自動挿入は、`Serilog` ロガーで `LogContext` 強化を有効化した後、あるいは、`NLog` ロガーまたは `log4net` ロガーで `Mapped Diagnostics Context` を有効化した後でのみ、アプリケーションログに表示されます (下記の例を参照してください)。
+.NET トレーサー は [Serilog][4]、[NLog][5] (バージョン 4.0+)、[log4net][6] に対応しており、[LibLog][2] ライブラリを使用してトレース ID をアプリケーションログに自動的に挿入します。自動挿入は、`Serilog` ロガーで `LogContext` 強化を有効化した後、あるいは、`NLog` ロガーまたは `log4net` ロガーで `Mapped Diagnostics Context` を有効化した後でのみ、アプリケーションログに表示されます。
 
 **注**: 自動挿入が機能するのは JSON 形式のログのみです。
+
+**有効にするには、以下の 2 つの手順に従います。**
+
+1. 環境変数またはコンフィギュレーションファイルを通じて `DD_LOGS_INJECTION=true` を設定することで、.NET トレーサーの[コンフィギュレーション][1]の挿入を有効にします。
+2. ログライブラリに基づいてログコンフィギュレーションを更新します。
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
 ```csharp
 var log = new LoggerConfiguration()
-    // Enrich.FromLogContext を追加して MDC プロパティを表示
+    // Enrich.FromLogContext を追加して Datadog プロパティを表示
     .Enrich.FromLogContext()
     .WriteTo.File(new JsonFormatter(), "log.json")
     .CreateLogger();
@@ -62,7 +65,7 @@ var log = new LoggerConfiguration()
 NLog バージョン 4.6 以降 の場合
 
 ```xml
-  <!-- includeMdlc="true" を追加して MDC プロパティを表示 -->
+  <!--includeMdlc="true" を追加して Datadog プロパティを表示-->
   <layout xsi:type="JsonLayout" includeMdlc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -71,17 +74,33 @@ NLog バージョン 4.6 以降 の場合
   </layout>
 ```
 
-NLog バージョン 4.5 の場合
+NLog バージョン 4.0 - 4.5 の場合:
 
 ```xml
-  <!-- includeMdc="true" を追加して MDC プロパティを表示 -->
+  <!--バージョン 4.4.10+ を使用している場合は、includeMdc="true" を抽出して Datadog プロパティを表示-->
   <layout xsi:type="JsonLayout" includeMdc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
     <attribute name="message" layout="${message}" />
     <attribute name="exception" layout="${exception:format=ToString}" />
   </layout>
+
+  <!--バージョン4.4.10以下を使用している場合は、<attribute> ノードを追加することでDatadog プロパティを個別に抽出-->
+  <layout xsi:type="JsonLayout">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+
+    <attribute name="dd.env" layout="${mdc:item=dd.env}"/>
+    <attribute name="dd.service" layout="${mdc:item=dd.service}"/>
+    <attribute name="dd.version" layout="${mdc:item=dd.version}"/>
+    <attribute name="dd.trace_id" layout="${mdc:item=dd.trace_id}"/>
+    <attribute name="dd.span_id" layout="${mdc:item=dd.span_id}"/>
+  </layout>
 ```
+
+NLog バージョン 4.0 以下の場合、JSON レイアウトは内蔵されていません。
 
 {{% /tab %}}
 {{< /tabs >}}

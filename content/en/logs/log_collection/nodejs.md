@@ -13,7 +13,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
@@ -132,7 +132,7 @@ logs:
     sourcecategory: sourcecode
 ```
 
-## Agentless Logging
+## Agentless logging
 
 You can stream your logs from your application to Datadog without installing an Agent on your Host. Note that using an Agent to forward your logs is recommended as it provides a native connection management.
 

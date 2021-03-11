@@ -203,6 +203,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                                                     |
 | `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace long-running processes    |
 | `DD_TAGS`                                 | `null`      | Tags to be set on all spans, for example: `key1:value1,key2:value2`. Added in version `0.47.0`                                                 |
+| `DD_TRACE_HEADER_TAGS`                    | `null`      | CSV of header names that are reported on the root span as tags.                                                                                |
 | `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`. |
 | `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`     | `false`     | Set the service name of Redis clients operations to `redis-<hostname>`. Added in version `0.51.0`                            |
 | `DD_TRACE_<INTEGRATION>_ENABLED`          | `true`      | Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)). For versions < `0.47.1`, this parameter is `DD_INTEGRATIONS_DISABLED` which takes a CSV list of integrations to disable, for example: `curl,mysqli`. |
@@ -288,7 +289,7 @@ There are two classes of scenarios that are not covered by automatic normalizati
 
 ###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
-This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`. 
+This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`.
 
 | URL                          | regex     | Expected Resource Name       |
 |:-----------------------------|:----------|:-----------------------------|
@@ -312,6 +313,8 @@ When the application runs in a docker container, the path `/proc/self` should al
 ## Upgrading
 
 To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
+
+Once the installation is completed restart PHP (PHP-FPM or the Apache SAPI).
 
 **Note**: If you are using second level caching in OPcache by setting the parameter `opcache.file_cache`, remove the cache folder.
 

@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez les exécutions du client Chef\_: soyez informé en cas d'échec, de réussite ou de changement majeur."
 doc_link: 'https://docs.datadoghq.com/integrations/chef/'
+draft: false
 git_integration_title: chef
 has_logo: true
 integration_title: Chef
@@ -30,7 +31,7 @@ Il est extrêmement simple de déployer Datadog avec Chef. Cela vous permet d'ex
 
 Nous offrons également un [gestionnaire de rapports et d'exécution][1] Chef capable d'enregistrer les échecs `chef-client` ainsi que des métriques relatives à l'exécution de Chef, portant notamment sur des délais et des mises à jour de ressources.
 
-## Implémentation
+## Configuration
 
 ### Déployer l'Agent
 

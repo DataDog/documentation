@@ -2,7 +2,7 @@
 title: Monitor Guides
 kind: guide
 private: true
-disable_toc: true
+disable_sidebar: true
 ---
 
 {{< whatsnext desc="General Guides:" >}}
@@ -11,5 +11,6 @@ disable_toc: true
     {{< nextlink href="monitors/guide/visualize-your-service-check-in-the-datadog-ui" >}}Visualize your service check in the Datadog UI{{< /nextlink >}}
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Template Variable Evaluation{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Monitoring Ranges{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/supress-alert-with-downtimes" >}}Downtimes common use cases{{< /nextlink >}}
     {{< nextlink href="monitors/guide/slo-checklist" >}}SLO Checklist{{< /nextlink >}}
 {{< /whatsnext >}}

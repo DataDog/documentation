@@ -382,11 +382,13 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 {{% /tab %}}
 {{% tab "Istio" %}}
 
-Datadog monitors every aspect of your Istio setup, including:
+Datadog monitors every aspect of your Istio environment, so you can:
+- Drill into distributed traces for applications transacting over the mesh with APM (see below).
+- Assess the health of Envoy and the Istio control plane with [logs][1].
+- Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][1].
+- Map network communication between containers, pods, and services over the mesh with [Network Performance Monitoring][2].
 
-- Application distributed traces (see below)
-- [Metrics and logs][1] (using the Istio Agent Check)
-- [Container and pod-level flow data][2] (using Network Performance Monitoring)
+To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][10].
 
 ## Configuration
 
@@ -495,7 +497,7 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 
 
 [1]: /integrations/istio/
-[2]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
+[2]: /network_monitoring/performance/setup/#istio
 [3]: /agent/kubernetes/
 [4]: /agent/kubernetes/apm/
 [5]: https://istio.io/docs/setup/install/istioctl/
@@ -503,10 +505,10 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [7]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
 [8]: /tracing/setup/cpp/#environment-variables
 [9]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[10]: https://www.datadoghq.com/blog/istio-datadog/
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-

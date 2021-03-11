@@ -1,7 +1,7 @@
 ---
 title: Network Device Monitoring
 kind: documentation
-disable_toc: true
+disable_sidebar: true
 description: Gain visibility into your network-connected devices, such as routers, switches, servers, and firewalls.
 aliases:
     - /network_performance_monitoring/devices/
@@ -23,7 +23,7 @@ Datadog Network Device Monitoring is designed to give you visibility into your n
 
 Configure the Datadog Agent to automatically discover devices on any network and collect metrics such as bandwidth utilization, throughput, and up/down of devices. Graph the metrics on a Datadog [dashboard][1], or create a [monitor][2] to be alerted when issues arise.
 
-{{< img src="network_performance_monitoring/devices/snmp_dashboard.png" alt="SNMP Generic Dashboard" responsive="true" style="width:100%;">}}
+{{< img src="network_performance_monitoring/devices/datacenter_dashboard.jpg" alt="Datacenter Overview Dashboard" responsive="true" style="width:100%;">}}
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_performance_monitoring/devices/setup" >}}<u>Setup</u>: Configure the Agent to collect network device data.{{< /nextlink >}}

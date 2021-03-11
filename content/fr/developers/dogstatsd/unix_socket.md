@@ -1,7 +1,7 @@
 ---
-title: Utiliser DogStatsD sur un socket de domaine Unix
+title: Utiliser DogStatsD via un socket de domaine Unix
 kind: documentation
-description: Documentation relative à l'utilisation de DogStatsD sur un socket de domaine Unix
+description: Documentation relative à l'utilisation de DogStatsD via un socket de domaine Unix
 aliases:
   - /fr/developers/metrics/unix_socket/
 further_reading:
@@ -27,13 +27,14 @@ Si UDP fonctionne très bien sur `localhost`, sa configuration peut toutefois po
 
 Au lieu d'utiliser un couple `IP:port` pour établir les connexions, les sockets de domaine Unix utilisent un fichier de socket générique. Une fois la connexion ouverte, les données sont transmises dans le même [format de datagramme][1] que le transport UDP. Lorsque l'Agent redémarre, le socket existant est supprimé et remplacé par un nouveau socket. Les bibliothèques client détectent ce changement et se connectent automatiquement au nouveau socket.
 
-**Remarque :** de par sa nature, le trafic UDS est local au host. Cela signifie que l'Agent Datadog doit fonctionner sur chaque host depuis lequel vous envoyez des métriques.
+**Remarques :**
 
-## Implémentation
+* De par sa nature, le trafic UDS est local au host. Cela signifie que l'Agent Datadog doit s'exécuter sur chaque host depuis lequel vous envoyez des métriques.
+* Le protocole UDS n'est pas pris en charge par Windows.
+
+## Configuration
 
 Pour configurer DogStatsD avec le socket de domaine Unix, activez le serveur DogStatsD à l'aide du paramètre `dogstatsd_socket`. Configurez ensuite le [client DogStatsD](#configuration-du-client-dogstatsd) dans votre code.
-
-**Remarque** : Go ne prend pas en charge le [`dogstatsd_socket` pour unixgram][10]. Ce processus ne peut donc pas être effectué sous Windows.
 
 Pour activer l'UDS DogStatsD de l'Agent :
 
@@ -60,7 +61,7 @@ Pour activer l'UDS DogStatsD de l'Agent :
 
 1. Définissez le chemin du socket avec la variable d'environnement `DD_DOGSTATSD_SOCKET=<VOTRE_CHEMIN_UDS>` sur le conteneur de l'Agent.
 
-2. Assurez-vous que les conteneurs du client puissent accéder au fichier du socket en montant un répertoire host des deux côtés (avec un accès en lecture seule dans les conteneurs de votre client, et en lecture/écriture dans le conteneur de l'Agent). Monter le dossier parent à la place du socket directement permet de maintenir la communication avec le socket en cas de redémarrage de DogStatsD :
+2. Assurez-vous que les conteneurs de votre application peuvent accéder au fichier du socket. Pour ce faire, montez un répertoire host des deux côtés (avec un accès en lecture seule dans les conteneurs de votre application, et en lecture/écriture dans le conteneur de l'Agent). Monter le dossier parent à la place du socket directement permet de maintenir la communication avec le socket en cas de redémarrage de DogStatsD :
 
     - Démarrez le conteneur de l'Agent avec `-v /var/run/datadog:/var/run/datadog`.
     - Démarrez vos conteneurs d'application avec `-v /var/run/datadog:/var/run/datadog:ro`.
@@ -68,9 +69,9 @@ Pour activer l'UDS DogStatsD de l'Agent :
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-1. Définissez le chemin du socket avec la variable d'environnement `DD_DOGSTATSD_SOCKET=<VOTRE_CHEMIN_UDS>` sur le conteneur de l'Agent.
+1. Définissez le chemin du socket avec la variable d'environnement `DD_DOGSTATSD_SOCKET=<VOTRE_CHEMIN_UDS>` sur le conteneur de l'Agent (exemple : `/var/run/datadog/dsd.socket`).
 
-2. Assurez-vous que les conteneurs du client puissent accéder au fichier du socket en montant un répertoire host des deux côtés (avec un accès en lecture seule dans les conteneurs de votre client, et en lecture/écriture dans le conteneur de l'Agent). Monter le dossier parent à la place du socket directement permet de maintenir la communication avec le socket en cas de redémarrage de DogStatsD.
+2. Assurez-vous que les conteneurs de votre application peuvent accéder au fichier du socket. Pour ce faire, montez un répertoire host des deux côtés (avec un accès en lecture seule dans les conteneurs de votre application, et en lecture/écriture dans le conteneur de l'Agent). Monter le dossier parent à la place du socket directement permet de maintenir la communication avec le socket en cas de redémarrage de DogStatsD.
 
     - Montez le dossier de socket dans votre conteneur `datadog-agent` :
 
@@ -85,7 +86,7 @@ Pour activer l'UDS DogStatsD de l'Agent :
               name: dsdsocket
         ```
 
-    - Exposez le même dossier dans les conteneurs de votre client :
+    - Exposez le même dossier dans les conteneurs de votre application :
 
         ```yaml
         volumeMounts:
@@ -99,7 +100,7 @@ Pour activer l'UDS DogStatsD de l'Agent :
               name: dsdsocket
         ```
 
-        **Remarque** : supprimez `readOnly: true` si les conteneurs de votre client doivent disposer d'un accès en écriture au socket.
+        **Remarque** : supprimez `readOnly: true` si les conteneurs de votre application doivent disposer d'un accès en écriture au socket.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -165,7 +166,7 @@ La détection de l'origine permet à DogStatsD d'identifier la provenance des m�
 
 Lorsqu'il fonctionne dans un conteneur, DogStatsD doit être exécuté dans l'espace de nommage PID du host pour assurer la bonne détection de l'origine. Activez cette option via le Docker avec le flag `--pid=host`. L'option est prise en charge par ECS avec le paramètre `"pidMode": "host"` dans la définition de tâche du conteneur. Elle n'est pas prise en charge dans Fargate. Pour en savoir plus, consultez la [documentation AWS][2].
 
-[2] :
+
 [1]: /fr/getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
 {{% /tab %}}
@@ -236,4 +237,3 @@ Pour découvrir comment créer des options d'implémentation supplémentaires, r
 [7]: https://github.com/DataDog/php-datadogstatsd
 [8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
 [9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
-[10]: https://github.com/DataDog/datadog-agent/blob/c9588a61e1fef100c61deb39a5145f3b471d107a/pkg/dogstatsd/listeners/uds_common_test.go#L7

@@ -25,6 +25,14 @@ $ddpurple:    #632CA6;
     max-width: 100%;
     height: auto;
   }
+
+  table.table-metrics {
+    tr {
+      td {
+        word-break: break-word;
+      }
+    }
+  }
 }
 
 .filters {
@@ -142,6 +150,11 @@ $ddpurple:    #632CA6;
     }
   }
 
+  /* lower go button on marketplace */
+  .cat-marketplace .card .card-button .btn-container {
+    bottom: 23px !important;
+  }
+
   div:nth-child(odd) .card {
     margin-right:9px;
     margin-left:0;
@@ -216,7 +229,7 @@ $ddpurple:    #632CA6;
     .cat-marketplace {
       &:hover {
         .card-title {
-          padding-top: 0.75rem !important;
+          padding:0.75rem 0 0 0 !important;
         }
       }
     }

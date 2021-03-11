@@ -63,7 +63,8 @@ class Build:
             try:
                 if content["action"] == "integrations":
                     Int.process_integrations(content)
-
+                elif content["action"] == "marketplace-integrations":
+                    Int.process_integrations(content, marketplace=True)
                 elif (content["action"] == "pull-and-push-folder"):
                     pull_and_push_folder(content, self.content_dir)
 
@@ -79,7 +80,8 @@ class Build:
                     print(
                         "\x1b[31mERROR\x1b[0m: Action {} unknown for {}".format(content["action"], content))
                     raise ValueError
-            except:
+            except Exception as e:
+                print(e)
                 if getenv("LOCAL") == 'True':
                     print(
                         "\x1b[33mWARNING\x1b[0m: Unsuccessful processing of {}".format(content))

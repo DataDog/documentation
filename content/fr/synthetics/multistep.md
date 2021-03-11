@@ -25,20 +25,20 @@ Les tests API à plusieurs étapes vous permettent de **créer une chaîne de [t
 
 Si l'un de vos services est moins réactif ou si ses réponses ne correspondent pas à vos attentes (corps de réponse inattendu ou code de statut inattendu, etc.), votre test peut [**prévenir votre équipe**][2], [**bloquer votre pipeline de CI**][3] ou même [**annuler le déploiement à l'origine de l'erreur**][3].
 
-Actuellement, les tests API à plusieurs étapes peuvent uniquement être exécutés depuis des [emplacements gérés][4] par Datadog.
+Les tests API en plusieurs étapes peuvent s'exécuter depuis des [emplacements gérés][4] par Datadog et des [emplacements privés][5], ce qui permet une **récupération complète de vos systèmes**, aussi bien au niveau externe qu'interne.
 
-**Remarque** : les tests API à plusieurs étapes vous permettent d'associer plusieurs requêtes HTTP au sein d'un seul test. Si vous souhaitez exécuter des requêtes uniques pour vos services, vous pouvez utiliser les [tests API][5].
+**Remarque** : les tests API en plusieurs étapes vous permettent d'associer plusieurs requêtes HTTP dans un test. Si vous souhaitez exécuter des requêtes simples sur vos services, vous pouvez utiliser les [tests API][6].
 
 ## Configuration
 
 ### Nommer votre test et y ajouter des tags
 
 1. **Donnez un nom** à votre test API à plusieurs étapes.
-2. Ajoutez des **tags** `env` et tout autre tag de votre choix à votre test API à plusieurs étapes. Vous pourrez ensuite utiliser ces tags pour filtrer rapidement vos tests Synthetic depuis la [page d'accueil de la surveillance Synthetic][6].
+2. Ajoutez des **tags** `env` et tout autre tag de votre choix à votre test API en plusieurs étapes. Vous pourrez ensuite utiliser ces tags pour filtrer rapidement vos tests Synthetic depuis la [page d'accueil de la surveillance Synthetic][7].
 
 ### Sélectionner des emplacements
 
-Sélectionnez les **emplacements** à partir desquels vous souhaitez exécuter votre test API à plusieurs étapes. Actuellement, les tests API à plusieurs étapes peuvent uniquement être exécutés depuis des [emplacements gérés][4].
+Sélectionnez les **emplacements** à partir desquels exécuter votre test API en plusieurs étapes : les tests API en plusieurs étapes peuvent être exécutés depuis des [emplacements gérés][4] et des [emplacements privés][5], selon que vous souhaitez exécuter le test à partir de l'extérieur ou de l'intérieur de votre réseau.
 
 ### Définir des requêtes
 
@@ -96,8 +96,8 @@ Les assertions définissent un résultat de test escompté. Lorsque vous cliquez
 
 | Type          | Opérateur                                                                                               | Type de valeur                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][7] | _Chaîne_ <br> _[Regex][8]_ <br> _Chaîne_, _[Regex][8]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Regex][9]                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8] | _Chaîne_ <br> _[Regex][9]_ <br> _Chaîne_, _[Regex][9]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Regex][10]_                                      |
 | response time | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Nombre entier_                                                      |
 
@@ -116,8 +116,8 @@ Pour parser votre variable :
 1. Donnez un nom à votre variable en renseignant le champ **Variable Name**. Ce nom doit comporter au moins trois caractères et peut uniquement contenir des lettres majuscules, des chiffres et des underscores.
 2. Indiquez si la variable doit être extraite à partir des en-têtes ou du corps de la réponse :
 
-    * Extraction de la valeur à partir du **Response Header** : utilisez l'en-tête de réponse complet de votre requête HTTP comme valeur de variable, ou parsez l'en-tête à l'aide d'une [expression régulière][9].
-    * Extraction de la valeur à partir du **Response Body** : utilisez le corps de réponse complet de votre requête HTTP comme valeur de variable, ou parsez le corps avec une [expression régulière][9] ou une expression [JSONPath][7].
+    * Extraire la valeur à partir du **Response Header** : utiliser l'en-tête de réponse complet de votre requête HTTP comme valeur de variable, ou parsez l'en-tête à l'aide d'une [expression régulière][10].
+    * Extraire la valeur à partir du **Response Body** : utiliser le corps de réponse complet de votre requête HTTP comme valeur de variable, ou parser le corps avec une [expression régulière][10] ou une expression [JSONPath][8].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extraire des variables depuis des requêtes HTTP dans le test API à plusieurs étapes" style="width:90%;" >}}
 
@@ -147,7 +147,7 @@ Lorsque vous définissez les conditions d'alerte sur `An alert is triggered if a
 
 #### Nouvelle tentative rapide
 
-Votre test peut déclencher de nouvelles tentatives en cas d'échec. Par défaut, les tentatives sont effectuées 300 ms après le premier échec. Cet intervalle peut être configuré via l'[API][8].
+Votre test peut déclencher de nouvelles tentatives en cas d'échec. Par défaut, les tentatives sont effectuées 300 ms après le premier échec. Cet intervalle peut être configuré via l'[API][9].
 
 
 La disponibilité d'un emplacement est calculée pour chaque évaluation (quels que soient les résultats du dernier test avant l'évaluation). La disponibilité totale est calculée selon les conditions d'alerte configurées. Les notifications envoyées se basent sur la disponibilité totale.
@@ -156,9 +156,9 @@ La disponibilité d'un emplacement est calculée pour chaque évaluation (quels 
 
 Votre test envoie une notification selon les [conditions d'alerte](#definir-des-conditions-d-alerte) définies au préalable. Référez-vous à cette section pour définir les conditions et le message à envoyer à vos équipes.
 
-1. [Tout comme pour les monitors][10], sélectionnez **les utilisateurs et/ou services** qui doivent recevoir des notifications. Pour ce faire, ajoutez `@notification`au message, ou cherchez des membres d'équipe ou des intégrations connectées à l'aide de la liste déroulante.
+1. [Tout comme pour les monitors][11], sélectionnez **les utilisateurs et/ou services** qui doivent recevoir des notifications. Pour ce faire, ajoutez `@notification` au message, ou cherchez des membres d'équipe ou des intégrations connectées à l'aide de la liste déroulante.
 
-2. Saisissez un **message** de notification pour le test. Ce champ accepte [le format de mise en forme Markdown][11] standard ainsi que les [variables conditionnelles][12] suivantes :
+2. Saisissez un **message** de notification pour le test. Ce champ accepte [le format de mise en forme Markdown][12] standard ainsi que les [variables conditionnelles][13] suivantes :
 
     | Variable conditionnelle       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -198,7 +198,7 @@ Vous pouvez créer des variables locales en définissant leurs valeurs sur l'un 
 
 ### Utiliser des variables
 
-Les [variables globales définies sur la page `Settings`][13] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests HTTP.
+Les [variables globales définies sur la page `Settings`][14] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests HTTP.
 Pour afficher la liste de vos variables, saisissez `{{` dans le champ souhaité.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Utilisation de variables dans les tests API à plusieurs étapes" video="true" width="90%" >}}
@@ -212,7 +212,7 @@ Un test est considéré comme `FAILED` si une étape ne répond pas à une ou pl
 | `CONNRESET`       | La connexion a été interrompue de façon soudaine par le serveur à distance. Causes possibles : erreur ou défaillance du serveur Web lors de la réponse ou perte de connectivité du serveur Web.                                                                                                                                                                                                                                                         |
 | DNS               | L'entrée DNS est introuvable pour l'URL du test. Causes possibles : URL du test mal configurée, configuration des entrées DNS incorrecte, etc.                                                                                                                                                                                                                                                                                                                  |
 | `INVALID_REQUEST` | La configuration du test n'est pas valide (par exemple, en raison d'une faute de frappe dans l'URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | La connexion SSL n'a pas pu être effectuée. [Consultez la page relative aux erreurs pour en savoir plus][14].                                                                                                                                                                                                                                                                                                                                                      |
+| `SSL`             | La connexion SSL n'a pas pu être effectuée. [Consultez la page relative aux erreurs pour en savoir plus][15].                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | La requête n'a pas pu être effectuée dans un délai raisonnable. Deux types d'erreur `TIMEOUT` peuvent se produire. <br> - Une erreur `TIMEOUT: The request couldn’t be completed in a reasonable time.` indique que la requête a expiré lors de la connexion au socket TCP. <br> - Une erreur `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indique que la requête a expiré lors de son traitement global (qui comprend la connexion au socket TCP, le transfert de données et les assertions). |
 
 ## Pour aller plus loin
@@ -223,13 +223,14 @@ Un test est considéré comme `FAILED` si une étape ne répond pas à une ou pl
 [2]: /fr/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
 [3]: /fr/synthetics/ci
 [4]: /fr/api/v1/synthetics/#get-all-locations-public-and-private
-[5]: /fr/synthetics/api_tests/
-[6]: /fr/synthetics/search/#search
-[7]: https://restfulapi.net/json-jsonpath/
-[8]: /fr/api/v1/synthetics/#create-a-test
-[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[10]: /fr/monitors/notifications/?tab=is_alert#notification
-[11]: http://daringfireball.net/projects/markdown/syntax
-[12]: /fr/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[13]: /fr/synthetics/settings/#global-variables
-[14]: /fr/synthetics/api_tests/errors/#ssl-errors
+[5]: /fr/synthetics/private_locations
+[6]: /fr/synthetics/api_tests/
+[7]: /fr/synthetics/search/#search
+[8]: https://restfulapi.net/json-jsonpath/
+[9]: /fr/api/v1/synthetics/#create-a-test
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[11]: /fr/monitors/notifications/?tab=is_alert#notification
+[12]: http://daringfireball.net/projects/markdown/syntax
+[13]: /fr/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[14]: /fr/synthetics/settings/#global-variables
+[15]: /fr/synthetics/api_tests/errors/#ssl-errors

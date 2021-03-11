@@ -10,7 +10,7 @@ Datadog は、ホストとカスタムメトリクスの数を毎時間測定し
 
 ### ホスト
 
-ホストは、Datadog Agent がインストールされているすべてのインスタンスに、インテグレーションを使用して監視されているすべての AWS EC2、GCP、Azure、vSphere VM を加えた数として定義されます。Agent がインストールされている EC2 または VM は、1 つのインスタンスとしてカウントされます (二重課金されません)。
+ホストとは、Datadog で監視する実際のまたはバーチャルの OS インスタンスで、サーバー、VM、ノード（Kubernetes の場合）、または App Service Plan インスタンス（Azure App Services の場合）などがあります。Datadog Agent がインストールされているすべてのインスタンスのほか、インテグレーションを使用して監視されているすべての AWS EC2、GCP、Azure、vSphere VM がホストになり得ます。Agent がインストールされている EC2 または VM は、1 つのインスタンスとしてカウントされます (二重課金されません)。
 
 報告を行っていないホスト ([インフラストラクチャーリスト][2]でステータスが `???`) は、課金の対象になりません。そのようなホストが[インフラストラクチャーリスト][2]から除外されるまで、最大 2 時間かかることがあります。Datadog は、これらのホスト (有料アカウント) の履歴データを保持します。ホスト名またはタグがわかれば、メトリクスをダッシュボードでグラフ化できます。
 
@@ -20,23 +20,27 @@ Datadog は、ホストとカスタムメトリクスの数を毎時間測定し
 
 ### サーバーレス
 
-請求は、アカウントの 1 か月間の 1 時間あたりの平均関数の数に基づきます。Datadog では、1 回以上実行された、Datadog アカウントで監視されている関数の数を 1 時間ごとに記録します。月末に、記録された関数の時間当たり平均数が算出され、請求に反映されます。
-
-Pro および Enterprise プランには、請求対象の関数ごとに 150,000 件の Indexed Span と 5 個のカスタムメトリクスが含まれます。サーバーレス APM の請求は、Datadog APM サービスに送信された [Indexed Span][4] のうち、バンドルされた数量を超過した総数に基づき、月末に課金されます。サーバーレス使用時は、請求可能な [APM ホスト][4]はありません。
+Datadog では、すべてのアカウントでご利用の当月の AWS Lambda 呼び出しの合計に基づきご請求が発生します。Pro および Enterprise プランには、100 万件の呼び出しごとに 150,000 件の Indexed Span と 5 個のカスタムメトリクスが含まれます。サーバーレス APM の請求は、Datadog APM サービスに送信された [Indexed Span][4] のうち、バンドルされた数量を超過した総数に基づき、月末に課金されます。サーバーレス使用時は、請求可能な [APM ホスト][4]はありません。
 
 **注** Analyzed Span は、2020 年 10 月 20 日の Tracing Without Limits のローンチに伴い、Indexed Span と改名しました。
 
 詳細については、[サーバーレス請求ページ][5]および[Datadog 料金ページ][6]を参照してください。
 
+### IoT
+
+Datadog は、IoT デバイスの数を毎時間測定します。IoT デバイスの課金対象数は、この下位 99 % の時間の最大数として月末に計算されます。上位 1% を除外することで、使用量の短期的な急上昇が課金額に影響しないようにしています。
+
+IoT のご請求に関する詳細については、[Datadog 料金ページ][7]をご参照ください。
+
 ## 請求
 
-クレジットカード払いの場合は、[管理者][7]に [Billing History][8] で前月の領収書が発行されます。
+クレジットカード払いの場合は、[管理者][8]に [Billing History][9] で前月の領収書が発行されます。
 
-小切手または振込払いの場合は、期日になると請求書が請求メールアドレスに送信されます。他の形式の請求書等が必要な場合は、[Datadog の課金窓口][9]までメールでお問い合わせください。
+小切手または振込払いの場合は、期日になると請求書が請求メールアドレスに送信されます。他の形式の請求書等が必要な場合は、[Datadog の請求担当][10]までメールでお問い合わせください。
 
 ### 請求メール
 
-[Plan][10] ページの **Manage Billing Emails** で、請求書を受け取るためのメールアドレスを設定できます。
+[Plan][11] ページの **Manage Billing Emails** で、請求書の受信用メールアドレスを設定できます。
 
 {{< img src="account_management/billing/billing01.png" alt="請求メールの管理" >}}
 
@@ -70,8 +74,9 @@ Pro および Enterprise プランには、請求対象の関数ごとに 150,00
 [3]: /ja/agent/
 [4]: https://docs.datadoghq.com/ja/account_management/billing/pricing/#apm
 [5]: https://docs.datadoghq.com/ja/account_management/billing/serverless
-[6]: https://www.datadoghq.com/pricing/#included_serverless_functions-d
-[7]: /ja/account_management/users/default_roles/
-[8]: https://app.datadoghq.com/account/billing_history
-[9]: mailto:billing@datadoghq.com
-[10]: https://app.datadoghq.com/account/billing
+[6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
+[7]: https://www.datadoghq.com/pricing/
+[8]: /ja/account_management/users/default_roles/
+[9]: https://app.datadoghq.com/account/billing_history
+[10]: mailto:billing@datadoghq.com
+[11]: https://app.datadoghq.com/account/billing

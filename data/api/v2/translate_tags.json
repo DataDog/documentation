@@ -21,7 +21,7 @@
   },
   "logs": {
     "name": "Logs",
-    "description": "Search your logs and send them to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\n\nThe status codes answered by the HTTP API are:\n- 200: OK\n- 400: Bad request (likely an issue in the payload formatting)\n- 403: Permission issue (likely using an invalid API Key)\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 5xx: Internal error, request should be retried after some time"
+    "description": "Search your logs and send them to your Datadog platform over HTTP."
   },
   "logs-archives": {
     "name": "Logs Archives",
@@ -34,6 +34,10 @@
   "logs-restriction-queries": {
     "name": "Logs Restriction Queries",
     "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read access on log data at all, you must grant the `logs_read_data` permission.\nFrom there you can limit what data a role grants read access to by associating a Restriction Query with that role.\n\nA Restriction Query is a logs query that restricts which logs the `logs_read_data` permission grants read access to.\nFor users whose roles have Restriction Queries, any log query they make only returns those log events that also match\none of their Restriction Queries. This is true whether the user queries log events from any log-related feature, including\nthe log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently only support use of the following components of log events:\n\n- Reserved attributes\n- The log message\n- Tags\n\nThe recommended way to manage restricted read access on log data for customers with large or complicated organizational structures\nis to add a team tag to log events to indicate which team(s) own(s) them, and then to scope Restriction Queries to the appropriate\nvalues of the team tag. Tags can be applied to log events in many ways, and a log event can have multiple tags with the same key (like team)\nand different values—in this way the same log event can be visible to roles whose restriction queries are scoped to different team values.\n\nYou need an API and application key with Admin rights to interact with this endpoint."
+  },
+  "metrics": {
+    "name": "Metrics",
+    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
   },
   "processes": {
     "name": "Processes",

@@ -16,7 +16,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: /logs/faq/log-collection-troubleshooting-guide
@@ -94,7 +94,7 @@ services:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Logger Configuration
+### Logger configuration
 
 {{< tabs >}}
 {{% tab "PHP Monolog" %}}
@@ -178,7 +178,7 @@ Configure the formatter in your Monolog configuration: declare the formatter fie
 
 If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM PHP logging instructions][2] to automatically add trace and span IDs in your logs.
 
-### Agent Configuration
+### Agent configuration
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -358,7 +358,7 @@ Add a session Processor to add variable context within your logs:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Monolog Framework integration
+## Monolog framework integration
 
 Monolog is a part of the following frameworks:
 

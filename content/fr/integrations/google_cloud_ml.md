@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de Google Cloud Machine Learning.
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_ml/'
+draft: false
 git_integration_title: google_cloud_ml
 has_logo: true
 integration_title: "Google\_Machine\_Learning"
@@ -27,7 +28,7 @@ Recueillez des métriques de Google Machine Learning pour :
 - Visualiser les performances de vos services d'apprentissage automatique
 - Corréler les performances de vos services d'apprentissage automatique avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

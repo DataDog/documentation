@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
+- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
+  tag: "Blog"
+  text: "Monitor Core Web Vitals with Synthetic Monitoring"
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Guides"
@@ -39,7 +42,7 @@ Define the configuration of your browser test.
 
 3. **Name**: The name of your browser test.
 4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetic tests page.
-5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`) and devices (`Laptop Large`, `Tablet`, `Mobile Small`) to run your test on. 
+5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`) and devices (`Laptop Large`, `Tablet`, `Mobile Small`) to run your test on.
 6. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available for each site. For the Datadog for Government site, the West US (AWS GovCloud) location is supported. You can also set up [private locations][2] to run your browser test from custom locations or from inside private networks.
 7. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week. The one minute frequency is available [upon request][3].
 
@@ -89,7 +92,7 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 4. In addition to the automatically recorded steps, you can also use the [steps][11] available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps"  style="width:80%;">}}
 
-    **Note**: You should always make to **end your browser test with an [assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
+    **Note**: You should always make sure to **end your browser test with an [assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
 5. Once you have finished your scenario, click on **Save and Launch Test**.
 
 ## Further Reading
@@ -107,3 +110,4 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 [9]: https://www.google.com/chrome
 [10]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [11]: /synthetics/browser_tests/actions/
+[12]: /synthetics/browser_tests/actions/#assertion

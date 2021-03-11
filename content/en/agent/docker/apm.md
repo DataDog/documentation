@@ -44,7 +44,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -p 127.0.0.1:8126:8126/tcp \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               gcr.io/datadoghq/agent:latest
 ```
@@ -54,7 +54,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               gcr.io/datadoghq/agent:latest
 ```
@@ -109,7 +109,7 @@ docker run -d --name datadog-agent \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
@@ -117,6 +117,7 @@ docker run -d --name datadog-agent \
 # Application
 docker run -d --name app \
               --network <NETWORK_NAME> \
+              -e DD_AGENT_HOST=datadog-agent \
               company/app:latest
 ```
 
@@ -127,7 +128,7 @@ docker run -d --name app \
 # Datadog Agent
 docker run -d --name datadog-agent \
               --network "<NETWORK_NAME>" \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
@@ -135,6 +136,7 @@ docker run -d --name datadog-agent \
 # Application
 docker run -d --name app \
               --network "<NETWORK_NAME>" \
+              -e DD_AGENT_HOST=datadog-agent \
               company/app:latest
 ```
 
@@ -144,7 +146,7 @@ docker run -d --name app \
 This exposes the hostname `datadog-agent` in your `app` container.
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
-Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. (In this example case, `datadog-agent` and `8126`, respectively.)
+Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. The example above uses host `datadog-agent` and port `8126` (the default value so you don't have to set it).
 
 Alternately, see the examples below to set the Agent host manually in each supported language:
 

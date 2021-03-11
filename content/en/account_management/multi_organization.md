@@ -20,7 +20,7 @@ further_reading:
 
 It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1]. The parent-organization can view the usage of individual child-organizations, allowing them to track trends in usage.
 
-Account settings, such as whitelisted IP addresses, are not inherited by child-organizations from their parent-organization.
+Account settings, such as allow-listed IP addresses, are not inherited by child-organizations from their parent-organization.
 
 The Multi-organization Account feature is not enabled by default. Contact [Datadog support][2] to have it enabled.
 
@@ -49,6 +49,8 @@ The custom sub-domain feature is not enabled by default. Contact [Datadog suppor
 If you are a member of multiple organizations, custom sub-domains help you identify the source of an alert or notification. Also, they can immediately switch you to the organization associated with the sub-domain.
 
 For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][1], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
+
+Note: when using a custom subdomain, you will have to manually edit the links from the Datadog documentation with your subdomain name. For example a link redirecting to `https://**app**.datadoghq.com/account/settings` will become `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
 
 ## Setting up SAML
 

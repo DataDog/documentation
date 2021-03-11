@@ -9,6 +9,7 @@ further_reading:
 aliases:
   - /tracing/compatibility
   - /tracing/compatibility_requirements
+  - /tracing/setup_overview/compatibility_requirements/undefined
 ---
 
 Choose your language to see the compatibility requirements and supported integrations for Datadog APM.

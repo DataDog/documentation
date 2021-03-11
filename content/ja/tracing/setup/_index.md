@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/tracing/languages
   - /ja/tracing/proxies
-disable_toc: true
+disable_sidebar: true
 ---
 [Datadog Agent を構成][1]したら、次の公式 Datadog トレースライブラリのいずれかを使用して[トレース][2]を送信するようにアプリケーションを構成します。
 
