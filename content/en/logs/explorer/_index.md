@@ -196,4 +196,3 @@ At any moment, and depending on your current aggregation, **export** your explor
 [8]: /dashboards/
 [9]: /monitors/monitor_types/log/
 [10]: /integrations/#cat-notification
-[11]: /logs/explorer/watchdog-insights
