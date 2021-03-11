@@ -111,10 +111,15 @@ The number of custom metrics from a [DISTRIBUTION metric][1] is five times the u
 
 ##### Adding percentile aggregations
 
-You can include percentile aggregations (`p50`, `p75`, `p90`, `p95`, and `p99`) on your distribution metric. Including these additional percentile aggregations results in an additional volume of five times the unique combination of metric name and tag values (**5\*4 = 20 custom metrics**). Therefore the total number of custom metrics emitted from this distribution metric with percentile aggregationos is **2 * (5\*4 = 20 custom metrics)** .
+You can include percentile aggregations (`p50`, `p75`, `p90`, `p95`, and `p99`) on your distribution metric. Including these additional percentile aggregations results in an additional volume of five times the unique combination of metric name and tag values (**5\*4 = 20 custom metrics**). Therefore the total number of custom metrics emitted from this distribution metric with percentile aggregations is **2 * (5\*4 = 20 custom metrics)** .
 
 This table summarizes the effect of adding percentile aggregations to any distribution metric. 
-{{< img src="account_management/billing/custom_metrics/percentilescounting.jpg" alt="Number of custom metrics from distributions with percentiles"  >}}
+
+| Metrics                                                                                    | Number of Billable Custom Metrics |
+|--------------------------------------------------------------------------------------------|-----------------------------------|
+| Number of custom metrics from a baseline distribution (count, sum, min, max, avg)          | `5*(tag value combinations)`      |
+| Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99)  | `5*(tag value combinations)`      |
+| Total                                                                                      | `2*5(tag value combinations)`     |
 
 ##### Customization of tagging
 
@@ -128,7 +133,6 @@ The number of custom metrics from a [DISTRIBUTION metric][1] is five times the u
 
 [1]: /developers/metrics/types/?tab=distribution#definition
 [2]: /metrics/distributions/#customize-tagging
-[3]: /metrics/distributions/#aggregations
 {{% /tab %}}
 {{< /tabs >}}
 
