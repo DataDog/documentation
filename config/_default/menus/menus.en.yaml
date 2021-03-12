@@ -407,7 +407,7 @@ main:
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1001  
+    weight: 1001
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
