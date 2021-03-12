@@ -8,9 +8,6 @@ further_reading:
 - link: "/security_monitoring/detection_rules/security_monitoring"
   tag: "Documentation"
   text: "Follow the creating new Security Monitoring rules guide"
-- link: "/security_monitoring/detection_rules/compliance_monitoring"
-  tag: "Documentation"
-  text: "Follow the creating new Compliance Monitoring rules guide"
 ---
 
 ## Overview
