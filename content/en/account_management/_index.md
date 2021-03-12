@@ -6,8 +6,20 @@ aliases:
     - /guides/billing
     - /account_management/settings
 ---
+{{< site-region region="us,us3,eu" >}}
+<div class="alert alert-warning">Testing multiple regions in the site-region partial.</div>
+{{< /site-region >}}
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3" >}}
+<h3>This text should only show up for us or us3.</h3>
+{{< /site-region >}}
+
+{{< site-region region="eu,gov" >}}
+<h3>This text should only show up for eu or gov.</h3>
 {{< /site-region >}}
 
 ## Account settings

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         options.forEach(option => {
             option.addEventListener('click', () => {
                 const region = option.dataset.value;
-                regionOnChangeHandler(region)
+                regionOnChangeHandler(region);
             })
         })
     }
@@ -75,8 +75,7 @@ function showRegionSnippet(newSiteRegion) {
     regionSnippets.forEach(regionSnippet => {
         const { region } = regionSnippet.dataset;
 
-        // hide snippet if not active region
-        if (region !== newSiteRegion) {
+        if (!region.includes(newSiteRegion)) {
             regionSnippet.classList.add('d-none');
         } else {
             regionSnippet.classList.remove('d-none');
