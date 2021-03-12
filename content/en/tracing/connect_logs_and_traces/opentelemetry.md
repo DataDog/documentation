@@ -3,7 +3,7 @@ title: Connect OpenTelemetry Traces and Logs
 kind: documentation
 description: 'Connect your application logs and OpenTelemetry traces to correlate them in Datadog'
 further_reading:
-- link: "/tracing/setup_overview/openstandards/"
+- link: "/tracing/setup_overview/open_standards/"
   tag: "Documentation"
   text: "Send OpenTelemetry Traces to Datadog"
 - link: "https://opentelemetry.io/docs/collector/"
