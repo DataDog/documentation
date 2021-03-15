@@ -75,7 +75,7 @@ function showRegionSnippet(newSiteRegion) {
     regionSnippets.forEach(regionSnippet => {
         const { region } = regionSnippet.dataset;
 
-        if (!region.includes(newSiteRegion)) {
+        if (region !== newSiteRegion) {
             regionSnippet.classList.add('d-none');
         } else {
             regionSnippet.classList.remove('d-none');
