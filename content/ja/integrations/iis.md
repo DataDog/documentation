@@ -8,7 +8,10 @@ assets:
   logs:
     source: iis
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[IIS] Anomalous amount of requests for site: {{site.name}}': assets/monitors/req.json
+    '[IIS] Increase of locked error per second for site: {{site.name}}': assets/monitors/lock.json
+    '[IIS] Increase of not found error per second for site: {{site.name}}': assets/monitors/err.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json

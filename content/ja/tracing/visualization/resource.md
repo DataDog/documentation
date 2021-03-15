@@ -50,15 +50,13 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 ### レイテンシー分布
 
-上記のグラフ以外に、リソースレイテンシー分布グラフがあります。
+リソースステータス画面にも、リソースレイテンシー分布グラフが表示されます。
 
-{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="レイテンシー分布"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="レイテンシー分布"  style="width:100%;">}}
 
-このグラフの右上のセレクターを使用して、レイテンシー分布の特定のパーセンタイルを拡大します。
+右上のセレクターを使用して特定のパーセンタイルを拡大するか、サイドバーにカーソルを合わせてパーセンタイルマーカーを表示します。
 
-{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="レイテンシー分布セレクター"  style="width:20%;">}}
-
-このグラフをズームして、対応するトレースをフィルタリングします。
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="レイテンシー分布セレクター"  style="width:50%;">}}
 
 ## スパンサマリー
 

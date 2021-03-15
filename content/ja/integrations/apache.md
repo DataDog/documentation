@@ -9,10 +9,13 @@ assets:
   logs:
     source: apache
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Apache] Low number of idle workers': assets/recommended_monitors/apache_low_idle_workers.json
+    '[Apache] resource utilization': assets/recommended_monitors/high_keep_alive_and_cpu.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
+    apache_processes: assets/saved_views/apache_processes.json
     bot_errors: assets/saved_views/bot_errors.json
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
