@@ -19,7 +19,7 @@ further_reading:
 
 ## Automatic Configuration
 
-Enable runtime metrics collection in the .NET Tracer 1.22.0+ with the `DD_RUNTIME_METRICS_ENABLED=true` environment variable.
+Enable runtime metrics collection in the .NET Tracer 1.23.0+ with the `DD_RUNTIME_METRICS_ENABLED=true` environment variable.
 
 View runtime metrics in correlation with your .NET services. See the [Service page][1] in Datadog.
 
