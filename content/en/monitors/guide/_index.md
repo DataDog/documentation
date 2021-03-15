@@ -12,6 +12,6 @@ disable_sidebar: true
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Template Variable Evaluation{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Monitoring Ranges{{< /nextlink >}}
     {{< nextlink href="monitors/guide/supress-alert-with-downtimes" >}}Downtimes common use cases{{< /nextlink >}}
-    {{< nextlink href="monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value" >}}Configure a metric monitor to alert on NO change in value{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value" >}}Configure a metric monitor to alert on NO change in value{{< /nextlink >}}
     {{< nextlink href="monitors/guide/slo-checklist" >}}SLO Checklist{{< /nextlink >}}
 {{< /whatsnext >}}
