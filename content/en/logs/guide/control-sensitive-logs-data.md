@@ -85,7 +85,7 @@ Take the following steps according to your compliance requirements. You might no
 
 This step is a handy way to mitigate compliance issues. It aims at making the logs with sensitive data - both logs that already sent and logs that might keep flowing in - not queryable in Datadog (Explorer, Dashboards, and Livetail). 
 
-Use the [Data Access configuration page][15] and use the sensitive outline query to define a [restiction][16] that applies to everyone in your organization. 
+Use the [Data Access configuration page][15] and use the sensitive outline query to define a [restriction][16] that applies to everyone in your organization. 
 
 **Note:** Using the **negation** of the sensitive outline query restricts users from seeing anything but matching logs.  
 
