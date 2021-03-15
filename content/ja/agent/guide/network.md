@@ -26,7 +26,7 @@ further_reading:
   - [ライブコンテナ][2]データは `process.`{{< region-param key="dd_site" code="true" >}}
   - [ログ][3] データには、TCP トラフィックの `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} 、HTTP の `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} などが含まれます。詳細は、[ログエンドポイント][4]の全リストを参照してください。
   - [オーケストレーターリソース][5]データは `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
-  - [HIPPA ログ][6]データはすべての[ログ][3]と同じですが、以下に挙げるレガシーエンドポイントにも対応しています。
+  - [HIPAA ログ][6]データはすべての[ログ][3]と同じですが、以下に挙げるレガシーエンドポイントにも対応しています。
     - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
