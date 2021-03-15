@@ -22,6 +22,8 @@ Datadog RUM ブラウザモニタリングを設定するには
 
 **注**: Datadog がデータの受信を開始するまで、アプリケーションはアプリケーションリストページに「保留中」として表示されます。
 
+**対応ブラウザ**: RUM SDK は、IE11 を含む最新のデスクトップブラウザとモバイルブラウザをすべてサポートします。下記の[ブラウザサポート][8]表をご参照ください。
+
 ### 適切なインストール方法の選択
 
 | インストール方法        | 使用例                                                                                                                                                                                                                                                                                                                                                           |
@@ -120,7 +122,6 @@ window.DD_RUM.init({
   applicationId: 'XXX',
   clientToken: 'XXX',
   site: 'datadoghq.com',
-  resourceSampleRate: 100,
   sampleRate: 100,
 })
 ```
@@ -140,7 +141,6 @@ window.DD_RUM.init({
 | `env`                   | 文字列  | ✕       |                 | アプリケーションの環境 (例: prod、pre-prod、staging)                                |
 | `version`               | 文字列  | ✕       |                 | アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)                                |
 | `trackInteractions`     | Boolean | ✕       | `false`         | [ユーザーアクションの自動収集][6]を有効にします。                                                      |
-| `resourceSampleRate`    | 数値  | ✕       | `100`           | リソースを収集するセッションのうち追跡されるセッションの割合。`100` は全てのセッションが追跡されることを、`0` は追跡されるセッションがないことを意味します。               |
 | `sampleRate`            | 数値  | ✕       | `100`           | 追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみが rum イベントを送信します。 |
 | `silentMultipleInit`    | Boolean | ✕       | `false`         | Datadog の RUM がページ上ですでに初期化されている場合、初期化が暗黙に失敗します。                       |
 | `proxyHost`             | 文字列  | ✕       |                 | オプションのプロキシホスト (例: www.proxy.com)。詳細については、完全な[プロキシ設定ガイド][7]を参照してください。       |
@@ -163,7 +163,6 @@ init(configuration: {
     applicationId: string,
     clientToken: string,
     site?: string,
-    resourceSampleRate?: number
     sampleRate?: number,
     silentMultipleInit?: boolean,
     trackInteractions?: boolean,
@@ -184,3 +183,4 @@ init(configuration: {
 [5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
 [6]: https://docs.datadoghq.com/ja/real_user_monitoring/data_collected/user_action/#automatic-collection-of-user-actions
 [7]: https://docs.datadoghq.com/ja/real_user_monitoring/faq/proxy_rum_data/
+[8]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum/BROWSER_SUPPORT.md
