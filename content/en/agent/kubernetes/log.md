@@ -47,12 +47,12 @@ To enable log collection with your DaemonSet:
           value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
           value: "true"
-        - name: DD_CONTAINER_EXCLUDE
+        - name: DD_CONTAINER_EXCLUDE_LOGS
           value: "name:datadog-agent"
      # (...)
     ```
 
-    **Note**: Setting `DD_CONTAINER_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [Container Discovery Management][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
+    **Note**: Setting `DD_CONTAINER_EXCLUDE_LOGS` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [Container Discovery Management][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE_LOGS` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
 
 2. Mount the `pointdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
 
