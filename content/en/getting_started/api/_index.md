@@ -20,6 +20,7 @@ You have:
 - An active Datadog implementation.
 - Access to your Datadog [API and application keys][2].
 - Basic knowledge of API structure and JSON formatting.
+- A [free Postman account][6].
 
 ## Setup
 
@@ -112,3 +113,4 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 [3]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
 [4]: /api/v1/organizations/
 [5]: /api/
+[6]: https://identity.getpostman.com/signup

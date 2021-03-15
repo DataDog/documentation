@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: 'Affichez, recherchez et échangez sur des logs Papertrail dans votre flux d''événements Datadog.'
 doc_link: 'https://docs.datadoghq.com/integrations/papertrail/'
+draft: false
 git_integration_title: papertrail
 has_logo: true
 integration_title: PaperTrail
@@ -25,7 +26,7 @@ Utilisez Papertrail et Datadog pour :
 - Transformer vos données de log non structurées en métriques exploitables
 - Éviter les informations opérationnelles cloisonnées : affichez et corrélez les métriques dérivées des logs, ainsi que les métriques associées au système et aux applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

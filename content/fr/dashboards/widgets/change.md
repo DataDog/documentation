@@ -73,58 +73,15 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][1] utilisé pour le widget Évolution est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][1] pour en savoir plus.
 
-```text
-CHANGE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["change"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][2] utilisé pour le widget Groupe est le suivant :
 
-| Paramètre  | Type             | Obligatoire | Description                                                                                                                                                  |
-|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`     | chaîne           | oui      | Type de widget (utilisez `change` pour le widget Évolution)                                                                                                         |
-| `requests` | tableau d'objets | oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][2] pour apprendre à élaborer le `REQUEST_SCHEMA`. |
-| `title`    | chaîne           | non       | Titre de votre widget.                                                                                                                                        |
+{{< dashboards-widgets-api >}}
 
-Propriétés supplémentaires autorisées dans l'objet `request` :
-
-```json
-{
-  "change_type": {"enum": ["absolute", "relative"]},
-  "compare_to": {
-    "enum": ["hour_before", "day_before", "week_before", "month_before"]
-  },
-  "increase_good": {"type": "boolean"},
-  "order_by": {"enum": ["change", "name", "present", "past"]},
-  "order_dir": {"enum": ["asc", "desc"]},
-  "show_present": {"type": "boolean"}
-}
-```
-
-| Paramètre       | Type    | Obligatoire | Description                                                                                                                    |
-|-----------------|---------|----------|--------------------------------------------------------------------------------------------------------------------------------|
-| `change_type`   | chaîne  | non       | Permet d'afficher l'évolution absolue ou relative. Valeurs disponibles : `absolute` ou `relative`                                       |
-| `compare_to`    | chaîne  | non       | Intervalle de comparaison à utiliser pour mesurer l'évolution. Valeurs disponibles : `hour_before`, `day_before`, `week_before` ou `month_before`. |
-| `increase_good` | Booléen | non       | Définit si une augmentation est préférable ou non.                                                                                              |
-| `order_by`      | chaîne  | non       | Définit le critère de tri à utiliser. Valeurs disponibles : `change`, `name`, `present` ou `past`.                                                |
-| `order_dir`     | chaîne  | non       | Définit l'ordre de tri. Valeurs disponibles : `asc` ou `desc`.                                                                        |
-| `show_present`  | Booléen | non       | Permet d'afficher ou non la valeur actuelle.                                                                                             |
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/graphing_json/widget_json/
-[2]: /fr/dashboards/graphing_json/request_json/
+[1]: /fr/api/v1/dashboards/
+[2]: /fr/dashboards/graphing_json/widget_json/

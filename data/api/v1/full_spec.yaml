@@ -760,7 +760,7 @@ components:
             ok:
               description: An array of of SLO IDs that can be safely deleted.
               items:
-                description: A SLO ID.
+                description: An SLO ID.
                 type: string
               type: array
           type: object
@@ -1979,6 +1979,7 @@ components:
       required:
       - data_source
       - compute
+      - name
       type: object
     FormulaAndFunctionEventQueryGroupBy:
       description: List of objects used to group by.
@@ -2075,6 +2076,7 @@ components:
       required:
       - data_source
       - query
+      - name
       type: object
     FormulaAndFunctionProcessQueryDataSource:
       description: Data sources that rely on the process backend.
@@ -2105,6 +2107,7 @@ components:
           type: string
         name:
           description: Name of query for use in formulas.
+          example: query_errors
           type: string
         sort:
           $ref: '#/components/schemas/QuerySortOrder'
@@ -2120,6 +2123,7 @@ components:
       required:
       - data_source
       - metric
+      - name
       type: object
     FormulaAndFunctionQueryDefinition:
       description: A formula and function query.
@@ -5919,6 +5923,13 @@ components:
             error as value.
           type: object
       type: object
+    SLOErrorBudgetRemainingData:
+      additionalProperties:
+        description: Remaining error budget.
+        format: double
+        type: number
+      description: A mapping of threshold `timeframe` to the remaining error budget.
+      type: object
     SLOErrorTimeframe:
       description: 'The timeframe of the threshold associated with this error
 
@@ -5935,7 +5946,10 @@ components:
       - NINETY_DAYS
       - ALL
     SLOHistoryMetrics:
-      description: A `metric` based SLO history response.
+      description: 'A `metric` based SLO history response.
+
+
+        This is not included in responses for `monitor` based SLOs.'
       properties:
         denominator:
           $ref: '#/components/schemas/SLOHistoryMetricsSeries'
@@ -6085,8 +6099,34 @@ components:
               description: The `from` timestamp in epoch seconds.
               format: int64
               type: integer
+            group_by:
+              description: 'For `metric` based SLOs where the query includes a group-by
+                clause, this represents the list of grouping parameters.
+
+
+                This is not included in responses for `monitor` based SLOs.'
+              items:
+                description: A grouping parameter.
+                type: string
+              type: array
             groups:
-              $ref: '#/components/schemas/SLOHistorySLIData'
+              description: 'For grouped SLOs, this represents SLI data for specific
+                groups.
+
+
+                This is not included in the responses for `metric` based SLOs.'
+              items:
+                $ref: '#/components/schemas/SLOHistorySLIData'
+              type: array
+            monitors:
+              description: 'For multi-monitor SLOs, this represents SLI data for specific
+                monitors.
+
+
+                This is not included in the responses for `metric` based SLOs.'
+              items:
+                $ref: '#/components/schemas/SLOHistorySLIData'
+              type: array
             overall:
               $ref: '#/components/schemas/SLOHistorySLIData'
             series:
@@ -6121,13 +6161,22 @@ components:
       type: object
     SLOHistorySLIData:
       description: 'An object that holds an SLI value and its associated data. It
-        can represent
+        can represent an SLO''s overall SLI value.
 
-        an SLO''s overall SLI value or the SLI value for a specific monitor (in multi-monitor
-        SLOs)
-
-        or group (in grouped SLOs). The uptime history is included for monitor SLOs.'
+        This can also represent the SLI value for a specific monitor in multi-monitor
+        SLOs, or a group in grouped SLOs.'
       properties:
+        error_budget_remaining:
+          $ref: '#/components/schemas/SLOErrorBudgetRemainingData'
+        errors:
+          description: A list of errors while querying the history data for the service
+            level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseError'
+          type: array
+        group:
+          description: For groups in a grouped SLO, this is the group name.
+          type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
             uptime time series.
@@ -6142,9 +6191,17 @@ components:
             minItems: 2
             type: array
           type: array
+        monitor_modified:
+          description: For `monitor` based SLOs, this is the last modified timestamp
+            in epoch seconds of the monitor.
+          format: int64
+          type: integer
+        monitor_type:
+          description: For `monitor` based SLOs, this describes the type of monitor.
+          type: string
         name:
-          description: For groups in a grouped SLO this is the group name. For monitors
-            in a multi-monitor SLO this is the monitor name.
+          description: For groups in a grouped SLO, this is the group name. For monitors
+            in a multi-monitor SLO, this is the monitor name.
           type: string
         precision:
           additionalProperties:
@@ -6155,8 +6212,8 @@ components:
             regardless of the from && to timestamp.
           type: object
         preview:
-          description: 'For `monitor` based SLOs when `true` this indicates that a
-            replay is in progress to give an accurate uptime
+          description: 'For `monitor` based SLOs, when `true` this indicates that
+            a replay is in progress to give an accurate uptime
 
             calculation.'
           type: boolean
@@ -6172,7 +6229,7 @@ components:
           type: number
         uptime:
           deprecated: true
-          description: Deprecated. Use `sli_value` instead.
+          description: Use `sli_value` instead.
           format: double
           type: number
       type: object
@@ -7423,6 +7480,37 @@ components:
       - DB
       - CACHE
       - CUSTOM
+    SyntheticsAPIStep:
+      description: The steps used in a Synthetics multistep API test.
+      properties:
+        assertions:
+          default: []
+          description: Array of assertions used for the test.
+          example: []
+          items:
+            $ref: '#/components/schemas/SyntheticsAssertion'
+          type: array
+        extractedValues:
+          description: Array of values to parse and save as variables from the response.
+          items:
+            $ref: '#/components/schemas/SyntheticsParsingOptions'
+          type: array
+        name:
+          description: The name of the step.
+          type: string
+        request:
+          $ref: '#/components/schemas/SyntheticsTestRequest'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
+      type: object
+    SyntheticsAPIStepSubtype:
+      description: The subtype of the Synthetic multistep API test step, currently
+        only supporting `http`.
+      enum:
+      - http
+      type: string
+      x-enum-varnames:
+      - HTTP
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -7479,8 +7567,12 @@ components:
           type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
+        steps:
+          description: When the test subtype is `multi`, the steps of the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsAPIStep'
+          type: array
       required:
-      - request
       - assertions
       type: object
     SyntheticsAPITestResultData:
@@ -8107,6 +8199,21 @@ components:
       type: string
       x-enum-varnames:
       - TEXT
+    SyntheticsCoreWebVitals:
+      description: Core Web Vitals attached to a browser test step.
+      properties:
+        cls:
+          description: Cumulative Layout Shift.
+          format: int64
+          type: integer
+        lcp:
+          description: Largest Contentful Paint in milliseconds.
+          format: int64
+          type: integer
+        url:
+          description: URL attached to the metrics.
+          type: string
+      type: object
     SyntheticsDeleteTestsPayload:
       description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
 
@@ -8266,20 +8373,7 @@ components:
               example: content-type
               type: string
             parser:
-              description: Details of the parser to use for the global variable.
-              example:
-                type: regex
-                value: .*
-              properties:
-                type:
-                  $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
-                value:
-                  description: Regex or JSON path used for the parser. Not used with
-                    type `raw`.
-                  type: string
-              required:
-              - type
-              type: object
+              $ref: '#/components/schemas/SyntheticsVariableParser'
             type:
               $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
           required:
@@ -8376,6 +8470,22 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
+      type: object
+    SyntheticsParsingOptions:
+      description: Parsing options for variables to extract.
+      properties:
+        field:
+          description: When type is `http_header`, name of the header to use to extract
+            the value.
+          example: content-type
+          type: string
+        name:
+          description: Name of the variable to extract.
+          type: string
+        parser:
+          $ref: '#/components/schemas/SyntheticsVariableParser'
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object
     SyntheticsPlayingTab:
       description: Navigate between different tabs for your browser test.
@@ -8629,6 +8739,11 @@ components:
         value:
           description: Value for the step.
           type: object
+        vitalsMetrics:
+          description: Array of Core Web Vitals metrics for the step.
+          items:
+            $ref: '#/components/schemas/SyntheticsCoreWebVitals'
+          type: array
         warnings:
           description: Warning collected that didn't failed the step.
           items:
@@ -8774,20 +8889,22 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
     SyntheticsTestDetailsSubType:
-      description: 'The sub-type of the Synthetic API test, `http`, `ssl`, `tcp` or
+      description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`.'
+        `dns` or `multi`.'
       enum:
       - http
       - ssl
       - tcp
       - dns
+      - multi
       type: string
       x-enum-varnames:
       - HTTP
       - SSL
       - TCP
       - DNS
+      - MULTI
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -9091,6 +9208,21 @@ components:
       properties:
         new_status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+      type: object
+    SyntheticsVariableParser:
+      description: Details of the parser to use for the global variable.
+      example:
+        type: regex
+        value: .*
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
+        value:
+          description: Regex or JSON path used for the parser. Not used with type
+            `raw`.
+          type: string
+      required:
+      - type
       type: object
     SyntheticsWarningType:
       description: User locator used.
@@ -18278,7 +18410,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-      summary: Create a SLO object
+      summary: Create an SLO object
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
@@ -18345,7 +18477,7 @@ paths:
         type: idempotent
   /api/v1/slo/can_delete:
     get:
-      description: 'Check if a SLO can be safely deleted. For example,
+      description: 'Check if an SLO can be safely deleted. For example,
 
         assure an SLO can be deleted without disrupting a dashboard.'
       operationId: CheckCanDeleteSLO
@@ -18436,7 +18568,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SLODeleteResponse'
           description: Conflict
-      summary: Delete a SLO
+      summary: Delete an SLO
       tags:
       - Service Level Objectives
       x-undo:
@@ -18470,7 +18602,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
-      summary: Get a SLO's details
+      summary: Get an SLO's details
       tags:
       - Service Level Objectives
       x-undo:
@@ -18517,7 +18649,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Update a SLO
+      summary: Update an SLO
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
@@ -21734,11 +21866,12 @@ tags:
   name: Logs Pipelines
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can\
     \ be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n\
-    - Modify tag configurations for metrics\n\n**Note**: A graph can only contain\
-    \ a set number of points\nand as the timeframe over which a metric is viewed increases,\n\
-    aggregation between points occurs to stay below that set number.\n\nThe Post,\
-    \ Patch, and Delete `manage_tags` API methods can only be performed by\na user\
-    \ who has the `Manage Tags for Metrics` permission."
+    - Modify tag configurations for metrics\n- View tags and volumes for metrics\n\
+    \n**Note**: A graph can only contain a set number of points\nand as the timeframe\
+    \ over which a metric is viewed increases,\naggregation between points occurs\
+    \ to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags`\
+    \ API methods can only be performed by\na user who has the `Manage Tags for Metrics`\
+    \ permission."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
     a metric or check that you care about,

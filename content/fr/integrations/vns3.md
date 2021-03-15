@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - network
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md'
 display_name: VNS3
+draft: false
 git_integration_title: vns3
 guid: 1a7a2c46-37a8-4660-8d71-aaad733d987a
 integration_id: vns3
@@ -45,7 +47,7 @@ Obtenez des informations sur le statut des endpoints/tunnels IPSec de votre topo
 
   ![ipsec][3]
 
-## Implémentation
+## Configuration
 
 ### Configuration
 

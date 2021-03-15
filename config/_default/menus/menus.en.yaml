@@ -196,9 +196,9 @@ main_left:
     url: 'https://www.datadoghq.com/solutions/devops/'
     weight: -445
   - identifier: usecase-testing
-    name: 'Shift-Left Testing'
-    parent: 'solutions'
-    title: 'usecase'
+    name: Shift-Left Testing
+    parent: solutions
+    title: usecase
     url: 'https://www.datadoghq.com/solutions/shift-left-testing/'
     weight: -444
   - identifier: usecase-security
@@ -208,9 +208,9 @@ main_left:
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
     weight: -443
   - identifier: usecase-compliance
-    name: 'Compliance for CIS Benchmarks'
-    parent: 'solutions'
-    title: 'usecase'
+    name: Compliance for CIS Benchmarks
+    parent: solutions
+    title: usecase
     url: 'https://www.datadoghq.com/solutions/security/cis-benchmarks/'
     weight: -442
   - identifier: usecase-hybrid
@@ -393,11 +393,6 @@ main:
     url: getting_started/synthetics/
     parent: getting_started
     weight: 10
-  - name: Private Locations
-    identifier: getting_started_private_location
-    url: getting_started/synthetics/private_location
-    parent: getting_started_synthetics
-    weight: 1001
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
@@ -408,6 +403,11 @@ main:
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
     weight: 1003
+  - name: Private Locations
+    identifier: getting_started_private_location
+    url: getting_started/synthetics/private_location
+    parent: getting_started_synthetics
+    weight: 1001
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
@@ -995,6 +995,10 @@ main:
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
     weight: 501
+  - name: Trace Propagation (Advanced)
+    url: serverless/distributed_tracing/serverless_trace_propagation
+    parent: serverless_distributed_tracing
+    weight: 502
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
@@ -1834,6 +1838,10 @@ main:
     url: synthetics/api_tests/dns_tests
     parent: api_tests
     weight: 104
+  - name: ICMP
+    url: synthetics/api_tests/icmp_tests
+    parent: api_tests
+    weight: 105
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics
@@ -3669,7 +3677,19 @@ api:
     url: /api/latest/metrics/
     identifier: metrics
     generated: true
-  - name: Create a Tag Configuration
+  - name: List distinct metric volumes by metric name
+    url: '#list-distinct-metric-volumes-by-metric-name'
+    identifier: list-distinct-metric-volumes-by-metric-name
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListVolumesByMetricName
+      unstable:
+        - v2
+  - name: Create a tag configuration
     url: '#create-a-tag-configuration'
     identifier: create-a-tag-configuration
     parent: metrics
@@ -3681,7 +3701,7 @@ api:
         - CreateTagConfiguration
       unstable:
         - v2
-  - name: Update a Tag Configuration
+  - name: Update a tag configuration
     url: '#update-a-tag-configuration'
     identifier: update-a-tag-configuration
     parent: metrics
@@ -3693,7 +3713,7 @@ api:
         - UpdateTagConfiguration
       unstable:
         - v2
-  - name: List Tag Configuration by Name
+  - name: List tag configuration by name
     url: '#list-tag-configuration-by-name'
     identifier: list-tag-configuration-by-name
     parent: metrics
@@ -3705,7 +3725,7 @@ api:
         - ListTagConfigurationByName
       unstable:
         - v2
-  - name: Delete a Tag Configuration
+  - name: Delete a tag configuration
     url: '#delete-a-tag-configuration'
     identifier: delete-a-tag-configuration
     parent: metrics
@@ -3717,7 +3737,19 @@ api:
         - DeleteTagConfiguration
       unstable:
         - v2
-  - name: List Tag Configurations
+  - name: List tags by metric name
+    url: '#list-tags-by-metric-name'
+    identifier: list-tags-by-metric-name
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagsByMetricName
+      unstable:
+        - v2
+  - name: List tag configurations
     url: '#list-tag-configurations'
     identifier: list-tag-configurations
     parent: metrics
@@ -4123,9 +4155,9 @@ api:
         - GetSLOHistory
       unstable:
         - v1
-  - name: Update a SLO
-    url: '#update-a-slo'
-    identifier: update-a-slo
+  - name: Update an SLO
+    url: '#update-an-slo'
+    identifier: update-an-slo
     parent: service-level-objectives
     generated: true
     params:
@@ -4134,9 +4166,9 @@ api:
       operationids:
         - UpdateSLO
       unstable: []
-  - name: Get a SLO's details
-    url: '#get-a-slos-details'
-    identifier: get-a-slos-details
+  - name: Get an SLO's details
+    url: '#get-an-slos-details'
+    identifier: get-an-slos-details
     parent: service-level-objectives
     generated: true
     params:
@@ -4145,9 +4177,9 @@ api:
       operationids:
         - GetSLO
       unstable: []
-  - name: Delete a SLO
-    url: '#delete-a-slo'
-    identifier: delete-a-slo
+  - name: Delete an SLO
+    url: '#delete-an-slo'
+    identifier: delete-an-slo
     parent: service-level-objectives
     generated: true
     params:
@@ -4178,9 +4210,9 @@ api:
       operationids:
         - DeleteSLOTimeframeInBulk
       unstable: []
-  - name: Create a SLO object
-    url: '#create-a-slo-object'
-    identifier: create-a-slo-object
+  - name: Create an SLO object
+    url: '#create-an-slo-object'
+    identifier: create-an-slo-object
     parent: service-level-objectives
     generated: true
     params:

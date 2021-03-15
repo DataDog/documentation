@@ -2,8 +2,11 @@
 aliases:
   - /fr/integrations/winservices
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md'
 display_name: Windows Service
+draft: false
 git_integration_title: windows_service
 guid: 2289acf0-e413-4384-83f7-88157b430805
 integration_id: windows-service
@@ -37,35 +41,49 @@ Ce check surveille l'état de n'importe quel service Windows et envoie un check 
 
 ### Installation
 
-Le check Service Windows est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos hosts Windows.
+Le check Service Windows est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos hosts Windows.
 
 ### Configuration
 
-Modifiez le fichier `windows_service.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple windows_service.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+Modifiez le fichier `windows_service.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple windows_service.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles. Vous trouverez ci-dessous un exemple de configuration.
 
 ```yaml
 init_config:
 
 instances:
-  ## @param services  - liste de chaînes, obligatoire
-  ## Liste des services à surveiller, p. ex. Dnscache, wmiApSrv, etc.
-  ##
-  ## Si un service est défini sur `ALL`, tous les services enregistrés avec le SCM sont surveillés.
-  ##
-  ## Cela renvoie tous les services qui commencent par service, comme si service.* était configuré.
-  ## Pour une correspondance exacte, utilisez ^service$
-  #
+
+    ## @param services  - liste de chaînes, obligatoire
+    ## Liste des services à surveiller, p. ex. Dnscache, wmiApSrv, etc.
+    ##
+    ## Si un service est défini sur `ALL`, tous les services enregistrés avec le SCM sont surveillés.
+    ##
+    ## Cela renvoie tous les services qui commencent par service, comme si service.* était configuré.
+    ## Pour une correspondance exacte, utilisez ^service$
+    #
+    # - services:
+    #    - <NOM_SERVICE_1>
+    #    - <NOM_SERVICE_2>
   - services:
-      - "<NOM_SERVICE_1>"
-      - "<NOM_SERVICE_2>"
-  ## @param tags - liste d'éléments key:value, facultatif
-  ## Liste de tags à ajouter à chaque check de service envoyé par cette intégration.
-  ##
-  ## Pour en savoir plus sur le tagging, consultez la page https://docs.datadoghq.com/tagging
-  #
-  #  tags:
-  #    - <KEY_1>:<VALUE_1>
-  #    - <KEY_2>:<VALUE_2>
+      - wmiApSrv
+      - SNMPTRAP
+
+    ## @param disable_legacy_service_tag - booléen, facultatif, valeur par défaut : false
+    ## Indique si l'envoi du tag dont le nom `service` a été remplacé `windows_service` doit s'arrêter
+    ## et si l'avertissement d'obsolescence doit être désactivé
+    #
+    # disable_legacy_service_tag: false
+    disable_legacy_service_tag: true
+
+    ## @param tags - liste de paires key:value, facultatif
+    ## Liste de tags à ajouter à chaque check de service envoyé par cette intégration.
+    ##
+    ## Pour en savoir plus sur le tagging, consultez la page https://docs.datadoghq.com/tagging
+    #
+    # tags:
+    #   - <KEY_1>:<VALUE_1>
+    #   - <KEY_2>:<VALUE_2>
+    tags:
+      - provider:amazon
 ```
 
 Entrez les noms de service tels qu'ils apparaissent dans le champ Propriétés de `services.msc` (p. ex. `wmiApSrv`), **PAS** le nom d'affichage (p. ex. `WMI Performance Adapter`). Pour les noms contenant des espaces : mettez le nom entier entre guillemets (p. ex. "Bonjour Service"). **Remarque** : les espaces sont remplacées par des underscores dans Datadog.
@@ -92,8 +110,8 @@ Le check Service Windows n'inclut aucun événement.
 
 ### Checks de service
 
-**windows_service.state** : 
-L'Agent envoie ce check de service pour chaque service Windows configuré dans `services`, et applique le tag « service:<nom_service> » au check de service. Le check de service prend les statuts suivants en fonction du statut Windows :
+**windows_service.state** :<br>
+L'Agent envoie ce check de service pour chaque service Windows configuré dans `services`, et applique le tag service:<nom_service> au check de service. Ce dernier prend les statuts suivants, en fonction du statut Windows :
 
 | Statut Windows   | windows_service.state |
 | ---------------- | --------------------- |
@@ -105,6 +123,8 @@ L'Agent envoie ce check de service pour chaque service Windows configuré dans `
 | Pause Pending    | WARNING               |
 | Paused           | WARNING               |
 | Unknown          | UNKNOWN               |
+
+Si l'Agent ne parvient pas à accéder au service, en raison d'un problème d'autorisation ou d'une erreur de nom, le check de service renvoie `UNKNOWN`.
 
 ## Dépannage
 

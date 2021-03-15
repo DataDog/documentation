@@ -56,7 +56,9 @@ Users with the Access Management permission can assign or remove Datadog roles b
 
 2. Click the **New Mapping** button. 
 
-3. Specify the SAML identity provider key-value pair that you want to associate with an existing Datadog role (either default or custom). For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`: 
+3. Specify the SAML identity provider key-value pair that you want to associate with an existing Datadog role (either default or custom). Note that these entries are case-sensitive. 
+
+   For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`: 
 
     {{< img src="account_management/saml/create_mapping.png" alt="Creating a SAML mapping to Datadog Role"  >}}
 

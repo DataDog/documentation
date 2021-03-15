@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'AWS\_Storage\_Gateway."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_storage_gateway/'
+draft: false
 git_integration_title: amazon_storage_gateway
 has_logo: true
 integration_title: Amazon Storage Gateway
@@ -27,7 +28,7 @@ AWS Storage Gateway offre une intégration transparente et sécurisée entre l
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de Storage Gateway.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -77,14 +77,17 @@ exceptions:
   - Notebook List
   - npm
   - OkHttp
+  - OneLogin
   - OpenMetrics
   - openSUSE
   - OpenTelemetry
   - OpenTracing
   - OpenVPN
+  - OpsWorks
   - Phusion Passenger
   - pre-NAT
   - Prometheus
+  - Puppet
   - Python
   - Python
   - Rails

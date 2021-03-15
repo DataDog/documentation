@@ -89,10 +89,6 @@ When an anomaly appears in one service, there’s often a corresponding anomaly 
 
 Watchdog automatically groups related APM anomalies into a single story whenever it detects an issue that affects multiple services. The story will include a dependency map that shows the service where the issue originated and the downstream dependencies that were affected. This gives you visibility on  the impact of the issue and a quick path to the source of the issue and to move on resolution.
 
-The screenshot below shows a Watchdog story, starting with a summary of the issue and a graph highlighting the anomaly. Below that, a dependency map illustrates the full scope of the problem: the issue is rooted in the `ad-server-http-client` service, and it also affects the downstream services `web-store` and `web-store-mongo`. Clicking on a service node in the map will open a bottom panel where you will be able to explore the different evidences, side effects and root causes that Watchdog identified for that service.
-
-(screenshot tk)
-
 ##### Related dashboards
 
 To speed up further investigations, Datadog may suggest some of your dashboards that are related to the story. In this case, Datadog will highlight which of the dashboard's metrics are related to the insights in the story. 
@@ -163,7 +159,7 @@ Need help? Contact [Datadog support][18].
 [8]: /integrations/amazon_cloudfront/
 [9]: /integrations/amazon_dynamodb/
 [10]: /monitors/
-[11]: https://app.datadoghq.com/apm/watchdog
+[11]: https://app.datadoghq.com/watchdog
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: /monitors/monitor_types/watchdog/
 [14]: /tracing/send_traces/#configure-your-environment

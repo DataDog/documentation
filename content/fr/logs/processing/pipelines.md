@@ -58,24 +58,23 @@ Le flux de logs affiche les logs auxquels votre pipeline s'applique :
 
 ## Pipelines imbriqués
 
-Les pipelines imbriqués sont des pipelines au sein d'un pipeline. Utilisez les pipelines imbriqués pour diviser le processing en deux étapes. Par exemple, vous pouvez commencer par appliquer un filtre de niveau supérieur tel que l'équipe, puis un deuxième niveau de filtrage basé sur l'intégration, le service ou tout autre tag ou attribut.
+Les pipelines imbriqués sont des pipelines au sein d'un autre pipeline. Utilisez les pipelines imbriqués pour diviser le processing en deux étapes. Par exemple, vous pouvez commencer par appliquer un filtre de niveau supérieur tel que l'équipe, puis un deuxième niveau de filtrage basé sur l'intégration, le service ou tout autre tag ou attribut.
 
- Un pipeline peut contenir des pipelines imbriqués et des processeurs, tandis qu'un pipeline imbriqué peut seulement contenir des processeurs.
+Un pipeline peut contenir des pipelines imbriqués et des processeurs, tandis qu'un pipeline imbriqué peut seulement contenir des processeurs.
 
 {{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Pipelines imbriqués" style="width:80%;">}}
 
- Il est possible de faire glisser un pipeline vers un autre pipeline pour le transformer en pipeline imbriqué :
+Il est possible de faire glisser un pipeline vers un autre pipeline pour le transformer en pipeline imbriqué :
 
 {{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="Faire glisser et déposer des pipelines imbriqués" video="true" width="80%" >}}
 
 ## Pipelines spéciaux
 
-### Pipeline d'attribut réservé
+### Pré-processing de logs JSON
 
-Datadog dispose d'[une liste d'attributs réservés][3], tels que `timestamp`, `status`, `host`, `service` et même le `message` de log. Ces attributs ont un comportement spécifique au sein de l'application Datadog.
-Si les attributs figurant dans vos logs JSON présentent des noms différents, utilisez le pipeline des attributs réservés pour remapper l'attribut de vos logs vers un attribut figurant dans la liste des attributs réservés.
+Datadog propose [une liste d'attributs réservés][3] tels que `timestamp`, `status`, `host`, `service` et `message`. Ces attributs ont un comportement spécifique dans Datadog. Si les attributs figurant dans vos logs JSON utilisent des noms différents, utilisez le pipeline *Pre processing for JSON logs* pour mapper les noms d'attribut de vos logs aux attributs réservés de Datadog.
 
-Par exemple, imaginons un service qui génère les logs ci-dessous :
+Par exemple, imaginons un service qui génère le log suivant :
 
 ```json
 {
@@ -87,7 +86,7 @@ Par exemple, imaginons un service qui génère les logs ci-dessous :
 }
 ```
 
-Accédez au pipeline d'attribut réservé et remplacez le mappage par défaut par ce qui suit :
+Ouvrez le pipeline *Pre processing for JSON logs* et modifiez les mappages par défaut comme suit :
 
 {{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Remappage de l'attribut réservé" style="width:70%;">}}
 
@@ -95,7 +94,9 @@ On obtient alors le log suivant :
 
 {{< img src="logs/processing/pipelines/log_post_remapping.png" alt="log après remappage" style="width:70%;">}}
 
-Si vous souhaitez remapper un attribut vers un des attributs réservés dans un pipeline personnalisé, utilisez le [remappeur de statut de log][4] ou le [remappeur de dates de log][5].
+Si vous souhaitez mapper un attribut vers l'un des attributs réservés dans un pipeline personnalisé, utilisez le [remappeur de statut de log][4], le [remappeur de date de log][5] ou le [remappeur de message de log][6].
+
+**Remarque :** le pipeline *Pre processing for JSON logs* est le seul moyen de définir l'un de vos attributs de log en tant que `host` pour vos logs.
 
 ### Pipelines d'intégration
 
@@ -105,14 +106,14 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour cert
 
 ### Bibliothèque de pipelines d'intégration
 
-Pour afficher la liste complète des pipelines d'intégration proposés par Datadog, consultez la [Bibliothèque de pipelines d'intégration][6].
+Pour afficher la liste complète des pipelines d'intégration proposés par Datadog, consultez la [Bibliothèque de pipelines d'intégration][7].
 La Bibliothèque de pipelines indique comment Datadog traite les différents formats de log par défaut.
 
-{{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Bibliothèque de pipelines d'intégration"  style="width:80%;">}}
+{{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Bibliothèque de pipelines d'intégration" style="width:80%;">}}
 
-Pour utiliser un pipeline d'intégration, nous vous conseillons d'installer l'intégration en configurant la `source` de log correspondante. Lorsque Datadog reçoit le premier log avec cette source, l'installation se déclenche automatiquement et le pipeline d'intégration est ajouté à la liste des pipelines de traitement. Pour configurer la source de log, consultez la [documentation relative à l'intégration][7] correspondante.
+Pour utiliser un pipeline d'intégration, nous vous conseillons d'installer l'intégration en configurant la `source` de log correspondante. Lorsque Datadog reçoit le premier log avec cette source, l'installation se déclenche automatiquement et le pipeline d'intégration est ajouté à la liste des pipelines de traitement. Pour configurer la source de log, consultez la [documentation relative à l'intégration][8] correspondante.
 
-Il est également possible de copier un pipeline d'intégration à l'aide du bouton Copy. 
+Il est également possible de copier un pipeline d'intégration à l'aide du bouton Copy.
 
 {{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="Cloner un pipeline à partir de la bibliothèque"  style="width:80%;">}}
 
@@ -120,11 +121,11 @@ Il est également possible de copier un pipeline d'intégration à l'aide du bou
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /fr/logs/processing/processors/
 [2]: /fr/logs/explorer/search/
 [3]: /fr/logs/processing/#reserved-attributes
 [4]: /fr/logs/processing/processors/#log-status-remapper
 [5]: /fr/logs/processing/processors/#log-date-remapper
-[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[7]: /fr/integrations/#cat-log-collection
+[6]: /fr/logs/processing/processors/#log-message-remapper
+[7]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[8]: /fr/integrations/#cat-log-collection

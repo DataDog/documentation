@@ -65,9 +65,9 @@ RUM ライブラリは、さまざまな戦略を使用してクリックアク�
 ```
 ## カスタムユーザーアクション
 
-カスタムユーザーアクションは、`addUserAction` API を使用して手動で宣言および送信されるユーザーアクションです。カスタムタイミングや顧客のカート情報など、ユーザージャーニー中に発生するイベントに関連する情報を送信できます。
+カスタムユーザーアクションは、`addAction` API を使用して手動で宣言および送信されるユーザーアクションです。カスタムタイミングや顧客のカート情報など、ユーザージャーニー中に発生するイベントに関連する情報を送信できます。
 
-RUM を初期化したら、`addUserAction(name: string, context: Context)` API コールを使用してアプリケーションページの特定のインタラクションを監視したり、カスタムタイミングを測定したりする場合のユーザーアクションを生成します。以下の例では、RUM SDK がカート内のアイテム数、中身、カート全体の総額を収集します。
+RUM を初期化したら、`addAction(name: string, context: Context)` API コールを使用してアプリケーションページの特定のインタラクションを監視したり、カスタムタイミングを測定したりする場合のユーザーアクションを生成します。以下の例では、RUM SDK がカート内のアイテム数、中身、カート全体の総額を収集します。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -75,10 +75,10 @@ RUM を初期化したら、`addUserAction(name: string, context: Context)` API 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addUserAction('<名前>', '<JSON_オブジェクト>');
+datadogRum.addAction('<NAME>', '<JSON_OBJECT>');
 
-// Code example
-datadogRum.addUserAction('checkout', {
+// コード例
+datadogRum.addAction('checkout', {
     cart: {
         amount: 42,
         currency: '$',
@@ -92,12 +92,12 @@ datadogRum.addUserAction('checkout', {
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('<NAME>', '<JSON_OBJECT>');
+    DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
 })
 
 // コード例
 DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',
@@ -111,11 +111,11 @@ DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addUserAction('<名前>', '<JSON_オブジェクト>');
+window.DD_RUM && DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
 
-// Code example
+// コード例
 window.DD_RUM &&
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',

@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/pdh_check/README.md'
 display_name: PDH
+draft: false
 git_integration_title: pdh_check
 guid: D09B3410-00A0-4789-ABD7-7740C3FE211F
 integration_id: pdh
@@ -39,7 +41,7 @@ Recueillez des métriques à partir des counters de performances Windows en temp
 
 ### Installation
 
-Le check PDH est inclus avec le paquet de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer.
+Le check PDH est inclus avec le package de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer.
 
 ### Configuration
 

@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Firehose."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_firehose/'
+draft: false
 git_integration_title: amazon_firehose
 has_logo: true
 integration_title: Amazon Firehose
@@ -27,7 +28,7 @@ Amazon Firehose constitue le moyen le plus simple d'importer des données de fl
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de Firehose.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

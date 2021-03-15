@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: 'Observez et discutez des cas nouveaux, ouverts, en attente et résolus dans votre flux d''événements.'
 doc_link: 'https://docs.datadoghq.com/integrations/desk/'
+draft: false
 git_integration_title: desk
 has_logo: true
 integration_title: Desk
@@ -25,7 +26,7 @@ Associez Desk à Datadog pour :
 - Visualiser les statistiques de cas par utilisateur et statut
 - Visualiser les tendances des tickets d'incident en les comparant aux problèmes DevOps
 
-## Implémentation
+## Configuration
 
 ### Configuration
 

@@ -2,10 +2,11 @@
 title: Extension Lambda Datadog (en préversion)
 kind: documentation
 further_reading:
-  - link: serverless/custom_metrics
-    tag: Documentation
-    text: Envoyer des métriques custom à partir d'AWS Lambda
+    - link: serverless/custom_metrics
+      tag: Documentation
+      text: Envoyer des métriques custom à partir d'AWS Lambda
 ---
+
 ## Présentation
 
 <div class="alert alert-warning"> L'extension AWS Lambda Datadog est disponible sous forme de préversion publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
@@ -23,7 +24,7 @@ L'extension Datadog est distribuée sous forme de couche Lambda autonome (distin
 2. Ajoutez la couche Lambda pour l'extension Datadog à votre fonction AWS Lambda :
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:5
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:6
     ```
 
     Remplacez le paramètre fictif `AWS_REGION` dans l'ARN de la couche Lambda par les valeurs adéquates.
@@ -45,7 +46,6 @@ Pour envoyer vos logs Lambda AWS à Datadog à l'aide de l'extension, définisse
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /fr/serverless/custom_metrics?tab=python#synchronous-vs-asynchronous-custom-metrics
 [2]: /fr/serverless/forwarder

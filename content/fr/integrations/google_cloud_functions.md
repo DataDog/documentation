@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez les temps d''exécution de fonctions min, max et moyenne.'
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_functions/'
+draft: false
 git_integration_title: google_cloud_functions
 has_logo: true
 integration_title: Google Cloud Functions
@@ -27,7 +28,7 @@ Recueillez des métriques de Google Functions pour :
 - Visualiser les performances de vos fonctions
 - Corréler les performances de vos fonctions avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Collecte de métriques
 
@@ -45,7 +46,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Function 
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 

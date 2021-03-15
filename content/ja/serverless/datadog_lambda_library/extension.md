@@ -2,10 +2,11 @@
 title: Datadog Lambda 拡張機能 (プレビュー)
 kind: ドキュメント
 further_reading:
-  - link: serverless/custom_metrics
-    tag: Documentation
-    text: AWS Lambda からのカスタムメトリクスの送信
+    - link: serverless/custom_metrics
+      tag: Documentation
+      text: AWS Lambda からのカスタムメトリクスの送信
 ---
+
 ## 概要
 
 <div class="alert alert-warning">Datadog AWS Lambda 拡張機能は公開プレビューです。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
@@ -23,7 +24,7 @@ Datadog 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda ライ�
 2. Datadog 拡張機能用 Lambda レイヤーを AWS Lambda 関数に追加します。
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:5
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:6
     ```
 
     Lambda レイヤー ARN のプレイスホルダー `AWS_REGION` を適切な値に置き換えます。
@@ -45,7 +46,6 @@ Extension を使用して AWS Lambda ログを Datadog に送信するには、�
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /ja/serverless/custom_metrics?tab=python#synchronous-vs-asynchronous-custom-metrics
 [2]: /ja/serverless/forwarder

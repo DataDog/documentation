@@ -1,6 +1,8 @@
 ---
 aliases: []
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: openldap

@@ -213,7 +213,7 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 
 #### Monitoring AWS managed services
 
-To monitor an AWS managed service like MSK, ElastiCache, or RDS, create a pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart.
+To monitor an AWS managed service like MSK, ElastiCache, or RDS, set `clusterChecksRunner` to create a pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart. Then, set the integration configurations under `clusterAgent.confd`.
 
 {{< code-block lang="yaml" >}}
 clusterChecksRunner:

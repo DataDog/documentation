@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Elastic Map Reduce.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_emr/'
+draft: false
 git_integration_title: amazon_emr
 has_logo: true
 integration_title: "Amazon\_Elastic\_Map\_Reduce"
@@ -27,7 +28,7 @@ Amazon Elastic Map Reduce (Amazon EMR) est un service Web qui facilite le trait
 
 Activez cette intégration pour visualiser dans Datadog vos métriques d'EMR.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

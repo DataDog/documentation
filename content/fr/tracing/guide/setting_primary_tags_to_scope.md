@@ -29,7 +29,7 @@ Les tags primaires respectent un autre ensemble de règles que celles des [tags 
 
 L'environnement à partir duquel vous recueillez vos traces constitue le tag primaire obligatoire par défaut. Sa clé de tag est `env`. Par défaut, sa valeur pour des données sans tag est `env:none`.
 
-#### Définition de l'environnement dans le traceur
+#### Environnement du traceur
 
 Nous vous conseillons d'utiliser le traceur pour définir le tag `env`. Cette méthode offre une plus grande flexibilité, car la définition du tag `env` réside dans le runtime réel du service.
 
@@ -37,7 +37,7 @@ Si la variable `DD_ENV` est exposée au processus de votre service, le traceur l
 
 Vous pouvez également définir manuellement le tag `env` comme tag global pour le traceur dans le code. Pour en savoir plus, consultez la [documentation relative à l'assignation de tags dans l'APM][4].
 
-#### Définition de l'environnement dans l'Agent
+#### Environnement de l'Agent
 
 Le tag `env` peut être défini dans la configuration de votre Agent.
 **Toutefois, si `env` est déjà présent dans les données de trace, alors il remplacera tout tag `env` défini dans l'Agent.**
@@ -63,11 +63,9 @@ Options :
 
     **Environnements conteneurisés** : l'Agent prend également en charge la configuration de `tags` de premier niveau par le biais de la variable d'environnement `DD_TAGS`.
 
-#### Afficher les données selon un environnement
+#### Afficher des données selon un environnement
 
-Les environnements apparaissent en haut des pages APM. Utilisez la liste déroulante pour filtrer les données affichées sur la page actuelle.
-
-{{< img src="tracing/guide/setting_primary_tags/envs_tracing_screen.png" alt="Tracing d'environnements"  style="width:80%;">}}
+Les environnements apparaissent en haut des pages APM. Utilisez la liste déroulante `env` pour filtrer les données affichées sur la page actuelle.
 
 ## Ajouter un deuxième tag primaire dans Datadog
 
@@ -83,11 +81,9 @@ Si vous modifiez un tag primaire défini, prenez en compte ce qui suit :
 * Vous ne pourrez plus accéder aux données historiques de l'APM agrégées par ce tag primaire.
 * Les monitors d'APM associés à l'ancien tag afficheront le statut _No Data_.
 
-### Afficher les données selon un tag primaire
+### Afficher des données selon un tag primaire
 
-Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs pour filtrer les données affichées sur la page actuelle. Pour afficher les données sans tag primaire, choisissez `<NOM_TAG>:*` dans la liste déroulante (comme illustré ci-dessous).
-
-{{< img src="tracing/guide/setting_primary_tags/primary_tags_ui.png" alt="IU tags primaires"  style="width:80%;">}}
+Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs pour filtrer les données affichées sur la page actuelle. Pour afficher les données sans tag primaire, choisissez `<NOM_TAG>:*` dans la liste déroulante.
 
 ## Pour aller plus loin
 
