@@ -1879,37 +1879,42 @@ main:
     parent: synthetics
     identifier: synthetics_ci
     weight: 5
+  - name: Testing Tunnel
+    url: /synthetics/testing_tunnel
+    parent: synthetics
+    identifier: synthetics_testing_tunnel
+    weight: 6
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 6
+    weight: 7
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 7
+    weight: 8
   - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
-    weight: 8
+    weight: 9
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Identify Synthetic Bots
     url: synthetics/guide/identify_synthetics_bots/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 11
+    weight: 12
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 12
+    weight: 13
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum_2
