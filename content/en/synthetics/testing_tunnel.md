@@ -79,11 +79,6 @@ datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel
 
 {{< /site-region >}}
 
-
-
-
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -92,8 +87,3 @@ datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/DataDog/datadog-ci/releases/tag/v0.11.0
 [4]: /synthetics/ci/#cli-usage
-
-
-[1]: https://github.com/DataDog/datadog-ci
-[3]: https://github.com/TooTallNate/node-proxy-agent
-[4]: /api/v1/synthetics/#get-test
