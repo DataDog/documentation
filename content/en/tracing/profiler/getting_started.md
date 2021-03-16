@@ -207,6 +207,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
           profiler.HeapProfile,
           // The profiles below are disabled by default to keep overhead
           // low, but can be enabled as needed.
+
           // profiler.BlockProfile,
           // profiler.MutexProfile,
           // profiler.GoroutineProfile,
