@@ -202,6 +202,16 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
         profiler.WithEnv("<ENVIRONMENT>"),
         profiler.WithVersion("<APPLICATION_VERSION>"),
         profiler.WithTags("<KEY1>:<VALUE1>,<KEY2>:<VALUE2>"),
+        profiler.WithProfileTypes(
+          profiler.CPUProfile,
+          profiler.HeapProfile,
+          // The profiles below are disabled by default to keep overhead
+          // low, but can be enabled as needed.
+
+          // profiler.BlockProfile,
+          // profiler.MutexProfile,
+          // profiler.GoroutineProfile,
+        ),
     )
     if err != nil {
         log.Fatal(err)
