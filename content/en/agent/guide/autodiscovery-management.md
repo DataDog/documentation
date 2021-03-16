@@ -22,7 +22,7 @@ Exclude containers from the Agent Autodiscovery perimeter with an exclude rule b
 
 **Note**: Exclude rules support regexes, which are defined as a list of comma-separated strings.
 
-**Note**: In order to exclude every container `name:.*`, `image:.*` or `kube_namespace:.*` can be used. Note that configuring `.*` without a `name:`, `image:` or `kube_namespace:` prefix will not work.
+**Note**: To exclude every container, you can use `name:.*`, `image:.*`, or `kube_namespace:.*`. Note that configuring `.*` without a `name:`, `image:`, or `kube_namespace:` prefix will not work.
 
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
