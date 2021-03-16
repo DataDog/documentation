@@ -84,7 +84,6 @@ datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel
 
 
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
