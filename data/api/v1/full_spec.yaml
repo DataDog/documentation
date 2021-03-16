@@ -9391,6 +9391,10 @@ components:
           items:
             $ref: '#/components/schemas/WidgetEvent'
           type: array
+        legend_columns:
+          $ref: '#/components/schemas/TimeseriesWidgetLegendColumns'
+        legend_layout:
+          $ref: '#/components/schemas/TimeseriesWidgetLegendLayout'
         legend_size:
           $ref: '#/components/schemas/WidgetLegendSize'
         markers:
@@ -9451,6 +9455,35 @@ components:
       required:
       - expression
       type: object
+    TimeseriesWidgetLegendColumns:
+      description: Columns displayed in the legend.
+      items:
+        description: Legend column.
+        enum:
+        - value
+        - avg
+        - sum
+        - min
+        - max
+        type: string
+        x-enum-varnames:
+        - VALUE
+        - AVG
+        - SUM
+        - MIN
+        - MAX
+      type: array
+    TimeseriesWidgetLegendLayout:
+      description: Layout of the legend.
+      enum:
+      - auto
+      - horizontal
+      - vertical
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - HORIZONTAL
+      - VERTICAL
     TimeseriesWidgetRequest:
       description: Updated timeseries widget.
       properties:
