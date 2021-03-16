@@ -1540,6 +1540,11 @@ main:
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
     weight: 1004
+  - name: .NET
+    url: tracing/runtime_metrics/dotnet
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_dotnet
+    weight: 1005
   - name: Continuous Profiler
     url: tracing/profiler/
     parent: tracing
