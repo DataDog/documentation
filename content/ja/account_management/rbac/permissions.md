@@ -58,20 +58,19 @@ further_reading:
 
 ### ログコンフィギュレーションアクセス
 
-#### logs_generate_metrics
+#### `logs_generate_metrics`
 
 [Generate Metrics][3] 機能を使用する能力をロールに付与します。
 
 このアクセス許可はグローバルで、これにより新しいメトリクスの作成と、既存のメトリクスの編集または削除の両方が可能になります。
 
-#### logs_write_facets
+#### `logs_write_facets`
 
 [ファセットの作成、編集、および削除][4]を使用する能力をロールに付与します。
 
 このアクセス許可はグローバルで、これにより新しいファセットの作成と、既存のメトリクスの編集または削除の両方が可能になります。
 
-
-#### logs_modify_indexes
+#### `logs_modify_indexes`
 
 [ログインデックス][5]を作成および変更する能力をロールに付与します。それには以下が含まれます。
 
@@ -84,7 +83,7 @@ further_reading:
 **注**: このアクセス許可は、バックグラウンドで[ログ読み取りインデックスデータ](#logs-read-index-data)および[ログ書き込み除外フィルター](#logs-write-exclusion-filters)アクセス許可も付与します。
 
 
-#### logs_write_exclusion_filters
+#### `logs_write_exclusion_filters`
 
 インデックス内で[除外フィルター][8]を作成または変更する能力をロールに付与します。
 
@@ -109,7 +108,7 @@ further_reading:
 {{< /tabs >}}
 
 
-#### logs_write_pipelines
+#### `logs_write_pipelines`
 
 [ログ処理パイプライン][9]を作成および変更する能力をロールに付与します。それには以下が含まれます。
 
@@ -122,7 +121,7 @@ further_reading:
 **注**: このアクセス許可は、バックグラウンドで[ログ書き込みプロセッサ](#logs-write-processors) (すべてのパイプライン上のすべてのプロセッサに対して) アクセス許可も付与します。
 
 
-#### logs_write_processors
+#### `logs_write_processors`
 
 プロセッサとネストされたパイプラインを作成、編集、または削除する能力をロールに付与します[12]。
 
@@ -164,7 +163,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-#### logs_write_archives
+#### `logs_write_archives`
 
 [ログアーカイブ][13]を作成、編集、または削除する能力を付与します。それには以下が含まれます。
 
@@ -175,7 +174,7 @@ curl -X POST \
 
 このアクセス許可はグローバルで、これにより新しいアーカイブの作成と、既存のアーカイブの編集と削除が可能になります。
 
-#### logs_read_archives
+#### `logs_read_archives`
 
 アーカイブコンフィギュレーションの詳細にアクセスする能力を付与します。 [ログ書き込み履歴ビュー](#logs-write-historical-view)と組み合わせて、このアクセス許可はアーカイブから[リハイドレート][14]をトリガーする能力も付与します。
 
@@ -207,7 +206,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-#### logs_write_historical_views
+#### `logs_write_historical_views`
 
 [Log Rehydration*][14] をトリガーすることを意味する、履歴ビューを書き込む能力を付与します。
 
@@ -230,7 +229,7 @@ curl -X POST \
 * [インデックスデータのログ読み取り](#logs-read-index-data)レガシーアクセス許可を使用**する**場合、結果の履歴ビューは `PROD` および `ADMIN` ロールメンバーに制限されるため、これらのログには `CI-CD` ロールメンバーはアクセスできません。 
 
 
-#### logs_public_config_api
+#### `logs_public_config_api`
 
 Datadog API でログコンフィギュレーションを作成または変更する能力を付与します。
 
@@ -248,7 +247,7 @@ Datadog API でログコンフィギュレーションを作成または変更�
 * [ログ読み取りデータ](#logs-read-data) (推奨) は、ログ制限クエリに一致するログへのロールのアクセスを制限することにより、よりきめ細かなアクセス制御を提供します。
 * [ログ読み取りインデックスデータ](#logs-read-index-data)は、インデックスごとにインデックス付きログデータへのデータアクセスを制限するレガシーアプローチです。(インデックスされたデータにアクセスする際にもこのアクセス許可を有効にすることが求められます)
 
-#### logs_read_data
+#### `logs_read_data`
 
 ログデータへの読み取りアクセス権。付与された場合、他の制限が適用されます (`logs_read_index_data` または[制限クエリ][18]など)。
 
@@ -334,7 +333,7 @@ Datadog API でログコンフィギュレーションを作成または変更�
 * このユーザーが [livetail](#logs-livetail) アクセス許可を持っている場合、このユーザーには livetail の `service:api` ログのみが表示されます。
 
 
-#### logs_read_index_data
+#### `logs_read_index_data`
 
 いくつかのログインデックスでロールに読み取りアクセス権を付与します。これは、グローバルに割り当てることも、ログインデックスのサブセットに制限することもできます。
 
@@ -377,7 +376,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-#### logs_live_tail
+#### `logs_live_tail`
 
 ロールに [Live Tail][19] 機能を使用する能力を付与します。
 

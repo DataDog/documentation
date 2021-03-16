@@ -27,12 +27,12 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies: []
-display_name: RapDev Zoom
+display_name: Zoom par RapDev
 draft: false
 git_integration_title: rapdev_zoom
 guid: a0a0380a-42b7-4977-92fc-a65c8d904b8d
 integration_id: rapdev-zoom
-integration_title: RapDev Zoom
+integration_title: Zoom par RapDev
 is_public: true
 kind: integration
 maintainer: integrations@rapdev.io
@@ -44,9 +44,9 @@ pricing:
   - billing_type: tag_count
     metric: datadog.marketplace.rapdev.zoom
     tag: zoom_user_email
-    unit_label: Zoom Registered Users
+    unit_label: Utilisateurs enregistrés Zoom
     unit_price: 1
-public_title: RapDev Zoom
+public_title: Zoom par RapDev
 short_description: Surveillez vos comptes Zoom et optimisez votre licence.
 support: partner
 supported_os:

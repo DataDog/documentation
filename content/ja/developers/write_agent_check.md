@@ -55,7 +55,7 @@ __version__ = "1.0.0"
 
 class HelloCheck(AgentCheck):
     def check(self, instance):
-        self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
+        self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'] + self.instance.get('tags', []))
 {{< /code-block >}}
 
 基本クラスから提供されるインターフェイスの詳細については、[API のドキュメント][5]を参照してください。
@@ -116,6 +116,8 @@ sudo -u dd-agent -- dd-agent check <CHECK_NAME>
 {{% /tab %}}
 {{< /tabs >}}
 
+確認したら、Agent を再起動してこれを含め、Datadog へのデータのレポートを開始します。
+
 ## コマンドラインプログラムを実行するチェックの書き方
 
 コマンドラインプログラムを実行し、その出力をカスタムメトリクスとして取得するカスタムチェックを作成できます。たとえば、`vgs` コマンドを実行して、ボリュームグループに関する情報を報告するチェックが考えられます。便宜上、ラッパー関数が提供されています。これは、別のプロセスを呼び出してその出力や終了コードを収集することを避けるためです。
@@ -150,7 +152,7 @@ class LSCheck(AgentCheck):
     def check(self, instance):
         files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
         file_count = len(files.split('\n')) - 1  #len() はデフォルトで int 値を返します
-        self.gauge("file.count", file_count,tags=['タグキー:タグ値'])
+        self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'] + self.instance.get('tags', []))
 ```
 
 ## その他の参考資料
