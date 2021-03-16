@@ -44,6 +44,12 @@ On .NET Framework, metrics are collected using performance counters. Users in no
 
 IIS application pools use special accounts that do not appear in the list of users. To add them to the Performance Monitoring Users group, look for `IIS APPPOOL\<name of the pool>`. For instance, the user for the DefaultAppPool would be `IIS APPPOOL\DefaultAppPool`.
 
+This can be done either from the "Computer Management" UI, or from an administrator command prompt:
+
+```
+net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
