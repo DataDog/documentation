@@ -70,13 +70,13 @@ Datadog は、特定のサービスに対してすぐに使用できるグラフ
 
 ### レイテンシー分布
 
-上記のグラフ以外に、サービスレイテンシー分布グラフがあります。
+サービス詳細画面にも、サービスレイテンシー分布グラフが表示されます。
 
-{{< img src="tracing/visualization/service/latency_distribution.png" alt="レイテンシー分布"  style="width:90%;">}}
+{{< img src="tracing/visualization/service/service_latency_distribution.png" alt="レイテンシー分布"  style="width:100%;">}}
 
-このグラフの右上のセレクターを使用して、レイテンシー分布の特定のパーセンタイルを拡大します。
+右上のセレクターを使用して特定のパーセンタイルを拡大するか、サイドバーにカーソルを合わせてパーセンタイルマーカーを表示します。
 
-{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="レイテンシー分布セレクター"  style="width:20%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="レイテンシー分布サイドバー"  style="width:50%;">}}
 
 ## リソース
 

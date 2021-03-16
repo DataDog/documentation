@@ -28,7 +28,7 @@
 "name": "reporter"
 "pricing":
 - "billing_type": flat_fee
-  "unit_price": !!int "250"
+  "unit_price": !!int "1000"
 "public_title": "Reporter"
 "short_description": "Datadog ダッシュボードのメールレポートを生成する"
 "support": "パートナー"

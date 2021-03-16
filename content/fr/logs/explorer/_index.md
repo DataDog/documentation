@@ -195,4 +195,3 @@ En fonction de l'agrégation que vous consultez, vous pouvez **exporter** votre 
 [8]: /fr/dashboards/
 [9]: /fr/monitors/monitor_types/log/
 [10]: /fr/integrations/#cat-notification
-[11]: /fr/logs/explorer/watchdog-insights
