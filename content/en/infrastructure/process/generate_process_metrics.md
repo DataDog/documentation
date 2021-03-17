@@ -1,9 +1,9 @@
 ---
-title: Generate Metrics from Processes
+title: Increase Process Retention
 kind: documentation
 aliases:
     - /processes/processing/process_to_metrics/
-    - /infrastructure/generate_process_metrics/
+    - /infrastructure/increase_process_retention/
 description: Generate metrics from processes.
 further_reading:
     - link: 'metrics/distributions/'
@@ -25,11 +25,9 @@ While Live Processes data is stored for 36 hours, you can generate global and pe
 
 {{< img src="infrastructure/process/process2metrics_overview.png" alt="Generate process-based metrics"  style="width:80%;">}}
 
-Generating process-based metrics is currently in public beta for all US customers. EU customers can request access [using this form][1].
-
 ## Generate a process-based metric
 
-You can generate a new process-based metric directly from queries in the Live Processes page, or in the _[Distribution Metrics][2]_ tab, by selecting the **Create Metric** button.
+You can generate a new process-based metric directly from queries in the Live Processes page, or in the _[Distribution Metrics][1]_ tab, by selecting the **Create Metric** button.
 
 {{< img src="infrastructure/process/process2metrics_create_LP.png" alt="Generate process-based metrics"  style="width:80%;">}}
 
@@ -37,9 +35,9 @@ You can generate a new process-based metric directly from queries in the Live Pr
 
 {{< img src="infrastructure/process/process2metrics_create.png" alt="Create a process-based metric"  style="width:80%;">}}
 
-1. **Select tags to filter your query**: The query syntax is the same as for [Live Processes][3]. Only processes matching the scope of your filters are considered for aggregation. Textsearch filters are currently supported only in the Live Processes page.
+1. **Select tags to filter your query**: The query syntax is the same as for [Live Processes][2]. Only processes matching the scope of your filters are considered for aggregation. Textsearch filters are currently supported only in the Live Processes page.
 2. **Select the measure you would like to track**: Enter a measure (e.g., `Total CPU %`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics.
-3. **Add tags to `group by`**: Select tags to be added as dimensions to your metrics, so they can be filtered, aggregated, and compared. By default, metrics generated from processes will not have any tags unless explicitly added. Any tag available for Live Processes queries can be used in this field. Process-based metrics are considered [custom metrics][4]. Avoid grouping by unbounded or extremely high cardinality tags like `command` and `user` to avert impacting your billing.
+3. **Add tags to `group by`**: Select tags to be added as dimensions to your metrics, so they can be filtered, aggregated, and compared. By default, metrics generated from processes will not have any tags unless explicitly added. Any tag available for Live Processes queries can be used in this field. Process-based metrics are considered [custom metrics][3]. Avoid grouping by unbounded or extremely high cardinality tags like `command` and `user` to avert impacting your billing.
 4. **Name your metric**: Fill in the name of your metric. Process-based metrics always have the prefix _proc._ and suffix _[measure_selection]_.
 5. **Add percentile aggregations**: Select the _Include percentile aggregations_ checkbox to generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered customer metrics, and billed accordingly.
 
@@ -67,14 +65,13 @@ Once created, you can use process distribution aggregate and percentile metrics 
 
 - Graph process-based metrics in dashboards and notebooks to track the historical resource consumption of important workloads
 - Create threshold or anomaly-based monitors on top of process-based metrics to detect when CPU or RSS memory dips or spikes unexpectedly
-- Use [Metric Correlations][5] to contextualize changes in resource consumption against internal and third-party software performance
+- Use [Metric Correlations][4] to contextualize changes in resource consumption against internal and third-party software performance
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://forms.gle/Bo664kv8Y1Avmzmg6
-[2]: https://app.datadoghq.com/process?view=metrics
-[3]: https://app.datadoghq.com/process
-[4]: /developers/metrics/custom_metrics/
-[5]: /dashboards/correlations/
+[1]: https://app.datadoghq.com/process?view=metrics
+[2]: https://app.datadoghq.com/process
+[3]: /developers/metrics/custom_metrics/
+[4]: /dashboards/correlations/
