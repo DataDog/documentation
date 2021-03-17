@@ -3,7 +3,7 @@ title: Increase Process Retention
 kind: documentation
 aliases:
     - /processes/processing/process_to_metrics/
-    - /infrastructure/increase_process_retention/
+    - /infrastructure/generate_process_metrics/
 description: Generate metrics from processes.
 further_reading:
     - link: 'metrics/distributions/'
