@@ -23,13 +23,13 @@ While Live Processes data is stored for 36 hours, you can generate global and pe
 - Assess the health of your system before and after load or stress tests
 - Track the effect of software deployments on the health of your underlying hosts or containers
 
-{{< img src="infrastructure/process/process2metrics_overview.png" alt="Generate process-based metrics"  style="width:80%;">}}
+{{< img src="infrastructure/process/process2metrics_overview_2.png" alt="Generate process-based metrics"  style="width:80%;">}}
 
 ## Generate a process-based metric
 
-You can generate a new process-based metric directly from queries in the Live Processes page, or in the _[Distribution Metrics][1]_ tab, by selecting the **Create Metric** button.
+You can generate a new process-based metric directly from queries in the Live Processes page, or in the _[Increase Retention][1]_ tab, by selecting the **Create Metric** button.
 
-{{< img src="infrastructure/process/process2metrics_create_LP.png" alt="Generate process-based metrics"  style="width:80%;">}}
+{{< img src="infrastructure/process/process2metrics_create_LP_2.png" alt="Generate process-based metrics"  style="width:80%;">}}
 
 ### Add a new process-based metric
 
