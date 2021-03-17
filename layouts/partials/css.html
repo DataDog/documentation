@@ -1,0 +1,19 @@
+{{ $inServerMode := site.IsServer }}
+{{ $includePaths := (slice "node_modules") }}
+{{ $scss         := "scss/style.scss" }}
+{{ $cssOutput    := "css/style.css" }}
+{{/* CSS dev mode: sourcemaps */}}
+{{ $devOpts      := dict "targetPath" $cssOutput "includePaths" $includePaths "enableSourceMap" true }}
+{{/* CSS prod mode: minified */}}
+{{ $prodOpts     := dict "targetPath" $cssOutput "includePaths" $includePaths "outputStyle" "compressed" }}
+{{/* Activate dev mode only when running `hugo server` */}}
+{{ $cssOpts      := cond $inServerMode $devOpts $prodOpts }}
+{{ $css          := resources.Get $scss | resources.ExecuteAsTemplate $scss . | toCSS $cssOpts }}
+
+{{ if $inServerMode }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{ else }}
+{{/* For prod mode, add a SHA fingerprint */}}
+{{ $prodCss      := $css | fingerprint }}
+<link rel="stylesheet" href="{{ $prodCss.RelPermalink }}" integrity="{{ $prodCss.Data.Integrity }}">
+{{ end }}

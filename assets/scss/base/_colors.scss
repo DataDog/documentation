@@ -68,82 +68,82 @@ $bg-api-patch:          #FFF0D4;
 
 // Color variables for helper classes
 $color-var: (
-  black:                $gray-base,
-  white:                $white-base,
-  primary:              $brand-primary,
-  purple:               $brand-primary,
-  yellow:               $brand-yellow,
-  gray-darker:          $gray-darker,
-  gray-darkish:          $gray-darkish,
-  gray-dark:            $gray-dark,
-  gray:                 $gray,
-  gray-light:           $gray-light,
-  gray-lighter:         $gray-lighter,
-  gray-lightest:        $gray-lightest,
-  gray-border:          $gray-border,
-  light-gray:           $gray-lighter,
-  studio:               $studio,
-  rose:                 $rose,
-  silver:               $silver,
-  wild-sand:            $wild-sand,
-  cornflower-blue:      $cornflower-blue,
-  froly:                $froly,
-  amethyst-violet:      $amethyst-violet,
-  amethyst:             $amethyst,
-  medium-orchid-violet: $medium-orchid-violet,
-  tru-v:                $tru-v,
-  cranberry:            $cranberry,
-  persimmon:            $persimmon,
-  mercury:              $mercury,
-  dodger-blue:          $dodger-blue,
-  alabaster:            $alabaster,
-  boulder:              $boulder,
-  blue-ribbon:          $blue-ribbon,
-  onahau:               $onahau,
-  mine-shaft:           $mine-shaft,
-  lavender:             $lavender,
-  governor-bay:         $governor-bay,
-  success:              $brand-success,
-  info:                 $brand-info,
-  warning:              $brand-warning,
-  danger:               $brand-danger,
-  neue:                 $brand-neue,
-  orch-green:           #9DDB16,
-  white-translucent:    rgba(255, 255, 255, 0.3),
-  black-translucent:    rgba(0, 0, 0, 0.3),
-  transparent:          transparent,
-  api-post:             $api-post,
-  api-delete:           $api-delete,
-  api-get:              $api-get,
-  api-put:              $api-put,
-  api-patch:            $api-patch,
-  bg-api-post:          $bg-api-post,
-  bg-api-delete:        $bg-api-delete,
-  bg-api-get:           $bg-api-get,
-  bg-api-put:           $bg-api-put,
-  bg-api-patch:         $bg-api-patch,
+  "black":                $gray-base,
+  "white":                $white-base,
+  "primary":              $brand-primary,
+  "purple":               $brand-primary,
+  "yellow":               $brand-yellow,
+  "gray-darker":          $gray-darker,
+  "gray-darkish":         $gray-darkish,
+  "gray-dark":            $gray-dark,
+  "gray":                 $gray,
+  "gray-light":           $gray-light,
+  "gray-lighter":         $gray-lighter,
+  "gray-lightest":        $gray-lightest,
+  "gray-border":          $gray-border,
+  "light-gray":           $gray-lighter,
+  "studio":               $studio,
+  "rose":                 $rose,
+  "silver":               $silver,
+  "wild-sand":            $wild-sand,
+  "cornflower-blue":      $cornflower-blue,
+  "froly":                $froly,
+  "amethyst-violet":      $amethyst-violet,
+  "amethyst":             $amethyst,
+  "medium-orchid-violet": $medium-orchid-violet,
+  "tru-v":                $tru-v,
+  "cranberry":            $cranberry,
+  "persimmon":            $persimmon,
+  "mercury":              $mercury,
+  "dodger-blue":          $dodger-blue,
+  "alabaster":            $alabaster,
+  "boulder":              $boulder,
+  "blue-ribbon":          $blue-ribbon,
+  "onahau":               $onahau,
+  "mine-shaft":           $mine-shaft,
+  "lavender":             $lavender,
+  "governor-bay":         $governor-bay,
+  "success":              $brand-success,
+  "info":                 $brand-info,
+  "warning":              $brand-warning,
+  "danger":               $brand-danger,
+  "neue":                 $brand-neue,
+  "orch-green":           #9DDB16,
+  "white-translucent":    rgba(255, 255, 255, 0.3),
+  "black-translucent":    rgba(0, 0, 0, 0.3),
+  "transparent":          transparent,
+  "api-post":             $api-post,
+  "api-delete":           $api-delete,
+  "api-get":              $api-get,
+  "api-put":              $api-put,
+  "api-patch":            $api-patch,
+  "bg-api-post":          $bg-api-post,
+  "bg-api-delete":        $bg-api-delete,
+  "bg-api-get":           $bg-api-get,
+  "bg-api-put":           $bg-api-put,
+  "bg-api-patch":         $bg-api-patch,
 );
 
 @each $name, $color in $color-var {
-  .border-#{"" + $name} {
-    border-color: $color!important;
+  .border-#{$name} {
+    border-color: $color !important;
   }
 }
 
 @each $name, $color in $color-var {
-  .text-#{"" + $name} {
-    color: $color!important;
+  .text-#{$name} {
+    color: $color !important;
   }
 }
 
 @each $name, $color in $color-var {
-  .font-#{"" + $name} {
-    color: $color!important;
+  .font-#{$name} {
+    color: $color !important;
   }
 }
 
 @each $name, $color in $color-var {
-  .bg-#{"" + $name} {
+  .bg-#{$name} {
     background-color: $color !important;
   }
 }

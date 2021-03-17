@@ -47,20 +47,20 @@ module:
     - source: content/ja
       target: content
       lang: ja
-    - source: static
-      target: static
+    #- source: static
+    #  target: static
     - source: layouts
       target: layouts
     - source: data
       target: data
-    - source: static
-      target: assets
+    #- source: static
+    #  target: assets
     - source: i18n
       target: i18n
     - source: archetypes
       target: archetypes
     # custom mounts
-    - source: "./node_modules/@datadog/browser-rum/bundle/datadog-rum.js"
-      target: "assets/node_modules/datadog-rum.js"
-    - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
-      target: "assets/node_modules/datadog-logs.js"
+    #- source: "./node_modules/@datadog/browser-rum/bundle/datadog-rum.js"
+    #  target: "assets/node_modules/datadog-rum.js"
+    #- source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
+    #  target: "assets/node_modules/datadog-logs.js"

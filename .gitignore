@@ -2,6 +2,7 @@
 public/
 data/service_checks/
 integrations_data
+resources/
 
 # Ignore generated examples
 /examples

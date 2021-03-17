@@ -2,31 +2,34 @@
   font-size: 16px;
 }
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins/breakpoints";
-@import "~bootstrap/scss/mixins/grid";
-@import "~bootstrap/scss/utilities/display";
-@import "~bootstrap/scss/utilities/spacing";
-
-
+/*
+  Here, Bootstrap is loaded from node_modules/bootstrap. Hugo Pipes allows you
+  to specify a `targetPath` for loading external assets. That parameter is set
+  in layouts/partials/css.html.
+*/
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins/breakpoints";
+@import "bootstrap/scss/mixins/grid";
+@import "bootstrap/scss/utilities/display";
+@import "bootstrap/scss/utilities/spacing";
 
 /* Bootstrap variable customization here */
 $ddpurple:    #632CA6;
 $codesnippet-filename-bg: rgba(119,0,255, 0.15);
 
 $theme-colors: (
-        "primary": $ddpurple,
-        "secondary": #000,
-        "success": $green,
-        "info": $cyan,
-        "warning": $yellow,
-        "danger": $red,
-        "semi-trans": rgba(255, 255, 255, .5),
-        "light": $gray-100,
-        "dark": $gray-800,
-        "gradient": $ddpurple,
-        "white": #FFF
+  "primary": $ddpurple,
+  "secondary": #000,
+  "success": $green,
+  "info": $cyan,
+  "warning": $yellow,
+  "danger": $red,
+  "semi-trans": rgba(255, 255, 255, .5),
+  "light": $gray-100,
+  "dark": $gray-800,
+  "gradient": $ddpurple,
+  "white": #FFF
 );
 
 $spacer: 1rem !default;
@@ -79,11 +82,12 @@ $container-max-widths: (
   xl: 1170px
 );
 
-h2{
+h2 {
   font-weight: 200 !important;
 }
 
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+/* Loaded from node_modules. See note above */
+@import "bootstrap/scss/bootstrap";
 
 /* beyond custom variables here and actual implementations that need to overwrite bootstrap */
 

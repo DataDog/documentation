@@ -1,6 +1,5 @@
 const merge = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.common');
 
 module.exports = merge(common(), {
@@ -29,8 +28,6 @@ module.exports = merge(common(), {
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: [
                 'public/**/*.js',
-                'public/**/*.css',
-                'data/manifest.json'
             ]
         }),
 
