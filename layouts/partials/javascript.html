@@ -1,7 +1,8 @@
 {{ $serverMode := site.IsServer }}
 {{ $jsMain     := "js/main-dd-js.js" }}
-{{ $devOpts    := dict "targetPath" "js/main-dd-js.js" "sourceMap" "inline" }}
-{{ $prodOpts   := dict "targetPath" "js/main-dd-js.js" "minify" true }}
+{{ $defines    := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) }}
+{{ $devOpts    := dict "defines" $defines "targetPath" "js/main-dd-js.js" "sourceMap" "inline" }}
+{{ $prodOpts   := dict "defines" $defines "targetPath" "js/main-dd-js.js" "minify" true }}
 {{/* Activate dev mode only when running `hugo server` */}}
 {{ $jsOpts     := cond $serverMode $devOpts $prodOpts }}
 {{ $js         := resources.Get $jsMain | js.Build $jsOpts }}

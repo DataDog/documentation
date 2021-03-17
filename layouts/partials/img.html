@@ -1,11 +1,6 @@
-{{ if .img_param }}
-    {{ .root.Scratch.Set "img_param" .img_param }}
-{{ else }}
-    {{ .root.Scratch.Set "img_param" "?ch=Width,DPR&fit=max" }}
-{{ end }}
-{{ $img_param := .root.Scratch.Get "img_param" }}
+{{ $img_param := .img_param | default "?ch=Width,DPR&fit=max" }}
 
-{{ $url := (print (.root.Site.Params.img_url) (printf "%s/%s" "images" .src)  ($img_param)) | safeURL }}
+{{ $url := (print (site.Params.img_url) (printf "%s/%s" "images" .src)  ($img_param)) | safeURL }}
 
 {{ $image_type_arr := split .src "." }}
 {{ $image_ext := index $image_type_arr 1 }}
@@ -16,7 +11,7 @@
 {{ $img_alt := .alt }}
 {{ $disable_lazy := .disable_lazy }}
 
-<picture class="{{ if $img_class }} {{ $img_class }} {{ end }}">
+<picture {{ with $img_class }}class="{{ . }}"{{ end }}>
     <source srcset="{{ $url }}&auto=format&w=807 1x, {{ $url }}&auto=format&w=807&dpr=2 2x" media="(min-width: 1200px)">
     <source srcset="{{ $url }}&auto=format&w=670 1x, {{ $url }}&auto=format&w=670&dpr=2 2x" media="(min-width: 992px)">
     <source srcset="{{ $url }}&auto=format&w=496 1x, {{ $url }}&auto=format&w=496&dpr=2 2x" media="(min-width: 759px)">

@@ -1,6 +1,6 @@
 <!-- 1. getting source svg file -->
-{{ $file_path := print "images/svg-icons/" .src }}
-{{ $svg_cont := resources.Get $file_path }}
+{{ $file_path := print "static/images/svg-icons/" .src }}
+{{ $svg_cont := readFile $file_path }}
 
 <!-- 2. set size -->
 {{ $size := .size | default "100%" }}
