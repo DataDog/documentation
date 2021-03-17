@@ -37,7 +37,7 @@ const handleApiResultStyleUpdates = () => {
     const headers = document.querySelectorAll('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
 
     headers.forEach(header => {
-        if (header.textContent.toLowerCase().includes('api latest')) {
+        if (header.textContent.toLowerCase().includes('api')) {
             header.style.fontWeight = '800';
             header.style.color = '#632ca6';
         }
