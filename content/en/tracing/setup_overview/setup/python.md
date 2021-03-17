@@ -44,7 +44,7 @@ Otherwise, to begin tracing applications written in Python, install the Datadog 
 pip install ddtrace
 ```
 
-**Note:** This command requires pip version`18.0.0` or greater.  For Ubuntu, Debian, or another package manager, update your pip version with the following command:
+**Note:** This command requires pip version `18.0.0` or greater.  For Ubuntu, Debian, or another package manager, update your pip version with the following command:
 
 ```python
 sudo -H pip3 install --upgrade pip
