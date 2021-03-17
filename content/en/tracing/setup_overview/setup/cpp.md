@@ -240,6 +240,6 @@ For other environments, please refer to the [Integrations][5] documentation for 
 [1]: /tracing/setup/envoy/
 [2]: /tracing/setup/nginx/
 [3]: /tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/install
+[4]: https://app.datadoghq.com/apm/docs
 [5]: /tracing/send_traces/
 [6]: https://github.com/opentracing/opentracing-cpp
