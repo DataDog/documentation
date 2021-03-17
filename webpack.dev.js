@@ -29,11 +29,6 @@ module.exports = merge(common(), {
             cleanOnceBeforeBuildPatterns: [
                 'public/**/*.js',
             ]
-        }),
-
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css'
         })
     ]
 });
