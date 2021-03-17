@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Datadog’s [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes for storage and query, at the same time many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit what your store for exploration, you can still visualize trends and anomalies over all of your log data at 10s granularity for 15 months.
+Datadog’s [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes for storage and query, at the same time many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit what you store for exploration, you can still visualize trends and anomalies over all of your log data at 10s granularity for 15 months.
 
 With log-based metrics, you can generate a count metric of logs that match a query or a [distribution metric][3] of a numeric value contained in the logs, such as request duration.
 
