@@ -70,11 +70,13 @@ Arithmetic processors must follow the below rules:
 
 {{< img src="tracing/processing_pipelines/lookupprocessor.png" style="width:100%;" alt="How to create a lookup processor" >}}
 
-Lookup processors allow you to define a mapping between a span attribute and human readable values saved in an Enrichment Table (BETA).
+Lookup processors allow you to define a mapping between a span attribute and human readable values saved in an [Enrichment Table](#enrichment-tables).  This feature is also in beta.
 
-For example, you can use the Lookup Processor to map an internal service ID into a human readable service name or store an ID value associated with address and other personal data that is either subject to frequent changes or shouldn't be set within application code. Alternatively, use a lookup processor to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
+For example, you can use the Lookup Processor to map an internal service ID into a human readable service name or store an ID value associated with address and other personal data that is either subject to frequent changes or shouldn't be set within application code.
 
-The Lookup processor performs the following actions:
+Alternatively, use a lookup processor to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
+
+Lookup processors performs the following actions:
 
 1. Looks if the span contains the source attribute.
 2. Checks if the source attribute value exists in the mapping table.
@@ -85,8 +87,9 @@ The Lookup processor performs the following actions:
 
 #### Enrichment tables
 
-This feature is shared with our Log Management solution. For more information on how to create an enrichment table, see the [detailed guide][6].
+This beta feature is shared with our Log Management solution. For more information on how to create an enrichment table and to request access, see the [detailed guide][6].
 
+**Note:** It is not required to be using Datadog Log Management to obtain access to the enrichment table beta.
 
 [1]: /tracing/trace_search_and_analytics/
 [2]: /dashboards/
