@@ -1,6 +1,6 @@
 {{ $serverMode := site.IsServer }}
 {{ $jsMain     := "js/main-dd-js.js" }}
-{{ $devOpts    := dict "targetPath" "js/main-dd-js.js" }}
+{{ $devOpts    := dict "targetPath" "js/main-dd-js.js" "sourceMap" true }}
 {{ $prodOpts   := dict "targetPath" "js/main-dd-js.js" }}
 {{/* Activate dev mode only when running `hugo server` */}}
 {{ $jsOpts     := cond $serverMode $devOpts $prodOpts }}
