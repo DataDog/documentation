@@ -17,6 +17,11 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
+## Runtime Metrics Compatibility
+
+- .NET Framework 4.5+ 
+- .NET Core 3.1+
+ 
 ## Automatic Configuration
 
 Enable runtime metrics collection in the .NET Tracer 1.23.0+ with the `DD_RUNTIME_METRICS_ENABLED=true` environment variable.
