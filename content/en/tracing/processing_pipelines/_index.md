@@ -23,7 +23,8 @@ Span Processing Pipelines are an optional configuration that can be added to you
 
 Pipelines and Processors are applied to all ingested spans, meaning all configuration is done on the [Pipelines][5] page within the Datadog UI.
 
-Use [arithmetic processors](#arithmetic-processor) to change the units of an existing tag or create a new tag based on a formulaic calculation.  Use [lookup processors](#lookup-processor) to add tags based on the key of a row in your [enrichment table][6] without needing to store these values in your code.
+- Use [arithmetic processors](#arithmetic-processor) to change the units of an existing tag or create a new tag based on a formulaic calculation.
+- Use [lookup processors](#lookup-processor) to add tags based on the key of a row in your [enrichment table][6] without needing to store these values in your code.
 
 {{< img src="tracing/processing_pipelines/ProcessingPipelines.png" style="width:100%;" alt="How to create an arithmetic processor" >}}
 
