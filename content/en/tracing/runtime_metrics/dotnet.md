@@ -20,7 +20,7 @@ further_reading:
 ## Runtime Metrics Compatibility
 
 - .NET Framework 4.5+ 
-- .NET Core 3.1+
+- .NET Core 3.1
 - .NET 5
  
 ## Automatic Configuration
