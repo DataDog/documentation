@@ -54,7 +54,7 @@ datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | 443  | `tunnel-us1.synthetics.datadoghq.com`   | Required to open the wss connection from the `datadog-ci` client to the tunnel service. |
-| 443  | `intake.synthetics.datadoghq.com` | Required to get the presigned URL & to trigger the Synthetic tests. |
+| 443  | `intake.synthetics.datadoghq.com` | Required to get the presigned URL and to trigger the Synthetic tests. |
 | 443  | `api.datadoghq.com` | Required to search for Synthetic tests, get them, and poll their results. |
 
 {{< /site-region >}}
