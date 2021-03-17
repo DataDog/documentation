@@ -23,7 +23,7 @@ This feature is currently in public beta.
 </div>
 
 The Synthetic testing tunnel creates **short lived secure connections between your internal environments and the Datadog infrastructure**, allowing you to **swiftly trigger Synthetic tests on your private applications**.  
-We recommend using the testing tunnel if you are willing to launch Synthetics tests from your **CI/CD pipeline** or against **local** versions of your application without deploying a dedicated and long lasting probing system (such as [private locations][1]). The testing tunnel can also prove helpful if you are looking at triggering tests on **ephemeral cloud environments**.
+Datadog recommends using the testing tunnel if you are willing to launch Synthetics tests from your **CI/CD pipeline** or against **local** versions of your application without deploying a dedicated and long lasting probing system (such as [private locations][1]). The testing tunnel can also prove helpful if you are looking at triggering tests on **ephemeral cloud environments**.
 
 ## What is it?
 
