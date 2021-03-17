@@ -72,7 +72,7 @@ export function handleLanguageBasedRedirects() {
 				acceptLanguage = params['lang_pref'];
 
 				logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
-	
+
 				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
 
 				window.location.replace( window.location.origin + `${ previewPath }/${ uri }${getQueryString(params)}`.replace(/\/+/g,'/') );

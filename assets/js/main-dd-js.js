@@ -2,6 +2,9 @@ import 'bootstrap';
 
 import './datadog-docs';
 
+import './lang-redirects';
+import './region-redirects';
+
 import './components/announcement_banner';
 import './components/copy-code';
 import './components/global-modals';
