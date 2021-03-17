@@ -22,6 +22,8 @@
   {{- partial "meta.html" . -}}
   {{- end -}}
 
+  {{ partial "javascript.html" . }}
+  {{ partial "css.html" . }}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 

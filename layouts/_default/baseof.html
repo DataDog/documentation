@@ -7,8 +7,6 @@
 
   {{ partial "header-scripts.html" . }}
 
-  {{ partial "javascript.html" . }}
-
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}
   {{ partial "preload.html" . }}
@@ -25,6 +23,7 @@
   {{- partial "meta.html" . -}}
   {{- end -}}
 
+  {{ partial "javascript.html" . }}
   {{ partial "css.html" . }}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
