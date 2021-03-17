@@ -35,7 +35,7 @@ The testing tunnel is a functionality that comes with the **[@datadog/datadog-ci
 
 **Note:** When using the testing tunnel, your tests' locations are overriden by a location that depends on your Datadog account region.
 
-## How to use it?
+## How to use the testing tunnel
 
 As mentioned above, the testing tunnel comes with the [@datadog/datadog-ci][2] NPM package and is available from version [v0.11.0][3] of the package. To learn how to get started using the Datadog CI/CD testing integration, visit [this documentation page][4].
 
