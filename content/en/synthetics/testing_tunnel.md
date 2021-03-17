@@ -33,7 +33,7 @@ The testing tunnel is a functionality that comes with the **[@datadog/datadog-ci
 
 `datadog-ci` first gets a presigned URL from Datadog (for authentication). It then opens a secure websocket connection (wss) to Datadog's managed locations using the presigned URL. Using SSH connections through the websocket connection, tests are triggered by `datadog-ci` and executed through Datadog's managed locations. 
 
-**Note:** When using the testing tunnel, your tests' locations will be overriden by a location that depends on your Datadog account region.
+**Note:** When using the testing tunnel, your tests' locations are overriden by a location that depends on your Datadog account region.
 
 ## How to use it?
 
