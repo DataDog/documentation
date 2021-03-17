@@ -1,15 +1,18 @@
 {{ $serverMode := site.IsServer }}
 {{ $jsMain     := "js/main-dd-js.js" }}
-{{ $defines    := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) }}
+{{ $defines    := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) "process.env.RESET_APP_DATA_TIMER" `""` "process.env.NODE_ENV" `"debug"` }}
 {{ $devOpts    := dict "target" "es2019" "defines" $defines "targetPath" "js/main-dd-js.js" "sourceMap" "inline" }}
 {{ $prodOpts   := dict "target" "es2019" "defines" $defines "targetPath" "js/main-dd-js.js" "minify" true }}
 {{/* Activate dev mode only when running `hugo server` */}}
 {{ $jsOpts     := cond $serverMode $devOpts $prodOpts }}
-{{ $js         := resources.Get $jsMain | js.Build $jsOpts }}
+{{ $js         := resources.Get $jsMain | js.Build $jsOpts | babel }}
+
+{{/* Hugo Pipes struggles with jQuery, so let's just import it first */}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 {{ if $serverMode }}
-<script type="text/javascript" src="{{ $js.RelPermalink }}"></script>
+<script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
 {{ else }}
-{{ $prodJs := $js | babel | resources.Fingerprint "sha512" }}
-<script type="text/javascript" src="{{ $prodJs.Permalink }}" integrity="{{ $prodJs.Data.Integrity }}"></script>
+{{ $prodJs := $js | resources.Fingerprint "sha512" }}
+<script type="text/javascript" src="{{ $prodJs.Permalink }}" integrity="{{ $prodJs.Data.Integrity }}" defer></script>
 {{ end }}

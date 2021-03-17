@@ -1,7 +1,5 @@
 import 'bootstrap';
-
 import './datadog-docs';
-
 import './lang-redirects';
 import './region-redirects';
 
