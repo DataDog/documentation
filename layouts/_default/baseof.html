@@ -23,7 +23,6 @@
   {{- partial "meta.html" . -}}
   {{- end -}}
 
-  {{ partial "javascript.html" . }}
   {{ partial "css.html" . }}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
@@ -77,6 +76,7 @@
 
   {{ partial "preview_banner/preview_banner" . }}
 
+  {{ partial "javascript.html" . }}
 </body>
 
 </html>
