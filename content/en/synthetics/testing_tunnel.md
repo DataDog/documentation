@@ -45,7 +45,7 @@ Once you've set up your client on your local machine or your CI server, you can 
 datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel
 ```
 
-### Firewall Requirements
+### Firewall requirements
 
 **Outbound connections** need to be allowed for the following Datadog endpoints:
 
