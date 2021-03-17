@@ -68,14 +68,20 @@ function regionOnChangeHandler(region) {
 function showRegionSnippet(newSiteRegion) {
     const regionSnippets = document.querySelectorAll('[data-region]');
     const regionParams = document.querySelectorAll('[data-region-param]');
-    const externalLinks = document.querySelectorAll(
-        '#mainContent a[href*="app.datadoghq."]'
-    );
+    
+    // build list of external app links using config 
+    let externalLinksQuery = '';
+    Object.entries(config.dd_full_site).forEach(e => {
+        externalLinksQuery += `#mainContent a[href*="${e[1]}"],`
+    })
 
+    // query selector for all app links, removing trailing comma
+    const externalLinks = document.querySelectorAll(externalLinksQuery.slice(0, -1));
+    
     regionSnippets.forEach(regionSnippet => {
         const { region } = regionSnippet.dataset;
 
-        if (region !== newSiteRegion) {
+        if (region.split(',').indexOf(newSiteRegion) === -1) {
             regionSnippet.classList.add('d-none');
         } else {
             regionSnippet.classList.remove('d-none');
