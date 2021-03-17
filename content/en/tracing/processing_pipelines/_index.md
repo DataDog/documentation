@@ -25,6 +25,8 @@ Pipelines and Processors are applied to all ingested spans, meaning all configur
 
 Use [arithmetic processors](#arithmetic-processor) to change the units of an existing tag or create a new tag based on a formulaic calculation.  Use [lookup processors](#lookup-processor) to add tags based on the key of a row in your [enrichment table][6] without needing to store these values in your code.
 
+{{< img src="tracing/processing_pipelines/ProcessingPipelines.png" style="width:100%;" alt="How to create an arithmetic processor" >}}
+
 ## Pipelines
 
 Pipelines allow you to parse and enrich your trace spans by chaining them sequentially through processors. This lets you extract meaningful information or attributes from semi-structured text to reuse them as facets.
@@ -33,7 +35,7 @@ All ingested spans that come through Pipelines are tested against every Pipeline
 
 ### Pipeline Filters
 
-Filters let you define and limit what kinds of spans a Pipeline applies to. The syntax is the same as when writing a [search query][7] or [retention filter][8].  Common choices for
+Filters let you define and limit what kinds of spans a Pipeline applies to. The syntax is the same as when writing a [search query][7] or [retention filter][8].
 
 **Note:** Filtering is applied before any of the Pipeline’s Processors, hence you cannot filter on an attribute that is yet-to-be-created in the pipeline.
 
@@ -75,11 +77,12 @@ The Lookup processor performs the following actions:
 
 1. Looks if the span contains the source attribute.
 2. Checks if the source attribute value exists in the mapping table.
-3. If it does, creates the target attribute with the corresponding value in the table.
-4. If the target attribute already exists, it is overwritten by the result of the formula.
-5. Optionally, if a lookup processor does not find the source attribute value in the mapping table, creates a target attribute with the fixed default value.
+3. Attributes must be prefixed with `@` when used in formulas.
+4. If it does, creates the target attribute with the corresponding value in the table.
+5. If the target attribute already exists, it is overwritten by the result of the formula.
+6. Optionally, if a lookup processor does not find the source attribute value in the mapping table, creates a target attribute with the fixed default value.
 
-### Enrichment tables
+#### Enrichment tables
 
 This feature is shared with our Log Management solution. For more information on how to create an enrichment table, see the [detailed guide][6].
 
