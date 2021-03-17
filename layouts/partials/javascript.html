@@ -1,3 +1,14 @@
-{{ $opts := dict "targetPath" "js/main-dd-js.js" }}
-{{ $js := resources.Get "js/main-dd-js.js" | js.Build $opts }}
+{{ $serverMode := site.IsServer }}
+{{ $jsMain     := "js/main-dd-js.js" }}
+{{ $devOpts    := dict "targetPath" "js/main-dd-js.js" }}
+{{ $prodOpts   := dict "targetPath" "js/main-dd-js.js" }}
+{{/* Activate dev mode only when running `hugo server` */}}
+{{ $jsOpts     := cond $serverMode $devOpts $prodOpts }}
+{{ $js         := resources.Get $jsMain | js.Build $jsOpts }}
+
+{{ if $serverMode }}
 <script type="text/javascript" src="{{ $js.RelPermalink }}"></script>
+{{ else }}
+{{ $prodJs := $js | babel | resources.Fingerprint "sha512" }}
+<script type="text/javascript" src="{{ $prodJs.Permalink }}" integrity="{{ $prodJs.Data.Integrity }}"></script>
+{{ end }}
