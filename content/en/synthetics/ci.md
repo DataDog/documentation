@@ -542,7 +542,7 @@ For instance, if your test's starting URL is `https://www.example.org:81/path/to
 * `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}`
 * `{{URL}}`
 
-### Running tests
+### Run tests
 
 You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
 
@@ -581,7 +581,7 @@ npm run datadog-ci-synthetics
 {{% /tab %}}
 {{< /tabs >}}
 
-### Run tests on internal applications using the testing tunnel
+### Use the testing tunnel
 
 The [@datadog/datadog-ci][2] NPM package also comes with a tunnel functionality allowing you to swiftly trigger Synthetic tests on your internal applications. The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog allowing all test requests sent via the CLI to automatically be routed through the `datadog-ci` client, consequently allowing Datadog to run test on your internal applications.
 
