@@ -1,46 +1,24 @@
-{{ if  not (.Get "src") }}
-    {{ errorf "Img shortcode error: Missing value for param 'src': %s" .Position }}
+{{ if not (.Get "src") }}
+  {{ errorf "Img shortcode error: Missing value for param 'src': %s" .Position }}
 {{ end }}
-{{- if eq (.Get "popup") "false" -}}
-  {{- $.Scratch.Set "popup" "false" -}}
-{{- else -}}
-  {{- $.Scratch.Set "popup" "true" -}}
-{{- end -}}
-{{- $isPopup := $.Scratch.Get "popup" -}}
+{{- $is_popup := not (eq (.Get "popup") "false") -}}
 {{- $img_width := .Get "width" -}}
 {{- $img_height := .Get "height" -}}
-{{- $wide :=  .Get "wide" -}}
-{{- $video :=  .Get "video" -}}
+{{- $wide := eq (.Get "wide") true -}}
+{{- $video := .Get "video" -}}
 {{- $src := (.Get "src") -}}
 {{- $img := (print .Site.Params.img_url "images/" $src) -}}
+{{- $imgix_w := cond $wide "1170" "850" -}}
 
 {{- $img_resource := partial "img-resource.html" (dict "context" . "src" (print "images/" $src)) -}}
 
 {{- $image_type_arr := split (.Get "src") "." -}}
 {{- $image_ext := index $image_type_arr 1 -}}
-{{- if $wide -}}
-    {{- $.Scratch.Set "imgix_w" "1170" -}}
-{{- else -}}
-    {{- $.Scratch.Set "imgix_w" "850" -}}
-{{- end -}}
-{{- $imgix_w := $.Scratch.Get "imgix_w" -}}
-{{- if .Get "img_param" | len -}}
-  {{- .Get "img_param" | $.Scratch.Add "img_param" -}}
-{{- else -}}
-  {{- $.Scratch.Add "img_param" (printf "?ch=Width,DPR&fit=max") -}}
-{{- end -}}
-{{- if .Get "pop_param" | len -}}
-  {{- .Get "pop_param" | $.Scratch.Add "pop_param" -}}
-{{- else -}}
-  {{- if eq $image_ext "gif" -}}
-     {{- $.Scratch.Add "pop_param" "?fit=max" -}}
-  {{- else -}}
-     {{- $.Scratch.Add "pop_param" "?fit=max&auto=format" -}}
-  {{- end -}}
-{{- end -}}
-{{- $img_param := $.Scratch.Get "img_param" -}}
-{{- $pop_param := $.Scratch.Get "pop_param" -}}
-{{- $figure_class :=  .Get "figure_class" -}}
+{{- $img_param := .Get "img_param" | default "?ch=Width,DPR&fit=max" -}}
+{{- $is_gif := eq $image_ext "gif" -}}
+{{- $pop_param := .Get "pop_param" | default (cond $is_gif "?fit=max" "?fit=max&auto=format") -}}
+
+{{- $figure_class := .Get "figure_class" -}}
 {{ $e := (print $img_resource "?auto=format" | safeURL) }}
 <div class="shortcode-wrapper shortcode-img expand {{- if $wide -}}wide-parent{{- end -}}"><figure class="text-center {{- if $wide -}}wide {{- end -}}{{ $figure_class -}}" {{- if .Get "figure_style" -}}style="{{- with .Get "figure_style" -}}{{- . | safeCSS -}}{{- end -}}"{{- end -}}>
   {{- if $video -}}
@@ -56,7 +34,7 @@
       <div class="pause"></div>
     </video>
 {{- else -}}
-  {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
+  {{- if (and $is_popup (ne $image_ext "gif")) -}}
   <a href="{{ print $img_resource $pop_param | relURL }}" class="pop" data-toggle="modal" data-target="#popupImageModal">
 {{- else if .Get "href" -}}
   <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
@@ -81,7 +59,7 @@
       </picture>
     {{- end -}}
 {{- end -}}
-{{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
+{{- if (and $is_popup (ne $image_ext "gif")) -}}
   </a>
 {{- else if .Get "href" -}}
   </a>
