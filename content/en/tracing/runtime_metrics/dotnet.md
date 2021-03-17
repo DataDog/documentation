@@ -21,6 +21,7 @@ further_reading:
 
 - .NET Framework 4.5+ 
 - .NET Core 3.1+
+- .NET 5
  
 ## Automatic Configuration
 
