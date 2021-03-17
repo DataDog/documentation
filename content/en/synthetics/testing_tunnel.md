@@ -37,7 +37,7 @@ The testing tunnel is a functionality that comes with the **[@datadog/datadog-ci
 
 ## How to use the testing tunnel
 
-As mentioned above, the testing tunnel comes with the [@datadog/datadog-ci][2] NPM package and is available from version [v0.11.0][3] of the package. To learn how to get started using the Datadog CI/CD testing integration, see the [related documentation][4].
+As mentioned above, the testing tunnel comes with the [@datadog/datadog-ci][2] NPM package and is available from version [v0.11.0][3] of the package. To learn how to get started using the Datadog CI/CD testing integration, see the [Synthetics CI documentation][4].
 
 Once you've set up your client on your local machine or your CI server, you can decide to have your tests launched with the tunnel by appending the command used to launch tests with `--tunnel`. For instance, if you are using a global configuration file, you can use:
 
