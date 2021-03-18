@@ -14,88 +14,95 @@ further_reading:
 This feature is currently in private beta. <a href="https://forms.gle/6hHcytp2JvBAHxC6A">Fill out this form</a> to request this feature for your account or to be notified when it becomes generally available.
 </div>
 
-## Overview
+Span Processing Pipelines are an optional way you can configure your APM setup so that collected metadata is modified or enriched for use in [Trace Search and Analytics][1], [Dashboards][2], or [Monitors][3]. Span processing involves two constructs: _pipelines_ and _processors_:
 
-Span Processing Pipelines are an optional configuration that can be added to your APM setup to modify or enrich metadata for use in [Trace Search and Analytics][1], [Dashboards][2], or [Monitors][3].  Currently there are two main types of modification possible through [arithmetic processors](#arithmetic-processor) and [lookup processors](#lookup-processor).  If you have a use case not covered by the existing processor options, [reach out to our support team][4] with details to have a feature request created.
+1. A [pipeline](#pipelines) takes a filtered subset of incoming spans and applies a list of sequential processors.
+2. A [processor](#processors) executes within a pipeline to complete a data-structuring action (such as arithmetic computation or tag enrichment) on a span.
 
-1. A [Pipeline](#pipelines) takes a filtered subset of incoming spans and applies a list of sequential processors.
-2. A [Processor](#processors) executes within a Pipeline to complete a data-structuring action (arithmetic computation, tag enrichment, etc.) on a span.
+Pipelines and processors are applied to all ingested spans, and you can configuration them on the [Pipelines][4] page within the Datadog app.
 
-Pipelines and Processors are applied to all ingested spans, meaning all configuration is done on the [Pipelines][5] page within the Datadog UI.
+There are two types of processors, enabling two types of modification: 
 
-- Use [arithmetic processors](#arithmetic-processor) to change the units of an existing tag or create a new tag based on a formulaic calculation.
-- Use [lookup processors](#lookup-processor) to add tags based on the key of a row in your [enrichment table][6] without needing to store these values in your code.
+- Use [arithmetic processors](#arithmetic-processor) to change the units of an existing tag or to create a new tag based on a formulaic calculation.
+- Use [lookup processors](#lookup-processor) to add tags based on the key of a row in your [enrichment table][5] without needing to store these values in your code.
 
-{{< img src="tracing/processing_pipelines/ProcessingPipelines.png" style="width:100%;" alt="How to create an arithmetic processor" >}}
+If you have a use case not covered by the existing processor options, [reach out to our support team][6] with details to have a feature request created.
+
+{{< img src="tracing/processing_pipelines/ProcessingPipelines.png" style="width:100%;" alt="Pipelines, filters, and processors in the Datadog App" >}}
 
 ## Pipelines
 
-Pipelines allow you to parse and enrich your trace spans by chaining them sequentially through processors. This lets you extract meaningful information or attributes from semi-structured text to reuse them as facets.
+Pipelines allow you to parse and enrich your trace spans by passing them sequentially through processors. This lets you extract meaningful information or attributes from semi-structured text to reuse them as facets.
 
-All ingested spans that come through Pipelines are tested against every Pipeline filter. If it matches one then all processors within that pipeline are applied sequentially before the span is processed by the next pipeline.
+Each ingested span that comes through pipelines is tested against every pipeline filter. If the span matches a filter, all processors within that pipeline are applied sequentially before the span is processed by the next pipeline.
 
-### Pipeline Filters
+### Pipeline filters
 
-Filters let you define and limit what kinds of spans a Pipeline applies to. The syntax is the same as when writing a [search query][7] or [retention filter][8].
+Filters let you define and limit what kinds of spans a pipeline applies to. The syntax is the same as when writing a [search query][7] or [retention filter][8].
 
-**Note:** Filtering is applied before any of the Pipeline’s Processors, hence you cannot filter on an attribute that is yet-to-be-created in the pipeline.
+**Note:** Filtering is applied before any of the pipeline’s processors, so you cannot filter on an attribute that is yet-to-be-created in the pipeline.
 
-### Nested Pipelines
+### Nested pipelines
 
-Nested Pipelines are pipelines created within a pipeline. Use Nested Pipelines to split the processing into two steps. For example, first use a high-level filtering such as `env` and add common processors, and then a second level of filtering based on `service`, or any other tag or attribute and their custom processors.
+_Nested pipelines_ are pipelines created within a pipeline. Use nested pipelines to split the processing into separate steps. For example, first use a high-level filtering such as `env` and add common processors, and then a second level of filtering based on `service`, or any other tag or attribute and their custom processors.
 
-**Note:** It is only possible to have a single layer of nested pipelines.  Within a nested pipeline, only processors can be created.
+**Note:** You can nest pipelines only one level deep. Within a nested pipeline, you can create processors, but not additional nested pipelines.
 
 ## Processors
 
-A processor executes within a pipeline to complete a data-structuring action (arithmetic computation, tag enrichment, etc.) on a trace span.
+A processor executes within a pipeline to complete a data-structuring action, such as arithmetic computation or tag enrichment, on a trace span.
 
 ### Arithmetic processor
 
 {{< img src="tracing/processing_pipelines/arithmeticprocessor.png" style="width:100%;" alt="How to create an arithmetic processor" >}}
 
-Use arithmetic processors to add new attributes (without spaces or special characters in the new attribute names) to a span with the result of user-provided formulas. This enables you to remap different time attributes with different units into a single attribute, or to compute operations on attributes within the same span.
+With arithmetic processors, you can:
+- Add new attributes to a span with the result of a formula that you define. Added attribute names must not contain spaces or special characters.
+- Remap different time attributes with different units into a single attribute.
+- Compute operations on attributes within the same span.
 
-Arithmetic processors must follow the below rules:
+Arithmetic processors follow these rules:
 
 1. Formulas can use parentheses and the basic arithmetic operators: `-`, `+`, `*`, and `/`.
 2. Attributes must be prefixed with `@` when used in formulas.
 3. By default, the calculation is skipped if an attribute is not present on the span, or if it cannot be parsed as a number.
-4. If desired, select the option “Replace missing attribute by 0” to automatically populate missing attribute values with 0 to ensure that the calculation is done.
-5. If using `-` as an operator, it must be used with a space on either side like `a - b`, as `-` can also exist in attribute names.
+4. If desired, select the option **Replace missing attribute by 0** to automatically populate missing attribute values with `0` to ensure that the calculation is done.
+5. If you use `-` as an operator, it must be used with a space on either side like `a - b`, as `-` can also exist in attribute names.
 6. If the target attribute already exists, it is overwritten by the result of the formula.
-7. Results are rounded up to the 9th decimal. For example, if the result of the formula is 0.1234567891, the actual value stored for the attribute is 0.123456789.
+7. Results are rounded up to the ninth decimal place. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
 
 ### Lookup Processor
 
 {{< img src="tracing/processing_pipelines/lookupprocessor.png" style="width:100%;" alt="How to create a lookup processor" >}}
 
-Lookup processors allow you to define a mapping between a span attribute and human readable values saved in an [Enrichment Table](#enrichment-tables).  This feature is also in beta.
+Lookup processors allow you to define a mapping between a span attribute and human readable values saved in an [Enrichment Table](#enrichment-tables).  The Enrichment Tables feature is also in beta.
 
-For example, you can use the Lookup Processor to map an internal service ID into a human readable service name or store an ID value associated with address and other personal data that is either subject to frequent changes or shouldn't be set within application code.
+For example, with a lookup processor you can:
+- Map an internal service ID into a human readable service name.
+- Store an ID value associated with address and other personal data that is either subject to frequent changes or shouldn't be set within application code.
+- Check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
-Alternatively, use a lookup processor to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
+A lookup processor performs the following actions:
 
-Lookup processors performs the following actions:
-
-1. Looks if the span contains the source attribute.
+1. Looks to see if the span contains the source attribute.
 2. Checks if the source attribute value exists in the mapping table.
-3. Attributes must be prefixed with `@` when used in formulas.
-4. If it does, creates the target attribute with the corresponding value in the table.
+3. If it does, creates the target attribute with the corresponding value from the table.
 5. If the target attribute already exists, it is overwritten by the result of the formula.
 6. Optionally, if a lookup processor does not find the source attribute value in the mapping table, creates a target attribute with the fixed default value.
 
+As with arithmetic processors, attributes in lookup processors must be prefixed with `@` when used in formulas.
+
 #### Enrichment tables
 
-This beta feature is shared with our Log Management solution. For more information on how to create an enrichment table and to request access, see the [detailed guide][6].
+Enrichment tables is beta feature shared with Log Management. For more information on how to create an enrichment table and to request access, see the [detailed guide][5].
 
-**Note:** It is not required to be using Datadog Log Management to obtain access to the enrichment table beta.
+**Note:** You needn't be using Datadog Log Management to obtain access to the enrichment table beta.
 
 [1]: /tracing/trace_search_and_analytics/
 [2]: /dashboards/
 [3]: /monitors/monitor_types/apm/?tab=apmmetrics
-[4]: /help
-[5]: https://app.datadoghq.com/apm/traces/pipelines
-[6]: /logs/guide/enrichment-tables/?tab=manualupload#overview
+[4]: https://app.datadoghq.com/apm/traces/pipelines
+[5]: /logs/guide/enrichment-tables/?tab=manualupload#overview
+[6]: /help
 [7]: /tracing/trace_search_and_analytics/query_syntax/
 [8]: /tracing/trace_retention_and_ingestion/#retention-filters
