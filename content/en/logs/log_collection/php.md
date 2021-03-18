@@ -367,7 +367,6 @@ Monolog is a part of the following frameworks:
 * [Laravel][5]
 * [Silex][6]
 * [Lumen][7]
-* [CakePHP][8]
 
 Integrate Monolog with your framework then configure your logger:
 
