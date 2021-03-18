@@ -31,6 +31,19 @@ further_reading:
   text: "Add Dashboard widgets to your clipboard"
 ---
 
+## Content Toggle Test
+Some test content here.
+
+<details>
+  <summary>
+    {{< h3 >}}Manual{{< /h3 >}}
+  </summary>
+
+  1. Test
+  2. Another Test
+  3. Third Test
+</details>
+
 ## Overview
 
 A dashboard is Datadog's tool for visually tracking, analyzing, and displaying key performance metrics, which enable you to monitor the health of your infrastructure.
