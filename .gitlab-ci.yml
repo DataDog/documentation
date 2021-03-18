@@ -29,6 +29,7 @@ cache: &cache
       - yarn.lock
   paths:
     - node_modules/
+    - /usr/local/bin/hugo
 
 # ================== templates ================== #
 .base_template: &base_template
