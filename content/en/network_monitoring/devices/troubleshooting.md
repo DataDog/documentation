@@ -68,6 +68,18 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 1. Try loosening ACLs/firewall rules for your devices.
 2. Run `snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6` from the host your Agent is running on. If you get a timeout without any response, there is likely something blocking the Datadog Agent from collecting metrics from your device.
 
+#### What do I do if Datadog supports a vendor or device type but my specific model isn’t supported? 
+
+1. Contact [Datadog support][1] to put in a request to support your specific model.
+2. Profiles can be extended to support additional `sysobjectid`’s 
+    For example, if you want to monitor another type of Cisco CSR, you can modify the ISR profile directly to list another `sysobjectid` like this: 
+    
+    ```
+		snmpwalk -v 2c -c [community string] [ip address] 1.3.6.1.2.1.1.2
+    ```
+
+**Note**: If you do not know the `sysobjectid` of your device, first try googling for it, or run a `snmpwalk` on a host that can reach out to your device. Use the output to list the profile to match against. 
+
 
 ## Further Reading
 
