@@ -63,16 +63,16 @@ To start tracing an application hosted in IIS:
 
 3. Run the .NET Tracer MSI installer with administrator privileges.
 
-4. Stop and start IIS using the following commands as an administrator: 
+4. Stop, then start IIS using the following commands as an administrator: 
 
-<div class="alert alert-warning"> 
-  <strong>Note:</strong> You must use a stop and start command, this is not the same as a reset or restart command.
-</div>
+    <div class="alert alert-warning"> 
+      <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
+    </div>
 
-   ```text
-   net stop /y was
-   net start w3svc
-   ```
+    ```text
+    net stop /y was
+    net start w3svc
+    ```
 5. Create application load. 
 
 6. Visit [APM Live Traces][4]. 
