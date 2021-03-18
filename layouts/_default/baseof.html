@@ -27,6 +27,7 @@
   <script src="{{ (index $.Site.Data.manifest "region-redirects.js") | relURL }}"></script>
 
   {{ partial "css.html" . }}
+  {{ partial "javascript.html" . }}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{- $customClass := $.Params.customclass -}}

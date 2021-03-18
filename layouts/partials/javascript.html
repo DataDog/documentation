@@ -1,0 +1,15 @@
+{{ $serverMode := site.IsServer }}
+{{ $jsMain     := "js/app.js" }}
+{{ $jsOutput   := "js/app.js" }}
+{{ $defines    := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) }}
+{{ $devOpts    := dict "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" }}
+{{ $prodOpts   := dict "defines" $defines "targetPath" $jsOutput "minify" true }}
+{{ $jsOpts     := cond $serverMode $devOpts $prodOpts }}
+{{ $js := resources.Get $jsMain | js.Build $jsOpts | babel }}
+
+{{ if $serverMode }}
+<script type="text/javascript" src="{{ $js.RelPermalink }}"></script>
+{{ else }}
+{{ $prodJs := $js | resources.Fingerprint "sha512" }}
+<script type="text/javascript" src="{{ $prodJs.RelPermalink }}" integrity="{{ $prodJs.Data.Integrity }}"></script>
+{{ end }}

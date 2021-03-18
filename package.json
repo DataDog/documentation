@@ -43,6 +43,7 @@
     },
     "dependencies": {
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
+        "@babel/cli": "^7.13.10",
         "@babel/polyfill": "^7.4.4",
         "@datadog/browser-logs": "^1.24.1",
         "@datadog/browser-rum": "^1.24.1",
@@ -85,7 +86,7 @@
         "yaml-lint": "^1.2.4"
     },
     "devDependencies": {
-        "@babel/core": "^7.5.5",
+        "@babel/core": "^7.13.10",
         "@babel/plugin-proposal-class-properties": "^7.5.5",
         "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
         "@babel/plugin-syntax-object-rest-spread": "^7.2.0",

@@ -14,6 +14,6 @@
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{ else }}
 {{/* For prod mode, add a SHA fingerprint */}}
-{{ $prodCss      := $css | resources.PostCSS | fingerprint }}
+{{ $prodCss      := $css | resources.PostCSS | resources.Fingerprint "sha512" }}
 <link rel="stylesheet" href="{{ $prodCss.RelPermalink }}" integrity="{{ $prodCss.Data.Integrity }}">
 {{ end }}
