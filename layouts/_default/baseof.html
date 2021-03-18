@@ -7,13 +7,6 @@
 
   {{ partial "header-scripts.html" . }}
 
-  {{/* inline datadog rum & logs libs, then load config after as config changes every builds due to version */}}
-  {{ $dd_rum := resources.Get "node_modules/datadog-rum.js" }}
-  {{ $dd_logs := resources.Get "node_modules/datadog-logs.js" }}
-  {{ $dd_libs_js := slice $dd_rum $dd_logs | resources.Concat "js/dd-libs.js" }}
-  <script>{{ $dd_libs_js.Content | safeJS }}</script>
-  <script src="{{ (index $.Site.Data.manifest "dd-browser-logs-rum.js") | relURL }}"></script>
-
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}
   {{ partial "preload.html" . }}
@@ -26,13 +19,14 @@
   {{- partial "hreflang.html" . -}}
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
-  <link rel="stylesheet" href="{{ (index $.Site.Data.manifest "main-dd-css.css") | relURL }}">
   {{- if ne $.Params.disable_opengraph_meta_tags true -}}
   {{- partial "meta.html" . -}}
   {{- end -}}
 
   <script src="{{ (index $.Site.Data.manifest "lang-redirects.js") | relURL }}"></script>
   <script src="{{ (index $.Site.Data.manifest "region-redirects.js") | relURL }}"></script>
+
+  {{ partial "css.html" . }}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{- $customClass := $.Params.customclass -}}
