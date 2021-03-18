@@ -547,4 +547,3 @@ class AppServiceProvider extends ServiceProvider
 [5]: /logs/log_collection/php/#laravel
 [6]: /logs/log_collection/php/#silex
 [7]: /logs/log_collection/php/#lumen
-[8]: /logs/log_collection/php/#cakephp
