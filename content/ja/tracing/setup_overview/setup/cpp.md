@@ -102,7 +102,7 @@ get_latest_release() {
 }
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 OPENTRACING_VERSION="v1.5.1"
-# OpenTracing-cpp をダウンロードしてインストール
+# OpenTracing-cpp をダウンロードしてインストール 
 wget https://github.com/opentracing/opentracing-cpp/archive/${OPENTRACING_VERSION}.tar.gz -O opentracing-cpp.tar.gz
 mkdir -p opentracing-cpp/.build
 tar zxvf opentracing-cpp.tar.gz -C ./opentracing-cpp/ --strip-components=1
@@ -240,6 +240,6 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 [1]: /ja/tracing/setup/envoy/
 [2]: /ja/tracing/setup/nginx/
 [3]: /ja/tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/docs
+[4]: https://app.datadoghq.com/apm/install
 [5]: /ja/tracing/send_traces/
 [6]: https://github.com/opentracing/opentracing-cpp
