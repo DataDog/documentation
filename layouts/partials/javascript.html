@@ -1,15 +1,21 @@
 {{ $serverMode := site.IsServer }}
 {{ $jsMain     := "js/app.js" }}
 {{ $jsOutput   := "js/app.js" }}
-{{ $defines    := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) }}
+{{ $defines    := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`)
+  "process.env" `""` }}
 {{ $devOpts    := dict "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" }}
 {{ $prodOpts   := dict "defines" $defines "targetPath" $jsOutput "minify" true }}
 {{ $jsOpts     := cond $serverMode $devOpts $prodOpts }}
 {{ $js := resources.Get $jsMain | js.Build $jsOpts | babel }}
 
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous" defer></script>
+
 {{ if $serverMode }}
-<script type="text/javascript" src="{{ $js.RelPermalink }}"></script>
+<script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
 {{ else }}
 {{ $prodJs := $js | resources.Fingerprint "sha512" }}
-<script type="text/javascript" src="{{ $prodJs.RelPermalink }}" integrity="{{ $prodJs.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $prodJs.RelPermalink }}" integrity="{{ $prodJs.Data.Integrity }}" defer></script>
 {{ end }}

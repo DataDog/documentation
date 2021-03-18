@@ -23,9 +23,6 @@
   {{- partial "meta.html" . -}}
   {{- end -}}
 
-  <script src="{{ (index $.Site.Data.manifest "lang-redirects.js") | relURL }}"></script>
-  <script src="{{ (index $.Site.Data.manifest "region-redirects.js") | relURL }}"></script>
-
   {{ partial "css.html" . }}
   {{ partial "javascript.html" . }}
 </head>
@@ -73,9 +70,6 @@
   </div>
 
   {{ partial "footer/footer.html" . }}
-
-  <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
-  <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>
 
   {{ partial "footer-scripts.html" . }}
 
