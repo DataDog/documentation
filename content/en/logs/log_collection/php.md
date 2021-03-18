@@ -367,7 +367,6 @@ Monolog is a part of the following frameworks:
 * [Laravel][5]
 * [Silex][6]
 * [Lumen][7]
-* [CakePHP][8]
 
 Integrate Monolog with your framework then configure your logger:
 
@@ -536,45 +535,6 @@ class AppServiceProvider extends ServiceProvider
   return $app;
 ```
 
-### CakePHP
-
-First, add this dependency to the `composer.json` file and
-run `composer update`.
-
-```json
-{"require": {"cakephp/monolog": "*"}}
-```
-
-Then, start by creating a logging configuration file (i.e., `app/Config/log.php`) that you includes your `app/Config/bootstrap.php`:
-
-```php
-<?php
-  include 'log.php';
-```
-
-A basic configuration, to replicate what Cake does but using Monolog would look something like this:
-
-```text
-CakePlugin::load('Monolog');
-```
-
-Finally log into a file:
-
-```text
-CakeLog::config('debug', array(
-  'engine' => 'Monolog.Monolog',
-  'channel' => 'app',
-  'handlers' => array(
-    'Stream' => array(
-      LOGS . 'application-json.log',
-      'formatters' => array(
-        'Json' => array("")
-      )
-    )
-  )
-));
-```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -586,4 +546,3 @@ CakeLog::config('debug', array(
 [5]: /logs/log_collection/php/#laravel
 [6]: /logs/log_collection/php/#silex
 [7]: /logs/log_collection/php/#lumen
-[8]: /logs/log_collection/php/#cakephp
