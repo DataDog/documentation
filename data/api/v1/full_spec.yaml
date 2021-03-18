@@ -5929,6 +5929,8 @@ components:
         format: double
         type: number
       description: A mapping of threshold `timeframe` to the remaining error budget.
+      example:
+        7d: 100.0
       type: object
     SLOErrorTimeframe:
       description: 'The timeframe of the threshold associated with this error
@@ -5961,6 +5963,7 @@ components:
           type: integer
         message:
           description: Optional message if there are specific query issues/warnings.
+          example: ''
           type: string
         numerator:
           $ref: '#/components/schemas/SLOHistoryMetricsSeries'
@@ -6097,6 +6100,7 @@ components:
           properties:
             from_ts:
               description: The `from` timestamp in epoch seconds.
+              example: 1615323990
               format: int64
               type: integer
             group_by:
@@ -6105,6 +6109,7 @@ components:
 
 
                 This is not included in responses for `monitor` based SLOs.'
+              example: []
               items:
                 description: A grouping parameter.
                 type: string
@@ -6115,6 +6120,7 @@ components:
 
 
                 This is not included in the responses for `metric` based SLOs.'
+              example: []
               items:
                 $ref: '#/components/schemas/SLOHistorySLIData'
               type: array
@@ -6124,6 +6130,7 @@ components:
 
 
                 This is not included in the responses for `metric` based SLOs.'
+              example: []
               items:
                 $ref: '#/components/schemas/SLOHistorySLIData'
               type: array
@@ -6135,9 +6142,11 @@ components:
               additionalProperties:
                 $ref: '#/components/schemas/SLOThreshold'
               description: mapping of string timeframe to the SLO threshold.
+              example: {}
               type: object
             to_ts:
               description: The `to` timestamp in epoch seconds.
+              example: 1615928790
               format: int64
               type: integer
             type:
@@ -6171,20 +6180,28 @@ components:
         errors:
           description: A list of errors while querying the history data for the service
             level objective.
+          example: []
           items:
             $ref: '#/components/schemas/SLOHistoryResponseError'
           type: array
         group:
           description: For groups in a grouped SLO, this is the group name.
+          example: name
           type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
             uptime time series.
           items:
             description: Represents an array time series data.
+            example:
+            - - 1579212382
+              - 0
             items:
               description: A time series data point which is a tuple of (timestamp,
                 value).
+              example:
+              - 1579212382
+              - 0
               format: double
               type: number
             maxItems: 2
@@ -6194,14 +6211,17 @@ components:
         monitor_modified:
           description: For `monitor` based SLOs, this is the last modified timestamp
             in epoch seconds of the monitor.
+          example: 1615867200
           format: int64
           type: integer
         monitor_type:
           description: For `monitor` based SLOs, this describes the type of monitor.
+          example: string
           type: string
         name:
           description: For groups in a grouped SLO, this is the group name. For monitors
             in a multi-monitor SLO, this is the monitor name.
+          example: string
           type: string
         precision:
           additionalProperties:
@@ -6210,12 +6230,16 @@ components:
             type: number
           description: A mapping of threshold `timeframe` to number of accurate decimals,
             regardless of the from && to timestamp.
+          example:
+            30d: 1
+            7d: 2
           type: object
         preview:
           description: 'For `monitor` based SLOs, when `true` this indicates that
             a replay is in progress to give an accurate uptime
 
             calculation.'
+          example: true
           type: boolean
         sli_value:
           description: The current SLI value of the SLO over the history window.
@@ -6225,11 +6249,13 @@ components:
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp.
+          example: 2
           format: double
           type: number
         uptime:
           deprecated: true
           description: Use `sli_value` instead.
+          example: 99.99
           format: double
           type: number
       type: object
@@ -6276,7 +6302,7 @@ components:
             corresponding
 
             timeframe.'
-          example: 0.0
+          example: 99.9
           format: double
           type: number
         target_display:
@@ -6294,6 +6320,7 @@ components:
           $ref: '#/components/schemas/SLOTimeframe'
         warning:
           description: The warning value for the service level objective.
+          example: 90.0
           format: double
           type: number
         warning_display:
@@ -6306,6 +6333,7 @@ components:
             Included in service level objective responses if a warning target exists.
 
             Ignored in create/update requests.'
+          example: '90.0'
           type: string
       required:
       - timeframe
@@ -6327,6 +6355,7 @@ components:
       enum:
       - metric
       - monitor
+      example: metric
       type: string
       x-enum-varnames:
       - METRIC
@@ -9392,7 +9421,10 @@ components:
             $ref: '#/components/schemas/WidgetEvent'
           type: array
         legend_columns:
-          $ref: '#/components/schemas/TimeseriesWidgetLegendColumns'
+          description: Columns displayed in the legend.
+          items:
+            $ref: '#/components/schemas/TimeseriesWidgetLegendColumn'
+          type: array
         legend_layout:
           $ref: '#/components/schemas/TimeseriesWidgetLegendLayout'
         legend_size:
@@ -9455,24 +9487,21 @@ components:
       required:
       - expression
       type: object
-    TimeseriesWidgetLegendColumns:
-      description: Columns displayed in the legend.
-      items:
-        description: Legend column.
-        enum:
-        - value
-        - avg
-        - sum
-        - min
-        - max
-        type: string
-        x-enum-varnames:
-        - VALUE
-        - AVG
-        - SUM
-        - MIN
-        - MAX
-      type: array
+    TimeseriesWidgetLegendColumn:
+      description: Legend column.
+      enum:
+      - value
+      - avg
+      - sum
+      - min
+      - max
+      type: string
+      x-enum-varnames:
+      - VALUE
+      - AVG
+      - SUM
+      - MIN
+      - MAX
     TimeseriesWidgetLegendLayout:
       description: Layout of the legend.
       enum:
