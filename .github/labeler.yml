@@ -3,12 +3,14 @@ Github:
 
 Images:
 - assets/images/**/*
+- static/images/**/*
 
 Architecture:
 - local/**/*
 - layouts/**/*
 - config/**/*
-- src/**/*
+- assets/css/**/*
+- assets/js/**/*
 
 $1:
 - content/en/([^/]+)/.*
