@@ -93,6 +93,8 @@ build_preview:
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - in-isolation deploy_preview
+    # remove static images so we can skip from artifact passed in gitlab
+    - remove_static_from_repo
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
   artifacts:
     paths:
@@ -172,7 +174,7 @@ missing_tms_preview:
     - build_preview
   script:
     # remove dirs we don't need to scan
-    - rm -rf ./images ./public/fr ./public/ja ./public/api/v1/ ./public/api/v2/
+    - rm -rf ./public/fr ./public/ja ./public/api/v1/ ./public/api/v2/
     - GOMAXPROCS=$(nproc --all) vale --glob='*.{html}' ./public
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
