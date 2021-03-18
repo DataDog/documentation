@@ -30,6 +30,8 @@ Apply log processing rules to a specific log collection configurations to:
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
+**Note**: Processing rule patterns must conform to [Golang regexp syntax](https://golang.org/pkg/regexp/syntax/).
+
 To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
 
 ## Filter logs
