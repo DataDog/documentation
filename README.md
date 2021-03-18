@@ -51,7 +51,7 @@ hugpython                 Build virtualenv used for tests.
 source-helpers            Source the helper functions used to build, test, deploy.
 start-no-pre-build        Build the documentation without automatically pulled content.
 start                     Build the documentation with all external content.
-stop                      Stop wepack watch/hugo server.
+stop                      Stop Hugo server.
 ```
 
 ## Working on Docs
