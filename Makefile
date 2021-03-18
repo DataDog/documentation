@@ -38,8 +38,8 @@ clean-all: stop  ## Clean everything.
 
 clean-build:  ## Remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
-	@if [ static/images/integrations_logos/2020w2.pdf ]; then \
-	rm -f static/images/integrations_logos/2020w2.pdf ;fi
+	@if [ assets/images/integrations_logos/2020w2.pdf ]; then \
+	rm -f assets/images/integrations_logos/2020w2.pdf ;fi
 
 clean-exe:  ## Remove execs.
 	@rm -rf ${EXE_LIST}

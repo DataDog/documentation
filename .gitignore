@@ -56,7 +56,7 @@ data/integrations/
 !content/en/integrations/snyk.md
 
 # Ignore the marketplace images that get pulled
-static/images/marketplace
+assets/images/marketplace
 
 # security rules
 content/en/security_monitoring/default_rules/*.md
@@ -167,5 +167,5 @@ __pycache__/
 Makefile.config
 data/permissions.json
 
-static/images/integrations_logos/2020w2.pdf
+assets/images/integrations_logos/2020w2.pdf
 
