@@ -35,7 +35,7 @@ In addition to this documentation, you can learn more about developing Datadog i
 
 ### The Development Process
 
-1. [Choose the type of Marketing offering you would like to list](# NEED HELP LINKING TABLE OF CONTENTS)
+1. [Choose the type of Marketing offering you would like to list]<!--(# NEED HELP LINKING TABLE OF CONTENTS)-->
 2. [Build bi-directional integration](#)
 3. [Clone either the Marketplace or Integrations Extras Repository](#)
 4. [Install the Datadog Development Toolkit](#)
