@@ -1,4 +1,4 @@
-import docsearch from 'docsearch.js';
+import docsearch from 'docsearch.js/dist/npm/index';
 import configDocs from '../config/config-docs';
 
 const { env } = document.documentElement.dataset;

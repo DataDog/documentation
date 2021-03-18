@@ -21,7 +21,6 @@
         {{- end -}}
 
         {{ partial "css.html" . }}
-        {{ partial "javascript.html" . }}
 </head>
 
 {{ $dot := . }}
@@ -121,5 +120,6 @@
 
     {{ partial "preview_banner/preview_banner" . }}
 
+    {{ partial "javascript.html" . }}
 </body>
 </html>

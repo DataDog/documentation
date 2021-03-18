@@ -2,20 +2,28 @@
 {{ $jsMain     := "js/app.js" }}
 {{ $jsOutput   := "js/app.js" }}
 {{ $defines    := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`)
-  "process.env" `""` }}
-{{ $devOpts    := dict "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" }}
-{{ $prodOpts   := dict "defines" $defines "targetPath" $jsOutput "minify" true }}
+  "process.env.RESET_APP_DATA_TIMER" `10`
+  "process.env.DEBUG" `false`
+  "process.env.NODE_ENV" `"development"` }}
+{{ $devOpts    := dict "target" "es2020" "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" }}
+{{ $prodOpts   := dict "target" "es2020" "defines" $defines "targetPath" $jsOutput "minify" true }}
 {{ $jsOpts     := cond $serverMode $devOpts $prodOpts }}
-{{ $js := resources.Get $jsMain | js.Build $jsOpts | babel }}
+{{ $babelOpts  := dict "config" "babel.config.json" }}
+{{ $js := resources.Get $jsMain | js.Build $jsOpts | babel $babelOpts }}
+{{ $jq := site.Params.jquery }}
+{{ $jqUrl := printf "https://code.jquery.com/jquery-%s.min.js" $jq.version }}
 
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous" defer></script>
+{{/* Load jQuery synchronously */}}
+<script src="{{ $jqUrl }}" integrity="{{ $jq.sha_256 }}" crossorigin="anonymous"></script>
+
+{{/* The docsearch.js lib requires this for some reason */}}
+<script>
+  global = globalThis;
+</script>
 
 {{ if $serverMode }}
-<script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
+<script src="{{ $js.RelPermalink }}" defer></script>
 {{ else }}
 {{ $prodJs := $js | resources.Fingerprint "sha512" }}
-<script type="text/javascript" src="{{ $prodJs.RelPermalink }}" integrity="{{ $prodJs.Data.Integrity }}" defer></script>
+<script src="{{ $prodJs.RelPermalink }}" integrity="{{ $prodJs.Data.Integrity }}" defer></script>
 {{ end }}

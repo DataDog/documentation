@@ -32,8 +32,11 @@ markup:
   highlight:
     guessSyntax: true
 
-# so we can access images as resources
-# assetDir: "static"
+# Arbitrary key/value data at the site level
+params:
+  jquery:
+    version: "3.6.0"
+    sha_256: "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 
 module:
   mounts:
