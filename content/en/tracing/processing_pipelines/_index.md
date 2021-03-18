@@ -98,6 +98,11 @@ Enrichment tables is beta feature shared with Log Management. For more informati
 
 **Note:** You needn't be using Datadog Log Management to obtain access to the enrichment table beta.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /tracing/trace_search_and_analytics/
 [2]: /dashboards/
 [3]: /monitors/monitor_types/apm/?tab=apmmetrics
