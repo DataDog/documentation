@@ -21,6 +21,12 @@ include $(CONFIG_FILE)
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
+build-live:
+	hugo --buildDrafts --buildFuture --environment live
+
+build-preview:
+	hugo --buildDrafts --buildFuture --environment preview
+
 clean: stop  ## Clean all make installs.
 	@echo "cleaning up..."
 	make clean-build

@@ -13,7 +13,7 @@
 {{ $jq := site.Params.jquery }}
 {{ $jqUrl := printf "https://code.jquery.com/jquery-%s.min.js" $jq.version }}
 
-{{/* Load jQuery synchronously */}}
+{{/* Load jQuery synchronously. Version/sha256 info is in config/_default/config.yaml. */}}
 <script src="{{ $jqUrl }}" integrity="{{ $jq.sha_256 }}" crossorigin="anonymous"></script>
 
 {{/* The docsearch.js lib requires this for some reason */}}

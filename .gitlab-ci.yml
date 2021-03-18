@@ -77,7 +77,7 @@ build_preview:
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
-    - yarn run build:preview
+    - make build-live
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - in-isolation deploy_preview
@@ -191,7 +191,7 @@ sourcemaps_preview:
     policy: pull
   environment: "preview"
   script:
-    - yarn run build:webpack:preview -- --devtool source-map
+    - make build-preview
     - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
@@ -223,7 +223,7 @@ build_live:
     - sync_integration_metrics
     - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
     - placehold_translations
-    - yarn run build:live
+    - make build-live
     - in-isolation deploy_live
     - create_artifact
     - create_artifact_untracked

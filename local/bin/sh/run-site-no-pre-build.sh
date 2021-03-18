@@ -10,12 +10,10 @@ if [ ${RUN_SERVER} = true ]; then
     printf "checking that node modules are installed and up-to-date"
     npm --global install yarn && \
     npm cache clean --force && yarn install --frozen-lockfile
-    printf "starting webpack and hugo build"
-	  yarn run start
 
-    sleep 5
+    printf "starting hugo build"
+	  hugo --verbose
 	fi
-
 else
 	exit 0
 fi

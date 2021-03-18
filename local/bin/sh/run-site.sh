@@ -19,7 +19,7 @@ if [ ${RUN_SERVER} = true ]; then
 
   update_pre_build.py "${args}"
 
-	# rbac permissions 
+	# rbac permissions
 	if [ ${PULL_RBAC_PERMISSIONS} == true ]; then
 		echo "Pulling RBAC permissions."
 
@@ -41,12 +41,10 @@ if [ ${RUN_SERVER} = true ]; then
 		echo "Checking that node modules are installed and up-to-date."
     npm --global install yarn && \
     npm cache clean --force && yarn install --frozen-lockfile
-    echo "Starting webpack and hugo build."
-	yarn run start
 
-    sleep 5
+    echo "Starting hugo build."
+    hugo --verbose
 	fi
-
 else
 	exit 0
 fi
