@@ -92,7 +92,7 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 4. In addition to the automatically recorded steps, you can also use the [steps][11] available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps"  style="width:80%;">}}
 
-    **Note**: You should always make to **end your browser test with an [assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
+    **Note**: You should always make sure to **end your browser test with an [assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
 5. Once you have finished your scenario, click on **Save and Launch Test**.
 
 ## Further Reading
@@ -110,3 +110,4 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 [9]: https://www.google.com/chrome
 [10]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [11]: /synthetics/browser_tests/actions/
+[12]: /synthetics/browser_tests/actions/#assertion

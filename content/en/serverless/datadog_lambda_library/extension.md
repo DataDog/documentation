@@ -24,7 +24,7 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
 2. Add the Lambda Layer for the Datadog Extension to your AWS Lambda function:
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:5
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:6
     ```
 
     Replace the placeholder `AWS_REGION` in the Lambda Layer ARN with appropriate values.
@@ -46,7 +46,6 @@ To submit your AWS Lambda logs to Datadog using the Extension, set the env varia
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /serverless/custom_metrics?tab=python#synchronous-vs-asynchronous-custom-metrics
 [2]: /serverless/forwarder

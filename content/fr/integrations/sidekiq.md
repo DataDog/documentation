@@ -4,6 +4,9 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Sidekiq Overview: assets/dashboards/overview.json
+  logs:
+    source: sidekiq
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -14,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md'
 display_name: Sidekiq
+draft: false
 git_integration_title: sidekiq
 guid: b4bc604c-73a5-4bd8-8dfe-3f80fc19976b
 integration_id: sidekiq
@@ -43,7 +47,7 @@ Cette intégration permet de surveiller [Sidekiq][1] via [Dogstatsd][2]. Les mé
 
 ### Installation
 
-L'intégration Sidekiq est incluse avec le paquet de l'[Agent Datadog][4].
+L'intégration Sidekiq est incluse avec le package de l'[Agent Datadog][4].
 Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
@@ -54,12 +58,12 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
     gem install dogstatsd-ruby
    ```
 
-2. Pour activer la collecte de métriques Sidekiq Pro, ajoutez ce qui suit à votre initialiseur :
+2. Pour activer la collecte de métriques de Sidekiq Pro, ajoutez le code suivant à votre initialiseur. Pour un déploiement conteneurisé, remplacez `localhost` par l'adresse du conteneur de votre Agent.
 
    ```ruby
         require 'datadog/statsd' # gem 'dogstatsd-ruby'
 
-        Sidekiq::Pro.dogstatsd = ->{ Datadog::Statsd.new('metrics.example.com', 8125, namespace:'sidekiq') }
+        Sidekiq::Pro.dogstatsd = ->{ Datadog::Statsd.new('localhost', 8125, namespace:'sidekiq') }
 
         Sidekiq.configure_server do |config|
           config.server_middleware do |chain|
@@ -78,7 +82,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
           end
    ```
 
-    Consultez la documentation sur Sidekiq [Pro][5] et [Enterprise][6] pour en savoir plus, ainsi que la documentation [sur Ruby de Datadog][6] pour découvrir d'autres options de configuration.
+    Consultez la documentation sur Sidekiq [Pro][5] et [Enterprise][6] pour en savoir plus, ainsi que la documentation [Dogstatsd Ruby][3] (en anglais) pour découvrir d'autres options de configuration.
 
 3. Modifiez le [fichier de configuration principal de l'Agent Datadog][7] `datadog.yaml` pour y ajouter les paramètres suivants :
 
@@ -96,7 +100,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
            match_type: "regex"
            tags:
              worker: "$1"
-        - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
+         - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
            name: "sidekiq.jobs.worker.$2"
            match_type: "regex"
            tags:
@@ -105,17 +109,13 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 4. [Redémarrez l'Agent][4].
 
-### Validation
-
-[Lancez la sous-commande `status` de l'Agent][8] et cherchez `sidekiq` dans la section Checks.
-
 ## Données collectées
 
 ### Métriques
 {{< get-metrics-from-git "sidekiq" >}}
 
 
-L'intégration Sidekiq permet également la collecte de métriques custom. Consultez la [documentation sur Sidekiq][10] pour trouver des idées de métriques custom.
+L'intégration Sidekiq permet également la collecte de métriques custom. Consultez la [documentation de Sidekiq][9] (en anglais) pour trouver des idées de métriques custom.
 
 ### Collecte de logs
 
@@ -136,7 +136,7 @@ L'intégration Sidekiq permet également la collecte de métriques custom. Consu
           service: <SERVICE>
     ```
 
-     Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Si vous ne parvenez pas à trouver vos logs, [consultez la documentation sur Sidekiq pour en savoir plus sur les logs][11].
+     Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Si vous ne parvenez pas à trouver vos logs, [consultez la documentation de Sidekiq sur le fonctionnement des logs][10] (en anglais).
 
 3. [Redémarrez l'Agent][4].
 
@@ -150,7 +150,7 @@ Sidekiq n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 [1]: https://sidekiq.org/
 [2]: https://docs.datadoghq.com/fr/developers/dogstatsd/
@@ -159,8 +159,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [5]: https://github.com/mperham/sidekiq/wiki/Pro-Metrics
 [6]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/sidekiq/metadata.csv
-[10]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics#custom
-[11]: https://github.com/mperham/sidekiq/wiki/Logging#log-file
-[12]: https://docs.datadoghq.com/fr/help/
+[8]: https://github.com/DataDog/integrations-core/blob/master/sidekiq/metadata.csv
+[9]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics#custom
+[10]: https://github.com/mperham/sidekiq/wiki/Logging#log-file
+[11]: https://docs.datadoghq.com/fr/help/

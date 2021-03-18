@@ -82,6 +82,21 @@ Once enabled, events are overlayed on your graphs with red bars:
 
 {{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay"  style="width:75%;" >}}
 
+##### Legend configuration
+
+Add configurable legends on your screenboards by navigating to the legend section in the graph editor and selecting an option.
+
+{{< img src="dashboards/widgets/timeseries/legend-config.jpg" alt="Legend configuration"  style="width:100%;" >}}
+
+Options:
+
+* Automatic (default)
+* Compact
+* Expanded: Configurable columns for value, avg, sum, min, max
+* None
+
+Note: For timeboards, legends will display automatically when dashboard is set to L or XL.
+
 ##### Y-axis controls
 
 Y-axis controls are available via the UI and the JSON editor. They allow you to:

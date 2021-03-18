@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="logs/processing/processors/processors_overview.png" alt="original log" >}}
+{{< img src="logs/processing/processors/processing_overview.png" alt="Processors" >}}
 
 A [Processor][1] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
 

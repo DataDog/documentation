@@ -65,7 +65,7 @@ The following arguments and environment variables have been deprecated:
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -114,7 +114,7 @@ The following arguments and environment variables have been deprecated:
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -188,7 +188,7 @@ Deprecated code level Profiler configuration:
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

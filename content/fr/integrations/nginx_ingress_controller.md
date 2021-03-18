@@ -2,9 +2,11 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    nginx_ingress_controller: assets/dashboards/overview.json
   logs:
     source: nginx-ingress-controller
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
@@ -23,6 +25,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md'
 display_name: nginx-ingress-controller
+draft: false
 git_integration_title: nginx_ingress_controller
 guid: 27f6a498-6b3e-41b0-bec4-68db4d3322c3
 integration_id: nginx-ingress-controller
@@ -50,7 +53,7 @@ Ce check surveille le [NGINX Ingress Controller][1] Kubernetes.
 
 ### Installation
 
-Le check `nginx-ingress-controller` est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check `nginx-ingress-controller` est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 

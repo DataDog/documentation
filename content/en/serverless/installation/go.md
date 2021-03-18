@@ -2,6 +2,9 @@
 title: Instrumenting Go Applications
 kind: documentation
 further_reading:
+- link: 'serverless/datadog_lambda_library/go'
+  tag: "Documentation"
+  text: 'Datadog Lambda Library for Go'
 - link: 'serverless/serverless_tagging/'
   tag: "Documentation"
   text: 'Tagging Serverless Applications'
@@ -13,7 +16,9 @@ further_reading:
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-## Required setup
+<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
+
+## Required Setup
 
 If not already configured:
 
@@ -32,19 +37,24 @@ You can install the [Datadog Lambda Library][3] locally by running the following
 go get github.com/DataDog/datadog-lambda-go
 ```
 
-### Configure the function
+### Instrument the Function
 
-1. Set environment variable `DD_FLUSH_TO_LOG` to `true`.
-2. Enable [AWS X-Ray active tracing][4] for your Lambda function.
-3. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
+2. Import the required packages in the file declaring your Lambda function handler.
+
     ```go
     package main
 
     import (
       "github.com/aws/aws-lambda-go/lambda"
       "github.com/DataDog/datadog-lambda-go"
+      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
     )
+    ```
+3. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
 
+    ```go
     func main() {
       // Wrap your lambda handler like this
       lambda.Start(ddlambda.WrapHandler(myHandler, nil))
@@ -55,9 +65,24 @@ go get github.com/DataDog/datadog-lambda-go
       }))
       */
     }
-
+    ```
+4. Use the included libraries to create additional spans, connect logs and traces, and pass trace context to other services.
+    ```go
     func myHandler(ctx context.Context, event MyEvent) (string, error) {
-      // ...
+      // Trace an HTTP request
+      req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+      client := http.Client{}
+      client = *httptrace.WrapClient(&client)
+      client.Do(req)
+
+      // Connect your Lambda logs and traces
+      currentSpan, _ := tracer.SpanFromContext(ctx)
+      log.Printf("my log message %v", currentSpan)
+
+      // Create a custom span
+      s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+      time.Sleep(100 * time.Millisecond)
+      s.Finish()
     }
     ```
 
@@ -66,15 +91,15 @@ go get github.com/DataDog/datadog-lambda-go
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
-2. [Subscribe the Datadog Forwarder to your function's log groups][5].
+2. [Subscribe the Datadog Forwarder to your function's log groups][4].
 
 ### Unified service tagging
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
+Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][5].
 
 ## Explore Datadog serverless monitoring
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][7].
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][6].
 
 ## Monitor custom business logic
 
@@ -119,7 +144,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-For more information on custom metric submission, see [here][8].
+For more information on custom metric submission, see [here][7].
 
 ## Further Reading
 
@@ -128,8 +153,7 @@ For more information on custom metric submission, see [here][8].
 [1]: /integrations/amazon_web_services/
 [2]: /serverless/forwarder/
 [3]: https://github.com/DataDog/datadog-lambda-go
-[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[7]: https://app.datadoghq.com/functions
-[8]: /serverless/custom_metrics?tab=go
+[4]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[6]: https://app.datadoghq.com/functions
+[7]: /serverless/custom_metrics?tab=go

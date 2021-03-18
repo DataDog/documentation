@@ -2,7 +2,9 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    rabbitmq: assets/dashboards/rabbitmq_dashboard.json
+    rabbitmq_screenboard: assets/dashboards/rabbitmq_screenboard_dashboard.json
   logs:
     source: rabbitmq
   metrics_metadata: metadata.csv
@@ -10,6 +12,7 @@ assets:
   saved_views:
     pid_overview: assets/saved_views/status_overview.json
     rabbitmq_pattern: assets/saved_views/rabbitmq_pattern.json
+    rabbitmq_processes: assets/saved_views/rabbitmq_processes.json
   service_checks: assets/service_checks.json
 categories:
   - processing
@@ -167,7 +170,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 | パラメーター      | 値                                                                                                                                               |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "rabbitmq", "service": "rabbitmq", "log_processing_rules": {"type":"multi_line","name":"logs_starts_with_equal_sign", "pattern": "="}}` |
+| `<LOG_CONFIG>` | `{"source": "rabbitmq", "service": "rabbitmq", "log_processing_rules": [{"type":"multi_line","name":"logs_starts_with_equal_sign", "pattern": "="}]}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/

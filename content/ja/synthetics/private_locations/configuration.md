@@ -83,13 +83,14 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 | オプション | タイプ | デフォルト | 説明 |
 | -------| ---- | ------- | ----------- |
+| `config` | 文字列 | `/etc/datadog/synthetics-check-runner.json` | JSON コンフィギュレーションファイルへのパス。 |
 | `logFormat` | 文字列 | `pretty` | `"pretty"` と `"json"` 間でログ出力をフォーマットします。ログフォーマットを `json` に設定すると、ログが Datadog によって収集された時点で自動的に解析できます。 |
 | `verbosity` | 数値 | `3` | 冗長レベル (例: `-v`, `-vv`, `-vvv`, ...)。 |
 | `dumpConfig` | Boolean | `none` | シークレットなしでワーカーコンフィギュレーションパラメーターを表示します。 |
 | `dumpFullConfig` | Boolean | `none` | 完全なワーカーコンフィギュレーションパラメーターを表示します。 |
 | `help` | Boolean | `none` | ヘルプを表示します。 |
 
-**注**: プライベートロケーションコンテナログはコンテナ内に保存されず、stdout/stderrに出力されます。
+**注**: プライベートロケーションのコンテナは、コンテナ内に保存せずに stdout/stderr へ出力します。
 
 ## その他の参考資料
 

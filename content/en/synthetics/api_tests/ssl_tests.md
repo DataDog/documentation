@@ -20,11 +20,11 @@ further_reading:
 ## Overview
 
 SSL tests allow you to **proactively monitor the validity and expiration of your SSL/TLS certificates** to ensure secure connections between your key services and your users. If your certificate is about to expire or becomes compromised, Datadog sends you an **alert with details on the failure**, allowing you to quickly pinpoint the root cause of the issue and fix it.
-SSL tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor certificates of **public or internal hosts**.
+SSL tests can run from [managed][1] and [private locations][2] depending on whether you want to monitor certificates of **public or internal hosts**.
 
 ## Configuration
 
-After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], or [`DNS` test][6]), you can define your test's request.
+After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
 
 ### Define request
 
@@ -34,14 +34,14 @@ After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][
 2. Add **Advanced Options** (optional) to your test:
     * **Accept self-signed certificates**: Bypass any server error related to a self-signed certificate.
     * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
-  
+
   ```
-  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts 
+  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
   ```
 
 3. **Name** your SSL test.
-4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
+4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
 5. Select the **Locations** to run your SSL test from: SSL tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor certificates from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
@@ -54,7 +54,7 @@ SSL tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][8].
+* [**Within your CI/CD pipelines**][9].
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define assertions
@@ -68,7 +68,6 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | response time         | `is less than`                                                                         | _Integer (ms)_             |
 | maximum TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
 | minimum TLS version   | `is more than`, `is more than or equal`                                                | _Decimal_                  |
-
 
 You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
@@ -158,9 +157,9 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [4]: /synthetics/api_tests/ssl_tests
 [5]: /synthetics/api_tests/tcp_tests
 [6]: /synthetics/api_tests/dns_tests
-[7]: /synthetics/search/#search
-[8]: /synthetics/ci
-[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[7]: /synthetics/api_tests/icmp_tests
+[8]: /synthetics/search/#search
+[9]: /synthetics/ci
 [10]: /api/v1/synthetics/#create-a-test
 [11]: /monitors/notifications/?tab=is_alert#notification
 [12]: https://www.markdownguide.org/basic-syntax/

@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez la taille de la file d''attente, la taille moyenne des messages, le nombre de messages, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_sqs/'
+draft: false
 git_integration_title: amazon_sqs
 has_logo: true
 integration_title: Amazon SQS
@@ -29,7 +30,7 @@ La solution Amazon Simple Queue Service (SQS) est un service de file d'attente d
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de SQS.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

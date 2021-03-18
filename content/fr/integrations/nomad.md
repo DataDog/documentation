@@ -37,6 +37,8 @@ supported_os:
   - mac_os
   - windows
 ---
+![Dashboard Nomad][1]
+
 ## Présentation
 
 Rassemblez des métriques à partir de vos clusters Nomad pour :
@@ -44,11 +46,13 @@ Rassemblez des métriques à partir de vos clusters Nomad pour :
 - Visualiser et surveiller les performances de vos clusters
 - Envoyer des alertes sur la disponibilité et la santé des clusters
 
+Les monitors recommandés vous permettent de recevoir une notification lorsque différents événements Nomad se produisent.
+
 ## Configuration
 
 ### Installation
 
-Nomad transmet des métriques à Datadog via DogStatsD. Pour activer l'intégration Nomad, [installez l'Agent Datadog][1] sur chaque client et chaque host du serveur.
+Nomad transmet des métriques à Datadog via DogStatsD. Pour activer l'intégration Nomad, [installez l'Agent Datadog][2] sur chaque client et chaque host du serveur.
 
 ### Configuration
 
@@ -82,8 +86,9 @@ Le check Nomad n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/integrations-extras/blob/master/nomad/metadata.csv
-[3]: https://docs.datadoghq.com/fr/help/
+[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/nomad/images/dashboard_overview.png
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://github.com/DataDog/integrations-extras/blob/master/nomad/metadata.csv
+[4]: https://docs.datadoghq.com/fr/help/
