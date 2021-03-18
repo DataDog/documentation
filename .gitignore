@@ -3,6 +3,7 @@ public/
 data/service_checks/
 integrations_data
 resources/
+assets/jsconfig.json
 
 # Ignore generated examples
 /examples

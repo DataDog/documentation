@@ -9,7 +9,7 @@ const handleApiToolbar = () => {
     }
 }
 
-$(document).ready(function () {
+$(() => {
     handleApiToolbar();
 
     $('.announcement_banner .icon').on('click', function () {

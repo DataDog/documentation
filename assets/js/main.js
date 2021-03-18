@@ -1,8 +1,13 @@
 import 'bootstrap';
+import '@datadog/browser-rum/bundle/datadog-rum';
+import '@datadog/browser-logs/bundle/datadog-logs';
+
+import './api-redirect';
 import './datadog-docs';
 import './lang-redirects';
 import './region-redirects';
 
+import './components/dd-browser-logs-rum';
 import './components/announcement_banner';
 import './components/copy-code';
 import './components/global-modals';
