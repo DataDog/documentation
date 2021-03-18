@@ -15,31 +15,31 @@
 
 
 <section class="home-hero">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 offset-0 col-md-8 offset-md-2">
-                <h1 class="mt-3 mt-md-8 mb-0 mb-md-1 text-white font-regular text-center">{{ $datafile.heading }}</h1>
-                <div class="search-container">
-                        <form class="docssearch mt-0" method="GET" action="{{ "search/" | absLangURL }}">
-                            <div class="input-group" id="docssearchWrapper">
-                                <input class="docssearch-input form-control" name="s" type="docssearch" placeholder="Search documentation...">
-                                <div class="input-group-append">
-                                    <button class="btn btn-lg btn-primary text-uppercase js-search-btn" type="button" role="button">
-                                        <span class="d-none d-md-flex">Search</span>
-                                        <span class="d-flex d-md-none">{{ partial "svg" (dict "context" $dot "src" "search.svg" "color" "white" )}}</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                </div>
-                <p class="smaller text-white text-center font-semibold popular-search">
-                    Popular searches: 
-                    {{ $lenList := (len $datafile.popular_searches)}}
-                    {{ range $index, $popular_search := (sort $datafile.popular_searches "weight" "asc") }}
-                        <a href="{{ $popular_search.link | absLangURL }}">{{ $popular_search.title }}</a>{{ if eq (sub $lenList 2) $index }}, and{{ else if eq (sub $lenList 1) $index }}{{ else }},{{ end}}
-                    {{ end }}
-                </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 offset-0 col-md-8 offset-md-2">
+        <h1 class="mt-3 mt-md-8 mb-0 mb-md-1 text-white font-regular text-center">{{ $datafile.heading }}</h1>
+        <div class="search-container">
+          <form class="docssearch mt-0" method="GET" action="{{ "search/" | absLangURL }}">
+            <div class="input-group" id="docssearchWrapper">
+              <input class="docssearch-input form-control" name="s" type="docssearch" placeholder="Search documentation...">
+              <div class="input-group-append">
+                <button class="btn btn-lg btn-primary text-uppercase js-search-btn" type="button" role="button">
+                  <span class="d-none d-md-flex">Search</span>
+                  <span class="d-flex d-md-none">{{ partial "svg" (dict "context" $dot "src" "search.svg" "color" "white" )}}</span>
+                </button>
+              </div>
             </div>
+          </form>
         </div>
+        <p class="smaller text-white text-center font-semibold popular-search">
+          Popular searches:
+          {{ $lenList := (len $datafile.popular_searches)}}
+          {{ range $index, $popular_search := (sort $datafile.popular_searches "weight" "asc") }}
+              <a href="{{ $popular_search.link | absLangURL }}">{{ $popular_search.title }}</a>{{ if eq (sub $lenList 2) $index }}, and{{ else if eq (sub $lenList 1) $index }}{{ else }},{{ end}}
+          {{ end }}
+        </p>
+      </div>
     </div>
+  </div>
 </section>
