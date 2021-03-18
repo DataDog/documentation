@@ -1,0 +1,11 @@
+body.ja {
+
+  &> header .mainnav li.dropdown:nth-child(1) .dropdown-menu {
+    min-width: 200px;
+  }
+
+  &> header .mainnav li.dropdown:nth-child(4) .dropdown-menu {
+    min-width: 300px;
+  }
+
+}

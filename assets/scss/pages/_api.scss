@@ -1,0 +1,211 @@
+// API
+$ddpurple: #632ca6;
+
+.announcement_banner.open ~ header.scrolled ~ .container .api-nav {
+    top: 94px;
+}
+
+.announcement_banner.open ~ .container .main-api h2 {
+    margin-top: -175px;
+    padding-top: 175px;
+}
+
+.main-api {
+    margin-bottom: 160px;
+    padding-left: 15px;
+
+    @media (min-width: 991px) {
+        padding-left: 29px;
+    }
+
+    h2 {
+        margin-top: -145px;
+        padding-top: 145px;
+        pointer-events: none;
+        background-clip: content-box;
+        margin-right: 0;
+        a {
+            pointer-events: initial;
+            border-bottom: 1px solid transparent;
+            &:hover {
+                color: #000;
+                border-bottom: 1px solid #000;
+            }
+        }
+    }
+
+    .read-only {
+        position: relative;
+        top: 2px;
+        font-size: 16px;
+    }
+
+    a {
+        color: #4a4a4a;
+        border-bottom: 1px solid #6c757d;
+        &:hover {
+            color: $ddpurple;
+            border-bottom: 1px solid $ddpurple;
+        }
+    }
+
+    .code-snippet-wrapper {
+        margin-right: 0;
+        @media (min-width: 992px) {
+            margin-right: -180px;
+        }
+        @media (min-width: 1200px) {
+            margin-right: -216px;
+        }
+    }
+
+    .table-request .isReadOnly {
+        display: none;
+    }
+
+    .chroma {
+        max-height: 300px;
+        overflow-wrap: break-word;
+        white-space: inherit;
+    }
+
+    .divider {
+        margin-top: 70px;
+        &:last-of-type {
+            display: none;
+        }
+    }
+
+    .endpoint {
+      &.isCollapsed {
+        a.js-collapse-trigger {
+          padding-left:20px;
+        }
+      }
+      .toggle-arrow {
+        position:absolute;
+        &.expanded {
+          transform: rotate(90deg);
+        }
+      }
+    }
+}
+
+.api {
+    // These are temporary fixes until we refactor the announcement banner.
+    .announcement_banner.open ~ .container {
+        padding-top: 40px;
+
+        @include media-breakpoint-up(lg) {
+            padding-top: 0px;
+            margin-top: -20px;
+        }
+
+        @include media-breakpoint-up(xl) {
+            padding-top: 30px;
+            margin-top: 0;
+        }
+    }
+
+    .announcement_banner ~ .container {
+        padding-top: 20px;
+
+        @media (min-width: 992px) {
+            padding-top: 0px;
+        }
+    }
+
+    .api-toolbar {
+        font-weight: 600;
+        height: auto;
+
+        a {
+            border-bottom: none;
+        }
+
+        @include media-breakpoint-up(lg) {
+            align-items: baseline;
+            background: white;
+            position: sticky;
+            z-index: 5;
+            top: 94px;
+            height: 65px;
+        }
+
+        #breadcrumbs {
+            &:lang(ja) {
+                font-size: 15px;
+            }
+        }
+    }
+
+    .api-content {
+        ul {
+            list-style-type: none;
+            -webkit-padding-start: 12px;
+            ul {
+                -webkit-padding-start: 20px;
+            }
+            li {
+                &:before {
+                    content: '–';
+                    position: relative;
+                    margin-right: 10px;
+                    margin-left: -12px;
+                    float: left;
+                }
+                p {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    // gross change this..
+    .col-sm-9 > div:nth-child(1) > div:nth-child(1) {
+        padding-top: 70px;
+    }
+    .col-sm-9 > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) {
+        padding-top: 0;
+    }
+    .api-nav {
+        margin-right: -15px;
+        margin-left: -15px;
+        height: 50px;
+        z-index: 9;
+        top: 64px;
+    }
+    .api-content {
+        padding-top: 40px;
+        border-bottom: 1px solid #d6d6d6;
+    }
+    .api-code {
+        background: #1d1d1d;
+        padding-left: 0;
+        padding-right: 0;
+        color: #ffffff;
+        border-bottom: 1px solid #323232;
+        h3 {
+            color: #787878;
+            font-size: 18px;
+            font-weight: 200;
+        }
+        p {
+            color: #fff;
+        }
+        a {
+            color: #7cafe9;
+            text-decoration: underline;
+        }
+        & > div {
+            padding: 80px 30px 40px 30px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .api-content {
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+    }
+}

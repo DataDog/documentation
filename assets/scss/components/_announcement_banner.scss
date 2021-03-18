@@ -1,0 +1,100 @@
+@mixin gradient($left, $right, $opacity_left: 1, $opacity_right: 1, $direction: 45deg){
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7749a3+0,c900d2+100 */
+  background: rgba($left, 1); /* Old browsers */
+  background: -moz-linear-gradient($direction,  rgba($left, $opacity_left) 0%, rgba($right,$opacity_right) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient($direction,  rgba($left, $opacity_left) 0%,rgba($right,$opacity_right) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient($direction,  rgba($left,$opacity_left) 0%,rgba($right,$opacity_right) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7749a3', endColorstr='#c900d2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  //linear-gradient($direction, rgb($left) 0%, rgb($left) 100%)
+}
+
+// Announcement Banner Color Variables
+$announcement_banner_color: #632CA6;
+$announcement_banner_color_2: #2F80ED;
+$announcement_banner_text_color: #ffffff;
+
+.announcement_banner.open{
+    display: block;
+    background: indigo;
+    height: 30px;
+    line-height: 30px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    @include gradient($announcement_banner_color, $announcement_banner_color_2, 1);
+    a {
+      display: block;
+      color: $announcement_banner_text_color;
+      font-size: 20px;
+      margin-top: -2px;
+      font-weight: bold;
+
+      // JA site specific font-size for announcement banner
+      &:lang(ja) {
+        font-size: 16px;
+        line-height: 35px;
+      }
+    }
+}
+header {
+  margin-top: 30px;
+}
+
+/*.blog .announcement_banner.open ~ .navbar + .main,
+.search .announcement_banner.open ~ .navbar + .main,
+.resources .announcement_banner.open ~ .navbar + .main {
+    padding-top: 90px;
+    .s-results {
+      top: 60px;
+    }
+}
+
+.blog-single .announcement_banner.open ~ .featured-image {
+  margin-top:30px;
+}
+
+@media (min-width: 992px) {
+  .blog .announcement_banner.open ~ .navbar + .main,
+  .search .announcement_banner.open ~ .navbar + .main,
+  .resources .announcement_banner.open ~ .navbar + .main {
+      padding-top: 159px;
+      background-color: red !important;
+  }
+
+  .blog .announcement_banner.open ~ .navbar + .main,
+  .search .announcement_banner.open ~ .navbar + .main,
+  .resources .announcement_banner.open ~ .navbar + .main {
+    .header-search.affix {
+      top: 94px;
+    }
+  }
+  .blog .announcement_banner.open ~ .navbar + .main,
+  .search .announcement_banner.open ~ .navbar + .main {
+    .s-results {
+        top: 79px;
+      }
+  }
+
+  .blog .announcement_banner.open ~ .navbar + .main,
+  .search .announcement_banner.open ~ .navbar + .main {
+    .s-results {
+        top: 79px;
+      }
+  }
+
+  .blog .announcement_banner.open ~ .navbar + .main > .header-search.shrink,
+  .search .announcement_banner.open ~ .navbar + .main > .header-search.shrink {
+    .categories {
+        top: 50px;
+    }
+    .s-results {
+        top: 50px;
+    }
+  }
+
+  .resources .announcement_banner.open ~ .nav-tabs-underline-container {
+      margin-top: 30px;
+  }
+
+}*/

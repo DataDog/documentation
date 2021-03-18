@@ -1,0 +1,47 @@
+#signupModal {
+  .modal-content {
+    width:542px;
+  }
+  .modal-header {
+    border:none;
+  }
+  .modal-body {
+    padding:0;
+    height: 526px;
+  }
+  .modal-title {
+    font-weight: 200;
+    text-align: center;
+    color: #7749a3;
+    font-size: 30px;
+    width:100%;
+  }
+  .close {
+    font-size: 33px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+  }
+}
+
+#popupImageModal {
+  .modal-header {
+    border:none;
+  }
+  .modal-body {
+    padding:0;
+  }
+  .close {
+    display:none;
+  }
+}
+
+
+@media (max-width: 575px) {
+  #signupModal {
+    .modal-content {
+      width: auto;
+    }
+  }
+}

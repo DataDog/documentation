@@ -1,0 +1,7 @@
+body.fr {
+
+  &> header .mainnav li.dropdown:nth-child(4) .dropdown-menu {
+    min-width: 280px;
+  }
+
+}

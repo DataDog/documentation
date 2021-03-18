@@ -1,3 +1,56 @@
-body {
-  background-color: red;
-}
+// bootstrap customization & font setup
+@import "custom";
+@import "webfonts";
+@import "icons";
+
+// base
+@import "base/variables";
+@import "base/mixins";
+@import "base/colors";
+@import "base/typography";
+@import "base/helpers";
+
+// vendor
+@import "vendor/chroma-styles.css";
+
+// docsearch
+@import "main_docsearch";
+
+// global to all pages
+@import "pages/global";
+// language specific
+@import "pages/ja";
+@import "pages/fr";
+
+// page specific styles that aren't partials go here
+// partial css lives with partial
+@import "pages/api";
+@import "pages/search";
+@import "pages/404";
+@import "pages/home";
+@import "pages/help";
+@import "pages/security_monitoring";
+
+// Components
+@import "components/announcement_banner";
+@import "components/badge";
+@import "components/choice-select-box";
+@import "components/footer";
+@import "components/global-modals";
+@import "components/header";
+@import "components/integration-labels";
+@import "components/integrations";
+@import "components/platforms";
+@import "components/preview_banner";
+@import "components/questions";
+@import "components/language-region-select";
+@import "components/sidenav";
+@import "components/support";
+@import "components/table-of-contents";
+@import "components/tile-nav";
+@import "components/whats-next";
+@import "components/schema-table";
+@import "components/tab-toggle";
+
+// for now just include ie fixes
+@import "ie";

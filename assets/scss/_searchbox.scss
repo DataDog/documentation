@@ -1,0 +1,312 @@
+
+@function even-px($value) {
+  @if type-of($value) == 'number' {
+    @if (unitless($value)) {
+      $value: $value * 1px;
+    } @else if unit($value) == 'em' {
+      $value: ($value / 1em * 16px);
+    } @else if unit($value) == 'pts' {
+      $value: $value * 1.3333 * 1px;
+    } @else if unit($value) == '%' {
+      $value: $value * 16 / 100% * 1px;
+    };
+    $value: round($value);
+    @if ($value % 2 != 0) {
+      $value: $value + 1;
+    }
+    @return $value;
+  }
+}
+
+@mixin searchbox(
+  $font-size: 90%,
+  $input-width: 350px,
+  $input-height: $font-size * 2.4,
+  $border-width: 1px,
+  $border-radius: $input-height / 2,
+  $input-border-color: #ccc,
+  $input-focus-border-color: #1ec9ea,
+  $input-background: #f8f8f8,
+  $input-focus-background: #fff,
+  $placeholder-color: #aaa,
+  $icon: 'sbx-icon-search-1',
+  $icon-size: $input-height / 1.6,
+  $icon-position: left,
+  $icon-color: #888,
+  $icon-background: $input-focus-border-color,
+  $icon-background-opacity: .1,
+  $icon-clear: 'sbx-icon-clear-1',
+  $icon-clear-size: $font-size / 1.1
+) {
+  .searchbox {
+    display: inline-block;
+    position: relative;
+    width: $input-width;
+    height: even-px($input-height)!important;
+    white-space: nowrap;
+    box-sizing: border-box;
+    visibility: visible!important;
+    width: 100%;
+
+    .algolia-autocomplete{
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__wrapper {
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+      position: relative;
+    }
+
+    &__input {
+      display: inline-block;
+      box-sizing: border-box;
+      transition: box-shadow .4s ease, background .4s ease;
+      border: 0;
+      border-radius: even-px($border-radius);
+      box-shadow: inset 0 0 0 $border-width $input-border-color;
+      background: $input-background !important;
+      padding: 0;
+      padding-right: if($icon-position == 'right', even-px($input-height) + even-px($icon-clear-size) + 8px, even-px($input-height * .8))
+                + if($icon-background-opacity == 0, 0, even-px($font-size));
+      padding-left: if($icon-position == 'right',
+                even-px($font-size / 2) + even-px($border-radius / 2),
+                even-px($input-height) + if($icon-background-opacity == 0, 0, even-px($font-size * 1.2)));
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+      white-space: normal;
+      font-size: $font-size;
+      appearance: none;
+
+      &::-webkit-search-decoration,
+      &::-webkit-search-cancel-button,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration {
+        display: none;
+      }
+
+      &:hover {
+        box-shadow: inset 0 0 0 $border-width darken($input-border-color, 10%);
+      }
+
+      &:focus,
+      &:active {
+        outline: 0;
+        box-shadow: inset 0 0 0 $border-width $input-focus-border-color;
+        background: $input-focus-background;
+      }
+
+      &::placeholder {
+        color: $placeholder-color;
+      }
+
+    }
+
+    &__submit {
+      position: absolute;
+      top: 0;
+      margin: 0;
+      border: 0;
+      border-radius: if($icon-position == 'right', 0 $border-radius $border-radius 0, $border-radius 0 0 $border-radius);
+      background-color: rgba($icon-background, $icon-background-opacity);
+      padding: 0;
+      width: even-px($input-height) + if($icon-background-opacity == 0, 0, even-px($font-size / 2));
+      height: 100%;
+      vertical-align: middle;
+      text-align: center;
+      font-size: inherit;
+      user-select: none;
+      @if $icon-position == 'right' {
+        right: 0;
+        left: inherit;
+      } @else {
+        right: inherit;
+        left: 0;
+      }
+
+      // Helper for vertical alignment of the icon
+      &::before {
+        display: inline-block;
+        margin-right: -4px;
+        height: 100%;
+        vertical-align: middle;
+        content: '';
+      }
+
+      &:hover,
+      &:active {
+        cursor: pointer;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+
+      svg {
+        width: even-px($icon-size);
+        height: even-px($icon-size);
+        vertical-align: middle;
+        fill: $icon-color;
+      }
+    }
+
+    &__reset {
+      display: block;
+      position: absolute;
+      top: (even-px($input-height) - even-px($icon-clear-size)) / 2 - 4px;
+      right: if($icon-position == 'right',
+        even-px($input-height) + if($icon-background-opacity == 0, 0 , even-px($font-size)),
+        (even-px($input-height) - even-px($icon-clear-size)) / 2 - 4px);
+      margin: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      padding: 0;
+      font-size: inherit;
+      user-select: none;
+      fill: rgba(#000, .5);
+
+      &.hide {
+        display: none;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+
+      svg {
+        display: block;
+        margin: 4px;
+        width: even-px($icon-clear-size);
+        height: even-px($icon-clear-size);
+      }
+    }
+
+    &__input:valid ~ &__reset {
+      display: block;
+      animation-name: sbx-reset-in;
+      animation-duration: .15s;
+    }
+
+    @at-root{
+      @keyframes sbx-reset-in {
+        0% {
+          transform: translate3d(-20%, 0, 0);
+          opacity: 0;
+        }
+
+        100% {
+          transform: none;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.docssearch{
+  position:relative;
+  z-index:3;
+  transform: translateX(11px);
+  margin-top: 15px;
+  margin-bottom: 13px;
+  @media (min-width: 992px) {
+    margin-top: 0;
+  }
+
+
+
+  .search-input-container {
+    position: relative;
+
+    .docssearch-input, .docssearch-input-mobile {
+      height: 32px;
+      padding: 10px 18px 10px 35px;
+      border: none !important;
+      box-sizing: border-box;
+      appearance: none;
+      background-color: white !important;
+      
+      &:focus{
+          border: none;
+          outline: none;
+          box-shadow: none;
+      }
+
+      &:lang(ja) {
+        font-size: 15px;
+        line-height: 28px;
+      }
+    }
+
+    .docssearch-input {
+      width: 200px;
+      @media (min-width: 1200px) {
+        width: 250px;
+      }
+    }
+    .docssearch-input-mobile {
+      width: 100%;
+    }
+
+    .search-input-icon {
+      // height: 16px;
+      // width: 16px;
+      position: absolute;
+      top: 50%;
+      left: 16px;
+      transform: translateY(-50%);
+      fill: #e4e4e4;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+  .algolia-autocomplete{
+    width: 100%;
+  }
+
+  // overriding Algolias default styles
+  // .docssearch-input, .docssearch-input-m{
+
+  //     background-color: white !important;
+  //     border: none !important;
+  //     border-radius:0 !important;
+  //     width: 90%;
+  //     height: 32px;
+  //     font-size: 16px;
+  //     padding: 10px 10px 10px 14px;
+
+
+  //     // border-radius:0;
+  //     // transition-duration: 0.125s;
+  //     // width: 90%;
+  //     // background-color: transparent;
+  //     // border: 0px;
+  //     // border-bottom: 1px solid #ced4da;;
+
+  //     &:focus{
+  //       border: 0px;
+  //       border-bottom: 1px solid #632CA6;
+  //       outline: none;
+  //     }
+  //     &:lang(ja) {
+  //       font-size: 15px;
+  //       line-height: 28px;
+  //     }
+  //   }
+  // }
+}

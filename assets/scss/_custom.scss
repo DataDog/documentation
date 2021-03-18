@@ -1,0 +1,267 @@
+:root {
+  font-size: 16px;
+}
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins/breakpoints";
+@import "bootstrap/scss/mixins/grid";
+@import "bootstrap/scss/utilities/display";
+@import "bootstrap/scss/utilities/spacing";
+
+
+
+/* Bootstrap variable customization here */
+$ddpurple:    #632CA6;
+$codesnippet-filename-bg: rgba(119,0,255, 0.15);
+
+$theme-colors: (
+        "primary": $ddpurple,
+        "secondary": #000,
+        "success": $green,
+        "info": $cyan,
+        "warning": $yellow,
+        "danger": $red,
+        "semi-trans": rgba(255, 255, 255, .5),
+        "light": $gray-100,
+        "dark": $gray-800,
+        "gradient": $ddpurple,
+        "white": #FFF
+);
+
+$spacer: 1rem !default;
+
+$spacers: (
+  0: 0,
+  1: ($spacer * 0.625),
+  2: ($spacer * 1.25),
+  3: ($spacer * 1.875),
+  4: ($spacer * 2.5),
+  5: ($spacer * 3.125),
+  6: ($spacer * 3.75),
+  7: ($spacer * 4.375),
+  8: ($spacer * 5),
+  9: ($spacer * 5.625)
+);
+
+$font-family-sans-serif: "NationalWeb", Helvetica, Arial, sans-serif;
+$font-family-monospace:  "RobotoMono-Regular", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-base:       $font-family-sans-serif;
+
+// Links
+$link-color:            theme-color("primary");
+$link-decoration:       none;
+$link-hover-color:      $ddpurple;
+$link-hover-decoration: none;
+
+//dropdowns
+$dropdown-link-hover-color: $white;
+$dropdown-link-hover-bg: $ddpurple;
+$dropdown-link-active-color: $white;
+$dropdown-link-active-bg: $ddpurple;
+
+// Buttons
+$btn-font-weight: 600;
+
+// Headers
+$h1-font-size: 42px;
+$h2-font-size: 36px;
+$h3-font-size: 24px;
+$h4-font-size: 18px;
+$h5-font-size: 16px;
+$h6-font-size: 1rem;
+$headings-font-weight:600;
+
+$container-max-widths: (
+  // sm: 540px,
+  md: 750px,
+  lg: 970px,
+  xl: 1170px
+);
+
+h2{
+  font-weight: 200 !important;
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+/* beyond custom variables here and actual implementations that need to overwrite bootstrap */
+
+// Custom grids
+// 5 column
+// 2.4 width columns, 5 of them makes the 12 grid
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+    .col#{$infix}-2-4 {
+      @include make-col(2.4, $grid-columns);
+    }
+  }
+}
+// this button is generated from theme colors but we want to have slight variant colors
+.btn-outline-secondary {
+  border-color: #D6D6D6;
+
+  &:hover {
+    border-color: $ddpurple;
+    background-color: $ddpurple;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &.disabled,
+  &:disabled {
+
+  }
+
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    background-color: $ddpurple;
+    border-color: $ddpurple;
+    box-shadow: none;
+  }
+}
+
+// btn outline primary remove that dropshadow
+.btn-outline-primary:focus, .btn-outline-primary.focus,
+.btn-outline-primary:active:not([disabled]):not(.disabled),
+.btn-outline-primary.active:not([disabled]):not(.disabled),
+.show > .btn-outline-primary.dropdown-toggle {
+  box-shadow:none;
+}
+// we want the dropdowns to be outline like button
+.btn-outline-primary,
+.show > .btn-outline-primary.dropdown-toggle {
+  background-color:#fff;
+  color:$ddpurple;
+}
+
+.btn-outline-semi-trans {
+  &:hover {
+    border-color: #fff;
+    background-color: #fff;
+    color: $ddpurple;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    box-shadow: none;
+    background-color:transparent;
+  }
+}
+
+// this button is generated from theme colors but we want to have a gradient
+.btn-gradient {
+  background-image: linear-gradient(90deg,#c024b6,#3023ae);
+  border-color: transparent;
+  &:hover,
+  &:active,
+  &.active,
+  .show > &.dropdown-toggle {
+    background-color: #fff;
+    background-image: none;
+    border-color: $ddpurple;
+    color: $ddpurple;
+  }
+}
+
+// a button size the same as btn-sm but with a set font size,
+// this is for tags on the integrations page and elsewhere as needed
+.btn-sm-tag {
+  @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 16px, $line-height-sm, $btn-border-radius-sm);
+  &:lang(ja) {
+    @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 15px, $line-height-sm, $btn-border-radius-sm);
+  }
+}
+
+//white badge should have black border
+.badge-white {
+  border: 1px solid #000;
+}
+a.list-group-item-white {
+  color:#000;
+}
+a.list-group-item-white:focus,
+a.list-group-item-white:hover,
+button.list-group-item-white:focus,
+button.list-group-item-white:hover  {
+  color: $ddpurple;
+  background-color: #EBE4F2;
+  border-color: $ddpurple;
+  .badge {
+    background-color: $ddpurple;
+    border: 1px solid $ddpurple;
+    color: white;
+  }
+}
+
+// remove outlines
+button:focus {
+  outline: none;
+}
+.form-control:focus {
+  box-shadow: none;
+}
+
+$table-bg: $white;
+
+// Tables
+$table-border-color: #D6D6D6;
+// set default table to look like .table
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: $spacer;
+  background-color: $table-bg; // Reset for nesting within parents with `background-color`.
+
+  th,
+  td {
+    padding: $table-cell-padding;
+    vertical-align: top;
+    border-top: $table-border-width solid $table-border-color;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-bottom: (2 * $table-border-width) solid $table-border-color;
+  }
+
+  tbody + tbody {
+    border-top: (2 * $table-border-width) solid $table-border-color;
+  }
+
+  table,
+  .table {
+    background-color: $body-bg;
+  }
+}
+
+.btn-white.btn-outline{
+  color: $white;
+  border: 1px solid $white;
+  background-color: transparent;
+
+  &:hover, &:active, &:focus,
+  &:not(:disabled):not(.disabled):hover,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled):focus {
+    opacity: 1;
+    border: 1px solid $white;
+    background-color: $white;
+    color: $ddpurple;
+
+    a {
+      color: $white;
+    }
+  }
+}
