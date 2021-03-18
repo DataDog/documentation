@@ -12,7 +12,7 @@ Follow these steps to develop and publish your Marketplace offering:
 
 
 ## Apply for Sandbox Account
-All Technology Partners can request a dedicated sandbox Datadog account to aid in their development by following these four steps:
+All Technology Partners can request a dedicated sandbox Datadog account to aid in their development. To request a sandbox:
 
 1. Create a free Datadog [trial account](https://www.datadoghq.com/free-datadog-trial/) using the same email address as your Technology Partner application
 2. Log into the [Datadog Partner Portal](https://partners.datadoghq.com/English/)
@@ -36,8 +36,8 @@ In addition to this documentation, you can learn more about developing Datadog i
 ### The Development Process
 
 1. [Choose the type of Marketplace offering you would like to list](#1-choose-an-integration-type)<!--(# NEED HELP LINKING TABLE OF CONTENTS)-->
-2. [Build bi-directional integration](#2-build-a-bi-directional-integration)
-3. [Clone either the Marketplace or Integrations Extras Repository](#3-clone-either-the-marketplace-or-the-integrations-extras-repository)
+2. [Build a bi-directional integration](#2-build-a-bi-directional-integration)
+3. [Clone either the Marketplace or the Integrations Extras repository](#3-clone-either-the-marketplace-or-the-integrations-extras-repository)
 4. [Install the Datadog Development Toolkit](#4-install-and-run-the-datadog-development-toolkit)
 5. [Populate the tile scaffolding with metadata and out-of-the-box assets (like  dashboards and monitors)](#5-populate-the-tile-scaffolding)
 6. [Submit a pull-request](#6-submit-a-pull-request)
@@ -45,7 +45,7 @@ In addition to this documentation, you can learn more about developing Datadog i
 
 ### 1. Choose an integration type
 
-There are a few different ways to integrate with Datadog. Depending on the use cases and type of integration, choose the approach that makes the most sense for your offering. 
+There are a few different ways to integrate with Datadog. Depending on the use case and type of integration, choose the approach that makes the most sense for your offering. 
 
 #### [**1. Datadog Agent-based Integration**](https://docs.datadoghq.com/developers/integrations/)
 
@@ -65,7 +65,7 @@ There are a few different ways to integrate with Datadog. Depending on the use c
 #### [**2. Datadog REST API Integration**](https://docs.datadoghq.com/api/)
 An API integration fits well for enriching and submitting data from your backend, or pulling data directly out of Datadog. API integrations also work well for building a connector between Datadog and another SaaS platform. 
 
-Note that a Datadog API Key is required to submit data to a Datadog API endpoint, while an App Key is required for querying data from Datadog, or for creating resources within the Datadog App.
+**Note:** that a Datadog API Key is required to submit data to a Datadog API endpoint, while an App Key is required for querying data from Datadog, or for creating resources within the Datadog App.
 
 #### **3. Tile Only Listing**
 For Marketplace offerings that include a standalone SaaS or services offering, with no exchange of data, only a tile is needed. The Development Toolkit offers a command option to create tile-only scaffolding: ddev create -t tile "<Offering Name>" 
@@ -124,15 +124,14 @@ For the complete integration scaffolding run:
 
 `ddev create`
 
-
 ### 5. Populate the Tile Scaffolding
 
 The ddev commands in the previous section generate a skeleton of folders and files that make up your tile assets:
 
 #### README.md
 
-* Include “Overview,” “Setup,” and “Support” sections with H2 headings.
-* The “Overview heading should clearly describe the value your offering provides users, as well as how it can be used together with Datadog for more comprehensive observability. We recommend adding images of your software or dashboards in action. This section will be displayed in the “Overview” tab of your tile.
+* Include “Overview,” “Setup,” and “Support” sections with H2 headings (## in Markdown).
+* The “Overview" heading should clearly describe the value your offering provides users, as well as how it can be used together with Datadog for more comprehensive observability. We recommend adding images of your software or dashboards in action. This section will be displayed in the “Overview” tab of your tile.
 * The “Setup” heading should provide straightforward configuration steps for users to install or use your offering. This section will be displayed in the “Configuration” tab of your tile.
 * The “Support” heading should identify a contact for support, and possibly an option to submit product feedback. This section will be displayed in the “Support” tab of your tile. 
 
