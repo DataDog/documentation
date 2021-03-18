@@ -10,7 +10,7 @@ Built with [hugo][1], a static website generation tool.
 
 2. [Install Python3][3] (you can also use [pyenv][4])
 
-3. [Install hugo][12]
+3. [Install hugo][12] version 0.82.0 or higher, in particular the extended version with support for Sass.
 
 4. Install yarn: `npm install -g yarn`
 
