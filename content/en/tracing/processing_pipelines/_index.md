@@ -57,7 +57,7 @@ A processor executes within a pipeline to complete a data-structuring action, su
 {{< img src="tracing/processing_pipelines/arithmeticprocessor.png" style="width:100%;" alt="How to create an arithmetic processor" >}}
 
 With arithmetic processors, you can:
-- Add new attributes to a span with the result of a formula that you define. Added attribute names must not contain spaces or special characters.
+- Add new attributes to a span with values that are the calculated result of a formula that you define. Added attribute names must not contain spaces or special characters.
 - Remap different time attributes with different units into a single attribute.
 - Compute operations on attributes within the same span.
 
