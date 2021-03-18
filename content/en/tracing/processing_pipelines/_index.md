@@ -64,11 +64,10 @@ With arithmetic processors, you can:
 Arithmetic processors follow these rules:
 
 1. Formulas can use parentheses and the basic arithmetic operators: `-`, `+`, `*`, and `/`.
-2. Attributes must be prefixed with `@` when used in formulas.
-3. By default, the calculation is skipped if an attribute is not present on the span, or if it cannot be parsed as a number.
-4. If desired, select the option **Replace missing attribute by 0** to automatically populate missing attribute values with `0` to ensure that the calculation is done.
-5. If you use `-` as an operator, it must be used with a space on either side like `a - b`, as `-` can also exist in attribute names.
-6. If the target attribute already exists, it is overwritten by the result of the formula.
+2. In the formula, prefix attributes names with `@`.
+3. By default, if the formula references an attribute that is not present on a span, or if it cannot be parsed as a number, the processor is skipped for the span. However, you can change this behavior by selecting **Replace missing attribute by 0**, and the formula will used `0` for any missing attribute values, to ensure that the calculation is done.
+5. If you use `-` as an operator, put a space on either side, as in `a - b`, because `-` can also exist in attribute names.
+6. If the target attribute already exists, its value is overwritten by the result of the formula.
 7. Results are rounded up to the ninth decimal place. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
 
 ### Lookup Processor
@@ -85,9 +84,9 @@ For example, with a lookup processor you can:
 A lookup processor performs the following actions:
 
 1. Looks to see if the span contains the source attribute.
-2. Checks if the source attribute value exists in the mapping table.
-3. If it does, creates the target attribute with the corresponding value from the table.
-5. If the target attribute already exists, it is overwritten by the result of the formula.
+2. Checks if the source attribute value exists in the mapping table, and if it does, either:
+    - Creates the a span attribute with the corresponding value from the table; or
+    - Overwrites the span's existing attribute with the value from the table.
 6. Optionally, if a lookup processor does not find the source attribute value in the mapping table, creates a target attribute with the fixed default value.
 
 As with arithmetic processors, attributes in lookup processors must be prefixed with `@` when used in formulas.
