@@ -23,7 +23,11 @@ Pour créer un monitor composite, commencez par choisir des monitors existants, 
 
 Pour des raisons de configuration, un monitor composite ne dépend pas des monitors qui le composent. Sa stratégie de notification peut être modifiée sans altérer celle des monitors individuels, et vice versa. De même, la suppression d'un monitor composite n'entraîne pas la suppression des monitors qui le composent. Un monitor composite ne possède pas d'autres monitors, il se contente d'utiliser leurs résultats. En outre, plusieurs monitors composite peuvent utiliser un même monitor individuel.
 
-**Remarque** : les termes `monitors individuels`, `monitors qui le composent` et `monitors non composite` désignent tous des monitors utilisés par un monitor composite pour calculer son statut.
+**Remarques**
+
+- Les termes `monitors individuels`, `monitors qui le composent` et `monitors non composite` désignent tous des monitors utilisés par un monitor composite pour calculer son statut.
+- Pour obtenir un résultat composite, il est nécessaire d'effectuer des regroupements communs. Si vous choisissez des monitors qui ne partagent pas de tels regroupements, les monitors sélectionnés dans l'expression peuvent ne pas générer de résultat composite.
+- Les monitors composite ne peuvent pas se baser sur d'autres monitors composite.
 
 ## Création d'un monitor
 
@@ -88,14 +92,14 @@ Cette section repose sur des exemples pour expliquer le processus de calcul des 
 
 Le calcul de `A && B && C` par Datadog suit les conventions. Cependant, quels sont les statuts de monitor qui entraînent l'envoi d'alertes ? Un monitor composite tient compte de six différents statuts :
 
-| Statut    | Envoi d'alertes                             |
+| Status    | Envoi d'alertes                             |
 |-----------|------------------------------------------|
-| `Ok`      | Non                                    |
-| `Warn`    | Oui                                     |
-| `Alert`   | Oui                                     |
-| `Skipped` | Non                                    |
+| `Ok`      | False                                    |
+| `Warn`    | True                                     |
+| `Alert`   | True                                     |
+| `Skipped` | False                                    |
 | `No Data` | Non (oui si `notify_no_data` est true) |
-| `Unknown` | Oui                                     |
+| `Unknown` | True                                     |
 
 Lorsqu'un monitor composite estime qu'il doit envoyer des alertes, il hérite du statut le plus grave de ses monitors individuels et déclenche une alerte. S'il considère qu'aucune alerte ne doit être envoyée, il hérite du statut le _moins_ grave.
 

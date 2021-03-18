@@ -147,6 +147,36 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
+**Note**: If multiple `include_at_match` rules are defined, all rules patterns must match in order for the log to be included. If you want to match one or more patterns you must define them in a single expression:
+
+```yaml
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      pattern: abc|123
+```
+
+If the patterns are too long to fit legibly on a single line you can break them into multiple lines:
+
+```yaml
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      pattern: "abc\
+|123\
+|\\w+@datadoghq.com"
+```
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 

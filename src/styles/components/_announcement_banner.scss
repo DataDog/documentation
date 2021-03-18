@@ -13,9 +13,6 @@ $announcement_banner_color: #632CA6;
 $announcement_banner_color_2: #2F80ED;
 $announcement_banner_text_color: #ffffff;
 
-.announcement_banner {
-  display: none;
-}
 .announcement_banner.open{
     display: block;
     background: indigo;
@@ -39,25 +36,12 @@ $announcement_banner_text_color: #ffffff;
         line-height: 35px;
       }
     }
-    strong {
-      font-size: 21px;
-    }
-    ~ nav { // Push nav down because it's fixed we need 30px above
-      margin-top: 30px !important;
-      background: #fff;
-    }
 }
-.announcement_banner .icon {
-  position: absolute;
-  right: 10px;
-  top: 0;
-  font-size: 17px;
-  color: $announcement_banner_text_color;
-  cursor: pointer;
-  padding: 6px;
+header {
+  margin-top: 30px;
 }
 
-.blog .announcement_banner.open ~ .navbar + .main,
+/*.blog .announcement_banner.open ~ .navbar + .main,
 .search .announcement_banner.open ~ .navbar + .main,
 .resources .announcement_banner.open ~ .navbar + .main {
     padding-top: 90px;
@@ -75,6 +59,7 @@ $announcement_banner_text_color: #ffffff;
   .search .announcement_banner.open ~ .navbar + .main,
   .resources .announcement_banner.open ~ .navbar + .main {
       padding-top: 159px;
+      background-color: red !important;
   }
 
   .blog .announcement_banner.open ~ .navbar + .main,
@@ -112,4 +97,4 @@ $announcement_banner_text_color: #ffffff;
       margin-top: 30px;
   }
 
-}
+}*/

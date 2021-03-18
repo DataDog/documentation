@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Pub/Sub."
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_pubsub/'
+draft: false
 git_integration_title: google_cloud_pubsub
 has_logo: true
 integration_title: Google Pub/Sub
@@ -29,7 +30,7 @@ Recueillez des métriques de Google Pub/Sub pour :
 - Visualiser les performances de vos sujets et abonnements Pub/Sub
 - Corréler les performances de vos sujets et abonnements Pub/Sub avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Collecte de métriques
 
@@ -51,7 +52,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Pub/Sub d
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 

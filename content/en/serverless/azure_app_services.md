@@ -41,7 +41,9 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 1. If you haven't already, set up the [Microsoft Azure integration][8] first.
 
-2. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][9].
+2. The extension only supports Azure App Service Web Apps. **Function Apps are not supported**.
+
+3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][9].
 
     - .NET Framework 4.5 and later
     - .NET Core 2.1
@@ -50,7 +52,7 @@ The Datadog extension for Azure App Services provides additional monitoring capa
     - .NET Core 3.1
     - .NET 5
 
-3. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require a restart of your web app.
+4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require a restart of your web app.
 
 **Note**: Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.
 

@@ -760,7 +760,7 @@ components:
             ok:
               description: An array of of SLO IDs that can be safely deleted.
               items:
-                description: A SLO ID.
+                description: An SLO ID.
                 type: string
               type: array
           type: object
@@ -1979,6 +1979,7 @@ components:
       required:
       - data_source
       - compute
+      - name
       type: object
     FormulaAndFunctionEventQueryGroupBy:
       description: List of objects used to group by.
@@ -2075,6 +2076,7 @@ components:
       required:
       - data_source
       - query
+      - name
       type: object
     FormulaAndFunctionProcessQueryDataSource:
       description: Data sources that rely on the process backend.
@@ -2105,6 +2107,7 @@ components:
           type: string
         name:
           description: Name of query for use in formulas.
+          example: query_errors
           type: string
         sort:
           $ref: '#/components/schemas/QuerySortOrder'
@@ -2120,6 +2123,7 @@ components:
       required:
       - data_source
       - metric
+      - name
       type: object
     FormulaAndFunctionQueryDefinition:
       description: A formula and function query.
@@ -5919,6 +5923,15 @@ components:
             error as value.
           type: object
       type: object
+    SLOErrorBudgetRemainingData:
+      additionalProperties:
+        description: Remaining error budget.
+        format: double
+        type: number
+      description: A mapping of threshold `timeframe` to the remaining error budget.
+      example:
+        7d: 100.0
+      type: object
     SLOErrorTimeframe:
       description: 'The timeframe of the threshold associated with this error
 
@@ -5935,7 +5948,10 @@ components:
       - NINETY_DAYS
       - ALL
     SLOHistoryMetrics:
-      description: A `metric` based SLO history response.
+      description: 'A `metric` based SLO history response.
+
+
+        This is not included in responses for `monitor` based SLOs.'
       properties:
         denominator:
           $ref: '#/components/schemas/SLOHistoryMetricsSeries'
@@ -5947,6 +5963,7 @@ components:
           type: integer
         message:
           description: Optional message if there are specific query issues/warnings.
+          example: ''
           type: string
         numerator:
           $ref: '#/components/schemas/SLOHistoryMetricsSeries'
@@ -6083,10 +6100,40 @@ components:
           properties:
             from_ts:
               description: The `from` timestamp in epoch seconds.
+              example: 1615323990
               format: int64
               type: integer
+            group_by:
+              description: 'For `metric` based SLOs where the query includes a group-by
+                clause, this represents the list of grouping parameters.
+
+
+                This is not included in responses for `monitor` based SLOs.'
+              example: []
+              items:
+                description: A grouping parameter.
+                type: string
+              type: array
             groups:
-              $ref: '#/components/schemas/SLOHistorySLIData'
+              description: 'For grouped SLOs, this represents SLI data for specific
+                groups.
+
+
+                This is not included in the responses for `metric` based SLOs.'
+              example: []
+              items:
+                $ref: '#/components/schemas/SLOHistorySLIData'
+              type: array
+            monitors:
+              description: 'For multi-monitor SLOs, this represents SLI data for specific
+                monitors.
+
+
+                This is not included in the responses for `metric` based SLOs.'
+              example: []
+              items:
+                $ref: '#/components/schemas/SLOHistorySLIData'
+              type: array
             overall:
               $ref: '#/components/schemas/SLOHistorySLIData'
             series:
@@ -6095,9 +6142,11 @@ components:
               additionalProperties:
                 $ref: '#/components/schemas/SLOThreshold'
               description: mapping of string timeframe to the SLO threshold.
+              example: {}
               type: object
             to_ts:
               description: The `to` timestamp in epoch seconds.
+              example: 1615928790
               format: int64
               type: integer
             type:
@@ -6121,30 +6170,58 @@ components:
       type: object
     SLOHistorySLIData:
       description: 'An object that holds an SLI value and its associated data. It
-        can represent
+        can represent an SLO''s overall SLI value.
 
-        an SLO''s overall SLI value or the SLI value for a specific monitor (in multi-monitor
-        SLOs)
-
-        or group (in grouped SLOs). The uptime history is included for monitor SLOs.'
+        This can also represent the SLI value for a specific monitor in multi-monitor
+        SLOs, or a group in grouped SLOs.'
       properties:
+        error_budget_remaining:
+          $ref: '#/components/schemas/SLOErrorBudgetRemainingData'
+        errors:
+          description: A list of errors while querying the history data for the service
+            level objective.
+          example: []
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseError'
+          type: array
+        group:
+          description: For groups in a grouped SLO, this is the group name.
+          example: name
+          type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
             uptime time series.
           items:
             description: Represents an array time series data.
+            example:
+            - - 1579212382
+              - 0
             items:
               description: A time series data point which is a tuple of (timestamp,
                 value).
+              example:
+              - 1579212382
+              - 0
               format: double
               type: number
             maxItems: 2
             minItems: 2
             type: array
           type: array
+        monitor_modified:
+          description: For `monitor` based SLOs, this is the last modified timestamp
+            in epoch seconds of the monitor.
+          example: 1615867200
+          format: int64
+          type: integer
+        monitor_type:
+          description: For `monitor` based SLOs, this describes the type of monitor.
+          example: string
+          type: string
         name:
-          description: For groups in a grouped SLO this is the group name. For monitors
-            in a multi-monitor SLO this is the monitor name.
+          description: For groups in a grouped SLO, this is the group name. For monitors
+            in a multi-monitor SLO, this is the monitor name.
+          example: string
           type: string
         precision:
           additionalProperties:
@@ -6153,12 +6230,16 @@ components:
             type: number
           description: A mapping of threshold `timeframe` to number of accurate decimals,
             regardless of the from && to timestamp.
+          example:
+            30d: 1
+            7d: 2
           type: object
         preview:
-          description: 'For `monitor` based SLOs when `true` this indicates that a
-            replay is in progress to give an accurate uptime
+          description: 'For `monitor` based SLOs, when `true` this indicates that
+            a replay is in progress to give an accurate uptime
 
             calculation.'
+          example: true
           type: boolean
         sli_value:
           description: The current SLI value of the SLO over the history window.
@@ -6168,11 +6249,13 @@ components:
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
             the given from `&&` to timestamp.
+          example: 2
           format: double
           type: number
         uptime:
           deprecated: true
-          description: Deprecated. Use `sli_value` instead.
+          description: Use `sli_value` instead.
+          example: 99.99
           format: double
           type: number
       type: object
@@ -6219,7 +6302,7 @@ components:
             corresponding
 
             timeframe.'
-          example: 0.0
+          example: 99.9
           format: double
           type: number
         target_display:
@@ -6237,6 +6320,7 @@ components:
           $ref: '#/components/schemas/SLOTimeframe'
         warning:
           description: The warning value for the service level objective.
+          example: 90.0
           format: double
           type: number
         warning_display:
@@ -6249,6 +6333,7 @@ components:
             Included in service level objective responses if a warning target exists.
 
             Ignored in create/update requests.'
+          example: '90.0'
           type: string
       required:
       - timeframe
@@ -6270,6 +6355,7 @@ components:
       enum:
       - metric
       - monitor
+      example: metric
       type: string
       x-enum-varnames:
       - METRIC
@@ -7423,6 +7509,37 @@ components:
       - DB
       - CACHE
       - CUSTOM
+    SyntheticsAPIStep:
+      description: The steps used in a Synthetics multistep API test.
+      properties:
+        assertions:
+          default: []
+          description: Array of assertions used for the test.
+          example: []
+          items:
+            $ref: '#/components/schemas/SyntheticsAssertion'
+          type: array
+        extractedValues:
+          description: Array of values to parse and save as variables from the response.
+          items:
+            $ref: '#/components/schemas/SyntheticsParsingOptions'
+          type: array
+        name:
+          description: The name of the step.
+          type: string
+        request:
+          $ref: '#/components/schemas/SyntheticsTestRequest'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
+      type: object
+    SyntheticsAPIStepSubtype:
+      description: The subtype of the Synthetic multistep API test step, currently
+        only supporting `http`.
+      enum:
+      - http
+      type: string
+      x-enum-varnames:
+      - HTTP
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -7479,8 +7596,12 @@ components:
           type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
+        steps:
+          description: When the test subtype is `multi`, the steps of the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsAPIStep'
+          type: array
       required:
-      - request
       - assertions
       type: object
     SyntheticsAPITestResultData:
@@ -8281,20 +8402,7 @@ components:
               example: content-type
               type: string
             parser:
-              description: Details of the parser to use for the global variable.
-              example:
-                type: regex
-                value: .*
-              properties:
-                type:
-                  $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
-                value:
-                  description: Regex or JSON path used for the parser. Not used with
-                    type `raw`.
-                  type: string
-              required:
-              - type
-              type: object
+              $ref: '#/components/schemas/SyntheticsVariableParser'
             type:
               $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
           required:
@@ -8391,6 +8499,22 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
+      type: object
+    SyntheticsParsingOptions:
+      description: Parsing options for variables to extract.
+      properties:
+        field:
+          description: When type is `http_header`, name of the header to use to extract
+            the value.
+          example: content-type
+          type: string
+        name:
+          description: Name of the variable to extract.
+          type: string
+        parser:
+          $ref: '#/components/schemas/SyntheticsVariableParser'
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object
     SyntheticsPlayingTab:
       description: Navigate between different tabs for your browser test.
@@ -8794,20 +8918,22 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
     SyntheticsTestDetailsSubType:
-      description: 'The sub-type of the Synthetic API test, `http`, `ssl`, `tcp` or
+      description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns`.'
+        `dns` or `multi`.'
       enum:
       - http
       - ssl
       - tcp
       - dns
+      - multi
       type: string
       x-enum-varnames:
       - HTTP
       - SSL
       - TCP
       - DNS
+      - MULTI
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -9112,6 +9238,21 @@ components:
         new_status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
       type: object
+    SyntheticsVariableParser:
+      description: Details of the parser to use for the global variable.
+      example:
+        type: regex
+        value: .*
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
+        value:
+          description: Regex or JSON path used for the parser. Not used with type
+            `raw`.
+          type: string
+      required:
+      - type
+      type: object
     SyntheticsWarningType:
       description: User locator used.
       enum:
@@ -9279,6 +9420,13 @@ components:
           items:
             $ref: '#/components/schemas/WidgetEvent'
           type: array
+        legend_columns:
+          description: Columns displayed in the legend.
+          items:
+            $ref: '#/components/schemas/TimeseriesWidgetLegendColumn'
+          type: array
+        legend_layout:
+          $ref: '#/components/schemas/TimeseriesWidgetLegendLayout'
         legend_size:
           $ref: '#/components/schemas/WidgetLegendSize'
         markers:
@@ -9339,6 +9487,32 @@ components:
       required:
       - expression
       type: object
+    TimeseriesWidgetLegendColumn:
+      description: Legend column.
+      enum:
+      - value
+      - avg
+      - sum
+      - min
+      - max
+      type: string
+      x-enum-varnames:
+      - VALUE
+      - AVG
+      - SUM
+      - MIN
+      - MAX
+    TimeseriesWidgetLegendLayout:
+      description: Layout of the legend.
+      enum:
+      - auto
+      - horizontal
+      - vertical
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - HORIZONTAL
+      - VERTICAL
     TimeseriesWidgetRequest:
       description: Updated timeseries widget.
       properties:
@@ -18298,7 +18472,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-      summary: Create a SLO object
+      summary: Create an SLO object
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
@@ -18365,7 +18539,7 @@ paths:
         type: idempotent
   /api/v1/slo/can_delete:
     get:
-      description: 'Check if a SLO can be safely deleted. For example,
+      description: 'Check if an SLO can be safely deleted. For example,
 
         assure an SLO can be deleted without disrupting a dashboard.'
       operationId: CheckCanDeleteSLO
@@ -18456,7 +18630,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SLODeleteResponse'
           description: Conflict
-      summary: Delete a SLO
+      summary: Delete an SLO
       tags:
       - Service Level Objectives
       x-undo:
@@ -18490,7 +18664,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
-      summary: Get a SLO's details
+      summary: Get an SLO's details
       tags:
       - Service Level Objectives
       x-undo:
@@ -18537,7 +18711,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Update a SLO
+      summary: Update an SLO
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body

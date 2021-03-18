@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez les connexions ayant échoué, la latence de session, les espaces de travail qui ne sont pas sains et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_workspaces/'
+draft: false
 git_integration_title: amazon_workspaces
 has_logo: true
 integration_title: AWS Workspaces
@@ -26,7 +27,7 @@ Amazon WorkSpaces est un service informatique de bureau sécurisé et entièrem
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de Workspaces.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez l'utilisation des ressources AWS\_OpsWorks."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ops_works/'
+draft: false
 git_integration_title: amazon_ops_works
 has_logo: true
 integration_title: Amazon OpsWorks
@@ -27,7 +28,7 @@ AWS OpsWorks est un service de gestion d'applications qui facilite le déploiem
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'OpsWorks.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -97,8 +97,10 @@ aside.sidebar {
   }
 
   .dropdown {
-    @include media-breakpoint-down(lg) {
-      z-index: 2;
+    z-index: 2;
+
+    @include media-breakpoint-up(lg) {
+      z-index: unset;
     }
   }
 

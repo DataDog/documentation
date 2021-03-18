@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: "Envoyez des logs Sumo\_Logic à Datadog et des notifications Datadog à Sumo\_Logic."
 doc_link: 'https://docs.datadoghq.com/integrations/sumologic/'
+draft: false
 git_integration_title: sumo_logic
 has_logo: true
 integration_title: Sumo Logic
@@ -16,14 +17,14 @@ kind: integration
 manifest_version: '1.0'
 name: sumo_logic
 public_title: "Intégration Datadog/Sumo\_Logic"
-short_description: "Envoyez des logs Sumo\_Logic à Datadog\_et des notifications Datadog à Sumo\_Logic."
+short_description: "Envoyez des logs Sumo\_Logic à Datadog et des notifications Datadog à Sumo\_Logic."
 version: '1.0'
 ---
 ## Présentation
 
 Datadog s'intègre à Sumo Logic de deux façons : vous pouvez transférer des données de log Sumo Logic vers votre flux d'événements Datadog, ou utiliser Sumo Logic en tant que canal de notification pour vos alertes et événements Datadog. En d'autres termes, chaque service peut transmettre des informations à l'autre.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

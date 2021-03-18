@@ -79,8 +79,10 @@ After the widget is saved, the value of the template variable is the one selecte
 
 {{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables"  style="width:75%;">}}
 
+When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
+
 #### Associated template variables
-When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated by taking into consideration the other template variable values selected on the page, and seamlessly identifies the related values without any configuration. 
+When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated by taking into consideration the other template variable values selected on the page, and seamlessly identifies the related values without any configuration.
 
 {{< img src="dashboards/template_variables/associated_template_variables.png" alt="Associated template variables"  style="width:75%;">}}
 

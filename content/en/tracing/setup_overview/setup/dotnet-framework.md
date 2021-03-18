@@ -17,24 +17,27 @@ code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 70
 further_reading:
-    - link: 'https://github.com/DataDog/dd-trace-dotnet'
-      tag: 'GitHub'
-      text: 'Source code'
-    - link: 'https://www.datadoghq.com/blog/net-monitoring-apm/'
-      tag: 'Blog'
-      text: '.NET monitoring with Datadog APM and distributed tracing'
-    - link: 'tracing/visualization/'
-      tag: 'Documentation'
-      text: 'Explore your services, resources and traces'
-    - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/samples"
-      tag: "GitHub"
-      text: "Examples of Custom Instrumentation"
-    - link: "/tracing/connect_logs_and_traces/dotnet/"
-      tag: "Documentation"
-      text: "Connect .NET application logs to traces"
-    - link: "/serverless/azure_app_services/"
-      tag: "Documentation"
-      text: "Microsoft Azure App Services Extension"
+  - link: "/tracing/connect_logs_and_traces/dotnet/"
+    tag: "Documentation"
+    text: "Connect .NET application logs to traces"
+  - link: "/tracing/runtime_metrics/dotnet/"
+    tag: "Documentation"
+    text: "Runtime metrics"
+  - link: "/serverless/azure_app_services/"
+    tag: "Documentation"
+    text: "Microsoft Azure App Services extension"
+  - link: "/tracing/visualization/"
+    tag: "Documentation"
+    text: "Explore your services, resources, and traces"
+  - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
+    tag: "Blog"
+    text: ".NET monitoring with Datadog APM and distributed tracing"
+  - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/samples"
+    tag: "GitHub"
+    text: "Examples of custom instrumentation"
+  - link: "https://github.com/DataDog/dd-trace-dotnet"
+    tag: "GitHub"
+    text: "Source code"
 ---
 ## Compatibility requirements
 
@@ -60,12 +63,16 @@ To start tracing an application hosted in IIS:
 
 3. Run the .NET Tracer MSI installer with administrator privileges.
 
-4. Restart IIS using the following commands as an administrator: 
+4. Stop, then start IIS using the following commands as an administrator: 
 
-   ```text
-   net stop /y was
-   net start w3svc
-   ```
+    <div class="alert alert-warning"> 
+      <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
+    </div>
+
+    ```text
+    net stop /y was
+    net start w3svc
+    ```
 5. Create application load. 
 
 6. Visit [APM Live Traces][4]. 
@@ -271,6 +278,7 @@ The following table lists configuration variables that are available **only** wh
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames`  | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][8] section.                             |
 | `DD_HTTP_CLIENT_ERROR_STATUSES`                                 | Sets status code ranges that will cause HTTP client spans to be marked as errors. Default value is `400-499`. |
 | `DD_HTTP_SERVER_ERROR_STATUSES`                                 | Sets status code ranges that will cause HTTP server spans to be marked as errors. Default value is `500-599`. |
+| `DD_RUNTIME_METRICS_ENABLED`                                    | Enables .NET runtime metrics. Valid values are `true` or `false`. Default value is `false`. Added in version 1.23.0.
 | `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) that will be excluded from automatic instrumentation. |
 
 

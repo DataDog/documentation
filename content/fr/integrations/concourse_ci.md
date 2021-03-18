@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - Collaboration
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md'
 display_name: "Concourse\_CI"
+draft: false
 git_integration_title: concourse_ci
 guid: 054cc9fb-01c4-4f05-98b5-fae828746787
 integration_id: concourse-ci
@@ -36,7 +38,7 @@ Configurez l'émetteur de métriques Datadog dans Concourse CI pour :
 - Afficher la durée des pipelines, le nombre de conteneurs et les volumes montés de travail
 - Identifier des requêtes lentes afin d'élaborer des itinéraires
 
-## Implémentation
+## Configuration
 
 ### Installation
 

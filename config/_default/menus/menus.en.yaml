@@ -393,11 +393,6 @@ main:
     url: getting_started/synthetics/
     parent: getting_started
     weight: 10
-  - name: Private Locations
-    identifier: getting_started_private_location
-    url: getting_started/synthetics/private_location
-    parent: getting_started_synthetics
-    weight: 1001
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
@@ -408,6 +403,11 @@ main:
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
     weight: 1003
+  - name: Private Locations
+    identifier: getting_started_private_location
+    url: getting_started/synthetics/private_location
+    parent: getting_started_synthetics
+    weight: 1001
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
@@ -995,6 +995,10 @@ main:
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
     weight: 501
+  - name: Trace Propagation (Advanced)
+    url: serverless/distributed_tracing/serverless_trace_propagation
+    parent: serverless_distributed_tracing
+    weight: 502
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
@@ -1541,6 +1545,11 @@ main:
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
     weight: 1204
+  - name: .NET
+    url: tracing/runtime_metrics/dotnet
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_dotnet
+    weight: 1205
   - name: Continuous Profiler
     url: tracing/profiler/
     parent: tracing
@@ -1839,6 +1848,10 @@ main:
     url: synthetics/api_tests/dns_tests
     parent: api_tests
     weight: 104
+  - name: ICMP
+    url: synthetics/api_tests/icmp_tests
+    parent: api_tests
+    weight: 105
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics
@@ -4152,9 +4165,9 @@ api:
         - GetSLOHistory
       unstable:
         - v1
-  - name: Update a SLO
-    url: '#update-a-slo'
-    identifier: update-a-slo
+  - name: Update an SLO
+    url: '#update-an-slo'
+    identifier: update-an-slo
     parent: service-level-objectives
     generated: true
     params:
@@ -4163,9 +4176,9 @@ api:
       operationids:
         - UpdateSLO
       unstable: []
-  - name: Get a SLO's details
-    url: '#get-a-slos-details'
-    identifier: get-a-slos-details
+  - name: Get an SLO's details
+    url: '#get-an-slos-details'
+    identifier: get-an-slos-details
     parent: service-level-objectives
     generated: true
     params:
@@ -4174,9 +4187,9 @@ api:
       operationids:
         - GetSLO
       unstable: []
-  - name: Delete a SLO
-    url: '#delete-a-slo'
-    identifier: delete-a-slo
+  - name: Delete an SLO
+    url: '#delete-an-slo'
+    identifier: delete-an-slo
     parent: service-level-objectives
     generated: true
     params:
@@ -4207,9 +4220,9 @@ api:
       operationids:
         - DeleteSLOTimeframeInBulk
       unstable: []
-  - name: Create a SLO object
-    url: '#create-a-slo-object'
-    identifier: create-a-slo-object
+  - name: Create an SLO object
+    url: '#create-an-slo-object'
+    identifier: create-an-slo-object
     parent: service-level-objectives
     generated: true
     params:
