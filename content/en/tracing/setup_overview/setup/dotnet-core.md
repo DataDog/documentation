@@ -62,7 +62,12 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 
 3. Run the .NET Tracer MSI installer with administrator privileges.
 
-4. Restart IIS by running the following commands as an administrator:
+4. Stop and start IIS by running the following commands as an administrator:
+
+<div class="alert alert-warning"> 
+  <strong>Warning!</strong> You must use a stop and start command, this is not the same as a reset or restart command.
+</div>
+
     ```cmd
     net stop /y was
     net start w3svc
