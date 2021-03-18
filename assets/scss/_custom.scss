@@ -9,24 +9,22 @@
 @import "bootstrap/scss/utilities/display";
 @import "bootstrap/scss/utilities/spacing";
 
-
-
 /* Bootstrap variable customization here */
 $ddpurple:    #632CA6;
 $codesnippet-filename-bg: rgba(119,0,255, 0.15);
 
 $theme-colors: (
-        "primary": $ddpurple,
-        "secondary": #000,
-        "success": $green,
-        "info": $cyan,
-        "warning": $yellow,
-        "danger": $red,
-        "semi-trans": rgba(255, 255, 255, .5),
-        "light": $gray-100,
-        "dark": $gray-800,
-        "gradient": $ddpurple,
-        "white": #FFF
+  "primary": $ddpurple,
+  "secondary": #000,
+  "success": $green,
+  "info": $cyan,
+  "warning": $yellow,
+  "danger": $red,
+  "semi-trans": rgba(255, 255, 255, .5),
+  "light": $gray-100,
+  "dark": $gray-800,
+  "gradient": $ddpurple,
+  "white": #FFF
 );
 
 $spacer: 1rem !default;
