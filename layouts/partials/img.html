@@ -5,7 +5,8 @@
 {{ end }}
 {{ $img_param := .root.Scratch.Get "img_param" }}
 
-{{ $url := (print (.root.Site.Params.img_url) (printf "%s/%s" "images" .src)  ($img_param)) | safeURL }}
+{{ $url := (print (.root.Site.Params.img_url) (printf "%s/%s" "images" .src)  ($img_param)) }}
+
 
 {{ $image_type_arr := split .src "." }}
 {{ $image_ext := index $image_type_arr 1 }}
