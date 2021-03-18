@@ -179,6 +179,20 @@ code + code.region-param {
     border-bottom-left-radius: 0;
 }
 
+details {
+    margin-bottom: 1.5rem;
+
+    summary {
+        h3 {
+            display: inline-block;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
 .programming-lang-wrapper {
     .code-snippet-wrapper {
         display: none;
