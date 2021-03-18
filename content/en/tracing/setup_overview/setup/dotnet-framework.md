@@ -66,7 +66,7 @@ To start tracing an application hosted in IIS:
 4. Stop and start IIS using the following commands as an administrator: 
 
 <div class="alert alert-warning"> 
-  <strong>Warning!</strong> You must use a stop and start command, this is not the same as a reset or restart command.
+  <strong>Note:</strong> You must use a stop and start command, this is not the same as a reset or restart command.
 </div>
 
    ```text
