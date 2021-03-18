@@ -11,7 +11,7 @@ further_reading:
       text: 'Use Analytics queries and monitors based on retained traces.'
 ---
 <div class="alert alert-warning">
-This feature is currently in private beta. <a href="https://docs.google.com/forms/d/1RlT0FNdFjiEzkQgxiCf77ugpW0w5a17X7JQ7E286jM4">Fill out this form</a> to request this feature for your account or to be notified when it becomes generally available.
+This feature is currently in private beta. <a href="https://forms.gle/6hHcytp2JvBAHxC6A">Fill out this form</a> to request this feature for your account or to be notified when it becomes generally available.
 </div>
 
 ## Overview
