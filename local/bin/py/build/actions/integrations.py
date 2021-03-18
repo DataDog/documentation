@@ -412,14 +412,14 @@ class Integrations:
     # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png
     def process_images(self, file_name):
         """
-        Copies a single image file to the static/images/ folder, creating a new directory if needed.
+        Copies a single image file to the assets/images/ folder, creating a new directory if needed.
         """
         image_filename = basename(file_name) # img.png
         integration_image_path = file_name.replace('../', '') # if it found local marketplace repo
         integration_image_path = integration_image_path.replace('./integrations_data/extracted/', '') # marketplace/nerdvision/images/img.png
         integration_image_directory = dirname(integration_image_path) # marketplace/nerdvision/images/
-        destination_directory = './static/images/{}'.format(integration_image_directory) # static/images/marketplace/nerdvision/images/
-        full_destination_path = '{}/{}'.format(destination_directory, image_filename) # static/images/marketplace/nerdvision/images/img.png
+        destination_directory = './assets/images/{}'.format(integration_image_directory) # assets/images/marketplace/nerdvision/images/
+        full_destination_path = '{}/{}'.format(destination_directory, image_filename) # assets/images/marketplace/nerdvision/images/img.png
 
         makedirs(destination_directory, exist_ok=True)
         copyfile(file_name, full_destination_path)
@@ -427,7 +427,7 @@ class Integrations:
     @staticmethod
     def replace_image_src(markdown_string):
         """
-        Takes a markdown string and replaces any image markdown with our img shortcode, pointing to the static/images folder.
+        Takes a markdown string and replaces any image markdown with our img shortcode, pointing to the assets/images folder.
         This is needed when dealing with Marketplace Integrations to properly display images pulled from a private repo.
         """
         markdown_img_search_regex = r"!\[(.*?)\]\((.*?)\)"
