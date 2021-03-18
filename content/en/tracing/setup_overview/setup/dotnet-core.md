@@ -65,7 +65,7 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 4. Stop and start IIS by running the following commands as an administrator:
 
 <div class="alert alert-warning"> 
-  <strong>Warning!</strong> You must use a stop and start command, this is not the same as a reset or restart command.
+  <strong>Note:</strong> You must use a stop and start command, this is not the same as a reset or restart command.
 </div>
 
     ```cmd
