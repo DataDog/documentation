@@ -33,6 +33,7 @@ As a best practice, Datadog recommends using unified service tagging when assign
 * Tags must start with a letter.
 * May contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters are converted to underscores.
 * Any trailing underscore will get removed, whether if it originated from a converted character or if it was in the original tag value.
+* Contiguous underscores will be reduced to a single underscore.
 * Tags can be up to 200 characters long and support Unicode.
 * Tags are converted to lowercase.
 * For optimal functionality, it is recommended to use the `key:value` syntax.
