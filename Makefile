@@ -21,13 +21,13 @@ include $(CONFIG_FILE)
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-install-hugo:
+install-hugo: ## Install Hugo locally at /usr/local/bin/hugo (only for CI)
 	./local/bin/sh/install-hugo.sh
 
-build-live:
+build-live: ## Build the "live" (read: public-facing) version of the site
 	hugo --buildDrafts --buildFuture --environment live
 
-build-preview:
+build-preview: ## Build the preview version of the site
 	hugo --buildDrafts --buildFuture --environment preview
 
 clean: stop  ## Clean all make installs.
