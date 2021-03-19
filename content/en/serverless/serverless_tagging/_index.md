@@ -24,6 +24,8 @@ With these tags, you can:
 
 To tag your serverless application with `env`, `service` and `version`, see the [unified service tagging documentation][1].
 
+Also note that Lambda function names should adhere to [Datadog's tagging convention][4]. This allows us to tie all of your function's traces, logs and metrics together seamlessly.
+
 ### The env tag
 
 Use `env` to separate out your staging, development, and production environments. This works for any kind of infrastructure, not just for your serverless functions. As an example, you could tag your production EU Lambda functions with `env:prod-eu`.
@@ -56,3 +58,4 @@ The [Service Map][3] groups services into maps by the `env` tag, and uses the `s
 [1]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [2]: /tracing/deployment_tracking/
 [3]: /tracing/visualization/services_map/
+[4]: /developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
