@@ -2,6 +2,8 @@
 title: Span Processing Pipelines
 kind: documentation
 description: 'Enrich span metadata with processing pipelines.'
+aliases:
+  - /tracing/processing_pipelines/
 further_reading:
     - link: 'tracing/trace_retention_and_ingestion'
       tag: "Documentation"
@@ -21,7 +23,7 @@ Span Processing Pipelines are an optional way you can configure your APM setup s
 
 Pipelines and processors are applied to all ingested spans, and you can configuration them on the [Pipelines][4] page within the Datadog app.
 
-There are two types of processors, enabling two types of modification: 
+There are two types of processors, enabling two types of modification:
 
 - Use [arithmetic processors](#arithmetic-processor) to change the units of an existing tag or to create a new tag based on a formulaic calculation.
 - Use [lookup processors](#lookup-processor) to add tags based on the key of a row in your [enrichment table][5] without needing to store these values in your code.
