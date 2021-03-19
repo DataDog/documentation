@@ -41,5 +41,17 @@ export default {
         us3: '10516',
         eu: '1883',
         gov: 'not supported'
+    },
+    web_integrations_endpoint: {
+        us: 'intake.logs.datadoghq.com',
+        us3: 'intake.logs.datadoghq.com',
+        eu: 'tcp-intake.logs.datadoghq.eu',
+        gov: 'not supported'
+    },
+    web_integrations_port: {
+        us: '10516',
+        us3: '10516',
+        eu: '443',
+        gov: 'not supported'
     }
 };
