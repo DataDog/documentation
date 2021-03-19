@@ -201,6 +201,8 @@ The following conditional variables are available:
 | `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
 | `{{^is_no_data_recovery}}` | The monitor does not recover from `NO DATA`                        |
 | `{{#is_priority 'value'}}`  | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
+| `{{#is_unknown}}`          | The monitor is in the unknown state                                |
+| `{{^is_unknown}}`          | The monitor is not in the unknown state                            |
 
 #### Examples
 
