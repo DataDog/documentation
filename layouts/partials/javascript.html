@@ -1,4 +1,4 @@
-{{ $serverMode := site.IsServer }}
+{{ $devMode    := site.IsServer }}
 {{ $jsMain     := "js/app.js" }}
 {{ $jsOutput   := "js/app.js" }}
 {{ $defines    := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`)
@@ -6,8 +6,8 @@
   "process.env.DEBUG" `false`
   "process.env.NODE_ENV" `"development"` }}
 {{ $devOpts    := dict "target" "es2020" "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" }}
-{{ $prodOpts   := dict "target" "es2020" "defines" $defines "targetPath" $jsOutput "minify" true }}
-{{ $jsOpts     := cond $serverMode $devOpts $prodOpts }}
+{{ $prodOpts   := dict "target" "es2020" "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" "minify" true }}
+{{ $jsOpts     := cond $devMode $devOpts $prodOpts }}
 {{ $babelOpts  := dict "config" "babel.config.json" }}
 {{ $js := resources.Get $jsMain | js.Build $jsOpts | babel $babelOpts }}
 {{ $jq := site.Params.jquery }}
@@ -21,7 +21,7 @@
   global = globalThis;
 </script>
 
-{{ if $serverMode }}
+{{ if $devMode }}
 <script src="{{ $js.RelPermalink }}" defer></script>
 {{ else }}
 {{ $prodJs := $js | resources.Fingerprint "sha512" }}

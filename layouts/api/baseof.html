@@ -20,8 +20,6 @@
   {{- if ne $.Params.disable_opengraph_meta_tags true -}}
   {{- partial "meta.html" . -}}
   {{- end -}}
-
-  <script src="{{ (index $.Site.Data.manifest "lang-redirects.js") | relURL }}"></script>
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 
@@ -44,9 +42,6 @@ data-spy="scroll" data-target="#navbar-example2" data-offset="5"
   </div>
 
   {{ partial "footer/footer.html" . }}
-
-  <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
-  <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>
 
   {{ partial "footer-scripts.html" . }}
   {{ partial "footer-js-dd-docs-methods" . }}
