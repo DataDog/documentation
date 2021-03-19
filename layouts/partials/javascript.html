@@ -5,8 +5,8 @@
   "process.env.RESET_APP_DATA_TIMER" `10`
   "process.env.DEBUG" `false`
   "process.env.NODE_ENV" `"development"` }}
-{{ $devOpts    := dict "target" "es2020" "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" }}
-{{ $prodOpts   := dict "target" "es2020" "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" "minify" true }}
+{{ $devOpts    := dict "target" "es2020" "defines" $defines "targetPath" $jsOutput "sourceMap" "external" }}
+{{ $prodOpts   := dict "target" "es2020" "defines" $defines "targetPath" $jsOutput "sourceMap" "external" "minify" true }}
 {{ $jsOpts     := cond $devMode $devOpts $prodOpts }}
 {{ $babelOpts  := dict "config" "babel.config.json" }}
 {{ $js := resources.Get $jsMain | js.Build $jsOpts | babel $babelOpts }}
