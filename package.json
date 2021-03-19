@@ -5,10 +5,6 @@
     "private": true,
     "scripts": {
         "preinstall": "bash local/bin/sh/preinstall.sh",
-        "prestart": "rimraf public",
-        "start": "run-p start:**",
-        "start:webpack": "webpack --config webpack.dev.js --progress",
-        "start:hugo": "./node_modules/.bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache",
         "prebuild": "rimraf public",
         "build": "run-s build:webpack build:hugo",
         "build:preview": "yarn run build:webpack:preview && yarn run build:hugo:preview",

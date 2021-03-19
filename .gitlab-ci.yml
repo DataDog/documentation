@@ -193,7 +193,6 @@ sourcemaps_preview:
     policy: pull
   environment: "preview"
   script:
-    - make build-preview
     - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/**/*.map --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
@@ -336,7 +335,6 @@ sourcemaps_live:
     policy: pull
   environment: "live"
   script:
-    - yarn run build:webpack -- --devtool source-map
     - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/**/*.map --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_live
