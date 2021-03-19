@@ -4,8 +4,8 @@
     "description": "Datadog Docs built on HUGO",
     "private": true,
     "scripts": {
-        "build:apiPages": "node -e 'require(\"./src/scripts/build-api-pages.js\").init()'",
-        "dereference": "node ./src/scripts/dereference.js",
+        "build:apiPages": "node -e 'require(\"./assets/js/build-api-pages.js\").init()'",
+        "dereference": "node ./assets/js/dereference.js",
         "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true",
         "test": "./node_modules/.bin/jest",
         "check-links": "node node_modules/link-checker/dd-link-checker.js"
