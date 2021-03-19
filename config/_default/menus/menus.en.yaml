@@ -1455,11 +1455,6 @@ main:
     parent: tracing
     identifier: generate_metrics
     weight: 6
-  - name: Span Processing Pipelines
-    url: tracing/processing_pipelines/
-    parent: tracing
-    identifier: span_processing_pipelines
-    weight: 7
   - name: Deployment Tracking
     url: tracing/deployment_tracking/
     parent: tracing
