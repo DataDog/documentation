@@ -1459,177 +1459,177 @@ main:
     url: tracing/deployment_tracking/
     parent: tracing
     identifier: deployment_tracking
-    weight: 7
+    weight: 8
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
     identifier: tracing_connect_logs_and_traces
-    weight: 8
+    weight: 9
   - name: Java
     url: tracing/connect_logs_and_traces/java
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_java
-    weight: 801
+    weight: 901
   - name: Python
     url: tracing/connect_logs_and_traces/python
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_python
-    weight: 802
+    weight: 902
   - name: Go
     url: tracing/connect_logs_and_traces/go
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_go
-    weight: 803
+    weight: 903
   - name: Ruby
     url: tracing/connect_logs_and_traces/ruby
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_ruby
-    weight: 804
+    weight: 904
   - name: PHP
     url: tracing/connect_logs_and_traces/php
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_php
-    weight: 805
+    weight: 905
   - name: NodeJS
     url: tracing/connect_logs_and_traces/nodejs
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_nodejs
-    weight: 806
+    weight: 906
   - name: .NET
     url: tracing/connect_logs_and_traces/dotnet
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
-    weight: 807
+    weight: 907
   - name: OpenTelemetry
     url: tracing/connect_logs_and_traces/opentelemetry
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_opentelemetry
-    weight: 808
+    weight: 908
   - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
-    weight: 8
+    weight: 10
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: tracing
     identifier: tracing_connect_rum_and_traces
-    weight: 9
+    weight: 11
   - name: Runtime Metrics
     url: tracing/runtime_metrics/
     parent: tracing
     identifier: tracing_runtime_metrics
-    weight: 10
+    weight: 12
   - name: Java
     url: tracing/runtime_metrics/java
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_java
-    weight: 1001
+    weight: 1201
   - name: Python
     url: tracing/runtime_metrics/python
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_python
-    weight: 1002
+    weight: 1202
   - name: Ruby
     url: tracing/runtime_metrics/ruby
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_ruby
-    weight: 1003
+    weight: 1203
   - name: NodeJS
     url: tracing/runtime_metrics/nodejs
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
-    weight: 1004
+    weight: 1204
   - name: .NET
     url: tracing/runtime_metrics/dotnet
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_dotnet
-    weight: 1005
+    weight: 1205
   - name: Continuous Profiler
     url: tracing/profiler/
     parent: tracing
     identifier: profiler
-    weight: 11
+    weight: 13
   - name: Getting Started
     url: tracing/profiler/getting_started
     parent: profiler
     identifier: profiler_getting_started
-    weight: 1101
+    weight: 1301
   - name: Search Profiles
     url: tracing/profiler/search_profiles
     parent: profiler
     identifier: profiler_search_profiles
-    weight: 1102
+    weight: 1302
   - name: Investigate Code Hotspots from Traces
     url: tracing/profiler/connect_traces_and_profiles
     parent: profiler
     identifier: profiler_traces_profiles
-    weight: 1103
+    weight: 1303
   - name: Profiler Troubleshooting
     url: tracing/profiler/profiler_troubleshooting
     parent: profiler
     identifier: profiler_profiler_troubleshooting
-    weight: 1104
+    weight: 1304
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
     identifier: tracing_vis
-    weight: 13
+    weight: 14
   - name: Services List
     url: tracing/visualization/services_list/
     parent: tracing_vis
-    weight: 1301
+    weight: 1401
   - name: Service Page
     url: tracing/visualization/service/
     parent: tracing_vis
-    weight: 1302
+    weight: 1402
   - name: Resource Page
     url: tracing/visualization/resource/
     parent: tracing_vis
-    weight: 1303
+    weight: 1403
   - name: Trace View
     url: tracing/visualization/trace/
     parent: tracing_vis
-    weight: 1304
+    weight: 1404
   - name: Service Map
     url: tracing/visualization/services_map/
     parent: tracing_vis
-    weight: 1305
+    weight: 1405
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 14
+    weight: 15
   - name: Troubleshooting
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 15
+    weight: 16
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1501
+    weight: 1601
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1502
+    weight: 1602
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1503
+    weight: 1603
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1504
+    weight: 1604
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1505
+    weight: 1605
   - name: Log Management
     url: logs/
     pre: nav_logs

@@ -47,7 +47,7 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 ## Automatic instrumentation
 
 <div class="alert alert-warning"> 
-  <strong>Note:</strong>  If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
+  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 </div>
 
 ### Installation
@@ -62,7 +62,12 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 
 3. Run the .NET Tracer MSI installer with administrator privileges.
 
-4. Restart IIS by running the following commands as an administrator:
+4. Stop, then start IIS by running the following commands as an administrator:
+
+    <div class="alert alert-warning"> 
+      <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
+    </div>
+
     ```cmd
     net stop /y was
     net start w3svc
@@ -71,7 +76,6 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 5. Create application load.
 
 6. Visit [APM Live Traces][3].
-
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=gui
