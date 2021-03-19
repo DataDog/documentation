@@ -31,7 +31,7 @@ You can use the **Synthetic Monitoring IP ranges** corresponding to each Datadog
 https://ip-ranges.{{< region-param key="dd_site" >}}/synthetics.json
 ```
 
-**Note:** IPs are listed using the CIDR notation. You might or might not need to convert them to IPv4 address ranges before using them.
+**Note:** IPs listed use the CIDR notation and may require conversion to IPv4 address ranges before use.
 
 ## Default headers
 
