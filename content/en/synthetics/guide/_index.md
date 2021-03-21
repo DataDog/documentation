@@ -10,8 +10,9 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser Tests:" >}}
+    {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation" >}}Email validation with browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Test file upload and download{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/popup/" >}}Handling popups in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the Browser Test Chrome Extension{{< /nextlink >}}
 {{< /whatsnext >}}
