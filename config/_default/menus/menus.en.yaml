@@ -1916,7 +1916,7 @@ main:
     identifier: synthetics_troubleshooting
     weight: 12
   - name: Security
-    url: synthetics/security/
+    url: /security/synthetics/
     parent: synthetics
     weight: 13
   - name: Real User Monitoring
