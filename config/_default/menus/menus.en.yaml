@@ -1915,6 +1915,10 @@ main:
     parent: synthetics
     identifier: synthetics_troubleshooting
     weight: 12
+  - name: Security
+    url: synthetics/security/
+    parent: synthetics
+    weight: 13
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum_2
@@ -2367,10 +2371,14 @@ main:
     url: security/logs/
     parent: security
     weight: 3
+  - name: Synthetic Monitoring
+    url: security/synthetics/
+    parent: security
+    weight: 4
   - name: Other considerations
     url: security/other/
     parent: security
-    weight: 4
+    weight: 5
   - name: Help
     url: help/
     pre: nav_help
