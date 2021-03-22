@@ -3,7 +3,7 @@
 import os
 
 int_md = filter(lambda x: x.endswith('.md'), os.listdir('content/en/integrations'))
-int_png = filter(lambda x: x.endswith('.png'), os.listdir('assets/images/integrations_logos'))
+int_png = filter(lambda x: x.endswith('.png'), os.listdir('static/images/integrations_logos'))
 int_ignore = ['_index.png',
               'agent_metrics.png',
               'azure_storage.png',                # Azure will deprecate soon
