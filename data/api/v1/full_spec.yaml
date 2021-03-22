@@ -19049,6 +19049,10 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/synthetics/tests/api/{public_id}:
     put:
       description: Edit the configuration of a Synthetic API test.
@@ -19146,6 +19150,10 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
       description: 'Get the detailed configuration (including steps) associated with
