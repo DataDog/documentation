@@ -27,31 +27,31 @@ In this context, the number of created or provided attributes can lead to confus
 
 Even if technologies and teams natively define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings. A **naming convention** defines standard names to use when referring to structuring technical or business concepts, resulting in a common language that everyone agrees to use by convention.
 
-## Standard attributes, reserved attributes, and aliasing
+## Attribute types and aliasing
 
 Attributes prescribe [logs facets][1], which are used for filtering and searching in Log Explorer.
 
-There are **reserved attributes** that are automatically ingested with logs, as [noted below][2].
+[**Reserved attributes**](#reserved-attributes) that are automatically ingested with logs.
 
-**Standard Attributes** are the backbone of the naming convention for your organization.
+[**Standard Attributes**](#standard-attributes) are the backbone of the naming convention for your organization.
 
-With **Aliasing**, search and aggregate logs flowing from heterogenous sources. Onboard users across multiple teams with your naming convention, without asking them for changes in their technical stack.
+With [**Aliasing**](#aliasing) search and aggregate logs flowing from heterogenous sources. Onboard users across multiple teams with your naming convention, without asking them for changes in their technical stack.
 
 Aliasing is particularly useful when it comes to filtering or aggregating logs from different sources altogether—that is to say, when [turned into facets][1]. Gathering content from multiple and heterogenous sources into a unique **Standard Facet** makes it much more straightforward to build insights or pivot information across your organization.
 
-For example, follow the clients most impacted by latencies on a hybrid [Apache][3] and [Amazon Cloud Front][4] infrastructure, using the standard `Network Client IP` facet alongside the standard `duration`.
+For example, follow the clients most impacted by latencies on a hybrid [Apache][2] and [Amazon Cloud Front][3] infrastructure, using the standard `Network Client IP` facet alongside the standard `duration`.
 
 ### Reserved attributes
 
 Below is a list of reserved attributes that are automatically ingested with logs:
 
-**Note**: If you're also collecting traces or metrics, it is recommended to configure unified service tagging. This configuration ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. Refer to the dedicated [unified service tagging][5] documentation for more information.
+**Note**: If you're also collecting traces or metrics, it is recommended to configure unified service tagging. This configuration ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. Refer to the dedicated [unified service tagging][4] documentation for more information.
 
 | Attribute | Description                                                                                                                                                                                                                                |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                          |
 | `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
-| `status`  | This corresponds to the level/severity of a log. It is used to define [patterns][2] and has a dedicated layout in the Datadog Log UI.                                                                                                     |
+| `status`  | This corresponds to the level/severity of a log. It is used to define [patterns][5] and has a dedicated layout in the Datadog Log UI.                                                                                                     |
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                                |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in Live Tail, where it is indexed for full text search.                                    |
 
@@ -72,7 +72,7 @@ Users can interact with either the aliased (source) or standard (destination) fa
 - Attributes can only be aliased to standard attributes.
 - To respect the JSON structure of the logs, it is not possible to have one standard attribute as the child of another (for example `user` and `user.name` cannot both be standard attributes).
 
-### Curate standard attributes
+### Standard attributes
 
 Log integrations natively rely on a [default set](#default-standard-attribute-list) of standard attributes.
 
@@ -81,13 +81,13 @@ Admin users in your organization can curate the list:
 - From the [Log Explorer][1], **promoting** existing attributes as standard attributes.
 - From the standard attribute [configuration page](#standard-attributes-in-the-log-explorer), **creating** new standard attributes from scratch.
 
-## Standard attributes in log configuration
+#### Standard attributes in log configuration
 
 The standard attribute table is available in Log Configuration pages, along with pipelines and other logs intake capabilities such as metrics generation, archives, exclusion filters, etc.
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes"  style="width:60%;">}}
 
-### Standard attribute list
+#### Standard attribute list
 
 The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
 
@@ -108,7 +108,7 @@ The standard attribute panel appears when you add a new standard attribute or ed
 
 Alias attributes directly from the Log Explorer. See the [associated documentation][7] for reference.
 
-## Default standard attribute list
+### Default standard attribute list
 
 The default standard attribute list is split into the functional domains:
 
@@ -134,7 +134,7 @@ The following attributes are related to the data used in network communication. 
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
-Typical integrations relying on these attributes include [Apache][3], [Varnish][8], [AWS ELB][9], [Nginx][10], [HAProxy][11], etc.
+Typical integrations relying on these attributes include [Apache][2], [Varnish][8], [AWS ELB][9], [Nginx][10], [HAProxy][11], etc.
 
 ### Geolocation
 
@@ -143,18 +143,18 @@ The following attributes are related to the geolocation of IP addresses used in 
 | **Fullname**                                | **Type** | **Description**                                                                                                                      |
 | :------------------------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------- |
 | `network.client.geoip.country.name`         | `string` | Name of the country                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | `string` | [ISO Code][5] of the country (example: `US` for the United States, `FR` for France)                                                  |
+| `network.client.geoip.country.iso_code`     | `string` | [ISO Code][4] of the country (example: `US` for the United States, `FR` for France)                                                  |
 | `network.client.geoip.continent.code`       | `string` | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
 | `network.client.geoip.continent.name`       | `string` | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
 | `network.client.geoip.subdivision.name`     | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
-| `network.client.geoip.subdivision.iso_code` | `string` | [ISO Code][5] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
+| `network.client.geoip.subdivision.iso_code` | `string` | [ISO Code][4] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
 | `network.client.geoip.city.name`            | `String` | The name of the city (example `Paris`, `New York`)                                                                                   |
 
 ### HTTP requests
 
 These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
 
-Typical integrations relying on these attributes include [Apache][3], Rails, [AWS CloudFront][9], web applications servers, etc.
+Typical integrations relying on these attributes include [Apache][2], Rails, [AWS CloudFront][9], web applications servers, etc.
 
 #### Common attributes
 
@@ -284,10 +284,10 @@ All attributes are prefixed by `evt`.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/facets/
-[2]: /logs/explorer/patterns/
-[3]: /integrations/apache/
-[4]: /integrations/amazon_cloudfront/
-[5]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[2]: /integrations/apache/
+[3]: /integrations/amazon_cloudfront/
+[4]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[5]: /logs/explorer/patterns/
 [6]: /logs/explorer/facets/#aliased-facets
 [7]: /logs/explorer/facets/#alias-facets
 [8]: /integrations/varnish/
