@@ -260,7 +260,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 ## Not sure what to do next?
 
-[Intro to Profiling][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Intro to Profiling][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
