@@ -36,7 +36,7 @@ Continuous profiler is designed to run in production across all services by leve
 
 Profiling your service to visualize all your stack traces in one place takes just minutes.
 
-### 1. Instrument Your Application
+### Instrument Your Application
 
 Add a profiler library to your application to start sending profiles to the Datadog Agent.
 
@@ -44,14 +44,13 @@ To get notified when a private beta is available for the **Node**, **Ruby**, **P
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
+## Guide to using the profiler
+
+Check out this [Intro to Profiling][2] which explains profiling and shows you how to use Continuous Profiler to understand and fix a sample service that has a performance problem.
+
 ## Explore Datadog Profiler
 
-Now that you've configured your application to send profiles to Datadog, start getting insights into your code performance:
-
-### Simple guide to using the profiler
-
-Explore the profiler with a [simple guide][2] where we'll explain profiling and show you how we can use Continuous Profiler to understand and fix a sample service that has a performance problem.
-
+After you've configured your application to send profiles to Datadog, start getting insights into your code performance:
 
 ### Search profiles by tags
 
