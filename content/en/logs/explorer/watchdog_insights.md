@@ -26,7 +26,7 @@ In the following example, Watchog Insights highlights that `version:2.9.7` of a 
 
 {{< img src="logs/explorer/watchdog_insights/overview.png" alt="Watchdog Insights" style="width:100%;" >}}
 
-## Navigating Watchdog Insights 
+## Navigation
 
 The Watchdog Insights banner appears in the Log Explorer results page and surfaces insights relevant to the current query:
  
@@ -42,13 +42,11 @@ For richer troubleshooting inspiration, click **View all** to open the Watchdog 
 
 Each insight comes with its own embedded interactions and side panel with detailed troubleshooting material. The insight interactions and side panel vary depending on the [type of Watchdog Insight](#watchdog-insights-collections).
 
+## Collections
 
-## Watchdog Insights collections
+### Error outliers
 
-
-### Error Outliers
-
-An Error Outliers insight shows fields (that is, [faceted tags or attributes][1]) that are characteristic of errors matching the current query. This casts light on `key:value` pairs that are statistically over-represented among the errors, giving you hints on the possible root cause of problems.
+An error outliers insight shows fields (that is, [faceted tags or attributes][1]) that are characteristic of errors matching the current query. This casts light on `key:value` pairs that are statistically over-represented among the errors, giving you hints on the possible root cause of problems.
 
 Typical error outliers examples are `env:staging`, `docker_image:acme:3.1` `http.useragent_details.browser.family:curl`.
 
@@ -72,7 +70,6 @@ Typical error outliers examples are `env:staging`, `docker_image:acme:3.1` `http
   * A comprehensive list of [log patterns][2] for those logs.
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:60%;" >}}
-
 
 ## Further Reading
 
