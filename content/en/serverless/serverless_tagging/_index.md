@@ -24,7 +24,7 @@ With these tags, you can:
 
 To tag your serverless application with `env`, `service` and `version`, see the [unified service tagging documentation][1].
 
-Also note that Lambda function names should adhere to [Datadog's tagging convention][4]. This allows us to tie all of your function's traces, logs and metrics together seamlessly.
+**Note**: Lambda function names should adhere to [Datadog's tagging convention][4]. This ties all of your function's traces, logs and metrics together seamlessly.
 
 ### The env tag
 
