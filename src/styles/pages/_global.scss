@@ -179,6 +179,24 @@ code + code.region-param {
     border-bottom-left-radius: 0;
 }
 
+details {
+    margin-bottom: 1.5rem;
+
+    summary {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            display: inline-block;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
 .programming-lang-wrapper {
     .code-snippet-wrapper {
         display: none;
