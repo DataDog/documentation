@@ -46,7 +46,7 @@ To get notified when a private beta is available for the **Node**, **Ruby**, **P
 
 ## Guide to using the profiler
 
-[Intro to Profiling][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Intro to Profiling][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Explore Datadog Profiler
 
