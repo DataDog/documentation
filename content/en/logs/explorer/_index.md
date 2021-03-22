@@ -37,7 +37,7 @@ The **Log Explorer** is your home base for log troubleshooting and exploration. 
 
 At any moment, [**Export**](#export) your Log Explorer view to reuse it later or in different contexts.
 
-## Filters Logs
+## Filters logs
 
 The search filter consists of a timerange and a search query mixing `key:value` and full-text search. Refer to our [log search syntax][2] and [timerange][3] documentation for details on advanced use cases. For example, the search query `service:payment status:error rejected` over a `Past 5 minutes` timerange:
 
