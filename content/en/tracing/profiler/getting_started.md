@@ -67,12 +67,15 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
+- Don't know where to start? Explore the profiler with a [simple guide][7] where we'll explain profiling and show you how we can use Continuous Profiler to understand and fix a sample service that has a performance problem.
+
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: /tracing/profiler/profiler_troubleshooting/#java-8-support
 [3]: https://app.datadoghq.com/account/settings#agent/overview
 [4]: https://app.datadoghq.com/profiling
 [5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [6]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[7]: /tracing/profiler/intro_to_profiling/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -168,10 +171,16 @@ You can configure the profiler using the following environment variables:
 | `DD_VERSION`            | `version`                      | String                     | The version of your application.                                    |
 | `DD_TAGS`               | `tags`                         | String / Dictionary        | Tags to apply to an uploaded profile. If set with an environment variable, it must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`. If set with keyword argument, it must be a dictionary where keys are tag names and values are tag values such as:`{"layer": "api", "team": "intake"}`.  |
 
+
+**Simple guide to using the profiler**
+
+Don't know where to start? Explore the profiler with a [simple guide][5] where we'll explain profiling and show you how we can use Continuous Profiler to understand and fix a sample service that has a performance problem.
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/profiling
 [3]: /tracing/visualization/#services
 [4]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[5]: /tracing/profiler/intro_to_profiling/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -242,6 +251,8 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 | `DD_ENV`                                         | String        | The Datadog [environment][7] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
+
+- Don't know where to start? Explore the profiler with a [simple guide][5] where we'll explain profiling and show you how we can use Continuous Profiler to understand and fix a sample service that has a performance problem.
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
