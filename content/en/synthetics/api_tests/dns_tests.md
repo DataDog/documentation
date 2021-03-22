@@ -31,7 +31,7 @@ After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`T
 
 ### Define request
 
-{{< img src="synthetics/api_tests/dns_test_config.png" alt="Define DNS query"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query"  style="width:90%;" >}}
 
 1. Specify the **Domain** you want your test to query. For example, `www.example.com`.
 2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
