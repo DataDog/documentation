@@ -45399,7 +45399,7 @@
     },
     "/api/v2/metrics/{metric_name}/volumes": {
       "get": {
-        "description": "View distinct metrics volumes for the given metric name.\n\nCustom distribution metrics will return both ingested and indexed custom metric volumes.\nFor Metrics without Limits beta customers, all metrics will return both ingested/indexed volumes.\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+        "description": "View distinct metrics volumes for the given metric name.\n\nCustom distribution metrics will return both ingested and indexed custom metric volumes.\nFor Metrics without Limits&trade; beta customers, all metrics will return both ingested/indexed volumes.\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
         "operationId": "ListVolumesByMetricName",
         "parameters": [
           {
