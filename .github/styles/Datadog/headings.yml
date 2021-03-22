@@ -67,6 +67,7 @@ exceptions:
   - Log Explorer
   - Log Management
   - Log Rehydration
+  - Logback
   - macOS
   - Metrics Explorer
   - MongoDB
@@ -123,5 +124,7 @@ exceptions:
   - URLs
   - User Datagram Protocol
   - vSphere
+  - Watchdog
+  - Watchdog Insights
   - Webhook
   - Windows
