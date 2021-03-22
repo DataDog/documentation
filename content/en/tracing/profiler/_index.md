@@ -36,7 +36,7 @@ Continuous profiler is designed to run in production across all services by leve
 
 Profiling your service to visualize all your stack traces in one place takes just minutes.
 
-### 1. Instrument Your Application
+### Instrument Your Application
 
 Add a profiler library to your application to start sending profiles to the Datadog Agent.
 
@@ -44,13 +44,17 @@ To get notified when a private beta is available for the **Node**, **Ruby**, **P
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
+## Guide to using the profiler
+
+The [Intro to Profiling][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+
 ## Explore Datadog Profiler
 
-Now that you've configured your application to send profiles to Datadog, start getting insights into your code performance:
+After you've configured your application to send profiles to Datadog, start getting insights into your code performance:
 
 ### Search profiles by tags
 
-[Use tags to search profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
+[Use tags to search profiles][3] across any dimension—whether it’s a specific host, service, version, or any combination.
 
 {{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
 
@@ -62,7 +66,7 @@ Obtain key profiling metrics from services such as top CPU usage by method, top 
 
 ### Connect traces to profiling data
 
-Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][4] to find specific lines of code related to performance issues.
+Application processes that have both [APM distributed tracing][4] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][5] to find specific lines of code related to performance issues.
 
 {{< img src="tracing/profiling/code_hotspots_tab.gif" alt="Code Hotspots tab shows profiling information for a APM trace span">}}
 
@@ -71,6 +75,7 @@ Application processes that have both [APM distributed tracing][3] and continuous
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-[2]: /tracing/profiling/search_profiles
-[3]: /tracing/
-[4]: /tracing/profiler/connect_traces_and_profiles/
+[2]: /tracing/profiler/intro_to_profiling/
+[3]: /tracing/profiling/search_profiles
+[4]: /tracing/
+[5]: /tracing/profiler/connect_traces_and_profiles/
