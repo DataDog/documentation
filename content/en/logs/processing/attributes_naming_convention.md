@@ -31,7 +31,7 @@ Attributes prescribe [logs facets][1], which are used for filtering and searchin
 
   * [**Reserved attributes**](#reserved-attributes) are automatically ingested.
 
-  * [**Standard attributes**](#standard-attributes) are the backbone of the naming convention for your organization. There is default set of standard attributes available in [the app][2]. However, this list can be customized to create a **naming convention** for your team.
+  * [**Standard attributes**](#standard-attributes) are the backbone of the naming convention for your organization. There is a default set of standard attributes available in [the app][2]. However, this list can be customized to create a **naming convention** for your team.
 
   * Use [**Aliasing**](#aliasing) once you've implemented a naming convention with standard attributes or if you're trying to create a unique standard facet from multiple log sources. For example, follow the clients most impacted by latencies on a hybrid [Apache][3] and [Amazon Cloud Front][4] infrastructure, using the standard `Network Client IP` facet alongside the standard `duration`. Aliasing allows implementation of a naming convention without having to change a team's technical stack.
 
@@ -43,7 +43,7 @@ Below is a list of reserved attributes that are automatically ingested with logs
 
 | Attribute | Description                                                                                                                                                                                                                                |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                          |
+| `host`    | The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your logs. The Agent sets this value automatically.                          |
 | `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
 | `status`  | This corresponds to the level/severity of a log. It is used to define [patterns][6] and has a dedicated layout in the Datadog Log UI.                                                                                                     |
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                                |
@@ -248,7 +248,7 @@ All attributes are prefixed by `evt`.
 
 ## Aliasing
 
-Creating an alias for a source attribute that maps to a destination attributes allows logs to carry both the source and destination attribute.
+Creating an alias for a source attribute that maps to a destination attribute allows logs to carry both the source and destination attributes.
 
 Users can interact with either the aliased (source) or standard (destination) faceted attribute. However, users are [encouraged][25] to use the standard facet rather than the aliased one. This provides guidance towards the naming convention, and discourages users from building assets (such as saved views or dashboards) based on non-standard content.
 
