@@ -6382,6 +6382,9 @@ components:
       description: Use the SLO and uptime widget to track your SLOs (Service Level
         Objectives) and uptime on screenboards and timeboards.
       properties:
+        global_time_target:
+          description: Defined global time target.
+          type: string
         show_error_budget:
           description: Defined error budget.
           type: boolean
