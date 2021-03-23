@@ -1,196 +1,99 @@
-<img src="https://raw.githubusercontent.com/gohugoio/gohugoioTheme/master/static/images/hugo-logo-wide.svg?sanitize=true" alt="Hugo" width="565">
+# Documentation site for Datadog
 
-A Fast and Flexible Static Site Generator built with love by [bep](https://github.com/bep), [spf13](http://spf13.com/) and [friends](https://github.com/gohugoio/hugo/graphs/contributors) in [Go][].
+Built with [hugo][1], a static website generation tool.
 
-[Website](https://gohugo.io) |
-[Forum](https://discourse.gohugo.io) |
-[Documentation](https://gohugo.io/getting-started/) |
-[Installation Guide](https://gohugo.io/getting-started/installing/) |
-[Contribution Guide](CONTRIBUTING.md) |
-[Twitter](https://twitter.com/gohugoio)
+## Setup
 
-[![GoDoc](https://godoc.org/github.com/gohugoio/hugo?status.svg)](https://godoc.org/github.com/gohugoio/hugo)
-[![Tests on Linux, MacOS and Windows](https://github.com/gohugoio/hugo/workflows/Test/badge.svg)](https://github.com/gohugoio/hugo/actions?query=workflow%3ATest)
-[![Go Report Card](https://goreportcard.com/badge/github.com/gohugoio/hugo)](https://goreportcard.com/report/github.com/gohugoio/hugo)
+### Installation
 
-## Overview
+1. [Install node / npm][2]
 
-Hugo is a static HTML and CSS website generator written in [Go][].
-It is optimized for speed, ease of use, and configurability.
-Hugo takes a directory with content and templates and renders them into a full HTML website.
+2. [Install Python3][3] (you can also use [pyenv][4])
 
-Hugo relies on Markdown files with front matter for metadata, and you can run Hugo from any directory.
-This works well for shared hosts and other systems where you don’t have a privileged account.
+3. [Install hugo][12]
 
-Hugo renders a typical website of moderate size in a fraction of a second.
-A good rule of thumb is that each piece of content renders in around 1 millisecond.
+4. Install yarn: `npm install -g yarn`
 
-Hugo is designed to work well for any kind of website including blogs, tumbles, and docs.
+5. Download the documentation repo `git clone https://github.com/DataDog/documentation.git`
 
-#### Supported Architectures
+### Run the server
 
-Currently, we provide pre-built Hugo binaries for Windows, Linux, FreeBSD, NetBSD, DragonFly BSD, Open BSD, macOS (Darwin), and [Android](https://gist.github.com/bep/a0d8a26cf6b4f8bc992729b8e50b480b) for x64, i386 and ARM architectures.
+Inside `documentation/` folder, create a `Makefile.config` file from the [Makefile.config.example][5]
 
-Hugo may also be compiled from source wherever the Go compiler tool chain can run, e.g. for other operating systems including Plan 9 and Solaris.
+If you are a Datadog employee, add your [Github personal token][6]
 
-**Complete documentation is available at [Hugo Documentation](https://gohugo.io/getting-started/).**
+To run the documentation site locally, execute:
 
-## Choose How to Install
+| Command                   | Description                                                                                                                                                                                                                             |
+|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                |
+| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a Github personal token setup in your `Makefile.config` or the extra content is available locally. If you are working with local content, the repo must be downloaded to the same folder as the documentation repo. |
 
-If you want to use Hugo as your site generator, simply install the Hugo binaries.
-The Hugo binaries have no external dependencies.
+**Documentation is then available at `http://localhost:1313`**
 
-To contribute to the Hugo source code or documentation, you should [fork the Hugo GitHub project](https://github.com/gohugoio/hugo#fork-destination-box) and clone it to your local machine.
+To learn more about how the documentation is built, refer to the [Documentation Build Wiki][7].
 
-Finally, you can install the Hugo source code with `go`, build the binaries yourself, and run Hugo that way.
-Building the binaries is an easy task for an experienced `go` getter.
+### Makefile
 
-### Install Hugo as Your Site Generator (Binary Install)
+To use the Makefile, create a Makefile.config. See the instructions at the top of the [Makefile.config.example][5].
 
-Use the [installation instructions in the Hugo documentation](https://gohugo.io/getting-started/installing/).
+After you have a config file, run `make help` to see options:
 
-### Build and Install the Binaries from Source (Advanced Install)
-
-#### Prerequisite Tools
-
-* [Git](https://git-scm.com/)
-* [Go (we test it with the last 2 major versions; but note that Hugo 0.81.0 only builds with >= Go 1.16.)](https://golang.org/dl/)
-
-#### Fetch from GitHub
-
-Since Hugo 0.48, Hugo uses the Go Modules support built into Go 1.11 to build. The easiest is to clone Hugo in a directory outside of `GOPATH`, as in the following example:
-
-```bash
-mkdir $HOME/src
-cd $HOME/src
-git clone https://github.com/gohugoio/hugo.git
-cd hugo
-go install
+```text
+clean-all                 Clean everything.
+clean-build               Remove build artifacts.
+clean-exe                 Remove execs.
+clean-integrations        Remove built integrations files.
+clean-node                Remove node_modules.
+clean-virt                Remove python virtual env.
+clean                     Clean all make installs.
+hugpython                 Build virtualenv used for tests.
+source-helpers            Source the helper functions used to build, test, deploy.
+start-no-pre-build        Build the documentation without automatically pulled content.
+start                     Build the documentation with all external content.
+stop                      Stop wepack watch/hugo server.
 ```
 
-**If you are a Windows user, substitute the `$HOME` environment variable above with `%USERPROFILE%`.**
+## Working on Docs
 
-If you want to compile with Sass/SCSS support use `--tags extended` and make sure `CGO_ENABLED=1` is set in your go environment. If you don't want to have CGO enabled, you may use the following command to temporarily enable CGO only for hugo compilation:
+### Datadog Staff
 
-```bash
-CGO_ENABLED=1 go install --tags extended
-```
+* Always branch off of master; never commit directly to master.
+* Name your branch `<SLACK_HANDLE>/<FEATURE_NAME>` if you would like to create a preview site and run tests.
+* When you are ready to commit, create a new pull request to master from your branch.
+* Consult our [contributing guidelines][8], and the [Documentation Build Wiki][7].
 
-## The Hugo Documentation
+### Outside Contributors
 
-The Hugo documentation now lives in its own repository, see https://github.com/gohugoio/hugoDocs. But we do keep a version of that documentation as a `git subtree` in this repository. To build the sub folder `/docs` as a Hugo site, you need to clone this repo:
+* Fork the master branch.
+* When you are ready to finalize your changes, commit them, and then make a pull request back to `DataDog/master`.
+* Consult our [contributing guidelines][8].
 
-```bash
-git clone git@github.com:gohugoio/hugo.git
-```
-## Contributing to Hugo
+### A note about markdown
 
-For a complete guide to contributing to Hugo, see the [Contribution Guide](CONTRIBUTING.md).
+This site uses [Goldmark][9] for markdown, which is compliant with [CommonMark 0.29][10].
 
-We welcome contributions to Hugo of any kind including documentation, themes,
-organization, tutorials, blog posts, bug reports, issues, feature requests,
-feature implementations, pull requests, answering questions on the forum,
-helping to manage issues, etc.
+If you include ANY Markdown in a file, give it an `.md` extension.
 
-The Hugo community and maintainers are [very active](https://github.com/gohugoio/hugo/pulse/monthly) and helpful, and the project benefits greatly from this activity.
+Make sure all files are lowercase. Macs are case insensitive when creating links to images and pages, but our build server is not, so tests may work locally, but the site will fail in production.
 
-### Asking Support Questions
+## Releasing
 
-We have an active [discussion forum](https://discourse.gohugo.io) where users and developers can ask questions.
-Please don't use the GitHub issue tracker to ask questions.
+Within 10 minutes of merging to master, it deploys automatically.
 
-### Reporting Issues
+## How to add a new integration
 
-If you believe you have found a defect in Hugo or its documentation, use
-the GitHub issue tracker to report the problem to the Hugo maintainers.
-If you're not sure if it's a bug or not, start by asking in the [discussion forum](https://discourse.gohugo.io).
-When reporting the issue, please provide the version of Hugo in use (`hugo version`).
+[See the dedicated doc page][11].
 
-### Submitting Patches
-
-The Hugo project welcomes all contributors and contributions regardless of skill or experience level.
-If you are interested in helping with the project, we will help you with your contribution.
-Hugo is a very active project with many contributions happening daily.
-
-We want to create the best possible product for our users and the best contribution experience for our developers,
-we have a set of guidelines which ensure that all contributions are acceptable.
-The guidelines are not intended as a filter or barrier to participation.
-If you are unfamiliar with the contribution process, the Hugo team will help you and teach you how to bring your contribution in accordance with the guidelines.
-
-For a complete guide to contributing code to Hugo, see the [Contribution Guide](CONTRIBUTING.md).
-
-[![Analytics](https://ga-beacon.appspot.com/UA-7131036-6/hugo/readme)](https://github.com/igrigorik/ga-beacon)
-
-[Go]: https://golang.org/
-[Hugo Documentation]: https://gohugo.io/overview/introduction/
-
-## Dependencies
-
-Hugo stands on the shoulder of many great open source libraries, in lexical order:
-
- | Dependency  | License |
- | :------------- | :------------- |
- | [github.com/alecthomas/chroma](https://github.com/alecthomas/chroma) | MIT License |
- | [github.com/armon/go-radix](https://github.com/armon/go-radix) | MIT License |
- | [github.com/aws/aws-sdk-go](https://github.com/aws/aws-sdk-go) | Apache License 2.0 |
- | [github.com/bep/debounce](https://github.com/bep/debounce) | MIT License |
- | [github.com/bep/gitmap](https://github.com/bep/gitmap) | MIT License |
- | [github.com/bep/golibsass](https://github.com/bep/golibsass) | MIT License |
- | [github.com/bep/tmc](https://github.com/bep/tmc) | MIT License |
- | [github.com/BurntSushi/locker](https://github.com/BurntSushi/locker) | The Unlicense |
- | [github.com/BurntSushi/toml](https://github.com/BurntSushi/toml) | MIT License |
- | [github.com/cpuguy83/go-md2man](https://github.com/cpuguy83/go-md2man) | MIT License |
- | [github.com/danwakefield/fnmatch](https://github.com/danwakefield/fnmatch) | BSD 2-Clause "Simplified" License |
- | [github.com/disintegration/gift](https://github.com/disintegration/gift) | MIT License |
- | [github.com/dustin/go-humanize](https://github.com/dustin/go-humanize) | MIT License |
- | [github.com/fsnotify/fsnotify](https://github.com/fsnotify/fsnotify) | BSD 3-Clause "New" or "Revised" License |
- | [github.com/gobwas/glob](https://github.com/gobwas/glob) | MIT License |
- | [github.com/gorilla/websocket](https://github.com/gorilla/websocket) | BSD 2-Clause "Simplified" License |
- | [github.com/hashicorp/golang-lru](https://github.com/hashicorp/golang-lru) | Mozilla Public License 2.0 |
- | [github.com/hashicorp/hcl](https://github.com/hashicorp/hcl) | Mozilla Public License 2.0 |
- | [github.com/jdkato/prose](https://github.com/jdkato/prose) | MIT License |
- | [github.com/kr/pretty](https://github.com/kr/pretty) | MIT License |
- | [github.com/kyokomi/emoji](https://github.com/kyokomi/emoji) | MIT License |
- | [github.com/magiconair/properties](https://github.com/magiconair/properties) | BSD 2-Clause "Simplified" License |
- | [github.com/markbates/inflect](https://github.com/markbates/inflect) | MIT License |
- | [github.com/mattn/go-isatty](https://github.com/mattn/go-isatty) | MIT License |
- | [github.com/mattn/go-runewidth](https://github.com/mattn/go-runewidth) | MIT License |
- | [github.com/miekg/mmark](https://github.com/miekg/mmark) | Simplified BSD License |
- | [github.com/mitchellh/hashstructure](https://github.com/mitchellh/hashstructure) | MIT License |
- | [github.com/mitchellh/mapstructure](https://github.com/mitchellh/mapstructure) | MIT License |
- | [github.com/muesli/smartcrop](https://github.com/muesli/smartcrop) | MIT License |
- | [github.com/nicksnyder/go-i18n](https://github.com/nicksnyder/go-i18n) | MIT License |
- | [github.com/niklasfasching/go-org](https://github.com/niklasfasching/go-org) | MIT License |
- | [github.com/olekukonko/tablewriter](https://github.com/olekukonko/tablewriter) | MIT License |
- | [github.com/pelletier/go-toml](https://github.com/pelletier/go-toml) | MIT License |
- | [github.com/pkg/errors](https://github.com/pkg/errors) | BSD 2-Clause "Simplified" License |
- | [github.com/PuerkitoBio/purell](https://github.com/PuerkitoBio/purell) | BSD 3-Clause "New" or "Revised" License |
- | [github.com/PuerkitoBio/urlesc](https://github.com/PuerkitoBio/urlesc) | BSD 3-Clause "New" or "Revised" License |
- | [github.com/rogpeppe/go-internal](https://github.com/rogpeppe/go-internal) | BSD 3-Clause "New" or "Revised" License |
- | [github.com/russross/blackfriday](https://github.com/russross/blackfriday)  | Simplified BSD License |
- | [github.com/rwcarlsen/goexif](https://github.com/rwcarlsen/goexif) | BSD 2-Clause "Simplified" License |
- | [github.com/spf13/afero](https://github.com/spf13/afero) | Apache License 2.0 |
- | [github.com/spf13/cast](https://github.com/spf13/cast) | MIT License |
- | [github.com/spf13/cobra](https://github.com/spf13/cobra) | Apache License 2.0 |
- | [github.com/spf13/fsync](https://github.com/spf13/fsync) | MIT License |
- | [github.com/spf13/jwalterweatherman](https://github.com/spf13/jwalterweatherman) | MIT License |
- | [github.com/spf13/pflag](https://github.com/spf13/pflag) | BSD 3-Clause "New" or "Revised" License |
- | [github.com/spf13/viper](https://github.com/spf13/viper) | MIT License |
- | [github.com/tdewolff/minify](https://github.com/tdewolff/minify) | MIT License |
- | [github.com/tdewolff/parse](https://github.com/tdewolff/parse) | MIT License |
- | [github.com/yuin/goldmark](https://github.com/yuin/goldmark) | MIT License |
- | [github.com/yuin/goldmark-highlighting](https://github.com/yuin/goldmark-highlighting) | MIT License |
- | [go.opencensus.io](https://go.opencensus.io) | Apache License 2.0 |
- | [go.uber.org/atomic](https://go.uber.org/atomic) | MIT License |
- | [gocloud.dev](https://gocloud.dev) | Apache License 2.0 |
- | [golang.org/x/image](https://golang.org/x/image) | BSD 3-Clause "New" or "Revised" License |
- | [golang.org/x/net](https://golang.org/x/net) | BSD 3-Clause "New" or "Revised" License |
- | [golang.org/x/oauth2](https://golang.org/x/oauth2) | BSD 3-Clause "New" or "Revised" License |
- | [golang.org/x/sync](https://golang.org/x/sync) | BSD 3-Clause "New" or "Revised" License |
- | [golang.org/x/sys](https://golang.org/x/sys) | BSD 3-Clause "New" or "Revised" License |
- | [golang.org/x/text](https://golang.org/x/text) | BSD 3-Clause "New" or "Revised" License |
- | [golang.org/x/xerrors](https://golang.org/x/xerrors) | BSD 3-Clause "New" or "Revised" License |
- | [google.golang.org/api](https://google.golang.org/api) | BSD 3-Clause "New" or "Revised" License |
- | [google.golang.org/genproto](https://google.golang.org/genproto) | Apache License 2.0 |
- | [gopkg.in/ini.v1](https://gopkg.in/ini.v1) | Apache License 2.0 |
- | [gopkg.in/yaml.v2](https://gopkg.in/yaml.v2) | Apache License 2.0 |
+[1]: https://gohugo.io
+[2]: https://nodejs.org/en/download/package-manager
+[3]: https://www.python.org/downloads
+[4]: https://github.com/pyenv/pyenv
+[5]: https://github.com/DataDog/documentation/blob/master/Makefile.config.example
+[6]: https://github.com/DataDog/documentation/wiki/Github-personal-token
+[7]: https://github.com/DataDog/documentation/wiki/Documentation-Build
+[8]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
+[9]: https://github.com/yuin/goldmark
+[10]: https://spec.commonmark.org/0.29/
+[11]: https://docs.datadoghq.com/developers/integrations
+[12]: https://gohugo.io/getting-started/installing/
