@@ -896,8 +896,8 @@ main:
     parent: infrastructure
     identifier: infrastructure_process
     weight: 5
-  - name: Generate Process Metrics
-    url: infrastructure/process/generate_process_metrics/
+  - name: Increase Process Retention
+    url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
     weight: 101
   - name: Live Containers
@@ -1711,7 +1711,7 @@ main:
     url: logs/processing/parsing/
     parent: log_processing
     weight: 203
-  - name: Naming Convention
+  - name: Attributes and Aliasing
     url: logs/processing/attributes_naming_convention/
     parent: log_processing
     weight: 204
@@ -2360,7 +2360,7 @@ main:
     parent: security
     weight: 1
   - name: APM (Tracing)
-    url: tracing/custom_instrumentation/agent_customization/
+    url: /tracing/setup_overview/configure_data_security/
     parent: security
     weight: 2
   - name: Log Management
