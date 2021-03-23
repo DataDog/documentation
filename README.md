@@ -1,6 +1,7 @@
 # Documentation site for Datadog
 
-Built with [hugo][1], a static website generation tool.
+The documentation for Datadog, available at https://docs.datadoghq.com, is built with the [Hugo][1]
+static site generator.
 
 ## Setup
 
@@ -10,7 +11,7 @@ Built with [hugo][1], a static website generation tool.
 
 2. [Install Python3][3] (you can also use [pyenv][4])
 
-3. [Install hugo][12]
+3. [Install Hugo][12] version **0.81.0** or greater, in particular the "extended" version with [Hugo Pipes][13] support.
 
 4. Install yarn: `npm install -g yarn`
 
@@ -18,16 +19,20 @@ Built with [hugo][1], a static website generation tool.
 
 ### Run the server
 
-Inside `documentation/` folder, create a `Makefile.config` file from the [Makefile.config.example][5]
+Inside the `documentation/` folder, create a `Makefile.config` file from the [`Makefile.config.example`][5]:
 
-If you are a Datadog employee, add your [Github personal token][6]
+```shell
+cp Makefile.config.example Makefile.config
+```
+
+If you are a Datadog employee, add your [GitHub personal token][6] under `GITHUB_TOKEN`.
 
 To run the documentation site locally, execute:
 
 | Command                   | Description                                                                                                                                                                                                                             |
 |---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                |
-| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a Github personal token setup in your `Makefile.config` or the extra content is available locally. If you are working with local content, the repo must be downloaded to the same folder as the documentation repo. |
+| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a GitHub personal token setup in your `Makefile.config` or the extra content is available locally. If you are working with local content, the repo must be downloaded to the same folder as the documentation repo. |
 
 **Documentation is then available at `http://localhost:1313`**
 
@@ -35,11 +40,13 @@ To learn more about how the documentation is built, refer to the [Documentation 
 
 ### Makefile
 
-To use the Makefile, create a Makefile.config. See the instructions at the top of the [Makefile.config.example][5].
+To use the Makefile, create a `Makefile.config`. See the instructions at the top of the [`Makefile.config.example`][5].
 
 After you have a config file, run `make help` to see options:
 
 ```text
+build-live                Build the "live" (read: public-facing) version of the site
+build-preview             Build the preview version of the site
 clean-all                 Clean everything.
 clean-build               Remove build artifacts.
 clean-exe                 Remove execs.
@@ -48,10 +55,10 @@ clean-node                Remove node_modules.
 clean-virt                Remove python virtual env.
 clean                     Clean all make installs.
 hugpython                 Build virtualenv used for tests.
-source-helpers            Source the helper functions used to build, test, deploy.
+install-hugo              Install Hugo locally at /usr/local/bin/hugo (only for CI)
+source-helpers            Source the helper functions used in build, test, deploy.
 start-no-pre-build        Build the documentation without automatically pulled content.
 start                     Build the documentation with all external content.
-stop                      Stop wepack watch/hugo server.
 ```
 
 ## Working on Docs
@@ -97,3 +104,4 @@ Within 10 minutes of merging to master, it deploys automatically.
 [10]: https://spec.commonmark.org/0.29/
 [11]: https://docs.datadoghq.com/developers/integrations
 [12]: https://gohugo.io/getting-started/installing/
+[13]: https://gohugo.io/hugo-pipes

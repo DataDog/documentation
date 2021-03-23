@@ -21,9 +21,6 @@ include $(CONFIG_FILE)
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-develop: ## Run the site locally (with live reloading)
-	hugo server --buildDrafts --buildFuture --navigateToChanged --noHTTPCache
-
 install-hugo: ## Install Hugo locally at /usr/local/bin/hugo (only for CI)
 	./local/bin/sh/install-hugo.sh
 
@@ -198,11 +195,6 @@ start-no-pre-build: clean source-helpers ## Build the documentation without auto
 		RUN_SERVER=${RUN_SERVER} \
 		run-site-no-pre-build.sh; \
 	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
-
-stop:  ## Stop wepack watch/hugo server.
-	@echo "stopping previous..."
-	@pkill -x webpack || true
-	@pkill -x hugo server --renderToDisk || true
 
 clean-go-examples:
 	@git clean -xdf content/en/api/**/*.go

@@ -35,13 +35,12 @@ if [ ${RUN_SERVER} = true ]; then
 		placehold_translations.py -c "config/_default/languages.yaml"
 	fi
 
-  # Install Yarn and install assets
+  echo "Installing Yarn and static assets"
 	npm --global install yarn && \
   npm cache clean --force && yarn install --frozen-lockfile
 
-  # Build the site
-  echo "Starting hugo build."
-  hugo --verbose
+  echo "Starting Hugo in server mode"
+  hugo server --buildDrafts --buildFuture --navigateToChanged --noHTTPCache
 else
 	exit 0
 fi
