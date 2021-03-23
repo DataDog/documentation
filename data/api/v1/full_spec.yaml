@@ -1900,6 +1900,7 @@ components:
       enum:
       - count
       - cardinality
+      - median
       - pc75
       - pc90
       - pc95
@@ -1914,6 +1915,7 @@ components:
       x-enum-varnames:
       - COUNT
       - CARDINALITY
+      - MEDIAN
       - PC75
       - PC90
       - PC95
@@ -7877,7 +7879,9 @@ components:
             type: string
           type: array
         message:
-          description: Notification message associated with the test.
+          description: Notification message associated with the test. Message can
+            either be text or an empty string.
+          example: ''
           type: string
         monitor_id:
           description: The associated monitor ID.
@@ -7906,6 +7910,8 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/SyntheticsBrowserTestType'
+      required:
+      - message
       type: object
     SyntheticsBrowserTestConfig:
       description: Configuration object for a Synthetic browser test.
