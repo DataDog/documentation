@@ -18,7 +18,7 @@ This article describes the main security guarantees available to users leveragin
 
 ## Encryption in managed locations 
 
-## Test configurations and variables
+### Test configurations and variables
 
 * **Transport**: Asymmetric encryption - RSA (4096-bit key). All requests are signed using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity. 
 * **Storage**: Symmetric encryption - AES-GCM (256-bit key).
