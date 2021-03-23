@@ -2135,142 +2135,142 @@ main:
     url: developers/dogstatsd/dogstatsd_mapper/
     parent: dev_tools_dogstatsd
     weight: 105
-  - name: Marketplace
-    url: developers/marketplace/
-    parent: dev_tools
-    identifier: marketplace
-    weight: 2
-  - name: Custom Metrics
-    url: developers/metrics/
-    parent: dev_tools
-    identifier: dev_tools_metrics
-    weight: 3
-  - name: Metrics Types
-    url: developers/metrics/types/
-    parent: dev_tools_metrics
-    identifier: dev_tools_metrics_metrics_type
-    weight: 301
-  - name: 'Submission - Agent Check '
-    url: developers/metrics/agent_metrics_submission/
-    parent: dev_tools_metrics
-    identifier: dev_tools_metrics_agent
-    weight: 302
-  - name: Submission - DogStatsD
-    url: developers/metrics/dogstatsd_metrics_submission/
-    parent: dev_tools_metrics
-    identifier: dev_tools_metrics_dogstatsd
-    weight: 303
-  - name: Submission - Powershell
-    url: developers/metrics/powershell_metrics_submission
-    parent: dev_tools_metrics
-    identifier: dev_tools_metrics_powershell
-    weight: 304
-  - name: 'Submission - API '
-    url: api/v1/metrics/#submit-metrics
-    parent: dev_tools_metrics
-    identifier: dev_tools_metrics_api
-    weight: 305
-  - name: Metric Type Modifiers
-    url: developers/metrics/type_modifiers/
-    parent: dev_tools_metrics
-    identifier: dev_tools_metrics_modifiers
-    weight: 306
-  - name: Metrics Units
-    url: developers/metrics/units/
-    parent: dev_tools_metrics
-    identifier: dev_tools_metrics_units
-    weight: 307
-  - name: Events
-    url: developers/events/
-    parent: dev_tools
-    identifier: dev_tools_events
-    weight: 4
   - name: Custom Agent Check
-    url: developers/events/agent/
-    parent: dev_tools_events
-    identifier: dev_tools_events_agent
-    weight: 401
-  - name: DogStatsD
-    url: developers/events/dogstatsd/
-    parent: dev_tools_events
-    identifier: dev_tools_events_dogstatsd
-    weight: 402
-  - name: Email
-    url: developers/events/email/
-    parent: dev_tools_events
-    identifier: dev_tools_events_mail
-    weight: 403
-  - name: API
-    url: api/v1/events/#post-an-event
-    parent: dev_tools_events
-    identifier: dev_tools_events_api
-    weight: 404
-  - name: Service Checks
-    url: developers/service_checks/
-    parent: dev_tools
-    identifier: dev_tools_service_check
-    weight: 5
-  - name: 'Submission - Agent Check '
-    url: developers/service_checks/agent_service_checks_submission/
-    parent: dev_tools_service_check
-    identifier: dev_tools_service_check_agent_check
-    weight: 501
-  - name: Submission - DogStatsD
-    url: developers/service_checks/dogstatsd_service_checks_submission/
-    parent: dev_tools_service_check
-    identifier: dev_tools_service_check_dogstatsd
-    weight: 502
-  - name: Submission - API
-    url: api/v1/service-checks/
-    parent: dev_tools_service_check
-    identifier: dev_tools_service_check_api
-    weight: 503
-  - name: Libraries
-    url: developers/libraries/
-    parent: dev_tools
-    weight: 6
-  - name: Community Office Hours
-    url: developers/office_hours/
-    parent: dev_tools
-    weight: 7
-  - name: Write a Custom Check
     url: developers/write_agent_check/
     parent: dev_tools
-    weight: 8
-  - name: Write an OpenMetrics Check
+    weight: 2
+  - name: Custom OpenMetrics Check
     url: developers/prometheus/
     parent: dev_tools
-    weight: 9
+    weight: 3
   - name: Integrations
     url: developers/integrations/
     parent: dev_tools
     identifier: dev_tools_integrations
-    weight: 10
+    weight: 4
   - name: Create a new Integration
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
-    weight: 901
+    weight: 401
   - name: Integration assets reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 1002
+    weight: 402
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 1003
+    weight: 403
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 1004
-  - name: Amazon CloudFormation
-    url: developers/amazon_cloudformation/
+    weight: 404
+  - name: Custom Metrics
+    url: developers/metrics/
     parent: dev_tools
-    identifier: dev_tools_aws_cloudformation
-    weight: 11
+    identifier: dev_tools_metrics
+    weight: 5
+  - name: Metrics Types
+    url: developers/metrics/types/
+    parent: dev_tools_metrics
+    identifier: dev_tools_metrics_metrics_type
+    weight: 501
+  - name: 'Submission - Agent Check '
+    url: developers/metrics/agent_metrics_submission/
+    parent: dev_tools_metrics
+    identifier: dev_tools_metrics_agent
+    weight: 502
+  - name: Submission - DogStatsD
+    url: developers/metrics/dogstatsd_metrics_submission/
+    parent: dev_tools_metrics
+    identifier: dev_tools_metrics_dogstatsd
+    weight: 503
+  - name: Submission - Powershell
+    url: developers/metrics/powershell_metrics_submission
+    parent: dev_tools_metrics
+    identifier: dev_tools_metrics_powershell
+    weight: 504
+  - name: 'Submission - API '
+    url: api/v1/metrics/#submit-metrics
+    parent: dev_tools_metrics
+    identifier: dev_tools_metrics_api
+    weight: 505
+  - name: Metric Type Modifiers
+    url: developers/metrics/type_modifiers/
+    parent: dev_tools_metrics
+    identifier: dev_tools_metrics_modifiers
+    weight: 506
+  - name: Metrics Units
+    url: developers/metrics/units/
+    parent: dev_tools_metrics
+    identifier: dev_tools_metrics_units
+    weight: 507
+  - name: Events
+    url: developers/events/
+    parent: dev_tools
+    identifier: dev_tools_events
+    weight: 6
+  - name: Custom Agent Check
+    url: developers/events/agent/
+    parent: dev_tools_events
+    identifier: dev_tools_events_agent
+    weight: 601
+  - name: DogStatsD
+    url: developers/events/dogstatsd/
+    parent: dev_tools_events
+    identifier: dev_tools_events_dogstatsd
+    weight: 602
+  - name: Email
+    url: developers/events/email/
+    parent: dev_tools_events
+    identifier: dev_tools_events_mail
+    weight: 603
+  - name: API
+    url: api/v1/events/#post-an-event
+    parent: dev_tools_events
+    identifier: dev_tools_events_api
+    weight: 604
+  - name: Service Checks
+    url: developers/service_checks/
+    parent: dev_tools
+    identifier: dev_tools_service_check
+    weight: 7
+  - name: 'Submission - Agent Check '
+    url: developers/service_checks/agent_service_checks_submission/
+    parent: dev_tools_service_check
+    identifier: dev_tools_service_check_agent_check
+    weight: 701
+  - name: Submission - DogStatsD
+    url: developers/service_checks/dogstatsd_service_checks_submission/
+    parent: dev_tools_service_check
+    identifier: dev_tools_service_check_dogstatsd
+    weight: 702
+  - name: Submission - API
+    url: api/v1/service-checks/
+    parent: dev_tools_service_check
+    identifier: dev_tools_service_check_api
+    weight: 703
+  - name: Libraries
+    url: developers/libraries/
+    parent: dev_tools
+    weight: 8
+  - name: Community Office Hours
+    url: developers/office_hours/
+    parent: dev_tools
+    weight: 9
   - name: Guides
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
+    weight: 10
+  - name: Marketplace
+    url: developers/marketplace/
+    parent: dev_tools
+    identifier: marketplace
+    weight: 11
+  - name: Amazon CloudFormation
+    url: developers/amazon_cloudformation/
+    parent: dev_tools
+    identifier: dev_tools_aws_cloudformation
     weight: 12
   - name: API
     url: api/
