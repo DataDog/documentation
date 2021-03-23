@@ -12,7 +12,7 @@
 {{- $wide :=  .Get "wide" -}}
 {{- $video :=  .Get "video" -}}
 {{- $src := (.Get "src") -}}
-{{- $img := (print .Site.Params.img_url "images/" $src) -}}
+{{- $img := (print site.Params.img_url "images/" $src) -}}
 
 {{- $img_resource := partial "img-resource.html" (dict "context" . "src" (print "images/" $src)) -}}
 

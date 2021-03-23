@@ -2,7 +2,7 @@
 {{ $widget_type := .Page.Params.widget_type | default .Page.File.TranslationBaseName }}
 {{ $dot.Scratch.Set "json" "" }}
 {{ $dot.Scratch.Set "html" "" }}
-{{ with .Site.GetPage "/api/v1/dashboards/_index.md" }}
+{{ with site.GetPage "/api/v1/dashboards/_index.md" }}
   {{ with .Resources.Match "widgets.json" }}
     {{ range . }}
         {{ $data := . | unmarshal }}
