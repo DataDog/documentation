@@ -34,34 +34,22 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< site-region region="us" >}}
 
-* **Transport**: Encryption in transit using [AWS Signature Version 4 for S3][1].
-
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/network-isolation.html
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-* **Transport**: Encryption in transit using [Authentication, integrity, and encryption for GCS][1].
-
-[1]: https://cloud.google.com/security/encryption-in-transit/resources/encryption-in-transit-whitepaper.pdf
-
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
-
 * **Storage**: Encryption for [AWS S3 buckets][1].
+* **Transport**: Encryption in transit using [AWS Signature Version 4 for S3][2].
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
+[2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/network-isolation.html
 
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
 * **Storage**: Encryption through [service accounts in GCS][1] (using [AES256][2]).
+* **Transport**: Encryption in transit using [Authentication, integrity, and encryption for GCS][3].
 
 [1]: https://cloud.google.com/storage/docs/encryption/customer-managed-keys
 [2]: https://cloud.google.com/security/encryption-at-rest/default-encryption
+[3]: https://cloud.google.com/security/encryption-in-transit/resources/encryption-in-transit-whitepaper.pdf
 
 {{< /site-region >}}
 
@@ -88,34 +76,22 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< site-region region="us" >}}
 
-* **Transport**: HTTPS transport between the private location and Datadog (authentication through API key), then from Datadog to storage: encryption in transit using [AWS Signature Version 4 for S3][1].
-
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/network-isolation.html
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-* **Transport**: HTTPS transport between the private location and Datadog (authentication through API key), then from Datadog to storage: encryption in transit using [Authentication, integrity, and encryption for GCS][1].
-
-[1]: https://cloud.google.com/security/encryption-in-transit/resources/encryption-in-transit-whitepaper.pdf
-
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
-
 * **Storage**: Encryption for [AWS][1].
+* **Transport**: HTTPS transport between the private location and Datadog (authentication through API key), then from Datadog to storage: encryption in transit using [AWS Signature Version 4 for S3][2].
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
+[2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/network-isolation.html
 
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
 * **Storage**: Encryption through [service accounts in GCS][1] (using [AES256][2]).
+* **Transport**: HTTPS transport between the private location and Datadog (authentication through API key), then from Datadog to storage: encryption in transit using [Authentication, integrity, and encryption for GCS][3].
 
 [1]: https://cloud.google.com/storage/docs/encryption/customer-managed-keys
 [2]: https://cloud.google.com/security/encryption-at-rest/default-encryption
+[3]: https://cloud.google.com/security/encryption-in-transit/resources/encryption-in-transit-whitepaper.pdf
 
 {{< /site-region >}}
 
