@@ -2105,7 +2105,7 @@ main:
     parent: ndm
     identifier: ndm_guide
     weight: 305
-  - name: Developer Tools
+  - name: Developers
     url: developers/
     pre: nav_developers
     identifier: dev_tools
