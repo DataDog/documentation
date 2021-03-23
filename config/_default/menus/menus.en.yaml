@@ -4546,6 +4546,17 @@ api:
       operationids:
         - UpdateAPITest
       unstable: []
+  - name: Get an API test
+    url: '#get-an-api-test'
+    identifier: get-an-api-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetAPITest
+      unstable: []
   - name: Create an API test
     url: '#create-an-api-test'
     identifier: create-an-api-test
