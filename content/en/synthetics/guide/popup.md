@@ -39,7 +39,7 @@ Alternatively, use one of these methods to ensure your popup is closed and your 
     }
     ```
 
-  * Record steps to close your popup, add them in-between all your other browser test steps, and tick the **[`Allow this step to fail` box][3]** for each of them.
+  * Record steps to close the popup, add them between all your other browser test steps, and select the **[`Allow this step to fail` option][3]** for each of them.
 
 ## Further Reading
 
