@@ -48,7 +48,7 @@
 {{ with index site.Menus "api" }}
   {{ $dot.Scratch.Set "menu" . }}
 {{ else }}
-  {{ $dot.Scratch.Set "menu" (index site.First.Menus "api") }}
+  {{ $dot.Scratch.Set "menu" (index .Sites.First.Menus "api") }}
 {{ end }}
 {{ $menu := .Scratch.Get "menu" }}
 

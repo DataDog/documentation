@@ -6,7 +6,7 @@
 {{ with index site.Menus $apiMenu }}
   {{ $dot.Scratch.Set "menu" . }}
 {{ else }}
-  {{ $dot.Scratch.Set "menu" (index site.First.Menus $apiMenu) }}
+  {{ $dot.Scratch.Set "menu" (index .Sites.First.Menus $apiMenu) }}
 {{ end }}
 {{ $menu := .Scratch.Get "menu" }}
 
