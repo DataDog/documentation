@@ -9,6 +9,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Configure a Browser Test'
 ---
+## JavaScript and Basic Auth modals
 
 Synthetic browser tests automatically handle [JavaScript modals][1]: 
  - `alert` modals are closed. 
