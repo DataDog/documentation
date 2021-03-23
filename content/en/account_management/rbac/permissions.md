@@ -232,12 +232,13 @@ For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the f
 
 #### `logs_public_config_api`
 
-Grants the ability to create or modify log configuration through the Datadog API:
+Grants the ability to view, create, or modify log configuration through the Datadog API:
 
-* Configure [Archives][15] through the API
-* Configure [Indexes][16] through the API
-* Configure [Pipelines][17] through the API
-* Configure [Restriction Queries][18] through the API
+* View and configure [archives][15] through the API
+* View and configure [indexes][16] through the API
+* View and configure [pipelines][17] through the API
+* View and configure [restriction queries][18] through the API
+* View and configure [metrics generated from logs][19] through the API
 
 The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs-write-exclusion-filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
 
@@ -379,7 +380,7 @@ curl -X POST \
 
 #### `logs_live_tail`
 
-Grants a role the ability to use the [Live Tail][19] feature.
+Grants a role the ability to use the [Live Tail][20] feature.
 
 This permission is global, and grants access to the livetail irregardless of [Log Read Index Data](#logs-read-index-data) permission.
 
@@ -408,4 +409,5 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [16]: /api/v1/logs-indexes/
 [17]: /api/v1/logs-pipelines/
 [18]: /api/v2/logs-restriction-queries/
-[19]: /logs/explorer/live_tail/
+[19]: /api/v2/logs-metrics/
+[20]: /logs/explorer/live_tail/

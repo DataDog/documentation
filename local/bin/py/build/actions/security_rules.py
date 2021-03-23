@@ -17,8 +17,6 @@ TEMPLATE = """\
 {front_matter}
 ---
 
-## Overview
-
 {content}
 """
 
