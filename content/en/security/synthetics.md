@@ -65,9 +65,9 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< /site-region >}}
 
-# Encryption in private locations 
+## Encryption in private locations 
 
-## Private locations credentials
+### Private locations credentials
 
 * **Storage**: Private locations credentials used to sign test configuration, variables, and test results requests are stored encrypted (symmetric encryption - AES-GCM), with audit logging and access policies.
 
