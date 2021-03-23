@@ -896,8 +896,8 @@ main:
     parent: infrastructure
     identifier: infrastructure_process
     weight: 5
-  - name: Generate Process Metrics
-    url: infrastructure/process/generate_process_metrics/
+  - name: Increase Process Retention
+    url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
     weight: 101
   - name: Live Containers
