@@ -1781,6 +1781,7 @@ main:
   - name: Security
     url: security/logs/
     parent: log_management
+    identifier: log_security
     weight: 11
   - name: Security & Compliance
     url: security_monitoring/
@@ -1923,7 +1924,7 @@ main:
     url: real_user_monitoring/
     pre: nav_rum_2
     identifier: rum
-    weight: 150000
+    weight: 155000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
