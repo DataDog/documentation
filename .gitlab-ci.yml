@@ -50,7 +50,7 @@ install_dependencies:
     <<: *cache
   script:
     - yarn install --frozen-lockfile
-    - make install-hugo
+    - bash ./local/bin/sh/install-hugo.sh
   only:
     changes:
       - yarn.lock
