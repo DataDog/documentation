@@ -21,6 +21,7 @@ For Basic Auth popups, specify the associated credentials in your browser test c
 ## Application popups
 
 ### Anchored popups
+
 If a popup appears at a specific point of your journey, you can record a step to close it and allow this step to fail using the [corresponding option][3]. This way, your test knows how to behave in case a popup appears. If the popup does not show up, the step fails without causing the whole test to fail. 
 
 {{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Allow step to fail to handle popup" width="90%">}}
