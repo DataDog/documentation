@@ -2360,7 +2360,7 @@ main:
     parent: security
     weight: 1
   - name: APM (Tracing)
-    url: tracing/custom_instrumentation/agent_customization/
+    url: /tracing/setup_overview/configure_data_security/
     parent: security
     weight: 2
   - name: Log Management
