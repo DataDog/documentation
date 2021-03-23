@@ -10,7 +10,10 @@ further_reading:
       text: 'Configure a Browser Test'
 ---
 
-Datadog browser tests automatically handle **[JavaScript modals][1]**: `alert` modals are closed and `prompt` and `confirm` ones are answered `Lorem Ipsum`. For Basic Auth popups, you need to specify the associated credentials in your browser test configuration, below the [`HTTP Auth` **Advanced option**][2]:
+Synthetic browser tests automatically handle [JavaScript modals][1]: 
+ - `alert` modals are closed. 
+ - `prompt` and `confirm` modals are answered `Lorem Ipsum`. 
+ - For Basic Auth popups, specify the associated credentials in your browser test configuration, below the [`HTTP Auth` **Advanced option**][2]:
 
 {{< img src="synthetics/guide/popup/http_auth_option.png" alt="Basic Auth Popup">}}
 
