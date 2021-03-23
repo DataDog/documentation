@@ -411,7 +411,7 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /logs/#reserved-attributes
+[3]: /logs/processing/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 
