@@ -18,11 +18,9 @@ If a **popup appears at a specific point of your journey**, you can record a ste
 
 {{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Allow step to fail to handle popup">}}
 
-If the time at which these **popups appear in a session is not predictable**:
+If the time at which these popups appear in a session is not predictable, check with the third party providing the popup to see if they can create a rule that prevents the popup from appearing during your browser test execution. They could, for example, provide you with a cookie that you can input below the [dedicated **Advanced option**][2] of your test.
 
-* You should sync with the **third party** providing the popup to see if they could create a rule that would prevent the popup from appearing during your browser test execution. They could for instance provide you with a cookie that you could then input below the [dedicated **Advanced option**][2] of your test.
-
-* Alternatively, you can use one of these two methods to ensure your popup gets closed and your test is able to continue its journey:
+Alternatively, use one of these methods to ensure your popup is closed and your test is able to continue its journey:
   * Create a **[JavaScript assertion][4]** at the very beginning of your browser test to regularly try to close the popup:
 
     ```javascript
