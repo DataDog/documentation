@@ -1711,7 +1711,7 @@ main:
     url: logs/processing/parsing/
     parent: log_processing
     weight: 203
-  - name: Naming Convention
+  - name: Attributes and Aliasing
     url: logs/processing/attributes_naming_convention/
     parent: log_processing
     weight: 204
