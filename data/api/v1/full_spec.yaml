@@ -1900,6 +1900,7 @@ components:
       enum:
       - count
       - cardinality
+      - median
       - pc75
       - pc90
       - pc95
@@ -1914,6 +1915,7 @@ components:
       x-enum-varnames:
       - COUNT
       - CARDINALITY
+      - MEDIAN
       - PC75
       - PC90
       - PC95
@@ -7877,7 +7879,9 @@ components:
             type: string
           type: array
         message:
-          description: Notification message associated with the test.
+          description: Notification message associated with the test. Message can
+            either be text or an empty string.
+          example: ''
           type: string
         monitor_id:
           description: The associated monitor ID.
@@ -7906,6 +7910,8 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/SyntheticsBrowserTestType'
+      required:
+      - message
       type: object
     SyntheticsBrowserTestConfig:
       description: Configuration object for a Synthetic browser test.
@@ -11307,10 +11313,24 @@ components:
           description: Contains the custom metric name.
           type: string
       type: object
+    UsageTopAvgMetricsMetadata:
+      description: The object containing document metadata.
+      properties:
+        day:
+          description: The day value from the user request that contains the returned
+            usage data. (If day was used the request)
+        month:
+          description: The month value from the user request that contains the returned
+            usage data. (If month was used the request)
+        pagination:
+          $ref: '#/components/schemas/UsageAttributionPagination'
+      type: object
     UsageTopAvgMetricsResponse:
       description: Response containing the number of hourly recorded custom metrics
         for a given organization.
       properties:
+        metadata:
+          $ref: '#/components/schemas/UsageTopAvgMetricsMetadata'
         usage:
           description: Number of hourly recorded custom metrics for a given organization.
           items:
@@ -19054,6 +19074,44 @@ paths:
         parameters: []
         type: unsafe
   /api/v1/synthetics/tests/api/{public_id}:
+    get:
+      description: 'Get the detailed configuration associated with
+
+        a Synthetic API test.'
+      operationId: GetAPITest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsAPITest'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user'
+      summary: Get an API test
+      tags:
+      - Synthetics
+      x-undo:
+        type: safe
     put:
       description: Edit the configuration of a Synthetic API test.
       operationId: UpdateAPITest
@@ -21107,14 +21165,24 @@ paths:
   /api/v1/usage/top_avg_metrics:
     get:
       description: Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
-        by hourly average.
+        by hourly average. Use the month parameter to get a month-to-date data resolution
+        or use the day parameter to get a daily resolution. One of the two is required,
+        and only one of the two is allowed.
       operationId: GetUsageTopAvgMetrics
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM]
-          for usage beginning at this hour.'
+          for usage beginning at this hour. (Either month or day should be specified,
+          but not both)'
         in: query
         name: month
-        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to day: [YYYY-MM-DD]
+          for usage beginning at this hour. (Either month or day should be specified,
+          but not both)'
+        in: query
+        name: day
         schema:
           format: date-time
           type: string
