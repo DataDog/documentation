@@ -744,6 +744,10 @@
     "request_description": "Details of the test to create.",
     "request_schema_description": "Object containing details about a Synthetic API test."
   },
+  "GetAPITest": {
+    "description": "Get the detailed configuration associated with\na Synthetic API test.",
+    "summary": "Get an API test"
+  },
   "UpdateAPITest": {
     "description": "Edit the configuration of a Synthetic API test.",
     "summary": "Edit an API test",
@@ -943,7 +947,7 @@
     "summary": "Get hourly usage for custom metrics"
   },
   "GetUsageTopAvgMetrics": {
-    "description": "Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average.",
+    "description": "Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average. Use the month parameter to get a month-to-date data resolution or use the day parameter to get a daily resolution. One of the two is required, and only one of the two is allowed.",
     "summary": "Get top custom metrics by hourly average"
   },
   "GetUsageTrace": {
