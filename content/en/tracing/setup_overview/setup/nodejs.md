@@ -84,7 +84,7 @@ import `dd-trace/init`;
 
 ### Adding the tracer via command line arguments
 
-Use the `--require` option to Node.js to load and initialize the tracer in once
+Use the `--require` option to Node.js to load and initialize the tracer in one
 step.
 
 ```sh
