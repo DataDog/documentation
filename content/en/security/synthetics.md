@@ -71,7 +71,7 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 * **Storage**: Private locations credentials used to sign test configuration, variables, and test results requests are stored encrypted (symmetric encryption - AES-GCM), with audit logging and access policies.
 
-## Test configurations and variables
+### Test configurations and variables
 
 * **Transport**: Asymmetric encryption - RSA (4096-bit key). Communication between private locations and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity. 
 * **Storage**: Symmetric encryption - AES-GCM (256-bit key).
