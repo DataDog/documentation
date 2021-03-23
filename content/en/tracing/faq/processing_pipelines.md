@@ -89,7 +89,6 @@ A lookup processor performs the following actions:
 2. Checks if the source attribute value exists in the mapping table, and if it does, either:
     - Creates the a span attribute with the corresponding value from the table; or
     - Overwrites the span's existing attribute with the value from the table.
-6. Optionally, if a lookup processor does not find the source attribute value in the mapping table, creates a target attribute with the fixed default value.
 
 As with arithmetic processors, attributes in lookup processors must be prefixed with `@` when used in formulas.
 
