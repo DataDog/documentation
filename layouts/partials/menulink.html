@@ -1,6 +1,6 @@
 {{- $dot := (index $ 3) -}}
 {{- $no_base_urls := ( slice "documentation" "login" "enterprise_cta" "api") -}}
-{{- if eq $dot.Site.Params.full_translation true -}}
+{{- if eq site.Params.full_translation true -}}
     {{- $dot.Scratch.Set "url" ((index $ 1) | absLangURL) -}}
 {{- else -}}
     {{- $dot.Scratch.Set "url" ((index $ 1) | absURL) -}}
