@@ -744,6 +744,10 @@
     "request_description": "Details of the test to create.",
     "request_schema_description": "Object containing details about a Synthetic API test."
   },
+  "GetAPITest": {
+    "description": "Get the detailed configuration associated with\na Synthetic API test.",
+    "summary": "Get an API test"
+  },
   "UpdateAPITest": {
     "description": "Edit the configuration of a Synthetic API test.",
     "summary": "Edit an API test",
