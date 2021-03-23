@@ -24,7 +24,7 @@ If a popup appears at a specific point of your journey, you can record a step to
 If the time at which these popups appear in a session is not predictable, check with the third party providing the popup to see if they can create a rule that prevents the popup from appearing during your browser test execution. They could, for example, provide you with a cookie that you can input below the [dedicated **Advanced option**][2] of your test.
 
 Alternatively, use one of these methods to ensure your popup is closed and your test is able to continue its journey:
-  * Create a **[JavaScript assertion][4]** at the very beginning of your browser test to regularly try to close the popup:
+  * Create a [JavaScript assertion][4] at the beginning of your browser test to regularly try to close the popup:
 
     ```javascript
     if (document.querySelector("<ELEMENT>")) {
