@@ -251,15 +251,7 @@ Log events that do not comply with these limits might be transformed or truncate
 
 ### Attributes and tags
 
-Attributes prescribe [logs facets][7], which are used for filtering and searching in Log Explorer. There are a few reserved attributes that are automatically ingested with logs, as noted below, and some attributes that require additional configuration if using other parts of Datadog such as APM. Review the reserved attributes list below after configuring log collection:
-
-| Attribute | Description                                                                                                                                                                                                                                |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                          |
-| `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
-| `status`  | This corresponds to the level/severity of a log. It is used to define [patterns][8] and has a dedicated layout in the Datadog Log UI.                                                                                                     |
-| `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                                |
-| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in Live Tail, where it is indexed for full text search.                                    |
+Attributes prescribe [logs facets][7], which are used for filtering and searching in Log Explorer. See the dedicated [attributes and aliasing][8] documentation for a list of reserved and standard attributes and to learn how to support a naming convention with logs attributes and aliasing.
 
 #### Attributes for stack traces
 
@@ -281,10 +273,6 @@ To enable these functionalities use the following attribute names:
 
 For more information, see the complete [source code attributes documentation][9].
 
-#### Unified service tagging
-
-If you're also collecting traces or metrics, it is recommended to configure unified service tagging. This configuration ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. Refer to the dedicated [unified service tagging][10] documentation for more information.
-
 ## Next steps
 
 Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][11] documentation to begin analyzing your log data, or see the additional log management documentation below.
@@ -304,7 +292,7 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [5]: /integrations/logstash/#log-collection
 [6]: /security/logs/#information-security
 [7]: /logs/explorer/facets/
-[8]: /logs/explorer/patterns/
+[8]: /logs/processing/attributes_naming_convention
 [9]: /logs/processing/attributes_naming_convention/#source-code
 [10]: /getting_started/tagging/unified_service_tagging
 [11]: /logs/explore/
