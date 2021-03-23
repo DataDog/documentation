@@ -17,6 +17,7 @@ Synthetic browser tests automatically handle [JavaScript modals][1]:
 For Basic Auth popups, specify the associated credentials in your browser test configuration, below the [`HTTP Auth` **Advanced option**][2]:
 
 {{< img src="synthetics/guide/popup/http_auth_option.png" alt="Basic Auth Popup">}}
+
 ## Application popups
 
 ### Anchored popups
