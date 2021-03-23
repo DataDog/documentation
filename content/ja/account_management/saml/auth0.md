@@ -56,5 +56,5 @@ https://app.datadoghq.com/account/saml/assertion
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://auth0.com/docs/protocols/saml/saml2webapp-tutorial
-[2]: https://auth0.com/docs/protocols/saml/saml-apps/datadog
+[2]: https://auth0.com/docs/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-datadog
 [3]: https://auth0.com/docs/users/normalized/auth0#normalized-user-profile-schema
