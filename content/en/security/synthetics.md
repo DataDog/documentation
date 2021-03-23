@@ -82,7 +82,7 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
    
 * **Storage**: Sensitive parts (by default, response headers and body) of test results are stored encrypted with an asymmetric encryption - RSA (4096-bit key) and decrypted on-the-fly when test results are fetched.
 
-## Artifacts
+### Artifacts
 
 Artifacts are browser test screenshots, snapshots, errors, and resources.
 
