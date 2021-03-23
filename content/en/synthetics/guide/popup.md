@@ -24,6 +24,7 @@ For Basic Auth popups, specify the associated credentials in your browser test c
 If a popup appears at a specific point of your journey, you can record a step to close it and allow this step to fail using the [corresponding option][3]. This way, your test knows how to behave in case a popup appears. If the popup does not show up, the step fails without causing the whole test to fail. 
 
 {{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Allow step to fail to handle popup">}}
+
 ### Moving popups
 
 If the time at which these popups appear in a session is not predictable, check with the third party providing the popup to see if they can create a rule that prevents the popup from appearing during your browser test execution. They could, for example, provide you with a cookie that you can input below the [dedicated **Advanced option**][2] of your test.
