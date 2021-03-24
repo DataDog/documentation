@@ -325,7 +325,7 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
 
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
-[2]: http://logback.qos.ch/translator
+[2]: http://logback.qos.ch/translator/
 {{% /tab %}}
 
 {{% tab "Log4j 2" %}}
