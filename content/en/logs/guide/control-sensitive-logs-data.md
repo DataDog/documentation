@@ -62,7 +62,7 @@ This is an optional step to prevent additional sensitive data from being sent to
 * Find which index(es) that hold sensitive data are susceptible to routing.
 * For each index, add an exclusion filter based on the sensitive outline query.
 
-{{< img src="logs/guide/sensitive/sensitive_exclusion-filters.png" alt="Sensitive Exclusion Filters" style="width:80%;" >}
+{{< img src="logs/guide/sensitive/sensitive_exclusion-filters.png" alt="Sensitive Exclusion Filters" style="width:80%;" >}}
 
 ### Stop sending sensitive data to Datadog
 
