@@ -18,6 +18,8 @@ ifeq ($(wildcard $(CONFIG_FILE)),)
 endif
 include $(CONFIG_FILE)
 
+HUGO := /usr/local/bin/hugo
+
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
@@ -25,10 +27,10 @@ install-hugo: ## Install Hugo locally at /usr/local/bin/hugo (only for CI)
 	./local/bin/sh/install-hugo.sh
 
 build-live: ## Build the "live" (read: public-facing) version of the site
-	hugo --buildDrafts --buildFuture --environment live
+	$(HUGO) --buildDrafts --buildFuture --environment live
 
 build-preview: ## Build the preview version of the site
-	hugo --buildDrafts --buildFuture --environment preview
+	$(HUGO) --buildDrafts --buildFuture --environment preview
 
 clean: stop  ## Clean all make installs.
 	@echo "cleaning up..."
