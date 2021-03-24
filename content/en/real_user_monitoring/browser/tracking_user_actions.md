@@ -22,7 +22,7 @@ further_reading:
 
 Real User Monitoring (RUM) Browser SDK automatically detects user interactions performed during a user journey. 
 
-The automatic collection of user actions provides insights into user behavior, without having to instrument every single click in your application. It will help you achieve the following objectives:
+The automatic collection of user actions provides insights into user behavior, without having to manually instrument every single click in your application. It helps you achieve the following objectives:
 * Understand the performance of key interactions (for example, a click on the "Add to cart" button)
 * Quantify feature adoption
 * Identify the steps that led to a specific browser error
@@ -33,7 +33,7 @@ You can extend the collection of user interactions by [sending your own custom a
 
 ## What interactions are being tracked?
 
-The Browser SDK automatically tracks clicks. A click action is created if the following conditions are met:
+The Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
 * Activity is detected within 100ms of click being handled (activity being defined as the start of a network request or a DOM mutation)
 * The click does not lead to a new page being loaded, in which case the Browser SDK will generate a new RUM View event
 * A name can be computed for the action. [Learn more about action naming](#declaring-a-name-for-click-actions)
@@ -77,9 +77,7 @@ The RUM library uses various strategies to get a name for click actions. If you 
 ```
 ## Custom actions
 
-Custom actions are user actions declared and sent manually by using the `addAction` API. They can send information relative to an event occurring during a user journey (for example, a customer cart information).
-
-Once RUM is initialized, generate custom actions when you want to monitor specific interactions on your application pages with the `addAction(name: string, context: Context)` API call. In the following examples, the RUM SDK collects the number of items within a cart, what they are, and how much the cart is worth overall. The information is sent to Datadog when the user goes to the checkout page.
+Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, we collect a visitor's cart data when they hit the checkout button. The RUM SDK collects the number of items within the cart, the list of items, and how much the cart is worth overall.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
