@@ -28,7 +28,7 @@ This article describes the main security guarantees available to users leveragin
 * **Transport**: Asymmetric encryption - RSA (4096-bit key). All requests are signed using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity.
 * **Storage**: Sensitive parts (response headers and body) of test results are stored encrypted with an asymmetric encryption - RSA (4096-bit key) and decrypted on-the-fly when test results are fetched.
 
-## Artifacts
+### Artifacts
 
 Artifacts are browser test screenshots, snapshots, errors, and resources.
 
