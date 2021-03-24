@@ -18,8 +18,8 @@ further_reading:
       text: 'Tracking custom user actions'
 ---
 
-## Scrub sensitive data from your RUM data
-If your RUM data contains sensitive information that need redacting, configure the Browser SDK to scrub sensitive sequences, or to dismiss selected RUM events, by using the `beforeSend` callback when you initialize RUM.
+## Control sensitive RUM data
+If your RUM data contains sensitive information that need redacting, configure the Browser SDK to redact sensitive sequences, or to discard selected RUM events, by using the `beforeSend` callback when you initialize RUM.
 
 This callback function gives you access to every event collected by the RUM SDK before they get sent to Datadog.
 
@@ -89,9 +89,9 @@ You can update the following event properties:
 
 **Note**: The RUM SDK will ignore modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][1].
 
-### Dismiss a RUM event
+### Discard a RUM event
 
-With the `beforeSend` API, dismiss a RUM event by returning `false`:
+With the `beforeSend` API, discard a RUM event by returning `false`:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -102,7 +102,7 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     ...,
     beforeSend: (event) => {
-        if (shouldDismiss(event)) {
+        if (shouldDiscard(event)) {
             return false
         }
         ...
@@ -118,7 +118,7 @@ DD_RUM.onReady(function() {
     DD_RUM.init({
         ...,
         beforeSend: (event) => {
-            if (shouldDismiss(event)) {
+            if (shouldDiscard(event)) {
                 return false
             },
             ...
@@ -135,7 +135,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         ...,
         beforeSend: (event) => {
-            if (shouldDismiss(event)) {
+            if (shouldDiscard(event)) {
                 return false
             }
             ...
