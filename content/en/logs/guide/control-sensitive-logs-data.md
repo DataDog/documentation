@@ -18,7 +18,7 @@ further_reading:
 
 Logs may contain sensitive data, and should be handled carefully. If you are ingesting sensitive data into Datadog, consider the following:
 
-- If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use the **Roles Based Access Control** to ensure that you have set up appropriate restrictions so only entitled users who have access to your Datadog account can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] to learn how to configure it for your organization.
+- If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use the **Roles Based Access Control** to ensure that you have set up appropriate restrictions so only authorized users who have access to your Datadog account can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] to learn how to configure it for your organization.
 - Address any unintentional logging of sensitive data to preemptively address any concerns down the road. Continue with this guide to learn more.
 
 Controlling all of your data can be challenging, especially on a large and highly collaborative platform. This guide walks you through the three steps you should take if you have compliance-sensitive data that is ingested into Datadog:
