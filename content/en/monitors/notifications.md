@@ -455,7 +455,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [8]: /integrations/slack/#mentions-in-slack-from-monitor-alert
 [9]: /integrations/webhooks/
 [10]: /integrations/webhooks/#usage
-[11]: https://docs.datadoghq.com/integrations/#cat-collaboration
+[11]: /integrations/#cat-notification
 [12]: /events/
 [13]: /monitors/guide/template-variable-evaluation/
 [14]: /monitors/faq/what-are-recovery-thresholds/

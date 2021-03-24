@@ -1,5 +1,5 @@
 ---
-title: Writing a custom OpenMetrics Check
+title: Custom OpenMetrics Check
 kind: documentation
 further_reading:
 - link: "/agent/prometheus/"
