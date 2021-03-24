@@ -5,6 +5,9 @@ integrations_data
 resources/
 assets/jsconfig.json
 
+# Hugo executable (CI)
+local/bin/hugo
+
 # Ignore generated examples
 /examples
 content/en/api/**/*.go
