@@ -43,7 +43,7 @@ Otherwise, to begin tracing your applications:
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
-   To access a specific version of the tracer, visit Datadog's [Maven repository][16].
+   To access a specific version of the tracer, visit Datadog's [Maven repository][4].
 
 2. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
 
@@ -204,13 +204,13 @@ For additional details and options, see the [WebSphere docs][1].
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
 
-     For more information, see the [Oracle documentation][4].
+     For more information, see the [Oracle documentation][5].
 
 - Never add `dd-java-agent` to your classpath. It can cause unexpected behavior.
 
 ## Automatic Instrumentation
 
-Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][5]. When a `java-agent` is registered, it has the ability to modify class files at load time.
+Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][6]. When a `java-agent` is registered, it has the ability to modify class files at load time.
 
 Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
 
@@ -228,21 +228,21 @@ System properties can be set as JVM flags.
 
 | System Property                        | Environment Variable                   | Default                           | Description                                                                                                                                                                                                                                                           |
 | -------------------------------------- | -------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dd.service`                      | `DD_SERVICE`                      | `unnamed-java-app`                | The name of a set of processes that do the same job. Used for grouping stats for your application. Available for versions 0.50.1+.                                                                                                                                                                    |
-| `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Example: `layer:api,team:intake`) A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it will override any env or version tag defined in DD_TAGS. Available for versions 0.50.1+.  |
+| `dd.service`                      | `DD_SERVICE`                      | `unnamed-java-app`                | The name of a set of processes that do the same job. Used for grouping stats for your application. Available for versions 0.50.0+.                                                                                                                                                                    |
+| `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Example: `layer:api,team:intake`) A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it will override any env or version tag defined in DD_TAGS. Available for versions 0.50.0+.  |
 |`dd.env`                              | `DD_ENV`                              | `none`                            | Your application environment (e.g. production, staging, etc.). Available for versions 0.48+.                                                    |
 | `dd.version`                              | `DD_VERSION`                              | `null`                            | Your application version (e.g. 2.5, 202003181415, 1.3-alpha, etc.). Available for versions 0.48+.             |
-| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details.   |
+| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][7] for details.   |
 | `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>` |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (Example: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                                                                       |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                       |
-| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][7] for more details.                                                                                                  |
+| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][8] for more details.                                                                                                  |
 | `dd.trace.agent.port`                  | `DD_TRACE_AGENT_PORT`                  | `8126`                            | Port number the Agent is listening on for configured host.                                                                                |
 | `dd.trace.agent.unix.domain.socket`    | `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`    | `null`                            | This can be used to direct trace traffic to a proxy, to later be sent to a remote Datadog Agent.                                                            |
 | `dd.trace.agent.url`                   | `DD_TRACE_AGENT_URL`                   | `null`                            | The URL to send traces to. This can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+. |
 | `dd.trace.agent.timeout`               | `DD_TRACE_AGENT_TIMEOUT`               | `10`                              | Timeout in seconds for network interactions with the Datadog Agent.                                                                                                                                                                                                   |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names. Automatically apply header values as tags on traces.                                                                                                               |
-| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][8])               | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                            |
+| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][9])               | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                            |
 | `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Example: `"package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]"`) List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls    |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | Set a number of partial spans to flush on. Useful to reduce memory overhead when dealing with heavy traffic or long running traces.     |
 | `dd.trace.split-by-tags`               | `DD_TRACE_SPLIT_BY_TAGS`               | `null`                            | (Example: `aws.service`) Used to rename spans to be identified with the corresponding service tag                                       |
@@ -273,14 +273,14 @@ System properties can be set as JVM flags.
 
 - If the same key type is set for both, the system property configuration takes priority.
 - System properties can be used as JVM parameters.
-- By default, JMX metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][9].
+- By default, JMX metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][10].
 
-  - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
-  - In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
+  - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][11], and that port `8125` is open on the Agent container.
+  - In Kubernetes, [bind the DogStatsD port to a host port][12]; in ECS, [set the appropriate flags in your task definition][13].
 
 ### Integrations
 
-See how to disable integrations in the [integrations][13] compatibility section.
+See how to disable integrations in the [integrations][14] compatibility section.
 
 ### Examples
 
@@ -400,11 +400,11 @@ Would produce the following result:
 
 {{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example"  >}}
 
-See the [Java integration documentation][14] to learn more about Java metrics collection with JMX fetch.
+See the [Java integration documentation][15] to learn more about Java metrics collection with JMX fetch.
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][15] and injection for distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][16] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
 
@@ -481,16 +481,16 @@ Java APM has minimal impact on the overhead of an application:
 [1]: /tracing/profiler/getting_started/?tab=java
 [2]: /tracing/compatibility_requirements/java
 [3]: https://app.datadoghq.com/apm/docs
-[4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[5]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[6]: /tracing/connect_logs_and_traces/java/
-[7]: /tracing/setup/docker/
-[8]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[9]: /developers/dogstatsd/#setup
-[10]: /agent/docker/#dogstatsd-custom-metrics
-[11]: /developers/dogstatsd/
-[12]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
-[13]: /tracing/compatibility_requirements/java#disabling-integrations
-[14]: /integrations/java/?tab=host#metric-collection
-[15]: https://github.com/openzipkin/b3-propagation
-[16]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
+[4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
+[5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[6]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[7]: /tracing/connect_logs_and_traces/java/
+[8]: /tracing/setup/docker/
+[9]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[10]: /developers/dogstatsd/#setup
+[11]: /agent/docker/#dogstatsd-custom-metrics
+[12]: /developers/dogstatsd/
+[13]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[14]: /tracing/compatibility_requirements/java#disabling-integrations
+[15]: /integrations/java/?tab=host#metric-collection
+[16]: https://github.com/openzipkin/b3-propagation
