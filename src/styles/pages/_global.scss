@@ -878,7 +878,7 @@ table,
 ._hj_feedback_container {
     display: none;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
         display: block;
     }
 }
