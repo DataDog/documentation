@@ -28,7 +28,7 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 |----------------------|-----------------|----------|--------------------------------------------------------------------------------------------|
 | `<TITLE>`            | String          | Yes      | The title of the event                                                                     |
 | `<TEXT>`             | String          | Yes      | The text body of the event                                                                 |
-| `<TIMESTAMP>`        | Integer         | No       | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
+| `<TIMESTAMP>`        | Integer         | Yes      | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
 | `<HOSTNAME>`         | String          | No       | The name of the host                                                                       |
 | `<AGGREGATION_KEY>`  | String          | No       | A key to use for aggregating events                                                        |
 | `<PRIORITY>`         | String          | No       | Specifies the priority of the event (`normal` or `low`).                                   |
