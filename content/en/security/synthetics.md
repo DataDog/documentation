@@ -31,7 +31,7 @@ The [Synthetic Monitoring product][2] allows you to proactively monitor how your
 
 Artifacts are browser test screenshots, snapshots, errors, and resources.
 
-{{< site-region region="us" >}}
+{{< site-region region="us,us3,gov" >}}
 
 * **Storage**: Encryption for [AWS S3 buckets][1].
 * **Transport**: Encryption in transit using [AWS Signature Version 4 for S3][2].
@@ -73,7 +73,7 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 Artifacts are browser test screenshots, snapshots, errors, and resources.
 
-{{< site-region region="us" >}}
+{{< site-region region="us,us3,gov" >}}
 
 * **Storage**: Encryption for [AWS][1].
 * **Transport**: HTTPS transport between the private location and Datadog (authentication through API key), then from Datadog to storage: encryption in transit using [AWS Signature Version 4 for S3][2].
