@@ -34,7 +34,7 @@ You can extend the collection of user interactions by [sending your own custom a
 ## What interactions are being tracked?
 
 The Browser SDK automatically tracks clicks. A click action is created if the following conditions are met:
-* Activity is detected within 100ms of click being handled (activity being defined as ongoing network requests or DOM mutations)
+* Activity is detected within 100ms of click being handled (activity being defined as the start of a network request or a DOM mutation)
 * The click does not lead to a new page being loaded, in which case the Browser SDK will generate a new RUM View event
 * A name can be computed for the action. [Learn more about action naming](#declaring-a-name-for-click-actions)
 
