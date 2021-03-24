@@ -305,7 +305,7 @@ index_internal_doc:
   only:
     - master
   except: [ tags, schedules ]
-  tags: [ "runner:docker", "size:2xlarge" ]
+  tags: [ "runner:main", "size:2xlarge" ]
   script:
     - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
 
