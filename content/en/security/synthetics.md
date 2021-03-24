@@ -14,7 +14,6 @@ further_reading:
 This article is part of a [series on data security][1].
 
 The [Synthetic Monitoring product][2] allows you to proactively monitor how your systems and applications are performing using simulated requests and business transactions. Synthetic tests can be initiated from all around the globe, from either managed or private locations.  
-This article describes the main security guarantees available to users leveraging the Synthetics product, for both location types.
 
 ## Encryption in managed locations 
 
