@@ -874,6 +874,15 @@ table,
     opacity: 0.3;
 }
 
+// hotjar feedback button
+._hj_feedback_container {
+    display: none;
+
+    @include media-breakpoint-up(md) {
+        display: block;
+    }
+}
+
 // all external links show an icon
 /*a {
   &:not([href*='localhost']):not([href*='datadoghq.com']):not([href*='datadog.com']):not( [href^='#'] ):not( [href^='/'] ):after {
