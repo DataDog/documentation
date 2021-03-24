@@ -21,7 +21,7 @@ If you can't see any RUM data or if data is missing for some users:
 | Ad blockers prevent the Browser RUM SDK from being downloaded or from sending the data to Datadog.     | Some ad blockers extend their restrictions to performance and marketing tracking tools. [Install the Browser RUM SDK with npm][3] and [forward the collected data through a proxy][4]. |
 | Network rules or VPN prevent the Browser RUM SDK from being downloaded or sending data to Datadog. | Grant access to the endpoints required to download the SDK or to send data. The list of endpoints is available in the [Content Security Policy documentation][5].                                        |
 
-Read the [Content Security Policy guidelines][6] and ensure your website grants access to the Browser RUM SDK CDN and the intake endpoint.
+Read the [Content Security Policy guidelines][5] and ensure your website grants access to the Browser RUM SDK CDN and the intake endpoint.
 
 ### Check that the Browser RUM SDK is initialized
 
@@ -62,4 +62,4 @@ The Browser RUM SDK relies on cookies to store session information and follow a 
 [3]: /real_user_monitoring/browser/#npm
 [4]: /real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /real_user_monitoring/faq/content_security_policy/
-[6]: /real_user_monitoring/browser/data_collected/?tab=session
+[6]: /real_user_monitoring/browser/data_collected/#session-metrics-and-attributes

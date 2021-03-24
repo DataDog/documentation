@@ -5,6 +5,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
+  - link: "/real_user_monitoring/browser/data_collected/"
+    tag: "Documentation"
+    text: "Collecting Browser Data and Context"
   - link: "/real_user_monitoring/explorer/"
     tag: "Documentation"
     text: "Explore your views within Datadog"
@@ -59,6 +62,15 @@ RUM view events collect extensive performance metrics for every single page view
 | `view.long_task.count`          | number      | Count of all long tasks collected for this view.                                                                                                                                                                      |
 | `view.resource.count`           | number      | Count of all resources collected for this view.                                                                                                                                                                       |
 | `view.action.count`             | number      | Count of all actions collected for this view.                                                                                                                                                                         |
+
+#### Long task timing metrics
+
+A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.
+
+| Metric  | Type   | Description                |
+|------------|--------|----------------------------|
+| `long_task.duration` | number | Duration of the long task. |
+
 
 ## Monitoring single page applications (SPA)
 

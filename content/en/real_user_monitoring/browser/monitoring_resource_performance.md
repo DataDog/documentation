@@ -5,6 +5,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
+  - link: "/real_user_monitoring/browser/data_collected/"
+    tag: "Documentation"
+    text: "Collecting Browser Data and Context"
   - link: "/real_user_monitoring/explorer/"
     tag: "Documentation"
     text: "Explore your views within Datadog"
@@ -73,7 +76,7 @@ RUM infers the name and category of the resource provider from the resource URL 
 
 The [Resource Timing API][3] is used to collect RUM resource timing. It is subject to the cross-origin security limitations that browsers enforce on scripts. For example, if your web application is hosted on `www.example.com` and it loads your images via `images.example.com`, you will only get timing for resources loaded hosted on `www.example.com` by default.
 
-To resolve this, enable extended data collection for resources subject to CORS by adding the `Timing-Allow-Origin` HTTP response header to your cross-origin resources. For example, to grant access to the resource timing to any origin, use `Timing-Allow-Origin: *`. Find more about CORS on the [MDN Web Docs][4]
+To resolve this, enable extended data collection for resources subject to CORS by adding the `Timing-Allow-Origin` HTTP response header to your cross-origin resources. For example, to grant access to the resource timing to any origin, use `Timing-Allow-Origin: *`. Find more about CORS on the [MDN Web Docs][4].
 
 ## Further Reading
 

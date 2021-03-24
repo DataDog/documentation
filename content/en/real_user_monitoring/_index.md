@@ -23,7 +23,7 @@ further_reading:
   text: "Use geomaps to visualize your app data by location"
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
-  text: "RUM Browser Data Collected"
+  text: "Collecting RUM Browser Data and Context"
 ---
 
 {{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM Dashboard"  >}}
@@ -62,7 +62,7 @@ View user sessions in segments, such as checking when latency impacts your premi
 
 ### Seamless integration with Logs, APM and Profiler
 
-View your [backend traces, logs, infrastructure metrics][1] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
+View your [backend traces, logs, infrastructure metrics][3] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM">}}
 
@@ -77,7 +77,7 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/real_user_monitoring/dashboards
-[2]:/real_user_monitoring/explorer/analytics
-[4]:/real_user_monitoring/error_tracking
-[1]: /real_user_monitoring/connect_rum_and_traces
+[1]: /real_user_monitoring/dashboards
+[2]: /real_user_monitoring/explorer/analytics
+[3]: /real_user_monitoring/connect_rum_and_traces
+[4]: /real_user_monitoring/error_tracking
