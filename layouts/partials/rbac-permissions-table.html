@@ -36,9 +36,9 @@
 
       {{- if ne .attributes.name nil -}}
       <tr>
-        <td>      
+        <td>
             {{- if eq $permission_group "Logs" -}}
-              <a href="#{{ .attributes.name }}">
+              <a href="/logs/guide/logs-rbac-permissions/#{{ .attributes.name }}">
                 <code>{{- .attributes.name -}}</code>
               </a>
             {{- else -}}
