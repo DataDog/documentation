@@ -18,7 +18,7 @@
       <br><br>
   {{ end }}
 </div>
-<p>{{ partial "return-to-group-link" (dict "lang" site.Language.Lang "taxonomy" .Data) }}</p>
+<p>{{ partial "return-to-group-link" (dict "lang" .Site.Language.Lang "taxonomy" .Data) }}</p>
 </section>
 
 

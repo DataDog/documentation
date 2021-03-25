@@ -1,8 +1,8 @@
 {{ $dot := . }}
-{{ $data := site.Data.security_monitoring.data }}
+{{ $data := $dot.ctx.Site.Data.security_monitoring.data }}
 {{ $img_map := $data.image_map }}
 {{ $img_path := "images/integrations_logos/" }}
-{{ $img_url := printf "%s%s" site.Params.img_url $img_path }}
+{{ $img_url := printf "%s%s" $dot.ctx.Site.Params.img_url $img_path }}
 {{ $source := .source }}
 {{ $scope := .scope }}
 
@@ -20,7 +20,7 @@
             {{ else }}
                 {{ $src_img = printf "%s" .image }}
             {{ end }}
-
+            
             {{ if .link }}
                 {{ $src_link = printf "integrations/%s" .link }}
             {{ else }}

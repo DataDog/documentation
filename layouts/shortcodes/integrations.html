@@ -2,10 +2,10 @@
 
 <!-- From data file -->
 {{ $kind := "integration" }}
-{{ if eq site.Language.Lang "ja"}}
+{{ if eq .Site.Language.Lang "ja"}}
     {{ $kind = "インテグレーション"}}
 {{ end }}
-{{ $integration_list := sort (where (where (where site.Pages "Params.kind" "=" $kind) ".Params.beta" "!=" "true") ".Params.is_public" "=" true) ".File.BaseFileName" }}
+{{ $integration_list := sort (where (where (where .Site.Pages "Params.kind" "=" $kind) ".Params.beta" "!=" "true") ".Params.is_public" "=" true) ".File.BaseFileName" }}
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
@@ -98,9 +98,9 @@
                     <a class="card-img" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
                         {{ $.Scratch.Set "url" ""}}
                         {{ if $indx }}
-                            {{ $.Scratch.Set "url" (print (site.Params.img_url) $indx "?auto=format") | safeURL }}
+                            {{ $.Scratch.Set "url" (print (.Site.Params.img_url) $indx "?auto=format") | safeURL }}
                         {{ else }}
-                            {{ $.Scratch.Set "url" (print (site.Params.img_url) "integrations_logos/dd-noimage.png" "?auto=format") | safeURL }}
+                            {{ $.Scratch.Set "url" (print (.Site.Params.img_url) "integrations_logos/dd-noimage.png" "?auto=format") | safeURL }}
                         {{ end }}
                         {{ $url := $.Scratch.Get "url" }}
                         <picture class="mx-auto">

@@ -1,4 +1,4 @@
-{{ $announce := site.Params.announcement_banner }}
+{{ $announce := .Site.Params.announcement_banner }}
 {{ if not (in (slice "dg" "landing-page" "tshirt" "apm" "legal" "event" "webinar" "summit") .Type) }}
 <div class="announcement_banner open text-center">
 <!-- default announcement banner -->
