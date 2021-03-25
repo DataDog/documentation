@@ -41,7 +41,7 @@ The first seen and last seen date are updated, if new data is made available fro
 
 {{< img src="security_monitoring/explorer/signal_2.png" alt="Security Signal"  >}}
 
-To better understand activity, the Security Signal Panel summarizes tags and attributes from all logs that trigger a signal so you can quickly troubleshoot without having to pivot to Log Explorer. For example, you can determine at a glance the list of IPs attempting to log into a user account, or the AWS accounts and availability zones running the authentication service.
+To better understand activity, the Security Signal Panel summarizes tags and attributes from all logs that trigger a signal so you can troubleshoot without having to pivot to Log Explorer. For example, you can determine at a glance the list of IPs attempting to log into a user account, or the AWS accounts and availability zones running the authentication service.
 
 Below the overview of the signal are tabs with detailed information related to the signal:
 
