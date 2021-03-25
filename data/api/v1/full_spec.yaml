@@ -5063,7 +5063,7 @@ components:
           - service:cassandra
           type: metric alert
       properties:
-        count:
+        counts:
           description: ''
           properties:
             muted:
@@ -16838,6 +16838,16 @@ paths:
           If set, metrics retrieved are those with the corresponding hostname tag.'
         in: query
         name: host
+        required: false
+        schema:
+          type: string
+      - description: 'Filter metrics that have been submitted with the given tags.
+          Supports boolean and wildcard expressions.
+
+          Cannot be combined with other filters.'
+        example: env IN (staging,test) AND service:web
+        in: query
+        name: tag_filter
         required: false
         schema:
           type: string
