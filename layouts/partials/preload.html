@@ -1,7 +1,7 @@
-<link rel="preload" as="font" type="font/woff2" href="{{ site.BaseURL }}fonts/NationalWeb-Light.woff2" crossorigin="anonymous">
-<link rel="preload" as="font" type="font/woff2" href="{{ site.BaseURL }}fonts/NationalWeb-Semibold.woff2" crossorigin="anonymous">
+<link rel="preload" as="font" type="font/woff2" href="{{ .Site.BaseURL }}fonts/NationalWeb-Light.woff2" crossorigin="anonymous">
+<link rel="preload" as="font" type="font/woff2" href="{{ .Site.BaseURL }}fonts/NationalWeb-Semibold.woff2" crossorigin="anonymous">
 
-{{ if eq site.Language.Lang "ja" }}
-    <link rel="preload" as="font" type="font/woff2" href="{{ site.BaseURL }}fonts/web-fonts/noto-sans-jp-v24-latin-300.woff2" crossorigin="anonymous">
-    <link rel="preload" as="font" type="font/woff2" href="{{ site.BaseURL }}fonts/web-fonts/noto-sans-jp-v24-latin-700.woff2" crossorigin="anonymous">
+{{ if eq .Site.Language.Lang "ja" }}
+    <link rel="preload" as="font" type="font/woff2" href="{{ .Site.BaseURL }}fonts/web-fonts/noto-sans-jp-v24-latin-300.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" type="font/woff2" href="{{ .Site.BaseURL }}fonts/web-fonts/noto-sans-jp-v24-latin-700.woff2" crossorigin="anonymous">
 {{ end }}

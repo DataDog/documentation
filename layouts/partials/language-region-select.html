@@ -26,7 +26,7 @@
     <div class="d-flex">
       <p class="text-uppercase">Site</p>
       <a href="/getting_started/site/" class="{{ if ne .Page.Type "api" }}ml-1{{ else }}mr-1{{ end }} d-inline-flex">
-        <img src="{{ site.Params.img_url }}images/icons/help-druids.svg" height="18" width="18" />
+        <img src="{{ .Site.Params.img_url }}images/icons/help-druids.svg" height="18" width="18" />
       </a>
     </div>
     <div class="dropdown bootstrap-dropdown-custom js-region-select">
@@ -36,7 +36,7 @@
         <div class="chevron chevron-up d-none"></div>
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        {{ range sort site.Params.allowedRegions ".weight" "asc" }}
+        {{ range sort .Site.Params.allowedRegions ".weight" "asc" }}
           <a class="dropdown-item" data-value="{{ .value }}">{{ .name }}</a>
         {{ end }}
       </div>

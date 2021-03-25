@@ -18,7 +18,7 @@
 
 {{ $dot := . }}
 
-{{ range $k, $v := site.Params.header_scripts }}
+{{ range $k, $v := .Site.Params.header_scripts }}
 
     {{ range $i, $tag := $v }}
 
