@@ -4,7 +4,7 @@
 <section>
     <ul>
         {{ $data := .Data }}
-        {{ range $key, $value := index site.Taxonomies "video-categories" }}
+        {{ range $key, $value := index .Site.Taxonomies "video-categories" }}
         {{ $link := absLangURL (print "video-categories/" ($key | urlize) "/") }}
         <li><a href="{{ $link }}">{{ $key }}</a> - ({{ len $value }})</li>
         {{ end }}

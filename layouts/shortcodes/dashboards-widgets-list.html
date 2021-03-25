@@ -6,7 +6,7 @@
 </style>
 <div class="whatsnext">
     <ul class="list-group">
-        {{ range site.Data.api.v1.full_spec_deref.components.schemas.WidgetDefinition.oneOf }}
+        {{ range $dot.Site.Data.api.v1.full_spec_deref.components.schemas.WidgetDefinition.oneOf }}
           {{ $s := .properties.type.default }}
           {{ $pageExists := false }}
           {{ $filename := (lower (replace (humanize $s) " " "_" )) }}

@@ -6,9 +6,9 @@
 
     {{ range .codeLangs }}
         <li class="nav-item" style="margin-bottom: 6px;">
-            <a class="nav-link mr-1 js-code-example-link" data-code-lang-trigger="{{ . }}" href="#">{{ index site.Params.code_language_ids . }}</a>
+            <a class="nav-link mr-1 js-code-example-link" data-code-lang-trigger="{{ . }}" href="#">{{ index $.context.Site.Params.code_language_ids . }}</a>
         </li>
         {{ $count = add $count 1 }}
     {{ end}}
 
-</ul>
+</ul>  

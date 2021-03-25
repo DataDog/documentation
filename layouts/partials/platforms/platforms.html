@@ -4,12 +4,12 @@
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $dot.Page.Lang "en"}}
     {{ if (fileExists (print "data/partials/platforms." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index site.Data.partials (print "platforms." $dot.Page.Lang)) }}
+      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "platforms." $dot.Page.Lang)) }}
     {{ else }}
-      {{ $.Scratch.Set "data" site.Data.partials.platforms }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
     {{ end }}
 {{ else }}
-    {{ $.Scratch.Set "data" site.Data.partials.platforms }}
+    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
 
@@ -52,7 +52,7 @@
               <a class="card" href="{{ .link | absLangURL }}">
                   <div class="card-body text-center">
                       {{ $src := (print "icons/" .image)}}
-                      {{ $url := (print (site.Params.img_url) "images/" $src "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                      {{ $url := (print ($dot.Site.Params.img_url) "images/" $src "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                       <picture class="mx-auto">
                           <source srcset="{{ $url }}&w=138 1x, {{ $url }}&w=138&dpr=2 2x" media="(min-width: 1200px)">
                           <source srcset="{{ $url }}&w=108 1x, {{ $url }}&w=108&dpr=2 2x" media="(min-width: 992px)">
