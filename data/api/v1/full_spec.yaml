@@ -16841,6 +16841,16 @@ paths:
         required: false
         schema:
           type: string
+      - description: 'Filter metrics that have been submitted with the given tags.
+          Supports boolean and wildcard expressions.
+
+          Cannot be combined with other filters.'
+        example: env IN (staging,test) AND service:web
+        in: query
+        name: tag_filter
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
