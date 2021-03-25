@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
+<html lang="{{ site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" data-env="{{site.Params.environment}}" data-commit-ref="{{ site.Params.branch }}" style="opacity:0" class="{{ if or site.Params.announcement_banner.link site.Params.announcement_banner.desktop_message }}banner{{ end }}">
 
 <head>
         {{ partial "header-scripts.html" . }}
@@ -20,7 +20,7 @@
         {{- partial "meta.html" . -}}
         {{- end -}}
 
-        {{ partial "css.html" . }}
+        {{ partialCached "css.html" . }}
 </head>
 
 {{ $dot := . }}
@@ -29,12 +29,12 @@
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $dot.Page.Lang "en"}}
     {{ if (fileExists (print "data/partials/home." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "home." $dot.Page.Lang)) }}
+      {{ $.Scratch.Set "data" (index site.Data.partials (print "home." $dot.Page.Lang)) }}
     {{ else }}
-      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
+      {{ $.Scratch.Set "data" site.Data.partials.home }}
     {{ end }}
 {{ else }}
-    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
+    {{ $.Scratch.Set "data" site.Data.partials.home }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
 
@@ -42,7 +42,7 @@
 
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{- $customClass := $.Params.customclass -}}
-<body class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }}">
+<body class="{{ site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }}">
 
 
     {{ partial "header/header.html" . }}
@@ -113,13 +113,9 @@
     </main>
 
     {{ partial "footer/footer.html" . }}
-
     {{ partial "footer-scripts.html" . }}
-
     {{ partial "footer-js-dd-docs-methods" . }}
-
     {{ partial "preview_banner/preview_banner" . }}
-
-    {{ partial "javascript.html" . }}
+    {{ partialCached "javascript.html" . }}
 </body>
 </html>

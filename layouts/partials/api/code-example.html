@@ -14,7 +14,7 @@
 {{ with $resourcePage.Resources.Match (printf "%s%s" $operationid ".*" ) }}
     {{ range . }}
       {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-      {{ $lang := index $context.Page.Site.Params.code_languages $file_extension }}
+      {{ $lang := index site.Params.code_languages $file_extension }}
       {{ $codeLangs = $codeLangs | append $lang.name }}
     {{ end }}
 {{ end }}
@@ -23,7 +23,7 @@
 
 {{ $count := 0 }}
 {{ $file_extension := "sh" }}
-{{ $lang := index $context.Site.Params.code_languages "sh" }}
+{{ $lang := index site.Params.code_languages "sh" }}
 <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}" >
     <div class="code-snippet">
       <div class="code-button-wrapper position-absolute">
@@ -68,7 +68,7 @@
     {{ range . }}
         {{ $file_content := .Content }}
         {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-        {{ $lang := index $context.Site.Params.code_languages $file_extension }}
+        {{ $lang := index site.Params.code_languages $file_extension }}
 
         {{ if ne $file_extension "sh"}}
           <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
@@ -83,7 +83,7 @@
             <p>First <a href="{{ "api/latest/" | absLangURL }}?code-lang={{ $lang.name }}">install the library and its dependencies</a> and then save the example to <code>{{ $lang.example_file }}</code> and run following commands:</p>
 
             <pre class="chroma">
-              <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="kn">export</span> <span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"{{- range $context.Site.Params.allowedRegions -}}
+              <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="kn">export</span> <span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"{{- range site.Params.allowedRegions -}}
                 {{- if not (index ($endpoint.regions) .value) -}}
                   <span class="d-none" data-region="{{ .value }}">Not supported in the {{ .name }} region</span>
                 {{- else -}}

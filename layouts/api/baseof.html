@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}"
-  data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0">
+<html lang="{{ site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}"
+  data-env="{{site.Params.environment}}" data-commit-ref="{{ site.Params.branch }}" style="opacity:0">
 
 <head>
-
   {{ partial "header-scripts.html" . }}
-
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}
   {{ partial "preload.html" . }}
@@ -27,7 +25,7 @@
 
 <body
 data-spy="scroll" data-target="#navbar-example2" data-offset="5"
-  class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
+  class="{{ site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
 
   {{ partial "header/header.html" . }}
 
@@ -44,7 +42,6 @@ data-spy="scroll" data-target="#navbar-example2" data-offset="5"
   </div>
 
   {{ partial "footer/footer.html" . }}
-
   {{ partial "footer-scripts.html" . }}
   {{ partial "footer-js-dd-docs-methods" . }}
   {{ partial "preview_banner/preview_banner" . }}

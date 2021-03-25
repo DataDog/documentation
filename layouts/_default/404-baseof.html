@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}"
-  data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
-  class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
+<html lang="{{ site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}"
+  data-env="{{site.Params.environment}}" data-commit-ref="{{ site.Params.branch }}" style="opacity:0"
+  class="{{ if or site.Params.announcement_banner.link site.Params.announcement_banner.desktop_message }}banner{{ end }}">
 
 <head>
   {{ partial "header-scripts.html" . }}
@@ -22,12 +22,12 @@
   {{- partial "meta.html" . -}}
   {{- end -}}
 
-  {{ partial "css.html" . }}
+  {{ partialCached "css.html" . }}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 
 <body
-  class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
+  class="{{ site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
 
   <div class="greyside">
     <div class="container h-100">
@@ -51,11 +51,10 @@
   </div>
 
   {{ partial "footer/footer.html" . }}
-
   {{ partial "footer-scripts.html" . }}
   {{ partial "footer-js-dd-docs-methods" . }}
   {{ partial "preview_banner/preview_banner" . }}
-
+  {{ partialCached "javascript.html" . }}
 </body>
 
 </html>

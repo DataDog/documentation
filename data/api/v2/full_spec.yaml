@@ -6908,6 +6908,27 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: 'Filter metrics that have been submitted with the given tags.
+          Supports boolean and wildcard expressions.
+
+          Cannot be combined with other filters.'
+        example: env IN (staging,test) AND service:web
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          type: string
+      - description: 'The number of seconds of look back (from now) to apply to a
+          filter[tag] query.
+
+          Defaults value is 3600 (1 hour), maximum value is 172,800 (2 days).'
+        example: 3600
+        in: query
+        name: window[seconds]
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:

@@ -3,7 +3,7 @@
 <!-- attempts to load a data file at the same path/filename as md file e.g content/foo/bar.md will try look for data/foo/bar.yaml -->
 {{ $.Scratch.Set "data" "" }}
 {{ if (fileExists (print "data/" $dot.Page.Lang "/" $dot.Page.File.Dir (replace $dot.Page.File.TranslationBaseName "-" "_") ".yaml")) }}
-    {{ $.Scratch.Set "data" (index $dot.Page.Site.Data $dot.Page.Lang) }}
+    {{ $.Scratch.Set "data" (index site.Data $dot.Page.Lang) }}
     {{ range $k, $v := (split $dot.Page.File.Dir "/") }}
         {{ if ne $v "/"}}
             {{ if ne $v ""}}

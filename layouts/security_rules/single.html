@@ -46,7 +46,7 @@
 	</div>
 
 	{{ if isset .Params "source" }}
-		{{ with .Site.GetPage (print "/" $meta_image.rellink) }}
+		{{ with site.GetPage (print "/" $meta_image.rellink) }}
 			<p>Set up the <a href="{{ $meta_image.link }}">{{ $dot.Params.source }}</a> integration.</p>
 		{{ end }}
 	{{ end }}
