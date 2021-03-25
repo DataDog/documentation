@@ -1,1 +1,1 @@
-{{- $dot := .context -}}{{- with resources.Get .src  -}}{{- $perm := ( . | resources.Fingerprint "md5").RelPermalink -}}{{- print (strings.TrimRight "/" $dot.Site.Params.img_url) $perm -}}{{- end -}}
+{{- $dot := .context -}}{{- with resources.Get .src  -}}{{- $perm := ( . | resources.Fingerprint "md5").RelPermalink -}}{{- print (strings.TrimRight "/" site.Params.img_url) $perm -}}{{- end -}}

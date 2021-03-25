@@ -14,18 +14,18 @@
 
 {{ $integration := $.Scratch.Get "integration" }}
 
-{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.integrations) }}
+{{ if or (not (eq site.Params.environment "development")) (site.Data.integrations) }}
 
   <!-- get lang specific data file -->
   {{ $.Scratch.Set "data" "" }}
   {{ if ne $.Page.Lang "en"}}
       {{ if (fileExists (print "data/integrations/" $integration "." $.Page.Lang ".yaml")) }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations (print $integration "." $.Page.Lang)) }}
+        {{ $.Scratch.Set "data" (index site.Data.integrations (print $integration "." $.Page.Lang)) }}
       {{ else }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
+        {{ $.Scratch.Set "data" (index site.Data.integrations $integration) }}
       {{ end }}
   {{ else }}
-      {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
+      {{ $.Scratch.Set "data" (index site.Data.integrations $integration) }}
   {{ end }}
   {{ $data := ($.Scratch.Get "data") }}
 

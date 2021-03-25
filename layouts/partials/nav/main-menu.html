@@ -1,13 +1,13 @@
 {{ $dot := . }}
 {{ $ctx := . }}
-{{ $menu := .Site.Menus.main }}
+{{ $menu := site.Menus.main }}
 {{/* Menu identifiers to apply class to */}}
 {{ $excludeAsyc := (slice "api" "dev_tools_metrics_api" "dev_tools_events_api" "integrations_top_level" "tracing api" "watchdog_top_level" "glossary_top_level" "video_top_level" "help_top_level" "other_integrations") }}
 
-{{ $path := (printf "%s/" $.Site.Params.branch) }}
+{{ $path := (printf "%s/" site.Params.branch) }}
 
 {{/* account for branch name in preview site for data-path */}}
-{{ if eq $.Site.Params.environment "preview"}}          
+{{ if eq site.Params.environment "preview"}}
     {{ $.Scratch.Set "branch_path" $path }}
 {{ else }}
     {{ $.Scratch.Set "branch_path" "" }}
@@ -17,7 +17,7 @@
 
 <ul class="list-unstyled">
     {{ $currentPage := . }}
-    {{ range .Site.Menus.main }}
+    {{ range site.Menus.main }}
         {{ if .HasChildren }}
             <li class="nav-top-level {{ if (not (in $excludeAsyc .Identifier)) }} js-load {{ end }}
             {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">

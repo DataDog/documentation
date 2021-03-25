@@ -1,4 +1,4 @@
-{{ $permissions_data := $.Site.Data.permissions }}
+{{ $permissions_data := site.Data.permissions }}
 {{ $single_permission_group := .Get "group" }}
 
 {{/* Passing a single permission group name allows us to render one set of permissions at a time.   Currently this is used to separate General from Advanced Permissions on the account_management/rbac/permissions page, but could be re-used elsewhere in the future. */}}
