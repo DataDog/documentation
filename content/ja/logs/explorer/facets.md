@@ -227,7 +227,7 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 [20]: /ja/integrations/python/
 [21]: /ja/logs/processing/processors/?tab=ui#arithmetic-processor
 [22]: /ja/logs/explorer/saved_views/
-[23]: /ja/logs/log_collection/#attributes-and-tags
+[23]: /ja/logs/processing/attributes_naming_convention/#reserved-attributes
 [24]: /ja/logs/processing/attributes_naming_convention/
 [25]: /ja/logs/indexes/#indexes
 [26]: /ja/logs/archives/rehydrating/
