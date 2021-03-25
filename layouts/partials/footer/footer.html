@@ -5,12 +5,12 @@
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $dot.Page.Lang "en"}}
     {{ if (fileExists (print "data/partials/footer." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "footer." $dot.Page.Lang)) }}
+      {{ $.Scratch.Set "data" (index site.Data.partials (print "footer." $dot.Page.Lang)) }}
     {{ else }}
-      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
+      {{ $.Scratch.Set "data" site.Data.partials.footer }}
     {{ end }}
 {{ else }}
-    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
+    {{ $.Scratch.Set "data" site.Data.partials.footer }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
 
@@ -35,38 +35,38 @@
                     {{ end}}
                 </a>
                 <p class="font-weight-semibold text-center text-lg-left mb-0">Download mobile app</p>
-                
+
                 <div class="d-flex d-lg-none justify-content-center ">
                     <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-1" aria-label="Apple Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "app-store-badge.svg" )}}
-                    </a>             
+                    </a>
                     <a href="https://play.google.com/store/apps/details?id=com.datadog.app" aria-label="Google Play Store Link">
-                        {{ partial "svg" (dict "context" $dot "src" "google-play-badge.svg" )}}  
+                        {{ partial "svg" (dict "context" $dot "src" "google-play-badge.svg" )}}
                     </a>
                 </div>
 
                 <div class="d-none d-lg-flex justify-content-lg-start">
                     <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-2" aria-label="Apple Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "apple.svg" )}}
-                    </a>             
+                    </a>
                     <a href="https://play.google.com/store/apps/details?id=com.datadog.app" aria-label="Google Play Store Link">
-                        {{ partial "svg" (dict "context" $dot "src" "google-play.svg" )}}  
+                        {{ partial "svg" (dict "context" $dot "src" "google-play.svg" )}}
                     </a>
                 </div>
             </div>
             <div class="col-12 col-lg-6  mt-3 mt-lg-0">
                 <p class="border-bottom border-gray mb-0">{{ i18n "product" }}</p>
 
-                {{ $lenFooterProduct := len .Site.Menus.footer_product }}
+                {{ $lenFooterProduct := len site.Menus.footer_product }}
                 {{ $secondHalfFooterProduct := div $lenFooterProduct 2 }}
                 {{ $firstHalfFooterProduct := sub $lenFooterProduct  $secondHalfFooterProduct }}
 
                 <div class="row">
                     <div class="col-6 col-lg-4">
                         <ul class="footer-menu mt-1">
-                            {{ range first $firstHalfFooterProduct .Site.Menus.footer_product }}
+                            {{ range first $firstHalfFooterProduct site.Menus.footer_product }}
                                 <li>
-                                    {{ if eq $.Site.Params.full_translation true }}
+                                    {{ if eq site.Params.full_translation true }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                     {{ else }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
@@ -77,9 +77,9 @@
                     </div>
                     <div class="col-6 col-lg-4">
                         <ul class="footer-menu mt-1">
-                            {{ range last $secondHalfFooterProduct .Site.Menus.footer_product }}
+                            {{ range last $secondHalfFooterProduct site.Menus.footer_product }}
                                 <li>
-                                    {{ if eq $.Site.Params.full_translation true }}
+                                    {{ if eq site.Params.full_translation true }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                     {{ else }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
@@ -94,9 +94,9 @@
 
                     <div class="d-none d-lg-block col-lg-4 ">
                         <ul class="footer-menu mt-1">
-                            {{ range .Site.Menus.footer_product_three }}
+                            {{ range site.Menus.footer_product_three }}
                             <li>
-                                {{ if eq $.Site.Params.full_translation true }}
+                                {{ if eq site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
@@ -105,12 +105,12 @@
                             {{end}}
                         </ul>
                     </div>
-                    
+
                     <div class="col-6 d-lg-none">
                         <ul class="footer-menu mt-1">
-                            {{ range first 3 .Site.Menus.footer_product_three }}
+                            {{ range first 3 site.Menus.footer_product_three }}
                             <li>
-                                {{ if eq $.Site.Params.full_translation true }}
+                                {{ if eq site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
@@ -121,9 +121,9 @@
                     </div>
                     <div class="col-6 d-lg-none">
                         <ul class="footer-menu mt-1">
-                            {{ range last 2 .Site.Menus.footer_product_three }}
+                            {{ range last 2 site.Menus.footer_product_three }}
                             <li>
-                                {{ if eq $.Site.Params.full_translation true }}
+                                {{ if eq site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
@@ -132,7 +132,7 @@
                             {{end}}
                         </ul>
                     </div>
-                   
+
                 </div>
             </div>
             <div class="col-12 col-lg-3 mt-3 mt-lg-0">
@@ -140,9 +140,9 @@
                     <div class="col-6 col-lg-8">
                         <p class="border-bottom border-gray">{{ i18n "about" }}</p>
                         <ul class="footer-menu mt-1">
-                            {{ range .Site.Menus.footer_about }}
+                            {{ range site.Menus.footer_about }}
                             <li>
-                                {{ if eq $.Site.Params.full_translation true }}
+                                {{ if eq site.Params.full_translation true }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                 {{ else }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
@@ -154,18 +154,18 @@
                     <div class="col-6 col-lg-4">
                         <p class="border-bottom border-gray">{{ i18n "blog" }}</p>
                         <ul class="footer-menu mt-1">
-                            {{ range .Site.Menus.footer_blog }}
+                            {{ range site.Menus.footer_blog }}
                             <li>
                                 {{ if eq (substr .URL 0 1) "/" }}
                                     <!-- to specifig lang page e.g /es/blog -->
-                                    {{ if $.Site.Params.branch }}
-                                        {{ $.Scratch.Set "flink" ( (print "/" $.Site.Params.branch .URL) | absURL) }}
+                                    {{ if site.Params.branch }}
+                                        {{ $.Scratch.Set "flink" ( (print "/" site.Params.branch .URL) | absURL) }}
                                     {{ else }}
                                         {{ $.Scratch.Set "flink" ( .URL | absURL) }}
                                     {{ end }}
                                     {{ partial "footer_link" (dict "footer_link" . "base_url" ($.Scratch.Get "flink") ) }}
                                 {{ else }}
-                                    {{ if eq $.Site.Params.full_translation true }}
+                                    {{ if eq site.Params.full_translation true }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
                                     {{ else }}
                                         {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
@@ -175,7 +175,7 @@
                             {{end}}
                         </ul>
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -226,8 +226,8 @@
                         </div>
                         <div class="col-6 col-lg-2 mb-1 mb-lg-0 d-flex justify-content-lg-end">
                             <ul class="footer-menu d-flex  align-items-center">
-                                {{ range $index, $value := .Site.Menus.footer_social }}
-                                <li class="d-flex align-items-center {{ if ne $index ( sub (len $.Site.Menus.footer_social) 1 ) }} mr-2 mr-lg-1 mr-xl-2 {{end}}">
+                                {{ range $index, $value := site.Menus.footer_social }}
+                                <li class="d-flex align-items-center {{ if ne $index ( sub (len site.Menus.footer_social) 1 ) }} mr-2 mr-lg-1 mr-xl-2 {{end}}">
                                     <a class="d-flex align-items-center" href="{{ .URL }}" aria-label="{{ .Name }} link">{{ partial "svg" (dict "context" $dot "src" .Pre  )}}  </a>
                                 </li>
                                 {{end}}
@@ -236,12 +236,12 @@
                         <div class="col-12 col-lg-6 order-lg-first d-flex align-items-center" style="transform: translateY(-2px);">
                             <span class="copyright">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}} &nbsp;</span>
                             <ul class="footer-menu d-flex align-items-center">
-                                {{ range $index, $v := .Site.Menus.footer_sub }}
+                                {{ range $index, $v := site.Menus.footer_sub }}
                                     <li class="d-flex align-items-center">
-                                        {{ if eq $.Site.Params.full_translation true }}
-                                            <a href="{{ "" | absLangURL }}{{.URL}}">{{$v.Name}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
+                                        {{ if eq site.Params.full_translation true }}
+                                            <a href="{{ "" | absLangURL }}{{.URL}}">{{$v.Name}}</a>{{ if ne $index ( sub (len site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
                                         {{ else }}
-                                            <a href="{{ "" | absURL }}{{.URL}}">{{$v.Name}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
+                                            <a href="{{ "" | absURL }}{{.URL}}">{{$v.Name}}</a>{{ if ne $index ( sub (len site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
                                         {{ end }}
                                     </li>
                                 {{ end }}
@@ -251,8 +251,8 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
     </div>
 </footer>
 

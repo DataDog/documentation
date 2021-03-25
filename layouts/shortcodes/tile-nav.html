@@ -2,7 +2,7 @@
     <div class="card-deck">
         <a class="card agent" href="{{ "agent/" | absLangURL }}">
             <div class="card-body text-center">
-                {{ $url := (print (.Site.Params.img_url) "images/icons/agent.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                {{ $url := (print (site.Params.img_url) "images/icons/agent.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
                     <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
                     <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
@@ -14,7 +14,7 @@
         </a>
         <a class="card integrations" href="{{ "integrations/" | absLangURL }}">
             <div class="card-body text-center">
-                {{ $url := (print (.Site.Params.img_url)  "images/icons/integrations.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                {{ $url := (print (site.Params.img_url)  "images/icons/integrations.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
                     <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
                     <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
@@ -27,7 +27,7 @@
         <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
         <a class="card graphing" href="{{ "graphing/" | absLangURL }}">
             <div class="card-body text-center">
-                {{ $url := (print (.Site.Params.img_url) "images/icons/graphing.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                {{ $url := (print (site.Params.img_url) "images/icons/graphing.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
                     <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
                     <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
@@ -42,7 +42,7 @@
         <div class="w-100 d-none d-xl-block"><!-- wrap every 3 on xl--></div>
         <a class="card alerting" href="{{ "monitoring/" | absLangURL }}">
             <div class="card-body text-center">
-                {{ $url := (print (.Site.Params.img_url) "images/icons/alerting.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                {{ $url := (print (site.Params.img_url) "images/icons/alerting.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
                     <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
                     <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
@@ -55,7 +55,7 @@
         <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
         <a class="card tracing" href="{{ "tracing/" | absLangURL }}">
             <div class="card-body text-center">
-                {{ $url := (print (.Site.Params.img_url) "images/icons/tracing_apm.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                {{ $url := (print (site.Params.img_url) "images/icons/tracing_apm.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
                     <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
                     <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">
@@ -67,7 +67,7 @@
         </a>
         <a class="card developers" href="{{ "developers/" | absLangURL }}">
             <div class="card-body text-center">
-                {{ $url := (print (.Site.Params.img_url) "images/icons/developers.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                {{ $url := (print (site.Params.img_url) "images/icons/developers.png"  "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
                     <source srcset="{{ $url }}&w=80 1x, {{ $url }}&w=80&dpr=2 2x" media="(min-width: 576px)">
                     <source srcset="{{ $url }}&w=47 1x, {{ $url }}&w=47&dpr=2 2x" media="(min-width: 0px)">

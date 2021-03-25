@@ -7,7 +7,7 @@
 {{ else if $.Params.title }}
     {{ $.Scratch.Add "meta_title" $.Params.title }}
 {{ else }}
-    {{ $.Scratch.Add "meta_title" .Site.Params.meta_title }}
+    {{ $.Scratch.Add "meta_title" site.Params.meta_title }}
 {{ end }}
 {{ $meta_title := $.Scratch.Get "meta_title" }}
 
@@ -16,7 +16,7 @@
 {{ else if $.Params.Description }}
     {{ $.Scratch.Add "meta_desc" $.Params.description }}
 {{ else }}
-    {{ $.Scratch.Add "meta_desc" .Site.Params.meta_description }}
+    {{ $.Scratch.Add "meta_desc" site.Params.meta_description }}
 {{ end }}
 {{ $meta_desc := $.Scratch.Get "meta_desc" }}
 
@@ -26,21 +26,21 @@
 <meta itemprop="description" content="{{ $meta_desc | safeHTML }}">
 
 <!-- Twitter Card data -->
-{{ if $meta_image}}<meta name="twitter:card" content="{{.Site.Params.img_url}}images{{ $meta_image }}">{{ end }}
+{{ if $meta_image}}<meta name="twitter:card" content="{{site.Params.img_url}}images{{ $meta_image }}">{{ end }}
 <meta name="twitter:site" content="@datadoghq">
 <meta name="twitter:title" content="{{ $meta_title | safeHTML }}">
 <meta name="twitter:description" content="{{ $meta_desc | safeHTML }}">
 <meta name="twitter:creator" content="@datadoghq">
 <!-- Twitter summary card with large image must be at least 280x150px -->
-{{ if $meta_image}}<meta name="twitter:image:src" content="{{.Site.Params.img_url}}images{{ $meta_image }}">{{ end }}
+{{ if $meta_image}}<meta name="twitter:image:src" content="{{site.Params.img_url}}images{{ $meta_image }}">{{ end }}
 
 <!-- Open Graph data -->
 <meta property="og:title" content="{{ $meta_title }}"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="{{ $.Permalink }}"/>
-{{ if $meta_image}}<meta property="og:image" content="{{.Site.Params.img_url}}images{{ $meta_image }}"/>{{ else }}<meta property="og:image" content="{{.Site.Params.img_url}}{{- partial "imgurl.html" (dict "root" $dot "src" "dd-docs-meta-image.png" ) -}}"/>{{ end }}
+{{ if $meta_image}}<meta property="og:image" content="{{site.Params.img_url}}images{{ $meta_image }}"/>{{ else }}<meta property="og:image" content="{{site.Params.img_url}}{{- partial "imgurl.html" (dict "root" $dot "src" "dd-docs-meta-image.png" ) -}}"/>{{ end }}
 <meta property="og:description" content="{{ $meta_desc }}"/>
-<meta property="og:site_name" content="{{ .Site.Params.site_name }}"/>
+<meta property="og:site_name" content="{{ site.Params.site_name }}"/>
 <meta property="article:author" content="Datadog"/>
 
 <!-- Address Bar Matches Brand Colors -->

@@ -3,7 +3,7 @@
 {{ $apiMenu := "api" }}
 
 <!-- if no api menu in other languages fallback to english -->
-{{ with index .Site.Menus $apiMenu }}
+{{ with index site.Menus $apiMenu }}
   {{ $dot.Scratch.Set "menu" . }}
 {{ else }}
   {{ $dot.Scratch.Set "menu" (index .Sites.First.Menus $apiMenu) }}

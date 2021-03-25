@@ -1,8 +1,8 @@
 {{ $dot := . }}
 {{ $base := "" | absLangURL }}
-{{ $announce := .Site.Params.announcement_banner }}
+{{ $announce := site.Params.announcement_banner }}
 {{ $btnClass := "btn btn-gradient knockout-around js-cta-topRight" }}
-{{ $SignUpClass := .Site.Params.SignUpClass }}
+{{ $SignUpClass := site.Params.SignUpClass }}
 {{ if $announce }}
     {{ partial "announcement_banner/announcement_banner.html" . }}
 {{ end }}
@@ -12,7 +12,7 @@
         <div class="mainnav d-none d-xl-flex row align-items-center no-gutters">
             <div class="col">
                 <ul class="nav navbar-left">
-                    {{ range .Site.Menus.main_left   }}
+                    {{ range site.Menus.main_left   }}
                     {{ if .HasChildren }}
                     <li class="dropdown {{ .Identifier }}-dropdown nav-item">
                         <a href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}" class="nav-link dropdown {{ if eq .Name "Solutions" }} solutions{{ end }}">{{.Name}}</a>
@@ -88,8 +88,8 @@
             <div class="col-1 text-center">
                 {{ $allowedLangs := (slice "ja") }}
                 {{ .Scratch.Set "logoURL" "https://www.datadoghq.com/" }}
-                {{ if in $allowedLangs .Site.Language.Lang }}
-                  {{ .Scratch.Set "logoURL" (print "https://www.datadoghq.com/" .Site.Language.Lang "/") }}
+                {{ if in $allowedLangs site.Language.Lang }}
+                  {{ .Scratch.Set "logoURL" (print "https://www.datadoghq.com/" site.Language.Lang "/") }}
                 {{ end }}
                 {{ $logoURL := .Scratch.Get "logoURL" }}
                 <a href="{{ $logoURL }}" id="logo">
@@ -100,7 +100,7 @@
             <div class="col">
                 <!-- Menu: Right menu items -->
 <ul class="nav justify-content-end">
-  {{ range .Site.Menus.main_right }}
+  {{ range site.Menus.main_right }}
   {{ if .HasChildren }}
       <li class="dropdown nav-item">
         <a href="{{- partial "menulink" (slice .Identifier ( .URL ) $base $dot ) | safeURL -}}" class="dropdown nav-link">{{.Name}}</a>
