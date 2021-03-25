@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}"
-  data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
-  class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
+<html lang="{{ site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}"
+  data-env="{{ site.Params.environment}}" data-commit-ref="{{ site.Params.branch }}" style="opacity:0"
+  class="{{ if or site.Params.announcement_banner.link site.Params.announcement_banner.desktop_message }}banner{{ end }}">
 
 <head>
   {{ partial "header-scripts.html" . }}
@@ -11,7 +11,7 @@
   {{ $dd_logs := resources.Get "node_modules/datadog-logs.js" }}
   {{ $dd_libs_js := slice $dd_rum $dd_logs | resources.Concat "js/dd-libs.js" }}
   <script>{{ $dd_libs_js.Content | safeJS }}</script>
-  <script src="{{ (index $.Site.Data.manifest "dd-browser-logs-rum.js") | relURL }}"></script>
+  <script src="{{ (index site.Data.manifest "dd-browser-logs-rum.js") | relURL }}"></script>
 
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}
@@ -24,7 +24,7 @@
   {{- partial "hreflang.html" . -}}
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
-  <link rel="stylesheet" href="{{ (index $.Site.Data.manifest "main-dd-css.css") | relURL }}">
+  <link rel="stylesheet" href="{{ (index site.Data.manifest "main-dd-css.css") | relURL }}">
 
   {{- if ne $.Params.disable_opengraph_meta_tags true -}}
   {{- partial "meta.html" . -}}
@@ -34,7 +34,7 @@
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 
 <body
-  class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
+  class="{{ site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
 
   <div class="greyside">
     <div class="container h-100">
@@ -59,8 +59,8 @@
 
   {{ partial "footer/footer.html" . }}
 
-  <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
-  <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>
+  <script src="{{ (index site.Data.manifest "vendor.js") | relURL}}"></script>
+  <script src="{{ (index site.Data.manifest "main-dd-js.js") | relURL}}"></script>
 
   {{ partial "footer-scripts.html" . }}
   {{ partial "footer-js-dd-docs-methods" . }}

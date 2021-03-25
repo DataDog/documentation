@@ -14,18 +14,18 @@
 
 {{ $integration := $.Scratch.Get "integration" }}
 
-{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.service_checks) }}
+{{ if or (not (eq site.Params.environment "development")) (site.Data.service_checks) }}
 
   <!-- get lang specific data file -->
   {{ $.Scratch.Set "data" "" }}
   {{ if ne $.Page.Lang "en"}}
       {{ if (fileExists (print "data/service_checks/" $integration "." $.Page.Lang ".json")) }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.service_checks (print $integration "." $.Page.Lang)) }}
+        {{ $.Scratch.Set "data" (index site.Data.service_checks (print $integration "." $.Page.Lang)) }}
       {{ else }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.service_checks $integration) }}
+        {{ $.Scratch.Set "data" (index site.Data.service_checks $integration) }}
       {{ end }}
   {{ else }}
-      {{ $.Scratch.Set "data" (index $.Page.Site.Data.service_checks $integration) }}
+      {{ $.Scratch.Set "data" (index site.Data.service_checks $integration) }}
   {{ end }}
   {{ $data := ($.Scratch.Get "data") }}
 

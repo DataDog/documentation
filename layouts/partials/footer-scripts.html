@@ -18,7 +18,7 @@
 
 {{ $dot := . }}
 
-{{ range $k, $v := .Site.Params.footer_scripts }}
+{{ range $k, $v := site.Params.footer_scripts }}
 
     {{ range $i, $tag := $v }}
 

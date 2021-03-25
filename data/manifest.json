@@ -1,11 +1,11 @@
 {
-  "@babel/polyfill.js": "static/@babel/polyfill.js",
-  "api-redirect.js": "static/api-redirect.js",
+  "@babel/polyfill.js": "static/@babel/polyfill.69b0d.js",
+  "api-redirect.js": "static/api-redirect.5f3f2.js",
   "dd-browser-logs-rum.js": "static/dd-browser-logs-rum.js",
-  "lang-redirects.js": "static/lang-redirects.js",
-  "main-dd-css.css": "static/main-dd-css.css",
-  "main-dd-css.js": "static/main-dd-css.js",
-  "main-dd-js.js": "static/main-dd-js.js",
-  "region-redirects.js": "static/region-redirects.js",
-  "vendor.js": "static/vendor.js"
+  "lang-redirects.js": "static/lang-redirects.d2587.js",
+  "main-dd-css.css": "static/main-dd-css.16897.css",
+  "main-dd-css.js": "static/main-dd-css.be655.js",
+  "main-dd-js.js": "static/main-dd-js.7d996.js",
+  "region-redirects.js": "static/region-redirects.76ac2.js",
+  "vendor.js": "static/0.js"
 }

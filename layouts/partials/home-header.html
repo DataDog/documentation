@@ -4,12 +4,12 @@
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $dot.Page.Lang "en"}}
     {{ if (fileExists (print "data/partials/home." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "home." $dot.Page.Lang)) }}
+      {{ $.Scratch.Set "data" (index site.Data.partials (print "home." $dot.Page.Lang)) }}
     {{ else }}
-      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
+      {{ $.Scratch.Set "data" site.Data.partials.home }}
     {{ end }}
 {{ else }}
-    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
+    {{ $.Scratch.Set "data" site.Data.partials.home }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
 
@@ -33,7 +33,7 @@
                         </form>
                 </div>
                 <p class="smaller text-white text-center font-semibold popular-search">
-                    Popular searches: 
+                    Popular searches:
                     {{ $lenList := (len $datafile.popular_searches)}}
                     {{ range $index, $popular_search := (sort $datafile.popular_searches "weight" "asc") }}
                         <a href="{{ $popular_search.link | absLangURL }}">{{ $popular_search.title }}</a>{{ if eq (sub $lenList 2) $index }}, and{{ else if eq (sub $lenList 1) $index }}{{ else }},{{ end}}
