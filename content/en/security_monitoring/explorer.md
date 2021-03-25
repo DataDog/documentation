@@ -49,7 +49,7 @@ Below the overview of the signal are tabs with detailed information related to t
 
 - `Event Attributes` are helpful when triaging and filtering security signals. For example, you may determine that a user or entity triggered a security rule as part of their benign behavior, or that a compliance control shouldn't apply across all of your environments. Click on any attribute in Event Attributes tab to generate the dropdown menu and select **Never trigger signals for **`<value>`**** to fine-tune what is visible within the Security Signals Explorer. You can also filter by or view logs related to an attribute from this menu.
 
-  {{< img src="security_monitoring/explorer/never_trigger_signal.png" alt="Option to never trigger a signal for a set value" >}}
+  {{< img src="security_monitoring/explorer/never_trigger_signal_option.png" alt="Option to never trigger a signal for a set value" >}}
 
 - `Samples` includes a list of log samples to provide context on why the signal triggered. Click on any of the samples to see the full log.
 
