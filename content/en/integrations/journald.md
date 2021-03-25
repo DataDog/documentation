@@ -44,7 +44,7 @@ usermod -a -G systemd-journal dd-agent
 
 To configure this check for an Agent running on a host:
 
-Edit the `journald.d/conf.yaml` file in the in the Agent's `conf.d/` folder at the root of your Agent's directory.
+Add a `journald.d/conf.yaml` file in the in the Agent's `conf.d/` folder at the root of your Agent's directory.
 
 #### Log collection
 
