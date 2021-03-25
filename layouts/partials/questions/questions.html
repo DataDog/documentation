@@ -4,12 +4,12 @@
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $dot.Page.Lang "en"}}
     {{ if (fileExists (print "data/partials/questions." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index site.Data.partials (print "questions." $dot.Page.Lang)) }}
+      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "questions." $dot.Page.Lang)) }}
     {{ else }}
-      {{ $.Scratch.Set "data" site.Data.partials.questions }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.questions }}
     {{ end }}
 {{ else }}
-    {{ $.Scratch.Set "data" site.Data.partials.questions }}
+    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.questions }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
 

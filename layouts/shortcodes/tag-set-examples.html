@@ -1,6 +1,6 @@
 <section id="menu">
     <ul>
-        {{ range $key, $taxonomy := site.Taxonomies.examples }}
+        {{ range $key, $taxonomy := .Site.Taxonomies.examples }}
 
           {{ $examples := where ($taxonomy.Pages) "Section" "examples" }}
 

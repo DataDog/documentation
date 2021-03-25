@@ -1,9 +1,9 @@
 {{ $dot := . }}
 
-{{ printf "%s" site.GetPage "/security_monitoring/default_rules" }}
+{{ printf "%s" .Site.GetPage "/security_monitoring/default_rules" }}
 
 {{/* Comment */}}
-{{ $rules := site.GetPage "/security_monitoring/default_rules/cloudtrail-aws-cloudtrail-configuration-modified.json" }}
+{{ $rules := .Site.GetPage "/security_monitoring/default_rules/cloudtrail-aws-cloudtrail-configuration-modified.json" }}
 
 {{/*  {{ range $rules }}
     <h2>{{ .name }}</h2>
