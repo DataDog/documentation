@@ -4,6 +4,8 @@
     "description": "Datadog Docs built on HUGO",
     "private": true,
     "scripts": {
+        "build:preview": "hugo --buildDrafts --buildFuture --environment live",
+        "build:live": "hugo --buildDrafts --buildFuture --environment preview",
         "build:apiPages": "node -e 'require(\"./assets/js/build-api-pages.js\").init()'",
         "dereference": "node ./assets/js/dereference.js",
         "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true",
@@ -37,6 +39,7 @@
         "del": "4.1.1",
         "docsearch.js": "^2.6.3",
         "fancy-log": "^1.3.3",
+        "hugo-bin": "0.70.0",
         "jquery": "3.5.1",
         "js-cookie": "^2.2.1",
         "js-yaml": "^3.14.1",

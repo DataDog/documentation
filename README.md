@@ -45,8 +45,6 @@ To use the Makefile, create a `Makefile.config`. See the instructions at the top
 After you have a config file, run `make help` to see options:
 
 ```text
-build-live                Build the "live" (read: public-facing) version of the site
-build-preview             Build the preview version of the site
 clean-all                 Clean everything.
 clean-build               Remove build artifacts.
 clean-exe                 Remove execs.
@@ -55,7 +53,6 @@ clean-node                Remove node_modules.
 clean-virt                Remove python virtual env.
 clean                     Clean all make installs.
 hugpython                 Build virtualenv used for tests.
-install-hugo              Install Hugo locally at /usr/local/bin/hugo (only for CI)
 source-helpers            Source the helper functions used in build, test, deploy.
 start-no-pre-build        Build the documentation without automatically pulled content.
 start                     Build the documentation with all external content.

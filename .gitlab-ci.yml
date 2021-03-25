@@ -32,7 +32,6 @@ cache: &cache
       - yarn.lock
   paths:
     - node_modules/
-    - /usr/local/bin/hugo
 
 # ================== templates ================== #
 .base_template: &base_template
@@ -62,7 +61,6 @@ install_dependencies:
     - cp --remove-destination ./sparse-docs/yarn.lock ./yarn.lock
     - yarn install --link-duplicates --frozen-lockfile --cache-folder .yarn
     - rm -rf ./sparse-docs # cleanup runner
-    - make install-hugo
   only:
     changes:
       - yarn.lock
@@ -91,8 +89,7 @@ build_preview:
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
-    - make install-hugo
-    - make build-live
+    - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - in-isolation deploy_preview
@@ -246,8 +243,7 @@ build_live:
     - sync_integration_metrics
     - ./local/bin/py/build/pull_rbac.py $(get_secret 'dd_api_key') $(get_secret 'dd-app-key')
     - placehold_translations
-    - make install-hugo
-    - make build-live
+    - yarn run build:live
     - in-isolation deploy_live
     - create_artifact
     - create_artifact_untracked
