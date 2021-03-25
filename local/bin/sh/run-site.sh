@@ -40,7 +40,7 @@ if [ ${RUN_SERVER} = true ]; then
   npm cache clean --force && yarn install --frozen-lockfile
 
   echo "Starting Hugo in server mode"
-  hugo server --buildDrafts --buildFuture --navigateToChanged --noHTTPCache
+  yarn run serve
 else
 	exit 0
 fi

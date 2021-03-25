@@ -10,6 +10,7 @@
         "dereference": "node ./assets/js/dereference.js",
         "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true",
         "test": "./node_modules/.bin/jest",
+        "serve": "hugo server --buildDrafts --buildFuture --navigateToChanged --noHTTPCache",
         "check-links": "node node_modules/link-checker/dd-link-checker.js"
     },
     "repository": {
@@ -39,7 +40,7 @@
         "del": "4.1.1",
         "docsearch.js": "^2.6.3",
         "fancy-log": "^1.3.3",
-        "hugo-bin": "0.70.0",
+        "hugo-bin-extended": "0.82.0",
         "jquery": "3.5.1",
         "js-cookie": "^2.2.1",
         "js-yaml": "^3.14.1",
