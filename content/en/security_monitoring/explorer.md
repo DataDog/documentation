@@ -35,13 +35,19 @@ Click on any Security Signal to open the Security Signal Panel and see more deta
 
 {{< img src="security_monitoring/explorer/signal_1.png" alt="Security Signal"  >}}
 
-The details you need first when triaging an issue can be found in the top portion of the Security Signal Panel. From here, you can determine the severity of the signal, when it was generated, access the rule settings, and quickly share this signal to a teammate. 
+The details you need first when triaging an issue can be found in the top portion of the Security Signal Panel. From here, you can determine the severity of the signal, when it was generated, access the rule settings, and quickly share this signal to a teammate.
 
-The first seen and last seen date are updated, if new data is made available from the past or the attack continues. In addition, any configured group bys on the rule are displayed in this section. This example rule is configured with a group by of `usr.name`. Finally, any tags which are set on the rule are displayed below the group bys. 
+The first seen and last seen date are updated, if new data is made available from the past or the attack continues. In addition, any configured group bys on the rule are displayed in this section. This example rule is configured with a group by of `usr.name`. Finally, any tags which are set on the rule are displayed below the group bys.
 
 {{< img src="security_monitoring/explorer/signal_2.png" alt="Security Signal"  >}}
 
-Below the overview of the signal are 3 tabs with detailed information related to the signal. The first tab, `Message`, displays the text configured in the rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The second tab, `Samples`, includes a list of log samples to provide context on why the signal triggered. Click on any of the samples to see the full log. The third tab, `Related Signals`, includes a list of other signals which contain the same group by values to assist with triaging the signal.  
+To better understand activity, the Security Signal Panel summarizes tags and attributes from all logs that trigger a signal so you can quickly troubleshoot without having to pivot to Log Explorer. For example, you can determine at a glance the list of IPs attempting to log into a user account, or the AWS accounts and availability zones running the authentication service.
+
+When triaging security signals, you may determine that a user or entity triggered a security rule as part of their benign behavior, or that a compliance control shouldn't apply across all of your environments. Click on any attribute in the Security Signal Panel to generate the dropdown option list and select **Never trigger signals for <value>** to fine-tune what is visible within the Security Signals Explorer.
+
+{{< img src="security_monitoring/explorer/never_trigger_signal.png" alt="Option to never trigger a signal for a set value" >}}
+
+Below the overview of the signal are 3 tabs with detailed information related to the signal. The first tab, `Message`, displays the text configured in the rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The second tab, `Samples`, includes a list of log samples to provide context on why the signal triggered. Click on any of the samples to see the full log. The third tab, `Related Signals`, includes a list of other signals which contain the same group by values to assist with triaging the signal.
 
 ## Visualize your security signals analytics
 
