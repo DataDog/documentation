@@ -1,6 +1,8 @@
 ---
 title: Security and Compliance Monitoring
 kind: documentation
+aliases:
+  - compliance_monitoring
 ---
 
 <div class="alert alert-warning">
