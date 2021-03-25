@@ -34,9 +34,9 @@ You can extend the collection of user interactions by [sending your own custom a
 ## What interactions are being tracked?
 
 The Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
-* Activity is detected within 100ms of click being handled (activity being defined as the start of a network request or a DOM mutation)
-* The click does not lead to a new page being loaded, in which case the Browser SDK will generate a new RUM View event
-* A name can be computed for the action. [Learn more about action naming](#declaring-a-name-for-click-actions)
+* Activity is detected within 100ms of click being handled (activity being defined as the start of a network request or a DOM mutation).
+* The click does not lead to a new page being loaded, in which case the Browser SDK generates a new RUM View event.
+* A name can be computed for the action. ([Learn more about action naming](#declaring-a-name-for-click-actions))
 
 ## Action timing metrics
 
@@ -77,7 +77,7 @@ The RUM library uses various strategies to get a name for click actions. If you 
 ```
 ## Custom actions
 
-Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, we collect a visitor's cart data when they hit the checkout button. The RUM SDK collects the number of items within the cart, the list of items, and how much the cart is worth overall.
+Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM SDK collects a visitor's cart data when they hit the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
