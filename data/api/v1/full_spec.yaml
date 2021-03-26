@@ -10039,6 +10039,35 @@ components:
             $ref: '#/components/schemas/UsageBillableSummaryHour'
           type: array
       type: object
+    UsageComplianceHour:
+      description: Compliance Monitoring usage for a given organization for a given
+        hour.
+      properties:
+        compliance_container_count:
+          description: The total number of compliance container hours from the start
+            of the given hour's month until the given hour.
+          format: int64
+          type: integer
+        compliance_host_count:
+          description: The total number of compliance hosts hours from the start of
+            the given hour's month until the given hour.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+      type: object
+    UsageComplianceResponse:
+      description: The response containing the Compliance Monitoring usage for each
+        hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Compliance Monitoring.
+          items:
+            $ref: '#/components/schemas/UsageComplianceHour'
+          type: array
+      type: object
     UsageCustomReportsAttributes:
       description: The response containing attributes for custom reports.
       properties:
@@ -10689,6 +10718,14 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        compliance_container_count_sum:
+          description: Shows the sum of compliance containers over all hours in the
+            current date for all organizations.
+        compliance_host_count_sum:
+          description: Shows the sum of compliance hosts over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -10871,6 +10908,14 @@ components:
           type: integer
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
+            current date for the given org.
+          format: int64
+          type: integer
+        compliance_container_agg_sum:
+          description: Shows the sum of all compliance containers over all hours in
+            the current date for the given org.
+        compliance_host_agg_sum:
+          description: Shows the sum of all compliance hosts over all hours in the
             current date for the given org.
           format: int64
           type: integer
@@ -11059,6 +11104,14 @@ components:
           type: integer
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        compliance_container_agg_sum:
+          description: Shows the sum of all compliance containers over all hours in
+            the current months for all organizations.
+        compliance_host_agg_sum:
+          description: Shows the sum of all compliance hosts over all hours in the
             current months for all organizations.
           format: int64
           type: integer
@@ -20367,6 +20420,53 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
       summary: Get billable usage across your account
+      tags:
+      - Usage Metering
+      x-undo:
+        type: safe
+  /api/v1/usage/compliance-monitoring:
+    get:
+      description: Get hourly usage for Compliance Monitoring.
+      operationId: GetUsageComplianceMonitoring
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageComplianceResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Compliance Monitoring
       tags:
       - Usage Metering
       x-undo:
