@@ -4967,6 +4967,17 @@ api:
       operationids:
         - GetUsageFargate
       unstable: []
+  - name: Get hourly usage for Compliance Monitoring
+    url: '#get-hourly-usage-for-compliance-monitoring'
+    identifier: get-hourly-usage-for-compliance-monitoring
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageComplianceMonitoring
+      unstable: []
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: get-billable-usage-across-your-account
