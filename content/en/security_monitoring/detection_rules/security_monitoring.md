@@ -44,6 +44,10 @@ Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
 
+#### Advanced options
+
+Click the **Advanced** option to add queries that will **Only trigger a signal when** a value is met, or **Never trigger a signal** when a value is met. For example, if a user is triggering a signal, but their actions are benign and no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under `Never Trigger A Signal`.
+
 #### Joining queries
 
 Joining together logs that span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
@@ -82,6 +86,10 @@ Construct a search query using the same logic as a [log explorer search][1]. Eac
 Select a value to detect, learning duration, and, optionally, define a signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user or IP).
 
 For example, create a query for successful user authentication and set **detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
+
+#### Advanced options
+
+Click the **Advanced** option to add queries that will **Only trigger a signal when** a value is met, or **Never trigger a signal** when a value is met. For example, if a user is triggering a signal, but their actions are benign and no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under `Never Trigger A Signal`.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
