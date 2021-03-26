@@ -1,6 +1,7 @@
 ---
 categories:
   - issue tracking
+  - notification
 ddtype: crawler
 dependencies: []
 description: Faites en sorte que vos alertes Datadog génèrent et mettent à jour automatiquement les tickets.
