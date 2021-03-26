@@ -874,6 +874,10 @@
     "description": "Get billable usage across your account.",
     "summary": "Get billable usage across your account"
   },
+  "GetUsageComplianceMonitoring": {
+    "description": "Get hourly usage for Compliance Monitoring.",
+    "summary": "Get hourly usage for Compliance Monitoring"
+  },
   "GetUsageFargate": {
     "description": "Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).",
     "summary": "Get hourly usage for Fargate"
