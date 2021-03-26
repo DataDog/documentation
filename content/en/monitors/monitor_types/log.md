@@ -43,7 +43,7 @@ As you define the search query, the graph above the search fields updates.
 
 #### No data and below alerts
 
-`NO DATA` is a state given when no logs match the monitor query during the timeframe
+`NO DATA` is a state given when no logs match the monitor query during the timeframe.
 
 To receive a notification when all groups matching a specific query have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
 
