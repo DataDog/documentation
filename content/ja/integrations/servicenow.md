@@ -1,6 +1,7 @@
 ---
 categories:
   - issue tracking
+  - notification
 ddtype: crawler
 dependencies: []
 description: Datadog アラートからチケットを自動的に生成および更新
