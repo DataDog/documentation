@@ -6,6 +6,9 @@ aliases:
   - /synthetics/browser_check
   - /synthetics/browser_test
 further_reading:
+- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
 - link: "https://www.datadoghq.com/blog/browser-tests/"
   tag: "Blog"
   text: "User experience monitoring with browser tests"
@@ -20,7 +23,7 @@ further_reading:
   text: "Monitor Core Web Vitals with Synthetic Monitoring"
 - link: "/synthetics/guide/"
   tag: "Documentation"
-  text: "Guides"
+  text: "Synthetic Monitoring Guides"
 ---
 
 ## Overview
