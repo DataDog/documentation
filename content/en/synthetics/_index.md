@@ -6,21 +6,19 @@ disable_sidebar: true
 aliases:
   - /integrations/synthetics/
 further_reading:
+- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introduction to Datadog Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/browser-tests/"
   tag: "Blog"
   text: "User experience monitoring with Datadog Browser Tests"
-- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
-  tag: "Blog"
-  text: "Best practices for creating end-to-end tests"
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
-- link: "/synthetics/troubleshooting/"
-  tag: "Documentation"
-  text: "Troubleshooting Synthetic Monitoring"
+
 ---
 
 {{< vimeo 447241955 >}}
