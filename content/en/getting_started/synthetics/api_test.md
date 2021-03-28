@@ -2,6 +2,9 @@
 title: Getting Started with API Tests
 kind: documentation
 further_reading:
+    - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+      tag: 'Learning Center'
+      text: 'Introduction to Synthetic Tests'
     - link: '/synthetics/api_tests'
       tag: 'Documentation'
       text: 'Learn more about API tests'
