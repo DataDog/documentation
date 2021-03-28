@@ -3,9 +3,12 @@ title: Multistep API Tests
 kind: documentation
 description: Chain requests to monitor sophisticated transactions on your key services
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+- link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetic Monitoring"
+  text: "Monitor your workflows with Datadog multistep API tests"
+- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
 - link: "/getting_started/synthetics/api_test"
   tag: "Documentation"
   text: "Get started with API tests"
