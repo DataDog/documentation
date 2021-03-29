@@ -53,11 +53,11 @@ Grants a role the ability to create and modify [log indexes][5]. This includes:
 
 - Setting [indexes filters][6] for which logs should be routed into an index.
 - Setting [log retention][7] for an index.
-- Granting another role the [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exclsion Filters](#logs-write-exclusion-filters) permissions, scoped for a specific index.
+- Granting another role the [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exclusion Filters](#logs-write-exclusion-filters) permissions, scoped for a specific index.
 
 This permission is global and enables both the creation of new indexes, and the edition of existing ones.
 
-**Note**: This permission also grants [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exlcusion Filters](#logs-write-exclusion-filters) permissions behind the scenes.
+**Note**: This permission also grants [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exclusion Filters](#logs-write-exclusion-filters) permissions behind the scenes.
 
 
 ### `logs_write_exclusion_filters`
@@ -72,10 +72,12 @@ This permission can be assigned either globally or restricted to a subset of ind
 {{% tab "UI" %}}
 
 1. Remove the global permission on the role.
-2. Grant this permission to the role in [the Index page of the Datadog app][2] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
+2. Grant this permission to the role in [the Index page of the Datadog app][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
 
 {{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters"  style="width:75%;" >}}
 
+
+[1]: /logs/pipelines/indexes
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -83,7 +85,6 @@ This configuration is only supported through the UI.
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ### `logs_write_pipelines`
 
@@ -100,7 +101,7 @@ Grants a role the ability to create and modify [log processing pipelines][9]. Th
 
 ### `logs_write_processors`
 
-Grants a role the ability to create, edit or delete processors and nested pipelines[12].
+Grants a role the ability to create, edit or delete processors and nested pipelines.
 
 This permission can be assigned either globally or restricted to a subset of pipelines.
 
@@ -114,11 +115,10 @@ Assign the role(s) in the modal of a specific pipeline.
 {{% /tab %}}
 {{% tab "API" %}}
 
-
-* [Get the Roles ID][1] of the role you want to assign to specific pipelines.
-* [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
-* [Get the Pipeline ID(s)][3] of the pipeline(s) you want to assign this role on.
-* Grant permission to that role with the following call:
+1. [Get the Roles ID][1] of the role you want to assign to specific pipelines.
+2. [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
+3. [Get the Pipeline ID(s)][3] of the pipeline(s) you want to assign this role on.
+4. Grant permission to that role with the following call:
 
 ```sh
 curl -X POST \
@@ -314,7 +314,7 @@ These permissions are globally enabled by default for all users.
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
 
-To scope this permission to a subset of indexes, first remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role. Then
+To scope this permission to a subset of indexes, first remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role. Then:
 
 {{< tabs >}}
 {{% tab "UI" %}}
