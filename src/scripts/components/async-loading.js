@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { updateTOC, buildTOCMap } from './table-of-contents';
 import codeTabs from './codetabs';
 import { redirectToRegion } from '../region-redirects';
@@ -51,7 +52,7 @@ function loadPage(newUrl) {
                 '.js-toc-container'
             );
 
-            const currentSidebar = document.querySelector('.sidebar'); 
+            const currentSidebar = document.querySelector('.sidebar');
             const newSidebar = httpRequest.responseXML.querySelector('.sidebar');
 
             if (newContent === null) {
@@ -171,7 +172,7 @@ function loadPage(newUrl) {
             }
 
             // Ensure sidebar is displayed or hidden properly based on HTTP response.  I'm certain we can implement a better strategy for what's happening in this script, but this should hold us over until then.
-            if (newSidebar && !currentSidebar) {            
+            if (newSidebar && !currentSidebar) {
                 const jsContentContainer = document.querySelector('.js-content-container');
                 jsContentContainer.appendChild(newSidebar);
             }
