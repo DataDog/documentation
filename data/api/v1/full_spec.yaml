@@ -7690,6 +7690,9 @@ components:
         result:
           description: Result of the last API test run.
           properties:
+            passed:
+              description: Describes if the test run has passed or failed.
+              type: boolean
             timings:
               $ref: '#/components/schemas/SyntheticsTiming'
           type: object
@@ -8197,6 +8200,9 @@ components:
       - greaterEquals
       - lowerEquals
       - matchRegex
+      - between
+      - isEmpty
+      - notIsEmpty
       type: string
       x-enum-varnames:
       - EQUALS
@@ -8210,6 +8216,9 @@ components:
       - GREATER_EQUALS
       - LOWER_EQUALS
       - MATCH_REGEX
+      - BETWEEN
+      - IS_EMPTY
+      - NOT_IS_EMPTY
     SyntheticsConfigVariable:
       description: Object defining a variable that can be used in your test configuration.
       properties:
@@ -8993,6 +9002,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
+        disableCors:
+          description: Whether or not to disable CORS mechanism.
+          type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
@@ -9021,6 +9033,9 @@ components:
               minimum: 0
               type: integer
           type: object
+        noScreenshot:
+          description: Prevents saving screenshots of the steps.
+          type: boolean
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         tick_every:
@@ -9091,6 +9106,9 @@ components:
           type: string
         method:
           $ref: '#/components/schemas/HTTPMethod'
+        noSavingResponseBody:
+          description: Determines whether or not to save the response body.
+          type: boolean
         port:
           description: Port to use when performing the test.
           format: int64
