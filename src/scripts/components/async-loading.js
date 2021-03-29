@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { updateTOC, buildTOCMap } from './table-of-contents';
 import codeTabs from './codetabs';
 import { redirectToRegion } from '../region-redirects';
@@ -113,16 +112,8 @@ function loadPage(newUrl) {
                 newDocument.documentElement.dataset.type;
 
             // update data-code-lang
-            if (document.documentElement.dataset.type === 'multi-code-lang') {
-              // if we are navigating to a multi-code-lang page
-              // we should try load the existing lang if possible
-              document.documentElement.dataset.pageCodeLang = Cookies.get('code-lang');
-              const replacedUrl = newUrl.replace(`/${newDocument.documentElement.dataset.pageCodeLang}`, `/${document.documentElement.dataset.pageCodeLang}`);
-              window.history.replaceState({}, '', replacedUrl);
-            } else {
-              document.documentElement.dataset.pageCodeLang =
-                newDocument.documentElement.dataset.pageCodeLang;
-            }
+            document.documentElement.dataset.pageCodeLang =
+            newDocument.documentElement.dataset.pageCodeLang;
 
             // update data-current-section
             document.documentElement.dataset.currentSection =
