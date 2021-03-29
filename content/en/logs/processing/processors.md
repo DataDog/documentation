@@ -267,7 +267,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tag to another target attribute or tag. It can transforms this log:
+The remapper processor remaps any source attribute(s) or tag to another target attribute or tag. It can transform this log:
 
 {{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribute pre remapping "  style="width:40%;">}}
 
