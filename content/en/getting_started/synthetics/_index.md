@@ -42,6 +42,7 @@ If you haven't already, create a [Datadog account][2].
 ## Next steps
 
 {{< whatsnext desc="After you set up your first Synthetic test:">}}
+{{< nextlink href="https://learn.datadoghq.com/course/view.php?id=39" tag="Learning Center" >}}Introduction to Synthetic Tests{{< /nextlink >}}
 {{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}Learn more about browser tests{{< /nextlink >}}
 {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}Learn more about API tests{{< /nextlink >}}
 {{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Create a browser subtest{{< /nextlink >}}
