@@ -6,21 +6,18 @@ aliases:
   - /synthetics/browser_check
   - /synthetics/browser_test
 further_reading:
-- link: 'https://learn.datadoghq.com/course/view.php?id=39'
-  tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
 - link: "https://www.datadoghq.com/blog/browser-tests/"
   tag: "Blog"
   text: "User experience monitoring with browser tests"
+- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
   text: "Getting started with browser tests"
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
-  tag: "Blog"
-  text: "Monitor Core Web Vitals with Synthetic Monitoring"
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"

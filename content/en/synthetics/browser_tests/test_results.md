@@ -5,9 +5,9 @@ description: Synthetic browser test results
 aliases:
  - "/synthetics/apm/browser_tests"
 further_reading:
-- link: "/synthetics/browser_tests/"
-  tag: "Documentation"
-  text: "Browser Tests"
+- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
+  tag: "Blog"
+  text: "Monitor Core Web Vitals with Synthetic Monitoring"
 ---
 
 
