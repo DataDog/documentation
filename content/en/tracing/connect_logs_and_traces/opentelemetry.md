@@ -236,12 +236,17 @@ logger.info("Example log line with trace correlation info")
 To manually correlate your traces with your logs, first enable the [openTelemetry-java-instrumentation Logger MDC Instrumentation][1]. Then, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses [Spring Boot and Logback][2]. For other logging libraries, it may be more appropriate to [modify the Datadog SDK examples][3]. 
 
 ```java
-String traceIdValue = Span.current().getSpanContext().getTraceIdAsHexString()
+String traceIdValue = Span.current().getSpanContext().getTraceId();
 String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
 long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
-String datadogTraceIdString = Long.toUnsignedString(datadogTraceId)
+String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
 
-logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{spanId} %n
+String spanIdValue = Span.current().getSpanContext().getSpanId();
+String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
+long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
+String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
+
+logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{datadogSpanIdString} %n
 ```
 
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
