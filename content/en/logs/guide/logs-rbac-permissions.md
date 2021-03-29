@@ -114,7 +114,6 @@ Assign the role(s) in the modal of a specific pipeline.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Preliminary,
 
 * [Get the Roles ID][1] of the role you want to assign to specific pipelines.
 * [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
@@ -149,7 +148,7 @@ Grants the ability to create, edit or delete [Log Archives][13]. This includes:
 - Reordering archives
 - Restricting the [Logs Read Archives](#logs-read-archives) permission to a subset of roles.
 
-This permission is global and enables the creation of new archives, and the edition and deletion of existing ones.
+This permission is global and enables creating new archives, and editing and deleting existing ones.
 
 ### `logs_read_archives`
 
@@ -358,7 +357,7 @@ curl -X POST \
 
 Grants a role the ability to use the [Live Tail][20] feature.
 
-This permission is global, and grants access to the livetail irregardless of [Log Read Index Data](#logs-read-index-data) permission.
+This permission is global, and grants access to the livetail regardless of [Log Read Index Data](#logs-read-index-data) permission.
 
 ## Further reading
 
