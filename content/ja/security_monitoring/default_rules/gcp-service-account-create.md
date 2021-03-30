@@ -11,8 +11,6 @@ source: gcp
 title: GCP サービスアカウントの作成
 type: security_rules
 ---
-## 概要
-
 ### 目標
 新しいサービスアカウントが 作成されたことを検出します。
 

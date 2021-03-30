@@ -56,22 +56,24 @@ Pour obtenir un flare de chaque container, exécutez les commandes suivantes :
 kubectl exec -it <agent-pod-name> -c agent -- agent flare <case-id>
 ```
 
-### process-agent
+### Agent de processus
 
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --local
 ```
 
-### trace-agent
+### Agent de trace
 
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
 ```
 
-### system-probe
+### System probe
+
+Le conteneur system-probe ne peut pas envoyer de flare. Vous devez donc récupérer les logs de conteneur :
 
 ```bash
-kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --local
+kubectl logs <NOM_POD_AGENT> -c system-probe > system-probe.log
 ```
 
 [1]: /fr/agent/basic_agent_usage/#gui

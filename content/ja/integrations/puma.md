@@ -14,13 +14,13 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/puma/README.md'
 display_name: Puma
-draft: true
+draft: false
 git_integration_title: puma
 guid: 93264c0f-a4d1-447d-81b6-bee3eb891df3
 integration_id: puma
 integration_title: Puma
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: justin.morris@ferocia.com.au
 manifest_version: 1.0.0
 metric_prefix: puma.
