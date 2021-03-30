@@ -92,7 +92,7 @@ To enable Network Performance Monitoring, configure it in your [Agent's main con
 Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
-{{% tab "Agent" %}}
+{{% tab "Agent (Linux)" %}}
 
 To enable network performance monitoring with the Datadog Agent, use the following configurations:
 
@@ -175,9 +175,7 @@ If these utilities do not exist in your distribution, follow the same procedure 
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
-Data collection for Windows relies on a privileged filter driver for collecting network data.
-
-**Note**: NPM currently monitors Windows hosts only, and not Windows containers. DNS metric collection is not supported for Windows systems.
+Data collection for Windows relies on a filter driver for collecting network data.
 
 To enable network performance monitoring for Windows hosts:
 
@@ -201,7 +199,7 @@ To enable network performance monitoring for Windows hosts:
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-
+**Note**: NPM currently monitors Windows hosts only, and not Windows containers. DNS metric collection is not supported for Windows systems.
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 [2]: /agent/guide/agent-commands/#restart-the-agent
