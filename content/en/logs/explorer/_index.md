@@ -32,8 +32,8 @@ further_reading:
 The **Log Explorer** is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][1], or land here from any other context like monitor notifications or dashboard widgets, the Log Explorer is designed to iteratively:
 
 1. [**Filter**](#filters-logs) logs; to narrow down, broaden, or shift your focus on the subset of logs of current interest.
-2. [**Aggregate**](#aggregations-and-measures) queried logs into higher-level entities in order to derive or consolidate information.
-3. [**Visualize**](#visualizations) the outcome of filters and aggregations to put your logs into the right perspective and bubble up decisive information.
+2. [**Aggregate**](#aggregate-and-measure) queried logs into higher-level entities in order to derive or consolidate information.
+3. [**Visualize**](#visualize) the outcome of filters and aggregations to put your logs into the right perspective and bubble up decisive information.
 
 At any moment, [**Export**](#export) your Log Explorer view to reuse it later or in different contexts.
 
