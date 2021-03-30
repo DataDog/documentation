@@ -33,7 +33,7 @@ With these three tags you can:
 - Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][3].
 
 
-| Language         | Versions |
+| Language         | Minimum Tracer Version |
 |--------------|------------|
 | .NET    |  1.17.0+       |
 | C++    |  1.1.4+       |
