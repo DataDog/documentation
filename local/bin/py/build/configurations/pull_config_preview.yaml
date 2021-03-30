@@ -483,7 +483,7 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/logs/real_user_monitoring/'
+        dest_path: '/real_user_monitoring/'
         file_name: 'reactnative.md'
         front_matters:
           title: React Native RUM Collection
