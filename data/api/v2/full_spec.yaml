@@ -4974,13 +4974,13 @@ components:
       in: header
       name: DD-API-KEY
       type: apiKey
-      x-env-name: DD_CLIENT_API_KEY
+      x-env-name: DD_API_KEY
     appKeyAuth:
       description: Your Datadog APP Key.
       in: header
       name: DD-APPLICATION-KEY
       type: apiKey
-      x-env-name: DD_CLIENT_APP_KEY
+      x-env-name: DD_APP_KEY
 info:
   contact:
     email: support@datadoghq.com
