@@ -39,21 +39,25 @@ Otherwise, the command returns a non-0 exit code and the following output:
 package gpg-pubkey-e09422b3 is not installed
 ```
 
-## Trust the GPG key
+## Trust the GPG keys
 
-This step is not required if hosts already trust the key or if a recent version of an official installation method is used.
+This step is not required if hosts already trust the keys or if a recent version of an official installation method is used.
 
 ### Import command
 
 Run the following commands on the host:
 
 ```bash
-$ curl -o /tmp/DATADOG_RPM_KEY_E09422B3.public https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+$ curl -o /tmp/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+$ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+$ curl -o /tmp/DATADOG_RPM_KEY_E09422B3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 
+$ rpm --import /tmp/DATADOG_RPM_KEY_CURRENT.public
+$ rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915.public
 $ rpm --import /tmp/DATADOG_RPM_KEY_E09422B3.public
 ```
 
-Then check if the key is trusted by following the steps in [Check if a host trusts the GPG key](#check-if-a-host-trusts-the-gpg-key).
+Then check if the keys are trusted by following the steps in [Check if a host trusts the GPG key](#check-if-a-host-trusts-the-gpg-key).
 
 ### Yum repository file update
 
@@ -68,8 +72,9 @@ name = Datadog, Inc.
 baseurl = https://yum.datadoghq.com/stable/7/x86_64/
 enabled=1
 gpgcheck=1
-gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
 
 {{% /tab %}}
@@ -81,8 +86,10 @@ name = Datadog, Inc.
 baseurl = https://yum.datadoghq.com/stable/6/x86_64/
 enabled=1
 gpgcheck=1
-gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY.public
 ```
 
 {{% /tab %}}
