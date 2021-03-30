@@ -107,8 +107,9 @@ RPM ベースのオペレーティングシステムに IoT Agent を手動で�
     baseurl = https://yum.datadoghq.com/stable/7/<HOST_ARCHITECTURE>
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
     `baseurl` は、ホスト OS に依存します。
