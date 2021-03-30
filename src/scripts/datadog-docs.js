@@ -840,16 +840,6 @@ function navClickEventHandler(event) {
 
     newUrl = event.target.closest('li').querySelector('a').href;
 
-    /*
-    If this is a multi code lang page we are clicking on
-    lets check if we have a lang already and load that url
-    */
-    const type = event.target.closest('li').querySelector('a').dataset.type;
-    if(type === 'multi-code-lang') {
-      const codeLang = Cookies.get('code-lang') || document.documentElement.dataset.pageCodeLang || 'python';
-      newUrl = newUrl.replace(/\/[^\/]*$/, `/${codeLang}`)
-    }
-
     const domain = window.location.origin;
 
     if (typeof domain !== 'string' || newUrl.search(domain) !== 0) {
