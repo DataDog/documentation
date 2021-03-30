@@ -32,6 +32,18 @@ With these three tags you can:
 
 - Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][3].
 
+
+| Language         | Minimum Tracer Version |
+|--------------|------------|
+| .NET    |  1.17.0+       |
+| C++    |  1.1.4+       |
+| Go         |  1.24.0+       |
+| Java   |  0.50.0+      |
+| Node    |  0.20.3+       |
+| PHP  |  0.47.0+      |
+| Python  |  0.38.0+      |
+| Ruby  |  0.34.0+      |
+
 - Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][4] and [Assigning Tags][5] documentation before proceeding to configuration.
 
 ## Configuration
