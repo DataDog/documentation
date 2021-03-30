@@ -337,10 +337,10 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
 2. Mettez à jour votre référentiel Zypper local et installez l'Agent :
   ```
   sudo zypper refresh
-  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY.public
-  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   sudo zypper install datadog-agent
   ```
 

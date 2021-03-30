@@ -337,10 +337,10 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 2. ローカルの Zypper リポジトリを更新し、Agent をインストールします。
   ```
   sudo zypper refresh
-  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY.public
-  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   sudo zypper install datadog-agent
   ```
 
