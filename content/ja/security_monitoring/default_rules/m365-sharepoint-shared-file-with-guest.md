@@ -9,8 +9,6 @@ source: microsoft-365
 title: Microsoft 365 SharePoint オブジェクトのゲストとの共有
 type: security_rules
 ---
-## 概要
-
 ### 目標
 ユーザーが Microsoft 365 Sharepoint ドキュメントをゲストと共有したことを検出します。
 

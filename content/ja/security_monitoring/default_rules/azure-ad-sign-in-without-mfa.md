@@ -10,8 +10,6 @@ source: azure
 title: MFA なしの Azure AD ログイン
 type: security_rules
 ---
-## 概要
-
 ### 目標
 多要素認証なしでユーザーが Azure AD にログインしたことを検出します。
 

@@ -16,13 +16,13 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md'
 display_name: PHP OPcache
-draft: true
+draft: false
 git_integration_title: php_opcache
 guid: 323518fd-be8d-4b5e-b35d-829107a1c416
 integration_id: php-opcache
 integration_title: PHP OPcache
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: noname@withgod.jp
 manifest_version: 1.0.0
 metric_prefix: php_opcache.
