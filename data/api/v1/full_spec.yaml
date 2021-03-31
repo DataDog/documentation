@@ -12362,27 +12362,27 @@ components:
       in: header
       name: DD-API-KEY
       type: apiKey
-      x-env-name: DD_CLIENT_API_KEY
+      x-env-name: DD_API_KEY
     apiKeyAuthQuery:
       description: Deprecated API Key as query argument.
       in: query
       name: api_key
       type: apiKey
       x-auth-id-alias: apiKeyAuth
-      x-env-name: DD_CLIENT_API_KEY
+      x-env-name: DD_API_KEY
     appKeyAuth:
       description: Your Datadog APP Key.
       in: header
       name: DD-APPLICATION-KEY
       type: apiKey
-      x-env-name: DD_CLIENT_APP_KEY
+      x-env-name: DD_APP_KEY
     appKeyAuthQuery:
       description: Deprecated APP Key as query argument.
       in: query
       name: application_key
       type: apiKey
       x-auth-id-alias: appKeyAuth
-      x-env-name: DD_CLIENT_APP_KEY
+      x-env-name: DD_APP_KEY
 info:
   contact:
     email: support@datadoghq.com
