@@ -950,6 +950,11 @@
                           "description": "URL of the user's icon.",
                           "type": "string"
                         },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "name": {
                           "description": "Name of the user.",
                           "type": "string"
@@ -1181,6 +1186,11 @@
                   },
                   "icon": {
                     "description": "URL of the user's icon.",
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
                     "type": "string"
                   },
                   "name": {
@@ -1656,6 +1666,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -2164,6 +2179,11 @@
                           "description": "URL of the user's icon.",
                           "type": "string"
                         },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "name": {
                           "description": "Name of the user.",
                           "type": "string"
@@ -2486,6 +2506,11 @@
                   },
                   "icon": {
                     "description": "URL of the user's icon.",
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
                     "type": "string"
                   },
                   "name": {
@@ -5144,6 +5169,11 @@
                           "description": "URL of the user's icon.",
                           "type": "string"
                         },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "name": {
                           "description": "Name of the user.",
                           "type": "string"
@@ -6018,6 +6048,11 @@
                     "description": "URL of the user's icon.",
                     "type": "string"
                   },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
+                    "type": "string"
+                  },
                   "name": {
                     "description": "Name of the user.",
                     "type": "string"
@@ -6723,6 +6758,11 @@
                     "description": "URL of the user's icon.",
                     "type": "string"
                   },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
+                    "type": "string"
+                  },
                   "name": {
                     "description": "Name of the user.",
                     "type": "string"
@@ -7162,6 +7202,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -7972,6 +8017,11 @@
                           "description": "URL of the user's icon.",
                           "type": "string"
                         },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "name": {
                           "description": "Name of the user.",
                           "type": "string"
@@ -8491,6 +8541,11 @@
                     "description": "URL of the user's icon.",
                     "type": "string"
                   },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
+                    "type": "string"
+                  },
                   "name": {
                     "description": "Name of the user.",
                     "type": "string"
@@ -8926,6 +8981,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -9729,6 +9789,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -11835,6 +11900,11 @@
                           "description": "URL of the user's icon.",
                           "type": "string"
                         },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "name": {
                           "description": "Name of the user.",
                           "type": "string"
@@ -12199,6 +12269,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -24241,6 +24316,11 @@
                 "description": "URL of the user's icon.",
                 "type": "string"
               },
+              "modified_at": {
+                "description": "Time that the user was last modified.",
+                "format": "date-time",
+                "type": "string"
+              },
               "name": {
                 "description": "Name of the user.",
                 "type": "string"
@@ -24458,6 +24538,11 @@
           },
           "icon": {
             "description": "URL of the user's icon.",
+            "type": "string"
+          },
+          "modified_at": {
+            "description": "Time that the user was last modified.",
+            "format": "date-time",
             "type": "string"
           },
           "name": {
@@ -25126,6 +25211,11 @@
                   },
                   "icon": {
                     "description": "URL of the user's icon.",
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
                     "type": "string"
                   },
                   "name": {
@@ -26082,6 +26172,11 @@
                       "description": "URL of the user's icon.",
                       "type": "string"
                     },
+                    "modified_at": {
+                      "description": "Time that the user was last modified.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
                     "name": {
                       "description": "Name of the user.",
                       "type": "string"
@@ -26865,6 +26960,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -27359,6 +27459,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -27924,6 +28029,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -28437,6 +28547,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -28944,6 +29059,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -29613,6 +29733,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -30213,6 +30338,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -30781,6 +30911,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -31385,6 +31520,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -31945,6 +32085,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -33806,6 +33951,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -34889,6 +35039,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -35875,6 +36030,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -37099,6 +37259,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -47921,6 +48086,11 @@
                                 "description": "URL of the user's icon.",
                                 "type": "string"
                               },
+                              "modified_at": {
+                                "description": "Time that the user was last modified.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
                               "name": {
                                 "description": "Name of the user.",
                                 "type": "string"
@@ -48550,6 +48720,11 @@
                                 "description": "URL of the user's icon.",
                                 "type": "string"
                               },
+                              "modified_at": {
+                                "description": "Time that the user was last modified.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
                               "name": {
                                 "description": "Name of the user.",
                                 "type": "string"
@@ -49153,6 +49328,11 @@
                               },
                               "icon": {
                                 "description": "URL of the user's icon.",
+                                "type": "string"
+                              },
+                              "modified_at": {
+                                "description": "Time that the user was last modified.",
+                                "format": "date-time",
                                 "type": "string"
                               },
                               "name": {
@@ -52916,6 +53096,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -53568,6 +53753,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -54238,6 +54428,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -54878,6 +55073,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -55430,6 +55630,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -56080,6 +56285,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -56746,6 +56956,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -57380,6 +57595,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -58181,6 +58401,11 @@
                                 "description": "URL of the user's icon.",
                                 "type": "string"
                               },
+                              "modified_at": {
+                                "description": "Time that the user was last modified.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
                               "name": {
                                 "description": "Name of the user.",
                                 "type": "string"
@@ -58830,6 +59055,11 @@
                               "description": "URL of the user's icon.",
                               "type": "string"
                             },
+                            "modified_at": {
+                              "description": "Time that the user was last modified.",
+                              "format": "date-time",
+                              "type": "string"
+                            },
                             "name": {
                               "description": "Name of the user.",
                               "type": "string"
@@ -59464,6 +59694,11 @@
                               "description": "URL of the user's icon.",
                               "type": "string"
                             },
+                            "modified_at": {
+                              "description": "Time that the user was last modified.",
+                              "format": "date-time",
+                              "type": "string"
+                            },
                             "name": {
                               "description": "Name of the user.",
                               "type": "string"
@@ -60062,6 +60297,11 @@
                               "description": "URL of the user's icon.",
                               "type": "string"
                             },
+                            "modified_at": {
+                              "description": "Time that the user was last modified.",
+                              "format": "date-time",
+                              "type": "string"
+                            },
                             "name": {
                               "description": "Name of the user.",
                               "type": "string"
@@ -60648,6 +60888,11 @@
                             },
                             "icon": {
                               "description": "URL of the user's icon.",
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Time that the user was last modified.",
+                              "format": "date-time",
                               "type": "string"
                             },
                             "name": {
