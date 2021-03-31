@@ -115,7 +115,6 @@ Once you see the Metric Stream resource has been successfully created, wait five
  
  ## Further Reading
  
- {{< partial name="whats-next/whats-next.html" >}}
  
 [1]: /getting_started/site/
 [2]: https://app.datadoghq.com/account/settings#api
@@ -123,6 +122,8 @@ Once you see the Metric Stream resource has been successfully created, wait five
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 {{% /tab %}}
 {{< /tabs >}}
+
+ {{< partial name="whats-next/whats-next.html" >}}
  
 [1]: https://aws.amazon.com/cloudwatch/pricing/
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup
