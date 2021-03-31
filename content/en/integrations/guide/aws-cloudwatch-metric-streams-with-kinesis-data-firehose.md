@@ -18,14 +18,14 @@ further_reading:
 Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can get CloudWatch metrics into Datadog faster with a 2-3 minute latency. This is significantly faster than Datadog’s API polling approach, which provides updated metrics every 10 minutes.
 ## Overview
  
-1. Create these AWS resources in each AWS account and region you want to stream metrics:
+1. Create these AWS resources in each AWS account and region for which you want to stream metrics:
    - Create a Kinesis Data Firehose delivery stream that delivers metrics to Datadog, along with an S3 Backup for any failed metrics delivery.
-   - Create a Cloudwatch Metric Stream linked to your delivery stream.
+   - Create a CloudWatch Metric Stream linked to your delivery stream.
    - Optionally specify a limited set of namespaces to stream metrics.
 2. Once you create these resources, Datadog immediately starts receiving the streamed metrics and displays them in the Datadog application with no additional configuration needed.
-   - **Important Note**: Per namespace defaults and account-level settings in the AWS Integration tile only apply to the API polling approach. Manage all rules for including and excluding namespaces in the streams using the CloudWatch Metric Streams configuration in your AWS accounts.
+   - **Note**: Per-namespace defaults and account-level settings in the AWS Integration tile only apply to the API polling approach. Manage all rules for including and excluding namespaces in the streams using the CloudWatch Metric Streams configuration in your AWS accounts.
    - If you already receive the same CloudWatch metrics through the API polling method, Datadog automatically detects this and stops polling those metrics since you are streaming them.
-   - If you later decide you don't want to stream a metric and delete the stream or remove namespaces from it, Datadog automatically starts collecting those metrics using the API polling again, according to your configuration settings in the AWS Integration Tile.
+   - If you later decide you don't want to stream a metric and delete the stream or remove namespaces from it, Datadog automatically starts collecting those metrics using API polling again, according to your configuration settings in the AWS Integration tile.
  
 ### Billing
  
@@ -61,7 +61,7 @@ Datadog recommends using CloudFormation because it's automatic and easier if you
    - **FilterMethod**: Include or Exclude list of namespaces to include for metrics streaming.
    - **First/Second/Third Namespace**: Specify the namespaces you wish to include or exclude. Note: The namespace values have to precisely match the values in the namespace column in AWS’s documentation. For example, AWS/EC2.
 7. Check the acknowledgment box that states, "I acknowledge that AWS CloudFormation might create IAM resources with custom names."
-8. Click "Create Stack".
+8. Click **Create Stack**.
  
 ### Results
  
@@ -108,7 +108,7 @@ If you want to set up metric streams using the AWS Console, follow these steps f
 Once you see the Metric Stream resource has been successfully created, wait five minutes for Datadog to recognize this. Then go to the [Datadog AWS Integration tile][3] to see this is working by viewing the "CloudWatch Metric Streams" tab for the specified AWS account.
  
 {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-regions.png" alt="Metric streams selection tab" responsive="true" style="width:60%;">}}
-**Important Note**: If you've already enabled polling CloudWatch APIs, the transition to streaming could cause a brief (up to five minutes) period where the specific metrics you are streaming are double-counted in Datadog. This is because of the difference in timing between when Datadog’s crawlers are running and submitting your CloudWatch metrics, and when Datadog recognizes that you have started streaming those metrics and turn off the crawlers.
+**Note**: If you've already enabled polling CloudWatch APIs, the transition to streaming could cause a brief (up to five minutes) period where the specific metrics you are streaming are double-counted in Datadog. This is because of the difference in timing between when Datadog’s crawlers are running and submitting your CloudWatch metrics, and when Datadog recognizes that you have started streaming those metrics and turn off the crawlers.
  
  
 [1]: https://app.datadoghq.com/account/settings#api
