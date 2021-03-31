@@ -41,7 +41,8 @@ private: true
 <br>
 
 {{< whatsnext desc="Sensitive Data Management" >}}
-    {{< nextlink href="logs/guide/logs-rbac" >}}How to set up Logs RBAC{{< /nextlink >}}
+    {{< nextlink href="logs/guide/logs-rbac" >}}How to set up RBAC for Logs{{< /nextlink >}}
+    {{< nextlink href="logs/guide/logs-rbac-permissions" >}}Learn more about RBAC permissions for Logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
 {{< /whatsnext >}}
 
