@@ -14,13 +14,13 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/nvml/README.md'
 display_name: nvml
-draft: true
+draft: false
 git_integration_title: nvml
 guid: 5e997a76-f6a3-48e8-875f-6fbb2559f9e9
 integration_id: nvml
 integration_title: nvml
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: nvml.

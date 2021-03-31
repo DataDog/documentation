@@ -17,13 +17,13 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md'
 display_name: PHP APCu
-draft: true
+draft: false
 git_integration_title: php_apcu
 guid: d6b2f21e-8a91-4c5a-98c3-647af53065b7
 integration_id: php-apcu
 integration_title: PHP APCu
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: noname@withgod.jp
 manifest_version: 1.0.0
 metric_prefix: php_apcu.
