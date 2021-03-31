@@ -3,14 +3,16 @@ title: AWS CloudWatch Metric Streams with Kinesis Data Firehose
 kind: guide
 further_reading:
 - link: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html"
-  tag: "Amazon Docs"
+  tag: "Documentation"
   text: "Metric streams - Amazon CloudWatch"
 ---
-{{< site-region region=”gov” >}}
-The AWS CloudWatch Metric Streams with Kinesis Data Firehose is not supported on the Datadog for Government site.
+{{< site-region region="gov" >}}
+
+**The AWS CloudWatch Metric Streams with Kinesis Data Firehose is not supported on the Datadog for Government site.**
 {{< /site-region >}}
-{{< site-region region=”us3” >}} 
-The AWS CloudWatch Metric Streams with Kinesis Data Firehose is not supported on the Datadog US3 site.
+{{< site-region region="us3" >}}
+
+**The AWS CloudWatch Metric Streams with Kinesis Data Firehose is not supported on the Datadog US3 site.**
 {{< /site-region >}}
  
 Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can get CloudWatch metrics into Datadog faster with a 2-3 minute latency. This is significantly faster than Datadog’s API polling approach, which provides updated metrics every 10 minutes.
