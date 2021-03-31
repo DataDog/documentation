@@ -85,8 +85,10 @@ If you want to set up metric streams using the AWS Console, follow these steps f
 1. Create a new Kinesis Data Firehose delivery stream with the following specifications:
  - For source, select “Direct PUT or other sources”
 - For destination:
-  - Select Third Party Destination: `Datadog`.
-  - Select your [Datadog site][1] under metrics: `Datadog US` or `Datadog EU`.
+  - Select “HTTP Endpoint”
+  - For URL, use:
+   - `https://awsmetrics-intake.datadoghq.com/v1/input` (US Site)
+   - `https://awsmetrics-intake.datadoghq.eu/v1/input` (EU Site)
   - For access key, enter your [Datadog API key][2].
    - For retry duration, enter `60 seconds`.
    - For S3 backup, select `Failed data only` and choose the desired S3 bucket for backup.
