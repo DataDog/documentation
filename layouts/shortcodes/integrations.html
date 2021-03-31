@@ -11,8 +11,10 @@
 {{ $.Scratch.Set "filters" (slice)}}
 {{ range $index, $element := $integration_list }}
     {{ range $e := $element.Params.categories }}
-        {{ if not (in ($.Scratch.Get "filters") ($e | lower)) }}
-            {{ $.Scratch.Add "filters" ($e | lower) }}
+        {{ with $e }}
+          {{ if not (in ($.Scratch.Get "filters") (. | lower)) }}
+              {{ $.Scratch.Add "filters" (. | lower) }}
+          {{ end }}
         {{ end }}
     {{ end }}
 {{ end }}
