@@ -114,6 +114,7 @@ Once you see the Metric Stream resource has been successfully created, wait five
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[4]: /getting_started/site/
 {{% /tab %}}
 {{< /tabs >}}
  
