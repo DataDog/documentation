@@ -109,7 +109,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 ### Fibers
 
-[`fibers`][53] is incompatible with `async_hooks`, a Node.js [module][54] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fiber` directly or indirectly through frameworks such as [Meteor][55] may result in instability (crashes) or incorrect tracing.
+[`fibers`][53] is incompatible with `async_hooks`, a Node.js [module][54] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][55] may result in instability (crashes) or incorrect tracing.
 
 For additional information or to discuss [leave a comment on this github issue][56] or [reach out to support][2] to discuss further.
 
