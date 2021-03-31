@@ -1,10 +1,19 @@
 ---
 title: AWS CloudWatch Metric Streams with Kinesis Data Firehose
 kind: guide
+further_reading:
+- link: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html"
+  tag: "Amazon Docs"
+  text: "Metric streams - Amazon CloudWatch"
 ---
+{{< site-region region=”gov” >}}
+The AWS CloudWatch Metric Streams with Kinesis Data Firehose is not supported on the Datadog for Government site.
+{{< /site-region >}}
+{{< site-region region=”us3” >}} 
+The AWS CloudWatch Metric Streams with Kinesis Data Firehose is not supported on the Datadog US3 site.
+{{< /site-region >}}
  
 Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can get CloudWatch metrics into Datadog faster with a 2-3 minute latency. This is significantly faster than Datadog’s API polling approach, which provides updated metrics every 10 minutes.
-
 ## Overview
  
 1. Create these AWS resources in each AWS account and region you want to stream metrics:
@@ -45,7 +54,7 @@ Datadog recommends using CloudFormation because it's automatic and easier if you
 5. Fill in the required parameters:
    - **ApiKey**: Add your [Datadog API key][2].
    - **DdSite**: Select your [Datadog site][3]. Your site is: {{< region-param key="dd_site" code="true" >}}
-   - **Regions**: A comma separated list of the regions you wish to set up for metrics streaming. For a full list of supported regions, see the [AWS documentation][].
+   - **Regions**: A comma separated list of the regions you wish to set up for metrics streaming. For a full list of supported documentation, see the [AWS documentation][4].
 6. Fill in the optional parameters:
    - **FilterMethod**: Include or Exclude list of namespaces to include for metrics streaming.
    - **First/Second/Third Namespace**: Specify the namespaces you wish to include or exclude. Note: The namespace values have to precisely match the values in the namespace column in AWS’s documentation. For example, AWS/EC2.
@@ -62,6 +71,7 @@ Once the stack has been successfully created, wait five minutes for Datadog to r
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /getting_started/site/
+[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
 {{% /tab %}}
 {{% tab "AWS Console" %}}
  
@@ -69,11 +79,10 @@ If you want to set up metric streams using the AWS Console, follow these steps f
  
 1. Create a new Kinesis Data Firehose delivery stream with the following specifications:
  - For source, select “Direct PUT or other sources”
- - For destination:
-   - Select `HTTP Endpoint`.
-   - For URL, use:
-   `https://awsmetrics-intake.`{{< region-param key="dd_site" code="true" >}}`/v1/input`.
-   - For access key, enter your [Datadog API key][1].
+- For destination:
+  - Select Third Party Destination: `Datadog`.
+  - Select your [Datadog site][4] under metrics: `Datadog US` or `Datadog EU`.
+  - For access key, enter your [Datadog API key][1].
    - For retry duration, enter `60 seconds`.
    - For S3 backup, select `Failed data only` and choose the desired S3 bucket for backup.
  - For HTTP endpoint buffer conditions:
@@ -94,7 +103,7 @@ If you want to set up metric streams using the AWS Console, follow these steps f
  
 ### Results
  
-Once you see the Metric Stream resource has been successfully created, wait five minutes for Datadog to recognize this. Then go to the [Datadog AWS Integration tile][3] to see this is working by viewing the "CloudWatch Metric Streaming" tab for the specified AWS account and region.
+Once you see the Metric Stream resource has been successfully created, wait five minutes for Datadog to recognize this. Then go to the [Datadog AWS Integration tile][3] to see this is working by viewing the "CloudWatch Metric Streams" tab for the specified AWS account.
  
 {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-regions.png" alt="Metric streams selection tab" responsive="true" style="width:60%;">}}
 **Important Note**: If you've already enabled polling CloudWatch APIs, the transition to streaming could cause a brief (up to five minutes) period where the specific metrics you are streaming are double-counted in Datadog. This is because of the difference in timing between when Datadog’s crawlers are running and submitting your CloudWatch metrics, and when Datadog recognizes that you have started streaming those metrics and turn off the crawlers.
@@ -106,5 +115,5 @@ Once you see the Metric Stream resource has been successfully created, wait five
 {{% /tab %}}
 {{< /tabs >}}
  
-[1]: https://aws.amazon.com/pricing/
+[1]: https://aws.amazon.com/cloudwatch/pricing/
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup

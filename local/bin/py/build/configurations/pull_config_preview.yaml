@@ -36,7 +36,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: kaylyn/metric-streaming
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
