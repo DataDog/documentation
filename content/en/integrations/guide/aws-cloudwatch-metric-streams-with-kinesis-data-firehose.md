@@ -5,6 +5,9 @@ further_reading:
 - link: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html"
   tag: "Documentation"
   text: "Metric streams - Amazon CloudWatch"
+- link: "https://www.datadoghq.com/blog/amazon-cloudwatch-metric-streams-datadog/"
+  tag: "Blog"
+  text: "Collect Amazon CloudWatch metrics using Metric Streams"
 ---
 {{< site-region region="gov" >}}
 
