@@ -21,7 +21,7 @@ Troubleshooting is highly contextual, and Saved Views enable you and your teamma
 
 Technically, a Saved View keeps track of:
 
-- A [search query][3]
+- A [search query][3] along with its timerange. Note that the Saved View is meant to track live timeranges (past hour, past week...) and fixed timeranges are converted as such on save. 
 - A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties)
 - A [selected subset of facets][1] to be displayed in the facet list
 
