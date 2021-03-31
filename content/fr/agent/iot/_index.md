@@ -107,9 +107,8 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     baseurl = https://yum.datadoghq.com/stable/7/<HOST_ARCHITECTURE>
     enabled=1
     gpgcheck=1
-    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
    `baseurl` dépend du système d'exploitation de votre host :
