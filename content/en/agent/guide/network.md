@@ -32,7 +32,6 @@ further_reading:
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-  - [Synthetic Private Locations][7] is `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} for version 0.1.6+ and `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} for versions 0.2.0+.
   - All other Agent data:
       - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
       - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
@@ -143,7 +142,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 ## Using proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][8].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][7].
 
 ## Further Reading
 
@@ -155,5 +154,4 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [4]: /logs/log_collection/?tab=http#datadog-logs-endpoints
 [5]: /infrastructure/livecontainers/#kubernetes-resources-1
 [6]: /security/logs/#hipaa-enabled-customers
-[7]: /synthetics/private_locations/#datadog-private-locations-endpoints
-[8]: /agent/proxy/
+[7]: /agent/proxy/
