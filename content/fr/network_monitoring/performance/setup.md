@@ -416,7 +416,7 @@ Pour une configuration sur AWS ECS, consultez la section relative à [AWS ECS]
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [3]: /fr/network_monitoring/performance/network_page#dns-resolution
-[4]: /fr/network_monitoring/performance/setup/
+[4]: https://docs.datadoghq.com/fr/network_monitoring/performance/setup/?tab=agent#windows-systems
 [5]: https://docs.datadoghq.com/fr/integrations/docker_daemon/
 [6]: https://docs.datadoghq.com/fr/agent/kubernetes/
 [7]: https://docs.datadoghq.com/fr/agent/amazon_ecs/
