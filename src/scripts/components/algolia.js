@@ -55,6 +55,29 @@ const searchDesktop = docsearch({
     autocompleteOptions: {
         autoselect: false
     },
+    transformData: function(hits) {
+        if (isApiPage()) {
+            console.log(hits);
+            
+            hits.forEach(hit => {
+                const title = hit.hierarchy.lvl1;
+                const apiContent = hit.hierarchy.lvl2;
+
+                console.log(`${title} is the title, and ${apiContent} should be the title...`)
+
+                if (title && apiContent) {
+                    const leftTitle = document.querySelector('.algolia-docsearch-suggestion--subcategory-column-text');
+                    
+                    if (leftTitle) {
+                        console.log(`Left title = ${leftTitle.textContent}`);
+                        console.log(`apiContent = ${apiContent}`);
+                        leftTitle.textContent = apiContent;
+                    }
+                    // leftTitle.innerText = apiContent;
+                }
+            })
+        }
+    },
     queryHook(query) {
         // eslint-disable-next-line no-underscore-dangle
         if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
@@ -76,7 +99,7 @@ const searchDesktop = docsearch({
             }, 1000);
         }
     },
-    debug: false // Set debug to true if you want to inspect the dropdown
+    debug: true // Set debug to true if you want to inspect the dropdown
 });
 let desktopEnableEnter = true;
 const searchBtn = document.querySelector('.js-search-btn');
