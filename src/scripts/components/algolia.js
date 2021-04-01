@@ -35,11 +35,25 @@ const isApiPage = () => document.body.classList.value.includes('api');
 
 const handleApiResultStyleUpdates = () => {
     const headers = document.querySelectorAll('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
+    const contentTitles = document.querySelectorAll('.algolia-docsearch-suggestion--subcategory-column-text');
 
     headers.forEach(header => {
         if (header.textContent.toLowerCase().includes('api')) {
             header.style.fontWeight = '800';
             header.style.color = '#632ca6';
+        }
+    })
+
+    contentTitles.forEach(title => {
+        const parentAnchor = title.closest('a');
+
+        if (parentAnchor) {
+            const closestHeader = parentAnchor.querySelector('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
+
+            if (closestHeader.textContent.toLowerCase().includes('api')) {
+                const apiContentHeader = title.querySelector('.algolia-docsearch-suggestion--title');
+                // TODO: swap title with apiContentHeader.text
+            }
         }
     })
 }
@@ -54,29 +68,6 @@ const searchDesktop = docsearch({
     },
     autocompleteOptions: {
         autoselect: false
-    },
-    transformData: function(hits) {
-        if (isApiPage()) {
-            console.log(hits);
-            
-            hits.forEach(hit => {
-                const title = hit.hierarchy.lvl1;
-                const apiContent = hit.hierarchy.lvl2;
-
-                console.log(`${title} is the title, and ${apiContent} should be the title...`)
-
-                if (title && apiContent) {
-                    const leftTitle = document.querySelector('.algolia-docsearch-suggestion--subcategory-column-text');
-                    
-                    if (leftTitle) {
-                        console.log(`Left title = ${leftTitle.textContent}`);
-                        console.log(`apiContent = ${apiContent}`);
-                        leftTitle.textContent = apiContent;
-                    }
-                    // leftTitle.innerText = apiContent;
-                }
-            })
-        }
     },
     queryHook(query) {
         // eslint-disable-next-line no-underscore-dangle
