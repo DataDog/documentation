@@ -27,7 +27,7 @@ Use **attributes** and **aliasing** to unify your Logs environment.
 
 ## Attribute types and aliasing
 
-Attributes prescribe [logs facets][1], which are used for filtering and searching in Log Explorer.
+Attributes prescribe [logs facets][1] and [tags][27], which are used for filtering and searching in Log Explorer.
 
   * [**Reserved attributes**](#reserved-attributes) are automatically ingested.
 
@@ -295,3 +295,4 @@ See the [associated documentation][26] for additional information.
 [24]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
 [25]: /logs/explorer/facets/#aliased-facets
 [26]: /logs/explorer/facets/#alias-facets
+[27]: /logs/search_syntax/#tags
