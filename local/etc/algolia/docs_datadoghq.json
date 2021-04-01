@@ -45,6 +45,7 @@
                     "real_user_monitoring",
                     "serverless",
                     "synthetics",
+                    "network_monitoring/devices",
                     "developers"
                 ],
                 "localisation": ["", "/fr", "/ja"]

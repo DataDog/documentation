@@ -43,6 +43,7 @@
                     "tracing",
                     "logs",
                     "synthetics",
+                    "network_monitoring/devices",
                     "serverless",
                     "real_user_monitoring",
                     "developers"
