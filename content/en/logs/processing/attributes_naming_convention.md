@@ -273,7 +273,7 @@ See the [associated documentation][26] for additional information.
 [2]: https://app.datadoghq.com/logs/pipelines/standard-attributes
 [3]: /integrations/apache/
 [4]: /integrations/amazon_cloudfront/
-[5]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[5]: /getting_started/tagging/unified_service_tagging/
 [6]: /logs/explorer/patterns/
 [7]: /integrations/varnish/
 [8]: /integrations/amazon_elb/
