@@ -70,7 +70,7 @@ The breakdown view on the left side is a list of types of time spent executing t
 
 Click on one of these types to see a corresponding list, ordered by time, of the methods that are taking time. Clicking on the plus `+` will expand the stack trace to that method **in reverse order**.
 
-### main reasons why code hotspots show time spent in **Other**
+### What does time spent in the 'Other' category mean?
 
 It is not uncommon to have a small amount of **Other** unexplained time (less than 10%). Potential reasons for Other time include:
 
