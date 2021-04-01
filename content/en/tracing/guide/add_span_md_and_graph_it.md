@@ -41,7 +41,7 @@ Depending on the programming language you are you using, you’ll need to set th
 The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `setTag` method.
 
 ```java
-import io.opentracing.Tracer;
+import io.opentracing.Span;
 import io.opentracing.util.GlobalTracer;
 
 @WebServlet
