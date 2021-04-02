@@ -12,7 +12,7 @@ There are two options available for pricing, depending on whether APM and Profil
 | Billing Parameter  | Price                                      | Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [APM Host][4]      | $31 per underlying [APM host][4] per month | 1 million Indexed Spans and 150 GB of Ingested Spans included per month with every APM host.   | Datadog records the number of [APM hosts][5] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][5] |
-| [APM & Continuous Profiler][4] | $40 per underlying [APM host][4], includes the [Continuous Profiler][6] with 4 profiled containers per month. | Same as APM Host | Same as APM Host |
+| [APM & Continuous Profiler][4] | $40 per underlying [APM host][4] and includes the [Continuous Profiler][6] with 4 profiled containers per month. | Same as APM Host | Datadog records the number of unique Continuous Profiler hosts you are concurrently monitoring with the Datadog Continuous Profiler service once per hour.  The hourly measurements and billing are conducted the same as for APM Hosts.  |
 | [Fargate][4]       | $2 per concurrent task per month           | 65,000 Indexed Spans and 10 GB of Ingested Spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][4]              |
 | [Indexed span][5] | $1.70 per million Indexed Spans per month | Billed when usage is in excess of Indexed Spans included with every APM host | An Indexed span is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed via retention filters or legacy Analyzed Spans to the Datadog APM service at the end of the month. [More information.][5]                                                                                          |
 | [Ingested span][5] | $.10 per GB Ingested Spans per month | Billed when usage is in excess of Ingested Spans included with every APM host | An Ingested span is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested to Datadog at the end of the month. [More information.][5]                                                                                          |
@@ -27,7 +27,7 @@ For more information, see the [Pricing page][7].
 
 **Sample cases illustrate annual billing rates with default 15 days Indexed Span retention. Contact [Sales][7] or your [Customer Success][8] Manager to discuss volume discounts for your account.**
 
-### Hosts, indexed spans, and extra ingested Spans
+### APM Hosts, indexed spans, and extra ingested Spans without profiler
 
 Using 5 hosts and sending 30 million Indexed Spans, with 900 GB of total Ingested Spans without Profiler.
 
@@ -38,7 +38,7 @@ Using 5 hosts and sending 30 million Indexed Spans, with 900 GB of total Ingeste
 | Ingested Spans | 900 GB          | 750 GB included with 5 APM hosts. $.10 per GB for additional 150 GB of Ingested Spans.                                                                                 | 150 * $.10      | $15                  |
 | Total          |            |                                                                                                 | $155 + $42.50 + $15 | **$212.50 per month** |
 
-### Hosts with six profiled containers
+### APM and Profiler with six profiled containers per host
 
 APM & Continuous Profiler for five hosts with six apps running in separate containers per each host.
 
@@ -48,7 +48,7 @@ APM & Continuous Profiler for five hosts with six apps running in separate conta
 | Profiled containers  | 6 per host | $2 per additional container per host. In this case there are 6 - 4 = 2 additional containers for each host        | 2  * $2 * 5 hosts         | $20                   |
 | Total          |            |                                                                                                 | $60 + $20      | **$220 per month**    |
 
-### Hosts, Fargate, and indexed spans
+### APM Hosts, Fargate, and indexed spans without profiler
 
 Using 5 hosts, sending 20 million Indexed Spans, and have deployed APM on average 20 Fargate Tasks over the month.
 
@@ -70,9 +70,9 @@ APM & Continuous Profiler for service 1 running on container 1, service 2 runnin
 | Indexed Spans | 20 million | 1 million included with 1 APM host. $1.70 per million for additional 19 million Indexed Spans | 19 * $1.70   | $32.30               |
 | Total          |            |                                                                                                | $40 + $32.30 | **$72.30 per month** |
 
-### Dynamic scaling hosts, containers, Fargate, and no indexed spans
+### APM hosts with dynamic scaling, containers, Fargate, and no indexed spans without profiler
 
-App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 2 running on 10-30 Fargate tasks and you're not using App Analytics. Assuming, the 99th percentile usage of EC2 instances is 7, and average of Fargate Tasks over the month is 28.
+App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 2 running on 10-30 Fargate tasks. Assuming, the 99th percentile usage of EC2 instances is 7, and average of Fargate Tasks over the month is 28.
 
 | Billable Unit | Quantity | Price        | Formula    | Subtotal           |
 |---------------|----------|--------------|------------|--------------------|
@@ -82,7 +82,7 @@ App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 
 
 Note that the container count will not matter if the deployed agent is on the EC2 instances.
 
-### Kubernetes nodes and indexed spans
+### APM and Continuous Profiler with Kubernetes nodes and indexed spans
 
 APM & Continuous Profiler for apps with a Datadog Agent running on 20 worker nodes in Kubernetes sending 20 million Indexed Spans. 10 of these worker nodes have 8 pods each with 1 container per pod, the other 10 have 2 pods each with 1 container per pod.
 
@@ -139,7 +139,7 @@ As of October 20, 2020, all existing App Analytics filters are automatically tra
 
 Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested span volume. More information is available in the [Usage Metrics][7] documentation.
 
-**9. Is the Continuous Profiler as a standalone product?**
+**9. Is the Continuous Profiler available as a standalone product?**
 
 Yes. Let us know if you are interested in buying the Continuous Profiler without APM. Please reach out to us by contacting [Sales][13] or through your [Customer Success Manager][3].
 
