@@ -7,7 +7,7 @@ aliases:
 
 [APM & Continuous Profiler][1] powers you to find service bottlenecks, analyze distributed traces and code performance across your microservices architecture.
 
-There are two options available for pricing, depending on whether APM and Profiling are bundled. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to slice and dice your application data with spans indexed by [tagged-based custom retention filters][3]. 
+There are two options available for pricing, depending on whether APM and Profiling are bundled. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to slice and dice your application data with spans indexed by [tagged-based custom retention filters][3].
 
 | Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -25,7 +25,7 @@ For more information, see the [Pricing page][7].
 
 ## Deployment scenarios
 
-**Sample cases illustrate annual billing rates with default 15 days Indexed Span retention. Contact [Sales][7] or your [Customer Success][8] Manager to discuss volume discounts for your account.**
+**Sample cases illustrate annual billing rates with default 15 days Indexed Span retention. Contact [Sales][8] or your [Customer Success][9] Manager to discuss volume discounts for your account.**
 
 ### APM Hosts, indexed spans, and extra ingested Spans without profiler
 
@@ -101,7 +101,7 @@ An AWS-Lambda based serverless application being invoked 10 million times in a m
 
 | Billable Unit                  | Quantity   | Price                                                                       | Formula   | Subtotal           |
 |--------------------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| Lambda Function Invocations    | 10 million | [$5 per month][9]                                                           | 10 * $5  | $50               |
+| Lambda Function Invocations    | 10 million | [$5 per month][10]                                                           | 10 * $5  | $50               |
 | Indexed Spans                  | 10 million | 150,000 Indexed Spans included with each 1 million Lambda invocations. $1.70 per million additional Indexed Spans | 8.5 * $1.70 | $14.45               |
 | Total                          |            |                                                                             | $50 + $14.45 | **$64.45 per month** |
 
@@ -109,11 +109,11 @@ An AWS-Lambda based serverless application being invoked 10 million times in a m
 
 **1. What is classified as an APM host for billing?**
 
-A [host][4] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][10] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][5].
+A [host][4] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][11] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][5].
 
 **2. How is billing calculated if I deploy one agent per container?**
 
-It is recommended to [setup running][11] one agent per underlying host for container deployment. If you still choose to run one agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (Number of containers)
+It is recommended to [setup running][12] one agent per underlying host for container deployment. If you still choose to run one agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (Number of containers)
 
 **3. What is classified as an APM Fargate task for billing?**
 
@@ -129,19 +129,19 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **6. How is the host billing related to my services?**
 
-APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. App Analytics is billed on the basis of [Indexed Span][12] count. To estimate how many Indexed Spans each of your service can send, use the [Event Estimator][11].
+APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. Tracing without Limits is billed on the basis of [Indexed and Ingested span][13] count. To estimate how many ingested and indexed spans each of your services is sending, see the [Usage Metrics][13] documentation.
 
 **7. What happens to my existing App Analytics filters?**
 
 As of October 20, 2020, all existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters within the [retention filters][3] page.
 
-**8. How do I estimate my Ingested Span volume?**
+**8. How do I estimate my ingested or indexed span volume?**
 
-Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested span volume. More information is available in the [Usage Metrics][7] documentation.
+Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested and indexed span volume. More information is available in the [Usage Metrics][13] documentation.
 
 **9. Is the Continuous Profiler available as a standalone product?**
 
-Yes. Let us know if you are interested in buying the Continuous Profiler without APM. Please reach out to us by contacting [Sales][13] or through your [Customer Success Manager][3].
+Yes. Let us know if you are interested in buying the Continuous Profiler without APM. Please reach out to us by contacting [Sales][9] or through your [Customer Success Manager][14].
 
 
 ## Further Reading
@@ -159,9 +159,10 @@ Yes. Let us know if you are interested in buying the Continuous Profiler without
 [5]: /account_management/billing/pricing/#apm
 [6]: /tracing/profiling/
 [7]: https://www.datadoghq.com/pricing/
-[8]: mailto:success@datadoghq.com
-[9]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
-[10]: /tracing/send_traces/#datadog-agent
+[8]: mailto:sales@datadoghq.com
+[9]: mailto:success@datadoghq.com
+[10]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
 [11]: /account_management/billing/
-[12]: /tracing/visualization/
-[13]: mailto:sales@datadoghq.com
+[12]: /tracing/setup_overview/setup/java/?tab=containers#configure-the-datadog-agent-for-apm
+[13]: /tracing/trace_retention_and_ingestion/
+[14]: /tracing/trace_retention_and_ingestion/usage_metrics
