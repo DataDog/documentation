@@ -139,7 +139,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 * Store all images used in your README.md file in this folder. 
 
 #### Manifest.json
-* Contains multiple JSON objects, such as display_name, public_title, and author. 
+* JSON object including elements for `display_name`, `public_title`, `author`, and more.
 * More information about manifest.json fields can be found in our [Integrations Assets Reference](https://docs.datadoghq.com/developers/integrations/check_references/#manifest-file)
 * Details on the pricing object are described in the private [Marketplace README](https://github.com/DataDog/marketplace/blob/master/README.md#faq).
 
