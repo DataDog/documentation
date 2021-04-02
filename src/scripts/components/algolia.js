@@ -33,11 +33,25 @@ let algoliaTimer;
 
 const isApiPage = () => document.body.classList.value.includes('api');
 
+const handleSearchPageRedirect = () => {
+    const docsearchInput = document.querySelector('.docssearch-input.ds-input');
+
+    if (docsearchInput.value !== '') {
+        window.location = `${baseUrl}/search?s=${docsearchInput.value}`;
+    }
+}
+
 const appendHomeLinkToAutocompleteWidget = (autocompleteHeaderElement) => {
     const homeLink = document.createElement('a');
-    homeLink.setAttribute('href', '/');
     homeLink.className = "font-regular text-underline pl-2";
     homeLink.innerText = 'Click here to search the full docs';
+    homeLink.setAttribute('href', '#');
+
+    homeLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        handleSearchPageRedirect();
+    })
+
     autocompleteHeaderElement.appendChild(homeLink);
 }
 
@@ -113,7 +127,7 @@ const searchDesktop = docsearch({
             }, 1000);
         }
     },
-    debug: true // Set debug to true if you want to inspect the dropdown
+    debug: false // Set debug to true if you want to inspect the dropdown
 });
 let desktopEnableEnter = true;
 const searchBtn = document.querySelector('.js-search-btn');
@@ -136,14 +150,7 @@ searchDesktop.autocomplete.on('keyup', function(e) {
 
 // if user clicks search button
 if (searchBtn) {
-    searchBtn.addEventListener('click', function() {
-        const docsearchInput = document.querySelector(
-            '.docssearch-input.ds-input'
-        );
-        if (docsearchInput.value !== '') {
-            window.location = `${baseUrl}/search?s=${docsearchInput.value}`;
-        }
-    });
+    searchBtn.addEventListener('click', handleSearchPageRedirect);
 }
 
 searchDesktop.autocomplete.on('autocomplete:shown', function() {
