@@ -87,10 +87,10 @@ require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('127.0.0.1', 8125)
 
-statsd.increment('example_metric.increment', tags: ['environment:dev'])
-statsd.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
-
-statsd.flush(sync: true)
+statsd.batch do |s|
+  s.increment('example_metric.increment', tags: ['environment:dev'])
+  s.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
+end
 ```
 
 
