@@ -7,7 +7,7 @@ aliases:
 
 [APM & Continuous Profiler][1] powers you to find service bottlenecks, analyze distributed traces and code performance across your microservices architecture.
 
-There are two options available for pricing, depending on whether APM and Profiling are bundled. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to slice and dice your application data with spans indexed by [tagged-based custom retention filters][3].
+There are two options available for pricing, depending on whether APM and Profiling are bundled. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to slice and dice your application data with spans indexed by [tagged-based custom retention filters][3]. 
 
 | Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
