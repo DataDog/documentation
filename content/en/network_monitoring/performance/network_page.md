@@ -59,7 +59,7 @@ Whitelisted tags include `service`, `availability zone`, `env`, `environment`, `
 Once the custom facet is created, use this tag to filter and aggregate traffic in the network page and map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
 
 ### Wildcard search
-To perform a multi-character wildcard search, use the * symbol as follows:
+To perform a multi-character wildcard search, use the `*` symbol as follows:
 
 - `service:web*` matches all services that start with web
 - `service:*web` matches all services that end with web
@@ -69,7 +69,7 @@ Wildcard searches work within facets with this syntax. This query returns all th
 
 `service:*mongo`
 
-To learn more, see our documentation on [search syntax][1].
+To learn more, see the [search syntax][1] documentation.
 
 ## Network data
 
@@ -147,7 +147,7 @@ Organize and share views of traffic data. Saved Views make debugging faster and 
 - To rename a view: hover over a view in the Saved Views list and click the gear icon to *Edit name*.
 - To share a view: hover over a view in the Saved Views list and click the link icon to *Copy permalink*.
 
-To learn more, see our documentation on [Saved Views][2].
+To learn more, see the [Saved Views][2] documentation.
 
 
 ## Table
