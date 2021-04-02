@@ -33,8 +33,17 @@ let algoliaTimer;
 
 const isApiPage = () => document.body.classList.value.includes('api');
 
+const appendHomeLinkToAutocompleteWidget = (autocompleteHeaderElement) => {
+    const homeLink = document.createElement('a');
+    homeLink.setAttribute('href', '/');
+    homeLink.className = "font-regular text-underline pl-2";
+    homeLink.innerText = 'Click here to search the full docs';
+    autocompleteHeaderElement.appendChild(homeLink);
+}
+
 const enhanceApiResultStyles = () => {
     const headers = document.querySelectorAll('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
+    appendHomeLinkToAutocompleteWidget(headers[0]);
 
     headers.forEach(header => {
         if (header.textContent.toLowerCase().includes('api')) {
@@ -63,6 +72,8 @@ const setApiEndpointAsSubcategory = () => {
                     if (content) {
                         const apiEndpointTitle = content.querySelector('.algolia-docsearch-suggestion--title');
                         subcategory.textContent = apiEndpointTitle.textContent;
+                        subcategory.style.fontWeight = '800';
+                        subcategory.style.color = '#000';
                     }
                 }
             }
@@ -102,7 +113,7 @@ const searchDesktop = docsearch({
             }, 1000);
         }
     },
-    debug: false // Set debug to true if you want to inspect the dropdown
+    debug: true // Set debug to true if you want to inspect the dropdown
 });
 let desktopEnableEnter = true;
 const searchBtn = document.querySelector('.js-search-btn');
