@@ -158,7 +158,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 * **Note:** Technology Partners are responsible for the licensing of the logos they submit.  
 
 #### Changelog.md
-* Captures release notes and version information, and displays this in the “Release Notes” tab of your tile.
+* Captures release notes and version information, and displays this in the “Release Notes” tab of your tile. Add release notes in descending order (latest version at the top).
 
 #### Additional Marketplace files 
 * The Technology Partner’s own End User License Agreement (EULA) is required for all Marketplace offerings.
