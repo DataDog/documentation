@@ -102,7 +102,7 @@ const searchDesktop = docsearch({
             }, 1000);
         }
     },
-    debug: true // Set debug to true if you want to inspect the dropdown
+    debug: false // Set debug to true if you want to inspect the dropdown
 });
 let desktopEnableEnter = true;
 const searchBtn = document.querySelector('.js-search-btn');
