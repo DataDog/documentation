@@ -55,7 +55,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 1. Installez la [gem][3] `dogstatsd-ruby` :
 
    ```
-    gem install dogstatsd-ruby --version '~> 4'
+    gem install dogstatsd-ruby
    ```
 
 2. Pour activer la collecte de métriques de Sidekiq Pro, ajoutez le code suivant à votre initialiseur. Pour un déploiement conteneurisé, remplacez `localhost` par l'adresse du conteneur de votre Agent.
