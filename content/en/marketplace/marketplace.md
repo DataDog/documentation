@@ -122,7 +122,7 @@ For standalone software and services--or if your integration is using the Datado
 #### Full Integration
 For the complete integration scaffolding run: 
 
-`ddev create`
+`ddev create <Offering Name>`
 
 ### 5. Populate the Tile Scaffolding
 
