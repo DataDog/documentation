@@ -33,9 +33,8 @@ let algoliaTimer;
 
 const isApiPage = () => document.body.classList.value.includes('api');
 
-const handleApiResultStyleUpdates = () => {
+const enhanceApiResultStyles = () => {
     const headers = document.querySelectorAll('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
-    const contentTitles = document.querySelectorAll('.algolia-docsearch-suggestion--subcategory-column-text');
 
     headers.forEach(header => {
         if (header.textContent.toLowerCase().includes('api')) {
@@ -43,16 +42,29 @@ const handleApiResultStyleUpdates = () => {
             header.style.color = '#632ca6';
         }
     })
+}
 
-    contentTitles.forEach(title => {
-        const parentAnchor = title.closest('a');
+// Transforms API-specific results to show API endpoint as title on both left & right-hand columns of autocomplete widget.
+const setApiEndpointAsSubcategory = () => {
+    const searchResultSubcategoryNodeList = document.querySelectorAll('.algolia-docsearch-suggestion--subcategory-column-text');
+
+    searchResultSubcategoryNodeList.forEach(subcategory => {
+        const parentAnchor = subcategory.closest('a');
 
         if (parentAnchor) {
-            const closestHeader = parentAnchor.querySelector('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
+            const categoryHeader = parentAnchor.querySelector('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
 
-            if (closestHeader.textContent.toLowerCase().includes('api')) {
-                const apiContentHeader = title.querySelector('.algolia-docsearch-suggestion--title');
-                // TODO: swap title with apiContentHeader.text
+            if (categoryHeader && categoryHeader.textContent.toLowerCase().includes('api')) {
+                const subcategoryContainer = subcategory.closest('.algolia-docsearch-suggestion--subcategory-column');
+
+                if (subcategoryContainer && subcategoryContainer.nextElementSibling) {
+                    const content = subcategoryContainer.nextElementSibling;
+
+                    if (content) {
+                        const apiEndpointTitle = content.querySelector('.algolia-docsearch-suggestion--title');
+                        subcategory.textContent = apiEndpointTitle.textContent;
+                    }
+                }
             }
         }
     })
@@ -125,7 +137,8 @@ if (searchBtn) {
 
 searchDesktop.autocomplete.on('autocomplete:shown', function() {
     if (isApiPage()) {
-        handleApiResultStyleUpdates();
+        enhanceApiResultStyles();
+        setApiEndpointAsSubcategory();
     }
 })
 
