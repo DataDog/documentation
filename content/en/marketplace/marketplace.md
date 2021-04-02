@@ -26,7 +26,7 @@ Converting an account to a developer sandbox may take up to one or two business 
 
 ### Resources
 
-In addition to this documentation, you can learn more about developing Datadog integrations by taking the following steps :
+In addition to this documentation, you can learn more about developing Datadog integrations by taking the following steps:
 
 * Attend our on-demand [“Introduction to Datadog Integrations”](https://learn.datadoghq.com/course/view.php?id=38) course on the [Datadog Learning Center](https://learn.datadoghq.com/).
 * Review our example pull-request in the [Marketplace repository](https://github.com/DataDog/marketplace) with annotations and best practices (this link is only available to Technology Partners that have have completed the Marketplace Listing Agreement in the Datadog Partner Portal)
