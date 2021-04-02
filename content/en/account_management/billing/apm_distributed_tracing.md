@@ -46,7 +46,7 @@ APM & Continuous Profiler for five hosts with six apps running in separate conta
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM & Continuous Profiler       | 5          | $40 per host                                                                                    | 5 * $40       | $200                  |
 | Profiled containers  | 6 per host | $2 per additional container per host. In this case there are 6 - 4 = 2 additional containers for each host        | 2  * $2 * 5 hosts         | $20                   |
-| Total          |            |                                                                                                 | $60 + $20      | **$220 per month**    |
+| Total          |            |                                                                                                 | $200 + $20      | **$220 per month**    |
 
 ### APM Hosts, Fargate, and indexed spans without profiler
 
@@ -88,7 +88,7 @@ APM & Continuous Profiler for apps with a Datadog Agent running on 20 worker nod
 
 | Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| APM & Continuous Profiler (Nodes) | 20         | $40 per host                                                                | 20 * $340 | $800               |
+| APM & Continuous Profiler (Nodes) | 20         | $40 per host                                                                | 20 * $40 | $800               |
 | Profiled containers  | 100 in aggregate | $2 per additional container. In this case 20 hosts would allow up to 80 containers but we have 20 containers summed across two hosts: 100-80 = 20 additional containers        | $2 * 20 hosts        | $40                    |
 | Indexed Spans    | 20 million | 20 million included with 20 APM hosts (nodes). No additional Indexed Spans | 0 * $1.70 | 0                  |
 | Total             |            |                                                                             | $800 + $40 | **$840 per month** |
