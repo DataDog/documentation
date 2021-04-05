@@ -603,6 +603,10 @@
     "request_description": "Edit a monitor request body.",
     "request_schema_description": "Object describing a monitor update request."
   },
+  "ListMonitorDowntimes": {
+    "description": "Get all downtimes for the specified monitor",
+    "summary": "Get all downtimes for a monitor"
+  },
   "MuteMonitor": {
     "description": "Mute the specified monitor.",
     "summary": "Mute a monitor"
