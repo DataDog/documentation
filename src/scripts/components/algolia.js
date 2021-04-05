@@ -45,7 +45,7 @@ const appendHomeLinkToAutocompleteWidget = (autocompleteHeaderElement) => {
     const homeLink = document.createElement('a');
     homeLink.className = "font-regular text-underline pl-2";
     homeLink.innerText = 'Click here to search the full docs';
-    homeLink.setAttribute('href', '#');
+    homeLink.setAttribute('href', '/search');
 
     homeLink.addEventListener('click', (event) => {
         event.preventDefault();
