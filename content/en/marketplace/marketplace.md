@@ -168,7 +168,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 Submit a pull request containing your integration assets either to the [Marketplace repository](https://github.com/DataDog/marketplace), or to [Integrations Extras repository](https://github.com/DataDog/integrations-extras). 
 
-Each repository runs automatic tests to verify that your pull request is in good shape. Once the PR is passing all checks, our Engineering team will begin their review, where they will identify blockers to release, as well as make suggestions around best practices. 
+Each repository runs automatic tests to verify that your pull request is in good shape. You can run these same tests locally with the command `ddev validate all`. Once the PR is passing all checks, our Engineering team will begin their review, where they will identify blockers to release, as well as make suggestions around best practices. 
 
 If you need access to Azure DevOps for the Marketplace repository, please leave a comment in the PR and our engineering team will provide access. 
 
