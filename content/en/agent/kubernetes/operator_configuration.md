@@ -211,8 +211,10 @@ spec:
 | credentials.useSecretBackend                                                                               | Use the Agent secret backend feature for retreiving all credentials needed by the different components: Agent, Cluster, Cluster Checks. If `useSecretBackend: true`, other credential parameters will be ignored. Default value is false.                                                                                                                                                                                                                                                                                                                                                                                             |
 | site                                                                                                       | Set the site of the Datadog intake for Agent data: {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
-{{< /table >}}
 
+
+
+{{< /table >}}
 [1]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
 [2]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
 [3]: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
