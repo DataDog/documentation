@@ -58,6 +58,19 @@ Whitelisted tags include `service`, `availability zone`, `env`, `environment`, `
 
 Once the custom facet is created, use this tag to filter and aggregate traffic in the network page and map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
 
+### Wildcard search
+To perform a multi-character wildcard search, use the `*` symbol as follows:
+
+- `service:web*` matches all services that start with web
+- `service:*web` matches all services that end with web
+- `service:*web*` matches all services that contain the string web
+
+Wildcard searches work within facets with this syntax. This query returns all the services that end with the string mongo:
+
+`service:*mongo`
+
+To learn more, see the [search syntax][1] documentation.
+
 ## Network data
 
 {{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data"  style="width:90%;" >}}
@@ -134,7 +147,7 @@ Organize and share views of traffic data. Saved Views make debugging faster and 
 - To rename a view: hover over a view in the Saved Views list and click the gear icon to *Edit name*.
 - To share a view: hover over a view in the Saved Views list and click the link icon to *Copy permalink*.
 
-To learn more, see our documentation on [Saved Views][1].
+To learn more, see the [Saved Views][2] documentation.
 
 
 ## Table
@@ -184,4 +197,5 @@ The top of the sidepanel displays common source and destination tags shared by t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/saved_views/
+[1]: https://docs.datadoghq.com/logs/search_syntax/
+[2]: /logs/explorer/saved_views/
