@@ -55,15 +55,6 @@ const enhanceApiResultStyles = () => {
     appendHomeLinkToAutocompleteWidget(headers[0]);
 
     headers.forEach(header => {
-        // const parentAnchor = header.closest('a');
-
-        // if (parentAnchor.classList.value.includes('algolia-docsearch-suggestion__main')) {
-        //     const results = document.querySelector('.ds-suggestions');
-        //     header.remove();
-        //     results.prepend(header);
-        //     header.style.display = 'block';
-        // }
-
         if (header.textContent.toLowerCase().includes('api')) {
             header.style.fontWeight = '800';
             header.style.color = '#632ca6';
@@ -131,8 +122,9 @@ const searchDesktop = docsearch({
             }, 1000);
         }
     },
-    debug: true // Set debug to true if you want to inspect the dropdown
+    debug: false // Set debug to true if you want to inspect the dropdown
 });
+
 let desktopEnableEnter = true;
 const searchBtn = document.querySelector('.js-search-btn');
 const searchContainer = document.querySelector('.search-container');
@@ -201,7 +193,7 @@ if (searchContainer) {
 const searchMobile = docsearch({
     appId: algoliaConfig.appId,
     apiKey: algoliaConfig.apiKey,
-    indexName: algoliaConfig.index,
+    indexName: isApiPage() ? algoliaConfig.api_index : algoliaConfig.index,
     inputSelector: '.docssearch-input-mobile',
     algoliaOptions: {
         facetFilters: [`language:${lang}`]
@@ -211,15 +203,26 @@ const searchMobile = docsearch({
     },
     debug: false // Set debug to true if you want to inspect the dropdown
 });
+
 let mobileEnableEnter = true;
+
 searchMobile.autocomplete.on('keyup', function(e) {
     if (e.keyCode === 13 && mobileEnableEnter) {
         window.location = `${baseUrl}/search/?s=${this.value}`;
     }
 });
+
 searchMobile.autocomplete.on('autocomplete:cursorchanged', function() {
     mobileEnableEnter = false;
 });
+
 searchMobile.autocomplete.on('autocomplete:cursorremoved', function() {
     mobileEnableEnter = true;
 });
+
+searchMobile.autocomplete.on('autocomplete:shown', function() {
+    if (isApiPage()) {
+        enhanceApiResultStyles();
+        setApiEndpointAsSubcategory();
+    }
+})
