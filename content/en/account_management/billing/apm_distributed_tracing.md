@@ -129,7 +129,7 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **6. How is the host billing related to my services?**
 
-APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. Tracing without Limits is billed on the basis of [Indexed and Ingested span][13] count. To estimate how many ingested and indexed spans each of your services is sending, see the [Usage Metrics][13] documentation.
+APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. Tracing without Limits is billed on the basis of [Indexed and Ingested span][13] count. To estimate how many ingested and indexed spans each of your services is sending, see the [Usage Metrics][14] documentation.
 
 **7. What happens to my existing App Analytics filters?**
 
@@ -137,11 +137,11 @@ As of October 20, 2020, all existing App Analytics filters are automatically tra
 
 **8. How do I estimate my ingested or indexed span volume?**
 
-Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested and indexed span volume. More information is available in the [Usage Metrics][13] documentation.
+Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested and indexed span volume. More information is available in the [Usage Metrics][14] documentation.
 
 **9. Is the Continuous Profiler available as a standalone product?**
 
-Yes. Let us know if you are interested in buying the Continuous Profiler without APM. Please reach out to us by contacting [Sales][9] or through your [Customer Success Manager][14].
+Yes. Let us know if you are interested in buying the Continuous Profiler without APM. Please reach out to us by contacting [Sales][8] or through your [Customer Success Manager][9].
 
 
 ## Further Reading
