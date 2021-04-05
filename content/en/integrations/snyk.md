@@ -13,6 +13,10 @@ name: snyk
 public_title: Datadog-Snyk Integration
 short_description: Profile and report on vulnerabilities with Snyk
 version: '1.0'
+further_reading:
+- link: " https://www.datadoghq.com/partner/snyk/"
+  tag: "Partner page"
+  text: "Snyk Monitoring with Datadog"
 ---
 
 ## Overview
@@ -64,6 +68,10 @@ A minute or two after you deploy your service, the “Vulnerability” column on
 ## Troubleshooting
 
 Need help? Contact [Datadog support][12].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/tracing/profiler/
 [2]: https://snyk.io/product/vulnerability-database/
