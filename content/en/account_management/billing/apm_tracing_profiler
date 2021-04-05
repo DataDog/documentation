@@ -3,6 +3,8 @@ title: APM Billing
 kind: documentation
 aliases:
 - /account_management/billing/profiler/
+- /account_management/billing/apm_distributed_tracing/
+- /account_management/billing/apm_tracing_profiling/
 ---
 
 [APM & Continuous Profiler][1] powers you to find service bottlenecks, analyze distributed traces and code performance across your microservices architecture.

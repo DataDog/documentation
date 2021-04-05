@@ -57,10 +57,9 @@ You can set specific email addresses to receive invoices on the [Plan][11] page 
     {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom metrics{{< /nextlink >}}
     {{< nextlink href="account_management/billing/containers/" >}}Containers{{< /nextlink >}}
     {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM & Distributed Tracing{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM (Distributed Tracing & Continuous Profiler){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring FAQ{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/profiler/" >}}Continuous Profiler FAQ{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}
