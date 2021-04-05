@@ -42,17 +42,17 @@ const handleSearchPageRedirect = () => {
 }
 
 const appendHomeLinkToAutocompleteWidget = (autocompleteHeaderElement) => {
-    const homeLink = document.createElement('a');
-    homeLink.className = "font-regular text-underline pl-2";
-    homeLink.innerText = 'Click here to search the full docs';
-    homeLink.setAttribute('href', '/search');
+    const searchPageLink = document.createElement('a');
+    searchPageLink.className = "font-regular text-underline pl-2";
+    searchPageLink.innerText = 'Click here to search the full docs';
+    searchPageLink.setAttribute('href', `${baseUrl}/search/`);
 
-    homeLink.addEventListener('click', (event) => {
+    searchPageLink.addEventListener('click', (event) => {
         event.preventDefault();
         handleSearchPageRedirect();
     })
 
-    autocompleteHeaderElement.appendChild(homeLink);
+    autocompleteHeaderElement.appendChild(searchPageLink);
 }
 
 const enhanceApiResultStyles = () => {
@@ -60,6 +60,15 @@ const enhanceApiResultStyles = () => {
     appendHomeLinkToAutocompleteWidget(headers[0]);
 
     headers.forEach(header => {
+        // const parentAnchor = header.closest('a');
+
+        // if (parentAnchor.classList.value.includes('algolia-docsearch-suggestion__main')) {
+        //     const results = document.querySelector('.ds-suggestions');
+        //     header.remove();
+        //     results.prepend(header);
+        //     header.style.display = 'block';
+        // }
+
         if (header.textContent.toLowerCase().includes('api')) {
             header.style.fontWeight = '800';
             header.style.color = '#632ca6';
