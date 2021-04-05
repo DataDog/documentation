@@ -135,7 +135,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 * The “Setup” heading should provide straightforward configuration steps for users to install or use your offering. This section will be displayed in the “Configuration” tab of your tile.
 * The “Support” heading should identify a contact for support, and possibly an option to submit product feedback. This section will be displayed in the “Support” tab of your tile. 
 
-#### Images
+#### images/
 * Store all images used in your README.md file in this folder. 
 
 #### Manifest.json
