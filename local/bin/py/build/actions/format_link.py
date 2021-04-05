@@ -31,13 +31,13 @@ def prepare_file(file):
         for line in f:
             if state == 'main':
                 main_section.append(line)
-                if (re.search(r"{{< tabs >}}", line.strip()) or re.search(r"{{< programming-lang-wrapper", line.strip())):
+                if (re.search(r"{{< (tabs|programming-lang-wrapper|site-region) >}}", line.strip())):
                     state = 'tabs'
             elif state == 'tabs':
                 main_section.append(line)
                 if (re.search(r"{{% tab ", line.strip()) or re.search(r"{{< programming-lang ", line.strip())):
                     state = 'tab'
-                if (re.search(r"{{< /tabs >}}", line.strip()) or re.search(r"{{< /programming-lang-wrapper >}}", line.strip())):
+                if (re.search(r"{{< /(tabs|programming-lang-wrapper|site-region) >}}", line.strip())):
                     state = 'main'
             elif state == 'tab':
                 if (re.search(r"{{% /tab %}}", line.strip()) or re.search(r"{{< /programming-lang >}}", line.strip())):
@@ -324,14 +324,13 @@ def inline_section(file_prepared):
 
     final_text = []
 
-    end_section_pattern = r"\s*{{% /tab %}}.*"
-    end_lang_section_pattern = r"\s*{{< /programming-lang >}}.*"
+    end_section_pattern = r"\s*{{% /(tab|programming-lang|site-region) %}}.*"
 
     i = 1
 
     try:
         for line in file_prepared[0]:
-            if (re.match(end_section_pattern, line) or re.match(end_lang_section_pattern, line)):
+            if (re.match(end_section_pattern, line)):
                 final_text += file_prepared[i]
                 i += 1
             final_text.append(line)
