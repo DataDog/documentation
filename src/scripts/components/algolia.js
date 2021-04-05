@@ -43,14 +43,9 @@ const handleSearchPageRedirect = () => {
 
 const appendHomeLinkToAutocompleteWidget = (autocompleteHeaderElement) => {
     const searchPageLink = document.createElement('a');
-    searchPageLink.className = "font-regular text-underline pl-2";
+    searchPageLink.className = "font-regular text-underline pl-2 js-api-search";
     searchPageLink.innerText = 'Click here to search the full docs';
-    searchPageLink.setAttribute('href', `${baseUrl}/search/`);
-
-    searchPageLink.addEventListener('click', (event) => {
-        event.preventDefault();
-        handleSearchPageRedirect();
-    })
+    searchPageLink.href = `${baseUrl}/search/`;
 
     autocompleteHeaderElement.appendChild(searchPageLink);
 }
@@ -136,7 +131,7 @@ const searchDesktop = docsearch({
             }, 1000);
         }
     },
-    debug: false // Set debug to true if you want to inspect the dropdown
+    debug: true // Set debug to true if you want to inspect the dropdown
 });
 let desktopEnableEnter = true;
 const searchBtn = document.querySelector('.js-search-btn');
@@ -154,6 +149,15 @@ searchDesktop.autocomplete.on('keyup', function(e) {
     }
     if (e.keyCode === 13 && desktopEnableEnter) {
         window.location = `${baseUrl}/search/?s=${this.value}`;
+    }
+
+    if (isApiPage()) {
+        const searchLink = document.querySelector('.js-api-search');
+        const searchInput = document.querySelector('.docssearch-input.ds-input');
+
+        if (searchLink && searchInput) {
+            searchLink.href += !searchLink.href.includes('?') ? `?s=${searchInput.value}` : searchInput.value;
+        }
     }
 });
 
