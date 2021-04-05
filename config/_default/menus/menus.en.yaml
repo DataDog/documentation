@@ -3037,6 +3037,17 @@ api:
     url: /api/latest/downtimes/
     identifier: downtimes
     generated: true
+  - name: Get all downtimes for a monitor
+    url: '#get-all-downtimes-for-a-monitor'
+    identifier: get-all-downtimes-for-a-monitor
+    parent: downtimes
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListMonitorDowntimes
+      unstable: []
   - name: Update a downtime
     url: '#update-a-downtime'
     identifier: update-a-downtime

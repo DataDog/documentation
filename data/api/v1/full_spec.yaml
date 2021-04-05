@@ -17810,6 +17810,45 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
+  /api/v1/monitor/{monitor_id}/downtimes:
+    get:
+      description: Get all downtimes for the specified monitor
+      operationId: ListMonitorDowntimes
+      parameters:
+      - description: The id of the monitor
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Downtime'
+                type: array
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Monitor Not Found error
+      summary: Get all downtimes for a monitor
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/monitor/{monitor_id}/mute:
     post:
       description: Mute the specified monitor.
