@@ -89,7 +89,6 @@ function activateCodeLangNav(activeLang) {
 
 function toggleCodeBlocks(activeLang) {
     activateCodeLangNav(activeLang);
-    toggleMultiCodeLangNav(activeLang);
 
     // non-api page code blocks
     const codeWrappers = document.querySelectorAll('body:not(.api) [class*=js-code-snippet-wrapper]');
@@ -159,23 +158,4 @@ function toggleCodeBlocks(activeLang) {
     }
 }
 
-function toggleMultiCodeLangNav(codeLang) {
-  /*
-  - Find any nav entries with type multi-code-lang
-  - Look for child entry that has data-name matching the current code lang
-  - Switch that url into the parent url, so its the appropriate language version
-   */
-  if(codeLang.length) {
-    const items = document.querySelectorAll('a[data-type="multi-code-lang"]');
-    items.forEach((item) => {
-      const a = item.closest('li').querySelector(`a[data-name="${codeLang}"]`);
-      if (a) {
-        item.setAttribute('href', a.getAttribute('href'));
-      }
-    });
-  }
-}
-
-toggleMultiCodeLangNav(Cookies.get('code-lang') || '');
-
-export { redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav, toggleMultiCodeLangNav };
+export { redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav };
