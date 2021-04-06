@@ -12428,6 +12428,11 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.datadoghq.com
+        variables:
+          subdomain:
+            default: ip-ranges
+            description: The subdomain where the API is deployed.
       summary: List IP Ranges
       tags:
       - IP Ranges
@@ -14795,6 +14800,14 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
       summary: Delete a tag filtering entry
       tags:
       - AWS Integration
@@ -14849,6 +14862,14 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
@@ -14907,6 +14928,14 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
       summary: Set an AWS tag filter
       tags:
       - AWS Integration
@@ -21866,6 +21895,11 @@ paths:
           protocol:
             default: http
             description: The protocol for accessing the API.
+      - url: https://{site}
+        variables:
+          site:
+            default: localhost:8126
+            description: Local Agent endpoint.
       summary: Send traces
       tags:
       - Tracing
@@ -22019,6 +22053,14 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: http-intake.logs
+            description: The subdomain where the API is deployed.
       summary: Send logs
       tags:
       - Logs
@@ -22109,6 +22151,14 @@ servers:
     protocol:
       default: https
       description: The protocol for accessing the API.
+- url: https://{subdomain}.{site}
+  variables:
+    site:
+      default: datadoghq.com
+      description: Any Datadog deployment.
+    subdomain:
+      default: api
+      description: The subdomain where the API is deployed.
 tags:
 - description: 'Configure your Datadog-AWS integration directly through the Datadog
     API.
