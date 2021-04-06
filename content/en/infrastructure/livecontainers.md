@@ -86,10 +86,6 @@ documentation][2]. But if they are missing, ensure they are added (after
             resources:
             - deployments
             - replicasets
-            # Below are in case RBAC was not setup from the above linked "Cluster Agent Setup documentation"
-            - pods 
-            - nodes
-            - services
             verbs:
             - list
             - get
