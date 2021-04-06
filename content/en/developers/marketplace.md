@@ -152,18 +152,18 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### images
 
-* Store all images used in your README.md file in this folder. 
+* Store all images used in your `README.md` file in the `images` folder. 
 
 #### Manifest.json
 
 * JSON object including elements for `display_name`, `public_title`, `author`, and more.
-* More information about manifest.json fields can be found in our [Integrations Assets Reference][24]
+* More information about `manifest.json` fields can be found in our [Integrations Assets Reference][24]
 * Details on the pricing object are described in the private [Marketplace README][25].
 
 #### Metadata.csv
 
 * Contains a list of the out-of-the-box metrics included in an integration, including the metric name, type, interval, and unit. 
-* More information about metadata.csv fields can be found in our [Integrations Assets Reference][24].
+* More information about `metadata.csv` fields can be found in our [Integrations Assets Reference][24].
 * **Note:** All Marketplace metrics count as custom metrics. 
 
 #### Dashboards and Monitors
@@ -220,25 +220,25 @@ Please reach out to us at techpartners@datadoghq.com if you have any questions.
 [3]: https://app.datadoghq.com/marketplace
 [4]: https://www.datadoghq.com/free-datadog-trial/
 [5]: https://partners.datadoghq.com/English/
-[6]: https://docs.datadoghq.com/help/
+[6]: /help/
 [7]: https://learn.datadoghq.com/course/view.php?id=38
 [8]: https://learn.datadoghq.com/
 [9]: https://github.com/DataDog/marketplace
 [10]: https://github.com/DataDog/integrations-extras
 [11]: https://chat.datadoghq.com/
-[12]: https://docs.datadoghq.com/developers/integrations/
-[13]: https://docs.datadoghq.com/developers/prometheus/
-[14]: https://docs.datadoghq.com/developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
-[15]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent
-[16]: https://docs.datadoghq.com/api/
-[17]: https://docs.datadoghq.com/api/latest/metrics/
-[18]: https://docs.datadoghq.com/api/latest/events/
-[19]: https://docs.datadoghq.com/api/latest/service-checks/
-[20]: https://docs.datadoghq.com/api/latest/tracing/
-[21]: https://docs.datadoghq.com/api/latest/incidents/
-[22]: https://docs.datadoghq.com/api/latest/security-monitoring/
+[12]: /developers/integrations/
+[13]: /developers/prometheus/
+[14]: /developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
+[15]: /developers/dogstatsd/?tab=hostagent
+[16]: /api/
+[17]: /api/latest/metrics/
+[18]: /api/latest/events/
+[19]: /api/latest/service-checks/
+[20]: /api/latest/tracing/
+[21]: /api/latest/incidents/
+[22]: /api/latest/security-monitoring/
 [23]: https://pypi.org/project/datadog-checks-dev/
-[24]: https://docs.datadoghq.com/developers/integrations/check_references/#manifest-file
+[24]: /developers/integrations/check_references/#manifest-file
 [25]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
 [26]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
 [27]: https://www.datadoghq.com/blog/
