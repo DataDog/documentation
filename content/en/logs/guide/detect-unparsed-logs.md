@@ -7,8 +7,8 @@ further_reading:
  - link: "/logs/explorer/"
     tag: "Documentation"
     text: "See how to explore your logs"
- - link: /logs/faq/log-parsing-best-practice
-    tag: Documentation
+ - link: "/logs/faq/log-parsing-best-practice"
+    tag: "Documentation"
     text: "Log Parsing - Best Practices"
 beta: true
 ---
