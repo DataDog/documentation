@@ -14,7 +14,7 @@ public_title: Datadog-Snyk Integration
 short_description: Profile and report on vulnerabilities with Snyk
 version: '1.0'
 further_reading:
-- link: " https://www.datadoghq.com/partner/snyk/"
+- link: "https://www.datadoghq.com/partner/snyk/"
   tag: "Partner page"
   text: "Snyk Monitoring with Datadog"
 ---
