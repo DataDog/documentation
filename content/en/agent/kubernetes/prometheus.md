@@ -159,7 +159,7 @@ It also instructs the Datadog Cluster Agent (if enabled) to detect the services 
 
 - `prometheus.io/scrape=true`: Required.
 - `prometheus.io/path`: Optional, defaults to `/metrics`.
-- `prometheus.iioi/port`: Optional, default is `%%port%%`, a [template variable][13] that is replaced by the container/service port.
+- `prometheus.io/port`: Optional, default is `%%port%%`, a [template variable][13] that is replaced by the container/service port.
 
 This configuration generates a check that collects all metrics exposed using the default configuration of the [OpenMetrics integration][1].
 
