@@ -23,16 +23,38 @@ spec:
     image:
       name: "gcr.io/datadoghq/agent:latest"
 ```
-<p>Testing description list element:</p>
-
 agent.additionalAnnotations
 : `AdditionalAnnotations` provide annotations that will be added to the Agent Pods.
 
-agent.config.securityContext.allowPrivilegeEscalation
-: Controls whether a process can gain more privileges than its parent process. This Boolean directly controls if the no_new_privs flag will be set on the container process. `AllowPrivilegeEscalation` is true always when the container is both run as Privileged, and has CAP_SYS_ADMIN.
+agent.additionalLabels
+: `AdditionalLabels` provide labels that will be added to the cluster checks runner pods.
+
+agent.apm.enabled
+: Enable this to enable APM and tracing on port 8126. See the [Datadog Docker documentation][1]
+
+agent.apm.env
+: The Datadog Agent supports many [environment variables][2]
 
 agent.apm.hostPort
 : Number of the port to expose on the host. If specified, this must be a valid port number, 0 < x < 65536. If `HostNetwork` is specified, this must match `ContainerPort`. Most containers do not need this.
+
+agent.apm.resources.limits
+: Limits describes the maximum amount of compute resources allowed. For more info, [see the Kubernetes documentation][3]
+
+agent.apm.resources.requests
+: `Requests` describes the minimum amount of compute resources required. If `requests` is omitted for a container, it defaults to `limits` if that is explicitly specified. Otherwise, it defaults to an implementation-defined value. For more info, [see the Kubernetes documentation][3]
+
+agent.config.checksd.configMapName
+: Name of a ConfigMap used to mount a directory.
+
+agent.config.collectEvents
+: Enables starting event collection from the Kubernetes API. [See the Event Collection documentation][4]
+
+agent.config.confd.configMapName 
+: Name of a ConfigMap used to mount a directory.
+
+agent.config.criSocket.criSocketPath 
+: Path to the container runtime socket (if different from Docker). This is supported starting from Agent 6.6.0.  
 
 
 {{< table table-type="break-word" >}}
