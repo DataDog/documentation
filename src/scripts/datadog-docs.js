@@ -129,7 +129,7 @@ $(document).ready(function () {
         const results = new RegExp('[?&]' + 's' + '=([^&#]*)').exec(
             window.location.href
         );
-
+        
         let query = '';
         try {
             query = results[1];
@@ -560,7 +560,7 @@ $(document).ready(function () {
             );
         });
     }
-
+    
 
     updateMainContentAnchors();
 
@@ -657,7 +657,7 @@ function getPathElement() {
      if (path.includes('agent/guide')) {
         aPath = document.querySelector('.side [data-path*="agent/guide"]');
         maPath = document.querySelector('header [data-path*="agent/guide"]');
-    }
+    } 
 
 
     if (path.includes('tracing/guide')) {
@@ -716,7 +716,7 @@ function getPathElement() {
             'header .nav-top-level > [data-path*="integrations"]'
         );
     }
-
+    
     if (aPath) {
         aPath.classList.add('active');
         hasParentLi(aPath);
@@ -777,7 +777,7 @@ function updateSidebar(event) {
                 }
             }
         })
-
+        
     } else {
         if (event.target.closest('li').querySelector('a')) {
             event.target
@@ -881,7 +881,7 @@ function rulesListClickHandler(event, pathString) {
     if (event.target.matches('#rules .list-group .js-group a.js-page')) {
         event.preventDefault();
         const targetURL = event.target.href;
-
+        
         if (targetURL.includes(pathString)) {
             loadPage(targetURL);
             window.history.pushState({}, '' /* title */, targetURL);
