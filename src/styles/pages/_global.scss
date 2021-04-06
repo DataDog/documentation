@@ -943,3 +943,27 @@ table,
         width: 100%;
     }
 }
+
+dl {
+    border: 1px solid #d6d6d6;
+
+    dd,
+    dt {
+        padding-left: 0.75rem;
+    }
+
+    dt {
+        padding-top: 0.75rem;
+    }
+
+    dd {
+        border-bottom: 1px solid #d6d6d6;
+        padding-bottom: 0.75rem;
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+    }
+}
+  
+  

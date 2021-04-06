@@ -23,6 +23,17 @@ spec:
     image:
       name: "gcr.io/datadoghq/agent:latest"
 ```
+<p>Testing description list element:</p>
+
+agent.additionalAnnotations
+: `AdditionalAnnotations` provide annotations that will be added to the Agent Pods.
+
+agent.config.securityContext.allowPrivilegeEscalation
+: Controls whether a process can gain more privileges than its parent process. This Boolean directly controls if the no_new_privs flag will be set on the container process. `AllowPrivilegeEscalation` is true always when the container is both run as Privileged, and has CAP_SYS_ADMIN.
+
+agent.apm.hostPort
+: Number of the port to expose on the host. If specified, this must be a valid port number, 0 < x < 65536. If `HostNetwork` is specified, this must match `ContainerPort`. Most containers do not need this.
+
 
 {{< table table-type="break-word" >}}
 | Parameter                                                                                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
