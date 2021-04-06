@@ -248,7 +248,7 @@ Une solution consiste à exécuter NGINX à partir d'un conteneur Docker. Un exe
 
 Les plug-ins suivants doivent être installés :
 
-- Plug-in NGINX pour OpenTracing - [linux-amd64-nginx-${VERSION_NGINX}-ngx_http_module.so.tgz][3] : installé dans `/usr/lib/nginx/modules`
+- Plug-in NGINX pour OpenTracing - [linux-amd64-nginx-${VERSION_NGINX}-ot16-ngx_http_module.so.tgz][3] : installé dans `/usr/lib/nginx/modules`
 - Plug-in Datadog OpenTracing C++ - [linux-amd64-libdd_opentracing_plugin.so.gz][4] : installé à un emplacement accessible pour NGINX, p. ex. `/usr/local/lib`
 
 Commandes pour télécharger et installer ces modules :
@@ -264,8 +264,8 @@ NGINX_VERSION=1.17.3
 OPENTRACING_NGINX_VERSION="$(get_latest_release opentracing-contrib/nginx-opentracing)"
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 # Installer le plug-in NGINX pour OpenTracing
-wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/${OPENTRACING_NGINX_VERSION}/linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz
-tar zxf linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz -C /usr/lib/nginx/modules
+wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/${OPENTRACING_NGINX_VERSION}/linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz
+tar zxf linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz -C /usr/lib/nginx/modules
 # Installer le plug-in C++ Datadog pour Opentracing
 wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTRACING_CPP_VERSION}/linux-amd64-libdd_opentracing_plugin.so.gz
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
