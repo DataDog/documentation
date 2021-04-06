@@ -61577,6 +61577,19 @@
           "description": "The protocol for accessing the API."
         }
       }
+    },
+    {
+      "url": "https://{subdomain}.{site}",
+      "variables": {
+        "site": {
+          "default": "datadoghq.com",
+          "description": "Any Datadog deployment."
+        },
+        "subdomain": {
+          "default": "api",
+          "description": "The subdomain where the API is deployed."
+        }
+      }
     }
   ],
   "tags": [
