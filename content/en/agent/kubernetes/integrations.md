@@ -108,7 +108,7 @@ If you define your Kubernetes pods directly with `kind: Pod`, add each pod's ann
 
 ### Tolerate unready pods
 
-By default, `unready` pods are ignored when the Datadog Agent schedules checks, so metrics, service checks and logs are not collected from these pods. However, the annotation `ad.datadoghq.com/tolerate-unready` overrides this behavior. For example: 
+By default, `unready` pods are ignored when the Datadog Agent schedules checks, so metrics, service checks, and logs are not collected from these pods. However, the annotation `ad.datadoghq.com/tolerate-unready` overrides this behavior. For example:
 
 ```yaml
 apiVersion: v1
@@ -239,9 +239,6 @@ With the key-value store enabled as a template source, the Agent looks for templ
 [2]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
-
-
-
 
 ## Examples
 
