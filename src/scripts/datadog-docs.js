@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import Stickyfill from 'stickyfilljs';
 import algoliasearch from 'algoliasearch';
 import Choices from 'choices.js';
