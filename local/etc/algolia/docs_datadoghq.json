@@ -138,7 +138,7 @@
             "lvl0": {
                 "selector": "",
                 "global": true,
-                "default_value": "API Latest"
+                "default_value": "API"
             },
             "lvl1": ".main-api > h1",
             "lvl2": ".main-api h2 a",
