@@ -304,7 +304,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [5]: https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: /agent/guide/operator-advanced
-[8]: https://github.com/DataDog/datadog-operator/blob/master/docs/configuration.md
+[8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
 {{% /tab %}}
 {{< /tabs >}}
 
