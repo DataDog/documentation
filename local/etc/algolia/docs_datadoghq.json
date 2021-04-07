@@ -136,7 +136,7 @@
     "selectors": {
         "api_latest": {
             "lvl0": {
-                "selector": "",
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
                 "global": true,
                 "default_value": "API"
             },
