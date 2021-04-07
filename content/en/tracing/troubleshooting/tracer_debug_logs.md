@@ -351,8 +351,6 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 
 {{< programming-lang lang=".NET" >}}
 
-For performance reasons, the tracer writes each unique log message at most once in a 60 second period. For more visibility during debugging, disable rate limiting by setting the environment variable `DD_TRACE_LOGGING_RATE=0`.
-
 **Logs from native code:**
 
 ```shell
