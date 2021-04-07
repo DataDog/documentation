@@ -83,7 +83,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Botocore][43]    | >= 1.4.51         | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
 | [Boto2][44]       | >= 2.29.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
 | [Celery][45]      | >= 3.1            | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
-| [Consul][46]      | >= 0.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul     |
+| [Consul][46]      | >= 0.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
 | [Futures][47]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
 | [gevent][48]      | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [Grpc][49]        | >= 1.8.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
@@ -92,6 +92,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Kombu][52]       | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][53]        | >= 0.1.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [Requests][54]    | >= 2.08           | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [urllib3][55]     | >= 1.22           | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 
 
 ## Further Reading
@@ -152,3 +153,4 @@ The `ddtrace` library includes support for the following libraries:
 [52]: https://kombu.readthedocs.io/en/latest
 [53]: https://www.makotemplates.org
 [54]: https://requests.readthedocs.io/en/master/
+[55]: https://urllib3.readthedocs.io/en/latest/
