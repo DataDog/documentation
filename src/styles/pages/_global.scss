@@ -787,7 +787,7 @@ table,
 }
 
 dl {
-    border: 1px solid #d6d6d6;
+    border: 1px solid $ddgray;
 
     dd,
     dt {
@@ -800,7 +800,7 @@ dl {
     }
 
     dd {
-        border-bottom: 1px solid #d6d6d6;
+        border-bottom: 1px solid $ddgray;
         padding-bottom: 1.25rem;
 
         &:last-of-type {
