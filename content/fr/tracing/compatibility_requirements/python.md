@@ -24,7 +24,7 @@ La bibliothèque `ddtrace` prend en charge de nombreux frameworks Web, y compris
 | [asgi][3]                 | >= 2.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
 | [aiohttp][4]              | >= 1.2            | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
 | [Bottle][5]               | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
-| [CherryPy][16]            | >= 11.2.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
+| [CherryPy][43]            | >= 11.2.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
 | [Django][6]               | >= 1.8            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
 | [djangorestframework][6]  | >= 3.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
 | [Falcon][7]               | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
@@ -130,3 +130,4 @@ La bibliothèque `ddtrace` prend en charge les bibliothèques suivantes :
 [40]: http://jinja.pocoo.org
 [41]: https://kombu.readthedocs.io/en/latest
 [42]: https://www.makotemplates.org
+[43]: https://cherrypy.org/
