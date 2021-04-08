@@ -789,6 +789,10 @@ table,
 dl {
     border: 1px solid $ddgray;
 
+    a {
+        border-bottom: 1px solid;
+    }
+
     dt {
         padding: 0.75rem 0.75rem 0.25rem;
     }
