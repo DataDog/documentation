@@ -21,21 +21,16 @@ Python Datadog Trace ライブラリはオープンソースです。詳細に�
 
 | フレームワーク                 | サポート対象のバージョン | ライブラリドキュメント                                              |
 | ------------------------- | ----------------- | ------------------------------------------------------------------ |
-| [asgi][3]                 | >= 2.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
-| [aiohttp][4]              | >= 1.2            | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
-| [Bottle][5]               | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
-| [CherryPy][43]            | >= 11.2.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
-| [Django][6]               | >= 1.8            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
-| [djangorestframework][6]  | >= 3.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
-| [Falcon][7]               | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
-| [Flask][8]                | >= 0.10           | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask   |
-| [Molten][9]               | >= 0.7.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
-| [Pylons][10]              | >= 0.9.6          | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
-| [Pyramid][11]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
-| [pytest][12]              | >= 3.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
-| [Sanic][13]               | >= 19.6.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
-| [Starlette][14]           | >= 0.13.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
-| [Tornado][15]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
+| [aiohttp][3]             | 1.2 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [Bottle][4]              | 0.11 以降           | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
+| [Django][5]              | 1.8 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
+| [djangorestframework][5] | 3.4 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
+| [Falcon][6]              | 1.0 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
+| [Flask][7]               | 0.10 以降           | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask   |
+| [Molten][8]              | 0.7.0 以降          | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
+| [Pylons][9]              | 0.9.6 以降          | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
+| [Pyramid][10]             | 1.7 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
+| [Tornado][11]             | 4.0 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
 
 ### データストアの互換性
@@ -130,4 +125,3 @@ Python Datadog Trace ライブラリはオープンソースです。詳細に�
 [40]: http://jinja.pocoo.org
 [41]: https://kombu.readthedocs.io/en/latest
 [42]: https://www.makotemplates.org
-[43]: https://cherrypy.org/
