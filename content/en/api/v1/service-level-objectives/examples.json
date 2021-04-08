@@ -20,10 +20,10 @@
               "modified_at": "integer",
               "monitor_ids": [],
               "monitor_tags": [],
-              "name": "",
+              "name": "Custom Metric SLO",
               "query": {
-                "denominator": "",
-                "numerator": ""
+                "denominator": "sum:my.custom.metric{*}.as_count()",
+                "numerator": "sum:my.custom.metric{type:good}.as_count()"
               },
               "tags": [
                 "env:prod",
@@ -33,7 +33,7 @@
                 {
                   "target": 99.9,
                   "target_display": "99.9",
-                  "timeframe": "string",
+                  "timeframe": "30d",
                   "warning": 90,
                   "warning_display": "90.0"
                 }
@@ -97,10 +97,10 @@
               "modified_at": "integer",
               "monitor_ids": [],
               "monitor_tags": [],
-              "name": "",
+              "name": "Custom Metric SLO",
               "query": {
-                "denominator": "",
-                "numerator": ""
+                "denominator": "sum:my.custom.metric{*}.as_count()",
+                "numerator": "sum:my.custom.metric{type:good}.as_count()"
               },
               "tags": [
                 "env:prod",
@@ -110,7 +110,7 @@
                 {
                   "target": 99.9,
                   "target_display": "99.9",
-                  "timeframe": "string",
+                  "timeframe": "30d",
                   "warning": 90,
                   "warning_display": "90.0"
                 }
@@ -141,15 +141,15 @@
     },
     "request": {
       "json_curl": {
-        "name": "",
+        "name": "Custom Metric SLO",
         "query": {
-          "denominator": "",
-          "numerator": ""
+          "denominator": "sum:my.custom.metric{*}.as_count()",
+          "numerator": "sum:my.custom.metric{type:good}.as_count()"
         },
         "thresholds": [
           {
             "target": 99.9,
-            "timeframe": null
+            "timeframe": "30d"
           }
         ],
         "type": "metric"
@@ -161,10 +161,10 @@
           "role:mysql"
         ],
         "monitor_ids": [],
-        "name": "",
+        "name": "Custom Metric SLO",
         "query": {
-          "denominator": "",
-          "numerator": ""
+          "denominator": "sum:my.custom.metric{*}.as_count()",
+          "numerator": "sum:my.custom.metric{type:good}.as_count()"
         },
         "tags": [
           "env:prod",
@@ -174,14 +174,14 @@
           {
             "target": 99.9,
             "target_display": "99.9",
-            "timeframe": "string",
+            "timeframe": "30d",
             "warning": 90,
             "warning_display": "90.0"
           }
         ],
         "type": "metric"
       },
-      "html": "<div class=\"\"><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">created_at</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Creation timestamp (UNIX time in seconds)</p>\n<p>Always included in service level objective responses.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> creator</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Object describing the creator of the shared element.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">email</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Email of the creator.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">handle</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Handle of the creator.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Name of the creator.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">description</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A user-defined description of the service level objective.</p>\n<p>Always included in service level objective responses (but may be <code>null</code>).\nOptional in create/update requests.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">groups</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of (up to 20) monitor groups that narrow the scope of a monitor service level objective.</p>\n<p>Included in service level objective responses if it is not empty. Optional in\ncreate/update requests for monitor service level objectives, but may only be\nused when then length of the <code>monitor_ids</code> field is one.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A unique identifier for the service level objective object.</p>\n<p>Always included in service level objective responses.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">modified_at</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Modification timestamp (UNIX time in seconds)</p>\n<p>Always included in service level objective responses.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">monitor_ids</p>\n    </div>\n              <div class=\"col-2 column\"><p>[integer]</p></div>\n              <div class=\"col-6 column\"><p>A list of monitor ids that defines the scope of a monitor service level\nobjective. <strong>Required if type is <code>monitor</code></strong>.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the service level objective object.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> query</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>A metric SLI query. <strong>Required if type is <code>metric</code></strong>. Note that Datadog only allows the sum by aggregator\nto be used because this will sum up all request counts instead of averaging them, or taking the max or\nmin of all of those requests.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">denominator&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A Datadog metric query for total (valid) events.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">numerator&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A Datadog metric query for good events.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">tags</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of tags associated with this service level objective.\nAlways included in service level objective responses (but may be empty).\nOptional in create/update requests.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> thresholds&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>The thresholds (timeframes and associated targets) for this service level\nobjective object.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">target&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>double</p></div>\n              <div class=\"col-6 column\"><p>The target value for the service level indicator within the corresponding\ntimeframe.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">target_display</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A string representation of the target that indicates its precision.\nIt uses trailing zeros to show significant decimal places (e.g. <code>98.00</code>).</p>\n<p>Always included in service level objective responses. Ignored in\ncreate/update requests.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">timeframe&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The SLO time window options. \nAllowed enum values: <code>7d,30d,90d</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">warning</p>\n    </div>\n              <div class=\"col-2 column\"><p>double</p></div>\n              <div class=\"col-6 column\"><p>The warning value for the service level objective.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">warning_display</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A string representation of the warning target (see the description of\nthe <code>target_display</code> field for details).</p>\n<p>Included in service level objective responses if a warning target exists.\nIgnored in create/update requests.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The type of the service level objective. \nAllowed enum values: <code>metric,monitor</code></p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">description</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A user-defined description of the service level objective.</p>\n<p>Always included in service level objective responses (but may be <code>null</code>).\nOptional in create/update requests.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">groups</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of (up to 20) monitor groups that narrow the scope of a monitor service level objective.</p>\n<p>Included in service level objective responses if it is not empty. Optional in\ncreate/update requests for monitor service level objectives, but may only be\nused when then length of the <code>monitor_ids</code> field is one.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">monitor_ids</p>\n    </div>\n              <div class=\"col-2 column\"><p>[integer]</p></div>\n              <div class=\"col-6 column\"><p>A list of monitor ids that defines the scope of a monitor service level\nobjective. <strong>Required if type is <code>monitor</code></strong>.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the service level objective object.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> query</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>A metric SLI query. <strong>Required if type is <code>metric</code></strong>. Note that Datadog only allows the sum by aggregator\nto be used because this will sum up all request counts instead of averaging them, or taking the max or\nmin of all of those requests.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">denominator&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A Datadog metric query for total (valid) events.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">numerator&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A Datadog metric query for good events.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">tags</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of tags associated with this service level objective.\nAlways included in service level objective responses (but may be empty).\nOptional in create/update requests.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> thresholds&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>The thresholds (timeframes and associated targets) for this service level\nobjective object.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">target&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>double</p></div>\n              <div class=\"col-6 column\"><p>The target value for the service level indicator within the corresponding\ntimeframe.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">target_display</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A string representation of the target that indicates its precision.\nIt uses trailing zeros to show significant decimal places (e.g. <code>98.00</code>).</p>\n<p>Always included in service level objective responses. Ignored in\ncreate/update requests.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">timeframe&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The SLO time window options. \nAllowed enum values: <code>7d,30d,90d</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">warning</p>\n    </div>\n              <div class=\"col-2 column\"><p>double</p></div>\n              <div class=\"col-6 column\"><p>The warning value for the service level objective.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">warning_display</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>A string representation of the warning target (see the description of\nthe <code>target_display</code> field for details).</p>\n<p>Included in service level objective responses if a warning target exists.\nIgnored in create/update requests.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The type of the service level objective. \nAllowed enum values: <code>metric,monitor</code></p></div>\n            </div>\n            \n          </div>\n        </div></div>"
     }
   },
   "DeleteSLOTimeframeInBulk": {
@@ -353,10 +353,10 @@
             "modified_at": "integer",
             "monitor_ids": [],
             "monitor_tags": [],
-            "name": "",
+            "name": "Custom Metric SLO",
             "query": {
-              "denominator": "",
-              "numerator": ""
+              "denominator": "sum:my.custom.metric{*}.as_count()",
+              "numerator": "sum:my.custom.metric{type:good}.as_count()"
             },
             "tags": [
               "env:prod",
@@ -366,7 +366,7 @@
               {
                 "target": 99.9,
                 "target_display": "99.9",
-                "timeframe": "string",
+                "timeframe": "30d",
                 "warning": 90,
                 "warning_display": "90.0"
               }
@@ -421,10 +421,10 @@
               "modified_at": "integer",
               "monitor_ids": [],
               "monitor_tags": [],
-              "name": "",
+              "name": "Custom Metric SLO",
               "query": {
-                "denominator": "",
-                "numerator": ""
+                "denominator": "sum:my.custom.metric{*}.as_count()",
+                "numerator": "sum:my.custom.metric{type:good}.as_count()"
               },
               "tags": [
                 "env:prod",
@@ -434,7 +434,7 @@
                 {
                   "target": 99.9,
                   "target_display": "99.9",
-                  "timeframe": "string",
+                  "timeframe": "30d",
                   "warning": 90,
                   "warning_display": "90.0"
                 }
@@ -473,15 +473,15 @@
     },
     "request": {
       "json_curl": {
-        "name": "",
+        "name": "Custom Metric SLO",
         "query": {
-          "denominator": "",
-          "numerator": ""
+          "denominator": "sum:my.custom.metric{*}.as_count()",
+          "numerator": "sum:my.custom.metric{type:good}.as_count()"
         },
         "thresholds": [
           {
             "target": 99.9,
-            "timeframe": null
+            "timeframe": "30d"
           }
         ],
         "type": "metric"
@@ -494,10 +494,10 @@
         ],
         "monitor_ids": [],
         "monitor_tags": [],
-        "name": "",
+        "name": "Custom Metric SLO",
         "query": {
-          "denominator": "",
-          "numerator": ""
+          "denominator": "sum:my.custom.metric{*}.as_count()",
+          "numerator": "sum:my.custom.metric{type:good}.as_count()"
         },
         "tags": [
           "env:prod",
@@ -507,7 +507,7 @@
           {
             "target": 99.9,
             "target_display": "99.9",
-            "timeframe": "string",
+            "timeframe": "30d",
             "warning": 90,
             "warning_display": "90.0"
           }
