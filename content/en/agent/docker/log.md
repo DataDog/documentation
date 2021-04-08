@@ -100,11 +100,12 @@ The commands related to log collection are:
     logs_config:
         container_collect_all: true
     ```
-
-3. [Restart the Agent][2] to see all of your container logs in Datadog.
+3. **Windows 10 Only**: You must be a member of the `docker-users` group in order to have permissions to work with Docker containers. Run `net localgroup docker-users "your-user-id" /ADD` from your Administrator command prompt or follow the [Docker User Group][3] configuration steps.  
+4. [Restart the Agent][2] to see all of your container logs in Datadog.
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
 {{% /tab %}}
 {{% tab "Host Agent with Custom Logging" %}}
 
