@@ -292,6 +292,18 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
                 childRequiredKeys = [];
               }*/
             }
+
+            // for items -> oneOf
+            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
+              // if we have an example use that otherwise choose the first one oneof
+              if(!parentExample) {
+                if (Object.keys(value.items.oneOf).length !== 0) {
+                  childData = ("properties" in value.items.oneOf[0]) ? value.items.oneOf[0].properties : value.items.oneOf[0];
+                  prefixType = '[{';
+                  suffixType = '}]';
+                }
+              }
+            }
           } else if (typeof value.items === 'string') {
             childRequiredKeys = (value.items.required) ? value.items.required : [];
             if (value.items === '[Circular]') {
@@ -310,6 +322,15 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
             prefixType = '{';
             suffixType = '}';
             newParentKey = "additionalProperties";
+          }
+        } else if (typeof value === 'object' && "oneOf" in value) {
+          // if we have an example use that otherwise choose the first one oneof
+          if(!parentExample) {
+            if (Object.keys(value.oneOf).length !== 0) {
+              childData = ("properties" in value.oneOf[0]) ? value.oneOf[0].properties : value.oneOf[0];
+              prefixType = '{';
+              suffixType = '}';
+            }
           }
         }
 
@@ -412,6 +433,8 @@ const outputValue = (value, trailingComma = false) => {
       out = `${value}`;
       break;
     case "string":
+      out = `"${value.replace(/\r?\n|\r/g, '\\n')}"`;
+      break;
     default:
       out = `"${value}"`;
   }
