@@ -30,6 +30,10 @@ Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can
    - If you already receive the same CloudWatch metrics through the API polling method, Datadog automatically detects this and stops polling those metrics since you are streaming them.
    - If you later decide you don't want to stream a metric and delete the stream or remove namespaces from it, Datadog automatically starts collecting those metrics using API polling again, according to your configuration settings in the AWS Integration tile.
  
+### Supported Metrics
+Nearly all of the CloudWatch namespaces and metrics that Datadog supports via the API polling approach are also supported via Metric Streams. The only exceptions are metrics for percentile statistics (p90, p95, p99, etc.). CloudWatch Metric Streams do not currently support the streaming of metrics for percentile statistics.
+
+
 ### Billing
  
 There is no additional charge from Datadog to stream metrics.
@@ -86,7 +90,7 @@ If you want to set up metric streams using the AWS Console, follow these steps f
  - For source, select “Direct PUT or other sources”
 - For destination:
   - Select Third-party service provider: `Datadog`.
-  - Select your Datadog site under metrics: `Datadog US` or `Datadog EU`
+  - Select the metrics endpoint URL corresponding to your Datadog site: `Datadog metrics - US` or `Datadog metrics - EU`
   - For access key, enter your [Datadog API key][1].
    - For retry duration, enter `60 seconds`.
    - For S3 backup, select `Failed data only` and choose the desired S3 bucket for backup.
@@ -121,7 +125,7 @@ Once you see the Metric Stream resource has been successfully created, wait five
 {{< /tabs >}}
 
 ## Troubleshooting
-To resolve any issues encountered while setting up Metric Streams or other associated resources, please check out AWS's [troubleshooting documentation][3].
+To resolve any issues encountered while setting up Metric Streams or the associated resources, please check out [AWS's troubleshooting documentation][3].
 
 
 ## Further Reading
