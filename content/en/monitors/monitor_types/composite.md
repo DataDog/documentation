@@ -138,19 +138,6 @@ The number of alerts you receive depends on the individual monitor's alert type.
 
 If even one individual monitor is multi-alert, then the composite monitor is also multi-alert. How _many_ alerts it may send at a time depends on whether the composite monitor uses one or uses many multi-alert monitors.
 
-#### One multi-alert monitor
-
-Consider a scenario where monitor `A` is a multi-alert monitor grouped by `host`. If the monitor has four reporting sources (hosts `web01` through `web04`) you may receive up to four alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has four cases to consider. For each case, monitor `A`'s status may vary across its sources, but the statuses of monitors `B` and `C`—which are simple alerts—are unchanging.
-
-The table below shows the status of each multi-alert case at one point in time for the composite monitor `A && B && C`:
-
-| Source | Monitor A | Monitor B | Monitor C | Composite status | Alert triggered? |
-|--------|-----------|-----------|-----------|------------------|------------------|
-| web01  | Alert     | Warn      | Alert     | Alert            | {{< X >}}        |
-| web02  | Ok        | Warn      | Alert     | Ok               |                  |
-| web03  | Warn      | Warn      | Alert     | Alert            | {{< X >}}        |
-| web04  | Skipped   | Warn      | Alert     | Skipped          |                  |
-
 #### Many multi-alert monitors
 
 Now consider a scenario where monitor `A` and `B` are multi-alert and grouped by host. The number of alerts per cycle is, at most, the number of common reporting sources between monitors `A` and `B`. If `web01` through `web05` are reporting for monitor `A`, and `web04` through `web09` are reporting for monitor `B`, the composite monitor _only_ considers the common sources (`web04` and `web05`). Up to two alerts can be received in an evaluation cycle.
