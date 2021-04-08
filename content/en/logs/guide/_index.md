@@ -36,6 +36,7 @@ private: true
 {{< whatsnext desc="Log Queries" >}}
     {{< nextlink href="logs/guide/collect-multiple-logs-with-pagination" >}}Collect multiple logs with the Log List API and pagination{{< /nextlink >}}
     {{< nextlink href="/logs/guide/build-custom-reports-using-log-analytics-api/?tab=table" >}}Build custom reports using Log Analytics API{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/detect-unparsed-logs/" >}}Monitor and query for unparsed logs{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
