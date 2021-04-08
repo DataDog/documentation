@@ -86,7 +86,7 @@ If you want to set up metric streams using the AWS Console, follow these steps f
  - For source, select “Direct PUT or other sources”
 - For destination:
   - Select Third-party service provider: `Datadog`.
-  - Select your [Datadog site][3] under metrics: `Datadog US` or `Datadog EU`
+  - Select your Datadog site under metrics: `Datadog US` or `Datadog EU`
   - For access key, enter your [Datadog API key][1].
    - For retry duration, enter `60 seconds`.
    - For S3 backup, select `Failed data only` and choose the desired S3 bucket for backup.
@@ -113,8 +113,6 @@ Once you see the Metric Stream resource has been successfully created, wait five
 {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-regions.png" alt="Metric streams selection tab" responsive="true" style="width:60%;">}}
 **Note**: If you've already enabled polling CloudWatch APIs, the transition to streaming could cause a brief (up to five minutes) period where the specific metrics you are streaming are double-counted in Datadog. This is because of the difference in timing between when Datadog’s crawlers are running and submitting your CloudWatch metrics, and when Datadog recognizes that you have started streaming those metrics and turn off the crawlers.
  
- ## Further Reading
- 
  
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
@@ -123,9 +121,12 @@ Once you see the Metric Stream resource has been successfully created, wait five
 {{< /tabs >}}
 
 ## Troubleshooting
-To resolve any issues encountered while setting up Metric Streams or other associated resources, please check out AWS's [troubleshooting documentation][1].
+To resolve any issues encountered while setting up Metric Streams or other associated resources, please check out AWS's [troubleshooting documentation][3].
 
+
+## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
  
 [1]: https://aws.amazon.com/cloudwatch/pricing/
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup
+[3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
