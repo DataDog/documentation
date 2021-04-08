@@ -13,7 +13,7 @@ further_reading:
       text: 'Use Analytics queries and monitors based on retained traces.'
 ---
 <div class="alert alert-warning">
-This feature is currently in public beta.  While this feature is in beta it is not recommended to use metrics generated from spans for monitors.
+This feature is currently in public beta.  While this feature is in beta it is not recommended to use metrics generated from spans for monitors or production operations use cases.
 </div>
 
 ## Generate span-based metrics
