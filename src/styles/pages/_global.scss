@@ -273,7 +273,7 @@ details {
     margin-bottom: 20px;
     &.nav-tabs {
         .nav-item {
-            z-index: 3;
+            z-index: 1;
             
             &:before {
                 content: none;
