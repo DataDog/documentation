@@ -67,7 +67,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port, change it by setting the below env variables:
 
 `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
