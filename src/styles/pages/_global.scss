@@ -789,28 +789,20 @@ table,
 dl {
     border: 1px solid $ddgray;
 
-    dd,
     dt {
-        padding-left: 0.75rem;
-    }
-
-    dt {
-        padding-top: 0.75rem;
-        padding-bottom: 0.25rem;
+        padding: 0.75rem 0.75rem 0.25rem;
     }
 
     dd {
-        border-bottom: 1px solid $ddgray;
-        padding-bottom: 1.25rem;
+        padding: 0 0.75rem 1rem 1.75rem;
 
         &:last-of-type {
-            border-bottom: none;
+            padding-bottom: 0.5rem;
         }
     }
 }
 
 // external link logos
-
 .link-logo {
     transform: translateY(-1px);
     margin-right: -1px;
