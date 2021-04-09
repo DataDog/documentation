@@ -12,9 +12,9 @@ This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-
 
 SLO error budget alerts are threshold based and notify you when a certain percentage of your SLO’s error budget has been consumed. For example, alert me if 75% of the error budget for my 7-day target is consumed. Warn me if 50% is consumed (optional).
 
-
 **Note:** Error budget alerts are only available for [metric-based SLOs][1] or for [monitor-based SLOs][6] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
 
+{{< img src="monitors/service_level_objectives/error_budget_alert_config.png" alt="Error budget alert configuration">}}
 
 ## Monitor creation
 
@@ -27,7 +27,7 @@ over the past `target` number of days.
 
 **Note:** Clicking the `New Condition` button adds an optional warning condition. The warning threshold must be less than the alert threshold.
 
-{{< img src="monitors/service_level_objectives/error_budget_alert.png" alt="setting up an error budget alert">}}
+{{< img src="monitors/service_level_objectives/save_set_alert.png" alt="Save SLO and set up an error budget alert">}}
 
 ### API and Terraform
 
