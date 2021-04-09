@@ -18,7 +18,7 @@ The Datadog API is an HTTP REST API. The API uses resource-oriented URLs to call
 
 Authenticate to the API with an [API key][1], and depending on the endpoint, an [Application key][2].
 
-To try out the API [![Run in Postman][3]](https://app.getpostman.com/run-collection/bf4ac0b68b8ff47419c1#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFwaV9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ==)
+To try out the API [![Run in Postman][3]](https://app.getpostman.com/run-collection/b82586cb783eb6f7cf6d?action=collection%2Fimport#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoidGV4dCJ9LHsia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0=)
 
 [Using the API][4] is a guide to the endpoints.
 
