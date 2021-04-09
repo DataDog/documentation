@@ -47,8 +47,7 @@ First, install the Datadog Lambda Library by following the installation instruct
 Then, add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
 ```
-WORKDIR /opt/extensions
-COPY --from=datadog/lambda-extension:6 /opt/extensions/ .
+COPY --from=datadog/lambda-extension:6 /opt/extensions/ /opt/extensions
 ```
 
 ## Log collection
