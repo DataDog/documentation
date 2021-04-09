@@ -43,7 +43,7 @@ To create a login test and use it as a subtest in the rest of your test suite:
 {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration.png" alt="Configuring the parent test" >}}
 
 
-3. Once on the recorder of your test B, click the Subtest button and select the login test A you just created. 
+3. When recording test B, click **Subtest** and select the login test A. 
 
 {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_subtest.mp4" alt="Including subtest in parent test" video="true"  width="100%">}}
 
