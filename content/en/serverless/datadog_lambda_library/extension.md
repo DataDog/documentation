@@ -44,7 +44,7 @@ The Datadog Lambda Extension is distributed as its own Lambda Layer (separate fr
 
 If your function is deployed as a container image, you cannot add Lambda Layers to your function. Instead, you must directly install the Datadog Lambda Library and the Datadog Lambda Extension in your function's image.
 
-First, install the Datadog Lambda Library by following the installation instructions for [Node.js][5] or [Python][4]. Be sure to use the installation instructions specifically for functions deployed as container images.
+First, install the Datadog Lambda Library by following the installation instructions for [Node.js][5] or [Python][4]. Use the installation instructions specifically for functions deployed as container images.
 
 Then, add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
