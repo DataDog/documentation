@@ -27,7 +27,6 @@ Browser test subtests allow you to reuse your journeys among your test suite, wh
 * **Makes your tests easier to understand**, because you make blocks that are meaningful for others reading your tests.
 * **Allows for better maintenance**, because if your flows change, you only need to update it once, and not once per test.
 
-In the below example, we look into creating and re-using a login subtest.
 
 ## Create and re-use a login subtest
 
