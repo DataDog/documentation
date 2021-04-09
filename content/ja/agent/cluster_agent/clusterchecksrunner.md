@@ -51,7 +51,7 @@ datadogagent.datadoghq.com/datadog created
 Datadog Operator についての詳細は [Datadog Operator リポジトリ][2] を参照してください。
 
 
-[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-dca-clusterchecksrunner.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-dca-clusterchecksrunner.yaml
 [2]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}
