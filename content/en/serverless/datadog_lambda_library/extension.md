@@ -32,7 +32,7 @@ The Datadog Lambda Extension is distributed as its own Lambda Layer (separate fr
     ```
 
     Replace the placeholder values in the ARN as follows:
-    - Replace `AWS_REGION` with be the same AWS region as your Lambda Function, e.g. `us-east-1`.
+    - Replace `AWS_REGION` with the same AWS region as your Lambda Function, e.g. `us-east-1`.
     - Replace `VERSION_NUMBER` with the version of the Datadog Lambda Extension you would like to use, e.g. `6`. You can identify the current version by viewing the newest tags in the [Dockerhub repository][11].
     
     **Note**: This Layer is separate from the Datadog Lambda Library. If you installed the Datadog Lambda Library as a Lambda Layer,
