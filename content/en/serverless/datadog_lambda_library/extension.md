@@ -25,13 +25,15 @@ The Datadog Lambda Extension is distributed as its own Lambda Layer (separate fr
 
 1. Instrument your [Python][4] or [Node.js][5] application by installing the Datadog Lambda Library.
 
-2. Add the Lambda Layer for the Datadog Extension to your AWS Lambda function:
+2. Add the Lambda Layer for the Datadog Extension to your AWS Lambda function with the following ARN:
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:6
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<VERSION_NUMBER>
     ```
 
-    Replace the placeholder `AWS_REGION` in the Lambda Layer ARN with appropriate values.
+    Replace the placeholder values in the ARN as follows:
+    - Replace `AWS_REGION` with be the same AWS region as your Lambda Function, e.g. `us-east-1`.
+    - Replace `VERSION_NUMBER` with the version of the Datadog Lambda Extension you would like to use, e.g. `6`. You can identify the current version by viewing the newest tags in the [Dockerhub repository][11].
     
     Note that this Layer is separate from the Datadog Lambda Library. If you installed the Datadog Lambda Library as a Lambda Layer,
     your function should now have two Lambda Layers attached.
@@ -47,8 +49,10 @@ First, install the Datadog Lambda Library by following the installation instruct
 Then, add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
 ```
-COPY --from=datadog/lambda-extension:6 /opt/extensions/ /opt/extensions
+COPY --from=datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
 ```
+
+Replace `<TAG>` with either a specific version number (e.g. `6`) or with `latest`. You can see a complete list of possible tags in the [Dockerhub repository][11]. 
 
 ## Log collection
 
@@ -68,3 +72,4 @@ To submit your AWS Lambda logs to Datadog using the Extension, set the env varia
 [8]: https://github.com/DataDog/datadog-lambda-js/releases
 [9]: https://github.com/DataDog/datadog-lambda-python/releases
 [10]: /serverless/custom_metrics#custom-metrics-sample-code
+[11]: https://hub.docker.com/repository/docker/datadog/lambda-extension/tags
