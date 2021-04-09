@@ -28,7 +28,7 @@ Browser test subtests allow you to reuse your journeys among your test suite, wh
 * **Allows for better maintenance**, because if your flows change, you only need to update it once, and not once per test.
 
 
-## Create and re-use a login subtest
+## Create and reuse a login subtest
 
 If monitoring your application involves first logging into it, a best practice is to create a single test containing all your login steps, and to then have all your other Browser tests leverage that login test as a subtest. 
 
