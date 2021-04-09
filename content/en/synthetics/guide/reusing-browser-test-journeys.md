@@ -34,7 +34,7 @@ If monitoring your application involves first logging into it, a best practice i
 
 To create a login test and use it as a subtest in the rest of your test suite:
 
-1. Create a first test A that does nothing but logging into your application. You can set the **start URL** of this test A to your pre login URL.
+1. Create a test, A, that does nothing but log into your application. Set the **Starting URL** of test A to your pre-login URL.
 
 {{< img src="synthetics/guide/reusing-browser-test-journeys/login_subtest_recording.mp4" alt="Recording the Login subtest" video="true"  width="100%">}}
 
