@@ -38,7 +38,7 @@ To create a login test and use it as a subtest in the rest of your test suite:
 
 {{< img src="synthetics/guide/reusing-browser-test-journeys/login_subtest_recording.mp4" alt="Recording the Login subtest" video="true"  width="100%">}}
 
-2. Create a second test B that monitors any post login functionalities of your application. You can set the **start URL** of this test B to your pre login URL as well.
+2. Create a second test, B, that monitors a post-login functionality of your application. In the following example, this second test monitors creating a dashboard. Set the **Starting URL** of test B to your pre-login URL also.
 
 {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration.png" alt="Configuring the parent test" >}}
 
