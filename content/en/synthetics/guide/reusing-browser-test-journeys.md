@@ -36,32 +36,29 @@ To create a login test and use it as a subtest in the rest of your test suite:
 
 1. Create a test, A, that does nothing but log into your application. Set the **Starting URL** of test A to your pre-login URL.
 
-{{< img src="synthetics/guide/reusing-browser-test-journeys/login_subtest_recording.mp4" alt="Recording the Login subtest" video="true"  width="100%">}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/login_subtest_recording.mp4" alt="Recording the Login subtest" video="true"  width="100%">}}
 
 2. Create a second test, B, that monitors a post-login functionality of your application. In the following example, this second test monitors creating a dashboard. Set the **Starting URL** of test B to your pre-login URL also.
 
-{{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration.png" alt="Configuring the parent test" >}}
-
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration.png" alt="Configuring the parent test" >}}
 
 3. When recording test B, click **Subtest** and select the login test A. 
 
-{{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_subtest.mp4" alt="Including subtest in parent test" video="true"  width="100%">}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_subtest.mp4" alt="Including subtest in parent test" video="true"  width="100%">}}
 
-    When you set up this subtest step, all the steps of test A are played at the beginning of the parent test B. Also, the variables in the subtest A are imported into the parent test B.
-    By default, the subtest is played in the main tab. This means your subtest steps are played in the same tab as previous and following steps. The subtest starts running using the URL that was set in the parent test (in this example, the pre-login URL), and after all the subtest steps have been executed, the browser test executes the parent’s first non-subtest step from the page the subtest was last on. No parent step was created for now.
+  When you set up this subtest step, all the steps of test A are played at the beginning of the parent test B. Also, the variables in the subtest A are imported into the parent test B. By default, the subtest is played in the main tab. This means your subtest steps are played in the same tab as previous and following steps. The subtest starts running using the URL that was set in the parent test (in this example, the pre-login URL), and after all the subtest steps have been executed, the browser test executes the parent’s first non-subtest step from the page the subtest was last on. No parent step was created for now.
 
-
-    **Note:** You can choose the tab in which the subtest should execute using [**Subtest Advanced Options**][1].
+**Note:** You can choose the tab in which the subtest should execute using [**Subtest Advanced Options**][1].
 
 4. Before you start recording the parent test steps, login to your account with the dedicated credentials in the recorder window. This ensures that the parent test starts from the same state your browser test is in after it goes through the subtest steps.
 
-{{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_iframe.mp4" alt="Replaying subtest in parent test" video="true"  width="100%">}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_iframe.mp4" alt="Replaying subtest in parent test" video="true"  width="100%">}}
 
 5. After you login, click **Start recording** to start recording the parent test's post-login steps you’re interested in. Once you’re done, click **Save**.
 
-{{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_recording.mp4" alt="Recording parent test" video="true"  width="100%">}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_recording.mp4" alt="Recording parent test" video="true"  width="100%">}}
 
-In the above example we are checking that after logging into a test Datadog account, users are able to create a timeboard and that the timeboard is associated with the user who created it.
+ In the above example we are checking that after logging into a test Datadog account, users are able to create a timeboard and that the timeboard is associated with the user who created it.
 
 ## Further Reading
 
