@@ -34,6 +34,7 @@ Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can
 Nearly all of the CloudWatch namespaces and metrics that Datadog supports via the API polling approach are also supported via Metric Streams. There are however a couple exceptions.
 
 The following CloudWatch metrics are not currently supported:
+
 1. Metrics for percentile statistics (p90, p95, p99, etc.). CloudWatch Metric Streams does not currently support the streaming of metrics for percentile statistics.
 2. Metrics that have a timestamp of more than two hours old. Some examples of these include S3 daily storage metrics and some billing metrics.
 
