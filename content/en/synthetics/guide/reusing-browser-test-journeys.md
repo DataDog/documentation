@@ -53,7 +53,7 @@ To create a login test and use it as a subtest in the rest of your test suite:
 
 **Note:** You can choose the tab in which the subtest should execute using [**Subtest Advanced Options**][1].
 
-4. Login to your account with the dedicated credentials in the iframe/pop up associated with the recorder in order to start recording your parent test’s steps from the same state your Browser test would be in after going through the subtest’s steps.
+4. Before you start recording the parent test steps, login to your account with the dedicated credentials in the recorder window. This ensures that the parent test starts from the same state your browser test is in after it goes through the subtest steps.
 
 {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_iframe.mp4" alt="Replaying subtest in parent test" video="true"  width="100%">}}
 
