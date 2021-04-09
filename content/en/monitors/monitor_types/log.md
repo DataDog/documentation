@@ -37,7 +37,7 @@ As you define the search query, the graph above the search fields updates.
 ### Set alert conditions
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 48 hours.
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between `1 minute` and `2 days`.
 * Alert threshold `<NUMBER>`
 * Warning threshold `<NUMBER>`
 
