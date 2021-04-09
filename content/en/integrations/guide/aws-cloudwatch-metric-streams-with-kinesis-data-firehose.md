@@ -33,7 +33,6 @@ Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can
 ### Supported Metrics
 Nearly all of the CloudWatch namespaces and metrics that Datadog supports via the API polling approach are also supported via Metric Streams. The only exceptions are metrics for percentile statistics (p90, p95, p99, etc.). CloudWatch Metric Streams do not currently support the streaming of metrics for percentile statistics.
 
-
 ### Billing
  
 There is no additional charge from Datadog to stream metrics.
@@ -126,7 +125,6 @@ Once you see the Metric Stream resource has been successfully created, wait five
 
 ## Troubleshooting
 To resolve any issues encountered while setting up Metric Streams or the associated resources, please check out [AWS's troubleshooting documentation][3].
-
 
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
