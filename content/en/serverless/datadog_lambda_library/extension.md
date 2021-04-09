@@ -56,7 +56,7 @@ Replace `<TAG>` with either a specific version number (e.g. `6`) or with `latest
 
 ## Log collection
 
-To submit your AWS Lambda logs to Datadog using the Extension, set the env variable `DD_LOGS_ENABLED` to `true` in your function.
+To submit your AWS Lambda logs to Datadog using the extension, set the env variable `DD_LOGS_ENABLED` to `true` in your function.
 
 ## Further Reading
 
