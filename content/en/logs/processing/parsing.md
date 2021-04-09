@@ -174,7 +174,7 @@ Some examples demonstrating how to use parsers:
 * [Optional attribute](#optional-attribute)
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
-* [List and Arrays](#list-and-arrays)
+* [List and Arrays](#list-to-array)
 * [Glog format](#glog-format)
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
