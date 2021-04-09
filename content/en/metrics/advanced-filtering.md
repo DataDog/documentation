@@ -65,7 +65,7 @@ Tag value prefix and suffix wildcard matching is supported:
 -  `pod_name: web-*` 
 -  `cluster:*-trace`.
 
-Please note that prefix and suffix wildcard matching in the same filter is not supported.
+**Note**: Prefix and suffix wildcard matching in the same filter is not supported.
 
 
 #### Wildcard filtered query examples
