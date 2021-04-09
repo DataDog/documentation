@@ -51,7 +51,7 @@ To create a login test and use it as a subtest in the rest of your test suite:
     By default, the subtest is played in the main tab. This means your subtest steps are played in the same tab as previous and following steps. The subtest starts running using the URL that was set in the parent test (in this example, the pre-login URL), and after all the subtest steps have been executed, the browser test executes the parent’s first non-subtest step from the page the subtest was last on. No parent step was created for now.
 
 
-**Note:** You can choose the tab in which the subtest should execute using [**Subtest Advanced Options**][1].
+    **Note:** You can choose the tab in which the subtest should execute using [**Subtest Advanced Options**][1].
 
 4. Before you start recording the parent test steps, login to your account with the dedicated credentials in the recorder window. This ensures that the parent test starts from the same state your browser test is in after it goes through the subtest steps.
 
