@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-There are a number of cases in which it makes sense to reuse a similar journey in several different tests. Some examples include:
+Sometimes, you want to reuse a journey in several different tests. For example:
 
 * If most of your application’s functionalities are located behind a login, you might want to [reuse your login steps](#create-and-re-use-a-login-subtest) at the beginning of each of your tests
 * If you want to monitor your application’s functionalities on several different environments, you can create tests for your prod environment and then leverage these as subtests for your other environments (dev, staging, etc.)
