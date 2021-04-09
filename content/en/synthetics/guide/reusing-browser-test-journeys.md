@@ -23,7 +23,7 @@ Sometimes, you want to reuse a journey in several different tests. For example:
 * If running your tests creates database objects, you can create tests that clean up your testing environment and use them as subtests to systematically perform cleanup at the start or end of your tests.
 
 Browser test subtests allow you to reuse your journeys among your test suite, which:
-* **Saves you time at test creation** (eg. if you have a login test, you just need to call it as a subtest at the beginning of all your test suite, instead of recording the same login steps for each of your tests);
+* **Saves you time at test creation.** If you have a login test, call it as a subtest at the beginning of all your test suite, instead of recording the same login steps for each of your tests.
 * **Makes your tests easier to understand**, as you make blocks that are meaningful to the person reading after you;
 * **Allows for better maintenance**, because if your flows change, you only need to update it once, and not once per test.
 
