@@ -11,7 +11,7 @@ private: true
 
 {{< whatsnext desc="Browser Tests:" >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Re-using Browser tests journeys across your test suite{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Reusing browser tests journeys across your test suite{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation" >}}Email validation with browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Test file upload and download{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/popup/" >}}Handling popups in browser tests{{< /nextlink >}}
