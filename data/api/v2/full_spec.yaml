@@ -7895,11 +7895,25 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-given:
+        security_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}\",\n  \"queries\": [{\n    \"query\"\
+              : \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\"\
+              : [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"\
+              filters\": [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\"\
+              : \"info\",\n    \"condition\": \"a > 0\",\n    \"notifications\": []\n\
+              \  }],\n  \"options\": {\n    \"evaluationWindow\": 900,\n    \"keepAlive\"\
+              : 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"hasExtendedTitle\"\
+              : false,\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isDefault\"\
+              : false,\n  \"isEnabled\": true,\n  \"type\": \"log_detection\"\n}"
+          step: there is a valid "security_rule" in the system
       x-undo:
         operationId: DeleteSecurityMonitoringRule
         parameters:
         - name: rule_id
-          source: data.id
+          source: id
         type: unsafe
   /api/v2/security_monitoring/rules/{rule_id}:
     delete:
