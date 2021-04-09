@@ -57,7 +57,7 @@ To create a login test and use it as a subtest in the rest of your test suite:
 
 {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_iframe.mp4" alt="Replaying subtest in parent test" video="true"  width="100%">}}
 
-5. Hit **Start recording** once you’re logged in to start recording the parent test’s post login steps you’re interested in. Once you’re done hit **Save**.
+5. After you login, click **Start recording** to start recording the parent test's post-login steps you’re interested in. Once you’re done, click **Save**.
 
 {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_recording.mp4" alt="Recording parent test" video="true"  width="100%">}}
 
