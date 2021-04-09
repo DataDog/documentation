@@ -35,7 +35,7 @@ The Datadog Lambda Extension is distributed as its own Lambda Layer (separate fr
     - Replace `AWS_REGION` with be the same AWS region as your Lambda Function, e.g. `us-east-1`.
     - Replace `VERSION_NUMBER` with the version of the Datadog Lambda Extension you would like to use, e.g. `6`. You can identify the current version by viewing the newest tags in the [Dockerhub repository][11].
     
-    Note that this Layer is separate from the Datadog Lambda Library. If you installed the Datadog Lambda Library as a Lambda Layer,
+    **Note**: This Layer is separate from the Datadog Lambda Library. If you installed the Datadog Lambda Library as a Lambda Layer,
     your function should now have two Lambda Layers attached.
 
 3. Reference the [sample code][10] to submit a custom metric.
