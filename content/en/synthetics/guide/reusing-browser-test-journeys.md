@@ -19,7 +19,7 @@ further_reading:
 Sometimes, you want to reuse a journey in several different tests. For example:
 
 * If most of your application’s functionalities are located behind a login, you might want to [reuse your login steps](#create-and-re-use-a-login-subtest) at the beginning of each of your tests
-* If you want to monitor your application’s functionalities on several different environments, you can create tests for your prod environment and then leverage these as subtests for your other environments (dev, staging, etc.)
+* If you want to monitor your application’s functionalities on several different environments, you can create tests for your prod environment and reuse them as subtests for other environments such as dev or staging.
 * If running your tests leads to in database object creation, you can create tests to keep your testing environment clean and use these as subtests to systematically have clean up performed at the beginning or end of your tests.
 
 The Browser test subtest feature allows you to reuse your journeys among your test suite and consequently:
