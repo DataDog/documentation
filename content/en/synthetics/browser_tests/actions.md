@@ -286,7 +286,7 @@ By default, Datadog waits for a page to be fully loaded before performing a step
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest"  style="width:60%;">}}
 
-You can run browser tests within other browser tests in order to re-use existing workflows (up to two levels of nesting). You can find out more about why you should use subtests as well as find some examples on [this dedicated guide][10].
+You can run browser tests within other browser tests in order to reuse existing workflows (up to two levels of nesting). Find out more about why you should use subtests and see some examples in [this dedicated guide][10].
 
 Variables from subtests can be overriden in parent tests if you ensure the variables created at the parent test level have the same names as the variables present in the subtest. By default, the subtest is executed in sequence with the previous steps of the parent test but this can be tweaked using [**Subtest Advanced options**][11].
 
