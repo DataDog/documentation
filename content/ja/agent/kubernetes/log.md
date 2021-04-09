@@ -46,12 +46,12 @@ DaemonSet によるログの収集を有効にするには
           value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
           value: "true"
-        - name: DD_CONTAINER_EXCLUDE_LOGS
+        - name: DD_CONTAINER_EXCLUDE
           value: "name:datadog-agent"
      # (...)
     ```
 
-    **注**: `DD_CONTAINER_EXCLUDE_LOGS` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナを無視するための環境変数][1]を参照してください。OpenShift 環境内で ImageStreams を使用する場合は、`DD_CONTAINER_INCLUDE_LOGS` にコンテナの `name` を設定してログを収集します。これらパラメーター値（除外/含む）は正規表現をサポートします。
+    **注**: `DD_CONTAINER_EXCLUDE` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナのディスカバリー管理][1]を参照してください。OpenShift 環境内で ImageStreams を使用する場合は、`DD_CONTAINER_INCLUDE` にコンテナの `name` を設定してログを収集します。これらパラメーター値（除外/含む）は正規表現をサポートします。
 
 2. 再起動やネットワーク障害の際にコンテナログを失わないように、`pointdir` ボリュームをマウントします。`/var/log/pods` がこのディレクトリへのシンボリックリンクであるため、Kubernetes ログファイルからログを収集するよう `/var/lib/docker/containers` もマウントします。
 
@@ -106,7 +106,7 @@ DaemonSet によるログの収集を有効にするには
 
 Agent が非ルートユーザーで実行しているときは、`/var/lib/docker/containers` に含まれるログファイルを直接読み取れません。この場合、Docker Daemon からコンテナログをフェッチできるよう、Agent コンテナの Docker ソケットをマウントする必要があります。
 
-[1]: /ja/agent/docker/?tab=standard#ignore-containers
+[1]: /ja/agent/guide/autodiscovery-management/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -180,7 +180,7 @@ agent:
 
 `<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
 
-[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -399,7 +399,7 @@ spec:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: redisdb-config-map
+  name: redis-config-map
   namespace: default
 data:
   redisdb-config: |-
@@ -447,38 +447,6 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 
 {{% /tab %}}
 {{< /tabs >}}
-
-### 例 - アノテーションで構成されたファイルからのログ収集
-
-Agent v7.26.0+/6.26.0+ は、アノテーションに基づいてファイルからログを直接収集できます。これらのログを収集するには、ファイルタイプを設定して `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` を使用します。このようなアノテーションが付いたファイルから収集されたログには、コンテナ自体からのログと同じタグのセットが自動的にタグ付けされます。
-
-たとえば、Kubernetes ポッド内の `webapp` という名前のコンテナから `/logs/app/prod.log` からログを収集するには、ポッドの定義は次のようになります。
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: webapp
-  annotations:
-    ad.datadoghq.com/webapp.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}]'
-  labels:
-    name: webapp
-spec:
-  containers:
-    - name: webapp
-      image: webapp:latest
-```
-
-**注**:
-
-- ファイルパスは Agent に**相対的**であるため、ファイルを含むディレクトリは、アプリケーションを実行しているコンテナと Agent コンテナの間で共有される必要があります。たとえば、コンテナが `/logs` をマウントする場合、ファイルにログを作成する各コンテナはログファイルが書き込まれる場所に `/logs/app` のようなボリュームをマウントすることがあります。ポッド/コンテナ間でボリュームを共有する方法の詳細については、Kubernetes のドキュメントを確認してください。
-
-- この種のアノテーションをコンテナで使用する場合、出力ログは自動的に収集されません。コンテナとファイルの両方からの収集が必要な場合は、アノテーションで明示的に有効にする必要があります。次に例を示します。
-```yaml
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}, {"source": "container", "service": "app"}]'
-```
-
-- この種の組み合わせを使用する場合、`source` と `service` にはファイルから収集されたログのデフォルト値がないため、アノテーションで明示的に設定する必要があります。
 
 
 ## 高度なログの収集

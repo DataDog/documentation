@@ -8,23 +8,7 @@ further_reading:
     tag: ドキュメント
     text: データを可視化して詳細な情報を把握
 ---
-## 概要
-
-メトリクス単位は、時系列グラフ、クエリ値ウィジェット、トップリストなどに自動的に表示されます。
-
-{{< img src="developers/metrics/units/redis_dash_metrics_units.png" alt="Redis ダッシュボードのメトリクス単位"  style="width:100%;">}}
-
-時系列グラフ上でカーソルを動かすと、関連する単位が表示されます。元データは、わかりやすい表示単位に自動的に変換されます (1 秒未満は ms、毎秒 100 万バイトは MiB/s など)。
-
-単位は、タイムボードグラフの下部にも表示されます。歯車アイコンのドロップダウンから **Metrics Info** を選択することで、メトリクスの説明を表示できます。
-
-{{< img src="developers/metrics/units/annotated_ops.png" alt="アノテーション付き Ops"  style="width:100%;">}}
-
-メトリクス単位を変更するには、[Metric Summary][1] ページに移動し、**Metadata** セクションで **Edit** をクリックし、ドロップダウンメニューから `bit` や `byte` などの単位を選択します。
-
-## 単位リスト
-
-次の単位は、Datadog に送信されたメトリクスに関連付けられている可能性があります。
+曖昧さをなくしてシステムを合理的に把握するため、Datadog に送信されるメトリクスに次の単位を併記できます。
 
 | type        | 単位                                                                                                                                                                                                                                                                                                                    |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -34,82 +18,36 @@ further_reading:
 | ネットワーク     | connection / request / packet / segment / response / message / payload / timeout / datagram / route / session                                                                                                                                                                                                              |
 | システム      | process / thread / host / node / fault / service / instance / cpu                                                                                                                                                                                                                                                          |
 | ディスク        | file / inode / sector / block                                                                                                                                                                                                                                                                                              |
-| 一般     | buffer / error / read / write / occurrence / event / time / unit / operation / item / task / worker / resource / garbage collection / email / sample / stage / monitor / location / check / attempt / device / update / method / job / container / execution / throttle / invocation / user / success / build / prediction / exception |
-| DB          | table / index / lock / transaction / query / row / key / command / offset / record / object / cursor / assertion / scan / document / shard / flush / merge / refresh / fetch / column / commit / wait / ticket / question                                                                                                  |
+| 一般     | buffer / error / read / write / occurrence / event / time / unit / operation / item / task / worker / resource / garbage collection / email / sample / stage / monitor / location / check / attempt / device / update / method / job / container / execution / throttle / invocation / user / success / build / prediction |
+| データベース          | table / index / lock / transaction / query / row / key / command / offset / record / object / cursor / assertion / scan / document / shard / flush / merge / refresh / fetch / column / commit / wait / ticket / question                                                                                                  |
 | キャッシュ       | hit / miss / eviction / get / set                                                                                                                                                                                                                                                                                          |
-| 金額       | ドル / セント / マイクロドル / ユーロ                                                                                                                                                                                                                                                                                         |
+| 金額       | ドル / セント / マイクロドル / ユーロ                                                                                                                                                                                                                                                                                               |
 | メモリ      | page / split                                                                                                                                                                                                                                                                                                               |
 | 周波数   | hertz / kilohertz / megahertz / gigahertz                                                                                                                                                                                                                                                                                  |
 | ログ     | entry                                                                                                                                                                                                                                                                                                                      |
-| 温度 | decidegree celsius / degree celsius / degree fahrenheit                                                                                                                                                                                                                                                                    |
+| 温度 | decidegree celsius / degree celsius / degree fahrenheit                                                                                                                                                                                                                                                                                         |
 | CPU         | nanocore / microcore / millicore / core / kilocore / megacore / gigacore / teracore / petacore / exacore                                                                                                                                                                                                                   |
-| 電力       | nanowatt / microwatt / milliwatt / deciwatt / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                                            |
-| 電流     | milliampere / ampere                                                                                                                                                                                                                                                                                                       |
-| 電位   | millivolt / volt                                                                                                                                                                                                                                                                                                           |
+| 電力         | nanowatt / microwatt / milliwatt / deciwatt / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                                   |
+| 電流         | milliampere / ampere                                                                                                                                                                                    |
+| 電位         | millivolt / volt                                                                                                                                                                                      |
 | APM         | スパン                                                                                                                                                                                                                                                                                                                       |
 
-## 数値のフォーマット
+下記の Redis ダッシュボードの画面例のように、時系列グラフ、クエリ値ウィジェット、トップリストでは単位が自動的に表示されます。
 
-### 単位のないフォーマット
+{{< img src="developers/metrics/units/redis_dash_metrics_units.png" alt="Redis ダッシュボードのメトリクス単位"  style="width:70%;">}}
 
-単位のないメトリクスの場合、Datadog は [SI サフィックス][2] `K`、`M`、`G`、`T` を使用します。`T` の後、数値は指数表記に変換されます。これは非常に小さい数値にも使用されます。デフォルトでは、Datadog は小数点以下 2 桁に丸められます。指数表記の場合、デフォルトは小数点以下ゼロです。
+<mrk mid="160" mtype="seg">時系列グラフ上でカーソルを動かすと、関連する単位が表示されます。</mrk><mrk mid="161" mtype="seg">元データは、わかりやすい表示単位に自動的に変換されます (1 秒未満は ms、毎秒 100 万バイトは MiB/s など)。</mrk>
 
-#### 例
+{{< img src="developers/metrics/units/postgres_commits.png" alt="Postgres コミット"  style="width:70%;">}}
 
-| 元の値              | フォーマット済み |
-|------------------------|-----------|
-| 1                      | 1         |
-| 2.7182818284           | 2.72      |
-| 1337                   | 1.34K     |
-| 31536000               | 31.54M    |
-| 4294967296             | 4.29G     |
-| 18446744073709552000   | 2e19      |
-| 0.001                  | 1e-3      |
-| 2.3283064365386963e-10 | 2e-10     |
-| 無効                | N/A       |
+単位は、タイムボードグラフの下部にも表示されます。歯車アイコンのドロップダウンから **Metrics Info** を選択することで、メトリクスの説明を表示できます。
 
-### 単位処理
+{{< img src="developers/metrics/units/annotated_ops.png" alt="アノテーション付き Ops"  style="width:70%;">}}
 
-単位は、読みやすくするためにグラフ上で自動的に異なる単位に変換されます。
-
-#### 例
-
-| 単位       | ファミリー    | 元の値            | フォーマット済み    |
-|------------|-----------|----------------------|--------------|
-| バイト       | バイト     | 1                    | 1 B          |
-| キビバイト   | バイト     | 1234235              | 1.18 GiB     |
-| キビバイト   | バイト     | 45457878236741230000 | 40374.71 EiB |
-| ヘルツ      | 周波数 | 6345223              | 6.35 MHz     |
-| セント       | お金     | 1337                 | 13.37 $      |
-| ナノ秒 | 時間      | 0                    | 0s           |
-| 秒     | 時間      | 0.03212              | 32.12ms      |
-
-### 時間のフォーマット
-
-1 分から 1 年までの時間単位は、人間が読みやすいように複数の単位に分割されています。次の規則が適用されます。
-
-- 短い時間は 10 進形式でフォーマットされます。
-- 最小の時間単位はナノ秒です。
-- 非常に長い時間は、10 進形式の日数としてフォーマットされます。
-
-
-#### 例
-
-| 元の秒 | フォーマット済み               |
-|-------------|-------------------------|
-| 0.00123     | 1.23ms                  |
-| 0.00012345  | 123.45μs (マイクロ秒) |
-| 1.2345e-9   | 1.23ns                  |
-| 95          | 1m 35s                  |
-| 3671        | 1h 1m                   |
-| 86390       | 1d                      |
-| 96400       | 1d 3h                   |
-| 52596400    | 608.75 days             |
-
+メトリクス単位を変更するには、[Metric Summary][1] ページに移動し、**Metadata** セクションで **Edit** をクリックし、ドロップダウンメニューから `bit` や `byte` などの単位を選択します。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
-[2]: https://en.wikipedia.org/wiki/International_System_of_Units

@@ -44,7 +44,6 @@ _それ以前のバージョン (1.632+) の Jenkins をご使用の場合は、
 
 * **推奨**: Jenkins と Datadog 間で Forwarder として機能する DogStatsD サーバー / Datadog Agent の使用を推奨します。
   - ビルドログの収集は Datadog Agent が完全にインストールされている場合のみ動作します。
-  - 外部ホストから送信されたメトリクスの場合、Datadog Agent は DogStatsD に以下の設定を必要とします：`dogstatsd_non_local_traffic: true`。これは、`datadog.yaml` [コンフィギュレーションファイル][17]を使用して設定できます。
 * HTTP 経由で Datadog に直接データを送信します。
   - 現在実装されている HTTP クライアントはタイムアウト間隔 1 分でブロッキングを行います。Datadog との接続で問題が発生すると、Jenkins インスタンスにも遅延が起こる可能性があります。
 
@@ -68,7 +67,7 @@ Datadog のプラグインを構成するには、お使いの Jenkins の `Mana
 1. **Use the Datadog Agent to report to Datadog** の横のラジオボタンを選択します。
 2. DogStatsD サーバーの `hostname` と `port` を指定します。
 3. (オプション) Advanced タブで Jenkins サーバーのホスト名を入力すると、そのサーバーをイベントに含めることができます。
-4. (オプション) ログ収集ポートを入力し、[ログ収集](#log-collection-for-agents) を構成してから Advanced タブで "Enable Log Collection" を選択します。
+4. (オプション) ログ収集ポートを入力し、[ログ収集](#ログ収集)を構成してから Advanced タブで "Enable Log Collection" を選択します。
 5. 構成を保存します。
 
 #### Groovy スクリプト
@@ -113,7 +112,7 @@ d.setTargetHost('localhost')
 d.setTargetPort(8125)
 
 // ログを収集したい場合
-d.setTargetLogCollectionPort(8125)
+d.setLogCollectionPort(8125)
 
 // カスタムを行う場合は以下の詳細セクションを参照
 d.setExcluded('job1,job2')
@@ -150,7 +149,6 @@ d.save()
 
 Datadog プラグインにより "datadog" のステップが追加され、パイプラインベースのジョブに対するコンフィギュレーションオプションが提供されます。
 宣言型パイプラインでは、トップレベルのオプションブロックにステップを追加します。
-
 ```groovy
 pipeline {
     agent any
@@ -168,7 +166,6 @@ pipeline {
 ```
 
 スクリプト化されたパイプラインでは、関連セクションを Datadog ステップでラップします。
-
 ```groovy
 datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
   node {
@@ -188,8 +185,8 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 | 除外されるジョブ           | 監視対象から除外したいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`                                                                                                      | `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
 | 含まれるジョブ           | 監視対象に含めたいジョブ名を指定する正規表現を記載したカンマ区切りリストです。例: `susans-job,johns-.*,prod_folder/prod_release`                                                                                                          | `DATADOG_JENKINS_PLUGIN_INCLUDED`            |
 | グローバルタグファイル            | タグのカンマ区切りリストを含むワークスペースファイルへのパスです (パイプラインのジョブとは互換不能) 。                                                                                                                                   | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAG_FILE`      |
-| グローバルタグ                | すべてのメトリクス、イベント、サービスチェックを適用するためのカンマ区切りのリストです。タグにはマスターの jenkins インスタンスで定義される環境変数を含めることができます。　                                                                                                                                                          | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`          |
-| グローバルジョブタグ            | ジョブとそのジョブに適用するタグのリストを照合するための正規表現を記載したカンマ区切りリストです。タグにはマスターの jenkins インスタンスで定義される環境変数を含めることができます。**注**: タグで `$` 記号を用いて正規表現に一致したグループを参照することができます。例: `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3` | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
+| グローバルタグ                | すべてのメトリクス、イベント、サービスチェックを適用するためのカンマ区切りリストです。                                                                                                                                                         | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`          |
+| グローバルジョブタグ            | ジョブとそのジョブに適用するタグのリストを照合するための正規表現を記載したカンマ区切りリストです。**注**: タグで `$` 記号を用いて正規表現に一致したグループを参照することができます。例: `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3` | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
 | セキュリティ監査イベントの送信 | イベントおよびメトリクスの `Security Events Type` を送信します (デフォルトで有効) 。                                                                                                                                                                | `DATADOG_JENKINS_PLUGIN_EMIT_SECURITY_EVENTS` |
 | システムイベントの送信         | イベントおよびメトリクスの `System Events Type` を送信します (デフォルトで有効) 。                                                                                                                                                                  | `DATADOG_JENKINS_PLUGIN_EMIT_SYSTEM_EVENTS`   |
 | ログ収集の有効化      | ビルドログを収集および送信します (デフォルトで無効) 。                                                                                                                                                                  | `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS`   |
@@ -278,7 +275,6 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 | `jenkins.job.pause_duration`            | ビルドジョブの一時停止期間 (秒単位)。                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
 | `jenkins.job.started`                  | ジョブの開始レート                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
 | `jenkins.job.stage_duration`           | 個々のステージの期間。                                 | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
-| `jenkins.job.stage_pause_duration`     | 個々のステージの一時停止期間（ミリ秒）。         | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
 | `jenkins.job.stage_completed`          | ステージの完了レート                                      | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
 | `jenkins.job.waiting`                  | ジョブ実行までの待ち時間 (ミリ秒単位)            | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
 | `jenkins.node.count`                   | ノード総数                                          | `jenkins_url`                                                              |
@@ -307,6 +303,7 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 | `jenkins.user.authenticated`           | 認証したユーザーレート                                  | `jenkins_url`, `user_id`                                                   |
 | `jenkins.user.logout`                  | ログアウトしたユーザーレート                                     | `jenkins_url`, `user_id`                                                   |
 
+
 #### Agent のログ収集
 
 **注**: このコンフィギュレーションは、[Datadog Agent コンフィギュレーション](#dogstatsd-forwarding-plugin)を使用するものにのみ適用されます。
@@ -317,12 +314,12 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
    logs_enabled: true
    ```
 
-2. Jenkins ログを収集するには、次のように `conf.d/jenkins.d` 内に `conf.yaml` を作成して、Agent の[カスタムログソースファイル][13]を作成します。
 
-    ```yaml
+2. Jenkins ログを収集するには、次のように `conf.d/jenkins.d` 内に `conf.yaml` を作成して、Agent の[カスタムログソースファイル][13]を作成します。
+    ```
     logs:
-      - type: tcp
-        port: <PORT>
+      - type: tcp 
+        port: <PORT> 
         service: <SERVICE>
         source: jenkins
     ```
@@ -337,7 +334,7 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 
 ## 問題の追跡
 
-このプラグイン [jenkinsci/datadog-plugin/issues][7]に関する問題はすべて、GitHub に搭載の問題追跡システムを使用して追跡を行います。 
+このプラグイン [jenkinsci/datadog-plugin/issues][7] に関する問題はすべて、GitHub に搭載の問題追跡システムを使用して追跡を行います。
 しかし、Jenkins プラグインのホスティング状況に応じて、JIRA に課題が作成される場合があります。関連する課題の投稿については、 [Jenkins の課題ページ][8]をご参照ください。
 
 **注**: [Datadog に関連する JIRA の課題で未解決のものが存在します][9]。
@@ -348,10 +345,11 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 
 ## コードへのコントリビューション
 
-開発に対するアイデアを共有いただけることに、まずは深く**感謝**を申し上げます。
+開発に対するアイデアを共有いただけることに、まずは深く**感謝**を申し上げます。 
 
 課題やプルリクエストの送信前に、[ドキュメント寄稿ガイドライン][11]をお読みください。
 [開発用ドキュメント][12]でも、ローカル開発環境の準備などに関するヒントをご紹介しています。
+
 
 [1]: https://plugins.jenkins.io/datadog
 [2]: http://updates.jenkins-ci.org/download/war/1.632/jenkins.war
@@ -369,4 +367,3 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 [14]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [15]: https://docs.datadoghq.com/ja/logs/log_collection/?tab=http
 [16]: https://raw.githubusercontent.com/jenkinsci/datadog-plugin/master/images/dashboard.png
-[17]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=containeragent#

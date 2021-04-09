@@ -130,44 +130,11 @@ spec:
 
     {{< img src="integrations/guide/prometheus_kubernetes/prometheus_collected_metric_kubernetes.png" alt="Kubernetes で収集された Prometheus メトリクス">}}
 
-## Prometheus アノテーションによるメトリクスの収集
-
-Prometheus Autodiscovery を使用して、Datadog Agent でネイティブ Prometheus アノテーション（`prometheus.io/scrape`、`prometheus.io/path`、`prometheus.io/port` など）を検出し、Kubernetes で自動的に Prometheus メトリクスを収集するよう OpenMetrics チェックをスケジュールできます。
-
-### 要件
-
-- Datadog Agent v7 または v6.26 以降（Pod チェックの場合）
-- Datadog Cluster Agent v1.11 以降（サービスおよびエンドポイントチェックの場合）
-
-### コンフィギュレーション
-
-Helm `values.yaml` で、以下を追加します。
-
-```
-...
-datadog:
-...
-  prometheusScrape:
-    enabled: true
-...
-```
-
-これにより、Datadog Agent がネイティブ Prometheus アノテーションのあるポッドを検出し、対応する OpenMetrics チェックを生成するよう指示します。
-
-また、Datadog Cluster Agent（有効な場合）にネイティブ Prometheus アノテーションのあるサービスを検出し、対応する OpenMetrics チェックを生成するよう指示します。
-
-- `prometheus.io/scrape=true`: 必須。
-- `prometheus.io/path`: 任意。デフォルトは `/metrics`。
-- `prometheus.io/port`: 任意。デフォルトは `%%port%%` で、container/service により置換される[テンプレート変数][13]。
-
-このコンフィギュレーションでは、[OpenMetrics インテグレーション][1]のデフォルトコンフィギュレーションを使用して、公開されたすべてのメトリクスを収集するチェックを生成します。
-
-
 ## カスタムインテグレーションを公式インテグレーションに
 
 デフォルトでは、汎用の Prometheus チェックによって取得されるすべてのメトリクスが、カスタムメトリクスだと見なされます。既製ソフトウェアを監視されて、公式のインテグレーションにするべきだと思われた場合は、[ぜひご提供をお願いします][5]。
 
-公式インテグレーションは、それぞれ専用のディレクトリを持ちます。汎用のチェックには、デフォルトの構成とメトリクスメタデータをハードコードするためのデフォルトのインスタンスメカニズムがあります。たとえば、[kube-proxy][14] インテグレーションを参照します。
+公式インテグレーションは、それぞれ専用のディレクトリを持ちます。汎用のチェックには、デフォルトの構成とメトリクスメタデータをハードコードするためのデフォルトのインスタンスメカニズムがあります。たとえば、[kube-proxy][13] インテグレーションを参照します。
 
 ## その他の参考資料
 
@@ -185,5 +152,4 @@ datadog:
 [10]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [11]: /resources/yaml/prometheus.yaml
 [12]: https://app.datadoghq.com/metric/summary
-[13]: /ja/agent/faq/template_variables/
-[14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[13]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

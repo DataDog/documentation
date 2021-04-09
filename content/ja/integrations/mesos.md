@@ -49,34 +49,31 @@ docker run -d --name datadog-agent \
 
 #### ログの収集
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+Datadog Agent >6.0 はコンテナからログを収集します。すべてのコンテナからすべてのログを収集することも、コンテナイメージ名またはコンテナラベルで絞り込んで、収集するログを選別することもできます。
 
-    ```yaml
-    logs_enabled: true
-    ```
+ログの収集を開始するには、Datadog Agent の実行コマンドに次の変数を追加します。
 
-2. Mesos のログの収集を開始するには、次の構成ブロックを `mesos_master.d/conf.yaml` ファイルに追加します。
+- `-e DD_LOGS_ENABLED=true`: `true` に設定すると、ログ収集が有効になります。これで、Agent は、構成ファイルまたはコンテナラベルにあるログインストラクションを探します。
+- `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`: すべてのコンテナのログ収集を有効にします。
+- `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: Datadog に何が送信され、何が送信されなかったかを追跡するために、Agent がコンテナログのポインターを保管するために使用するディレクトリをマウントします。
 
-    ```yaml
-    logs:
-      - type: file
-        path: /var/log/mesos/*
-        source: mesos
-    ```
+次のようなコマンドになります。
 
-   `path` パラメーターの値を環境に合わせて変更するか、デフォルトの Docker stdout を使用します。
+```shell
+docker run -d --name datadog-agent \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /proc/:/host/proc/:ro \
+  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+  -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
+  -e DD_API_KEY=<YOUR_DATADOG_API_KEY> \
+  -e MESOS_MASTER=true \
+  -e MARATHON_URL=http://leader.mesos:8080 \
+  -e DD_LOGS_ENABLED=true \
+  -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+  datadog/agent:latest
+```
 
-    ```yaml
-    logs:
-      - type: docker
-        source: mesos
-    ```
-
-    使用可能なすべての構成オプションの詳細については、[サンプル mesos_master.d/conf.yaml][3] を参照してください。
-
-3. [Agent を再起動します][4]。
-
-Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][5]を参照してください。
+インテグレーションの自動セットアップを活用するために、[オートディスカバリー機能][4]を使用して、ログの `service` および `source` 属性をオーバーライドできます。
 
 ### 検証
 
@@ -99,18 +96,18 @@ Agent が Mesos Master API に接続してメトリクスを収集できない�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 ## その他の参考資料
 
-- [DC/OS を使用した Mesos への Datadog のインストール][7]
+- [DC/OS を使用した Mesos への Datadog のインストール][6]
 
 
 
 
 ## Mesos スレーブインテグレーション
 
-![Mesos スレーブダッシュボード][8]
+![Mesos スレーブダッシュボード][7]
 
 ## 概要
 
@@ -128,7 +125,7 @@ Agent が Mesos Master API に接続してメトリクスを収集できない�
 
 ### インストール
 
-[このブログ記事][7]の手順に従って、DC/OS Web UI から各 Mesos エージェントノードに Datadog Agent をインストールします。
+[ブログ記事][6]の手順に従って、DC/OS Web UI から各 Mesos エージェントノードに Datadog Agent をインストールします。
 
 ### コンフィギュレーション
 
@@ -142,7 +139,7 @@ Agent が Mesos Master API に接続してメトリクスを収集できない�
 
 #### Marathon
 
-DC/OS を使用していない場合は、Marathon Web UI を使用するか、次の JSON を API URL にポストして、Datadog Agent アプリケーションを定義します。`<YOUR_DATADOG_API_KEY>` をご使用の API キーに置き換え、インスタンスの数をクラスター内のスレーブノードの数に置き換える必要があります。また、使用される Docker イメージを最新のタグに更新する必要があります。最新のイメージは [Docker Hub][9] にあります。
+DC/OS を使用していない場合は、Marathon Web UI を使用するか、次の JSON を API URL にポストして、Datadog Agent アプリケーションを定義します。`<DATADOG_API_キー>` をご使用の API キーに置き換え、インスタンスの数をクラスター内のスレーブノードの数に置き換える必要があります。また、使用される Docker イメージを最新のタグに更新する必要があります。最新のイメージは [Docker Hub][8] で確認できます。
 
 ```json
 {
@@ -212,37 +209,6 @@ DC/OS を使用していない場合は、Marathon Web UI を使用するか、�
 
 カスタム `mesos_slave.d/conf.yaml` を構成する場合を除き (通常は `disable_ssl_validation：true` を設定する必要があります)、エージェントのインストール後に必要な作業はありません。
 
-#### ログの収集
-
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
-
-    ```yaml
-    logs_enabled: true
-    ```
-
-2. Mesos のログの収集を開始するには、次の構成ブロックを  `mesos_slave.d/conf.yaml` ファイルに追加します。
-
-    ```yaml
-    logs:
-      - type: file
-        path: /var/log/mesos/*
-        source: mesos
-    ```
-
-    `path` パラメーターの値を環境に合わせて変更するか、デフォルトの Docker stdout を使用します。
-
-    ```yaml
-    logs:
-      - type: docker
-        source: mesos
-    ```
-
-    使用可能なすべての構成オプションの詳細については、[sample mesos_slave.d/conf.yaml][10]を参照してください。
-
-3. [Agent を再起動します][4]。
-
-Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][5]を参照してください。
-
 ### 検証
 
 #### DC/OS
@@ -263,7 +229,7 @@ DC/OS を使用していない場合は、正常に実行中のアプリケー�
 
 Mesos スレーブチェックには、イベントは含まれません。
 
-### Service Check
+### サービスのチェック
 
 **mesos_slave.can_connect**:<br>
 Agent が Mesos スレーブメトリクスエンドポイントに接続できない場合は`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
@@ -285,20 +251,18 @@ mesos_slave チェックは、エグゼキュータータスクごとにサー�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 ## その他の参考資料
 
-- [DC/OS を使用した Mesos への Datadog のインストール][7]
+- [DC/OS を使用した Mesos への Datadog のインストール][6]
 
 
 [1]: https://docs.datadoghq.com/ja/integrations/mesos/#mesos-slave-integration
 [2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_master/images/mesos_dashboard.png
 [3]: https://github.com/DataDog/integrations-core/blob/master/mesos_master/datadog_checks/mesos_master/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://www.datadoghq.com/blog/deploy-datadog-dcos
-[8]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_slave/images/mesos_dashboard.png
-[9]: https://hub.docker.com/r/datadog/agent/tags
-[10]: https://github.com/DataDog/integrations-core/blob/master/mesos_slave/datadog_checks/mesos_slave/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ja/logs/log_collection/docker/#option-2-autodiscovery
+[5]: https://docs.datadoghq.com/ja/help/
+[6]: https://www.datadoghq.com/blog/deploy-datadog-dcos
+[7]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_slave/images/mesos_dashboard.png
+[8]: https://hub.docker.com/r/datadog/agent/tags
