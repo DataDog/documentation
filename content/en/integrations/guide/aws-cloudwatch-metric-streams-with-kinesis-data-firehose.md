@@ -31,7 +31,11 @@ Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can
    - If you later decide you don't want to stream a metric and delete the stream or remove namespaces from it, Datadog automatically starts collecting those metrics using API polling again, according to your configuration settings in the AWS Integration tile.
  
 ### Supported Metrics
-Nearly all of the CloudWatch namespaces and metrics that Datadog supports via the API polling approach are also supported via Metric Streams. The only exceptions are metrics for percentile statistics (p90, p95, p99, etc.). CloudWatch Metric Streams do not currently support the streaming of metrics for percentile statistics.
+Nearly all of the CloudWatch namespaces and metrics that Datadog supports via the API polling approach are also supported via Metric Streams. There are however a couple exceptions.
+
+The following CloudWatch metrics are not currently supported:
+1. Metrics for percentile statistics (p90, p95, p99, etc.). CloudWatch Metric Streams does not currently support the streaming of metrics for percentile statistics.
+2. Metrics that have a timestamp of more than two hours old. Some examples of these include S3 daily storage metrics and some billing metrics.
 
 ### Billing
  
