@@ -62,8 +62,8 @@ Replace `slo_id` with the alphanumeric ID of the metric-based SLO you wish to co
 
 ## Beta restrictions
 
-- Alerting is available for only metric-based SLOs.
-- The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel.
+- Alerting is available only for metric-based SLOs or for monitor-based SLOs that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
+- The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel or the [Manage Monitors][7] page.
 - You can only set one alert per SLO (target + time window) in the UI, but you can set multiple alerts per SLO using the API or Terraform.
 
 [1]: /monitors/service_level_objectives/metric/
@@ -72,3 +72,4 @@ Replace `slo_id` with the alphanumeric ID of the metric-based SLO you wish to co
 [4]: /api/v1/monitors/#create-a-monitor
 [5]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
 [6]: /monitors/service_level_objectives/monitor/
+[7]: https://app.datadoghq.com/monitors/manage
