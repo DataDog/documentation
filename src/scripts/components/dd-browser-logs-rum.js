@@ -18,7 +18,7 @@ if (window.DD_RUM) {
             applicationId: Config.ddApplicationId,
             clientToken: Config.ddClientToken,
             env,
-            service: 'documentation',
+            service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
             trackInteractions: true,
             allowedTracingOrigins: [window.location.origin]
