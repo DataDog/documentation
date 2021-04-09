@@ -1,5 +1,5 @@
 ---
-title: Re-using Browser tests journeys across your test suite
+title: Reusing browser tests journeys across your test suite
 kind: guide
 further_reading:
     - link: 'synthetics/browser_tests'
