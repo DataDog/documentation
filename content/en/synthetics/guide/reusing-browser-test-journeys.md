@@ -50,7 +50,6 @@ To create a login test and use it as a subtest in the rest of your test suite:
     When you set up this subtest step, all the steps of test A are played at the beginning of the parent test B. Also, the variables in the subtest A are imported into the parent test B.
     By default, the subtest is played in the main tab. This means your subtest steps are played in the same tab as previous and following steps. The subtest starts running using the URL that was set in the parent test (in this example, the pre-login URL), and after all the subtest steps have been executed, the browser test executes the parent’s first non-subtest step from the page the subtest was last on. No parent step was created for now.
 
-You can only see that after importing your login subtest (ie. test A) in your parent test (ie. test B), the two variables from the login subtest are imported into your parent test as well.
 
 **Note:** You can choose the tab in which the subtest should execute using [**Subtest Advanced Options**][1].
 
