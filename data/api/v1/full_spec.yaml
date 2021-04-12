@@ -891,6 +891,8 @@ components:
             type: string
           nullable: true
           type: array
+        reflow_type:
+          $ref: '#/components/schemas/DashboardReflowType'
         template_variable_presets:
           description: Array of template variables saved views.
           items:
@@ -1031,6 +1033,21 @@ components:
             $ref: '#/components/schemas/DashboardList'
           type: array
       type: object
+    DashboardReflowType:
+      description: 'Reflow type for a multi-size layout dashboard. Set this only when
+        layout type is ''ordered''.
+
+        If set to ''fixed'', the dashboard expect all widgets to have a layout, and
+        if it''s set to ''auto'',
+
+        widgets should not have layouts.'
+      enum:
+      - auto
+      - fixed
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - FIXED
     DashboardShareType:
       description: Type of sharing access (either open to anyone who has the public
         URL or invite-only).
