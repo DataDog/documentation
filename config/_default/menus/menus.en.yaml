@@ -4164,6 +4164,70 @@ api:
         - ListServiceDependencies
       unstable:
         - v1
+  - name: Service Level Objective Corrections
+    url: /api/latest/service-level-objective-corrections/
+    identifier: service-level-objective-corrections
+    generated: true
+  - name: Update an SLO correction
+    url: '#update-an-slo-correction'
+    identifier: update-an-slo-correction
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateSLOCorrection
+      unstable:
+        - v1
+  - name: Get an SLO correction for an SLO
+    url: '#get-an-slo-correction-for-an-slo'
+    identifier: get-an-slo-correction-for-an-slo
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLOCorrection
+      unstable:
+        - v1
+  - name: Delete an SLO correction
+    url: '#delete-an-slo-correction'
+    identifier: delete-an-slo-correction
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteSLOCorrection
+      unstable:
+        - v1
+  - name: Create an SLO correction
+    url: '#create-an-slo-correction'
+    identifier: create-an-slo-correction
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSLOCorrection
+      unstable:
+        - v1
+  - name: Get all SLO corrections
+    url: '#get-all-slo-corrections'
+    identifier: get-all-slo-corrections
+    parent: service-level-objective-corrections
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListSLOCorrection
+      unstable:
+        - v1
   - name: Service Level Objectives
     url: /api/latest/service-level-objectives/
     identifier: service-level-objectives
