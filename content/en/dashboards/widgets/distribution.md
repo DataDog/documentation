@@ -40,10 +40,6 @@ Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your da
 
 On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
-##### Legend
-
-Use *Show legend on graph* to toggle the legend display on your widget. Optionally, select the number of entries to display.
-
 #### Title
 
 Display a custom title for your widget by activating the `Show a Title` check box:

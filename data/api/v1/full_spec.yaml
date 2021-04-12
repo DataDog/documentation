@@ -1175,8 +1175,11 @@ components:
         aggregated across one or several tags, such as hosts.\nUnlike the heat map,\
         \ a distribution graph\u2019s x-axis is quantity rather than time."
       properties:
-        legend_size:
-          $ref: '#/components/schemas/WidgetLegendSize'
+        markers:
+            description: List of markers.
+            items:
+              $ref: '#/components/schemas/WidgetMarker'
+            type: array
         requests:
           description: "Array of one request object to display in the widget.\n\n\
             See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
@@ -1188,9 +1191,6 @@ components:
           maxItems: 1
           minItems: 1
           type: array
-        show_legend:
-          description: Whether or not to display the legend on this widget.
-          type: boolean
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
@@ -1203,6 +1203,10 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/DistributionWidgetDefinitionType'
+        xaxis:
+          $ref: '#/components/schemas/WidgetDistributionXAxis'
+        yaxis:
+          $ref: '#/components/schemas/WidgetDistributionYAxis'
       required:
       - type
       - requests
