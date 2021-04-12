@@ -128,7 +128,7 @@ spec:
 
 | Parameter          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
-| `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. |
+| `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. If multiple `include_at_match` rules are defined, all rules patterns must match in order for the log to be included. |
 
 
 For example, to **filter IN** logs that contain a Datadog email address, use the following `log_processing_rules`:
@@ -149,7 +149,7 @@ logs_config:
       pattern: \w+@datadoghq.com
 ```
 
-**Note**: If multiple `include_at_match` rules are defined, all rules patterns must match in order for the log to be included. If you want to match one or more patterns you must define them in a single expression:
+If you want to match one or more patterns you must define them in a single expression:
 
 ```yaml
 logs_config:
