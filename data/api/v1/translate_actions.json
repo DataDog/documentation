@@ -690,6 +690,30 @@
     "description": "Check if an SLO can be safely deleted. For example,\nassure an SLO can be deleted without disrupting a dashboard.",
     "summary": "Check if SLOs can be safely deleted"
   },
+  "ListSLOCorrection": {
+    "description": "Get all Service Level Objective corrections",
+    "summary": "Get all SLO corrections"
+  },
+  "CreateSLOCorrection": {
+    "description": "Create an SLO Correction",
+    "summary": "Create an SLO correction",
+    "request_description": "Create an SLO Correction",
+    "request_schema_description": "An object that defines a correction to be applied to an SLO"
+  },
+  "DeleteSLOCorrection": {
+    "description": "Permanently delete the specified SLO correction object",
+    "summary": "Delete an SLO correction"
+  },
+  "GetSLOCorrection": {
+    "description": "Get an SLO correction",
+    "summary": "Get an SLO correction for an SLO"
+  },
+  "UpdateSLOCorrection": {
+    "description": "Update the specified SLO correction object object",
+    "summary": "Update an SLO correction",
+    "request_description": "The edited SLO correction object.",
+    "request_schema_description": "An object that defines a correction to be applied to an SLO"
+  },
   "DeleteSLO": {
     "description": "Permanently delete the specified service level objective object.\n\nIf an SLO is used in a dashboard, the `DELETE /v1/slo/` endpoint returns\na 409 conflict error because the SLO is referenced in a dashboard.",
     "summary": "Delete an SLO"
