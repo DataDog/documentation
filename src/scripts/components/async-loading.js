@@ -5,7 +5,7 @@ import { initializeIntegrations } from './integrations';
 import { initializeSecurityRules } from './security-rules';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
-import {redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav} from './code-languages'; // eslint-disable-line import/no-cycle
+import {redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav, toggleMultiCodeLangNav} from './code-languages'; // eslint-disable-line import/no-cycle
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -51,7 +51,7 @@ function loadPage(newUrl) {
                 '.js-toc-container'
             );
 
-            const currentSidebar = document.querySelector('.sidebar'); 
+            const currentSidebar = document.querySelector('.sidebar');
             const newSidebar = httpRequest.responseXML.querySelector('.sidebar');
 
             if (newContent === null) {
@@ -163,7 +163,7 @@ function loadPage(newUrl) {
             }
 
             // Ensure sidebar is displayed or hidden properly based on HTTP response.  I'm certain we can implement a better strategy for what's happening in this script, but this should hold us over until then.
-            if (newSidebar && !currentSidebar) {            
+            if (newSidebar && !currentSidebar) {
                 const jsContentContainer = document.querySelector('.js-content-container');
                 jsContentContainer.appendChild(newSidebar);
             }
@@ -199,6 +199,7 @@ function loadPage(newUrl) {
             addCodeTabEventListeners();
             activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
+            toggleMultiCodeLangNav(pageCodeLang);
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
