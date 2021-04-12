@@ -119,6 +119,50 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 {{% /tab %}}
 {{< /tabs >}}
 
+### Add custom tags to resources
+
+You can add custom tags to Kubernetes resources to ease filtering inside the Kubernetes resources view.
+
+Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable.
+
+**Note**: These tags only show up in the Kubernetes resources view.
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+If you are using the official Helm chart, add the environment variable on both the Process Agent and the Cluster Agent by setting `agents.containers.processAgent.env` and `clusterAgent.env` respectively in [values.yaml][1].
+
+```yaml
+  agents:
+    containers:
+      processAgent:
+        env:
+          - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+            value: "tag1:value1 tag2:value2"
+  clusterAgent:
+    env:
+      - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+        value: "tag1:value1 tag2:value2"
+```
+
+
+Then deploy a new release.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+Set the environment variable on both the Process Agent and Cluster Agent containers:
+
+```yaml
+- name: DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS
+  value: "tag1:value1 tag2:value2"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Include or exclude containers
 
 It is possible to include and/or exclude containers from real-time collection:
