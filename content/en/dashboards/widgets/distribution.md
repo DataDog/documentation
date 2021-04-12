@@ -40,6 +40,22 @@ Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your da
 
 On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
 
+#### Markers
+
+With APM request distributions, you can add percentiles markers on the x-axis.
+
+{{< img src="dashboards/widgets/options/distribution_marker_controls.jpg" alt="Marker control preferences"  style="width:80%;">}}
+
+#### X-axis and Y-axis controls
+
+Axis controls are available via the UI and the JSON editor. They allow you to:
+
+* Clip the x and y-axes to specific ranges.
+* Automatically change x-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) in order to remove "outlier" bins.
+* Change the y-axis scale from linear to log.
+
+{{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="Distribution axis control preferences"  style="width:80%;">}}
+
 #### Title
 
 Display a custom title for your widget by activating the `Show a Title` check box:
