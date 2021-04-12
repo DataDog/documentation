@@ -1788,16 +1788,11 @@ main:
     pre: nav_security_monitoring
     identifier: security_platform
     weight: 160000
-  - name: Security Monitoring
-    url: security_platform/security_monitoring/
-    parent: security_platform
-    identifier: security_monitoring
-    weight: 1
   - name: Getting Started
     url: security_platform/getting_started
-    parent: security_monitoring
+    parent: security_platform
     identifier: security_monitoring_getting_started
-    weight: 101
+    weight: 1
   - name: Security Rules
     url: security_platform/detection_rules/
     parent: security_platform
