@@ -60,10 +60,9 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-See [tracer configuration][2] for more information on how to set these variables.
+See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /tracing/setup/php/#environment-variable-configuration
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
@@ -204,6 +203,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                                                     |
 | `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace long-running processes    |
 | `DD_TAGS`                                 | `null`      | Tags to be set on all spans, for example: `key1:value1,key2:value2`. Added in version `0.47.0`                                                 |
+| `DD_TRACE_HEADER_TAGS`                    | `null`      | CSV of header names that are reported on the root span as tags.                                                                                |
 | `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`. |
 | `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`     | `false`     | Set the service name of Redis clients operations to `redis-<hostname>`. Added in version `0.51.0`                            |
 | `DD_TRACE_<INTEGRATION>_ENABLED`          | `true`      | Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)). For versions < `0.47.1`, this parameter is `DD_INTEGRATIONS_DISABLED` which takes a CSV list of integrations to disable, for example: `curl,mysqli`. |
@@ -271,7 +271,7 @@ Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hash
 
 You can turn this functionality OFF using `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=false`.
 
-##### Custom URL-To-Resource Mapping
+##### Custom URL-to-resource mapping
 
 There are a few cases that are not covered by the automatic normalization that is applied.
 
@@ -284,26 +284,37 @@ There are a few cases that are not covered by the automatic normalization that i
 
 There are two classes of scenarios that are not covered by automatic normalization:
 
-  - The path fragment to normalize has a reproducible patter nand can be present in any part of the url, for example `id<number>` in the example above. This scenario is covered by the setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` below.
+  - The path fragment to normalize has a reproducible pattern and can be present in any part of the url, for example `id<number>` in the example above. This scenario is covered by the setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` below.
   - The path fragment can be anything, and the previous path fragment indicates that a value has to be normalized. For example `/cities/new-york` tells us that `new-york` has to be normalized as it is the name of a city. This scenario is covered by settings `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` for incoming and outgoing requests respectively.
 
 ###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
-This setting is a CSV of regex that are applied to every path fragment independently. For example setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for the first example `/using/prefix/id123/for/id` would apply the regex to all framents `using`, `prefix`, `id123`, `for`, and `id`. The final normalized resorce name would be `GET /using/prefix/?/for/id`.
+This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`.
 
-Note that multiple regular expressions separated by a comma can be added `^id\d+$,code\d+$` and that the comma character `,` is not escaped, hence it cannot be used in the regular expression.
+| URL                          | regex     | Expected Resource Name       |
+|:-----------------------------|:----------|:-----------------------------|
+| `/using/prefix/id123/for/id` | `^id\d+$` | `GET /using/prefix/?/for/id` |
+
+Note that because the format of this variable is a CSV, the comma character `,` is not escaped and cannot be used in your regular expressions.
 
 ###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 
-This setting is a CSV of patterns that can contain a wildcard `*`. For example, adding the pattern `cities/*` means that everytime the fragment `cities` is found while analyzing a URL, then the next fragment, if any, will be replaced with `?`. Patterns are applied at any depth, so applying the following rule will both normalize `/cities/new-york` and `/nested/cities/new-york` in the table above.
+This setting is a CSV of patterns that can contain a wildcard `*`. For example, adding the pattern `cities/*` means that every time the fragment `cities` is found while analyzing a URL, then the next fragment, if any, will be replaced with `?`. Patterns are applied at any depth, so applying the following rule will both normalize `/cities/new-york` and `/nested/cities/new-york` in the table above.
 
 Patterns can be applied to a part of a specific fragment. For example `path/*-fix` would normalize the url `/some/path/changing-fix/nested` to `/some/path/?-fix/nested`
 
 Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requests (for example web frameworks) while `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` only applies to outgoing requests (for example `curl` and `guzzle` requests).
 
+### `open_basedir` restrictions
+
+When [`open_basedir`][11] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
+
 ## Upgrading
 
 To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
+
+Once the installation is completed restart PHP (PHP-FPM or the Apache SAPI).
 
 **Note**: If you are using second level caching in OPcache by setting the parameter `opcache.file_cache`, remove the cache folder.
 
@@ -353,3 +364,4 @@ If no core dump was generated, check the following configurations and change the
 [8]: /tracing/faq/php-tracer-manual-installation
 [9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [10]: /tracing/setup/nginx/#nginx-and-fastcgi
+[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

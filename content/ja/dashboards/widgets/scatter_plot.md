@@ -2,6 +2,7 @@
 title: 散布図ウィジェット
 kind: documentation
 description: 2 つのメトリクスとそれぞれの集計を使用して、選択したスコープをグラフ化する
+widget_type: scatterplot
 aliases:
   - /ja/graphing/widgets/scatter_plot/
 further_reading:
@@ -43,55 +44,15 @@ further_reading:
 
 ## API
 
-散布図ウィジェットの[ウィジェット JSON スキーマ定義][1]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][1] ドキュメントをご参照ください。
 
-```text
-SCATTERPLOT_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["scatterplot"]},
-        "requests": {
-            "type": "object",
-            "properties": {
-                "x": REQUEST_SCHEMA,
-                "y": REQUEST_SCHEMA
-            },
-            "required": ["x", "y"],
-            "additionalProperties": false
-        },
-        "xaxis": AXIS_SCHEMA,
-        "yaxis": AXIS_SCHEMA,
-        "color_by_groups": {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+散布図ウィジェットの[ウィジェット JSON スキーマ定義][2]は次のとおりです。
 
-| パラメーター         | 種類             | 必須 | 説明                                                                                                                                        |
-|-------------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`            | string           | はい      | ウィジェットのタイプ。散布図ウィジェットには `scatterplot` を使用します。                                                                                     |
-| `requests`        | object           | はい      | ウィジェットで表示する `requests` オブジェクト。`REQUEST_SCHEMA` の作成方法については、[リクエスト JSON スキーマに関するドキュメント][2]を参照してください。 |
-| `yaxis`           | object           | いいえ       | Y 軸コントロールのオプション。`AXIS_SCHEMA` の作成方法については、[Y 軸 JSON スキーマに関するドキュメント][3]を参照してください。                           |
-| `xaxis`           | object           | いいえ       | Y 軸コントロールのオプション。`AXIS_SCHEMA` の作成方法については、[X 軸 JSON スキーマに関するドキュメント][3]を参照してください。                           |
-| `color_by_groups` | 文字列の配列 | いいえ       | 色分けに使用されるグループのリスト。                                                                                                                    |
-| `title`           | string           | いいえ       | ウィジェットのタイトル。                                                                                                                              |
-
-`request` オブジェクトでは、以下のプロパティも使用できます。
-
-```json
-{"aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}}
-```
-
-| パラメーター    | 種類   | 必須 | 説明                                                                                   |
-|--------------|--------|----------|-----------------------------------------------------------------------------------------------|
-| `aggregator` | string | いいえ       | リクエストに使用される集計関数。有効な値は `avg`、`last`、`max`、`min`、`sum` です。 |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/graphing_json/widget_json/
-[2]: /ja/dashboards/graphing_json/request_json/
-[3]: /ja/dashboards/graphing_json/widget_json/#y-axis-schema
+[1]: /ja/api/v1/dashboards/
+[2]: /ja/dashboards/graphing_json/widget_json/

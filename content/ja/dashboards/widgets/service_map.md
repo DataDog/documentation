@@ -2,6 +2,7 @@
 title: サービスマップウィジェット
 kind: documentation
 description: 1 つのサービスについて、それを呼び出したすべてのサービスおよびそれから呼び出されたすべてのサービスを表すマップを表示する
+widget_type: servicemap
 aliases:
   - /ja/graphing/widgets/service_map/
 further_reading:
@@ -32,28 +33,11 @@ further_reading:
 
 ## API
 
-サービスマップウィジェットの[ウィジェット JSON スキーマ定義][4]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][4] ドキュメントをご参照ください。
 
-```text
-SERVICEMAP_SCHEMA = {
-        "type": "object",
-        "properties": {
-            "type": {"enum": ["servicemap"]},
-            "filters": {"type": "array", "items": {"type": "string"}, "minItems": 1},
-            "service": {"type": "string"},
-            "title": WidgetSchema.TITLE
-        },
-        "required": ["type", "filters", "service"],
-        "additionalProperties": False,
-    }
-```
+サービスマップウィジェットの[ウィジェット JSON スキーマ定義][5]は次のとおりです。
 
-| パラメーター | 種類   | 必須 | 説明                                                       |
-|-----------|--------|----------|-------------------------------------------------------------------|
-| type      | string | はい      | ウィジェットのタイプ。サービスマップウィジェットには `servicemap` を使用します。 |
-| service   | string | はい      | マッピングするサービスの ID                            |
-| filters   | object | はい      | 環境およびプライマリタグ (または `*`。ただしアカウントで有効の場合)    |
-| title     | string | いいえ       | ウィジェットのタイトル                                         |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
@@ -62,4 +46,5 @@ SERVICEMAP_SCHEMA = {
 [1]: /ja/tracing/send_traces/
 [2]: /ja/tracing/guide/setting_primary_tags_to_scope/
 [3]: /ja/tracing/visualization/service/
-[4]: /ja/dashboards/graphing_json/widget_json/
+[4]: /ja/api/v1/dashboards/
+[5]: /ja/dashboards/graphing_json/widget_json/

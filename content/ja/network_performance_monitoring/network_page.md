@@ -8,9 +8,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
     tag: ブログ
     text: ネットワークパフォーマンスモニタリング
-  - link: /integrations/snmp
+  - link: /network_performance_monitoring/devices
     tag: ドキュメント
-    text: SNMP インテグレーション
+    text: ネットワークデバイスモニタリング
   - link: /network_performance_monitoring/installation
     tag: ドキュメント
     text: Datadog Agent を使用したネットワークデータの収集。

@@ -15,6 +15,9 @@ further_reading:
   - link: /integrations/amazon_lambda/
     tag: AWS Lambda インテグレーション
     text: AWS Lambda インテグレーション
+  - link: 'https://www.datadoghq.com/blog/monitoring-lambda-containers/'
+    tag: ブログ
+    text: コンテナイメージを使用してデプロイされた AWS Lambda 関数を監視する
 ---
 {{< img src="serverless/datadog_serverless_overview.png" alt="Datadog サーバレスの概要"  style="width:100%;">}}
 
@@ -26,17 +29,10 @@ further_reading:
 
 ## はじめに
 
-### 1. AWS インテグレーションをインストール
-
-[AWS インテグレーション][2]をインストールします。これにより、Datadog は AWS CloudWatch から Lambda メトリクスを取り込むことができます。
-
-### 2. Datadog Forwarder のインストール
-
-AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][3]をインストールします。**注**: [AWS インテグレーション][2] CloudFormation スタックの一部として Forwarder 関数がすでにインストールされている場合は、この手順をスキップしてください。
-
-### 3. アプリケーションのインスツルメンテーション
-
-サーバーレスアプリケーションをインスツルメントする手順については、以下の Lambda ランタイムを選択してください。
+1. [AWS インテグレーション][2]をインストールします。これにより、Datadog は AWS CloudWatch から Lambda メトリクスを取り込むことができます。
+2. AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][3]をインストールします。
+   **注**: [AWS インテグレーション][2] CloudFormation スタックの一部として Forwarder 関数がすでにインストールされている場合は、この手順をスキップしてください。
+3. アプリケーションをインスツルメントします。サーバーレスアプリケーションをインスツルメントする手順については、以下の Lambda ランタイムを選択してください。
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 

@@ -47,12 +47,12 @@ To enable log collection with your DaemonSet:
           value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
           value: "true"
-        - name: DD_CONTAINER_EXCLUDE
+        - name: DD_CONTAINER_EXCLUDE_LOGS
           value: "name:datadog-agent"
      # (...)
     ```
 
-    **Note**: Setting `DD_CONTAINER_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [Container Discovery Management][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
+    **Note**: Setting `DD_CONTAINER_EXCLUDE_LOGS` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [environment variable for ignoring containers][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE_LOGS` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
 
 2. Mount the `pointdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
 
@@ -91,7 +91,23 @@ To enable log collection with your DaemonSet:
 
     The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
-[1]: /agent/guide/autodiscovery-management/
+### Unprivileged
+
+(Optional) To run an unprivileged installation, add the following to your [pod template][2]:
+
+```yaml
+  spec:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
+
+When the agent is running with a non-root user, it cannot directly read the log files contained in `/var/lib/docker/containers`. In this case, it is necessary to mount the docker socket in the agent container so that it can fetch the container logs from the docker daemon.
+
+[1]: /agent/docker/?tab=standard#ignore-containers
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -113,6 +129,20 @@ datadog:
     #
     containerCollectAll: true
 ```
+
+### Unprivileged
+
+(Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
+
+```yaml
+datadog:
+  securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
@@ -136,9 +166,28 @@ Then apply the new configuration:
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
+## Unprivileged
+
+(Optional) To run an unprivileged installation, add the following to the [datadog CR][8]:
+
+```yaml
+agent:
+  config:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
+
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
+
+**Warning**: When running an unprivileged installation, the agent needs to be able to read the log files in `/var/log/pods`.
+With `containerd`, the log files in `/var/log/pods` are readable by members of the `root` group. With the above instructions, the `agent` is still running with the `root` group so, it works.
+With `docker`, the logs files in `/var/log/pods` are symbolic links to `/var/lib/docker/containers` which is traversable only by the `root` user. As a consequence, with `docker`, it’s not possible for a non-`root` agent to read pod logs in `/var/log/pods`. The docker socket must be mounted in the agent container so that it can get pods logs through the docker daemon.
 
 **Note**: If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, set the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to `true` in order to force the Agent to go for the file collection mode.
 
@@ -351,7 +400,7 @@ The following ConfigMap defines the integration template for `redis` containers 
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: redis-config-map
+  name: redisdb-config-map
   namespace: default
 data:
   redisdb-config: |-
@@ -399,6 +448,38 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Examples - Log collection from file configured in an annotation
+
+The Agent v7.26.0+/6.26.0+ can directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a file type configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
+
+For example, to collect logs from `/logs/app/prod.log` from a container named `webapp` inside a Kubernetes pod, the pod definition would be:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+  annotations:
+    ad.datadoghq.com/webapp.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}]'
+  labels:
+    name: webapp
+spec:
+  containers:
+    - name: webapp
+      image: webapp:latest
+```
+
+**Notes**:
+
+- The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to a file may mount a volume such as `/logs/app`, where the log file is written. Please check Kubernetes documentation for further detail on sharing volumes between pods/containers.
+
+- When using this kind of annotation with a container, output logs are not collected automatically. If collection from both the container and a file are needed it should be explicitly enabled in the annotation, for example:
+```yaml
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}, {"source": "container", "service": "app"}]'
+```
+
+- When using this kind of combination, `source` and `service` have no default value for logs collected from a file and should be explicitly set in the annotation.
 
 
 ## Advanced log collection

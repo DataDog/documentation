@@ -17,7 +17,7 @@
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
-    "description": "This endpoint is deprecated. Use the [new dashboard list endpoint](https://docs.datadoghq.com/api/v2/dashboard-lists/) instead."
+    "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
   "dashboards": {
     "name": "Dashboards",
@@ -47,29 +47,13 @@
     "name": "IP Ranges",
     "description": "Get a list of IP prefixes belonging to Datadog."
   },
-  "incident-services": {
-    "name": "Incident Services",
-    "description": "[Check API version 2](/api/v2/incident-services/)."
-  },
-  "incident-teams": {
-    "name": "Incident Teams",
-    "description": "[Check API version 2](/api/v2/incident-teams/)."
-  },
-  "incidents": {
-    "name": "Incidents",
-    "description": "[Check API version 2](/api/v2/incidents/)."
-  },
   "key-management": {
     "name": "Key Management",
-    "description": "Manage your Datadog API and application keys.\n\nYou need an API and applications key with Admin rights\nto interact with this endpoint. The full list of keys can be seen on your\n[Datadog API page](https://app.datadoghq.com/account/settings#api)."
+    "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api)."
   },
   "logs": {
     "name": "Logs",
-    "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload: 5MB\n- Maximum size for a single log: 256kB\n- Maximum array size if sending multiple logs in an array: 500 entries\n\nAny log exceeding 256KB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 256KB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 256KB, and returns a 2xx.\n\nWe encourage you to send your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs."
-  },
-  "logs-archives": {
-    "name": "Logs Archives",
-    "description": "[Check API version 2](/api/v2/logs-archives/)."
+    "description": "Search your logs and send them to your Datadog platform over HTTP."
   },
   "logs-indexes": {
     "name": "Logs Indexes",
@@ -79,13 +63,9 @@
     "name": "Logs Pipelines",
     "description": "Pipelines and processors operate on incoming logs, parsing\nand transforming them into structured attributes for easier querying.\n\n- See the [pipelines configuration page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines and processors currently configured in our UI.\n\n- Additional API-related information about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor).\n\n- For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\n**Notes:**\n\nThese endpoints are only available for admin users.\nMake sure to use an application key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned data to be configured before using in a request.**\nFor example, if you are using the data returned from a\nrequest for another request body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure all escaped spaces as `%{space}` to use\nin the body data."
   },
-  "logs-restriction-queries": {
-    "name": "Logs Restriction Queries",
-    "description": "[Check API version 2](/api/v2/logs-restriction-queries/)."
-  },
   "metrics": {
     "name": "Metrics",
-    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nDatadog has a soft limit of 100 timeseries per host\nwhere a timeseries is defined as a unique combination of metric name and tag."
+    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
   },
   "monitors": {
     "name": "Monitors",
@@ -99,21 +79,9 @@
     "name": "PagerDuty Integration",
     "description": "Configure your [Datadog-PagerDuty integration](https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty)\ndirectly through the Datadog API."
   },
-  "processes": {
-    "name": "Processes",
-    "description": "[Check API version 2](/api/v2/processes/)."
-  },
-  "roles": {
-    "name": "Roles",
-    "description": "[Check API version 2](/api/v2/roles/)."
-  },
   "screenboards": {
     "name": "Screenboards",
     "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
-  },
-  "security-monitoring": {
-    "name": "Security Monitoring",
-    "description": "[Check API version 2](/api/v2/security-monitoring/)."
   },
   "service-checks": {
     "name": "Service Checks",
@@ -122,6 +90,10 @@
   "service-dependencies": {
     "name": "Service Dependencies",
     "description": "APM Service Map API. For more information, visit\nthe [services map documentation](https://docs.datadoghq.com/tracing/visualization/services_map/)."
+  },
+  "service-level-objective-corrections": {
+    "name": "Service Level Objective Corrections",
+    "description": "SLO Status Corrections allow you to prevent specific time periods from negatively impacting\nyour SLO’s status and error budget. You can use Status Corrections for various purposes, such\nas removing planned maintenance windows, non-business hours, or other time periods that do\nnot correspond to genuine issues."
   },
   "service-level-objectives": {
     "name": "Service Level Objectives",
@@ -157,7 +129,7 @@
   },
   "users": {
     "name": "Users",
-    "description": "Create, edit, and disable users. [Read more about team management][1].\n\n[1]: https://docs.datadoghq.com/account_management/team"
+    "description": "Create, edit, and disable users."
   },
   "webhooks-integration": {
     "name": "Webhooks Integration",

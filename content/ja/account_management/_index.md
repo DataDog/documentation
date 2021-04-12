@@ -24,24 +24,19 @@ account settings ページには、自分が関連付けられているすべて
 
 **注**: 組織を退出すると、組織の管理者が招待するまで参加し直すことはできません。
 
-既存の組織に参加するには、管理者に招待してもらう必要があります。招待をリクエストするには次の手順に従ってください。
-
-1. [*account settings* ページ][1]のボタンをクリックして Datadog からログアウトします。
-2. [*new user sign up* ページ][5]にアクセスして、*Join an existing team* リンクをクリックします。
-3. Datadog アカウントに関連付けられているメールアドレス、自分の名前、参加する組織の管理者のメールアドレスを入力します。
-4. Request Invite をクリックしてリクエストを送信します。組織の管理者は、追加する方法の手順を含む通知を受信します。
+既存の組織に参加するには、管理者から招待される必要があります。招待されると、`You've been invited to join <組織名>` という件名のメールが届きます。メールの **Join Account** ボタンをクリックします。
 
 組織の管理者の方は、以下ののドキュメントをご参考になさってください。
 
-* [組織内のユーザーの管理][5]
-* [SAML でのシングルサインオンの構成][6]
-* [組織名の変更][7]
-* [複数の組織のアカウントの管理][8]
-* [Datadog プランを変更して使用状況と請求履歴を表示する][9]
+* [組織内のユーザーの管理][4]
+* [SAML でのシングルサインオンの構成][5]
+* [組織名の変更][6]
+* [複数の組織のアカウントの管理][7]
+* [Datadog プランを変更して使用状況と請求履歴を表示する][8]
 
 ### 設定
 
-*account settings* ページの [*Preferences* タブ][12]で、自分のタイムゾーン、デスクトップ通知、メール講読を設定できます。メールのサブスクリプションで、次のレポートにアクセスできます。
+*account settings* ページの [*Preferences* タブ][9]で、自分のタイムゾーン、デスクトップ通知、メール講読を設定できます。メールのサブスクリプションで、次のレポートにアクセスできます。
 
 * 1 日のダイジェスト
 * 週間ダイジェスト
@@ -59,21 +54,20 @@ Datadog をダークモードで表示するには、サイドバーにあるア
 
 ## GitHub への接続
 
-[GitHub インテグレーション][11]をインストールして Datadog でイベントを作成するには、自分の GitHub アカウントを Datadog ユーザーアカウントにリンクする必要があります。アカウントをリンクすることで、Datadog で GitHub イベントに投稿したコメントは自動的に GitHub の対応する問題またはプルリクエストに投稿し直されます。
+[GitHub インテグレーション][10]をインストールして Datadog でイベントを作成するには、自分の GitHub アカウントを Datadog ユーザーアカウントにリンクする必要があります。アカウントをリンクすることで、Datadog で GitHub イベントに投稿したコメントは自動的に GitHub の対応する問題またはプルリクエストに投稿し直されます。
 
 ## アカウントの削除
 
-Datadog アカウントを完全に削除する場合は、[サポートチームにご連絡ください][12]。
+Datadog アカウントを完全に削除するには、[サポートチームにご連絡ください][11]。
 
 [1]: https://app.datadoghq.com/account/profile
 [2]: https://gravatar.com
 [3]: https://support.google.com/accounts/answer/19870?hl=en
-[4]: https://app.datadoghq.com/signup
-[5]: /ja/account_management/users/
-[6]: /ja/account_management/saml/
-[7]: /ja/account_management/org_settings/#change-your-organization-name
-[8]: /ja/account_management/multi_organization/
-[9]: /ja/account_management/org_settings/
-[10]: https://app.datadoghq.com/account/preferences
-[11]: /ja/integrations/github/
-[12]: /ja/help/
+[4]: /ja/account_management/users/
+[5]: /ja/account_management/saml/
+[6]: /ja/account_management/org_settings/#change-your-organization-name
+[7]: /ja/account_management/multi_organization/
+[8]: /ja/account_management/org_settings/
+[9]: https://app.datadoghq.com/account/preferences
+[10]: /ja/integrations/github/
+[11]: /ja/help/

@@ -4,12 +4,15 @@ kind: documentation
 aliases:
   - /fr/real_user_monitoring/rum_explorer
 further_reading:
-  - link: /real_user_monitoring/explorer/search/
-    tag: Documentation
-    text: Explorez vos vues dans Datadog
   - link: /real_user_monitoring/rum_explorer/
     tag: Documentation
     text: Explorez vos vues dans Datadog
+  - link: /real_user_monitoring/explorer/search/
+    tag: Documentation
+    text: En savoir plus sur la recherche dans le RUM Explorer
+  - link: 'https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals'
+    tag: Blog
+    text: Surveiller les KPI Web essentiels avec le RUM
 ---
 {{< img src="real_user_monitoring/explorer/rum_explorer.png" alt="RUM Explorer"  >}}
 
@@ -51,7 +54,7 @@ Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans l
 Tous les paramètres de recherche sont contenus dans l'URL. Vous pouvez partager votre vue en partageant l'URL.
 
 
-## Configuration - Facettes et mesures
+## Configurer des facettes et des mesures
 
 Une fois recueillis, les attributs de vos événements RUM peuvent être indexés en tant que facettes ou mesures, puis être utilisés pour créer un [contexte](#contexte) ou réaliser des [analyses][3].
 

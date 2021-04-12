@@ -1,6 +1,7 @@
 ---
 title: Widget Tableau
 kind: documentation
+widget_type: query_table
 aliases:
   - /fr/graphing/widgets/table/
 further_reading:
@@ -16,9 +17,9 @@ further_reading:
 ---
 ## Présentation
 
-La visualisation Tableau est disponible sur les timeboards et les screenboards. Elle permet d'afficher des métriques regroupées par clé de tag sous forme de colonnes. L'exemple suivant affiche les métriques `system.cpu.system` et `system.cpu.user` regroupées par `service` :
+La visualisation Tableau est disponible sur les dashboards. Elle permet d'afficher des données agrégées regroupées par clé de tag sous forme de colonnes. L'exemple suivant affiche les métriques `system.cpu.system` et `system.cpu.user` regroupées par `service` :
 
-{{< img src="dashboards/widgets/table/table_widget.png" alt="Widget Tableau" style="width:80%;">}}
+{{< img src="dashboards/widgets/table/table_widget_1.png" alt="Widget Tableau"  style="width:80%;">}}
 
 ## Configuration
 
@@ -27,67 +28,28 @@ La visualisation Tableau est disponible sur les timeboards et les screenboards. 
 * Choisissez les données à représenter (ajoutez des colonnes supplémentaires en fonction de vos besoins) :
   * Métrique : consultez la [principale documentation sur les graphiques][1] pour configurer une requête de métrique.
   * Événements de log : consultez la [documentation sur la recherche de logs][2] pour configurer une requête d'événement de log.
+  * Spans indexées : consultez la [documentation dédiée][3] pour configurer une requête de span indexée.
+  * Événements RUM : consultez la [documentation relative à la syntaxe de recherche RUM][4] pour configurer une requête RUM.
+  * Métriques de profiling : consultez la [documentation relative aux profils de recherche][5] pour configurer une requête de profiling.
+  * Signaux de sécurité : consultez la [documentation relative au Security Signals Explorer][6] pour configurer une requête de signal de sécurité.
+  * Statistiques APM : consultez la [documentation dédiée][7] pour configurer une requête de statistiques APM.
 * Vous pouvez renommer les en-têtes de colonne en définissant des alias de métrique.
 * Pour les **Rows** (rangs), définissez l'option **Group by** sur la clé de tag à utiliser pour le regroupement. L'exemple ci-dessous affiche les rangs `service`.
 * Choisissez une limite pour le nombre de résultats (par défaut, 10).
 * Choisissez la métrique à utiliser pour trier le tableau (par défaut, il s'agit de la première colonne).
-* Facultatif : définissez une mise en forme conditionnelle en fonction des valeurs des cellules pour chaque colonne.
+* Facultatif :
+  * Définissez une mise en forme conditionnelle (avec les optons **bar/number** et **color**) en fonction de la valeur des cellules de chaque colonne.
+  * Définissez si la barre de recherche doit s'afficher ou non. L'option **Auto**, appliquée par défaut, affiche la barre de recherche en fonction de la taille du widget. Ainsi, si la fenêtre devient trop petite, le widget affiche en priorité les données et masque la barre de recherche. Cette dernière continue à s'afficher en mode plein écran.
 
-{{< img src="dashboards/widgets/table/table_setup.png" alt="Configuration du tableau" style="width:80%;">}}
+{{< img src="dashboards/widgets/table/table_setup_1.png" alt="Configuration du widget Tableau"  style="width:80%;">}}
 
 ## API
 
-Le [schéma JSON][3] utilisé pour le widget Tableau est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][8] pour en savoir plus.
 
-```text
-TOPLIST_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["query_table"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][9] utilisé pour le widget Tableau est le suivant :
 
-| Paramètre  | Type             | Obligatoire | Description                                                                                                                                         |
-|------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`     | Chaîne           | Oui      | Le type de widget (utilisez `query_table` pour le widget Tableau).                                                                                         |
-| `requests` | Tableau d'objets | Oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][4] pour élaborer le `REQUEST_SCHEMA`. |
-| `title`    | Chaîne           | Non       | Titre de votre widget                                                                                                                                |
-
-### Requêtes
-
-Propriétés supplémentaires autorisées dans un objet `request` :
-
-```text
-{
-   "alias": {"type": "string"},
-   "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]},
-   "limit": {"type": "integer"},
-   "order": {"enum": ["asc", "desc"]},
-   "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
-}
-```
-
-| Paramètre             | Type    | Obligatoire | Description                                                                                                                                                                                        |
-|-----------------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `alias`               | Chaîne  | Non       | Le nom de la colonne (par défaut, il s'agit du nom de la métrique)                                                                                                                                                      |
-| `aggregator`          | Enum    | Oui      | Pour les requêtes de métriques, ce paramètre permet de déterminer la méthode à utiliser pour transformer les valeurs de l'intervalle de temps en valeur unique pour le tableau. Valeurs disponibles : `avg`, `last`, `max`, `min` ou `sum`. |
-| `limit`               | Nombre entier | Oui      | Pour les requêtes de métriques, le nombre de lignes à afficher dans le tableau. Seule une requête peut disposer de cette propriété.                                                                                          |
-| `order`               | Enum    | Oui      | Pour les requêtes de métriques, l'ordre de tri des rangs. Ce paramètre doit être défini pour la même requête que `limit`. Valeurs disponibles : `desc` et `asc`.                                                        |
-| `conditional_formats` | Objet  | Non       | Options de commande de mise en forme conditionnelle. Consultez la [documentation relative au schéma JSON de format conditionnel][5] pour apprendre à élaborer le `CONDITIONAL_FORMATS_SCHEMA`.                                    |
-
-#### Colonnes multiples
-
-Afin d'obtenir des colonnes multiples pour une requête de métriques, vous devez spécifier plusieurs objets de requête (un objet par colonne). Pour les requêtes de logs, vous devez uniquement spécifier un objet de requête contenant un tableau `multi_compute` d'objets `compute`. Chaque objet `compute` fournit une colonne.
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
@@ -95,6 +57,10 @@ Afin d'obtenir des colonnes multiples pour une requête de métriques, vous deve
 
 [1]: /fr/dashboards/querying/#configuring-a-graph
 [2]: /fr/logs/search_syntax/
-[3]: /fr/dashboards/graphing_json/widget_json/
-[4]: /fr/dashboards/graphing_json/request_json/
-[5]: /fr/dashboards/graphing_json/widget_json/#conditional-format-schema
+[3]: /fr/tracing/trace_search_and_analytics/query_syntax/
+[4]: /fr/real_user_monitoring/explorer/search/#search-syntax
+[5]: /fr/tracing/profiler/search_profiles
+[6]: /fr/security_monitoring/explorer/
+[7]: /fr/dashboards/querying/#configuring-an-apm-stats-graph
+[8]: /fr/api/v1/dashboards/
+[9]: /fr/dashboards/graphing_json/widget_json/

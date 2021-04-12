@@ -7,7 +7,7 @@ assets:
 categories:
   - 例外
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/rookout/README.md'
 display_name: Rookout

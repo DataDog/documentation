@@ -1,3 +1,4 @@
 ---
 title: ユーザー
+headless: true
 ---

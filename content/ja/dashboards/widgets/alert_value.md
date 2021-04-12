@@ -47,37 +47,15 @@ further_reading:
 
 ## API
 
-アラート値ウィジェット専用の[ウィジェット JSON スキーマ定義][1]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][1] ドキュメントをご参照ください。
 
-```text
-ALERT_VALUE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["alert_value"]},
-        "alert_id": {"type": "string"},
-        "precision": {"type": "integer"},
-        "unit": {"type": "string"},
-        "text_align": {"enum": ["left", "center", "right"]},
-        "title_size": {"type": "string"},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "alert_id"],
-    "additionalProperties": false
-}
-```
+アラート値ウィジェット専用の[ウィジェット JSON スキーマ定義][2]は次のとおりです。
 
-| パラメーター    | 種類    | 必須 | 説明                                                                             |
-|--------------|---------|----------|-----------------------------------------------------------------------------------------|
-| `type`       | string  | はい      | ウィジェットのタイプ。アラート値ウィジェットには `alert_value` を使用します。                        |
-| `alert_id`   | string  | はい      | ウィジェットで使用するアラートの ID                                                    |
-| `precision`  | integer | いいえ       | 小数点以下の表示桁数。定義されない場合は、未処理の値が使用されます。                    |
-| `unit`       | string  | いいえ       | 値と共に表示する単位                                                          |
-| `text_align` | string  | いいえ       | ウィジェット内の値の配置方法。有効な値は `left`、`center`、`right` です。 |
-| `title_size`  | string  | いいえ       | ウィジェット内の値のサイズ                                                             |
-| `title`      | string  | いいえ       | ウィジェットのタイトル                                                                     |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/graphing_json/widget_json/
+[1]: /ja/api/v1/dashboards/
+[2]: /ja/dashboards/graphing_json/widget_json/

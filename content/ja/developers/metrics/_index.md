@@ -19,7 +19,7 @@ further_reading:
 ---
 ## 概要
 
-メトリクスが [{{< translate key="integration_count" >}} 種以上の Datadog インテグレーション][1]から送信された場合、そのメトリクスはカスタムメトリクス<sup>[(1)][2]</sup>とみなされます。カスタムメトリクスを使うと、訪問者数、カスタムバケットの平均サイズ、リクエストレイテンシー、カスタムアルゴリズムのパフォーマンス分布など、アプリケーションの KPI を追跡することができます。
+メトリクスが [{{< translate key="integration_count" >}} 種以上の Datadog インテグレーション][1]以外から送信された場合、そのメトリクスはカスタムメトリクス<sup>[(1)][2]</sup>とみなされます。カスタムメトリクスを使うと、訪問者数、カスタムバケットの平均サイズ、リクエストレイテンシー、カスタムアルゴリズムのパフォーマンス分布など、アプリケーションの KPI を追跡することができます。
 
 カスタムメトリクスは、**メトリクス名とタグ値 (ホストタグを含む) の組み合わせ**により、一意に識別されます。一般に、[DogStatsD][3] または[カスタム Agent チェック][4]を使用して送信されるメトリクスはすべて、カスタムメトリクスとなります。
 
@@ -75,7 +75,7 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 [4]: /ja/developers/metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /ja/account_management/billing/custom_metrics/#counting-custom-metrics
-[7]: /ja/graphing/metrics/introduction/
+[7]: /ja/metrics
 [8]: /ja/developers/metrics/types/
 [9]: /ja/developers/metrics/types/?tab=rate#metric-types
 [10]: /ja/developers/metrics/types/?tab=count#metric-types

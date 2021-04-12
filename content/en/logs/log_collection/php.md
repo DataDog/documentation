@@ -16,7 +16,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: /logs/faq/log-collection-troubleshooting-guide
@@ -94,7 +94,7 @@ services:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Logger Configuration
+### Logger configuration
 
 {{< tabs >}}
 {{% tab "PHP Monolog" %}}
@@ -178,7 +178,7 @@ Configure the formatter in your Monolog configuration: declare the formatter fie
 
 If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM PHP logging instructions][2] to automatically add trace and span IDs in your logs.
 
-### Agent Configuration
+### Agent configuration
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -358,7 +358,7 @@ Add a session Processor to add variable context within your logs:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Monolog Framework integration
+## Monolog framework integration
 
 Monolog is a part of the following frameworks:
 
@@ -367,7 +367,6 @@ Monolog is a part of the following frameworks:
 * [Laravel][5]
 * [Silex][6]
 * [Lumen][7]
-* [CakePHP][8]
 
 Integrate Monolog with your framework then configure your logger:
 
@@ -446,6 +445,10 @@ monolog:
 
 ### Laravel
 
+<div class="alert alert-warning">
+Note that the function <code>\DDTrace\trace_id()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
+</div>
+
 ```php
 <?php
 
@@ -479,19 +482,15 @@ class AppServiceProvider extends ServiceProvider
 
         // Inject the trace and span ID to connect the log entry with the APM trace
         $monolog->pushProcessor(function ($record) use ($useJson) {
-            $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-            if (null === $span) {
-                return $record;
-            }
             if ($useJson === true) {
                 $record['dd'] = [
-                    'trace_id' => $span->getTraceId(),
+                    'trace_id' => \DDTrace\trace_id(),
                     'span_id'  => \dd_trace_peek_span_id(),
                 ];
             } else {
                 $record['message'] .= sprintf(
                     ' [dd.trace_id=%d dd.span_id=%d]',
-                    $span->getTraceId(),
+                    \DDTrace\trace_id(),
                     \dd_trace_peek_span_id()
                 );
             }
@@ -536,45 +535,6 @@ class AppServiceProvider extends ServiceProvider
   return $app;
 ```
 
-### CakePHP
-
-First, add this dependency to the `composer.json` file and
-run `composer update`.
-
-```json
-{"require": {"cakephp/monolog": "*"}}
-```
-
-Then, start by creating a logging configuration file (i.e., `app/Config/log.php`) that you includes your `app/Config/bootstrap.php`:
-
-```php
-<?php
-  include 'log.php';
-```
-
-A basic configuration, to replicate what Cake does but using Monolog would look something like this:
-
-```text
-CakePlugin::load('Monolog');
-```
-
-Finally log into a file:
-
-```text
-CakeLog::config('debug', array(
-  'engine' => 'Monolog.Monolog',
-  'channel' => 'app',
-  'handlers' => array(
-    'Stream' => array(
-      LOGS . 'application-json.log',
-      'formatters' => array(
-        'Json' => array("")
-      )
-    )
-  )
-));
-```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -586,4 +546,3 @@ CakeLog::config('debug', array(
 [5]: /logs/log_collection/php/#laravel
 [6]: /logs/log_collection/php/#silex
 [7]: /logs/log_collection/php/#lumen
-[8]: /logs/log_collection/php/#cakephp

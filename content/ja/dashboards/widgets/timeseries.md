@@ -63,19 +63,19 @@ further_reading:
 
 #### メトリクスのエイリアス作成
 
-クエリまたは式にエイリアスを作成できます。エイリアスは、グラフや凡例の表示を上書きし、メトリクス名が長い場合に便利です。クエリ/式の末尾にある **as...** をクリックして、メトリクスのエイリアスを入力します。
+任意の[絞り込みタグ][6]を使用して、クエリまたは式ごとにエイリアスを作成できます。エイリアスは、グラフや凡例の表示を上書きし、メトリクス名やフィルターのリストが長い場合に便利です。クエリ/式の末尾にある **as...** をクリックして、メトリクスのエイリアスを入力します。
 
 {{< img src="dashboards/querying/metric_alias.png" alt="メトリクスエイリアス"  style="width:75%;" >}}
 
 ##### イベントオーバーレイ
 
-関連するシステムからイベントを追加して、グラフにさらにコンテキストを追加できます。たとえば、GitHub のコミットイベント、Jenkins のデプロイイベント、Docker の作成イベントなどを追加できます。**Event Overlays** セクションを展開して、イベントを表示するためのクエリを入力します。[イベントストリーム][6]と同じクエリ書式を使用してください。以下に例を示します。
+関連するシステムからイベントを追加して、グラフにさらにコンテキストを追加できます。たとえば、GitHub のコミットイベント、Jenkins のデプロイイベント、Docker の作成イベントなどを追加できます。**Event Overlays** セクションを展開して、イベントを表示するためのクエリを入力します。[イベントストリーム][7]と同じクエリ書式を使用してください。以下に例を示します。
 
 | クエリ                       | 説明                                                |
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Jenkins ソースから取得されたすべてのイベントを表示します。                  |
 | `tag:role:web`              | タグ `role:web` が付いたすべてのイベントを表示します。                  |
-| `tags:$<TEMPLATE_VARIABLE>` | 選択された[テンプレート変数][7]から取得されたすべてのイベントを表示します。 |
+| `tags:$<TEMPLATE_VARIABLE>` | 選択された[テンプレート変数][8]から取得されたすべてのイベントを表示します。 |
 
 有効になると、イベントがグラフに赤いバーで重ねて表示されます。
 
@@ -106,81 +106,17 @@ Y 軸の目盛を変更するには、Y-Axis Controls ボタンを展開しま�
 
 ## 全画面
 
-[標準の全画面オプション][8]のほかに、前回の期間と比較する、Y 軸の目盛を調整する、変更を保存する、新しいグラフとして保存するなどの簡単な関数を適用できます。
+[標準の全画面オプション][9]のほかに、前回の期間と比較する、Y 軸の目盛を調整する、変更を保存する、新しいグラフとして保存するなどの簡単な関数を適用できます。
 
-詳しくは、[全画面モードでグラフを表示しデータを調べる][9]を参照してください。
+詳しくは、[全画面モードでグラフを表示しデータを調べる][10]を参照してください。
 
 ## API
 
-時系列ウィジェットの[ウィジェット JSON スキーマ定義][10]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][11] ドキュメントをご参照ください。
 
-```text
-TIMESERIES_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["timeseries"]},
-        "requests": {
-            "type":    "array",
-            "items":   REQUEST_SCHEMA,
-            "minItems": 1
-        },
-        "yaxis":   AXIS_SCHEMA,
-        "events":  EVENTS_SCHEMA,
-        "markers": MARKERS_SCHEMA,
-        "title":   {"type": "string"},
-        "show_legend": {"type": "boolean"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+時系列ウィジェットの[ウィジェット JSON スキーマ定義][12]は次のとおりです。
 
-| パラメーター     | タイプ             | 必須 | 説明                                                                                                                                               |
-|---------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | 文字列           | はい      | ウィジェットのタイプ。時系列ウィジェットには `timeseries` を使用します。                                                                                               |
-| `requests`    | オブジェクトの配列 | はい      | ウィジェットに表示する `request` オブジェクトの配列。`REQUEST_SCHEMA` の作成方法については、[リクエスト JSON スキーマに関するドキュメント][11]を参照してください。 |
-| `yaxis`       | オブジェクト           | いいえ       | Y 軸コントロールのオプション。`AXIS_SCHEMA` の作成方法については、[Y 軸 JSON スキーマに関するドキュメント][12]を参照してください。                                 |
-| `events`      | オブジェクト           | いいえ       | イベントオーバーレイコントロールのオプション。`EVENTS_SCHEMA` の作成方法については、[イベント JSON スキーマに関するドキュメント][13]を参照してください。                         |
-| `markers`     | オブジェクト           | いいえ       | マーカーオーバーレイコントロールのオプション。`MARKERS_SCHEMA` の作成方法については、[マーカー JSON スキーマに関するドキュメント][14]を参照してください。                     |
-| `title`       | 文字列           | いいえ       | ウィジェットのタイトル。                                                                                                                                     |
-| `show_legend` | boolean          | いいえ       | （スクリーンボードのみ）このウィジェットのレジェンドを表示                                                                                                        |
-
-`request` オブジェクトでは、以下のプロパティも使用できます。
-
-```json
-{
-  "style": {
-    "type": "object",
-    "properties": {
-      "palette": {"type": "string"},
-      "line_type": {"enum": ["dashed", "dotted", "solid"]},
-      "line_width": {"enum": ["normal", "thick", "thin"]}
-    },
-    "additionalProperties": false
-  },
-  "metadata": {
-    "type": "array",
-    "items": {
-      "type": "object",
-      "properties": {
-        "expression": {"type": "string"},
-        "alias_name": {"type": "string"}
-      },
-      "required": ["expression"],
-      "additionalProperties": false
-    }
-  },
-  "display_type": {"enum": ["area", "bars", "line"]}
-}
-```
-
-| パラメーター          | タイプ   | 必須 | 説明                                                                              |
-|--------------------|--------|----------|------------------------------------------------------------------------------------------|
-| `style.palette`    | 文字列 | いいえ       | ウィジェットに適用するカラーパレット。                                                    |
-| `style.line_type`  | 文字列 | いいえ       | 表示される線のタイプ。有効な値は `dashed`、`dotted`、`solid` です。           |
-| `style.line_width` | 文字列 | いいえ       | 表示される線の幅。有効な値は `normal`、`thick`、`thin` です。             |
-| `metadata`         | オブジェクト | いいえ       | 式のエイリアスの定義に使用されます。                                                       |
-| `display_type`     | 文字列 | いいえ       | リクエストに対して使用する表示タイプ。有効な値は `area`、`bars`、`line` です。 |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
@@ -191,12 +127,10 @@ TIMESERIES_SCHEMA = {
 [3]: /ja/dashboards/querying/
 [4]: /ja/tracing/app_analytics/search/#search-bar
 [5]: /ja/logs/search_syntax/
-[6]: /ja/events/
-[7]: /ja/dashboards/template_variables/
-[8]: /ja/dashboards/widgets/#full-screen
-[9]: https://www.datadoghq.com/blog/full-screen-graphs
-[10]: /ja/dashboards/graphing_json/widget_json/
-[11]: /ja/dashboards/graphing_json/request_json/
-[12]: /ja/dashboards/graphing_json/widget_json/#y-axis-schema
-[13]: /ja/dashboards/graphing_json/widget_json/#events-schema
-[14]: /ja/dashboards/graphing_json/widget_json/#markers-schema
+[6]: /ja/dashboards/querying/#filter
+[7]: /ja/events/
+[8]: /ja/dashboards/template_variables/
+[9]: /ja/dashboards/widgets/#full-screen
+[10]: https://www.datadoghq.com/blog/full-screen-graphs
+[11]: /ja/api/v1/dashboards/
+[12]: /ja/dashboards/graphing_json/widget_json/

@@ -7,15 +7,15 @@ aliases:
 ---
 APIを介してすべてのダッシュボードを簡単に整理、検索、およびチームや組織と共有できます。
 
-- [ダッシュボードリストのアイテムを取得する](#get-items-of-a-dashboard-list)
+- [ダッシュボードリストのアイテムを取得](#get-items-of-a-dashboard-list)
 - [ダッシュボードリストへの項目の追加](#add-items-to-a-dashboard-list)
 - [ダッシュボードリストのアイテムを更新する](#update-items-of-a-dashboard-list)
 - [ダッシュボードリストからアイテムを削除する](#delete-items-from-a-dashboard-list)
 
-## ダッシュボードリストのアイテムを取得する
+## ダッシュボードリストのアイテムを取得
 
 <div class="alert alert-danger">
-このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#get-items-of-a-dashboard-list">ダッシュボードリストのアイテムを取得する V2 エンドポイント</a>を使用してください。
+このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#get-items-of-a-dashboard-list">ダッシュボードリストのアイテムを取得する v2 エンドポイント</a>を使用してください。
 </div>
 
 ### シグニチャ
@@ -375,7 +375,7 @@ curl -X GET \
 ## ダッシュボードリストへの項目の追加
 
 <div class="alert alert-danger">
-このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#add-items-to-a-dashboard-list">ダッシュボードリストにアイテムを追加する V2 エンドポイント</a>を使用してください。
+このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#add-items-to-a-dashboard-list">ダッシュボードリストにアイテムを追加する v2 エンドポイント</a>を使用してください。
 </div>
 
 ### シグニチャ
@@ -626,7 +626,7 @@ curl -X ADD -H "Content-type: application/json" \
 ## ダッシュボードリストのアイテムを更新する
 
 <div class="alert alert-danger">
-このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list">ダッシュボードリストのアイテムを更新する V2 エンドポイント</a>を使用してください。
+このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list">ダッシュボードリストのアイテムを更新する v2 エンドポイント</a>を使用してください。
 </div>
 
 ### シグニチャ
@@ -879,7 +879,7 @@ curl -X UPDATE -H "Content-type: application/json" \
 ## ダッシュボードリストからアイテムを削除する
 
 <div class="alert alert-danger">
-このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list">ダッシュボードリストからアイテムを削除する V2 エンドポイント</a>を使用してください。
+このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list">ダッシュボードリストからアイテムを削除する v2 エンドポイント</a>を使用してください。
 </div>
 
 

@@ -1,6 +1,7 @@
 ---
 categories:
   - issue tracking
+  - notification
 ddtype: crawler
 dependencies: []
 description: Faites en sorte que vos alertes Datadog génèrent et mettent à jour automatiquement les tickets.
@@ -159,7 +160,7 @@ Une fois que ServiceNow est connecté à votre compte Datadog, les alertes reçu
 
 ### Utiliser des variables dans la charge utile des tickets et les mappages de champ
 
-Des variables peuvent être utilisées dans le corps de vos alertes ou dans les mappages de champ pour s'assurer que les détails de l'événement sont inclus dans ServiceNow. Par exemple, il est possible d'inclure le titre et la sévérité dans le champ ServiceNow approprié, ou encore d'ajouter un lien permettant de revenir vers l'incident spécifique dans Datadog directement depuis le ticket ServiceNow.
+Des variables peuvent être utilisées dans le corps de vos alertes ou dans les mappages de champ pour s'assurer que les détails de l'événement sont inclus dans ServiceNow. Par exemple, il est possible d'inclure le titre et la gravité dans le champ ServiceNow approprié, ou encore d'ajouter un lien permettant de revenir vers l'incident spécifique dans Datadog directement depuis le ticket ServiceNow.
 
 {{< img src="integrations/servicenow/servicenow-variables.png" alt="Variables ServiceNow" >}}
 

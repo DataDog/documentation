@@ -28,19 +28,12 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 
 <div class="alert alert-info">Make sure to check out discussions going on in the <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> channel in the <a href="https://chat.datadoghq.com/">Datadog Slack community</a>.</div>
 
-## Getting Started
+## Getting started
 
-### 1. Install the AWS integration
-
-Install the [AWS integration][2]. This allows Datadog to ingest Lambda metrics from AWS CloudWatch. 
-
-### 2. Install the Datadog Forwarder
-
-Install the [Datadog Forwarder Lambda function][3], which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics, and logs. **Note**: Skip this step if you already have the forwarder function installed as part of the [AWS integration][2] CloudFormation stack.
-
-### 3. Instrument your application
-
-Select the Lambda runtime below for instructions to instrument your serverless application.
+1. Install the [AWS integration][2]. This allows Datadog to ingest Lambda metrics from AWS CloudWatch. 
+2. Install the [Datadog Forwarder Lambda function][3], which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics, and logs.
+   **Note**: Skip this step if you already have the forwarder function installed as part of the [AWS integration][2] CloudFormation stack.
+3. Instrument your application. Select the Lambda runtime below for instructions to instrument your serverless application.
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 

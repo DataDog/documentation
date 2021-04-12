@@ -64,23 +64,38 @@ For line graphs, different metrics can be assigned specific palettes by separati
 
 #### Metric aliasing
 
-Each query or formula can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names. At the end of the query/formula click on **as...**, then enter your metric alias:
+Each query or formula, along with any [filtering tags][6], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of the query/formula click on **as...**, then enter your metric alias:
 
 {{< img src="dashboards/querying/metric_alias.png" alt="metric alias"  style="width:75%;" >}}
 
-##### Event Overlay
+##### Event overlay
 
-Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][6], for example:
+Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][7], for example:
 
 | Query                       | Description                                                |
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Shows all events from the Jenkins source.                  |
 | `tag:role:web`              | Shows all events with the tag `role:web`.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][7]. |
+| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][8]. |
 
 Once enabled, events are overlayed on your graphs with red bars:
 
 {{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay"  style="width:75%;" >}}
+
+##### Legend configuration
+
+Add configurable legends on your screenboards by navigating to the legend section in the graph editor and selecting an option.
+
+{{< img src="dashboards/widgets/timeseries/legend-config.jpg" alt="Legend configuration"  style="width:100%;" >}}
+
+Options:
+
+* Automatic (default)
+* Compact
+* Expanded: Configurable columns for value, avg, sum, min, max
+* None
+
+Note: For timeboards, legends will display automatically when dashboard is set to L or XL.
 
 ##### Y-axis controls
 
@@ -107,15 +122,15 @@ The following configuration options are available:
 
 ## Full screen
 
-In addition to the [standard full screen options][8], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
+In addition to the [standard full screen options][9], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
 
-See [Explore your data in full-screen graph mode][9], to learn more.
+See [Explore your data in full-screen graph mode][10], to learn more.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][10] documentation for additional reference.
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][11] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][11] for the timeseries widget is:
+The dedicated [widget JSON schema definition][12] for the timeseries widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -128,9 +143,10 @@ The dedicated [widget JSON schema definition][11] for the timeseries widget is:
 [3]: /dashboards/querying/
 [4]: /tracing/app_analytics/search/#search-bar
 [5]: /logs/search_syntax/
-[6]: /events/
-[7]: /dashboards/template_variables/
-[8]: /dashboards/widgets/#full-screen
-[9]: https://www.datadoghq.com/blog/full-screen-graphs
-[10]: /api/v1/dashboards/
-[11]: /dashboards/graphing_json/widget_json/
+[6]: /dashboards/querying/#filter
+[7]: /events/
+[8]: /dashboards/template_variables/
+[9]: /dashboards/widgets/#full-screen
+[10]: https://www.datadoghq.com/blog/full-screen-graphs
+[11]: /api/v1/dashboards/
+[12]: /dashboards/graphing_json/widget_json/

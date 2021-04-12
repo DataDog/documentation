@@ -24,58 +24,93 @@ title: Android の RUM データを収集する
     }
     ```
 
-2. アプリケーションコンテキストと [Datadog クライアントトークン][4]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。また、アプリケーション ID を提供する必要があります (see our [RUM の使用方法ページ][3]参照）。
+2. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][4]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][3]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
 
-    {{< tabs >}}
-    {{% tab "US" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        val config = DatadogConfig.Builder("<CLIENT_TOKEN>", "<ENVIRONMENT_NAME>", "<APPLICATION_ID>")
-                        .trackInteractions()
-                        .useViewTrackingStrategy(strategy)
-                        .build()
-        Datadog.initialize(this, config)
+   {{< tabs >}}
+   {{% tab "US" %}}
+   ```kotlin
+    class SampleApplication : Application() {
+        override fun onCreate() {
+            super.onCreate()
+            val configuration = Configuration.Builder().build()
+            val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+            Datadog.initialize(this, credentials, configuration, trackingConsent)
+        }
     }
-}
-```
+   ```
+   {{% /tab %}}
+   {{% tab "EU" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+       override fun onCreate() {
+          super.onCreate()
+          val configuration = Configuration.Builder()
+             .useEUEndpoints()
+             .build()
+          val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+          Datadog.initialize(this, credentials, configuration, trackingConsent)
+       }
+   }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
-    {{% /tab %}}
-    {{% tab "EU" %}}
+   GDPR 規制を遵守するため、SDK は初期化時に追跡に関する同意を求めます。
+   追跡に関する同意は以下のいずれかの値で示されます。
+   * `TrackingConsent.PENDING`: SDK はデータの収集とバッチ処理を開始しますが、データは送信されません
+     収集エンドポイントへの送信は行われません。SDK はバッチ処理が完了したデータをどうするかについての新たな同意値が得られるまで待機します。
+   * `TrackingConsent.GRANTED`: SDK はデータの収集を開始し、それをデータ収集エンドポイントに送信します。
+   * `TrackingConsent.NOT_GRANTED`: SDK がデータを収集することはありません。手動でログやトレース、
+     RUM イベントを送信することもできません。
 
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
+   SDK の初期化後に追跡に関する同意を更新する場合は、 `Datadog.setTrackingConsent(<NEW CONSENT>)` の呼び出しを行います。
+   SDK は新しい同意に応じて動作を変更します。たとえば、現在の同意内容が `TrackingConsent.PENDING` で、それを
+   * `TrackingConsent.GRANTED` に更新した場合: SDK は現在のバッチデータと将来的なデータをすべてデータ収集エンドポイントに直接送信します。
+   * `TrackingConsent.NOT_GRANTED`: SDK はすべてのバッチデータを消去し、以後のデータも収集しません。
 
-        val config = DatadogConfig.Builder("<CLIENT_TOKEN>", "<ENVIRONMENT_NAME>", "<APPLICATION_ID>")
-                        .trackInteractions()
-                        .useViewTrackingStrategy(strategy)
-                        .useEUEndpoints()
-                        .build()
-        Datadog.initialize(this, config)
+   初期化に必要な認証情報では、アプリケーションのバリアント名も必要となることにご注意ください。これは適切な Proguard `mapping.txt` ファイルを有効化し、ビルド時の自動アップロードを行うために重要です。この操作により、Datadog ダッシュボードがスタックトレースの難読化を解除できるようになります。
+
+   ユーティリティメソッド `isInitialized` を使用して SDK が適切に初期化されていることを確認します。
+
+   ```kotlin
+    if(Datadog.isInitialized()){
+        // your code here
     }
-}
-```
+   ```
+   アプリケーションを書く際、`setVerbosity` メソッドを呼び出すことで開発ログを有効にできます。指定したレベル以上の優先度を持つライブラリ内のすべての内部メッセージが Android の Logcat に記録されます。
+   ```kotlin
+   Datadog.setVerbosity(Log.INFO)
+   ```
 
-    {{% /tab %}}
-    {{< /tabs >}}
+3. SDK で自動ビュー追跡を有効にするには、初期化時に追跡ストラテジーを提供する必要があります。
+   ご使用のアプリケーションのアーキテクチャにより、`ViewTrackingStrategy` の実装から 1 つを選択します。
 
-ご使用のアプリケーションのアーキテクチャにより、`ViewTrackingStrategy` の実装から 1 つを選択します。
+   - `ActivityViewTrackingStrategy`: アプリケーションの各アクティビティが個別のビューとみなされます。
+   - `FragmentViewTrackingStrategy`: アプリケーションの各フラグメントが個別のビューとみなされます。
+   - `NavigationViewTrackingStrategy`: Android Jetpack Navigation ライブラリを使用している場合は、この方法をお勧めします。ナビゲーション先を個別のビューとして自動的に追跡します。
+   - `MixedViewTrackingStrategy`: すべてのアクティビティまたはフラグメントが個別のビューとみなされます。この方法は、`ActivityViewTrackingStrategy` と `FragmentViewTrackingStrategy` の融合型です。
 
-  - `ActivityViewTrackingStrategy`: アプリケーションの各アクティビティが個別のビューとみなされます。
-  - `FragmentViewTrackingStrategy`: アプリケーションの各フラグメントが個別のビューとみなされます。
-  - `NavigationViewTrackingStrategy`: Android Jetpack Navigation ライブラリを使用している場合は、この方法をお勧めします。ナビゲーション先を個別のビューとして自動的に追跡します。
-  - `MixedViewTrackingStrategy`: すべてのアクティビティまたはフラグメントが個別のビューとみなされます。この方法は、`ActivityViewTrackingStrategy` と `FragmentViewTrackingStrategy` の融合型です。
+   ```kotlin
+   class SampleApplication : Application() {
+       override fun onCreate() {
+           super.onCreate()
 
-  **注**: `ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
+          val configuration = Configuration.Builder()
+                           .trackInteractions()
+                           .useViewTrackingStrategy(strategy)
+                           .build()
 
-  **注**: デフォルトで、ライブラリはいずれのビューも追跡しません。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
+          Datadog.initialize(this, credentials, configuration, trackingConsent)
+       }
+   }
+   ```
 
-3. RUM Monitor を構成して登録します。通常はアプリケーションの `onCreate()` メソッドで、一度だけ実行する必要があります。
+   **注**: `ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
+
+   **注**: デフォルトで、ライブラリはいずれのビューも追跡しません。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
+
+
+4. RUM Monitor を構成して登録します。通常はアプリケーションの `onCreate()` メソッドで、一度だけ実行する必要があります。
 
     ```kotlin
     val monitor = RumMonitor.Builder()
@@ -86,7 +121,7 @@ class SampleApplication : Application() {
     GlobalRum.registerIfAbsent(monitor)
     ```
 
-4. OkHttp リクエストをリソースとして追跡する場合は、次のようにして提供された[インターセプター][6]を追加できます。
+5. OkHttp リクエストをリソースとして追跡したい場合は、提供された[インターセプター][6]を追加してください。
 
     ```kotlin
     val okHttpClient =  OkHttpClient.Builder()
@@ -98,7 +133,7 @@ class SampleApplication : Application() {
 
     **注**: また、複数のインターセプターを使用する場合、これを最初に呼び出す必要があります。
 
-5. (任意) リソースでタイミング情報 (最初の 1 バイトまで、DNS 解決など) を取得するには、以下の方法で[イベント][6]リスナーファクトリを追加します。
+6. (任意) リソースでタイミング情報 (最初の 1 バイトまで、DNS 解決など) を取得するには、以下の方法で[イベント][6]リスナーファクトリを追加します。
 
     ```kotlin
     val okHttpClient =  OkHttpClient.Builder()
@@ -107,9 +142,9 @@ class SampleApplication : Application() {
         .build()
     ```
 
-6. (任意) RUM イベントを手動で追跡する場合は、`GlobalRum` クラスを使用します。
+7. (任意) RUM イベントを手動で追跡する場合は、`GlobalRum` クラスを使用します。
 
-  ビューを追跡するには、ビューがインタラクティブに確認できるようになったら (ライフサイクルイベントが `onResume` と同等) `RumMonitor#startView` を呼び出し、次に、ビューが確認できなくなったら (ライフサイクルイベントが `onPause` と同等)  `RumMonitor#stopView` を呼び出します。以下を参照してください。
+  ビューを追跡するには、ビューがインタラクティブに確認できるようになったら (ライフサイクルイベントが `onResume` と同等) `RumMonitor#startView` を呼び出し、次に、ビューが確認できなくなったら (ライフサイクルイベントが `onPause` と同等)  `RumMonitor#stopView` を呼び出します。
 
    ```kotlin
       fun onResume(){
@@ -143,7 +178,7 @@ class SampleApplication : Application() {
       }
    ```
 
-7. (任意) すべての RUM イベントに属性としてカスタム情報を追加する場合は、`GlobalRum` クラスを使用します。
+8. (任意) すべての RUM イベントに属性としてカスタム情報を追加する場合は、`GlobalRum` クラスを使用します。
 
    ```kotlin
       // Adds an attribute to all future RUM events
@@ -152,6 +187,32 @@ class SampleApplication : Application() {
       // Removes an attribute to all future RUM events
       GlobalRum.removeAttribute(key)
    ```
+8. RUM イベントで属性を変更する、またバッチ処理前にイベントを丸ごと削除する必要がある場合は、SDK の初期化時に `EventMapper<T>` を実装することで上記の処理を行えます。
+   ```kotlin
+      val config = DatadogConfig.Builder("<CLIENT_TOKEN>", "<ENVIRONMENT_NAME>", "<APPLICATION_ID>")
+                        ...
+                        .setRumErrorEventMapper(rumErrorEventMapper)
+                        .setRumActionEventMapper(rumActionEventMapper)
+                        .setRumResourceEventMapper(rumResourceEventMapper)
+                        .setRumViewEventMapper(rumViewEventMapper)
+                        .build()
+   ```
+   `EventMapper<T>` インターフェースを実装する場合、各イベントタイプの属性は以下のように一部のみしか変更することができません。
+
+   | イベントタイプ    | 属性キー      | 説明                                     |
+   |---------------|--------------------|-------------------------------------------------|
+   | ViewEvent     | `view.referrer`      | ページの初期ビューへのリンク URL |
+   |               | `view.url`           | ビューの URL                                 |
+   | ActionEvent   |                    |                                                 |
+   |               | `action.target.name` | ターゲット名                                     |
+   | ErrorEvent    |                    |                                                 |
+   |               | `error.message`      | エラーメッセージ                                   |
+   |               | `error.stack`        | エラーの Stacktrace                         |
+   |               | `error.resource.url` | リソース URL                             |
+   | ResourceEvent |                    |                                                 |
+   |               | `resource.url`       | リソース URL                             |
+
+   **注**: `EventMapper<T>` の実装から null が返された場合、イベントは削除されます。
 
 ## 高度なロギング
 
@@ -190,6 +251,7 @@ RUM データを追跡するために RumMonitor を作成する場合、`RumMon
 | `stopResource(<key>, <status>, <size>, <kind> <attributes>)`   | 特定のステータス (通常は HTTP ステータスコード)、サイズ (バイト単位)、および種類を使用して、リソースのロードが終了したことを RumMonitor に通知します。 |
 | `stopResourceWithError(<key>, <status>, <message>, <source>, <throwable>)` | 例外のため、リソースのロードを終了できなかったことを RumMonitor に通知します。 |
 | `addError(<message>, <source>, <throwable>, <attributes>)` | エラーが発生したことを RumMonitor に通知します。 |
+
 
 
 ### ウィジェットの追跡

@@ -5,7 +5,6 @@ description: 'Open Standards for NodeJS'
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40
-further_reading:
 ---
 
 ## OpenTracing
@@ -153,9 +152,6 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 - See [npm][2] or [github][3] for more OpenTelemetry NodeJS Datadog Exporter usage.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentracing.io/guides/javascript/
 [2]: https://www.npmjs.com/package/opentelemetry-exporter-datadog

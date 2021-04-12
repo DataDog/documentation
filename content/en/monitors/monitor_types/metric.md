@@ -96,7 +96,8 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 
 Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
 
-Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
+Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space. 
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`.
 
 ### Set alert conditions
 
@@ -181,7 +182,7 @@ Alternatively, if you are monitoring a metric over an auto-scaling group of host
 
 For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
 
-#### Auto Resolve
+#### Auto resolve
 
 `[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.
 

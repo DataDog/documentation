@@ -5,7 +5,7 @@ kind: ドキュメント
 title: Datadog Lambda Library for Java
 ---
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-java/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-java/blob/main/LICENSE)
 ![](https://github.com/DataDog/datadog-lambda-java/workflows/Test%20on%20Master%20branch/badge.svg)
 ![Bintray](https://img.shields.io/bintray/v/datadog/datadog-maven/datadog-lambda-java)
 
@@ -54,7 +54,7 @@ Lambda Java Client Library は、インスツルメントされた HTTP 接続�
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         URL url = new URL("https://example.com");
         HttpURLConnection instrumentedUrlConnection = dd.makeUrlConnection(url); //含まれるトレースヘッダー
@@ -71,12 +71,12 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         URL url = new URL("https://example.com");
         HttpURLConnection hc = (HttpURLConnection)url.openConnection();
 
-        //分散型トレーシングヘッダーを追加します
+        //分散型トレーシングヘッダーを追加
         hc = (HttpURLConnection) dd.addTraceHeaders(hc);
 
         hc.connect();
@@ -91,7 +91,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
 
@@ -108,12 +108,12 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet hg = new HttpGet("https://example.com");
 
-        //分散型トレーシングヘッダーを追加します
+        //分散型トレーシングヘッダーを追加
         hg = (HttpGet) dd.addTraceHeaders(hg);
 
         HttpResponse hr = client.execute(hg);
@@ -128,7 +128,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
@@ -148,7 +148,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
@@ -156,7 +156,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
             .url("https://example.com")
             .build();
 
-        //分散型トレーシングヘッダーを追加します
+        //分散型トレーシングヘッダーを追加
         okHttpRequest = dd.addTraceHeaders(okHttpRequest);
 
         Response resp = okHttpClient.newCall(okHttpRequest).execute();
@@ -205,6 +205,9 @@ log4j.appender.LAMBDA.layout.conversionPattern=%d{yyyy-MM-dd HH:mm:ss} %X{dd.tra
 
 ログラインは次のようになります。`2020-11-13 19:21:53 [dd.trace_id=1168910694192328743 dd.span_id=3204959397041471598] INFO  com.serverless.Handler:20 - Test Log Message`
 
+前のセクションの**プレーンテキストログ**と同様に、トレースコンテキストを正しくパースするには、新しい[パーサー](https://docs.datadoghq.com/logs/processing/parsing/?tab=matcher)を作成する必要があります。
+
+
 #### その他のロギングソリューション
 
 他のロギングソリューションを使用している場合は、メソッド  `DDLambda.getTraceContextString()` を使用してトレース ID にアクセスできます。この場合、あらゆるログメッセージに追加できる文字列としてトレース ID が返されます。
@@ -219,7 +222,7 @@ log4j.appender.LAMBDA.layout.conversionPattern=%d{yyyy-MM-dd HH:mm:ss} %X{dd.tra
 
 ## 寄稿
 
-このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/dd-lambda-layer-js/blob/master/CONTRIBUTING.md)に従ってプルリクエストを開いてください。
+このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/dd-lambda-layer-java/blob/main/CONTRIBUTING.md)に従ってプルリクエストを開いてください。
 
 ## ライセンス
 

@@ -56,7 +56,7 @@ With the following placeholders:
 | `<TAG_KEY>`             | The Tag key to associate to the tags collected.                                                                                           | no                      |
 | `<TAG_VALUE_TO_EXPAND>` | The tags collected from the `<MATCH_TYPE>` to inline.                                                                                     | no                      |
 
-## Wildcard Match Pattern
+## Wildcard match pattern
 
 The wildcard match pattern matches dot-separated metric names using `*` as wildcard. The metric name must be only composed of alphanumeric, `.`, and `_` characters for this pattern to work. Groups extracted can then be expanded with the `$n` format e.g. `$1`, `$2`, `$3`... or the `${n}` format e.g. `${1}`, `${2}`, `${3}`, ...
 
@@ -77,9 +77,7 @@ dogstatsd_mapper_profiles:
 
 It would send the metric `custom_metric.process` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value_2`.
 
-**Note**: If the incoming metric have already at least one tag, no mapping is applied.
-
-## Regex Match Pattern
+## Regex match pattern
 
 The regex match pattern matches metric names using regex patterns. Compared to the wildcard match pattern, it allows to define captured groups that contain `.`. Groups extracted can then be expanded with the `$n` format e.g. `$1`, `$2`, `$3`... or the `${n}` format e.g. `${1}`, `${2}`, `${3}`, ...
 
@@ -99,8 +97,6 @@ dogstatsd_mapper_profiles:
 ```
 
 It would send the metric `custom_metric.process` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value.with.dots._2`.
-
-**Note**: If the incoming metric have already at least one tag, no mapping is applied.
 
 ## Expand group in metric name
 

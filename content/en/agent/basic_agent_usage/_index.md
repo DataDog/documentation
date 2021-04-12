@@ -19,7 +19,7 @@ further_reading:
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
-## Agent Architecture
+## Agent architecture
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -51,11 +51,11 @@ By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 | 5002 | Serves the GUI server on Windows and OSX.                                                   |
 | 8125 | Used for the DogStatsD server to receive external metrics.                                  |
 
-### The Collector
+### Collector
 
 The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python 2.7 interpreter to run integrations and [custom checks][4].
 
-### The Forwarder
+### Forwarder
 
 The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents network splits from affecting metric reporting. Metrics are buffered in memory until a limit in size or number of outstanding send requests are reached. Afterwards, the oldest metrics are discarded to keep the forwarder's memory footprint manageable. Logs are sent over an SSL-encrypted TCP connection to Datadog.
 
@@ -83,7 +83,7 @@ Agent v5 is composed of four major components, each written in Python running as
 
 **Note**: For Windows users, all four Agent processes appear as instances of `ddagent.exe` with the description `DevOps’ best friend`.
 
-### Supervision, Privileges, and Network Ports
+### Supervision, privileges, and network ports
 
 A SupervisorD master process runs as the `dd-agent` user, and all forked subprocesses run as the same user. This also applies to any system call (`iostat`/`netstat`) initiated by the Datadog Agent. The Agent configuration resides at `/etc/dd-agent/datadog.conf` and `/etc/dd-agent/conf.d`. All configuration must be readable by `dd-agent`. The recommended permissions are 0600 since configuration files contain your API key and other credentials needed to access metrics.
 
@@ -128,29 +128,32 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 3. For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
 
-## Supported OS versions
+## Supported platforms
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| OS                                              | Supported versions                                |
-|-------------------------------------------------|---------------------------------------------------|
-| [Amazon][1]                                     | Amazon Linux 2                                    |
-| [Debian x86_64][2] with systemd                 | Debian 7 (wheezy)+                                |
-| [Debian x86_64][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                |
-| [Ubuntu x86_64][3]                              | Ubuntu 14.04+                                     |
-| [RedHat/CentOS x86_64][4]                       | RedHat/CentOS 6+                                  |
-| [Docker][5]                                     | Version 1.12+                                     |
-| [Kubernetes][6]                                 | Version 1.3+                                      |
-| [SUSE Enterprise Linux x86_64][7] with systemd  | SUSE 11 SP4+                                      |
-| [SUSE Enterprise Linux x86_64][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                      |
-| [Fedora x86_64][8]                              | Fedora 26+                                        |
-| [macOS][9]                                      | macOS 10.12+                                      |
-| [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano) |
-| [Windows 64-bit][10]                            | Windows 7+                                        |
-| [Windows Azure Stack HCI OS][10]                | All Versions                                      |
+| Platform                                 | Supported versions                                        |
+|------------------------------------------|-----------------------------------------------------------|
+| [Amazon Linux][1]                        | Amazon Linux 2                                            |
+| [Debian][2] with systemd                 | Debian 7 (wheezy)+                                        |
+| [Debian][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0+                        |
+| [Ubuntu][3]                              | Ubuntu 14.04+                                             |
+| [RedHat/CentOS][4]                       | RedHat/CentOS 6+                                          |
+| [Docker][5]                              | Version 1.12+                                             |
+| [Kubernetes][6]                          | Version 1.3+                                              |
+| [SUSE Enterprise Linux][7] with systemd  | SUSE 11 SP4+                                              |
+| [SUSE Enterprise Linux][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                              |
+| [Fedora][8]                              | Fedora 26+                                                |
+| [macOS][9]                               | macOS 10.12+                                              |
+| [Windows Server][10]                     | Windows Server 2008 R2+ and Server Core (not Nano Server) |
+| [Windows][10]                            | Windows 7+                                                |
+| [Windows Azure Stack HCI OS][10]         | All Versions                                              |
 
-**Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
+**Notes**: 
+- 64-bit x86 packages are available for all platforms on the list. Arm v8 packages are available for all platforms except Windows and MacOS.
+- [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
+- Datadog Agent v6+ supports Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
 [2]: /agent/basic_agent_usage/deb/
@@ -163,28 +166,27 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [9]: /agent/basic_agent_usage/osx/
 [10]: /agent/basic_agent_usage/windows/
 [11]: /agent/basic_agent_usage/source/
+[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| OS                                | Supported versions     |
-|-----------------------------------|------------------------|
-| [Amazon][1]                       | Amazon Linux 2         |
-| [Debian x86_64][2]                | Debian 7 (wheezy)+     |
-| [Ubuntu x86_64][3]                | Ubuntu 12.04+          |
-| [RedHat/CentOS x86_64][4]         | RedHat/CentOS 5+       |
-| [Docker][5]                       | Version 1.12+          |
-| [Kubernetes][6]                   | Version 1.3 to 1.8     |
-| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4+           |
-| [Fedora x86_64][8]                | Fedora 26+             |
-| [MacOS][9]                        | macOS 10.10+           |
-| [Windows server 64-bit][10]       | Windows Server 2008r2+ |
-| [Windows 64-bit][10]              | Windows 7+             |
+| Platform                   | Supported versions     |
+|----------------------------|------------------------|
+| [Amazon Linux][1]          | Amazon Linux 2         |
+| [Debian][2]                | Debian 7 (wheezy)+     |
+| [Ubuntu][3]                | Ubuntu 12.04+          |
+| [RedHat/CentOS][4]         | RedHat/CentOS 5+       |
+| [Docker][5]                | Version 1.12+          |
+| [Kubernetes][6]            | Version 1.3 to 1.8     |
+| [SUSE Enterprise Linux][7] | SUSE 11 SP4+           |
+| [Fedora][8]                | Fedora 26+             |
+| [MacOS][9]                 | macOS 10.10+           |
+| [Windows Server][10]       | Windows Server 2008r2+ |
+| [Windows][10]              | Windows 7+             |
 
 **Notes**:
 
 - [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
-
-- Windows Server 2008 R2+ is supported, but must have the most recent updates installed in order to run versions 7+ of the Datadog Agent. There is also [a known issued with clock drift and Go][12] that affects Windows Server 2008 R2+.
 
 [1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
 [2]: /agent/basic_agent_usage/deb/
@@ -201,7 +203,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 
-| OS       | Supported versions                        |
+| Platform | Supported versions                        |
 |----------|-------------------------------------------|
 | [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
@@ -246,7 +248,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 <AGENT_BIN_PATH> check --help
 ```
 
-## Agent Overhead
+## Agent overhead
 
 An example of the Datadog Agent resource consumption is below. Tests were made on an AWS EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM). The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
 Enabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.

@@ -13,6 +13,10 @@ further_reading:
 Datadog expose les endpoints AWS PrivateLink sur <b>us-east-1</b>.
 </div>
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog via PrivateLink ne prend pas en charge le site gouvernemental de Datadog.</div>
+{{< /site-region >}}
+
 Ce guide vous explique comment configurer [AWS PrivateLink][1] afin de l'utiliser avec Datadog.
 
 ## Présentation
@@ -65,6 +69,13 @@ Pour utiliser PrivateLink, vous devez configurer un endpoint interne dans votre 
 | Nom du service des traces Datadog                                |
 | --------------------------------------------------------- |
 | `com.amazonaws.vpce.us-east-1.vpce-svc-07672d13af0033c24` |
+
+{{% /tab %}}
+{{% tab "Ressources Kubernetes" %}}
+
+| Nom de service de l'explorateur Kubernetes Datadog                  |
+| --------------------------------------------------------- |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0b03d6756bf6c2ec3` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -186,6 +197,30 @@ Pour transmettre vos métriques de trace à Datadog à l'aide du nouvel endpoint
 2. [Redémarrez votre Agent][2] pour envoyer des traces à Datadog via AWS PrivateLink.
 
 **Remarque** : si vous utilisez l'Agent de conteneur, définissez plutôt la variable d'environnement `DD_APM_DD_URL="https://trace-pvtlink.agent.datadoghq.com"`. Celle-ci doit être configurée sur l'Agent de cluster _et_ sur l'Agent de nœud si vous utilisez l'Agent de cluster pour surveiller un environnement Kubernetes.
+
+
+[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /fr/agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}
+{{% tab "Ressources Kubernetes" %}}
+
+Pour transmettre vos ressources Kubernetes à Datadog à l'aide du nouvel endpoint de votre VPC, définissez `orchestrator-pvtlink.datadoghq.com` comme nouvelle destination pour vos données d'orchestrateur :
+
+1. Mettez à jour le paramètre `dd_url` dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
+
+    ```yaml
+    dd_url: orchestrator-pvtlink.datadoghq.com
+    ```
+
+   Si vous utilisez l'Agent de conteneur, définissez plutôt la variable d'environnement ci-dessous.
+
+   ```
+   DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_DD_URL="orchestrator-pvtlink.datadoghq.com"
+   ```
+
+   Définissez également cette variable d'environnement pour l'Agent de processus. Si vous utilisez l'Agent de cluster pour surveiller un environnement Kubernetes, vous devrez également la configurer pour l'Agent de cluster et l'Agent de nœud.
+
+2. [Redémarrez votre Agent][2] pour envoyer des ressources Kubernetes à Datadog via AWS PrivateLink.
 
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file

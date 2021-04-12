@@ -8,6 +8,9 @@ further_reading:
   tag: "Documentation"
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+{{< /site-region >}}
 
 **This documentation assumes that you already have a SAML Identity Provider up and running.**
 
@@ -49,11 +52,13 @@ The Single Sign-on URL is also displayed on the [Team page][6]. Loading this URL
 
 Users with the Access Management permission can assign or remove Datadog roles based on a user's SAML-assigned attributes:
 
-1. Go to Account Management and click the Mappings tab.
+1. Go to Teams and click the Mappings tab.
 
 2. Click the **New Mapping** button. 
 
-3. Specify the SAML identity provider key-value pair that you want to associate with an existing Datadog role (either default or custom). For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`: 
+3. Specify the SAML identity provider key-value pair that you want to associate with an existing Datadog role (either default or custom). Note that these entries are case-sensitive. 
+
+   For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`: 
 
     {{< img src="account_management/saml/create_mapping.png" alt="Creating a SAML mapping to Datadog Role"  >}}
 
@@ -69,7 +74,7 @@ You can make changes to a mapping by clicking the pencil icon, or remove it by c
 
 Alternatively, you can create and change mappings of SAML attributes to Datadog roles by using the `authn_mappings` endpoint. See [Federated Authentication to Role Mapping API][8] for more information.
 
-## Datadog Service Provider Details
+## Datadog service provider details
 
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
@@ -78,7 +83,7 @@ Alternatively, you can create and change mappings of SAML attributes to Datadog 
 * Assertions can be encrypted, but unencrypted assertions are accepted.
 * Reference [Datadog's SP Metadata][5].
 
-## Setting Attributes
+## Setting attributes
 
 Attributes may be included with the Assertion. Datadog looks for 3 Attributes in the AttributeStatement:
 
@@ -116,21 +121,21 @@ For more information about configuring specific IdP's, refer to the following do
 * [Okta][14]
 * [SafeNet][15]
 
-## Additional Features
+## Additional features
 
 The following features can be enabled through the [SAML Configuration dialog][4].
 
-### Just-in-Time (JIT) Provisioning
+### Just in time (JIT) provisioning
 
-With Just-in-Time provisioning, a user is created within Datadog the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time.
+With JIT provisioning, a user is created within Datadog the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time. The invitation email is not sent in this case.
 
 Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][2]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
-Administrators can set the default role for new Just-in-Time users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only** or even **Administrators**.
+Administrators can set the default role for new JIT users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only** or even **Administrators**.
 
 {{< img src="account_management/saml/saml_jit_default.png" alt="saml JIT Default"  style="width:50%;" >}}
 
-### IdP Initiated Login
+### IdP initiated login
 
 When the Datadog URL is loaded, the browser is redirected to the customer IdP where the user enters their credentials, then the IdP redirects back to Datadog. Some IdPs have the ability to send an assertion directly to Datadog without first getting an AuthnRequest (IdP Initiated Login).
 
@@ -138,9 +143,9 @@ After enabling the IdP Initiated Login feature (and waiting for caches to clear)
 
 If you do not use the updated SP Metadata, Datadog is not able to associate the assertion with your organization and displays an error page with a message that the SAML response is missing the "InResponseTo" attribute.
 
-### SAML Strict
+### SAML strict
 
-With SAML Strict mode enabled, all users must log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account.
+With SAML strict mode enabled, all users must log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account.
 
 ## Further Reading
 

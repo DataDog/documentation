@@ -3,6 +3,10 @@ title: Gestion des incidents
 kind: documentation
 description: Créer et gérer des incidents
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">La fonctionnalité de gestion des incidents n'est pas disponible pour le site gouvernemental de Datadog.</div>
+{{< /site-region >}}
+
 Tout événement susceptible d'entraîner une interruption des services de votre organisation peut être considéré comme un incident, et il est souvent nécessaire d'avoir un système bien défini pour traiter ce genre d'événements. La fonctionnalité de gestion des incidents de Datadog fournit un système grâce auquel votre organisation peut identifier et réduire les incidents de manière efficace.
 
 Les incidents sont regroupés dans Datadog au même titre que les métriques, les traces et les logs que vous recueillez. Vous pouvez consulter et filtrer les incidents qui vous intéressent.
@@ -10,7 +14,7 @@ Les incidents sont regroupés dans Datadog au même titre que les métriques, le
 Dans Datadog, les situations suivantes justifient la déclaration d'un incident :
 
 * Un problème a ou peut avoir un impact sur les clients ou les services.
-* Vous ne savez pas avec certitude si un événement constitue un incident. Avertissez les personnes compétentes et renforcez la sévérité de la situation de manière adéquate.
+* Vous ne savez pas avec certitude si un événement constitue un incident. Avertissez les personnes compétentes et renforcez la gravité de la situation de manière adéquate.
 
 ## Utilisation
 
@@ -52,7 +56,7 @@ Depuis l'[interface des incidents][1], cliquez sur le bouton **New Incident** po
 
 Une fois l'[intégration Datadog activée sur Slack][3], vous pouvez utiliser la commande `/datadog incident` depuis n'importe quel canal Slack pour déclarer un nouvel incident.
 
-Dans la fenêtre de création, ajoutez un titre descriptif, indiquez si l'incident a eu un impact sur les clients (yes, no, unknown) et sélectionnez un niveau de sévérité (1-5, unknown).
+Dans la fenêtre de création, ajoutez un titre descriptif, indiquez si l'incident a eu un impact sur les clients (yes, no, unknown) et sélectionnez un niveau de gravité (1-5, unknown).
 
 Si l'utilisateur qui déclare l'incident a associé son compte Slack à son compte Datadog, cet utilisateur devient alors l'Incident Commander par défaut. L'Incident Commander (IC) peut être changé ultérieurement dans l'application si nécessaire. Si la personne qui déclare un incident n'est pas membre d'un compte Datadog, alors le rôle d'IC est assigné à un `Slack app user` générique et peut être assigné à un autre IC depuis l'application.
 
@@ -72,7 +76,7 @@ Quel que soit le moyen par lequel vous créez l'incident, il est essentiel de le
 
 Lorsque vous créez un incident, une fenêtre d'incident apparait. Cette fenêtre comporte plusieurs champs importants :
 
-**Severity Level** : indique la sévérité de votre incident, de SEV-1 (le plus grave) à SEV-5 (le moins grave). Si votre incident fait l'objet d'une toute première investigation et que vous n'en connaissez pas encore la sévérité, choisissez UNKNOWN.
+**Severity Level** : indique la gravité de votre incident, de SEV-1 (le plus grave) à SEV-5 (le moins grave). Si votre incident fait l'objet d'une toute première investigation et que vous n'en connaissez pas encore la gravité, choisissez UNKNOWN.
 
 * SEV-1 : impact critique
 * SEV-2 : fort impact
@@ -81,7 +85,7 @@ Lorsque vous créez un incident, une fenêtre d'incident apparait. Cette fenêtr
 * SEV-5 : problème mineur
 * UNKNOWN : toute première investigation
 
-**Remarque** : vous pouvez personnaliser la description de chaque niveau de sévérité en fonction des exigences de votre organisation.
+**Remarque** : vous pouvez personnaliser la description de chaque niveau de gravité en fonction des exigences de votre organisation.
 
 **Title** : donnez un titre descriptif à votre incident.
 
@@ -99,9 +103,9 @@ Le statut d'un incident peut être mis à jour directement depuis la [page de pr
 
 Vous pouvez également mettre à jour la partie relative à l'impact afin de spécifier si l'incident a eu un impact sur les clients, sa chronologie, et s'il est toujours en cours ou non. Afin d'être complète, cette section nécessite également une description de l'étendue de l'impact.
 
-Dans l'en-tête de l'incident, vous pouvez voir l'état, la sévérité, le timestamp, l'impact et la durée de l'incident, ainsi que le nom des personnes qui s'en occupent. Vous pouvez également informer les personnes concernées des éventuelles mises à jour. Des liens permettent d'accéder rapidement aux chaînes de discussion (si vous n'utilisez pas l'application Slack pour Datadog), aux vidéoconférences et aux analyses post-mortem liées (le cas échéant).
+Dans l'en-tête de l'incident, vous pouvez voir l'état, la gravité, le timestamp, l'impact et la durée de l'incident, ainsi que le nom des personnes qui s'en occupent. Vous pouvez également informer les personnes concernées des éventuelles mises à jour. Des liens permettent d'accéder rapidement aux chaînes de discussion (si vous n'utilisez pas l'application Slack pour Datadog), aux vidéoconférences et aux analyses post-mortem liées (le cas échéant).
 
-Les données relatives à la chronologie de l'incident sont catégorisées, vous permettant ainsi d'utiliser les facettes pour filtrer les différents éléments de la chronologie. Cela est particulièrement utile pour les longs incidents qui ont nécessité une enquête plus longue. Les personnes en charge et les IC peuvent ainsi facilement identifier les personnes impliquées, les progrès effectués et le contenu qui a déjà été analysé. Vous pouvez modifier les notes et les timestamps à mesure qu'ils sont créés. Vous pouvez également mettre en évidence certains éléments de la chronologie pour que les autres personnes qui surveillent l'incident en aient connaissance.
+Les données relatives à la chronologie de l'incident sont catégorisées, vous permettant ainsi d'utiliser les facettes pour filtrer les différents éléments de la chronologie. Cela est particulièrement utile pour les longs incidents qui ont nécessité une enquête plus longue. Les personnes en charge et les IC peuvent ainsi facilement identifier les personnes impliquées, les progrès effectués et le contenu qui a déjà été analysé. En tant qu'auteur des notes de chronologie, vous pouvez modifier les notes et les timestamps à mesure qu'ils sont créés. Vous pouvez également mettre en évidence certains éléments de la chronologie pour les signaler aux autres personnes surveillant l'incident.
 
 #### Niveaux de statut
 
@@ -128,19 +132,19 @@ Les champs d'évaluation correspondent aux métadonnées et au contexte que vous
 
 ## Exemple de workflow
 
-### 1. Détection d'un problème
+### Détection d'un problème
 
 Imaginons que vous consultez un dashboard et que vous remarquez qu'un service en particulier affiche un très grand nombre d'erreurs. À l'aide du bouton d'exportation en haut à droite d'un widget, vous pouvez déclarer un incident.
 
 {{< img src="monitors/incidents/workflow-1-graph-1.png" alt="À partir d'un graphique"  style="width:80%;">}}
 
-### 2. Déclaration d'un incident et composition de votre équipe
+### Déclaration d'un incident et création de votre équipe
 
 Utilisez la boîte de dialogue New Incident pour composer votre équipe et avertir ses membres. Le graphique à partir duquel vous avez créé l'incident est automatiquement joint en tant que signal. Vous avez la possibilité d'ajouter tout autre signal susceptible d'aider votre équipe à commencer à résoudre le problème. Les intégrations Slack et PagerDuty vous permettent d'envoyer des notifications via ces services.
 
 {{< img src="monitors/incidents/workflow-2-modal-1.png" alt="Boîte de dialogue New Incident"  style="width:60%;">}}
 
-### 3. Communication et dépannage
+### Communication et dépannage
 
 Si vous avez installé l'[application Slack pour Datadog][3], l'intégration Slack peut créer automatiquement un canal dédié à l'incident, ce qui vous permet de consolider les communications avec votre équipe et de commencer le dépannage.
 
@@ -148,13 +152,13 @@ Pour les clients non européens qui utilisent Slack, [demandez à accéder à la
 
 {{< img src="monitors/incidents/workflow-3-slack-1-1.png" alt="Communiquer"  style="width:80%;">}}
 
-### 4. Mise à jour l'incident et création d'une analyse post-mortem
+### Mise à jour de l'incident et création d'une analyse post-mortem
 
 Mettez à jour l'incident à mesure que la situation évolue. Définissez le statut sur `Stable` pour indiquer que le problème a été atténué, et remplissez le champ concernant l'impact sur les clients afin que votre organisation sache dans quelle mesure le problème a affecté les clients. Ensuite, définissez le statut sur `Resolved` une fois que l'incident a été complètement résolu. Il existe un quatrième statut facultatif, `Completed`, qui peut être utilisé pour indiquer que toutes les étapes de remédiation ont été réalisées. Ce statut peut être activé dans les [Paramètres d'incident][2].
 
 {{< img src="monitors/incidents/workflow-4-update-2.png" alt="Mise à jour de l'incident"  style="width:60%;">}}
 
-Vous pouvez mettre à jour le statut et la sévérité dans la section `Properties` de chaque incident.
+Vous pouvez mettre à jour le statut et la gravité dans la section `Properties` de chaque incident.
 
 À mesure que le statut d'un incident évolue, Datadog suit les délais de résolution de la manière suivante :
 
@@ -168,9 +172,9 @@ Une fois qu'un incident est classé comme résolu, vous pouvez générer automat
 
 {{< img src="monitors/incidents/postmortem.png" alt="générer automatiquement une analyse post-mortem" style="width:80%;">}}
 
-### 5. Suivi et enseignement
+### Suivi et enseignement
 
-Créez des tâches d'atténuation ou de remédiation post-mortem. Ajoutez les tâches de votre choix dans le champ de texte pour les suivre. Cochez la case d'une tâche pour indiquer qu'elle est terminée.
+Créez des tâches d'atténuation ou de remédiation post-mortem. Ajoutez les tâches de votre choix dans le champ de texte, définissez une date limite et attribuez-les à un membre d'équipe pour effectuer un suivi de ces tâches. Cochez la case en regard d'une tâche pour indiquer qu'elle est terminée.
 
 Associez un document d'analyse post-mortem, réexaminez ce qui a posé problème et ajoutez des tâches de suivi. L'utilisation des [Notebooks][7] Datadog pour créer des post-mortems permet de renforcer la collaboration en temps réel. Pour relier un notebook existant à un incident, cliquez sur le signe plus sous `Other Docs`. Cliquez sur le notebook associé pour le modifier en temps réel avec les membres de votre équipe.
 
@@ -183,3 +187,4 @@ Associez un document d'analyse post-mortem, réexaminez ce qui a posé problème
 [5]: /fr/tracing/#2-instrument-your-application
 [6]: https://app.datadoghq.com/incidents/ddslackapp
 [7]: https://app.datadoghq.com/notebook/list
+[8]: https://docs.datadoghq.com/fr/integrations/slack/?tab=slackapplicationus

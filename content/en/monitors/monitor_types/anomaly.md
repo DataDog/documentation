@@ -49,7 +49,7 @@ After defining the metric, the anomaly detection monitor provides two preview gr
 
 **Recovery window** - How much time is required for the metric to not be considered anomalous so the alert recovers.
 
-#### Advanced Options
+#### Advanced options
 
 Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
 
@@ -74,7 +74,7 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 
 **Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
 
-##### Anomaly Detection Algorithms
+##### Anomaly detection algorithms
 
 | Option | Use case                                                                                       | Description                                                                                                                                                                                                                                                           |
 |--------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -84,7 +84,7 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms can avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
-**Examples**:<br>
+**Examples:**<br>
 The graphs below illustrate how and when these three algorithms behave differently from one another.
 
 In this example, `basic` successfully identifies anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, `robust` and `agile` both recognize the seasonal pattern and can detect more nuanced anomalies, for example if the metric was to flat-line near its minimum value.
@@ -124,7 +124,7 @@ Anomaly monitors are managed using the [same API][12] as other monitors. These f
 The `query` property in the request body should contain a query string in the following format:
 
 ```text
-avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direction='<direction>', alert_window='<alert_window>', interval=<interval>, count_default_zero='<default_zero>' [, seasonality='<seasonality>']) >= <threshold>
+avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direction='<direction>', alert_window='<alert_window>', interval=<interval>, count_default_zero='<count_default_zero>' [, seasonality='<seasonality>']) >= <threshold>
 ```
 
 * `query_window`: a timeframe like `last_4h` or `last_7d`; the time window displayed in graphs in notifications; must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`
@@ -134,7 +134,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 * `direction`: the directionality of anomalies that should trigger an alert; `above`, `below`, or `both`
 * `alert_window`: the timeframe which will be checked for anomalies (e.g., `last_5m`, `last_1h`)
 * `interval`: a positive integer representing the number of seconds in the rollup interval; we recommend that the `interval` be at least a fifth of the `alert_window` duration
-* `default_zero`: use `true` for most monitors; only set to `false` if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero
+* `count_default_zero`: use `true` for most monitors; only set to `false` if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero
 * `seasonality`: `hourly`, `daily`, or `weekly`; exclude this parameter when using the `basic` algorithm
 * `threshold`: a positive number no larger than 1; the fraction of points in the `alert_window` that must be anomalous in order for a critical alert to trigger
 

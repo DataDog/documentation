@@ -24,7 +24,7 @@ htop、ctop、kubectl などの基盤ツールを手本として、ライブコ�
 
 ## コンフィギュレーション
 
-### Kubernetes Resources
+### Kubernetes リソース
 
 Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes リソースを取得するように構成できます。この機能により、特定のネームスペースまたはアベイラビリティーゾーンのポッド、デプロイメント、その他の Kubernetes の概念の状態を監視したり、デプロイメント内で失敗したポッドのリソース仕様を確認したり、ノードアクティビティを関係するログに関連付けたりすることが可能になります。
 
@@ -57,7 +57,11 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes �
         ```
 
     - 以下の RBAC アクセス許可を使用して、Cluster Agent ClusterRole を設定します。
-
+特に `apps` apiGroups の場合は、ライブコンテナに
+一般的な Kubernetes リソース (`pods`、`services`、`nodes` など) を収集する権限が必要です。
+これは、[Cluster Agent のセットアップ用ドキュメント][2]に従っていれば、すでに RBAC にあります。
+ない場合は、追加されていることを確認してください
+（`deployments`、`replicasets` の後）。
         ```yaml
           ClusterRole:
           - apiGroups:  # To create the datadog-cluster-id CM
@@ -76,17 +80,20 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes �
             verbs:
             - get
           ...
-          - apiGroups:  # to collect new resource types
+          - apiGroups:  # To collect new resource types
             - "apps"
             resources:
             - deployments
             - replicasets
+            # Below are in case RBAC was not setup from the above linked "Cluster Agent Setup documentation"
+            - pods 
+            - nodes
+            - services
             verbs:
             - list
             - get
             - watch
         ```
-
     これらのアクセス許可は、Agent DaemonSet や Cluster Agent Deployment と同じネームスペースに `datadog-cluster-id` ConfigMap を作成したり、デプロイや ReplicaSets を収集するために必要です。
 
     Cluster Agent により `cluster-id` ConfigMap が作成されない場合、Agent ポッドは起動せず、`CreateContainerConfigError` ステータスに陥ります。この ConfigMap が存在しないために Agent ポッドが動かない場合は、Cluster Agent アクセス許可を更新しポッドを再起動して ConfigMap を作成すると、Agent ポッドは自動的に回復します。
@@ -242,7 +249,7 @@ Kubernetes コンテナは以下でタグ付けされます。
 
 コンテナページをアクティブに使用している間、メトリクスは 2 秒の解像度で収集されます。これは、CPU などの揮発性が高いメトリクスで重要です。バックグラウンドでは、履歴を目的として、10 秒の解像度でメトリクスが収集されます。
 
-### Kubernetes Resources ビュー
+### Kubernetes リソースビュー
 
 ライブコンテナ向け Kubernetes Resources を有効にしている場合は、ページ左上の **View** ドロップダウンメニューで **Pods**、**Deployments**、**ReplicaSets**、**Services** ビューを切り替えます。これらの各ビューには、ステータス、名前、Kubernetes ラベルなどのフィールドでデータを整理できるデータテーブルと、ポッドと Kubernetes クラスターの全体像を示す詳細なクラスターマップが含まれています。
 
@@ -271,9 +278,9 @@ Kubernetes Resources ビューには、いくつかの追加のタブがあり�
 
 ### コンテナログ
 
-`docker logs -f` や `kubectl logs -f` などのコンテナのストリーミングログを Datadog で表示します。テーブル内のコンテナをクリックして調べることができます。Logs タブをクリックすると、[Live Tail][15] からのリアルタイムデータや過去の任意の時間のインデックス化されたログが表示されます。
+`docker logs -f` や `kubectl logs -f` などのコンテナのストリーミングログを Datadog で表示します。テーブル内のコンテナをクリックして調べることができます。*Logs* タブをクリックすると、[Live Tail][15] からのリアルタイムデータや過去の任意の時間のインデックス化されたログが表示されます。
 
-#### Live Tail
+#### Live tail
 
 Live Tail を使用すると、すべてのコンテナログがストリーミングされます。ストリームを一時停止すると、高速に書き込まれているログを簡単に読むことができます。一時停止を解除すると、ストリーミングが継続されます。
 
@@ -295,7 +302,7 @@ Live Tail を使用すると、すべてのコンテナログがストリーミ�
 * RBAC 設定によって Kubernetes のメタデータ収集を制限できます。[Datadog Agent の RBAC エンティティ][16]を参照してください。
 * Kubernetes の `health` 値は、コンテナの readiness プローブです。liveness プローブではありません。
 
-### Kubernetes Resources
+### Kubernetes リソースesources
 
 * データは一定の間隔で自動的に更新されます。ベータ版の更新間隔は変更される可能性があります。
 * 1000 以上のデプロイまたは ReplicaSets を持つクラスターでは、Cluster Agent からの CPU 使用率が上昇する場合があります。Helm チャートにはコンテナのスクラブを無効にするオプションがあります。詳細については、[Helm チャートリポジトリ][17]を参照してください。

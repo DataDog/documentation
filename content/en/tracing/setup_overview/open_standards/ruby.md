@@ -5,7 +5,6 @@ description: 'Open Standards for Ruby'
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
-further_reading:
 ---
 
 ## OpenTracing
@@ -164,10 +163,6 @@ Tags that are set directly on individual spans supersede conflicting tags define
 ### OpenTelemetry Links
 
 - See [rubygems][7] or [github][8] for more OpenTelemetry Ruby Datadog Exporter usage.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/ruby/#quickstart-for-opentracing
 [2]: /tracing/setup/ruby/#tracer-settings

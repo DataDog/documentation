@@ -7,7 +7,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログエクスプローラーの詳細
-  - link: /logs/explorer/patterns/
+  - link: '/logs/explorer/#patterns'
     tag: Documentation
     text: ログパターンビューの概要
   - link: /logs/live_tail/
@@ -384,7 +384,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 
 {{< img src="logs/guide/rbac/archives.png" alt="リハイドレートの ACME タグ"  style="width:60%;">}}
 
-**注**: [Legacy Read Index Data Permission][21] を使用する**場合**、`ACME User` ロールと一緒に `ACME User` ロールを ACME アーカイブに追加してください。`ACME User` ロールメンバーにはリハイドレートを実行するアクセス許可がないため、これによって機密性の高いアクセス許可が付与されることはありません。ただし、これにより、Read Index Data アクセス許可が結果の履歴ビューに自動的にスコープされるため、コンテンツにアクセスできます。
+**注**: [Legacy Read Index Data Permission][21] を使用する**場合**、`ACME Admin` ロールと一緒に `ACME User` ロールを ACME アーカイブに追加してください。`ACME User` ロールメンバーにはリハイドレートを実行するアクセス許可がないため、これによって機密性の高いアクセス許可が付与されることはありません。ただし、これにより、Read Index Data アクセス許可が結果の履歴ビューに自動的にスコープされるため、コンテンツにアクセスできます。
 
 {{< img src="logs/guide/rbac/rehydration_index.png" alt="リハイドレートインデックスアクセス許可"  style="width:60%;">}}
 

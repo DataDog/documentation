@@ -2,16 +2,16 @@
 title: "Quelles sont les bonnes pratiques à adopter pour nommer les métriques et les tags\_?"
 kind: faq
 further_reading:
-  - link: developers/metrics
+  - link: /developers/metrics/
     tag: Documentation
     text: En savoir plus sur les métriques Datadog
-  - link: /tagging
+  - link: /getting_started/tagging/
     tag: Documentation
     text: Débuter avec les tags
 aliases:
   - /fr/developers/faq/what-best-practices-are-recommended-for-naming-metrics-and-tags
 ---
-Datadog recommande certaines bonnes pratiques pour nommer les métriques et les tags.
+Voici quelques recommandations pour bien nommer vos métriques, tags et services.
 
 ## Règles et bonnes pratiques pour nommer des métriques
 
@@ -27,6 +27,8 @@ Les métriques renvoyées par l'Agent respectent un format pseudo hiérarchique 
 
 ## Règles et bonnes pratiques pour nommer des tags
 
+Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous attribuez des tags. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la [documentation dédiée][1].
+
 * Les tags doivent commencer par une lettre.
 * Ils peuvent contenir des caractères alphanumériques, des underscores, des signes moins, des deux-points, des points et des barres obliques. Les autres caractères sont convertis en underscores.
 * Lorsqu'un tag se termine par un underscore, que ce soit à la suite de la conversion d'un caractère ou tout simplement parce que son nom finit par un « _ », l'underscore est supprimé.
@@ -34,8 +36,10 @@ Les métriques renvoyées par l'Agent respectent un format pseudo hiérarchique 
 * Les tags sont convertis en minuscule.
 * Pour un fonctionnement optimal, nous conseillons d'utiliser la syntaxe `key:value`.
 
-Les clés de tag de métrique fréquemment utilisées comprennent `env`, `instance`, `name` et `role`.
+Les clés de tag de métrique fréquemment utilisées comprennent `instance`, `name` et `role`.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /fr/getting_started/tagging/unified_service_tagging

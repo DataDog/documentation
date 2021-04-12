@@ -19,7 +19,7 @@ This is possible thanks to the [Category Processor][3] that defines a mapping be
 
 In this article, we show how to do this with 2 examples: Bunyan levels and web access logs.
 
-## Web Access logs
+## Web access logs
 
 The status code of the request can be used to determine the log status. Our integrations use the following mapping:
 

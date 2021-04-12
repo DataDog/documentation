@@ -93,8 +93,8 @@ further_reading:
 
 {{< img src="tracing/visualization/trace/trace_networks.png" alt="トレースネットワークの依存関係" style="width:90%;">}}
 
-[1]: https://docs.datadoghq.com/ja/network_performance_monitoring/network_page
-[2]: https://docs.datadoghq.com/ja/network_performance_monitoring/installation?tab=agent
+[1]: /ja/network_monitoring/performance/network_page
+[2]: /ja/network_monitoring/performance/setup
 {{% /tab %}}
 {{< /tabs >}}
 

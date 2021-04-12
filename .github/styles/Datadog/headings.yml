@@ -1,0 +1,130 @@
+extends: capitalization
+message: "'%s' should use sentence-style capitalization."
+link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#headers"
+level: warning
+scope: heading
+match: $sentence
+exceptions:
+  - ACLs
+  - Agent
+  - Agents
+  - Amazon
+  - APIs
+  - APM & Distributed Tracing
+  - AuthN
+  - Autodiscovery
+  - Azure
+  - Azure App Service Plan
+  - CakePHP
+  - Cassandra Nodetool
+  - CentOS
+  - Chef
+  - Clipboard
+  - CloudSQL
+  - CloudWatch
+  - Cluster Agent
+  - Continuous Profiler
+  - DaemonSet
+  - Data Collected
+  - Datadog
+  - Datadog Agent Manager
+  - Datadog for Government
+  - Datadog Operator
+  - Debian
+  - Detection Rules
+  - Docker
+  - Docker Swarm
+  - Dockerfile
+  - DogStatsD
+  - Fargate
+  - FreeBSD
+  - FreeSwitch
+  - Further Reading
+  - GeoIP
+  - GitHub
+  - Google
+  - Google Analytics
+  - Google Cloud
+  - Google Cloud Functions
+  - GraphQL
+  - HAProxy
+  - HostPort
+  - I
+  - IdP
+  - IDs
+  - Incident Management
+  - IoT
+  - IPs
+  - Java
+  - JMXFetch
+  - Journald
+  - Kubernetes
+  - Kubernetes Pod
+  - Lambda
+  - LaunchDarkly
+  - Linux
+  - Live Tail
+  - Log Explorer
+  - Log Management
+  - Log Rehydration
+  - Logback
+  - macOS
+  - Metrics Explorer
+  - MongoDB
+  - MySQL
+  - Network Device Monitoring
+  - Network Performance Monitoring
+  - NixOS
+  - Notebook
+  - Notebook List
+  - npm
+  - OkHttp
+  - OneLogin
+  - OpenMetrics
+  - openSUSE
+  - OpenTelemetry
+  - OpenTracing
+  - OpenVPN
+  - OpsWorks
+  - Phusion Passenger
+  - pre-NAT
+  - Prometheus
+  - Puppet
+  - Python
+  - Python
+  - Rails
+  - Real User Monitoring
+  - Red Hat
+  - Redis
+  - RocketPants
+  - Root Cause Analysis
+  - RumMonitor
+  - SafeNet
+  - Security Monitoring
+  - Security Signal
+  - Security Signals
+  - SELinux
+  - Siri
+  - Slack
+  - SLIs
+  - SLOs
+  - socat
+  - Social Security
+  - SQLDelight
+  - SQLite
+  - StackStorm
+  - StatsD
+  - sysOID
+  - Terraform
+  - Trello
+  - TypeScript
+  - Ubuntu
+  - Unix
+  - Unix Domain Socket
+  - URLs
+  - User Datagram Protocol
+  - vSphere
+  - Watchdog
+  - Watchdog Insights
+  - Webhook
+  - Windows

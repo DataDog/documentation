@@ -4,7 +4,8 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    mongodb: assets/dashboards/overview.json
   logs:
     source: mongodb
   metrics_metadata: metadata.csv
@@ -25,6 +26,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/mongo/README.md'
 display_name: MongoDB
+draft: false
 git_integration_title: mongo
 guid: d51c342e-7a02-4611-a47f-1e8eade5735c
 integration_id: mongodb
@@ -65,19 +67,17 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### アーキテクチャ
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ほとんどの低レベルのメトリクス (アップタイム、ストレージサイズなど) は、すべての mongod ノードで収集する必要があります。その他の高レベルのメトリクス (収集/インデックス統計など) は、一度だけ収集する必要があります。これらの理由により、Agent を構成する方法は、mongo クラスターのデプロイ方法によって異なります。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "スタンドアロン" %}}
+#### スタンドアロン
 
-#### ホスト
-
-ホストで実行中の Agent に対してこのチェックを構成するには:
+このインテグレーションを単一ノードの MongoDB デプロイ用に構成するには
 
 ##### MongoDB の準備
-
 Mongo シェルで、`admin` データベースに Datadog Agent 用の読み取り専用ユーザーを作成します。
 
 ```shell
@@ -100,6 +100,96 @@ db.createUser({
 })
 ```
 
+##### Agent の構成
+使用可能なすべての mongo メトリクスを収集するには、できれば同じノードで実行している単一の Agent だけが必要です。コンフィギュレーションオプションについては、以下を参照してください。
+{{% /tab %}}
+{{% tab "ReplicaSet" %}}
+#### ReplicaSet
+
+このインテグレーションを MongoDB レプリカセット用に構成するには
+
+##### MongoDB の準備
+Mongo シェルで、プライマリに対して認証し、`admin` データベースに Datadog Agent 用の読み取り専用ユーザーを作成します。
+
+```shell
+# 管理者ユーザーとして認証します。
+use admin
+db.auth("admin", "<MongoDB_管理者パスワード>")
+
+# MongoDB 2.x では、addUser コマンドを使用します。
+db.addUser("datadog", "<一意のパスワード>", true)
+
+# MongoDB 3.x 以降では、createUser コマンドを使用します。
+db.createUser({
+  "user": "datadog",
+  "pwd": "<一意のパスワード>",
+  "roles": [
+    { role: "read", db: "admin" },
+    { role: "clusterMonitor", db: "admin" },
+    { role: "read", db: "local" }
+  ]
+})
+```
+
+##### Agent の構成
+メンバーごとに 1 つの Agent を構成する必要があります。コンフィギュレーションオプションについては、以下を参照してください。
+注: [MongoDB ドキュメント][1]に記載されているように、アービターノードのモニタリングはリモートではサポートされていません。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
+
+[1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
+{{% /tab %}}
+{{% tab "シャード" %}}
+#### シャード
+
+このインテグレーションを MongoDB シャードクラスター用に構成するには
+
+##### MongoDB の準備
+クラスタ内のシャードごとに、レプリカセットのプライマリに接続し、`admin` データベースに Datadog Agent 用のローカル読み取り専用ユーザーを作成します。
+
+```shell
+# 管理者ユーザーとして認証します。
+use admin
+db.auth("admin", "<MongoDB_管理者パスワード>")
+
+# MongoDB 2.x では、addUser コマンドを使用します。
+db.addUser("datadog", "<一意のパスワード>", true)
+
+# MongoDB 3.x 以降では、createUser コマンドを使用します。
+db.createUser({
+  "user": "datadog",
+  "pwd": "<一意のパスワード>",
+  "roles": [
+    { role: "read", db: "admin" },
+    { role: "clusterMonitor", db: "admin" },
+    { role: "read", db: "local" }
+  ]
+})
+```
+
+次に、mongos プロキシから同じユーザーを作成します。これには、コンフィギュレーションサーバーにローカルユーザーを作成するという副作用もあり、直接接続が可能になります。
+
+
+##### Agent の構成
+1. 各シャードのメンバーごとに 1 つの Agent を構成します。
+2. コンフィギュレーションサーバーのメンバーごとに 1 つの Agent を構成します。
+3. mongos プロキシを介してクラスターに接続するように 1 つの追加 Agent を構成します。この mongos は、監視目的専用の新しい mongos でも、既存の mongos でもかまいません。
+
+注: [MongoDB ドキュメント][1]に記載されているように、アービターノードのモニタリングはリモートではサポートされていません。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
+[1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### コンフィギュレーション
+
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+
+{{< tabs >}}
+{{% tab "Host" %}}
+
+#### ホスト
+
+ホストで実行中の Agent に対してこのチェックを構成するには:
+
 ##### メトリクスの収集
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d` フォルダーの `mongo.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mongo.d/conf.yaml][2] を参照してください。
@@ -112,6 +202,7 @@ db.createUser({
        ## Hosts to collect metrics from, as is appropriate for your deployment topology.
        ## E.g. for a standalone deployment, specify the hostname and port of the mongod instance.
        ## For replica sets or sharded clusters, see instructions in the sample conf.yaml.
+       ## Only specify multiple hosts when connecting through mongos
        #
      - hosts:
          - <HOST>:<PORT>
@@ -137,12 +228,6 @@ db.createUser({
        #
        options:
          authSource: admin
-
-       ## @param replica_check - boolean - optional - default: true
-       ## Whether or not to read from available replicas.
-       ## Disable this if any replicas are inaccessible to the Agent.
-       #
-       replica_check: true
    ```
 
 2. [Agent を再起動します][3]。
@@ -196,7 +281,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `<インテグレーション名>` | `mongo`                                                                                                                                   |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                                                             |
-| `<インスタンスコンフィギュレーション>`  | `{"hosts": ["%%hosts%%:%%port%%], "username": "datadog", "password : "<一意のパスワード>", "database": "<データベース>", "replica_check": true}` |
+| `<インスタンスコンフィギュレーション>`  | `{"hosts": ["%%host%%:%%port%%], "username": "datadog", "password : "<UNIQUEPASSWORD>", "database": "<DATABASE>"}` |
 
 ##### トレースの収集
 

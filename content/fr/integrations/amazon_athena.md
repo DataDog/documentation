@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Athena."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_athena/'
+draft: false
 git_integration_title: amazon_athena
 has_logo: true
 integration_title: "Amazon\_Athena"
@@ -35,22 +36,6 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `Athena` est cochée dans la section concernant la collecte des métriques.
 2. Installez l'[intégration Datadog/Amazon Athena][3].
 
-### Collecte de logs
-
-#### Activer le logging
-
-Configurez Amazon Athena de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
-
-**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_athena` est défini en tant que _Target prefix_.
-
-#### Envoyer des logs à Datadog
-
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Athena dans la console AWS :
-
-    - [Ajouter un déclencheur manuel sur le compartiment S3][5]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
-
 ## Données collectées
 
 ### Métriques
@@ -67,13 +52,10 @@ L'intégration Amazon Athena n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-athena
-[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_athena/amazon_athena_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help/
+[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_athena/amazon_athena_metadata.csv
+[5]: https://docs.datadoghq.com/fr/help/

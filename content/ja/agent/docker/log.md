@@ -29,14 +29,15 @@ further_reading:
 
 Datadog Agent 6 以降は、コンテナからログを収集します。2 通りのインストレーション方法があります。
 
-- Agent が Docker 環境の外部にあるホスト
-- コンテナ化された Agent の Docker 環境へのデプロイ
+ログ収集の構成は、現在の環境によって異なります。開始するには、次のいずれかのインストールを選択してください。
 
-次に、環境コンテナからすべてのログを収集することも、コンテナイメージ名またはコンテナラベルで絞り込んで、収集するログを選別することもできます。本ドキュメントでは、実行中のすべてのコンテナからログを収集する方法と共に、オートディスカバリーを活用しログインテグレーションを有効にする方法を紹介します。
+- ご使用の環境が**すべて**のログを `stdout`/`stderr` に書き込む場合は、[コンテナ化された Agent](?tab=containerized-agent#installation) のインストールに従ってください。
 
-## ワンステップインストレーション
+- コンテナ化された Agent をデプロイできず、コンテナが**すべて**のログを `stdout`/`stderr` に書き込む場合は、[ホスト Agent](?tab=hostagent#installation) のインストールに従って、Agent コンフィギュレーションファイル内でコンテナ化されたログを有効にします。 
 
-まず最初に、Agent（コンテナバージョンおよび直接ホストバージョンともに） のインストレーションと、すべてのコンテナのログ収集を有効にします。
+- コンテナがログをファイルに書き込む場合 (ログを `stdout`/`stderr` に部分的にのみ書き込み、ログをファイルに書き込むか、ログをファイルに完全に書き込む)、[カスタムログ収集を使用するホスト Agent](?tab=hostagentwithcustomlogging#installation) のインストールまたは[コンテナ化された Agent](?tab=containerized-agent#installation) のインストール手順に従い、[オートディスカバリーコンフィギュレーションの例があるファイルからのログ収集](?tab=logcollectionfromfile#examples)を確認します。
+
+## インストール
 
 {{< tabs >}}
 {{% tab "Container Installation" %}}
@@ -45,7 +46,7 @@ Datadog Agent を埋め込みホストを監視する [Docker コンテナ][1] �
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
@@ -60,7 +61,7 @@ docker run -d --name datadog-agent \
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
@@ -68,7 +69,7 @@ docker run -d --name datadog-agent \
            gcr.io/datadoghq/agent:latest
 ```
 
-最新版の Datadog Agent の使用が推奨されます。Docker Hub で利用できる [Agent v6 のイメージ][2]リストを参照してください。
+最新版の Datadog Agent の使用が推奨されます。GCR で利用できる [Agent v6 のイメージ][2]リストを参照してください。
 
 ログ収集に関連するコマンド：
 
@@ -81,47 +82,68 @@ docker run -d --name datadog-agent \
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | ログは Docker ソケットの `stdout/stderr` コンテナから収集されます。                                                                                        |
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[2]: https://gcr.io/datadoghq/agent
+[2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
 {{% /tab %}}
-{{% tab "Host Installation" %}}
+{{% tab "ホスト Agent" %}}
 
-ホストに[最新版の Agent 6][1] をインストールします。Agent は [ホスト上のファイル][2] または `stdout`/`stderr` コンテナからログを収集できます。
+1. [最新バージョンの Agent][1] をホストにインストールします。
+2. デフォルトの状態では、Datadog Agent でのログ収集は _無効_ になっています。有効にするには、`datadog.yaml` 構成ファイルに次の行を加えます。
 
-デフォルトの状態では、Datadog Agent でのログ収集は _無効_ になっています。有効にするには、`datadog.yaml` 構成ファイルに次の行を加えます。
+    ```yaml
+    logs_enabled: true
+    listeners:
+        - name: docker
+    config_providers:
+        - name: docker
+          polling: true
+    logs_config:
+        container_collect_all: true
+    ```
 
-```yaml
-logs_enabled: true
-listeners:
-    - name: docker
-config_providers:
-    - name: docker
-      polling: true
-logs_config:
-    container_collect_all: true
-```
+3. [Agent を再起動][2]し、Datadog のすべてのコンテナログを確認します。
 
-[Agent を再起動][3] し、Datadog のコンテナログを確認します。
+[1]: /ja/agent/basic_agent_usage/
+[2]: /ja/agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}
+{{% tab "カスタムログを使用するホスト Agent" %}}
 
+1. [最新バージョンの Agent][1] をホストにインストールします。
+2. [カスタムログ収集のドキュメント][2]に従って、ログのファイルを調整します。
+
+   `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` に保存されているログを `<APP_NAME>` アプリケーションから収集するには、[Agent のコンフィギュレーションディレクトリ][3]のルートに以下の内容の `<APP_NAME>.d/conf.yaml` ファイルを作成します。
+
+    ```yaml
+    logs:
+      - type: file
+        path: "<PATH_LOG_FILE>/<LOG_FILE_NAME>.log"
+        service: "<APP_NAME>"
+        source: "<SOURCE>"
+    ```
+
+3. [Agent を再起動][4]し、Datadog のすべてのコンテナログを確認します。
 
 [1]: /ja/agent/basic_agent_usage/
 [2]: /ja/agent/logs/#custom-log-collection
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
+[3]: /ja/agent/guide/agent-configuration-files/
+[4]: /ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
 **重要**:
 
+- コンテナメタデータはカスタムログ収集では取得されないため、Agent はコンテナタグをログに自動的に割り当てません。[カスタムタグ][1]を使用してコンテナタグを作成します。
+
 - Datadog Agent 6.8 以降では、`source` や `service` の初期値は `short_image` タグの値となります。下で説明するように、ソースやサービスの値はオートディスカバリーで上書きすることができます。`source` 値をインテグレーション名に設定すると、ログをパースして関連情報を抽出するインテグレーション Pipelines がインストールされます。
 
 - コンテナ `Stderr` からのログは `Error` の状態がデフォルトとなります。
 
-- Docker のデフォルトである json-file ログドライバーではなく _journald_ ログドライバーを使用する場合は、コンテナ環境の設定に関するドキュメント [journald インテグレーション][1] をご覧ください。フィルタリング対象のパラメーターについての詳細は、[journald フィルターユニット][1]のドキュメントを参照してください。
+- Docker のデフォルトである json-file ログドライバーではなく _journald_ ログドライバーを使用する場合は、コンテナ環境の設定に関するドキュメント [journald インテグレーション][2]をご覧ください。フィルタリング対象のパラメーターについての詳細は、[journald フィルターユニット][2]のドキュメントを参照してください。
 
 ## ログインテグレーション
 
 Datadog Agent 6.8 以降では、`source` や `service` の初期値は `short_image` タグの値となります。これにより、Datadog は各コンテナのログソースを特定でき、対応するインテグレーションを自動的にインストールできます。
 
-コンテナのショートイメージ名とカスタムイメージのインテグレーション名が一致しない場合があります。アプリケーションにふさわしい名前に上書きするには、[Datadog オートディスカバリー][2] や [Kubernetes ポッドアノテーション][3] またはコンテナラベルを使います。
+コンテナのショートイメージ名とカスタムイメージのインテグレーション名が一致しない場合があります。アプリケーションにふさわしい名前に上書きするには、[Datadog オートディスカバリー][3]や [Kubernetes ポッドアノテーション][4]またはコンテナラベルを使います。
 
 オートディスカバリーは、ファイルの種類に応じてラベルが以下の形式となることを前提とします。
 
@@ -156,9 +178,9 @@ labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-`<LOG_CONFIG>` がログ収集コンフィギュレーションの場合、インテグレーション構成ファイルにあります。[詳細は、ログ収集コンフィギュレーションを参照してください][4]。
+`<LOG_CONFIG>` がログ収集コンフィギュレーションの場合、インテグレーション構成ファイルにあります。[詳細は、ログ収集コンフィギュレーションを参照してください][5]。
 
-**注**: Datadog では、Dockerラベルを使い `service` 値を設定する際のベストプラクティスとして、統合サービスタグ付けの使用をお勧めしています。統合サービスタグ付けは `env`、`service`、`version` の 3 つの標準タグを使用して、ログを含むすべての Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][5]ドキュメントをご参照ください。
+**注**: Datadog では、Dockerラベルを使い `service` 値を設定する際のベストプラクティスとして、統合サービスタグ付けの使用をお勧めしています。統合サービスタグ付けは `env`、`service`、`version` の 3 つの標準タグを使用して、ログを含むすべての Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][6]ドキュメントをご参照ください。
 
 ### 例
 
@@ -204,7 +226,32 @@ labels:
 [複数行の処理規則][1]には、他にもさまざまなパターンが記載されています。
 
 
-[1]: /ja/agent/logs/advanced_log_collection/#multi-line-aggregation
+[1]: /ja/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+{{% /tab %}}
+{{% tab "From file" %}}
+
+Agent v7.25.0 以降/6.25.0 以降では、コンテナのオートディスカバリーラベルに基づくファイルから直接ログを収集できます。このようなログを収集するには、以下のようにコンテナに `com.datadoghq.ad.logs` ラベルを使用して `/logs/app/prod.log` を収集します。
+
+```yaml
+labels:
+    com.datadoghq.ad.logs: '[{"type":"file", "source": "sample_app", "service": "sample_service", "path": "/logs/app/prod.log"}]'
+```
+
+ファイルから収集されたログは、コンテナのメタデータとともにタグ付けされます。ログ収集はコンテナのライフサイクルにリンクされ、コンテナが停止するとそのファイルからのログ収集も停止します。
+
+
+**注**:
+
+- ファイルパスは Agent に**相対的**であるため、ファイルを含むディレクトリは、アプリケーションを実行しているコンテナと Agent コンテナの間で共有される必要があります。たとえば、コンテナが `/logs` をマウントする場合、ファイルにログを作成する各コンテナはログファイルが書き込まれる場所に `/logs/app` のようなボリュームをマウントすることがあります。
+
+- このようなラベルをコンテナに使用する場合、その `stderr`/`stdout` ログは自動的に収集されません。`stderr`/`stdout` およびファイルの両方から収集する必要がある場合は、ラベルを使用して明示的に有効にします。たとえば、
+```yaml
+labels:
+    com.datadoghq.ad.logs: '[{"type":"file", "source": "java", "service": "app", "path": "/logs/app/prod.log"}, {"type": "docker", "source": "app_container", "service": "app"}]'
+```
+
+- このような組み合わせを使用しているとき、`source` と `service` にデフォルト値はなく、オートディスカバリーのラベルで明示的に設定する必要があります。
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -218,13 +265,13 @@ labels:
 
 オートディスカバリーログラベルを使用し、高度なログ収集の処理ロジックを適用します。たとえば、
 
-- [Datadog へ送信する前にログを絞り込む][6]。
-- [ログの機密データのスクラビング][7]。
-- [複数行の集約の実行][8]。
+- [Datadog へ送信する前にログを絞り込む][7]。
+- [ログの機密データのスクラビング][8]。
+- [複数行の集約の実行][9]。
 
 ## コンテナを絞り込む
 
-ログの収集元となるコンテナを管理することができます。これは、たとえば Datadog Agent のログを収集しないようにするのに役立ちます。詳細については[コンテナのディスカバリー管理][9]を参照してください。
+ログの収集元となるコンテナを管理することができます。これは、たとえば Datadog Agent のログを収集しないようにするのに役立ちます。詳細については[コンテナのディスカバリー管理][10]を参照してください。
 
 ## 存続期間が短いコンテナ
 
@@ -232,19 +279,20 @@ Docker 環境では、Agent は Docker イベントによりコンテナのア�
 
 Agent v6.14 以降、Agent はすべてのコンテナ（実行中かは問わず）のログを収集します。つまり、直近の 1 秒間に開始し停止した存続期間の短いコンテナのログは、削除されるまで収集されます。
 
-Kubernetes 環境には、[Kubernetes 存続期間が短いコンテナのドキュメント][10]を参照してください。
+Kubernetes 環境には、[Kubernetes 存続期間が短いコンテナのドキュメント][11]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/journald/
-[2]: /ja/agent/docker/integrations/
-[3]: /ja/agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
-[4]: /ja/agent/logs/#custom-log-collection
-[5]: /ja/getting_started/tagging/unified_service_tagging
-[6]: /ja/agent/logs/advanced_log_collection/?tab=docker#filter-logs
-[7]: /ja/agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
-[8]: /ja/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-[9]: /ja/agent/guide/autodiscovery-management/
-[10]: /ja/agent/kubernetes/log/#short-lived-containers
+[1]: /ja/getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
+[2]: /ja/integrations/journald/
+[3]: /ja/agent/docker/integrations/
+[4]: /ja/agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
+[5]: /ja/agent/logs/#custom-log-collection
+[6]: /ja/getting_started/tagging/unified_service_tagging
+[7]: /ja/agent/logs/advanced_log_collection/?tab=docker#filter-logs
+[8]: /ja/agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
+[9]: /ja/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[10]: /ja/agent/guide/autodiscovery-management/
+[11]: /ja/agent/kubernetes/log/?tab=daemonset#short-lived-containers

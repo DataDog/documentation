@@ -1,4 +1,66 @@
 {
+  "ListAPIKeys": {
+    "description": "List all API keys available for your account.",
+    "summary": "Get all API keys"
+  },
+  "CreateAPIKey": {
+    "description": "Create an API key.",
+    "summary": "Create an API key",
+    "request_description": "",
+    "request_schema_description": "Request used to create an API key."
+  },
+  "DeleteAPIKey": {
+    "description": "Delete an API key.",
+    "summary": "Delete an API key"
+  },
+  "GetAPIKey": {
+    "description": "Get an API key.",
+    "summary": "Get API key"
+  },
+  "UpdateAPIKey": {
+    "description": "Update an API key.",
+    "summary": "Edit an API key",
+    "request_description": "",
+    "request_schema_description": "Request used to update an API key."
+  },
+  "ListApplicationKeys": {
+    "description": "List all application keys available for your org",
+    "summary": "Get all application keys"
+  },
+  "DeleteApplicationKey": {
+    "description": "Delete an application key",
+    "summary": "Delete an application key"
+  },
+  "UpdateApplicationKey": {
+    "description": "Edit an application key",
+    "summary": "Edit an application key",
+    "request_description": "",
+    "request_schema_description": "Request used to update an application key."
+  },
+  "ListCurrentUserApplicationKeys": {
+    "description": "List all application keys available for current user",
+    "summary": "Get all application keys owned by current user"
+  },
+  "CreateCurrentUserApplicationKey": {
+    "description": "Create an application key for current user",
+    "summary": "Create an application key for current user",
+    "request_description": "",
+    "request_schema_description": "Request used to create an application key."
+  },
+  "DeleteCurrentUserApplicationKey": {
+    "description": "Delete an application key owned by current user",
+    "summary": "Delete an application key owned by current user"
+  },
+  "GetCurrentUserApplicationKey": {
+    "description": "Get an application key owned by current user",
+    "summary": "Get one application key owned by current user"
+  },
+  "UpdateCurrentUserApplicationKey": {
+    "description": "Edit an application key owned by current user",
+    "summary": "Edit an application key owned by current user",
+    "request_description": "",
+    "request_schema_description": "Request used to update an application key."
+  },
   "DeleteDashboardListItems": {
     "description": "Delete dashboards from an existing dashboard list.",
     "summary": "Delete items from a dashboard list",
@@ -7,7 +69,7 @@
   },
   "GetDashboardListItems": {
     "description": "Fetch the dashboard list’s dashboard definitions.",
-    "summary": "Get a Dashboard List"
+    "summary": "Get items of a Dashboard List"
   },
   "CreateDashboardListItems": {
     "description": "Add dashboards to an existing dashboard list.",
@@ -101,6 +163,30 @@
     "request_description": "",
     "request_schema_description": "Relationship to role."
   },
+  "ListLogsMetrics": {
+    "description": "Get the list of configured log-based metrics with their definitions.",
+    "summary": "Get all log-based metrics"
+  },
+  "CreateLogsMetric": {
+    "description": "Create a metric based on your ingested logs in your organization.\nReturns the log-based metric object from the request body when the request is successful.",
+    "summary": "Create a log-based metric",
+    "request_description": "The definition of the new log-based metric.",
+    "request_schema_description": "The new log-based metric body."
+  },
+  "DeleteLogsMetric": {
+    "description": "Delete a specific log-based metric from your organization.",
+    "summary": "Delete a log-based metric"
+  },
+  "GetLogsMetric": {
+    "description": "Get a specific log-based metric from your organization.",
+    "summary": "Get a log-based metric"
+  },
+  "UpdateLogsMetric": {
+    "description": "Update a specific log-based metric from your organization.\nReturns the log-based metric object from the request body when the request is successful.",
+    "summary": "Update a log-based metric",
+    "request_description": "New definition of the log-based metric.",
+    "request_schema_description": "The new log-based metric body."
+  },
   "ListRestrictionQueries": {
     "description": "Returns all restriction queries, including their names and IDs.",
     "summary": "List restriction queries"
@@ -150,14 +236,46 @@
     "request_schema_description": "Relationship to role."
   },
   "ListLogsGet": {
-    "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nlogs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "Get a quick list of logs"
+    "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest logs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Get a list of logs"
   },
   "ListLogs": {
-    "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nBoth this endpoint and the GET endpoint can be used interchangeably when listing\nlogs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "Get a list of logs",
+    "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex logs filtering and search.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Search logs",
     "request_description": "",
     "request_schema_description": "The request for a logs list."
+  },
+  "ListTagConfigurations": {
+    "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
+    "summary": "List tag configurations"
+  },
+  "ListTagsByMetricName": {
+    "description": "View indexed tag key-value pairs for a given metric name.",
+    "summary": "List tags by metric name"
+  },
+  "DeleteTagConfiguration": {
+    "description": "Deletes a metric's tag configuration. Can only be used with application\nkeys from users with the `Manage Tags for Metrics` permission.",
+    "summary": "Delete a tag configuration"
+  },
+  "ListTagConfigurationByName": {
+    "description": "Returns the tag configuration for the given metric name.",
+    "summary": "List tag configuration by name"
+  },
+  "UpdateTagConfiguration": {
+    "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
+    "summary": "Update a tag configuration",
+    "request_description": "",
+    "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
+  },
+  "CreateTagConfiguration": {
+    "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "summary": "Create a tag configuration",
+    "request_description": "",
+    "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
+  },
+  "ListVolumesByMetricName": {
+    "description": "View distinct metrics volumes for the given metric name.\n\nCustom distribution metrics will return both ingested and indexed custom metric volumes.\nFor Metrics without Limits&trade; beta customers, all metrics will return both ingested/indexed volumes.\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+    "summary": "List distinct metric volumes by metric name"
   },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",

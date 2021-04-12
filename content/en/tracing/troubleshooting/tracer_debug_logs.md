@@ -9,21 +9,29 @@ Use Datadog debug settings to diagnose issues or audit trace data. We don't reco
 
 Debug mode is disabled by default. To enable it, follow the corresponding language tracer instructions:
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+
+{{< programming-lang lang="java" >}}
 
 To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
-**Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file: `-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+**Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file: 
+```
+-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+```
 
 [1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
-{{% /tab %}}
-{{% tab "Python" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
 
 To enable debug mode for the Datadog Python Tracer, set the environment variable `DATADOG_TRACE_DEBUG=true` when using `ddtrace-run`.
+<p></p>
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 To enable debug mode for the Datadog Ruby Tracer, set the `debug` option to `true` in the tracer initialization configuration:
 
@@ -53,8 +61,10 @@ Datadog::Tracer.log.info { "this is typically called by tracing code" }
 See [the API documentation][1] for more details.
 
 [1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
-{{% /tab %}}
-{{% tab "Go" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 To enable debug mode for the Datadog Go Tracer, enable the debug mode during the `Start` config:
 
@@ -69,9 +79,9 @@ func main() {
 }
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab "Node" %}}
+{{< programming-lang lang="nodejs" >}}
 
 To enable debug mode for the Datadog Node.js Tracer, enable it during its `init`:
 
@@ -120,8 +130,10 @@ For more tracer settings, check out the [API documentation][5].
 [3]: /help/
 [4]: /agent/troubleshooting/#send-a-flare
 [5]: https://datadog.github.io/dd-trace-js/#tracer-settings
-{{% /tab %}}
-{{% tab ".NET" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
 
 To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), or in a `datadog.json` file. Alternatively, you can enable debug mode by calling `GlobalSettings.SetDebugEnabled(true)`:
 
@@ -144,10 +156,16 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 
 For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
 
+There are two types of logs that are created in these paths:
+1. **Logs from native code:** In 1.21.0 and higher, these logs are saved as `dotnet-tracer-native.log`. In 1.20.x and older versions, this was stored as `dotnet-profiler.log`.
+2. **Logs from managed code:** In 1.21.0 and higher, these logs are saved `dotnet-tracer-managed-<processname>-<date>.log`. In 1.20.x and older versions, this was stored as `dotnet-tracer-<processname>-<date>.log`.
+
 
 [1]: /tracing/setup/dotnet/#configuration
-{{% /tab %}}
-{{% tab "PHP" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="php" >}}
 
 To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
@@ -158,8 +176,10 @@ If you are using an NGINX server, use the `error_log` directive.
 If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
 [1]: https://www.php-fig.org/psr/psr-3
-{{% /tab %}}
-{{% tab "C++" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="cpp" >}}
 
 The release binary libraries are all compiled with debug symbols added to the optimized release. You can use GDB or LLDB to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
 
@@ -170,8 +190,9 @@ make
 make install
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 ### Review Tracer debug logs
 
@@ -179,17 +200,16 @@ When debug mode for your tracer is enabled, tracer-specific log messages report 
 
 If there are errors that you don't understand, or if traces are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][2].
 
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
 
-{{< tabs >}}
-{{% tab "Java" %}}
-
-### Intialization log for the tracer
+**Intialization log for the tracer:**
 
 ```java
 [main] DEBUG datadog.trace.agent.ot.DDTracer - Using config: Config(runtimeId=<runtime ID>, serviceName=<service name>, traceEnabled=true, writerType=DDAgentWriter, agentHost=<IP HERE>, agentPort=8126, agentUnixDomainSocket=null, prioritySamplingEnabled=true, traceResolverEnabled=true, serviceMapping={}, globalTags={env=none}, spanTags={}, jmxTags={}, excludedClasses=[], headerTags={}, httpServerErrorStatuses=[512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511], httpClientErrorStatuses=[400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499], httpClientSplitByDomain=false, partialFlushMinSpans=1000, runtimeContextFieldInjection=true, propagationStylesToExtract=[DATADOG], propagationStylesToInject=[DATADOG], jmxFetchEnabled=true, jmxFetchMetricsConfigs=[], jmxFetchCheckPeriod=null, jmxFetchRefreshBeansPeriod=null, jmxFetchStatsdHost=null, jmxFetchStatsdPort=8125, logsInjectionEnabled=false, reportHostName=false)
 ```
 
-### Example of traces being generated
+**Example of traces being generated:**
 
 ```java
 [http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.DDSpan - Finished: DDSpan [ t_id=<trace id>, s_id=<span id>, p_id=<parent id>] trace=SpringBoot_Service/OperationHandler.handle/OperationHandler.handle metrics={} tags={component=spring-web-controller, env=none, span.kind=server, thread.id=33, thread.name=http-nio-8080-exec-1}, duration_ns=92808848
@@ -198,27 +218,25 @@ If there are errors that you don't understand, or if traces are reported as flus
 [http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - Writing 2 spans to DDAgentWriter { api=DDApi { tracesUrl=http://<IP address>/v0.4/traces } }.
 ```
 
-### Traces were sent to the Datadog Agent
+**Traces were sent to the Datadog Agent:**
 
 ```java
 [http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - traceId: <trace id> -- Expired reference. count = 0
 [dd-trace-writer] DEBUG datadog.trace.agent.common.writer.DDApi - Successfully sent 1 of 2 traces to the DD agent.
 ```
 
-
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
 
-### Traces were generated
+**Traces were generated:**
 
 ```shell
 <YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:470] - writing 8 spans (enabled:True)
 ```
 
-
-### Span generated by the Python tracer
+**Span generated by the Python tracer:**
 
 ```text
 <YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:472] -
@@ -245,17 +263,16 @@ For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
 ```
 
 
-### Traces were sent to the Datadog Agent
+**Traces were sent to the Datadog Agent:**
 
 ```shell
 <YYYY-MM-DD> 16:01:11,637 DEBUG [ddtrace.api] [api.py:236] - reported 1 traces in 0.00207s
 ```
 
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-### Span is generated
+**Span is generated:**
 
 ```shell
 D, [<YYYY-MM-DD>T16:42:51.147563 #476] DEBUG -- ddtrace: [ddtrace] (/usr/local/bundle/gems/ddtrace-<version>/lib/ddtrace/tracer.rb:371:in `write') Writing 4 spans (enabled: true)
@@ -287,27 +304,30 @@ Metrics: [
 ```
 
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
 
-###  Trace submission attempt to the Agent
+{{< programming-lang lang="go" >}}
+
+
+**Trace submission attempt to the Agent:**
 
 ```shell
 YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size of traces> traces: <number of traces>.
 ```
 
 
-###  Trace failed to send to the Agent
+**Trace failed to send to the Agent:**
 
 ```shell
 2019/08/07 16:12:27 Datadog Tracer <version> ERROR: lost <number of traces> traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused, 4 additional messages skipped (first occurrence: DD MM YY 16:11 UTC)
 ```
 
 
-{{% /tab %}}
-{{% tab "Node" %}}
+{{< /programming-lang >}}
 
-### Issue sending trace to the Agent
+{{< programming-lang lang="nodejs" >}}
+
+**Issue sending trace to the Agent:**
 
 ```json
 {
@@ -327,17 +347,20 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 ```
 
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
 
-### Profiler log
+{{< programming-lang lang=".NET" >}}
+
+For performance reasons, the tracer writes each unique log message at most once in a 60 second period. For more visibility during debugging, disable rate limiting by setting the environment variable `DD_TRACE_LOGGING_RATE=0`.
+
+**Logs from native code:**
 
 ```shell
 [dotnet] 19861: [debug] JITCompilationStarted: function_id=<function id> token=<token id> name=System.Net.Http.Headers.HttpHeaders.RemoveParsedValue()
 ```
 
 
-### Tracer logs showing spans were generated
+**Logs from managed code showing spans were generated:**
 
 ```shell
 { MachineName: ".", ProcessName: "dotnet", PID: <process id>, AppDomainName: "test-webapi" }
@@ -346,8 +369,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span started: [s_id: <span id>, p_id:
 YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span closed: [s_id: <span id>, p_id: <parent span id>, t_id: <trace id>] for (Service: test-webapi, Resource: custom, Operation: custom.function, Tags: [<span tags>])
 ```
 
-
-### Tracer logs showing traces couldn't be sent to the Datadog Agent
+**Logs from managed code showing traces couldn't be sent to the Datadog Agent:**
 
 ```shell
 YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending traces to the agent at System.Net.Http.HttpRequestException: Connection refused ---> System.Net.Sockets.SocketException: Connection refused
@@ -356,10 +378,12 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 ```
 
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
 
-### Generating a span
+{{< programming-lang lang="php" >}}
+
+
+**Generating a span:**
 
 ```shell
 [Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <span id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
@@ -367,23 +391,23 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 
 
-### Attempt to send a trace to the Agent
+**Attempt to send a trace to the Agent:**
 
 ```shell
 [Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
 ```
 
 
-### Trace successfully sent to the Agent
+**Trace successfully sent to the Agent:**
 
 ```shell
 [Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
 ```
 
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
 
+{{< /programming-lang-wrapper >}}
 
 [1]: /help/
 [2]: /agent/troubleshooting/#send-a-flare

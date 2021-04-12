@@ -55,6 +55,10 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 Enable monitor renotification (optional), which is useful to remind your team a problem is not solved. If enabled, you are given the option to include an escalation message sent any time the monitor renotifies. The original notification message is also included.
 
+### Priority
+
+Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
+
 ## Notify your team
 
 Use this section to send notifications to your team through email, Slack, PagerDuty, etc. You can search for team members and connected integrations with the drop-down box. When an `@notification` is added to this section, the notification is automatically added to the [message](#message) field.
@@ -158,6 +162,16 @@ If your facet has periods, use brackets around the facet, for example:
 {{ [@network.client.ip].name }}
 ```
 
+#### Composite monitor variables
+
+Composite monitors can access the value associated with the sub-monitors at the time the alert triggers. 
+
+For example, if your composite monitor has sub-monitor `a`, you can include the value of `a` with:
+
+```text
+{{ a.value }}
+```
+
 ### Conditional variables
 
 Conditional variables use `if-else` logic to display a different message depending on the state of the monitor and the details of how it was triggered. These variables can be used within the subject or body of the notification message.
@@ -186,6 +200,9 @@ The following conditional variables are available:
 | `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
 | `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
 | `{{^is_no_data_recovery}}` | The monitor does not recover from `NO DATA`                        |
+| `{{#is_priority 'value'}}`  | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
+| `{{#is_unknown}}`          | The monitor is in the unknown state                                |
+| `{{^is_unknown}}`          | The monitor is not in the unknown state                            |
 
 #### Examples
 
@@ -438,7 +455,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [8]: /integrations/slack/#mentions-in-slack-from-monitor-alert
 [9]: /integrations/webhooks/
 [10]: /integrations/webhooks/#usage
-[11]: https://docs.datadoghq.com/integrations/#cat-collaboration
+[11]: /integrations/#cat-notification
 [12]: /events/
 [13]: /monitors/guide/template-variable-evaluation/
 [14]: /monitors/faq/what-are-recovery-thresholds/

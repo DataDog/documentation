@@ -6,8 +6,6 @@ description: iOS アプリケーションから RUM データを収集します�
 kind: documentation
 title: iOS RUM 収集
 ---
-<div class="alert alert-info">iOS RUM の収集はベータ版です。ご質問がございましたら、<a href="https://docs.datadoghq.com/help/" target="_blank">サポートチーム</a>までお問い合わせください。</div>
-
 [Datadog の `dd-sdk-ios` クライアント側 RUM SDK][2] を使用すると、iOS アプリケーションから Datadog へ[リアルユーザーモニタリングのデータ][1]を送信すると共に、次の機能を利用できます。
 
 * アプリのパフォーマンスおよびデモグラフィックに関する全体像を把握。
@@ -23,7 +21,7 @@ title: iOS RUM 収集
 
 [CocoaPods][4] を使用して、`dd-sdk-ios` をインストールできます。
 ```
-pod 'DatadogSDK', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :tag => '1.4.0-beta1'
+pod 'DatadogSDK'
 ```
 
 [4]: https://cocoapods.org/
@@ -33,7 +31,7 @@ pod 'DatadogSDK', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :tag => '
 
 Apple の [Swift Package Manager][5] を使用して SDK を統合するには、`Package.swift` に以下を依存関係として追加します。
 ```swift
-.package(url: "https://github.com/DataDog/dd-sdk-ios.git", .exact("1.4.0-beta1"))
+.package(url: "https://github.com/DataDog/dd-sdk-ios.git", .upToNextMajor(from: "1.0.0"))
 ```
 
 [5]: https://swift.org/package-manager/
@@ -43,7 +41,7 @@ Apple の [Swift Package Manager][5] を使用して SDK を統合するには�
 
 [Carthage][6] を使用して、`dd-sdk-ios` をインストールできます。
 ```
-github "DataDog/dd-sdk-ios" "1.4.0-beta1"
+github "DataDog/dd-sdk-ios"
 ```
 
 [6]: https://github.com/Carthage/Carthage
@@ -59,6 +57,7 @@ github "DataDog/dd-sdk-ios" "1.4.0-beta1"
 ```swift
 Datadog.initialize(
     appContext: .init(),
+    trackingConsent: trackingConsent,
     configuration: Datadog.Configuration
         .builderUsing(
             rumApplicationID: "<rum_application-id>",
@@ -76,6 +75,7 @@ Datadog.initialize(
 ```swift
 Datadog.initialize(
     appContext: .init(),
+    trackingConsent: trackingConsent,
     configuration: Datadog.Configuration
         .builderUsing(
             rumApplicationID: "<rum_application-id>",
@@ -83,13 +83,26 @@ Datadog.initialize(
             environment: "<environment_name>"
         )
         .set(serviceName: "app-name")
-        .set(rumEndpoint: .eu)
+        .set(endpoint: .eu)
         .build()
 )
 ```
 
     {{% /tab %}}
     {{< /tabs >}}
+
+   GDPR 規制に準拠するために、SDK では初期化時に `trackingConsent` 値が必要です。
+   `trackingConsent` は、次のいずれかの値になります。
+
+    - `.pending` - SDK はデータの収集とバッチ処理を開始しますが、Datadog に送信しません。SDK は、新しい追跡同意値がバッチデータをどう処理するかを決定するのを待ちます。
+    - `.granted` - SDK はデータの収集を開始し、Datadog に送信します。
+    - `.notGranted` - SDK はデータを収集しません。ログ、トレース、RUM イベントは Datadog に送信されません。
+
+   SDK の初期化後に追跡同意値を変更するには、`Datadog.set(trackingConsent:)` API 呼び出しを使用します。
+   SDK は、新しい値に応じて動作を変更します。たとえば、現在の追跡同意が `.pending` の場合:
+
+    - `.granted` に変更すると、SDK は現在および将来のすべてのデータを Datadog に送信します。
+    - `.notGranted` に変更すると、SDK は現在のすべてのデータを消去し、将来のデータを収集しません。
 
 3. RUM Monitor を構成して登録します。通常は `AppDelegate` コードで、一度だけ実行する必要があります。
 
@@ -110,17 +123,17 @@ RUM SDK には、次の 2 つのインスツルメンテーション方法があ
 
 ### RUM ビュー
 
-RUM ビューの追跡を有効にするには、SDK を構成するときに `.trackUIKitRUMViews(using:)` オプションを使用します。
+RUM ビューの追跡を有効にするには、SDK を構成するときに `.trackUIKitRUMViews()` オプションを使用します。
 ```swift
 Datadog.Configuration
    .builderUsing(...)
-   .trackUIKitRUMViews(using: predicate)
+   .trackUIKitRUMViews()
    .build()
 
 Global.rum = RUMMonitor.initialize()
 ```
 
-`predicate` は、`UIKitRUMViewsPredicate` プロトコルに準拠するタイプである必要があります。
+RUM ビューの追跡をカスタマイズするには、`.trackUIKitRUMViews(using: predicate)` を使用し、`UIKitRUMViewsPredicate` プロトコルに準拠する `predicate` の独自の実装を提供します。
 ```swift
 public protocol UIKitRUMViewsPredicate {
     func rumView(for viewController: UIViewController) -> RUMView?
@@ -155,11 +168,11 @@ let session = URLSession(
 
 ### RUM アクション
 
-RUM アクションの追跡を有効にするには、SDK を構成するときに `.trackUIKitActions(_:)` オプションを使用します。
+RUM アクションの追跡を有効にするには、SDK を構成するときに `.trackUIKitActions()` オプションを使用します。
 ```
 Datadog.Configuration
    .builderUsing(...)
-   .trackUIKitActions(true)
+   .trackUIKitActions()
    .build()
 
 Global.rum = RUMMonitor.initialize()
@@ -254,7 +267,7 @@ Global.rum.stopResourceLoading(
 }
 ```
 
-**注**: `.startUserAction(type:name:)` と `.stopUserAction(type:)` を使用する場合。これは、SDK がリソースの開始と完了を一致させるために必要です。
+**注**: `.startUserAction(type:name:)` と `.stopUserAction(type:)` を使用する場合、アクション `type` は同じである必要があります。これは、SDK がリソースの開始と完了を一致させるために必要です。
 
 詳細と使用可能なオプションについては、`DDRUMMonitor` クラスのコードドキュメントのコメントを参照してください。
 
@@ -272,6 +285,51 @@ Global.rum.addError(message: "error message.")
 ```
 
 詳細と使用可能なオプションについては、`DDRUMMonitor` クラスのコードドキュメントのコメントを参照してください。
+
+## データスクラビング
+
+Datadog に送信される前に RUM イベントの属性を変更したり、イベントを完全に削除したりするには、SDK を構成するときにイベントマッパー API を使用します。
+```swift
+Datadog.Configuration
+    .builderUsing(...)
+    .setRUMViewEventMapper { viewEvent in 
+        return viewEvent
+    }
+    .setRUMErrorEventMapper { errorEvent in
+        return errorEvent
+    }
+    .setRUMResourceEventMapper { resourceEvent in
+        return resourceEvent
+    }
+    .setRUMActionEventMapper { actionEvent in
+        return actionEvent
+    }
+    .build()
+```
+各マッパーは、`(T) -> T?` のシグネチャを持つ Swift クロージャです。ここで、`T` は具体的な RUM イベントタイプです。これにより、イベントが送信される前にイベントの一部を変更できます。たとえば、RUM リソースの `url` で機密情報を編集するには、カスタムの `redacted(_:) -> String` 関数を実装し、それを `RUMResourceEventMapper` で使用します。
+```swift
+.setRUMResourceEventMapper { resourceEvent in
+    var resourceEvent = resourceEvent
+    resourceEvent.resource.url = redacted(resourceEvent.resource.url)
+    return resourceEvent
+}
+```
+エラー、リソース、またはアクションマッパーから `nil` を返すと、イベントは完全にドロップされます (Datadog に送信されません)。ビューイベントマッパーから返される値は `nil` であってはなりません。
+
+特定のイベントのタイプに応じて、一部の特定のプロパティのみを変更できます。
+
+| イベントタイプ        | 属性キー                     | 説明                                     |
+|-------------------|-----------------------------------|-------------------------------------------------|
+| RUMViewEvent      | `viewEvent.view.name`             | ビューの名前                                 |
+|                   | `viewEvent.view.url`              | ビューの URL                                 |
+| RUMActionEvent    | `actionEvent.action.target?.name` | アクションの名前                              |
+|                   | `actionEvent.view.url`            | このアクションにリンクされているビューの URL           |
+| RUMErrorEvent     | `errorEvent.error.message`        | エラーメッセージ                                   |
+|                   | `errorEvent.error.stack`          | エラーのスタックトレース                         |
+|                   | `errorEvent.error.resource?.url`  | エラーが参照するリソースの URL         |
+|                   | `errorEvent.view.url`             | このエラーにリンクされているビューの URL            |
+| RUMResourceEvent  | `resourceEvent.resource.url`      | リソースの URL                             |
+|                   | `resourceEvent.view.url`          | このリソースにリンクされているビューの URL         |
 
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/data_collected/
 [2]: https://github.com/DataDog/dd-sdk-ios

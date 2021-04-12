@@ -55,7 +55,7 @@ En plus des métriques, l'Agent Datadog envoie également des checks de service 
 
 ### Installation
 
-Les étapes ci-dessous sont toutes nécessaires pour faire fonctionner l'intégration Airflow. Avant de commencer, [installez l'Agent Datadog][3] version `>=6.17` ou `>=7.17` pour bénéficier de la fonctionnalité de mapping StatsD/DogStatsD.
+Les étapes ci-dessous sont toutes nécessaires pour faire fonctionner l'intégration Airflow. Avant de commencer, [installez l'Agent Datadog][3] version `>=6.17` ou `>=7.17` pour bénéficier de la fonctionnalité de mappage StatsD/DogStatsD.
 
 ### Configuration
 
@@ -108,6 +108,10 @@ Connectez Airflow à DogStatsD (inclus avec l'Agent Datadog) via la fonctionnali
            name: "airflow.job.end"
            tags:
              job_name: "$1"
+         - match: "airflow.*_heartbeat_failure"
+           name: airflow.job.heartbeat.failure
+           tags:
+             job_name: "$1"
          - match: "airflow.operator_failures_*"
            name: "airflow.operator_failures"
            tags:
@@ -131,6 +135,10 @@ Connectez Airflow à DogStatsD (inclus avec l'Agent Datadog) via la fonctionnali
            name: "airflow.dag.loading_duration"
            tags:
              dag_file: "$1"
+         - match: "airflow.dagrun.*.first_task_scheduling_delay"
+           name: "airflow.dagrun.first_task_scheduling_delay"
+           tags:
+             dag_id: "$1"
          - match: "airflow.pool.open_slots.*"
            name: "airflow.pool.open_slots"
            tags:
@@ -380,5 +388,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [2]: https://docs.datadoghq.com/fr/developers/dogstatsd/
 [3]: https://docs.datadoghq.com/fr/agent/
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://airflow.apache.org/docs/stable/_modules/airflow/contrib/hooks/datadog_hook.html
+[5]: https://airflow.apache.org/docs/apache-airflow-providers-datadog/stable/_modules/airflow/providers/datadog/hooks/datadog.html
 [6]: https://docs.datadoghq.com/fr/help/

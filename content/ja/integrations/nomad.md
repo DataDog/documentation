@@ -37,6 +37,8 @@ supported_os:
   - mac_os
   - windows
 ---
+[!Nomad ダッシュボード][1]
+
 ## 概要
 
 Nomad クラスターからメトリクスを収集して、以下のことができます。
@@ -44,11 +46,13 @@ Nomad クラスターからメトリクスを収集して、以下のことが�
 - クラスターのパフォーマンスを視覚化および監視できます。
 - クラスターの健全性と可用性に関するアラートを生成できます。
 
+推奨されるモニターを使用して、さまざまな Nomad イベントに関する通知を受け取ることができます。
+
 ## セットアップ
 
 ### インストール
 
-Nomad は、メトリクスを DogStatsD 経由で Datadog に送信します。Nomad インテグレーションを有効にするには、各クライアントおよびサーバーホストに [Datadog Agent をインストール][1]します。
+Nomad は、メトリクスを DogStatsD 経由で Datadog に送信します。Nomad インテグレーションを有効にするには、各クライアントおよびサーバーホストに [Datadog Agent をインストール][2]します。
 
 ### コンフィギュレーション
 
@@ -82,8 +86,9 @@ Nomad チェックには、サービスのチェック機能は含まれませ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/integrations-extras/blob/master/nomad/metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/nomad/images/dashboard_overview.png
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://github.com/DataDog/integrations-extras/blob/master/nomad/metadata.csv
+[4]: https://docs.datadoghq.com/ja/help/

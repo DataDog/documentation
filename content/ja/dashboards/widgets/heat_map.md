@@ -2,6 +2,7 @@
 title: ヒートマップウィジェット
 kind: documentation
 description: 特定のメトリクスの時系列ヒートマップを構築する
+widget_type: ヒートマップ
 aliases:
   - /ja/graphing/widgets/heat_map/
 further_reading:
@@ -59,61 +60,19 @@ Y 軸の目盛を変更するには、Y-Axis Controls ボタンを展開しま�
 
 | オプション                | 必須 | 説明                                                                                                                                                                                                       |
 |-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Min`/`Max`           | いいえ       | Y 軸に表示する最小値または最大値、またはその両方を指定します。数値または `Auto` (デフォルト値を使用) を指定します。                                                                                                   |
-| `Scale`               | いいえ       | 目盛のタイプを指定します。使用可能な値:<br>- linear: 線形目盛 (デフォルト)<br>- log: 対数目盛<br>- pow: 2 の累乗目盛 (2 はデフォルトです。JSON で変更できます)<br>- sqrt: 平方根目盛 |
-| `Always include zero` | いいえ       | 常に 0 を含めるか、軸をデータの範囲に合わせるかを指定します。デフォルトは、常に 0 を含めます。                                                                                                                     |
+| `Min`/`Max`           | ✕       | Y 軸に表示する最小値または最大値、またはその両方を指定します。数値または `Auto` (デフォルト値を使用) を指定します。                                                                                                   |
+| `Scale`               | ✕       | 目盛のタイプを指定します。使用可能な値:<br>- linear: 線形目盛 (デフォルト)<br>- log: 対数目盛<br>- pow: 2 の累乗目盛 (2 はデフォルトです。JSON で変更できます)<br>- sqrt: 平方根目盛 |
+| `Always include zero` | ✕       | 常に 0 を含めるか、軸をデータの範囲に合わせるかを指定します。デフォルトは、常に 0 を含めます。                                                                                                                     |
 
 **注**: 対数関数には負の値を適用できないため、Datadog の対数目盛は、値の符号がすべて同じ (すべて正またはすべて負) の場合にのみ機能します。そうでない場合は、空のグラフが返されます。
 
 ## API
 
-ヒートマップウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][3] ドキュメントをご参照ください。
 
-```text
-HEATMAP_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["heatmap"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "yaxis":  AXIS_SCHEMA,
-        "events": EVENTS_SCHEMA,
-        "title":   {"type": "string"},
-        "show_legend": {"type": "boolean"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+ヒートマップウィジェットの[ウィジェット JSON スキーマ定義][4]は次のとおりです。
 
-| パラメーター     | 種類             | 必須 | 説明                                                                                                                                                  |
-|---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | はい      | ウィジェットのタイプ。ヒートマップウィジェットには `heatmap` を使用します。                                                                                                        |
-| `requests`    | オブジェクトの配列 | はい      | ウィジェットに表示する 1 つの `request` オブジェクトの配列。`REQUEST_SCHEMA` の作成方法については、[リクエスト JSON スキーマに関するドキュメント][4]を参照してください。 |
-| `yaxis`       | object           | いいえ       | Y 軸コントロールのオプション。`<AXIS_SCHEMA>` の作成方法については、[Y 軸 JSON スキーマに関するドキュメント][5]を参照してください。                                   |
-| `events`      | object           | いいえ       | イベントオーバーレイコントロールのオプション。`<EVENTS_SCHEMA>` の作成方法については、[イベント JSON スキーマに関するドキュメント][6]を参照してください。                           |
-| `title`       | string           | いいえ       | ウィジェットのタイトル。                                                                                                                                        |
-| `show_legend` | boolean          | いいえ       | （スクリーンボードのみ）このウィジェットのレジェンドを表示                                                                                                           |
-
-`requests` オブジェクトでは、以下のプロパティも使用できます。
-
-```json
-{
-  "style": {
-    "type": "object",
-    "properties": {"palette": {"type": "string"}},
-    "additionalProperties": false
-  }
-}
-```
-
-| パラメーター       | 種類   | 必須 | 説明                           |
-|-----------------|--------|----------|---------------------------------------|
-| `style.palette` | string | いいえ       | ウィジェットに適用するカラーパレット。 |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
@@ -121,7 +80,5 @@ HEATMAP_SCHEMA = {
 
 [1]: /ja/events/
 [2]: /ja/dashboards/template_variables/
-[3]: /ja/dashboards/graphing_json/widget_json/
-[4]: /ja/dashboards/graphing_json/request_json/
-[5]: /ja/dashboards/graphing_json/widget_json/#y-axis-schema
-[6]: /ja/dashboards/graphing_json/widget_json/#events-schema
+[3]: /ja/api/v1/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

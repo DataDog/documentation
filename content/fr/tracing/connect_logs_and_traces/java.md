@@ -24,9 +24,22 @@ Si vos logs sont au format JSON et que vous utilisez Logback, vous n'avez plus r
 
 Si vos logs sont au format brut, modifiez votre formateur en ajoutant `dd.trace_id` et `dd.span_id` à la configuration de votre logger :
 
+{{< tabs >}}
+{{% tab "Log4j2" %}}
+
+```xml
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
+```
+
+{{% /tab %}}
+{{% tab "slf4j/logback" %}}
+
 ```xml
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **Remarque** : si le `attribute.path` de votre ID de trace ne correspond **pas** à `dd.trace_id`, assurez-vous que les paramètres des attributs réservés de votre ID de trace prennent en compte le `attribute.path`. Pour en savoir plus, consultez la [FAQ à ce sujet][2].
 
@@ -59,6 +72,12 @@ finally {
     ThreadContext.remove("dd.trace_id");
     ThreadContext.remove("dd.span_id");
 }
+```
+
+Modifiez ensuite la configuration de votre logger en ajoutant `dd.trace_id` et `dd.span_id` à votre pattern de log :
+
+```xml
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
 {{% /tab %}}

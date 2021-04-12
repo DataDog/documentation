@@ -29,34 +29,16 @@ further_reading:
 
 ## API
 
-フリーテキストウィジェットの[ウィジェット JSON スキーマ定義][2]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
 
-```text
-FREE_TEXT_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["free_text"]},
-        "text": {"type": "string"},
-        "color": {"type": "string"},
-        "font_size": {"type": "string"},
-        "text_align": {"enum": ["center", "left", "right"]}
-    },
-    "required": ["type", "text"],
-    "additionalProperties": false
-}
-```
+フリーテキストウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
-| パラメーター    | 種類   | 必須 | 説明                                                                             |
-|--------------|--------|----------|-----------------------------------------------------------------------------------------|
-| `type`       | string | はい      | ウィジェットのタイプ。フリーテキストウィジェットには `free_text` を使用します。                            |
-| `text`       | string | はい      | 表示するテキスト                                                                         |
-| `color`      | string | いいえ       | テキストの色                                                                       |
-| `font_size`  | string | いいえ       | テキストのサイズ                                                                        |
-| `text_align` | string | いいえ       | ウィジェットにテキストを配置する方法。有効な値は `center`、`left`、`right` です。 |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/dashboards/screenboard/
-[2]: /ja/dashboards/graphing_json/widget_json/
+[2]: /ja/api/v1/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

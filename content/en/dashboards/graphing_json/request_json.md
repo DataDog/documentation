@@ -46,7 +46,7 @@ You can apply functions to the result of each query.
 
 For more information about functions explained through a series of examples, see the [examples page][1].
 
-#### Aggregation Method
+#### Aggregation method
 
 In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average, max, min, and sum.
 
@@ -95,7 +95,7 @@ You can also add, subtract, multiply, and divide a series. Note that Datadog doe
 {"viz": "timeseries", "requests": [{"q": "metric{apples} / metric{oranges}"}]}
 ```
 
-## Stacked Series
+## Stacked series
 
 {{< img src="dashboards/graphing_json/slice-n-stack.png" alt="slice and stack"  >}}
 

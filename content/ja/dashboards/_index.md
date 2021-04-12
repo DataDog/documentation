@@ -14,15 +14,21 @@ further_reading:
   - link: /dashboards/template_variables/
     tag: ドキュメント
     text: テンプレート変数を使用してダッシュボードを強化
+  - link: 'https://www.datadoghq.com/blog/template-variable-associated-values/'
+    tag: ブログ
+    text: 関連するテンプレート変数を使用してダッシュボードを調整
   - link: /dashboards/sharing/
     tag: ドキュメント
     text: Datadogの外部でグラフを共有
   - link: /dashboards/widgets/
-    tag: ドキュメント
+    tag: Documentation
     text: ダッシュボードで利用可能なすべてのウィジェット
   - link: '/mobile/#dashboards'
     tag: Documentation
     text: ダッシュボードをモバイルアプリで確認
+  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+    tag: ブログ
+    text: ダッシュボードウィジェットをクリップボードに追加する
 ---
 ## 概要
 
@@ -48,11 +54,11 @@ further_reading:
 
 左側のサイドバーには、お気に入り、プリセット、編集可能な共有リストが表示されます。**Hide Controls** リンクを使用すると、このサイドバーを非表示にすることができます。
 
-#### Favorite Lists
+#### お気に入りリスト
 
 Favorite lists (お気に入りリスト) は、現在ログインしているユーザーがスターを付けたダッシュボードのリストです。**注**: スター付きのリストがない場合、*Favorite Lists* のカテゴリは非表示になります。
 
-#### Preset Lists
+#### プリセットリスト
 
 Preset lists (プリセットリスト) は、Datadog でデフォルトのダッシュボードリストです。
 
@@ -64,11 +70,11 @@ Preset lists (プリセットリスト) は、Datadog でデフォルトのダ�
 | Created By You           | 現在ログイン中のユーザーにより作成されたカスタムダッシュボード。                |
 | Frequently Viewed By You | 現在ログイン中のユーザーが頻繁に表示するすべてのダッシュボード。         |
 
-#### Shared, Editable Lists
+#### 共有、編集可能リスト
 
 このセクションには、編集可能な共有ダッシュボードのリストがダッシュボード数とともに表示されます。
 
-### All Dashboards
+### すべてのダッシュボード
 
 ここに表示されるすべてのダッシュボードは、*スター*、*名前*、*変更日時*、*人気度*の列ヘッダーを使用して並べ替えることができます。すべての列とその説明は以下のとおりです。
 
@@ -100,7 +106,7 @@ Datadog には、[スクリーンボード][4]と[タイムボード][3]の 2 �
 | 時間スコープ                 | すべてのグラフで同じ時間スコープが共有されます。 | グラフには、個別の時間スコープを設定できます。   |
 | レイアウト                     | グラフは固定グリッドに表示されます。 | グラフはキャンバス上のどこにでも配置できます。 |
 | グラフの個別共有  | 〇                                   | ✕                                        |
-| ダッシュボード全体の共有 | ✕                                    | はい                                       |
+| ダッシュボード全体の共有 | 〇                                   | 〇                                       |
 | 共有を読み取り専用に設定   | 〇                                   | 〇                                       |
 
 ### コピー / インポート / エクスポート

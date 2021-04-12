@@ -8,11 +8,11 @@
   "service_checks": assets/service_checks.json
 "categories":
 - orchestration
-- issue-tracking
+- 問題追跡
 - コラボレーション
-- source-control
+- ソースコントロール
 "creates_events": false
-"ddtype": "check"
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md"
 "display_name": "Sleuth"

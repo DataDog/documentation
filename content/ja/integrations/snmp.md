@@ -2,7 +2,9 @@
 aliases:
   - /ja/agent/faq/how-to-monitor-snmp-devices/
 assets:
-  dashboards: {}
+  dashboards:
+    Datacenter Overview: assets/dashboards/datacenter_overview.json
+    Interface Performance: assets/dashboards/interface_performance.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}

@@ -4,6 +4,116 @@ components:
   headers: {}
   links: {}
   parameters:
+    APIKeyFilterCreatedAtEndParameter:
+      description: Only include API keys created on or before the specified date.
+      in: query
+      name: filter[created_at][end]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    APIKeyFilterCreatedAtStartParameter:
+      description: Only include API keys created on or after the specified date.
+      in: query
+      name: filter[created_at][start]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    APIKeyFilterModifiedAtEndParameter:
+      description: Only include API keys modified on or before the specified date.
+      in: query
+      name: filter[modified_at][end]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    APIKeyFilterModifiedAtStartParameter:
+      description: Only include API keys modified on or after the specified date.
+      in: query
+      name: filter[modified_at][start]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    APIKeyFilterParameter:
+      description: Filter API keys by the specified string.
+      in: query
+      name: filter
+      required: false
+      schema:
+        type: string
+    APIKeyId:
+      description: The ID of the API key.
+      in: path
+      name: api_key_id
+      required: true
+      schema:
+        type: string
+    APIKeyIncludeParameter:
+      description: Comma separated list of resource paths for related resources to
+        include in the response. Supported resource paths are `created_by` and `modified_by`.
+      in: query
+      name: include
+      required: false
+      schema:
+        example: created_by,modified_by
+        type: string
+    APIKeysSortParameter:
+      description: 'API key attribute used to sort results. Sort order is ascending
+
+        by default. In order to specify a descending sort, prefix the
+
+        attribute with a minus sign.'
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/APIKeysSort'
+    ApplicationKeyFilterCreatedAtEndParameter:
+      description: Only include application keys created on or before the specified
+        date.
+      in: query
+      name: filter[created_at][end]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    ApplicationKeyFilterCreatedAtStartParameter:
+      description: Only include application keys created on or after the specified
+        date.
+      in: query
+      name: filter[created_at][start]
+      required: false
+      schema:
+        example: '2020-11-24T18:46:21+00:00'
+        type: string
+    ApplicationKeyFilterParameter:
+      description: Filter application keys by the specified string.
+      in: query
+      name: filter
+      required: false
+      schema:
+        type: string
+    ApplicationKeyId:
+      description: The ID of the application key.
+      in: path
+      name: app_key_id
+      required: true
+      schema:
+        type: string
+    ApplicationKeysSortParameter:
+      description: 'Application key attribute used to sort results. Sort order is
+        ascending
+
+        by default. In order to specify a descending sort, prefix the
+
+        attribute with a minus sign.'
+      in: query
+      name: sort
+      required: false
+      schema:
+        $ref: '#/components/schemas/ApplicationKeysSort'
     ArchiveID:
       description: The ID of the archive.
       in: path
@@ -27,9 +137,7 @@ components:
       required: false
       schema:
         items:
-          enum:
-          - users
-          type: string
+          $ref: '#/components/schemas/IncidentRelatedObject'
         type: array
     IncidentServiceIDPathParameter:
       description: The ID of the incident service.
@@ -45,9 +153,7 @@ components:
       name: include
       required: false
       schema:
-        enum:
-        - users
-        type: string
+        $ref: '#/components/schemas/IncidentRelatedObject'
     IncidentServiceSearchQueryParameter:
       description: A search query that filters services by name.
       in: query
@@ -70,9 +176,7 @@ components:
       name: include
       required: false
       schema:
-        enum:
-        - users
-        type: string
+        $ref: '#/components/schemas/IncidentRelatedObject'
     IncidentTeamSearchQueryParameter:
       description: A search query that filters teams by name.
       in: query
@@ -80,6 +184,21 @@ components:
       required: false
       schema:
         example: ExampleTeamName
+        type: string
+    MetricID:
+      description: The name of the log-based metric.
+      in: path
+      name: metric_id
+      required: true
+      schema:
+        type: string
+    MetricName:
+      description: The name of the metric.
+      example: dist.http.endpoint.request
+      in: path
+      name: metric_name
+      required: true
+      schema:
         type: string
     PageNumber:
       description: Specific page number to return.
@@ -164,6 +283,12 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Concurrent Modification
+    ConflictResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Conflict
     ForbiddenResponse:
       content:
         application/json:
@@ -182,6 +307,12 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Not Found
+    TooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Too many requests
     UnauthorizedResponse:
       content:
         application/json:
@@ -202,6 +333,251 @@ components:
       required:
       - errors
       type: object
+    APIKeyCreateAttributes:
+      description: Attributes used to create an API Key.
+      properties:
+        name:
+          description: Name of the API key.
+          example: API Key for submitting metrics
+          type: string
+      required:
+      - name
+      type: object
+    APIKeyCreateData:
+      description: Object used to create an API key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/APIKeyCreateAttributes'
+        type:
+          $ref: '#/components/schemas/APIKeysType'
+      required:
+      - attributes
+      - type
+      type: object
+    APIKeyCreateRequest:
+      description: Request used to create an API key.
+      properties:
+        data:
+          $ref: '#/components/schemas/APIKeyCreateData'
+      required:
+      - data
+      type: object
+    APIKeyRelationships:
+      description: Resources related to the API key.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+        modified_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    APIKeyResponse:
+      description: Response for retrieving an API key.
+      properties:
+        data:
+          $ref: '#/components/schemas/FullAPIKey'
+        included:
+          description: Array of objects related to the API key.
+          items:
+            $ref: '#/components/schemas/APIKeyResponseIncludedItem'
+          type: array
+      type: object
+    APIKeyResponseIncludedItem:
+      description: An object related to an API key.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    APIKeyUpdateAttributes:
+      description: Attributes used to update an API Key.
+      properties:
+        name:
+          description: Name of the API key.
+          example: API Key for submitting metrics
+          type: string
+      required:
+      - name
+      type: object
+    APIKeyUpdateData:
+      description: Object used to update an API key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/APIKeyUpdateAttributes'
+        id:
+          description: ID of the API key.
+          example: 00112233-4455-6677-8899-aabbccddeeff
+          type: string
+        type:
+          $ref: '#/components/schemas/APIKeysType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    APIKeyUpdateRequest:
+      description: Request used to update an API key.
+      properties:
+        data:
+          $ref: '#/components/schemas/APIKeyUpdateData'
+      required:
+      - data
+      type: object
+    APIKeysResponse:
+      description: Response for a list of API keys.
+      properties:
+        data:
+          description: Array of API keys.
+          items:
+            $ref: '#/components/schemas/PartialAPIKey'
+          type: array
+        included:
+          description: Array of objects related to the API key.
+          items:
+            $ref: '#/components/schemas/APIKeyResponseIncludedItem'
+          type: array
+      type: object
+    APIKeysSort:
+      default: name
+      description: Sorting options
+      enum:
+      - created_at
+      - -created_at
+      - last4
+      - -last4
+      - modified_at
+      - -modified_at
+      - name
+      - -name
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - LAST4_ASCENDING
+      - LAST4_DESCENDING
+      - MODIFIED_AT_ASCENDING
+      - MODIFIED_AT_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
+    APIKeysType:
+      default: api_keys
+      description: API Keys resource type.
+      enum:
+      - api_keys
+      example: api_keys
+      type: string
+      x-enum-varnames:
+      - API_KEYS
+    ApplicationKeyCreateAttributes:
+      description: Attributes used to create an application Key.
+      properties:
+        name:
+          description: Name of the application key.
+          example: Application Key for submitting metrics
+          type: string
+      required:
+      - name
+      type: object
+    ApplicationKeyCreateData:
+      description: Object used to create an application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationKeyCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationKeyCreateRequest:
+      description: Request used to create an application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationKeyCreateData'
+      required:
+      - data
+      type: object
+    ApplicationKeyRelationships:
+      description: Resources related to the application key.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    ApplicationKeyResponse:
+      description: Response for retrieving an application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/FullApplicationKey'
+        included:
+          description: Array of objects related to the application key.
+          items:
+            $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
+          type: array
+      type: object
+    ApplicationKeyResponseIncludedItem:
+      description: An object related to an application key.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Role'
+      type: object
+    ApplicationKeyUpdateAttributes:
+      description: Attributes used to update an application Key.
+      properties:
+        name:
+          description: Name of the application key.
+          example: Application Key for submitting metrics
+          type: string
+      required:
+      - name
+      type: object
+    ApplicationKeyUpdateData:
+      description: Object used to update an application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationKeyUpdateAttributes'
+        id:
+          description: ID of the application key.
+          example: 00112233-4455-6677-8899-aabbccddeeff
+          type: string
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    ApplicationKeyUpdateRequest:
+      description: Request used to update an application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationKeyUpdateData'
+      required:
+      - data
+      type: object
+    ApplicationKeysSort:
+      default: name
+      description: Sorting options
+      enum:
+      - created_at
+      - -created_at
+      - last4
+      - -last4
+      - name
+      - -name
+      type: string
+      x-enum-varnames:
+      - CREATED_AT_ASCENDING
+      - CREATED_AT_DESCENDING
+      - LAST4_ASCENDING
+      - LAST4_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
+    ApplicationKeysType:
+      default: application_keys
+      description: Application Keys resource type.
+      enum:
+      - application_keys
+      example: application_keys
+      type: string
+      x-enum-varnames:
+      - APPLICATION_KEYS
     Creator:
       description: Creator of the object.
       properties:
@@ -383,6 +759,85 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    FullAPIKey:
+      description: Datadog API key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FullAPIKeyAttributes'
+        id:
+          description: ID of the API key.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/APIKeyRelationships'
+        type:
+          $ref: '#/components/schemas/APIKeysType'
+      type: object
+    FullAPIKeyAttributes:
+      description: Attributes of a full API key.
+      properties:
+        created_at:
+          description: Creation date of the API key.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        key:
+          description: The API key.
+          readOnly: true
+          type: string
+        last4:
+          description: The last four characters of the API key.
+          example: abcd
+          maxLength: 4
+          minLength: 4
+          readOnly: true
+          type: string
+        modified_at:
+          description: Date the API key was last modified.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        name:
+          description: Name of the API key.
+          example: API Key for submitting metrics
+          type: string
+      type: object
+    FullApplicationKey:
+      description: Datadog application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FullApplicationKeyAttributes'
+        id:
+          description: ID of the application key.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ApplicationKeyRelationships'
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      type: object
+    FullApplicationKeyAttributes:
+      description: Attributes of a full application key.
+      properties:
+        created_at:
+          description: Creation date of the application key.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        key:
+          description: The application key.
+          readOnly: true
+          type: string
+        last4:
+          description: The last four characters of the application key.
+          example: abcd
+          maxLength: 4
+          minLength: 4
+          readOnly: true
+          type: string
+        name:
+          description: Name of the application key.
+          example: Application Key for submitting metrics
+          type: string
+      type: object
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -531,6 +986,13 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_POSTMORTEMS
+    IncidentRelatedObject:
+      description: Object related to an incident.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
     IncidentResponse:
       description: Response with an incident.
       properties:
@@ -786,7 +1248,7 @@ components:
       type: object
     IncidentServiceType:
       default: services
-      description: Incident Service resource type.
+      description: Incident service resource type.
       enum:
       - services
       example: services
@@ -1327,6 +1789,20 @@ components:
       required:
       - data
       type: object
+    ListApplicationKeysResponse:
+      description: Response for a list of application keys.
+      properties:
+        data:
+          description: Array of application keys.
+          items:
+            $ref: '#/components/schemas/PartialApplicationKey'
+          type: array
+        included:
+          description: Array of objects related to the application key.
+          items:
+            $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
+          type: array
+      type: object
     Log:
       description: Object description of a log after being processed and stored by
         Datadog.
@@ -1470,10 +1946,10 @@ components:
           type: array
         options:
           $ref: '#/components/schemas/LogsQueryOptions'
-        paging:
+        page:
           description: Paging settings
           properties:
-            after:
+            cursor:
               description: The returned paging point to use to get the next results
               example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
               type: string
@@ -1974,6 +2450,7 @@ components:
         limit:
           default: 10
           description: The maximum buckets to return for this group by
+          format: int64
           type: integer
         missing:
           $ref: '#/components/schemas/LogsGroupByMissing'
@@ -2064,6 +2541,217 @@ components:
         meta:
           $ref: '#/components/schemas/LogsResponseMetadata'
       type: object
+    LogsMetricCompute:
+      description: The compute rule to compute the log-based metric.
+      properties:
+        aggregation_type:
+          $ref: '#/components/schemas/LogsMetricComputeAggregationType'
+        path:
+          description: The path to the value the log-based metric will aggregate on
+            (only used if the aggregation type is a "distribution").
+          example: '@duration'
+          type: string
+      required:
+      - aggregation_type
+      type: object
+    LogsMetricComputeAggregationType:
+      description: The type of aggregation to use.
+      enum:
+      - count
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - DISTRIBUTION
+    LogsMetricCreateAttributes:
+      description: The object describing the Datadog log-based metric to create.
+      properties:
+        compute:
+          $ref: '#/components/schemas/LogsMetricCompute'
+        filter:
+          $ref: '#/components/schemas/LogsMetricFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/LogsMetricGroupBy'
+          type: array
+      required:
+      - compute
+      type: object
+    LogsMetricCreateData:
+      description: The new log-based metric properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LogsMetricCreateAttributes'
+        id:
+          $ref: '#/components/schemas/LogsMetricID'
+        type:
+          $ref: '#/components/schemas/LogsMetricType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    LogsMetricCreateRequest:
+      description: The new log-based metric body.
+      properties:
+        data:
+          $ref: '#/components/schemas/LogsMetricCreateData'
+      required:
+      - data
+      type: object
+    LogsMetricFilter:
+      description: The log-based metric filter. Logs matching this filter will be
+        aggregated in this metric.
+      properties:
+        query:
+          default: '*'
+          description: The search query - following the log search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
+          type: string
+      type: object
+    LogsMetricGroupBy:
+      description: A group by rule.
+      properties:
+        path:
+          description: The path to the value the log-based metric will be aggregated
+            over.
+          example: '@http.status_code'
+          type: string
+        tag_name:
+          description: Eventual name of the tag that gets created. By default, the
+            path attribute is used as the tag name.
+          example: status_code
+          type: string
+      required:
+      - path
+      type: object
+    LogsMetricID:
+      description: The name of the log-based metric.
+      example: logs.page.load.count
+      type: string
+    LogsMetricResponse:
+      description: The log-based metric object.
+      properties:
+        data:
+          $ref: '#/components/schemas/LogsMetricResponseData'
+      type: object
+    LogsMetricResponseAttributes:
+      description: The object describing a Datadog log-based metric.
+      properties:
+        compute:
+          $ref: '#/components/schemas/LogsMetricResponseCompute'
+        filter:
+          $ref: '#/components/schemas/LogsMetricResponseFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/LogsMetricResponseGroupBy'
+          type: array
+      type: object
+    LogsMetricResponseCompute:
+      description: The compute rule to compute the log-based metric.
+      properties:
+        aggregation_type:
+          $ref: '#/components/schemas/LogsMetricResponseComputeAggregationType'
+        path:
+          description: The path to the value the log-based metric will aggregate on
+            (only used if the aggregation type is a "distribution").
+          example: '@duration'
+          type: string
+      type: object
+    LogsMetricResponseComputeAggregationType:
+      description: The type of aggregation to use.
+      enum:
+      - count
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - DISTRIBUTION
+    LogsMetricResponseData:
+      description: The log-based metric properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LogsMetricResponseAttributes'
+        id:
+          $ref: '#/components/schemas/LogsMetricID'
+        type:
+          $ref: '#/components/schemas/LogsMetricType'
+      type: object
+    LogsMetricResponseFilter:
+      description: The log-based metric filter. Logs matching this filter will be
+        aggregated in this metric.
+      properties:
+        query:
+          description: The search query - following the log search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
+          type: string
+      type: object
+    LogsMetricResponseGroupBy:
+      description: A group by rule.
+      properties:
+        path:
+          description: The path to the value the log-based metric will be aggregated
+            over.
+          example: '@http.status_code'
+          type: string
+        tag_name:
+          description: Eventual name of the tag that gets created. By default, the
+            path attribute is used as the tag name.
+          example: status_code
+          type: string
+      type: object
+    LogsMetricType:
+      default: logs_metrics
+      description: The type of the resource. The value should always be logs_metrics.
+      enum:
+      - logs_metrics
+      example: logs_metrics
+      type: string
+      x-enum-varnames:
+      - LOGS_METRICS
+    LogsMetricUpdateAttributes:
+      description: The log-based metric properties that will be updated.
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsMetricFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/LogsMetricGroupBy'
+          type: array
+      type: object
+    LogsMetricUpdateData:
+      description: The new log-based metric properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LogsMetricUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/LogsMetricType'
+      required:
+      - type
+      - attributes
+      type: object
+    LogsMetricUpdateRequest:
+      description: The new log-based metric body.
+      properties:
+        data:
+          $ref: '#/components/schemas/LogsMetricUpdateData'
+      required:
+      - data
+      type: object
+    LogsMetricsResponse:
+      description: All the available log-based metric objects.
+      properties:
+        data:
+          description: A list of log-based metric objects.
+          items:
+            $ref: '#/components/schemas/LogsMetricResponseData'
+          type: array
+      type: object
     LogsQueryFilter:
       description: The search and filter query settings
       properties:
@@ -2105,6 +2793,7 @@ components:
       properties:
         timeOffset:
           description: The time offset (in seconds) to apply to the query.
+          format: int64
           type: integer
         timezone:
           default: UTC
@@ -2119,6 +2808,7 @@ components:
         elapsed:
           description: The time elapsed in milliseconds
           example: 132
+          format: int64
           type: integer
         page:
           description: Paging attributes.
@@ -2192,6 +2882,346 @@ components:
             from the other indexes
           type: string
       type: object
+    Metric:
+      description: Object for a single metric tag configuration.
+      example:
+        id: metric.foo.bar
+        type: metric
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricType'
+      type: object
+    MetricAllTags:
+      description: Object for a single metric's indexed tags.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAllTagsAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricType'
+      type: object
+    MetricAllTagsAttributes:
+      description: Object containing the definition of a metric's tags.
+      properties:
+        tags:
+          description: List of indexed tag value pairs.
+          example:
+          - sport:golf
+          - sport:football
+          - animal:dog
+          items:
+            description: Tag key-value pairs.
+            type: string
+          type: array
+      type: object
+    MetricAllTagsResponse:
+      description: Response object that includes a single metric's indexed tags.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricAllTags'
+      readOnly: true
+      type: object
+    MetricDistinctVolume:
+      description: Object for a single metric's distinct volume.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricDistinctVolumeAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricDistinctVolumeType'
+      type: object
+    MetricDistinctVolumeAttributes:
+      description: Object containing the definition of a metric's distinct volume.
+      properties:
+        distinct_volume:
+          description: Distinct volume for the given metric.
+          example: 10
+          format: int64
+          type: integer
+      type: object
+    MetricDistinctVolumeType:
+      default: distinct_metric_volumes
+      description: The metric distinct volume type.
+      enum:
+      - distinct_metric_volumes
+      example: distinct_metric_volumes
+      type: string
+      x-enum-varnames:
+      - DISTINCT_METRIC_VOLUMES
+    MetricIngestedIndexedVolume:
+      description: Object for a single metric's ingested and indexed volume.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricIngestedIndexedVolumeAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricIngestedIndexedVolumeType'
+      type: object
+    MetricIngestedIndexedVolumeAttributes:
+      description: Object containing the definition of a metric's ingested and indexed
+        volume.
+      properties:
+        indexed_volume:
+          description: Indexed volume for the given metric.
+          example: 10
+          format: int64
+          type: integer
+        ingested_volume:
+          description: Ingested volume for the given metric.
+          example: 20
+          format: int64
+          type: integer
+      type: object
+    MetricIngestedIndexedVolumeType:
+      default: metric_volumes
+      description: The metric ingested and indexed volume type.
+      enum:
+      - metric_volumes
+      example: metric_volumes
+      type: string
+      x-enum-varnames:
+      - METRIC_VOLUMES
+    MetricName:
+      description: The metric name for this resource.
+      example: test.metric.latency
+      type: string
+    MetricTagConfiguration:
+      description: Object for a single metric tag configuration.
+      example:
+        attributes:
+          created_at: '2020-03-31T09:48:37.463835Z'
+          metric_type: gauge
+          modified_at: '2020-04-31T09:48:37.463835Z'
+          tags:
+          - app
+          - datacenter
+        id: http.request.latency
+        type: manage_tags
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricTagConfigurationAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricTagConfigurationType'
+      type: object
+    MetricTagConfigurationAttributes:
+      description: Object containing the definition of a metric tag configuration
+        attributes.
+      properties:
+        created_at:
+          description: Timestamp when the tag configuration was created.
+          example: '2020-03-31T09:48:37.463835Z'
+          format: date-time
+          type: string
+        include_percentiles:
+          description: 'Toggle to turn on/off percentile aggregations for distribution
+            metrics.
+
+            Only present when the `metric_type` is `distribution`.'
+          example: true
+          type: boolean
+        metric_type:
+          $ref: '#/components/schemas/MetricTagConfigurationMetricTypes'
+        modified_at:
+          description: Timestamp when the tag configuration was last modified.
+          example: '2020-03-31T09:48:37.463835Z'
+          format: date-time
+          type: string
+        tags:
+          description: List of tag keys on which to group.
+          example:
+          - app
+          - datacenter
+          items:
+            description: Tag keys to group by.
+            type: string
+          type: array
+      type: object
+    MetricTagConfigurationCreateAttributes:
+      description: Object containing the definition of a metric tag configuration
+        to be created.
+      properties:
+        include_percentiles:
+          default: false
+          description: 'Toggle to include/exclude percentiles for a distribution metric.
+
+            Defaults to false. Can only be applied to metrics that have a `metric_type`
+            of `distribution`.'
+          example: true
+          type: boolean
+        metric_type:
+          $ref: '#/components/schemas/MetricTagConfigurationMetricTypes'
+        tags:
+          default: []
+          description: A list of tag keys that will be queryable for your metric.
+          example:
+          - app
+          - datacenter
+          items:
+            description: Tag keys to group by.
+            type: string
+          type: array
+      required:
+      - tags
+      - metric_type
+      type: object
+    MetricTagConfigurationCreateData:
+      description: Object for a single metric to be configure tags on.
+      example:
+        attributes:
+          include_percentiles: false
+          metric_type: distribution
+          tags:
+          - app
+          - datacenter
+        id: http.endpoint.request
+        type: manage_tags
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricTagConfigurationCreateAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricTagConfigurationType'
+      required:
+      - id
+      - type
+      type: object
+    MetricTagConfigurationCreateRequest:
+      description: Request object that includes the metric that you would like to
+        configure tags for.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricTagConfigurationCreateData'
+      required:
+      - data
+      type: object
+    MetricTagConfigurationMetricTypes:
+      default: gauge
+      description: The metric's type.
+      enum:
+      - gauge
+      - count
+      - distribution
+      example: count
+      type: string
+      x-enum-varnames:
+      - GAUGE
+      - COUNT
+      - DISTRIBUTION
+    MetricTagConfigurationResponse:
+      description: Response object which includes a single metric's tag configuration.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricTagConfiguration'
+      readOnly: true
+      type: object
+    MetricTagConfigurationType:
+      default: manage_tags
+      description: The metric tag configuration resource type.
+      enum:
+      - manage_tags
+      example: manage_tags
+      type: string
+      x-enum-varnames:
+      - MANAGE_TAGS
+    MetricTagConfigurationUpdateAttributes:
+      description: Object containing the definition of a metric tag configuration
+        to be updated.
+      properties:
+        include_percentiles:
+          default: false
+          description: 'Toggle to include/exclude percentiles for a distribution metric.
+
+            Defaults to false. Can only be applied to metrics that have a `metric_type`
+            of `distribution`.'
+          example: true
+          type: boolean
+        tags:
+          default: []
+          description: A list of tag keys that will be queryable for your metric.
+          example:
+          - app
+          - datacenter
+          items:
+            description: Tag keys to group by.
+            type: string
+          type: array
+      type: object
+    MetricTagConfigurationUpdateData:
+      description: Object for a single tag configuration to be edited.
+      example:
+        attributes:
+          group_by:
+          - app
+          - datacenter
+          include_percentiles: false
+        id: http.endpoint.request
+        type: manage_tags
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricTagConfigurationUpdateAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricTagConfigurationType'
+      required:
+      - id
+      - type
+      type: object
+    MetricTagConfigurationUpdateRequest:
+      description: Request object that includes the metric that you would like to
+        edit the tag configuration on.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricTagConfigurationUpdateData'
+      required:
+      - data
+      type: object
+    MetricType:
+      default: metrics
+      description: The metric resource type.
+      enum:
+      - metrics
+      example: metrics
+      type: string
+      x-enum-varnames:
+      - METRICS
+    MetricVolumes:
+      description: Possible response objects for a metric's volume.
+      oneOf:
+      - $ref: '#/components/schemas/MetricDistinctVolume'
+      - $ref: '#/components/schemas/MetricIngestedIndexedVolume'
+      type: object
+    MetricVolumesResponse:
+      description: Response object which includes a single metric's volume.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricVolumes'
+      readOnly: true
+      type: object
+    MetricsAndMetricTagConfigurations:
+      description: Object for a metrics and metric tag configurations.
+      oneOf:
+      - $ref: '#/components/schemas/Metric'
+      - $ref: '#/components/schemas/MetricTagConfiguration'
+      type: object
+    MetricsAndMetricTagConfigurationsResponse:
+      description: Response object that includes metrics and metric tag configurations.
+      properties:
+        data:
+          description: Array of metrics and metric tag configurations.
+          items:
+            $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
+          type: array
+      readOnly: true
+      type: object
     Organization:
       description: Organization object.
       properties:
@@ -2255,6 +3285,77 @@ components:
           description: Total count of elements matched by the filter.
           format: int64
           type: integer
+      type: object
+    PartialAPIKey:
+      description: Partial Datadog API key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PartialAPIKeyAttributes'
+        id:
+          description: ID of the API key.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/APIKeyRelationships'
+        type:
+          $ref: '#/components/schemas/APIKeysType'
+      type: object
+    PartialAPIKeyAttributes:
+      description: Attributes of a partial API key.
+      properties:
+        created_at:
+          description: Creation date of the API key.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        last4:
+          description: The last four characters of the API key.
+          example: abcd
+          maxLength: 4
+          minLength: 4
+          readOnly: true
+          type: string
+        modified_at:
+          description: Date the API key was last modified.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        name:
+          description: Name of the API key.
+          example: API Key for submitting metrics
+          type: string
+      type: object
+    PartialApplicationKey:
+      description: Partial Datadog application key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PartialApplicationKeyAttributes'
+        id:
+          description: ID of the application key.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ApplicationKeyRelationships'
+        type:
+          $ref: '#/components/schemas/ApplicationKeysType'
+      type: object
+    PartialApplicationKeyAttributes:
+      description: Attributes of a partial application key.
+      properties:
+        created_at:
+          description: Creation date of the application key.
+          example: '2020-11-23T10:00:00.000Z'
+          readOnly: true
+          type: string
+        last4:
+          description: The last four characters of the application key.
+          example: abcd
+          maxLength: 4
+          minLength: 4
+          readOnly: true
+          type: string
+        name:
+          description: Name of the application key.
+          example: Application Key for submitting metrics
+          type: string
       type: object
     Permission:
       description: Permission object.
@@ -2979,6 +4080,24 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+    SecurityMonitoringFilter:
+      description: The rule's suppression filter.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityMonitoringFilterAction'
+        query:
+          description: Query for selecting logs to apply the filtering action.
+          type: string
+      type: object
+    SecurityMonitoringFilterAction:
+      description: The type of filtering action.
+      enum:
+      - require
+      - suppress
+      type: string
+      x-enum-varnames:
+      - REQUIRE
+      - SUPPRESS
     SecurityMonitoringListRulesResponse:
       description: List of rules.
       properties:
@@ -3043,6 +4162,12 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
           type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
         isEnabled:
           description: Whether the rule is enabled.
           example: true
@@ -3080,6 +4205,15 @@ components:
       - cases
       - message
       type: object
+    SecurityMonitoringRuleDetectionMethod:
+      description: The detection method.
+      enum:
+      - threshold
+      - new_value
+      type: string
+      x-enum-varnames:
+      - THRESHOLD
+      - NEW_VALUE
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window
@@ -3164,19 +4298,67 @@ components:
       - SIX_HOURS
       - TWELVE_HOURS
       - ONE_DAY
+    SecurityMonitoringRuleNewValueOptions:
+      description: Options on new value rules.
+      properties:
+        forgetAfter:
+          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter'
+        learningDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration'
+      type: object
+    SecurityMonitoringRuleNewValueOptionsForgetAfter:
+      description: The duration in days after which a learned value is forgotten.
+      enum:
+      - 1
+      - 2
+      - 7
+      - 14
+      - 21
+      - 28
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE_DAY
+      - TWO_DAYS
+      - ONE_WEEK
+      - TWO_WEEKS
+      - THREE_WEEKS
+      - FOUR_WEEKS
+    SecurityMonitoringRuleNewValueOptionsLearningDuration:
+      description: 'The duration in days during which values are learned, and after
+        which signals will be generated for values that
+
+        weren''t learned. If set to 0, a signal will be generated for all new values
+        after the first value is learned.'
+      enum:
+      - 0
+      - 1
+      - 7
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ZERO_DAYS
+      - ONE_DAY
+      - SEVEN_DAYS
     SecurityMonitoringRuleOptions:
       description: Options on rules.
       properties:
+        detectionMethod:
+          $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
         evaluationWindow:
           $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
         keepAlive:
           $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
         maxSignalDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
+        newValueOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
       type: object
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
       properties:
+        agentRule:
+          $ref: '#/components/schemas/SecurityMonitoringRuntimeAgentRule'
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
@@ -3210,15 +4392,19 @@ components:
       - cardinality
       - sum
       - max
+      - new_value
       type: string
       x-enum-varnames:
       - COUNT
       - CARDINALITY
       - SUM
       - MAX
+      - NEW_VALUE
     SecurityMonitoringRuleQueryCreate:
       description: Query for matching rule.
       properties:
+        agentRule:
+          $ref: '#/components/schemas/SecurityMonitoringRuntimeAgentRule'
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
@@ -3264,6 +4450,12 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
         id:
           description: The ID of the rule.
           type: string
@@ -3322,6 +4514,12 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
         isEnabled:
           description: Whether the rule is enabled.
           type: boolean
@@ -3344,6 +4542,24 @@ components:
             description: Tag.
             type: string
           type: array
+      type: object
+    SecurityMonitoringRuntimeAgentRule:
+      description: The Agent rule.
+      properties:
+        agentRuleId:
+          description: The Agent rule ID. Must be unique within the rule.
+          example: etc_shadow
+          type: string
+        expression:
+          description: 'A Runtime Security expression determines what activity should
+            be collected by the Datadog Agent.
+
+            These logical expressions can use predefined operators and attributes.
+            Tags cannot be used in Runtime
+
+            Security expressions. Instead, allow or deny based on tags under the advanced
+            option.'
+          type: string
       type: object
     SecurityMonitoringSignal:
       description: Object description of a security signal.
@@ -3519,6 +4735,10 @@ components:
         icon:
           description: URL of the user's icon.
           type: string
+        modified_at:
+          description: Time that the user was last modified.
+          format: date-time
+          type: string
         name:
           description: Name of the user.
           type: string
@@ -3537,7 +4757,7 @@ components:
       properties:
         email:
           description: The email of the user.
-          example: joe.doe@example.com
+          example: jane.doe@example.com
           type: string
         name:
           description: The name of the user.
@@ -3758,13 +4978,13 @@ components:
       in: header
       name: DD-API-KEY
       type: apiKey
-      x-env-name: DD_CLIENT_API_KEY
+      x-env-name: DD_API_KEY
     appKeyAuth:
       description: Your Datadog APP Key.
       in: header
       name: DD-APPLICATION-KEY
       type: apiKey
-      x-env-name: DD_CLIENT_APP_KEY
+      x-env-name: DD_APP_KEY
 info:
   contact:
     email: support@datadoghq.com
@@ -3775,6 +4995,480 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/v2/api_keys:
+    get:
+      description: List all API keys available for your account.
+      operationId: ListAPIKeys
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/APIKeysSortParameter'
+      - $ref: '#/components/parameters/APIKeyFilterParameter'
+      - $ref: '#/components/parameters/APIKeyFilterCreatedAtStartParameter'
+      - $ref: '#/components/parameters/APIKeyFilterCreatedAtEndParameter'
+      - $ref: '#/components/parameters/APIKeyFilterModifiedAtStartParameter'
+      - $ref: '#/components/parameters/APIKeyFilterModifiedAtEndParameter'
+      - $ref: '#/components/parameters/APIKeyIncludeParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeysResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get all API keys
+      tags:
+      - Key Management
+      x-undo:
+        type: safe
+    post:
+      description: Create an API key.
+      operationId: CreateAPIKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIKeyCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create an API key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-given:
+        api_key:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
+              \ unique }}\"\n    },\n    \"type\": \"api_keys\"\n  }\n}"
+          step: there is a valid "api_key" in the system
+      x-undo:
+        operationId: DeleteAPIKey
+        parameters:
+        - name: api_key_id
+          source: data.id
+        type: unsafe
+  /api/v2/api_keys/{api_key_id}:
+    delete:
+      description: Delete an API key.
+      operationId: DeleteAPIKey
+      parameters:
+      - $ref: '#/components/parameters/APIKeyId'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete an API key
+      tags:
+      - Key Management
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an API key.
+      operationId: GetAPIKey
+      parameters:
+      - $ref: '#/components/parameters/APIKeyId'
+      - $ref: '#/components/parameters/APIKeyIncludeParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get API key
+      tags:
+      - Key Management
+      x-undo:
+        type: safe
+    patch:
+      description: Update an API key.
+      operationId: UpdateAPIKey
+      parameters:
+      - $ref: '#/components/parameters/APIKeyId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIKeyUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Edit an API key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v2/application_keys:
+    get:
+      description: List all application keys available for your org
+      operationId: ListApplicationKeys
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/ApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationKeysResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get all application keys
+      tags:
+      - Key Management
+      x-undo:
+        type: safe
+  /api/v2/application_keys/{app_key_id}:
+    delete:
+      description: Delete an application key
+      operationId: DeleteApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete an application key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+    patch:
+      description: Edit an application key
+      operationId: UpdateApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Edit an application key
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v2/current_user/application_keys:
+    get:
+      description: List all application keys available for current user
+      operationId: ListCurrentUserApplicationKeys
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/ApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationKeysResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get all application keys owned by current user
+      tags:
+      - Key Management
+      x-undo:
+        type: safe
+    post:
+      description: Create an application key for current user
+      operationId: CreateCurrentUserApplicationKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create an application key for current user
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-given:
+        application_key:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
+              \ unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
+          step: there is a valid "application_key" in the system
+      x-undo:
+        operationId: DeleteCurrentUserApplicationKey
+        parameters:
+        - name: app_key_id
+          source: data.id
+        type: unsafe
+  /api/v2/current_user/application_keys/{app_key_id}:
+    delete:
+      description: Delete an application key owned by current user
+      operationId: DeleteCurrentUserApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete an application key owned by current user
+      tags:
+      - Key Management
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an application key owned by current user
+      operationId: GetCurrentUserApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get one application key owned by current user
+      tags:
+      - Key Management
+      x-undo:
+        type: safe
+    patch:
+      description: Edit an application key owned by current user
+      operationId: UpdateCurrentUserApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Edit an application key owned by current user
+      tags:
+      - Key Management
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
     delete:
       description: Delete dashboards from an existing dashboard list.
@@ -3855,7 +5549,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Get a Dashboard List
+      summary: Get items of a Dashboard List
       tags:
       - Dashboard Lists
       x-undo:
@@ -4018,6 +5712,14 @@ paths:
       tags:
       - Incidents
       x-codegen-request-body-name: body
+      x-given:
+        incident:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"{{\
+              \ unique }}\",\n      \"customer_impacted\": false\n     },\n     \"\
+              type\": \"incidents\"\n  }\n}"
+          step: there is a valid "incident" in the system
       x-undo:
         operationId: DeleteIncident
         parameters:
@@ -4435,9 +6137,6 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Returns all read roles a given archive is restricted to.
       operationId: ListArchiveReadRoles
@@ -4474,9 +6173,6 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Adds a read role to an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
       operationId: AddReadRoleToArchive
@@ -4515,9 +6211,152 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
+  /api/v2/logs/config/metrics:
+    get:
+      description: Get the list of configured log-based metrics with their definitions.
+      operationId: ListLogsMetrics
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all log-based metrics
+      tags:
+      - Logs Metrics
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a metric based on your ingested logs in your organization.
 
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        Returns the log-based metric object from the request body when the request
+        is successful.'
+      operationId: CreateLogsMetric
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsMetricCreateRequest'
+        description: The definition of the new log-based metric.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a log-based metric
+      tags:
+      - Logs Metrics
+      x-codegen-request-body-name: body
+      x-given:
+        logs_metric:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"attributes\"\
+              : {\n      \"filter\": {\n        \"query\": \"source:{{ unique }}\"\
+              \n      },\n      \"compute\": {\n        \"aggregation_type\": \"count\"\
+              \n      }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
+          step: there is a valid "logs_metric" in the system
+      x-undo:
+        operationId: DeleteLogsMetric
+        parameters:
+        - name: metric_id
+          source: data.id
+        type: unsafe
+  /api/v2/logs/config/metrics/{metric_id}:
+    delete:
+      description: Delete a specific log-based metric from your organization.
+      operationId: DeleteLogsMetric
+      parameters:
+      - $ref: '#/components/parameters/MetricID'
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a log-based metric
+      tags:
+      - Logs Metrics
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a specific log-based metric from your organization.
+      operationId: GetLogsMetric
+      parameters:
+      - $ref: '#/components/parameters/MetricID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a log-based metric
+      tags:
+      - Logs Metrics
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a specific log-based metric from your organization.
+
+        Returns the log-based metric object from the request body when the request
+        is successful.'
+      operationId: UpdateLogsMetric
+      parameters:
+      - $ref: '#/components/parameters/MetricID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsMetricUpdateRequest'
+        description: New definition of the log-based metric.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsMetricResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a log-based metric
+      tags:
+      - Logs Metrics
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/logs/config/restriction_queries:
     get:
       description: Returns all restriction queries, including their names and IDs.
@@ -4905,10 +6744,7 @@ paths:
         [Results are paginated][1].
 
 
-        Both this endpoint and the POST endpoint can be used interchangeably when
-        listing
-
-        logs.
+        Use this endpoint to see your latest logs.
 
 
         **If you are considering archiving logs for your organization,
@@ -4990,14 +6826,11 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
-      summary: Get a quick list of logs
+      summary: Get a list of logs
       tags:
       - Logs
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/logs/events/search:
     post:
       description: 'List endpoint returns logs that match a log search query.
@@ -5005,9 +6838,7 @@ paths:
         [Results are paginated][1].
 
 
-        Both this endpoint and the GET endpoint can be used interchangeably when listing
-
-        logs.
+        Use this endpoint to build complex logs filtering and search.
 
 
         **If you are considering archiving logs for your organization,
@@ -5038,15 +6869,407 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
-      summary: Get a list of logs
+      summary: Search logs
       tags:
       - Logs
       x-codegen-request-body-name: body
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
+  /api/v2/metrics:
+    get:
+      description: 'Returns all configured count/gauge/rate/distribution metric names
 
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        (with additional filters if specified).'
+      operationId: ListTagConfigurations
+      parameters:
+      - description: Filter metrics that have configured tags.
+        example: true
+        in: query
+        name: filter[configured]
+        required: false
+        schema:
+          type: boolean
+      - description: Filter tag configurations by configured tags.
+        example: app
+        in: query
+        name: filter[tags_configured]
+        required: false
+        schema:
+          description: Tag keys to filter by.
+          type: string
+      - description: Filter tag configurations by metric type.
+        in: query
+        name: filter[metric_type]
+        required: false
+        schema:
+          $ref: '#/components/schemas/MetricTagConfigurationMetricTypes'
+      - description: 'Filter distributions with additional percentile
+
+          aggregations enabled or disabled.'
+        example: true
+        in: query
+        name: filter[include_percentiles]
+        required: false
+        schema:
+          type: boolean
+      - description: 'Filter metrics that have been submitted with the given tags.
+          Supports boolean and wildcard expressions.
+
+          Cannot be combined with other filters.'
+        example: env IN (staging,test) AND service:web
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          type: string
+      - description: 'The number of seconds of look back (from now) to apply to a
+          filter[tag] query.
+
+          Defaults value is 3600 (1 hour), maximum value is 172,800 (2 days).'
+        example: 3600
+        in: query
+        name: window[seconds]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsAndMetricTagConfigurationsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: List tag configurations
+      tags:
+      - Metrics
+      x-undo:
+        type: safe
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
+  /api/v2/metrics/{metric_name}/all-tags:
+    get:
+      description: View indexed tag key-value pairs for a given metric name.
+      operationId: ListTagsByMetricName
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAllTagsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: List tags by metric name
+      tags:
+      - Metrics
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/metrics/{metric_name}/tags:
+    delete:
+      description: 'Deletes a metric''s tag configuration. Can only be used with application
+
+        keys from users with the `Manage Tags for Metrics` permission.'
+      operationId: DeleteTagConfiguration
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Delete a tag configuration
+      tags:
+      - Metrics
+      x-undo:
+        type: idempotent
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
+    get:
+      description: Returns the tag configuration for the given metric name.
+      operationId: ListTagConfigurationByName
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagConfigurationResponse'
+          description: Success
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: List tag configuration by name
+      tags:
+      - Metrics
+      x-undo:
+        type: safe
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
+    patch:
+      description: 'Update the tag configuration of a metric or percentile aggregations
+        of a distribution metric. Can only be used with
+
+        application keys from users with the `Manage Tags for Metrics` permission.'
+      operationId: UpdateTagConfiguration
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricTagConfigurationUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagConfigurationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Update a tag configuration
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
+    post:
+      description: 'Create and define a list of queryable tag keys for a count/gauge/rate/distribution
+        metric. Optionally, include percentile aggregations on any distribution metric.
+
+        Can only be used with application keys of users with the `Manage Tags for
+        Metrics` permission.'
+      operationId: CreateTagConfiguration
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricTagConfigurationCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricTagConfigurationResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: Create a tag configuration
+      tags:
+      - Metrics
+      x-codegen-request-body-name: body
+      x-given:
+        metric_tag_configuration:
+          parameters:
+          - name: metric_name
+            value: '"{{ unique_alnum }}"'
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\"\
+              , \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"\
+              distribution\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\"\
+              : \"{{ unique_alnum }}\"\n  }\n}"
+          step: there is a valid "metric_tag_configuration" in the system
+      x-undo:
+        operationId: DeleteTagConfiguration
+        parameters:
+        - name: metric_name
+          source: data.id
+        type: unsafe
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
+        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
+        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
+        \ your Customer Success Manager.**"
+  /api/v2/metrics/{metric_name}/volumes:
+    get:
+      description: 'View distinct metrics volumes for the given metric name.
+
+
+        Custom distribution metrics will return both ingested and indexed custom metric
+        volumes.
+
+        For Metrics without Limits&trade; beta customers, all metrics will return
+        both ingested/indexed volumes.
+
+        Custom metrics generated in-app from other products will return `null` for
+        ingested volumes.'
+      operationId: ListVolumesByMetricName
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricVolumesResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      summary: List distinct metric volumes by metric name
+      tags:
+      - Metrics
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -5074,6 +7297,10 @@ paths:
       summary: List permissions
       tags:
       - Roles
+      x-given:
+        permission:
+          source: data[0]
+          step: there is a valid "permission" in the system
       x-undo:
         type: safe
   /api/v2/processes:
@@ -5237,6 +7464,13 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-given:
+        role:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
+              \ unique }}\"\n     },\n     \"type\": \"roles\"\n  }\n}"
+          step: there is a valid "role" in the system
       x-undo:
         operationId: DeleteRole
         parameters:
@@ -5462,6 +7696,15 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-given:
+        permission_role:
+          parameters:
+          - name: role_id
+            source: role.data.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"id\": \"{{ permission.id }}\",\n    \"\
+              type\": \"{{ permission.type }}\"\n  }\n}"
+          step: the "permission" is granted to the "role"
       x-undo:
         type: safe
   /api/v2/roles/{role_id}/users:
@@ -5596,6 +7839,15 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-given:
+        permission_role:
+          parameters:
+          - name: role_id
+            source: role.data.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"id\": \"{{ user.data.id }}\",\n    \"\
+              type\": \"{{ user.data.type }}\"\n  }\n}"
+          step: the "user" has the "role"
       x-undo:
         type: safe
   /api/v2/security_monitoring/rules:
@@ -5643,11 +7895,25 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-given:
+        security_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}\",\n  \"queries\": [{\n    \"query\"\
+              : \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\"\
+              : [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"\
+              filters\": [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\"\
+              : \"info\",\n    \"condition\": \"a > 0\",\n    \"notifications\": []\n\
+              \  }],\n  \"options\": {\n    \"evaluationWindow\": 900,\n    \"keepAlive\"\
+              : 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"hasExtendedTitle\"\
+              : false,\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isDefault\"\
+              : false,\n  \"isEnabled\": true,\n  \"type\": \"log_detection\"\n}"
+          step: there is a valid "security_rule" in the system
       x-undo:
         operationId: DeleteSecurityMonitoringRule
         parameters:
         - name: rule_id
-          source: data.id
+          source: id
         type: unsafe
   /api/v2/security_monitoring/rules/{rule_id}:
     delete:
@@ -5897,6 +8163,13 @@ paths:
       tags:
       - Incident Services
       x-codegen-request-body-name: body
+      x-given:
+        service:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
+              \ unique }}\"\n     },\n     \"type\": \"services\"\n  }\n}"
+          step: there is a valid "service" in the system
       x-undo:
         operationId: DeleteIncidentService
         parameters:
@@ -6063,6 +8336,13 @@ paths:
       tags:
       - Incident Teams
       x-codegen-request-body-name: body
+      x-given:
+        team:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
+              \ unique }}\"\n     },\n     \"type\": \"teams\"\n  }\n}"
+          step: there is a valid "team" in the system
       x-undo:
         operationId: DeleteIncidentTeam
         parameters:
@@ -6199,6 +8479,16 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-given:
+        user_invitation:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": [\n    {\n      \"relationships\": {\"user\": {\"\
+              data\": {\n        \"id\": \"{{ user.data.id }}\",\n        \"type\"\
+              : \"{{ user.data.type }}\"\n      }}},\n      \"type\": \"user_invitations\"\
+              \n    }\n  ]\n}"
+          source: data[0]
+          step: the "user" has a "user_invitation"
       x-undo:
         type: safe
   /api/v2/user_invitations/{user_invitation_uuid}:
@@ -6339,6 +8629,14 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-given:
+        user:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{\
+              \ unique }}@datadoghq.com\",\n      \"title\": \"user title\"\n    \
+              \ },\n     \"type\": \"users\"\n  }\n}"
+          step: there is a valid "user" in the system
       x-undo:
         operationId: DisableUser
         parameters:
@@ -6531,7 +8829,9 @@ servers:
       description: The regional site for our customers.
       enum:
       - datadoghq.com
+      - us3.datadoghq.com
       - datadoghq.eu
+      - ddog-gov.com
     subdomain:
       default: api
       description: The subdomain where the API is deployed.
@@ -6543,46 +8843,21 @@ servers:
     protocol:
       default: https
       description: The protocol for accessing the API.
+- url: https://{subdomain}.{site}
+  variables:
+    site:
+      default: datadoghq.com
+      description: Any Datadog deployment.
+    subdomain:
+      default: api
+      description: The subdomain where the API is deployed.
 tags:
-- description: '[See API version 1](/api/v1/aws-integration/).'
-  name: AWS Integration
-- description: '[See API version 1](/api/v1/aws-logs-integration/).'
-  name: AWS Logs Integration
-- description: "All requests to Datadog\u2019s API must be authenticated.\nRequests\
-    \ that write data require reporting access and require an `API key`.\nRequests\
-    \ that read data require full access and also require an `application key`.\n\n\
-    **Note:** All Datadog API clients are configured by default to consume Datadog\
-    \ US site APIs.\nIf you are on the Datadog EU site, set the environment variable\
-    \ `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly\
-    \ when creating your client.\n\n[Manage your account\u2019s API and application\
-    \ keys](https://app.datadoghq.com/account/settings#api).\n\n## Validate API key\n\
-    \n[See API version 1](/api/v1/authentication/#validate-api-key)."
-  name: Authentication
-- description: '[See API version 1](/api/v1/azure-integration/).'
-  name: Azure Integration
-- description: 'Interact with your dashboard lists through the API to make it easier
-    to
+- description: 'Interact with your dashboard lists through the API to
 
     organize, find, and share all of your dashboards with your team and
 
-    organization. Note that you can add API v1 Dashboards to Dashboard Lists
-
-    that you create with API v2.'
+    organization.'
   name: Dashboard Lists
-- description: '[See API version 1](/api/v1/dashboards/).'
-  name: Dashboards
-- description: '[See API version 1](/api/v1/downtimes/).'
-  name: Downtimes
-- description: '[See API version 1](/api/v1/embeddable-graphs/).'
-  name: Embeddable Graphs
-- description: '[See API version 1](/api/v1/events/).'
-  name: Events
-- description: '[See API version 1](/api/v1/gcp-integration/).'
-  name: GCP Integration
-- description: '[See API version 1](/api/v1/hosts/).'
-  name: Hosts
-- description: '[See API version 1](/api/v1/ip-ranges/).'
-  name: IP Ranges
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
   name: Incident Services
@@ -6591,12 +8866,19 @@ tags:
   name: Incident Teams
 - description: Manage incident response.
   name: Incidents
-- description: '[See API version 1](/api/v1/key-management/).'
+- description: 'Manage your Datadog API and application keys. You need an API key
+    and
+
+    an application key for a user with the required permissions to interact
+
+    with these endpoints. The full list of API and application keys can be
+
+    seen on your [Datadog API page](https://app.datadoghq.com/account/settings#api).'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
-- description: 'Search your logs in the Datadog platform over HTTP.
-
-
-    [See API version 1](/api/v1/logs/) for sending logs.'
+- description: Search your logs and send them to your Datadog platform over HTTP.
   name: Logs
 - description: 'Archives forward all the logs ingested to a cloud storage system.
 
@@ -6608,10 +8890,12 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
-- description: '[See API version 1](/api/v1/logs-indexes/).'
-  name: Logs Indexes
-- description: '[See API version 1](/api/v1/logs-pipelines/).'
-  name: Logs Pipelines
+- description: Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
+    for your organization.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/logs/logs_to_metrics/
+  name: Logs Metrics
 - description: "**Note: This endpoint is in public beta. If you have any feedback,\
     \ contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read\
     \ access on log data at all, you must grant the `logs_read_data` permission.\n\
@@ -6633,14 +8917,15 @@ tags:
     \ are scoped to different team values.\n\nYou need an API and application key\
     \ with Admin rights to interact with this endpoint."
   name: Logs Restriction Queries
-- description: '[See API version 1](/api/v1/metrics/).'
+- description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can\
+    \ be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n\
+    - Modify tag configurations for metrics\n- View tags and volumes for metrics\n\
+    \n**Note**: A graph can only contain a set number of points\nand as the timeframe\
+    \ over which a metric is viewed increases,\naggregation between points occurs\
+    \ to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags`\
+    \ API methods can only be performed by\na user who has the `Manage Tags for Metrics`\
+    \ permission."
   name: Metrics
-- description: '[See API version 1](/api/v1/monitors/).'
-  name: Monitors
-- description: '[See API version 1](/api/v1/organizations/).'
-  name: Organizations
-- description: '[See API version 1](/api/v1/pagerduty-integration/).'
-  name: PagerDuty Integration
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
 - description: 'The Roles API is used to create and manage Datadog roles, what
@@ -6658,36 +8943,12 @@ tags:
 
     [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
   name: Roles
-- description: '[See API version 1](/api/v1/screenboards/).'
-  name: Screenboards
 - description: 'Detection rules for generating signals and listing of generated
 
     signals.'
   name: Security Monitoring
-- description: '[See API version 1](/api/v1/service-checks/).'
-  name: Service Checks
-- description: '[See API version 1](/api/v1/service-dependencies/).'
-  name: Service Dependencies
-- description: '[See API version 1](/api/v1/service-level-objectives/).'
-  name: Service Level Objectives
-- description: '[See API version 1](/api/v1/slack-integration/).'
-  name: Slack Integration
-- description: '[See API version 1](/api/v1/snapshots/).'
-  name: Snapshots
-- description: '[See API version 1](/api/v1/synthetics/).'
-  name: Synthetics
-- description: '[See API version 1](/api/v1/tags/).'
-  name: Tags
-- description: '[See API version 1](/api/v1/timeboards/).'
-  name: Timeboards
-- description: '[See API version 1](/api/v1/tracing/).'
-  name: Tracing
-- description: '[See API version 1](/api/v1/usage-metering/).'
-  name: Usage Metering
 - description: Create, edit, and disable users.
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users
   name: Users
-- description: '[See API version 1](/api/v1/webhooks-integration/).'
-  name: Webhooks Integration
 x-group-parameters: true

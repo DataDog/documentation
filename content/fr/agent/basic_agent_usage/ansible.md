@@ -345,7 +345,6 @@ L'exemple suivant envoie des données au site américain de Datadog (par défaut
       log_level: INFO
       apm_config:
         enabled: true
-        max_traces_per_second: 10
       logs_enabled: true  # disponible avec l'Agent v6 et v7
     datadog_checks:
       process:

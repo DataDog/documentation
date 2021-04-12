@@ -39,8 +39,8 @@ Une fois la métrique définie, le monitor de détection des anomalies génère 
 ### Définir vos conditions d'alerte
 
 * Déclencher une alerte si les valeurs sont `above or below`, `above` ou `below`
-* les limites durant `15 minutes`, `1 hour`, `2 hours`, etc.
-* Rétablir le monitor si les valeurs restent dans les limites pendant au moins `15 minutes`, `1 hour`, `2 hours`, etc.
+* aux limites depuis `15 minutes`, `1 hour` ou une période `custom` (comprise entre 15 minutes et 24 heures).
+* Rétablir si les valeurs sont comprises entre les limites pendant une durée minimale de `15 minutes`, `1 hour` `custom` (comprise entre 15 minutes et 24 heures).
 
 **Détection des anomalies** : avec l'option par défaut (`above ou below`), une métrique est considérée comme anormale si elle sort de la bande grise représentant les valeurs normales. Choisissez l'option `above` ou `below` pour être alerté uniquement si la métrique passe au-dessus ou en dessous de la bande grise.
 
@@ -83,7 +83,7 @@ Datadog analyse automatiquement la métrique choisie et définit plusieurs param
 
 Tous les algorithmes saisonniers peuvent utiliser au maximum deux mois de données historiques lors du calcul de la plage normale de comportement attendue d'une métrique. En utilisant un volume conséquent de données passées, les algorithmes peuvent éviter de donner trop d'importance à un comportement anormal qui aurait pu avoir lieu il y a peu de temps.
 
-**Exemples** :<br>
+**Exemples** :<br>
 Les graphiques ci-dessous illustrent les différents comportements de ces trois algorithmes.
 
 Dans cet exemple, `basic` identifie avec succès les anomalies qui quittent la plage normale de valeurs, sans tenir compte des tendances saisonnières et récurrentes pour déterminer la plage de valeurs prévues. À l'inverse, les algorithmes `robust`  et `agile` reconnaissent la tendance saisonnière et peuvent détecter des anomalies plus nuancées (p. ex., si la métrique se stabilise au niveau de sa valeur minimale).

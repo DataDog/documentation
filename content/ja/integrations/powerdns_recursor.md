@@ -5,7 +5,8 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: powerdns
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
@@ -13,6 +14,7 @@ categories:
   - web
   - network
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -125,6 +127,31 @@ Recursor を再起動すると、統計 API が有効になります。
 
 2. [Agent を再起動します][3]。
 
+##### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. 以下を実行して、`systemd-journal` グループに `dd-agent` ユーザーを追加します。
+   ```text
+   usermod -a -G systemd-journal dd-agent
+   ```
+
+3. PowerDNS Recursor のログの収集を開始するには、次のコンフィギュレーションブロックを `powerdns_recursor.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: journald
+       source: powerdns
+   ```
+
+    使用可能なすべての構成オプションの詳細については、[サンプル powerdns_recursor.d/conf.yaml][2] を参照してください。
+
+4. [Agent を再起動します][3]。
+
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
@@ -141,7 +168,16 @@ Recursor を再起動すると、統計 API が有効になります。
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                                    |
 | `<インスタンスコンフィギュレーション>`  | `{"host":"%%host%%", "port":8082, "api_key":"<POWERDNS_API_KEY>", "version": 3}` |
 
+##### ログの収集
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+
+| パラメーター      | 値                                     |
+|----------------|-------------------------------------------|
+| `<LOG_CONFIG>` | `{"source": "powerdns"}`                  |
+
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -155,19 +191,20 @@ Recursor を再起動すると、統計 API が有効になります。
 {{< get-metrics-from-git "powerdns_recursor" >}}
 
 
+
 ### イベント
 
 PowerDNS Recursor チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**`powerdns.recursor.can_connect`**:
-
-Agent が Recursor の統計 API に接続できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**powerdns.recursor.can_connect**:<br>
+Agent が Recursor の統計 API に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

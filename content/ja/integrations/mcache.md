@@ -2,7 +2,11 @@
 aliases:
   - /ja/integrations/memcached
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    memcached: assets/dashboards/memcached_dashboard.json
+    memcached_screenboard: assets/dashboards/memcached_screenboard.json
   logs:
     source: memcached
   metrics_metadata: metadata.csv
@@ -55,10 +59,8 @@ Memcache チェックは [Datadog Agent][1] パッケージに含まれていま
 
 #### メトリクスの収集
 
-#{{< tabs >}}
+{{< tabs >}}
 {{% tab "Host" %}}
-#{{% /tab %}}
-{{% tab "Containerized" %}}
 
 #### ホスト
 
@@ -91,6 +93,58 @@ Datadog APM は、Memcache と統合して分散システム全体のトレー�
 [4]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [5]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
+{{% tab "Containerized" %}}
+
+#### コンテナ化
+
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+
+| パラメーター            | 値                                 |
+| -------------------- | ------------------------------------- |
+| `<インテグレーション名>` | `mcache`                              |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                         |
+| `<インスタンスコンフィギュレーション>`  | `{"url": "%%host%%","port": "11211"}` |
+
+##### トレースの収集
+
+コンテナ化されたアプリケーションの APM は、Agent v6 以降を実行するホストでサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
+
+Agent コンテナで必要な環境変数
+
+| パラメーター            | 値                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<DD_API_KEY>` | `api_key`                                                                  |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][2]および [Kubernetes Daemon のセットアップ][3]を参照してください。
+
+次に、[アプリケーションコンテナをインスツルメント][4]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
+
+#### ログの収集
+
+_Agent バージョン 6.0 以降で利用可能_
+
+1. このコンフィギュレーションブロックを `mcache.d/conf.yaml` ファイルに追加すると、Memcached ログの収集を開始します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: /var/log/memcached.log
+       source: memcached
+       service: mcache
+   ```
+
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
+
+2. [Agent を再起動][5]して、変更を検証します。
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[4]: https://docs.datadoghq.com/ja/tracing/setup/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証
@@ -111,9 +165,8 @@ Mcache チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-`memcache.can_connect`:
-
-Agent が memcache に接続してメトリクスを収集できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
+**memcache.can_connect**:<br>
+Agent が memcache に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

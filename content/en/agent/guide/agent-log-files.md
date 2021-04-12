@@ -57,6 +57,7 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 * `agent.log`
 * `process-agent.log`
 * `trace-agent.log`
+* `jmxfetch.log` for Agent >= 7.24.0/6.24.0
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -69,11 +70,11 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent Installation Log Files
+## Agent installation log files
 
 | Platform                             | Location and file name        |
 |--------------------------------------|-------------------------------|
-| Linux                                | `/tmp/dd_agent.log`           |
+| Linux                                | `$pwd/ddagent-install.log`    |
 | macOS                                | `/tmp/dd_agent.log`           |
 | Windows                              | `%TEMP%\MSI*.LOG`             |
 

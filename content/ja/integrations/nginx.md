@@ -4,6 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     NGINX Plus base overview: assets/dashboards/plus_overview.json
+    NGINX-Metrics: assets/dashboards/NGINX-Metrics_dashboard.json
+    NGINX-Overview: assets/dashboards/NGINX-Overview_dashboard.json
   logs:
     source: nginx
   metrics_metadata: metadata.csv
@@ -15,6 +17,7 @@ assets:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
+    nginx_processes: assets/saved_views/nginx_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:

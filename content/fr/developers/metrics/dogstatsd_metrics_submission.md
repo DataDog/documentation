@@ -37,7 +37,7 @@ Une fois [DogStatsD installé][1], les fonctions ci-dessous peuvent être utilis
 |---------------------------------------------------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `increment(<NOM_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)`             | Utilisée pour incrémenter une métrique COUNT.                         | Stockée en tant que métrique `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur de la métrique durant la période de transmission de StatsD. |
 | `decrement(<NOM_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)`             | Utilisée pour décrémenter une métrique COUNT.                         | Stockée en tant que métrique `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur de la métrique durant la période de transmission de StatsD. |
-| `count(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Utilisée pour incrémenter une métrique COUNT à partir d'une `valeur` quelconque | Stockée en tant que métrique `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur de la métrique durant la période de transmission de StatsD. |
+| `count(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Utilisée pour incrémenter une métrique COUNT à partir d'une `valeur` quelconque | Stockée en tant que métrique `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur de la métrique durant la période de transmission de StatsD.<br/><br/>**Remarque :** `count` n'est pas pris en charge par Python.</p>|
 
 **Remarque** : Datadog peut afficher les métriques de type `COUNT` avec une valeur décimale, car elles sont normalisées sur l'intervalle de transmission et indiquées en unités par seconde.
 
@@ -66,6 +66,9 @@ while(1):
   statsd.decrement('exemple_métrique.decrement', tags=["environment:dev"])
   time.sleep(10)
 ```
+
+**Remarque :** `statsd.count` n'est pas pris en charge par Python.
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -415,9 +418,9 @@ end
 package main
 
 import (
+    "fmt"
     "log"
     "math/rand"
-    "strconv"
     "time"
 
     "github.com/DataDog/datadog-go/statsd"
@@ -431,8 +434,8 @@ func main() {
     var i float64
     for {
         i += 1
-        statsd.Set("exemple_métrique.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
-        time.Sleep(rand.Intn(10) * time.Second)
+        statsd.Set("example_metric.set", fmt.Sprintf("%f", i), []string{"environment:dev"}, 1)
+        time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
     }
 }
 ```
@@ -659,7 +662,7 @@ L'instrumentation ci-dessus génère les métriques suivantes :
 | Métrique                                  | Description                             |
 |-----------------------------------------|-----------------------------------------|
 | `exemple_métrique.histogram.count`        | Le nombre d'échantillonnages de cette métrique |
-| `exemple_métrique.histogram.avg`          | La durée moyenne des valeurs échantillonnées      |
+| `exemple_métrique.histogram.avg`          | La moyenne des valeurs échantillonnées           |
 | `exemple_métrique.histogram.median`       | La valeur échantillonnée médiane                    |
 | `exemple_métrique.histogram.max`          | La valeur échantillonnée maximale                   |
 | `exemple_métrique.histogram.95percentile` | Le 95e centile des valeurs échantillonnées           |

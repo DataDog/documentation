@@ -31,6 +31,10 @@ deployment:
       - pattern: "^.+\\.(png|jpg|jpeg|gif|mp4|zip|pdf|txt|csv)$"
         cacheControl: "max-age=31536000, no-transform, public"
         gzip: false
-      - pattern: "^.+\\.(html|xml|json)$"
+      - pattern: "^.+\\.(html)$"
+        gzip: true
+        contentType: "text/html; charset=utf-8"
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
+      - pattern: "^.+\\.(xml|json)$"
         gzip: true
         cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"

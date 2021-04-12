@@ -6,10 +6,11 @@
 "dependencies": []
 "description": "Consultez les données de disponibilité, les délais de réponse et les alertes recueillis par Pingdom dans Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/pingdom/"
+"draft": false
 "git_integration_title": "pingdom"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "Pingdom"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "integration"
 "manifest_version": "1.0"
 "name": "pingdom"
@@ -30,7 +31,7 @@ Les événements de Pingdom peuvent être ajoutés en configurant le [monitor de
 Les métriques peuvent uniquement être importées pour les clients Pingdom de niveau Starter ou supérieur.
 </div>
 
-## Implémentation
+## Configuration
 
 ### Installation
 

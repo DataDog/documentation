@@ -5,7 +5,6 @@ code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 70
 description: 'Standards ouverts pour .NET'
-further_reading:
 ---
 
 ## OpenTracing
@@ -58,11 +57,6 @@ Pour tracer du code exécuté dans une tâche asynchrone, créez un nouveau cont
      });
 
 ```
-
-
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://github.com/opentracing/opentracing-csharp

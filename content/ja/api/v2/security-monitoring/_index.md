@@ -1,3 +1,4 @@
 ---
 title: セキュリティモニタリング
+headless: true
 ---

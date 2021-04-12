@@ -16,12 +16,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md'
 display_name: Cloud Foundry API
-draft: true
+draft: false
 git_integration_title: cloud_foundry_api
 guid: 82e5b924-c8c3-4467-bfde-5838857b6447
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
-is_public: false
+is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

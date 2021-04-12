@@ -57,6 +57,7 @@ To send logs with environment variables, configure the following:
 * `DD_LOGS_ENABLED=true`
 * `DD_LOGS_CONFIG_USE_HTTP=true`
 
+By default, the Datadog Agent uses the port `443` to send its logs to Datadog over HTTPS.
 
 [1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
@@ -84,7 +85,7 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 
 **Note**: Setting up a [SOCKS5 proxy][2] server enforces TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
-## HTTPS Transport
+## HTTPS transport
 
 **HTTPS log forwarding is the recommended configuration** for the best log collection reliability as the`200` status code is returned by the Datadog storage system:
 
@@ -125,7 +126,7 @@ logs_config:
 
 Or use the `DD_LOGS_CONFIG_BATCH_WAIT=2` environment variable. The unit is in seconds and must be an integer between `1` and `10`.
 
-### HTTPS Proxy configuration
+### HTTPS proxy configuration
 
 When logs are sent through HTTPS, use the same [set of proxy settings][4] as the other data types to send logs through a web proxy.
 

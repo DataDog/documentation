@@ -384,7 +384,7 @@ Attribuez l'autorisation [logs_write_historical_views][19] aux membres `ACME Adm
 
 {{< img src="logs/guide/rbac/archives.png" alt="Tags ACME lors de la réintégration"  style="width:60%;">}}
 
-**Remarque** : **si** vous utilisez l'autorisation obsolète [logs_read_index_data][21], ajoutez le rôle `ACME User` aux archives ACME en plus du rôle `ACME User`. Étant donné que les utilisateurs disposant du rôle `ACME User` ne sont pas autorisés à effectuer une réintégration à partir des archives, ils ne disposeront pas d'autorisations sensibles. Toutefois, l'autorisation logs_read_index_data est ainsi automatiquement limitée à la vue historique obtenue, permettant ainsi aux utilisateurs d'accéder au contenu.
+**Remarque** : **si** vous utilisez l'autorisation obsolète [logs_read_index_data][21], ajoutez le rôle `ACME User` aux archives ACME en plus du rôle `ACME Admin`. Étant donné que les utilisateurs disposant du rôle `ACME User` ne sont pas autorisés à effectuer une réintégration à partir des archives, ils ne disposeront pas d'autorisations sensibles. Toutefois, l'autorisation logs_read_index_data est ainsi automatiquement limitée à la vue historique obtenue, permettant ainsi aux utilisateurs d'accéder au contenu.
 
 {{< img src="logs/guide/rbac/rehydration_index.png" alt="Autorisation de réintégration d'index"  style="width:60%;">}}
 

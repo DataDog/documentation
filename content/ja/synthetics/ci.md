@@ -28,20 +28,9 @@ Synthetic CI/CD テストを使用して、**CD プロセスの一部として�
 
 エンドポイントをトリガーするテストは、1 回のリクエストで最大 50 件のテスト実行に対応します。
 
-{{< site-region region="us" >}}
-
-* **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci`
+* **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci`
 * **Method**: `POST`
 * **Argument**: トリガーする全テストのリストと各テストのコンフィギュレーションオーバーライドを含む JSON オブジェクト。
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-* **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci`
-* **Method**: `POST`
-* **Argument**: トリガーする全テストのリストと各テストのコンフィギュレーションオーバーライドを含む JSON オブジェクト。
-
-{{< /site-region >}}
 
 #### リクエストデータの構造
 
@@ -57,8 +46,6 @@ Synthetic CI/CD テストを使用して、**CD プロセスの一部として�
 
 #### リクエスト例
 
-{{< site-region region="us" >}}
-
 ```bash
 #!/bin/sh
 
@@ -87,84 +74,44 @@ curl -X POST \
             "variables": { "titleVariable": "new value" }
         }
     ]
-}' "https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci"
+}' "https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci"
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-
-```bash
-#!/bin/sh
-
-api_key="<DATADOG_API_KEY>"
-app_key="<DATADOG_APPLICATION_KEY>"
-
-curl -X POST \
--H 'Content-Type: application/json' \
--H "DD-API-KEY: ${api_key}" \
--H "DD-APPLICATION-KEY: ${app_key}" \
--d '{
-    "tests": [
-        {
-            "public_id": "abc-def-ghi",
-            "allowInsecureCertificates": true,
-            "basicAuth": { "username": "test", "password": "test" },
-            "body": "{\"fakeContent\":true}",
-            "bodyType": "application/json",
-            "cookies": "name1=value1;name2=value2;",
-            "deviceIds": ["laptop_large"],
-            "followRedirects": true,
-            "headers": { "NEW_HEADER": "NEW VALUE" },
-            "locations": ["aws:us-west-1"],
-            "retry": { "count": 2, "interval": 300 },
-            "startUrl": "http://new.url/",
-            "variables": { "titleVariable": "new value" }
-        }
-    ]
-}' "https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci"
-```
-
-{{< /site-region >}}
-
 
 #### 応答例
 
 ```json
 {
+  "batch_id": null,
   "results": [
     {
       "result_id": "0123456789012345678",
       "public_id": "abc-def-ghi",
-      "location": 1
-    },
+      "location": 30019
+    }
   ],
   "triggered_check_ids": [
     "abc-def-ghi"
+  ],
+  "locations": [
+    {
+      "display_name": "N. California (AWS)",
+      "name": "aws:us-west-1",
+      "region": "Americas",
+      "is_active": true,
+      "is_public": true,
+      "id": 30019
+    }
   ]
 }
 ```
 
 ### ポーリング結果のエンドポイント
 
-{{< site-region region="us" >}}
-
-* **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/poll_results`
+* **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/poll_results`
 * **Method**: `GET`
 * **Parameters**: 結果の入手元となる結果識別子のリストを含む JSON 配列。
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-* **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results`
-* **Method**: `GET`
-* **Parameters**: 結果の入手元となる結果識別子のリストを含む JSON 配列。
-
-{{< /site-region >}}
 
 #### リクエスト例
-
-{{< site-region region="us" >}}
 
 ```bash
 #!/bin/sh
@@ -173,29 +120,11 @@ api_key="<DATADOG_API_KEY>"
 app_key="<DATADOG_APPLICATION_KEY>"
 
 curl -G \
-    "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
+    "https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
     -d "result_ids=[220123456789012345678]"
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```bash
-#!/bin/sh
-
-api_key="<DATADOG_API_KEY>"
-app_key="<DATADOG_APPLICATION_KEY>"
-
-curl -G \
-    "https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results" \
-    -H "DD-API-KEY: ${api_key}" \
-    -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
-```
-
-{{< /site-region >}}
 
 #### 応答例
 
@@ -207,28 +136,120 @@ curl -G \
 {
   "results": [
     {
-      "check_id": "123456",
-      "timestamp": 1585841351642,
+      "check": {
+        "config": {
+          "assertions": [
+            {
+              "operator": "lessThan",
+              "target": 2000,
+              "type": "responseTime"
+            }
+          ],
+          "configVariables": [],
+          "request": {
+            "basicAuth": {
+              "password": "test",
+              "username": "test"
+            },
+            "body": "{\"fakeContent\":true}",
+            "headers": {
+              "Content-Type": "application/json",
+              "Cookie": "name1=value1;name2=value2;",
+              "NEW_HEADER": "NEW VALUE"
+            },
+            "method": "GET",
+            "timeout": 30,
+            "url": "http://new.url/"
+          }
+        },
+        "locations": [
+          30019
+        ],
+        "options": {
+          "allow_insecure": true,
+          "follow_redirects": true,
+          "min_failure_duration": 0,
+          "min_location_failed": 1,
+          "monitor_options": {
+            "include_tags": true,
+            "locked": false,
+            "new_host_delay": 300,
+            "notify_audit": false,
+            "notify_no_data": false,
+            "renotify_interval": 0
+          },
+          "retry": {
+            "count": 2,
+            "interval": 300
+          },
+          "tick_every": 60
+        },
+        "subtype": "http",
+        "type": "api"
+      },
+      "check_id": "7654321",
+      "check_version": 2,
+      "config_override": {
+        "allowInsecureCertificates": true,
+        "basicAuth": {
+          "password": "test",
+          "username": "test"
+        },
+        "body": "{\"fakeContent\":true}",
+        "bodyType": "application/json",
+        "cookies": "name1=value1;name2=value2;",
+        "deviceIds": [
+          "laptop_large"
+        ],
+        "followRedirects": true,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cookie": "name1=value1;name2=value2;",
+          "NEW_HEADER": "NEW VALUE"
+        },
+        "locations": [
+          "aws:us-west-1"
+        ],
+        "public_id": "abc-def-ghi",
+        "retry": {
+          "count": 2,
+          "interval": 300
+        },
+        "startUrl": "http://example.org/",
+        "variables": {
+          "titleVariable": "new value"
+        }
+      },
+      "dc_id": 30019,
       "orgID": 2,
       "result": {
-        "unhealthy": false,
+        "assertionResults": [
+          {
+            "actual": 27.92,
+            "valid": true
+          }
+        ],
+        "dnsServer": "8.8.8.8",
         "eventType": "finished",
-        "timings": {
-          "firstByte": 14.7,
-          "tcp": 11.6,
-          "ssl": 45.7,
-          "dns": 12.484235048294067,
-          "download": 0.2,
-          "total": 84.7
-        },
+        "healthCheckRatio": 1,
+        "httpStatusCode": 400,
         "mainDC": "us1.prod",
+        "passed": true,
+        "resolvedIp": "93.184.216.34",
+        "responseSize": 349,
         "runType": 2,
-        "httpStatusCode": 200,
-        "responseSize": 9201,
-        "healthCheckRatio": 1
+        "subtype": "http",
+        "timings": {
+          "dns": 24.6,
+          "download": 0.1,
+          "firstByte": 1.4,
+          "tcp": 1.8,
+          "total": 27.9
+        },
+        "unhealthy": false
       },
-      "dc_id": 1,
-      "resultID": "0123456789012345678"
+      "resultID": "220123456789012345678",
+      "timestamp": 1612404331304
     }
   ]
 }
@@ -368,7 +389,7 @@ yarn add --dev @datadog/datadog-ci
 
     * **apiKey**: Datadog API にクエリーを送信する際に使用される API キー。
     * **appKey**: Datadog API にクエリーを送信する際に使用されるアプリケーションキー。
-    * **datadogSite**: リクエストの送信先となる Datadog インスタンス (`datadoghq.com` または `datadoghq.eu`)。デフォルトは `datadoghq.com` です。
+    * **datadogSite**: リクエストの送信先となる Datadog インスタンス。デフォルトは `datadoghq.com`。Datadog サイトは {{< region-param key="dd_site" code="true" >}} です。
     * **files**: Synthetic テスト用コンフィギュレーションファイルを検出するグロブパターン。
     * **global**: すべてのテストに適用される Synthetic テストのオーバーライド ([各フィールドの説明については下記を参照してください](#テストの構成))。
     * **proxy**: Datadog への発信接続に使用されるプロキシー。`host` と `port` キーは必須の引数で、`protocol` キーの初期値は `http` です。サポートされる `protocol` キーの値は、`http`、`https`、`socks`、`socks4`、`socks4a`、`socks5`、`socks5h`、`pac+data`、`pac+file`、`pac+ftp`、`pac+http`、`pac+https` です。プロキシーの構成に使用されるライブラリーは、[proxy-agent][3] ライブラリーです。
@@ -436,16 +457,16 @@ yarn add --dev @datadog/datadog-ci
 
 ただし、CI デプロイメントの際に、下記のオーバーライドを使用して、テストパラメーターの一部 (またはすべて) をオーバーライドするように任意で定めることもできます。テストすべてをオーバーライドするように定義する場合は、下記と同じパラメーターを[グローバルコンフィギュレーションファイル](#クライアントのセットアップ)ごとに設定できます。
 
-* **allowInsecureCertificates**: (_boolean_) API テストの認証チェックを無効化します。
-* **basicAuth**: (_オブジェクト_) 基本認証を行う際に提供する認証情報。
+* **allowInsecureCertificates**: (_boolean_) HTTP テストの認証チェックを無効化します。
+* **basicAuth**: (_オブジェクト_) HTTP またはブラウザテストで基本認証を行う際に提供する認証情報。
      * **username**: (_文字列_) 基本認証で使用するユーザー名。
      * **password**: (_文字列_) 基本認証で使用するパスワード。
-* **body**: (_文字列_) Synthetic API テストで送信するデータ。
-* **bodyType**: (_文字列_) Synthetic API テストで送信するデータのタイプ。
-* **cookies**: (_文字列_) API またはブラウザテストのクッキーヘッダーとして提供された文字列を使用。
+* **body**: (_文字列_) HTTP テストで送信するデータ。
+* **bodyType**: (_文字列_) HTTP テストで送信するデータのタイプ。
+* **cookies**: (_文字列_) HTTP またはブラウザテストのクッキーヘッダーとして提供された文字列を使用。
 * **deviceIds**: (_配列_) ブラウザテストを実行するデバイスのリスト。
-* **followRedirects**: (_boolean_) API テストで HTTP リダイレクトに従うかどうかを示す。
-* **headers**: (_オブジェクト_) テストで置換するヘッダー。このオブジェクトには、置換するヘッダーの名前 (キー) と、ヘッダーの新しい値 (値) が含まれている必要がある。
+* **followRedirects**: (_boolean_) HTTP テストでリダイレクトに従うかどうかを示す。
+* **headers**: (_オブジェクト_) HTTP またはブラウザテストで置換するヘッダー。このオブジェクトには、置換するヘッダーの名前 (キー) と、ヘッダーの新しい値 (値) が含まれている必要がある。
 * **locations**: (_配列_) テストの実行元となる場所のリスト。
 * **retry**: (_オブジェクト_) テストの再試行ポリシー。
      * **count**: (_整数_) テストが失敗した場合に再試行する回数。
@@ -454,7 +475,7 @@ yarn add --dev @datadog/datadog-ci
      * **blocking**: テストが失敗した場合、CLI はエラーを返す。
      * **non_blocking**: テストが失敗した場合、CLI は警告のプリントのみを実施する。
      * **skipped**: テストを一切実行しない。
-* **startUrl**: (_文字列_) テストに提供する新しい開始 URL。
+* **startUrl**: (_文字列_) HTTP またはブラウザテストに提供する新しい開始 URL。
 * **variables**: (_オブジェクト_) テストで置換する変数。このオブジェクトには、置換する変数の名前 (キー) と、変数の新しい値 (値) が含まれている必要がある。
 * **pollingTimeout**: (_整数_) Synthetic テストが失敗したとみなす経過時間（ミリ秒）。
 

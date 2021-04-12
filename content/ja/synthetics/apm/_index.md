@@ -42,13 +42,15 @@ https://*.datadoghq.com/*
 
 以下の Datadog トレーシングライブラリがサポートされています。
 
-* [Python][4]
-* [Go][5]
-* [Java][6]
-* [Ruby][7]
-* [JavaScript][8]
-* [PHP][9]
-* [.NET][10]
+| ライブラリ                             | 最小バージョン                                                                                                             |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| [Python][4]                  | [0.22.0][5]                |
+| [Go][6]                  | [1.10.0][7]                |
+| [Java][8]                  | [0.24.1][9]                |
+| [Ruby][10]                  | [0.20.0][11]                |
+| [JavaScript][12]                  | [0.10.0][13]                |
+| [PHP][14]                  | [0.33.0][15]                |
+| [.NET][16]                  | [1.18.2][17]                |
 
 ### トレースとテストのリンク方法
 
@@ -60,7 +62,7 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 | `x-datadog-parent-id: 0`               | Synthetic テストを生成されたトレースのルートスパンにします。                                                        |
 | `x-datadog-origin: synthetics`         | API テストによって生成されたトレースが [APM クオータに影響しない](#how-are-apm-quotas-affected)ようにします。     |
 | `x-datadog-origin: synthetics-browser` | ブラウザテストによって生成されたトレースが [APM クオータに影響しない](#how-are-apm-quotas-affected)ようにします。 |
-| `x-datadog-sampling-priority: 1`       | [Agent がトレースを維持するようにします][11]。                                                                      |
+| `x-datadog-sampling-priority: 1`       | Agent がトレースを維持するようにします。                                                                      |
 
 ### APM クオータへの影響
 
@@ -68,7 +70,7 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 
 ### トレースの保持期間
 
-これらのトレースは、[従来の APM トレースと同様に][12]保持されます。
+これらのトレースは、[従来の APM トレースと同様に][18]保持されます。
 
 ## その他の参考資料
 
@@ -77,12 +79,18 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 [1]: /ja/synthetics/api_tests/
 [2]: /ja/synthetics/browser_tests/
 [3]: /ja/tracing/
-[4]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[5]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[7]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[9]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[10]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[11]: /ja/tracing/guide/trace_sampling_and_storage/#how-it-works
-[12]: /ja/tracing/guide/trace_sampling_and_storage/#trace-storage
+[4]: /ja/tracing/setup_overview/setup/python/
+[5]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
+[6]: /ja/tracing/setup_overview/setup/go/
+[7]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
+[8]: /ja/tracing/setup_overview/setup/java/
+[9]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
+[10]: /ja/tracing/setup_overview/setup/ruby/
+[11]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
+[12]: /ja/tracing/setup_overview/setup/nodejs/
+[13]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
+[14]: /ja/tracing/setup_overview/setup/php/
+[15]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
+[16]: /ja/tracing/setup_overview/setup/dotnet-core/
+[17]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[18]: /ja/tracing/trace_retention_and_ingestion/

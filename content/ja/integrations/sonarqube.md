@@ -6,7 +6,8 @@ assets:
   logs:
     source: sonarqube
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    SonarQube vulnerabilities: assets/recommended_monitors/vulnerabilities.json
   saved_views:
     status_overview: assets/saved_views/status_overview.json
   service_checks: assets/service_checks.json
@@ -19,12 +20,16 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md'
 display_name: SonarQube
-draft: true
+draft: false
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/datadog-sonarqube-integration/'
+    tag: ブログ
+    text: SonarQube で Datadog のコード品質を監視
 git_integration_title: sonarqube
 guid: ce089575-93bf-47f0-80b6-ffaf6e34722c
 integration_id: sonarqube
 integration_title: SonarQube
-is_public: false
+is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
@@ -51,6 +56,87 @@ SonarQube チェックは [Datadog Agent][2] パッケージに含まれてい�
 サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
+
+SonarQube は、Web API および JMX の 2 つのソースからのメトリクスを公開します。
+[以下で指定されたメトリクス](#metrics)のすべてを収集するには、このチェックの 3 つのインスタンスを構成します。SonarQube の
+Web API を監視するものと、SonarQube の JMX Bean を監視する 2 つです。
+
+SonarQube の Web API に関するドキュメントは、SonarQube Web UI の `/web_api` でご確認ください。デフォルトで
+このインテグレーションは SonarQube の JMX Bean を通じて公開されたすべての関連 SonarQube パフォーマンスを収集します。この
+デフォルトのメトリクスのコンフィギュレーションは、[sonarqube.d/metrics.yaml][3] ファイルにあります。Bean に関するドキュメントは、
+[SonarQube のウェブサイト][4]をご覧ください。
+
+SonarQube の JMX サーバーは、デフォルトで無効になっています。有効化して SonarQube 内で JMX を構成する方法について、
+詳細は [SonarQube ドキュメント][5]をご参照ください。
+
+これは、SonarQube および JMX のデフォルトに基づく基本的な `sonarqube.d/conf.yaml` 例です。ホストベースまたはコンテナベースで
+Agent をインストールする場合、ここを起点として開始できます。
+
+```yaml
+init_config:
+    is_jmx: false
+    collect_default_metrics: true
+instances:
+  # Web API インスタンス
+  - is_jmx: false
+    web_endpoint: http://localhost:9000
+    auth_type: basic
+    username: <username>    # Defined in the Web UI
+    password: <password>    # Defined in the Web UI
+    default_tag: component  # Optional
+    components:
+      my-project:
+        tag: project_name
+  # Web JMX インスタンス
+  - is_jmx: true
+    host: localhost
+    port: 10443
+    user: <username>      # SonarQube の sonar.properties ファイルで定義済み
+    password: <password>  # SonarQube の sonar.properties ファイルで定義済み
+  # Compute Engine JMX インスタンス
+  - is_jmx: true
+    host: localhost
+    port: 10444
+    user: <username>      # SonarQube の sonar.properties ファイルで定義済み
+    password: <password>  # SonarQube の sonar.properties ファイルで定義済み
+```
+
+> 注: インテグレーションを構成したら、SonarQube で 1 つ以上のプロジェクトをスキャンし、メトリクスを Datadog に表示します。
+> 
+
+このインテグレーションで収集される.メトリクスは、デフォルトで `component` タグが付けられます。タグ名をコンポーネント別に
+変更するには、コンポーネントの定義で `tag` プロパティを指定します。すべてのプロジェクトに設定するには、インスタンスの
+コンフィグで `default_tag` プロパティを設定します。
+
+> 注: SonarQube のプロジェクトには、よく複数のソース管理ブランチが含まれています。このインテグレーションでは、
+>SonarQube 内のデフォルトブランチ (通常は `main`) からのメトリクスのみが収集されます。
+
+さらに、SonarQube はこのインテグレーションの追加インスタンスおよび収集する JMX メトリクスのコンフィギュレーションを
+使用して監視される Search Server を公開します。収集するメトリクスのカスタマイズ方法については、[JMX チェックのドキュメント][6]
+で詳細をご確認ください。以下のコンフィグ例や、 [sonarqube.d/metrics.yaml][3] 内のデフォルトの JMX メトリクスコンフィグ
+などもご活用いただけます。
+
+```yaml
+init_config:
+  # インテグレーションにより収集されるメトリクスのリスト。
+  config:
+    - include:
+      domain: SonarQube
+      name: <name>
+      exclude_tags:
+        - name
+      attribute:
+        MyMetric:
+          alias: sonarqube.search_server.my_metric
+          metric_type: gauge
+instances:
+  # Search Server JMX インスタンス
+  - is_jmx: true
+    host: localhost
+    port: 10445
+    user: <username>      # SonarQube の sonar.properties ファイルで定義済み
+    password: <password>  # SonarQube の sonar.properties ファイルで定義済み
+```
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -150,7 +236,7 @@ Datadog Agent では、ログの収集がデフォルトで無効になってい
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、**JMXFetch** セクションで `sonarqube` を探します。
+[Agent のステータスサブコマンドを実行][7]し、 **JMXFetch** セクションで `sonarqube` を探します。
 
 ```text
 ========
@@ -159,6 +245,11 @@ JMXFetch
   Initialized checks
   ==================
     sonarqube
+      instance_name : sonarqube-localhost-10444
+      message : <no value>
+      metric_count : 33
+      service_check_count : 0
+      status : OK
       instance_name : sonarqube-localhost-10443
       message : <no value>
       metric_count : 38
@@ -174,24 +265,17 @@ Collector
 =========
   Running Checks
   ==============
-    sonarqube (1.0.0)
+    sonarqube (1.1.0)
     -----------------
-      Instance ID: sonarqube:f872f6fd88ce0d82 [OK]
-      Configuration Source: file:/etc/datadog-agent/conf.d/sonarqube.d/sonarqube.yaml
-      Total Runs: 2,925
-      Metric Samples: Last Run: 39, Total: 114,075
+      Instance ID: sonarqube:1249c1ed7c7b489a [OK]
+      Configuration Source: file:/etc/datadog-agent/conf.d/sonarqube.d/conf.yaml
+      Total Runs: 51
+      Metric Samples: Last Run: 39, Total: 1,989
       Events: Last Run: 0, Total: 0
-      Service Checks: Last Run: 1, Total: 2,925
-      Average Execution Time : 29ms
-      Last Execution Date : 2020-10-29 13:25:37.000000 UTC
-      Last Successful Execution Date : 2020-10-29 13:25:37.000000 UTC
-      metadata:
-        version.build: 37579
-        version.major: 8
-        version.minor: 5
-        version.patch: 0
-        version.raw: 8.5.0.37579
-        version.scheme: semver
+      Service Checks: Last Run: 1, Total: 51
+      Average Execution Time : 1.19s
+      Last Execution Date : 2021-03-12 00:00:44.000000 UTC
+      Last Successful Execution Date : 2021-03-12 00:00:44.000000 UTC
 ```
 
 ## 収集データ
@@ -214,10 +298,18 @@ SonarQube には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://www.sonarqube.org
 [2]: https://docs.datadoghq.com/ja/agent/
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/metrics.yaml
+[4]: https://docs.sonarqube.org/latest/instance-administration/monitoring/
+[5]: https://docs.sonarqube.org/latest/instance-administration/monitoring/#header-4
+[6]: https://docs.datadoghq.com/ja/integrations/java/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/help/

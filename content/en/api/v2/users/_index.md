@@ -1,3 +1,4 @@
 ---
 title: Users
+headless: true
 ---

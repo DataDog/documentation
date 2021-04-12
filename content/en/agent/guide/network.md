@@ -27,12 +27,11 @@ further_reading:
   - [Live Containers][2] data is `process.`{{< region-param key="dd_site" code="true" >}}
   - [Logs][3] data includes `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP, and several others. Review the complete list of [logs endpoints][4] for more information.
   - [Orchestrator Resources][5] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
-  - [HIPPA logs][6] data is the same as for all [Logs][3], but also the following legacy endpoints are supported:
+  - [HIPAA logs][6] data is the same as for all [Logs][3], but also the following legacy endpoints are supported:
     - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-  - [Synthetic Private Locations][7] is `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} for version 0.1.6+ and `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} for versions 0.2.0+.
   - All other Agent data:
       - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
       - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
@@ -80,7 +79,7 @@ Each section has a dedicated endpoint, for example:
 
 You should whitelist all of these IPs. While only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
 
-## Open Ports
+## Open ports
 
 **All outbound traffic is sent over SSL via TCP / UDP.**
 
@@ -141,9 +140,9 @@ Open the following ports in order to benefit from all the Agent functionalities:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Using Proxies
+## Using proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][8].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][7].
 
 ## Further Reading
 
@@ -155,5 +154,4 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [4]: /logs/log_collection/?tab=http#datadog-logs-endpoints
 [5]: /infrastructure/livecontainers/#kubernetes-resources-1
 [6]: /security/logs/#hipaa-enabled-customers
-[7]: /synthetics/private_locations/#datadog-private-locations-endpoints
-[8]: /agent/proxy/
+[7]: /agent/proxy/

@@ -6,7 +6,6 @@ aliases:
   - /ja/agent/docker
   - /ja/agent/basic_agent_usage/docker/
   - /ja/integrations/docker_daemon/
-  - /ja/integrations/docker/
   - /ja/docker/
 further_reading:
   - link: /agent/docker/log/
@@ -34,10 +33,10 @@ Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバー�
 
 64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
 
-| Docker Hub      | GCR             |
-|-----------------|-----------------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`             | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`           |
-| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent`   | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent`  |
+| Docker Hub                                             | GCR                                                             |
+|--------------------------------------------------------|-----------------------------------------------------------------|
+| [Agent v6+][2]<br>`docker pull datadog/agent`          | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
+| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
 
 ## セットアップ
 
@@ -47,16 +46,24 @@ Docker Agent をまだインストールしていない場合は、以下の手�
 {{% tab "標準" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
 
 **注**: GCR 以外の別のレジストリを使用している場合は、必ずイメージを更新してください。
 
 {{% /tab %}}
-{{% tab "Amazon Linux < v2" %}}
+{{% tab "Amazon Linux" %}}
+
+Amazon Linux < v2 の場合:
 
 ```shell
-DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+```
+
+Amazon Linux v2 の場合:
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
 
 {{% /tab %}}
@@ -74,7 +81,7 @@ docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:
 (オプション) 非特権インストールを実行するには、インストールコマンドに `--group-add=<DOCKER_GROUP_ID>` を追加します。次に例を示します。
 
 ```shell
-DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7 --group-add=<DOCKER_GROUP_ID>
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
 
 {{% /tab %}}
@@ -95,10 +102,10 @@ Agent の [メインコンフィギュレーションファイル][11]は `datad
 | 環境変数       | 説明                                                                                                                                                                                                                                                                                                                                      |
 |--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`       | Datadog API キー (**必須**)                                                                                                                                                                                                                                                                                                              |
-| `DD_ENV`          | 出力されるすべてのデータにグローバル `env` タグを設定します。                                                                                                                                                                                                                                                                 |
+| `DD_ENV`           | 出力されるすべてのデータにグローバル `env` タグを設定します。                                                                                                                                                                                                                                                                                                  |
 | `DD_HOSTNAME`      | メトリクスに使用するホスト名 (自動検出が失敗した場合)                                                                                                                                                                                                                                                                                             |
 | `DD_TAGS`          | スペース区切りのホストタグ。例: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
-| `DD_SITE`          | メトリクス、トレース、およびログの送信先サイト。有効なオプションは、`datadoghq.com` (Datadog US サイト) および `datadoghq.eu` (Datadog EU サイト) です。                                                                                                                                                                                      |
+| `DD_SITE`          | メトリクス、トレース、ログの送信先サイト。Datadog サイトを `{{< region-param key="dd_site" >}}` に設定します。デフォルトは `datadoghq.com` です。                                                                                                                                                                                                |
 | `DD_DD_URL`        | メトリクス送信用 URL を上書きします。設定は任意です。                                                                                                                                                                                                                                                                                      |
 | `DD_CHECK_RUNNERS` | Agent はデフォルトですべてのチェックを同時に実行します (デフォルト値は `4` ランナーです)。チェックを順次実行する場合は、値を `1` に設定してください。ただし、多数のチェック (または時間のかかるチェック) を実行する必要がある場合、`collector-queue` コンポーネントが遅延して、ヘルスチェックに失敗する可能性があります。ランナーの数を増やすと、チェックを並行して実行できます。 |
 
@@ -120,7 +127,7 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 
 | 環境変数               | 説明                                                                                                                                                                                                                                                      |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_ENABLED`           | トレース Agent による [トレースの収集][13]を有効にします。                                                                                                                                                                                                               |
+| `DD_APM_ENABLED`           | トレース Agent による [トレースの収集][13]を有効にします。                                                                                                                                                                                                              |
 | `DD_LOGS_ENABLED`          | ログ Agent による[ログの収集][14]を有効にします。                                                                                                                                                                                                                 |
 | `DD_PROCESS_AGENT_ENABLED` | プロセス Agent による[ライブプロセスの収集][15]を有効にします。Docker ソケットがある場合、[ライブコンテナービュー][16]はすでにデフォルトで有効になっています。`false` に設定すると、[ライブプロセスの収集][15]と[ライブコンテナービュー][16]が無効になります。 |
 
@@ -145,11 +152,11 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 
 Datadog は [Docker][20]、[Kubernetes][21]、[ECS][22]、[Swarm、Mesos、Nomad、Rancher][20] からの一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
-| 環境変数                            | 説明                                               |
-|-----------------------------------------|-----------------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`              | Docker コンテナラベルを抽出します                           |
-| `DD_DOCKER_ENV_AS_TAGS`                 | Docker コンテナ環境変数を抽出します            |
-| `DD_COLLECT_EC2_TAGS`                   | AWS インテグレーションを使用せずに、カスタム EC2 タグを抽出します |
+| 環境変数               | 説明                                               |
+|----------------------------|-----------------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS` | Docker コンテナラベルを抽出します                           |
+| `DD_DOCKER_ENV_AS_TAGS`    | Docker コンテナ環境変数を抽出します            |
+| `DD_COLLECT_EC2_TAGS`      | AWS インテグレーションを使用せずに、カスタム EC2 タグを抽出します |
 
 詳細については、[Docker タグの抽出][23]ドキュメントを参照してください。
 
@@ -161,16 +168,16 @@ Datadog は [Docker][20]、[Kubernetes][21]、[ECS][22]、[Swarm、Mesos、Nomad
 
 ログの収集、メトリクスの収集、オートディスカバリーからコンテナを除外します。Datadog はデフォルトで Kubernetes と OpenShift の `pause` コンテナを除外します。これらの許可リストとブロックリストはオートディスカバリーにのみ適用されます。トレースと DogStatsD は影響を受けません。これらの環境変数の値は、正規表現をサポートしています。
 
-| 環境変数    | 説明                                                                                                                                                                                                        |
-|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_CONTAINER_INCLUDE` | 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*` OpenShift 環境内で ImageStreams を使用する場合は、画像の代わりにコンテナ名を使用してください。例: "name:container_name_1 name:container_name_2", name:.*|
-| `DD_CONTAINER_EXCLUDE` | 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*` |
-| `DD_CONTAINER_INCLUDE_METRICS` | メトリクスを含めたいコンテナの許可リスト。  |
-| `DD_CONTAINER_EXCLUDE_METRICS` | メトリクスを除外したいコンテナのブロックリスト。 |
-| `DD_CONTAINER_INCLUDE_LOGS` | ログを含めたいコンテナの許可リスト。  |
-| `DD_CONTAINER_EXCLUDE_LOGS` | ログを除外したいコンテナのブロックリスト。 |
-| `DD_AC_INCLUDE` | **非推奨**: 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`  |
-| `DD_AC_EXCLUDE` | **非推奨**: 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*` |
+| 環境変数                   | 説明                                                                                                                                                                                                                                                                                                               |
+|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_CONTAINER_INCLUDE`         | 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*` OpenShift 環境内で ImageStreams を使用する場合は、画像の代わりにコンテナ名を使用してください。例: "name:container_name_1 name:container_name_2", name:.* |
+| `DD_CONTAINER_EXCLUDE`         | 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*`                                                                                                        |
+| `DD_CONTAINER_INCLUDE_METRICS` | メトリクスを含めたいコンテナの許可リスト。                                                                                                                                                                                                                                                                |
+| `DD_CONTAINER_EXCLUDE_METRICS` | メトリクスを除外したいコンテナのブロックリスト。                                                                                                                                                                                                                                                                |
+| `DD_CONTAINER_INCLUDE_LOGS`    | ログを含めたいコンテナの許可リスト。                                                                                                                                                                                                                                                                   |
+| `DD_CONTAINER_EXCLUDE_LOGS`    | ログを除外したいコンテナのブロックリスト。                                                                                                                                                                                                                                                                   |
+| `DD_AC_INCLUDE`                | **非推奨**: 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`                                                                                                                                                     |
+| `DD_AC_EXCLUDE`                | **非推奨**: 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*`                                                                                        |
 
 その他の例は[コンテナのディスカバリー管理][25]ページでご確認いただけます。
 

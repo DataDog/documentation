@@ -4,10 +4,10 @@ dependencies:
 kind: ドキュメント
 title: Ruby 向け Datadog Lambda ライブラリ
 ---
-[![CircleCI](https://img.shields.io/circleci/build/github/DataDog/datadog-lambda-rb)](https://circleci.com/gh/DataDog/workflows/datadog-lambda-rb)
+![build](https://github.com/DataDog/datadog-lambda-rb/workflows/build/badge.svg)
 [![RubyGem](https://img.shields.io/gem/v/datadog-lambda)](https://rubygems.org/gems/datadog-lambda)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-rb/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-rb/blob/main/LICENSE)
 
 Ruby (2.5 および 2.7) 向け Datadog Lambda ライブラリは、拡張 Lambda メトリクス、分散型トレーシング、および AWS Lambda 関数からのカスタムメトリクス送信を可能にします。
 
@@ -27,7 +27,7 @@ Ruby (2.5 および 2.7) 向け Datadog Lambda ライブラリは、拡張 Lambd
 
 トレース収集の詳細については、[AWS Lambda 関数からのトレースの収集](https://docs.datadoghq.com/integrations/amazon_lambda/?tab=ruby#trace-collection)をご覧ください。
 
-トレーサーの詳細については、[Datadog トレースクライアントの公式ドキュメント](https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md)をご覧ください。
+トレーサーの詳細については、[Datadog トレースクライアントの公式ドキュメント](https://github.com/DataDog/dd-trace-rb/blob/main/docs/GettingStarted.md)をご覧ください。
 
 トレースとログの接続の詳細については、[ログとトレースの接続](https://docs.datadoghq.com/tracing/connect_logs_and_traces/ruby/)をご覧ください。
 
@@ -55,7 +55,7 @@ X-Ray トレースと Datadog トレースの両方を使用するときに、X-
 
 ## 寄稿
 
-このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/dd-lambda-layer-rb/blob/master/CONTRIBUTING.md)に従ってプルリクエストを開いてください。
+このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/dd-lambda-layer-rb/blob/main/CONTRIBUTING.md)に従ってプルリクエストを開いてください。
 
 ## ライセンス
 

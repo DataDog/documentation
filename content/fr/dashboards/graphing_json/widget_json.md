@@ -108,7 +108,7 @@ MARKERS_SCHEMA = {
 | Paramètre      | Type   | Description                                                                                                           |
 |----------------|--------|-----------------------------------------------------------------------------------------------------------------------|
 | `value`        | chaîne | Valeur à appliquer. Peut être une valeur unique `y = 15` ou une plage de valeurs `0 < y < 10`                                      |
-| `display_type` | chaîne | Combinaison des éléments suivants : <br>- Un niveau de sévérité `error`, `warning`, `ok` ou `info` <br> - Un type de ligne `dashed`, `solid` ou `bold` |
+| `display_type` | chaîne | Combinaison des éléments suivants : <br>- Un niveau de gravité `error`, `warning`, `ok` ou `info` <br> - Un type de ligne `dashed`, `solid` ou `bold` |
 | `label`        | chaîne | Libellé à afficher sur le marqueur.                                                                                     |
 
 ### Exemple :

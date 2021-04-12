@@ -13,8 +13,6 @@ source: docker
 title: /etc/docker/daemon.json 監査が構成されている
 type: security_rules
 ---
-## 概要
-
 ## 説明
 
 該当する場合は `/etc/docker/daemon.json` を監査します。
@@ -22,6 +20,14 @@ type: security_rules
 ## 根拠
 
 Linux ファイルシステムおよびシステムのコールを監査するのと同時に、すべての Docker 関連ファイルおよびディレクトリも監査します。Docker daemon はルート権限で実行しその行動は `/etc/docker/daemon.json` を含むキーファイルやディレクトリに依存します。これにより、Docker daemon のさまざまなパラメーターが保持されるため、監査する必要があるのです。
+
+## 監査
+
+`/etc/docker/daemon.json` ファイルに関連付けられた監査ルールがあることを確認します。`/etc/docker/daemon.json` ファイルのルールを表示するには、次のコマンドを実行します。
+
+```
+auditctl -l | grep /etc/docker/daemon.json
+```
 
 ## 修復
 

@@ -26,8 +26,15 @@ To create a [host monitor][1] in Datadog, use the main navigation: *Monitors -->
 
 Select the hosts to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
 
-* The include field uses `AND` logic. All listed names and tags must be present on a host for it to be included.
-* The exclude field uses `OR` logic. Any host with a listed name or tag is excluded.
+- The include field uses `AND` logic. All listed names and tags must be present on a host for it to be included.
+- The exclude field uses `OR` logic. Any host with a listed name or tag is excluded.
+
+#### Examples
+
+| Monitor                                                | Include               | Exclude     |
+|--------------------------------------------------------|-----------------------|-------------|
+| Include all hosts with the tag `env:prod`              | `env:prod`            | leave empty |
+| Include all hosts except hosts with the tag `env:test` | `All Monitored Hosts` | `env:test`  |
 
 ### Set alert conditions
 

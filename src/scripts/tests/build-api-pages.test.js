@@ -227,6 +227,17 @@ describe(`outputExample `, () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should output multi line example strings with newlines as \\n to avoid parse errors', () => {
+    const mockExample = `rule_name_1 foo
+
+rule_name_2 bar
+
+`;
+    const actual = bp.outputExample(mockExample);
+    const expected = '"rule_name_1 foo\\n\\nrule_name_2 bar\\n\\n"';
+    expect(actual).toEqual(expected);
+  });
+
 });
 
 describe(`getJsonWrapChars `, () => {
@@ -1037,7 +1048,7 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should show oneOf', () => {
+  it('should show oneOf examples', () => {
     const mockSchema = {
       "description": "Structured log message.",
       "oneOf": [
@@ -1209,6 +1220,253 @@ describe(`filterExampleJson`, () => {
     };
     expect(actual).toEqual(expected);
   });
+
+  it('should show more oneOf examples', () => {
+    const mockSchema = {
+      "description": "Response object which includes a single metric's volume.",
+      "properties": {
+        "data": {
+          "description": "Possible response objects for a metric's volume.",
+          "oneOf": [
+            {
+              "description": "Object for a single metric's distinct volume.",
+              "properties": {
+                "attributes": {
+                  "description": "Object containing the definition of a metric's distinct volume.",
+                  "properties": {
+                    "distinct_volume": {
+                      "description": "Distinct volume for the given metric.",
+                      "example": 10,
+                      "format": "int64",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "The metric name for this resource.",
+                  "example": "test.metric.latency",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "distinct_metric_volumes",
+                  "description": "The metric distinct volume type.",
+                  "enum": [
+                    "distinct_metric_volumes"
+                  ],
+                  "example": "distinct_metric_volumes",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "DISTINCT_METRIC_VOLUMES"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            {
+              "description": "Object for a single metric's ingested and indexed volume.",
+              "properties": {
+                "attributes": {
+                  "description": "Object containing the definition of a metric's ingested and indexed volume.",
+                  "properties": {
+                    "indexed_volume": {
+                      "description": "Indexed volume for the given metric.",
+                      "example": 10,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "ingested_volume": {
+                      "description": "Ingested volume for the given metric.",
+                      "example": 20,
+                      "format": "int64",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "The metric name for this resource.",
+                  "example": "test.metric.latency",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "metric_volumes",
+                  "description": "The metric ingested and indexed volume type.",
+                  "enum": [
+                    "metric_volumes"
+                  ],
+                  "example": "metric_volumes",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "METRIC_VOLUMES"
+                  ]
+                }
+              },
+              "type": "object"
+            }
+          ],
+          "type": "object"
+        }
+      },
+      "readOnly": true,
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {
+      "data": {
+        "attributes": {
+          "distinct_volume": 10
+        },
+        "id": "test.metric.latency",
+        "type": "distinct_metric_volumes"
+      }
+    };
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show more oneOf examples with items', () => {
+    const mockSchema = {
+      "description": "Response object that includes metrics and metric tag configurations.",
+      "properties": {
+        "data": {
+          "description": "Array of metrics and metric tag configurations.",
+          "items": {
+            "description": "Object for a metrics and metric tag configurations.",
+            "oneOf": [
+              {
+                "description": "Object for a single metric tag configuration.",
+                "example": {
+                  "id": "metric.foo.bar",
+                  "type": "metric"
+                },
+                "properties": {
+                  "id": {
+                    "description": "The metric name for this resource.",
+                    "example": "test.metric.latency",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "metrics",
+                    "description": "The metric resource type.",
+                    "enum": [
+                      "metrics"
+                    ],
+                    "example": "metrics",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "METRICS"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "description": "Object for a single metric tag configuration.",
+                "example": {
+                  "attributes": {
+                    "created_at": "2020-03-31T09:48:37.463835Z",
+                    "metric_type": "gauge",
+                    "modified_at": "2020-04-31T09:48:37.463835Z",
+                    "tags": [
+                      "app",
+                      "datacenter"
+                    ]
+                  },
+                  "id": "http.request.latency",
+                  "type": "manage_tags"
+                },
+                "properties": {
+                  "attributes": {
+                    "description": "Object containing the definition of a metric tag configuration attributes.",
+                    "properties": {
+                      "created_at": {
+                        "description": "Timestamp when the tag configuration was created.",
+                        "example": "2020-03-31T09:48:37.463835Z",
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "include_percentiles": {
+                        "description": "Toggle to turn on/off percentile aggregations for distribution metrics.\nOnly present when the `metric_type` is `distribution`.",
+                        "example": true,
+                        "type": "boolean"
+                      },
+                      "metric_type": {
+                        "default": "gauge",
+                        "description": "The metric's type.",
+                        "enum": [
+                          "gauge",
+                          "count",
+                          "distribution"
+                        ],
+                        "example": "count",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "GAUGE",
+                          "COUNT",
+                          "DISTRIBUTION"
+                        ]
+                      },
+                      "modified_at": {
+                        "description": "Timestamp when the tag configuration was last modified.",
+                        "example": "2020-03-31T09:48:37.463835Z",
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "tags": {
+                        "description": "List of tag keys on which to group.",
+                        "example": [
+                          "app",
+                          "datacenter"
+                        ],
+                        "items": {
+                          "description": "Tag keys to group by.",
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "id": {
+                    "description": "The metric name for this resource.",
+                    "example": "test.metric.latency",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "manage_tags",
+                    "description": "The metric tag configuration resource type.",
+                    "enum": [
+                      "manage_tags"
+                    ],
+                    "example": "manage_tags",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "MANAGE_TAGS"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "readOnly": true,
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {
+      "data": [
+        {
+          "id": "test.metric.latency",
+          "type": "metrics"
+        }
+      ]
+    };
+    expect(actual).toEqual(expected);
+  })
 
 });
 

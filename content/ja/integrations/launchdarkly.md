@@ -7,7 +7,7 @@
 "categories":
 - notification
 "creates_events": true
-"ddtype": "check"
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md"
 "display_name": "LaunchDarkly"
@@ -23,7 +23,7 @@
 "metric_prefix": "launchdarkly_relay."
 "name": "launchdarkly"
 "public_title": "Datadog-LaunchDarkly インテグレーション"
-"short_description": "LaunchDarkly のリレープロキシからのメトリクスを追跡"
+"short_description": "Datadog の LaunchDarkly の変更を監視する"
 "support": "contrib"
 "supported_os":
 - linux

@@ -1,4 +1,61 @@
 {
+  "ListAPIKeys": {
+    "description": "アカウントで利用できるすべての API キーを一覧表示します。",
+    "summary": "すべての API キーを取得"
+  },
+  "CreateAPIKey": {
+    "description": "API キーを作成します。",
+    "summary": "API キーの作成",
+    "request_schema_description": "API キーの作成に使用されるリクエスト。"
+  },
+  "DeleteAPIKey": {
+    "description": "API キーを削除します。",
+    "summary": "API キーの削除"
+  },
+  "GetAPIKey": {
+    "description": "API キーを取得します。",
+    "summary": "API キーを取得する"
+  },
+  "UpdateAPIKey": {
+    "description": "API キーを更新します。",
+    "summary": "API キーの編集",
+    "request_schema_description": "API キーの更新に使用されるリクエスト。"
+  },
+  "ListApplicationKeys": {
+    "description": "組織で利用できるすべてのアプリケーションキーを一覧表示",
+    "summary": "すべてのアプリケーションキーを取得"
+  },
+  "DeleteApplicationKey": {
+    "description": "アプリケーションキーの削除",
+    "summary": "アプリケーションキーの削除"
+  },
+  "UpdateApplicationKey": {
+    "description": "アプリケーションキーの編集",
+    "summary": "アプリケーションキーの編集",
+    "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
+  },
+  "ListCurrentUserApplicationKeys": {
+    "description": "現在のユーザーが利用できるすべてのアプリケーションキーを一覧表示",
+    "summary": "現在のユーザーが所有するすべてのアプリケーションキーを取得する"
+  },
+  "CreateCurrentUserApplicationKey": {
+    "description": "現在のユーザーのアプリケーションキーを作成します",
+    "summary": "現在のユーザーのアプリケーションキーを作成します",
+    "request_schema_description": "アプリケーションキーの作成に使用されるリクエスト。"
+  },
+  "DeleteCurrentUserApplicationKey": {
+    "description": "現在のユーザーが所有するアプリケーションキーを削除します",
+    "summary": "現在のユーザーが所有するアプリケーションキーを削除します"
+  },
+  "GetCurrentUserApplicationKey": {
+    "description": "現在のユーザーが所有するアプリケーションキーを 1 つ取得",
+    "summary": "現在のユーザーが所有するアプリケーションキーを 1 つ取得します"
+  },
+  "UpdateCurrentUserApplicationKey": {
+    "description": "現在のユーザーが所有するアプリケーションキーを編集します",
+    "summary": "現在のユーザーが所有するアプリケーションキーを編集します",
+    "request_schema_description": "アプリケーションキーの更新に使用されるリクエスト。"
+  },
   "DeleteDashboardListItems": {
     "description": "既存のダッシュボードリストからダッシュボードを削除します。",
     "summary": "ダッシュボードリストからアイテムを削除する",
@@ -7,7 +64,7 @@
   },
   "GetDashboardListItems": {
     "description": "ダッシュボードリストのダッシュボード定義を取得します。",
-    "summary": "ダッシュボードリストの取得"
+    "summary": "ダッシュボードリストのアイテムを取得する"
   },
   "CreateDashboardListItems": {
     "description": "既存のダッシュボードリストにダッシュボードを追加します。",
@@ -98,6 +155,30 @@
     "summary": "アーカイブにロールを付与する",
     "request_schema_description": "ロールとの関係。"
   },
+  "ListLogsMetrics": {
+    "description": "構成されたログベースのメトリクスとその定義のリストを取得します。",
+    "summary": "すべてのログベースのメトリクスを取得する"
+  },
+  "CreateLogsMetric": {
+    "description": "オーガニゼーションで収集されたログに基づきメトリクスを作成します。\nリクエストが正常に完了すると、リクエスト本文からログベースのメトリクスオブジェクトを返します。",
+    "summary": "ログベースのメトリクスを作成する",
+    "request_description": "新しいログベースメトリクスの定義。",
+    "request_schema_description": "新しいログベースのメトリクス本文。"
+  },
+  "DeleteLogsMetric": {
+    "description": "オーガニゼーションから特定のログベースメトリクスを削除します。",
+    "summary": "ログベースのメトリクスを削除する"
+  },
+  "GetLogsMetric": {
+    "description": "オーガニゼーションから特定のログベースメトリクスを取得します。",
+    "summary": "ログベースのメトリクスを取得する"
+  },
+  "UpdateLogsMetric": {
+    "description": "オーガニゼーションの特定のログベースメトリクスを更新します。\nリクエストが正常に完了すると、リクエスト本文からログベースのメトリクスオブジェクトを返します。",
+    "summary": "ログベースのメトリクスを更新する",
+    "request_description": "ログベースメトリクスの新しい定義。",
+    "request_schema_description": "新しいログベースのメトリクス本文。"
+  },
   "ListRestrictionQueries": {
     "description": "名前と ID を含むすべての制限クエリを返します。",
     "summary": "制限クエリを一覧表示する"
@@ -143,13 +224,35 @@
     "request_schema_description": "ロールとの関係。"
   },
   "ListLogsGet": {
-    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントと POST エンドポイントは、ログを一覧表示する際に互いに交換して使用できます。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "ログの簡易リストの取得"
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n最新のログを見るにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "ログのリストの取得"
   },
   "ListLogs": {
-    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントと GET エンドポイントは、ログを一覧表示する際に互いに交換して\n使用できます。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "ログのリストの取得",
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n複雑なログフィルタリングおよび検索を構築するにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Search logs",
     "request_schema_description": "ログリストのリクエスト。"
+  },
+  "ListTagConfigurations": {
+    "description": "構成済みの count/gauge/rate/distribution メトリクス名をすべて返します\n(指定された場合は追加のフィルターを適用)。",
+    "summary": "タグ付けコンフィギュレーションの一覧表示"
+  },
+  "DeleteTagConfiguration": {
+    "description": "メトリクスのタグ付けコンフィギュレーションを削除します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグ付けコンフィギュレーションを削除"
+  },
+  "ListTagConfigurationByName": {
+    "description": "特定のメトリクス名のタグ付けコンフィギュレーションを返します。",
+    "summary": "タグ付けコンフィギュレーションを名前で一覧表示"
+  },
+  "UpdateTagConfiguration": {
+    "description": "メトリクスまたは分散型メトリクスのパーセンタイル集計のタグ付けコンフィギュレーションを更新します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグ付けコンフィギュレーションを更新",
+    "request_schema_description": "タグ付けコンフィギュレーションを編集したいメトリクスを含むオブジェクトをリクエストします。"
+  },
+  "CreateTagConfiguration": {
+    "description": "count/gauge/rate/distribution メトリクスについて、クエリが可能なタグキーの一覧を作成および定義します。オプションで任意の分散型メトリクスについてのパーセンタイル集計を含めることもできます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグ付けコンフィギュレーションを作成",
+    "request_schema_description": "タグを構成したいメトリクスを含むオブジェクトをリクエストします。"
   },
   "ListPermissions": {
     "description": "名前、説明、ID を含むすべてのアクセス許可のリストを返します。",
@@ -255,7 +358,7 @@
     "summary": "既存のインシデントサービスを削除する"
   },
   "GetIncidentService": {
-    "description": "インシデントサービスの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",
+    "description": "インシデントサービスの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、\nincluded 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",
     "summary": "インシデントサービスの詳細を取得する"
   },
   "UpdateIncidentService": {
@@ -279,7 +382,7 @@
     "summary": "既存のインシデントチームを削除する"
   },
   "GetIncidentTeam": {
-    "description": "インシデントチームの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
+    "description": "インシデントチームの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、\nincluded 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
     "summary": "インシデントチームの詳細を取得する"
   },
   "UpdateIncidentTeam": {

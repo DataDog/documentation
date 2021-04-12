@@ -317,6 +317,28 @@ Pour supprimer le tracer PHP :
 
 **Remarque** : si vous utilisez une mise en cache secondaire dans OPcache en définissant le paramètre `opcache.file_cache`, supprimez le dossier de cache.
 
+## Résoudre un crash d'application
+
+Si jamais le traceur PHP entraîne le crash de votre application, généralement en raison d'une erreur de segmentation, il est préférable d'obtenir un core dump et de contacter l'assistance Datadog.
+
+### Obtenir un core dump
+
+Il peut s'avérer difficile d'obtenir un core dump pour les applications PHP, notamment pour PHP-FPM. Voici quelques conseils pour vous aider à obtenir un core dump :
+
+1. Passez en revue le log d'erreur de l'application pour déterminer si PHP-FPM a généré un core dump :
+   - Recherchez l'expression `(SIGSEGV - core dumped)`, afin de trouver un message confirmant l'enregistrement d'un core dump. Exemple : `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV - core dumped) after <duration> seconds from start`.
+   - Recherchez l'expression `(SIGSEGV)`, afin de trouver un message confirmant le non-enregistrement d'un core dump. Exemple : `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`.
+1. Accédez au core dump en exécutant `cat /proc/sys/kernel/core_pattern`. La valeur par défaut étant généralement `core`, un fichier `core` est donc généré dans le dossier racine Web.
+
+Si aucun core dump n'a été généré, vérifiez les configurations suivantes et modifiez-les en fonction de vos besoins :
+
+1. Si `/proc/sys/kernel/core_pattern` contient un chemin comprenant des répertoires imbriqués, assurez-vous que le chemin d'accès avec les répertoires complets existe.
+1. Si l'utilisateur qui exécute les workers du pool PHP-FPM n'est pas `root` (`www-data` est généralement utilisé), attribuez à cet utilisateur des autorisations d'écriture dans le répertoire des core dumps.
+1. Assurez-vous que la valeur de `/proc/sys/fs/suid_dumpable` n'est pas `0`. Définissez-la sur `1` ou `2`, sauf si vous exécutez le pool de workers PHP-FPM en tant que `root`. Vérifiez vos options avec votre administrateur système.
+1. Assurez-vous que la valeur de `rlimit_core` est adéquate dans la configuration du pool PHP-FPM. Vous pouvez retirer cette limite, avec `rlimit_core = unlimited`.
+1. Assurez-vous que la valeur de `ulimit` est adéquate dans votre système. Vous pouvez retirer cette limite, avec `ulimit -c unlimited`.
+1. Si votre application s'exécute dans un conteneur Docker et que vous souhaitez modifier `/proc/sys/*`, vous devez effectuer les changements sur la machine du host. Contactez votre administrateur système pour découvrir les différentes options qui s'offrent à vous. Si vous le pouvez, essayez de reproduire le problème dans vos environnements staging ou test.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

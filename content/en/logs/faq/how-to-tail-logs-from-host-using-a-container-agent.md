@@ -28,7 +28,9 @@ Pods/containers have no access to host files by default, which also applies to t
 
 ```
 
-To give the container Agent access to host files, mount the file or its directory to the container Agent. Here are some examples for Kubernetes and Docker:
+To give the container Agent access to host files, mount the file or its directory to the container Agent. Review the list of [Agent configuration files and directories][1] for which host file and directory to mount based your OS.
+
+Here are some examples for Kubernetes and Docker:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -40,7 +42,7 @@ To mount the log files in your host to the Agent container, set the host log dir
           - name: customlogs
             ## The desired log directory inside the agent container:
             mountPath: /container/var/test-dir/logs/
-            
+
       volumes:
         - name: customlogs
           hostPath:
@@ -116,7 +118,7 @@ Your Agent’s Docker installation command should look like this:
 
 ```
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
@@ -155,3 +157,5 @@ Logs Agent
 ```
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/guide/agent-configuration-files/?tab=agentv6v7

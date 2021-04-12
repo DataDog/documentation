@@ -1,11 +1,12 @@
 ---
 title: Presse-papiers Datadog
 kind: documentation
-disable_toc: true
 description: Créer et gérer des incidents
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+    tag: Blog
+    text: Explorer facilement vos données avec le presse-papiers Datadog
 ---
-**Le presse-papiers Datadog est actuellement disponible en version bêta.**
-
 # Présentation
 
 Le presse-papiers Datadog est un outil multiplateforme vous permettant de recueillir et de partager des signaux dans divers contextes. Son contenu est propre à chaque utilisateur. Il stocke tous les graphiques copiés ainsi que les liens enregistrés. Les signaux peuvent être regroupés et exportés dans un dashboard, notebook ou incident.
@@ -49,5 +50,9 @@ Le contenu du presse-papiers peut être exporté dans des dashboards, notebooks 
 {{< img src="monitors/incidents/exporting.png" alt="Exporter du contenu depuis le presse-papiers"  style="width:80%;">}}
 
 Les URL ne peuvent pas être exportées dans des dashboards. Seuls les [graphiques compatibles][1] peuvent être exportés dans des notebooks.
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/fr/notebooks/#visualization

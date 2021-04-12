@@ -37,38 +37,16 @@ further_reading:
 
 ## API
 
-イベントタイムラインウィジェット専用の[ウィジェット JSON スキーマ定義][2]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
 
-```text
-EVENT_TIMELINE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["event_timeline"]},
-        "query": {"type": "string"},
-        "title": {"type": "string"},
-        "title_size": {"type": "string"},
-        "title_align": {"enum": ["center", "left", "right"]}
-        "time": TIME_SCHEMA
-    },
-    "required": ["type", "query"],
-    "additionalProperties": false
-}
-```
+イベントタイムラインウィジェット専用の[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
-| パラメーター     | 種類   | 必須 | 説明                                                                                                                |
-|---------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string | はい      | ウィジェットのタイプ。イベントタイムラインウィジェットには `event_timeline` を使用します。                                                     |
-| `query`       | string | はい      | イベントタイムラインの絞り込みに使用するクエリ                                                                                    |
-| `title`       | string | いいえ       | ウィジェットのタイトル                                                                                                        |
-| `title_size`  | string | いいえ       | タイトルのサイズ                                                                                                          |
-| `title_align` | string | いいえ       | タイトルの配置方法。有効な値は `center`、`left`、`right` です。                                                 |
-| `time`        | object | いいえ       | ウィジェットの時間設定。`TIME_SCHEMA` の作成方法については、[時間 JSON スキーマに関するドキュメント][3]を参照してください。 |
-
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/events/
-[2]: /ja/dashboards/graphing_json/widget_json/
-[3]: /ja/dashboards/graphing_json/widget_json/#time-schema
+[2]: /ja/api/v1/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

@@ -9,11 +9,11 @@ base_integrations_url: https://docs.datadoghq.com/integrations/
 image_map:
   - source:
       - kubernetes
-    image: kube_apiserver_metrics
+    image: kubernetes
     append: false
   - source:
       - azure
-    image: azure.active_directory
+    image: azure
     append: false
   - source:
       - cloudtrail
@@ -63,4 +63,20 @@ image_map:
       - twistlock
     image: twistlock_sm
     link: twistlock
+    append: false
+  - source:
+      - microsoft-365
+    image: microsoft_365
+    append: false
+  - source:
+      - azure-active-directory
+    image: azure_active_directory
+    append: false
+  - source:
+      - microsoft-teams
+    image: microsoft_teams
+    append: false
+  - source:
+      - exchange-server
+    image: exchange_server
     append: false

@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    azure_iot_edge: assets/dashboards/overview.json
   logs:
     source: azure.iot_edge
   metrics_metadata: metadata.csv
@@ -77,7 +78,7 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
         }
         ```
 
-    - "Environment Variables" で、次の環境変数 (アンダースコアが 2 回続けて使用されていることに注意) を追加して試験的メトリクスを有効にします。
+    - "Environment Variables" で、以下の環境変数 (アンダースコアが 2 回続けて使用されていることに注意) を追加して試験的メトリクスを有効にします。
         - `ExperimentalFeatures__Enabled`: `true`
         - `ExperimentalFeatures__EnableMetrics`: `true`
 

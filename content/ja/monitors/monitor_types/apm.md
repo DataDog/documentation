@@ -47,7 +47,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 * が `above`、`above or equal to`、`below`、または `below or equal to` の時にアラートを作成
 * アラートのしきい値 `<数値>`
 * 警告のしきい値 `<数値>`
-* 最後の `5 minutes`、`15 minutes`、`1 hour` などを超えた場合
+* 過去 `5 minutes`、`15 minutes`、`1 hour` など、または `custom` に 1 分～48 時間の値を設定します。
 
 #### 異常検知アラート
 
@@ -56,7 +56,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 * `Requests per second`、`Errors per second`、`Apdex`、`Error rate`、`Avg latency`, `p50 latency`、  `p75 latency`、 `p90 latency`、または `p99 latency` の場合
 * `<ALERT_THRESHOLD>`%, `<WARNING_THRESHOLD>`% の時にアラート
 * 値が`<数値>`偏差、`above or below`、`above`、または`below`
-* 過去 `5 minutes`、`15 minutes`、`1 hour` などの間の予測
+* 過去 `5 minutes`、`15 minutes`、`1 hour` などの間の予測、または `custom` に 1 分～48 時間の値を設定します。
 
 [1]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /ja/tracing/visualization/service/
@@ -76,7 +76,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 ### アラート条件を選択
 
 * メトリクスが `above` または `above or equal to` の場合にトリガー
-* 最後の `5 minutes`、`15 minutes`、`1 hour` などの間のしきい値
+* 過去 `5 minutes`、`15 minutes`、`1 hour` などの間のしきい値、または `custom` に 5 分～48 時間の値を設定します。
 * アラートのしきい値: `<数値>`
 * 警告のしきい値: `<数値>`
 

@@ -4,7 +4,8 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    mongodb: assets/dashboards/overview.json
   logs:
     source: mongodb
   metrics_metadata: metadata.csv
@@ -25,6 +26,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/mongo/README.md'
 display_name: MongoDB
+draft: false
 git_integration_title: mongo
 guid: d51c342e-7a02-4611-a47f-1e8eade5735c
 integration_id: mongodb
@@ -57,27 +59,25 @@ Associez MongoDB à Datadog pour :
 
 Vous pouvez également créer vos propres métriques à l'aide de requêtes personnalisées `find`, `count` et `aggregate`.
 
-**Remarque** : MongoDB v2.6 ou une version ultérieure est requise pour cette intégration.
+**Remarque** : MongoDB v2.6 ou ultérieur est requis pour cette intégration.
 
 ## Configuration
 
 ### Installation
 
-Le check MongoDB est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer.
+Le check MongoDB est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer.
 
-### Configuration
+### Architecture
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+La plupart des métriques mesurant des éléments précis (tels que la disponibilité, la taille, etc.) doivent être recueillies sur chaque nœud mongod. Les métriques plus globales (comme les statistiques sur les index ou la collecte) doivent être recueillies une seule fois. Ainsi, la configuration de votre Agent dépend du déploiement de votre cluster mongo.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "Déploiement autonome" %}}
+#### Déploiement autonome
 
-#### Host
-
-Pour configurer ce check lorsque l'Agent est exécuté sur un host :
+Pour configurer cette intégration pour un déploiement MongoDB composé d'un seul nœud :
 
 ##### Préparer MongoDB
-
 Dans un shell Mongo, créez un utilisateur en lecture seule pour l'Agent Datadog dans la base de données `admin` :
 
 ```shell
@@ -100,6 +100,95 @@ db.createUser({
 })
 ```
 
+##### Configurer les Agents
+Pour recueillir toutes les métriques Mongo disponibles, vous avez besoin d'un seul Agent. Il est préférable de l'exécuter sur le même nœud. Consultez les options de configuration ci-dessous.
+{{% /tab %}}
+{{% tab "ReplicaSet" %}}
+#### ReplicaSet
+
+Pour configurer cette intégration pour un ReplicaSet MongoDB :
+
+##### Préparer MongoDB
+Dans un shell Mongo, authentifiez-vous auprès du serveur primaire et créez un utilisateur en lecture seule pour l'Agent Datadog dans la base de données `admin` :
+
+```shell
+# S'authentifier en tant qu'administrateur.
+use admin
+db.auth("admin", "<VOTRE_MOTDEPASSE_ADMIN_MONGODB>")
+
+# Sur MongoDB 2.x, utiliser la commande addUser.
+db.addUser("datadog", "<MOTDEPASSEUNIQUE>", true)
+
+# Sur MongoDB 3.x ou une version ultérieure, utiliser la commande createUser.
+db.createUser({
+  "user": "datadog",
+  "pwd": "<MOTDEPASSEUNIQUE>",
+  "roles": [
+    { role: "read", db: "admin" },
+    { role: "clusterMonitor", db: "admin" },
+    { role: "read", db: "local" }
+  ]
+})
+```
+
+##### Configurer les Agents
+Vous avez besoin d'un Agent pour chaque membre. Consultez les options de configuration ci-dessous.
+Remarque : d'après la [documentation MongoDB][1] (en anglais), la surveillance des nœuds arbitres n'est pas possible à distance. Cependant, tout changement de statut d'un nœud arbitre est signalé à l'Agent connecté au serveur primaire.
+
+[1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
+{{% /tab %}}
+{{% tab "Partitionnement" %}}
+#### Partitionnement
+
+Pour configurer cette intégration pour un cluster MongoDB partitionné :
+
+##### Préparer MongoDB
+Pour chaque partition de votre cluster, connectez-vous au serveur primaire du ReplicaSet et créez un utilisateur local en lecture seule pour l'Agent Datadog dans la base de données `admin` :
+
+```shell
+# S'authentifier en tant qu'administrateur.
+use admin
+db.auth("admin", "<VOTRE_MOTDEPASSE_ADMIN_MONGODB>")
+
+# Sur MongoDB 2.x, utiliser la commande addUser.
+db.addUser("datadog", "<MOTDEPASSEUNIQUE>", true)
+
+# Sur MongoDB 3.x ou une version ultérieure, utiliser la commande createUser.
+db.createUser({
+  "user": "datadog",
+  "pwd": "<MOTDEPASSEUNIQUE>",
+  "roles": [
+    { role: "read", db: "admin" },
+    { role: "clusterMonitor", db: "admin" },
+    { role: "read", db: "local" }
+  ]
+})
+```
+
+Créez ensuite le même utilisateur depuis un proxy mongos. Cette étape entraîne également la création d'un utilisateur local dans les serveurs de configuration, ce qui permet une connexion directe.
+
+
+##### Configurer les Agents
+1. Configurer un Agent pour chaque membre de chaque partition.
+2. Configurez un Agent pour chaque membre des serveurs de configuration.
+3. Configurez un Agent supplémentaire pour vous connecter au cluster via un proxy mongos. Ce dernier peut être entièrement dédié à la surveillance d'un Agent existant.
+
+Remarque : d'après la [documentation MongoDB][1] (en anglais), la surveillance des nœuds arbitres n'est pas possible à distance. Cependant, tout changement de statut d'un nœud arbitre est signalé à l'Agent connecté au serveur primaire.
+[1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
+{{% /tab %}}
+
+
+### Configuration
+
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+
+{{< tabs >}}
+{{% tab "Host" %}}
+
+#### Host
+
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
+
 ##### Collecte de métriques
 
 1. Modifiez le fichier `mongo.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple mongo.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
@@ -112,6 +201,7 @@ db.createUser({
        ## Hosts to collect metrics from, as is appropriate for your deployment topology.
        ## E.g. for a standalone deployment, specify the hostname and port of the mongod instance.
        ## For replica sets or sharded clusters, see instructions in the sample conf.yaml.
+       ## Only specify multiple hosts when connecting through mongos
        #
      - hosts:
          - <HOST>:<PORT>
@@ -137,12 +227,6 @@ db.createUser({
        #
        options:
          authSource: admin
-
-       ## @param replica_check - boolean - optional - default: true
-       ## Whether or not to read from available replicas.
-       ## Disable this if any replicas are inaccessible to the Agent.
-       #
-       replica_check: true
    ```
 
 2. [Redémarrez l'Agent][3].
@@ -151,7 +235,7 @@ db.createUser({
 
 L'APM Datadog s'intègre à Mongo pour vous permettre de visualiser les traces sur l'ensemble de votre système distribué. La collecte de traces est activée par défaut dans les versions 6 et ultérieures de l'Agent Datadog. Pour commencer à recueillir des traces :
 
-1. [Activez la collecte de trace dans Datadog][4].
+1. [Activez la collecte de traces dans Datadog][4].
 2. [Instrumentez l'application qui envoie des requêtes à Mongo][5].
 
 ##### Collecte de logs
@@ -196,7 +280,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `<NOM_INTÉGRATION>` | `mongo`                                                                                                                                   |
 | `<CONFIG_INIT>`      | vide ou `{}`                                                                                                                             |
-| `<CONFIG_INSTANCE>`  | `{"hosts": ["%%hosts%%:%%port%%], "username": "datadog", "password : "<MOTDEPASSEUNIQUE>", "database": "<BASEDEDONNÉES>", "replica_check": true}` |
+| `<CONFIG_INSTANCE>`  | `{"hosts": ["%%host%%:%%port%%], "username": "datadog", "password : "<MOTDEPASSEUNIQUE>", "database": "<BASEDEDONNÉES>"}` |
 
 ##### Collecte de traces
 
@@ -210,7 +294,7 @@ Variables d'environnement requises sur le conteneur de l'Agent :
 | `<DD_APM_ENABLED>`           | true      |
 | `<DD_APM_NON_LOCAL_TRAFFIC>` | true      |
 
-Consultez les sections [Tracing d'applications Kubernetes][2] et [Configuration de DaemonSet Kubernetes][3] pour consulter la liste complète des variables d'environnement et configurations disponibles.
+Consultez les sections relatives au [tracing d'applications Kubernetes][2] et à la [configuration de DaemonSet Kubernetes][3] pour consulter la liste complète des variables d'environnement et configurations disponibles.
 
 Ensuite, [instrumentez votre conteneur d'application][4] et définissez `DD_AGENT_HOST` sur le nom du conteneur de votre Agent.
 

@@ -8,6 +8,10 @@ further_reading:
     tag: Documentation
     text: 複数のアカウントを持つチームとオーガニゼーションの構成
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog for Government site では、SAML ログインのみがサポートされます。</div>
+{{< /site-region >}}
+
 **このドキュメントは、SAML ID プロバイダー (IdP) が既に稼働中であることを前提としています。**
 
 Datadog アカウントに対して [SAML (Security Assertion Markup Language)][1] を構成すると、SAML IdP が構成された Active Directory、LDAP などのオーガニゼーションの ID ストアに保存されている資格情報を使用してすべてのチームメンバーが Datadog にログインできるようになります。
@@ -20,9 +24,9 @@ Datadog アカウントに対して [SAML (Security Assertion Markup Language)][
 
 ## SAML の構成
 
-左側ナビゲーションメニューでユーザー名にマウスを置くとドロップダウンメニューが表示されますが、[Datadog 管理者][3]の場合は、ここに [Configure SAML][4] オプションがあります。
+左側のナビゲーションメニューでユーザー名にマウスを置くとドロップダウンメニューが表示されますが、[Datadog 管理者][3]の場合は、ここに [Configure SAML][4] オプションがあります。
 
-{{< img src="account_management/saml/saml_configure.png" alt="SAML 構成"  style="width:50%;" >}}
+{{< img src="account_management/saml/saml_configure.png" alt="SAML の構成"  style="width:50%;" >}}
 
 このオプションを選択すると、**SAML Single Sign On Configuration** ページが表示されます。
 
@@ -35,33 +39,33 @@ Datadog アカウントに対して [SAML (Security Assertion Markup Language)][
 2. Datadog の[サービスプロバイダーメタデータ][5]をダウンロードして、Datadog をサービスプロバイダーとして認識するように IdP を構成します。
 
 3. IdP メタデータをアップロードし、IdP を構成したら、**Enable** ボタンをクリックして Datadog で SAML を有効にします。
-{{< img src="account_management/saml/saml_enable.png" alt="SAML の有効化"  >}}
+{{< img src="account_management/saml/saml_enable.png" alt="SAML 有効化"  >}}
 
-Datadog で SAML を構成し、Datadog からのリクエストを受け付けるように IdP のセットアップが完了したら、ユーザーは [SAML Configuration ページ][4]上部のステータスボックスに表示される**シングルサインオン URL** からログインできます。
-{{< img src="account_management/saml/saml_enabled.png" alt="有効化された SAML" >}}
+Datadog で SAML が構成され、Datadog からのリクエストを受け付けるように IdP がセットアップされたら、ユーザーは、[SAML Configuration ページ][4]の上部にあるステータスボックスに表示される**シングルサインオン URL** を使用してログインできます。
+{{< img src="account_management/saml/saml_enabled.png" alt="SAML 有効化"  >}}
 
-<mrk mid="26" mtype="seg">シングルサインオン URL は、[Team ページ][6]にも表示されます。</mrk><mrk mid="27" mtype="seg">この URL をロードすると、IdP に対する SAML 認証が開始されます。</mrk><mrk mid="28" mtype="seg">**注**:</mrk> <mrk mid="29" mtype="seg">この URL は、アカウントで SAML が有効にならないと表示されません。</mrk>
+シングルサインオン URL は、[Team ページ][6]にも表示されます。この URL をロードすると、IdP に対する SAML 認証が開始されます。**注**: この URL は、アカウントで SAML が有効にならないと表示されません。
 
-<mrk mid="30" mtype="seg">**注**:</mrk> <mrk mid="31" mtype="seg">マルチオーガニゼーションに対して SAML を構成する必要がある場合は、[マルチオーガニゼーションに関するドキュメント][7]を参照してください。</mrk>
+**注**: マルチオーガニゼーションに SAML を構成する必要がある場合は、[マルチオーガニゼーションに関するドキュメント][7]を参照してください。
 
 ## SAML 属性の Datadog ロールへのマッピング
 
-ユーザーの SAML 属性に基づき、Datadog のロールを割り当てまたは削除することができます。
+Access Management アクセス許可を持つユーザーは、ユーザーの SAML 属性に基づき、Datadog のロールを割り当てまたは削除することができます。
 
-1. Account Management で Mappings タブをクリックします。
+1. Teams で Mappings タブをクリックします。
 
 2. **New Mapping** ボタンをクリックします。
 
 3. 既存の Datadog ロール（デフォルトまたはカスタム）と関連付ける SAML ID プロバイダーのキー/値ペアを指定します。たとえば、`member_of` 属性に `Development` の値を持つすべてのユーザーに `Devs` という Datadog のカスタムロールを割り当てたい場合は、以下のようにします。
 
-    {{< img src="account_management/saml/create_mapping.png" alt="SAML の Datadog ロールへのマッピング作成"  >}}
+    {{< img src="account_management/saml/create_mapping.png" alt="Datadog ロールへ SAML マッピングを作成"  >}}
 
-4. まだの場合は、**Enable Mappings** をクリックしてマッピングを有効化します。
+4. まだの場合は、**Enable Mappings** をクリックしてマッピングを有効化します。 
 
 指定された ID プロバイダー属性を持つユーザーがログインすると、自動的に Datadog ロールが割り当てられます。同様に、ユーザーの ID プロバイダー属性が削除されると、ロールへのアクセスも失います（別のマッピングが追加された場合を除く）。
 
 <div class="alert alert-warning">
-  <strong>重要:</strong> いずれのマッピングにも一致<i>しない</i>ユーザーは、それまで割り当てられていたロールを失い、SAML で組織にログインすることができなくなります。マッピング定義をよく確認してください。 
+  <strong>重要:</strong> いずれのマッピングにも一致<i>しない</i>ユーザーは、それまで割り当てられていたロールを失い、SAML でオーガニゼーションにログインできなくなります。マッピング定義をよく確認してください。 
 </div>
 
 マッピングに変更を加えるには鉛筆アイコンを、マッピングを削除する場合はゴミ箱アイコンをクリックします。この操作はマッピングのみに適用され、ID プロバイダー属性または Datadog ロールへの影響はありません。
@@ -121,11 +125,11 @@ IdP が基本 NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic` を
 
 ### ジャストインタイム (JIT) プロビジョニング
 
-JIT プロビジョニングを使用すると、初めてログインしようとしたときに Datadog 内にユーザーアカウントが作成されます。したがって、管理者がユーザーアカウントを 1 つずつ手動で作成する必要がなくなります。
+JIT プロビジョニングを使用すると、初めてログインしようとしたときに Datadog 内にユーザーアカウントが作成されます。したがって、管理者がユーザーアカウントを 1 つずつ手動で作成する必要がなくなります。この場合、招待メールは送信されません。
 
 <mrk mid="82" mtype="seg">オーガニゼーションによっては、一部のユーザーを Datadog に招待したくない場合があります。</mrk><mrk mid="83" mtype="seg">アカウントに対する SAML の動作を変更したい場合は、[Datadog のサポートチーム][2]にお問い合わせください。</mrk><mrk mid="84" mtype="seg">特定のユーザーが Datadog にアクセスできないようにする場合は、オーガニゼーション側で、Datadog にアサーションを送信しないように IdP を構成する必要があります。</mrk>
 
-<mrk mid="85" mtype="seg">管理者は、新しい JIT ユーザーにデフォルトのロールを設定できます。</mrk><mrk mid="86" mtype="seg">デフォルトのロールは「**標準**」ですが、新しい JIT ユーザーを「**読み取り専用**」や「**管理者**」として追加することもできます。</mrk>
+管理者は、新しい JIT ユーザーにデフォルトのロールを設定できます。デフォルトのロールは **Standard** ですが、新しい JIT ユーザーを **Read-Only** や **Administrators** として追加することもできます。
 
 {{< img src="account_management/saml/saml_jit_default.png" alt="SAML JIT デフォルト"  style="width:50%;" >}}
 
@@ -139,7 +143,7 @@ JIT プロビジョニングを使用すると、初めてログインしよう�
 
 ### SAML 限定
 
-<mrk mid="95" mtype="seg">SAML 限定モードを有効にした場合、すべてのユーザーが SAML でログインする必要があります。</mrk><mrk mid="96" mtype="seg">それまでのユーザー名/パスワードまたは Google OAuth ログインは機能しません。</mrk><mrk mid="97" mtype="seg">Datadog へのアクセス権を持つすべてのユーザーは、Datadog アカウントにアクセスするために自社の IdP/ディレクトリサービスに有効な資格情報を持っている必要があります。</mrk>
+SAML 限定モードを有効にした場合、すべてのユーザーが SAML でログインする必要があります。それまでのユーザー名/パスワードまたは Google OAuth ログインは機能しません。Datadog へのアクセス権を持つすべてのユーザーは、Datadog アカウントにアクセスするために自社の IdP/ディレクトリサービスに有効な資格情報を持っている必要があります。
 
 ## その他の参考資料
 

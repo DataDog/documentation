@@ -48,7 +48,7 @@ With Datadog APM, you can easily investigate the performance of your endpoints, 
 
     This is the Flamegraph and associated information. Here you can see the duration of each step in the trace and whether it is erroneous. This is useful in identifying slow components and error-prone ones. The Flamegraph can be zoomed, scrolled, and explored naturally. Under the Flamegraph you can see associated metadata, Logs, and Host information.
 
-    The Flamegraph is a great way of identifying the precise piece of your stack that is errneous or very latent. Errors are marked with red highlights and duration is represented by the horizontal length of the span, so very long spans are the slow ones. Learn more about using the Flamegraph in the [Trace View guide][6].
+    The Flamegraph is a great way of identifying the precise piece of your stack that is erroneous or very latent. Errors are marked with red highlights and duration is represented by the horizontal length of the span, so very long spans are the slow ones. Learn more about using the Flamegraph in the [Trace View guide][6].
 
     Under the Flamegraph you can see all of the tags (including [custom ones][7]). From here you can also see associated logs (if you [connected Logs to your Traces][8]), see Host-level information such as CPU and memory usage.
 

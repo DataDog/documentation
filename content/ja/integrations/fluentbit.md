@@ -24,7 +24,7 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 
 ## セットアップ
 
-下記の手順に従ってホストで Fluent Bit を構成します。AWS ECS で Fluent Bit を構成する場合は、[ECS Fluent Bit と firelense ドキュメント][2]を参照してください。
+下記の手順に従ってホストで Fluent Bit を構成します。AWS ECS で Fluent Bit を構成する場合は、[ECS Fluent Bit と FireLens ドキュメント][2]を参照してください。
 
 ### ログの収集
 

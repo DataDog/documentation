@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    activemq: assets/dashboards/activemq_dashboard.json
   logs:
     source: activemq
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    activemq_processes: assets/saved_views/activemq_processes.json
   service_checks: assets/service_checks.json
 categories:
   - log collection
@@ -44,6 +47,8 @@ supported_os:
 
 ActiveMQ チェックは、ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集します。
 
+**注:** このチェックは ActiveMQ Artemis (今後の ActiveMQ バージョン `6`) もサポートし、`activemq.artemis` ネームスペースのメトリクスを報告します。詳細は[メトリクス][#metrics]をご参照ください。
+
 **注**: バージョン 5.8.0 以前の ActiveMQ を実行している場合は、[Agent 5.10.x リリースのサンプルファイル][1]を参照してください。
 
 ## セットアップ
@@ -64,74 +69,22 @@ Agent の ActiveMQ チェックは [Datadog Agent][2] パッケージに含ま�
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
 1. **ActiveMQ サーバーで [JMX Remote が有効になっている][1]ことを確認します。**
-2. ActiveMQ に接続するように Agent を構成します。[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `activemq.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル activemq.d/conf.yaml][3] を参照してください。
+2. ActiveMQ に接続するように Agent を構成します。[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `activemq.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル activemq.d/conf.yaml][3] を参照してください。デフォルトで収集されるメトリクスのリストについては、[`metrics.yaml` ファイル][4]を参照してください。
 
    ```yaml
+   init_config:
+     is_jmx: true
+     collect_default_metrics: true
+
    instances:
      - host: localhost
        port: 1616
        user: username
        password: password
        name: activemq_instance
-   # List of metrics to be collected by the integration
-   # You should not have to modify this.
-   init_config:
-     conf:
-       - include:
-         Type: Queue
-         attribute:
-           AverageEnqueueTime:
-             alias: activemq.queue.avg_enqueue_time
-             metric_type: gauge
-           ConsumerCount:
-             alias: activemq.queue.consumer_count
-             metric_type: gauge
-           ProducerCount:
-             alias: activemq.queue.producer_count
-             metric_type: gauge
-           MaxEnqueueTime:
-             alias: activemq.queue.max_enqueue_time
-             metric_type: gauge
-           MinEnqueueTime:
-             alias: activemq.queue.min_enqueue_time
-             metric_type: gauge
-           MemoryPercentUsage:
-             alias: activemq.queue.memory_pct
-             metric_type: gauge
-           QueueSize:
-             alias: activemq.queue.size
-             metric_type: gauge
-           DequeueCount:
-             alias: activemq.queue.dequeue_count
-             metric_type: counter
-           DispatchCount:
-             alias: activemq.queue.dispatch_count
-             metric_type: counter
-           EnqueueCount:
-             alias: activemq.queue.enqueue_count
-             metric_type: counter
-           ExpiredCount:
-             alias: activemq.queue.expired_count
-             type: counter
-           InFlightCount:
-             alias: activemq.queue.in_flight_count
-             metric_type: counter
-
-       - include:
-         Type: Broker
-         attribute:
-           StorePercentUsage:
-             alias: activemq.broker.store_pct
-             metric_type: gauge
-           TempPercentUsage:
-             alias: activemq.broker.temp_pct
-             metric_type: gauge
-           MemoryPercentUsage:
-             alias: activemq.broker.memory_pct
-             metric_type: gauge
    ```
 
-3. [Agent を再起動します][4]。
+3. [Agent を再起動します][5]。
 
 ##### ログの収集
 
@@ -157,12 +110,13 @@ _Agent バージョン 6.0 以降で利用可能_
        service: "<SERVICE_NAME>"
    ```
 
-3. [Agent を再起動します][4]。
+3. [Agent を再起動します][5]。
 
 [1]: https://activemq.apache.org/jmx.html
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -201,7 +155,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### メトリクス
 {{< get-metrics-from-git "activemq" >}}
-
+  ActiveMQ Artemis フレーバーに関連付けられたメトリクスは、メトリクス名に `artemis` が含まれています。その他すべては ActiveMQ "classic" に報告されます。
 
 ### イベント
 

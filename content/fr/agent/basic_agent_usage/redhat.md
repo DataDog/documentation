@@ -19,6 +19,8 @@ further_reading:
 
 Cette page présente les fonctionnalités de base de l'Agent Datadog pour Red Hat. Si vous n'avez pas encore installé l'Agent, vous trouverez des instructions dans la documentation relative à l'[intégration de l'Agent Datadog][1].
 
+Les paquets sont disponibles en versions pour architectures x86 64 bits et Arm v8. Pour toute autre architecture, utilisez l'installation depuis les sources.
+
 **Remarque** : les versions 6 et ultérieures de Red Hat sont prises en charge.
 
 ## Commandes
@@ -30,7 +32,7 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 
 ### Red Hat 7 et versions ultérieures
 
-| Description                        | Commande                                                |
+| Rôle                        | Commande                                                |
 |------------------------------------|--------------------------------------------------------|
 | Démarrer l'Agent en tant que service           | `sudo systemctl start datadog-agent`                   |
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo systemctl stop datadog-agent`                    |
@@ -43,7 +45,7 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 
 ### Red Hat 6
 
-| Description                        | Commande                                                |
+| Rôle                        | Commande                                                |
 |------------------------------------|--------------------------------------------------------|
 | Démarrer l'Agent en tant que service           | `sudo start datadog-agent`                             |
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo stop datadog-agent`                              |
@@ -57,7 +59,7 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| Description                        | Commande                                           |
+| Rôle                        | Commande                                           |
 |------------------------------------|---------------------------------------------------|
 | Démarrer l'Agent en tant que service           | `sudo service datadog-agent start`                |
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                 |

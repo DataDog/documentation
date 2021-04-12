@@ -19,12 +19,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md'
 display_name: SonarQube
-draft: true
+draft: false
 git_integration_title: sonarqube
 guid: ce089575-93bf-47f0-80b6-ffaf6e34722c
 integration_id: sonarqube
 integration_title: SonarQube
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

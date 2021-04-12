@@ -30,13 +30,15 @@ Apply log processing rules to a specific log collection configurations to:
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
+**Note**: Processing rule patterns must conform to [Golang regexp syntax][1].
+
 To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
 
 ## Filter logs
 
 To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
 
-### exclude_at_match
+### Exclude at match
 
 | Parameter          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
@@ -48,7 +50,7 @@ For example, to **filter OUT** logs that contain a Datadog email address, use th
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -122,7 +124,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### include_at_match
+### Include at match
 
 | Parameter          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
@@ -135,7 +137,7 @@ For example, to **filter IN** logs that contain a Datadog email address, use the
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -145,6 +147,36 @@ logs:
       name: include_datadoghq_users
       ## Regexp can be anything
       pattern: \w+@datadoghq.com
+```
+
+**Note**: If multiple `include_at_match` rules are defined, all rules patterns must match in order for the log to be included. If you want to match one or more patterns you must define them in a single expression:
+
+```yaml
+logs_config:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      pattern: abc|123
+```
+
+If the patterns are too long to fit legibly on a single line you can break them into multiple lines:
+
+```yaml
+logs_config:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      pattern: "abc\
+|123\
+|\\w+@datadoghq.com"
 ```
 
 {{% /tab %}}
@@ -221,7 +253,7 @@ For example, redact credit card numbers:
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs:
+logs_config:
  - type: file
    path: /my/test/file.log
    service: cardpayment
@@ -327,7 +359,7 @@ For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format.
 To send the example logs above with a configuration file, use the following `log_processing_rules`:
 
 ```yaml
-logs:
+logs_config:
  - type: file
    path: /var/log/pg_log.log
    service: database
@@ -398,6 +430,8 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em></div>
+
 More examples:
 
 | **Raw string**           | **Pattern**                                   |
@@ -407,12 +441,11 @@ More examples:
 | Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
 | 20180228                 | `\d{8}`                                       |
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
-**Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
+## Commonly used log processing rules
 
-## Commonly Used Log Processing Rules
-
-See the dedicated [Commonly Used Log Processing Rules FAQ][1] to see a list of examples.
+See the dedicated [Commonly Used Log Processing Rules FAQ][2] to see a list of examples.
 
 ## Tail directories by using wildcards
 
@@ -430,14 +463,14 @@ If your log files are labeled by date or all stored in the same directory, confi
 Configuration example:
 
 ```yaml
-logs:
- - type: file
-   path: /var/log/myapp/*.log
-   exclude_paths:
-     - /var/log/myapp/debug.log
-     - /var/log/myapp/trace.log
-   service: mywebapp
-   source: go
+logs_config:
+  - type: file
+    path: /var/log/myapp/*.log
+    exclude_paths:
+      - /var/log/myapp/debug.log
+      - /var/log/myapp/trace.log
+    service: mywebapp
+    source: go
 ```
 
 The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log` will never be tailed.
@@ -446,25 +479,25 @@ The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp
 
 ## Encode UTF-16 format logs
 
-If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer][2]. Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
+If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer][3]. Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
 
 Configuration example:
 
 ```yaml
-logs:
- - type: file
-   path: /test/log/hello-world.log
-   tags: key:value
-   service: utf-16-logs
-   source: mysql
-   encoding: utf-16-be
+logs_config:
+  - type: file
+    path: /test/log/hello-world.log
+    tags: key:value
+    service: utf-16-logs
+    source: mysql
+    encoding: utf-16-be
 ```
 
 **Note**: The `encoding` parameter is only applicable when the `type` parameter is set to `file`.
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][3] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][4] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -474,13 +507,13 @@ In the `datadog.yaml` file:
 ```yaml
 logs_config:
   processing_rules:
-     - type: exclude_at_match
-       name: exclude_healthcheck
-       pattern: healthcheck
-     - type: mask_sequences
-       name: mask_user_email
-       pattern: \w+@datadoghq.com
-       replace_placeholder: "MASKED_EMAIL"
+    - type: exclude_at_match
+      name: exclude_healthcheck
+      pattern: healthcheck
+    - type: mask_sequences
+      name: mask_user_email
+      pattern: \w+@datadoghq.com
+      replace_placeholder: "MASKED_EMAIL"
 ```
 
 {{% /tab %}}
@@ -507,7 +540,7 @@ env:
 {{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][4] to troubleshoot any issues.
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][5] to troubleshoot any issues.
 
 ## Further Reading
 
@@ -516,8 +549,8 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-
-[1]: /agent/faq/commonly-used-log-processing-rules
-[2]: https://docs.datadoghq.com/logs/explorer/#overview
-[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[4]: /agent/guide/agent-commands/#agent-information
+[1]: https://golang.org/pkg/regexp/syntax/
+[2]: /agent/faq/commonly-used-log-processing-rules
+[3]: https://docs.datadoghq.com/logs/explorer/#overview
+[4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: /agent/guide/agent-commands/#agent-information

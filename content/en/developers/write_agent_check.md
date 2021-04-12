@@ -1,5 +1,5 @@
 ---
-title: Writing a Custom Agent Check
+title: Custom Agent Check
 kind: documentation
 aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
@@ -26,7 +26,7 @@ For more information about how to write an integration, see [Creating New Integr
 
 First, ensure the [Agent][3] is properly installed. If you run into any issues during the setup, [contact Datadog support][4].
 
-**Note**: If you are running Agent v7+ your custom Agent check should be Python 3 compatible. Otherwise it should be Python 2.7+ compatible.
+**Note**: If you are running Agent v7+ your custom Agent check should be Python 3 compatible. Otherwise, it should be Python 2.7+ compatible.
 
 ## Custom Agent check
 
@@ -56,7 +56,7 @@ __version__ = "1.0.0"
 
 class HelloCheck(AgentCheck):
     def check(self, instance):
-        self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
+        self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'] + self.instance.get('tags', []))
 {{< /code-block >}}
 
 For more details about the interface provided by the base class, browse the [API documentation][5].
@@ -153,7 +153,7 @@ class LSCheck(AgentCheck):
     def check(self, instance):
         files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
         file_count = len(files.split('\n')) - 1  #len() returns an int by default
-        self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'])
+        self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'] + self.instance.get('tags', []))
 ```
 
 ## Further Reading

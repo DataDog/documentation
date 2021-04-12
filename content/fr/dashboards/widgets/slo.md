@@ -24,7 +24,7 @@ Utilisez le widget Résumé des SLO pour surveiller vos [SLO (Service Level Obje
 2. Sélectionnez un SLO dans le menu déroulant.
 3. Sélectionnez jusqu'à trois intervalles de temps différents.
 
-**Remarque :** les SLO peuvent être configurés avec des intervalles de temps de 7, 30 ou 90 jours. Pour tous les SLO, vous pouvez également sélectionner `Week to date` comme intervalle de temps. Si un intervalle de temps de 30 jours au moins est configuré pour un SLO, vous pouvez également sélectionner `Previous week` comme intervalle de temps. Si un intervalle de temps de 90 jours est configuré pour un SLO, vous pouvez également sélectionner `Month to date` ou `Previous month` comme intervalle de temps.
+**Remarque :** l'intervalle `Global Time` vous permet d'afficher le statut et le budget d'indisponibilité pour des périodes arbitraires au cours des 90 derniers jours. De plus, vous pouvez également spécifier une cible SLO unique (facultative) pour la période arbitraire. Pour afficher un budget d'indisponibilité et appliquer un code couleur à la valeur du statut du SLO (rouge ou vert), il est nécessaire d'appliquer une cible SLO. Si vous ne spécifiez aucune cible, seul le statut s'affiche, et le texte demeure gris.
 
 ### Options
 
@@ -42,6 +42,8 @@ Choisissez d'afficher ou de masquer le budget d'indisponibilité restant en cliq
   - `Monitors` : affiche un tableau des pourcentages de statuts pour chaque monitor
   - `Both` : affiche les pourcentages de statuts et les cibles du SLO global ainsi qu'un tableau des pourcentages de statuts pour chaque monitor
 
+**Remarque :** lorsque l'option d'intervalle `Global Time` est sélectionnée, vous pouvez uniquement utiliser le mode de vue `Status`.
+
 {{< img src="dashboards/widgets/slo/slo_summary-view_mode.png" alt="mode de visualisation"  >}}
 
 #### Titre
@@ -52,9 +54,19 @@ Affichez un titre personnalisé pour votre widget en cochant la case `Show a tit
 
 Vous pouvez aussi définir sa taille et son alignement si vous le souhaitez.
 
+## API
+
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][3] pour en savoir plus.
+
+Le [schéma JSON][4] utilisé pour le widget Service Map est le suivant :
+
+{{< dashboards-widgets-api >}}
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/monitors/service_level_objectives/
 [2]: https://app.datadoghq.com/slo
+[3]: /fr/api/v1/dashboards/
+[4]: /fr/dashboards/graphing_json/widget_json/

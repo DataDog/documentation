@@ -1,3 +1,4 @@
 ---
 title: ロール
+headless: true
 ---

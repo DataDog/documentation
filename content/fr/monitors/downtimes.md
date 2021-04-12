@@ -24,7 +24,7 @@ Pour planifier un [downtime de monitor][1] dans Datadog, utilisez le menu princi
 {{< tabs >}}
 {{% tab "Par nom de monitor" %}}
 
-Utilisez le menu déroulant pour choisir les monitors à désactiver, ou cherchez-les. Si vous choisissez de laisser le champ vide, tous les monitors seront désactivés par défaut. Vous pouvez également sélectionner un contexte afin de limiter votre downtime à un host, appareil ou tag de votre choix.
+Utilisez le menu déroulant pour choisir les monitors à désactiver ou la fonction de recherche pour les trouver. Si vous choisissez de laisser le champ vide, tous les monitors seront désactivés par défaut. Vous pouvez également sélectionner un contexte afin de limiter votre downtime à un host, appareil ou tag de votre choix. Seuls les monitors qui correspondent à **TOUS les contextes sélectionnés** sont désactivés.
 
 {{% /tab %}}
 {{% tab "Par tags de monitor" %}}
@@ -82,15 +82,22 @@ Les monitors déclenchent des événements lorsque leur statut, à savoir `ALERT
 
 **Remarque** : si vous désactivez ou réactivez un monitor via l'IU, les downtimes planifiés associés à ce monitor ne sont pas supprimés. Pour modifier ou supprimer un downtime, utilisez la page [Manage Downtimes][1] ou passez par l'[API][6].
 
-Si le statut d'un monitor change durant un downtime (en passant par exemple de `OK` à `ALERT`, `WARNING` ou `NO DATA`) et reste identique après la fin d'un downtime planifié, **aucune** notification n'est envoyée. Toutefois, un événement de rétablissement se déclenche dès que des données sont renvoyées pour ce contexte ou dès que le statut du monitor repasse à `OK`.
+Si un monitor possède un état nécessitant l'envoi d'une alerte (`ALERT`, `WARNING` ou `NO DATA`) lorsque le downtime prend fin, le monitor se rétablit automatiquement et se déclenche à nouveau peu de temps après si les conditions d'alerte sont remplies. Cette logique s'applique aux monitors qui changent d'état lors d'un downtime (en passant par exemple de l'état `OK` à l'état `ALERT`, `WARNING` ou `NO DATA`), mais également aux monitors qui possédaient déjà un état nécessitant l'envoi d'une alerte au début du downtime.
 
-Ce comportement a été conçu dans le but d'empêcher l'envoi d'alertes `NO DATA` lors de l'utilisation de la fonctionnalité *Autoresolve*. Si vous préférez que le monitor déclenche un événement `NO DATA` chaque fois que la désactivation prend fin, contactez [l'équipe d'assistance Datadog][7] afin de demander l'activation de cette fonctionnalité pour votre compte. **Remarque** : cela concerne uniquement les situations où un monitor termine une période de downtime avec un statut `NO DATA`.
+**1er exemple :** monitor possédant un état d'alerte *avant* le début du downtime et conservant le *même état* pendant la durée du downtime :
+1. Pendant le downtime, les notifications pour cette alerte sont désactivées.
+2. Le monitor conserve son état d'alerte, car les conditions sont toujours remplies.
+3. Le downtime prend fin.
+4. Le monitor est automatiquement rétabli.
+5. Les conditions d'alerte sont toujours remplies, ce qui déclenche l'envoi d'une notification.
 
-Si un monitor déclenche une alerte **avant** un downtime et que le statut est rétabli **pendant** ce downtime, un événement de rétablissement est envoyé pendant ce downtime (s'il s'agit du premier rétablissement).
+**2e exemple :** monitor possédant un état d'alerte *avant* le début d'un downtime et rétabli *pendant* le downtime :
+1. Le monitor passe d'un état d'alerte à l'état `OK`.
+2. La notification de rétablissement est envoyée pendant le downtime, mais uniquement pour le premier rétablissement de ce downtime.
 
 ### Rapport sur les monitors
 
-Tous les statuts ayant déclenché une alerte sont inclus dans le [rapport hebdomadaire sur les monitors][8], même si le monitor est en downtime.
+Tous les états d'alerte sont inclus dans le [rapport hebdomadaire sur les monitors][7], même si le monitor est en downtime.
 
 ## Pour aller plus loin
 
@@ -102,5 +109,4 @@ Tous les statuts ayant déclenché une alerte sont inclus dans le [rapport hebdo
 [4]: /fr/monitors/monitor_status/
 [5]: /fr/events/#event-stream
 [6]: /fr/api/v1/downtimes/#cancel-a-downtime
-[7]: /fr/help/
-[8]: /fr/account_management/#preferences
+[7]: /fr/account_management/#preferences

@@ -13,6 +13,12 @@ For security purposes, you must have a valid session for each org you switch to.
 
 2. **SAML Strict**: If your org is set for [SAML Strict][1], you must authenticate via SAML. You are required to re-authenticate each time you switch orgs. Since IdPs persist sessions, this is often a redirect.
 
+## Resetting passwords for multi-org users
+
+A password is shared across orgs for each multi-org user. If you reset your password, the reset affects all the orgs to which you belong.
+
+Note that you cannot use the same password twice.
+
 ## Troubleshooting
 
 If you encounter a problem and cannot log in, try the following:

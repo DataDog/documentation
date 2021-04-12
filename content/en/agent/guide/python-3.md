@@ -20,11 +20,11 @@ This guide provides information and best practices on migrating checks between P
 
 To provide flexibility in allowing code to run multiple on versions of the Agent, this guide focuses on retaining backwards compatibility.
 
-## Editors and Tools
+## Editors and tools
 
-### pylint
+### Pylint
 
-`pylint` contains functions to help you [verify that your custom checks are compatible with Python 3][2].
+Pylint contains functions to help you [verify that your custom checks are compatible with Python 3][2].
 
 #### Installation
 
@@ -77,9 +77,9 @@ Running 2to3 prints a diff against the original source file. For more details ab
 
 Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2–only file, any linting errors or warnings show up on the side as a colorful tick in [PyCharm][5] or as a clickable box on the bottom in [Visual Studio Code][6].
 
-## Python Migration
+## Python migration
 
-### Package Imports
+### Package imports
 
 To standardize Datadog package namespacing, with Python3, all resources live under the base subpackage. For example:
 
@@ -121,7 +121,7 @@ The `dict.has_key()` method is deprecated in Python 2 and is removed in Python 3
 |--------------------------------------|-----------------|
 | `mydict.has_key('foo') //deprecated` | `foo in mydict` |
 
-### Standard Library Changes
+### Standard library changes
 
 Python 3 features a reorganized standard library, where a number of modules and functions were renamed or moved. Importing moved modules through `six.moves` works on both Python versions.
 
@@ -160,11 +160,11 @@ In Python 3, print is explicitly treated as a function; to turn print into a fun
 |---------------|-------------------------------------------------------------------|
 | `print "foo"` | `from __future__ import print_function` <br/><br/> `print("foo")` |
 
-### Integer Division
+### Integer division
 
 In Python 2, the `/` operator performs floor division on integers.
 
-#### Python 2:
+#### Python 2
 
 ```python
 >> 5/2
@@ -173,7 +173,7 @@ In Python 2, the `/` operator performs floor division on integers.
 
 In Python 3, the `/` operator performs float division. The `//` operator performs floor division.
 
-#### Python 3:
+#### Python 3
 
 ```python
 >> 5/2
@@ -188,7 +188,7 @@ To replicate the same behavior of Python 3 regardless of the Python version, put
 
 In Python 2 the standard library round method uses the Round Half Up Strategy while Python 3 uses the Round To Even strategy.
 
-#### Python 2:
+#### Python 2
 
 ```python
 >> round(2.5)
@@ -197,7 +197,7 @@ In Python 2 the standard library round method uses the Round Half Up Strategy wh
 4
 ```
 
-#### Python 3:
+#### Python 3
 
 ```python
 >> round(2.5)
@@ -217,7 +217,7 @@ Python 3 features different syntax for except and raise.
 | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception, variable:` <br/> &nbsp;&nbsp; `...` | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception as variable:` <br/> &nbsp;&nbsp; `...` |
 | `raise Exception, args`                                                                      | `raise Exception(args)`                                                                        |
 
-### Relative Imports
+### Relative imports
 
 In Python 3, relative imports must be made explicit, using the dot (`.`) syntax.
 

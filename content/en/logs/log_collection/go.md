@@ -16,7 +16,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
@@ -97,9 +97,9 @@ logs:
     sourcecategory: sourcecode
 ```
 
-## Getting Further
+## Getting further
 
-Here are some little advices:
+Tips for getting further with Go log collection:
 
 * Always give a name to the logger corresponding to the functionality or service you try to deliver.
 * Log a lot in the DEBUG level and log accurately in the INFO, WARNING and FATAL levels; since these are the log levels you'll get in your production environments.

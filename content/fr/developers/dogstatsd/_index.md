@@ -497,7 +497,7 @@ Si vous souhaitez approfondir vos connaissances sur le format des datagrammes ut
 [1]: https://github.com/etsy/statsd
 [2]: /fr/developers/metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
-[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
+[4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /fr/developers/metrics/custom_metrics/
 [6]: /fr/developers/events/dogstatsd/
 [7]: /fr/developers/service_checks/dogstatsd_service_checks_submission/

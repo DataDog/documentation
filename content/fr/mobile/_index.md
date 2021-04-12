@@ -33,7 +33,7 @@ Si vous le souhaitez, vous pouvez également vous authentifier à l'aide d'un co
 ##### Code QR
 
 1. Connectez-vous tout d'abord à la [page de profil de votre compte Datadog][4] dans un navigateur et cliquez sur le bouton **Link mobile device** de l'organisation à laquelle vous voulez vous connecter. Un code QR s'affiche alors.
-    {{< img src="mobile/link-device.png" alt="bouton Link mobile device">}}
+    {{< img src="mobile/link-device.png" alt="Profils du compte - Link mobile device">}}
 2. Utilisez l'appareil photo de votre téléphone pour scanner le code QR, puis appuyez sur le lien suggéré pour ouvrir l'application Datadog. L'UDID de l'organisation est automatiquement inséré sur l'écran de connexion.
 
 ##### Saisie manuelle
@@ -49,23 +49,25 @@ En cliquant sur **Authorize** lors de la connexion, vous associez l'appareil mob
 
 {{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="page Monitors">}}
 
-Sur la page Monitors, vous pouvez consulter et rechercher tous les monitors auxquels vous avez accès dans votre organisation Datadog. Vos requêtes de recherche peuvent reposer sur un nom de champ ou un build, selon votre stratégie de tagging. Pour en savoir plus sur les recherches, consultez la [section Gérer les monitors][6]. Par exemple, pour filtrer les monitors de métrique associés à l'équipe SRE qui reçoit les alertes, utilisez la requête `"status:Alert type:Metric team:sre"`. Cliquez sur une alerte pour voir ses détails. Vous pouvez filtrer les alertes par type et par heure. Il est également possible de désactiver une alerte. Vos dix recherches les plus récentes sont enregistrées, afin que vous puissiez accéder rapidement à vos dernières requêtes.
+Sur la page Monitors, vous pouvez consulter et rechercher tous les monitors auxquels vous avez accès dans votre organisation Datadog. Vos requêtes de recherche peuvent reposer sur un nom de champ ou un build, selon votre stratégie de tagging. Pour en savoir plus sur les recherches, consultez la [section Gérer les monitors][6].
 
-**Remarque :** pour configurer ou modifier des monitors et des notifications, vous devez accéder à l'[application Web Datadog][7]. Tous les monitors configurés dans l'application Web sont visibles dans l'application mobile. Pour en savoir plus, consultez la section relative à la [création des monitors][8].
+Par exemple, pour filtrer les monitors de métrique associés à l'équipe SRE qui reçoit les alertes, utilisez la requête `"status:Alert type:Metric team:sre"`. Cliquez sur une alerte pour afficher ses détails. Vous pouvez filtrer les alertes par type et par heure. Il est également possible de désactiver une alerte. Vos dix recherches les plus récentes sont enregistrées, afin que vous puissiez accéder rapidement à vos dernières requêtes. De plus, vous pouvez filtrer votre liste de monitors en utilisant les vues enregistrées, qui apparaissent lorsque vous utilisez la barre de recherche. Enfin, affichez et exécutez des tests Synthetic lorsque vous consultez des monitors Synthetic.
+
+**Remarque :** pour configurer ou modifier des monitors, des notifications ou des vues enregistrées, vous devez accéder à l'[application Web Datadog][7]. Tous les monitors configurés dans l'application Web sont visibles dans l'application mobile. Pour en savoir plus, consultez la section relative à la [création de monitors][8].
 
 ## Dashboards
 
 {{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="page Dashboards">}}
 
-Sur la page Dashboards, vous pouvez consulter et rechercher tous les dashboards accessibles de votre organisation Datadog, et les filtrer à l'aide des template variables définies dans l'application Web Datadog. Cliquez sur un dashboard pour l'afficher.
+Sur la page Dashboards, vous pouvez consulter et rechercher tous les dashboards accessibles de votre organisation Datadog, et les filtrer à l'aide des template variables définies dans l'application Web Datadog. Filtrez rapidement vos dashboards à l'aide des vues enregistrées des templates variables. Pour en savoir plus sur les vues enregistrées des templates variables, consultez la section relative aux[ vues enregistrées des dashboards][9]. Cliquez sur un dashboard pour ces vues.
 
-**Remarque :** pour configurer ou modifier un dashboard, vous devez [passer par un navigateur][9]. Pour en savoir plus, consultez la section [Dashboards][5].
+**Remarque :** pour configurer ou modifier un dashboard, vous devez [vous connecter depuis un navigateur][10]. Pour en savoir plus, consultez la section [Dashboards][11].
 
 ## Actions rapides
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Actions rapides">}}
 
-Appuyez longuement sur l'icône de l'application pour faire apparaître un menu d'actions rapides permettant d'accéder aux cinq dashboards [consultés le plus fréquemment][10] pour iOS (d'après le nombre de vues récentes) et les cinq dashboards les plus ouverts sur mobile pour Android. Appuyez sur un résultat pour ouvrir le dashboard dans l'application.
+Appuyez longuement sur l'icône de l'application pour faire apparaître un menu d'actions rapides permettant d'accéder aux cinq dashboards [les plus fréquemment consultés][12] sous iOS (d'après le nombre de vues et l'activité récente), ou les cinq dashboards les plus ouverts sur mobile sous Android. Appuyez sur un résultat pour ouvrir le dashboard dans l'application.
 
 ## Recherche depuis l'écran d'accueil
 
@@ -82,12 +84,12 @@ Appuyez longuement sur l'icône de l'application pour faire apparaître un menu 
 Avec le raccourci, vous pouvez accéder à vos dashboards et à vos monitors de trois façons différentes :
 
 - Épinglez le raccourci à votre écran d'accueil en tant qu'icône. Pour ce faire, accédez à l'application Raccourcis et ouvrez le menu de modification du raccourci vers votre dashboard.
-- Commande vocale Siri : dites le nom de votre raccourci, comme « Ouvrir l'aperçu AWS », pour que Siri ouvre votre dashboard dans l'application.
+- Commande vocale Siri : dites le nom de votre raccourci, par exemple « Ouvrir l'aperçu AWS », pour que Siri ouvre votre dashboard dans l'application.
 - Suggestions Siri : Siri enregistre vos habitudes et vous suggère des raccourcis vers les dashboards dont vous avez le plus besoin. Ces suggestions s'affichent dans un bandeau sur l'écran d'accueil ou l'écran de verrouillage, sur l'écran de recherche iPhone ou dans les widgets de suggestions Siri sur iOS 14.
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Raccourcis">}}
 
-Pour en savoir plus sur les raccourcis et les suggestions Siri, consultez la [documentation d'Apple dédiée à Siri][11].
+Pour en savoir plus sur les raccourcis et les suggestions Siri, consultez la [documentation d'Apple dédiée à Siri][13].
 
 ## Handoff
 
@@ -95,12 +97,12 @@ Pour en savoir plus sur les raccourcis et les suggestions Siri, consultez la [do
 
 Pour que la fonctionnalité Handoff fonctionne, chaque appareil doit :
 
-- être connecté à iCloud avec le même identifiant Apple
-- avoir le Bluetooth activé
-- avoir le Wi-Fi activé
-- avoir Handoff activé
+- être connecté à iCloud avec le même identifiant Apple ;
+- avoir le Bluetooth activé ;
+- avoir le Wi-Fi activé 
+- avoir Handoff activé.
 
-Pour en savoir plus sur Handoff, consultez la [documentation d'Apple dédiée à Handoff][12].
+Pour en savoir plus sur Handoff, consultez la [documentation d'Apple dédiée à Handoff][14].
 
 ## Compte
 
@@ -108,7 +110,7 @@ Changez d'organisation ou déconnectez-vous sur la page Account.
 
 ## Dépannage
 
-Si vous avez besoin d'aide pour le dépannage, [contactez l'assistance Datadog][13]. Vous pouvez aussi envoyer un message sur le canal [Slack public de Datadog][14] [#mobile-app][15].
+Si vous avez besoin d'aide pour résoudre d'éventuels problèmes, [contactez l'assistance Datadog][5]. Vous pouvez aussi envoyer un message sur le canal [Slack public de Datadog][15] [#mobile-app][16].
 
 ### Pour aller plus loin
 
@@ -118,14 +120,15 @@ Si vous avez besoin d'aide pour le dépannage, [contactez l'assistance Datadog][
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /fr/account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
-[5]: /fr/dashboards/
+[5]: /fr/help/
 [6]: /fr/monitors/manage_monitor/#search
 [7]: https://app.datadoghq.com/monitors
 [8]: /fr/monitors/monitor_types/
-[9]: https://app.datadoghq.com/dashboard/lists
-[10]: https://app.datadoghq.com/dashboard/lists/preset/5
-[11]: https://support.apple.com/en-us/HT209055
-[12]: https://support.apple.com/en-us/HT209455
-[13]: /fr/help/
-[14]: https://chat.datadoghq.com/
-[15]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[9]: /fr/dashboards/template_variables/#saved-views
+[10]: https://app.datadoghq.com/dashboard/lists
+[11]: /fr/dashboards/
+[12]: https://app.datadoghq.com/dashboard/lists/preset/5
+[13]: https://support.apple.com/en-us/HT209055
+[14]: https://support.apple.com/en-us/HT209455
+[15]: https://chat.datadoghq.com/
+[16]: https://datadoghq.slack.com/archives/C0114D5EHNG

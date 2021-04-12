@@ -52,6 +52,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [HTTP][22]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http][23]                          |
 | [HTTP router][24]       | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter][25]          |
 | [Redis (go-redis)][26]  | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis][27]                    |
+| [Redis (go-redis-v8)][65]| Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v8][66]                |
 | [Redis (redigo)][28]    | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo][29]                   |
 | [Redis (new redigo)][30]| Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gomodule/redigo][31]                   |
 | [SQL][32]               | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][33]                      |
@@ -147,3 +148,5 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [62]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes
 [63]: https://github.com/bradfitz/gomemcache/memcache
 [64]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
+[65]: https://github.com/go-redis/redis/v8
+[66]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v8

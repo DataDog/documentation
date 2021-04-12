@@ -3,7 +3,7 @@ title: Règles de détection des menaces par défaut
 kind: documentation
 type: security_rules
 description: "Règles sécuritaires de détection Datadog"
-disable_toc: true
+disable_sidebar: true
 ---
 
 Les [règles de détection][1] définissent la logique conditionnelle appliquée à l'ensemble des logs ingérés. Lorsque les conditions d'une règle sont remplies pendant un intervalle donné, Datadog génère un signal de sécurité.

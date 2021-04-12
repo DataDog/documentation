@@ -24,7 +24,11 @@ Choose existing monitors to create a composite monitor, for example: monitor `A`
 
 For configuration purposes, a composite monitor is independent of its constituent monitors. The notification policy of a composite monitor can be modified without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor does not delete the constituent monitors. A composite monitor does not own other monitors—it only uses their results. Also, many composite monitors may reference the same individual monitor.
 
-**Note**: The terms `individual monitors`, `constituent monitors`, and `non-composite monitors` all refer to monitors used by a composite monitor to calculate its status.
+**Notes**
+
+- The terms `individual monitors`, `constituent monitors`, and `non-composite monitors` all refer to monitors used by a composite monitor to calculate its status.
+- Composite results require common groupings. If you choose monitors that do not have common groupings, the selected monitors in the expression may not lead to a composite result.
+- Composite monitors cannot be based on other composite monitors.
 
 ## Monitor creation
 
@@ -133,19 +137,6 @@ As a consequence of this behavior, composite monitors may take several minutes t
 The number of alerts you receive depends on the individual monitor's alert type. If all individual monitors are simple alerts, the composite monitor also has a simple alert type. The composite monitor triggers a single notification when the queries for `A`, `B`, and `C` are all `true` at the same time.
 
 If even one individual monitor is multi-alert, then the composite monitor is also multi-alert. How _many_ alerts it may send at a time depends on whether the composite monitor uses one or uses many multi-alert monitors.
-
-#### One multi-alert monitor
-
-Consider a scenario where monitor `A` is a multi-alert monitor grouped by `host`. If the monitor has four reporting sources (hosts `web01` through `web04`) you may receive up to four alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has four cases to consider. For each case, monitor `A`'s status may vary across its sources, but the statuses of monitors `B` and `C`—which are simple alerts—are unchanging.
-
-The table below shows the status of each multi-alert case at one point in time for the composite monitor `A && B && C`:
-
-| Source | Monitor A | Monitor B | Monitor C | Composite status | Alert triggered? |
-|--------|-----------|-----------|-----------|------------------|------------------|
-| web01  | Alert     | Warn      | Alert     | Alert            | {{< X >}}        |
-| web02  | Ok        | Warn      | Alert     | Ok               |                  |
-| web03  | Warn      | Warn      | Alert     | Alert            | {{< X >}}        |
-| web04  | Skipped   | Warn      | Alert     | Skipped          |                  |
 
 #### Many multi-alert monitors
 

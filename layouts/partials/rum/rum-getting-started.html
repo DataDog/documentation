@@ -1,0 +1,22 @@
+{{ $dot := . }}
+<div class="apm-languages">
+  <div class="container cards-dd">
+    <div class="card-deck">
+      <a class="card" href="/real_user_monitoring/browser/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/javascript.png" "class" "img-fluid" "alt" "browser" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="/real_user_monitoring/android/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/android.png" "class" "img-fluid" "alt" "android" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="/real_user_monitoring/ios/">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/ios_stacked.png" "class" "img-fluid" "alt" "ios" "width" "400") }}
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

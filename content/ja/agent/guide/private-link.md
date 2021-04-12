@@ -13,6 +13,10 @@ further_reading:
 Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開しています。
 </div>
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog PrivateLink は、政府関係のサイトに対する Datadog の使用をサポートしていません。</div>
+{{< /site-region >}}
+
 このガイドでは Datadog で [AWS PrivateLink][1] を構成および使用する方法についてご説明します。
 
 ## 概要
@@ -65,6 +69,13 @@ Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開�
 | Datadog トレースサービス名                                |
 | --------------------------------------------------------- |
 | `com.amazonaws.vpce.us-east-1.vpce-svc-07672d13af0033c24` |
+
+{{% /tab %}}
+{{% tab "Kubernetes リソース" %}}
+
+| Datadog Kubernetes Explorer サービス名                  |
+| --------------------------------------------------------- |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0b03d6756bf6c2ec3` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -186,6 +197,30 @@ Datadog API にデータを送信する、またはこの新しいエンドポ�
 2. [Agent を再起動][2]し、AWS PrivateLink 経由で Datadog にトレースを送信します。
 
 **注**: コンテナ Agent をお使いの場合は、代わりに環境変数: `DD_APM_DD_URL="https://trace-pvtlink.agent.datadoghq.com"` を設定してください。Cluster Agent で Kubernetes 環境の監視を行っている場合は、この環境変数を Cluster Agent と Node Agent の_両方_で構成します。
+
+
+[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /ja/agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}
+{{% tab "Kubernetes リソース" %}}
+
+新しい VPC エンドポイントを使用して Kubernetes のリソースを Datadog に転送するには、新しいオーケストレータのデータ宛先として `orchestrator-pvtlink.datadoghq.com` を構成します。
+
+1. [Agent の `datadog.yaml` コンフィギュレーションファイル][1]で `dd_url` パラメーターを更新します。
+
+    ```yaml
+    dd_url: orchestrator-pvtlink.datadoghq.com
+    ```
+
+   コンテナ Agent の場合は、代わりに以下の環境変数を設定します。
+
+   ```
+   DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_DD_URL="orchestrator-pvtlink.datadoghq.com"
+   ```
+
+   プロセス Agent にも同様にこの設定を行います。Kubernetes 環境の監視にクラスター Agent を使用している場合は、この環境変数をクラスター Agent および ノード Agent に構成します。
+
+2. [Agent を再起動][2]して、AWS PrivateLink 経由で Kubernetes リソースを Datadog に送信します。
 
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file

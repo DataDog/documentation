@@ -14,7 +14,7 @@ Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to 
 
 If you have Agent v5 already installed, a script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and check configurations according to the new v6 format. Select your platform below for specific instructions. You can either download the [DMG package and install it manually](#manual-upgrade), or use the [one-line install script](#one-step-upgrade).
 
-## One-step Upgrade
+## One-step upgrade
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -52,7 +52,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 {{% /tab %}}
 {{< /tabs >}}
 
-## Manual Upgrade
+## Manual upgrade
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -76,9 +76,10 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -118,9 +119,10 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -199,9 +201,10 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -235,9 +238,10 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -325,17 +329,19 @@ Find below the manual upgrade instructions for:
   type=rpm-md
   gpgcheck=1
   repo_gpgcheck=0
-  gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-         https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-         https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+  gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   ```
 
 2. Update your local Zypper repo and install the Agent:
   ```
   sudo zypper refresh
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   sudo zypper install datadog-agent
   ```
 

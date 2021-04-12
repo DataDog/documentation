@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
+    etcd-Screenboard: assets/dashboards/etcd_2_overview.json
   logs:
     source: etcd
   metrics_metadata: metadata.csv

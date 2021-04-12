@@ -10,7 +10,6 @@ further_reading:
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
-
 ## Overview
 
 Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
@@ -19,39 +18,39 @@ Global distributions are designed to instrument logical objects, like services, 
 
 * **Calculation of percentile aggregations**: Percentile aggregations (p50, p75, p90, p95, p99) are calculated from the raw data across all hosts, and are therefore globally accurate.
 
-* **Customization of tagging**: This functionality allows you to control the tagging scheme for metrics for which host-level granularity is not necessary (e.g. transactions per second for a checkout service).
+* **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (for example, transactions per second for a checkout service).
 
-See the [Developer Tools section][1] for more implementation details. Please note that since distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
+See the [Developer Tools section][1] for more implementation details. 
+
+**Note:** Because distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
 
 ## Aggregations
 
-Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for a set of tags (up to ten) specified on the [Distribution Metrics][2] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
+Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for all queryable tags on your distribution, specified on the [Metrics Summary][2] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
 
-{{< img src="metrics/distributions/revised_global_metrics_selection.png" alt="Distribution Metric UI"  style="width:80%;">}}
+{{< img src="metrics/distributions/percentiles.gif" alt="Enable Percentiles"  style="width:80%;">}}
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
 
-{{< img src="metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis"  style="width:80%;">}}
+{{< img src="metrics/distributions/graph_percentiles.jpg" alt="Distribution metric aggregations"  style="width:80%;">}}
 
 ## Customize tagging
 
-Distributions provide functionality that allows you to control the tagging for metrics where host-level granularity does not make sense.
+Distributions provide functionality that allows you to control the tagging for custom metrics where host-level granularity does not make sense. Tag configurations are _allowlists_ of the tags you'd like to keep. 
 
-To customize tagging, hover over your metric in the table, and click on the pencil icon to edit. In the modal that pops up, select *Custom...*. There is a _whitelist_ of the tags you have defined in code by default. You can remove any of these tags or add any host-level tags back in.
+To customize tagging:
 
-**Note**: The exclusion of tags is not supported in the whitelist-based customization of tags. Adding tags starting with `!` is not accepted.
+1. Click on your custom distribution metric name in the Metrics Summary table to open the metrics details sidepanel.
+2. Click the **Manage Tags** button to open the tag configuration modal.
+3. Click the **Custom...** tab to customize the tags you'd like to keep available for query. 
 
-{{< img src="metrics/distributions/distribution_metric.png" alt="Distribution metric"  style="width:80%;">}}
+**Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
-## Counting distribution metrics
-
-Distribution metrics with percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) generate custom metrics or timeseries differently than gauges, counts, histograms, and distributions with nonpercentile aggregations (`sum`, `count`, `min`, `max`, `avg`). Because percentiles aren't reaggregatable, Datadog preserves five timeseries for every potentially queryable tag combination. This is different from the number of custom metrics generated from gauges, counts, histograms, or distributions with nonpercentile aggregations (dependent on the unique number of tag value combinations that appear in your data).
-
-For more information on counting custom metrics created from gauge, count, histogram, or distribution metrics with nonpercentile aggregations, refer to the [Custom Metrics][2] page.
-
+{{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution"  style="width:80%;">}}
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /developers/metrics/types/
-[2]: /developers/metrics/custom_metrics/
+[2]: https://app.datadoghq.com/metric/distribution_metrics

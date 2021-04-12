@@ -36,7 +36,7 @@ Datadog で [RUM モニター][2]を作成するには、メインナビゲー�
 ### アラートの条件を設定する
 
 * メトリクスが `above`、`above or equal to`、`below`、`below or equal to` の場合にトリガーされる
-* 最後の `5 minutes`、`15 minutes`、 `1 hour`などの間のしきい値
+* 過去 `5 minutes`、`15 minutes`、`1 hour` などの間のしきい値、または `custom` に 5 分～48 時間の値を設定します。
 * アラートのしきい値 `<NUMBER>`
 * 警告のしきい値`<NUMBER>`
 

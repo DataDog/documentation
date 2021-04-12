@@ -1,10 +1,17 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    IIS-Overview: assets/dashboards/iis_overview.json
+    iis: assets/dashboards/iis_dashboard.json
   logs:
     source: iis
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[IIS] Anomalous amount of requests for site: {{site.name}}': assets/monitors/req.json
+    '[IIS] Increase of locked error per second for site: {{site.name}}': assets/monitors/lock.json
+    '[IIS] Increase of not found error per second for site: {{site.name}}': assets/monitors/err.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -14,8 +21,8 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - web
-  - log collection
-  - autodiscovery
+  - ログの収集
+  - オートディスカバリー
 creates_events: false
 ddtype: check
 dependencies:
@@ -34,7 +41,7 @@ metric_prefix: iis.
 metric_to_check: iis.uptime
 name: iis
 public_title: Datadog-IIS インテグレーション
-short_description: 全体またはサイトごとのメトリクスを追跡し、各サイトの稼働/停止状態を監視
+short_description: 全体またはサイトごとのメトリクスを追跡し、各サイトの稼働/停止状態を監視。
 support: コア
 supported_os:
   - windows

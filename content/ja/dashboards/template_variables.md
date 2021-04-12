@@ -6,14 +6,17 @@ aliases:
   - /ja/graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
   - /ja/graphing/dashboards/template_variables/
 further_reading:
+  - link: 'https://www.datadoghq.com/blog/template-variable-associated-values/'
+    tag: ブログ
+    text: 関連するテンプレート変数を使用してダッシュボードを調整
   - link: /dashboards/
     tag: ドキュメント
     text: Datadog でダッシュボードを作成
   - link: /dashboards/sharing/
     tag: ドキュメント
-    text: Datadog以外とグラフを共有
+    text: Datadogの外部でグラフを共有
   - link: /dashboards/widgets/
-    tag: ドキュメント
+    tag: Documentation
     text: ダッシュボードのウィジェットについて
 ---
 テンプレート変数により、ダッシュボード内の 1 つ以上のウィジェットを動的にフィルタリングすることができます。
@@ -74,6 +77,11 @@ further_reading:
 ウィジェットが保存されると、テンプレート変数の値はダッシュボードの上から選択されたものとなります。
 
 {{< img src="dashboards/template_variables/selecting_template_variables.png" alt="テンプレート変数を選択"  style="width:75%;">}}
+
+#### 関連するテンプレート変数
+テンプレート変数に値を選択する際、**Associated Values** と **Other Values** セクションが表示されます。関連する値は、ページに選択された他のテンプレート変数の値を考量して計算され、コンフィギュレーションせずに関連する値をシームレスに特定します。
+
+{{< img src="dashboards/template_variables/associated_template_variables.png" alt="関連するテンプレート変数"  style="width:75%;">}}
 
 #### テキスト
 

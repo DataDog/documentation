@@ -60,10 +60,9 @@ PHP トレーサーのオープンソースに対する貢献に関しては、[
 
 `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT`
 
-変数の設定方法については、[トレーサーコンフィギュレーション][2]を参照してください。
+変数の設定方法については、[環境変数のコンフィギュレーション](#environment-variable-configuration) を参照してください。
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/tracing/setup/php/#environment-variable-configuration
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
@@ -271,7 +270,7 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=false` を使用してこの機能をオフにすることも可能です。
 
-##### カスタム URL からリソースマッピング
+##### URL からリソースへのマッピングをカスタマイズ
 
 適用された自動正規化ではカバーされないケースがいくつかあります。
 
@@ -289,9 +288,13 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 ###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
-この設定は、各パスフラグメントに個々に適用される正規表現の CSV です。たとえば、最初の例、 `/using/prefix/id123/for/id` で `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` を `^id\d+$` に設定すると、すべてのフラグメント（`using`、`prefix`、`id123`、`for`、`id`）に正規表現が適用されます。最終的な正規化されたリソース名は、`GET /using/prefix/?/for/id` になります。
+この設定は、各パスフラグメントに個々に適用される正規表現の CSV です。たとえば、 `/using/prefix/id123/for/id` のパスとして `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` を `^id\d+$` に設定すると、各フラグメント（`using`、`prefix`、`id123`、`for`、`id`）に正規表現が適用されます。
 
-カンマで区切られた複数の正規表現を `^id\d+$,code\d+$` に追加することができますが、カンマ文字 `,` はエスケープされないので正規表現では使用できないことに注意してください。
+| URL                          | 正規表現     | 考えられるリソース名       |
+|:-----------------------------|:----------|:-----------------------------|
+| `/using/prefix/id123/for/id` | `^id\d+$` | `GET /using/prefix/?/for/id` |
+
+この変数の形式は CSV であるため、カンマ記号 `,` はエスケープされず、正規表現では使用できないことに注意してください。
 
 ###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` および `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 
@@ -301,9 +304,16 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` は受信リクエスト（ウェブフレームワークなど）のみに適用され、`DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` は発信リクエスト（`curl` や `guzzle` リクエストなど）のみに適用されることに、ご注意ください。
 
+### `open_basedir` 制限
+
+[`open_basedir`][11] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
+アプリケーションを Docker コンテナで実行する場合は、許可されるディレクトリにパス `/proc/self` も追加する必要があります。
+
 ## アップグレード
 
 PHP トレーサーをアップグレードするには、[最新のリリースをダウンロード][5]し、[拡張機能のインストール](#install-the-extension)と同じ手順に従います。
+
+インストールが完了したら、PHP (PHP-FPM または Apache SAPI) を再起動します。
 
 **注**: OPcache でパラメーターを `opcache.file_cache` に設定してセカンドレベルキャッシングを使用する場合は、キャッシュフォルダーを削除します。
 
@@ -316,6 +326,28 @@ PHPトレーサーを削除するには:
 3. php-fpm の場合は php-fpm サービスを再起動し、それ以外の場合は Apache Web サーバーを再起動します。
 
 **注**: OPcache でパラメーターを `opcache.file_cache` に設定してセカンドレベルキャッシングを使用する場合は、キャッシュフォルダーを削除します。
+
+## アプリケーションクラッシュのトラブルシューティング
+
+PHP トレーサーが原因でアプリケーションがクラッシュするという異常なイベントが発生した場合、通常はセグメンテーションフォールトが原因で、最善の対応はコアダンプを取得し、Datadog サポートに連絡することです。
+
+### コアダンプの取得
+
+PHP アプリケーションのコアダンプを取得することは、特に PHP-FPM では難しい場合があります。コアダンプを取得するのに役立ついくつかのヒントを次に示します。
+
+1. アプリケーションエラーログを調べて、PHP-FPM がコアダンプを生成したかどうかを確認します。
+   - `(SIGSEGV - core dumped)` を検索します。これは、次のようなメッセージはダンプされたことを意味するためです: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV - core dumped) after <duration> seconds from start`
+   - `(SIGSEGV)` を検索します。これは、次のようなメッセージはコアがダンプされなかったことを意味するためです: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`
+1. `cat /proc/sys/kernel/core_pattern` を実行して、コアダンプを見つけます。デフォルト値は通常 `core` です。これは、`core` という名前のファイルが Web ルートフォルダーに生成されることを意味します。
+
+コアダンプが生成されなかった場合は、次のコンフィギュレーションを確認し、必要に応じて変更します。
+
+1. `/proc/sys/kernel/core_pattern` にネストされたディレクトリを含むパスが含まれている場合は、完全なディレクトリパスが存在することを確認します。
+1. PHP-FPM プールワーカーを実行しているユーザーが `root` 以外の場合 (一般的なユーザー名は `www-data`)、そのユーザーにコアダンプディレクトリへの書き込みアクセス許可を付与します。
+1. `/proc/sys/fs/suid_dumpable` の値が `0` ではないことを確認します。PHP-FPM ワーカープールを `root` として実行しない限り、`1` または `2` に設定します。システム管理者にオプションを確認します。
+1. PHP-FPM プールコンフィギュレーションセクションに適切な `rlimit_core` があることを確認します。これは unlimited に設定できます: `rlimit_core = unlimited`
+1. システムに適切な `ulimit` が設定されていることを確認します。これは unlimited に設定できます: `ulimit -c unlimited`
+1. アプリケーションが Docker コンテナで実行されている場合は、ホストマシンに対して `/proc/sys/*` への変更を行う必要があります。使用可能なオプションについては、システム管理者に問い合わせてください。可能であれば、テスト環境またはステージング環境で問題を再現してみてください。
 
 ## その他の参考資料
 
@@ -331,3 +363,4 @@ PHPトレーサーを削除するには:
 [8]: /ja/tracing/faq/php-tracer-manual-installation
 [9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [10]: /ja/tracing/setup/nginx/#nginx-and-fastcgi
+[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

@@ -33,7 +33,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 | オプション | タイプ | デフォルト | 説明 |
 | ------ | ---- | ------- | ----------- |
-| `site` | 文字列 | `datadoghq.com` | プライベートロケーションがテストコンフィギュレーションをプルし、テスト結果をプッシュする Datadog サイト。Datadog EU ユーザーの場合は、`datadoghq.eu` に設定する必要があります。 |
+| `site` | 文字列 | `datadoghq.com` | プライベートロケーションがテストコンフィギュレーションをプルし、テスト結果をプッシュする Datadog サイト。`site` は {{< region-param key="dd_site" code="true" >}} です。 |
 
 ### DNS コンフィギュレーション
 
@@ -73,15 +73,24 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 | `concurrency` | 数値 | `10` | 並列で実行されるテストの最大数。 |
 | `maxTimeout` | 数値 | `60000` | API テストのテストの最大実行時間 (ミリ秒)。 |
 
+## プライベートルート証明書
+
+カスタムルート証明書をプライベートロケーションにアップロードして、API とブラウザのテストで独自の `.pem` ファイルを使用して SSL ハンドシェイクを実行することができます。プライベートロケーションコンテナを起動するときは、プライベートロケーションコンフィギュレーションファイルをマウントするのと同じ方法で、関連する証明書 `.pem` ファイルを `/etc/datadog/certs` にマウントします。これらの証明書は信頼できる CA と見なされ、テストの実行時にそのように使用されます。
+
+**注**: この機能は、プライベートロケーション Docker イメージのバージョン 1.5.3 以降でサポートされています。
+
 ## プライベートロケーション管理者
 
 | オプション | タイプ | デフォルト | 説明 |
 | -------| ---- | ------- | ----------- |
+| `config` | 文字列 | `/etc/datadog/synthetics-check-runner.json` | JSON コンフィギュレーションファイルへのパス。 |
 | `logFormat` | 文字列 | `pretty` | `"pretty"` と `"json"` 間でログ出力をフォーマットします。ログフォーマットを `json` に設定すると、ログが Datadog によって収集された時点で自動的に解析できます。 |
 | `verbosity` | 数値 | `3` | 冗長レベル (例: `-v`, `-vv`, `-vvv`, ...)。 |
 | `dumpConfig` | Boolean | `none` | シークレットなしでワーカーコンフィギュレーションパラメーターを表示します。 |
 | `dumpFullConfig` | Boolean | `none` | 完全なワーカーコンフィギュレーションパラメーターを表示します。 |
 | `help` | Boolean | `none` | ヘルプを表示します。 |
+
+**注**: プライベートロケーションのコンテナは、コンテナ内に保存せずに stdout/stderr へ出力します。
 
 ## その他の参考資料
 
