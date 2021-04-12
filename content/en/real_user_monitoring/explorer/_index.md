@@ -4,12 +4,15 @@ kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
-- link: "/real_user_monitoring/explorer/search/"
-  tag: "Documentation"
-  text: "Explore your views within Datadog"
 - link: "/real_user_monitoring/rum_explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
+- link: "/real_user_monitoring/explorer/search/"
+  tag: "Documentation"
+  text: "Learn more about search in RUM Explorer"
+- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
+  tag: "Blog"
+  text: "Monitor Core Web Vitals with RUM"
 ---
 
 {{< img src="real_user_monitoring/explorer/rum_explorer.png" alt="RUM explorer"  >}}
@@ -23,7 +26,7 @@ The Real User Monitoring (RUM) Explorer allows you to explore all data collected
 
 {{< img src="real_user_monitoring/explorer/explorer_tabs.png" alt="RUM explorer tabs"  >}}
 
-The RUM explorer displays all event types by default. Each tab gives you access to a customized list with relevant columns for the selected RUM event type. 
+The RUM explorer displays all event types by default. Each tab gives you access to a customized list with relevant columns for the selected RUM event type.
 
 ### Event side panel
 
@@ -41,7 +44,7 @@ RUM collects context information by default. You can add any additional context 
 
 Build up a context to explore your RUM events in your RUM Explorer page first by selecting the proper [time range](#time-range), and then by using the [search bar][1] to filter your RUM events and analytics.
 
-### Time Range
+### Time range
 
 The time range appears directly under the search bar as a timeline. This feature allows you to display RUM events in the explorer stream or analytics within a given time period.
 
@@ -52,7 +55,7 @@ Quickly change the time range by selecting a preset range from the dropdown (or 
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
 
-## Setup - Facets & Measures
+## Setup facets and measures
 
 After being collected, your RUM events attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][3].
 

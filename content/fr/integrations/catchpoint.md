@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Envoyez vos alertes Catchpoint à votre flux d'événements Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/catchpoint/'
+draft: false
 git_integration_title: catchpoint
 has_logo: true
 integration_title: Catchpoint
@@ -28,7 +29,7 @@ Associez Catchpoint à Datadog pour :
 - Créer des liens directs vers des tableaux d'analyse du portail Catchpoint
 - Ajouter des tags relatifs au type d'alerte afin de filtrer facilement les données
 
-## Implémentation
+## Configuration
 
 ### Installation
 

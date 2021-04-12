@@ -16,7 +16,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualize'
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/faq/log-collection-troubleshooting-guide
@@ -444,6 +444,10 @@ monolog:
 
 ### Laravel
 
+<div class="alert alert-warning">
+注: 関数 <code>\DDTrace\trace_id()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a> で導入されています。
+</div>
+
 ```php
 <?php
 
@@ -477,19 +481,15 @@ class AppServiceProvider extends ServiceProvider
 
         // トレースおよびスパン ID を挿入してログエントリを APM トレースと接続
         $monolog->pushProcessor(function ($record) use ($useJson) {
-            $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
-            if (null === $span) {
-                return $record;
-            }
             if ($useJson === true) {
                 $record['dd'] = [
-                    'trace_id' => $span->getTraceId(),
+                    'trace_id' => \DDTrace\trace_id(),
                     'span_id'  => \dd_trace_peek_span_id(),
                 ];
             } else {
                 $record['message'] .= sprintf(
                     ' [dd.trace_id=%d dd.span_id=%d]',
-                    $span->getTraceId(),
+                    \DDTrace\trace_id(),
                     \dd_trace_peek_span_id()
                 );
             }

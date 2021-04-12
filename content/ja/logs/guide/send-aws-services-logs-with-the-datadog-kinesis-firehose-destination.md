@@ -5,7 +5,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualize'
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/processing/
@@ -21,11 +21,11 @@ AWS Firehose コンソールで Kinesis Firehose Delivery Stream を設定する
 ​
 {{< tabs >}}
 {{% tab "Kinesis Firehose Delivery ストリーム" %}}
-## Kinesis Firehose Delivery Stream での Datadog Destination のセットアップ
 
 Datadog は、Datadog Kinesis 宛先を使用する場合、入力として Kinesis ストリームを使用することをお勧めします。Datadog がログの唯一のコンシューマーではない場合に備えて、ログを複数の宛先に転送する機能が用意されています。
 
-ログを Datadog に送信するだけの場合、またはログに Kinesis  Datastream がすでにある場合は、ステップ 1 を無視してください。
+ログを Datadog に送信するだけの場合、またはログに Kinesis Datastream がすでにある場合は、ステップ 1 を無視してください。
+
 1. (オプション) 新しい Kinesis ストリームを作成します（[Kinesis ガイド][1]を参照）。ストリームに `DatadogLogStream` など分かりやすい名前を付け、シャードカウントを 1 にします（必要な各 MB/s スループットのシャード数を増やします）。
 2. [新しい配信ストリーム][2]を作成し、`DatadogLogsforwarder` という名前を付けます。
 3. ソースを "Kinesis stream" に設定し (Kinesis ストリームを使用しない場合は、ソースを `Direct PUT or other sources` のままにします)、`DatadogLogStream` (またはすでにログが含まれている既存の Kinesis ストリーム) を選択します。
@@ -43,7 +43,6 @@ Datadog は、Datadog Kinesis 宛先を使用する場合、入力として Kine
 
 Delivery Stream で失敗したログが引き続き Datadog に送信されるようにするには、[この S3 バケットでトリガーするように Datadog Lambda 関数を構成します][4]。
 
-
 [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/app-hotspots-prepare.html#app-hotspots-create-two-streams
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/account/settings#api
@@ -51,13 +50,10 @@ Delivery Stream で失敗したログが引き続き Datadog に送信される�
 {{% /tab %}}
 
 {{% tab "CloudFormation template" %}}
-## CloudFormation テンプレートを使用してアップロードする
-
+​
 または、この CloudFormation テンプレートをカスタマイズして、AWS コンソールからインストールします。
-
-[こちらから Kinesis CloudFormation テンプレート全体をご覧ください。][1]
-
-
+​
+すべての[Kinesis CloudFormation テンプレート][1]全体をご確認ください。
 
 [1]: /resources/json/kinesis-logs-cloudformation-template.json
 {{% /tab %}}
@@ -65,14 +61,13 @@ Delivery Stream で失敗したログが引き続き Datadog に送信される�
 
 ## AWS ログを Kinesis ストリームに送信する
 
-1. [ロググループインデックスページ][1]の `Subscriptions` 列を確認して、関連するロググループの現在のサブスクリプションを確認します。CloudWatch ロググループは 1 つのサブスクリプションしか持つことができないため、新しい Kinesis ストリームをサブスクライバーとして追加する前に、ロググループへの既存のサブスクリプションをすべて削除します。
-  * **注**: 別のものにサブスクライブする場合は、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。
+1. [ロググループインデックスページ][1]の `Subscriptions` 列を確認して、関連するロググループの現在のサブスクリプションを確認します。新しい Kinesis ストリームをサブスクライバーとして追加します。注: 各 CloudWatch ロググループに許可されるサブスクリプションは 2 つのみです。
+  * **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。
 2. Datadog に取り込みたい CloudWatch ロググループに、新しい Kinesis ストリームをサブスクライブさせます。[この CloudWatch Logs ドキュメントセクション][2] (ステップ 3〜6) を参照して、
   a. `aws iam create-role` コマンドを使い、Kinesis ストリームにログデータを置く権限をCloudWatch Logs に付与する IAM ロールを作成します。
   b. `firehose:PutRecord` `firehose:PutRecordBatch`、`kinesis:PutRecord`、`kinesis:PutRecordBatch` アクションを許可するアクセス許可ポリシーを作成します。
   c. `aws iam put-role-policy` コマンドを使用して、新しく作成した IAM ロールにアクセス許可ポリシーを関連づけます。
   d. Use the `aws logs put-subscription-filter` コマンドを使い、Datadog に取り込みたい CloudWatch ロググループに Kinesis ストリームを サブスクライブさせます。
-​
 ​
    サブスクリプションフィルターの例:
 ​

@@ -70,7 +70,6 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 | **パターン**                                     | **使用方法**                                                                                                                          |
 | `date("pattern"[, "timezoneId"[, "localeId"]])` | 指定されたパターンを持つ日付に一致してパースし、Unix タイムスタンプを生成します。[日付マッチャーの例を参照してください](#parsing-dates)。 |
 | `regex("pattern")`                              | 正規表現に一致します。[正規表現マッチャーの例を参照してください](#regex)。                                                                       |
-| `data`                                          | スペースと改行を含め、任意の文字列に一致します。`.*` と同じです。                                                              |
 | `notSpace`                                      | 次のスペースまでの文字列に一致します。                                                                                           |
 | `boolean("truePattern", "falsePattern")`        | ブール値に一致してパースします。true と false のパターンをオプションで定義できます (デフォルトは 'true' と 'false'。大文字と小文字は区別されません)。     |
 | `numberStr`                                     | 10 進浮動小数点数に一致し、それを文字列としてパースします。                                                                 |
@@ -93,6 +92,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 | `hostname`                                      | ホスト名に一致します。                                                                                                                |
 | `ipOrHost`                                      | ホスト名または IP に一致します。                                                                                                          |
 | `port`                                          | ポート番号に一致します。                                                                                                             |
+| `data`                                          | スペースと改行を含め、任意の文字列に一致します。正規表現の `.*` と同じです。上記のいずれのパターンも適切でない場合に使用します。                                                              |
 
 {{% /tab %}}
 {{% tab "Filter" %}}
@@ -112,7 +112,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 | `lowercase`                                                    | 小文字に変換した文字列を返します。                                                                                                                            |
 | `uppercase`                                                    | 大文字に変換した文字列を返します。                                                                                                                            |
 | `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | キー値のパターンを抽出し、JSON オブジェクトを返します。[キー値フィルターの例](#キー値またはlogfmt)を参照してください。                                                         |
-| `xml`                                                          |  適切にフォーマット化された XML をパースします。[XML フィルターの例](#parsing-xml)を参照してください。                                                                                | 
+| `xml`                                                          |  適切にフォーマット化された XML をパースします。[XML フィルターの例](#parsing-xml)を参照してください。                                                                                |
 | `csv(headers[, separator[, quotingcharacter]])`                | 適切にフォーマット化された CSV または TSV の行をパースします。[CSV フィルターの例](#CSV をパースする)を参照してください。                                                                    |
 | `scale(factor)`                                                | 抽出された数値を指定された factor で乗算します。                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | 文字列トークンシーケンスをパースして配列として返します。                                                                                             |
@@ -184,7 +184,7 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 
 * `separatorStr`: キーと値を区切るセパレーターを定義します。デフォルト `=`.
 * `characterWhiteList`: デフォルトの `\\w.\\-_@` に加え、追加の非エスケープ値文字を定義します。引用符で囲まれていない値 (例: `key=@valueStr`) にのみ使用します。
-* `quotingStr`: デフォルトの引用符 `<>`、`""`、`''` の検出の代わりに引用符を定義します。
+* `quotingStr`: 引用符を定義し、デフォルトの引用符検出（`<>`、`""`、`''`）を置き換えます。
 * `delimiter`: 異なる key-value ペアのセパレーターを定義します（すなわち、`|` は `key1=value1|key2=value2`の区切り文字です）。デフォルトは ` ` (通常のスペース)、`,` および `;` です。
 
 **keyvalue** などのフィルターを使用すると、keyvalue または logfmt 形式の属性に文字列をより簡単にマップできます。
@@ -244,7 +244,7 @@ rule %{data::keyvalue("=","/:")}
 
 | **文字列の例**               | **パース規則**                                      | **結果**                            |
 |:-----------------------------|:------------------------------------------------------|:--------------------------------------|
-| key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr}                    |
+| key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | key=\<valueStr>              | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | "key"="valueStr"             | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | key:valueStr                 | `%{data::keyvalue(":")}`                              | {"key": "valueStr"}                   |
@@ -301,7 +301,7 @@ rule %{data::keyvalue("=","/:")}
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
 
-<sup>1</sup> 独自のローカライズを実行し、タイムスタンプが UTC _以外_の場合は、`timezone` パラメータを使用します。
+<sup>1</sup>  独自のローカライズを実行し、タイムスタンプが UTC _以外_の場合は、`timezone` パラメーターを使用します。
 タイムゾーンとしてサポートされる形式は、以下になります。
 
 * `GMT`、`UTC`、`UT`、`Z`
@@ -377,8 +377,6 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
 
 ### 正規表現
 
-ログメッセージの部分文字列を見つけるには、正規表現マッチャーを使用します。
-
 **ログの例**
 
 ```text
@@ -392,6 +390,8 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 ```
 
 {{< img src="logs/processing/parsing/regex_parsing.png" alt="パース例 6" responsive="true" style="width:80%;" >}}
+
+**注**: Agent で許可されている正規表現構文の全リストは、able in the [RE2 repo][3] でご確認いただけます。
 
 ### リストと配列
 
@@ -457,15 +457,15 @@ kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+
 
 ### XML のパース 
 
-XML パーサーは XML フォーマットのメッセージを JSON に変換します。
+XML パーサーは、XML 形式のメッセージを JSON に変換します。
 
 **ログ:**
 
 ```text
-<book category="CHILDREN">  
-  <title lang="en">Harry Potter</title>  
-  <author>J K. Rowling</author>  
-  <year>2005</year>  
+<book category="CHILDREN">
+  <title lang="en">Harry Potter</title>
+  <author>J K. Rowling</author>
+  <year>2005</year>
 </book>
 ```
 
@@ -504,7 +504,7 @@ CSV フィルターは `csv(headers[, separator[, quotingcharacter]])` で定義
 
 * `headers`: `,` で区切られたキーの名前を定義します。キー名にはアルファベットと `_` を使用できますが、冒頭の文字はアルファベットでなければなりません。
 * `separator`: それぞれの値を区切るために使用する区切り文字を定義します。種類は 1 つのみ指定でき、デフォルトは `,` です。**注意**: タブ文字を表すには `tab` を使用します。
-* `quotingcharacter`: 引用符を定義します。種類は 1 つのみ指定でき、デフォルトは `"` です。
+* `quotingcharacter`: 引用符を定義します。許可されるのは 1 文字だけです。デフォルトは `"` 。
 
 **注**:
 
@@ -558,3 +558,4 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 
 [1]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [2]: /ja/logs/processing/processors/#log-date-remapper
+[3]: https://github.com/google/re2/wiki/Syntax

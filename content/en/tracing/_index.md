@@ -84,27 +84,39 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Trace Retention and Ingestion"  style="width:100%;">}}
 
+### Generate Custom Metrics from all Spans
+
+[Generate metrics][12] with 15-month retention from all ingested spans to create and monitor key business and performance indicators.
+
+{{< img src="tracing/index/SpantoMetricsPreview.png" alt="Generate Custom Metrics from ingested spans"  style="width:100%;">}}
+
 ### Deployment Tracking
 
-[Monitor service performance][12] and compare between versions for rolling, blue/green, shadow, or canary deployments.
+[Monitor service performance][13] and compare between versions for rolling, blue/green, shadow, or canary deployments.
 
 {{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page"  style="width:100%;">}}
 
 ### Connect Logs and Distributed Traces
 
-[View your application logs][13] side-by-side with the trace for a single distributed request with automatic trace-id injection.
+[View your application logs][14] side-by-side with the trace for a single distributed request with automatic trace-id injection.
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
 
+### Connect Real User Monitoring and Traces
+
+[Link between real user sessions][15] and traces to see the exact traces that correspond to user experiences and reported issues.
+
+{{< img src="tracing/index/RumTraces.gif" alt="Connect RUM sessions and traces"  style="width:100%;">}}
+
 ### Connect Synthetic Test Data and Traces
 
-[Link simulated API tests][14] to traces to find the root cause of failures across frontend, network and backend requests.
+[Link simulated API tests][16] to traces to find the root cause of failures across frontend, network and backend requests.
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetic tests"  style="width:100%;">}}
 
 ### Continuous Profiler
 
-[Improve code efficiency][15] with an always on production profiler to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+[Improve code efficiency][17] with an always on production profiler to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
@@ -123,7 +135,9 @@ Now that you've configured your application to send traces to Datadog, start get
 [9]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
 [10]: /tracing/trace_search_and_analytics/#live-analytics-for-15-minutes
 [11]: /tracing/trace_retention_and_ingestion/
-[12]: /tracing/deployment_tracking/
-[13]: /tracing/connect_logs_and_traces/
-[14]: /synthetics/apm/
-[15]: /tracing/profiler/
+[12]: /tracing/generate_metrics/
+[13]: /tracing/deployment_tracking/
+[14]: /tracing/connect_logs_and_traces/
+[15]: /real_user_monitoring/connect_rum_and_traces
+[16]: /synthetics/apm/
+[17]: /tracing/profiler/

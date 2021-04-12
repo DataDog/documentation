@@ -75,7 +75,11 @@ _Synthetic Monitoring_ -> _Settings_ -> _Private Locations_ に移動し、**Add
 
 **注**: プライベートロケーションを作成できるのは **Admin** ユーザーのみです。
 
-プライベートロケーションの詳細を入力します。プライベートロケーションの**名前**と**説明**を指定し、プライベートロケーションに関連付けたい**タグ**を追加して、既存の **API キー**を 1 つ選択します。API キーを選択すると、プライベートロケーションと Datadog 間の通信が可能になります。既存の API キーがない場合は、**Generate API key** をクリックして専用ページで作成できます。
+プライベートロケーションの詳細を入力します。
+
+1. プライベートロケーションの**名前**および**説明**を指定します。
+2. プライベートロケーションに関連付ける**タグ**を追加します。
+3. 既存の **API キー**を 1 つ選択します。API キーを選択すると、プライベートロケーションと Datadog 間の通信が可能になります。既存の API キーがない場合は、**Generate API key** をクリックして専用ページで作成できます。
 
 **注:** `Name` フィールドと `API key` フィールドのみが必須です。
 
@@ -167,7 +171,7 @@ docker-compose -f docker-compose.yml up
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes Deployment" %}}
 
 1. 以下を実行し、以前に作成した JSON ファイルで Kubernetes ConfigMap を作成します。
 
@@ -215,6 +219,28 @@ docker-compose -f docker-compose.yml up
     ```
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+{{% /tab %}}
+
+{{% tab "Helm Chart" %}}
+
+1. [Datadog Synthetics Private Location][1] を Helm リポジトリに追加します。
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com 
+    helm repo update
+    ```
+
+2. 以下を実行して事前に作成された JSON ファイルを使用して、リリース名 `<RELEASE_NAME>` でチャートをインストールします。
+
+    ```shell
+    helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
+    ```
+
+    **注:** 予約済み IP をブロックした場合は、必ずプライベートロケーションコンテナに `NET_ADMIN` [Linux 機能][2]を追加してください。
+
+[1]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
+[2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}
 
@@ -289,7 +315,11 @@ docker-compose -f docker-compose.yml up
 }
 ```
 
-**注:** プライベートロケーションファイアウォールオプションは AWS Fargate ではサポートされていません。したがって、`enableDefaultBlockedIpRanges` パラメーターは `true` に設定できません。
+**注:** 
+
+タスク定義に環境変数を使用する場合、Fargate プライベートロケーションのデプロイには Datadog. の他の部分と異なる環境変数が使用されることにご留意ください。Fargate では、以下の環境変数を使用します。`DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PRIVATE_KEY`.
+
+プライベートロケーションファイアウォールオプションは AWS Fargate でサポートされていません。したがって、`enableDefaultBlockedIpRanges` パラメーターは `true` に設定できません。
 
 {{% /tab %}}
 
@@ -350,9 +380,9 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
 
 #### ヘルスチェックの設定
 
-ヘルスチェックメカニズムを追加すると、オーケストレーターはワーカーが正しく実行していることを確認できます。
+[ヘルスチェック][10]メカニズムを追加すると、オーケストレーターはワーカーが正しく実行していることを確認できます。
 
-プライベートロケーションコンテナの `/tmp/liveness.date` ファイルは、Datadog から正常にポーリングされるごとに更新されます (デフォルトでは 500ミリ秒)。例えば過去1分間にフェッチされないなど一定期間ポーリングが行われないと、コンテナは異常だとみなされます。
+プライベートロケーションコンテナの `/tmp/liveness.date` ファイルは、Datadog から正常にポーリングされるごとに更新されます (デフォルトでは 2 秒)。例えば過去1分間にフェッチされないなど一定期間ポーリングが行われないと、コンテナは異常だとみなされます。
 
 以下のコンフィギュレーションを使い、コンテナにヘルスチェックを設定します。
 
@@ -373,7 +403,24 @@ healthcheck:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes Deployment" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
+
+{{% /tab %}}
+
+{{% tab "Helm Chart" %}}
 
 ```yaml
 livenessProbe:
@@ -461,14 +508,14 @@ livenessProbe:
 
 {{< img src="synthetics/private_locations/assign_test_pl.png" alt="Synthetics テストをプライベートロケーションに割り当てる"  style="width:80%;">}}
 
-プライベートロケーションは、他の Datadog 管理ロケーションと同じように使用できます。具体的には、プライベートロケーションに [Synthetic テスト][2]を割り当て、テスト結果を視覚化し、[Synthetic メトリクス][10]を取得するなどが可能です。
+プライベートロケーションは、他の Datadog 管理ロケーションと同じように使用できます。具体的には、プライベートロケーションに [Synthetic テスト][2]を割り当て、テスト結果を視覚化し、[Synthetic メトリクス][11]を取得するなどが可能です。
 
 
 ## プライベートロケーションのサイズ変更
 
 プライベートロケーションにワーカーを追加または削除することで、簡単に**水平スケーリング**することができます。単一のコンフィギュレーションファイルで、1 つのプライベートロケーションに対して複数のコンテナを実行できます。これにより、ワーカー 1 がテストを処理している時にワーカー 2 が次のテストのリクエストを送信するなど、各ワーカーが空きスロットの数に応じて `N` 件のテストの実行リクエストを送信します。
 
-また、[`concurrency` パラメーター][11]の値を利用して、プライベートロケーションワーカーが並行して実行できるテストの数を調整することもできます。
+[`concurrency` パラメーター][12]を使用してプライベートロケーションを**垂直にスケーリング**して、プライベートロケーションで使用可能なスロットの数を調整することもできます。これらのスロットは、プライベートロケーションワーカーが並行して実行できるテストの数です。プライベートロケーションの [`concurrency` パラメーター][12]を更新する際は、[ワーカーに割り当てられたリソース](#hardware-requirements)も必ず更新してください。
 
 ### ハードウェア要件
 
@@ -484,7 +531,7 @@ livenessProbe:
 | API テストのみを実行するプライベートロケーション             | 1〜200                 | スロットあたり 20mCores/5MiB    |
 | ブラウザテストのみを実行するプライベートロケーション         | 1〜50                  | スロットあたり 150mCores/1GiB   |
 
-**例:** API テストとブラウザテストの両方を実行し、[`concurrency`][11] をデフォルトの `10` に設定したプライベートロケーションの場合、安全な使用のための推奨値は〜1.5 コア `(150mCores + (150mCores*10 スロット))` と〜10GiB メモリ `(150M + (1G*10 スロット))` です。
+**例:** API テストとブラウザテストの両方を実行し、[`concurrency`][12] をデフォルトの `10` に設定したプライベートロケーションの場合、安全な使用のための推奨値は〜1.5 コア `(150mCores + (150mCores*10 スロット))` と〜10GiB メモリ `(150M + (1G*10 スロット))` です。
 
 #### ディスク
 
@@ -503,5 +550,6 @@ livenessProbe:
 [7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
 [8]: /ja/synthetics/private_locations/configuration/#reserved-ips-configuration
 [9]: /ja/synthetics/private_locations/configuration/
-[10]: /ja/synthetics/metrics
-[11]: /ja/synthetics/private_locations/configuration/#parallelization-configuration
+[10]: https://docs.docker.com/engine/reference/builder/#healthcheck
+[11]: /ja/synthetics/metrics
+[12]: /ja/synthetics/private_locations/configuration#advanced-configuration

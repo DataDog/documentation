@@ -5,10 +5,11 @@
 "dependencies": []
 "description": "Envoyez des commits et pull requests depuis votre serveur Git auto-hébergé vers Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/git/"
+"draft": false
 "git_integration_title": "git"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "Git"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "integration"
 "manifest_version": "1.0"
 "name": "git"
@@ -27,7 +28,7 @@ Enregistrez des commits Git directement depuis votre serveur Git pour ;
 - Ajouter des indicateurs de changement de code sur l'ensemble de vos dashboards
 - Discuter des changements de code avec votre équipe
 
-## Implémentation
+## Configuration
 
 ### Installation
 

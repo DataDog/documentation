@@ -2,7 +2,11 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    cassandra-overview: assets/dashboards/cassandra_overview.json
+    cassandra-read: assets/dashboards/cassandra_read.json
+    cassandra-sstables: assets/dashboards/cassandra_sstable.json
+    cassandra-write: assets/dashboards/cassandra_write.json
   logs:
     source: cassandra
   metrics_metadata: metadata.csv

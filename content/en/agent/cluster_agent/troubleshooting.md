@@ -163,7 +163,7 @@ Or look for error logs, such as:
 2018-06-10 08:03:02 UTC | ERROR | Could not initialise the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
-## Custom Metric Server
+## Custom metric server
 
 ### Cluster Agent status and flare
 

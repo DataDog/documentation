@@ -34,10 +34,12 @@ We recommend that you use the latest version of the [official DogStatsD clients]
 
 Some StatsD and DogStatsD clients, by default, send one metric per datagram. This adds considerable overhead on the client, the operating system, and the Agent. If your client supports buffering multiple metrics in one datagram, enabling this option brings noticeable improvements.
 
+If you are using a community-supported DogStatsD client that supports buffering, make sure to configure a max datagram size that does not exceed the Agent-side per-datagram buffer size (8KB by default, configurable on the Agent with `dogstatsd_buffer_size`) and the network/OS max datagram size.
+
 Here are a few examples for [official DogStatsD supported clients][3]:
 
-{{< tabs >}}
-{{% tab "Go" %}}
+{{< programming-lang-wrapper langs="go,python,ruby,java,.NET,PHP" >}}
+{{< programming-lang lang="go" >}}
 
 By default, Datadog's official Golang library [DataDog/datadog-go][1] uses buffering. The size of each packet and the number of messages use different default values for `UDS` and `UDP`. See [DataDog/datadog-go][1] for more information about the client configuration.
 
@@ -61,9 +63,8 @@ func main() {
 ```
 
 [1]: https://github.com/DataDog/datadog-go
-{{% /tab %}}
-
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 By using Datadog's official Python library [datadogpy][1], the example below creates a buffered DogStatsD client instance that sends up to 25 metrics in one packet when the block completes:
 
@@ -77,28 +78,28 @@ with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
 
 
 [1]: https://github.com/DataDog/datadogpy
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
-{{% tab "Ruby" %}}
-
-By using Datadog's official Ruby library [dogstatsd-ruby][1], the example below creates a buffered DogStatsD client instance that sends metrics in one packet when the block completes:
+By using Datadog's official Ruby library [dogstatsd-ruby][1], the example below creates a buffered DogStatsD client instance that sends metrics in one packet when the flush is triggered:
 
 ```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('127.0.0.1', 8125)
 
-statsd.batch do |s|
-  s.increment('example_metric.increment', tags: ['environment:dev'])
-  s.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
-end
+statsd.increment('example_metric.increment', tags: ['environment:dev'])
+statsd.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
+
+# synchronous flush
+statsd.flush(sync: true)
 ```
 
 
 [1]: https://github.com/DataDog/dogstatsd-ruby
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
 
-{{% tab "Java" %}}
 
 By using Datadog's official Java library [java-dogstatsd-client][1], the example below creates a buffered DogStatsD client instance with a maximum packet size of 1500 bytes, meaning all metrics sent from this instance of the client are buffered and sent in packets of `1500` packet-length at most:
 
@@ -126,8 +127,8 @@ public class DogStatsdClient {
 
 
 [1]: https://github.com/DataDog/java-dogstatsd-client
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 By using Datadog's official C# library [dogstatsd-csharp-client][1], the example below creates a DogStatsD client with UDP as transport:
 
 ```csharp
@@ -157,8 +158,8 @@ public class DogStatsdClient
 
 
 [1]: https://github.com/DataDog/dogstatsd-csharp-client
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="PHP" >}}
 
 By using Datadog's official PHP library [php-datadogstatsd][1], the example below creates a buffered DogStatsD client instance that sends metrics in one packet when the block completes:
 
@@ -181,8 +182,8 @@ $client->increment('example_metric.increment', $sampleRate->0.5 , array('environ
 
 
 [1]: https://github.com/DataDog/php-datadogstatsd
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### Sample your metrics
 
@@ -194,7 +195,7 @@ For more information and code examples, see [DogStatsD "Sample Rate" Parameter E
 
 UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
-## Operating System kernel buffers
+## Operating system kernel buffers
 
 Most operating systems add incoming UDP and UDS datagrams containing your metrics to a buffer with a maximum size. Once the max is reached, datagrams containing your metrics start getting dropped. It is possible to adjust the values to give the Agent more time to process incoming metrics:
 
@@ -335,8 +336,8 @@ Each client shares a set of common tags.
 **Note**: When using UDP, network errors can't be detected by the client
 and the corresponding metrics will not reflect bytes/packets drop.
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
+{{< programming-lang lang="python" >}}
 
 Starting with version `0.34.0` of the Python client.
 
@@ -360,8 +361,8 @@ See [DataDog/datadogpy][1] for more information about the client configuration.
 
 
 [1]: https://github.com/DataDog/datadogpy
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 Starting with version `4.6.0` of the Ruby client.
 
@@ -385,8 +386,8 @@ See [DataDog/dogstatsd-ruby][1] for more information about the client configurat
 
 
 [1]: https://github.com/DataDog/dogstatsd-ruby
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 Starting with version `3.4.0` of the Go client.
 
@@ -415,8 +416,8 @@ See [DataDog/datadog-go][1] for more information about the client configuration.
 
 
 [1]: https://github.com/DataDog/datadog-go
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
 
 Starting with version `2.10.0` of the Java client.
 
@@ -445,8 +446,8 @@ See [DataDog/java-dogstatsd-client][1] for more information about the client con
 
 
 [1]: https://github.com/DataDog/java-dogstatsd-client
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="PHP" >}}
 
 Starting with version `1.5.0` of the PHP client the telemetry is enabled by
 default for the `BatchedDogStatsd` client and disabled by default for the
@@ -497,8 +498,8 @@ $statsd = new BatchedDogStatsd(
 See [DataDog/php-datadogstatsd][1] for more information about the client configuration.
 
 [1]: https://github.com/DataDog/php-datadogstatsd
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 Starting with version `5.0.0` of the .NET client.
 
@@ -531,8 +532,8 @@ See [DataDog/dogstatsd-csharp-client][1] for more information about the client c
 
 
 [1]: https://github.com/DataDog/dogstatsd-csharp-client
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Further Reading
 

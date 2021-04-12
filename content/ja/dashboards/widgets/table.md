@@ -1,6 +1,7 @@
 ---
 title: テーブルウィジェット
 kind: documentation
+widget_type: query_table
 aliases:
   - /ja/graphing/widgets/table/
 further_reading:
@@ -16,9 +17,9 @@ further_reading:
 ---
 ## 概要
 
-テーブルを、タイムボードとスクリーンボードで可視化できます。タグキーでグループ化されたメトリクスの列が表示されます。たとえば、`system.cpu.system` と `system.cpu.user` が `service` でグループ化されます。
+テーブルはダッシュボードで可視化することが可能です。タグキーでグループ化された集計データを列で表示します。たとえば、`system.cpu.system` と `system.cpu.user` が `service` でグループ化されます。
 
-{{< img src="dashboards/widgets/table/table_widget.png" alt="テーブルウィジェット"  style="width:80%;">}}
+{{< img src="dashboards/widgets/table/table_widget_1.png" alt="テーブルウィジェット"  style="width:80%;">}}
 
 ## セットアップ
 
@@ -27,69 +28,28 @@ further_reading:
 * グラフを作成するデータを選択します (必要に応じて列を追加してください)。
   * メトリクス: メトリクスクエリの構成については、[グラフ作成方法に関するドキュメント][1]を参照してください。
   * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][2]を参照してください。
-  * APM Statistics: APM 統計クエリの構成については、[APM 統計に関するドキュメント][6]を参照してください。
+  * Indexed Span: Indexed Span クエリの構成については、[Indexed Span ドキュメント][3]を参照してください。
+  * RUM イベント: RUM クエリの構成については、[RUM 検索構文に関するドキュメント][4]を参照してください。
+  * プロファイリングメトリクス: プロファイリングクエリの構成については、[検索プロファイルのドキュメント][5]を参照してください。
+  * セキュリティシグナル: セキュリティシグナルクエリの構成については、[セキュリティシグナルの探索に関するドキュメント][6]を参照してください。
+  * APM 統計: APM 統計クエリの構成については、[APM 統計に関するドキュメント][7]を参照してください。
 * メトリクスのエイリアスを設定することで、列ヘッダーの名前を変更できます。
 * **Rows** に対して、**Group by** を行うタグキーを選択します。以下の例では `service` の行が表示されます。
 * 結果の数の限度を選択します (デフォルトは 10)。
 * テーブルを並べ替えるためのメトリクスを選択します (デフォルトは最初の列)。
-* オプション: 各列のセルの値に応じて、条件付き書式を構成します。
+* オプション:
+  * 各列のセルの値に応じて、条件付き書式 (**バー/数字** と **色** の両方) を構成します。
+  * 検索バーを表示するかどうかを構成します。デフォルトは **Auto** で、ウィジェットの大きさに応じて検索バーを表示します。つまり、画面が小さい場合はウィジェット上のデータの表示を優先し、検索バーは非表示になります（全画面モードになると表示されます）。
 
-{{< img src="dashboards/widgets/table/table_setup.png" alt="テーブルのセットアップ"  style="width:80%;">}}
+{{< img src="dashboards/widgets/table/table_setup_1.png" alt="テーブルの設定"  style="width:80%;">}}
 
 ## API
 
-テーブルウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用されます。詳しくは、[ダッシュボード API][8] ドキュメントを参照してください。
 
-```text
-TABLE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["query_table"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+テーブルウィジェットの[ウィジェット JSON スキーマ定義][9]は次のとおりです。
 
-| パラメーター  | タイプ             | 必須 | 説明                                                                                                                                         |
-|------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`     | 文字列           | 〇      | ウィジェットのタイプ。テーブルウィジェットでは `query_table` を使用します。                                                                                         |
-| `requests` | オブジェクトの配列 | 〇      | ウィジェットに表示する 1 つの `request` オブジェクトの配列。`REQUEST_SCHEMA` の作成については、[リクエスト JSON スキーマに関するドキュメント][4]を参照してください。 |
-| `title`    | 文字列           | ✕       | ウィジェットのタイトル                                                                                                                                |
-
-### リクエスト
-
-`request` オブジェクトでは、以下のプロパティも使用できます。
-
-```text
-{
-   "alias": {"type": "string"},
-   "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]},
-   "limit": {"type": "integer"},
-   "order": {"enum": ["asc", "desc"]},
-   "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
-}
-```
-
-| パラメーター             | タイプ    | 必須 | 説明                                                                                                                                                                                        |
-|-----------------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `alias`               | 文字列  | ✕       | 列名 (デフォルトはメトリクスの名前)                                                                                                                                                      |
-| `aggregator`          | 列挙    | 〇      | メトリクスクエリの場合は、これを使用して、タイムフレームの値をテーブルで単一の値にロールアップする方法を定義します。指定可能な値は、`avg`、`last`、`max`、`min`、`sum` です。 |
-| `limit`               | 整数 | 〇      | メトリクスクエリの場合は、テーブルに表示する行の数です。1 つのリクエストだけで、このプロパティを設定する必要があります。                                                                                          |
-| `order`               | 列挙    | 〇      | メトリクスクエリの場合は、行の並べ替え順です。`limit` と同じリクエストで設定する必要があります。`desc` または `asc` の値を指定できます。                                                        |
-| `conditional_formats` | オブジェクト  | ✕       | 条件付き書式コントロールのオプション。`CONDITIONAL_FORMATS_SCHEMA` の作成方法については、[条件付き書式 JSON スキーマに関するドキュメント][5]を参照してください。                                    |
-
-#### 複数の列
-
-メトリクスクエリ用に複数の列を取得するには、複数のリクエストオブジェクト (列ごとに 1 つのオブジェクト) が必要になります。ログクエリの場合に必要なのは、`compute` オブジェクトの `multi_compute` 配列を含む 1 つのリクエストオブジェクトだけです。各 `compute` オブジェクトで 1 つの列を取得できます。
-
-APM 統計クエリには、1 つのリクエストオブジェクトに複数の列が含まれています。このデータソースを選択すると、テーブルにあらかじめ推奨列が作成されます。列は、追加、削除、またはエイリアスを作成することができます。
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
@@ -97,7 +57,10 @@ APM 統計クエリには、1 つのリクエストオブジェクトに複数�
 
 [1]: /ja/dashboards/querying/#configuring-a-graph
 [2]: /ja/logs/search_syntax/
-[3]: /ja/dashboards/graphing_json/widget_json/
-[4]: /ja/dashboards/graphing_json/request_json/
-[5]: /ja/dashboards/graphing_json/widget_json/#conditional-format-schema
-[6]: /ja/dashboards/querying/#configuring-an-apm-stats-graph
+[3]: /ja/tracing/trace_search_and_analytics/query_syntax/
+[4]: /ja/real_user_monitoring/explorer/search/#search-syntax
+[5]: /ja/tracing/profiler/search_profiles
+[6]: /ja/security_monitoring/explorer/
+[7]: /ja/dashboards/querying/#configuring-an-apm-stats-graph
+[8]: /ja/api/v1/dashboards/
+[9]: /ja/dashboards/graphing_json/widget_json/

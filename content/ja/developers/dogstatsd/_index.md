@@ -88,10 +88,10 @@ DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_キー>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 StatsD メトリクスの収集に使用するポートを変更する必要がある場合は、`DD_DOGSTATSD_PORT="<新しい_DOGSTATSD_ポート>` 環境変数を使用します。[Unix ドメインソケット][1]を使用するように DogStatsD を構成することもできます。
@@ -223,30 +223,33 @@ env:
 #### DogStatsD クライアントをインストールする
 
 公式の Datadog-DogStatsD クライアントライブラリは、次の言語で使用できます。[汎用 StatsD クライアント][8]を使用してメトリクスを DogStatsD に送信_できます_が、上記の Datadog 固有の機能を使用することはできません。
+{{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang lang="python" >}}
 
 ```shell
 pip install datadog
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 ```shell
 gem install dogstatsd-ruby
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 ```shell
 go get github.com/DataDog/datadog-go/statsd
 ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
 
 Java DataDog StatsD Client は maven central とともに配布され、[Maven からダウンロード][1]できます。まず、`pom.xml` に以下の構成を追加します。
 
@@ -260,8 +263,10 @@ Java DataDog StatsD Client は maven central とともに配布され、[Maven �
 
 
 [1]: https://search.maven.org/search?q=g:com.datadoghq%20a:java-dogstatsd-client
-{{% /tab %}}
-{{% tab "PHP" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="PHP" >}}
 
 `composer.json` に以下を追加します。
 
@@ -275,22 +280,26 @@ Java DataDog StatsD Client は maven central とともに配布され、[Maven �
 
 
 [1]: https://github.com/DataDog/php-datadogstatsd#php-datadog-statsd-client
-{{% /tab %}}
-{{% tab ".NET" %}}
 
-[NuGet からパッケージを取得][1]してインストールします。
+{{< /programming-lang >}}
 
+{{< programming-lang lang=".NET" >}}
+
+- [NuGet からパッケージ][1]を取得してインストールします。
 
 [1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
-{{% /tab %}}
-{{< /tabs >}}
+
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
 
 #### DogStatsD クライアントをインスタンス化する
 
 DogStatsD クライアントをインストールしたら、コードでインスタンス化します。
+{{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang lang="python" >}}
 
 ```python
 from datadog import initialize, statsd
@@ -303,8 +312,9 @@ options = {
 initialize(**options)
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 ```ruby
 # ライブラリをインポートします
@@ -314,8 +324,9 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 ```go
 dogstatsd_client, err := statsd.New("127.0.0.1:8125")
@@ -328,8 +339,10 @@ if err != nil {
 
 
 [1]: https://godoc.org/github.com/DataDog/datadog-go/statsd
-{{% /tab %}}
-{{% tab "Java" %}}
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
 
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
@@ -340,7 +353,7 @@ public class DogStatsdClient {
     public static void main(String[] args) throws Exception {
 
         StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
-            .prefix("statsd").
+            .prefix("statsd")
             .hostname("localhost")
             .port(8125)
             .build();
@@ -349,8 +362,9 @@ public class DogStatsdClient {
 }
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="PHP" >}}
 
 composer を使用して、新しい DogStatsd オブジェクトをインスタンス化します。
 
@@ -368,8 +382,9 @@ $statsd = new DogStatsd(
   );
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
 
 DogStatsd クラスを構成します。
 
@@ -392,8 +407,9 @@ using (var dogStatsdService = new DogStatsdService())
 } // 未送信のメトリクスをフラッシュします
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 **注**: コンテナ Agent または Kubernetes で DogStatsD を使用する場合、Unix ドメインソケットを使用している場合は `$DD_DOGSTATSD_SOCKET` 環境変数を、ホストポートバインディング方式を使用している場合は `$DD_AGENT_HOST` 環境変数を使用して、StatsD メトリクスの転送先のホストをインスタンス化する必要があります。
 
@@ -403,23 +419,22 @@ using (var dogStatsdService = new DogStatsdService())
 
 必須の DogStatsD 構成（`url` と `port`）に加えて、DogStatsD クライアントでは次のオプションのパラメーターを使用できます。
 
-{{< tabs >}}
-{{% tab "Python" %}}
-
+{{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
+{{< programming-lang lang="python" >}}
 | パラメーター              | タイプ            | デフォルト     | 説明                                                                                                    |
 | ---------------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | `statsd_host`          | 文字列          | `localhost` | DogStatsD サーバーのホスト。                                                                             |
 | `statsd_port`          | 整数         | `8125`      | DogStatsD サーバーのポート。                                                                             |
-| `statsd_socket_path`   | 文字列          | `null`      | DogStatsD Unix ドメインソケットへのパス（`host` と `port` をオーバーライドします。Agent v6 以上でのみサポートされます）。 |
+| `statsd_socket_path`   | 文字列          | `null`      | DogStatsD Unix ドメインソケットへのパス (`host` および `port` を上書き。Agent v6 以降のみに対応)。 |
 | `statsd_constant_tags` | 文字列のリスト | `null`      | すべてのメトリクス、イベント、サービスチェックに適用するタグ。                                                      |
-| `statsd_namespace`     | 文字列          | `null`      | すべてのメトリクス、イベント、サービスチェックの前に付けるネームスペース。                                                   |
+| `statsd_namespace`     | 文字列          | `null`      | すべてのメトリクス、イベント、サービスチェックのプレフィックスになるネームスペース。                                                   |
 
 詳細については、[DogStatsD モジュール][1]のドキュメントを参照してください。
 
 
 [1]: https://datadogpy.readthedocs.io/en/latest
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 | パラメーター     | タイプ            | デフォルト     | 説明                                                                                                    |
 | ------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
@@ -429,8 +444,8 @@ using (var dogStatsdService = new DogStatsdService())
 | `tags`        | 文字列のリスト | `null`      | すべてのメトリクス、イベント、サービスチェックに適用するタグ。                                                      |
 | `namespace`   | 文字列          | `null`      | すべてのメトリクス、イベント、サービスチェックの前に付けるネームスペース。                                                |
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 | パラメーター               | タイプ            | 説明                                                                                                                                                                                                         |
 | ----------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -445,8 +460,8 @@ using (var dogStatsdService = new DogStatsdService())
 
 
 [1]: https://godoc.org/github.com/DataDog/datadog-go/statsd#Option
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
 
 | パラメーター      | タイプ            | 説明                                                          |
 | -------------- | --------------- | -------------------------------------------------------------------- |
@@ -459,8 +474,8 @@ using (var dogStatsdService = new DogStatsdService())
 
 
 [1]: https://jar-download.com/artifacts/com.datadoghq/java-dogstatsd-client/2.1.1/documentation
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="PHP" >}}
 
 | パラメーター     | タイプ            | デフォルト     | 説明                                                                                                                                                         |
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -469,8 +484,8 @@ using (var dogStatsdService = new DogStatsdService())
 | `socket_path` | 文字列          | `null`      | DogStatsD Unix ドメインソケットへのパス（`host` と `port` をオーバーライドします）。Agent v6 以上でのみサポートされます。                                                  |
 | `global_tags` | 文字列のリスト | `null`      | すべてのメトリクス、イベント、サービスチェックに適用するタグ。`@dd.internal.entity_id` タグは、`DD_ENTITY_ID` 環境変数から global_tags に追加されます。 |
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 | パラメーター          | タイプ            | デフォルト     | 説明                                                          |
 | ------------------ | --------------- | ----------- | -------------------------------------------------------------------- |
@@ -479,8 +494,8 @@ using (var dogStatsdService = new DogStatsdService())
 | `Prefix`           | 文字列          | `null`      | すべてのメトリクス、イベント、サービスチェックに適用するプレフィックス。           |
 | `ConstantTags`     | 文字列のリスト | `null`      | すべてのメトリクス、イベント、サービスチェックに適用されるグローバルタグ。 |
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## DogStatsD の理解
 
@@ -497,7 +512,7 @@ DogStatsD が使用するデータグラム形式についてさらに理解を�
 [1]: https://github.com/etsy/statsd
 [2]: /ja/developers/metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
-[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
+[4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /ja/developers/metrics/custom_metrics/
 [6]: /ja/developers/events/dogstatsd/
 [7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/

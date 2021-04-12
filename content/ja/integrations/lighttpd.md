@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    lighttpd: assets/dashboards/lighttpd_dashboard.json
   logs:
     source: lighttpd
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    lighttpd_processes: assets/saved_views/lighttpd_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -109,7 +112,6 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
    ```yaml
    logs:
      - type: file
-       encoding: utf-16-le
        path: /path/to/my/directory/file.log
        source: lighttpd
    ```
@@ -136,9 +138,8 @@ Lighttpd チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-`- lighttpd.can_connect`:
-
-Agent が lighttpd に接続してメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**lighttpd.can_connect**:<br>
+Agent が lighttpd に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

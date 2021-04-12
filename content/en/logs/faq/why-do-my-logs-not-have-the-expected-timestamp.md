@@ -30,6 +30,7 @@ However, this default timestamp does not always reflect the actual value that mi
     But we can extract the timestamp from the message to override the actual log date for both raw and JSON logs.
 
 2. **Raw logs**.
+
     2.1 **Extract the timestamp value with a parser**.
         While writing a parsing rule for your logs, you need to extract the timestamp in a specific attribute. [Refer to some specific date parsing examples to help you][2].
         For the above log, we would use the following rule with the `date()` [matcher][3] to extract the date and pass it into a custom date attribute:
@@ -44,6 +45,7 @@ However, this default timestamp does not always reflect the actual value that mi
         {{< img src="logs/faq/log_timestamp_5.png" alt="Log post processing with new timestamp"  style="width:70%;" >}}
 
 3. **JSON logs**.
+
     3.1 **Supported Date formats**.
         JSON logs are automatically parsed in Datadog.
         The log `date` attribute is one of the [reserved attributes][5] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's date. Change the default remapping for those attribute at the top of your Pipeline as explained [in the edit reserved attributes documentation][6].
@@ -71,7 +73,7 @@ However, this default timestamp does not always reflect the actual value that mi
 [2]: /logs/processing/parsing/#parsing-dates
 [3]: /logs/processing/parsing/?tab=matcher
 [4]: /logs/processing/processors/#log-date-remapper
-[5]: /logs/#reserved-attributes
+[5]: /logs/processing/attributes_naming_convention/#reserved-attributes
 [6]: /logs/processing/#edit-reserved-attributes
 [7]: https://www.iso.org/iso-8601-date-and-time-format.html
 [8]: https://en.wikipedia.org/wiki/Unix_time

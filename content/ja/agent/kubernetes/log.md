@@ -90,6 +90,22 @@ DaemonSet によるログの収集を有効にするには
 
    `pointdir` は、Agent がログを収集するすべてのコンテナへのポインターを含むファイルを格納するために使用されます。これは、Agent が再起動したり、ネットワークに問題があった場合でも、何も失われないようにするためです。
 
+### 非特権
+
+(オプション) 非特権インストールを実行するには、[ポッドテンプレート][2]に以下を追加します。
+
+```yaml
+  spec:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
+
+Agent が非ルートユーザーで実行しているときは、`/var/lib/docker/containers` に含まれるログファイルを直接読み取れません。この場合、Docker Daemon からコンテナログをフェッチできるよう、Agent コンテナの Docker ソケットをマウントする必要があります。
+
 [1]: /ja/agent/guide/autodiscovery-management/
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -113,6 +129,20 @@ datadog:
     containerCollectAll: true
 ```
 
+### 非特権
+
+(オプション) 非特権インストールを実行するには、`values.yaml` ファイルに以下を追加します。
+
+```yaml
+datadog:
+  securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
+
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Operator" %}}
@@ -122,7 +152,7 @@ datadog:
 ```
 agent:
   image:
-    name: "datadog/agent:latest"
+    name: "gcr.io/datadoghq/agent:latest"
   log:
     enabled: true
 ```
@@ -135,9 +165,28 @@ agent:
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
+## 非特権
+
+(オプション) 非特権インストールを実行するには、[Datadog CR][8] に以下を追加します。
+
+```yaml
+agent:
+  config:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
+
 [1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
+
+**警告**: 非特権インストールを実行する際、Agent が `/var/log/pods` のログファイルを読み取れる必要があります。
+`containerd` の場合、`/var/log/pods` のログファイルは `root` グループのメンバーに読み取り可能です。上記の手順により、`Agent` が依然として `root` グループで実行しているため、動作します。
+`docker` の場合、`/var/log/pods` のログファイルは  `root` ユーザーによってのみ走査可能な、`/var/lib/docker/containers` へのシンボリックリンクです。したがって、`docker` の場合は非`root` Agentが `/var/log/pods` のポッドログを読み取ることは不可能です。Docker ソケットは、Docker Daemon を通じてポッドログを取得できるよう、Agent のコンテナにマウントされている必要があります。
 
 **注**: Docker ソケットがマウントされていても、`/var/log/pods` からログを収集したい場合は、Agent にファイル収集モードを強制するために環境変数 `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (または `datadog.yaml` 内の `logs_config.k8s_container_use_file`) を `true` に設定します。
 

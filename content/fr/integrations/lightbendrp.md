@@ -5,6 +5,7 @@ ddtype: agent
 dependencies: []
 description: Surveillez les événements relatifs aux acteurs et au répartiteur pour les applications basées sur Akka
 doc_link: 'https://docs.datadoghq.com/integrations/lightbendrp/'
+draft: false
 git_integration_title: lightbendrp
 has_logo: true
 integration_title: Lightbend
@@ -27,7 +28,7 @@ Recueillez des métriques de votre [application Lightbend Reactive Platform][1
 - Plonger au cœur des caractéristiques de remoting de votre application.
 - Accéder à des métriques sur le répartiteur pour ajuster les performances de l'application.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

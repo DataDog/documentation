@@ -20,7 +20,7 @@ further_reading:
 
 There are a number of common issues that can get in the way when [sending new logs to Datadog][1] via the log collector in the `dd-agent`. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, [contact Datadog support][2] for further assistance.
 
-## The Agent needs to be restarted
+## Restart the Agent
 
 Changes in the configuration of the `datadog-agent` won't be taken into account until you have [restarted the Agent][3].
 
@@ -48,7 +48,7 @@ logs_config:
 
 See the [HTTPS log forwarding section][4] for more information.
 
-## Check the status of the agent
+## Check the status of the Agent
 
 Often, checking the [Agent status command][5] results will help you troubleshoot what is happening.
 
@@ -56,7 +56,7 @@ Often, checking the [Agent status command][5] results will help you troubleshoot
 
 The Datadog Agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them). In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
 
-## Permission Issues While Tailing Log Files
+## Permission issues tailing log files
 
 The `datadog-agent` does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
 
@@ -96,9 +96,9 @@ Set permissions as `644` in the log rotation configuration to make sure the Agen
 
 ## Permission issue and Journald
 
-When collecting logs from journald, make sure that the Datadog Agent user is added in the systemd group as shown in the [journald integration][7].
+When collecting logs from Journald, make sure that the Datadog Agent user is added in the systemd group as shown in the [Journald integration][7].
 
-Note that journald sends an empty payload if the file permissions are incorrect. Accordingly, it is not possible to raise or send an explicit error message in this case.
+**Note**: Journald sends an empty payload if the file permissions are incorrect. Accordingly, it is not possible to raise or send an explicit error message in this case.
 
 ## Configuration issues
 

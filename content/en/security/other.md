@@ -13,7 +13,7 @@ This article is part of a [series on data security][1].
 
 This article describes additional security considerations that customers might find relevant when using Datadog and the Agent.
 
-## Process Arguments Obfuscation
+## Process arguments obfuscation
 
 For customers using release 6, the Agent can be configured to obfuscate [Process][2] commands or arguments sent by the Agent to the Datadog application. To mask sensitive sequences within your Process information, use the `custom_sensitive_words` [setting][3]. It is a list containing one or more regular expressions instructing the Agent to filter Process information based on an exclusion list.
 
@@ -23,7 +23,7 @@ Additionally, the following keywords are obfuscated as a baseline:
 "password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
 ```
 
-## Cloud Integrations Security
+## Cloud integrations security
 
 Datadog enables customers to integrate with 3rd-party services. Some of Datadog's [{{< translate key="integration_count" >}}+ built-in integrations][4] are configured directly in the Datadog application, and might require customers to provide credentials that allow Datadog to connect to the 3rd-party service on their behalf. Credentials provided by customers are encrypted and stored by Datadog in a secure credential datastore, with strict security guarantees enforced. All data is encrypted at-rest and in-transit. Access to the secure credential datastore is tightly controlled and highly audited, and specific services or actions within those services are limited to only what is necessary.
 Anomalous behavior detection continuously monitors for unauthorized access. Employee access for maintenance purposes is limited to a select subset of engineers.

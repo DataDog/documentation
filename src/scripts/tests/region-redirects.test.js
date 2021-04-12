@@ -1,14 +1,12 @@
 import { redirectToRegion } from '../region-redirects';
 
-let regionSelector;
 let regionUSSnippet;
 let regionEUSnippet;
+let regionGOVSnippet;
 let regionParam;
 let regionAppLink;
 
 describe(`On main page load (not home or api pages, nor loaded via async)`, () => {
-
-
     beforeEach(() => {
         Object.defineProperty(window.document, 'cookie', {
             writable: true,
@@ -24,12 +22,6 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
         window.location = {
             href: 'http://localhost:1313/getting_started/logs/'
         };
-
-        const selectOption = `<select id="region-select" class="js-region-selector">
-            <option disabled="" selected="" value="">--</option>
-            <option value="us">US</option>
-            <option value="eu">EU</option>
-        </select>`;
 
         const testUSRegionShortcodeHtml = `
         <div class="d-none" data-region="us">
@@ -49,22 +41,25 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
         <code class="js-region-param" data-region-param="dd_site"></code>
         `;
 
-        const testParamHtml = `<code class="js-region-param" data-region-param="dd_site"></code>`;
+        const testGovRegionShortcodeHtml = `
+        <div class="d-none" data-region="gov">
+        <code class="js-region-param" data-region-param="dd_site"></code>
+        `;
 
+        const testParamHtml = `<code class="js-region-param" data-region-param="dd_site"></code>`;
         const testAppLink = `<div id="mainContent"><a class="test-link" href="https://app.datadoghq.com/logs">Logs</a></div>`;
 
-        document.body.innerHTML = selectOption;
         document.body.innerHTML += testUSRegionShortcodeHtml;
         document.body.innerHTML += testEURegionShortcodeHtml;
+        document.body.innerHTML += testGovRegionShortcodeHtml;
         document.body.innerHTML += testParamHtml;
         document.body.innerHTML += testAppLink;
 
-        regionSelector = document.querySelector('.js-region-selector');
         regionUSSnippet = document.querySelector('[data-region=us]');
         regionEUSnippet = document.querySelector('[data-region=eu]');
+        regionGOVSnippet = document.querySelector('[data-region=gov]');
         regionParam = document.querySelector('[data-region-param]');
         regionAppLink = document.querySelector('.test-link');
-       
     });
 
     describe(`No Cookie Set`, () => {
@@ -73,7 +68,6 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
                 redirectToRegion();
 
                 expect(window.document.cookie).toContain('site=us');
-                expect(regionSelector.value).toEqual('us');
                 expect(regionEUSnippet.classList).toContain('d-none')
                 expect(regionUSSnippet.classList).not.toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.com')
@@ -87,10 +81,7 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
 
                 redirectToRegion();
 
-                // console.log('regionAppLink.href: ', regionAppLink.href);
-
                 expect(window.document.cookie).toContain('site=eu');
-                expect(regionSelector.value).toEqual('eu');
                 expect(regionEUSnippet.classList).not.toContain('d-none')
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.eu')
@@ -105,7 +96,6 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
                 redirectToRegion();
 
                 expect(window.document.cookie).toContain('site=us');
-                expect(regionSelector.value).toEqual('us');
                 expect(regionUSSnippet.classList).not.toContain('d-none')
                 expect(regionEUSnippet.classList).toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.com')
@@ -120,7 +110,6 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
                 redirectToRegion();
 
                 expect(window.document.cookie).toContain('site=eu');
-                expect(regionSelector.value).toEqual('eu');
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.eu')
@@ -142,10 +131,9 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
                 redirectToRegion();
 
                 expect(window.document.cookie).toContain('site=eu');
-                expect(regionSelector.value).toEqual('eu');
-                expect(regionUSSnippet.classList).toContain('d-none')
-                expect(regionEUSnippet.classList).not.toContain('d-none')
-                expect(regionParam.innerHTML).toEqual('datadoghq.eu')
+                expect(regionUSSnippet.classList).toContain('d-none');
+                expect(regionEUSnippet.classList).not.toContain('d-none');
+                expect(regionParam.innerHTML).toEqual('datadoghq.eu');
                 expect(regionAppLink.href).toEqual('https://app.datadoghq.eu/logs');
             });
         });
@@ -157,10 +145,9 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
                 redirectToRegion();
 
                 expect(window.document.cookie).toContain('site=eu');
-                expect(regionSelector.value).toEqual('eu');
-                expect(regionUSSnippet.classList).toContain('d-none')
-                expect(regionEUSnippet.classList).not.toContain('d-none')
-                expect(regionParam.innerHTML).toEqual('datadoghq.eu')
+                expect(regionUSSnippet.classList).toContain('d-none');
+                expect(regionEUSnippet.classList).not.toContain('d-none');
+                expect(regionParam.innerHTML).toEqual('datadoghq.eu');
                 expect(regionAppLink.href).toEqual('https://app.datadoghq.eu/logs');
             });
         });
@@ -172,7 +159,6 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
                 redirectToRegion();
 
                 expect(window.document.cookie).toContain('site=eu');
-                expect(regionSelector.value).toEqual('eu');
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.eu')
@@ -187,7 +173,6 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
                 redirectToRegion();
 
                 expect(window.document.cookie).toContain('site=us');
-                expect(regionSelector.value).toEqual('us');
                 expect(regionUSSnippet.classList).not.toContain('d-none')
                 expect(regionEUSnippet.classList).toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.com')
@@ -196,4 +181,65 @@ describe(`On main page load (not home or api pages, nor loaded via async)`, () =
         });
     });
 
+    describe(`Cookie is Set to "gov"`, () => {
+        beforeEach(() => {
+            Object.defineProperty(window.document, 'cookie', {
+                writable: true,
+                value: 'site=gov'
+            });
+        });
+        describe('no site param set', () => {
+            it('should set cookie value "site" to region "gov"', () => {
+                redirectToRegion();
+
+                expect(window.document.cookie).toContain('site=gov');
+                expect(regionUSSnippet.classList).toContain('d-none');
+                expect(regionEUSnippet.classList).toContain('d-none');
+                expect(regionGOVSnippet.classList).not.toContain('d-none');
+                expect(regionAppLink.href).toEqual('https://app.ddog-gov.com/logs');
+            });
+        });
+
+        describe('set region param in url', () => {
+            it('should set cookie value "site" to region from query param "gov"', () => {
+                window.location.search = 'site=gov';
+
+                redirectToRegion();
+
+                expect(window.document.cookie).toContain('site=gov');
+                expect(regionUSSnippet.classList).toContain('d-none');
+                expect(regionEUSnippet.classList).toContain('d-none');
+                expect(regionGOVSnippet.classList).not.toContain('d-none');
+                expect(regionAppLink.href).toEqual('https://app.ddog-gov.com/logs');
+            });
+        });
+
+        describe('invalid site param', () => {
+            it('should set cookie value "site" to region from query param "gov", and disregard invalid param value', () => {
+                window.location.search = 'site=fs';
+
+                redirectToRegion();
+
+                expect(window.document.cookie).toContain('site=gov');
+                expect(regionUSSnippet.classList).toContain('d-none');
+                expect(regionEUSnippet.classList).toContain('d-none');
+                expect(regionGOVSnippet.classList).not.toContain('d-none');
+                expect(regionAppLink.href).toEqual('https://app.ddog-gov.com/logs');
+            });
+        });
+
+        describe('referrer coming from app.ddog-gov.com', () => {
+            it('should set cookie value "site" to region "gov" from document referrer', () => {
+                window.document.referrer = "https://app.ddog-gov.com/";
+
+                redirectToRegion();
+
+                expect(window.document.cookie).toContain('site=gov');
+                expect(regionUSSnippet.classList).toContain('d-none');
+                expect(regionEUSnippet.classList).toContain('d-none');
+                expect(regionGOVSnippet.classList).not.toContain('d-none');
+                expect(regionAppLink.href).toEqual('https://app.ddog-gov.com/logs');
+            });
+        });
+    });
 });

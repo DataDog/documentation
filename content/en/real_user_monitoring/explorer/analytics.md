@@ -6,6 +6,9 @@ aliases:
   - /real_user_monitoring/rum_analytics
   - /real_user_monitoring/analytics
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-geomaps/"
+  tag: "Blog"
+  text: "Use geomaps to visualize your app data by location"
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
@@ -118,7 +121,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 {{< /tabs >}}
 
-## Related Events
+## Related events
 
 Select or click on a section of the graph to either zoom in the graph or see the list of events corresponding to your selection:
 

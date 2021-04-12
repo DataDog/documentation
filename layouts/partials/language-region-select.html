@@ -1,0 +1,45 @@
+<div class="language-region-select-container d-flex flex-lg-column">
+  <div class="language-select-container">
+    <p class="text-uppercase">Language</p>
+    <div class="dropdown bootstrap-dropdown-custom">
+      <button class="btn d-flex align-items-center justify-content-between" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ .Language.LanguageName }}
+        <div class="chevron chevron-down"></div>
+        <div class="chevron chevron-up d-none"></div>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+
+        <!-- Manually adding English option to non-English sites -->
+        {{ if ne .Sites.First .Site }}
+          <a class="dropdown-item" href="{{ replace .Permalink (printf "/%s/" .Language.Lang) "/" }}?lang_pref=en">English</a>
+        {{ end }}
+
+        {{ range where .Translations "Language.Lang" "!=" "en" }}
+          <a class="dropdown-item" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  <div class="region-select-container">
+    <div class="d-flex">
+      <p class="text-uppercase">Site</p>
+      <a href="/getting_started/site/" class="{{ if ne .Page.Type "api" }}ml-1{{ else }}mr-1{{ end }} d-inline-flex">
+        <img src="{{ .Site.Params.img_url }}images/icons/help-druids.svg" height="18" width="18" />
+      </a>
+    </div>
+    <div class="dropdown bootstrap-dropdown-custom js-region-select">
+      <button class="btn d-flex align-items-center justify-content-between" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="btn-inner"></span>
+        <div class="chevron chevron-down"></div>
+        <div class="chevron chevron-up d-none"></div>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {{ range sort .Site.Params.allowedRegions ".weight" "asc" }}
+          <a class="dropdown-item" data-value="{{ .value }}">{{ .name }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

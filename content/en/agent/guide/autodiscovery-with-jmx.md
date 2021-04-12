@@ -116,13 +116,13 @@ spec:
                 -Djava.rmi.server.hostname=$(POD_IP)
 ```
 
-## Autodiscovery Container Identifiers
+## Autodiscovery container identifiers
 
 If you need to pass a more complex configuration for your Datadog-JMX integration, leverage [Autodiscovery Container Identifiers][11] to pass custom integration configuration file or custom `metrics.yaml` file.
 
 ### Agent preparation
 
-Choose wether your Agent is running as a container in your cluster, or on your host directly:
+Choose whether your Agent is running as a container in your cluster, or on your host directly:
 
 {{< tabs >}}
 {{% tab "Container Agent" %}}
@@ -140,7 +140,7 @@ If your Agent is running in your cluster and you want to autodiscover your conta
     | [confluent_platform][7] | [metrics.yaml][8]  | [conf.yaml.example][9] |
     | [hive][10]              | [metrics.yaml][11] | [conf.yaml.example][12] |
     | [jboss_wildfly][13]     | [metrics.yaml][14] | [conf.yaml.example][15] |
-    | [kafka][16]             | [metrics.yaml][17] | [conf.yaml.example][18] |
+    | [kafka][29]             | [metrics.yaml][17] | [conf.yaml.example][18] |
     | [solr][19]              | [metrics.yaml][20] | [conf.yaml.example][21] |
     | [presto][22]            | [metrics.yaml][23] | [conf.yaml.example][24] |
     | [tomcat][16]            | [metrics.yaml][25] | [conf.yaml.example][26] |
@@ -227,6 +227,7 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 [26]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [27]: /agent/faq/template_variables/
 [28]: /agent/guide/ad_identifiers/#short-image-container-identifiers
+[29]: /integrations/kafka/
 {{% /tab %}}
 {{% tab "Host Agent" %}}
 
@@ -285,7 +286,7 @@ If your Agent is running on a host and you want to autodiscover your container t
 {{% /tab %}}
 {{< /tabs >}}
 
-### Container Preparation
+### Container preparation
 
 #### Docker
 

@@ -37,13 +37,15 @@ As you define the search query, the graph above the search fields updates.
 ### Set alert conditions
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 24 hours.
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between `1 minute` and `2 days`.
 * Alert threshold `<NUMBER>`
 * Warning threshold `<NUMBER>`
 
 #### No data and below alerts
 
-To receive a notification when all groups in a service have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
+`NO DATA` is a state given when no logs match the monitor query during the timeframe.
+
+To receive a notification when all groups matching a specific query have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
 
 When splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.
 
@@ -58,14 +60,14 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
-#### Log samples
+#### Log samples and breaching values toplist
 
-By default, when a logs monitor is triggered, samples or values are added to the notification message.
+When a logs monitor is triggered, samples or values can be added to the notification message.
 
-| Monitor over     | Added to notification message                                                                            |
+| Monitor over     | Can be added to notification message                                                                     |
 |------------------|----------------------------------------------------------------------------------------------------------|
 | Log count        | Grouped: The top 10 breaching values and their corresponding counts.<br>Ungrouped: Up to 10 log samples. |
-| Facet or measure | The top 10 facet or measure values.                                                                      |
+| Facet or measure | Grouped: The top 10 facet or measure values.<br>Ungrouped: The top 10 facet or measure values.           |
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 

@@ -18,6 +18,128 @@ further_reading:
 
 このページでは、[Datadog Browser SDK][1] で利用可能なさまざまな初期化オプションを説明します。
 
+### RUM データから機密データをスクラブする
+RUM データに編集が必要な機密情報が含まれている場合は、RUM を初期化するときに `beforeSend` コールバックを使用して、機密シーケンスをスクラブするように Browser SDK を構成します。
+
+このコールバック関数を使用すると、RUM SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。
+
+たとえば、Web アプリケーションの URL からメールアドレスを編集します。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    beforeSend: (event) => {
+        // ビューの URL からメールを削除します
+        event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+    },
+    ...
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            // ビューの URL からメールを削除します
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+        },
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            // ビューの URL からメールを削除します
+            event.view.url = event.view.url.replace(/email=[^&]*/, "email=REDACTED")
+        },
+        ...
+    });
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+次のイベントプロパティを更新できます。
+
+|   属性           |   タイプ    |   説明                                                                                       |
+|-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
+|   `view.url`            |   文字列  |   アクティブな Web ページの URL。                                                                   |
+|   `view.referrer`       |   文字列  |   現在リクエストされているページへのリンクがたどられた前のウェブページの URL。  |
+|   `action.target.name`  |   文字列  |   ユーザーが操作した要素。自動的に収集されたアクションの場合のみ。              |
+|   `error.message`       |   文字列  |   エラーについて簡潔にわかりやすく説明する 1 行メッセージ。                                 |
+|   `error.stack `        |   文字列  |   スタックトレースまたはエラーに関する補足情報。                                     |
+|   `error.resource.url`  |   文字列  |   エラーをトリガーしたリソース URL。                                                        |
+|   `resource.url`        |   文字列  |   リソースの URL。                                                                                 |
+
+**注**: RUM SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。すべてのイベントプロパティについては、[Browser SDK リポジトリ][2]を参照してください。
+
+### ユーザーセッションを特定する
+RUM セッションにユーザー情報を追加すると、次のことが簡単になります。
+* 特定のユーザーのジャーニーをたどる
+* エラーの影響を最も受けているユーザーを把握する
+* 最も重要なユーザーのパフォーマンスを監視する
+
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API"  >}}
+
+次の属性は**オプション**ですが、**少なくとも 1 つ**を指定することをお勧めします。
+
+| 属性  | タイプ | 説明                                                                                              |
+|------------|------|----------------------------------------------------------------------------------------------------|
+| usr.id    | 文字列 | 一意のユーザー識別子。                                                                                  |
+| usr.name  | 文字列 | RUM UI にデフォルトで表示されるユーザーフレンドリーな名前。                                                  |
+| usr.email | 文字列 | ユーザー名が存在しない場合に RUM UI に表示されるユーザーのメール。Gravatar をフェッチするためにも使用されます。 |
+
+ユーザーセッションを識別するには、`setUser` API を使用します。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.setUser({
+    id: '1234',
+    name: 'John Doe',
+    email: 'john@doe.com'
+})
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.setUser({
+        id: '1234',
+        name: 'John Doe',
+        email: 'john@doe.com'
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.setUser({
+    id: '1234',
+    name: 'John Doe',
+    email: 'john@doe.com'
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### サンプリング
 
 デフォルトでは、収集セッション数にサンプリングは適用されていません。収集セッション数に相対サンプリング (% 表示) を適用するには、RUM を初期化する際に `sampleRate` パラメーターを使用します。下記の例では、RUM アプリケーションの全セッションの 90% のみを収集します。
@@ -26,12 +148,12 @@ further_reading:
 {{% tab "NPM" %}}
 
 ```javascript
-import { Datacenter, datadogRum } from '@datadog/browser-rum';
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
-    datacenter: Datacenter.US,
+    site: '<DATADOG_SITE>',
     sampleRate: 90,
 });
 ```
@@ -49,6 +171,7 @@ datadogRum.init({
     DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
+        site: '<DATADOG_SITE>',
         sampleRate: 90,
     })
   })
@@ -60,8 +183,9 @@ datadogRum.init({
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
-        clientToken: '<クライアントトークン>',
-        applicationId: '<アプリケーション_ID>',
+        clientToken: '<CLIENT_TOKEN>',
+        applicationId: '<APPLICATION_ID>',
+        site: '<DATADOG_SITE>',
         sampleRate: 90,
     });
 ```
@@ -83,12 +207,12 @@ window.DD_RUM &&
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addRumGlobalContext('<コンテキストキー>', <コンテキスト値>);
+datadogRum.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
-// Code example
-datadogRum.addRumGlobalContext('usr', {
-    id: 123,
-    plan: 'premium'
+// コード例
+datadogRum.addRumGlobalContext('activity', {
+    hasPaid: true,
+    amount: 23.42
 });
 ```
 
@@ -96,14 +220,14 @@ datadogRum.addRumGlobalContext('usr', {
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
 // コード例
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('usr', {
-        id: 123,
-        plan: 'premium'
+    DD_RUM.addRumGlobalContext('activity', {
+        hasPaid: true,
+        amount: 23.42
     });
 })
 ```
@@ -111,19 +235,19 @@ DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 
 ```javascript
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('<コンテキストキー>', <コンテキスト値>);
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
 // コード例
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('usr', {
-    id: 123,
-    plan: 'premium'
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
+    hasPaid: true,
+    amount: 23.42
 });
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
+**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][3]に従ってください。
 
 ### グローバルコンテキストを置換
 
@@ -174,7 +298,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
+**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][3]に従ってください。
 
 ### グローバルコンテキストを読み取る
 
@@ -208,7 +332,7 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 
 ### カスタムユーザーアクション
 
-リアルユーザーモニタリング (RUM) を初期化したら、`addUserAction(name: string, context: Context)` API を使用してアプリケーションページの特定のインタラクションを監視したり、カスタムタイミングを測定したりする場合のユーザーアクションを生成します。
+リアルユーザーモニタリング (RUM) を初期化したら、`addAction(name: string, context: Context)` API を使用してアプリケーションページの特定のインタラクションを監視したり、カスタムタイミングを測定したりする場合のユーザーアクションを生成します。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -216,10 +340,10 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addUserAction('<名前>', '<JSON_オブジェクト>');
+datadogRum.addAction('<名前>', '<JSON_オブジェクト>');
 
 // Code example
-datadogRum.addUserAction('checkout', {
+datadogRum.addAction('checkout', {
     cart: {
         amount: 42,
         currency: '$',
@@ -233,12 +357,12 @@ datadogRum.addUserAction('checkout', {
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('<NAME>', '<JSON_OBJECT>');
+    DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
 })
 
 // コード例
 DD_RUM.onReady(function() {
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',
@@ -252,11 +376,11 @@ DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addUserAction('<名前>', '<JSON_オブジェクト>');
+window.DD_RUM && DD_RUM.addAction('<名前>', '<JSON_オブジェクト>');
 
 // Code example
 window.DD_RUM &&
-    DD_RUM.addUserAction('checkout', {
+    DD_RUM.addAction('checkout', {
         cart: {
             amount: 42,
             currency: '$',
@@ -272,104 +396,11 @@ window.DD_RUM &&
 上記の例では、RUM SDK がカート内のアイテム数、中身、カート全体の総額を収集します。
 
 
-### カスタムエラー
-処理済みの例外、処理済みのプロミス拒否、および `addError()` API を使用した RUM SDK により自動的に追跡されないその他のエラーを監視します。
-
-```javascript
-addError(
-    error: unknown,
-    context?: Context,
-    source: ErrorSource.CUSTOM | ErrorSource.NETWORK | ErrorSource.SOURCE = ErrorSource.CUSTOM
-);
-```
-
-**注**: [エラー追跡][3]機能では、`custom` または `source` に設定されたソースに送信され、スタックトレースを含むエラーが処理します。
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-// コンテキスト付きでカスタムエラーを送信
-const error = new Error('Something wrong occured.');
-
-datadogRum.addError(error, {
-    pageStatus: 'beta',
-});
-
-// ネットワークエラーを送信
-fetch('<SOME_URL>').catch(function(error) {
-    datadogRum.addError(error, undefined, 'network');
-})
-
-// 処理済みの例外エラーを送信
-try {
-    //Some code logic
-} catch (error) {
-    datadogRum.addError(error, undefined, 'source');
-}
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-// コンテキスト付きでカスタムエラーを送信
-const error = new Error('Something wrong occured.');
-
-DD_RUM.onReady(function() {
-    DD_RUM.addError(error, {
-        pageStatus: 'beta',
-    });
-});
-
-// ネットワークエラーを送信
-fetch('<SOME_URL>').catch(function(error) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'network');
-    });
-})
-
-// 処理済みの例外エラーを送信
-try {
-    //Some code logic
-} catch (error) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'source');
-    })
-}
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```javascript
-// コンテキスト付きでカスタムエラーを送信
-const error = new Error('Something wrong occured.');
-
-window.DD_RUM && DD_RUM.addError(error, {
-    pageStatus: 'beta',
-});
-
-// ネットワークエラーを送信
-fetch('<SOME_URL>').catch(function(error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'network');
-})
-
-// 処理済みの例外エラーを送信
-try {
-    //コードロジック
-} catch (error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'source');
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://github.com/DataDog/browser-sdk
-[2]: /ja/logs/processing/attributes_naming_convention/#user-related-attributes
-[3]: /ja/real_user_monitoring/error_tracking
+[2]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum/src/rumEvent.types.ts
+[3]: /ja/logs/processing/attributes_naming_convention/#user-related-attributes

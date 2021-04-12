@@ -3,13 +3,15 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: nagios
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - monitoring
   - notification
+  - log collection
 creates_events: true
 ddtype: check
 dependencies:
@@ -99,6 +101,27 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 デフォルトの構成では、Nagios チェックはメトリクスを収集しません。ただし、`collect_host_performance_data` や `collect_service_performance_data` を `True` に設定すると、チェックは Nagios パフォーマンスデータを監視し、それをゲージメトリクスとして Datadog に送信します。
 
+### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Nagios のログの収集を開始するには、次の構成ブロックを `nagios.d/conf.yaml` ファイルに追加します。
+
+    ```yaml
+    logs:
+      - type: file
+        path: /opt/nagios/var/log/nagios.log
+        source: nagios
+    ```
+
+    `path` パラメーターの値を環境に合わせて変更します。nagios コンフィギュレーションファイルの `log_file` 値を参照してください。使用可能なすべてのコンフィギュレーションオプションについては、[nagios.d/conf.yaml のサンプル][3]を参照してください。
+
+3. [Agent を再起動します][4]。
+
 ### イベント
 
 このチェックは Nagios イベントログを監視して、次の文字列を含むログ行を検出すると、行ごとにイベントを送信します。
@@ -119,14 +142,16 @@ Nagios チェックには、サービスのチェック機能は含まれませ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 ## その他の参考資料
 
-- [Datadog を使用した Nagios アラートの把握][4]
+- [Datadog を使用した Nagios アラートの把握][6]
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/help/
-[4]: https://www.datadoghq.com/blog/nagios-monitoring
+[3]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/help/
+[6]: https://www.datadoghq.com/blog/nagios-monitoring

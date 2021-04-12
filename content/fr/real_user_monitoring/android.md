@@ -113,11 +113,11 @@ En fonction de l'architecture de votre application, vous pouvez choisir l'une de
 
    ```kotlin
       fun onResume(){
-        GlobalRum.get().startView(viewKey, viewName, viewAttributes)        
+        GlobalRum.get().startView(viewKey, viewName, viewAttributes)
       }
 
       fun onPause(){
-        GlobalRum.get().stopView(viewKey, viewAttributes)        
+        GlobalRum.get().stopView(viewKey, viewAttributes)
       }
    ```
 
@@ -183,7 +183,7 @@ Si vous souhaitez effectuer le suivi d'événements manuellement, vous pouvez le
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `startView(<clé>, <nom>, <attributs>)`   | Prévient le RumMonitor qu'une nouvelle vue vient de commencer. Le plus souvent, cette méthode doit être appelée dans la première méthode `onResume()` de l'`Activity` ou du `Fragment`. |
 | `stopView(<clé>, <attributs>)`   | Prévient le RumMonitor que la vue actuelle vient de s'arrêter. Le plus souvent, cette méthode doit être appelée dans la première méthode `onPause()` de l'`Activity` ou du `Fragment`. |
-| `addUserAction(<type>, <nom>, <attributs>)`   | Prévient le RumMonitor qu'une action utilisateur vient de se produire. |
+| `addAction(<type>, <nom>, <attributs>)`   | Prévient le RumMonitor qu'une action utilisateur vient de se produire. |
 | `startUserAction(<type>, <nom>, <attributs>)`   | Prévient le RumMonitor qu'une action utilisateur continue vient de commencer (par exemple, un utilisateur qui fait défiler une liste). |
 | `stopUserAction(<type>, <nom>, <attributs>)`   | Prévient le RumMonitor qu'une action utilisateur continue vient de s'arrêter. |
 | `startResource(<clé>, <méthode>, <url>, <attributs>)`   | Prévient le RumMonitor que l'application a lancé le chargement d'une ressource avec une méthode donnée (par exemple : `GET` ou `POST`), à l'URL indiquée. |
@@ -194,7 +194,7 @@ Si vous souhaitez effectuer le suivi d'événements manuellement, vous pouvez le
 
 ### Suivi des widgets
 
-La plupart du temps, les widgets sont affichés dans la vue `AppWidgetHostView` fournie par l'application HomeScreen, et nous ne pouvons pas fournir une instrumentation automatique pour ces composants. Pour envoyer des informations d'interaction avec l'interface à partir de vos widgets, appelez manuellement notre API. Consultez un exemple d'approche dans cet exemple d'application : 
+La plupart du temps, les widgets sont affichés dans la vue `AppWidgetHostView` fournie par l'application HomeScreen, et nous ne pouvons pas fournir une instrumentation automatique pour ces composants. Pour envoyer des informations d'interaction avec l'interface à partir de vos widgets, appelez manuellement notre API. Consultez un exemple d'approche dans cet exemple d'application :
 [Suivi des widgets](https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget)
 
 ## Collecte groupée de spans
@@ -253,10 +253,10 @@ Conformément à la [documentation générée automatiquement sur l'API SQLiteOp
 Cette intégration permet de détecter toute corruption de base de données et d'envoyer un événement d'erreur RUM associé.
 
 ```kotlint
-   class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(<Context>, 
-                                                     <NOM_BASEDEDONNÉES>, 
-                                                     <CursorFactory>, 
-                                                     <VERSION_BASEDEDONNÉES>, 
+   class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(<Context>,
+                                                     <NOM_BASEDEDONNÉES>,
+                                                     <CursorFactory>,
+                                                     <VERSION_BASEDEDONNÉES>,
                                                      DatadogDatabaseErrorHandler()) {
                                 // …
 

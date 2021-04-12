@@ -11,7 +11,7 @@ categories:
   - コンプライアンス
   - 自動化
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md'
 display_name: Pliant

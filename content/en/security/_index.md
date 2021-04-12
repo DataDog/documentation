@@ -11,6 +11,9 @@ further_reading:
 - link: "/security/agent/"
   tag: "Documentation"
   text: "Agent Security"
+- link: "/security/synthetics/"
+  tag: "Documentation"
+  text: "Synthetic Monitoring Security"
 - link: "/security/other/"
   tag: "Documentation"
   text: "Additional Security Considerations"
@@ -24,7 +27,7 @@ Datadog allows customers to submit data in multiple ways, including via the [Age
 
 Metadata consist primarily of [tags][6], which are typically formatted in the `key:value` (e.g. `env:prod`) format. Metadata enable customer data such as Infrastructure Metrics, APM and Logs to be filtered and grouped. Metadata should not contain personal data as part of the intended use of the service.
 
-## Infrastructure Metrics
+## Infrastructure metrics
 
 Infrastructure Metrics consist of timeseries for given metric names, associated with Metadata, used to populate graphs. Metric names and timeseries should not contain personal data as part of the intended use of the service.
 
@@ -40,11 +43,11 @@ Logs consist of messages collected [by the Agent or by integrations][9], and ass
 
 [Processes][11] consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state, and the working directory. Process data may also be associated with optional Metadata. Processes should not contain personal data as part of the intended use of the service. See the [Additional Security Considerations][12] page for more information.
 
-## Monitors and Alerts
+## Monitors and alerts
 
 [Monitors and Alerts][13] are defined by customers to monitor the state of their infrastructure and applications based on the data they submit to Datadog. Monitors and Alerts are associated with optional Metadata. A Monitor might trigger an Alert when certain conditions occur, such as a metric reaching a threshold, in order to track critical changes and notify team members as needed. Monitors should not contain personal data as part of the intended use of the service.
 
-## Events and Comments
+## Events and comments
 
 [Events][14] are aggregated from multiple sources into a consolidated Event stream, including triggered monitors, Events submitted by integrations, Events submitted by the application itself, Comments and annotations from users, and Events and Comments submitted through the API. Events and Comments are associated with optional Metadata. Events and Comments should not contain personal data as part of the intended use of the service.
 

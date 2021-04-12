@@ -37,13 +37,33 @@ To send logs manually, use the `telnet` command with your [Datadog API key][5] w
 
 Logs can be a full-text message:
 
-The secure TCP endpoint is {{< region-param key="tcp_endpoint" code="true" >}} (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
+The secure TCP endpoint is telnet intake.logs.datadoghq.com with port `{{< region-param key="tcp_endpoint_port_ssl" >}}` (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
+
+{{< site-region region="us,us3" >}}
 
 ```
-telnet {{< region-param key="tcp_endpoint" >}} {{< region-param key="tcp_endpoint_port_ssl" >}}
+telnet intake.logs.datadoghq.com 10516
 
 <DATADOG_API_KEY> Plain text log sent through TCP
 ```
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+```
+telnet intake.logs.datadoghq.com 1883
+
+<DATADOG_API_KEY> Plain text log sent through TCP
+```
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+This feature is not supported.
+
+{{< /site-region >}}
 
 This produces the following result in the [Log Explorer Page][2]:
 
@@ -51,10 +71,10 @@ This produces the following result in the [Log Explorer Page][2]:
 
 or a JSON object that is automatically parsed by Datadog:
 
-{{< site-region region="us" >}}
+{{< site-region region="us,us3" >}}
 
 ```text
-telnet intake.logs.datadoghq.com 10514
+telnet intake.logs.datadoghq.com 10516
 
 <DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
 ```
@@ -71,6 +91,12 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 {{< /site-region >}}
 
+{{< site-region region="gov" >}}
+
+This feature is not supported.
+
+{{< /site-region >}}
+
 This produces the following result in the [Log Explorer Page][2]:
 
 {{< img src="getting_started/logs/json_log.png" alt="JSON logs" >}}
@@ -81,9 +107,10 @@ This produces the following result in the [Log Explorer Page][2]:
 
 To install the Datadog Agent within your Vagrant host, use the [one line install command][6] updated with your [Datadog API key][5]:
 
+
 {{< site-region region="us" >}}
 
-```text
+```shell
 DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
@@ -91,8 +118,24 @@ DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-age
 
 {{< site-region region="eu" >}}
 
-```text
+```shell
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="ddog-gov.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="us3.datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
 {{< /site-region >}}

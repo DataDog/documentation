@@ -35,7 +35,7 @@ Datadog Agent によって収集されたすべてのログに同一の処理ル
 
 ログの一部分のみを Datadog に送信するには、構成ファイル内の `log_processing_rules` パラメーターを使用して、`type` に **exclude_at_match** または **include_at_match** を指定します。
 
-### exclude_at_match
+### 一致時に除外
 
 | パラメーター          | 説明                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
@@ -121,7 +121,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### include_at_match
+### 一致時に含める
 
 | パラメーター          | 説明                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
@@ -397,6 +397,8 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em></div>
+
 その他の例:
 
 | **文字列の例**           | **パターン**                                   |
@@ -406,10 +408,9 @@ spec:
 | Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
 | 20180228                 | `\d{8}`                                       |
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
-**注**: 複数行のログのための正規表現パターンは、常にログの**先頭**に一致します。行の途中でパターンを一致させることはできません。
-
-## 一般的に使用されるログ処理ルール
+## 良く使用されるログの処理ルール
 
 例のリストを確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][1] をご覧ください。
 
@@ -430,13 +431,13 @@ spec:
 
 ```yaml
 logs:
- - type: file
-   path: /var/log/myapp/*.log
-   exclude_paths:
-     - /var/log/myapp/debug.log
-     - /var/log/myapp/trace.log
-   service: mywebapp
-   source: go
+  - type: file
+    path: /var/log/myapp/*.log
+    exclude_paths:
+      - /var/log/myapp/debug.log
+      - /var/log/myapp/trace.log
+    service: mywebapp
+    source: go
 ```
 
 上の例は `/var/log/myapp/log/myfile.log` と一致しますが `/var/log/myapp/log/debug.log` と `/var/log/myapp/log/trace.log` が追尾されることはありません。
@@ -451,12 +452,12 @@ Datadog Agent **v6.23/v7.23** 以降でアプリケーションログが UTF-16 
 
 ```yaml
 logs:
- - type: file
-   path: /test/log/hello-world.log
-   tags: key:value
-   service: utf-16-logs
-   source: mysql
-   encoding: utf-16-be
+  - type: file
+    path: /test/log/hello-world.log
+    tags: key:value
+    service: utf-16-logs
+    source: mysql
+    encoding: utf-16-be
 ```
 
 **注**: `encoding` パラメーターは `type` パラメーターが `file` に設定されている場合のみ適用可能です。
@@ -473,13 +474,13 @@ Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`ma
 ```yaml
 logs_config:
   processing_rules:
-     - type: exclude_at_match
-       name: exclude_healthcheck
-       pattern: healthcheck
-     - type: mask_sequences
-       name: mask_user_email
-       pattern: \w+@datadoghq.com
-       replace_placeholder: "MASKED_EMAIL"
+    - type: exclude_at_match
+      name: exclude_healthcheck
+      pattern: healthcheck
+    - type: mask_sequences
+      name: mask_user_email
+      pattern: \w+@datadoghq.com
+      replace_placeholder: "MASKED_EMAIL"
 ```
 
 {{% /tab %}}

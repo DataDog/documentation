@@ -46,37 +46,18 @@ Bind9 チェックは [Datadog Agent][2] パッケージに**含まれていま�
 
 Agent v6.8 以降を使用している場合は、以下の手順に従ってホストに Bind9 チェックをインストールしてください。[バージョン 6.8 以前の Agent][4] または [Docker Agent][5] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][3]に関する Agent のガイドを参照してください。
 
-1. [開発ツールキット][6]をインストールします。
-2. integrations-extras リポジトリを複製します。
+1. [Datadog Agent をダウンロードして起動][2]します。
+2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
    ```shell
-   git clone https://github.com/DataDog/integrations-extras.git.
+   datadog-agent integration install -t datadog-bind9==<INTEGRATION_VERSION>
    ```
 
-3. `ddev` 構成を `integrations-extras/` パスで更新します。
-
-   ```shell
-   ddev config set extras ./integrations-extras
-   ```
-
-4. `bind9` パッケージをビルドします。
-
-   ```shell
-   ddev -e release build bind9
-   ```
-
-5. [Datadog Agent をダウンロードして起動][2]します。
-6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
-
-   ```shell
-   datadog-agent integration install -w <PATH_OF_BIND9_ARTIFACT>/<BIND9_ARTIFACT_NAME>.whl
-   ```
-
-7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
+3. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
-1. Bind9 の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][8]のルートにある `conf.d/` フォルダーの `bind9.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル bind9.d/conf.yaml][9] を参照してください。
+1. Bind9 の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーの `bind9.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル bind9.d/conf.yaml][8] を参照してください。
 
    ```yaml
    init_config:
@@ -85,11 +66,11 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
      - URL: "<BIND_9_STATS_URL>"
    ```
 
-2. [Agent を再起動します][10]
+2. [Agent を再起動します][9]
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][11]し、Checks セクションで `bind9` を探します。
+[Agent の `status` サブコマンドを実行][10]し、Checks セクションで `bind9` を探します。
 
 ## 互換性
 
@@ -112,18 +93,17 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 
 ## 開発
 
-Agent ベースのインテグレーションのテストおよび開発方法の詳細については、[メインドキュメント][13]を参照してください。
+Agent ベースのインテグレーションのテストおよび開発方法の詳細については、[メインドキュメント][12]を参照してください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bind9/images/snapshot.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[6]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[7]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[9]: https://github.com/DataDog/integrations-extras/blob/master/bind9/datadog_checks/bind9/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[12]: https://github.com/DataDog/cookiecutter-datadog-check/blob/master/%7B%7Bcookiecutter.check_name%7D%7D/metadata.csv
-[13]: https://docs.datadoghq.com/ja/developers/
+[6]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: https://github.com/DataDog/integrations-extras/blob/master/bind9/datadog_checks/bind9/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
+[11]: https://github.com/DataDog/integrations-extras/blob/master/bind9/metadata.csv
+[12]: https://docs.datadoghq.com/ja/developers/

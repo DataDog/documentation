@@ -24,7 +24,7 @@ Datadog integrates with AWS CloudHSM via a Lambda function that ships CloudHSM l
 
 ## Setup
 
-### Log Collection
+### Log collection
 
 #### Enable CloudHSM logs
 

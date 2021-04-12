@@ -55,31 +55,15 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 ## API
 
-アラートグラフウィジェット専用の[ウィジェット JSON スキーマ定義][1]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][1] ドキュメントをご参照ください。
 
-```text
-ALERT_GRAPH_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["alert_graph"]},
-        "alert_id": {"type": "string"},
-        "viz_type": {"enum": ["timeseries", "toplist"]},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "alert_id", "viz_type"],
-    "additionalProperties": false
-}
-```
+アラートグラフウィジェット専用の[ウィジェット JSON スキーマ定義][2]は次のとおりです。
 
-| パラメーター  | 種類   | 必須 | 説明                                                                                                       |
-|------------|--------|----------|-------------------------------------------------------------------------------------------------------------------|
-| `type`     | string | はい      | ウィジェットのタイプ。アラートグラフウィジェットには `alert_graph` を使用します。                                                  |
-| `alert_id` | string | はい      | ウィジェットで使用するアラートの ID                                                                              |
-| `viz_type` | string | はい      | アラートグラフを時系列とトップリストのどちらとして表示するかを指定します。有効な値は `timeseries` または `toplist` です。 |
-| `title`    | string | いいえ       | ウィジェットのタイトル                                                                                               |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/graphing_json/widget_json/
+[1]: /ja/api/v1/dashboards/
+[2]: /ja/dashboards/graphing_json/widget_json/

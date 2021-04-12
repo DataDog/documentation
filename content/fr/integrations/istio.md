@@ -8,7 +8,8 @@ assets:
   logs:
     source: istio
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    Failed sidecar injections: assets/monitors/failed_sidecar_injection.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -44,23 +45,25 @@ supported_os:
 ---
 ## Présentation
 
-Utilisez l'Agent Datadog pour surveiller les performances d'Istio.
+Datadog surveille chaque aspect de votre environnement Istio, afin que vous puissiez :
+- Évaluer la santé d'Envoy et du plan de contrôle Istio grâce aux logs ([voir ci-dessous](#collecte-de-logs))
+- Consulter en détail les performances de votre maillage de services avec des métriques sur les requêtes, la bande passante et la consommation de ressources ([voir ci-dessous](#metriques)).
+- Mapper les communications réseau entre les conteneurs, pods et services sur le maillage avec la solution [Network Performance Monitoring][1]
+- Plonger au cœur des traces distribuées pour les applications qui effectuent des transactions sur le maillage avec l'[APM][2]
 
-- Recueillez des métriques sur les applications et les types de requêtes transmises.
-- Étudiez l'utilisation de la bande passante par les applications.
-- Visualisez les ressources consommées par Istio
+Pour en savoir plus sur la surveillance de votre environnement Istio avec Datadog, [consultez l'article du blog à ce sujet][3] (en anglais).
 
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][4] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
-Istio est intégré à l'Agent Datadog. [Installez l'Agent Datadog][2] sur vos serveurs Istio ou dans votre cluster et connectez-le à Istio.
+Istio est fourni avec l'Agent Datadog. [Installez l'Agent Datadog][5] sur vos serveurs Istio ou dans votre cluster et pointez-le vers Istio.
 
 ### Configuration
 
-Modifiez le fichier `istio.d/conf.yaml` (dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour connecter l'Agent à Istio. Consultez le [fichier d'exemple istio.d/conf.yaml][4]) pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `istio.d/conf.yaml` (dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][6] pour vous connecter à Istio. Consultez le [fichier d'exemple istio.d/conf.yaml][7]) pour découvrir toutes les options de configuration disponibles.
 
 #### Collecte de métriques
 
@@ -75,9 +78,9 @@ Ajoutez l'un des blocs de configuration ci-dessous à votre fichier `istio.d/con
       - istiod_endpoint: http://istiod.istio-system:15014/metrics
     ```
 
-   Pour surveiller des métriques de maillage Istio, continuez à utiliser `istio_mesh_endpoint`. Les métriques de maillage Istio sont désormais uniquement disponibles à partir des conteneurs `istio-proxy`, qui sont directement pris en charge via Autodiscovery. Référez-vous à [`istio.d/auto_conf.yaml`][5].
+   Pour surveiller des métriques de maillage Istio, continuez à utiliser `istio_mesh_endpoint`. Les métriques de maillage Istio sont désormais uniquement disponibles sur les conteneurs `istio-proxy`, qui sont directement pris en charge via Autodiscovery. Référez-vous au fichier [`istio.d/auto_conf.yaml`][8].
 
-   **Remarque** : veillez à bien activer la [version 1 de la télémétrie][6] pour Istio `v1.6` ou ultérieur de façon à recueillir les métriques de maillage.
+   **REMARQUE** : veillez à bien activer la [version 1 de la télémétrie][9] pour Istio `v1.6` ou les versions ultérieures de façon à recueillir les métriques de maillage.
 
 2. Pour surveiller Istio `v1.4` ou une version antérieure, utilisez la configuration suivante :
     ```yaml
@@ -92,13 +95,13 @@ Ajoutez l'un des blocs de configuration ci-dessous à votre fichier `istio.d/con
         send_histograms_buckets: true
     ```
 
-Chaque endpoint est facultatif, mais au moins l'un d'eux doit être configuré. Consultez la [documentation Istio][7] pour en savoir plus sur l'adaptateur Prometheus.
+Chaque endpoint est facultatif, mais vous devez configurer au moins l'un des deux. Consultez la [documentation Istio][10] (en anglais) pour en savoir plus sur l'adaptateur Prometheus.
 
 Remarque : l'étiquette Prometheus `connectionID` est exclue.
 
-##### Désactiver l'injection de sidecar
+##### Désactivez l'injection de sidecar pour les pods de l'Agent Datadog
 
-Si vous installez l'[Agent Datadog dans un conteneur][8], Datadog vous conseille de désactiver l'injection de sidecar d'Istio au préalable.
+Si vous installez l'[Agent Datadog dans un conteneur][11], nous vous conseillons de désactiver au préalable l'injection de sidecar d'Istio.
 
 Ajoutez l'annotation `sidecar.istio.io/inject: "false"` au DaemonSet `datadog-agent` :
 
@@ -121,12 +124,11 @@ kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"anno
 
 #### Collecte de logs
 
-Istio contient deux types de logs : les logs d'accès Envoy recueillis via l'[intégration Envoy][9], ainsi que les [logs Istio][10].
+Istio contient deux types de logs : les logs d'accès Envoy recueillis via l'[intégration Envoy][12], ainsi que les [logs Istio][13].
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-Consultez les [modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous.
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][11].
+Consultez les [modèles d'intégration Autodiscovery][4] pour découvrir comment appliquer les paramètres ci-dessous. Par défaut, la collecte des logs est désactivée dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][14].
 
 | Paramètre      | Valeur                                                |
 | -------------- | ---------------------------------------------------- |
@@ -134,7 +136,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Validation
 
-[Lancez la sous-commande `info` de l'Agent][12] et cherchez `istio` dans la section Checks.
+[Lancez la sous-commande `info` de l'Agent][15] et cherchez `istio` dans la section Checks.
 
 ## Données collectées
 
@@ -166,28 +168,32 @@ Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de m
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][14].
+Besoin d'aide ? Contactez [l'assistance Datadog][17].
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller votre maillage de services Istio avec Datadog][15]
-- [Découvrir comment Datadog recueille des métriques clés pour surveiller Istio][16]
+- [Surveiller votre maillage de services Istio avec Datadog][18]
+- [Découvrir comment Datadog recueille des métriques clés pour surveiller Istio][19]
+- [Comment surveiller Istio avec Datadog][3]
 
-[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example
-[5]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
-[6]: https://istio.io/latest/docs/tasks/observability/mixer/metrics/collecting-metrics/#before-you-begin
-[7]: https://istio.io/docs/tasks/telemetry/metrics/querying-metrics
-[8]: https://docs.datadoghq.com/fr/agent/kubernetes/
-[9]: https://docs.datadoghq.com/fr/integrations/envoy/#log-collection
-[10]: https://istio.io/docs/tasks/telemetry/logs/collecting-logs/
-[11]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
-[14]: https://docs.datadoghq.com/fr/help/
-[15]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
-[16]: https://www.datadoghq.com/blog/istio-metrics/
+[1]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
+[2]: https://docs.datadoghq.com/fr/tracing/setup_overview/proxy_setup/?tab=istio
+[3]: https://www.datadoghq.com/blog/istio-datadog/
+[4]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example
+[8]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
+[9]: https://istio.io/v1.1/docs/tasks/telemetry/
+[10]: https://istio.io/docs/tasks/telemetry/metrics/querying-metrics
+[11]: https://docs.datadoghq.com/fr/agent/kubernetes/
+[12]: https://docs.datadoghq.com/fr/integrations/envoy/#log-collection
+[13]: https://istio.io/docs/tasks/telemetry/logs/collecting-logs/
+[14]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[15]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[16]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
+[17]: https://docs.datadoghq.com/fr/help/
+[18]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
+[19]: https://www.datadoghq.com/blog/istio-metrics/

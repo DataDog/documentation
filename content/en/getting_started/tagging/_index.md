@@ -8,6 +8,7 @@ aliases:
     - /developers/getting_started/tagging/
     - /tagging
     - /guides/tagging/
+    - - /faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events/
 further_reading:
     - link: '/getting_started/tagging/assigning_tags/'
       tag: 'Documentation'
@@ -35,13 +36,13 @@ Tagging binds different data types in Datadog, allowing for correlation and call
 | `env`     | Scoping of application specific data across metrics, traces, and logs |
 | `version` | Scoping of application specific data across metrics, traces, and logs |
 
-## Why It Matters
+## Why it matters
 
 Typically, it's helpful to look at containers, VMs, and cloud infrastructure at the `service` level in aggregate. For example, it's more helpful to look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
 
 Containers and cloud environments regularly churn through hosts, so it is critical to tag these to allow for aggregation of the metrics you're getting.
 
-## Defining Tags
+## Defining tags
 
 Below are Datadog's tagging requirements:
 
@@ -59,7 +60,7 @@ Below are Datadog's tagging requirements:
     **Note**: A tag cannot end with a colon, for example `tag:`
 
 2. Tags can be **up to 200 characters** long and support Unicode.
-3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
+3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`. **Note**: `host` and `device` tags are excluded from this conversion.
 4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
 
     | Tag                | Key           | Value          |
@@ -69,7 +70,7 @@ Below are Datadog's tagging requirements:
 
 5. Tags shouldn't originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
 
-## Assigning Tags
+## Assigning tags
 
 ### Tagging methods
 
@@ -86,7 +87,7 @@ Tags may be assigned using any (or all) of the following methods. Refer to the d
 
 As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][8] documentation.
 
-## Using Tags
+## Using tags
 
 After you have [assigned tags][3] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
 

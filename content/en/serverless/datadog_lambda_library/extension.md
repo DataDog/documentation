@@ -11,42 +11,56 @@ further_reading:
 
 <div class="alert alert-warning"> The Datadog AWS Lambda Extension is in public preview. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
 
-AWS Lambda Extensions are companion processes that augment your Lambda functions. They run within the Lambda execution environment, alongside your Lambda function code. The Datadog Extension is a lightweight version of the Datadog agent built to run alongside your code with minimal performance overhead.
+AWS Lambda Extensions are companion processes that augment your Lambda functions. They run within the Lambda execution environment, alongside your Lambda function code. The Datadog Extension is a lightweight version of the Datadog Agent built to run alongside your code with minimal performance overhead.
 
 The Datadog Extension supports submitting custom metrics and logs [synchronously][1] while your AWS Lambda function executes. This means that you can submit some of your telemetry data without the [Datadog Forwarder][2]. **Note**: The Datadog Forwarder is still required to submit traces to Datadog.
 
 ## Setup
 
-The Datadog Extension is distributed as its own Lambda Layer (separate from the [Datadog Lambda Library][3]) and supports Node.js and Python runtimes.
+The Datadog Extension currently supports Node.js and Python runtimes.
 
-1. Instrument your [Python][4] or [Node.js][5] application.
+### As a Lambda Layer
 
-2. Add the Lambda Layer for the Datadog Extension to your AWS Lambda function:
+The Datadog Lambda Extension is distributed as its own Lambda Layer (separate from the [Datadog Lambda Library][3]).
 
-    ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:4
-    ```
+1. Instrument your [Python][4] or [Node.js][5] application by installing the Datadog Lambda Library.
 
-    Replace the placeholder `AWS_REGION` in the Lambda Layer ARN with appropriate values.
-
-3. If you are using Node.js or Python, add the Lambda Layer for the [Datadog Library][7] to your AWS Lambda function:
+2. Add the Lambda Layer for the Datadog Extension to your AWS Lambda function with the following ARN:
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<VERSION_NUMBER>
     ```
 
-    The available `RUNTIME` options are `Node10-x`, `Node12-x`, `Python37`, and `Python38`. For `VERSION`, see the latest release for [Node.js][8] or [Python][9].
+    Replace the placeholder values in the ARN as follows:
+    - Replace `<AWS_REGION>` with the same AWS region as your Lambda Function, for example, `us-east-1`.
+    - Replace `<VERSION_NUMBER>` with the version of the Datadog Lambda Extension you would like to use, for example `6`. You can identify the current version by viewing the newest image tags in the [Amazon ECR repository][11].
+    
+    **Note**: This Layer is separate from the Datadog Lambda Library. If you installed the Datadog Lambda Library as a Lambda Layer,
+    your function should now have two Lambda Layers attached.
 
-4. Reference the [sample code][10] to submit a custom metric.
+3. Reference the [sample code][10] to submit a custom metric.
 
-### Log collection
+### As a container image
 
-To submit your AWS Lambda logs to Datadog using the Extension, set the env variable `DD_LOGS_ENABLED` to `true` in your function. Additionally, this generates Datadog's [enhanced metrics][11].
+If your function is deployed as a container image, you cannot add Lambda Layers to your function. Instead, you must directly install the Datadog Lambda Library and the Datadog Lambda Extension in your function's image.
+
+First, install the Datadog Lambda Library by following the installation instructions for [Node.js][5] or [Python][4]. Use the installation instructions specifically for functions deployed as container images.
+
+Then, add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
+
+```
+COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+```
+
+Replace `<TAG>` with either a specific version number (for example, `6`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][11]. 
+
+## Log collection
+
+To submit your AWS Lambda logs to Datadog using the extension, set the env variable `DD_LOGS_ENABLED` to `true` in your function.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /serverless/custom_metrics?tab=python#synchronous-vs-asynchronous-custom-metrics
 [2]: /serverless/forwarder
@@ -58,4 +72,4 @@ To submit your AWS Lambda logs to Datadog using the Extension, set the env varia
 [8]: https://github.com/DataDog/datadog-lambda-js/releases
 [9]: https://github.com/DataDog/datadog-lambda-python/releases
 [10]: /serverless/custom_metrics#custom-metrics-sample-code
-[11]: /serverless/enhanced_lambda_metrics
+[11]: https://gallery.ecr.aws/datadog/lambda-extension

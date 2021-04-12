@@ -22,7 +22,7 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 1. **Choose the time period** for which you wish to rehydrate log events.
 
-2. **Input the query**. The query syntax is the same as that of the [log explorer search][4], but is limited to log attributes, [reserved attributes][5], and free text search on the message.
+2. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query. 
 
 3. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
 
@@ -38,7 +38,7 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 {{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive"  style="width:75%;">}}
 
-#### Rehydrate by Query
+#### Rehydrate by query
 
 By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 1 billion log events per historical view you create.
 
@@ -76,6 +76,9 @@ Datadog requires the permission to read from your archives in order to rehydrate
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">AWS Role Delegation is not supported on the Datadog for Government site. Access keys must be used.</div>
+{{< /site-region >}}
 
 In order to rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. To allow that Role to rehydrate log events from your archives, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
 
@@ -142,6 +145,6 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
 [4]: /logs/explorer/search/
-[5]: /logs/processing/#reserved-attributes
+[5]: /logs/archives/?tab=awss3#datadog-tags
 [6]: /integrations/#cat-notification
 [7]: /logs/archives/

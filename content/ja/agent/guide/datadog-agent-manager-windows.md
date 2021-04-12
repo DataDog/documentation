@@ -8,7 +8,7 @@ further_reading:
 ---
 ## 概要
 
-Datadog Agent v6 Manager GUI はブラウザベースです。GUI が実行されるポートは `datadog.yaml` ファイルで構成できます。ポートを `-1` に設定すると、GUI が無効になります。 デフォルトでは、Windows と Mac ではポート 5002 で有効になっており、Linux では無効になっています。
+Datadog Agent Manager GUI はブラウザベースです。GUI が実行されるポートは `datadog.yaml` ファイルで構成できます。ポートを `-1` に設定すると、GUI が無効になります。 デフォルトでは、Windows と Mac ではポート 5002 で有効になっており、Linux では無効になっています。
 
 ### 要件
 

@@ -6,7 +6,7 @@ widget_type: "timeseries"
 aliases:
     - /graphing/widgets/network/
 further_reading:
-- link: "/network_performance_monitoring/"
+- link: "/network_monitoring/performance/"
   tag: "Documentation"
   text: "Network Performance Monitoring"
 - link: "/dashboards/screenboards/"
@@ -57,6 +57,6 @@ The dedicated [widget JSON schema definition][3] for the network widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_performance_monitoring/
+[1]: /network_monitoring/performance
 [2]: /api/v1/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

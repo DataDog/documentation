@@ -11,6 +11,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez la latence des requêtes, le nombre de requêtes par type, la taille des compartiments et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_s3/'
+draft: false
 git_integration_title: amazon_s3
 has_logo: true
 integration_title: Amazon S3
@@ -30,7 +31,7 @@ Amazon Simple Storage Service (S3) est un service de stockage dans le cloud haut
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de S3.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

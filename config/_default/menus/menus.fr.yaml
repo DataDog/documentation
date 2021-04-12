@@ -59,7 +59,7 @@ main_left:
     parent: product
   - identifier: rum
     name: Real User Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''icône rum''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''icône rum''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
@@ -99,111 +99,138 @@ main_left:
     name: Solutions
     url: '#'
     weight: -460
-  - name: Services financiers
+  - identifier: industry-financial
+    name: Services financiers
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/financial-services/'
     weight: -460
-  - name: Production et logistique
+  - identifier: industry-manufacturing
+    name: Production et logistique
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
     weight: -459
-  - name: Santé et sciences de la vie
+  - identifier: industry-healthcare
+    name: Santé et sciences de la vie
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/healthcare/'
     weight: -458
-  - name: Commerce de détail et électronique
+  - identifier: industry-retail
+    name: Commerce de détail et électronique
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
     weight: -457
-  - name: Secteur public
+  - identifier: industry-public
+    name: Secteur public
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/public-sector/'
     weight: -456
-  - name: Médias et divertissement
+  - identifier: industry-media
+    name: Médias et divertissement
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/media-entertainment/'
     weight: -455
-  - name: Technologies
+  - identifier: industry-technology
+    name: Technologies
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/technology/'
     weight: -454
-  - name: Jeux vidéo
+  - identifier: industry-gaming
+    name: Jeux vidéo
     parent: solutions
     title: industry
     url: 'https://www.datadoghq.com/solutions/gaming/'
     weight: -453
-  - name: "Amazon\_Web\_Services"
+  - identifier: technology-aws
+    name: "Amazon\_Web\_Services"
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/aws/'
     weight: -452
-  - name: Azure
+  - identifier: technology-azure
+    name: Azure
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/azure/'
     weight: -451
-  - name: "Google\_Cloud\_Platform"
+  - identifier: technology-gcp
+    name: "Google\_Cloud\_Platform"
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/gcp/'
     weight: -450
-  - name: Kubernetes
+  - identifier: technology-kubernetes
+    name: Kubernetes
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
-  - name: Red Hat OpenShift
+  - identifier: technology-openshift
+    name: Red Hat OpenShift
     parent: solutions
     title: technology
     url: 'https://www.datadoghq.com/solutions/openshift/'
     weight: -448
-  - name: Migration vers le cloud
+  - identifier: usecase-migration
+    name: Migration vers le cloud
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/cloud-migration/'
     weight: -447
-  - name: Unification de la surveillance
+  - identifier: usecase-consolidate
+    name: Unification de la surveillance
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
     weight: -446
-  - name: DevOps
+  - identifier: usecase-devops
+    name: DevOps
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/devops/'
     weight: -445
-  - name: Analyse de la sécurité
+  - identifier: usecase-security
+    name: Analyse de la sécurité
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
     weight: -444
-  - name: Surveillance Cloud hybride
+  - identifier: usecase-hybrid
+    name: Surveillance Cloud hybride
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
     weight: -443
-  - name: Surveillance IoT
+  - identifier: usecase-iot
+    name: Surveillance IoT
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
     weight: -442
-  - name: Apprentissage automatique
+  - identifier: usecase-machine
+    name: Apprentissage automatique
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
     weight: -441
-  - name: BI en temps réel
+  - identifier: usecase-analytics
+    name: BI en temps réel
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
     weight: -440
+  - identifier: usecase-onprem
+    name: Surveillance sur site
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
+    weight: -439
 main_right:
   - identifier: about
     name: Notre entreprise
@@ -219,7 +246,7 @@ main_right:
     weight: -480
   - name: Actualité
     parent: about
-    url: 'https://www.datadoghq.com/about/latest-news/'
+    url: 'https://www.datadoghq.com/about/latest-news/press-releases/'
     weight: -460
   - name: Direction
     parent: about
@@ -820,7 +847,7 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 902
-  - name: Mobile
+  - name: Application mobile
     url: mobile/
     identifier: mobile
     pre: nav_mobile
@@ -946,66 +973,66 @@ main:
     url: serverless/custom_metrics
     parent: serverless
     weight: 6
+  - name: Insights
+    url: serverless/insights
+    parent: serverless
+    weight: 7
   - name: Suivi des déploiements
     url: serverless/deployment_tracking
     parent: serverless
-    weight: 7
+    weight: 8
   - name: Intégrations sans serveur
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: serverless
-    weight: 8
+    weight: 9
   - name: Plug-in Serverless Datadog
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 801
+    weight: 901
   - name: Macro Serverless Datadog
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 802
+    weight: 902
   - name: CLI Serverless Datadog
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 803
+    weight: 903
   - name: Tagging de fonctions sans serveur
     url: serverless/serverless_tagging
     parent: serverless
-    weight: 9
+    weight: 10
   - name: Dépannage
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 10
+    weight: 11
   - name: Extension Azure App Services
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 11
+    weight: 12
   - name: Métriques
     url: metrics/
     identifier: metrics_top_level
     pre: nav_metrics
     weight: 110000
-  - name: Introduction
-    url: metrics/introduction/
-    parent: metrics_top_level
-    weight: 901
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
-    weight: 902
+    weight: 901
   - name: Résumé
     url: metrics/summary/
     parent: metrics_top_level
-    weight: 903
+    weight: 902
   - name: Distributions
     url: metrics/distributions/
     parent: metrics_top_level
     identifier: metrics_distributions
-    weight: 904
+    weight: 903
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1061,7 +1088,7 @@ main:
     parent: monitor_types
     identifier: monitor_types_process_check
     weight: 108
-  - name: Réseau
+  - name: Network
     url: monitors/monitor_types/network/
     parent: monitor_types
     identifier: monitor_types_network
@@ -1266,7 +1293,7 @@ main:
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
   - name: OpenTracing et OpenTelemetry
-    url: tracing/setup_overview/open_standards/java
+    url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
     weight: 103
@@ -1388,56 +1415,66 @@ main:
     parent: trace_retention_and_ingestion
     identifier: trace_retention_and_ingestion_usage_metrics
     weight: 501
+  - name: Générer des métriques à partir de spans
+    url: tracing/generate_metrics/
+    parent: tracing
+    identifier: generate_metrics
+    weight: 6
   - name: Suivi des déploiements
     url: tracing/deployment_tracking/
     parent: tracing
     identifier: deployment_tracking
-    weight: 6
+    weight: 7
   - name: Associer vos logs à vos traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
     identifier: tracing_connect_logs_and_traces
-    weight: 7
+    weight: 8
   - name: Java
     url: tracing/connect_logs_and_traces/java
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_java
-    weight: 701
+    weight: 801
   - name: Python
     url: tracing/connect_logs_and_traces/python
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_python
-    weight: 702
+    weight: 802
   - name: Go
     url: tracing/connect_logs_and_traces/go
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_go
-    weight: 703
+    weight: 803
   - name: Ruby
     url: tracing/connect_logs_and_traces/ruby
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_ruby
-    weight: 704
+    weight: 804
   - name: PHP
     url: tracing/connect_logs_and_traces/php
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_php
-    weight: 705
+    weight: 805
   - name: NodeJS
     url: tracing/connect_logs_and_traces/nodejs
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_nodejs
-    weight: 706
+    weight: 806
   - name: .NET
     url: tracing/connect_logs_and_traces/dotnet
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
-    weight: 707
+    weight: 807
   - name: Associer les tests Synthetic à vos traces
     url: synthetics/apm
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
     weight: 8
+  - name: Associer RUM à vos traces
+    url: real_user_monitoring/connect_rum_and_traces
+    parent: tracing
+    identifier: tracing_connect_rum_and_traces
+    weight: 9
   - name: Métriques runtime
     url: tracing/runtime_metrics/
     parent: tracing
@@ -1664,18 +1701,22 @@ main:
     url: logs/explorer/patterns/
     parent: log_explorer
     weight: 603
+  - name: Enregistrer les transactions
+    url: logs/explorer/transactions/
+    parent: log_explorer
+    weight: 604
   - name: Analyse de logs
     url: logs/explorer/analytics/
     parent: log_explorer
-    weight: 604
+    weight: 605
   - name: Vues enregistrées
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 605
+    weight: 606
   - name: Facettes
     url: logs/explorer/facets/
     parent: log_explorer
-    weight: 606
+    weight: 607
   - name: Syntaxe de recherche
     url: logs/search_syntax/
     parent: log_management
@@ -1709,30 +1750,35 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring
     weight: 1
+  - name: Prise en main
+    url: security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: Signals Explorer
+    url: security_monitoring/explorer
+    parent: security_monitoring
+    identifier: security_monitoring_explorer
+    weight: 102
+  - name: Règles de détection des menaces
+    url: security_monitoring/detection_rules
+    parent: security_monitoring
+    identifier: security_monitoring_detection_rules
+    weight: 103
+  - name: Guides
+    url: security_monitoring/guide
+    parent: security_monitoring
+    identifier: security_monitoring_guides
+    weight: 104
   - name: Surveillance de la conformité
     url: compliance_monitoring/
     parent: security_compliance_monitoring
     identifier: compliance_monitoring
     weight: 2
   - name: Règles par défaut
-    url: security_monitoring/default_rules/
+    url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
-    weight: 3
-  - name: Prise en main
-    url: security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
-    weight: 1
-  - name: Signals Explorer
-    url: security_monitoring/explorer
-    parent: security_monitoring
-    identifier: security_monitoring_explorer
-    weight: 2
-  - name: Règles de détection des menaces
-    url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
     weight: 3
   - name: Surveillance Synthetic
     url: synthetics/
@@ -1743,69 +1789,90 @@ main:
     url: synthetics/api_tests/
     parent: synthetics
     weight: 1
-    id: api_tests
+    identifier: api_tests
+  - name: HTTP
+    url: synthetics/api_tests/http_tests
+    parent: api_tests
+    weight: 101
+  - name: SSL
+    url: synthetics/api_tests/ssl_tests
+    parent: api_tests
+    weight: 102
+  - name: TCP
+    url: synthetics/api_tests/tcp_tests
+    parent: api_tests
+    weight: 103
+  - name: DNS
+    url: synthetics/api_tests/dns_tests
+    parent: api_tests
+    weight: 104
+  - name: Tests API en plusieurs étapes
+    url: synthetics/multistep
+    parent: synthetics
+    identifier: synthetics_multistep
+    weight: 2
   - name: Tests Browser
     url: synthetics/browser_tests/
     parent: synthetics
     identifier: synthetics_browser_tests
-    weight: 2
+    weight: 3
   - name: Étapes
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
-    weight: 201
-  - name: Options avancées pour les étapes
-    url: synthetics/browser_tests/advanced_options
-    parent: synthetics_browser_tests
-    weight: 203
+    weight: 301
   - name: Résultats de test
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
-    weight: 202
+    weight: 302
+  - name: Options avancées pour les étapes
+    url: synthetics/browser_tests/advanced_options
+    parent: synthetics_browser_tests
+    weight: 303
   - name: Emplacements privés
     url: synthetics/private_locations
     parent: synthetics
     identifier: synthetics_private_location
-    weight: 3
+    weight: 4
   - name: Configuration
     url: synthetics/private_locations/configuration
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
-    weight: 301
+    weight: 401
   - name: Tests CI/CD
     url: /synthetics/ci/
     parent: synthetics
     identifier: synthetics_ci
-    weight: 4
+    weight: 5
   - name: Intégration APM
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 5
+    weight: 6
   - name: Rechercher et gérer
     url: synthetics/search/
     parent: synthetics
-    weight: 6
+    weight: 7
   - name: Métriques
     url: synthetics/metrics/
     parent: synthetics
-    weight: 7
+    weight: 8
   - name: Paramètres
     url: synthetics/settings/
     parent: synthetics
-    weight: 8
+    weight: 9
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 9
+    weight: 10
   - name: Dépannage
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 10
+    weight: 11
   - name: Real User Monitoring
     url: real_user_monitoring/
-    pre: nav_rum
+    pre: nav_rum_2
     identifier: rum
     weight: 150000
   - name: Surveillance Browser
@@ -1823,6 +1890,21 @@ main:
     parent: rum_browser
     identifier: rum_advanced
     weight: 102
+  - name: Surveillance des performances de pages
+    url: real_user_monitoring/browser/monitoring_page_performance/
+    parent: rum_browser
+    identifier: page_performance
+    weight: 103
+  - name: Surveillance des performances de ressources
+    url: real_user_monitoring/browser/monitoring_resource_performance/
+    parent: rum_browser
+    identifier: resource_performance
+    weight: 104
+  - name: Collecte d'erreurs du navigateur
+    url: real_user_monitoring/browser/collecting_browser_errors/
+    parent: rum_browser
+    identifier: collect_errors
+    weight: 105
   - name: Surveillance Android
     url: real_user_monitoring/android/
     parent: rum
@@ -1863,7 +1945,7 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_search
     weight: 501
-  - name: Analyses
+  - name: Analytics
     url: real_user_monitoring/explorer/analytics/
     parent: rum_explorer
     identifier: rum_explorer_analytics
@@ -1883,21 +1965,26 @@ main:
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
     weight: 505
+  - name: Associer RUM à vos traces
+    url: real_user_monitoring/connect_rum_and_traces
+    parent: rum
+    identifier: rum_connect_rum_and_traces
+    weight: 6
   - name: Suivi des erreurs
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 6
+    weight: 7
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 601
+    weight: 701
   - name: Guides
     url: real_user_monitoring/guide
     parent: rum
     identifier: rum_guides
-    weight: 7
+    weight: 8
   - name: Surveillance réseau
     url: network_performance_monitoring/
     pre: nav_network
@@ -1923,36 +2010,41 @@ main:
     parent: npm
     identifier: dns_monitoring
     weight: 4
+  - name: Guides
+    url: network_performance_monitoring/guide/
+    identifier: npm_guides
+    parent: npm
+    weight: 5
   - name: Appareils
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 500
+    weight: 600
   - name: Configuration
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 501
+    weight: 601
   - name: Profils
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 502
+    weight: 602
   - name: Données collectées
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 503
+    weight: 603
   - name: Dépannage
     url: network_performance_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 504
+    weight: 604
   - name: Guides
     url: network_performance_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 505
+    weight: 605
   - name: Outils de développement
     url: developers/
     pre: nav_developers
@@ -2378,6 +2470,34 @@ api_v1:
     parent: Dashboards
     url: '#creer-un-dashboard'
     generated: true
+  - name: Créer un dashboard partagé
+    parent: Dashboards
+    url: '#creer-un-dashboard-partage'
+    generated: true
+  - name: Révoquer une URL de dashboard partagé
+    parent: Dashboards
+    url: '#revoquer-une-url-de-dashboard-partage'
+    generated: true
+  - name: Récupérer un dashboard partagé
+    parent: Dashboards
+    url: '#recuperer-un-dashboard-partage'
+    generated: true
+  - name: Mettre à jour un dashboard partagé
+    parent: Dashboards
+    url: '#mettre-a-jour-un-dashboard-partage'
+    generated: true
+  - name: Révoquer des invitations de dashboard partagé
+    parent: Dashboards
+    url: '#revoquer-des-invitations-de-dashboard-partage'
+    generated: true
+  - name: Récupérer toutes les invitations pour un dashboard partagé
+    parent: Dashboards
+    url: '#recuperer-toutes-les-invitations-pour-un-dashboard-partage'
+    generated: true
+  - name: Envoyer un e-mail d'invitation pour un dashboard partagé
+    parent: Dashboards
+    url: '#envoyer-un-e-mail-d-invitation-pour-un-dashboard-partage'
+    generated: true
   - name: Supprimer un dashboard
     parent: Dashboards
     url: '#supprimer-un-dashboard'
@@ -2601,6 +2721,10 @@ api_v1:
   - name: Mettre à jour un index
     parent: Index de logs
     url: '#mettre-a-jour-un-index'
+    generated: true
+  - name: Métriques de logs
+    url: /api/v1/logs-metrics/
+    identifier: Métriques de logs
     generated: true
   - name: Pipelines de logs
     url: /api/v1/logs-pipelines/
@@ -2895,23 +3019,23 @@ api_v1:
     identifier: Synthetic
     generated: true
   - name: Récupérer tous les emplacements (publics et privés)
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-tous-les-emplacements-publics-et-prives'
     generated: true
-  - name: Créez un emplacement privé
-    parent: Synthetics
+  - name: Créer un emplacement privé
+    parent: Synthetic
     url: '#creer-un-emplacement-prive'
     generated: true
   - name: Supprimer un emplacement privé
-    parent: Synthetics
+    parent: Synthetic
     url: '#supprimer-un-emplacement-prive'
     generated: true
   - name: Récupérer un emplacement privé
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-un-emplacement-prive'
     generated: true
   - name: Modifier un emplacement privé
-    parent: Synthetics
+    parent: Synthetic
     url: '#modifier-un-emplacement-prive'
     generated: true
   - name: Récupérer la liste de tous les tests
@@ -3046,9 +3170,9 @@ api_v1:
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-lambda'
     generated: true
-  - name: Récupérer l'utilisation facturable de votre compte multi-org
+  - name: Récupérer l'utilisation facturable de votre compte
     parent: Mesure de l'utilisation
-    url: '#recuperer-l-utilisation-facturable-de-votre-compte-multi-org'
+    url: '#recuperer-l-utilisation-facturable-de-votre-compte'
     generated: true
   - name: Récupérer l'utilisation horaire pour Fargate
     parent: Mesure de l'utilisation
@@ -3344,6 +3468,114 @@ api_v2:
     url: /api/v2/key-management/
     identifier: Gestion des clés
     generated: true
+  - name: Récupérer toutes les clés d'API
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-api'
+    generated: true
+  - name: Créer une clé d'API
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-api'
+    generated: true
+  - name: Supprimer une clé d'API
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-api'
+    generated: true
+  - name: Récupérer une clé d'API
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-api'
+    generated: true
+  - name: Modifier une clé d'API
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-api'
+    generated: true
+  - name: Récupérer toutes les clés d'application
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application'
+    generated: true
+  - name: Supprimer une clé d'application
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-application'
+    generated: true
+  - name: Modifier une clé d'application
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-application'
+    generated: true
+  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Créer une clé d'application pour l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-application-pour-l-utilisateur-actuel'
+    generated: true
+  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Gestion des clés
+    url: /api/v2/key-management/
+    identifier: Gestion des clés
+    generated: true
+  - name: Récupérer toutes les clés d'API
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-api'
+    generated: true
+  - name: Créer une clé d'API
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-api'
+    generated: true
+  - name: Supprimer une clé d'API
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-api'
+    generated: true
+  - name: Récupérer une clé d'API
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-api'
+    generated: true
+  - name: Modifier une clé d'API
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-api'
+    generated: true
+  - name: Récupérer toutes les clés d'application
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application'
+    generated: true
+  - name: Supprimer une clé d'application
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-application'
+    generated: true
+  - name: Modifier une clé d'application
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-application'
+    generated: true
+  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Créer une clé d'application pour l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-application-pour-l-utilisateur-actuel'
+    generated: true
+  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
   - name: Logs
     url: /api/v2/logs/
     identifier: Logs
@@ -3407,6 +3639,30 @@ api_v2:
   - name: Index de logs
     url: /api/v2/logs-indexes/
     identifier: Index de logs
+    generated: true
+  - name: Métriques de logs
+    url: /api/v2/logs-metrics/
+    identifier: Métriques de logs
+    generated: true
+  - name: Récupérer toutes les métriques basées sur des logs
+    parent: Métriques de logs
+    url: '#recuperer-toutes-les-metriques-basees-sur-des-logs'
+    generated: true
+  - name: Créer une métrique basée sur des logs
+    parent: Métriques de logs
+    url: '#creer-une-metrique-basee-sur-des-logs'
+    generated: true
+  - name: Supprimer une métrique basée sur des logs
+    parent: Métriques de logs
+    url: '#supprimer-une-metrique-basee-sur-des-logs'
+    generated: true
+  - name: Récupérer une métrique basée sur des logs
+    parent: Métriques de logs
+    url: '#recuperer-une-metrique-basee-sur-des-logs'
+    generated: true
+  - name: Mettre à jour une métrique basée sur des logs
+    parent: Métriques de logs
+    url: '#mettre-a-jour-une-metrique-basee-sur-des-logs'
     generated: true
   - name: Pipelines de logs
     url: /api/v2/logs-pipelines/

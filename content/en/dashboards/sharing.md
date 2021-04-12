@@ -6,6 +6,9 @@ aliases:
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
     - /graphing/dashboards/shared_graph/
 further_reading:
+- link: "https://www.datadoghq.com/blog/dashboard-sharing/"
+  tag: "Blog"
+  text: "Share dashboards securely with anyone outside of your organization"
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Create Dashboards in Datadog"
@@ -19,13 +22,55 @@ further_reading:
 
 ## Overview
 
-Shared graphs and screenboards allow you to display metric, trace, and log visualizations outside of Datadog.
+Shared dashboards and graphs allow you to display metric, trace, and log visualizations outside of Datadog.
+
+## Dashboards
+When you share a dashboard by URL or email link, the shared page shows live, read-only contents of that dashboard. 
+
+### Share a dashboard by public URL
+
+To share an entire dashboard publicly, generate a URL:
+
+1. On the dashboard's page, click the settings cog in the upper right.
+2. Select **Generate public URL**.
+3. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well which tags are visible for selectable template variables.
+4. Copy the URL and click **Done**.
+
+**Note**: Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other log-based queries do.
+
+### Share a dashboard with individual email addresses
+
+ To authorize one or more specific email addresses to view a dashboard page:
+ 
+1. On the dashboard's page, click the settings cog in the upper right.
+2. Select **Generate public URL**.
+3. Select **Only specified people** for indicating who can access this dashboard.
+4. Input the email addresses for people you would like to share your dashboard with.
+5. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well which tags are visible for selectable template variables.
+6. (Optional) You can copy the URL to share; the specified email addresses will also receive an email with a link.
+7. Click **Done**.
+
+**Note**:
+- Individuals who are added to the allowlist for a dashboard receive a link in their email. If the link isn't clicked on within one hour, they can request a new link on the dashboard landing page. If their email address is on the allowlist, a new email is sent.
+- Once clicked, a device will be authorized to see the dashboard for up to 30 days. Once that time is expired, the user can request a new link on the dashboard landing page. If their email address is on the allowlist, a new email is sent.
+- If a user is removed from the allowlist, access will be removed.
+- Widgets based on APM traces queries do not display data on shared dashboards. The Log Stream widget doesn't show data either, but other log-based queries do.
+
+### Revoke
+
+To revoke a shared dashboard:
+
+1. Navigate to the [Dashboard List][1].
+2. Select the dashboard you want to revoke access to.
+3. Click on the settings cog in the upper right.
+4. Click **Configure sharing**.
+5. Click **Revoke public URL**.
 
 ## Graphs
 
 ### Share
 
-To share a graph from a [Timeboard][1] or [Screenboard][2]:
+To share a graph from a [Timeboard][2] or [Screenboard][3]:
 
 2. For the graph you want to share, click the pencil icon in the upper right corner.
 3. Under the *Graph your data* section, select the **Share** tab.
@@ -40,38 +85,13 @@ To share a graph from a [Timeboard][1] or [Screenboard][2]:
 
 To revoke the keys used to share individual (embedded) graphs:
 
-1. Navigate to [**Integrations -> Embeds**][3] to see a list of all shared graphs.
+1. Navigate to [**Integrations -> Embeds**][4] to see a list of all shared graphs.
 2. Click on the **Revoke** button next to the graph you want to stop sharing.
 3. The graph is moved to the **Revoked** list.
 
-## Dashboards
-
-### Share
-
-Share an entire dashboard by generating a public URL:
-
-1. On the dashboard's page, click the settings cog in the upper right.
-2. Choose the **Generate public URL** option.
-3. Choose configuration options for "Allow changing timeframe" and/or template variables visible tags.
-4. Copy the URL and click **Done**.
-
-The created URL has live, read-only access to the contents of that specific dashboard.
-
-**Note**: Dashboard [template variable][4] selectors are only present on dashboards when you configure visible tags. The template variables' default values are the default values set in Datadog. Additionally, widgets based on APM traces queries do not display data on public dashboards. All log based queries will show data, except the Log Stream widget.
-
-### Revoke
-
-To revoke a shared dashboard:
-
-1. Navigate to the [Dashboard List][5].
-2. Select the dashboard you want to revoke access to.
-3. Click on the settings cog in the upper right.
-4. Click **Configure sharing**.
-5. Click **Revoke public URL**.
-
 ### Applying restrictions
 
-You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][6] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [security page][7].
+You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][5] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [security page][6].
 
 ### Dark mode
 
@@ -83,30 +103,29 @@ TV mode is available on public screenboards. Use the keyboard shortcut `F` or cl
 
 ## API
 
-Datadog has a [dedicated API][8] allowing you to interact with your shared graphs (embeds):
+Datadog has a [dedicated API][7] allowing you to interact with your shared graphs (embeds):
 
 | Endpoint                 | Description                                                             |
 |--------------------------|-------------------------------------------------------------------------|
-| [Get all embeds][9]     | Get a list of previously created embeddable graphs.                     |
-| [Create embed][10]       | Creates a new embeddable graph.                                         |
-| [Get specific embed][11] | Get the HTML fragment for a previously generated embed with `embed_id`. |
-| [Enable embed][12]       | Enable the specified embed.                                             |
-| [Revoke embed][13]       | Revoke the specified embed.                                             |
+| [Get all embeds][8]     | Get a list of previously created embeddable graphs.                     |
+| [Create embed][9]       | Creates a new embeddable graph.                                         |
+| [Get specific embed][10] | Get the HTML fragment for a previously generated embed with `embed_id`. |
+| [Enable embed][11]       | Enable the specified embed.                                             |
+| [Revoke embed][12]       | Revoke the specified embed.                                             |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/timeboard/
-[2]: /dashboards/screenboard/
-[3]: https://app.datadoghq.com/account/settings#embeds
-[4]: /dashboards/template_variables/
-[5]: https://app.datadoghq.com/dashboard/lists
-[6]: /help/
-[7]: https://app.datadoghq.com/account/org_security
-[8]: /api/v1/embeddable-graphs/
-[9]: /api/v1/embeddable-graphs/#get-all-embeds
-[10]: /api/v1/embeddable-graphs/#create-embed
-[11]: /api/v1/embeddable-graphs/#get-specific-embed
-[12]: /api/v1/embeddable-graphs/#enable-embed
-[13]: /api/v1/embeddable-graphs/#revoke-embed
+[1]: https://app.datadoghq.com/dashboard/lists
+[2]: /dashboards/timeboard/
+[3]: /dashboards/screenboard/
+[4]: https://app.datadoghq.com/account/settings#embeds
+[5]: /help/
+[6]: https://app.datadoghq.com/account/org_security
+[7]: /api/v1/embeddable-graphs/
+[8]: /api/v1/embeddable-graphs/#get-all-embeds
+[9]: /api/v1/embeddable-graphs/#create-embed
+[10]: /api/v1/embeddable-graphs/#get-specific-embed
+[11]: /api/v1/embeddable-graphs/#enable-embed
+[12]: /api/v1/embeddable-graphs/#revoke-embed

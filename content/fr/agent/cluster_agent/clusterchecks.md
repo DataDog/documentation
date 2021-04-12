@@ -8,7 +8,7 @@ further_reading:
     tag: Documentation
     text: Documentation sur l'Agent de cluster
 ---
-## Fonctionnement
+## Présentation
 
 L'Agent Datadog est capable d'identifier automatiquement vos conteneurs et de créer des configurations de check via [le système Autodiscovery][1].
 
@@ -78,11 +78,11 @@ L'exécution de [checks custom de l'Agent][5] en tant que checks de cluster est 
 
 L'Agent de cluster peut être configuré pour utiliser une logique de distribution avancée pour les checks de cluster, qui prend en compte le temps d'exécution et les exemples de métriques des instances de check. Cette logique permet à l'Agent de cluster d'optimiser la répartition et la distribution entre les exécuteurs de checks de cluster.
 
-#### Distribution avancée - Configuration de l'Agent de cluster
+#### Configuration de l'Agent de cluster
 
 En plus des étapes mentionnées dans la section [Configuration de l'Agent de cluster][3], vous devez définir `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` sur `true`.
 
-#### Distribution avancée - Configuration de l'exécuteur de check de cluster
+#### Configuration de l'exécuteur de checks de cluster
 
 Les variables d'environnement suivantes sont requises pour configurer les exécuteurs de checks de cluster (ou Agents de nœud) de façon à ce qu'ils exposent les statistiques de leurs checks. Les statistiques sont utilisées par l'Agent de cluster et permettent d'optimiser la logique de distribution des checks.
 
@@ -102,7 +102,7 @@ Les variables d'environnement suivantes sont requises pour configurer les exécu
 
 Lorsque l'IP d'une ressource donnée est fixe (endpoint de service externe, URL publique, etc.), une configuration statique peut être passée à l'Agent de cluster sous la forme d'un fichier YAML. La syntaxe et la convention de nommage des fichiers sont les mêmes que pour les configurations statiques sur les Agents de nœud, avec l'ajout de la ligne `cluster_check: true`.
 
-#### Exemple : check MySQL sur une base de données CloudSQL
+#### Check MySQL sur une base de données CloudSQL
 
 Après avoir configuré une instance CloudSQL et un [utilisateur Datadog][6], montez un fichier `/conf.d/mysql.yaml` dans le conteneur de l'Agent de cluster avec le contenu suivant :
 
@@ -118,7 +118,7 @@ instances:
 
 Le champ `cluster_check` informe l'Agent de cluster qu'il doit déléguer ce check à un Agent de nœud.
 
-### Source du modèle : Annotations de service Kubernetes
+### Source du modèle : annotations de service Kubernetes
 
 Vous pouvez annoter des services avec la syntaxe suivante, similaire à celle utilisée pour l'[annotation de pods Kubernetes][1] :
 
@@ -130,7 +130,7 @@ ad.datadoghq.com/service.instances: '[<CONFIG_INSTANCE>]'
 
 La [template variable][7] `%%host%%` est prise en charge et remplacée par l'IP du service. Les tags `kube_namespace` et `kube_service` sont automatiquement ajoutés à l'instance.
 
-### Source du modèle : Étiquettes standard
+### Source du modèle : étiquettes standard
 
 ```yaml
 tags.datadoghq.com/env: "<ENV>"

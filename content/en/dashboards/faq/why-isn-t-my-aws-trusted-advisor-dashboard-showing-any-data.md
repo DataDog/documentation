@@ -12,11 +12,11 @@ For your AWS Trusted Advisor integration dashboard to populate with data:
 * Configure support permissions
 * Have an upgraded AWS support plan.
 
-## Support Permissions
+## Support permissions
 
 In the IAM Console, add `support:describe*` and `support: refresh*` as an action in the policy document text box.
 
-## AWS Support Plan
+## AWS support plan
 
 The Datadog Trusted Advisor Dashboard needs access to the full set of [AWS Trusted Advisor checks][1]. AWS makes these only available for upgraded AWS support plans. Make sure that your AWS plan includes full access:
 

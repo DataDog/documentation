@@ -11,7 +11,7 @@ categories:
   - cloud
   - processing
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md'
 display_name: AppKeeper
@@ -36,42 +36,63 @@ supported_os:
 ---
 ## Présentation
 
-SIOS AppKeeper redémarre automatiquement les services Amazon EC2 qui ont échoué lorsque des notifications sont envoyées par Datadog, comme Synthetic. Il n'est ainsi plus nécessaire de prévoir une intervention manuelle coûteuse.
-
-Après avoir détecté les alertes, Datadog redémarre le service via l'API Recovery d'AppKeeper.
+SIOS AppKeeper redémarre automatiquement les services Amazon EC2 ayant échoué lorsque des notifications sont envoyées par Datadog. Il n'est ainsi plus nécessaire de prévoir une intervention manuelle coûteuse. Lorsque Datadog déclenche une alerte, le service EC2 est redémarré via l'API AppKeeper Recovery.
 
 ## Configuration
 
-### Étape 1. Obtenir la clé d'API SIOS AppKeeper
+### Récupérer la clé d'API SIOS AppKeeper
 
-Obtenez la clé d'API SIOS AppKeeper à partir de l'interface graphique AppKeeper.
+Récupérez la clé d'API SIOS AppKeeper à partir de l'interface graphique d'AppKeeper.
+
+1. Cliquez sur **Account Information** et ouvrez la boîte de dialogue modale.
+2. Cliquez sur **Get token**.
+3. Copiez le token.
 
 ![snapshot][1]
 
-### Étape 2. Définir le webhook dans le dashboard d'intégration Datadog
+### Installer et configurer l'intégration Webhooks
 
-![snapshot][2]
-
-### Étape 3. Définir la CHARGE UTILE et les EN-TÊTES PERSONNALISÉS
+1. Dans l'app Datadog, accédez à l'[intégration Webhooks][2] et installez-la.
+2. Sélectionnez l'onglet **Configuration**.
+3. Sous l'en-tête **Webhooks**, cliquez sur **New**.
+4. Saisissez l'URL suivante : "https://api.appkeeper.sios.com/v2/integration/{ID_compte_AWS}/actions/recover".
+5. Saisissez l'`id` et le nom de `name` pour l'instance de surveillance dans la section **Payload**.
+3. Enregistrez le token de l'API AppKeeper dans la section **Custom Headers**.
 
 ![snapshot][3]
 
-1. Saisissez l'**URL suivante** : "https://api.appkeeper.sios.com/v2/integration/{AWS_account_ID}/actions/recover".
-2. Saisissez l'ID de l'instance et le nom des services pour l'instance de surveillance dans **Payload**.
-3. Enregistrez le token d'API AppKeeper **appkeeper-integration-token** dans **Custom Headers**.
+### Intégration à la surveillance Datadog
 
-Pour en savoir plus sur l'intégration AppKeeper, consultez la [documentation][4] AppKeeper.
+1. Créez un nouveau [test Synthetic][4] Datadog. Cliquez sur **New test** en haut à droite.
+2. Lors de l'étape **Define requests**, saisissez l'URL que vous souhaitez surveiller.
+3. Lors de l'étape **Define assertions**, cliquez sur **New assertion** et ajoutez les paramètres suivants : When `status code` is `200`. Cela déclenche une alerte dès lors que le code de statut n'est **pas** 200. SI vous souhaitez que la requête envoie une notification pour un statut différent, remplacez 200 par le code de statut de votre choix.
+4. Cliquez à nouveau sur **New Assertion** et ajoutez un second ensemble de paramètres : And `response time` is less than `2000` ms. Cela déclenche une alerte lorsque le temps de réponse dépasse 2 000 ms. Si vous souhaitez définir un temps de réponse plus ou moins long, remplacez `2000` par la valeur de votre choix.
+5. Lors de l'étape **Notify your team**, ajoutez le webhook, au format `@webhook-nom_du_webhook`. Ajoutez un message dans la notification. **Remarque** : l'intervalle de surveillance minimal pour le paramètre **renotify if the monitor has not been resolved** de cette étape est `Every 10 Minutes.` Si vous le définissez sur **Never**, cela empêchera le webhook d'appeler l'API de récupération d'AppKeeper.
+
+![snapshot][5]
+
+Les résultats des récupérations par AppKeeper sont indiqués dans l'interface graphique d'AppKeeper.
+
+![snapshot][6]
+
+Pour en savoir plus sur l'intégration AppKeeper, consultez la [documentation][7] AppKeeper.
 
 ## Données collectées
 
 ### Métriques
 
+Consultez le fichier [metadata.csv][8] pour découvrir la liste des métriques fournies par cette intégration.
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/get_token2.png
-[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/datadog_webhook.jpg
+[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/get_token.jpg
+[2]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/payload_header.jpg
-[4]: https://sioscoati.zendesk.com/hc/en-us/articles/900000978443-Integration
-[5]: https://docs.datadoghq.com/fr/help/
+[4]: https://app.datadoghq.com/synthetics/list
+[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/synthetic_test_params.png
+[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/history.jpg
+[7]: https://sioscoati.zendesk.com/hc/en-us/articles/900000978443-Integration
+[8]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
+[9]: https://docs.datadoghq.com/fr/help/

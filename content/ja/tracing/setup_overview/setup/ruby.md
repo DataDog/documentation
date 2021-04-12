@@ -57,6 +57,7 @@ type: multi-code-lang
      - [GraphQL](#graphql)
      - [gRPC](#grpc)
      - [http.rb](#http-rb)
+     - [httpclient](#httpclient)
      - [MongoDB](#mongodb)
      - [MySQL2](#mysql2)
      - [Net/HTTP](#net-http)
@@ -100,7 +101,8 @@ type: multi-code-lang
 
 | タイプ  | Documentation              | バージョン | サポートの種類                         | Gem バージョンのサポート |
 | ----- | -------------------------- | -----   | ------------------------------------ | ------------------- |
-| MRI   | https://www.ruby-lang.org/ | 2.7     | フル                                 | 最新              |
+| MRI   | https://www.ruby-lang.org/ | 3.0     | フル                                 | 最新              |
+|       |                            | 2.7     | フル                                 | 最新              |
 |       |                            | 2.6     | フル                                 | 最新              |
 |       |                            | 2.5     | フル                                 | 最新              |
 |       |                            | 2.4     | フル                                 | 最新              |
@@ -138,13 +140,37 @@ type: multi-code-lang
 
 次の手順は、Ruby アプリケーションのトレースをすばやく開始するのに役立ちます。
 
-### Datadog Agent の設定
+### APM に Datadog Agent を構成する
 
 アプリケーションにトレースをダウンロードする前に、Datadog Agent をインストールします。Ruby APM トレーサーは、Datadog Agent を介してトレースデータを送信します。
 
-[Datadog Agent をインストールして構成します](https://docs.datadoghq.com/tracing/setup)。[Docker アプリケーションのトレース](https://docs.datadoghq.com/tracing/setup/docker/)に関する追加のドキュメントをご覧ください。
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `datadog.yaml` ファイルの `apm_enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下の手順に従って、Datadog Agent 内でトレース収集を有効にします。
+
+#### コンテナ
+
+1. メインの [`datadog.yaml` コンフィギュレーションファイル](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-main-configuration-file)で `apm_non_local_traffic: true` を設定します。
+
+2. [Docker](https://docs.datadoghq.com/agent/docker/apm/?tab=ruby)、[Kubernetes](https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm)、[Amazon ECS](https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ruby)、または [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/#trace-collection) 用の特定のセットアップ手順で、コンテナ化環境でトレースを受信するよう Agent が構成されていることを確認します。
+
+3. アプリケーションをインスツルメント化した後、トレースクライアントはデフォルトでトレースを `localhost:8126` に送信します。これが正しいホストとポートでない場合は、環境変数 `DD_AGENT_HOST` および `DD_TRACE_AGENT_PORT` を設定して変更します。
+
 
 ### Rails アプリケーションのクイックスタート
+
+#### Rails 自動インスツルメンテーションのすべてのインテグレーション
+
+1. `ddtrace` gem を Gemfile に追加します。
+
+    ```ruby
+    source 'https://rubygems.org'
+    gem 'ddtrace', require: 'ddtrace/auto_instrument'
+    ```
+
+2. `bundle install` で gem をインストールします
+
+3. [Rails 手動コンフィギュレーション](#rails-manual-configuration)ファイルを追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
+
+#### Rails 手動コンフィギュレーション
 
 1. `ddtrace` gem を Gemfile に追加します。
 
@@ -166,6 +192,25 @@ type: multi-code-lang
    ここで追加のインテグレーションをアクティブ化することもできます（[インテグレーションインスツルメンテーション](#integration-instrumentation)を参照）。
 
 ### Ruby アプリケーションのクイックスタート
+
+#### Ruby 自動インスツルメンテーションのすべてのインテグレーション
+
+1. `gem install ddtrace` で gem をインストールします
+2. インスツルメントする必要のある[サポートされているライブラリまたはフレームワーク](#integration-instrumentation)が必要です。
+3. アプリケーションに `require 'ddtrace/auto_instrument'` を追加します。_注:_ これは、サポートされているライブラリまたはフレームワークが必要になった_後_に実行する必要があります。
+
+    ```ruby
+    # Example frameworks and libraries
+    require 'sinatra'
+    require 'faraday'
+    require 'redis'
+
+    require 'ddtrace/auto_instrument'
+    ```
+
+   [Ruby 手動コンフィギュレーションブロック](#ruby-manual-configuration)を追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
+
+#### Ruby 手動コンフィギュレーション
 
 1. `gem install ddtrace` で gem をインストールします
 2. Ruby アプリケーションにコンフィギュレーションブロックを追加します。
@@ -241,7 +286,7 @@ end
 | `resource`    | `String` | 操作対象のリソースまたはアクションの名前。同じリソース値を持つトレースは、メトリクスの目的でグループ化されます（ただし、個別に表示可能です）。通常、URL、クエリ、リクエストなどのドメイン固有です（例: `'Article#submit'`、`http://example.com/articles/list`） | スパンの `name`。 |
 | `span_type`   | `String` | スパンのタイプ（`'http'`、`'db'` など） | `nil` |
 | `child_of`    | `Datadog::Span` / `Datadog::Context` | このスパンの親。指定しない場合、自動的に現在のアクティブスパンになります。 | `nil` |
-| `start_time`  | `Integer` | スパンが実際に開始したとき。すでに発生したイベントをトレースするときに役立ちます。 | `Time.now.utc` |
+| `start_time`  | `Time` | スパンが実際に開始したとき。すでに発生したイベントをトレースするときに役立ちます。 | `Time.now` |
 | `tags`        | `Hash` | スパンに追加する必要がある追加のタグ。 | `{}` |
 | `on_error`    | `Proc` | トレースするブロックが指定されたときに呼び出されるハンドラー。これはエラーを発生させます。引数として `span` と `error` が指定されました。デフォルトでスパンにエラーを設定します。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
@@ -364,6 +409,7 @@ end
 | GraphQL                  | `graphql`                  | `>= 1.7.9`               | `>= 1.7.9`                | *[リンク](#graphql)*                  | *[リンク](https://github.com/rmosolgo/graphql-ruby)*                             |
 | gRPC                     | `grpc`                     | `>= 1.7`                 | *gem の利用不可*       | *[リンク](#grpc)*                     | *[リンク](https://github.com/grpc/grpc/tree/master/src/rubyc)*                   |
 | http.rb                  | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[Link](#http-rb)*                  | *[リンク](https://github.com/httprb/http)*                                       |
+| httpclient                | `httpclient`              | `>= 2.2`                 | `>= 2.2`                  | *[リンク](#httpclient)*               | *[リンク](https://github.com/nahi/httpclient)*                                     |
 | Kafka                    | `ruby-kafka`               | `>= 0.7.10`              | `>= 0.7.10`               | *[リンク](#kafka)*                    | *[Link](https://github.com/zendesk/ruby-kafka)*                                |
 | MongoDB                  | `mongo`                    | `>= 2.1`                 | `>= 2.1`                  | *[リンク](#mongodb)*                  | *[リンク](https://github.com/mongodb/mongo-ruby-driver)*                         |
 | MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *gem の利用不可*       | *[リンク](#mysql2)*                   | *[リンク](https://github.com/brianmario/mysql2)*                                 |
@@ -1019,6 +1065,32 @@ end
 | `service_name` | `httprb` インスツルメンテーションのサービス名。 | `'httprb'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
 
+### httpclient
+
+httpclient インテグレーションは、httpclient gem を使用して HTTP 呼び出しをトレースします。
+
+```ruby
+require 'http'
+require 'ddtrace'
+Datadog.configure do |c|
+  c.use :httpclient, options
+  # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
+  c.use :httpclient, describes: /user-[^.]+\.example\.com/ do |httpclient|
+    httpclient.service_name = 'user.example.com'
+    httpclient.split_by_domain = false # split_by_domain がデフォルトで true の場合にのみ必要
+  end
+end
+```
+
+ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+
+| キー | 説明 | デフォルト |
+| --- | ----------- | ------- |
+| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
+| `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
+| `service_name` | `httpclient` インスツルメンテーションのサービス名。 | `'httpclient'` |
+| `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
+
 ### Kafka
 
 Kafka インテグレーションは、`ruby-kafka` gem のトレースを提供します。
@@ -1348,8 +1420,9 @@ end
 |  2.1          |                |  3.0 - 4.2     |
 |  2.2 - 2.3    |                |  3.0 - 5.2     |
 |  2.4          |                |  4.2.8 - 5.2   |
-|  2.5          |                |  4.2.8 - 6.0   |
-|  2.6 - 2.7    |  9.2           |  5.0 - 6.0     |
+|  2.5          |                |  4.2.8 - 6.1   |
+|  2.6 - 2.7    |  9.2           |  5.0 - 6.1     |
+|  3.0          |                |  6.1           |
 
 ### Rake
 
@@ -1439,6 +1512,7 @@ redis.set 'foo', 'bar'
 | --- | ----------- | ------- |
 | `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `redis` インスツルメンテーションに使用されるサービス名 | `'redis'` |
+| `command_args` | コマンド引数 (例: `GET key` の `key`) をリソース名とタグとして表示します | true |
 
 次のように、*インスタンスごと*のコンフィギュレーションを設定することもできます。
 
@@ -2025,6 +2099,7 @@ Service C:
 - [Rails](#rails)
 - [Sinatra](#sinatra)
 - [http.rb](#http-rb)
+- [httpclient](#httpclient)
 
 **HTTP プロパゲーターの使用**
 
@@ -2053,9 +2128,7 @@ end
 
 HTTP リクエストから発生するトレースは、リクエストが Ruby アプリケーションに到達する前にフロントエンドウェブサーバーまたはロードバランサーキューで費やされた時間を含むように構成できます。
 
-この機能は**試験的**なもので、デフォルトでは無効になっています。
-
-この機能を有効にするには、ウェブサーバー（Nginx）から `X-Request-Start` または `X-Queue-Start` ヘッダーを追加する必要があります。以下は Nginx のコンフィギュレーション例です。
+この機能はデフォルトで無効になっています。有効にするには、ウェブサーバー（Nginx）から `X-Request-Start` または `X-Queue-Start` ヘッダーを追加する必要があります。以下は Nginx のコンフィギュレーション例です。
 
 ```
 # /etc/nginx/conf.d/ruby_service.conf
@@ -2069,9 +2142,7 @@ server {
 }
 ```
 
-次に、リクエストを処理するインテグレーションでリクエストキューイング機能を有効にする必要があります。
-
-Rack ベースのアプリケーションの場合、この機能を有効にする方法の詳細については、[ドキュメント](#rack)を参照してください。
+次に、リクエストを処理するインテグレーションで `request_queuing: true` を設定して、リクエストキューイング機能を有効にする必要があります。Rack ベースのアプリケーションの詳細については、[ドキュメント](#rack)を参照してください。
 
 ### 処理パイプライン
 

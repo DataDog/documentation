@@ -4,7 +4,9 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    postgresql: assets/dashboards/postgresql_dashboard.json
+    postgresql_screenboard: assets/dashboards/postgresql_screenboard_dashboard.json
   logs:
     source: postgresql
   metrics_metadata: metadata.csv

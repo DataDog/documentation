@@ -41,7 +41,8 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \
-              datadog/agent:latest
+              -e DD_SITE="<VOTRE_SITE_DATADOG>" \
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -52,8 +53,10 @@ DOCKER_CONTENT_TRUST=1 \
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
                               -v /proc/:/host/proc/:ro \
                               -v /cgroup/:/host/sys/fs/cgroup:ro \
-                              -e DD_API_KEY="<DATADOG_API_KEY>" \
-                              datadog/agent:latest
+                              -e DD_API_KEY="<CLÉ_API_DATADOG>" \
+                              -e DD_SITE="<VOTRE_SITE_DATADOG>" \
+                              gcr.io/datadoghq/agent:latest
+
 ```
 
 {{% /tab %}}
@@ -62,13 +65,14 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```shell
 DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<CLÉ_API_DATADOG>" \
-              datadog/agent:latest
+              -e DD_SITE="<VOTRE_SITE_DATADOG>" \
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : ajoutez `DD_SITE=datadoghq.eu` si vous utilisez le site européen de Datadog.
+**Remarque** : votre site Datadog est {{< region-param key="dd_site" code="true" >}}.
 
 ### Configuration
 
@@ -137,7 +141,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
     {{% /tab %}}
     {{% tab "Windows" %}}
@@ -145,7 +149,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```shell
 DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<CLÉ_API_DATADOG>" \
-              datadog/agent:latest \
+              gcr.io/datadoghq/agent:latest \
               -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
 ```
     {{% /tab %}}

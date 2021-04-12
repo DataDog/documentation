@@ -54,9 +54,19 @@ SLO サマリーウィジェットを使用して、スクリーンボードと�
 
 オプションで、タイトルのサイズと配置を定義できます。
 
+## API
+
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][3] ドキュメントをご参照ください。
+
+サービスマップウィジェットの[ウィジェット JSON スキーマ定義][4]は次のとおりです。
+
+{{< dashboards-widgets-api >}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/monitors/service_level_objectives/
 [2]: https://app.datadoghq.com/slo
+[3]: /ja/api/v1/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

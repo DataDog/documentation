@@ -69,7 +69,7 @@ from datadog_checks.base import OpenMetricsBaseCheck
 class KubeDNSCheck(OpenMetricsBaseCheck):
 ```
 
-#### Définir un mapping de métriques
+#### Définir un mappage de métriques
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheck

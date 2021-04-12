@@ -10,11 +10,11 @@ Datadog facture les hosts AWS qui exécutent l'Agent Datadog et toutes les insta
 
 Les autres ressources AWS (ELB, EBS, RDS, Dynamo, etc.) ne font pas partie de la facturation mensuelle et les exclusions de configuration ne s'appliquent pas.
 
-### Exclusion de métriques
+## Exclusion de ressources AWS
 
-Utilisez le [carré d'intégration Datadog/AWS][1] pour contrôler la collecte de métriques. Allez à l'onglet **Configuration** et sélectionnez un compte ou ajoutez un nouveau compte. Chaque compte est contrôlé dans **Optionally limit metrics collection**. Limitez les métriques par [tag de host][2] ou par espace de nommage :
+Utilisez le [carré d'intégration Datadog/AWS][1] pour contrôler la collecte de métriques. Accédez à l'onglet **Configuration** et sélectionnez un compte ou ajoutez-en un autre. Chaque compte est contrôlé via l'option **Optionally limit resource collection**. Limitez les métriques par [tag de host][2], par tag Lambda ou par espace de nommage :
 
-{{< img src="account_management/billing/aws01.png" alt="AWS" >}}
+{{< img src="account_management/billing/aws02.png" alt="AWS" >}}
 
 **Remarque** : Datadog ne facture pas les métriques ELB, car elles ne peuvent pas être exclues par filtrage.
 
@@ -30,6 +30,6 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [2]: /fr/getting_started/tagging/using_tags/#integrations
-[3]: /fr/infrastructure
-[4]: /fr/help
+[3]: /fr/infrastructure/
+[4]: /fr/help/
 [5]: mailto:success@datadoghq.com

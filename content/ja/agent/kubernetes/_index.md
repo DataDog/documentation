@@ -32,6 +32,8 @@ further_reading:
     tag: ドキュメント
     text: コンテナから送信された全データにタグを割り当て
 ---
+## 概要
+
 クラスターやアプリケーションのメトリクス、トレース、ログを収集するには、Kubernetes クラスターで Datadog Agent を DaemonSet として実行します。[Helm チャート](?tab=helm)または [DaemonSet](?tab=daemonset) オブジェクトの YAML 定義を使用して直接デプロイできます。
 
 **注**: Agent バージョン 6.0 以降は、1.7.6 より上のバージョンの Kubernetes のみをサポートします。以前のバージョンの Kubernetes については、[「レガシー Kubernetes バージョン」][1]を参照してください。
@@ -71,14 +73,44 @@ further_reading:
 
 次に、使用する Datadog の機能を有効にします: [APM][5], [Logs][6]
 
-**注**: Datadog チャートの構成可能なパラメーターとそのデフォルト値の完全なリストについては、[Datadog Helm リポジトリの README][7]を参照してください。
+**注**:
+
+- Datadog チャートの構成可能なパラメーターとそのデフォルト値の完全なリストについては、[Datadog Helm リポジトリの README][7] を参照してください。
+- 現在のデプロイリージョンで Google Container Registry ([gcr.io/datadoghq][8]) にアクセスが不可能な場合は、`values.yaml` ファイルで下記のコンフィギュレーションで イメージ [datadog/agent][9] および [datadog/cluster-agent][10] とともに Docker Hub レジストリを使用します。
+
+    ```yaml
+    agents:
+      image:
+        repository: datadog/agent
+
+    clusterAgent:
+      image:
+        repository: datadog/cluster-agent
+
+    clusterChecksRunner:
+      image:
+        repository: datadog/agent
+    ```
 
 ### チャート v1 からのアップグレード
 
 v2.0 では、Datadog のチャートはリファクタリングされており、`values.yaml` パラメーターがより論理的に再グループ化されています。
 
-現在、デプロイされているチャートバージョンが `v2.0.0` 以前の場合は、[移行ガイド][8]に従って設定を新しいフィールドにマッピングしてください。
+現在、デプロイされているチャートバージョンが `v2.0.0` 以前の場合は、[移行ガイド][11]に従って設定を新しいフィールドにマッピングしてください。
 
+### 非特権
+
+(オプション) 非特権インストールを実行するには、`values.yaml` ファイルに以下を追加します。
+
+```yaml
+datadog:
+  securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
@@ -87,7 +119,10 @@ v2.0 では、Datadog のチャートはリファクタリングされており�
 [5]: /ja/agent/kubernetes/apm?tab=helm
 [6]: /ja/agent/kubernetes/log?tab=helm
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
-[8]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
+[8]: https://gcr.io/datadoghq
+[9]: https://hub.docker.com/r/datadog/agent
+[10]: https://hub.docker.com/r/datadog/cluster-agent
+[11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -130,7 +165,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 
     **注**: これらのマニフェストは、デフォルトで `default` ネームスペースに設定されています。カスタムネームスペースを使用している場合、適用する前に `metadata.namespace` パラメーターを更新します。
 
-4. 任意 - **Datadog サイトを設定**。Datadog EU サイトをご利用中の場合、`datadog-agent.yaml` マニフェストで `DD_SITE` 環境変数を `datadoghq.eu` に設定します。
+4. `datadog-agent.yaml` マニフェストで、`DD_SITE` 環境変数を使用して **Datadog サイト**を {{< region-param key="dd_site" code="true" >}} に設定します。
 
 5. 次のコマンドで **DaemonSet をデプロイ**します。
 
@@ -157,6 +192,20 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
     ```
 
+### 非特権
+
+(オプション) 非特権インストールを実行するには、[ポッドテンプレート][2]に以下を追加します。
+
+```yaml
+  spec:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
+
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/yaml/datadog-agent-all-features.yaml
@@ -174,7 +223,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 [15]: /ja/agent/kubernetes/log/
 [16]: /ja/agent/kubernetes/apm/
 [17]: /ja/infrastructure/process/?tab=kubernetes#installation
-[18]: /ja/network_performance_monitoring/installation/
+[18]: /ja/network_monitoring/performance/setup/
 [19]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [20]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
@@ -191,7 +240,6 @@ Datadog Operator を使用するには、次の前提条件が必要です。
 - **Kubernetes Cluster バージョン >= v1.14.X**: テストはバージョン >= `1.14.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
 - `datadog-operator` をデプロイするための [`Helm`][2]。
 - `datadog-agent` をインストールするための [`Kubectl` CLI][3]。
-
 
 ## Operator を使用して Agent をデプロイする
 
@@ -212,7 +260,7 @@ Datadog Operator を使用するには、次の前提条件が必要です。
      appKey: <DATADOG_APP_KEY>
    agent:
      image:
-       name: "datadog/agent:latest"
+       name: "gcr.io/datadoghq/agent:latest"
    ```
 
    `<DATADOG_API_KEY>` と `<DATADOG_APP_KEY>` を [Datadog API とアプリケーションキー][6]に置き換えます
@@ -233,6 +281,21 @@ helm delete datadog
 
 許容範囲の使用に関する情報を含む、Operator の設定の詳細については、[Datadog Operator の高度な設定ガイド][7]を参照してください。
 
+## 非特権
+
+(オプション) 非特権インストールを実行するには、[Datadog カスタムリソース (CR)][8] に以下を追加します。
+
+```yaml
+agent:
+  config:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
+
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -240,19 +303,17 @@ helm delete datadog
 [5]: https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: /ja/agent/guide/operator-advanced
+[8]: https://github.com/DataDog/datadog-operator/blob/master/docs/configuration.md
 {{% /tab %}}
 {{< /tabs >}}
 
-### 非特権
+## 追加のコンフィギュレーション
 
-(オプション) 非特権インストールを実行するには、[ポッドテンプレート][2]に以下を追加します。
+### ライブコンテナ用 Kubernetes リソース
 
-```text
-  spec:
-    securityContext:
-      runAsUser: <USER_ID>
-      fsGroup: <DOCKER_GROUP_ID>
-```
+[Datadog Agent][2] と [Cluster Agent][3] は、[ライブコンテナ][4]の Kubernetes リソースを取得するように構成できます。この機能により、特定のネームスペースまたはアベイラビリティーゾーンのポッド、デプロイメント、その他の Kubernetes の概念の状態を監視したり、デプロイメント内で失敗したポッドのリソース仕様を確認したり、ノードアクティビティを関係するログに関連付けたりすることが可能になります。
+
+コンフィギュレーションの説明や追加の情報については、[ライブコンテナ][5]ドキュメントを参照してください。
 
 ## イベント収集
 
@@ -283,60 +344,59 @@ agent:
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## インテグレーション
 
-クラスター内で Agent が実行されたら、[Datadog のオートディスカバリー機能][3]を使いポッドからメトリクスとログを自動的に収集します。
+クラスター内で Agent が実行されたら、[Datadog のオートディスカバリー機能][6]を使いポッドからメトリクスとログを自動的に収集します。
 
 ## 環境変数
 
-Datadog Agent で使用可能な環境変数のリストを以下に示します。これらを Helm でセットアップする場合は、[helm/charts Github リポジトリ][4]の `datadog-value.yaml` ファイルのコンフィギュレーションオプションの完全なリストを参照してください。
+Datadog Agent で使用可能な環境変数のリストを以下に示します。これらを Helm でセットアップする場合は、[helm/charts Github リポジトリ][7]の `datadog-value.yaml` ファイルのコンフィギュレーションオプションの完全なリストを参照してください。
 
 ### グローバルオプション
 
-| 環境変数       | 説明                                                                                                                                                                                                                                                                                                                                      |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_API_KEY`       | Datadog API キー (**必須**)                                                                                                                                                                                                                                                                                                              |
-| `DD_ENV`          | 出力されるすべてのデータにグローバル `env` タグを設定します。                                                                                                                                                                                                                                                                 |
-| `DD_HOSTNAME`      | メトリクスに使用するホスト名 (自動検出が失敗した場合)                                                                                                                                                                                                                                                                                             |
-| `DD_TAGS`          | スペース区切りのホストタグ。例: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
-| `DD_SITE`          | メトリクス、トレース、およびログの送信先サイト。有効なオプションは、`datadoghq.com` (Datadog US サイト) および `datadoghq.eu` (Datadog EU サイト) です。                                                                                                                                                                                      |
-| `DD_DD_URL`        | メトリクス送信用 URL を上書きします。設定は任意です。                                                                                                                                                                                                                                                                                      |
-| `DD_CHECK_RUNNERS` | Agent はデフォルトですべてのチェックを同時に実行します (デフォルト値は `4` ランナーです)。チェックを順次実行する場合は、値を `1` に設定してください。ただし、多数のチェック (または時間のかかるチェック) を実行する必要がある場合、`collector-queue` コンポーネントが遅延して、ヘルスチェックに失敗する可能性があります。ランナーの数を増やすと、チェックを並行して実行できます。 |
-| `DD_LEADER_ELECTION` | クラスターで複数の Agent が実行されている場合は、この変数を `true` に設定して、イベント収集の重複を回避します。 |
+| 環境変数         | 説明                                                                                                                                                                                                                                                                                                                                      |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_API_KEY`         | Datadog API キー (**必須**)                                                                                                                                                                                                                                                                                                              |
+| `DD_ENV`             | 出力されるすべてのデータにグローバル `env` タグを設定します。                                                                                                                                                                                                                                                                                                  |
+| `DD_HOSTNAME`        | メトリクスに使用するホスト名 (自動検出が失敗した場合)                                                                                                                                                                                                                                                                                             |
+| `DD_TAGS`            | スペース区切りのホストタグ。例: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
+| `DD_SITE`            | メトリクス、トレース、ログの送信先サイト。`DD_SITE` は {{< region-param key="dd_site" code="true">}} で、デフォルトは `datadoghq.com` です。                                                                                                                                                                                               |
+| `DD_DD_URL`          | メトリクス送信用 URL を上書きします。設定は任意です。                                                                                                                                                                                                                                                                                      |
+| `DD_CHECK_RUNNERS`   | Agent はデフォルトですべてのチェックを同時に実行します (デフォルト値は `4` ランナーです)。チェックを順次実行する場合は、値を `1` に設定してください。ただし、多数のチェック (または時間のかかるチェック) を実行する必要がある場合、`collector-queue` コンポーネントが遅延して、ヘルスチェックに失敗する可能性があります。ランナーの数を増やすと、チェックを並行して実行できます。 |
+| `DD_LEADER_ELECTION` | クラスターで複数の Agent が実行されている場合は、この変数を `true` に設定して、イベント収集の重複を回避します。                                                                                                                                                                                                                         |
 
 ### プロキシ設定
 
 Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境変数を使用して Agent のプロキシ設定を上書きできるようになりました。
 
-| 環境変数        | 説明                                                       |
-| ------------------- | ----------------------------------------------------------------- |
-| `DD_PROXY_HTTP`     | `http` リクエスト用のプロキシとして使用する HTTP URL です。                |
-| `DD_PROXY_HTTPS`    | `https` リクエスト用のプロキシとして使用する HTTPS URL です。              |
-| `DD_PROXY_NO_PROXY` | プロキシを使用すべきではない場合に必要となる、URL をスペースで区切ったリストです。 |
+| 環境変数             | 説明                                                            |
+|--------------------------|------------------------------------------------------------------------|
+| `DD_PROXY_HTTP`          | `http` リクエスト用のプロキシとして使用する HTTP URL です。                     |
+| `DD_PROXY_HTTPS`         | `https` リクエスト用のプロキシとして使用する HTTPS URL です。                   |
+| `DD_PROXY_NO_PROXY`      | プロキシを使用すべきではない場合に必要となる、URL をスペースで区切ったリストです。      |
 | `DD_SKIP_SSL_VALIDATION` | Agent と Datadog との接続で問題が発生した場合にテストを実施するオプションです。 |
 
-プロキシ設定の詳細については、[Agent v6 プロキシのドキュメント][5]を参照してください。
+プロキシ設定の詳細については、[Agent v6 プロキシのドキュメント][8]を参照してください。
 
 ### オプションの収集 Agent
 
 セキュリティまたはパフォーマンス上の理由により、オプションの収集 Agent はデフォルトで無効になっています。このエージェントを有効にするには、以下の環境変数を使用します。
 
-| 環境変数               | 説明                                                                                                                                                                                                                                                  |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_APM_ENABLED`           | トレース Agent による [トレースの収集][6]を有効にします。                                                                                                                                                                                                           |
-| `DD_LOGS_ENABLED`          | ログ Agent による[ログの収集][7]を有効にします。                                                                                                                                                                                                              |
-| `DD_PROCESS_AGENT_ENABLED` | プロセス Agent による[ライブプロセスの収集][8]を有効にします。Docker ソケットがある場合、[ライブコンテナービュー][9]はすでにデフォルトで有効になっています。`false` に設定すると、[ライブプロセスの収集][8]と[ライブコンテナービュー][9]が無効になります。 |
-| `DD_COLLECT_KUBERNETES_EVENTS ` | Agent でのイベント収集を有効にします。クラスターで複数の Agent を実行している場合は、`DD_LEADER_ELECTION` も `true` に設定します。 |
+| 環境変数                    | 説明                                                                                                                                                                                                                                                  |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_APM_ENABLED`                | トレース Agent による [トレースの収集][5]を有効にします。                                                                                                                                                                                                           |
+| `DD_LOGS_ENABLED`               | ログ Agent による[ログの収集][6]を有効にします。                                                                                                                                                                                                              |
+| `DD_PROCESS_AGENT_ENABLED`      | プロセス Agent による[ライブプロセスの収集][7]を有効にします。Docker ソケットがある場合、[ライブコンテナービュー][8]はすでにデフォルトで有効になっています。`false` に設定すると、[ライブプロセスの収集][7]と[ライブコンテナービュー][8]が無効になります。 |
+| `DD_COLLECT_KUBERNETES_EVENTS ` | Agent でのイベント収集を有効にします。クラスターで複数の Agent を実行している場合は、`DD_LEADER_ELECTION` も `true` に設定します。                                                                                                                       |
 
 ライブコンテナビューを有効にするには、DD_PROCESS_AGENT_ENABLED を `true` に設定した上でプロセス Agent を実行していることをご確認ください。
 
 ### DogStatsD (カスタムメトリクス)
 
-カスタムメトリクスを [StatsD プロトコル][10]で送信します。
+カスタムメトリクスを [StatsD プロトコル][9]で送信します。
 
 | 環境変数                     | 説明                                                                                                                                                |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | 他のコンテナからの DogStatsD パケットをリスニングします (カスタムメトリクスの送信に必要)。                                                                       |
 | `DD_HISTOGRAM_PERCENTILES`       | 計算するヒストグラムのパーセンタイル (スペース区切り)。デフォルトは `0.95` です。                                                                         |
 | `DD_HISTOGRAM_AGGREGATES`        | 計算するヒストグラムの集計 (スペース区切り)。デフォルトは "max median avg count" です。                                                          |
@@ -344,22 +404,22 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | UNIX ソケットのメトリクス用にコンテナの検出とタグ付けを有効にします。                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `["env:golden", "group:retrievers"]` のように追加します。 |
 
-詳しくは、[Unix ドメインソケット上の DogStatsD][11] を参照してください。
+詳しくは、[Unix ドメインソケット上の DogStatsD][10] を参照してください。
 
 ### タグ付け
 
 Datadog は Kubernetes から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
 | 環境変数                            | 説明             |
-| --------------------------------------- | ----------------------- |
+|-----------------------------------------|-------------------------|
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | ポッドラベルを抽出します      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | ポッドアノテーションを抽出します |
 
-詳細については、[Kubernetes タグの抽出][12]ドキュメントを参照してください。
+詳細については、[Kubernetes タグの抽出][11]ドキュメントを参照してください。
 
 ### シークレットファイルの使用
 
-インテグレーションの資格情報を Docker や Kubernetes のシークレットに格納し、オートディスカバリーテンプレートで使用できます。詳細については、[シークレット管理のドキュメント][13]を参照してください。
+インテグレーションの資格情報を Docker や Kubernetes のシークレットに格納し、オートディスカバリーテンプレートで使用できます。詳細については、[シークレット管理のドキュメント][12]を参照してください。
 
 ### コンテナの無視
 
@@ -368,7 +428,7 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 | 環境変数    | 説明                                                                                                                                                                                                        |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `DD_CONTAINER_INCLUDE` | 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`  |
-| `DD_CONTAINER_EXCLUDE` | 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*` |
+| `DD_CONTAINER_EXCLUDE` | 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"`、`image:.*` |
 | `DD_CONTAINER_INCLUDE_METRICS` | メトリクスを含めたいコンテナの許可リスト。  |
 | `DD_CONTAINER_EXCLUDE_METRICS` | メトリクスを除外したいコンテナのブロックリスト。 |
 | `DD_CONTAINER_INCLUDE_LOGS` | ログを含めたいコンテナの許可リスト。  |
@@ -376,40 +436,39 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 | `DD_AC_INCLUDE` | **非推奨**: 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`  |
 | `DD_AC_EXCLUDE` | **非推奨**: 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*` |
 
-その他の例は[コンテナのディスカバリー管理][14] ページでご確認いただけます。
+その他の例は[コンテナのディスカバリー管理][13] ページでご確認いただけます。
 
 **注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。コンテナごとの課金にも影響しません。
 
 ### その他
 
-| 環境変数                        | 説明                                                                                                      |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | コンテナソースの自動検出を上書きして、1 つのソースに制限します (`"docker"`、`"ecs_fargate"`、`"kubelet"` など)。 |
-| `DD_HEALTH_PORT`                    | これを `5555` に設定すると、Agent のヘルスチェックをポート `5555` で公開します。                                              |
-| `DD_CLUSTER_NAME`                   | カスタム Kubernetes クラスター識別子を設定して、ホストエイリアスの衝突を回避します。クラスター名は最大 40 文字で、小文字、数字、およびハイフンのみという制限があります。また、文字で始める必要があり、 数字または文字で終わる必要があります。                                                             |
+| 環境変数                        | 説明                                                                                                                                                                                                                                                         |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | コンテナソースの自動検出を上書きして、1 つのソースに制限します (`"docker"`、`"ecs_fargate"`、`"kubelet"` など)。                                                                                                                                                    |
+| `DD_HEALTH_PORT`                    | これを `5555` に設定すると、Agent のヘルスチェックをポート `5555` で公開します。                                                                                                                                                                                                 |
+| `DD_CLUSTER_NAME`                   | カスタム Kubernetes クラスター識別子を設定して、ホストエイリアスの衝突を回避します。クラスター名は最大 40 文字で、小文字、数字、およびハイフンのみという制限があります。また、文字で始める必要があり、 数字または文字で終わる必要があります。 |
 
 リスナーおよび構成プロバイダーを追加するには、`DD_EXTRA_LISTENERS` と `DD_EXTRA_CONFIG_PROVIDERS` の環境変数を使用します。これらは `datadog.yaml` 構成ファイルの `listeners` セクションと `config_providers` セクションに定義する変数に追加されます。
 
 ## コマンド
 
-すべての Docker Agent コマンドは [Agent コマンドガイド][15]でご確認いただけます。
+すべての Docker Agent コマンドは [Agent コマンドガイド][14]でご確認いただけます。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/faq/kubernetes-legacy/
-[2]: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/#pod-templates
-[3]: /ja/agent/kubernetes/integrations/
-[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
-[5]: /ja/agent/proxy/#agent-v6
-[6]: /ja/agent/kubernetes/apm/
-[7]: /ja/agent/kubernetes/log/
-[8]: /ja/infrastructure/process/
-[9]: /ja/infrastructure/livecontainers/
-[10]: /ja/developers/dogstatsd/
-[11]: /ja/developers/dogstatsd/unix_socket/
-[12]: /ja/agent/kubernetes/tag/
-[13]: /ja/security/agent/#secrets-management
-[14]: /ja/agent/guide/autodiscovery-management/
-[15]: /ja/agent/guide/agent-commands/
+[2]: /ja/agent/
+[3]: /ja/agent/cluster_agent/
+[4]: https://app.datadoghq.com/containers
+[5]: /ja/infrastructure/livecontainers/?tab=helm#configuration
+[6]: /ja/agent/kubernetes/integrations/
+[7]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
+[8]: /ja/agent/proxy/#agent-v6
+[9]: /ja/developers/dogstatsd/
+[10]: /ja/developers/dogstatsd/unix_socket/
+[11]: /ja/agent/kubernetes/tag/
+[12]: /ja/security/agent/#secrets-management
+[13]: /ja/agent/guide/autodiscovery-management/
+[14]: /ja/agent/guide/agent-commands/

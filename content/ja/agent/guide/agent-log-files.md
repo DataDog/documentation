@@ -56,6 +56,7 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 * `agent.log`
 * `process-agent.log`
 * `trace-agent.log`
+* `jmxfetch.log` for Agent >= 7.24.0/6.24.0
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

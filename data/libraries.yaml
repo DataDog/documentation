@@ -65,7 +65,7 @@ Classic:
     - name: dogstatsde
       link: https://github.com/waisbrot/dogstatsde
       dogstatsd: true
-      authors: waisbrot    
+      authors: waisbrot
   - Go:
     - name: datadog-go
       link: https://github.com/DataDog/datadog-go
@@ -128,12 +128,6 @@ Classic:
       link: https://github.com/chonton/dogstatd-client
       dogstatsd: true
       authors: Chas Honton
-  - Lambda:
-    - name: serverless-datadog-metrics
-      link: https://github.com/DanteInc/serverless-datadog-metrics
-      api: true
-      authors: Dante Consulting, Inc.
-      notes: This library logs useful metrics from AWS Lambda functions, so that they can be accumulated via Datadog's AWS Lambda integration.
   - NiFi:
     - name: DataDogReportingTask
       link: https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-datadog-nar/1.5.0/org.apache.nifi.reporting.datadog.DataDogReportingTask/index.html
@@ -184,6 +178,11 @@ Classic:
       dogstatsd: true
       authors: Datadog
       notes: Also includes an API client CLI tool, 'dog'.
+    - name: datadog-api-client-python
+      link: https://github.com/DataDog/datadog-api-client-python
+      official: true
+      api: true
+      authors: Datadog
   - R:
     - name: datadogr
       link: https://cran.r-project.org/package=datadogr
@@ -203,6 +202,11 @@ Classic:
   - Ruby:
     - name: DogApi
       link: https://github.com/DataDog/dogapi-rb
+      official: true
+      api: true
+      authors: Datadog
+    - name: datadog_api_client
+      link: https://github.com/DataDog/datadog-api-client-ruby
       official: true
       api: true
       authors: Datadog
@@ -226,6 +230,12 @@ Classic:
       api: true
       authors: NomadBlacky
       notes: Datadog API client for Scala.
+  - Swift:
+    - name: DatadogSDK
+      link: https://github.com/DataDog/dd-sdk-ios
+      api: true
+      official: true
+      authors: Datadog
   - Swift:
     - name: SwiftDog
       link: https://github.com/jaronoff97/SwiftDog
@@ -305,6 +315,43 @@ Tracing:
     - name: scala-opentracing
       link: https://github.com/Colisweb/scala-opentracing
       authors: Colisweb
+Serverless:
+  - Lambda:
+    - name: datadog-lambda-python
+      official: true
+      link: https://github.com/DataDog/datadog-lambda-python
+      authors: Datadog
+      notes: Official Datadog Python Lambda library
+    - name: datadog-lambda-js
+      official: true
+      link: https://github.com/DataDog/datadog-lambda-js
+      authors: Datadog
+      notes: Official Datadog Node.js Lambda library
+    - name: datadog-lambda-rb
+      official: true
+      link: https://github.com/DataDog/datadog-lambda-rb
+      authors: Datadog
+      notes: Official Datadog Ruby Lambda library
+    - name: datadog-lambda-go
+      official: true
+      link: https://github.com/DataDog/datadog-lambda-go
+      authors: Datadog
+      notes: Official Datadog Go Lambda library
+    - name: datadog-lambda-java
+      official: true
+      link: https://github.com/DataDog/datadog-lambda-java
+      authors: Datadog
+      notes: Official Datadog Java Lambda library
+    - name: serverless-plugin-datadog
+      official: true
+      link: https://github.com/DataDog/serverless-plugin-datadog
+      authors: Datadog
+      notes: Plugin to automatically instrument your Lambda functions with Datadog.
+    - name: serverless-datadog-metrics
+      link: https://github.com/DanteInc/serverless-datadog-metrics
+      api: true
+      authors: Dante Consulting, Inc.
+      notes: This library logs useful metrics from AWS Lambda functions, so that they can be accumulated via Datadog's AWS Lambda integration.
 Log:
   - Flutter:
     - name: Datadog Flutter

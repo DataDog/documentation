@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /fr/tracing/languages
   - /fr/tracing/proxies
-disable_toc: true
+disable_sidebar: true
 ---
 Après avoir [activé la collecte de traces][1], configurez votre application pour envoyer des [traces][2] en utilisant l'une des bibliothèques de tracing Datadog officielles suivantes :
 

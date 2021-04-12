@@ -2,6 +2,12 @@
 title: ダッシュボードの概要
 kind: ドキュメント
 further_reading:
+  - link: 'https://www.datadoghq.com/blog/dashboard-sharing/'
+    tag: ブログ
+    text: ダッシュボードを組織外の人と安全に共有する
+  - link: 'https://www.datadoghq.com/blog/template-variable-associated-values/'
+    tag: ブログ
+    text: 関連するテンプレート変数を使用してダッシュボードを調整
   - link: 'https://learn.datadoghq.com/enrol/index.php?id=8'
     tag: 学習
     text: '自分のペースで学べるオンライン学習: ダッシュボードのより効果的な活用'

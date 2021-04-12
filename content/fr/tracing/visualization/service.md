@@ -14,6 +14,9 @@ further_reading:
   - link: /tracing/visualization/trace/
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
+  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
+    tag: Blog
+    text: Ajouter une URL vers la page d'un service APM à votre presse-papiers
 ---
 {{< img src="tracing/visualization/service/detailed_service_page.png" alt="Page détaillée des services" style="width:90%;">}}
 
@@ -37,7 +40,7 @@ Activez-les directement ou créez vos propres [monitors d'APM][3].
 
 **Remarque**: ajoutez un tag à un monitor avec `service:<NOM_SERVICE>` pour le lier à un service APM.
 
-## Graphiques par défaut
+## Les graphiques par défaut
 
 Datadog fournit des graphiques par défaut pour chaque service :
 
@@ -50,7 +53,7 @@ Datadog fournit des graphiques par défaut pour chaque service :
 * Erreur - Choisissez si vous voulez afficher :
     * Le **nombre total d'erreurs**
     * Le nombre **d'erreurs par seconde**
-    * Le **taux d'erreur**
+    * Le **taux d'erreur en %**
 * Sous-services : lorsque plusieurs services sont impliqués, un quatrième graphique est disponible. Il présente la **durée totale**, le **% de temps passé** et la **durée moyenne par requête** de votre service en fonction des *services* ou des *types* de service.
 
     Cela représente le temps total/relatif/moyen passé par les traces du service actuel par rapport aux autres *services* ou *types* de service.
@@ -67,13 +70,13 @@ En haut à droite de chaque graphique, cliquez sur la flèche pour exporter votr
 
 ### Distribution de la latence
 
-Outre ces graphiques, vous disposez également d'un graphique de distribution de la latence sur les services :
+La page du service affiche également un graphique représentant la distribution des latences :
 
-{{< img src="tracing/visualization/service/latency_distribution.png" alt="Distribution de la latence" style="width:90%;">}}
+{{< img src="tracing/visualization/service/service_latency_distribution.png" alt="distribution des latences"  style="width:100%;">}}
 
-Utilisez le sélecteur en haut à droite de ce graphique pour zoomer sur un centile donné de la distribution de latence :
+Utilisez les sélecteurs en haut à droite pour zoomer sur un centile donné, ou passez votre curseur sur la barre latérale pour voir les marqueurs de centile.
 
-{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="Sélection de distribution de latence" style="width:20%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="barre latérale de la distribution des latences"  style="width:50%;">}}
 
 ## Ressources
 

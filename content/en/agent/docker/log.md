@@ -36,7 +36,7 @@ Configuring log collection depends on your current environment. Choose one of th
 
 - If you cannot deploy the containerized Agent and your container writes **all** logs to `stdout`/`stderr`, follow the [host Agent](?tab=hostagent#installation) installation to enable containerized logging within your Agent configuration file.
 
-- If your container writes logs to files (only partially writes logs to `stdout`/`stderr` and writes logs to files OR fully writes logs to files), follow the [host Agent with custom log collection](?tab=hostagentwithcustomlogging#installation) installation.
+- If your container writes logs to files (only partially writes logs to `stdout`/`stderr` and writes logs to files OR fully writes logs to files), follow the [host Agent with custom log collection](?tab=hostagentwithcustomlogging#installation) installation or follow the [containerized Agent](?tab=containerized-agent#installation) installation and check the [log collection from file with Autodiscovery configuration example](?tab=logcollectionfromfile#examples).
 
 ## Installation
 
@@ -47,7 +47,7 @@ To run a [Docker container][1] that embeds the Datadog Agent to monitor your hos
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
@@ -62,7 +62,7 @@ docker run -d --name datadog-agent \
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
@@ -100,11 +100,12 @@ The commands related to log collection are:
     logs_config:
         container_collect_all: true
     ```
-
-3. [Restart the Agent][2] to see all of your container logs in Datadog.
+3. **Windows 10 Only**: The Datadog Agent user must be a member of the `docker-users` group in order to have permissions to work with Docker containers. Run `net localgroup docker-users "ddagentuser" /ADD` from your Administrator command prompt or follow the [Docker User Group][3] configuration steps.  
+4. [Restart the Agent][2] to see all of your container logs in Datadog.
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
 {{% /tab %}}
 {{% tab "Host Agent with Custom Logging" %}}
 
@@ -140,11 +141,11 @@ The commands related to log collection are:
 
 - If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][2] documentation for details regarding the setup for containerized environments. Refer to the [journald filter units][2] documentation for more information on parameters for filtering.
 
-## Log Integrations
+## Log integrations
 
 In Datadog Agent 6.8+, `source` and `service` default to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
 
-The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][1] and [pod annotations in Kubernetes][3] or container labels.
+The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][3] and [pod annotations in Kubernetes][4] or container labels.
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -179,9 +180,9 @@ Add the following label as a run command:
 {{% /tab %}}
 {{< /tabs >}}
 
-Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][4].
+Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][5].
 
-**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][5] documentation.
+**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][6] documentation.
 
 ### Examples
 
@@ -227,7 +228,32 @@ labels:
 See the [multi-line processing rule documentation][1] to get more pattern examples.
 
 
-[1]: /agent/logs/advanced_log_collection/#multi-line-aggregation
+[1]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+{{% /tab %}}
+{{% tab "From file" %}}
+
+The Agent v7.25.0+/6.25.0+ can directly collect logs from a file based on a container Autodiscovery label. To collect these logs, use the `com.datadoghq.ad.logs` label as shown below on your containers to collect `/logs/app/prod.log`:
+
+```yaml
+labels:
+    com.datadoghq.ad.logs: '[{"type":"file", "source": "sample_app", "service": "sample_service", "path": "/logs/app/prod.log"}]'
+```
+
+Logs collected from a file are tagged with the container metadata. Log collection is linked to the container life cycle, as soon as the container stops, log collection from that file stops.
+
+
+**Notes**:
+
+- The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to file may mount a volume such as `/logs/app` where the log file is written.
+
+- When using this kind of label on a container, its `stderr`/`stdout` logs are not collected automatically. If collection from both `stderr`/`stdout` and a file are needed it should be explicity enabled by using a label, for example:
+```yaml
+labels:
+    com.datadoghq.ad.logs: '[{"type":"file", "source": "java", "service": "app", "path": "/logs/app/prod.log"}, {"type": "docker", "source": "app_container", "service": "app"}]'
+```
+
+- When using this kind of combination, `source` and `service` have no default value and should be explicitly set in the Autodiscovery label.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -241,33 +267,34 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
 
-- [Filter logs before sending them to Datadog][6].
-- [Scrub sensitive data from your logs][7].
-- [Proceed to multi-line aggregation][8].
+- [Filter logs before sending them to Datadog][7].
+- [Scrub sensitive data from your logs][8].
+- [Proceed to multi-line aggregation][9].
 
 ## Filter containers
 
-It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][9] to learn more.
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][10] to learn more.
 
-## Short Lived containers
+## Short lived containers
 
 For a Docker environment, the Agent receives container updates in real time through Docker events. The Agent extracts and updates the configuration from the container labels (Autodiscovery) every 1 seconds.
 
 Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
-For Kubernetes environments, refer to the [Kubernetes short lived container documentation][10].
+For Kubernetes environments, refer to the [Kubernetes short lived container documentation][11].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
-[2]: /agent/logs/?tab=tailfiles
-[3]: /integrations/journald/
-[4]: /agent/docker/integrations/
-[5]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
-[6]: /agent/logs/#custom-log-collection
-[7]: /getting_started/tagging/unified_service_tagging
-[8]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
-[9]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
-[10]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[2]: /integrations/journald/
+[3]: /agent/docker/integrations/
+[4]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
+[5]: /agent/logs/#custom-log-collection
+[6]: /getting_started/tagging/unified_service_tagging
+[7]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
+[8]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
+[9]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[10]: /agent/guide/autodiscovery-management/
+[11]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers

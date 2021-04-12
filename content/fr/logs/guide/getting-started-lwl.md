@@ -5,7 +5,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: "En savoir plus sur la vue Log\_Explorer"
-  - link: /logs/explorer/patterns/
+  - link: '/logs/explorer/#patterns'
     tag: Documentation
     text: Se familiariser avec la vue Log Pattern
   - link: /logs/live_tail/
@@ -52,7 +52,7 @@ La vue Pattern vous aide à identifier et à filtrer les patterns inutiles. Elle
 
 ## 3. Créer un filtre d'exclusion de pattern de log
 
-Le volet Pattern context répertorie toutes les instances (tous les événements) d'un pattern de log. Il crée également une requête de recherche personnalisée en fonction du pattern sélectionné. Ajoutez cette requête à un filtre d'exclusion pour supprimer ces logs de votre index.
+Le volet de contexte des patterns répertorie toutes les instances (tous les événements) d'un pattern de log. Il crée également une requête de recherche personnalisée en fonction du pattern sélectionné. Ajoutez cette requête à un filtre d'exclusion pour supprimer ces logs de votre index.
 
 **Pour créer un filtre d'exclusion** :
 

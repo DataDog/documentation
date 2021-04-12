@@ -5,7 +5,6 @@ description: 'Standards ouverts pour Java'
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
-further_reading:
 
 ---
 
@@ -177,10 +176,6 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 
 Veuillez noter que les exemples ci-dessus utilisent uniquement les classes OpenTracing. Consultez l'[API OpenTracing][1] pour en savoir plus.
 
-
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/opentracing/opentracing-java
 [2]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java

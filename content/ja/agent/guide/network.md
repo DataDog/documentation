@@ -26,7 +26,7 @@ further_reading:
   - [ライブコンテナ][2]データは `process.`{{< region-param key="dd_site" code="true" >}}
   - [ログ][3] データには、TCP トラフィックの `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} 、HTTP の `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} などが含まれます。詳細は、[ログエンドポイント][4]の全リストを参照してください。
   - [オーケストレーターリソース][5]データは `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
-  - [HIPPA ログ][6]データはすべての[ログ][3]と同じですが、以下に挙げるレガシーエンドポイントにも対応しています。
+  - [HIPAA ログ][6]データはすべての[ログ][3]と同じですが、以下に挙げるレガシーエンドポイントにも対応しています。
     - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
@@ -70,28 +70,10 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 }
 ```
 
-{{< site-region region="us" >}}
-
 各セクションには専用のエンドポイントがあります。例:
 
-- [https://ip-ranges.datadoghq.com/logs.json][1]: Datadog US リージョンのログデータの受信に TCP を通じて使用される IP
-- [https://ip-ranges.datadoghq.com/apm.json][2]: Datadog US リージョンの APM データの受信に使用される IP
-
-[1]: https://ip-ranges.datadoghq.com/logs.json
-[2]: https://ip-ranges.datadoghq.com/apm.json
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-各セクションには専用のエンドポイントがあります。例:
-
-- [https://ip-ranges.datadoghq.eu/logs.json][1]: Datadog EU リージョンのログデータの受信に TCP を通じて使用される IP
-- [https://ip-ranges.datadoghq.eu/apm.json][2]: Datadog EU リージョンの APM データの受信に使用される IP
-
-[1]: https://ip-ranges.datadoghq.eu/logs.json
-[2]: https://ip-ranges.datadoghq.eu/apm.json
-
-{{< /site-region >}}
+- TCP 経由でログデータを受信するために使用される IP の場合は `https://ip-ranges.{{< region-param key="dd_site" >}}/logs.json`。
+- APM データの受信に使用される IP の場合は `https://ip-ranges.{{< region-param key="dd_site" >}}/apm.json`。
 
 ### 注
 

@@ -1,3 +1,4 @@
 ---
 title: サービスのチェック
+headless: true
 ---

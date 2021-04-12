@@ -48,15 +48,15 @@
   },
 
   "email_support_sentence": {
-    "other": "Contact the Datadog support team by email at <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>"
+    "other": "Contact the Datadog support team by email at <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a> (all sites)"
   },
 
   "live_chat_support_sentence": {
-    "other": "Chat with our support team Mon-Fri from 10:00 to 19:00 ET through in-app chat or <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>"
+    "other": "Chat with our support team Mon-Fri from 10:00 to 19:00 ET through in-app chat or <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a> (US and EU)"
   },
 
   "event_stream_support_sentence": {
-    "other": "Messages in the Datadog <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">event stream</a> containing <code>@support-datadog</code> create a ticket for our support team. This is a convenient way to reference a graph snapshot."
+    "other": "Messages in the Datadog <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">event stream</a> containing <code>@support-datadog</code> create a ticket for our support team. This is a convenient way to reference a graph snapshot. (US and EU)"
   },
 
   "agent_started_sentence": {

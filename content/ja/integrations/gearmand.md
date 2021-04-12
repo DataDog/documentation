@@ -28,7 +28,7 @@ is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
-metric_prefix: gearmand.
+metric_prefix: gearman.
 metric_to_check: gearman.unique_tasks
 name: gearmand
 process_signatures:

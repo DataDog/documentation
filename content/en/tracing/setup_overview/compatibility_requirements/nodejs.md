@@ -16,7 +16,7 @@ further_reading:
 
 The NodeJS Datadog Trace library is open source - view the [Github repository][1] for more information.
 
-Node `>=8` is supported by this library. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported.
+Node `>=8` is supported by this library. Even numbered versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported.
 
 ## Supported Integrations
 
@@ -75,33 +75,43 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [amqp10][37]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
 | [amqplib][38]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
 | [generic-pool][39]         | `>=2`    | Fully supported |                                                        |
-| [kafka-node][40]           |          | Coming Soon     |                                                        |
-| [rhea][41]                 | `>=1`    | Fully supported |                                                        |
+| [kafkajs][40]         | `>=1.4`    | Fully supported |                                                        |
+| [kafka-node][41]           |          | Coming Soon     |                                                        |
+| [rhea][42]                 | `>=1`    | Fully supported |                                                        |
 
 ### SDK Compatibility
 
 | Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
-| [aws-sdk][42]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [aws-sdk][43]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
 
 ### Promise Library Compatibility
 
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bluebird][43]   | `>=2`     | Fully supported |
-| [promise][44]    | `>=7`     | Fully supported |
-| [promise-js][45] | `>=0.0.3` | Fully supported |
-| [q][46]          | `>=1`     | Fully supported |
-| [when][47]       | `>=3`     | Fully supported |
+| [bluebird][44]   | `>=2`     | Fully supported |
+| [promise][45]    | `>=7`     | Fully supported |
+| [promise-js][46] | `>=0.0.3` | Fully supported |
+| [q][47]          | `>=1`     | Fully supported |
+| [when][48]       | `>=3`     | Fully supported |
 
 ### Logger Compatibility
 
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bunyan][48]     | `>=1`     | Fully supported |
-| [paperplane][49] | `>=2.3.2` | Fully supported |
-| [pino][50]       | `>=2`     | Fully supported |
-| [winston][51]    | `>=1`     | Fully supported |
+| [bunyan][49]     | `>=1`     | Fully supported |
+| [paperplane][50] | `>=2.3.2` | Fully supported |
+| [pino][51]       | `>=2`     | Fully supported |
+| [winston][52]    | `>=1`     | Fully supported |
+
+
+## Unsupported Libraries
+
+### Fibers
+
+[`fibers`][53] is incompatible with `async_hooks`, a Node.js [module][54] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][55] may result in instability (crashes) or incorrect tracing.
+
+For additional information or to discuss [leave a comment on this github issue][56] or [reach out to support][2] to discuss further.
 
 ## Further Reading
 
@@ -146,15 +156,20 @@ For details about how to how to toggle and configure plugins, check out the [API
 [37]: https://github.com/noodlefrenzy/node-amqp10
 [38]: https://github.com/squaremo/amqp.node
 [39]: https://github.com/coopernurse/node-pool
-[40]: https://github.com/SOHU-Co/kafka-node
-[41]: https://github.com/amqp/rhea
-[42]: https://github.com/aws/aws-sdk-js
-[43]: https://github.com/petkaantonov/bluebird
-[44]: https://github.com/then/promise
-[45]: https://github.com/kevincennis/promise
-[46]: https://github.com/kriskowal/q
-[47]: https://github.com/cujojs/when
-[48]: https://github.com/trentm/node-bunyan
-[49]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
-[50]: http://getpino.io
-[51]: https://github.com/winstonjs/winston
+[40]: https://github.com/tulios/kafkajs
+[41]: https://github.com/SOHU-Co/kafka-node
+[42]: https://github.com/amqp/rhea
+[43]: https://github.com/aws/aws-sdk-js
+[44]: https://github.com/petkaantonov/bluebird
+[45]: https://github.com/then/promise
+[46]: https://github.com/kevincennis/promise
+[47]: https://github.com/kriskowal/q
+[48]: https://github.com/cujojs/when
+[49]: https://github.com/trentm/node-bunyan
+[50]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[51]: http://getpino.io
+[52]: https://github.com/winstonjs/winston
+[53]: https://github.com/laverdet/node-fibers
+[54]: https://nodejs.org/api/async_hooks.html
+[55]: https://www.meteor.com/
+[56]: https://github.com/DataDog/dd-trace-js/issues/1229

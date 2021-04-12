@@ -21,7 +21,7 @@ Checks are small Python programs run periodically by the Agent. A Check performs
 
 Note that the word "check" - when not capitalized - refers to the generic act of taking a measurement.
 
-## Client Library
+## Client library
 
 There are a number of libraries in a variety of languages that help you instrument your applications with Datadog directly. Datadog provides official libraries for C#, Golang, Java, PHP, Python, and Ruby. Libraries in other languages have been contributed by the community, and are supported on a best-effort basis.
 

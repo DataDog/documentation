@@ -44,13 +44,14 @@ Beta integrations are disabled by default but can be enabled individually:
 | Grizzly-HTTP            | 2.3.20+    | [Beta][2]       | `grizzly-filterchain`                          |
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty (non-Servlet)     | 8+         | [Beta][2]       | `jetty`, `jetty-8`                             |
+| Jetty                   | 7.0-9.x    | Fully Supported | `jetty`                                        |
 | Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
 | Play                    | 2.3-2.8    | Fully Supported | `play`, `play-action`                          |
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
 | Spark Java              | 2.3+       | [Beta][2]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
+| Vert.x                  | 3.4-3.9.x  | Fully Supported | `vertx`, `vertx-3.4`                           |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
@@ -83,7 +84,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Kafka-Streams            | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
 | Java RMI                 | all         | Fully Supported | `rmi`, `rmi-client`, `rmi-server`              |
 | Jax RS Clients           | 2.0+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
-| Jersey Client            | 1.9+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
+| Jersey Client            | 1.9-2.29    | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | Ning HTTP Client         | 1.9.0+      | [Beta][3]         | `ning`                                         |
@@ -111,9 +112,9 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | ----------------------- | -------- | --------------- | ---------------------------------------------------------------------------------------- |
 | Aerospike               | 4.0+     | Fully Supported | `aerospike`                                                                              |
 | Couchbase               | 2.0+     | Fully Supported | `couchbase`                                                                              |
-| Cassandra               | 3.x      | Fully Supported | `cassandra`                                                                              |
-| Elasticsearch Transport | 2.0-7.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
-| Elasticsearch Rest      | 5.0-7.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
+| Cassandra               | 3.0+     | Fully Supported | `cassandra`                                                                              |
+| Elasticsearch Transport | 2.0+     | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6,7}` (pick one)|
+| Elasticsearch Rest      | 5.0+     | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-{5,6,7}` (pick one)           |
 | JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                |
 | Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |
@@ -143,15 +144,17 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 | Framework         | Versions | Support Type    | Instrumentation Names (used for configuration) |
 | ----------------- | -------- | --------------- | ---------------------------------------------- |
+| Datanucleus JDO   | 4.0+     | Fully Supported | `datanucleus`                                  |
 | Dropwizard Views  | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
 | Hibernate         | 3.5+     | Fully Supported | `hibernate`, `hibernate-core`                  |
 | Hystrix           | 1.4+     | Fully Supported | `hystrix`                                      |
 | JSP Rendering     | 2.3+     | Fully Supported | `jsp`, `jsp-render`, `jsp-compile`             |
+| JUnit             | 4.1+, 5.3+ | Fully Supported | `junit`, `junit-4`, `junit-5`                 |
 | Project Reactor   | 3.1+     | Fully Supported | `reactor-core`                                 |
 | RxJava            | 2.x      | Fully Supported | `rxjava`                                       |
 | Spring Data       | 1.8+     | Fully Supported | `spring-data`                                  |
 | Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
-| Twilio SDK        | 0+       | Fully Supported | `twilio-sdk`                                   |
+| Twilio SDK        | < 8.0    | Fully Supported | `twilio-sdk`                                   |
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 

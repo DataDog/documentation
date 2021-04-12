@@ -16,6 +16,8 @@ further_reading:
 - [Systemd](#systemd)
 - [その他の参考資料](#further-reading)
 
+**注**: 以下の例の `<CHECK_NAME>` を Agent チェックに置き換えます。例: `activemq`、`ceph`、または `elastic`。[インテグレーションのドキュメント][1]を確認して、Agent チェック名を確認します。
+
 ## Linux
 
 Agent チェックをテストするには、次を実行します。
@@ -39,6 +41,8 @@ sudo -u dd-agent datadog-agent check <チェック名> --check-rate
 ```shell
 sudo -u dd-agent dd-agent check <チェック名>
 ```
+
+`<CHECK_NAME>` を Agent チェックに置き換えます。例: `activemq`、`ceph`、または `elastic`。[インテグレーションのドキュメント][1]を確認して、Agent チェック名を確認します。
 
 レートメトリクスを含める場合は、コマンドに `--check-rate` を追加します。Agent v6.x の場合は、次を実行します。
 

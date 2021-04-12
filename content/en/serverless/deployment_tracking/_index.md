@@ -28,7 +28,7 @@ If you haven’t already, set up the [Amazon Web Services][2] integration first.
 cloudtrail:LookupEvents
 ```
 
-If you have already added the permission, but you still don't see events for any of your AWS Lambda functions, please reach out to our [support team][3].
+If you have already added the permission, but you still don't see events for any of your AWS Lambda functions, please reach out to our [support team][3] to opt into Deployment Tracking.
 
 ## Further Reading
 

@@ -9,20 +9,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - 監視
-  - セキュリティ
+  - モニタリング
+  - security
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md'
 display_name: Cyral
-draft: true
+draft: false
 git_integration_title: cyral
 guid: 2a854a73-b0da-4954-b34e-fc1cd05ba8e8
 integration_id: cyral
 integration_title: Cyral
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: product@cyral.com
 manifest_version: 1.0.0
 metric_prefix: cyral.
@@ -44,16 +44,20 @@ supported_os:
 
 ### インストール
 
-Cyral チェックをホストにインストールするには
+Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Cyral チェックをインストールしてください。[バージョン 6.8 以前の Agent][4] または [Docker Agent][5] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][3]に関する Agent のガイドを参照してください。
 
-1. マシンに[開発ツールキット][3]をインストールします。
-2. `ddev release build cyral` を実行してパッケージをビルドします。
-3. [Datadog Agent をダウンロードします][4]。
-4. ビルドアーティファクトを Agent のあるホストにアップロードし、`datadog-agent integration install -w path/to/cyral/dist/<ARTIFACT_NAME>.whl` を実行します。
+1. [Datadog Agent をダウンロードして起動][6]します。
+2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
+
+   ```shell
+   datadog-agent integration install -t datadog-cyral==<INTEGRATION_VERSION>
+   ```
+
+3. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
-1. cyral のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cyral.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cyral.d/conf.yaml][5] を参照してください。
+1. cyral のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cyral.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cyral.d/conf.yaml][8] を参照してください。
 
     ```yaml
     init_config:
@@ -67,7 +71,7 @@ Cyral チェックをホストにインストールするには
 
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `cyral` を探します。
+[Agent の status サブコマンドを実行][9]し、Checks セクションで `cyral` を探します。
 
 ## 収集データ
 
@@ -96,14 +100,16 @@ Cyral には、イベントは含まれません。
 
 `cyral.yaml` 内の `url` が正しいかどうかを確認してください。
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://cyral.com/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/integrations-extras/blob/master/cyral/datadog_checks/cyral/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
+[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/cyral/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[8]: https://github.com/DataDog/integrations-extras/blob/master/cyral/datadog_checks/cyral/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://github.com/DataDog/integrations-extras/blob/master/cyral/metadata.csv
+[11]: https://docs.datadoghq.com/ja/help/

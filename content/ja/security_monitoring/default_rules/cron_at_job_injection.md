@@ -10,11 +10,9 @@ rule_category:
 scope: ''
 security: コンプライアンス
 source: ファイル整合性モニタリング
-title: Cront AT ジョブの作成
+title: Cron AT ジョブの作成
 type: security_rules
 ---
-## 概要
-
 ## 目標
 システム上で新規 cron ジョブの作成や修正を検知します。
 

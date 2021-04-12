@@ -16,7 +16,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualiser-les-donnees'
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -113,13 +113,13 @@ Une fois la bibliothèque dans votre classpath, ajoutez la disposition suivante 
 
   <!--
   Consultez https://github.com/nlog/nlog/wiki/Configuration-file
-  pour en savoir plus sur la personnalisation des règles et des sorties de la journalisation.
+  pour en savoir plus sur la personnalisation des règles et des sorties.
    -->
   <targets async="true">
     <!-- Rédiger les logs au format JSON dans un fichier -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${longdate}" />
+        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -309,18 +309,24 @@ Initialisez ensuite directement le logger dans votre application. N'oubliez pas 
 {{< site-region region="us" >}}
 
 ```csharp
-var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.com")
-    .WriteTo.DatadogLogs("<CLÉ_API>")
-    .CreateLogger();
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<CLÉ_API>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.com" })
+    .CreateLogger())
+{
+    // Insérer du code
+}
 ```
 
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
 ```csharp
-var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.eu")
-    .WriteTo.DatadogLogs("<CLÉ_API>")
-    .CreateLogger();
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<CLÉ_API>", configuration: new DatadogConfiguration { Url = "https://http-intake.logs.datadoghq.eu" })
+    .CreateLogger())
+{
+    // Insérer du code
+}
 ```
 
 {{< /site-region >}}
@@ -333,16 +339,19 @@ Par exemple, pour transférer des logs vers la région américaine de Datadog vi
 
 ```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<CLÉ_API>",
         source: "<NOM_SOURCE>",
         service: "<NOM_SERVICE>",
-        host: "<NOM_HOST>",
-        tags: new string[] {"<TAG_1>:<VALEUR_1>", "<TAG_2>:<VALEUR_2>"},
+        host: "<HOSTNAME>",
+        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
         configuration: config
     )
-    .CreateLogger();
+    .CreateLogger())
+{
+    // Insérer du code
+}
 ```
 
 {{< /site-region >}}
@@ -352,16 +361,19 @@ Par exemple, pour transférer des logs vers la région européenne de Datadog vi
 
 ```csharp
 var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
-var log = new LoggerConfiguration()
+using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<CLÉ_API>",
         source: "<NOM_SOURCE>",
         service: "<NOM_SERVICE>",
         host: "<HOSTNAME>",
-        tags: new string[] {"<TAG_1>:<VALEUR_1>", "<TAG_2>:<VALEUR_2>"},
+        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
         configuration: config
     )
-    .CreateLogger();
+    .CreateLogger())
+{
+    // Insérer du code
+}
 ```
 
 {{< /site-region >}}
@@ -397,7 +409,7 @@ Dans la matrice `Serilog.WriteTo`, ajoutez une entrée pour `DatadogLogs`. Voici
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /fr/logs/#reserved-attributes
+[3]: /fr/logs/processing/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 

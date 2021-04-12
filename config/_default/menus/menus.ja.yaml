@@ -52,40 +52,40 @@ main_left:
     weight: 8
     parent: product
   - identifier: synthetics
-    name: Synthetic の監視
+    name: Synthetic モニタリング
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics icon''>'
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 9
     parent: product
   - identifier: rum
     name: リアルユーザーモニタリング
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''rum icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''RUM アイコン''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
-  - identifier: incident
-    name: Incident Management
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
+  - identifier: インシデント
+    name: インシデント管理
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''インシデントアイコン''>'
     url: 'https://www.datadoghq.com/product/incident-management/'
-    weight: 6
+    weight: 11
     parent: product
   - identifier: サーバーレス
     name: サーバーレス
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 11
+    weight: 12
     parent: product
   - identifier: alerts
     name: アラート
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''alert icon''>'
     url: 'https://www.datadoghq.com/product/platform/alerts/'
-    weight: 12
+    weight: 13
     parent: product
   - identifier: api
     name: API
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''api icon''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 13
+    weight: 14
     parent: product
   - identifier: customers
     name: お客様
@@ -99,106 +99,150 @@ main_left:
     name: ソリューション
     url: '#'
     weight: -460
-  - name: 金融サービス
+  - identifier: industry-financial
+    name: 金融サービス
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/financial-services/'
     weight: -460
-  - name: 製造 / 物流
+  - identifier: industry-manufacturing
+    name: 製造 / 物流
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/manufacturing-logistics/'
     weight: -459
-  - name: 医療 / ライフサイエンス
+  - identifier: industry-healthcare
+    name: 医療 / ライフサイエンス
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/healthcare/'
     weight: -458
-  - name: 小売業 / e コマース
+  - identifier: industry-retail
+    name: 小売業 / e コマース
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/retail-ecommerce/'
     weight: -457
-  - name: 官業
+  - identifier: industry-public
+    name: 官業
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/solutions/public-sector/'
     weight: -456
-  - name: メディア / エンターテインメント
+  - identifier: industry-media
+    name: メディア / エンターテインメント
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/media-entertainment/'
     weight: -455
-  - name: テクノロジー
+  - identifier: industry-technology
+    name: テクノロジー
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/solutions/technology/'
     weight: -454
-  - name: ゲーム業界
+  - identifier: industry-gaming
+    name: ゲーム業界
     parent: solutions
     title: 業種
     url: 'https://www.datadoghq.com/ja/solutions/gaming/'
     weight: -453
-  - name: Amazon Web Services
+  - identifier: technology-aws
+    name: Amazon Web Services
     parent: solutions
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/aws/'
     weight: -452
-  - name: Azure
+  - identifier: technology-azure
+    name: Azure
     parent: solutions
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/azure/'
     weight: -451
-  - name: Google Cloud Platform
+  - identifier: technology-gcp
+    name: Google Cloud Platform
     parent: solutions
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/gcp/'
     weight: -450
-  - name: Kubernetes
+  - identifier: technology-kubernetes
+    name: Kubernetes
     parent: solutions
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
-  - name: クラウド移行
+  - identifier: technology-openshift
+    name: Red Hat OpenShift
+    parent: solutions
+    title: テクノロジー
+    url: 'https://www.datadoghq.com/solutions/openshift/'
+    weight: -448
+  - identifier: usecase-migration
+    name: クラウド移行
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/cloud-migration/'
-    weight: -448
-  - name: 統合監視
+    weight: -447
+  - identifier: usecase-consolidate
+    name: 統合監視
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/monitoring-consolidation/'
-    weight: -447
-  - name: DevOps
+    weight: -446
+  - identifier: usecase-devops
+    name: DevOps
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/devops/'
-    weight: -446
-  - name: セキュリティ分析
+    weight: -445
+  - identifier: usecase-testing
+    name: シフト左テスト
+    parent: solutions
+    title: ユースケース
+    url: 'https://www.datadoghq.com/solutions/shift-left-testing/'
+    weight: -444
+  - identifier: usecase-security
+    name: セキュリティ分析
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -445
-  - name: ハイブリッドクラウドモニタリング
+    weight: -443
+  - identifier: usecase-compliance
+    name: CIS ベンチマークのコンプライアンス
+    parent: solutions
+    title: ユースケース
+    url: 'https://www.datadoghq.com/solutions/security/cis-benchmarks/'
+    weight: -442
+  - identifier: usecase-hybrid
+    name: ハイブリッドクラウドモニタリング
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -444
-  - name: IoT モニタリング
+    weight: -441
+  - identifier: usecase-iot
+    name: IoT モニタリング
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -443
-  - name: 機械学習
+    weight: -440
+  - identifier: usecase-machine
+    name: 機械学習
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -442
-  - name: リアルタイム BI
+    weight: -439
+  - identifier: usecase-analytics
+    name: リアルタイム BI
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -441
+    weight: -438
+  - identifier: usecase-onprem
+    name: オンプレミス監視
+    parent: solutions
+    title: ユースケース
+    url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
+    weight: -437
 main_right:
   - identifier: about
     name: 会社情報
@@ -214,7 +258,7 @@ main_right:
     weight: -480
   - name: 最新ニュース
     parent: about
-    url: 'https://www.datadoghq.com/about/latest-news/'
+    url: 'https://www.datadoghq.com/about/latest-news/press-releases/'
     weight: -460
   - name: 経営陣
     parent: about
@@ -284,85 +328,90 @@ main:
     url: getting_started/application/monitors
     parent: getting_started_datadog
     weight: 101
+  - name: Datadog サイト
+    identifier: getting_started_datadog_site
+    url: getting_started/site/
+    parent: getting_started
+    weight: 2
   - name: エージェント
     identifier: getting_started_agent
     url: getting_started/agent/
     parent: getting_started
-    weight: 2
+    weight: 3
   - name: オートディスカバリー
     identifier: getting_started_agent_autodiscovery
     url: getting_started/agent/autodiscovery
     parent: getting_started_agent
-    weight: 201
+    weight: 301
   - name: インテグレーション
     identifier: getting_started_integrations
     url: getting_started/integrations/
     parent: getting_started
-    weight: 3
+    weight: 4
   - name: ダッシュボード
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
     parent: getting_started
-    weight: 4
+    weight: 5
   - name: ログ
     identifier: getting_started_logs
     url: getting_started/logs/
     parent: getting_started
-    weight: 5
+    weight: 6
   - name: トレーシング
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
-    weight: 6
+    weight: 7
   - name: タグ
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 7
+    weight: 8
   - name: タグの付け方
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
     parent: tagging_
-    weight: 701
+    weight: 801
   - name: 統合サービスタグ付け
     identifier: unified_service_tagging
     url: getting_started/tagging/unified_service_tagging
     parent: tagging_
-    weight: 702
+    weight: 802
   - name: タグの使用方法
     identifier: using_tags
     url: getting_started/tagging/using_tags
     parent: tagging_
-    weight: 703
+    weight: 803
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 8
-  - name: Synthetic の監視
+    weight: 9
+  - name: Synthetic モニタリング
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 9
-  - name: プライベートロケーション
-    identifier: getting_started_private_location
-    url: getting_started/synthetics/private_location
-    parent: getting_started_synthetics
-    weight: 901
+    weight: 10
   - name: ブラウザテスト
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 902
+    weight: 1002
   - name: API テスト
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 903
+    weight: 1003
+  - name: プライベートロケーション
+    identifier: getting_started_private_location
+    url: getting_started/synthetics/private_location
+    parent: getting_started_synthetics
+    weight: 1001
   - name: ラーニングセンター
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 10
+    weight: 11
   - name: エージェント
     url: agent/
     pre: nav_agent
@@ -528,178 +577,183 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
     weight: 307
+  - name: IoT
+    url: agent/iot/
+    parent: agent
+    identifier: agent_iot
+    weight: 4
   - name: Amazon ECS
     url: agent/amazon_ecs/
     parent: agent
     identifier: agent_amazon_ecs
-    weight: 4
+    weight: 5
   - name: ログの収集
     url: agent/amazon_ecs/logs/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_logs
-    weight: 401
+    weight: 501
   - name: APM
     url: agent/amazon_ecs/apm/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_apm
-    weight: 402
+    weight: 502
   - name: タグの抽出
     url: agent/amazon_ecs/tags/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_tags
-    weight: 403
+    weight: 503
   - name: 収集データ
     url: agent/amazon_ecs/data_collected/
     parent: agent_amazon_ecs
     identifier: agent_amazon_ecs_data_collected
-    weight: 404
+    weight: 504
   - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
     identifier: agent_cluster
-    weight: 5
+    weight: 6
   - name: セットアップ
     url: agent/cluster_agent/setup/
     parent: agent_cluster
     identifier: cluster_agent_setup
-    weight: 501
+    weight: 601
   - name: イベント収集
     url: agent/cluster_agent/event_collection/
     parent: agent_cluster
     identifier: cluster_agent_event_collection
-    weight: 502
+    weight: 602
   - name: Custom & External Metrics
     url: agent/cluster_agent/external_metrics/
     parent: agent_cluster
     identifier: cluster_agent_external_metrics
-    weight: 503
+    weight: 603
   - name: クラスターチェック
     url: agent/cluster_agent/clusterchecks/
     parent: agent_cluster
-    weight: 504
+    weight: 604
   - name: Endpoints Checks
     url: agent/cluster_agent/endpointschecks/
     parent: agent_cluster
-    weight: 505
+    weight: 605
   - name: Admission Controller
     url: agent/cluster_agent/admission_controller/
     parent: agent_cluster
-    weight: 506
+    weight: 606
   - name: コマンドとオプション
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
-    weight: 507
+    weight: 607
   - name: クラスターメタデータプロバイダー
     url: agent/cluster_agent/metadata_provider/
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
-    weight: 508
+    weight: 608
   - name: ビルド
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
-    weight: 509
+    weight: 609
   - name: クラスターチェックランナー
     url: agent/cluster_agent/clusterchecksrunner
     identifier: cluster_agent_clcr
     parent: agent_cluster
-    weight: 510
+    weight: 610
   - name: トラブルシューティング
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 511
+    weight: 611
   - name: ログの収集
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 6
+    weight: 7
   - name: 高度なログの収集
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 601
+    weight: 701
   - name: プロキシ
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 602
+    weight: 702
   - name: 転送
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 603
+    weight: 703
   - name: プロキシ
     url: agent/proxy/
     parent: agent
     identifier: agent_proxy
-    weight: 7
+    weight: 8
   - name: バージョン
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 8
+    weight: 9
   - name: Agent v7 へアップグレード
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 801
+    weight: 901
   - name: Agent v6 へアップグレード
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 802
+    weight: 902
   - name: トラブルシューティング
     url: agent/troubleshooting/
     parent: agent
-    weight: 9
+    weight: 10
     identifier: agent_troubleshooting
   - name: デバッグモード
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 901
+    weight: 1001
   - name: Agent フレア
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 902
+    weight: 1002
   - name: Agent チェックのステータス
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 903
+    weight: 1003
   - name: NTP 関連の問題
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 904
+    weight: 1004
   - name: アクセス許可に関する問題
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 905
+    weight: 1005
   - name: インテグレーションの問題
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 906
+    weight: 1006
   - name: サイトの問題
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 907
+    weight: 1007
   - name: オートディスカバリーに関する問題
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 908
+    weight: 1008
   - name: Windows コンテナ問題
     url: agent/troubleshooting/windows_containers
-    weight: 909
+    weight: 1009
     parent: agent_troubleshooting
   - name: Agent ランタイムコンフィギュレーション
     url: agent/troubleshooting/config
-    weight: 910
+    weight: 1010
     parent: agent_troubleshooting
   - name: ガイド
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 10
+    weight: 11
   - name: セキュリティ
     identifier: agent_security
     url: security/agent/
     parent: agent
-    weight: 11
+    weight: 12
   - name: インテグレーション
     url: integrations/
     identifier: integrations_top_level
@@ -815,12 +869,12 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 902
-  - name: モバイル
+  - name: モバイルアプリケーション
     url: mobile/
     identifier: モバイル
     pre: nav_mobile
     weight: 80000
-  - name: Infrastructure
+  - name: インフラストラクチャー
     url: infrastructure/
     identifier: インフラストラクチャー
     pre: nav_infrastructure
@@ -937,56 +991,69 @@ main:
     identifier: serverless_distributed_tracing
     parent: サーバーレス
     weight: 5
+  - name: トレースのマージ（詳細）
+    url: serverless/distributed_tracing/serverless_trace_merging
+    parent: serverless_distributed_tracing
+    weight: 501
+  - name: トレース伝搬 (高度)
+    url: serverless/distributed_tracing/serverless_trace_propagation
+    parent: serverless_distributed_tracing
+    weight: 502
   - name: カスタムメトリクス
     url: serverless/custom_metrics
     parent: サーバーレス
     weight: 6
+  - name: インサイト
+    url: serverless/insights
+    parent: サーバーレス
+    weight: 7
   - name: デプロイ追跡
     url: serverless/deployment_tracking
     parent: サーバーレス
-    weight: 7
+    weight: 8
   - name: サーバーレスインテグレーション
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: サーバーレス
-    weight: 8
+    weight: 9
   - name: Datadog サーバーレスプラグイン
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 801
+    weight: 901
   - name: Datadog のサーバーレスマクロ
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 802
+    weight: 902
   - name: Datadog サーバーレス CLI
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 803
+    weight: 903
   - name: サーバーレスタグ付け
     url: serverless/serverless_tagging
     parent: サーバーレス
-    weight: 9
+    weight: 10
   - name: トラブルシューティング
     url: serverless/troubleshooting
     parent: サーバーレス
     identifier: serverless_troubleshooting
-    weight: 10
+    weight: 11
   - name: Azure App Service 拡張機能
     url: serverless/azure_app_services
     parent: サーバーレス
     identifier: serverless_app_services
-    weight: 11
+    weight: 12
   - name: メトリクス
     url: metrics/
     identifier: metrics_top_level
     pre: nav_metrics
     weight: 110000
-  - name: はじめに
-    url: metrics/introduction/
+  - name: 高度なフィルタリング
+    url: metrics/advanced-filtering/
     parent: metrics_top_level
+    identifier: metrics_advanced_filtering
     weight: 901
   - name: エクスプローラー
     url: metrics/explorer/
@@ -1126,6 +1193,11 @@ main:
     parent: アラート設定
     identifier: インシデント
     weight: 8
+  - name: Datadog クリップボード
+    url: monitors/incident_management/datadog_clipboard
+    parent: インシデント
+    identifier: incidents_clipboard
+    weight: 801
   - name: モニターベース SLO
     url: monitors/service_level_objectives/monitor/
     parent: SLO
@@ -1255,8 +1327,8 @@ main:
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
-  - name: OpenTracing と OpenTelemetry
-    url: tracing/setup_overview/open_standards/java
+  - name: OpenTelemetry と OpenTracing
+    url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
     weight: 103
@@ -1296,7 +1368,7 @@ main:
     identifier: tracing_open_standards_open_standards_dotnet
     weight: 108
   - name: サーバーレス関数のトレース
-    url: tracing/setup_overview/serverless_functions/
+    url: serverless/distributed_tracing
     parent: tracing_setup_overview
     identifier: tracing_serverless_functions
     weight: 104
@@ -1378,56 +1450,71 @@ main:
     parent: trace_retention_and_ingestion
     identifier: trace_retention_and_ingestion_usage_metrics
     weight: 501
+  - name: スパンからメトリクスを生成する
+    url: tracing/generate_metrics/
+    parent: トレーシング
+    identifier: generate_metrics
+    weight: 6
   - name: デプロイ追跡
     url: tracing/deployment_tracking/
     parent: トレーシング
     identifier: deployment_tracking
-    weight: 6
+    weight: 7
   - name: ログとトレースの接続
     url: tracing/connect_logs_and_traces/
     parent: トレーシング
     identifier: tracing_connect_logs_and_traces
-    weight: 7
+    weight: 8
   - name: Java
     url: tracing/connect_logs_and_traces/java
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_java
-    weight: 701
+    weight: 801
   - name: Python
     url: tracing/connect_logs_and_traces/python
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_python
-    weight: 702
+    weight: 802
   - name: Go
     url: tracing/connect_logs_and_traces/go
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_go
-    weight: 703
+    weight: 803
   - name: Ruby
     url: tracing/connect_logs_and_traces/ruby
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_ruby
-    weight: 704
+    weight: 804
   - name: PHP
     url: tracing/connect_logs_and_traces/php
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_php
-    weight: 705
+    weight: 805
   - name: NodeJS
     url: tracing/connect_logs_and_traces/nodejs
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_nodejs
-    weight: 706
+    weight: 806
   - name: .NET
     url: tracing/connect_logs_and_traces/dotnet
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
-    weight: 707
+    weight: 807
+  - name: OpenTelemetry
+    url: tracing/connect_logs_and_traces/opentelemetry
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_opentelemetry
+    weight: 808
   - name: Synthetics テストとトレースの接続
     url: synthetics/apm
     parent: トレーシング
     identifier: tracing_connect_synthetics_and_traces
     weight: 8
+  - name: RUM とトレースの接続
+    url: real_user_monitoring/connect_rum_and_traces
+    parent: トレーシング
+    identifier: tracing_connect_rum_and_traces
+    weight: 9
   - name: ランタイムメトリクス
     url: tracing/runtime_metrics/
     parent: トレーシング
@@ -1453,7 +1540,7 @@ main:
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
     weight: 1004
-  - name: Continuous Profiler
+  - name: 継続的なプロファイラー
     url: tracing/profiler/
     parent: トレーシング
     identifier: プロファイラー
@@ -1468,11 +1555,16 @@ main:
     parent: プロファイラー
     identifier: profiler_search_profiles
     weight: 1102
+  - name: トレースからコードのホットスポットを調査
+    url: tracing/profiler/connect_traces_and_profiles
+    parent: プロファイラー
+    identifier: profiler_traces_profiles
+    weight: 1103
   - name: プロファイラのトラブルシューティング
     url: tracing/profiler/profiler_troubleshooting
     parent: プロファイラー
     identifier: profiler_profiler_troubleshooting
-    weight: 1103
+    weight: 1104
   - name: APM 用語集
     url: tracing/visualization/
     parent: トレーシング
@@ -1646,26 +1738,22 @@ main:
     url: logs/explorer/live_tail/
     parent: log_explorer
     weight: 601
-  - name: ログリスト
-    url: logs/explorer/list/
+  - name: ログサイドパネル
+    url: logs/explorer/side_panel/
     parent: log_explorer
     weight: 602
-  - name: ログパターン
-    url: logs/explorer/patterns/
-    parent: log_explorer
-    weight: 603
-  - name: ログ分析
-    url: logs/explorer/analytics/
-    parent: log_explorer
-    weight: 604
   - name: 保存ビュー
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 605
+    weight: 603
   - name: ファセット
     url: logs/explorer/facets/
     parent: log_explorer
-    weight: 606
+    weight: 604
+  - name: Watchdog Insights
+    url: logs/explorer/watchdog_insights/
+    parent: log_explorer
+    weight: 605
   - name: 検索構文
     url: logs/search_syntax/
     parent: log_management
@@ -1676,7 +1764,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: ログとメトリクスの相関
-    url: 'dashboards/timeboards/#graph-menu'
+    url: logs/guide/correlate-logs-with-metrics
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1694,37 +1782,37 @@ main:
     pre: nav_security_monitoring
     identifier: security_compliance_monitoring
     weight: 160000
-  - name: セキュリティモニタリング
-    url: security_monitoring/
+  - name: はじめに
+    url: security_monitoring/getting_started
     parent: security_compliance_monitoring
-    identifier: security_monitoring
+    identifier: security_monitoring_getting_started
     weight: 1
-  - name: コンプライアンスのモニタリング
-    url: compliance_monitoring/
+  - name: 検出ルール
+    url: security_monitoring/detection_rules/
     parent: security_compliance_monitoring
-    identifier: compliance_monitoring
+    identifier: detection_rules
     weight: 2
-  - name: デフォルトのルール
-    url: security_monitoring/default_rules/
+  - name: セキュリティモニタリング
+    url: security_monitoring/detection_rules/security_monitoring
+    parent: detection_rules
+    identifier: security_monitoring_detection_rules
+    weight: 201
+  - name: デフォルトの検出ルール
+    url: security_monitoring/default_rules
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
-  - name: はじめに
-    url: security_monitoring/getting_started
-    parent: security_monitoring
-    identifier: security_monitoring_getting_started
-    weight: 1
   - name: シグナルエクスプローラー
     url: security_monitoring/explorer
-    parent: security_monitoring
+    parent: security_compliance_monitoring
     identifier: security_monitoring_explorer
-    weight: 2
-  - name: 脅威検知の規則
-    url: security_monitoring/detection_rules
-    parent: security_monitoring
-    identifier: security_monitoring_detection_rules
-    weight: 3
-  - name: Synthetic の監視
+    weight: 4
+  - name: ガイド
+    url: security_monitoring/guide
+    parent: security_compliance_monitoring
+    identifier: security_monitoring_guides
+    weight: 5
+  - name: Synthetic モニタリング
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
@@ -1733,211 +1821,285 @@ main:
     url: synthetics/api_tests/
     parent: synthetics
     weight: 1
-    id: api_tests
+    identifier: api_tests
+  - name: HTTP
+    url: synthetics/api_tests/http_tests
+    parent: api_tests
+    weight: 101
+  - name: SSL
+    url: synthetics/api_tests/ssl_tests
+    parent: api_tests
+    weight: 102
+  - name: TCP
+    url: synthetics/api_tests/tcp_tests
+    parent: api_tests
+    weight: 103
+  - name: DNS
+    url: synthetics/api_tests/dns_tests
+    parent: api_tests
+    weight: 104
+  - name: ICMP
+    url: synthetics/api_tests/icmp_tests
+    parent: api_tests
+    weight: 105
+  - name: Multistep API テスト
+    url: synthetics/multistep
+    parent: synthetics
+    identifier: synthetics_multistep
+    weight: 2
   - name: ブラウザテスト
     url: synthetics/browser_tests/
     parent: synthetics
     identifier: synthetics_browser_tests
-    weight: 2
+    weight: 3
   - name: ステップ
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
-    weight: 201
+    weight: 301
+  - name: テスト結果とパフォーマンス
+    url: synthetics/browser_tests/test_results
+    parent: synthetics_browser_tests
+    weight: 302
   - name: ステップの高度なオプション
     url: synthetics/browser_tests/advanced_options
     parent: synthetics_browser_tests
-    weight: 203
-  - name: テスト結果
-    url: synthetics/browser_tests/test_results
-    parent: synthetics_browser_tests
-    weight: 202
+    weight: 303
   - name: プライベートロケーション
     url: synthetics/private_locations
     parent: synthetics
     identifier: synthetics_private_location
-    weight: 3
+    weight: 4
   - name: コンフィギュレーション
     url: synthetics/private_locations/configuration
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
-    weight: 301
+    weight: 401
   - name: CI/CD テスト
     url: /synthetics/ci/
     parent: synthetics
     identifier: synthetics_ci
-    weight: 4
+    weight: 5
   - name: APM インテグレーション
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 5
-  - name: 検索と管理
-    url: synthetics/search/
-    parent: synthetics
     weight: 6
-  - name: メトリクス
-    url: synthetics/metrics/
-    parent: synthetics
-    weight: 7
   - name: 設定
     url: synthetics/settings/
     parent: synthetics
+    weight: 7
+  - name: 検索と管理
+    url: synthetics/search/
+    parent: synthetics
     weight: 8
+  - name: メトリクス
+    url: synthetics/metrics/
+    parent: synthetics
+    weight: 9
+  - name: Synthetic ボットの特定
+    url: synthetics/guide/identify_synthetics_bots/
+    parent: synthetics
+    weight: 10
   - name: ガイド
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 9
+    weight: 11
   - name: トラブルシューティング
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 10
+    weight: 12
   - name: リアルユーザーモニタリング
     url: real_user_monitoring/
-    pre: nav_rum
+    pre: nav_rum_2
     identifier: rum
     weight: 150000
   - name: ブラウザのモニタリング
     url: real_user_monitoring/browser/
     parent: rum
-    identifier: ブラウザ
+    identifier: rum_browser
     weight: 1
   - name: 収集データ
     url: real_user_monitoring/browser/data_collected/
-    parent: ブラウザ
+    parent: rum_browser
     identifier: rum_data_collected
     weight: 101
   - name: 高度なコンフィギュレーション
     url: real_user_monitoring/browser/advanced_configuration/
-    parent: ブラウザ
+    parent: rum_browser
     identifier: rum_advanced
     weight: 102
+  - name: ページのパフォーマンスの監視
+    url: real_user_monitoring/browser/monitoring_page_performance/
+    parent: rum_browser
+    identifier: page_performance
+    weight: 103
+  - name: リソースパフォーマンスの監視
+    url: real_user_monitoring/browser/monitoring_resource_performance/
+    parent: rum_browser
+    identifier: resource_performance
+    weight: 104
+  - name: ブラウザエラーの収集
+    url: real_user_monitoring/browser/collecting_browser_errors/
+    parent: rum_browser
+    identifier: collect_errors
+    weight: 105
+  - name: ユーザーアクションの追跡
+    url: real_user_monitoring/browser/tracking_user_actions/
+    parent: rum_browser
+    identifier: track_actions
+    weight: 106
+  - name: トラブルシューティング
+    url: real_user_monitoring/browser/troubleshooting/
+    parent: rum_browser
+    identifier: トラブルシューティング
+    weight: 107
   - name: Android モニタリング
     url: real_user_monitoring/android/
     parent: rum
-    identifier: android
+    identifier: rum_android
     weight: 2
+  - name: iOS モニタリング
+    url: real_user_monitoring/ios/
+    parent: rum
+    identifier: rum_ios
+    weight: 3
   - name: ダッシュボード
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 3
+    weight: 4
   - name: パフォーマンス概要
     url: real_user_monitoring/dashboards/performance_overview_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_performance
-    weight: 301
+    weight: 401
   - name: リソース
     url: real_user_monitoring/dashboards/resources_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_resources
-    weight: 302
+    weight: 402
   - name: Errors
     url: real_user_monitoring/dashboards/errors_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_errors
-    weight: 303
+    weight: 403
   - name: エクスプローラー
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 4
+    weight: 5
   - name: 検索
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 401
+    weight: 501
   - name: 分析
     url: real_user_monitoring/explorer/analytics/
     parent: rum_explorer
     identifier: rum_explorer_analytics
-    weight: 402
+    weight: 502
   - name: ロングタスク
     url: real_user_monitoring/data_collected/long_task
     parent: rum_data_collected
     identifier: rum_data_collected_long_task
-    weight: 403
+    weight: 503
   - name: エラー
     url: real_user_monitoring/data_collected/error
     parent: rum_data_collected
     identifier: rum_data_collected_error
-    weight: 404
+    weight: 504
   - name: ユーザーアクション
     url: real_user_monitoring/data_collected/user_action
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
-    weight: 405
+    weight: 505
+  - name: RUM とトレースの接続
+    url: real_user_monitoring/connect_rum_and_traces
+    parent: rum
+    identifier: rum_connect_rum_and_traces
+    weight: 6
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 5
+    weight: 7
   - name: エクスプローラー
     url: real_user_monitoring/error_tracking/explorer
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 501
+    weight: 701
   - name: ガイド
     url: real_user_monitoring/guide
     parent: rum
     identifier: rum_guides
-    weight: 6
+    weight: 8
   - name: ネットワークモニタリング
-    url: network_performance_monitoring/
+    url: network_monitoring/
     pre: nav_network
-    identifier: npm
+    identifier: nm_parent
     weight: 190000
-  - name: インストール
-    url: network_performance_monitoring/installation
+  - name: ネットワークパフォーマンスモニタリング
+    url: network_monitoring/performance/
+    parent: nm_parent
+    identifier: npm
+    weight: 100
+  - name: セットアップ
+    url: network_monitoring/performance/setup/
     parent: npm
-    identifier: npm_installation
-    weight: 1
+    identifier: npm_setup
+    weight: 101
   - name: ネットワークページ
-    url: network_performance_monitoring/network_page
+    url: network_monitoring/performance/network_page/
     parent: npm
     identifier: npm_page
-    weight: 2
+    weight: 102
   - name: ネットワークマップ
-    url: network_performance_monitoring/network_map
+    url: network_monitoring/performance/network_map/
     parent: npm
     identifier: npm_map
-    weight: 3
+    weight: 103
+  - name: ガイド
+    url: network_monitoring/performance/guide/
+    identifier: npm_guides
+    parent: npm
+    weight: 104
   - name: DNS モニタリング
-    url: network_performance_monitoring/dns_monitoring
-    parent: npm
+    url: network_monitoring/dns/
+    parent: nm_parent
     identifier: dns_monitoring
-    weight: 4
-  - name: デバイス
-    url: network_performance_monitoring/devices
-    parent: npm
+    weight: 200
+  - name: ネットワークデバイスモニタリング
+    url: network_monitoring/devices
+    parent: nm_parent
     identifier: ndm
-    weight: 500
+    weight: 300
   - name: セットアップ
-    url: network_performance_monitoring/devices/setup
+    url: network_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 501
+    weight: 301
   - name: プロファイル
-    url: network_performance_monitoring/devices/profiles
+    url: network_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 502
+    weight: 302
   - name: 収集データ
-    url: network_performance_monitoring/devices/data
+    url: network_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 503
+    weight: 303
   - name: トラブルシューティング
-    url: network_performance_monitoring/devices/troubleshooting
+    url: network_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 504
+    weight: 304
   - name: ガイド
-    url: network_performance_monitoring/devices/guide/
+    url: network_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 505
+    weight: 305
   - name: 開発ツール
     url: developers/
     pre: nav_developers
@@ -2186,1373 +2348,29 @@ main:
   - name: セキュリティ
     url: security/
     pre: nav_security
-    identifier: セキュリティ
+    identifier: security
     weight: 230000
   - name: エージェント
     url: security/agent/
-    parent: セキュリティ
+    parent: security
     weight: 1
   - name: APM（トレース）
     url: tracing/custom_instrumentation/agent_customization/
-    parent: セキュリティ
+    parent: security
     weight: 2
   - name: ログ管理
     url: security/logs/
-    parent: セキュリティ
+    parent: security
     weight: 3
   - name: その他の考慮事項
     url: security/other/
-    parent: セキュリティ
+    parent: security
     weight: 4
   - name: ヘルプ
     url: help/
     pre: nav_help
     identifier: help_top_level
     weight: 240000
-api_v1:
-  - name: 概要
-    url: /api/v1/
-    identifier: API V1 概要
-    weight: -10
-  - name: API の使用
-    url: /api/v1/using-the-api/
-    parent: API V1 概要
-    weight: 5
-  - name: レート制限
-    url: /api/v1/rate-limits/
-    parent: API V1 概要
-    weight: 6
-    identifier: rate-limits
-  - name: AWS インテグレーション
-    url: /api/v1/aws-integration/
-    identifier: AWS インテグレーション
-    generated: true
-  - name: AWS インテグレーションの削除
-    parent: AWS インテグレーション
-    url: '#delete-an-aws-integration'
-    generated: true
-  - name: すべての AWS インテグレーションのリスト
-    parent: AWS インテグレーション
-    url: '#list-all-aws-integrations'
-    generated: true
-  - name: AWS インテグレーションの作成
-    parent: AWS インテグレーション
-    url: '#create-an-aws-integration'
-    generated: true
-  - name: AWS インテグレーションの更新
-    parent: AWS インテグレーション
-    url: '#update-an-aws-integration'
-    generated: true
-  - name: ネームスペース規則のリスト
-    parent: AWS インテグレーション
-    url: '#list-namespace-rules'
-    generated: true
-  - name: 新しい外部 ID を生成する
-    parent: AWS インテグレーション
-    url: '#generate-a-new-external-id'
-    generated: true
-  - name: AWS ログインテグレーション
-    url: /api/v1/aws-logs-integration/
-    identifier: AWS ログインテグレーション
-    generated: true
-  - name: AWS ログインテグレーションの削除
-    parent: AWS ログインテグレーション
-    url: '#delete-an-aws-logs-integration'
-    generated: true
-  - name: すべての AWS ログインテグレーションのリスト
-    parent: AWS ログインテグレーション
-    url: '#list-all-aws-logs-integrations'
-    generated: true
-  - name: AWS ログ Lambda ARN の追加
-    parent: AWS ログインテグレーション
-    url: '#add-aws-log-lambda-arn'
-    generated: true
-  - name: AWS Lambda 関数の存在を確認
-    parent: AWS ログインテグレーション
-    url: '#check-that-an-aws-lambda-function-exists'
-    generated: true
-  - name: AWS ログレディサービスのリストを取得
-    parent: AWS ログインテグレーション
-    url: '#get-list-of-aws-log-ready-services'
-    generated: true
-  - name: AWS ログインテグレーションの有効化
-    parent: AWS ログインテグレーション
-    url: '#enable-an-aws-logs-integration'
-    generated: true
-  - name: ログサービスのアクセス許可を確認する
-    parent: AWS ログインテグレーション
-    url: '#check-permissions-for-log-services'
-    generated: true
-  - name: Authentication
-    url: /api/v1/authentication/
-    identifier: Authentication
-    generated: true
-  - name: API キーを検証する
-    parent: Authentication
-    url: '#validate-api-key'
-    generated: true
-  - name: Azure インテグレーション
-    url: /api/v1/azure-integration/
-    identifier: Azure インテグレーション
-    generated: true
-  - name: Azure インテグレーションの削除
-    parent: Azure インテグレーション
-    url: '#delete-an-azure-integration'
-    generated: true
-  - name: すべての Azure インテグレーションのリスト
-    parent: Azure インテグレーション
-    url: '#list-all-azure-integrations'
-    generated: true
-  - name: Azure インテグレーションの作成
-    parent: Azure インテグレーション
-    url: '#create-an-azure-integration'
-    generated: true
-  - name: Azure インテグレーションの更新
-    parent: Azure インテグレーション
-    url: '#update-an-azure-integration'
-    generated: true
-  - name: Azure インテグレーションホストフィルターを更新する
-    parent: Azure インテグレーション
-    url: '#update-azure-integration-host-filters'
-    generated: true
-  - name: ダッシュボードリスト
-    url: /api/v1/dashboard-lists/
-    identifier: ダッシュボードリスト
-    generated: true
-  - name: すべてのダッシュボードリストを取得する
-    parent: ダッシュボードリスト
-    url: '#get-all-dashboard-lists'
-    generated: true
-  - name: ダッシュボードリストを作成する
-    parent: ダッシュボードリスト
-    url: '#create-a-dashboard-list'
-    generated: true
-  - name: ダッシュボードリストを削除する
-    parent: ダッシュボードリスト
-    url: '#delete-a-dashboard-list'
-    generated: true
-  - name: ダッシュボードリストを取得する
-    parent: ダッシュボードリスト
-    url: '#get-a-dashboard-list'
-    generated: true
-  - name: ダッシュボードリストを更新する
-    parent: ダッシュボードリスト
-    url: '#update-a-dashboard-list'
-    generated: true
-  - name: ダッシュボード
-    url: /api/v1/dashboards/
-    identifier: ダッシュボード
-    generated: true
-  - name: すべてのダッシュボードを取得する
-    parent: ダッシュボード
-    url: '#get-all-dashboards'
-    generated: true
-  - name: 新しいダッシュボードを作成する
-    parent: ダッシュボード
-    url: '#create-a-new-dashboard'
-    generated: true
-  - name: ダッシュボードを削除する
-    parent: ダッシュボード
-    url: '#delete-a-dashboard'
-    generated: true
-  - name: ダッシュボードを取得する
-    parent: ダッシュボード
-    url: '#get-a-dashboard'
-    generated: true
-  - name: ダッシュボードを更新する
-    parent: ダッシュボード
-    url: '#update-a-dashboard'
-    generated: true
-  - name: ダウンタイム
-    url: /api/v1/downtimes/
-    identifier: ダウンタイム
-    generated: true
-  - name: すべてのダウンタイムを取得する
-    parent: ダウンタイム
-    url: '#get-all-downtimes'
-    generated: true
-  - name: ダウンタイムをスケジュールする
-    parent: ダウンタイム
-    url: '#schedule-a-downtime'
-    generated: true
-  - name: スコープごとにダウンタイムをキャンセルする
-    parent: ダウンタイム
-    url: '#cancel-downtimes-by-scope'
-    generated: true
-  - name: ダウンタイムをキャンセルする
-    parent: ダウンタイム
-    url: '#cancel-a-downtime'
-    generated: true
-  - name: ダウンタイムを取得する
-    parent: ダウンタイム
-    url: '#get-a-downtime'
-    generated: true
-  - name: ダウンタイムを更新する
-    parent: ダウンタイム
-    url: '#update-a-downtime'
-    generated: true
-  - name: 埋め込み可能なグラフ
-    url: /api/v1/embeddable-graphs/
-    identifier: 埋め込み可能なグラフ
-    generated: true
-  - name: すべての Embed を取得
-    parent: 埋め込み可能なグラフ
-    url: '#get-all-embeds'
-    generated: true
-  - name: Embed の作成
-    parent: 埋め込み可能なグラフ
-    url: '#create-embed'
-    generated: true
-  - name: 特定の Embed を取得
-    parent: 埋め込み可能なグラフ
-    url: '#get-specific-embed'
-    generated: true
-  - name: Embed の有効化
-    parent: 埋め込み可能なグラフ
-    url: '#enable-embed'
-    generated: true
-  - name: Embed の無効化
-    parent: 埋め込み可能なグラフ
-    url: '#revoke-embed'
-    generated: true
-  - name: イベント
-    url: /api/v1/events/
-    identifier: イベント
-    generated: true
-  - name: イベントストリームのクエリ
-    parent: イベント
-    url: '#query-the-event-stream'
-    generated: true
-  - name: イベントのポスト
-    parent: イベント
-    url: '#post-an-event'
-    generated: true
-  - name: イベントの取得
-    parent: イベント
-    url: '#get-an-event'
-    generated: true
-  - name: GCP インテグレーション
-    url: /api/v1/gcp-integration/
-    identifier: GCP インテグレーション
-    generated: true
-  - name: GCP インテグレーションの削除
-    parent: GCP インテグレーション
-    url: '#delete-a-gcp-integration'
-    generated: true
-  - name: すべての GCP インテグレーションのリスト
-    parent: GCP インテグレーション
-    url: '#list-all-gcp-integrations'
-    generated: true
-  - name: GCP インテグレーションの作成
-    parent: GCP インテグレーション
-    url: '#create-a-gcp-integration'
-    generated: true
-  - name: GCP インテグレーションを更新する
-    parent: GCP インテグレーション
-    url: '#update-a-gcp-integration'
-    generated: true
-  - name: ホスト
-    url: /api/v1/hosts/
-    identifier: ホスト
-    generated: true
-  - name: ホストのミュート
-    parent: ホスト
-    url: '#mute-a-host'
-    generated: true
-  - name: ホストのミュートを解除
-    parent: ホスト
-    url: '#unmute-a-host'
-    generated: true
-  - name: 組織のすべてのホストを取得する
-    parent: ホスト
-    url: '#get-all-hosts-for-your-organization'
-    generated: true
-  - name: アクティブなホストの総数を取得する
-    parent: ホスト
-    url: '#get-the-total-number-of-active-hosts'
-    generated: true
-  - name: IP 範囲
-    url: /api/v1/ip-ranges/
-    identifier: IP 範囲
-    generated: true
-  - name: IP 範囲を一覧表示する
-    parent: IP 範囲
-    url: '#list-ip-ranges'
-    generated: true
-  - name: Key Management
-    url: /api/v1/key-management/
-    identifier: Key Management
-    generated: true
-  - name: すべての API キーを取得
-    parent: Key Management
-    url: '#get-all-api-keys'
-    generated: true
-  - name: API キーの作成
-    parent: Key Management
-    url: '#create-an-api-key'
-    generated: true
-  - name: API キーの削除
-    parent: Key Management
-    url: '#delete-an-api-key'
-    generated: true
-  - name: API キーを取得する
-    parent: Key Management
-    url: '#get-api-key'
-    generated: true
-  - name: API キーの編集
-    parent: Key Management
-    url: '#edit-an-api-key'
-    generated: true
-  - name: すべてのアプリケーションキーを取得
-    parent: Key Management
-    url: '#get-all-application-keys'
-    generated: true
-  - name: アプリケーションキーの作成
-    parent: Key Management
-    url: '#create-an-application-key'
-    generated: true
-  - name: アプリケーションキーの削除
-    parent: Key Management
-    url: '#delete-an-application-key'
-    generated: true
-  - name: アプリケーションキーの取得
-    parent: Key Management
-    url: '#get-an-application-key'
-    generated: true
-  - name: アプリケーションキーの編集
-    parent: Key Management
-    url: '#edit-an-application-key'
-    generated: true
-  - name: ログ
-    url: /api/v1/logs/
-    identifier: ログ
-    generated: true
-  - name: ログのリストの取得
-    parent: ログ
-    url: '#get-a-list-of-logs'
-    generated: true
-  - name: ログを送信する
-    parent: ログ
-    url: '#send-logs'
-    generated: true
-  - name: ログアーカイブ
-    url: /api/v1/logs-archives/
-    identifier: ログアーカイブ
-    generated: true
-  - name: ログインデックス
-    url: /api/v1/logs-indexes/
-    identifier: ログインデックス
-    generated: true
-  - name: インデックス順序を取得する
-    parent: ログインデックス
-    url: '#get-indexes-order'
-    generated: true
-  - name: インデックス順序を更新する
-    parent: ログインデックス
-    url: '#update-indexes-order'
-    generated: true
-  - name: すべてのインデックスを取得する
-    parent: ログインデックス
-    url: '#get-all-indexes'
-    generated: true
-  - name: インデックスを取得する
-    parent: ログインデックス
-    url: '#get-an-index'
-    generated: true
-  - name: インデックスを更新する
-    parent: ログインデックス
-    url: '#update-an-index'
-    generated: true
-  - name: "ログパイプライン\n\_"
-    url: /api/v1/logs-pipelines/
-    identifier: "ログパイプライン\n\_"
-    generated: true
-  - name: パイプライン順序を取得する
-    parent: "ログパイプライン\n\_"
-    url: '#get-pipeline-order'
-    generated: true
-  - name: パイプライン順序を更新する
-    parent: "ログパイプライン\n\_"
-    url: '#update-pipeline-order'
-    generated: true
-  - name: すべてのパイプラインを取得する
-    parent: "ログパイプライン\n\_"
-    url: '#get-all-pipelines'
-    generated: true
-  - name: パイプラインを作成する
-    parent: "ログパイプライン\n\_"
-    url: '#create-a-pipeline'
-    generated: true
-  - name: パイプラインを削除する
-    parent: "ログパイプライン\n\_"
-    url: '#delete-a-pipeline'
-    generated: true
-  - name: パイプラインを取得する
-    parent: "ログパイプライン\n\_"
-    url: '#get-a-pipeline'
-    generated: true
-  - name: パイプラインを更新する
-    parent: "ログパイプライン\n\_"
-    url: '#update-a-pipeline'
-    generated: true
-  - name: ログ制限クエリ
-    url: /api/v1/logs-restriction-queries/
-    identifier: ログ制限クエリ
-    generated: true
-  - name: メトリクス
-    url: /api/v1/metrics/
-    identifier: メトリクス
-    generated: true
-  - name: アクティブメトリクスのリストを取得する
-    parent: メトリクス
-    url: '#get-active-metrics-list'
-    generated: true
-  - name: メトリクスのメタデータを取得する
-    parent: メトリクス
-    url: '#get-metric-metadata'
-    generated: true
-  - name: メトリクスのメタデータを編集
-    parent: メトリクス
-    url: '#edit-metric-metadata'
-    generated: true
-  - name: 時系列ポイントのクエリ
-    parent: メトリクス
-    url: '#query-timeseries-points'
-    generated: true
-  - name: メトリクスの検索
-    parent: メトリクス
-    url: '#search-metrics'
-    generated: true
-  - name: メトリクスを送信する
-    parent: メトリクス
-    url: '#submit-metrics'
-    generated: true
-  - name: モニター
-    url: /api/v1/monitors/
-    identifier: モニター
-    generated: true
-  - name: 全モニターの詳細を取得
-    parent: モニター
-    url: '#get-all-monitor-details'
-    generated: true
-  - name: モニターの作成
-    parent: モニター
-    url: '#create-a-monitor'
-    generated: true
-  - name: モニターの削除が可能かどうか確認
-    parent: モニター
-    url: '#check-if-a-monitor-can-be-deleted'
-    generated: true
-  - name: モニターグループの検索
-    parent: モニター
-    url: '#monitors-group-search'
-    generated: true
-  - name: モニターの検索
-    parent: モニター
-    url: '#monitors-search'
-    generated: true
-  - name: モニターの検証
-    parent: モニター
-    url: '#validate-a-monitor'
-    generated: true
-  - name: モニターの削除
-    parent: モニター
-    url: '#delete-a-monitor'
-    generated: true
-  - name: モニターの詳細を取得
-    parent: モニター
-    url: '#get-a-monitors-details'
-    generated: true
-  - name: モニターの編集
-    parent: モニター
-    url: '#edit-a-monitor'
-    generated: true
-  - name: モニターのミュート
-    parent: モニター
-    url: '#mute-a-monitor'
-    generated: true
-  - name: モニターのミュートを解除
-    parent: モニター
-    url: '#unmute-a-monitor'
-    generated: true
-  - name: モニターを解決する
-    parent: モニター
-    url: '#resolve-monitor'
-    generated: true
-  - name: 全モニターのミュート
-    parent: モニター
-    url: '#mute-all-monitors'
-    generated: true
-  - name: 全モニターのミュートを解除
-    parent: モニター
-    url: '#unmute-all-monitors'
-    generated: true
-  - name: Organizations
-    url: /api/v1/organizations/
-    identifier: Organizations
-    generated: true
-  - name: 管理している組織を一覧表示する
-    parent: Organizations
-    url: '#list-your-managed-organizations'
-    generated: true
-  - name: 子組織を作成する
-    parent: Organizations
-    url: '#create-a-child-organization'
-    generated: true
-  - name: 組織情報を取得する
-    parent: Organizations
-    url: '#get-organization-information'
-    generated: true
-  - name: 組織を更新する
-    parent: Organizations
-    url: '#update-your-organization'
-    generated: true
-  - name: IdP メタデータをアップロード
-    parent: Organizations
-    url: '#upload-idp-metadata'
-    generated: true
-  - name: PagerDuty インテグレーション
-    url: /api/v1/pagerduty-integration/
-    identifier: PagerDuty インテグレーション
-    generated: true
-  - name: 新しいサービスオブジェクトを作成する
-    parent: PagerDuty インテグレーション
-    url: '#create-a-new-service-object'
-    generated: true
-  - name: 単一のサービスオブジェクトを削除する
-    parent: PagerDuty インテグレーション
-    url: '#delete-a-single-service-object'
-    generated: true
-  - name: 単一のサービスオブジェクトを取得する
-    parent: PagerDuty インテグレーション
-    url: '#get-a-single-service-object'
-    generated: true
-  - name: 単一のサービスオブジェクトを更新する
-    parent: PagerDuty インテグレーション
-    url: '#update-a-single-service-object'
-    generated: true
-  - name: ロール
-    url: /api/v1/roles/
-    identifier: ロール
-    generated: true
-  - name: スクリーンボード
-    url: /api/v1/screenboards/
-    identifier: スクリーンボード
-    generated: true
-  - name: セキュリティモニタリング
-    url: /api/v1/security-monitoring/
-    identifier: セキュリティモニタリング
-    generated: true
-  - name: サービスのチェック
-    url: /api/v1/service-checks/
-    identifier: サービスのチェック
-    generated: true
-  - name: サービスチェックを送信する
-    parent: サービスのチェック
-    url: '#submit-a-service-check'
-    generated: true
-  - name: サービスの依存関係
-    url: /api/v1/service-dependencies/
-    identifier: サービスの依存関係
-    generated: true
-  - name: すべての APM サービスの依存関係を取得
-    parent: サービスの依存関係
-    url: '#get-all-apm-service-dependencies'
-    generated: true
-  - name: 1 つの APM サービスの依存関係を取得
-    parent: サービスの依存関係
-    url: '#get-one-apm-services-dependencies'
-    generated: true
-  - name: サービスレベル目標
-    url: /api/v1/service-level-objectives/
-    identifier: サービスレベル目標
-    generated: true
-  - name: SLO を検索する
-    parent: サービスレベル目標
-    url: '#search-slos'
-    generated: true
-  - name: SLO オブジェクトを作成する
-    parent: サービスレベル目標
-    url: '#create-a-slo-object'
-    generated: true
-  - name: SLO タイムフレームを一括削除する
-    parent: サービスレベル目標
-    url: '#bulk-delete-slo-timeframes'
-    generated: true
-  - name: SLO を安全に削除できるかどうかを確認する
-    parent: サービスレベル目標
-    url: '#check-if-slos-can-be-safely-deleted'
-    generated: true
-  - name: SLO を削除する
-    parent: サービスレベル目標
-    url: '#delete-a-slo'
-    generated: true
-  - name: SLO の詳細を取得する
-    parent: サービスレベル目標
-    url: '#get-a-slos-details'
-    generated: true
-  - name: SLO を更新する
-    parent: サービスレベル目標
-    url: '#update-a-slo'
-    generated: true
-  - name: SLO の履歴を取得する
-    parent: サービスレベル目標
-    url: '#get-an-slos-history'
-    generated: true
-  - name: Slack インテグレーション
-    url: /api/v1/slack-integration/
-    identifier: Slack インテグレーション
-    generated: true
-  - name: Slack インテグレーションの削除
-    parent: Slack インテグレーション
-    url: '#delete-a-slack-integration'
-    generated: true
-  - name: Slack インテグレーションに関する情報を取得する
-    parent: Slack インテグレーション
-    url: '#get-info-about-a-slack-integration'
-    generated: true
-  - name: Slack インテグレーションの作成
-    parent: Slack インテグレーション
-    url: '#create-a-slack-integration'
-    generated: true
-  - name: Slack インテグレーションにチャネルを追加
-    parent: Slack インテグレーション
-    url: '#add-channels-to-slack-integration'
-    generated: true
-  - name: Slack インテグレーションのすべてのチャンネルを取得
-    parent: Slack インテグレーション
-    url: '#get-all-channels-in-a-slack-integration'
-    generated: true
-  - name: Slack インテグレーションチャンネルの作成
-    parent: Slack インテグレーション
-    url: '#create-a-slack-integration-channel'
-    generated: true
-  - name: Slack インテグレーションチャンネルの削除
-    parent: Slack インテグレーション
-    url: '#remove-a-slack-integration-channel'
-    generated: true
-  - name: Slack インテグレーションチャンネルの取得
-    parent: Slack インテグレーション
-    url: '#get-a-slack-integration-channel'
-    generated: true
-  - name: Slack インテグレーションチャンネルの更新
-    parent: Slack インテグレーション
-    url: '#update-a-slack-integration-channel'
-    generated: true
-  - name: スナップショット
-    url: /api/v1/snapshots/
-    identifier: スナップショット
-    generated: true
-  - name: グラフのスナップショットを撮る
-    parent: スナップショット
-    url: '#take-graph-snapshots'
-    generated: true
-  - name: Synthetics
-    url: /api/v1/synthetics/
-    identifier: Synthetics
-    generated: true
-  - name: ロケーションをすべて取得する（パブリックおよびプライベート）
-    parent: Synthetics
-    url: '#get-all-locations-public-and-private'
-    generated: true
-  - name: すべてのテストのリストを取得する
-    parent: Synthetics
-    url: '#get-the-list-of-all-tests'
-    generated: true
-  - name: テストの作成
-    parent: Synthetics
-    url: '#create-a-test'
-    generated: true
-  - name: テストコンフィギュレーションを取得する（ブラウザ）
-    parent: Synthetics
-    url: '#get-a-test-configuration-browser'
-    generated: true
-  - name: テストの最新結果の要約を取得する (ブラウザ)
-    parent: Synthetics
-    url: '#get-the-tests-latest-results-summaries-browser'
-    generated: true
-  - name: テスト結果を取得する (ブラウザ)
-    parent: Synthetics
-    url: '#get-a-test-result-browser'
-    generated: true
-  - name: テストの削除
-    parent: Synthetics
-    url: '#delete-tests'
-    generated: true
-  - name: CI の Synthetic テストのトリガー
-    parent: Synthetics
-    url: '#trigger-some-synthetics-tests-for-ci'
-    generated: true
-  - name: テストコンフィギュレーションを取得する（API）
-    parent: Synthetics
-    url: '#get-a-test-configuration-api'
-    generated: true
-  - name: テストの編集
-    parent: Synthetics
-    url: '#edit-a-test'
-    generated: true
-  - name: テストの最新結果の要約を取得する (API)
-    parent: Synthetics
-    url: '#get-the-tests-latest-results-summaries-api'
-    generated: true
-  - name: テスト結果を取得する (API)
-    parent: Synthetics
-    url: '#get-a-test-result-api'
-    generated: true
-  - name: テストを一時停止または開始する
-    parent: Synthetics
-    url: '#pause-or-start-a-test'
-    generated: true
-  - name: グローバル変数を作成する
-    parent: Synthetics
-    url: '#create-a-global-variable'
-    generated: true
-  - name: グローバル変数を削除する
-    parent: Synthetics
-    url: '#delete-a-global-variable'
-    generated: true
-  - name: グローバル変数を取得する
-    parent: Synthetics
-    url: '#get-a-global-variable'
-    generated: true
-  - name: グローバル変数を編集する
-    parent: Synthetics
-    url: '#edit-a-global-variable'
-    generated: true
-  - name: タグ
-    url: /api/v1/tags/
-    identifier: タグ
-    generated: true
-  - name: タグを取得する
-    parent: タグ
-    url: '#get-tags'
-    generated: true
-  - name: ホストタグの削除
-    parent: タグ
-    url: '#remove-host-tags'
-    generated: true
-  - name: ホストタグの取得
-    parent: タグ
-    url: '#get-host-tags'
-    generated: true
-  - name: ホストへのタグの追加
-    parent: タグ
-    url: '#add-tags-to-a-host'
-    generated: true
-  - name: ホストタグの更新
-    parent: タグ
-    url: '#update-host-tags'
-    generated: true
-  - name: タイムボード
-    url: /api/v1/timeboards/
-    identifier: タイムボード
-    generated: true
-  - name: トレーシング
-    url: /api/v1/tracing/
-    identifier: トレーシング
-    generated: true
-  - name: トレースの送信
-    parent: トレーシング
-    url: '#send-traces'
-    generated: true
-  - name: 使用料のメータリング
-    url: /api/v1/usage-metering/
-    identifier: 使用料のメータリング
-    generated: true
-  - name: 利用可能な日刊カスタムレポートのリストを取得
-    parent: 使用料のメータリング
-    url: '#get-the-list-of-available-daily-custom-reports'
-    generated: true
-  - name: 指定された日刊カスタムレポートを取得
-    parent: 使用料のメータリング
-    url: '#get-specified-daily-custom-reports'
-    generated: true
-  - name: 利用可能な月刊カスタムレポートのリストを取得します
-    parent: 使用料のメータリング
-    url: '#get-the-list-of-available-monthly-custom-reports'
-    generated: true
-  - name: 特定の月刊カスタムレポートを取得します
-    parent: 使用料のメータリング
-    url: '#get-specified-monthly-custom-reports'
-    generated: true
-  - name: 分析されたログの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-analyzed-logs'
-    generated: true
-  - name: Lambda の 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-lambda'
-    generated: true
-  - name: マルチオーガニゼーションのアカウント全体の請求対象使用量を取得します
-    parent: 使用料のメータリング
-    url: '#get-billable-usage-across-your-multi-org-account'
-    generated: true
-  - name: Fargate の 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-fargate'
-    generated: true
-  - name: ホストとコンテナの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-hosts-and-containers'
-    generated: true
-  - name: インデックス化されたスパンの 1 時間あたり使用量を取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-indexed-spans'
-    generated: true
-  - name: 取り込まれたスパンの 1 時間あたり使用量を取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-ingested-spans'
-    generated: true
-  - name: ログの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-logs'
-    generated: true
-  - name: インデックスごとにログの 1 時間あたり使用量を取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-logs-by-index'
-    generated: true
-  - name: ネットワークフローの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-network-flows'
-    generated: true
-  - name: ネットワークホストの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-network-hosts'
-    generated: true
-  - name: プロファイルされたホストの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-profiled-hosts'
-    generated: true
-  - name: RUM セッションの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-rum-sessions'
-    generated: true
-  - name: SNMP デバイスの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-snmp-devices'
-    generated: true
-  - name: マルチオーガニゼーションのアカウント全体の使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-usage-across-your-multi-org-account'
-    generated: true
-  - name: Synthetics チェックの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-synthetics-checks'
-    generated: true
-  - name: Synthetics API チェックの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-synthetics-api-checks'
-    generated: true
-  - name: Synthetics Browser チェックの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-synthetics-browser-checks'
-    generated: true
-  - name: カスタムメトリクスの 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-custom-metrics'
-    generated: true
-  - name: 時間平均に基づくカスタムメトリクス上位 500 の取得
-    parent: 使用料のメータリング
-    url: '#get-top-500-custom-metrics-by-hourly-average'
-    generated: true
-  - name: トレース検索の 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-trace-search'
-    generated: true
-  - name: Tracing without Limits の 1 時間あたり使用量の取得
-    parent: 使用料のメータリング
-    url: '#get-hourly-usage-for-tracing-without-limits'
-    generated: true
-  - name: ユーザー
-    url: /api/v1/users/
-    identifier: ユーザー
-    generated: true
-  - name: すべてのユーザーを一覧表示する
-    parent: ユーザー
-    url: '#list-all-users'
-    generated: true
-  - name: ユーザーを作成する
-    parent: ユーザー
-    url: '#create-a-user'
-    generated: true
-  - name: ユーザーを無効にする
-    parent: ユーザー
-    url: '#disable-a-user'
-    generated: true
-  - name: ユーザーの詳細を取得する
-    parent: ユーザー
-    url: '#get-user-details'
-    generated: true
-  - name: ユーザーを更新する
-    parent: ユーザー
-    url: '#update-a-user'
-    generated: true
-  - name: Webhook インテグレーション
-    url: /api/v1/webhooks-integration/
-    identifier: Webhook インテグレーション
-    generated: true
-  - name: カスタム変数を作成する
-    parent: Webhook インテグレーション
-    url: '#create-a-custom-variable'
-    generated: true
-  - name: カスタム変数を削除する
-    parent: Webhook インテグレーション
-    url: '#delete-a-custom-variable'
-    generated: true
-  - name: カスタム変数を取得する
-    parent: Webhook インテグレーション
-    url: '#get-a-custom-variable'
-    generated: true
-  - name: カスタム変数を更新する
-    parent: Webhook インテグレーション
-    url: '#update-a-custom-variable'
-    generated: true
-  - name: Webhook インテグレーションを作成する
-    parent: Webhook インテグレーション
-    url: '#create-a-webhooks-integration'
-    generated: true
-  - name: Webhook を削除する
-    parent: Webhook インテグレーション
-    url: '#delete-a-webhook'
-    generated: true
-  - name: Webhook インテグレーションを取得する
-    parent: Webhook インテグレーション
-    url: '#get-a-webhook-integration'
-    generated: true
-  - name: Webhook を更新する
-    parent: Webhook インテグレーション
-    url: '#update-a-webhook'
-    generated: true
-api_v2:
-  - name: 概要
-    url: /api/v2/
-    identifier: API V2 概要
-    weight: -10
-  - name: API の使用
-    url: /api/v2/using-the-api/
-    parent: API V2 概要
-    weight: 5
-  - name: レート制限
-    url: /api/v2/rate-limits/
-    parent: API V2 概要
-    weight: 6
-    identifier: rate-limits
-  - name: AWS インテグレーション
-    url: /api/v2/aws-integration/
-    identifier: AWS インテグレーション
-    generated: true
-  - name: AWS ログインテグレーション
-    url: /api/v2/aws-logs-integration/
-    identifier: AWS ログインテグレーション
-    generated: true
-  - name: Authentication
-    url: /api/v2/authentication/
-    identifier: Authentication
-    generated: true
-  - name: Azure インテグレーション
-    url: /api/v2/azure-integration/
-    identifier: Azure インテグレーション
-    generated: true
-  - name: ダッシュボードリスト
-    url: /api/v2/dashboard-lists/
-    identifier: ダッシュボードリスト
-    generated: true
-  - name: ダッシュボードリストからアイテムを削除する
-    parent: ダッシュボードリスト
-    url: '#delete-items-from-a-dashboard-list'
-    generated: true
-  - name: ダッシュボードリストの取得
-    parent: ダッシュボードリスト
-    url: '#get-a-dashboard-list'
-    generated: true
-  - name: ダッシュボードリストへの項目の追加
-    parent: ダッシュボードリスト
-    url: '#add-items-to-a-dashboard-list'
-    generated: true
-  - name: ダッシュボードリストのアイテムを更新する
-    parent: ダッシュボードリスト
-    url: '#update-items-of-a-dashboard-list'
-    generated: true
-  - name: ダッシュボード
-    url: /api/v2/dashboards/
-    identifier: ダッシュボード
-    generated: true
-  - name: ダウンタイム
-    url: /api/v2/downtimes/
-    identifier: ダウンタイム
-    generated: true
-  - name: 埋め込み可能なグラフ
-    url: /api/v2/embeddable-graphs/
-    identifier: 埋め込み可能なグラフ
-    generated: true
-  - name: イベント
-    url: /api/v2/events/
-    identifier: イベント
-    generated: true
-  - name: GCP インテグレーション
-    url: /api/v2/gcp-integration/
-    identifier: GCP インテグレーション
-    generated: true
-  - name: ホスト
-    url: /api/v2/hosts/
-    identifier: ホスト
-    generated: true
-  - name: IP 範囲
-    url: /api/v2/ip-ranges/
-    identifier: IP 範囲
-    generated: true
-  - name: インシデントサービス
-    url: /api/v2/incident-services/
-    identifier: インシデントサービス
-    generated: true
-  - name: すべてのインシデントサービスのリストを取得する
-    parent: インシデントサービス
-    url: '#get-a-list-of-all-incident-services'
-    generated: true
-  - name: 新しいインシデントサービスを作成する
-    parent: インシデントサービス
-    url: '#create-a-new-incident-service'
-    generated: true
-  - name: 既存のインシデントサービスを削除する
-    parent: インシデントサービス
-    url: '#delete-an-existing-incident-service'
-    generated: true
-  - name: インシデントサービスの詳細を取得する
-    parent: インシデントサービス
-    url: '#get-details-of-an-incident-service'
-    generated: true
-  - name: 既存のインシデントサービスを更新する
-    parent: インシデントサービス
-    url: '#update-an-existing-incident-service'
-    generated: true
-  - name: インシデントチーム
-    url: /api/v2/incident-teams/
-    identifier: インシデントチーム
-    generated: true
-  - name: すべてのインシデントチームのリストを取得する
-    parent: インシデントチーム
-    url: '#get-a-list-of-all-incident-teams'
-    generated: true
-  - name: 新しいインシデントチームを作成する
-    parent: インシデントチーム
-    url: '#create-a-new-incident-team'
-    generated: true
-  - name: 既存のインシデントチームを削除する
-    parent: インシデントチーム
-    url: '#delete-an-existing-incident-team'
-    generated: true
-  - name: インシデントチームの詳細を取得する
-    parent: インシデントチーム
-    url: '#get-details-of-an-incident-team'
-    generated: true
-  - name: 既存のインシデントチームを更新する
-    parent: インシデントチーム
-    url: '#update-an-existing-incident-team'
-    generated: true
-  - name: Key Management
-    url: /api/v2/key-management/
-    identifier: Key Management
-    generated: true
-  - name: ログ
-    url: /api/v2/logs/
-    identifier: ログ
-    generated: true
-  - name: イベントを集計する
-    parent: ログ
-    url: '#aggregate-events'
-    generated: true
-  - name: ログの簡易リストの取得
-    parent: ログ
-    url: '#get-a-quick-list-of-logs'
-    generated: true
-  - name: ログのリストの取得
-    parent: ログ
-    url: '#get-a-list-of-logs'
-    generated: true
-  - name: ログアーカイブ
-    url: /api/v2/logs-archives/
-    identifier: ログアーカイブ
-    generated: true
-  - name: アーカイブの順序を取得する
-    parent: ログアーカイブ
-    url: '#get-archive-order'
-    generated: true
-  - name: アーカイブの順序を更新する
-    parent: ログアーカイブ
-    url: '#update-archive-order'
-    generated: true
-  - name: すべてのアーカイブを取得する
-    parent: ログアーカイブ
-    url: '#get-all-archives'
-    generated: true
-  - name: アーカイブを作成する
-    parent: ログアーカイブ
-    url: '#create-an-archive'
-    generated: true
-  - name: アーカイブを削除する
-    parent: ログアーカイブ
-    url: '#delete-an-archive'
-    generated: true
-  - name: アーカイブを取得する
-    parent: ログアーカイブ
-    url: '#get-an-archive'
-    generated: true
-  - name: アーカイブを更新する
-    parent: ログアーカイブ
-    url: '#update-an-archive'
-    generated: true
-  - name: アーカイブからロールを取り消す
-    parent: ログアーカイブ
-    url: '#revoke-role-from-an-archive'
-    generated: true
-  - name: アーカイブの読み取りロールを一覧表示する
-    parent: ログアーカイブ
-    url: '#list-read-roles-for-an-archive'
-    generated: true
-  - name: アーカイブにロールを付与する
-    parent: ログアーカイブ
-    url: '#grant-role-to-an-archive'
-    generated: true
-  - name: ログインデックス
-    url: /api/v2/logs-indexes/
-    identifier: ログインデックス
-    generated: true
-  - name: ログパイプライン
-    url: /api/v2/logs-pipelines/
-    identifier: ログパイプライン
-    generated: true
-  - name: ログ制限クエリ
-    url: /api/v2/logs-restriction-queries/
-    identifier: ログ制限クエリ
-    generated: true
-  - name: 制限クエリを一覧表示する
-    parent: ログ制限クエリ
-    url: '#list-restriction-queries'
-    generated: true
-  - name: 制限クエリを作成する
-    parent: ログ制限クエリ
-    url: '#create-a-restriction-query'
-    generated: true
-  - name: 特定のロールの制限クエリを取得する
-    parent: ログ制限クエリ
-    url: '#get-restriction-query-for-a-given-role'
-    generated: true
-  - name: 特定のユーザーのすべての制限クエリを取得する
-    parent: ログ制限クエリ
-    url: '#get-all-restriction-queries-for-a-given-user'
-    generated: true
-  - name: 制限クエリを削除する
-    parent: ログ制限クエリ
-    url: '#delete-a-restriction-query'
-    generated: true
-  - name: 制限クエリを取得する
-    parent: ログ制限クエリ
-    url: '#get-a-restriction-query'
-    generated: true
-  - name: 制限クエリを更新する
-    parent: ログ制限クエリ
-    url: '#update-a-restriction-query'
-    generated: true
-  - name: 制限クエリからロールを取り消す
-    parent: ログ制限クエリ
-    url: '#revoke-role-from-a-restriction-query'
-    generated: true
-  - name: 制限クエリのロールを一覧表示する
-    parent: ログ制限クエリ
-    url: '#list-roles-for-a-restriction-query'
-    generated: true
-  - name: 制限クエリにロールを付与する
-    parent: ログ制限クエリ
-    url: '#grant-role-to-a-restriction-query'
-    generated: true
-  - name: メトリクス
-    url: /api/v2/metrics/
-    identifier: メトリクス
-    generated: true
-  - name: モニター
-    url: /api/v2/monitors/
-    identifier: モニター
-    generated: true
-  - name: Organizations
-    url: /api/v2/organizations/
-    identifier: Organizations
-    generated: true
-  - name: PagerDuty インテグレーション
-    url: /api/v2/pagerduty-integration/
-    identifier: PagerDuty インテグレーション
-    generated: true
-  - name: ロール
-    url: /api/v2/roles/
-    identifier: ロール
-    generated: true
-  - name: アクセス許可を一覧表示する
-    parent: ロール
-    url: '#list-permissions'
-    generated: true
-  - name: ロールを一覧表示する
-    parent: ロール
-    url: '#list-roles'
-    generated: true
-  - name: ロールを作成する
-    parent: ロール
-    url: '#create-role'
-    generated: true
-  - name: ロールの削除
-    parent: ロール
-    url: '#delete-role'
-    generated: true
-  - name: ロールを取得する
-    parent: ロール
-    url: '#get-a-role'
-    generated: true
-  - name: ロールを更新する
-    parent: ロール
-    url: '#update-a-role'
-    generated: true
-  - name: アクセス許可の取り消し
-    parent: ロール
-    url: '#revoke-permission'
-    generated: true
-  - name: ロールのアクセス許可を一覧表示する
-    parent: ロール
-    url: '#list-permissions-for-a-role'
-    generated: true
-  - name: ロールにアクセス許可を付与する
-    parent: ロール
-    url: '#grant-permission-to-a-role'
-    generated: true
-  - name: ロールからユーザーを削除
-    parent: ロール
-    url: '#remove-a-user-from-a-role'
-    generated: true
-  - name: ロールのすべてのユーザーの取得
-    parent: ロール
-    url: '#get-all-users-of-a-role'
-    generated: true
-  - name: ロールにユーザーを追加する
-    parent: ロール
-    url: '#add-a-user-to-a-role'
-    generated: true
-  - name: スクリーンボード
-    url: /api/v2/screenboards/
-    identifier: スクリーンボード
-    generated: true
-  - name: セキュリティモニタリング
-    url: /api/v2/security-monitoring/
-    identifier: セキュリティモニタリング
-    generated: true
-  - name: 規則のリスト
-    parent: セキュリティモニタリング
-    url: '#list-rules'
-    generated: true
-  - name: 検出ルールを作成する
-    parent: セキュリティモニタリング
-    url: '#create-a-detection-rule'
-    generated: true
-  - name: 既存の規則を削除します
-    parent: セキュリティモニタリング
-    url: '#delete-an-existing-rule'
-    generated: true
-  - name: 規則の詳細を取得する
-    parent: セキュリティモニタリング
-    url: '#get-a-rules-details'
-    generated: true
-  - name: 既存の規則を更新します
-    parent: セキュリティモニタリング
-    url: '#update-an-existing-rule'
-    generated: true
-  - name: セキュリティシグナルの簡易リストの取得
-    parent: セキュリティモニタリング
-    url: '#get-a-quick-list-of-security-signals'
-    generated: true
-  - name: セキュリティシグナルのリストの取得
-    parent: セキュリティモニタリング
-    url: '#get-a-list-of-security-signals'
-    generated: true
-  - name: サービスのチェック
-    url: /api/v2/service-checks/
-    identifier: サービスのチェック
-    generated: true
-  - name: サービスの依存関係
-    url: /api/v2/service-dependencies/
-    identifier: サービスの依存関係
-    generated: true
-  - name: サービスレベル目標
-    url: /api/v2/service-level-objectives/
-    identifier: サービスレベル目標
-    generated: true
-  - name: Slack インテグレーション
-    url: /api/v2/slack-integration/
-    identifier: Slack インテグレーション
-    generated: true
-  - name: スナップショット
-    url: /api/v2/snapshots/
-    identifier: スナップショット
-    generated: true
-  - name: Synthetics
-    url: /api/v2/synthetics/
-    identifier: Synthetics
-    generated: true
-  - name: タグ
-    url: /api/v2/tags/
-    identifier: タグ
-    generated: true
-  - name: タイムボード
-    url: /api/v2/timeboards/
-    identifier: タイムボード
-    generated: true
-  - name: トレーシング
-    url: /api/v2/tracing/
-    identifier: トレーシング
-    generated: true
-  - name: 使用料のメータリング
-    url: /api/v2/usage-metering/
-    identifier: 使用料のメータリング
-    generated: true
-  - name: ユーザー
-    url: /api/v2/users/
-    identifier: ユーザー
-    generated: true
-  - name: 招待メールを送信する
-    parent: ユーザー
-    url: '#send-invitation-emails'
-    generated: true
-  - name: ユーザー招待を取得
-    parent: ユーザー
-    url: '#get-a-user-invitation'
-    generated: true
-  - name: すべてのユーザーを一覧表示する
-    parent: ユーザー
-    url: '#list-all-users'
-    generated: true
-  - name: ユーザーを作成する
-    parent: ユーザー
-    url: '#create-a-user'
-    generated: true
-  - name: ユーザーを無効にする
-    parent: ユーザー
-    url: '#disable-a-user'
-    generated: true
-  - name: ユーザーの詳細を取得する
-    parent: ユーザー
-    url: '#get-user-details'
-    generated: true
-  - name: ユーザーを更新する
-    parent: ユーザー
-    url: '#update-a-user'
-    generated: true
-  - name: ユーザー組織を取得する
-    parent: ユーザー
-    url: '#get-a-user-organization'
-    generated: true
-  - name: ユーザーアクセス許可を取得する
-    parent: ユーザー
-    url: '#get-a-user-permissions'
-    generated: true
-  - name: Webhook インテグレーション
-    url: /api/v2/webhooks-integration/
-    identifier: Webhook インテグレーション
-    generated: true
 footer_product:
   - name: 機能
     url: 'https://www.datadoghq.com/ja/product/'
@@ -3584,7 +2402,7 @@ footer_product:
   - name: リアルユーザーモニタリング
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
-  - name: Incident Management
+  - name: インシデント管理
     url: 'https://www.datadoghq.com/product/incident-management/'
     weight: 136
   - name: サーバーレス
@@ -3690,3 +2508,3453 @@ footer_sub:
   - name: Cookie
     url: 'https://www.datadoghq.com/legal/cookies/'
     weight: 130
+api:
+  - name: 概要
+    url: /api/latest/
+    identifier: API 概要
+    weight: -10
+  - name: API の使用
+    url: /api/latest/using-the-api/
+    parent: API 概要
+    weight: 5
+  - name: レート制限
+    url: /api/latest/rate-limits/
+    parent: API 概要
+    weight: 6
+    identifier: rate-limits
+  - name: AWS インテグレーション
+    url: /api/latest/aws-integration/
+    identifier: aws-integration
+    generated: true
+  - name: 新しい外部 ID を生成する
+    url: '#generate-a-new-external-id'
+    identifier: generate-a-new-external-id
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateNewAWSExternalID
+      unstable: []
+  - name: AWS タグフィルターを設定
+    url: '#set-an-aws-tag-filter'
+    identifier: set-an-aws-tag-filter
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAWSTagFilter
+      unstable: []
+  - name: すべての AWS タグフィルターを取得
+    url: '#get-all-aws-tag-filters'
+    identifier: get-all-aws-tag-filters
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSTagFilters
+      unstable: []
+  - name: タグのフィルタリングエントリを削除
+    url: '#delete-a-tag-filtering-entry'
+    identifier: delete-a-tag-filtering-entry
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAWSTagFilter
+      unstable: []
+  - name: ネームスペース規則のリスト
+    url: '#list-namespace-rules'
+    identifier: list-namespace-rules
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAvailableAWSNamespaces
+      unstable: []
+  - name: AWS インテグレーションの更新
+    url: '#update-an-aws-integration'
+    identifier: update-an-aws-integration
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAWSAccount
+      unstable: []
+  - name: AWS インテグレーションの作成
+    url: '#create-an-aws-integration'
+    identifier: create-an-aws-integration
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAWSAccount
+      unstable: []
+  - name: すべての AWS インテグレーションのリスト
+    url: '#list-all-aws-integrations'
+    identifier: list-all-aws-integrations
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSAccounts
+      unstable: []
+  - name: AWS インテグレーションの削除
+    url: '#delete-an-aws-integration'
+    identifier: delete-an-aws-integration
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAWSAccount
+      unstable: []
+  - name: AWS ログインテグレーション
+    url: /api/latest/aws-logs-integration/
+    identifier: aws-logs-integration
+    generated: true
+  - name: ログサービスのアクセス許可を確認する
+    url: '#check-permissions-for-log-services'
+    identifier: check-permissions-for-log-services
+    parent: aws-logs-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CheckAWSLogsServicesAsync
+      unstable: []
+  - name: AWS ログインテグレーションの有効化
+    url: '#enable-an-aws-logs-integration'
+    identifier: enable-an-aws-logs-integration
+    parent: aws-logs-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - EnableAWSLogServices
+      unstable: []
+  - name: AWS ログレディサービスのリストを取得
+    url: '#get-list-of-aws-log-ready-services'
+    identifier: get-list-of-aws-log-ready-services
+    parent: aws-logs-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSLogsServices
+      unstable: []
+  - name: AWS Lambda 関数の存在を確認
+    url: '#check-that-an-aws-lambda-function-exists'
+    identifier: check-that-an-aws-lambda-function-exists
+    parent: aws-logs-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CheckAWSLogsLambdaAsync
+      unstable: []
+  - name: AWS ログ Lambda ARN の追加
+    url: '#add-aws-log-lambda-arn'
+    identifier: add-aws-log-lambda-arn
+    parent: aws-logs-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAWSLambdaARN
+      unstable: []
+  - name: すべての AWS ログインテグレーションのリスト
+    url: '#list-all-aws-logs-integrations'
+    identifier: list-all-aws-logs-integrations
+    parent: aws-logs-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSLogsIntegrations
+      unstable: []
+  - name: AWS ログインテグレーションの削除
+    url: '#delete-an-aws-logs-integration'
+    identifier: delete-an-aws-logs-integration
+    parent: aws-logs-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAWSLambdaARN
+      unstable: []
+  - name: Authentication
+    url: /api/latest/authentication/
+    identifier: 認証
+    generated: true
+  - name: API キーを検証する
+    url: '#validate-api-key'
+    identifier: validate-api-key
+    parent: 認証
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - 検証
+      unstable: []
+  - name: Azure インテグレーション
+    url: /api/latest/azure-integration/
+    identifier: azure-integration
+    generated: true
+  - name: Azure インテグレーションホストフィルターを更新する
+    url: '#update-azure-integration-host-filters'
+    identifier: update-azure-integration-host-filters
+    parent: azure-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAzureHostFilters
+      unstable: []
+  - name: Azure インテグレーションの更新
+    url: '#update-an-azure-integration'
+    identifier: update-an-azure-integration
+    parent: azure-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAzureIntegration
+      unstable: []
+  - name: Azure インテグレーションの作成
+    url: '#create-an-azure-integration'
+    identifier: create-an-azure-integration
+    parent: azure-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAzureIntegration
+      unstable: []
+  - name: すべての Azure インテグレーションのリスト
+    url: '#list-all-azure-integrations'
+    identifier: list-all-azure-integrations
+    parent: azure-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAzureIntegration
+      unstable: []
+  - name: Azure インテグレーションの削除
+    url: '#delete-an-azure-integration'
+    identifier: delete-an-azure-integration
+    parent: azure-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAzureIntegration
+      unstable: []
+  - name: ダッシュボードリスト
+    url: /api/latest/dashboard-lists/
+    identifier: dashboard-lists
+    generated: true
+  - name: ダッシュボードリストのアイテムを更新する
+    url: '#update-items-of-a-dashboard-list'
+    identifier: update-items-of-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateDashboardListItems
+      unstable: []
+  - name: ダッシュボードリストへの項目の追加
+    url: '#add-items-to-a-dashboard-list'
+    identifier: add-items-to-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateDashboardListItems
+      unstable: []
+  - name: ダッシュボードリストのアイテムを取得する
+    url: '#get-items-of-a-dashboard-list'
+    identifier: get-items-of-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetDashboardListItems
+      unstable: []
+  - name: ダッシュボードリストからアイテムを削除する
+    url: '#delete-items-from-a-dashboard-list'
+    identifier: delete-items-from-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteDashboardListItems
+      unstable: []
+  - name: ダッシュボードリストを更新する
+    url: '#update-a-dashboard-list'
+    identifier: update-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateDashboardList
+      unstable: []
+  - name: ダッシュボードリストを取得する
+    url: '#get-a-dashboard-list'
+    identifier: get-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetDashboardList
+      unstable: []
+  - name: ダッシュボードリストを削除する
+    url: '#delete-a-dashboard-list'
+    identifier: delete-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboardList
+      unstable: []
+  - name: ダッシュボードリストを作成する
+    url: '#create-a-dashboard-list'
+    identifier: create-a-dashboard-list
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateDashboardList
+      unstable: []
+  - name: すべてのダッシュボードリストを取得する
+    url: '#get-all-dashboard-lists'
+    identifier: get-all-dashboard-lists
+    parent: dashboard-lists
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListDashboardLists
+      unstable: []
+  - name: ダッシュボード
+    url: /api/latest/dashboards/
+    identifier: ダッシュボード
+    generated: true
+  - name: ダッシュボードを更新する
+    url: '#update-a-dashboard'
+    identifier: update-a-dashboard
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateDashboard
+      unstable: []
+  - name: ダッシュボードを取得する
+    url: '#get-a-dashboard'
+    identifier: get-a-dashboard
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetDashboard
+      unstable: []
+  - name: ダッシュボードを削除する
+    url: '#delete-a-dashboard'
+    identifier: delete-a-dashboard
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboard
+      unstable: []
+  - name: 共有ダッシュボードの招待メールの送信
+    url: '#send-shared-dashboard-invitation-email'
+    identifier: send-shared-dashboard-invitation-email
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SendPublicDashboardInvitation
+      unstable: []
+  - name: 共有ダッシュボードへのすべての招待の取得
+    url: '#get-all-invitations-for-a-shared-dashboard'
+    identifier: get-all-invitations-for-a-shared-dashboard
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetPublicDashboardInvitations
+      unstable: []
+  - name: 共有ダッシュボードの招待を取り消す
+    url: '#revoke-shared-dashboard-invitations'
+    identifier: revoke-shared-dashboard-invitations
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeletePublicDashboardInvitation
+      unstable: []
+  - name: 共有ダッシュボードの更新
+    url: '#update-a-shared-dashboard'
+    identifier: update-a-shared-dashboard
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdatePublicDashboard
+      unstable: []
+  - name: 共有ダッシュボードの取得
+    url: '#get-a-shared-dashboard'
+    identifier: get-a-shared-dashboard
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetPublicDashboard
+      unstable: []
+  - name: 共有ダッシュボード URL を取り消す
+    url: '#revoke-a-shared-dashboard-url'
+    identifier: revoke-a-shared-dashboard-url
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeletePublicDashboard
+      unstable: []
+  - name: 共有ダッシュボードの作成
+    url: '#create-a-shared-dashboard'
+    identifier: create-a-shared-dashboard
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreatePublicDashboard
+      unstable: []
+  - name: 新しいダッシュボードを作成する
+    url: '#create-a-new-dashboard'
+    identifier: create-a-new-dashboard
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateDashboard
+      unstable: []
+  - name: すべてのダッシュボードを取得する
+    url: '#get-all-dashboards'
+    identifier: get-all-dashboards
+    parent: ダッシュボード
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListDashboards
+      unstable: []
+  - name: ダウンタイム
+    url: /api/latest/downtimes/
+    identifier: ダウンタイム
+    generated: true
+  - name: ダウンタイムを更新する
+    url: '#update-a-downtime'
+    identifier: update-a-downtime
+    parent: ダウンタイム
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateDowntime
+      unstable: []
+  - name: ダウンタイムを取得する
+    url: '#get-a-downtime'
+    identifier: get-a-downtime
+    parent: ダウンタイム
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetDowntime
+      unstable: []
+  - name: ダウンタイムをキャンセルする
+    url: '#cancel-a-downtime'
+    identifier: cancel-a-downtime
+    parent: ダウンタイム
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CancelDowntime
+      unstable: []
+  - name: スコープごとにダウンタイムをキャンセルする
+    url: '#cancel-downtimes-by-scope'
+    identifier: cancel-downtimes-by-scope
+    parent: ダウンタイム
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CancelDowntimesByScope
+      unstable: []
+  - name: ダウンタイムをスケジュールする
+    url: '#schedule-a-downtime'
+    identifier: schedule-a-downtime
+    parent: ダウンタイム
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateDowntime
+      unstable: []
+  - name: すべてのダウンタイムを取得する
+    url: '#get-all-downtimes'
+    identifier: get-all-downtimes
+    parent: ダウンタイム
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListDowntimes
+      unstable: []
+  - name: 埋め込み可能なグラフ
+    url: /api/latest/embeddable-graphs/
+    identifier: embeddable-graphs
+    generated: true
+  - name: Embed の無効化
+    url: '#revoke-embed'
+    identifier: revoke-embed
+    parent: embeddable-graphs
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - RevokeEmbeddableGraph
+      unstable: []
+  - name: Embed の有効化
+    url: '#enable-embed'
+    identifier: enable-embed
+    parent: embeddable-graphs
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - EnableEmbeddableGraph
+      unstable: []
+  - name: 特定の Embed を取得
+    url: '#get-specific-embed'
+    identifier: get-specific-embed
+    parent: embeddable-graphs
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetEmbeddableGraph
+      unstable: []
+  - name: Embed の作成
+    url: '#create-embed'
+    identifier: create-embed
+    parent: embeddable-graphs
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateEmbeddableGraph
+      unstable: []
+  - name: すべての Embed を取得
+    url: '#get-all-embeds'
+    identifier: get-all-embeds
+    parent: embeddable-graphs
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListEmbeddableGraphs
+      unstable: []
+  - name: イベント
+    url: /api/latest/events/
+    identifier: イベント
+    generated: true
+  - name: イベントの取得
+    url: '#get-an-event'
+    identifier: get-an-event
+    parent: イベント
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetEvent
+      unstable: []
+  - name: イベントのポスト
+    url: '#post-an-event'
+    identifier: post-an-event
+    parent: イベント
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateEvent
+      unstable: []
+  - name: イベントストリームのクエリ
+    url: '#query-the-event-stream'
+    identifier: query-the-event-stream
+    parent: イベント
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListEvents
+      unstable: []
+  - name: GCP インテグレーション
+    url: /api/latest/gcp-integration/
+    identifier: gcp-integration
+    generated: true
+  - name: GCP インテグレーションを更新する
+    url: '#update-a-gcp-integration'
+    identifier: update-a-gcp-integration
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateGCPIntegration
+      unstable: []
+  - name: GCP インテグレーションの作成
+    url: '#create-a-gcp-integration'
+    identifier: create-a-gcp-integration
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateGCPIntegration
+      unstable: []
+  - name: すべての GCP インテグレーションのリスト
+    url: '#list-all-gcp-integrations'
+    identifier: list-all-gcp-integrations
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListGCPIntegration
+      unstable: []
+  - name: GCP インテグレーションの削除
+    url: '#delete-a-gcp-integration'
+    identifier: delete-a-gcp-integration
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteGCPIntegration
+      unstable: []
+  - name: ホスト
+    url: /api/latest/hosts/
+    identifier: ホスト
+    generated: true
+  - name: アクティブなホストの総数を取得する
+    url: '#get-the-total-number-of-active-hosts'
+    identifier: get-the-total-number-of-active-hosts
+    parent: ホスト
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetHostTotals
+      unstable: []
+  - name: 組織のすべてのホストを取得する
+    url: '#get-all-hosts-for-your-organization'
+    identifier: get-all-hosts-for-your-organization
+    parent: ホスト
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListHosts
+      unstable: []
+  - name: ホストのミュートを解除
+    url: '#unmute-a-host'
+    identifier: unmute-a-host
+    parent: ホスト
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UnmuteHost
+      unstable: []
+  - name: ホストのミュート
+    url: '#mute-a-host'
+    identifier: mute-a-host
+    parent: ホスト
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - MuteHost
+      unstable: []
+  - name: IP 範囲
+    url: /api/latest/ip-ranges/
+    identifier: ip-ranges
+    generated: true
+  - name: IP 範囲を一覧表示する
+    url: '#list-ip-ranges'
+    identifier: list-ip-ranges
+    parent: ip-ranges
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetIPRanges
+      unstable: []
+  - name: Key Management
+    url: /api/latest/key-management/
+    identifier: key-management
+    generated: true
+  - name: 現在のユーザーが所有するアプリケーションキーを編集します
+    url: '#edit-an-application-key-owned-by-current-user'
+    identifier: edit-an-application-key-owned-by-current-user
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCurrentUserApplicationKey
+      unstable: []
+  - name: 現在のユーザーが所有するアプリケーションキーを 1 つ取得します
+    url: '#get-one-application-key-owned-by-current-user'
+    identifier: get-one-application-key-owned-by-current-user
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCurrentUserApplicationKey
+      unstable: []
+  - name: 現在のユーザーが所有するアプリケーションキーを削除します
+    url: '#delete-an-application-key-owned-by-current-user'
+    identifier: delete-an-application-key-owned-by-current-user
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCurrentUserApplicationKey
+      unstable: []
+  - name: 現在のユーザーのアプリケーションキーを作成します
+    url: '#create-an-application-key-for-current-user'
+    identifier: create-an-application-key-for-current-user
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCurrentUserApplicationKey
+      unstable: []
+  - name: 現在のユーザーが所有するすべてのアプリケーションキーを取得します
+    url: '#get-all-application-keys-owned-by-current-user'
+    identifier: get-all-application-keys-owned-by-current-user
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCurrentUserApplicationKeys
+      unstable: []
+  - name: アプリケーションキーの編集
+    url: '#edit-an-application-key'
+    identifier: edit-an-application-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - UpdateApplicationKey
+      unstable: []
+  - name: アプリケーションキーの取得
+    url: '#get-an-application-key'
+    identifier: get-an-application-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetApplicationKey
+      unstable: []
+  - name: アプリケーションキーの削除
+    url: '#delete-an-application-key'
+    identifier: delete-an-application-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - DeleteApplicationKey
+      unstable: []
+  - name: アプリケーションキーの作成
+    url: '#create-an-application-key'
+    identifier: create-an-application-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateApplicationKey
+      unstable: []
+  - name: すべてのアプリケーションキーを取得
+    url: '#get-all-application-keys'
+    identifier: get-all-application-keys
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - ListApplicationKeys
+      unstable: []
+  - name: API キーの編集
+    url: '#edit-an-api-key'
+    identifier: edit-an-api-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - UpdateAPIKey
+      unstable: []
+  - name: API キーを取得する
+    url: '#get-api-key'
+    identifier: get-api-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - GetAPIKey
+      unstable: []
+  - name: API キーの削除
+    url: '#delete-an-api-key'
+    identifier: delete-an-api-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - DeleteAPIKey
+      unstable: []
+  - name: API キーの作成
+    url: '#create-an-api-key'
+    identifier: create-an-api-key
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - CreateAPIKey
+      unstable: []
+  - name: すべての API キーを取得
+    url: '#get-all-api-keys'
+    identifier: get-all-api-keys
+    parent: key-management
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - ListAPIKeys
+      unstable: []
+  - name: ログ
+    url: /api/latest/logs/
+    identifier: logs
+    generated: true
+  - name: ログのリストの取得
+    url: '#get-a-list-of-logs'
+    identifier: get-a-list-of-logs
+    parent: logs
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsGet
+      unstable: []
+  - name: イベントを集計する
+    url: '#aggregate-events'
+    identifier: aggregate-events
+    parent: logs
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateLogs
+      unstable: []
+  - name: ログを送信する
+    url: '#send-logs'
+    identifier: send-logs
+    parent: logs
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SubmitLog
+      unstable: []
+  - name: Search logs
+    url: '#search-logs'
+    identifier: search-logs
+    parent: logs
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - ListLogs
+      unstable: []
+  - name: ログインデックス
+    url: /api/latest/logs-indexes/
+    identifier: logs-indexes
+    generated: true
+  - name: インデックスを更新する
+    url: '#update-an-index'
+    identifier: update-an-index
+    parent: logs-indexes
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateLogsIndex
+      unstable: []
+  - name: インデックスを取得する
+    url: '#get-an-index'
+    identifier: get-an-index
+    parent: logs-indexes
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetLogsIndex
+      unstable: []
+  - name: インデックスを作成
+    url: '#create-an-index'
+    identifier: create-an-index
+    parent: logs-indexes
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateLogsIndex
+      unstable: []
+  - name: すべてのインデックスを取得する
+    url: '#get-all-indexes'
+    identifier: get-all-indexes
+    parent: logs-indexes
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListLogIndexes
+      unstable: []
+  - name: インデックス順序を更新する
+    url: '#update-indexes-order'
+    identifier: update-indexes-order
+    parent: logs-indexes
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateLogsIndexOrder
+      unstable: []
+  - name: インデックス順序を取得する
+    url: '#get-indexes-order'
+    identifier: get-indexes-order
+    parent: logs-indexes
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetLogsIndexOrder
+      unstable: []
+  - name: ログパイプライン
+    url: /api/latest/logs-pipelines/
+    identifier: logs-pipelines
+    generated: true
+  - name: パイプラインを更新する
+    url: '#update-a-pipeline'
+    identifier: update-a-pipeline
+    parent: logs-pipelines
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateLogsPipeline
+      unstable: []
+  - name: パイプラインを取得する
+    url: '#get-a-pipeline'
+    identifier: get-a-pipeline
+    parent: logs-pipelines
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetLogsPipeline
+      unstable: []
+  - name: パイプラインを削除する
+    url: '#delete-a-pipeline'
+    identifier: delete-a-pipeline
+    parent: logs-pipelines
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteLogsPipeline
+      unstable: []
+  - name: パイプラインを作成する
+    url: '#create-a-pipeline'
+    identifier: create-a-pipeline
+    parent: logs-pipelines
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateLogsPipeline
+      unstable: []
+  - name: すべてのパイプラインを取得する
+    url: '#get-all-pipelines'
+    identifier: get-all-pipelines
+    parent: logs-pipelines
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListLogsPipelines
+      unstable: []
+  - name: パイプライン順序を更新する
+    url: '#update-pipeline-order'
+    identifier: update-pipeline-order
+    parent: logs-pipelines
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateLogsPipelineOrder
+      unstable: []
+  - name: パイプライン順序を取得する
+    url: '#get-pipeline-order'
+    identifier: get-pipeline-order
+    parent: logs-pipelines
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetLogsPipelineOrder
+      unstable: []
+  - name: メトリクス
+    url: /api/latest/metrics/
+    identifier: metrics
+    generated: true
+  - name: メトリクス名で個別のメトリクスボリュームを一覧表示する
+    url: '#list-distinct-metric-volumes-by-metric-name'
+    identifier: list-distinct-metric-volumes-by-metric-name
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListVolumesByMetricName
+      unstable:
+        - v2
+  - name: タグコンフィギュレーションを作成する
+    url: '#create-a-tag-configuration'
+    identifier: create-a-tag-configuration
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateTagConfiguration
+      unstable:
+        - v2
+  - name: タグコンフィギュレーションを更新する
+    url: '#update-a-tag-configuration'
+    identifier: update-a-tag-configuration
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateTagConfiguration
+      unstable:
+        - v2
+  - name: タグコンフィギュレーションを名前で一覧表示する
+    url: '#list-tag-configuration-by-name'
+    identifier: list-tag-configuration-by-name
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagConfigurationByName
+      unstable:
+        - v2
+  - name: タグコンフィギュレーションを削除する
+    url: '#delete-a-tag-configuration'
+    identifier: delete-a-tag-configuration
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteTagConfiguration
+      unstable:
+        - v2
+  - name: メトリクス名でタグを一覧表示する
+    url: '#list-tags-by-metric-name'
+    identifier: list-tags-by-metric-name
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagsByMetricName
+      unstable:
+        - v2
+  - name: タグコンフィギュレーションを一覧表示する
+    url: '#list-tag-configurations'
+    identifier: list-tag-configurations
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListTagConfigurations
+      unstable:
+        - v2
+  - name: メトリクスを送信する
+    url: '#submit-metrics'
+    identifier: submit-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SubmitMetrics
+      unstable: []
+  - name: メトリクスの検索
+    url: '#search-metrics'
+    identifier: search-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListMetrics
+      unstable: []
+  - name: 時系列ポイントのクエリ
+    url: '#query-timeseries-points'
+    identifier: query-timeseries-points
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - QueryMetrics
+      unstable: []
+  - name: メトリクスのメタデータを編集
+    url: '#edit-metric-metadata'
+    identifier: edit-metric-metadata
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateMetricMetadata
+      unstable: []
+  - name: メトリクスのメタデータを取得する
+    url: '#get-metric-metadata'
+    identifier: get-metric-metadata
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetMetricMetadata
+      unstable: []
+  - name: アクティブメトリクスのリストを取得する
+    url: '#get-active-metrics-list'
+    identifier: get-active-metrics-list
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListActiveMetrics
+      unstable: []
+  - name: モニター
+    url: /api/latest/monitors/
+    identifier: モニター
+    generated: true
+  - name: 全モニターのミュートを解除
+    url: '#unmute-all-monitors'
+    identifier: unmute-all-monitors
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UnmuteAllMonitors
+      unstable: []
+  - name: 全モニターのミュート
+    url: '#mute-all-monitors'
+    identifier: mute-all-monitors
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - MuteAllMonitors
+      unstable: []
+  - name: モニターを解決する
+    url: '#resolve-monitor'
+    identifier: resolve-monitor
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ResolveMonitor
+      unstable: []
+  - name: モニターのミュートを解除
+    url: '#unmute-a-monitor'
+    identifier: unmute-a-monitor
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UnmuteMonitor
+      unstable: []
+  - name: モニターのミュート
+    url: '#mute-a-monitor'
+    identifier: mute-a-monitor
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - MuteMonitor
+      unstable: []
+  - name: モニターの編集
+    url: '#edit-a-monitor'
+    identifier: edit-a-monitor
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateMonitor
+      unstable: []
+  - name: モニターの詳細を取得
+    url: '#get-a-monitors-details'
+    identifier: get-a-monitors-details
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetMonitor
+      unstable: []
+  - name: モニターの削除
+    url: '#delete-a-monitor'
+    identifier: delete-a-monitor
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteMonitor
+      unstable: []
+  - name: モニターの検証
+    url: '#validate-a-monitor'
+    identifier: validate-a-monitor
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ValidateMonitor
+      unstable: []
+  - name: モニターの検索
+    url: '#monitors-search'
+    identifier: monitors-search
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SearchMonitors
+      unstable: []
+  - name: モニターグループの検索
+    url: '#monitors-group-search'
+    identifier: monitors-group-search
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SearchMonitorGroups
+      unstable: []
+  - name: モニターの削除が可能かどうか確認
+    url: '#check-if-a-monitor-can-be-deleted'
+    identifier: check-if-a-monitor-can-be-deleted
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CheckCanDeleteMonitor
+      unstable: []
+  - name: モニターの作成
+    url: '#create-a-monitor'
+    identifier: create-a-monitor
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateMonitor
+      unstable: []
+  - name: 全モニターの詳細を取得
+    url: '#get-all-monitor-details'
+    identifier: get-all-monitor-details
+    parent: モニター
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListMonitors
+      unstable: []
+  - name: Organizations
+    url: /api/latest/organizations/
+    identifier: オーガニゼーション
+    generated: true
+  - name: IdP メタデータをアップロード
+    url: '#upload-idp-metadata'
+    identifier: upload-idp-metadata
+    parent: オーガニゼーション
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UploadIdPForOrg
+      unstable: []
+  - name: 組織を更新する
+    url: '#update-your-organization'
+    identifier: update-your-organization
+    parent: オーガニゼーション
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateOrg
+      unstable: []
+  - name: 組織情報を取得する
+    url: '#get-organization-information'
+    identifier: get-organization-information
+    parent: オーガニゼーション
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetOrg
+      unstable: []
+  - name: 子組織を作成する
+    url: '#create-a-child-organization'
+    identifier: create-a-child-organization
+    parent: オーガニゼーション
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateChildOrg
+      unstable: []
+  - name: 管理している組織を一覧表示する
+    url: '#list-your-managed-organizations'
+    identifier: list-your-managed-organizations
+    parent: オーガニゼーション
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListOrgs
+      unstable: []
+  - name: PagerDuty インテグレーション
+    url: /api/latest/pagerduty-integration/
+    identifier: pagerduty-integration
+    generated: true
+  - name: 単一のサービスオブジェクトを更新する
+    url: '#update-a-single-service-object'
+    identifier: update-a-single-service-object
+    parent: pagerduty-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdatePagerDutyIntegrationService
+      unstable: []
+  - name: 単一のサービスオブジェクトを取得する
+    url: '#get-a-single-service-object'
+    identifier: get-a-single-service-object
+    parent: pagerduty-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetPagerDutyIntegrationService
+      unstable: []
+  - name: 単一のサービスオブジェクトを削除する
+    url: '#delete-a-single-service-object'
+    identifier: delete-a-single-service-object
+    parent: pagerduty-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeletePagerDutyIntegrationService
+      unstable: []
+  - name: 新しいサービスオブジェクトを作成する
+    url: '#create-a-new-service-object'
+    identifier: create-a-new-service-object
+    parent: pagerduty-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreatePagerDutyIntegrationService
+      unstable: []
+  - name: スクリーンボード
+    url: /api/latest/screenboards/
+    identifier: スクリーンボード
+    generated: true
+  - name: サービスのチェック
+    url: /api/latest/service-checks/
+    identifier: service-checks
+    generated: true
+  - name: サービスチェックを送信する
+    url: '#submit-a-service-check'
+    identifier: submit-a-service-check
+    parent: service-checks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SubmitServiceCheck
+      unstable: []
+  - name: サービスの依存関係
+    url: /api/latest/service-dependencies/
+    identifier: service-dependencies
+    generated: true
+  - name: 1 つの APM サービスの依存関係を取得
+    url: '#get-one-apm-services-dependencies'
+    identifier: get-one-apm-services-dependencies
+    parent: service-dependencies
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListSingleServiceDependencies
+      unstable:
+        - v1
+  - name: すべての APM サービスの依存関係を取得
+    url: '#get-all-apm-service-dependencies'
+    identifier: get-all-apm-service-dependencies
+    parent: service-dependencies
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListServiceDependencies
+      unstable:
+        - v1
+  - name: サービスレベル目標
+    url: /api/latest/service-level-objectives/
+    identifier: service-level-objectives
+    generated: true
+  - name: SLO の履歴を取得する
+    url: '#get-an-slos-history'
+    identifier: get-an-slos-history
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLOHistory
+      unstable:
+        - v1
+  - name: SLO を更新する
+    url: '#update-an-slo'
+    identifier: update-an-slo
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateSLO
+      unstable: []
+  - name: SLO の詳細を取得する
+    url: '#get-an-slos-details'
+    identifier: get-an-slos-details
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSLO
+      unstable: []
+  - name: SLO を削除する
+    url: '#delete-an-slo'
+    identifier: delete-an-slo
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteSLO
+      unstable: []
+  - name: SLO を安全に削除できるかどうかを確認する
+    url: '#check-if-slos-can-be-safely-deleted'
+    identifier: check-if-slos-can-be-safely-deleted
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CheckCanDeleteSLO
+      unstable: []
+  - name: SLO タイムフレームを一括削除する
+    url: '#bulk-delete-slo-timeframes'
+    identifier: bulk-delete-slo-timeframes
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteSLOTimeframeInBulk
+      unstable: []
+  - name: SLO オブジェクトを作成する
+    url: '#create-an-slo-object'
+    identifier: create-an-slo-object
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSLO
+      unstable: []
+  - name: すべての SLO を取得する
+    url: '#get-all-slos'
+    identifier: get-all-slos
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListSLOs
+      unstable: []
+  - name: Slack インテグレーション
+    url: /api/latest/slack-integration/
+    identifier: slack-integration
+    generated: true
+  - name: Slack インテグレーションチャンネルの更新
+    url: '#update-a-slack-integration-channel'
+    identifier: update-a-slack-integration-channel
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateSlackIntegrationChannel
+      unstable: []
+  - name: Slack インテグレーションチャンネルの取得
+    url: '#get-a-slack-integration-channel'
+    identifier: get-a-slack-integration-channel
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSlackIntegrationChannel
+      unstable: []
+  - name: Slack インテグレーションチャンネルの削除
+    url: '#remove-a-slack-integration-channel'
+    identifier: remove-a-slack-integration-channel
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - RemoveSlackIntegrationChannel
+      unstable: []
+  - name: Slack インテグレーションチャンネルの作成
+    url: '#create-a-slack-integration-channel'
+    identifier: create-a-slack-integration-channel
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSlackIntegrationChannel
+      unstable: []
+  - name: Slack インテグレーションのすべてのチャンネルを取得
+    url: '#get-all-channels-in-a-slack-integration'
+    identifier: get-all-channels-in-a-slack-integration
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSlackIntegrationChannels
+      unstable: []
+  - name: Slack インテグレーションにチャネルを追加
+    url: '#add-channels-to-slack-integration'
+    identifier: add-channels-to-slack-integration
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateSlackIntegration
+      unstable: []
+  - name: Slack インテグレーションの作成
+    url: '#create-a-slack-integration'
+    identifier: create-a-slack-integration
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSlackIntegration
+      unstable: []
+  - name: Slack インテグレーションに関する情報を取得する
+    url: '#get-info-about-a-slack-integration'
+    identifier: get-info-about-a-slack-integration
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSlackIntegration
+      unstable: []
+  - name: Slack インテグレーションの削除
+    url: '#delete-a-slack-integration'
+    identifier: delete-a-slack-integration
+    parent: slack-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteSlackIntegration
+      unstable: []
+  - name: スナップショット
+    url: /api/latest/snapshots/
+    identifier: スナップショット
+    generated: true
+  - name: グラフのスナップショットを撮る
+    url: '#take-graph-snapshots'
+    identifier: take-graph-snapshots
+    parent: スナップショット
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetGraphSnapshot
+      unstable: []
+  - name: Synthetics
+    url: /api/latest/synthetics/
+    identifier: synthetics
+    generated: true
+  - name: グローバル変数を編集する
+    url: '#edit-a-global-variable'
+    identifier: edit-a-global-variable
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - EditGlobalVariable
+      unstable: []
+  - name: グローバル変数を取得する
+    url: '#get-a-global-variable'
+    identifier: get-a-global-variable
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetGlobalVariable
+      unstable: []
+  - name: グローバル変数を削除する
+    url: '#delete-a-global-variable'
+    identifier: delete-a-global-variable
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteGlobalVariable
+      unstable: []
+  - name: グローバル変数を作成する
+    url: '#create-a-global-variable'
+    identifier: create-a-global-variable
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateGlobalVariable
+      unstable: []
+  - name: テストを一時停止または開始する
+    url: '#pause-or-start-a-test'
+    identifier: pause-or-start-a-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateTestPauseStatus
+      unstable: []
+  - name: テスト結果を取得する (API)
+    url: '#get-a-test-result-api'
+    identifier: get-a-test-result-api
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetAPITestResult
+      unstable: []
+  - name: テストの最新結果の要約を取得する (API)
+    url: '#get-the-tests-latest-results-summaries-api'
+    identifier: get-the-tests-latest-results-summaries-api
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetAPITestLatestResults
+      unstable: []
+  - name: テストの編集
+    url: '#edit-a-test'
+    identifier: edit-a-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateTest
+      unstable: []
+  - name: テストコンフィギュレーションを取得する（API）
+    url: '#get-a-test-configuration-api'
+    identifier: get-a-test-configuration-api
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetTest
+      unstable: []
+  - name: CI の Synthetic テストのトリガー
+    url: '#trigger-some-synthetics-tests-for-ci'
+    identifier: trigger-some-synthetics-tests-for-ci
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - TriggerCITests
+      unstable: []
+  - name: テストの削除
+    url: '#delete-tests'
+    identifier: delete-tests
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteTests
+      unstable: []
+  - name: テスト結果を取得する (ブラウザ)
+    url: '#get-a-test-result-browser'
+    identifier: get-a-test-result-browser
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetBrowserTestResult
+      unstable: []
+  - name: テストの最新結果の要約を取得する (ブラウザ)
+    url: '#get-the-tests-latest-results-summaries-browser'
+    identifier: get-the-tests-latest-results-summaries-browser
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetBrowserTestLatestResults
+      unstable: []
+  - name: ブラウザテストを編集する
+    url: '#edit-a-browser-test'
+    identifier: edit-a-browser-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateBrowserTest
+      unstable: []
+  - name: テストコンフィギュレーションを取得する（ブラウザ）
+    url: '#get-a-test-configuration-browser'
+    identifier: get-a-test-configuration-browser
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetBrowserTest
+      unstable: []
+  - name: ブラウザテストを作成
+    url: '#create-a-browser-test'
+    identifier: create-a-browser-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSyntheticsBrowserTest
+      unstable: []
+  - name: API テストを編集する
+    url: '#edit-an-api-test'
+    identifier: edit-an-api-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateAPITest
+      unstable: []
+  - name: API テストの作成
+    url: '#create-an-api-test'
+    identifier: create-an-api-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateSyntheticsAPITest
+      unstable: []
+  - name: テストの作成
+    url: '#create-a-test'
+    identifier: create-a-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateTest
+      unstable: []
+  - name: すべてのテストのリストを取得する
+    url: '#get-the-list-of-all-tests'
+    identifier: get-the-list-of-all-tests
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListTests
+      unstable: []
+  - name: プライベートロケーションを編集
+    url: '#edit-a-private-location'
+    identifier: edit-a-private-location
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdatePrivateLocation
+      unstable: []
+  - name: プライベートロケーションを取得
+    url: '#get-a-private-location'
+    identifier: get-a-private-location
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetPrivateLocation
+      unstable: []
+  - name: プライベートロケーションを削除
+    url: '#delete-a-private-location'
+    identifier: delete-a-private-location
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeletePrivateLocation
+      unstable: []
+  - name: プライベートロケーションを作成
+    url: '#create-a-private-location'
+    identifier: create-a-private-location
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreatePrivateLocation
+      unstable: []
+  - name: ロケーションをすべて取得する（パブリックおよびプライベート）
+    url: '#get-all-locations-public-and-private'
+    identifier: get-all-locations-public-and-private
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListLocations
+      unstable: []
+  - name: タグ
+    url: /api/latest/tags/
+    identifier: タグ
+    generated: true
+  - name: ホストタグの更新
+    url: '#update-host-tags'
+    identifier: update-host-tags
+    parent: タグ
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateHostTags
+      unstable: []
+  - name: ホストへのタグの追加
+    url: '#add-tags-to-a-host'
+    identifier: add-tags-to-a-host
+    parent: タグ
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateHostTags
+      unstable: []
+  - name: ホストタグの取得
+    url: '#get-host-tags'
+    identifier: get-host-tags
+    parent: タグ
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetHostTags
+      unstable: []
+  - name: ホストタグの削除
+    url: '#remove-host-tags'
+    identifier: remove-host-tags
+    parent: タグ
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteHostTags
+      unstable: []
+  - name: タグを取得する
+    url: '#get-tags'
+    identifier: get-tags
+    parent: タグ
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListHostTags
+      unstable: []
+  - name: タイムボード
+    url: /api/latest/timeboards/
+    identifier: タイムボード
+    generated: true
+  - name: トレーシング
+    url: /api/latest/tracing/
+    identifier: トレーシング
+    generated: true
+  - name: トレースの送信
+    url: '#send-traces'
+    identifier: send-traces
+    parent: トレーシング
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - SubmitTraces
+      unstable: []
+  - name: 使用料のメータリング
+    url: /api/latest/usage-metering/
+    identifier: usage-metering
+    generated: true
+  - name: Tracing without Limits の 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-tracing-without-limits'
+    identifier: get-hourly-usage-for-tracing-without-limits
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetTracingWithoutLimits
+      unstable: []
+  - name: トレース検索の 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-trace-search'
+    identifier: get-hourly-usage-for-trace-search
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageTrace
+      unstable: []
+  - name: 時間平均に基づく上位カスタムメトリクスを取得
+    url: '#get-top-custom-metrics-by-hourly-average'
+    identifier: get-top-custom-metrics-by-hourly-average
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageTopAvgMetrics
+      unstable: []
+  - name: カスタムメトリクスの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-custom-metrics'
+    identifier: get-hourly-usage-for-custom-metrics
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageTimeseries
+      unstable: []
+  - name: Synthetics Browser チェックの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-synthetics-browser-checks'
+    identifier: get-hourly-usage-for-synthetics-browser-checks
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSyntheticsBrowser
+      unstable: []
+  - name: Synthetics API チェックの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-synthetics-api-checks'
+    identifier: get-hourly-usage-for-synthetics-api-checks
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSyntheticsAPI
+      unstable: []
+  - name: Synthetics チェックの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-synthetics-checks'
+    identifier: get-hourly-usage-for-synthetics-checks
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSynthetics
+      unstable: []
+  - name: マルチオーガニゼーションのアカウント全体の使用量の取得
+    url: '#get-usage-across-your-multi-org-account'
+    identifier: get-usage-across-your-multi-org-account
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSummary
+      unstable: []
+  - name: SNMP デバイスの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-snmp-devices'
+    identifier: get-hourly-usage-for-snmp-devices
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSNMP
+      unstable: []
+  - name: RUM セッションの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-rum-sessions'
+    identifier: get-hourly-usage-for-rum-sessions
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageRumSessions
+      unstable: []
+  - name: プロファイルされたホストの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-profiled-hosts'
+    identifier: get-hourly-usage-for-profiled-hosts
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageProfiling
+      unstable: []
+  - name: ネットワークホストの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-network-hosts'
+    identifier: get-hourly-usage-for-network-hosts
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageNetworkHosts
+      unstable: []
+  - name: ネットワークフローの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-network-flows'
+    identifier: get-hourly-usage-for-network-flows
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageNetworkFlows
+      unstable: []
+  - name: インデックスごとにログの 1 時間あたり使用量を取得
+    url: '#get-hourly-usage-for-logs-by-index'
+    identifier: get-hourly-usage-for-logs-by-index
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLogsByIndex
+      unstable: []
+  - name: ログの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-logs'
+    identifier: get-hourly-usage-for-logs
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLogs
+      unstable: []
+  - name: IoT の 1 時間あたりの使用量を取得する
+    url: '#get-hourly-usage-for-iot'
+    identifier: get-hourly-usage-for-iot
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageInternetOfThings
+      unstable: []
+  - name: 取り込まれたスパンの 1 時間あたり使用量を取得
+    url: '#get-hourly-usage-for-ingested-spans'
+    identifier: get-hourly-usage-for-ingested-spans
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetIngestedSpans
+      unstable: []
+  - name: インデックス化されたスパンの 1 時間あたり使用量を取得
+    url: '#get-hourly-usage-for-indexed-spans'
+    identifier: get-hourly-usage-for-indexed-spans
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageIndexedSpans
+      unstable: []
+  - name: インシデント管理の 1 時間あたり使用量を取得
+    url: '#get-hourly-usage-for-incident-management'
+    identifier: get-hourly-usage-for-incident-management
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetIncidentManagement
+      unstable: []
+  - name: ホストとコンテナの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-hosts-and-containers'
+    identifier: get-hourly-usage-for-hosts-and-containers
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageHosts
+      unstable: []
+  - name: Fargate の 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-fargate'
+    identifier: get-hourly-usage-for-fargate
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageFargate
+      unstable: []
+  - name: アカウント全体の請求対象使用量を取得します
+    url: '#get-billable-usage-across-your-account'
+    identifier: get-billable-usage-across-your-account
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageBillableSummary
+      unstable: []
+  - name: Lambda の 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-lambda'
+    identifier: get-hourly-usage-for-lambda
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLambda
+      unstable: []
+  - name: 使用属性を取得
+    url: '#get-usage-attribution'
+    identifier: get-usage-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageAttribution
+      unstable:
+        - v1
+  - name: 分析されたログの 1 時間あたり使用量の取得
+    url: '#get-hourly-usage-for-analyzed-logs'
+    identifier: get-hourly-usage-for-analyzed-logs
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageAnalyzedLogs
+      unstable: []
+  - name: 特定の月刊カスタムレポートを取得します
+    url: '#get-specified-monthly-custom-reports'
+    identifier: get-specified-monthly-custom-reports
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSpecifiedMonthlyCustomReports
+      unstable:
+        - v1
+  - name: 利用可能な月刊カスタムレポートのリストを取得します
+    url: '#get-the-list-of-available-monthly-custom-reports'
+    identifier: get-the-list-of-available-monthly-custom-reports
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetMonthlyCustomReports
+      unstable:
+        - v1
+  - name: 指定された日刊カスタムレポートを取得
+    url: '#get-specified-daily-custom-reports'
+    identifier: get-specified-daily-custom-reports
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSpecifiedDailyCustomReports
+      unstable:
+        - v1
+  - name: 利用可能な日刊カスタムレポートのリストを取得
+    url: '#get-the-list-of-available-daily-custom-reports'
+    identifier: get-the-list-of-available-daily-custom-reports
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetDailyCustomReports
+      unstable:
+        - v1
+  - name: ユーザー
+    url: /api/latest/users/
+    identifier: ユーザー
+    generated: true
+  - name: ユーザーアクセス許可を取得する
+    url: '#get-a-user-permissions'
+    identifier: get-a-user-permissions
+    parent: ユーザー
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListUserPermissions
+      unstable: []
+  - name: ユーザー組織を取得する
+    url: '#get-a-user-organization'
+    identifier: get-a-user-organization
+    parent: ユーザー
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListUserOrganizations
+      unstable: []
+  - name: ユーザー招待を取得
+    url: '#get-a-user-invitation'
+    identifier: get-a-user-invitation
+    parent: ユーザー
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetInvitation
+      unstable: []
+  - name: 招待メールを送信する
+    url: '#send-invitation-emails'
+    identifier: send-invitation-emails
+    parent: ユーザー
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SendInvitations
+      unstable: []
+  - name: ユーザーを更新する
+    url: '#update-a-user'
+    identifier: update-a-user
+    parent: ユーザー
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - UpdateUser
+      unstable: []
+  - name: ユーザーの詳細を取得する
+    url: '#get-user-details'
+    identifier: get-user-details
+    parent: ユーザー
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - GetUser
+      unstable: []
+  - name: ユーザーを無効にする
+    url: '#disable-a-user'
+    identifier: disable-a-user
+    parent: ユーザー
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - DisableUser
+      unstable: []
+  - name: ユーザーを作成する
+    url: '#create-a-user'
+    identifier: create-a-user
+    parent: ユーザー
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - CreateUser
+      unstable: []
+  - name: すべてのユーザーを一覧表示する
+    url: '#list-all-users'
+    identifier: list-all-users
+    parent: ユーザー
+    generated: true
+    params:
+      versions:
+        - v1
+        - v2
+      operationids:
+        - ListUsers
+      unstable: []
+  - name: Webhook インテグレーション
+    url: /api/latest/webhooks-integration/
+    identifier: webhooks-integration
+    generated: true
+  - name: Webhook を更新する
+    url: '#update-a-webhook'
+    identifier: update-a-webhook
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateWebhooksIntegration
+      unstable: []
+  - name: Webhook インテグレーションを取得する
+    url: '#get-a-webhook-integration'
+    identifier: get-a-webhook-integration
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetWebhooksIntegration
+      unstable: []
+  - name: Webhook を削除する
+    url: '#delete-a-webhook'
+    identifier: delete-a-webhook
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteWebhooksIntegration
+      unstable: []
+  - name: Webhook インテグレーションを作成する
+    url: '#create-a-webhooks-integration'
+    identifier: create-a-webhooks-integration
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateWebhooksIntegration
+      unstable: []
+  - name: カスタム変数を更新する
+    url: '#update-a-custom-variable'
+    identifier: update-a-custom-variable
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateWebhooksIntegrationCustomVariable
+      unstable: []
+  - name: カスタム変数を取得する
+    url: '#get-a-custom-variable'
+    identifier: get-a-custom-variable
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetWebhooksIntegrationCustomVariable
+      unstable: []
+  - name: カスタム変数を削除する
+    url: '#delete-a-custom-variable'
+    identifier: delete-a-custom-variable
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteWebhooksIntegrationCustomVariable
+      unstable: []
+  - name: カスタム変数を作成する
+    url: '#create-a-custom-variable'
+    identifier: create-a-custom-variable
+    parent: webhooks-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateWebhooksIntegrationCustomVariable
+      unstable: []
+  - name: インシデントサービス
+    url: /api/latest/incident-services/
+    identifier: incident-services
+    generated: true
+  - name: 既存のインシデントサービスを更新する
+    url: '#update-an-existing-incident-service'
+    identifier: update-an-existing-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentService
+      unstable:
+        - v2
+  - name: インシデントサービスの詳細を取得する
+    url: '#get-details-of-an-incident-service'
+    identifier: get-details-of-an-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentService
+      unstable:
+        - v2
+  - name: 既存のインシデントサービスを削除する
+    url: '#delete-an-existing-incident-service'
+    identifier: delete-an-existing-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentService
+      unstable:
+        - v2
+  - name: 新しいインシデントサービスを作成する
+    url: '#create-a-new-incident-service'
+    identifier: create-a-new-incident-service
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentService
+      unstable:
+        - v2
+  - name: すべてのインシデントサービスのリストを取得する
+    url: '#get-a-list-of-all-incident-services'
+    identifier: get-a-list-of-all-incident-services
+    parent: incident-services
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentServices
+      unstable:
+        - v2
+  - name: インシデントチーム
+    url: /api/latest/incident-teams/
+    identifier: incident-teams
+    generated: true
+  - name: 既存のインシデントチームを更新する
+    url: '#update-an-existing-incident-team'
+    identifier: update-an-existing-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentTeam
+      unstable:
+        - v2
+  - name: インシデントチームの詳細を取得する
+    url: '#get-details-of-an-incident-team'
+    identifier: get-details-of-an-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncidentTeam
+      unstable:
+        - v2
+  - name: 既存のインシデントチームを削除する
+    url: '#delete-an-existing-incident-team'
+    identifier: delete-an-existing-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncidentTeam
+      unstable:
+        - v2
+  - name: 新しいインシデントチームを作成する
+    url: '#create-a-new-incident-team'
+    identifier: create-a-new-incident-team
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncidentTeam
+      unstable:
+        - v2
+  - name: すべてのインシデントチームのリストを取得する
+    url: '#get-a-list-of-all-incident-teams'
+    identifier: get-a-list-of-all-incident-teams
+    parent: incident-teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentTeams
+      unstable:
+        - v2
+  - name: インシデント
+    url: /api/latest/incidents/
+    identifier: インシデント
+    generated: true
+  - name: 既存のインシデントを更新
+    url: '#update-an-existing-incident'
+    identifier: update-an-existing-incident
+    parent: インシデント
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncident
+      unstable:
+        - v2
+  - name: インシデントの詳細を取得
+    url: '#get-the-details-of-an-incident'
+    identifier: get-the-details-of-an-incident
+    parent: インシデント
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetIncident
+      unstable:
+        - v2
+  - name: 既存のインシデントを削除
+    url: '#delete-an-existing-incident'
+    identifier: delete-an-existing-incident
+    parent: インシデント
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteIncident
+      unstable:
+        - v2
+  - name: インシデントを作成
+    url: '#create-an-incident'
+    identifier: create-an-incident
+    parent: インシデント
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateIncident
+      unstable:
+        - v2
+  - name: インシデントリストを取得
+    url: '#get-a-list-of-incidents'
+    identifier: get-a-list-of-incidents
+    parent: インシデント
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidents
+      unstable:
+        - v2
+  - name: ログアーカイブ
+    url: /api/latest/logs-archives/
+    identifier: logs-archives
+    generated: true
+  - name: アーカイブにロールを付与する
+    url: '#grant-role-to-an-archive'
+    identifier: grant-role-to-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddReadRoleToArchive
+      unstable: []
+  - name: アーカイブの読み取りロールを一覧表示する
+    url: '#list-read-roles-for-an-archive'
+    identifier: list-read-roles-for-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListArchiveReadRoles
+      unstable: []
+  - name: アーカイブからロールを取り消す
+    url: '#revoke-role-from-an-archive'
+    identifier: revoke-role-from-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveRoleFromArchive
+      unstable: []
+  - name: アーカイブを更新する
+    url: '#update-an-archive'
+    identifier: update-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsArchive
+      unstable: []
+  - name: アーカイブを取得する
+    url: '#get-an-archive'
+    identifier: get-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsArchive
+      unstable: []
+  - name: アーカイブを削除する
+    url: '#delete-an-archive'
+    identifier: delete-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteLogsArchive
+      unstable: []
+  - name: アーカイブを作成する
+    url: '#create-an-archive'
+    identifier: create-an-archive
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateLogsArchive
+      unstable: []
+  - name: すべてのアーカイブを取得する
+    url: '#get-all-archives'
+    identifier: get-all-archives
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsArchives
+      unstable: []
+  - name: アーカイブの順序を更新する
+    url: '#update-archive-order'
+    identifier: update-archive-order
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsArchiveOrder
+      unstable: []
+  - name: アーカイブの順序を取得する
+    url: '#get-archive-order'
+    identifier: get-archive-order
+    parent: logs-archives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsArchiveOrder
+      unstable: []
+  - name: ログメトリクス
+    url: /api/latest/logs-metrics/
+    identifier: logs-metrics
+    generated: true
+  - name: ログベースのメトリクスを更新する
+    url: '#update-a-log-based-metric'
+    identifier: update-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsMetric
+      unstable: []
+  - name: ログベースのメトリクスを取得する
+    url: '#get-a-log-based-metric'
+    identifier: get-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsMetric
+      unstable: []
+  - name: ログベースのメトリクスを削除する
+    url: '#delete-a-log-based-metric'
+    identifier: delete-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteLogsMetric
+      unstable: []
+  - name: ログベースのメトリクスを作成する
+    url: '#create-a-log-based-metric'
+    identifier: create-a-log-based-metric
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateLogsMetric
+      unstable: []
+  - name: すべてのログベースのメトリクスを取得する
+    url: '#get-all-log-based-metrics'
+    identifier: get-all-log-based-metrics
+    parent: logs-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsMetrics
+      unstable: []
+  - name: ログ制限クエリ
+    url: /api/latest/logs-restriction-queries/
+    identifier: logs-restriction-queries
+    generated: true
+  - name: 制限クエリにロールを付与する
+    url: '#grant-role-to-a-restriction-query'
+    identifier: grant-role-to-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddRoleToRestrictionQuery
+      unstable:
+        - v2
+  - name: 制限クエリのロールを一覧表示する
+    url: '#list-roles-for-a-restriction-query'
+    identifier: list-roles-for-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRestrictionQueryRoles
+      unstable:
+        - v2
+  - name: 制限クエリからロールを取り消す
+    url: '#revoke-role-from-a-restriction-query'
+    identifier: revoke-role-from-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveRoleFromRestrictionQuery
+      unstable:
+        - v2
+  - name: 制限クエリを更新する
+    url: '#update-a-restriction-query'
+    identifier: update-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRestrictionQuery
+      unstable:
+        - v2
+  - name: 制限クエリを取得する
+    url: '#get-a-restriction-query'
+    identifier: get-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRestrictionQuery
+      unstable:
+        - v2
+  - name: 制限クエリを削除する
+    url: '#delete-a-restriction-query'
+    identifier: delete-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRestrictionQuery
+      unstable:
+        - v2
+  - name: 特定のユーザーのすべての制限クエリを取得する
+    url: '#get-all-restriction-queries-for-a-given-user'
+    identifier: get-all-restriction-queries-for-a-given-user
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListUserRestrictionQueries
+      unstable:
+        - v2
+  - name: 特定のロールの制限クエリを取得する
+    url: '#get-restriction-query-for-a-given-role'
+    identifier: get-restriction-query-for-a-given-role
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRoleRestrictionQuery
+      unstable:
+        - v2
+  - name: 制限クエリを作成する
+    url: '#create-a-restriction-query'
+    identifier: create-a-restriction-query
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateRestrictionQuery
+      unstable:
+        - v2
+  - name: 制限クエリを一覧表示する
+    url: '#list-restriction-queries'
+    identifier: list-restriction-queries
+    parent: logs-restriction-queries
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRestrictionQueries
+      unstable:
+        - v2
+  - name: プロセス
+    url: /api/latest/processes/
+    identifier: プロセス
+    generated: true
+  - name: すべてのプロセスを取得
+    url: '#get-all-processes'
+    identifier: get-all-processes
+    parent: プロセス
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListProcesses
+      unstable: []
+  - name: ロール
+    url: /api/latest/roles/
+    identifier: ロール
+    generated: true
+  - name: ロールにユーザーを追加する
+    url: '#add-a-user-to-a-role'
+    identifier: add-a-user-to-a-role
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddUserToRole
+      unstable: []
+  - name: ロールのすべてのユーザーの取得
+    url: '#get-all-users-of-a-role'
+    identifier: get-all-users-of-a-role
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRoleUsers
+      unstable: []
+  - name: ロールからユーザーを削除
+    url: '#remove-a-user-from-a-role'
+    identifier: remove-a-user-from-a-role
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemoveUserFromRole
+      unstable: []
+  - name: ロールにアクセス許可を付与する
+    url: '#grant-permission-to-a-role'
+    identifier: grant-permission-to-a-role
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AddPermissionToRole
+      unstable: []
+  - name: ロールのアクセス許可を一覧表示する
+    url: '#list-permissions-for-a-role'
+    identifier: list-permissions-for-a-role
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRolePermissions
+      unstable: []
+  - name: アクセス許可の取り消し
+    url: '#revoke-permission'
+    identifier: revoke-permission
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - RemovePermissionFromRole
+      unstable: []
+  - name: ロールを更新する
+    url: '#update-a-role'
+    identifier: update-a-role
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRole
+      unstable: []
+  - name: ロールを取得する
+    url: '#get-a-role'
+    identifier: get-a-role
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRole
+      unstable: []
+  - name: ロールの削除
+    url: '#delete-role'
+    identifier: delete-role
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRole
+      unstable: []
+  - name: ロールを作成する
+    url: '#create-role'
+    identifier: create-role
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateRole
+      unstable: []
+  - name: ロールを一覧表示する
+    url: '#list-roles'
+    identifier: list-roles
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListRoles
+      unstable: []
+  - name: アクセス許可を一覧表示する
+    url: '#list-permissions'
+    identifier: list-permissions
+    parent: ロール
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListPermissions
+      unstable: []
+  - name: セキュリティモニタリング
+    url: /api/latest/security-monitoring/
+    identifier: security-monitoring
+    generated: true
+  - name: セキュリティシグナルのリストの取得
+    url: '#get-a-list-of-security-signals'
+    identifier: get-a-list-of-security-signals
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchSecurityMonitoringSignals
+      unstable:
+        - v2
+  - name: セキュリティシグナルの簡易リストの取得
+    url: '#get-a-quick-list-of-security-signals'
+    identifier: get-a-quick-list-of-security-signals
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringSignals
+      unstable:
+        - v2
+  - name: 既存の規則を更新します
+    url: '#update-an-existing-rule'
+    identifier: update-an-existing-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityMonitoringRule
+      unstable: []
+  - name: 規則の詳細を取得する
+    url: '#get-a-rules-details'
+    identifier: get-a-rules-details
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityMonitoringRule
+      unstable: []
+  - name: 既存の規則を削除します
+    url: '#delete-an-existing-rule'
+    identifier: delete-an-existing-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityMonitoringRule
+      unstable: []
+  - name: 検出ルールを作成する
+    url: '#create-a-detection-rule'
+    identifier: create-a-detection-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityMonitoringRule
+      unstable: []
+  - name: 規則のリスト
+    url: '#list-rules'
+    identifier: list-rules
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringRules
+      unstable: []

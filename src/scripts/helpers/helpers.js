@@ -40,5 +40,17 @@ function gtag(...args) {
     dataLayer.push(args);
 }
 
+const getCookieByName = (name) => {
+    let value = '';
+    const cookie = document.cookie.split('; ').find(row => row.startsWith(name));
 
-export {updateMainContentAnchors, reloadWistiaVidScripts, gtag}
+    if (cookie) {
+        // eslint-disable-next-line prefer-destructuring
+        value = cookie.split('=')[1];
+    }
+
+    return value;
+}
+
+
+export {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName}

@@ -2,6 +2,7 @@
 title: モニターサマリーウィジェット
 kind: documentation
 description: Datadog のすべてのモニターまたはクエリに基づく一部のモニターの概要を表示する
+widget_type: manage_status
 aliases:
   - /ja/graphing/widgets/monitor_summary/
 further_reading:
@@ -62,42 +63,11 @@ further_reading:
 
 ## API
 
-モニターサマリーウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][3] ドキュメントをご参照ください。
 
-```text
-MANAGE_STATUS_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["manage_status"]},
-        "query": {"type": "string"},
-        "summary_type": {"enum": ["monitors", "groups", "combined"]},
-        "sort": {"type": "string"},
-        "display_format": {"enum": ["counts", "countsAndList", "list"]},
-        "color_preference": {"enum": ["background", "text"]},
-        "hide_zero_counts": {"type": "boolean"},
-        "show_last_triggered": {"type": "boolean"},
-        "title": {"type": "string"},
-        "title_size": {"type": "string"},
-        "title_align": {"enum": ["center", "left", "right"]}
-    },
-    "required": ["type", "query"],
-    "additionalProperties": false
-}
-```
+モニターサマリーウィジェットの[ウィジェット JSON スキーマ定義][4]は次のとおりです。
 
-| パラメーター             | 種類    | 必須 | 説明                                                                              |
-|-----------------------|---------|----------|------------------------------------------------------------------------------------------|
-| `type`                | string  | はい      | ウィジェットのタイプ。モニターサマリーウィジェットには `manage_status` を使用します。                   |
-| `query`               | string  | はい      | モニターの絞り込みに使用するクエリ                                                        |
-| `summary_type`        | string  | いいえ       | 使用するサマリータイプ                                                        |
-| `sort`                | string  | いいえ       | 結果をソートする方法（例: `status,asc`）。利用可能なソートフィールドの値は、`group`、`name`、`status`、`triggered` で、利用可能な順序の値は `asc` または `desc` です。デフォルトは `status,asc` です。|
-| `display_format`      | string  | いいえ       | ウィジェットに何を表示するかを指定します。有効な値は `counts`、`countsAndList`、`list` です。 |
-| `color_preference`    | string  | いいえ       | ウィジェットで使用する色。有効な値は `background` または `text` です。           |
-| `hide_zero_counts`    | Boolean | いいえ       | カウントが 0 でも表示するかどうか                                                       |
-| `show_last_triggered` | Boolean | いいえ       | モニター/グループがトリガーされてから経過した時間を表示するかどうか              |
-| `title`               | string  | いいえ       | ウィジェットのタイトル                                                                      |
-| `title_size`          | string  | いいえ       | タイトルのサイズ                                                                        |
-| `title_align`         | string  | いいえ       | タイトルの配置方法。有効な値は `center`、`left`、`right` です。               |
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
@@ -105,4 +75,5 @@ MANAGE_STATUS_SCHEMA = {
 
 [1]: /ja/monitors/manage_monitor/
 [2]: /ja/monitors/manage_monitor/#manage-triggered-monitors-with-group-level-granularity
-[3]: /ja/dashboards/graphing_json/widget_json/
+[3]: /ja/api/v1/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

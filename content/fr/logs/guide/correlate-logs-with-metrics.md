@@ -25,7 +25,7 @@ Pour mettre en corrélation des logs et des métriques dans le [Log Explorer][4
 1. Cliquez sur un log dans la colonne **Content**. Un volet s'affiche alors, avec des informations détaillées sur le log.
 2. Cliquez sur l'onglet **Metrics** dans le volet.
 
-{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.png" alt="Définition des autorisations de fichier"  >}}
+{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.png" alt="Métriques du Log Explorer"  >}}
 
 ## Dashboards
 
@@ -40,7 +40,7 @@ Pour mettre en corrélation des logs et des métriques dans un [dashboard][5] :
 4. Si votre widget contient des **métriques que vous souhaitez mettre en corrélation avec des logs** :
     1. Sélectionnez **View related logs**.
 
-{{< img src="logs/guide/correlate-logs-with-metrics/dashboards.gif" alt="Définition des autorisations de fichier"  >}}
+{{< img src="logs/guide/correlate-logs-with-metrics/dashboards.gif" alt="Associer des logs à des métriques dans un dashboard"  >}}
 
 ## Metrics Explorer
 
@@ -50,7 +50,7 @@ Pour mettre en corrélation des logs et des métriques sur la page [Metrics Exp
 2. Cliquez sur un point du graphique pour remplir le menu de graphique.
 3. Sélectionnez **View related logs**.
 
-{{< img src="logs/guide/correlate-logs-with-metrics/metrics-explorer.png" alt="Définition des autorisations de fichier"  >}}
+{{< img src="logs/guide/correlate-logs-with-metrics/metrics-explorer.png" alt="Metrics Explorer - View Related Logs"  >}}
 
 
 ## Pour aller plus loin

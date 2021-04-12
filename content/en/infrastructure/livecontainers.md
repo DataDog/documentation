@@ -25,7 +25,7 @@ Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technol
 
 ## Configuration
 
-### Kubernetes Resources
+### Kubernetes resources
 
 The Datadog Agent and Cluster Agent can be configured to retrieve Kubernetes resources for [Live Containers][5]. This feature allows you to monitor the state of pods, deployments and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
 
@@ -86,10 +86,6 @@ documentation][2]. But if they are missing, ensure they are added (after
             resources:
             - deployments
             - replicasets
-            # Below are in case RBAC was not setup from the above linked "Cluster Agent Setup documentation"
-            - pods 
-            - nodes
-            - services
             verbs:
             - list
             - get
@@ -225,7 +221,7 @@ Having these tags available will let you tie together APM, logs, metrics, and li
 
 ## Views
 
-### Containers View
+### Containers view
 
 The **Containers** view includes [Scatter Plot](#scatter-plot) and [Timeseries][10] views, and a table to better organize your container data by fields such as container name, status, and start time.
 
@@ -251,7 +247,7 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
 
-### Kubernetes Resources View
+### Kubernetes resources view
 
 If you have enabled Kubernetes Resources for Live Containers, toggle between the **Pods**, **Deployments**, **ReplicaSets**, and **Services** views in the **View** dropdown menu in the top left corner of the page. Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
@@ -280,13 +276,13 @@ For a detailed dashboard of this resource, click the **View Dashboard** in the t
 
 ### Container logs
 
-View streaming logs for any container like `docker logs -f` or `kubectl logs -f` in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [Live Tail][15] or indexed logs for any time in the past.
+View streaming logs for any container like `docker logs -f` or `kubectl logs -f` in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [live tail][15] or indexed logs for any time in the past.
 
-#### Live Tail
+#### Live tail
 
-With Live Tail, all container logs are streamed. Pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming.
+With live tail, all container logs are streamed. Pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming.
 
-Streaming logs can be searched with simple string matching. For more details about Live Tail, see the [Live Tail documentation][15].
+Streaming logs can be searched with simple string matching. For more details about live tail, see the [documentation][15].
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
@@ -304,7 +300,7 @@ You can see logs that you have chosen to index and persist by selecting a corres
 * RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][16].
 * In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
 
-### Kubernetes Resources
+### Kubernetes resources
 
 * Data is updated automatically in constant intervals. Update intervals may change during beta.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart, see [the Helm Chart repo][17] for more details.

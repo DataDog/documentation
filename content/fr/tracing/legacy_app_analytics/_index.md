@@ -20,24 +20,24 @@ La fonction [App Analytics][1] sert à filtrer les spans indexées avec des tags
 
 ## Configuration automatique
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,nginx" >}}
+{{< programming-lang lang="java" >}}
 
 La fonction App Analytics est disponible à partir de la version 0.25.0 du client de tracing Java. Elle peut être activée de façon globale pour toutes les intégrations **de serveur Web** avec un paramètre de configuration unique dans le client de tracing :
 
 * Propriété système : `-Ddd.trace.analytics.enabled=true`
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 La fonction App Analytics est disponible à partir de la version 0.19.0 du client de tracing Python. Elle peut être activée de façon globale pour toutes les intégrations **Web** avec un paramètre de configuration unique dans le client de tracing :
 
 * Configuration du traceur : `ddtrace.config.analytics_enabled = True`
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 La fonction App Analytics est disponible à partir de la version 0.19.0 du client de tracing Ruby. Elle peut être activée pour toutes les intégrations **Web** avec un flag global.
 
@@ -50,8 +50,8 @@ Datadog.configure { |c| c.analytics_enabled = true }
 * `true` active les analyses pour tous les frameworks Web.
 * `false` ou `nil` désactive les analyses, sauf pour les intégrations qui l'activent automatiquement. (Par défaut)
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 La fonction App Analytics est disponible à partir de la version 1.11.0 du client de tracing Go. Elle peut être activée de façon globale pour toutes les intégrations **Web** avec :
 
@@ -64,8 +64,8 @@ La fonction App Analytics est disponible à partir de la version 1.11.0 du clie
 * la variable d'environnement `DD_TRACE_ANALYTICS_ENABLED=true`, à partir de la version 1.26.0.
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
 
 La fonction App Analytics est disponible à partir de la version 0.10.0 du client de tracing Node.js. Elle peut être activée de façon globale pour toutes les intégrations Web avec un paramètre de configuration unique dans le client de tracing :
 
@@ -79,8 +79,8 @@ Vous pouvez également utiliser le paramètre de configuration suivant :
 
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 La fonction App Analytics est disponible à partir de la version 1.1.0 du client de tracing .NET. Elle peut être activée de façon globale pour toutes les intégrations **Web** avec un paramètre de configuration unique dans le client de tracing :
 
@@ -92,15 +92,15 @@ Ce paramètre peut également être défini dans le code :
 Tracer.Instance.Settings.AnalyticsEnabled = true;
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 La fonction App Analytics est disponible à partir de la version 0.17.0 du client de tracing PHP. Elle peut être activée de façon globale pour toutes les intégrations **Web** avec un paramètre de configuration unique dans le client de tracing :
 
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
 
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
 
 La fonction App Analytics est disponible à partir de la version 1.0.0 du client de tracing C++. Elle peut être activée de façon globale pour toutes les spans de premier niveau en définissant la variable d'environnement `DD_TRACE_ANALYTICS_ENABLED` sur `true`. Notez que ce paramètre peut également être défini directement dans le code :
 
@@ -112,8 +112,8 @@ datadog::opentracing::TracerOptions tracer_options;
   auto tracer = datadog::opentracing::makeTracer(tracer_options);
 ```
 
-{{% /tab %}}
-{{% tab "Nginx" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nginx" >}}
 
 Pour activer la fonction App Analytics pour Nginx :
 
@@ -121,8 +121,8 @@ Pour activer la fonction App Analytics pour Nginx :
 
 2. Ajoutez `env DD_TRACE_ANALYTICS_ENABLED;` en haut de votre fichier `nginx.conf`.
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 Une fois la fonction activée, l'interface App Analytics commence à afficher des résultats. Consultez la [page App Analytics][1] pour démarrer.
 
@@ -130,8 +130,8 @@ Une fois la fonction activée, l'interface App Analytics commence à afficher de
 
 ### Configuration par intégration
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
 
 En plus du paramètre global, vous pouvez activer ou désactiver la fonction App Analytics pour des intégrations spécifiques grâce au paramètre suivant :
 
@@ -146,8 +146,8 @@ Utilisez ces options en plus de la configuration globale pour les intégrations 
 Les noms des intégrations sont disponibles sur le [tableau des intégrations][1].
 
 [1]: /fr/tracing/compatibility_requirements/java/#compatibility
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 En plus du paramètre global, vous pouvez activer ou désactiver la fonction App Analytics pour des intégrations spécifiques grâce au paramètre suivant :
 
@@ -162,8 +162,8 @@ Utilisez ces options en plus de la configuration globale pour les intégrations 
 **Remarque** : l'implémentation du traceur étant propre à chaque intégration, plusieurs intégrations nécessitent une configuration spéciale. Consultez la documentation des bibliothèques sur [App Analytics][1] pour en savoir plus.
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 La fonction App Analytics peut être activée pour des intégrations spécifiques.
 
@@ -180,8 +180,8 @@ Où `intégration` est le nom de l'intégration. Consultez la [liste des intégr
 * `nil` applique le paramètre global pour l'analyse.
 
 [1]: /fr/tracing/setup/ruby/#library-compatibility
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 En plus du paramètre global, vous pouvez activer ou désactiver la fonction App Analytics pour chaque intégration. Par exemple, pour configurer le paquet `net/http` de la bibliothèque standard, vous pouvez procéder ainsi :
 
@@ -202,8 +202,8 @@ func main() {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
 
 En plus du paramètre global, vous pouvez activer ou désactiver la fonction App Analytics pour des intégrations spécifiques.
 
@@ -218,8 +218,8 @@ tracer.use('express', {
 Les noms des intégrations sont disponibles sur le [tableau des intégrations][1].
 
 [1]: /fr/tracing/setup/nodejs/#integrations
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 En plus du paramètre global, vous pouvez activer ou désactiver la fonction App Analytics pour des intégrations spécifiques.
 
@@ -244,8 +244,8 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 Les noms des intégrations sont disponibles sur le [tableau des intégrations][1]. **Remarque :** sous Linux, les noms des variables d'environnement sont sensibles à la casse.
 
 [1]: /fr/tracing/setup/dotnet/#integrations
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 En plus du paramètre global, vous pouvez activer ou désactiver la fonction App Analytics pour des intégrations spécifiques grâce au paramètre suivant :
 
@@ -258,29 +258,30 @@ Utilisez ces options en plus de la configuration globale pour les intégrations 
 Les noms des intégrations sont disponibles sur le [tableau des intégrations][1].
 
 [1]: /fr/tracing/setup/php/#integration-names
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### Services de base de données
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
+
 
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple :
 
 * Propriété système : `-Ddd.jdbc.analytics.enabled=true`
 * Variable d'environnement : `DD_JDBC_ANALYTICS_ENABLED=true`
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple :
 
 * Configuration du traceur : `ddtrace.config.postgres.analytics_enabled = True`
 * Variable d'environnement : `DD_POSTGRES_ANALYTICS_ENABLED=true`
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple :
 
@@ -288,8 +289,8 @@ Par défaut, le tracing de base de données n'est pas pris en charge par la fonc
 Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple :
 
@@ -298,8 +299,8 @@ Par défaut, le tracing de base de données n'est pas pris en charge par la fonc
 sqltrace.Register("mysql", &mysql.MySQLDriver{}, sqltrace.WithAnalytics(true))
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
 
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple :
 
@@ -309,8 +310,8 @@ tracer.use('mysql', {
 })
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple, pour activer la fonction App Analytics pour ADO.NET :
 
@@ -325,8 +326,8 @@ Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 Les noms des intégrations sont disponibles sur le [tableau des intégrations][1]. **Remarque :** sous Linux, les noms des variables d'environnement sont sensibles à la casse.
 
 [1]: /fr/tracing/setup/dotnet/#integrations
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 Par défaut, le tracing Datadog n'est pas enregistré par la fonction App Analytics. Vous pouvez activer ou désactiver cette fonction pour des intégrations spécifiques grâce au paramètre suivant :
 
@@ -339,13 +340,13 @@ Utilisez cette option en plus de la configuration globale pour les intégrations
 Les noms des intégrations sont disponibles sur le [tableau des intégrations][1].
 
 [1]: /fr/tracing/setup/php/#integrations
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### Instrumentation personnalisée
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang lang="java" >}}
 
 Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_SAMPLE_RATE` à une span :
 
@@ -372,8 +373,8 @@ class MyClass {
 
 [1]: https://docs.datadoghq.com/fr/tracing/custom_instrumentation/java/#dd-trace-methods
 [2]: https://docs.datadoghq.com/fr/tracing/custom_instrumentation/java/#trace-annotations
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` à une span :
 
@@ -387,8 +388,8 @@ def my_method():
     span.set_tag(ANALYTICS_SAMPLE_RATE_KEY, True)
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_KEY` à une span :
 
@@ -399,8 +400,8 @@ Datadog.tracer.trace('my.task') do |span|
 end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 Pour les instrumentations personnalisées, un tag spécial a été ajouté pour activer la fonction App Analytics sur une span, comme ci-dessous :
 
@@ -410,8 +411,8 @@ span.SetTag(ext.AnalyticsEvent, true)
 
 Ce tag permet de définir la span comme un événement App Analytics.
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
 
 Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS` à une span :
 
@@ -421,8 +422,8 @@ const { ANALYTICS } = require('dd-trace/ext/tags')
 span.setTag(ANALYTICS, true)
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
 
 Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `Tags.Analytics` à une span :
 
@@ -437,8 +438,8 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_KEY` à une span :
 
@@ -449,8 +450,8 @@ Les applications utilisant une instrumentation personnalisée peuvent activer Ap
 ?>
 ```
 
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
 
 Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `analytics_event` à une span :
 
@@ -468,7 +469,7 @@ span->SetTag(datadog::tags::analytics_event, true);
 span->SetTag(datadog::tags::analytics_event, 0.5);
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 [1]: https://app.datadoghq.com/apm/analytics

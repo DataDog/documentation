@@ -1,16 +1,22 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: kyototycoon
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md'
 display_name: Kyoto Tycoon
+draft: false
 git_integration_title: kyototycoon
 guid: 2661668b-d804-4c8d-96a7-8019525add8c
 integration_id: kyoto-tycoon
@@ -40,7 +46,7 @@ Le check KyotoTycoon de l'Agent surveille les opérations get, set et delete et 
 
 ### Installation
 
-Le check KyotoTycoon est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Kyoto Tycoon.
+Le check KyotoTycoon est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Kyoto Tycoon.
 
 ### Configuration
 
@@ -58,6 +64,27 @@ Le check KyotoTycoon est inclus avec le paquet de l'[Agent Datadog][1] : vous n
 
 2. [Redémarrez l'Agent][4].
 
+##### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `kyototycoon.d/conf.yaml` pour commencer à recueillir vos logs Kyoto Tycoon :
+
+    ```yaml
+    logs:
+      - type: file
+        path: /var/data/ktserver.log
+        source: kyototycoon
+    ```
+
+    Modifiez la valeur du paramètre `path` en fonction de votre environnement. Consultez le [fichier d'exemple kyototycoon.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][4].
+
 ### Validation
 
 [Lancez la sous-commande `status` de l'Agent][5] et cherchez `kyototycoon` dans la section Checks.
@@ -74,9 +101,8 @@ Le check Kyoto Tycoon n'inclut aucun événement.
 
 ### Checks de service
 
-`kyototycoon.can_connect` :
-
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à Kyoto Tycoon pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+**kyototycoon.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Kyoto Tycoon pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

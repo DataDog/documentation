@@ -108,7 +108,7 @@ DogStatsD crée un message qui contient des informations à propos de votre mét
 Voici le format d'envoi de métriques :
 
 ```text
-<NOM_MÉTRIQUE>:<VALEUR>|<TYPE>|@<TAUX_ÉCHANTILLONAGE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>
+<NOM_MÉTRIQUE>:<VALEUR>|<TYPE>|@<TAUX_ÉCHANTILLONNAGE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>
 ```
 
 Les exemples ci-dessous envoient des points de données pour une métrique gauge `custom_metric` avec le tag `shell`.

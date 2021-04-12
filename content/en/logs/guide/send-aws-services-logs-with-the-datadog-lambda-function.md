@@ -5,7 +5,7 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/explorer/analytics/"
+- link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/processing/"
@@ -33,7 +33,16 @@ There are two options when configuring triggers on the Datadog Forwarder Lambda 
 
 ### Automatically set up triggers
 
-If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can automatically manage triggers for you.
+Datadog can automatically configure triggers on the Datadog Forwarder Lambda function to collect AWS logs from the following sources and locations:
+
+| Source                          | Location       |
+| ------------------------------- | ---------------|
+| S3 Access Logs                  | S3             |
+| Classic ELB Access Logs         | S3             |
+| Application ELB Access Logs     | S3             |
+| CloudFront Access Logs          | S3             |
+| Redshift Logs                   | S3             |
+| Lambda Logs                     | CloudWatch     |
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 2. Ensure the policy of the IAM role used for [Datadog-AWS integration][3] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
@@ -44,9 +53,7 @@ If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can
     "elasticloadbalancing:DescribeLoadBalancers",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "lambda:List*",
-    "lambda:AddPermission",
     "lambda:GetPolicy",
-    "lambda:RemovePermission",
     "redshift:DescribeClusters",
     "redshift:DescribeLoggingStatus",
     "s3:GetBucketLogging",
@@ -66,9 +73,7 @@ If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
     | `lambda:List*`                                              | List all Lambda functions. |
-    | `lambda:AddPermission`                                      | Add permission allowing a particular S3 bucket to trigger a Lambda function. |
     | `lambda:GetPolicy`                                          | Gets the Lambda policy when triggers are to be removed.                      |
-    | `lambda:RemovePermission`                                   | Remove permissions from a Lambda policy.                                     |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
     | `s3:GetBucketLogging`                                       | Get the name of the S3 bucket containing S3 access logs.                     |
@@ -91,12 +96,12 @@ If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can
 
 ### Manually set up triggers
 
-#### Collecting logs from CloudWatch Log Group
+#### Collecting logs from CloudWatch log group
 
-If you are collecting logs from a CloudWatch Log Group, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following methods:
+If you are collecting logs from a CloudWatch log group, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following methods:
 
 {{< tabs >}}
-{{% tab "AWS Console" %}}
+{{% tab "AWS console" %}}
 
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" popup="true" style="width:70%;">}}
 
@@ -104,7 +109,6 @@ Select the corresponding CloudWatch Log Group, add a filter name (but feel free 
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" popup="true" style="width:70%;">}}
 
 Once done, go into your [Datadog Log section][1] to start exploring your logs.
-
 
 [1]: https://app.datadoghq.com/logs
 {{% /tab %}}
@@ -121,16 +125,13 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
 }
 ```
 
-
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-For AWS CloudFormation users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below. 
+For AWS CloudFormation users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below.
 
 The sample code also work for AWS [SAM][2] and [Serverless Framework][3]. For Serverless Framework, put the code under the [resources][4] section within your `serverless.yml`.
-
-
 
 ```yaml
 Resources:
@@ -141,7 +142,6 @@ Resources:
       LogGroupName: "<CLOUDWATCH_LOG_GROUP_NAME>"
       FilterPattern: ""
 ```
-
 
 [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
 [2]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html
@@ -160,14 +160,13 @@ If you are collecting logs from an S3 bucket, configure the trigger to the [Data
 1. Once the Lambda function is installed, manually add a trigger on the S3 bucket that contains your logs in the AWS console:
   {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" popup="true"style="width:80%;">}}
 
-1. Select the bucket and then follow the AWS instructions:
+2. Select the bucket and then follow the AWS instructions:
   {{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" popup="true" style="width:80%;">}}
 
-1. Set the correct event type on S3 buckets:
+3. Set the correct event type on S3 buckets:
   {{< img src="logs/aws/object_created.png" alt="Object Created" popup="true" style="width:80%;">}}
 
 Once done, go into your [Datadog Log section][1] to start exploring your logs!
-
 
 [1]: https://app.datadoghq.com/logs
 {{% /tab %}}

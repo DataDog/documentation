@@ -2,10 +2,13 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    tokumx: assets/dashboards/tokumx_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    tokumx_processes: assets/saved_views/tokumx_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -49,7 +52,7 @@ supported_os:
 
 ### インストール
 
-TokuMX チェックは [Datadog Agent][1] パッケージに含まれています。TokuMX サーバーに追加でインストールする必要はありません。
+TokuMX チェックは、Agent バージョン 6.x 以前の [Datadog Agent][1] パッケージに含まれています。TokuMX サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
@@ -147,9 +150,8 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
 
 ### サービスのチェック
 
-`tokumx.can_connect`:
-
-Agent が TokuMX に接続してメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**tokumx.can_connect**:<br>
+Agent が TokuMX に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

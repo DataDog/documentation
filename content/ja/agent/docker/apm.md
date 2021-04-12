@@ -83,7 +83,6 @@ Docker Agent 内のトレースに利用可能なすべての環境変数をリ�
 | `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。書式はカンマ区切りの正規表現です。例: <code>GET /ignore-me,(GET\|POST) /and-also-me</code> となります。                                                                                                                                                                                       |
 | `DD_APM_ANALYZED_SPANS`    | トランザクションを分析するスパンを構成します。書式はカンマ区切りのインスタンス <code>\<サービス名>\|;\<オペレーション名>=1</code>、たとえば、<code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code> となります。トレーシングクライアントでコンフィギュレーションパラメーターを使用して[自動的に有効化][3]することもできます。 |
 | `DD_APM_MAX_EPS`           | 1 秒あたりの最大 Indexed Span 数を設定します。デフォルトは 1 秒あたり 200 イベントです。                                                                                                                                                                                                                                                                        |
-| `DD_APM_MAX_TPS`           | 1 秒あたりの最大トレース数を設定します。デフォルトは 1 秒あたり 10 トレースです。                                                                                                                                                                                                                                                                                 |
 
 ## 他のコンテナからのトレース
 
@@ -148,8 +147,10 @@ docker run -d --name app \
 
 または、サポートされている言語ごとに、以下の例を参照して Agent ホストを手動で設定します。
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodeJS,.NET" >}}
+
+{{< programming-lang lang="java" >}}
+
 環境変数を使用して Java Agent 構成を更新します。
 
 ```bash
@@ -167,8 +168,9 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -jar /your/app.jar
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
 
 ```python
 from ddtrace import tracer
@@ -179,8 +181,9 @@ tracer.configure(
 )
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 ```ruby
 Datadog.configure do |c|
@@ -189,8 +192,9 @@ Datadog.configure do |c|
 end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
 
 ```go
 package main
@@ -203,8 +207,9 @@ func main() {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodeJS" >}}
 
 ```javascript
 const tracer = require('dd-trace').init({
@@ -213,9 +218,9 @@ const tracer = require('dd-trace').init({
 });
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab ".NET" %}}
+{{< programming-lang lang=".NET" >}}
 
 インスツルメンテーションされたアプリを起動する前に変数を設定します。
 
@@ -235,8 +240,9 @@ export DD_TRACE_AGENT_PORT=8126
 dotnet example.dll
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 ### Docker ホスト IP
 

@@ -29,7 +29,7 @@ You must [install the Datadog Agent][1] on the server running Stunnel.
 
 Create a `stunnel.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][2] to start collecting your Stunnel Proxy logs.
 
-#### Log Collection
+#### Log collection
 
 _Available for Agent versions >v6.0_
 

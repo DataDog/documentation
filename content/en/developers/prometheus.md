@@ -1,5 +1,5 @@
 ---
-title: Writing a custom OpenMetrics Check
+title: Custom OpenMetrics Check
 kind: documentation
 further_reading:
 - link: "/agent/prometheus/"
@@ -175,7 +175,7 @@ def check(self, instance):
     self.process(instance)
 ```
 
-### Putting It All Together
+### Putting it all together
 
 ```python
 from datadog_checks.base import ConfigurationError, OpenMetricsBaseCheck

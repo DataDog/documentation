@@ -50,7 +50,7 @@ initialize(**options)
 
 statsd.service_check(
     check_name="application.service_check",
-    status="O",
+    status="0",
     message="Application is OK",
 )
 ```

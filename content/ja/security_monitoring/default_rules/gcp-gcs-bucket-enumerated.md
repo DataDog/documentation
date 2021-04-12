@@ -13,8 +13,6 @@ technique: T1083-file-and-directory-discovery
 title: GCP バケット列挙
 type: security_rules
 ---
-## 概要
-
 ### 目標
 サービスアカウントが GCS バケットを一覧表示したことを検出します。
 

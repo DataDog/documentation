@@ -24,7 +24,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | Source                               | `/etc/datadog-agent/datadog.yaml`    |
 | Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
 | Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
-| Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\datadog.yaml` |
+| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.yaml` |
 | Windows Server 2003, XP or older     | *unsupported platform*               |
 
 {{% /tab %}}
@@ -41,13 +41,13 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | Source                               | `/etc/dd-agent/datadog.conf`                                               |
 | Suse                                 | `/etc/dd-agent/datadog.conf`                                               |
 | Ubuntu                               | `/etc/dd-agent/datadog.conf`                                               |
-| Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\datadog.conf`                                       |
+| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003, XP or older     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Note: [A full example of the `datadog.yaml` file is available in the `datadog-agent` Github repository][1].
+**Note**: [A full example of the `datadog.yaml` file is available in the `datadog-agent` Github repository][1].
 
 ## Agent configuration directory
 
@@ -68,12 +68,12 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 | Source                               | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
-| Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\conf.d` |
+| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\conf.d` |
 | Windows Server 2003, XP or older     | *unsupported platform*         |
 
 ### Checks configuration files for Agent 6
 
-An example for each Agent check configuration file is found in the `conf.yaml.example` file in the corresponding `<CHECK_NAME>.d/` folder. Rename this file to `conf.yaml` to enable the associated check. Note that the Agent loads valid YAML files contained in the folder: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. This allows complex configurations to be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
+An example for each Agent check configuration file is found in the `conf.yaml.example` file in the corresponding `<CHECK_NAME>.d/` folder. Rename this file to `conf.yaml` to enable the associated check. **Note**: The Agent loads valid YAML files contained in the folder: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. This allows complex configurations to be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
 
 ```text
 /etc/datadog-agent/conf.d/http_check.d/
@@ -91,9 +91,9 @@ Autodiscovery template files are stored in the configuration folder with the `au
 └── conf.yaml.example
 ```
 
-**Note**: For log collection, the Agent does not accept multiple YAML files that point to the same log source to prevent duplicate logs from being sent to Datadog. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
+For log collection, the Agent does not accept multiple YAML files that point to the same log source to prevent duplicate logs from being sent to Datadog. In the case where there is more than one YAML file that points to the same log source, the Agent considers the files in alphabetical order and uses the first file.
 
-To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/datadog-agent/conf.d/<CHECK_NAME>.yaml`, but migrating to the new layout is strongly recommended.
+To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/dd-agent/conf.d/<CHECK_NAME>.yaml`, but migrating to the new layout is strongly recommended.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -109,7 +109,7 @@ To preserve backwards compatibility, the Agent still picks up configuration file
 | Source                               | `/etc/dd-agent/conf.d/`                                              |
 | Suse                                 | `/etc/dd-agent/conf.d/`                                              |
 | Ubuntu                               | `/etc/dd-agent/conf.d/`                                              |
-| Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\conf.d`                                       |
+| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\conf.d`                                       |
 | Windows Server 2003, XP or older     | `\\Documents and Settings\All Users\Application Data\Datadog\conf.d` |
 
 {{% /tab %}}

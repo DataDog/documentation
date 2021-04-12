@@ -40,6 +40,10 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
+{{< /site-region >}}
+
 まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][1]をセットアップします。
 
 * 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
@@ -315,7 +319,7 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 3. S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。"AWS-KMS" オプション、CMK ARN の順に選択して保存します。
 
 
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
 

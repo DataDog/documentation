@@ -1,0 +1,85 @@
+{{/* Scopable columns may be refactored or moved to a different page later, but should remain hardcoded for now. */}}
+
+{{ $scopable_permissions := slice "logs_read_data" "logs_write_exclusion_filters" "logs_write_processors" "logs_read_archives" "logs_read_index_data" }}
+{{ $is_scopable := false }}
+{{ $hide_scopable_column := false }}
+{{ $permission_group := .group }}
+{{ $permissions_data := .data }}
+
+{{ if eq $permission_group "General" }}
+  {{ $hide_scopable_column = true }}
+{{ else }}
+  {{ $hide_scopable_column = false }}
+{{ end }}
+
+{{/* Logs permissions are rendered separate from the rest so they can appear on the page directly above the Log Configuration Access section.   This is meant to be a short-term solution until a decision is made on separating Logs permissions to a stand-alone page. */}}
+{{ if eq $permission_group "Logs" }}
+  <h2 id="{{ anchorize $permission_group }}">{{ $permission_group }}</h2>
+  <p>Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you’d assign this permission to. See the recommendations on how to assign permissions to team members in the <a href="https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=ui#overview">Logs RBAC guide</a>.</p>
+{{ end }}
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th {{ if $hide_scopable_column }}class="d-none"{{ end }}>Scopable</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $permissions_data -}}
+      {{- if in $scopable_permissions .attributes.name -}}
+          {{- $is_scopable = true -}}
+        {{- else -}}
+          {{- $is_scopable = false -}}
+        {{- end -}}
+
+      {{- if ne .attributes.name nil -}}
+      <tr>
+        <td>
+            {{- if eq $permission_group "Logs" -}}
+              <a href="/logs/guide/logs-rbac-permissions/#{{ .attributes.name }}">
+                <code>{{- .attributes.name -}}</code>
+              </a>
+            {{- else -}}
+              <code>{{- .attributes.name -}}</code>
+            {{- end -}}
+        </td>
+        <td>{{- .attributes.description -}}</td>
+        <td {{ if $hide_scopable_column }}class="d-none"{{ end }}>{{- $is_scopable -}}</td>
+      </tr>
+      {{- end -}}
+    {{ end }}
+  </tbody>
+</table>
+
+{{/* Harcoding the legacy logs section until deprecation */}}
+{{ if eq $permission_group "Logs" }}
+  <p>Log Management RBAC also includes two legacy permissions, superseded by finer-grained and more extensive <code>logs_read_data</code> permission:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Scopable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a href="/logs/guide/logs-rbac-permissions/#logs_live_tail"><code>logs_live_tail</code></a>
+        </td>
+        <td>Access the live tail feature</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/logs/guide/logs-rbac-permissions/#logs_read_index_data"><code>logs_read_index_data</code></a>
+        </td>
+        <td>Read a subset log data (index based)</td>
+        <td>true</td>
+      </tr>
+    </tbody>
+  </table>
+{{ end }}

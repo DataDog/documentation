@@ -10,7 +10,7 @@ rule_category:
 scope: docker
 security: compliance
 source: docker
-title: S'assurer que les fichiers et répertoires Docker sont bien audités - /etc/docker/daemon.json
+title: Audit de /etc/docker/daemon.json configuré
 type: security_rules
 ---
 ## Présentation
@@ -22,6 +22,14 @@ Auditer `/etc/docker/daemon.json`, le cas échéant.
 ## Meilleure pratique
 
 En plus d'auditer le système de fichier et les appels système Linux, il est essentiel d'auditer tous les fichiers et répertoires associés à Docker. Le daemon Docker s'exécute avec des privilèges root et son comportement dépend de certains fichiers et répertoires clés, notamment `/etc/docker/daemon.json`. Ce fichier inclut divers paramètres pour le daemon Docker et doit donc être audité.
+
+## Audit
+
+Vérifiez s'il existe une règle d'audit associée au fichier `/etc/docker/daemon.json`. Pour afficher la règle pour le fichier `/etc/docker/daemon.json`, exécutez :
+
+```
+auditctl -l | grep /etc/docker/daemon.json
+```
 
 ## Remédiation
 

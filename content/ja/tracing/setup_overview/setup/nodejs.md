@@ -32,33 +32,25 @@ NodeJS トレーサーはバージョン `8 以降`を公式にサポートし�
 
 ## インストールと利用開始
 
-### アプリ内のドキュメントに従ってください (推奨)
+Datadog トレースライブラリを Node.js アプリケーションに追加するには、次の手順に従います。
 
-Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
-
-- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
-- `service`、`env`、`version` タグを動的に設定します。
-- セットアップ中にトレースの 100% の取り込みとトレース ID のログへの挿入を有効にします。
-
-APM で使用される用語の説明は、[公式ドキュメント][3]を参照してください。
-
-コンフィギュレーションおよび API の使用の詳細については、Datadog の [API ドキュメント][4]を参照してください。
-
-貢献の詳細については、[開発ガイド][5]を参照してください。
-
-### Quickstart
-
-<div class="alert alert-warning">
-このライブラリは、インスツルメントされたいずれのモジュールよりも先にインポートおよび初期化する<strong>必要があります</strong>。トランスパイラーを使用する時は、トレーサーライブラリを外部ファイルにインポートして初期化する<strong>必要があります</strong>。その後、アプリケーションを構築する際にそのファイルをまとめてインポートします。これにより、ホイストを防ぎ、他のモジュールがインポートされる前にトレーサーライブラリを確実にインポートして初期化します。
-</div>
-
-Node.js アプリケーションのトレースを開始するには、npm を使用して Datadog トレーシングライブラリをインストールします。
+1. 以下の npm を使用して Datadog Tracing ライブラリをインストールします。
 
 ```sh
 npm install --save dd-trace
 ```
 
-続いて、トレーサーをインポートして初期化します。
+2. コードまたはコマンドライン引数を使用して、トレーサーをインポートして初期化します。Node.js トレースライブラリは、他のモジュールの**前**にインポートして初期化する必要があります。
+
+   セットアップが完了した後、Web リクエストの URL ルートの欠落、スパンの切断または欠落など、完全なトレースを受信していない場合は、**ステップ 2 が正しく行われたことを確認してください**。最初に初期化されるトレースライブラリは、トレーサーが自動インスツルメンテーションに必要なすべてのライブラリに適切にパッチを適用するために必要です。
+
+   TypeScript、Webpack、Babel などのトランスパイラーを使用する場合は、トレーサーライブラリを外部ファイルにインポートして初期化し、アプリケーションをビルドするときにそのファイル全体をインポートします。
+
+3. [APM に Datadog Agent を構成する](#configure-the-datadog-agent-for-apm)
+
+4. [統合サービスタグ付け][2]の `service`、`env`、`version` など、必要な[コンフィギュレーション](#configuration)をトレーサーに追加します。
+
+### コードにトレーサーを追加する
 
 ##### JavaScript
 
@@ -67,7 +59,9 @@ npm install --save dd-trace
 const tracer = require('dd-trace').init();
 ```
 
-##### TypeScript
+#### TypeScript とバンドラー
+
+EcmaScript モジュール構文をサポートする TypeScript およびバンドラーの場合、正しいロード順序を維持するために、別のファイルでトレーサーを初期化します。
 
 ```typescript
 // server.ts
@@ -78,6 +72,22 @@ import tracer from 'dd-trace';
 tracer.init(); // ホイストを避けるため異なるファイルで初期化。
 export default tracer;
 ```
+
+デフォルトのコンフィギュレーションで十分な場合、またはすべてのコンフィギュレーションが環境変数を介して行われる場合は、`dd-trace/init` を使用することもできます。これは 1 つのステップでロードおよび初期化されます。
+
+```typescript
+import `dd-trace/init`;
+```
+
+### コマンドライン引数を介したトレーサーの追加
+
+Node.js の `--require` オプションを使用して、トレーサーを 1 回のステップでロードして初期化します。
+
+```sh
+node --require dd-trace/init app.js
+```
+
+**注:** このアプローチでは、トレーサーのすべてのコンフィギュレーションに環境変数を使用する必要があります。
 
 ### APM に Datadog Agent を構成する
 
@@ -133,7 +143,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{< /tabs >}}
 
 
-初期化のオプションについては、[トレーサー設定][6]を参照してください。
+初期化のオプションについては、[トレーサー設定][3]を参照してください。
 
 ## コンフィギュレーション
 
@@ -148,7 +158,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 | version        | `DD_VERSION`            | `null`      | アプリケーションのバージョン番号。デフォルトは、package.json のバージョンフィールドの値です。バージョン 0.20 以降で利用可能。
 | タグ           | `DD_TAGS`                    | `{}`        | すべてのスパンおよびメトリクスに適用されるべきグローバルタグを設定します。環境変数としてパスした場合、フォーマットは `key:value,key:value` となります。プログラム的に設定する場合は、`tracer.init({ tags: { foo: 'bar' } })` となり、バージョン 0.20 以降で使用できます                                                                                                                            |
 
-サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することをおすすめします。このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][7]のドキュメントをご参照ください。
+サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することをおすすめします。このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][2]のドキュメントをご参照ください。
 
 ### インスツルメンテーション
 
@@ -164,7 +174,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 | sampleRate     | -                            | `1`         | スパンのサンプリング率: `0` ～ `1` 間の浮動小数点。                                                                                                                                                                                                              |
 | flushInterval  | -                            | `2000`      | トレーサーが Agent へトレースを送信する際のインターバル (ミリセカンド)。                                                                                                                                                                                                |
 | runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | ランタイムメトリクスのキャプチャを有効にするかどうか。ポート `8125` (または `dogstatsd.port` で構成) が UDP 用に Agent で開いている必要があります。                                                                                                                                        |
-| experimental   | -                            | `{}`        | 試験機能は、 Boolean の true を使用して一度に、またはキー/値のペアを使用して個々に有効にできます。試験機能に関する詳細は、[サポート][8]までお問合せください。                                                                                   |
+| experimental   | -                            | `{}`        | 試験機能は、 Boolean の true を使用して一度に、またはキー/値のペアを使用して個々に有効にできます。試験機能に関する詳細は、[サポート][4]までお問合せください。                                                                                   |
 | plugins        | -                            | `true`      | ビルトインプラグインを使用して、外部ライブラリの自動インスツルメンテーションを有効にするかどうか。                                                                                                                                                                       |
 | - | `DD_TRACE_DISABLED_PLUGINS` | - | トレーサーが初期化された際に自動で無効となるインテグレーション名のカンマ区切り文字列。`DD_TRACE_DISABLED_PLUGINS=express,dns` などの環境変数のみとなります。 |
 | clientToken    | `DD_CLIENT_TOKEN`            | `null`      | ブラウザーのトレーシング用クライアントトークン。Datadog の **Integrations** -> **APIs** で生成できます。                                                                                                                                                                             |
@@ -175,10 +185,6 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/nodejs
-[2]: https://app.datadoghq.com/apm/docs
-[3]: /ja/tracing/visualization/
-[4]: https://datadog.github.io/dd-trace-js
-[5]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
-[6]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[7]: /ja/getting_started/tagging/unified_service_tagging/
-[8]: /ja/help/
+[2]: /ja/getting_started/tagging/unified_service_tagging/
+[3]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[4]: /ja/help/

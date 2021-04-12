@@ -47,7 +47,7 @@ This section displays the [NTP offset][2] and system UTC time, for example:
     System UTC time: 2019-08-29 18:16:41.526203 UTC
 ```
 
-### Host Info
+### Host info
 
 This section displays information on the host the Agent is running on, for example:
 ```text
@@ -80,7 +80,7 @@ This section displays the hostnames found by the Agent (see the example below). 
 
 ## Collector
 
-### Running Checks
+### Running checks
 
 This section displays a list of running check instances, for example:
 
@@ -108,7 +108,7 @@ Terms and descriptions:
 | Last Run               | The number during the last check run.                            |
 | Total                  | The total number since the Agent's most recent start or restart. |
 
-### Config Errors
+### Config errors
 
 This section only displays if there are checks with config errors, for example:
 
@@ -118,7 +118,7 @@ This section only displays if there are checks with config errors, for example:
       Configuration file contains no valid instances
 ```
 
-### Loading Errors
+### Loading errors
 
 This section only displays if there are checks with loading errors, for example:
 
@@ -189,7 +189,7 @@ Terms and descriptions:
 | DroppedOnInput | The number of transactions that were dropped because all workers were busy.  |
 | Dropped        | The number of transactions dropped because they were retried too many times. |
 
-### API Keys status
+### API keys status
 
 This sections shows the status of your configured API key, for example:
 

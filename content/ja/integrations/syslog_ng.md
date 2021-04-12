@@ -93,7 +93,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
     - 出力先の定義を次のように変更します。
 
         ```conf
-        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
+        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
     TLS のパラメーターの詳細、および syslog-ng が使用可能かどうかは、[公式ドキュメント][1]を参照してください。
@@ -168,7 +168,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
     - 出力先の定義を次のように変更します。
 
         ```conf
-        destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
+        destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
     TLS のパラメーターの詳細、および syslog-ng が使用可能かどうかは、[公式ドキュメント][1]を参照してください。

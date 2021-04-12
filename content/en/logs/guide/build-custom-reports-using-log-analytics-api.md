@@ -24,6 +24,7 @@ The following examples are covered in this guide:
 * [Getting stats](#getting-stats)
 * [Getting percentiles](#getting-percentiles)
 * [Multiple group-bys, unique counts, and metrics](#multiple-group-bys-unique-counts-and-metrics) 
+* [Pagination](#pagination)
 
 ## Prerequisites
 
@@ -688,7 +689,181 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 ```
 In the response, `c0` represents the unique count of `useragent`, `c1` represents the `pc90` of metric `duration`, `c2` represents the `avg` of metric `network.bytes_written`, and `c3` represents the total `count` of log events.
 
-**Note:** Paging is only supported if `sort` is `alphabetical`.
+### Pagination
+
+The following API call builds a `table` to display the breakdown of your log data by facets (such as `service` and `status`), sorts the results by `service` in ascending order, and paginates over the result set using `limit`.
+
+**API call:**
+
+```bash
+curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
+   "compute":[
+   {
+       "type":"total",
+       "aggregation":"count"
+   }],
+   "filter": {
+       "from":"1611118800000",
+       "to":"1611205140000",
+       "query":"*"
+           },
+   "group_by":[
+       {
+           "type":"facet",
+           "facet":"service",
+           "sort":{
+               "order":"asc"
+           },
+           "limit":2
+       },
+       {
+           "type":"facet",
+           "facet":"status",
+           "sort":{
+               "order":"desc",
+               "type":"measure",
+               "aggregation":"count"
+           }
+       }
+   ]
+}'
+
+```
+
+**Response:**
+
+```json
+{
+    "meta": {
+        "status": "done",
+        "request_id": "MjZUNF9qRG1TaG1Tb01JenhBV2tYd3x3VTNjTUhIQUdaRUZKajQ0YTBqdmZn",
+        "page": {
+            "after": "eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iXX19"
+        },
+        "elapsed": 5923
+    },
+    "data": {
+        "buckets": [
+            {
+                "computes": {
+                    "c0": 312
+                },
+                "by": {
+                    "status": "info",
+                    "service": "activator"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 405606
+                },
+                "by": {
+                    "status": "info",
+                    "service": "ad-auction"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 124
+                },
+                "by": {
+                    "status": "error",
+                    "service": "ad-auction"
+                }
+            }
+        ]
+    }
+}
+
+```
+To paginate and access the next set of results, use `page` option and set the `cursor` value to the `after` value from the previous call. 
+
+**API call:**
+```bash
+curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
+   "compute":[
+   {
+       "type":"total",
+       "aggregation":"count"
+   }],
+   "filter": {
+       "from":"1611118800000",
+       "to":"1611205140000",
+       "query":"*"
+           },
+   "group_by":[
+       {
+           "type":"facet",
+           "facet":"service",
+           "sort":{
+               "order":"asc"
+           },
+           "limit":2
+       },
+       {
+           "type":"facet",
+           "facet":"status",
+           "sort":{
+               "order":"desc",
+               "type":"measure",
+               "aggregation":"count"
+           }
+       }
+   ],
+   "page":{
+       "cursor":"eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iXX19"
+   }
+}'
+
+```
+
+**Response:**
+
+```json
+{
+    "meta": {
+        "status": "done",
+        "request_id": "aVM2Y2VVMUZReVNmLVU4ZzUwV1JnUXxRWkVjamNHZU9Ka21ubjNDbHVYbXJn",
+        "page": {
+            "after": "eyJhZnRlciI6eyJzZXJ2aWNlIjpbImFjdGl2YXRvciIsImFkLWF1Y3Rpb24iLCJhZC1zZXJ2ZXIiLCJhZGRvbi1yZXNpemVyIl19fQ"
+        },
+        "elapsed": 6645
+    },
+    "data": {
+        "buckets": [
+            {
+                "computes": {
+                    "c0": 24740759
+                },
+                "by": {
+                    "status": "info",
+                    "service": "ad-server"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 2854331
+                },
+                "by": {
+                    "status": "error",
+                    "service": "ad-server"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 139
+                },
+                "by": {
+                    "status": "error",
+                    "service": "addon-resizer"
+                }
+            }
+        ]
+    }
+}
+```
+
+**Note:** Paging is only supported if `sort` is `alphabetical` for at least one facet as shown in above example. To build a report with multiple group-bys with high cardinality facets, make separate API calls. For example, to build a report showing different metrics for `url paths` for every `session id`, make separate API calls. The first call would return all `sessions ids` sorted and you would use these results to get the metrics for `url paths` for each `session id`.
 
 ### Further Reading
 

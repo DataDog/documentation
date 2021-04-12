@@ -23,7 +23,7 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
 
-## Extract Labels as Tags
+## Extract labels as tags
 
 Starting with Agent v6.0+, the Agent can collect labels for a given container and use them as tags to attach to all data emitted by this container.
 
@@ -66,7 +66,18 @@ docker_labels_as_tags:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Extract Environment Variables as Tags
+## Extract environment variables as tags
+
+Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][2]. To extract even more tags, use the following options:
+
+| Environment Variable               | Description                                    |
+|------------------------------------|------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS`         | Extract docker container labels                |
+| `DD_DOCKER_ENV_AS_TAGS`            | Extract docker container environment variables |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                             |
+| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics                      |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics                     |
+
 Starting with Agent v7.20+, a containerized Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container without modifying the Agent `datadog.yaml` file.
 
 Tags should be added using the following format:
@@ -117,3 +128,4 @@ docker_env_as_tags:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging
+[2]: /agent/docker/?tab=standard#tagging

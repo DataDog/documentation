@@ -14,7 +14,7 @@ Cet article décrit des considérations de sécurité supplémentaires à prendr
 
 ## Obfuscation des arguments de processus
 
-Si vous utilisez la version 6, vous pouvez configurer l'Agent afin d'obfusquer des commandes de [processus][2] ou des arguments envoyés par l'Agent à l'application Datadog. Pour masquer des séquences sensibles au sein de vos données de processus, utilisez le [paramètre][3] `custom_sensitive_words`. Il s'agit d'une liste contenant une ou plusieurs expressions régulières qui demandent à l'Agent de filtrer les informations de processus en fonction d'une liste d'exclusion.
+Si vous utilisez la version 6, vous pouvez configurer l'Agent afin d'obfusquer des commandes de [processus][2] ou des arguments envoyés par l'Agent à l'application Datadog. Pour masquer des séquences sensibles au sein de vos données de processus, utilisez le [paramètre][3] `custom_sensitive_words`. Il s'agit d'une liste contenant une ou plusieurs expressions régulières qui demandent à l'Agent de filtrer des informations de processus en fonction d'une liste d'exclusion.
 
 De plus, les mots-clés suivants sont obfusqués par défaut :
 
@@ -24,7 +24,7 @@ De plus, les mots-clés suivants sont obfusqués par défaut :
 
 ## Sécurité des intégrations cloud
 
-Datadog permet aux clients d'intégrer des services tiers. Datadog propose [plus de 400 intégrations embarquées][4], certaines d'entre elles étant directement configurées dans l'application : les clients doivent parfois fournir des identifiants pour permettre à Datadog de se connecter à un service tiers en leur nom. Les identifiants fournis par les clients sont chiffrés et stockés par Datadog dans un datastore sécurisé soumis à des protocoles de sécurité strictes. Toutes les données sont chiffrées durant leur stockage et leur transfert. L'accès au datastore sécurisé est soumis à des contrôles et à une surveillance strictes. Chaque service et chaque action de service a uniquement accès aux données qui lui sont nécessaires.
+Datadog permet aux clients d'intégrer des services tiers. Datadog propose plus de [{{< translate key="integration_count" >}} intégrations intégrées][4], certaines d'entre elles étant directement configurées dans l'application. Ainsi, les clients doivent parfois fournir des identifiants pour permettre à Datadog de se connecter à un service tiers en leur nom. Les identifiants fournis par les clients sont chiffrés et stockés par Datadog dans un datastore sécurisé soumis à des protocoles de sécurité strictes. Toutes les données sont chiffrées durant leur stockage et leur transfert. L'accès au datastore sécurisé est soumis à des contrôles et à une surveillance renforcés. Chaque service et chaque action de service ont uniquement accès aux données qui lui sont nécessaires.
 Un système de détection des comportements anormaux surveille en permanence les accès non autorisés. L'accès des employés à des fins de maintenance est limité à un petit groupe d'ingénieurs.
 
 En raison de leur nature sensible, des protocoles de sécurité supplémentaires sont mis en place lors de l'intégration avec les fournisseurs cloud lorsque cela est possible, notamment via l'utilisation d'identifiants spécifiques à Datadog avec des autorisations limitées. Par exemple :

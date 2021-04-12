@@ -211,6 +211,7 @@ spec:
 | site | Agent データを送信する Datadog インテークのサイト。EU サイトにデータを送信するには、`datadoghq.eu` に設定します。 |
 
 {{< /table >}}
+
 [1]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
 [2]: https://docs.datadoghq.com/ja/agent/docker/?tab=standard#environment-variables
 [3]: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/

@@ -44,6 +44,12 @@ Otherwise, to begin tracing applications written in Python, install the Datadog 
 pip install ddtrace
 ```
 
+**Note:** This command requires pip version `18.0.0` or greater.  For Ubuntu, Debian, or another package manager, update your pip version with the following command:
+
+```python
+sudo -H pip3 install --upgrade pip
+```
+
 Then to instrument your Python application use the included `ddtrace-run` command. To use it, prefix your Python entry-point command with `ddtrace-run`.
 
 For example, if your application is started with `python app.py` then:
@@ -124,8 +130,9 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DD_ENV`                           |             | Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6]. Available in version 0.38+.                                                                                                             |
 | `DD_SERVICE`                       |             | The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you [set the service name in code](#integrations). Available in version 0.38+. |
+| `DD_SERVICE_MAPPING`               |             | Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+. |
 | `DD_VERSION`                       |             | Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.                                                                                                                                                                  |
-| `DD_TAGS`                          |             | A list of default tags to be added to every span, profile, and runtime metric, for example: `layer:api,team:intake`. Available in version 0.38+.                                                                                                                            |
+| `DD_TAGS`                          |             | A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.                                                                                                                            |
 | `DD_TRACE_ENABLED`            | `true`      | Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.                                                                                                                                                           |
 | `DD_AGENT_HOST`                    | `localhost` | Override the address of the trace Agent host that the default tracer attempts to submit traces to.                                                                                                                                                                          |
 | `DATADOG_TRACE_AGENT_PORT`         | `8126`      | Override the port that the default tracer submit traces to.                                                                                                                                                                                                                 |

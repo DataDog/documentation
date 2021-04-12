@@ -43,7 +43,7 @@ These different metric submission types are mapped to four in-app metric types f
 
 **Note**: If you submit a metric to Datadog without a type, the metric type appears as `Not Assigned` within Datadog. The `Not Assigned` metric type cannot be further changed to another in-app type until an initial metric type is submitted.
 
-## Submission vs. In-App type
+## Submission vs. in-app type
 
 Metrics are submitted to Datadog in three main ways:
 
@@ -55,7 +55,7 @@ The majority of data that Datadog receives is submitted by the Agent, either thr
 
 Data submitted directly to the Datadog API is not aggregated by Datadog, with the exception of distribution metrics. The raw values sent to Datadog are stored as-is.
 
-Refer to the [Submission and In-App Types](#submission-types-and-datadog-in-app-types) section to see how different metric submission types are mapped to their corresponding in-app types.
+Refer to the [Submission types and Datadog in-app types](#submission-types-and-datadog-in-app-types) section to see how different metric submission types are mapped to their corresponding in-app types.
 
 ## Metric types
 

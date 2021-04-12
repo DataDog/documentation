@@ -18,7 +18,7 @@ Le plug-in Serverless Framework Datadog installe automatiquement la bibliothèqu
 
 ## Macro Serverless Datadog
 
-La macro Serverless Datadog pour AWS CloudFormation installe automatiquement la bibliothèque Lambda Datadog sur vos applications sans serveur Python et Node.js déployées à l'aide d'AWS CloudFormation, SAM ou CDK, et permet de recueillir des métriques Lambda optimisées, des métriques custom, des traces et des logs à partir de vos fonctions Lambda. Pour en savoir plus, consultez la [page dédiée à la macro][2].
+La macro Serverless Datadog pour AWS CloudFormation installe automatiquement la bibliothèque Lambda Datadog sur vos applications sans serveur Python et Node.js déployées à l'aide d'AWS CloudFormation, SAM ou CDK. Elle permet de recueillir des métriques Lambda optimisées, des métriques custom, des traces et des logs à partir de vos fonctions Lambda. Pour en savoir plus, consultez la [page dédiée à la macro][2].
 
 ## CLI Serverless Datadog
 

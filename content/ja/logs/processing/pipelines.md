@@ -70,12 +70,11 @@ Datadog は、JSON 形式のログを自動的にパースします。ログが 
 
 ## 特殊なパイプライン
 
-### 予約済み属性パイプライン
+### JSON ログの前処理
 
-Datadog には、`timestamp`、`status`、`host`、`service`、さらにはログ `message` などの[予約済み属性][3]が用意されています。これらの属性は Datadog 内で固有の挙動を示します。
-使用する JSON ログでこれらの属性に別の属性名が付いている場合は、予約済み属性パイプラインを使用して、それらのログ属性を予約済み属性リストのいずれかに再マップしてください。
+Datadog には、`timestamp`、`status`、`host`、`service`、`message` などの[予約済み属性のリスト][3]があります。これらの属性には、Datadog 内で特定の動作があります。JSON ログに異なる属性名がある場合は、*JSON ログの前処理*を使用して、ログ属性名を予約済み属性リストの属性名にマップします。
 
-たとえば、次のログを生成するサービスがあるとします。
+たとえば、次のログを生成するサービスについて考えてみます。
 
 ```json
 {
@@ -87,15 +86,17 @@ Datadog には、`timestamp`、`status`、`host`、`service`、さらにはロ�
 }
 ```
 
-予約済み属性パイプラインに移動し、デフォルトのマッピングを次のように変更します。
+*JSON ログの前処理*を開き、デフォルトのマッピングを次のように変更します。
 
 {{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="予約済み属性リマッパー"  style="width:70%;">}}
 
-これで、次のログが生成されます。
+これにより、次のログが生成されます。
 
 {{< img src="logs/processing/pipelines/log_post_remapping.png" alt="ログの事後再マッピング"  style="width:70%;">}}
 
-カスタムパイプラインで属性を予約済み属性の 1 つに再マップする場合は、[ログステータスリマッパー][4]または[ログ日付リマッパー][5]を使用します。
+カスタムパイプラインの予約済み属性の 1 つに属性をマップするには、[ログステータスリマッパー][4]、[ログ日付リマッパー][5]、または[ログメッセージリマッパー][6]を使用します。
+
+**注:** *JSON ログの前処理*は、ログ属性の 1 つをログの `host` として定義する唯一の方法です。
 
 ### インテグレーションパイプライン
 
@@ -105,12 +106,12 @@ Datadog には、`timestamp`、`status`、`host`、`service`、さらにはロ�
 
 ### インテグレーションパイプラインライブラリ
 
-Datadog で利用可能なインテグレーションパイプラインの一覧については、[インテグレーションパイプラインライブラリ][6]をご覧ください。
+Datadog で利用可能なインテグレーションパイプラインの一覧については、[インテグレーションパイプラインライブラリ][7]をご覧ください。
 パイプラインライブラリにて、Datadog がデフォルトで各ログフォーマットを処理する方法をご確認いただけます。
 
 {{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="インテグレーションパイプラインライブラリ"  style="width:80%;">}}
 
-インテグレーションパイプラインをひとつ使用する場合、Datadog は対応するログの `source` を構成し、インテグレーションをインストールすることを推奨しています。Datadog がこのソースから初回のログを受信すると、インストールが自動でトリガーされ、インテグレーションパイプラインが処理対象のパイプラインリストに追加されます。ログソースの構成については、対応する[インテグレーションのドキュメント][7]を参照してください。
+インテグレーションパイプラインをひとつ使用する場合、Datadog は対応するログの `source` を構成し、インテグレーションをインストールすることを推奨しています。Datadog がこのソースから初回のログを受信すると、インストールが自動でトリガーされ、インテグレーションパイプラインが処理対象のパイプラインリストに追加されます。ログソースの構成については、対応する[インテグレーションのドキュメント][8]を参照してください。
 
 コピーボタンをクリックしてインテグレーションパイプラインをコピーすることもできます。
 
@@ -120,11 +121,11 @@ Datadog で利用可能なインテグレーションパイプラインの一覧
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /ja/logs/processing/processors/
 [2]: /ja/logs/explorer/search/
 [3]: /ja/logs/processing/#reserved-attributes
 [4]: /ja/logs/processing/processors/#log-status-remapper
 [5]: /ja/logs/processing/processors/#log-date-remapper
-[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[7]: /ja/integrations/#cat-log-collection
+[6]: /ja/logs/processing/processors/#log-message-remapper
+[7]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[8]: /ja/integrations/#cat-log-collection

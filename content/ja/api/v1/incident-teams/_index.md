@@ -1,3 +1,4 @@
 ---
 title: インシデントチーム
+headless: true
 ---

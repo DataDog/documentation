@@ -17,7 +17,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 * A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Infrastructure service. Datadog charges monthly based on the fractional hours of monitored containers.
 * A [**custom metric**][2] is a single, unique combination of a metric name, host ID and any tags. Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
 * A **device** is a physical sensor comprising one or more single-board computers in a frame. Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
-* A **serverless function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function). The Datadog Infrastructure service records the number of functions executed or invoked one or more times each hour. Datadog charges based on the average number of functions across all hours in a month.
+* A **serverless function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function). Datadog charges based on the total number of Lambda function invocations in a month.
 * An AWS **Fargate task** is a collection of containers setup through AWS’s ECS container orchestration platform. Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
 
 ## APM
@@ -26,6 +26,9 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.
+* An **Ingested Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested into Datadog APM.
+
+You can put controls in place for both Indexed and Ingested span volumes.  For more information, read the [Trace Rentention and Ingestion Controls][4] documentation.
 
 **Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
@@ -61,24 +64,26 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 * Datadog records the number of unique Continuous Profiler hosts you are concurrently monitoring with the Datadog Continuous Profiler service once per hour.
   * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).
-  * Each host is allowed up to 4 profiled containers for free. Overage containers will be priced at $2 per container. Note: this allotment is aggregated across all hosts so if you have 4 containers on average across all your hosts, you will not be charged overages on host-by-host basis.
+  * Each host is allowed up to 4 profiled containers for free. Containers over this will be priced at $2 per container.
+    **Note**: this allotment is aggregated across all hosts so if you have 4 containers on average across all your hosts, you will not be charged as if you have more on host-by-host basis.
 * Datadog measures the total number of containers that are being profiled. A container is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Continuous Profiler service. Datadog charges monthly based on the fractional hours of monitored containers. For Continuous Profiler, Datadog only counts the containers that are running the Continuous Profiler service towards the total monitored container count.
 
-## Incident Management 
+## Incident Management
 
-* Datadog tracks the number of monthly active users who participate in incident management and response. 
+* Datadog tracks the number of monthly active users who participate in incident management and response.
  * An **active user** is only counted if they contribute comments or signals (graphs, links, etc.) to an incident. Anyone who only opens/closes an incident or simply views the incident are not counted. Additionally, these are not named seats, so you do not need to determine which specific users have access.
 
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][4].
+For technical questions, contact [Datadog support][5].
 
-Contact [Sales][5] or your [Customer Success][6] Manager to discuss hourly pricing or billing for your account.
+Contact [Sales][6] or your [Customer Success][7] Manager to discuss hourly pricing or billing for your account.
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /developers/metrics/custom_metrics/
 [3]: /tracing/trace_retention_and_ingestion/#retention-filters
-[4]: /help/
-[5]: mailto:sales@datadoghq.com
-[6]: mailto:success@datadoghq.com
+[4]: /tracing/trace_retention_and_ingestion/
+[5]: /help/
+[6]: mailto:sales@datadoghq.com
+[7]: mailto:success@datadoghq.com

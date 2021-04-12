@@ -8,8 +8,8 @@ aliases:
 further_reading:
   - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
     tag: ブログ
-    text: 新しいモニターアップタイムウィジェットで SLO のステータスを追跡する
-  - link: 'https://learn.datadoghq.com/enrol/index.php?id=30'
+    text: Datadog で SLO のステータスとエラーバジェットを追跡する
+  - link: 'https://learn.datadoghq.com/course/view.php?id=34'
     tag: ラーニングセンター
     text: サービスレベル目標 (SLO) について
 ---
@@ -32,7 +32,7 @@ further_reading:
 
 ## セットアップ
 
-Datadog の[サービスレベル目標ステータスページ][1]を使用して、新しい SLO を作成したり、既存の SLO を表示して管理することができます。また、[SLO サマリーウィジェット][2]を追加すると、SLO のステータスを一目で確認できます。
+Datadog の[サービスレベル目標ステータスページ][1]を使用して、新しい SLO を作成したり、既存の SLO を表示して管理することができます。また、[SLO サマリーウィジェット][2]をダッシュボードに追加すると、SLO のステータスを一目で確認できます。
 
 ### 構成
 
@@ -79,7 +79,7 @@ SLO のリストビューに移動すると、デフォルトの SLO ビュー�
 - オーガニゼーションで定義されているすべての SLO リスト
 - 左側のファセットリストで利用可能なファセットのリスト
 
-### 保存ビュー
+### 保存済みビュー
 
 以下を共有することで、チームに最も関連性の高い SLO についてカスタマイズした検索を保存ビューの SLO リストビューに保存し共有することができます。
 

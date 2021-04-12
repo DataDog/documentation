@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -15,11 +16,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md'
 display_name: "API Cloud\_Foundry"
+draft: false
 git_integration_title: api_cloud_foundry
 guid: 82e5b924-c8c3-4467-bfde-5838857b6447
 integration_id: api-cloud-foundry
 integration_title: "API Cloud\_Foundry"
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

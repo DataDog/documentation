@@ -39,6 +39,9 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 After you have instrumented your services and ingested traces, set tag-based [Retention filters][3] within the Datadog app so that Datadog retains spans that are relevant to you.
 
+**Note:** Both ingested and indexed spans may impact your bill. For more information, see the [APM Billing][7] page.
+
+
 ## Live Search for 15 minutes
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
@@ -95,7 +98,7 @@ All spans that are indexed by retention filters or legacy App Analytics filters 
 
 For example, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search will return no results, unlike when using Live Search.
 
-You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][7] page within the Datadog app to create or modify your own filters.
+You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][8] page within the Datadog app to create or modify your own filters.
 
 ## Live Analytics for 15 minutes
 
@@ -131,7 +134,7 @@ All spans indexed by retention filters or legacy App Analytics filters are avail
 
 **Note:** As of October 20, 2020 Tracing without Limits replaced App Analytics as a more flexible way to ingest 100% of your traces and retain the ones important to your business.
 
-You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][7] page within the Datadog app to create or modify your own filters.
+You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][8] page within the Datadog app to create or modify your own filters.
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
@@ -139,4 +142,5 @@ You can customize what spans are retained and at what retention rates. By defaul
 [4]: /tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter
 [5]: /tracing/visualization/#indexed-span
 [6]: /tracing/trace_retention_and_ingestion/
-[7]: https://app.datadoghq.com/apm/traces/retention-filters
+[7]: /account_management/billing/apm_distributed_tracing/
+[8]: https://app.datadoghq.com/apm/traces/retention-filters
