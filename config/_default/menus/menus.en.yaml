@@ -1783,40 +1783,45 @@ main:
     parent: log_management
     identifier: log_security
     weight: 11
-  - name: Security & Compliance
-    url: security_monitoring/
+  - name: Security Platform
+    url: security_platform/
     pre: nav_security_monitoring
-    identifier: security_compliance_monitoring
+    identifier: security_platform
     weight: 160000
-  - name: Getting Started
-    url: security_monitoring/getting_started
-    parent: security_compliance_monitoring
-    identifier: security_monitoring_getting_started
+  - name: Security Monitoring
+    url: security_platform/security_monitoring/
+    parent: security_platform
+    identifier: security_monitoring
     weight: 1
-  - name: Detection Rules
-    url: security_monitoring/detection_rules/
-    parent: security_compliance_monitoring
-    identifier: detection_rules
+  - name: Getting Started
+    url: security_platform/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: Security Rules
+    url: security_platform/detection_rules/
+    parent: security_platform
+    identifier: security_rules
     weight: 2
   - name: Security Monitoring
-    url: security_monitoring/detection_rules/security_monitoring
-    parent: detection_rules
+    url: security_platform/detection_rules/security_monitoring
+    parent: security_rules
     identifier: security_monitoring_detection_rules
     weight: 201
-  - name: Default Detection Rules
-    url: security_monitoring/default_rules
-    parent: security_compliance_monitoring
-    identifier: security_monitoring_default_detection_rules
+  - name: Default Rules
+    url: security_platform/default_rules
+    parent: security_platform
+    identifier: default_rules
     weight: 3
   - name: Signals Explorer
-    url: security_monitoring/explorer
-    parent: security_compliance_monitoring
-    identifier: security_monitoring_explorer
+    url: security_platform/explorer
+    parent: security_platform
+    identifier: signals_explorer
     weight: 4
   - name: Guides
-    url: security_monitoring/guide
-    parent: security_compliance_monitoring
-    identifier: security_monitoring_guides
+    url: security_platform/guide
+    parent: security_platform
+    identifier: security_platform_guides
     weight: 5
   - name: Synthetic Monitoring
     url: synthetics/
