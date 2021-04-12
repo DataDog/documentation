@@ -125,7 +125,7 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 
 ### Add custom tags to resources
 
-It is possible to add custom tags to Kubernetes resources to ease filtering inside the Kubernetes resource view.
+You can add custom tags to Kubernetes resources to ease filtering inside the Kubernetes resource view.
 
 Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable.
 
