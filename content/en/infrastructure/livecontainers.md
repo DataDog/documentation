@@ -129,7 +129,7 @@ You can add custom tags to Kubernetes resources to ease filtering inside the Kub
 
 Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable.
 
-Note that such tags will only show up in the Kubernetes resource view.
+**Note**: These tags only show up in the Kubernetes resource view.
 
 
 {{< tabs >}}
