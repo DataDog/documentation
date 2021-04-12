@@ -38,7 +38,7 @@ Each item in the Clipboard can be opened, cloned, or deleted; these options are 
 
 {{< img src="monitors/incidents/managing-clips.png" alt="Manage your clips"  style="width:80%;">}}
 
-The Clipboard holds a maximum of 20 graphs. Remove graphs by deleting them individually, or by clicking “Clear Clipboard” on the bottom left. If more than 20 graphs are added, the oldest graphs, stored furthest to the left, are removed automatically.
+The Clipboard holds a maximum of 20 graphs. Remove graphs by deleting them individually, or by clicking “Remove All.” If more than 20 graphs are added, the oldest graphs, stored furthest to the left, are removed automatically.
 
 ## Exporting
 
