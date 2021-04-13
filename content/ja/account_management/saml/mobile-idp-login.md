@@ -22,8 +22,7 @@ IdP 始動の SAML を使用した Datadog モバイルアプリへのログイ�
 
 - Datadog モバイルアプリがインストールされた**モバイルデバイス**では、ユーザーは**まずモバイルブラウザを使用してアイデンティティプロバイダーでログイン** (下記の Google の例を参照) する必要があります。すると、アプリで自動的にリクエストが取得され、ユーザーのサインインが許可されます。
 
-{{< img src="account_management/saml/google_idp_tile_sml.png" style="width:60%; background:none; border:none; box-shadow:none;" alt="Google IDP Relay S
-tate" >}}
+{{< img src="account_management/saml/google_idp_tile_sml.png" style="width:60%; background:none; border:none; box-shadow:none;" alt="Google IDP Relay State" >}}
 
 - **デスクトップデバイス**またはアプリがインストールされていないアプリの場合、続行するにはユーザーは "Use the Datadog Website" をクリックする必要があります。
 
