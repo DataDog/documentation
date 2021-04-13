@@ -109,7 +109,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 10. For **Container name** enter `datadog-agent`.
 11. For **Image** enter `gcr.io/datadoghq/agent:latest`.
 12. For **Maximum memory** enter `256`. **Note**: For high resource usage, you may need a higher memory limit.
-13. Scroll down to the **Advanced container configuration** section and enter `10` in **CPU units**.
+13. Scroll down to the **Advanced container configuration** section and enter `100` in **CPU units**.
 **Note**: For Windows, enter at least `512` in **CPU units** to avoid getting the error `Timeout while starting the service`.
 14. For **Env Variables**, add a **Key** of `DD_API_KEY` and enter your Datadog API Key in the value. *If you feel more comfortable storing secrets like this in s3, take a look at the [ECS Configuration guide][1].*
 15. Add another Environment Variable for any tags you want to add using the key `DD_TAGS`.
