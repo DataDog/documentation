@@ -58,6 +58,8 @@ After processing, the following structured log is generated:
 * You must have unique rule names within the same Grok parser.
 * The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 * Properties with null or empty values are not displayed.
+* A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][3].
+* The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
 
 ### Matcher and filter
 
@@ -391,11 +393,6 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 ```
 
 {{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
-
-**Notes**:
-
-- A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][3].
-- The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
 
 ### List to array
 
