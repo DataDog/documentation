@@ -203,8 +203,13 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 {{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet"  style="width:100%;">}}
 
-
 {{< /site-region >}}
+
+{{< site-region region="us3,gov" >}}
+A TCP endpoint is not supported for this region.
+{{< /site-region >}}
+
+
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
