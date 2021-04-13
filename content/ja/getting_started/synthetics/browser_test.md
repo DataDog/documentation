@@ -2,6 +2,9 @@
 title: ブラウザテストの概要
 kind: documentation
 further_reading:
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+    tag: ラーニングセンター
+    text: Synthetic テストの紹介
   - link: /synthetics/browser_tests
     tag: ドキュメント
     text: ブラウザテストについて
@@ -9,8 +12,8 @@ further_reading:
     tag: ドキュメント
     text: ブラウザサブセットを作成
   - link: /synthetics/settings/
-    tag: ドキュメント
-    text: 高度な Synthetics モニタリング設定を構成する
+    tag: Documentation
+    text: 高度な Synthetic モニタリング設定を構成する
 ---
 ## ブラウザテストを作成
 
@@ -23,7 +26,7 @@ further_reading:
 ## テストの設定
 
 1. Datadog アプリケーションで、左側のメニューにある **[UX Monitoring][2]** にカーソルを合わせ、**Synthetic Test** を選択します。
-2. 右上隅にある **New Test** ボタンをクリックします。
+2. 右上の **New Test** ボタンをクリックします。
 3. **Browser Test**を選択します。
 4. ブラウザテストの構成を定義します。
 
@@ -86,11 +89,9 @@ further_reading:
 
 **Traces** タブには、Datadog の [Synthetic モニタリングとの APM インテグレーション][8]でアクセスできます。構成が完了すると、失敗したテストランから生成されたトレースを見ることで、テストランが失敗した問題の根本原因を探ることができます。ブラウザテストの結果を APM とリンクさせるには、APM インテグレーションのヘッダーを追加する URL をホワイトリスト化します。ワイルドカードには `*` を使用します（例: `https://*.datadoghq.com/*`）。
 
-{{< whatsnext desc="ブラウザテストを初めて設定した後。">}}
-{{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}ブラウザテストについて{{< /nextlink >}}
-{{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}ブラウザのサブテストを作成{{< /nextlink >}}
-{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}高度な Synthetic モニタリング設定を構成する{{< /nextlink >}}
-{{< /whatsnext >}}
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
