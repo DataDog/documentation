@@ -425,16 +425,16 @@ class Integrations:
         copyfile(file_name, full_destination_path)
 
     @staticmethod
-    def replace_image_src(markdown_string):
+    def replace_image_src(markdown_string, integration_name):
         """
         Takes a markdown string and replaces any image markdown with our img shortcode, pointing to the static/images folder.
         This is needed when dealing with Marketplace Integrations to properly display images pulled from a private repo.
         """
         markdown_img_search_regex = r"!\[(.*?)\]\((.*?)\)"
-        img_shortcode = "{{< img src=\"\\2\" alt=\"\\1\" >}}"
-        integration_img_prefix = 'https://raw.githubusercontent.com/DataDog/marketplace/master/'
+        img_shortcode = "{{< img src=\"marketplace/" + integration_name + "/\\2\" alt=\"\\1\" >}}"
+        integration_img_prefix = 'https://raw.githubusercontent.com/DataDog/marketplace/master/{}/'.format(integration_name)
 
-        replaced_markdown_string = markdown_string.replace(integration_img_prefix, 'marketplace/')
+        replaced_markdown_string = markdown_string.replace(integration_img_prefix, '')
         regex_result = re.sub(markdown_img_search_regex, img_shortcode, replaced_markdown_string, 0, re.MULTILINE)
 
         if regex_result:
@@ -561,7 +561,7 @@ class Integrations:
         else:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
-                markdown_with_replaced_images = self.replace_image_src(markdown_string)
+                markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
                 updated_markdown = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
                 is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
 
