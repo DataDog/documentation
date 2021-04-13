@@ -541,7 +541,10 @@ class Integrations:
         new_file_name = "{}.md".format(
             basename(dirname(file_name))
         )
-        exist_already = exists(
+        # is this the same as a committed hardcoded integration
+        exist_already = (self.content_integrations_dir + new_file_name in self.initial_integration_files)
+        # is this overwriting another generated integration
+        exist_collision = exists(
             self.content_integrations_dir + new_file_name
         )
 
@@ -624,13 +627,23 @@ class Integrations:
         if not exist_already and no_integration_issue:
             # lets only write out file.md if its going to be public
             if manifest_json.get("is_public", False):
-                with open(self.content_integrations_dir + new_file_name, "w", ) as out:
+                out_name = self.content_integrations_dir + new_file_name
+
+                # if the same integration exists in multiple locations try name md after manifest name entry
+                if exist_collision:
+                    f_name = manifest_json.get("name", new_file_name)
+                    f_name = f_name if f_name.endswith('.md') else f_name + ".md"
+                    out_name = self.content_integrations_dir + f_name
+                    print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
+                        new_file_name, f_name))
+
+                with open(out_name, "w", ) as out:
                     out.write(result)
 
                 ## Reformating all links now that all processing is done
                 if tab_logic:
-                    final_text = format_link_file(self.content_integrations_dir + new_file_name,regex_skip_sections_start,regex_skip_sections_end)
-                    with open(self.content_integrations_dir + new_file_name, 'w') as final_file:
+                    final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
+                    with open(out_name, 'w') as final_file:
                         final_file.write(final_text)
 
     def add_integration_frontmatter(
