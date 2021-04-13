@@ -16,3 +16,5 @@ agents:
   rbac:
     create: false
     serviceAccountName: datadog-agent
+clusterAgent:
+  enabled: false
