@@ -45,8 +45,8 @@
     "dependencies": {
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
         "@babel/polyfill": "^7.4.4",
-        "@datadog/browser-logs": "^1.24.1",
-        "@datadog/browser-rum": "^1.24.1",
+        "@datadog/browser-logs": "^2.7.1",
+        "@datadog/browser-rum-recorder": "^2.7.1",
         "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz",
         "algoliasearch": "^3.35.1",
         "bootstrap": "4.3.1",
