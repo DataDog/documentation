@@ -24,10 +24,11 @@ further_reading:
 - The destination for:
 
   - [APM][1] data is `trace.agent.`{{< region-param key="dd_site" code="true" >}}
-  - [Live Containers][2] data is `process.`{{< region-param key="dd_site" code="true" >}}
-  - [Logs][3] data includes `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP, and several others. Review the complete list of [logs endpoints][4] for more information.
-  - [Orchestrator Resources][5] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
-  - [HIPAA logs][6] data is the same as for all [Logs][3], but also the following legacy endpoints are supported:
+  - [Live Containers][2] & [Live Process][3] data is `process.`{{< region-param key="dd_site" code="true" >}}
+  - [Logs][4] data includes `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP, and several others. Review the complete list of [logs endpoints][5] for more information.
+  - [Orchestrator Resources][6] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
+  - [Real User Monitoring (RUM)][7] data is `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+  - [HIPAA logs][8] data is the same as for all [Logs][4], but also the following legacy endpoints are supported:
     - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
@@ -142,7 +143,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 ## Using proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][7].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
 
 ## Further Reading
 
@@ -150,8 +151,10 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 
 [1]: /tracing/
 [2]: /infrastructure/livecontainers/
-[3]: /logs/
-[4]: /logs/log_collection/?tab=http#datadog-logs-endpoints
-[5]: /infrastructure/livecontainers/#kubernetes-resources-1
-[6]: /security/logs/#hipaa-enabled-customers
-[7]: /agent/proxy/
+[3]: /infrastructure/process/
+[4]: /logs/
+[5]: /logs/log_collection/?tab=http#datadog-logs-endpoints
+[6]: /infrastructure/livecontainers/#kubernetes-resources-1
+[7]: /real_user_monitoring/
+[8]: /security/logs/#hipaa-enabled-customers
+[9]: /agent/proxy/
