@@ -7,7 +7,7 @@ guides:
     link_text: View Guides
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Learn how to collect metrics, traces and logs with more than 400 integrations.
+    desc: Learn how to collect metrics, traces and logs with more than 450 integrations.
     link_text: View Guides
     link: getting_started/integrations/
   - title: Get Started in App
