@@ -13,15 +13,16 @@ further_reading:
   - link: /real_user_monitoring/rum_analytics
     tag: Documentation
     text: イベントに関する分析論を組み立てる
+  - link: real_user_monitoring/browser/tracking_user_actions
+    tag: Documentation
+    text: カスタムユーザーアクション追跡
 ---
-## 初期化
-
-このページでは、[Datadog Browser SDK][1] で利用可能なさまざまな初期化オプションを説明します。
-
-### RUM データから機密データをスクラブする
-RUM データに編集が必要な機密情報が含まれている場合は、RUM を初期化するときに `beforeSend` コールバックを使用して、機密シーケンスをスクラブするように Browser SDK を構成します。
+## 機密 RUM データの管理
+RUM データに編集が必要な機密情報が含まれている場合は、RUM を初期化するときに `beforeSend` コールバックを使用して、機密シーケンスを編集するか選択した RUM イベントを破棄するように Browser SDK を構成します。
 
 このコールバック関数を使用すると、RUM SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。
+
+### RUM イベントのコンテンツを変更
 
 たとえば、Web アプリケーションの URL からメールアドレスを編集します。
 
@@ -85,9 +86,67 @@ window.DD_RUM &&
 |   `error.resource.url`  |   文字列  |   エラーをトリガーしたリソース URL。                                                        |
 |   `resource.url`        |   文字列  |   リソースの URL。                                                                                 |
 
-**注**: RUM SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。すべてのイベントプロパティについては、[Browser SDK リポジトリ][2]を参照してください。
+**注**: RUM SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。すべてのイベントプロパティについては、[Browser SDK リポジトリ][1]を参照してください。
 
-### ユーザーセッションを特定する
+### RUM イベントを破棄
+
+`beforeSend` API で、`false` を返し RUM イベントを破棄します。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    beforeSend: (event) => {
+        if (shouldDiscard(event)) {
+            return false
+        }
+        ...
+    },
+    ...
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            if (shouldDiscard(event)) {
+                return false
+            },
+            ...
+        },
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            if (shouldDiscard(event)) {
+                return false
+            }
+            ...
+        },
+        ...
+    });
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## ユーザーセッションを特定する
 RUM セッションにユーザー情報を追加すると、次のことが簡単になります。
 * 特定のユーザーのジャーニーをたどる
 * エラーの影響を最も受けているユーザーを把握する
@@ -140,7 +199,7 @@ window.DD_RUM && window.DD_RUM.setUser({
 {{% /tab %}}
 {{< /tabs >}}
 
-### サンプリング
+## サンプリング
 
 デフォルトでは、収集セッション数にサンプリングは適用されていません。収集セッション数に相対サンプリング (% 表示) を適用するには、RUM を初期化する際に `sampleRate` パラメーターを使用します。下記の例では、RUM アプリケーションの全セッションの 90% のみを収集します。
 
@@ -195,8 +254,7 @@ window.DD_RUM &&
 
 **注**: サンプルとして抽出したセッションでは、すべてのページビューとそのセッションに紐付くテレメトリーは収集されません。
 
-## 利用可能な API
-
+## グローバルコンテキスト
 ### グローバルコンテキストを追加
 
 リアルユーザーモニタリング (RUM) を初期化したら、`addRumGlobalContext(key: string, value: any)` API を使用してアプリケーションから収集したすべての RUM  イベントにコンテキストを追加します。
@@ -247,7 +305,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][3]に従ってください。
+**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
 
 ### グローバルコンテキストを置換
 
@@ -298,7 +356,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][3]に従ってください。
+**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
 
 ### グローバルコンテキストを読み取る
 
@@ -330,70 +388,6 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{% /tab %}}
 {{< /tabs >}}
 
-### カスタムユーザーアクション
-
-リアルユーザーモニタリング (RUM) を初期化したら、`addAction(name: string, context: Context)` API を使用してアプリケーションページの特定のインタラクションを監視したり、カスタムタイミングを測定したりする場合のユーザーアクションを生成します。
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.addAction('<名前>', '<JSON_オブジェクト>');
-
-// Code example
-datadogRum.addAction('checkout', {
-    cart: {
-        amount: 42,
-        currency: '$',
-        nb_items: 2,
-        items: ['socks', 't-shirt'],
-    },
-});
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
-})
-
-// コード例
-DD_RUM.onReady(function() {
-    DD_RUM.addAction('checkout', {
-        cart: {
-            amount: 42,
-            currency: '$',
-            nb_items: 2,
-            items: ['socks', 't-shirt'],
-        },
-    });
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```javascript
-window.DD_RUM && DD_RUM.addAction('<名前>', '<JSON_オブジェクト>');
-
-// Code example
-window.DD_RUM &&
-    DD_RUM.addAction('checkout', {
-        cart: {
-            amount: 42,
-            currency: '$',
-            nb_items: 2,
-            items: ['socks', 't-shirt'],
-        },
-    });
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-上記の例では、RUM SDK がカート内のアイテム数、中身、カート全体の総額を収集します。
 
 
 ## その他の参考資料
@@ -401,6 +395,5 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/browser-sdk
-[2]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum/src/rumEvent.types.ts
-[3]: /ja/logs/processing/attributes_naming_convention/#user-related-attributes
+[1]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum-core/src/rumEvent.types.ts
+[2]: /ja/logs/processing/attributes_naming_convention/#user-related-attributes
