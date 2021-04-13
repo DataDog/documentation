@@ -620,10 +620,6 @@ class Integrations:
                 0,
             )
 
-        result = self.add_integration_frontmatter(
-            new_file_name, result, dependencies
-        )
-
         if not exist_already and no_integration_issue:
             # lets only write out file.md if its going to be public
             if manifest_json.get("is_public", False):
@@ -636,6 +632,11 @@ class Integrations:
                     out_name = self.content_integrations_dir + f_name
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
                         new_file_name, f_name))
+                    new_file_name = f_name
+
+                result = self.add_integration_frontmatter(
+                    new_file_name, result, dependencies
+                )
 
                 with open(out_name, "w", ) as out:
                     out.write(result)
