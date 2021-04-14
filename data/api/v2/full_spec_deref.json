@@ -2982,6 +2982,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3026,6 +3027,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3069,6 +3071,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3113,6 +3116,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3213,6 +3217,7 @@
               "integration_timeboard",
               "host_timeboard"
             ],
+            "example": "host_timeboard",
             "type": "string",
             "x-enum-varnames": [
               "CUSTOM_TIMEBOARD",
@@ -3251,6 +3256,7 @@
               "integration_timeboard",
               "host_timeboard"
             ],
+            "example": "host_timeboard",
             "type": "string",
             "x-enum-varnames": [
               "CUSTOM_TIMEBOARD",
@@ -3285,6 +3291,7 @@
               "integration_timeboard",
               "host_timeboard"
             ],
+            "example": "host_timeboard",
             "type": "string",
             "x-enum-varnames": [
               "CUSTOM_TIMEBOARD",
@@ -3386,6 +3393,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3443,6 +3451,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3487,6 +3496,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3517,6 +3527,7 @@
           "integration_timeboard",
           "host_timeboard"
         ],
+        "example": "host_timeboard",
         "type": "string",
         "x-enum-varnames": [
           "CUSTOM_TIMEBOARD",
@@ -32517,6 +32528,7 @@
                             "integration_timeboard",
                             "host_timeboard"
                           ],
+                          "example": "host_timeboard",
                           "type": "string",
                           "x-enum-varnames": [
                             "CUSTOM_TIMEBOARD",
@@ -32570,6 +32582,7 @@
                               "integration_timeboard",
                               "host_timeboard"
                             ],
+                            "example": "host_timeboard",
                             "type": "string",
                             "x-enum-varnames": [
                               "CUSTOM_TIMEBOARD",
@@ -32784,6 +32797,7 @@
                               "integration_timeboard",
                               "host_timeboard"
                             ],
+                            "example": "host_timeboard",
                             "type": "string",
                             "x-enum-varnames": [
                               "CUSTOM_TIMEBOARD",
@@ -32922,6 +32936,7 @@
                             "integration_timeboard",
                             "host_timeboard"
                           ],
+                          "example": "host_timeboard",
                           "type": "string",
                           "x-enum-varnames": [
                             "CUSTOM_TIMEBOARD",
@@ -32975,6 +32990,7 @@
                               "integration_timeboard",
                               "host_timeboard"
                             ],
+                            "example": "host_timeboard",
                             "type": "string",
                             "x-enum-varnames": [
                               "CUSTOM_TIMEBOARD",
@@ -33125,6 +33141,7 @@
                             "integration_timeboard",
                             "host_timeboard"
                           ],
+                          "example": "host_timeboard",
                           "type": "string",
                           "x-enum-varnames": [
                             "CUSTOM_TIMEBOARD",
@@ -33178,6 +33195,7 @@
                               "integration_timeboard",
                               "host_timeboard"
                             ],
+                            "example": "host_timeboard",
                             "type": "string",
                             "x-enum-varnames": [
                               "CUSTOM_TIMEBOARD",
