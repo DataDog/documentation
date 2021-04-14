@@ -8,7 +8,7 @@
   {{ partial "header-scripts.html" . }}
 
   {{/* inline datadog rum & logs libs, then load config after as config changes every builds due to version */}}
-  {{ $dd_rum := resources.Get "node_modules/datadog-rum-recorder.js" }}
+  {{ $dd_rum := resources.Get "node_modules/datadog-rum.js" }}
   {{ $dd_logs := resources.Get "node_modules/datadog-logs.js" }}
   {{ $dd_libs_js := slice $dd_rum $dd_logs | resources.Concat "js/dd-libs.js" }}
   <script>{{ $dd_libs_js.Content | safeJS }}</script>
