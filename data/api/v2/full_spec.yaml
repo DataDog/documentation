@@ -752,6 +752,7 @@ components:
       - integration_screenboard
       - integration_timeboard
       - host_timeboard
+      example: host_timeboard
       type: string
       x-enum-varnames:
       - CUSTOM_TIMEBOARD
