@@ -436,8 +436,6 @@ The following table below lists configuration variables that are available for b
 | `DD_TRACE_LOGGING_RATE`                             | Sets rate limiting for log messages. If set, unique log lines will be written once per `x` seconds. For example, to log a given message once per 60s, set to `60`. Setting to `0` disables log rate limiting. | `DD_TRACE_LOGGING_RATE`                             | Sets rate limiting for log messages. If set, unique log lines will be written once per `x` seconds. For example, to log a given message once per 60s, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0, disabled by default |
 | `DD_TRACE_SERVICE_MAPPING`                          | Rename services using configuration. Accepts a map of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. For example: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`. `from-key` is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0 |
 | `DD_TAGS`<br/><br/>`GlobalTags`                     | If specified, adds all of the specified tags to all generated spans Example: `layer:api,team:intake`. Added in version 1.17.0.                                                           |
-| `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`    | Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Default value is `false`. Added in version 1.26.0             |
-| `DD_TRACE_PARTIAL_FLUSH_ENABLED`                    | Enables incrementally flushing large traces to the Datadog Agent, reducing the chance of rejection by the Agent. Use only when you have long-lived traces or traces with many spans. Valid values are `true` or `false` (default). Added in version 1.26.0, only compatible with the Datadog Agent 7.26.0+             |
         
 
 #### Automatic instrumentation optional configuration
@@ -461,6 +459,15 @@ The following table lists the configuration variables that are available **only*
 | Setting Name                                                                  | Description                                                                                                           |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_<INTEGRATION_NAME>_ENABLED`<br/><br/>`Integrations[<INTEGRATION_NAME>].Enabled`            | Enables or disables a specific integration. Valid values are: `true` (default) or `false`. Integration names are listed in the [Integrations][5] section.                          |
+
+#### Experimental features
+
+The following table below lists configuration variables for features which are available for use, but which may change in a future releases. 
+
+| Setting Name                                        | Description                                                                                                                                                                                                       |
+|-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`    | Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Default value is `false`. Added in version 1.26.0             |
+| `DD_TRACE_PARTIAL_FLUSH_ENABLED`                    | Enables incrementally flushing large traces to the Datadog Agent, reducing the chance of rejection by the Agent. Use only when you have long-lived traces or traces with many spans. Valid values are `true` or `false` (default). Added in version 1.26.0, only compatible with the Datadog Agent 7.26.0+             |
 
 ## Further reading
 
