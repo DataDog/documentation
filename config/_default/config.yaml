@@ -60,7 +60,7 @@ module:
     - source: archetypes
       target: archetypes
     # custom mounts
-    - source: "./node_modules/@datadog/browser-rum-recorder/bundle/datadog-rum-recorder.js"
-      target: "assets/node_modules/datadog-rum-recorder.js"
+    - source: "./node_modules/@datadog/browser-rum/bundle/datadog-rum.js"
+      target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
