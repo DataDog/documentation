@@ -20,6 +20,10 @@ If you experience issues setting up or configuring Datadog Synthetic Monitoring,
 
 ### Recording
 
+#### My website is not loading in the iframe
+
+After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could indeed mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a pop up clicking **Open in Popup** to record your journey.
+
 #### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a pop up
 
 After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder. Additionally, you cannot record any steps, regardless of whether you open your website in the iframe or in a pop up:
