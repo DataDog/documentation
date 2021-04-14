@@ -50,7 +50,7 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
   <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 </div>
 
-### Installation
+### .NET Installation Steps
 
 {{< tabs >}}
 
@@ -77,6 +77,50 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 
 6. Visit [APM Live Traces][3].
 
+#### Applications not hosted in IIS
+
+To enable automatic instrumentation for Windows applications not hosted in IIS, you must set two environment variables before starting your application:
+
+Name                       | Value
+---------------------------|------
+`CORECLR_ENABLE_PROFILING` | `1`
+`CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
+
+<div class="alert alert-warning"> 
+  <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
+</div>
+
+##### Windows services
+
+To automatically instrument a Windows service, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables: 
+
+1. In the Windows Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key. 
+2. Set the value data to:
+    ```text
+    CORECLR_ENABLE_PROFILING=1
+    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+    ```
+    {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Creating the environment variables for instrumenting a service in the Registry Editor" >}}
+
+Alternatively, you can set the environment variables by using the following PowerShell snippet:
+
+```powershell
+[String[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
+```
+
+##### Console applications
+
+To automatically instrument a console application, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables from a batch file before starting your application:
+
+```bat
+rem Set environment variables
+SET CORECLR_ENABLE_PROFILING=1
+SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+
+rem Start application
+dotnet.exe example.dll
+```
 
 [1]: /agent/basic_agent_usage/windows/?tab=gui
 [2]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -125,61 +169,13 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
 
 {{< /tabs >}}
 
+### Configure the Datadog Agent for APM
 
-### Required environment variables
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
-
-#### Applications not hosted in IIS
-
-To enable automatic instrumentation for Windows applications not hosted in IIS, you must set two environment variables before starting your application:
-
-Name                       | Value
----------------------------|------
-`CORECLR_ENABLE_PROFILING` | `1`
-`CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
-
-<div class="alert alert-warning"> 
-  <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
-</div>
-
-##### Windows services
-
-To automatically instrument a Windows service, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables: 
-
-1. In the Windows Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key. 
-2. Set the value data to:
-    ```text
-    CORECLR_ENABLE_PROFILING=1
-    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-    ```
-    {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Creating the environment variables for instrumenting a service in the Registry Editor" >}}
-
-Alternatively, you can set the environment variables by using the following PowerShell snippet:
-
-```powershell
-[String[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
-```
-
-##### Console applications
-
-To automatically instrument a console application, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables from a batch file before starting your application:
-
-```bat
-rem Set environment variables
-SET CORECLR_ENABLE_PROFILING=1
-SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-
-rem Start application
-dotnet.exe example.dll
-```
-
-{{% /tab %}}
-
-{{% tab "Linux" %}}
+{{% tab "Containers" %}}
 
 1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
 
@@ -193,7 +189,7 @@ dotnet.exe example.dll
     - `DD_AGENT_HOST`
     - `DD_TRACE_AGENT_PORT`
 
-4. The following environment variables are required to enable automatic instrumentation on Linux:
+4. The following environment variables are required to enable automatic instrumentation:
 
     <div class="alert alert-info"> 
       <strong>Note:</strong> If the .NET Tracer is installed into a path other than the default <code>/opt/datadog</code> path, ensure the paths are changed to match.
@@ -287,11 +283,37 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [2]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 {{% /tab %}}
 
+{{% tab "AWS Lambda" %}}
+
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
+
+
+[1]: /tracing/serverless_functions/
+{{% /tab %}}
+
+{{% tab "Azure App Services Extension" %}}
+
+To set up Datadog APM in Azure App Service, see the [Tracing Azure App Services Extension][1] documentation.
+
+
+[1]: /serverless/azure_app_services/#overview
+{{% /tab %}}
+
+{{% tab "Other Environments" %}}
+
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+
+For other environments, please refer to the [Integrations][4] documentation for that environment and [contact support][5] if you are encountering any setup issues.
+
+
+[1]: /agent/basic_agent_usage/heroku/#installation
+[2]: /integrations/cloud_foundry/#trace-collection
+[3]: /integrations/amazon_elasticbeanstalk/
+[4]: /integrations/
+[5]: /help/
+{{% /tab %}}
+
 {{< /tabs >}}
-
-### Configure the Datadog Agent for APM
-
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
 
 ## Custom Instrumentation
 
