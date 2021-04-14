@@ -7,6 +7,8 @@ further_reading:
 - link: "/security_monitoring/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
+aliases:
+    - /security_monitoring/detection_rules/security_monitoring/
 ---
 
 ## Create a New Rule
