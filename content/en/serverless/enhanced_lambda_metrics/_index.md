@@ -38,7 +38,7 @@ The following real-time enhanced Lambda metrics are available, and they are tagg
 
 Follow the [installation instructions][5] to set up instrumentation of your serverless applications, and the enhanced Lambda metrics are enabled by default.
 
-**Note**: To enable enhanced Lambda metrics without sending the logs for your functions to Datadog, set the `DdForwardLog` environment variable to `false` on the [Datadog Forwarder][2].
+**Note**: To enable enhanced Lambda metrics without sending the logs for your functions to Datadog, set the `DD_FORWARD_LOG` environment variable to `false` on the [Datadog Forwarder][2].
 
 ## Viewing your dashboard
 
