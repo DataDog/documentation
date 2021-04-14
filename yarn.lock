@@ -901,36 +901,27 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@datadog/browser-core@2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-2.7.1.tgz#a4e2b44f906080f6c74907f848a8ed72ae8eda4d"
-  integrity sha512-/gCnbAz13IWtfCacgcYzJziy7nilXmp1AwNQ0X01RitH3ssrRN1GNIYmFmGGMe3RUAxfcfT4J8KlaZ4u8NbY3Q==
+"@datadog/browser-core@1.25.4":
+  version "1.25.4"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-1.25.4.tgz#f4b9fec5aca7256ee7c786e708808a73a8b0172a"
+  integrity sha512-+HIHhiboxYkIY1qP45p29DJXd5pD9C7KX0tBZ3we/vfTu5ovQ0rW1lWSRmynUxn+H7qTvneNofJ6e7QAOV5dAA==
   dependencies:
     tslib "^1.10.0"
 
-"@datadog/browser-logs@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-logs/-/browser-logs-2.7.1.tgz#641b75ea80f411231b0bed26e913d11e69f9553b"
-  integrity sha512-rhysvPc5Ohyn4F09kXzC108Adu2iS5nY4bDW62LLhYl71OEyX/MMQt7BaRi0ehk7l4P2ujCoT+nkRGRURuLMUA==
+"@datadog/browser-logs@^1.24.1":
+  version "1.25.4"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-logs/-/browser-logs-1.25.4.tgz#4a347b22e4afd780439e7c7d6141c929e53725d9"
+  integrity sha512-kgG7NVca+U1rDCM/LHY7nh0p7W5shD84v1qcDTuS9ZnHs7RghFlN7qvvkq0jGLmABWEiAwzhbm7CnZPVNl4Kqg==
   dependencies:
-    "@datadog/browser-core" "2.7.1"
+    "@datadog/browser-core" "1.25.4"
     tslib "^1.10.0"
 
-"@datadog/browser-rum-core@2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-rum-core/-/browser-rum-core-2.7.1.tgz#506392cd2c0acb3ff100af34b36704336fe747ba"
-  integrity sha512-AJwEitKotGtenfMcAvrf9dgq4ZOBRbCCZMDHWafbOoSXX6Am1hiyarznFwvqOh1uChlDVmYkTpcMz1WCy1M+Fw==
+"@datadog/browser-rum@^1.24.1":
+  version "1.25.4"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-1.25.4.tgz#b028baafd592ac4a1de21db3503d7eace1fb4aa8"
+  integrity sha512-gdWTCCv+AtmgSfjFN3U7CJ4PZP99xRBefVC9jZgH0BKXCgryWYrla5mGm7NVTxjKicxSPDp4oZRSkLz5Sh42Eg==
   dependencies:
-    "@datadog/browser-core" "2.7.1"
-    tslib "^1.10.0"
-
-"@datadog/browser-rum-recorder@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-rum-recorder/-/browser-rum-recorder-2.7.1.tgz#d22ea0bb0f46b46a145551d0d671b1d315e8561a"
-  integrity sha512-x9Opa/bHVLG1GTT3YJNxtN8rpT3llOpRX2dCJHUPa4YoQZbE7PnPrau3cAkcE6hHVcI9RS7aqX9A5+POlDhYWA==
-  dependencies:
-    "@datadog/browser-core" "2.7.1"
-    "@datadog/browser-rum-core" "2.7.1"
+    "@datadog/browser-core" "1.25.4"
     tslib "^1.10.0"
 
 "@datadog/datadog-ci@^0.7.1":
