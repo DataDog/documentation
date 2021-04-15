@@ -18,13 +18,13 @@ further_reading:
 
 ## Overview
 
-Logs and traces contain valuable information that truly shine when seen together. Correlating your data enhance your analytics (e.g with [unified service tagging](https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging)) but also your searches. How often do we find ourselves slicing and dicing through logs to find one critical information? On the other hand, how can we evaluate one log criticity without its context?
+With [unified service tagging][1] you already have high level correlation capabilities. But sometimes the starting point of your investigation is a single log or a single trace. Correlating them with other data gives context to estimate business impact and find root causes in a few clicks.
 
 For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Let's see how we can easily correlate slow query analysis with traces.
 
 {{< img src="logs/guide/correlate-your-full-stack-data/database-slow-query-correlation.png" alt="Slow query logs correlation" style="width:80%;" >}}
 
-Correlating your logs also allows for [consistent sampling based on Trace ID](https://docs.datadoghq.com/logs/indexes/#sampling-consistently-with-higher-level-entities) without losing search capabilities.
+Correlating your logs also eases [aggressive sampling strategy consistent sampling based on Trace ID][2] without losing entity-level consistency.
 
 This guide walks you through the steps you should take to correlate your full stack for search purposes:
 
@@ -42,11 +42,15 @@ Note: Depending on your use case, you may skip steps. Steps dependant from other
 
 Application logs are the backbone of your context that give most of the code and business logic issues. They can even help you solve other services issues, e.g. most ORMs logs database errors.
 
+- - -
+
 Use one of the [various OOTB correlations](https://docs.datadoghq.com/tracing/connect_logs_and_traces/). If you use a custom tracer or if you have any issues, you can go on the [correlation FAQ](https://docs.datadoghq.com/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/).
 
 ## Correlate your proxy logs
 
 Proxy logs provide higher-tier information than application logs. They also cover wider entrypoints than application logs, like static content and redirections.
+
+- - -
 
 The application tracer generates Trace IDs by default. This can be changed by injecting `x-datadog-trace-id` in HTTP Request headers.
 
@@ -59,7 +63,7 @@ Follow [NGINX tracing integration](https://docs.datadoghq.com/tracing/setup_over
 
 ### Inject Trace ID in logs
 
-Trace ID is stored as `$opentracing_context_x_datadog_trace_id` variable. Update the NGINX log format by adding the following configuration block in the http section of your NGINX configuration file `/etc/nginx/nginx.conf`:
+Trace ID is stored as `opentracing_context_x_datadog_trace_id` variable. Update the NGINX log format by adding the following configuration block in the http section of your NGINX configuration file `/etc/nginx/nginx.conf`:
 
 ```conf
 http {
@@ -93,6 +97,9 @@ http {
 ## Correlate your database logs
 
 As said in the introduction, database logs are hard to contextualize. Let's simplify it on PostgreSQL.
+
+For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Let's see how we can easily correlate slow query analysis with traces.
+
 
 ### Enrich your database logs
 
@@ -155,3 +162,6 @@ TODO
 ## Correlate RUM views
 
 TODO
+
+[1]:/getting_started/tagging/unified_service_tagging
+[2]:/logs/indexes/#sampling-consistently-with-higher-level-entities
