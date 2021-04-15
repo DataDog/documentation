@@ -50,7 +50,7 @@ For a full list of supported libraries, visit the [Compatibility Requirements][1
   <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 </div>
 
-### .NET Installation Steps
+### Installation Steps
 
 {{< tabs >}}
 
@@ -169,39 +169,21 @@ dotnet.exe example.dll
 
 {{< /tabs >}}
 
-### Configure the Datadog Agent for APM
+### Required Environment Variables
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+The following environment variables are required to enable automatic instrumentation:
 
-{{< tabs >}}
-
-{{% tab "Containers" %}}
-
-1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
-
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. While it is instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting these environment variables:
-
-    - `DD_AGENT_HOST`
-    - `DD_TRACE_AGENT_PORT`
-
-4. The following environment variables are required to enable automatic instrumentation:
-
-    <div class="alert alert-info"> 
+  <div class="alert alert-info"> 
       <strong>Note:</strong> If the .NET Tracer is installed into a path other than the default <code>/opt/datadog</code> path, ensure the paths are changed to match.
-    </div>
+  </div>
 
-    Name                       | Value
-    ---------------------------|------
-    `CORECLR_ENABLE_PROFILING` | `1`
-    `CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
-    `CORECLR_PROFILER_PATH`    | `/opt/datadog/Datadog.Trace.ClrProfiler.Native.so`
-    `DD_INTEGRATIONS`          | `/opt/datadog/integrations.json`
-    `DD_DOTNET_TRACER_HOME`    | `/opt/datadog`
+  Name                       | Value
+  ---------------------------|------
+  `CORECLR_ENABLE_PROFILING` | `1`
+  `CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
+  `CORECLR_PROFILER_PATH`    | `/opt/datadog/Datadog.Trace.ClrProfiler.Native.so`
+  `DD_INTEGRATIONS`          | `/opt/datadog/integrations.json`
+  `DD_DOTNET_TRACER_HOME`    | `/opt/datadog`
 
 #### Set the environment variables by bash script
 
@@ -223,17 +205,17 @@ dotnet example.dll
 
 To set the required environment variables on a Linux Docker container:
 
-    ```docker
-    # Set environment variables
-    ENV CORECLR_ENABLE_PROFILING=1
-    ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-    ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-    ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
-    ENV DD_DOTNET_TRACER_HOME=/opt/datadog
+  ```docker
+  # Set environment variables
+  ENV CORECLR_ENABLE_PROFILING=1
+  ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+  ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+  ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
+  ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 
-    # Start your application
-    CMD ["dotnet", "example.dll"]
-    ```
+  # Start your application
+  CMD ["dotnet", "example.dll"]
+  ```
 
 #### SystemCTL (per service)
 
@@ -281,6 +263,28 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+
+### Configure the Datadog Agent for APM
+
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+
+{{< tabs >}}
+
+{{% tab "Containers" %}}
+
+1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+
+2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+</br>
+
+3. While it is instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting these environment variables:
+
+    - `DD_AGENT_HOST`
+    - `DD_TRACE_AGENT_PORT`
+
+
 {{% /tab %}}
 
 {{% tab "AWS Lambda" %}}
