@@ -42,7 +42,7 @@ When configuring your Okta app, set the Default RelayState value on the **Config
 
 ### Google
 
-When configuring your Google app for Work SAML app, set the **Start URL** under the Service Provider Details to `dd_m_idp`.
+When configuring your Google app for SAML, set the **Start URL** under the Service Provider Details to `dd_m_idp`.
 {{< img src="account_management/saml/google-mobile-idp-relay-state.png" alt="Google's Service Provider Details Page" >}}
 
 ## Troubleshooting
