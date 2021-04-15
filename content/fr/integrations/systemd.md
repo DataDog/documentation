@@ -3,6 +3,7 @@ assets:
   dashboards:
     Systemd Overview: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/systemd/README.md'
 display_name: Systemd
+draft: false
 git_integration_title: systemd
 guid: acd470e7-5413-4deb-95fc-4b034d904691
 integration_id: systemd
@@ -36,13 +38,22 @@ Ce check permet de surveiller [Systemd][1] ainsi que les unités qu'il gère ave
 - Surveillez l'état et la santé de votre Systemd.
 - Surveillez les unités, les services et les sockets gérés par Systemd.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Le check Systemd est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien à installer sur votre serveur.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
+
+Le check Systemd est inclus avec le paquet de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+
+[1]: https://app.datadoghq.com/account/settings#agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -61,13 +72,18 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 1. Modifiez le fichier `systemd.d/conf.yaml` dans le dossier `conf.d/` à la racine du
    répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Systemd.
-   Consultez le [fichier d'exemple systemd.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+   Consultez le [fichier d'exemple systemd.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][4].
+2. [Redémarrez l'Agent][2].
+
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `systemd` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][2] et cherchez `systemd` dans la section Checks.
 
 ## Données collectées
 
@@ -104,12 +120,9 @@ Le check Systemd n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/systemd/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/help/
