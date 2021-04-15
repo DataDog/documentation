@@ -39,7 +39,7 @@ Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4
 
 | Key            | Description                                                                                                              | Default                                                                     |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| Host           | _Required_ - The Datadog server where you are sending your logs.                                                         | US - `http-intake.logs.datadoghq.com`, EU - `http-intake.logs.datadoghq.eu` |
+| Host           | _Required_ - The Datadog server where you are sending your logs.                                                         | {{< region-param key="http_endpoint" code="true" >}} |
 | TLS            | _Required_ - End-to-end security communications security protocol. Datadog recommends setting this to `on`.              | `off`                                                                       |
 | apikey         | _Required_ - Your [Datadog API key][4].                                                                                  |                                                                             |
 | compress       | _Recommended_ - compresses the payload in GZIP format, Datadog supports and recommends setting this to `gzip`.           |                                                                             |
