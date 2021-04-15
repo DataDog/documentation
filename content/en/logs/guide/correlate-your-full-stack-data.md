@@ -18,43 +18,48 @@ further_reading:
 
 ## Overview
 
-Logs and traces may contain valuable information that truly shine when seen together. While [logs and traces OOTB connection](https://docs.datadoghq.com/tracing/connect_logs_and_traces/) already provide solid investigation possibilities, we can push it further.
+Logs and traces contain valuable information that truly shine when seen together. Correlating your data enhance your analytics (e.g with [unified service tagging](https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging)) but also your searches. How often do we find ourselves slicing and dicing through logs to find one critical information? On the other hand, how can we evaluate one log criticity without its context?
 
-Most of the time we have all needed information when troubleshooting. The biggest issue is to find the right information at the right place.
-
-Temporal correlation may not be enough if you have a lot of customers or if you use [Logging without Limit sampling™](https://docs.datadoghq.com/logs/guide/getting-started-lwl/).
-
-For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. How often do we find ourselves slicing and dicing through logs to find one critical information? On the other hand, how can we evaluate one log criticity without its context? Let's see how we can easily correlate slow query analysis with traces.
+For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Let's see how we can easily correlate slow query analysis with traces.
 
 {{< img src="logs/guide/correlate-your-full-stack-data/database-slow-query-correlation.png" alt="Slow query logs correlation" style="width:80%;" >}}
 
-Note: This example will only be used as a redline for part of the guide. We will see how to correlate many kind of services information.
+Correlating your logs also allows for [consistent sampling based on Trace ID](https://docs.datadoghq.com/logs/indexes/#sampling-consistently-with-higher-level-entities) without losing search capabilities.
 
-This guide will cover a specific stack (NGINX, Flask with SQLAlchemy, PostgreSQL). Each action item will be defined so that you can find an equivalent for your own stack.
+This guide walks you through the steps you should take to correlate your full stack for search purposes:
 
-## Prerequisites
+1. [Correlate your application logs](#correlate-your-application-logs)
+2. [Correlate your proxy logs](#correlate-your-proxy-logs)
+3. [Correlate your database logs](#correlate-your-database-logs)
+4. [Correlate your queuing logs](#correlate-your-queuing-logs)
+5. [Test the whole correlation from a Synthetic test](#test-the-whole-correlation-from-a-synthetic-test)
+6. [Correlate your browser logs](#correlate-your-browser-logs)
+7. [Correlate RUM views](#correlate-rum-views)
 
-### Correlate your application logs
+Note: Depending on your use case, you may skip steps. Steps dependant from others are explicit.
 
-Application logs are an added value for your traces. They can even help you solving other service issues. For example most ORMs will log for you database errors.
+## Correlate your application logs
 
-Datadog provides [various OOTB correlations](https://docs.datadoghq.com/tracing/connect_logs_and_traces/).
+Application logs are the backbone of your context that give most of the code and business logic issues. They can even help you solve other services issues, e.g. most ORMs logs database errors.
 
-If you use a custom tracer or if you have any issues, you can go on our [FAQ](https://docs.datadoghq.com/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/).
+Use one of the [various OOTB correlations](https://docs.datadoghq.com/tracing/connect_logs_and_traces/). If you use a custom tracer or if you have any issues, you can go on the [correlation FAQ](https://docs.datadoghq.com/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/).
 
-### Apply unified service tagging
+## Correlate your proxy logs
 
-With [unified service tagging](https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging) you can:
+Proxy logs provide higher-tier information than application logs. They also cover wider entrypoints than application logs, like static content and redirections.
 
-* Identify deployment impact with trace and container metrics filtered by version
-* Navigate seamlessly across traces, metrics, and logs with consistent tags
-* View service data based on environment or version in a unified fashion within the Datadog app
+The application tracer generates Trace IDs by default. This can be changed by injecting `x-datadog-trace-id` in HTTP Request headers.
 
-## Correlate your webaccess logs
+{{< tabs >}}
+{{% tab "NGINX" %}}
 
-Webaccess logs can provide you higher-tier information than application logs.
+### Setup opentracing
 
-For NGINX, you can update the NGINX log format by adding the following configuration block in the http section of your NGINX configuration file `/etc/nginx/nginx.conf`:
+Follow [NGINX tracing integration](https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=nginx).
+
+### Inject Trace ID in logs
+
+Trace ID is stored as `$opentracing_context_x_datadog_trace_id` variable. Update the NGINX log format by adding the following configuration block in the http section of your NGINX configuration file `/etc/nginx/nginx.conf`:
 
 ```conf
 http {
@@ -66,36 +71,24 @@ http {
 }
 ```
 
-You can now customize NGINX pipeline first grok parser:
+### Parse Trace ID in pipelines
 
-- Parsing rules:
-```text
-access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
+1. Clone NGINX pipeline.
 
-access.combined %{access.common} (%{number:duration:scale(1000000000)} )?"%{_referer}" "%{_user_agent}"( "%{_x_forwarded_for}")?.*
+2. Customize the first [grok parser](https://docs.datadoghq.com/logs/processing/processors/?tab=ui#grok-parser):
+   - In *Parsing rules*, replace the first parsing rule with:
+   ```text
+   access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
+   ```
+   - In `Advanced settings -> Helper Rules`, add the line:
+   ```text
+   _trace_id %{notSpace:dd.trace_id:nullIf("-")}
+   ```
 
-error.format %{date("yyyy/MM/dd HH:mm:ss"):date_access} \[%{word:level}\] %{data:error.message}(, %{data::keyvalue(": ",",")})?
-```
-- Advanced settings -> Helper Rules:
-```text
-_auth %{notSpace:http.auth:nullIf("-")}
-_bytes_written %{integer:network.bytes_written}
-_client_ip %{ipOrHost:network.client.ip}
-_version HTTP\/%{regex("\\d+\\.\\d+"):http.version}
-_url %{notSpace:http.url}
-_ident %{notSpace:http.ident:nullIf("-")}
-_user_agent %{regex("[^\\\"]*"):http.useragent}
-_referer %{notSpace:http.referer}
-_status_code %{integer:http.status_code}
-_method %{word:http.method}
-_date_access %{date("dd/MMM/yyyy:HH:mm:ss Z"):date_access}
-_x_forwarded_for %{regex("[^\\\"]*"):http._x_forwarded_for:nullIf("-")}
-_trace_id %{notSpace:dd.trace_id:nullIf("-")}
-```
+3. Add a Trace Id remapper on `dd.trace_id` attribute.
 
-Do not forget to add a Trace Id remapper.
-
-You should now see your NGINX logs in your traces.
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Correlate your database logs
 
@@ -129,17 +122,17 @@ if os.environ.get('DD_LOGS_INJECTION') == 'true':
     @event.listens_for(Engine, "before_cursor_execute", retval=True)
     def comment_sql_calls(conn, cursor, statement, parameters, context, executemany):
         trace_id, span_id = get_correlation_ids()
-        statement = f"{statement} -- dd.trace_id=<{trace_id or 0}> dd.span_id=<{span_id or 0}>"
+        statement = f"{statement} -- dd.trace_id=<{trace_id or 0}>"
         return statement, parameters
 ```
 
 You can now customize PostgreSQL pipeline by adding a new grok parser:
 
 ```text
-extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+dd.span_id=<%{notSpace:dd.span_id}>%{data}
+extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+%{data}
 ```
 
-Do not forget to add a Trace Id remapper.
+Add a Trace Id remapper on `dd.trace_id` attribute.
 
 Note: this will only correlate logs that include your statement. Error logs like `ERROR:  duplicate key value violates unique constraint "user_username_key"` will stay out of context. Most of the time you can still get error information through your application logs.
 
