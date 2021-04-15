@@ -43,6 +43,10 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipluated in your SLAs.
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
+**Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose.
+For monitor-based SLOs: up to 2 decimal places are allowed for 7-day and 30-day targets, up to 3 decimal places are allowed for 90-day targets.
+For metric-based SLOs: up to 3 decimal places are allowed for all targets.
+
 Once you have an SLO set up, on the [Service Level Objectives status page][1] you can select an SLO from the list view to open its details side panel. The side panel will display the overall status percentage and remaining error budget for each of that SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you have created a grouped monitor-based SLO using one [multi alert monitor][5] or a grouped metric-based SLO using the [`sum by` clause][6], in addition to the overall status percentage and remaining error budget you will also be presented with the status percentage and remaining error budget for each individual group.
 
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, you will see status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking.
