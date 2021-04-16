@@ -199,7 +199,7 @@ function loadPage(newUrl) {
             addCodeTabEventListeners();
             activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
-            toggleMultiCodeLangNav(pageCodeLang);
+            // toggleMultiCodeLangNav(pageCodeLang);
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
