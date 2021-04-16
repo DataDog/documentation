@@ -43,7 +43,11 @@ const commonConfig = env => {
         },
         output: {
             path: path.join(__dirname, 'public', 'static'),
-            publicPath: 'static'
+            publicPath: 'static',
+            chunkFilename:
+                  process.env.NODE_ENV === 'preview' || process.env.NODE_ENV === 'production'
+                      ? '[name].[chunkhash].js'
+                      : '[name].js'
         },
 
         context: path.join(__dirname, 'src'),
