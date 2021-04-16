@@ -22,7 +22,7 @@ With [unified service tagging][1] you already have high level correlation capabi
 
 {{< img src="logs/guide/correlate-your-full-stack-data/full-stack-cover.png" alt="Full stack correlation" style="width:80%;" >}}
 
-Correlating your logs also eases [aggressive sampling strategy consistent sampling based on Trace ID][2] without losing entity-level consistency.
+Correlating your logs also eases [aggressive sampling strategy based on Trace ID][2] without losing entity-level consistency.
 
 This guide walks you through the steps you should take to correlate your full stack logs, traces and view:
 
@@ -110,7 +110,7 @@ For example, production slow queries are hard to reproduce and analyze without i
 
 PostgreSQL default logs are not detailed. Follow [this integration guide][1] to enrich them.
 
-Following our redline, we also want to have rich plan explanation on our slow queries. For having execution plan results, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
+The slow query guideline also requires to have rich plan explanation on slow queries. For having execution plan results, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
 
 ```conf
 session_preload_libraries = 'auto_explain'
@@ -140,7 +140,7 @@ if os.environ.get('DD_LOGS_INJECTION') == 'true':
 
 Note: this only correlates logs that include query statement. Error logs like `ERROR:  duplicate key value violates unique constraint "<TABLE_KEY>"` stay out of context. Most of the time you can still get error information through your application logs.
 
-You can now customize PostgreSQL pipeline:
+You can now clone and customize the PostgreSQL pipeline:
 
 1. Add a new [grok parser][4]:
    ```text
