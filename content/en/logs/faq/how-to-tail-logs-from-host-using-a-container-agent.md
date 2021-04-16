@@ -5,7 +5,7 @@ further_reading:
 - link: "/docker/log"
   tag: "Documentation"
   text: "Logging with Docker"
-- link: "/agent/kubernetes/log"
+- link: "https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation"
   tag: "Documentation"
   text: "Logging with Kubernetes"
 - link: "https://www.datadoghq.com/blog/docker-logging/"
