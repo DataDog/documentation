@@ -45,7 +45,7 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 
 **Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
 
-[Monitor-based SLOs][10]: up to 2 decimal places are allowed for 7-day and 30-day targets, up to 3 decimal places are allowed for 90-day targets.
+[Monitor-based SLOs][10]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
 [Metric-based SLOs][11]: up to 3 decimal places are allowed for all targets.
 
 Once you have an SLO set up, on the [Service Level Objectives status page][1] you can select an SLO from the list view to open its details side panel. The side panel will display the overall status percentage and remaining error budget for each of that SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you have created a grouped monitor-based SLO using one [multi alert monitor][5] or a grouped metric-based SLO using the [`sum by` clause][6], in addition to the overall status percentage and remaining error budget you will also be presented with the status percentage and remaining error budget for each individual group.
