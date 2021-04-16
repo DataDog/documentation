@@ -205,7 +205,7 @@ function loadPage(newUrl) {
             gtag('config', gaTag, { page_path: pathName });
 
             // Marketo
-            if (typeof window.Munchkin !== 'undefined') {
+            if (typeof window.Munchkin !== 'undefined' && typeof window.Munchkin.munchkinFunction === 'function') {
                 window.Munchkin.munchkinFunction('clickLink', { href: newUrl });
             } else {
                 window.DD_LOGS.logger.info('Munchkin called before ready..');
