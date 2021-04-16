@@ -19043,11 +19043,11 @@ paths:
         correction:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"id\": \"1\",\n    \"attributes\": {\n\
-              \      \"slo_id\": \"{{ slo.data[0].id }}\",\n      \"start\": {{ now_ts\
-              \ }},\n      \"end\": {{ hour_later_ts }},\n      \"category\": \"Other\"\
-              ,\n      \"timezone\": \"UTC\",\n      \"description\": \"Test Correction\"\
-              \n     },\n     \"type\": \"correction\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"slo_id\": \"\
+              {{ slo.data[0].id }}\",\n      \"start\": {{ now_ts }},\n      \"end\"\
+              : {{ hour_later_ts }},\n      \"category\": \"Other\",\n      \"timezone\"\
+              : \"UTC\",\n      \"description\": \"Test Correction\"\n     },\n  \
+              \   \"type\": \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
       x-undo:
         operationId: DeleteSLOCorrection
