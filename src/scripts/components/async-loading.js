@@ -5,7 +5,7 @@ import { initializeIntegrations } from './integrations';
 import { initializeSecurityRules } from './security-rules';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
-import {redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav, toggleMultiCodeLangNav} from './code-languages'; // eslint-disable-line import/no-cycle
+import {redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav} from './code-languages'; // eslint-disable-line import/no-cycle
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -199,7 +199,7 @@ function loadPage(newUrl) {
             addCodeTabEventListeners();
             activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
-            toggleMultiCodeLangNav(pageCodeLang);
+            // toggleMultiCodeLangNav(pageCodeLang);
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
