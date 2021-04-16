@@ -30,9 +30,6 @@ First, install and setup the [Carbon Black Defense log shipper][1].
 
 The configuration file below enables your Carbon Black Defense shipper to forward your logs to Datadog:
 
-{{< tabs >}}
-{{% tab "Datadog US Site" %}}
-
 ```conf
 [general]
 
@@ -40,7 +37,7 @@ template = {{source}}|{{version}}|{{vendor}}|{{product}}|{{dev_version}}|{{signa
 policy_action_severity = 4
 output_format=json
 output_type=http
-http_out=https://http-intake.logs.datadoghq.com/v1/input/<DATADOG_API_KEY>?ddsource=cbdefense
+http_out={{< region-param key="http_endpoint" code="true" >}}<DATADOG_API_KEY>?ddsource=cbdefense
 http_headers={"content-type": "application/json"}
 https_ssl_verify=True
 
@@ -49,29 +46,6 @@ server_url = <CB_DEFENSE_SERVER_URL>
 siem_connector_id=<CB_DEFENSE_API_ID>
 siem_api_key=<CB_DEFENSE_API_SECRET_KEY>
 ```
-
-{{% /tab %}}
-{{% tab "Datadog EU Site" %}}
-
-```conf
-[general]
-
-template = {{source}}|{{version}}|{{vendor}}|{{product}}|{{dev_version}}|{{signature}}|{{name}}|{{severity}}|{{extension}}
-policy_action_severity = 4
-output_format=json
-output_type=http
-http_out=https://http-intake.logs.datadoghq.eu/v1/input/<DATADOG_API_KEY>?ddsource=cbdefense
-http_headers={"content-type": "application/json"}
-https_ssl_verify=True
-
-[cbdefense1]
-server_url = <CB_DEFENSE_SERVER_URL>
-siem_connector_id=<CB_DEFENSE_API_ID>
-siem_api_key=<CB_DEFENSE_API_SECRET_KEY>
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 Replace the `<DATADOG_API_KEY>`, `<CB_DEFENSE_API_SECRET_KEY>`, `<CB_DEFENSE_API_ID>`, and `<CB_DEFENSE_SERVER_URL>` placeholders to complete your configuration.
 
