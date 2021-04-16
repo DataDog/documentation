@@ -7,9 +7,8 @@ further_reading:
 - link: "/security_monitoring/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "https://www.datadoghq.com/blog/new-term-detection-method-datadog/"
-  tag: "Blog"
-  text: "Detect anomalous activity with Detection Rules"  
+aliases:
+    - /security_monitoring/detection_rules/security_monitoring/
 ---
 
 ## Create a New Rule
