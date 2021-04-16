@@ -26,7 +26,7 @@ For example, production slow queries are hard to reproduce and analyze without i
 
 Correlating your logs also eases [aggressive sampling strategy consistent sampling based on Trace ID][2] without losing entity-level consistency.
 
-This guide walks you through the steps you should take to correlate your full stack for search purposes:
+This guide walks you through the steps you should take to correlate your full stack logs, traces and view:
 
 1. [Correlate your application logs](#correlate-your-application-logs)
 2. [Correlate your proxy logs](#correlate-your-proxy-logs)
@@ -44,7 +44,7 @@ Application logs are the backbone of your context that give most of the code and
 
 - - -
 
-Use one of the [various OOTB correlations](https://docs.datadoghq.com/tracing/connect_logs_and_traces/). If you use a custom tracer or if you have any issues, you can go on the [correlation FAQ](https://docs.datadoghq.com/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/).
+Use one of the [various OOTB correlations][3]. If you use a custom tracer or if you have any issues, you can go on the [correlation FAQ][4].
 
 ## Correlate your proxy logs
 
@@ -59,7 +59,7 @@ The application tracer generates Trace IDs by default. This can be changed by in
 
 ### Setup opentracing
 
-Follow [NGINX tracing integration](https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=nginx).
+Follow [NGINX tracing integration][1].
 
 ### Inject Trace ID in logs
 
@@ -79,7 +79,7 @@ http {
 
 1. Clone NGINX pipeline.
 
-2. Customize the first [grok parser](https://docs.datadoghq.com/logs/processing/processors/?tab=ui#grok-parser):
+2. Customize the first [grok parser][2]:
    - In *Parsing rules*, replace the first parsing rule with:
    ```text
    access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
@@ -89,8 +89,11 @@ http {
    _trace_id %{notSpace:dd.trace_id:nullIf("-")}
    ```
 
-3. Add a Trace Id remapper on `dd.trace_id` attribute.
+3. Add a [Trace Id remapper][3] on `dd.trace_id` attribute.
 
+[1]:/tracing/setup_overview/proxy_setup/?tab=nginx
+[2]:/logs/processing/processors/?tab=ui#grok-parser
+[3]:/logs/processing/processors/?tab=ui#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -103,7 +106,7 @@ For example, production slow queries are hard to reproduce and analyze without i
 
 ### Enrich your database logs
 
-PostgreSQL default logs are not detailed. Follow [this integration guide](https://docs.datadoghq.com/integrations/postgres/?tab=host#log-collection) to enrich them.
+PostgreSQL default logs are not detailed. Follow [this integration guide][5] to enrich them.
 
 Following our redline, we also want to have rich plan explanation on our slow queries. For having execution plan results, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
 
@@ -113,8 +116,9 @@ auto_explain.log_min_duration = '500s'
 ```
 
 Your query longer than 500ms will now log their execution plan.
+img highlight ici
 
-Note: `auto_explain.log_analyze = 'true'` provide even more information but greatly impact performance. You can learn more on the [official documentation](https://www.postgresql.org/docs/9.2/auto-explain.html).
+Note: `auto_explain.log_analyze = 'true'` provide even more information but greatly impact performance. You can learn more on the [official documentation][6].
 
 ### Inject trace_id into your database logs
 
@@ -139,7 +143,7 @@ You can now customize PostgreSQL pipeline by adding a new grok parser:
 extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+%{data}
 ```
 
-Add a Trace Id remapper on `dd.trace_id` attribute.
+Add a [Trace Id remapper][7] on `dd.trace_id` attribute.
 
 Note: this will only correlate logs that include your statement. Error logs like `ERROR:  duplicate key value violates unique constraint "user_username_key"` will stay out of context. Most of the time you can still get error information through your application logs.
 
@@ -153,7 +157,7 @@ The APM integration with Synthetic Monitoring allows you to go from a test run t
 
 Having network-related specifics (thanks to your test) as well as backend, infrastructure, and log information (thanks to your trace) allows you to access a new level of details about the way your application is behaving, as experienced by your user.
 
-For that, simply [enable APM integration on Synthetic settings](https://docs.datadoghq.com/synthetics/apm).
+For that, simply [enable APM integration on Synthetic settings][8].
 
 ## Correlate your browser logs
 
@@ -163,5 +167,11 @@ TODO
 
 TODO
 
-[1]:/getting_started/tagging/unified_service_tagging
-[2]:/logs/indexes/#sampling-consistently-with-higher-level-entities
+[1]: /getting_started/tagging/unified_service_tagging
+[2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
+[3]: /tracing/connect_logs_and_traces
+[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[5]: /integrations/postgres/?tab=host#log-collection
+[6]: https://www.postgresql.org/docs/9.2/auto-explain.html
+[7]: /logs/processing/processors/?tab=ui#trace-remapper
+[8]: /synthetics/apm
