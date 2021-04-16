@@ -28,6 +28,7 @@ further_reading:
   - [Logs][4] data includes `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP, and several others. Review the complete list of [logs endpoints][5] for more information.
   - [Orchestrator Resources][6] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
   - [Real User Monitoring (RUM)][7] data is `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+  - [Profiling][10] data is `intake.profile.`{{< region-param key="dd_site" code="true" >}}
   - [HIPAA logs][8] data is the same as for all [Logs][4], but also the following legacy endpoints are supported:
     - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
@@ -158,3 +159,4 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [7]: /real_user_monitoring/
 [8]: /security/logs/#hipaa-enabled-customers
 [9]: /agent/proxy/
+[10]: /tracing/profiler/
