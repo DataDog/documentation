@@ -1,5 +1,5 @@
 ---
-title: Correlate your full stack data
+title: Correlate your full stack logs, traces and views
 kind: guide
 aliases:
   - /logs/guide/xxx
@@ -19,10 +19,6 @@ further_reading:
 ## Overview
 
 With [unified service tagging][1] you already have high level correlation capabilities. But sometimes the starting point of your investigation is a single log or a single trace. Correlating them with other data gives context to estimate business impact and find root causes in a few clicks.
-
-For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Let's see how we can easily correlate slow query analysis with traces.
-
-{{< img src="logs/guide/correlate-your-full-stack-data/database-slow-query-correlation.png" alt="Slow query logs correlation" style="width:80%;" >}}
 
 Correlating your logs also eases [aggressive sampling strategy consistent sampling based on Trace ID][2] without losing entity-level consistency.
 
@@ -99,14 +95,18 @@ http {
 
 ## Correlate your database logs
 
-As said in the introduction, database logs are hard to contextualize. Let's simplify it on PostgreSQL.
+Database logs are often hard to contextualize due to queries similarities, variable anonymization and high usage.
 
-For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Let's see how we can easily correlate slow query analysis with traces.
+For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Let's correlate slow query analysis with traces.
 
+- - -
+
+{{< tabs >}}
+{{% tab "PostgreSQL" %}}
 
 ### Enrich your database logs
 
-PostgreSQL default logs are not detailed. Follow [this integration guide][5] to enrich them.
+PostgreSQL default logs are not detailed. Follow [this integration guide][1] to enrich them.
 
 Following our redline, we also want to have rich plan explanation on our slow queries. For having execution plan results, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
 
@@ -115,14 +115,13 @@ session_preload_libraries = 'auto_explain'
 auto_explain.log_min_duration = '500s'
 ```
 
-Your query longer than 500ms will now log their execution plan.
-img highlight ici
+Your query longer than 500ms logs their execution plan.
 
-Note: `auto_explain.log_analyze = 'true'` provide even more information but greatly impact performance. You can learn more on the [official documentation][6].
+Note: `auto_explain.log_analyze = 'true'` provide even more information but greatly impact performance. You can learn more on the [official documentation][2].
 
 ### Inject trace_id into your database logs
 
-SQL logs are now enriched, but still not correlated. Using SQL comments, we can inject `trace_id` into most of our database logs. Here is an example with Flask and SQLAlchemy:
+You can inject `trace_id` into most of your database logs with [SQL comments][3]. Here is an example with Flask and SQLAlchemy:
 
 ```python
 if os.environ.get('DD_LOGS_INJECTION') == 'true':
@@ -137,15 +136,30 @@ if os.environ.get('DD_LOGS_INJECTION') == 'true':
         return statement, parameters
 ```
 
-You can now customize PostgreSQL pipeline by adding a new grok parser:
+Note: this only correlates logs that include query statement. Error logs like `ERROR:  duplicate key value violates unique constraint "<TABLE_KEY>"` stay out of context. Most of the time you can still get error information through your application logs.
 
-```text
-extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+%{data}
-```
+You can now customize PostgreSQL pipeline:
 
-Add a [Trace Id remapper][7] on `dd.trace_id` attribute.
+1. Add a new [grok parser][4]:
+   ```text
+   extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+%{data}
+   ```
 
-Note: this will only correlate logs that include your statement. Error logs like `ERROR:  duplicate key value violates unique constraint "user_username_key"` will stay out of context. Most of the time you can still get error information through your application logs.
+2. Add a [Trace Id remapper][5] on `dd.trace_id` attribute.
+
+- - -
+
+You can see slow query execution plan from your slow trace:
+
+{{< img src="logs/guide/correlate-your-full-stack-data/database-slow-query-correlation.png" alt="Slow query logs correlation" style="width:80%;" >}}
+
+[1]: /integrations/postgres/?tab=host#log-collection
+[2]: https://www.postgresql.org/docs/13/auto-explain.html
+[3]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
+[4]:/logs/processing/processors/?tab=ui#grok-parser
+[5]: /logs/processing/processors/?tab=ui#trace-remapper
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Correlate your queuing logs
 
@@ -157,7 +171,9 @@ The APM integration with Synthetic Monitoring allows you to go from a test run t
 
 Having network-related specifics (thanks to your test) as well as backend, infrastructure, and log information (thanks to your trace) allows you to access a new level of details about the way your application is behaving, as experienced by your user.
 
-For that, simply [enable APM integration on Synthetic settings][8].
+- - -
+
+For that, simply [enable APM integration on Synthetic settings][5].
 
 ## Correlate your browser logs
 
@@ -171,7 +187,4 @@ TODO
 [2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
 [3]: /tracing/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-[5]: /integrations/postgres/?tab=host#log-collection
-[6]: https://www.postgresql.org/docs/9.2/auto-explain.html
-[7]: /logs/processing/processors/?tab=ui#trace-remapper
-[8]: /synthetics/apm
+[5]: /synthetics/apm
