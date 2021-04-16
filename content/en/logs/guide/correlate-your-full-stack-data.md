@@ -20,6 +20,8 @@ further_reading:
 
 With [unified service tagging][1] you already have high level correlation capabilities. But sometimes the starting point of your investigation is a single log or a single trace. Correlating them with other data gives context to estimate business impact and find root causes in a few clicks.
 
+{{< img src="logs/guide/correlate-your-full-stack-data/full-stack-cover.png" alt="Full stack correlation" style="width:80%;" >}}
+
 Correlating your logs also eases [aggressive sampling strategy consistent sampling based on Trace ID][2] without losing entity-level consistency.
 
 This guide walks you through the steps you should take to correlate your full stack logs, traces and view:
@@ -112,7 +114,7 @@ Following our redline, we also want to have rich plan explanation on our slow qu
 
 ```conf
 session_preload_libraries = 'auto_explain'
-auto_explain.log_min_duration = '500s'
+auto_explain.log_min_duration = '500ms'
 ```
 
 Your query longer than 500ms logs their execution plan.
@@ -151,7 +153,7 @@ You can now customize PostgreSQL pipeline:
 
 You can see slow query execution plan from your slow trace:
 
-{{< img src="logs/guide/correlate-your-full-stack-data/database-slow-query-correlation.png" alt="Slow query logs correlation" style="width:80%;" >}}
+{{< img src="logs/guide/correlate-your-full-stack-data/slow-query-root-cause.png" alt="Slow query logs correlation" style="width:80%;" >}}
 
 [1]: /integrations/postgres/?tab=host#log-collection
 [2]: https://www.postgresql.org/docs/13/auto-explain.html
