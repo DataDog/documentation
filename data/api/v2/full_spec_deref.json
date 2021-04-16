@@ -7720,7 +7720,6 @@
           }
         },
         "required": [
-          "id",
           "type"
         ],
         "type": "object"
@@ -7843,7 +7842,6 @@
               }
             },
             "required": [
-              "id",
               "type"
             ],
             "type": "object"
@@ -9495,7 +9493,6 @@
           }
         },
         "required": [
-          "id",
           "type"
         ],
         "type": "object"
@@ -9618,7 +9615,6 @@
               }
             },
             "required": [
-              "id",
               "type"
             ],
             "type": "object"
@@ -51106,7 +51102,7 @@
             "parameters": [
               {
                 "name": "body",
-                "value": "{\n  \"name\": \"{{ unique }}\",\n  \"queries\": [{\n    \"query\": \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\": [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"filters\": [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n    \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\": {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"hasExtendedTitle\": false,\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isDefault\": false,\n  \"isEnabled\": true,\n  \"type\": \"log_detection\"\n}"
+                "value": "{\n  \"name\": \"{{ unique }}\",\n  \"queries\": [{\n    \"query\": \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\": [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"filters\": [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n    \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\": {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\": true\n}"
               }
             ],
             "step": "there is a valid \"security_rule\" in the system"
@@ -54918,7 +54914,6 @@
                       }
                     },
                     "required": [
-                      "id",
                       "type"
                     ],
                     "type": "object"
@@ -57446,7 +57441,6 @@
                       }
                     },
                     "required": [
-                      "id",
                       "type"
                     ],
                     "type": "object"

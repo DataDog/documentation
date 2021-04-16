@@ -1280,7 +1280,6 @@ components:
         type:
           $ref: '#/components/schemas/IncidentServiceType'
       required:
-      - id
       - type
       type: object
     IncidentServiceUpdateRequest:
@@ -1460,7 +1459,6 @@ components:
         type:
           $ref: '#/components/schemas/IncidentTeamType'
       required:
-      - id
       - type
       type: object
     IncidentTeamUpdateRequest:
@@ -7906,9 +7904,8 @@ paths:
               filters\": [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\"\
               : \"info\",\n    \"condition\": \"a > 0\",\n    \"notifications\": []\n\
               \  }],\n  \"options\": {\n    \"evaluationWindow\": 900,\n    \"keepAlive\"\
-              : 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"hasExtendedTitle\"\
-              : false,\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isDefault\"\
-              : false,\n  \"isEnabled\": true,\n  \"type\": \"log_detection\"\n}"
+              : 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"message\": \"Test\
+              \ rule\",\n  \"tags\": [],\n  \"isEnabled\": true\n}"
           step: there is a valid "security_rule" in the system
       x-undo:
         operationId: DeleteSecurityMonitoringRule
