@@ -66,7 +66,7 @@ install_dependencies:
       - yarn.lock
   except:
     # skip on automated translation prs
-    - /^guacbot\/translation-[0-9]+$
+    - /^guacbot\/translation-[0-9]+$/i
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
