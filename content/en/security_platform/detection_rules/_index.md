@@ -1,5 +1,5 @@
 ---
-title: Security Rules
+title: Detection Rules
 kind: documentation
 aliases:
   - /security_monitoring/detection_rules/
