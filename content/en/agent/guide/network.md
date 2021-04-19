@@ -146,6 +146,18 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
 
+## Agent-side data buffering on network unavailability
+
+If the network becomes unavailable, the Agent stores the metrics in memory.
+The maximum memory usage for storing the metrics is defined by the `forwarder_retry_queue_payloads_max_size` configuration setting. When this limit is reached, the metrics are dropped.
+
+Agent version 7.27.0 and above can store the metrics on disk when the memory limit is reached.
+Enable this capability by setting `forwarder_storage_max_size_in_bytes` to a positive value indicating the maximum amount of storage space, in bytes, that the Agent can use to store the metrics on disk.
+
+The metrics are stored in the folder defined by the `forwarder_storage_path` setting, which is by default `/opt/datadog-agent/run/transactions_to_retry` on Unix systems and `C:\ProgramData\Datadog\run\transactions_to_retry` on Windows.
+
+To avoid running out of storage space, the Agent stores the metrics on disk only if the total storage space used is less than 95 percent. This limit is defined by `forwarder_storage_max_disk_ratio` setting.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
