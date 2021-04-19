@@ -1798,7 +1798,7 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_getting_started
     weight: 101
-  - name: CSPM
+  - name: Cloud Security Posture Management
     url: security_platform/cspm/
     parent: security_platform
     identifier: cspm
@@ -1812,36 +1812,46 @@ main:
     url: security_platform/cspm/frameworks_and_benchmarks
     parent: cspm
     weight: 202
+  - name: Cloud Workload Security
+    url: security_platform/cloud_workload_security/
+    parent: security_platform
+    identifier: cloud_workload_security
+    weight: 3
+  - name: Getting Started
+    url: security_platform/cloud_workload_security/getting_started
+    parent: cloud_workload_security
+    identifier: cws_getting_started
+    weight: 3
   - name: Security Rules
     url: security_platform/detection_rules/
     parent: security_platform
     identifier: security_rules
-    weight: 3
+    weight: 4
   - name: Create a New Rule
     url: security_platform/detection_rules/create_a_new_rule
     parent: detection_rules
     identifier: create_a_new_rule
-    weight: 301
+    weight: 401
   - name: Default Rules
     url: security_platform/default_rules
     parent: security_platform
     identifier: default_rules
-    weight: 4
+    weight: 5
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
     identifier: signals_explorer
-    weight: 5
+    weight: 6
   - name: Compliance Findings
     url: security_platform/findings
     parent: security_platform
     identifier: compliance_findings
-    weight: 6
+    weight: 7
   - name: Guides
     url: security_platform/guide
     parent: security_platform
     identifier: security_platform_guides
-    weight: 7
+    weight: 8
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
