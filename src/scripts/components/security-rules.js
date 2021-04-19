@@ -30,7 +30,7 @@ export function initializeSecurityRules() {
         }
 
         if (searchValue && searchValue.length > 2) {
-            results = Array.from(results).filter(item => item.dataset.name.indexOf(searchValue) > -1);
+            results = Array.from(results).filter(item => (item.dataset.name && item.dataset.name.indexOf(searchValue) > -1));
         }
 
         return results;
@@ -55,7 +55,8 @@ export function initializeSecurityRules() {
 
     const handleEmptyResultSet = () => {
         const searchQuery = inputSearch.value;
-        const txt = (document.querySelector('.controls .active')) ? document.querySelector('.controls .active').text : '';
+        const activeEl = document.querySelector('.controls .active');
+        const txt = (activeEl) ? activeEl.text : '';
         const activeCategoryFilter = stringToTitleCase(txt);
         const message = `No results found for query "${searchQuery}" in category ${activeCategoryFilter}`;
         if(jsEmptyResults) {
@@ -89,9 +90,13 @@ export function initializeSecurityRules() {
         // Show headers and groups for all matches
         filteredResults.forEach(element => {
             const jsGroup = element.closest('.js-group');
-            const header = jsGroup.querySelector('.js-group-header');
-            jsGroup.style.display = 'block';
-            header.style.display = 'block';
+            if(jsGroup) {
+                const header = jsGroup.querySelector('.js-group-header');
+                jsGroup.style.display = 'block';
+                if(header) {
+                  header.style.display = 'block';
+                }
+            }
             element.style.display = 'inline';
         })
     }
