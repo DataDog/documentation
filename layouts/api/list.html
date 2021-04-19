@@ -76,9 +76,12 @@
       <div class="col-12 col-md-6">
           <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
             {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
-              {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild) }}
+              {{ $adat := (index (index $dot.Site.Data.api $versionNum) "full_spec_deref") }}
+              {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+              {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
+              {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
               <li class="nav-item">
-                <a class="nav-link mr-1 {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if eq (len $menuChild.Params.versions) 1 }}disabled{{ end }}" data-toggle="tab" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} ({{ $endpointVisibility.label }})</a>
+                <a class="nav-link mr-1 {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" data-toggle="tab" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} ({{ $endpointVisibility.label }})</a>
               </li>
             {{ end }}
           </ul>
@@ -89,23 +92,21 @@
     <div class="tab-content">
     <!-- If we have multiple endpoints for a version output them next to each other -->
     {{ range $versionIndex, $versionNum := .Params.versions }}
-      {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild) }}
-      <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="tab-pane {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" role="tabpanel">
       {{ $adat := (index (index $dot.Site.Data.api $versionNum) "full_spec_deref") }}
 
       <!-- Get the general API server url for this version -->
       {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
       {{ $dot.Scratch.Set "regions" $generalRegions }}
 
+      {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
+      {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
+
+      <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="tab-pane {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" role="tabpanel">
+
       <!-- for accessing v1/v2 resources from latest -->
       {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "") }}
 
       {{ range $tag := (first 1 (where $adat.tags ".name" "==" $ParamTitleEn)) }}
-
-        {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
-
-        {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild) }}
-
         <!-- get action strings from params, why? because they are translated here -->
         {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
 
