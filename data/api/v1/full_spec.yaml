@@ -2398,11 +2398,16 @@ components:
         your timeboard. Each group has a custom header, can hold one to many graphs,
         and is collapsible.
       properties:
+        background_color:
+          description: Background color of the group title.
+          type: string
         layout_type:
           $ref: '#/components/schemas/WidgetLayoutType'
         title:
           description: Title of the widget.
           type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
         type:
           $ref: '#/components/schemas/GroupWidgetDefinitionType'
         widgets:
@@ -10118,6 +10123,22 @@ components:
           description: The network host usage by tag(s).
           format: double
           type: number
+        profiled_containers_percentage:
+          description: The percentage of profiled containers usage by tag(s).
+          format: double
+          type: number
+        profiled_containers_usage:
+          description: The profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_hosts_percentage:
+          description: The percentage of profiled hosts usage by tag(s).
+          format: double
+          type: number
+        profiled_hosts_usage:
+          description: The profiled host usage by tag(s).
+          format: double
+          type: number
         snmp_percentage:
           description: The percentage of network device usage by tag(s).
           format: double
@@ -13143,6 +13164,15 @@ paths:
 
         This query will not return preset dashboards.'
       operationId: ListDashboards
+      parameters:
+      - description: 'When `true`, this query only returns shared custom created
+
+          or cloned dashboards.'
+        in: query
+        name: filter[shared]
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -13199,6 +13229,25 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-given:
+        dashboard:
+          parameters:
+          - name: body
+            value: "{\n  \"layout_type\": \"ordered\",\n  \"title\": \"{{ unique }}\
+              \ with Profile Metrics Query\",\n  \"widgets\": [\n    {\n      \"definition\"\
+              : {\n        \"type\": \"timeseries\",\n        \"requests\": [\n  \
+              \        {\n            \"profile_metrics_query\": {\n             \
+              \ \"compute\": {\n                \"aggregation\": \"sum\",\n      \
+              \          \"facet\": \"@prof_core_cpu_cores\"\n              },\n \
+              \             \"search\": { \"query\": \"runtime:jvm\" },\n        \
+              \      \"group_by\": [\n                {\n                  \"facet\"\
+              : \"service\",\n                  \"limit\": 10,\n                 \
+              \ \"sort\": {\n                    \"aggregation\": \"sum\",\n     \
+              \               \"order\": \"desc\",\n                    \"facet\"\
+              : \"@prof_core_cpu_cores\"\n                  }\n                }\n\
+              \              ]\n            }\n          }\n        ]\n      }\n \
+              \   }\n  ]\n}"
+          step: there is a valid "dashboard" in the system
       x-undo:
         operationId: DeleteDashboard
         parameters:
@@ -17380,6 +17429,8 @@ paths:
 
         - rum: `rum alert`
 
+        - SLO: `slo alert`
+
         - watchdog: `event alert`
 
         - event-v2: `event-v2 alert`
@@ -17584,7 +17635,22 @@ paths:
         to filter results by these tags.
 
         It is only available via the API and isn''t visible or editable in the Datadog
-        UI.'
+        UI.
+
+
+        **SLO Alert Query**
+
+
+        Example: `error_budget("slo_id").over("time_window") operator #`
+
+
+        - **`slo_id`**: The alphanumeric SLO ID of the SLO you are configuring the
+        alert for.
+
+        - **`time_window`**: The time window of the SLO target you wish to alert on.
+        Valid options: `7d`, `30d`, `90d`.
+
+        - **`operator`**: `>=` or `>`'
       operationId: CreateMonitor
       requestBody:
         content:
