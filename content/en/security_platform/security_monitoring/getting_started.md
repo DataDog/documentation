@@ -6,9 +6,12 @@ aliases:
   - /security_monitoring/getting_started/
   - /security_platform/getting_started/
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
-  tag: "Blog"
-  text: "Secure your infrastructure with Datadog Runtime Security"
+- link: "/security_platform/default_rules"
+  tag: "Documentation"
+  text: "Explore default security rules"
+- link: "/security_platform/explorer"
+  tag: "Documentation"
+  text: "Learn about the Security Signals Explorer"
 ---
 
 To get started with Datadog Security Monitoring, follow these steps:
