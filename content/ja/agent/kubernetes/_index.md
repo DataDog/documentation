@@ -115,7 +115,7 @@ datadog:
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
+[4]: https://github.com/kubernetes/kube-state-metrics/tree/master/charts/kube-state-metrics
 [5]: /ja/agent/kubernetes/apm?tab=helm
 [6]: /ja/agent/kubernetes/log?tab=helm
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
