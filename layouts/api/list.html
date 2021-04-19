@@ -81,7 +81,7 @@
               {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
               {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
               <li class="nav-item">
-                <a class="nav-link mr-1 {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" data-toggle="tab" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} ({{ $endpointVisibility.label }})</a>
+                <a class="nav-link mr-1 {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-toggle="collapse"{{- else -}}data-toggle="tab"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} ({{ $endpointVisibility.label }})</a>
               </li>
             {{ end }}
           </ul>
@@ -101,7 +101,7 @@
       {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
       {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
 
-      <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="tab-pane {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" role="tabpanel">
+      <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" role="tabpanel">
 
       <!-- for accessing v1/v2 resources from latest -->
       {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "") }}
