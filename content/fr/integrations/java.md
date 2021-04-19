@@ -7,6 +7,7 @@ ddtype: check
 dependencies: []
 description: Recueillez des métriques custom depuis vos applications à l'aide de la bibliothèque de métriques Yammer.
 doc_link: 'https://docs.datadoghq.com/integrations/java/'
+draft: false
 further_reading:
   - link: 'https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect'
     tag: FAQ
@@ -63,94 +64,36 @@ Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre chec
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Configurez l'Agent afin qu'il se connecte à l'aide de JMX, et modifiez-le selon vos besoins. Voici un fichier d'exemple `jmx.d/conf.yaml` :
+- Configurez l'Agent pour le connecter à JMX. Modifiez le fichier `jmx.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez les [options de configuration](#options-de-configuration) ci-dessous ou les modèles de [init_config][2] et d'[instance][3] pour découvrir toutes les options de configuration disponibles.
 
-```yaml
-init_config:
-  #custom_jar_paths:
-  #  - <CHEMIN_FICHIER_JAR_PERSONNALISÉ>.jar
-  #is_jmx: true
+    ```yaml
+      init_config:
+        is_jmx: true
+        collect_default_metrics: true
+        # custom_jar_paths:
+        #  - <CUSTOM_JAR_FILE_PATH>.jar
 
-instances:
-  - host: "<ENDPOINT_INSTANCE_JMX>"
-    port: "<PORT_JMX>"
-    user: "<NOM_UTILISATEUR>"
-    password: "<MOTDEPASSE>"
+      instances:
+        - host: localhost
+          port: port
+          user: username
+          password: password
+          name: jmx_instance_name
+    ```
 
-    jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/<CHEMIN_PERSONNALISÉ>" # facultatif
+- [Redémarrez l'Agent][4].
 
-    name: "<NOM_INSTANCE_JMX>"
-    java_bin_path: "<CHEMIN_JAVA>"
-    java_options: "-Xmx200m -Xms50m"
-    trust_store_path: "<CHEMIN_TRUST_STORE>.jks"
-    trust_store_password: "<MOTDEPASSE>"
+**Remarque** : pour exécuter plusieurs checks JMX, créez des fichiers de configuration avec le format `jmx_<INDEX>.d/conf.yaml`. Exemples : `jmx_1.d/conf.yaml`, `jmx_2.d/conf.yaml`, etc. Chaque dossier doit être stocké dans le répertoire `conf.d`. Définissez l'option `is_jmx` sur `true` dans le fichier de configuration.
 
-    rmi_connection_timeout: 20
-    rmi_client_timeout: 15000
 
-    process_name_regex: ".*<NOM_PROCESSUS>.*"
-    tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
-    refresh_beans: 600
-    tags:
-      env: dev
-      "<KEY_TAG>":"<VALUE_TAG>"
-
-    conf:
-      - include:
-          domain: "<NOM_DOMAINE_1>"
-          tags:
-              simple: $attr0
-              raw_value: "<VALEUR_CHOISIE>"
-              multiple: $attr0-$attr1
-          bean:
-            - "<NOM_BEAN_1>"
-            - "<NOM_BEAN_2>"
-          attribute:
-            attribute1:
-              metric_type: counter
-              alias: "jmx.<NOM_ATTRIBUT_MÉTRIQUE_1>"
-            attribute2:
-              metric_type: gauge
-              alias: "jmx.<NOM_ATTRIBUT_MÉTRIQUE_2>"
-            attribute3:
-              metric_type: monotonic_count
-              alias: "jmx.<NOM_ATTRIBUT_MÉTRIQUE_3>"
-
-      - include:
-          domain: "<NOM_DOMAINE_2>"
-        exclude:
-          bean:
-            - "<NOM_BEAN_EXCLU>"
-      - include:
-          domain_regex: "<REGEX_DOMAINE>"
-        exclude:
-          bean_regex:
-            - "<NOM_REGEX_BEAN_EXCLU>"
-      - include:
-          bean_regex: regex_topic=(.*?)
-          attribute:
-            attribute1:
-              metric_type: gauge
-              alias: "jmx.<NOM_ATTRIBUT_AVEC_TAG_REGEX>"
-
-          ## Les lignes suivantes envoient le bean <NOM_ATTRIBUT_AVEC_TAG_REGEX> avec les tags :
-          ## `hostregex:<paramètreBean>`
-          ## `typeregex:<paramètreBean>`
-          ## `contextregex<paramètreBean>`
-          ## `optional:tag`
-          tags:
-              TypeRegex: $1
-              HostRegex: $2
-              contextRegex: $3
-              optional: tag
-```
-
-**Remarque** : pour exécuter plusieurs checks JMX, créez des fichiers de configuration avec le format `jmx_<INDEX>.yaml` (p. ex., `jmx_1.d/conf.yaml`, `jmx_2.d/conf.yaml`, etc.). Chaque fichier doit être stocké dans le répertoire `conf.d`. Définissez l'option `is_jmx` sur `true` dans ces fichiers de configuration.
-
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/init_config/jmx.yaml
+[3]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/instances/jmx.yaml
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-JMX n'est pas installé sur l'image standard `datadog/agent:latest` servant à exécuter le [conteneur de l'Agent Datadog][1]. **Utilisez plutôt l'image `datadog/agent:latest-jmx`** : celle-ci est basée sur `datadog/agent:latest` mais comprend une JVM, dont l'Agent a besoin pour exécuter [jmxfetch][2].
+JMX n'est pas installé sur l'image standard `gcr.io/datadoghq/agent:latest` servant à exécuter le [conteneur de l'Agent Datadog][1]. **Utilisez plutôt l'image `gcr.io/datadoghq/agent:latest-jmx`Agent** : celle-ci est basée sur `gcr.io/datadoghq/agent:latest` mais comprend une JVM, dont l'Agent a besoin pour exécuter [jmxfetch][2].
 
 Pour lancer un check JMX sur l'un de vos conteneurs :
 
@@ -179,26 +122,31 @@ Pour lancer un check JMX sur l'un de vos conteneurs :
 
 ##### Options de configuration
 
-| Option                                        | Obligatoire | Description                                                                                                                                                                                                                                                                                                                               |
-| --------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `custom_jar_paths`                            | Non       | Permet de spécifier des fichiers jar personnalisés afin de les ajouter au classpath du JVM de l'Agent.                                                                                                                                                                                                                                                         |
-| `jmx_url`                                     | Non       | Si l'Agent a besoin de se connecter à une URL JMX différente de celle par défaut, indiquez l'URL ici au lieu d'un host et d'un port. Si vous utilisez ce paramètre, vous devez spécifier un `name` pour l'instance.                                                                                                                                                                        |
-| `is_jmx`                                      | Non       | Autorise la création de différents fichiers de configuration pour chaque application, au lieu de créer un seul fichier JMX exhaustif. Indiquez cette option dans chaque fichier de configuration, tel qu'expliqué dans la remarque de la section [Configuration](#configuration).                                                                                                     |
-| `collect_default_metrics`                     | Non       | Chaque intégration contient un fichier `metrics.yaml` qui comprend la liste des beans par défaut à recueillir. Si vous définissez ce paramètre sur `true`, ces métriques sont automatiquement recueillies sans être explicitement ajoutées au fichier yaml. Cette option est généralement utilisée pour gérer la configuration d'Autodiscovery, afin de réduire la taille de l'objet de configuration. |
-| `name`                                        | Non       | Utilisé conjointement avec `jmx_url`.                                                                                                                                                                                                                                                                                                       |
-| `java_bin_path`                               | Non       | Doit être défini si l'Agent ne parvient pas à trouver votre exécutable Java.                                                                                                                                                                                                                                                                              |
-| `java_options`                                | Non       | Options JVM Java                                                                                                                                                                                                                                                                                                                          |
-| `trust_store_path` et `trust_store_password` | Non       | À définir si le protocole SSL est activé.                                                                                                                                                                                                                                                                                                          |
-| `process_name_regex`                          | Non       | Au lieu de spécifier un host et un port ou `jmx_url`, l'Agent peut se connecter à l'aide de l'API Attach. Pour ce faire, vous devez avoir installé le JDK et avoir défini le chemin vers `tools.jar`.                                                                                                                                                              |
-| `tools_jar_path`                              | Non       | À définir lorsque `process_name_regex` est défini.                                                                                                                                                                                                                                                                                               |
-| `refresh_beans`                               | Non       | Fréquence d'actualisation de la liste des Mbeans correspondants. Valeur par défaut : 600 s. Toute valeur inférieure peut entraîner une augmentation de la charge processeur.                                                                                                                                                                                                  |
-| `rmi_connection_timeout`                      | Non       | Le délai d'expiration, en secondes, d'une connexion à la JVM à l'aide du `host` et du `port` ou d'une `jmx_url`.                                                                                                                                                                                                                                      |
-| `rmi_client_timeout`                          | Non       | Spécifie la durée, en millisecondes, sans réponse de la JVM connectée après laquelle l'Agent abandonne une connexion existante et réessaie de se connecter.                                                                                                                                                                                        |
+| Option                                        | Obligatoire | Description                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-----------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `custom_jar_paths`                            | Non       | Permet de spécifier des fichiers jar personnalisés afin de les ajouter au classpath du JVM de l'Agent.                                                                                                                                                                                                                                                                                                                                       |
+| `jmx_url`                                     | Non       | Si l'Agent a besoin de se connecter à une URL JMX différente de celle par défaut, indiquez l'URL ici au lieu d'un host et d'un port. Si vous utilisez ce paramètre, vous devez spécifier un `name` pour l'instance.                                                                                                                                                                                                                                                      |
+| `is_jmx`                                      | Non       | Autorise la création de différents fichiers de configuration pour chaque application, au lieu de créer un seul fichier JMX exhaustif. Indiquez cette option dans chaque fichier de configuration, tel qu'expliqué dans la remarque de la section [Configuration](#configuration).                                                                                                                                                                                   |
+| `collect_default_jvm_metrics`                 | Non       | Ordonne à l'intégration de collecter les métriques JVM par défaut (`jvm.*`). La valeur par défaut est `true`.                                                                                                                                                                                                                                                                                                                                 |
+| `collect_default_metrics`                     | Non       | Chaque intégration contient un fichier `metrics.yaml` qui comprend la liste des beans par défaut à recueillir. Si vous définissez ce paramètre sur `true`, ces métriques sont automatiquement recueillies sans être explicitement ajoutées au fichier yaml. Cette option est généralement utilisée pour gérer la configuration d'Autodiscovery, afin de réduire la taille de l'objet de configuration. Cela ne s'applique pas à la collecte de [métriques JMX via l'Agent de tracing Java][6]. |
+| `java_bin_path`                               | Non       | Indiquez le chemin vers votre binaire ou exécutable Java si l'Agent ne parvient pas à le localiser. Exemple : `C:/chemin/vers/java.exe` ou `/etc/alternatives/java`.                                                                                                                                                                                                                                                                          |
+| `java_options`                                | Non       | Options JVM Java                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `name`                                        | Non       | Utilisé conjointement avec `jmx_url`.                                                                                                                                                                                                                                                                                                                                                                                     |
+| `new_gc_metrics`                              | Non       | Définissez ce paramètre sur `true` pour améliorer les noms des métriques de garbage collection. La valeur par défaut est `false`.                                                                                                                                                                                                                                                                                                                                |
+| `process_name_regex`                          | Non       | Au lieu de spécifier un host et un port ou `jmx_url`, l'Agent peut se connecter à l'aide de l'API Attach. Pour ce faire, vous devez avoir installé le JDK et avoir défini le chemin vers `tools.jar`.                                                                                                                                                                                                                                            |
+| `refresh_beans`                               | Non       | Fréquence d'actualisation de la liste des Mbeans correspondants. Valeur par défaut : 600 s. Toute valeur inférieure peut entraîner une augmentation de la charge processeur.                                                                                                                                                                                                                                                                                |
+| `refresh_beans_initial`                       | Non       | Période d'actualisation de la liste des Mbeans correspondants qui intervient immédiatement après l'initialisation. La valeur par défaut est `refresh_beans`.                                                                                                                                                                                                                                                                                        |
+| `rmi_connection_timeout`                      | Non       | Le délai d'expiration, en millisecondes, d'une connexion à la JVM à l'aide du `host` et du `port` ou d'une `jmx_url`.                                                                                                                                                                                                                                                                                                               |
+| `rmi_client_timeout`                          | Non       | Spécifie la durée, en millisecondes, sans réponse de la JVM connectée après laquelle l'Agent abandonne une connexion existante et réessaie de se connecter.                                                                                                                                                                                                                                                                      |
+| `service`                                     | Non       | Permet d'associer un tag `service:<SERVICE>` à chaque métrique, événement et check de service émis par cette intégration.                                                                                                                                                                                                                                                                                                                 |
+| `service_check_prefix`                        | Non       | Préfixe de check de service custom, par ex. `my_prefix` pour obtenir un check de service nommé `my_prefix.can_connect`. Si cette valeur n'a pas été définie, le nom de l'intégration est utilisé par défaut.                                                                                                                                                                                                                                                                |
+| `tools_jar_path`                              | Non       | À définir lorsque `process_name_regex` est défini.                                                                                                                                                                                                                                                                                                                                                                             |
+| `trust_store_path` et `trust_store_password` | Non       | À définir si le protocole SSL est activé.                                                                                                                                                                                                                                                                                                                                                                                        |
 
 Le paramètre `conf` correspond à une liste de dictionnaires. Seules deux clés sont autorisées dans ce dictionnaire :
 
 | Clé       | Obligatoire | Description                                                                                                                                |
-| --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+|-----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | `include` | Oui      | Dictionnaire de filtres. Tout attribut qui correspond à ces filtres est recueilli, sauf s'il correspond également aux filtres « exclude » (voir ci-dessous). |
 | `exclude` | Non       | Dictionnaire de filtres. Les attributs qui correspondent à ces filtres ne sont pas recueillis.                                                           |
 
@@ -210,23 +158,27 @@ mydomain:attr0=val0,attr1=val1
 
 Cela créé une métrique `mondomaine` (ou un nom similaire, en fonction de l'attribut au sein du bean) avec les tags : `attr0:val0, attr1:val1, domain:mondomaine, simple:val0, raw_value:ma_valeur_choisie, multiple:val0-val1`.
 
-Si vous spécifiez un alias dans une clé `include` au format _camel case_, il est converti au format _snake case_. Par exemple, `MonNomMétrique` s'affiche sous la forme `mon_nom_métrique` dans Datadog.
+Si vous spécifiez un alias dans une clé `include` au format _camel case_, il est converti au format _snake case_. Par exemple, `MonNomMétrique` devient `mon_nom_métrique` dans Datadog.
 
 ##### Description des filtres
 
 Chaque dictionnaire `include` ou `exclude` prend en charge les clés suivantes :
 
-| Clé                   | Description                                                                                                                                                                              |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `domain`              | Liste des noms de domaine (p. ex., `java.lang`).                                                                                                                                               |
-| `domain_regex`        | Liste des expressions régulières pour le nom de domaine (p. ex., `java\.lang.*`).                                                                                                                              |
-| `bean` ou `bean_name` | Liste des noms de bean complets (p. ex., `java.lang:type=Compilation`).                                                                                                                           |
-| `bean_regex`          | Liste des expressions régulières pour les noms de bean complets (p. ex., `java\.lang.*[,:]type=Compilation.*`). Vous pouvez utiliser des groupes de capture dans votre expression régulière afin de fournir des valeurs de tag. Référez-vous à l'exemple de configuration ci-dessus. |
-| `attribute`           | Liste ou dictionnaire de noms d'attributs (voir ci-dessous pour plus de détails).                                                                                                                  |
+| Clé                   | Description                                                                                                                                                                                                      |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `domain`              | Nom de domaine ou liste de noms de domaine (par ex. `java.lang`).                                                                                                                                                        |
+| `domain_regex`        | Expression régulière ou liste d'expressions régulières correspondant au nom de domain (par ex. `java\lang.*`)                                                                                                                              |
+| `bean` ou `bean_name` | Nom de bean ou liste de noms de bean complets (par ex. `java.lang:type=Compilation`).                                                                                                                                      |
+| `bean_regex`          | Expression régulière ou liste d'expressions régulières correspondant aux noms de bean complets (par ex. `java\.lang.*[,:]type=Compilation.*`). Vous pouvez utiliser des groupes d'enregistrement dans votre expression régulière afin de spécifier des valeurs de tag. Voir l'exemple de configuration ci-dessus. |
+| `class`               | Classe ou liste de noms de classe (par ex. `org.datadog.jmxfetch.SimpleTestJavaApp`).                                                                                                                                  |
+| `class_regex`         | Expression régulière ou liste d'expressions régulières correspondant aux noms de classe (par ex. `org\.datadog\.jmxfetch\.SimpleTestJavaApp`).                                                                                                 |
+| `exclude_tags`        | Liste de clés de tag à supprimer des métriques finales. Celle-ci peut être utilisée pour améliorer la cardinalité des tags de métrique. (Par ex. `["attr1", "id", "partition-id"]`)                                                           |
+| `attribute`           | Liste ou dictionnaire de noms d'attributs (voir ci-dessous pour plus de détails).                                                                                                                                          |
 
-Les expressions régulières définies dans `domain_regex` et `bean_regex` doivent respecter le [format des expressions régulières Java][6].
+**Remarques** :
 
-Les filtres `domain_regex` et `bean_regex` ont été ajoutés dans la version 5.5.0.
+- Les expressions régulières définies dans `domain_regex` et `bean_regex` doivent respecter [le format des expressions régulières de Java][7]. Ces filtres ont été ajoutés dans la version 5.5.0.
+- À l'exception des expressions régulières, toutes les valeurs sont sensibles à la casse.
 
 En plus de ces paramètres, les filtres prennent en charge les clés personnalisées. Ainsi, vous pouvez appliquer des filtres basés sur des paramètres bean. Par exemple, si vous souhaitez recueillir des métriques concernant le cache Cassandra, vous pouvez appliquer le filtre `type: - Caches` :
 
@@ -242,7 +194,7 @@ conf:
 
 Le filtre `attribute` accepte deux types de valeurs :
 
-- Un dictionnaire dont les clés correspondent à des noms d'attributs :
+- Dictionnaire dont les clés correspondent aux noms des attributs cibles :
 
     ```yaml
     conf:
@@ -259,9 +211,10 @@ Le filtre `attribute` accepte deux types de valeurs :
                       metric_type: counter
     ```
 
-     Vous pouvez alors spécifier un alias pour la métrique, qui correspond au nom de la métrique dans Datadog. Vous pouvez également indiquer le type de métrique : `gauge`, `histogram`, `counter`/`rate` ou `monotonic_count`. Si vous choisissez `counter`, un `rate` par seconde est calculé pour cette métrique et envoyé en tant que `gauge`.
+    - Vous pouvez définir un `alias` pour l'attribut qui devient le nom de la métrique dans Datadog.
+    - Vous pouvez également définir le type de métrique : `gauge`, `histogram`, `counter`/`rate`, ou `monotonic_count`. Si vous choisissez `counter`, un `rate` (taux) par seconde est calculé pour la métrique et envoyé en tant que `gauge`.
 
-- Une liste de noms d'attributs :
+- Une liste de noms d'attribut cible :
 
     ```yaml
     conf:
@@ -279,9 +232,8 @@ Le filtre `attribute` accepte deux types de valeurs :
                   - RecentHitRate
     ```
 
-     Dans ce cas :
-      - Le type de métrique est gauge.
-      - Le nom de la métrique est `jmx.<NOM_DOMAINE>.<NOM_ATTRIBUT>`.
+    - Le type de métrique est défini sur `gauge` par défaut.
+    - Le nom de la métrique est `jmx.<NOM_DOMAINE>.<NOM_ATTRIBUT>`.
 
 Voici un autre exemple de filtre :
 
@@ -304,19 +256,19 @@ init_config:
 
 #### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez votre check JMX dans la section JMXFetch.
+[Lancez la sous-commande status de l'Agent][8] et cherchez votre check JMX dans la section JMXFetch.
 
-Les checks JMX possèdent également une configuration par défaut qui recueille 11 métriques depuis votre application JMX. Reportez-vous au [Metrics Explorer][8] pour consulter les métriques suivantes : `jvm.heap_memory`, `jvm.non_heap_memory` ou `jvm.gc.cms.count`.
+Les checks JMX possèdent également une configuration par défaut qui recueille des métriques depuis votre application. Reportez-vous au [Metrics Explorer][9] pour : `jvm.heap_memory`, `jvm.non_heap_memory` ou `jvm.gc.cms.count`.
 
 ### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-Consultez la documentation relative à la [configuration de la collecte de logs Java][9] pour transmettre vos logs à Datadog.
+Consultez la documentation relative à la [configuration de la collecte de logs Java][10] pour transmettre vos logs à Datadog.
 
 ### Collecte de traces
 
-Après avoir [activé la collecte de traces avec votre Agent][10], consultez la documentation relative à l'[instrumentation de votre application Java][11] pour envoyer ses traces à Datadog.
+Après avoir [activé la collecte de traces avec votre Agent][11], consultez la documentation relative à l'[instrumentation de votre application Java][12] pour envoyer ses traces à Datadog.
 
 ## Données collectées
 
@@ -324,7 +276,7 @@ Après avoir [activé la collecte de traces avec votre Agent][10], consultez la 
 
 {{< get-metrics-from-git >}}
 
-**Remarque** : définissez `new_gc_metrics: true` dans votre fichier [jmx.d/conf.yaml][12] pour remplacer les métriques suivantes :
+**Remarque** : définissez `new_gc_metrics: true` dans votre fichier [jmx.d/conf.yaml][13] pour remplacer les métriques suivantes :
 
 ```text
 jvm.gc.cms.count   => jvm.gc.minor_collection_count
@@ -335,7 +287,7 @@ jvm.gc.parnew.time => jvm.gc.minor_collection_time
 
 ## Dépannage
 
-Consultez la liste des [commandes de dépannage JMX et la FAQ dédiée][13].
+Consultez la liste des [commandes de dépannage JMX et la FAQ dédiée][14].
 
 ## Pour aller plus loin
 
@@ -346,11 +298,12 @@ Consultez la liste des [commandes de dépannage JMX et la FAQ dédiée][13].
 [3]: https://docs.datadoghq.com/fr/help/
 [4]: https://docs.oracle.com/en/java/javase/14/management/monitoring-and-management-using-jmx-technology.html
 [5]: https://docs.datadoghq.com/fr/getting_started/integrations/#setting-up-an-integration
-[6]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/fr/metrics/explorer/
-[9]: https://docs.datadoghq.com/fr/logs/log_collection/java/
-[10]: https://docs.datadoghq.com/fr/tracing/send_traces/
-[11]: https://docs.datadoghq.com/fr/tracing/setup/java/
-[12]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
-[13]: https://docs.datadoghq.com/fr/integrations/faq/troubleshooting-jmx-integrations/
+[6]: 14
+[7]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://docs.datadoghq.com/fr/metrics/explorer/
+[10]: https://docs.datadoghq.com/fr/logs/log_collection/java/
+[11]: https://docs.datadoghq.com/fr/tracing/send_traces/
+[12]: https://docs.datadoghq.com/fr/tracing/setup/java/
+[13]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
+[14]: https://docs.datadoghq.com/fr/integrations/faq/troubleshooting-jmx-integrations/
