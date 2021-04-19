@@ -1054,20 +1054,21 @@ main:
     url: metrics/advanced-filtering/
     parent: metrics_top_level
     identifier: metrics_advanced_filtering
-    weight: 901
+    weight: 907
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
-    weight: 902
+    identifier: metrics_explorer
+    weight: 901
   - name: Summary
     url: metrics/summary/
     parent: metrics_top_level
     weight: 903
   - name: Distributions
     url: metrics/distributions/
-    parent: metrics_top_level
+    parent: metrics_explorer
     identifier: metrics_distributions
-    weight: 904
+    weight: 902
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -2171,14 +2172,14 @@ main:
     weight: 404
   - name: Custom Metrics
     url: developers/metrics/
-    parent: dev_tools
+    parent: metrics_top_level
     identifier: dev_tools_metrics
-    weight: 5
+    weight: 999
   - name: Metrics Types
     url: developers/metrics/types/
-    parent: dev_tools_metrics
+    parent: metrics_top_level
     identifier: dev_tools_metrics_metrics_type
-    weight: 501
+    weight: 905
   - name: 'Submission - Agent Check '
     url: developers/metrics/agent_metrics_submission/
     parent: dev_tools_metrics
@@ -2206,9 +2207,9 @@ main:
     weight: 506
   - name: Metrics Units
     url: developers/metrics/units/
-    parent: dev_tools_metrics
+    parent: metrics_top_level
     identifier: dev_tools_metrics_units
-    weight: 507
+    weight: 906
   - name: Events
     url: developers/events/
     parent: dev_tools
