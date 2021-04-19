@@ -1788,36 +1788,51 @@ main:
     pre: nav_security_monitoring
     identifier: security_platform
     weight: 160000
-  - name: Getting Started
-    url: security_platform/getting_started
+  - name: Security Monitoring
+    url: security_platform/security_monitoring/
     parent: security_platform
-    identifier: security_monitoring_getting_started
+    identifier: security_monitoring
     weight: 1
-  - name: Security Rules
+  - name: Getting Started
+    url: security_platform/security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: CSPM
+    url: security_platform/cspm/
+    parent: security_platform
+    identifier: cspm
+    weight: 2
+  - name: Getting Started
+    url: security_platform/cspm/getting_started
+    parent: cspm
+    identifier: cspm_getting_started
+    weight: 201
+  - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
-    identifier: security_rules
-    weight: 2
-  - name: Security Monitoring
-    url: security_platform/detection_rules/security_monitoring
-    parent: security_rules
-    identifier: security_monitoring_detection_rules
-    weight: 201
+    identifier: detection_rules
+    weight: 3
+  - name: Create a New Rule
+    url: security_platform/detection_rules/create_a_new_rule
+    parent: detection_rules
+    identifier: create_a_new_rule
+    weight: 301
   - name: Default Rules
     url: security_platform/default_rules
     parent: security_platform
     identifier: default_rules
-    weight: 3
+    weight: 4
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
     identifier: signals_explorer
-    weight: 4
+    weight: 5
   - name: Guides
     url: security_platform/guide
     parent: security_platform
     identifier: security_platform_guides
-    weight: 5
+    weight: 6
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics

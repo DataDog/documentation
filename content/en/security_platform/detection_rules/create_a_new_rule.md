@@ -1,5 +1,8 @@
 ---
-title: Security Monitoring Rules
+title: Create a New Rule
+type: documentation
+aliases:
+ - security_platform/detection_rules/security_monitoring
 further_reading:
 - link: "/security_monitoring/default_rules/"
   tag: "Documentation"
@@ -11,7 +14,7 @@ aliases:
     - /security_monitoring/detection_rules/security_monitoring/
 ---
 
-## Create a New Rule
+## Overview
 
 To create a new Security Monitoring detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
 
