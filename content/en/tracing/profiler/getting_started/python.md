@@ -2,7 +2,7 @@
 title: Getting Started
 kind: Documentation
 aliases:
-    - /tracing/profiler/java
+    - /tracing/profiler/python
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
