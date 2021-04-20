@@ -54,7 +54,7 @@ Agent がデフォルトでバインドする[ポート][3]は、Linux では 3 
 
 コレクターは、15 秒ごとにすべての標準のメトリクスを収集します。Agent v6 埋め込みの Python2.7 インタープリターは、インテグレーションと[カスタムチェック][4]を実行します。
 
-### フォワーダー
+### Forwarder
 
 Agent フォワーダーは、メトリクスを HTTPS 経由で Datadog に送信します。バッファリングを行うと、ネットワークスプリットがメトリクスの報告に影響を与えることを防ぐことができます。メトリクスは、処理待ちの送信リクエストのサイズまたは数が制限に達するまで、メモリにバッファされます。その後、フォワーダーのメモリのフットプリントを管理可能な範囲に保つために、最も古いメトリクスが破棄されます。ログは、SSL 暗号化 TCP 接続経由で Datadog に送信されます。
 
@@ -82,7 +82,7 @@ Agent v5 は、以下に示す主な 4 つのコンポーネントで構成さ�
 
 **注**: Windows の場合、4 つの Agent プロセスはいずれも `ddagent.exe` インスタンスとして、`DevOps' best friend` という説明とともに表示されます。
 
-### スーパーバイズ、特権、ネットワークポート
+### 監督、特権、ネットワークポート
 
 SupervisorD マスタープロセスは、`dd-agent` ユーザーとして実行され、分岐したすべてのサブプロセスは同じユーザーとして実行されます。これは、Datadog Agent によって開始されたシステムコール (`iostat`/`netstat`) にも適用されます。Agent 構成は、`/etc/dd-agent/datadog.conf` と `/etc/dd-agent/conf.d` にあります。すべての構成は、`dd-agent` によって読み取り可能である必要があります。構成ファイルには API キーとメトリクスにアクセスするために必要な他の証明書が含まれるので、推奨されるアクセス許可は 0600 です。
 
@@ -128,31 +128,32 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 
 3. セキュリティ上の理由から、GUI はローカルネットワークインターフェイス (`localhost`/`127.0.0.1`) から**のみ**アクセスできます。そのため、Agent を同じホストで実行する必要があります。したがって、Agent を VM やコンテナーで実行してホストマシンからアクセスすることはできません。
 
-## サポートされる OS バージョン
+## サポート対象のプラットフォーム
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| OS                                              | サポートされるバージョン                                |
-|-------------------------------------------------|---------------------------------------------------|
-| [Amazon][1]                                     | Amazon Linux 2                                    |
-| [Debian x86_64][2] (systemd を使用)                 | Debian 7 (wheezy) 以上                                |
-| [Debian x86_64][2] (SysVinit を使用)                | Agent 6.6.0 以上では Debian 7 (wheezy) 以上                |
-| [Ubuntu x86_64][3]                              | Ubuntu 14.04 以上                                     |
-| [RedHat/CentOS x86_64][4]                       | RedHat/CentOS 6 以上                                  |
-| [Docker][5]                                     | バージョン 1.12 以上                                     |
-| [Kubernetes][6]                                 | バージョン 1.3 以上                                      |
-| [SUSE Enterprise Linux x86_64][7] (systemd を使用)  | SUSE 11 SP4 以上                                      |
-| [SUSE Enterprise Linux x86_64][7] (SysVinit を使用) | Agent 7.16.0 以上では SUSE 11 SP4                      |
-| [Fedora x86_64][8]                              | Fedora 26 以上                                        |
-| [macOS][9]                                      | macOS 10.12 以上                                      |
-| [Windows Server 64 ビット][10]                     | Windows Server 2008r2 以上と Server Core (Nano 以外) |
-| [Windows 64 ビット][10]                            | Windows 7 以上                                        |
-| [Windows Azure Stack HCI OS][10]                | すべてのバージョン                                      |
+| プラットフォーム                                 | サポートされるバージョン                                        |
+|------------------------------------------|-----------------------------------------------------------|
+| [Amazon Linux][1]                        | Amazon Linux 2                                            |
+| [Debian][2] (systemd を使用)                 | Debian 7 (wheezy) 以上                                        |
+| [Debian][2] (SysVinit を使用)                | Agent 6.6.0 以上では Debian 7 (wheezy) 以上                        |
+| [Ubuntu][3]                              | Ubuntu 14.04 以上                                             |
+| [RedHat/CentOS][4]                       | RedHat/CentOS 6 以上                                          |
+| [Docker][5]                              | バージョン 1.12 以上                                             |
+| [Kubernetes][6]                          | バージョン 1.3 以上                                              |
+| [SUSE Enterprise Linux][7] (systemd を使用)  | SUSE 11 SP4 以上                                              |
+| [SUSE Enterprise Linux][7] (SysVinit を使用) | Agent 7.16.0 以上では SUSE 11 SP4                              |
+| [Fedora][8]                              | Fedora 26 以上                                                |
+| [macOS][9]                               | macOS 10.12 以上                                              |
+| [Windows Server][10]                     | Windows Server 2008 R2+ および Server Core (Nano Server 以外) |
+| [Windows][10]                            | Windows 7 以上                                                |
+| [Windows Azure Stack HCI OS][10]         | すべてのバージョン                                              |
 
 **注**: 
+- 64-bit x86 パッケージは、リスト上のすべてのプラットフォーム用でご利用いただけます。Arm v8 パッケージは、Windows および MacOS 以外の全プラットフォームでご利用いただけます。
 - [ソース][11]インストールは、このリストにないオペレーティングシステムでも実行でき、ベストエフォートベースでサポートされている可能性があります。
-- Datadog Agent v7+ は、最新の Windows Update がインストールされた Windows Server 2008 R2 をサポートします。Windows Server 2008 R2 に影響する[クロックドリフトと Go の既知の問題][12]もあります。
+- Datadog Agent v6+ は、最新の Windows Update がインストールされた Windows Server 2008 R2 をサポートします。Windows Server 2008 R2 に影響する[クロックドリフトと Go の既知の問題][12]もあります。
 
 [1]: /ja/agent/basic_agent_usage/amazonlinux/
 [2]: /ja/agent/basic_agent_usage/deb/
@@ -165,28 +166,27 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 [9]: /ja/agent/basic_agent_usage/osx/
 [10]: /ja/agent/basic_agent_usage/windows/
 [11]: /ja/agent/basic_agent_usage/source/
+[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| OS                                | サポートされるバージョン     |
-|-----------------------------------|------------------------|
-| [Amazon][1]                       | Amazon Linux 2         |
-| [Debian x86_64][2]                | Debian 7 (wheezy) 以上     |
-| [Ubuntu x86_64][3]                | Ubuntu 12.04 以上          |
-| [RedHat/CentOS x86_64][4]         | RedHat/CentOS 5 以上       |
-| [Docker][5]                       | バージョン 1.12 以上          |
-| [Kubernetes][6]                   | バージョン 1.3 ～ 1.8     |
-| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 以上           |
-| [Fedora x86_64][8]                | Fedora 26 以上             |
-| [MacOS][9]                        | macOS 10.10 以上           |
-| [Windows Server 64 ビット][10]       | Windows Server 2008r2 以上 |
-| [Windows 64 ビット][10]              | Windows 7 以上             |
+| プラットフォーム                   | サポートされるバージョン     |
+|----------------------------|------------------------|
+| [Amazon Linux][1]          | Amazon Linux 2         |
+| [Debian][2]                | Debian 7 (wheezy) 以上     |
+| [Ubuntu][3]                | Ubuntu 12.04 以上          |
+| [RedHat/CentOS][4]         | RedHat/CentOS 5 以上       |
+| [Docker][5]                | バージョン 1.12 以上          |
+| [Kubernetes][6]            | バージョン 1.3 ～ 1.8     |
+| [SUSE Enterprise Linux][7] | SUSE 11 SP4 以上           |
+| [Fedora][8]                | Fedora 26 以上             |
+| [MacOS][9]                 | macOS 10.10 以上           |
+| [Windows Server][10]       | Windows Server 2008r2 以上 |
+| [Windows][10]              | Windows 7 以上             |
 
 **注**:
 
 - [ソース][11]インストールは、このリストにないオペレーティングシステムでも実行でき、ベストエフォートベースでサポートされている可能性があります。
-
-- Windows Server 2008 R2 はサポートされていますが、Windows Server 2008 R2 に影響する[クロックドリフトと Go の既知の問題][12]があります。
 
 [1]: /ja/agent/basic_agent_usage/amazonlinux/?tab=agentv5
 [2]: /ja/agent/basic_agent_usage/deb/
@@ -203,7 +203,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 
-| OS       | サポートされるバージョン                        |
+| プラットフォーム | サポートされるバージョン                        |
 |----------|-------------------------------------------|
 | [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 

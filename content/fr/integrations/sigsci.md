@@ -8,7 +8,7 @@ assets:
 categories:
   - security
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md'
 display_name: "Signal\_Sciences"

@@ -5,7 +5,7 @@ kind: documentation
 title: Bibliothèque Lambda Datadog pour Java
 ---
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-java/blob/master/LICENSE)
+[![Licence](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-java/blob/main/LICENSE)
 ![](https://github.com/DataDog/datadog-lambda-java/workflows/Test%20on%20Master%20branch/badge.svg)
 ![Bintray](https://img.shields.io/bintray/v/datadog/datadog-maven/datadog-lambda-java)
 
@@ -58,7 +58,7 @@ Vous ne trouvez pas votre client préféré ? Ouvrez un ticket pour effectuer u
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         URL url = new URL("https://example.com");
         HttpURLConnection instrumentedUrlConnection = dd.makeUrlConnection(url); // En-têtes de tracing inclus
@@ -75,7 +75,7 @@ Méthode alternative plus complexe :
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         URL url = new URL("https://example.com");
         HttpURLConnection hc = (HttpURLConnection)url.openConnection();
@@ -95,7 +95,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
 
@@ -112,7 +112,7 @@ Méthode alternative plus complexe :
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet hg = new HttpGet("https://example.com");
@@ -132,7 +132,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
@@ -152,7 +152,7 @@ Méthode alternative :
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
-        DDLambda dd = new DDLambda(request, lambda);
+        DDLambda dd = new DDLambda(request, context);
 
         HttpClient client = HttpClientBuilder.create().build();
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
@@ -210,6 +210,9 @@ log4j.appender.LAMBDA.layout.conversionPattern=%d{yyyy-MM-dd HH:mm:ss} %X{dd.tra
 
 Cela génère les lignes de log suivantes : `2020-11-13 19:21:53 [dd.trace_id=1168910694192328743 dd.span_id=3204959397041471598] INFO com.serverless.Handler:20 - Test de message de log`.
 
+Comme pour les **logs en texte brut** de la section précédente, vous devez créer un nouveau [parser](https://docs.datadoghq.com/logs/processing/parsing/?tab=matcher) pour pouvoir parser correctement le contexte des traces.
+
+
 #### Autres solutions de journalisation
 
 Si vous utilisez une autre solution de journalisation, vous pouvez accéder à l'ID de trace à l'aide de la méthode `DDLambda.getTraceContextString()`. Celle-ci renvoie l'ID de votre trace sous la forme d'une chaîne, qui peut être ajoutée à n'importe quel message de log.
@@ -224,7 +227,7 @@ Vous pouvez également créer un ticket pour demander l'ajout d'une fonctionnali
 
 ## Contributions
 
-Si vous rencontrez un problème avec ce package et que vous avez un correctif, n'hésitez pas à faire une pull request en suivant la [procédure](https://github.com/DataDog/dd-lambda-layer-js/blob/master/CONTRIBUTING.md).
+Si vous rencontrez un problème avec ce package et que vous avez un correctif, n'hésitez pas à faire une pull request en suivant la [procédure](https://github.com/DataDog/dd-lambda-layer-java/blob/main/CONTRIBUTING.md).
 
 ## Licence
 

@@ -202,6 +202,55 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 [3]: https://docs.datadoghq.com/serverless/forwarder/
 [4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
+{{% tab "Chalice" %}}
+
+### Update the Chalice project
+
+1. Set environment variables `DD_TRACE_ENABLED` and `DD_FLUSH_TO_LOG` to `"true"` in your `config.json`:
+    ```json
+    {
+      "version": "2.0",
+      "app_name": "hello-chalice",
+      "stages": {
+        "dev": {
+          "api_gateway_stage": "api",
+          "environment_variables": {
+            "DD_TRACE_ENABLED": "true",
+            "DD_FLUSH_TO_LOG": "true"
+          }
+        }
+      }
+    }
+    ```
+1. Add `datadog_lambda` to your `requirements.txt`.
+1. Register `datadog_lambda_wrapper` as a [middleware][1] in your `app.py`:
+    ```python
+    from chalice import Chalice, ConvertToMiddleware
+    from datadog_lambda.wrapper import datadog_lambda_wrapper
+
+    app = Chalice(app_name='hello-chalice')
+
+    app.register_middleware(ConvertToMiddleware(datadog_lambda_wrapper))
+
+    @app.route('/')
+    def index():
+        return {'hello': 'world'}
+    ```
+1. If your Lambda function is configured to use code signing, add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][2].
+
+### Subscribe the Datadog Forwarder to the log groups
+
+You need to subscribe the Datadog Forwarder Lambda function for each of your function’s log groups, to send metrics, traces, and logs to Datadog.
+
+1. [Install the Datadog Forwarder][3] if you haven't.
+2. [Subscribe the Datadog Forwarder to your function's log groups][4].
+
+
+[1]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[3]: https://docs.datadoghq.com/serverless/forwarder/
+[4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+{{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
 <div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>

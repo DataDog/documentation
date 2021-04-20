@@ -29,13 +29,15 @@ further_reading:
 
 **注**: 複数の処理ルールを設定した場合、ルールは順次適用され、各ルールは直前のルールの結果に適用されます。
 
+**注**: 処理ルールのパターンは [Golang の正規構文][1]に従う必要があります。
+
 Datadog Agent によって収集されたすべてのログに同一の処理ルールを適用する場合は、[グローバルな処理ルール](#global-processing-rules)のセクションを参照してください。
 
 ## ログの絞り込み
 
 ログの一部分のみを Datadog に送信するには、構成ファイル内の `log_processing_rules` パラメーターを使用して、`type` に **exclude_at_match** または **include_at_match** を指定します。
 
-### exclude_at_match
+### 一致時に除外
 
 | パラメーター          | 説明                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
@@ -47,7 +49,7 @@ Datadog Agent によって収集されたすべてのログに同一の処理ル
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -121,11 +123,11 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### include_at_match
+### 一致時に含める
 
 | パラメーター          | 説明                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
-| `include_at_match` | 指定されたパターンを含むメッセージを持つログだけが Datadog に送信されます。 |
+| `include_at_match` | 指定されたパターンを含むメッセージを持つログだけが Datadog に送信されます。複数の `include_at_match` ルールが定義されている場合、ログを含めるにはすべてのルールパターンが一致している必要があります。 |
 
 
 たとえば、Datadog メールアドレスを含むログに**絞り込む**には、次の `log_processing_rules` を使用します。
@@ -134,7 +136,7 @@ spec:
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -144,6 +146,36 @@ logs:
       name: include_datadoghq_users
       ## 任意の正規表現
       pattern: \w+@datadoghq.com
+```
+
+1 つ以上のパターンを一致させるには、単一の表現内で定義します。
+
+```yaml
+logs_config:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      pattern: abc|123
+```
+
+パターンが長すぎて1行に表示されない場合は、複数行に分けることが可能です。
+
+```yaml
+logs_config:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      pattern: "abc\
+|123\
+|\\w+@datadoghq.com"
 ```
 
 {{% /tab %}}
@@ -220,7 +252,7 @@ spec:
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs:
+logs_config:
  - type: file
    path: /my/test/file.log
    service: cardpayment
@@ -229,7 +261,7 @@ logs:
       - type: mask_sequences
         name: mask_credit_cards
         replace_placeholder: "[masked_credit_card]"
-        ## キャプチャするグループを含む 1 つのパターン
+        ##キャプチャするグループを含む 1 つのパターン
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
@@ -326,7 +358,7 @@ Agent バージョン 7.17 以降をご利用の場合、文字列 `replace_plac
 構成ファイルで上記のログ例を送信するには、次の `log_processing_rules` を使用します。
 
 ```yaml
-logs:
+logs_config:
  - type: file
    path: /var/log/pg_log.log
    service: database
@@ -397,6 +429,8 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em></div>
+
 その他の例:
 
 | **文字列の例**           | **パターン**                                   |
@@ -406,12 +440,11 @@ spec:
 | Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
 | 20180228                 | `\d{8}`                                       |
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
-**注**: 複数行のログのための正規表現パターンは、常にログの**先頭**に一致します。行の途中でパターンを一致させることはできません。
+## 良く使用されるログの処理ルール
 
-## 一般的に使用されるログ処理ルール
-
-例のリストを確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][1] をご覧ください。
+例の一覧を確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][2] をご覧ください。
 
 ## ワイルドカードを使用したディレクトリの追跡
 
@@ -429,7 +462,7 @@ spec:
 構成例:
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /var/log/myapp/*.log
     exclude_paths:
@@ -445,12 +478,12 @@ logs:
 
 ## UTF-16 形式のログをエンコード
 
-Datadog Agent **v6.23/v7.23** 以降でアプリケーションログが UTF-16 形式で記述されている場合は、これらのログをエンコードして[ログエクスプローラー][2]で望ましい形にパースすることができます。ログコンフィギュレーションのセクションで `encoding` パラメーターを使用して、UTF16 リトルエンディアン の場合は `utf-16-le` に、UTF16 ビッグエンディアンの場合は `utf-16-be` に設定します。その他の値は無視され、Agent はファイルを UTF-8 形式で読み込みます。
+Datadog Agent **v6.23/v7.23** 以降でアプリケーションログが UTF-16 形式で記述されている場合は、これらのログをエンコードして[ログエクスプローラー][3]で望ましい形にパースすることができます。ログコンフィギュレーションのセクションで `encoding` パラメーターを使用して、UTF16 リトルエンディアン の場合は `utf-16-le` に、UTF16 ビッグエンディアンの場合は `utf-16-be` に設定します。その他の値は無視され、Agent はファイルを UTF-8 形式で読み込みます。
 
 構成例:
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /test/log/hello-world.log
     tags: key:value
@@ -463,7 +496,7 @@ logs:
 
 ## グローバルな処理ルール
 
-Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メイン構成ファイル][3]で、または環境変数を使用してグローバルに定義できます。
+Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メインコンフィギュレーションファイル][4]で、または環境変数を使用してグローバルに定義できます。
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -506,7 +539,7 @@ env:
 {{< /tabs >}}
 Datadog Agent によって収集されるすべてのログが、グローバルな処理ルールの影響を受けます。
 
-**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][4]を実行します。
+**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][5]を実行します。
 
 ## その他の参考資料
 
@@ -515,8 +548,8 @@ Datadog Agent によって収集されるすべてのログが、グローバル
 <br>
 *Logging without Limits は Datadog, Inc. の商標です。
 
-
-[1]: /ja/agent/faq/commonly-used-log-processing-rules
-[2]: https://docs.datadoghq.com/ja/logs/explorer/#overview
-[3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[4]: /ja/agent/guide/agent-commands/#agent-information
+[1]: https://golang.org/pkg/regexp/syntax/
+[2]: /ja/agent/faq/commonly-used-log-processing-rules
+[3]: https://docs.datadoghq.com/ja/logs/explorer/#overview
+[4]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: /ja/agent/guide/agent-commands/#agent-information

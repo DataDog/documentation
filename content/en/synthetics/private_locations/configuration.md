@@ -90,6 +90,8 @@ You can upload custom root certificates to your private locations to have your A
 | `dumpFullConfig` | Boolean | `none` | Display full worker configuration parameters. |
 | `help` | Boolean | `none` | Show help. |
 
+**Note**: Private Location containers output logs to stdout/stderr without saving them within the container.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -179,6 +179,24 @@ code + code.region-param {
     border-bottom-left-radius: 0;
 }
 
+details {
+    margin-bottom: 1.5rem;
+
+    summary {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            display: inline-block;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
 .programming-lang-wrapper {
     .code-snippet-wrapper {
         display: none;
@@ -255,6 +273,8 @@ code + code.region-param {
     margin-bottom: 20px;
     &.nav-tabs {
         .nav-item {
+            z-index: 1;
+            
             &:before {
                 content: none;
             }
@@ -766,8 +786,27 @@ table,
     }
 }
 
-// external link logos
+dl {
+    border: 1px solid $ddgray;
 
+    a {
+        border-bottom: 1px solid;
+    }
+
+    dt {
+        padding: 0.75rem 0.75rem 0.25rem;
+    }
+
+    dd {
+        padding: 0 0.75rem 1rem 1.75rem;
+
+        &:last-of-type {
+            padding-bottom: 0.5rem;
+        }
+    }
+}
+
+// external link logos
 .link-logo {
     transform: translateY(-1px);
     margin-right: -1px;
@@ -854,6 +893,15 @@ table,
     opacity: 0.3;
 }
 
+// hotjar feedback button
+._hj_feedback_container {
+    display: none;
+
+    @include media-breakpoint-up(lg) {
+        display: block;
+    }
+}
+
 // all external links show an icon
 /*a {
   &:not([href*='localhost']):not([href*='datadoghq.com']):not([href*='datadog.com']):not( [href^='#'] ):not( [href^='/'] ):after {
@@ -914,3 +962,5 @@ table,
         width: 100%;
     }
 }
+  
+  

@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: 'Affichez, recherchez et échangez sur des exceptions Honeybadger dans votre flux d''événements.'
 doc_link: 'https://docs.datadoghq.com/integrations/honeybadger/'
+draft: false
 git_integration_title: honeybadger
 has_logo: true
 integration_title: Honeybadger
@@ -27,7 +28,7 @@ Associez Honeybadger à Datadog pour :
 - Discuter des erreurs avec votre équipe
 - Faire un excellent travail
 
-## Implémentation
+## Configuration
 
 ### Installation
 

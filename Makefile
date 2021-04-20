@@ -86,7 +86,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'tcprtt.md' \
 		-a -not -name 'uwsgi.md' \
 		-exec rm -rf {} \;
-	@find ./content/en/security_monitoring/default_rules -type f -maxdepth 1 \
+	@find ./content/en/security_platform/default_rules -type f -maxdepth 1 \
 		-a -not -name '_index.md' \
 		-exec rm -rf {} \;
 	@if [ -d static/images/marketplace ]; then \

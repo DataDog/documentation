@@ -58,8 +58,10 @@ After processing, the following structured log is generated:
 * You must have unique rule names within the same Grok parser.
 * The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 * Properties with null or empty values are not displayed.
+* A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][3].
+* The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
 
-### Matcher and Filter
+### Matcher and filter
 
 Here is a list of all the matchers and filters natively implemented by Datadog:
 
@@ -124,9 +126,9 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Advanced Settings
+## Advanced settings
 
-At the bottom of your Grok processor tiles, there is an Advanced Settings section:
+At the bottom of your Grok processor tiles, there is an **Advanced Settings** section:
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings"  style="width:80%;">}}
 
@@ -174,7 +176,7 @@ Some examples demonstrating how to use parsers:
 * [Optional attribute](#optional-attribute)
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
-* [List and Arrays](#list-and-arrays)
+* [List and Arrays](#list-to-array)
 * [Glog format](#glog-format)
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
@@ -392,9 +394,7 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 
 {{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
 
-**Note**: A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][3].
-
-### List and Arrays
+### List to array
 
 Use the `array` matcher to extract a list into an array in a single attribute.
 

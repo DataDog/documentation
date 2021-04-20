@@ -80,21 +80,21 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 | `PROCESS_ENABLED`          | 文字列 | 構成ファイルで、Process Agent を有効 (`"true"`) または無効 (`"false"`) にします。デフォルトでは、Process Agent は無効です。                                                                                                     |
 | `HOSTNAME_FQDN_ENABLED`    | 文字列 | Agent のホスト名に対する FQDN の使用を有効 (`"true"`) または無効 (`"false"`) にします。これは、Agent コンフィギュレーションファイルの `hostname_fqdn` を設定することと同等です。ホスト名の FQDN の使用は、デフォルトでは無効になっています。_(v6.20.0+)_ |
 | `CMD_PORT`                 | 数値 | 0 から 65534 までの有効なポート番号。Datadog Agent はコマンド API をポート 5001 で公開します。このポートが既に別のプログラムで使用されている場合は、この変数でデフォルトを上書きできます。                                               |
-| `PROXY_HOST`               | 文字列 | プロキシを使っている場合は、プロキシホストを設定します。[Datadog Agent でのプロキシの使用についてさらに詳しく][3]。                                                                                                                                 |
-| `PROXY_PORT`               | 数値 | プロキシを使っている場合は、プロキシポートを設定します。[Datadog Agent でのプロキシの使用についてさらに詳しく][3]。                                                                                                                                 |
-| `PROXY_USER`               | 文字列 | プロキシを使っている場合は、プロキシユーザーを設定します。[Datadog Agent でのプロキシの使用についてさらに詳しく][3]。                                                                                                                                 |
-| `PROXY_PASSWORD`           | 文字列 | プロキシを使っている場合は、プロキシパスワードを設定します。プロセス/コンテナ Agent の場合は、認証パスワードの受け渡しのためにこの変数は必須で、名前を変えることはできません。[Datadog Agent でのプロキシの使用についてさらに詳しく][3]。 |
-| `DDAGENTUSER_NAME`         | 文字列 | Agent インストール時に使用されるデフォルトの `ddagentuser` ユーザー名を上書きします _(v6.11.0 以降)_。[Datadog Windows Agent ユーザーについては、こちらを参照してください][2]。                                                                                      |
-| `DDAGENTUSER_PASSWORD`     | 文字列 | Agent インストール時に `ddagentuser` ユーザー用に生成された、暗号論的に安全なパスワードを上書きします _(v6.11.0 以降)_。ドメインサーバーへのインストールではこれを提供する必要があります。[Datadog Windows Agent ユーザーについては、こちらを参照してください][2]。  |
+| `PROXY_HOST`               | 文字列 | プロキシを使っている場合は、プロキシホストを設定します。[Datadog Agent でのプロキシの使用についてさらに詳しく][2]。                                                                                                                                 |
+| `PROXY_PORT`               | 数値 | プロキシを使っている場合は、プロキシポートを設定します。[Datadog Agent でのプロキシの使用についてさらに詳しく][2]。                                                                                                                                 |
+| `PROXY_USER`               | 文字列 | プロキシを使っている場合は、プロキシユーザーを設定します。[Datadog Agent でのプロキシの使用についてさらに詳しく][2]。                                                                                                                                 |
+| `PROXY_PASSWORD`           | 文字列 | プロキシを使っている場合は、プロキシパスワードを設定します。プロセス/コンテナ Agent の場合は、認証パスワードの受け渡しのためにこの変数は必須で、名前を変えることはできません。[Datadog Agent でのプロキシの使用についてさらに詳しく][2]。 |
+| `DDAGENTUSER_NAME`         | 文字列 | Agent インストール時に使用されるデフォルトの `ddagentuser` ユーザー名を上書きします _(v6.11.0 以降)_。[Datadog Windows Agent ユーザーについては、こちらを参照してください][3]。                                                                                      |
+| `DDAGENTUSER_PASSWORD`     | 文字列 | Agent インストール時に `ddagentuser` ユーザー用に生成された暗号論的に安全なパスワードを上書きします _(v6.11.0 以降)_。ドメインサーバー上のインストールにはこれを提供する必要があります。[Datadog Windows Agent ユーザーについては、こちらを参照してください][3]。  |
 | `APPLICATIONDATADIRECTORY` | パス   | 構成ファイルのディレクトリツリーに使用するディレクトリを上書きします。初期インストール時にのみ提供でき、アップグレードでは無効です。デフォルト: `C:\ProgramData\Datadog` _(v6.11.0 以降)_                                           |
 | `PROJECTLOCATION`          | パス   | バイナリファイルのディレクトリツリーに使用するディレクトリを上書きします。初期インストール時にのみ提供でき、アップグレードでは無効です。デフォルト: `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
 
 **注**: 有効な `datadog.yaml` が見つかり、API キーが設定されている場合は、そのファイルが、指定されているすべてのコマンドラインオプションより優先されます。
 
-[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: /ja/agent/faq/windows-agent-ddagent-user/
-[3]: /ja/agent/proxy/
 
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
+[2]: /ja/agent/proxy/
+[3]: /ja/agent/faq/windows-agent-ddagent-user/
 {{% /tab %}}
 {{% tab "アップグレード" %}}
 
@@ -199,13 +199,11 @@ Windows Powershell で、次のコマンドを使用することもできます�
 {{% /tab %}}
 {{< /tabs >}}
 
-[インテグレーション][1]用構成ファイルの場所:
+インテグレーション用構成ファイルの場所:
 `C:\ProgramData\Datadog\conf.d\` または
 `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 **注**: `ProgramData` は隠しフォルダーです。
-
-[1]: /ja/integrations/
 
 ## トラブルシューティング
 
@@ -382,7 +380,7 @@ print tempfile.gettempdir()
 {{% /tab %}}
 {{< /tabs >}}
 
-## 使用例
+## ユースケース
 
 ###  Windows サービスの監視
 
@@ -392,7 +390,7 @@ print tempfile.gettempdir()
 
 {{< img src="agent/faq/DHCP.png" alt="DHCP"  style="width:75%;">}}
 
-独自のサービスを追加する場合は、次に示す書式に厳密に従ってください。書式が正しくないと、インテグレーションが失敗します。
+独自のサービスを追加する場合は、次に示す書式に厳密に従ってください。書式が正しくないと、インテグレーションが失敗します。**注**: サービス名の特殊文字はエスケープする必要があります。たとえば、`MSSQL$BILLING` という名前の場合、`MSSQL\$BILLING` のように特殊文字を追加します。
 
 {{< img src="agent/faq/windows_DHCP_service.png" alt="Windows DHCP サービス"  style="width:75%;">}}
 
@@ -422,6 +420,7 @@ process_config:
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
 [2]: /ja/agent/basic_agent_usage/#supported-os-versions

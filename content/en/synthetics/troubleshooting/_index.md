@@ -14,11 +14,17 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact our AWESOME support team][1].
+If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact Datadog's support team][1].
 
 ## Browser Tests
 
-### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a pop up
+### Recording
+
+#### My website is not loading in the iframe
+
+After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a pop up by clicking **Open in Popup** to record your journey.
+
+#### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a pop up
 
 After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder. Additionally, you cannot record any steps, regardless of whether you open your website in the iframe or in a pop up:
 
@@ -29,7 +35,7 @@ If that happens, ensure the [Datadog extension][3] has the permissions to read a
 {{< img src="synthetics/extension.mp4" alt="Allowing extension to read data on all sites" video="true"  width="100%" >}}
 
 
-### I don't see the login page in the recorder. What is happening?
+#### I don't see the login page in the recorder. What is happening?
 
 By default, the iframe/pop up of the recorder uses your own browser. This means that if you’re already logged into your application, the iframe/pop up might directly display a post login page, therefore preventing you from recording your login steps without logging out first.
 
@@ -41,7 +47,23 @@ To be able to record your steps without logging out from your application, just 
 
 The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are consequently automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
-### My browser test has a `None or multiple elements detected` step warning
+### Test Results
+
+#### My Mobile Small or Tablet browser test results keep failing
+
+If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a very different architecture when running from a `Tablet` or a `Mobile Small`.  
+This means that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
+
+{{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
+
+For these types of cases, Datadog recommends creating **separate `Mobile Small` or `Tablet` specific tests** where the recorded steps match the viewport your test is set to at runtime.  
+To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Small` or `Tablet` in the recorder dropdown before hitting the **Start Recording** button.
+
+{{< img src="synthetics/record_device.png" alt="Recording steps on mobile tablet" style="width:100%;" >}}
+
+Additionally, Datadog's test browsers run in **headless**, meaning Browser tests do not support some features. For example, Browser tests do not support `touch` and cannot use `touch` to detect whether the website should appear with its mobile design.
+
+#### My Browser test has a `None or multiple elements detected` step warning
 
 One of your Browser test steps is showing a `None or multiple elements detected` step warning:
 

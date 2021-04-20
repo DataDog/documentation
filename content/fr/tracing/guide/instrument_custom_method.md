@@ -32,9 +32,9 @@ Ces exemples vous montreront comment tracer l'intégralité de la méthode `Back
 {{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Vue Analytics"  style="width:90%;">}}
 
 La span `http.request POST /charge/` prend beaucoup de temps et ne présente aucune span enfant directe : une instrumentation plus poussée est donc probablement nécessaire pour mieux comprendre son comportement. Selon le langage de programmation que vous utilisez, vous devez décorer vos fonctions différemment :
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
+{{< programming-lang lang="java" >}}
 
-{{< tabs >}}
-{{% tab "Java" %}}
 Dans le langage Java, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en utilisant des décorateurs de méthode ou en instrumentant des blocs de code spécifiques.
 
 **Instrumenter une méthode avec un décorateur** :
@@ -89,8 +89,8 @@ public class BackupLedger {
 ```
 
 [1]: /fr/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 Dans le langage Python, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en utilisant des décorateurs de méthode ou en instrumentant des blocs de code spécifiques.
 
@@ -135,8 +135,9 @@ class BackupLedger:
 ```
 
 [1]: /fr/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
   Dans le langage Ruby, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en instrumentant des codes de bloc spécifiques.
 
   Cet exemple crée une span pour l'appel de la méthode `BackupLedger.write` et une span enfant pour chaque transaction publiée dans le registre avec un [tag personnalisé][1] spécifiant l'ID de transaction spécifique.
@@ -164,9 +165,10 @@ end
 ```
 
 [1]: /fr/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Go" %}}
-  Dans le langage Go, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en instrumentant des blocs de code spécifiques.
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+  Dans le langage Go, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en instrumentant des codes de bloc spécifiques.
 
   Cet exemple crée une span pour chaque transaction publiée dans le registre et ajoute un [tag personnalisé][1] avec l'ID de transaction spécifique à la span.
 
@@ -209,9 +211,10 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 ```
 
 [1]: /fr/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "Node.js" %}}
-  Dans le langage Node.js, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en instrumentant des blocs de code spécifiques.
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+  Dans le langage Node.js, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en instrumentant des codes de bloc spécifiques.
 
 Cet exemple crée une span pour l'appel de la méthode `BackupLedger.write` et une span enfant pour chaque transaction publiée dans le registre, avec un [tag personnalisé][1] spécifiant l'ID de transaction spécifique.
 
@@ -233,9 +236,10 @@ function write (transactions) {
 ```
 
 [1]: /fr/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab ".NET" %}}
-  Dans le langage .NET, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en instrumentant des blocs de code spécifiques.
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+  Dans le langage .NET, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en instrumentant des codes de bloc spécifiques.
 
 Cet exemple crée une span pour chaque transaction publiée dans le registre et ajoute un [tag personnalisé][1] avec l'ID de transaction spécifique à la span.
 
@@ -263,8 +267,8 @@ public void Write(List<Transaction> transactions)
 ```
 
 [1]: /fr/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
 Dans le langage PHP, l'APM Datadog vous permet d'instrumenter votre code pour générer des spans personnalisées en utilisant des wrappers de méthode ou en instrumentant des blocs de code spécifiques.
 
@@ -333,8 +337,8 @@ Cet exemple ajoute des spans enfant à la span `BackupLedger.write` créée ci-d
 ```
 
 [1]: /fr/tracing/guide/add_span_md_and_graph_it/
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Visualiser vos nouvelles spans personnalisées depuis l'interface de Datadog
 

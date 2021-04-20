@@ -17,8 +17,6 @@ TEMPLATE = """\
 {front_matter}
 ---
 
-## Overview
-
 {content}
 """
 
@@ -66,7 +64,11 @@ def security_rules(content, content_dir):
                         "kind": "documentation",
                         "type": "security_rules",
                         "disable_edit": True,
-                        "aliases": [f"{data.get('defaultRuleId', '').strip()}"],
+                        "aliases": [
+                            f"{data.get('defaultRuleId', '').strip()}",
+                            f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
+                            f"/security_monitoring/default_rules/{p.stem}"
+                        ],
                         "rule_category": []
                     }
 

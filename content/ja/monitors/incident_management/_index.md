@@ -3,6 +3,10 @@ title: インシデント管理
 kind: documentation
 description: インシデントの作成と管理
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog for Government site では、インシデント管理をご利用いただけません。</div>
+{{< /site-region >}}
+
 組織のサービス中断につながる可能性のあるイベントは、すべてインシデントと見なすことができます。多くの場合、こうしたイベントを処理するためのフレームワークを用意する必要があります。Datadog のインシデント管理機能は、組織がインシデントを効果的に識別して軽減できるシステムを提供します。
 
 インシデントは、収集しているメトリクス、トレース、ログとともに Datadog に存在します。自分に関連するインシデントを表示してフィルタリングできます。
@@ -128,19 +132,19 @@ Datadog Slack インテグレーションについては、[ドキュメント][
 
 ## ワークフローの例
 
-### 1. 問題を発見する
+### 問題を発見
 
 ダッシュボードを確認しているシナリオを考えてみます。ある特定のサービスが特に高いエラー数を示していることに気づきました。ウィジェットの右上にある Export ボタンを使用して、インシデントを宣言できます。
 
 {{< img src="monitors/incidents/workflow-1-graph-1.png" alt="グラフから"  style="width:80%;">}}
 
-### 2. インシデントを宣言してチームを編成する
+### インシデントを宣言しチームに編成
 
 New Incident モーダルを使用してチームを編成し、通知します。インシデント作成元のグラフは、自動的にシグナルとしてアタッチされます。この問題の解決を開始するために必要なコンテキストをチームに与える他のシグナルをアタッチします。Slack と PagerDuty のインテグレーションにより、これらのサービスを通じて通知を送信できます。
 
 {{< img src="monitors/incidents/workflow-2-modal-1.png" alt="New Incident"  style="width:60%;">}}
 
-### 3. コミュニケーションを取り、トラブルシューティングを開始する
+### コミュニケーションを取り、トラブルシューティングを開始
 
 [Datadog Slack アプリ][3]がインストールされている場合、Slack インテグレーションによりインシデント専用の新しいチャネルが自動的に作成されるため、チームとのコミュニケーションを統合してトラブルシューティングを開始できます。
 
@@ -148,7 +152,7 @@ Slack をご利用の EU 外のお客様は、Datadog Slack アプリに[ベー�
 
 {{< img src="monitors/incidents/workflow-3-slack-1-1.png" alt="コミュニケーション"  style="width:80%;">}}
 
-### 4. インシデントの更新と事後分析の生成
+### インシデントを更新し事後分析を生成
 
 状況の変化に応じてインシデントを更新します。問題が軽減されたことを示す場合はステータスを `Stable` に設定します。この問題が顧客にどのように影響したかを組織に知らせる場合は、顧客影響フィールドを設定します。次に、インシデントが完全に修復されたら、ステータスを `Resolved` に設定します。選択可能な 4 番目のステータスとして `Completed` があります。これは、すべての修復ステップが完了したかどうかを追跡するために使用できます。このステータスは、[Incident Settings][2] で有効にできます。
 
@@ -168,7 +172,7 @@ Slack をご利用の EU 外のお客様は、Datadog Slack アプリに[ベー�
 
 {{< img src="monitors/incidents/postmortem.png" alt=事後分析の自動生成" style="width:80%;">}}
 
-### 5. インシデントをフォローアップして学ぶ
+### フォローアップし、インシデントについて学ぶ
 
 軽減タスクまたはインシデント発生後の修復タスクを作成します。テキストフィールドにタスクを追加し、期日を設定し、チームメンバーを割り当てることで、ここのタスクをすべて追跡できます。タスクが終了したら、ボックスにチェックを入れて完了します。
 
@@ -183,3 +187,4 @@ Slack をご利用の EU 外のお客様は、Datadog Slack アプリに[ベー�
 [5]: /ja/tracing/#2-instrument-your-application
 [6]: https://app.datadoghq.com/incidents/ddslackapp
 [7]: https://app.datadoghq.com/notebook/list
+[8]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackapplicationus

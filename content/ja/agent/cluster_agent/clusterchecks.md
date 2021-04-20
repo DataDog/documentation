@@ -8,7 +8,7 @@ further_reading:
     tag: ドキュメント
     text: Cluster Agent のドキュメント
 ---
-## オートディスカバリーの動作
+## 概要
 
 Datadog Agent は、[オートディスカバリーメカニズム][1]によってコンテナを自動検出し、チェック構成を作成できます。
 
@@ -78,11 +78,11 @@ Datadog **Node** Agent で `clusterchecks` 構成プロバイダーを有効に�
 
 Cluster Agent はクラスターチェックに対する高度なディスパッチロジックを使用するように構成できます。これには、チェックインスタンスからの実行時間およびメトリクスサンプルが考慮されます。このロジックにより Cluster Agent はクラスターチェックランナー間のディスパッチと分散を最適化できます。
 
-#### 高度なディスパッチ - Cluster Agent の設定
+#### Cluster Agent のドキュメント
 
 [Cluster Agent のセットアップ][3] ドキュメントにある手順に加え、`DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` を `true` とします。
 
-#### 高度なディスパッチ - クラスターチェックランナーの設定
+#### クラスターチェックランナーの設定
 
 以下の環境変数は、クラスターチェックランナー（またはノード Agent）を構成する際、チェック統計を公開するために必要となります。統計は Cluster Agent によりコンシュームされ、クラスターチェックのディスパッチロジックを最適化するのに使用されます。
 
@@ -102,7 +102,7 @@ Cluster Agent はクラスターチェックに対する高度なディスパッ
 
 リソースの IP が変わらない場合 (例: 外部サービスエンドポイント、パブリック URL など)、静的構成を YAML ファイルとして Cluster Agent に渡すことができます。ファイル命名規則と構文はノードベースの Agent に対する静的構成と同じですが、`cluster_check: true` 行が追加されています。
 
-#### 例: CloudSQL データベース上の MySQL チェック
+#### CloudSQL データベース上の MySQL チェック
 
 CloudSQL インスタンスと [Datadog ユーザー][6]を設定後、`/conf.d/mysql.yaml` ファイルを以下の内容と共に Cluster Agent にマウントします。
 
@@ -118,7 +118,7 @@ instances:
 
 `cluster_check` のフィールドにより、Cluster Agent にこのチェックを一つのノードベースの Agent に委任するよう知らせます。
 
-### <mrk mid="54" mtype="seg">テンプレートソース: </mrk> <mrk mid="55" mtype="seg">Kubernetes サービスアノテーション</mrk>
+### テンプレートソース: Kubernetes サービスアノテーション
 
 [Kubernetes ポッドのアノテーション][1]の構文と同様に、以下の構文でサービスをアノテーションできます。
 

@@ -57,6 +57,8 @@ type: multi-code-lang
      - [GraphQL](#graphql)
      - [gRPC](#grpc)
      - [http.rb](#http-rb)
+     - [httpclient](#httpclient)
+     - [httpx](#httpx)
      - [MongoDB](#mongodb)
      - [MySQL2](#mysql2)
      - [Net/HTTP](#net-http)
@@ -156,6 +158,21 @@ type: multi-code-lang
 
 ### Rails アプリケーションのクイックスタート
 
+#### 自動インスツルメンテーション
+
+1. `ddtrace` gem を Gemfile に追加します。
+
+    ```ruby
+    source 'https://rubygems.org'
+    gem 'ddtrace', require: 'ddtrace/auto_instrument'
+    ```
+
+2. `bundle install` で gem をインストールします
+
+3. [Rails 手動コンフィギュレーション](#rails-manual-configuration)ファイルを追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
+
+#### 手動インスツルメンテーション
+
 1. `ddtrace` gem を Gemfile に追加します。
 
     ```ruby
@@ -176,6 +193,25 @@ type: multi-code-lang
    ここで追加のインテグレーションをアクティブ化することもできます（[インテグレーションインスツルメンテーション](#integration-instrumentation)を参照）。
 
 ### Ruby アプリケーションのクイックスタート
+
+#### 自動インスツルメンテーション
+
+1. `gem install ddtrace` で gem をインストールします
+2. インスツルメントする必要のある[サポートされているライブラリまたはフレームワーク](#integration-instrumentation)が必要です。
+3. アプリケーションに `require 'ddtrace/auto_instrument'` を追加します。_注:_ これは、サポートされているライブラリまたはフレームワークが必要になった_後_に実行する必要があります。
+
+    ```ruby
+    # Example frameworks and libraries
+    require 'sinatra'
+    require 'faraday'
+    require 'redis'
+
+    require 'ddtrace/auto_instrument'
+    ```
+
+   [Ruby 手動コンフィギュレーションブロック](#ruby-manual-configuration)を追加することで、特定のインテグレーション設定を構成、オーバーライド、または無効にすることができます。
+
+#### 手動インスツルメンテーション
 
 1. `gem install ddtrace` で gem をインストールします
 2. Ruby アプリケーションにコンフィギュレーションブロックを追加します。
@@ -374,6 +410,8 @@ end
 | GraphQL                  | `graphql`                  | `>= 1.7.9`               | `>= 1.7.9`                | *[リンク](#graphql)*                  | *[リンク](https://github.com/rmosolgo/graphql-ruby)*                             |
 | gRPC                     | `grpc`                     | `>= 1.7`                 | *gem の利用不可*       | *[リンク](#grpc)*                     | *[リンク](https://github.com/grpc/grpc/tree/master/src/rubyc)*                   |
 | http.rb                  | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[Link](#http-rb)*                  | *[リンク](https://github.com/httprb/http)*                                       |
+| httpclient                | `httpclient`              | `>= 2.2`                 | `>= 2.2`                  | *[リンク](#httpclient)*               | *[リンク](https://github.com/nahi/httpclient)*                                     |
+| httpx                     | `httpx`                   | `>= 0.11`                | `>= 0.11`                 | *[リンク](#httpx)*                    | *[リンク](https://gitlab.com/honeyryderchuck/httpx)*                             |
 | Kafka                    | `ruby-kafka`               | `>= 0.7.10`              | `>= 0.7.10`               | *[リンク](#kafka)*                    | *[Link](https://github.com/zendesk/ruby-kafka)*                                |
 | MongoDB                  | `mongo`                    | `>= 2.1`                 | `>= 2.1`                  | *[リンク](#mongodb)*                  | *[リンク](https://github.com/mongodb/mongo-ruby-driver)*                         |
 | MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *gem の利用不可*       | *[リンク](#mysql2)*                   | *[リンク](https://github.com/brianmario/mysql2)*                                 |
@@ -523,16 +561,19 @@ Datadog.configure do |c|
   # ActiveRecord で Rails を使用している場合にのみ使用できます。
   c.use :active_record, describes: :secondary_database, service_name: 'secondary-db'
 
+  # 構成パターンをブロック。 
   c.use :active_record, describes: :secondary_database do |second_db|
     second_db.service_name = 'secondary-db'
   end
 
   # 次の接続設定の接続文字列:
-  # Adapter、user、host、port、database
+  # adapter、username、host、port、database
+  # 他のフィールドは無視。  
   c.use :active_record, describes: 'mysql2://root@127.0.0.1:3306/mysql', service_name: 'secondary-db'
 
   # 次の接続設定のハッシュ
-  # Adapter、user、host、port、database
+  # adapter、user、host、port、database
+  # 他のフィールドは無視。
   c.use :active_record, describes: {
       adapter:  'mysql2',
       host:     '127.0.0.1',
@@ -543,6 +584,27 @@ Datadog.configure do |c|
     service_name: 'secondary-db'
 end
 ```
+
+データベース接続フィールドの部分的一致に基づき構成を作成することも可能です。
+
+```ruby
+Datadog.configure do |c|
+  # ホスト `127.0.0.1` の任意の接続に一致。
+  c.use :active_record, describes: { host:  '127.0.0.1' }, service_name: 'local-db'
+
+  # 任意の `mysql2` 接続に一致。
+  c.use :active_record, describes: { adapter: 'mysql2'}, service_name: 'mysql-db'
+
+  # `reports` データベースへの任意の `mysql2` 接続に一致。
+  #
+  # `describe` 構成に複数の一致がある場合、最新のものを適用。
+  # この場合、アダプター `mysql` とデータベース `reports` の両方の接続は
+  # `service_name: 'mysql-db'` ではなく `service_name: 'reports-db'` と構成。 
+  c.use :active_record, describes: { adapter: 'mysql2', database:  'reports'}, service_name: 'reports-db'
+end
+```
+
+複数の `describes` コンフィギュレーションが接続に一致するとき、一致する最新の構成ルールが適用されます。
 
 ActiveRecord が `describes` で定義されたキーと一致する接続を使用するイベントをトレースする場合は、その接続に割り当てられているトレース設定を使用します。接続が記述されている接続のいずれとも一致しない場合は、代わりに `c.use :active_record` で定義されたデフォルト設定を使用します。
 
@@ -649,7 +711,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `true` |
 | `enabled` | Cucumber テストをトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
 | `service_name` | `cucumber` インスツルメンテーションに使用されるサービス名 | `'cucumber'` |
 | `operation_name` | `cucumber` インスツルメンテーションに使用するオペレーション名。`trace.#{operation_name}.errors` など、自動のトレースメトリクスの名前を変更したい場合に役立ちます。 | `'cucumber.test'` |
@@ -1028,6 +1089,51 @@ end
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `httprb` インスツルメンテーションのサービス名。 | `'httprb'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
+
+### httpclient
+
+httpclient インテグレーションは、httpclient gem を使用して HTTP 呼び出しをトレースします。
+
+```ruby
+require 'httpclient'
+require 'ddtrace'
+Datadog.configure do |c|
+  c.use :httpclient, options
+  # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
+  c.use :httpclient, describes: /user-[^.]+\.example\.com/ do |httpclient|
+    httpclient.service_name = 'user.example.com'
+    httpclient.split_by_domain = false # split_by_domain がデフォルトで true の場合にのみ必要
+  end
+end
+```
+
+ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+
+| キー | 説明 | デフォルト |
+| --- | ----------- | ------- |
+| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
+| `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
+| `service_name` | `httpclient` インスツルメンテーションのサービス名。 | `'httpclient'` |
+| `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
+
+### httpx
+
+`httpx` は [`ddtrace` とのインテグレーション](https://honeyryderchuck.gitlab.io/httpx/wiki/Datadog-Adapter)を維持:
+
+```ruby
+require "ddtrace"
+require "httpx/adapters/datadog"
+
+Datadog.configure do |c|
+  c.use :httpx
+
+  # オプションで、正規表現に一致するホスト名に別のサービス名を指定します
+  c.use :httpx, describes: /user-[^.]+\.example\.com/ do |http|
+    http.service_name = 'user.example.com'
+    http.split_by_domain = false # split_by_domain がデフォルトで true の場合にのみ必要
+  end
+end
+```
 
 ### Kafka
 
@@ -1488,18 +1594,25 @@ Datadog.configure do |c|
   # Redis クライアントのデフォルトコンフィギュレーション
   c.use :redis, service_name: 'redis-default'
 
-  # 指定された UNIX ソケットに一致するコンフィギュレーション
+  # 指定された UNIX ソケットに一致するコンフィギュレーション。
   c.use :redis, describes: { url: 'unix://path/to/file' }, service_name: 'redis-unix'
 
+  # ネットワーク接続の場合、以下のフィールドのみが検索一致の対象:
+  # scheme、host、port、db
+  # 他のフィールドは無視されます。
+
   # 接続文字列
-  c.use :redis, describes: { url: 'redis://127.0.0.1:6379/0' }, service_name: 'redis-connection-string'
-  # クライアントホスト、ポート、データベース、スキーム
+  c.use :redis, describes: 'redis://127.0.0.1:6379/0', service_name: 'redis-connection-string'
+  c.use :redis, describes: { url: 'redis://127.0.0.1:6379/1' }, service_name: 'redis-connection-url'
+  # ネットワーククライアントのハッシュ
   c.use :redis, describes: { host: 'my-host.com', port: 6379, db: 1, scheme: 'redis' }, service_name: 'redis-connection-hash'
   # 接続ハッシュのサブセットのみ
   c.use :redis, describes: { host: ENV['APP_CACHE_HOST'], port: ENV['APP_CACHE_PORT'] }, service_name: 'redis-cache'
   c.use :redis, describes: { host: ENV['SIDEKIQ_CACHE_HOST'] }, service_name: 'redis-sidekiq'
 end
 ```
+
+複数の `describes` コンフィギュレーションが接続に一致するとき、一致する最新の構成ルールが適用されます。
 
 ### Resque
 
@@ -1571,7 +1684,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `true` |
 | `enabled` | RSpec テストをトレースする必要があるのかどうかを定義します。トレーシングを一時的に無効化するのに役立ちます。`true` または `false` | `true` |
 | `service_name` | `rspec` インスツルメンテーションに使用されているサービス名 | `'rspec'` |
 | `operation_name` | `rspec` インスツルメンテーションに使用されているオペレーション名です。`trace.#{オペレーション_名前}.errors` など、自動トレースメトリクスの名前を変更したい場合に役立ちます。 | `'rspec.example'` |
@@ -1814,6 +1926,7 @@ end
  - `sampler`: カスタム `Datadog::Sampler` インスタンスに設定します。指定した場合、トレーサーはこのサンプラーを使用してサンプリング動作を決定します。
  - `diagnostics.startup_logs.enabled`: スタートアップコンフィギュレーションと診断ログ。デフォルトは `true` です。`DD_TRACE_STARTUP_LOGS` 環境変数を介して設定できます。
  - `diagnostics.debug`: デバッグログを有効にするには、true に設定します。`DD_TRACE_DEBUG` 環境変数を使用して構成できます。デフォルトは `false` です。
+ - `time_now_provider`: テストの際、異なるタイムプロバイダを使用すると良い場合があります。たとえば Timecopの場合、`->{ Time.now_without_mock_time }` により、トレーサーはリアル時刻を使用できます。スパン期間の計算には、使用できる時には依然としてモノトニッククロックを使用するため、この設定による影響はありません。デフォルトは `->{ Time.now }`。
 
 #### カスタムロギング
 
@@ -2037,6 +2150,8 @@ Service C:
 - [Rails](#rails)
 - [Sinatra](#sinatra)
 - [http.rb](#http-rb)
+- [httpclient](#httpclient)
+- [httpx](#httpx)
 
 **HTTP プロパゲーターの使用**
 
@@ -2065,9 +2180,7 @@ end
 
 HTTP リクエストから発生するトレースは、リクエストが Ruby アプリケーションに到達する前にフロントエンドウェブサーバーまたはロードバランサーキューで費やされた時間を含むように構成できます。
 
-この機能は**試験的**なもので、デフォルトでは無効になっています。
-
-この機能を有効にするには、ウェブサーバー（Nginx）から `X-Request-Start` または `X-Queue-Start` ヘッダーを追加する必要があります。以下は Nginx のコンフィギュレーション例です。
+この機能はデフォルトで無効になっています。有効にするには、ウェブサーバー（Nginx）から `X-Request-Start` または `X-Queue-Start` ヘッダーを追加する必要があります。以下は Nginx のコンフィギュレーション例です。
 
 ```
 # /etc/nginx/conf.d/ruby_service.conf
@@ -2081,9 +2194,7 @@ server {
 }
 ```
 
-次に、リクエストを処理するインテグレーションでリクエストキューイング機能を有効にする必要があります。
-
-Rack ベースのアプリケーションの場合、この機能を有効にする方法の詳細については、[ドキュメント](#rack)を参照してください。
+次に、リクエストを処理するインテグレーションで `request_queuing: true` を設定して、リクエストキューイング機能を有効にする必要があります。Rack ベースのアプリケーションの詳細については、[ドキュメント](#rack)を参照してください。
 
 ### 処理パイプライン
 

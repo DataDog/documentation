@@ -133,7 +133,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 
 **注**: Kubernetes を使用する場合、マニフェスト`.spec.containers[0].name` にあるべきなのはコンテナ`<NAME>` です。
 
-## コンテナを対象に入れる
+## コンテナを対象に含める
 
 `name` または `image` に基づく包含ルールで` Agent のオートディスカバリー境界からのコンテナを含め、そのコンテナから**のみ**のデータを集めます。コンテナと包含ルールが一致すると、常にオートディスカバリー境界に含まれることになります。
 
@@ -148,7 +148,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
-**Agent v7.19 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.19 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>` を持つ特定の Docker コンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_AC_INCLUDE = "image:<IMAGE_NAME>"
@@ -169,7 +169,7 @@ DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
 ```
 
-**Agent v7.19 以前**でオートディスカバリーから**名前**`<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.19 以前**でオートディスカバリーから**名前** `<IMAGE_NAME>` を持つ特定の Docker コンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_AC_INCLUDE = "name:<NAME>"

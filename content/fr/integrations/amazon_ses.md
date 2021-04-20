@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez les e-mails non délivrés, les tentatives d''envoi, les messages rejetés, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ses/'
+draft: false
 git_integration_title: amazon_ses
 has_logo: true
 integration_title: Amazon SES
@@ -27,7 +28,7 @@ Amazon Simple Email Service (SES) est un service économique d'envoi d'e-mails.
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de SES.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

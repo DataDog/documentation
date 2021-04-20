@@ -22,7 +22,7 @@ Affichez un flux de logs correspondant à la requête de votre choix :
 
 {{< img src="dashboards/widgets/log_stream/log_stream_setup.gif" alt="Configuration du flux de logs"  style="width:80%;">}}
 
-Saisissez une [requête de log][1] pour filtrer le flux de logs.
+Saisissez une [requête de logs][1] pour filtrer le flux de logs.
 
 ### Options
 
@@ -44,42 +44,11 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][3] utilisé pour le widget Flux de logs est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][3] pour en savoir plus.
 
-```text
-LOG_STREAM_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["log_stream"]},
-        "logset": {"type": "string"},
-        "indexes": {"type": "array", "items": {"type": "string"}},
-        "query": {"type": "string"},
-        "columns": {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"},
-        "title_size": {"type": "string"},
-        "title_align": {"enum": ["center", "left", "right"]},
-        "time": TIME_SCHEMA
-    },
-    "required": ["type"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][4] utilisé pour le widget Flux de logs est le suivant :
 
-| Paramètre             | Type    | Obligatoire | Description                                                                                |
-|-----------------------|---------|----------|--------------------------------------------------------------------------------------------|
-| `type`                | Chaîne  | Oui      | Type du widget (utilisez `log_stream` pour le widget Flux de logs).                            |
-| `logset`              | Chaîne  | Non       | (Obsolète) Utiliser `indexes` à la place. L'ID de l'index à inclure dans le flux.            |
-| `indexes`             | Tableau   | Non       | Tableau des noms des index à inclure dans le flux. Utiliser `[]` pour interroger tous les index en même temps.       |
-| `query`               | Chaîne  | Non       | Requête à l'aide de laquelle le flux de logs est filtré.                                                        |
-| `columns`             | Tableau   | Non       | Les colonnes à afficher sur le widget.                                                      |
-| `show_date_column`    | Booléen | Non       | Permet d'afficher ou non la colonne de date.                                                    |
-| `show_message_column` | Booléen | Non       | Permet d'afficher ou non la colonne de message.                                                 |
-| `message_display`     | Chaîne  | Non       | Le nombre de lignes de log à afficher.                                                        |
-| `sort`                | Objet  | Non       | La colonne et l'ordre de tri.                                                           |
-| `title`               | Chaîne  | Non       | Le titre du widget.                                                                   |
-| `title_size`          | Chaîne  | Non       | La taille du titre.                                                                     |
-| `title_align`         | Chaîne  | Non       | Définit comment aligner le titre. Les valeurs disponibles sont `center`, `left` ou `right`.             |
-| `time`                | Objet  | Non       | Définit l'intervalle de temps affiché sur le widget. Pour en savoir plus, consultez la [documentation relative au schéma JSON d'intervalle][4]. |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
@@ -87,5 +56,5 @@ LOG_STREAM_SCHEMA = {
 
 [1]: /fr/logs/explorer/search/
 [2]: /fr/logs/explorer/facets/
-[3]: /fr/dashboards/graphing_json/widget_json/
-[4]: /fr/dashboards/graphing_json/widget_json/#time-schema
+[3]: /fr/api/v1/dashboards/
+[4]: /fr/dashboards/graphing_json/widget_json/

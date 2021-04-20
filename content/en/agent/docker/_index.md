@@ -6,7 +6,6 @@ aliases:
   - /agent/docker
   - /agent/basic_agent_usage/docker/
   - /integrations/docker_daemon/
-  - /integrations/docker/
   - /docker/
 further_reading:
 - link: "/agent/docker/log/"

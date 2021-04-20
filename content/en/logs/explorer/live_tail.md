@@ -23,7 +23,7 @@ With Live Tail, access all your log events in near real time from anywhere in yo
 
 For example, Live Tail is specifically useful to check if a process has correctly started or if a new deployment went smoothly.
 
-## Live Tail View
+## Live Tail view
 
 In the [Log Explorer][3], choose the Live Tail option in the timerange to query logs as they flow into Datadog.
 

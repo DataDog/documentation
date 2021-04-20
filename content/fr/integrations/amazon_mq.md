@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'AWS Amazon\_MQ."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_mq/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog'
     tag: Blog
@@ -30,7 +31,7 @@ Amazon MQ est un service d'agent de messages géré pour Apache ActiveMQ qui fa
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'Amazon MQ.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

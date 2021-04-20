@@ -28,15 +28,16 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 
 | パラメーター            | 説明                                                                                                                                                                                                                                                                                                                                                                                     |
 |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `flushMetricsToLogs` | Datadog Forwarder Lambda 関数でログを使用してカスタムメトリクスを送信します (推奨)。デフォルトは `true` です。このパラメーターを無効にする場合は、パラメーター `site` と `apiKey` (または暗号化されている場合は `apiKMSKey`) を設定する必要があります。                                                                                                                                                            |
-| `site`               | データを送信する Datadog サイトを設定します。flushMetricsToLogs が `false` の場合にのみ必要です。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。                                                                                                                                                                                                                                |
-| `apiKey`             | Datadog API キー。`flushMetricsToLogs` が `false` の場合にのみ必要です。Datadog API キーの取得の詳細については、[API キーのドキュメント][3]を参照してください。                                                                                                                                                                                                                                    |
-| `apiKMSKey`          | KMS を使用して暗号化された Datadog API キー。`flushMetricsToLogs` が `false` で、KMS 暗号化を使用している場合、`apiKey` の代わりにこのパラメーターを使用します。                                                                                                                                                                                                                                             |
+| `flushMetricsToLogs` | Datadog Forwarder Lambda 関数 (推奨) でログを使用してカスタムメトリクスを送信します。デフォルトは `true` です。このパラメータを無効にする場合は、`apiKey` (または暗号化されている場合は `apiKMSKey`) を設定する必要があります。`addExtension` が true の場合、`flushMetricsToLogs` は無視されます。                                                                                                                                                            |
+| `site`               | データを送信する Datadog サイトを設定します。これは、`flushMetricsToLogs` が `false` または `addExtension` が `true` の場合にのみ使用されます。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。                                                                                                                                                                                                                                |
+| `apiKey`             | Datadog API キー。`flushMetricsToLogs` が `false` または `addExtension` が `true` の場合にのみ必要です。Datadog API キーの取得の詳細については、[API キーのドキュメント][3]を参照してください。                                                                                                                                                                                                                                    |
+| `apiKMSKey`          | KMS を使用して暗号化された Datadog API キー。`flushMetricsToLogs` が `false` または `addExtension` が `true` で、KMS 暗号化を使用している場合、`apiKey` の代わりにこのパラメーターを使用します。                                                                                                                                                                                                                                             |
 | `addLayers`          | Datadog Lambda ライブラリをレイヤーとしてインストールするかどうか。デフォルトは `true` です。特定のバージョンの Datadog Lambda ライブラリ ([Python][4] または [Node.js][5]) をインストールできるように Datadog Lambda ライブラリを関数のデプロイパッケージに独自にパッケージ化する場合は、`false` に設定します。 |
+| `addExtension`    | Datadog Lambda Extension をレイヤーとしてインストールするかどうか。デフォルトは `false` です。有効にした場合、`apiKey` (または `apiKMSKey`) パラメータを設定する必要があります。`addExtension` を使用している間は、`forwarderArn` を省略してください。Datadog Lambda Extension Layer は公開プレビュー中です。Lambda Extension Layer の詳細については[こちら][8]をご覧ください。                                                                                                                                                                                                                                                                      |
 | `logLevel`           | ログのレベル。拡張ロギングの場合 `DEBUG` に設定します。デフォルトは`info`。                                                                                                                                                                                                                                                                                                                           |
 | `enableXrayTracing`  | Lambda 関数と API Gateway 統合で X-Ray トレーシングを有効にするには、`true` に設定します。デフォルトは `false` です。                                                                                                                                                                                                                                                                                   |
-| `enableDDTracing`    | Lambda 関数で Datadog トレースを有効にします。デフォルトは `true` です。有効にした場合、`forwarder` パラメーターを設定する必要があります。                                                                                                                                                                                                                                                                         |
-| `forwarder`          | このパラメーターを設定すると、Lambda 関数の CloudWatch ロググループが指定された Datadog Forwarder Lambda 関数にサブスクライブされます。`enableDDTracing` が `true` に設定されている場合に必要です。                                                                                                                                                                                                                 |
+| `enableDDTracing`    | Lambda 関数で Datadog トレースを有効にします。デフォルトは `true` です。                                                                                                                                                                                                                                                                        |
+| `forwarderArn`          | このパラメーターを設定すると、指定された Datadog Forwarder が Lambda 関数の CloudWatch ロググループにサブスクライブされます。サブスクリプションが別の方法で適用されない限り、`enableDDTracing` が `true` に設定されている場合に必要です。たとえば、Datadog Forwarder サブスクリプションが Datadog の AWS インテグレーションを介して適用される場合、`forwarderArn` は必要ありません。`forwarderArn` を使用するときは、`addExtension` を `true` に設定しないでください。                                                                                                                                                                                                                 |
 | `enableTags`         | 設定すると、サーバーレスアプリケーション定義の `service` 値と `stage` 値を使用して、Lambda 関数に `service` タグと `env` タグを自動的にタグ付けします。`service` または `env` タグがすでに存在する場合はオーバーライドされません。デフォルトは `true` です。                                                                                                                                      |
 | `injectLogContext`         | 設定すると、lambda レイヤーは自動的に console.log に Datadog のトレース ID をパッチします。デフォルトは `true` です。                                                                                                                                      |
 | `exclude`         | 設定後、このプラグインは指定されたすべての機能を無視します。Datadog の機能に含まれてはならない機能がある場合は、このパラメーターを使用します。デフォルトは `[]` です。                                                                                                                                      |
@@ -50,12 +51,12 @@ custom:
   datadog:
     flushMetricsToLogs: true
     apiKey: "{Datadog_API_Key}"
-    apiKMSKey: "{Encripted_Datadog_API_Key}"
+    apiKMSKey: "{Encrypted_Datadog_API_Key}"
     addLayers: true
     logLevel: "info"
     enableXrayTracing: false
     enableDDTracing: true
-    forwarder: arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
+    forwarderArn: arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
     enableTags: true
     injectLogContext: true
     exclude: 
@@ -107,7 +108,7 @@ custom:
 
 ### Forwarder
 
-[Datadog Forwarder Lambda 関数][7] は、インストールして Lambda 関数ロググループにサブスクライブさせる必要があります。Forwarder の ARN が `forwarder` オプションを介して提供された際に、プラグインが自動的にログサブスクリプションを生成します。
+[Datadog Forwarder Lambda 関数][7] は、インストールして Lambda 関数ロググループにサブスクライブさせる必要があります。Forwarder の ARN が `forwarderArn` オプションを介して提供された際に、プラグインが自動的にログサブスクリプションを生成します。
 
 以下のエラーが発生した場合は、提供されている Forwarder ARN が正しいかどうかを再チェックし、サーバーレスアプリケーションが配置されている地域とアカウントから提供されていることを確認してください。
 
@@ -162,3 +163,4 @@ custom:
 [5]: https://www.npmjs.com/package/datadog-lambda-js
 [6]: https://webpack.js.org/configuration/externals/
 [7]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[8]: https://docs.datadoghq.com/ja/serverless/datadog_lambda_library/extension/

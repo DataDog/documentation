@@ -6,6 +6,9 @@ aliases:
   - /fr/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
   - /fr/graphing/dashboards/shared_graph/
 further_reading:
+  - link: 'https://www.datadoghq.com/blog/dashboard-sharing/'
+    tag: Blog
+    text: Partager des dashboards en toute sécurité avec des utilisateurs en dehors de votre organisation
   - link: /dashboards/
     tag: Documentation
     text: Créer des dashboards dans Datadog
@@ -18,13 +21,49 @@ further_reading:
 ---
 ## Présentation
 
-Les graphiques et les screenboards partagés vous permettent d'afficher des visualisations de métrique, de trace et de log en dehors de Datadog.
+Les dashboards et les graphiques partagés vous permettent d'afficher des visualisations de métrique, de trace et de log en dehors de Datadog.
+
+## Dashboards
+Lorsque vous partagez un dashboard à l'aide d'une URL ou d'un lien inclus dans un e-mail, la page partagée affiche le contenu en temps réel et en lecture seule de ce dashboard.
+
+### Partager un dashboard à l'aide d'une URL publique
+
+Pour partager un dashboard entier en générant une URL publique :
+
+1. Sur la page du dashboard, cliquez sur l'icône des paramètres en forme d'engrenage en haut à droite.
+2. Sélectionnez **Generate public URL**.
+3. Sous **Time & Variable Settings**, vous pouvez configurer des options afin de définir l'intervalle, d'indiquer si les utilisateurs peuvent modifier ou non l'intervalle et de sélectionner les tags visibles pour les templates variables pouvant être sélectionnées.
+4. Copiez l'URL et cliquez sur **Done**.
+
+### Partager un dashboard à partir d'adresses e-mail individuelles
+
+Pour autoriser une ou plusieurs adresses e-mail spécifiques à consulter la page d'un dashboard :
+
+1. Sur la page du dashboard, cliquez sur l'icône des paramètres en forme d'engrenage en haut à droite.
+2. Sélectionnez **Generate public URL**.
+3. Sélectionnez l'option **Only specified people** afin de préciser les personnes pouvant accéder à ce dashboard.
+4. Ajoutez l'adresse e-mail des personnes avec lesquelles vous souhaitez partager votre dashboard.
+5. Sous **Time & Variable Settings**, vous pouvez configurer des options afin de définir l'intervalle, d'indiquer si les utilisateurs peuvent modifier ou non l'intervalle et de sélectionner les tags visibles pour les templates variables pouvant être sélectionnées.
+6. (Facultatif) Vous pouvez copier l'URL du dashboard à partager. Un e-mail contenant un lien vers le dashboard sera également envoyé aux adresses e-mails que vous avez renseignées.
+7. Cliquez sur **Done**.
+
+**Remarque** : les widgets reposant sur les traces de l'APM n'affichent pas de données sur les dashboard publics, tout comme le widget Flux de logs. Toutefois, vous pouvez visualiser les données des requêtes basées sur des logs.
+
+### Révoquer
+
+Pour révoquer un dashboard partagé :
+
+1. Accédez à la [liste des dashboards][1].
+2. Sélectionnez le dashboard dont vous souhaitez révoquer l'accès.
+3. Cliquez sur l'icône des paramètres en forme d'engrenage en haut à droite.
+4. Cliquez sur **Configure sharing**.
+5. Cliquez sur **Revoke public URL**.
 
 ## Graphiques
 
 ### Partager
 
-Pour partager un graphique à partir d'un [timeboard][1] ou d'un [screenboard][2] :
+Pour partager un graphique depuis un [timeboard][2] ou un [screenboard][3] :
 
 2. Cliquez sur l'icône en forme de crayon en haut à droite du graphique que vous souhaitez partager.
 3. Dans la section *Graph your data*, sélectionnez l'onglet **Share**.
@@ -39,38 +78,13 @@ Pour partager un graphique à partir d'un [timeboard][1] ou d'un [screenboard][2
 
 Pour révoquer les clés utilisées pour partager des graphiques (intégrés) individuels :
 
-1. Accédez à [**Integrations -> Embeds**][3] pour consulter la liste de tous les graphiques partagés.
+1. Accédez à [**Integrations -> Embeds**][4] pour consulter la liste de tous les graphiques partagés.
 2. Cliquez sur le bouton **Revoke** correspondant au graphique que vous ne souhaitez plus partager.
 3. Le graphique est alors déplacé vers la liste **Revoked**.
 
-## Dashboards
-
-### Partager
-
-Partagez un dashboard entier en générant une URL publique :
-
-1. Sur la page du dashboard, cliquez sur l'icône des paramètres en forme d'engrenage en haut à droite.
-2. Choisissez l'option **Generate public URL**.
-3. Sélectionnez les options de configuration pour « Allow changing timeframe » ou les tags de template variable visibles.
-4. Copiez l'URL et cliquez sur **Done**.
-
-L'URL créée permet un accès en lecture seule au contenu de ce dashboard spécifique, mis à jour en temps réel.
-
-**Remarque **: les sélecteurs de [template variable][4] sont uniquement disponibles pour les dashboards lorsque vous configurez des tags visibles. Les valeurs par défaut des template variables sont les valeurs par défaut définies dans Datadog. En outre, les données des widgets basés sur des requêtes de traces APM ne sont pas visibles sur les dashboards publics. Tous les logs basés sur des requêtes affichent des données, sauf le widget Flux de logs.
-
-### Révoquer
-
-Pour révoquer un dashboard partagé :
-
-1. Accédez à la [liste des dashboards][5].
-2. Sélectionnez le dashboard dont vous souhaitez révoquer l'accès.
-3. Cliquez sur l'icône des paramètres en forme d'engrenage en haut à droite.
-4. Cliquez sur **Configure sharing**.
-5. Cliquez sur **Revoke public URL**.
-
 ### Appliquer des restrictions
 
-Vous pouvez restreindre l'accès à votre dashboard en fonction de l'adresse IP. Envoyez un e-mail à [l'équipe d'assistance Datadog][6] pour activer la fonctionnalité d'ajout d'adresses IP à la liste blanche et ainsi permettre aux administrateurs de spécifier les adresses IP autorisées à accéder aux dashboards partagés. Une fois cette fonctionnalité activée, vous pourrez gérer vos restrictions sur la [page des paramètres de sécurité][7] pour votre organisation.
+Vous pouvez restreindre l'accès à votre dashboard en fonction des adresses IP de votre liste d'autorisation. Envoyez un e-mail à [l'équipe d'assistance Datadog][6] pour activer cette fonctionnalité. Les administrateurs pourront spécifier les adresses IP autorisées à accéder aux dashboards partagés. Une fois cette fonctionnalité activée, consultez la [page de sécurité][6] de votre organisation pour gérer les restrictions.
 
 ### Mode sombre
 
@@ -82,30 +96,29 @@ Le mode TV est disponible sur les screenboards publics. Utilisez le raccourci cl
 
 ## API
 
-Datadog propose une [API dédiée][8] qui vous permet d'interagir avec vos graphiques partagés (embeds) :
+Datadog propose une [API dédiée][7] qui vous permet d'interagir avec vos graphiques partagés (embeds) :
 
 | Endpoint                 | Description                                                             |
 |--------------------------|-------------------------------------------------------------------------|
-| [Récupérer tous les embeds][9]     | Récupère la liste des graphiques intégrables précédemment créés.                     |
-| [Créer un embed][10]       | Crée un nouveau graphique intégrable.                                         |
-| [Récupérer un embed spécifique][11] | Récupère le fragment HTML d'un embed généré précédemment avec `embed_id`. |
-| [Activer un embed][12]       | Active l'embed spécifié.                                             |
-| [Révoquer un embed][13]       | Révoque l'embed spécifié.                                             |
+| [Récupérer tous les embeds][8]     | Récupère la liste des graphiques intégrables précédemment créés.                     |
+| [Créer un embed][9]       | Crée un nouveau graphique intégrable.                                         |
+| [Récupérer un embed spécifique][10] | Récupérez le fragment HTML d'un embed généré précédemment avec `embed_id`. |
+| [Activer un embed][11]       | Active l'embed spécifié.                                             |
+| [Révoquer un embed][12]       | Révoque l'embed spécifié.                                             |
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/timeboard/
-[2]: /fr/dashboards/screenboard/
-[3]: https://app.datadoghq.com/account/settings#embeds
-[4]: /fr/dashboards/template_variables/
-[5]: https://app.datadoghq.com/dashboard/lists
-[6]: /fr/help/
-[7]: https://app.datadoghq.com/account/org_security
-[8]: /fr/api/v1/embeddable-graphs/
-[9]: /fr/api/v1/embeddable-graphs/#get-all-embeds
-[10]: /fr/api/v1/embeddable-graphs/#create-embed
-[11]: /fr/api/v1/embeddable-graphs/#get-specific-embed
-[12]: /fr/api/v1/embeddable-graphs/#enable-embed
-[13]: /fr/api/v1/embeddable-graphs/#revoke-embed
+[1]: https://app.datadoghq.com/dashboard/lists
+[2]: /fr/dashboards/timeboard/
+[3]: /fr/dashboards/screenboard/
+[4]: https://app.datadoghq.com/account/settings#embeds
+[5]: /fr/help/
+[6]: https://app.datadoghq.com/account/org_security
+[7]: /fr/api/v1/embeddable-graphs/
+[8]: /fr/api/v1/embeddable-graphs/#get-all-embeds
+[9]: /fr/api/v1/embeddable-graphs/#create-embed
+[10]: /fr/api/v1/embeddable-graphs/#get-specific-embed
+[11]: /fr/api/v1/embeddable-graphs/#enable-embed
+[12]: /fr/api/v1/embeddable-graphs/#revoke-embed

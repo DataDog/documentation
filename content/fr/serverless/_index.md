@@ -15,6 +15,9 @@ further_reading:
   - link: /integrations/amazon_lambda/
     tag: "Intégration AWS\_Lambda"
     text: "Intégration AWS\_Lambda"
+  - link: 'https://www.datadoghq.com/blog/monitoring-lambda-containers/'
+    tag: Blog
+    text: Surveiller des fonctions Lambda Datadog AWS déployées à l'aide d'images de conteneur
 ---
 {{< img src="serverless/datadog_serverless_overview.png" alt="Présentation de l'informatique sans serveur Datadog"  style="width:100%;">}}
 
@@ -24,19 +27,12 @@ L'informatique sans serveur consiste à écrire du code orienté événement et 
 
 <div class="alert alert-info">Assurez-vous de consulter les discussions en cours dans le canal <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> de la <a href="https://chat.datadoghq.com/">communauté Slack de Datadog</a>.</div>
 
-## Débuter
+## Prise en main
 
-### 1. Installer l'intégration AWS
-
-Installez [l'intégration AWS][2]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS CloudWatch.
-
-### 2. Installer le Forwarder Datadog
-
-Installez la [fonction Lambda du Forwarder Datadog][3], qui est nécessaire pour l'ingestion des traces, des métriques optimisées, des métriques custom et des logs AWS Lambda. **Remarque** : ignorez cette étape si vous avez déjà installé la fonction du Forwarder avec la pile CloudFormation de l'[intégration AWS][2}.
-
-### 3. Instrumenter votre application
-
-Sélectionnez un runtime Lambda ci-dessous pour découvrir comment instrumenter votre application sans serveur.
+1. Installez [l'intégration AWS][2]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS CloudWatch.
+2. Installez la [fonction Lambda du Forwarder Datadog][3], qui est requise pour ingérer des traces Lambda AWS, des métriques optimisées, des métriques custom et des logs.
+   **Remarque** : ignorez cette étape si vous avez déjà installé la fonction du Forwarder avec la pile CloudFormation de l'[intégration AWS][2].
+3. Instrumentez votre application. Sélectionnez un runtime Lambda ci-dessous pour découvrir comment instrumenter votre application sans serveur.
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 

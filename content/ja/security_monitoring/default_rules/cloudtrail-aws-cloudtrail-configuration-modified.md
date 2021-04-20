@@ -13,8 +13,6 @@ source: cloudtrail
 title: AWS CloudTrail コンフィギュレーションの変更
 type: security_rules
 ---
-## 概要
-
 ### 目標
 CloudTrail を無効化または変更することにより、攻撃者が防御を回避しようとしていることを検出します。
 

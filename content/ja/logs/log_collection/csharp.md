@@ -16,7 +16,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualize'
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -409,7 +409,7 @@ using (var log = new LoggerConfiguration()
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /ja/logs/#reserved-attributes
+[3]: /ja/logs/processing/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 

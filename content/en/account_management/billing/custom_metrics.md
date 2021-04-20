@@ -9,6 +9,8 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
 
+Your monthly billable volume for custom metrics (reflected on the Usage page) represents the average number of distinct custom metrics over all hours in the current month.
+
 ## Counting custom metrics
 
 The number of custom metrics associated with a particular metric name depends on its metric [submission type][3]. Below are examples of how to count your custom metrics based on the following scenario below:
@@ -107,6 +109,18 @@ The number of unique tag value combinations submitted for a DISTRIBUTION metric 
 
 The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. This results in `request.Latency` reporting a total of **5\*4 = 20 custom metrics**.
 
+##### Adding percentile aggregations
+
+You can include percentile aggregations (`p50`, `p75`, `p90`, `p95`, and `p99`) on your distribution metric. Including these additional percentile aggregations results in an additional volume of five times the unique combination of metric name and tag values (**5\*4 = 20 custom metrics**). Therefore the total number of custom metrics emitted from this distribution metric with percentile aggregations is **2 * (5\*4) = 40 custom metrics** .
+
+This table summarizes the effect of adding percentile aggregations to any distribution metric. 
+
+| Metrics                                                                                    | Number of Billable Custom Metrics |
+|--------------------------------------------------------------------------------------------|-----------------------------------|
+| Number of custom metrics from a baseline distribution (count, sum, min, max, avg)          | `5*(tag value combinations)`      |
+| Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99)  | `5*(tag value combinations)`      |
+| Total                                                                                      | `2*5(tag value combinations)`     |
+
 ##### Customization of tagging
 
 You can customize [which tag combination][2] aggregations are created for any DISTRIBUTION metric. Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
@@ -117,27 +131,8 @@ You can customize [which tag combination][2] aggregations are created for any DI
 
 The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5\*3 = 15 custom metrics**
 
-##### Adding percentile aggregations
-
-Percentile aggregations are unique in the way they're counted because **Datadog stores five custom metrics for each potentially queryable tag value combination** to provide you with globally accurate percentiles: `p50`, `p75`, `p90`, `p95`, and `p99`. Suppose you have [added percentile aggregations][3] for `request.Latency` for the set of tags `endpoint` and `status` with the same tag dependency seen earlier. The number of queryable tag value combinations is **eight**:
-
-- `endpoint:X`, `status:200`
-- `endpoint:X`, `status:400`
-- `endpoint:Y`, `status:200`
-- `endpoint:X`
-- `endpoint:Y`
-- `status:200`
-- `status:400`
-- `*`
-
-After enabling percentile aggregations for `request.Latency`, this metric name additionally reports **5\*8 = 40 custom metrics**.
-
-**Note**: Only tag value combinations that actually appear in your data are counted as queryable. Since the combination { `endpoint:Y`, `status:400` } was never submitted in your data, this combination won’t be queryable and won’t count towards your custom metric count.
-
-
 [1]: /developers/metrics/types/?tab=distribution#definition
 [2]: /metrics/distributions/#customize-tagging
-[3]: /metrics/distributions/#aggregations
 {{% /tab %}}
 {{< /tabs >}}
 

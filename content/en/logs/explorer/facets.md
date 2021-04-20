@@ -33,7 +33,8 @@ Facets also allow you to manipulate your logs in your [log monitors][4], log wid
 
 **Note**: You do not need facets to support [log processing][7], [livetail search][8], [archive][9] forwarding, rehydration, or [metric generation][10] from logs. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
-### Qualitative facets: Dimensions
+### Qualitative facets
+#### Dimensions
 
 Use qualitative facets when you need:
 
@@ -41,11 +42,12 @@ Use qualitative facets when you need:
 - To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][15] web access logs, enriched with the Datadog [GeoIP Processor][16].
 - To **count unique values**. For instance, create a facet on `user.email` from your [Kong][17] logs to know how many users connect every day to your website.
 
-#### Types {#types-qualitative-facets}
+#### Types
 
 Qualitative facets can have a string or numerical (integer) type. While assigning string type to a dimension works in all case, using integer types on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][1] for reference.
 
-### Quantitative facets: Measures
+### Quantitative facets
+#### Measures
 
 Use measures when you need:
 
@@ -53,7 +55,7 @@ Use measures when you need:
 - To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][19] tasks, and see the list of servers having the most runs taking more than 10s.
 - To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][20] microservice. You can then search all the logs, starting with the one with the highest amount.
 
-#### Types{#types-qualitative-facets}
+#### Types
 
 Measures come with either a (long) integer or double value, for equivalent capabilities.
 
@@ -71,7 +73,7 @@ Unit is a property of the measure itself, not of the field. For example, conside
 1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][21]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`.
 2. Use `duration:>20ms` (see [search syntax][1] for reference) to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
 
-## The facet panel
+## Facet panel
 
 The search bar provides the most comprehensive set of interactions to slice and dice your data. However, for most cases, the facet panel is likely to be a more straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
 
@@ -131,7 +133,7 @@ If you see an aliased facet in your facet list, consider using the _standard_ fa
 
 You may wish to keep the non-standard _aliased_ version of the facet if you are troubleshooting against old content (before the aliasing for this facet has been setup by your organization).
 
-## Manage Facets
+## Manage facets
 
 ### Out-of-the-box facets
 
@@ -139,19 +141,19 @@ Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out
 
 Facets on [Reserved Attributes][23] and most [Standard Attributes][24] are available by default.
 
-### The Index Facet
+### Index facet
 
 The index facet is a specific facet that appears only if your organization has [multiple indexes][25], and/or if you have active [historical views][26]. Use this facet if you want to scope down your query to a subset of your indexes.
 
 {{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
 
-### Create Facets
+### Create facets
 
 As a matter of good practice, always consider using an existing facet rather than creating a new one (see the [alias facets](#alias-facets) section). Using a unique facet for information of a similar nature fosters cross-team collaboration.
 
 **Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
-#### From log side panel
+#### Log side panel
 
 The easiest way to create a facet is to add it from the log side panel, where most of the facet details—such as the field name or the underlying type of data—are pre-filled and it's only a matter of double-checking. Navigate in the [Log Explorer][1] to whichever log of interest bearing the field to create a facet on. Open the side-panel for this log, click on the corresponding field (either in tags or in attributes) and create a facet from there:
 
@@ -162,7 +164,7 @@ The easiest way to create a facet is to add it from the log side panel, where mo
 
 **Note**: As a best practice, it is recommended to use no more than 1000 facets.
 
-#### From the facet list
+#### Facet list
 
 In case finding a matching log is not an option, create a new facet directly from the facet panel using the _add facet_ button.
 
@@ -175,7 +177,7 @@ Autocomplete based on the content in logs of the current views helps you to defi
 
 {{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="Create Facet from scratch" style="width:30%;">}}
 
-### Alias Facets
+### Alias facets
 
 Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting—see [Naming Convention][24] for reference.
 
@@ -226,7 +228,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [20]: /integrations/python/
 [21]: /logs/processing/processors/?tab=ui#arithmetic-processor
 [22]: /logs/explorer/saved_views/
-[23]: /logs/processing/#reserved-attributes
+[23]: /logs/processing/attributes_naming_convention/#reserved-attributes
 [24]: /logs/processing/attributes_naming_convention/
 [25]: /logs/indexes/#indexes
 [26]: /logs/archives/rehydrating/

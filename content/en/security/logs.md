@@ -39,8 +39,8 @@ These features are not available to customers who have signed Datadog's BAA:
 * Group-by dimensions are limited to host tags, source, service, and status for [Log-based Metrics][6].
 * Notifications from Log Monitors cannot include log samples.
 * You cannot configure Log Monitors with a `group-by` clause.
-* You cannot [share][7] logs (nor traces) from the explorer through web integrations.
-* The Security Monitoring product cannot be active.
+* You cannot [share][7] logs, security signals, or traces from the explorer through web integrations.
+* Security rules cannot send notifications.
 
 If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, contact your account manager.
 

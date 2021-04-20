@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
+- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
 - link: "/getting_started/synthetics/api_test"
   tag: "Documentation"
   text: "Get started with HTTP tests"
@@ -20,11 +23,11 @@ further_reading:
 
 HTTP tests allow you to **send HTTP requests to your applications' API endpoints** in order to verify that they are responding to requests, as well as that they meet any conditions you define-such as overall response time, status code, and header or body content.
 
-HTTP tests can be run from [**managed**][1] and [**private locations**][2] depending on whether you are willing to monitor your endpoints from outside or inside your network. HTTP tests can run **on a schedule**, **on-demand**, or directly **within your [CI/CD pipelines][3]**.
+HTTP tests can be run from [**managed**][1] and [**private locations**][2] depending on whether you want to monitor your endpoints from outside or inside your network. HTTP tests can run **on a schedule**, **on-demand**, or directly **within your [CI/CD pipelines][3]**.
 
 ## Configuration
 
-After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], or [`DNS` test][7]), you can define your test's request.
+After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][17], or [`ICMP` test][7]), you can define your test's request.
 
 ### Define request
 
@@ -55,9 +58,9 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 
   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
-  
+
   ```
-  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts 
+  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
   ```
 
@@ -190,7 +193,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [4]: /synthetics/api_tests/http_tests
 [5]: /synthetics/api_tests/ssl_tests
 [6]: /synthetics/api_tests/tcp_tests
-[7]: /synthetics/api_tests/dns_tests
+[7]: /synthetics/api_tests/icmp_tests
 [8]: /synthetics/search/#search
 [9]: https://restfulapi.net/json-jsonpath/
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
@@ -200,3 +203,4 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [15]: /synthetics/settings/#global-variables
 [16]: /synthetics/api_tests/errors/#ssl-errors
+[17]: /synthetics/api_tests/dns_tests

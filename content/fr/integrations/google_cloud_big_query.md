@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: 'Surveillez le nombre de requêtes, les temps d''exécution, les octets et les rangs téléchargés, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_big_query/'
+draft: false
 git_integration_title: google_cloud_big_query
 has_logo: true
 integration_title: Google BigQuery
@@ -28,7 +29,7 @@ Recueillez des métriques de Google BigQuery pour :
 - Visualiser les performances de vos requêtes BigQuery
 - Corréler les performances de vos requêtes BigQuery avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

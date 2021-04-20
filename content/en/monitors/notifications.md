@@ -201,6 +201,8 @@ The following conditional variables are available:
 | `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
 | `{{^is_no_data_recovery}}` | The monitor does not recover from `NO DATA`                        |
 | `{{#is_priority 'value'}}`  | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
+| `{{#is_unknown}}`          | The monitor is in the unknown state                                |
+| `{{^is_unknown}}`          | The monitor is not in the unknown state                            |
 
 #### Examples
 
@@ -316,7 +318,7 @@ To notify your dev team if a triggering host has the name `production`, use the 
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][1]: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][1]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
@@ -453,7 +455,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [8]: /integrations/slack/#mentions-in-slack-from-monitor-alert
 [9]: /integrations/webhooks/
 [10]: /integrations/webhooks/#usage
-[11]: https://docs.datadoghq.com/integrations/#cat-collaboration
+[11]: /integrations/#cat-notification
 [12]: /events/
 [13]: /monitors/guide/template-variable-evaluation/
 [14]: /monitors/faq/what-are-recovery-thresholds/

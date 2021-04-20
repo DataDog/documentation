@@ -2,10 +2,13 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    riakcs: assets/dashboards/riakcs_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    riak-cs_processes: assets/saved_views/riak-cs_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -13,7 +16,7 @@ creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md'
-display_name: Riak CS
+display_name: RiakCS
 draft: false
 git_integration_title: riakcs
 guid: 55ba6b94-8eeb-486b-aa94-6366a044fdf0
@@ -101,8 +104,7 @@ RiackCS チェックには、イベントは含まれません。
 ### サービスのチェック
 
 **riakcs.can_connect**:
-
-Agent が RiakCS エンドポイントに接続してメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+Agent が RiakCS エンドポイントに接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

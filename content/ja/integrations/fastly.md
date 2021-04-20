@@ -37,7 +37,7 @@ Fastly に接続して、Fastly のキーメトリクス (キャッシュカバ�
 Fastly のトークン管理ページで読み取り専用アクセス API トークンを作成し、ダッシュボードからサービス ID を取得して、それらを [Fastly インテグレーションタイル][1]に入力します。
 
 <div class="alert alert-info">
-サービス ID は、5VqE6MOOy1QFJbgmCK41pY のような英数字のコードです (<a href="https://docs.fastly.com/api/auth">こちらの例</a>)。
+ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</code>（<a href="https://docs.fastly.com/api/auth">Fastly ドキュメント</a>からの例）。
 </div>
 
 1 つのアカウントで複数のサービス ID を使用している場合は、各行に API トークンを入力してください。
@@ -56,8 +56,8 @@ Fastly ログを Datadog アプリケーションに転送するように Datado
 ##### Datadog エンドポイントを構成する (推奨)
 
 1. エンドポイントに名前を付けます (例: `Datadog`)。
-2. ログ形式を構成します。デフォルトで、**[推奨される Datadog-Fastly ログ形式][2]**がすでに用意されており、カスタマイズできます。
-3. Datadog アカウントのリージョンと一致するように、リージョンとして US または EU を選択します。アカウントのログインが `datadoghq.com` にアクセスする場合は US リージョンアカウント、`datadoghq.eu` にアクセスする場合は EU リージョンアカウントをお持ちです。
+2. ログ形式を構成します。デフォルトで、推奨される[Datadog-Fastly ログ形式][2]がすでに用意されており、カスタマイズできます。
+3. Datadog アカウントのリージョンと一致するように、リージョンを選択します: {{< region-param key="dd_site_name" code="true" >}}
 4. [Datadog API キー][3]を追加します。
 5. 下部にある **Create** をクリックします。
 6. 右上の **Activate** をクリックして、新しいコンフィギュレーションをアクティブ化します。数分後、ログがアカウントに流れ始めます。
@@ -65,20 +65,20 @@ Fastly ログを Datadog アプリケーションに転送するように Datado
 ##### Syslog エンドポイントの構成
 
 1. エンドポイントに名前を付けます (例: `Datadog`)。
-2. ログ形式を構成して、**[推奨の Datadog-Fastly ログ形式][2]**の先頭に [Datadog API キー][3]を含めます。
+2. ログ形式を構成して、推奨される[Datadog-Fastly ログ形式][2]の先頭に[Datadog API キー][3]を含めます。
 
     ```text
     <DATADOG_API_KEY> <DATADOG_FASTLY_LOG_FORMAT>
     ```
 
-    注: Datadog-Fastly ログ形式の先頭に Datadog API キーがないと、ログが Datadog に表示されません。ログ変数の詳細については、[Fastly のドキュメント][4]を参照してください。
+   注: Datadog-Fastly ログ形式の先頭に Datadog API キーがないと、ログが Datadog に表示されません。ログ変数の詳細については、[Fastly のドキュメント][4]を参照してください。
 
-3. **Syslog Address** を `intake.logs.datadoghq.com` (EU リージョンの場合は、`tcp-intake.logs.datadoghq.eu`) に設定します。
-4. **Port** を `10516` (EU リージョンの場合は `443`) に設定します。
+3. **Syslog Address** を {{< region-param key="web_integrations_endpoint" code="true" >}} に設定します
+4. **Port** を {{< region-param key="web_integrations_port" code="true" >}} に設定します
 5. **TLS** を `yes` に設定します。
-6. **TLS Hostname** を `intake.logs.datadoghq.com` に設定します。
+6. **TLS Hostname** を {{< region-param key="web_integrations_endpoint" code="true" >}} に設定します
 7. Advanced options セクションで、**log line format** として `Blank` を選択します。
-8. 最後に、エンドポイントを保存し、サービスをデプロイします。数秒後に、ログが [Datadog アカウント][5]に流れ込むようになります。
+8. 最後に、エンドポイントを保存し、サービスをデプロイします。[Datadog のログエクスプローラー][5] でログを確認できます。
 
 ## 収集データ
 

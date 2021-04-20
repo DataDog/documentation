@@ -22,6 +22,8 @@ Exclude containers from the Agent Autodiscovery perimeter with an exclude rule b
 
 **Note**: Exclude rules support regexes, which are defined as a list of comma-separated strings.
 
+**Note**: To exclude every container, you can use `name:.*`, `image:.*`, or `kube_namespace:.*`. Note that configuring `.*` without a `name:`, `image:`, or `kube_namespace:` prefix will not work.
+
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
@@ -149,7 +151,7 @@ In **Agent v7.20+**, to include a given Docker container with the **image** `<IM
 DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
-In **Agent <= v7.19+**, to remove a given Docker container with the **image** `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
+In **Agent <= v7.19+**, to include a given Docker container with the **image** `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_AC_INCLUDE = "image:<IMAGE_NAME>"
@@ -170,7 +172,7 @@ DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
 ```
 
-In **Agent <= v7.19+**, to remove a given Docker container with the **name** `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
+In **Agent <= v7.19+**, to include a given Docker container with the **name** `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_AC_INCLUDE = "name:<NAME>"

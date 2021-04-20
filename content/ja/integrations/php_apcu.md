@@ -17,13 +17,13 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md'
 display_name: PHP APCu
-draft: true
+draft: false
 git_integration_title: php_apcu
 guid: d6b2f21e-8a91-4c5a-98c3-647af53065b7
 integration_id: php-apcu
 integration_title: PHP APCu
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: noname@withgod.jp
 manifest_version: 1.0.0
 metric_prefix: php_apcu.
@@ -47,19 +47,18 @@ supported_os:
 
 ### インストール
 
-`php_apcu` チェックをホストにインストールするには
+Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに `php_apcu` チェックをインストールしてください。[バージョン 6.8 以前の Agent][4] または [Docker Agent][5] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][3]に関する Agent のガイドを参照してください。
 
+1. [Datadog Agent をダウンロードします][6]。
 
-1. [開発ツールキット][3]をインストールします。
- どのマシンでも。
+2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
-2. `ddev release build php_apcu` を実行してパッケージをビルドします。
+   ```shell
+      datadog-agent integration install -t datadog-php_apcu==<INTEGRATION_VERSION>
+   ```
 
-3. [Datadog Agent をダウンロードします][4]。
+3. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-4. ビルドの成果物を Agent をインストール済みのホストにアップロードし、以下を実行します。
- `datadog-agent integration install -w
- path/to/php_apcu/dist/<ARTIFACT_NAME>.whl`.
 
 #### APCu のセットアップ
 
@@ -83,16 +82,17 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 
 ### コンフィギュレーション
 
-1. `php_apcu` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `php_apcu.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル `php_apcu.d/conf.yaml` ファイル][6]を参照してください。
+1. `php_apcu` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `php_apcu.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル `php_apcu.d/conf.yaml` ファイル][8]を参照してください。
     ```
     instances
       - url: http://localhost/apcu-status
     ```
-2. [Agent を再起動します][7]。
+
+2. [Agent を再起動します][9]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `php_apcu` を探します。
+[Agent の status サブコマンドを実行][10]し、Checks セクションで `php_apcu` を探します。
 
 ## 収集データ
 
@@ -110,15 +110,17 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://www.php.net/manual/en/book.apcu.php
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/datadog_checks/php_apcu/assets/exporter/apcu-dd-handler.php
-[6]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/datadog_checks/php_apcu/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
+[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[8]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/datadog_checks/php_apcu/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://github.com/DataDog/integrations-extras/blob/master/php_apcu/metadata.csv
+[12]: https://docs.datadoghq.com/ja/help/

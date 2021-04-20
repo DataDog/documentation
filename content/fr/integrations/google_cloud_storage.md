@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Storage."
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_storage/'
+draft: false
 git_integration_title: google_cloud_storage
 has_logo: true
 integration_title: Google Storage
@@ -28,7 +29,7 @@ Recueillez des métriques de Google Storage pour :
 - Visualiser les performances de vos services Storage
 - Corréler les performances de vos services Storage avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

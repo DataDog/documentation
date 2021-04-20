@@ -5,6 +5,7 @@ level: warning
 scope: heading
 match: $sentence
 exceptions:
+  - ACLs
   - Agent
   - Agents
   - Amazon
@@ -14,17 +15,20 @@ exceptions:
   - Autodiscovery
   - Azure
   - Azure App Service Plan
+  - CakePHP
   - Cassandra Nodetool
   - CentOS
   - Chef
   - Clipboard
   - CloudSQL
+  - CloudWatch
   - Cluster Agent
   - Continuous Profiler
   - DaemonSet
   - Data Collected
   - Datadog
   - Datadog Agent Manager
+  - Datadog for Government
   - Datadog Operator
   - Debian
   - Detection Rules
@@ -36,6 +40,7 @@ exceptions:
   - FreeBSD
   - FreeSwitch
   - Further Reading
+  - GeoIP
   - GitHub
   - Google
   - Google Analytics
@@ -46,18 +51,25 @@ exceptions:
   - HostPort
   - I
   - IdP
+  - IDs
   - Incident Management
+  - IoT
   - IPs
   - Java
   - JMXFetch
+  - Journald
   - Kubernetes
   - Kubernetes Pod
   - Lambda
   - LaunchDarkly
   - Linux
+  - Live Tail
+  - Log Explorer
   - Log Management
   - Log Rehydration
+  - Logback
   - macOS
+  - Metrics Explorer
   - MongoDB
   - MySQL
   - Network Device Monitoring
@@ -67,20 +79,25 @@ exceptions:
   - Notebook List
   - npm
   - OkHttp
+  - OneLogin
   - OpenMetrics
   - openSUSE
   - OpenTelemetry
   - OpenTracing
   - OpenVPN
+  - OpsWorks
   - Phusion Passenger
   - pre-NAT
   - Prometheus
+  - Puppet
   - Python
   - Python
   - Rails
   - Real User Monitoring
   - Red Hat
   - Redis
+  - RocketPants
+  - Root Cause Analysis
   - RumMonitor
   - SafeNet
   - Security Monitoring
@@ -107,5 +124,7 @@ exceptions:
   - URLs
   - User Datagram Protocol
   - vSphere
+  - Watchdog
+  - Watchdog Insights
   - Webhook
   - Windows

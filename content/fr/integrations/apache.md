@@ -4,14 +4,18 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    apache: assets/dashboards/apache_dashboard.json
   logs:
     source: apache
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Apache] Low number of idle workers': assets/recommended_monitors/apache_low_idle_workers.json
+    '[Apache] resource utilization': assets/recommended_monitors/high_keep_alive_and_cpu.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
+    apache_processes: assets/saved_views/apache_processes.json
     bot_errors: assets/saved_views/bot_errors.json
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
@@ -25,6 +29,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/apache/README.md'
 description: 'Surveillez le nombre de requêtes par seconde, les octets traités, les threads worker, le temps de disponibilité et plus encore.'
 display_name: Apache
+draft: false
 git_integration_title: apache
 guid: cb2b4a06-4ede-465e-9478-a45f8b32058a
 integration_id: apache
@@ -91,7 +96,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -138,7 +143,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
