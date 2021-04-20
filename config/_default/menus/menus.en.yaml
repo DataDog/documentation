@@ -4518,9 +4518,9 @@ api:
       operationids:
         - UpdateTestPauseStatus
       unstable: []
-  - name: Get a test result (API)
-    url: '#get-a-test-result-api'
-    identifier: get-a-test-result-api
+  - name: Get an API test result
+    url: '#get-an-api-test-result'
+    identifier: get-an-api-test-result
     parent: synthetics
     generated: true
     params:
@@ -4529,9 +4529,9 @@ api:
       operationids:
         - GetAPITestResult
       unstable: []
-  - name: Get the test's latest results summaries (API)
-    url: '#get-the-tests-latest-results-summaries-api'
-    identifier: get-the-tests-latest-results-summaries-api
+  - name: Get an API test's latest results summaries
+    url: '#get-an-api-tests-latest-results-summaries'
+    identifier: get-an-api-tests-latest-results-summaries
     parent: synthetics
     generated: true
     params:
@@ -4562,9 +4562,9 @@ api:
       operationids:
         - GetTest
       unstable: []
-  - name: Trigger some Synthetics tests for CI
-    url: '#trigger-some-synthetics-tests-for-ci'
-    identifier: trigger-some-synthetics-tests-for-ci
+  - name: Trigger tests from CI/CD pipelines
+    url: '#trigger-tests-from-ci/cd-pipelines'
+    identifier: trigger-tests-from-ci/cd-pipelines
     parent: synthetics
     generated: true
     params:
@@ -4584,9 +4584,9 @@ api:
       operationids:
         - DeleteTests
       unstable: []
-  - name: Get a test result (browser)
-    url: '#get-a-test-result-browser'
-    identifier: get-a-test-result-browser
+  - name: Get a browser test result
+    url: '#get-a-browser-test-result'
+    identifier: get-a-browser-test-result
     parent: synthetics
     generated: true
     params:
@@ -4595,9 +4595,9 @@ api:
       operationids:
         - GetBrowserTestResult
       unstable: []
-  - name: Get the test's latest results summaries (browser)
-    url: '#get-the-tests-latest-results-summaries-browser'
-    identifier: get-the-tests-latest-results-summaries-browser
+  - name: Get a browser test's latest results summaries
+    url: '#get-a-browser-tests-latest-results-summaries'
+    identifier: get-a-browser-tests-latest-results-summaries
     parent: synthetics
     generated: true
     params:
@@ -4617,9 +4617,9 @@ api:
       operationids:
         - UpdateBrowserTest
       unstable: []
-  - name: Get a test configuration (browser)
-    url: '#get-a-test-configuration-browser'
-    identifier: get-a-test-configuration-browser
+  - name: Get a browser test
+    url: '#get-a-browser-test'
+    identifier: get-a-browser-test
     parent: synthetics
     generated: true
     params:
