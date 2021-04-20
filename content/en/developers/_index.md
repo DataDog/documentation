@@ -16,7 +16,7 @@ The Developers section contains reference materials for developing on Datadog. Y
 
 ## Data
 
-### Unsupported
+### Should I write a custom check or an integration?
 
 Developers have several choices for sending unsupported data to Datadog. The main considerations are effort (time to develop) and budget (cost of custom metrics). If you are a Partner developing on Datadog Marketplace or community integrations, jump straight to the [Marketplace][2] and [building an integration][3] docs. If you are trying to see data that Datadog doesn't support, start by deciding which method makes the most sense to start sending data:
 
