@@ -345,8 +345,8 @@
       globs:
       - 'docs/configure_rum_android_sdk.md'
       options:
-        dest_path: '/real_user_monitoring/android/advanced_configuration'
-        file_name: 'configure_rum_android_sdk.md'
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'advanced_configuration.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md"]
           title: RUM Android Advanced Configuration
