@@ -60,7 +60,7 @@ docker run -d --name datadog-agent \
            gcr.io/datadoghq/agent:latest
 ```
 
-**Note**: On Windows systems, run this command without all volume mounts. That is:
+**Note**: On Windows systems, run this command without any volume mounts. That is:
 
 ```shell
 docker run -d --name datadog-agent \
@@ -82,7 +82,7 @@ The commands related to log collection are:
 | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-e DD_LOGS_ENABLED=true`                                     | Enables log collection when set to `true`. The Agent looks for log instructions in configuration files.                                                                                                                                   |
 | `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`                | Adds a log configuration that enables log collection for all containers.                                                                                                                                                                  |
-| `-e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true`            | Adds a log configuration that enables Docker container log collection from file. Available in the Datadog Agent 7.27.0/6.27.0+. Please check the [dedicated section](#docker-containers-log-collection-from-file) for additional details. |
+| `-e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true`            | Adds a log configuration that enables Docker container log collection from file. Available in the Datadog Agent 7.27.0/6.27.0+. Check the [dedicated section](#docker-containers-log-collection-from-file) for additional details. |
 | `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         | To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host.                                                                              |
 | `-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`                | Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics. This parameter value supports regular expressions.                       |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`             | To connect to the Docker daemon to discover containers and collect `stdout/stderr` from the Docker socket.                                                                                                                                 |
