@@ -8,6 +8,7 @@ ddtype: library
 dependencies: []
 description: Envoyez des métriques custom à partir de vos services Node.js via DogStatsD ou notre API.
 doc_link: 'https://docs.datadoghq.com/integrations/nodejs/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/node-logging-best-practices/'
     tag: Blog

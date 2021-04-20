@@ -27,36 +27,6 @@ Si la fenêtre d'évaluation comprend de nombreux compartiments "null" (**10/NaN
 
 ## Solutions pour les métriques creuses et décalées
 
-### `.rollup()`
-
-Vous pouvez appliquer une fonction `.rollup()` pour que tous les compartiments de temps évalués disposent de valeurs valides. Cette fonction peut également être utile pour les métriques avec des vides, peu importe si la requête comprend des opérations arithmétiques ou non.
-
-**Version d'origine** : `sum:ma_metrique.creuse{*}`
-
-```text
-| Timestamp           | Value |
-|:--------------------|:------|
-| 2019-03-29 11:00:00 | 1     |
-| 2019-03-29 11:00:30 |       |
-| 2019-03-29 11:01:00 | 2     |
-| 2019-03-29 11:01:30 | 1     |
-| 2019-03-29 11:02:00 |       |
-```
-
-**Version modifiée** : `sum:ma_metrique.creuse{*}.rollup(sum,60)`
-
-```text
-| Timestamp           | Value |
-|:--------------------|:------|
-| 2019-03-29 11:00:00 | 1     |
-| 2019-03-29 11:01:00 | 3     |
-| 2019-03-29 11:02:00 | 1*    |
-```
-
-La fonction `rollup()` crée des compartiments de temps en fonction des intervalles de temps que vous définissez. Vous pouvez ainsi ignorer les données manquantes en définissant un intervalle de cumul supérieur à la longueur des vides de vos métriques. Dans cet exemple, les nouveaux compartiments regroupent les sommes des valeurs dans une fenêtre de 60 secondes.
-
-\*Vous remarquerez que la valeur du timestamp `2019-03-29 11:02:00` pour la requête modifiée ne correspond pas à la valeur du premier tableau. En effet, la fonction `.rollup()` s'aligne avec le temps UNIX. Ici, on peut imaginer que la valeur `1` se produit à `2019-03-29 11:02:30`. Elle apparaît dans la fenêtre des cumuls, mais pas dans la fenêtre d'évaluation du monitor. Pour éviter de déclencher votre monitor à partir d'un intervalle de cumul incomplet contenant seulement un court extrait de données, ajoutez un **délai d'évaluation** au monitor. Attribuez-lui une valeur au moins égale à la longueur de l'intervalle de cumul.
-
 ### `.fill()`
 
 Vous pouvez appliquer une fonction `.fill()` pour garantir que tous les compartiments de temps possèdent des valeurs valides. Pour les types de métriques **gauge**, l'interpolation par défaut est linéaire, ou `.fill(linear)`, pendant 5 minutes. Pour les métriques de type **count** et **rate**, la valeur par défaut est `.fill(null)`, ce qui désactive l'interpolation. Datadog déconseille généralement l'interpolation pour les métriques count/rate dans les monitors.
@@ -115,6 +85,24 @@ Avec `.fill(last,900)`, voici le résultat :
 |:--------------------|:----------------------------------------------|:-------|
 | `classic_eval_path` | **(1)/1 + 1/1 + 0/1 + 0/1 + 1/1 + 1/1 + 1/1** | 5      |
 
+### Fenêtres d'évaluation de faible durée
+
+Il est possible de rencontrer des problèmes temporels lorsque vous effectuez des divisions impliquant des fenêtres d'évaluation de courte durée. Lorsque la requête de votre monitor nécessite une division sur une fenêtre d'évaluation d'une minute, le numérateur et le dénominateur représentent des compartiments de temps de quelques secondes. Or, si les métriques du numérateur et du dénominateur ne sont pas disponibles en même temps au moment de la requête, vous pouvez obtenir des valeurs d'évaluation indésirables.
+
+```
+| Timestamp             | sum:my_num{*}       | sum:my_denom{*}     |
+| :-------------------- | :------------------ | :------------------ |
+| ...                   | ...                 | ...                 |
+| 2019-03-29 13:30:50   | 900                 | 1000                |
+| 2019-03-29 13:30:52   | 900                 | 1000                |
+| 2019-03-29 13:30:54   | 900                 | 1000                |
+| 2019-03-29 13:30:56   | 120 (inc)           | 850 (inc)           |
+```
+
+Pour une requête comme `min(last_1m):sum:mon_num{*}/sum:mon_denom{*}`, la valeur minimum peut être biaisée et peut déclencher par inadvertance votre monitor.
+
+Par conséquent, nous vous conseillons d'ajouter un court délai d'évaluation de 30 à 60 secondes afin de régler les problèmes temporels pour les requêtes avec une division impliquant des fenêtres d'évaluation de courte durée. Vous pouvez également passer à une fenêtre d'évaluation de cinq minutes.
+
 [Contactez l'équipe d'assistance Datadog][1] si vous avez des questions sur cette logique.
 
-[1]: /fr/help
+[1]: /fr/help/

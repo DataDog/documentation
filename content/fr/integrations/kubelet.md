@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md'
 display_name: Kubelet
+draft: false
 git_integration_title: kubelet
 guid: 55039e21-7e89-41fb-968c-ab8bf8f25da0
 integration_id: kubelet
@@ -41,7 +43,7 @@ Cette intégration recueille les métriques de conteneur depuis kubelet.
 
 ### Installation
 
-Le check Kubelet est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check Kubelet est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 

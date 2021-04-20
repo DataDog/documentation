@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez le nombre de requêtes autorisées ou bloquées.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_waf/'
+draft: false
 git_integration_title: amazon_waf
 has_logo: true
 integration_title: Amazon Web Application Firewall
@@ -27,7 +28,7 @@ AWS WAF est un pare-feu d'applications Web qui vous aide à protéger vos appli
 
 Activez cette intégration pour visualiser dans Datadog vos métriques de WAF.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

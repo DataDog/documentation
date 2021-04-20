@@ -25,7 +25,7 @@ further_reading:
 
 ## Datadog Cluster Agent を構成する
 
-### 手順 1 - RBAC アクセス許可の構成
+### RBAC アクセス許可の構成
 
 Datadog Cluster Agent を実行するには、適切な RBAC が必要です。
 
@@ -42,7 +42,7 @@ Datadog Cluster Agent を実行するには、適切な RBAC が必要です。
 
 Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要になる可能性もあります。[DCA のため AKS で RBAC][3] に関する「よくあるご質問」を参照してください。
 
-### 手順 2 - Cluster Agent - Agent 間通信のセキュリティ保護
+### Cluster Agent - Agent 間通信のセキュリティ保護
 
 次のオプションを 1 つ使用して、Datadog Agent と Datadog Cluster Agent 間の通信を保護します。
 
@@ -110,7 +110,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
 
 **注**: この設定は、Cluster Agent のマニフェストとノードエージェントのマニフェストの**両方**で必要です。
 
-### 手順 3 - Cluster Agent とそのサービスの作成
+### Cluster Agent とそのサービスの作成
 
 1. 以下のマニフェストをダウンロードします。
 
@@ -133,7 +133,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
 
 **注**: Datadog Cluster Agent で、 `<DD_SITE>` を Datadog サイト {{< region-param key="dd_site" code="true" >}} に設定します。デフォルト値は `datadoghq.com` です。
 
-### 手順 4 - 検証
+### 検証
 
 この時点で、次のような状態になっているはずです。
 
@@ -166,13 +166,13 @@ Datadog Cluster Agent の設定が終了したら、Datadog Agent と Datadog Cl
 
 ### セットアップ
 
-#### 手順 1 - ノードベースの Agent に対する RBAC アクセス許可の構成
+#### ノードベースの Agent に対する RBAC アクセス許可の設定
 
 1. [agent-rbac.yaml マニフェスト][9]をダウンロードします。**注**: Cluster Agent を使用する場合、Kubernetes API サーバーと通信できるのは Cluster Agent だけで、Node Agent ではないことにご注意ください。
 
 2. 実行: `kubectl apply -f agent-rbac.yaml`
 
-#### 手順 2 - Datadog Agent の有効化
+#### Datadog Agent の有効化
 
 1. [daemonset.yaml マニフェスト][10]をダウンロードします。
 
@@ -209,6 +209,30 @@ datadog-cluster-agent-8568545574-x9tc9   1/1       Running   0          2h
 ```
 
 Datadog アカウントに Kubernetes イベントが流れ込み始め、Agent によって収集された関連メトリクスに、それぞれに対応するクラスターレベルのメタデータがタグ付けされます。
+
+#### AWS の管理型サービスを監視
+
+MSK、ElastiCache、RDS といった AWS の管理型サービスを監視するには、ポッドを作成し、Helm チャートの serviceAccountAnnotation 経由で IAM ロールを割り当てます。
+
+{{< code-block lang="yaml" >}}
+clusterChecksRunner:
+  enabled: true
+  rbac:
+    # clusterChecksRunner.rbac.create -- true の場合は RBAC リソースを作成・使用
+    create: true
+    dedicated: true
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::***************:role/ROLE-NAME-WITH-MSK-READONLY-POLICY
+clusterAgent:
+  confd:
+    amazon_msk.yaml: |-
+      cluster_check: true
+      instances:
+        - cluster_arn: arn:aws:kafka:us-west-2:*************:cluster/gen-kafka/*******-8e12-4fde-a5ce-******-3
+          region_name: us-west-2
+{{< /code-block >}}
+
+
 
 ## その他の参考資料
 

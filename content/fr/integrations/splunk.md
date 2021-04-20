@@ -6,10 +6,11 @@
 "dependencies": []
 "description": "Enregistrez des événements à partir de Splunk pour les superposer sur des graphiques de métriques clés."
 "doc_link": "https://docs.datadoghq.com/integrations/splunk/"
+"draft": false
 "git_integration_title": "splunk"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "Splunk"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "integration"
 "manifest_version": "1.0"
 "name": "splunk"
@@ -26,7 +27,7 @@ Connectez votre système de surveillance de log Splunk pour :
 - Corréler ces rapports avec vos autres métriques
 - Collaborer avec votre équipe sur ces événements
 
-## Implémentation
+## Configuration
 
 ### Installation
 

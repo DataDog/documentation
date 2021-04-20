@@ -64,7 +64,7 @@
   },
   "GetDashboardListItems": {
     "description": "ダッシュボードリストのダッシュボード定義を取得します。",
-    "summary": "ダッシュボードリストの取得"
+    "summary": "ダッシュボードリストのアイテムを取得する"
   },
   "CreateDashboardListItems": {
     "description": "既存のダッシュボードリストにダッシュボードを追加します。",
@@ -224,13 +224,35 @@
     "request_schema_description": "ロールとの関係。"
   },
   "ListLogsGet": {
-    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントと POST エンドポイントは、ログを一覧表示する際に互いに交換して使用できます。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "ログの簡易リストの取得"
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n最新のログを見るにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "ログのリストの取得"
   },
   "ListLogs": {
-    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントと GET エンドポイントは、ログを一覧表示する際に互いに交換して\n使用できます。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "ログのリストの取得",
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n複雑なログフィルタリングおよび検索を構築するにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Search logs",
     "request_schema_description": "ログリストのリクエスト。"
+  },
+  "ListTagConfigurations": {
+    "description": "構成済みの count/gauge/rate/distribution メトリクス名をすべて返します\n(指定された場合は追加のフィルターを適用)。",
+    "summary": "タグ付けコンフィギュレーションの一覧表示"
+  },
+  "DeleteTagConfiguration": {
+    "description": "メトリクスのタグ付けコンフィギュレーションを削除します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグ付けコンフィギュレーションを削除"
+  },
+  "ListTagConfigurationByName": {
+    "description": "特定のメトリクス名のタグ付けコンフィギュレーションを返します。",
+    "summary": "タグ付けコンフィギュレーションを名前で一覧表示"
+  },
+  "UpdateTagConfiguration": {
+    "description": "メトリクスまたは分散型メトリクスのパーセンタイル集計のタグ付けコンフィギュレーションを更新します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグ付けコンフィギュレーションを更新",
+    "request_schema_description": "タグ付けコンフィギュレーションを編集したいメトリクスを含むオブジェクトをリクエストします。"
+  },
+  "CreateTagConfiguration": {
+    "description": "count/gauge/rate/distribution メトリクスについて、クエリが可能なタグキーの一覧を作成および定義します。オプションで任意の分散型メトリクスについてのパーセンタイル集計を含めることもできます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグ付けコンフィギュレーションを作成",
+    "request_schema_description": "タグを構成したいメトリクスを含むオブジェクトをリクエストします。"
   },
   "ListPermissions": {
     "description": "名前、説明、ID を含むすべてのアクセス許可のリストを返します。",

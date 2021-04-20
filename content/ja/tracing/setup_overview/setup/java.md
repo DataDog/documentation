@@ -36,7 +36,7 @@ Datadog アプリ内の[クイックスタート手順][3]に従って、最高�
 
 ### Java のインストール手順
 
-もしくは、各言語で作成されたアプリケーションをトレースする場合は以下の操作を行ってください。
+もしくは、アプリケーションをトレースする場合は以下の操作を行ってください。
 
 1. 最新の Agent クラスファイルが含まれる `dd-java-agent.jar` をダウンロードします:
 
@@ -251,8 +251,8 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 | `dd.trace.health.metrics.statsd.host`  | `DD_TRACE_HEALTH_METRICS_STATSD_HOST`  | `dd.jmxfetch.statsd.host` と同じ | ヘルスメトリクスの送信先の Statsd ホスト                                                                                                     |
 | `dd.trace.health.metrics.statsd.port`  | `DD_TRACE_HEALTH_METRICS_STATSD_PORT`  | `dd.jmxfetch.statsd.port` と同じ | ヘルスメトリクスの送信先の Statsd ポート                                                                                                    |
 | `dd.http.client.tag.query-string`      | `DD_HTTP_CLIENT_TAG_QUERY_STRING`      | `false`                           | `true` に設定すると、クエリ文字列パラメーターとフラグメントがウェブクライアントスパンに追加されます                                                    |
-| `dd.http.client.error.statuses`        | `DD_HTTP_CLIENT_ERROR_STATUSES`        | `400-499`                           | 許容可能なエラーの範囲。デフォルトで 4xx エラーは HTTP クライアントのエラーとしてレポートされます。このコンフィギュレーションはこれをオーバーライドします。例: `dd.http.client.error.statuses=400-499`                                                                                                    |
-| `dd.http.server.error.statuses`        | `DD_HTTP_SERVER_ERROR_STATUSES`        | `500-599`                           | 許容可能なエラーの範囲。デフォルトで 5xx ステータスコードは HTTP サーバーのエラーとしてレポートされます。このコンフィギュレーションはこれをオーバーライドします。例: `dd.http.server.error.statuses=500-599`                                                                                                    |
+| `dd.http.client.error.statuses`        | `DD_HTTP_CLIENT_ERROR_STATUSES`        | `400-499`                           | 許容可能なエラーの範囲。デフォルトで 4xx エラーは HTTP クライアントのエラーとしてレポートされます。このコンフィギュレーションはこれをオーバーライドします。例: `dd.http.client.error.statuses=400-403,405,410-499`                                                                                                    |
+| `dd.http.server.error.statuses`        | `DD_HTTP_SERVER_ERROR_STATUSES`        | `500-599`                           | 許容可能なエラーの範囲。デフォルトで 5xx ステータスコードは HTTP サーバーのエラーとしてレポートされます。このコンフィギュレーションはこれをオーバーライドします。例: `dd.http.server.error.statuses=500,502-599`                                                                                                    |
 | `dd.http.server.tag.query-string`      | `DD_HTTP_SERVER_TAG_QUERY_STRING`      | `false`                           | `true` に設定すると、クエリ文字列パラメーターとフラグメントがウェブサーバースパンに追加されます                                                     |
 | `dd.trace.enabled`                     | `DD_TRACE_ENABLED`                     | `true`                            | `false` トレースエージェントが無効の時                                                                                                 |
 | `dd.jmxfetch.enabled`                  | `DD_JMXFETCH_ENABLED`                  | `true`                            | Java トレースエージェントによる JMX メトリクスの収集を有効にします。                                                                                  |

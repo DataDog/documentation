@@ -15,8 +15,11 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
     tag: ブログ
     text: エンドツーエンドテスト作成のベストプラクティス
+  - link: 'https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals'
+    tag: ブログ
+    text: Synthetic モニタリングでウェブに関する主な指標を監視
   - link: /synthetics/guide/
-    tag: ドキュメント
+    tag: Documentation
     text: ガイド
 ---
 ## 概要
@@ -39,7 +42,7 @@ further_reading:
 3. <mrk mid="33" mtype="seg"/><mrk mid="34" mtype="seg"/>
 4. **Select your tags**: タグはブラウザテストに紐付いています。`<KEY>:<VALUE>` フォーマットを使用して `<VALUE>` に Synthetic テストページ上の任意の `<KEY>` でフィルターを適用します。
 5. **Browsers & Devices**: テストを実行するブラウザ (`Chrome`、`Firefox`) とデバイス (`Laptop Large`、`Tablet`、`Mobile Small`)。
-6. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが多数用意されています。また、[プライベートロケーション][2]をセットアップして、カスタムロケーションまたはプライベートネットワーク内からブラウザテストを実行することもできます。
+6. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが各サイトに多数用意されています。Datadog for Government site には、West US (AWS GovCloud) ロケーションがサポートされています。また、[プライベートロケーション][2]をセットアップして、カスタムロケーションまたはプライベートネットワーク内からブラウザテストを実行することもできます。
 7. **How often should Datadog run the test?**: 5 分間隔から週に一度までの間でインターバルを設定します。1 分の頻度は[リクエストに応じて][3]利用できます。
 
 ### グローバル変数を使用する
@@ -88,7 +91,7 @@ further_reading:
 4. 自動的に記録されたステップに加えて、左上隅にある[ステップ][11]を使用して、シナリオを強化することもできます。
     {{< img src="synthetics/browser_tests/manual_steps.png" alt="ブラウザテストのステップ"  style="width:80%;">}}
 
-   **注**: ブラウザテストによって実行されたジャーニーが期待される状態になったことを確認するために、常に**ブラウザテストは、[アサーション][12]で終了する**必要があります。
+    **注**: ブラウザテストによって実行されたジャーニーが期待される状態になったことを確認するために、常に**ブラウザテストは、[アサーション][12]で終了する**必要があります。
 5. シナリオが終了したら、**Save and Launch Test** をクリックします。
 
 ## その他の参考資料
@@ -106,3 +109,4 @@ further_reading:
 [9]: https://www.google.com/chrome
 [10]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [11]: /ja/synthetics/browser_tests/actions/
+[12]: /ja/synthetics/browser_tests/actions/#assertion

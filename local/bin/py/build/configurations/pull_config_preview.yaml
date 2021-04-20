@@ -483,7 +483,7 @@
         - "security-monitoring/*.json"
         - "security-monitoring/*.md"
       options:
-        dest_path: '/security_monitoring/default_rules/'
+        dest_path: '/security_platform/default_rules/'
     - action: compliance-rules
       branch: main
       globs:
@@ -496,4 +496,4 @@
         - "runtime/**/*.yml"
         - "runtime/**/*.md"
       options:
-        dest_path: '/security_monitoring/default_rules/'
+        dest_path: '/security_platform/default_rules/'

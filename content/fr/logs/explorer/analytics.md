@@ -24,8 +24,6 @@ further_reading:
 Les fonctions d'analyse de logs permettent d'agréger ou de fractionner des logs depuis la page de recherche de logs, ce qui est particulièrement utile pour le dépannage et la surveillance.
 Vous pouvez accéder à la page d'analyse depuis n'importe quelle vue Log Explorer, en cliquant sur l'icône « Analyse » à proximité de la barre de requête.
 
-{{< img src="logs/explorer/analytics/explorer-button.png" alt="Log Explorer" style="width:50%;" >}}
-
 Vous pouvez contrôler :
 
 - la requête qui permet de filtrer l'ensemble des logs à analyser ;
@@ -46,30 +44,20 @@ Créez une requête pour contrôler le contenu affiché dans votre analyse de lo
 
 1. Choisissez une [mesure][1] ou une [facette][1] à représenter graphiquement. Les [mesures][1] vous permettent de choisir une fonction d'agrégation, tandis que les [facettes][1] affichent le nombre de valeurs uniques.
 
-    {{< img src="logs/explorer/analytics/choose_measure_facet.png" alt="sélection mesure ou facette" style="width:50%;">}}
+    {{< img src="logs/explorer/facet/measure_facet.png" alt="sélection mesure ou facette" style="width:50%;">}}
 
 2. Sélectionnez la fonction d'agrégation pour la [mesure][1] que vous souhaitez représenter :
 
-    {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="fonction d'agrégation pour l'analyse de logs" style="width:50%;">}}
-
 3. Utilisez une [facette][1] pour fractionner votre graphique.
 
-    {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="fractionner avec l'analyse de logs" style="width:50%;">}}
-
 4. Choisissez d'afficher les _X_ valeurs les plus **élevées** ou **faibles** en fonction de la [mesure][1] sélectionnée.
-
-    {{< img src="logs/explorer/analytics/top_bottom_button.png" alt="bouton top et bottom"  style="width:20%;">}}
 
 5. Sélectionnez les laps de temps du graphique.
    Le changement de l'intervalle de temps global modifie la liste des laps de temps disponibles.
 
-    {{< img src="logs/explorer/analytics/timesteps.png" alt="Laps de temps"  style="width:30%;">}}
-
 ## Visualisations
 
 Sélectionnez un type de visualisation d'analyse de logs à l'aide du sélecteur de graphique :
-
-{{< img src="logs/explorer/analytics/graph_selector.png" alt="Sélection d'analyse de logs" style="width:30%;">}}
 
 Visualisations disponibles :
 
@@ -95,7 +83,7 @@ Voici des informations supplémentaires sur la superposition :
 L'analyse de logs avec une série temporelle suivante illustre :
 l'évolution des **5 principaux chemins URL** selon le nombre d'adresses **IP client uniques** au cours du dernier mois.
 
-{{< img src="logs/explorer/analytics/timeserie_example.png" alt="Exemple de série temporelle" style="width:90%;">}}
+{{< img src="logs/explorer/timeseries.png" alt="Exemple de série temporelle" style="width:90%;">}}
 
 
 [1]: /fr/logs/explorer/facets/
@@ -108,7 +96,7 @@ Visualisez les valeurs les plus élevées d'une [facette][1] en fonction de la [
 L'analyse de logs avec une Top List suivante illustre :
 l'évolution des **5 principaux chemins URL** selon le nombre d'adresses **IP client uniques** au cours du dernier mois.
 
-{{< img src="logs/explorer/analytics/top_list_example.png" alt="Exemple de Top List" style="width:90%;">}}
+{{< img src="logs/explorer/toplists.png" alt="Exemple de Top List" style="width:90%;">}}
 
 
 [1]: /fr/logs/explorer/facets/
@@ -126,9 +114,6 @@ Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonctio
 
 L'analyse de logs avec un tableau suivante illustre l'évolution des **premiers codes de statut** en fonction de leur **débit**, ainsi que le nombre moyen d'**IP client** uniques au cours des 15 dernières minutes :
 
-{{< img src="logs/explorer/analytics/logs_table_example.png" alt="exemple de tableau" style="width:90%;">}}
-
-
 [1]: /fr/logs/explorer/facets/
 {{% /tab %}}
 {{< /tabs >}}
@@ -136,8 +121,6 @@ L'analyse de logs avec un tableau suivante illustre l'évolution des **premiers 
 ## Logs associés
 
 Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou consulter la liste des logs correspondant à votre sélection :
-
-{{< img src="logs/explorer/analytics/view_logs.mp4" alt="affichage des logs" video="true" width="80%" >}}
 
 ## Share View
 
@@ -147,8 +130,6 @@ Exportez votre visualisation de log actuelle grâce à la fonction de _partage_�
 - Export to **Dashboard** : exportez l'analyse actuelle sous la forme d'un widget dans un nouveau [dashboard][3] ou un dashboard existant.
 - Generate new **Metric** : [générez une nouvelle métrique][4] à partir de la requête d'analyse actuelle.
 
-{{< img src="logs/explorer/analytics/analytics_share.png" alt="exemple de tableau"  style="width:90%;">}}
-
 ## Comment fonctionnent les agrégations
 
 Datadog calcule une agrégation (une moyenne, une somme, un centile, etc.) en utilisant l'ensemble des logs inclus dans l'intervalle de temps ciblé.
@@ -156,8 +137,6 @@ Datadog calcule une agrégation (une moyenne, une somme, un centile, etc.) en ut
 Illustrons ceci sur une chronologie à barres fictive, où chaque barre représente un intervalle de temps. Dans cet exemple, Datadog crée une agrégation pour chaque intervalle de temps de l'ensemble des logs. On constate que les événements de log ne sont pas toujours répartis uniformément dans le temps, de sorte que vous ne pouvez pas nécessairement créer des agrégations pour le même nombre de logs.
 
 Dans l'exemple suivant, chaque point représente un événement de log. L'axe des abscisses correspond au timestamp du log, tandis que l'axe des ordonnées correspond à la valeur d'un attribut de durée transmis par les logs. La série temporelle affiche une agrégation selon les valeurs maximales. Datadog affiche une chronologie avec les paramètres de déploiement. Par exemple, il y a 4 barres pour l'intervalle de temps complet.
-
-{{< img src="logs/explorer/analytics/aggregation_howto.mp4" alt="exemple de top list" video="true"  >}}
 
 ## Pour aller plus loin
 

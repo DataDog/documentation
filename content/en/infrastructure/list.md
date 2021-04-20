@@ -18,9 +18,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list shows all your hosts monitored by Datadog with activity during the last 2 hours. Search your hosts, group them by tags, or sort the list by column headers.
-
-{{< img src="infrastructure/index/infrastructure_list.png" alt="Infrastructure list"  >}}
+The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last 2 hours. Search your hosts, or group them by tags.
 
 ## Hosts
 

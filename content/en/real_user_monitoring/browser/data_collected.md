@@ -118,7 +118,7 @@ In addition to default attributes, add user related data to all RUM event types 
 |------------|--------|----------------------------|
 | `session.time_spent` | number (ns) | Duration of the user session. |
 | `session.view.count`        | number      | Count of all views collected for this session. |
-| `session.error.count`      | number      | Count of all errors collected for this session.  |  
+| `session.error.count`      | number      | Count of all errors collected for this session.  |
 | `session.resource.count`         | number      | Count of all resources collected for this session. |
 | `session.action.count`      | number      | Count of all actions collected for this session. |
 | `session.long_task.count`      | number      | Count of all long tasks collected for this session. |
@@ -176,8 +176,11 @@ RUM view performance metrics are collected from both the [Paint Timing API][2] a
 | Metric                              | Type        | Decription                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
+| `view.largest_contentful_paint` | number (ns) | Moment in the page load timeline in which the largest DOM object in the viewport (i.e. visible on screen) is rendered.                                                                                                |
+| `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                             |
+| `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts happening.                                                                               |
 | `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info on how view loading time is collected][4]|
-| `view.first_contentful_paint` | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][5].                                                                                            |
+| `view.first_contentful_paint` | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][5].                                                                                            |
 | `view.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][6]                                                                                                               |
 | `view.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][7]. |
 | `view.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][8]                                                                             |
@@ -185,7 +188,7 @@ RUM view performance metrics are collected from both the [Paint Timing API][2] a
 | `view.error.count`            | number      | Count of all errors collected for this view.                                                                                                                                                                        |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
-| `view.action.count`      | number      | Count of all actions collected for this view.                                                                                     
+| `view.action.count`      | number      | Count of all actions collected for this view.
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [2]: https://www.w3.org/TR/paint-timing/
@@ -306,7 +309,7 @@ Once an interaction is detected, all new RUM events are attached to the ongoing 
 Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
 ### Custom user actions
-Custom user actions are user actions declared and sent manually via the [`addUserAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
+Custom user actions are user actions declared and sent manually via the [`addAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
 
 ### Action timing metrics
 

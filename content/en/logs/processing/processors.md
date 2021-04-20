@@ -16,15 +16,15 @@ further_reading:
 
 ## Overview
 
-{{< img src="logs/processing/processors/processors_overview.png" alt="original log" >}}
+{{< img src="logs/processing/processors/processing_overview.png" alt="Processors" >}}
 
-A [Processor][1] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][12], etc.) on a log.
+A [Processor][1] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
 
 **Note**: Structured logs should be shipped in a valid format. If the structure contains invalid characters for parsing, these should be stripped at the Agent level using the [mask_sequences][5] feature.
 
 As a best practice, it is recommended to use at most 20 Processors per Pipeline.
 
-## Grok Parser
+## Grok parser
 
 Create custom grok rules to parse the full message or [a specific attribute of your raw event][1]. For more information, see the [parsing section][3]. As a best practice, it is recommended to use at most 10 parsing rules within a grok Processor.
 
@@ -71,7 +71,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 {{% /tab %}}
 {{< /tabs >}}
 
-## Log Date Remapper
+## Log date remapper
 
 As Datadog receives logs, it timestamps them using the value(s) from any of these default attributes:
 
@@ -128,7 +128,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Date Remap
 {{% /tab %}}
 {{< /tabs >}}
 
-## Log Status Remapper
+## Log status remapper
 
 Use this Processor if you want to assign some attributes as the official status. For example, it can transform this log:
 
@@ -140,7 +140,7 @@ Into this log:
 
 Each incoming status value is mapped as follows:
 
-* Integers from 0 to 7 map to the [Syslog severity standards][4]
+* Integers from 0 to 7 map to the [Syslog severity standards][6]
 * Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
 * Strings beginning with **a** (case-insensitive) map to **alert (1)**
 * Strings beginning with **c** (case-insensitive) map to **critical (2)**
@@ -187,7 +187,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Status Rem
 {{% /tab %}}
 {{< /tabs >}}
 
-## Service Remapper
+## Service remapper
 
 Use this processor if you want to assign one or more attributes as the official service.
 
@@ -226,7 +226,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Re
 {{% /tab %}}
 {{< /tabs >}}
 
-## Log Message Remapper
+## Log message remapper
 
 The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define one or more attributes as the official log message.
 
@@ -243,7 +243,7 @@ Define the Log Message remapper processor in the [Datadog Log configuration page
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Datadog Log Pipeline API endpoint][1] with the following Log Message Remapper JSON payload:
+Use the [Datadog Log Pipeline API endpoint][1] with the following log message remapper JSON payload:
 
 ```json
 {
@@ -267,7 +267,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Message Re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tag to another target attribute or tag. It can transforms this log:
+The remapper processor remaps any source attribute(s) or tag to another target attribute or tag. It transforms this log:
 
 {{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribute pre remapping "  style="width:40%;">}}
 
@@ -275,7 +275,7 @@ Into this log:
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping "  style="width:40%;">}}
 
-Constraints on the tag/attribute name are explained in the [Tagging documentation][6]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
+Constraints on the tag/attribute name are explained in the [Tagging documentation][7]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
 
 If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept (note: The decimal separator for `Double` need to be `.`)
 
@@ -324,7 +324,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 {{% /tab %}}
 {{< /tabs >}}
 
-## URL Parser
+## URL parser
 
 This Processor extracts query parameters and other important parameters from a URL. When setup, the following attributes are produced:
 
@@ -407,17 +407,17 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent par
 {{% /tab %}}
 {{< /tabs >}}
 
-## Category Processor
+## Category processor
 
-Use the Category Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query.
+Use the category processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query.
 Use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
 
 **Note**:
 
-* The syntax of the query is the one of [Logs Explorer][7] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* The syntax of the query is the one of [Logs Explorer][8] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
-* Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper][8].
+* Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper][9].
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -476,7 +476,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
-* If you need to scale a unit of measure, see [Scale Filter][9].
+* If you need to scale a unit of measure, see [Scale Filter][10].
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -610,7 +610,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following string builder
 {{% /tab %}}
 {{< /tabs >}}
 
-## GeoIP Parser
+## GeoIP parser
 
 The GeoIP parser takes an IP address attribute and extracts if available the Continent, Country, Subdivision, and City information in the target attribute path.
 
@@ -655,16 +655,16 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Lookup Processor
+## Lookup processor
 
-Use the Lookup Processor to define a mapping between a log attribute and a human readable value saved in an [Enrichment Table (beta)][10] or the processors mapping table.
-For example, you can use the Lookup Processor to map an internal service ID into a human readable service name.
+Use the lookup processor to define a mapping between a log attribute and a human readable value saved in an [Enrichment Table (beta)][11] or the processors mapping table.
+For example, you can use the lookup processor to map an internal service ID into a human readable service name.
 Alternatively, you could also use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup Processor"  style="width:80%;">}}
+{{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup processor"  style="width:80%;">}}
 
 The processor performs the following actions:
 
@@ -708,11 +708,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 {{% /tab %}}
 {{< /tabs >}}
 
-## Trace Remapper
+## Trace remapper
 
 There are two ways to improve correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a Trace ID in the application logs][11] and by default log integrations take care of all the rest of the setup.
+1. Follow the documentation on [how to inject a Trace ID in the application logs][12] and by default log integrations take care of all the rest of the setup.
 
 2. Use the Trace remapper processor to define a log attribute as its associated trace ID.
 
@@ -756,12 +756,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [1]: /logs/processing/parsing/#advanced-settings
 [2]: /logs/processing/pipelines/
 [3]: /logs/processing/parsing/
-[4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[4]: /logs/processing/processors/?tab=ui#grok-parser
 [5]: https://docs.datadoghq.com/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
-[6]: /logs/guide/log-parsing-best-practice/
-[7]: /logs/search_syntax/
-[8]: /logs/processing/processors/?tab=ui#log-status-remapper
-[9]: /logs/processing/parsing/?tab=filter#matcher-and-filter
-[10]: /logs/guide/enrichment-tables/
-[11]: /tracing/connect_logs_and_traces/
-[12]: /logs/processing/processors/?tab=ui#grok-parser
+[6]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[7]: /logs/guide/log-parsing-best-practice/
+[8]: /logs/search_syntax/
+[9]: /logs/processing/processors/?tab=ui#log-status-remapper
+[10]: /logs/processing/parsing/?tab=filter#matcher-and-filter
+[11]: /logs/guide/enrichment-tables/
+[12]: /tracing/connect_logs_and_traces/

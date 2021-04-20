@@ -9,9 +9,11 @@ const common = require('./webpack.common.js');
 const prodConfig = (env) => merge(common(env), {
 	mode: 'production',
 
-	output: {
-		filename: '[name].[contenthash:5].js'
-	},
+  output: {
+      filename: ({ chunk: { name } }) => {
+          return name === 'dd-browser-logs-rum' ? '[name].js' : '[name].[contenthash:5].js';
+      }
+  },
 
 	optimization: {
 		minimizer: [

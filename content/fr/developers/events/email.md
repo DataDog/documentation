@@ -1,10 +1,10 @@
 ---
-title: Envoyer des événements par e-mail
+title: Envoi d'événements par e-mail
 kind: documentation
 aliases:
   - /fr/guides/eventsemail
 ---
-Si aucune [intégration Datadog][1] n'est disponible pour votre application et que vous ne souhaitez pas écrire de [check custom pour l'Agent][2], vous pouvez envoyer des événements par e-mail.
+Si aucune [intégration Datadog][1] n'est disponible pour votre application et que vous ne souhaitez pas créer de [check custom pour l'Agent][2], vous pouvez envoyer des événements par e-mail.
 
 ## Implémentation
 
@@ -12,11 +12,11 @@ Pour envoyer des événements par e-mail, vous devez disposer d'une adresse e-ma
 
 1. Connectez-vous à votre [compte Datadog][3].
 2. Depuis le menu **Integrations**, choisissez **APIs**.
-3. Développez l'option **Events API Emails**.
+3. Développez l'option **Events API emails**.
 4. Choisissez le format de vos messages à l'aide du menu déroulant **Format** (`Plain text` ou `JSON`).
-5. Cliquez sur le bouton **Create API Email**.
+5. Cliquez sur le bouton **Create API email**.
 
-La section **Events API Emails** affiche l'ensemble des adresses e-mail disponibles pour vos applications, ainsi que le créateur de chaque adresse.
+La section **Events API emails** affiche l'ensemble des adresses e-mail disponibles pour vos applications, ainsi que le créateur de chaque adresse.
 
 ## Envoi
 
@@ -29,9 +29,9 @@ Si vous êtes libre de configurer les e-mails envoyés par l'application comme b
 
 ### E-mail source {#e-mail-source-1}
 
-Les e-mails au format JSON vous offrent la possibilité de définir les champs suivants :
+Les e-mails au format JSON vous offrent la possibilité de définir les informations suivantes :
 
-* Adresse e-mail de l'expéditeur
+* L'adresse e-mail de l'expéditeur
 * Tous les arguments transmis par l’[API des événements Datadog][1]
 
 **Remarque** : si votre JSON n'est pas valide ou que votre e-mail est envoyé sans aucun objet, l'événement n'apparaîtra pas dans votre flux d'événements.
@@ -42,7 +42,7 @@ Avec un e-mail au format JSON, l'objet de l'e-mail n'apparaît pas dans l'évén
 
 {{< img src="developers/events/json-event.png" alt="événement json"  >}}
 
-**Remarque** : si vous testez l'e-mail avec un client de messagerie standard, le corps risque d'être converti en HTML. Le corps ne sera alors plus entièrement composé de JSON et l'e-mail sera ignoré.
+**Remarque** : si vous testez l'e-mail avec un client de messagerie standard, le corps risque d'être converti en HTML. Il ne sera alors plus entièrement composé de JSON et l'e-mail sera ignoré.
 
 [1]: /fr/api/v1/events/
 {{% /tab %}}
@@ -52,29 +52,27 @@ Si les possibilités de configuration des e-mails envoyés par une application s
 
 ### E-mail source {#e-mail-source-2}
 
-Les e-mails au format texte brut vous offrent la possibilité de définir les champs suivants :
+Les e-mails au format texte brut vous offrent la possibilité de définir les informations suivantes :
 
 | Champ                | Obligatoire | Description                     |
 |----------------------|----------|---------------------------------|
-| Sender's Email | Oui      | L'adresse e-mail de l'expéditeur |
+| Sender email address | Oui      | L'adresse e-mail de l'expéditeur |
 | Subject              | Oui      | L'objet de l'e-mail        |
-| Body                 | Non       | Le corps de l'e-mail           |
+| Body                 | Oui      | Le corps de l'e-mail           |
 
-L'e-mail ci-dessous est un exemple d'envoi valide :
+Par exemple, l'e-mail ci-dessous est un exemple d'envoi valide :
 
 ```text
-Sender's Email: matt@datadog.com
+Sender's email: matt@datadog.com
 Subject: Env:Test - System at 50% CPU - #test
 Body: This is a test message showing that env:test is at 50% CPU - #test
 ```
 
 ### Événement Datadog {#evenement-datadog-2}
 
-L'objet de l'e-mail devient le titre de l'événement, et le corps de l'e-mail devient le message de l'événement. L'expéditeur de l'e-mail apparaît à la fin de l'événement. Exemple d'événement envoyé au format texte brut :
+L'objet de l'e-mail devient le titre de l'événement, et le corps de l'e-mail devient le message de l'événement. L'expéditeur de l'e-mail apparaît à la fin de l'événement. Vous pouvez ajouter des tags à l'aide du caractère `#` dans le corps du message. Exemple d'événement envoyé au format texte brut :
 
 {{< img src="developers/events/plain-event.png" alt="événement en texte brut" >}}
-
-**Remarque** : bien qu'un tag semble apparaître à la fin du titre et du corps de l'événement, aucun de ces éléments ne contient de tag.
 
 {{% /tab %}}
 {{< /tabs >}}

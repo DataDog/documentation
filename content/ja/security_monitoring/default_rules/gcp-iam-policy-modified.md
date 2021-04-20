@@ -11,8 +11,6 @@ source: gcp
 title: GCP IAM ポリシーの変更
 type: security_rules
 ---
-## 概要
-
 ### 目標
 IAM ポリシーの変更を検出します。
 

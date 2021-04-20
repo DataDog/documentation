@@ -62,7 +62,7 @@ If you believe you've discovered a bug in Datadog's security, get in touch at [s
 
 ## Running as an unprivileged user
 
-By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][18].
+By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][18]. Note the `system-probe` and `security-agent` services are an exception to this, and still need to run as `root` on Linux and `LOCAL_SYSTEM` on Windows.
 
 ## Secrets management
 
@@ -79,9 +79,9 @@ For more information, see the [Secrets Management][20] documentation.
 [3]: /api/
 [4]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=d1402d39517b9f8888abfc98d6936dab
 [5]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=3e8510ce571008616b42bd67916e83f8
-[6]: https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
-[7]: https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-[8]: https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+[6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+[7]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+[8]: https://keys.datadoghq.com/DATADOG_RPM_KEY.public
 [9]: /agent/faq/network/
 [10]: /agent/proxy/
 [11]: /agent/troubleshooting/

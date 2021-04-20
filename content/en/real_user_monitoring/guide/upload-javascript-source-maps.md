@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     new webpack.SourceMapDevToolPlugin({
       noSources: false,
-      filename: '[name].[hash].js.map'
+      filename: '[name].[fullhash].js.map'
     }),
     // ...
   ],
@@ -110,7 +110,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 
 By running this command against our example `dist` directory (see previous section), Datadog will expect your server or your CDN to deliver the javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min`.js.  When an error occurs in a session of one of your users, the RUM SDK instantaneously collects it. Whenever the given error originated in a file that were downloaded from one of those urls and is also tagged with `version:v35.2395005` and `service:my-service`, the related source map will be used to deobfuscate the stack trace (in this case, the `javascript.464388.js.map` file).
 
-**Note**: Currently only source maps with the `.min.js` extension will work to correctly unminify stack traces in the Error Tracking UI. Source maps with other extensions (for example, `.mjs`, etc.) while accepted will not unminify stack traces. 
+**Note**: Only source maps with the `.js.map` extension work to correctly unminify stack traces in the error tracking UI. Source maps with other extensions, such as `.mjs.map`, are accepted but do not unminify stack traces.
 
 <div class="alert alert-info">A given JavaScript source file can be served from different subdomains depending on the environment (for example, staging or production). You can upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full url (specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).</div>
 

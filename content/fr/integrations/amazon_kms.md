@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez l'expiration de vos clés Amazon\_KMS."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_kms/'
+draft: false
 git_integration_title: amazon_kms
 has_logo: true
 integration_title: "Amazon\_Key\_Management\_Service"
@@ -27,7 +28,7 @@ AWS Key Management Service (KMS) est un service géré qui vous permet de créer
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de KMS.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

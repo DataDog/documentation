@@ -77,7 +77,7 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 ### Select alert conditions
 
 * Trigger when the metric is `above` or `above or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 24 hours.
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 48 hours.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 

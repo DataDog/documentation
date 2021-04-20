@@ -1,5 +1,5 @@
 ---
-title: OpenTracing and OpenTelemetry
+title: OpenTelemetry and OpenTracing
 kind: documentation
 description: 'Use open standards to generate your application traces'
 further_reading:
@@ -9,23 +9,20 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
   text: "Datadog's partnership with OpenTelemetry"
+- link: "/tracing/connect_logs_and_traces/opentelemetry"
+  tag: "Documentation"
+  text: "Connect OpenTelemetry Traces and Logs"
 aliases:
 
 
 ---
-Datadog supports a variety of open standards, including [OpenTracing][1] and [OpenTelemetry][2]. Each of the following languages has support for sending Open Tracing data to Datadog. They all also have support for sending OpenTelemetry data to Datadog via the [OpenTelemetry Collector Datadog exporter](#opentelemetry-collector-datadog-exporter). Additionally, Python, Ruby, and NodeJS have dedicated OpenTelemetry Datadog span exporters, which export traces from OpenTelemetry tracing clients to a Datadog Agent. 
-
-Click your language to see instructions for setting up OpenTracing or language-specific OpenTelemetry exporters. See below for setting up the [OpenTelemetry Collector Datadog exporter](#opentelemetry-collector-datadog-exporter):
-
-{{< partial name="apm/apm-opentracing.html" >}}
-
-<br>
+Datadog supports a variety of open standards, including [OpenTelemetry][1] and [OpenTracing][2].
 
 ## OpenTelemetry Collector Datadog exporter
 
-The OpenTelemetry Collector is a vendor-agnostic separate agent process for collecting and exporting telemetry data emitted by many processes. Datadog has [an exporter available within the OpenTelemetry Collector][3] to receive traces and metrics data from the OpenTelemetry SDKs, and to forward the data on to Datadog (without the Datadog Agent). It works with all supported languages. 
+The OpenTelemetry Collector is a vendor-agnostic separate agent process for collecting and exporting telemetry data emitted by many processes. Datadog has [an exporter available within the OpenTelemetry Collector][3] to receive traces and metrics data from the OpenTelemetry SDKs, and to forward the data on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs](#connect-opentelemetry-traces-and-logs).
 
-You can [deploy the OpenTelemetry Collector via any of the supported methods][4], and configure it by adding a `datadog` exporter to your [OpenTelemetry configuration YAML file][5] along with your [Datadog API key][6]:
+You can [deploy the OpenTelemetry Collector using any of the supported methods][4], and configure it by adding a `datadog` exporter to your [OpenTelemetry configuration YAML file][5] along with your [Datadog API key][6]:
 
 ```
 datadog:
@@ -40,7 +37,7 @@ datadog:
     site: datadoghq.eu
 ```
 
-On each OpenTelemetry-instrumented application, set the resource attributes `development.environment`, `service.name`, and `service.version` using [the language's SDK][2]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][7]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
+On each OpenTelemetry-instrumented application, set the resource attributes `development.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][7]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
 
 <!--- 1. Hostname set by another OpenTelemetry component -->
 1. Manually set hostname in configuration
@@ -290,12 +287,24 @@ spec:
 
 To see more information and additional examples of how you might configure your collector, see [the OpenTelemetry Collector configuration documentation][5].
 
+## Connect OpenTelemetry traces and logs
+
+To connect OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces, see [Connect OpenTelemetry Traces and Logs][17] for language specific instructions and example code.
+
+## Alternatives to the OpenTelemetry Collector Datadog exporter
+
+Datadog recommends you use the OpenTelemetry Collector Datadog exporter in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you:
+
+  - Each of the supported languages also has support for [sending OpenTracing data to Datadog][18].
+
+  - [Python][19], [Ruby][20], and [NodeJS][21] also have language-specific OpenTelemetry Datadog span exporters, which export traces directly from OpenTelemetry tracing clients to a Datadog Agent. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentracing.io/docs/
-[2]: https://opentelemetry.io/docs/
+[1]: https://opentelemetry.io/docs/
+[2]: https://opentracing.io/docs/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [4]: https://opentelemetry.io/docs/collector/getting-started/#deployment
 [5]: https://opentelemetry.io/docs/collector/configuration/
@@ -310,3 +319,8 @@ To see more information and additional examples of how you might configure your 
 [14]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-an-agent
 [15]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-a-standalone-collector
 [16]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/images/opentelemetry-service-deployment-models.png
+[17]: /tracing/connect_logs_and_traces/opentelemetry
+[18]: /tracing/setup_overview/open_standards/java
+[19]: /tracing/setup_overview/open_standards/python#opentelemetry
+[20]: /tracing/setup_overview/open_standards/ruby#opentelemetry
+[21]: /tracing/setup_overview/open_standards/nodejs#opentelemetry

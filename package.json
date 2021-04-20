@@ -4,6 +4,7 @@
     "description": "Datadog Docs built on HUGO",
     "private": true,
     "scripts": {
+        "algolia:config": "node ./local/bin/js/algolia-config.js",
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public",
         "start": "run-p start:**",

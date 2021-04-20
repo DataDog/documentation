@@ -11,21 +11,21 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - セキュリティ
-  - コンテナ
+  - security
+  - containers
   - 構成 & デプロイ
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md'
 display_name: open_policy_agent
-draft: true
+draft: false
 git_integration_title: open_policy_agent
 guid: 73fdfc40-51ea-11eb-ae93-0242ac130002
 integration_id: open-policy-agent
 integration_title: Open Policy Agent
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: ara.pulido@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: open_policy_agent.

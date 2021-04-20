@@ -1,6 +1,7 @@
 ---
 categories:
   - コラボレーション
+  - notification
 ddtype: crawler
 dependencies: []
 description: Microsoft Teams で Datadog アラートとイベントの通知を受信

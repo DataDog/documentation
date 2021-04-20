@@ -48,15 +48,15 @@
   },
 
   "email_support_sentence": {
-    "other": "Datadog サポートチームには、メール（<a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>）でお問い合わせいただけます。"
+    "other": "Datadog サポートチームには、メール（<a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>）でお問い合わせいただけます（すべてのサイト）"
   },
 
   "live_chat_support_sentence": {
-    "other": "また、月曜から金曜の 10:00 から 19:00 ET までは、アプリ内チャットまたは <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a> を使ってサポートチームにお問い合わせいただけます。"
+    "other": "また、月曜から金曜の 10:00 から 19:00 ET までは、アプリ内チャットまたは <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a> を使ってサポートチームにお問い合わせいただけます（アメリカ合衆国および EU）"
   },
 
   "event_stream_support_sentence": {
-    "other": "Datadog <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">イベントストリーム</a>のメッセージに <code>@support-datadog</code> を含めた場合は、サポートチームのチケットが作成されます。これは、グラフのスナップショットを参照する場合に便利です。"
+    "other": "Datadog <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">イベントストリーム</a>のメッセージに <code>@support-datadog</code> を含めた場合は、サポートチームのチケットが作成されます。これは、グラフのスナップショットを参照する場合に便利です（アメリカ合衆国および EU）"
   },
 
   "agent_started_sentence": {

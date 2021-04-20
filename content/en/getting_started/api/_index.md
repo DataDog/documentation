@@ -20,14 +20,16 @@ You have:
 - An active Datadog implementation.
 - Access to your Datadog [API and application keys][2].
 - Basic knowledge of API structure and JSON formatting.
+- A [free Postman account][3].
 
 ## Setup
 
 ### Import the Datadog collection into Postman
+</br>
 <div class="postman-run-button"
 data-postman-action="collection/import"
-data-postman-var-1="bf4ac0b68b8ff47419c1"
-data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFwaV9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="></div>
+data-postman-var-1="b82586cb783eb6f7cf6d"
+data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoidGV4dCJ9LHsia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
@@ -46,7 +48,7 @@ After the Postman collection is imported, a full list of available Datadog API c
 
 #### Authentication
 
-The collection includes a [Postman environment][3] called `Datadog Authentication`, where you add your Datadog API, and application keys for authentication.
+The collection includes a [Postman environment][4] called `Datadog Authentication`, where you add your Datadog API, and application keys for authentication.
 
 Follow these steps to set up your environment:
 
@@ -80,7 +82,7 @@ Follow these steps to update to the EU instance:
 
 ## Working with the collection
 
-After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder, there are subfolders for each type of API category listed in the [Datadog API Reference][4]. Expand the subfolders to see the HTTP methods and API call names.
+After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder, there are subfolders for each type of API category listed in the [Datadog API Reference][5]. Expand the subfolders to see the HTTP methods and API call names.
 
 ### Builder
 
@@ -96,7 +98,7 @@ When you click on the Endpoint name a description of the endpoint and all requir
 
 ### Params
 
-The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][5].
+The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][6].
 
 {{< img src="getting_started/postman/parameters.png" alt="postman_param"  style="width:70%;">}}
 
@@ -109,6 +111,7 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 
 [1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
-[4]: /api/v1/organizations/
-[5]: /api/
+[3]: https://identity.getpostman.com/signup
+[4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[5]: /api/v1/organizations/
+[6]: /api/

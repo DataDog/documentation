@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md'
 display_name: Longueur de file d'attente TCP
+draft: false
 git_integration_title: tcp_queue_length
 guid: 0468b098-43bd-4157-8a01-14065cfdcb7b
 integration_id: tcp-queue-length
@@ -20,7 +22,7 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: tcp_queue.
-metric_to_check: tcp_queue.rqueue.size
+metric_to_check: tcp_queue.read_buffer_max_usage_pct
 name: tcp_queue_length
 public_title: Intégration Datadog/Longueur de file d'attente TCP
 short_description: Suivez la taille de vos buffers TCP avec Datadog.
@@ -30,13 +32,13 @@ supported_os:
 ---
 ## Présentation
 
-Ce check surveille la taille des files d'attente de réception et d'envoi TCP Linux.
+Ce check surveille l'utilisation des files d'attente de réception et d'envoi TCP Linux. Il peut détecter lorsqu'une file d'attente de réception ou d'envoi TCP est pleine pour des conteneurs spécifiques.
 
 ## Configuration
 
 ### Installation
 
-`tcp_queue_length` est un check de base de l'Agent 6/7 qui fait appel à un programme eBPF implémenté dans `system-probe`.
+`tcp_queue_length` est un check de base de l'Agent v6 ou v7 qui fait appel à un programme eBPF implémenté dans `system-probe`. Vous devez utiliser la version 7.24.1/6.24.1 ou une version ultérieure de l'Agent.
 
 Le programme eBPF utilisé par `system-probe` est compilé au runtime. Vous devez avoir accès aux en-têtes de kernel appropriés.
 
@@ -48,7 +50,10 @@ apt install -y linux-headers-$(uname -r)
 Sur les distributions dérivées de RHEL, installez les en-têtes de kernel à l'aide de la commande suivante :
 ```sh
 yum install -y kernel-headers-$(uname -r)
+yum install -y kernel-devel-$(uname -r)
 ```
+
+**Remarque** : seules les versions 8 et ultérieur de CentOS/RHEL sont prises en charge.
 
 ### Configuration
 
@@ -57,15 +62,12 @@ Pour activer l'intégration `tcp_queue_length`, l'option de configuration doit �
 Dans le fichier de configuration `system-probe.yaml`, les paramètres suivants doivent être configurés :
 ```yaml
 system_probe_config:
-  enabled: true
   enable_tcp_queue_length: true
 ```
 
 1. Modifiez le fichier `tcp_queue_length.d/conf.yaml` dans le dossier `conf.d/` à la racine du
    répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance tcp_queue_length.
    Consultez le [fichier d'exemple tcp_queue_length.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
-
-    Le paramètre `only_count_nb_contexts` est activé par défaut et recueille uniquement le nombre de séries temporelles qu'il recueille normalement. Si ce paramètre est désactivé, le check recueille toutes les données, c'est-à-dire la taille des files d'attente TCP pour chaque connexion.
 
 2. [Redémarrez l'Agent][2].
 

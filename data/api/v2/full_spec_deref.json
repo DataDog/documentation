@@ -950,6 +950,11 @@
                           "description": "URL of the user's icon.",
                           "type": "string"
                         },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "name": {
                           "description": "Name of the user.",
                           "type": "string"
@@ -1181,6 +1186,11 @@
                   },
                   "icon": {
                     "description": "URL of the user's icon.",
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
                     "type": "string"
                   },
                   "name": {
@@ -1656,6 +1666,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -2164,6 +2179,11 @@
                           "description": "URL of the user's icon.",
                           "type": "string"
                         },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "name": {
                           "description": "Name of the user.",
                           "type": "string"
@@ -2486,6 +2506,11 @@
                   },
                   "icon": {
                     "description": "URL of the user's icon.",
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
                     "type": "string"
                   },
                   "name": {
@@ -2957,6 +2982,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3001,6 +3027,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3044,6 +3071,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3088,6 +3116,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3188,6 +3217,7 @@
               "integration_timeboard",
               "host_timeboard"
             ],
+            "example": "host_timeboard",
             "type": "string",
             "x-enum-varnames": [
               "CUSTOM_TIMEBOARD",
@@ -3226,6 +3256,7 @@
               "integration_timeboard",
               "host_timeboard"
             ],
+            "example": "host_timeboard",
             "type": "string",
             "x-enum-varnames": [
               "CUSTOM_TIMEBOARD",
@@ -3260,6 +3291,7 @@
               "integration_timeboard",
               "host_timeboard"
             ],
+            "example": "host_timeboard",
             "type": "string",
             "x-enum-varnames": [
               "CUSTOM_TIMEBOARD",
@@ -3361,6 +3393,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3418,6 +3451,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3462,6 +3496,7 @@
                     "integration_timeboard",
                     "host_timeboard"
                   ],
+                  "example": "host_timeboard",
                   "type": "string",
                   "x-enum-varnames": [
                     "CUSTOM_TIMEBOARD",
@@ -3492,6 +3527,7 @@
           "integration_timeboard",
           "host_timeboard"
         ],
+        "example": "host_timeboard",
         "type": "string",
         "x-enum-varnames": [
           "CUSTOM_TIMEBOARD",
@@ -5144,6 +5180,11 @@
                           "description": "URL of the user's icon.",
                           "type": "string"
                         },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "name": {
                           "description": "Name of the user.",
                           "type": "string"
@@ -6018,6 +6059,11 @@
                     "description": "URL of the user's icon.",
                     "type": "string"
                   },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
+                    "type": "string"
+                  },
                   "name": {
                     "description": "Name of the user.",
                     "type": "string"
@@ -6723,6 +6769,11 @@
                     "description": "URL of the user's icon.",
                     "type": "string"
                   },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
+                    "type": "string"
+                  },
                   "name": {
                     "description": "Name of the user.",
                     "type": "string"
@@ -7162,6 +7213,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -7664,7 +7720,6 @@
           }
         },
         "required": [
-          "id",
           "type"
         ],
         "type": "object"
@@ -7787,7 +7842,6 @@
               }
             },
             "required": [
-              "id",
               "type"
             ],
             "type": "object"
@@ -7970,6 +8024,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -8491,6 +8550,11 @@
                     "description": "URL of the user's icon.",
                     "type": "string"
                   },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
+                    "type": "string"
+                  },
                   "name": {
                     "description": "Name of the user.",
                     "type": "string"
@@ -8926,6 +8990,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -9424,7 +9493,6 @@
           }
         },
         "required": [
-          "id",
           "type"
         ],
         "type": "object"
@@ -9547,7 +9615,6 @@
               }
             },
             "required": [
-              "id",
               "type"
             ],
             "type": "object"
@@ -9729,6 +9796,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -11835,6 +11907,11 @@
                           "description": "URL of the user's icon.",
                           "type": "string"
                         },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
+                          "type": "string"
+                        },
                         "name": {
                           "description": "Name of the user.",
                           "type": "string"
@@ -12199,6 +12276,11 @@
                         },
                         "icon": {
                           "description": "URL of the user's icon.",
+                          "type": "string"
+                        },
+                        "modified_at": {
+                          "description": "Time that the user was last modified.",
+                          "format": "date-time",
                           "type": "string"
                         },
                         "name": {
@@ -17428,6 +17510,246 @@
         },
         "type": "object"
       },
+      "MetricAllTags": {
+        "description": "Object for a single metric's indexed tags.",
+        "properties": {
+          "attributes": {
+            "description": "Object containing the definition of a metric's tags.",
+            "properties": {
+              "tags": {
+                "description": "List of indexed tag value pairs.",
+                "example": [
+                  "sport:golf",
+                  "sport:football",
+                  "animal:dog"
+                ],
+                "items": {
+                  "description": "Tag key-value pairs.",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The metric name for this resource.",
+            "example": "test.metric.latency",
+            "type": "string"
+          },
+          "type": {
+            "default": "metrics",
+            "description": "The metric resource type.",
+            "enum": [
+              "metrics"
+            ],
+            "example": "metrics",
+            "type": "string",
+            "x-enum-varnames": [
+              "METRICS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "MetricAllTagsAttributes": {
+        "description": "Object containing the definition of a metric's tags.",
+        "properties": {
+          "tags": {
+            "description": "List of indexed tag value pairs.",
+            "example": [
+              "sport:golf",
+              "sport:football",
+              "animal:dog"
+            ],
+            "items": {
+              "description": "Tag key-value pairs.",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "MetricAllTagsResponse": {
+        "description": "Response object that includes a single metric's indexed tags.",
+        "properties": {
+          "data": {
+            "description": "Object for a single metric's indexed tags.",
+            "properties": {
+              "attributes": {
+                "description": "Object containing the definition of a metric's tags.",
+                "properties": {
+                  "tags": {
+                    "description": "List of indexed tag value pairs.",
+                    "example": [
+                      "sport:golf",
+                      "sport:football",
+                      "animal:dog"
+                    ],
+                    "items": {
+                      "description": "Tag key-value pairs.",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The metric name for this resource.",
+                "example": "test.metric.latency",
+                "type": "string"
+              },
+              "type": {
+                "default": "metrics",
+                "description": "The metric resource type.",
+                "enum": [
+                  "metrics"
+                ],
+                "example": "metrics",
+                "type": "string",
+                "x-enum-varnames": [
+                  "METRICS"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        },
+        "readOnly": true,
+        "type": "object"
+      },
+      "MetricDistinctVolume": {
+        "description": "Object for a single metric's distinct volume.",
+        "properties": {
+          "attributes": {
+            "description": "Object containing the definition of a metric's distinct volume.",
+            "properties": {
+              "distinct_volume": {
+                "description": "Distinct volume for the given metric.",
+                "example": 10,
+                "format": "int64",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The metric name for this resource.",
+            "example": "test.metric.latency",
+            "type": "string"
+          },
+          "type": {
+            "default": "distinct_metric_volumes",
+            "description": "The metric distinct volume type.",
+            "enum": [
+              "distinct_metric_volumes"
+            ],
+            "example": "distinct_metric_volumes",
+            "type": "string",
+            "x-enum-varnames": [
+              "DISTINCT_METRIC_VOLUMES"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "MetricDistinctVolumeAttributes": {
+        "description": "Object containing the definition of a metric's distinct volume.",
+        "properties": {
+          "distinct_volume": {
+            "description": "Distinct volume for the given metric.",
+            "example": 10,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "MetricDistinctVolumeType": {
+        "default": "distinct_metric_volumes",
+        "description": "The metric distinct volume type.",
+        "enum": [
+          "distinct_metric_volumes"
+        ],
+        "example": "distinct_metric_volumes",
+        "type": "string",
+        "x-enum-varnames": [
+          "DISTINCT_METRIC_VOLUMES"
+        ]
+      },
+      "MetricIngestedIndexedVolume": {
+        "description": "Object for a single metric's ingested and indexed volume.",
+        "properties": {
+          "attributes": {
+            "description": "Object containing the definition of a metric's ingested and indexed volume.",
+            "properties": {
+              "indexed_volume": {
+                "description": "Indexed volume for the given metric.",
+                "example": 10,
+                "format": "int64",
+                "type": "integer"
+              },
+              "ingested_volume": {
+                "description": "Ingested volume for the given metric.",
+                "example": 20,
+                "format": "int64",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The metric name for this resource.",
+            "example": "test.metric.latency",
+            "type": "string"
+          },
+          "type": {
+            "default": "metric_volumes",
+            "description": "The metric ingested and indexed volume type.",
+            "enum": [
+              "metric_volumes"
+            ],
+            "example": "metric_volumes",
+            "type": "string",
+            "x-enum-varnames": [
+              "METRIC_VOLUMES"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "MetricIngestedIndexedVolumeAttributes": {
+        "description": "Object containing the definition of a metric's ingested and indexed volume.",
+        "properties": {
+          "indexed_volume": {
+            "description": "Indexed volume for the given metric.",
+            "example": 10,
+            "format": "int64",
+            "type": "integer"
+          },
+          "ingested_volume": {
+            "description": "Ingested volume for the given metric.",
+            "example": 20,
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "MetricIngestedIndexedVolumeType": {
+        "default": "metric_volumes",
+        "description": "The metric ingested and indexed volume type.",
+        "enum": [
+          "metric_volumes"
+        ],
+        "example": "metric_volumes",
+        "type": "string",
+        "x-enum-varnames": [
+          "METRIC_VOLUMES"
+        ]
+      },
       "MetricName": {
         "description": "The metric name for this resource.",
         "example": "test.metric.latency",
@@ -18086,6 +18408,177 @@
         "x-enum-varnames": [
           "METRICS"
         ]
+      },
+      "MetricVolumes": {
+        "description": "Possible response objects for a metric's volume.",
+        "oneOf": [
+          {
+            "description": "Object for a single metric's distinct volume.",
+            "properties": {
+              "attributes": {
+                "description": "Object containing the definition of a metric's distinct volume.",
+                "properties": {
+                  "distinct_volume": {
+                    "description": "Distinct volume for the given metric.",
+                    "example": 10,
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The metric name for this resource.",
+                "example": "test.metric.latency",
+                "type": "string"
+              },
+              "type": {
+                "default": "distinct_metric_volumes",
+                "description": "The metric distinct volume type.",
+                "enum": [
+                  "distinct_metric_volumes"
+                ],
+                "example": "distinct_metric_volumes",
+                "type": "string",
+                "x-enum-varnames": [
+                  "DISTINCT_METRIC_VOLUMES"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          {
+            "description": "Object for a single metric's ingested and indexed volume.",
+            "properties": {
+              "attributes": {
+                "description": "Object containing the definition of a metric's ingested and indexed volume.",
+                "properties": {
+                  "indexed_volume": {
+                    "description": "Indexed volume for the given metric.",
+                    "example": 10,
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "ingested_volume": {
+                    "description": "Ingested volume for the given metric.",
+                    "example": 20,
+                    "format": "int64",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The metric name for this resource.",
+                "example": "test.metric.latency",
+                "type": "string"
+              },
+              "type": {
+                "default": "metric_volumes",
+                "description": "The metric ingested and indexed volume type.",
+                "enum": [
+                  "metric_volumes"
+                ],
+                "example": "metric_volumes",
+                "type": "string",
+                "x-enum-varnames": [
+                  "METRIC_VOLUMES"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "type": "object"
+      },
+      "MetricVolumesResponse": {
+        "description": "Response object which includes a single metric's volume.",
+        "properties": {
+          "data": {
+            "description": "Possible response objects for a metric's volume.",
+            "oneOf": [
+              {
+                "description": "Object for a single metric's distinct volume.",
+                "properties": {
+                  "attributes": {
+                    "description": "Object containing the definition of a metric's distinct volume.",
+                    "properties": {
+                      "distinct_volume": {
+                        "description": "Distinct volume for the given metric.",
+                        "example": 10,
+                        "format": "int64",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "id": {
+                    "description": "The metric name for this resource.",
+                    "example": "test.metric.latency",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "distinct_metric_volumes",
+                    "description": "The metric distinct volume type.",
+                    "enum": [
+                      "distinct_metric_volumes"
+                    ],
+                    "example": "distinct_metric_volumes",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "DISTINCT_METRIC_VOLUMES"
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "description": "Object for a single metric's ingested and indexed volume.",
+                "properties": {
+                  "attributes": {
+                    "description": "Object containing the definition of a metric's ingested and indexed volume.",
+                    "properties": {
+                      "indexed_volume": {
+                        "description": "Indexed volume for the given metric.",
+                        "example": 10,
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "ingested_volume": {
+                        "description": "Ingested volume for the given metric.",
+                        "example": 20,
+                        "format": "int64",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "id": {
+                    "description": "The metric name for this resource.",
+                    "example": "test.metric.latency",
+                    "type": "string"
+                  },
+                  "type": {
+                    "default": "metric_volumes",
+                    "description": "The metric ingested and indexed volume type.",
+                    "enum": [
+                      "metric_volumes"
+                    ],
+                    "example": "metric_volumes",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "METRIC_VOLUMES"
+                    ]
+                  }
+                },
+                "type": "object"
+              }
+            ],
+            "type": "object"
+          }
+        },
+        "readOnly": true,
+        "type": "object"
       },
       "MetricsAndMetricTagConfigurations": {
         "description": "Object for a metrics and metric tag configurations.",
@@ -21700,6 +22193,18 @@
                 "options": {
                   "description": "Options on rules.",
                   "properties": {
+                    "detectionMethod": {
+                      "description": "The detection method.",
+                      "enum": [
+                        "threshold",
+                        "new_value"
+                      ],
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "THRESHOLD",
+                        "NEW_VALUE"
+                      ]
+                    },
                     "evaluationWindow": {
                       "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                       "enum": [
@@ -21786,6 +22291,48 @@
                         "TWELVE_HOURS",
                         "ONE_DAY"
                       ]
+                    },
+                    "newValueOptions": {
+                      "description": "Options on new value rules.",
+                      "properties": {
+                        "forgetAfter": {
+                          "description": "The duration in days after which a learned value is forgotten.",
+                          "enum": [
+                            1,
+                            2,
+                            7,
+                            14,
+                            21,
+                            28
+                          ],
+                          "format": "int32",
+                          "type": "integer",
+                          "x-enum-varnames": [
+                            "ONE_DAY",
+                            "TWO_DAYS",
+                            "ONE_WEEK",
+                            "TWO_WEEKS",
+                            "THREE_WEEKS",
+                            "FOUR_WEEKS"
+                          ]
+                        },
+                        "learningDuration": {
+                          "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                          "enum": [
+                            0,
+                            1,
+                            7
+                          ],
+                          "format": "int32",
+                          "type": "integer",
+                          "x-enum-varnames": [
+                            "ZERO_DAYS",
+                            "ONE_DAY",
+                            "SEVEN_DAYS"
+                          ]
+                        }
+                      },
+                      "type": "object"
                     }
                   },
                   "type": "object"
@@ -21795,20 +22342,37 @@
                   "items": {
                     "description": "Query for matching rule.",
                     "properties": {
+                      "agentRule": {
+                        "description": "The Agent rule.",
+                        "properties": {
+                          "agentRuleId": {
+                            "description": "The Agent rule ID. Must be unique within the rule.",
+                            "example": "etc_shadow",
+                            "type": "string"
+                          },
+                          "expression": {
+                            "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
                       "aggregation": {
                         "description": "The aggregation type.",
                         "enum": [
                           "count",
                           "cardinality",
                           "sum",
-                          "max"
+                          "max",
+                          "new_value"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "COUNT",
                           "CARDINALITY",
                           "SUM",
-                          "MAX"
+                          "MAX",
+                          "NEW_VALUE"
                         ]
                       },
                       "distinctFields": {
@@ -22064,6 +22628,18 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "detectionMethod": {
+                "description": "The detection method.",
+                "enum": [
+                  "threshold",
+                  "new_value"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "THRESHOLD",
+                  "NEW_VALUE"
+                ]
+              },
               "evaluationWindow": {
                 "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                 "enum": [
@@ -22150,6 +22726,48 @@
                   "TWELVE_HOURS",
                   "ONE_DAY"
                 ]
+              },
+              "newValueOptions": {
+                "description": "Options on new value rules.",
+                "properties": {
+                  "forgetAfter": {
+                    "description": "The duration in days after which a learned value is forgotten.",
+                    "enum": [
+                      1,
+                      2,
+                      7,
+                      14,
+                      21,
+                      28
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ONE_DAY",
+                      "TWO_DAYS",
+                      "ONE_WEEK",
+                      "TWO_WEEKS",
+                      "THREE_WEEKS",
+                      "FOUR_WEEKS"
+                    ]
+                  },
+                  "learningDuration": {
+                    "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                    "enum": [
+                      0,
+                      1,
+                      7
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_DAYS",
+                      "ONE_DAY",
+                      "SEVEN_DAYS"
+                    ]
+                  }
+                },
+                "type": "object"
               }
             },
             "type": "object"
@@ -22160,20 +22778,37 @@
             "items": {
               "description": "Query for matching rule.",
               "properties": {
+                "agentRule": {
+                  "description": "The Agent rule.",
+                  "properties": {
+                    "agentRuleId": {
+                      "description": "The Agent rule ID. Must be unique within the rule.",
+                      "example": "etc_shadow",
+                      "type": "string"
+                    },
+                    "expression": {
+                      "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
                 "aggregation": {
                   "description": "The aggregation type.",
                   "enum": [
                     "count",
                     "cardinality",
                     "sum",
-                    "max"
+                    "max",
+                    "new_value"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
                     "COUNT",
                     "CARDINALITY",
                     "SUM",
-                    "MAX"
+                    "MAX",
+                    "NEW_VALUE"
                   ]
                 },
                 "distinctFields": {
@@ -22235,6 +22870,18 @@
           "message"
         ],
         "type": "object"
+      },
+      "SecurityMonitoringRuleDetectionMethod": {
+        "description": "The detection method.",
+        "enum": [
+          "threshold",
+          "new_value"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "THRESHOLD",
+          "NEW_VALUE"
+        ]
       },
       "SecurityMonitoringRuleEvaluationWindow": {
         "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
@@ -22323,9 +22970,99 @@
           "ONE_DAY"
         ]
       },
+      "SecurityMonitoringRuleNewValueOptions": {
+        "description": "Options on new value rules.",
+        "properties": {
+          "forgetAfter": {
+            "description": "The duration in days after which a learned value is forgotten.",
+            "enum": [
+              1,
+              2,
+              7,
+              14,
+              21,
+              28
+            ],
+            "format": "int32",
+            "type": "integer",
+            "x-enum-varnames": [
+              "ONE_DAY",
+              "TWO_DAYS",
+              "ONE_WEEK",
+              "TWO_WEEKS",
+              "THREE_WEEKS",
+              "FOUR_WEEKS"
+            ]
+          },
+          "learningDuration": {
+            "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+            "enum": [
+              0,
+              1,
+              7
+            ],
+            "format": "int32",
+            "type": "integer",
+            "x-enum-varnames": [
+              "ZERO_DAYS",
+              "ONE_DAY",
+              "SEVEN_DAYS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringRuleNewValueOptionsForgetAfter": {
+        "description": "The duration in days after which a learned value is forgotten.",
+        "enum": [
+          1,
+          2,
+          7,
+          14,
+          21,
+          28
+        ],
+        "format": "int32",
+        "type": "integer",
+        "x-enum-varnames": [
+          "ONE_DAY",
+          "TWO_DAYS",
+          "ONE_WEEK",
+          "TWO_WEEKS",
+          "THREE_WEEKS",
+          "FOUR_WEEKS"
+        ]
+      },
+      "SecurityMonitoringRuleNewValueOptionsLearningDuration": {
+        "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+        "enum": [
+          0,
+          1,
+          7
+        ],
+        "format": "int32",
+        "type": "integer",
+        "x-enum-varnames": [
+          "ZERO_DAYS",
+          "ONE_DAY",
+          "SEVEN_DAYS"
+        ]
+      },
       "SecurityMonitoringRuleOptions": {
         "description": "Options on rules.",
         "properties": {
+          "detectionMethod": {
+            "description": "The detection method.",
+            "enum": [
+              "threshold",
+              "new_value"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "THRESHOLD",
+              "NEW_VALUE"
+            ]
+          },
           "evaluationWindow": {
             "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
             "enum": [
@@ -22412,6 +23149,48 @@
               "TWELVE_HOURS",
               "ONE_DAY"
             ]
+          },
+          "newValueOptions": {
+            "description": "Options on new value rules.",
+            "properties": {
+              "forgetAfter": {
+                "description": "The duration in days after which a learned value is forgotten.",
+                "enum": [
+                  1,
+                  2,
+                  7,
+                  14,
+                  21,
+                  28
+                ],
+                "format": "int32",
+                "type": "integer",
+                "x-enum-varnames": [
+                  "ONE_DAY",
+                  "TWO_DAYS",
+                  "ONE_WEEK",
+                  "TWO_WEEKS",
+                  "THREE_WEEKS",
+                  "FOUR_WEEKS"
+                ]
+              },
+              "learningDuration": {
+                "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                "enum": [
+                  0,
+                  1,
+                  7
+                ],
+                "format": "int32",
+                "type": "integer",
+                "x-enum-varnames": [
+                  "ZERO_DAYS",
+                  "ONE_DAY",
+                  "SEVEN_DAYS"
+                ]
+              }
+            },
+            "type": "object"
           }
         },
         "type": "object"
@@ -22419,20 +23198,37 @@
       "SecurityMonitoringRuleQuery": {
         "description": "Query for matching rule.",
         "properties": {
+          "agentRule": {
+            "description": "The Agent rule.",
+            "properties": {
+              "agentRuleId": {
+                "description": "The Agent rule ID. Must be unique within the rule.",
+                "example": "etc_shadow",
+                "type": "string"
+              },
+              "expression": {
+                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
           "aggregation": {
             "description": "The aggregation type.",
             "enum": [
               "count",
               "cardinality",
               "sum",
-              "max"
+              "max",
+              "new_value"
             ],
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
               "CARDINALITY",
               "SUM",
-              "MAX"
+              "MAX",
+              "NEW_VALUE"
             ]
           },
           "distinctFields": {
@@ -22472,33 +23268,52 @@
           "count",
           "cardinality",
           "sum",
-          "max"
+          "max",
+          "new_value"
         ],
         "type": "string",
         "x-enum-varnames": [
           "COUNT",
           "CARDINALITY",
           "SUM",
-          "MAX"
+          "MAX",
+          "NEW_VALUE"
         ]
       },
       "SecurityMonitoringRuleQueryCreate": {
         "description": "Query for matching rule.",
         "properties": {
+          "agentRule": {
+            "description": "The Agent rule.",
+            "properties": {
+              "agentRuleId": {
+                "description": "The Agent rule ID. Must be unique within the rule.",
+                "example": "etc_shadow",
+                "type": "string"
+              },
+              "expression": {
+                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
           "aggregation": {
             "description": "The aggregation type.",
             "enum": [
               "count",
               "cardinality",
               "sum",
-              "max"
+              "max",
+              "new_value"
             ],
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
               "CARDINALITY",
               "SUM",
-              "MAX"
+              "MAX",
+              "NEW_VALUE"
             ]
           },
           "distinctFields": {
@@ -22646,6 +23461,18 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "detectionMethod": {
+                "description": "The detection method.",
+                "enum": [
+                  "threshold",
+                  "new_value"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "THRESHOLD",
+                  "NEW_VALUE"
+                ]
+              },
               "evaluationWindow": {
                 "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                 "enum": [
@@ -22732,6 +23559,48 @@
                   "TWELVE_HOURS",
                   "ONE_DAY"
                 ]
+              },
+              "newValueOptions": {
+                "description": "Options on new value rules.",
+                "properties": {
+                  "forgetAfter": {
+                    "description": "The duration in days after which a learned value is forgotten.",
+                    "enum": [
+                      1,
+                      2,
+                      7,
+                      14,
+                      21,
+                      28
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ONE_DAY",
+                      "TWO_DAYS",
+                      "ONE_WEEK",
+                      "TWO_WEEKS",
+                      "THREE_WEEKS",
+                      "FOUR_WEEKS"
+                    ]
+                  },
+                  "learningDuration": {
+                    "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                    "enum": [
+                      0,
+                      1,
+                      7
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_DAYS",
+                      "ONE_DAY",
+                      "SEVEN_DAYS"
+                    ]
+                  }
+                },
+                "type": "object"
               }
             },
             "type": "object"
@@ -22741,20 +23610,37 @@
             "items": {
               "description": "Query for matching rule.",
               "properties": {
+                "agentRule": {
+                  "description": "The Agent rule.",
+                  "properties": {
+                    "agentRuleId": {
+                      "description": "The Agent rule ID. Must be unique within the rule.",
+                      "example": "etc_shadow",
+                      "type": "string"
+                    },
+                    "expression": {
+                      "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
                 "aggregation": {
                   "description": "The aggregation type.",
                   "enum": [
                     "count",
                     "cardinality",
                     "sum",
-                    "max"
+                    "max",
+                    "new_value"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
                     "COUNT",
                     "CARDINALITY",
                     "SUM",
-                    "MAX"
+                    "MAX",
+                    "NEW_VALUE"
                   ]
                 },
                 "distinctFields": {
@@ -22911,6 +23797,18 @@
           "options": {
             "description": "Options on rules.",
             "properties": {
+              "detectionMethod": {
+                "description": "The detection method.",
+                "enum": [
+                  "threshold",
+                  "new_value"
+                ],
+                "type": "string",
+                "x-enum-varnames": [
+                  "THRESHOLD",
+                  "NEW_VALUE"
+                ]
+              },
               "evaluationWindow": {
                 "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                 "enum": [
@@ -22997,6 +23895,48 @@
                   "TWELVE_HOURS",
                   "ONE_DAY"
                 ]
+              },
+              "newValueOptions": {
+                "description": "Options on new value rules.",
+                "properties": {
+                  "forgetAfter": {
+                    "description": "The duration in days after which a learned value is forgotten.",
+                    "enum": [
+                      1,
+                      2,
+                      7,
+                      14,
+                      21,
+                      28
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ONE_DAY",
+                      "TWO_DAYS",
+                      "ONE_WEEK",
+                      "TWO_WEEKS",
+                      "THREE_WEEKS",
+                      "FOUR_WEEKS"
+                    ]
+                  },
+                  "learningDuration": {
+                    "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                    "enum": [
+                      0,
+                      1,
+                      7
+                    ],
+                    "format": "int32",
+                    "type": "integer",
+                    "x-enum-varnames": [
+                      "ZERO_DAYS",
+                      "ONE_DAY",
+                      "SEVEN_DAYS"
+                    ]
+                  }
+                },
+                "type": "object"
               }
             },
             "type": "object"
@@ -23006,20 +23946,37 @@
             "items": {
               "description": "Query for matching rule.",
               "properties": {
+                "agentRule": {
+                  "description": "The Agent rule.",
+                  "properties": {
+                    "agentRuleId": {
+                      "description": "The Agent rule ID. Must be unique within the rule.",
+                      "example": "etc_shadow",
+                      "type": "string"
+                    },
+                    "expression": {
+                      "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
                 "aggregation": {
                   "description": "The aggregation type.",
                   "enum": [
                     "count",
                     "cardinality",
                     "sum",
-                    "max"
+                    "max",
+                    "new_value"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
                     "COUNT",
                     "CARDINALITY",
                     "SUM",
-                    "MAX"
+                    "MAX",
+                    "NEW_VALUE"
                   ]
                 },
                 "distinctFields": {
@@ -23062,6 +24019,21 @@
               "type": "string"
             },
             "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityMonitoringRuntimeAgentRule": {
+        "description": "The Agent rule.",
+        "properties": {
+          "agentRuleId": {
+            "description": "The Agent rule ID. Must be unique within the rule.",
+            "example": "etc_shadow",
+            "type": "string"
+          },
+          "expression": {
+            "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+            "type": "string"
           }
         },
         "type": "object"
@@ -23351,6 +24323,11 @@
                 "description": "URL of the user's icon.",
                 "type": "string"
               },
+              "modified_at": {
+                "description": "Time that the user was last modified.",
+                "format": "date-time",
+                "type": "string"
+              },
               "name": {
                 "description": "Name of the user.",
                 "type": "string"
@@ -23568,6 +24545,11 @@
           },
           "icon": {
             "description": "URL of the user's icon.",
+            "type": "string"
+          },
+          "modified_at": {
+            "description": "Time that the user was last modified.",
+            "format": "date-time",
             "type": "string"
           },
           "name": {
@@ -24236,6 +25218,11 @@
                   },
                   "icon": {
                     "description": "URL of the user's icon.",
+                    "type": "string"
+                  },
+                  "modified_at": {
+                    "description": "Time that the user was last modified.",
+                    "format": "date-time",
                     "type": "string"
                   },
                   "name": {
@@ -25192,6 +26179,11 @@
                       "description": "URL of the user's icon.",
                       "type": "string"
                     },
+                    "modified_at": {
+                      "description": "Time that the user was last modified.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
                     "name": {
                       "description": "Name of the user.",
                       "type": "string"
@@ -25660,14 +26652,14 @@
         "in": "header",
         "name": "DD-API-KEY",
         "type": "apiKey",
-        "x-env-name": "DD_CLIENT_API_KEY"
+        "x-env-name": "DD_API_KEY"
       },
       "appKeyAuth": {
         "description": "Your Datadog APP Key.",
         "in": "header",
         "name": "DD-APPLICATION-KEY",
         "type": "apiKey",
-        "x-env-name": "DD_CLIENT_APP_KEY"
+        "x-env-name": "DD_APP_KEY"
       }
     }
   },
@@ -25973,6 +26965,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -26469,6 +27466,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -27034,6 +28036,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -27547,6 +28554,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -28054,6 +29066,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -28723,6 +29740,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -29323,6 +30345,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -29891,6 +30918,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -30495,6 +31527,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -31057,6 +32094,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -31482,6 +32524,7 @@
                             "integration_timeboard",
                             "host_timeboard"
                           ],
+                          "example": "host_timeboard",
                           "type": "string",
                           "x-enum-varnames": [
                             "CUSTOM_TIMEBOARD",
@@ -31535,6 +32578,7 @@
                               "integration_timeboard",
                               "host_timeboard"
                             ],
+                            "example": "host_timeboard",
                             "type": "string",
                             "x-enum-varnames": [
                               "CUSTOM_TIMEBOARD",
@@ -31749,6 +32793,7 @@
                               "integration_timeboard",
                               "host_timeboard"
                             ],
+                            "example": "host_timeboard",
                             "type": "string",
                             "x-enum-varnames": [
                               "CUSTOM_TIMEBOARD",
@@ -31887,6 +32932,7 @@
                             "integration_timeboard",
                             "host_timeboard"
                           ],
+                          "example": "host_timeboard",
                           "type": "string",
                           "x-enum-varnames": [
                             "CUSTOM_TIMEBOARD",
@@ -31940,6 +32986,7 @@
                               "integration_timeboard",
                               "host_timeboard"
                             ],
+                            "example": "host_timeboard",
                             "type": "string",
                             "x-enum-varnames": [
                               "CUSTOM_TIMEBOARD",
@@ -32090,6 +33137,7 @@
                             "integration_timeboard",
                             "host_timeboard"
                           ],
+                          "example": "host_timeboard",
                           "type": "string",
                           "x-enum-varnames": [
                             "CUSTOM_TIMEBOARD",
@@ -32143,6 +33191,7 @@
                               "integration_timeboard",
                               "host_timeboard"
                             ],
+                            "example": "host_timeboard",
                             "type": "string",
                             "x-enum-varnames": [
                               "CUSTOM_TIMEBOARD",
@@ -32914,6 +33963,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -33999,6 +35053,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -34985,6 +36044,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -36209,6 +37273,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -43236,6 +44305,27 @@
             "schema": {
               "type": "boolean"
             }
+          },
+          {
+            "description": "Filter metrics that have been submitted with the given tags. Supports boolean and wildcard expressions.\nCannot be combined with other filters.",
+            "example": "env IN (staging,test) AND service:web",
+            "in": "query",
+            "name": "filter[tags]",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of seconds of look back (from now) to apply to a filter[tag] query.\nDefaults value is 3600 (1 hour), maximum value is 172,800 (2 days).",
+            "example": 3600,
+            "in": "query",
+            "name": "window[seconds]",
+            "required": false,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
           }
         ],
         "responses": {
@@ -43453,14 +44543,198 @@
             "description": "Too Many Requests"
           }
         },
-        "summary": "List Tag Configurations",
+        "summary": "List tag configurations",
         "tags": [
           "Metrics"
         ],
         "x-undo": {
           "type": "safe"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+      }
+    },
+    "/api/v2/metrics/{metric_name}/all-tags": {
+      "get": {
+        "description": "View indexed tag key-value pairs for a given metric name.",
+        "operationId": "ListTagsByMetricName",
+        "parameters": [
+          {
+            "description": "The name of the metric.",
+            "example": "dist.http.endpoint.request",
+            "in": "path",
+            "name": "metric_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object that includes a single metric's indexed tags.",
+                  "properties": {
+                    "data": {
+                      "description": "Object for a single metric's indexed tags.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Object containing the definition of a metric's tags.",
+                          "properties": {
+                            "tags": {
+                              "description": "List of indexed tag value pairs.",
+                              "example": [
+                                "sport:golf",
+                                "sport:football",
+                                "animal:dog"
+                              ],
+                              "items": {
+                                "description": "Tag key-value pairs.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The metric name for this resource.",
+                          "example": "test.metric.latency",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "metrics",
+                          "description": "The metric resource type.",
+                          "enum": [
+                            "metrics"
+                          ],
+                          "example": "metrics",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "METRICS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "readOnly": true,
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          }
+        },
+        "summary": "List tags by metric name",
+        "tags": [
+          "Metrics"
+        ],
+        "x-undo": {
+          "type": "safe"
+        },
+        "x-unstable": "**Note: This endpoint is in public beta. If you have any feedback,\ncontact [Datadog support](https://docs.datadoghq.com/help/).**"
       }
     },
     "/api/v2/metrics/{metric_name}/tags": {
@@ -43559,14 +44833,14 @@
             "description": "Too Many Requests"
           }
         },
-        "summary": "Delete a Tag Configuration",
+        "summary": "Delete a tag configuration",
         "tags": [
           "Metrics"
         ],
         "x-undo": {
           "type": "idempotent"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "get": {
         "description": "Returns the tag configuration for the given metric name.",
@@ -43761,17 +45035,17 @@
             "description": "Too Many Requests"
           }
         },
-        "summary": "List Tag Configuration by Name",
+        "summary": "List tag configuration by name",
         "tags": [
           "Metrics"
         ],
         "x-undo": {
           "type": "safe"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "patch": {
-        "description": "Update the tag configuration of a metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
+        "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric. Can only be used with\napplication keys from users with the `Manage Tags for Metrics` permission.",
         "operationId": "UpdateTagConfiguration",
         "parameters": [
           {
@@ -44067,7 +45341,7 @@
             "description": "Too Many Requests"
           }
         },
-        "summary": "Update a Tag Configuration",
+        "summary": "Update a tag configuration",
         "tags": [
           "Metrics"
         ],
@@ -44075,10 +45349,10 @@
         "x-undo": {
           "type": "idempotent"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "post": {
-        "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+        "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
         "operationId": "CreateTagConfiguration",
         "parameters": [
           {
@@ -44395,7 +45669,7 @@
             "description": "Too Many Requests"
           }
         },
-        "summary": "Create a Tag Configuration",
+        "summary": "Create a tag configuration",
         "tags": [
           "Metrics"
         ],
@@ -44425,7 +45699,231 @@
           ],
           "type": "unsafe"
         },
-        "x-unstable": "**Note: This endpoint is in public beta and is only accessible for customers who have Metrics Without Limits&trade;.\nIf you’re interested in this feature, please contact your Customer Support Manager.**"
+        "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
+      }
+    },
+    "/api/v2/metrics/{metric_name}/volumes": {
+      "get": {
+        "description": "View distinct metrics volumes for the given metric name.\n\nCustom distribution metrics will return both ingested and indexed custom metric volumes.\nFor Metrics without Limits&trade; beta customers, all metrics will return both ingested/indexed volumes.\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+        "operationId": "ListVolumesByMetricName",
+        "parameters": [
+          {
+            "description": "The name of the metric.",
+            "example": "dist.http.endpoint.request",
+            "in": "path",
+            "name": "metric_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object which includes a single metric's volume.",
+                  "properties": {
+                    "data": {
+                      "description": "Possible response objects for a metric's volume.",
+                      "oneOf": [
+                        {
+                          "description": "Object for a single metric's distinct volume.",
+                          "properties": {
+                            "attributes": {
+                              "description": "Object containing the definition of a metric's distinct volume.",
+                              "properties": {
+                                "distinct_volume": {
+                                  "description": "Distinct volume for the given metric.",
+                                  "example": 10,
+                                  "format": "int64",
+                                  "type": "integer"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "id": {
+                              "description": "The metric name for this resource.",
+                              "example": "test.metric.latency",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "distinct_metric_volumes",
+                              "description": "The metric distinct volume type.",
+                              "enum": [
+                                "distinct_metric_volumes"
+                              ],
+                              "example": "distinct_metric_volumes",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "DISTINCT_METRIC_VOLUMES"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        {
+                          "description": "Object for a single metric's ingested and indexed volume.",
+                          "properties": {
+                            "attributes": {
+                              "description": "Object containing the definition of a metric's ingested and indexed volume.",
+                              "properties": {
+                                "indexed_volume": {
+                                  "description": "Indexed volume for the given metric.",
+                                  "example": 10,
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "ingested_volume": {
+                                  "description": "Ingested volume for the given metric.",
+                                  "example": 20,
+                                  "format": "int64",
+                                  "type": "integer"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "id": {
+                              "description": "The metric name for this resource.",
+                              "example": "test.metric.latency",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "metric_volumes",
+                              "description": "The metric ingested and indexed volume type.",
+                              "enum": [
+                                "metric_volumes"
+                              ],
+                              "example": "metric_volumes",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "METRIC_VOLUMES"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        }
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "readOnly": true,
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          }
+        },
+        "summary": "List distinct metric volumes by metric name",
+        "tags": [
+          "Metrics"
+        ],
+        "x-undo": {
+          "type": "safe"
+        },
+        "x-unstable": "**Note: This endpoint is in public beta. If you have any feedback,\ncontact [Datadog support](https://docs.datadoghq.com/help/).**"
       }
     },
     "/api/v2/permissions": {
@@ -46602,6 +48100,11 @@
                                 "description": "URL of the user's icon.",
                                 "type": "string"
                               },
+                              "modified_at": {
+                                "description": "Time that the user was last modified.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
                               "name": {
                                 "description": "Name of the user.",
                                 "type": "string"
@@ -47231,6 +48734,11 @@
                                 "description": "URL of the user's icon.",
                                 "type": "string"
                               },
+                              "modified_at": {
+                                "description": "Time that the user was last modified.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
                               "name": {
                                 "description": "Name of the user.",
                                 "type": "string"
@@ -47834,6 +49342,11 @@
                               },
                               "icon": {
                                 "description": "URL of the user's icon.",
+                                "type": "string"
+                              },
+                              "modified_at": {
+                                "description": "Time that the user was last modified.",
+                                "format": "date-time",
                                 "type": "string"
                               },
                               "name": {
@@ -48537,6 +50050,18 @@
                           "options": {
                             "description": "Options on rules.",
                             "properties": {
+                              "detectionMethod": {
+                                "description": "The detection method.",
+                                "enum": [
+                                  "threshold",
+                                  "new_value"
+                                ],
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "THRESHOLD",
+                                  "NEW_VALUE"
+                                ]
+                              },
                               "evaluationWindow": {
                                 "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                                 "enum": [
@@ -48623,6 +50148,48 @@
                                   "TWELVE_HOURS",
                                   "ONE_DAY"
                                 ]
+                              },
+                              "newValueOptions": {
+                                "description": "Options on new value rules.",
+                                "properties": {
+                                  "forgetAfter": {
+                                    "description": "The duration in days after which a learned value is forgotten.",
+                                    "enum": [
+                                      1,
+                                      2,
+                                      7,
+                                      14,
+                                      21,
+                                      28
+                                    ],
+                                    "format": "int32",
+                                    "type": "integer",
+                                    "x-enum-varnames": [
+                                      "ONE_DAY",
+                                      "TWO_DAYS",
+                                      "ONE_WEEK",
+                                      "TWO_WEEKS",
+                                      "THREE_WEEKS",
+                                      "FOUR_WEEKS"
+                                    ]
+                                  },
+                                  "learningDuration": {
+                                    "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                                    "enum": [
+                                      0,
+                                      1,
+                                      7
+                                    ],
+                                    "format": "int32",
+                                    "type": "integer",
+                                    "x-enum-varnames": [
+                                      "ZERO_DAYS",
+                                      "ONE_DAY",
+                                      "SEVEN_DAYS"
+                                    ]
+                                  }
+                                },
+                                "type": "object"
                               }
                             },
                             "type": "object"
@@ -48632,20 +50199,37 @@
                             "items": {
                               "description": "Query for matching rule.",
                               "properties": {
+                                "agentRule": {
+                                  "description": "The Agent rule.",
+                                  "properties": {
+                                    "agentRuleId": {
+                                      "description": "The Agent rule ID. Must be unique within the rule.",
+                                      "example": "etc_shadow",
+                                      "type": "string"
+                                    },
+                                    "expression": {
+                                      "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
                                 "aggregation": {
                                   "description": "The aggregation type.",
                                   "enum": [
                                     "count",
                                     "cardinality",
                                     "sum",
-                                    "max"
+                                    "max",
+                                    "new_value"
                                   ],
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "COUNT",
                                     "CARDINALITY",
                                     "SUM",
-                                    "MAX"
+                                    "MAX",
+                                    "NEW_VALUE"
                                   ]
                                 },
                                 "distinctFields": {
@@ -48862,6 +50446,18 @@
                   "options": {
                     "description": "Options on rules.",
                     "properties": {
+                      "detectionMethod": {
+                        "description": "The detection method.",
+                        "enum": [
+                          "threshold",
+                          "new_value"
+                        ],
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "THRESHOLD",
+                          "NEW_VALUE"
+                        ]
+                      },
                       "evaluationWindow": {
                         "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                         "enum": [
@@ -48948,6 +50544,48 @@
                           "TWELVE_HOURS",
                           "ONE_DAY"
                         ]
+                      },
+                      "newValueOptions": {
+                        "description": "Options on new value rules.",
+                        "properties": {
+                          "forgetAfter": {
+                            "description": "The duration in days after which a learned value is forgotten.",
+                            "enum": [
+                              1,
+                              2,
+                              7,
+                              14,
+                              21,
+                              28
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ONE_DAY",
+                              "TWO_DAYS",
+                              "ONE_WEEK",
+                              "TWO_WEEKS",
+                              "THREE_WEEKS",
+                              "FOUR_WEEKS"
+                            ]
+                          },
+                          "learningDuration": {
+                            "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                            "enum": [
+                              0,
+                              1,
+                              7
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ZERO_DAYS",
+                              "ONE_DAY",
+                              "SEVEN_DAYS"
+                            ]
+                          }
+                        },
+                        "type": "object"
                       }
                     },
                     "type": "object"
@@ -48958,20 +50596,37 @@
                     "items": {
                       "description": "Query for matching rule.",
                       "properties": {
+                        "agentRule": {
+                          "description": "The Agent rule.",
+                          "properties": {
+                            "agentRuleId": {
+                              "description": "The Agent rule ID. Must be unique within the rule.",
+                              "example": "etc_shadow",
+                              "type": "string"
+                            },
+                            "expression": {
+                              "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
                         "aggregation": {
                           "description": "The aggregation type.",
                           "enum": [
                             "count",
                             "cardinality",
                             "sum",
-                            "max"
+                            "max",
+                            "new_value"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "COUNT",
                             "CARDINALITY",
                             "SUM",
-                            "MAX"
+                            "MAX",
+                            "NEW_VALUE"
                           ]
                         },
                         "distinctFields": {
@@ -49152,6 +50807,18 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "detectionMethod": {
+                          "description": "The detection method.",
+                          "enum": [
+                            "threshold",
+                            "new_value"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "THRESHOLD",
+                            "NEW_VALUE"
+                          ]
+                        },
                         "evaluationWindow": {
                           "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                           "enum": [
@@ -49238,6 +50905,48 @@
                             "TWELVE_HOURS",
                             "ONE_DAY"
                           ]
+                        },
+                        "newValueOptions": {
+                          "description": "Options on new value rules.",
+                          "properties": {
+                            "forgetAfter": {
+                              "description": "The duration in days after which a learned value is forgotten.",
+                              "enum": [
+                                1,
+                                2,
+                                7,
+                                14,
+                                21,
+                                28
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ONE_DAY",
+                                "TWO_DAYS",
+                                "ONE_WEEK",
+                                "TWO_WEEKS",
+                                "THREE_WEEKS",
+                                "FOUR_WEEKS"
+                              ]
+                            },
+                            "learningDuration": {
+                              "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                              "enum": [
+                                0,
+                                1,
+                                7
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_DAYS",
+                                "ONE_DAY",
+                                "SEVEN_DAYS"
+                              ]
+                            }
+                          },
+                          "type": "object"
                         }
                       },
                       "type": "object"
@@ -49247,20 +50956,37 @@
                       "items": {
                         "description": "Query for matching rule.",
                         "properties": {
+                          "agentRule": {
+                            "description": "The Agent rule.",
+                            "properties": {
+                              "agentRuleId": {
+                                "description": "The Agent rule ID. Must be unique within the rule.",
+                                "example": "etc_shadow",
+                                "type": "string"
+                              },
+                              "expression": {
+                                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
                           "aggregation": {
                             "description": "The aggregation type.",
                             "enum": [
                               "count",
                               "cardinality",
                               "sum",
-                              "max"
+                              "max",
+                              "new_value"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
                               "COUNT",
                               "CARDINALITY",
                               "SUM",
-                              "MAX"
+                              "MAX",
+                              "NEW_VALUE"
                             ]
                           },
                           "distinctFields": {
@@ -49371,12 +51097,23 @@
           "Security Monitoring"
         ],
         "x-codegen-request-body-name": "body",
+        "x-given": {
+          "security_rule": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"name\": \"{{ unique }}\",\n  \"queries\": [{\n    \"query\": \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\": [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"filters\": [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n    \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\": {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\": true\n}"
+              }
+            ],
+            "step": "there is a valid \"security_rule\" in the system"
+          }
+        },
         "x-undo": {
           "operationId": "DeleteSecurityMonitoringRule",
           "parameters": [
             {
               "name": "rule_id",
-              "source": "data.id"
+              "source": "id"
             }
           ],
           "type": "unsafe"
@@ -49589,6 +51326,18 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "detectionMethod": {
+                          "description": "The detection method.",
+                          "enum": [
+                            "threshold",
+                            "new_value"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "THRESHOLD",
+                            "NEW_VALUE"
+                          ]
+                        },
                         "evaluationWindow": {
                           "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                           "enum": [
@@ -49675,6 +51424,48 @@
                             "TWELVE_HOURS",
                             "ONE_DAY"
                           ]
+                        },
+                        "newValueOptions": {
+                          "description": "Options on new value rules.",
+                          "properties": {
+                            "forgetAfter": {
+                              "description": "The duration in days after which a learned value is forgotten.",
+                              "enum": [
+                                1,
+                                2,
+                                7,
+                                14,
+                                21,
+                                28
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ONE_DAY",
+                                "TWO_DAYS",
+                                "ONE_WEEK",
+                                "TWO_WEEKS",
+                                "THREE_WEEKS",
+                                "FOUR_WEEKS"
+                              ]
+                            },
+                            "learningDuration": {
+                              "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                              "enum": [
+                                0,
+                                1,
+                                7
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_DAYS",
+                                "ONE_DAY",
+                                "SEVEN_DAYS"
+                              ]
+                            }
+                          },
+                          "type": "object"
                         }
                       },
                       "type": "object"
@@ -49684,20 +51475,37 @@
                       "items": {
                         "description": "Query for matching rule.",
                         "properties": {
+                          "agentRule": {
+                            "description": "The Agent rule.",
+                            "properties": {
+                              "agentRuleId": {
+                                "description": "The Agent rule ID. Must be unique within the rule.",
+                                "example": "etc_shadow",
+                                "type": "string"
+                              },
+                              "expression": {
+                                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
                           "aggregation": {
                             "description": "The aggregation type.",
                             "enum": [
                               "count",
                               "cardinality",
                               "sum",
-                              "max"
+                              "max",
+                              "new_value"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
                               "COUNT",
                               "CARDINALITY",
                               "SUM",
-                              "MAX"
+                              "MAX",
+                              "NEW_VALUE"
                             ]
                           },
                           "distinctFields": {
@@ -49891,6 +51699,18 @@
                   "options": {
                     "description": "Options on rules.",
                     "properties": {
+                      "detectionMethod": {
+                        "description": "The detection method.",
+                        "enum": [
+                          "threshold",
+                          "new_value"
+                        ],
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "THRESHOLD",
+                          "NEW_VALUE"
+                        ]
+                      },
                       "evaluationWindow": {
                         "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                         "enum": [
@@ -49977,6 +51797,48 @@
                           "TWELVE_HOURS",
                           "ONE_DAY"
                         ]
+                      },
+                      "newValueOptions": {
+                        "description": "Options on new value rules.",
+                        "properties": {
+                          "forgetAfter": {
+                            "description": "The duration in days after which a learned value is forgotten.",
+                            "enum": [
+                              1,
+                              2,
+                              7,
+                              14,
+                              21,
+                              28
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ONE_DAY",
+                              "TWO_DAYS",
+                              "ONE_WEEK",
+                              "TWO_WEEKS",
+                              "THREE_WEEKS",
+                              "FOUR_WEEKS"
+                            ]
+                          },
+                          "learningDuration": {
+                            "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                            "enum": [
+                              0,
+                              1,
+                              7
+                            ],
+                            "format": "int32",
+                            "type": "integer",
+                            "x-enum-varnames": [
+                              "ZERO_DAYS",
+                              "ONE_DAY",
+                              "SEVEN_DAYS"
+                            ]
+                          }
+                        },
+                        "type": "object"
                       }
                     },
                     "type": "object"
@@ -49986,20 +51848,37 @@
                     "items": {
                       "description": "Query for matching rule.",
                       "properties": {
+                        "agentRule": {
+                          "description": "The Agent rule.",
+                          "properties": {
+                            "agentRuleId": {
+                              "description": "The Agent rule ID. Must be unique within the rule.",
+                              "example": "etc_shadow",
+                              "type": "string"
+                            },
+                            "expression": {
+                              "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
                         "aggregation": {
                           "description": "The aggregation type.",
                           "enum": [
                             "count",
                             "cardinality",
                             "sum",
-                            "max"
+                            "max",
+                            "new_value"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "COUNT",
                             "CARDINALITY",
                             "SUM",
-                            "MAX"
+                            "MAX",
+                            "NEW_VALUE"
                           ]
                         },
                         "distinctFields": {
@@ -50164,6 +52043,18 @@
                     "options": {
                       "description": "Options on rules.",
                       "properties": {
+                        "detectionMethod": {
+                          "description": "The detection method.",
+                          "enum": [
+                            "threshold",
+                            "new_value"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "THRESHOLD",
+                            "NEW_VALUE"
+                          ]
+                        },
                         "evaluationWindow": {
                           "description": "A time window is specified to match when at least one of the cases matches true. This is a sliding window\nand evaluates in real time.",
                           "enum": [
@@ -50250,6 +52141,48 @@
                             "TWELVE_HOURS",
                             "ONE_DAY"
                           ]
+                        },
+                        "newValueOptions": {
+                          "description": "Options on new value rules.",
+                          "properties": {
+                            "forgetAfter": {
+                              "description": "The duration in days after which a learned value is forgotten.",
+                              "enum": [
+                                1,
+                                2,
+                                7,
+                                14,
+                                21,
+                                28
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ONE_DAY",
+                                "TWO_DAYS",
+                                "ONE_WEEK",
+                                "TWO_WEEKS",
+                                "THREE_WEEKS",
+                                "FOUR_WEEKS"
+                              ]
+                            },
+                            "learningDuration": {
+                              "description": "The duration in days during which values are learned, and after which signals will be generated for values that\nweren't learned. If set to 0, a signal will be generated for all new values after the first value is learned.",
+                              "enum": [
+                                0,
+                                1,
+                                7
+                              ],
+                              "format": "int32",
+                              "type": "integer",
+                              "x-enum-varnames": [
+                                "ZERO_DAYS",
+                                "ONE_DAY",
+                                "SEVEN_DAYS"
+                              ]
+                            }
+                          },
+                          "type": "object"
                         }
                       },
                       "type": "object"
@@ -50259,20 +52192,37 @@
                       "items": {
                         "description": "Query for matching rule.",
                         "properties": {
+                          "agentRule": {
+                            "description": "The Agent rule.",
+                            "properties": {
+                              "agentRuleId": {
+                                "description": "The Agent rule ID. Must be unique within the rule.",
+                                "example": "etc_shadow",
+                                "type": "string"
+                              },
+                              "expression": {
+                                "description": "A Runtime Security expression determines what activity should be collected by the Datadog Agent.\nThese logical expressions can use predefined operators and attributes. Tags cannot be used in Runtime\nSecurity expressions. Instead, allow or deny based on tags under the advanced option.",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
                           "aggregation": {
                             "description": "The aggregation type.",
                             "enum": [
                               "count",
                               "cardinality",
                               "sum",
-                              "max"
+                              "max",
+                              "new_value"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
                               "COUNT",
                               "CARDINALITY",
                               "SUM",
-                              "MAX"
+                              "MAX",
+                              "NEW_VALUE"
                             ]
                           },
                           "distinctFields": {
@@ -51171,6 +53121,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -51823,6 +53778,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -52493,6 +54453,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -52949,7 +54914,6 @@
                       }
                     },
                     "required": [
-                      "id",
                       "type"
                     ],
                     "type": "object"
@@ -53131,6 +55095,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -53685,6 +55654,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -54335,6 +56309,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -55001,6 +56980,11 @@
                                     "description": "URL of the user's icon.",
                                     "type": "string"
                                   },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "description": "Name of the user.",
                                     "type": "string"
@@ -55457,7 +57441,6 @@
                       }
                     },
                     "required": [
-                      "id",
                       "type"
                     ],
                     "type": "object"
@@ -55635,6 +57618,11 @@
                                   },
                                   "icon": {
                                     "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
                                     "type": "string"
                                   },
                                   "name": {
@@ -56436,6 +58424,11 @@
                                 "description": "URL of the user's icon.",
                                 "type": "string"
                               },
+                              "modified_at": {
+                                "description": "Time that the user was last modified.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
                               "name": {
                                 "description": "Name of the user.",
                                 "type": "string"
@@ -57085,6 +59078,11 @@
                               "description": "URL of the user's icon.",
                               "type": "string"
                             },
+                            "modified_at": {
+                              "description": "Time that the user was last modified.",
+                              "format": "date-time",
+                              "type": "string"
+                            },
                             "name": {
                               "description": "Name of the user.",
                               "type": "string"
@@ -57574,7 +59572,7 @@
             "parameters": [
               {
                 "name": "body",
-                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{ unique }}@datadoghq.com\"\n     },\n     \"type\": \"users\"\n  }\n}"
+                "value": "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{ unique }}@datadoghq.com\",\n      \"title\": \"user title\"\n     },\n     \"type\": \"users\"\n  }\n}"
               }
             ],
             "step": "there is a valid \"user\" in the system"
@@ -57717,6 +59715,11 @@
                             },
                             "icon": {
                               "description": "URL of the user's icon.",
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Time that the user was last modified.",
+                              "format": "date-time",
                               "type": "string"
                             },
                             "name": {
@@ -58317,6 +60320,11 @@
                               "description": "URL of the user's icon.",
                               "type": "string"
                             },
+                            "modified_at": {
+                              "description": "Time that the user was last modified.",
+                              "format": "date-time",
+                              "type": "string"
+                            },
                             "name": {
                               "description": "Name of the user.",
                               "type": "string"
@@ -58903,6 +60911,11 @@
                             },
                             "icon": {
                               "description": "URL of the user's icon.",
+                              "type": "string"
+                            },
+                            "modified_at": {
+                              "description": "Time that the user was last modified.",
+                              "format": "date-time",
                               "type": "string"
                             },
                             "name": {
@@ -59564,6 +61577,7 @@
           "description": "The regional site for our customers.",
           "enum": [
             "datadoghq.com",
+            "us3.datadoghq.com",
             "datadoghq.eu",
             "ddog-gov.com"
           ]
@@ -59584,6 +61598,19 @@
         "protocol": {
           "default": "https",
           "description": "The protocol for accessing the API."
+        }
+      }
+    },
+    {
+      "url": "https://{subdomain}.{site}",
+      "variables": {
+        "site": {
+          "default": "datadoghq.com",
+          "description": "Any Datadog deployment."
+        },
+        "subdomain": {
+          "default": "api",
+          "description": "The subdomain where the API is deployed."
         }
       }
     }
@@ -59638,7 +61665,7 @@
       "name": "Logs Restriction Queries"
     },
     {
-      "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nDatadog has a soft limit of 100 timeseries per host\nwhere a timeseries is defined as a unique combination of metric name and tag.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.",
+      "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.",
       "name": "Metrics"
     },
     {

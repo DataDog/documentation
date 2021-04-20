@@ -41,7 +41,11 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 1. If you haven't already, set up the [Microsoft Azure integration][8] first.
 
-2. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][9].
+2. The extension only supports Azure App Service Web Apps. **Function Apps are not supported**.
+
+<div class="alert alert-warning">To be notified when a private beta is available for Function Apps or additional runtimes, <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">sign up here</a>.</div>
+
+3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][9].
 
     - .NET Framework 4.5 and later
     - .NET Core 2.1
@@ -50,7 +54,7 @@ The Datadog extension for Azure App Services provides additional monitoring capa
     - .NET Core 3.1
     - .NET 5
 
-3. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require a restart of your web app.
+4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
 **Note**: Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.
 
@@ -70,13 +74,13 @@ The Datadog extension for Azure App Services provides additional monitoring capa
     - Set `DD_SERVICE` to specify a service name (defaults to your web app name).
     - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your web app.
     - See a full list of [optional configuration variables][12].
-6. Click **Save** (this will restart your application).
-7. Stop your application: click **Stop**. This step is required, or the the install process will not complete.
+6. Click **Save** (this restarts your application).
+7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>
 8. Go to the Azure extensions page and select the Datadog APM extension.
     {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Datadog extension" >}}
 9. Accept the legal terms, click **OK**, and wait for the installation to complete. **Note**: the web app must be in a stopped state for this step to complete successfully.
-10. Start the main application: click **Start**.
-    {{< img src="infrastructure/serverless/azure_app_services/restart.png" alt="Stop and restart page" >}}
+10. Start the main application, click **Start**:
+    {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Start" >}}
 
 ### Application logging from Azure web apps
 

@@ -1,16 +1,18 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - security
   - log collection
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md'
 display_name: Lacework
+draft: false
 git_integration_title: lacework
 guid: 545f8c45-038b-41e5-ae13-8550c0ee563f
 integration_id: lacework
@@ -57,7 +59,7 @@ La configuration s'effectue en intégralité sur le dashboard de Lacework. Des i
      - Sélectionnez `com` si vous utilisez le site américain de Datadog.
      - Sélectionnez `eu` si vous utilisez le site européen de Datadog.
    - **API KEY** : saisissez votre [clé d'API Datadog][2].
-   - **Alert Security Level** : sélectionnez le niveau de sévérité minimum des logs transmis.
+   - **Alert Security Level** : sélectionnez le niveau de gravité minimum des logs transmis.
 
 ## Données collectées
 

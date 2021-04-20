@@ -5,7 +5,7 @@ further_reading:
 - link: "/docker/log"
   tag: "Documentation"
   text: "Logging with Docker"
-- link: "/agent/kubernetes/log"
+- link: "/agent/docker/log/?tab=containerinstallation"
   tag: "Documentation"
   text: "Logging with Kubernetes"
 - link: "https://www.datadoghq.com/blog/docker-logging/"
@@ -118,7 +118,7 @@ Your Agent’s Docker installation command should look like this:
 
 ```
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \

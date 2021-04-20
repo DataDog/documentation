@@ -240,6 +240,6 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 [1]: /ja/tracing/setup/envoy/
 [2]: /ja/tracing/setup/nginx/
 [3]: /ja/tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/install
+[4]: https://app.datadoghq.com/apm/docs
 [5]: /ja/tracing/send_traces/
 [6]: https://github.com/opentracing/opentracing-cpp

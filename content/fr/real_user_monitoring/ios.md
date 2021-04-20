@@ -6,8 +6,6 @@ description: Collectez des données RUM depuis vos applications iOS.
 kind: documentation
 title: Collecte de données RUM pour iOS
 ---
-<div class="alert alert-info">La collecte de données RUM pour iOS est en version bêta. Si vous avez des questions, contactez l'<a href="https://docs.datadoghq.com/help/" target="_blank">équipe d'assistance</a>.</div>
-
 Envoyez des [données Real User Monitoring][1] à Datadog à partir de vos applications iOS avec la [SDK RUM côté client `dd-sdk-ios` de Datadog][2]. Vous pourrez notamment :
 
 * obtenir une vue d'ensemble des performances et des données démographiques de votre application ;
@@ -23,7 +21,7 @@ Envoyez des [données Real User Monitoring][1] à Datadog à partir de vos appli
 
 Vous pouvez utiliser [CocoaPods][4] pour installer `dd-sdk-ios` :
 ```
-pod 'DatadogSDK', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :tag => '1.4.0-beta1'
+pod 'DatadogSDK'
 ```
 
 [4]: https://cocoapods.org/
@@ -33,7 +31,7 @@ pod 'DatadogSDK', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :tag => '
 
 Pour réaliser l'intégration du SDK grâce au [Swift Package Manager d'Apple][5], ajoutez ce qui suit en tant que dépendance à votre `Package.swift` :
 ```swift
-.package(url: "https://github.com/DataDog/dd-sdk-ios.git", .exact("1.4.0-beta1"))
+.package(url: "https://github.com/DataDog/dd-sdk-ios.git", .upToNextMajor(from: "1.0.0"))
 ```
 
 [5]: https://swift.org/package-manager/
@@ -43,7 +41,7 @@ Pour réaliser l'intégration du SDK grâce au [Swift Package Manager d'Apple][5
 
 Vous pouvez utiliser [Carthage][6] pour installer `dd-sdk-ios` :
 ```
-github "DataDog/dd-sdk-ios" "1.4.0-beta1"
+github "DataDog/dd-sdk-ios"
 ```
 
 [6]: https://github.com/Carthage/Carthage
@@ -59,6 +57,7 @@ github "DataDog/dd-sdk-ios" "1.4.0-beta1"
 ```swift
 Datadog.initialize(
     appContext: .init(),
+    trackingConsent: trackingConsent,
     configuration: Datadog.Configuration
         .builderUsing(
             rumApplicationID: "<id_application_rum>",
@@ -76,9 +75,10 @@ Datadog.initialize(
 ```swift
 Datadog.initialize(
     appContext: .init(),
+    trackingConsent: trackingConsent,
     configuration: Datadog.Configuration
         .builderUsing(
-            rumApplicationID: "<id_application_rum-id>",
+            rumApplicationID: "<id_application_rum>",
             clientToken: "<token_client>",
             environment: "<nom_environnement>"
         )
@@ -90,6 +90,19 @@ Datadog.initialize(
 
     {{% /tab %}}
     {{< /tabs >}}
+
+    Pour répondre aux exigences du RGPD, le SDK nécessite la valeur `trackingConsent` à son initialisation.
+    `trackingConsent` peut prendre l'une des valeurs suivantes :
+
+    - `.pending` : le SDK commence à recueillir et à regrouper les données, mais ne les envoie pas à Datadog. Le SDK attend d'obtenir la nouvelle valeur de consentement de suivi pour déterminer ce qu'il doit faire de ces données regroupées par lots.
+    - `.granted` : le SDK commence à recueillir les données et les envoie à Datadog.
+    - `.notGranted` : le SDK ne recueille aucune donnée. Les logs, traces et événements RUM ne sont pas envoyés à Datadog.
+
+    Pour modifier la valeur du consentement de suivi une fois le SDK lancé, utilisez l'appel d'API `Datadog.set(trackingConsent:)`.
+    Le SDK modifie son comportement en tenant compte de la nouvelle valeur. Par exemple, si le consentement de suivi actuel a pour valeur `.pending` :
+
+    - si la nouvelle valeur est `.granted`, le SDK enverra toutes les données actuelles et futures à Datadog ;
+    - si la nouvelle valeur est `.notGranted`, le SDK effacera toutes les données actuelles et ne recueillera pas les futures données.
 
 3. Configurez et enregistrez le monitor RUM. Cette opération, qui doit être effectuée une seule fois, s'effectue généralement dans le code `AppDelegate` de votre application :
 
@@ -110,17 +123,17 @@ Le SDK RUM offre deux méthodes d'instrumentation :
 
 ### Vues RUM
 
-Pour activer le suivi des vues RUM, utilisez l'option `.trackUIKitRUMViews(using:)` lors de la configuration du SDK :
+Pour activer le suivi des vues RUM, utilisez l'option `.trackUIKitRUMViews()` lors de la configuration du SDK :
 ```swift
 Datadog.Configuration
    .builderUsing(...)
-   .trackUIKitRUMViews(using: predicate)
+   .trackUIKitRUMViews()
    .build()
 
 Global.rum = RUMMonitor.initialize()
 ```
 
-Le type `predicate` doit être conforme au protocole `UIKitRUMViewsPredicate` :
+Pour personnaliser le suivi des vues RUM, utilisez `.trackUIKitRUMViews(using: predicate)` et implémentez vous-même le `predicate` qui respecte le protocole `UIKitRUMViewsPredicate` :
 ```swift
 public protocol UIKitRUMViewsPredicate {
     func rumView(for viewController: UIViewController) -> RUMView?
@@ -155,11 +168,11 @@ De cette façon, le SDK surveillera les requêtes envoyées depuis cette instanc
 
 ### Actions RUM
 
-Pour activer le suivi des actions RUM, utilisez l'option `.trackUIKitActions(_:)` lors de la configuration du SDK :
+Pour activer le suivi des actions RUM, utilisez l'option `.trackUIKitActions()` lors de la configuration du SDK :
 ```
 Datadog.Configuration
    .builderUsing(...)
-   .trackUIKitActions(true)
+   .trackUIKitActions()
    .build()
 
 Global.rum = RUMMonitor.initialize()
@@ -254,7 +267,7 @@ Exemple :
 }
 ```
 
-**Remarque** : lorsque vous utilisez `.startUserAction(type:name:)` et `.stopUserAction(type:)`. Cela est nécessaire pour que le SDK puisse faire correspondre le début d'une ressource à sa fin.
+**Remarque** : lorsque vous utilisez `.startUserAction(type:name:)` et `.stopUserAction(type:)`, l'action `type` doit être identique pour que le SDK puisse faire correspondre le début d'une ressource à sa fin.
 
 Pour en savoir plus et découvrir toutes les options disponibles, référez-vous aux commentaires de la documentation relative au code dans la classe `DDRUMMonitor`.
 
@@ -272,6 +285,51 @@ Global.rum.addError(message: "error message.")
 ```
 
 Pour en savoir plus et découvrir toutes les options disponibles, référez-vous aux commentaires de la documentation relative au code dans la classe `DDRUMMonitor`.
+
+## Nettoyage des données
+
+Pour modifier les attributs d'un événement RUM avant de l'envoyer à Datadog, ou pour ignorer complètement un événement, utilisez l'API Event Mapper lors de la configuration du SDK :
+```swift
+Datadog.Configuration
+    .builderUsing(...)
+    .setRUMViewEventMapper { viewEvent in 
+        return viewEvent
+    }
+    .setRUMErrorEventMapper { errorEvent in
+        return errorEvent
+    }
+    .setRUMResourceEventMapper { resourceEvent in
+        return resourceEvent
+    }
+    .setRUMActionEventMapper { actionEvent in
+        return actionEvent
+    }
+    .build()
+```
+Chaque mapper est une clôture Swift avec une signature `(T) -> T?`, où `T` est un type d'événement RUM concret. Cela permet de modifier des parties de l'événement avant son envoi. Par exemple, pour effacer des informations sensibles de l'`url` de la ressource RUM, vous pouvez implémenter une fonction `redacted(_:) -> String` personnalisée et l'utiliser dans `RUMResourceEventMapper` :
+```swift
+.setRUMResourceEventMapper { resourceEvent in
+    var resourceEvent = resourceEvent
+    resourceEvent.resource.url = redacted(resourceEvent.resource.url)
+    return resourceEvent
+}
+```
+Si le mapper d'action, de ressource ou d'erreur renvoie `nil`, l'événement est ignoré dans son intégralité et n'est donc pas envoyé à Datadog. La valeur renvoyée par le mapper d'événement de vue doit être différente de `nil`.
+
+Selon le type d'événement donné, seules certaines propriétés peuvent être mutées :
+
+| Type d'événement        | Clé d'attribut                     | Rôle                                     |
+|-------------------|-----------------------------------|-------------------------------------------------|
+| RUMViewEvent      | `viewEvent.view.name`             | Nom de la vue                                 |
+|                   | `viewEvent.view.url`              | URL de la vue                                 |
+| RUMActionEvent    | `actionEvent.action.target?.name` | Nom de l'action                              |
+|                   | `actionEvent.view.url`            | URL de la vue associée à cette action           |
+| RUMErrorEvent     | `errorEvent.error.message`        | Message d'erreur                                   |
+|                   | `errorEvent.error.stack`          | Stacktrace de l'erreur                         |
+|                   | `errorEvent.error.resource?.url`  | URL de la ressource concernée par l'erreur         |
+|                   | `errorEvent.view.url`             | URL de la vue associée à cette erreur            |
+| RUMResourceEvent  | `resourceEvent.resource.url`      | URL de la ressource                             |
+|                   | `resourceEvent.view.url`          | URL de la vue associée à cette ressource         |
 
 [1]: https://docs.datadoghq.com/fr/real_user_monitoring/data_collected/
 [2]: https://github.com/DataDog/dd-sdk-ios

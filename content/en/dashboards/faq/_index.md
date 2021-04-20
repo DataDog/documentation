@@ -32,7 +32,6 @@ aliases:
     {{< nextlink href="dashboards/faq/why-is-a-counter-metric-being-displayed-as-a-decimal-value" >}}Why is a counter metric being displayed as a decimal value?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/the-same-color-is-used-twice-in-my-graph" >}}The same color is used twice in my graph!{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same" >}}I'm switching between the sum/min/max/avg aggregators but the values look the same?{{< /nextlink >}}
-    {{< nextlink href="dashboards/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events" >}}When I query can I use wildcards in metric names and events?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/embeddable-graphs-with-template-variables" >}}Embeddable Graphs with Template Variables{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/historical-data" >}}Historical Data{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -1,5 +1,5 @@
 ---
-title: Writing a Custom Agent Check
+title: Custom Agent Check
 kind: documentation
 aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
@@ -26,7 +26,7 @@ For more information about how to write an integration, see [Creating New Integr
 
 First, ensure the [Agent][3] is properly installed. If you run into any issues during the setup, [contact Datadog support][4].
 
-**Note**: If you are running Agent v7+ your custom Agent check should be Python 3 compatible. Otherwise it should be Python 2.7+ compatible.
+**Note**: If you are running Agent v7+ your custom Agent check should be Python 3 compatible. Otherwise, it should be Python 2.7+ compatible.
 
 ## Custom Agent check
 

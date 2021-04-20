@@ -13,7 +13,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualize'
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -133,15 +133,12 @@ logs:
 
 ホストに Agent をインストールしなくても、アプリケーションから Datadog にログをストリーミングできます。ネイティブ接続管理を提供するため、Agent を使用してログを転送することをお勧めします。
 
-{{< tabs >}}
-{{% tab "Winston 3.0" %}}
-
-[Winston HTTP 転送][1]を使用して、[Datadog Log API][2] を介してログを直接送信します。
+[Winston HTTP 転送][4]を使用して、[Datadog Log API][5] を介してログを直接送信します。
 ブートストラップファイルまたはコード内のいずれかの場所で、次のようにロガーを宣言します。
 
 {{< site-region region="us" >}}
 
-```js
+```javascript
 const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
@@ -173,7 +170,7 @@ logger.info('Hello log with metas',{color: 'blue' });
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-```js
+```javascript
 const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
@@ -198,12 +195,10 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-{{< /site-region >}}
-
 [1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
 [2]: /ja/api/v1/logs/#send-logs
-{{% /tab %}}
-{{< /tabs >}}
+
+{{< /site-region >}}
 
 ## トラブルシューティング
 
@@ -226,3 +221,5 @@ logstash.on('error', function(err) {
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
 [3]: /ja/tracing/connect_logs_and_traces/nodejs/
+[4]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
+[5]: /ja/api/v1/logs/#send-logs

@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md'
 display_name: "OOM\_Kill"
+draft: false
 git_integration_title: oom_kill
 guid: 4b8e9c18-1a13-43b0-a03c-186eb3221147
 integration_id: oom-kill
@@ -49,7 +51,10 @@ apt install -y linux-headers-$(uname -r)
 Sur les distributions dérivées de RHEL, installez les en-têtes de kernel à l'aide de la commande suivante :
 ```sh
 yum install -y kernel-headers-$(uname -r)
+yum install -y kernel-devel-$(uname -r)
 ```
+
+**Remarque** : seules les versions 8 et ultérieures de CentOS/RHEL sont prises en charge.
 
 ### Configuration
 
@@ -57,21 +62,20 @@ yum install -y kernel-headers-$(uname -r)
 
     ```yaml
     system_probe_config:
-        enabled: true
         enable_oom_kill: true
     ```
 
-2. Assurez-vous que le fichier `oom_kill.d/conf.yaml` se trouve dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir des métriques OOM Kill.
+2. Vérifiez que le fichier `oom_kill.d/conf.yaml` figure bien dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos métriques OOM Kill. Consultez le [fichier d'exemple oom_kill.d/conf.yaml][2] découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][2].
+3. [Redémarrez l'Agent][3].
 
 ### Configuration avec Helm
 
-À l'aide du [chart Helm Datadog][3], vérifiez que les paramètres `datadog.systemProbe` et `datadog.systemProbe.enableOOMKill` sont activés dans le fichier `values.yaml`.
+À l'aide du [chart Helm Datadog][4], vérifiez que les paramètres `datadog.systemProbe` et `datadog.systemProbe.enableOOMKill` sont activés dans le fichier `values.yaml`.
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][4] et cherchez `oom_kill` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][5] et cherchez `oom_kill` dans la section Checks.
 
 ## Données collectées
 
@@ -89,11 +93,12 @@ Le check OOM Kill envoie un événement pour chaque OOM Kill. Celui-ci inclut l
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://github.com/helm/charts/tree/master/stable/datadog
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/oom_kill/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help/
+[2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/oom_kill.d/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/helm/charts/tree/master/stable/datadog
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/oom_kill/metadata.csv
+[7]: https://docs.datadoghq.com/fr/help/

@@ -51,9 +51,9 @@ Your chosen metric can be filtered by host or tag using the **from** dropdown to
 
 {{< img src="dashboards/querying/filter.png" alt="Graphing Filter"  style="width:75%;" >}}
 
-You can also use advanced filtering within the `from` dropdown to evaluate boolean filtered queries such as:
+You can also use [advanced filtering][11] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries such as:
 
-{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}}
+{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}} 
 
 To learn more about tags, refer to the [Tagging][6] documentation.
 
@@ -94,6 +94,8 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 Datadog also supports the ability to graph your metrics with various arithmetic operations. Use: `+`, `-`, `/`, and `*` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
+
+**Note**: Queries using commas are only supported in visualisations, they do not work on monitors. Use [boolean operators][12] or arithmetic operations to combine multiple metrics in a monitor.
 
 #### Metric arithmetic using an integer
 
@@ -164,3 +166,5 @@ View event correlations by using the **Event Overlays** section in the graphing 
 [8]: /dashboards/functions/rollup/
 [9]: /dashboards/functions/#apply-functions-optional
 [10]: /events/#event-query-language
+[11]: /metrics/advanced-filtering/
+[12]: /metrics/advanced-filtering/#boolean-filtered-queries
