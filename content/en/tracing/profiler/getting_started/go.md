@@ -2,7 +2,7 @@
 title: Getting Started
 kind: Documentation
 aliases:
-    - /tracing/profiling/getting_started/go
+    - /tracing/profiler/java
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 50
