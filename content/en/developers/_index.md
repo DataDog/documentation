@@ -12,13 +12,13 @@ further_reading:
 
 ## Overview
 
-The Developers section contains reference materials for developing for Datadog.
+The Developers section contains reference materials for developing on Datadog. You may want to develop on Datadog if there is data you want to see in the product that you are currently not seeing, or if you are a partner who knows they want to build on Datadog and contribute it to the Datadog Marketplace or to Integrations Extras. For more information about becoming a Datadog partner, see our [Partner program page][1].
 
 ## Data
 
 ### Unsupported
 
-Developers have several choices for sending unsupported data to Datadog. The main considerations are effort (time to develop) and budget (cost of custom metrics).
+Developers have several choices for sending unsupported data to Datadog. The main considerations are effort (time to develop) and budget (cost of custom metrics). Start by deciding which method you 
 
 | Type                | Effort | Custom Metrics | Language |
 |---------------------|--------|----------------|----------|
@@ -61,3 +61,5 @@ Developers have several choices for sending unsupported data to Datadog. The mai
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.datadoghq.com/partner/
