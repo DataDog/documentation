@@ -5,7 +5,7 @@ guides:
     link_text: ガイドを表示
     link: getting_started/agent/
   - title: インテグレーションをセットアップ
-    desc: 400 以上のインテグレーションを利用して、メトリクス、トレース、ログを収集できます。
+    desc: 450 以上のインテグレーションを利用して、メトリクス、トレース、ログを収集できます。
     link_text: ガイドを表示
     link: getting_started/integrations/
   - title: アプリで使用を開始
