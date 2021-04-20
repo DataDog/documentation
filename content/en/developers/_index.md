@@ -14,11 +14,9 @@ further_reading:
 
 The Developers section contains reference materials for developing on Datadog. You may want to develop on Datadog if there is data you want to see in the product that you are not seeing, or if you are a partner who wants to build on Datadog and contribute to the Datadog Marketplace or to Datadog's community integrations. For more information about becoming a Datadog partner, see the [Partner program page][1].
 
-## Data
-
 ### Should I write a custom check or an integration?
 
-Developers have several choices for sending unsupported data to Datadog. The main considerations are effort (time to develop) and budget (cost of custom metrics). If you are a Partner developing on Datadog Marketplace or community integrations, jump straight to the [Marketplace][2] and [building an integration][3] docs. If you are trying to see data that Datadog doesn't support, start by deciding which method makes the most sense to start sending data:
+Developers have several choices for sending unsupported data to Datadog. The main considerations are effort (time to develop) and budget (cost of custom metrics). If you are a Partner developing on Datadog Marketplace or community integrations, jump straight to the [Marketplace][2] and [building an integration][3] docs. If you are trying to see data that Datadog doesn't currently support, start by deciding which method makes the most sense to start sending data:
 
 | Type                | Effort | Custom Metrics | Language |
 |---------------------|--------|----------------|----------|
@@ -27,7 +25,7 @@ Developers have several choices for sending unsupported data to Datadog. The mai
 | Private integration | Medium | Yes            | Python   |
 | Public integration  | High   | No             | Python   |
 
-{{< whatsnext desc="Send unsupported metrics to Datadog:" >}}
+{{< whatsnext desc="Send your own metrics to Datadog:" >}}
     {{< nextlink href="/developers/dogstatsd" >}}<u>DogStatsD</u>: Overview of the features of DogStatsD, including setup, datagram format, and data submission.{{< /nextlink >}}
     {{< nextlink href="/developers/write_agent_check" >}}<u>Custom Agent Check</u>: Learn how to report metrics, events, and service checks with your own custom check.{{< /nextlink >}}
     {{< nextlink href="/developers/prometheus" >}}<u>Custom OpenMetrics Check</u>: Learn how to report your OpenMetrics with a dedicated custom Agent Check.{{< /nextlink >}}
