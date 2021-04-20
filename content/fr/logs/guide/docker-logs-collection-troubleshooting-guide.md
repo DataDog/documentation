@@ -32,7 +32,9 @@ Plusieurs problèmes courants peuvent survenir lors de l'envoi de nouveaux logs 
 
 4. Si le statut est semblable à celui de l'exemple ci-dessus mais que vous ne recevez toujours aucun log, consultez la section [Le statut de l'Agent de logging n'indique aucune erreur](#le-statut-de-l-agent-de-logging-n-indique-aucune-erreur)
 
-## Le statut de l'Agent de logging indique « not running »
+## Logs Agent
+
+### Statut not running
 
 Si la commande status de l'Agent renvoie le message suivant :
 
@@ -48,7 +50,7 @@ Cela signifie que le logging n'est pas activé dans l'Agent.
 
 Pour activer le logging avec l'Agent de conteneur, définissez la variable d'environnement suivante : `DD_LOGS_ENABLED=true`.
 
-## L'Agent de logging indique qu'aucun log n'a été traité ou envoyé
+### Aucun log traité ni envoyé
 
 Si le statut de l'Agent de logging ne renvoie aucune intégration et affiche le message `LogsProcessed: 0 and LogsSent: 0` :
 
@@ -66,7 +68,7 @@ Cela signifie que les logs sont activés, mais que les conteneurs à partir desq
 
 2. Pour configurer l'Agent de façon à ce qu'il collecte les logs des autres conteneurs, définissez la variable d'environnement `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` sur `true`.
 
-## L'Agent de logging indique « Status: Pending »
+### Statut pending
 
 Si le statut de l'Agent de logging indique `Status: Pending` :
 
@@ -85,11 +87,11 @@ Logs Agent
 
 Cela signifie que l'Agent de logging est en cours d'exécution, mais qu'il n'a pas encore commencé à recueillir les logs de conteneur. Plusieurs causes sont possibles :
 
-### Le daemon Docker a démarré après l'Agent de host
+#### Daemon Docker démarré après l'Agent de host
 
 Si vous utilisez une version < 7.17 de l'Agent et que le daemon Docker démarre alors que l'Agent de host est déjà en cours d'exécution, redémarrez l'Agent pour relancer la collecte de logs de conteneur.
 
-### Le socket Docker n'a pas été monté au démarrage de l'Agent de conteneur
+#### Socket Docker non monté
 
 Pour que l'Agent de conteneur puisse recueillir des logs à partir de conteneurs Docker, il doit avoir accès au socket Docker. Lorsqu'il ne dispose pas de cet accès, les logs suivants apparaissent dans `agent.log` :
 
@@ -101,26 +103,14 @@ Pour que l'Agent de conteneur puisse recueillir des logs à partir de conteneurs
 
 Relancez le conteneur de l'Agent avec l'option `-v /var/run/docker.sock:/var/run/docker.sock:ro` pour l'autoriser à accéder au socket Docker.
 
-### L'utilisateur « dd-agent » ne fait pas partie du groupe Docker (Agent de host uniquement)
+### Statut no errors
 
-Si vous utilisez l'Agent de host, l'utilisateur `dd-agent` doit être ajouté au groupe Docker pour lui accorder un accès en lecture au socket Docker. Si les logs d'erreur suivants apparaissent dans le fichier `agent.log` :
-
-```text
-2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | docker listener cannot start, will retry: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
-
-2019-10-11 09:17:56 UTC | CORE | ERROR | (pkg/autodiscovery/config_poller.go:123 in collect) | Unable to collect configurations from provider docker: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
-```
-
-Ajoutez l'Agent de host au groupe d'utilisateurs Docker en exécutant la commande suivante : `usermod -a -G docker dd-agent`.
-
-## Le statut de l'Agent de logging n'indique aucune erreur
-
-Si le statut de l'Agent de logging ressemble à celui de l'exemple donné dans [Vérifier le statut de l'Agent](#verifier-le-statut-de-l-agent) mais qu'aucun log n'est visible sur la plateforme Datadog, la cause est peut-être l'une des suivantes :
+Si vos logs ne sont pas transmis à la plate-forme Datadog alors que le statut de l'Agent de logs est semblable à l'exemple de la section [Vérifier le statut de l'Agent](#verifier-le-statut-de-l-agent), il est possible que l'une des situations suivantes s'applique :
 
 * Le port utilisé pour l'envoi de logs à Datadog (10516) est bloqué
 * Votre conteneur utilise un pilote de logging autre que celui attendu par l'Agent
 
-### Le trafic sortant du port 10516 est bloqué
+#### Le trafic sortant du port 10516 est bloqué
 
 L'Agent Datadog envoie ses logs à Datadog par TCP via le port 10516. Si cette connexion n'est pas disponible, les logs ne sont pas envoyés et une erreur est enregistrée dans le fichier `agent.log`.
 
@@ -132,12 +122,12 @@ Testez manuellement votre connexion en exécutant une commande telnet ou openssl
 Envoyez ensuite un log comme suit :
 
 ```text
-<CLÉ_API> this is a test message
+<CLÉ_API> Ceci est un message test
 ```
 
 Si vous ne pouvez pas ouvrir le port 10514 ou 10516, vous pouvez configurer l'Agent Datadog de façon à envoyer les logs via HTTPS en définissant la variable d'environnement `DD_LOGS_CONFIG_USE_HTTP` sur `true` :
 
-### Vos conteneurs n'utilisent pas le pilote de logging JSON
+#### Vos conteneurs n'utilisent pas le pilote de logging JSON
 
 Étant donné que Docker utilise le pilote de logging json-file par défaut, l'Agent de conteneur tente d'abord de recueillir les logs à partir de celui-ci. Si vos conteneurs sont configurés de façon à utiliser un autre pilote de logging, l'Agent indique qu'il parvient à trouver vos conteneurs, mais qu'il n'est pas en mesure de recueillir leurs logs. L'Agent de conteneur peut également être configuré de façon à lire les logs à partir du pilote journald.
 
@@ -175,6 +165,19 @@ Le timeout de lecture par défaut est défini sur 30 secondes. Si vous augmente
 logs_config:
   docker_client_read_timeout: 60
 ```
+
+## Agent de host
+### Utilisateur de l'Agent dans le groupe Docker
+
+Si vous utilisez l'Agent de host, l'utilisateur `dd-agent` doit être ajouté au groupe Docker afin qu'il puisse lire le contenu du socket Docker. Si les logs d'erreur suivants figurent dans le fichier `agent.log` :
+
+```text
+2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | docker listener cannot start, will retry: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
+
+2019-10-11 09:17:56 UTC | CORE | ERROR | (pkg/autodiscovery/config_poller.go:123 in collect) | Unable to collect configurations from provider docker: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
+```
+
+Pour ajouter l'Agent de host au groupe d'utilisateurs Docker, exécutez la commande suivante : `usermod -a -G docker dd-agent`.
 
 [1]: /fr/help/
 [2]: /fr/integrations/journald/#setup
