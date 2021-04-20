@@ -1970,6 +1970,26 @@ main:
     parent: rum
     identifier: rum_android
     weight: 2
+  - name: Data Collected
+    url: real_user_monitoring/android/data_collected/
+    parent: rum_android
+    identifier: rum_android_data_collected
+    weight: 201
+  - name: Advanced Configuration
+    url: real_user_monitoring/android/advanced_configuration/
+    parent: rum_android
+    identifier: rum_android_advanced
+    weight: 202
+  - name: Troubleshooting
+    url: real_user_monitoring/android/troubleshooting/
+    parent: rum_android
+    identifier: rum_troubleshooting_android
+    weight: 203
+  - name: Integrated Libraries
+    url: real_user_monitoring/android/integrated_libraries/
+    parent: rum_android
+    identifier: rum_android_libraries
+    weight: 204
   - name: iOS Monitoring
     url: real_user_monitoring/ios/
     parent: rum

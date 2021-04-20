@@ -321,13 +321,57 @@
     - action: pull-and-push-file
       branch: master
       globs:
-      - 'docs/rum_collection.md'
+      - 'docs/rum_getting_started'
       options:
-        dest_path: '/real_user_monitoring/'
+        dest_path: '/real_user_monitoring/android'
         file_name: 'android.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md"]
-          title: Getting Started with Android RUM Collection
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md"]
+          title: RUM Android Monitoring
+          kind: documentation
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/mobile_data_collected.md'
+      options:
+        dest_path: '/real_user_monitoring/android/data_collected'
+        file_name: 'mobile_data_collected.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md"]
+          title: RUM Android Data Collected
+          kind: documentation
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/configure_rum_android_sdk.md'
+      options:
+        dest_path: '/real_user_monitoring/android/advanced_configuration'
+        file_name: 'configure_rum_android_sdk.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md"]
+          title: RUM Android Advanced Configuration
+          kind: documentation
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/troubleshooting_android.md'
+      options:
+        dest_path: '/real_user_monitoring/android/troubleshooting'
+        file_name: 'troubleshooting_android.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md"]
+          title: Troubleshooting
+          kind: documentation
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/integrated_libraries_android.md'
+      options:
+        dest_path: '/real_user_monitoring/android/integrated_libraries'
+        file_name: 'integrated_libraries_android.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
+          title: Android Integrated Libraries
           kind: documentation
 
   - repo_name: browser-sdk
