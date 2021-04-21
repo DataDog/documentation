@@ -320,8 +320,9 @@
     contents:
     - action: pull-and-push-file
       branch: master
+      sha: 473c1776
       globs:
-      - 'docs/rum_getting_started.md'
+      - 'docs/rum_collection.md'
       options:
         dest_path: '/real_user_monitoring/'
         file_name: 'android.md'
