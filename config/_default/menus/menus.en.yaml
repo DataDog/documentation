@@ -2068,7 +2068,7 @@ main:
   - name: Track Android Errors
     url: real_user_monitoring/error_tracking/android
     parent: rum_error_tracking
-    identifier: rum_error_tracking_andriod
+    identifier: rum_error_tracking_android
     weight: 703
   - name: Guides
     url: real_user_monitoring/guide
