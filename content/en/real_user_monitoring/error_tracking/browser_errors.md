@@ -17,8 +17,6 @@ further_reading:
   text: "Error tracking"
 ---
 
-## Tracking Browser Errors
-
 Error Tracking processes errors collected from the browser by the RUM SDK: whenever a [source][1] or [custom][2] error containing a stack trace is collected, Error Tracking processes and groups it under an issue (group of similar errors).
 
 To quickly get started with error tracking:
@@ -30,12 +28,12 @@ To quickly get started with error tracking:
 <div class="alert alert-warning">The Datadog for Government site does not support sending alerts for new error tracking issues.</div>
 {{< /site-region >}}
 
-### Upload mapping files
+## Upload mapping files
 
 The source code of some applications is obfuscated or minified when deployed to production for performance optimization and security concerns.
 The consequence is that stack traces of errors fired from those applications are also obfuscated, making the troubleshooting process much more difficult.
 
-#### Javascript source maps
+### Javascript source maps
 
 Source maps are mapping files generated when minifying Javascript source code. The [Datadog CLI][5] can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps with their related minified files. Upload your source maps directly from your CI pipeline:
 
