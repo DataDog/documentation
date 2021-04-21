@@ -137,10 +137,12 @@ With Prometheus Autodiscovery, the Datadog Agent is able to detect native Promet
 
 ### Requirements
 
-- Datadog Agent v7 or v6.26+ (for Pod checks)
+- Datadog Agent v7 or v6.27+ (for Pod checks)
 - Datadog Cluster Agent v1.11+ (for service and endpoint checks)
 
 ### Configuration
+
+#### Basic configuration
 
 In your Helm `values.yaml`, add the following:
 
@@ -163,6 +165,51 @@ It also instructs the Datadog Cluster Agent (if enabled) to detect the services 
 
 This configuration generates a check that collects all metrics exposed using the default configuration of the [OpenMetrics integration][1].
 
+#### Advanced configuration
+
+It is possible to define advanced Openmetrics check configuration or custom Autodiscovery rules other than native Prometheus annotations thanks the `additionalConfigs` configuration field in `values.yaml`.
+
+`additionalConfigs` is a list of structures containing Openmetrics check configurations and Autodiscovery rules.
+
+Every [configuration field][15] supported by the Openmetrics check can be passed in the configurations list.
+
+The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it’s an AND (both rules must match).
+
+`kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
+
+`kubernetes_annotations` contains two maps of labels to define the discovery rules: `include` and `exclude`.
+
+**Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following
+
+```
+kubernetes_annotations:
+  include:
+    - prometheus.io/scrape: "true"
+  exclude:
+    - prometheus.io/scrape: "false"
+```
+
+**Example:**
+
+In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customising the Openmetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
+
+```
+datadog:
+...
+  prometheusScrape:
+    enabled: true
+    additionalConfigs:
+      -
+        configurations:
+        - timeout: 5
+          send_distribution_buckets: true
+        autodiscovery:
+          kubernetes_container_names:
+            - my-app
+          kubernetes_annotations:
+            include:
+              app: my-app
+```
 
 ## From custom to official integration
 
@@ -188,3 +235,4 @@ Official integrations have their own dedicated directories. There's a default in
 [12]: https://app.datadoghq.com/metric/summary
 [13]: /agent/faq/template_variables/
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[15]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
