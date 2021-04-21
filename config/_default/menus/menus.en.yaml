@@ -6014,6 +6014,18 @@ api:
         - ListSecurityMonitoringSignals
       unstable:
         - v2
+  - name: Get the latest Runtime Security policy
+    url: '#get-the-latest-runtime-security-policy'
+    identifier: get-the-latest-runtime-security-policy
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DowloadRuntimePolicyFile
+      unstable:
+        - v2
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: update-an-existing-rule
