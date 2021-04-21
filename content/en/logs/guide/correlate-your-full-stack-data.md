@@ -26,17 +26,17 @@ Correlating your logs also eases [aggressive sampling strategy based on Trace ID
 
 This guide walks you through the steps you should take to correlate your full stack logs, traces and view:
 
-1. [Correlate your application logs](#correlate-your-application-logs)
-2. [Correlate your proxy logs](#correlate-your-proxy-logs)
-3. [Correlate your database logs](#correlate-your-database-logs)
-4. [Correlate your queuing logs](#correlate-your-queuing-logs)
+1. [Correlate application logs](#correlate-application-logs)
+2. [Correlate proxy logs](#correlate-proxy-logs)
+3. [Correlate database logs](#correlate-database-logs)
+4. [Correlate queuing logs](#correlate-queuing-logs)
 5. [Test the whole correlation from a Synthetic test](#test-the-whole-correlation-from-a-synthetic-test)
-6. [Correlate your browser logs](#correlate-your-browser-logs)
+6. [Correlate browser logs](#correlate-browser-logs)
 7. [Correlate RUM views](#correlate-rum-views)
 
 Note: Depending on your use case, you may skip steps. Steps dependant from others are explicit.
 
-## Correlate your application logs
+## Correlate application logs
 
 Application logs are the backbone of your context that give most of the code and business logic issues. They can even help you solve other services issues, e.g. most ORMs logs database errors.
 
@@ -44,7 +44,7 @@ Application logs are the backbone of your context that give most of the code and
 
 Use one of the [various OOTB correlations][3]. If you use a custom tracer or if you have any issues, you can go on the [correlation FAQ][4].
 
-## Correlate your proxy logs
+## Correlate proxy logs
 
 Proxy logs provide higher-tier information than application logs. They also cover wider entrypoints than application logs, like static content and redirections.
 
@@ -95,7 +95,7 @@ http {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Correlate your database logs
+## Correlate database logs
 
 Database logs are often hard to contextualize due to queries similarities, variable anonymization and high usage.
 
@@ -163,7 +163,7 @@ You can see slow query execution plan from your slow trace:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Correlate your queuing logs
+## Correlate queuing logs
 
 TODO
 
@@ -177,7 +177,7 @@ Having network-related specifics (thanks to your test) as well as backend, infra
 
 For that, simply [enable APM integration on Synthetic settings][5].
 
-## Correlate your browser logs
+## Correlate browser logs
 
 TODO
 
