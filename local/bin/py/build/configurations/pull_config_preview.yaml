@@ -329,6 +329,13 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md"]
           title: RUM Android Monitoring
           kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
       globs:
@@ -340,6 +347,13 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md"]
           title: RUM Android Data Collected
           kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
       globs:
@@ -351,6 +365,13 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md"]
           title: RUM Android Advanced Configuration
           kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
       globs:
@@ -362,6 +383,13 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md"]
           title: Troubleshooting
           kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
     - action: pull-and-push-file
       branch: master
       globs:
@@ -373,7 +401,13 @@
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
           title: Android Integrated Libraries
           kind: documentation
-
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
