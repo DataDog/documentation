@@ -440,7 +440,7 @@
   - repo_name: dd-sdk-android-gradle-plugin
     contents:
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - 'docs/upload_mapping_file.md'
       options:
