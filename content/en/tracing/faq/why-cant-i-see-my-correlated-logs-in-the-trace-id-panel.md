@@ -49,6 +49,7 @@ For JSON logs, step 1 and 2 are done automatically. The tracer inject the [trace
 
 If this isn't working as expected, ensure the name of the logs attribute that contains the trace id is `dd.trace_id` and verify it is properly set in [reserved attributes][4].
 
+{{< img src="tracing/faq/trace_id_reserved_attribute_mapping.png" alt="Trace ID mapping" >}}
 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/visualization/#spans
@@ -69,7 +70,9 @@ Now it is possible that the log format is not covered by the integration pipelin
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-For raw logs without any integration, make sure that the custom parsing rule is extracting the [trace][1] and [span][2] ids as a string as on the following example:
+For raw logs without any integration:
+
+* Make sure that the custom parsing rule is extracting the [trace][1] and [span][2] ids as a string as on the following example:
 
 {{< img src="tracing/faq/tracing_custom_parsing.png" alt="Custom parser"  style="width:90%;">}}
 
