@@ -12,11 +12,11 @@ further_reading:
 
 ## Overview
 
-The Developers section contains reference materials for developing on Datadog. You may want to develop on Datadog if there is data you want to see in the product that you are not seeing. If this is the case, Datadog may already support the technology you need. Refer to the table of [commonly requested technologies][#commonly-requested-technologies] to find the product or integration that may fulfill your needs.
+The Developers section contains reference materials for developing on Datadog. You may want to develop on Datadog if there is data you want to see in the product that you are not seeing. If this is the case, Datadog may already support the technology you need. Refer to the table of [commonly requested technologies](#commonly-requested-technologies) to find the product or integration that may fulfill your needs.
 
-If the solution you require is truly unavailable, you can contact [Datadog Support][1] to request a feature. You may also wish to [create your own solution][#creating-your-own-solution] by using the reference materials in this section.
+If the solution you require is truly unavailable, you can contact [Datadog Support][1] to request a feature. You may also wish to [create your own solution](#creating-your-own-solution) by using the reference materials in this section.
 
-## Partners and Datadog Marketplace
+### Partners and Datadog Marketplace
 
 Additionally, you may also be a partner who wants to build on Datadog and contribute to the Datadog Marketplace or to Datadog's community integrations. For more information about becoming a Datadog partner, see the [Partner program page][2].
 
@@ -45,12 +45,12 @@ Developers have several choices for sending unsupported data to Datadog.
 
 - [**Custom checks**][23] enable you to collect metrics from custom applications or systems. [Custom Agent checks][23] are suitable for many basic needs. For more advanced requirements like metrics preprocessing, you may choose to write an [OpenMetrics][24] check. You may also wish to submit a [service][25] check within a custom Agent check.
 
-- [**Integrations**][26] also enable you to collect metrics from custom applications or systems. Integrations are open source contributions to Datadog's [repository of community integrations][27] and become part of the Datadog ecosystem that can be used by other developers. 
+- [**Integrations**][26] also enable you to collect metrics from custom applications or systems. Integrations are reusable. You can keep your integration private, or you can write a public integration and contribute to Datadog's [repository of community integrations][27] to be used by other developers. In this case, you—as the code author—are the active maintainer of the integration and are responsible for ensuring its functionality.
 
 
 ### Should I write a custom check or an integration?
 
-The primary difference between custom checks and integrations is that integrations are reusable components of the Datadog ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software.
+The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software.
 
 When deciding how to send unsupported data to Datadog, the main considerations are effort (time to develop) and budget (cost of custom metrics). If you are trying to see data that Datadog doesn't currently support, start by deciding which method makes the most sense to start sending data:
 
