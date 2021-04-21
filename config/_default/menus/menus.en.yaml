@@ -2061,7 +2061,7 @@ main:
     identifier: rum_error_tracking_explorer
     weight: 701
   - name: Track Browser Errors
-    url: real_user_monitoring/error_tracking/browser
+    url: real_user_monitoring/error_tracking/browser_errors
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
     weight: 702
