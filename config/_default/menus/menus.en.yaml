@@ -2060,6 +2060,16 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
     weight: 701
+  - name: Track Browser Errors
+    url: real_user_monitoring/error_tracking/browser
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_browser
+    weight: 702
+  - name: Track Android Errors
+    url: real_user_monitoring/error_tracking/android
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_andriod
+    weight: 703
   - name: Guides
     url: real_user_monitoring/guide
     parent: rum
