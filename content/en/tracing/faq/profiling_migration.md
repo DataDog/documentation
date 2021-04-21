@@ -25,7 +25,7 @@ Perform the following steps to migrate your service to send profiles directly th
 2. Upgrade the tracing library to [version 0.55][2]+ or run the following command to get the latest tracer version:
 
     ```shell
-    wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
+    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
     ```
 
 3. Clear the `DD_PROFILING_API_KEY_FILE`, `DD_PROFILING_API_KEY`, `DD_API_KEY_FILE` or `DD_API_KEY` environment variables or equivalent system property flags. The API key files are deprecated as of version 0.55.
