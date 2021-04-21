@@ -52388,6 +52388,58 @@
         }
       }
     },
+    "/api/v2/security_monitoring/runtime/policy/download": {
+      "get": {
+        "description": "The download endpoint generates a Runtime Security policy file from your currently active\nRuntime Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
+        "operationId": "DowloadRuntimePolicyFile",
+        "responses": {
+          "200": {
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          }
+        },
+        "summary": "Get the latest Runtime Security policy",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-undo": {
+          "type": "safe"
+        },
+        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+      }
+    },
     "/api/v2/security_monitoring/signals": {
       "get": {
         "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
