@@ -7988,6 +7988,34 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
+  /api/v2/security_monitoring/runtime/policy/download:
+    get:
+      description: 'The download endpoint generates a Runtime Security policy file
+        from your currently active
+
+        Runtime Security rules, and downloads them as a .policy file. This file can
+        then be deployed to
+
+        your agents to update the policy running in your environment.'
+      operationId: DowloadRuntimePolicyFile
+      responses:
+        '200':
+          content:
+            application/yaml:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+      summary: Get the latest Runtime Security policy
+      tags:
+      - Security Monitoring
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security_monitoring/signals:
     get:
       description: 'The list endpoint returns security signals that match a search
