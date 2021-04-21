@@ -181,7 +181,7 @@ To enable network performance monitoring for Windows hosts:
 
 1. Install the [Datadog Agent][1] (version 7.27.0 or above) with the network driver component enabled.
 
-   During installation pass `ADDLOCAL=NPM` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
+   During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
 
 1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
