@@ -45,12 +45,14 @@ Developers have several choices for sending unsupported data to Datadog.
 
 - [**Custom checks**][23] enable you to collect metrics from custom applications or systems. [Custom Agent checks][23] are suitable for many basic needs. For more advanced requirements like metrics preprocessing, you may choose to write an [OpenMetrics][24] check. You may also wish to submit a [service][25] check within a custom Agent check.
 
-- [**Integrations**][26] also enable you to collect metrics from custom applications or systems. Integrations are reusable. You can keep your integration private, or you can write a public integration and contribute to Datadog's [repository of community integrations][27] to be used by other developers. In this case, you—as the code author—are the active maintainer of the integration and are responsible for ensuring its functionality.
+- [**Integrations**][26] also enable you to collect metrics from custom applications or systems. Integrations are reusable. You can keep your integration private, or you can write a public integration and contribute to Datadog's [repository of community integrations][27] to be used by other developers.
 
 
 ### Should I write a custom check or an integration?
 
-The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software.
+The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software. For more niche scenarios, such as monitoring services that are not widely used outside your team or organization, writing a custom check may be the most efficient option. However, you may choose to write an integration instead of a custom check if your particular use-case requires you to publish and deploy your solution as a Python wheel (`.whl`).
+
+Note that writing a public integration (that is, one that is part of Datadog's ecosystem, can be installed with the `datadog-agent integration` command, and is accepted into Datadog's [integrations-extras] or [integrations-core] repositories) requires more work than a private integration. These integrations must pass all `ddev validate` steps, have usable tests, and undergo code review. You, as the code author, are the active maintainer of the integration and are responsible for ensuring its functionality.
 
 When deciding how to send unsupported data to Datadog, the main considerations are effort (time to develop) and budget (cost of custom metrics). If you are trying to see data that Datadog doesn't currently support, start by deciding which method makes the most sense to start sending data:
 
@@ -62,6 +64,8 @@ When deciding how to send unsupported data to Datadog, the main considerations a
 | Public integration  | High   | No             | Python   |
 
 If you are a partner developing for the Datadog Marketplace or community integrations, jump straight to the [Marketplace][28] and [building an integration][26] docs.
+
+### General developer resources
 
 {{< whatsnext desc="Send your own metrics to Datadog:" >}}
     {{< nextlink href="/developers/dogstatsd" >}}<u>DogStatsD</u>: Overview of the features of DogStatsD, including setup, datagram format, and data submission.{{< /nextlink >}}
