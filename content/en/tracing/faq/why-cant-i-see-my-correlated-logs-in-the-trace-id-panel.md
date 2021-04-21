@@ -72,7 +72,7 @@ Now it is possible that the log format is not covered by the integration pipelin
 
 For raw logs without any integration:
 
-* Make sure that the custom parsing rule is extracting the [trace][1] and [span][2] ids as a string as on the following example:
+* Make sure that the custom parsing rule is extracting the [trace][1] and [span][2] IDs as a string as on the following example:
 
 {{< img src="tracing/faq/tracing_custom_parsing.png" alt="Custom parser"  style="width:90%;">}}
 
