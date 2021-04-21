@@ -321,7 +321,7 @@
     - action: pull-and-push-file
       branch: master
       globs:
-      - 'docs/rum_collection.md'
+      - 'docs/rum_getting_started.md'
       options:
         dest_path: '/real_user_monitoring/'
         file_name: 'android.md'
