@@ -40,97 +40,49 @@ further_reading:
 The .NET Tracer supports instrumentation on:
   - .NET 5
   - .NET Core 3.1
-  - .NET Core 2.1. 
+  - .NET Core 2.1
 
 For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
+## Installation and getting started
+
+### Follow the in-app documentation (recommended)
+
+Follow the [Quickstart instructions][6] in the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env` and `version` tags.
+- Enable other configuration settings.
+
+Otherwise, to begin tracing your applications:
+
 ## Automatic instrumentation
 
-<div class="alert alert-warning"> 
+### Installing the Tracer
+
+<div class="alert alert-warning">
   <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 </div>
-
-### Installation Steps
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
-1. [Install and configure the Windows Datadog Agent][1].
+1. Download the [.NET Tracer MSI installer][2]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
-2. Download the [.NET Tracer MSI installer][2]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+2. Run the .NET Tracer MSI installer with administrator privileges.
 
-3. Run the .NET Tracer MSI installer with administrator privileges.
+3. Enable instrumentation in your service by setting the required environment variables.
 
-4. Stop, then start IIS by running the following commands as an administrator:
+4. Create application load.
 
-    <div class="alert alert-warning"> 
-      <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
-    </div>
+5. Visit [APM Live Traces][3].
 
-    ```cmd
-    net stop /y was
-    net start w3svc
-    ```
-
-5. Create application load.
-
-6. Visit [APM Live Traces][3].
-
-#### Applications not hosted in IIS
-
-To enable automatic instrumentation for Windows applications not hosted in IIS, you must set two environment variables before starting your application:
-
-Name                       | Value
----------------------------|------
-`CORECLR_ENABLE_PROFILING` | `1`
-`CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
-
-<div class="alert alert-warning"> 
-  <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
-</div>
-
-##### Windows services
-
-To automatically instrument a Windows service, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables: 
-
-1. In the Windows Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key. 
-2. Set the value data to:
-    ```text
-    CORECLR_ENABLE_PROFILING=1
-    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-    ```
-    {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Creating the environment variables for instrumenting a service in the Registry Editor" >}}
-
-Alternatively, you can set the environment variables by using the following PowerShell snippet:
-
-```powershell
-[String[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
-```
-
-##### Console applications
-
-To automatically instrument a console application, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables from a batch file before starting your application:
-
-```bat
-rem Set environment variables
-SET CORECLR_ENABLE_PROFILING=1
-SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-
-rem Start application
-dotnet.exe example.dll
-```
-
-[1]: /agent/basic_agent_usage/windows/?tab=gui
-[2]: https://github.com/DataDog/dd-trace-dotnet/releases
-[3]: https://app.datadoghq.com/apm/traces
 {{% /tab %}}
 
 {{% tab "Linux" %}}
 
-1. [Install and configure a Linux Datadog Agent][1].
-2. Download and install the .NET Tracer into the application environment:
+1. Download and install the .NET Tracer into the application environment:
     - **Debian or Ubuntu** - Download and install the Debian package:
       ```bash
       curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb
@@ -153,27 +105,100 @@ dotnet.exe example.dll
       curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>.tar.gz \
       | sudo tar xzf - -C /opt/datadog
       ```
-3. Add the [required environment variables](#required-environment-variables).
 
-4. Run the `/opt/datadog/createLogPath.sh` script, which creates a directory for the log files and sets appropriate directory permissions. The default directory for log files is `/var/log/datadog/dotnet`.
+2. Run the `/opt/datadog/createLogPath.sh` script, which creates a directory for the log files and sets appropriate directory permissions. The default directory for log files is `/var/log/datadog/dotnet`.
 
-5. Create application load.
+3. Enable instrumentation in your service by setting the required environment variables.
 
-6. Visit [APM Live Traces][3].
+4. Create application load.
 
+5. Visit [APM Live Traces][3].
 
 [1]: /agent/basic_agent_usage/
 [2]: https://en.wikipedia.org/wiki/Musl
 [3]: https://app.datadoghq.com/apm/traces
+
+{{% /tab %}}
+
+### Instrumenting your service
+
+{{< tabs >}}
+
+{{% tab "Windows" %}}
+
+#### Applications hosted in IIS
+
+Completely stop and then start IIS by running the following commands as an administrator:
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
+</div>
+
+```cmd
+net stop /y was
+net start w3svc
+```
+
+#### Windows services
+
+To automatically instrument a Windows service, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables for the service.
+
+Using the Registry Editor:
+
+In the Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key and set the value data to:
+```text
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+```
+
+{{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
+
+Using PowerShell:
+
+```powershell
+[string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
+```
+
+#### Console applications
+
+To automatically instrument a console application, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables from a batch file before starting your application:
+
+```bat
+rem Set environment variables
+SET CORECLR_ENABLE_PROFILING=1
+SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+
+rem Start application
+dotnet.exe example.dll
+```
+
+#### Other applications
+
+To enable automatic instrumentation, you must set two environment variables before starting your application:
+
+Name                       | Value
+---------------------------|------
+`CORECLR_ENABLE_PROFILING` | `1`
+`CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be instrumented. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
+</div>
+
+[1]: /agent/basic_agent_usage/
+[2]: https://github.com/DataDog/dd-trace-dotnet/releases
+[3]: https://app.datadoghq.com/apm/traces
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Required Environment Variables
+{{% tab "Linux" %}}
 
 The following environment variables are required to enable automatic instrumentation:
 
-  <div class="alert alert-info"> 
+  <div class="alert alert-info">
       <strong>Note:</strong> If the .NET Tracer is installed into a path other than the default <code>/opt/datadog</code> path, ensure the paths are changed to match.
   </div>
 
@@ -217,13 +242,13 @@ To set the required environment variables on a Linux Docker container:
   CMD ["dotnet", "example.dll"]
   ```
 
-#### SystemCTL (per service)
+#### `systemctl` (per service)
 
 When using `systemctl` to run .NET applications as a service, you can add the required environment variables to be loaded for a specific service.
 
 1. Create a file called `environment.env` containing:
 
-    ```bat
+    ```ini
     CORECLR_ENABLE_PROFILING=1
     CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
@@ -233,24 +258,24 @@ When using `systemctl` to run .NET applications as a service, you can add the re
     ```
 2. In the service's configuration file, reference this as an [`EnvironmentFile`][2] in the service block:
 
-    ```bat
+    ```ini
     [Service]
     EnvironmentFile=/path/to/environment.env
     ExecStart=<command used to start the application>
     ```
 3. Restart the .NET service for the environment variable settings to take effect.
 
-#### SystemCTL (all services)
+#### `systemctl` (all services)
 
-<div class="alert alert-warning"> 
+<div class="alert alert-warning">
   <strong>Note:</strong> The .NET runtime tries to load a profiler into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be traced. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to load the profiler.</strong>
 </div>
 
-When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services run by `systemctl`. 
+When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services run by `systemctl`.
 
 1. Set the required environment variables by running [`systemctl set-environment`][2]:
 
-    ```bat
+    ```bash
     systemctl set-environment CORECLR_ENABLE_PROFILING=1
     systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
@@ -264,9 +289,25 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 
-### Configure the Datadog Agent for APM
+{{% /tab %}}
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+{{< /tabs >}}
+
+## Custom Instrumentation
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
+</div>
+
+To use custom instrumentation in your .NET application:
+1. Add the `Datadog.Trace` [NuGet package][2] to your application.
+2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+
+For more details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation documentation][3].
+
+## Install and configure the Agent for APM
+
+[Install the Datadog Agent][1] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
 
 {{< tabs >}}
 
@@ -305,33 +346,21 @@ To set up Datadog APM in Azure App Service, see the [Tracing Azure App Services 
 
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+Tracing is available for a number of other environments, such as [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
 For other environments, please refer to the [Integrations][4] documentation for that environment and [contact support][5] if you are encountering any setup issues.
-
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
 [3]: /integrations/amazon_elasticbeanstalk/
 [4]: /integrations/
 [5]: /help/
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Custom Instrumentation
-
-<div class="alert alert-warning"> 
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
-</div>
-
-To use custom instrumentation in your .NET application:
-1. Add the `Datadog.Trace` [NuGet package][2] to your application. 
-2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-For more details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation documentation][3].
-
-## Configuring the .NET Tracer
+## Configuring the Tracer
 
 The .NET Tracer has configuration settings that can be set by any of these methods:
 
@@ -379,7 +408,7 @@ dotnet example.dll
 
 To configure the Tracer in application code, create a `TracerSettings` from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
 
-<div class="alert alert-warning"> 
+<div class="alert alert-warning">
   <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
 </div>
 
@@ -427,7 +456,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ### Configuration settings
 
-<div class="alert alert-info"> 
+<div class="alert alert-info">
   <strong>Note:</strong> On Linux, the names of environment variables are case-sensitive.
 </div>
 
@@ -444,7 +473,7 @@ To use [Unified Service Tagging][4], configure the following settings for your s
 | `DD_VERSION`<br/><br/>`ServiceVersion`            | If specified, sets the version of the service. Added in version 1.17.0. |
 
 
-#### Additional optional configuration
+#### Optional configuration
 
 The following table below lists configuration variables that are available for both automatic and custom instrumentation.
 
@@ -462,7 +491,7 @@ The following table below lists configuration variables that are available for b
 | `DD_TRACE_SERVICE_MAPPING`                          | Rename services using configuration. Accepts a map of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. For example: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`. `from-key` is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0 |
 | `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans Example: `layer:api,team:intake`. Added in version 1.17.0.                                                           |
 
-#### Automatic instrumentation optional configuration
+#### Automatic instrumentation
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation.
 
@@ -474,14 +503,6 @@ The following table lists configuration variables that are available **only** wh
 | `DD_HTTP_SERVER_ERROR_STATUSES`                                 | Sets status code ranges that will cause HTTP server spans to be marked as errors. Default value is `500-599`. |
 | `DD_RUNTIME_METRICS_ENABLED`                                    | Enables .NET runtime metrics. Valid values are `true` or `false`. Default value is `false`. Added in version 1.23.0.
 | `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) that will be excluded from automatic instrumentation. |
-
-
-#### Disable integration configuration
-
-The following table lists the configuration variables that are available **only** when automatic instrumentation can be set for each integration. 
-
-| Setting Name                                                                  | Description                                                                                                           |
-|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_<INTEGRATION_NAME>_ENABLED`<br/><br/>`Integrations[<INTEGRATION_NAME>].Enabled`            | Enables or disables a specific integration. Valid values are: `true` (default) or `false`. Integration names are listed in the [Integrations][5] section.                          |
 
 ## Further reading
@@ -493,3 +514,4 @@ The following table lists the configuration variables that are available **only*
 [3]: /tracing/setup_overview/custom_instrumentation/dotnet/
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
+[6]: https://app.datadoghq.com/apm/docs
