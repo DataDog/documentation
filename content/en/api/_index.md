@@ -37,14 +37,14 @@ Maven - Add this dependency to your project's POM:
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-api-client</artifactId>
-  <version>1.0.0-beta10</version>
+  <version>{{< sdk-version "datadog-api-client-java" >}}</version>
   <scope>compile</scope>
 </dependency>
 ```
 
 Gradle - Add this dependency to your project's build file:
 ```gradle
-compile "com.datadoghq:datadog-api-client:1.0.0-beta10"
+compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-java" >}}"
 ```
 
 #### Usage
@@ -72,7 +72,7 @@ Maven `pom.xml` for running examples:
     <dependency>
       <groupId>com.datadoghq</groupId>
       <artifactId>datadog-api-client</artifactId>
-      <version>1.0.0-beta10</version>
+      <version>{{< sdk-version "datadog-api-client-java" >}}</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
@@ -96,7 +96,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.datadoghq:datadog-api-client:1.0.0-beta10'
+    implementation 'com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-java" >}}'
 }
 
 application {
@@ -143,7 +143,7 @@ require 'dogapi'
 {{< programming-lang lang="ruby-beta" >}}
 #### Installation
 ```sh
-gem install datadog_api_client -v 1.0.0.beta.2 --pre
+gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}} --pre
 ```
 #### Usage
 ```ruby

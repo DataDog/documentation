@@ -1,0 +1,13 @@
+{{- $client := .Get 0 -}}
+{{- $version := "" -}}
+{{- with site.Data.sdk_versions -}}
+  {{- range $sdk := . -}}
+    {{- if eq $sdk.client $client -}}
+      {{- $version = $sdk.version -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq (len $version) 0 -}}
+  {{- warnf "could not retrieve sdkversion for %q" $client -}}
+{{- end -}}
+{{- print $version -}}
