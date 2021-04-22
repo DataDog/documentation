@@ -173,7 +173,7 @@ You can define advanced Openmetrics check configurations or custom Autodiscovery
 
 Every [configuration field][15] supported by the Openmetrics check can be passed in the configurations list.
 
-The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it’s an AND (both rules must match).
+The autodiscovery configuration can be based on container names or kubernetes annotations or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
 `kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
 
