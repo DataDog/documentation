@@ -167,7 +167,7 @@ This configuration generates a check that collects all metrics exposed using the
 
 #### Advanced configuration
 
-It is possible to define advanced Openmetrics check configuration or custom Autodiscovery rules other than native Prometheus annotations thanks the `additionalConfigs` configuration field in `values.yaml`.
+You can define advanced Openmetrics check configurations or custom Autodiscovery rules other than native Prometheus annotations with the `additionalConfigs` configuration field in `values.yaml`.
 
 `additionalConfigs` is a list of structures containing Openmetrics check configurations and Autodiscovery rules.
 
