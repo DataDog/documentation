@@ -3,7 +3,7 @@
 {{- with site.Data.sdk_versions -}}
   {{- range $sdk := . -}}
     {{- if eq $sdk.client $client -}}
-      {{- $version = $sdk.version -}}
+      {{- $version = replaceRE "^[^0-9]*" "" $sdk.version -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
