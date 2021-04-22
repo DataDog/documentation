@@ -179,7 +179,7 @@ The autodiscovery configuration can be based on container names or kubernetes an
 
 `kubernetes_annotations` contains two maps of labels to define the discovery rules: `include` and `exclude`.
 
-**Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following
+**Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
 ```
 kubernetes_annotations:
