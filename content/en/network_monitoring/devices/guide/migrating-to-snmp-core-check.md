@@ -181,11 +181,15 @@ metrics:
 
 #### Metrics tags
 
+**Before Agent 7.27.0:**
+
 {{< code-block lang="yaml" filename="metrics_tags.yaml" >}}
 metrics_tags:
   - symbol: sysName
     tag: snmp_host
 {{< /code-block >}}
+
+**With Agent 7.27.0:**
 
 {{< code-block lang="yaml" filename="metrics_tags_7_27.yaml" >}}
 metrics_tags:
