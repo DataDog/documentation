@@ -29,7 +29,7 @@ RUM view events collect extensive performance metrics for every single page view
 
 ### Core Web Vitals
 <div class="alert alert-warning"> 
-  <strong>Note:</strong> The Core Web Vitals metrics have been introduced in Datadog since [`@datadog/browser-rum`](https://github.com/DataDog/browser-sdk) package version 2.0.0
+  <strong>Note:</strong> The Core Web Vitals metrics are available in Datadog from <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package version 2.0.0 and newer.
 </div>
 [Google's Core Web Vitals][4] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
 
