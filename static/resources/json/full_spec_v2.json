@@ -44733,8 +44733,7 @@
         ],
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note: This endpoint is in public beta. If you have any feedback,\ncontact [Datadog support](https://docs.datadoghq.com/help/).**"
+        }
       }
     },
     "/api/v2/metrics/{metric_name}/tags": {
@@ -45922,8 +45921,7 @@
         ],
         "x-undo": {
           "type": "safe"
-        },
-        "x-unstable": "**Note: This endpoint is in public beta. If you have any feedback,\ncontact [Datadog support](https://docs.datadoghq.com/help/).**"
+        }
       }
     },
     "/api/v2/permissions": {

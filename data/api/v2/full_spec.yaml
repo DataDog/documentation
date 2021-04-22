@@ -7008,9 +7008,6 @@ paths:
       - Metrics
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: 'Deletes a metric''s tag configuration. Can only be used with application
@@ -7266,9 +7263,6 @@ paths:
       - Metrics
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
