@@ -1842,10 +1842,10 @@ main:
     parent: security_platform
     identifier: signals_explorer
     weight: 6
-  - name: Compliance Findings
+  - name: Findings
     url: security_platform/findings
     parent: security_platform
-    identifier: compliance_findings
+    identifier: cspm_findings
     weight: 7
   - name: Guides
     url: security_platform/guide
