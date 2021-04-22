@@ -60,7 +60,7 @@
 
 <!-- Loop over the menu to determine what to pull in -->
 {{ range (where .Sites.First.Menus.api ".Name" "==" $ParamTitleEn) }}
-  {{ range $menuChild := .Children }}
+  {{ range $menuChild := sort .Children ".Params.order" "desc" }}
 
     {{ $anchorStr := $menuChild.Name }}
     {{ $versionCount := (len $menuChild.Params.versions) }}
