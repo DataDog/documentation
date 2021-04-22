@@ -140,7 +140,7 @@ if os.environ.get('DD_LOGS_INJECTION') == 'true':
 
 Note: this only correlates logs that include query statement. Error logs like `ERROR:  duplicate key value violates unique constraint "<TABLE_KEY>"` stay out of context. Most of the time you can still get error information through your application logs.
 
-You can now clone and customize the PostgreSQL pipeline:
+Clone and customize the PostgreSQL pipeline:
 
 1. Add a new [grok parser][4]:
    ```text
@@ -175,7 +175,7 @@ Having network-related specifics (thanks to your test) as well as backend, infra
 
 - - -
 
-For that, simply [enable APM integration on Synthetic settings][5].
+For that, [enable APM integration on Synthetic settings][5].
 
 ## Correlate browser logs
 
@@ -183,10 +183,28 @@ TODO
 
 ## Correlate RUM views
 
-TODO
+APM and RUM combination lets you see your full frontend and backend data through one lens.
+
+Use the RUM correlation to:
+
+* Quickly pinpoint issues anywhere in your stack including frontend
+* Fully understand what your users are experiencing
+
+- - -
+
+For that, [connect RUM and Traces][6]. You can see RUM view information in [Trace view][7] and Trace information in [Session view][8].
+
+{{< img src="logs/guide/correlate-your-full-stack-data/trace-details-rum.png" alt="RUM information in a trace" style="width:80%;" >}}
+
+Note: There is no direct correlation between RUM views and server logs. You can still see a RUM event from a log and logs from a RUM event by looking at Trace previews.
+
+{{< img src="logs/guide/correlate-your-full-stack-data/log-explorer-rum-span.png" alt="RUM span in a log trace preview" style="width:80%;" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
 [3]: /tracing/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 [5]: /synthetics/apm
+[6]: /real_user_monitoring/connect_rum_and_traces
+[7]: https://app.datadoghq.com/apm/traces
+[8]: https://app.datadoghq.com/rum/explorer
