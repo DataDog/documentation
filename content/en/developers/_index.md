@@ -16,13 +16,13 @@ The Developers section contains reference materials for developing on Datadog. Y
 
 If the solution you require is truly unavailable, you can contact [Datadog Support][1] to request a feature. You may also wish to [create your own solution](#creating-your-own-solution) by using the reference materials in this section.
 
-### Partners and Datadog Marketplace
+### Partners and the Datadog Marketplace
 
 Additionally, you may also be a partner who wants to build on Datadog and contribute to the Datadog Marketplace or to Datadog's community integrations. For more information about becoming a Datadog partner, see the [Partner program page][2].
 
 ## Commonly requested technologies
 
-If there is data you want to monitor with Datadog that you are not seeing, consider the following Datadog products and integrations.
+If there is data you want to monitor with Datadog that you are not seeing, before building something custom, consider the following Datadog products and integrations:
 
 | Type                         | Details |
 |------------------------------|---------|
@@ -39,7 +39,7 @@ If there is data you want to monitor with Datadog that you are not seeing, consi
 
 ## Creating your own solution
 
-Developers have several choices for sending unsupported data to Datadog.
+Still not seeing the type of data that you need? Developers have several choices for sending unsupported data to Datadog.
 
 - [**DogStatsD**][22] is a metrics aggregation service that accepts custom metrics, events, and service checks.
 
@@ -50,7 +50,7 @@ Developers have several choices for sending unsupported data to Datadog.
 
 ### Should I write a custom check or an integration?
 
-The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software. For more niche scenarios, such as monitoring services that are not widely used outside your team or organization, writing a custom check may be the most efficient option. However, you may choose to write an integration instead of a custom check if your particular use-case requires you to publish and deploy your solution as a Python wheel (`.whl`).
+The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software. For more niche scenarios, such as monitoring services that are not widely used outside your team or organization, writing a custom check may be the most efficient option. However, you may choose to write an integration instead of a custom check if your particular use-case requires you to publish and deploy your solution as a Python wheel (`.whl`). Custom checks also use custom metrics, which have a cost associated, whereas if an integration gets accepted into the Datadog ecosystem, it is no longer considered a custom metric. For more information about how this might impact cost, see our the [Datadog Pricing Page][29]. 
 
 Note that writing a public integration (that is, one that is part of Datadog's ecosystem, can be installed with the `datadog-agent integration` command, and is accepted into Datadog's [integrations-extras] or [integrations-core] repositories) requires more work than a private integration. These integrations must pass all `ddev validate` steps, have usable tests, and undergo code review. You, as the code author, are the active maintainer of the integration and are responsible for ensuring its functionality.
 
@@ -130,3 +130,4 @@ If you are a partner developing for the Datadog Marketplace or community integra
 [26]: /developers/integrations/
 [27]: https://github.com/DataDog/integrations-extras
 [28]: /developers/marketplace/
+[29]: https://www.datadoghq.com/pricing/
