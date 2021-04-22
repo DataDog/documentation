@@ -95,7 +95,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
     Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs.
 
 7. **Versions of the:**
- **- language/frameworks/dependencies used to build the instrumented application**
+ **- language, frameworks, and dependencies used to build the instrumented application**
  **- Datadog Agent**
  **- Datadog Tracer**
 
