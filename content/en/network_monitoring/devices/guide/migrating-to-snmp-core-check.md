@@ -100,24 +100,96 @@ snmp_listener:
 {{% /tab %}}
 {{< /tabs >}}
 
+### DCA specific migration
+
+Some parameters used in `snmp_listener` have changed. For example, `network_address` is now `network`, and `community_string` is now `community`. See the complete list of changed parameters below:
+
+| Integration configs (Python & core) | snmp_listener                                                    |
+| ----------------------------------- | -----------------------------------------------------------------|
+| `community_string`                  | `community`                                                      |
+| `network_address`                   | `network`                                                        |
+| `authKey`                           | `authentication_key`                                             |
+| `authProtocol`                      | `authentication_protocol`                                        |
+| `privKey`                           | `privacy_key`                                                    |
+| `privProtocol`                      | `privacy_protocol`                                               |
+| `snmp_version`                      | `version`                                                        |
+| `discovery_allowed_failures`        | `allowed_failures`, top config: `snmp_listener.allowed_failures` |
+
 ### Migrating custom profiles (independent of deployment)
 
-SNMP no longer supports only listing OIDs by their human-readable name. You can reference by address (table name and index) or MIB entry address. If you have written any profiles yourself or modified any existing profiles, migrate them to the new format. Below is an example of updating Scalar symbols.
+SNMP no longer supports only listing OIDs by their human-readable name. You can reference by address (table name and index) or MIB entry address. If you have written any profiles yourself or modified any existing profiles, migrate them to the new format. Below are examples of migration.
+
+#### Scalar symbols
 
 **Before Agent 7.27.0:**
 
-```yaml
+{{< code-block lang="yaml" filename="scalar_symbols.yaml" >}}
 metrics:
   - MIB: HOST-RESOURCES-MIB
   symbol: hrSystemUptime
-```
+{{< /code-block >}}
 
 **With Agent 7.27.0:**
 
-```yaml
+{{< code-block lang="yaml" filename="scalar_symbols_7_27.yaml" >}}
 metrics:
   - MIB: HOST-RESOURCES-MIB
   symbol:
     OID: 1.3.6.1.2.1.25.1.1.0
     name: hrSystemUptime
-```
+{{< /code-block >}}
+
+#### Table symbols
+
+**Before Agent 7.27.0:**
+
+{{< code-block lang="yaml" filename="table_symbols.yaml" >}}
+
+metrics:
+  -MIB: HOST-RESOURCES-MIB
+  table: hrStorageTable
+  symbols:
+    - hrStorageAllocationUnits
+    - hrStoageSize
+  metrics_tags:
+    - tag: storagedec
+      column: hrStorageDescr
+
+{{< /code-block >}}
+
+
+**With Agent 7.27.0:**
+
+{{< code-block lang="yaml" filename="table_symbols_7_27.yaml" >}}
+metrics:
+  -MIB: HOST-RESOURCES-MIB
+  table:
+    OID: 1.3.6.1.2.1.25.2.3
+    name: hrStorageTable
+  symbols:
+    - OID: 1.3.6.1.2.1.25.2.3.1.4
+      name: hrStorageAllocationUnits
+    - OID: 1.3.6.1.2.1.25.2.3.1.5
+      name: hrStoageSize
+  metrics_tags:
+    - tag: storagedec
+      column:
+        OID: 1.3.6.1.2.1.25.2.3.1.3
+        name: hrStorageDescr
+{{< /code-block >}}
+
+
+#### Metrics tags
+
+{{< code-block lang="yaml" filename="metrics_tags.yaml" >}}
+metrics_tags:
+  - symbol: sysName
+    tag: snmp_host
+{{< /code-block >}}
+
+{{< code-block lang="yaml" filename="metrics_tags_7_27.yaml" >}}
+metrics_tags:
+  - OID: 1.3.6.1.2.1.1.5.0
+    symbol: sysName
+    tag: snmp_host
+{{< /code-block >}}
