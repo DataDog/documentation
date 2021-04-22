@@ -80,7 +80,11 @@ For Error Tracking to properly work with your source maps, you must configure yo
 
 <div class="alert alert-info">A given JavaScript source file can be served from different subdomains depending on the environment (for example, staging or production). You can upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full url (specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).</div>
 
-[1]: /real_user_monitoring/browser/data_collected/?tab=error#error-origins
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /real_user_monitoring/browser/data_collected/?tab=error#source-errors
 [2]: /real_user_monitoring/browser/advanced_configuration#custom-errors
 [3]: https://www.npmjs.com/package/@datadog/browser-rum
 [4]: /real_user_monitoring/browser/#initialization-parameters
