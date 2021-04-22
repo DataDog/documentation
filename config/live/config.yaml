@@ -23,7 +23,7 @@ deployment:
 
     matchers:
       # dont cache rum/logs config
-      - pattern: "^assets/dd-browser-logs-rum.js$"
+      - pattern: "^static/dd-browser-logs-rum.js$"
         cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
         gzip: true
       - pattern: "^.+\\.(js|css|svg)$"
