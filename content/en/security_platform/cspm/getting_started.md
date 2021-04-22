@@ -23,21 +23,15 @@ Cloud Security Posture Management is not currently available in US1-FED or US3.
 
 Navigate to the [Getting Started page][1] to configure your environment for scanning.
 
-{{< img src="security_platform/cspm/getting_started/overview.png" alt="CSPM Configuration">}}
-
 ## Setup
 
 ### Secure your cloud environment
 
 This section guides you through collecting resource configuration data from cloud providers. Resource configuration collection allows Datadog to assess your environments against Cloud Configuration rules [Add link].
 
-{{< img src="security_platform/cspm/getting_started/cloud.png" alt="Secure your cloud environment">}}
-
 ### Secure your hosts and containers
 
 This section guides you through configuring the Datadog agent to scan your hosts and containers. Our agent allows Datadog to continuously assess the state of your hosts and containers against Runtime Compliance rules [Add link].
-
-{{< img src="security_platform/cspm/getting_started/host-containers.png" alt="Secure your hosts and containers">}}
 
 ## Further reading
 

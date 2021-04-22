@@ -11,9 +11,7 @@ Cloud Security Posture Management is not currently available in US1-FED or US3.
 
 ## Overview
 
-Datadog Cloud Security Posture Management (CSPM) makes it easy to track the compliance posture of your production environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. View your compliance posture from the Compliance Homepage, with links to explore compliance findings in detail.
-
-{{< img src="security_platform/cspm/homepage" alt="CSPM Homepage">}}
+Datadog Cloud Security Posture Management (CSPM) makes it easy to track the compliance posture of your production environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. Assess the state of your cloud environment, such as security groups, storage buckets, load balancers, databases, and several other popular cloud services. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters, as well as to monitor the integrity of their files and folders. View your compliance posture in one place, CSPM Homepage, with links to explore findings in detail.
 
 ### Terminology
 

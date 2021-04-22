@@ -1,5 +1,5 @@
 ---
-title: Compliance Findings
+title: CSPM Findings
 kind: documentation
 further_reading:
 - link: "security_platform/default_rules"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-The Compliance Findings page helps drill into the details of compliance findings, the configuration of resources, and descriptions and remediation guidelines for remediating a misconfigured resource.
+The Findings page helps drill into the details of CSPM findings, the configuration of resources, and descriptions and remediation guidelines for remediating a misconfigured resource.
 
 Use the **time selector** to explore compliance posture, including the configuration of individual resources, at any point in the past.
 

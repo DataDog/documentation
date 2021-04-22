@@ -6,15 +6,11 @@ aliases:
   - security_monitoring
 ---
 
-<div class="alert alert-warning">
-Compliance Monitoring is currently available for private beta. Use this <a href="https://docs.google.com/forms/d/e/1FAIpQLScTA913tNGptcAeNNdWlvgECjekYoDVJwR-OkMtZYnJnq-FWw/viewform">form</a> to request access.
-</div>
-
 ## Overview
 
 {{< img src="security_monitoring/overview_top.png" alt="Datadog Security Monitoring" >}}
 
-Datadog Security and Compliance Monitoring unify developer, operation, and security teams through one platform. Use a single dashboard to display DevOps content, business metrics, and security content. Detect threats, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration, to your application and infrastructure in real time, and notify your team of security issues by email, slack, Jira, PagerDuty, or a webhook.
+The Datadog Security Platform unify developer, operation, and security teams through one platform. Use a single dashboard to display DevOps content, business metrics, and security content. Detect threats, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration, to your application and infrastructure in real time, and notify your team of security issues by email, slack, Jira, PagerDuty, or a webhook.
 
 {{< img src="security_monitoring/takeover_ex.png" alt="Slack Example"  style="width:75%;">}}
 
