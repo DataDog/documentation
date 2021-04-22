@@ -3712,8 +3712,7 @@ api:
         - v2
       operationids:
         - ListVolumesByMetricName
-      unstable:
-        - v2
+      unstable: []
   - name: Create a tag configuration
     url: '#create-a-tag-configuration'
     identifier: create-a-tag-configuration
@@ -3772,8 +3771,7 @@ api:
         - v2
       operationids:
         - ListTagsByMetricName
-      unstable:
-        - v2
+      unstable: []
   - name: List tag configurations
     url: '#list-tag-configurations'
     identifier: list-tag-configurations
