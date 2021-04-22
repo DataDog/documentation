@@ -124,8 +124,21 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/serverless/serverless_integrations/macro.md ;fi
 	@if [ content/en/serverless/serverless_integrations/cli.md ]; then \
 	rm -f content/en/serverless/serverless_integrations/cli.md ;fi
-	@if [ content/en/real_user_monitoring/android.md ]; then \
-	rm -f content/en/real_user_monitoring/android.md ;fi
+	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/android/_index.md ;fi
+	@if [ content/en/real_user_monitoring/android/data_collected.md ]; then \
+	rm -f content/en/real_user_monitoring/android/data_collected.md ;fi
+	@if [ content/en/real_user_monitoring/android/advanced_configuration.md ]; then \
+	rm -f content/en/real_user_monitoring/android/advanced_configuration.md ;fi
+	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
+	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
+	@if [ content/en/real_user_monitoring/android/integrated_libraries.md ]; then \
+	rm -f content/en/real_user_monitoring/android/integrated_libraries.md ;fi
+	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
+	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
+
+
+
 	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
 	@if [ content/en/real_user_monitoring/ios.md ]; then \
