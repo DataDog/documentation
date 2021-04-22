@@ -7,3 +7,4 @@
 /config/                  @DataDog/corpweb @DataDog/documentation
 /config/_default/menus/   @DataDog/documentation
 package.json              @DataDog/corpweb @DataDog/documentation
+/data/sdk_versions.json   @DataDog/integrations-tools-and-libraries
