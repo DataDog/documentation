@@ -4559,9 +4559,9 @@ api:
       operationids:
         - UpdateTest
       unstable: []
-  - name: Get a test configuration (API)
-    url: '#get-a-test-configuration-api'
-    identifier: get-a-test-configuration-api
+  - name: Get a test configuration
+    url: '#get-a-test-configuration'
+    identifier: get-a-test-configuration
     parent: synthetics
     generated: true
     params:
