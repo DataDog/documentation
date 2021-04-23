@@ -820,7 +820,7 @@
   },
   "GetTest": {
     "description": "Get the detailed configuration associated with a Synthetics test.",
-    "summary": "Get a test configuration (API)"
+    "summary": "Get a test configuration"
   },
   "UpdateTest": {
     "description": "Edit the configuration of a Synthetic test.",
