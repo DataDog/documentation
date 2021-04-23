@@ -70,8 +70,8 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 
 #### What do I do if Datadog supports a vendor or device type but my specific model isn’t supported? 
 
-1. Contact [Datadog support][1] to put in a request to support your specific model.
-2. Profiles can be extended to support additional `sysobjectid`’s 
+- Contact [Datadog support][1] to put in a request to support your specific model.
+- Extend your profiles to support additional `sysobjectid` values. 
     For example, if you want to monitor another type of Cisco CSR, you can modify the ISR profile directly to list another `sysobjectid` like this: 
     
     ```
