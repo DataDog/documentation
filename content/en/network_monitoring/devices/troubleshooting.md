@@ -78,7 +78,7 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 		snmpwalk -v 2c -c [community string] [ip address] 1.3.6.1.2.1.1.2
     ```
 
-**Note**: If you do not know the `sysobjectid` of your device, first try googling for it, or run a `snmpwalk` on a host that can reach out to your device. Use the output to list the profile to match against. 
+**Note**: If you do not know the `sysobjectid` of your device, try doing an Internet search or run a `snmpwalk` on a host that can reach out to your device. Use the output to list the profile to match against. 
 
 
 ## Further Reading
