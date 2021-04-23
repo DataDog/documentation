@@ -36,7 +36,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: saleel/update-aws-docs-for-resources
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
