@@ -32685,6 +32685,7 @@
           "Dashboard Lists"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
         }
@@ -32888,6 +32889,7 @@
         "tags": [
           "Dashboard Lists"
         ],
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -33093,6 +33095,7 @@
           "Dashboard Lists"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 2,
         "x-undo": {
           "type": "safe"
         }
@@ -33298,6 +33301,7 @@
           "Dashboard Lists"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 3,
         "x-undo": {
           "type": "safe"
         }
@@ -38116,6 +38120,7 @@
           "Logs"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -38213,6 +38218,7 @@
         "tags": [
           "Logs Archives"
         ],
+        "x-menu-order": 9,
         "x-undo": {
           "type": "safe"
         }
@@ -38417,6 +38423,7 @@
           "Logs Archives"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 10,
         "x-undo": {
           "type": "safe"
         }
@@ -38729,6 +38736,7 @@
         "tags": [
           "Logs Archives"
         ],
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -39305,6 +39313,7 @@
           "Logs Archives"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 2,
         "x-undo": {
           "operationId": "DeleteLogsArchive",
           "parameters": [
@@ -39416,6 +39425,7 @@
         "tags": [
           "Logs Archives"
         ],
+        "x-menu-order": 5,
         "x-undo": {
           "type": "idempotent"
         }
@@ -39783,6 +39793,7 @@
         "tags": [
           "Logs Archives"
         ],
+        "x-menu-order": 3,
         "x-undo": {
           "type": "safe"
         }
@@ -40395,6 +40406,7 @@
           "Logs Archives"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
         "x-undo": {
           "type": "safe"
         }
@@ -40536,6 +40548,7 @@
           "Logs Archives"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 8,
         "x-undo": {
           "type": "idempotent"
         }
@@ -40766,6 +40779,7 @@
           "Logs Archives"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 6,
         "x-undo": {
           "type": "safe"
         }
@@ -40905,6 +40919,7 @@
           "Logs Archives"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 7,
         "x-undo": {
           "type": "unsafe"
         }
@@ -41071,6 +41086,7 @@
         "tags": [
           "Logs Metrics"
         ],
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -41409,6 +41425,7 @@
             "step": "there is a valid \"logs_metric\" in the system"
           }
         },
+        "x-menu-order": 2,
         "x-undo": {
           "operationId": "DeleteLogsMetric",
           "parameters": [
@@ -41520,6 +41537,7 @@
         "tags": [
           "Logs Metrics"
         ],
+        "x-menu-order": 5,
         "x-undo": {
           "type": "idempotent"
         }
@@ -41716,6 +41734,7 @@
         "tags": [
           "Logs Metrics"
         ],
+        "x-menu-order": 3,
         "x-undo": {
           "type": "safe"
         }
@@ -42018,6 +42037,7 @@
           "Logs Metrics"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
         }
@@ -42142,6 +42162,7 @@
         "tags": [
           "Logs Restriction Queries"
         ],
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         },
@@ -42305,6 +42326,7 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 2,
         "x-undo": {
           "operationId": "DeleteRestrictionQuery",
           "parameters": [
@@ -42449,6 +42471,7 @@
         "tags": [
           "Logs Restriction Queries"
         ],
+        "x-menu-order": 10,
         "x-undo": {
           "type": "safe"
         },
@@ -42586,6 +42609,7 @@
         "tags": [
           "Logs Restriction Queries"
         ],
+        "x-menu-order": 9,
         "x-undo": {
           "type": "safe"
         },
@@ -42692,6 +42716,7 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 5,
         "x-undo": {
           "type": "idempotent"
         },
@@ -42938,6 +42963,7 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 3,
         "x-undo": {
           "type": "safe"
         },
@@ -43137,6 +43163,7 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
         },
@@ -43279,6 +43306,7 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 8,
         "x-undo": {
           "type": "idempotent"
         },
@@ -43448,6 +43476,7 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 6,
         "x-undo": {
           "type": "safe"
         },
@@ -43588,6 +43617,7 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 7,
         "x-undo": {
           "type": "safe"
         },
@@ -43908,6 +43938,7 @@
         "tags": [
           "Logs"
         ],
+        "x-menu-order": 3,
         "x-undo": {
           "type": "safe"
         }
@@ -44243,6 +44274,7 @@
           "Logs"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 2,
         "x-undo": {
           "type": "safe"
         }
@@ -44547,6 +44579,7 @@
         "tags": [
           "Metrics"
         ],
+        "x-menu-order": 5,
         "x-undo": {
           "type": "safe"
         },
@@ -44731,6 +44764,7 @@
         "tags": [
           "Metrics"
         ],
+        "x-menu-order": 6,
         "x-undo": {
           "type": "safe"
         }
@@ -44836,6 +44870,7 @@
         "tags": [
           "Metrics"
         ],
+        "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
         },
@@ -45038,6 +45073,7 @@
         "tags": [
           "Metrics"
         ],
+        "x-menu-order": 2,
         "x-undo": {
           "type": "safe"
         },
@@ -45345,6 +45381,7 @@
           "Metrics"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 3,
         "x-undo": {
           "type": "idempotent"
         },
@@ -45688,6 +45725,7 @@
             "step": "there is a valid \"metric_tag_configuration\" in the system"
           }
         },
+        "x-menu-order": 1,
         "x-undo": {
           "operationId": "DeleteTagConfiguration",
           "parameters": [
@@ -45919,6 +45957,7 @@
         "tags": [
           "Metrics"
         ],
+        "x-menu-order": 7,
         "x-undo": {
           "type": "safe"
         }
@@ -46067,6 +46106,7 @@
             "step": "there is a valid \"permission\" in the system"
           }
         },
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -46302,6 +46342,7 @@
         "tags": [
           "Processes"
         ],
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -46532,6 +46573,7 @@
         "tags": [
           "Roles"
         ],
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -46851,6 +46893,7 @@
             "step": "there is a valid \"role\" in the system"
           }
         },
+        "x-menu-order": 2,
         "x-undo": {
           "operationId": "DeleteRole",
           "parameters": [
@@ -46938,6 +46981,7 @@
           "Roles"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 5,
         "x-undo": {
           "type": "idempotent"
         }
@@ -47117,6 +47161,7 @@
           "Roles"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 3,
         "x-undo": {
           "type": "safe"
         }
@@ -47406,6 +47451,7 @@
           "Roles"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
         }
@@ -47620,6 +47666,7 @@
           "Roles"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 8,
         "x-undo": {
           "type": "idempotent"
         }
@@ -47772,6 +47819,7 @@
           "Roles"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 6,
         "x-undo": {
           "type": "safe"
         }
@@ -47999,6 +48047,7 @@
             "step": "the \"permission\" is granted to the \"role\""
           }
         },
+        "x-menu-order": 7,
         "x-undo": {
           "type": "safe"
         }
@@ -48637,6 +48686,7 @@
           "Roles"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 11,
         "x-undo": {
           "type": "idempotent"
         }
@@ -49245,6 +49295,7 @@
         "tags": [
           "Roles"
         ],
+        "x-menu-order": 9,
         "x-undo": {
           "type": "safe"
         }
@@ -49896,6 +49947,7 @@
             "step": "the \"user\" has the \"role\""
           }
         },
+        "x-menu-order": 10,
         "x-undo": {
           "type": "safe"
         }
@@ -50339,6 +50391,7 @@
         "tags": [
           "Security Monitoring"
         ],
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -51106,6 +51159,7 @@
             "step": "there is a valid \"security_rule\" in the system"
           }
         },
+        "x-menu-order": 2,
         "x-undo": {
           "operationId": "DeleteSecurityMonitoringRule",
           "parameters": [
@@ -51192,6 +51246,7 @@
         "tags": [
           "Security Monitoring"
         ],
+        "x-menu-order": 5,
         "x-undo": {
           "type": "idempotent"
         }
@@ -51588,6 +51643,7 @@
         "tags": [
           "Security Monitoring"
         ],
+        "x-menu-order": 3,
         "x-undo": {
           "type": "safe"
         }
@@ -52381,6 +52437,7 @@
           "Security Monitoring"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
         }
@@ -52686,6 +52743,7 @@
         "tags": [
           "Security Monitoring"
         ],
+        "x-menu-order": 7,
         "x-undo": {
           "type": "safe"
         },
@@ -52933,6 +52991,7 @@
           "Security Monitoring"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 6,
         "x-undo": {
           "type": "safe"
         },
@@ -58222,6 +58281,7 @@
             "step": "the \"user\" has a \"user_invitation\""
           }
         },
+        "x-menu-order": 8,
         "x-undo": {
           "type": "safe"
         }
@@ -58358,6 +58418,7 @@
           "Users"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 9,
         "x-undo": {
           "type": "safe"
         }
@@ -58988,6 +59049,7 @@
           "Users"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -59628,6 +59690,7 @@
             "step": "there is a valid \"user\" in the system"
           }
         },
+        "x-menu-order": 2,
         "x-undo": {
           "operationId": "DisableUser",
           "parameters": [
@@ -59715,6 +59778,7 @@
           "Users"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 5,
         "x-undo": {
           "type": "idempotent"
         }
@@ -60256,6 +60320,7 @@
           "Users"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 3,
         "x-undo": {
           "type": "safe"
         }
@@ -60909,6 +60974,7 @@
           "Users"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 4,
         "x-undo": {
           "type": "idempotent"
         }
@@ -61452,6 +61518,7 @@
           "Users"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 6,
         "x-undo": {
           "type": "safe"
         }
@@ -61606,6 +61673,7 @@
           "Users"
         ],
         "x-codegen-request-body-name": "body",
+        "x-menu-order": 7,
         "x-undo": {
           "type": "safe"
         }
