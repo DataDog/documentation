@@ -91,6 +91,10 @@
     "name": "Service Dependencies",
     "description": "APM Service Map API. For more information, visit\nthe [services map documentation](https://docs.datadoghq.com/tracing/visualization/services_map/)."
   },
+  "service-level-objective-corrections": {
+    "name": "Service Level Objective Corrections",
+    "description": "SLO Status Corrections allow you to prevent specific time periods from negatively impacting\nyour SLO’s status and error budget. You can use Status Corrections for various purposes, such\nas removing planned maintenance windows, non-business hours, or other time periods that do\nnot correspond to genuine issues."
+  },
   "service-level-objectives": {
     "name": "Service Level Objectives",
     "description": "[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\n(or SLOs) are a key part of the site reliability engineering toolkit.\nSLOs provide a framework for defining clear targets around application performance,\nwhich ultimately help teams provide a consistent customer experience,\nbalance feature development with platform stability,\nand improve communication with internal and external users."

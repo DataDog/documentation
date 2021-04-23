@@ -81,17 +81,18 @@ with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-By using Datadog's official Ruby library [dogstatsd-ruby][1], the example below creates a buffered DogStatsD client instance that sends metrics in one packet when the block completes:
+By using Datadog's official Ruby library [dogstatsd-ruby][1], the example below creates a buffered DogStatsD client instance that sends metrics in one packet when the flush is triggered:
 
 ```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('127.0.0.1', 8125)
 
-statsd.batch do |s|
-  s.increment('example_metric.increment', tags: ['environment:dev'])
-  s.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
-end
+statsd.increment('example_metric.increment', tags: ['environment:dev'])
+statsd.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
+
+# synchronous flush
+statsd.flush(sync: true)
 ```
 
 

@@ -14,13 +14,13 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md'
 display_name: pihole
-draft: true
+draft: false
 git_integration_title: pihole
 guid: f0a69a1e-3961-43e2-9848-469342734e34
 integration_id: pihole
 integration_title: Pi-hole
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: monganai@tcd.ie
 manifest_version: 1.0.0
 metric_prefix: pihole.

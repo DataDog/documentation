@@ -17,8 +17,6 @@ TEMPLATE = """\
 {front_matter}
 ---
 
-## Overview
-
 {content}
 """
 
@@ -66,7 +64,11 @@ def security_rules(content, content_dir):
                         "kind": "documentation",
                         "type": "security_rules",
                         "disable_edit": True,
-                        "aliases": [f"{data.get('defaultRuleId', '').strip()}"],
+                        "aliases": [
+                            f"{data.get('defaultRuleId', '').strip()}",
+                            f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
+                            f"/security_monitoring/default_rules/{p.stem}"
+                        ],
                         "rule_category": []
                     }
 
@@ -78,7 +80,10 @@ def security_rules(content, content_dir):
                     if 'security-monitoring' in relative_path:
                         page_data['rule_category'].append('Log Detection')
                     if 'runtime' in relative_path:
-                        page_data['rule_category'].append('Runtime Agent')
+                        if 'compliance' in relative_path:
+                            page_data['rule_category'].append('Infrastructure Configuration')
+                        else:
+                            page_data['rule_category'].append('Runtime Agent')
 
                     tags = data.get('tags', [])
                     if tags:

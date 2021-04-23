@@ -5,9 +5,9 @@ description: Synthetic ブラウザテストの結果
 aliases:
   - /ja/synthetics/apm/browser_tests
 further_reading:
-  - link: /synthetics/browser_tests/
-    tag: ドキュメント
-    text: ブラウザテスト
+  - link: 'https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals'
+    tag: ブログ
+    text: Synthetic モニタリングでウェブに関する主な指標を監視
 ---
 テスト結果とパフォーマンスデータは、ブラウザテストのステータスページの **Step Results** セクションからアクセスします。
 

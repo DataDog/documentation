@@ -63,7 +63,7 @@ Configure the task using either the [AWS CLI tools][12] or using the Amazon Web 
 
 1. For Linux containers, download [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] if you are using an original Amazon Linux 1 AMI). For Windows, download [datadog-agent-ecs-win.json][3].
 2. Edit `datadog-agent-ecs.json` and set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][4] for your account.
-3. Optionally - Add an [Agent health check](#agent-health-check).
+3. Optionally - Add an Agent health check.
 
     Add the following to your ECS task definition to create an Agent health check:
 
@@ -109,7 +109,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 10. For **Container name** enter `datadog-agent`.
 11. For **Image** enter `gcr.io/datadoghq/agent:latest`.
 12. For **Maximum memory** enter `256`. **Note**: For high resource usage, you may need a higher memory limit.
-13. Scroll down to the **Advanced container configuration** section and enter `10` in **CPU units**.
+13. Scroll down to the **Advanced container configuration** section and enter `100` in **CPU units**.
 **Note**: For Windows, enter at least `512` in **CPU units** to avoid getting the error `Timeout while starting the service`.
 14. For **Env Variables**, add a **Key** of `DD_API_KEY` and enter your Datadog API Key in the value. *If you feel more comfortable storing secrets like this in s3, take a look at the [ECS Configuration guide][1].*
 15. Add another Environment Variable for any tags you want to add using the key `DD_TAGS`.

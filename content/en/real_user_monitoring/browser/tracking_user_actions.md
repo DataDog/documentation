@@ -20,11 +20,23 @@ further_reading:
 ---
 
 
-Real User Monitoring (RUM) SDKs detect user interactions performed during a user journey. Set the `trackInteractions` [initialization parameter][1] to `true` to enable this feature.
+Real User Monitoring (RUM) Browser SDK automatically detects user interactions performed during a user journey. 
 
-**Note**: The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
+The automatic collection of user actions provides insights into user behavior, without having to manually instrument every single click in your application. It helps you achieve the following objectives:
+* Understand the performance of key interactions (for example, a click on the "Add to cart" button)
+* Quantify feature adoption
+* Identify the steps that led to a specific browser error
 
-Once an interaction is detected, all new RUM events are attached to the ongoing action until it is considered finished. The action also benefits from its parent view attributes such as browser information, geolocation data, and [global context][2].
+You can extend the collection of user interactions by [sending your own custom actions](#custom-actions).
+
+**Note**: The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with. You can control which information is sent to Datadog by [manually setting an action name](#declaring-a-name-for-click-actions), or by [implementing global scrubbing rules in the Browser SDK][1].
+
+## What interactions are being tracked?
+
+The Browser SDK automatically tracks clicks. A click action is created if **all** of the following conditions are met:
+* Activity is detected within 100ms of click being handled (activity being defined as the start of a network request or a DOM mutation).
+* The click does not lead to a new page being loaded, in which case the Browser SDK generates a new RUM View event.
+* A name can be computed for the action. ([Learn more about action naming](#declaring-a-name-for-click-actions))
 
 ## Action timing metrics
 
@@ -39,7 +51,7 @@ For information about the default attributes for all RUM event types, see [Data 
 
 ### How action loading time is calculated
 
-Once an interaction is detected, the RUM SDK watches for network requests and DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
+Once an interaction is detected, the RUM SDK watches for network requests and DOM mutations. The action is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
 ## Action attributes
 
@@ -52,9 +64,7 @@ Once an interaction is detected, the RUM SDK watches for network requests and DO
 
 ## Declaring a name for click actions
 
-The RUM library uses various strategies to get a name for click actions, but if you want more
-control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their
-parents) that will be used to name the action. For example:
+The RUM library uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that will be used to name the action. For example:
 
 ```html
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Try it out!</a>
@@ -65,11 +75,9 @@ parents) that will be used to name the action. For example:
   Enter a valid email address
 </div>
 ```
-## Custom user actions
+## Custom actions
 
-Custom user actions are user actions declared and sent manually by using the `addAction` API. They can send information relative to an event occurring during a user journey (for example, a custom timing or customer cart information).
-
-Once RUM is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addAction(name: string, context: Context)` API call. In the following examples, the RUM SDK collects the number of items within a cart, what they are, and how much the cart is worth overall.
+Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM SDK collects a visitor's cart data when they hit the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -135,7 +143,6 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/browser/?tab=us#initialization-parameters
-[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#scrub-sensitive-data-from-your-rum-data
 [3]: /real_user_monitoring/browser/data_collected/#default-attributes
 [4]: /real_user_monitoring/browser/advanced_configuration/

@@ -57,8 +57,8 @@ data/integrations/
 static/images/marketplace
 
 # security rules
-content/en/security_monitoring/default_rules/*.md
-!content/en/security_monitoring/default_rules/_index.md
+content/en/security_platform/default_rules/*.md
+!content/en/security_platform/default_rules/_index.md
 
 # compliance rules
 content/en/compliance_monitoring/default_rules/*.md
@@ -70,7 +70,12 @@ content/en/compliance_monitoring/default_rules/*.md
 npm-debug.log*
 
 # RUM
-content/en/real_user_monitoring/android.md
+content/en/real_user_monitoring/android/_index.md
+content/en/real_user_monitoring/android/data_collected.md
+content/en/real_user_monitoring/android/advanced_configuration.md
+content/en/real_user_monitoring/android/troubleshooting.md
+content/en/real_user_monitoring/android/integrated_libraries.md
+content/en/real_user_monitoring/error_tracking/android.md
 content/en/real_user_monitoring/browser/_index.md
 content/en/logs/log_collection/javascript.md
 content/en/real_user_monitoring/ios.md

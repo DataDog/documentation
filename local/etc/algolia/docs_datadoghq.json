@@ -45,6 +45,7 @@
                     "real_user_monitoring",
                     "serverless",
                     "synthetics",
+                    "network_monitoring/devices",
                     "developers"
                 ],
                 "localisation": ["", "/fr", "/ja"]
@@ -136,9 +137,9 @@
     "selectors": {
         "api_latest": {
             "lvl0": {
-                "selector": "",
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
                 "global": true,
-                "default_value": "API Latest"
+                "default_value": "API"
             },
             "lvl1": ".main-api > h1",
             "lvl2": ".main-api h2 a",

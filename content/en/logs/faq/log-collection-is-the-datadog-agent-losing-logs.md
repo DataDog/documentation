@@ -14,7 +14,8 @@ further_reading:
 
 ## Log rotate
 
-When a file is rotated, the Agent keeps tailing the old file until its end before starting to look at the newly created file.
+When a file is rotated, the Agent keeps tailing the old file while starting to tail the newly created file in parallel.
+Although the Agent continues to tail the old file, a 60-second timeout after the log rotation is set to ensure the agent is using its ressources to tail the most up-to-date files.
 
 ## Network issues
 

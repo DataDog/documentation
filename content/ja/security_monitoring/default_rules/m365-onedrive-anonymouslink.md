@@ -9,8 +9,6 @@ source: microsoft-365
 title: Microsoft 365 OneDrive 匿名リンクが作成されました
 type: security_rules
 ---
-## 概要
-
 ### 目標
 ユーザーが OneDrive で Microsoft 365 ドキュメントの匿名リンクを作成したことを検出します。これにより、認証されていないユーザーがリンクを持っていれば、このドキュメントにアクセスできるようになります。
 
