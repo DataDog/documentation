@@ -1630,11 +1630,81 @@ main:
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
     weight: 1605
+  - name: Continuous Integration
+    url: continuous_integration/
+    pre: nav_ci
+    identifier: ci
+    weight: 150000
+  - name: Tracing Tests
+    url: continuous_integration/setup_tests/
+    parent: ci
+    identifier: setup_tests
+    weight: 1
+  - name: Containers
+    url: continuous_integration/setup_tests/container/
+    parent: setup_tests
+    identifier: ci_container
+    weight: 101
+  - name: SaaS CI
+    url: continuous_integration/setup_tests/saas/
+    parent: setup_tests
+    identifier: ci_saas
+    weight: 102
+  - name: .NET
+    url: continuous_integration/setup_tests/dotnet/
+    parent: setup_tests
+    identifier: ci_dotnet
+    weight: 103
+  - name: Java
+    url: continuous_integration/setup_tests/java/
+    parent: setup_tests
+    identifier: ci_java
+    weight: 104
+  - name: Tracing Pipelines
+    url: continuous_integration/setup_pipelines/
+    parent: ci
+    identifier: setup_pipelines
+    weight: 2
+  - name: GitLab
+    url: continuous_integration/setup_pipelines/gitlab/
+    parent: setup_pipelines
+    identifier: ci_gitlab
+    weight: 201
+  - name: Jenkins
+    url: continuous_integration/setup_pipelines/jenkins/
+    parent: setup_pipelines
+    identifier: ci_jenkins
+    weight: 202
+  - name: Custom
+    url: continuous_integration/setup_pipelines/custom/
+    parent: setup_pipelines
+    identifier: ci_custom
+    weight: 203
+  - name: Test-First View
+    url: continuous_integration/explore_tests/
+    parent: ci
+    identifier: explore_tests
+    weight: 3
+  - name: Pipeline Performance
+    url: continuous_integration/explore_pipelines/
+    parent: ci
+    identifier: explore_pipelines
+    weight: 4
+  - name: Guides
+    url: continuous_integration/guides/
+    parent: ci
+    identifier: ci_guides
+    weight: 5
+  - name: Troubleshooting
+    url: continuous_integration/troubleshooting/
+    parent: ci
+    identifier: ci_troubleshooting
+    weight: 6
   - name: Log Management
     url: logs/
     pre: nav_logs
     identifier: log_management
-    weight: 150000
+    weight: 160000
   - name: Log Collection & Integrations
     url: logs/log_collection/
     parent: log_management
@@ -1787,7 +1857,7 @@ main:
     url: security_platform/
     pre: nav_security_monitoring
     identifier: security_platform
-    weight: 160000
+    weight: 170000
   - name: Getting Started
     url: security_platform/getting_started
     parent: security_platform
@@ -1822,7 +1892,7 @@ main:
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
-    weight: 170000
+    weight: 180000
   - name: API Tests
     url: synthetics/api_tests/
     parent: synthetics
