@@ -22,7 +22,7 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 #### Enabling SAML
 
-SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the note at the end of this section. To authenticate SAML:
+SAML login requires you to set up and authenticate your SAML provider with Datadog. To authenticate SAML:
 
 1. Press the “Using Single Sign-On (SAML)?” button.
 2. Enter your company email and send the email.
@@ -43,6 +43,10 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 2. Press the “Use another method to login” button, and enter the SAML ID manually.
 
 By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
+
+##### SAML IdP-Initiated Login
+
+If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][16]
 
 **Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][5] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
 
@@ -133,3 +137,4 @@ For help with troubleshooting, [contact Datadog support][5]. You can also send a
 [14]: https://support.apple.com/en-us/HT209455
 [15]: https://chat.datadoghq.com/
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[16]: https://docs.datadoghq.com/account_management/saml/mobile-idp-login/
