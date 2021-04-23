@@ -105,7 +105,7 @@ The `ddtrace` library includes support for the following libraries:
 [3]: http://asgi.readthedocs.io/
 [4]: https://aiohttp.readthedocs.io
 [5]: https://bottlepy.org
-[6]: https://www.djangoproject.com
+[6]: https://cherrypy.org/
 [7]: https://falconframework.org
 [8]: http://flask.pocoo.org
 [9]: https://fastapi.tiangolo.com/
