@@ -76,7 +76,7 @@ Une alerte se déclenche chaque fois qu'une métrique dévie d'un pattern attend
 ### Sélectionner les conditions d'alerte
 
 * Envoyer une alerte lorsque la métrique est `above` ou `above or equal to` (supérieure, supérieure ou égale)
-* au seuil durant les dernières `5 minutes`, `15 minutes` , `1 hour` ou lors d'une période `custom` (comprise entre 5 minutes et 24 heures).
+* au seuil sur un intervalle de `5 minutes`, `15 minutes` ou `1 hour` ou sur un intervalle `custom` (entre 5 minutes et 48 heures).
 * Seuil d'alerte : `<NOMBRE>`
 * Seuil d'avertissement : `<NOMBRE>`
 
