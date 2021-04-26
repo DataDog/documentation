@@ -108,7 +108,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the `source`. |
 
 ### Cloud service autodetection
-Filtering by specific third-party services such as S3, RDS, Kinesis, and ELB can help pinpoint latency, assess database performance, and visualize your network more completely. For instance, you can filter a search query by service, view the service in the Network Map, and trace communication on that node to see affected services.
+By filtering on third-party services such as S3, RDS, Kinesis, and ELB, you can pinpoint latency, assess database performance, and visualize your network more completely. For instance, you can filter a search query by service, view the service in the Network Map, and trace communication on that node to see affected services.
 
 {{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
 
