@@ -1,8 +1,0 @@
-{{- $dot := . -}}
-{{- $src_img := (.source | lower) -}}
-{{- $src_link := printf "integrations/%s" $src_img -}}
-{{- $int_logo := "" -}}
-{{- if ne $src_img "File Integrity Monitoring" -}}
-  {{- $int_logo = partial "integrations-logo.html" (dict "context" $dot.ctx "basename" $src_img "variant" "avatar") -}}
-{{- end -}}
-{{- return (dict "image" $int_logo "link" ($src_link | absLangURL) "rellink" $src_link ) -}}
