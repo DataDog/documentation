@@ -1821,7 +1821,12 @@ main:
     url: security_platform/cloud_workload_security/getting_started
     parent: cloud_workload_security
     identifier: cws_getting_started
-    weight: 3
+    weight: 301
+  - name: Event Types and Attributes
+    url: security_platform/cloud_workload_security/event_types_and_attributes
+    parent: cloud_workload_security
+    identifier: cws_event_types_and_attributes
+    weight: 301
   - name: Security Rules
     url: security_platform/detection_rules/
     parent: security_platform
