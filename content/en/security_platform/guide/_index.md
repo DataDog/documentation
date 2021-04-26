@@ -1,6 +1,8 @@
 ---
 title: Security Monitoring Guides
 kind: guide
+aliases:
+  - /security_monitoring/guide/
 private: true
 ---
 

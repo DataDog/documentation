@@ -18,6 +18,7 @@ dependencies:
 supported_os:
     - linux
     - windows
+integration_id: "syslog_ng"
 ---
 
 ## Overview
@@ -104,9 +105,9 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
     ```conf
     template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\"] $MSG\n"); };
     ```
-    
+
     You can also add custom tags with the `ddtags` attribute:
-    
+
     ```conf
     template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\" ddtags=\"env:test,user:test_user,<KEY:VALUE>\"] $MSG\n"); };
     ```

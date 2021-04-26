@@ -17,6 +17,7 @@ dependencies:
 public_title: Datadog-Rsyslog Integration
 supported_os:
     - linux
+integration_id: "rsyslog"
 ---
 
 ## Overview
