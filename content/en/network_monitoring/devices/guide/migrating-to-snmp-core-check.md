@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Agent 7.27.0 introduces a new SNMP check version in Go that has both memory and performance improvements to the Agent when monitoring devices using SNMP. The purpose of this guide is to assist in migration over to the new Core Check.
+The Datadog Agent 7.27.0 introduces a new SNMP check version in Go that has both memory and performance improvements to the Agent when monitoring devices using SNMP. The purpose of this guide is to assist in migration over to the new core check.
 
 ### Agent v7.27.0 changes
 
