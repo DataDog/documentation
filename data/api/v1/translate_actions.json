@@ -761,7 +761,7 @@
     "summary": "Get the list of all tests"
   },
   "CreateTest": {
-    "description": "Create a Synthetic test.",
+    "description": "This endpoint is deprecated. To create a test, use [Create an API test](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test), or [Create a browser test](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test).",
     "summary": "Create a test",
     "request_description": "Details of the test to create.",
     "request_schema_description": "Object containing details about your Synthetic test."
@@ -823,7 +823,7 @@
     "summary": "Get a test configuration"
   },
   "UpdateTest": {
-    "description": "Edit the configuration of a Synthetic test.",
+    "description": "This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) or [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).",
     "summary": "Edit a test",
     "request_description": "New test details to be saved.",
     "request_schema_description": "Object containing details about your Synthetic test."
