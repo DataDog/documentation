@@ -116,7 +116,7 @@ By filtering on third-party services such as S3, RDS, Kinesis, and ELB, you can 
 - **To visualize specific managed services**: In the [Network Map][2], click the dropdown next to *View* and type or select desired tags. In the map, click a node to view troubleshooting options.
 - To view integration metrics for a service: in the Network Page, click on a row in the [dependency table](#table). In the opened side panel, use the *Integration Metrics* tab to analyze the performance of cloud services and distinguish between a client-side and cloud provider issue.
 
-To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
+To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#dns-resolution).
 
 ### DNS resolution
 
