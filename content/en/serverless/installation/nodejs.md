@@ -216,7 +216,7 @@ More information and additional parameters can be found in the [CLI documentatio
 
 ### Install the Datadog Lambda Library
 
-If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda Library as a layer. Instead, you must install the Datadog Lambda Library directly within the image. If you are using Datadog tracing, you must also install `dd-trace`.
+If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda Library as a layer. Instead, you must install the Datadog Lambda Library as a dependency of your function within the image. If you are using Datadog tracing, you must also install `dd-trace`.
 
 **NPM**:
 
@@ -235,11 +235,12 @@ Note that the minor version of the `datadog-lambda-js` package always matches th
 
 ### Configure the function
 
-1. Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can either set this directly in your Dockerfile or override the value using AWS.
-2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
-5. Optionally add a `service` and `env` tag with appropriate values to your function.
+1. Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile.
+2. Set the following environment variables in AWS:
+  - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+  - Set `DD_TRACE_ENABLED` to `true`.
+  - Set `DD_FLUSH_TO_LOG` to `true`.
+3. Optionally add `service` and `env` tags with appropriate values to your function.
 
 ### Subscribe the Datadog Forwarder to the log groups
 
