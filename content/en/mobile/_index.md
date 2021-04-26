@@ -22,7 +22,7 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 #### Enabling SAML
 
-SAML login requires you to set up and authenticate your SAML provider with Datadog. To authenticate SAML:
+SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
 
 1. Press the “Using Single Sign-On (SAML)?” button.
 2. Enter your company email and send the email.
