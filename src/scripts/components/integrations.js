@@ -268,6 +268,8 @@ export function initializeIntegrations() {
 
             updateData(searchQueryParameter, true);
 
+            search.value = searchQueryParameter;
+
             if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
                 window.DD_LOGS.logger.log(
                     'Integrations Search',
