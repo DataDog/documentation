@@ -30,7 +30,7 @@ Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can
    - Optionally specify a limited set of namespaces to stream metrics.
 2. Once you create these resources, Datadog immediately starts receiving the streamed metrics and displays them in the Datadog application with no additional configuration needed.
    - **Note**: Per-namespace defaults and account-level settings in the AWS Integration tile only apply to the API polling approach. Manage all rules for including and excluding namespaces in the streams using the CloudWatch Metric Streams configuration in your AWS accounts.
-   - If you already receive the same CloudWatch metrics through the API polling method, Datadog automatically detects this and stops polling those metrics since you are streaming them.
+   - If you already receive metrics for a given CloudWatch namespace through the API polling method, Datadog automatically detects this and stops polling metrics for that namespace since you are now streaming them. This could lead to some differences in the specific metric names collected as noted in [Supported Metrics](?tab=cloudformation#supported-metrics).
    - If you later decide you don't want to stream a metric and delete the stream or remove namespaces from it, Datadog automatically starts collecting those metrics using API polling again, according to your configuration settings in the AWS Integration tile.
  
 ### Supported Metrics

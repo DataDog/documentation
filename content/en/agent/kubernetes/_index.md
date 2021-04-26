@@ -116,7 +116,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
+[4]: https://github.com/kubernetes/kube-state-metrics/tree/master/charts/kube-state-metrics
 [5]: /agent/kubernetes/apm?tab=helm
 [6]: /agent/kubernetes/log?tab=helm
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
@@ -146,7 +146,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 2. **Create a secret that contains your Datadog API Key**. Replace the `<DATADOG_API_KEY>` below with [the API key for your organization][2]. This secret is used in the manifest to deploy the Datadog Agent.
 
     ```shell
-    kubectl create secret generic datadog-agent --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
+    kubectl create secret generic datadog-agent --from-literal='api-key=<DATADOG_API_KEY>' --namespace="default"
     ```
 
      **Note**: This create a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.

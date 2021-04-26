@@ -36,14 +36,14 @@ Maven - Add this dependency to your project's POM:
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-api-client</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.0-beta10</version>
   <scope>compile</scope>
 </dependency>
  ```
 
  Gradle - Add this dependency to your project's build file:
  ```java
-compile "com.datadoghq:datadog-api-client:1.0.0"
+compile "com.datadoghq:datadog-api-client:1.0.0-beta10"
  ```
 
 {{< /programming-lang >}}

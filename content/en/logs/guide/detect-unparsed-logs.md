@@ -23,7 +23,7 @@ To identify and control the volume of unparsed logs in your organization:
 
 1. [Detect unparsed logs](#detect-unparsed-logs)
 2. [Query for unparsed logs](#query-for-unparsed-logs)
-3. [Create a metric to track for unparsed logs](#create-a-metric-to-track-fro-unparsed-logs)
+3. [Create a metric to track for unparsed logs](#create-a-metric-to-track-for-unparsed-logs)
 4. [Monitor the volume of unparsed logs](#monitor-the-volume-of-unparsed-logs)
 
 
