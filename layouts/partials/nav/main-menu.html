@@ -34,7 +34,7 @@
                             <ul class="list-unstyled sub-menu">
                             {{ range .Children }}
                                 <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (in $excludeAsyc .Identifier)) }} js-load {{- end -}}" >
-                                    <a href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print .URL) | relLangURL)) "/" }}">
+                                    <a href="{{ .URL | relLangURL }}" data-type="{{- with site.GetPage .URL -}}{{- .Type -}}{{- end -}}" data-path="{{ trim (print $branchPath ((print .URL) | relLangURL)) "/" }}">
                                         {{ if .Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ .Name }}</span>
                                     </a>
                                     {{/*  4th level, hide  */}}
@@ -42,7 +42,7 @@
                                         <ul class="list-unstyled sub-menu d-none">
                                         {{ range .Children }}
                                             <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (in $excludeAsyc .Identifier)) }} js-load {{- end -}}" >
-                                                <a href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print .URL) | relLangURL)) "/" }}">
+                                                <a data-name="{{- delimit (last 1 (split (strings.TrimSuffix "/" .URL) "/")) "" -}}" href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print .URL) | relLangURL)) "/" }}">
                                                     {{ if .Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ .Name }}</span>
                                                 </a>
                                             </li>

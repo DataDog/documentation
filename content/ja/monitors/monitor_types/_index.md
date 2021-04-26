@@ -3,6 +3,7 @@ title: モニター
 kind: documentation
 aliases:
   - /ja/monitoring
+  - /ja/monitors/faq/can-i-set-up-a-monitor-for-a-metric-that-hasn-t-been-reported-to-datadog-yet/
 ---
 ## 作成
 

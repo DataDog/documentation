@@ -37,14 +37,14 @@ Maven - Add this dependency to your project's POM:
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-api-client</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.0-beta10</version>
   <scope>compile</scope>
 </dependency>
 ```
 
 Gradle - Add this dependency to your project's build file:
 ```gradle
-compile "com.datadoghq:datadog-api-client:1.0.0"
+compile "com.datadoghq:datadog-api-client:1.0.0-beta10"
 ```
 
 #### Usage
@@ -72,7 +72,7 @@ Maven `pom.xml` for running examples:
     <dependency>
       <groupId>com.datadoghq</groupId>
       <artifactId>datadog-api-client</artifactId>
-      <version>1.0.0-beta.9</version>
+      <version>1.0.0-beta10</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
@@ -96,7 +96,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.datadoghq:datadog-api-client:1.0.0-beta.9'
+    implementation 'com.datadoghq:datadog-api-client:1.0.0-beta10'
 }
 
 application {
