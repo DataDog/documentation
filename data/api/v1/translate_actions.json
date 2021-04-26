@@ -761,7 +761,7 @@
     "summary": "Get the list of all tests"
   },
   "CreateTest": {
-    "description": "Create a Synthetic test.",
+    "description": "This endpoint is deprecated. To create a test, use [Create an API test](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test), or [Create a browser test](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test).",
     "summary": "Create a test",
     "request_description": "Details of the test to create.",
     "request_schema_description": "Object containing details about your Synthetic test."
@@ -790,7 +790,7 @@
   },
   "GetBrowserTest": {
     "description": "Get the detailed configuration (including steps) associated with\na Synthetic browser test.",
-    "summary": "Get a test configuration (browser)"
+    "summary": "Get a browser test"
   },
   "UpdateBrowserTest": {
     "description": "Edit the configuration of a Synthetic browser test.",
@@ -800,11 +800,11 @@
   },
   "GetBrowserTestLatestResults": {
     "description": "Get the last 50 test results summaries for a given Synthetics Browser test.",
-    "summary": "Get the test's latest results summaries (browser)"
+    "summary": "Get a browser test's latest results summaries"
   },
   "GetBrowserTestResult": {
     "description": "Get a specific full result from a given (browser) Synthetic test.",
-    "summary": "Get a test result (browser)"
+    "summary": "Get a browser test result"
   },
   "DeleteTests": {
     "description": "Delete multiple Synthetic tests by ID.",
@@ -814,27 +814,27 @@
   },
   "TriggerCITests": {
     "description": "Trigger a set of Synthetics tests for continuous integration.",
-    "summary": "Trigger some Synthetics tests for CI",
+    "summary": "Trigger tests from CI/CD pipelines",
     "request_description": "Details of the test to trigger.",
     "request_schema_description": "Object describing the synthetics tests to trigger."
   },
   "GetTest": {
     "description": "Get the detailed configuration associated with a Synthetics test.",
-    "summary": "Get a test configuration (API)"
+    "summary": "Get a test configuration"
   },
   "UpdateTest": {
-    "description": "Edit the configuration of a Synthetic test.",
+    "description": "This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) or [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).",
     "summary": "Edit a test",
     "request_description": "New test details to be saved.",
     "request_schema_description": "Object containing details about your Synthetic test."
   },
   "GetAPITestLatestResults": {
     "description": "Get the last 50 test results summaries for a given Synthetics API test.",
-    "summary": "Get the test's latest results summaries (API)"
+    "summary": "Get an API test's latest results summaries"
   },
   "GetAPITestResult": {
     "description": "Get a specific full result from a given (API) Synthetic test.",
-    "summary": "Get a test result (API)"
+    "summary": "Get an API test result"
   },
   "UpdateTestPauseStatus": {
     "description": "Pause or start a Synthetics test by changing the status.",

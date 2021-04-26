@@ -1176,7 +1176,15 @@ components:
         \ a distribution graph\u2019s x-axis is quantity rather than time."
       properties:
         legend_size:
-          $ref: '#/components/schemas/WidgetLegendSize'
+          deprecated: true
+          description: (Deprecated) The widget legend was replaced by a tooltip and
+            sidebar.
+          type: string
+        markers:
+          description: List of markers.
+          items:
+            $ref: '#/components/schemas/WidgetMarker'
+          type: array
         requests:
           description: "Array of one request object to display in the widget.\n\n\
             See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
@@ -1189,7 +1197,9 @@ components:
           minItems: 1
           type: array
         show_legend:
-          description: Whether or not to display the legend on this widget.
+          deprecated: true
+          description: (Deprecated) The widget legend was replaced by a tooltip and
+            sidebar.
           type: boolean
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -1203,6 +1213,10 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/DistributionWidgetDefinitionType'
+        xaxis:
+          $ref: '#/components/schemas/DistributionWidgetXAxis'
+        yaxis:
+          $ref: '#/components/schemas/DistributionWidgetYAxis'
       required:
       - type
       - requests
@@ -1240,6 +1254,51 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetStyle'
+      type: object
+    DistributionWidgetXAxis:
+      description: X Axis controls for the distribution widget.
+      properties:
+        include_zero:
+          description: True includes zero.
+          type: boolean
+        max:
+          default: auto
+          description: Specifies maximum value to show on the x-axis. It takes a number,
+            percentile (p90 === 90th percentile), or auto for default behavior.
+          type: string
+        min:
+          default: auto
+          description: Specifies minimum value to show on the x-axis. It takes a number,
+            percentile (p90 === 90th percentile), or auto for default behavior.
+          type: string
+        scale:
+          default: linear
+          description: Specifies the scale type. Possible values are `linear`.
+          type: string
+      type: object
+    DistributionWidgetYAxis:
+      description: Y Axis controls for the distribution widget.
+      properties:
+        include_zero:
+          description: True includes zero.
+          type: boolean
+        label:
+          description: The label of the axis to display on the graph.
+          type: string
+        max:
+          default: auto
+          description: Specifies the maximum value to show on the y-axis. It takes
+            a number, or auto for default behavior.
+          type: string
+        min:
+          default: auto
+          description: Specifies minimum value to show on the y-axis. It takes a number,
+            or auto for default behavior.
+          type: string
+        scale:
+          default: linear
+          description: Specifies the scale type. Possible values are `linear` or `log`.
+          type: string
       type: object
     Downtime:
       description: 'Downtiming gives you greater control over monitor notifications
@@ -8364,6 +8423,7 @@ components:
           type: object
       required:
       - public_id
+      type: object
     SyntheticsCITestBody:
       description: Object describing the synthetics tests to trigger.
       properties:
@@ -8675,6 +8735,7 @@ components:
           type: string
       required:
       - value
+      type: object
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
       properties:
@@ -10454,6 +10515,13 @@ components:
             for the OpenTelemetry Collector.
           format: int64
           type: integer
+        vsphere_host_count:
+          description: 'Contains the total number of hosts that reported via vSphere
+            integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
       type: object
     UsageHostsResponse:
       description: Host usage response.
@@ -10541,8 +10609,7 @@ components:
           format: date-time
           type: string
         iot_device_count:
-          description: The total number of IoT device hours from the start of the
-            given hour's month until the given hour.
+          description: The total number of IoT devices during a given hour.
           format: int64
           type: integer
       type: object
@@ -10982,7 +11049,7 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
-        heroku_host_top99p_sum:
+        heroku_host_top99p:
           description: Shows the 99th percentile of all Heroku dynos over all hours
             in the current date for all organizations.
           format: int64
@@ -11007,12 +11074,12 @@ components:
             current date for all organizations.
           format: int64
           type: integer
-        iot_device_agg_sum:
+        iot_device_sum:
           description: Shows the sum of all IoT devices over all hours in the current
             date for all organizations.
           format: int64
           type: integer
-        iot_device_top99p_sum:
+        iot_device_top99p:
           description: Shows the 99th percentile of all IoT devices over all hours
             in the current date all organizations.
           format: int64
@@ -11042,7 +11109,7 @@ components:
             all hours in the current date for all organizations.
           format: int64
           type: integer
-        opentelemetry_host_top99p_sum:
+        opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
             date for all organizations.
@@ -11086,6 +11153,11 @@ components:
         twol_ingested_events_bytes_sum:
           description: Shows the sum of all tracing without limits bytes ingested
             over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        vsphere_host_top99p:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
       type: object
@@ -11278,6 +11350,11 @@ components:
         twol_ingested_events_bytes_sum:
           description: Shows the sum of all tracing without limits bytes ingested
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        vsphere_host_top99p:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current date for the given org.
           format: int64
           type: integer
       type: object
@@ -11517,6 +11594,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDate'
           type: array
+        vsphere_host_top99p_sum:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
       type: object
     UsageSyntheticsAPIHour:
       description: Number of Synthetics API tests run for each hour for a given organization.
@@ -12290,7 +12372,8 @@ components:
       properties:
         display_type:
           description: "Combination of:\n  - A severity error, warning, ok, or info\n\
-            \  - A line type: dashed, solid, or bold\n"
+            \  - A line type: dashed, solid, or bold\nIn this case of a Distribution\
+            \ widget, this can be set to be `x_axis_percentile`.\n"
           example: error dashed
           type: string
         label:
@@ -12639,6 +12722,7 @@ paths:
       summary: List IP Ranges
       tags:
       - IP Ranges
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/api_key:
@@ -12661,6 +12745,7 @@ paths:
       summary: Get all API keys
       tags:
       - Key Management
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -12695,6 +12780,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -12740,6 +12826,7 @@ paths:
       summary: Delete an API key
       tags:
       - Key Management
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -12774,6 +12861,7 @@ paths:
       summary: Get API key
       tags:
       - Key Management
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -12821,6 +12909,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/application_key:
@@ -12843,6 +12932,7 @@ paths:
       summary: Get all application keys
       tags:
       - Key Management
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -12883,6 +12973,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         operationId: DeleteApplicationKey
         parameters:
@@ -12922,6 +13013,7 @@ paths:
       summary: Delete an application key
       tags:
       - Key Management
+      x-menu-order: 10
       x-undo:
         type: idempotent
     get:
@@ -12956,6 +13048,7 @@ paths:
       summary: Get an application key
       tags:
       - Key Management
+      x-menu-order: 8
       x-undo:
         type: safe
     put:
@@ -13009,6 +13102,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 9
       x-undo:
         type: idempotent
   /api/v1/check_run:
@@ -13062,6 +13156,7 @@ paths:
       tags:
       - Service Checks
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/daily_custom_reports:
@@ -13112,6 +13207,7 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
+      x-menu-order: 20
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -13150,6 +13246,7 @@ paths:
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
+      x-menu-order: 21
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -13189,6 +13286,7 @@ paths:
       summary: Get all dashboards
       tags:
       - Dashboards
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -13248,6 +13346,7 @@ paths:
               \              ]\n            }\n          }\n        ]\n      }\n \
               \   }\n  ]\n}"
           step: there is a valid "dashboard" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteDashboard
         parameters:
@@ -13274,6 +13373,7 @@ paths:
       summary: Get all dashboard lists
       tags:
       - Dashboard Lists
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -13309,6 +13409,7 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteDashboardList
         parameters:
@@ -13349,6 +13450,7 @@ paths:
       summary: Delete a dashboard list
       tags:
       - Dashboard Lists
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -13384,6 +13486,7 @@ paths:
       summary: Get a dashboard list
       tags:
       - Dashboard Lists
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -13433,6 +13536,7 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/dashboard/public:
@@ -13482,6 +13586,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -13522,6 +13627,7 @@ paths:
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -13558,6 +13664,7 @@ paths:
       summary: Get a shared dashboard
       tags:
       - Dashboards
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -13622,6 +13729,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -13669,6 +13777,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
     get:
@@ -13718,6 +13827,7 @@ paths:
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
+      x-menu-order: 5
       x-undo:
         type: safe
     post:
@@ -13775,6 +13885,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -13814,6 +13925,7 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -13848,6 +13960,7 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -13896,6 +14009,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/downtime:
@@ -13927,6 +14041,7 @@ paths:
       summary: Get all downtimes
       tags:
       - Downtimes
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -13962,6 +14077,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: TODO
         parameters: []
@@ -14006,6 +14122,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
@@ -14039,6 +14156,7 @@ paths:
       summary: Cancel a downtime
       tags:
       - Downtimes
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -14075,6 +14193,7 @@ paths:
       summary: Get a downtime
       tags:
       - Downtimes
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -14126,6 +14245,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/events:
@@ -14206,6 +14326,7 @@ paths:
       summary: Query the event stream
       tags:
       - Events
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -14239,6 +14360,7 @@ paths:
       tags:
       - Events
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/events/{event_id}:
@@ -14277,6 +14399,7 @@ paths:
       summary: Get an event
       tags:
       - Events
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/graph/embed:
@@ -14537,6 +14660,7 @@ paths:
       summary: Take graph snapshots
       tags:
       - Snapshots
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/host/{host_name}/mute:
@@ -14580,6 +14704,7 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/host/{host_name}/unmute:
@@ -14616,6 +14741,7 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v1/hosts:
@@ -14705,6 +14831,7 @@ paths:
       summary: Get all hosts for your organization
       tags:
       - Hosts
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/hosts/totals:
@@ -14746,6 +14873,7 @@ paths:
       summary: Get the total number of active hosts
       tags:
       - Hosts
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/integration/aws:
@@ -14789,6 +14917,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
     get:
@@ -14835,6 +14964,7 @@ paths:
       summary: List all AWS integrations
       tags:
       - AWS Integration
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -14882,6 +15012,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         operationId: DeleteAWSAccount
         parameters: []
@@ -14948,6 +15079,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v1/integration/aws/available_namespace_rules:
@@ -14978,6 +15110,7 @@ paths:
       summary: List namespace rules
       tags:
       - AWS Integration
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/integration/aws/filtering:
@@ -15043,6 +15176,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15104,6 +15238,7 @@ paths:
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15171,6 +15306,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAWSTagFilter
         parameters: []
@@ -15214,6 +15350,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/aws/logs:
@@ -15251,6 +15388,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15291,6 +15429,7 @@ paths:
       summary: List all AWS Logs integrations
       tags:
       - AWS Logs Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15327,6 +15466,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAWSLambdaARN
         parameters: []
@@ -15381,6 +15521,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/integration/aws/logs/services:
@@ -15420,6 +15561,7 @@ paths:
       summary: Get list of AWS log ready services
       tags:
       - AWS Logs Integration
+      x-menu-order: 4
       x-undo:
         type: safe
     post:
@@ -15456,6 +15598,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         operationId: TODO
         type: unsafe
@@ -15500,6 +15643,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/integration/azure:
@@ -15537,6 +15681,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15565,6 +15710,7 @@ paths:
       summary: List all Azure integrations
       tags:
       - Azure Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15614,6 +15760,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAzureIntegration
         parameters: []
@@ -15659,6 +15806,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/azure/host_filters:
@@ -15697,6 +15845,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/integration/gcp:
@@ -15734,6 +15883,7 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15761,6 +15911,7 @@ paths:
       summary: List all GCP integrations
       tags:
       - GCP Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15797,6 +15948,7 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteGCPIntegration
         parameters: []
@@ -15842,6 +15994,7 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/pagerduty/configuration/services:
@@ -15878,6 +16031,7 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeletePagerDutyIntegrationService
         parameters:
@@ -15913,6 +16067,7 @@ paths:
       summary: Delete a single service object
       tags:
       - PagerDuty Integration
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -15947,6 +16102,7 @@ paths:
       summary: Get a single service object
       tags:
       - PagerDuty Integration
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -15991,6 +16147,7 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/integration/slack:
@@ -16159,6 +16316,7 @@ paths:
       summary: Get all channels in a Slack integration
       tags:
       - Slack Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -16202,6 +16360,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: unsafe
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels/{channel_name}:
@@ -16235,6 +16394,7 @@ paths:
       summary: Remove a Slack integration channel
       tags:
       - Slack Integration
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -16271,6 +16431,7 @@ paths:
       summary: Get a Slack integration channel
       tags:
       - Slack Integration
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -16315,6 +16476,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/webhooks/configuration/custom-variables:
@@ -16351,6 +16513,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
         parameters:
@@ -16386,6 +16549,7 @@ paths:
       summary: Delete a custom variable
       tags:
       - Webhooks Integration
+      x-menu-order: 8
       x-undo:
         type: idempotent
     get:
@@ -16431,6 +16595,7 @@ paths:
       summary: Get a custom variable
       tags:
       - Webhooks Integration
+      x-menu-order: 6
       x-undo:
         type: safe
     put:
@@ -16479,6 +16644,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/integration/webhooks/configuration/webhooks:
@@ -16515,6 +16681,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeleteWebhooksIntegration
         parameters:
@@ -16550,6 +16717,7 @@ paths:
       summary: Delete a webhook
       tags:
       - Webhooks Integration
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -16590,6 +16758,7 @@ paths:
       summary: Get a webhook integration
       tags:
       - Webhooks Integration
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -16638,6 +16807,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/logs-queries/list:
@@ -16688,6 +16858,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/logs/config/index-order:
@@ -16711,6 +16882,7 @@ paths:
       summary: Get indexes order
       tags:
       - Logs Indexes
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -16749,6 +16921,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/logs/config/indexes:
@@ -16773,6 +16946,7 @@ paths:
       summary: Get all indexes
       tags:
       - Logs Indexes
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -16809,6 +16983,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: TODO
         parameters: []
@@ -16847,6 +17022,7 @@ paths:
       summary: Get an index
       tags:
       - Logs Indexes
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -16898,6 +17074,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/logs/config/pipeline-order:
@@ -16922,6 +17099,7 @@ paths:
       summary: Get pipeline order
       tags:
       - Logs Pipelines
+      x-menu-order: 1
       x-undo:
         type: safe
     put:
@@ -16973,6 +17151,7 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v1/logs/config/pipelines:
@@ -16997,6 +17176,7 @@ paths:
       summary: Get all pipelines
       tags:
       - Logs Pipelines
+      x-menu-order: 3
       x-undo:
         type: safe
     post:
@@ -17032,6 +17212,7 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         operationId: DeleteLogsPipeline
         parameters:
@@ -17069,6 +17250,7 @@ paths:
       summary: Delete a pipeline
       tags:
       - Logs Pipelines
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -17105,6 +17287,7 @@ paths:
       summary: Get a pipeline
       tags:
       - Logs Pipelines
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -17150,6 +17333,7 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v1/metrics:
@@ -17205,6 +17389,7 @@ paths:
       summary: Get active metrics list
       tags:
       - Metrics
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/metrics/{metric_name}:
@@ -17240,6 +17425,7 @@ paths:
       summary: Get metric metadata
       tags:
       - Metrics
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -17289,6 +17475,7 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/monitor:
@@ -17387,6 +17574,7 @@ paths:
       summary: Get all monitor details
       tags:
       - Monitors
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -17682,6 +17870,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeleteMonitor
         parameters:
@@ -17730,6 +17919,7 @@ paths:
       summary: Check if a monitor can be deleted
       tags:
       - Monitors
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/monitor/groups/search:
@@ -17811,6 +18001,7 @@ paths:
       summary: Monitors group search
       tags:
       - Monitors
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/monitor/search:
@@ -17892,6 +18083,7 @@ paths:
       summary: Monitors search
       tags:
       - Monitors
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/monitor/validate:
@@ -17928,6 +18120,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -17983,6 +18176,7 @@ paths:
       summary: Delete a monitor
       tags:
       - Monitors
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -18031,6 +18225,7 @@ paths:
       summary: Get a monitor's details
       tags:
       - Monitors
+      x-menu-order: 4
       x-undo:
         type: safe
     put:
@@ -18086,6 +18281,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
@@ -18125,6 +18321,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/mute:
@@ -18289,6 +18486,7 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
+      x-menu-order: 22
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -18333,6 +18531,7 @@ paths:
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
+      x-menu-order: 23
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -18358,6 +18557,7 @@ paths:
       summary: List your managed organizations
       tags:
       - Organizations
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -18409,6 +18609,7 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: TODO
         parameters: []
@@ -18447,6 +18648,7 @@ paths:
       summary: Get organization information
       tags:
       - Organizations
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -18489,6 +18691,7 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/org/{public_id}/idp_metadata:
@@ -18547,6 +18750,7 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/query:
@@ -18596,6 +18800,7 @@ paths:
       summary: Query timeseries points
       tags:
       - Metrics
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/search:
@@ -18631,6 +18836,7 @@ paths:
       summary: Search metrics
       tags:
       - Metrics
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v1/series:
@@ -18700,6 +18906,7 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/service_dependencies:
@@ -18764,6 +18971,7 @@ paths:
       summary: Get all APM service dependencies
       tags:
       - Service Dependencies
+      x-menu-order: 1
       x-undo:
         type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
@@ -18838,6 +19046,7 @@ paths:
       summary: Get one APM service's dependencies
       tags:
       - Service Dependencies
+      x-menu-order: 2
       x-undo:
         type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
@@ -18906,6 +19115,7 @@ paths:
       summary: Get all SLOs
       tags:
       - Service Level Objectives
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -18951,6 +19161,7 @@ paths:
               sum:httpservice.hits{code:2xx}.as_count()\",\n    \"denominator\": \"\
               sum:httpservice.hits{!code:3xx}.as_count()\"\n  }\n}"
           step: there is a valid "slo" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteSLO
         parameters:
@@ -19000,6 +19211,7 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         type: idempotent
   /api/v1/slo/can_delete:
@@ -19045,6 +19257,7 @@ paths:
       summary: Check if SLOs can be safely deleted
       tags:
       - Service Level Objectives
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/slo/correction:
@@ -19067,6 +19280,7 @@ paths:
       summary: Get all SLO corrections
       tags:
       - Service Level Objective Corrections
+      x-menu-order: 2
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19115,6 +19329,7 @@ paths:
               : \"UTC\",\n      \"description\": \"Test Correction\"\n     },\n  \
               \   \"type\": \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
+      x-menu-order: 1
       x-undo:
         operationId: DeleteSLOCorrection
         parameters:
@@ -19153,6 +19368,7 @@ paths:
       summary: Delete an SLO correction
       tags:
       - Service Level Objective Corrections
+      x-menu-order: 5
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19190,6 +19406,7 @@ paths:
       summary: Get an SLO correction for an SLO
       tags:
       - Service Level Objective Corrections
+      x-menu-order: 3
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19241,6 +19458,7 @@ paths:
       tags:
       - Service Level Objective Corrections
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19297,6 +19515,7 @@ paths:
       summary: Delete an SLO
       tags:
       - Service Level Objectives
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -19331,6 +19550,7 @@ paths:
       summary: Get an SLO's details
       tags:
       - Service Level Objectives
+      x-menu-order: 4
       x-undo:
         type: safe
     put:
@@ -19379,6 +19599,7 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/slo/{slo_id}/history:
@@ -19450,6 +19671,7 @@ paths:
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
+      x-menu-order: 6
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19471,6 +19693,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
+      x-menu-order: 22
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -19507,6 +19730,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 19
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -19538,6 +19762,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
+      x-menu-order: 23
       x-undo:
         type: idempotent
     get:
@@ -19568,6 +19793,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
+      x-menu-order: 21
       x-undo:
         type: safe
     put:
@@ -19606,6 +19832,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 20
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests:
@@ -19634,11 +19861,14 @@ paths:
       summary: Get the list of all tests
       tags:
       - Synthetics
+      x-menu-order: 9
       x-undo:
         type: safe
     post:
       deprecated: true
-      description: Create a Synthetic test.
+      description: This endpoint is deprecated. To create a test, use [Create an API
+        test](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test),
+        or [Create a browser test](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test).
       operationId: CreateTest
       requestBody:
         content:
@@ -19678,6 +19908,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 26
       x-undo:
         operationId: TODO
         parameters: []
@@ -19724,6 +19955,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: TODO
         parameters: []
@@ -19765,6 +19997,7 @@ paths:
       summary: Get an API test
       tags:
       - Synthetics
+      x-menu-order: 7
       x-undo:
         type: safe
     put:
@@ -19819,6 +20052,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser:
@@ -19863,6 +20097,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: TODO
         parameters: []
@@ -19901,9 +20136,10 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get a test configuration (browser)
+      summary: Get a browser test
       tags:
       - Synthetics
+      x-menu-order: 8
       x-undo:
         type: safe
     put:
@@ -19958,6 +20194,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
@@ -20017,10 +20254,11 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get the test's latest results summaries (browser)
+      summary: Get a browser test's latest results summaries
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -20063,9 +20301,10 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
-      summary: Get a test result (browser)
+      summary: Get a browser test result
       tags:
       - Synthetics
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -20115,6 +20354,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 14
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger/ci:
@@ -20141,10 +20381,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: JSON format is wrong
-      summary: Trigger some Synthetics tests for CI
+      summary: Trigger tests from CI/CD pipelines
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -20179,14 +20420,16 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get a test configuration (API)
+      summary: Get a test configuration
       tags:
       - Synthetics
+      x-menu-order: 24
       x-undo:
         type: safe
     put:
       deprecated: true
-      description: Edit the configuration of a Synthetic test.
+      description: This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test)
+        or [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).
       operationId: UpdateTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -20237,6 +20480,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 25
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -20294,10 +20538,11 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get the test's latest results summaries (API)
+      summary: Get an API test's latest results summaries
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -20338,9 +20583,10 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
-      summary: Get a test result (API)
+      summary: Get an API test result
       tags:
       - Synthetics
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -20392,6 +20638,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
@@ -20428,6 +20675,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 15
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -20469,6 +20717,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
+      x-menu-order: 18
       x-undo:
         type: idempotent
     get:
@@ -20503,6 +20752,7 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
+      x-menu-order: 17
       x-undo:
         type: safe
     put:
@@ -20545,6 +20795,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 16
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -20581,6 +20832,7 @@ paths:
       summary: Get Tags
       tags:
       - Tags
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/tags/hosts/{host_name}:
@@ -20623,6 +20875,7 @@ paths:
       summary: Remove host tags
       tags:
       - Tags
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -20664,6 +20917,7 @@ paths:
       summary: Get host tags
       tags:
       - Tags
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -20718,6 +20972,7 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         operationId: DeleteHostTags
         parameters:
@@ -20777,6 +21032,7 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/usage/analyzed_logs:
@@ -20824,6 +21080,7 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
       - Usage Metering
+      x-menu-order: 17
       x-undo:
         type: safe
   /api/v1/usage/attribution:
@@ -20883,6 +21140,7 @@ paths:
       summary: Get Usage Attribution
       tags:
       - Usage Metering
+      x-menu-order: 29
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -20931,6 +21189,7 @@ paths:
       summary: Get hourly usage for Lambda
       tags:
       - Usage Metering
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/usage/billable-summary:
@@ -20968,6 +21227,7 @@ paths:
       summary: Get billable usage across your account
       tags:
       - Usage Metering
+      x-menu-order: 19
       x-undo:
         type: safe
   /api/v1/usage/compliance-monitoring:
@@ -21015,6 +21275,7 @@ paths:
       summary: Get hourly usage for Compliance Monitoring
       tags:
       - Usage Metering
+      x-menu-order: 30
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -21060,6 +21321,7 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
       - Usage Metering
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/usage/hosts:
@@ -21105,6 +21367,7 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/usage/incident-management:
@@ -21152,6 +21415,7 @@ paths:
       summary: Get hourly usage for incident management
       tags:
       - Usage Metering
+      x-menu-order: 27
       x-undo:
         type: safe
   /api/v1/usage/indexed-spans:
@@ -21197,6 +21461,7 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
       - Usage Metering
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/usage/ingested-spans:
@@ -21244,6 +21509,7 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
       - Usage Metering
+      x-menu-order: 26
       x-undo:
         type: safe
   /api/v1/usage/iot:
@@ -21291,6 +21557,7 @@ paths:
       summary: Get hourly usage for IoT
       tags:
       - Usage Metering
+      x-menu-order: 28
       x-undo:
         type: safe
   /api/v1/usage/logs:
@@ -21336,6 +21603,7 @@ paths:
       summary: Get hourly usage for Logs
       tags:
       - Usage Metering
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
@@ -21389,6 +21657,7 @@ paths:
       summary: Get hourly usage for Logs by Index
       tags:
       - Usage Metering
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/usage/network_flows:
@@ -21436,6 +21705,7 @@ paths:
       summary: Get hourly usage for Network Flows
       tags:
       - Usage Metering
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/usage/network_hosts:
@@ -21481,6 +21751,7 @@ paths:
       summary: Get hourly usage for Network Hosts
       tags:
       - Usage Metering
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/usage/profiling:
@@ -21528,6 +21799,7 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
       - Usage Metering
+      x-menu-order: 24
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -21580,6 +21852,7 @@ paths:
       summary: Get hourly usage for RUM Sessions
       tags:
       - Usage Metering
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -21627,6 +21900,7 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
       - Usage Metering
+      x-menu-order: 18
       x-undo:
         type: safe
   /api/v1/usage/summary:
@@ -21681,6 +21955,7 @@ paths:
       summary: Get usage across your multi-org account
       tags:
       - Usage Metering
+      x-menu-order: 16
       x-undo:
         type: safe
   /api/v1/usage/synthetics:
@@ -21727,6 +22002,7 @@ paths:
       summary: Get hourly usage for Synthetics Checks
       tags:
       - Usage Metering
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v1/usage/synthetics_api:
@@ -21772,6 +22048,7 @@ paths:
       summary: Get hourly usage for Synthetics API Checks
       tags:
       - Usage Metering
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v1/usage/synthetics_browser:
@@ -21817,6 +22094,7 @@ paths:
       summary: Get hourly usage for Synthetics Browser Checks
       tags:
       - Usage Metering
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v1/usage/timeseries:
@@ -21862,6 +22140,7 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
       - Usage Metering
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v1/usage/top_avg_metrics:
@@ -21929,6 +22208,7 @@ paths:
       summary: Get top custom metrics by hourly average
       tags:
       - Usage Metering
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/usage/traces:
@@ -21978,6 +22258,7 @@ paths:
       summary: Get hourly usage for Trace Search
       tags:
       - Usage Metering
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/usage/tracing-without-limits:
@@ -22029,6 +22310,7 @@ paths:
       summary: Get hourly usage for tracing without limits
       tags:
       - Usage Metering
+      x-menu-order: 25
       x-undo:
         type: safe
   /api/v1/user:
@@ -22051,6 +22333,7 @@ paths:
       summary: List all users
       tags:
       - Users
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -22097,6 +22380,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DisableUser
         parameters:
@@ -22149,6 +22433,7 @@ paths:
       summary: Disable a user
       tags:
       - Users
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -22185,6 +22470,7 @@ paths:
       summary: Get user details
       tags:
       - Users
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -22238,6 +22524,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/validate:
@@ -22263,6 +22550,7 @@ paths:
       summary: Validate API key
       tags:
       - Authentication
+      x-menu-order: 1
       x-undo:
         type: safe
   /monitor/bulk_resolve:
@@ -22362,6 +22650,7 @@ paths:
       tags:
       - Tracing
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: idempotent
   /v1/input:
@@ -22523,6 +22812,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /v1/monitor/mute_all:

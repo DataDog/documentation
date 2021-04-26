@@ -19,6 +19,7 @@ supported_os:
 - linux
 - mac_os
 - windows
+integration_id: "uwsgi"
 ---
 
 ## Overview
