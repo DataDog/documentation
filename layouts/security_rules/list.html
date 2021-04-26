@@ -34,7 +34,7 @@
                 <div class="js-group-header mb-1 active">
                     <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
                         {{ range first 1 $v.Pages }}
-                            {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (.Params.source | default .Params.scope) "variant" "avatar") }}
+                            {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" .Params.source "variant" "avatar") }}
                             {{ if $int_logo }}
                                 <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
@@ -44,7 +44,7 @@
                     </div>
                     <div class="d-inline font-semibold ml-1">
                         {{ if eq (len $v.Key) 3 }}
-                            {{ title $v.Key | humanize | title | upper }}
+                            {{ title $v.Key | title | upper }}
                         {{ else }}
                             {{ title $v.Key | humanize | title }}
                         {{ end }}
@@ -54,7 +54,12 @@
                 <div class="group-{{ .Key }} mb-2 ml-4 d-none">
                     {{ range $v.Pages }}
                         <a class="mb-1 font-semibold mix js-single-rule {{ range $i, $e := .Params.rule_category }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
-                            {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (.Params.source | default .Params.scope) "variant" "avatar") }}
+                            {{ $basename := (.Params.scope | default .Params.source) }}
+                            {{ if in .Params.scope "." }}
+                                <!-- e.g gcp.project use source -->
+                                {{ $basename = .Params.source }}
+                            {{ end }}
+                            {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "avatar") }}
                             {{ if $int_logo }}
                                 <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
