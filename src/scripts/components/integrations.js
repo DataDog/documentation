@@ -87,14 +87,15 @@ export function initializeIntegrations() {
 
     mobilecontrols.addEventListener('click', function(e) {
         e.stopPropagation();
-        // e.preventDefault();
         handleButtonClick(e.target, mobilefilters);
+
         // trigger same active on desktop
         const desktopBtn = controls.querySelector(
             `[data-filter="${e.target.getAttribute('data-filter')}"]`
         );
+
         activateButton(desktopBtn, filters);
-        // return false;
+
         pop.style.display = 'none';
         $(window).scrollTop(0);
     });
@@ -225,7 +226,6 @@ export function initializeIntegrations() {
                         (isSearch && !filter)
                     ) {
                         domitem.classList.remove('grayscale');
-                        // show.push(item);
                     } else {
                         const name = item.name ? item.name.toLowerCase() : '';
                         const publicTitle = item.public_title
@@ -241,10 +241,8 @@ export function initializeIntegrations() {
                                 item.tags.indexOf(filter.substr(1)) !== -1)
                         ) {
                             domitem.classList.remove('grayscale');
-                            // show.push(item);
                         } else {
                             domitem.classList.add('grayscale');
-                            // hide.push(item);
                         }
                     }
                 }
