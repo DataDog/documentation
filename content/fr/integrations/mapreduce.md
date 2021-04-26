@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    mapreduce: assets/dashboards/mapreduce_dashboard.json
   logs:
     source: mapreduce
   metrics_metadata: metadata.csv
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md'
 display_name: MapReduce
+draft: false
 git_integration_title: mapreduce
 guid: 1c143492-84ac-42d2-89d5-a45c718092b0
 integration_id: mapreduce
@@ -130,14 +132,12 @@ Le check Mapreduce n'inclut aucun événement.
 
 ### Checks de service
 
-**mapreduce.resource_manager.can_connect**
-
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Resource Manager.
+**mapreduce.resource_manager.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au Resource Manager.
 Si ce n'est pas le cas, renvoie `OK`.
 
-**mapreduce.application_master.can_connect**
-
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Application Master.
+**mapreduce.application_master.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'Application Master.
 Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage

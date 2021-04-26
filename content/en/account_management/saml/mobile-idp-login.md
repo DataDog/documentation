@@ -38,11 +38,11 @@ When configuring your OneLogin app, set the Relay State value on the **Applicati
 ### Okta
 
 When configuring your Okta app, set the Default RelayState value on the **Configure SAML** page to `dd_m_idp`.
-{{< img src="account_management/saml/okta-mobile-idp-relay-state.png" alt="Okta's Application Details Page" >}}
+{{< img src="account_management/saml/okta-mobile-idp-relay-state.png" alt="Okta's Configure SAML page" >}}
 
 ### Google
 
-When configuring your Google app for Work SAML app, set the **Start URL** under the Service Provider Details to `dd_m_idp`.
+When configuring your Google app for SAML, set the **Start URL** under the Service Provider Details to `dd_m_idp`.
 {{< img src="account_management/saml/google-mobile-idp-relay-state.png" alt="Google's Service Provider Details Page" >}}
 
 ## Troubleshooting

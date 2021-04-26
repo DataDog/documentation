@@ -80,7 +80,10 @@ def security_rules(content, content_dir):
                     if 'security-monitoring' in relative_path:
                         page_data['rule_category'].append('Log Detection')
                     if 'runtime' in relative_path:
-                        page_data['rule_category'].append('Runtime Agent')
+                        if 'compliance' in relative_path:
+                            page_data['rule_category'].append('Infrastructure Configuration')
+                        else:
+                            page_data['rule_category'].append('Runtime Agent')
 
                     tags = data.get('tags', [])
                     if tags:
@@ -98,6 +101,12 @@ def security_rules(content, content_dir):
                             page_data["framework"] = data.get('framework', {}).get('name', '')
                             page_data["control"] = data.get('control', '')
                             page_data["scope"] = tech
+
+                    # lowercase them
+                    if page_data.get("source", None):
+                        page_data["source"] = page_data["source"].lower()
+                    if page_data.get("scope", None):
+                        page_data["scope"] = page_data["scope"].lower()
 
                     front_matter = yaml.dump(page_data, default_flow_style=False).strip()
                     output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
@@ -154,6 +163,12 @@ def compliance_rules(content, content_dir):
                     for tag in json_data.get('tags', []):
                         key, value = tag.split(':')
                         page_data[key] = value
+
+                    # lowercase them
+                    if page_data.get("source", None):
+                        page_data["source"] = page_data["source"].lower()
+                    if page_data.get("scope", None):
+                        page_data["scope"] = page_data["scope"].lower()
 
                     front_matter = yaml.dump(page_data, default_flow_style=False).strip()
                     output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())

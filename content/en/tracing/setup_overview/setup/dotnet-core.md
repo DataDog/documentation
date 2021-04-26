@@ -469,8 +469,8 @@ To use [Unified Service Tagging][4], configure the following settings for your s
 | Setting Name                                        | Description                                                                                                                                                                                                       |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. Added in version 1.17.0.                                                            |
-| `DD_SERVICE`<br/><br/>`ServiceName`            | If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (the IIS application name, process entry assembly, or process name). Added in version 1.17.0.  |
-| `DD_VERSION`<br/><br/>`ServiceVersion`            | If specified, sets the version of the service. Added in version 1.17.0. |
+| `DD_SERVICE`<br/><br/>`ServiceName`                 | If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (the IIS application name, process entry assembly, or process name). Added in version 1.17.0.  |
+| `DD_VERSION`<br/><br/>`ServiceVersion`              | If specified, sets the version of the service. Added in version 1.17.0. |
 
 
 #### Optional configuration
@@ -485,11 +485,13 @@ The following table below lists configuration variables that are available for b
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                               |
 | `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`        | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
 | `DD_TRACE_DEBUG` <br/><br/>`DebugEnabled`           | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                          |
-| `DD_TRACE_HEADER_TAGS`                              | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`. Added in version 1.18.3.  |
+| `DD_TRACE_HEADER_TAGS`                              | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`. Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0. |
 | `DD_TRACE_LOG_DIRECTORY`                            | Sets the directory for .NET Tracer logs.<br/><br/>Default: `%ProgramData%\Datadog .NET Tracer\logs\`      |
 | `DD_TRACE_LOG_PATH`                                 | Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.             |
+| `DD_TRACE_LOGGING_RATE`                             | Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default. |
 | `DD_TRACE_SERVICE_MAPPING`                          | Rename services using configuration. Accepts a map of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. For example: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`. `from-key` is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0 |
-| `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans Example: `layer:api,team:intake`. Added in version 1.17.0.                                                           |
+| `DD_TAGS`<br/><br/>`GlobalTags`                     | If specified, adds all of the specified tags to all generated spans. Example: `layer:api,team:intake`. Added in version 1.17.0.                                                           |
+        
 
 #### Automatic instrumentation
 
@@ -504,6 +506,15 @@ The following table lists configuration variables that are available **only** wh
 | `DD_RUNTIME_METRICS_ENABLED`                                    | Enables .NET runtime metrics. Valid values are `true` or `false`. Default value is `false`. Added in version 1.23.0.
 | `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) that will be excluded from automatic instrumentation. |
 | `DD_TRACE_<INTEGRATION_NAME>_ENABLED`<br/><br/>`Integrations[<INTEGRATION_NAME>].Enabled`            | Enables or disables a specific integration. Valid values are: `true` (default) or `false`. Integration names are listed in the [Integrations][5] section.                          |
+
+#### Experimental features
+
+The following table lists configuration variables for features that are available for use but may change in future releases. 
+
+| Setting Name                                        | Description                                                                                                                                                                                                       |
+|-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`    | Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Default value is `false`. Added in version 1.26.0.             |
+| `DD_TRACE_PARTIAL_FLUSH_ENABLED`                    | Enables incrementally flushing large traces to the Datadog Agent, reducing the chance of rejection by the Agent. Use only when you have long-lived traces or traces with many spans. Valid values are `true` or `false` (default). Added in version 1.26.0, only compatible with the Datadog Agent 7.26.0+.             |
 
 ## Further reading
 
