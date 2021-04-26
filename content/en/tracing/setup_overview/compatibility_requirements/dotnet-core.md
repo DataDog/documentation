@@ -19,7 +19,7 @@ further_reading:
 ## Compatibility
 
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
- 
+
 - The .NET Tracer supports instrumentation on:
   - .NET 5
   - .NET Core 3.1
@@ -27,7 +27,7 @@ further_reading:
 
 - The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][1].
 
-<div class="alert alert-warning"> 
+<div class="alert alert-warning">
   <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
 </div>
 
@@ -47,6 +47,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
 | PostgreSQL                      | `Npgsql` 4.0+                                                           | `AdoNet`             |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                | `RabbitMQ`           |
+| Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                    | `ServiceRemoting`    |
 
 <div class="alert alert-info">
 <strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code>.

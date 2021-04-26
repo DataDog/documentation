@@ -73,7 +73,8 @@ const updateMenu = (specData, specs, languages) => {
               params: {
                 "versions": [apiVersion],
                 "operationids": [`${action.operationId}`],
-                "unstable": action.hasOwnProperty("x-unstable") ? [apiVersion] : []
+                "unstable": action.hasOwnProperty("x-unstable") ? [apiVersion] : [],
+                "order": (action.hasOwnProperty("x-menu-order")) ? parseInt(action["x-menu-order"]) : 0
               }
             };
             newMenuArray.splice(indx + 1, 0, item);
