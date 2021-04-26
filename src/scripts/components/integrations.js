@@ -263,6 +263,11 @@ export function initializeIntegrations() {
         const searchQueryParameter = getQueryParameterByName('q', window.location.href);
 
         if (searchQueryParameter) {
+            // Search query parameter should take priority if both param & category hash are present in URL.
+            if (window.location.hash) {
+                window.location.hash = '#all';
+            }
+
             updateData(searchQueryParameter, true);
 
             if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
