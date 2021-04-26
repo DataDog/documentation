@@ -42,6 +42,7 @@
       - integration/*/manifest.json
       - integration/*/service_checks.json
       - integration/*/README.md
+      - integration/*/__init__.py
 
   - repo_name: integrations-core
     contents:

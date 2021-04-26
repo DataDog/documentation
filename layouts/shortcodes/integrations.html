@@ -2,10 +2,14 @@
 
 <!-- From data file -->
 {{ $kind := "integration" }}
-{{ if eq .Site.Language.Lang "ja"}}
+{{ if eq site.Language.Lang "ja"}}
     {{ $kind = "インテグレーション"}}
 {{ end }}
-{{ $integration_list := sort (where (where (where .Site.Pages "Params.kind" "=" $kind) ".Params.beta" "!=" "true") ".Params.is_public" "=" true) ".File.BaseFileName" }}
+{{ $integration_list := (where site.Pages "Params.kind" "=" $kind) }}
+{{ $integration_list := $integration_list | intersect (where $integration_list ".Params.beta" "!=" true) }}
+{{ $integration_list := $integration_list | intersect (where $integration_list ".Params.is_public" "=" true) }}
+{{ $integration_list := $integration_list | intersect (where $integration_list ".Params.integration_id" "!=" "datadog-agent") }}
+{{ $integration_list := sort $integration_list ".File.BaseFileName" }}
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
@@ -25,28 +29,38 @@
 {{ end }}
 
 <!-- build tiles -->
-{{ $.Scratch.Add "row-count" 0 }}
-{{ $.Scratch.Set "ints" (slice)}}
-{{ range $k, $v := $integration_list }}
-    {{ $.Scratch.Set "curr_categories" (slice)}}
-    {{ range $i, $e := $v.Params.categories }}
-        {{ $.Scratch.Add "curr_categories" (print "cat-" (replace $e "/" "" | urlize)) }}
-    {{ end }}
-    {{ $urlname := $v.File.TranslationBaseName }}
-    {{ $src := (print "images/integrations_logos/" ($urlname | lower) ".png")}}
-    {{ $indx :=  $src }}
-    {{ if and $indx (fileExists (print "static/" $src)) }}
-        {{ $doc_link := (print "/integrations/" $v.Params.name "/") }}
-        {{ $.Scratch.Add "ints" (dict "id" $k "name" $v.Params.name "tags" ($.Scratch.Get "curr_categories") "item_class" "" "redirect" $doc_link "blurb" $v.Params.short_description "public_title" $v.Params.public_title) }}
-    {{ end }}
-{{ end }}
-
-{{ $json := $.Scratch.Get "ints" | jsonify }}
-{{ $test := printf "%s" $json }}
+{{- $s := newScratch -}}
+{{- range $k, $v := $integration_list -}}
+  {{- $path := (print $v.File.BaseFileName) -}}
+  {{- $s.SetInMap $path "id" $k -}}
+  {{- $s.SetInMap $path "name" ($v.Params.name | default ($v.File.TranslationBaseName | lower))  -}}
+  {{- $s.SetInMap $path "item_class" "" -}}
+  {{- $s.SetInMap $path "redirect" (print "integrations/" $v.Params.name "/") -}}
+  {{- $s.SetInMap $path "blurb" $v.Params.short_description -}}
+  {{- $s.SetInMap $path "public_title" $v.Params.public_title -}}
+  {{- $s.SetInMap $path "integration_title" $v.Params.integration_title -}}
+  {{- $curr_categories := slice -}}
+  {{- range $i, $e := $v.Params.categories -}}
+    {{- $curr_categories = $curr_categories | append (print "cat-" (replace $e "/" "" | urlize)) -}}
+  {{- end -}}
+  {{- $s.SetInMap $path "tags" ($curr_categories | default slice) -}}
+  {{- $basename := $v.Params.integration_id | default ($v.Params.name | lower) | default ($v.File.TranslationBaseName | lower) }}
+  <!-- we need to overwrite system or network tiles to be more specific -->
+  {{- if in (slice "system" "network") $v.Params.integration_id  -}}
+    {{- $basename = ($v.Params.name | lower) | default ($v.File.TranslationBaseName | lower) -}}
+  {{- end -}}
+  {{- $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "large") -}}
+  {{- $s.SetInMap $path "int_logo" $int_logo -}}
+  {{ if $int_logo }}
+    {{- $s.SetInMap "hits" $path ($s.Get $path) -}}
+  {{ end }}
+{{- end -}}
+{{- $integrationData := ($s.GetSortedMapValues "hits") -}}
+{{- $json := $integrationData | jsonify -}}
 
 <script type="text/javascript">
     var data_resources = [];
-    var integrations = {{ $test }};
+    var integrations = {{ $json }};
     window.integrations = JSON.parse(integrations);
 </script>
 
@@ -74,70 +88,39 @@
 
 <!-- using 5 col -->
 <div class="row no-gutters integration-tiles mt-4" data-ref="container">
-    {{ range $i, $v := $integration_list }}
-
-        {{ $.Scratch.Set "formatname" ""}}
-        {{ if $v.Params.integration_title }}
-            {{ $.Scratch.Set "formatname" $v.Params.integration_title }}
-        {{ else if $v.Params.name }}
-            {{ $.Scratch.Set "formatSlice" (slice)}}
-            {{ range $i, $word := (split $v.Params.name "_") }}
-                {{ $.Scratch.Add "formatSlice" (print (substr $word 0 1 | upper) (substr $word 1 (len $word))) }}
-            {{ end }}
-            {{ $.Scratch.Set "formatname" (delimit ($.Scratch.Get "formatSlice") " ") }}
-        {{ end }}
-        {{ $formatname := $.Scratch.Get "formatname" }}
-
-        {{ $urlname := $v.File.TranslationBaseName }}
-        {{ $src := (print "images/integrations_logos/" ($urlname | lower) ".png")}}
-        {{ $indx := $src }}
-
-        {{/* if  $src */}}
-        {{ if and $indx (fileExists (print "static/" $src)) }}
-            {{ if $formatname }}
-            <div id="mixid_{{$i}}" class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.Params.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
-                <div id="{{ $v.Params.name | default ($urlname | lower) }}" class="card">
-                    {{ if in $v.Params.categories "marketplace" }}
+    {{ range $integration := $integrationData }}
+        {{ if $integration.int_logo }}
+            <div id="mixid_{{ $integration.id }}" class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $cat := $integration.tags }} {{ $cat }} {{ end }}" data-id="{{ $integration.id }}" data-ref="item">
+                <div id="{{ $integration.name }}" class="card">
+                    {{ if in $integration.tags "cat-marketplace" }}
                         <div class="card-banner">
                             <p class="font-primary font-weight-bold text-uppercase">Marketplace</p>
                         </div>
                     {{ end }}
-                    <a class="card-img" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
-                        {{ $.Scratch.Set "url" ""}}
-                        {{ if $indx }}
-                            {{ $.Scratch.Set "url" (print (.Site.Params.img_url) $indx "?auto=format") | safeURL }}
-                        {{ else }}
-                            {{ $.Scratch.Set "url" (print (.Site.Params.img_url) "integrations_logos/dd-noimage.png" "?auto=format") | safeURL }}
-                        {{ end }}
-                        {{ $url := $.Scratch.Get "url" }}
+                    <a class="card-img" href="{{ $integration.redirect | absLangURL }}">
                         <picture class="mx-auto">
-                            <source srcset="{{ $url }}&w=144 1x, {{ $url }}&w=144&dpr=2 2x" media="(min-width: 530px)">
-                            <source srcset="{{ $url }}&w=200 1x, {{ $url }}&w=200&dpr=2 2x" media="(min-width: 0px)">
                             <img class="img-fluid mx-auto"
-                                 srcset="{{ $url }}&w=144"
+                                 src="{{ $integration.int_logo }}"
                                  alt="integration">
                         </picture>
                     </a>
-                    <a class="card-img-gray" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
+                    <a class="card-img-gray" href="{{ $integration.redirect | absLangURL }}">
                         <picture class="mx-auto">
-                            <source srcset="{{ $url }}&w=144&sat=-100 1x, {{ $url }}&w=144&sat=-100&dpr=2 2x" media="(min-width: 530px)">
-                            <source srcset="{{ $url }}&w=200&sat=-100 1x, {{ $url }}&w=400&sat=-100&dpr=2 2x" media="(min-width: 0px)">
                             <img class="img-fluid mx-auto"
-                                 srcset="{{ $url }}&w=144&sat=-100"
-                                 alt="integration">
+                                 src="{{ $integration.int_logo }}"
+                                 alt="integration" style="filter: saturate(0%);">
                         </picture>
                     </a>
-                    <div class="text-center title">{{ $formatname }}</div>
+                    <div class="text-center title">{{ $integration.integration_title }}</div>
                     <div class="card-body">
-                        <a class="card-button" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
-                            <h4 class="card-title">{{ $formatname }}</h4>
-                            <p class="card-text">{{ $v.Params.short_description }}</p>
+                        <a class="card-button" href="{{ $integration.redirect | absLangURL }}">
+                            <h4 class="card-title">{{ $integration.integration_title }}</h4>
+                            <p class="card-text">{{ $integration.blurb }}</p>
                             <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>
                         </a>
                     </div>
                 </div>
             </div>
-            {{ end }}
         {{ end }}
     {{ end }}
 </div>
