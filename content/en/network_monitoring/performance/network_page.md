@@ -36,18 +36,7 @@ The next example shows all aggregate connections from IP addresses representing 
 
 You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
-{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}}
-
-### Cloud service autodetection
-Filtering by specific third-party services such as S3, RDS, Kinesis, and ELB can help pinpoint latency, assess database performance, and visualize your network more completely. For instance, you can filter a search query by service, view the service in the Network Map, and trace communication on that node to see affected services.
-
-{{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
-
-- To filter a query: in search bar(s), enter tags such as `service:s3`, `service:kinesis`, and `service:elb`. For a number of services, you can break down latency and retransmits further by using more out-of-the-box tags like `s3_bucket` and `rds_instance_type`.
-- To visualize specific managed services: in the [Network Map][1], click the dropdown next to *View* and type or select desired tags. In the map, click a particular node to view troubleshooting options.
-- To view integration metrics for a service: in the Network Page, click on a row in the [dependency table](#table). In the opened side panel, use the *Integration Metrics* tab to analyze the performance of cloud services and distinguish between a client-side and cloud provider issue.
-
-To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution). 
+{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}} 
 
 ### Facet panels
 
@@ -80,7 +69,7 @@ Wildcard searches work within facets with this syntax. This query returns all th
 
 `service:*mongo`
 
-To learn more, see the [search syntax][2] documentation.
+To learn more, see the [search syntax][1] documentation.
 
 ## Network data
 
@@ -117,6 +106,17 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | **TCP Jitter** | Measured as TCP smoothed round-trip time variance. |
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the `source`. |
 | **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the `source`. |
+
+### Cloud service autodetection
+Filtering by specific third-party services such as S3, RDS, Kinesis, and ELB can help pinpoint latency, assess database performance, and visualize your network more completely. For instance, you can filter a search query by service, view the service in the Network Map, and trace communication on that node to see affected services.
+
+{{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
+
+- To filter a query: in search bar(s), enter tags such as `service:s3`, `service:kinesis`, and `service:elb`. For a number of services, you can break down latency and retransmits further by using more out-of-the-box tags like `s3_bucket` and `rds_instance_type`.
+- To visualize specific managed services: in the [Network Map][2], click the dropdown next to *View* and type or select desired tags. In the map, click a particular node to view troubleshooting options.
+- To view integration metrics for a service: in the Network Page, click on a row in the [dependency table](#table). In the opened side panel, use the *Integration Metrics* tab to analyze the performance of cloud services and distinguish between a client-side and cloud provider issue.
+
+To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
 
 ### DNS resolution
 
@@ -208,6 +208,6 @@ The top of the sidepanel displays common source and destination tags shared by t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/network_monitoring/performance/network_map/
-[2]: https://docs.datadoghq.com/logs/search_syntax/
+[1]: https://docs.datadoghq.com/logs/search_syntax/
+[2]: https://docs.datadoghq.com/network_monitoring/performance/network_map/
 [3]: /logs/explorer/saved_views/
