@@ -1,4 +1,5 @@
 environment: default
+integrations_img_url: "https://static.datadoghq.com/static/images/logos/"
 imgix:
   header_jpg: "?ch=Width&fit=max&fm=jpg&auto=format&lossless=true"
   header_png: "?ch=Width&fit=max&fm=png&auto=format&lossless=1"
