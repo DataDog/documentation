@@ -4727,6 +4727,7 @@ api:
       operationids:
         - UpdateTest
       unstable: []
+      order: 25
   - name: Get a test configuration
     url: '#get-a-test-configuration'
     identifier: get-a-test-configuration
