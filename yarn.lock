@@ -929,7 +929,7 @@
     "@datadog/browser-core" "1.25.4"
     tslib "^1.10.0"
 
-"@datadog/datadog-ci@0.11.7":
+"@datadog/datadog-ci@^0.11.7":
   version "0.11.7"
   resolved "https://registry.yarnpkg.com/@datadog/datadog-ci/-/datadog-ci-0.11.7.tgz#8ebf30c161f66a984bad02dc0c5cffbaa14b3caf"
   integrity sha512-Ibi7Opc5MxJWTnuDNNSaMc04ZWgV/yzwJ5yFit5aO24sKW7TvctVJ71qTAlhQkwTtMfNLGqO8GlIQoNmUj4KCQ==
@@ -3504,7 +3504,7 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-copy-webpack-plugin@8.1.1:
+copy-webpack-plugin@^8.1.1:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/copy-webpack-plugin/-/copy-webpack-plugin-8.1.1.tgz#3f697e162764925c2f0d235f380676125508fd26"
   integrity sha512-rYM2uzRxrLRpcyPqGceRBDpxxUV8vcDqIKxAUKfcnFpcrPxT5+XvhTxv7XLjo5AvEJFPdAE3zCogG2JVahqgSQ==
@@ -8675,7 +8675,7 @@ opentracing@>=0.12.1:
   resolved "https://registry.yarnpkg.com/opentracing/-/opentracing-0.14.5.tgz#891fa92cd90a24e64f99bc964370227310926c85"
   integrity sha512-XLKtEfHxqrWyF1fzxznsv78w3csW41ucHnjiKnfzZLD5FN8UBDZZL1i4q0FR29zjxXhm+2Hop+5Vr/b8tKIvEg==
 
-optimize-css-assets-webpack-plugin@5.0.4:
+optimize-css-assets-webpack-plugin@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/optimize-css-assets-webpack-plugin/-/optimize-css-assets-webpack-plugin-5.0.4.tgz#85883c6528aaa02e30bbad9908c92926bb52dc90"
   integrity sha512-wqd6FdI2a5/FdoiCNNkEvLeA//lHHfG24Ln2Xm2qqdIk4aOlsR18jwpyOihqQ8849W3qu2DX8fOYxpvTMj+93A==
