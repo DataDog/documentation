@@ -128,6 +128,13 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 {{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
 
+### Restrict access
+
+<div class="alert alert-warning">
+RBAC restrict access to dashboards is currently in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+
+Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][5] documentation.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -136,3 +143,4 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 [2]: /help/
 [3]: /dashboards/timeboard/
 [4]: /dashboards/screenboard/
+[5]: /account_management/rbac/

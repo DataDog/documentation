@@ -28,6 +28,7 @@ further_reading:
   - [Logs][4] data includes `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP, and several others. Review the complete list of [logs endpoints][5] for more information.
   - [Orchestrator Resources][6] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
   - [Real User Monitoring (RUM)][7] data is `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+  - [Profiling][10] data is `intake.profile.`{{< region-param key="dd_site" code="true" >}}
   - [HIPAA logs][8] data is the same as for all [Logs][4], but also the following legacy endpoints are supported:
     - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
@@ -145,6 +146,18 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
 
+## Agent-side data buffering on network unavailability
+
+If the network becomes unavailable, the Agent stores the metrics in memory.
+The maximum memory usage for storing the metrics is defined by the `forwarder_retry_queue_payloads_max_size` configuration setting. When this limit is reached, the metrics are dropped.
+
+Agent version 7.27.0 and above can store the metrics on disk when the memory limit is reached.
+Enable this capability by setting `forwarder_storage_max_size_in_bytes` to a positive value indicating the maximum amount of storage space, in bytes, that the Agent can use to store the metrics on disk.
+
+The metrics are stored in the folder defined by the `forwarder_storage_path` setting, which is by default `/opt/datadog-agent/run/transactions_to_retry` on Unix systems and `C:\ProgramData\Datadog\run\transactions_to_retry` on Windows.
+
+To avoid running out of storage space, the Agent stores the metrics on disk only if the total storage space used is less than 95 percent. This limit is defined by `forwarder_storage_max_disk_ratio` setting.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -158,3 +171,4 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [7]: /real_user_monitoring/
 [8]: /security/logs/#hipaa-enabled-customers
 [9]: /agent/proxy/
+[10]: /tracing/profiler/

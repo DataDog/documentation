@@ -52,8 +52,8 @@ nav_sections:
         link: logs/
         icon: logs.svg
         desc: Collect, process, explore, monitor, & archive your logs
-      - title: Security & Compliance
-        link: security_monitoring/
+      - title: Security Platform
+        link: security_platform/
         icon: siem.svg
         desc: Detect threats and misconfigurations across applications and infrastructure
       - title: Synthetic Monitoring
