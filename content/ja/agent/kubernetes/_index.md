@@ -145,7 +145,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 2. **Datadog API キーを含むシークレットを作成**: 下の`<DATADOG_API_KEY>` を[組織の API キー][2]に置き換えます。このシークレットはマニフェストで Datadog Agent をデプロイするために使用されます。
 
     ```shell
-    kubectl create secret generic datadog-agent --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
+    kubectl create secret generic datadog-agent --from-literal='api-key=<DATADOG_API_KEY>' --namespace="default"
     ```
 
     **注**: これにより、`default` ネームスペースでシークレットが作成されます。カスタムネームスペースを使用している場合、実行前にコマンドの `namespace` パラメーターを更新します。
