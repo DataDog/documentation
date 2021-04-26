@@ -2,6 +2,7 @@
 
 import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
+import { getQueryParameterByName } from '../helpers/helpers';
 
 export function initializeIntegrations() {
     let finderState = 0; // closed
@@ -257,12 +258,37 @@ export function initializeIntegrations() {
         }
     }
 
+    // Handle search query param filtering on page load.
+    const handleQueryParamFilter = () => {
+        const searchQueryParameter = getQueryParameterByName('q', window.location.href);
+
+        if (searchQueryParameter) {
+            updateData(searchQueryParameter, true);
+
+            if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+                window.DD_LOGS.logger.log(
+                    'Integrations Search',
+                    {
+                        browser: {
+                            integrations: {
+                                search: searchQueryParameter.toLowerCase()
+                            }
+                        }
+                    },
+                    'info'
+                );
+            }
+        }
+    }
+
     // Set controls the active controls on startup
     activateButton(controls.querySelector('[data-filter="all"]'), filters);
     activateButton(
         mobilecontrols.querySelector('[data-filter="all"]'),
         mobilefilters
     );
+
+    handleQueryParamFilter();
 
     $(window).on('hashchange', function() {
         let currentCat = '';
