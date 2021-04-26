@@ -31,21 +31,21 @@ SCHEMA HERE
 | `chmod.file.uid`     | number           | file.uid       | User ID of the file / directory       | 7.27          |
 | `chmod.file.user`    | string           | file.user      | Resolved user of the file / directory | 7.27          |
 
-## SECL legacy support
+### SECL legacy support
 
-### Input
-
-```json
-SCHEMA HERE
-```
-
-### Output
+#### Input
 
 ```json
 SCHEMA HERE
 ```
 
-### Reference
+#### Output
+
+```json
+SCHEMA HERE
+```
+
+#### Reference
 
 | SECL accessor        | Now alias of             | Was introduced in |
 |----------------------|--------------------------|-------------------|
