@@ -10,6 +10,9 @@ further_reading:
 - link: "/security_monitoring/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
+- link: "https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/"
+  tag: "Blog"
+  text: "Detect unauthorized third parties in your AWS account"
 aliases:
     - /security_monitoring/detection_rules/security_monitoring/
 ---
