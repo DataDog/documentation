@@ -23,7 +23,7 @@ L'extension Datadog est distribuée sous forme de couche Lambda autonome (distin
 2. Ajoutez la couche Lambda pour l'extension Datadog à votre fonction AWS Lambda :
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:6
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:7
     ```
 
     Remplacez le paramètre fictif `AWS_REGION` dans l'ARN de la couche Lambda par les valeurs adéquates.

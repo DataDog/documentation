@@ -33,8 +33,8 @@ The Datadog Lambda Extension is distributed as its own Lambda Layer (separate fr
 
     Replace the placeholder values in the ARN as follows:
     - Replace `<AWS_REGION>` with the same AWS region as your Lambda Function, for example, `us-east-1`.
-    - Replace `<VERSION_NUMBER>` with the version of the Datadog Lambda Extension you would like to use, for example `6`. You can identify the current version by viewing the newest image tags in the [Amazon ECR repository][11].
-    
+    - Replace `<VERSION_NUMBER>` with the version of the Datadog Lambda Extension you would like to use, for example `7`. You can identify the current version by viewing the newest image tags in the [Amazon ECR repository][11].
+
     **Note**: This Layer is separate from the Datadog Lambda Library. If you installed the Datadog Lambda Library as a Lambda Layer,
     your function should now have two Lambda Layers attached.
 
@@ -52,7 +52,7 @@ Then, add the Datadog Lambda Extension to your container image by adding the fol
 COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
 ```
 
-Replace `<TAG>` with either a specific version number (for example, `6`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][11]. 
+Replace `<TAG>` with either a specific version number (for example, `7`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][11].
 
 ## Log collection
 
