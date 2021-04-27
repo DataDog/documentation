@@ -2,7 +2,7 @@
 
 import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
-import { getQueryParameterByName } from '../helpers/helpers';
+import { updateQueryParameter, deleteQueryParameter, getQueryParameterByName } from '../helpers/browser';
 
 export function initializeIntegrations() {
     let finderState = 0; // closed
@@ -74,15 +74,17 @@ export function initializeIntegrations() {
     const mixer = mixitup(container, config);
 
     controls.addEventListener('click', function(e) {
-        // e.preventDefault();
         handleButtonClick(e.target, filters);
+
+        if (e.target.dataset.filter && e.target.dataset.filter !== 'all') {
+            deleteQueryParameter('q');
+        }
+
         // trigger same active on mobile
-        // $('.integrations-select').val('#'+e.target.getAttribute('href').substr(1));
         const mobileBtn = controls.querySelector(
             `[data-filter="${e.target.getAttribute('data-filter')}"]`
         );
         activateButton(mobileBtn, mobilefilters);
-        // return false;
     });
 
     mobilecontrols.addEventListener('click', function(e) {
@@ -110,6 +112,12 @@ export function initializeIntegrations() {
         searchTimer = setTimeout(function() {
             activateButton(allBtn, filters);
             updateData(e.target.value.toLowerCase(), true);
+
+            if (window.location.hash && window.location.hash !== 'all') {
+                window.location.hash = '#all';
+            }
+
+            updateQueryParameter('q', e.target.value.toLowerCase());
 
             if (
                 e.target.value.length > 0 &&
@@ -176,6 +184,7 @@ export function initializeIntegrations() {
     function updateData(filter, isSearch) {
         const show = [];
         const hide = [];
+
         for (let i = 0; i < window.integrations.length; i++) {
             const item = window.integrations[i];
             const domitem = document.getElementById(`mixid_${item.id}`);
