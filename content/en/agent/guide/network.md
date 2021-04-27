@@ -35,7 +35,7 @@ further_reading:
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
   - [Synthetics private location][11] workers rely on the endpoints below to submit test results:
-      - `intake.synthetics.datadoghq.com` - For sending API test results from worker versions >0.1.6
+      - `intake.synthetics.datadoghq.com` - For sending API test results from worker versions >0.1.6. For worker versions >=1.5.0 this is the only endpoint you need to configure. 
       - `intake-v2.synthetics.datadoghq.com` - For sending browser test results for worker versions >0.2.0
       - `api.datadoghq.com` - For sending API test results from older worker versions <0.1.5
 
