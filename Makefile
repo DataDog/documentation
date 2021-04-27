@@ -140,6 +140,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
 	@if [ content/en/real_user_monitoring/ios.md ]; then \
 	rm -f content/en/real_user_monitoring/ios.md ;fi
+	@if [ content/en/real_user_monitoring/reactnative.md ]; then \
+	rm -f content/en/real_user_monitoring/reactnative.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
