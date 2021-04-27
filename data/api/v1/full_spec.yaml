@@ -13350,21 +13350,8 @@ paths:
       x-given:
         dashboard:
           parameters:
-          - name: body
-            value: "{\n  \"layout_type\": \"ordered\",\n  \"title\": \"{{ unique }}\
-              \ with Profile Metrics Query\",\n  \"widgets\": [\n    {\n      \"definition\"\
-              : {\n        \"type\": \"timeseries\",\n        \"requests\": [\n  \
-              \        {\n            \"profile_metrics_query\": {\n             \
-              \ \"compute\": {\n                \"aggregation\": \"sum\",\n      \
-              \          \"facet\": \"@prof_core_cpu_cores\"\n              },\n \
-              \             \"search\": { \"query\": \"runtime:jvm\" },\n        \
-              \      \"group_by\": [\n                {\n                  \"facet\"\
-              : \"service\",\n                  \"limit\": 10,\n                 \
-              \ \"sort\": {\n                    \"aggregation\": \"sum\",\n     \
-              \               \"order\": \"desc\",\n                    \"facet\"\
-              : \"@prof_core_cpu_cores\"\n                  }\n                }\n\
-              \              ]\n            }\n          }\n        ]\n      }\n \
-              \   }\n  ]\n}"
+          - file: dashboard_payload.json
+            name: body
           step: there is a valid "dashboard" in the system
       x-menu-order: 1
       x-undo:
