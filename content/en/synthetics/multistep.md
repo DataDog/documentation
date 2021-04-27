@@ -111,6 +111,14 @@ You can create up to 10 assertions per step by clicking on **New Assertion** or 
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 
+##### Failure behavior
+
+The `Continue with test if this step fails` setting allows Multistep API tests to move on with subsequent steps even in case of step failure. This is particularly useful to ensure your tests are able to clean up after themselves. For instance, a test might first create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fails, you still want the resource to be deleted at the end of the test to avoid generating false positives. This can be done using the `Continue with test if this step fails` on every intermediary step.
+
+You should also activate the `Consider entire test as failed if this step fails` setting on your intermediary steps to ensure your overall test still generates an alert in case one of the endpoints does not answer as expected.
+
+Similarly, if your Multistep API test runs on a variety of endpoints, the two failure behavior settings can help ensure your test performs all requests even in case of issue with one or several of the API endpoints.
+
 #### Extract variables from the response
 
 You can also optionally extract variables from the response of your HTTP request by parsing its response headers or body. The value of the variable is updated each time the HTTP request step is being run.

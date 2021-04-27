@@ -506,6 +506,33 @@
           description: "Collect RUM data from your iOS applications."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection.md"]
 
+  - repo_name: dd-sdk-reactnative
+    contents:
+
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/real_user_monitoring/'
+        file_name: 'reactnative.md'
+        front_matters:
+          title: React Native RUM Collection
+          kind: documentation
+          beta: true
+          description: "Collect RUM data from your React Native projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "Github"
+              text: "dd-sdk-reactnative source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+            - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
+              tag: "Blog"
+              text: "Monitor react-native applications"
+
   - repo_name: security-monitoring
     contents:
     - action: security-rules
