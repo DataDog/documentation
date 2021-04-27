@@ -68,7 +68,7 @@ Otherwise, to begin tracing your applications:
 
 {{% tab "Windows" %}}
 
-1. Download the [.NET Tracer MSI installer][2]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
@@ -76,7 +76,10 @@ Otherwise, to begin tracing your applications:
 
 4. Create application load.
 
-5. Visit [APM Live Traces][3].
+5. Visit [APM Live Traces][2].
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+[2]: https://app.datadoghq.com/apm/traces
 
 {{% /tab %}}
 
@@ -93,7 +96,7 @@ Otherwise, to begin tracing your applications:
       curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
       sudo rpm -Uvh datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
       ```
-    - **Alpine or other [musl-based distributions][2]** - Download the tar archive with the musl-linked binary:
+    - **Alpine or other [musl-based distributions][1]** - Download the tar archive with the musl-linked binary:
       ```bash
       sudo mkdir -p /opt/datadog
       curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>-musl.tar.gz \
@@ -112,11 +115,10 @@ Otherwise, to begin tracing your applications:
 
 4. Create application load.
 
-5. Visit [APM Live Traces][3].
+5. Visit [APM Live Traces][2].
 
-[1]: /agent/basic_agent_usage/
-[2]: https://en.wikipedia.org/wiki/Musl
-[3]: https://app.datadoghq.com/apm/traces
+[1]: https://en.wikipedia.org/wiki/Musl
+[2]: https://app.datadoghq.com/apm/traces
 
 {{% /tab %}}
 
@@ -188,10 +190,6 @@ Name                       | Value
   <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be instrumented. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
 </div>
 
-[1]: /agent/basic_agent_usage/
-[2]: https://github.com/DataDog/dd-trace-dotnet/releases
-[3]: https://app.datadoghq.com/apm/traces
-
 {{% /tab %}}
 
 {{% tab "Linux" %}}
@@ -210,7 +208,7 @@ The following environment variables are required to enable automatic instrumenta
   `DD_INTEGRATIONS`          | `/opt/datadog/integrations.json`
   `DD_DOTNET_TRACER_HOME`    | `/opt/datadog`
 
-#### Set the environment variables by bash script
+#### Bash script
 
 To set the required environment variables from a bash file before starting your application:
 
@@ -256,7 +254,7 @@ When using `systemctl` to run .NET applications as a service, you can add the re
     DD_DOTNET_TRACER_HOME=/opt/datadog
     # any other environment variable used by the application
     ```
-2. In the service's configuration file, reference this as an [`EnvironmentFile`][2] in the service block:
+2. In the service's configuration file, reference this as an [`EnvironmentFile`][1] in the service block:
 
     ```ini
     [Service]
@@ -286,8 +284,7 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 
 3. Restart the .NET service for the environment variables to take effect.
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[1]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 
 {{% /tab %}}
 
@@ -307,7 +304,7 @@ For more details on custom instrumentation and custom tagging, see [.NET Custom 
 
 ## Install and configure the Agent for APM
 
-[Install the Datadog Agent][1] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
+[Install the Datadog Agent][7] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
 
 {{< tabs >}}
 
@@ -527,3 +524,4 @@ The following table lists configuration variables for features that are availabl
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
 [6]: https://app.datadoghq.com/apm/docs
+[7]: https://docs.datadoghq.com/agent/basic_agent_usage/
