@@ -120,6 +120,8 @@ Otherwise, to begin tracing your applications:
 
 {{% /tab %}}
 
+{{< /tabs >}}
+
 ### Instrumenting your service
 
 {{< tabs >}}
@@ -191,8 +193,6 @@ Name                       | Value
 [3]: https://app.datadoghq.com/apm/traces
 
 {{% /tab %}}
-
-{{< /tabs >}}
 
 {{% tab "Linux" %}}
 
@@ -334,14 +334,15 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 
 
 [1]: /tracing/serverless_functions/
+
 {{% /tab %}}
 
 {{% tab "Azure App Services Extension" %}}
 
 To set up Datadog APM in Azure App Service, see the [Tracing Azure App Services Extension][1] documentation.
 
-
 [1]: /serverless/azure_app_services/#overview
+
 {{% /tab %}}
 
 {{% tab "Other Environments" %}}
@@ -491,7 +492,7 @@ The following table below lists configuration variables that are available for b
 | `DD_TRACE_LOGGING_RATE`                             | Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default. |
 | `DD_TRACE_SERVICE_MAPPING`                          | Rename services using configuration. Accepts a map of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. For example: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`. `from-key` is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0 |
 | `DD_TAGS`<br/><br/>`GlobalTags`                     | If specified, adds all of the specified tags to all generated spans. Example: `layer:api,team:intake`. Added in version 1.17.0.                                                           |
-        
+
 
 #### Automatic instrumentation
 
@@ -509,7 +510,7 @@ The following table lists configuration variables that are available **only** wh
 
 #### Experimental features
 
-The following table lists configuration variables for features that are available for use but may change in future releases. 
+The following table lists configuration variables for features that are available for use but may change in future releases.
 
 | Setting Name                                        | Description                                                                                                                                                                                                       |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
