@@ -34,6 +34,11 @@ further_reading:
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+  - [Synthetics private location][11] workers rely on the endpoints below to submit test results:
+      - `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} for sending API test results from worker versions >0.1.6. For worker versions >=1.5.0 this is the only endpoint you need to configure. 
+      - `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} for sending browser test results for worker versions >0.2.0
+      - `api.`{{< region-param key="dd_site" code="true" >}} for sending API test results from older worker versions <0.1.5
+
   - All other Agent data:
       - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
       - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
@@ -44,6 +49,7 @@ Since v6.1.0, the Agent also queries Datadog's API to provide non-critical funct
 
 - **Agent >= 7.18.0/6.18.0** `api.`{{< region-param key="dd_site" code="true" >}}
 - **Agent < 7.18.0/6.18.0** `app.`{{< region-param key="dd_site" code="true" >}}
+
 
 All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
@@ -172,3 +178,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [8]: /security/logs/#hipaa-enabled-customers
 [9]: /agent/proxy/
 [10]: /tracing/profiler/
+[11]: /synthetics/private_locations
