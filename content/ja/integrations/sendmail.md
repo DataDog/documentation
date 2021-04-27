@@ -11,13 +11,13 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md'
 display_name: Sendmail
-draft: true
+draft: false
 git_integration_title: sendmail
 guid: 4d4f72c7-c8c5-4e7a-b281-32c2d462c7c8
 integration_id: sendmail
 integration_title: Sendmail
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: david.bouchare@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: sendmail.

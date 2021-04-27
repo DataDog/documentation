@@ -39,11 +39,11 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 
 Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces. The Agent can [tail log files][2] or [listen for logs sent over UDP/TCP][2], and you can configure it to [filter out logs][3], [scrub sensitive data][3], or aggregate [multi line logs][4].
 
+
 [1]: /agent/logs/
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
-
 {{% /tab %}}
 
 {{% tab "Application" %}}
@@ -54,32 +54,32 @@ After you have [enabled log collection][1], configure your application language 
 
 **Note**: JSON-formatted logging helps handle multi-line application logs. JSON-formatted logs are automatically parsed by Datadog. If you have control over the log format you send to Datadog, it is recommended that you format logs as JSON to avoid the need for custom parsing rules.
 
-[1]: /agent/logs/
 
+[1]: /agent/logs/
 {{% /tab %}}
 
 {{% tab "Container" %}}
 
-The Datadog Agent can [collect logs directly from container stdout/stderr][13] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
-It is possible to collect logs from all your containers or [only a subset filtered by container image, label, or name][14]. Autodiscovery can also be used to [configure log collection directly in the container labels][15]. In Kubernetes environments you can also leverage [the daemonset installation][16].
+The Datadog Agent can [collect logs directly from container stdout/stderr][1] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
+It is possible to collect logs from all your containers or [only a subset filtered by container image, label, or name][2]. Autodiscovery can also be used to [configure log collection directly in the container labels][3]. In Kubernetes environments you can also leverage [the daemonset installation][4].
 
 Choose your environment below to get dedicated log collection instructions:
 
 {{< partial name="logs/logs-containers.html" >}}
 
-[13]: /agent/docker/log/
-[14]: /agent/guide/autodiscovery-management/
-[15]: /agent/kubernetes/integrations/
-[16]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 
+[1]: /agent/docker/log/
+[2]: /agent/guide/autodiscovery-management/
+[3]: /agent/kubernetes/integrations/
+[4]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 {{% /tab %}}
 
 {{% tab "Serverless" %}}
 
-Datadog collects logs from AWS Lambda. To enable this, refer to the [serverless monitoring documentation][17].
+Datadog collects logs from AWS Lambda. To enable this, refer to the [serverless monitoring documentation][1].
 
-[17]: /serverless/forwarder
 
+[1]: /serverless/forwarder
 {{% /tab %}}
 
 {{% tab "Cloud/Integration" %}}
@@ -92,11 +92,11 @@ Datadog integrations and log collection are tied together. Use an integration de
 
 Consult the [list of available supported integrations][4].
 
+
 [1]: /logs/processing/
 [2]: /logs/processing/parsing/
 [3]: /logs/explorer/facets/
 [4]: /integrations/#cat-log-collection
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -106,49 +106,21 @@ Consult the [list of available supported integrations][4].
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections. Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][6].
 
-{{< site-region region="us" >}}
-
-Endpoints that can be used to send logs to the Datadog US region:
+Endpoints that can be used to send logs to Datadog:
 
 | Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `agent-intake.logs.datadoghq.com`       | `10516` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
-| `agent-http-intake.logs.datadoghq.com`  | `443`   | Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][1].                                                        |
-| `http-intake.logs.datadoghq.com`        | `443`   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][1].                                       |
-| `intake.logs.datadoghq.com`             | `10516` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
-| `lambda-intake.logs.datadoghq.com`      | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
-| `lambda-http-intake.logs.datadoghq.com` | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
-| `functions-intake.logs.datadoghq.com`   | `10516` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
+| `{{< region-param key="tcp_endpoint" code="true" >}}`       | `{{< region-param key="tcp_endpoint_port" code="true" >}}` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
+| `{{< region-param key="agent_http_endpoint" code="true" >}}`  | `{{< region-param key="agent_http_port" code="true" >}}`   | Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][7].                                                        |
+| `{{< region-param key="http_endpoint" code="true" >}}`  | `{{< region-param key="http_port" code="true" >}}`   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][7].                                       |
+| `{{< region-param key="web_integrations_endpoint" code="true" >}}`  | `{{< region-param key="web_integrations_port" code="true" >}}`   | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
+| `{{< region-param key="lambda_endpoint" code="true" >}}`  | `{{< region-param key="lambda_port" code="true" >}}`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
+| `{{< region-param key="lambda_http_endpoint" code="true" >}}`  | `{{< region-param key="lambda_http_port" code="true" >}}`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
+| `{{< region-param key="functions_endpoint" code="true" >}}`  | `{{< region-param key="functions_port" code="true" >}}`   | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
 | Endpoint for unencrypted connections | Port    | Description                                                                                              |
 |--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
-| `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
-
-[1]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-Endpoints that can be used to send logs to Datadog EU region:
-
-| Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
-|-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `agent-intake.logs.datadoghq.eu`        | `443` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
-| `agent-http-intake.logs.datadoghq.eu`   | `443` | Used by the Agent to send logs in JSON format over HTTPS. See the [Agent logs documentation][1].                                                        |
-| `http-intake.logs.datadoghq.eu`         | `443` | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Agent logs documentation][1].                                       |
-| `tcp-intake.logs.datadoghq.eu`          | `443` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
-| `lambda-intake.logs.datadoghq.eu`       | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
-| `lambda-http-intake.logs.datadoghq.eu`  | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
-| `functions-intake.logs.datadoghq.eu`    | `443` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
-
-| Endpoint for unencrypted connections | Port   | Description                                                                                                     |
-|--------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------|
-| `tcp-intake.logs.datadoghq.eu`       | `1883` | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection. |
-
-[1]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
+| `{{< region-param key="web_integrations_endpoint" code="true" >}}`          | `{{< region-param key="web_integrations_unencrypted_port" code="true" >}}` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unencrypted TCP connection. |
 
 ### Custom log forwarding
 
@@ -159,8 +131,8 @@ Any custom process or logging library able to forward logs through **TCP** or **
 
 You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][1] to get started.
 
-[1]: /api/v1/logs/#send-logs
 
+[1]: /api/v1/logs/#send-logs
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -196,8 +168,6 @@ telnet intake.logs.datadoghq.com 10514
 
 {{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet"  style="width:100%;">}}
 
-[1]: https://app.datadoghq.com/account/settings#api
-[2]: https://app.datadoghq.com/logs/livetail
 
 {{< /site-region >}}
 
@@ -233,10 +203,15 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 {{< img src="logs/custom_log_telnet_json_.png" alt="Custom telnet"  style="width:100%;">}}
 
+{{< /site-region >}}
+
+{{< site-region region="us3,gov" >}}
+A TCP endpoint is not supported for this region.
+{{< /site-region >}}
+
+
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
-
-{{< /site-region >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -251,7 +226,7 @@ Log events that do not comply with these limits might be transformed or truncate
 
 ### Attributes and tags
 
-Attributes prescribe [logs facets][7], which are used for filtering and searching in Log Explorer. See the dedicated [attributes and aliasing][8] documentation for a list of reserved and standard attributes and to learn how to support a naming convention with logs attributes and aliasing.
+Attributes prescribe [logs facets][8], which are used for filtering and searching in Log Explorer. See the dedicated [attributes and aliasing][9] documentation for a list of reserved and standard attributes and to learn how to support a naming convention with logs attributes and aliasing.
 
 #### Attributes for stack traces
 
@@ -271,7 +246,7 @@ To enable these functionalities use the following attribute names:
 
 **Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 
-For more information, see the complete [source code attributes documentation][9].
+For more information, see the complete [source code attributes documentation][10].
 
 ## Next steps
 
@@ -291,8 +266,8 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [4]: /integrations/fluentd/#log-collection
 [5]: /integrations/logstash/#log-collection
 [6]: /security/logs/#information-security
-[7]: /logs/explorer/facets/
-[8]: /logs/processing/attributes_naming_convention
-[9]: /logs/processing/attributes_naming_convention/#source-code
-[10]: /getting_started/tagging/unified_service_tagging
+[7]: /agent/logs/#send-logs-over-https
+[8]: /logs/explorer/facets/
+[9]: /logs/processing/attributes_naming_convention
+[10]: /logs/processing/attributes_naming_convention/#source-code
 [11]: /logs/explore/

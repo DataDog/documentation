@@ -1,7 +1,7 @@
 ---
 title: "Live\_Tail"
 kind: documentation
-description: Effectuer des recherches sur l'ensemble de vos logs et réaliser des analyses de logs
+description: Effectuer des recherches et des analyses sur l'ensemble de vos logs
 aliases:
   - /fr/logs/explore/livetail
   - /fr/logs/live_tail

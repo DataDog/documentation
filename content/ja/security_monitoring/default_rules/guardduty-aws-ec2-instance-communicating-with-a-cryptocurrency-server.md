@@ -13,8 +13,6 @@ technique: T1496-resource-hijacking
 title: 暗号通貨サーバーと通信する AWS EC2 インスタンス
 type: security_rules
 ---
-## 概要
-
 ### 目標
 EC2 インスタンスが暗号通貨サーバーと通信していることを検出します
 

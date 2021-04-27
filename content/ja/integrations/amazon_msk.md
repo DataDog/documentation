@@ -37,17 +37,18 @@ Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming fo
 
 1. まだ作成していない場合は、[クライアントマシンを作成します][3]
 2. クライアントマシンにアクセス許可ポリシー（[arn:aws:iam::aws:policy/AmazonMSKReadOnlyAccess][5]）が[付与][4]されているか、これに相当する[資格情報][6]が使用できることを確認します
-3. [Datadog Agent][7] をインストールします
+3. MSK 側で [Prometheus によるオープンモニタリング][7]を有効にし、JmxExporter および NodeExporter を有効にします。
+4. [Datadog Agent][8]をインストール
 
 ### コンフィギュレーション
 
-1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `amazon_msk.d/conf.yaml` ファイルを編集し、Amazon MSK のパフォーマンスデータの収集を開始します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[amazon_msk.d/conf.yaml のサンプル][8]を参照してください。
+1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `amazon_msk.d/conf.yaml` ファイルを編集し、Amazon MSK のパフォーマンスデータの収集を開始します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル amazon_msk.d/conf.yaml][3]を参照してください。
 
-2. [Agent を再起動します][9]。
+2. [Agent を再起動します][10]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `amazon_msk` を探します。
+[Agent の status サブコマンドを実行][11]し、Checks セクションで  `amazon_msk` を探します。
 
 ### 収集データ
 
@@ -75,13 +76,13 @@ Amazon MSK チェックには、イベントは含まれません。
 
 ### インストール
 
-[Amazon Web Services インテグレーション][12]をまだセットアップしていない場合は、最初にセットアップします。
+[Amazon Web Services インテグレーション][13]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][13]のメトリクス収集で、`MSK` をオンにします。
+1. [AWS インテグレーションタイル][14]のメトリクス収集で、`MSK` をオンにします。
 
-2. [Datadog - Amazon MSK インテグレーション][14]をインストールします。
+2. [Datadog - Amazon MSK インテグレーション][15]をインストールします。
 
 ### ログの収集
 
@@ -93,11 +94,11 @@ Amazon MSK から S3 バケットまたは CloudWatch のいずれかにログ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][15]をまだ設定していない場合は、設定を行ってください。
+1. [Datadog ログ コレクション AWS Lambda 関数][16]をまだ実行していない場合は、セットアップします。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon MSK ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
-    - [S3 バケットに手動トリガーを追加][16]
-    - [Cloudwatch ロググループに手動トリガーを追加][17]
+    - [S3 バケットに手動トリガーを追加][17]
+    - [Cloudwatch ロググループに手動でトリガーを追加][18]
 
 ### 収集データ
 
@@ -107,7 +108,7 @@ Amazon MSK クローラーには、イベントやサービスのチェック機
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][18]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][19]までお問合せください。
 
 [1]: https://aws.amazon.com/msk
 [2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations/
@@ -115,15 +116,16 @@ Amazon MSK クローラーには、イベントやサービスのチェック機
 [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role
 [5]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AmazonMSKReadOnlyAccess
 [6]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#configuring-credentials
-[7]: https://docs.datadoghq.com/ja/agent/
-[8]: https://github.com/DataDog/integrations-core/blob/master/amazon_msk/datadog_checks/amazon_msk/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/amazon_msk/metadata.csv
-[12]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[13]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[14]: https://app.datadoghq.com/account/settings#integrations/amazon-msk
-[15]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[16]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[17]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[18]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.aws.amazon.com/msk/latest/developerguide/open-monitoring.html
+[8]: https://docs.datadoghq.com/ja/agent/
+[9]: https://github.com/DataDog/integrations-core/blob/master/amazon_msk/datadog_checks/amazon_msk/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://github.com/DataDog/integrations-core/blob/master/amazon_msk/metadata.csv
+[13]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[14]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[15]: https://app.datadoghq.com/account/settings#integrations/amazon-msk
+[16]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[17]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[18]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[19]: https://docs.datadoghq.com/ja/help/

@@ -30,6 +30,8 @@ Apply log processing rules to a specific log collection configurations to:
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
+**Note**: Processing rule patterns must conform to [Golang regexp syntax][1].
+
 To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
 
 ## Filter logs
@@ -48,7 +50,7 @@ For example, to **filter OUT** logs that contain a Datadog email address, use th
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -126,7 +128,7 @@ spec:
 
 | Parameter          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
-| `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. |
+| `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. If multiple `include_at_match` rules are defined, all rules patterns must match in order for the log to be included. |
 
 
 For example, to **filter IN** logs that contain a Datadog email address, use the following `log_processing_rules`:
@@ -135,7 +137,7 @@ For example, to **filter IN** logs that contain a Datadog email address, use the
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -147,10 +149,10 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-**Note**: If multiple `include_at_match` rules are defined, all rules patterns must match in order for the log to be included. If you want to match one or more patterns you must define them in a single expression:
+If you want to match one or more patterns you must define them in a single expression:
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -164,7 +166,7 @@ logs:
 If the patterns are too long to fit legibly on a single line you can break them into multiple lines:
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -251,7 +253,7 @@ For example, redact credit card numbers:
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs:
+logs_config:
  - type: file
    path: /my/test/file.log
    service: cardpayment
@@ -357,7 +359,7 @@ For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format.
 To send the example logs above with a configuration file, use the following `log_processing_rules`:
 
 ```yaml
-logs:
+logs_config:
  - type: file
    path: /var/log/pg_log.log
    service: database
@@ -443,7 +445,7 @@ More examples:
 
 ## Commonly used log processing rules
 
-See the dedicated [Commonly Used Log Processing Rules FAQ][1] to see a list of examples.
+See the dedicated [Commonly Used Log Processing Rules FAQ][2] to see a list of examples.
 
 ## Tail directories by using wildcards
 
@@ -461,7 +463,7 @@ If your log files are labeled by date or all stored in the same directory, confi
 Configuration example:
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /var/log/myapp/*.log
     exclude_paths:
@@ -477,12 +479,12 @@ The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp
 
 ## Encode UTF-16 format logs
 
-If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer][2]. Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
+If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer][3]. Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
 
 Configuration example:
 
 ```yaml
-logs:
+logs_config:
   - type: file
     path: /test/log/hello-world.log
     tags: key:value
@@ -495,7 +497,7 @@ logs:
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][3] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][4] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -538,7 +540,7 @@ env:
 {{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][4] to troubleshoot any issues.
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][5] to troubleshoot any issues.
 
 ## Further Reading
 
@@ -547,8 +549,8 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-
-[1]: /agent/faq/commonly-used-log-processing-rules
-[2]: https://docs.datadoghq.com/logs/explorer/#overview
-[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[4]: /agent/guide/agent-commands/#agent-information
+[1]: https://golang.org/pkg/regexp/syntax/
+[2]: /agent/faq/commonly-used-log-processing-rules
+[3]: https://docs.datadoghq.com/logs/explorer/#overview
+[4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: /agent/guide/agent-commands/#agent-information

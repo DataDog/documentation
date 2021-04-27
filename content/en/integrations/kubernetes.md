@@ -23,6 +23,7 @@ categories:
     - log collection
 doc_link: /integrations/kubernetes/
 ddtype: check
+integration_id: "kubernetes"
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard"  >}}

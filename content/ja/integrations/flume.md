@@ -15,13 +15,13 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/flume/README.md'
 display_name: flume
-draft: true
+draft: false
 git_integration_title: flume
 guid: 39644ce3-222b-4b97-81b4-55dd8a1db3ea
 integration_id: flume
 integration_title: flume
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: kealan.maas@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: flume.

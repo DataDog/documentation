@@ -12,8 +12,6 @@ source: elasticsearch
 title: Elasticsearch ドメインが KMS カスタマーマスターキーで暗号化
 type: security_rules
 ---
-## 概要
-
 ## 説明
 
 Amazon Elasticsearch ドメインを KMS カスタマーマスターキー (CMK) で暗号化します。

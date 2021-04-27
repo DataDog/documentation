@@ -12,8 +12,6 @@ source: rds
 title: デフォルトのポートを持つ RDS インスタンス
 type: security_rules
 ---
-## 概要
-
 ## 説明
 
 [Amazon RDS データベースインスタンス][1]がデフォルトのポートを使用していないことを確認します。MySQL/Aurora ポート 3306、SQL Server ポート 1433、 PostgreSQL ポート 5432 などのデフォルトポートが含まれます。

@@ -32,7 +32,11 @@ supported_os:
 ---
 ## 概要
 
-任意の Prometheus エンドポイントからカスタムメトリクスを抽出します。**注**: Prometheus テキスト形式を効率よくフルにサポートできるため、[OpenMetrics check][1] の使用をお勧めします。メトリクスエンドポイントがテキスト形式をサポートしない場合のみ、Prometheus チェックを使用してください。
+Prometheus に接続して:
+- Prometheus エンドポイントからカスタムメトリクスを抽出します
+- Datadog イベントストリームで Prometheus Alertmanager アラートを確認します
+
+**注**: [OpenMetrics チェック][1]の方が効率性が高く Prometheus のテキスト形式を完全にサポートしているので、OpenMetrics チェックの使用をお勧めします。Prometheus チェックは、メトリクスのエンドポイントがテキスト形式をサポートしていない場合にのみ使用してください。
 
 <div class="alert alert-warning">
 このインテグレーションによって取得されたメトリクスはすべて、<a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">カスタムメトリクス</a>と見なされます。
@@ -82,11 +86,28 @@ Prometheus チェックによって収集されたメトリクスはすべて、
 
 ### イベント
 
-Prometheus チェックには、イベントは含まれません。
+Prometheus Alertmanager アラートは、Webhook コンフィギュレーションに従って、Datadog イベントストリームに自動的に送信されます。
 
 ### サービスのチェック
 
 Prometheus チェックには、サービスのチェック機能は含まれません。
+
+## Prometheus Alertmanager
+イベントストリームで Prometheus Alertmanager アラートを送信します。
+
+### セットアップ
+1. Alertmanager コンフィギュレーションファイル `alertmanager.yml` を編集して、以下を含めます。
+```
+receivers:
+- name: datadog
+  webhook_configs: 
+  - send_resolved: true
+    url: https://app.datadoghq.com/intake/webhook/prometheus?api_key=<DATADOG_API_KEY>
+```
+2. Prometheus および Alertmanager サービスを再起動します。
+```
+sudo systemctl restart prometheus.service alertmanager.service
+```
 
 ## トラブルシューティング
 
@@ -97,6 +118,7 @@ Prometheus チェックには、サービスのチェック機能は含まれま
 - [Datadog Agent 6 用の Prometheus サポートの導入][7]
 - [Prometheus チェックの構成][8]
 - [カスタム Prometheus チェックの書き方][9]
+- [Prometheus Alertmanager ドキュメント] [11]
 
 [1]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [2]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/

@@ -95,6 +95,8 @@ Datadog also supports the ability to graph your metrics with various arithmetic 
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
+**Note**: Queries using commas are only supported in visualisations, they do not work on monitors. Use [boolean operators][12] or arithmetic operations to combine multiple metrics in a monitor.
+
 #### Metric arithmetic using an integer
 
 Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
@@ -165,3 +167,4 @@ View event correlations by using the **Event Overlays** section in the graphing 
 [9]: /dashboards/functions/#apply-functions-optional
 [10]: /events/#event-query-language
 [11]: /metrics/advanced-filtering/
+[12]: /metrics/advanced-filtering/#boolean-filtered-queries

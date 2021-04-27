@@ -108,7 +108,17 @@
           "data": [
             {
               "attributes": {
-                "destination": {},
+                "destination": {
+                  "container": "container-name",
+                  "integration": {
+                    "client_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
+                    "tenant_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa"
+                  },
+                  "path": "string",
+                  "region": "string",
+                  "storage_account": "account-name",
+                  "type": "azure"
+                },
                 "include_tags": false,
                 "name": "Nginx Archive",
                 "query": "source:nginx",
@@ -146,7 +156,17 @@
         "json": {
           "data": {
             "attributes": {
-              "destination": {},
+              "destination": {
+                "container": "container-name",
+                "integration": {
+                  "client_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
+                  "tenant_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa"
+                },
+                "path": "string",
+                "region": "string",
+                "storage_account": "account-name",
+                "type": "azure"
+              },
               "include_tags": false,
               "name": "Nginx Archive",
               "query": "source:nginx",
@@ -183,7 +203,12 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "destination": null,
+            "destination": {
+              "integration": {
+                "client_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
+                "tenant_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa"
+              }
+            },
             "name": "Nginx Archive",
             "query": "source:nginx"
           },
@@ -193,7 +218,17 @@
       "json": {
         "data": {
           "attributes": {
-            "destination": {},
+            "destination": {
+              "container": "container-name",
+              "integration": {
+                "client_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
+                "tenant_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa"
+              },
+              "path": "string",
+              "region": "string",
+              "storage_account": "account-name",
+              "type": "azure"
+            },
             "include_tags": false,
             "name": "Nginx Archive",
             "query": "source:nginx",
@@ -247,7 +282,17 @@
         "json": {
           "data": {
             "attributes": {
-              "destination": {},
+              "destination": {
+                "container": "container-name",
+                "integration": {
+                  "client_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
+                  "tenant_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa"
+                },
+                "path": "string",
+                "region": "string",
+                "storage_account": "account-name",
+                "type": "azure"
+              },
               "include_tags": false,
               "name": "Nginx Archive",
               "query": "source:nginx",
@@ -300,7 +345,17 @@
         "json": {
           "data": {
             "attributes": {
-              "destination": {},
+              "destination": {
+                "container": "container-name",
+                "integration": {
+                  "client_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
+                  "tenant_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa"
+                },
+                "path": "string",
+                "region": "string",
+                "storage_account": "account-name",
+                "type": "azure"
+              },
               "include_tags": false,
               "name": "Nginx Archive",
               "query": "source:nginx",
@@ -345,7 +400,12 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "destination": null,
+            "destination": {
+              "integration": {
+                "client_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
+                "tenant_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa"
+              }
+            },
             "name": "Nginx Archive",
             "query": "source:nginx"
           },
@@ -355,7 +415,17 @@
       "json": {
         "data": {
           "attributes": {
-            "destination": {},
+            "destination": {
+              "container": "container-name",
+              "integration": {
+                "client_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
+                "tenant_id": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa"
+              },
+              "path": "string",
+              "region": "string",
+              "storage_account": "account-name",
+              "type": "azure"
+            },
             "include_tags": false,
             "name": "Nginx Archive",
             "query": "source:nginx",

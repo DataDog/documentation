@@ -524,7 +524,7 @@ You can also **vertically scale** your private locations using the [`concurrency
 
 * Base requirement: 150mCores/150MiB
 
-* Additional equirement per slot:
+* Additional requirement per slot:
 
 | Private location test type                          | Recommended concurrency range | CPU/Memory recommendation |
 | --------------------------------------------------- | ----------------------------- | ------------------------- |

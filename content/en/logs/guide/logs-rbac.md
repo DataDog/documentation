@@ -1,9 +1,12 @@
 ---
-title: How to set up Logs RBAC
+title: How to set up RBAC for Logs
 aliases:
   - /logs/guide/restrict-access-to-log-events-with-restriction-queries
 kind: guide
 further_reading:
+- link: "/logs/guide/logs-rbac-permissions/"
+  tag: "Documentation"
+  text: "Learn more about RBAC permissions for Logs"
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn more about Log Explorer"
@@ -13,9 +16,6 @@ further_reading:
 - link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Explore Live Tail"
-- link: "/logs/logs_to_metrics/"
-  tag: "Documentation"
-  text: "Learn how to generate metrics from ingested logs"
 ---
 
 ## Overview

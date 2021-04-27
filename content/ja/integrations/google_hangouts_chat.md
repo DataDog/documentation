@@ -1,6 +1,7 @@
 ---
 categories:
   - コラボレーション
+  - notification
 ddtype: crawler
 dependencies: []
 description: Datadog のアラートとグラフをチームの Google Hangouts ルームへ送信
@@ -37,7 +38,7 @@ version: '1.0'
 
 Hangouts Chat インテグレーションは、Datadog アプリケーションの[インテグレーションタイル][1]から、Hangouts ルームにボットを追加することでインストールされます。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. `@DataDog` を使用して Datadog チャットボットを Google Hangouts ルームに追加します。注: Datadog チャットボットをルームに追加するには、[それをホワイトリストに登録][2]する必要があります。
 2. `@Datadog install` と入力して、Google Hangouts ルームに Datadog チャットボットをインストールします。

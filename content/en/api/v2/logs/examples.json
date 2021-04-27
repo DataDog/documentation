@@ -10,7 +10,10 @@
                   "<any-key>": "string"
                 },
                 "computes": {
-                  "<any-key>": "undefined"
+                  "<any-key>": {
+                    "description": "undefined",
+                    "type": "undefined"
+                  }
                 }
               }
             ]
@@ -95,14 +98,20 @@
               "min": 50
             },
             "limit": "integer",
-            "missing": "undefined",
+            "missing": {
+              "description": "undefined",
+              "type": "undefined"
+            },
             "sort": {
               "aggregation": "pc90",
               "metric": "@duration",
               "order": "asc",
               "type": "string"
             },
-            "total": "undefined"
+            "total": {
+              "description": "undefined",
+              "type": "undefined"
+            }
           }
         ],
         "options": {

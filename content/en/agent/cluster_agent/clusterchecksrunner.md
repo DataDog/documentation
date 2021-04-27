@@ -52,7 +52,7 @@ datadogagent.datadoghq.com/datadog created
 See the [Datadog Operator repo][2] for more information about the Datadog Operator.
 
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-dca-clusterchecksrunner.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-dca-clusterchecksrunner.yaml
 [2]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}

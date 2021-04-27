@@ -1,1 +1,9 @@
-<div class="{{- if .Get "responsive" -}}table-responsive{{- end -}}{{ with .Get "table-type"}}{{.}}{{ end }}{{- if .Get "wide" -}}table-wide{{- end -}} {{- if .Get "vertical-mobile" -}}table-vertical-mobile{{- end -}}">{{- if .Get "responsive" -}}<div class="table-scroll">{{- .Inner -}}</div>{{- else -}}{{- .Inner | markdownify -}}{{- end -}}</div>
+<div class="{{- if .Get "responsive" -}}table-responsive{{- end -}}{{ with .Get "table-type"}}{{.}}{{ end }}{{- if .Get "wide" -}}table-wide{{- end -}} {{- if .Get "vertical-mobile" -}}table-vertical-mobile{{- end -}}">
+  {{- if .Get "responsive" -}}
+    <div class="table-scroll">
+      {{- .Inner -}}
+    </div>
+  {{- else -}}
+    {{- .Inner | markdownify -}}
+  {{- end -}}
+</div>

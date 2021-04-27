@@ -36,7 +36,7 @@ The next example shows all aggregate connections from IP addresses representing 
 
 You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
-{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}} 
 
 ### Facet panels
 
@@ -57,6 +57,19 @@ Whitelisted tags include `service`, `availability zone`, `env`, `environment`, `
 3. Click `Create`.
 
 Once the custom facet is created, use this tag to filter and aggregate traffic in the network page and map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
+
+### Wildcard search
+To perform a multi-character wildcard search, use the `*` symbol as follows:
+
+- `service:web*` matches all services that start with web
+- `service:*web` matches all services that end with web
+- `service:*web*` matches all services that contain the string web
+
+Wildcard searches work within facets with this syntax. This query returns all the services that end with the string mongo:
+
+`service:*mongo`
+
+To learn more, see the [search syntax][1] documentation.
 
 ## Network data
 
@@ -93,6 +106,17 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | **TCP Jitter** | Measured as TCP smoothed round-trip time variance. |
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the `source`. |
 | **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the `source`. |
+
+### Cloud service autodetection
+By filtering on third-party services such as S3, RDS, Kinesis, and ELB, you can pinpoint latency, assess database performance, and visualize your network more completely. For instance, you can filter a search query by service, view the service in the Network Map, and trace communication on that node to see affected services.
+
+{{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
+
+- **To filter a query**: In a search bar, enter tags such as `service:s3`, `service:kinesis`, and `service:elb`. For some services, you can break down latency and retransmits further by using more out-of-the-box tags like `s3_bucket` and `rds_instance_type`.
+- **To visualize specific managed services**: In the [Network Map][2], click the dropdown next to *View* and type or select desired tags. In the map, click a node to view troubleshooting options.
+- **To view integration metrics for a service**: In the Network Page, click a row in the [dependency table](#table). In the opened side panel, use the *Integration Metrics* tab to analyze the performance of cloud services and distinguish between a client-side and cloud provider issue.
+
+To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#dns-resolution).
 
 ### DNS resolution
 
@@ -134,7 +158,7 @@ Organize and share views of traffic data. Saved Views make debugging faster and 
 - To rename a view: hover over a view in the Saved Views list and click the gear icon to *Edit name*.
 - To share a view: hover over a view in the Saved Views list and click the link icon to *Copy permalink*.
 
-To learn more, see our documentation on [Saved Views][1].
+To learn more, see the [Saved Views][3] documentation.
 
 
 ## Table
@@ -184,4 +208,6 @@ The top of the sidepanel displays common source and destination tags shared by t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/saved_views/
+[1]: https://docs.datadoghq.com/logs/search_syntax/
+[2]: https://docs.datadoghq.com/network_monitoring/performance/network_map/
+[3]: /logs/explorer/saved_views/
