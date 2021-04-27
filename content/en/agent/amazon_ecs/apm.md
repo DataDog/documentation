@@ -21,7 +21,7 @@ After following the [Amazon ECS agent installation instructions][1], enable trac
     {
       "name": "datadog-agent",
       "image": "gcr.io/datadoghq/agent:latest",
-      "cpu": 10,
+      "cpu": 100,
       "memory": 256,
       "essential": true,
       "portMappings": [
