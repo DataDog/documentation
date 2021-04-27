@@ -3,6 +3,8 @@ title: Default Rules
 kind: documentation
 type: security_rules
 description: "Datadog Security and Compliance Rules"
+aliases:
+  - /security_monitoring/default_rules/
 disable_sidebar: true
 ---
 

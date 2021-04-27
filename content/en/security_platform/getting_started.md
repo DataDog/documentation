@@ -2,6 +2,8 @@
 title: Getting Started with Security Monitoring
 kind: documentation
 description: "Learn the main concepts of Datadog Security Monitoring, how to enable threat detection, and discover out of the box threat detection rules."
+aliases:
+  - /security_monitoring/getting_started/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
   tag: "Blog"
