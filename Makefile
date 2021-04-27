@@ -106,24 +106,16 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
 	@if [ content/en/agent/basic_agent_usage/saltstack.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
-	@if [ content/en/serverless/forwarder.md ]; then \
-	rm -f content/en/serverless/forwarder.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/python.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/python.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/nodejs.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/nodejs.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/ruby.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/ruby.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/go.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/go.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/java.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/java.md ;fi
-	@if [ content/en/serverless/serverless_integrations/plugin.md ]; then \
-	rm -f content/en/serverless/serverless_integrations/plugin.md ;fi
-	@if [ content/en/serverless/serverless_integrations/macro.md ]; then \
-	rm -f content/en/serverless/serverless_integrations/macro.md ;fi
-	@if [ content/en/serverless/serverless_integrations/cli.md ]; then \
-	rm -f content/en/serverless/serverless_integrations/cli.md ;fi
+	@if [ content/en/serverless/libraries_integrations/plugin.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/plugin.md ;fi
+	@if [ content/en/serverless/libraries_integrations/forwarder.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/forwarder.md ;fi
+	@if [ content/en/serverless/libraries_integrations/library.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/library.md ;fi
+	@if [ content/en/serverless/libraries_integrations/macro.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
+	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/cli.md ;fi
 	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/android/_index.md ;fi
 	@if [ content/en/real_user_monitoring/android/data_collected.md ]; then \
