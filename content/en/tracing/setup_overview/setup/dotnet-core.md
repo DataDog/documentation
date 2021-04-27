@@ -130,12 +130,12 @@ Otherwise, to begin tracing your applications:
 
 {{% tab "Windows" %}}
 
-#### Applications hosted in IIS
+#### Internet Information Services (IIS)
 
-Completely stop and then start IIS by running the following commands as an administrator:
+To automatically instrument applications hosted in IIS, completely stop IIS and then start it by running the following commands as an administrator:
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
+  <strong>Note:</strong> You must use a stop and start command. A reset or restart command will not always work.
 </div>
 
 ```cmd
@@ -145,7 +145,7 @@ net start w3svc
 
 #### Windows services
 
-To automatically instrument a Windows service, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables for the service.
+To automatically instrument a Windows service, set the `CORECLR_ENABLE_PROFILING` and `CORECLR_PROFILER` environment variables for the service in the Windows Registry.
 
 Using the Registry Editor:
 
@@ -271,7 +271,7 @@ When using `systemctl` to run .NET applications as a service, you can add the re
 
 When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services run by `systemctl`.
 
-1. Set the required environment variables by running [`systemctl set-environment`][2]:
+1. Set the required environment variables by running [`systemctl set-environment`][1]:
 
     ```bash
     systemctl set-environment CORECLR_ENABLE_PROFILING=1
@@ -284,7 +284,7 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 
 3. Restart the .NET service for the environment variables to take effect.
 
-[1]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[2]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 
 {{% /tab %}}
 
@@ -322,6 +322,7 @@ For more details on custom instrumentation and custom tagging, see [.NET Custom 
     - `DD_AGENT_HOST`
     - `DD_TRACE_AGENT_PORT`
 
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 
 {{% /tab %}}
 
@@ -338,7 +339,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 
 To set up Datadog APM in Azure App Service, see the [Tracing Azure App Services Extension][1] documentation.
 
-[1]: /serverless/azure_app_services/#overview
+[1]: /serverless/azure_app_services/
 
 {{% /tab %}}
 
