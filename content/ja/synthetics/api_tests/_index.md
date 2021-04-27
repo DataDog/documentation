@@ -9,21 +9,12 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: ブログ
     text: Datadog Synthetic モニタリングの紹介
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+    tag: ラーニングセンター
+    text: Synthetic テストの紹介
   - link: /getting_started/synthetics/api_test
     tag: Documentation
     text: API テストの概要
-  - link: /synthetics/api_tests/http_tests
-    tag: Documentation
-    text: 初めての HTTP テストを作成する
-  - link: /synthetics/api_tests/ssl_tests
-    tag: Documentation
-    text: 初めての SSL テストを作成する
-  - link: /synthetics/api_tests/tcp_tests
-    tag: Documentation
-    text: 初めての TCP テストを作成する
-  - link: /synthetics/api_tests/dns_tests
-    tag: Documentation
-    text: 初めての DNS テストを作成する
   - link: /synthetics/private_locations
     tag: Documentation
     text: 内部エンドポイントで API テストを実行する
@@ -39,14 +30,15 @@ API テストは、いつでもどこからでも**最も重要なサービス�
 - [`SSL` テスト][2]
 - [`TCP` テスト][3]
 - [`DNS` テスト][4]
+- [`ICMP` テスト][5]
 
-{{< img src="synthetics/api_tests/api_tests.mp4" alt="API テストのサブタイプ" video="true"  width="100%" >}}
+{{< img src="synthetics/api_tests/api_test.mp4" alt="API テストのサブタイプ" video="true"  width="100%" >}}
 
-サービスが応答遅延を起こしたり、予期しない方法 (たとえば、予期しない応答本文、間違った A レコードなど) で応答を開始した場合、テストは[**チームに警告する**][5]、[**CI パイプラインをブロックする**][6]、または[**障害のあるデプロイをロールバックする**][6]ことができます。
+サービスが応答遅延を起こしたり、予期しない方法 (たとえば、予期しない応答本文、間違った A レコードなど) で応答を開始した場合、テストは[**チームに警告する**][6]、[**CI パイプラインをブロックする**][7]、または[**障害のあるデプロイをロールバックする**][7]ことができます。
 
-API テストは、Datadog [管理ロケーション][7]および[プライベートロケーション][8]から実行できるため、外部と内部の両方で**システムを完全にカバー**できます。
+API テストは、Datadog [管理ロケーション][8]および[プライベートロケーション][9]から実行できるため、外部と内部の両方で**システムを完全にカバー**できます。
 
-**注**: API テストは、サービスに対して実行される単一のリクエストです。API レベルまたは認証を必要とするエンドポイントで高度なビジネストランザクションを監視する場合は、[Multistep API テスト][9]を使用してリクエストをチェーンすることもできます。
+**注**: API テストは、サービスに対して実行される単一のリクエストです。API レベルまたは認証を必要とするエンドポイントで高度なビジネストランザクションを監視する場合は、[Multistep API テスト][10]を使用してリクエストをチェーンすることもできます。
 
 ## その他の参考資料
 
@@ -56,8 +48,9 @@ API テストは、Datadog [管理ロケーション][7]および[プライベ�
 [2]: /ja/synthetics/api_tests/ssl_tests
 [3]: /ja/synthetics/api_tests/tcp_tests
 [4]: /ja/synthetics/api_tests/dns_tests
-[5]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[6]: /ja/synthetics/ci
-[7]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
-[8]: /ja/synthetics/private_locations
-[9]: /ja/synthetics/multistep/
+[5]: /ja/synthetics/api_tests/icmp_tests
+[6]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[7]: /ja/synthetics/ci
+[8]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
+[9]: /ja/synthetics/private_locations
+[10]: /ja/synthetics/multistep/

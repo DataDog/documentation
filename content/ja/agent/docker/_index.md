@@ -6,7 +6,6 @@ aliases:
   - /ja/agent/docker
   - /ja/agent/basic_agent_usage/docker/
   - /ja/integrations/docker_daemon/
-  - /ja/integrations/docker/
   - /ja/docker/
 further_reading:
   - link: /agent/docker/log/
@@ -182,7 +181,7 @@ Datadog は [Docker][20]、[Kubernetes][21]、[ECS][22]、[Swarm、Mesos、Nomad
 
 その他の例は[コンテナのディスカバリー管理][25]ページでご確認いただけます。
 
-**注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。コンテナごとの課金にも影響しません。
+**注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。なお、これらはコンテナの課金に影響しません。
 
 ### その他
 

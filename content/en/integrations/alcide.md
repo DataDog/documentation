@@ -13,6 +13,7 @@ name: alcide
 public_title: Datadog-Alcide Integration
 short_description: Ingest and process your Alcide logs
 version: '1.0'
+integration_id: "alcide"
 ---
 
 ## Overview

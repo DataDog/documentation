@@ -20,11 +20,9 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
 * Enregistrer les adresses IP et user agents réels du client
 * Optimiser l'utilisation du réseau grâce aux envois groupés automatiques
 
-**Remarque** : la bibliothèque `dd-sdk-android` prend en charge toutes les versions d'Android à partir du niveau d'API 19 (KitKat).
-
 ## Configuration
 
-1. Ajoutez la dépendance Gradle en définissant la bibliothèque en tant que dépendance dans votre fichier `build.gradle` :
+1. Ajoutez la dépendance Gradle en définissant la bibliothèque en tant que dépendance dans le fichier `build.gradle` au niveau du module :
 
     ```conf
     repositories {
@@ -36,55 +34,63 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
     }
     ```
 
-2. Initialisez la bibliothèque avec le contexte de votre application ainsi que le [token client Datadog][2] et l'ID d'application générés lors de la création d'une application RUM depuis l'interface Datadog (consulter la section [Débuter avec la collecte de données RUM sur Android][6] pour en savoir plus). Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][3] pour configurer la bibliothèque `dd-sdk-android`, car elles risqueraient d'être exposées côté client dans le bytecode de l'APK de l'application Android. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][2] :
+2. Initialisez la bibliothèque avec le contexte de votre application, le consentement au suivi ainsi que le [token client Datadog][2] et l'ID d'application générés lors de la création d'une application RUM depuis l'interface Datadog (consulter la section [Débuter avec la collecte de données RUM sur Android][6] pour en savoir plus). Pour des raisons de sécurité, vous devez utiliser un token client : il n'est pas possible d'utiliser des [clés d'API Datadog][3] pour configurer la bibliothèque `dd-sdk-android`. En effet, elles risqueraient d'être exposées côté client dans le bytecode de l'APK de l'application Android. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][2] :
 
-    {{< tabs >}}
-    {{% tab "Site américain" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        val config = DatadogConfig.Builder("<TOKEN_CLIENT>", "<NOM_ENVIRONNEMENT>", "<ID_APPLICATION>")
-                        .build()
-        Datadog.initialize(this, config)
-    }
-}
-```
-
-    {{% /tab %}}
-    {{% tab "Site européen" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        val config = DatadogConfig.Builder("<TOKEN_CLIENT>", "<NOM_ENVIRONNEMENT>", "<ID_APPLICATION>")
-                        .useEUEndpoints()
-                        .build()
-        Datadog.initialize(this, config)
-    }
-}
-```
-
-    {{% /tab %}}
-    {{< /tabs >}}
-
-     Une méthode utilitaire est également disponible pour obtenir le statut actuel du SDK. Vous pouvez vous en servir afin de vérifier si l'initialisation a été correctement effectuée ou non :
-
-    ```kotlin
-        if(Datadog.isInitialized()){
-          // votre code ici
+   {{< tabs >}}
+   {{% tab "Site américain" %}}
+   ```kotlin
+    class SampleApplication : Application() {
+        override fun onCreate() {
+            super.onCreate()
+            val configuration = Configuration.Builder().build()
+            val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+            Datadog.initialize(this, credentials, configuration, trackingConsent)
         }
-    ```
+    }
+   ```
+   {{% /tab %}}
+   {{% tab "Site européen" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+       override fun onCreate() {
+          super.onCreate()
+          val configuration = Configuration.Builder()
+             .useEUEndpoints()
+             .build()
+          val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+          Datadog.initialize(this, credentials, configuration, trackingConsent)
+       }
+   }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
-     Lors de la création de votre application, vous pouvez activer les logs de développement. Tous les messages internes dans la bibliothèque dont la priorité est égale ou supérieure au niveau spécifié sont alors enregistrés dans le Logcat d'Android.
+   Pour répondre aux exigences du RGPD, le SDK nécessite la valeur de consentement au suivi à son initialisation.
+   Voici les différentes valeurs possibles pour le consentement au suivi :
+   * `TrackingConsent.PENDING` : le SDK commence à recueillir les données et à les regrouper par lots, mais ne les envoie pas au
+     endpoint de collecte de données. Le SDK attend d'obtenir la nouvelle valeur de consentement au suivi pour déterminer ce qu'il doit faire de ces lots de données.
+   * `TrackingConsent.GRANTED` : le SDK commence à recueillir les données et les envoie au endpoint de collecte de données.
+   * `TrackingConsent.NOT_GRANTED` : le SDK ne recueille aucune donnée. Vous ne pourrez pas envoyer manuellement des logs, des traces ou
+     des événements RUM.
 
-    ```kotlin
-        Datadog.setVerbosity(Log.INFO)
-    ```
+   Pour mettre à jour le consentement au suivi une fois le SDK initialisé, effectuez l'appel suivant : `Datadog.setTrackingConsent(<NOUVEAU CONSENTEMENT>)`.
+   Le SDK ajuste son comportement en fonction de la nouvelle valeur de consentement. Imaginons que vous modifiez une valeur de consentement `TrackingConsent.PENDING` :
+   * Si vous la remplacez par `TrackingConsent.GRANTED` : le SDK envoie tous les lots de données actuels, ainsi que toutes les données ultérieures, directement au endpoint de collecte de données.
+   * Si vous la remplacez par `TrackingConsent.NOT_GRANTED` : le SDK supprime tous les lots de données et ne recueille plus aucune donnée par la suite.
+
+   Attention, vous devez également spécifier le nom de la variante de votre application dans les identifiants requis pour l'initialisation. Cette opération est primordiale, car elle permet d'importer automatiquement le bon fichier `mapping.txt` ProGuard au moment de la génération. Un dashboard Datadog peut alors annuler l'obfuscation des stack traces.
+
+   Utilisez la méthode utilitaire `isInitialized` pour vérifier que le SDK est bien initialisé :
+
+   ```kotlin
+    if(Datadog.isInitialized()){
+        // your code here
+    }
+   ```
+   Lors de la création de votre application, vous pouvez activer les logs de développement en appelant la méthode `setVerbosity`. Tous les messages internes de la bibliothèque dont la priorité est supérieure ou égale au niveau spécifié sont alors enregistrés dans le Logcat Android :
+   ```kotlin
+   Datadog.setVerbosity(Log.INFO)
+   ```
 
 3. Configurer le logger Android :
 
@@ -150,7 +156,6 @@ Les méthodes suivantes dans `DatadogConfig.Builder` peuvent être utilisées lo
 | `setLogsEnabled(true)`     | Définir sur `true` pour activer l'envoi de logs à Datadog.                                                                                                                                                                                                                                  |
 | `addPlugin(DatadogPlugin, Feature)`   | Ajoute une implémentation de plugin pour une fonctionnalité spécifique (CRASH, LOG, TRACE, RUM). Le plugin sera enregistré une fois la fonctionnalité réinitialisée, puis désenregistré lorsque la fonctionnalité sera arrêtée. |
 
-
 ### Initialisation du logger
 
 Les méthodes suivantes dans `Logger.Builder` peuvent être utilisées lors de l'initialisation du logger afin d'envoyer des logs à Datadog :
@@ -172,7 +177,7 @@ Les méthodes suivantes dans `Logger.Builder` peuvent être utilisées lors de l
 
 Vous trouverez ci-dessous les fonctions pour ajouter/supprimer des tags et des attributs de tous les logs envoyés par un logger donné.
 
-#### Tags globaux
+#### Global tags
 
 ##### Ajouter des tags
 
@@ -242,7 +247,7 @@ Les données stockées sont automatiquement supprimées si elles sont trop ancie
 
 ## Extensions
 
-### Timber 
+### Timber
 
 Si votre codebase existante utilise Timber, vous pouvez transmettre tous ces logs à Datadog automatiquement à l'aide de la [bibliothèque dédiée](https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-timber).
 

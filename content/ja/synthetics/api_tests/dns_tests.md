@@ -26,17 +26,18 @@ DNS テストは[管理ロケーション][1]および[プライベートロケ�
 
 ## コンフィギュレーション
 
-作成するテストのタイプ ([`HTTP`][3]、[`SSL`][4]、[`TCP`][5]、または [`DNS` テスト][6]) を選択した後、テストのリクエストを定義できます。
+作成するテストのタイプ ([`HTTP`][3]、[`SSL`][4]、[`TCP`][5]、[`DNS`][6]、[`ICMP` test][7])を選択した後、テストのリクエストを定義できます。
 
 ### リクエストを定義する
 
-{{< img src="synthetics/api_tests/dns_test_config.png" alt="DNS クエリを定義する"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/dns_test_config_new.png" alt="DNS クエリを定義する"  style="width:90%;" >}}
 
 1. テストでクエリする**ドメイン**を指定します (例: `www.example.com`)。
-2. 使用する `DNS Server` を指定します (オプション)。ドメイン名または IP アドレスを使用できます。指定されていない場合、DNS テストは `8.8.8.8` を使用して解決を実行し、` 1.1.1.1` と内部 AWS DNS サーバーにフォールバックします。
-3. DNS テストに**名前**を付けます。
-4. DNS テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][7]で Synthetic テストをすばやくフィルタリングできます。
-5. DNS テストを実行する**ロケーション**を選択します。DNS テストは、パブリックドメインとプライベートドメインのどちらを監視するかによって、[管理ロケーション][1]と[プライベートロケーション][2]から実行できます。
+2. 使用する **DNS サーバー** を指定します（任意）。ドメイン名または IP アドレスを使用できます。指定されていない場合、DNS テストは `8.8.8.8` を使用して解決を実行し、 `1.1.1.1` と内部 AWS DNS サーバーにフォールバックします。
+3. DNS サーバーの **ポート** を指定します（任意）。指定されていない場合、DNS サーバーのポートはデフォルトで 53 になります。
+4. DNS テストに**名前**を付けます。
+5. DNS テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][8]で Synthetic テストをすばやくフィルタリングできます。
+6. DNS テストを実行する**ロケーション**を選択します。DNS テストは、パブリックドメインとプライベートドメインのどちらを監視するかによって、[管理ロケーション][1]と[プライベートロケーション][2]から実行できます。
 
 **Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
 
@@ -48,7 +49,7 @@ DNS テストは次の頻度で実行できます。
 
 {{< img src="synthetics/api_tests/schedule.png" alt="スケジュールどおりに API テストを実行する"  style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][8]。
+* [**CI/CD パイプライン内**][9].
 * **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
 
 ### アサーションを定義する
@@ -58,8 +59,8 @@ DNS テストは次の頻度で実行できます。
 | タイプ                | レコードタイプ                                                     | 演算子                                           | 値の型                 |
 |---------------------|-----------------------------------------------------------------|----------------------------------------------------|----------------------------|
 | response time       |                                                                 | `is less than`                                     | 整数 (ms)             |
-| すべてのレコード        | タイプ A、タイプ AAAA、タイプ MX、タイプ TXT、タイプ CNAME | `is`、`contains`、<br> `matches`、`does not match` | _String_ <br> _[Regex][9]_ |
-| at least one record | タイプ A、タイプ AAAA、タイプ MX、タイプ TXT、タイプ CNAME | `is`、`contains`、<br> `matches`、`does not match` | _String_ <br> _[Regex][9]_ |
+| すべてのレコード        | タイプ A、タイプ AAAA、タイプ MX、タイプ TXT、タイプ CNAME | `is`、`contains`、<br> `matches`、`does not match` | _String_ <br> _[Regex][10]_ |
+| at least one record | タイプ A、タイプ AAAA、タイプ MX、タイプ TXT、タイプ CNAME | `is`、`contains`、<br> `matches`、`does not match` | _String_ <br> _[Regex][10]_ |
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 10 個のアサーションを作成できます。
 
@@ -76,9 +77,9 @@ DNS テストは次の頻度で実行できます。
 * 直近 *X* 分間に、最低 1 個のロケーションで失敗 (最低 1 つのアサーションが失敗)、
 * 直近 *X* 分間に、ある時点で最低 *n* 個のロケーションで失敗。
 
-#### Fast Retry
+#### 高速再試行
 
-テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][10] を介して構成できます。
+テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][11] を介して構成できます。
 
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
@@ -87,14 +88,14 @@ DNS テストは次の頻度で実行できます。
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
-1. [モニターと同様][11]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
+1. [モニターと同様][12]、メッセージに `@notification `を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
 
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][12]のほか、以下の[条件付き変数][13]を使用できます。
+2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][13]のほか、以下の[条件付き変数][14]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            |モニターがアラートする場合に表示します。                                          |
-    | `{{^is_alert}}`            |テストが警告しない限り表示します。                                        |
+    | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
+    | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
     | `{{#is_recovery}}`         |テストがアラートから回復したときに表示します。                             |
     | `{{^is_recovery}}`         |テストがアラートから回復しない限り表示します。                           |
 
@@ -122,7 +123,7 @@ DNS テストは次の頻度で実行できます。
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][14]と[ローカルで定義された変数](#create-local-variables)を使用できます。
+HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][15]と[ローカルで定義された変数](#create-local-variables)を使用できます。
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="API テストでの変数の使用" video="true" width="90%" >}}
@@ -147,12 +148,13 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 [3]: /ja/synthetics/api_tests/http_tests
 [4]: /ja/synthetics/api_tests/ssl_tests
 [5]: /ja/synthetics/api_tests/tcp_tests
-[6]: /ja/synthetics/api_tests/dns_tests
-[7]: /ja/synthetics/search/#search
-[8]: /ja/synthetics/ci
-[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[10]: /ja/api/v1/synthetics/#create-a-test
-[11]: /ja/monitors/notifications/?tab=is_alert#notification
-[12]: https://www.markdownguide.org/basic-syntax/
-[13]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[14]: /ja/synthetics/settings/#global-variables
+[6]: /ja/synthetics/api_tests/dns_test
+[7]: /ja/synthetics/api_tests/icmp_tests
+[8]: /ja/synthetics/search/#search
+[9]: /ja/synthetics/ci
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[11]: /ja/api/v1/synthetics/#create-a-test
+[12]: /ja/monitors/notifications/?tab=is_alert#notification
+[13]: https://www.markdownguide.org/basic-syntax/
+[14]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[15]: /ja/synthetics/settings/#global-variables

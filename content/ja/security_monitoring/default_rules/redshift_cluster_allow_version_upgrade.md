@@ -12,8 +12,6 @@ source: redshift
 title: Redshift クラスターにヴァージョンアップグレードが有効になっていません
 type: security_rules
 ---
-## 概要
-
 ## 説明
 
 `AllowVersionUpgrade` が有効になっていることを確認して、[Redshift クラスター][1]が自動的に最新バージョンにアップグレードできるようにします。

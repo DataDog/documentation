@@ -124,7 +124,7 @@ Anomaly monitors are managed using the [same API][12] as other monitors. These f
 The `query` property in the request body should contain a query string in the following format:
 
 ```text
-avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direction='<direction>', alert_window='<alert_window>', interval=<interval>, count_default_zero='<default_zero>' [, seasonality='<seasonality>']) >= <threshold>
+avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direction='<direction>', alert_window='<alert_window>', interval=<interval>, count_default_zero='<count_default_zero>' [, seasonality='<seasonality>']) >= <threshold>
 ```
 
 * `query_window`: a timeframe like `last_4h` or `last_7d`; the time window displayed in graphs in notifications; must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`
@@ -134,7 +134,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 * `direction`: the directionality of anomalies that should trigger an alert; `above`, `below`, or `both`
 * `alert_window`: the timeframe which will be checked for anomalies (e.g., `last_5m`, `last_1h`)
 * `interval`: a positive integer representing the number of seconds in the rollup interval; we recommend that the `interval` be at least a fifth of the `alert_window` duration
-* `default_zero`: use `true` for most monitors; only set to `false` if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero
+* `count_default_zero`: use `true` for most monitors; only set to `false` if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero
 * `seasonality`: `hourly`, `daily`, or `weekly`; exclude this parameter when using the `basic` algorithm
 * `threshold`: a positive number no larger than 1; the fraction of points in the `alert_window` that must be anomalous in order for a critical alert to trigger
 

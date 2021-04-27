@@ -11,8 +11,6 @@ source: gcp
 title: GCP IAM カスタムロールの作成または変更
 type: security_rules
 ---
-## 概要
-
 ### 目標
 カスタムロールが作成または変更されたことを検出します。
 

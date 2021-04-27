@@ -12,21 +12,27 @@ code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60
 further_reading:
-  - link: 'https://github.com/DataDog/dd-trace-dotnet'
-    tag: GitHub
-    text: ソースコード
+  - link: /tracing/connect_logs_and_traces/dotnet/
+    tag: Documentation
+    text: .NET アプリケーションログとトレースの接続
+  - link: /tracing/runtime_metrics/dotnet/
+    tag: Documentation
+    text: ランタイムメトリクス
+  - link: /serverless/azure_app_services/
+    tag: Documentation
+    text: Microsoft Azure App Service 拡張機能
+  - link: /tracing/visualization/
+    tag: Documentation
+    text: サービス、リソース、トレースの詳細
   - link: 'https://www.datadoghq.com/blog/net-monitoring-apm/'
     tag: ブログ
     text: Datadog APM と分散型トレーシングを使用した .NET のモニタリング
-  - link: /tracing/visualization/
-    tag: Documentation
-    text: サービス、リソース、トレースを調査する
-  - link: /tracing/
-    tag: 高度な使用方法
-    text: 高度な使用方法
   - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
     tag: GitHub
     text: カスタムインスツルメンテーションの例
+  - link: 'https://github.com/DataDog/dd-trace-dotnet'
+    tag: GitHub
+    text: ソースコード
 ---
 ## 互換性要件
 
@@ -55,7 +61,12 @@ further_reading:
 
 3. 管理者権限で .NET トレーサー MSI インストーラーを実行します。
 
-4. 管理者として次のコマンドを実行して、IIS を再起動します。
+4. 管理者として次のコマンドを実行して、IIS を停止してから起動します。
+
+    <div class="alert alert-warning"> 
+      <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
+    </div>
+
     ```cmd
     net stop /y was
     net start w3svc
@@ -64,7 +75,6 @@ further_reading:
 5. アプリケーションロードを作成します。
 
 6. [APM ライブトレース][3]にアクセスします。
-
 
 
 [1]: /ja/agent/basic_agent_usage/windows/?tab=gui
@@ -435,6 +445,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames`  | 無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][5]セクションでリストされているインテグレーション名です。           |
 | `DD_HTTP_CLIENT_ERROR_STATUSES`                                 | HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。デフォルト値は `400-499` です。 |
 | `DD_HTTP_SERVER_ERROR_STATUSES`                                 | HTTP サーバースパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。デフォルト値は `500-599` です。 |
+| `DD_RUNTIME_METRICS_ENABLED`                                    | .NET ランタイムメトリクスを有効にします。有効な値は `true` または `false` です。デフォルト値は `false` です。バージョン 1.23.0 で追加されました。
 | `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | 自動インスツルメンテーションから除外される `AdoNet` タイプ (たとえば、`System.Data.SqlClient.SqlCommand`) のリストを設定します。 |
 
 

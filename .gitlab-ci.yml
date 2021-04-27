@@ -64,6 +64,9 @@ install_dependencies:
   only:
     changes:
       - yarn.lock
+  except:
+    # skip on automated translation prs
+    - /^guacbot\/translation-[0-9]+$/i
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
@@ -204,6 +207,22 @@ index_algolia_preview:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
+replica_algolia_preview:
+  <<: *base_template
+  stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
+  environment: "preview"
+  script:
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
+  dependencies:
+    - build_preview
+  when: manual
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
+
 sourcemaps_preview:
   <<: *base_template
   stage: post-deploy
@@ -232,7 +251,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup_overview/setup/android.md,content/en/tracing/setup_overview/setup/ruby.md,content/en/security_monitoring/default_rules,content/en/serverless/forwarder.md,content/en/serverless/datadog_lambda_library/python.md,content/en/serverless/datadog_lambda_library/nodejs.md,content/en/serverless/datadog_lambda_library/ruby.md,content/en/serverless/datadog_lambda_library/go.md,content/en/serverless/datadog_lambda_library/java.md,content/en/real_user_monitoring/android.md,content/en/real_user_monitoring/browser/_index.md,content/en/real_user_monitoring/ios.md,content/en/serverless/serverless_integrations/plugin.md,content/en/serverless/serverless_integrations/macro.md,content/en/serverless/serverless_integrations/cli.md,content/en/logs/log_collection/javascript.md"
+    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup_overview/setup/android.md,content/en/tracing/setup_overview/setup/ruby.md,content/en/security_platform/default_rules,content/en/serverless/forwarder.md,content/en/serverless/datadog_lambda_library/python.md,content/en/serverless/datadog_lambda_library/nodejs.md,content/en/serverless/datadog_lambda_library/ruby.md,content/en/serverless/datadog_lambda_library/go.md,content/en/serverless/datadog_lambda_library/java.md,content/en/real_user_monitoring/android/_index.md,content/en/real_user_monitoring/android/data_collected.md,content/en/real_user_monitoring/android/advanced_configuration.md,content/en/real_user_monitoring/android/troubleshooting.md,content/en/real_user_monitoring/android/integrated_libraries.md,content/en/real_user_monitoring/error_tracking/android.md,content/en/real_user_monitoring/browser/_index.md,content/en/real_user_monitoring/ios.md,content/en/serverless/serverless_integrations/plugin.md,content/en/serverless/serverless_integrations/macro.md,content/en/serverless/serverless_integrations/cli.md,content/en/logs/log_collection/javascript.md"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
@@ -342,6 +361,20 @@ index_algolia:
       export DISPLAY=:99
       Xvfb :99 -ac &
       echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
+  dependencies:
+    - build_live
+  only:
+    - schedules
+
+replica_algolia:
+  <<: *base_template
+  stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
+  environment: "live"
+  script:
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
   only:

@@ -11,8 +11,6 @@ source: gcp
 title: GCP GCE VPC ネットワークの変更
 type: security_rules
 ---
-## 概要
-
 ### 目標
 VPC ネットワークが作成されたことを検出します。
 

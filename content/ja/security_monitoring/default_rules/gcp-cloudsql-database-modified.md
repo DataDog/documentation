@@ -11,8 +11,6 @@ source: gcp
 title: GCP Cloud SQL データベースの変更
 type: security_rules
 ---
-## 概要
-
 ### 目標
 Cloud SQL DB が変更されたことを検出します。
 

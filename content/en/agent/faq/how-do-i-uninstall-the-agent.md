@@ -134,6 +134,7 @@ sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
 sudo rm -rf ~/.datadog-agent/**​ #to remove broken symlinks
 launchctl remove com.datadoghq.agent
+sudo rm -rf /var/log/datadog
 ```
 
 Then, reboot your machine for changes to take effect.

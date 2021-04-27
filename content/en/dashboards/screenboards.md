@@ -5,6 +5,8 @@ aliases:
     - /graphing/dashboards/screenboards/
     - /graphing/dashboards/screenboard/
     - /dashboards/screenboard/
+    - /screenboards/
+    - /screenboard/
 further_reading:
 - link: "/dashboards/template_variables/"
   tag: "Documentation"

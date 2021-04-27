@@ -9,7 +9,7 @@ from os import sep, getenv
 from os.path import isdir, sys
 
 
-def download_from_repo(github_token, org, repo, branch, globs, extract_dir):
+def download_from_repo(github_token, org, repo, branch, globs, extract_dir, commit_sha=None):
     """
     Takes github info and file globs and downloads files from github using multiple processes
     :param github_token: A valide Github token to download content with the Github Class
@@ -18,12 +18,13 @@ def download_from_repo(github_token, org, repo, branch, globs, extract_dir):
     :param branch: the branch name
     :param globs: list of strings in glob format of what to extract
     :param extract_dir: Directory in which to put all downloaded content.
+    :param commit_sha: sha if we want to provide one
     :return:
     """
     pool_size = 5
 
     with GitHub(github_token) as gh:
-        listing = gh.list(org, repo, branch, globs)
+        listing = gh.list(org, repo, branch, commit_sha, globs)
         dest = "{0}{1}{2}".format(
             extract_dir, repo, sep
         )
@@ -37,7 +38,7 @@ def download_from_repo(github_token, org, repo, branch, globs, extract_dir):
                             request_session=s,
                             org=org,
                             repo=repo,
-                            branch=branch,
+                            branch=branch if not commit_sha else commit_sha,
                             dest_dir=dest,
                         ),
                         listing,
@@ -87,7 +88,8 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
                                content["repo_name"],
                                content["branch"],
                                content["globs"],
-                               extract_dir
+                               extract_dir,
+                               content.get("sha", None)
                                )
             content[
                 "globs"
@@ -135,6 +137,7 @@ def extract_config(configuration):
                 content_temp["branch"] = content[
                     "branch"
                 ]
+                content_temp["sha"] = content.get("sha", None)
                 content_temp["action"] = content[
                     "action"
                 ]
