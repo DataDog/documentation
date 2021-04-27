@@ -97,7 +97,7 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
 
 Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space. 
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`.
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][6] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
 
 ### Set alert conditions
 
@@ -211,3 +211,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [3]: /dashboards/querying/#advanced-graphing
 [4]: /monitors/faq/what-are-recovery-thresholds/
 [5]: /monitors/notifications/
+[6]: /monitors/notifications/?tab=is_alert#tag-variables
