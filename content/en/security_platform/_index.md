@@ -1,8 +1,9 @@
 ---
-title: Security and Compliance Monitoring
+title: Security Platform
 kind: documentation
 aliases:
   - compliance_monitoring
+  - security_monitoring
 ---
 
 <div class="alert alert-warning">

@@ -1,11 +1,13 @@
 ---
-title: Detection Rules
+title: Security Rules
 kind: documentation
+aliases:
+  - /security_monitoring/detection_rules/
 further_reading:
 - link: "security_monitoring/default_rules"
   tag: "Documentation"
   text: "Explore default detection rules"
-- link: "/security_monitoring/detection_rules/security_monitoring"
+- link: "/security_platform/detection_rules/security_monitoring"
   tag: "Documentation"
   text: "Follow the creating new Security Monitoring rules guide"
 ---

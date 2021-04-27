@@ -42,6 +42,7 @@
       - integration/*/manifest.json
       - integration/*/service_checks.json
       - integration/*/README.md
+      - integration/*/__init__.py
 
   - repo_name: integrations-core
     contents:
@@ -321,14 +322,93 @@
     - action: pull-and-push-file
       branch: master
       globs:
-      - 'docs/rum_collection.md'
+      - 'docs/rum_getting_started.md'
       options:
-        dest_path: '/real_user_monitoring/'
-        file_name: 'android.md'
+        dest_path: '/real_user_monitoring/android/'
+        file_name: '_index.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md"]
-          title: Getting Started with Android RUM Collection
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md"]
+          title: RUM Android Monitoring
           kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/mobile_data_collected.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'data_collected.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md"]
+          title: RUM Android Data Collected
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/configure_rum_android_sdk.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'advanced_configuration.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md"]
+          title: RUM Android Advanced Configuration
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/troubleshooting_android.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'troubleshooting.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md"]
+          title: Troubleshooting
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/integrated_libraries_android.md'
+      options:
+        dest_path: '/real_user_monitoring/android/'
+        file_name: 'integrated_libraries.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/integrated_libraries_android.md"]
+          title: Android Integrated Libraries
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-android"
+              tag: "Github"
+              text: "dd-sdk-android Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
 
   - repo_name: browser-sdk
     contents:
@@ -358,6 +438,26 @@
           kind: documentation
           aliases:
           - /logs/log_collection/web_browser
+  - repo_name: dd-sdk-android-gradle-plugin
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'docs/upload_mapping_file.md'
+      options:
+        dest_path: '/real_user_monitoring/error_tracking/'
+        file_name: 'android.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md"]
+          title: Android Error Tracking
+          kind: documentation
+          further_reading:
+          - link: '/real_user_monitoring/error_tracking/'
+            tag: 'Error Tracking'
+            text: 'Get started with Error Tracking'
+          - link: '/real_user_monitoring/error_tracking/explorer'
+            tag: 'Documentation'
+            text: 'Visualize Error Tracking data in the Explorer'
 
   - repo_name: datadog-cloudformation-resources
     contents:
@@ -483,7 +583,7 @@
         - "security-monitoring/*.json"
         - "security-monitoring/*.md"
       options:
-        dest_path: '/security_monitoring/default_rules/'
+        dest_path: '/security_platform/default_rules/'
     - action: compliance-rules
       branch: main
       globs:
@@ -496,4 +596,4 @@
         - "runtime/**/*.yml"
         - "runtime/**/*.md"
       options:
-        dest_path: '/security_monitoring/default_rules/'
+        dest_path: '/security_platform/default_rules/'

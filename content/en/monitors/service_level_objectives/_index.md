@@ -43,6 +43,11 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipluated in your SLAs.
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
+**Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
+
+[Monitor-based SLOs][10]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
+[Metric-based SLOs][11]: Up to three decimal places are allowed for all targets.
+
 Once you have an SLO set up, on the [Service Level Objectives status page][1] you can select an SLO from the list view to open its details side panel. The side panel will display the overall status percentage and remaining error budget for each of that SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you have created a grouped monitor-based SLO using one [multi alert monitor][5] or a grouped metric-based SLO using the [`sum by` clause][6], in addition to the overall status percentage and remaining error budget you will also be presented with the status percentage and remaining error budget for each individual group.
 
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, you will see status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking.
@@ -158,3 +163,5 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 [7]: /monitors/service_level_objectives/#saved-views
 [8]: /api/v1/events/#query-the-event-stream
 [9]: /monitors/monitor_types/event/
+[10]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
+[11]: /monitors/service_level_objectives/metric/#set-your-slo-targets

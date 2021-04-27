@@ -2,6 +2,8 @@
 title: Security Signals Explorer
 kind: documentation
 description: "Search through all of your security signals and perform Security Analytics"
+aliases:
+  - /security_monitoring/explorer/
 further_reading:
   - link: "https://www.datadoghq.com/blog/announcing-security-monitoring/"
     tag: "Blog"
