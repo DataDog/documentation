@@ -8061,6 +8061,10 @@ components:
       - recordSome
       - tlsVersion
       - minTlsVersion
+      - latency
+      - packetLossPercentage
+      - packetsReceived
+      - networkHop
       type: string
       x-enum-varnames:
       - BODY
@@ -8073,6 +8077,10 @@ components:
       - RECORD_SOME
       - TLS_VERSION
       - MIN_TLS_VERSION
+      - LATENCY
+      - PACKET_LOSS_PERCENTAGE
+      - PACKETS_RECEIVED
+      - NETWORK_HOP
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       properties:
@@ -9186,13 +9194,14 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns` or `multi`.'
+        `dns`, `icmp` or `multi`.'
       enum:
       - http
       - ssl
       - tcp
       - dns
       - multi
+      - icmp
       type: string
       x-enum-varnames:
       - HTTP
@@ -9200,6 +9209,7 @@ components:
       - TCP
       - DNS
       - MULTI
+      - ICMP
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -9358,6 +9368,12 @@ components:
         noSavingResponseBody:
           description: Determines whether or not to save the response body.
           type: boolean
+        numberOfPackets:
+          description: Number of pings to use per test.
+          format: int32
+          maximum: 10
+          minimum: 0
+          type: integer
         port:
           description: Port to use when performing the test.
           format: int64
@@ -9365,6 +9381,10 @@ components:
         query:
           description: Query to use for the test.
           type: object
+        shouldTrackHops:
+          description: Turns on a traceroute probe to discover all gateways along
+            the path to the host destination.
+          type: boolean
         timeout:
           description: Timeout in seconds for the test.
           format: double
@@ -13330,21 +13350,8 @@ paths:
       x-given:
         dashboard:
           parameters:
-          - name: body
-            value: "{\n  \"layout_type\": \"ordered\",\n  \"title\": \"{{ unique }}\
-              \ with Profile Metrics Query\",\n  \"widgets\": [\n    {\n      \"definition\"\
-              : {\n        \"type\": \"timeseries\",\n        \"requests\": [\n  \
-              \        {\n            \"profile_metrics_query\": {\n             \
-              \ \"compute\": {\n                \"aggregation\": \"sum\",\n      \
-              \          \"facet\": \"@prof_core_cpu_cores\"\n              },\n \
-              \             \"search\": { \"query\": \"runtime:jvm\" },\n        \
-              \      \"group_by\": [\n                {\n                  \"facet\"\
-              : \"service\",\n                  \"limit\": 10,\n                 \
-              \ \"sort\": {\n                    \"aggregation\": \"sum\",\n     \
-              \               \"order\": \"desc\",\n                    \"facet\"\
-              : \"@prof_core_cpu_cores\"\n                  }\n                }\n\
-              \              ]\n            }\n          }\n        ]\n      }\n \
-              \   }\n  ]\n}"
+          - file: dashboard_payload.json
+            name: body
           step: there is a valid "dashboard" in the system
       x-menu-order: 1
       x-undo:
