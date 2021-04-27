@@ -52,7 +52,7 @@ Then, add the Datadog Lambda Extension to your container image by adding the fol
 COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
 ```
 
-Replace `<TAG>` with either a specific version number (for example, `6`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][11].
+Replace `<TAG>` with either a specific version number (for example, `7`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][11].
 
 ## Log collection
 
