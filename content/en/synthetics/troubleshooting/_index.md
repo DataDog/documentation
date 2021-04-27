@@ -26,7 +26,7 @@ After downloading the [Datadog extension][2], you are unable to see your website
 
 #### I'm seeing a "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner at the top of the iframe
 
-This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop up to be able or change your URL to a `https` one to start recording on it. 
+This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop up or change your URL to an `https` one to start recording on the page. 
 
 {{< img src="synthetics/http_iframe.png" alt="HTTP in iframe" style="width:100%;" >}}
 
@@ -42,7 +42,7 @@ If that happens, ensure the [Datadog extension][3] has the permissions to read a
 
 #### I'm unable to record steps on my application
 
-Your Chrome browser might have some policies preventing the extension from performing the recording as expected. To find out, go to `chrome://policy` and be on the lookout for any extension related settings such as [`ExtensionSettings`][4].
+Your Chrome browser might have some policies preventing the extension from performing the recording as expected. To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][4].
 
 #### I don't see the login page in the recorder. What is happening?
 
