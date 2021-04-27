@@ -33,12 +33,12 @@ The Datadog Lambda Extension is distributed as its own Lambda Layer (separate fr
 
     Replace the placeholder values in the ARN as follows:
     - Replace `<AWS_REGION>` with the same AWS region as your Lambda Function, for example, `us-east-1`.
-    - Replace `<VERSION_NUMBER>` with the version of the Datadog Lambda Extension you would like to use, for example `6`. You can identify the current version by viewing the newest image tags in the [Amazon ECR repository][11].
+    - Replace `<VERSION_NUMBER>` with the version of the Datadog Lambda Extension you would like to use, for example `6`. You can identify the current version by viewing the newest image tags in the [Amazon ECR repository][6].
     
     **Note**: This Layer is separate from the Datadog Lambda Library. If you installed the Datadog Lambda Library as a Lambda Layer,
     your function should now have two Lambda Layers attached.
 
-3. Reference the [sample code][10] to submit a custom metric.
+3. Reference the [sample code][7] to submit a custom metric.
 
 ### As a container image
 
@@ -52,7 +52,7 @@ Then, add the Datadog Lambda Extension to your container image by adding the fol
 COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
 ```
 
-Replace `<TAG>` with either a specific version number (for example, `6`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][11]. 
+Replace `<TAG>` with either a specific version number (for example, `6`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][6]. 
 
 ## Log collection
 
@@ -67,9 +67,5 @@ To submit your AWS Lambda logs to Datadog using the extension, set the env varia
 [3]: /serverless/datadog_lambda_library
 [4]: /serverless/installation/python
 [5]: /serverless/installation/nodejs
-[6]: /serverless/installation/go
-[7]: https://docs.datadoghq.com/serverless/datadog_lambda_library
-[8]: https://github.com/DataDog/datadog-lambda-js/releases
-[9]: https://github.com/DataDog/datadog-lambda-python/releases
-[10]: /serverless/custom_metrics#custom-metrics-sample-code
-[11]: https://gallery.ecr.aws/datadog/lambda-extension
+[6]: https://gallery.ecr.aws/datadog/lambda-extension
+[7]: /serverless/custom_metrics#custom-metrics-sample-code

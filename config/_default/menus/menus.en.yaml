@@ -944,107 +944,83 @@ main:
     parent: serverless_installation
     identifier: serverless_installation_dotnet
     weight: 106
-  - name: Datadog Lambda Library
-    url: serverless/datadog_lambda_library
+  - name: Libraries & Integrations
+    url: serverless/libraries_integrations
     parent: serverless
-    identifier: serverless_datadog_lambda_library
+    identifier: libraries_integrations
     weight: 2
-  - name: Python
-    url: serverless/datadog_lambda_library/python
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_python
-    weight: 201
-  - name: Node.js
-    url: serverless/datadog_lambda_library/nodejs
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_nodejs
-    weight: 202
-  - name: Ruby
-    url: serverless/datadog_lambda_library/ruby
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_ruby
-    weight: 203
-  - name: Go
-    url: serverless/datadog_lambda_library/go
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_go
-    weight: 204
-  - name: Java
-    url: serverless/datadog_lambda_library/java
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_java
-    weight: 205
   - name: Datadog Lambda Extension
-    url: serverless/datadog_lambda_library/extension
-    parent: serverless_datadog_lambda_library
-    weight: 206
+    url: serverless/libraries_integrations/extension/
+    parent: libraries_integrations
+    weight: 201
+  - name: Datadog Lambda Library
+    url: serverless/libraries_integrations/library/
+    parent: libraries_integrations
+    weight: 202
   - name: Datadog Forwarder
-    url: serverless/forwarder
-    parent: serverless
-    weight: 3
-  - name: Enhanced Lambda Metrics
-    url: serverless/enhanced_lambda_metrics
-    parent: serverless
-    weight: 4
+    url: serverless/libraries_integrations/forwarder/
+    parent: libraries_integrations
+    weight: 203
+  - name: Datadog Serverless Plugin
+    url: serverless/libraries_integrations/plugin/
+    parent: libraries_integrations
+    weight: 204
+  - name: Datadog Serverless Macro
+    url: serverless/libraries_integrations/macro/
+    parent: libraries_integrations
+    weight: 205
+  - name: Datadog Serverless CLI
+    url: serverless/libraries_integrations/forwarder/
+    parent: libraries_integrations
+    weight: 206
+  - name: Lambda Code Signing
+    url: serverless/libraries_integrations/lambda_code_signing/
+    parent: libraries_integrations
+    weight: 207
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless
-    weight: 5
+    weight: 3
   - name: Trace Merging (Advanced)
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
-    weight: 501
+    weight: 301
   - name: Trace Propagation (Advanced)
     url: serverless/distributed_tracing/serverless_trace_propagation
     parent: serverless_distributed_tracing
-    weight: 502
+    weight: 302
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
-    weight: 6
-  - name: Insights
-    url: serverless/insights
+    identifier: custom_metrics
+    weight: 4
+  - name: Enhanced Lambda Metrics
+    url: serverless/enhanced_lambda_metrics
     parent: serverless
-    weight: 7
+    weight: 5
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless
-    weight: 8
-  - name: Serverless Integrations
-    url: serverless/serverless_integrations
-    identifier: serverless_integrations
-    parent: serverless
-    weight: 9
-  - name: Datadog Serverless Plugin
-    url: serverless/serverless_integrations/plugin
-    parent: serverless_integrations
-    identifier: serverless_integrations_plugin
-    weight: 901
-  - name: Datadog Serverless Macro
-    url: serverless/serverless_integrations/macro
-    parent: serverless_integrations
-    identifier: serverless_integrations_macro
-    weight: 902
-  - name: Datadog Serverless CLI
-    url: serverless/serverless_integrations/cli
-    parent: serverless_integrations
-    identifier: serverless_integrations_cli
-    weight: 903
-  - name: Serverless Tagging
-    url: serverless/serverless_tagging
-    parent: serverless
-    weight: 10
+    weight: 6
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 11
+    weight: 7
+  - name: Insights
+    url: serverless/troubleshooting/insights
+    parent: serverless_troubleshooting
+    weight: 701
+  - name: Serverless Tagging
+    url: serverless/troubleshooting/serverless_tagging
+    parent: serverless_troubleshooting
+    weight: 702
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 12
+    weight: 8
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
