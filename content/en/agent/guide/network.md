@@ -34,11 +34,11 @@ further_reading:
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-  - [Synthetics Private Location][11] Workers rely on one of the three endpoints below to submit test results:
-      - `api.datadoghq.com` - For worker versions <0.1.5
-      - `intake.synthetics.datadoghq.com` - For worker versions 0.1.6 to 0.2.0
-      - `intake-v2.synthetics.datadoghq.com` - For worker versions >0.2.0
-    
+  - [Synthetics private location][11] workers rely on the endpoints below to submit test results:
+      - `intake.synthetics.datadoghq.com` - For sending API test results from worker versions >0.1.6
+      - `intake-v2.synthetics.datadoghq.com` - For sending browser test results for worker versions >0.2.0
+      - `api.datadoghq.com` - (Deprecated) For sending API test results from worker versions <0.1.5
+
   - All other Agent data:
       - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
       - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
