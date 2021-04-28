@@ -525,4 +525,4 @@ The following table lists configuration variables for features that are availabl
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
 [6]: https://app.datadoghq.com/apm/docs
-[7]: https://docs.datadoghq.com/agent/basic_agent_usage/
+[7]: /agent/basic_agent_usage/
