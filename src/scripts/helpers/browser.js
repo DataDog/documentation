@@ -1,3 +1,4 @@
+// Note this works when the URL has one query parameter only.  To do: Update this function to work when multiple query params are present in URL.
 export const updateQueryParameter = (queryParameterName, newQueryParameterValue) => {
   let historyReplaceUrl =  `?${queryParameterName}=${newQueryParameterValue}`;
 
