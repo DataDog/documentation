@@ -20,7 +20,7 @@ Datadog 拡張機能は、AWS Lambda 関数の実行中にカスタムメトリ�
 
 ### Lambda レイヤーとして
 
-Datadog Lambda 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda ライブラリ][3]とは別) として配布されます。
+Datadog Lambda 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda ライブラリ][3]とは別) として配布されます。 
 
 1. Datadog Lambda ライブラリをインストールして、[Python][4] または [Node.js][5] アプリケーションをインスツルメントします。
 
@@ -32,7 +32,7 @@ Datadog Lambda 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda 
 
     ARN のプレイスホルダーの値を次のように置き換えます。
     - Replace `<AWS_REGION>` を Lambda 関数と同じ AWS リージョンに置き換えます。例、 `us-east-1`
-    - `<VERSION_NUMBER>` を使用する Datadog Lambda 拡張機能のバージョン（たとえば `7` ）に置き換えます。 現在のバージョンを確認するには、[Amazon ECR リポジトリ][11]で最新のイメージタグを表示します。
+    - `<VERSION_NUMBER>` を使用する Datadog Lambda 拡張機能のバージョン（たとえば `6` ）に置き換えます。 現在のバージョンを確認するには、[Amazon ECR リポジトリ][11]で最新のイメージタグを表示します。
 
     **注**: このレイヤーは Datadog Lambda ライブラリとは別のものです。Datadog Lambda ライブラリを Lambda レイヤーとしてインストールした場合、
     関数には 2 つの Lambda レイヤーがアタッチされることになります。
