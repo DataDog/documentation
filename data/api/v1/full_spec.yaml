@@ -1034,10 +1034,10 @@ components:
           type: array
       type: object
     DashboardReflowType:
-      description: 'Reflow type for a multi-size layout dashboard. Set this only when
-        layout type is ''ordered''.
+      description: 'Reflow type for a **new dashboard layout** dashboard. Set this
+        only when layout type is ''ordered''.
 
-        If set to ''fixed'', the dashboard expect all widgets to have a layout, and
+        If set to ''fixed'', the dashboard expects all widgets to have a layout, and
         if it''s set to ''auto'',
 
         widgets should not have layouts.'
@@ -2460,8 +2460,15 @@ components:
         background_color:
           description: Background color of the group title.
           type: string
+        banner_img:
+          description: URL of image to display as a banner for the group.
+          type: string
         layout_type:
           $ref: '#/components/schemas/WidgetLayoutType'
+        show_title:
+          default: true
+          description: Whether to show the title or not.
+          type: boolean
         title:
           description: Title of the widget.
           type: string
@@ -3156,6 +3163,18 @@ components:
         An image can be a PNG, JPG, or animated GIF. Only available on FREE layout
         dashboards.
       properties:
+        has_background:
+          default: true
+          description: Whether to display a background or not.
+          example: true
+          type: boolean
+        has_border:
+          default: true
+          description: Whether to display a border or not.
+          example: true
+          type: boolean
+        horizontal_align:
+          $ref: '#/components/schemas/WidgetHorizontalAlign'
         margin:
           $ref: '#/components/schemas/WidgetMargin'
         sizing:
@@ -3164,8 +3183,14 @@ components:
           $ref: '#/components/schemas/ImageWidgetDefinitionType'
         url:
           description: URL of the image.
-          example: ''
+          example: https://example.com/image.png
           type: string
+        url_dark_theme:
+          description: URL of the image in dark mode.
+          example: https://example.com/image-dark-mode.png
+          type: string
+        vertical_align:
+          $ref: '#/components/schemas/WidgetVerticalAlign'
       required:
       - type
       - url
@@ -5550,6 +5575,10 @@ components:
         font_size:
           description: Size of the text.
           type: string
+        has_padding:
+          default: true
+          description: Whether to add padding or not.
+          type: boolean
         show_tick:
           description: Whether to show a tick or not.
           type: boolean
@@ -5562,6 +5591,8 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/NoteWidgetDefinitionType'
+        vertical_align:
+          $ref: '#/components/schemas/WidgetVerticalAlign'
       required:
       - type
       - content
@@ -11994,11 +12025,11 @@ components:
           type: string
       type: object
     Widget:
-      description: 'Information about widget.
-
-
-        Note: The `layout` property is required for widgets in dashboards with `free`
-        `layout_type` only.'
+      description: "Information about widget.\n\n**Note**: The `layout` property is\
+        \ required for widgets in dashboards with `free` `layout_type`.\n      For\
+        \ the **new dashboard layout**, the `layout` property depends on the `reflow_type`\
+        \ of the dashboard.\n      - If `reflow_type` is `fixed`, `layout` is required.\n\
+        \      - If `reflow_type` is `auto`, `layout` should not be set."
       properties:
         definition:
           $ref: '#/components/schemas/WidgetDefinition'
@@ -12263,19 +12294,44 @@ components:
       x-enum-varnames:
       - CHECK
       - CLUSTER
-    WidgetImageSizing:
-      description: How to size the image on the widget.
+    WidgetHorizontalAlign:
+      description: Horizontal alignment.
       enum:
+      - center
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - CENTER
+      - LEFT
+      - RIGHT
+    WidgetImageSizing:
+      description: 'How to size the image on the widget. The values are based on the
+        image `object-fit` CSS properties.
+
+        **Note**: `zoom`, `fit` and `center` values are deprecated.'
+      enum:
+      - fill
+      - contain
+      - cover
+      - none
+      - scale-down
       - zoom
       - fit
       - center
       type: string
       x-enum-varnames:
+      - FILL
+      - CONTAIN
+      - COVER
+      - NONE
+      - SCALEDOWN
       - ZOOM
       - FIT
       - CENTER
     WidgetLayout:
-      description: The layout for a widget on a free dashboard.
+      description: The layout for a widget on a `free` or **new dashboard layout**
+        dashboard.
       properties:
         height:
           description: The height of the widget. Should be a non-negative integer.
@@ -12283,6 +12339,14 @@ components:
           format: int64
           minimum: 0
           type: integer
+        is_column_break:
+          default: false
+          description: 'Whether the widget should be the first one on the second column
+            in high density or not.
+
+            **Note**: Only for the **new dashboard layout** and only one widget in
+            the dashboard should have this property set to `true`.'
+          type: boolean
         width:
           description: The width of the widget. Should be a non-negative integer.
           example: 0
@@ -12378,12 +12442,20 @@ components:
       - PAST_ONE_YEAR
       - ALERT
     WidgetMargin:
-      description: Size of the margins around the image.
+      description: 'Size of the margins around the image.
+
+        **Note**: `small` and `large` values are deprecated.'
       enum:
+      - sm
+      - md
+      - lg
       - small
       - large
       type: string
       x-enum-varnames:
+      - SM
+      - MD
+      - LG
       - SMALL
       - LARGE
     WidgetMarker:
@@ -12643,6 +12715,17 @@ components:
       - MONTH_TO_DATE
       - PREVIOUS_MONTH
       - GLOBAL_TIME
+    WidgetVerticalAlign:
+      description: Vertical alignment.
+      enum:
+      - center
+      - top
+      - bottom
+      type: string
+      x-enum-varnames:
+      - CENTER
+      - TOP
+      - BOTTOM
     WidgetViewMode:
       description: Define how you want the SLO to be displayed.
       enum:
@@ -14263,7 +14346,8 @@ paths:
         `,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most\
         \ recent results. To return additional results,\nidentify the last timestamp\
         \ of the last result and set that as the `end` query time to\npaginate the\
-        \ results."
+        \ results. You can also use the page parameter to specify which set of `1000`\
+        \ results to return."
       operationId: ListEvents
       parameters:
       - description: POSIX timestamp.
@@ -14305,12 +14389,36 @@ paths:
           Otherwise if an event is aggregated to a parent event with a timestamp outside
           of the timeframe,
 
-          it won''t be available in the output.'
+          it won''t be available in the output. Aggregated events with `is_aggregate=true`
+          in the response will still be returned unless exclude_aggregate is set to
+          `true.`'
         in: query
         name: unaggregated
         required: false
         schema:
           type: boolean
+      - description: 'Set `exclude_aggregate` to `true` to only return unaggregated
+          events where `is_aggregate=false` in the response. If the `exclude_aggregate`
+          parameter is set to `true`,
+
+          then the unaggregated parameter is ignored and will be `true` by default.'
+        in: query
+        name: exclude_aggregate
+        required: false
+        schema:
+          type: boolean
+      - description: 'By default 1000 results are returned per request. Set page to
+          the number of the page to return with `0` being the first page. The page
+          parameter can only be used
+
+          when either unaggregated or exclude_aggregate is set to `true.`'
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          maximum: 2147483647
+          type: integer
       responses:
         '200':
           content:
