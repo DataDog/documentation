@@ -117,7 +117,7 @@ Filtering by specific AWS cloud services can help pinpoint latency, assess datab
 - **To visualize specific managed services**: In the [Network Map][2], click the dropdown next to *View* and type or select desired tags. In the map, click a node to view troubleshooting options.
 - **To view integration metrics for a service**: In the Network Page, click a row in the [dependency table](#table). In the opened side panel, use the *Integration Metrics* tab to analyze the performance of cloud services and distinguish between a client-side and cloud provider issue.
 
-NPM automatically detects S3, RDS, Kinesis, ELB, Elasticache, and more. View the supported services [here][3]. To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
+NPM automatically detects S3, RDS, Kinesis, ELB, Elasticache, and others listed in the [supported services][3]. To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
 
 ### DNS resolution
 
