@@ -52,7 +52,7 @@ Watchdog can group related data together, draw connections between groups, and p
 
 Watchdog considers the relationships between the following types of signals:
 
-* APM error rate latency and hit rate increases 
+* APM error rate, latency and hit rate increases 
 * New deployments with APM service version changes
 * APM error traces
 * Introduction of new APM resources 
