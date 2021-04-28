@@ -137,7 +137,7 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 | `DD_AGENT_HOST`                    | `localhost` | Override the address of the trace Agent host that the default tracer attempts to submit traces to.                                                                                                                                                                          |
 | `DATADOG_TRACE_AGENT_PORT`         | `8126`      | Override the port that the default tracer submit traces to.                                                                                                                                                                                                                 |
 | `DD_TRACE_AGENT_URL`               |             | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.  |
-| `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and trace injection][8].                                                                                                                                                                                                                           |
+| `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and trace injection][7].                                                                                                                                                                                                                           |
 
 ## Further Reading
 
@@ -149,5 +149,4 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 [4]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /tracing/guide/setting_primary_tags_to_scope/
-[7]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#priority-sampling
-[8]: /tracing/connect_logs_and_traces/python/
+[7]: /tracing/connect_logs_and_traces/python/
