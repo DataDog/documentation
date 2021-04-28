@@ -18,20 +18,25 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last 2 hours. Search your hosts, or group them by tags.
+The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last 2 hours(default) and up to 1 week. Search your hosts, or group them by tags.
 
 ## Hosts
 
 The following information is displayed in the infrastructure list for your hosts:
 
-| Column   | Description                                                                                         |
-|----------|-----------------------------------------------------------------------------------------------------|
-| Hostname | The preferred hostname alias (use the dropdown to view cloud name or instance ID).                  |
-| Status   | Displays `UP` when the expected metrics are received and displays `???` if no metrics are received. |
-| CPU      | The percent of CPU used (everything but idle).                                                      |
-| IOWait   | The percent of CPU spent waiting on the IO (not reported for all platforms).                        |
-| Load 15  | The system load over the last 15 minutes.                                                           |
-| Apps     | The Datadog integrations reporting metrics for the host.                                            |
+| Column           | Description                                                                                         |
+|------------------|-----------------------------------------------------------------------------------------------------|
+| Hostname         | The preferred hostname alias (use the Options menu to view cloud name or instance ID).              |
+| Cloud Name       |                                             |
+| Instance ID      |                                             |
+| Status           | Displays `UP` when the expected metrics are received and displays `???` if no metrics are received. |
+| CPU              | The percent of CPU used (everything but idle).                                                      |
+| IOWait           | The percent of CPU spent waiting on the IO (not reported for all platforms).                        |
+| Load 15          | The system load over the last 15 minutes.                                                           |
+| Apps             | The Datadog integrations reporting metrics for the host.                                            |
+| Operating System |                                             |
+| Cloud Platform   |                                             |
+| Datadog Agent    |                                             |
 
 ### Hostname
 
