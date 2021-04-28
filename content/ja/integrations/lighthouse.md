@@ -78,7 +78,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
    ```shell
    # example
    root@hostname:~# npm list -g --depth=0 | grep 'lighthouse'
-   └── lighthouse@5.6.0
+   |_ lighthouse@5.6.0
    ```
 
    - インストールされていない (上記のコマンドからの出力なし) 場合はインストールします。
@@ -112,7 +112,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
       ```shell
       # example
       root@hostname:~# npm list -g --depth=0 | grep 'puppeteer'
-      └── puppeteer@1.12.2
+      |_ puppeteer@1.12.2
       ```
 
       + インストールされていない (上記のコマンドからの出力なし) 場合はインストールします。
