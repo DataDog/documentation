@@ -110,8 +110,6 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/serverless/libraries_integrations/plugin.md ;fi
 	@if [ content/en/serverless/libraries_integrations/forwarder.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/forwarder.md ;fi
-	@if [ content/en/serverless/libraries_integrations/library.md ]; then \
-	rm -f content/en/serverless/libraries_integrations/library.md ;fi
 	@if [ content/en/serverless/libraries_integrations/macro.md ]; then \
 	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
 	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
