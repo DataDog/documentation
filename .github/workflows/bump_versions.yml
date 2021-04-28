@@ -1,0 +1,56 @@
+on:
+  schedule:
+    # At 08:00 on every day-of-week from Monday through Friday.
+    - cron: '0 8 * * 1-5'
+
+jobs:
+  sdk-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - id: set-versions
+        name: Load latest SDK versions
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            const clients = [
+              'datadog-api-client-go',
+              'datadog-api-client-java',
+              'datadog-api-client-python',
+              'datadog-api-client-ruby'
+            ]
+            const versions = await Promise.all(clients.map(async (repo) => {
+              const releases = await github.repos.listReleases({
+                owner: 'DataDog',
+                repo: repo
+              })
+              return {client: repo, version: releases.data[0]["tag_name"]}
+            }))
+            console.log(versions)
+            return JSON.stringify(versions)
+      - uses: actions/checkout@v2
+      - name: Write version
+        run: |-
+          echo '${{steps.set-versions.outputs.result}}' | jq > ./data/sdk_versions.json
+          git add ./data/sdk_versions.json
+          git config user.name packages
+          git config user.email packages@datadoghq.com
+          git add .
+          git commit -m "Bump SDK"
+          git push origin HEAD:refs/heads/sdk-versions
+      - uses: actions/github-script@v4
+        name: Propose change with latest versions
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            await github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "[SDK] new versions are available",
+              body: "SSID",
+              head: "sdk-versions",
+              base: "master",
+              maintainer_can_modify: true
+            })

@@ -180,7 +180,7 @@
     "request_schema_description": "Downtiming gives you greater control over monitor notifications by\nallowing you to globally exclude scopes from alerting.\nDowntime settings, which can be scheduled with start and end times,\nprevent all alerting related to specified Datadog tags."
   },
   "ListEvents": {
-    "description": "The event stream can be queried and filtered by time, priority, sources and tags.\n\n**Notes**:\n- If the event you’re querying contains markdown formatting of any kind,\nyou may see characters such as `%`,`\\`,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most recent results. To return additional results,\nidentify the last timestamp of the last result and set that as the `end` query time to\npaginate the results.",
+    "description": "The event stream can be queried and filtered by time, priority, sources and tags.\n\n**Notes**:\n- If the event you’re querying contains markdown formatting of any kind,\nyou may see characters such as `%`,`\\`,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most recent results. To return additional results,\nidentify the last timestamp of the last result and set that as the `end` query time to\npaginate the results. You can also use the page parameter to specify which set of `1000` results to return.",
     "summary": "Query the event stream"
   },
   "CreateEvent": {
@@ -761,7 +761,7 @@
     "summary": "Get the list of all tests"
   },
   "CreateTest": {
-    "description": "Create a Synthetic test.",
+    "description": "This endpoint is deprecated. To create a test, use [Create an API test](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test), or [Create a browser test](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test).",
     "summary": "Create a test",
     "request_description": "Details of the test to create.",
     "request_schema_description": "Object containing details about your Synthetic test."
@@ -820,10 +820,10 @@
   },
   "GetTest": {
     "description": "Get the detailed configuration associated with a Synthetics test.",
-    "summary": "Get a test configuration (API)"
+    "summary": "Get a test configuration"
   },
   "UpdateTest": {
-    "description": "Edit the configuration of a Synthetic test.",
+    "description": "This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) or [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).",
     "summary": "Edit a test",
     "request_description": "New test details to be saved.",
     "request_schema_description": "Object containing details about your Synthetic test."

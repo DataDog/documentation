@@ -232,7 +232,7 @@ instances:
     password: "<パスワード>"
 
     ## @param only_custom_queries - 文字列 - 任意
-    ## このインスタンスに対してのみカスタムクエリを実行する場合は、
+    ## このインスタンスに対してカスタムクエリのみを実行する場合は、
     ## このパラメーターを任意の値に設定します。
     #
     only_custom_queries: true

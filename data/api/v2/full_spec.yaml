@@ -3107,12 +3107,14 @@ components:
       enum:
       - gauge
       - count
+      - rate
       - distribution
       example: count
       type: string
       x-enum-varnames:
       - GAUGE
       - COUNT
+      - RATE
       - DISTRIBUTION
     MetricTagConfigurationResponse:
       description: Response object which includes a single metric's tag configuration.
@@ -5516,6 +5518,7 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -5551,6 +5554,7 @@ paths:
       summary: Get items of a Dashboard List
       tags:
       - Dashboard Lists
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -5600,6 +5604,7 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -5649,6 +5654,7 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v2/incidents:
@@ -5845,6 +5851,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v2/logs/config/archive-order:
@@ -5869,6 +5876,7 @@ paths:
       summary: Get archive order
       tags:
       - Logs Archives
+      x-menu-order: 9
       x-undo:
         type: safe
     put:
@@ -5919,6 +5927,7 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v2/logs/config/archives:
@@ -5941,6 +5950,7 @@ paths:
       summary: Get all archives
       tags:
       - Logs Archives
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -5976,6 +5986,7 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteLogsArchive
         parameters:
@@ -6012,6 +6023,7 @@ paths:
       summary: Delete an archive
       tags:
       - Logs Archives
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -6047,6 +6059,7 @@ paths:
       summary: Get an archive
       tags:
       - Logs Archives
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -6095,6 +6108,7 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v2/logs/config/archives/{archive_id}/readers:
@@ -6134,6 +6148,7 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         type: idempotent
     get:
@@ -6170,6 +6185,7 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -6208,6 +6224,7 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: unsafe
   /api/v2/logs/config/metrics:
@@ -6228,6 +6245,7 @@ paths:
       summary: Get all log-based metrics
       tags:
       - Logs Metrics
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -6271,6 +6289,7 @@ paths:
               \n      },\n      \"compute\": {\n        \"aggregation_type\": \"count\"\
               \n      }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
           step: there is a valid "logs_metric" in the system
+      x-menu-order: 2
       x-undo:
         operationId: DeleteLogsMetric
         parameters:
@@ -6295,6 +6314,7 @@ paths:
       summary: Delete a log-based metric
       tags:
       - Logs Metrics
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -6318,6 +6338,7 @@ paths:
       summary: Get a log-based metric
       tags:
       - Logs Metrics
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -6354,6 +6375,7 @@ paths:
       tags:
       - Logs Metrics
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/logs/config/restriction_queries:
@@ -6379,6 +6401,7 @@ paths:
       summary: List restriction queries
       tags:
       - Logs Restriction Queries
+      x-menu-order: 1
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -6416,6 +6439,7 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteRestrictionQuery
         parameters:
@@ -6453,6 +6477,7 @@ paths:
       summary: Get restriction query for a given role
       tags:
       - Logs Restriction Queries
+      x-menu-order: 10
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -6486,6 +6511,7 @@ paths:
       summary: Get all restriction queries for a given user
       tags:
       - Logs Restriction Queries
+      x-menu-order: 9
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -6522,6 +6548,7 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -6562,6 +6589,7 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -6607,6 +6635,7 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -6649,6 +6678,7 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -6690,6 +6720,7 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -6731,6 +6762,7 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -6828,6 +6860,7 @@ paths:
       summary: Get a list of logs
       tags:
       - Logs
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v2/logs/events/search:
@@ -6872,6 +6905,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v2/metrics:
@@ -6960,6 +6994,7 @@ paths:
       summary: List tag configurations
       tags:
       - Metrics
+      x-menu-order: 5
       x-undo:
         type: safe
       x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
@@ -7006,11 +7041,9 @@ paths:
       summary: List tags by metric name
       tags:
       - Metrics
+      x-menu-order: 6
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: 'Deletes a metric''s tag configuration. Can only be used with application
@@ -7043,6 +7076,7 @@ paths:
       summary: Delete a tag configuration
       tags:
       - Metrics
+      x-menu-order: 4
       x-undo:
         type: idempotent
       x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
@@ -7082,6 +7116,7 @@ paths:
       summary: List tag configuration by name
       tags:
       - Metrics
+      x-menu-order: 2
       x-undo:
         type: safe
       x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
@@ -7137,6 +7172,7 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
       x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
@@ -7144,8 +7180,9 @@ paths:
         \ you\u2019re interested in Metrics without Limits&trade;, please contact\
         \ your Customer Success Manager.**"
     post:
-      description: 'Create and define a list of queryable tag keys for a count/gauge/rate/distribution
-        metric. Optionally, include percentile aggregations on any distribution metric.
+      description: 'Create and define a list of queryable tag keys for an existing
+        count/gauge/rate/distribution metric. Optionally, include percentile aggregations
+        on any distribution metric.
 
         Can only be used with application keys of users with the `Manage Tags for
         Metrics` permission.'
@@ -7204,6 +7241,7 @@ paths:
               distribution\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\"\
               : \"{{ unique_alnum }}\"\n  }\n}"
           step: there is a valid "metric_tag_configuration" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteTagConfiguration
         parameters:
@@ -7264,11 +7302,9 @@ paths:
       summary: List distinct metric volumes by metric name
       tags:
       - Metrics
+      x-menu-order: 7
       x-undo:
         type: safe
-      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -7300,6 +7336,7 @@ paths:
         permission:
           source: data[0]
           step: there is a valid "permission" in the system
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v2/processes:
@@ -7386,6 +7423,7 @@ paths:
       summary: Get all processes
       tags:
       - Processes
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v2/roles:
@@ -7429,6 +7467,7 @@ paths:
       summary: List roles
       tags:
       - Roles
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -7470,6 +7509,7 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
               \ unique }}\"\n     },\n     \"type\": \"roles\"\n  }\n}"
           step: there is a valid "role" in the system
+      x-menu-order: 2
       x-undo:
         operationId: DeleteRole
         parameters:
@@ -7501,6 +7541,7 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -7531,6 +7572,7 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -7580,6 +7622,7 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/roles/{role_id}/permissions:
@@ -7623,6 +7666,7 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         type: idempotent
     get:
@@ -7653,6 +7697,7 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -7704,6 +7749,7 @@ paths:
             value: "{\n  \"data\": {\n    \"id\": \"{{ permission.id }}\",\n    \"\
               type\": \"{{ permission.type }}\"\n  }\n}"
           step: the "permission" is granted to the "role"
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v2/roles/{role_id}/users:
@@ -7747,6 +7793,7 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-menu-order: 11
       x-undo:
         type: idempotent
     get:
@@ -7796,6 +7843,7 @@ paths:
       summary: Get all users of a role
       tags:
       - Roles
+      x-menu-order: 9
       x-undo:
         type: safe
     post:
@@ -7847,6 +7895,7 @@ paths:
             value: "{\n  \"data\": {\n    \"id\": \"{{ user.data.id }}\",\n    \"\
               type\": \"{{ user.data.type }}\"\n  }\n}"
           step: the "user" has the "role"
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v2/security_monitoring/rules:
@@ -7868,6 +7917,7 @@ paths:
       summary: List rules
       tags:
       - Security Monitoring
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -7907,6 +7957,7 @@ paths:
               : 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"message\": \"Test\
               \ rule\",\n  \"tags\": [],\n  \"isEnabled\": true\n}"
           step: there is a valid "security_rule" in the system
+      x-menu-order: 2
       x-undo:
         operationId: DeleteSecurityMonitoringRule
         parameters:
@@ -7929,6 +7980,7 @@ paths:
       summary: Delete an existing rule
       tags:
       - Security Monitoring
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -7948,6 +8000,7 @@ paths:
       summary: Get a rule's details
       tags:
       - Security Monitoring
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -7986,6 +8039,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/runtime/policy/download:
@@ -8087,6 +8141,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
+      x-menu-order: 7
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -8121,6 +8176,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -8515,6 +8571,7 @@ paths:
               \n    }\n  ]\n}"
           source: data[0]
           step: the "user" has a "user_invitation"
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v2/user_invitations/{user_invitation_uuid}:
@@ -8551,6 +8608,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v2/users:
@@ -8621,6 +8679,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -8663,6 +8722,7 @@ paths:
               \ unique }}@datadoghq.com\",\n      \"title\": \"user title\"\n    \
               \ },\n     \"type\": \"users\"\n  }\n}"
           step: there is a valid "user" in the system
+      x-menu-order: 2
       x-undo:
         operationId: DisableUser
         parameters:
@@ -8696,6 +8756,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -8726,6 +8787,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -8776,6 +8838,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/users/{user_id}/orgs:
@@ -8810,6 +8873,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v2/users/{user_id}/permissions:
@@ -8842,6 +8906,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
 security:

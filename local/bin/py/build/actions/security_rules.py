@@ -102,6 +102,12 @@ def security_rules(content, content_dir):
                             page_data["control"] = data.get('control', '')
                             page_data["scope"] = tech
 
+                    # lowercase them
+                    if page_data.get("source", None):
+                        page_data["source"] = page_data["source"].lower()
+                    if page_data.get("scope", None):
+                        page_data["scope"] = page_data["scope"].lower()
+
                     front_matter = yaml.dump(page_data, default_flow_style=False).strip()
                     output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
 
@@ -157,6 +163,12 @@ def compliance_rules(content, content_dir):
                     for tag in json_data.get('tags', []):
                         key, value = tag.split(':')
                         page_data[key] = value
+
+                    # lowercase them
+                    if page_data.get("source", None):
+                        page_data["source"] = page_data["source"].lower()
+                    if page_data.get("scope", None):
+                        page_data["scope"] = page_data["scope"].lower()
 
                     front_matter = yaml.dump(page_data, default_flow_style=False).strip()
                     output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
