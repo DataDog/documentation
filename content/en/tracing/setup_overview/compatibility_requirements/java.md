@@ -152,7 +152,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 **Integrations Disabled By Default**
 
-The following instrumentation is off by default and can be enabled with the following settings:
+The following instrumentations are disabled by default and can be enabled with the following settings:
 
 | Instrumentation         | To Enable 									  |
 | ----------------------- |---------------------------------------------- |
