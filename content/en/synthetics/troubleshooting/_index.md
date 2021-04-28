@@ -24,6 +24,12 @@ If you experience issues setting up or configuring Datadog Synthetic Monitoring,
 
 After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a pop up by clicking **Open in Popup** to record your journey.
 
+#### I'm seeing a "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner at the top of the iframe
+
+This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop up or change your URL to an `https` one to start recording on the page. 
+
+{{< img src="synthetics/http_iframe.png" alt="HTTP in iframe" style="width:100%;" >}}
+
 #### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a pop up
 
 After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder. Additionally, you cannot record any steps, regardless of whether you open your website in the iframe or in a pop up:
@@ -34,6 +40,9 @@ If that happens, ensure the [Datadog extension][3] has the permissions to read a
 
 {{< img src="synthetics/extension.mp4" alt="Allowing extension to read data on all sites" video="true"  width="100%" >}}
 
+#### I'm unable to record steps on my application
+
+Your Chrome browser might have some policies preventing the extension from performing the recording as expected. To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][4].
 
 #### I don't see the login page in the recorder. What is happening?
 
@@ -81,9 +90,9 @@ To fix it, go edit your recording, open the advanced options of the step that is
 If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should use the method that you use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetic test.
 
 * Is your endpoint using **header-based authentication**?
-  * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][4] or [Browser test][5].
-  * **Token based authentication**: extract your token with a first [HTTP test][4], create a [global variable][6] by parsing the response of that first test, and re-inject that variable in a second [HTTP][4] or [Browser test][8] requiring the authentication token.
-  * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][4] or [Browser test][5].
+  * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][5] or [Browser test][6].
+  * **Token based authentication**: extract your token with a first [HTTP test][5], create a [global variable][7] by parsing the response of that first test, and re-inject that variable in a second [HTTP][5] or [Browser test][8] requiring the authentication token.
+  * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][5] or [Browser test][6].
   
 * Is this endpoint using **query parameters for authentication** (e.g. do you need to add a specific API key in your URL parameters?)
 
@@ -106,10 +115,10 @@ Synthetic tests by default do not [renotify][10]. This means that if you add you
 [1]: /help/
 [2]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [3]: chrome://extensions/?id=kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /synthetics/api_tests/?tab=httptest#make-a-request
-[5]: /synthetics/browser_tests/#test-details
-[6]: /synthetics/settings/?tab=createfromhttptest#global-variables
-[7]: /synthetics/api_tests/?tab=httptest#use-global-variables
+[4]: https://chromeenterprise.google/policies/#ExtensionSettings
+[5]: /synthetics/api_tests/?tab=httptest#make-a-request
+[6]: /synthetics/browser_tests/#test-details
+[7]: /synthetics/settings/?tab=createfromhttptest#global-variables
 [8]: /synthetics/browser_tests/#use-global-variables
 [9]: https://ip-ranges.datadoghq.com/synthetics.json
 [10]: /synthetics/api_tests/?tab=httptest#notify-your-team

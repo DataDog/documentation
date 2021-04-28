@@ -36,7 +36,7 @@ The next example shows all aggregate connections from IP addresses representing 
 
 You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
-{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}} 
 
 ### Facet panels
 
@@ -107,6 +107,18 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the `source`. |
 | **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the `source`. |
 
+### Cloud service autodetection
+
+Filtering by specific AWS cloud services can help pinpoint latency, assess database performance, and visualize your network more completely. For instance, you can filter a search query by service, view the service in the Network Map, and trace communication on that node to see affected services.
+
+{{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
+
+- **To filter a query**: In a search bar, enter tags such as `service:s3`, `service:kinesis`, and `service:elb`. For some services, you can break down latency and retransmits further by using more out-of-the-box tags like `s3_bucket` and `rds_instance_type`.
+- **To visualize specific managed services**: In the [Network Map][2], click the dropdown next to *View* and type or select desired tags. In the map, click a node to view troubleshooting options.
+- **To view integration metrics for a service**: In the Network Page, click a row in the [dependency table](#table). In the opened side panel, use the *Integration Metrics* tab to analyze the performance of cloud services and distinguish between a client-side and cloud provider issue.
+
+NPM automatically detects S3, RDS, Kinesis, ELB, Elasticache, and others listed in the [supported services][3]. To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
+
 ### DNS resolution
 
 Starting with Agent 7.17+, the Agent resolves IPs to human-readable domain names for external and internal traffic. Domain allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and APIs. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **Domain is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
@@ -147,7 +159,7 @@ Organize and share views of traffic data. Saved Views make debugging faster and 
 - To rename a view: hover over a view in the Saved Views list and click the gear icon to *Edit name*.
 - To share a view: hover over a view in the Saved Views list and click the link icon to *Copy permalink*.
 
-To learn more, see the [Saved Views][2] documentation.
+To learn more, see the [Saved Views][4] documentation.
 
 
 ## Table
@@ -198,4 +210,6 @@ The top of the sidepanel displays common source and destination tags shared by t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/logs/search_syntax/
-[2]: /logs/explorer/saved_views/
+[2]: https://docs.datadoghq.com/network_monitoring/performance/network_map/
+[3]: https://github.com/aws/aws-sdk-go/blob/main/aws/endpoints/defaults.go#L177
+[4]: /logs/explorer/saved_views/
