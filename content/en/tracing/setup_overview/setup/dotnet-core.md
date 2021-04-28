@@ -284,7 +284,7 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 
 3. Restart the .NET service for the environment variables to take effect.
 
-[2]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[1]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 
 {{% /tab %}}
 
@@ -359,7 +359,7 @@ For other environments, please refer to the [Integrations][4] documentation for 
 
 {{< /tabs >}}
 
-## Configuring the Tracer
+## Configure the Tracer
 
 The .NET Tracer has configuration settings that can be set by any of these methods:
 
