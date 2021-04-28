@@ -17,7 +17,7 @@ display_name: Disk
 draft: false
 git_integration_title: disk
 guid: 94588b23-111e-4ed2-a2af-fd6e4caeea04
-integration_id: システム
+integration_id: system
 integration_title: Disk
 is_public: true
 kind: インテグレーション
