@@ -244,8 +244,7 @@ Using the Datadog Operator requires the following prerequisites:
 
 ## Deploy an Agent with the Operator
 
-To deploy a Datadog Agent with the Operator in the minimum number of steps, use the [`datadog-agent-with-operator`][4] Helm chart.
-Here are the steps:
+To deploy the Datadog Agent with the operator in the minimum number of steps, see the [`datadog-operator`][4] helm chart. Here are the steps:
 
 1. Install the [Datadog Operator][5]:
 
@@ -318,7 +317,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[4]: https://github.com/DataDog/datadog-operator/tree/master/chart/datadog-agent-with-operator
+[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 [5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: /agent/guide/operator-advanced
