@@ -72,7 +72,7 @@ Otherwise, to begin tracing your applications:
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
-3. Enable instrumentation in your service by setting the required environment variables.
+3. Enable instrumentation in your service by setting the required environment variables. See the section *Instrumenting your service*, below.
 
 4. Create application load.
 
@@ -111,7 +111,7 @@ Otherwise, to begin tracing your applications:
 
 2. Run the `/opt/datadog/createLogPath.sh` script, which creates a directory for the log files and sets appropriate directory permissions. The default directory for log files is `/var/log/datadog/dotnet`.
 
-3. Enable instrumentation in your service by setting the required environment variables.
+3. Enable instrumentation in your service by setting the required environment variables. See the section *Instrumenting your service*, below.
 
 4. Create application load.
 
