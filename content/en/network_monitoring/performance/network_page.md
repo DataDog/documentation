@@ -108,7 +108,8 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the `source`. |
 
 ### Cloud service autodetection
-By filtering on third-party services such as S3, RDS, Kinesis, and ELB, you can pinpoint latency, assess database performance, and visualize your network more completely. For instance, you can filter a search query by service, view the service in the Network Map, and trace communication on that node to see affected services.
+
+Filtering by specific AWS cloud services can help pinpoint latency, assess database performance, and visualize your network more completely. For instance, you can filter a search query by service, view the service in the Network Map, and trace communication on that node to see affected services.
 
 {{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
 
@@ -116,7 +117,7 @@ By filtering on third-party services such as S3, RDS, Kinesis, and ELB, you can 
 - **To visualize specific managed services**: In the [Network Map][2], click the dropdown next to *View* and type or select desired tags. In the map, click a node to view troubleshooting options.
 - **To view integration metrics for a service**: In the Network Page, click a row in the [dependency table](#table). In the opened side panel, use the *Integration Metrics* tab to analyze the performance of cloud services and distinguish between a client-side and cloud provider issue.
 
-To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#dns-resolution).
+NPM automatically detects S3, RDS, Kinesis, ELB, Elasticache, and others listed in the [supported services][3]. To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
 
 ### DNS resolution
 
@@ -158,7 +159,7 @@ Organize and share views of traffic data. Saved Views make debugging faster and 
 - To rename a view: hover over a view in the Saved Views list and click the gear icon to *Edit name*.
 - To share a view: hover over a view in the Saved Views list and click the link icon to *Copy permalink*.
 
-To learn more, see the [Saved Views][3] documentation.
+To learn more, see the [Saved Views][4] documentation.
 
 
 ## Table
@@ -210,4 +211,5 @@ The top of the sidepanel displays common source and destination tags shared by t
 
 [1]: https://docs.datadoghq.com/logs/search_syntax/
 [2]: https://docs.datadoghq.com/network_monitoring/performance/network_map/
-[3]: /logs/explorer/saved_views/
+[3]: https://github.com/aws/aws-sdk-go/blob/main/aws/endpoints/defaults.go#L177
+[4]: /logs/explorer/saved_views/

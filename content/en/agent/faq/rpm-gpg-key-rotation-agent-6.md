@@ -97,7 +97,7 @@ gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: due to a [bug in dnf](https://bugzilla.redhat.com/show_bug.cgi?id=1792506), use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.
+**Note**: due to a [bug in dnf][7], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.
 
 **Note**: This method doesn't work on SUSE-based systems. Use the [import command](#import-command) instead.
 
@@ -107,3 +107,4 @@ gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
 [4]: https://github.com/DataDog/ansible-datadog
 [5]: https://github.com/DataDog/puppet-datadog-agent
 [6]: https://github.com/DataDog/datadog-formula
+[7]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506

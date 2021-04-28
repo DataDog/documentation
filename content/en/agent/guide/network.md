@@ -28,13 +28,13 @@ further_reading:
   - [Logs][4] data includes `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP, and several others. Review the complete list of [logs endpoints][5] for more information.
   - [Orchestrator Resources][6] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
   - [Real User Monitoring (RUM)][7] data is `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-  - [Profiling][10] data is `intake.profile.`{{< region-param key="dd_site" code="true" >}}
-  - [HIPAA logs][8] data is the same as for all [Logs][4], but also the following legacy endpoints are supported:
+  - [Profiling][8] data is `intake.profile.`{{< region-param key="dd_site" code="true" >}}
+  - [HIPAA logs][9] data is the same as for all [Logs][4], but also the following legacy endpoints are supported:
     - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-  - [Synthetics private location][11] workers rely on the endpoints below to submit test results:
+  - [Synthetics private location][10] workers rely on the endpoints below to submit test results:
       - `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} for sending API test results from worker versions >0.1.6. For worker versions >=1.5.0 this is the only endpoint you need to configure. 
       - `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} for sending browser test results for worker versions >0.2.0
       - `api.`{{< region-param key="dd_site" code="true" >}} for sending API test results from older worker versions <0.1.5
@@ -150,7 +150,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 ## Using proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][11].
 
 ## Agent-side data buffering on network unavailability
 
@@ -175,7 +175,7 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [5]: /logs/log_collection/?tab=http#datadog-logs-endpoints
 [6]: /infrastructure/livecontainers/#kubernetes-resources-1
 [7]: /real_user_monitoring/
-[8]: /security/logs/#hipaa-enabled-customers
-[9]: /agent/proxy/
-[10]: /tracing/profiler/
-[11]: /synthetics/private_locations
+[8]: /tracing/profiler/
+[9]: /security/logs/#hipaa-enabled-customers
+[10]: /synthetics/private_locations
+[11]: /agent/proxy/

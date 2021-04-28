@@ -127,7 +127,7 @@ Find below the manual upgrade instructions for:
            https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
-   **Note**: due to a [bug in dnf](https://bugzilla.redhat.com/show_bug.cgi?id=1792506), use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on CentOS 8.1.
+   **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on CentOS 8.1.
 
 2. Update your local Yum repo and install the Agent:
     ```
@@ -250,7 +250,7 @@ Find below the manual upgrade instructions for:
            https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
-   **Note**: due to a [bug in dnf](https://bugzilla.redhat.com/show_bug.cgi?id=1792506), use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL 8.1.
+   **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL 8.1.
 
 2. Update your local Yum repo and install the Agent:
     ```
@@ -368,6 +368,7 @@ Find below the manual upgrade instructions for:
   sudo systemctl restart datadog-agent.service
   ```
 
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 {{% tab "Windows" %}}
 

@@ -91,22 +91,22 @@ If one of your Synthetic tests is throwing a 401, it most likely means that it i
 
 * Is your endpoint using **header-based authentication**?
   * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][5] or [Browser test][6].
-  * **Token based authentication**: extract your token with a first [HTTP test][5], create a [global variable][7] by parsing the response of that first test, and re-inject that variable in a second [HTTP][5] or [Browser test][9] requiring the authentication token.
+  * **Token based authentication**: extract your token with a first [HTTP test][5], create a [global variable][7] by parsing the response of that first test, and re-inject that variable in a second [HTTP][5] or [Browser test][8] requiring the authentication token.
   * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][5] or [Browser test][6].
   
 * Is this endpoint using **query parameters for authentication** (e.g. do you need to add a specific API key in your URL parameters?)
 
-* Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][10].
+* Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][9].
 
 ### Forbidden errors
 
 If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header.  This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
 
-Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][10] are allowed as traffic sources by your firewalls.
+Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][9] are allowed as traffic sources by your firewalls.
 
 ### Missing notifications
 
-Synthetic tests by default do not [renotify][11]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
+Synthetic tests by default do not [renotify][10]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
 
 ## Further Reading
 
@@ -119,7 +119,6 @@ Synthetic tests by default do not [renotify][11]. This means that if you add you
 [5]: /synthetics/api_tests/?tab=httptest#make-a-request
 [6]: /synthetics/browser_tests/#test-details
 [7]: /synthetics/settings/?tab=createfromhttptest#global-variables
-[8]: /synthetics/api_tests/?tab=httptest#use-global-variables
-[9]: /synthetics/browser_tests/#use-global-variables
-[10]: https://ip-ranges.datadoghq.com/synthetics.json
-[11]: /synthetics/api_tests/?tab=httptest#notify-your-team
+[8]: /synthetics/browser_tests/#use-global-variables
+[9]: https://ip-ranges.datadoghq.com/synthetics.json
+[10]: /synthetics/api_tests/?tab=httptest#notify-your-team
