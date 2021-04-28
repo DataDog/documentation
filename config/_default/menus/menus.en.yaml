@@ -970,7 +970,7 @@ main:
     parent: libraries_integrations
     weight: 205
   - name: Datadog Serverless CLI
-    url: serverless/libraries_integrations/forwarder/
+    url: serverless/libraries_integrations/cli/
     parent: libraries_integrations
     weight: 206
   - name: Lambda Code Signing
