@@ -265,7 +265,6 @@ build_live:
       content/en/tracing/setup_overview/setup/ruby.md,
       content/en/security_platform/default_rules,
       content/en/serverless/libraries_integrations/forwarder.md,
-      content/en/serverless/libraries_integrations/library.md,
       content/en/serverless/libraries_integrations/plugin.md,
       content/en/serverless/libraries_integrations/macro.md,
       content/en/serverless/libraries_integrations/cli.md,
