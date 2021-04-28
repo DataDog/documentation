@@ -72,6 +72,7 @@ name = Datadog, Inc.
 baseurl = https://yum.datadoghq.com/stable/7/x86_64/
 enabled=1
 gpgcheck=1
+repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -86,6 +87,7 @@ name = Datadog, Inc.
 baseurl = https://yum.datadoghq.com/stable/6/x86_64/
 enabled=1
 gpgcheck=1
+repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -94,6 +96,8 @@ gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: due to a [bug in dnf](https://bugzilla.redhat.com/show_bug.cgi?id=1792506), use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.
 
 **Note**: This method doesn't work on SUSE-based systems. Use the [import command](#import-command) instead.
 
