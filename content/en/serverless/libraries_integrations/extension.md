@@ -33,7 +33,13 @@ The Datadog Lambda Extension is distributed as its own Lambda Layer (separate fr
 
     Replace the placeholder values in the ARN as follows:
     - Replace `<AWS_REGION>` with the same AWS region as your Lambda Function, for example, `us-east-1`.
+<<<<<<< HEAD
     - Replace `<VERSION_NUMBER>` with the version of the Datadog Lambda Extension you would like to use, for example `7`. You can identify the current version by viewing the newest image tags in the [Amazon ECR repository][6].
+=======
+    - Replace `<VERSION_NUMBER>` with the version of the Datadog Lambda Extension you would like to use, for example `6`. You can identify the current version by viewing the newest image tags in the [Amazon ECR repository][6].
+    
+    - Replace `<VERSION_NUMBER>` with the version of the Datadog Lambda Extension you would like to use, for example `7`. You can identify the current version by viewing the newest image tags in the [Amazon ECR repository][11].
+>>>>>>> a9aee3a5b (Apply suggestions from code review)
 
     **Note**: This Layer is separate from the Datadog Lambda Library. If you installed the Datadog Lambda Library as a Lambda Layer,
     your function should now have two Lambda Layers attached.
