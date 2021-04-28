@@ -59,7 +59,7 @@ Also, frameworks like Spring Boot inherently work because it usually uses a supp
 
 **Integrations Disabled By Default**
 
-The following instrumentation is off by default and can be enabled with the following settings:
+The following instrumentations are disabled by default and can be enabled with the following settings:
 
 | Instrumentation         | To Enable 									  |
 | ----------------------- |---------------------------------------------- |
