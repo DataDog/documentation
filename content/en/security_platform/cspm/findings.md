@@ -1,6 +1,8 @@
 ---
 title: CSPM Findings
 kind: documentation
+aliases:
+  - /security_platform/findings
 further_reading:
 - link: "security_platform/default_rules"
   tag: "Documentation"
