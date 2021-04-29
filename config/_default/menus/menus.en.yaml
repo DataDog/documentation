@@ -1857,21 +1857,16 @@ main:
     parent: cloud_workload_security
     identifier: cws_getting_started
     weight: 301
-  - name: Homepage
-    url: security_platform/cloud_workload_security/homepage
-    parent: cloud_workload_security
-    identifier: cws_homepage
-    weight: 302
   - name: Workload Security Rules
     url: security_platform/cloud_workload_security/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
-    weight: 303
+    weight: 302
   - name: Default Rules
     url: security_platform/default_rules#cat-runtime-agent
     parent: cloud_workload_security
     identifier: cws_workload_default_rules
-    weight: 304
+    weight: 303
   - name: Signals Explorer
     url: security_platform/explorer
     parent: cloud_workload_security
