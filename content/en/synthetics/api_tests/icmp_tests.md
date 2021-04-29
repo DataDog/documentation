@@ -65,7 +65,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | packet received | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 | network hops    | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
 
-You can create up to 10 assertions per API test by selecting **New Assertion** or by selecting the response preview directly:
+You can create up to 20 assertions per API test by selecting **New Assertion** or by selecting the response preview directly:
 
 {{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test" style="width:90%;" >}}
 
