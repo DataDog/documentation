@@ -1,16 +1,16 @@
 ---
-title: Getting Started with Runtime Security
+title: Getting Started with Cloud Workload Security
 kind: documentation
-description: "Follow the setup and installation instructions to get started with Runtime Security."
+description: "Follow the setup and installation instructions to get started with Cloud Workload Security."
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
   tag: "Blog"
-  text: "Learn more about Datadog Runtime Security"
+  text: "Learn more about Datadog Cloud Runtime Security"
 ---
 
 ## Overview
 
-There are two main sets of features you can use for Runtime Security in the Datadog Agent:
+There are two types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
 1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real time.
 2. **Process Execution Monitoring** to monitor process executions for malicious activity on hosts or containers in real time.
