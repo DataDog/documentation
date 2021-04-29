@@ -16,7 +16,7 @@ further_reading:
 
 Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule that is matched over a given period of time, Datadog generates a Security Signal.
 
-{{< img src="security_monitoring/detection_rules/detection_rules.png" alt="Detection Rules" width="75%">}}
+{{< img src="security_platform/security_monitoring/detection_rules/detection_rules.png" alt="Detection Rules" width="75%">}}
 
 Security Monitoring uses Log Detection to analyze ingested logs in real-time. Compliance Monitoring uses Cloud Configuration to scan the state of your cloud environment. For each monitoring option, there are [default detection rules][1] that work out-of-the-box with integration configuration. You can also create new rules to tailor to your environment.
 
@@ -30,7 +30,7 @@ The free text search filters Detection Rules by text in the rule name or query. 
 
 #### Filter by facet
 
-{{< img src="security_monitoring/detection_rules/facets_panel.png" alt="Facets panel" width="75%">}}
+{{< img src="security_platform/security_monitoring/detection_rules/facets_panel.png" alt="Facets panel" width="75%">}}
 
 Use facets in the left panel to scope a search query by value. For example, if you have several rule sources and need to troubleshoot on rules provided by one source, hover over a source value in the panel, such as `cloudtrail` or `kubernetes`, and click **only** to narrow the search to that source.
 
@@ -38,7 +38,7 @@ By default, all facets are selected. To remove a facet from search, deselect the
 
 ### Rules table
 
-{{< img src="security_monitoring/detection_rules/rules_table2.png" alt="Rules Table"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/rules_table2.png" alt="Rules Table"  >}}
 
 Rules are displayed in the rules table.
 

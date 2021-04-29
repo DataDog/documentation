@@ -1,8 +1,9 @@
 ---
-title: Create a New Rule
+title: Log Detection Rules
 type: documentation
 aliases:
  - security_platform/detection_rules/security_monitoring
+ - security_platform/detection_rules/create_a_new_rule
 further_reading:
 - link: "/security_monitoring/default_rules/"
   tag: "Documentation"
@@ -19,7 +20,7 @@ aliases:
 
 ## Overview
 
-To create a new Security Monitoring detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a new log detection detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
 
 ## Rule Type
 
@@ -42,7 +43,7 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 ### Search query
 
-{{< img src="security_monitoring/detection_rules/threshold.png" alt="Define the search query" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/threshold.png" alt="Define the search query" >}}
 
 Construct a search query using the same logic as a [log explorer search][1].
 
@@ -60,19 +61,19 @@ Click the **Advanced** option to add queries that will **Only trigger a signal w
 
 Joining together logs that span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
 
-{{< img src="security_monitoring/detection_rules/joining_queries_define.png" alt="Define search queries"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/joining_queries_define.png" alt="Define search queries"  >}}
 
 The Detection Rules join the logs together using a group by value. The group by values are typically entities (e.g. IP address, user, etc), but can be any attribute.
 
-{{< img src="security_monitoring/detection_rules/group_by.png" alt="Group by"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/group_by.png" alt="Group by"  >}}
 
 The Detection Rule cases join these queries together based on their group by value. The group by attribute is typically the same attribute because the value must be the same for the case to be met. If a group by value doesn’t exist, the case will never be met. A Security Signal is generated for each unique group by value when a case is matched.
 
-{{< img src="security_monitoring/detection_rules/set_rule_cases2.png" alt="Set rule cases"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/set_rule_cases2.png" alt="Set rule cases"  >}}
 
 In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
 
-{{< img src="security_monitoring/detection_rules/gbv2.png" alt="Set rule cases" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/gbv2.png" alt="Set rule cases" >}}
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -81,7 +82,7 @@ In this example, when greater than five failed logins and a successful login exi
 
 ### Search query
 
-{{< img src="security_monitoring/detection_rules/new_term.png" alt="Define the search query" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/new_term.png" alt="Define the search query" >}}
 
 Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
 
@@ -89,7 +90,7 @@ Construct a search query using the same logic as a [log explorer search][1]. Eac
 
 #### Learned value
 
-{{< img src="security_monitoring/detection_rules/learning_duration.png" alt="Define the learned value" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/learning_duration.png" alt="Define the learned value" >}}
 
 Select a value to detect, learning duration, and, optionally, define a signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user or IP).
 
@@ -110,7 +111,7 @@ Click the **Advanced** option to add queries that will **Only trigger a signal w
 
 ### Trigger
 
-{{< img src="security_monitoring/detection_rules/define_rule_case.png" alt="Define the rule case" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/define_rule_case.png" alt="Define the rule case" >}}
 
 Rule cases, such as `a > 3`, are evaluated as case statements. Thus, the first case to match generates the signal. Click and drag your rule cases to manipulate their ordering.
 
@@ -143,7 +144,7 @@ Additional cases can be added by clicking the **Add Case** button.
 
 {{% tab "New Term" %}}
 
-{{< img src="security_monitoring/detection_rules/new_term_rule_case.png" alt="Define the rule case" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/new_term_rule_case.png" alt="Define the rule case" >}}
 
 ### Severity and notification
 

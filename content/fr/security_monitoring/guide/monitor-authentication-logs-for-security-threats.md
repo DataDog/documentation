@@ -80,7 +80,7 @@ Pour détecter et surveiller de façon adéquate les menaces de sécurité, vous
 
 Le [**credential stuffing**][11] constitue également une technique d'attaque courante. Cette pratique consiste à combiner des informations de connexion publiquement divulguées afin de tenter de trouver des paires d'identifiants réellement utilisées. Pour détecter ce type d'attaque, recherchez les connexions utilisant plusieurs valeurs `usr.id` et provenant toutes du même `network.client.ip`.
 
-{{< img src="security_monitoring/guide/monitor-authentication-logs-for-security-threats/credential-stuffing-attack-signal.png" alt="Signal d'attaque de credential stuffing dans le Security Signals Explorer">}}
+{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/credential-stuffing-attack-signal.png" alt="Signal d'attaque de credential stuffing dans le Security Signals Explorer">}}
 
 Datadog propose des [règles de détection][12] préconfigurées capables d'analyser vos logs ingérés en temps réel afin d'identifier certaines techniques d'attaque courantes, comme les deux précédemment décrites. Lorsqu'un log déclenche l'une de ces erreurs, Datadog génère automatiquement un [signal de sécurité][13]. Ce signal inclut des données importantes sur l'événement, telles que le type d'attaque détecté et des suggestions de mesure. Vous pouvez consulter, filtrer et trier tous vos signaux de sécurité dans le Security Signals Explorer. Cette vue vous permet ainsi de classifier vos signaux et ainsi de concentrer vos efforts sur les plus importants.
 
@@ -92,7 +92,7 @@ Datadog propose des dashboards prêts à l'emploi, tels que le [dashboard d'anal
 
 Par exemple, si une adresse IP ou un utilisateur précis déclenche plusieurs signaux de sécurité, vous pouvez cliquer sur l'adresse IP ou l'utilisateur dans une liste de dashboards ou dans un graphique et sélectionner l'option **View related Security Signals**. Cela affiche alors tous les signaux de sécurité déclenchés par l'adresse IP ou l'utilisateur en question dans le Security Signals Explorer. Si vos données sont concluantes, cette vue vous aide à mettre en corrélation une adresse IP avec un utilisateur, et vice versa. Vous pouvez alors passer en revue chaque règle pour prendre les mesures adéquates. Cliquez sur une règle et consultez les informations de triage et de réponse dans l'onglet **Message** pour évaluer efficacement l'ampleur du problème et le corriger.
 
-{{< img src="security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.gif" alt="Étudier des signaux de sécurité déclenchés dans le dashboard d'analyse d'adresse IP">}}
+{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.gif" alt="Étudier des signaux de sécurité déclenchés dans le dashboard d'analyse d'adresse IP">}}
 
 Vous pouvez également créer des dashboards personnalisés pour visualiser des données d'authentification essentielles, telles que le nombre de connexions par source et par résultat. Ces dashboards vous offrent une vue d'ensemble des activités pour tous vos utilisateurs. Ils vous aident également à visualiser les tendances afin de détecter les pics d'activité anormaux devant faire l'objet d'une enquête.
 
