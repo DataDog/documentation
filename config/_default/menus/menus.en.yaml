@@ -1660,6 +1660,26 @@ main:
     parent: setup_tests
     identifier: ci_java
     weight: 104
+  - name: JavaScript
+    url: continuous_integration/setup_tests/javascript/
+    parent: setup_tests
+    identifier: ci_javascro[t]
+    weight: 105
+  - name: Python
+    url: continuous_integration/setup_tests/python/
+    parent: setup_tests
+    identifier: ci_python
+    weight: 106
+  - name: Ruby
+    url: continuous_integration/setup_tests/ruby/
+    parent: setup_tests
+    identifier: ci_ruby
+    weight: 107
+  - name: Swift
+    url: continuous_integration/setup_tests/swift/
+    parent: setup_tests
+    identifier: ci_swift
+    weight: 108
   - name: Tracing Pipelines
     url: continuous_integration/setup_pipelines/
     parent: ci
