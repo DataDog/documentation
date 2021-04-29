@@ -13,7 +13,7 @@ Runtime Security uses the Datadog Agent, so if you’re already using Datadog to
 
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/cloud_workload_security/getting_started">}}Complete setup and configuration{{< /nextlink >}}
-  {{< nextlink href="/security_platform/detection_rules">}}Learn about Datadog security rules{{< /nextlink >}}
-  {{< nextlink href="/security_monitoring/default_rules">}}Start using out-of-the-box Cloud Workload Security rules in your environment{{< /nextlink >}}
+  {{< nextlink href="/security_platform/cloud_workload_security/workload_security_rules">}}Learn about Workload Security rules{{< /nextlink >}}
+  {{< nextlink href="/security_monitoring/default_rules">}}Start using out-of-the-box Workload Security rules in your environment{{< /nextlink >}}
 {{< /whatsnext >}}
 
