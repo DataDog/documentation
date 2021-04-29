@@ -69,7 +69,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | maximum TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
 | minimum TLS version   | `is more than`, `is more than or equal`                                                | _Decimal_                  |
 
-You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your SSL test" style="width:90%;" >}}
 
