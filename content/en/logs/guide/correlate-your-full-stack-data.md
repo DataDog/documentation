@@ -194,7 +194,7 @@ For that, [connect RUM and Traces][6]. You can see RUM view information in [Trac
 
 Note: There is no direct correlation between RUM views and server logs. You can still see a RUM event from a log and logs from a RUM event by looking at Trace previews.
 
-{{< img src="logs/guide/correlate-your-full-stack-data/log-explorer-rum-span.png" alt="RUM span in a log trace preview" style="width:80%;" >}}
+{{< img src="logs/guide/correlate-your-full-stack-data/rum-action-server-logs.png" alt="Logs in a RUM action trace preview" style="width:80%;" >}}
 
 ## Correlate browser logs
 
