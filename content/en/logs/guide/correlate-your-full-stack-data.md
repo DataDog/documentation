@@ -33,7 +33,7 @@ At first, [correlating application logs](#correlate-application-logs) offers ext
 3. [Correlate RUM views](#correlate-rum-views)
 4. [Correlate browser logs](#correlate-browser-logs)
 
-At last, [leverage the correlation to troubleshoot Synthetic tests](#leverage-the-correlation-to-troubleshoot-synthetic-tests)
+At last, [leverage the correlation to troubleshoot Synthetic tests](#leverage-the-correlation-to-troubleshoot-synthetic-tests).
 
 Note: Depending on your use cases, you may skip steps. Steps dependant from others are explicit.
 
