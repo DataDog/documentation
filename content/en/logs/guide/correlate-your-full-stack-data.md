@@ -18,23 +18,25 @@ further_reading:
 
 ## Overview
 
-With [unified service tagging][1] you already have high level correlation capabilities. But sometimes the starting point of your investigation is a single log or a single trace. Correlating them with other data gives context to estimate business impact and find root causes in a few clicks.
+With [unified service tagging][1] you already have high level correlation capabilities. But sometimes the starting point of your investigation is a single log, trace or view. Correlating them with other data gives context to estimate business impact and find root causes in a few clicks.
 
 {{< img src="logs/guide/correlate-your-full-stack-data/full-stack-cover.png" alt="Full stack correlation" style="width:80%;" >}}
 
-Correlating your logs also eases [aggressive sampling strategy based on Trace ID][2] without losing entity-level consistency.
+Correlating your logs also eases [aggressive sampling strategy without losing entity-level consistency][2] with attributes like `trace_id` and `network.session_id`.
 
-This guide walks you through the steps you should take to correlate your full stack logs, traces and view:
+This guide walks you through the steps you should take to correlate your full stack logs, traces and view.
 
-1. [Correlate application logs](#correlate-application-logs)
-2. [Correlate proxy logs](#correlate-proxy-logs)
-3. [Correlate database logs](#correlate-database-logs)
-4. [Correlate queuing logs](#correlate-queuing-logs)
-5. [Test the whole correlation from a Synthetic test](#test-the-whole-correlation-from-a-synthetic-test)
-6. [Correlate browser logs](#correlate-browser-logs)
-7. [Correlate RUM views](#correlate-rum-views)
+At first, [correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some very specific use-cases require to prolong the correlation deeper to your stack:
 
-Note: Depending on your use case, you may skip steps. Steps dependant from others are explicit.
+1. [Correlate proxy logs](#correlate-proxy-logs)
+2. [Correlate database logs](#correlate-database-logs)
+3. [Correlate queuing logs](#correlate-queuing-logs)
+4. [Correlate RUM views](#correlate-rum-views)
+5. [Correlate browser logs](#correlate-browser-logs)
+
+At last, [leverage the correlation to troubleshoot Synthetic tests](#leverage-the-correlation-to-troubleshoot-synthetic-tests)
+
+Note: Depending on your use cases, you may skip steps. Steps dependant from others are explicit.
 
 ## Correlate application logs
 
@@ -196,7 +198,7 @@ Note: There is no direct correlation between RUM views and server logs. You can 
 
 ### Why?
 
-[Browser logs][9] inside a RUM event gives context and insights on what caused an issue, and what were the consequences for users. E.g. below, browser logs indicates that the bad query root cause is an invalid user id.
+[Browser logs][9] inside a RUM event gives context and insights on causes and consequences. E.g. below, browser logs indicates that the bad query root cause is an invalid user id.
 
 {{< img src="logs/guide/correlate-your-full-stack-data/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:80%;" >}}
 
@@ -204,7 +206,7 @@ Note: There is no direct correlation between RUM views and server logs. You can 
 
 Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][10]. You just need to have [matching configuration between RUM and logs SDK][11].
 
-## Test the whole correlation from a Synthetic test
+## Leverage the correlation to troubleshoot Synthetic tests
 
 ### Why?
 
