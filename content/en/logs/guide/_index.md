@@ -47,4 +47,7 @@ private: true
     {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Log Correlation" >}}
+  {{< nextlink href="logs/guide/correlate-your-full-stack-data" >}}Correlate your full stack logs, traces and views{{< /nextlink >}}
+{{< /whatsnext >}}
 
