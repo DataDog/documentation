@@ -1,3 +1,5 @@
+Draft of Java Doc Changes-Audit
+
 ---
 title: Tracing Java Applications
 kind: documentation
@@ -26,19 +28,13 @@ All JVM-based languages, such as Scala (versions 2.10.x - 2.13.x), Groovy, Kotli
 
 ## Installation and Getting Started
 
-### Follow the in-app Documentation (Recommended)
-
-Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env` and `version` tags.
-- Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
+To get started with Datadog APM, add the Datadog Tracer to your application, which will then send traces to a Datadog Agent[link] - which forwards your traces to our backend. 
 
 ### Java Installation Steps
 
 Otherwise, to begin tracing your applications:
 
-1. Download `dd-java-agent.jar` that contains the latest Agent class files:
+1. Download `dd-java-agent.jar` that contains the latest version of the Java tracer:
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
@@ -50,47 +46,106 @@ Otherwise, to begin tracing your applications:
    ```text
     -javaagent:/path/to/the/dd-java-agent.jar
    ```
+For application-server specific instructions, see https://docs.datadoghq.com/tracing/setup_overview/setup/java?tab=containers#add-the-java-tracer-to-the-jvm 
 
-3. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics-all the metrics you intend to use. See the examples below. Note that using the in-app quickstart instructions generates these for you.
+3. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, and profiling. 
 
-### Configure the Datadog Agent for APM
+| System Property                        | Environment Variable                   | Default                           | Description                                                                                                                                                                                                                                                           |
+| -------------------------------------- | -------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dd.service`                           | `DD_SERVICE`                           | `unnamed-java-app`                | The name of a set of processes that do the same job. Used for grouping stats for your application. Available for versions 0.50.0+.                                                                                                                                                                    |
+| `dd.env`                               | `DD_ENV`                               | `none`                            | Your application environment (e.g. production, staging, etc.). Available for versions 0.48+.                                                    |
+| `dd.version`                           | `DD_VERSION`                           | `null`                            | Your application version (e.g. 2.5, 202003181415, 1.3-alpha, etc.). Available for versions 0.48+.             |
+| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | `true`                           | Inject trace_id and span_id into your logs to correlate with traces in the Datadog UI. Set as true by default in 0.78.0+ of the tracer. See [Connect Logs and Traces][18] docs for details.   |
+| `dd.profiling.enabled`                    | `DD_PROFILING_ENABLED`                    | `false`                           | Enables Continuous Profiler. Requires Datadog Agent 7.20.2+ or 6.20.2+. See [Continuous Profiler][17] docs for details.  |
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+4. Check Datadog Agent Connection
+
+To ensure the Datadog Agent is configured to receive traces, run the following command to submit a test trace:
+
+`java -Ddd...etc... -jar dd-java-agent-0.80.0.jar`
+
+ <! --- 
+
+This tool will confirm the following:
+UDS configured/open
+Agent running, UDS not configured
+Agent running, no UDS but localhost:8126 is open
+No agent connection - no UDS, localhost:8126 is closed. 
+
+ --- !>
+
+If the Datadog Agent is configured for tracing, the command will return:
+ `Traces sent to Agent successfully`. 
+
+Check out your traces on the Live Search page [here][19]! 
+
+If the Datadog Agent is not configured to receive traces - follow the following steps below:
 
 {{< tabs >}}
-{{% tab "Containers" %}}
+{{% tab "Docker" %}}
 
-1. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+After installing the Datadog Agent(link to Agent), the Agent will be listening for trace traffic over a Unix Domain Socket at `socketPath: /var/run/datadog/apm.socket` by default. To enable socket communication on your application container, start your application containers with `-v /var/run/datadog:/var/run/TBD`
 
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+After enabling, test successful trace connection with the comman: 
+`java -Ddd...etc... -jar dd-java-agent-0.80.0.jar`
 
-{{< partial name="apm/apm-containers.html" >}}
-</br>
+If you are unable to get started with APM, optionally you can configure a host/port connection[link] or reach out to our support team for more assistance. 
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port, change it by setting the below env variables:
-
-`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
-
-```bash
-java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
-```
-
-You can also use system properties:
-
-```bash
-java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
-     -Ddd.agent.host=$DD_AGENT_HOST \
-     -Ddd.agent.port=$DD_TRACE_AGENT_PORT \
-     -jar <YOUR_APPLICATION_PATH>.jar
-```
-
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
-{{% tab "AWS Lambda" %}}
+
+{{% tab "Kubernetes" %}}
+
+After installing the Datadog Agent(link to Agent), the Agent will be listening for trace traffic over a Unix Domain Socket at `socketPath: /var/run/datadog/apm.socket` by default. 
+
+To expose the same folder in your applications, add the following to your application deployment:
+
+```
+volumeMounts:
+    - name: dsdsocket
+      mountPath: /var/run/datadog
+      readOnly: true
+    ## ...
+volumes:
+    - hostPath:
+          path: /var/run/datadog/
+      name: dsdsocket
+```
+
+After enabling, test successful trace connection with the command: 
+`java -Ddd...etc... -jar dd-java-agent-0.80.0.jar`
+
+If you are unable to get started with APM, optionally you can configure a host/port connection[link] or reach out to our support team for more assistance. 
+
+{{% /tab %}}
+
+{{% tab “ECS - EC2" %}}
+
+After installing the Datadog Agent(link to Agent), the Agent will be listening for trace traffic over a Unix Domain Socket at `socketPath: /var/run/datadog/apm.socket` by default. 
+
+To expose the same folder in your applications, add the following to your task definition TBD:
+
+```
+volumeMounts:
+    - name: dsdsocket
+      mountPath: /var/run/datadog
+      readOnly: true
+    ## ...
+volumes:
+    - hostPath:
+          path: /var/run/datadog/
+      name: dsdsocket
+```
+
+After enabling, test successful trace connection with the command: 
+`java -Ddd...etc... -jar dd-java-agent-0.80.0.jar`
+
+If you are unable to get started with APM, optionally you can configure a host/port connection[link] or reach out to our support team for more assistance. 
+
+{{% /tab %}}
+
+{{% tab "ECS - Lambda" %}}
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
-
 
 [1]: /tracing/serverless_functions/
 {{% /tab %}}
@@ -495,3 +550,9 @@ Java APM has minimal impact on the overhead of an application:
 [14]: /integrations/java/?tab=host#metric-collection
 [15]: https://github.com/openzipkin/b3-propagation
 [16]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
+[17]: https://docs.datadoghq.com/tracing/profiler/ 
+[18]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/ 
+[19]: https://app.datadoghq.com/apm/traces 
+
+
+
