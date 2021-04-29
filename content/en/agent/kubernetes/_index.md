@@ -149,7 +149,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     kubectl create secret generic datadog-agent --from-literal='api-key=<DATADOG_API_KEY>' --namespace="default"
     ```
 
-     **Note**: This create a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.
+     **Note**: This creates a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.
 
 3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
@@ -167,6 +167,8 @@ To install the Datadog Agent on your Kubernetes cluster:
      **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
 4. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
+    
+    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadog.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][19] to see documentation appropriate for the site you're using.
 
 5. **Deploy the DaemonSet** with the command:
 
@@ -187,7 +189,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][19] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][20]:
+7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][20] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][21]:
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -225,8 +227,9 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [16]: /agent/kubernetes/apm/
 [17]: /infrastructure/process/?tab=kubernetes#installation
 [18]: /network_monitoring/performance/setup/
-[19]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[20]: /agent/kubernetes/data_collected/#kube-state-metrics
+[19]: /getting_started/site/
+[20]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[21]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Operator" %}}
 
