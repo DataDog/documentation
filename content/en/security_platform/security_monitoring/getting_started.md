@@ -26,7 +26,7 @@ If you already have a logging source, follow the [in-app onboarding][1] to begin
 
 Datadog’s [Log Collection documentation][2] provides detailed information on collecting logs from many different sources into Datadog. All ingested logs are first parsed and enriched. In real time, Detection Rules apply to all processed logs to maximize detection coverage without any of the traditionally associated performance or cost concerns of indexing all of your log data. [Read more about Datadog’s Logging without Limits™][3].
 
-{{< img src="security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingest Logs" >}}
+{{< img src="security_platform/security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingest Logs" >}}
 
 ## Review Detection Rules
 
