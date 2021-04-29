@@ -5,6 +5,9 @@ further_reading:
 - link: "/tracing/connect_logs_and_traces/"
   tag: "Documentation"
   text: "Correlate Traces and Logs"
+- link: '/logs/guide/correlate-your-full-stack-data/'
+  tag: 'Guide'
+  text: 'Correlate your full stack logs, traces and views.'
 ---
 
 Clicking on a [trace][1] opens a contextual panel that contains information about the trace, about the host and the correlated logs. However the log panel can be empty in some specific cases. Let's review how this can be fixed.

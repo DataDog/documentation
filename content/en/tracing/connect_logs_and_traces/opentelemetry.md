@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
   text: "Datadog's partnership with OpenTelemetry"
+- link: '/logs/guide/correlate-your-full-stack-data/'
+  tag: 'Guide'
+  text: 'Correlate your full stack logs, traces and views.'
 ---
 
 Connecting OpenTelemetry language SDK logs and traces within Datadog is similar to connecting [Datadog SDK logs and traces][1], with a few additional steps:

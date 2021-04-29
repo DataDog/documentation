@@ -15,6 +15,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
       tag: 'Blog'
       text: 'Correlate request logs with traces automatically'
+    - link: '/logs/guide/correlate-your-full-stack-data/'
+      tag: 'Guide'
+      text: 'Correlate your full stack logs, traces and views.'
 ---
 
 ## Automatically Inject Trace and Span IDs
