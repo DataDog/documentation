@@ -30,9 +30,8 @@ At first, [correlating application logs](#correlate-application-logs) offers ext
 
 1. [Correlate proxy logs](#correlate-proxy-logs)
 2. [Correlate database logs](#correlate-database-logs)
-3. [Correlate queuing logs](#correlate-queuing-logs)
-4. [Correlate RUM views](#correlate-rum-views)
-5. [Correlate browser logs](#correlate-browser-logs)
+3. [Correlate RUM views](#correlate-rum-views)
+4. [Correlate browser logs](#correlate-browser-logs)
 
 At last, [leverage the correlation to troubleshoot Synthetic tests](#leverage-the-correlation-to-troubleshoot-synthetic-tests)
 
@@ -170,10 +169,6 @@ You can see slow query execution plan from your slow trace:
 [5]: /logs/processing/processors/?tab=ui#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
-
-### Correlate queuing logs
-
-TODO
 
 ### Correlate RUM views
 
