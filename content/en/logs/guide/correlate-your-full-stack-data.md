@@ -119,7 +119,7 @@ For example, production slow queries are hard to reproduce and analyze without i
 
 PostgreSQL default logs are not detailed. Follow [this integration guide][1] to enrich them.
 
-The slow query guideline also requires to have rich plan explanation on slow queries. For having execution plan results, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
+The slow query guideline also requires a rich plan explanation on slow queries. For execution plan results, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
 
 ```conf
 session_preload_libraries = 'auto_explain'
