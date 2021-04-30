@@ -82,7 +82,7 @@ http {
 
 ##### Parse trace ID in pipelines
 
-1. Clone NGINX pipeline.
+1. Clone the NGINX pipeline.
 
 2. Customize the first [grok parser][2]:
    - In *Parsing rules*, replace the first parsing rule with:
