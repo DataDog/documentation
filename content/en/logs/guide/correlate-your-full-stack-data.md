@@ -174,7 +174,7 @@ Here is an example of a slow query execution plan from a slow trace:
 
 #### Why?
 
-APM and RUM combination lets you see your full frontend and backend data through one lens.
+APM and RUM together let you see your full frontend and backend data through one lens.
 
 Use the RUM correlation to:
 
