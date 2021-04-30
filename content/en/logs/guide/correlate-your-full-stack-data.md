@@ -195,7 +195,7 @@ Follow the [connect RUM and Traces][6] documentation. RUM view information is av
 
 #### Why?
 
-[Browser logs][9] inside a RUM event gives context and insights on causes and consequences. E.g. below, browser logs indicates that the bad query root cause is an invalid user id.
+[Browser logs][9] inside a RUM event gives context and insight into causes and consequences. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
 
 {{< img src="logs/guide/correlate-your-full-stack-data/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:80%;" >}}
 
