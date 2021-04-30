@@ -209,31 +209,31 @@ GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
 init_config:
 
 instances:
-  ## @param server - 文字列 - 必須
-  ## Oracle Database Server の IP アドレスまたはホスト名。
+  ## @param server - string - required
+  ## The IP address or hostname of the Oracle Database Server.
   #
   - server: localhost:1521
 
-    ## @param service_name - 文字列 - 必須
-    ## Oracle Database サービス名。サーバーで利用可能なサービスを表示するには、
-    ## 次のクエリを実行します。
+    ## @param service_name - string - required
+    ## The Oracle Database service name. To view the services available on your server,
+    ## run the following query:
     ## `SELECT value FROM v$parameter WHERE name='service_names'`
     #
-    service_name: "<サービス名>"
+    service_name: "<SERVICE_NAME>"
 
-    ## @param user - 文字列 - 必須
-    ## ユーザーアカウントのユーザー名。
+    ## @param user - string - required
+    ## The username for the user account.
     #
-    user: <ユーザー>
+    user: <USER>
 
-    ## @param password - 文字列 - 必須
-    ## ユーザーアカウントのパスワード。
+    ## @param password - string - required
+    ## The password for the user account.
     #
-    password: "<パスワード>"
+    password: "<PASSWORD>"
 
-    ## @param only_custom_queries - 文字列 - 任意
-    ## このインスタンスに対してカスタムクエリのみを実行する場合は、
-    ## このパラメーターを任意の値に設定します。
+    ## @param only_custom_queries - string - optional
+    ## Set this parameter to any value if you want to only run custom
+    ## queries for this instance.
     #
     only_custom_queries: true
 ```
