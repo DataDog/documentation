@@ -26,7 +26,7 @@ Correlating your logs also eases [aggressive sampling strategy without losing en
 
 This guide walks you through the steps to correlate your full stack logs, traces, and view.
 
-At first, [correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some very specific use-cases require to prolong the correlation deeper to your stack:
+[Correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some very specific use cases require correlation deeper into to your stack. Follow the links to complete setup per use case.
 
 1. [Correlate proxy logs](#correlate-proxy-logs)
 2. [Correlate database logs](#correlate-database-logs)
