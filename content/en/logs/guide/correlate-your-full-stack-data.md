@@ -126,7 +126,7 @@ session_preload_libraries = 'auto_explain'
 auto_explain.log_min_duration = '500ms'
 ```
 
-Your query longer than 500ms logs their execution plan.
+Queries longer than 500ms log their execution plan.
 
 Note: `auto_explain.log_analyze = 'true'` provide even more information but greatly impact performance. You can learn more on the [official documentation][2].
 
