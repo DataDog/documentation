@@ -94,7 +94,7 @@ http {
    _trace_id %{notSpace:dd.trace_id:nullIf("-")}
    ```
 
-3. Add a [Trace Id remapper][3] on `dd.trace_id` attribute.
+3. Add a [trace ID remapper][3] on `dd.trace_id` attribute.
 
 [1]:/tracing/setup_overview/proxy_setup/?tab=nginx
 [2]:/logs/processing/processors/?tab=ui#grok-parser
