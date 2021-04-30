@@ -211,7 +211,7 @@ The APM integration with Synthetic Monitoring allows you to go from a test run t
 
 Having network-related specifics, thanks to your test, as well as backend, infrastructure, log information (thanks to your trace), and RUM events (for [browser tests][12] only) allows you to access a new level of detail about the way your application is behaving and how it is experienced by your users.
 
-For that, [enable APM integration on Synthetic settings][5].
+For this feature, follow the [enable APM integration on Synthetic settings][5] documentation.
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
