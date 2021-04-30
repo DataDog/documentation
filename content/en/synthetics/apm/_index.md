@@ -11,9 +11,9 @@ further_reading:
   - link: "/tracing/"
     tag: "Documentation"
     text: "APM and Distributed Tracing"
-  - link: '/logs/guide/correlate-your-full-stack-data/'
+  - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
     tag: 'Guide'
-    text: 'Correlate your full stack logs, traces and views.'
+    text: 'Ease troubleshooting with cross product correlation.'
 
 ---
 

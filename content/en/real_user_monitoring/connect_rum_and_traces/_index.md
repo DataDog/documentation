@@ -8,9 +8,9 @@ further_reading:
   - link: "/tracing/"
     tag: "Documentation"
     text: "APM and Distributed Tracing"
-  - link: '/logs/guide/correlate-your-full-stack-data/'
+  - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
     tag: 'Guide'
-    text: 'Correlate your full stack logs, traces and views.'
+    text: 'Ease troubleshooting with cross product correlation.'
 ---
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}

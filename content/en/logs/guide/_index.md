@@ -48,6 +48,6 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Log Correlation" >}}
-  {{< nextlink href="logs/guide/correlate-your-full-stack-data" >}}Correlate your full stack logs, traces and views{{< /nextlink >}}
+  {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross product correlation{{< /nextlink >}}
 {{< /whatsnext >}}
 
