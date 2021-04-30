@@ -43,7 +43,7 @@ At last, [leverage the correlation to troubleshoot Synthetic tests](#leverage-th
 
 #### Why?
 
-Application logs are the backbone of your context that give most of the code and business logic issues. They can even help you solve other services issues, e.g. most ORMs logs database errors.
+Application logs give the most context around most code and business logic issues. They can even help you solve other services issues. For example, most ORMs log database errors.
 
 #### How?
 
