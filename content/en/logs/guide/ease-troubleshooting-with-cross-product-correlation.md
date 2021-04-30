@@ -1,19 +1,6 @@
 ---
 title: Ease troubleshooting with cross product correlation
 kind: guide
-aliases:
-  - /logs/guide/xxx
-further_reading:
-  - link: /logs/guide/logs-rbac/
-    tag: Documentation
-    text: "Set up Roles Based Access Controls (RBAC) for Log Management"
-  - link: /agent/logs/advanced_log_collection
-    tag: Documentation
-    text: "Filter and Redact logs with Advanced Log Collection"
-  - link: /agent/guide/autodiscovery-management/
-    tag: Documentation
-    text: "Exclude containers from Log Collection with Autodiscovery"
-
 ---
 
 ## Overview
