@@ -156,7 +156,7 @@ Clone and customize the PostgreSQL pipeline:
    extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+%{data}
    ```
 
-2. Add a [Trace Id remapper][5] on `dd.trace_id` attribute.
+2. Add a [trace ID remapper][5] on `dd.trace_id` attribute.
 
 You can see slow query execution plan from your slow trace:
 
