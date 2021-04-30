@@ -19,6 +19,24 @@ further_reading:
 * TravisCI
 * Bitrise
 
+## Supported versions
+
+The Swift test instrumentation is compatible with the following platforms:
+
+| PLATFORM    | VERSION |
+| ----------- | ----- |
+| iOS         |  11.0+  |
+| macOS       |  10.13+ |
+| tvOS        |  11.0+  |
+
+and the following languages:
+
+| PLATFORM    | VERSION |
+| ----------- | ----- |
+| Swift       |  5.3+   |
+| Objective-C |  2.0+   |
+
+
 ## Installing using SPM
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
@@ -60,7 +78,7 @@ Optionally, set these environment variables also:
 |`DD_SERVICE`                | The name of the service you want to report      |
 
 
-### Configuration CI
+### Configuring your CI service
 
 Set the following environment variables for your CI service:
 
@@ -185,182 +203,170 @@ If you run MacOS tests, or iOS or tvOS tests on a simulator, Git information is 
 
 #### Jenkins
 
-| Key                      | Value                       |
+| Environment variable     | Value                       |
 |--------------------------|-----------------------------|
-|GIT_COMMIT             |$(GIT_COMMIT)             |
-|GIT_URL                |$(GIT_URL)                |
-|GIT_BRANCH             |$(GIT_BRANCH)             |
+| `GIT_COMMIT`             | `$(GIT_COMMIT)`             |
+| `GIT_URL`                | `$(GIT_URL)`                |
+| `GIT_BRANCH`             | `$(GIT_BRANCH)`             |
 
 #### CircleCI
 
-| Key                        | Value                         |
+| Environment variable     | Value                         |
 |--------------------------- |-------------------------------|
-|CIRCLE_SHA1              |$(CIRCLE_SHA1)              |
-|CIRCLE_REPOSITORY_URL    |$(CIRCLE_REPOSITORY_URL)    |
-|CIRCLE_BRANCH            |$(CIRCLE_BRANCH)            |
-|CIRCLE_TAG |$(CIRCLE_TAG) |
+| `CIRCLE_SHA1`              | `$(CIRCLE_SHA1)`              |
+| `CIRCLE_REPOSITORY_URL`    | `$(CIRCLE_REPOSITORY_URL)`    |
+| `CIRCLE_BRANCH`            | `$(CIRCLE_BRANCH)`            |
+| `CIRCLE_TAG` | `$(CIRCLE_TAG)` |
 
 
 #### GitLab CI
 
-| Key                  | Value             |
+| Environment variable     | Value             |
 | -------------------  | ----------------- |
-|CI_COMMIT_SHA      |$(CI_COMMIT_SHA)      |
-|CI_REPOSITORY_URL  |$(CI_REPOSITORY_URL)  |
-|CI_COMMIT_BRANCH   |$(CI_COMMIT_BRANCH)   |
-|CI_COMMIT_TAG      |$(CI_COMMIT_TAG)      |
+| `CI_COMMIT_SHA`      | `$(CI_COMMIT_SHA)`      |
+| `CI_REPOSITORY_URL`  | `$(CI_REPOSITORY_URL)`  |
+| `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`   |
+| `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`      |
 
 #### Travis
 
-| Key                          | Value                           |
+| Environment variable     | Value                           |
 | ---------------------------- | ------------------------------- |
-|TRAVIS_REPO_SLUG           |$(TRAVIS_REPO_SLUG)           |
-|TRAVIS_PULL_REQUEST_SLUG |$(TRAVIS_PULL_REQUEST_SLUG) |
-|TRAVIS_PULL_REQUEST_BRANCH |$(TRAVIS_PULL_REQUEST_BRANCH) |
-|TRAVIS_BRANCH              |$(TRAVIS_BRANCH)              |
-|TRAVIS_COMMIT              |$(TRAVIS_COMMIT)              |
-|TRAVIS_TAG           |$(TRAVIS_TAG)           |
+| `TRAVIS_REPO_SLUG`           | `$(TRAVIS_REPO_SLUG)`           |
+| `TRAVIS_PULL_REQUEST_SLUG` | `$(TRAVIS_PULL_REQUEST_SLUG)` |
+| `TRAVIS_PULL_REQUEST_BRANCH` | `$(TRAVIS_PULL_REQUEST_BRANCH)` |
+| `TRAVIS_BRANCH`              | `$(TRAVIS_BRANCH)`              |
+| `TRAVIS_COMMIT`              | `$(TRAVIS_COMMIT)`              |
+| `TRAVIS_TAG`           | `$(TRAVIS_TAG)`           |
 
 
 #### GitHub Actions
 
-| Key                 | Value                  |
+| Environment variable     | Value                  |
 | ------------------- | ---------------------- |
-|GITHUB_SHA        |$(GITHUB_SHA)        |
-|GITHUB_REF        |$(GITHUB_REF)        |
-|GITHUB_HEAD_REF |$(GITHUB_HEAD_REF) |
-|GITHUB_REPOSITORY |$(GITHUB_REPOSITORY) |
+| `GITHUB_SHA`        | `$(GITHUB_SHA)`        |
+| `GITHUB_REF`        | `$(GITHUB_REF)`        |
+| `GITHUB_HEAD_REF` | `$(GITHUB_HEAD_REF)` |
+| `GITHUB_REPOSITORY` | `$(GITHUB_REPOSITORY)` |
 
 #### Buildkite
 
-| Key                             | Value                              |
+| Environment variable     | Value                              |
 | ------------------------------- | ---------------------------------- |
-|BUILDKITE_COMMIT              |$(BUILDKITE_COMMIT)              |
-|BUILDKITE_REPO                |$(BUILDKITE_REPO)                |
-|BUILDKITE_BRANCH              |$(BUILDKITE_BRANCH)              |
-|BUILDKITE_TAG |$(BUILDKITE_TAG) |
+| `BUILDKITE_COMMIT`              | `$(BUILDKITE_COMMIT)`              |
+| `BUILDKITE_REPO`                | `$(BUILDKITE_REPO)`                |
+| `BUILDKITE_BRANCH`              | `$(BUILDKITE_BRANCH)`              |
+| `BUILDKITE_TAG` | `$(BUILDKITE_TAG)` |
 
 #### Bitbucket Pipelines
 
-| Key                        | Value                              |
+| Environment variable     | Value                              |
 | -------------------------- | ---------------------------------- |
-|BITBUCKET_COMMIT         |$(BITBUCKET_COMMIT)              |
-|BITBUCKET_GIT_SSH_ORIGIN |$(BITBUCKET_GIT_SSH_ORIGIN)      |
-|BITBUCKET_BRANCH         |$(BITBUCKET_BRANCH)              |
-|BITBUCKET_TAG |$(BITBUCKET_TAG) |
+| `BITBUCKET_COMMIT`         | `$(BITBUCKET_COMMIT)`              |
+| `BITBUCKET_GIT_SSH_ORIGIN` | `$(BITBUCKET_GIT_SSH_ORIGIN)`      |
+| `BITBUCKET_BRANCH`         | `$(BITBUCKET_BRANCH)`              |
+| `BITBUCKET_TAG` | `$(BITBUCKET_TAG)` |
 
 #### AppVeyor
 
-| Key                                    | Value                                     |
+| Environment variable     | Value                                     |
 | -------------------------------------- | ----------------------------------------- |
-| APPVEYOR_REPO_COMMIT                   | $(APPVEYOR_REPO_COMMIT)                   |
-| APPVEYOR_REPO_NAME                     | $(APPVEYOR_REPO_NAME)                     |
-| APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH | $(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH) |
-| APPVEYOR_REPO_BRANCH                   | $(APPVEYOR_REPO_BRANCH)                   |
+| `APPVEYOR_REPO_COMMIT`                   | `$(APPVEYOR_REPO_COMMIT)`                   |
+| `APPVEYOR_REPO_NAME`                     | `$(APPVEYOR_REPO_NAME)`                     |
+| `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH` | `$(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)` |
+| `APPVEYOR_REPO_BRANCH`                   | `$(APPVEYOR_REPO_BRANCH)`                   |
 
 #### Azure Pipelines
 
-| Key                                  | Value                                   |
+| Environment variable     | Value                                   |
 | ------------------------------------ | --------------------------------------- |
-|BUILD_SOURCEVERSION                |$(BUILD_SOURCEVERSION)                |
-|BUILD_REPOSITORY_URI               |$(BUILD_REPOSITORY_URI)               |
-|BUILD_SOURCEBRANCH                 |$(BUILD_SOURCEBRANCH)                 |
-|SYSTEM_PULLREQUEST_SOURCECOMMITID |$(SYSTEM_PULLREQUEST_SOURCECOMMITID) |
-|SYSTEM_PULLREQUEST_SOURCEBRANCH |$(SYSTEM_PULLREQUEST_SOURCEBRANCH) |
-|SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI |$(SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI) |
+| `BUILD_SOURCEVERSION`                | `$(BUILD_SOURCEVERSION)`                |
+| `BUILD_REPOSITORY_URI`               | `$(BUILD_REPOSITORY_URI)`               |
+| `BUILD_SOURCEBRANCH`                 | `$(BUILD_SOURCEBRANCH)`                 |
+| `SYSTEM_PULLREQUEST_SOURCECOMMITID` | `$(SYSTEM_PULLREQUEST_SOURCECOMMITID)` |
+| `SYSTEM_PULLREQUEST_SOURCEBRANCH` | `$(SYSTEM_PULLREQUEST_SOURCEBRANCH)` |
+| `SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI` | `$(SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI)` |
 
 #### Bitrise
 
-| Key                                  | Value                                   |
+| Environment variable     | Value                                   |
 | ------------------------------------ | --------------------------------------- |
-|GIT_REPOSITORY_URL                          |$(GIT_REPOSITORY_URL)                          |
-|BITRISE_GIT_COMMIT                |$(BITRISE_GIT_COMMIT)                |
-|BITRISE_GIT_BRANCH                 |$(BITRISE_GIT_BRANCH)                 |
-|BITRISEIO_GIT_BRANCH_DEST |$(BITRISEIO_GIT_BRANCH_DEST) |
-|BITRISE_GIT_TAG |$(BITRISE_GIT_TAG) |
-|GIT_CLONE_COMMIT_HASH |$(GIT_CLONE_COMMIT_HASH) |
-|BITRISE_GIT_MESSAGE |$(BITRISE_GIT_MESSAGE) |
-|GIT_CLONE_COMMIT_MESSAGE_SUBJECT |$(GIT_CLONE_COMMIT_MESSAGE_SUBJECT) |
-|GIT_CLONE_COMMIT_MESSAGE_BODY |$(GIT_CLONE_COMMIT_MESSAGE_BODY) |
-|GIT_CLONE_COMMIT_AUTHOR_NAME |$(GIT_CLONE_COMMIT_AUTHOR_NAME) |
-|GIT_CLONE_COMMIT_AUTHOR_EMAIL |$(GIT_CLONE_COMMIT_AUTHOR_EMAIL) |
-|GIT_CLONE_COMMIT_COMMITER_NAME |$(GIT_CLONE_COMMIT_COMMITER_NAME) |
-|GIT_CLONE_COMMIT_COMMITER_EMAIL |$(GIT_CLONE_COMMIT_COMMITER_EMAIL) |
+| `GIT_REPOSITORY_URL`                          | `$(GIT_REPOSITORY_URL)`                          |
+| `BITRISE_GIT_COMMIT`                | `$(BITRISE_GIT_COMMIT)`                |
+| `BITRISE_GIT_BRANCH`                 | `$(BITRISE_GIT_BRANCH)`                 |
+| `BITRISEIO_GIT_BRANCH_DEST` | `$(BITRISEIO_GIT_BRANCH_DEST)` |
+| `BITRISE_GIT_TAG` | `$(BITRISE_GIT_TAG)` |
+| `GIT_CLONE_COMMIT_HASH` | `$(GIT_CLONE_COMMIT_HASH)` |
+| `BITRISE_GIT_MESSAGE` | `$(BITRISE_GIT_MESSAGE)` |
+| `GIT_CLONE_COMMIT_MESSAGE_SUBJECT` | `$(GIT_CLONE_COMMIT_MESSAGE_SUBJECT)` |
+| `GIT_CLONE_COMMIT_MESSAGE_BODY` | `$(GIT_CLONE_COMMIT_MESSAGE_BODY)` |
+| `GIT_CLONE_COMMIT_AUTHOR_NAME` | `$(GIT_CLONE_COMMIT_AUTHOR_NAME)` |
+| `GIT_CLONE_COMMIT_AUTHOR_EMAIL` | `$(GIT_CLONE_COMMIT_AUTHOR_EMAIL)` |
+| `GIT_CLONE_COMMIT_COMMITER_NAME` | `$(GIT_CLONE_COMMIT_COMMITER_NAME)` |
+| `GIT_CLONE_COMMIT_COMMITER_EMAIL` | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)` |
 
 ## Running tests 
 
-After installation, you can run your tests as you normally do, for example using the `xcodebuild test` command. 
-
-Tests, network requests and application logs will be instrumented automatically.
+After installation, you can run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs will be instrumented automatically.
 
 ## UI Tests
 
-For UITests, both the test target and the application running from the UITests must link with the framework. Environment variables only need to be set in the test target, since the framework automatically injects these values to the application.
+For UITests, both the test target and the application running from the UITests must link with the framework. Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
-## Crash handler
+## Handling crashes
 
-Testing library install a crash handler while running your tests, if a test crashes while being run, this crash handler will capture the crash log and will add this crash log along with your test result. If the tests are being run on macOS or iOS simulator, crash log will be fully symbolicated, in other cases they will only be partially symbolicated.
+The testing library installs a crash handler while running your tests. If a test crashes while running, this crash handler captures the crash log and adds the log to the test result. If the tests are running on macOS or iOS simulator, the crash log is fully symbolicated; otherwise they are partially symbolicated.
 
-### Disable crash handler
+### Disabling the crash handler
 
-You should never need to do it, but in some ***very specific cases*** you may want to disable crash reporting for tests (e.g. you want to test your own crash handler, ... ):
-{% highlight txt %}
-DD_DISABLE_CRASH_HANDLER # Disables crash handling and reporting. (Boolean) WARNING, read note below
-{% endhighlight %}
+In some *very rare cases*. such as testing your own crash handler, you may want to disable crash reporting for tests.
 
-> You must know that if you disable crash reporting, crashing tests won't be reported to the backend and wont appear as a failure. If you really, really need to do this for any of your tests, run it as a totally separated target, so you don't disable it for the rest of the tests.
+<div class="alert alert-warning">**Important**: If you disable crash reporting, crashing tests won't be reported to the backend and won't appear as failures. If you need to disable crash handling for any of your tests, run it as a separate target, so you don't disable it for the rest of the tests.</div>
 
-## Extra configuration
+`DD_DISABLE_CRASH_HANDLER`
+: Disables crash handling and reporting. (Boolean)
 
-### Disabling Auto Instrumentation
+## Additional optional configuration
 
-The framework automatically tries to capture the most information possible, but for some situations or tests it can be counter-productive. You can disable some of the autoinstrumentation for all the tests by setting the following environment variables:
+ - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES` or `NO` 
+ - `String` list variables accept a list of elements separated by `,` or `;`
 
-> `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES` or `NO` 
->
-> `String` list variables accept a list of elements separated by `,` or `;`
+### Disabling auto-instrumentation
 
-{% highlight txt %}
-DD_DISABLE_NETWORK_INSTRUMENTATION # Disables all network instrumentation (Boolean)
-DD_DISABLE_STDOUT_INSTRUMENTATION # Disables all stdout instrumentation (Boolean)
-DD_DISABLE_STDERR_INSTRUMENTATION # Disables all stderr instrumentation (Boolean)
-DD_DISABLE_SDKIOS_INTEGRATION # Disables integration with dd-sdk-ios logs and traces (Boolean)
-{% endhighlight %}
+The framework automatically captures the most information possible, but for some situations or tests this can be counter-productive. You can disable some of the auto-instrumentation for all the tests by setting environment variables:
 
-### Network Auto Instrumentation
+`DD_DISABLE_NETWORK_INSTRUMENTATION`
+: Disables all network instrumentation (Boolean)
 
-For Network autoinstrumentation there are other settings that you can configure
+`DD_DISABLE_STDOUT_INSTRUMENTATION`
+: Disables all `stdout` instrumentation (Boolean)
 
-{% highlight txt %}
-DD_DISABLE_HEADERS_INJECTION # Disables all injection of tracing headers (Boolean)
-DD_INSTRUMENTATION_EXTRA_HEADERS # Specific extra headers that you want to log (String List)
-DD_EXCLUDED_URLS # Urls that you don't want to log or inject headers into (String List)
-DD_ENABLE_RECORD_PAYLOAD # It enables reporting a subset (512 bytes) of the payloads in 
-                        requests and responses (Boolean)
-DD_MAX_PAYLOAD_SIZE # It sets the maximum size that will be reported from the payload, 1024 by default (Integer)
-{% endhighlight %}
+`DD_DISABLE_STDERR_INSTRUMENTATION`
+: Disables all `stderr` instrumentation (Boolean)
 
-You can also disable or enable specific autoinstrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
+`DD_DISABLE_SDKIOS_INTEGRATION`
+: Disables integration with `dd-sdk-ios` logs and traces (Boolean)
 
+### Network auto-instrumentation
 
-## Supported versions
+For Network auto-instrumentation, you can configure these additional settings:
 
-The Swift test instrumentation is compatible with the following platforms:
+`DD_DISABLE_HEADERS_INJECTION`
+: Disables all injection of tracing headers (Boolean)
 
-| PLATFORM    | VERSION |
-| ----------- | ----- |
-| iOS         |  11.0+  |
-| macOS       |  10.13+ |
-| tvOS        |  11.0+  |
+`DD_INSTRUMENTATION_EXTRA_HEADERS`
+: Specific extra headers that you want to log (String List)
 
-and the following languages:
+`DD_EXCLUDED_URLS`
+: URLs that you don't want to log or inject headers into (String List)
 
-| PLATFORM    | VERSION |
-| ----------- | ----- |
-| Swift       |  5.3+   |
-| Objective-C |  2.0+   |
+`DD_ENABLE_RECORD_PAYLOAD`
+: Enables reporting a subset (512 bytes) of the payloads in requests and responses (Boolean)
 
+`DD_MAX_PAYLOAD_SIZE`
+: Sets the maximum size reported from the payload. Default `1024` (Integer)
 
+You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
 
 ## Further reading
 
