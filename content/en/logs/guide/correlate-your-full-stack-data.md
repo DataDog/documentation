@@ -147,7 +147,7 @@ if os.environ.get('DD_LOGS_INJECTION') == 'true':
         return statement, parameters
 ```
 
-Note: this only correlates logs that include query statement. Error logs like `ERROR:  duplicate key value violates unique constraint "<TABLE_KEY>"` stay out of context. Most of the time you can still get error information through your application logs.
+**Note**: This only correlates logs that include a query statement. Error logs like `ERROR:  duplicate key value violates unique constraint "<TABLE_KEY>"` stay out of context. Most of the time you can still get error information through your application logs.
 
 Clone and customize the PostgreSQL pipeline:
 
