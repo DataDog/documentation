@@ -7815,6 +7815,10 @@ components:
     SyntheticsAPIStep:
       description: The steps used in a Synthetics multistep API test.
       properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
         assertions:
           default: []
           description: Array of assertions used for the test.
@@ -7827,6 +7831,12 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
         name:
           description: The name of the step.
           type: string
@@ -8237,6 +8247,10 @@ components:
           type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
+        setCookie:
+          description: Cookies to be used for the request, using the [Set-Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+            syntax.
+          type: string
         variables:
           description: Array of variables used for the test steps.
           items:
@@ -9410,6 +9424,12 @@ components:
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
+        dnsServerPort:
+          description: DNS server port to use for DNS tests.
+          format: int32
+          maximum: 65535
+          minimum: 1
+          type: integer
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
