@@ -128,7 +128,7 @@ auto_explain.log_min_duration = '500ms'
 
 Queries longer than 500ms log their execution plan.
 
-Note: `auto_explain.log_analyze = 'true'` provide even more information but greatly impact performance. You can learn more on the [official documentation][2].
+**Note**: `auto_explain.log_analyze = 'true'` provides even more information, but greatly impacts performance. For more information, see the [official documentation][2].
 
 ##### Inject trace_id into your database logs
 
