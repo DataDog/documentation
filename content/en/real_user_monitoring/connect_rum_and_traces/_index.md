@@ -43,7 +43,7 @@ datadogRum.init({
 })
 ```
 
-**Note**: `allowedTracingOrigins` accepts Javascript String and RegExp that should match the origins called by you browser application, with origin defined as: `<scheme> "://" <hostname> [ ":" <port> ]`
+**Note**: `allowedTracingOrigins` accepts Javascript String and RegExp that should match the origins called by your browser application, with origin defined as: `<scheme> "://" <hostname> [ ":" <port> ]`
 
 [1]: /real_user_monitoring/browser/
 {{% /tab %}}
