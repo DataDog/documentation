@@ -22,7 +22,7 @@ further_reading:
 
 {{< img src="logs/guide/correlate-your-full-stack-data/full-stack-cover.png" alt="Full stack correlation" style="width:80%;" >}}
 
-Correlating your logs also eases [aggressive sampling strategy without losing entity-level consistency][2] with attributes like `trace_id` and `session_id`.
+Correlating your logs also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of attributes like `trace_id` and `session_id`.
 
 This guide walks you through the steps you should take to correlate your full stack logs, traces and view.
 
