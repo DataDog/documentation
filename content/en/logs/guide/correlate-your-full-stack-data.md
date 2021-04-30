@@ -57,7 +57,7 @@ Proxy logs provide more information than application logs as they cover more ent
 
 #### How?
 
-The application tracer generates Trace IDs by default. This can be changed by injecting `x-datadog-trace-id` in HTTP Request headers.
+The application tracer generates trace IDs by default. This can be changed by injecting `x-datadog-trace-id` into HTTP Request headers.
 
 {{< tabs >}}
 {{% tab "NGINX" %}}
