@@ -68,7 +68,7 @@ Follow [NGINX tracing integration][1].
 
 ##### Inject Trace ID in logs
 
-Trace ID is stored as `opentracing_context_x_datadog_trace_id` variable. Update the NGINX log format by adding the following configuration block in the http section of your NGINX configuration file `/etc/nginx/nginx.conf`:
+Trace ID is stored as `opentracing_context_x_datadog_trace_id` variable. Update the NGINX log format by adding the following configuration block in the HTTP section of your NGINX configuration file `/etc/nginx/nginx.conf`:
 
 ```conf
 http {
