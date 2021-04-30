@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-With [unified service tagging][1] you already have high level correlation capabilities. But sometimes the starting point of your investigation is a single log, trace or view. Correlating them with other data gives context to estimate business impact and find root causes in a few clicks.
+[Unified service tagging][1] permits high level correlation capabilities. However, there are times when the starting point of your investigation is a single log, trace or view. Correlating logs, traces, and views with other data gives context to help estimate business impact and find the root cause of an issue in a few clicks.
 
 {{< img src="logs/guide/correlate-your-full-stack-data/full-stack-cover.png" alt="Full stack correlation" style="width:80%;" >}}
 
