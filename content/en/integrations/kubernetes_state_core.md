@@ -28,11 +28,15 @@ Get metrics from Kubernetes service in real time to:
 
 The Kubernetes State Metrics Core check leverages [kube-state-metrics version 2+][1] and includes major performance and tagging improvments compared to the legacy `kubernetes_state` check.
 
+As opposed to the legacy check, with the Kubernetes State Metrics Core check you will not need to deploy `kube-state-metrics` in your cluster anymore.
+
+Kubernetes State Metrics Core provides a better alternative to the legacy `kubernetes_state` check as it offers more granular metrics and tags. See the [Major Changes][2] and [Data Collected][3] for more details.
+
 ## Setup
 
 ### Installation
 
-The Kubernetes State Metrics Core check is included in the [Datadog Cluster Agent][2] image, so you don't need to install anything else on your Kubernetes servers.
+The Kubernetes State Metrics Core check is included in the [Datadog Cluster Agent][4] image, so you don't need to install anything else on your Kubernetes servers.
 
 ### Requirements
 
@@ -40,7 +44,8 @@ The Kubernetes State Metrics Core check is included in the [Datadog Cluster Agen
 
 ### Configuration
 
-We highly recommend using the Datadog Helm Chart to configure the Kubernetes State Metrics Core check.
+{{< tabs >}}
+{{% tab "Helm" %}}
 
 In your Helm `values.yaml`, add the following:
 
@@ -53,9 +58,35 @@ datadog:
 ...
 ```
 
-**Note:** Enabling `kubeStateMetricsCore` in your Helm `values.yaml` will also configure the Agent to ignore the auto configuration file for legacy `kubernetes_state` check. The goal is to avoid running both checks simultaneously.
+{{% /tab %}}
+{{< /tabs >}}
 
-**Optional:** The Kubernetes State Metrics Core check does not require deploying `kube-state-metrics` in your cluster, you can optionally disable deploying `kube-state-metrics` as part of the Datadog Helm Chart. To do this, add the following in your Helm `values.yaml`:
+## Migration from kubernetes_state to kubernetes_state_core
+
+### Backward incompatibility changes
+
+The Kubernetes State Metrics Core check is not backward compatible, please read the changes carefully before migrating from the legacy `kubernetes_state` check.
+
+`kubernetes_state.node.by_condition`
+: A new metric with node name granularity. It replaces `kubernetes_state.nodes.by_condition`.
+
+`kubernetes_state.persistentvolume.by_phase`
+: A new metric with persistentvolume name granularity. It replaces `kubernetes_state.persistentvolumes.by_phase`.
+
+`kubernetes_state.pod.status_phase`
+: The metric is tagged with pod level tags now, like `pod_name`.
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Enabling `kubeStateMetricsCore` in your Helm `values.yaml` will also configure the Agent to ignore the auto configuration file for legacy `kubernetes_state` check. The goal is to avoid running both checks simultaneously.
+
+If you still want to enable both checks simultaneously for the migration phase, you can disable the `ignoreLegacyKSMCheck` field in your `values.yaml`.
+
+Note that `ignoreLegacyKSMCheck` will make the Agent only ignore the auto configuration for the legacy `kubernetes_state` check. Custom `kubernetes_state` configurations need to be removed manually.
+
+The Kubernetes State Metrics Core check does not require deploying `kube-state-metrics` in your cluster anymore, you can disable deploying `kube-state-metrics` as part of the Datadog Helm Chart. To do this, add the following in your Helm `values.yaml`:
 
 ```
 ...
@@ -64,6 +95,11 @@ datadog:
   kubeStateMetricsEnabled: false
 ...
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Important Note:** The Kubernetes State Metrics Core check is an alternative to the legacy `kubernetes_state` check, we highly recommand not enabling both checks simultaneously to guarantee consistent metrics.
 
 ## Data Collected
 
@@ -396,7 +432,7 @@ datadog:
 `kubernetes_state.service.type`
 : Service types. Tags:`kube_namespace` `kube_service` `type`.
 
-**Note:** You can configure [Datadog Standard labels][3] on your Kubernetes objects to get the `env` `service` `version` tags.
+**Note:** You can configure [Datadog Standard labels][5] on your Kubernetes objects to get the `env` `service` `version` tags.
 
 ### Events
 
@@ -427,14 +463,16 @@ The Kubernetes State Metrics Core check does not include any events.
 
 ### Validation
 
-[Run the Cluster Agent's `status` subcommand][4] inside your Cluster Agent container and look for `kubernetes_state_core` under the Checks section.
+[Run the Cluster Agent's `status` subcommand][6] inside your Cluster Agent container and look for `kubernetes_state_core` under the Checks section.
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][5].
+Need help? Contact [Datadog support][7].
 
 [1]: https://kubernetes.io/blog/2021/04/13/kube-state-metrics-v-2-0/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/
-[3]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=clusteragent#agent-status-and-information
-[5]: /help/
+[2]: /integrations/kubernetes_state_core/#major-changes
+[3]: /integrations/kubernetes_state_core/#data-collected
+[4]: /agent/cluster_agent/
+[5]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
+[6]: /agent/guide/agent-commands/?tab=clusteragent#agent-status-and-information
+[7]: /help/
