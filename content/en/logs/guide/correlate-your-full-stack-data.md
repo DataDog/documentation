@@ -132,7 +132,7 @@ Queries longer than 500ms log their execution plan.
 
 ##### Inject trace_id into your database logs
 
-You can inject `trace_id` into most of your database logs with [SQL comments][3]. Here is an example with Flask and SQLAlchemy:
+Inject `trace_id` into most of your database logs with [SQL comments][3]. Here is an example with Flask and SQLAlchemy:
 
 ```python
 if os.environ.get('DD_LOGS_INJECTION') == 'true':
