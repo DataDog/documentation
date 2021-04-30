@@ -53,7 +53,7 @@ Use one of the [various OOTB correlations][3]. If you use a custom tracer or if 
 
 #### Why?
 
-Proxy logs provide more information than application logs: they cover more entrypoints and give information on static content and redirections.
+Proxy logs provide more information than application logs as they cover more entry points and give information on static content and redirections.
 
 #### How?
 
