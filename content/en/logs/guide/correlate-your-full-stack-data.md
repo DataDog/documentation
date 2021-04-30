@@ -35,7 +35,7 @@ This guide walks you through the steps to correlate your full stack logs, traces
 
 At last, [leverage the correlation to troubleshoot Synthetic tests](#leverage-the-correlation-to-troubleshoot-synthetic-tests).
 
-Note: Depending on your use cases, you may skip steps. Steps dependant from others are explicit.
+**Note**: Depending on your use case, you may skip certain steps below. Steps that are dependent on others are explicitly stated.
 
 ## Set up the correlation
 
