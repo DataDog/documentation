@@ -89,7 +89,7 @@ http {
    ```text
    access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
    ```
-   - In `Advanced settings -> Helper Rules`, add the line:
+   - In **Advanced settings** under **Helper Rules**, add the line:
    ```text
    _trace_id %{notSpace:dd.trace_id:nullIf("-")}
    ```
