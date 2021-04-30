@@ -158,7 +158,7 @@ Clone and customize the PostgreSQL pipeline:
 
 2. Add a [trace ID remapper][5] on `dd.trace_id` attribute.
 
-You can see slow query execution plan from your slow trace:
+Here is an example of a slow query execution plan from a slow trace:
 
 {{< img src="logs/guide/correlate-your-full-stack-data/slow-query-root-cause.png" alt="Slow query logs correlation" style="width:80%;" >}}
 
