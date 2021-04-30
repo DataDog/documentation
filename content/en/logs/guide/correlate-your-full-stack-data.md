@@ -24,7 +24,7 @@ further_reading:
 
 Correlating your logs also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of attributes like `trace_id` and `session_id`.
 
-This guide walks you through the steps you should take to correlate your full stack logs, traces and view.
+This guide walks you through the steps to correlate your full stack logs, traces, and view.
 
 At first, [correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some very specific use-cases require to prolong the correlation deeper to your stack:
 
