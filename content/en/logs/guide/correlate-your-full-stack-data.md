@@ -80,7 +80,7 @@ http {
 }
 ```
 
-##### Parse Trace ID in pipelines
+##### Parse trace ID in pipelines
 
 1. Clone NGINX pipeline.
 
