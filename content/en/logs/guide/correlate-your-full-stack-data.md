@@ -183,7 +183,7 @@ Use the RUM correlation to:
 
 #### How?
 
-For that, [connect RUM and Traces][6]. You can see RUM view information in [Trace view][7] and Trace information in [Session view][8].
+Follow the [connect RUM and Traces][6] documentation. RUM view information is available in the [Trace view][7] and trace information is available in the [Session view][8].
 
 {{< img src="logs/guide/correlate-your-full-stack-data/trace-details-rum.png" alt="RUM information in a trace" style="width:80%;" >}}
 
