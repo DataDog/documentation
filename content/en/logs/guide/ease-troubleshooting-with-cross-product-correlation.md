@@ -9,7 +9,7 @@ kind: guide
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/full-stack-cover.png" alt="Full stack correlation" style="width:80%;" >}}
 
-This guide walks you through the steps you should take to correlate your full stack data:
+This guide walks you through the steps to correlate your full stack data:
 
 1. [Correlate server-side logs with traces](#correlate-server-side-logs-with-traces)
    * [Correlate application logs](#correlate-application-logs)
@@ -29,7 +29,7 @@ When your users are encountering errors or high latency in your application, dri
 
 Correlating your logs also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of attributes like `trace_id` and `session_id`.
 
-[Correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some very specific use cases require correlation deeper into your stack. Follow the links to complete setup per use case.
+[Correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some very specific use cases require correlation deeper into your stack. Follow the links to complete setup per use case:
 
 * [Correlate proxy logs](#correlate-proxy-logs)
 * [Correlate database logs](#correlate-database-logs)
@@ -183,7 +183,7 @@ Browser logs and RUM events are automatically correlated as explained in the [RU
 
 Traditional backend and frontend monitoring are siloed and require separate workflows to troubleshoot across the stack. Datadog full-stack correlations let you identify root cause (whether it comes from a browser issue or a database downtime) and estimate user impact in a quick and intuitive manner.
 
-This section walks you through the steps you should take to enable such correlations:
+This section walks you through the steps to enable such correlations:
 
 * [Correlate RUM views with traces](#correlate-rum-views-with-traces)
 * [Leverage the trace correlation to troubleshoot Synthetic tests](#leverage-the-trace-correlation-to-troubleshoot-synthetic-tests).
