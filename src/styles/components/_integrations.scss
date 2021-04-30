@@ -21,6 +21,9 @@ $ddpurple:    #632CA6;
 }
 
 .integrations-single {
+  h1#pagetitle {
+    margin-top:50px;
+  }
   img {
     max-width: 100%;
     height: auto;
@@ -109,6 +112,10 @@ $ddpurple:    #632CA6;
         font-size: 12px;
         line-height: 16px;
         margin-top: 0.5px;
+        &:lang(ja) {
+          font-size: 11px !important;
+          line-height: 18px !important;
+        }
       }
     }
 
