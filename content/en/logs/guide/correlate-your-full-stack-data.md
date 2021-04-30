@@ -209,7 +209,7 @@ The APM integration with Synthetic Monitoring allows you to go from a test run t
 
 {{< img src="logs/guide/correlate-your-full-stack-data/synthetic-trace-root-cause.png" alt="Root cause of a synthetic test fail" style="width:80%;" >}}
 
-Having network-related specifics (thanks to your test) as well as backend, infrastructure, log information (thanks to your trace) and RUM events (for [browser tests][12] only) allows you to access a new level of details about the way your application is behaving, as experienced by your user.
+Having network-related specifics, thanks to your test, as well as backend, infrastructure, log information (thanks to your trace), and RUM events (for [browser tests][12] only) allows you to access a new level of detail about the way your application is behaving and how it is experienced by your users.
 
 For that, [enable APM integration on Synthetic settings][5].
 
