@@ -106,7 +106,7 @@ http {
 
 #### Why?
 
-Database logs are often hard to contextualize due to queries similarities, variable anonymization and high usage.
+Database logs are often hard to contextualize due to query similarities, variable anonymization, and high usage.
 
 For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Let's correlate slow query analysis with traces.
 
