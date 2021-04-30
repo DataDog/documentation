@@ -47,7 +47,7 @@ Application logs give the most context around most code and business logic issue
 
 #### How?
 
-Use one of the [various OOTB correlations][3]. If you use a custom tracer or if you have any issues, you can go on the [correlation FAQ][4].
+Use one of the [various OOTB correlations][3]. If you use a custom tracer or if you have any issues, follow the [correlation FAQ][4].
 
 ### Correlate proxy logs
 
