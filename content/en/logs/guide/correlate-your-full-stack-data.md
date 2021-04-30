@@ -201,7 +201,7 @@ Follow the [connect RUM and Traces][6] documentation. RUM view information is av
 
 #### How?
 
-Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][10]. You just need to have [matching configuration between RUM and logs SDK][11].
+Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][10]. [Matching configuration between RUM and logs SDK][11] is required.
 
 ## Leverage the correlation to troubleshoot Synthetic tests
 
