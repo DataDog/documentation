@@ -9,7 +9,7 @@ further_reading:
 
 To collect custom metrics with the Postgres integration, use the `custom_queries` option in the `conf.d/postgres.d/conf.yaml` file at the root of your [Agent's configuration directory][1]. See the sample [postgres.d/conf.yaml][2] for more details.
 
-**Note:** When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the postgres user. Example: `grant SELECT on <TABLE_NAME> to <USER>;`
+**Note:** When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the Postgres user. Example: `grant SELECT on <TABLE_NAME> to <USER>;`
 
 ## Configuration
 
