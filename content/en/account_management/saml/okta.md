@@ -19,8 +19,8 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 |Okta IDP Input Field   | Expected Value |
 |---|---|
 | Single Sign On URL  | Assertion Consumer Service URL (Find this URL on the [Configure SAML][1] page, in the *Assertion Consumer Service URL* field.)  |
-| Recipient URL   | Assertion Consumer Service URL (or click checkbox: `Use this for Recipient URL and Destination URL`)  |
-| Destination URL   | Assertion Consumer Service URL (or click checkbox: `Use this for Recipient URL and Destination URL)`  |
+| Recipient URL   | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)  |
+| Destination URL   | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)  |
 | Audience URI (SP Entity ID)   | Service Provider Entity ID (Find this URL on the [Configure SAML][1] page, in the `Service Provider Entity ID` field.) |
 | Name ID Format  | EmailAddress |
 | Response | Signed  |
