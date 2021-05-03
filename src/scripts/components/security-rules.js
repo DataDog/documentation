@@ -23,13 +23,14 @@ export function initializeSecurityRules() {
         let results = [];
 
         if (filterCategoryValue && filterCategoryValue !== 'all') {
-            results = document.querySelectorAll(`.${filterCategoryValue}`);
+            const val = (filterCategoryValue.startsWith('.')) ? filterCategoryValue.slice(1) : filterCategoryValue;
+            results = document.querySelectorAll(`.${val}`);
         } else {
             results = allRules;
         }
 
         if (searchValue && searchValue.length > 2) {
-            results = Array.from(results).filter(item => item.dataset.name.indexOf(searchValue) > -1);
+            results = Array.from(results).filter(item => (item.dataset.name && item.dataset.name.indexOf(searchValue) > -1));
         }
 
         return results;
@@ -54,10 +55,14 @@ export function initializeSecurityRules() {
 
     const handleEmptyResultSet = () => {
         const searchQuery = inputSearch.value;
-        const activeCategoryFilter = stringToTitleCase(document.querySelector('.controls .active').text);
+        const activeEl = document.querySelector('.controls .active');
+        const txt = (activeEl) ? activeEl.text : '';
+        const activeCategoryFilter = stringToTitleCase(txt);
         const message = `No results found for query "${searchQuery}" in category ${activeCategoryFilter}`;
-        jsEmptyResults.innerText = message;
-        jsEmptyResults.classList.remove('d-none');
+        if(jsEmptyResults) {
+          jsEmptyResults.innerText = message;
+          jsEmptyResults.classList.remove('d-none');
+        }
     }
 
     const showResults = (filteredResults) => {
@@ -77,7 +82,7 @@ export function initializeSecurityRules() {
         // Handle empty result set
         if (filteredResults.length < 1) {
             handleEmptyResultSet();
-        } else {
+        } else if (jsEmptyResults) {
             jsEmptyResults.innerText = '';
             jsEmptyResults.classList.add('d-none');
         }
@@ -85,18 +90,22 @@ export function initializeSecurityRules() {
         // Show headers and groups for all matches
         filteredResults.forEach(element => {
             const jsGroup = element.closest('.js-group');
-            const header = jsGroup.querySelector('.js-group-header');
-            jsGroup.style.display = 'block';
-            header.style.display = 'block';
+            if(jsGroup) {
+                const header = jsGroup.querySelector('.js-group-header');
+                jsGroup.style.display = 'block';
+                if(header) {
+                  header.style.display = 'block';
+                }
+            }
             element.style.display = 'inline';
         })
     }
 
-    const handleCategoryFilterClick = (event) => {       
+    const handleCategoryFilterClick = (event) => {
         // If button is already active, or an operation is in progress, ignore the click
         if (event.target.classList.contains('active') || !event.target.getAttribute('data-filter'))
             return;
-            
+
         const searchValue = inputSearch.value.length > 2 ? inputSearch.value.toLowerCase().trim() : '';
         const filtered = filterResults(event.target.dataset.filter, searchValue);
         activateButton(event.target, filters);
@@ -105,7 +114,8 @@ export function initializeSecurityRules() {
 
     const handleKeyup = () => {
         const searchValue = inputSearch.value.length > 2 ? inputSearch.value.toLowerCase().trim() : '';
-        const activeCategoryFilter = document.querySelector('.controls .active').dataset.filter;
+        const activeCategory = document.querySelector('.controls .active');
+        const activeCategoryFilter = (activeCategory) ? activeCategory.dataset.filter : '';
         const { hash } = window.location;
         const replaceUrl = hash ? `?q=${searchValue}${hash}` : `?q=${searchValue}`
 

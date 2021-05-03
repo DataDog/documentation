@@ -2,12 +2,12 @@
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $.Page.Lang "en"}}
     {{ if (fileExists (print "data/libraries." $.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index site.Data (print "libraries." $.Page.Lang)) }}
+      {{ $.Scratch.Set "data" (index $.Site.Data (print "libraries." $.Page.Lang)) }}
     {{ else }}
-      {{ $.Scratch.Set "data" site.Data.libraries }}
+      {{ $.Scratch.Set "data" $.Site.Data.libraries }}
     {{ end }}
 {{ else }}
-    {{ $.Scratch.Set "data" site.Data.libraries }}
+    {{ $.Scratch.Set "data" $.Site.Data.libraries }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
 

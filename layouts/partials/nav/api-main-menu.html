@@ -3,7 +3,7 @@
 {{ $apiMenu := "api" }}
 
 <!-- if no api menu in other languages fallback to english -->
-{{ with index site.Menus $apiMenu }}
+{{ with index .Site.Menus $apiMenu }}
   {{ $dot.Scratch.Set "menu" . }}
 {{ else }}
   {{ $dot.Scratch.Set "menu" (index .Sites.First.Menus $apiMenu) }}
@@ -27,7 +27,7 @@
                 <span>{{ .Name }}</span>
             </a>
             <ul class="nav">
-                {{ range .Children }}
+                {{ range sort .Children ".Params.order" "asc"  }}
                     {{ $menuChild := . }}
                     <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
                         <a class="col nav-link d-inline-block" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-target="#{{.Identifier}}">

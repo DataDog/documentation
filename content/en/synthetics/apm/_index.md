@@ -50,7 +50,7 @@ The following Datadog tracing libraries are supported:
 | [Go][6]                  | [1.10.0][7]                |
 | [Java][8]                  | [0.24.1][9]                |
 | [Ruby][10]                  | [0.20.0][11]                |
-| [JavaScript][12]                  | [0.10.0][13]                |
+| [Node.js][12]                  | [0.10.0][13]                |
 | [PHP][14]                  | [0.33.0][15]                |
 | [.NET][16]                  | [1.18.2][17]                |
 

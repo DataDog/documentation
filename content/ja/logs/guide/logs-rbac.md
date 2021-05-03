@@ -1,9 +1,12 @@
 ---
-title: Logs RBAC の設定方法
+title: ログ用に RBAC を設定する方法
 aliases:
   - /ja/logs/guide/restrict-access-to-log-events-with-restriction-queries
 kind: ガイド
 further_reading:
+  - link: /logs/guide/logs-rbac-permissions/
+    tag: Documentation
+    text: ログの RBAC アクセス許可の詳細
   - link: /logs/explorer/
     tag: Documentation
     text: ログエクスプローラーの詳細
@@ -13,9 +16,6 @@ further_reading:
   - link: /logs/live_tail/
     tag: Documentation
     text: Live Tail のご紹介
-  - link: /logs/logs_to_metrics/
-    tag: Documentation
-    text: 収集されたログからメトリクスを生成する方法
 ---
 ## 概要
 
@@ -27,7 +27,7 @@ further_reading:
 カスタムロールの作成と変更は、オプトイン機能です。ご使用のアカウントでこの機能を有効にしたい場合は、<a href="/help">Datadog のサポートチームにお問い合わせください</a>。
 </div>
 
-### "ACME" チーム
+### 複数のチーム
 
 組織が複数のチームで構成されていると想定します。その 1 つが **ACME** (Applicative Component Making Errors) チームで、そのメンバーはトラブルシューティングと監査の目的で ACME Logs を処理します。
 
@@ -193,14 +193,12 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H
 
 ```
 
-
 [1]: /ja/api/v2/roles/#create-role
 [2]: /ja/api/v2/roles/#list-roles
 [3]: /ja/api/v2/roles/#grant-permission-to-a-role
 [4]: /ja/api/v2/roles/#revoke-permission
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ### ユーザーをロールにアタッチする
 
@@ -213,7 +211,6 @@ Datadog の [Team Section][1] で、User タブに移動します。ユーザー
 
 {{< img src="logs/guide/rbac/assign_user.png" alt="グリッドビューで招待を削除"  style="width:60%;">}}
 {{< img src="logs/guide/rbac/assign_user2.png" alt="グリッドビューで招待を削除"  style="width:60%;">}}
-
 
 [1]: https://app.datadoghq.com/access/users
 [2]: /ja/account_management/users/
@@ -254,13 +251,10 @@ curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Conten
 curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
 ```
 
-
-
 [1]: /ja/api/v2/users/#list-all-users
 [2]: /ja/api/v2/roles/#add-a-user-to-a-role
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## ログへのアクセスを制限する
 
@@ -274,7 +268,6 @@ curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Cont
 2. その制限クエリを ACME ロールにアタッチする。
 
 **注**: ロールには、制限クエリを **1 つだけ**アタッチできます。制限クエリをロールにアタッチすると、このロールにすでにアタッチされている制限クエリがすべて削除されます。
-
 
 {{< tabs >}}
 {{% tab "UI" %}}

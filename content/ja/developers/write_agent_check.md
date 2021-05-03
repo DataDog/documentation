@@ -1,5 +1,5 @@
 ---
-title: カスタム Agent チェックの書き方
+title: カスタム Agent チェック
 kind: documentation
 aliases:
   - /ja/agent/faq/how-do-i-change-the-frequency-of-an-agent-check/

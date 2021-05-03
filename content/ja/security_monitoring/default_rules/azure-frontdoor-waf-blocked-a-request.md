@@ -12,8 +12,6 @@ technique: T1190-exploit-public-facing-application
 title: Azure Frontdoor WAF によるリクエストのブロック
 type: security_rules
 ---
-## 概要
-
 ### 目標
 Azure Frontdoor Web アプリケーション ファイアウォール (WAF) が、IP アドレスからのリクエストをブロックしたことを検出します。
 

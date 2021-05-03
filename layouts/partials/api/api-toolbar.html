@@ -1,5 +1,5 @@
-{{ $url := replace .Permalink ( printf "%s" site.BaseURL) "" }}
-{{ $.Scratch.Add "path" site.BaseURL }}
+{{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
+{{ $.Scratch.Add "path" .Site.BaseURL }}
 
 <div class="api-toolbar pt-2 mb-lg-1 d-lg-flex justify-content-between">
     <div id="breadcrumbs">

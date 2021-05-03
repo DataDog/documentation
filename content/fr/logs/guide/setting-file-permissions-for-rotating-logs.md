@@ -4,13 +4,13 @@ kind: guide
 aliases:
   - /fr/logs/faq/setting-file-permissions-for-rotating-logs
 further_reading:
-  - link: logs/guide/log-parsing-best-practice
+  - link: /logs/guide/log-parsing-best-practice/
     tag: FAQ
     text: "Parsing de log\_: bonnes pratiques à adopter"
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
 ---
@@ -70,6 +70,10 @@ Vérifiez le statut ACL d'un fichier avec :
 getfacl /var/log/apache/access.log
 ```
 
+**Remarque** : si vous utilisez **PostgreSQL v10** ou une version antérieure, définissez les autorisations sur **0700**. À partir de **PostgreSQL v11**, vous pouvez les définir sur **0700** ou **0750**. Si vous essayez de démarrer un serveur alors que les autorisations de son répertoire de base ne sont pas définies sur 0700 ou 750, le processus postmaster échouera.
+
+**Remarque** : le répertoire de logging de PostgreSQL ne peut pas figurer dans le même répertoire que l'installation PostgreSQL de base.
+
 ## Définir des autorisations en l'absence d'ACL
 
 En l'absence d'ACL dans un système, définissez vos autorisations en fonction des droits d'accès des groupes.
@@ -95,9 +99,9 @@ Ici, la solution la plus simple consiste à autoriser à tous les utilisateurs l
 
         daily
         rotate 7
-        missing ok
+        missingok
         create 644 mysql adm
-        Compress
+        compress
 }
 ```
 

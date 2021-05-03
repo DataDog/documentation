@@ -318,7 +318,7 @@ To notify your dev team if a triggering host has the name `production`, use the 
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][1]: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][1]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
@@ -348,7 +348,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 
 ### Dynamic links
 
-Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can of provide links to pages within Datadog such as dashboards, the host map, and monitors.
+Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can provide links to pages within Datadog such as dashboards, the host map, and monitors.
 
 {{< tabs >}}
 {{% tab "Dashboards" %}}
@@ -455,7 +455,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [8]: /integrations/slack/#mentions-in-slack-from-monitor-alert
 [9]: /integrations/webhooks/
 [10]: /integrations/webhooks/#usage
-[11]: https://docs.datadoghq.com/integrations/#cat-collaboration
+[11]: /integrations/#cat-notification
 [12]: /events/
 [13]: /monitors/guide/template-variable-evaluation/
 [14]: /monitors/faq/what-are-recovery-thresholds/

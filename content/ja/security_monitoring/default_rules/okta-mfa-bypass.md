@@ -9,8 +9,6 @@ source: okta
 title: Okta MFA バイパスの試行
 type: security_rules
 ---
-## 概要
-
 ### 目標
 ユーザーが多要素認証 (MFA) のバイパスを試行したことを検出します。
 

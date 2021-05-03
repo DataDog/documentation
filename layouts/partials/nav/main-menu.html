@@ -1,13 +1,13 @@
 {{ $dot := . }}
 {{ $ctx := . }}
-{{ $menu := site.Menus.main }}
+{{ $menu := .Site.Menus.main }}
 {{/* Menu identifiers to apply class to */}}
 {{ $excludeAsyc := (slice "api" "dev_tools_metrics_api" "dev_tools_events_api" "integrations_top_level" "tracing api" "watchdog_top_level" "glossary_top_level" "video_top_level" "help_top_level" "other_integrations") }}
 
-{{ $path := (printf "%s/" site.Params.branch) }}
+{{ $path := (printf "%s/" $.Site.Params.branch) }}
 
 {{/* account for branch name in preview site for data-path */}}
-{{ if eq site.Params.environment "preview"}}
+{{ if eq $.Site.Params.environment "preview"}}          
     {{ $.Scratch.Set "branch_path" $path }}
 {{ else }}
     {{ $.Scratch.Set "branch_path" "" }}
@@ -17,7 +17,7 @@
 
 <ul class="list-unstyled">
     {{ $currentPage := . }}
-    {{ range site.Menus.main }}
+    {{ range .Site.Menus.main }}
         {{ if .HasChildren }}
             <li class="nav-top-level {{ if (not (in $excludeAsyc .Identifier)) }} js-load {{ end }}
             {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
@@ -34,7 +34,7 @@
                             <ul class="list-unstyled sub-menu">
                             {{ range .Children }}
                                 <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (in $excludeAsyc .Identifier)) }} js-load {{- end -}}" >
-                                    <a href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print .URL) | relLangURL)) "/" }}">
+                                    <a href="{{ .URL | relLangURL }}" data-type="{{- with site.GetPage .URL -}}{{- .Type -}}{{- end -}}" data-path="{{ trim (print $branchPath ((print .URL) | relLangURL)) "/" }}">
                                         {{ if .Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ .Name }}</span>
                                     </a>
                                     {{/*  4th level, hide  */}}
@@ -42,7 +42,7 @@
                                         <ul class="list-unstyled sub-menu d-none">
                                         {{ range .Children }}
                                             <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (in $excludeAsyc .Identifier)) }} js-load {{- end -}}" >
-                                                <a href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print .URL) | relLangURL)) "/" }}">
+                                                <a data-name="{{- delimit (last 1 (split (strings.TrimSuffix "/" .URL) "/")) "" -}}" href="{{ .URL | relLangURL }}" data-path="{{ trim (print $branchPath ((print .URL) | relLangURL)) "/" }}">
                                                     {{ if .Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" (.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ .Name }}</span>
                                                 </a>
                                             </li>

@@ -381,7 +381,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 #### Set up healthchecks
 
-Add a healthcheck mechanism so your orchestrator can ensure the workers are running correctly.
+Add a [healthcheck][10] mechanism so your orchestrator can ensure the workers are running correctly.
 
 The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (2s by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
 
@@ -509,14 +509,14 @@ You can then go to any of your API or Browser test creation form, and tick your 
 
 {{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assign Synthetic test to private location"  style="width:80%;">}}
 
-Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][10], etc.
+Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][11], etc.
 
 
 ## Scale your private locations
 
 You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
-You can also **vertically scale** your private locations using the [`concurrency` parameter][11] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel. Whenever updating the [`concurrency` parameter][11] of your private location, make sure to also update [the resources allocated to your workers](#hardware-requirements).
+You can also **vertically scale** your private locations using the [`concurrency` parameter][12] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel. Whenever updating the [`concurrency` parameter][12] of your private location, make sure to also update [the resources allocated to your workers](#hardware-requirements).
 
 ### Hardware Requirements
 
@@ -524,7 +524,7 @@ You can also **vertically scale** your private locations using the [`concurrency
 
 * Base requirement: 150mCores/150MiB
 
-* Additional equirement per slot:
+* Additional requirement per slot:
 
 | Private location test type                          | Recommended concurrency range | CPU/Memory recommendation |
 | --------------------------------------------------- | ----------------------------- | ------------------------- |
@@ -532,7 +532,7 @@ You can also **vertically scale** your private locations using the [`concurrency
 | Private location running API tests only             | From 1 to 200                 | 20mCores/5MiB per slot    |
 | Private location running Browser tests only         | From 1 to 50                  | 150mCores/1GiB per slot   |
 
-**Example:** For a private location running both API and Browser tests, and with a [`concurrency`][11] set to the default `10`, recommendation for a safe usage is ~ 1.5 core `(150mCores + (150mCores*10 slots))` and ~ 10GiB memory `(150M + (1G*10 slots))`.
+**Example:** For a private location running both API and Browser tests, and with a [`concurrency`][12] set to the default `10`, recommendation for a safe usage is ~ 1.5 core `(150mCores + (150mCores*10 slots))` and ~ 10GiB memory `(150M + (1G*10 slots))`.
 
 #### Disk
 
@@ -551,5 +551,6 @@ The recommendation for disk size is to allocate ~ 10MiB/slot (1MiB/slot for API-
 [7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
 [8]: /synthetics/private_locations/configuration/#reserved-ips-configuration
 [9]: /synthetics/private_locations/configuration/
-[10]: /synthetics/metrics
-[11]: /synthetics/private_locations/configuration#advanced-configuration
+[10]: https://docs.docker.com/engine/reference/builder/#healthcheck
+[11]: /synthetics/metrics
+[12]: /synthetics/private_locations/configuration#advanced-configuration

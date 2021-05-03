@@ -22,6 +22,10 @@ deployment:
       include: "**.{jpg,jpeg,png,gif,mp4,svg,json}"
 
     matchers:
+      # dont cache rum/logs config
+      - pattern: "^static/dd-browser-logs-rum.js$"
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
+        gzip: true
       - pattern: "^.+\\.(js|css|svg)$"
         cacheControl: "max-age=31536000, no-transform, public"
         gzip: true

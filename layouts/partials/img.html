@@ -5,7 +5,7 @@
 {{ end }}
 {{ $img_param := .root.Scratch.Get "img_param" }}
 
-{{ $url := (print (site.Params.img_url) (printf "%s/%s" "images" .src)  ($img_param)) | safeURL }}
+{{ $url := (print (.root.Site.Params.img_url) (printf "%s/%s" "images" .src)  ($img_param)) | safeURL }}
 
 {{ $image_type_arr := split .src "." }}
 {{ $image_ext := index $image_type_arr 1 }}
@@ -26,8 +26,9 @@
     <source srcset="{{ $url }}&auto=format&w=360 1x, {{ $url }}&auto=format&w=360&dpr=2 2x" media="(min-width: 0px)">
     <img width="{{$img_width}}"
          height="{{$img_height}}"
-         class="{{ if $img_class }} {{ $img_class }} {{ end }}{{ if not ($disable_lazy) }} lazyload {{ end }}"
+         class="{{ if $img_class }}{{ $img_class }}{{ end }}"
          srcset="{{ $url }}&auto=format&w=807"
          style="{{ if $img_style }}{{ $img_style | safeCSS }}{{ end }}"
+         loading="lazy"
          alt="{{ if $img_alt }}{{ $img_alt }}{{end}}">
 </picture>

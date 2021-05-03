@@ -42,7 +42,7 @@ Datadog truncates the following strings if they exceed the indicated number of c
 
 Additionally, the number of [span tags][6] present on any span cannot exceed 250.
 
-For a given 10 minute interval, Datadog accepts the following combinations. To accomodate larger volumes, please contact [support][1] to discuss your use case.
+For a given 10 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, please contact [support][1] to discuss your use case.
 
 - 1000 unique environments and service combinations
 - 30 unique host groups per environment
@@ -94,7 +94,10 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
     Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs.
 
-7. **Versions of languages, frameworks, the Datadog Agent, and Tracing Library being used**
+7. **Versions of the:**
+   * **programming language, frameworks, and dependencies used to build the instrumented application**
+   * **Datadog Tracer**
+   * **Datadog Agent**
 
     Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][12] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
 

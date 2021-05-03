@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: 'Envoyez les exceptions, erreurs et déploiements de code vers votre flux d''événements Datadog.'
 doc_link: 'https://docs.datadoghq.com/integrations/rollbar/'
+draft: false
 git_integration_title: rollbar
 has_logo: true
 integration_title: Rollbar
@@ -27,12 +28,12 @@ Rollbar aide les développeurs à concevoir de meilleurs logiciels, plus rapidem
 Connecter Rollbar à Datadog pour :
 
 - Recevoir une notification pour les exceptions, erreurs et déploiements de code dans votre flux d'événements
-- Filtrez des notifications par sévérité, environnement, host, utilisateur, et bien plus encore.
+- Filtrez des notifications par gravité, environnement, host, utilisateur, et bien plus encore.
 - Rechercher des exceptions sur vos graphiques
 - Discuter des exceptions avec votre équipe
 - Passer moins de temps à déboguer des problèmes
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -53,15 +54,15 @@ Votre configuration est terminée. Lorsqu'une exception se produit, elle appara�
 
 ### Métriques
 
-L'intégration Redmine n'inclut aucune métrique.
+L'intégration Rollbar n'inclut aucune métrique.
 
 ### Événements
 
-L'intégration Redmine envoie des exceptions, erreurs et déploiements de code à Datadog sous la forme d'événements.
+L'intégration Rollbar envoie des exceptions, erreurs et déploiements de code à Datadog sous la forme d'événements.
 
 ### Checks de service
 
-L'intégration Redmine n'inclut aucun check de service.
+L'intégration Rollbar n'inclut aucun check de service.
 
 ## Dépannage
 

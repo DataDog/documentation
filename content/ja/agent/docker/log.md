@@ -46,7 +46,7 @@ Datadog Agent を埋め込みホストを監視する [Docker コンテナ][1] �
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
@@ -61,7 +61,7 @@ docker run -d --name datadog-agent \
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
@@ -143,7 +143,7 @@ docker run -d --name datadog-agent \
 
 Datadog Agent 6.8 以降では、`source` や `service` の初期値は `short_image` タグの値となります。これにより、Datadog は各コンテナのログソースを特定でき、対応するインテグレーションを自動的にインストールできます。
 
-コンテナのショートイメージ名とカスタムイメージのインテグレーション名が一致しない場合があります。アプリケーションにふさわしい名前に上書きするには、[Datadog オートディスカバリー][1]や [Kubernetes ポッドアノテーション][3]またはコンテナラベルを使います。
+コンテナのショートイメージ名とカスタムイメージのインテグレーション名が一致しない場合があります。アプリケーションにふさわしい名前に上書きするには、[Datadog オートディスカバリー][3]や [Kubernetes ポッドアノテーション][4]またはコンテナラベルを使います。
 
 オートディスカバリーは、ファイルの種類に応じてラベルが以下の形式となることを前提とします。
 
@@ -178,9 +178,9 @@ labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-`<LOG_CONFIG>` がログ収集コンフィギュレーションの場合、インテグレーション構成ファイルにあります。[詳細は、ログ収集コンフィギュレーションを参照してください][4]。
+`<LOG_CONFIG>` がログ収集コンフィギュレーションの場合、インテグレーション構成ファイルにあります。[詳細は、ログ収集コンフィギュレーションを参照してください][5]。
 
-**注**: Datadog では、Dockerラベルを使い `service` 値を設定する際のベストプラクティスとして、統合サービスタグ付けの使用をお勧めしています。統合サービスタグ付けは `env`、`service`、`version` の 3 つの標準タグを使用して、ログを含むすべての Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][5]ドキュメントをご参照ください。
+**注**: Datadog では、Dockerラベルを使い `service` 値を設定する際のベストプラクティスとして、統合サービスタグ付けの使用をお勧めしています。統合サービスタグ付けは `env`、`service`、`version` の 3 つの標準タグを使用して、ログを含むすべての Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][6]ドキュメントをご参照ください。
 
 ### 例
 
@@ -226,11 +226,11 @@ labels:
 [複数行の処理規則][1]には、他にもさまざまなパターンが記載されています。
 
 
-[1]: /ja/agent/logs/advanced_log_collection/#multi-line-aggregation
+[1]: /ja/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
 {{% /tab %}}
 {{% tab "From file" %}}
 
-Agent v7.25.0 以降/6.25.0 以降では、コンテナのオートディスカバリーラベルに基づくファイルから直接ログを収集できます。このようなログを収集するには、以下のようにコンテナに `com.datadoghq.ad.logs` ラベルを使用して `/logs/app.log` を収集します。
+Agent v7.25.0 以降/6.25.0 以降では、コンテナのオートディスカバリーラベルに基づくファイルから直接ログを収集できます。このようなログを収集するには、以下のようにコンテナに `com.datadoghq.ad.logs` ラベルを使用して `/logs/app/prod.log` を収集します。
 
 ```yaml
 labels:
@@ -265,13 +265,13 @@ labels:
 
 オートディスカバリーログラベルを使用し、高度なログ収集の処理ロジックを適用します。たとえば、
 
-- [Datadog へ送信する前にログを絞り込む][6]。
-- [ログの機密データのスクラビング][7]。
-- [複数行の集約の実行][8]。
+- [Datadog へ送信する前にログを絞り込む][7]。
+- [ログの機密データのスクラビング][8]。
+- [複数行の集約の実行][9]。
 
 ## コンテナを絞り込む
 
-ログの収集元となるコンテナを管理することができます。これは、たとえば Datadog Agent のログを収集しないようにするのに役立ちます。詳細については[コンテナのディスカバリー管理][9]を参照してください。
+ログの収集元となるコンテナを管理することができます。これは、たとえば Datadog Agent のログを収集しないようにするのに役立ちます。詳細については[コンテナのディスカバリー管理][10]を参照してください。
 
 ## 存続期間が短いコンテナ
 
@@ -279,19 +279,20 @@ Docker 環境では、Agent は Docker イベントによりコンテナのア�
 
 Agent v6.14 以降、Agent はすべてのコンテナ（実行中かは問わず）のログを収集します。つまり、直近の 1 秒間に開始し停止した存続期間の短いコンテナのログは、削除されるまで収集されます。
 
-Kubernetes 環境には、[Kubernetes 存続期間が短いコンテナのドキュメント][10]を参照してください。
+Kubernetes 環境には、[Kubernetes 存続期間が短いコンテナのドキュメント][11]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
-[2]: /ja/agent/logs/?tab=tailfiles
-[3]: /ja/integrations/journald/
-[4]: /ja/agent/docker/integrations/
-[5]: /ja/agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
-[6]: /ja/agent/logs/#custom-log-collection
-[7]: /ja/getting_started/tagging/unified_service_tagging
-[8]: /ja/agent/logs/advanced_log_collection/?tab=docker#filter-logs
-[9]: /ja/agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
-[10]: /ja/agent/kubernetes/log/?tab=daemonset#short-lived-containers
+[2]: /ja/integrations/journald/
+[3]: /ja/agent/docker/integrations/
+[4]: /ja/agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
+[5]: /ja/agent/logs/#custom-log-collection
+[6]: /ja/getting_started/tagging/unified_service_tagging
+[7]: /ja/agent/logs/advanced_log_collection/?tab=docker#filter-logs
+[8]: /ja/agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
+[9]: /ja/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[10]: /ja/agent/guide/autodiscovery-management/
+[11]: /ja/agent/kubernetes/log/?tab=daemonset#short-lived-containers

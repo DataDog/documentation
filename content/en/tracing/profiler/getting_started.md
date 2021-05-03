@@ -32,7 +32,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
     ```shell
-    wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
+    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
     ```
 
      **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
@@ -186,7 +186,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 2. Get `dd-trace-go` using the command:
 
     ```shell
-    go get gopkg.in/DataDog/dd-trace-go.v1
+    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
     ```
 
      **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.

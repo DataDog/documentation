@@ -76,9 +76,11 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -118,10 +120,14 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
+
+   **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on CentOS 8.1.
 
 2. Update your local Yum repo and install the Agent:
     ```
@@ -199,9 +205,11 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -235,10 +243,14 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
+
+   **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL 8.1.
 
 2. Update your local Yum repo and install the Agent:
     ```
@@ -324,18 +336,20 @@ Find below the manual upgrade instructions for:
   baseurl=https://yum.datadoghq.com/suse/stable/6/x86_64
   type=rpm-md
   gpgcheck=1
-  repo_gpgcheck=0
-  gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-         https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-         https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+  repo_gpgcheck=1
+  gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   ```
 
 2. Update your local Zypper repo and install the Agent:
   ```
   sudo zypper refresh
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   sudo zypper install datadog-agent
   ```
 
@@ -354,6 +368,7 @@ Find below the manual upgrade instructions for:
   sudo systemctl restart datadog-agent.service
   ```
 
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 {{% tab "Windows" %}}
 

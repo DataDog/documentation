@@ -39,11 +39,31 @@ Logs can be a full-text message:
 
 The secure TCP endpoint is telnet intake.logs.datadoghq.com with port `{{< region-param key="tcp_endpoint_port_ssl" >}}` (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
 
+{{< site-region region="us,us3" >}}
+
 ```
 telnet intake.logs.datadoghq.com 10516
 
 <DATADOG_API_KEY> Plain text log sent through TCP
 ```
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+```
+telnet intake.logs.datadoghq.com 1883
+
+<DATADOG_API_KEY> Plain text log sent through TCP
+```
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+This feature is not supported.
+
+{{< /site-region >}}
 
 This produces the following result in the [Log Explorer Page][2]:
 
@@ -51,7 +71,7 @@ This produces the following result in the [Log Explorer Page][2]:
 
 or a JSON object that is automatically parsed by Datadog:
 
-{{< site-region region="us" >}}
+{{< site-region region="us,us3" >}}
 
 ```text
 telnet intake.logs.datadoghq.com 10516
@@ -68,6 +88,12 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 <DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
 ```
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+This feature is not supported.
 
 {{< /site-region >}}
 

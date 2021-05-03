@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_event_bridge/'
 draft: false
 git_integration_title: amazon_event_bridge
 has_logo: true
+integration_id: ''
 integration_title: Amazon EventBridge
 is_public: true
 kind: インテグレーション

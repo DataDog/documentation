@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
+- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
 - link: "/getting_started/synthetics/api_test"
   tag: "Documentation"
   text: "Get started with HTTP tests"
@@ -24,7 +27,7 @@ HTTP tests can be run from [**managed**][1] and [**private locations**][2] depen
 
 ## Configuration
 
-After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
+After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][17], or [`ICMP` test][7]), you can define your test's request.
 
 ### Define request
 
@@ -102,7 +105,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 **Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your HTTP test" style="width:90%;" >}}
 
@@ -200,3 +203,4 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [15]: /synthetics/settings/#global-variables
 [16]: /synthetics/api_tests/errors/#ssl-errors
+[17]: /synthetics/api_tests/dns_tests

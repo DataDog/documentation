@@ -72,7 +72,7 @@
         "json": {},
         "html": "<div class=\"hide-table\"><div class=\"row\">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row\">\n          <div class=\"col-12 column\"><p>No response body</p></div>\n        </div>\n      </div>\n    </div></div>"
       },
-      "default": {
+      "400": {
         "json": {
           "code": 0,
           "message": ""

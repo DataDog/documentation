@@ -12,8 +12,6 @@ technique: T1110-brute-force
 title: Auth0 へのクレデンシャルスタッフィング攻撃
 type: security_rules
 ---
-## 概要
-
 ## **目的:**
 クレデンシャルスタッフィング攻撃によるアカウント乗っ取り（ATO）を検出。
 

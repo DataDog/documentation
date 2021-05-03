@@ -29,19 +29,13 @@ To fully instrument your serverless application with distributed tracing, your J
 
 ### Install the Datadog Lambda Library
 
-You can install the Datadog Lambda Library locally by adding one of the following code blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `VERSION` below with the latest release (omitting the preceeding `v`): ![Bintray][4]
+You can install the Datadog Lambda Library locally by adding one of the following code blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `VERSION` below with the latest release (omitting the preceeding `v`): ![Maven Cental][4]
 {{< tabs >}}
 {{% tab "Maven" %}}
 
 Include the following dependency in your `pom.xml`:
 
 ```xml
-<repositories>
-  <repository>
-    <id>datadog-maven</id>
-    <url>https://dl.bintray.com/datadog/datadog-maven</url>
-  </repository>     
-</repositories>
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-lambda-java</artifactId>
@@ -55,9 +49,6 @@ Include the following dependency in your `pom.xml`:
 Include the following in your `build.gradle`:
 
 ```groovy
-repositories {
-  maven { url "https://dl.bintray.com/datadog/datadog-maven" }
-}
 dependencies {
   implementation 'com.datadoghq:datadog-lambda-java:VERSION'
 }
@@ -165,7 +156,7 @@ To automatically connect Java Lambda function logs and traces, see [Connecting J
 [1]: /integrations/amazon_web_services/
 [2]: /serverless/forwarder/
 [3]: /serverless/enhanced_lambda_metrics
-[4]: https://img.shields.io/bintray/v/datadog/datadog-maven/datadog-lambda-java
+[4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
 [5]: https://github.com/DataDog/datadog-lambda-java/releases/
 [6]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: /serverless/insights#cold-starts

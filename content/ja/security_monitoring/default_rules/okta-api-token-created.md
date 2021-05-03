@@ -9,8 +9,6 @@ source: okta
 title: Okta API トークンの作成または有効化
 type: security_rules
 ---
-## 概要
-
 ### 目標
 Okta API トークンが新規作成されたことを検出します。
 

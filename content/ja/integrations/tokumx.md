@@ -30,8 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: tokumx.
 metric_to_check: tokumx.uptime
 name: tokumx
-process_signatures:
-  - mongod --config /etc/tokumx.conf
+process_signatures: []
 public_title: Datadog-TokuMX インテグレーション
 short_description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
 support: コア

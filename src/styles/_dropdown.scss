@@ -596,3 +596,19 @@ $responsive-breakpoint: 768px
 .algolia-docsearch-suggestion--subcategory-column, .algolia-docsearch-suggestion--text {
   color: #4B4B4B !important;
 }
+
+// API-page specific algolia replica autocomplete fixes
+.api {
+  .ds-dropdown-menu {
+    em {
+      color: #8821A2 !important;
+      background: #F9F0FB !important;
+      box-shadow: none !important;
+      padding: 0.1em 0.05em;
+    }
+
+    .algolia-docsearch-suggestion {
+      display: block;
+    }
+  }
+}

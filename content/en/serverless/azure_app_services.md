@@ -13,7 +13,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/azure-app-service-extension/"
   tag: "Blog"
   text: "Monitor .NET web apps with the Datadog extension for Azure App Service"
-- link: "https://www.datadoghq.com/pricing/?product=apm#apm-what-is-considered-as-a-host-for-azure-app-services"
+- link: "https://www.datadoghq.com/pricing/?product=apm--continuous-profiler#apm--continuous-profiler-what-is-considered-as-a-host-for-azure-app-services"
   tag: "Pricing"
   text: "Azure App Service APM Pricing"
 ---
@@ -43,6 +43,8 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 2. The extension only supports Azure App Service Web Apps. **Function Apps are not supported**.
 
+<div class="alert alert-warning">To be notified when a private beta is available for Function Apps or additional runtimes, <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">sign up here</a>.</div>
+
 3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][9].
 
     - .NET Framework 4.5 and later
@@ -52,7 +54,7 @@ The Datadog extension for Azure App Services provides additional monitoring capa
     - .NET Core 3.1
     - .NET 5
 
-4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require a restart of your web app.
+4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
 **Note**: Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.
 
