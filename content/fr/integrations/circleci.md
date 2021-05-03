@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/circleci/'
 draft: false
 git_integration_title: circleci
 has_logo: true
+integration_id: ''
 integration_title: CircleCI
 is_public: true
 kind: integration
