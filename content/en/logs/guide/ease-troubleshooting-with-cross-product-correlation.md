@@ -181,7 +181,7 @@ Browser logs and RUM events are automatically correlated as explained in the [RU
 
 ## Correlate user experience with server behavior
 
-Traditional backend and frontend monitoring are siloed and require separate workflows to troubleshoot across the stack. Datadog full-stack correlations let you identify root cause (whether it comes from a browser issue or a database downtime) and estimate user impact in a quick and intuitive manner.
+Traditional backend and frontend monitoring are siloed and require separate workflows to troubleshoot across your stack. Datadog full stack correlations lets you identify a root cause (whether it comes from a browser issue or a database downtime) and estimate user impact.
 
 This section walks you through the steps to enable such correlations:
 
