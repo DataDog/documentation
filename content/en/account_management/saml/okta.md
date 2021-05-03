@@ -46,7 +46,7 @@ This is required only if you are using [AuthN Mapping][4].
 
 | Name  |Name Format (optional)   | Value  |
 |---|---|---|
-| memberOf   | Unspecified| Matches regex: .* (This method retrieves all groups. Please reach out to your IDP administrator if this does not fit your use case.)  |
+| memberOf   | Unspecified| Matches regex `.*` (This method retrieves all groups. Contact your IDP administrator if this does not fit your use case.)  |
 
 
 
