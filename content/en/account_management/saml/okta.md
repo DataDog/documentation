@@ -30,7 +30,7 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 | SAML Single Logout   | Disabled  |
 | authnContextClassRef  | PasswordProtectedTransport |
 | Honor Force Authentication  | Yes  |
-| SAML Issuer ID  | http://www.okta.com/${org.externalKey}  |
+| SAML Issuer ID  | `http://www.okta.com/${org.externalKey}`  |
 
 ## Attribute statements details
 
