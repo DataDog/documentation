@@ -27,26 +27,27 @@ Use **attributes** and **aliasing** to unify your Logs environment.
 
 ## Attribute types and aliasing
 
-Attributes prescribe [logs facets][1], which are used for filtering and searching in Log Explorer.
+Attributes prescribe [logs facets][1] and [tags][2], which are used for filtering and searching in Log Explorer.
 
   * [**Reserved attributes**](#reserved-attributes) are automatically ingested.
 
-  * [**Standard attributes**](#standard-attributes) are the backbone of the naming convention for your organization. There is a default set of standard attributes available in [the app][2]. However, this list can be customized to create a **naming convention** for your team.
+  * [**Standard attributes**](#standard-attributes) are the backbone of the naming convention for your organization. There is a default set of standard attributes available in [the app][3]. However, this list can be customized to create a **naming convention** for your team.
 
-  * Use [**Aliasing**](#aliasing) once you've implemented a naming convention with standard attributes or if you're trying to create a unique standard facet from multiple log sources. For example, follow the clients most impacted by latencies on a hybrid [Apache][3] and [Amazon Cloud Front][4] infrastructure, using the standard `Network Client IP` facet alongside the standard `duration`. Aliasing allows implementation of a naming convention without having to change a team's technical stack.
+  * Use [**Aliasing**](#aliasing) once you've implemented a naming convention with standard attributes or if you're trying to create a unique standard facet from multiple log sources. For example, follow the clients most impacted by latencies on a hybrid [Apache][4] and [Amazon Cloud Front][5] infrastructure, using the standard `Network Client IP` facet alongside the standard `duration`. Aliasing allows implementation of a naming convention without having to change a team's technical stack.
 
 ## Reserved attributes
 
 Below is a list of reserved attributes that are automatically ingested with logs:
 
-**Note**: If you're also collecting traces or metrics, it is recommended to configure unified service tagging. This configuration ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. Refer to the dedicated [unified service tagging][5] documentation for more information.
+**Note**: If you're also collecting traces or metrics, it is recommended to configure unified service tagging. This configuration ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. Refer to the dedicated [unified service tagging][6] documentation for more information.
 
 | Attribute | Description                                                                                                                                                                                                                                |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your logs. The Agent sets this value automatically.                          |
 | `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
-| `status`  | This corresponds to the level/severity of a log. It is used to define [patterns][6] and has a dedicated layout in the Datadog Log UI.                                                                                                     |
+| `status`  | This corresponds to the level/severity of a log. It is used to define [patterns][7] and has a dedicated layout in the Datadog Log UI.                                                                                                     |
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                                |
+| `trace_id` | This corresponds to the Trace ID used for traces. It is used to [correlate your log with its trace][8].                                                                                                                                 |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in Live Tail, where it is indexed for full text search.                                    |
 
 ## Standard attributes
@@ -56,7 +57,7 @@ Log integrations natively rely on a [default set](#default-standard-attribute-li
 Admin users in your organization can curate the list:
 
 - From the [Log Explorer][1]: **Promote** existing attributes as standard attributes.
-- From the standard attribute [configuration page][2]: **Create** new standard attributes.
+- From the standard attribute [configuration page][3]: **Create** new standard attributes.
 
 {{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes"  style="width:60%;">}}
 
@@ -101,7 +102,7 @@ The following attributes are related to the data used in network communication. 
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
-Typical integrations relying on these attributes include [Apache][3], [Varnish][7], [AWS ELB][8], [Nginx][9], [HAProxy][10], etc.
+Typical integrations relying on these attributes include [Apache][4], [Varnish][9], [AWS ELB][10], [Nginx][11], [HAProxy][12], etc.
 
 #### Geolocation
 
@@ -110,18 +111,18 @@ The following attributes are related to the geolocation of IP addresses used in 
 | **Fullname**                                | **Type** | **Description**                                                                                                                      |
 | :------------------------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------- |
 | `network.client.geoip.country.name`         | `string` | Name of the country                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | `string` | [ISO Code][5] of the country (example: `US` for the United States, `FR` for France)                                                  |
+| `network.client.geoip.country.iso_code`     | `string` | [ISO Code][6] of the country (example: `US` for the United States, `FR` for France)                                                  |
 | `network.client.geoip.continent.code`       | `string` | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
 | `network.client.geoip.continent.name`       | `string` | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
 | `network.client.geoip.subdivision.name`     | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
-| `network.client.geoip.subdivision.iso_code` | `string` | [ISO Code][5] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
+| `network.client.geoip.subdivision.iso_code` | `string` | [ISO Code][6] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
 | `network.client.geoip.city.name`            | `String` | The name of the city (example `Paris`, `New York`)                                                                                   |
 
 #### HTTP requests
 
 These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
 
-Typical integrations relying on these attributes include [Apache][3], Rails, [AWS CloudFront][8], web applications servers, etc.
+Typical integrations relying on these attributes include [Apache][4], Rails, [AWS CloudFront][10], web applications servers, etc.
 
 ##### Common attributes
 
@@ -137,7 +138,7 @@ Typical integrations relying on these attributes include [Apache][3], Rails, [AW
 
 ##### URL details attributes
 
-These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][11]. All attributes are prefixed by `http.url_details`.
+These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][13]. All attributes are prefixed by `http.url_details`.
 
 | **Fullname**                   | **Type** | **Description**                                                                         |
 | :----------------------------- | :------- | :-------------------------------------------------------------------------------------- |
@@ -149,7 +150,7 @@ These attributes provide details about the parsed parts of the HTTP URL. They ar
 
 ##### User-Agent attributes
 
-These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][12]. All attributes are prefixed by `http.useragent_details`.
+These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][14]. All attributes are prefixed by `http.useragent_details`.
 
 | **Fullname**                            | **Type** | **Description**                                |
 | :-------------------------------------- | :------- | :--------------------------------------------- |
@@ -184,7 +185,7 @@ Database related attributes are prefixed by `db`.
 | `db.operation` | `string` | The operation that was performed ("query", "update", "delete",...).                                                                   |
 | `db.user`      | `string` | User that performs the operation.                                                                                                     |
 
-Typical integrations relying on these attributes are: [Cassandra][13], [MySQL][14], [RDS][15], [Elasticsearch][16], etc.
+Typical integrations relying on these attributes are: [Cassandra][15], [MySQL][16], [RDS][17], [Elasticsearch][18], etc.
 
 #### Performance
 
@@ -194,7 +195,7 @@ Performance metrics attributes.
 | :----------- | :------- | :------------------------------------------------------------------------------------------------ |
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
-Datadog advises you to [remap][17] any durations within your logs on this attribute since Datadog displays and uses it as a default [measure][1] for [trace search][18].
+Datadog advises you to [remap][19] any durations within your logs on this attribute since Datadog displays and uses it as a default [measure][1] for [trace search][20].
 
 #### User related attributes
 
@@ -218,7 +219,7 @@ These attributes are related to the data added by a syslog or a log-shipper agen
 | `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute.       |
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 
-Some integrations that rely on these are: [Rsyslog][19], [NxLog][20], [Syslog-ng][21], [Fluentd][22], [Logstash][23], etc.
+Some integrations that rely on these are: [Rsyslog][21], [NxLog][22], [Syslog-ng][23], [Fluentd][24], [Logstash][25], etc.
 
 #### DNS
 
@@ -228,11 +229,11 @@ All attributes and measures are prefixed by `dns`.
 | :------------------- | :------- | :------------------------------------------------------------------------ |
 | `dns.id`             | `string` | The DNS query identifier.                                                 |
 | `dns.question.name`  | `string` | The queried domain name.                                                  |
-| `dns.question.type`  | `string` | A [two octet code][24] which specifies the DNS question type.             |
+| `dns.question.type`  | `string` | A [two octet code][26] which specifies the DNS question type.             |
 | `dns.question.class` | `string` | The class looked up by the DNS question (i.e IN when using the internet). |
 | `dns.question.size`  | `number` | The DNS question size in bytes.                                           |
 | `dns.answer.name`    | `string` | The IP address that the DNS answers with.                                 |
-| `dns.answer.type`    | `string` | A [two octet code][24] which specifies the DNS answer type.               |
+| `dns.answer.type`    | `string` | A [two octet code][26] which specifies the DNS answer type.               |
 | `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
 | `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
 | `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
@@ -250,7 +251,7 @@ All attributes are prefixed by `evt`.
 
 Creating an alias for a source attribute that maps to a destination attribute allows logs to carry both the source and destination attributes.
 
-Users can interact with either the aliased (source) or standard (destination) faceted attribute. However, users are [encouraged][25] to use the standard facet rather than the aliased one. This provides guidance towards the naming convention, and discourages users from building assets (such as saved views or dashboards) based on non-standard content.
+Users can interact with either the aliased (source) or standard (destination) faceted attribute. However, users are [encouraged][27] to use the standard facet rather than the aliased one. This provides guidance towards the naming convention, and discourages users from building assets (such as saved views or dashboards) based on non-standard content.
 
 **Additional details regarding aliasing**:
 
@@ -263,35 +264,37 @@ Users can interact with either the aliased (source) or standard (destination) fa
 - Attributes can only be aliased to standard attributes.
 - To respect the JSON structure of logs, it is not possible to have one standard attribute as the child of another (for example `user` and `user.name` cannot both be standard attributes).
 
-See the [associated documentation][26] for additional information.
+See the [associated documentation][28] for additional information.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/facets/
-[2]: https://app.datadoghq.com/logs/pipelines/standard-attributes
-[3]: /integrations/apache/
-[4]: /integrations/amazon_cloudfront/
-[5]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[6]: /logs/explorer/patterns/
-[7]: /integrations/varnish/
-[8]: /integrations/amazon_elb/
-[9]: /integrations/nginx/
-[10]: /integrations/haproxy/
-[11]: /logs/processing/processors/#url-parser
-[12]: /logs/processing/processors/#user-agent-parser
-[13]: /integrations/cassandra/
-[14]: /integrations/mysql/
-[15]: /integrations/amazon_rds/
-[16]: /integrations/elastic/
-[17]: /logs/processing/processors/#remapper
-[18]: /tracing/app_analytics/search/
-[19]: /integrations/rsyslog/
-[20]: /integrations/nxlog/
-[21]: /integrations/syslog_ng/
-[22]: /integrations/fluentd/
-[23]: /integrations/logstash/
-[24]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
-[25]: /logs/explorer/facets/#aliased-facets
-[26]: /logs/explorer/facets/#alias-facets
+[2]: /logs/search_syntax/#tags
+[3]: https://app.datadoghq.com/logs/pipelines/standard-attributes
+[4]: /integrations/apache/
+[5]: /integrations/amazon_cloudfront/
+[6]: /getting_started/tagging/unified_service_tagging/
+[7]: /logs/explorer/patterns/
+[8]: /tracing/connect_logs_and_traces/
+[9]: /integrations/varnish/
+[10]: /integrations/amazon_elb/
+[11]: /integrations/nginx/
+[12]: /integrations/haproxy/
+[13]: /logs/processing/processors/#url-parser
+[14]: /logs/processing/processors/#user-agent-parser
+[15]: /integrations/cassandra/
+[16]: /integrations/mysql/
+[17]: /integrations/amazon_rds/
+[18]: /integrations/elastic/
+[19]: /logs/processing/processors/#remapper
+[20]: /tracing/app_analytics/search/
+[21]: /integrations/rsyslog/
+[22]: /integrations/nxlog/
+[23]: /integrations/syslog_ng/
+[24]: /integrations/fluentd/
+[25]: /integrations/logstash/
+[26]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+[27]: /logs/explorer/facets/#aliased-facets
+[28]: /logs/explorer/facets/#alias-facets

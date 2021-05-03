@@ -6,7 +6,6 @@ aliases:
   - /ja/agent/docker
   - /ja/agent/basic_agent_usage/docker/
   - /ja/integrations/docker_daemon/
-  - /ja/integrations/docker/
   - /ja/docker/
 further_reading:
   - link: /agent/docker/log/
@@ -143,7 +142,7 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 | `DD_HISTOGRAM_AGGREGATES`        | 計算するヒストグラムの集計 (スペース区切り)。デフォルトは "max median avg count" です。                                                          |
 | `DD_DOGSTATSD_SOCKET`            | リスニングする UNIX ソケットのパス。`rw` でマウントされたボリューム内にある必要があります。                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | UNIX ソケットのメトリクス用にコンテナの検出とタグ付けを有効にします。                                                                                            |
-| `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `["env:golden", "group:retrievers"]` のように追加します。 |
+| `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `"env:golden group:retrievers"` のように追加します。 |
 
 詳しくは、[Unix ドメインソケット上の DogStatsD][18] を参照してください。
 
@@ -182,7 +181,7 @@ Datadog は [Docker][20]、[Kubernetes][21]、[ECS][22]、[Swarm、Mesos、Nomad
 
 その他の例は[コンテナのディスカバリー管理][25]ページでご確認いただけます。
 
-**注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。コンテナごとの課金にも影響しません。
+**注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。なお、これらはコンテナの課金に影響しません。
 
 ### その他
 

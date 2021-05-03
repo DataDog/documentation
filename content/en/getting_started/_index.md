@@ -19,5 +19,5 @@ further_reading:
 {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Learn about tracing by setting up the Agent to trace a small application.{{< /nextlink >}}
 {{< nextlink href="/getting_started/tagging" >}}<u>Tagging</u>: Start tagging your metrics, logs, and traces.{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Get started on Datadog HTTP API.{{< /nextlink >}}
-{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
+{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start testing and monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -3,9 +3,12 @@ title: Multistep API Tests
 kind: documentation
 description: Chain requests to monitor sophisticated transactions on your key services
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+- link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetic Monitoring"
+  text: "Monitor your workflows with Datadog multistep API tests"
+- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
 - link: "/getting_started/synthetics/api_test"
   tag: "Documentation"
   text: "Get started with API tests"
@@ -46,6 +49,8 @@ Select the **Locations** to run your Multistep API test from: Multistep API test
 Hit **Create Your First Request** to start designing your test's requests.
 
 {{< img src="synthetics/api_tests/create_request.png" alt="Create your Multistep API test requests"  style="width:90%;" >}}
+
+**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase it.
 
 #### Define the request
 
@@ -104,9 +109,17 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 **Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 10 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
+
+##### Failure behavior
+
+The `Continue with test if this step fails` setting allows Multistep API tests to move on with subsequent steps even in case of step failure. This is particularly useful to ensure your tests are able to clean up after themselves. For instance, a test might first create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fails, you still want the resource to be deleted at the end of the test to avoid generating false positives. This can be done using the `Continue with test if this step fails` on every intermediary step.
+
+You should also activate the `Consider entire test as failed if this step fails` setting on your intermediary steps to ensure your overall test still generates an alert in case one of the endpoints does not answer as expected.
+
+Similarly, if your Multistep API test runs on a variety of endpoints, the two failure behavior settings can help ensure your test performs all requests even in case of issue with one or several of the API endpoints.
 
 #### Extract variables from the response
 
@@ -169,11 +182,6 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-
-Email notifications include the message defined in this section as well as a summary of failed assertions.
-Notifications example:
-
-{{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications"  style="width:90%;" >}}
 
 Click on **Save** to save your test and have Datadog start executing it.
 

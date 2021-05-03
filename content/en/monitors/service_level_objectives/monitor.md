@@ -44,6 +44,8 @@ Example: `99% of the time requests should have a latency of less than 300ms over
 
 While the SLO remains above the target percentage, the SLO's status will be displayed in green font. When the target percentage is violated, the SLO's status will be displayed in red font. You can also optionally include a warning percentage that is greater than the target percentage to indicate when you are approaching an SLO breach. When the warning percentage is violated (but the target percentage is not violated), the SLO status will be displayed in yellow font.
 
+**Note:** The number of decimal places you can specify for your monitor-based SLOs differs depending on the time windows you choose. Up to two decimal places are allowed for 7-day and 30-day targets, and up to three decimal places are allowed for 90-day targets. The precision shown in the details UI of the SLO will be up to `num_target_decimal_places`, meaning two decimal places for 7-day and 30-day targets and three decimal places for 90-day targets. These limits are in place because monitor-based SLO error budget is specified in terms of time. A 99.999% target for a 7-day and 30-day targets results in error budgets of 6 seconds and 26 seconds, respectively. Monitors evaluate every minute, thus the granularity of a monitor-based SLO is also 1 minute. This means one alert would fully consume and overspend the 6 second or 26 second error budgets in the previous examples (for use cases requiring more granularity, consider using [metric-based SLOs][6] instead). Furthermore, error budgets this small are likely unrealistic goals for you to try to achieve in practice.
+
 ### Identify this indicator
 
 Here you can add contextual information about the purpose of the SLO, including any related information or resources in the description and tags you would like to associate with the SLO.
@@ -74,7 +76,7 @@ In certain cases, there is an exception to the status calculation for monitor-ba
 
 By changing any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using just that one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups. 
 
-For more information on Synthetic test alerting conditions, visit the Synthetic Monitoring [documentation][6].
+For more information on Synthetic test alerting conditions, visit the Synthetic Monitoring [documentation][7].
 
 ## Underlying monitor and SLO histories
 
@@ -86,7 +88,7 @@ Datadog recommends against using monitors with `Alert Recovery Threshold` and `W
 
 SLO calculations do not take into account when a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification`s, and using the clone for your SLO.
 
-Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as [described in the SLO metric documentation][7].
+Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as [described in the SLO metric documentation][6].
 
 ## Further Reading
 
@@ -97,5 +99,5 @@ Confirm you are using the preferred SLI type for your use case. Datadog supports
 [3]: https://app.datadoghq.com/slo/new/monitor
 [4]: https://app.datadoghq.com/monitors#create
 [5]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
-[6]: /synthetics/api_tests/?tab=httptest#alert-conditions
-[7]: /monitors/service_level_objectives/metric/
+[6]: /monitors/service_level_objectives/metric/
+[7]: /synthetics/api_tests/?tab=httptest#alert-conditions

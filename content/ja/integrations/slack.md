@@ -105,10 +105,31 @@ Slack アプリから送信されるようモニターを更新するには、�
 
 {{< img src="integrations/slack/incidents2.png" alt="Slack コンフィギュレーション" style="width:80%;">}}
 
+#### インシデントの更新チャンネル
+インシデントの更新チャンネルを使用すると、チームは Slack ワークスペースから、組織全体にすべてのインシデントのステータスを直接公開することができます。ワークスペースで、更新を投稿するチャンネルを選択すると、チャンネルでは以下の投稿を受信します。
+
+1. 新しく宣言されたインシデント。
+2. 重要度、ステータスの移行、インシデントコマンダーへの変更点。
+3. アプリ内の[インシデント][4]の概要ページへのリンク。
+4. 該当するインシデントの Slack チャンネルへの参加リンク。
+
+Slack アプリを[インストール][5]したら、Incident [Settings][6] ページに移動します。*Incident Updates Channel* セクションまでスクロールして、セットアップの手順を開始します。
+
+Slack アプリにログインしたら、インシデントの更新チャンネルとして動作するチャンネルを設定できます。
+
+**このチャンネルのセットアップ方法**:
+1. インシデント設定にアクセスします。
+2. *Incident Updates Channel* セクションに移動します。
+3. Slack ワークスペースと、インシデントの更新チャンネルとして使用する特定の Slack チャンネルを定義します。
+
+{{< img src="integrations/slack/incident_updates_channel.png" alt="インシデントの更新チャンネル" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/slack
 [2]: https://www.datadoghq.com/blog/datadog-slack-app/
 [3]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackwebhookeu
+[4]: https://app.datadoghq.com/incidents
+[5]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackapplicationus#installation
+[6]: https://app.datadoghq.com/incidents/settings
 {{% /tab %}}
 
 {{% tab "Slack Webhook - EU" %}}

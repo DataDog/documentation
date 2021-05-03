@@ -44,7 +44,7 @@ La section **Applied Tags** vous permet d'effectuer plusieurs opérations :
 - Si vous modifiez des tags, les nouveaux rapports tiendront compte de vos changements. Cependant, les rapports précédents conserveront les anciens tags.
 - Les rapports mensuels englobent l'ensemble de tags le plus récent. Si vous modifiez les tags au milieu du mois, les pourcentages d'utilisation risquent de ne pas correspondre. 
 
-### Tableau Monthly Usage Attribution
+### Attribution de l'utilisation mensuelle
 
 Dès que la création de rapports est lancée, ces derniers sont mis à jour quotidiennement et agrégés tous les mois dans ce tableau.
 
@@ -58,7 +58,7 @@ Dès que la création de rapports est lancée, ces derniers sont mis à jour quo
 
 Les données mensuelles peuvent également être récupérées à l'aide de l'API publique de l'outil. Consultez la [documentation sur l'endpoint d'API][1] pour en savoir plus.
 
-### Section Daily Usage Attribution
+### Attribution de l'utilisation quotidienne
 
 Cette section fournit des rapports quotidiens avec une granularité horaire pour analyser en détail certains intervalles. Tous les rapports d'un mois précis y sont également concaténés.
 
@@ -84,7 +84,7 @@ Le tableau ci-dessous présente un exemple de rapport quotidien pour deux tags d
 - Des valeurs séparées par le symbole `|` (barre verticale) (par exemple, `service1 | service2`) indiquent qu'un tag spécifique a été appliqué plusieurs fois à la ressource.
 - Une valeur de tag valide (voir la [documentation sur la définition de tags][3]) indique la valeur réelle du tag concerné.
 
-#### Analyse plus approfondie des données
+#### Analyse approfondie des données
 
 Lorsque vous utilisez plusieurs tags, les rapports Daily Usage Attribution et Monthly Usage Attribution contiennent des données pour toutes les combinaisons possibles de ces tags. Ils constituent ainsi d'excellents ensembles de données de base pour vos tâches d'analyse plus approfondie. Par exemple, vous pouvez utiliser des opérations de regroupement ou de pivotement pour générer des vues afin d'étudier plus précisément un certain sous-ensemble de tags, ou encore d'effectuer des agrégations temporelles personnalisées.
 

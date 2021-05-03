@@ -58,6 +58,8 @@ After processing, the following structured log is generated:
 * You must have unique rule names within the same Grok parser.
 * The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 * Properties with null or empty values are not displayed.
+* A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][1].
+* The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
 
 ### Matcher and filter
 
@@ -174,7 +176,7 @@ Some examples demonstrating how to use parsers:
 * [Optional attribute](#optional-attribute)
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
-* [List and Arrays](#list-and-arrays)
+* [List and Arrays](#list-to-array)
 * [Glog format](#glog-format)
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
@@ -308,9 +310,9 @@ The supported format for timezones are:
 * `GMT`, `UTC`, `UT` or `Z`
 * `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive.
 * Timezones starting with `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
-* Timezone IDs pulled from the TZ database. For more information, see [TZ database names][1].
+* Timezone IDs pulled from the TZ database. For more information, see [TZ database names][2].
 
-**Note**: Parsing a date **doesn't** set its value as the log official date. For this use the [Log Date Remapper][2] in a subsequent Processor.
+**Note**: Parsing a date **doesn't** set its value as the log official date. For this use the [Log Date Remapper][3] in a subsequent Processor.
 
 ### Alternating pattern
 
@@ -391,8 +393,6 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 ```
 
 {{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
-
-**Note**: A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][3].
 
 ### List to array
 
@@ -557,6 +557,6 @@ Other examples:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[2]: /logs/processing/processors/#log-date-remapper
-[3]: https://github.com/google/re2/wiki/Syntax
+[1]: https://github.com/google/re2/wiki/Syntax
+[2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[3]: /logs/processing/processors/#log-date-remapper

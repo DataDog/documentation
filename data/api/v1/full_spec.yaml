@@ -891,6 +891,8 @@ components:
             type: string
           nullable: true
           type: array
+        reflow_type:
+          $ref: '#/components/schemas/DashboardReflowType'
         template_variable_presets:
           description: Array of template variables saved views.
           items:
@@ -1031,6 +1033,21 @@ components:
             $ref: '#/components/schemas/DashboardList'
           type: array
       type: object
+    DashboardReflowType:
+      description: 'Reflow type for a **new dashboard layout** dashboard. Set this
+        only when layout type is ''ordered''.
+
+        If set to ''fixed'', the dashboard expects all widgets to have a layout, and
+        if it''s set to ''auto'',
+
+        widgets should not have layouts.'
+      enum:
+      - auto
+      - fixed
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - FIXED
     DashboardShareType:
       description: Type of sharing access (either open to anyone who has the public
         URL or invite-only).
@@ -1159,7 +1176,15 @@ components:
         \ a distribution graph\u2019s x-axis is quantity rather than time."
       properties:
         legend_size:
-          $ref: '#/components/schemas/WidgetLegendSize'
+          deprecated: true
+          description: (Deprecated) The widget legend was replaced by a tooltip and
+            sidebar.
+          type: string
+        markers:
+          description: List of markers.
+          items:
+            $ref: '#/components/schemas/WidgetMarker'
+          type: array
         requests:
           description: "Array of one request object to display in the widget.\n\n\
             See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
@@ -1172,7 +1197,9 @@ components:
           minItems: 1
           type: array
         show_legend:
-          description: Whether or not to display the legend on this widget.
+          deprecated: true
+          description: (Deprecated) The widget legend was replaced by a tooltip and
+            sidebar.
           type: boolean
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -1186,6 +1213,10 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/DistributionWidgetDefinitionType'
+        xaxis:
+          $ref: '#/components/schemas/DistributionWidgetXAxis'
+        yaxis:
+          $ref: '#/components/schemas/DistributionWidgetYAxis'
       required:
       - type
       - requests
@@ -1223,6 +1254,51 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetStyle'
+      type: object
+    DistributionWidgetXAxis:
+      description: X Axis controls for the distribution widget.
+      properties:
+        include_zero:
+          description: True includes zero.
+          type: boolean
+        max:
+          default: auto
+          description: Specifies maximum value to show on the x-axis. It takes a number,
+            percentile (p90 === 90th percentile), or auto for default behavior.
+          type: string
+        min:
+          default: auto
+          description: Specifies minimum value to show on the x-axis. It takes a number,
+            percentile (p90 === 90th percentile), or auto for default behavior.
+          type: string
+        scale:
+          default: linear
+          description: Specifies the scale type. Possible values are `linear`.
+          type: string
+      type: object
+    DistributionWidgetYAxis:
+      description: Y Axis controls for the distribution widget.
+      properties:
+        include_zero:
+          description: True includes zero.
+          type: boolean
+        label:
+          description: The label of the axis to display on the graph.
+          type: string
+        max:
+          default: auto
+          description: Specifies the maximum value to show on the y-axis. It takes
+            a number, or auto for default behavior.
+          type: string
+        min:
+          default: auto
+          description: Specifies minimum value to show on the y-axis. It takes a number,
+            or auto for default behavior.
+          type: string
+        scale:
+          default: linear
+          description: Specifies the scale type. Possible values are `linear` or `log`.
+          type: string
       type: object
     Downtime:
       description: 'Downtiming gives you greater control over monitor notifications
@@ -2333,12 +2409,28 @@ components:
     GeomapWidgetRequest:
       description: An updated geomap widget.
       properties:
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         q:
           description: The widget metrics query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     GraphSnapshot:
@@ -2365,11 +2457,23 @@ components:
         your timeboard. Each group has a custom header, can hold one to many graphs,
         and is collapsible.
       properties:
+        background_color:
+          description: Background color of the group title.
+          type: string
+        banner_img:
+          description: URL of image to display as a banner for the group.
+          type: string
         layout_type:
           $ref: '#/components/schemas/WidgetLayoutType'
+        show_title:
+          default: true
+          description: Whether to show the title or not.
+          type: boolean
         title:
           description: Title of the widget.
           type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
         type:
           $ref: '#/components/schemas/GroupWidgetDefinitionType'
         widgets:
@@ -2399,12 +2503,9 @@ components:
       - GROUP
     HTTPLog:
       description: Structured log message.
-      oneOf:
-      - $ref: '#/components/schemas/HTTPLogItem'
-      - description: List of log items.
-        items:
-          $ref: '#/components/schemas/HTTPLogItem'
-        type: array
+      items:
+        $ref: '#/components/schemas/HTTPLogItem'
+      type: array
     HTTPLogError:
       description: Invalid query performed.
       properties:
@@ -3062,6 +3163,18 @@ components:
         An image can be a PNG, JPG, or animated GIF. Only available on FREE layout
         dashboards.
       properties:
+        has_background:
+          default: true
+          description: Whether to display a background or not.
+          example: true
+          type: boolean
+        has_border:
+          default: true
+          description: Whether to display a border or not.
+          example: true
+          type: boolean
+        horizontal_align:
+          $ref: '#/components/schemas/WidgetHorizontalAlign'
         margin:
           $ref: '#/components/schemas/WidgetMargin'
         sizing:
@@ -3070,8 +3183,14 @@ components:
           $ref: '#/components/schemas/ImageWidgetDefinitionType'
         url:
           description: URL of the image.
-          example: ''
+          example: https://example.com/image.png
           type: string
+        url_dark_theme:
+          description: URL of the image in dark mode.
+          example: https://example.com/image-dark-mode.png
+          type: string
+        vertical_align:
+          $ref: '#/components/schemas/WidgetVerticalAlign'
       required:
       - type
       - url
@@ -4480,9 +4599,16 @@ components:
       properties:
         series:
           description: A list of time series to submit to Datadog.
+          example:
+          - metric: system.load.1
+            points:
+            - - 1475317847
+              - 0.7
           items:
             $ref: '#/components/schemas/Series'
           type: array
+      required:
+      - series
       type: object
     MetricsQueryMetadata:
       description: Object containing all metric names returned and their associated
@@ -5449,6 +5575,10 @@ components:
         font_size:
           description: Size of the text.
           type: string
+        has_padding:
+          default: true
+          description: Whether to add padding or not.
+          type: boolean
         show_tick:
           description: Whether to show a tick or not.
           type: boolean
@@ -5461,6 +5591,8 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/NoteWidgetDefinitionType'
+        vertical_align:
+          $ref: '#/components/schemas/WidgetVerticalAlign'
       required:
       - type
       - content
@@ -5907,6 +6039,166 @@ components:
             $ref: '#/components/schemas/SLOBulkDeleteError'
           type: array
       type: object
+    SLOCorrection:
+      description: The response object of a list of SLO corrections
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SLOCorrectionResponseAttributes'
+        id:
+          description: The ID of the SLO correction
+          type: string
+        type:
+          $ref: '#/components/schemas/SLOCorrectionType'
+      type: object
+    SLOCorrectionCategory:
+      description: Category the SLO correction belongs to
+      enum:
+      - Scheduled Maintenance
+      - Outside Business Hours
+      - Deployment
+      - Other
+      example: Scheduled Maintenance
+      type: string
+      x-enum-varnames:
+      - SCHEDULED_MAINTENANCE
+      - OUTSIDE_BUSINESS_HOURS
+      - DEPLOYMENT
+      - OTHER
+    SLOCorrectionCreateData:
+      description: The data object associated with the SLO correction to be created
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SLOCorrectionCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SLOCorrectionType'
+      type: object
+    SLOCorrectionCreateRequest:
+      description: An object that defines a correction to be applied to an SLO
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOCorrectionCreateData'
+      type: object
+    SLOCorrectionCreateRequestAttributes:
+      description: The attribute object associated with the SLO correction to be created
+      properties:
+        category:
+          $ref: '#/components/schemas/SLOCorrectionCategory'
+        description:
+          description: Description of the correction being made.
+          type: string
+        end:
+          description: Ending time of the correction in epoch seconds
+          example: 1600000000
+          format: int64
+          type: integer
+        slo_id:
+          description: ID of the SLO that this correction will be applied to
+          example: sloId
+          type: string
+        start:
+          description: Starting time of the correction in epoch seconds
+          example: 1600000000
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone to display in the UI for the correction times
+            (defaults to "UTC")
+          example: UTC
+          type: string
+      required:
+      - slo_id
+      - start
+      - end
+      - category
+      type: object
+    SLOCorrectionListResponse:
+      description: A list of  SLO correction objects
+      properties:
+        data:
+          description: The list of of SLO corrections objects
+          items:
+            $ref: '#/components/schemas/SLOCorrection'
+          type: array
+      type: object
+    SLOCorrectionResponse:
+      description: The response object of an SLO correction
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOCorrection'
+      type: object
+    SLOCorrectionResponseAttributes:
+      description: The attribute object associated with the SLO correction
+      properties:
+        category:
+          $ref: '#/components/schemas/SLOCorrectionCategory'
+        creator:
+          $ref: '#/components/schemas/Creator'
+        description:
+          description: Description of the correction being made.
+          type: string
+        end:
+          description: Ending time of the correction in epoch seconds
+          format: int64
+          type: integer
+        slo_id:
+          description: ID of the SLO that this correction will be applied to
+          type: string
+        start:
+          description: Starting time of the correction in epoch seconds
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone to display in the UI for the correction times
+            (defaults to "UTC")
+          type: string
+      type: object
+    SLOCorrectionType:
+      default: correction
+      description: SLO correction resource type.
+      enum:
+      - correction
+      example: correction
+      type: string
+      x-enum-varnames:
+      - CORRECTION
+    SLOCorrectionUpdateData:
+      description: The data object associated with the SLO correction to be updated
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SLOCorrectionUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SLOCorrectionType'
+      type: object
+    SLOCorrectionUpdateRequest:
+      description: An object that defines a correction to be applied to an SLO
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOCorrectionUpdateData'
+      type: object
+    SLOCorrectionUpdateRequestAttributes:
+      description: The attribute object associated with the SLO correction to be updated
+      properties:
+        category:
+          $ref: '#/components/schemas/SLOCorrectionCategory'
+        description:
+          description: Description of the correction being made.
+          type: string
+        end:
+          description: Ending time of the correction in epoch seconds
+          example: 1600000000
+          format: int64
+          type: integer
+        start:
+          description: Starting time of the correction in epoch seconds
+          example: 1600000000
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone to display in the UI for the correction times
+            (defaults to "UTC")
+          example: UTC
+          type: string
+      type: object
     SLODeleteResponse:
       description: A response list of all service level objective deleted.
       properties:
@@ -6278,6 +6570,27 @@ components:
             description: The error message.
             type: string
           type: array
+        metadata:
+          description: The metadata object containing additional information about
+            the list of SLOs.
+          properties:
+            page:
+              description: The object containing information about the pages of the
+                list of SLOs.
+              properties:
+                total_count:
+                  description: The total number of resources that could be retrieved
+                    ignoring the parameters and filters in the request.
+                  format: int64
+                  type: integer
+                total_filtered_count:
+                  description: The total number of resources that match the parameters
+                    and filters in the request. This attribute can be used by a client
+                    to determine the total number of pages.
+                  format: int64
+                  type: integer
+              type: object
+          type: object
       type: object
     SLOResponse:
       description: A service level objective response containing a single service
@@ -6759,7 +7072,7 @@ components:
           type: array
         name:
           description: The name of the service level objective object.
-          example: ''
+          example: Custom Metric SLO
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
@@ -6781,7 +7094,12 @@ components:
             service level
 
             objective object.'
-          example: []
+          example:
+          - target: 95
+            timeframe: 7d
+          - target: 95
+            timeframe: 30d
+            warning: 97
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
@@ -6802,11 +7120,11 @@ components:
       properties:
         denominator:
           description: A Datadog metric query for total (valid) events.
-          example: ''
+          example: sum:my.custom.metric{*}.as_count()
           type: string
         numerator:
           description: A Datadog metric query for good events.
-          example: ''
+          example: sum:my.custom.metric{type:good}.as_count()
           type: string
       required:
       - numerator
@@ -6818,16 +7136,6 @@ components:
 
         for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
       properties:
-        created_at:
-          description: 'Creation timestamp (UNIX time in seconds)
-
-
-            Always included in service level objective responses.'
-          format: int64
-          readOnly: true
-          type: integer
-        creator:
-          $ref: '#/components/schemas/Creator'
         description:
           description: 'A user-defined description of the service level objective.
 
@@ -6856,21 +7164,6 @@ components:
             description: A group name, for instance `env:prod`.
             type: string
           type: array
-        id:
-          description: 'A unique identifier for the service level objective object.
-
-
-            Always included in service level objective responses.'
-          readOnly: true
-          type: string
-        modified_at:
-          description: 'Modification timestamp (UNIX time in seconds)
-
-
-            Always included in service level objective responses.'
-          format: int64
-          readOnly: true
-          type: integer
         monitor_ids:
           description: 'A list of monitor ids that defines the scope of a monitor
             service level
@@ -6883,7 +7176,7 @@ components:
           type: array
         name:
           description: The name of the service level objective object.
-          example: ''
+          example: Custom Metric SLO
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
@@ -6905,7 +7198,12 @@ components:
             service level
 
             objective object.'
-          example: []
+          example:
+          - target: 95
+            timeframe: 7d
+          - target: 95
+            timeframe: 30d
+            warning: 97
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
@@ -7517,6 +7815,10 @@ components:
     SyntheticsAPIStep:
       description: The steps used in a Synthetics multistep API test.
       properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
         assertions:
           default: []
           description: Array of assertions used for the test.
@@ -7529,6 +7831,12 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
         name:
           description: The name of the step.
           type: string
@@ -7690,6 +7998,9 @@ components:
         result:
           description: Result of the last API test run.
           properties:
+            passed:
+              description: Describes if the test run has passed or failed.
+              type: boolean
             timings:
               $ref: '#/components/schemas/SyntheticsTiming'
           type: object
@@ -7812,6 +8123,10 @@ components:
       - recordSome
       - tlsVersion
       - minTlsVersion
+      - latency
+      - packetLossPercentage
+      - packetsReceived
+      - networkHop
       type: string
       x-enum-varnames:
       - BODY
@@ -7824,6 +8139,10 @@ components:
       - RECORD_SOME
       - TLS_VERSION
       - MIN_TLS_VERSION
+      - LATENCY
+      - PACKET_LOSS_PERCENTAGE
+      - PACKETS_RECEIVED
+      - NETWORK_HOP
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       properties:
@@ -7928,6 +8247,10 @@ components:
           type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
+        setCookie:
+          description: Cookies to be used for the request, using the [Set-Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+            syntax.
+          type: string
         variables:
           description: Array of variables used for the test steps.
           items:
@@ -8174,6 +8497,7 @@ components:
           type: object
       required:
       - public_id
+      type: object
     SyntheticsCITestBody:
       description: Object describing the synthetics tests to trigger.
       properties:
@@ -8197,6 +8521,9 @@ components:
       - greaterEquals
       - lowerEquals
       - matchRegex
+      - between
+      - isEmpty
+      - notIsEmpty
       type: string
       x-enum-varnames:
       - EQUALS
@@ -8210,6 +8537,9 @@ components:
       - GREATER_EQUALS
       - LOWER_EQUALS
       - MATCH_REGEX
+      - BETWEEN
+      - IS_EMPTY
+      - NOT_IS_EMPTY
     SyntheticsConfigVariable:
       description: Object defining a variable that can be used in your test configuration.
       properties:
@@ -8479,6 +8809,7 @@ components:
           type: string
       required:
       - value
+      type: object
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
       properties:
@@ -8929,13 +9260,14 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns` or `multi`.'
+        `dns`, `icmp` or `multi`.'
       enum:
       - http
       - ssl
       - tcp
       - dns
       - multi
+      - icmp
       type: string
       x-enum-varnames:
       - HTTP
@@ -8943,6 +9275,7 @@ components:
       - TCP
       - DNS
       - MULTI
+      - ICMP
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -8993,6 +9326,10 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
+        disableCors:
+          description: Whether or not to disable CORS mechanism. Currently only available
+            for Chrome.
+          type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
@@ -9021,6 +9358,9 @@ components:
               minimum: 0
               type: integer
           type: object
+        noScreenshot:
+          description: Prevents saving screenshots of the steps.
+          type: boolean
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         tick_every:
@@ -9084,6 +9424,12 @@ components:
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
+        dnsServerPort:
+          description: DNS server port to use for DNS tests.
+          format: int32
+          maximum: 65535
+          minimum: 1
+          type: integer
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
@@ -9091,6 +9437,15 @@ components:
           type: string
         method:
           $ref: '#/components/schemas/HTTPMethod'
+        noSavingResponseBody:
+          description: Determines whether or not to save the response body.
+          type: boolean
+        numberOfPackets:
+          description: Number of pings to use per test.
+          format: int32
+          maximum: 10
+          minimum: 0
+          type: integer
         port:
           description: Port to use when performing the test.
           format: int64
@@ -9098,6 +9453,10 @@ components:
         query:
           description: Query to use for the test.
           type: object
+        shouldTrackHops:
+          description: Turns on a traceroute probe to discover all gateways along
+            the path to the host destination.
+          type: boolean
         timeout:
           description: Timeout in seconds for the test.
           format: double
@@ -9917,6 +10276,22 @@ components:
           description: The network host usage by tag(s).
           format: double
           type: number
+        profiled_containers_percentage:
+          description: The percentage of profiled containers usage by tag(s).
+          format: double
+          type: number
+        profiled_containers_usage:
+          description: The profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_hosts_percentage:
+          description: The percentage of profiled hosts usage by tag(s).
+          format: double
+          type: number
+        profiled_hosts_usage:
+          description: The profiled host usage by tag(s).
+          format: double
+          type: number
         snmp_percentage:
           description: The percentage of network device usage by tag(s).
           format: double
@@ -10037,6 +10412,35 @@ components:
           description: An array of objects regarding usage of billable summary.
           items:
             $ref: '#/components/schemas/UsageBillableSummaryHour'
+          type: array
+      type: object
+    UsageComplianceHour:
+      description: Compliance Monitoring usage for a given organization for a given
+        hour.
+      properties:
+        compliance_container_count:
+          description: The total number of compliance container hours from the start
+            of the given hour's month until the given hour.
+          format: int64
+          type: integer
+        compliance_host_count:
+          description: The total number of compliance hosts hours from the start of
+            the given hour's month until the given hour.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+      type: object
+    UsageComplianceResponse:
+      description: The response containing the Compliance Monitoring usage for each
+        hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Compliance Monitoring.
+          items:
+            $ref: '#/components/schemas/UsageComplianceHour'
           type: array
       type: object
     UsageCustomReportsAttributes:
@@ -10203,6 +10607,13 @@ components:
             for the OpenTelemetry Collector.
           format: int64
           type: integer
+        vsphere_host_count:
+          description: 'Contains the total number of hosts that reported via vSphere
+            integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
       type: object
     UsageHostsResponse:
       description: Host usage response.
@@ -10290,8 +10701,7 @@ components:
           format: date-time
           type: string
         iot_device_count:
-          description: The total number of IoT device hours from the start of the
-            given hour's month until the given hour.
+          description: The total number of IoT devices during a given hour.
           format: int64
           type: integer
       type: object
@@ -10689,6 +11099,14 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        compliance_container_count_sum:
+          description: Shows the sum of compliance containers over all hours in the
+            current date for all organizations.
+        compliance_host_count_sum:
+          description: Shows the sum of compliance hosts over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -10723,7 +11141,7 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
-        heroku_host_top99p_sum:
+        heroku_host_top99p:
           description: Shows the 99th percentile of all Heroku dynos over all hours
             in the current date for all organizations.
           format: int64
@@ -10748,12 +11166,12 @@ components:
             current date for all organizations.
           format: int64
           type: integer
-        iot_device_agg_sum:
+        iot_device_sum:
           description: Shows the sum of all IoT devices over all hours in the current
             date for all organizations.
           format: int64
           type: integer
-        iot_device_top99p_sum:
+        iot_device_top99p:
           description: Shows the 99th percentile of all IoT devices over all hours
             in the current date all organizations.
           format: int64
@@ -10783,7 +11201,7 @@ components:
             all hours in the current date for all organizations.
           format: int64
           type: integer
-        opentelemetry_host_top99p_sum:
+        opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
             date for all organizations.
@@ -10829,6 +11247,11 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        vsphere_host_top99p:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
       type: object
     UsageSummaryDateOrg:
       description: Global hourly report of all data billed by Datadog for a given
@@ -10871,6 +11294,14 @@ components:
           type: integer
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
+            current date for the given org.
+          format: int64
+          type: integer
+        compliance_container_agg_sum:
+          description: Shows the sum of all compliance containers over all hours in
+            the current date for the given org.
+        compliance_host_agg_sum:
+          description: Shows the sum of all compliance hosts over all hours in the
             current date for the given org.
           format: int64
           type: integer
@@ -11013,6 +11444,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        vsphere_host_top99p:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
       type: object
     UsageSummaryResponse:
       description: Response with hourly report of all data billed by Datadog all organizations.
@@ -11059,6 +11495,14 @@ components:
           type: integer
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        compliance_container_agg_sum:
+          description: Shows the sum of all compliance containers over all hours in
+            the current months for all organizations.
+        compliance_host_agg_sum:
+          description: Shows the sum of all compliance hosts over all hours in the
             current months for all organizations.
           format: int64
           type: integer
@@ -11242,6 +11686,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDate'
           type: array
+        vsphere_host_top99p_sum:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
       type: object
     UsageSyntheticsAPIHour:
       description: Number of Synthetics API tests run for each hour for a given organization.
@@ -11617,11 +12066,11 @@ components:
           type: string
       type: object
     Widget:
-      description: 'Information about widget.
-
-
-        Note: The `layout` property is required for widgets in dashboards with `free`
-        `layout_type` only.'
+      description: "Information about widget.\n\n**Note**: The `layout` property is\
+        \ required for widgets in dashboards with `free` `layout_type`.\n      For\
+        \ the **new dashboard layout**, the `layout` property depends on the `reflow_type`\
+        \ of the dashboard.\n      - If `reflow_type` is `fixed`, `layout` is required.\n\
+        \      - If `reflow_type` is `auto`, `layout` should not be set."
       properties:
         definition:
           $ref: '#/components/schemas/WidgetDefinition'
@@ -11886,19 +12335,44 @@ components:
       x-enum-varnames:
       - CHECK
       - CLUSTER
-    WidgetImageSizing:
-      description: How to size the image on the widget.
+    WidgetHorizontalAlign:
+      description: Horizontal alignment.
       enum:
+      - center
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - CENTER
+      - LEFT
+      - RIGHT
+    WidgetImageSizing:
+      description: 'How to size the image on the widget. The values are based on the
+        image `object-fit` CSS properties.
+
+        **Note**: `zoom`, `fit` and `center` values are deprecated.'
+      enum:
+      - fill
+      - contain
+      - cover
+      - none
+      - scale-down
       - zoom
       - fit
       - center
       type: string
       x-enum-varnames:
+      - FILL
+      - CONTAIN
+      - COVER
+      - NONE
+      - SCALEDOWN
       - ZOOM
       - FIT
       - CENTER
     WidgetLayout:
-      description: The layout for a widget on a free dashboard.
+      description: The layout for a widget on a `free` or **new dashboard layout**
+        dashboard.
       properties:
         height:
           description: The height of the widget. Should be a non-negative integer.
@@ -11906,6 +12380,14 @@ components:
           format: int64
           minimum: 0
           type: integer
+        is_column_break:
+          default: false
+          description: 'Whether the widget should be the first one on the second column
+            in high density or not.
+
+            **Note**: Only for the **new dashboard layout** and only one widget in
+            the dashboard should have this property set to `true`.'
+          type: boolean
         width:
           description: The width of the widget. Should be a non-negative integer.
           example: 0
@@ -12001,12 +12483,20 @@ components:
       - PAST_ONE_YEAR
       - ALERT
     WidgetMargin:
-      description: Size of the margins around the image.
+      description: 'Size of the margins around the image.
+
+        **Note**: `small` and `large` values are deprecated.'
       enum:
+      - sm
+      - md
+      - lg
       - small
       - large
       type: string
       x-enum-varnames:
+      - SM
+      - MD
+      - LG
       - SMALL
       - LARGE
     WidgetMarker:
@@ -12015,7 +12505,8 @@ components:
       properties:
         display_type:
           description: "Combination of:\n  - A severity error, warning, ok, or info\n\
-            \  - A line type: dashed, solid, or bold\n"
+            \  - A line type: dashed, solid, or bold\nIn this case of a Distribution\
+            \ widget, this can be set to be `x_axis_percentile`.\n"
           example: error dashed
           type: string
         label:
@@ -12265,6 +12756,17 @@ components:
       - MONTH_TO_DATE
       - PREVIOUS_MONTH
       - GLOBAL_TIME
+    WidgetVerticalAlign:
+      description: Vertical alignment.
+      enum:
+      - center
+      - top
+      - bottom
+      type: string
+      x-enum-varnames:
+      - CENTER
+      - TOP
+      - BOTTOM
     WidgetViewMode:
       description: Define how you want the SLO to be displayed.
       enum:
@@ -12291,27 +12793,27 @@ components:
       in: header
       name: DD-API-KEY
       type: apiKey
-      x-env-name: DD_CLIENT_API_KEY
+      x-env-name: DD_API_KEY
     apiKeyAuthQuery:
       description: Deprecated API Key as query argument.
       in: query
       name: api_key
       type: apiKey
       x-auth-id-alias: apiKeyAuth
-      x-env-name: DD_CLIENT_API_KEY
+      x-env-name: DD_API_KEY
     appKeyAuth:
       description: Your Datadog APP Key.
       in: header
       name: DD-APPLICATION-KEY
       type: apiKey
-      x-env-name: DD_CLIENT_APP_KEY
+      x-env-name: DD_APP_KEY
     appKeyAuthQuery:
       description: Deprecated APP Key as query argument.
       in: query
       name: application_key
       type: apiKey
       x-auth-id-alias: appKeyAuth
-      x-env-name: DD_CLIENT_APP_KEY
+      x-env-name: DD_APP_KEY
 info:
   contact:
     email: support@datadoghq.com
@@ -12356,9 +12858,15 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.datadoghq.com
+        variables:
+          subdomain:
+            default: ip-ranges
+            description: The subdomain where the API is deployed.
       summary: List IP Ranges
       tags:
       - IP Ranges
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/api_key:
@@ -12381,6 +12889,7 @@ paths:
       summary: Get all API keys
       tags:
       - Key Management
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -12415,6 +12924,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -12460,6 +12970,7 @@ paths:
       summary: Delete an API key
       tags:
       - Key Management
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -12494,6 +13005,7 @@ paths:
       summary: Get API key
       tags:
       - Key Management
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -12541,6 +13053,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/application_key:
@@ -12563,6 +13076,7 @@ paths:
       summary: Get all application keys
       tags:
       - Key Management
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -12603,6 +13117,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         operationId: DeleteApplicationKey
         parameters:
@@ -12642,6 +13157,7 @@ paths:
       summary: Delete an application key
       tags:
       - Key Management
+      x-menu-order: 10
       x-undo:
         type: idempotent
     get:
@@ -12676,6 +13192,7 @@ paths:
       summary: Get an application key
       tags:
       - Key Management
+      x-menu-order: 8
       x-undo:
         type: safe
     put:
@@ -12729,6 +13246,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 9
       x-undo:
         type: idempotent
   /api/v1/check_run:
@@ -12777,11 +13295,12 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
       security:
-      - apiKeyAuthQuery: []
+      - apiKeyAuth: []
       summary: Submit a Service Check
       tags:
       - Service Checks
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/daily_custom_reports:
@@ -12832,6 +13351,7 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
+      x-menu-order: 20
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -12870,6 +13390,7 @@ paths:
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
+      x-menu-order: 21
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -12884,6 +13405,15 @@ paths:
 
         This query will not return preset dashboards.'
       operationId: ListDashboards
+      parameters:
+      - description: 'When `true`, this query only returns shared custom created
+
+          or cloned dashboards.'
+        in: query
+        name: filter[shared]
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -12900,6 +13430,7 @@ paths:
       summary: Get all dashboards
       tags:
       - Dashboards
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -12940,6 +13471,13 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-given:
+        dashboard:
+          parameters:
+          - file: dashboard_payload.json
+            name: body
+          step: there is a valid "dashboard" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteDashboard
         parameters:
@@ -12966,6 +13504,7 @@ paths:
       summary: Get all dashboard lists
       tags:
       - Dashboard Lists
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -13001,6 +13540,7 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteDashboardList
         parameters:
@@ -13041,6 +13581,7 @@ paths:
       summary: Delete a dashboard list
       tags:
       - Dashboard Lists
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -13076,6 +13617,7 @@ paths:
       summary: Get a dashboard list
       tags:
       - Dashboard Lists
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -13125,6 +13667,7 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/dashboard/public:
@@ -13174,6 +13717,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -13214,6 +13758,7 @@ paths:
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -13250,6 +13795,7 @@ paths:
       summary: Get a shared dashboard
       tags:
       - Dashboards
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -13314,6 +13860,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -13361,6 +13908,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
     get:
@@ -13410,6 +13958,7 @@ paths:
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
+      x-menu-order: 5
       x-undo:
         type: safe
     post:
@@ -13467,6 +14016,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -13506,6 +14056,7 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -13540,6 +14091,7 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -13588,6 +14140,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/downtime:
@@ -13619,6 +14172,7 @@ paths:
       summary: Get all downtimes
       tags:
       - Downtimes
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -13654,6 +14208,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: TODO
         parameters: []
@@ -13698,6 +14253,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
@@ -13731,6 +14287,7 @@ paths:
       summary: Cancel a downtime
       tags:
       - Downtimes
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -13767,6 +14324,7 @@ paths:
       summary: Get a downtime
       tags:
       - Downtimes
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -13818,6 +14376,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/events:
@@ -13828,7 +14387,8 @@ paths:
         `,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most\
         \ recent results. To return additional results,\nidentify the last timestamp\
         \ of the last result and set that as the `end` query time to\npaginate the\
-        \ results."
+        \ results. You can also use the page parameter to specify which set of `1000`\
+        \ results to return."
       operationId: ListEvents
       parameters:
       - description: POSIX timestamp.
@@ -13870,12 +14430,36 @@ paths:
           Otherwise if an event is aggregated to a parent event with a timestamp outside
           of the timeframe,
 
-          it won''t be available in the output.'
+          it won''t be available in the output. Aggregated events with `is_aggregate=true`
+          in the response will still be returned unless exclude_aggregate is set to
+          `true.`'
         in: query
         name: unaggregated
         required: false
         schema:
           type: boolean
+      - description: 'Set `exclude_aggregate` to `true` to only return unaggregated
+          events where `is_aggregate=false` in the response. If the `exclude_aggregate`
+          parameter is set to `true`,
+
+          then the unaggregated parameter is ignored and will be `true` by default.'
+        in: query
+        name: exclude_aggregate
+        required: false
+        schema:
+          type: boolean
+      - description: 'By default 1000 results are returned per request. Set page to
+          the number of the page to return with `0` being the first page. The page
+          parameter can only be used
+
+          when either unaggregated or exclude_aggregate is set to `true.`'
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          maximum: 2147483647
+          type: integer
       responses:
         '200':
           content:
@@ -13898,6 +14482,7 @@ paths:
       summary: Query the event stream
       tags:
       - Events
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -13926,11 +14511,12 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
       security:
-      - apiKeyAuthQuery: []
+      - apiKeyAuth: []
       summary: Post an event
       tags:
       - Events
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/events/{event_id}:
@@ -13969,6 +14555,7 @@ paths:
       summary: Get an event
       tags:
       - Events
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/graph/embed:
@@ -14229,6 +14816,7 @@ paths:
       summary: Take graph snapshots
       tags:
       - Snapshots
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/host/{host_name}/mute:
@@ -14272,6 +14860,7 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/host/{host_name}/unmute:
@@ -14308,6 +14897,7 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v1/hosts:
@@ -14397,6 +14987,7 @@ paths:
       summary: Get all hosts for your organization
       tags:
       - Hosts
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/hosts/totals:
@@ -14438,6 +15029,7 @@ paths:
       summary: Get the total number of active hosts
       tags:
       - Hosts
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/integration/aws:
@@ -14481,6 +15073,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
     get:
@@ -14527,6 +15120,7 @@ paths:
       summary: List all AWS integrations
       tags:
       - AWS Integration
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -14574,6 +15168,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         operationId: DeleteAWSAccount
         parameters: []
@@ -14640,6 +15235,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v1/integration/aws/available_namespace_rules:
@@ -14670,6 +15266,7 @@ paths:
       summary: List namespace rules
       tags:
       - AWS Integration
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/integration/aws/filtering:
@@ -14723,10 +15320,19 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
       summary: Delete a tag filtering entry
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -14777,9 +15383,18 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -14835,10 +15450,19 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
       summary: Set an AWS tag filter
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAWSTagFilter
         parameters: []
@@ -14882,6 +15506,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/aws/logs:
@@ -14919,6 +15544,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -14959,6 +15585,7 @@ paths:
       summary: List all AWS Logs integrations
       tags:
       - AWS Logs Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -14995,6 +15622,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAWSLambdaARN
         parameters: []
@@ -15049,6 +15677,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/integration/aws/logs/services:
@@ -15088,6 +15717,7 @@ paths:
       summary: Get list of AWS log ready services
       tags:
       - AWS Logs Integration
+      x-menu-order: 4
       x-undo:
         type: safe
     post:
@@ -15124,6 +15754,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         operationId: TODO
         type: unsafe
@@ -15168,6 +15799,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/integration/azure:
@@ -15205,6 +15837,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15233,6 +15866,7 @@ paths:
       summary: List all Azure integrations
       tags:
       - Azure Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15282,6 +15916,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAzureIntegration
         parameters: []
@@ -15327,6 +15962,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/azure/host_filters:
@@ -15365,6 +16001,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/integration/gcp:
@@ -15402,6 +16039,7 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15429,6 +16067,7 @@ paths:
       summary: List all GCP integrations
       tags:
       - GCP Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15465,6 +16104,7 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteGCPIntegration
         parameters: []
@@ -15510,6 +16150,7 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/pagerduty/configuration/services:
@@ -15546,6 +16187,7 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeletePagerDutyIntegrationService
         parameters:
@@ -15581,6 +16223,7 @@ paths:
       summary: Delete a single service object
       tags:
       - PagerDuty Integration
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -15615,6 +16258,7 @@ paths:
       summary: Get a single service object
       tags:
       - PagerDuty Integration
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -15659,6 +16303,7 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/integration/slack:
@@ -15827,6 +16472,7 @@ paths:
       summary: Get all channels in a Slack integration
       tags:
       - Slack Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15870,6 +16516,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: unsafe
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels/{channel_name}:
@@ -15903,6 +16550,7 @@ paths:
       summary: Remove a Slack integration channel
       tags:
       - Slack Integration
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -15939,6 +16587,7 @@ paths:
       summary: Get a Slack integration channel
       tags:
       - Slack Integration
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -15983,6 +16632,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/webhooks/configuration/custom-variables:
@@ -16019,6 +16669,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
         parameters:
@@ -16054,6 +16705,7 @@ paths:
       summary: Delete a custom variable
       tags:
       - Webhooks Integration
+      x-menu-order: 8
       x-undo:
         type: idempotent
     get:
@@ -16099,6 +16751,7 @@ paths:
       summary: Get a custom variable
       tags:
       - Webhooks Integration
+      x-menu-order: 6
       x-undo:
         type: safe
     put:
@@ -16147,6 +16800,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/integration/webhooks/configuration/webhooks:
@@ -16183,6 +16837,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeleteWebhooksIntegration
         parameters:
@@ -16218,6 +16873,7 @@ paths:
       summary: Delete a webhook
       tags:
       - Webhooks Integration
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -16258,6 +16914,7 @@ paths:
       summary: Get a webhook integration
       tags:
       - Webhooks Integration
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -16306,6 +16963,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/logs-queries/list:
@@ -16356,6 +17014,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/logs/config/index-order:
@@ -16379,6 +17038,7 @@ paths:
       summary: Get indexes order
       tags:
       - Logs Indexes
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -16417,6 +17077,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/logs/config/indexes:
@@ -16441,6 +17102,7 @@ paths:
       summary: Get all indexes
       tags:
       - Logs Indexes
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -16477,6 +17139,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: TODO
         parameters: []
@@ -16515,6 +17178,7 @@ paths:
       summary: Get an index
       tags:
       - Logs Indexes
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -16566,6 +17230,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/logs/config/pipeline-order:
@@ -16590,6 +17255,7 @@ paths:
       summary: Get pipeline order
       tags:
       - Logs Pipelines
+      x-menu-order: 1
       x-undo:
         type: safe
     put:
@@ -16641,6 +17307,7 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v1/logs/config/pipelines:
@@ -16665,6 +17332,7 @@ paths:
       summary: Get all pipelines
       tags:
       - Logs Pipelines
+      x-menu-order: 3
       x-undo:
         type: safe
     post:
@@ -16700,6 +17368,7 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         operationId: DeleteLogsPipeline
         parameters:
@@ -16737,6 +17406,7 @@ paths:
       summary: Delete a pipeline
       tags:
       - Logs Pipelines
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -16773,6 +17443,7 @@ paths:
       summary: Get a pipeline
       tags:
       - Logs Pipelines
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -16818,6 +17489,7 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v1/metrics:
@@ -16873,6 +17545,7 @@ paths:
       summary: Get active metrics list
       tags:
       - Metrics
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/metrics/{metric_name}:
@@ -16908,6 +17581,7 @@ paths:
       summary: Get metric metadata
       tags:
       - Metrics
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -16957,6 +17631,7 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/monitor:
@@ -17055,6 +17730,7 @@ paths:
       summary: Get all monitor details
       tags:
       - Monitors
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -17096,6 +17772,8 @@ paths:
         - process: `service check`
 
         - rum: `rum alert`
+
+        - SLO: `slo alert`
 
         - watchdog: `event alert`
 
@@ -17164,10 +17842,11 @@ paths:
         - **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod",
         "role:db")`
 
-        - **`count`** must be at >= your max threshold (defined in the `options`).
+        - **`count`** must be at greater than or equal to your max threshold (defined
+        in the `options`). It is limited to 100.
 
-        e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should
-        be 3. It is limited to 100.
+        For example, if you''ve specified to notify on 1 critical, 3 ok, and 2 warn
+        statuses, `count` should be 3.
 
 
         **Event Alert Query**
@@ -17300,7 +17979,22 @@ paths:
         to filter results by these tags.
 
         It is only available via the API and isn''t visible or editable in the Datadog
-        UI.'
+        UI.
+
+
+        **SLO Alert Query**
+
+
+        Example: `error_budget("slo_id").over("time_window") operator #`
+
+
+        - **`slo_id`**: The alphanumeric SLO ID of the SLO you are configuring the
+        alert for.
+
+        - **`time_window`**: The time window of the SLO target you wish to alert on.
+        Valid options: `7d`, `30d`, `90d`.
+
+        - **`operator`**: `>=` or `>`'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -17332,6 +18026,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeleteMonitor
         parameters:
@@ -17380,6 +18075,7 @@ paths:
       summary: Check if a monitor can be deleted
       tags:
       - Monitors
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/monitor/groups/search:
@@ -17461,6 +18157,7 @@ paths:
       summary: Monitors group search
       tags:
       - Monitors
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/monitor/search:
@@ -17542,6 +18239,7 @@ paths:
       summary: Monitors search
       tags:
       - Monitors
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/monitor/validate:
@@ -17578,6 +18276,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -17633,6 +18332,7 @@ paths:
       summary: Delete a monitor
       tags:
       - Monitors
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -17681,6 +18381,7 @@ paths:
       summary: Get a monitor's details
       tags:
       - Monitors
+      x-menu-order: 4
       x-undo:
         type: safe
     put:
@@ -17736,8 +18437,49 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v1/monitor/{monitor_id}/downtimes:
+    get:
+      description: Get all downtimes for the specified monitor
+      operationId: ListMonitorDowntimes
+      parameters:
+      - description: The id of the monitor
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Downtime'
+                type: array
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Monitor Not Found error
+      summary: Get all downtimes for a monitor
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-undo:
+        type: safe
   /api/v1/monitor/{monitor_id}/mute:
     post:
       description: Mute the specified monitor.
@@ -17900,6 +18642,7 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
+      x-menu-order: 22
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -17944,6 +18687,7 @@ paths:
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
+      x-menu-order: 23
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -17969,6 +18713,7 @@ paths:
       summary: List your managed organizations
       tags:
       - Organizations
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -18020,6 +18765,7 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: TODO
         parameters: []
@@ -18058,6 +18804,7 @@ paths:
       summary: Get organization information
       tags:
       - Organizations
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -18100,6 +18847,7 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/org/{public_id}/idp_metadata:
@@ -18158,6 +18906,7 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/query:
@@ -18207,6 +18956,7 @@ paths:
       summary: Query timeseries points
       tags:
       - Metrics
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/search:
@@ -18242,6 +18992,7 @@ paths:
       summary: Search metrics
       tags:
       - Metrics
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v1/series:
@@ -18306,11 +19057,12 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
       security:
-      - apiKeyAuthQuery: []
+      - apiKeyAuth: []
       summary: Submit metrics
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/service_dependencies:
@@ -18375,6 +19127,7 @@ paths:
       summary: Get all APM service dependencies
       tags:
       - Service Dependencies
+      x-menu-order: 1
       x-undo:
         type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
@@ -18449,6 +19202,7 @@ paths:
       summary: Get one APM service's dependencies
       tags:
       - Service Dependencies
+      x-menu-order: 2
       x-undo:
         type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
@@ -18517,6 +19271,7 @@ paths:
       summary: Get all SLOs
       tags:
       - Service Level Objectives
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -18562,6 +19317,7 @@ paths:
               sum:httpservice.hits{code:2xx}.as_count()\",\n    \"denominator\": \"\
               sum:httpservice.hits{!code:3xx}.as_count()\"\n  }\n}"
           step: there is a valid "slo" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteSLO
         parameters:
@@ -18611,6 +19367,7 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         type: idempotent
   /api/v1/slo/can_delete:
@@ -18656,8 +19413,213 @@ paths:
       summary: Check if SLOs can be safely deleted
       tags:
       - Service Level Objectives
+      x-menu-order: 7
       x-undo:
         type: safe
+  /api/v1/slo/correction:
+    get:
+      description: Get all Service Level Objective corrections
+      operationId: ListSLOCorrection
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOCorrectionListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get all SLO corrections
+      tags:
+      - Service Level Objective Corrections
+      x-menu-order: 2
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an SLO Correction
+      operationId: CreateSLOCorrection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SLOCorrectionCreateRequest'
+        description: Create an SLO Correction
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOCorrectionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create an SLO correction
+      tags:
+      - Service Level Objective Corrections
+      x-codegen-request-body-name: body
+      x-given:
+        correction:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"slo_id\": \"\
+              {{ slo.data[0].id }}\",\n      \"start\": {{ now_ts }},\n      \"end\"\
+              : {{ hour_later_ts }},\n      \"category\": \"Other\",\n      \"timezone\"\
+              : \"UTC\",\n      \"description\": \"Test Correction\"\n     },\n  \
+              \   \"type\": \"correction\"\n  }\n}"
+          step: there is a valid "correction" for "slo"
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteSLOCorrection
+        parameters:
+        - name: slo_correction_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/slo/correction/{slo_correction_id}:
+    delete:
+      description: Permanently delete the specified SLO correction object
+      operationId: DeleteSLOCorrection
+      parameters:
+      - description: The ID of the SLO correction object
+        in: path
+        name: slo_correction_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Delete an SLO correction
+      tags:
+      - Service Level Objective Corrections
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get an SLO correction
+      operationId: GetSLOCorrection
+      parameters:
+      - description: The ID of the SLO correction object
+        in: path
+        name: slo_correction_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOCorrectionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get an SLO correction for an SLO
+      tags:
+      - Service Level Objective Corrections
+      x-menu-order: 3
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update the specified SLO correction object object
+      operationId: UpdateSLOCorrection
+      parameters:
+      - description: The ID of the SLO correction object
+        in: path
+        name: slo_correction_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SLOCorrectionUpdateRequest'
+        description: The edited SLO correction object.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOCorrectionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Update an SLO correction
+      tags:
+      - Service Level Objective Corrections
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/{slo_id}:
     delete:
       description: 'Permanently delete the specified service level objective object.
@@ -18709,6 +19671,7 @@ paths:
       summary: Delete an SLO
       tags:
       - Service Level Objectives
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -18743,6 +19706,7 @@ paths:
       summary: Get an SLO's details
       tags:
       - Service Level Objectives
+      x-menu-order: 4
       x-undo:
         type: safe
     put:
@@ -18791,6 +19755,7 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/slo/{slo_id}/history:
@@ -18823,6 +19788,17 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: The SLO target. If `target` is passed in, the response will include
+          the error budget that remains.
+        in: query
+        name: target
+        schema:
+          exclusiveMaximum: true
+          exclusiveMinimum: true
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
       responses:
         '200':
           content:
@@ -18851,6 +19827,7 @@ paths:
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
+      x-menu-order: 6
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -18872,6 +19849,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
+      x-menu-order: 22
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -18908,6 +19886,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 19
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -18939,6 +19918,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
+      x-menu-order: 23
       x-undo:
         type: idempotent
     get:
@@ -18969,6 +19949,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
+      x-menu-order: 21
       x-undo:
         type: safe
     put:
@@ -19007,6 +19988,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 20
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests:
@@ -19035,11 +20017,14 @@ paths:
       summary: Get the list of all tests
       tags:
       - Synthetics
+      x-menu-order: 9
       x-undo:
         type: safe
     post:
       deprecated: true
-      description: Create a Synthetic test.
+      description: This endpoint is deprecated. To create a test, use [Create an API
+        test](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test),
+        or [Create a browser test](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test).
       operationId: CreateTest
       requestBody:
         content:
@@ -19079,6 +20064,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 26
       x-undo:
         operationId: TODO
         parameters: []
@@ -19125,6 +20111,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: TODO
         parameters: []
@@ -19166,6 +20153,7 @@ paths:
       summary: Get an API test
       tags:
       - Synthetics
+      x-menu-order: 7
       x-undo:
         type: safe
     put:
@@ -19220,6 +20208,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser:
@@ -19264,6 +20253,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: TODO
         parameters: []
@@ -19286,7 +20276,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SyntheticsTestDetails'
+                $ref: '#/components/schemas/SyntheticsBrowserTest'
           description: OK
         '403':
           content:
@@ -19302,9 +20292,10 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get a test configuration (browser)
+      summary: Get a browser test
       tags:
       - Synthetics
+      x-menu-order: 8
       x-undo:
         type: safe
     put:
@@ -19359,6 +20350,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
@@ -19418,10 +20410,11 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get the test's latest results summaries (browser)
+      summary: Get a browser test's latest results summaries
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -19464,9 +20457,10 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
-      summary: Get a test result (browser)
+      summary: Get a browser test result
       tags:
       - Synthetics
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -19516,6 +20510,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 14
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger/ci:
@@ -19542,10 +20537,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: JSON format is wrong
-      summary: Trigger some Synthetics tests for CI
+      summary: Trigger tests from CI/CD pipelines
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -19580,14 +20576,16 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get a test configuration (API)
+      summary: Get a test configuration
       tags:
       - Synthetics
+      x-menu-order: 24
       x-undo:
         type: safe
     put:
       deprecated: true
-      description: Edit the configuration of a Synthetic test.
+      description: This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test)
+        or [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).
       operationId: UpdateTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -19638,6 +20636,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 25
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -19695,10 +20694,11 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get the test's latest results summaries (API)
+      summary: Get an API test's latest results summaries
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -19739,9 +20739,10 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
-      summary: Get a test result (API)
+      summary: Get an API test result
       tags:
       - Synthetics
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -19793,6 +20794,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
@@ -19829,6 +20831,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 15
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -19870,6 +20873,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
+      x-menu-order: 18
       x-undo:
         type: idempotent
     get:
@@ -19904,6 +20908,7 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
+      x-menu-order: 17
       x-undo:
         type: safe
     put:
@@ -19946,6 +20951,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 16
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -19982,6 +20988,7 @@ paths:
       summary: Get Tags
       tags:
       - Tags
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/tags/hosts/{host_name}:
@@ -20024,6 +21031,7 @@ paths:
       summary: Remove host tags
       tags:
       - Tags
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -20065,6 +21073,7 @@ paths:
       summary: Get host tags
       tags:
       - Tags
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -20119,6 +21128,7 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         operationId: DeleteHostTags
         parameters:
@@ -20178,6 +21188,7 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/usage/analyzed_logs:
@@ -20225,6 +21236,7 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
       - Usage Metering
+      x-menu-order: 17
       x-undo:
         type: safe
   /api/v1/usage/attribution:
@@ -20284,6 +21296,7 @@ paths:
       summary: Get Usage Attribution
       tags:
       - Usage Metering
+      x-menu-order: 29
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -20332,6 +21345,7 @@ paths:
       summary: Get hourly usage for Lambda
       tags:
       - Usage Metering
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/usage/billable-summary:
@@ -20369,6 +21383,55 @@ paths:
       summary: Get billable usage across your account
       tags:
       - Usage Metering
+      x-menu-order: 19
+      x-undo:
+        type: safe
+  /api/v1/usage/compliance-monitoring:
+    get:
+      description: Get hourly usage for Compliance Monitoring.
+      operationId: GetUsageComplianceMonitoring
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageComplianceResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Compliance Monitoring
+      tags:
+      - Usage Metering
+      x-menu-order: 30
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -20414,6 +21477,7 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
       - Usage Metering
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/usage/hosts:
@@ -20459,6 +21523,7 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/usage/incident-management:
@@ -20506,6 +21571,7 @@ paths:
       summary: Get hourly usage for incident management
       tags:
       - Usage Metering
+      x-menu-order: 27
       x-undo:
         type: safe
   /api/v1/usage/indexed-spans:
@@ -20551,6 +21617,7 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
       - Usage Metering
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/usage/ingested-spans:
@@ -20598,6 +21665,7 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
       - Usage Metering
+      x-menu-order: 26
       x-undo:
         type: safe
   /api/v1/usage/iot:
@@ -20645,6 +21713,7 @@ paths:
       summary: Get hourly usage for IoT
       tags:
       - Usage Metering
+      x-menu-order: 28
       x-undo:
         type: safe
   /api/v1/usage/logs:
@@ -20690,6 +21759,7 @@ paths:
       summary: Get hourly usage for Logs
       tags:
       - Usage Metering
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
@@ -20743,6 +21813,7 @@ paths:
       summary: Get hourly usage for Logs by Index
       tags:
       - Usage Metering
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/usage/network_flows:
@@ -20790,6 +21861,7 @@ paths:
       summary: Get hourly usage for Network Flows
       tags:
       - Usage Metering
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/usage/network_hosts:
@@ -20835,6 +21907,7 @@ paths:
       summary: Get hourly usage for Network Hosts
       tags:
       - Usage Metering
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/usage/profiling:
@@ -20882,6 +21955,7 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
       - Usage Metering
+      x-menu-order: 24
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -20934,6 +22008,7 @@ paths:
       summary: Get hourly usage for RUM Sessions
       tags:
       - Usage Metering
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -20981,6 +22056,7 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
       - Usage Metering
+      x-menu-order: 18
       x-undo:
         type: safe
   /api/v1/usage/summary:
@@ -21035,6 +22111,7 @@ paths:
       summary: Get usage across your multi-org account
       tags:
       - Usage Metering
+      x-menu-order: 16
       x-undo:
         type: safe
   /api/v1/usage/synthetics:
@@ -21081,6 +22158,7 @@ paths:
       summary: Get hourly usage for Synthetics Checks
       tags:
       - Usage Metering
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v1/usage/synthetics_api:
@@ -21126,6 +22204,7 @@ paths:
       summary: Get hourly usage for Synthetics API Checks
       tags:
       - Usage Metering
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v1/usage/synthetics_browser:
@@ -21171,6 +22250,7 @@ paths:
       summary: Get hourly usage for Synthetics Browser Checks
       tags:
       - Usage Metering
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v1/usage/timeseries:
@@ -21216,6 +22296,7 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
       - Usage Metering
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v1/usage/top_avg_metrics:
@@ -21283,6 +22364,7 @@ paths:
       summary: Get top custom metrics by hourly average
       tags:
       - Usage Metering
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/usage/traces:
@@ -21332,6 +22414,7 @@ paths:
       summary: Get hourly usage for Trace Search
       tags:
       - Usage Metering
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/usage/tracing-without-limits:
@@ -21383,6 +22466,7 @@ paths:
       summary: Get hourly usage for tracing without limits
       tags:
       - Usage Metering
+      x-menu-order: 25
       x-undo:
         type: safe
   /api/v1/user:
@@ -21405,6 +22489,7 @@ paths:
       summary: List all users
       tags:
       - Users
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -21451,6 +22536,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DisableUser
         parameters:
@@ -21503,6 +22589,7 @@ paths:
       summary: Disable a user
       tags:
       - Users
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -21539,6 +22626,7 @@ paths:
       summary: Get user details
       tags:
       - Users
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -21592,6 +22680,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/validate:
@@ -21617,6 +22706,7 @@ paths:
       summary: Validate API key
       tags:
       - Authentication
+      x-menu-order: 1
       x-undo:
         type: safe
   /monitor/bulk_resolve:
@@ -21707,10 +22797,16 @@ paths:
           protocol:
             default: http
             description: The protocol for accessing the API.
+      - url: https://{site}
+        variables:
+          site:
+            default: localhost:8126
+            description: Local Agent endpoint.
       summary: Send traces
       tags:
       - Tracing
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: idempotent
   /v1/input:
@@ -21830,7 +22926,7 @@ paths:
               schema:
                 type: object
           description: Response from server (always 200 empty JSON).
-        default:
+        '400':
           content:
             application/json:
               schema:
@@ -21860,10 +22956,19 @@ paths:
           protocol:
             default: https
             description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: http-intake.logs
+            description: The subdomain where the API is deployed.
       summary: Send logs
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /v1/monitor/mute_all:
@@ -21950,6 +23055,14 @@ servers:
     protocol:
       default: https
       description: The protocol for accessing the API.
+- url: https://{subdomain}.{site}
+  variables:
+    site:
+      default: datadoghq.com
+      description: Any Datadog deployment.
+    subdomain:
+      default: api
+      description: The subdomain where the API is deployed.
 tags:
 - description: 'Configure your Datadog-AWS integration directly through the Datadog
     API.
@@ -22128,6 +23241,12 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/visualization/services_map/
   name: Service Dependencies
+- description: "SLO Status Corrections allow you to prevent specific time periods\
+    \ from negatively impacting\nyour SLO\u2019s status and error budget. You can\
+    \ use Status Corrections for various purposes, such\nas removing planned maintenance\
+    \ windows, non-business hours, or other time periods that do\nnot correspond to\
+    \ genuine issues."
+  name: Service Level Objective Corrections
 - description: '[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)
 
     (or SLOs) are a key part of the site reliability engineering toolkit.
