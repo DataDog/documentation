@@ -103,7 +103,7 @@ http {
 
 Database logs are often hard to contextualize due to query similarities, variable anonymization, and high usage.
 
-For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Let's correlate slow query analysis with traces.
+For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Below is an example of how to correlate slow query analysis with traces.
 
 #### How?
 
