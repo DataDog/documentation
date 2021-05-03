@@ -104,7 +104,7 @@ The following attributes are related to the geolocation of IP addresses:
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (example `Paris`, `New York`).                                                                                   |
 
-**Note**: By default, the client IP address is retained in Datadog. Reach out to support@datadoghq.com to stop collecting IP addresses. This does not impact the collection of geolocation attributes listed above. 
+**Note**: By default, Datadog stores the client IP address. Reach out to support@datadoghq.com to stop collecting IP addresses. This does not impact the collection of geolocation attributes listed above. 
 
 ## User attributes
 
