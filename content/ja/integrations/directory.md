@@ -17,7 +17,7 @@ display_name: Directory
 draft: false
 git_integration_title: directory
 guid: 0c38c4ef-5266-4667-9fb1-de8f2b73708a
-integration_id: system
+integration_id: システム
 integration_title: Directory
 is_public: true
 kind: インテグレーション
