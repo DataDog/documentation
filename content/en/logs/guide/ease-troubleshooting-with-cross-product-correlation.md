@@ -171,7 +171,7 @@ Here is an example of a slow query execution plan from a slow trace:
 
 #### Why?
 
-[Browser logs][9] inside a RUM event gives context and insight into causes and consequences. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
+[Browser logs][9] inside a RUM event give context and insight into an issue. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:80%;" >}}
 
