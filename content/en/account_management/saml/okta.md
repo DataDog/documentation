@@ -36,9 +36,9 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 
 | Name  |Name Format (optional)   | Value  |
 |---|---|---|
-| NameFormat   | URI Reference | urn:oasis:names:tc:SAML:2.0:attrname-format:uri  |
-| sn  | URI Reference  | user.lastName |
-| givenName  | URI Reference  | user.firstName  |
+| NameFormat   | URI Reference | `urn:oasis:names:tc:SAML:2.0:attrname-format:uri`  |
+| sn  | URI Reference  | `user.lastName` |
+| givenName  | URI Reference  | `user.firstName`  |
 
 ## Group attribute statements (optional)
 
