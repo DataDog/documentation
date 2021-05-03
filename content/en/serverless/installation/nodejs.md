@@ -36,14 +36,14 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Forwarder][2].
+The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you install the Datadog Serverless Plugin. 
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
 1. Install the Datadog Serverless Plugin: 
-	```
+	  ```
     yarn add --dev serverless-plugin-datadog
     ```
 2. In your `serverless.yml`, add the following:
@@ -55,13 +55,17 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     custom:
       datadog:
-        forwarder: # The Datadog Forwarder ARN goes here.
+        addExtension: true
+        apiKey: # Your Datadog API Key goes here.
+        apiKMSKey: # Your Datadog API Key using KMS goes here (recommended).
     ```
-    More information on the Datadog Forwarder ARN or installation can be found [here][2]. For additional settings, see the [plugin documentation][1].
+    Find your Datadog API key on the [API Management page][4]. For additional settings, see the [plugin documentation][1].
+
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[4]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -110,11 +114,7 @@ More information and additional parameters can be found in the [macro documentat
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-The [Datadog CDK Constructs][1] automatically configure ingestion of metrics, traces, and logs from your serverless applications by:
-
-- Installing and configuring the Datadog Lambda library for your Python and Node.js Lambda functions.
-- Enabling the collection of traces and custom metrics from your Lambda functions.
-- Managing subscriptions from the Datadog Forwarder to your Lambda function log groups.
+The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 ### Install the Datadog CDK Constructs Library
 
@@ -128,11 +128,9 @@ yarn add --dev datadog-cdk-constructs
 npm install datadog-cdk-constructs --save-dev
 ```
 
-The Datadog CDK Constructs library is now downloaded and ready to use.
-
 ### Instrument the function
 
-Import the `datadog-cdk-construct` module in your AWS CDK app and add the following configurations (this example is TypeScript, but usage in other languages is similar):
+Import the `datadog-cdk-construct` module in your AWS CDK app and add the following configurations:
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
@@ -141,34 +139,28 @@ import { Datadog } from "datadog-cdk-constructs";
 class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    const datadog = new Datadog(this, "Datadog", {
-      nodeLayerVersion: <LAYER_VERSION>,
-      pythonLayerVersion: <LAYER_VERSION>,
-      addLayers: <BOOLEAN>,
-      forwarderArn: "<FORWARDER_ARN>",
-      flushMetricsToLogs: <BOOLEAN>,
-      site: "<SITE>",
-      apiKey: "{Datadog_API_Key}",
-      apiKMSKey: "{Encrypted_Datadog_API_Key}",
-      enableDDTracing: <BOOLEAN>,
-      injectLogContext: <BOOLEAN>
+
+    const datadog = new Datadog(this, "Datadog", { 
+        nodeLayerVersion: <LAYER_VERSION>, 
+        extensionLayerVersion: <EXTENSION_VERSION>, 
+        apiKey: <Your Datadog API key>,
+        apiKMSKey: <If using KMS, your encrypted Datadog API key (recommended)>,
+        service: <SERVICE> // Optional
+        env: <ENV> // Optional 
     });
-    datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
+    datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);    
   }
 }
 ```
 
-Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the desired version of Datadog Lambda layer (see the [latest releases][2]), and `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][3]).
-
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can use the macro.
+Find your Datadog API key on the [API Management page][4]. Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][2]), and `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][3]).
 
 More information and additional parameters can be found in the [Datadog CDK NPM page][1].
 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://docs.datadoghq.com/serverless/forwarder/
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[3]: https://gallery.ecr.aws/datadog/lambda-extension
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -202,15 +194,12 @@ For example:
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can instrument it with the Datadog CLI. 
-
-More information and additional parameters can be found in the [CLI documentation][5].
+More information and additional parameters can be found in the [CLI documentation][4].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
 [3]: https://docs.datadoghq.com/serverless/forwarder/
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[5]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[4]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -279,8 +268,6 @@ The available `RUNTIME` options are `Node10-x` and `Node12-x`. For `VERSION`, se
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can add the Datadog Lambda library as a layer. 
-
 #### Using the package
 
 **NPM**:
@@ -295,7 +282,7 @@ npm install --save datadog-lambda-js
 yarn add datadog-lambda-js
 ```
 
-See the [latest release][4].
+See the [latest release][3].
 
 ### Configure the function
 
@@ -309,16 +296,15 @@ See the [latest release][4].
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
 
-1. [Install the Datadog Forwarder if you haven't][5].
-2. [Subscribe the Datadog Forwarder to your function's log groups][6].
+1. [Install the Datadog Forwarder if you haven't][4].
+2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[4]: https://www.npmjs.com/package/datadog-lambda-js
-[5]: https://docs.datadoghq.com/serverless/forwarder/
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[3]: https://www.npmjs.com/package/datadog-lambda-js
+[4]: https://docs.datadoghq.com/serverless/forwarder/
+[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 
