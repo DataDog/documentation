@@ -42,7 +42,7 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 
 ## Group attribute statements (optional)
 
-This is only required if you are leveraging [Authn Mapping][4].
+This is required only if you are using [AuthN Mapping][4].
 
 | Name  |Name Format (optional)   | Value  |
 |---|---|---|
