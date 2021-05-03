@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_firewall/'
 draft: false
 git_integration_title: azure_firewall
 has_logo: true
+integration_id: ''
 integration_title: Pare-feu Microsoft Azure
 is_public: true
 kind: integration
