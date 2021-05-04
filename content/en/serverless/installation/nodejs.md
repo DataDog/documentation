@@ -59,6 +59,41 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     More information on the Datadog Forwarder ARN or installation can be found [here][2]. For additional settings, see the [plugin documentation][1].
 
+4. (Optional - only applies if you're using Webpack)
+
+    ### Webpack
+
+    `dd-trace` is known to be not compatible with webpack due to the use of conditional import and other issues. If using webpack, make sure to mark `datadog-lambda-js` and `dd-trace` as [externals](https://webpack.js.org/configuration/externals/) for webpack, so webpack knows these dependencies will be available in the runtime. You should also remove `datadog-lambda-js` and `dd-trace` from `package.json` and the build process to ensure you're using the versions provided by the Datadog Lambda Layer.
+
+    #### serverless-webpack
+
+    If using `serverless-webpack`, make sure to also exclude `datadog-lambda-js` and `dd-trace` in your `serverless.yml` in addition to declaring them as external in your webpack config file.
+
+    **webpack.config.js**
+
+    ```
+    var nodeExternals = require("webpack-node-externals");
+
+    module.exports = {
+      // we use webpack-node-externals to excludes all node deps.
+      // You can manually set the externals too.
+      externals: [nodeExternals(), "dd-trace", "datadog-lambda-js"],
+    };
+    ```
+
+    **serverless.yml**
+
+    ```
+    custom:
+      webpack:
+        includeModules:
+          forceExclude:
+            - dd-trace
+            - datadog-lambda-js
+    ```
+
+
+
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
