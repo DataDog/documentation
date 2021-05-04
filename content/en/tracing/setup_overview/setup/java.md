@@ -118,7 +118,7 @@ If you are unable to get started with APM, optionally you can configure a host/p
 
 {{% /tab %}}
 
-{{% tab “ECS - EC2" %}}
+{{% tab “ECS on EC2" %}}
 
 After installing the Datadog Agent(link to Agent), the Agent will be listening for trace traffic over a Unix Domain Socket at `socketPath: /var/run/datadog/apm.socket` by default. 
 
