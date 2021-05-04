@@ -38,7 +38,7 @@
 data-spy="scroll" data-target="#navbar-example2" data-offset="5"
   class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
 
-  {{ partial "header/header.html" . }}
+  {{ partialCached "header/header.html" . }}
 
   <div class="container">
     <div class="row">
@@ -52,7 +52,7 @@ data-spy="scroll" data-target="#navbar-example2" data-offset="5"
     </div>
   </div>
 
-  {{ partial "footer/footer.html" . }}
+  {{ partialCached "footer/footer.html" . }}
 
   <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
   <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>

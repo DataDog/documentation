@@ -162,7 +162,7 @@
                     {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
 
                     <!-- code example -->
-                    {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint) }}
+                    {{ partialCached "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint) }}
                 </div>
             </div>
         </div>
