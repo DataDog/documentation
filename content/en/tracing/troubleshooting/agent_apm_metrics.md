@@ -23,7 +23,7 @@ Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent 
 | datadog.trace_agent.ratelimit                       | Gauge     | If lower than `1`, it means payloads are being refused due to high resource usage (cpu or memory).       |
 | datadog.trace_agent.receiver.error                  | Count     | Number of times that the API rejected a payload due to an error in either decoding, formatting or other. |
 | datadog.trace_agent.receiver.events_extracted       | Count     | Total APM events sampled.                                                                                |
-| datadog.trace_agent.receiver.events_sampled         | Count     | Total APM events sampled by the `max_events_per_second parameter sampler.                                |
+| datadog.trace_agent.receiver.events_sampled         | Count     | Total APM events sampled by the `max_events_per_second` parameter sampler.                                |
 | datadog.trace_agent.receiver.oom_kill               | Count     | Number of times the Agent killed itself due to excessive memory use (150% of max_memory).                |
 | datadog.trace_agent.receiver.out_chan_fill          | Gauge     | Internal metric. Percentage of fill on the receiver’s output channel.                                    |
 | datadog.trace_agent.receiver.payload_accepted       | Count     | Number of payloads accepted by the Agent.                                                                |
