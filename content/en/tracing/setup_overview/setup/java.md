@@ -143,7 +143,7 @@ If you are unable to get started with APM, optionally you can configure a host/p
 
 {{% /tab %}}
 
-{{% tab "ECS - Lambda" %}}
+{{% tab "Lambda" %}}
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 
