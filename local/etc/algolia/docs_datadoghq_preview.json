@@ -100,7 +100,7 @@
                     "notebooks",
                     "real_user_monitoring",
                     "security",
-                    "security_monitoring",
+                    "security_platform",
                     "synthetics",
                     "tracing",
                     "serverless",
