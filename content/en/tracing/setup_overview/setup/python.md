@@ -119,25 +119,48 @@ For more advanced usage, configuration, and fine-grain control, see Datadog's [A
 
 When using **ddtrace-run**, the following [environment variable options][4] can be used:
 
-| Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
-| ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_TRACE_DEBUG`              | `false`     | Enable debug logging in the tracer.                                                                                                                                                                                                                                         |
-| `DATADOG_PATCH_MODULES`            |             | Override the modules patched for this application execution. It should follow the format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`.                                                                                                                            |
+`DD_TRACE_DEBUG`
+: **Default**: `false`<br>
+Enable debug logging in the tracer.
+
+`DATADOG_PATCH_MODULES`
+: Override the modules patched for this application execution. Follow the format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`
 
 It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][5] documentation for recommendations on how to configure these environment variables.
 
-| Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
-| ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_ENV`                           |             | Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6]. Available in version 0.38+.                                                                                                             |
-| `DD_SERVICE`                       |             | The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you [set the service name in code](#integrations). Available in version 0.38+. |
-| `DD_SERVICE_MAPPING`               |             | Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+. |
-| `DD_VERSION`                       |             | Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.                                                                                                                                                                  |
-| `DD_TAGS`                          |             | A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.                                                                                                                            |
-| `DD_TRACE_ENABLED`            | `true`      | Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.                                                                                                                                                           |
-| `DD_AGENT_HOST`                    | `localhost` | Override the address of the trace Agent host that the default tracer attempts to submit traces to.                                                                                                                                                                          |
-| `DATADOG_TRACE_AGENT_PORT`         | `8126`      | Override the port that the default tracer submit traces to.                                                                                                                                                                                                                 |
-| `DD_TRACE_AGENT_URL`               |             | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.  |
-| `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and trace injection][7].                                                                                                                                                                                                                           |
+`DD_ENV`
+: Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6]. Available in version 0.38+.
+
+`DD_SERVICE`
+: The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you [set the service name in code](#integrations). Available in version 0.38+.
+
+`DD_SERVICE_MAPPING`
+: Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
+
+`DD_VERSION`
+: Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
+
+`DD_TAGS`
+: A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.
+
+`DD_TRACE_ENABLED`
+: **Default**: `true`<br>
+Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.
+
+`DD_AGENT_HOST`
+: **Default**: `localhost`<br>
+Override the address of the trace Agent host that the default tracer attempts to submit traces to.
+
+`DATADOG_TRACE_AGENT_PORT`
+: **Default**: `8126`<br>
+Override the port that the default tracer submit traces to.
+
+`DD_TRACE_AGENT_URL`
+: The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
+
+`DD_LOGS_INJECTION`
+: **Default**: `false`<br>
+Enable [connecting logs and trace injection][7].
 
 ## Further Reading
 
