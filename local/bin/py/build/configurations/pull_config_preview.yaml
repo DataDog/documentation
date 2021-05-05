@@ -425,7 +425,7 @@
           aliases:
             - /real_user_monitoring/setup
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - 'packages/logs/README.md'
       options:
