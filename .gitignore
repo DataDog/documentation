@@ -42,6 +42,7 @@ data/integrations/
 !content/en/integrations/cloudability.md
 !content/en/integrations/cloudcheckr.md
 !content/en/integrations/kubernetes.md
+!content/en/integrations/kubernetes_state_core.md
 !content/en/integrations/rss.md
 !content/en/integrations/system.md
 !content/en/integrations/tcprtt.md

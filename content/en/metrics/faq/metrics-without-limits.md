@@ -27,4 +27,5 @@ Please reach out to your Customer Support Manager if you're interested in this p
 
 
 \*Metrics without Limits is a trademark of Datadog, Inc.
+
 [1]: https://app.datadoghq.com/metric/summary

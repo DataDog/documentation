@@ -31,9 +31,10 @@ After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`T
 {{< img src="synthetics/api_tests/tcp_test_config.png" alt="Define TCP connection"  style="width:90%;" >}}
 
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
-2. **Name** your TCP test.
-3. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
-4. Select the **Locations** to run your TCP test from: TCP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to launch the connection from outside or inside your network.
+2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results. 
+3. **Name** your TCP test.
+4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
+5. Select the **Locations** to run your TCP test from: TCP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to launch the connection from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
@@ -56,7 +57,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 |---------------|-------------------------------------------------------------------------|----------------|
 | response time | `is less than`                                                          | _Integer (ms)_ |
 
-You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your TCP test" style="width:90%;" >}}
 

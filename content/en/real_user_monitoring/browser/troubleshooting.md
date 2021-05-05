@@ -10,7 +10,7 @@ further_reading:
       text: 'Content Security Policy'
 ---
 
-If you experience unexpected behavior with Datadog Browser RUM, this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes. 
+If you experience unexpected behavior with Datadog Browser RUM, this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
 
 ## Missing data
 
@@ -58,7 +58,7 @@ The Browser RUM SDK relies on cookies to store session information and follow a 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
-[2]: https://github.com/DataDog/browser-sdk/blob/master/CHANGELOG.md
+[2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: /real_user_monitoring/browser/#npm
 [4]: /real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /real_user_monitoring/faq/content_security_policy/

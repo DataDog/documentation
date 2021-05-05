@@ -50,6 +50,8 @@ Hit **Create Your First Request** to start designing your test's requests.
 
 {{< img src="synthetics/api_tests/create_request.png" alt="Create your Multistep API test requests"  style="width:90%;" >}}
 
+**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase it.
+
 #### Define the request
 
 {{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
@@ -107,7 +109,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 **Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 10 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 
@@ -180,11 +182,6 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-
-Email notifications include the message defined in this section as well as a summary of failed assertions.
-Notifications example:
-
-{{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications"  style="width:90%;" >}}
 
 Click on **Save** to save your test and have Datadog start executing it.
 

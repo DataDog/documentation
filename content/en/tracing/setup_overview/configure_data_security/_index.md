@@ -151,6 +151,8 @@ apm_config:
 
 * `remove_query_string`: If true, obfuscates query strings in URLs.
 * `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
+
+
 [1]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Stack Traces" %}}

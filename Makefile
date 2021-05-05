@@ -74,6 +74,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'integration_sdk.md' \
 		-a -not -name 'journald.md' \
 		-a -not -name 'kubernetes.md' \
+		-a -not -name 'kubernetes_state_core.md' \
 		-a -not -name 'nxlog.md' \
 		-a -not -name 'rss.md' \
 		-a -not -name 'rsyslog.md' \
