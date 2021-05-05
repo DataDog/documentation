@@ -419,7 +419,7 @@
         dest_path: '/real_user_monitoring/browser/'
         file_name: '_index.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/browser-sdk/blob/master/packages/rum/README.md"]
+          dependencies: ["https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md"]
           title: RUM Browser Monitoring
           kind: documentation
           aliases:
@@ -432,7 +432,7 @@
         dest_path: '/logs/log_collection/'
         file_name: 'javascript.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/browser-sdk/blob/master/packages/logs/README.md"]
+          dependencies: ["https://github.com/DataDog/browser-sdk/blob/main/packages/logs/README.md"]
           title: Browser Log Collection
           kind: documentation
           aliases:
