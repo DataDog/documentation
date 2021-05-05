@@ -173,6 +173,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | JSP Rendering     | 2.3+     | Fully Supported | `jsp`, `jsp-render`, `jsp-compile`             |
 | JUnit             | 4.1+, 5.3+ | Fully Supported | `junit`, `junit-4`, `junit-5`                 |       
 | Project Reactor   | 3.1+     | Fully Supported | `reactor-core`                                 |
+| Quartz            | 2.x      | Fully Supported | `quartz`                                       |
 | RxJava            | 2.x      | Fully Supported | `rxjava`                                       |
 | Spring Data       | 1.8+     | Fully Supported | `spring-data`                                  |
 | Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
