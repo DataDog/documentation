@@ -11,14 +11,18 @@ Cloud Security Posture Management is not currently available in US1-FED or US3.
 
 ## Overview
 
-Datadog Cloud Security Posture Management (CSPM) makes it easy to track the compliance posture of your production environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. Assess the state of your cloud environment, such as security groups, storage buckets, load balancers, databases, and several other popular cloud services. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters, as well as to monitor the integrity of their files and folders. View your compliance posture in one place, CSPM Homepage, with links to explore findings in detail.
+Datadog Cloud Security Posture Management (CSPM) makes it easy to track the security hygiene and compliance posture of your production environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against compliance controls. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against security best practices.
 
-### Terminology
+View your cloud security posture at a higher level level with the CSPM Home page, and drill into the details of compliance findings and analyze historical configurations with the Findings Explorer.
 
-- **Average compliance posture score**: The percentage of your environment that complies with all default cloud configuration and runtime compliance rules. Formula: `(# of resources with 0 findings)` / `(total # of resources scanned)`.
+[Screenshot]
+
+## Terminology
+
+- **Resource**: A configurable entity that needs to be continuously scanned for compliance. Examples include hosts, containers, security groups, users, and customer-managed IAM policies.
+- **Average compliance posture score**: The percentage of your environment that complies with all default cloud configuration and runtime compliance rules. Formula: `(# of resources with 0 findings) / (total # of resources scanned)`.
+- **Control**: A specific recommendation for how technology, people, and processes should be managed. One or more configuration rules map to each control displayed in Datadog.
 - **Requirement**: A group of controls representing a single technical or operational topic, such as “Access Management” or “Networking.” The regulatory framework PCI DSS, for example, has 12 requirements.
-- **Control**: A specific recommendation for how technology, people, and processes should be managed.
-- **Resource**: A configurable entity that needs to be continuously scanned for compliance. Example AWS instances include hosts, containers, security groups, users, and customer-managed IAM policies.
 
 ## Get Started
 
