@@ -133,7 +133,7 @@ require 'timeout'
 def example_method
   puts 'some work'
   sleep(1)
-  raise StandardError.new "This is a exception"
+  raise StandardError.new "This is an exception"
 end
 
 Datadog.tracer.trace('example.trace') do |span|
@@ -178,19 +178,45 @@ Datadog.tracer.trace(name, options) do |span|
 end
 ```
 
-Where `name` should be a `String` that describes the generic kind of operation being done (e.g. `'web.request'`, or `'request.parse'`)
+Where `name` is a `String` that describes the generic kind of operation being done (for example `'web.request'`, or `'request.parse'`), and `options` is an optional `Hash` that accepts the following parameters:
 
-And `options` is an optional `Hash` that accepts the following parameters:
+`service`
+: **Type**: `String`<br>
+The service name which this span belongs.<br>
+**Example**: `'my-web-service'`<br>
+**Default**: Tracer `default-service`, `$PROGRAM_NAME`, or `'ruby'`
 
-| Key | Type | Description | Default |
-| --- | --- | --- | --- |
-| `service`     | `String` | The service name which this span belongs (e.g. `'my-web-service'`) | Tracer `default-service`, `$PROGRAM_NAME` or `'ruby'` |
-| `resource`    | `String` | Name of the resource or action being operated on. Traces with the same resource value will be grouped together for the purpose of metrics (but still independently viewable.) Usually domain specific, such as a URL, query, request, etc. (e.g. `'Article#submit'`, `http://example.com/articles/list`.) | `name` of Span. |
-| `span_type`   | `String` | The type of the span (such as `'http'`, `'db'`, etc.) | `nil` |
-| `child_of`    | `Datadog::Span` / `Datadog::Context` | Parent for this span. If not provided, will automatically become current active span. | `nil` |
-| `start_time`  | `Integer` | When the span actually starts. Useful when tracing events that have already happened. | `Time.now.utc` |
-| `tags`        | `Hash` | Extra tags which should be added to the span. | `{}` |
-| `on_error`    | `Proc` | Handler invoked when a block is provided to trace, and it raises an error. Provided `span` and `error` as arguments. Sets error on the span by default. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
+`resource`
+: **Type**: `String`<br>
+Name of the resource or action being operated on. Traces with the same resource value will be grouped together for the purpose of metrics (but still independently viewable.) Usually domain specific, such as a URL, query, request, etc.<br> 
+**Examples**: `'Article#submit'`, `http://example.com/articles/list`<br>
+**Default**: `name` of Span.
+
+`span_type`
+: **Type**: `String`<br>
+The type of the span.<br>
+**Examples**: `'http'`, `'db'`<br>
+**Default**: `nil`
+
+`child_of`
+: **Type**: `Datadog::Span` / `Datadog::Context`<br>
+Parent for this span. If not provided, will automatically become current active span. <br>
+**Default**: `nil`
+
+`start_time`  
+: **Type**: `Integer`<br>
+When the span actually starts. Useful when tracing events that have already happened. <br>
+**Default**: `Time.now.utc`
+
+`tags`
+: **Type**: `Hash`<br>
+Extra tags which should be added to the span. <br>
+**Default**: `{}`
+
+`on_error`
+: **Type**: `Proc`<br>
+Handler invoked when a block is provided to trace, and it raises an error. Provided `span` and `error` as arguments. Sets error on the span by default. <br>
+**Default**: `proc { |span, error| span.set_error(error) unless span.nil? }`
 
 It's highly recommended you set both `service` and `resource` at a minimum. Spans without a `service` or `resource` as `nil` will be discarded by the Datadog agent.
 
