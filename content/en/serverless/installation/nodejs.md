@@ -116,7 +116,7 @@ More information and additional parameters can be found in the [macro documentat
 
 The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
-### Install the Datadog CDK Constructs Library
+### Install the Datadog CDK Construct Library
 
 Run the following Yarn or NPM command in your CDK project:
 
@@ -143,8 +143,8 @@ class CdkStack extends cdk.Stack {
     const datadog = new Datadog(this, "Datadog", { 
         nodeLayerVersion: <LAYER_VERSION>, 
         extensionLayerVersion: <EXTENSION_VERSION>, 
-        apiKey: <Your Datadog API key>,
-        apiKMSKey: <If using KMS, your encrypted Datadog API key (recommended)>,
+        apiKey: <DATADOG_API_KEY>,
+        apiKMSKey: <ENCRYPTED_DATADOG_API_KEY>, // If using KMS, your encrypted Datadog API key (recommended).
         service: <SERVICE> // Optional
         env: <ENV> // Optional 
     });
