@@ -395,5 +395,5 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum-core/src/rumEvent.types.ts
+[1]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [2]: /ja/logs/processing/attributes_naming_convention/#user-related-attributes

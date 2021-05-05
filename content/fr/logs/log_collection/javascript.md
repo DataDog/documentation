@@ -2,7 +2,7 @@
 aliases:
   - /fr/logs/log_collection/web_browser
 dependencies:
-  - 'https://github.com/DataDog/browser-sdk/blob/master/packages/logs/README.md'
+  - 'https://github.com/DataDog/browser-sdk/blob/main/packages/logs/README.md'
 kind: documentation
 title: Collecte de logs à partir des navigateurs
 ---
@@ -595,5 +595,5 @@ window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 [1]: /fr/account_management/api-app-keys/#api-keys
 [2]: /fr/account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
-[4]: https://github.com/DataDog/browser-sdk/blob/master/packages/logs/BROWSER_SUPPORT.md
-[5]: https://github.com/DataDog/browser-sdk/blob/master/packages/logs/src/logsEvent.types.ts
+[4]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/BROWSER_SUPPORT.md
+[5]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/src/logsEvent.types.ts
