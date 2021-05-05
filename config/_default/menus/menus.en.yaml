@@ -1198,6 +1198,11 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 801
+  - name: Notification Rules
+    url: monitors/incident_management/notification_rules
+    parent: incidents
+    identifier: notification_rules
+    weight: 802
   - name: Monitor-based SLOs
     url: monitors/service_level_objectives/monitor/
     parent: slos
