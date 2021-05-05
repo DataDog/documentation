@@ -21,14 +21,14 @@ integration_id: "kubernetes_state_core"
 
 ## Overview
 
-Get metrics from Kubernetes service in real time to:
+Get metrics from Kubernetes service in real-time to:
 
-- Visualize and monitor kubernetes states
-- Be notified about kubernetes failovers and events.
+- Visualize and monitor Kubernetes states.
+- Be notified about Kubernetes failovers and events.
 
-The Kubernetes State Metrics Core check leverages [kube-state-metrics version 2+][1] and includes major performance and tagging improvments compared to the legacy `kubernetes_state` check.
+The Kubernetes State Metrics Core check leverages [kube-state-metrics version 2+][1] and includes major performance and tagging improvements compared to the legacy `kubernetes_state` check.
 
-As opposed to the legacy check, with the Kubernetes State Metrics Core check you will not need to deploy `kube-state-metrics` in your cluster anymore.
+As opposed to the legacy check, with the Kubernetes State Metrics Core check, you no longer need to deploy `kube-state-metrics` in your cluster.
 
 Kubernetes State Metrics Core provides a better alternative to the legacy `kubernetes_state` check as it offers more granular metrics and tags. See the [Major Changes][2] and [Data Collected][3] for more details.
 
@@ -65,7 +65,7 @@ datadog:
 
 ### Backward incompatibility changes
 
-The Kubernetes State Metrics Core check is not backward compatible, please read the changes carefully before migrating from the legacy `kubernetes_state` check.
+The Kubernetes State Metrics Core check is not backward compatible, be sure to read the changes carefully before migrating from the legacy `kubernetes_state` check.
 
 `kubernetes_state.node.by_condition`
 : A new metric with node name granularity. It replaces `kubernetes_state.nodes.by_condition`.
@@ -80,9 +80,9 @@ The Kubernetes State Metrics Core check is not backward compatible, please read 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Enabling `kubeStateMetricsCore` in your Helm `values.yaml` will also configure the Agent to ignore the auto configuration file for legacy `kubernetes_state` check. The goal is to avoid running both checks simultaneously.
+Enabling `kubeStateMetricsCore` in your Helm `values.yaml` configures the Agent to ignore the auto configuration file for legacy `kubernetes_state` check. The goal is to avoid running both checks simultaneously.
 
-If you still want to enable both checks simultaneously for the migration phase, you can disable the `ignoreLegacyKSMCheck` field in your `values.yaml`.
+If you still want to enable both checks simultaneously for the migration phase, disable the `ignoreLegacyKSMCheck` field in your `values.yaml`.
 
 Note that `ignoreLegacyKSMCheck` will make the Agent only ignore the auto configuration for the legacy `kubernetes_state` check. Custom `kubernetes_state` configurations need to be removed manually.
 
@@ -99,7 +99,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Important Note:** The Kubernetes State Metrics Core check is an alternative to the legacy `kubernetes_state` check, we highly recommand not enabling both checks simultaneously to guarantee consistent metrics.
+**Important Note:** The Kubernetes State Metrics Core check is an alternative to the legacy `kubernetes_state` check. Datadog recommends not enabling both checks simultaneously to guarantee consistent metrics.
 
 ## Data Collected
 
@@ -172,7 +172,7 @@ datadog:
 : Information about a cluster node. Tags:`node` `kernel_version` `os_image` `container_runtime_version` `kubelet_version` `kubeproxy_version` `provider_id` `pod_cidr`.
 
 `kubernetes_state.node.cpu_allocatable`
-: The allocatable cpu of a node that is available for scheduling. Tags:`node` `resource` `unit`.
+: The allocatable CPU of a node that is available for scheduling. Tags:`node` `resource` `unit`.
 
 `kubernetes_state.node.memory_allocatable`
 : The allocatable memory of a node that is available for scheduling. Tags:`node` `resource` `unit`.
@@ -181,7 +181,7 @@ datadog:
 : The allocatable memory of a node that is available for scheduling. Tags:`node` `resource` `unit`.
 
 `kubernetes_state.node.cpu_capacity`
-: The cpu capacity of a node. Tags:`node` `resource` `unit`.
+: The CPU capacity of a node. Tags:`node` `resource` `unit`.
 
 `kubernetes_state.node.memory_capacity`
 : The memory capacity of a node. Tags:`node` `resource` `unit`.
@@ -202,13 +202,13 @@ datadog:
 : Describes whether the container is currently in terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.cpu_limit`
-: The value of cpu limit by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
+: The value of CPU limit by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.memory_limit`
 : The value of memory limit by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.cpu_requested`
-: The value of cpu requested by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
+: The value of CPU requested by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.memory_requested`
 : The value of memory requested by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
@@ -397,19 +397,19 @@ datadog:
 : Information about resource quota usage by resource. Tags:`kube_namespace` `resourcequota`.
 
 `kubernetes_state.limitrange.cpu.min`
-: Information about cpu limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
+: Information about CPU limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
 
 `kubernetes_state.limitrange.cpu.max`
-: Information about cpu limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
+: Information about CPU limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
 
 `kubernetes_state.limitrange.cpu.default`
-: Information about cpu limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
+: Information about CPU limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
 
 `kubernetes_state.limitrange.cpu.default_request`
-: Information about cpu limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
+: Information about CPU limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
 
 `kubernetes_state.limitrange.cpu.max_limit_request_ratio`
-: Information about cpu limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
+: Information about CPU limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
 
 `kubernetes_state.limitrange.memory.min`
 : Information about memory limit range usage by constraint. Tags:`kube_namespace` `limitrange` `type`.
@@ -470,7 +470,7 @@ The Kubernetes State Metrics Core check does not include any events.
 Need help? Contact [Datadog support][7].
 
 [1]: https://kubernetes.io/blog/2021/04/13/kube-state-metrics-v-2-0/
-[2]: /integrations/kubernetes_state_core/#major-changes
+[2]: /integrations/kubernetes_state_core/#migration-from-kubernetes_state-to-kubernetes_state_core
 [3]: /integrations/kubernetes_state_core/#data-collected
 [4]: /agent/cluster_agent/
 [5]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
