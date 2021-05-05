@@ -413,7 +413,7 @@
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - 'packages/rum/README.md'
       options:
@@ -426,7 +426,7 @@
           aliases:
             - /real_user_monitoring/setup
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - 'packages/logs/README.md'
       options:
