@@ -6570,6 +6570,27 @@ components:
             description: The error message.
             type: string
           type: array
+        metadata:
+          description: The metadata object containing additional information about
+            the list of SLOs.
+          properties:
+            page:
+              description: The object containing information about the pages of the
+                list of SLOs.
+              properties:
+                total_count:
+                  description: The total number of resources that could be retrieved
+                    ignoring the parameters and filters in the request.
+                  format: int64
+                  type: integer
+                total_filtered_count:
+                  description: The total number of resources that match the parameters
+                    and filters in the request. This attribute can be used by a client
+                    to determine the total number of pages.
+                  format: int64
+                  type: integer
+              type: object
+          type: object
       type: object
     SLOResponse:
       description: A service level objective response containing a single service
@@ -7794,6 +7815,10 @@ components:
     SyntheticsAPIStep:
       description: The steps used in a Synthetics multistep API test.
       properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
         assertions:
           default: []
           description: Array of assertions used for the test.
@@ -7806,6 +7831,12 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
         name:
           description: The name of the step.
           type: string
@@ -8216,6 +8247,10 @@ components:
           type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
+        setCookie:
+          description: Cookies to be used for the request, using the [Set-Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+            syntax.
+          type: string
         variables:
           description: Array of variables used for the test steps.
           items:
@@ -9389,6 +9424,12 @@ components:
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
+        dnsServerPort:
+          description: DNS server port to use for DNS tests.
+          format: int32
+          maximum: 65535
+          minimum: 1
+          type: integer
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
