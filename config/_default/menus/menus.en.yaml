@@ -1843,7 +1843,7 @@ main:
     identifier: cspm_default_rules
     weight: 204
   - name: Findings Explorer
-    url: /security_platform/findings
+    url: /security_platform/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 205
