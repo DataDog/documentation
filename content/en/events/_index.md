@@ -60,47 +60,94 @@ Target specific event properties using these prefixes:
 
 
 {{< site-region region="us" >}}
-| Filter                          | Description                                                                    |
-|---------------------------------|--------------------------------------------------------------------------------|
-| `sources:github,chef`           | Show events from GitHub OR Chef.                                               |
-| `tags:env-prod,db`              | Show events tagged with #env-prod OR #db.                                      |
-| `hosts:i-0ade23e6,db.myapp.com` | Show events from i-0ade23e6 OR db.myapp.com.                                   |
-| `status:error`                  | Show events with an error status (supports: `error`, `warning`, `success`).    |
-| `priority:low`                  | Show only low-priority events (supports `low` or `normal`, defaults to `all`). |
+
+
+`sources:github,chef`           
+: Show events from GitHub OR Chef.
+
+`tags:env-prod,db`              
+: Show events tagged with #env-prod OR #db.
+
+`hosts:i-0ade23e6,db.myapp.com` 
+: Show events from i-0ade23e6 OR db.myapp.com.
+
+`status:error`                  
+: Show events with an error status (supports: `error`, `warning`, `success`).
+
+`priority:low`                  
+: Show only low-priority events (supports `low` or `normal`, defaults to `all`).
+
 {{< /site-region >}}
 {{< site-region region="eu" >}}
-| Filter                          | Description                                                                    |
-|---------------------------------|--------------------------------------------------------------------------------|
-| `sources:github,chef`           | Show events from GitHub OR Chef.                                               |
-| `tags:env-prod,db`              | Show events tagged with #env-prod OR #db.                                      |
-| `hosts:i-0ade23e6,db.myapp.com` | Show events from i-0ade23e6 OR db.myapp.com.                                   |
-| `status:error`                  | Show events with an error status (supports: `error`, `warning`, `success`).    |
-| `priority:low`                  | Show only low-priority events (supports `low` or `normal`, defaults to `all`). |
+
+`sources:github,chef`           
+: Show events from GitHub OR Chef.
+
+`tags:env-prod,db`              
+: Show events tagged with #env-prod OR #db.
+
+`hosts:i-0ade23e6,db.myapp.com` 
+: Show events from i-0ade23e6 OR db.myapp.com.
+
+`status:error`                  
+: Show events with an error status (supports: `error`, `warning`, `success`).
+
+`priority:low`                  
+: Show only low-priority events (supports `low` or `normal`, defaults to `all`).
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-| Filter                          | Description                                                                    |
-|---------------------------------|--------------------------------------------------------------------------------|
-| `source:github,chef`           | Show events from GitHub OR Chef.                                               |
-| `host:i-0ade23e6,db.myapp.com` | Show events from i-0ade23e6 OR db.myapp.com.                                   |
-| `service:kafka`                | Show events from the `kafka` service.    |
-| `status:error`                 | Show events with an error status (supports: `error`, `warning`, `success`).    |
-| `role:`                        |     |
-| `availability-zone:us-east-1a` | Show events in the `us-east-1a` AWS availability zone (AZ).  |
-| `container_id:foo`             | Show events from the container with the ID `foo`.   |
-| `@evt.name:foo`                | Show the event named `foo`.  |
+
+`source:github,chef`           
+: Show events from GitHub OR Chef.
+
+`host:i-0ade23e6,db.myapp.com` 
+: Show events from i-0ade23e6 OR db.myapp.com.
+
+`service:kafka`                
+: Show events from the `kafka` service.
+
+`status:error`                 
+: Show events with an error status (supports: `error`, `warning`, `success`).
+
+`role:`                        
+: 
+
+`availability-zone:us-east-1a` 
+: Show events in the `us-east-1a` AWS availability zone (AZ).
+
+`container_id:foo`             
+: Show events from the container with the ID `foo`.
+
+`@evt.name:foo`                
+: Show the event named `foo`.
 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
-| Filter                          | Description                                                                    |
-|---------------------------------|--------------------------------------------------------------------------------|
-| `source:github,chef`           | Show events from GitHub OR Chef.                                               |
-| `host:i-0ade23e6,db.myapp.com` | Show events from i-0ade23e6 OR db.myapp.com.                                   |
-| `service:kafka`                | Show events from the `kafka` service.    |
-| `status:error`                 | Show events with an error status (supports: `error`, `warning`, `success`).    |
-| `role:`                        |     |
-| `availability-zone:us-east-1a` | Show events in the `us-east-1a` AWS availability zone (AZ).  |
-| `container_id:foo`             | Show events from the container with the ID `foo`.   |
-| `@evt.name:foo`                | Show the event named `foo`.  |
+
+`source:github,chef`           
+: Show events from GitHub OR Chef.
+
+`host:i-0ade23e6,db.myapp.com` 
+: Show events from i-0ade23e6 OR db.myapp.com.
+
+`service:kafka`                
+: Show events from the `kafka` service.
+
+`status:error`                 
+: Show events with an error status (supports: `error`, `warning`, `success`).
+
+`role:`                        
+: 
+
+`availability-zone:us-east-1a` 
+: Show events in the `us-east-1a` AWS availability zone (AZ).
+
+`container_id:foo`             
+: Show events from the container with the ID `foo`.
+
+`@evt.name:foo`                
+: Show the event named `foo`.
 
 {{< /site-region >}}
 
@@ -152,29 +199,45 @@ Use saved views to automatically configure your events explorer with a preselect
 
 For a more advanced search, use the Datadog event query language, for example:
 
-| Filter                                            | Description                                                               |
-|---------------------------------------------------|---------------------------------------------------------------------------|
-| `tags:env-prod OR db`                             | Show events tagged with #env-prod OR #db.                                 |
-| `tags:security-group:sg-123 AND role:common-node` | Show events tagged with `#security-group:sg-123` AND `#role:common-node`. |
-| `cloud_provider:* NOT "azure"`                    | Show all cloud providers except the ones tagged with "azure".             |
+`tags:env-prod OR db`                             
+: Show events tagged with #env-prod OR #db.
+
+`tags:security-group:sg-123 AND role:common-node` 
+: Show events tagged with `#security-group:sg-123` AND `#role:common-node`.
+
+`cloud_provider:* NOT "azure"`                    
+: Show all cloud providers except the ones tagged with "azure".
 
 Use tag search to find all events with the same key tag, for example:
 
-| Filter               | Description                                                                          |
-|----------------------|--------------------------------------------------------------------------------------|
-| `tags:<KEY>:<VALUE>` | Shows events with the `<KEY>:<VALUE>` tag.                                           |
-| `<KEY>:*`            | Shows all events with the `<KEY>` attached.                                          |
-| `<KEY>`:`<REGEX>`    | Shows all events with `<KEY>:<VALUE>` tag where the `<VALUE>` matches the `<REGEX>`. |
-| `tags:<KEY>`         | This is not a valid search.                                                          |
-| `<KEY>:<VALUE>`      | This is not a valid search.                                                          |
+`tags:<KEY>:<VALUE>` 
+: Shows events with the `<KEY>:<VALUE>` tag.
+
+`<KEY>:*`            
+: Shows all events with the `<KEY>` attached.
+
+`<KEY>`:`<REGEX>`    
+: Shows all events with `<KEY>:<VALUE>` tag where the `<VALUE>` matches the `<REGEX>`.
+
+`tags:<KEY>`         
+: This is not a valid search.
+
+`<KEY>:<VALUE>`      
+: This is not a valid search.
 
 To combine multiple terms into a complex query, use the following Boolean operators:
 
-| Operator | Description                                                                                                           | Example                                   |
-|----------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| `AND`    | **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is the default).        | `redis_* AND down`                        |
-| `OR`     | **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               | `sources:nagios,chef directory OR Mixlib` |
-| `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
+`AND`    
+: **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is the default).        
+: **Example**: `redis_* AND down`
+
+`OR`     
+: **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               
+: **Example**: `sources:nagios,chef directory OR Mixlib`
+
+`NOT`    
+: **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. 
+: **Example**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
 
 **Note**: Some of the advanced query language features like Boolean logic work only in the event stream page, and are not available in graph tiles or dashboard widgets.
 
@@ -192,29 +255,45 @@ sources:nagios,chef status:error cassandra
 
 For a more advanced search, use the Datadog event query language, for example:
 
-| Filter                                            | Description                                                               |
-|---------------------------------------------------|---------------------------------------------------------------------------|
-| `tags:env-prod OR db`                             | Show events tagged with #env-prod OR #db.                                 |
-| `tags:security-group:sg-123 AND role:common-node` | Show events tagged with `#security-group:sg-123` AND `#role:common-node`. |
-| `cloud_provider:* NOT "azure"`                    | Show all cloud providers except the ones tagged with "azure".             |
+`tags:env-prod OR db`                             
+: Show events tagged with #env-prod OR #db.
+
+`tags:security-group:sg-123 AND role:common-node` 
+: Show events tagged with `#security-group:sg-123` AND `#role:common-node`.
+
+`cloud_provider:* NOT "azure"`                    
+: Show all cloud providers except the ones tagged with "azure".
 
 Use tag search to find all events with the same key tag, for example:
 
-| Filter               | Description                                                                          |
-|----------------------|--------------------------------------------------------------------------------------|
-| `tags:<KEY>:<VALUE>` | Shows events with the `<KEY>:<VALUE>` tag.                                           |
-| `<KEY>:*`            | Shows all events with the `<KEY>` attached.                                          |
-| `<KEY>`:`<REGEX>`    | Shows all events with `<KEY>:<VALUE>` tag where the `<VALUE>` matches the `<REGEX>`. |
-| `tags:<KEY>`         | This is not a valid search.                                                          |
-| `<KEY>:<VALUE>`      | This is not a valid search.                                                          |
+`tags:<KEY>:<VALUE>` 
+: Shows events with the `<KEY>:<VALUE>` tag.
+
+`<KEY>:*`            
+: Shows all events with the `<KEY>` attached.
+
+`<KEY>`:`<REGEX>`    
+: Shows all events with `<KEY>:<VALUE>` tag where the `<VALUE>` matches the `<REGEX>`.
+
+`tags:<KEY>`         
+: This is not a valid search.
+
+`<KEY>:<VALUE>`      
+: This is not a valid search.
 
 To combine multiple terms into a complex query, use the following Boolean operators:
 
-| Operator | Description                                                                                                           | Example                                   |
-|----------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| `AND`    | **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is the default).        | `redis_* AND down`                        |
-| `OR`     | **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               | `sources:nagios,chef directory OR Mixlib` |
-| `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
+`AND`    
+: **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is the default).        
+: **Example**: `redis_* AND down`
+
+`OR`     
+: **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               
+: **Example**: `sources:nagios,chef directory OR Mixlib`
+
+`NOT`    
+: **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. 
+: **Example**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
 
 **Note**: Some of the advanced query language features like Boolean logic work only in the event stream page, and are not available in graph tiles or dashboard widgets.
 
@@ -234,11 +313,17 @@ For a more advanced search, use the Datadog log query language. See the [Log Sea
 
 To combine multiple terms into a complex query, use the following Boolean operators:
 
-| Operator | Description                                                                                                           | Example                                   |
-|----------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| `AND`    | **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is the default).        | `redis_* AND down`                        |
-| `OR`     | **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               | `sources:nagios,chef directory OR Mixlib` |
-| `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
+`AND`    
+: **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is the default).        
+: **Example**: `redis_* AND down`
+
+`OR`     
+: **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               
+: **Example**: `sources:nagios,chef directory OR Mixlib`
+
+`NOT`    
+: **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. 
+: **Example**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
 
 [6]: logs/search_syntax/
 
@@ -250,11 +335,17 @@ For a more advanced search, use the Datadog log query language. See the [Log Sea
 
 To combine multiple terms into a complex query, use the following Boolean operators:
 
-| Operator | Description                                                                                                           | Example                                   |
-|----------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| `AND`    | **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is the default).        | `redis_* AND down`                        |
-| `OR`     | **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               | `sources:nagios,chef directory OR Mixlib` |
-| `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
+`AND`    
+: **Intersection**: both terms are in the selected events (for tags, if nothing is added, `AND` is the default).        
+: **Example**: `redis_* AND down`
+
+`OR`     
+: **Union**: either term is contained in the selected events. Use a comma (`,`) for tags.                               
+: **Example**: `sources:nagios,chef directory OR Mixlib`
+
+`NOT`    
+: **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. 
+: **Example**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
 
 [7]: logs/search_syntax/
 
@@ -279,15 +370,26 @@ By default, related events are aggregated when displayed in the events stream. T
 
 Datadog supports `@notifications`, for example:
 
-| Example                                 | Description                                                                                      |
-|-----------------------------------------|--------------------------------------------------------------------------------------------------|
-| `@support-datadog`                      | Creates a Datadog support ticket when posted directly to your events (including comments). |
-| `@all`                                  | Sends a notification to all members of your organization.                                        |
-| `@john`                                 | Notifies the user named `john`.                                                                  |
-| `@test@example.com`                     | Sends an email to `test@example.com`.                                                            |
-| `@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>` | Posts the event or graph to the specified Slack channel.                                         |
-| `@webhook`                              | Alerts or triggers the webhook. See the [blog post on webhooks][7].                              |
-| `@pagerduty`                            | Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`. |
+`@support-datadog`                      
+: Creates a Datadog support ticket when posted directly to your events (including comments).
+
+`@all`                                  
+: Sends a notification to all members of your organization.
+
+`@john`                                 
+: Notifies the user named `john`.
+
+`@test@example.com`                     
+: Sends an email to `test@example.com`.
+
+`@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>` 
+: Posts the event or graph to the specified Slack channel.
+
+`@webhook`                              
+: Alerts or triggers the webhook. See the [blog post on webhooks][7].
+
+`@pagerduty`                            
+: Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`.
 
 ## Further Reading
 
