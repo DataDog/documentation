@@ -25,7 +25,7 @@ To configure a new Notification Rule:
 
 **Example:** Set a Notification Rule to automatically notify executives whenever a SEV-1 incident is declared and when that incident moves through different states of progression.
 
-{{< img src="monitors/incidents/placeholder.png" alt="Placeholder"  style="width:80%;">}}
+{{< img src="monitors/incidents/notification_rules_config.jpeg" alt="Notification Rules Config"  style="width:80%;">}}
 
 ## Managing Notification Rules
 
@@ -36,7 +36,7 @@ In the *Notification Rules* section of your [Incident Settings][1], you can perf
 - *Copy* - Hover over any individual Notification Rule and click the **Copy** icon button next to the Rule's toggle
 - *Delete* - Hover over any individual Notification Rule and click the **Delete** icon button next to the Rule's toggle
 
-{{< img src="monitors/incidents/placeholder.png" alt="Placeholder"  style="width:80%;">}}
+{{< img src="monitors/incidents/notification_rules_list.png" alt="Notification Rules List"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/incidents/settings
 [2]: /monitors/notifications/?tab=is_alert#notify-your-team
