@@ -9,7 +9,7 @@ further_reading:
     tag: Documentation
     text: Stratégie de sécurité de contenu
 ---
-Si la fonctionnalité RUM Browser de Datadog se comporte de manière inattendue, consultez ce guide pour voir les solutions proposées. Si vous ne parvenez pas à résoudre votre problème, contactez l'[assistance Datadog][1] pour obtenir de l'aide. Assurez-vous de mettre régulièrement à jour le [SDK RUM Browser][2], car chaque version contient des améliorations et des correctifs. 
+Si la fonctionnalité RUM Browser de Datadog se comporte de manière inattendue, consultez ce guide pour voir les solutions proposées. Si vous ne parvenez pas à résoudre votre problème, contactez l'[assistance Datadog][1] pour obtenir de l'aide. Assurez-vous de mettre régulièrement à jour le [SDK RUM Browser][2], car chaque version contient des améliorations et des correctifs.
 
 ## Données manquantes
 
@@ -57,7 +57,7 @@ Le SDK RUM Browser utilise des cookies pour stocker des informations de session 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/help
-[2]: https://github.com/DataDog/browser-sdk/blob/master/CHANGELOG.md
+[2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: /fr/real_user_monitoring/browser/#npm
 [4]: /fr/real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /fr/real_user_monitoring/faq/content_security_policy/
