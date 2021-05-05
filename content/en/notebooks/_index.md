@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Notebooks combine graphs and text in a linear, cell-based format. They are help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
+Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
 {{< img src="notebooks/demo_notebook.png" alt="demo notebook"  style="width:90%;">}}
 
