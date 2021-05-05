@@ -20,9 +20,8 @@ further_reading:
   text: "Monitor AWS Lambda functions deployed using container images"
 ---
 
-{{< img src="serverless/datadog_serverless_overview.png" alt="Datadog Serverless Overview"  style="width:100%;">}}
+{{< vimeo 543362476 >}}
 
-## Overview
 
 Serverless is a concept where you write event-driven code and upload it to a cloud provider, which manages all of the underlying computational resources. [Datadog Serverless][1] brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view.
 
