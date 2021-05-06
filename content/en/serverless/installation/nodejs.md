@@ -26,8 +26,8 @@ further_reading:
 
 If not already configured:
 
-- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
-- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
+- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS.
+- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
@@ -38,11 +38,11 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 
 The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Forwarder][2].
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you install the Datadog Serverless Plugin. 
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you install the Datadog Serverless Plugin.
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
-1. Install the Datadog Serverless Plugin: 
+1. Install the Datadog Serverless Plugin:
 	```
     yarn add --dev serverless-plugin-datadog
     ```
@@ -58,6 +58,37 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
         forwarder: # The Datadog Forwarder ARN goes here.
     ```
     More information on the Datadog Forwarder ARN or installation can be found [here][2]. For additional settings, see the [plugin documentation][1].
+
+4. (Optional - only applies if you're using Webpack)
+
+    `dd-trace` is known to be not compatible with webpack due to the use of conditional import and other issues. If using webpack, make sure to mark `datadog-lambda-js` and `dd-trace` as [externals](https://webpack.js.org/configuration/externals/) for webpack, so webpack knows these dependencies will be available in the runtime. You should also remove `datadog-lambda-js` and `dd-trace` from `package.json` and the build process to ensure you're using the versions provided by the Datadog Lambda Layer.
+
+    If using `serverless-webpack`, make sure to also exclude `datadog-lambda-js` and `dd-trace` in your `serverless.yml` in addition to declaring them as external in your webpack config file.
+
+    **webpack.config.js**
+
+    ```
+    var nodeExternals = require("webpack-node-externals");
+
+    module.exports = {
+      // we use webpack-node-externals to excludes all node deps.
+      // You can manually set the externals too.
+      externals: [nodeExternals(), "dd-trace", "datadog-lambda-js"],
+    };
+    ```
+
+    **serverless.yml**
+
+    ```
+    custom:
+      webpack:
+        includeModules:
+          forceExclude:
+            - dd-trace
+            - datadog-lambda-js
+    ```
+
+
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
@@ -202,7 +233,7 @@ For example:
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can instrument it with the Datadog CLI. 
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can instrument it with the Datadog CLI.
 
 More information and additional parameters can be found in the [CLI documentation][5].
 
@@ -279,7 +310,7 @@ The available `RUNTIME` options are `Node10-x` and `Node12-x`. For `VERSION`, se
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can add the Datadog Lambda library as a layer. 
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can add the Datadog Lambda library as a layer.
 
 #### Using the package
 
@@ -304,6 +335,7 @@ See the [latest release][4].
 3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
 4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
+6. If you're using webpack, please note that `dd-trace` is known to be not compatible with webpack due to the use of conditional import and other issues. Make sure to mark `datadog-lambda-js` and `dd-trace` as [externals](https://webpack.js.org/configuration/externals/) for webpack, so webpack knows these dependencies will be available in the runtime. You should also remove `datadog-lambda-js` and `dd-trace` from `package.json` and the build process to ensure you're using the versions provided by the Datadog Lambda Layer.
 
 ### Subscribe the Datadog Forwarder to the log groups
 
