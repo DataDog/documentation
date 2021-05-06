@@ -204,7 +204,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [7]: /synthetics/api_tests/icmp_tests
 [8]: /synthetics/search/#search
 [9]: https://restfulapi.net/json-jsonpath/
-[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [12]: /api/v1/synthetics/#create-a-test
 [13]: /monitors/notifications/?tab=is_alert#notification
 [14]: https://www.markdownguide.org/basic-syntax/
