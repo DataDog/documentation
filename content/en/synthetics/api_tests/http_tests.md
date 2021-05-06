@@ -27,7 +27,7 @@ HTTP tests can be run from [**managed**][1] and [**private locations**][2] depen
 
 ## Configuration
 
-After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][18], or [`ICMP` test][7]), you can define your test's request.
+After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][17], or [`ICMP` test][7]), you can define your test's request.
 
 ### Define request
 
