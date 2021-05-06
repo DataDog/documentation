@@ -57,7 +57,7 @@ Logs can be valuable as individual events, but sometimes valuable information li
 
 ### Fields
 
-With the field aggregation, all logs matching the query filter are aggregated into groups based on the value of a log facet. On top of these aggregates, you can extract the following measures:
+With the field aggregation, all logs matching the query filter are aggregated into groups based on the value of one or multiple log facets. On top of these aggregates, you can extract the following measures:
 
 - **count of logs** per group
 - **unique count** of coded values for a facet per group
@@ -65,7 +65,7 @@ With the field aggregation, all logs matching the query filter are aggregated in
 
 **Note**: Individual logs having multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-Groups support the [Timeseries](#timeseries), [Toplist](#toplist) and [Table](#table) visualizations.
+When there are multiple dimensions (or facets), the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension. Fields support one dimension for the [Table](#table) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Toplist](#toplist) vizualizations.
 
 ### Patterns
 
@@ -159,7 +159,6 @@ For example, the following Toplist shows the **top 15 Customers** on a merchant 
 
 Visualize the top values from a [facet][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update a search query or drill through logs corresponding to either dimension.
 
-- When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 - When there are multiple measures, the top or bottom list is determined according to the first measure.
 - The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
