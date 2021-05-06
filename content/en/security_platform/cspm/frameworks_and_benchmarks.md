@@ -27,7 +27,7 @@ Each default rule maps to one or more controls within a compliance framework or 
 
 ## Customize how your environment is scanned by each rule
 
-On the [Rules][9] page, hover over a rule and click on the pencil icon to edit a rule **OR** select `New Rule` at the top of the page. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how a rule scans your environment.
+On the [Rules][6] page, hover over a rule and click on the pencil icon to edit a rule at the top of the page. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how a rule scans your environment.
 
 For example, you can remove all resources tagged with `env:staging` because this environment is not running production applications using the **Never trigger a signal when** function. Or, you may want to limit scope for a certain rule to resources tagged with `compliance:pci` using the **Only trigger a signal when** function.
 
@@ -35,14 +35,14 @@ For example, you can remove all resources tagged with `env:staging` because this
 
 ## Set notification targets for rules
 
-On the [Rules][6] page, hover over a rule and click on the pencil icon to edit a rule at the top of the page. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how a rule scans your environment. The complete list of notification options are:
+From the [Rules][6] page, you can add notification targets. The complete list of notification options are:
 
-- Slack
-- Jira
-- PagerDuty
-- ServiceNow
-- Microsoft Teams
-- Webhooks
+- [Slack][7]
+- [Jira][8]
+- [PagerDuty][9]
+- [ServiceNow][10]
+- [Microsoft Teams][11]
+- [Webhooks][12]
 
 ## Further reading
 
@@ -54,3 +54,9 @@ On the [Rules][6] page, hover over a rule and click on the pencil icon to edit a
 [4]: /security_platform/security_monitoring/
 [5]: /integrations/amazon_cloudtrail/
 [6]: https://app.datadoghq.com/security/configuration/rules/
+[7]: /integrations/slack/
+[8]: /integrations/jira/
+[9]: /integrations/pagerduty
+[10]: /integrations/servicenow/
+[11]: /integrations/microsoft_teams/
+[12]: /integrations/webhooks/
