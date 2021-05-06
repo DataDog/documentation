@@ -118,7 +118,6 @@ Tests can be only recorded from **[Google Chrome][11]**. To record your test, do
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/identify_synthetics_bots/
-[2]: TOADD
 [3]: /security/synthetics
 [4]: /synthetics/private_locations/
 [5]: /help/
