@@ -15,7 +15,7 @@ further_reading:
 
 Use the [Manage Monitors][1] page to search, delete, mute, or resolve your monitors and edit monitor tags in bulk. You can also clone or edit individual monitors from the search results.
 
-{{< img src="monitors/manage_monitor/page.png" alt="manage monitor page"  >}}
+{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="manage monitor page"  >}}
 
 ## Search
 
@@ -55,7 +55,7 @@ There are a few caveats regarding quoted fields:
 
 Advanced search lets you filter monitors by any combination of monitor attributes:
 
-| Attribute    | Description                                                                               |
+| Attribute    | Description                                                                                     |
 |--------------|-------------------------------------------------------------------------------------------------|
 | Status       | The monitor status: `Triggered` (`Alert`, `Warn`, `No Data`) or `OK`                            |
 | Muted        | The muted state of the monitor: `true` or `false`                                               |
