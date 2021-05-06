@@ -30,11 +30,14 @@ By granting permissions to roles, any user who is associated with that role rece
 
 ## Datadog default roles
 
-| Role                       | Description                                                                                                                                                                                                                                  |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Datadog Admin Role**     | Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][2]. They can also promote standard users to administrators.                                          |
-| **Datadog Standard Role**  | Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][2], [monitors][3], [events][4], and [notebooks][5]. Standard users can also invite other users to organizations.                      |
-| **Datadog Read Only Role** | Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][2] with someone outside their unit. |
+Datadog Admin Role
+: Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][2]. They can also promote standard users to administrators.
+
+Datadog Standard Role
+: Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][2], [monitors][3], [events][4], and [notebooks][5]. Standard users can also invite other users to organizations.
+
+Datadog Read Only Role
+: Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][2] with someone outside their unit.
 
 ## Custom roles
 
