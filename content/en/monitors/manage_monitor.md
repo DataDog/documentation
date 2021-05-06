@@ -67,8 +67,8 @@ Advanced search lets you filter monitors by any combination of monitor attribute
 | Scope        | Search tags listed in the `from` field of your monitor query.                                   |
 | Metric/Check | The metric or service check being monitored                                                     |
 | Notification | The person or service receiving a notification                                                  |
-| Muted_left   | The time remaing before downtime stops muting notification for this monitor. Searching for `muted_left:30m` returns all monitors that are still muted for at most 30 minutes. Supported units are seconds (`s`), minutes (`m`), hours (`h`), and weeks (`w`).    |
-| Muted_elapsed| The time elapsed since a downtime started muting notification for this monitor. Searching for `muted_elapsed:30d` returns all monitors that have been muted for at least 30 days. Supported units are seconds (`s`), minutes (`m`), hours (`h`), and weeks (`w`). |
+| Muted left   | The time remaining before downtime stops muting the notification for this monitor. Searching for `muted_left:30m` returns all monitors that are still muted for at most 30 minutes. Supported units are seconds (`s`), minutes (`m`), hours (`h`), and weeks (`w`).    |
+| Muted elapsed | The time elapsed since a downtime started muting the notification for this monitor. Searching for `muted_elapsed:30d` returns all monitors that have been muted for at least 30 days. Supported units are seconds (`s`), minutes (`m`), hours (`h`), and weeks (`w`). |
 
 Check any number of boxes to find your monitors. The following rules apply:
 
