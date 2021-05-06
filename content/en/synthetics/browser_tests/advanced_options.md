@@ -70,5 +70,5 @@ Opening your subtest in the main tab means that your subtest is the continuation
 [1]: /synthetics/browser_tests/
 [2]: /synthetics/browser_tests/actions/
 [3]: /security/synthetics/
-[4]: TOADD
+[4]: /synthetics/browser_tests/?tab=privacy#test-configuration
 [5]: /synthetics/browser_tests/actions/#subtests
