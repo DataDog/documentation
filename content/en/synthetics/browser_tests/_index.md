@@ -107,7 +107,7 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop in **Incognito mode** to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
 2. Click on **Start recording** to begin recording your browser test.
 3. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][11] within your browser test scenario on the left.
-4. In addition to the automatically recorded steps, you can also use the [steps][12] available in the upper left corner to enrich your scenario:
+4. In addition to the automatically recorded steps, you can also use the [steps][11] available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps"  style="width:80%;">}}
 
     **Note**: You should always make sure to **end your browser test with an [assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
