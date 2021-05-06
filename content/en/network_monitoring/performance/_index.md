@@ -46,5 +46,4 @@ NPM makes it simple to monitor complex networks with built in support for contai
 
 [1]: https://app.datadoghq.com/network
 [2]: https://app.datadoghq.com/network/map
-[3]: https://www.datadoghq.com/blog/npm-windows-support/
-[4]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
+[3]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
