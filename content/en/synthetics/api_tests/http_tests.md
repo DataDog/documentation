@@ -209,6 +209,6 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [12]: /monitors/notifications/?tab=is_alert#notification
 [13]: https://www.markdownguide.org/basic-syntax/
 [15]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[16]: /synthetics/settings/#global-variables
+[15]: /synthetics/settings/#global-variables
 [17]: /synthetics/api_tests/errors/#ssl-errors
 [18]: /synthetics/api_tests/dns_tests
