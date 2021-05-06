@@ -111,6 +111,7 @@ snmp_listener:
       tags:
       - "key1:val1"
       - "key2:val2"
+      loader: core # use SNMP corecheck implementation
     - network: 2.3.4.5/24
       version: 2
       port: 161
@@ -118,6 +119,7 @@ snmp_listener:
       tags:
       - "key1:val1"
       - "key2:val2"
+      loader: core
 ```
 
 {{% /tab %}}
@@ -141,6 +143,7 @@ snmp_listener:
       tags:
         - "key1:val1"
         - "key2:val2"
+      loader: core
     - network: 2.3.4.5/24
       version: 3
       snmp_version: 3
@@ -152,6 +155,7 @@ snmp_listener:
       tags:
         - "key1:val1"
         - "key2:val2"
+      loader: core
 ```
 
 {{% /tab %}}
