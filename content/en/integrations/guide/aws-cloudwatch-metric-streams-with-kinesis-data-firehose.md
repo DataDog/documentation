@@ -109,7 +109,7 @@ If you want to set up metric streams using the AWS Console, follow these steps f
  - Enable error logging.
 2. Create your [CloudWatch Metric Stream][2] with the following steps:
  1. Choose whether you want to stream all CloudWatch metrics, or choose specific namespaces with “Include” or “Exclude” lists.
-   {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/cloudwatch-metric-stream.png" alt="Metric streams selection tab" responsive="true" style="width:60%;">}}
+   {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/cloudwatch-metric-stream.png" alt="Cloudwatch metric stream" responsive="true" style="width:60%;">}}
  2. Select the Firehose you created in Step 1 to use for sending the metrics to Datadog.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/firehose.png" alt="Metric streams selection tab" responsive="true" style="width:60%;">}}
  3. Create a new service role to put records in Kinesis Data Firehose.
