@@ -81,7 +81,7 @@ Datadog recommends using CloudFormation because it's automatic and easier if you
  
 Once the stack has been successfully created, wait five minutes for Datadog to recognize this. Then go to Datadog’s [AWS Integration tile][1] to verify this is working by viewing the "CloudWatch Metric Streaming" tab for the specified AWS account and noting the activated regions.
  
-{{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-regions.png" alt="Metric streams selection tab" responsive="true" style="width:60%;">}}
+{{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-regions.png" alt="Active regions" responsive="true" style="width:60%;">}}
  
  
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
