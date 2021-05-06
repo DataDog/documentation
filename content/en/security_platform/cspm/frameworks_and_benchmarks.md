@@ -1,5 +1,5 @@
 ---
-title: Compliance Frameworks and Industry Benchmarks
+title: Frameworks and Industry Benchmarks
 kind: documentation
 further_reading:
 - link: "security_platform/default_rules"
@@ -7,7 +7,7 @@ further_reading:
   text: "Explore default cloud configuration rules"
 - link: "security_platform/cspm/findings"
   tag: "Documentation"
-  text: "Search and explore compliance findings"
+  text: "Search and explore CSPM findings"
 ---
 
 {{< site-region region="us3,gov" >}}
