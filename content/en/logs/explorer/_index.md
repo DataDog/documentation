@@ -57,7 +57,7 @@ Logs can be valuable as individual events, but sometimes valuable information li
 
 ### Fields
 
-With the fields aggregation, all logs matching the query filter are aggregated into groups based on the value of one or multiple log facets. On top of these aggregates, you can extract the following measures:
+With fields aggregation, all logs matching the query filter are aggregated into groups based on the value of one or multiple log facets. On top of these aggregates, you can extract the following measures:
 
 - **count of logs** per group
 - **unique count** of coded values for a facet per group
@@ -65,7 +65,7 @@ With the fields aggregation, all logs matching the query filter are aggregated i
 
 **Note**: Individual logs having multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-The fields aggregation supports one dimension for the [Table](#table) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Toplist](#toplist) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension. 
+Fields aggregation supports one dimension for the [Table](#table) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Toplist](#toplist) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension. 
 
 ### Patterns
 
