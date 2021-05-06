@@ -3,6 +3,10 @@ title: Cloud Workload Security
 kind: documentation
 ---
 
+<div class="alert alert-warning">
+Cloud Workload Security is currently in beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> for more information.
+</div>
+
 ## Overview
 
 Datadog Cloud Workload Security (CSW) detects threats to your production workloads in real time. With Cloud Workload Security, monitor file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level. Use **File Integrity Monitoring (FIM)** to watch for changes to key files and directories on hosts or containers in real-time or **Process Execution Monitoring** to monitor process executions for malicious activity on hosts or containers in real time.
