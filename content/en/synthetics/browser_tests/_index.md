@@ -94,7 +94,7 @@ A notification is sent according to the set of alerting conditions. To configure
 
     Notification messages include the **message** defined in this section and information about the failing locations.
 
-2. Choose your [services][10] and/or team members to notify.
+2. Choose your [services][8] and/or team members to notify.
 3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 4. Click **Save Details and Record Test**.
 
