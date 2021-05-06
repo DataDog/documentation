@@ -100,7 +100,7 @@ A notification is sent according to the set of alerting conditions. To configure
 
 ## Record your steps
 
-Tests can be only recorded from **[Google Chrome][11]**. To record your test, download the [Datadog Record Test extension for Google Chrome][12].
+Tests can be only recorded from **[Google Chrome][9]**. To record your test, download the [Datadog Record Test extension for Google Chrome][10].
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test"  >}}
 
