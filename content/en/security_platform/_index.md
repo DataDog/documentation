@@ -13,6 +13,6 @@ Bring speed and scale to your production security operations. Datadog's Security
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/security_platform/security_monitoring">}}<u>Security Monitoring</u>: Detect threats, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration, to your application and infrastructure in real time.{{< /nextlink >}}
   {{< nextlink href="/security_platform/cspm">}}<u>Cloud Security Posture Management</u>: Track the security hygiene and compliance posture of your production environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.{{< /nextlink >}}
-  {{< nextlink href="/security_monitoring/cloud_workload_security">}}<u>Cloud Workload Security</u>: Monitor file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level.{{< /nextlink >}}
+  {{< nextlink href="/security_platform/cloud_workload_security">}}<u>Cloud Workload Security</u>: Monitor file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level.{{< /nextlink >}}
 {{< /whatsnext >}}
 
