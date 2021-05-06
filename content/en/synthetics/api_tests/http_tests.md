@@ -210,5 +210,5 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [13]: https://www.markdownguide.org/basic-syntax/
 [14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [15]: /synthetics/settings/#global-variables
-[17]: /synthetics/api_tests/errors/#ssl-errors
+[16]: /synthetics/api_tests/errors/#ssl-errors
 [18]: /synthetics/api_tests/dns_tests
