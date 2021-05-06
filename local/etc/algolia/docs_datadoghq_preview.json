@@ -255,6 +255,7 @@
             ["gcp", "google cloud platform"],
             ["aws", "amazon web service"],
             ["RUM", "rum", "real user monitoring"]
+            ["Role Permissions", "permissions"]
         ]
     },
     "only_content_level": true,
