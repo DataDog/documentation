@@ -128,6 +128,6 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 [9]: https://www.google.com/chrome
 [10]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [11]: /synthetics/browser_tests/actions/
-[12]: /synthetics/browser_tests/actions#manually-added-steps
+[12]: /synthetics/browser_tests/actions#assertion
 [13]: https://app.datadoghq.com/synthetics/browser/create
 [14]: /api/latest/synthetics/#get-all-locations-public-and-private
