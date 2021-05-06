@@ -202,7 +202,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [5]: /synthetics/api_tests/ssl_tests
 [6]: /synthetics/api_tests/tcp_tests
 [7]: /synthetics/api_tests/icmp_tests
-[9]: /synthetics/search/#search
+[8]: /synthetics/search/#search
 [10]: https://restfulapi.net/json-jsonpath/
 [11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [12]: /api/v1/synthetics/#create-a-test
