@@ -57,7 +57,7 @@ Browser RUM SDK は、クッキーに依存してセッション情報を保存�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/help
-[2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
+[2]: https://github.com/DataDog/browser-sdk/blob/master/CHANGELOG.md
 [3]: /ja/real_user_monitoring/browser/#npm
 [4]: /ja/real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /ja/real_user_monitoring/faq/content_security_policy/
