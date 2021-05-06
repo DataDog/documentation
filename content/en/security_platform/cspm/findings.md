@@ -12,6 +12,12 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
+{{< site-region region="us3,gov" >}}
+<div class="alert alert-warning">
+Cloud Security Posture Management is not currently available in US1-FED or US3.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 The Findings page helps drill into the details of CSPM findings, the configuration of resources, and descriptions and remediation guidelines for remediating a misconfigured resource.

@@ -10,6 +10,12 @@ further_reading:
   text: "Search and explore compliance findings"
 ---
 
+{{< site-region region="us3,gov" >}}
+<div class="alert alert-warning">
+Cloud Security Posture Management is not currently available in US1-FED or US3.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 Each default rule maps to one or more controls within a compliance framework or industry benchmark. Datadog currently map rules to the following frameworks & benchmarks:
