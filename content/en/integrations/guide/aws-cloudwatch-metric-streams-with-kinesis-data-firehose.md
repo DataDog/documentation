@@ -70,7 +70,7 @@ Datadog recommends using CloudFormation because it's automatic and easier if you
 5. Fill in the required parameters:
    - **ApiKey**: Add your [Datadog API key][2].
    - **DdSite**: Select your [Datadog site][3]. Your site is: {{< region-param key="dd_site" code="true" >}}
-   - **Regions**: A comma separated list of the regions you wish to set up for metrics streaming. For a full list of supported documentation, see the [AWS documentation][4].
+   - **Regions**: A comma separated list of the regions you wish to set up for metrics streaming. For a full list of supported regions, see the [AWS documentation][4].
 6. Fill in the optional parameters:
    - **FilterMethod**: Include or Exclude list of namespaces to include for metrics streaming.
    - **First/Second/Third Namespace**: Specify the namespaces you wish to include or exclude. Note: The namespace values have to precisely match the values in the namespace column in AWS’s documentation. For example, AWS/EC2.
