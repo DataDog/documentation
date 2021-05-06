@@ -243,7 +243,6 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 [5]: /synthetics/private_locations
 [6]: /synthetics/api_tests/
 [7]: /synthetics/search/#search
-[8]: /security/synthetics
 [9]: https://restfulapi.net/json-jsonpath/
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [11]: /api/v1/synthetics/#create-a-test
