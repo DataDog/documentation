@@ -215,7 +215,7 @@ You can create local variables by defining their values from one of the below av
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in Multistep API tests" video="true" width="90%" >}}
