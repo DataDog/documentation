@@ -112,7 +112,7 @@ In this example, the metric exhibits a sudden level shift. `Agile` adjusts more 
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="algorithm comparison 2"  style="width:90%;">}}
 
-This example shows how the algorithms react to an hour-long anomaly. `Robust` completely ignores this anomaly. The other algorithms start to behave as if the anomaly is the new normal. `Agile` even identifies the metric's return to its original level as an anomaly.
+This example shows how the algorithms react to an hour-long anomaly. `Robust` does not adjust the bounds for the anomaly in this scenario since it reacts more slowly to abrupt changes. The other algorithms start to behave as if the anomaly is the new normal. `Agile` even identifies the metric's return to its original level as an anomaly.
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3"  style="width:90%;">}}
 
