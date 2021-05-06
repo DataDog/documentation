@@ -119,4 +119,4 @@ You can use [API][6], [Multistep API][7] and [Browser tests' privacy options][8]
 [5]: /account_management/rbac/permissions/#synthetic-monitoring
 [6]: /synthetics/api_tests/http_tests?tab=privacy#define-request
 [7]: /synthetics/multistep?tab=privacy#define-the-request 
-[8]: TOADD
+[8]: /synthetics/browser_tests/?tab=privacy#test-configuration
