@@ -6597,7 +6597,144 @@ components:
         level objective.
       properties:
         data:
-          $ref: '#/components/schemas/ServiceLevelObjective'
+          description: 'A service level objective object includes a service level
+            indicator, thresholds
+
+            for one or more timeframes, and metadata (`name`, `description`, `tags`,
+            etc.).'
+          properties:
+            configured_alert_ids:
+              description: A list of SLO monitors IDs that reference this SLO. This
+                field is returned only when `with_configured_alert_ids` parameter
+                is true in query.
+              example:
+              - 123
+              - 456
+              - 789
+              items:
+                description: A monitor ID.
+                format: int64
+                type: integer
+              type: array
+            created_at:
+              description: 'Creation timestamp (UNIX time in seconds)
+
+
+                Always included in service level objective responses.'
+              format: int64
+              readOnly: true
+              type: integer
+            creator:
+              $ref: '#/components/schemas/Creator'
+            description:
+              description: 'A user-defined description of the service level objective.
+
+
+                Always included in service level objective responses (but may be `null`).
+
+                Optional in create/update requests.'
+              nullable: true
+              type: string
+            groups:
+              description: 'A list of (up to 20) monitor groups that narrow the scope
+                of a monitor service level objective.
+
+
+                Included in service level objective responses if it is not empty.
+                Optional in
+
+                create/update requests for monitor service level objectives, but may
+                only be
+
+                used when then length of the `monitor_ids` field is one.'
+              example:
+              - env:prod
+              - role:mysql
+              items:
+                description: A group name, for instance `env:prod`.
+                type: string
+              type: array
+            id:
+              description: 'A unique identifier for the service level objective object.
+
+
+                Always included in service level objective responses.'
+              readOnly: true
+              type: string
+            modified_at:
+              description: 'Modification timestamp (UNIX time in seconds)
+
+
+                Always included in service level objective responses.'
+              format: int64
+              readOnly: true
+              type: integer
+            monitor_ids:
+              description: 'A list of monitor ids that defines the scope of a monitor
+                service level
+
+                objective. **Required if type is `monitor`**.'
+              items:
+                description: A monitor ID.
+                format: int64
+                type: integer
+              type: array
+            monitor_tags:
+              description: 'The union of monitor tags for all monitors referenced
+                by the `monitor_ids`
+
+                field.
+
+                Always included in service level objective responses for monitor service
+                level
+
+                objectives (but may be empty). Ignored in create/update requests.
+                Does not
+
+                affect which monitors are included in the service level objective
+                (that is
+
+                determined entirely by the `monitor_ids` field).'
+              items:
+                description: A monitor tag.
+                type: string
+              type: array
+            name:
+              description: The name of the service level objective object.
+              example: Custom Metric SLO
+              type: string
+            query:
+              $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+            tags:
+              description: 'A list of tags associated with this service level objective.
+
+                Always included in service level objective responses (but may be empty).
+
+                Optional in create/update requests.'
+              example:
+              - env:prod
+              - app:core
+              items:
+                description: A tag to apply to your SLO.
+                type: string
+              type: array
+            thresholds:
+              description: 'The thresholds (timeframes and associated targets) for
+                this service level
+
+                objective object.'
+              example:
+              - target: 95
+                timeframe: 7d
+              - target: 95
+                timeframe: 30d
+                warning: 97
+              items:
+                $ref: '#/components/schemas/SLOThreshold'
+              type: array
+            type:
+              $ref: '#/components/schemas/SLOType'
+          type: object
         errors:
           description: 'An array of error messages. Each endpoint documents how/whether
             this field is
@@ -19684,6 +19821,13 @@ paths:
         required: true
         schema:
           type: string
+      - description: Get the IDs of SLO monitors that reference this SLO.
+        example: true
+        in: query
+        name: with_configured_alert_ids
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
