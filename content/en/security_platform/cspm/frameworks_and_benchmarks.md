@@ -1,5 +1,5 @@
 ---
-title: Compliance Findings
+title: Compliance Frameworks and Industry Benchmarks
 kind: documentation
 further_reading:
 - link: "security_platform/default_rules"
