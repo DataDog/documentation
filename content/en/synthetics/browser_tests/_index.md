@@ -123,7 +123,7 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 [4]: /synthetics/settings/#global-variables
 [5]: /api/v1/synthetics/#create-or-clone-a-test
 [6]: http://daringfireball.net/projects/markdown/syntax
-[9]: /monitors/notifications/?tab=is_alert#integrations
+[7]: /monitors/notifications/?tab=is_alert#integrations
 [10]: /integrations/#cat-notification
 [11]: https://www.google.com/chrome
 [12]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
