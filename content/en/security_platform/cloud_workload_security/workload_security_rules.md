@@ -1,5 +1,5 @@
 ---
-title: Workload Security Rules
+title: Writing CWS Rules
 kind: documentation
 further_reading:
 - link: "/security_platform/cloud_workload_security/getting_started"
