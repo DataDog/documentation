@@ -140,7 +140,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `�@notification`�to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][14] and supports the following [conditional variables][15]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
