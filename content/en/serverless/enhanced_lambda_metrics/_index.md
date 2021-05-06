@@ -18,17 +18,33 @@ Enhanced Lambda metrics give you a view above and beyond the default [Lambda met
 
 The following real-time enhanced Lambda metrics are available, and they are tagged with the `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime`. These metrics are [distributions][4], and you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations.
 
-| Metric                                  | Description                                                                                                                                        |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **aws.lambda.enhanced.invocations**     | Measures the number of times a function is invoked in response to an event or invocation API call.                                                 |
-| **aws.lambda.enhanced.errors**          | Measures the number of invocations that failed due to errors in the function (response code 4XX).                                                  |
-| **aws.lambda.enhanced.max_memory_used** | Measures the maximum amount of memory (mb) used by the function.                                                                                                |
-| **aws.lambda.enhanced.duration**        | Measures the elapsed seconds from when the function code starts executing as a result of an invocation to when it stops executing. |
-| **aws.lambda.enhanced.billed_duration** | Measures the billed amount of time the function ran for (100ms increments).                                                                        |
-| **aws.lambda.enhanced.init_duration** | Measures the initialization time (second) of a function during a cold start.                                  |
-| **aws.lambda.enhanced.estimated_cost**  | Measures the total estimated cost of the function invocation (US dollars).                                                                         |
-| **aws.lambda.enhanced.timeouts**  | Measures the number of times a function times out.                        |
-| **aws.lambda.enhanced.out_of_memory**  | Measures the number of times a function runs out of memory.                        |
+
+`aws.lambda.enhanced.invocations`     
+: Measures the number of times a function is invoked in response to an event or invocation API call.
+
+`aws.lambda.enhanced.errors`          
+: Measures the number of invocations that failed due to errors in the function (response code 4XX).
+
+`aws.lambda.enhanced.max_memory_used` 
+: Measures the maximum amount of memory (mb) used by the function.
+
+`aws.lambda.enhanced.duration`        
+: Measures the elapsed seconds from when the function code starts executing as a result of an invocation to when it stops executing.
+
+`aws.lambda.enhanced.billed_duration` 
+: Measures the billed amount of time the function ran for (100ms increments).
+
+`aws.lambda.enhanced.init_duration` 
+: Measures the initialization time (second) of a function during a cold start.
+
+`aws.lambda.enhanced.estimated_cost`  
+: Measures the total estimated cost of the function invocation (US dollars).
+
+`aws.lambda.enhanced.timeouts`  
+: Measures the number of times a function times out.
+
+`aws.lambda.enhanced.out_of_memory`  
+: Measures the number of times a function runs out of memory.
 
 **Note**: Enhanced metrics are sent to the Datadog Forwarder via CloudWatch Logs, meaning you’ll see an increased volume of logs in CloudWatch. This may affect your AWS bill. To opt-out, set the `DD_ENHANCED_METRICS` environment variable to `false` on your AWS Lambda functions.
 
