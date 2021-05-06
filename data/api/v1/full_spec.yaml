@@ -1315,6 +1315,12 @@ components:
           example: true
           readOnly: true
           type: boolean
+        active_child:
+          description: The downtime object definition of the active child for the
+            original parent recurring downtime.
+          nullable: true
+          readOnly: true
+          type: object
         canceled:
           description: If a scheduled downtime is canceled.
           example: 1412799983
@@ -9464,8 +9470,7 @@ components:
             $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         disableCors:
-          description: Whether or not to disable CORS mechanism. Currently only available
-            for Chrome.
+          description: Whether or not to disable CORS mechanism.
           type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
