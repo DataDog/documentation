@@ -139,7 +139,7 @@ To parse your variable:
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
     * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][10].
-    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][10] or a [JSONPath][9].
+    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][10] or a [JSONPath][8].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
