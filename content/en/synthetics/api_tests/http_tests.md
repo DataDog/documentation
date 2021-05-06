@@ -138,7 +138,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][13], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `�@notification`�to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][14] and supports the following [conditional variables][15]:
 
