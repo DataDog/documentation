@@ -32,7 +32,7 @@ Datadog Network Performance Monitoring (NPM) is designed to give you visibility 
 * Identify outages of cloud provider regions and third-party tools
 * Troubleshoot client-side and server-side DNS server issues
 
-NPM makes it simple to monitor complex networks with built in support for Linux and [Windows OS][3] as well as containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
+NPM makes it simple to monitor complex networks with built in support for containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
