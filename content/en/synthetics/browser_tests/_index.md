@@ -121,7 +121,7 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 [2]: /synthetics/private_locations/
 [3]: /help/
 [4]: /synthetics/settings/#global-variables
-[7]: /api/v1/synthetics/#create-or-clone-a-test
+[5]: /api/v1/synthetics/#create-or-clone-a-test
 [8]: http://daringfireball.net/projects/markdown/syntax
 [9]: /monitors/notifications/?tab=is_alert#integrations
 [10]: /integrations/#cat-notification
