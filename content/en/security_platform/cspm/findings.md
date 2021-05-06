@@ -1,5 +1,5 @@
 ---
-title: CSPM Findings
+title: Findings Explorer
 kind: documentation
 aliases:
   - /security_platform/findings
