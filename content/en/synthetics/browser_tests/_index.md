@@ -126,7 +126,7 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 [7]: /monitors/notifications/?tab=is_alert#integrations
 [8]: /integrations/#cat-notification
 [9]: https://www.google.com/chrome
-[12]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[10]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [13]: /synthetics/browser_tests/actions/
 [14]: /synthetics/browser_tests/actions#manually-added-steps
 [15]: https://app.datadoghq.com/synthetics/browser/create
