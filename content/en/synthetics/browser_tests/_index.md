@@ -125,7 +125,7 @@ Tests can be only recorded from **[Google Chrome][9]**. To record your test, dow
 [6]: http://daringfireball.net/projects/markdown/syntax
 [7]: /monitors/notifications/?tab=is_alert#integrations
 [8]: /integrations/#cat-notification
-[11]: https://www.google.com/chrome
+[9]: https://www.google.com/chrome
 [12]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [13]: /synthetics/browser_tests/actions/
 [14]: /synthetics/browser_tests/actions#manually-added-steps
