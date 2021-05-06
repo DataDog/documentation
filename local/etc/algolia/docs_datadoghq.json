@@ -144,7 +144,7 @@
             "lvl1": ".main-api > h1",
             "lvl2": ".main-api h2 a",
             "lvl3": ".main-api h3",
-            "text": ".main-api p, .main-api ul > li",
+            "text": ".api-main-content p, .api-main-content ul > li",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
