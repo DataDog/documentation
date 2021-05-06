@@ -246,7 +246,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 [8]: https://restfulapi.net/json-jsonpath/
 [9]: /api/v1/synthetics/#create-a-test
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[12]: /monitors/notifications/?tab=is_alert#notification
+[11]: /monitors/notifications/?tab=is_alert#notification
 [13]: http://daringfireball.net/projects/markdown/syntax
 [14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [15]: /synthetics/settings/#global-variables
