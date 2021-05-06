@@ -249,5 +249,5 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 [11]: /monitors/notifications/?tab=is_alert#notification
 [12]: http://daringfireball.net/projects/markdown/syntax
 [13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[15]: /synthetics/settings/#global-variables
+[14]: /synthetics/settings/#global-variables
 [16]: /synthetics/api_tests/errors/#ssl-errors
