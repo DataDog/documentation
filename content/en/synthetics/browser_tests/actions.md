@@ -204,13 +204,20 @@ To create a variable, first give it a name then define its value from:
 
 Create a variable by defining its value from one of the below available builtins:
 
-| Pattern                    | Description                                                                                                 |
-|----------------------------|-------------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`         | Generates a numeric string with `n` digits.                                                                 |
-| `{{ alphabetic(n) }}`      | Generates an alphabetic string with `n` letters.                                                            |
-| `{{ alphanumeric(n) }}`    | Generates an alphanumeric string with `n` characters.                                                       |
-| `{{ date(n, format) }}`    | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.        |
-| `{{ timestamp(n, unit) }}` | Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit. |
+`{{ numeric(n) }}`
+: Generates a numeric string with `n` digits.
+
+`{{ alphabetic(n) }}`
+: Generates an alphabetic string with `n` letters.
+
+`{{ alphanumeric(n) }}`
+: Generates an alphanumeric string with `n` characters.
+
+`{{ date(n, format) }}`
+: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+
+`{{ timestamp(n, unit) }}` 
+: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
 
 #### An Element
 
@@ -320,8 +327,8 @@ Optionally, you can base your step success on assertions about the defined HTTP 
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][13] | _String_ <br> _[Regex][12]_ <br> _String_, _[Regex][12]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][12]                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][13]                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -340,8 +347,8 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][12].
-    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][12] or a [JSONPath][13].
+    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][13].
+    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][13] or a [JSONPath][12].
 
 {{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="Create a variable from HTTP request in Browser test" video="true"  width="80%" >}}
 
@@ -362,5 +369,5 @@ Once created this variable can be used in the following steps of your browser te
 [9]: /synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
 [10]: /synthetics/guide/reusing-browser-test-journeys
 [11]: /synthetics/browser_tests/advanced_options/#subtests
-[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[13]: https://restfulapi.net/json-jsonpath/
+[12]: https://restfulapi.net/json-jsonpath/
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
