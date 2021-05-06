@@ -61,11 +61,14 @@ You can search for numerical attribute within a specific range. For instance, re
 
 ## Examples
 
-| Search query                                                 | Description                                                                                                                                         |
-|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `@http.url_details.path:"/api/v1/test"`                      | Searches all views containing `/api/v1/test` in the attribute `http.url_details.path`.                                                              |
-| `@http.url:\/api\/v1\/*`                                     | Searches all views containing a value in `http.url` attribute that start with `/api/v1/`                                                            |
-| `@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*` | Searches all views with a `duration` between 100 and 300 ns, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
+`@http.url_details.path:"/api/v1/test"`
+: Searches all views containing `/api/v1/test` in the attribute `http.url_details.path`.
+
+`@http.url:\/api\/v1\/*`
+: Searches all views containing a value in `http.url` attribute that start with `/api/v1/`.
+
+`@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*`
+: Searches all views with a `duration` between 100 and 300 ns, and containing a value in `http.url_details.path` attribute that start with `/api/v1/`.
 
 ## Further Reading
 
