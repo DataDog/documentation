@@ -22,7 +22,7 @@ Si vous utilisez actuellement Docker, plusieurs images de conteneur disponibles 
 | Agent Docker (v5)                         | [Agent Docker (v5)][3]                    | `docker pull datadog/docker-dd-agent`                      |
 | [DogStatsD][4]                            | [DogStatsD][5]                            | `DOCKER_CONTENT_TRUST=1 docker pull datadog/dogstatsd`     |
 | [Agent de cluster Datadog][6]             | [Agent de cluster][7]                     | `DOCKER_CONTENT_TRUST=1 docker pull datadog/cluster-agent` |
-| [Worker d'emplacement privé Synthetic][8] | [Worker d'emplacement privé Synthetic][9] | `docker pull synthetics-private-location-worker`           |
+| [Worker d'emplacement privé Synthetic][8] | [Worker d'emplacement privé Synthetic][9] | `docker pull datadog/synthetics-private-location-worker`           |
 
 [1]: /fr/agent/docker/
 [2]: https://hub.docker.com/r/datadog/agent
