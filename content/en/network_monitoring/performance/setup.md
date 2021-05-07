@@ -117,7 +117,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `systemctl` command is not available on your system, start it with following command instead: `sudo service datadog-agent-sysprobe start` and then set it up to start on boot before `datadog-agent` starts.
 
-5. [Restart the Agent][2]
+5. [Restart the Agent][2].
 
     ```shell
     sudo systemctl restart datadog-agent
@@ -129,7 +129,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
 On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
 
-The Datadog Agent RPM package for CentOS-based systems bundles [an SELinux policy][3] to grant these permissions to the system-probe binary.
+The Datadog Agent RPM package for CentOS-based systems bundles an [SELinux policy][3] to grant these permissions to the system-probe binary.
 
 If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
 
@@ -156,12 +156,16 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
     restorecon -v /opt/datadog-agent/embedded/bin/system-probe
     ```
 
-5. [Restart the Agent][2]
+5. [Restart the Agent][2].
 
 **Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
+
+[1]: /infrastructure/process
+[2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -380,4 +384,3 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [10]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [11]: https://github.com/DataDog/chef-datadog
 [12]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
