@@ -35,10 +35,28 @@ Define the configuration of your browser test.
 
 1. **Starting URL**: The URL from which your browser test starts the scenario.
 2. **Advanced Options** (optional): Set specific options to your browser test:
-    * Headers: Define headers to add to or override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
-    * Authentication: Authenticate through HTTP Basic, Digest or NTLM with a username and a password.
-    * Cookies: Define cookies to add to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-    * Proxy URL: URL of the proxy the requests should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+
+  {{< tabs >}}
+
+  {{% tab "Request Options" %}}
+
+  * **Headers**: Define headers to add to or override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
+  * **Authentication**: Authenticate through HTTP Basic, Digest or NTLM with a username and a password.
+  * **Cookies**: Define cookies to add to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+  * **Proxy URL**: URL of the proxy the requests should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+
+  {{% /tab %}}
+
+  {{% tab "Privacy" %}}
+
+  * **Do not capture any screenshots for this test**: Select this option to prevent any screenshot from being taken for all your test steps. This option is also available as an [advanced option][1] at the individual step level. This can be helpful to ensure no sensitive data gets featured in your test results. It however needs to be use mindfully as it can make failure troubleshooting way more challenging. You can read more about our security recommendations [here][2].
+
+[1]: /synthetics/browser_tests/advanced_options#prevent-screenshot-capture
+[2]: /security/synthetics
+
+  {{% /tab %}}
+
+  {{< /tabs >}}
 
 3. **Name**: The name of your browser test.
 4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetic tests page.

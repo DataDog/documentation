@@ -72,6 +72,14 @@ After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`T
   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
 
   {{% /tab %}}
+  
+  {{% tab "Privacy" %}}
+
+  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. It however needs to be use mindfully as it can make failure troubleshooting way more challenging. You can read more about our security recommendations [here][1].
+  
+[1]: /security/synthetics
+
+  {{% /tab %}}
 
   {{< /tabs >}}
 
@@ -130,7 +138,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
 
