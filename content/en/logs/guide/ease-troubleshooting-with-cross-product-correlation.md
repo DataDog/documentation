@@ -27,7 +27,7 @@ This guide walks you through the steps to correlate your full stack data:
 
 When your users are encountering errors or high latency in your application, drilling down to view the logs from a problematic request can reveal exactly what went wrong. By pulling together all the logs pertaining to a given request, you can see in rich detail how it was handled from beginning to end so you can quickly diagnose the issue.
 
-Correlating your logs also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of attributes like `trace_id` and `session_id`.
+Correlating your logs with traces also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of `trace_id`.
 
 [Correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some very specific use cases require correlation deeper into your stack. Follow the links to complete setup per use case:
 
@@ -174,6 +174,8 @@ Here is an example of a slow query execution plan from a slow trace:
 [Browser logs][9] inside a RUM event give context and insight into an issue. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:80%;" >}}
+
+Correlating your browser logs with RUM also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of attributes like `session_id` and `view.id`.
 
 #### How?
 
