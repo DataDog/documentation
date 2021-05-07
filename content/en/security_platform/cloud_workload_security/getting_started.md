@@ -21,7 +21,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
 
 ## Requirements
 
-* Datadog Agent >= 7.25.0
+* Datadog Agent >= 7.27.0
 * Hosts/containers must be running Linux with kernel versions >= 4.15
   * All major Linux distributions running on those kernels are supported.
   * Custom kernel builds are not supported.
