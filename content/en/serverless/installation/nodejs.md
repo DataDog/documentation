@@ -59,40 +59,15 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     More information on the Datadog Forwarder ARN or installation can be found [here][2]. For additional settings, see the [plugin documentation][1].
 
-4. (Optional - only applies if you're using Webpack)
-
-    `dd-trace` is known to be not compatible with webpack due to the use of conditional import and other issues. If using webpack, make sure to mark `datadog-lambda-js` and `dd-trace` as [externals](https://webpack.js.org/configuration/externals/) for webpack, so webpack knows these dependencies will be available in the runtime. You should also remove `datadog-lambda-js` and `dd-trace` from `package.json` and the build process to ensure you're using the versions provided by the Datadog Lambda Layer.
-
-    If using `serverless-webpack`, make sure to also exclude `datadog-lambda-js` and `dd-trace` in your `serverless.yml` in addition to declaring them as external in your webpack config file.
-
-    **webpack.config.js**
-
-    ```
-    var nodeExternals = require("webpack-node-externals");
-
-    module.exports = {
-      // we use webpack-node-externals to excludes all node deps.
-      // You can manually set the externals too.
-      externals: [nodeExternals(), "dd-trace", "datadog-lambda-js"],
-    };
-    ```
-
-    **serverless.yml**
-
-    ```
-    custom:
-      webpack:
-        includeModules:
-          forceExclude:
-            - dd-trace
-            - datadog-lambda-js
-    ```
+**Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][5].
 
 
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[4]: /serverless/troubleshooting/serverless_tracing_and_webpack/
+[5]: https://webpack.js.org/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -335,22 +310,25 @@ See the [latest release][4].
 3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
 4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
-6. If you're using webpack, please note that `dd-trace` is known to be not compatible with webpack due to the use of conditional import and other issues. Make sure to mark `datadog-lambda-js` and `dd-trace` as [externals](https://webpack.js.org/configuration/externals/) for webpack, so webpack knows these dependencies will be available in the runtime. You should also remove `datadog-lambda-js` and `dd-trace` from `package.json` and the build process to ensure you're using the versions provided by the Datadog Lambda Layer.
+
+**Note**: You need to follow these [additional configuration steps][5] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][6].
 
 ### Subscribe the Datadog Forwarder to the log groups
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
 
-1. [Install the Datadog Forwarder if you haven't][5].
-2. [Subscribe the Datadog Forwarder to your function's log groups][6].
+1. [Install the Datadog Forwarder if you haven't][7].
+2. [Subscribe the Datadog Forwarder to your function's log groups][8].
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://www.npmjs.com/package/datadog-lambda-js
-[5]: https://docs.datadoghq.com/serverless/forwarder/
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: /serverless/troubleshooting/serverless_tracing_and_webpack/
+[6]: https://webpack.js.org/
+[7]: https://docs.datadoghq.com/serverless/forwarder/
+[8]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 
