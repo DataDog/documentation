@@ -254,7 +254,7 @@
             ["microsoft azure", "azure"],
             ["gcp", "google cloud platform"],
             ["aws", "amazon web service"],
-            ["RUM", "rum", "real user monitoring"]
+            ["RUM", "rum", "real user monitoring"],
             ["Role Permissions", "permissions"]
         ]
     },
