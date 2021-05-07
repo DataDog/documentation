@@ -241,7 +241,8 @@
         "#en-apprendre-plus",
         "#further-reading",
         ".alert-info",
-        ".announcement_banner"
+        ".announcement_banner",
+        ".language-region-select-container"
     ],
     "conversation_id": ["620036890"],
     "custom_settings": {

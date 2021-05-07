@@ -144,7 +144,7 @@
             "lvl1": ".main-api > h1",
             "lvl2": ".main-api h2 a",
             "lvl3": ".main-api h3",
-            "text": ".api-main-content p, .api-main-content ul > li",
+            "text": ".main-api p, .main-api ul > li",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
@@ -241,7 +241,8 @@
         "#en-apprendre-plus",
         "#further-reading",
         ".alert-info",
-        ".announcement_banner"
+        ".announcement_banner",
+        ".language-region-select-container"
     ],
     "conversation_id": ["620036890"],
     "custom_settings": {
