@@ -46,7 +46,7 @@ Docker Agent をまだインストールしていない場合は、以下の手�
 {{% tab "標準" %}}
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent
 ```
 
 **注**: GCR 以外の別のレジストリを使用している場合は、必ずイメージを更新してください。
@@ -57,13 +57,13 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 Amazon Linux < v2 の場合:
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent
 ```
 
 Amazon Linux v2 の場合:
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent
 ```
 
 {{% /tab %}}
@@ -72,7 +72,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 Datadog Agent は、Windows Server 2019 (LTSC) とバージョン 1909 (SAC) でサポートされています。
 
 ```shell
-docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine datadog/agent
 ```
 
 {{% /tab %}}
@@ -81,7 +81,7 @@ docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:
 (オプション) 非特権インストールを実行するには、インストールコマンドに `--group-add=<DOCKER_GROUP_ID>` を追加します。次に例を示します。
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7 --group-add=<DOCKER_GROUP_ID>
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent --group-add=<DOCKER_GROUP_ID>
 ```
 
 {{% /tab %}}
