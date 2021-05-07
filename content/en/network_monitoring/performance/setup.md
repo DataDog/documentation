@@ -162,6 +162,9 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
+[1]: /infrastructure/process/?tab=linuxwindows#installation
+[2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
