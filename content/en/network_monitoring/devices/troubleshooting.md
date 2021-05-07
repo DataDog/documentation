@@ -15,13 +15,17 @@ Use the information below for troubleshooting Datadog Network Device Monitoring.
 
 ## Terminology
 
-**SNMP** - Simple network management protocol - A network protocol that is used to collect information about bare metal networking gear.
+SNMP - Simple network management protocol
+: A network protocol that is used to collect information about bare metal networking gear.
 
-**OID** - Object identifier - A unique ID or address on a device that when polled returns the response code of that value. For example, OIDs are CPU or device fan speed.
+OID - Object identifier
+: A unique ID or address on a device that when polled returns the response code of that value. For example, OIDs are CPU or device fan speed.
 
-**sysOID** - System object identifier - A specific address that defines the device type. All devices have a unique ID that defines it. For example, the Meraki base sysOID is `1.3.6.1.4.1.29671`.
+sysOID - System object identifier
+: A specific address that defines the device type. All devices have a unique ID that defines it. For example, the Meraki base sysOID is `1.3.6.1.4.1.29671`.
 
-**MIB** - Managed information base - A database or list of all the possible OIDs and their definitions that are related to the MIB. For example, the `IF-MIB` (interface MIB) contains all the OIDs for descriptive information about a device's interface.
+MIB - Managed information base
+: A database or list of all the possible OIDs and their definitions that are related to the MIB. For example, the `IF-MIB` (interface MIB) contains all the OIDs for descriptive information about a device's interface.
 
 ## FAQ
 
