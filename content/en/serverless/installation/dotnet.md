@@ -18,31 +18,34 @@ further_reading:
 If not already configured:
 
 - Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
-- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
+### Install the Datadog Lambda Extension
+
+Install the [Datadog Lambda Extension][3] as a Lambda Layer on your Lambda function using the ARN in the following format:
+
+```
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
+```
+
+For `EXTENSION_VERSION`, see the [latest release][2].
+
 ### Configure the function
 
-1. Enable [AWS X-Ray active tracing][3] for your Lambda function.
-2. Install the [AWS X-Ray SDK for .NET][4].
-
-### Subscribe the Datadog Forwarder to the log groups
-
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces, and logs to Datadog.
-
-1. [Install the Datadog Forwarder if you haven't][2].
-2. [Subscribe the Datadog Forwarder to your function's log groups][5].
+1. Enable [AWS X-Ray active tracing][4] for your Lambda function.
+2. Install the [AWS X-Ray SDK for .NET][5].
+3. Add the environment variable `DD_API_KEY` or `DD_KMS_API_KEY`, and set the value to your Datadog API key on the [API Management page][6]. 
 
 ### Unified service tagging
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
+Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][7].
 
 ## Explore Datadog serverless monitoring
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless homepage][7].
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless homepage][8].
 
 ## Monitor custom business logic
 
@@ -57,17 +60,17 @@ myMetric.Add("t", new string[] {"product:latte", "order:online"});
 LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 ```
 
-For more information on custom metric submission, see [here][8].
+For more information on custom metric submission, see [here][6].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
-[2]: /serverless/forwarder/
-[3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
-[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[7]: https://app.datadoghq.com/functions
-[8]: /serverless/custom_metrics?tab=otherruntimes
+[2]: https://gallery.ecr.aws/datadog/lambda-extension
+[3]: /serverless/libraries_integrations/extension/
+[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
+[5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
+[6]: /serverless/custom_metrics?tab=otherruntimes
+[7]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[8]: https://app.datadoghq.com/functions

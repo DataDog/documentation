@@ -1,5 +1,5 @@
 ---
-title: Serverless Integrations
+title: Libraries & Integrations
 kind: documentation
 further_reading:
 - link: "/serverless/serverless_integrations/plugin/"
