@@ -24,11 +24,9 @@ further_reading:
 
 ## Required setup
 
-If not already configured:
+If not already configured, install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. After you have installed the [AWS integration][1], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
-- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
-
-After you have installed the [AWS integration][1], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
+{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
 
 ## Configuration
 

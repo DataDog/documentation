@@ -24,12 +24,16 @@ further_reading:
 
 ## Required setup
 
-If not already configured:
+If not already configured, install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. After you have installed the [AWS integration][1], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
+<<<<<<< HEAD
 - Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS.
 - Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
+=======
+{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
+>>>>>>> bbcc5be66f (Add Extension instructions everywhere)
 
 ## Configuration
 
@@ -359,11 +363,11 @@ For `EXTENSION_VERSION`, see the [latest release][4].
 
 ### Unified service tagging
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][3].
+Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][2].
 
 ## Explore Datadog serverless monitoring
 
-After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][4].
+After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][3].
 
 ## Monitor custom business logic
 
@@ -416,15 +420,14 @@ exports.handler = async (event) => {
 };
 ```
 
-For more information on custom metric submission, see [here][5]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][6].
+For more information on custom metric submission, see [here][4]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
-[2]: /serverless/forwarder
-[3]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[4]: https://app.datadoghq.com/functions
-[5]: /serverless/custom_metrics?tab=nodejs
-[6]: /tracing/custom_instrumentation/nodejs/
+[2]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[3]: https://app.datadoghq.com/functions
+[4]: /serverless/custom_metrics?tab=nodejs
+[5]: /tracing/custom_instrumentation/nodejs/
