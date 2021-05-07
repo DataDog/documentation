@@ -60,12 +60,13 @@ Systemd チェックは [Datadog Agent][1] パッケージに含まれていま�
 コンテナ環境の場合は、Systemd データの取得に必要なソケット `/run/systemd/private` を含む `/run/systemd/` フォルダーをマウントする必要があります。たとえば、以下のとおりです。
 
 ```bash
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+DOCKER_CONTENT_TRUST=1 docker run -d \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup/:ro \
               -v /run/systemd/:/host/run/systemd/:ro \
               -e DD_API_KEY=<YOUR_API_KEY> \
-              datadog/agent:latest
+              datadog/agent
 ```
 
 ### コンフィギュレーション

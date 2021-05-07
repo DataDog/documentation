@@ -29,14 +29,15 @@ short_description: クラスターリソース使用状況、マスターおよ�
 DC/OS の有無にかかわらず、Mesos でのインストールは同じです。各 Mesos マスターノードで datadog-agent コンテナを実行します。
 
 ```shell
-docker run -d --name datadog-agent \
+DOCKER_CONTENT_TRUST=1 docker run -d \
+  --name datadog-agent \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /proc/:/host/proc/:ro \
   -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
   -e DD_API_KEY=<YOUR_DATADOG_API_KEY> \
   -e MESOS_MASTER=true \
   -e MARATHON_URL=http://leader.mesos:8080 \
-  datadog/agent:latest
+  datadog/agent
 ```
 
 上のコマンドの Datadog API キーと Mesos Master の API URL は、適切な値に置き換えてください。

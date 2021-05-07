@@ -307,7 +307,7 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
 Docker でネットワークパフォーマンスのモニタリングを有効化するには、コンテナ Agent を起動する際に、次のコンフィギュレーションを使用します。
 
 ```shell
-$ docker run -e DD_API_KEY="<DATADOG_API_キー>" \
+$ DOCKER_CONTENT_TRUST=1 docker run -e DD_API_KEY="<DATADOG_API_キー>" \
 -e DD_SYSTEM_PROBE_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
       -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -320,7 +320,7 @@ $ docker run -e DD_API_KEY="<DATADOG_API_キー>" \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
 --cap-add=IPC_LOCK \
-datadog/agent:latest
+datadog/agent
 ```
 
 `<API_キー>` を、ご使用の [Datadog API キー][1]に置き換えます。
