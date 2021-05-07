@@ -153,14 +153,20 @@ class CdkStack extends cdk.Stack {
 }
 ```
 
-Find your Datadog API key on the [API Management page][4]. Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][2]), and `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][3]).
+To fill in the placeholders:
+
+- Replace `<DATADOG_API_KEY>` or `<ENCRYPTED_DATADOG_API_KEY>` your Datadog API key on the [API Management page][3]. 
+- Replace `<SERVICE>` and `<ENV>` with appropriate values.
+- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][2]).
+- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][4]).
 
 More information and additional parameters can be found in the [Datadog CDK NPM page][1].
 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://gallery.ecr.aws/datadog/lambda-extension
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: https://gallery.ecr.aws/datadog/lambda-extension
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -222,6 +228,17 @@ yarn add datadog-lambda-js dd-trace
 
 Note that the minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
 
+
+### Install the Datadog Lambda Extension
+
+Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
+
+```
+COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+```
+
+Replace `<TAG>` with either a specific version number (for example, `7`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+
 ### Configure the function
 
 1. Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
@@ -229,18 +246,11 @@ Note that the minor version of the `datadog-lambda-js` package always matches th
   - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
   - Set `DD_TRACE_ENABLED` to `true`.
   - Set `DD_FLUSH_TO_LOG` to `true`.
+  - Set `DD_API_KEY` or `DD_KMS_API_KEY` with your Datadog API key on the [API Management page][2]. 
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
-### Subscribe the Datadog Forwarder to the log groups
-
-You need to subscribe the Datadog Forwarder Lambda function to each of your functions' log groups in order to send metrics, traces, and logs to Datadog.
-
-1. [Install the Datadog Forwarder if you haven't][1].
-2. [Subscribe the Datadog Forwarder to your function's log groups][2].
-
-
-[1]: https://docs.datadoghq.com/serverless/forwarder/
-[2]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[1]: https://gallery.ecr.aws/datadog/lambda-extension
+[2]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -284,27 +294,32 @@ yarn add datadog-lambda-js
 
 See the [latest release][3].
 
+
+### Install the Datadog Lambda Extension
+
+[Configure the layers][1] for your Lambda function using the ARN in the following format:
+
+```
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
+```
+
+For `EXTENSION_VERSION`, see the [latest release][4].
+
 ### Configure the function
 
 1. Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
 2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
+4. Set the environment variable `DD_API_KEY` or `DD_KMS_API_KEY` to your Datadog API key on the [API Management page][5]. 
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
-### Subscribe the Datadog Forwarder to the log groups
-
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
-
-1. [Install the Datadog Forwarder if you haven't][4].
-2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://www.npmjs.com/package/datadog-lambda-js
-[4]: https://docs.datadoghq.com/serverless/forwarder/
-[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[4]: https://gallery.ecr.aws/datadog/lambda-extension
+[5]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 
