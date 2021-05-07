@@ -25,14 +25,26 @@ The Datadog Lambda Library supports submitting custom metrics in Lambda, both sy
 
 **Synchronous**: The default behavior. This method submits your custom metrics to Datadog via HTTP periodically (every 10 seconds) and at the end of your Lambda invocation. If the invocation lasts for less than 10 seconds, your custom metrics are submitted at the end of the invocation.
 
-**Asynchronous (recommended)**: It's possible to submit your custom metrics with zero latency overhead **and** have them appear in Datadog in near-real-time. To accomplish this, the Lambda Library emits your custom metrics as a specially-formatted log, which the [Datadog Forwarder][4] parses and submits to Datadog. Logging in AWS Lambda is 100% asynchronous, so this method ensures there is zero latency overhead to your function.
+**Asynchronous (recommended)**: It's possible to submit your custom metrics with zero latency overhead **and** have them appear in Datadog in near-real-time. To accomplish this, the Lambda Library either:
+- Publishes your custom metrics to the [Datadog Lambda Extension][4], which will submit your custom metrics directly to Datadog without impacting your function latency.
+- Emits your custom metrics as specially-formatted log which the [Datadog Forwarder][5] parses and submits to Datadog. Logging in AWS Lambda is 100% asynchronous, so this method ensures there is zero latency overhead to your function.
 
 ### Enabling asynchronous custom metrics
 
-1. Set the environment variable `DD_FLUSH_TO_LOG` to `True` on your Lambda function.
-2. Update your [Datadog Forwarder][4] to at least version 1.4.0.
+#### With the Datadog Lambda Extension
 
-If you are not using Datadog Logs, you can still use asynchronous custom metric submission. Set the environment variable `DD_FORWARD_LOG` to `False` on the [Datadog log collection AWS Lambda function][4]. This intelligently forwards only custom metrics to Datadog, and not regular logs.
+This is the recommended approach if your you are using Node.js or Python Lambda runtimes.
+
+1. Set the environment variable `DD_FLUSH_TO_LOG` to `True` on your Lambda function.
+2. Add the [Datadog Lambda Extension][4] to your function either as a Lambda Layer or as a container image.
+3. Add the environment variable `DD_API_KEY` or `DD_KMS_API_KEY` to your Lambda function, and set the value to your Datadog API key on the [API Management page][12]. 
+
+#### With the Datadog Forwarder
+
+1. Set the environment variable `DD_FLUSH_TO_LOG` to `True` on your Lambda function.
+2. Update your [Datadog Forwarder][5] to at least version 1.4.0.
+
+If you are not using Datadog Logs, you can still use asynchronous custom metric submission. Set the environment variable `DD_FORWARD_LOG` to `False` on the [Datadog log collection AWS Lambda function][5]. This intelligently forwards only custom metrics to Datadog, and not regular logs.
 
 ### Custom metrics sample code
 
@@ -40,7 +52,7 @@ In your function code, you must import the necessary methods from the Lambda Lib
 
 **Note:** The arguments to the custom metrics reporting methods have the following requirements:
 
-- `<METRIC_NAME>` uniquely identifies your metric and adheres to the [metric naming policy][5].
+- `<METRIC_NAME>` uniquely identifies your metric and adheres to the [metric naming policy][6].
 - `<METRIC_VALUE>` MUST be a number (i.e. integer or float).
 - `<TAG_LIST>` is optional and formatted, for example: `['owner:Datadog', 'env:demo', 'cooltag']`.
 
@@ -194,7 +206,7 @@ For example:
 
 ### Tagging custom metrics
 
-You should tag your custom metrics when submitting them with the [Datadog Lambda Library][6]. Use the [Distribution Metrics][3] page to [customize the set of tags][7] applied to your custom metrics.
+You should tag your custom metrics when submitting them with the [Datadog Lambda Library][7]. Use the [Distribution Metrics][3] page to [customize the set of tags][8] applied to your custom metrics.
 
 To add Lambda resource tags to your custom metrics, set the parameter `DdFetchLambdaTags` to `true` on the Datadog forwarder CloudFormation stack.
 
@@ -204,25 +216,25 @@ With distribution metrics, you select the aggregation when graphing or querying 
 
 If you previously submitted custom metrics from Lambda without using one of the Datadog Lambda Libraries, you'll need to start instrumenting your custom metrics under **new metric names** when submitting them to Datadog. The same metric name cannot simultaneously exist as both distribution and non-distribution metric types.
 
-To enable percentile aggregations for your distribution metrics, consult the [Distribution Metrics][7] page.
+To enable percentile aggregations for your distribution metrics, consult the [Distribution Metrics][8] page.
 
 ## Other submission methods
 
 ### Running in a VPC
 
-The Datadog Lambda Library requires [access to the public internet][8] to submit custom metrics **synchronously**. If your Lambda function is associated with a VPC, ensure that it is instead submitting custom metrics **asynchronously** or that your function can reach the public internet.
+The Datadog Lambda Library requires [access to the public internet][9] to submit custom metrics **synchronously**. If your Lambda function is associated with a VPC, ensure that it is instead submitting custom metrics **asynchronously** or that your function can reach the public internet.
 
 ### Using third-party libraries
 
-There are a number of open source libraries that make it easy to submit custom metrics to Datadog. However, many have not been updated to use [Distribution metrics][3], which are optimized for Lambda. Distribution metrics allow for server-side aggregations independent of a host or locally-running [agent][9]. In a serverless environment where there is no agent, Distribution metrics give you flexible aggregations and tagging.
+There are a number of open source libraries that make it easy to submit custom metrics to Datadog. However, many have not been updated to use [Distribution metrics][3], which are optimized for Lambda. Distribution metrics allow for server-side aggregations independent of a host or locally-running [agent][10]. In a serverless environment where there is no agent, Distribution metrics give you flexible aggregations and tagging.
 
 When evaluating third-party metrics libraries for AWS Lambda, ensure they support Distribution metrics.
 
 ### [DEPRECATED] Using CloudWatch logs
 
-**This method of submitting custom metrics is no longer supported, and is disabled for all new customers.** The recommended way to submit custom metrics from Lambda is with a [Datadog Lambda Library][6].
+**This method of submitting custom metrics is no longer supported, and is disabled for all new customers.** The recommended way to submit custom metrics from Lambda is with a [Datadog Lambda Library][7].
 
-This requires the following AWS permissions in your [Datadog IAM policy][10].
+This requires the following AWS permissions in your [Datadog IAM policy][11].
 
 | AWS Permission            | Description                                                 |
 | ------------------------- | ----------------------------------------------------------- |
@@ -242,7 +254,7 @@ Where:
 - `<UNIX_EPOCH_TIMESTAMP>` is in seconds, not milliseconds.
 - `<METRIC_VALUE>` MUST be a number (i.e. integer or float).
 - `<METRIC_TYPE>` is `count`, `gauge`, `histogram`, or `check`.
-- `<METRIC_NAME>` uniquely identifies your metric and adheres to the [metric naming policy][5].
+- `<METRIC_NAME>` uniquely identifies your metric and adheres to the [metric naming policy][6].
 - `<TAG_LIST>` is optional, comma separated, and must be preceded by `#`. The tag `function_name:<name_of_the_function>` is automatically applied to custom metrics.
 
 **Note**: The sum for each timestamp is used for counts and the last value for a given timestamp is used for gauges. It is not recommended to print a log statement every time you increment a metric, as this increases the time it takes to parse your logs. Continually update the value of the metric in your code, and print one log statement for that metric before the function finishes.
@@ -250,10 +262,11 @@ Where:
 [1]: /logs/logs_to_metrics/
 [2]: /tracing/generate_metrics/
 [3]: https://docs.datadoghq.com/metrics/distributions/
-[4]: /serverless/forwarder/
-[5]: /developers/metrics/
-[6]: /serverless/installation/
-[7]: /metrics/distributions/#customize-tagging
-[8]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function
-[9]: /agent/
-[10]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[4]: /serverless/libraries_integrations/extension
+[5]: /serverless/forwarder/
+[6]: /developers/metrics/
+[7]: /serverless/installation/
+[8]: /metrics/distributions/#customize-tagging
+[9]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function
+[10]: /agent/
+[11]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
