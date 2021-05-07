@@ -46,7 +46,8 @@ Configuring log collection depends on your current environment. Choose one of th
 To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command:
 
 ```shell
-docker run -d --name datadog-agent \
+DOCKER_CONTENT_TRUST=1 docker run -d \
+           --name datadog-agent \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -57,13 +58,14 @@ docker run -d --name datadog-agent \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-           gcr.io/datadoghq/agent:latest
+           datadog/agent
 ```
 
 **Note**: On Windows systems, run this command without any volume mounts. That is:
 
 ```shell
-docker run -d --name datadog-agent \
+DOCKER_CONTENT_TRUST=1 docker run -d \
+           --name datadog-agent \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
@@ -71,7 +73,7 @@ docker run -d --name datadog-agent \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
-           gcr.io/datadoghq/agent:latest
+           datadog/agent
 ```
 
 It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on GCR.
