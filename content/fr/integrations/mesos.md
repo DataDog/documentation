@@ -29,6 +29,7 @@ et bien plus encore.
 L'installation se fait de la même façon que vous utilisiez Mesos avec ou sans DC/OS. Exécutez le conteneur datadog-agent sur chacun de vos nœuds Mesos Master :
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d --name datadog-agent \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /proc/:/host/proc/:ro \
@@ -36,7 +37,7 @@ docker run -d --name datadog-agent \
   -e DD_API_KEY= \
   -e MESOS_MASTER=true \
   -e MARATHON_URL=http://leader.mesos:8080 \
-  datadog/agent:latest
+  datadog/agent
 ```
 
 Spécifiez votre clé d'API Datadog et votre URL d'API Mesos Master dans la commande ci-dessus.

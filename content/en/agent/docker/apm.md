@@ -26,7 +26,7 @@ further_reading:
       text: "Assign tags to all data emitted by a container"
 ---
 
-Enable the Trace Agent in the `gcr.io/datadoghq/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
+Enable the Trace Agent in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 ## Tracing from the host
 
@@ -40,23 +40,25 @@ For example, the following command allows the Agent to receive traces from your 
 {{% tab "Linux" %}}
 
 ```shell
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+DOCKER_CONTENT_TRUST=1 docker run -d \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
-              gcr.io/datadoghq/agent:latest
+              datadog/agent
 ```
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
 ```shell
-docker run -d -p 127.0.0.1:8126:8126/tcp \
+DOCKER_CONTENT_TRUST=1 docker run -d \
+              -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
-              gcr.io/datadoghq/agent:latest
+              datadog/agent
 ```
 
 {{% /tab %}}
@@ -106,7 +108,8 @@ Then start the Agent and the application container, connected to the network pre
 
 ```bash
 # Datadog Agent
-docker run -d --name datadog-agent \
+DOCKER_CONTENT_TRUST=1 docker run -d \
+              --name datadog-agent \
               --network <NETWORK_NAME> \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
@@ -114,7 +117,7 @@ docker run -d --name datadog-agent \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              datadog/agent
 
 # Application
 docker run -d --name app \
@@ -128,12 +131,13 @@ docker run -d --name app \
 
 ```bash
 # Datadog Agent
-docker run -d --name datadog-agent \
+DOCKER_CONTENT_TRUST=1 docker run -d \
+              --name datadog-agent \
               --network "<NETWORK_NAME>" \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              datadog/agent
 
 # Application
 docker run -d --name app \

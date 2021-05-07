@@ -60,12 +60,13 @@ Le check Systemd est inclus avec le paquet de l'[Agent Datadog][1]. Vous n'avez 
 Pour les environnements conteneurisés, montez le dossier `/run/systemd/`, qui contient le socket `/run/systemd/private` nécessaire pour récupérer les données Systemd. Exemple :
 
 ```bash
+DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup/:ro \
               -v /run/systemd/:/host/run/systemd/:ro \
               -e DD_API_KEY=<VOTRE_CLÉ_API> \
-              datadog/agent:latest
+              datadog/agent
 ```
 
 ### Configuration

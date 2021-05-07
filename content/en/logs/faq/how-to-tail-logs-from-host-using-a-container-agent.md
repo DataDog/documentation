@@ -117,7 +117,8 @@ and mount it into `/conf.d/`. The file name can be anything:
 Your Agent’s Docker installation command should look like this:
 
 ```
-docker run -d --name datadog-agent \
+DOCKER_CONTENT_TRUST=1 docker run -d \
+           --name datadog-agent \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -126,7 +127,7 @@ docker run -d --name datadog-agent \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
            -v /<host log directory>/:<container log directory>/ \
            -v /<config location>/logs.yaml:/conf.d/logs.yaml \
-           gcr.io/datadoghq/agent:latest
+           datadog/agent
 ```
 {{% /tab %}}
 {{< /tabs >}}

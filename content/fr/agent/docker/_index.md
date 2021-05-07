@@ -34,10 +34,10 @@ L'Agent Docker Datadog est la version conteneurisée de l'[Agent][1] pour host. 
 
 L'image est disponible en versions pour architectures x86 64 bits et Arm v8.
 
-| Docker Hub      | GCR             |
-|-----------------|-----------------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`             | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`           |
-| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent`   | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent`  |
+| Docker Hub                                                           | GCR                                                             |
+|----------------------------------------------------------------------|-----------------------------------------------------------------|
+| [Agent v6+][2]<br>`DOCKER_CONTENT_TRUST=1 docker pull datadog/agent` | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
+| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent`               | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
 
 ## Configuration
 
@@ -47,7 +47,7 @@ Si vous n'avez pas encore installé l'Agent Docker, consultez les informations c
 {{% tab "Installation standard" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<CLÉ_API_DATADOG> gcr.io/datadoghq/agent:7
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<CLÉ_API_DATADOG> datadog/agent
 ```
 
 **Remarque** : mettez à jour l'image si vous utilisez un autre registre que GCR.
@@ -56,7 +56,7 @@ DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/va
 {{% tab "Amazon Linux < v2" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<CLÉ_API_DATADOG> gcr.io/datadoghq/agent:7
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<CLÉ_API_DATADOG> datadog/agent
 ```
 
 {{% /tab %}}
@@ -65,7 +65,7 @@ DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/va
 L'Agent Datadog est pris en charge dans Windows Server version 2019 (LTSC) et 1909 (SAC).
 
 ```shell
-docker run -d --name dd-agent -e DD_API_KEY=<CLÉ_API> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -e DD_API_KEY=<CLÉ_API> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine datadog/agent
 ```
 
 {{% /tab %}}
@@ -74,7 +74,7 @@ docker run -d --name dd-agent -e DD_API_KEY=<CLÉ_API> -v \\.\pipe\docker_engine
 (Facultatif) Pour exécuter une installation sans privilèges, ajoutez `--group-add=<ID_GROUPE_DOCKER>` à la commande d'installation. Par exemple :
 
 ```shell
-DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<CLÉ_API_DATADOG> gcr.io/datadoghq/agent:7 --group-add=<ID_GROUPE_DOCKER>
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<CLÉ_API_DATADOG> datadog/agent --group-add=<ID_GROUPE_DOCKER>
 ```
 
 {{% /tab %}}
