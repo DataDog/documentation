@@ -341,6 +341,30 @@
     "request_description": "",
     "request_schema_description": "Relationship to user."
   },
+  "ListSecurityFilters": {
+    "description": "Get the list of configured security filters with their definitions.",
+    "summary": "Get all security filters"
+  },
+  "CreateSecurityFilter": {
+    "description": "Create a security filter.",
+    "summary": "Create a security filter",
+    "request_description": "The definition of the new security filter.",
+    "request_schema_description": "Request object that includes the security filter that you would like to create."
+  },
+  "DeleteSecurityFilter": {
+    "description": "Delete a specific security filter.",
+    "summary": "Delete a security filter"
+  },
+  "GetSecurityFilter": {
+    "description": "Get the details of a specific security filter.",
+    "summary": "Get a security filter"
+  },
+  "UpdateSecurityFilter": {
+    "description": "Update a specific security filter.\nReturns the security filter object when the request is successful.",
+    "summary": "Update a security filter",
+    "request_description": "New definition of the security filter.",
+    "request_schema_description": "The new security filter body."
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
