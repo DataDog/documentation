@@ -34,10 +34,10 @@ L'Agent Docker Datadog est la version conteneurisée de l'[Agent][1] pour host. 
 
 L'image est disponible en versions pour architectures x86 64 bits et Arm v8.
 
-| Docker Hub      | GCR             |
-|-----------------|-----------------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`             | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`           |
-| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent`   | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent`  |
+| Docker Hub                                                           | GCR                                                             |
+|----------------------------------------------------------------------|-----------------------------------------------------------------|
+| [Agent v6+][2]<br>`DOCKER_CONTENT_TRUST=1 docker pull datadog/agent` | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
+| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent`               | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
 
 ## Configuration
 

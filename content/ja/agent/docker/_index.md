@@ -33,10 +33,10 @@ Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバー�
 
 64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
 
-| Docker Hub                                             | GCR                                                             |
-|--------------------------------------------------------|-----------------------------------------------------------------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`          | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
-| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
+| Docker Hub                                                           | GCR                                                             |
+|----------------------------------------------------------------------|-----------------------------------------------------------------|
+| [Agent v6+][2]<br>`DOCKER_CONTENT_TRUST=1 docker pull datadog/agent` | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
+| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent`               | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
 
 ## セットアップ
 

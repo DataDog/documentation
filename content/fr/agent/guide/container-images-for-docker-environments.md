@@ -16,13 +16,13 @@ Si vous utilisez actuellement Docker, plusieurs images de conteneur disponibles 
 {{< tabs >}}
 {{% tab "Docker Hub" %}}
 
-| Produit Datadog                         | Docker Hub                               | Commande Pull Docker                              |
-|-----------------------------------------|------------------------------------------|--------------------------------------------------|
-| [Agent Docker][1]                       | [Agent Docker (v6+)][2]                  | `docker pull datadog/agent`                      |
-| Agent Docker (v5)                      | [Agent Docker (v5)][3]                   | `docker pull datadog/docker-dd-agent`            |
-| [DogStatsD][4]                          | [DogStatsD][5]                           | `docker pull datadog/dogstatsd`                  |
-| [Agent de cluster Datadog][6]              | [Agent de cluster][7]                       | `docker pull datadog/cluster-agent`              |
-| [Worker d'emplacement privé Synthetic][8] | [Worker d'emplacement privé Synthetic][9]  | `docker pull synthetics-private-location-worker` |
+| Produit Datadog                           | Docker Hub                                | Commande Pull Docker                                       |
+|-------------------------------------------|-------------------------------------------|------------------------------------------------------------|
+| [Agent Docker][1]                         | [Agent Docker (v6+)][2]                   | `DOCKER_CONTENT_TRUST=1 docker pull datadog/agent`         |
+| Agent Docker (v5)                         | [Agent Docker (v5)][3]                    | `docker pull datadog/docker-dd-agent`                      |
+| [DogStatsD][4]                            | [DogStatsD][5]                            | `DOCKER_CONTENT_TRUST=1 docker pull datadog/dogstatsd`     |
+| [Agent de cluster Datadog][6]             | [Agent de cluster][7]                     | `DOCKER_CONTENT_TRUST=1 docker pull datadog/cluster-agent` |
+| [Worker d'emplacement privé Synthetic][8] | [Worker d'emplacement privé Synthetic][9] | `docker pull synthetics-private-location-worker`           |
 
 [1]: /fr/agent/docker/
 [2]: https://hub.docker.com/r/datadog/agent
@@ -37,13 +37,13 @@ Si vous utilisez actuellement Docker, plusieurs images de conteneur disponibles 
 {{% /tab %}}
 {{% tab "GCR" %}}
 
-| Produit Datadog                          | GCR                                      | Commande Pull GCR                                                  |
-|------------------------------------------|------------------------------------------|-------------------------------------------------------------------|
-| [Agent Docker][1]                        | [Agent Docker (v6+)][2]                  | `docker pull gcr.io/datadoghq/agent`                              |
-| Agent Docker (v5)                       | [Agent Docker (v5)][2]                   | `docker pull gcr.io/datadoghq/docker-dd-agent`                    |
-| [DogStatsD][3]                           | [DogStatsD][4]                           | `docker pull gcr.io/datadoghq/dogstatsd`                          |
-| [Agent de cluster Datadog][5]               | [Agent de Cluster][6]                       | `docker pull gcr.io/datadoghq/cluster-agent`                      |
-| [Worker d'emplacement privé Synthetic][7]  | [Worker d'emplacement privé Synthetic][8]  | `docker pull gcr.io/datadoghq/synthetics-private-location-worker` |
+| Produit Datadog                           | GCR                                       | Commande Pull GCR                                                 |
+|-------------------------------------------|-------------------------------------------|-------------------------------------------------------------------|
+| [Agent Docker][1]                         | [Agent Docker (v6+)][2]                   | `docker pull gcr.io/datadoghq/agent`                              |
+| Agent Docker (v5)                         | [Agent Docker (v5)][2]                    | `docker pull gcr.io/datadoghq/docker-dd-agent`                    |
+| [DogStatsD][3]                            | [DogStatsD][4]                            | `docker pull gcr.io/datadoghq/dogstatsd`                          |
+| [Agent de cluster Datadog][5]             | [Agent de Cluster][6]                     | `docker pull gcr.io/datadoghq/cluster-agent`                      |
+| [Worker d'emplacement privé Synthetic][7] | [Worker d'emplacement privé Synthetic][8] | `docker pull gcr.io/datadoghq/synthetics-private-location-worker` |
 
 [1]: /fr/agent/docker/
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent

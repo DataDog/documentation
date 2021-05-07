@@ -16,13 +16,13 @@ further_reading:
 {{< tabs >}}
 {{% tab "Docker Hub" %}}
 
-| Datadog 製品                         | Docker Hub                               | Docker プルコマンド                              |
-|-----------------------------------------|------------------------------------------|--------------------------------------------------|
-| [Docker Agent][1]                       | [Docker Agent (v6+)][2]                  | `docker pull datadog/agent`                      |
-| Docker Agent (v 5)                      | [Docker Agent (v5)][3]                   | `docker pull datadog/docker-dd-agent`            |
-| [DogStatsD][4]                          | [DogStatsD][5]                           | `docker pull datadog/dogstatsd`                  |
-| [Datadog クラスター Agent][6]              | [クラスター Agent][7]                       | `docker pull datadog/cluster-agent`              |
-| [Synthetics プライベートロケーションワーカー][8] | [Synthetics プライベートロケーションワーカー][9]  | `docker pull synthetics-private-location-worker` |
+| Datadog 製品                                | Docker Hub                                 | Docker プルコマンド                                           |
+|--------------------------------------------|--------------------------------------------|-------------------------------------------------------------|
+| [Docker Agent][1]                          | [Docker Agent (v6+)][2]                    | `DOCKER_CONTENT_TRUST=1 docker pull datadog/agent`          |
+| Docker Agent (v 5)                         | [Docker Agent (v5)][3]                     | `docker pull datadog/docker-dd-agent`                       |
+| [DogStatsD][4]                             | [DogStatsD][5]                             | `DOCKER_CONTENT_TRUST=1 docker pull datadog/dogstatsd`      |
+| [Datadog クラスター Agent][6]                | [クラスター Agent][7]                        | `DOCKER_CONTENT_TRUST=1 docker pull datadog/cluster-agent` |
+| [Synthetics プライベートロケーションワーカー][8] | [Synthetics プライベートロケーションワーカー][9] | `docker pull synthetics-private-location-worker`          |
 
 [1]: /ja/agent/docker/
 [2]: https://hub.docker.com/r/datadog/agent
