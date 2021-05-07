@@ -355,7 +355,7 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
 Pour configurer la fonctionnalité Network Performance Monitoring dans Docker, utilisez la configuration suivante lorsque vous lancez l'Agent de conteneur :
 
 ```shell
-$ docker run -e DD_API_KEY="<CLÉ_API_DATADOG>" \
+$ DOCKER_CONTENT_TRUST=1 docker run -e DD_API_KEY="<CLÉ_API_DATADOG>" \
 -e DD_SYSTEM_PROBE_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
       -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -368,7 +368,7 @@ $ docker run -e DD_API_KEY="<CLÉ_API_DATADOG>" \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
 --cap-add=IPC_LOCK \
-datadog/agent:latest
+datadog/agent
 ```
 
 Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].

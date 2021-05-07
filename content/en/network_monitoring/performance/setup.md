@@ -309,7 +309,7 @@ If you already have the [Agent running with a manifest][4]:
 To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```shell
-$ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
+$ DOCKER_CONTENT_TRUST=1 docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
 -e DD_SYSTEM_PROBE_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
       -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -322,7 +322,7 @@ $ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
 --cap-add=IPC_LOCK \
-datadog/agent:latest
+datadog/agent
 ```
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
