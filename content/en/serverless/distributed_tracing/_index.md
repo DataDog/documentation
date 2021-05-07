@@ -73,7 +73,7 @@ The Datadog Lambda Library and tracing libraries for Go support:
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Go][11] libraries.
 
-You can trace your serverless functions in Datadog with [Datadog's tracing libraries][7] or by [installing our AWS X-Ray integration][3]. If you are using [Datadog's tracing libraries][7], and need to connect multiple Lambda function traces in event-driven architectures, we recommend you augment your traces by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described [here][8].
+For Go serverless applications, Datadog recommends you [install Datadog's tracing libraries][7]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, we recommend you augment AWS X-Ray traces with Datadog APM by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described [here][8].
 
 *Looking to trace through serverless resources not listed above? Open a feature request [here][9].*
 
@@ -84,7 +84,7 @@ The Datadog Lambda Library and tracing libraries for Java support:
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Java][13] libraries.
 
-You can trace your serverless functions in Datadog with [Datadog's tracing libraries][7] or by [installing the AWS X-Ray integration][3]. If you are using [Datadog's tracing libraries][7], and you need to connect multiple Lambda function traces in event-driven architectures, it is recommended that you augment your traces by configuring _both_ AWS X-Ray and Datadog APM tracing libraries, as described in [the serverless trace merging documentation][8].
+For Java serverless applications, Datadog recommends you [install Datadog's tracing libraries][7]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, we recommend you augment AWS X-Ray traces with Datadog APM by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described [here][8].
 
 *Have feedback on the Datadog's tracing libraries for Java Lambda functions? Make sure to check out discussions going on in the [#serverless][14] channel in the [Datadog Slack community][15].*
 

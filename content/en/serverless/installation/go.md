@@ -16,7 +16,7 @@ further_reading:
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
+{{< img src="serverless/go-lambda-tracing.png" alt="Monitor Go Lambda Functions with Datadog"  style="width:100%;">}}
 
 ## Required Setup
 
