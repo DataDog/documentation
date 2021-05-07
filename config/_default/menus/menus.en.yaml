@@ -1040,8 +1040,8 @@ main:
     parent: serverless
     identifier: serverless_troubleshooting
     weight: 11
-  - name: Node.js Lambda Tracing and Webpack Compatibility
-    url: serverless/serverless_tracing_and_webpack
+  - name: Webpack Compatibility
+    url: serverless/troubleshooting/serverless_tracing_and_webpack
     parent: serverless_troubleshooting
     weight: 1101
   - name: Azure App Services Extension
