@@ -91,7 +91,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
-              gcr.io/datadoghq/agent:latest
+              datadog/agent
 ```
 
 Si vous devez modifier le port utilisé pour recueillir des métriques StatsD, utilisez la variable d'environnement `DD_DOGSTATSD_PORT="<NOUVEAU_PORT_DOGSTATSD>`. Vous pouvez également configurer DogStatsD de façon à utiliser un [socket de domaine Unix][1] :
