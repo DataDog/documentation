@@ -13,7 +13,7 @@ further_reading:
 
 検出ルールは、取り込んだすべてのログおよびクラウドコンフィギュレーションに適用される条件付きロジックを定義します。対象期間内に、ルールで定義された少なくとも 1 つのケースが一致した場合に Datadog でセキュリティシグナルが生成されます。
 
-{{< img src="security_monitoring/detection_rules/detection_rules.png" alt="検出ルール" width="75%">}}
+{{< img src="security_platform/security_monitoring/detection_rules/detection_rules.png" alt="検出ルール" width="75%">}}
 
 セキュリティモニタリングでは、ログ検出を使用し、取り込んだログをリアルタイムで分析します。コンプライアンスモニタリングでは、クラウドコンフィギュレーションを使用しクラウド環境の状態をスキャンします。各モニタリングオプションには、インテグレーションコンフィギュレーションですぐに使用できる[デフォルトの検出ルール][1]があります。環境に合わせて新しいルールを作成することも可能です。.
 
@@ -27,7 +27,7 @@ further_reading:
 
 #### ファセットで絞り込み
 
-{{< img src="security_monitoring/detection_rules/facets_panel.png" alt="ファセットパネル" width="75%">}}
+{{< img src="security_platform/security_monitoring/detection_rules/facets_panel.png" alt="ファセットパネル" width="75%">}}
 
 左側のパネルのファセットを使用し、検索クエリを値でスコープします。たとえば、いくつかのルールソースがあり、1 つのソースにより提供されたルールでトラブルシューティングする必要がある場合、パネルで `cloudtrail` や `kubernetes` などのソース値の上にカーソルを合わせ、**only** をクリックして検索するソースを絞り込みます。
 
@@ -35,7 +35,7 @@ further_reading:
 
 ### ルール表
 
-{{< img src="security_monitoring/detection_rules/rules_table2.png" alt="ルール表"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/rules_table2.png" alt="ルール表"  >}}
 
 ルールはルール表に表示されます。
 

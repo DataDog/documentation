@@ -80,7 +80,7 @@ Datadog でログ属性を適切に使用しログデータを絞り込んだり
 
 認証システムへの攻撃として一般的な方法には、他に[**クレデンシャルスタッフィング**][11]があります。クレデンシャルスタッフィングは、セキュリティ侵害を受けたログイン情報をランダムに使用して、本当に動作するユーザーアカウントを見つけ出す攻撃です。このタイプの攻撃を検出するには、同じ `network.client.ip` から送信されてくる複数の `usr.id` の値を使用したログインをチェックします。
 
-{{< img src="security_monitoring/guide/monitor-authentication-logs-for-security-threats/credential-stuffing-attack-signal.png" alt="セキュリティシグナルエクスプローラーに表示されたクレデンシャルスタッフィング攻撃のサイン">}}
+{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/credential-stuffing-attack-signal.png" alt="セキュリティシグナルエクスプローラーに表示されたクレデンシャルスタッフィング攻撃のサイン">}}
 
 Datadog では、上記のような一般的な攻撃に対し、収集されたログをリアルタイムでスキャンすることのできる、事前設定済みの[検出ルール][12]を提供しています。このルールをトリガーするログがあると、Datadog により自動的に[セキュリティシグナル][13]が生成されます。このシグナルには、検出された攻撃の種類や対応方法、状況への対処方法など、イベントに関する重要なデータが含まれます。セキュリティシグナルは、エクスプローラーで表示、絞り込み、並べ替えることが可能で、情報をトリアージして重点的に作業をすべき点を確認できます。
 
@@ -92,7 +92,7 @@ Datadog では、[IP 調査ダッシュボード][16]や[ユーザーアカウ�
 
 たとえば、特定の IP アドレスまたはユーザーが複数のセキュリティシグナルをトリガーしている場合、ダッシュボードのリストまたはグラフでその IP アドレスまたはユーザーをクリックし、**View related Security Signals** を選択します。すると、該当する IP アドレスまたはユーザーにトリガーされたすべてのセキュリティシグナルがセキュリティシグナルエクスプローラーに表示されます。十分なデータがあれば、このビューで IP アドレスをユーザーに、またはその逆を関連付けることができます。そして、各ルールの詳細を確認して攻撃に対処します。ルールをクリックして **Message** タブでトリアージおよび対処に関する情報を確認し、この問題を適切に評価して対処を実行します。
 
-{{< img src="security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.gif" alt="IP 調査ダッシュボードで、トリガーされたセキュリティシグナルを分析">}}
+{{< img src="security_platform/security_monitoring/guide/monitor-authentication-logs-for-security-threats/investigation-dashboard-example.gif" alt="IP 調査ダッシュボードで、トリガーされたセキュリティシグナルを分析">}}
 
 カスタムダッシュボードを作成して、キーとなる認証データ（ソース別ログイン回数と結果など）を視覚化することも可能です。ユーザーベース全体のアクティビティを高いレベルで確認し、トレンドを理解して調査すべき疑わしいスパイクを検出することができます。
 

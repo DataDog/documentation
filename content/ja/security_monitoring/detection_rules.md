@@ -16,7 +16,7 @@ Datadog で検出ルールを新規作成するには、メインナビゲーシ
 
 ### 検索クエリを定義する
 
-{{< img src="security_monitoring/detection_rules/define_search_query.png" alt="検索クエリを定義" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/define_search_query.png" alt="検索クエリを定義" >}}
 
 同じロジックを使用して、[ログエクスプローラー検索][2]で検索クエリを構築します。各クエリには ASCII の小文字でラベルが付与されます。クエリ名を ASCII 文字から変更する場合は、鉛筆アイコンをクリックします。
 
@@ -30,7 +30,7 @@ Datadog で検出ルールを新規作成するには、メインナビゲーシ
 
 ### ルールのケースを定義する
 
-{{< img src="security_monitoring/detection_rules/define_rule_case.png" alt="ルールケースを設定" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/define_rule_case.png" alt="ルールケースを設定" >}}
 
 #### ルールケースのトリガーと名称
 
@@ -74,19 +74,19 @@ Datadog で検出ルールを新規作成するには、メインナビゲーシ
 
 タイムフレームをまたぐログを結合すると、セキュリティシグナルの信頼性と重大度を強化することができます。たとえば、ブルートフォースアタックを検出するためには、成功した場合と失敗した場合の認証ログをユーザーと関連付ける必要があります。
 
-{{< img src="security_monitoring/detection_rules/joining_queries_define.png" alt="検索クエリを定義"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/joining_queries_define.png" alt="検索クエリを定義"  >}}
 
 検出ルールはグループ化の値をもとにログを結合します。グループ化の値は通常エンティティ (IP アドレス、ユーザーなど) となりますが、必要に応じてすべての属性を使用できます。
 
-{{< img src="security_monitoring/detection_rules/group_by.png" alt="グループ化"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/group_by.png" alt="グループ化"  >}}
 
 検出ルールケースは、グループ化の値に基づいてこれらのクエリを結合します。一致するケースと値が同じでなければならないため、グループ化属性には通常同じ属性が設定されます。グループ化の値が存在しない場合、ケースが一致することはありません。セキュリティシグナルはケースが一致した場合のみ、一意のグループ化値に対して生成されます。
 
-{{< img src="security_monitoring/detection_rules/set_rule_cases2.png" alt="ルールケースを設定"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/set_rule_cases2.png" alt="ルールケースを設定"  >}}
 
 以下の例は、同じ `@usr.name` で5 回を超えてログインに失敗した場合、および 1 回ログインに成功した場合のケースです。この場合、最初のケースに一致した場合はセキュリティシグナルが生成されます。
 
-{{< img src="security_monitoring/detection_rules/gbv2.png" alt="ルールケースを設定" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/gbv2.png" alt="ルールケースを設定" >}}
 
 ## 検出ルールを管理する
 
@@ -98,7 +98,7 @@ Datadog で検出ルールを新規作成するには、メインナビゲーシ
 
 ### 検出ルールテーブル
 
-{{< img src="security_monitoring/detection_rules/rules_table2.png" alt="検出ルールテーブル"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/rules_table2.png" alt="検出ルールテーブル"  >}}
 
 検出ルールは検出ルールテーブルに表示されます。
 
@@ -126,7 +126,7 @@ Options ボタンを使用して、検出ルールテーブルの内容をニー
 
 ルールの上にカーソルを重ねて、**Delete** ボタンをクリックするとルールを削除できます。
 
-## その他の参考資料 
+## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 
