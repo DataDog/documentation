@@ -137,7 +137,9 @@ Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
 ### PCNTL (Process control)
 
-We currently do not offer support for [pcntl][7]. Tracing applications that use functions such as `pcntl_fork` may result in unpredictable results.
+We currently do not offer support for tracing processes forked via [pcntl][7]. When a call to `pcntl_fork` is detected, we disable tracing in the forked process. The main process will still be traced. We plan to provide support for `pcntl` in the future.
+
+If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application will fatally crash. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog agent without blocking the main process.
 
 ## Further Reading
 
@@ -150,3 +152,4 @@ We currently do not offer support for [pcntl][7]. Tracing applications that use 
 [5]: /tracing/troubleshooting/php_5_deep_call_stacks
 [6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
+[8]: https://man7.org/linux/man-pages/man2/unshare.2.html
