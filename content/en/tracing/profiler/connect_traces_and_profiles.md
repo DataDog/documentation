@@ -19,7 +19,7 @@ If your application is showing performance problems in production, it's helpful 
 
 ## Prerequisites
 
-{{< programming-lang-wrapper langs="java,python" >}}
+{{< programming-lang-wrapper langs="java,python,ruby" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -46,6 +46,15 @@ Requires:
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
 
 Requires tracing library version 0.44.0 or greater.
+
+
+[1]: /tracing/profiler/getting_started
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
+
+Requires tracing library version 0.49.0 or greater.
 
 
 [1]: /tracing/profiler/getting_started
