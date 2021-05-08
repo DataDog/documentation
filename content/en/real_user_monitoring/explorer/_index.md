@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
   tag: "Blog"
   text: "Monitor Core Web Vitals with RUM"
+- link: "https://www.datadoghq.com/blog/modern-frontend-monitoring/"
+  tag: "Blog"
+  text: "Start monitoring single-page applications"
 ---
 
 {{< img src="real_user_monitoring/explorer/rum_explorer.png" alt="RUM explorer"  >}}
