@@ -133,5 +133,8 @@
         "webpack-bundle-analyzer": "^3.3.2",
         "webpack-cli": "^3.3.6",
         "webpack-merge": "^4.2.1"
+    },
+    "hugo-bin": {
+      "buildTags": "extended"
     }
 }
