@@ -80,6 +80,10 @@ nav_sections:
         link: watchdog/
         icon: watchdog.svg
         desc: Automatically see trends in your applications & infrastructure metrics
+      - title: Continuous Integration
+        link: continuous_integration/
+        icon: ci.svg
+        desc: Monitor the performance and reliability of your CI tests and pipelines
   - nav_section:
     - name: 'Configuration'
     - navtiles:
