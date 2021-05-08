@@ -4,15 +4,15 @@
     <div class="row">
         <div class="col">
             <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
-            
+
             {{ partial "search-mobile.html" . }}
 
             <div class="sidenav-nav sidenav-nav-main">
                 <!-- This was placed with js for build speed increase -->
-                {{ partial "nav/main-menu.html" . }}
+                {{ partialCached "nav/main-menu.html" . }}
 
 
-                
+
             </div>
         </div>
     </div>

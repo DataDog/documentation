@@ -3,12 +3,12 @@
 <aside class="sidenav">
     <div class="row sticky">
         <div class="col">
-            
+
             <h4 class="text-brand-primary"><a class="text-primary" href="{{ "" | absLangURL  }}">{{ i18n "datadog_docs" }}</a></h4>
             {{ partial "search.html" . }}
 
             <div class="sidenav-nav sidenav-nav-main">
-                {{ partial "nav/main-menu.html" . }}
+                {{ partialCached "nav/main-menu.html" . }}
             </div>
         </div>
     </div>

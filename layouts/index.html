@@ -53,7 +53,7 @@
 <body class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }}">
 
 
-    {{ partial "header/header.html" . }}
+    {{ partialCached "header/header.html" . }}
 
     {{ partial "home-header.html" . }}
 
@@ -120,7 +120,7 @@
 
     </main>
 
-    {{ partial "footer/footer.html" . }}
+    {{ partialCached "footer/footer.html" . }}
 
     <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
     <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>

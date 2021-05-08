@@ -38,7 +38,7 @@
 
     {{ with $ctx.File }}
         {{ $editLink := ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
-        {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
+        {{ partialCached "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
     {{ end }}
 
 {{ end }}

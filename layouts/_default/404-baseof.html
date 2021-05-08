@@ -44,12 +44,12 @@
       </div>
     </div>
   </div>
-  {{ partial "header/header.html" . }}
+  {{ partialCached "header/header.html" . }}
 
   <div class="container h-100">
     <div class="row h-100">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
-        {{ partial "sidenav/main-sidenav.html" . }}
+        {{ partialCached "sidenav/main-sidenav.html" . }}
       </div>
       <div class="col-12 col-lg-9 main">
         {{ block "main" . }}{{ end }}
@@ -57,7 +57,7 @@
     </div>
   </div>
 
-  {{ partial "footer/footer.html" . }}
+  {{ partialCached "footer/footer.html" . }}
 
   <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
   <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>

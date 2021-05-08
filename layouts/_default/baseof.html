@@ -49,19 +49,19 @@
       </div>
     </div>
   </div>
-  {{ partial "header/header.html" . }}
+  {{ partialCached "header/header.html" . }}
 
   <div class="container h-100 pt-1">
     <div class="row h-100 position-relative js-content-container">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
-        {{ partial "sidenav/main-sidenav.html" . }}
+        {{ partialCached "sidenav/main-sidenav.html" . }}
       </div>
 
       <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
         <div class="{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}"
           id="mainContent">
           {{ block "main" . }}{{ end }}
-          {{ partial "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
+          {{ partialCached "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
         </div>
       </div>
 
@@ -77,7 +77,7 @@
     </div>
   </div>
 
-  {{ partial "footer/footer.html" . }}
+  {{ partialCached "footer/footer.html" . }}
 
   <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
   <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>

@@ -1,7 +1,7 @@
 {{- $partial_name := .Get "name" -}}
 {{- $markdown := .Get "markdown" -}}
 {{- if $markdown -}}
-  {{- partial $partial_name . | markdownify -}}
+  {{- partialCached $partial_name . | markdownify -}}
 {{- else -}}
-  {{- partial $partial_name . -}}
+  {{- partialCached $partial_name . -}}
 {{- end -}}
