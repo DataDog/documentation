@@ -65,7 +65,7 @@ Four tabs are below the profile header:
 
 In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs.
 
-{{< programming-lang-wrapper langs="java,python,go" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
 {{< programming-lang lang="java" >}}
 
 {{< img src="tracing/profiling/profile.png" alt="A specific profile">}}
@@ -149,13 +149,16 @@ Heap Count
 : Shows the number of objects allocated in heap memory by each function, and which objects remained allocated since the start of the application and lived since the last garbage collection. This is useful for investigating the overall memory usage of your service.
 
 {{< /programming-lang >}}
-{{< programming-lang lang="Ruby" >}}
+{{< programming-lang lang="ruby" >}}
+
 Once enabled, the following profile types are collected:
 
-| Profile type             | Definition                                                                                                                                                                                                                                                                                         |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU         | Shows the time each function spent running on the CPU, including Ruby and native code.                                                                                                                         |
-| Wall Time | Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running. |
+CPU
+: Shows the time each function spent running on the CPU, including Python and native code.
+
+Wall Time
+: Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
+
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
