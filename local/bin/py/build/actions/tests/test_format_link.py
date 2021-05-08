@@ -30,6 +30,11 @@ This is a reference [link][1]
 {{% /tab %}}
 {{< /tabs >}}
 
+{{< site-region region="us" >}}
+This is a [link][1] inside of a site-region shortcode.
+[1]: /site-region-link
+{{< /site-region >}}
+
 [1]: /reference_link_1
 [3]: /reference_without_text
 """
@@ -56,6 +61,11 @@ This is a reference [link][2]
 [2]: /reference_link_1
 {{% /tab %}}
 {{< /tabs >}}
+
+{{< site-region region="us" >}}
+This is a [link][1] inside of a site-region shortcode.
+[1]: /site-region-link
+{{< /site-region >}}
 
 [1]: /inlined_link
 [2]: /reference_link_1
