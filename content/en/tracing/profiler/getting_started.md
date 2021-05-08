@@ -20,9 +20,9 @@ further_reading:
 
 Profiler is shipped within the following tracing libraries. Select your language below to learn how to enable profiler for your application:
 
-To get notified when a private beta is available for the **Node**, **Ruby**, **PHP**, or **.NET** Profiler, [sign up here][1].
+To get notified when a private beta is available for the **Node**, **PHP**, or **.NET** Profiler, [sign up here][1].
 
-{{< programming-lang-wrapper langs="java,python,go" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
 {{< programming-lang lang="java" >}}
 
 The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 (version 8u262+)][2] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
@@ -255,6 +255,83 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
 [6]: /tracing/visualization/#services
 [7]: /tracing/guide/setting_primary_tags_to_scope/#environment
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+<div class="alert alert-warning">
+Datadog Ruby Profiler is currently in public beta. We strongly advise evaluating the profiler in a non-sensitive environment before deploying in production.
+</div>
+
+The Datadog Profiler requires Ruby 2.1+. To begin profiling applications:
+
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.
+
+2. Add the `google-protobuf` and `ddtrace` gems to your Gemfile:
+
+    ```ruby
+    source 'https://rubygems.org'
+    gem 'ddtrace'
+    gem 'google-protobuf'
+    ```
+
+    **Note**: Profiler is available in the `ddtrace` library for versions 0.49+.
+
+2. Install the gems with `bundle install`
+
+3. You can auto-enable the profiler by simply setting `DD_PROFILING_ENABLED` environment variable to `true`:
+
+    ```shell
+    DD_PROFILING_ENABLED=true
+    ```
+
+    **Note**
+
+    You can also configure the profiler via code. Rails applications you can create a `config/initializers/datadog.rb` file with Profiling enabled:
+
+    ```ruby
+    Datadog.configure do |c|
+      # Example for Rails: following will activate tracing auto-instrumentation
+      c.use :rails
+
+      # This will enable the profiler
+      c.profiling.enabled = true
+    end
+    ```
+
+4. Start your Ruby application with a pre-loader:
+
+    ```
+    bundle exec ddtracerb exec <your_app_invocation>
+    ```
+
+    **Note**
+
+    If starting the application via `ddtracerb exec` is not an option (eg. when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point such as `config.ru` for a web application:
+
+    ```
+    require 'ddtrace/profiling/preload'
+    ```
+
+
+4. After a minute or two of starting your Ruby application, visualize your profiles in the [Datadog APM > Profiler page][2].
+
+**Note**:
+
+- It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use environment variables to set the parameters:
+
+| Environment variable                             | Type          | Description                                                                                      |
+| ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracer version 0.45+.              |
+| `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
+| `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
+| `DD_VERSION`                                     | String        | The version of your application.                             |
+| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
+
+
+[1]: https://app.datadoghq.com/account/settings#agent/overview
+[2]: https://app.datadoghq.com/profiling
+[3]: /tracing/visualization/#services
+[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
