@@ -15,6 +15,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
       tag: 'Blog'
       text: 'Correlate request logs with traces automatically'
+    - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+      tag: 'Guide'
+      text: 'Ease troubleshooting with cross product correlation.'
 ---
 
 You can set up your logging library and .NET tracing configurations so that trace and span IDs are injected into application logs, providing you with application performance monitoring data correlated with log data. 

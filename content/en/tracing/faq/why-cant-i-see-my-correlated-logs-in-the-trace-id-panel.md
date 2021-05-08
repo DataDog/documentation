@@ -5,6 +5,9 @@ further_reading:
 - link: "/tracing/connect_logs_and_traces/"
   tag: "Documentation"
   text: "Correlate Traces and Logs"
+- link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+  tag: 'Guide'
+  text: 'Ease troubleshooting with cross product correlation.'
 ---
 
 Clicking on a [trace][1] opens a contextual panel that contains information about the trace, about the host and the correlated logs. However the log panel can be empty in some specific cases. Let's review how this can be fixed.

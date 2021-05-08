@@ -11,6 +11,9 @@ further_reading:
   - link: "/tracing/"
     tag: "Documentation"
     text: "APM and Distributed Tracing"
+  - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+    tag: 'Guide'
+    text: 'Ease troubleshooting with cross product correlation.'
 
 ---
 
