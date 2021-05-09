@@ -49,7 +49,7 @@ Define the configuration of your browser test.
 
   {{% tab "Privacy" %}}
 
-  * **Do not capture any screenshots for this test**: Select this option to prevent any screenshot from being taken for all your test steps. This option is also available as an [advanced option][1] at the individual step level. This can be helpful to ensure no sensitive data gets featured in your test results. It however needs to be use mindfully as it can make failure troubleshooting way more challenging. You can read more about our security recommendations [here][2].
+  * **Do not capture any screenshots for this test**: Select this option to prevent any screenshot from being taken for all your test steps. This option is also available as an [advanced option][1] at the individual step level. This can be helpful to ensure no sensitive data gets featured in your test results. It however needs to be used mindfully as it can make failure troubleshooting way more challenging. You can read more about our security recommendations [here][2].
 
 [1]: /synthetics/browser_tests/advanced_options#prevent-screenshot-capture
 [2]: /security/synthetics
