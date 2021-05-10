@@ -9,7 +9,7 @@ aliases:
 
 The Security Monitoring product analyzes your ingested logs to detect threats in real time, such as by matching logs with threat intelligence, or by applying [Security Rules][1] to detect attacks or anomalies.
 
-Datadog charges for analyzed logs based on the total number of gigabytes ingested and analyzed by the Datadog Security Monitoring service. By default, Security Monitoring analyzes all your ingested logs to maximize detection coverage. However, by using the [Security Monitoring API][2], you can programmatically setup "Security Filters" to configure which subset of ingested logs to analyze.
+Datadog charges for analyzed logs based on the total number of gigabytes ingested and analyzed by the Datadog Security Monitoring service. By default, Security Monitoring analyzes all your ingested logs to maximize detection coverage. However, by using the [Security Monitoring API][2], you can programmatically setup Security Filters to configure which subset of ingested logs to analyze.
 
 The following examples are covered in this guide:
 
