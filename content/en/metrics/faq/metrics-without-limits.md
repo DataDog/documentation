@@ -12,7 +12,7 @@ further_reading:
 
 Metrics without Limits\* provides you with the ability to customize tagging on all metric types in-app without having to redeploy or change any code. With Metrics without Limits\*, you’ll be able to customize tagging to drop in-app host-level tags attached to application-level or business metrics. This functionality will be located in the [Metrics Summary][1] page.
 
-## Configuration of Tags
+## Configuration of tags
 Click on any metric name to open its details sidepanel. Then click on the **Manage Tags** button and then **“Custom”** to configure the tags you’d like remain as queryable on dashboards/monitors. Before hitting **Save**, you’ll see an estimated new volume of indexed custom metrics that results from this potential tag configuration.
 
 {{< img src="metrics/faq/managetags.gif" alt="Configuration of Tags">}}
