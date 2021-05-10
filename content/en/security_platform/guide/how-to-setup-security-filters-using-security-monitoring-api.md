@@ -166,7 +166,7 @@ curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ```
 
-Security Filters are inclusive, which means a given log is analyzed **if it matches at least one Security Filter**. If you're aiming to specify a subset of logs to analyze, you likely also would want to disable the default built-in filter named "all ingested logs". You would do so by setting its "is_enabled" attribute to `false`, as follows:
+Security Filters are inclusive, which means a given log is analyzed **if it matches at least one Security Filter**. If you're aiming to specify a subset of logs to analyze, you likely also would want to disable the default built-in filter named `all ingested logs`. You would do so by setting its `is_enabled` attribute to `false`, as follows:
 
 **API call:**
 
