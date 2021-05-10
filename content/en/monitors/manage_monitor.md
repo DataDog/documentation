@@ -80,6 +80,31 @@ Check any number of boxes to find your monitors. The following rules apply:
 
 **Note**: For attributes with a large number of values across your monitors, use the attribute search bar to find the correct value.
 
+### Saved View
+
+Leverage saved views to quickly jump to pre-set views in order to find monitors relevant to a given context like the monitors for your team or muted for more than 60 days:
+
+{{< img src="monitors/manage_monitor/overview.jpg" alt="Saved Views selection"  style="width:90%;" >}}
+
+Saved views are visibile by everyone in your organisation.
+Technically, a Saved View keeps track of:
+
+- The search query
+
+#### Default view
+
+{{< img src="monitors/manage_monitor/default.png" alt="Default view"  style="width:50%;" >}}
+
+Your existing Manage Monitor view is your default saved view. This configuration is only accessible and viewable to you and updating this configuration does not have any impact on your organization.
+
+You can **temporarily** override your default saved view by completing any action in the UI or when opening links to the Manage Monitor page that embed a different configuration.
+
+At any moment, from the default view entry in the Views panel:
+
+* **Reload** your default view by clicking on the entry.
+* **Update** your default view with the current parameters.
+* **Reset** your default view to Datadog's defaults for a fresh restart.
+
 ## Manage
 
 After searching, select one or more monitors to update using the checkboxes next to each result. Select all results with the top checkbox next to the *STATUS* column heading. Modify the monitors in bulk using the buttons at the right above the search results:
