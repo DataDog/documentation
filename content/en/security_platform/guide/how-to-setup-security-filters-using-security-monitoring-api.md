@@ -1,5 +1,5 @@
 ---
-title: How To Setup Security Filters Using Security Monitoring API
+title: How To Setup Security Filters By Using The Security Monitoring API
 kind: guide
 aliases:
   - /security_monitoring/guide/how-to-setup-security-filters-using-security-monitoring-api/
@@ -7,26 +7,26 @@ aliases:
 
 ## Overview
 
-Use the [Security Monitoring API][1] to programmatically setup your Security Filters and choose which logs have to be analyzed with the [Security Monitoring Rules][2].
+The Security Monitoring product analyzes your ingested logs to detect threats in real time, such as by matching logs with threat intelligence, or by applying [Security Rules][1] to detect attacks or anomalies.
+
+Datadog charges for analyzed logs based on the total number of gigabytes ingested and analyzed by the Datadog Security Monitoring service. By default, Security Monitoring analyzes all your ingested logs to maximize detection coverage. However, by using the [Security Monitoring API][2], you can programmatically setup "Security Filters" to configure which subset of ingested logs to analyze.
 
 The following examples are covered in this guide:
 
-* [Add an exclusion filter on the builtin filter](#add-an-exclusion-filter-on-the-builtin-filter)
-* [Create a custom security filter](#create-a-custom-security-filter)
+* [Configure the default security filter to exclude certain logs](#add-an-exclusion-filter-on-the-builtin-filter)
+* [Create custom security filters to specify which log sources to analyze](#create-a-custom-security-filter)
 
 ## Prerequisites
 
-* An API key and an application key from an admin user is required to use the API. These are available in your [Datadog account API key page][3]. Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key.
+* An API key and an application key **from an admin user** is required to use the API. These are available in your [Datadog account API key page][3]. Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key.
 
-* This guide features `curl` examples. Install [curl][4] if you do not have it installed, or reference additional language examples for this API endpoint in the [API documentation][1].
-
+* This guide features `curl` examples. Install [curl][4] if you do not have it installed, or reference additional language examples for this API endpoint in the [API documentation][2].
 
 ## Examples
 
-### Add an exclusion filter on the builtin filter
+### Add an exclusion to the default security filter
 
-The builtin filter enabled by default means that all the logs are analyzed with the [Security Monitoring Rules][2]. You can customize it by adding an exclusion filter to exclude some logs.
-Before doing that, you first need to retrieve the list of Security Filters in order to get the filter `id`.
+By default, a single Security Filter exists that analyzes all ingested logs. It's named "all ingested logs" and has a query of `*`. You can customize it by adding an exclusion to exclude a subset of logs based on their tags. To do so, you first need to retrieve the list of Security Filters in order to get the filter's `id`.
 
 **API call:**
 
@@ -63,8 +63,9 @@ curl -L -X GET 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v
 
 ```
 
-You can then modify it to add an exclusion filter, for example exclude all the logs for `env:staging`.
-`version` indicates the current version of the filter you want to update.
+In this example, the filter's `id` is `"l6l-rmx-mqx"`. You can then modify it to add an exclusion, for example exclude all the logs tagged with `env:staging`.
+
+Note: `version` indicates the current version of the filter you want to update.
 
 **API call:**
 
@@ -118,8 +119,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 ### Create a custom security filter
 
-You can also create some custom Security Filters in order to restrict the analysis to some specific logs.
-For example you can choose to analyze only the logs from AWS cloudtrail with the filter `source:cloudtrail`
+You can also create custom Security Filters in order to restrict the analysis to explicitly specified logs. For example you can choose to analyze the logs from AWS Cloudtrail with a filter that matches only `source:cloudtrail`.
 
 **API call:**
 
@@ -166,9 +166,7 @@ curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ```
 
-If you already defined an exclusion filter as in [Add an exclusion filter on the builtin filter](#add-an-exclusion-filter-on-the-builtin-filter), the logs analyzed will be the ones with either `source:cloudtrail` OR without `env:staging`, others are dropped.
-
-**You need to deactivate the builtin filter which matches all the ingested logs if you only want your custom filter to be taken into account.**
+Security Filters are inclusive, which means a given log is analyzed **if it matches at least one Security Filter**. If you're aiming to specify a subset of logs to analyze, you likely also would want to disable the default built-in filter named "all ingested logs". You would do so by setting its "is_enabled" attribute to `false`, as follows:
 
 **API call:**
 
@@ -217,7 +215,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 ```
 
-[1]: /api/v2/security-monitoring/
-[2]: /security_platform/detection_rules/security_monitoring
+[1]: /security_platform/detection_rules/security_monitoring
+[2]: /api/v2/security-monitoring/
 [3]: /api/v1/authentication/
 [4]: https://curl.haxx.se/download.html
