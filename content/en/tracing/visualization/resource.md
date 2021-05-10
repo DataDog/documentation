@@ -67,12 +67,18 @@ For a given resource, Datadog provides you a [span][5] analysis breakdown of all
 
 The displayed metrics represent, per span:
 
-| Metric            | Description                                                                                                                                        |
-|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Avg Span/trace`  | Average number of occurrences of the span, for traces including the current resource, where the span is present at least once.                     |
-| `% of traces`     | Percentage of traces including the current resource where the span is present at least once.                                                       |
-| `Avg duration`    | Average duration of the span, for traces including the current resource, where the span is present at least once.                                  |
-| `Avg % Exec Time` | Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once. |
+
+`Avg Spans/trace`
+: Average number of occurrences of the span, for traces including the current resource, where the span is present at least once.
+
+`% of Traces`
+: Percentage of traces including the current resource where the span is present at least once.
+
+`Avg Duration`
+: Average duration of the span, for traces including the current resource, where the span is present at least once.
+
+`Avg % Exec Time` 
+: Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once.
 
 **Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (i.e.: spans without children).
 

@@ -24,19 +24,38 @@ The Infrastructure list shows all of your hosts monitored by Datadog with activi
 
 The following information is displayed in the infrastructure list for your hosts:
 
-| Column           | Description                                                                                         |
-|------------------|-----------------------------------------------------------------------------------------------------|
-| Hostname         | The preferred hostname [alias](#aliases) (use the Options menu to view Cloud Name or Instance ID).              |
-| Cloud Name       | A hostname [alias](#aliases).                                                                                   |
-| Instance ID      | A hostname [alias](#aliases).                                                                                   |
-| Status           | Displays `UP` when the expected metrics are received and displays `???` if no metrics are received. |
-| CPU              | The percent of CPU used (everything but idle).                                                      |
-| IOWait           | The percent of CPU spent waiting on the IO (not reported for all platforms).                        |
-| Load 15          | The system load over the last 15 minutes.                                                           |
-| Apps             | The Datadog integrations reporting metrics for the host.                                            |
-| Operating System | The tracked operating system                                                                        |
-| Cloud Platform   | Cloud platform the host is running on. (Example: AWS, GCP, Azure, etc...)                           |
-| Datadog Agent    | Agent version that is collecting data on the host.                                                  |
+Hostname
+: The preferred hostname [alias](#aliases) (use the Options menu to view Cloud Name or Instance ID).
+
+Cloud Name
+: A hostname [alias](#aliases).
+
+Instance ID
+: A hostname [alias](#aliases).
+
+Status
+: Displays `UP` when the expected metrics are received and displays `???` if no metrics are received.
+
+CPU
+: The percent of CPU used (everything but idle).
+
+IOWait
+: The percent of CPU spent waiting on the IO (not reported for all platforms).
+
+Load 15
+: The system load over the last 15 minutes.
+
+Apps
+: The Datadog integrations reporting metrics for the host.
+
+Operating System 
+: The tracked operating system.
+
+Cloud Platform
+: Cloud platform the host is running on (for example, AWS, GCP, or Azure).
+
+Datadog Agent
+: Agent version that is collecting data on the host.
 
 ### Hostname
 
@@ -46,7 +65,7 @@ The Datadog Agent collects potential hostnames from a number of different source
 
 ### Inspect
 
-Click on any host to view more details including [aliases](#aliases), [tags][2], [metrics][8], [containers][9] and [logs][3] (if enabled):
+Click on any host to view more details including [aliases](#aliases), [tags][2], [metrics][3], [containers][4] and [logs][5] (if enabled):
 
 {{< img src="infrastructure/index/Infra-List.png" alt="Infrastructure list host details"  style="width:90%;">}}
 
@@ -61,15 +80,15 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 For a JSON formatted list of your hosts reporting to Datadog, use one of the following:
 
 * The **JSON API permalink** at the bottom of the infrastructure list.
-* The [search hosts API endpoint][4] - see the [developer guide][5] for an example.
+* The [search hosts API endpoint][6] - see the [developer guide][7] for an example.
 
 #### Agent version
 
-At times it may also be prove useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][6], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
+At times it may also be prove useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][8], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
 
 #### No Agent
 
-Another use case of the JSON export would be to get a list of AWS EC2 instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See this [example script][7].
+Another use case of the JSON export would be to get a list of AWS EC2 instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See this [example script][9].
 
 ## Further Reading
 
@@ -77,10 +96,10 @@ Another use case of the JSON export would be to get a list of AWS EC2 instances 
 
 [1]: /agent/faq/how-datadog-agent-determines-the-hostname/
 [2]: /getting_started/tagging/
-[3]: /logs/
-[4]: /api/v1/hosts/#get-the-total-number-of-active-hosts
-[5]: /developers/guide/query-the-infrastructure-list-via-the-api/
-[6]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
-[7]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38
-[8]: /metrics/
-[9]: /infrastructure/livecontainers/?tab=helm#overview
+[3]: /metrics/
+[4]: /infrastructure/livecontainers/?tab=helm#overview
+[5]: /logs/
+[6]: /api/v1/hosts/#get-the-total-number-of-active-hosts
+[7]: /developers/guide/query-the-infrastructure-list-via-the-api/
+[8]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
+[9]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38

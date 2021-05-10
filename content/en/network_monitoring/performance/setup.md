@@ -43,10 +43,6 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 **Note:** There is an exception to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][3] feature is not supported on CentOS/RHEL 7.6.
 
-#### Windows OS
-
-Data collection is done using a device driver, and support is available as of Datadog agent version 7.27.0, for Windows versions 2012 and up.
-
 #### macOS
 
 Datadog Network Performance Monitoring does not currently support macOS platforms.
@@ -87,8 +83,6 @@ Network Performance Monitoring supports use of the following provisioning system
 
 ## Setup
 
-To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][13] based on your system setup.
-
 Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
@@ -123,7 +117,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `systemctl` command is not available on your system, start it with following command instead: `sudo service datadog-agent-sysprobe start` and then set it up to start on boot before `datadog-agent` starts.
 
-5. [Restart the Agent][2]
+5. [Restart the Agent][2].
 
     ```shell
     sudo systemctl restart datadog-agent
@@ -135,7 +129,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
 On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
 
-The Datadog Agent RPM package for CentOS-based systems bundles [an SELinux policy][3] to grant these permissions to the system-probe binary.
+The Datadog Agent RPM package for CentOS-based systems bundles an [SELinux policy][3] to grant these permissions to the system-probe binary.
 
 If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
 
@@ -162,47 +156,16 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
     restorecon -v /opt/datadog-agent/embedded/bin/system-probe
     ```
 
-5. [Restart the Agent][2]
+5. [Restart the Agent][2].
 
 **Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
-### Windows systems
 
-[1]: /infrastructure/process/?tab=linuxwindows#installation
+[1]: /infrastructure/process
 [2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
-{{% /tab %}}
-{{% tab "Agent (Windows)" %}}
-Data collection for Windows relies on a filter driver for collecting network data.
-
-To enable network performance monitoring for Windows hosts:
-
-1. Install the [Datadog Agent][1] (version 7.27.0 or above) with the network driver component enabled.
-
-   During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
-
-1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
-
-    ```yaml
-    network_config:
-        enabled: true
-    ```
-3. [Restart the Agent][2].
-
-    For PowerShell (`powershell.exe`):
-    ```shell
-    restart-service -f datadogagent
-    ```
-    For Command Prompt (`cmd.exe`):
-    ```shell
-    net /y stop datadogagent && net start datadogagent
-    ```
-**Note**: NPM currently monitors Windows hosts only, and not Windows containers. DNS metric collection is not supported for Windows systems.
-
-[1]: /agent/basic_agent_usage/windows/?tab=commandline
-[2]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -421,4 +384,3 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [10]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [11]: https://github.com/DataDog/chef-datadog
 [12]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

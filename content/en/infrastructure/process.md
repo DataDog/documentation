@@ -169,12 +169,14 @@ When you input a text string into the search bar, fuzzy string search is used to
 
 To combine multiple string searches into a complex query, use any of the following Boolean operators:
 
-|              |                                                                                                                                  |                                                                 |
-| :----------- | :------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- |
-| **Operator** | **Description**                                                                                                                  | **Example**                                                     |
-| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)                           | java AND elasticsearch                                          |
-| `OR`         | **Union**: either term is contained in the selected events                                                                       | java OR python                                                  |
-| `NOT` / `!`  | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
+`AND`
+: **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)<br> **Example**: `java AND elasticsearch`
+
+`OR`
+: **Union**: either term is contained in the selected events <br> **Example**: `java OR python`
+
+`NOT` / `!`
+: **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation<br> **Example**: `java NOT elasticsearch` or `java !elasticsearch`
 
 Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
 
