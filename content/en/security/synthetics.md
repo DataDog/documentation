@@ -106,7 +106,7 @@ You can store secrets in [global variables][4] with the obfuscation feature to e
 
 ## Privacy options
 
-You can use [API][6], [Multistep API][7] and [Browser tests' privacy options][8] to limit the amount of data stored in test results. You should however be mindful about the usage of these options as enabling them can make failures troubleshooting considerably more difficult.
+Use the [API][6], [Multistep API][7] and [Browser tests' privacy options][8] to limit the amount of data stored in test results. However, be mindful of the usage of these options as enabling them can make failures troubleshooting more difficult.
 
 ### Further Reading
 
