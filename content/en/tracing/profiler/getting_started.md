@@ -262,23 +262,22 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 Datadog Ruby Profiler is currently in public beta. We strongly advise evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Profiler requires Ruby 2.1+. To begin profiling applications:
+The Datadog Profiler requires MRI Ruby 2.1+. To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.
 
-2. Add the `google-protobuf` and `ddtrace` gems to your Gemfile:
+2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    source 'https://rubygems.org'
     gem 'ddtrace'
-    gem 'google-protobuf'
+    gem 'google-protobuf', '~> 3.0'
     ```
 
     **Note**: Profiler is available in the `ddtrace` library for versions 0.49+.
 
 2. Install the gems with `bundle install`
 
-3. You can auto-enable the profiler by simply setting `DD_PROFILING_ENABLED` environment variable to `true`:
+3. You can auto-enable the profiler by setting the `DD_PROFILING_ENABLED` environment variable to `true`:
 
     ```shell
     DD_PROFILING_ENABLED=true
@@ -298,17 +297,17 @@ The Datadog Profiler requires Ruby 2.1+. To begin profiling applications:
     end
     ```
 
-4. Start your Ruby application with a pre-loader:
+4. Add the `ddtracerb exec` command to your Ruby application start command:
 
-    ```
-    bundle exec ddtracerb exec <your_app_invocation>
+    ```shell
+    bundle exec ddtracerb exec ruby myapp.rb
     ```
 
     **Note**
 
     If starting the application via `ddtracerb exec` is not an option (eg. when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point such as `config.ru` for a web application:
 
-    ```
+    ```ruby
     require 'ddtrace/profiling/preload'
     ```
 
@@ -321,7 +320,7 @@ The Datadog Profiler requires Ruby 2.1+. To begin profiling applications:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracer version 0.45+.              |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracer version 0.48+.              |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
