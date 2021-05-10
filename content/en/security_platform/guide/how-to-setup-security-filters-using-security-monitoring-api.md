@@ -35,7 +35,7 @@ By default, a single Security Filter exists that analyzes all ingested logs. It'
 curl -L -X GET 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security_monitoring/configuration/security_filters' \
 --header 'Content-Type: application/json' \
 --header 'DD-API-KEY: <DATADOG_API_KEY>' \
---header 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' \
+--header 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>'
 
 ```
 
