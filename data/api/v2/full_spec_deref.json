@@ -22215,12 +22215,14 @@
                       "description": "The detection method.",
                       "enum": [
                         "threshold",
-                        "new_value"
+                        "new_value",
+                        "anomaly_detection"
                       ],
                       "type": "string",
                       "x-enum-varnames": [
                         "THRESHOLD",
-                        "NEW_VALUE"
+                        "NEW_VALUE",
+                        "ANOMALY_DETECTION"
                       ]
                     },
                     "evaluationWindow": {
@@ -22650,12 +22652,14 @@
                 "description": "The detection method.",
                 "enum": [
                   "threshold",
-                  "new_value"
+                  "new_value",
+                  "anomaly_detection"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
-                  "NEW_VALUE"
+                  "NEW_VALUE",
+                  "ANOMALY_DETECTION"
                 ]
               },
               "evaluationWindow": {
@@ -22893,12 +22897,14 @@
         "description": "The detection method.",
         "enum": [
           "threshold",
-          "new_value"
+          "new_value",
+          "anomaly_detection"
         ],
         "type": "string",
         "x-enum-varnames": [
           "THRESHOLD",
-          "NEW_VALUE"
+          "NEW_VALUE",
+          "ANOMALY_DETECTION"
         ]
       },
       "SecurityMonitoringRuleEvaluationWindow": {
@@ -23073,12 +23079,14 @@
             "description": "The detection method.",
             "enum": [
               "threshold",
-              "new_value"
+              "new_value",
+              "anomaly_detection"
             ],
             "type": "string",
             "x-enum-varnames": [
               "THRESHOLD",
-              "NEW_VALUE"
+              "NEW_VALUE",
+              "ANOMALY_DETECTION"
             ]
           },
           "evaluationWindow": {
@@ -23483,12 +23491,14 @@
                 "description": "The detection method.",
                 "enum": [
                   "threshold",
-                  "new_value"
+                  "new_value",
+                  "anomaly_detection"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
-                  "NEW_VALUE"
+                  "NEW_VALUE",
+                  "ANOMALY_DETECTION"
                 ]
               },
               "evaluationWindow": {
@@ -23819,12 +23829,14 @@
                 "description": "The detection method.",
                 "enum": [
                   "threshold",
-                  "new_value"
+                  "new_value",
+                  "anomaly_detection"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
-                  "NEW_VALUE"
+                  "NEW_VALUE",
+                  "ANOMALY_DETECTION"
                 ]
               },
               "evaluationWindow": {
@@ -50134,12 +50146,14 @@
                                 "description": "The detection method.",
                                 "enum": [
                                   "threshold",
-                                  "new_value"
+                                  "new_value",
+                                  "anomaly_detection"
                                 ],
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "THRESHOLD",
-                                  "NEW_VALUE"
+                                  "NEW_VALUE",
+                                  "ANOMALY_DETECTION"
                                 ]
                               },
                               "evaluationWindow": {
@@ -50531,12 +50545,14 @@
                         "description": "The detection method.",
                         "enum": [
                           "threshold",
-                          "new_value"
+                          "new_value",
+                          "anomaly_detection"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
-                          "NEW_VALUE"
+                          "NEW_VALUE",
+                          "ANOMALY_DETECTION"
                         ]
                       },
                       "evaluationWindow": {
@@ -50892,12 +50908,14 @@
                           "description": "The detection method.",
                           "enum": [
                             "threshold",
-                            "new_value"
+                            "new_value",
+                            "anomaly_detection"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "ANOMALY_DETECTION"
                           ]
                         },
                         "evaluationWindow": {
@@ -51413,12 +51431,14 @@
                           "description": "The detection method.",
                           "enum": [
                             "threshold",
-                            "new_value"
+                            "new_value",
+                            "anomaly_detection"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "ANOMALY_DETECTION"
                           ]
                         },
                         "evaluationWindow": {
@@ -51787,12 +51807,14 @@
                         "description": "The detection method.",
                         "enum": [
                           "threshold",
-                          "new_value"
+                          "new_value",
+                          "anomaly_detection"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
-                          "NEW_VALUE"
+                          "NEW_VALUE",
+                          "ANOMALY_DETECTION"
                         ]
                       },
                       "evaluationWindow": {
@@ -52131,12 +52153,14 @@
                           "description": "The detection method.",
                           "enum": [
                             "threshold",
-                            "new_value"
+                            "new_value",
+                            "anomaly_detection"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "ANOMALY_DETECTION"
                           ]
                         },
                         "evaluationWindow": {

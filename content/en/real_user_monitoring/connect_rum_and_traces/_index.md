@@ -8,6 +8,9 @@ further_reading:
   - link: "/tracing/"
     tag: "Documentation"
     text: "APM and Distributed Tracing"
+  - link: "https://www.datadoghq.com/blog/modern-frontend-monitoring/"
+    tag: "Blog"
+    text: "Start monitoring single-page applications"
 ---
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
@@ -44,6 +47,8 @@ datadogRum.init({
 ```
 
 **Note**: `allowedTracingOrigins` accepts Javascript String and RegExp that should match the origins called by your browser application, with origin defined as: `<scheme> "://" <hostname> [ ":" <port> ]`
+
+<div class="alert alert-info">End-to-end tracing is available for requests fired after the browser SDK is initialized. End-to-end tracing of the initial HTML document, and early browser requests, is not supported.</div>
 
 [1]: /real_user_monitoring/browser/
 {{% /tab %}}
@@ -124,7 +129,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 `x-datadog-origin: rum`
 : To make sure the generated traces from Real User Monitoring don’t affect your APM Index Spans counts.
 
-`x-datadog-sampling-priority: 1` 
+`x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
 
 `x-datadog-sampled: 1`

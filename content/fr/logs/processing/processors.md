@@ -15,7 +15,7 @@ further_reading:
 ---
 ## Présentation
 
-{{< img src="logs/processing/processors/processors_overview.png" alt="log d'origine" >}}
+{{< img src="logs/processing/processors/processing_overview.png" alt="Processeurs" >}}
 
 Un [processeur][1] s'exécute dans un [pipeline][2] pour effectuer une action de structuration de données sur un log ([remappage d'un attribut][3], [parsing Grok][4], etc.).
 
@@ -23,7 +23,7 @@ Un [processeur][1] s'exécute dans un [pipeline][2] pour effectuer une action de
 
 Nous vous conseillons de ne pas utiliser plus de 20 processeurs par pipeline.
 
-## Parser Grok
+## Parser grok
 
 Créez des règles Grok personnalisées pour parser l'intégralité du message ou [un attribut spécifique de votre événement brut][1]. Pour en savoir plus, consultez la [section sur le parsing][3]. Nous vous conseillons de ne pas utiliser plus de 10 règles de parsing par processeur Grok.
 
@@ -131,15 +131,15 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 Utilisez ce processeur si vous souhaitez définir des attributs en tant que statut officiel. Par exemple, il est possible de transformer ce log :
 
-{{< img src="logs/processing/processors/log_pre_severity.png" alt="Log avant remappage de la sévérité" style="width:40%;">}}
+{{< img src="logs/processing/processors/log_pre_severity.png" alt="Log avant remappage de la gravité" style="width:40%;">}}
 
 En ce log :
 
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log après remappage de la sévérité bis" style="width:40%;" >}}
+{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log après remappage de la gravité bis" style="width:40%;" >}}
 
 Chaque valeur de statut entrant est mappée comme suit :
 
-* Les entiers de 0 à 7 mappent vers les [normes de sévérité Syslog][4].
+* Les entiers de 0 à 7 mappent vers les [normes de sévérité Syslog][6].
 * Les chaînes de caractères commençant par **emerg** ou **f** (insensible à la casse) mappent vers **emerg (0)**.
 * Les chaînes de caractères commençant par **a** (insensible à la casse) mappent vers **alert (1)**.
 * Les chaînes de caractères commençant par **c** (insensible à la casse) mappent vers **critical (2)**.
@@ -158,7 +158,7 @@ Chaque valeur de statut entrant est mappée comme suit :
 
 Définissez le processeur de remappage de statut de log depuis la [page de configuration des logs Datadog][1] :
 
-{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Carré du processeur de remappage de la sévérité" style="width:80%;" >}}
+{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Carré du processeur de remappage de la gravité" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -242,7 +242,7 @@ Définissez le processeur de remappage de messages de log depuis la [page de con
 {{% /tab %}}
 {{% tab "API" %}}
 
-Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le remappeur de messages de log :
+Utilisez l'[endpoint de l'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le remappeur de messages de log :
 
 ```json
 {
@@ -274,7 +274,7 @@ En ce log :
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribut après remappage"  style="width:40%;">}}
 
-Les contraintes relatives aux noms de tag ou d'attribut sont expliquées dans la [documentation sur le tagging][6]. Certaines contraintes supplémentaires sont appliquées, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
+Les contraintes de nom du tag ou de l'attribut sont expliquées dans les [recommandations relatives aux tags][7]. Certaines contraintes supplémentaires s'appliquent, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
 
 Si la cible du remappeur est un attribut, le remappeur peut également tenter de convertir l'attribut en un attribut d'un autre type (`String`, `Integer` ou `Double`). Si la conversion est impossible, le type d'attribut reste le même (remarque : le séparateur décimal pour `Double` doit être un `.`)
 
@@ -413,10 +413,10 @@ Utilisez les catégories pour créer des groupes à des fins d'analyse (tels que
 
 **Remarques** :
 
-* La syntaxe de la requête est identique à celle de la barre de recherche du [Log Explorer][7]. La requête peut être effectuée sur n'importe quel tag ou attribut de log, qu'il s'agisse d'une facette ou non. Votre requête peut également contenir des wildcards.
+* La syntaxe de la requête est identique à celle de la barre de recherche du [Log Explorer][8]. La requête peut être effectuée sur n'importe quel tag ou attribut de log, qu'il s'agisse d'une facette ou non. Votre requête peut également contenir des wildcards.
 * Une fois que l'une des requêtes du processeur a renvoyé un log, celle-ci s'arrête. Assurez-vous de spécifier les requêtes dans l'ordre adéquat si un log correspond à plusieurs requêtes.
 * Les catégories doivent avoir un nom unique.
-* Une fois le processeur de catégories défini, vous pouvez mapper les catégories à des statuts de log à l'aide du [remappeur de statuts de log][8].
+* Une fois le processeur de catégories défini, vous pouvez mapper des catégories à des statuts de log à l'aide du [remappeur de statuts de log][9].
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -475,7 +475,7 @@ Un attribut est considéré comme manquant s'il est introuvable dans les attribu
 * L'opérateur `-` doit être séparé par une espace dans la formule, car il peut également être présent dans les noms d'attributs.
 * Si l'attribut cible existe déjà, il est remplacé par le résultat de la formule.
 * Les résultats sont arrondis à la 9e décimale. Par exemple, si le résultat de la formule est `0.1234567891`, la valeur stockée pour l'attribut est alors `0.123456789`.
-* Si vous souhaitez modifier l'échelle d'une unité de mesure, consultez la section [Filtre][9].
+* Si vous devez mettre à l'échelle une unité de mesure, consultez la section [Filtre][10].
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -653,14 +653,14 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 ## Processeur de correspondances
 
-Utilisez le Lookup Processor (processeur de correspondances) pour mapper un attribut de log à une valeur lisible enregistrée dans une [table d'enrichissement (bêta][10] ou dans la table de mappage des processeurs.
-Il peut par exemple être utilisé pour mapper un ID de service interne à un nom de service plus lisible.
-Vous pouvez également vous en servir pour vérifier si l'adresse MAC qui vient d'essayer de se connecter à votre environnement de production fait partie d'une liste de machines volées.
+Utilisez le processeur de correspondances pour mapper un attribut de log à une valeur lisible enregistrée dans une [table d'enrichissement (bêta)][11] ou dans la table de mappage des processeurs.
+Ce processeur peut par exemple servir à mapper un ID de service interne à un nom de service plus lisible.
+Il peut également vérifier si une adresse MAC qui vient d'essayer de se connecter à votre environnement de production fait partie d'une liste de machines volées.
 
 {{< tabs >}}
 {{% tab "IU" %}}
 
-{{< img src="logs/processing/processors/lookup_processor.png" alt="Processeur de correspondances" style="width:80%;">}}
+{{< img src="logs/processing/processors/lookup_processor.png" alt="Processeur de correspondances"  style="width:80%;">}}
 
 Le processeur effectue les actions suivantes :
 
@@ -708,7 +708,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 Il existe deux façons d'améliorer la corrélation entre les traces et les logs d'application :
 
-1. Suivez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][11] et sur l'utilisation des intégrations de log par défaut pour terminer la configuration.
+1. Consultez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][12] et sur l'utilisation des intégrations de log par défaut pour terminer la configuration.
 
 2. Utilisez le processeur de remappage de traces pour définir un attribut de log comme son ID de trace associé.
 
@@ -752,11 +752,12 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 [1]: /fr/logs/processing/parsing/#advanced-settings
 [2]: /fr/logs/processing/pipelines/
 [3]: /fr/logs/processing/parsing/
-[4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[4]: /fr/logs/processing/processors/?tab=ui#grok-parser
 [5]: https://docs.datadoghq.com/fr/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
-[6]: /fr/logs/guide/log-parsing-best-practice/
-[7]: /fr/logs/search_syntax/
-[8]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
-[9]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
-[10]: /fr/logs/guide/enrichment-tables/
-[11]: /fr/tracing/connect_logs_and_traces/
+[6]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[7]: /fr/logs/guide/log-parsing-best-practice/
+[8]: /fr/logs/search_syntax/
+[9]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
+[10]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
+[11]: /fr/logs/guide/enrichment-tables/
+[12]: /fr/tracing/connect_logs_and_traces/

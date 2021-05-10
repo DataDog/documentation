@@ -4211,10 +4211,12 @@ components:
       enum:
       - threshold
       - new_value
+      - anomaly_detection
       type: string
       x-enum-varnames:
       - THRESHOLD
       - NEW_VALUE
+      - ANOMALY_DETECTION
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
         matches true. This is a sliding window

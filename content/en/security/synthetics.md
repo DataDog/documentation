@@ -15,19 +15,21 @@ This article is part of a [series on data security][1].
 
 The [Synthetic Monitoring product][2] allows you to proactively monitor how your systems and applications are performing using simulated requests and business transactions. Synthetic tests can be initiated from all around the globe, from either managed or private locations.  
 
-## Encryption in managed locations 
+## Information security
 
-### Test configurations and variables
+### Encryption in managed locations 
+
+#### Test configurations and variables
 
 * **Transport**: Asymmetric encryption - RSA (4096-bit key). All requests are signed using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity. 
 * **Storage**: Symmetric encryption - AES-GCM (256-bit key).
 
-### Test results
+#### Test results
 
 * **Transport**: Asymmetric encryption - RSA (4096-bit key). All requests are signed using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity.
 * **Storage**: Sensitive parts (response headers and body) of test results are stored encrypted with an asymmetric encryption - RSA (4096-bit key) and decrypted on-the-fly when test results are fetched.
 
-### Artifacts
+#### Artifacts
 
 Artifacts are browser test screenshots, snapshots, errors, and resources.
 
@@ -52,24 +54,24 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< /site-region >}}
 
-## Encryption in private locations 
+### Encryption in private locations 
 
-### Private locations credentials
+#### Private locations credentials
 
 * **Storage**: Private locations credentials used to sign test configuration, variables, and test results requests are stored encrypted (symmetric encryption - AES-GCM), with audit logging and access policies.
 
-### Test configurations and variables
+#### Test configurations and variables
 
 * **Transport**: Asymmetric encryption - RSA (4096-bit key). Communication between private locations and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity. 
 * **Storage**: Symmetric encryption - AES-GCM (256-bit key).
 
-### Test results
+#### Test results
 
 * **Transport**: Asymmetric encryption - RSA (4096-bit key). Communication between private locations and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity.
    
 * **Storage**: Sensitive parts (by default, response headers and body) of test results are stored encrypted with an asymmetric encryption - RSA (4096-bit key) and decrypted on-the-fly when test results are fetched.
 
-### Artifacts
+#### Artifacts
 
 Artifacts are browser test screenshots, snapshots, errors, and resources.
 
@@ -94,6 +96,18 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< /site-region >}}
 
+## Testing accounts
+
+It is strongly recommended to leverage accounts dedicated to testing for your Synthetics tests.
+
+## Storing secrets
+
+You can store secrets in [global variables][4] with the obfuscation feature to ensure global variable values do not leak into your test configurations and results. The access to global variables can then be restricted using the dedicated [global variable RBAC permissions][5].
+
+## Privacy options
+
+Use the [API][6], [Multistep API][7] and [Browser tests' privacy options][8] to limit the amount of data stored in test results. However, be mindful of the usage of these options as enabling them can make failures troubleshooting more difficult.
+
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -101,3 +115,8 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 [1]: /security/
 [2]: /synthetics/
 [3]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+[4]: /synthetics/settings/?tab=specifyvalue#global-variables
+[5]: /account_management/rbac/permissions/#synthetic-monitoring
+[6]: /synthetics/api_tests/http_tests?tab=privacy#define-request
+[7]: /synthetics/multistep?tab=privacy#define-the-request 
+[8]: /synthetics/browser_tests/?tab=privacy#test-configuration
