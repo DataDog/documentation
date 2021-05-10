@@ -70,6 +70,7 @@ exceptions:
   - Logback
   - macOS
   - Metrics Explorer
+  - Metrics without Limits
   - MongoDB
   - MySQL
   - Network Device Monitoring
