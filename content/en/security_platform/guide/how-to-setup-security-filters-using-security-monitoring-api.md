@@ -13,7 +13,7 @@ Datadog charges for analyzed logs based on the total number of gigabytes ingeste
 
 The following examples are covered in this guide:
 
-* [Configure the default security filter to exclude certain logs](#add-an-exclusion-filter-on-the-builtin-filter)
+* [Configure the default security filter to exclude certain logs](#add-an-exclusion-to-the-default-security-filter)
 * [Create custom security filters to specify which log sources to analyze](#create-a-custom-security-filter)
 
 ## Prerequisites
@@ -24,7 +24,7 @@ The following examples are covered in this guide:
 
 ## Examples
 
-### Add an exclusion to the default security filter
+### Add an exclusion to the default Security Filter
 
 By default, a single Security Filter exists that analyzes all ingested logs. It's named "all ingested logs" and has a query of `*`. You can customize it by adding an exclusion to exclude a subset of logs based on their tags. To do so, you first need to retrieve the list of Security Filters in order to get the filter's `id`.
 
@@ -117,7 +117,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 ```
 
-### Create a custom security filter
+### Create a custom Security Filter
 
 You can also create custom Security Filters in order to restrict the analysis to explicitly specified logs. For example you can choose to analyze the logs from AWS Cloudtrail with a filter that matches only `source:cloudtrail`.
 
@@ -215,7 +215,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 ```
 
-### Key security-relevant tags and attributes
+## Key security-relevant tags and attributes
 
 If you aim to only analyze explicitly specified categories of logs, you will need to be cautious not to exclude logs that contain valuable security-relevant users and entities, or key sources of security logs. The tables below provide some useful examples.
 
