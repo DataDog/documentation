@@ -12,13 +12,13 @@ further_reading:
 ---
 
 ## Agent Expression Syntax
-Rules for Cloud Workload Security (CWS) are first evaluated in the datadog-agent, to decide what system activity to collect. This portion of a CWS rule is called the agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
+Rules for Cloud Workload Security (CWS) are first evaluated in the Datadog Agent to decide what system activity to collect. This portion of a CWS rule is called the agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
 
 ```
 <trigger>.<event-attribute> <operator> <value> <event-attribute> ...
 ```
 
-Using this format, an example rule will look like:
+Using this format, an example rule looks like this:
 ```
 open.file.path == "/etc/shadow" && file.path not in ["/usr/sbin/vipw"]
 ```
@@ -44,10 +44,10 @@ Triggers are events that correspond to types of activity seen by the system. The
 | `unmount`            | File             | Unmount a filesystem                  | 7.27          |
 
 ## Attributes
-Attributes can be used to specify exact data/behavior for a rule. Attributes are based on [CWS event attributes][1]
+Attributes can be used to specify exact data and behavior for a rule. Attributes are based on [CWS event attributes][1].
 
 ## Operators
-SECL operators are used to comibine event attributes together into a full expression. The following operators are available:
+SECL operators are used to combine event attributes together into a full expression. The following operators are available:
 
 | SECL Operator         | Types            |  Definition                           | Agent Version |
 |-----------------------|------------------|---------------------------------------|---------------|
@@ -74,14 +74,14 @@ Helpers exist in SECL that enable users to write advanced rules without needing 
 ### Command line arguments
 The *args_flags* and *args_options* are helpers to ease the writing of CWS rules based on command line arguments.
 
-*args_flags* is used to catch arguments that start by either one or two hyphen characters but do not accept any associated value.
+*args_flags* is used to catch arguments that start with either one or two hyphen characters but do not accept any associated value.
 
 Examples:
 * `version` is part of *args_flags* for the command `cat --version`
 * `l` and `n` both are in *args_flags* for the command `netstat -ln`
 
 	
-*args_options* is used to catch arguments that start by either one or two hyphen characters and accepts a value either specified as the same argument but separated by the ‘=’ character or specified as the next argument.
+*args_options* is used to catch arguments that start with either one or two hyphen characters and accepts a value either specified as the same argument but separated by the ‘=’ character or specified as the next argument.
 
 Examples:
 * `T=8` and `width=8` both are in *args_options* for the command `ls -T 8 --width=8`
