@@ -217,7 +217,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 ## Key security-relevant tags and attributes
 
-If you aim to only analyze explicitly specified categories of logs, you will need to be cautious not to exclude logs that contain valuable security-relevant users and entities, or key sources of security logs. The tables below provide some useful examples.
+If you aim to only analyze explicitly specified categories of logs, be cautious not to exclude logs that contain valuable security-relevant users and entities, or key sources of security logs. The tables below provide useful examples.
 
 **Key users and entities**
 
