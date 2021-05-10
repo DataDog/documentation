@@ -5209,6 +5209,18 @@ api:
         - GetUsageLogsByIndex
       unstable: []
       order: 3
+  - name: Get hourly logs usage by retention
+    url: '#get-hourly-logs-usage-by-retention'
+    identifier: get-hourly-logs-usage-by-retention
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLogsByRetention
+      unstable: []
+      order: 0
   - name: Get hourly usage for Logs
     url: '#get-hourly-usage-for-logs'
     identifier: get-hourly-usage-for-logs

@@ -3538,6 +3538,51 @@ components:
       type: string
       x-enum-varnames:
       - ATTRIBUTE_REMAPPER
+    LogsByRetention:
+      description: Object containing logs usage data broken down by retention period.
+      properties:
+        orgs:
+          description: Indexed logs usage summary for each organization for each retention
+            period with usage.
+          properties:
+            usage:
+              description: Indexed logs usage summary for each organization.
+              items:
+                $ref: '#/components/schemas/LogsByRetentionOrgUsage'
+              type: array
+          type: object
+        usage:
+          description: Aggregated index logs usage for each retention period with
+            usage.
+          items:
+            $ref: '#/components/schemas/LogsRetentionAggSumUsage'
+          type: array
+        usage_by_month:
+          $ref: '#/components/schemas/LogsByRetentionMonthlyUsage'
+      type: object
+    LogsByRetentionMonthlyUsage:
+      description: Object containing a summary of indexed logs usage by retention
+        period for a single month.
+      properties:
+        date:
+          description: The month for the usage.
+          format: datetime
+          type: string
+        usage:
+          description: Indexed logs usage for each active retention for the month.
+          items:
+            $ref: '#/components/schemas/LogsRetentionSumUsage'
+          type: array
+      type: object
+    LogsByRetentionOrgUsage:
+      description: Indexed logs usage by retention for a single organization.
+      properties:
+        usage:
+          description: Indexed logs usage for each active retention for the organization.
+          items:
+            $ref: '#/components/schemas/LogsRetentionSumUsage'
+          type: array
+      type: object
     LogsCategoryProcessor:
       description: "Use the Category Processor to add a new attribute (without spaces\
         \ or special characters in the new attribute name)\nto a log matching a provided\
@@ -4253,6 +4298,48 @@ components:
           type: integer
       required:
       - aggregation
+      type: object
+    LogsRetentionAggSumUsage:
+      description: Object containing indexed logs usage aggregated across organizations
+        and months for a retention period.
+      properties:
+        logs_indexed_logs_usage_agg_sum:
+          description: Total indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_live_indexed_logs_usage_agg_sum:
+          description: Live indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_logs_usage_agg_sum:
+          description: Rehydrated indexed logs for this retention period.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            periods.
+          type: string
+      type: object
+    LogsRetentionSumUsage:
+      description: Object containing indexed logs usage grouped by retention period
+        and summed.
+      properties:
+        logs_indexed_logs_usage_sum:
+          description: Total indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_live_indexed_logs_usage_sum:
+          description: Live indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_logs_usage_sum:
+          description: Rehydrated indexed logs for this retention period.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            periods.
+          type: string
       type: object
     LogsServiceRemapper:
       description: 'Use this processor if you want to assign one or more attributes
@@ -9347,7 +9434,6 @@ components:
             $ref: '#/components/schemas/SyntheticsBrowserVariable'
           type: array
       required:
-      - request
       - assertions
       type: object
     SyntheticsTestDetails:
@@ -9625,6 +9711,7 @@ components:
     SyntheticsTickInterval:
       description: The frequency at which to run the Synthetic test (in seconds).
       enum:
+      - 30
       - 60
       - 300
       - 900
@@ -9637,6 +9724,7 @@ components:
       format: int64
       type: integer
       x-enum-varnames:
+      - THIRTY_SECONDS
       - MINUTE
       - FIVE_MINUTES
       - FIFTEEN_MINUTES
@@ -10915,6 +11003,40 @@ components:
             $ref: '#/components/schemas/UsageLogsByIndexHour'
           type: array
       type: object
+    UsageLogsByRetentionHour:
+      description: The number of indexed logs for each hour for a given organization
+        broken down by retention period.
+      properties:
+        indexed_events_count:
+          description: Total logs indexed with this retention period during a given
+            hour.
+          format: int64
+          type: integer
+        live_indexed_events_count:
+          description: Live logs indexed with this retention period during a given
+            hour.
+          format: int64
+          type: integer
+        rehydrated_indexed_events_count:
+          description: Rehydrated logs indexed with this retention period during a
+            given hour.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            usage.
+          type: string
+      type: object
+    UsageLogsByRetentionResponse:
+      description: Response containing the indexed logs usage broken down by retention
+        period for an organization during a given hour.
+      properties:
+        usage:
+          description: Get hourly usage for indexed logs by retention period.
+          items:
+            $ref: '#/components/schemas/UsageLogsByRetentionHour'
+          type: array
+      type: object
     UsageLogsHour:
       description: Hour usage for logs.
       properties:
@@ -11729,6 +11851,8 @@ components:
             1, 2020).
           format: int64
           type: integer
+        logs_by_retention:
+          $ref: '#/components/schemas/LogsByRetention'
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current months for all organizations.
@@ -21903,6 +22027,53 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v1/usage/logs-by-retention:
+    get:
+      description: Get hourly usage for indexed logs by retention period.
+      operationId: GetUsageLogsByRetention
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageLogsByRetentionResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly logs usage by retention
+      tags:
+      - Usage Metering
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
