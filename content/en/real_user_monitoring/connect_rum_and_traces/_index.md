@@ -45,7 +45,7 @@ datadogRum.init({
 
 **Note**: `allowedTracingOrigins` accepts Javascript String and RegExp that should match the origins called by your browser application, with origin defined as: `<scheme> "://" <hostname> [ ":" <port> ]`
 
-<div class="alert alert-info">The browser SDK must be initialized in order to link browser requests to backend traces. End-to-end tracing of the initial HTML document, and early browser requests, is not currently supported.</div>
+<div class="alert alert-info">End-to-end tracing is available for requests fired after the browser SDK is initialized. End-to-end tracing of the initial HTML document, and early browser requests, is not supported.</div>
 
 [1]: /real_user_monitoring/browser/
 {{% /tab %}}
