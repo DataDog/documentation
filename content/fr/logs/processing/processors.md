@@ -276,7 +276,7 @@ En ce log :
 
 Les contraintes relatives aux noms de tag ou d'attribut sont expliquées dans la [documentation sur le tagging][6]. Certaines contraintes supplémentaires sont appliquées, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
 
-Si la cible du remappeur est un attribut, le remappeur peut également tenter de convertir l'attribut en un attribut d'un autre type (`String`, `Integer` ou `Double`). Si la conversion est impossible, le type d'attribut reste le même (remarque : le séparateur décimal pour `Double` doit être un `.`) 
+Si la cible du remappeur est un attribut, le remappeur peut également tenter de convertir l'attribut en un attribut d'un autre type (`String`, `Integer` ou `Double`). Si la conversion est impossible, le type d'attribut reste le même (remarque : le séparateur décimal pour `Double` doit être un `.`)
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -624,9 +624,6 @@ Un exemple de parser GeoIP se trouve ci-dessous. Il extrait la géolocalisation 
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="Exemple de GeoIP" style="width:60%;">}}
 
-**Remarque** : ce processeur utilise la base de données GeoLite2 créée par [MaxMind][1].
-
-[1]: https://www.maxmind.com
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -657,7 +654,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 ## Processeur de correspondances
 
 Utilisez le Lookup Processor (processeur de correspondances) pour mapper un attribut de log à une valeur lisible enregistrée dans une [table d'enrichissement (bêta][10] ou dans la table de mappage des processeurs.
-Il peut par exemple être utilisé pour mapper un ID de service interne à un nom de service plus lisible. 
+Il peut par exemple être utilisé pour mapper un ID de service interne à un nom de service plus lisible.
 Vous pouvez également vous en servir pour vérifier si l'adresse MAC qui vient d'essayer de se connecter à votre environnement de production fait partie d'une liste de machines volées.
 
 {{< tabs >}}
