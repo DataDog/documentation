@@ -26,7 +26,7 @@ The following examples are covered in this guide:
 
 ### Add an exclusion to the default Security Filter
 
-By default, a single Security Filter exists that analyzes all ingested logs. It's named "all ingested logs" and has a query of `*`. You can customize it by adding an exclusion to exclude a subset of logs based on their tags. To do so, you first need to retrieve the list of Security Filters in order to get the filter's `id`.
+By default, a single Security Filter exists that analyzes all ingested logs. It's named `all ingested logs` and has a query of `*`. You can customize it by adding an exclusion to exclude a subset of logs based on their tags. To do so, you first need to retrieve the list of Security Filters in order to get the filter's `id`.
 
 **API call:**
 
