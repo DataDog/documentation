@@ -45,7 +45,7 @@ In some cases, such as in the event of a pop-up, you may want to make some steps
 
 ## Prevent screenshot capture
 
-You can prevent a step screenshot from being captured at test execution. This can be helpful to ensure no sensitive data gets featured in your test results. It however needs to be used mindfully as it can make failure troubleshooting way more challenging. You can read more about our security recommendations [here][3].
+You can prevent a step screenshot from being captured at test execution. This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. Read more about security recommendations [here][3].
 
 {{< img src="synthetics/browser_tests/advanced_options/screenshot_capture_option.png" alt="Screenshot capture option" style="width:50%">}}
 
