@@ -215,6 +215,33 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 ```
 
+### Key security-relevant tags and attributes
+
+If you aim to only analyze explicitly specified categories of logs, you will need to be cautious not to exclude logs that contain valuable security-relevant users and entities, or key sources of security logs. The tables below provide some useful examples.
+
+**Key users and entities**
+
+| Name                  | Query                                            |
+| --------------------- |--------------------------------------------------|
+| All named events      | `@evt.name:*`                                    |
+| All client IPs        | `@network.client.ip:*`                           |
+| All destination IPs   | `@network.destination.ip:*`                      |
+| All users             | `@usr.id:* OR @usr.name:* @usr.email:*`          |
+| All hosts             | `host:* OR instance-id:*`                        |
+
+**Key security sources**
+
+| Name                  | Query                                            |
+| --------------------- |--------------------------------------------------|
+| AWS Security Logs     | `source:(cloudtrail OR guardduty OR route53)`    |
+| AWS Network Logs      | `source:(vpc OR waf OR elb OR alb)`              |
+| GCP Logs              | `source:gcp*`                                    |
+| Azure Logs            | `source:azure*`                                  |
+| Kubernetes Audit Logs | `source:kubernetes.audit`                        |
+| Identity Provider Logs| `source:(okta OR gsuite OR auth0)`               |
+| CDN Logs              | `source:(cloudfront OR cloudflare OR fastly)`    |
+| Web Server Logs       | `source:(nginx* OR apache OR iis)`               |
+
 [1]: /security_platform/detection_rules/security_monitoring
 [2]: /api/v2/security-monitoring/
 [3]: /api/v1/authentication/
