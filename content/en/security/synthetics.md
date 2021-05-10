@@ -102,7 +102,7 @@ It is strongly recommended to leverage accounts dedicated to testing for your Sy
 
 ## Storing secrets
 
-You can store secrets in [global variables][4] with the obfuscation feature on to ensure global variable values do not leak into your test configurations and results. The access to global variables can then be restricted using the dedicated [global variable RBAC permissions][5].
+You can store secrets in [global variables][4] with the obfuscation feature to ensure global variable values do not leak into your test configurations and results. The access to global variables can then be restricted using the dedicated [global variable RBAC permissions][5].
 
 ## Privacy options
 
