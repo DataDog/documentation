@@ -26,8 +26,8 @@ further_reading:
 
 If not already configured:
 
-- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
-- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
+- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS.
+- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
@@ -38,11 +38,11 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 
 The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Forwarder][2].
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you install the Datadog Serverless Plugin. 
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you install the Datadog Serverless Plugin.
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
-1. Install the Datadog Serverless Plugin: 
+1. Install the Datadog Serverless Plugin:
 	```
     yarn add --dev serverless-plugin-datadog
     ```
@@ -55,13 +55,19 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     custom:
       datadog:
-        forwarder: # The Datadog Forwarder ARN goes here.
+        forwarderArn: # The Datadog Forwarder ARN goes here.
     ```
     More information on the Datadog Forwarder ARN or installation can be found [here][2]. For additional settings, see the [plugin documentation][1].
+
+**Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][5].
+
+
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[4]: /serverless/troubleshooting/serverless_tracing_and_webpack/
+[5]: https://webpack.js.org/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -202,7 +208,7 @@ For example:
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can instrument it with the Datadog CLI. 
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can instrument it with the Datadog CLI.
 
 More information and additional parameters can be found in the [CLI documentation][5].
 
@@ -279,7 +285,7 @@ The available `RUNTIME` options are `Node10-x` and `Node12-x`. For `VERSION`, se
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can add the Datadog Lambda library as a layer. 
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can add the Datadog Lambda library as a layer.
 
 #### Using the package
 
@@ -305,20 +311,24 @@ See the [latest release][4].
 4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
+**Note**: You need to follow these [additional configuration steps][5] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][6].
+
 ### Subscribe the Datadog Forwarder to the log groups
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
 
-1. [Install the Datadog Forwarder if you haven't][5].
-2. [Subscribe the Datadog Forwarder to your function's log groups][6].
+1. [Install the Datadog Forwarder if you haven't][7].
+2. [Subscribe the Datadog Forwarder to your function's log groups][8].
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://www.npmjs.com/package/datadog-lambda-js
-[5]: https://docs.datadoghq.com/serverless/forwarder/
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: /serverless/troubleshooting/serverless_tracing_and_webpack/
+[6]: https://webpack.js.org/
+[7]: https://docs.datadoghq.com/serverless/forwarder/
+[8]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 
