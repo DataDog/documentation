@@ -934,6 +934,10 @@
     "description": "Get hourly usage for logs.",
     "summary": "Get hourly usage for Logs"
   },
+  "GetUsageLogsByRetention": {
+    "description": "Get hourly usage for indexed logs by retention period.",
+    "summary": "Get hourly logs usage by retention"
+  },
   "GetUsageLogsByIndex": {
     "description": "Get hourly usage for logs by index.",
     "summary": "Get hourly usage for Logs by Index"
