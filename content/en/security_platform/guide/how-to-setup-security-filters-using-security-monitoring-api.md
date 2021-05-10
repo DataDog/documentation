@@ -65,7 +65,7 @@ curl -L -X GET 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v
 
 In this example, the filter's `id` is `"l6l-rmx-mqx"`. You can then modify it to add an exclusion, for example exclude all the logs tagged with `env:staging`.
 
-Note: `version` indicates the current version of the filter you want to update.
+**Note**: `version` indicates the current version of the filter you want to update.
 
 **API call:**
 
