@@ -44,6 +44,8 @@ Define the configuration of your browser test.
   * **Authentication**: Authenticate through HTTP Basic, Digest or NTLM with a username and a password. Credentials added to the HTTP Auth fields are used on every step of your browser test.
   * **Cookies**: Define cookies to add to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
   * **Proxy URL**: URL of the proxy the requests should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+  
+[1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
 
   {{% /tab %}}
 
