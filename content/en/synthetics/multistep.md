@@ -91,6 +91,14 @@ Hit **Create Your First Request** to start designing your test's requests.
   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
 
   {{% /tab %}}
+  
+  {{% tab "Privacy" %}}
+
+  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This is helpful to ensure no sensitive data gets featured in your test results. Used mindfully as it can make failure troubleshooting more difficult. Read more about security recommendations [here][1].
+  
+[1]: /security/synthetics
+
+  {{% /tab %}}
 
   {{< /tabs >}}
 
@@ -102,7 +110,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8] | _String_ <br> _[Regex][9]_ <br> _String_, _[Regex][9]_ |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
 | header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
@@ -170,7 +178,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
 
