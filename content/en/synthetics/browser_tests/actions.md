@@ -271,7 +271,7 @@ If you want to record a step leveraging a variable, you can use the little hand 
 At recording, this translates into the actual value of the variable being injected on your website's input (consequently allowing you to move on with the rest of your steps) and creates an associated `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`.
 At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value.
 
-**Note**: Some variables only get computed at runtime (e.g. variable from HTTP request, variable from JavaScript step). To record a step using one of these variables, record a step with the actual variable value, then replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step definition before saving your test. 
+**Note**: Some variables only get computed at runtime (For example, variable from HTTP request or variable from JavaScript step). To record a step using one of these variables, record a step with the actual variable value, then replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step definition before saving your test. 
 
 ## Wait
 
