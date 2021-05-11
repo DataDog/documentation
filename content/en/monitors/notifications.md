@@ -53,17 +53,18 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 ### Renotify
 
-Enable monitor renotification (optional), which is useful to remind your team a problem is not solved. 
-If enabled, you are given the option to include an escalation message sent any time the monitor remain in the `alert` or `no data` state for the configured time.
-The escalation message can be added in two ways:
+Enable monitor renotification (optional) to remind your team that a problem is not solved. 
+If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in the `alert` or `no data` state for the specified time.
+The escalation message can be added in the following ways:
 
-* In the escalation_message box (UI) or attribute (API)
-* (recommended) By leveraging the `{{#is_renotify}}` block in the original message
+* In the `{{#is_renotify}}` block in the original notification message (recommended).
+* In the *escalation_message* field in the app.
+* With the `escalation_message` attribute in the API.
 
-The original notification message is always included therefore you want to leverage the `{{#is_renotify}}` block in the following conditions:
+If you use the `{{#is_renotify}}` block, keep in mind that the original notification message is also included in the renotification, so:
 
-1. The escalation message is only there to add some extra details and should not contain the original message details
-2. The escalation message should only be sent for a subset of groups
+1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
+2. Send the escalation message to a subset of groups.
 
 Learn how to configure your monitors for those use cases in [the example section](#examples).
 
@@ -340,7 +341,7 @@ To send an escalation message to a different destination just for the `productio
 {{/is_renotify}}
 ```
 
-To send a different escalation message that do not contain the original message details, leverage a combination of `{{^is_renotify}}` and `{{#is_renotify}}` blocks:
+To send a different escalation message that does not contain the original message details, use a combination of `{{^is_renotify}}` and `{{#is_renotify}}` blocks:
 
 ```text
 {{^is_renotify}}
@@ -359,7 +360,7 @@ This part is generic and sent both for the first trigger and the escalation mess
 
 ```
 
-On monitor renotification, users will only get the following escalation message:
+On monitor renotification, users will get the following escalation message:
 
 ```
 This part is generic and sent both for the first trigger and the escalation message.
