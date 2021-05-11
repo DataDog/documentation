@@ -13,7 +13,7 @@ further_reading:
 
 In some cases, you might need to set a specific `User-Agent` string to be able to record your browser tests steps. To do so:
 
-1. Open your application in a pop up by clickking on **Open in Popup** when on your browser test recorder.
+1. Open your application in a pop up by clicking on **Open in Popup** in your browser test recorder.
 2. Open your Chrome Developer Tools.
 3. Click on the menu button with the three vertical dots.
 4. Select the **More tools - Network conditions** option.
