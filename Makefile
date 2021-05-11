@@ -245,7 +245,7 @@ EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 
 examples/go: examples/datadog-api-client-go clean-go-examples
 	echo $(EXAMPLES_DIR)
-	@cd examples/datadog-api-client-fake; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Go code examples, aborting build."; exit 1)
+	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Go code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
