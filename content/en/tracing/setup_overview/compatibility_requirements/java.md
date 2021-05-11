@@ -201,6 +201,10 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 (See above for each integration's name.)
 
+### Known Issues
+
+Running the Java Tracer in Bitbucket is not supported at this time. 
+
 
 ## Further Reading
 
