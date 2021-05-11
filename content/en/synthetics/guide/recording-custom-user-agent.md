@@ -11,7 +11,6 @@ further_reading:
   text: "Configure advanced options for steps"
 ---
 
-
 In some cases, you might need to set a specific `User-Agent` string to be able to record your browser tests steps. To do so:
 
 1. Open your application in a pop up by clickking on **Open in Popup** when on your browser test recorder.
