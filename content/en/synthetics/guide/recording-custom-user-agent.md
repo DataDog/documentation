@@ -20,7 +20,7 @@ In some cases, you might need to set a specific `User-Agent` string to be able t
 5. Go to the **Network conditions** tab and disable the **Select automatically** option.
 6. Choose **Custom** and enter the `User-Agent` string of interest.
 
-**Note:** The `User-Agent` string can be overridden at test execution time by adding it as a header in your test configuration. 
+**Note:** The  [default `User-Agent` string][1] can be overridden at test execution time by adding it as a header in your test configuration. 
 
 ## Further Reading
 
