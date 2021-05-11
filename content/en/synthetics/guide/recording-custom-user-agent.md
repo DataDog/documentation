@@ -11,7 +11,7 @@ further_reading:
   text: "Configure advanced options for steps"
 ---
 
-In some cases, you might need to set a specific `User-Agent` string to be able to record your browser tests steps. To do so:
+Some implementations lead applications to render a certain way only when using a specific `User-Agent` string (e.g., when using a mobile `User-Agent`). In this type of cases, you would need to set the `User-Agent` header to a custom string to be able to record your browser tests steps on your application. To do so:
 
 1. Open your application in a pop up by clicking on **Open in Popup** in your browser test recorder.
 2. Open your Chrome Developer Tools.
