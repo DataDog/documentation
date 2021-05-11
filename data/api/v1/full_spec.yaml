@@ -10401,6 +10401,70 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - LAMBDA_USAGE
       - LAMBDA_PERCENTAGE
+    UsageAttributionSupportedMetrics:
+      description: Supported fields for usage attribution requests (valid requests
+        contain one or more metrics, or `*` for all).
+      enum:
+      - custom_timeseries_usage
+      - container_usage
+      - snmp_percentage
+      - apm_host_usage
+      - browser_usage
+      - npm_host_percentage
+      - infra_host_usage
+      - custom_timeseries_percentage
+      - container_percentage
+      - lambda_usage
+      - api_usage
+      - apm_host_percentage
+      - infra_host_percentage
+      - snmp_usage
+      - browser_percentage
+      - api_percentage
+      - lambda_percentage
+      - npm_host_usage
+      - lambda_functions_usage
+      - lambda_functions_percentage
+      - lambda_invocations_usage
+      - lambda_invocations_percentage
+      - fargate_usage
+      - fargate_percentage
+      - profiled_host_usage
+      - profiled_host_percentage
+      - profiled_container_usage
+      - profiled_container_percentage
+      - '*'
+      type: string
+      x-enum-varnames:
+      - CUSTOM_TIMESERIES_USAGE
+      - CONTAINER_USAGE
+      - SNMP_PERCENTAGE
+      - APM_HOST_USAGE
+      - BROWSER_USAGE
+      - NPM_HOST_PERCENTAGE
+      - INFRA_HOST_USAGE
+      - CUSTOM_TIMESERIES_PERCENTAGE
+      - CONTAINER_PERCENTAGE
+      - LAMBDA_USAGE
+      - API_USAGE
+      - APM_HOST_PERCENTAGE
+      - INFRA_HOST_PERCENTAGE
+      - SNMP_USAGE
+      - BROWSER_PERCENTAGE
+      - API_PERCENTAGE
+      - LAMBDA_PERCENTAGE
+      - NPM_HOST_USAGE
+      - LAMBDA_FUNCTIONS_USAGE
+      - LAMBDA_FUNCTIONS_PERCENTAGE
+      - LAMBDA_INVOCATIONS_USAGE
+      - LAMBDA_INVOCATIONS_PERCENTAGE
+      - FARGATE_USAGE
+      - FARGATE_PERCENTAGE
+      - PROFILED_HOST_USAGE
+      - PROFILED_HOST_PERCENTAGE
+      - PROFILED_CONTAINER_USAGE
+      - PROFILED_CONTAINER_PERCENTAGE
+      - ALL
     UsageAttributionTagNames:
       additionalProperties:
         description: A list of tag values.
@@ -21527,12 +21591,13 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: The specified field to search results for.
+      - description: Comma-separated list of usage types to return, or `*` for all
+          usage types.
         in: query
         name: fields
         required: true
         schema:
-          type: string
+          $ref: '#/components/schemas/UsageAttributionSupportedMetrics'
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for usage ending this month.'
         in: query
