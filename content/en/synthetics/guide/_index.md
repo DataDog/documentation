@@ -16,5 +16,5 @@ private: true
     {{< nextlink href="synthetics/guide/email-validation" >}}Email validation with browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Test file upload and download{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/popup/" >}}Handling popups in browser tests{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the Browser Test Chrome Extension{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
 {{< /whatsnext >}}
