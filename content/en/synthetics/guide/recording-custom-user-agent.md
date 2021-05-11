@@ -25,3 +25,5 @@ In some cases, you might need to set a specific `User-Agent` string to be able t
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests#default-headers
