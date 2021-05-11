@@ -11,7 +11,6 @@ further_reading:
   text: "Configure advanced options for steps"
 ---
 
-## Overview
 
 In some cases, you might need to set a specific `User-Agent` string to be able to record your browser tests steps. To do so:
 
