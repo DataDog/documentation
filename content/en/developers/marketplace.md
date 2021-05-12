@@ -112,7 +112,7 @@ Ensure that [Python 3.8 or higher][28] is installed.
 
 To avoid potential environment conflicts, in the directory where you cloned the repository, create a virtual environment by running: `python3 -m pip install virtualenv --user`
 
-The latest released version of the Datadog Development Toolkit may then be installed from [PyPI][23]:
+Install the latest released version of the Datadog Development Toolkit from [PyPI][23] by running:
 
 `python -m pip install --upgrade "datadog-checks-dev[cli]"`
 
