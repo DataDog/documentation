@@ -5693,6 +5693,661 @@ components:
       type: string
       x-enum-varnames:
       - NOTE
+    NotebookAbsoluteTime:
+      description: Absolute timeframe.
+      example:
+        end: '2021-02-24T20:18:28+00:00'
+        start: '2021-02-24T19:18:28+00:00'
+      properties:
+        end:
+          description: The end time.
+          example: '2021-02-24T20:18:28+00:00'
+          format: date-time
+          type: string
+        live:
+          description: Indicates whether the timeframe should be shifted to end at
+            the current time.
+          type: boolean
+        start:
+          description: The start time.
+          example: '2021-02-24T19:18:28+00:00'
+          format: date-time
+          type: string
+      required:
+      - start
+      - end
+    NotebookAuthor:
+      description: Attributes of user object returned by the API.
+      properties:
+        created_at:
+          description: Creation time of the user.
+          format: date-time
+          type: string
+        disabled:
+          description: Whether the user is disabled.
+          type: boolean
+        email:
+          description: Email of the user.
+          type: string
+        handle:
+          description: Handle of the user.
+          type: string
+        icon:
+          description: URL of the user's icon.
+          type: string
+        name:
+          description: Name of the user.
+          type: string
+        status:
+          description: Status of the user.
+          type: string
+        title:
+          description: Title of the user.
+          type: string
+        verified:
+          description: Whether the user is verified.
+          type: boolean
+      type: object
+    NotebookCellCreateRequest:
+      description: The description of a notebook cell create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    NotebookCellCreateRequestAttributes:
+      description: 'The attributes of a notebook cell in create cell request. Valid
+        cell types are `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCellResourceType:
+      default: notebook_cells
+      description: Type of the Notebook Cell resource.
+      enum:
+      - notebook_cells
+      example: notebook_cells
+      type: string
+      x-enum-varnames:
+      - NOTEBOOK_CELLS
+    NotebookCellResponse:
+      description: The description of a notebook cell response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellResponseAttributes'
+        id:
+          description: Notebook cell ID.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookCellResponseAttributes:
+      description: 'The attributes of a notebook cell response. Valid cell types are
+        `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCellTime:
+      description: Timeframe for the notebook cell. When 'null', the notebook global
+        time is used.
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/NotebookRelativeTime'
+      - $ref: '#/components/schemas/NotebookAbsoluteTime'
+      type: object
+    NotebookCellUpdateRequest:
+      description: The description of a notebook cell update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellUpdateRequestAttributes'
+        id:
+          description: Notebook cell ID.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookCellUpdateRequestAttributes:
+      description: 'The attributes of a notebook cell in update cell request. Valid
+        cell types are `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCreateData:
+      description: The data for a notebook create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCreateDataAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    NotebookCreateDataAttributes:
+      description: The data attributes of a notebook.
+      properties:
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookCellCreateRequest'
+          type: array
+        name:
+          description: Notebook name.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      - cells
+      - time
+      type: object
+    NotebookCreateRequest:
+      description: The description of a notebook create request.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookCreateData'
+      required:
+      - data
+      type: object
+    NotebookDistributionCellAttributes:
+      description: The attributes of a notebook distribution cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/DistributionWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookGlobalTime:
+      description: Notebook global timeframe.
+      oneOf:
+      - $ref: '#/components/schemas/NotebookRelativeTime'
+      - $ref: '#/components/schemas/NotebookAbsoluteTime'
+      type: object
+    NotebookGraphSize:
+      description: The size of the graph.
+      enum:
+      - xs
+      - s
+      - m
+      - l
+      - xl
+      type: string
+      x-enum-varnames:
+      - EXTRA_SMALL
+      - SMALL
+      - MEDIUM
+      - LARGE
+      - EXTRA_LARGE
+    NotebookHeatMapCellAttributes:
+      description: The attributes of a notebook heat map cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/HeatMapWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookLogStreamCellAttributes:
+      description: The attributes of a notebook log stream cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/LogStreamWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookMarkdownCellAttributes:
+      description: The attributes of a notebooks markdown cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/NotebookMarkdownCellDefinition'
+      required:
+      - definition
+      type: object
+    NotebookMarkdownCellDefinition:
+      description: Text in a notebook is formatted with [Markdown](https://daringfireball.net/projects/markdown/),
+        which enables the use of headings, subheadings, links, images, lists, and
+        code blocks.
+      properties:
+        text:
+          description: The markdown content.
+          example: "# Example Header \nexample content"
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookMarkdownCellDefinitionType'
+      required:
+      - type
+      - text
+      type: object
+    NotebookMarkdownCellDefinitionType:
+      default: markdown
+      description: Type of the markdown cell.
+      enum:
+      - markdown
+      example: markdown
+      type: string
+      x-enum-varnames:
+      - MARKDOWN
+    NotebookRelativeTime:
+      description: Relative timeframe.
+      example:
+        live_span: 1h
+      properties:
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
+      required:
+      - live_span
+      type: object
+    NotebookResourceType:
+      default: notebooks
+      description: Type of the Notebook resource.
+      enum:
+      - notebooks
+      example: notebooks
+      type: string
+      x-enum-varnames:
+      - NOTEBOOKS
+    NotebookResponse:
+      description: The description of a notebook response.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookResponseData'
+      type: object
+    NotebookResponseData:
+      description: The data for a notebook.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookResponseDataAttributes'
+        id:
+          description: Unique notebook ID, assigned when you create the notebook.
+          example: 123456
+          format: int64
+          readOnly: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookResponseDataAttributes:
+      description: The attributes of a notebook.
+      properties:
+        author:
+          $ref: '#/components/schemas/NotebookAuthor'
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            id: bzbycoya
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            id: 9k6bc6xc
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookCellResponse'
+          type: array
+        created:
+          description: UTC time stamp.
+          example: '2021-02-24T23:14:15.173964+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: UTC time stamp.
+          example: '2021-02-24T23:15:23.274966+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: Notebook name.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - cells
+      - time
+      - name
+      type: object
+    NotebookSplitBy:
+      description: Object describing how to split the graph to display multiple visualizations
+        per request.
+      properties:
+        keys:
+          description: Keys to split on.
+          items:
+            description: A key to split on.
+            example: environment
+            type: string
+          type: array
+        tags:
+          description: Tags to split on.
+          items:
+            description: A tag to split on.
+            example: environment:staging
+            type: string
+          type: array
+      required:
+      - keys
+      - tags
+      type: object
+    NotebookStatus:
+      default: published
+      description: Publication status of the notebook. For now, always "published".
+      enum:
+      - published
+      example: published
+      type: string
+      x-enum-varnames:
+      - PUBLISHED
+    NotebookTimeseriesCellAttributes:
+      description: The attributes of a notebook timeseries cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/TimeseriesWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookToplistCellAttributes:
+      description: The attributes of a notebook toplist cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/ToplistWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookUpdateCell:
+      description: 'Updating a notebook can either insert new cell(s) or update existing
+        cell(s) by including the cell `id`.
+
+        To delete existing cell(s), simply omit it from the list of cells.'
+      oneOf:
+      - $ref: '#/components/schemas/NotebookCellCreateRequest'
+      - $ref: '#/components/schemas/NotebookCellUpdateRequest'
+      type: object
+    NotebookUpdateData:
+      description: The data for a notebook update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookUpdateDataAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    NotebookUpdateDataAttributes:
+      description: The data attributes of a notebook.
+      properties:
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            id: bzbycoya
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            id: 9k6bc6xc
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookUpdateCell'
+          type: array
+        name:
+          description: Notebook name.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      - cells
+      - time
+      type: object
+    NotebookUpdateRequest:
+      description: The description of a notebook update request.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookUpdateData'
+      required:
+      - data
+      type: object
+    NotebooksResponse:
+      description: Notebooks get all response.
+      properties:
+        data:
+          description: List of notebook definitions.
+          items:
+            $ref: '#/components/schemas/NotebookResponseData'
+          type: array
+        meta:
+          description: Metadata returned by the API.
+          properties:
+            page:
+              $ref: '#/components/schemas/NotebooksResponsePage'
+          type: object
+      type: object
+    NotebooksResponsePage:
+      description: Pagination metadata returned by the API.
+      properties:
+        total_count:
+          description: The total number of notebooks that would be returned if the
+            request was not filtered by `start` and `count` parameters.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: The total number of notebooks returned.
+          format: int64
+          type: integer
+      type: object
     Organization:
       description: Create, edit, and manage organizations.
       properties:
@@ -12705,7 +13360,6 @@ components:
           minimum: 0
           type: integer
         is_column_break:
-          default: false
           description: 'Whether the widget should be the first one on the second column
             in high density or not.
 
@@ -19017,6 +19671,288 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/notebooks:
+    get:
+      description: 'Get all notebooks. This can also be used to search for notebooks
+        with a particular `query` in the notebook
+
+        `name` or author `handle`.'
+      operationId: ListNotebooks
+      parameters:
+      - description: Return notebooks created by the given `author_handle`.
+        in: query
+        name: author_handle
+        required: false
+        schema:
+          example: test@datadoghq.com
+          type: string
+        style: form
+      - description: Return notebooks not created by the given `author_handle`.
+        in: query
+        name: exclude_author_handle
+        required: false
+        schema:
+          example: test@datadoghq.com
+          type: string
+        style: form
+      - description: The index of the first notebook you want returned.
+        in: query
+        name: start
+        required: false
+        schema:
+          example: 0
+          format: int64
+          type: integer
+        style: form
+      - description: The number of notebooks to be returned.
+        in: query
+        name: count
+        required: false
+        schema:
+          example: 5
+          format: int64
+          type: integer
+        style: form
+      - description: Sort by field `modified` or `name`.
+        in: query
+        name: sort_field
+        required: false
+        schema:
+          default: modified
+          example: modified
+          type: string
+        style: form
+      - description: Sort by direction `asc` or `desc`.
+        in: query
+        name: sort_dir
+        required: false
+        schema:
+          default: desc
+          example: desc
+          type: string
+        style: form
+      - description: Return only notebooks with `query` string in notebook name or
+          author handle.
+        in: query
+        name: query
+        required: false
+        schema:
+          example: postmortem
+          type: string
+        style: form
+      - description: Value of `false` excludes the `cells` and global `time` for each
+          notebook.
+        in: query
+        name: include_cells
+        required: false
+        schema:
+          default: true
+          example: false
+          type: boolean
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebooksResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Get all notebooks
+      tags:
+      - Notebooks
+      x-undo:
+        type: safe
+    post:
+      description: Create a notebook using the specified options.
+      operationId: CreateNotebook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotebookCreateRequest'
+        description: The JSON description of the notebook you want to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Create a notebook
+      tags:
+      - Notebooks
+      x-codegen-request-body-name: body
+      x-given:
+        notebook:
+          parameters:
+          - file: notebook_payload.json
+            name: body
+          step: there is a valid "notebook" in the system
+      x-undo:
+        operationId: DeleteNotebook
+        parameters:
+        - name: notebook_id
+          source: data.id
+        type: unsafe
+  /api/v1/notebooks/{notebook_id}:
+    delete:
+      description: Delete a notebook using the specified ID.
+      operationId: DeleteNotebook
+      parameters:
+      - description: Unique ID, assigned when you create the notebook.
+        in: path
+        name: notebook_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete a notebook
+      tags:
+      - Notebooks
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a notebook using the specified notebook ID.
+      operationId: GetNotebook
+      parameters:
+      - description: Unique ID, assigned when you create the notebook.
+        in: path
+        name: notebook_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get a notebook
+      tags:
+      - Notebooks
+      x-undo:
+        type: safe
+    put:
+      description: Update a notebook using the specified ID.
+      operationId: UpdateNotebook
+      parameters:
+      - description: Unique ID, assigned when you create the notebook.
+        in: path
+        name: notebook_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotebookUpdateRequest'
+        description: Update notebook request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+      summary: Update a notebook
+      tags:
+      - Notebooks
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/org:
     get:
       description: List your managed organizations.
@@ -23575,6 +24511,17 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/
   name: Monitors
+- description: 'Interact with your notebooks through the API to make it easier to
+    organize, find, and
+
+    share all of your notebooks with your team and organization. For more information,
+    see the
+
+    [Notebooks documentation](https://docs.datadoghq.com/notebooks/).'
+  externalDocs:
+    description: For more information, see the Notebooks documentation.
+    url: https://docs.datadoghq.com/notebooks/
+  name: Notebooks
 - description: Create, edit, and manage your organizations. Read more about [multi-org
     accounts](https://docs.datadoghq.com/account_management/multi_organization).
   externalDocs:

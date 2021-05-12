@@ -71,6 +71,10 @@
     "name": "Monitors",
     "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about,\nnotifying your team when some defined threshold is exceeded.\nRefer to the Creating Monitors page for more information on creating monitors."
   },
+  "notebooks": {
+    "name": "Notebooks",
+    "description": "Interact with your notebooks through the API to make it easier to organize, find, and\nshare all of your notebooks with your team and organization. For more information, see the\n[Notebooks documentation](https://docs.datadoghq.com/notebooks/)."
+  },
   "organizations": {
     "name": "Organizations",
     "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization)."
