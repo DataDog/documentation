@@ -144,7 +144,7 @@ For standalone software and services--or if your integration is using the Datado
 
 For the complete integration scaffolding, `cd` into the the marketplace or integrations-extras directory and run: 
 
-`ddev create <Offering Name>`
+`ddev create "<Offering Name>"`
 
 ### 5. Populate the Tile Scaffolding
 
