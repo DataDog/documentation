@@ -110,12 +110,12 @@ The Datadog Development Toolkit command (`ddev`) allows you to create scaffoldin
 
 Ensure that Python 3.8 or higher is installed (https://www.python.org/downloads/).	
 
-Next, to avoid a range of potential environment conflicts, we recommend going into the directory where you cloned the repository and creating a simple virtual environment with the following command: python3 -m pip install virtualenv --user
+To avoid a range of potential environment conflicts, we recommend going into the directory where you cloned the repository and creating a simple virtual environment with the following command: python3 -m pip install virtualenv --user
 
 The latest released version may then be installed from [PyPI][23]:
 
 `python -m pip install --upgrade "datadog-checks-dev[cli]"`
-Note: if you are using Z shell, you may need to use an escape character: `python -m pip install --upgrade datadog-checks-dev\[cli\]` 
+**Note:** if you are using Z shell, you may need to use an escape character: `python -m pip install --upgrade datadog-checks-dev\[cli\]` 
 
 Set the location of to the cloned repository:
 
