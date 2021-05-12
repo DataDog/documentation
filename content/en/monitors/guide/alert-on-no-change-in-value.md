@@ -26,7 +26,7 @@ These functions can be applied to your query in the UI, via the "+" button.
 
 Alternatively, your complex query can be manually entered in the 'edit monitor' UI, via the Source tab (or applied programmatically via the [API][1]). See image below.
 
-For [alert conditions][3] in the metric monitor itself, configure as follows:
+For [alert conditions][2] in the metric monitor itself, configure as follows:
 
 * Select threshold alert
 * Set the "Trigger when the metric is..." dropdown selector to **below** or **equal to**

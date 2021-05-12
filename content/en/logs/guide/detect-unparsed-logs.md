@@ -8,12 +8,7 @@ further_reading:
   - link: /logs/faq/log-parsing-best-practice
     tag: Documentation
     text: "Log Parsing - Best Practices"
-beta: true
 ---
-
-<div class="alert alert-warning">
-The unparsed logs flagging feature is currently in private beta. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
-</div>
 
 ## Overview
 Parsed logs are central to be able to use Datadog Log Management to its full capacity, for queries, monitors, aggregations or automatic enrichments such as sensitive data scanner.

@@ -12,7 +12,7 @@ categories:
     - cloud
     - Gestion des coûts
 ddtype: crawler
-
+integration_id: "cloudability"
 ---
 
 ## Présentation

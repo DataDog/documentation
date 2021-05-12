@@ -54,7 +54,7 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
     ```
     custom:
       datadog:
-        forwarder: # The Datadog Forwarder ARN goes here.
+        forwarderArn: # The Datadog Forwarder ARN goes here.
     ```
     Pour en savoir plus sur l'ARN du Forwarder Datadog ou sur l'installation, cliquez [ici][2]. Pour obtenir des paramètres supplémentaires, consultez la [documentation du plug-in][1].
 

@@ -74,6 +74,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'integration_sdk.md' \
 		-a -not -name 'journald.md' \
 		-a -not -name 'kubernetes.md' \
+		-a -not -name 'kubernetes_state_core.md' \
 		-a -not -name 'nxlog.md' \
 		-a -not -name 'rss.md' \
 		-a -not -name 'rsyslog.md' \
@@ -124,12 +125,24 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/serverless/serverless_integrations/macro.md ;fi
 	@if [ content/en/serverless/serverless_integrations/cli.md ]; then \
 	rm -f content/en/serverless/serverless_integrations/cli.md ;fi
-	@if [ content/en/real_user_monitoring/android.md ]; then \
-	rm -f content/en/real_user_monitoring/android.md ;fi
+	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/android/_index.md ;fi
+	@if [ content/en/real_user_monitoring/android/data_collected.md ]; then \
+	rm -f content/en/real_user_monitoring/android/data_collected.md ;fi
+	@if [ content/en/real_user_monitoring/android/advanced_configuration.md ]; then \
+	rm -f content/en/real_user_monitoring/android/advanced_configuration.md ;fi
+	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
+	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
+	@if [ content/en/real_user_monitoring/android/integrated_libraries.md ]; then \
+	rm -f content/en/real_user_monitoring/android/integrated_libraries.md ;fi
+	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
+	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
 	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
 	@if [ content/en/real_user_monitoring/ios.md ]; then \
 	rm -f content/en/real_user_monitoring/ios.md ;fi
+	@if [ content/en/real_user_monitoring/reactnative.md ]; then \
+	rm -f content/en/real_user_monitoring/reactnative.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \

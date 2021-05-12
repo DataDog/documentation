@@ -30,9 +30,16 @@ As you define the search query, the graph above the search fields updates.
     * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet**: If a [facet][4] is selected, the monitor alerts over the `Unique value count` of the facet.
     * **Monitor over measure**: If a [measure][4] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-3. Configure the alerting grouping strategy (optional):
+3. Group logs by multiple dimensions (optional):
+
+   All logs matching the query are aggregated into groups based on the value of up to four log facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
+   * **1 facet**: 1000 top values
+   * **2 facets**: 30 top values per facet (at most 900 groups)
+   * **3 facets**: 10 top values per facet (at most 1000 groups)
+   * **4 facets**: 5 top values per facet (at most 625 groups)
+4. Configure the alerting grouping strategy (optional):
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
-    * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 100 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
+    * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
 ### Set alert conditions
 
