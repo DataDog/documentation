@@ -193,7 +193,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### Codeowners
 
-* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See [Github's documentation][28] for help with syntax.
+* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See [Github's documentation][29] for help with syntax.
 
 #### Additional Marketplace files 
 
@@ -256,4 +256,5 @@ Please reach out to us at techpartners@datadoghq.com if you have any questions.
 [25]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
 [26]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
 [27]: https://www.datadoghq.com/blog/
-[28]: https://help.github.com/articles/about-codeowners/
+[28]: https://www.python.org/downloads/
+[29]: https://help.github.com/articles/about-codeowners/
