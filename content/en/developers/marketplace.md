@@ -110,11 +110,13 @@ The Datadog Development Toolkit command (`ddev`) allows you to create scaffoldin
 
 Ensure that [Python 3.8 or higher][28] is installed.	
 
-To avoid potential environment conflicts, in the directory where you cloned the repository, create a virtual environment by running: `python3 -m pip install virtualenv --user`
+To avoid potential environment conflicts, in the directory where you cloned the repository, create a virtual environment by running: 
+
+```python3 -m pip install virtualenv --user```
 
 Install the latest released version of the Datadog Development Toolkit from [PyPI][23] by running:
 
-`python -m pip install --upgrade "datadog-checks-dev[cli]"`
+```python -m pip install --upgrade "datadog-checks-dev[cli]"```
 
 **Note:** If you are using Z shell, you may need to use escape characters: `python -m pip install --upgrade datadog-checks-dev\[cli\]` 
 
@@ -122,15 +124,15 @@ Set the location of to the cloned repository:
 
 #### Marketplace:
 
-`ddev config set marketplace /path/to/marketplace_directory`
+```ddev config set marketplace /path/to/marketplace_directory```
 
-`ddev config set repo marketplace`
+```ddev config set repo marketplace```
 
 #### Integrations-Extras:
 
-`ddev config set extras /path/to/integrations-extras_directory`
+```ddev config set extras /path/to/integrations-extras_directory```
 
-`ddev config set repo extras`
+```ddev config set repo extras```
 
 #### Tile Only Listing
 
@@ -138,13 +140,13 @@ For standalone software and services--or if your integration is using the Datado
 
 `cd` into the marketplace or integrations-extras directory and run: 
 
-`ddev create -t tile "<Offering Name>"`
+```ddev create -t tile "<Offering Name>"```
 
 #### Full Integration
 
 For the complete integration scaffolding, `cd` into the the marketplace or integrations-extras directory and run: 
 
-`ddev create "<Offering Name>"`
+```ddev create "<Offering Name>"```
 
 ### 5. Populate the Tile Scaffolding
 
