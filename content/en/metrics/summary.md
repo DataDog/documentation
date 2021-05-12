@@ -25,7 +25,7 @@ Search your metrics by name or tag using the **Metric** or **Tag** search fields
 ## Facet Panel
 The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also quickly filter your metrics by:
 * **Configuration** : Quickly identify metrics with tag configurations or additional percentile aggregations
-* **Metric Type** : Quickly identify distributions vs non-distributions (counts,gauges,rates)
+* **Metric Type** : Quickly identify distributions vs non-distributions (counts, gauges, rates)
 
 {{< img src="metrics/summary/facets.jpg" alt="Metrics Facet Panel"  style="width:75%;">}}
 
