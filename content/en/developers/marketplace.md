@@ -160,7 +160,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 #### images
 
 * Store all images used in your `README.md` file in the `images` folder. 
-* **Note:** We recommend not using empty spaces in the name of image files.
+* **Note:** Don't include spaces in the name of image files.
 
 #### Manifest.json
 
