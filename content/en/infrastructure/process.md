@@ -273,7 +273,7 @@ Once a third-party software has been detected, Live Processes makes it quick and
 2. Select a view to scope the page to only the processes running that software. 
 3. When inspecting a heavy process, shift to the *Integration Metrics* tab to analyze the health of the software on the underlying host. If you have already enabled the relevant Datadog integration, you'll be able to view all performance metrics collected from the integration to distinguish between a host-level and software-level issue. For instance, seeing correlated spikes in process CPU and MySQL query latency may indicate that an intensive operation, such as a full table scan, is delaying the execution of other MySQL queries relying on the same underlying resources. 
 
-You can customize integration views (e.g. when aggregating a query for Nginx processes by host) and other custom queries by clicking the *+Save* button at the top of the page. Doing so will save your query, table column selections, and visualization settings. Create saved views for quick access to the processes you care about without addition configuration, and to share process data with your teammates.  
+You can customize integration views (for example, when aggregating a query for Nginx processes by host) and other custom queries by clicking the *+Save* button at the top of the page. Doing so will save your query, table column selections, and visualization settings. Create saved views for quick access to the processes you care about without addition configuration, and to share process data with your teammates.  
 
 ## Processes across the platform
 
