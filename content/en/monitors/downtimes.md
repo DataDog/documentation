@@ -70,6 +70,7 @@ Notify your team by specifying team members or send the message to a service [in
 ## Manage
 
 The Manage Downtime page displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Use the _Filter downtimes_ text box to search your downtimes.
+By default this text box searches on the `monitor_name`, `scopes`, `monitor_tags`, `message`, and `status` parameter of the downtines.
 
 ### History
 

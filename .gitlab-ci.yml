@@ -24,7 +24,7 @@ before_script:
   - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
-
+  - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
 
 cache: &cache
   key:
@@ -35,7 +35,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_update-git
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_img-update
   tags:
     - "runner:main"
     - "size:2xlarge"
@@ -251,7 +251,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup_overview/setup/android.md,content/en/tracing/setup_overview/setup/ruby.md,content/en/security_platform/default_rules,content/en/serverless/forwarder.md,content/en/serverless/datadog_lambda_library/python.md,content/en/serverless/datadog_lambda_library/nodejs.md,content/en/serverless/datadog_lambda_library/ruby.md,content/en/serverless/datadog_lambda_library/go.md,content/en/serverless/datadog_lambda_library/java.md,content/en/real_user_monitoring/android.md,content/en/real_user_monitoring/browser/_index.md,content/en/real_user_monitoring/ios.md,content/en/serverless/serverless_integrations/plugin.md,content/en/serverless/serverless_integrations/macro.md,content/en/serverless/serverless_integrations/cli.md,content/en/logs/log_collection/javascript.md"
+    UNTRACKED_EXTRAS: "data"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
@@ -276,42 +276,6 @@ build_live:
     expire_in: 1 week
   only:
     - master
-
-
-# build_live_legacy:
-#   <<: *base_template
-#   stage: build
-#   environment: "live"
-#   variables:
-#     CONFIG: ${LIVE_CONFIG}
-#     URL: ${LIVE_DOMAIN}
-#     UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup_overview/setup/android.md,content/en/tracing/setup_overview/setup/ruby.md,content/en/security_monitoring/default_rules"
-#     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
-#     LOCAL: "False"
-#   script:
-#     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-#     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
-#     - version_static_assets
-#     - touch Makefile.config
-#     - make examples
-#     - sync_integration_descriptions
-#     - sync_integration_metrics
-#     - placehold_translations
-#     - build_hugo_site_new
-#     - in-isolation deploy_live
-#     - collect_static_assets
-#     - push_site_to_s3
-#     - create_artifact
-#     - create_artifact_untracked
-#   artifacts:
-#     when: on_success
-#     paths:
-#       - ${ARTIFACT_RESOURCE}
-#       - ./integrations_data
-#       - content/en
-#     expire_in: 1 week
-#   only:
-#     - master
 
 
 index_internal_doc:

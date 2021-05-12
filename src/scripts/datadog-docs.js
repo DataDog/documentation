@@ -589,8 +589,14 @@ $(document).ready(function () {
     onScroll();
 
     // TODO: move integrations code to own file after webpack update
-    initializeIntegrations();
-    initializeSecurityRules();
+
+    if (document.body.classList.value.includes('security_platform')) {
+        initializeSecurityRules();
+    }
+
+    if (document.body.classList.value.includes('integrations')) {
+        initializeIntegrations();
+    }
 });
 
 

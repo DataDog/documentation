@@ -42,6 +42,7 @@
       - integration/*/manifest.json
       - integration/*/service_checks.json
       - integration/*/README.md
+      - integration/*/__init__.py
 
   - repo_name: integrations-core
     contents:
@@ -411,27 +412,27 @@
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - 'packages/rum/README.md'
       options:
         dest_path: '/real_user_monitoring/browser/'
         file_name: '_index.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/browser-sdk/blob/master/packages/rum/README.md"]
+          dependencies: ["https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md"]
           title: RUM Browser Monitoring
           kind: documentation
           aliases:
             - /real_user_monitoring/setup
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - 'packages/logs/README.md'
       options:
         dest_path: '/logs/log_collection/'
         file_name: 'javascript.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/browser-sdk/blob/master/packages/logs/README.md"]
+          dependencies: ["https://github.com/DataDog/browser-sdk/blob/main/packages/logs/README.md"]
           title: Browser Log Collection
           kind: documentation
           aliases:
@@ -571,6 +572,33 @@
           beta: true
           description: "Collect RUM data from your iOS applications."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection.md"]
+
+  - repo_name: dd-sdk-reactnative
+    contents:
+
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/real_user_monitoring/'
+        file_name: 'reactnative.md'
+        front_matters:
+          title: React Native RUM Collection
+          kind: documentation
+          beta: true
+          description: "Collect RUM data from your React Native projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "Github"
+              text: "dd-sdk-reactnative source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+            - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
+              tag: "Blog"
+              text: "Monitor react-native applications"
 
   - repo_name: security-monitoring
     contents:

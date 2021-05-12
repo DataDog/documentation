@@ -87,13 +87,25 @@ The HISTOGRAM metric submission type represents the statistical distribution of 
 
 If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time interval, the following metrics are produced by the Agent by default:
 
-| New Metric Name              | Description                                                                                                                                                    | Datadog In-App Type |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| `<METRIC_NAME>.avg`          | Represents the average of those `X` values in the time interval.                                                                                               | GAUGE               |
-| `<METRIC_NAME>.count`        | Represents the number of values submitted during the interval, `X`. The Agent submits this number as a RATE so it would show in app the value of `X/interval`. | RATE                |
-| `<METRIC_NAME>.median`       | Represents the median of those `X` values in the time interval.                                                                                                | GAUGE               |
-| `<METRIC_NAME>.95percentile` | Represents the 95th percentile of those `X` values in the time interval.                                                                                       | GAUGE               |
-| `<METRIC_NAME>.max`          | Represents the maximum value of those `X` values sent during the time interval                                                                                 | GAUGE               |
+`<METRIC_NAME>.avg`
+: Represents the average of those `X` values in the time interval.<br>
+**Datadog In-App Type**: GAUGE
+
+`<METRIC_NAME>.count`
+: Represents the number of values submitted during the interval, `X`. The Agent submits this number as a RATE so it would show in app the value of `X/interval`. <br>
+**Datadog In-App Type**: RATE
+
+`<METRIC_NAME>.median`
+: Represents the median of those `X` values in the time interval.<br>
+**Datadog In-App Type**: GAUGE
+
+`<METRIC_NAME>.95percentile` 
+: Represents the 95th percentile of those `X` values in the time interval.<br>
+**Datadog In-App Type**: GAUGE
+
+`<METRIC_NAME>.max`
+: Represents the maximum value of those `X` values sent during the time interval.<br>
+**Datadog In-App Type**: GAUGE
 
 **Note**:
 
@@ -115,13 +127,25 @@ Unlike the HISTOGRAM metric type, which aggregates on the Agent during a given t
 
 If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time interval, the following aggregations are available for query by default:
 
-| Aggregation           | Description                                                                                              | Datadog In-App Type |
-| --------------------- | -------------------------------------------------------------------------------------------------------- | ------------------- |
-| `avg:<METRIC_NAME>`   | Represents the average of those `X` values in the time interval.                                         | GAUGE               |
-| `count:<METRIC_NAME>` | Represents the number of points submitted in the time interval, `X`. The Agent then sends it as a COUNT. | COUNT               |
-| `max:<METRIC_NAME>`   | Represents the maximum value of those `X` values sent in the time interval.                              | GAUGE               |
-| `min:<METRIC_NAME>`   | Represents the minimum value of those `X` sent in the time interval.                                     | GAUGE               |
-| `sum:<METRIC_NAME>`   | Represents the sum of all `X` values sent in the time interval                                           | COUNT               |
+`avg:<METRIC_NAME>`
+: Represents the average of those `X` values in the time interval.<br>
+**Datadog In-App Type**: GAUGE
+
+`count:<METRIC_NAME>`
+: Represents the number of points submitted in the time interval, `X`. The Agent then sends it as a COUNT.<br>
+**Datadog In-App Type**: COUNT
+
+`max:<METRIC_NAME>`
+: Represents the maximum value of those `X` values sent in the time interval.<br>
+**Datadog In-App Type**: GAUGE
+
+`min:<METRIC_NAME>`
+: Represents the minimum value of those `X` sent in the time interval.<br>
+**Datadog In-App Type**: GAUGE
+
+`sum:<METRIC_NAME>`
+: Represents the sum of all `X` values sent in the time interval.<br>
+**Datadog In-App Type**: COUNT
 
 {{% /tab %}}
 {{< /tabs >}}

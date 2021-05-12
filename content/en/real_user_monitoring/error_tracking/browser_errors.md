@@ -85,7 +85,7 @@ For Error Tracking to properly work with your source maps, you must configure yo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/data_collected/?tab=error#source-errors
-[2]: /real_user_monitoring/browser/advanced_configuration#custom-errors
+[2]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
 [3]: https://www.npmjs.com/package/@datadog/browser-rum
 [4]: /real_user_monitoring/browser/#initialization-parameters
 [5]: https://github.com/DataDog/datadog-ci/
