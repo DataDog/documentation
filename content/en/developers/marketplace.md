@@ -191,7 +191,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### Codeowners
 
-* Located in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See [Github's documentation][29] for help with syntax.
+* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See [Github's documentation][29] for help with syntax.
 
 #### Additional Marketplace files 
 
