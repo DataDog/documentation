@@ -116,7 +116,7 @@ Install the latest released version of the Datadog Development Toolkit from [PyP
 
 `python -m pip install --upgrade "datadog-checks-dev[cli]"`
 
-**Note:** if you are using Z shell, you may need to use escape characters: `python -m pip install --upgrade datadog-checks-dev\[cli\]` 
+**Note:** If you are using Z shell, you may need to use escape characters: `python -m pip install --upgrade datadog-checks-dev\[cli\]` 
 
 Set the location of to the cloned repository:
 
