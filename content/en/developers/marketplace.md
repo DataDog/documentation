@@ -96,7 +96,7 @@ Integrations can send the following data to Datadog:
 6. [Incidents][21]
 7. [Security Events][22]
 
-### 3. Clone either the Marketplace or the Integrations Extras repository
+### 3. Clone the Marketplace or fork the Integrations Extras repository
 
 Datadog integrations can be developed for either our private [Marketplace repository][9] or our open source [Integrations Extras repository][10]. 
 
@@ -108,11 +108,14 @@ Technology Partners can request access to the private Marketplace repository by 
 
 The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are first developing your integration, by spinning up a skeleton of all the assets and metadata for your tile.
 
-Ensure that Python 3.8 or higher is installed.	
+Ensure that Python 3.8 or higher is installed (https://www.python.org/downloads/).	
 
-The latest released version may be installed from [PyPI][23]:
+Next, to avoid a range of potential environment conflicts, we recommend going into the directory where you cloned the repository and creating a simple virtual environment with the following command: python3 -m pip install virtualenv --user
 
-`python -m pip install --upgrade "datadog-checks-dev[cli]`
+The latest released version may then be installed from [PyPI][23]:
+
+`python -m pip install --upgrade "datadog-checks-dev[cli]"`
+Note: if you are using Z shell, you may need to use an escape character: `python -m pip install --upgrade datadog-checks-dev\[cli\]` 
 
 Set the location of to the cloned repository:
 
@@ -131,7 +134,7 @@ Set the location of to the cloned repository:
 #### Tile Only Listing
 
 For standalone software and services--or if your integration is using the Datadog API and does not contain any Python code--the Development Toolkit supports a tile-only command. 
-`ddev create -t` 
+`ddev create -t tile "<Offering Name>"`
 
 #### Full Integration
 
@@ -174,12 +177,16 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### Logo
 
-* Consists of an SVG, which our DesignOps team implements throughout the Datadog app for both light and dark modes. 
+* Consists of an SVG, which our DesignOps team implements throughout the Datadog app for both light and dark modes.  
 * **Note:** Technology Partners are responsible for the licensing of the logos they submit.  
 
 #### Changelog.md
 
 * Captures release notes and version information, and displays this in the “Release Notes” tab of your tile. Add release notes in descending order (latest version at the top).
+
+#### Codeowners
+
+* Lives under .github directory and defines the individuals or teams that are responsible for code in a repository. See https://help.github.com/articles/about-codeowners/ for syntax.
 
 #### Additional Marketplace files 
 
