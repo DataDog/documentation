@@ -41,7 +41,7 @@ Each [default rule][1] maps to one or more controls within a compliance framewor
 
 On the [Rules][7] page, hover over a rule and click on the pencil icon to edit a rule at the top of the page. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how a rule scans your environment.
 
-For example, you can remove all resources tagged with `env:staging` because this environment is not running production applications using the **Never trigger a signal when** function. Or, you may want to limit scope for a certain rule to resources tagged with `compliance:pci` using the **Only trigger a signal when** function.
+For example, you can remove all resources tagged with `env:staging` because this environment is not running production applications using the **Never trigger a signal when** function. Or, you may want to limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only trigger a signal when** function.
 
 {{< img src="security_platform/cspm/frameworks_and_benchmarks/never-trigger-a-signal.png" alt="In the Datadog app, select Advanced to populate Never trigger a signal when, and add a query." >}}
 
