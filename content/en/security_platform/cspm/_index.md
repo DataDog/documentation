@@ -17,23 +17,16 @@ Cloud Security Posture Management is not currently available in US1-FED or US3.
 
 ## Overview
 
-Datadog Cloud Security Posture Management (CSPM) makes it easy to track the security hygiene and compliance posture of your production environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against compliance controls. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against security best practices.
+Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
 
-View your cloud security posture at a higher level level with the CSPM Home page, and drill into the details of compliance findings and analyze historical configurations with the Findings Explorer.
+Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against CSPM controls. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against security best practices.
 
-[Screenshot]
-
-## Terminology
-
-- **Resource**: A configurable entity that needs to be continuously scanned for compliance. Examples include hosts, containers, security groups, users, and customer-managed IAM policies.
-- **Average compliance posture score**: The percentage of your environment that complies with all default cloud configuration and runtime compliance rules. Formula: `(# of resources with 0 findings) / (total # of resources scanned)`.
-- **Control**: A specific recommendation for how technology, people, and processes should be managed. One or more configuration rules map to each control displayed in Datadog.
-- **Requirement**: A group of controls representing a single technical or operational topic, such as “Access Management” or “Networking.” The regulatory framework PCI DSS, for example, has 12 requirements.
+View your cloud security posture at a higher level level with the CSPM Home page, and drill into the details of findings and analyze historical configurations with the Findings Explorer.
 
 ## Get Started
 
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/cspm/getting_started">}}Configure your cloud environment for CSPM scanning{{< /nextlink >}}
-  {{< nextlink href="">}}Search and explore findings to uncover the details about a misconfigured resource and the steps needed to fix it{{< /nextlink >}}
-  {{< nextlink href="">}}Learn about the OOTB rules, regulatory frameworks, and industry benchmarks Datadog helps monitor{{< /nextlink >}}
+  {{< nextlink href="/security_platform/cspm/findings">}} Search and explore findings to reveal the details about a misconfigured resource, enabling you to identify the steps needed to fix it.{{< /nextlink >}}
+  {{< nextlink href="/security_platform/cspm/frameworks_and_benchmarks">}}Get the details about Datadog’s OOTB security posture rules and create your own rules to compare your configuration to applicable regulatory frameworks, controls, and industry benchmarks.{{< /nextlink >}}
 {{< /whatsnext >}}
