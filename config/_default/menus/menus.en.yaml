@@ -4173,6 +4173,70 @@ api:
         - ListMonitors
       unstable: []
       order: 2
+  - name: Notebooks
+    url: /api/latest/notebooks/
+    identifier: notebooks
+    generated: true
+  - name: Update a notebook
+    url: '#update-a-notebook'
+    identifier: update-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateNotebook
+      unstable: []
+      order: 0
+  - name: Get a notebook
+    url: '#get-a-notebook'
+    identifier: get-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetNotebook
+      unstable: []
+      order: 0
+  - name: Delete a notebook
+    url: '#delete-a-notebook'
+    identifier: delete-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteNotebook
+      unstable: []
+      order: 0
+  - name: Create a notebook
+    url: '#create-a-notebook'
+    identifier: create-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateNotebook
+      unstable: []
+      order: 0
+  - name: Get all notebooks
+    url: '#get-all-notebooks'
+    identifier: get-all-notebooks
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListNotebooks
+      unstable: []
+      order: 0
   - name: Organizations
     url: /api/latest/organizations/
     identifier: organizations
