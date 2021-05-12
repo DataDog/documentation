@@ -122,13 +122,13 @@ Set the location of to the cloned repository:
 
 #### Marketplace:
 
-`ddev config set marketplace /path/to/marketplace_directory` (for example: /Users/yourname/Documents/marketplace)
+`ddev config set marketplace /path/to/marketplace_directory` (For example: /Users/yourname/Documents/marketplace)
 
 `ddev config set repo marketplace`
 
 #### Integrations-Extras:
 
-`ddev config set extras /path/to/integrations-extras_directory` (for example: /Users/yourname/Documents/integrations-extras)
+`ddev config set extras /path/to/integrations-extras_directory` (For example: /Users/yourname/Documents/integrations-extras)
 
 `ddev config set repo extras`
 
