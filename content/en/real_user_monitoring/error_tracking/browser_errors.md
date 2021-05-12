@@ -28,6 +28,8 @@ In addition to sending source maps, the new version of the [Datadog CLI][6] repo
 
 {{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.gif" alt="Link from a stack frame to the source code"  >}}
 
+<div class="alert alert-info">To see links to the source code, make sure to use the <code>v0.12.0</code> version or more of the <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a>.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
