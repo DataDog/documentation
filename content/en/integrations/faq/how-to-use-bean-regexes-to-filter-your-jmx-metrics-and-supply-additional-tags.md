@@ -37,7 +37,7 @@ instances:
       - include:
           domain: domain.example.com
           bean_regex:
-            - "domain.example.com:name=my.metric.name.*(?:\.env\.)([a-z]+)(?:.*\.region\.)([a-z-]+[0-9])(?:.*\.method\.)([A-Z]+)(?:.*\.status\.)([0-9]+)(?:.*)"
+            - "domain.example.com:name=my.metric.name.*(?:\\.env\\.)([a-z]+)(?:.*\\.region\\.)([a-z-]+[0-9])(?:.*\\.method\\.)([A-Z]+)(?:.*\\.status\\.)([0-9]+)(?:.*)"
           attribute:
             attribute1:
               metric_type: gauge
