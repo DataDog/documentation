@@ -144,7 +144,7 @@ For standalone software and services--or if your integration is using the Datado
 
 #### Full Integration
 
-For the complete integration scaffolding, `cd` into the the marketplace or integrations-extras directory and run: 
+To generate a complete integration scaffolding, from the `marketplace` or `integrations-extras` directory specified above, run: 
 
 ```ddev create "<Offering Name>"```
 
