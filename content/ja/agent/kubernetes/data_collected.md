@@ -37,13 +37,13 @@ Kubernetes クラスターにデプロイされた Agent が収集するメト�
 
 {{< get-metrics-from-git "kubelet" >}}
 
-### kube-state-metrics
+### Kubernetes State
 
 `kubernetes_state.*` メトリクスは `kube-state-metrics` API から収集されます。
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
-### kube-dns
+### Kubernetes DNS
 
 {{< get-metrics-from-git "kube_dns" >}}
 
@@ -82,36 +82,36 @@ Datadog Agent の 5.17.0 リリース版では、Kubernetes イベントコレ�
 - Unable
 - Unhealthy
 
-## サービスのチェック
+## サービスチェック
 
 Kubernetes チェックは、次のサービスチェックを含みます。
 
-- `kubernetes.kubelet.check`: <br>
-    `CRITICAL` の場合、`kubernetes.kubelet.check.ping` または `kubernetes.kubelet.check.syncloop` は、`CRITICAL` または `NO DATA` の状態になります。
+`kubernetes.kubelet.check`
+: CRITICAL` の場合、`kubernetes.kubelet.check.ping` または `kubernetes.kubelet.check.syncloop` は、`CRITICAL` または `NO DATA` の状態になります。
 
-- `kubernetes.kubelet.check.ping`:<br>
-    `CRITICAL` または `NO DATA` の場合、Kubelet の API は使用できません
+`kubernetes.kubelet.check.ping`
+: `CRITICAL` または `NO DATA` の場合、Kubelet の API は使用できません
 
-- `kubernetes.kubelet.check.syncloop`:<br>
-    `CRITICAL` または `NO DATA` の場合、コンテナを更新する Kubelet の同期ループは機能しません。
+`kubernetes.kubelet.check.syncloop`
+: `CRITICAL` または `NO DATA` の場合、コンテナを更新する Kubelet の同期ループは機能しません。
 
-- `kubernetes_state.node.ready`:<br>
-    クラスターノードの準備ができていない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
+`kubernetes_state.node.ready`
+: クラスターノードの準備ができていない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
-- `kubernetes_state.node.out_of_disk`:<br>
-    クラスターノードにディスク容量がない場合は `CRITICAL` を返します。。それ以外の場合は`OK` を返します。
+`kubernetes_state.node.out_of_disk`
+: クラスターノードにディスク容量がない場合は `CRITICAL` を返します。それ以外の場合は`OK` を返します。
 
-- `kubernetes_state.node.disk_pressure`:<br>
-    クラスターノードがディスク圧縮状態の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
+`kubernetes_state.node.disk_pressure`
+: クラスターノードがディスク圧縮状態の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
-- `kubernetes_state.node.memory_pressure`:<br>
-    クラスターノードがメモリ圧縮状態の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
+`kubernetes_state.node.memory_pressure`
+: クラスターノードがメモリ圧縮状態の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
-- `kubernetes_state.node.network_unavailable`:<br>
-    クラスターノードがネットワーク使用不可能状態の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
+`kubernetes_state.node.network_unavailable`
+: クラスターノードがネットワーク使用不可能状態の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
-- `kubernetes_state.cronjob.on_schedule_check`:<br>
-    cron ジョブの予約時間が過ぎている場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
+`kubernetes_state.cronjob.on_schedule_check`
+: cron ジョブの予約時間が過ぎている場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## その他の参考資料
 
