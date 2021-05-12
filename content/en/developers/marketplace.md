@@ -96,7 +96,7 @@ Integrations can send the following data to Datadog:
 6. [Incidents][21]
 7. [Security Events][22]
 
-### 3. Clone either the Marketplace or the Integrations Extras repository
+### 3. Create a branch of the Marketplace repository or fork the Integrations Extras repository
 
 Datadog integrations can be developed for either our private [Marketplace repository][9] or our open source [Integrations Extras repository][10]. 
 
@@ -108,36 +108,43 @@ Technology Partners can request access to the private Marketplace repository by 
 
 The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are first developing your integration, by spinning up a skeleton of all the assets and metadata for your tile.
 
-Ensure that Python 3.8 or higher is installed.	
+Ensure that Python 3.8 or higher is installed (https://www.python.org/downloads/).	
 
-The latest released version may be installed from [PyPI][23]:
+To avoid a range of potential environment conflicts, we recommend going into the directory where you cloned the repository and creating a simple virtual environment with the following command: `python3 -m pip install virtualenv --user`
 
-`python -m pip install --upgrade "datadog-checks-dev[cli]`
+The latest released version may then be installed from [PyPI][23]:
+
+`python -m pip install --upgrade "datadog-checks-dev[cli]"`
+
+**Note:** if you are using Z shell, you may need to use escape characters: `python -m pip install --upgrade datadog-checks-dev\[cli\]` 
 
 Set the location of to the cloned repository:
 
 #### Marketplace:
 
-`ddev config set marketplace /path/to/marketplace`
+`ddev config set marketplace /path/to/marketplace_directory` (For example: /Users/yourname/Documents/marketplace)
 
 `ddev config set repo marketplace`
 
 #### Integrations-Extras:
 
-`ddev config set extras /path/to/integrations-extras`
+`ddev config set extras /path/to/integrations-extras_directory` (For example: /Users/yourname/Documents/integrations-extras)
 
 `ddev config set repo extras`
 
 #### Tile Only Listing
 
 For standalone software and services--or if your integration is using the Datadog API and does not contain any Python code--the Development Toolkit supports a tile-only command. 
-`ddev create -t` 
+
+`cd` into the marketplace or integrations-extras directory and run: 
+
+`ddev create -t tile "<Offering Name>"`
 
 #### Full Integration
 
-For the complete integration scaffolding run: 
+For the complete integration scaffolding, `cd` into the the marketplace or integrations-extras directory and run: 
 
-`ddev create <Offering Name>`
+`ddev create "<Offering Name>"`
 
 ### 5. Populate the Tile Scaffolding
 
@@ -153,6 +160,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 #### images
 
 * Store all images used in your `README.md` file in the `images` folder. 
+* **Note:** We recommend not using empty spaces in the name of image files.
 
 #### Manifest.json
 
@@ -162,7 +170,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### Metadata.csv
 
-* Contains a list of the out-of-the-box metrics included in an integration, including the metric name, type, interval, and unit. 
+* Contains a list of the out-of-the-box metrics included in an integration, such as the metric name, type, interval, and unit. 
 * More information about `metadata.csv` fields can be found in our [Integrations Assets Reference][24].
 * **Note:** All Marketplace metrics count as custom metrics. 
 
@@ -172,14 +180,18 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 * You can create dashboards and monitors directly in your sandbox account and export them as JSON files. 
 * See our [Dashboarding Best Practices][26] document for details.
 
-#### Logo
+#### Logos
 
-* Consists of an SVG, which our DesignOps team implements throughout the Datadog app for both light and dark modes. 
+* Consists of at least one SVG, which our DesignOps team implements throughout the Datadog app for both light and dark modes. Logo SVG files can be added to the `assets` directory, or you can place them in a `logos` sub-directory under `assets`.
 * **Note:** Technology Partners are responsible for the licensing of the logos they submit.  
 
 #### Changelog.md
 
 * Captures release notes and version information, and displays this in the “Release Notes” tab of your tile. Add release notes in descending order (latest version at the top).
+
+#### Codeowners
+
+* Lives under the shared .github directory and defines the individuals or teams that are responsible for code in the repository. See https://help.github.com/articles/about-codeowners/ for help with syntax.
 
 #### Additional Marketplace files 
 
