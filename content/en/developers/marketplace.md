@@ -96,7 +96,7 @@ Integrations can send the following data to Datadog:
 6. [Incidents][21]
 7. [Security Events][22]
 
-### 3. Create a branch of the Marketplace repository or fork the Integrations Extras repository
+### 3. Clone the Marketplace repository or fork the Integrations Extras repository
 
 Datadog integrations can be developed for either our private [Marketplace repository][9] or our open source [Integrations Extras repository][10]. 
 
@@ -122,13 +122,13 @@ Set the location of to the cloned repository:
 
 #### Marketplace:
 
-`ddev config set marketplace /path/to/marketplace_directory` (For example: /Users/yourname/Documents/marketplace)
+`ddev config set marketplace /path/to/marketplace_directory`
 
 `ddev config set repo marketplace`
 
 #### Integrations-Extras:
 
-`ddev config set extras /path/to/integrations-extras_directory` (For example: /Users/yourname/Documents/integrations-extras)
+`ddev config set extras /path/to/integrations-extras_directory`
 
 `ddev config set repo extras`
 
