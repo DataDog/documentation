@@ -17,7 +17,7 @@ further_reading:
 
 * xUnit 2.2+
 * NUnit 3.0+
-* MsTest V2 14+ (pre-alpha)
+* MsTest V2 14+
 
 ## Supported CI providers
 
@@ -94,19 +94,15 @@ The following example shows how to instrument the command `dotnet test --framewo
 dd-trace --dd-env=ci -- dotnet test --framework netcoreapp3.1
 ```
 
-## Instrumenting MsTest V2 framework (pre-alpha)
+## Instrumenting MsTest V2 framework
 
-Support for MsTest V2 framework is in pre-alpha stage and it's disabled by default. 
-
-To enable it, set the following environment variable before running the `dd-trace dotnet test` command:
+MsTest V2 framework is disabled by default. To enable it, set the following environment variable before running the `dd-trace dotnet test` command:
 
 ```
 DD_TRACE_CALLTARGET_ENABLED=true
 ```
 
 This enables the new instrumentation format in the .NET tracer.
-
-Some third-party libraries' instrumentation can be missing during the pre-alpha stage.
 
 ## Datadog Agent 
 

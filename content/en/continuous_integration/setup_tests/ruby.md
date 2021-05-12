@@ -27,13 +27,9 @@ To install the Ruby tracer:
 
     ```ruby
     source 'https://rubygems.org'
-    gem 'ddtrace', 
-        :git => "git://github.com/DataDog/dd-trace-rb.git", 
-        :branch => "adrian.lopezcalvo/fix-flushing-issues-test-instrumentation"
+    gem 'ddtrace'
     ```
 2. Install the gem by running `bundle install`
-
-**Note:** Using the specified branch above is a temporary workaround until new version is released containing the fix.
 
 See the [Ruby tracer installation docs][1] for more details.
 

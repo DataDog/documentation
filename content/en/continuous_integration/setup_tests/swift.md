@@ -80,7 +80,7 @@ Optionally, set these environment variables also:
 
 ### Configuring your CI service
 
-Set the following environment variables for your CI service:
+Set the following environment variables for your CI service. Note that Git information is automatically collected if you use a simulator to perform your MacOS, iOS, or tvOS tests. However, If you do testing on physical devices, set the additional Git-related environment variables.
 
 #### Jenkins
 
@@ -93,6 +93,13 @@ Set the following environment variables for your CI service:
 |`BUILD_URL`           | `$(BUILD_URL)`           |
 |`JOB_NAME` | `$(JOB_NAME)` |
 
+Additional Git configuration for physical device testing:
+
+| Environment variable     | Value                       |
+|--------------------------|-----------------------------|
+| `GIT_COMMIT`             | `$(GIT_COMMIT)`             |
+| `GIT_URL`                | `$(GIT_URL)`                |
+| `GIT_BRANCH`             | `$(GIT_BRANCH)`             |
 
 #### CircleCI
 
@@ -105,6 +112,14 @@ Set the following environment variables for your CI service:
 |`CIRCLE_WORKFLOW_ID` | `$(CIRCLE_WORKFLOW_ID)` |
 |`CIRCLE_PROJECT_REPONAME` | `$(CIRCLE_PROJECT_REPONAME)` |
 
+Additional Git configuration for physical device testing:
+
+| Environment variable     | Value                         |
+|--------------------------- |-------------------------------|
+| `CIRCLE_SHA1`              | `$(CIRCLE_SHA1)`              |
+| `CIRCLE_REPOSITORY_URL`    | `$(CIRCLE_REPOSITORY_URL)`    |
+| `CIRCLE_BRANCH`            | `$(CIRCLE_BRANCH)`            |
+| `CIRCLE_TAG` | `$(CIRCLE_TAG)` |
 
 #### GitLab CI
 
@@ -120,6 +135,15 @@ Set the following environment variables for your CI service:
 |`CI_PIPELINE_URL`    | `$(CI_PIPELINE_URL)`    |
 |`CI_PROJECT_PATH`    | `$(CI_PROJECT_PATH)`    |
 
+Additional Git configuration for physical device testing:
+
+| Environment variable     | Value             |
+| -------------------  | ----------------- |
+| `CI_COMMIT_SHA`      | `$(CI_COMMIT_SHA)`      |
+| `CI_REPOSITORY_URL`  | `$(CI_REPOSITORY_URL)`  |
+| `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`   |
+| `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`      |
+
 
 #### Travis
 
@@ -132,6 +156,17 @@ Set the following environment variables for your CI service:
 |`TRAVIS_BUILD_WEB_URL`       | `$(TRAVIS_BUILD_WEB_URL)`       |
 |`TRAVIS_JOB_WEB_URL`       | `$(TRAVIS_JOB_WEB_URL)`       |
 
+Additional Git configuration for physical device testing:
+
+| Environment variable     | Value                           |
+| ---------------------------- | ------------------------------- |
+| `TRAVIS_REPO_SLUG`           | `$(TRAVIS_REPO_SLUG)`           |
+| `TRAVIS_PULL_REQUEST_SLUG` | `$(TRAVIS_PULL_REQUEST_SLUG)` |
+| `TRAVIS_PULL_REQUEST_BRANCH` | `$(TRAVIS_PULL_REQUEST_BRANCH)` |
+| `TRAVIS_BRANCH`              | `$(TRAVIS_BRANCH)`              |
+| `TRAVIS_COMMIT`              | `$(TRAVIS_COMMIT)`              |
+| `TRAVIS_TAG`           | `$(TRAVIS_TAG)`           |
+
 
 #### GitHub Actions
 
@@ -142,6 +177,16 @@ Set the following environment variables for your CI service:
 |`GITHUB_RUN_ID`     | `$(GITHUB_RUN_ID)`     |
 |`GITHUB_RUN_NUMBER` | `$(GITHUB_RUN_NUMBER)` |
 |`GITHUB_WORKFLOW` | `$(GITHUB_WORKFLOW)` |
+
+Additional Git configuration for physical device testing:
+
+| Environment variable     | Value                  |
+| ------------------- | ---------------------- |
+| `GITHUB_SHA`        | `$(GITHUB_SHA)`        |
+| `GITHUB_REF`        | `$(GITHUB_REF)`        |
+| `GITHUB_HEAD_REF` | `$(GITHUB_HEAD_REF)` |
+| `GITHUB_REPOSITORY` | `$(GITHUB_REPOSITORY)` |
+
 
 #### Buildkite
 
@@ -155,6 +200,15 @@ Set the following environment variables for your CI service:
 | `BUILDKITE_PIPELINE_SLUG` | `$(BUILDKITE_PIPELINE_SLUG)` |
 | `BUILDKITE_JOB_ID` | `$(BUILDKITE_JOB_ID)` |
 
+Additional Git configuration for physical device testing:
+
+| Environment variable     | Value                              |
+| ------------------------------- | ---------------------------------- |
+| `BUILDKITE_COMMIT`              | `$(BUILDKITE_COMMIT)`              |
+| `BUILDKITE_REPO`                | `$(BUILDKITE_REPO)`                |
+| `BUILDKITE_BRANCH`              | `$(BUILDKITE_BRANCH)`              |
+| `BUILDKITE_TAG` | `$(BUILDKITE_TAG)` |
+
 #### Bitbucket Pipelines
 
 | Environment variable     | Value                              |
@@ -163,6 +217,16 @@ Set the following environment variables for your CI service:
 | `BITBUCKET_BUILD_NUMBER`   | `$(BITBUCKET_BUILD_NUMBER)`        |
 | `BITBUCKET_PIPELINE_UUID`   | `$(BITBUCKET_PIPELINE_UUID)`        |
 | `BITBUCKET_REPO_FULL_NAME` | `$(BITBUCKET_REPO_FULL_NAME)` |
+
+Additional Git configuration for physical device testing:
+
+| Environment variable     | Value                              |
+| -------------------------- | ---------------------------------- |
+| `BITBUCKET_COMMIT`         | `$(BITBUCKET_COMMIT)`              |
+| `BITBUCKET_GIT_SSH_ORIGIN` | `$(BITBUCKET_GIT_SSH_ORIGIN)`      |
+| `BITBUCKET_BRANCH`         | `$(BITBUCKET_BRANCH)`              |
+| `BITBUCKET_TAG` | `$(BITBUCKET_TAG)` |
+
 
 #### AppVeyor
 
@@ -173,6 +237,16 @@ Set the following environment variables for your CI service:
 | `APPVEYOR_BUILD_ID`                      | `$(APPVEYOR_BUILD_ID)`                      |
 | `APPVEYOR_BUILD_NUMBER`                  | `$(APPVEYOR_BUILD_NUMBER)`                  |
 | `APPVEYOR_REPO_TAG_NAME`                 | `$(APPVEYOR_REPO_TAG_NAME)`                 |
+
+Additional Git configuration for physical device testing:
+
+| Environment variable     | Value                                     |
+| -------------------------------------- | ----------------------------------------- |
+| `APPVEYOR_REPO_COMMIT`                   | `$(APPVEYOR_REPO_COMMIT)`                   |
+| `APPVEYOR_REPO_NAME`                     | `$(APPVEYOR_REPO_NAME)`                     |
+| `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH` | `$(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)` |
+| `APPVEYOR_REPO_BRANCH`                   | `$(APPVEYOR_REPO_BRANCH)`                   |
+
 
 #### Azure Pipelines
 
@@ -187,96 +261,7 @@ Set the following environment variables for your CI service:
 | `SYSTEM_JOBID |$(SYSTEM_JOBID)` |
 | `SYSTEM_TASKINSTANCEID` | `$(SYSTEM_TASKINSTANCEID)` |
 
-#### Bitrise
-
-| Environment variable     | Value                                   |
-| ------------------------------------ | --------------------------------------- |
-| `BITRISE_SOURCE_DIR`               | `$(BITRISE_SOURCE_DIR)`               |
-| `BITRISE_APP_TITLE`             | `$(BITRISE_APP_TITLE)`             |
-| `BITRISE_BUILD_SLUG`             | `$(BITRISE_BUILD_SLUG)`             |
-| `BITRISE_BUILD_NUMBER`                 | `$(BITRISE_BUILD_NUMBER)`                 |
-| `BITRISE_BUILD_URL`                      | `$(BITRISE_BUILD_URL)`                      |
-
-
-### Git information
-If you run MacOS tests, or iOS or tvOS tests on a simulator, Git information is automatically read from your repository info. If that is not the case the following environment variables must also be set in your test target, depending on your CI service:
-
-#### Jenkins
-
-| Environment variable     | Value                       |
-|--------------------------|-----------------------------|
-| `GIT_COMMIT`             | `$(GIT_COMMIT)`             |
-| `GIT_URL`                | `$(GIT_URL)`                |
-| `GIT_BRANCH`             | `$(GIT_BRANCH)`             |
-
-#### CircleCI
-
-| Environment variable     | Value                         |
-|--------------------------- |-------------------------------|
-| `CIRCLE_SHA1`              | `$(CIRCLE_SHA1)`              |
-| `CIRCLE_REPOSITORY_URL`    | `$(CIRCLE_REPOSITORY_URL)`    |
-| `CIRCLE_BRANCH`            | `$(CIRCLE_BRANCH)`            |
-| `CIRCLE_TAG` | `$(CIRCLE_TAG)` |
-
-
-#### GitLab CI
-
-| Environment variable     | Value             |
-| -------------------  | ----------------- |
-| `CI_COMMIT_SHA`      | `$(CI_COMMIT_SHA)`      |
-| `CI_REPOSITORY_URL`  | `$(CI_REPOSITORY_URL)`  |
-| `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`   |
-| `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`      |
-
-#### Travis
-
-| Environment variable     | Value                           |
-| ---------------------------- | ------------------------------- |
-| `TRAVIS_REPO_SLUG`           | `$(TRAVIS_REPO_SLUG)`           |
-| `TRAVIS_PULL_REQUEST_SLUG` | `$(TRAVIS_PULL_REQUEST_SLUG)` |
-| `TRAVIS_PULL_REQUEST_BRANCH` | `$(TRAVIS_PULL_REQUEST_BRANCH)` |
-| `TRAVIS_BRANCH`              | `$(TRAVIS_BRANCH)`              |
-| `TRAVIS_COMMIT`              | `$(TRAVIS_COMMIT)`              |
-| `TRAVIS_TAG`           | `$(TRAVIS_TAG)`           |
-
-
-#### GitHub Actions
-
-| Environment variable     | Value                  |
-| ------------------- | ---------------------- |
-| `GITHUB_SHA`        | `$(GITHUB_SHA)`        |
-| `GITHUB_REF`        | `$(GITHUB_REF)`        |
-| `GITHUB_HEAD_REF` | `$(GITHUB_HEAD_REF)` |
-| `GITHUB_REPOSITORY` | `$(GITHUB_REPOSITORY)` |
-
-#### Buildkite
-
-| Environment variable     | Value                              |
-| ------------------------------- | ---------------------------------- |
-| `BUILDKITE_COMMIT`              | `$(BUILDKITE_COMMIT)`              |
-| `BUILDKITE_REPO`                | `$(BUILDKITE_REPO)`                |
-| `BUILDKITE_BRANCH`              | `$(BUILDKITE_BRANCH)`              |
-| `BUILDKITE_TAG` | `$(BUILDKITE_TAG)` |
-
-#### Bitbucket Pipelines
-
-| Environment variable     | Value                              |
-| -------------------------- | ---------------------------------- |
-| `BITBUCKET_COMMIT`         | `$(BITBUCKET_COMMIT)`              |
-| `BITBUCKET_GIT_SSH_ORIGIN` | `$(BITBUCKET_GIT_SSH_ORIGIN)`      |
-| `BITBUCKET_BRANCH`         | `$(BITBUCKET_BRANCH)`              |
-| `BITBUCKET_TAG` | `$(BITBUCKET_TAG)` |
-
-#### AppVeyor
-
-| Environment variable     | Value                                     |
-| -------------------------------------- | ----------------------------------------- |
-| `APPVEYOR_REPO_COMMIT`                   | `$(APPVEYOR_REPO_COMMIT)`                   |
-| `APPVEYOR_REPO_NAME`                     | `$(APPVEYOR_REPO_NAME)`                     |
-| `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH` | `$(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)` |
-| `APPVEYOR_REPO_BRANCH`                   | `$(APPVEYOR_REPO_BRANCH)`                   |
-
-#### Azure Pipelines
+Additional Git configuration for physical device testing:
 
 | Environment variable     | Value                                   |
 | ------------------------------------ | --------------------------------------- |
@@ -287,7 +272,18 @@ If you run MacOS tests, or iOS or tvOS tests on a simulator, Git information is 
 | `SYSTEM_PULLREQUEST_SOURCEBRANCH` | `$(SYSTEM_PULLREQUEST_SOURCEBRANCH)` |
 | `SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI` | `$(SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI)` |
 
+
 #### Bitrise
+
+| Environment variable     | Value                                   |
+| ------------------------------------ | --------------------------------------- |
+| `BITRISE_SOURCE_DIR`               | `$(BITRISE_SOURCE_DIR)`               |
+| `BITRISE_APP_TITLE`             | `$(BITRISE_APP_TITLE)`             |
+| `BITRISE_BUILD_SLUG`             | `$(BITRISE_BUILD_SLUG)`             |
+| `BITRISE_BUILD_NUMBER`                 | `$(BITRISE_BUILD_NUMBER)`                 |
+| `BITRISE_BUILD_URL`                      | `$(BITRISE_BUILD_URL)`                      |
+
+Additional Git configuration for physical device testing:
 
 | Environment variable     | Value                                   |
 | ------------------------------------ | --------------------------------------- |
@@ -305,6 +301,7 @@ If you run MacOS tests, or iOS or tvOS tests on a simulator, Git information is 
 | `GIT_CLONE_COMMIT_COMMITER_NAME` | `$(GIT_CLONE_COMMIT_COMMITER_NAME)` |
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL` | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)` |
 
+
 ## Running tests 
 
 After installation, you can run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs will be instrumented automatically.
@@ -321,7 +318,7 @@ The testing library installs a crash handler while running your tests. If a test
 
 In some *very rare cases*. such as testing your own crash handler, you may want to disable crash reporting for tests.
 
-<div class="alert alert-warning">**Important**: If you disable crash reporting, crashing tests won't be reported to the backend and won't appear as failures. If you need to disable crash handling for any of your tests, run it as a separate target, so you don't disable it for the rest of the tests.</div>
+<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, crashing tests won't be reported to the backend and won't appear as failures. If you need to disable crash handling for any of your tests, run it as a separate target, so you don't disable it for the rest of the tests.</div>
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)

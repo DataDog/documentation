@@ -11,7 +11,7 @@ With Datadog Continuous Integration (CI) Monitoring you can trace your developme
 
 Find tests and pipelines that run slowly, or are unreliable, so you know where to focus your efforts to improve your CI environment.
 
-<div class="alert alert-info">CI Monitoring is in private beta. If you want to be added to the beta or have feedback about the features, <a href="/help/">contact the Datadog Support team</a>.</div>
+<div class="alert alert-info"><p>CI Monitoring is in private beta. If you want to be added to the beta or have feedback about the features, <a href="/help/">contact the Datadog Support team</a>.</p><p>CI Monitoring is available only on <a href="/getting_started/site/">the US Datadog site</a> at this time.</p></div>
 
 ## Setting up tests and pipelines with Datadog tracing
 
