@@ -16,9 +16,19 @@ further_reading:
 
 ## Overview
 
-The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Search your metrics by name or tag using the **Metric** or **Tag** search fields:
+The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. 
+
+Search your metrics by name or tag using the **Metric** or **Tag** search fields:
 
 {{< img src="metrics/summary/tagexplorer2.gif" alt="Filter by Tag"  style="width:75%;">}}
+
+## Facet Panel
+The search bars provide the most comprehensive set of actions to filter the list of metrics. But we also offer facets to quickly filter your metrics by:
+* **Configuration** : Quickly identify metrics with tag configurations or additional percentile aggregations
+* **Metric Type** : Quickly identify distributions vs non-distributions (counts,gauges,rates)
+
+{{< img src="metrics/summary/facets.jpg" alt="Metrics Facet Panel"  style="width:75%;">}}
+
 
 ## Metric details sidepanel
 
