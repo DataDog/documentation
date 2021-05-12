@@ -28,27 +28,33 @@ Cloud Security Posture Management is not currently available in US1-FED or US3.
 
 The Findings page helps drill into the details of CSPM findings, the configuration of resources, and descriptions and remediation guidelines for remediating a misconfigured resource.
 
-Use the **time selector** to explore compliance posture, including the configuration of individual resources, at any point in the past.
+The Security Posture Findings page allows you to:
+
+- View more details about your security posture findings;
+- Review the rules applied to their resources by CSPM
+- Review details about resource configurations
+- Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
+- Use the “time selector” to explore security configuration posture, including the configuration of individual resources, at any point in the past.
 
 ## Findings
 
-A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a **Pass** or **Fail** status. Resources are evaluated every 15 minutes or up to 4 hours (depending on type). Datadog generates new findings as soon as a new scan is completed, and stores a complete history of all findings for the past 15 months so they are available in the case of a breach forensics investigation or rigorous compliance audit.
+A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a **Pass** or **Fail** status. Resources are evaluated in increments between 15 minutes or up to 4 hours (depending on type). Datadog generates new findings as soon as a new scan is completed, and stores a complete history of all findings for the past 15 months so they are available in case of an investigation or audit.
 
 [img here]
 
-Click on an individual finding to see details about the misconfigured resource, the rule description, its compliance or industry benchmark mapping, and remediation steps.
+Clicking on an individual finding that has **failed** to see details about the misconfigured resource, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
 
 [img here]
 
-Findings can be aggregated by rule using the query search bar. This view provides a checklist of all of the rules that Datadog scans. Filtering by `evaluation:fail` status narrows the list to all rules that have issues that need to be addressed. The side panel shows details of each resource that has been evaluated by the rule.
+Aggregate findings by rule using the query search bar. This view provides a checklist of all of the rules that Datadog scans. Filtering by `evaluation:fail` status narrows the list to all rules that have issues that need to be addressed. The side panel shows details of each resource that has been evaluated by the rule.
 
 [img here]
 
-Findings can also be aggregated by resource to rank order resources with the most violations that need immediate attention.
+Findings can also be aggregated by resource to rank order resources that have failed the most rule evaluations so you can prioritize remediation.
 
 [img here]
 
-The side panel lists rules that were evaluated against the resource, some of which need to be addressed to improve compliance posture.
+The side panel lists rules that were evaluated against the resource, some of which you may choose to be addressed to improve your security configuration posture.
 
 [img here]
 
