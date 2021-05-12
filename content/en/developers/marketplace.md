@@ -138,7 +138,7 @@ Set the location of to the cloned repository:
 
 For standalone software and services--or if your integration is using the Datadog API and does not contain any Python code--the Development Toolkit supports a tile-only command. 
 
-`cd` into the marketplace or integrations-extras directory and run: 
+In the `marketplace` or `integrations-extras` directory you specified above, run: 
 
 ```ddev create -t tile "<Offering Name>"```
 
