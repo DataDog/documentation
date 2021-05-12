@@ -2,6 +2,12 @@
 title: Débuter avec les dashboards
 kind: documentation
 further_reading:
+  - link: 'https://www.datadoghq.com/blog/dashboard-sharing/'
+    tag: Blog
+    text: Partager des dashboards en tout sécurité avec des utilisateurs en dehors de votre organisation
+  - link: 'https://www.datadoghq.com/blog/template-variable-associated-values/'
+    tag: Blog
+    text: Utiliser les template variables associées pour affiner vos dashboards
   - link: 'https://learn.datadoghq.com/enrol/index.php?id=8'
     tag: Apprentissage
     text: "Apprentissage en ligne à votre rythme\_: Améliorer vos dashboards"
