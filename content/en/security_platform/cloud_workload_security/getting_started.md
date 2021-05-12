@@ -16,8 +16,8 @@ Cloud Workload Security is currently in beta. Contact <a href="https://docs.data
 
 There are two types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
-1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real time.
-2. **Process Execution Monitoring** to monitor process executions for malicious activity on hosts or containers in real time.
+1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
+2. **Process Execution Monitoring** to monitor process executions for malicious activity on hosts or containers in real-time.
 
 ## Requirements
 
@@ -87,7 +87,7 @@ DOCKER_CONTENT_TRUST=1 \
 
 For a package-based deployment, the Datadog package has to be deployed: run `dkpg -i datadog-agent_7….deb`
 
-By default Runtime Security is disabled. In order to enable it, both the datadog.yaml and the system-probe.yaml files need to be adapted. Run the following commands to enable these configurations:
+By default Runtime Security is disabled. To enable it, both the datadog.yaml and the system-probe.yaml files need to be adapted. Run the following commands to enable these configurations:
 
 {{< code-block lang="bash" filename="debian-runtime-security.sh" >}}
 
@@ -98,7 +98,7 @@ systemctl restart datadog-agent
 
 {{< /code-block >}}
 
-Both the security-agent and the system-probe have to be restarted once these changes have been applied.
+Once you apply the changes, restart both the Security Agent and the system-probe.
 
 {{% /tab %}}
 

@@ -23,7 +23,7 @@ Detection Rules define conditional logic that is applied to all ingested logs an
 
 For each of monitoring option, there are [default detection rules][1] that work out-of-the-box with integration configuration.
 
-- [Security Monitoring][2] uses Log Detection to analyze ingested logs in real-time. You can also create [custom rules][3] to tailor to your environment.
+- [Security Monitoring][2] uses log detection to analyze ingested logs in real-time. You can also create [custom rules][3] to tailor to your environment.
 
 - [Cloud Security Posture Management][4] uses cloud configuration and infrastructure configuration rules to scan the state of your cloud environment.
 

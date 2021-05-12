@@ -7,7 +7,7 @@ kind: documentation
 
 {{< img src="security_platform/security_monitoring/overview_top.png" alt="Datadog Security Monitoring" >}}
 
-Datadog Security Monitoring unify developer, operation, and security teams through one platform. Use a single dashboard to display DevOps content, business metrics, and security content. Detect threats, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration, to your application and infrastructure in real time, and notify your team of security issues by email, slack, Jira, PagerDuty, or a webhook.
+Datadog Security Monitoring unifies developer, operation, and security teams through one platform. Use a single dashboard to display DevOps content, business metrics, and security content. Detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure configuration, to your application and infrastructure in real time, and notify your team of security issues by email, slack, Jira, PagerDuty, or a webhook.
 
 {{< img src="security_platform/security_monitoring/takeover_ex.png" alt="Slack Example"  style="width:75%;">}}
 
