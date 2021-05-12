@@ -1315,6 +1315,8 @@ components:
           example: true
           readOnly: true
           type: boolean
+        active_child:
+          $ref: '#/components/schemas/DowntimeChild'
         canceled:
           description: If a scheduled downtime is canceled.
           example: 1412799983
@@ -1431,6 +1433,136 @@ components:
           nullable: true
           readOnly: true
           type: integer
+      type: object
+    DowntimeChild:
+      description: 'The downtime object definition of the active child for the original
+        parent recurring downtime. This
+
+        field will only exist on recurring downtimes.'
+      nullable: true
+      properties:
+        active:
+          description: If a scheduled downtime currently exists.
+          example: true
+          readOnly: true
+          type: boolean
+        canceled:
+          description: If a scheduled downtime is canceled.
+          example: 1412799983
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        creator_id:
+          description: User ID of the downtime creator.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        disabled:
+          description: If a downtime has been disabled.
+          example: false
+          type: boolean
+        downtime_type:
+          description: '`0` for a downtime applied on `*` or all,
+
+            `1` when the downtime is only scoped to hosts,
+
+            or `2` when the downtime is scoped to anything but hosts.'
+          example: 2
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        end:
+          description: 'POSIX timestamp to end the downtime. If not provided,
+
+            the downtime is in effect indefinitely until you cancel it.'
+          example: 1412793983
+          format: int64
+          nullable: true
+          type: integer
+        id:
+          description: The downtime ID.
+          example: 1626
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          description: 'A message to include with notifications for this downtime.
+
+            Email notifications can be sent to specific users by using the same `@username`
+            notation as events.'
+          example: Message on the downtime
+          type: string
+        monitor_id:
+          description: 'A single monitor to which the downtime applies.
+
+            If not provided, the downtime applies to all monitors.'
+          example: 123456
+          format: int64
+          nullable: true
+          type: integer
+        monitor_tags:
+          description: 'A comma-separated list of monitor tags. For example, tags
+            that are applied directly to monitors,
+
+            not tags that are used in monitor queries (which are filtered by the scope
+            parameter), to which the downtime applies.
+
+            The resulting downtime applies to monitors that match ALL provided monitor
+            tags.
+
+            For example, `service:postgres` **AND** `team:frontend`.'
+          example:
+          - '*'
+          items:
+            description: A monitor tag.
+            type: string
+          type: array
+        parent_id:
+          description: ID of the parent Downtime.
+          example: 123
+          format: int64
+          nullable: true
+          type: integer
+        recurrence:
+          $ref: '#/components/schemas/DowntimeRecurrence'
+        scope:
+          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+
+            Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
+
+            The resulting downtime applies to sources that matches ALL provided scopes
+            (`env:dev` **AND** `env:prod`).'
+          example:
+          - env:staging
+          items:
+            description: A scope. For example, `"env:staging"`.
+            type: string
+          type: array
+        start:
+          description: 'POSIX timestamp to start the downtime.
+
+            If not provided, the downtime starts the moment it is created.'
+          example: 1412792983
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone in which to display the downtime's start and end
+            times in Datadog applications.
+          example: America/New_York
+          type: string
+        updater_id:
+          description: ID of the last user that updated the downtime.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          readOnly: true
+          type: integer
+      readOnly: true
       type: object
     DowntimeRecurrence:
       description: An object defining the recurrence of the downtime.
