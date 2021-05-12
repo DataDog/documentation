@@ -28,7 +28,7 @@ That is exactly why using assertions is so important. Assertions allow you to de
 
 ## What if I still want to use a specific identifier?
 
-In some rare use cases (for example, if you want to click on the `nth` element of a dropdown, regardless of what the content of the element is), it makes sense to have your step rely on a user defined locator.
+In some rare use cases (for example, if you want to click on the `nth` element of a dropdown menu, regardless of what the content of the element is), it makes sense to have your step rely on a user defined locator.
 
 For that you do have the ability to use the [User Specified Locator][1] feature that is available in the [advanced options][2] of your browser test steps.
 
