@@ -29,6 +29,8 @@ Cloud Security Posture Management is not currently available in US1-FED or US3.
 
 Navigate to the [Getting Started page][1] to configure your environment for scanning.
 
+{{< img src="security_platform/cspm/getting_started/posture-management-setup.png" alt="Setup page for CSPM" style="width:100%;">}}
+
 ## Setup
 
 ### Cloud environment
@@ -43,6 +45,8 @@ Evaluate the security configuration of your hosts and containers. This section g
 
 View your security posture with respect to Datadog’s OOTB security posture rules at a higher level with the [Home page][4], with links to [findings][5] in more detail.
 
+{{< img src="security_platform/cspm/getting_started/posture-management-home.png" alt="Homepage for CSPM">}}
+
 ## Glossary
 
 - **Average security configuration score**: Percentage of your environment that satisfies all of your active [Datadog’s OOTB rules][6]. Formula: `(# of resources with 0 findings) / (total # of resources scanned)`.
@@ -53,9 +57,15 @@ View your security posture with respect to Datadog’s OOTB security posture rul
 
 - **Resource**: A configurable entity that needs to be continuously scanned for adherence with one or more controls. Examples of AWS instance resources include hosts, containers, security groups, users, and customer-managed IAM policies.
 
+{{< img src="security_platform/cspm/getting_started/resource.png" alt="CSPM resource" style="width:100%;">}}
+
 - **Rule**: A rule evaluates the configuration of a resource to validate a particular security best practice. These rules partially or completely, measure adherence to controls. Rules map to multiple controls, requirements, and frameworks.
 
+{{< img src="security_platform/cspm/getting_started/rules.png" alt="Rules and frameworks" style="width:100%;">}}
+
 - **Framework**: A collection of requirements that map to an industry benchmark or regulatory standard.
+
+{{< img src="security_platform/cspm/getting_started/frameworks.png" alt="Frameworks overview" style="width:100%;">}}
 
 ## Further reading
 
