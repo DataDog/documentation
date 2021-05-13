@@ -50,13 +50,17 @@ Aggregate findings by rule using the query search bar. This view provides a chec
 
 {{< img src="security_platform/cspm/findings/evaluation-fail.png" alt="Filtering by evaluation fail" style="width:100%;">}}
 
-Findings can also be aggregated by resource to rank order resources that have failed the most rule evaluations so you can prioritize remediation.
+The side panel shows details of each resource that has been evaluated by the rule.
 
 {{< img src="security_platform/cspm/findings/no-security-group-ingress.png" alt="Ranked order resources in the side panel" style="width:65%;">}}
 
-The side panel lists rules that were evaluated against the resource, some of which you may choose to be addressed to improve your security configuration posture.
+Findings can also be aggregated by resource to rank order resources that have failed the most rule evaluations so you can prioritize remediation.
 
 {{< img src="security_platform/cspm/findings/eval-fail-group-by-resource.png" alt="Group and aggregate by resource in search" style="width:100%;">}}
+
+The side panel lists rules that were evaluated against the resource, some of which you may choose to be addressed to improve your security configuration posture.
+
+{{< img src="security_platform/cspm/findings/passed-rules.png" alt="Group and aggregate by resource in search" style="width:100%;">}}
 
 ## Further reading
 
