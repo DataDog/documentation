@@ -6,7 +6,7 @@ disable_toc: true
 
 {{< site-region region="us" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is currently in public beta.
+Cloud Security Posture Management is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
 </div>
 {{< /site-region >}}
 
