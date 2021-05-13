@@ -10,10 +10,6 @@ aliases:
 <div class="alert alert-warning">
 Cloud Security Posture Management and Cloud Workload Security are currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
 </div>
-
-<div class="alert alert-warning">
-Cloud Workload Security is currently in beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> for more information.
-</div>
 {{< /site-region >}}
 
 {{< site-region region="us3,gov,eu" >}}
