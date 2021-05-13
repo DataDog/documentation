@@ -26,11 +26,11 @@ Cloud Security Posture Management is not currently available in US1-FED, US3, or
 
 ## Overview
 
-The Posture Findings page allows you to:
+The [Posture Findings][1] page allows you to:
 
-- View more details about your posture findings
+- Review the detailed configuration of a resource
 - Review the rules applied to your resources by CSPM
-- Review details about resource configurations
+- Review tags for more context about who owns the resource and where it resides in your environment
 - Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
 - Use the “time selector” to explore security configuration posture, including the configuration of individual resources, at any point in the past.
 
@@ -65,3 +65,5 @@ The side panel lists rules that were evaluated against the resource, some of whi
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/security/compliance?time=now
