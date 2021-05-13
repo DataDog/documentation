@@ -240,11 +240,6 @@ Whether or not to enable automatic instrumentation of external libraries using t
 `DD_TRACE_DISABLED_PLUGINS`
 : A comma-separated string of integration names automatically disabled when tracer is initialized. Environment variable only e.g. `DD_TRACE_DISABLED_PLUGINS=express,dns`.
 
-`clientToken`
-: **Environment variable**: `DD_CLIENT_TOKEN`<br>
-**Default**: `null`<br>
-Client token for browser tracing. Can be generated in Datadog in **Integrations** -> **APIs**.
-
 `logLevel`
 : **Environment variable**: `DD_TRACE_LOG_LEVEL`<br>
 **Default**: `debug`<br>
