@@ -126,7 +126,7 @@ example.exe
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
 {{< site-region region="us3,eu,gov" >}} 
 
-Ensure you set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} so that the Agent sends data to the right Datadog location.
+Ensure you set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} so that the Agent sends data to the right Datadog location.
 
 {{< /site-region >}}
 
