@@ -20,7 +20,7 @@ Cloud Security Posture Management is not currently available in US1-FED or US3.
 
 Datadog provides default configuration rules to flag potential misconfigurations to help immediately improve your security posture. Configuration rules follow the same [conditional logic][1] as all Datadog Security Platform rules.
 
-{{< img src="security_platform/cspm/configuration_rules/configuration_rule.png" alt="A configuration rule in Datadog" width="50%">}}
+{{< img src="security_platform/cspm/configuration_rules/configuration_rule.png" alt="A configuration rule in Datadog" width="65%">}}
 
 Datadog CSPM uses the following rule types to validate the configuration of your cloud infrastructure:
 
