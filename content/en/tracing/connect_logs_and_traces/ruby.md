@@ -3,50 +3,35 @@ title: Connecting Ruby Logs and Traces
 kind: documentation
 description: 'Connect your Ruby logs and traces to correlate them in Datadog.'
 further_reading:
-    - link: 'tracing/manual_instrumentation'
-      tags: 'Enrich Tracing'
-      text: 'Instrument manually your application to create traces.'
-    - link: 'tracing/opentracing'
-      tags: 'Enrich Tracing'
-      text: 'Implement Opentracing across your applications.'
-    - link: 'tracing/visualization/'
-      tag: 'Use the APM UI'
-      text: 'Explore your services, resources, and traces'
     - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
       tag: 'Blog'
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Manually Inject Trace and Span IDs
+## Trace correlation
 
-In many cases, such as logging, it may be useful to correlate trace IDs to other events or data streams, for easier cross-referencing. The tracer can produce a correlation identifier for the currently active trace via `active_correlation`, which can be used to decorate these other data sources.
+In many cases, such as logging, it may be useful to correlate trace IDs to other events or data streams, for easier cross-referencing.
+
+### For logging in Rails applications
+
+#### Automatic
+
+For Rails applications using the default logger (`ActiveSupport::TaggedLogging`) or `lograge`, you can automatically enable trace correlation injection by setting the `rails` instrumentation configuration option `log_injection` to `true` or by setting environment variable `DD_LOGS_INJECTION=true`:
 
 ```ruby
-# When a trace is active...
-Datadog.tracer.trace('correlation.example') do
-  # Returns #<Datadog::Correlation::Identifier>
-  correlation = Datadog.tracer.active_correlation
-  correlation.trace_id # => 5963550561812073440
-  correlation.span_id # => 2232727802607726424
-  correlation.env # => 'production' (derived from DD_ENV)
-  correlation.service # => 'billing-api' (derived from DD_SERVICE)
-  correlation.version # => '2.5.17' (derived from DD_VERSION)
-end
+# config/initializers/datadog.rb
+require 'ddtrace'
 
-# When a trace isn't active...
-correlation = Datadog.tracer.active_correlation
-# Returns #<Datadog::Correlation::Identifier>
-correlation = Datadog.tracer.active_correlation
-correlation.trace_id # => 0
-correlation.span_id # => 0
-correlation.env # => 'production' (derived from DD_ENV)
-correlation.service # => 'billing-api' (derived from DD_SERVICE)
-correlation.version # => '2.5.17' (derived from DD_VERSION)
+Datadog.configure do |c|
+  c.use :rails, log_injection: true
+end
 ```
 
-#### For logging in Rails applications using Lograge (recommended)
+_Note:_ For `lograge` users who have also defined `lograge.custom_options` in an `initializers/lograge.rb` configuration file, due to the order that Rails loads initializers (alphabetical), automatic trace correlation may not take effect, since `initializers/datadog.rb` would be overwritten by the `initializers/lograge.rb` initializer. To support automatic trace correlation with _existing_ `lograge.custom_options`, use the [Manual (Lograge)](#manual-lograge) configuration below.
 
-After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
+#### Manual (Lograge)
+
+After [setting up Lograge in a Rails application][1], manually modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs.
 
 ```ruby
 config.lograge.custom_options = lambda do |event|
@@ -69,11 +54,9 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-#### For logging in Rails applications
+#### Manual (ActiveSupport::TaggedLogging)
 
-Rails applications which are configured with an `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add correlation tags.
-
-In your Rails environment configuration file, add the following:
+Rails applications which are configured with the default `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. To enable Trace Correlation with `ActiveSupport::TaggedLogging`, in your Rails environment configuration file, add the following:
 
 ```ruby
 Rails.application.configure do
@@ -92,7 +75,7 @@ end
 # [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-#### For logging in Ruby applications
+### For logging in Ruby applications
 
 To add correlation IDs to your logger, add a log formatter which retrieves the correlation IDs with `Datadog.tracer.active_correlation`, then add them to the message.
 
@@ -132,15 +115,8 @@ logger.warn('This is an untraced operation.')
 Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.') }
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
-
-**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][3].
-
-See the [Ruby logging documentation][2] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/logs/log_collection/ruby/
-[2]: /logs/log_collection/ruby/#configure-the-datadog-agent
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
