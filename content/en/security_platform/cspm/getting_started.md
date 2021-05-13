@@ -57,7 +57,7 @@ View your security posture with respect to Datadog’s OOTB security posture rul
 
 - **Resource**: A configurable entity that needs to be continuously scanned for adherence with one or more controls. Examples of AWS instance resources include hosts, containers, security groups, users, and customer-managed IAM policies.
 
-{{< img src="security_platform/cspm/getting_started/resource.png" alt="CSPM resource" style="width:100%;">}}
+{{< img src="security_platform/cspm/getting_started/resource.png" alt="CSPM resource" style="width:65%;">}}
 
 - **Rule**: A rule evaluates the configuration of a resource to validate a particular security best practice. These rules partially or completely, measure adherence to controls. Rules map to multiple controls, requirements, and frameworks.
 
