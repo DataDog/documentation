@@ -5,13 +5,13 @@ kind: documentation
 
 {{< site-region region="us" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
+Cloud Security Posture Management and Cloud Workload Security are currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
 </div>
 {{< /site-region >}}
 
 {{< site-region region="us3,gov,eu" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in US1-FED or US3.
+Cloud Security Posture Management is not currently available in US1-FED, US3, or EU.
 </div>
 {{< /site-region >}}
 
