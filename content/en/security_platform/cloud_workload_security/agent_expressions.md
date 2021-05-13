@@ -16,7 +16,7 @@ Cloud Workload Security is currently in <a href="https://app.datadoghq.com/secur
 </div>
 
 ## Agent Expression Syntax
-Rules for Cloud Workload Security (CWS) are first evaluated in the Datadog Agent to decide what system activity to collect. This portion of a CWS rule is called the agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
+Rules for Cloud Workload Security (CWS) are first evaluated in the Datadog Agent to decide what system activity to collect. This portion of a CWS rule is called the Agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
 
 ```
 <trigger>.<event-attribute> <operator> <value> <event-attribute> ...

@@ -13,7 +13,9 @@ Cloud Workload Security is currently in <a href="https://app.datadoghq.com/secur
 
 ## Overview
 
-With Cloud Workload Security enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior. The full set of rules for the Agent is called a policy. Datadog provides several [out-of-the-box Cloud Workload Security rules][1] for your convenience in the default policy.
+With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior. Before learning how to create custom rules below, it is recommended to learn the basics of Cloud Workload Security rules and the concept of Agent expressions. Refer to the [Agent expression docs][1] for more information.
+
+The full set of rules for the Agent is called a policy. Datadog provides several [out-of-the-box Cloud Workload Security rules][2] for your convenience in the default policy.
 
 At some point, you will likely want to write your own custom rules for the Agent to use. Below are example rules, guidelines for optimization, and the underlying mechanics of rule efficiency.
 
@@ -70,4 +72,5 @@ For example, if you used explicit filenames to evaluate open events (for example
 
 Approvers are generally more powerful and preferred. Using approvers, the Agent can process only what it needs to see rather than dynamically learning what to filter out.
 
-[1]: /security_platform/default_rules
+[1]: /security_platform/cloud_workload_security/agent_expressions
+[2]: /security_platform/default_rules
