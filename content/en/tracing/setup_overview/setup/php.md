@@ -319,7 +319,7 @@ Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da
 
 The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.
 
-Use the name when setting integration-specific configuration such as, `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED`, for example: Laravel is `DD_TRACE_LARAVEL_ANALYTICS_ENABLED`.
+Use the name when setting integration-specific configuration such as, `DD_TRACE_<INTEGRATION>_ENABLED`, for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
 
 | Integration       | Service Name      |
 |-------------------|-------------------|
