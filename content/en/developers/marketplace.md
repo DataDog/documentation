@@ -44,7 +44,7 @@ In addition to this documentation, you can learn more about developing Datadog i
 
 1. [Choose the type of Marketplace offering you would like to list](#1-choose-an-integration-type)
 2. [Build a bi-directional integration](#2-build-a-bi-directional-integration)
-3. [Clone either the Marketplace or the Integrations Extras repository](#3-clone-either-the-marketplace-or-the-integrations-extras-repository)
+3. [Clone the Marketplace repository or fork the Integrations Extras repository](#3-clone-either-the-marketplace-or-the-integrations-extras-repository)
 4. [Install the Datadog Development Toolkit](#4-install-and-run-the-datadog-development-toolkit)
 5. [Populate the tile scaffolding with metadata and out-of-the-box assets (like  dashboards and monitors)](#5-populate-the-tile-scaffolding)
 6. [Submit a pull-request](#6-submit-a-pull-request)
