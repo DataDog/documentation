@@ -56,6 +56,8 @@ From the [Rules][7] page, you can add notification targets. The complete list of
 - [Microsoft Teams][12]
 - [Webhooks][13]
 
+{{< img src="security_platform/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
