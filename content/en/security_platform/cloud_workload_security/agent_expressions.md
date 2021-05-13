@@ -11,6 +11,10 @@ further_reading:
   text: "Event attributes for Cloud Workload Security"
 ---
 
+<div class="alert alert-warning">
+Cloud Workload Security is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
+</div>
+
 ## Agent Expression Syntax
 Rules for Cloud Workload Security (CWS) are first evaluated in the Datadog Agent to decide what system activity to collect. This portion of a CWS rule is called the agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
 
@@ -80,7 +84,7 @@ Examples:
 * `version` is part of *args_flags* for the command `cat --version`
 * `l` and `n` both are in *args_flags* for the command `netstat -ln`
 
-	
+
 *args_options* is used to catch arguments that start with either one or two hyphen characters and accepts a value either specified as the same argument but separated by the ‘=’ character or specified as the next argument.
 
 Examples:

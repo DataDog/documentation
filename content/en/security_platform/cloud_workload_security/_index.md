@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 <div class="alert alert-warning">
-Cloud Workload Security is currently in beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> for more information.
+Cloud Workload Security is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
 </div>
 
 ## Overview
