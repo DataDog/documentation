@@ -27,7 +27,7 @@ Datadog.configure do |c|
 end
 ```
 
-_Note:_ For `lograge` users who have also defined `lograge.custom_options` in an `initializers/lograge.rb` configuration file, due to the order that Rails loads initializers (alphabetical), automatic trace correlation may not take effect, since `initializers/datadog.rb` would be overwritten by the `initializers/lograge.rb` initializer. To support automatic trace correlation with _existing_ `lograge.custom_options`, use the [Manual (Lograge)](#manual-lograge) configuration below.
+**Note:** For `lograge` users who have also defined `lograge.custom_options` in an `initializers/lograge.rb` configuration file, because Rails loads initializers in alphabetical order, automatic trace correlation may not take effect, since `initializers/datadog.rb` would be overwritten by the `initializers/lograge.rb` initializer. To support automatic trace correlation with _existing_ `lograge.custom_options`, use the [Manual (Lograge)](#manual-lograge) configuration below.
 
 #### Manual (Lograge)
 
@@ -56,7 +56,7 @@ end
 
 #### Manual (ActiveSupport::TaggedLogging)
 
-Rails applications which are configured with the default `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. To enable Trace Correlation with `ActiveSupport::TaggedLogging`, in your Rails environment configuration file, add the following:
+Rails applications that are configured with the default `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. To enable Trace Correlation with `ActiveSupport::TaggedLogging`, in your Rails environment configuration file, add the following:
 
 ```ruby
 Rails.application.configure do
@@ -119,4 +119,4 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/log_collection/ruby/
+[1]: /logs/log_collection/ruby/
