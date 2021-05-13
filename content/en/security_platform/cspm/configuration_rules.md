@@ -26,7 +26,7 @@ Datadog CSPM uses the following rule types to validate the configuration of your
 
 - [Cloud configuration][2]: These rules analyze the configuration of resources within your cloud environment. For example, the rule [Cloudfront distribution is encrypted][3] evaluates an AWS Cloudfront distribution’s configuration for encrypted status. We do not support the ability to customize the cloud configuration query directly.
 
-- [Runtime compliance][4]: These rules analyze your containers and Kubernetes clusters in order to find configuration issues, as defined in the popular CIS compliance benchmarks for Docker and Kubernetes. For example, the rule [/etc/default/docker file permissions are set to 644 or more restrictively][5] evaluates Docker file permissions running on a host.
+- [Infrastructure configuration][4]: These rules analyze your containers and Kubernetes clusters in order to find configuration issues, as defined in the popular CIS compliance benchmarks for Docker and Kubernetes. For example, the rule [/etc/default/docker file permissions are set to 644 or more restrictively][5] evaluates Docker file permissions running on a host.
 
 These rules work with out-of-the-box integration configurations and map to controls within a [compliance framework or industry benchmark][4]. When new default configuration rules are added, they are automatically imported into your account.
 

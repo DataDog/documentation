@@ -29,10 +29,10 @@ Cloud Security Posture Management is not currently available in US1-FED, US3, or
 The Posture Findings page allows you to:
 
 - View more details about your posture findings
-- Review the rules applied to your resources by CSPM
+- Review all rules applied to a particular resource.
 - Review details about resource configurations
 - Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
-- Use the “time selector” to explore security configuration posture, including the configuration of individual resources, at any point in the past.
+- Use the “time selector” to explore security configuration posture at any point in the past.
 
 {{< img src="security_platform/cspm/findings/findings-time-window.png" alt="Set a findings time window using the dropdown" style="width:65%;">}}
 
