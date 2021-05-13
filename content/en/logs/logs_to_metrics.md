@@ -19,7 +19,7 @@ Datadog’s [Logging without Limits][1]\* lets you dynamically decide what to in
 
 With log-based metrics, you can generate a count metric of logs that match a query or a [distribution metric][3] of a numeric value contained in the logs, such as request duration.
 
-## Generate a log-based metric
+## generate a Log-based Metric
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric"  style="width:80%;">}}
 
