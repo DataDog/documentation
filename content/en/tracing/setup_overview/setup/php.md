@@ -58,9 +58,14 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
 
-`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
+    See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
+{{< site-region region="us3,eu,gov" >}} 
+
+4. Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
+
+{{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
