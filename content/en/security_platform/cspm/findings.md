@@ -7,14 +7,14 @@ further_reading:
 - link: "security_platform/default_rules"
   tag: "Documentation"
   text: "Explore default cloud configuration rules"
-- link: "security_platform/cspm/frameworks"
+- link: "security_platform/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 ---
 
 {{< site-region region="us" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is currently in public beta.
+Cloud Security Posture Management is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
 </div>
 {{< /site-region >}}
 

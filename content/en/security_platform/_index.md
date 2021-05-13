@@ -6,6 +6,22 @@ aliases:
   - security_monitoring
 ---
 
+{{< site-region region="us" >}}
+<div class="alert alert-warning">
+Cloud Security Posture Management is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
+</div>
+
+<div class="alert alert-warning">
+Cloud Workload Security is currently in beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> for more information.
+</div>
+{{< /site-region >}}
+
+{{< site-region region="us3,gov,eu" >}}
+<div class="alert alert-warning">
+Cloud Security Posture Management is not currently available in US1-FED or US3.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 Bring speed and scale to your production security operations. Datadog's Security Platform delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the observability platform, Datadog brings unprecedented integration between security and operations aligned to your organizations shared goals.

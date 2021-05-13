@@ -7,10 +7,10 @@ aliases:
 further_reading:
   - link: "https://www.datadoghq.com/blog/announcing-security-monitoring/"
     tag: "Blog"
-    text: "Security Monitoring"
+    text: "Learn more about Security Monitoring"
   - link: "/security_monitoring/detection_rules/"
     tag: "Documentation"
-    text: "Detection Rules"
+    text: "Learn about the conditional logic of Security Rules"
 ---
 
 ## Overview
