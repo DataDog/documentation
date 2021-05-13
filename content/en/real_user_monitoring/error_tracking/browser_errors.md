@@ -20,7 +20,7 @@ Error Tracking processes errors collected from the browser by the RUM SDK: whene
 
 1. Download the latest version of the [RUM Browser SDK][3].
 2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][4].
-3. Upload JS source maps [following our guide][5] to get unminified stack traces.
+3. Upload JavaScript source maps [following our guide][5] to get unminified stack traces.
 
 ## Link errors with your source code
 
