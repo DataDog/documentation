@@ -89,7 +89,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     ```
 {{< site-region region="us3,eu,gov" >}} 
 
-4. Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
+4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
 {{< /site-region >}}
 
