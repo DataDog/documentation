@@ -28,5 +28,5 @@ View your cloud security posture at a higher level level with the CSPM Home page
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/cspm/getting_started">}}Configure your cloud environment for CSPM scanning{{< /nextlink >}}
   {{< nextlink href="/security_platform/cspm/findings">}} Search and explore findings to reveal the details about a misconfigured resource, enabling you to identify the steps needed to fix it.{{< /nextlink >}}
-  {{< nextlink href="/security_platform/cspm/frameworks_and_benchmarks">}}Get the details about Datadog’s OOTB security posture rules and create your own rules to compare your configuration to applicable regulatory frameworks, controls, and industry benchmarks.{{< /nextlink >}}
+  {{< nextlink href="/security_platform/cspm/frameworks_and_benchmarks">}}Get details about Datadog’s OOTB security posture rules and create your own rules to compare your configuration to applicable regulatory frameworks, controls, and industry benchmarks.{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -26,12 +26,10 @@ Cloud Security Posture Management is not currently available in US1-FED or US3.
 
 ## Overview
 
-The Findings page helps drill into the details of CSPM findings, the configuration of resources, and descriptions and remediation guidelines for remediating a misconfigured resource.
+The Posture Findings page allows you to:
 
-The Security Posture Findings page allows you to:
-
-- View more details about your security posture findings;
-- Review the rules applied to their resources by CSPM
+- View more details about your posture findings
+- Review the rules applied to your resources by CSPM
 - Review details about resource configurations
 - Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
 - Use the “time selector” to explore security configuration posture, including the configuration of individual resources, at any point in the past.
