@@ -69,7 +69,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | maximum TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
 | minimum TLS version   | `is more than`, `is more than or equal`                                                | _Decimal_                  |
 
-You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your SSL test" style="width:90%;" >}}
 
@@ -120,13 +120,20 @@ Click on **Save** to save your test and have Datadog start executing it.
 
 You can create local variables by defining their values from one of the below available builtins:
 
-| Pattern                    | Description                                                                                                 |
-|----------------------------|-------------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`         | Generates a numeric string with `n` digits.                                                                 |
-| `{{ alphabetic(n) }}`      | Generates an alphabetic string with `n` letters.                                                            |
-| `{{ alphanumeric(n) }}`    | Generates an alphanumeric string with `n` characters.                                                       |
-| `{{ date(n, format) }}`    | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.        |
-| `{{ timestamp(n, unit) }}` | Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit. |
+`{{ numeric(n) }}`
+: Generates a numeric string with `n` digits.
+
+`{{ alphabetic(n) }}`
+: Generates an alphabetic string with `n` letters.
+
+`{{ alphanumeric(n) }}`
+: Generates an alphanumeric string with `n` characters.
+
+`{{ date(n, format) }}`
+: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+
+`{{ timestamp(n, unit) }}` 
+: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
 
 ### Use variables
 
@@ -139,13 +146,23 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
-| Error             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.                                                                                                                                                                                                                                                         |
-| DNS               | DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
-| `INVALID_REQUEST` | The configuration of the test is invalid (for example, a typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][15].                                                                                                                                                                                                                                                                                                                                                      |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. <br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. <br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
+
+`CONNRESET`
+: The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
+
+`DNS`
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+
+`INVALID_REQUEST` 
+: The configuration of the test is invalid (for example, a typo in the URL).
+
+`SSL`
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][15].
+
+`TIMEOUT`
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
+  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
 
 ## Further Reading
 

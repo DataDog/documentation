@@ -62,8 +62,7 @@
         "jshint-stylish": "2.2.1",
         "json2csv": "^4.5.2",
         "lazypipe": "1.0.2",
-        "lazysizes": "4.0.1",
-        "link-checker": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.73.tgz",
+        "link-checker": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/link-checker-v1.0.74.tgz",
         "lodash": "^4.17.20",
         "marked": "^1.2.7",
         "merge-stream": "2.0.0",
@@ -89,12 +88,12 @@
         "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
         "@babel/preset-env": "^7.5.5",
         "@babel/register": "^7.5.5",
-        "@datadog/datadog-ci": "^0.7.1",
+        "@datadog/datadog-ci": "^0.11.7",
         "acorn": "^7.1.1",
         "babel-eslint": "^10.0.2",
         "babel-loader": "^8.0.6",
         "clean-webpack-plugin": "^3.0.0",
-        "copy-webpack-plugin": "^5.1.0",
+        "copy-webpack-plugin": "^8.1.1",
         "cross-env": "^5.2.0",
         "css-loader": "^3.1.0",
         "eslint": "^6.8.0",
@@ -117,7 +116,7 @@
         "jest": "^25.3.0",
         "mini-css-extract-plugin": "^0.8.0",
         "npm-run-all": "^4.1.5",
-        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "optimize-css-assets-webpack-plugin": "^5.0.4",
         "postcss-import": "^12.0.1",
         "postcss-loader": "^3.0.0",
         "postcss-preset-env": "^6.7.0",
@@ -134,5 +133,8 @@
         "webpack-bundle-analyzer": "^3.3.2",
         "webpack-cli": "^3.3.6",
         "webpack-merge": "^4.2.1"
+    },
+    "hugo-bin": {
+      "buildTags": "extended"
     }
 }

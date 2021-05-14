@@ -108,10 +108,13 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     baseurl = https://yum.datadoghq.com/stable/7/<HOST_ARCHITECTURE>
     enabled=1
     gpgcheck=1
+    repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
+
+    **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.
 
     The `baseurl` is dependent on your host OS:
     - x86_64 - `https://yum.datadoghq.com/stable/7/x86_64/`
@@ -139,6 +142,7 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     sudo systemctl restart datadog-agent.service
     ```
 
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 {{< /tabs >}}
 

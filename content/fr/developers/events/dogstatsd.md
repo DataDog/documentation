@@ -27,7 +27,7 @@ event(<TITRE>, <TEXTE>, <TIMESTAMP>, <HOSTNAME>, <CLÉ_AGRÉGATION>, <PRIORITÉ>
 |----------------------|-----------------|----------|--------------------------------------------------------------------------------------------|
 | `<TITRE>`            | Chaîne          | Oui      | Le titre de l’événement                                                                     |
 | `<TEXTE>`             | Chaîne          | Oui      | Le corps de texte de l’événement                                                                 |
-| `<TIMESTAMP>`        | Nombre entier         | Oui      | Le timestamp de l'événement selon l'epoch Unix (par défaut, défini sur l'heure actuelle du serveur DogStatsD) |
+| `<TIMESTAMP>`        | Nombre entier         | Non       | Le timestamp de l'événement selon l'epoch Unix (par défaut, défini sur l'heure actuelle du serveur DogStatsD) |
 | `<HOSTNAME>`         | Chaîne          | Non       | Le nom du host                                                                       |
 | `<CLÉ_AGGRÉGATION>`  | Chaîne          | Non       | La clé à utiliser pour agréger les événements                                                        |
 | `<PRIORITÉ>`         | Chaîne          | Non       | Indique la priorité de l'événement (`normal` ou `low`).                                   |

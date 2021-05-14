@@ -17791,6 +17791,7 @@
                 "enum": [
                   "gauge",
                   "count",
+                  "rate",
                   "distribution"
                 ],
                 "example": "count",
@@ -17798,6 +17799,7 @@
                 "x-enum-varnames": [
                   "GAUGE",
                   "COUNT",
+                  "RATE",
                   "DISTRIBUTION"
                 ]
               },
@@ -17862,6 +17864,7 @@
             "enum": [
               "gauge",
               "count",
+              "rate",
               "distribution"
             ],
             "example": "count",
@@ -17869,6 +17872,7 @@
             "x-enum-varnames": [
               "GAUGE",
               "COUNT",
+              "RATE",
               "DISTRIBUTION"
             ]
           },
@@ -17908,6 +17912,7 @@
             "enum": [
               "gauge",
               "count",
+              "rate",
               "distribution"
             ],
             "example": "count",
@@ -17915,6 +17920,7 @@
             "x-enum-varnames": [
               "GAUGE",
               "COUNT",
+              "RATE",
               "DISTRIBUTION"
             ]
           },
@@ -17968,6 +17974,7 @@
                 "enum": [
                   "gauge",
                   "count",
+                  "rate",
                   "distribution"
                 ],
                 "example": "count",
@@ -17975,6 +17982,7 @@
                 "x-enum-varnames": [
                   "GAUGE",
                   "COUNT",
+                  "RATE",
                   "DISTRIBUTION"
                 ]
               },
@@ -18055,6 +18063,7 @@
                     "enum": [
                       "gauge",
                       "count",
+                      "rate",
                       "distribution"
                     ],
                     "example": "count",
@@ -18062,6 +18071,7 @@
                     "x-enum-varnames": [
                       "GAUGE",
                       "COUNT",
+                      "RATE",
                       "DISTRIBUTION"
                     ]
                   },
@@ -18121,6 +18131,7 @@
         "enum": [
           "gauge",
           "count",
+          "rate",
           "distribution"
         ],
         "example": "count",
@@ -18128,6 +18139,7 @@
         "x-enum-varnames": [
           "GAUGE",
           "COUNT",
+          "RATE",
           "DISTRIBUTION"
         ]
       },
@@ -18170,6 +18182,7 @@
                     "enum": [
                       "gauge",
                       "count",
+                      "rate",
                       "distribution"
                     ],
                     "example": "count",
@@ -18177,6 +18190,7 @@
                     "x-enum-varnames": [
                       "GAUGE",
                       "COUNT",
+                      "RATE",
                       "DISTRIBUTION"
                     ]
                   },
@@ -18646,6 +18660,7 @@
                     "enum": [
                       "gauge",
                       "count",
+                      "rate",
                       "distribution"
                     ],
                     "example": "count",
@@ -18653,6 +18668,7 @@
                     "x-enum-varnames": [
                       "GAUGE",
                       "COUNT",
+                      "RATE",
                       "DISTRIBUTION"
                     ]
                   },
@@ -18771,6 +18787,7 @@
                           "enum": [
                             "gauge",
                             "count",
+                            "rate",
                             "distribution"
                           ],
                           "example": "count",
@@ -18778,6 +18795,7 @@
                           "x-enum-varnames": [
                             "GAUGE",
                             "COUNT",
+                            "RATE",
                             "DISTRIBUTION"
                           ]
                         },
@@ -22197,12 +22215,14 @@
                       "description": "The detection method.",
                       "enum": [
                         "threshold",
-                        "new_value"
+                        "new_value",
+                        "anomaly_detection"
                       ],
                       "type": "string",
                       "x-enum-varnames": [
                         "THRESHOLD",
-                        "NEW_VALUE"
+                        "NEW_VALUE",
+                        "ANOMALY_DETECTION"
                       ]
                     },
                     "evaluationWindow": {
@@ -22632,12 +22652,14 @@
                 "description": "The detection method.",
                 "enum": [
                   "threshold",
-                  "new_value"
+                  "new_value",
+                  "anomaly_detection"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
-                  "NEW_VALUE"
+                  "NEW_VALUE",
+                  "ANOMALY_DETECTION"
                 ]
               },
               "evaluationWindow": {
@@ -22875,12 +22897,14 @@
         "description": "The detection method.",
         "enum": [
           "threshold",
-          "new_value"
+          "new_value",
+          "anomaly_detection"
         ],
         "type": "string",
         "x-enum-varnames": [
           "THRESHOLD",
-          "NEW_VALUE"
+          "NEW_VALUE",
+          "ANOMALY_DETECTION"
         ]
       },
       "SecurityMonitoringRuleEvaluationWindow": {
@@ -23055,12 +23079,14 @@
             "description": "The detection method.",
             "enum": [
               "threshold",
-              "new_value"
+              "new_value",
+              "anomaly_detection"
             ],
             "type": "string",
             "x-enum-varnames": [
               "THRESHOLD",
-              "NEW_VALUE"
+              "NEW_VALUE",
+              "ANOMALY_DETECTION"
             ]
           },
           "evaluationWindow": {
@@ -23465,12 +23491,14 @@
                 "description": "The detection method.",
                 "enum": [
                   "threshold",
-                  "new_value"
+                  "new_value",
+                  "anomaly_detection"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
-                  "NEW_VALUE"
+                  "NEW_VALUE",
+                  "ANOMALY_DETECTION"
                 ]
               },
               "evaluationWindow": {
@@ -23801,12 +23829,14 @@
                 "description": "The detection method.",
                 "enum": [
                   "threshold",
-                  "new_value"
+                  "new_value",
+                  "anomaly_detection"
                 ],
                 "type": "string",
                 "x-enum-varnames": [
                   "THRESHOLD",
-                  "NEW_VALUE"
+                  "NEW_VALUE",
+                  "ANOMALY_DETECTION"
                 ]
               },
               "evaluationWindow": {
@@ -44317,6 +44347,7 @@
               "enum": [
                 "gauge",
                 "count",
+                "rate",
                 "distribution"
               ],
               "example": "count",
@@ -44324,6 +44355,7 @@
               "x-enum-varnames": [
                 "GAUGE",
                 "COUNT",
+                "RATE",
                 "DISTRIBUTION"
               ]
             }
@@ -44435,6 +44467,7 @@
                                     "enum": [
                                       "gauge",
                                       "count",
+                                      "rate",
                                       "distribution"
                                     ],
                                     "example": "count",
@@ -44442,6 +44475,7 @@
                                     "x-enum-varnames": [
                                       "GAUGE",
                                       "COUNT",
+                                      "RATE",
                                       "DISTRIBUTION"
                                     ]
                                   },
@@ -44934,6 +44968,7 @@
                               "enum": [
                                 "gauge",
                                 "count",
+                                "rate",
                                 "distribution"
                               ],
                               "example": "count",
@@ -44941,6 +44976,7 @@
                               "x-enum-varnames": [
                                 "GAUGE",
                                 "COUNT",
+                                "RATE",
                                 "DISTRIBUTION"
                               ]
                             },
@@ -45216,6 +45252,7 @@
                               "enum": [
                                 "gauge",
                                 "count",
+                                "rate",
                                 "distribution"
                               ],
                               "example": "count",
@@ -45223,6 +45260,7 @@
                               "x-enum-varnames": [
                                 "GAUGE",
                                 "COUNT",
+                                "RATE",
                                 "DISTRIBUTION"
                               ]
                             },
@@ -45388,7 +45426,7 @@
         "x-unstable": "**Note: Use of this endpoint for count/gauge/rate metric types is only accessible for Metrics without Limits&trade; beta customers.\nIf you’re interested in Metrics without Limits&trade;, please contact your Customer Success Manager.**"
       },
       "post": {
-        "description": "Create and define a list of queryable tag keys for a count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+        "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric. Optionally, include percentile aggregations on any distribution metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
         "operationId": "CreateTagConfiguration",
         "parameters": [
           {
@@ -45438,6 +45476,7 @@
                             "enum": [
                               "gauge",
                               "count",
+                              "rate",
                               "distribution"
                             ],
                             "example": "count",
@@ -45445,6 +45484,7 @@
                             "x-enum-varnames": [
                               "GAUGE",
                               "COUNT",
+                              "RATE",
                               "DISTRIBUTION"
                             ]
                           },
@@ -45545,6 +45585,7 @@
                               "enum": [
                                 "gauge",
                                 "count",
+                                "rate",
                                 "distribution"
                               ],
                               "example": "count",
@@ -45552,6 +45593,7 @@
                               "x-enum-varnames": [
                                 "GAUGE",
                                 "COUNT",
+                                "RATE",
                                 "DISTRIBUTION"
                               ]
                             },
@@ -50104,12 +50146,14 @@
                                 "description": "The detection method.",
                                 "enum": [
                                   "threshold",
-                                  "new_value"
+                                  "new_value",
+                                  "anomaly_detection"
                                 ],
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "THRESHOLD",
-                                  "NEW_VALUE"
+                                  "NEW_VALUE",
+                                  "ANOMALY_DETECTION"
                                 ]
                               },
                               "evaluationWindow": {
@@ -50501,12 +50545,14 @@
                         "description": "The detection method.",
                         "enum": [
                           "threshold",
-                          "new_value"
+                          "new_value",
+                          "anomaly_detection"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
-                          "NEW_VALUE"
+                          "NEW_VALUE",
+                          "ANOMALY_DETECTION"
                         ]
                       },
                       "evaluationWindow": {
@@ -50862,12 +50908,14 @@
                           "description": "The detection method.",
                           "enum": [
                             "threshold",
-                            "new_value"
+                            "new_value",
+                            "anomaly_detection"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "ANOMALY_DETECTION"
                           ]
                         },
                         "evaluationWindow": {
@@ -51383,12 +51431,14 @@
                           "description": "The detection method.",
                           "enum": [
                             "threshold",
-                            "new_value"
+                            "new_value",
+                            "anomaly_detection"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "ANOMALY_DETECTION"
                           ]
                         },
                         "evaluationWindow": {
@@ -51757,12 +51807,14 @@
                         "description": "The detection method.",
                         "enum": [
                           "threshold",
-                          "new_value"
+                          "new_value",
+                          "anomaly_detection"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
                           "THRESHOLD",
-                          "NEW_VALUE"
+                          "NEW_VALUE",
+                          "ANOMALY_DETECTION"
                         ]
                       },
                       "evaluationWindow": {
@@ -52101,12 +52153,14 @@
                           "description": "The detection method.",
                           "enum": [
                             "threshold",
-                            "new_value"
+                            "new_value",
+                            "anomaly_detection"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
                             "THRESHOLD",
-                            "NEW_VALUE"
+                            "NEW_VALUE",
+                            "ANOMALY_DETECTION"
                           ]
                         },
                         "evaluationWindow": {

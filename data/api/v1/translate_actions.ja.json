@@ -562,7 +562,7 @@
     "summary": "全モニターの詳細を取得"
   },
   "CreateMonitor": {
-    "description": "指定されたオプションを使用してモニターを作成します。\n\n#### モニターの種類\n\n選択可能なモニターの種類:\n\n- 異常検知: `query alert`\n- APM: `query alert` または `trace-analytics alert`\n- 複合条件: `composite`\n- カスタム: `service check`\n- イベント: `event alert`\n- 予測値: `query alert`\n- ホスト: `service check`\n- インテグレーション: `query alert` または `service check`\n- ライブプロセス: `process alert`\n- ログ: `log alert`\n- メトリクス: `metric alert`\n- ネットワーク: `service check`\n- 外れ値: `query alert`\n- プロセス: `service check`\n- RUM: `rum alert`\n- Watchdog: `event alert`\n- event-v2: `event-v2 alert`\n\n#### クエリの種類\n\n**メトリクスアラートのクエリ**\n\n例: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg、sum、max、min、change、pct_change\n- `time_window`: `last_#m` (`#` = モニターの種類に応じて 1〜2880) または`last_#h`(`#` = モニターの種類に応じて 1〜48)、`last_1d`\n- `space_aggr`: avg、sum、min、max\n- `tags`: 1つ以上のタグ (カンマ区切り)、または *\n- `key`: key:value タグ構文内の 'key'。グループ内のタグごとに異なるアラートを定義します（マルチアラート）\n- `operator`: <、<=、>、>=、==、!=\n- `#`: しきい値の設定に使用される整数または小数\n\n`_change_` または `_pct_change_` 時間集計関数を使用する場合は、代わりに `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` を次のように使用します。\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [詳細はこちら](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)\n- `time_window` last\\_#m (モニターの種類に応じて 1〜2880), last\\_#h (モニターの種類に応じて 1〜48), last_#d (1 または 2)\n- `timeshift` #m_ago (5、10、15、30), #h_ago (1、2、4)、1d_ago\n\n次のクエリを使用して、外れ値モニターを作成できます:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**サービスチェックのクエリ**\n\n例: `\"check\".over(tags).last(count).count_by_status()`\n\n- **`check`** チェックの名前。例. `datadog.agent.up`\n- **`tags`** 引用符で囲まれた 1 つ以上のタグ (カンマ区切り)、または \"*\"。例: `.over(\"env:prod\", \"role:db\")`\n- **`count`** 最大しきい値 (`options` で定義) 以上である必要があります。上限値は 100 です。\n例: ステータス 1 を critical、3 を OK、2 を warn と通知する場合は、`count` を 3 にする必要があります。\n\n**イベントアラートのクエリ**\n\n例: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`**, イベントクエリの文字列。\n- **`string_query`** イベントのタイトルとテキストと照合するフリーテキストクエリ。\n- **`sources`** イベントのソース (カンマ区切り)。\n- **`status`** イベントのステータス (カンマ区切り)。有効なオプション: error、warn、info。\n- **`priority`** イベントの優先度 (カンマ区切り)。有効なオプション: low、normal、all。\n- **`host`** イベントを報告しているホスト (カンマ区切り)。\n- **`tags`** イベントタグ (カンマ区切り)。\n- **`excluded_tags`** 除外されたイベントタグ (カンマ区切り)。\n- **`rollup`** 統計のロールアップ方法。現在 `count` のみサポートされています。\n- **`last`** カウントをロールアップするタイムフレーム。例: 45分、4時間。サポート対象のタイムフレーム: m、h、d。この値は 48 時間以内である必要があります。\n\n**注** US1 および EU でのみ利用できます。\n\n**イベント V2 アラートのクエリ**\n\n例: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`**  統計のロールアップ方法。`count`、`avg`、`cardinality` に対応します。\n- **`measure`** `avg` および cardinality `rollup_method` で、使用する測定またはファセット名を指定します。\n- **`time_window`** #m (5、10、15、30)、#h (1、2 または 4、24)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、`!=`。\n- **`#`** しきい値の設定に使用される整数または小数。\n\n**注** US1-FED および US3 で利用できます。また、EU と US1 ではクローズドベータ版のみ利用できます。\n\n**プロセスアラートのクエリ**\n\n例: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** プロセスの問い合わせに使用するフリーテキスト検索文字列。\n一致するプロセスは、[ライブプロセス](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) ページの結果と一致します。\n- **`tags`** 1 つ以上のタグ (カンマ区切り)\n- **`timeframe`** カウントをロールアップするタイムフレーム。例: 10分、4時間。サポート対象のタイムフレーム: s、m、h、d\n- **`operator`** <、<=、>、>=、==、!=\n- **`#`** しきい値の設定に使用される整数または小数\n\n**ログアラートのクエリ**\n\n例: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`index_name`** マルチインデックスのオーガニゼーションの場合に、リクエストが実行されるログインデックス。\n- **`rollup_method`** 統計のロールアップ方法。`count`、`avg`、`cardinality` に対応します。\n- **`measure`** `avg` および cardinality `rollup_method` で、使用する測定またはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、`!=`。\n- **`#`** しきい値の設定に使用される整数または小数。\n\n**複合条件のクエリ**\n\n例: `12345 && 67890`。ここで、`12345` と `67890` は非複合条件モニターの ID です。\n\n* **`name`** [*required*, *default* = **dynamic, based on query**]: アラートの名前。\n* **`message`** [*required*, *default* = **dynamic, based on query**]: このモニターの通知に含めるメッセージ。\nイベントと同じ「@username」表記を使用して、特定のユーザーに電子メール通知を送信できます。\n* **`tags`** [*optional*, *default* = **empty list**]: モニターに関連付けられるタグのリスト。\nAPI からすべてのモニター詳細を取得する際は、`monitor_tags` 引数を使用して、これらのタグで結果を絞り込みます。 \nAPI からのみ使用でき、Datadog UI での表示や編集はできません。",
+    "description": "指定されたオプションを使用してモニターを作成します。\n\n#### モニターの種類\n\n選択可能なモニターの種類:\n\n- 異常検知: `query alert`\n- APM: `query alert` または `trace-analytics alert`\n- 複合条件: `composite`\n- カスタム: `service check`\n- イベント: `event alert`\n- 予測値: `query alert`\n- ホスト: `service check`\n- インテグレーション: `query alert` または `service check`\n- ライブプロセス: `process alert`\n- ログ: `log alert`\n- メトリクス: `metric alert`\n- ネットワーク: `service check`\n- 外れ値: `query alert`\n- プロセス: `service check`\n- RUM: `rum alert`\n- SLO: `slo alert`\n- Watchdog: `event alert`\n- event-v2: `event-v2 alert`\n\n#### クエリの種類\n\n**メトリクスアラートのクエリ**\n\n例: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg、sum、max、min、change、pct_change\n- `time_window`: `last_#m` (`#` = モニターの種類に応じて 1〜2880) または`last_#h`(`#` = モニターの種類に応じて 1〜48)、`last_1d`\n- `space_aggr`: avg、sum、min、max\n- `tags`: 1つ以上のタグ (カンマ区切り)、または *\n- `key`: key:value タグ構文内の 'key'。グループ内のタグごとに異なるアラートを定義します（マルチアラート）\n- `operator`: <、<=、>、>=、==、!=\n- `#`: しきい値の設定に使用される整数または小数\n\n`_change_` または `_pct_change_` 時間集計関数を使用する場合は、代わりに `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` を次のように使用します。\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [詳細はこちら](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)\n- `time_window` last\\_#m (モニターの種類に応じて 1〜2880), last\\_#h (モニターの種類に応じて 1〜48), last_#d (1 または 2)\n- `timeshift` #m_ago (5、10、15、30), #h_ago (1、2、4)、1d_ago\n\n次のクエリを使用して、外れ値モニターを作成できます:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**サービスチェックのクエリ**\n\n例: `\"check\".over(tags).last(count).count_by_status()`\n\n- **`check`** チェックの名前。例. `datadog.agent.up`\n- **`tags`** 引用符で囲まれた 1 つ以上のタグ (カンマ区切り)、または \"*\"。例: `.over(\"env:prod\", \"role:db\")`\n- **`count`** 最大しきい値 (`options` で定義) 以上である必要があります。上限値は 100 です。\n例: ステータス 1 を critical、3 を OK、2 を warn と通知する場合は、`count` を 3 にする必要があります。\n\n**イベントアラートのクエリ**\n\n例: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`**, イベントクエリの文字列。\n- **`string_query`** イベントのタイトルとテキストと照合するフリーテキストクエリ。\n- **`sources`** イベントのソース (カンマ区切り)。\n- **`status`** イベントのステータス (カンマ区切り)。有効なオプション: error、warn、info。\n- **`priority`** イベントの優先度 (カンマ区切り)。有効なオプション: low、normal、all。\n- **`host`** イベントを報告しているホスト (カンマ区切り)。\n- **`tags`** イベントタグ (カンマ区切り)。\n- **`excluded_tags`** 除外されたイベントタグ (カンマ区切り)。\n- **`rollup`** 統計のロールアップ方法。現在 `count` のみサポートされています。\n- **`last`** カウントをロールアップするタイムフレーム。例: 45分、4時間。サポート対象のタイムフレーム: m、h、d。この値は 48 時間以内である必要があります。\n\n**注** US1 および EU でのみ利用できます。\n\n**イベント V2 アラートのクエリ**\n\n例: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`**  統計のロールアップ方法。`count`、`avg`、`cardinality` に対応します。\n- **`measure`** `avg` および cardinality `rollup_method` で、使用する測定またはファセット名を指定します。\n- **`time_window`** #m (5、10、15、30)、#h (1、2 または 4、24)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、`!=`。\n- **`#`** しきい値の設定に使用される整数または小数。\n\n**注** US1-FED および US3 で利用できます。また、EU と US1 ではクローズドベータ版のみ利用できます。\n\n**プロセスアラートのクエリ**\n\n例: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** プロセスの問い合わせに使用するフリーテキスト検索文字列。\n一致するプロセスは、[ライブプロセス](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) ページの結果と一致します。\n- **`tags`** 1 つ以上のタグ (カンマ区切り)\n- **`timeframe`** カウントをロールアップするタイムフレーム。例: 10分、4時間。サポート対象のタイムフレーム: s、m、h、d\n- **`operator`** <、<=、>、>=、==、!=\n- **`#`** しきい値の設定に使用される整数または小数\n\n**ログアラートのクエリ**\n\n例: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`index_name`** マルチインデックスのオーガニゼーションの場合に、リクエストが実行されるログインデックス。\n- **`rollup_method`** 統計のロールアップ方法。`count`、`avg`、`cardinality` に対応します。\n- **`measure`** `avg` および cardinality `rollup_method` で、使用する測定またはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、`!=`。\n- **`#`** しきい値の設定に使用される整数または小数。\n\n**複合条件のクエリ**\n\n例: `12345 && 67890`。ここで、`12345` と `67890` は非複合条件モニターの ID です。\n\n* **`name`** [*required*, *default* = **dynamic, based on query**]: アラートの名前。\n* **`message`** [*required*, *default* = **dynamic, based on query**]: このモニターの通知に含めるメッセージ。\nイベントと同じ「@username」表記を使用して、特定のユーザーに電子メール通知を送信できます。\n* **`tags`** [*optional*, *default* = **empty list**]: モニターに関連付けられるタグのリスト。\nAPI からすべてのモニター詳細を取得する際は、`monitor_tags` 引数を使用して、これらのタグで結果を絞り込みます。 \nAPI からのみ使用でき、Datadog UI での表示や編集はできません。\n\n**SLO アラートクエリ**\n\n例: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- **`slo_id`**: アラートを構成する SLO の SLO ID（英数字）。\n- **`time_window`**: アラートの対象とする SLO ターゲットのタイムウィンドウ。有効なオプション: `7d`、`30d`、`90d`。\n- **`operator`**: `>=` or `>`",
     "summary": "モニターの作成",
     "request_description": "モニターのリクエスト本文を作成します。",
     "request_schema_description": "モニターを記述するオブジェクト。"
@@ -682,6 +682,30 @@
     "description": "SLO が安全に削除されたかを確認します。たとえば、\nSLO の削除によりダッシュボードに問題が発生していないことを確認します。",
     "summary": "SLO を安全に削除できるかどうかを確認する"
   },
+  "ListSLOCorrection": {
+    "description": "サービスレベル目標の補正をすべて取得",
+    "summary": "Get all SLO corrections"
+  },
+  "CreateSLOCorrection": {
+    "description": "SLO 補正を作成",
+    "summary": "Create an SLO correction",
+    "request_description": "SLO 補正を作成",
+    "request_schema_description": "SLO に適用される補正を定義するオブジェクト"
+  },
+  "DeleteSLOCorrection": {
+    "description": "指定した SLO 補正オブジェクトを完全に削除",
+    "summary": "Delete an SLO correction"
+  },
+  "GetSLOCorrection": {
+    "description": "SLO 補正を取得",
+    "summary": "Get an SLO correction for an SLO"
+  },
+  "UpdateSLOCorrection": {
+    "description": "指定した SLO 補正オブジェクトを更新",
+    "summary": "Update an SLO correction",
+    "request_description": "編集済みの SLO 補正オブジェクト",
+    "request_schema_description": "SLO に適用される補正を定義するオブジェクト"
+  },
   "DeleteSLO": {
     "description": "指定のサービスレベル目標オブジェクトを完全に削除します。\n\nSLO を使用するダッシュボードの場合はダッシュボード内で SLO が参照されているため、\n`DELETE /v1/slo/` エンドポイントは 409 競合エラーを返します。",
     "summary": "SLO を削除する"
@@ -729,7 +753,7 @@
     "summary": "すべてのテストのリストを取得する"
   },
   "CreateTest": {
-    "description": "Synthetic テストを作成します。",
+    "description": "このエンドポイントは非推奨です。テストを作成するには、[Create an API test](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test) または [Create a browser test](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test) を使用してください。",
     "summary": "テストの作成",
     "request_description": "作成するテストの詳細。",
     "request_schema_description": "Synthetic テストについての詳細を含むオブジェクト。"
@@ -758,7 +782,7 @@
   },
   "GetBrowserTest": {
     "description": "Synthetic ブラウザテストに関連する詳細なコンフィギュレーション (手順を含む) を取得します。",
-    "summary": "テストコンフィギュレーションを取得する（ブラウザ）"
+    "summary": "ブラウザテストを取得"
   },
   "UpdateBrowserTest": {
     "description": "Synthetic ブラウザテストのコンフィギュレーションを編集します。",
@@ -768,11 +792,11 @@
   },
   "GetBrowserTestLatestResults": {
     "description": "特定の Synthetic ブラウザテストの最新結果の要約 50 件を取得します。",
-    "summary": "テストの最新結果の要約を取得する (ブラウザ)"
+    "summary": "ブラウザテストの最新結果概要を取得"
   },
   "GetBrowserTestResult": {
     "description": "特定の (ブラウザ) Synthetic テストの完全な結果を取得します。",
-    "summary": "テスト結果を取得する (ブラウザ)"
+    "summary": "ブラウザテストの結果を取得"
   },
   "DeleteTests": {
     "description": "複数の Synthetic テストを ID で削除します。",
@@ -782,27 +806,27 @@
   },
   "TriggerCITests": {
     "description": "継続的なインテグレーションに向けた一連の Synthetics テストをトリガーします。",
-    "summary": "CI の Synthetic テストのトリガー",
+    "summary": "CI/CD パイプラインからのテストをトリガー",
     "request_description": "トリガーするテストの詳細。",
     "request_schema_description": "トリガーする Synthetics テストを記述するオブジェクト。"
   },
   "GetTest": {
     "description": "Synthetics テストに関連する詳細なコンフィギュレーションを取得します。",
-    "summary": "テストコンフィギュレーションを取得する（API）"
+    "summary": "テストコンフィギュレーションを取得する"
   },
   "UpdateTest": {
-    "description": "Synthetics テストのコンフィギュレーションを編集します。",
+    "description": "このエンドポイントは非推奨です。テストを編集するには、[Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) または [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test) を使用してください。",
     "summary": "テストの編集",
     "request_description": "保存する新しいテストの詳細。",
     "request_schema_description": "Synthetic テストについての詳細を含むオブジェクト。"
   },
   "GetAPITestLatestResults": {
     "description": "特定の Synthetic API テストの最新結果の要約 50 件を取得します。",
-    "summary": "テストの最新結果の要約を取得する (API)"
+    "summary": "API テストの最新結果概要を取得"
   },
   "GetAPITestResult": {
     "description": "特定の (API) Synthetic テストの完全な結果を取得します。",
-    "summary": "テスト結果を取得する (API)"
+    "summary": "API テスト結果を取得"
   },
   "UpdateTestPauseStatus": {
     "description": "Synthetics テストのステータスを変更し、一時停止または開始します。",
