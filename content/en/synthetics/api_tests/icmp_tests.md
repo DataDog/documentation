@@ -14,7 +14,7 @@ further_reading:
   text: "Get started with API tests"
 - link: "/synthetics/private_locations"
   tag: "Documentation"
-  text: "Run ICMP Pings on internal endpoints"
+  text: "Run ICMP pings on internal endpoints"
 ---
 
 
@@ -22,31 +22,31 @@ further_reading:
 
 ICMP tests allow you to easily monitor the availability of your hosts and diagnose network communication issues. By asserting on the values received from one or more ICMP pings to your endpoint, Datadog can help detect connectivity issues, above-quota latency for round trip times, and unexpected changes in security firewall configuration. The tests can also track the number of network hops (TTL) required to connect to your host and view traceroute results to discover details on each network hop along the path.
 
-ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand or from within your [CI/CD pipelines][3].
+ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand, or from within your [CI/CD pipelines][3].
 
 ## Configuration
 
 After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][7], or [`ICMP` test][8]), you can define your test's request.
 
-### Define Request
+### Define request
 
 {{< img src="synthetics/api_tests/icmp_test_config.png" alt="Define ICMP request" style="width:90%;" >}}
 
 1. Specify the **Domain Name** or **IP address** to run your test on.
-2. Select or Deselect **Track number of network hops (TTL)**. This option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
-3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to 4 - you can choose to decrease or increase up to 10.
+2. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
+3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
 4. **Name** your ICMP test.
-5. Add `env` **Tags** as well as any other tag to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
-6. Select the **Locations** to run your ICMP test from: ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
+5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
+6. Select the **Locations** to run your ICMP test from. ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
 
-Click **Test URL** to try out the request configuration. A response preview should be displayed on the right side of your screen.
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 
 ### Specify test frequency
 
 ICMP tests can run:
 
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your ICMP test.
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency with which you want Datadog to run your ICMP test.
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
@@ -56,7 +56,7 @@ ICMP tests can run:
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `latency`, `packet loss` and `packet received` is added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. When hitting `Test URL`, basic assertions on `latency`, `packet loss`, and `packet received` are added. You must define at least one assertion for your test to monitor.
 
 | Type          | Aggregation    |Operator                                                                               | Value Type       |
 |-----------------|----------------|------------------------------------------------------------------------|------------------|
@@ -72,24 +72,24 @@ You can create up to 20 assertions per API test by selecting **New Assertion** o
 
 ### Define alert conditions
 
-You can set alert conditions to determine the circumstances when a test should fail and trigger an alert.
+You can set alert conditions to determine the circumstances under which a test should fail and trigger an alert.
 
 #### Alerting rule
 
 When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
 
-* At least one location was in failure (at least one assertion failed) during the last *X* minutes;
+* At least one location was in failure (at least one assertion failed) during the last *X* minutes.
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 milliseconds after the first failed test result. This interval can be configured via the [API][10].
+Your test can trigger retries in the case of failed test results. By default, the retries are performed 300 milliseconds after the first failed test result. You can configure this interval through the [API][10].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
 ### Notify your team
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+Your test sends a notification based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define what messages to send to your teams and how to send them.
 
 1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -102,7 +102,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
     | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
 
-3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
+3. Specify how often you want your test to **resend the notification message** in the case of test failure. To prevent renotifications from failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
 Email notifications include the message defined in this section as well as a summary of failed assertions.
 Notifications example:
@@ -127,10 +127,10 @@ You can create local variables by defining their values from one of the below av
 : Generates an alphanumeric string with `n` characters.
 
 `{{ date(n, format) }}`
-: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+: Generates a date in one of Datadog's accepted formats with the value of the date the test is initiated + `n` days.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
+: Generates a timestamp in one of Datadog's accepted units with a value of the timestamp the test is initiated at +/- `n` chosen units.
 
 ### Use variables
 
@@ -141,7 +141,7 @@ To display your list of variables, type `{{` in your desired field:
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can fail without being able to test the assertions against the endpoint, these reasons include:
+A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can fail without being able to test the assertions against the endpoint. These reasons include:
 
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
