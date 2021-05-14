@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_firewall/'
 draft: false
 git_integration_title: azure_firewall
 has_logo: true
+integration_id: ''
 integration_title: Microsoft Azure Firewall
 is_public: true
 kind: インテグレーション

@@ -1040,6 +1040,10 @@ main:
     parent: serverless
     identifier: serverless_troubleshooting
     weight: 11
+  - name: Webpack Compatibility
+    url: serverless/troubleshooting/serverless_tracing_and_webpack
+    parent: serverless_troubleshooting
+    weight: 1101
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
@@ -1995,86 +1999,91 @@ main:
     parent: rum
     identifier: rum_ios
     weight: 3
+  - name: React Native Monitoring
+    url: real_user_monitoring/reactnative/
+    parent: rum
+    identifier: rum_reactnative
+    weight: 4
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 4
+    weight: 5
   - name: Performance Overview
     url: real_user_monitoring/dashboards/performance_overview_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_performance
-    weight: 401
+    weight: 501
   - name: Resources
     url: real_user_monitoring/dashboards/resources_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_resources
-    weight: 402
+    weight: 502
   - name: Errors
     url: real_user_monitoring/dashboards/errors_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_errors
-    weight: 403
+    weight: 503
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 5
+    weight: 6
   - name: Search
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 501
+    weight: 601
   - name: Analytics
     url: real_user_monitoring/explorer/analytics/
     parent: rum_explorer
     identifier: rum_explorer_analytics
-    weight: 502
+    weight: 602
   - name: Long Task
     url: real_user_monitoring/data_collected/long_task
     parent: rum_data_collected
     identifier: rum_data_collected_long_task
-    weight: 503
+    weight: 603
   - name: Error
     url: real_user_monitoring/data_collected/error
     parent: rum_data_collected
     identifier: rum_data_collected_error
-    weight: 504
+    weight: 604
   - name: User Action
     url: real_user_monitoring/data_collected/user_action
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
-    weight: 505
+    weight: 605
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 6
+    weight: 7
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 7
+    weight: 8
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 701
+    weight: 801
   - name: Track Browser Errors
     url: real_user_monitoring/error_tracking/browser_errors
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
-    weight: 702
+    weight: 802
   - name: Track Android Errors
     url: real_user_monitoring/error_tracking/android
     parent: rum_error_tracking
     identifier: rum_error_tracking_android
-    weight: 703
+    weight: 803
   - name: Guides
     url: real_user_monitoring/guide
     parent: rum
     identifier: rum_guides
-    weight: 8
+    weight: 9
   - name: Network Monitoring
     url: network_monitoring/
     pre: nav_network
@@ -4164,6 +4173,70 @@ api:
         - ListMonitors
       unstable: []
       order: 2
+  - name: Notebooks
+    url: /api/latest/notebooks/
+    identifier: notebooks
+    generated: true
+  - name: Update a notebook
+    url: '#update-a-notebook'
+    identifier: update-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateNotebook
+      unstable: []
+      order: 0
+  - name: Get a notebook
+    url: '#get-a-notebook'
+    identifier: get-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetNotebook
+      unstable: []
+      order: 0
+  - name: Delete a notebook
+    url: '#delete-a-notebook'
+    identifier: delete-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteNotebook
+      unstable: []
+      order: 0
+  - name: Create a notebook
+    url: '#create-a-notebook'
+    identifier: create-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateNotebook
+      unstable: []
+      order: 0
+  - name: Get all notebooks
+    url: '#get-all-notebooks'
+    identifier: get-all-notebooks
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListNotebooks
+      unstable: []
+      order: 0
   - name: Organizations
     url: /api/latest/organizations/
     identifier: organizations
@@ -4727,6 +4800,7 @@ api:
       operationids:
         - UpdateTest
       unstable: []
+      order: 25
   - name: Get a test configuration
     url: '#get-a-test-configuration'
     identifier: get-a-test-configuration
@@ -5199,6 +5273,18 @@ api:
         - GetUsageLogsByIndex
       unstable: []
       order: 3
+  - name: Get hourly logs usage by retention
+    url: '#get-hourly-logs-usage-by-retention'
+    identifier: get-hourly-logs-usage-by-retention
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLogsByRetention
+      unstable: []
+      order: 0
   - name: Get hourly usage for Logs
     url: '#get-hourly-usage-for-logs'
     identifier: get-hourly-usage-for-logs

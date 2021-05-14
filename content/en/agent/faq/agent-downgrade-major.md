@@ -125,8 +125,10 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 
     ```shell
     rm /etc/yum.repos.d/datadog-beta.repo
-    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=0\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public' | sudo tee /etc/yum.repos.d/datadog.repo
+    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
+
+    **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.
 
 2. Update your local yum cache and downgrade the Agent
 
@@ -166,6 +168,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     sudo -u dd-agent -- rm -rf /etc/datadog-agent/
     ```
 
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 {{% tab "Windows" %}}
 

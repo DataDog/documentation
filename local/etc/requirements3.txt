@@ -9,8 +9,8 @@ htmlmin>=0.1.10
 pycparser==2.14
 awscli==1.18.27
 requests==2.23.0
-PyYAML==5.3.1
+PyYAML==5.4
 tqdm==4.43.0
-Pygments==2.6.1
+Pygments==2.7.4
 datadog==0.35.0
 markdown2==2.3.8

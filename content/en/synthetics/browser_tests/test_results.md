@@ -35,13 +35,21 @@ A test is considered `FAILED` if it does not satisfy its assertions or if the re
 
 Common failure reasons include:
 
-| Error                                | Description                                                                                                          |
-|--------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| `Element located but it's invisible` | The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.       |
-| `Cannot locate element`              | The element cannot be found in the HTML.                                                                             |
-| `Select did not have option`         | The specified option is missing from the dropdown menu.                                                              |
-| `Forbidden URL`                      | The test likely encountered a protocol that is not supported. Reach out to [Datadog support][6] for further details. |
-| `General test failure`               | A general error message. [Contact support][6] for further details.                                                   |
+
+`Element located but it's invisible` 
+: The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.
+
+`Cannot locate element`
+: The element cannot be found in the HTML.
+
+`Select did not have option`
+: The specified option is missing from the dropdown menu.
+
+`Forbidden URL`
+: The test likely encountered a protocol that is not supported. Reach out to [Datadog support][6] for further details.
+
+`General test failure`
+: A general error message. [Contact support][6] for further details.
 
 ## Errors
 
@@ -55,13 +63,21 @@ The maximum number of errors that can be displayed is 8, for example 2 `network`
 
 A resource corresponds to the combination of requests and assets. The Resources panel shows:
 
-| Item         | Description                                                     |
-|--------------|-----------------------------------------------------------------|
-| Resource     | The URL of the resource                                         |
-| Type         | The type of resource (HTML, CSS, Image, Javascript, XHR, Other) |
-| Duration     | The time needed to perform the request                          |
-| % Total Time | The resource duration over the total interaction time           |
-| Size         | The size of the request response                                |
+
+Resource
+: The URL of the resource
+
+Type
+: The type of resource (HTML, CSS, Image, Javascript, XHR, Other)
+
+Duration
+: The time needed to perform the request
+
+% Total Time 
+: The resource duration over the total interaction time
+
+Size
+: The size of the request response
 
 The maximum number of resources that can be displayed is 50. Resources are ordered by the time when they start and then are displayed in Datadog by the first 50.
 

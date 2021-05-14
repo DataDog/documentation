@@ -16,7 +16,7 @@ dependencies:
 display_name: Nfsstat
 git_integration_title: nfsstat
 guid: 9f2fe3a7-ae19-4da9-a253-ae817a5557ab
-integration_id: システム
+integration_id: system
 integration_title: Nfsstat
 is_public: true
 kind: インテグレーション

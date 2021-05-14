@@ -53,7 +53,20 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 ### Renotify
 
-Enable monitor renotification (optional), which is useful to remind your team a problem is not solved. If enabled, you are given the option to include an escalation message sent any time the monitor renotifies. The original notification message is also included.
+Enable monitor renotification (optional) to remind your team that a problem is not solved. 
+If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in the `alert` or `no data` state for the specified time.
+The escalation message can be added in the following ways:
+
+* In the `{{#is_renotify}}` block in the original notification message (recommended).
+* In the *escalation_message* field in the app.
+* With the `escalation_message` attribute in the API.
+
+If you use the `{{#is_renotify}}` block, keep in mind that the original notification message is also included in the renotification, so:
+
+1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
+2. Send the escalation message to a subset of groups.
+
+Learn how to configure your monitors for those use cases in [the example section](#examples).
 
 ### Priority
 
@@ -200,9 +213,11 @@ The following conditional variables are available:
 | `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
 | `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
 | `{{^is_no_data_recovery}}` | The monitor does not recover from `NO DATA`                        |
-| `{{#is_priority 'value'}}`  | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
+| `{{#is_priority 'value'}}` | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
 | `{{#is_unknown}}`          | The monitor is in the unknown state                                |
 | `{{^is_unknown}}`          | The monitor is not in the unknown state                            |
+| `{{#is_renotify}}`         | The monitor is renotifying                                         |
+| `{{^is_renotify}}`         | The monitor is not renotifying.                                    |
 
 #### Examples
 
@@ -314,6 +329,46 @@ To notify your dev team if a triggering host has the name `production`, use the 
 ```
 
 {{% /tab %}}
+{{% tab "is_renotify" %}}
+
+To send an escalation message to a different destination just for the `production` environment:
+
+```text
+{{#is_renotify}}
+{{#is_match "env" "production"}}
+  This is an escalation message sent to @dev-team@company.com
+{{/is_match}}
+{{/is_renotify}}
+```
+
+To send a different escalation message that does not contain the original message details, use a combination of `{{^is_renotify}}` and `{{#is_renotify}}` blocks:
+
+```text
+{{^is_renotify}}
+This monitor is alerting and sending a first message @dev-team@company.com
+
+To solve this monitor follow the steps:
+1. Go there
+2. Do this
+{{/is_renotify}}
+
+This part is generic and sent both for the first trigger and the escalation message.
+
+{{#is_renotify}}
+  This is the escalation message @dev-team@company.com
+{{/is_renotify}}
+
+```
+
+On monitor renotification, users will get the following escalation message:
+
+```
+This part is generic and sent both for the first trigger and the escalation message.
+
+This is the escalation message @dev-team@company.com
+``` 
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Test notifications
@@ -348,7 +403,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 
 ### Dynamic links
 
-Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can of provide links to pages within Datadog such as dashboards, the host map, and monitors.
+Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can provide links to pages within Datadog such as dashboards, the host map, and monitors.
 
 {{< tabs >}}
 {{% tab "Dashboards" %}}
