@@ -24,7 +24,7 @@ Cloud Security Posture Management is not currently available in US1-FED, US3, or
 
 ## Overview
 
-Each [default rule][1] maps to one or more controls within a compliance standard or industry benchmark. Datadog out-of-the-box (OOTB) rules currently map rules to controls and requirements for the following frameworks and benchmarks:
+Each [OOTB rule][1] maps to one or more controls within a compliance standard or industry benchmark. Datadog OOTB rules currently map to controls and requirements for the following frameworks and benchmarks:
 
 - [CIS AWS Foundations Benchmark v1.3.0*][2]
 - [CIS Docker Benchmark v1.2.0][2]
@@ -39,9 +39,9 @@ Each [default rule][1] maps to one or more controls within a compliance standard
 
 ## Customize how your environment is scanned by each rule
 
-On the [Rules][7] page, hover over a rule and click on the pencil icon to edit a rule at the top of the page. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how a rule scans your environment.
+On the [Rules][7] page, hover over a rule and click on the pencil icon to edit the rule. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how the rule scans your environment.
 
-For example, you can remove all resources tagged with `env:staging` because this environment is not running production applications using the **Never trigger a signal when** function. Or, you may want to limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only trigger a signal when** function.
+For example, you can remove all resources tagged with `env:staging` using the **Never trigger a signal when** function. Or, limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only trigger a signal when** function.
 
 {{< img src="security_platform/cspm/frameworks_and_benchmarks/never-trigger-a-signal.png" alt="In the Datadog app, select Advanced to populate Never trigger a signal when, and add a query." >}}
 
