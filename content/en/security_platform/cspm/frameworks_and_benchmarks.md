@@ -24,7 +24,7 @@ Cloud Security Posture Management is not currently available in US1-FED, US3, or
 
 ## Overview
 
-Each [default rule][1] maps to one or more controls within a compliance framework or industry benchmark. Datadog out-of-the-box (OOTB) rules currently map rules to controls and requirements for the following frameworks and benchmarks:
+Each [default rule][1] maps to one or more controls within a compliance standard or industry benchmark. Datadog out-of-the-box (OOTB) rules currently map rules to controls and requirements for the following frameworks and benchmarks:
 
 - [CIS AWS Foundations Benchmark v1.3.0*][2]
 - [CIS Docker Benchmark v1.2.0][2]
@@ -55,6 +55,7 @@ From the [Rules][7] page, you can add notification targets. The complete list of
 - [ServiceNow][11]
 - [Microsoft Teams][12]
 - [Webhooks][13]
+- Email
 
 {{< img src="security_platform/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
 

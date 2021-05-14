@@ -32,7 +32,7 @@ The [Posture Findings][1] page allows you to:
 - Review the rules applied to your resources by CSPM
 - Review tags for more context about who owns the resource and where it resides in your environment
 - Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
-- Use the “time selector” to explore security configuration posture, including the configuration of individual resources, at any point in the past.
+- Use the “time selector” to explore security configuration posture at any point in the past.
 
 {{< img src="security_platform/cspm/findings/findings-time-window.png" alt="Set a findings time window using the dropdown" style="width:65%;">}}
 
