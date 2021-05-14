@@ -26,19 +26,19 @@ Cloud Security Posture Management is not currently available in US1-FED, US3, or
 
 ## Overview
 
-The [Posture Findings][1] page allows you to:
+The [Findings Explorer][1] allows you to:
 
 - Review the detailed configuration of a resource
 - Review the rules applied to your resources by CSPM
 - Review tags for more context about who owns the resource and where it resides in your environment
 - Read descriptions and guidelines based on industry resources for remediating a misconfigured resource
-- Use the “time selector” to explore security configuration posture at any point in the past.
+- Use the “time selector” to explore your security configuration posture at any point in the past.
 
 {{< img src="security_platform/cspm/findings/findings-time-window.png" alt="Set a findings time window using the dropdown" style="width:65%;">}}
 
 ## Findings
 
-A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a **Pass** or **Fail** status. Resources are evaluated in increments between 15 minutes or up to 4 hours (depending on type). Datadog generates new findings as soon as a new scan is completed, and stores a complete history of all findings for the past 15 months so they are available in case of an investigation or audit.
+A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a **Pass** or **Fail** status. Resources are evaluated in increments between 15 minutes and four hours (depending on type). Datadog generates new findings as soon as a new scan is completed, and stores a complete history of all findings for the past 15 months so they are available in case of an investigation or audit.
 
 {{< img src="security_platform/cspm/findings/posture-management-overview.png" alt="An overview of the Posture Management Findings page" style="width:100%;">}}
 
@@ -46,7 +46,7 @@ Clicking on an individual finding that has **failed** to see details about the m
 
 {{< img src="security_platform/cspm/findings/signal-overview.png" alt="Failed signals in the side panel" style="width:65%;">}}
 
-Aggregate findings by rule using the query search bar. This view provides a checklist of all of the rules that Datadog scans. Filtering by `evaluation:fail` status narrows the list to all rules that have issues that need to be addressed. The side panel shows details of each resource that has been evaluated by the rule.
+Aggregate findings by rule using the query search bar. This view shows a checklist of all of the rules that Datadog scans. Filtering by `evaluation:fail` status narrows the list to all rules that have issues that need to be addressed. The side panel shows details of each resource that has been evaluated by the rule.
 
 {{< img src="security_platform/cspm/findings/evaluation-fail.png" alt="Filtering by evaluation fail" style="width:100%;">}}
 
