@@ -5129,9 +5129,9 @@ api:
         - GetUsageTrace
       unstable: []
       order: 6
-  - name: Get top custom metrics by hourly average
-    url: '#get-top-custom-metrics-by-hourly-average'
-    identifier: get-top-custom-metrics-by-hourly-average
+  - name: Get all custom metrics by hourly average
+    url: '#get-all-custom-metrics-by-hourly-average'
+    identifier: get-all-custom-metrics-by-hourly-average
     parent: usage-metering
     generated: true
     params:
