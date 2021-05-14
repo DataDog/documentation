@@ -1837,7 +1837,7 @@ main:
     parent: cspm
     identifier: cspm_default_rules
     weight: 203
-  - name: Findings Explorer
+  - name: Posture Findings
     url: /security_platform/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
