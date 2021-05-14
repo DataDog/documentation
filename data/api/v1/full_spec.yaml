@@ -8881,6 +8881,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -8889,6 +8890,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID for the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -9219,6 +9221,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -9227,6 +9230,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID of the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -9818,8 +9822,6 @@ components:
             the value will not be present if the variable is secure.'
           example: example-value
           type: string
-      required:
-      - value
       type: object
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
@@ -10240,6 +10242,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -10248,6 +10251,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The test public ID.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
