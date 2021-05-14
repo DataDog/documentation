@@ -8881,6 +8881,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -8889,6 +8890,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID for the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -9219,6 +9221,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -9227,6 +9230,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID of the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -9818,8 +9822,6 @@ components:
             the value will not be present if the variable is secure.'
           example: example-value
           type: string
-      required:
-      - value
       type: object
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
@@ -10240,6 +10242,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -10248,6 +10251,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The test public ID.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -11106,24 +11110,18 @@ components:
           $ref: '#/components/schemas/UsageAttributionPagination'
       type: object
     UsageAttributionPagination:
-      description: The page count for the current pagination.
+      description: The metadata for the current pagination.
       properties:
         limit:
           description: Maximum amount of records to be returned.
           format: int64
           type: integer
-        offset:
-          description: Records to be skipped before beginning to return.
-          format: int64
-          type: integer
-        sort_direction:
-          description: Direction to sort by.
-          type: string
-        sort_name:
-          description: Field to sort by.
+        next_record_id:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of this next_record_id.
           type: string
         total_number_of_records:
-          description: Total number of records.
+          description: Total number of records. (deprecated after May 1st, 2021)
           format: int64
           type: integer
       type: object
@@ -23754,7 +23752,7 @@ paths:
         type: safe
   /api/v1/usage/top_avg_metrics:
     get:
-      description: Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
+      description: Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
         by hourly average. Use the month parameter to get a month-to-date data resolution
         or use the day parameter to get a daily resolution. One of the two is required,
         and only one of the two is allowed.
@@ -23795,6 +23793,13 @@ paths:
           maximum: 5000
           minimum: 1
           type: integer
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -23814,7 +23819,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get top custom metrics by hourly average
+      summary: Get all custom metrics by hourly average
       tags:
       - Usage Metering
       x-menu-order: 5
@@ -24690,6 +24695,8 @@ tags:
 
     - [Read more about Custom Check monitors.][4]
 
+    - [Read more about Service Check and status codes.][5]
+
 
     [1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert
 
@@ -24697,7 +24704,9 @@ tags:
 
     [3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert
 
-    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert'
+    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert
+
+    [5]: https://docs.datadoghq.com/developers/service_checks/'
   name: Service Checks
 - description: 'APM Service Map API. For more information, visit
 
