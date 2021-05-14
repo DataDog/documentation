@@ -25,9 +25,7 @@ Assess the configuration of your cloud resources, such as security groups, stora
 
 View your cloud security posture at a higher level level with the [Posture Management][1] page, and drill into the details of findings and analyze historical configurations with [Posture Findings][2].
 
-## Posture Management
 
-View your security posture with respect to Datadog’s OOTB security posture rules at a higher level with the [Home page][2], with links to [findings][2] in more detail.
 
 {{< img src="security_platform/cspm/getting_started/posture-management-home.png" alt="Homepage for CSPM">}}
 
