@@ -14,6 +14,9 @@ further_reading:
     - link: '/infrastructure/livecontainers'
       tag: 'Graphing'
       text: 'Get real-time visibility of all of the containers across your environment'
+    - link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
+      tag: 'Blog'
+      text: 'Correlate software performance and resource consumption with saved views'
 ---
 
 ## Introduction
@@ -24,13 +27,13 @@ Datadog’s Live Processes gives you real-time visibility into the process runni
 * Break down the resource consumption on your hosts and containers at the process level
 * Query for processes running on a specific host, in a specific zone, or running a specific workload
 * Monitor the performance of the internal and third-party software you run using system metrics at two-second granularity
-* Add context to your dashboards and notebooks 
+* Add context to your dashboards and notebooks
 
 {{< img src="infrastructure/process/live_processes_main.png" alt="Live Processes Overview"  >}}
 
 ## Installation
 
-If you are using Agent 5, [follow this specific installation process][1]. If you are using Agent 6 or 7, [see the intructions below][2]. 
+If you are using Agent 5, [follow this specific installation process][1]. If you are using Agent 6 or 7, [see the intructions below][2].
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
@@ -157,7 +160,7 @@ process_config:
 
 ### Scoping processes
 
-Processes are, by nature, extremely high cardinality objects. To refine your scope to view relevant processes, you can use text and tag filters. 
+Processes are, by nature, extremely high cardinality objects. To refine your scope to view relevant processes, you can use text and tag filters.
 
 #### Text filters
 
@@ -235,21 +238,21 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 ## Process monitors
 
-Use the [Live Process Monitor][6] to generate alerts based on the count of any group of processes across hosts or tags. You can configure process alerts in the [Monitors page][7]. To learn more, see our [Live Process Monitor documentation][6]. 
+Use the [Live Process Monitor][6] to generate alerts based on the count of any group of processes across hosts or tags. You can configure process alerts in the [Monitors page][7]. To learn more, see our [Live Process Monitor documentation][6].
 
 {{< img src="infrastructure/process/process_monitor.png" alt="Process Monitor"  style="width:80%;">}}
 
 ## Processes in dashboards and notebooks
 
-You can graph process metrics in dashboards and notebooks using the [Timeseries widget][8]. To configure: 
-1. Select Live Processes as a data source 
-2. Filter using text strings in the search bar 
+You can graph process metrics in dashboards and notebooks using the [Timeseries widget][8]. To configure:
+1. Select Live Processes as a data source
+2. Filter using text strings in the search bar
 3. Select a process metric to graph
 4. Filter using tags in the `From` field
 
 {{< img src="infrastructure/process/process_widget.png" alt="Processes widget"  style="width:80%;">}}
 
-## Monitoring third-party software 
+## Monitoring third-party software
 
 ### Autodetected integrations
 
@@ -264,16 +267,16 @@ Each integration has one of two status types:
 
 Hosts that are running the integration, but where the integration is not enabled, can be found in the **Hosts** tab of the integrations tile.
 
-### Integration views 
+### Integration views
 
 {{< img src="infrastructure/process/integration_views.png" alt="Integration Views" >}}
 
-Once a third-party software has been detected, Live Processes makes it quick and easy to analyze the performance of that software. 
-1. To start, click on *Views* at the top right of the page to open a list of pre-set options, including Ngingx, Redis, and Kafka. 
-2. Select a view to scope the page to only the processes running that software. 
-3. When inspecting a heavy process, shift to the *Integration Metrics* tab to analyze the health of the software on the underlying host. If you have already enabled the relevant Datadog integration, you'll be able to view all performance metrics collected from the integration to distinguish between a host-level and software-level issue. For instance, seeing correlated spikes in process CPU and MySQL query latency may indicate that an intensive operation, such as a full table scan, is delaying the execution of other MySQL queries relying on the same underlying resources. 
+Once a third-party software has been detected, Live Processes makes it quick and easy to analyze the performance of that software.
+1. To start, click on *Views* at the top right of the page to open a list of pre-set options, including Ngingx, Redis, and Kafka.
+2. Select a view to scope the page to only the processes running that software.
+3. When inspecting a heavy process, shift to the *Integration Metrics* tab to analyze the health of the software on the underlying host. If you have already enabled the relevant Datadog integration, you'll be able to view all performance metrics collected from the integration to distinguish between a host-level and software-level issue. For instance, seeing correlated spikes in process CPU and MySQL query latency may indicate that an intensive operation, such as a full table scan, is delaying the execution of other MySQL queries relying on the same underlying resources.
 
-You can customize integration views (for example, when aggregating a query for Nginx processes by host) and other custom queries by clicking the *+Save* button at the top of the page. Doing so will save your query, table column selections, and visualization settings. Create saved views for quick access to the processes you care about without addition configuration, and to share process data with your teammates.  
+You can customize integration views (for example, when aggregating a query for Nginx processes by host) and other custom queries by clicking the *+Save* button at the top of the page. Doing so will save your query, table column selections, and visualization settings. Create saved views for quick access to the processes you care about without addition configuration, and to share process data with your teammates.
 
 ## Processes across the platform
 
@@ -287,9 +290,9 @@ Live Processes adds extra visibility to your container deployments by monitoring
 
 In [APM Traces][10], you can click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the Live Processes page. Related processes are not currently supported for serverless and browser traces.
 
-### Network Performance Monitoring 
+### Network Performance Monitoring
 
-When you inspect a dependency in the [Network Overview][11], you can view processes running on the underlying infrastructure of the endpoints (e.g. services) communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication. 
+When you inspect a dependency in the [Network Overview][11], you can view processes running on the underlying infrastructure of the endpoints (e.g. services) communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
 
 ## Real-time monitoring
 
