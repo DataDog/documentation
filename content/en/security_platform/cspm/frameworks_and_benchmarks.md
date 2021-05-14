@@ -35,7 +35,7 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 
 - To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Security Monitoring][5] and forward [Cloudtrail logs to Datadog][6].
 
-- Datadog CSPM is not designed to ensure compliance with any specific regulatory framework, benchmark, or standard. You are responsible for whether and how security configuration posture findings help your organization meet regulatory requirements and any remediation you implement. Further, Datadog OOTB rules are mapped to a subset of controls related to cloud infrastructure, and not other functions and internal processes that may impact regulatory adherence.
+- Datadog CSPM is designed to provide you with visibility into whether your Resources are configured in accordance with certain Rules. You can create your own Rules and/or utilize Datadog’s OOTB Rules that address various regulatory frameworks, benchmarks, and standards (“Security Posture Frameworks”). Please note that Datadog CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the OOTB Rules may not address all configuration settings that are relevant to the Security Posture Frameworks. To be clear: just because your Resources pass the OOTB Rules does not mean that you are meeting all the requirements under any particular Security Posture Framework. Datadog is not providing legal or compliance advice or guidance, and we recommend that you implement Datadog CSPM in consultation with your legal counsel or compliance experts.
 
 ## Customize how your environment is scanned by each rule
 
