@@ -52,7 +52,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
       datadog:
         addExtension: true
         apiKey: # Your Datadog API Key goes here.
-        apiKMSKey: # If using KMS, your encrypted Datadog API Key goes here (recommended).
     ```
     Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
@@ -63,7 +62,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to add the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to add the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
 ### Install the Datadog CloudFormation macro
 
@@ -87,14 +86,14 @@ Transform:
   - AWS::Serverless-2016-10-31
   - Name: DatadogServerless
     Parameters:
-      pythonLayerVersion: "<LAYER_VERSION>"
       stackName: !Ref "AWS::StackName"
-      forwarderArn: "<FORWARDER_ARN>"
+      nodeLayerVersion: "<LAYER_VERSION>"
+      extensionLayerVersion: "<EXTENSION_VERSION>"
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
 ```
 
-Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the desired version of Datadog Lambda layer (see the [latest releases][4]), and `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
+Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the [desired version][4] of Datadog Lambda Library, and `<EXTENSION_VERSION>` with the [desired version][5] of the Datadog Lambda Extension.
 
 More information and additional parameters can be found in the [macro documentation][1].
 
@@ -103,6 +102,7 @@ More information and additional parameters can be found in the [macro documentat
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-python/releases
+[5]: https://gallery.ecr.aws/datadog/lambda-extension
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -129,7 +129,6 @@ datadog = Datadog(self, "Datadog",
     python_layer_version=<LAYER_VERSION>,
     extension_layer_version=<EXTENSION_LAYER_VERSION>,
     dd_api_key=<DATADOG_API_KEY>,
-    dd_api_kms_key=<ENCRYPTED_DATADOG_API_KEY>, # If using KMS, your encrypted Datadog API key (recommended).
     service=<SERVICE>, # Optional
     env=<ENV>, # Optional
 )
@@ -138,7 +137,7 @@ datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
 
 To fill in the placeholders:
 
-- Replace `<DATADOG_API_KEY>` or `<ENCRYPTED_DATADOG_API_KEY>` your Datadog API key on the [API Management page][3]. 
+- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][3]. 
 - Replace `<SERVICE>` and `<ENV>` with appropriate values.
 - Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][2]).
 - Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][4]).
@@ -166,7 +165,6 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
                 "DD_TRACE_ENABLED": "true",
                 "DD_FLUSH_TO_LOG": "true",
                 "DD_API_KEY": "<DATADOG_API_KEY>",
-                "DD_KMS_API_KEY": "<ENCRYPTED_DATADOG_API_KEY>",
             },
         }
     }
@@ -177,7 +175,7 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 - Replace `<RUNTIME>` with the appropriate Python runtime. The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`.
 - Replace `<LIBRARY_VERSION>` with the [latest Datadog Lambda Library release][1]. 
 - Replace `<EXTENSION_VERSION>` with the [latest Datadog Lambda Extension release][2].
-- Replace `<DATADOG_API_KEY>` or `<ENCRYPTED_DATADOG_API_KEY>` with your Datadog API key on the [API Management page][3]. 
+- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][3]. 
 
 For example:
     ```
@@ -206,7 +204,6 @@ For example:
             "DD_TRACE_ENABLED": "true",
             "DD_FLUSH_TO_LOG": "true",
             "DD_API_KEY": "<DATADOG_API_KEY>",
-            "DD_KMS_API_KEY": "<ENCRYPTED_DATADOG_API_KEY>",
           },
           "layers": ["arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>"],
         }
@@ -215,7 +212,7 @@ For example:
     ```
 2. Replace the following placeholders with appropriate values: 
 
-- Replace `<DATADOG_API_KEY>` or `<ENCRYPTED_DATADOG_API_KEY>` with your Datadog API key on the [API Management page][2]. 
+- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][2]. 
 - Replace `<AWS_REGION>` with the AWS region to which your Lambda functions are deployed.
 - Replace `<EXTENSION_VERSION>` with the [latest Datadog Lambda Extension release][3].
 
@@ -309,7 +306,7 @@ Replace `<TAG>` with either a specific version number (for example, `7`) or with
   - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
   - Set `DD_TRACE_ENABLED` to `true`.
   - Set `DD_FLUSH_TO_LOG` to `true`.
-  - Set `DD_API_KEY` or `DD_KMS_API_KEY` with your Datadog API key on the [API Management page][2]. 
+  - Set `DD_API_KEY` with your Datadog API key on the [API Management page][2]. 
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
 
@@ -367,7 +364,7 @@ For `EXTENSION_VERSION`, see the [latest release][7].
 1. Set your function's handler to `datadog_lambda.handler.handler`.
 2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-4. Set the environment variable `DD_API_KEY` or `DD_KMS_API_KEY` to your Datadog API key on the [API Management page][8]. 
+4. Set the environment variable `DD_API_KEY` to your Datadog API key on the [API Management page][8]. 
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
 
@@ -382,15 +379,24 @@ For `EXTENSION_VERSION`, see the [latest release][7].
 {{% /tab %}}
 {{< /tabs >}}
 
-### Unified service tagging
-
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][2].
-
 ## Explore Datadog serverless monitoring
 
-After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][3].
+After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][2].
 
-## Monitor custom business logic
+### Unified service tagging
+
+Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][3].
+
+### Collect logs from AWS serverless resources
+
+Serverless logs generated by managed resources besides AWS Lambda functions can be hugely valuable in helping identify the root cause of issues in your serverless applications. We recommend you forward logs from the following managed resources in your environment:
+- API's: API Gateway, AppSync, ALB
+- Queues & Streams: SQS, SNS, Kinesis
+- Data Stores: DynamoDB, S3, RDS, etc.
+
+To collect logs from non-Lambda AWS resources, install and configure the [Datadog Forwarder][4] to subscribe to each of your managed resource CloudWatch log groups.
+
+### Monitor custom business logic
 
 If you would like to submit a custom metric or span, see the sample code below:
 
@@ -429,14 +435,15 @@ def get_message():
     return 'Hello from serverless!'
 ```
 
-For more information on custom metric submission, see [here][4]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][5].
+For more information on custom metric submission, see [here][5]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][6].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
-[2]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[3]: https://app.datadoghq.com/functions
-[4]: /serverless/custom_metrics?tab=python
-[5]: /tracing/custom_instrumentation/python/
+[2]: https://app.datadoghq.com/functions
+[3]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[4]: /serverless/libraries_integrations/forwarder
+[5]: /serverless/custom_metrics?tab=python
+[6]: /tracing/custom_instrumentation/python/

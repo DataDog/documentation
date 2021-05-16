@@ -43,7 +43,7 @@ The Datadog Lambda Extension is distributed as its own Lambda Layer (separate fr
     **Note**: This Layer is separate from the Datadog Lambda Library. If you installed the Datadog Lambda Library as a Lambda Layer,
     your function should now have two Lambda Layers attached.
 
-3. Add the environment variable `DD_API_KEY` or `DD_KMS_API_KEY`, and set the value to your Datadog API key on the [API Management page][10]. 
+3. Add the environment variable `DD_API_KEY` and set the value to your Datadog API key on the [API Management page][10]. 
 
 4. Reference the [sample code][11] to submit a custom metric.
 
@@ -61,13 +61,13 @@ COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/
 
 Replace `<TAG>` with either a specific version number (for example, `7`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][9].
 
-3. Add the environment variable `DD_API_KEY` or `DD_KMS_API_KEY`, and set the value to your Datadog API key on the [API Management page][10]. 
+3. Add the environment variable `DD_API_KEY` and set the value to your Datadog API key on the [API Management page][10]. 
 
 4. Reference the [sample code][11] to submit a custom metric.
 
 ## Log collection
 
-To submit your AWS Lambda logs to Datadog using the extension, set the env variable `DD_LOGS_ENABLED` to `true` in your function.
+To disable submission of your AWS Lambda logs to Datadog using the Extension, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false` in your Lambda function.
 
 ## Further Reading
 
