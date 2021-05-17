@@ -33,7 +33,7 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 
 ### 検索クエリ
 
-{{< img src="security_monitoring/detection_rules/threshold.png" alt="検索クエリを定義する" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/threshold.png" alt="検索クエリを定義する" >}}
 
 [ログエクスプローラーでの検索][1]と同じロジックを使用して検索クエリを作成します。
 
@@ -47,19 +47,19 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 
 タイムフレームをまたぐログを結合すると、セキュリティシグナルの信頼性と重大度を強化することができます。たとえば、ブルートフォースアタックを検出するためには、成功した場合と失敗した場合の認証ログをユーザーと関連付ける必要があります。
 
-{{< img src="security_monitoring/detection_rules/joining_queries_define.png" alt="検索クエリを定義"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/joining_queries_define.png" alt="検索クエリを定義"  >}}
 
 検出ルールはグループ化の値をもとにログを結合します。グループ化の値は通常エンティティ (IP アドレス、ユーザーなど) となりますが、必要に応じてすべての属性を使用できます。
 
-{{< img src="security_monitoring/detection_rules/group_by.png" alt="グループ化"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/group_by.png" alt="グループ化"  >}}
 
 検出ルールケースは、グループ化の値に基づいてこれらのクエリを結合します。一致するケースと値が同じでなければならないため、グループ化属性には通常同じ属性が設定されます。グループ化の値が存在しない場合、ケースが一致することはありません。セキュリティシグナルはケースが一致した場合のみ、一意のグループ化値に対して生成されます。
 
-{{< img src="security_monitoring/detection_rules/set_rule_cases2.png" alt="ルールケースを設定"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/set_rule_cases2.png" alt="ルールケースを設定"  >}}
 
 以下の例は、同じ `@usr.name` で 5 回を超えてログインに失敗した場合、および 1 回ログインに成功した場合のケースです。この場合、最初のケースに一致した場合はセキュリティシグナルが生成されます。
 
-{{< img src="security_monitoring/detection_rules/gbv2.png" alt="ルールケースを設定" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/gbv2.png" alt="ルールケースを設定" >}}
 
 [1]: /ja/logs/search_syntax/
 {{% /tab %}}
@@ -68,7 +68,7 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 
 ### 検索クエリ
 
-{{< img src="security_monitoring/detection_rules/new_term.png" alt="検索クエリを定義する" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/new_term.png" alt="検索クエリを定義する" >}}
 
 同じロジックを使用して、[ログエクスプローラー検索][1]で検索クエリを構築します。各クエリには ASCII の小文字でラベルが付与されます。クエリ名を ASCII 文字から変更する場合は、鉛筆アイコンをクリックします。
 
@@ -76,7 +76,7 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 
 #### 学習済みの値
 
-{{< img src="security_monitoring/detection_rules/learning_duration.png" alt="学習済みの値を定義する" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/learning_duration.png" alt="学習済みの値を定義する" >}}
 
 検出する値を選択し、期間を学習し、オプションでシグナルのグループ化を定義します。定義されたグループ化は、値ごとに各グループ化のシグナルを生成します。通常、グループ化はエンティティ (ユーザーや IP など) です。
 
@@ -93,7 +93,7 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 
 ### トリガー
 
-{{< img src="security_monitoring/detection_rules/define_rule_case.png" alt="ルールケースを設定" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/define_rule_case.png" alt="ルールケースを設定" >}}
 
 `a > 3` などのルールケースは、ステートメントとして評価されます。そのため、シグナルは一致した最初のケースに応じて生成されます。順番を変更する場合は、ルールケースをクリックしたままドラッグします。
 
@@ -126,7 +126,7 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 
 {{% tab "新しい条件" %}}
 
-{{< img src="security_monitoring/detection_rules/new_term_rule_case.png" alt="ルールケースを定義する" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/new_term_rule_case.png" alt="ルールケースを定義する" >}}
 
 ### 重大度および通知
 
