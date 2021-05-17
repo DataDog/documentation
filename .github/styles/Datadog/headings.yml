@@ -9,18 +9,23 @@ exceptions:
   - Agent
   - Agents
   - Amazon
+  - Amazon Web Services
   - APIs
   - APM & Distributed Tracing
   - AuthN
   - Autodiscovery
+  - AWS Systems Manager
   - Azure
   - Azure App Service Plan
+  - Azure Event Hub
   - CakePHP
   - Cassandra Nodetool
   - CentOS
   - Chef
   - Clipboard
+  - CloudFormation
   - CloudSQL
+  - CloudTrail
   - CloudWatch
   - Cluster Agent
   - Continuous Profiler
@@ -37,6 +42,7 @@ exceptions:
   - Dockerfile
   - DogStatsD
   - Fargate
+  - Fluentd
   - FreeBSD
   - FreeSwitch
   - Further Reading
@@ -56,11 +62,14 @@ exceptions:
   - IoT
   - IPs
   - Java
+  - JBoss
   - JMXFetch
   - Journald
+  - Kafka
   - Kubernetes
   - Kubernetes Pod
   - Lambda
+  - Lambda Layer
   - LaunchDarkly
   - Linux
   - Live Tail
@@ -93,18 +102,21 @@ exceptions:
   - Puppet
   - Python
   - Python
+  - RabbitMQ
   - Rails
   - Real User Monitoring
   - Red Hat
   - Redis
   - RocketPants
   - Root Cause Analysis
+  - Route53
   - RumMonitor
   - SafeNet
   - Security Monitoring
   - Security Signal
   - Security Signals
   - SELinux
+  - Service Checks
   - Siri
   - Slack
   - SLIs
@@ -113,6 +125,7 @@ exceptions:
   - Social Security
   - SQLDelight
   - SQLite
+  - SQL Server
   - StackStorm
   - StatsD
   - sysOID
@@ -124,8 +137,10 @@ exceptions:
   - Unix Domain Socket
   - URLs
   - User Datagram Protocol
+  - VMWare
   - vSphere
   - Watchdog
   - Watchdog Insights
   - Webhook
+  - WildFly
   - Windows

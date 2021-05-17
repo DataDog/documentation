@@ -33,7 +33,7 @@ Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can
    - If you already receive metrics for a given CloudWatch namespace through the API polling method, Datadog automatically detects this and stops polling metrics for that namespace since you are now streaming them. This could lead to some differences in the specific metric names collected as noted in [Supported Metrics](?tab=cloudformation#supported-metrics).
    - If you later decide you don't want to stream a metric and delete the stream or remove namespaces from it, Datadog automatically starts collecting those metrics using API polling again, according to your configuration settings in the AWS Integration tile.
  
-### Supported Metrics
+### Supported metrics
 Nearly all of the CloudWatch namespaces and metrics that Datadog supports via the API polling approach are also supported via Metric Streams. There are however a couple exceptions.
 
 The following CloudWatch metrics are not currently supported:
