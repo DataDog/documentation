@@ -18,3 +18,7 @@ private: true
     {{< nextlink href="synthetics/guide/popup/" >}}Handling popups in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< whatsnext desc="Cross product" >}}
+    {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross product correlation{{< /nextlink >}}
+{{< /whatsnext >}}
