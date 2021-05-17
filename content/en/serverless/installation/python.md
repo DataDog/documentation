@@ -163,7 +163,7 @@ More information and additional parameters can be found in the [macro documentat
 {{% /tab %}}
 {{% tab "Zappa" %}}
 
-### Update the Zappa settings
+### Update settings
 
 1. Add the following settings to your `zappa_settings.json`:
     ```json
@@ -204,7 +204,7 @@ Subscribe the Datadog Forwarder Lambda function to each of your function’s log
 {{% /tab %}}
 {{% tab "Chalice" %}}
 
-### Update the Chalice project
+### Update the project
 
 1. Set environment variables `DD_TRACE_ENABLED` and `DD_FLUSH_TO_LOG` to `"true"` in your `config.json`:
     ```json
