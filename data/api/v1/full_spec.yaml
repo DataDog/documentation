@@ -13318,6 +13318,9 @@ components:
       description: Custom links help you connect a data value to a URL, like a Datadog
         page or your AWS console.
       properties:
+        is_hidden:
+          description: The flag for toggling context menu link visibility.
+          type: boolean
         label:
           description: The label for the custom link URL. Keep the label short and
             descriptive. Use metrics and tags as variables.
@@ -13328,9 +13331,11 @@ components:
             A relative URL must start with `/`.
           example: https://app.datadoghq.com/logs?query={{host}}
           type: string
-      required:
-      - label
-      - link
+        override_label:
+          description: The label ID that refers to a context menu link. Can be `logs`,
+            `hosts`, `traces`, `profiles`, `processes`, `containers`, or `rum`.
+          example: logs
+          type: string
       type: object
     WidgetDefinition:
       description: '[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).'
