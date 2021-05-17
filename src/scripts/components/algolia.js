@@ -38,7 +38,7 @@ const handleSearchPageRedirect = () => {
     const docsearchInput = document.querySelector('.docssearch-input.ds-input');
 
     if (docsearchInput.value !== '') {
-        window.location = `${baseUrl}/search?s=${docsearchInput.value}`;
+        window.location = `${baseUrl}/search/?s=${docsearchInput.value}`;
     }
 }
 
