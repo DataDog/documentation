@@ -39,7 +39,7 @@ View your cloud security posture at a high level with the [Posture Management][1
 
 {{< img src="security_platform/cspm/getting_started/resource.png" alt="CSPM resource" style="width:65%;">}}
 
-- **Rule**: A rule evaluates the configuration of a resource to validate a particular security best practice. These rules partially or completely, measure adherence to controls. Rules map to multiple controls, requirements, and frameworks.
+- **Rule**: A rule evaluates the configuration of a resource to validate an element related to one or more controls. Rules may map to multiple controls, requirements, and frameworks.
 
 {{< img src="security_platform/cspm/getting_started/rules.png" alt="Rules and frameworks" style="width:100%;">}}
 
