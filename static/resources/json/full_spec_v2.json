@@ -365,6 +365,15 @@
           "type": "string"
         }
       },
+      "SecurityFilterID": {
+        "description": "The ID of the security filter.",
+        "in": "path",
+        "name": "security_filter_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "SecurityMonitoringRuleID": {
         "description": "The ID of the rule.",
         "in": "path",
@@ -22061,6 +22070,994 @@
         "x-enum-varnames": [
           "ROLES"
         ]
+      },
+      "SecurityFilter": {
+        "description": "The security filter's properties.",
+        "properties": {
+          "attributes": {
+            "description": "The object describing a security filter.",
+            "properties": {
+              "exclusion_filters": {
+                "description": "The list of exclusion filters applied in this security filter.",
+                "items": {
+                  "description": "A single exclusion filter.",
+                  "properties": {
+                    "name": {
+                      "description": "The exclusion filter name.",
+                      "example": "Exclude staging",
+                      "type": "string"
+                    },
+                    "query": {
+                      "description": "The exclusion filter query.",
+                      "example": "source:staging",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "filtered_data_type": {
+                "description": "The filtered data type.",
+                "enum": [
+                  "logs"
+                ],
+                "example": "logs",
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOGS"
+                ]
+              },
+              "is_builtin": {
+                "description": "Whether the security filter is the built-in filter.",
+                "example": false,
+                "type": "boolean"
+              },
+              "is_enabled": {
+                "description": "Whether the security filter is enabled.",
+                "example": false,
+                "type": "boolean"
+              },
+              "name": {
+                "description": "The security filter name.",
+                "example": "Custom security filter",
+                "type": "string"
+              },
+              "query": {
+                "description": "The security filter query. Logs accepted by this query will be accepted by this filter.",
+                "example": "service:api",
+                "type": "string"
+              },
+              "version": {
+                "description": "The version of the security filter.",
+                "example": 1,
+                "format": "int32",
+                "maximum": 2147483647,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The ID of the security filter.",
+            "example": "3dd-0uc-h1s",
+            "type": "string"
+          },
+          "type": {
+            "default": "security_filters",
+            "description": "The type of the resource. The value should always be `security_filters`.",
+            "enum": [
+              "security_filters"
+            ],
+            "example": "security_filters",
+            "type": "string",
+            "x-enum-varnames": [
+              "SECURITY_FILTERS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "SecurityFilterAttributes": {
+        "description": "The object describing a security filter.",
+        "properties": {
+          "exclusion_filters": {
+            "description": "The list of exclusion filters applied in this security filter.",
+            "items": {
+              "description": "A single exclusion filter.",
+              "properties": {
+                "name": {
+                  "description": "The exclusion filter name.",
+                  "example": "Exclude staging",
+                  "type": "string"
+                },
+                "query": {
+                  "description": "The exclusion filter query.",
+                  "example": "source:staging",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "filtered_data_type": {
+            "description": "The filtered data type.",
+            "enum": [
+              "logs"
+            ],
+            "example": "logs",
+            "type": "string",
+            "x-enum-varnames": [
+              "LOGS"
+            ]
+          },
+          "is_builtin": {
+            "description": "Whether the security filter is the built-in filter.",
+            "example": false,
+            "type": "boolean"
+          },
+          "is_enabled": {
+            "description": "Whether the security filter is enabled.",
+            "example": false,
+            "type": "boolean"
+          },
+          "name": {
+            "description": "The security filter name.",
+            "example": "Custom security filter",
+            "type": "string"
+          },
+          "query": {
+            "description": "The security filter query. Logs accepted by this query will be accepted by this filter.",
+            "example": "service:api",
+            "type": "string"
+          },
+          "version": {
+            "description": "The version of the security filter.",
+            "example": 1,
+            "format": "int32",
+            "maximum": 2147483647,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityFilterCreateAttributes": {
+        "description": "Object containing the attributes of the security filter to be created.",
+        "properties": {
+          "exclusion_filters": {
+            "description": "Exclusion filters to exclude some logs from the security filter.",
+            "example": [
+              {
+                "name": "Exclude staging",
+                "query": "source:staging"
+              }
+            ],
+            "items": {
+              "description": "Exclusion filter for the security filter.",
+              "example": {
+                "name": "Exclude staging",
+                "query": "source:staging"
+              },
+              "properties": {
+                "name": {
+                  "description": "Exclusion filter name.",
+                  "example": "Exclude staging",
+                  "type": "string"
+                },
+                "query": {
+                  "description": "Exclusion filter query. Logs that match this query are excluded from the security filter.",
+                  "example": "source:staging",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "query"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "filtered_data_type": {
+            "description": "The filtered data type.",
+            "enum": [
+              "logs"
+            ],
+            "example": "logs",
+            "type": "string",
+            "x-enum-varnames": [
+              "LOGS"
+            ]
+          },
+          "is_enabled": {
+            "description": "Whether the security filter is enabled.",
+            "example": true,
+            "type": "boolean"
+          },
+          "name": {
+            "description": "The name of the security filter.",
+            "example": "Custom security filter",
+            "type": "string"
+          },
+          "query": {
+            "description": "The query of the security filter.",
+            "example": "service:api",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "query",
+          "exclusion_filters",
+          "filtered_data_type",
+          "is_enabled"
+        ],
+        "type": "object"
+      },
+      "SecurityFilterCreateData": {
+        "description": "Object for a single security filter.",
+        "properties": {
+          "attributes": {
+            "description": "Object containing the attributes of the security filter to be created.",
+            "properties": {
+              "exclusion_filters": {
+                "description": "Exclusion filters to exclude some logs from the security filter.",
+                "example": [
+                  {
+                    "name": "Exclude staging",
+                    "query": "source:staging"
+                  }
+                ],
+                "items": {
+                  "description": "Exclusion filter for the security filter.",
+                  "example": {
+                    "name": "Exclude staging",
+                    "query": "source:staging"
+                  },
+                  "properties": {
+                    "name": {
+                      "description": "Exclusion filter name.",
+                      "example": "Exclude staging",
+                      "type": "string"
+                    },
+                    "query": {
+                      "description": "Exclusion filter query. Logs that match this query are excluded from the security filter.",
+                      "example": "source:staging",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "query"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "filtered_data_type": {
+                "description": "The filtered data type.",
+                "enum": [
+                  "logs"
+                ],
+                "example": "logs",
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOGS"
+                ]
+              },
+              "is_enabled": {
+                "description": "Whether the security filter is enabled.",
+                "example": true,
+                "type": "boolean"
+              },
+              "name": {
+                "description": "The name of the security filter.",
+                "example": "Custom security filter",
+                "type": "string"
+              },
+              "query": {
+                "description": "The query of the security filter.",
+                "example": "service:api",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "query",
+              "exclusion_filters",
+              "filtered_data_type",
+              "is_enabled"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "security_filters",
+            "description": "The type of the resource. The value should always be `security_filters`.",
+            "enum": [
+              "security_filters"
+            ],
+            "example": "security_filters",
+            "type": "string",
+            "x-enum-varnames": [
+              "SECURITY_FILTERS"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "SecurityFilterCreateRequest": {
+        "description": "Request object that includes the security filter that you would like to create.",
+        "properties": {
+          "data": {
+            "description": "Object for a single security filter.",
+            "properties": {
+              "attributes": {
+                "description": "Object containing the attributes of the security filter to be created.",
+                "properties": {
+                  "exclusion_filters": {
+                    "description": "Exclusion filters to exclude some logs from the security filter.",
+                    "example": [
+                      {
+                        "name": "Exclude staging",
+                        "query": "source:staging"
+                      }
+                    ],
+                    "items": {
+                      "description": "Exclusion filter for the security filter.",
+                      "example": {
+                        "name": "Exclude staging",
+                        "query": "source:staging"
+                      },
+                      "properties": {
+                        "name": {
+                          "description": "Exclusion filter name.",
+                          "example": "Exclude staging",
+                          "type": "string"
+                        },
+                        "query": {
+                          "description": "Exclusion filter query. Logs that match this query are excluded from the security filter.",
+                          "example": "source:staging",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "query"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "filtered_data_type": {
+                    "description": "The filtered data type.",
+                    "enum": [
+                      "logs"
+                    ],
+                    "example": "logs",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "LOGS"
+                    ]
+                  },
+                  "is_enabled": {
+                    "description": "Whether the security filter is enabled.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "The name of the security filter.",
+                    "example": "Custom security filter",
+                    "type": "string"
+                  },
+                  "query": {
+                    "description": "The query of the security filter.",
+                    "example": "service:api",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "query",
+                  "exclusion_filters",
+                  "filtered_data_type",
+                  "is_enabled"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "security_filters",
+                "description": "The type of the resource. The value should always be `security_filters`.",
+                "enum": [
+                  "security_filters"
+                ],
+                "example": "security_filters",
+                "type": "string",
+                "x-enum-varnames": [
+                  "SECURITY_FILTERS"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "SecurityFilterDeleteResponse": {
+        "description": "Response object which only includes the metadata.",
+        "properties": {
+          "meta": {
+            "description": "Optional metadata associated to the response.",
+            "properties": {
+              "warning": {
+                "description": "A warning message.",
+                "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityFilterExclusionFilter": {
+        "description": "Exclusion filter for the security filter.",
+        "example": {
+          "name": "Exclude staging",
+          "query": "source:staging"
+        },
+        "properties": {
+          "name": {
+            "description": "Exclusion filter name.",
+            "example": "Exclude staging",
+            "type": "string"
+          },
+          "query": {
+            "description": "Exclusion filter query. Logs that match this query are excluded from the security filter.",
+            "example": "source:staging",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "query"
+        ],
+        "type": "object"
+      },
+      "SecurityFilterExclusionFilterResponse": {
+        "description": "A single exclusion filter.",
+        "properties": {
+          "name": {
+            "description": "The exclusion filter name.",
+            "example": "Exclude staging",
+            "type": "string"
+          },
+          "query": {
+            "description": "The exclusion filter query.",
+            "example": "source:staging",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityFilterFilteredDataType": {
+        "description": "The filtered data type.",
+        "enum": [
+          "logs"
+        ],
+        "example": "logs",
+        "type": "string",
+        "x-enum-varnames": [
+          "LOGS"
+        ]
+      },
+      "SecurityFilterID": {
+        "description": "The ID of the security filter.",
+        "example": "3dd-0uc-h1s",
+        "type": "string"
+      },
+      "SecurityFilterMeta": {
+        "description": "Optional metadata associated to the response.",
+        "properties": {
+          "warning": {
+            "description": "A warning message.",
+            "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityFilterResponse": {
+        "description": "Response object which includes a single security filter.",
+        "properties": {
+          "data": {
+            "description": "The security filter's properties.",
+            "properties": {
+              "attributes": {
+                "description": "The object describing a security filter.",
+                "properties": {
+                  "exclusion_filters": {
+                    "description": "The list of exclusion filters applied in this security filter.",
+                    "items": {
+                      "description": "A single exclusion filter.",
+                      "properties": {
+                        "name": {
+                          "description": "The exclusion filter name.",
+                          "example": "Exclude staging",
+                          "type": "string"
+                        },
+                        "query": {
+                          "description": "The exclusion filter query.",
+                          "example": "source:staging",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "filtered_data_type": {
+                    "description": "The filtered data type.",
+                    "enum": [
+                      "logs"
+                    ],
+                    "example": "logs",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "LOGS"
+                    ]
+                  },
+                  "is_builtin": {
+                    "description": "Whether the security filter is the built-in filter.",
+                    "example": false,
+                    "type": "boolean"
+                  },
+                  "is_enabled": {
+                    "description": "Whether the security filter is enabled.",
+                    "example": false,
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "The security filter name.",
+                    "example": "Custom security filter",
+                    "type": "string"
+                  },
+                  "query": {
+                    "description": "The security filter query. Logs accepted by this query will be accepted by this filter.",
+                    "example": "service:api",
+                    "type": "string"
+                  },
+                  "version": {
+                    "description": "The version of the security filter.",
+                    "example": 1,
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The ID of the security filter.",
+                "example": "3dd-0uc-h1s",
+                "type": "string"
+              },
+              "type": {
+                "default": "security_filters",
+                "description": "The type of the resource. The value should always be `security_filters`.",
+                "enum": [
+                  "security_filters"
+                ],
+                "example": "security_filters",
+                "type": "string",
+                "x-enum-varnames": [
+                  "SECURITY_FILTERS"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "meta": {
+            "description": "Optional metadata associated to the response.",
+            "properties": {
+              "warning": {
+                "description": "A warning message.",
+                "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityFilterType": {
+        "default": "security_filters",
+        "description": "The type of the resource. The value should always be `security_filters`.",
+        "enum": [
+          "security_filters"
+        ],
+        "example": "security_filters",
+        "type": "string",
+        "x-enum-varnames": [
+          "SECURITY_FILTERS"
+        ]
+      },
+      "SecurityFilterUpdateAttributes": {
+        "description": "The security filters properties to be updated.",
+        "properties": {
+          "exclusion_filters": {
+            "description": "Exclusion filters to exclude some logs from the security filter.",
+            "example": [],
+            "items": {
+              "description": "Exclusion filter for the security filter.",
+              "example": {
+                "name": "Exclude staging",
+                "query": "source:staging"
+              },
+              "properties": {
+                "name": {
+                  "description": "Exclusion filter name.",
+                  "example": "Exclude staging",
+                  "type": "string"
+                },
+                "query": {
+                  "description": "Exclusion filter query. Logs that match this query are excluded from the security filter.",
+                  "example": "source:staging",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "query"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "filtered_data_type": {
+            "description": "The filtered data type.",
+            "enum": [
+              "logs"
+            ],
+            "example": "logs",
+            "type": "string",
+            "x-enum-varnames": [
+              "LOGS"
+            ]
+          },
+          "is_enabled": {
+            "description": "Whether the security filter is enabled.",
+            "example": true,
+            "type": "boolean"
+          },
+          "name": {
+            "description": "The name of the security filter.",
+            "example": "Custom security filter",
+            "type": "string"
+          },
+          "query": {
+            "description": "The query of the security filter.",
+            "example": "service:api",
+            "type": "string"
+          },
+          "version": {
+            "description": "The version of the security filter to update.",
+            "example": 1,
+            "format": "int32",
+            "maximum": 2147483647,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "SecurityFilterUpdateData": {
+        "description": "The new security filter properties.",
+        "properties": {
+          "attributes": {
+            "description": "The security filters properties to be updated.",
+            "properties": {
+              "exclusion_filters": {
+                "description": "Exclusion filters to exclude some logs from the security filter.",
+                "example": [],
+                "items": {
+                  "description": "Exclusion filter for the security filter.",
+                  "example": {
+                    "name": "Exclude staging",
+                    "query": "source:staging"
+                  },
+                  "properties": {
+                    "name": {
+                      "description": "Exclusion filter name.",
+                      "example": "Exclude staging",
+                      "type": "string"
+                    },
+                    "query": {
+                      "description": "Exclusion filter query. Logs that match this query are excluded from the security filter.",
+                      "example": "source:staging",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "query"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "filtered_data_type": {
+                "description": "The filtered data type.",
+                "enum": [
+                  "logs"
+                ],
+                "example": "logs",
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOGS"
+                ]
+              },
+              "is_enabled": {
+                "description": "Whether the security filter is enabled.",
+                "example": true,
+                "type": "boolean"
+              },
+              "name": {
+                "description": "The name of the security filter.",
+                "example": "Custom security filter",
+                "type": "string"
+              },
+              "query": {
+                "description": "The query of the security filter.",
+                "example": "service:api",
+                "type": "string"
+              },
+              "version": {
+                "description": "The version of the security filter to update.",
+                "example": 1,
+                "format": "int32",
+                "maximum": 2147483647,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "security_filters",
+            "description": "The type of the resource. The value should always be `security_filters`.",
+            "enum": [
+              "security_filters"
+            ],
+            "example": "security_filters",
+            "type": "string",
+            "x-enum-varnames": [
+              "SECURITY_FILTERS"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "SecurityFilterUpdateRequest": {
+        "description": "The new security filter body.",
+        "properties": {
+          "data": {
+            "description": "The new security filter properties.",
+            "properties": {
+              "attributes": {
+                "description": "The security filters properties to be updated.",
+                "properties": {
+                  "exclusion_filters": {
+                    "description": "Exclusion filters to exclude some logs from the security filter.",
+                    "example": [],
+                    "items": {
+                      "description": "Exclusion filter for the security filter.",
+                      "example": {
+                        "name": "Exclude staging",
+                        "query": "source:staging"
+                      },
+                      "properties": {
+                        "name": {
+                          "description": "Exclusion filter name.",
+                          "example": "Exclude staging",
+                          "type": "string"
+                        },
+                        "query": {
+                          "description": "Exclusion filter query. Logs that match this query are excluded from the security filter.",
+                          "example": "source:staging",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "query"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "filtered_data_type": {
+                    "description": "The filtered data type.",
+                    "enum": [
+                      "logs"
+                    ],
+                    "example": "logs",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "LOGS"
+                    ]
+                  },
+                  "is_enabled": {
+                    "description": "Whether the security filter is enabled.",
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "The name of the security filter.",
+                    "example": "Custom security filter",
+                    "type": "string"
+                  },
+                  "query": {
+                    "description": "The query of the security filter.",
+                    "example": "service:api",
+                    "type": "string"
+                  },
+                  "version": {
+                    "description": "The version of the security filter to update.",
+                    "example": 1,
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "type": {
+                "default": "security_filters",
+                "description": "The type of the resource. The value should always be `security_filters`.",
+                "enum": [
+                  "security_filters"
+                ],
+                "example": "security_filters",
+                "type": "string",
+                "x-enum-varnames": [
+                  "SECURITY_FILTERS"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "SecurityFiltersResponse": {
+        "description": "All the available security filters objects.",
+        "properties": {
+          "data": {
+            "description": "A list of security filters objects.",
+            "items": {
+              "description": "The security filter's properties.",
+              "properties": {
+                "attributes": {
+                  "description": "The object describing a security filter.",
+                  "properties": {
+                    "exclusion_filters": {
+                      "description": "The list of exclusion filters applied in this security filter.",
+                      "items": {
+                        "description": "A single exclusion filter.",
+                        "properties": {
+                          "name": {
+                            "description": "The exclusion filter name.",
+                            "example": "Exclude staging",
+                            "type": "string"
+                          },
+                          "query": {
+                            "description": "The exclusion filter query.",
+                            "example": "source:staging",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "filtered_data_type": {
+                      "description": "The filtered data type.",
+                      "enum": [
+                        "logs"
+                      ],
+                      "example": "logs",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "LOGS"
+                      ]
+                    },
+                    "is_builtin": {
+                      "description": "Whether the security filter is the built-in filter.",
+                      "example": false,
+                      "type": "boolean"
+                    },
+                    "is_enabled": {
+                      "description": "Whether the security filter is enabled.",
+                      "example": false,
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "description": "The security filter name.",
+                      "example": "Custom security filter",
+                      "type": "string"
+                    },
+                    "query": {
+                      "description": "The security filter query. Logs accepted by this query will be accepted by this filter.",
+                      "example": "service:api",
+                      "type": "string"
+                    },
+                    "version": {
+                      "description": "The version of the security filter.",
+                      "example": 1,
+                      "format": "int32",
+                      "maximum": 2147483647,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "The ID of the security filter.",
+                  "example": "3dd-0uc-h1s",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "security_filters",
+                  "description": "The type of the resource. The value should always be `security_filters`.",
+                  "enum": [
+                    "security_filters"
+                  ],
+                  "example": "security_filters",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "SECURITY_FILTERS"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "meta": {
+            "description": "Optional metadata associated to the response.",
+            "properties": {
+              "warning": {
+                "description": "A warning message.",
+                "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
       },
       "SecurityMonitoringFilter": {
         "description": "The rule's suppression filter.",
@@ -49992,6 +50989,1247 @@
         "x-menu-order": 10,
         "x-undo": {
           "type": "safe"
+        }
+      }
+    },
+    "/api/v2/security_monitoring/configuration/security_filters": {
+      "get": {
+        "description": "Get the list of configured security filters with their definitions.",
+        "operationId": "ListSecurityFilters",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "All the available security filters objects.",
+                  "properties": {
+                    "data": {
+                      "description": "A list of security filters objects.",
+                      "items": {
+                        "description": "The security filter's properties.",
+                        "properties": {
+                          "attributes": {
+                            "description": "The object describing a security filter.",
+                            "properties": {
+                              "exclusion_filters": {
+                                "description": "The list of exclusion filters applied in this security filter.",
+                                "items": {
+                                  "description": "A single exclusion filter.",
+                                  "properties": {
+                                    "name": {
+                                      "description": "The exclusion filter name.",
+                                      "example": "Exclude staging",
+                                      "type": "string"
+                                    },
+                                    "query": {
+                                      "description": "The exclusion filter query.",
+                                      "example": "source:staging",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "filtered_data_type": {
+                                "description": "The filtered data type.",
+                                "enum": [
+                                  "logs"
+                                ],
+                                "example": "logs",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "LOGS"
+                                ]
+                              },
+                              "is_builtin": {
+                                "description": "Whether the security filter is the built-in filter.",
+                                "example": false,
+                                "type": "boolean"
+                              },
+                              "is_enabled": {
+                                "description": "Whether the security filter is enabled.",
+                                "example": false,
+                                "type": "boolean"
+                              },
+                              "name": {
+                                "description": "The security filter name.",
+                                "example": "Custom security filter",
+                                "type": "string"
+                              },
+                              "query": {
+                                "description": "The security filter query. Logs accepted by this query will be accepted by this filter.",
+                                "example": "service:api",
+                                "type": "string"
+                              },
+                              "version": {
+                                "description": "The version of the security filter.",
+                                "example": 1,
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "type": "integer"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "The ID of the security filter.",
+                            "example": "3dd-0uc-h1s",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "security_filters",
+                            "description": "The type of the resource. The value should always be `security_filters`.",
+                            "enum": [
+                              "security_filters"
+                            ],
+                            "example": "security_filters",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "SECURITY_FILTERS"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "description": "Optional metadata associated to the response.",
+                      "properties": {
+                        "warning": {
+                          "description": "A warning message.",
+                          "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get all security filters",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create a security filter.",
+        "operationId": "CreateSecurityFilter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request object that includes the security filter that you would like to create.",
+                "properties": {
+                  "data": {
+                    "description": "Object for a single security filter.",
+                    "properties": {
+                      "attributes": {
+                        "description": "Object containing the attributes of the security filter to be created.",
+                        "properties": {
+                          "exclusion_filters": {
+                            "description": "Exclusion filters to exclude some logs from the security filter.",
+                            "example": [
+                              {
+                                "name": "Exclude staging",
+                                "query": "source:staging"
+                              }
+                            ],
+                            "items": {
+                              "description": "Exclusion filter for the security filter.",
+                              "example": {
+                                "name": "Exclude staging",
+                                "query": "source:staging"
+                              },
+                              "properties": {
+                                "name": {
+                                  "description": "Exclusion filter name.",
+                                  "example": "Exclude staging",
+                                  "type": "string"
+                                },
+                                "query": {
+                                  "description": "Exclusion filter query. Logs that match this query are excluded from the security filter.",
+                                  "example": "source:staging",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "query"
+                              ],
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "filtered_data_type": {
+                            "description": "The filtered data type.",
+                            "enum": [
+                              "logs"
+                            ],
+                            "example": "logs",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "LOGS"
+                            ]
+                          },
+                          "is_enabled": {
+                            "description": "Whether the security filter is enabled.",
+                            "example": true,
+                            "type": "boolean"
+                          },
+                          "name": {
+                            "description": "The name of the security filter.",
+                            "example": "Custom security filter",
+                            "type": "string"
+                          },
+                          "query": {
+                            "description": "The query of the security filter.",
+                            "example": "service:api",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "query",
+                          "exclusion_filters",
+                          "filtered_data_type",
+                          "is_enabled"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "security_filters",
+                        "description": "The type of the resource. The value should always be `security_filters`.",
+                        "enum": [
+                          "security_filters"
+                        ],
+                        "example": "security_filters",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "SECURITY_FILTERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "The definition of the new security filter.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object which includes a single security filter.",
+                  "properties": {
+                    "data": {
+                      "description": "The security filter's properties.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The object describing a security filter.",
+                          "properties": {
+                            "exclusion_filters": {
+                              "description": "The list of exclusion filters applied in this security filter.",
+                              "items": {
+                                "description": "A single exclusion filter.",
+                                "properties": {
+                                  "name": {
+                                    "description": "The exclusion filter name.",
+                                    "example": "Exclude staging",
+                                    "type": "string"
+                                  },
+                                  "query": {
+                                    "description": "The exclusion filter query.",
+                                    "example": "source:staging",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "filtered_data_type": {
+                              "description": "The filtered data type.",
+                              "enum": [
+                                "logs"
+                              ],
+                              "example": "logs",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "LOGS"
+                              ]
+                            },
+                            "is_builtin": {
+                              "description": "Whether the security filter is the built-in filter.",
+                              "example": false,
+                              "type": "boolean"
+                            },
+                            "is_enabled": {
+                              "description": "Whether the security filter is enabled.",
+                              "example": false,
+                              "type": "boolean"
+                            },
+                            "name": {
+                              "description": "The security filter name.",
+                              "example": "Custom security filter",
+                              "type": "string"
+                            },
+                            "query": {
+                              "description": "The security filter query. Logs accepted by this query will be accepted by this filter.",
+                              "example": "service:api",
+                              "type": "string"
+                            },
+                            "version": {
+                              "description": "The version of the security filter.",
+                              "example": 1,
+                              "format": "int32",
+                              "maximum": 2147483647,
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the security filter.",
+                          "example": "3dd-0uc-h1s",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "security_filters",
+                          "description": "The type of the resource. The value should always be `security_filters`.",
+                          "enum": [
+                            "security_filters"
+                          ],
+                          "example": "security_filters",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "SECURITY_FILTERS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "meta": {
+                      "description": "Optional metadata associated to the response.",
+                      "properties": {
+                        "warning": {
+                          "description": "A warning message.",
+                          "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Create a security filter",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-given": {
+          "security_filter": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"data\": {\n    \"type\": \"security_filters\",\n    \"attributes\": {\n      \"name\": \"{{ unique }}\",\n      \"query\": \"service:{{ unique_alnum }}\",\n      \"exclusion_filters\":[\n        {\n          \"name\": \"Exclude logs from staging\",\n          \"query\": \"source:staging\"\n        }\n     ],\n      \"filtered_data_type\":\"logs\",\n      \"is_enabled\": true\n     }\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"security_filter\" in the system"
+          }
+        },
+        "x-undo": {
+          "operationId": "DeleteSecurityFilter",
+          "parameters": [
+            {
+              "name": "security_filter_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/security_monitoring/configuration/security_filters/{security_filter_id}": {
+      "delete": {
+        "description": "Delete a specific security filter.",
+        "operationId": "DeleteSecurityFilter",
+        "parameters": [
+          {
+            "description": "The ID of the security filter.",
+            "in": "path",
+            "name": "security_filter_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object which only includes the metadata.",
+                  "properties": {
+                    "meta": {
+                      "description": "Optional metadata associated to the response.",
+                      "properties": {
+                        "warning": {
+                          "description": "A warning message.",
+                          "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Delete a security filter",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-undo": {
+          "type": "idempotent"
+        }
+      },
+      "get": {
+        "description": "Get the details of a specific security filter.",
+        "operationId": "GetSecurityFilter",
+        "parameters": [
+          {
+            "description": "The ID of the security filter.",
+            "in": "path",
+            "name": "security_filter_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object which includes a single security filter.",
+                  "properties": {
+                    "data": {
+                      "description": "The security filter's properties.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The object describing a security filter.",
+                          "properties": {
+                            "exclusion_filters": {
+                              "description": "The list of exclusion filters applied in this security filter.",
+                              "items": {
+                                "description": "A single exclusion filter.",
+                                "properties": {
+                                  "name": {
+                                    "description": "The exclusion filter name.",
+                                    "example": "Exclude staging",
+                                    "type": "string"
+                                  },
+                                  "query": {
+                                    "description": "The exclusion filter query.",
+                                    "example": "source:staging",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "filtered_data_type": {
+                              "description": "The filtered data type.",
+                              "enum": [
+                                "logs"
+                              ],
+                              "example": "logs",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "LOGS"
+                              ]
+                            },
+                            "is_builtin": {
+                              "description": "Whether the security filter is the built-in filter.",
+                              "example": false,
+                              "type": "boolean"
+                            },
+                            "is_enabled": {
+                              "description": "Whether the security filter is enabled.",
+                              "example": false,
+                              "type": "boolean"
+                            },
+                            "name": {
+                              "description": "The security filter name.",
+                              "example": "Custom security filter",
+                              "type": "string"
+                            },
+                            "query": {
+                              "description": "The security filter query. Logs accepted by this query will be accepted by this filter.",
+                              "example": "service:api",
+                              "type": "string"
+                            },
+                            "version": {
+                              "description": "The version of the security filter.",
+                              "example": 1,
+                              "format": "int32",
+                              "maximum": 2147483647,
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the security filter.",
+                          "example": "3dd-0uc-h1s",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "security_filters",
+                          "description": "The type of the resource. The value should always be `security_filters`.",
+                          "enum": [
+                            "security_filters"
+                          ],
+                          "example": "security_filters",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "SECURITY_FILTERS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "meta": {
+                      "description": "Optional metadata associated to the response.",
+                      "properties": {
+                        "warning": {
+                          "description": "A warning message.",
+                          "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get a security filter",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "patch": {
+        "description": "Update a specific security filter.\nReturns the security filter object when the request is successful.",
+        "operationId": "UpdateSecurityFilter",
+        "parameters": [
+          {
+            "description": "The ID of the security filter.",
+            "in": "path",
+            "name": "security_filter_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "The new security filter body.",
+                "properties": {
+                  "data": {
+                    "description": "The new security filter properties.",
+                    "properties": {
+                      "attributes": {
+                        "description": "The security filters properties to be updated.",
+                        "properties": {
+                          "exclusion_filters": {
+                            "description": "Exclusion filters to exclude some logs from the security filter.",
+                            "example": [],
+                            "items": {
+                              "description": "Exclusion filter for the security filter.",
+                              "example": {
+                                "name": "Exclude staging",
+                                "query": "source:staging"
+                              },
+                              "properties": {
+                                "name": {
+                                  "description": "Exclusion filter name.",
+                                  "example": "Exclude staging",
+                                  "type": "string"
+                                },
+                                "query": {
+                                  "description": "Exclusion filter query. Logs that match this query are excluded from the security filter.",
+                                  "example": "source:staging",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "query"
+                              ],
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "filtered_data_type": {
+                            "description": "The filtered data type.",
+                            "enum": [
+                              "logs"
+                            ],
+                            "example": "logs",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "LOGS"
+                            ]
+                          },
+                          "is_enabled": {
+                            "description": "Whether the security filter is enabled.",
+                            "example": true,
+                            "type": "boolean"
+                          },
+                          "name": {
+                            "description": "The name of the security filter.",
+                            "example": "Custom security filter",
+                            "type": "string"
+                          },
+                          "query": {
+                            "description": "The query of the security filter.",
+                            "example": "service:api",
+                            "type": "string"
+                          },
+                          "version": {
+                            "description": "The version of the security filter to update.",
+                            "example": 1,
+                            "format": "int32",
+                            "maximum": 2147483647,
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "security_filters",
+                        "description": "The type of the resource. The value should always be `security_filters`.",
+                        "enum": [
+                          "security_filters"
+                        ],
+                        "example": "security_filters",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "SECURITY_FILTERS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "New definition of the security filter.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object which includes a single security filter.",
+                  "properties": {
+                    "data": {
+                      "description": "The security filter's properties.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The object describing a security filter.",
+                          "properties": {
+                            "exclusion_filters": {
+                              "description": "The list of exclusion filters applied in this security filter.",
+                              "items": {
+                                "description": "A single exclusion filter.",
+                                "properties": {
+                                  "name": {
+                                    "description": "The exclusion filter name.",
+                                    "example": "Exclude staging",
+                                    "type": "string"
+                                  },
+                                  "query": {
+                                    "description": "The exclusion filter query.",
+                                    "example": "source:staging",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "filtered_data_type": {
+                              "description": "The filtered data type.",
+                              "enum": [
+                                "logs"
+                              ],
+                              "example": "logs",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "LOGS"
+                              ]
+                            },
+                            "is_builtin": {
+                              "description": "Whether the security filter is the built-in filter.",
+                              "example": false,
+                              "type": "boolean"
+                            },
+                            "is_enabled": {
+                              "description": "Whether the security filter is enabled.",
+                              "example": false,
+                              "type": "boolean"
+                            },
+                            "name": {
+                              "description": "The security filter name.",
+                              "example": "Custom security filter",
+                              "type": "string"
+                            },
+                            "query": {
+                              "description": "The security filter query. Logs accepted by this query will be accepted by this filter.",
+                              "example": "service:api",
+                              "type": "string"
+                            },
+                            "version": {
+                              "description": "The version of the security filter.",
+                              "example": 1,
+                              "format": "int32",
+                              "maximum": 2147483647,
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The ID of the security filter.",
+                          "example": "3dd-0uc-h1s",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "security_filters",
+                          "description": "The type of the resource. The value should always be `security_filters`.",
+                          "enum": [
+                            "security_filters"
+                          ],
+                          "example": "security_filters",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "SECURITY_FILTERS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "meta": {
+                      "description": "Optional metadata associated to the response.",
+                      "properties": {
+                        "warning": {
+                          "description": "A warning message.",
+                          "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Concurrent Modification"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Update a security filter",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
         }
       }
     },
