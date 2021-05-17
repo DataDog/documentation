@@ -37,13 +37,13 @@ Navigate to the [Getting Started page][1] to configure your environment for scan
 
 Select `Posture Management`. You can also configure multiple products at once by selecting their checkbox.
 
-### Secure your cloud environment
+### Assess your cloud environment
 
 Detect misconfigurations in your cloud environment. This section guides you through collecting resource configuration data from cloud providers. Resource configuration collection allows Datadog to assess your environments against Datadog’s out-of-the-box [Cloud Configuration rules][2].
 
-### Secure your host and containers
+### Assess your host and containers
 
-Evaluate the security configuration of your hosts and containers. This section guides you through configuring the Datadog Agent to scan your hosts and containers. Our agent allows Datadog to continuously assess the state of your hosts and containers against Datadog’s out-of-the-box [Infrastructure Configuration rules][3].
+Evaluate the security posture of your hosts and containers. This section guides you through configuring the Datadog Agent to scan your hosts and containers. Our agent allows Datadog to continuously assess the state of your hosts and containers against Datadog’s out-of-the-box [Infrastructure Configuration rules][3].
 
 ## Further reading
 
