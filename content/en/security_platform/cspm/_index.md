@@ -25,8 +25,6 @@ Assess the configuration of your cloud resources, such as security groups, stora
 
 View your cloud security posture at a high level with the [Posture Management][1] page, and drill into the details of findings and analyze historical configurations with [Posture Findings][2].
 
-{{< img src="security_platform/cspm/getting_started/posture-management-home.png" alt="Homepage for CSPM">}}
-
 ## Glossary
 
 - **Average security configuration score**: Percentage of your environment that satisfies all of your active [Datadog’s OOTB rules][3]. Formula: `(# of resources with 0 findings) / (total # of resources scanned)`.
@@ -41,7 +39,7 @@ View your cloud security posture at a high level with the [Posture Management][1
 
 - **Rule**: A rule evaluates the configuration of a resource to validate an element related to one or more controls. Rules may map to multiple controls, requirements, and frameworks.
 
-{{< img src="security_platform/cspm/getting_started/rules.png" alt="Rules and frameworks" style="width:100%;">}}
+{{< img src="security_platform/cspm/getting_started/rules.png" alt="Rules and frameworks" style="width:75%;">}}
 
 - **Framework**: A collection of requirements that map to an industry benchmark or regulatory standard.
 
