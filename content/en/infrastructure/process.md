@@ -133,6 +133,9 @@ In order to hide sensitive data on the Live Processes page, the Agent scrubs sen
 
 **Note**: The matching is **case insensitive**.
 
+{{< tabs >}}
+{{% tab "Linux/Windows" %}}
+
 Define your own list to be merged with the default one, using the `custom_sensitive_words` field in `datadog.yaml` file under the `process_config` section. Use wildcards (`*`) to define your own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
 
 ```yaml
@@ -155,6 +158,53 @@ You can also scrub **all** arguments from processes by enabling the `strip_proc_
 process_config:
     strip_proc_arguments: true
 ```
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+You can use the Helm chart to define your own list to be merged with the default one by updating your `datadog-values.yaml` by adding the env variables `DD_SCRUB_ARGS` and `DD_CUSTOM_SENSITIVE_WORDS`, then upgrade your Datadog Helm chart:
+
+```yaml
+datadog:
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
+    agents:
+        containers:
+            processAgent:
+                env:
+                - name: DD_SCRUB_ARGS 
+                  value: "true"
+                - name: DD_CUSTOM_SENSITIVE_WORDS
+                  value: "personal_key,*token,*token,sql*,*pass*d*" 
+```
+
+
+Use wildcards (`*`) to define your own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
+
+Set `DD_SCRUB_ARGS` to `false` to completely disable the process arguments scrubbing.
+
+You can also scrub **all** arguments from processes by enabling the `DD_STRIP_PROCESS_ARGS` variable in your `datadog-values.yaml` configuration file:
+
+```yaml
+datadog:
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
+    agents:
+        containers:
+            processAgent:
+                env:
+                - name: DD_STRIP_PROCESS_ARGS
+                  value: "true" 
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Queries
 
