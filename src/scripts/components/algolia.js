@@ -236,5 +236,6 @@ searchMobile.autocomplete.on('autocomplete:shown', function() {
     if (isApiPage()) {
         enhanceApiResultStyles();
         setApiEndpointAsSubcategory();
+        appendHomeLinkToAutocompleteWidget();
     }
 })
