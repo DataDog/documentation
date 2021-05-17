@@ -186,7 +186,7 @@ Use wildcards (`*`) to define your own matching scope. However, a single wildcar
 
 Set `DD_SCRUB_ARGS` to `false` to completely disable the process arguments scrubbing.
 
-You can also scrub **all** arguments from processes by enabling the `DD_STRIP_PROCESS_ARGS` variable in your `datadog-values.yaml` configuration file:
+Alternatively, you can scrub **all** arguments from processes by enabling the `DD_STRIP_PROCESS_ARGS` variable in your `datadog-values.yaml` file:
 
 ```yaml
 datadog:
