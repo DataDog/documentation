@@ -6495,3 +6495,63 @@ api:
         - ListSecurityMonitoringRules
       unstable: []
       order: 1
+  - name: Update a security filter
+    url: '#update-a-security-filter'
+    identifier: update-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get a security filter
+    url: '#get-a-security-filter'
+    identifier: get-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityFilter
+      unstable: []
+      order: 0
+  - name: Delete a security filter
+    url: '#delete-a-security-filter'
+    identifier: delete-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityFilter
+      unstable: []
+      order: 0
+  - name: Create a security filter
+    url: '#create-a-security-filter'
+    identifier: create-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get all security filters
+    url: '#get-all-security-filters'
+    identifier: get-all-security-filters
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityFilters
+      unstable: []
+      order: 0
