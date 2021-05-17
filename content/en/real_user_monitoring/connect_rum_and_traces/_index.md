@@ -11,6 +11,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/modern-frontend-monitoring/"
     tag: "Blog"
     text: "Start monitoring single-page applications"
+  - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+    tag: 'Guide'
+    text: 'Ease troubleshooting with cross product correlation.'
 ---
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
