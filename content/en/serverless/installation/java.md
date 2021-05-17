@@ -27,9 +27,9 @@ To fully instrument your serverless application with distributed tracing, your J
 
 ## Configuration
 
-### Install the Datadog Lambda Library
+### Install
 
-You can install the Datadog Lambda Library locally by adding one of the following code blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `VERSION` below with the latest release (omitting the preceeding `v`): ![Maven Cental][4]
+Install the Datadog Lambda Library locally by adding one of the following code blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `VERSION` below with the latest release (omitting the preceeding `v`): ![Maven Cental][4]
 {{< tabs >}}
 {{% tab "Maven" %}}
 
@@ -56,7 +56,9 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Instrument the function
+### Instrument
+
+Follow these steps to instrument the function:
 
 1. Install the Datadog Lambda Layer on your function. For `VERSION`, see the latest [release][5]:
 
@@ -89,9 +91,9 @@ dependencies {
     }
     ```
 
-### Subscribe the Datadog Forwarder to the log groups
+### Subscribe
 
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
 2. [Subscribe the Datadog Forwarder to your function's log groups][6].
@@ -107,13 +109,13 @@ To create a Datadog monitor on Java Lambda function cold starts, follow the [mon
 - From: `runtime:java*` and `cold_start:true`
 - Alert Grouping: Multi Alert, trigger a separate alert for each `function_arn`
 
-### Unified service tagging
+### Tag
 
 Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][9].
 
-## Explore Datadog serverless monitoring
+## Explore
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][10].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][10].
 
 ### Monitor custom business logic
 
