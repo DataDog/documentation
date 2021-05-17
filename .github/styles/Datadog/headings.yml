@@ -14,8 +14,10 @@ exceptions:
   - APM & Distributed Tracing
   - AuthN
   - Autodiscovery
+  - AWS Step Functions
   - AWS Systems Manager
   - Azure
+  - Azure App Service
   - Azure App Service Plan
   - Azure Event Hub
   - CakePHP
@@ -34,6 +36,7 @@ exceptions:
   - Datadog
   - Datadog Agent Manager
   - Datadog for Government
+  - Datadog Forwarder
   - Datadog Operator
   - Debian
   - Detection Rules
@@ -70,6 +73,7 @@ exceptions:
   - Kubernetes Pod
   - Lambda
   - Lambda Layer
+  - Lambda@Edge
   - LaunchDarkly
   - Linux
   - Live Tail
@@ -85,6 +89,7 @@ exceptions:
   - Network Device Monitoring
   - Network Performance Monitoring
   - NixOS
+  - Node
   - Notebook
   - Notebook List
   - npm
