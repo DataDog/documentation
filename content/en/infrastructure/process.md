@@ -163,7 +163,7 @@ process_config:
 
 {{% tab "Helm" %}}
 
-You can use the Helm chart to define your own list to be merged with the default one by updating your `datadog-values.yaml` by adding the env variables `DD_SCRUB_ARGS` and `DD_CUSTOM_SENSITIVE_WORDS`, then upgrade your Datadog Helm chart:
+You can use the Helm chart to define your own list, which will be merged with the default one. Add the environment variables `DD_SCRUB_ARGS` and `DD_CUSTOM_SENSITIVE_WORDS` to your `datadog-values.yaml` file, and upgrade your Datadog Helm chart:
 
 ```yaml
 datadog:
