@@ -32,6 +32,7 @@ const { algoliaConfig } = getConfig();
 let algoliaTimer;
 
 const isApiPage = () => document.body.classList.value.includes('api');
+const alogliaApiDocsearchInput = document.getElementById('search-input-api');
 
 const handleSearchPageRedirect = () => {
     const docsearchInput = document.querySelector('.docssearch-input.ds-input');
@@ -41,18 +42,26 @@ const handleSearchPageRedirect = () => {
     }
 }
 
-const appendHomeLinkToAutocompleteWidget = (autocompleteHeaderElement) => {
+const appendHomeLinkToAutocompleteWidget = () => {
+    const headers = document.querySelectorAll('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
+    const autocompleteHeaderElement = headers[0];
     const searchPageLink = document.createElement('a');
+
     searchPageLink.className = "font-regular text-underline pl-2 js-api-search";
     searchPageLink.innerText = 'Click here to search the full docs';
     searchPageLink.href = `${baseUrl}/search/`;
 
-    autocompleteHeaderElement.appendChild(searchPageLink);
+    if (alogliaApiDocsearchInput && alogliaApiDocsearchInput.value !== '') {
+        searchPageLink.href += `?s=${alogliaApiDocsearchInput.value}`;
+    }
+
+    if (autocompleteHeaderElement) {
+        autocompleteHeaderElement.appendChild(searchPageLink)
+    }
 }
 
 const enhanceApiResultStyles = () => {
     const headers = document.querySelectorAll('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
-    appendHomeLinkToAutocompleteWidget(headers[0]);
 
     headers.forEach(header => {
         if (header.textContent.toLowerCase().includes('api')) {
@@ -145,9 +154,11 @@ searchDesktop.autocomplete.on('keyup', function(e) {
 
     if (isApiPage()) {
         const searchLink = document.querySelector('.js-api-search');
-        const searchInput = document.querySelector('.docssearch-input.ds-input');
+        const searchInput = document.getElementById('search-input-api');
 
-        if (searchLink && searchInput) {
+        // The search query's first input character is handled by appendHomeLinkToAutocompleteWidget()
+        // This is because it must be handled during algolia's autocomplete:shown function so we have access to algolia's autocomplete elements.
+        if (searchLink && searchInput && searchInput.length > 1) {
             searchLink.href += !searchLink.href.includes('?') ? `?s=${searchInput.value}` : searchInput.value;
         }
     }
@@ -162,6 +173,7 @@ searchDesktop.autocomplete.on('autocomplete:shown', function() {
     if (isApiPage()) {
         enhanceApiResultStyles();
         setApiEndpointAsSubcategory();
+        appendHomeLinkToAutocompleteWidget();
     }
 })
 
