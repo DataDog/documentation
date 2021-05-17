@@ -243,6 +243,6 @@ If you aim to only analyze explicitly specified categories of logs, be cautious 
 | Web Server Logs       | `source:(nginx* OR apache OR iis)`               |
 
 [1]: /security_platform/detection_rules/security_monitoring
-[2]: /api/v2/security-monitoring/
+[2]: /api/latest/security-monitoring/#get-all-security-filters
 [3]: /api/v1/authentication/
 [4]: https://curl.haxx.se/download.html
