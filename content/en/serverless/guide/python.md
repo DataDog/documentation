@@ -61,11 +61,11 @@ The [Serverless Framework][1] helps you develop and deploy your AWS Lambda funct
 
 The plugin automatically attaches the Datadog Lambda Layers for Node.js and Python to your functions. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Layer.
 
-To install the Datadog Lambda Layer, follow the steps below:  
+To install the Datadog Lambda Layer, follow the steps below:
 
 1. Install the Serverless Plugin in your Python package: `yarn add --dev serverless-plugin-datadog`.  
 
-2. In your `serverless.yml`, add the following:  
+2. In your `serverless.yml`, add the following:
 
 ```bash
 plugins:

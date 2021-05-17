@@ -62,7 +62,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 **Note**: You need to follow these [additional configuration steps][4] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][5].
 
 
-
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
@@ -73,7 +72,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to add the Datadog Lambda library to your functions using layers, and configure your functions to send metrics, traces, and logs to Datadog through the [Datadog Forwarder][2].
 
-### Install the Datadog CloudFormation macro
+### Install
 
 Run the following command with your [AWS credentials][3] to deploy a CloudFormation stack that installs the macro AWS resource. You only need to install the macro once for a given region in your account. Replace `create-stack` with `update-stack` to update the macro to the latest version.
 
@@ -86,7 +85,7 @@ aws cloudformation create-stack \
 
 The macro is now deployed and ready to use.
 
-### Instrument the function
+### Instrument
 
 In your `template.yml`, add the following under the `Transform` section, **after** the `AWS::Serverless` transform for SAM.
 
@@ -122,9 +121,9 @@ The [Datadog CDK Constructs][1] automatically configure ingestion of metrics, tr
 - Enabling the collection of traces and custom metrics from your Lambda functions.
 - Managing subscriptions from the Datadog Forwarder to your Lambda function log groups.
 
-### Install the Datadog CDK Constructs Library
+### Install
 
-Run the following Yarn or NPM command in your CDK project:
+Run the following Yarn or NPM command in your CDK project to install the Datadog CDK Constructs library:
 
 ```sh
 #Yarn
@@ -134,11 +133,9 @@ yarn add --dev datadog-cdk-constructs
 npm install datadog-cdk-constructs --save-dev
 ```
 
-The Datadog CDK Constructs library is now downloaded and ready to use.
+### Instrument
 
-### Instrument the function
-
-Import the `datadog-cdk-construct` module in your AWS CDK app and add the following configurations (this example is TypeScript, but usage in other languages is similar):
+To instrument the function, import the `datadog-cdk-construct` module in your AWS CDK app and add the following configurations (this example is TypeScript, but usage in other languages is similar):
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
@@ -182,7 +179,7 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 
 Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines. The CLI command automatically adds the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog.
 
-### Install the Datadog CLI
+### Install
 
 Install the Datadog CLI with NPM or Yarn:
 
@@ -194,9 +191,9 @@ npm install -g @datadog/datadog-ci
 yarn global add @datadog/datadog-ci
 ```
 
-### Instrument the function
+### Instrument
 
-Run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the desired version of the Datadog Lambda layer (see [latest releases][2]) and `<forwarder_arn>` with Forwarder ARN (see the [Forwarder documentation][3]).
+To instrument the function, run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the desired version of the Datadog Lambda layer (see [latest releases][2]) and `<forwarder_arn>` with Forwarder ARN (see the [Forwarder documentation][3]).
 
 ```sh
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> --forwarder	<forwarder_arn>
@@ -220,7 +217,7 @@ More information and additional parameters can be found in the [CLI documentatio
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
-### Install the Datadog Lambda Library
+### Install
 
 If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda Library as a layer. Instead, you must install the Datadog Lambda Library as a dependency of your function within the image. If you are using Datadog tracing, you must also install `dd-trace`.
 
@@ -232,25 +229,26 @@ npm install --save datadog-lambda-js dd-trace
 
 **Yarn**:
 
-
 ```sh
 yarn add datadog-lambda-js dd-trace
 ```
 
-Note that the minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
+**Note**: The minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
 
-### Configure the function
+### Configure
 
-1. Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
+Follow these steps to configure the function:
+
+1. Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. **Note**: The value set in AWS overrides the value in the Dockerfile if you set both.
 2. Set the following environment variables in AWS:
   - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
   - Set `DD_TRACE_ENABLED` to `true`.
   - Set `DD_FLUSH_TO_LOG` to `true`.
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
-### Subscribe the Datadog Forwarder to the log groups
+### Subscribe
 
-You need to subscribe the Datadog Forwarder Lambda function to each of your functions' log groups in order to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your functions' log groups in order to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][1].
 2. [Subscribe the Datadog Forwarder to your function's log groups][2].
@@ -261,7 +259,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install the Datadog Lambda Library
+### Install
 
 The Datadog Lambda Library can be imported as a layer or JavaScript package.
 
@@ -303,7 +301,9 @@ yarn add datadog-lambda-js
 
 See the [latest release][4].
 
-### Configure the function
+### Configure
+
+Follow these steps to configure the function:
 
 1. Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
 2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
@@ -313,9 +313,9 @@ See the [latest release][4].
 
 **Note**: You need to follow these [additional configuration steps][5] if your Lambda function is simultaneously using Datadog's tracing libraries and [webpack][6].
 
-### Subscribe the Datadog Forwarder to the log groups
+### Subscribe
 
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][7].
 2. [Subscribe the Datadog Forwarder to your function's log groups][8].
@@ -332,13 +332,13 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 {{% /tab %}}
 {{< /tabs >}}
 
-### Unified service tagging
+### Tag
 
 Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][3].
 
-## Explore Datadog serverless monitoring
+## Explore
 
-After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][4].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][4].
 
 ## Monitor custom business logic
 
