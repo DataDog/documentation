@@ -225,6 +225,7 @@ All configuration options below have system property and environment variable eq
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
 
+Note: When using the java tracer’s system properties, make sure that they are listed before `-jar` so they get read in as JVM options.
 
 
 `dd.service`
