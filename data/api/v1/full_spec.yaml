@@ -5192,8 +5192,12 @@ components:
           type: boolean
         escalation_message:
           default: none
-          description: 'A message to include with a re-notification. Supports the
-            `@username` notification we allow elsewhere.
+          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notifications/?tab=is_alert#renotify),
+
+            block in the original message instead.
+
+            A message to include with a re-notification. Supports the `@username`
+            notification we allow elsewhere.
 
             Not applicable if `renotify_interval` is `None`.'
           type: string
