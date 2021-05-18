@@ -1856,21 +1856,26 @@ main:
     parent: cloud_workload_security
     identifier: cws_getting_started
     weight: 301
-  - name: Workload Security Rules
+  - name: Agent Expressions
+    url: security_platform/cloud_workload_security/agent_expressions
+    parent: cloud_workload_security
+    identifier: cws_agent_expressions
+    weight: 302
+  - name: Writing Workload Security Rules
     url: security_platform/cloud_workload_security/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
-    weight: 302
+    weight: 303
   - name: OOTB Rules
     url: security_platform/default_rules#cat-runtime-agent
     parent: cloud_workload_security
     identifier: cws_workload_default_rules
-    weight: 303
+    weight: 304
   - name: Signals Explorer
     url: security_platform/explorer
     parent: cloud_workload_security
     identifier: cws_workload_signals_explorer
-    weight: 304
+    weight: 305
   - name: Security Rules
     url: security_platform/detection_rules/
     parent: security_platform
