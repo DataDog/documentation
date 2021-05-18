@@ -651,7 +651,7 @@ Java APM has minimal impact on the overhead of an application:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/profiler/getting_started/?tab=java
+[1]: /tracing/profiler/enabling/?tab=java
 [2]: /tracing/compatibility_requirements/java
 [3]: https://app.datadoghq.com/apm/docs
 [4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
