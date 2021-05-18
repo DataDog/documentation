@@ -21,15 +21,28 @@ If you have Agent v5 already installed, a script is available to automatically i
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 
-| Platform     | Command                                                                                                                           |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| Amazon Linux | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| CentOS       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Debian       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Fedora       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Red Hat      | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Ubuntu       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| SUSE         | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+
+
+Amazon Linux 
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+CentOS       
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Debian       
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Fedora       
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Red Hat      
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Ubuntu       
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+SUSE         
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box.
 
@@ -76,6 +89,7 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
+    repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -119,11 +133,14 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
+    repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
+
+   **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on CentOS 8.1.
 
 2. Update your local Yum repo and install the Agent:
     ```
@@ -201,6 +218,7 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
+    repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -238,11 +256,14 @@ Find below the manual upgrade instructions for:
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
+    repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
+
+   **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL 8.1.
 
 2. Update your local Yum repo and install the Agent:
     ```
@@ -328,7 +349,7 @@ Find below the manual upgrade instructions for:
   baseurl=https://yum.datadoghq.com/suse/stable/6/x86_64
   type=rpm-md
   gpgcheck=1
-  repo_gpgcheck=0
+  repo_gpgcheck=1
   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -360,6 +381,7 @@ Find below the manual upgrade instructions for:
   sudo systemctl restart datadog-agent.service
   ```
 
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 {{% tab "Windows" %}}
 

@@ -1,0 +1,15 @@
+name: Linting
+on: [pull_request]
+
+jobs:
+  prose:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Vale
+      uses: errata-ai/vale-action@v1.4.0
+      with:
+        onlyAnnotateModifiedLines: true
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

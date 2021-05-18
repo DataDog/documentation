@@ -79,6 +79,13 @@ Use this section to send notifications to your team through Email, Slack, PagerD
 
 Removing the `@notification` from either section removes it from both sections.
 
+### Restrict access
+
+<div class="alert alert-warning">
+RBAC restrict access to monitors is currently in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+
+Use this section to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][9] documentation.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -91,3 +98,4 @@ Removing the `@notification` from either section removes it from both sections.
 [6]: /integrations/disk/
 [7]: /monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notifications/#conditional-variables
+[9]: /account_management/rbac/

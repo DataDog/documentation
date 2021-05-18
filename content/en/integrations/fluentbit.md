@@ -17,6 +17,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/fluentbit-integration-announcement/'
       tag: 'Blog'
       text: 'Centralize your logs with Datadog and Fluent Bit'
+integration_id: "fluentbit"
 ---
 
 ## Overview

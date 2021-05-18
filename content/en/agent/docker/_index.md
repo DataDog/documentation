@@ -30,14 +30,14 @@ further_reading:
 
 ## Overview
 
-The Datadog Docker Agent is the containerized version of the host [Agent][1]. The official [Docker image][2] is available on Docker Hub and GCR.
+The Datadog Docker Agent is the containerized version of the host [Agent][1]. The official [Docker image][2] is available on Docker Hub, GCR and ECR-Public.
 
 Images are available for 64-bit x86 and Arm v8 architectures.
 
-| Docker Hub                                             | GCR                                                             |
-|--------------------------------------------------------|-----------------------------------------------------------------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`          | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
-| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
+| Docker Hub                                             | GCR                                                             |ECR-Public                                                            |
+|--------------------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------|
+| [Agent v6+][2]<br>`docker pull datadog/agent`          | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |[Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          |
+| [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent` |
 
 ## Setup
 
@@ -50,7 +50,13 @@ If you haven’t installed the Docker Agent, follow the [in-app installation ins
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
 
-**Note**: If you're using a different registry besides GCR, make sure to update the image.
+For ECR-public:
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+```
+
+**Note**: If you're using a different registry besides GCR or ECR-public, make sure to update the image.
 
 {{% /tab %}}
 {{% tab "Amazon Linux" %}}
@@ -60,11 +66,21 @@ For Amazon Linux < v2:
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
+For ECR-public:
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+```
 
 For Amazon Linux v2:
 
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+```
+For ECR-public:
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
 {{% /tab %}}
@@ -76,6 +92,12 @@ The Datadog Agent is supported in Windows Server 2019 (LTSC) and version 1909 (S
 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
 ```
 
+For ECR-Public:
+
+```shell
+docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine public.ecr.aws/datadog/agent
+```
+
 {{% /tab %}}
 {{% tab "Unprivileged" %}}
 
@@ -83,6 +105,12 @@ docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:
 
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7 --group-add=<DOCKER_GROUP_ID>
+```
+For ECR-Public:
+
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
 
 {{% /tab %}}
@@ -143,7 +171,7 @@ Send custom metrics with [the StatsD protocol][17]:
 | `DD_HISTOGRAM_AGGREGATES`        | The histogram aggregates to compute (separated by spaces). The default is "max median avg count".                                                          |
 | `DD_DOGSTATSD_SOCKET`            | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
-| `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `["env:golden", "group:retrievers"]`. |
+| `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
 
 Learn more about [DogStatsD over Unix Domain Sockets][18].
 
@@ -235,8 +263,10 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [1]: /agent/
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
+[4]: https://gallery.ecr.aws/datadog/agent
 [4]: https://hub.docker.com/r/datadog/docker-dd-agent
 [5]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
+[6]: https://gallery.ecr.aws/datadog/docker-dd-agent
 [6]: https://app.datadoghq.com/account/settings#agent/docker
 [7]: /agent/basic_agent_usage/#supported-os-versions
 [8]: https://app.datadoghq.com/account/settings#api

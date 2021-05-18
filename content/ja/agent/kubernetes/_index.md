@@ -115,7 +115,7 @@ datadog:
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
+[4]: https://github.com/kubernetes/kube-state-metrics/tree/master/charts/kube-state-metrics
 [5]: /ja/agent/kubernetes/apm?tab=helm
 [6]: /ja/agent/kubernetes/log?tab=helm
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
@@ -145,7 +145,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 2. **Datadog API キーを含むシークレットを作成**: 下の`<DATADOG_API_KEY>` を[組織の API キー][2]に置き換えます。このシークレットはマニフェストで Datadog Agent をデプロイするために使用されます。
 
     ```shell
-    kubectl create secret generic datadog-agent --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
+    kubectl create secret generic datadog-agent --from-literal='api-key=<DATADOG_API_KEY>' --namespace="default"
     ```
 
     **注**: これにより、`default` ネームスペースでシークレットが作成されます。カスタムネームスペースを使用している場合、実行前にコマンドの `namespace` パラメーターを更新します。
@@ -402,7 +402,7 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 | `DD_HISTOGRAM_AGGREGATES`        | 計算するヒストグラムの集計 (スペース区切り)。デフォルトは "max median avg count" です。                                                          |
 | `DD_DOGSTATSD_SOCKET`            | リスニングする Unix ソケットのパス。`rw` でマウントされたボリューム内にある必要があります。                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | UNIX ソケットのメトリクス用にコンテナの検出とタグ付けを有効にします。                                                                                            |
-| `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `["env:golden", "group:retrievers"]` のように追加します。 |
+| `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `"env:golden group:retrievers"` のように追加します。 |
 
 詳しくは、[Unix ドメインソケット上の DogStatsD][10] を参照してください。
 
