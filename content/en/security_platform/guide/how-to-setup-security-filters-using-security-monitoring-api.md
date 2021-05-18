@@ -31,18 +31,15 @@ By default, a single Security Filter exists that analyzes all ingested logs. It'
 **API call:**
 
 ```bash
-
 curl -L -X GET 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security_monitoring/configuration/security_filters' \
 --header 'Content-Type: application/json' \
 --header 'DD-API-KEY: <DATADOG_API_KEY>' \
 --header 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>'
-
 ```
 
 **Response:**
 
 ```json
-
 {
     "data": [
         {
@@ -60,7 +57,6 @@ curl -L -X GET 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v
         }
     ]
 }
-
 ```
 
 In this example, the filter's `id` is `"l6l-rmx-mqx"`. You can then modify it to add an exclusion, for example exclude all the logs tagged with `env:staging`.
@@ -93,7 +89,6 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 **Response:**
 
 ```json
-
 {
     "data": {
         "attributes": {
@@ -114,7 +109,6 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
         "id": "l6l-rmx-mqx"
     }
 }
-
 ```
 
 ### Create a custom Security Filter
@@ -124,7 +118,6 @@ You can also create custom Security Filters in order to restrict analysis to exp
 **API call:**
 
 ```bash
-
 curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security_monitoring/configuration/security_filters' \
 --header 'Content-Type: application/json' \
 --header 'DD-API-KEY: <DATADOG_API_KEY>' \
@@ -141,13 +134,11 @@ curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/
         }
     }
 }'
-
 ```
 
 **Response:**
 
 ```json
-
 {
     "data": {
         "attributes": {
@@ -163,7 +154,6 @@ curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/
         "id": "qa6-tzm-rp7"
     }
 }
-
 ```
 
 Security Filters are inclusive, which means a given log is analyzed **if it matches at least one Security Filter**. If you're aiming to specify a subset of logs to analyze, you likely also would want to disable the default built-in filter named `all ingested logs`. You would do so by setting its `is_enabled` attribute to `false`, as follows:
@@ -171,7 +161,6 @@ Security Filters are inclusive, which means a given log is analyzed **if it matc
 **API call:**
 
 ```bash
-
 curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security_monitoring/configuration/security_filters/l6l-rmx-mqx' \
 --header 'Content-Type: application/json' \
 --header 'DD-API-KEY: <DATADOG_API_KEY>' \
@@ -185,13 +174,11 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
         "type": "security_filters"
     }
 }'
-
 ```
 
 **Response:**
 
 ```json
-
 {
     "data": {
         "attributes": {
@@ -212,7 +199,6 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
         "id": "l6l-rmx-mqx"
     }
 }
-
 ```
 
 ## Key security-relevant tags and attributes
