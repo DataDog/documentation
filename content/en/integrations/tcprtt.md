@@ -11,6 +11,7 @@ categories:
 ddtype: check
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md']
+integration_id: "tcp-rtt"
 ---
 
 ## Overview

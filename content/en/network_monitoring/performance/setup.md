@@ -45,7 +45,7 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 #### Windows OS
 
-Data collection is done using a device driver, and support is available as of Datadog agent version 7.27.0, for Windows versions 2012 and up.
+Data collection is done using a device driver, and support is available as of Datadog agent version 7.27.1, for Windows versions 2012 and up.
 
 #### macOS
 
@@ -63,13 +63,13 @@ With NPM, you can map network communication between containers, pods, and servic
 
 Datadog monitors every aspect of your Istio environment, so you can also:
 
-- Assess the health of Envoy and the Istio control plane with [logs][8].
-- Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][8].
-- Drill into distributed traces for applications transacting over the mesh with [APM][9].
+- Assess the health of Envoy and the Istio control plane with [logs][7].
+- Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][7].
+- Drill into distributed traces for applications transacting over the mesh with [APM][8].
 
 NPM supports Istio v1.6.4+ with [Datadog Agent v7.24.1+][1].
 
-To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][10].
+To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][9].
 
 #### Cilium
 
@@ -81,13 +81,11 @@ Network Performance Monitoring is compatible with **Cilium** installations, prov
 
 Network Performance Monitoring supports use of the following provisioning systems:
 
-- Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][11]
-- Chef 12.7+: See the [Datadog Chef recipe][12]
-- Ansible 2.6+: See the [Datadog Ansible role][13]
+- Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][10]
+- Chef 12.7+: See the [Datadog Chef recipe][11]
+- Ansible 2.6+: See the [Datadog Ansible role][12]
 
 ## Setup
-
-To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][14] based on your system setup.
 
 Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
@@ -123,7 +121,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `systemctl` command is not available on your system, start it with following command instead: `sudo service datadog-agent-sysprobe start` and then set it up to start on boot before `datadog-agent` starts.
 
-5. [Restart the Agent][2]
+5. [Restart the Agent][2].
 
     ```shell
     sudo systemctl restart datadog-agent
@@ -135,7 +133,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
 On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
 
-The Datadog Agent RPM package for CentOS-based systems bundles [an SELinux policy][3] to grant these permissions to the system-probe binary.
+The Datadog Agent RPM package for CentOS-based systems bundles an [SELinux policy][3] to grant these permissions to the system-probe binary.
 
 If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
 
@@ -162,7 +160,7 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
     restorecon -v /opt/datadog-agent/embedded/bin/system-probe
     ```
 
-5. [Restart the Agent][2]
+5. [Restart the Agent][2].
 
 **Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
 
@@ -179,9 +177,9 @@ Data collection for Windows relies on a filter driver for collecting network dat
 
 To enable network performance monitoring for Windows hosts:
 
-1. Install the [Datadog Agent][1] (version 7.27.0 or above) with the network driver component enabled.
+1. Install the [Datadog Agent][1] (version 7.27.1 or above) with the network driver component enabled.
 
-   During installation pass `ADDLOCAL=NPM` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
+   During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
 
 1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -203,6 +201,7 @@ To enable network performance monitoring for Windows hosts:
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 [2]: /agent/guide/agent-commands/#restart-the-agent
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -408,18 +407,16 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [3]: /network_monitoring/performance/network_page#dns-resolution
 [4]: https://docs.datadoghq.com/network_monitoring/performance/setup/?tab=agent#windows-systems
 [5]: https://docs.datadoghq.com/integrations/docker_daemon/
 [6]: https://docs.datadoghq.com/agent/kubernetes/
-[7]: https://docs.datadoghq.com/agent/amazon_ecs/
-[8]: https://docs.datadoghq.com/integrations/istio/
-[9]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
-[10]: https://www.datadoghq.com/blog/istio-datadog/
-[11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[12]: https://github.com/DataDog/chef-datadog
-[13]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[14]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-
+[7]: https://docs.datadoghq.com/integrations/istio/
+[8]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
+[9]: https://www.datadoghq.com/blog/istio-datadog/
+[10]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[11]: https://github.com/DataDog/chef-datadog
+[12]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe

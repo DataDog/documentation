@@ -74,6 +74,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'integration_sdk.md' \
 		-a -not -name 'journald.md' \
 		-a -not -name 'kubernetes.md' \
+		-a -not -name 'kubernetes_state_core.md' \
 		-a -not -name 'nxlog.md' \
 		-a -not -name 'rss.md' \
 		-a -not -name 'rsyslog.md' \
@@ -124,12 +125,24 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/serverless/serverless_integrations/macro.md ;fi
 	@if [ content/en/serverless/serverless_integrations/cli.md ]; then \
 	rm -f content/en/serverless/serverless_integrations/cli.md ;fi
-	@if [ content/en/real_user_monitoring/android.md ]; then \
-	rm -f content/en/real_user_monitoring/android.md ;fi
+	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/android/_index.md ;fi
+	@if [ content/en/real_user_monitoring/android/data_collected.md ]; then \
+	rm -f content/en/real_user_monitoring/android/data_collected.md ;fi
+	@if [ content/en/real_user_monitoring/android/advanced_configuration.md ]; then \
+	rm -f content/en/real_user_monitoring/android/advanced_configuration.md ;fi
+	@if [ content/en/real_user_monitoring/android/troubleshooting.md ]; then \
+	rm -f content/en/real_user_monitoring/android/troubleshooting.md ;fi
+	@if [ content/en/real_user_monitoring/android/integrated_libraries.md ]; then \
+	rm -f content/en/real_user_monitoring/android/integrated_libraries.md ;fi
+	@if [ content/en/real_user_monitoring/error_tracking/android.md ]; then \
+	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
 	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
 	@if [ content/en/real_user_monitoring/ios.md ]; then \
 	rm -f content/en/real_user_monitoring/ios.md ;fi
+	@if [ content/en/real_user_monitoring/reactnative.md ]; then \
+	rm -f content/en/real_user_monitoring/reactnative.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
@@ -232,22 +245,22 @@ EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 
 examples/go: examples/datadog-api-client-go clean-go-examples
 	echo $(EXAMPLES_DIR)
-	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Go code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 examples/java: examples/datadog-api-client-java clean-java-examples
-	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Java code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 examples/python: examples/datadog-api-client-python clean-python-examples
-	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
-	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Ruby code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 

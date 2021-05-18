@@ -24,25 +24,25 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 
 ## Configuration
 
-### Configure the function
+### Install
 
 1. Enable [AWS X-Ray active tracing][3] for your Lambda function.
 2. Install the [AWS X-Ray SDK for .NET][4].
 
-### Subscribe the Datadog Forwarder to the log groups
+### Subscribe
 
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function's log groups to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
 2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
-### Unified service tagging
+### Tag
 
 Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
 
-## Explore Datadog serverless monitoring
+## Explore
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless homepage][7].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][7].
 
 ## Monitor custom business logic
 

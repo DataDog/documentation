@@ -111,8 +111,6 @@ This section describe the minimum setup required in order to forward your Rails 
 
 If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Ruby logging instructions][7] to automatically add trace and span IDs in your logs.
 
-Then [configure the Datadog Agent](#configure-your-datadog-agent) to collect ruby logs from the file.
-
 ### Good logging practices in your application
 
 Now that your logging configuration is sending proper JSON, you should exploit it as much as you can.

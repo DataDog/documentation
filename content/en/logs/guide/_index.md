@@ -47,4 +47,7 @@ private: true
     {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Cross product" >}}
+    {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross product correlation{{< /nextlink >}}
+{{< /whatsnext >}}
 

@@ -1034,10 +1034,10 @@ components:
           type: array
       type: object
     DashboardReflowType:
-      description: 'Reflow type for a multi-size layout dashboard. Set this only when
-        layout type is ''ordered''.
+      description: 'Reflow type for a **new dashboard layout** dashboard. Set this
+        only when layout type is ''ordered''.
 
-        If set to ''fixed'', the dashboard expect all widgets to have a layout, and
+        If set to ''fixed'', the dashboard expects all widgets to have a layout, and
         if it''s set to ''auto'',
 
         widgets should not have layouts.'
@@ -1176,7 +1176,15 @@ components:
         \ a distribution graph\u2019s x-axis is quantity rather than time."
       properties:
         legend_size:
-          $ref: '#/components/schemas/WidgetLegendSize'
+          deprecated: true
+          description: (Deprecated) The widget legend was replaced by a tooltip and
+            sidebar.
+          type: string
+        markers:
+          description: List of markers.
+          items:
+            $ref: '#/components/schemas/WidgetMarker'
+          type: array
         requests:
           description: "Array of one request object to display in the widget.\n\n\
             See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
@@ -1189,7 +1197,9 @@ components:
           minItems: 1
           type: array
         show_legend:
-          description: Whether or not to display the legend on this widget.
+          deprecated: true
+          description: (Deprecated) The widget legend was replaced by a tooltip and
+            sidebar.
           type: boolean
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -1203,6 +1213,10 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/DistributionWidgetDefinitionType'
+        xaxis:
+          $ref: '#/components/schemas/DistributionWidgetXAxis'
+        yaxis:
+          $ref: '#/components/schemas/DistributionWidgetYAxis'
       required:
       - type
       - requests
@@ -1241,6 +1255,51 @@ components:
         style:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
+    DistributionWidgetXAxis:
+      description: X Axis controls for the distribution widget.
+      properties:
+        include_zero:
+          description: True includes zero.
+          type: boolean
+        max:
+          default: auto
+          description: Specifies maximum value to show on the x-axis. It takes a number,
+            percentile (p90 === 90th percentile), or auto for default behavior.
+          type: string
+        min:
+          default: auto
+          description: Specifies minimum value to show on the x-axis. It takes a number,
+            percentile (p90 === 90th percentile), or auto for default behavior.
+          type: string
+        scale:
+          default: linear
+          description: Specifies the scale type. Possible values are `linear`.
+          type: string
+      type: object
+    DistributionWidgetYAxis:
+      description: Y Axis controls for the distribution widget.
+      properties:
+        include_zero:
+          description: True includes zero.
+          type: boolean
+        label:
+          description: The label of the axis to display on the graph.
+          type: string
+        max:
+          default: auto
+          description: Specifies the maximum value to show on the y-axis. It takes
+            a number, or auto for default behavior.
+          type: string
+        min:
+          default: auto
+          description: Specifies minimum value to show on the y-axis. It takes a number,
+            or auto for default behavior.
+          type: string
+        scale:
+          default: linear
+          description: Specifies the scale type. Possible values are `linear` or `log`.
+          type: string
+      type: object
     Downtime:
       description: 'Downtiming gives you greater control over monitor notifications
         by
@@ -1256,6 +1315,8 @@ components:
           example: true
           readOnly: true
           type: boolean
+        active_child:
+          $ref: '#/components/schemas/DowntimeChild'
         canceled:
           description: If a scheduled downtime is canceled.
           example: 1412799983
@@ -1372,6 +1433,136 @@ components:
           nullable: true
           readOnly: true
           type: integer
+      type: object
+    DowntimeChild:
+      description: 'The downtime object definition of the active child for the original
+        parent recurring downtime. This
+
+        field will only exist on recurring downtimes.'
+      nullable: true
+      properties:
+        active:
+          description: If a scheduled downtime currently exists.
+          example: true
+          readOnly: true
+          type: boolean
+        canceled:
+          description: If a scheduled downtime is canceled.
+          example: 1412799983
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        creator_id:
+          description: User ID of the downtime creator.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        disabled:
+          description: If a downtime has been disabled.
+          example: false
+          type: boolean
+        downtime_type:
+          description: '`0` for a downtime applied on `*` or all,
+
+            `1` when the downtime is only scoped to hosts,
+
+            or `2` when the downtime is scoped to anything but hosts.'
+          example: 2
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        end:
+          description: 'POSIX timestamp to end the downtime. If not provided,
+
+            the downtime is in effect indefinitely until you cancel it.'
+          example: 1412793983
+          format: int64
+          nullable: true
+          type: integer
+        id:
+          description: The downtime ID.
+          example: 1626
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          description: 'A message to include with notifications for this downtime.
+
+            Email notifications can be sent to specific users by using the same `@username`
+            notation as events.'
+          example: Message on the downtime
+          type: string
+        monitor_id:
+          description: 'A single monitor to which the downtime applies.
+
+            If not provided, the downtime applies to all monitors.'
+          example: 123456
+          format: int64
+          nullable: true
+          type: integer
+        monitor_tags:
+          description: 'A comma-separated list of monitor tags. For example, tags
+            that are applied directly to monitors,
+
+            not tags that are used in monitor queries (which are filtered by the scope
+            parameter), to which the downtime applies.
+
+            The resulting downtime applies to monitors that match ALL provided monitor
+            tags.
+
+            For example, `service:postgres` **AND** `team:frontend`.'
+          example:
+          - '*'
+          items:
+            description: A monitor tag.
+            type: string
+          type: array
+        parent_id:
+          description: ID of the parent Downtime.
+          example: 123
+          format: int64
+          nullable: true
+          type: integer
+        recurrence:
+          $ref: '#/components/schemas/DowntimeRecurrence'
+        scope:
+          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+
+            Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
+
+            The resulting downtime applies to sources that matches ALL provided scopes
+            (`env:dev` **AND** `env:prod`).'
+          example:
+          - env:staging
+          items:
+            description: A scope. For example, `"env:staging"`.
+            type: string
+          type: array
+        start:
+          description: 'POSIX timestamp to start the downtime.
+
+            If not provided, the downtime starts the moment it is created.'
+          example: 1412792983
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone in which to display the downtime's start and end
+            times in Datadog applications.
+          example: America/New_York
+          type: string
+        updater_id:
+          description: ID of the last user that updated the downtime.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          readOnly: true
+          type: integer
+      readOnly: true
       type: object
     DowntimeRecurrence:
       description: An object defining the recurrence of the downtime.
@@ -2398,11 +2589,23 @@ components:
         your timeboard. Each group has a custom header, can hold one to many graphs,
         and is collapsible.
       properties:
+        background_color:
+          description: Background color of the group title.
+          type: string
+        banner_img:
+          description: URL of image to display as a banner for the group.
+          type: string
         layout_type:
           $ref: '#/components/schemas/WidgetLayoutType'
+        show_title:
+          default: true
+          description: Whether to show the title or not.
+          type: boolean
         title:
           description: Title of the widget.
           type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
         type:
           $ref: '#/components/schemas/GroupWidgetDefinitionType'
         widgets:
@@ -3092,6 +3295,18 @@ components:
         An image can be a PNG, JPG, or animated GIF. Only available on FREE layout
         dashboards.
       properties:
+        has_background:
+          default: true
+          description: Whether to display a background or not.
+          example: true
+          type: boolean
+        has_border:
+          default: true
+          description: Whether to display a border or not.
+          example: true
+          type: boolean
+        horizontal_align:
+          $ref: '#/components/schemas/WidgetHorizontalAlign'
         margin:
           $ref: '#/components/schemas/WidgetMargin'
         sizing:
@@ -3100,8 +3315,14 @@ components:
           $ref: '#/components/schemas/ImageWidgetDefinitionType'
         url:
           description: URL of the image.
-          example: ''
+          example: https://example.com/image.png
           type: string
+        url_dark_theme:
+          description: URL of the image in dark mode.
+          example: https://example.com/image-dark-mode.png
+          type: string
+        vertical_align:
+          $ref: '#/components/schemas/WidgetVerticalAlign'
       required:
       - type
       - url
@@ -3449,6 +3670,51 @@ components:
       type: string
       x-enum-varnames:
       - ATTRIBUTE_REMAPPER
+    LogsByRetention:
+      description: Object containing logs usage data broken down by retention period.
+      properties:
+        orgs:
+          description: Indexed logs usage summary for each organization for each retention
+            period with usage.
+          properties:
+            usage:
+              description: Indexed logs usage summary for each organization.
+              items:
+                $ref: '#/components/schemas/LogsByRetentionOrgUsage'
+              type: array
+          type: object
+        usage:
+          description: Aggregated index logs usage for each retention period with
+            usage.
+          items:
+            $ref: '#/components/schemas/LogsRetentionAggSumUsage'
+          type: array
+        usage_by_month:
+          $ref: '#/components/schemas/LogsByRetentionMonthlyUsage'
+      type: object
+    LogsByRetentionMonthlyUsage:
+      description: Object containing a summary of indexed logs usage by retention
+        period for a single month.
+      properties:
+        date:
+          description: The month for the usage.
+          format: datetime
+          type: string
+        usage:
+          description: Indexed logs usage for each active retention for the month.
+          items:
+            $ref: '#/components/schemas/LogsRetentionSumUsage'
+          type: array
+      type: object
+    LogsByRetentionOrgUsage:
+      description: Indexed logs usage by retention for a single organization.
+      properties:
+        usage:
+          description: Indexed logs usage for each active retention for the organization.
+          items:
+            $ref: '#/components/schemas/LogsRetentionSumUsage'
+          type: array
+      type: object
     LogsCategoryProcessor:
       description: "Use the Category Processor to add a new attribute (without spaces\
         \ or special characters in the new attribute name)\nto a log matching a provided\
@@ -4164,6 +4430,48 @@ components:
           type: integer
       required:
       - aggregation
+      type: object
+    LogsRetentionAggSumUsage:
+      description: Object containing indexed logs usage aggregated across organizations
+        and months for a retention period.
+      properties:
+        logs_indexed_logs_usage_agg_sum:
+          description: Total indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_live_indexed_logs_usage_agg_sum:
+          description: Live indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_logs_usage_agg_sum:
+          description: Rehydrated indexed logs for this retention period.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            periods.
+          type: string
+      type: object
+    LogsRetentionSumUsage:
+      description: Object containing indexed logs usage grouped by retention period
+        and summed.
+      properties:
+        logs_indexed_logs_usage_sum:
+          description: Total indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_live_indexed_logs_usage_sum:
+          description: Live indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_logs_usage_sum:
+          description: Rehydrated indexed logs for this retention period.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            periods.
+          type: string
       type: object
     LogsServiceRemapper:
       description: 'Use this processor if you want to assign one or more attributes
@@ -5486,6 +5794,10 @@ components:
         font_size:
           description: Size of the text.
           type: string
+        has_padding:
+          default: true
+          description: Whether to add padding or not.
+          type: boolean
         show_tick:
           description: Whether to show a tick or not.
           type: boolean
@@ -5498,6 +5810,8 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/NoteWidgetDefinitionType'
+        vertical_align:
+          $ref: '#/components/schemas/WidgetVerticalAlign'
       required:
       - type
       - content
@@ -5511,6 +5825,661 @@ components:
       type: string
       x-enum-varnames:
       - NOTE
+    NotebookAbsoluteTime:
+      description: Absolute timeframe.
+      example:
+        end: '2021-02-24T20:18:28+00:00'
+        start: '2021-02-24T19:18:28+00:00'
+      properties:
+        end:
+          description: The end time.
+          example: '2021-02-24T20:18:28+00:00'
+          format: date-time
+          type: string
+        live:
+          description: Indicates whether the timeframe should be shifted to end at
+            the current time.
+          type: boolean
+        start:
+          description: The start time.
+          example: '2021-02-24T19:18:28+00:00'
+          format: date-time
+          type: string
+      required:
+      - start
+      - end
+    NotebookAuthor:
+      description: Attributes of user object returned by the API.
+      properties:
+        created_at:
+          description: Creation time of the user.
+          format: date-time
+          type: string
+        disabled:
+          description: Whether the user is disabled.
+          type: boolean
+        email:
+          description: Email of the user.
+          type: string
+        handle:
+          description: Handle of the user.
+          type: string
+        icon:
+          description: URL of the user's icon.
+          type: string
+        name:
+          description: Name of the user.
+          type: string
+        status:
+          description: Status of the user.
+          type: string
+        title:
+          description: Title of the user.
+          type: string
+        verified:
+          description: Whether the user is verified.
+          type: boolean
+      type: object
+    NotebookCellCreateRequest:
+      description: The description of a notebook cell create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    NotebookCellCreateRequestAttributes:
+      description: 'The attributes of a notebook cell in create cell request. Valid
+        cell types are `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCellResourceType:
+      default: notebook_cells
+      description: Type of the Notebook Cell resource.
+      enum:
+      - notebook_cells
+      example: notebook_cells
+      type: string
+      x-enum-varnames:
+      - NOTEBOOK_CELLS
+    NotebookCellResponse:
+      description: The description of a notebook cell response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellResponseAttributes'
+        id:
+          description: Notebook cell ID.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookCellResponseAttributes:
+      description: 'The attributes of a notebook cell response. Valid cell types are
+        `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCellTime:
+      description: Timeframe for the notebook cell. When 'null', the notebook global
+        time is used.
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/NotebookRelativeTime'
+      - $ref: '#/components/schemas/NotebookAbsoluteTime'
+      type: object
+    NotebookCellUpdateRequest:
+      description: The description of a notebook cell update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellUpdateRequestAttributes'
+        id:
+          description: Notebook cell ID.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookCellUpdateRequestAttributes:
+      description: 'The attributes of a notebook cell in update cell request. Valid
+        cell types are `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCreateData:
+      description: The data for a notebook create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCreateDataAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    NotebookCreateDataAttributes:
+      description: The data attributes of a notebook.
+      properties:
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookCellCreateRequest'
+          type: array
+        name:
+          description: Notebook name.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      - cells
+      - time
+      type: object
+    NotebookCreateRequest:
+      description: The description of a notebook create request.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookCreateData'
+      required:
+      - data
+      type: object
+    NotebookDistributionCellAttributes:
+      description: The attributes of a notebook distribution cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/DistributionWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookGlobalTime:
+      description: Notebook global timeframe.
+      oneOf:
+      - $ref: '#/components/schemas/NotebookRelativeTime'
+      - $ref: '#/components/schemas/NotebookAbsoluteTime'
+      type: object
+    NotebookGraphSize:
+      description: The size of the graph.
+      enum:
+      - xs
+      - s
+      - m
+      - l
+      - xl
+      type: string
+      x-enum-varnames:
+      - EXTRA_SMALL
+      - SMALL
+      - MEDIUM
+      - LARGE
+      - EXTRA_LARGE
+    NotebookHeatMapCellAttributes:
+      description: The attributes of a notebook heat map cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/HeatMapWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookLogStreamCellAttributes:
+      description: The attributes of a notebook log stream cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/LogStreamWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookMarkdownCellAttributes:
+      description: The attributes of a notebooks markdown cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/NotebookMarkdownCellDefinition'
+      required:
+      - definition
+      type: object
+    NotebookMarkdownCellDefinition:
+      description: Text in a notebook is formatted with [Markdown](https://daringfireball.net/projects/markdown/),
+        which enables the use of headings, subheadings, links, images, lists, and
+        code blocks.
+      properties:
+        text:
+          description: The markdown content.
+          example: "# Example Header \nexample content"
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookMarkdownCellDefinitionType'
+      required:
+      - type
+      - text
+      type: object
+    NotebookMarkdownCellDefinitionType:
+      default: markdown
+      description: Type of the markdown cell.
+      enum:
+      - markdown
+      example: markdown
+      type: string
+      x-enum-varnames:
+      - MARKDOWN
+    NotebookRelativeTime:
+      description: Relative timeframe.
+      example:
+        live_span: 1h
+      properties:
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
+      required:
+      - live_span
+      type: object
+    NotebookResourceType:
+      default: notebooks
+      description: Type of the Notebook resource.
+      enum:
+      - notebooks
+      example: notebooks
+      type: string
+      x-enum-varnames:
+      - NOTEBOOKS
+    NotebookResponse:
+      description: The description of a notebook response.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookResponseData'
+      type: object
+    NotebookResponseData:
+      description: The data for a notebook.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookResponseDataAttributes'
+        id:
+          description: Unique notebook ID, assigned when you create the notebook.
+          example: 123456
+          format: int64
+          readOnly: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookResponseDataAttributes:
+      description: The attributes of a notebook.
+      properties:
+        author:
+          $ref: '#/components/schemas/NotebookAuthor'
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            id: bzbycoya
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            id: 9k6bc6xc
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookCellResponse'
+          type: array
+        created:
+          description: UTC time stamp.
+          example: '2021-02-24T23:14:15.173964+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: UTC time stamp.
+          example: '2021-02-24T23:15:23.274966+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: Notebook name.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - cells
+      - time
+      - name
+      type: object
+    NotebookSplitBy:
+      description: Object describing how to split the graph to display multiple visualizations
+        per request.
+      properties:
+        keys:
+          description: Keys to split on.
+          items:
+            description: A key to split on.
+            example: environment
+            type: string
+          type: array
+        tags:
+          description: Tags to split on.
+          items:
+            description: A tag to split on.
+            example: environment:staging
+            type: string
+          type: array
+      required:
+      - keys
+      - tags
+      type: object
+    NotebookStatus:
+      default: published
+      description: Publication status of the notebook. For now, always "published".
+      enum:
+      - published
+      example: published
+      type: string
+      x-enum-varnames:
+      - PUBLISHED
+    NotebookTimeseriesCellAttributes:
+      description: The attributes of a notebook timeseries cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/TimeseriesWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookToplistCellAttributes:
+      description: The attributes of a notebook toplist cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/ToplistWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookUpdateCell:
+      description: 'Updating a notebook can either insert new cell(s) or update existing
+        cell(s) by including the cell `id`.
+
+        To delete existing cell(s), simply omit it from the list of cells.'
+      oneOf:
+      - $ref: '#/components/schemas/NotebookCellCreateRequest'
+      - $ref: '#/components/schemas/NotebookCellUpdateRequest'
+      type: object
+    NotebookUpdateData:
+      description: The data for a notebook update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookUpdateDataAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    NotebookUpdateDataAttributes:
+      description: The data attributes of a notebook.
+      properties:
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            id: bzbycoya
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            id: 9k6bc6xc
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookUpdateCell'
+          type: array
+        name:
+          description: Notebook name.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      - cells
+      - time
+      type: object
+    NotebookUpdateRequest:
+      description: The description of a notebook update request.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookUpdateData'
+      required:
+      - data
+      type: object
+    NotebooksResponse:
+      description: Notebooks get all response.
+      properties:
+        data:
+          description: List of notebook definitions.
+          items:
+            $ref: '#/components/schemas/NotebookResponseData'
+          type: array
+        meta:
+          description: Metadata returned by the API.
+          properties:
+            page:
+              $ref: '#/components/schemas/NotebooksResponsePage'
+          type: object
+      type: object
+    NotebooksResponsePage:
+      description: Pagination metadata returned by the API.
+      properties:
+        total_count:
+          description: The total number of notebooks that would be returned if the
+            request was not filtered by `start` and `count` parameters.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: The total number of notebooks returned.
+          format: int64
+          type: integer
+      type: object
     Organization:
       description: Create, edit, and manage organizations.
       properties:
@@ -6475,13 +7444,171 @@ components:
             description: The error message.
             type: string
           type: array
+        metadata:
+          description: The metadata object containing additional information about
+            the list of SLOs.
+          properties:
+            page:
+              description: The object containing information about the pages of the
+                list of SLOs.
+              properties:
+                total_count:
+                  description: The total number of resources that could be retrieved
+                    ignoring the parameters and filters in the request.
+                  format: int64
+                  type: integer
+                total_filtered_count:
+                  description: The total number of resources that match the parameters
+                    and filters in the request. This attribute can be used by a client
+                    to determine the total number of pages.
+                  format: int64
+                  type: integer
+              type: object
+          type: object
       type: object
     SLOResponse:
       description: A service level objective response containing a single service
         level objective.
       properties:
         data:
-          $ref: '#/components/schemas/ServiceLevelObjective'
+          description: 'A service level objective object includes a service level
+            indicator, thresholds
+
+            for one or more timeframes, and metadata (`name`, `description`, `tags`,
+            etc.).'
+          properties:
+            configured_alert_ids:
+              description: A list of SLO monitors IDs that reference this SLO. This
+                field is returned only when `with_configured_alert_ids` parameter
+                is true in query.
+              example:
+              - 123
+              - 456
+              - 789
+              items:
+                description: A monitor ID.
+                format: int64
+                type: integer
+              type: array
+            created_at:
+              description: 'Creation timestamp (UNIX time in seconds)
+
+
+                Always included in service level objective responses.'
+              format: int64
+              readOnly: true
+              type: integer
+            creator:
+              $ref: '#/components/schemas/Creator'
+            description:
+              description: 'A user-defined description of the service level objective.
+
+
+                Always included in service level objective responses (but may be `null`).
+
+                Optional in create/update requests.'
+              nullable: true
+              type: string
+            groups:
+              description: 'A list of (up to 20) monitor groups that narrow the scope
+                of a monitor service level objective.
+
+
+                Included in service level objective responses if it is not empty.
+                Optional in
+
+                create/update requests for monitor service level objectives, but may
+                only be
+
+                used when then length of the `monitor_ids` field is one.'
+              example:
+              - env:prod
+              - role:mysql
+              items:
+                description: A group name, for instance `env:prod`.
+                type: string
+              type: array
+            id:
+              description: 'A unique identifier for the service level objective object.
+
+
+                Always included in service level objective responses.'
+              readOnly: true
+              type: string
+            modified_at:
+              description: 'Modification timestamp (UNIX time in seconds)
+
+
+                Always included in service level objective responses.'
+              format: int64
+              readOnly: true
+              type: integer
+            monitor_ids:
+              description: 'A list of monitor ids that defines the scope of a monitor
+                service level
+
+                objective. **Required if type is `monitor`**.'
+              items:
+                description: A monitor ID.
+                format: int64
+                type: integer
+              type: array
+            monitor_tags:
+              description: 'The union of monitor tags for all monitors referenced
+                by the `monitor_ids`
+
+                field.
+
+                Always included in service level objective responses for monitor service
+                level
+
+                objectives (but may be empty). Ignored in create/update requests.
+                Does not
+
+                affect which monitors are included in the service level objective
+                (that is
+
+                determined entirely by the `monitor_ids` field).'
+              items:
+                description: A monitor tag.
+                type: string
+              type: array
+            name:
+              description: The name of the service level objective object.
+              example: Custom Metric SLO
+              type: string
+            query:
+              $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+            tags:
+              description: 'A list of tags associated with this service level objective.
+
+                Always included in service level objective responses (but may be empty).
+
+                Optional in create/update requests.'
+              example:
+              - env:prod
+              - app:core
+              items:
+                description: A tag to apply to your SLO.
+                type: string
+              type: array
+            thresholds:
+              description: 'The thresholds (timeframes and associated targets) for
+                this service level
+
+                objective object.'
+              example:
+              - target: 95
+                timeframe: 7d
+              - target: 95
+                timeframe: 30d
+                warning: 97
+              items:
+                $ref: '#/components/schemas/SLOThreshold'
+              type: array
+            type:
+              $ref: '#/components/schemas/SLOType'
+          type: object
         errors:
           description: 'An array of error messages. Each endpoint documents how/whether
             this field is
@@ -7699,6 +8826,10 @@ components:
     SyntheticsAPIStep:
       description: The steps used in a Synthetics multistep API test.
       properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
         assertions:
           default: []
           description: Array of assertions used for the test.
@@ -7711,6 +8842,12 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
         name:
           description: The name of the step.
           type: string
@@ -7744,6 +8881,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -7752,6 +8890,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID for the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -7997,6 +9136,10 @@ components:
       - recordSome
       - tlsVersion
       - minTlsVersion
+      - latency
+      - packetLossPercentage
+      - packetsReceived
+      - networkHop
       type: string
       x-enum-varnames:
       - BODY
@@ -8009,6 +9152,10 @@ components:
       - RECORD_SOME
       - TLS_VERSION
       - MIN_TLS_VERSION
+      - LATENCY
+      - PACKET_LOSS_PERCENTAGE
+      - PACKETS_RECEIVED
+      - NETWORK_HOP
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       properties:
@@ -8074,6 +9221,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -8082,6 +9230,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID of the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -8113,6 +9262,10 @@ components:
           type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
+        setCookie:
+          description: Cookies to be used for the request, using the [Set-Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+            syntax.
+          type: string
         variables:
           description: Array of variables used for the test steps.
           items:
@@ -8359,6 +9512,7 @@ components:
           type: object
       required:
       - public_id
+      type: object
     SyntheticsCITestBody:
       description: Object describing the synthetics tests to trigger.
       properties:
@@ -8668,8 +9822,7 @@ components:
             the value will not be present if the variable is secure.'
           example: example-value
           type: string
-      required:
-      - value
+      type: object
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
       properties:
@@ -9070,7 +10223,6 @@ components:
             $ref: '#/components/schemas/SyntheticsBrowserVariable'
           type: array
       required:
-      - request
       - assertions
       type: object
     SyntheticsTestDetails:
@@ -9090,6 +10242,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -9098,6 +10251,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The test public ID.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -9120,13 +10274,14 @@ components:
     SyntheticsTestDetailsSubType:
       description: 'The subtype of the Synthetic API test, `http`, `ssl`, `tcp`,
 
-        `dns` or `multi`.'
+        `dns`, `icmp` or `multi`.'
       enum:
       - http
       - ssl
       - tcp
       - dns
       - multi
+      - icmp
       type: string
       x-enum-varnames:
       - HTTP
@@ -9134,6 +10289,7 @@ components:
       - TCP
       - DNS
       - MULTI
+      - ICMP
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -9185,8 +10341,7 @@ components:
             $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         disableCors:
-          description: Whether or not to disable CORS mechanism. Currently only available
-            for Chrome.
+          description: Whether or not to disable CORS mechanism.
           type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
@@ -9282,6 +10437,12 @@ components:
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
+        dnsServerPort:
+          description: DNS server port to use for DNS tests.
+          format: int32
+          maximum: 65535
+          minimum: 1
+          type: integer
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
@@ -9292,6 +10453,12 @@ components:
         noSavingResponseBody:
           description: Determines whether or not to save the response body.
           type: boolean
+        numberOfPackets:
+          description: Number of pings to use per test.
+          format: int32
+          maximum: 10
+          minimum: 0
+          type: integer
         port:
           description: Port to use when performing the test.
           format: int64
@@ -9299,6 +10466,10 @@ components:
         query:
           description: Query to use for the test.
           type: object
+        shouldTrackHops:
+          description: Turns on a traceroute probe to discover all gateways along
+            the path to the host destination.
+          type: boolean
         timeout:
           description: Timeout in seconds for the test.
           format: double
@@ -9331,6 +10502,7 @@ components:
     SyntheticsTickInterval:
       description: The frequency at which to run the Synthetic test (in seconds).
       enum:
+      - 30
       - 60
       - 300
       - 900
@@ -9343,6 +10515,7 @@ components:
       format: int64
       type: integer
       x-enum-varnames:
+      - THIRTY_SECONDS
       - MINUTE
       - FIVE_MINUTES
       - FIFTEEN_MINUTES
@@ -9937,24 +11110,18 @@ components:
           $ref: '#/components/schemas/UsageAttributionPagination'
       type: object
     UsageAttributionPagination:
-      description: The page count for the current pagination.
+      description: The metadata for the current pagination.
       properties:
         limit:
           description: Maximum amount of records to be returned.
           format: int64
           type: integer
-        offset:
-          description: Records to be skipped before beginning to return.
-          format: int64
-          type: integer
-        sort_direction:
-          description: Direction to sort by.
-          type: string
-        sort_name:
-          description: Field to sort by.
+        next_record_id:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of this next_record_id.
           type: string
         total_number_of_records:
-          description: Total number of records.
+          description: Total number of records. (deprecated after May 1st, 2021)
           format: int64
           type: integer
       type: object
@@ -10019,6 +11186,70 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - LAMBDA_USAGE
       - LAMBDA_PERCENTAGE
+    UsageAttributionSupportedMetrics:
+      description: Supported fields for usage attribution requests (valid requests
+        contain one or more metrics, or `*` for all).
+      enum:
+      - custom_timeseries_usage
+      - container_usage
+      - snmp_percentage
+      - apm_host_usage
+      - browser_usage
+      - npm_host_percentage
+      - infra_host_usage
+      - custom_timeseries_percentage
+      - container_percentage
+      - lambda_usage
+      - api_usage
+      - apm_host_percentage
+      - infra_host_percentage
+      - snmp_usage
+      - browser_percentage
+      - api_percentage
+      - lambda_percentage
+      - npm_host_usage
+      - lambda_functions_usage
+      - lambda_functions_percentage
+      - lambda_invocations_usage
+      - lambda_invocations_percentage
+      - fargate_usage
+      - fargate_percentage
+      - profiled_host_usage
+      - profiled_host_percentage
+      - profiled_container_usage
+      - profiled_container_percentage
+      - '*'
+      type: string
+      x-enum-varnames:
+      - CUSTOM_TIMESERIES_USAGE
+      - CONTAINER_USAGE
+      - SNMP_PERCENTAGE
+      - APM_HOST_USAGE
+      - BROWSER_USAGE
+      - NPM_HOST_PERCENTAGE
+      - INFRA_HOST_USAGE
+      - CUSTOM_TIMESERIES_PERCENTAGE
+      - CONTAINER_PERCENTAGE
+      - LAMBDA_USAGE
+      - API_USAGE
+      - APM_HOST_PERCENTAGE
+      - INFRA_HOST_PERCENTAGE
+      - SNMP_USAGE
+      - BROWSER_PERCENTAGE
+      - API_PERCENTAGE
+      - LAMBDA_PERCENTAGE
+      - NPM_HOST_USAGE
+      - LAMBDA_FUNCTIONS_USAGE
+      - LAMBDA_FUNCTIONS_PERCENTAGE
+      - LAMBDA_INVOCATIONS_USAGE
+      - LAMBDA_INVOCATIONS_PERCENTAGE
+      - FARGATE_USAGE
+      - FARGATE_PERCENTAGE
+      - PROFILED_HOST_USAGE
+      - PROFILED_HOST_PERCENTAGE
+      - PROFILED_CONTAINER_USAGE
+      - PROFILED_CONTAINER_PERCENTAGE
+      - ALL
     UsageAttributionTagNames:
       additionalProperties:
         description: A list of tag values.
@@ -10116,6 +11347,22 @@ components:
           type: number
         npm_host_usage:
           description: The network host usage by tag(s).
+          format: double
+          type: number
+        profiled_containers_percentage:
+          description: The percentage of profiled containers usage by tag(s).
+          format: double
+          type: number
+        profiled_containers_usage:
+          description: The profiled container usage by tag(s).
+          format: double
+          type: number
+        profiled_hosts_percentage:
+          description: The percentage of profiled hosts usage by tag(s).
+          format: double
+          type: number
+        profiled_hosts_usage:
+          description: The profiled host usage by tag(s).
           format: double
           type: number
         snmp_percentage:
@@ -10433,6 +11680,13 @@ components:
             for the OpenTelemetry Collector.
           format: int64
           type: integer
+        vsphere_host_count:
+          description: 'Contains the total number of hosts that reported via vSphere
+            integration
+
+            (and were NOT running the Datadog Agent).'
+          format: int64
+          type: integer
       type: object
     UsageHostsResponse:
       description: Host usage response.
@@ -10520,8 +11774,7 @@ components:
           format: date-time
           type: string
         iot_device_count:
-          description: The total number of IoT device hours from the start of the
-            given hour's month until the given hour.
+          description: The total number of IoT devices during a given hour.
           format: int64
           type: integer
       type: object
@@ -10597,6 +11850,40 @@ components:
             response.
           items:
             $ref: '#/components/schemas/UsageLogsByIndexHour'
+          type: array
+      type: object
+    UsageLogsByRetentionHour:
+      description: The number of indexed logs for each hour for a given organization
+        broken down by retention period.
+      properties:
+        indexed_events_count:
+          description: Total logs indexed with this retention period during a given
+            hour.
+          format: int64
+          type: integer
+        live_indexed_events_count:
+          description: Live logs indexed with this retention period during a given
+            hour.
+          format: int64
+          type: integer
+        rehydrated_indexed_events_count:
+          description: Rehydrated logs indexed with this retention period during a
+            given hour.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            usage.
+          type: string
+      type: object
+    UsageLogsByRetentionResponse:
+      description: Response containing the indexed logs usage broken down by retention
+        period for an organization during a given hour.
+      properties:
+        usage:
+          description: Get hourly usage for indexed logs by retention period.
+          items:
+            $ref: '#/components/schemas/UsageLogsByRetentionHour'
           type: array
       type: object
     UsageLogsHour:
@@ -10961,7 +12248,7 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
-        heroku_host_top99p_sum:
+        heroku_host_top99p:
           description: Shows the 99th percentile of all Heroku dynos over all hours
             in the current date for all organizations.
           format: int64
@@ -10986,12 +12273,12 @@ components:
             current date for all organizations.
           format: int64
           type: integer
-        iot_device_agg_sum:
+        iot_device_sum:
           description: Shows the sum of all IoT devices over all hours in the current
             date for all organizations.
           format: int64
           type: integer
-        iot_device_top99p_sum:
+        iot_device_top99p:
           description: Shows the 99th percentile of all IoT devices over all hours
             in the current date all organizations.
           format: int64
@@ -11021,7 +12308,7 @@ components:
             all hours in the current date for all organizations.
           format: int64
           type: integer
-        opentelemetry_host_top99p_sum:
+        opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
             date for all organizations.
@@ -11065,6 +12352,11 @@ components:
         twol_ingested_events_bytes_sum:
           description: Shows the sum of all tracing without limits bytes ingested
             over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        vsphere_host_top99p:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
       type: object
@@ -11259,6 +12551,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        vsphere_host_top99p:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
       type: object
     UsageSummaryResponse:
       description: Response with hourly report of all data billed by Datadog all organizations.
@@ -11403,6 +12700,8 @@ components:
             1, 2020).
           format: int64
           type: integer
+        logs_by_retention:
+          $ref: '#/components/schemas/LogsByRetention'
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current months for all organizations.
@@ -11496,6 +12795,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDate'
           type: array
+        vsphere_host_top99p_sum:
+          description: Shows the 99th percentile of all vSphere hosts over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
       type: object
     UsageSyntheticsAPIHour:
       description: Number of Synthetics API tests run for each hour for a given organization.
@@ -11871,11 +13175,11 @@ components:
           type: string
       type: object
     Widget:
-      description: 'Information about widget.
-
-
-        Note: The `layout` property is required for widgets in dashboards with `free`
-        `layout_type` only.'
+      description: "Information about widget.\n\n**Note**: The `layout` property is\
+        \ required for widgets in dashboards with `free` `layout_type`.\n      For\
+        \ the **new dashboard layout**, the `layout` property depends on the `reflow_type`\
+        \ of the dashboard.\n      - If `reflow_type` is `fixed`, `layout` is required.\n\
+        \      - If `reflow_type` is `auto`, `layout` should not be set."
       properties:
         definition:
           $ref: '#/components/schemas/WidgetDefinition'
@@ -12014,6 +13318,9 @@ components:
       description: Custom links help you connect a data value to a URL, like a Datadog
         page or your AWS console.
       properties:
+        is_hidden:
+          description: The flag for toggling context menu link visibility.
+          type: boolean
         label:
           description: The label for the custom link URL. Keep the label short and
             descriptive. Use metrics and tags as variables.
@@ -12024,9 +13331,11 @@ components:
             A relative URL must start with `/`.
           example: https://app.datadoghq.com/logs?query={{host}}
           type: string
-      required:
-      - label
-      - link
+        override_label:
+          description: The label ID that refers to a context menu link. Can be `logs`,
+            `hosts`, `traces`, `profiles`, `processes`, `containers`, or `rum`.
+          example: logs
+          type: string
       type: object
     WidgetDefinition:
       description: '[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).'
@@ -12140,19 +13449,44 @@ components:
       x-enum-varnames:
       - CHECK
       - CLUSTER
-    WidgetImageSizing:
-      description: How to size the image on the widget.
+    WidgetHorizontalAlign:
+      description: Horizontal alignment.
       enum:
+      - center
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - CENTER
+      - LEFT
+      - RIGHT
+    WidgetImageSizing:
+      description: 'How to size the image on the widget. The values are based on the
+        image `object-fit` CSS properties.
+
+        **Note**: `zoom`, `fit` and `center` values are deprecated.'
+      enum:
+      - fill
+      - contain
+      - cover
+      - none
+      - scale-down
       - zoom
       - fit
       - center
       type: string
       x-enum-varnames:
+      - FILL
+      - CONTAIN
+      - COVER
+      - NONE
+      - SCALEDOWN
       - ZOOM
       - FIT
       - CENTER
     WidgetLayout:
-      description: The layout for a widget on a free dashboard.
+      description: The layout for a widget on a `free` or **new dashboard layout**
+        dashboard.
       properties:
         height:
           description: The height of the widget. Should be a non-negative integer.
@@ -12160,6 +13494,13 @@ components:
           format: int64
           minimum: 0
           type: integer
+        is_column_break:
+          description: 'Whether the widget should be the first one on the second column
+            in high density or not.
+
+            **Note**: Only for the **new dashboard layout** and only one widget in
+            the dashboard should have this property set to `true`.'
+          type: boolean
         width:
           description: The width of the widget. Should be a non-negative integer.
           example: 0
@@ -12255,12 +13596,20 @@ components:
       - PAST_ONE_YEAR
       - ALERT
     WidgetMargin:
-      description: Size of the margins around the image.
+      description: 'Size of the margins around the image.
+
+        **Note**: `small` and `large` values are deprecated.'
       enum:
+      - sm
+      - md
+      - lg
       - small
       - large
       type: string
       x-enum-varnames:
+      - SM
+      - MD
+      - LG
       - SMALL
       - LARGE
     WidgetMarker:
@@ -12269,7 +13618,8 @@ components:
       properties:
         display_type:
           description: "Combination of:\n  - A severity error, warning, ok, or info\n\
-            \  - A line type: dashed, solid, or bold\n"
+            \  - A line type: dashed, solid, or bold\nIn this case of a Distribution\
+            \ widget, this can be set to be `x_axis_percentile`.\n"
           example: error dashed
           type: string
         label:
@@ -12519,6 +13869,17 @@ components:
       - MONTH_TO_DATE
       - PREVIOUS_MONTH
       - GLOBAL_TIME
+    WidgetVerticalAlign:
+      description: Vertical alignment.
+      enum:
+      - center
+      - top
+      - bottom
+      type: string
+      x-enum-varnames:
+      - CENTER
+      - TOP
+      - BOTTOM
     WidgetViewMode:
       description: Define how you want the SLO to be displayed.
       enum:
@@ -12618,6 +13979,7 @@ paths:
       summary: List IP Ranges
       tags:
       - IP Ranges
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/api_key:
@@ -12640,6 +14002,7 @@ paths:
       summary: Get all API keys
       tags:
       - Key Management
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -12674,6 +14037,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -12719,6 +14083,7 @@ paths:
       summary: Delete an API key
       tags:
       - Key Management
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -12753,6 +14118,7 @@ paths:
       summary: Get API key
       tags:
       - Key Management
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -12800,6 +14166,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/application_key:
@@ -12822,6 +14189,7 @@ paths:
       summary: Get all application keys
       tags:
       - Key Management
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -12862,6 +14230,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         operationId: DeleteApplicationKey
         parameters:
@@ -12901,6 +14270,7 @@ paths:
       summary: Delete an application key
       tags:
       - Key Management
+      x-menu-order: 10
       x-undo:
         type: idempotent
     get:
@@ -12935,6 +14305,7 @@ paths:
       summary: Get an application key
       tags:
       - Key Management
+      x-menu-order: 8
       x-undo:
         type: safe
     put:
@@ -12988,6 +14359,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 9
       x-undo:
         type: idempotent
   /api/v1/check_run:
@@ -13041,6 +14413,7 @@ paths:
       tags:
       - Service Checks
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/daily_custom_reports:
@@ -13091,6 +14464,7 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
+      x-menu-order: 20
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -13129,6 +14503,7 @@ paths:
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
+      x-menu-order: 21
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -13143,6 +14518,15 @@ paths:
 
         This query will not return preset dashboards.'
       operationId: ListDashboards
+      parameters:
+      - description: 'When `true`, this query only returns shared custom created
+
+          or cloned dashboards.'
+        in: query
+        name: filter[shared]
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -13159,6 +14543,7 @@ paths:
       summary: Get all dashboards
       tags:
       - Dashboards
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -13199,6 +14584,13 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-given:
+        dashboard:
+          parameters:
+          - file: dashboard_payload.json
+            name: body
+          step: there is a valid "dashboard" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteDashboard
         parameters:
@@ -13225,6 +14617,7 @@ paths:
       summary: Get all dashboard lists
       tags:
       - Dashboard Lists
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -13260,6 +14653,7 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteDashboardList
         parameters:
@@ -13300,6 +14694,7 @@ paths:
       summary: Delete a dashboard list
       tags:
       - Dashboard Lists
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -13335,6 +14730,7 @@ paths:
       summary: Get a dashboard list
       tags:
       - Dashboard Lists
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -13384,6 +14780,7 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/dashboard/public:
@@ -13433,6 +14830,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -13473,6 +14871,7 @@ paths:
       summary: Revoke a shared dashboard URL
       tags:
       - Dashboards
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -13509,6 +14908,7 @@ paths:
       summary: Get a shared dashboard
       tags:
       - Dashboards
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -13573,6 +14973,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -13620,6 +15021,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
     get:
@@ -13669,6 +15071,7 @@ paths:
       summary: Get all invitations for a shared dashboard
       tags:
       - Dashboards
+      x-menu-order: 5
       x-undo:
         type: safe
     post:
@@ -13726,6 +15129,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -13765,6 +15169,7 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -13799,6 +15204,7 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -13847,6 +15253,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/downtime:
@@ -13878,6 +15285,7 @@ paths:
       summary: Get all downtimes
       tags:
       - Downtimes
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -13913,6 +15321,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: TODO
         parameters: []
@@ -13957,6 +15366,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
@@ -13990,6 +15400,7 @@ paths:
       summary: Cancel a downtime
       tags:
       - Downtimes
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -14026,6 +15437,7 @@ paths:
       summary: Get a downtime
       tags:
       - Downtimes
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -14077,6 +15489,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/events:
@@ -14087,7 +15500,8 @@ paths:
         `,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most\
         \ recent results. To return additional results,\nidentify the last timestamp\
         \ of the last result and set that as the `end` query time to\npaginate the\
-        \ results."
+        \ results. You can also use the page parameter to specify which set of `1000`\
+        \ results to return."
       operationId: ListEvents
       parameters:
       - description: POSIX timestamp.
@@ -14129,12 +15543,36 @@ paths:
           Otherwise if an event is aggregated to a parent event with a timestamp outside
           of the timeframe,
 
-          it won''t be available in the output.'
+          it won''t be available in the output. Aggregated events with `is_aggregate=true`
+          in the response will still be returned unless exclude_aggregate is set to
+          `true.`'
         in: query
         name: unaggregated
         required: false
         schema:
           type: boolean
+      - description: 'Set `exclude_aggregate` to `true` to only return unaggregated
+          events where `is_aggregate=false` in the response. If the `exclude_aggregate`
+          parameter is set to `true`,
+
+          then the unaggregated parameter is ignored and will be `true` by default.'
+        in: query
+        name: exclude_aggregate
+        required: false
+        schema:
+          type: boolean
+      - description: 'By default 1000 results are returned per request. Set page to
+          the number of the page to return with `0` being the first page. The page
+          parameter can only be used
+
+          when either unaggregated or exclude_aggregate is set to `true.`'
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          maximum: 2147483647
+          type: integer
       responses:
         '200':
           content:
@@ -14157,6 +15595,7 @@ paths:
       summary: Query the event stream
       tags:
       - Events
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -14190,6 +15629,7 @@ paths:
       tags:
       - Events
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/events/{event_id}:
@@ -14228,6 +15668,7 @@ paths:
       summary: Get an event
       tags:
       - Events
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/graph/embed:
@@ -14488,6 +15929,7 @@ paths:
       summary: Take graph snapshots
       tags:
       - Snapshots
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/host/{host_name}/mute:
@@ -14531,6 +15973,7 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/host/{host_name}/unmute:
@@ -14567,6 +16010,7 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v1/hosts:
@@ -14656,6 +16100,7 @@ paths:
       summary: Get all hosts for your organization
       tags:
       - Hosts
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/hosts/totals:
@@ -14697,6 +16142,7 @@ paths:
       summary: Get the total number of active hosts
       tags:
       - Hosts
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/integration/aws:
@@ -14740,6 +16186,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
     get:
@@ -14786,6 +16233,7 @@ paths:
       summary: List all AWS integrations
       tags:
       - AWS Integration
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -14833,6 +16281,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         operationId: DeleteAWSAccount
         parameters: []
@@ -14899,6 +16348,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v1/integration/aws/available_namespace_rules:
@@ -14929,6 +16379,7 @@ paths:
       summary: List namespace rules
       tags:
       - AWS Integration
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/integration/aws/filtering:
@@ -14994,6 +16445,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15055,6 +16507,7 @@ paths:
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15122,6 +16575,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAWSTagFilter
         parameters: []
@@ -15165,6 +16619,7 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/aws/logs:
@@ -15202,6 +16657,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15242,6 +16698,7 @@ paths:
       summary: List all AWS Logs integrations
       tags:
       - AWS Logs Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15278,6 +16735,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAWSLambdaARN
         parameters: []
@@ -15332,6 +16790,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/integration/aws/logs/services:
@@ -15371,6 +16830,7 @@ paths:
       summary: Get list of AWS log ready services
       tags:
       - AWS Logs Integration
+      x-menu-order: 4
       x-undo:
         type: safe
     post:
@@ -15407,6 +16867,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         operationId: TODO
         type: unsafe
@@ -15451,6 +16912,7 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/integration/azure:
@@ -15488,6 +16950,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15516,6 +16979,7 @@ paths:
       summary: List all Azure integrations
       tags:
       - Azure Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15565,6 +17029,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteAzureIntegration
         parameters: []
@@ -15610,6 +17075,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/azure/host_filters:
@@ -15648,6 +17114,7 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/integration/gcp:
@@ -15685,6 +17152,7 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -15712,6 +17180,7 @@ paths:
       summary: List all GCP integrations
       tags:
       - GCP Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -15748,6 +17217,7 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: DeleteGCPIntegration
         parameters: []
@@ -15793,6 +17263,7 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/pagerduty/configuration/services:
@@ -15829,6 +17300,7 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeletePagerDutyIntegrationService
         parameters:
@@ -15864,6 +17336,7 @@ paths:
       summary: Delete a single service object
       tags:
       - PagerDuty Integration
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -15898,6 +17371,7 @@ paths:
       summary: Get a single service object
       tags:
       - PagerDuty Integration
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -15942,6 +17416,7 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/integration/slack:
@@ -16110,6 +17585,7 @@ paths:
       summary: Get all channels in a Slack integration
       tags:
       - Slack Integration
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -16153,6 +17629,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: unsafe
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels/{channel_name}:
@@ -16186,6 +17663,7 @@ paths:
       summary: Remove a Slack integration channel
       tags:
       - Slack Integration
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -16222,6 +17700,7 @@ paths:
       summary: Get a Slack integration channel
       tags:
       - Slack Integration
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -16266,6 +17745,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/integration/webhooks/configuration/custom-variables:
@@ -16302,6 +17782,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
         parameters:
@@ -16337,6 +17818,7 @@ paths:
       summary: Delete a custom variable
       tags:
       - Webhooks Integration
+      x-menu-order: 8
       x-undo:
         type: idempotent
     get:
@@ -16382,6 +17864,7 @@ paths:
       summary: Get a custom variable
       tags:
       - Webhooks Integration
+      x-menu-order: 6
       x-undo:
         type: safe
     put:
@@ -16430,6 +17913,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/integration/webhooks/configuration/webhooks:
@@ -16466,6 +17950,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeleteWebhooksIntegration
         parameters:
@@ -16501,6 +17986,7 @@ paths:
       summary: Delete a webhook
       tags:
       - Webhooks Integration
+      x-menu-order: 4
       x-undo:
         type: idempotent
     get:
@@ -16541,6 +18027,7 @@ paths:
       summary: Get a webhook integration
       tags:
       - Webhooks Integration
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -16589,6 +18076,7 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/logs-queries/list:
@@ -16639,6 +18127,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/logs/config/index-order:
@@ -16662,6 +18151,7 @@ paths:
       summary: Get indexes order
       tags:
       - Logs Indexes
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -16700,6 +18190,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/logs/config/indexes:
@@ -16724,6 +18215,7 @@ paths:
       summary: Get all indexes
       tags:
       - Logs Indexes
+      x-menu-order: 1
       x-undo:
         type: safe
     post:
@@ -16760,6 +18252,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: TODO
         parameters: []
@@ -16798,6 +18291,7 @@ paths:
       summary: Get an index
       tags:
       - Logs Indexes
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -16849,6 +18343,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/logs/config/pipeline-order:
@@ -16873,6 +18368,7 @@ paths:
       summary: Get pipeline order
       tags:
       - Logs Pipelines
+      x-menu-order: 1
       x-undo:
         type: safe
     put:
@@ -16924,6 +18420,7 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v1/logs/config/pipelines:
@@ -16948,6 +18445,7 @@ paths:
       summary: Get all pipelines
       tags:
       - Logs Pipelines
+      x-menu-order: 3
       x-undo:
         type: safe
     post:
@@ -16983,6 +18481,7 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         operationId: DeleteLogsPipeline
         parameters:
@@ -17020,6 +18519,7 @@ paths:
       summary: Delete a pipeline
       tags:
       - Logs Pipelines
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -17056,6 +18556,7 @@ paths:
       summary: Get a pipeline
       tags:
       - Logs Pipelines
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -17101,6 +18602,7 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v1/metrics:
@@ -17156,6 +18658,7 @@ paths:
       summary: Get active metrics list
       tags:
       - Metrics
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/metrics/{metric_name}:
@@ -17191,6 +18694,7 @@ paths:
       summary: Get metric metadata
       tags:
       - Metrics
+      x-menu-order: 2
       x-undo:
         type: safe
     put:
@@ -17240,6 +18744,7 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/monitor:
@@ -17338,6 +18843,7 @@ paths:
       summary: Get all monitor details
       tags:
       - Monitors
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -17379,6 +18885,8 @@ paths:
         - process: `service check`
 
         - rum: `rum alert`
+
+        - SLO: `slo alert`
 
         - watchdog: `event alert`
 
@@ -17584,7 +19092,22 @@ paths:
         to filter results by these tags.
 
         It is only available via the API and isn''t visible or editable in the Datadog
-        UI.'
+        UI.
+
+
+        **SLO Alert Query**
+
+
+        Example: `error_budget("slo_id").over("time_window") operator #`
+
+
+        - **`slo_id`**: The alphanumeric SLO ID of the SLO you are configuring the
+        alert for.
+
+        - **`time_window`**: The time window of the SLO target you wish to alert on.
+        Valid options: `7d`, `30d`, `90d`.
+
+        - **`operator`**: `>=` or `>`'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -17616,6 +19139,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DeleteMonitor
         parameters:
@@ -17664,6 +19188,7 @@ paths:
       summary: Check if a monitor can be deleted
       tags:
       - Monitors
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/monitor/groups/search:
@@ -17745,6 +19270,7 @@ paths:
       summary: Monitors group search
       tags:
       - Monitors
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/monitor/search:
@@ -17826,6 +19352,7 @@ paths:
       summary: Monitors search
       tags:
       - Monitors
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/monitor/validate:
@@ -17862,6 +19389,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -17917,6 +19445,7 @@ paths:
       summary: Delete a monitor
       tags:
       - Monitors
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -17965,6 +19494,7 @@ paths:
       summary: Get a monitor's details
       tags:
       - Monitors
+      x-menu-order: 4
       x-undo:
         type: safe
     put:
@@ -18020,6 +19550,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
@@ -18059,6 +19590,7 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/mute:
@@ -18223,6 +19755,7 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
+      x-menu-order: 22
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -18267,11 +19800,294 @@ paths:
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
+      x-menu-order: 23
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/notebooks:
+    get:
+      description: 'Get all notebooks. This can also be used to search for notebooks
+        with a particular `query` in the notebook
+
+        `name` or author `handle`.'
+      operationId: ListNotebooks
+      parameters:
+      - description: Return notebooks created by the given `author_handle`.
+        in: query
+        name: author_handle
+        required: false
+        schema:
+          example: test@datadoghq.com
+          type: string
+        style: form
+      - description: Return notebooks not created by the given `author_handle`.
+        in: query
+        name: exclude_author_handle
+        required: false
+        schema:
+          example: test@datadoghq.com
+          type: string
+        style: form
+      - description: The index of the first notebook you want returned.
+        in: query
+        name: start
+        required: false
+        schema:
+          example: 0
+          format: int64
+          type: integer
+        style: form
+      - description: The number of notebooks to be returned.
+        in: query
+        name: count
+        required: false
+        schema:
+          example: 5
+          format: int64
+          type: integer
+        style: form
+      - description: Sort by field `modified` or `name`.
+        in: query
+        name: sort_field
+        required: false
+        schema:
+          default: modified
+          example: modified
+          type: string
+        style: form
+      - description: Sort by direction `asc` or `desc`.
+        in: query
+        name: sort_dir
+        required: false
+        schema:
+          default: desc
+          example: desc
+          type: string
+        style: form
+      - description: Return only notebooks with `query` string in notebook name or
+          author handle.
+        in: query
+        name: query
+        required: false
+        schema:
+          example: postmortem
+          type: string
+        style: form
+      - description: Value of `false` excludes the `cells` and global `time` for each
+          notebook.
+        in: query
+        name: include_cells
+        required: false
+        schema:
+          default: true
+          example: false
+          type: boolean
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebooksResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Get all notebooks
+      tags:
+      - Notebooks
+      x-undo:
+        type: safe
+    post:
+      description: Create a notebook using the specified options.
+      operationId: CreateNotebook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotebookCreateRequest'
+        description: The JSON description of the notebook you want to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Create a notebook
+      tags:
+      - Notebooks
+      x-codegen-request-body-name: body
+      x-given:
+        notebook:
+          parameters:
+          - file: notebook_payload.json
+            name: body
+          step: there is a valid "notebook" in the system
+      x-undo:
+        operationId: DeleteNotebook
+        parameters:
+        - name: notebook_id
+          source: data.id
+        type: unsafe
+  /api/v1/notebooks/{notebook_id}:
+    delete:
+      description: Delete a notebook using the specified ID.
+      operationId: DeleteNotebook
+      parameters:
+      - description: Unique ID, assigned when you create the notebook.
+        in: path
+        name: notebook_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete a notebook
+      tags:
+      - Notebooks
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a notebook using the specified notebook ID.
+      operationId: GetNotebook
+      parameters:
+      - description: Unique ID, assigned when you create the notebook.
+        in: path
+        name: notebook_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get a notebook
+      tags:
+      - Notebooks
+      x-undo:
+        type: safe
+    put:
+      description: Update a notebook using the specified ID.
+      operationId: UpdateNotebook
+      parameters:
+      - description: Unique ID, assigned when you create the notebook.
+        in: path
+        name: notebook_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotebookUpdateRequest'
+        description: Update notebook request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+      summary: Update a notebook
+      tags:
+      - Notebooks
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/org:
     get:
       description: List your managed organizations.
@@ -18292,6 +20108,7 @@ paths:
       summary: List your managed organizations
       tags:
       - Organizations
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -18343,6 +20160,7 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: TODO
         parameters: []
@@ -18381,6 +20199,7 @@ paths:
       summary: Get organization information
       tags:
       - Organizations
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -18423,6 +20242,7 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/org/{public_id}/idp_metadata:
@@ -18481,6 +20301,7 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/query:
@@ -18530,6 +20351,7 @@ paths:
       summary: Query timeseries points
       tags:
       - Metrics
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/search:
@@ -18565,6 +20387,7 @@ paths:
       summary: Search metrics
       tags:
       - Metrics
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v1/series:
@@ -18634,6 +20457,7 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/service_dependencies:
@@ -18698,6 +20522,7 @@ paths:
       summary: Get all APM service dependencies
       tags:
       - Service Dependencies
+      x-menu-order: 1
       x-undo:
         type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
@@ -18772,6 +20597,7 @@ paths:
       summary: Get one APM service's dependencies
       tags:
       - Service Dependencies
+      x-menu-order: 2
       x-undo:
         type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
@@ -18840,6 +20666,7 @@ paths:
       summary: Get all SLOs
       tags:
       - Service Level Objectives
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -18885,6 +20712,7 @@ paths:
               sum:httpservice.hits{code:2xx}.as_count()\",\n    \"denominator\": \"\
               sum:httpservice.hits{!code:3xx}.as_count()\"\n  }\n}"
           step: there is a valid "slo" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteSLO
         parameters:
@@ -18934,6 +20762,7 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         type: idempotent
   /api/v1/slo/can_delete:
@@ -18979,6 +20808,7 @@ paths:
       summary: Check if SLOs can be safely deleted
       tags:
       - Service Level Objectives
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/slo/correction:
@@ -19001,6 +20831,7 @@ paths:
       summary: Get all SLO corrections
       tags:
       - Service Level Objective Corrections
+      x-menu-order: 2
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19035,6 +20866,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: SLO Not Found
       summary: Create an SLO correction
       tags:
       - Service Level Objective Corrections
@@ -19049,6 +20886,7 @@ paths:
               : \"UTC\",\n      \"description\": \"Test Correction\"\n     },\n  \
               \   \"type\": \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
+      x-menu-order: 1
       x-undo:
         operationId: DeleteSLOCorrection
         parameters:
@@ -19087,6 +20925,7 @@ paths:
       summary: Delete an SLO correction
       tags:
       - Service Level Objective Corrections
+      x-menu-order: 5
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19124,6 +20963,7 @@ paths:
       summary: Get an SLO correction for an SLO
       tags:
       - Service Level Objective Corrections
+      x-menu-order: 3
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19175,6 +21015,7 @@ paths:
       tags:
       - Service Level Objective Corrections
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19231,6 +21072,7 @@ paths:
       summary: Delete an SLO
       tags:
       - Service Level Objectives
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -19243,6 +21085,13 @@ paths:
         required: true
         schema:
           type: string
+      - description: Get the IDs of SLO monitors that reference this SLO.
+        example: true
+        in: query
+        name: with_configured_alert_ids
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -19265,6 +21114,7 @@ paths:
       summary: Get an SLO's details
       tags:
       - Service Level Objectives
+      x-menu-order: 4
       x-undo:
         type: safe
     put:
@@ -19313,6 +21163,7 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/slo/{slo_id}/history:
@@ -19384,6 +21235,7 @@ paths:
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
+      x-menu-order: 6
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -19405,6 +21257,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
+      x-menu-order: 22
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -19441,6 +21294,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 19
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -19472,6 +21326,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
+      x-menu-order: 23
       x-undo:
         type: idempotent
     get:
@@ -19502,6 +21357,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
+      x-menu-order: 21
       x-undo:
         type: safe
     put:
@@ -19540,6 +21396,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 20
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests:
@@ -19568,11 +21425,14 @@ paths:
       summary: Get the list of all tests
       tags:
       - Synthetics
+      x-menu-order: 9
       x-undo:
         type: safe
     post:
       deprecated: true
-      description: Create a Synthetic test.
+      description: This endpoint is deprecated. To create a test, use [Create an API
+        test](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test),
+        or [Create a browser test](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test).
       operationId: CreateTest
       requestBody:
         content:
@@ -19612,6 +21472,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 26
       x-undo:
         operationId: TODO
         parameters: []
@@ -19658,6 +21519,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: TODO
         parameters: []
@@ -19699,6 +21561,7 @@ paths:
       summary: Get an API test
       tags:
       - Synthetics
+      x-menu-order: 7
       x-undo:
         type: safe
     put:
@@ -19753,6 +21616,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser:
@@ -19797,6 +21661,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         operationId: TODO
         parameters: []
@@ -19835,9 +21700,10 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get a test configuration (browser)
+      summary: Get a browser test
       tags:
       - Synthetics
+      x-menu-order: 8
       x-undo:
         type: safe
     put:
@@ -19892,6 +21758,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
@@ -19951,10 +21818,11 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get the test's latest results summaries (browser)
+      summary: Get a browser test's latest results summaries
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -19997,9 +21865,10 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
-      summary: Get a test result (browser)
+      summary: Get a browser test result
       tags:
       - Synthetics
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -20049,6 +21918,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 14
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger/ci:
@@ -20075,10 +21945,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: JSON format is wrong
-      summary: Trigger some Synthetics tests for CI
+      summary: Trigger tests from CI/CD pipelines
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -20113,14 +21984,16 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get a test configuration (API)
+      summary: Get a test configuration
       tags:
       - Synthetics
+      x-menu-order: 24
       x-undo:
         type: safe
     put:
       deprecated: true
-      description: Edit the configuration of a Synthetic test.
+      description: This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test)
+        or [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).
       operationId: UpdateTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -20171,6 +22044,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 25
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -20228,10 +22102,11 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get the test's latest results summaries (API)
+      summary: Get an API test's latest results summaries
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -20272,9 +22147,10 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
-      summary: Get a test result (API)
+      summary: Get an API test result
       tags:
       - Synthetics
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -20326,6 +22202,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 5
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
@@ -20362,6 +22239,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 15
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -20403,6 +22281,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
+      x-menu-order: 18
       x-undo:
         type: idempotent
     get:
@@ -20437,6 +22316,7 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
+      x-menu-order: 17
       x-undo:
         type: safe
     put:
@@ -20479,6 +22359,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-menu-order: 16
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -20515,6 +22396,7 @@ paths:
       summary: Get Tags
       tags:
       - Tags
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/tags/hosts/{host_name}:
@@ -20557,6 +22439,7 @@ paths:
       summary: Remove host tags
       tags:
       - Tags
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -20598,6 +22481,7 @@ paths:
       summary: Get host tags
       tags:
       - Tags
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -20652,6 +22536,7 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         operationId: DeleteHostTags
         parameters:
@@ -20711,6 +22596,7 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/usage/analyzed_logs:
@@ -20758,6 +22644,7 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
       - Usage Metering
+      x-menu-order: 17
       x-undo:
         type: safe
   /api/v1/usage/attribution:
@@ -20775,12 +22662,13 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: The specified field to search results for.
+      - description: Comma-separated list of usage types to return, or `*` for all
+          usage types.
         in: query
         name: fields
         required: true
         schema:
-          type: string
+          $ref: '#/components/schemas/UsageAttributionSupportedMetrics'
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for usage ending this month.'
         in: query
@@ -20817,6 +22705,7 @@ paths:
       summary: Get Usage Attribution
       tags:
       - Usage Metering
+      x-menu-order: 29
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -20865,6 +22754,7 @@ paths:
       summary: Get hourly usage for Lambda
       tags:
       - Usage Metering
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/usage/billable-summary:
@@ -20902,6 +22792,7 @@ paths:
       summary: Get billable usage across your account
       tags:
       - Usage Metering
+      x-menu-order: 19
       x-undo:
         type: safe
   /api/v1/usage/compliance-monitoring:
@@ -20949,6 +22840,7 @@ paths:
       summary: Get hourly usage for Compliance Monitoring
       tags:
       - Usage Metering
+      x-menu-order: 30
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -20994,6 +22886,7 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
       - Usage Metering
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/usage/hosts:
@@ -21039,6 +22932,7 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/usage/incident-management:
@@ -21086,6 +22980,7 @@ paths:
       summary: Get hourly usage for incident management
       tags:
       - Usage Metering
+      x-menu-order: 27
       x-undo:
         type: safe
   /api/v1/usage/indexed-spans:
@@ -21131,6 +23026,7 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
       - Usage Metering
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/usage/ingested-spans:
@@ -21178,6 +23074,7 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
       - Usage Metering
+      x-menu-order: 26
       x-undo:
         type: safe
   /api/v1/usage/iot:
@@ -21225,6 +23122,7 @@ paths:
       summary: Get hourly usage for IoT
       tags:
       - Usage Metering
+      x-menu-order: 28
       x-undo:
         type: safe
   /api/v1/usage/logs:
@@ -21268,6 +23166,54 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
       summary: Get hourly usage for Logs
+      tags:
+      - Usage Metering
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v1/usage/logs-by-retention:
+    get:
+      description: Get hourly usage for indexed logs by retention period.
+      operationId: GetUsageLogsByRetention
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageLogsByRetentionResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly logs usage by retention
       tags:
       - Usage Metering
       x-undo:
@@ -21323,6 +23269,7 @@ paths:
       summary: Get hourly usage for Logs by Index
       tags:
       - Usage Metering
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/usage/network_flows:
@@ -21370,6 +23317,7 @@ paths:
       summary: Get hourly usage for Network Flows
       tags:
       - Usage Metering
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/usage/network_hosts:
@@ -21415,6 +23363,7 @@ paths:
       summary: Get hourly usage for Network Hosts
       tags:
       - Usage Metering
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/usage/profiling:
@@ -21462,6 +23411,7 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
       - Usage Metering
+      x-menu-order: 24
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -21514,6 +23464,7 @@ paths:
       summary: Get hourly usage for RUM Sessions
       tags:
       - Usage Metering
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -21561,6 +23512,7 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
       - Usage Metering
+      x-menu-order: 18
       x-undo:
         type: safe
   /api/v1/usage/summary:
@@ -21615,6 +23567,7 @@ paths:
       summary: Get usage across your multi-org account
       tags:
       - Usage Metering
+      x-menu-order: 16
       x-undo:
         type: safe
   /api/v1/usage/synthetics:
@@ -21661,6 +23614,7 @@ paths:
       summary: Get hourly usage for Synthetics Checks
       tags:
       - Usage Metering
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v1/usage/synthetics_api:
@@ -21706,6 +23660,7 @@ paths:
       summary: Get hourly usage for Synthetics API Checks
       tags:
       - Usage Metering
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v1/usage/synthetics_browser:
@@ -21751,6 +23706,7 @@ paths:
       summary: Get hourly usage for Synthetics Browser Checks
       tags:
       - Usage Metering
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v1/usage/timeseries:
@@ -21796,11 +23752,12 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
       - Usage Metering
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v1/usage/top_avg_metrics:
     get:
-      description: Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
+      description: Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
         by hourly average. Use the month parameter to get a month-to-date data resolution
         or use the day parameter to get a daily resolution. One of the two is required,
         and only one of the two is allowed.
@@ -21841,6 +23798,13 @@ paths:
           maximum: 5000
           minimum: 1
           type: integer
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -21860,9 +23824,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get top custom metrics by hourly average
+      summary: Get all custom metrics by hourly average
       tags:
       - Usage Metering
+      x-menu-order: 5
       x-undo:
         type: safe
   /api/v1/usage/traces:
@@ -21912,6 +23877,7 @@ paths:
       summary: Get hourly usage for Trace Search
       tags:
       - Usage Metering
+      x-menu-order: 6
       x-undo:
         type: safe
   /api/v1/usage/tracing-without-limits:
@@ -21963,6 +23929,7 @@ paths:
       summary: Get hourly usage for tracing without limits
       tags:
       - Usage Metering
+      x-menu-order: 25
       x-undo:
         type: safe
   /api/v1/user:
@@ -21985,6 +23952,7 @@ paths:
       summary: List all users
       tags:
       - Users
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -22031,6 +23999,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         operationId: DisableUser
         parameters:
@@ -22083,6 +24052,7 @@ paths:
       summary: Disable a user
       tags:
       - Users
+      x-menu-order: 5
       x-undo:
         type: idempotent
     get:
@@ -22119,6 +24089,7 @@ paths:
       summary: Get user details
       tags:
       - Users
+      x-menu-order: 3
       x-undo:
         type: safe
     put:
@@ -22172,6 +24143,7 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/validate:
@@ -22197,6 +24169,7 @@ paths:
       summary: Validate API key
       tags:
       - Authentication
+      x-menu-order: 1
       x-undo:
         type: safe
   /monitor/bulk_resolve:
@@ -22296,6 +24269,7 @@ paths:
       tags:
       - Tracing
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: idempotent
   /v1/input:
@@ -22457,6 +24431,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /v1/monitor/mute_all:
@@ -22678,6 +24653,17 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/
   name: Monitors
+- description: 'Interact with your notebooks through the API to make it easier to
+    organize, find, and
+
+    share all of your notebooks with your team and organization. For more information,
+    see the
+
+    [Notebooks documentation](https://docs.datadoghq.com/notebooks/).'
+  externalDocs:
+    description: For more information, see the Notebooks documentation.
+    url: https://docs.datadoghq.com/notebooks/
+  name: Notebooks
 - description: Create, edit, and manage your organizations. Read more about [multi-org
     accounts](https://docs.datadoghq.com/account_management/multi_organization).
   externalDocs:
@@ -22714,6 +24700,8 @@ tags:
 
     - [Read more about Custom Check monitors.][4]
 
+    - [Read more about Service Check and status codes.][5]
+
 
     [1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert
 
@@ -22721,7 +24709,9 @@ tags:
 
     [3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert
 
-    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert'
+    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert
+
+    [5]: https://docs.datadoghq.com/developers/service_checks/'
   name: Service Checks
 - description: 'APM Service Map API. For more information, visit
 
