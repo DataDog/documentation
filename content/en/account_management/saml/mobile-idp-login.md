@@ -31,7 +31,7 @@ In order to use the Datadog mobile app with Identity Provider (IdP) Initiated SA
 
 ## Providers
 
-**Note:** Datadog IdP Initiated SAML should work with any identity provider. Please contact [Support][1] for help if you run into an issue. 
+**Note:** Datadog IdP Initiated SAML works with most identity providers. If you run into trouble while configuring your identity provider with the Datadog Mobile App, please contact [Support][1]. 
 
 ### OneLogin
 
