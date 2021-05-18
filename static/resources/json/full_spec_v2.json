@@ -303,6 +303,7 @@
         "required": false,
         "schema": {
           "default": 0,
+          "example": 0,
           "format": "int64",
           "type": "integer"
         }
@@ -314,6 +315,7 @@
         "required": false,
         "schema": {
           "default": 0,
+          "example": 0,
           "format": "int64",
           "type": "integer"
         }
@@ -325,6 +327,7 @@
         "required": false,
         "schema": {
           "default": 10,
+          "example": 10,
           "format": "int64",
           "type": "integer"
         }
@@ -389,6 +392,7 @@
         "name": "user_id",
         "required": true,
         "schema": {
+          "example": "00000000-0000-0000-0000-000000000000",
           "type": "string"
         }
       }
@@ -27714,6 +27718,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -27725,6 +27730,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -29891,6 +29897,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -29902,6 +29909,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -31168,6 +31176,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -31179,6 +31188,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -34366,6 +34376,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -34377,6 +34388,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -43082,6 +43094,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -43093,6 +43106,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -44359,6 +44373,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -44370,6 +44385,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -47399,6 +47415,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -47410,6 +47427,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -49750,6 +49768,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -49761,6 +49780,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -52245,6 +52265,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -52256,6 +52277,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -55318,6 +55340,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -55329,6 +55352,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -57854,6 +57878,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -57865,6 +57890,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -60590,6 +60616,7 @@
             "name": "user_invitation_uuid",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -60728,6 +60755,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -60739,6 +60767,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -60750,6 +60779,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "example": "name",
               "type": "string"
             }
           },
@@ -60787,6 +60817,7 @@
             "name": "filter[status]",
             "required": false,
             "schema": {
+              "example": "Active",
               "type": "string"
             }
           }
@@ -62006,6 +62037,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -62085,6 +62117,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -62627,6 +62660,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -63283,6 +63317,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -63827,6 +63862,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
