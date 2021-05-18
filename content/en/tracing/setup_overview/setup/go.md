@@ -100,28 +100,33 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
 
-`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-You can also set a custom hostname and port in code:
+    You can also set a custom hostname and port in code:
 
-```go
-package main
+    ```go
+    package main
 
-import (
-    "net"
+    import (
+        "net"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    addr := net.JoinHostPort(
-        "custom-hostname",
-        "1234",
+        "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
     )
-    tracer.Start(tracer.WithAgentAddr(addr))
-    defer tracer.Stop()
-}
-```
+
+    func main() {
+        addr := net.JoinHostPort(
+            "custom-hostname",
+            "1234",
+        )
+        tracer.Start(tracer.WithAgentAddr(addr))
+        defer tracer.Stop()
+    }
+    ```
+{{< site-region region="us3,eu,gov" >}} 
+
+4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
+
+{{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
