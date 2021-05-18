@@ -363,55 +363,60 @@ main:
     url: getting_started/tracing/
     parent: getting_started
     weight: 7
+  - name: Profiler
+    identifier: getting_started_profiler
+    url: getting_started/profiler/
+    parent: getting_started
+    weight: 8
   - name: Tags
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 8
+    weight: 9
   - name: Assigning Tags
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
     parent: tagging_
-    weight: 801
+    weight: 901
   - name: Unified Service Tagging
     identifier: unified_service_tagging
     url: getting_started/tagging/unified_service_tagging
     parent: tagging_
-    weight: 802
+    weight: 902
   - name: Using Tags
     identifier: using_tags
     url: getting_started/tagging/using_tags
     parent: tagging_
-    weight: 803
+    weight: 903
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 9
+    weight: 10
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 10
+    weight: 11
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1002
+    weight: 1102
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1003
+    weight: 1103
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1001
+    weight: 1101
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 11
+    weight: 12
   - name: Agent
     url: agent/
     pre: nav_agent
@@ -1554,10 +1559,10 @@ main:
     parent: tracing
     identifier: profiler
     weight: 13
-  - name: Getting Started
-    url: tracing/profiler/getting_started
+  - name: Enabling the Profiler
+    url: tracing/profiler/enabling/
     parent: profiler
-    identifier: profiler_getting_started
+    identifier: profiler_enabling
     weight: 1301
   - name: Search Profiles
     url: tracing/profiler/search_profiles

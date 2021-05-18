@@ -1,6 +1,9 @@
 ---
-title: Intro to Profiling
+title: Getting Started with Continuous Profiler
 kind: Documentation
+aliases:
+    - /tracing/profiling/intro_to_profiling
+    - /tracing/profiler/intro_to_profiling
 ---
 
 You may have heard that profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler before, it can seem like a dark art.
@@ -190,4 +193,4 @@ We've only skimmed the surface here but this should give you a sense of how to g
 [5]: https://httpd.apache.org/docs/2.4/programs/ab.html
 [6]: https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java
 [7]: https://github.com/DataDog/dd-continuous-profiler-example/blob/25819b58c46227ce9a3722fa971702fd5589984f/java/src/main/java/movies/Server.java#L66
-[8]: /tracing/profiler/getting_started/
+[8]: /tracing/profiler/enabling/

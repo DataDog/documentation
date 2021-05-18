@@ -1,21 +1,22 @@
 ---
-title: Getting Started
+title: Enabling the Profiler
 kind: Documentation
 aliases:
     - /tracing/profiling/getting_started
+    - /tracing/profiler/getting_started
 further_reading:
-    - link: 'tracing/profiler/intro_to_profiling'
+    - link: 'getting_started/profiler'
       tag: 'Documentation'
-      text: 'Intro to profiling.'
+      text: 'Getting Started with Profiler'
     - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
-      text: 'Learn more about available profile types.'
+      text: 'Learn more about available profile types'
     - link: 'tracing/profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
-      text: 'Introducing always-on production profiling in Datadog.'
+      text: 'Introducing always-on production profiling in Datadog'
 ---
 
 Profiler is shipped within the following tracing libraries. Select your language below to learn how to enable profiler for your application:
@@ -260,11 +261,11 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 ## Not sure what to do next?
 
-The [Intro to Profiling][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-[2]: /tracing/profiler/intro_to_profiling/
+[2]: /getting_started/profiler/

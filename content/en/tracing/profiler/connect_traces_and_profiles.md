@@ -5,12 +5,12 @@ further_reading:
     - link: 'tracing'
       tag: 'Documentation'
       text: 'APM Distributed Tracing'
-    - link: 'tracing/profiler/getting_started'
+    - link: '/tracing/profiler/enabling'
       tag: 'Documentation'
       text: 'Enable Continuous Profiler for Your Application.'
-    - link: 'tracing/profiler/intro_to_profiling'
+    - link: 'getting_started/profiler'
       tag: 'Documentation'
-      text: 'Introduction to Profiling'
+      text: 'Getting Started with Profiler'
 ---
 
 If your application is showing performance problems in production, it's helpful to connect the distributed trace information from APM with the full profile of the code stack. Application processes that have both APM distributed tracing and continuous profiler enabled are automatically linked. So you can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues.
@@ -39,7 +39,7 @@ Requires:
 - OpenJDK 8u282 or greater
 
 
-[1]: /tracing/profiler/getting_started
+[1]: /tracing/profiler/enabling
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -48,7 +48,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 Requires tracing library version 0.44.0 or greater.
 
 
-[1]: /tracing/profiler/getting_started
+[1]: /tracing/profiler/enabling
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
