@@ -86,6 +86,7 @@ exceptions:
   - Metrics without Limits
   - MongoDB
   - MySQL
+  - Network Address Translation
   - Network Device Monitoring
   - Network Performance Monitoring
   - NixOS
@@ -102,10 +103,8 @@ exceptions:
   - OpenVPN
   - OpsWorks
   - Phusion Passenger
-  - pre-NAT
   - Prometheus
   - Puppet
-  - Python
   - Python
   - RabbitMQ
   - Rails
