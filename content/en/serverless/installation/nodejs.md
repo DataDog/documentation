@@ -187,9 +187,19 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 
 For example:
 
+{{< site-region region="us,us3,eu" >}}
+
 ```sh
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
 ```
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```sh
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws-us-gov:lambda:us-gov-east-1:002406178527:function:datadog-forwarder
+```
+{{< /site-region >}}
 
 More information and additional parameters can be found in the [CLI documentation][4].
 
@@ -253,21 +263,38 @@ The minor version of the `datadog-lambda-js` package always matches the layer ve
 
 #### Using the layer
 
-[Configure the layers][1] for your Lambda function using the ARN in the following format.
+[Configure the layers][1] for your Lambda function using the ARN in the following format:
+
+{{< site-region region="us,us3,eu" >}} 
 
 ```
-# For regular regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+```
 
-# For us-gov regions
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
+{{< /site-region >}}
 
 The available `RUNTIME` options are `Node10-x` and `Node12-x`. For `VERSION`, see the [latest release][2]. For example:
+
+{{< site-region region="us,us3,eu" >}} 
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
 ```
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527::layer:Datadog-Node12-x:25
+```
+
+{{< /site-region >}}
 
 #### Using the package
 
@@ -290,9 +317,20 @@ See the [latest release][3].
 
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
+{{< site-region region="us,us3,eu" >}} 
+
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
 ```
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>
+```
+
+{{< /site-region >}}
 
 For `EXTENSION_VERSION`, see the [latest release][4].
 
