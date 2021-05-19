@@ -95,19 +95,32 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 10. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
 
-Once it shows _Available_, the AWS PrivateLink is ready to be used. 
+    Once it shows _Available_, the AWS PrivateLink is ready to be used. 
+11. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If it's not already there, add the following to the [Agent `datadog.yaml` configuration file][3]:
 
-[Restart your Agents][3] to send data to Datadog through AWS PrivateLink.
+    ```yaml
+    logs_config:
+        use_http: true
+    ```
+
+    If you are using the container Agent, set the following environment variable instead:
+
+    ```
+    DD_LOGS_CONFIG_USE_HTTP=true
+    ```
+
+    This configuration is required when sending logs to Datadog via AWS PrivateLink. More information about this is available in the [Agent log collection documentation][4].
+12. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
 
 ## Advanced usage
 
 ### Inter-region peering
 
-To route traffic to Datadog’s PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][4]. 
+To route traffic to Datadog’s PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][6]. 
 
 Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses.
 
-For more information, see the [Amazon VPC peering documentation][4].
+For more information, see the [Amazon VPC peering documentation][6].
 
 ## Further Reading
 
@@ -115,5 +128,7 @@ For more information, see the [Amazon VPC peering documentation][4].
 
 [1]: https://aws.amazon.com/privatelink/
 [2]: /help/
-[3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
+[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[4]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[5]: /agent/guide/agent-commands/#restart-the-agent
+[6]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
