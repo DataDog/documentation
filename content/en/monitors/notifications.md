@@ -139,13 +139,21 @@ Template variables that return numerical values support operations and functions
 ### Tag variables
 
 Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
+For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
-For example, if your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+**Notes**: Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
-**Notes**:
+#### Multi-alert group by host
 
-* Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
-* Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. 
+To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+Some specific host metadata are available as well:
+
+- Agent Version : {{host.metadata_agent_version}}
+- Machine       : {{host.metadata_machine}}
+- Platform      : {{host.metadata_platform}}
+- Processor     : {{host.metadata_processor}}
+
 
 #### Tag key with period
 
@@ -388,6 +396,8 @@ Test notifications are supported for the [monitor types][1]: host, metric, anoma
 ### Events
 
 Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
+
+Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
 
 ### Variables {#variables-test-notification}
 
