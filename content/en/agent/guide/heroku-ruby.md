@@ -416,7 +416,7 @@ Once the rule has been created and after waiting for some minutes to gather the 
 
 #### Generating Datadog metrics from Heroku metric logs
 
-If [log-runtime-metrics]() is set up for your application, Heroku will generate log entries with system metrics for each of the dynos:
+If [log-runtime-metrics][18] is set up for your application, Heroku will generate log entries with system metrics for each of the dynos:
 
 {{< img src="agent/guide/heroku_ruby/dyno_memory_log.png" alt="Dyno memory usage log entry" >}}
 {{< img src="agent/guide/heroku_ruby/dyno_cpu_log.png" alt="Dyno CPU usage log entry" >}}
