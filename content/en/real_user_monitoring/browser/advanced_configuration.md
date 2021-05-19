@@ -163,6 +163,8 @@ The following attributes are **optional** but it is recommended to provide **at 
 | usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | usr.email | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
+**Note**: Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
+
 To identify user sessions, use the `setUser` API:
 
 {{< tabs >}}
@@ -171,7 +173,9 @@ To identify user sessions, use the `setUser` API:
 datadogRum.setUser({
     id: '1234',
     name: 'John Doe',
-    email: 'john@doe.com'
+    email: 'john@doe.com',
+    plan: 'premium',
+    ...
 })
 ```
 
@@ -182,7 +186,9 @@ DD_RUM.onReady(function() {
     DD_RUM.setUser({
         id: '1234',
         name: 'John Doe',
-        email: 'john@doe.com'
+        email: 'john@doe.com',
+        plan: 'premium',
+        ...
     })
 })
 ```
@@ -193,8 +199,37 @@ DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.setUser({
     id: '1234',
     name: 'John Doe',
-    email: 'john@doe.com'
+    email: 'john@doe.com',
+    plan: 'premium',
+    ...
 })
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Remove the user identification
+
+Clear a previously set user with the `removeUser` API. All RUM events collected afterwards will not contain user information.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.removeUser()
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.removeUser()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.removeUser()
 ```
 
 {{% /tab %}}
