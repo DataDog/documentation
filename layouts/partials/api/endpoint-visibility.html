@@ -3,11 +3,14 @@
 {{ $versionCount := .versionCount }}
 {{ $versionNum := .versionNum }}
 {{ $menuChild := .menuChild }}
+{{ $endpoint := .endpoint }}
 
-{{- $s.SetInMap "output" "isVisibleVersion" true -}}
-{{- $s.SetInMap "output" "label" "latest" -}}
-{{- $s.SetInMap "output" "labelPrefix" "" -}}
-{{- $s.SetInMap "output" "labelSuffix" "" -}}
+{{ $deprecated := $endpoint.action.deprecated | default false }}
+
+{{- $s.SetInMap "output" "isVisibleVersion" (not $deprecated) -}}
+{{- $s.SetInMap "output" "label" (cond $deprecated "deprecated" "latest") -}}
+{{- $s.SetInMap "output" "labelPrefix" (cond $deprecated "~" "") -}}
+{{- $s.SetInMap "output" "labelSuffix" (cond $deprecated "~" "") -}}
 
 {{ if gt $versionCount 1 }}
     <!-- we have multiple versions for this endpoint -->
@@ -42,9 +45,5 @@
             {{- $s.SetInMap "output" "isVisibleVersion" true -}}
         {{ end }}
     {{ end }}
-{{ else }}
-    <!-- we only have one version for this endpoint, so just show it -->
-    {{- $s.SetInMap "output" "isVisibleVersion" true -}}
-    {{- $s.SetInMap "output" "label" "latest" -}}
 {{ end }}
 {{ return ($s.Get "output") }}
