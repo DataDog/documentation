@@ -47,6 +47,20 @@ To customize tagging:
 **Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution"  style="width:80%;">}}
+
+## Audit Events
+Any tag configuration or percentile aggregation changes will create an event in the [event stream][3]. This event explains the change and displays the user that made the change.
+
+If you created/updated/removed a tag configuration on a distribution metric, you can see examples with the following event search:
+```text
+https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20tag%20configuration
+```
+
+If you added or removed percentile aggregations to a distribution metric, you can see examples with the following event search:
+```text
+https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20percentile%20aggregations
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -54,3 +68,4 @@ To customize tagging:
 
 [1]: /developers/metrics/types/
 [2]: https://app.datadoghq.com/metric/distribution_metrics
+[3]: https://app.datadoghq.com/event/stream
