@@ -82,7 +82,7 @@ Use this section to send notifications to your team through email, Slack, PagerD
 Disk space is low @ops-team@company.com
 ```
 
-### @notification
+### Notifications
 
 `@notifications` can be sent to:
 
