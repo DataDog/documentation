@@ -345,12 +345,9 @@ Navigating now to the [APM traces section](https://app.datadoghq.com/apm/traces)
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Ruby application traces in Datadog" >}}
 
-You can now navigate to the Services view to see all your application services:
+You can now navigate to the [Service list](https://app.datadoghq.com/apm/services) to see all your application services and your application service view:
 
 {{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Service list view in Datadog" >}}
-
-You can now navigate to the Service view to see your application metrics, including the latency distribution, at a glance:
-
 {{< img src="agent/guide/heroku_ruby/service_page.png" alt="Ruby application service view in Datadog" >}}
 
 ## Logs
@@ -437,7 +434,7 @@ These logs are also automatically parsed by the Heroku log integration pipeline,
 @heroku.memory.total
 ```
 
-You can learn about what each of these values mean in Heroku’s official documentation.
+You can learn about what each of these values mean in [Heroku official documentation](https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages).
 
 Follow the same steps explained on the previous section to generate metrics with 15 month retention for each of those measures.
 
@@ -563,7 +560,7 @@ Logs Agent
 
 That output shows us that the Logs agent is now running correctly and sending our Ruby application log to Datadog. 
 
-Navigate now to [Logs in the Datadog application](https://app.datadoghq.com/logs?cols=core_host%2Ccore_service&index=%2A&messageDisplay=inline&query=source%3Aruby&stream_sort=desc), and filtering by Source:ruby you will start seeing your Rails logs in Datadog
+Navigate now to [Logs in the Datadog application](https://app.datadoghq.com/logs?cols=core_host%2Ccore_service&index=%2A&messageDisplay=inline&query=source%3Aruby&stream_sort=desc), and filter by `Source:ruby` to start seeing your Rails logs in Datadog.
 
 {{< img src="agent/guide/heroku_ruby/ruby_logs.png" alt="Application generated logs" >}}
 
