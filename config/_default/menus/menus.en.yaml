@@ -1021,6 +1021,11 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 8
+  - name: Guides
+    url: serverless/guide/
+    identifier: serverless_guides
+    parent: serverless
+    weight: 9
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
