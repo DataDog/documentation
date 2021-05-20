@@ -40,7 +40,7 @@ The Kubernetes State Metrics Core check is included in the [Datadog Cluster Agen
 
 ### Requirements
 
-- Datadog Cluster Agent v1.12+ 
+- Datadog Cluster Agent v1.12+
 
 ### Configuration
 
@@ -158,6 +158,9 @@ datadog:
 
 `kubernetes_state.deployment.condition`
 : The current status conditions of a deployment. Tags:`kube_deployment` `kube_namespace` (`env` `service` `version` from standard labels).
+
+`kubernetes_state.endpoint.count`
+: Number of endpoints. Tags:`kube_namespace`.
 
 `kubernetes_state.endpoint.address_available`
 : Number of addresses available in endpoint. Tags:`endpoint` `kube_namespace`.
@@ -336,6 +339,9 @@ datadog:
 `kubernetes_state.statefulset.replicas_updated`
 : The number of updated replicas per StatefulSet. Tags:`kube_namespace` `kube_stateful_set` (`env` `service` `version` from standard labels).
 
+`kubernetes_state.hpa.count`
+: Number of horizontal pod autoscaler. Tags: `kube_namespace`.
+
 `kubernetes_state.hpa.min_replicas`
 : Lower limit for the number of pods that can be set by the autoscaler, default 1. Tags:`kube_namespace` `horizontalpodautoscaler`.
 
@@ -353,6 +359,9 @@ datadog:
 
 `kubernetes_state.hpa.spec_target_metric`
 : The metric specifications used by this autoscaler when calculating the desired replica count. Tags:`kube_namespace` `horizontalpodautoscaler` `metric_name` `metric_target_type`.
+
+`kubernetes_state.vpa.count`
+: Number of vertical pod autoscaler. Tags: `kube_namespace`.
 
 `kubernetes_state.vpa.lower_bound`
 : Minimum resources the container can use before the VerticalPodAutoscaler updater evicts it. Tags:`kube_namespace` `verticalpodautoscaler` `kube_container_name` `resource` `target_api_version` `target_kind` `target_name` `unit`.
@@ -374,6 +383,9 @@ datadog:
 
 `kubernetes_state.vpa.spec_container_maxallowed`
 : Maximum resources the VerticalPodAutoscaler can set for containers matching the name. Tags:`kube_namespace` `verticalpodautoscaler` `kube_container_name` `resource` `target_api_version` `target_kind` `target_name` `unit`.
+
+`kubernetes_state.cronjob.count`
+: Number of cronjobs. Tags:`kube_namespace`.
 
 `kubernetes_state.cronjob.spec_suspend`
 : Suspend flag tells the controller to suspend subsequent executions. Tags:`kube_namespace` `kube_cronjob` (`env` `service` `version` from standard labels).
