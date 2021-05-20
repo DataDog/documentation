@@ -68,6 +68,10 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
 
+## Incidents 
+
+On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account right from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more.
+
 ## Quick actions
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
