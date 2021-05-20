@@ -19,6 +19,10 @@ further_reading:
 * Jenkins
 * TravisCI
 
+## Prerequisites
+
+The Datadog Agent must be accessible by the environment you're using to run your tests on. Get one-step installation commands from the [Datadog app][1].
+
 ## Installing tracing
 
 To install the Ruby tracer:
@@ -31,7 +35,7 @@ To install the Ruby tracer:
     ```
 2. Install the gem by running `bundle install`
 
-See the [Ruby tracer installation docs][1] for more details.
+See the [Ruby tracer installation docs][2] for more details.
 
 ### Configuring Cucumber instrumentation
 
@@ -69,7 +73,7 @@ Where `options` is an optional `Hash` that accepts the following parameters:
 | `operation_name` | Specifies an operation name used for `cucumber` instrumentation. Useful if you want rename automatic trace metrics in the form `trace.#{operation_name}.errors`. | `'cucumber.test'` |
 
 
-See also the [Ruby trace library documentation for Cucumber][2].
+See also the [Ruby trace library documentation for Cucumber][3].
 
 
 ## Configuring RSpec instrumentation
@@ -106,17 +110,14 @@ Where `options` is an optional `Hash` that accepts the following parameters:
 | `service_name` | Specifies the service name used for `rspec` instrumentation. | `'rspec'` |
 | `operation_name` | Specifies an operation name used for `rspec` instrumentation. Useful if you want rename automatic trace metrics in the form `trace.#{operation_name}.errors`. | `'rspec.example'` |
 
-See also the [Ruby trace library documentation for RSpec][3].
-
-## Datadog Agent
-
-The Datadog Agent must be accessible by the environment you're using to run your tests on.
+See also the [Ruby trace library documentation for RSpec][4].
 
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/setup/ruby/#installation
-[2]: /tracing/setup_overview/setup/ruby/#cucumber
-[3]: /tracing/setup_overview/setup/ruby/#rspec
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: /tracing/setup_overview/setup/ruby/#installation
+[3]: /tracing/setup_overview/setup/ruby/#cucumber
+[4]: /tracing/setup_overview/setup/ruby/#rspec

@@ -27,9 +27,13 @@ Additionally, we support the test frameworks which are based on JUnit, such as S
 * Jenkins
 * TravisCI
 
+## Prerequisites
+
+The Datadog Agent must be accessible by the environment you're using to run your tests on. Get one-step installation commands from the [Datadog app][1].
+
 ## Installing tracing with Maven
 
-Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible via [Maven Repository][1]: 
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible via [Maven Repository][2]: 
 
 ```xml
 <profile>
@@ -55,7 +59,7 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 
 ### Instrumenting your tests
 
-Configure the [Maven Surefire Plugin][2] and/or the [Maven Failsafe Plugin][3] to use Datadog Java agent:
+Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] to use Datadog Java agent:
 
 ```xml
 <plugin>
@@ -90,7 +94,7 @@ mvn clean verify -Pci-app
 
 ## Installing tracing with Gradle
 
-Add the `ddTracerAgent` entry to the `configurations` task block and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer accessible via [Maven Repository][1]:
+Add the `ddTracerAgent` entry to the `configurations` task block and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer accessible via [Maven Repository][2]:
 
 ```groovy
 configurations {
@@ -135,7 +139,7 @@ Additionally, set the tracer prioritization type to `EnsureTrace` to avoid dropp
 |--------------------------|--------------------------|------------|-------------------------------------------------------------------|
 | `dd.prioritization.type` | `DD_PRIORITIZATION_TYPE` | `FAST_LANE` | Set to `ENSURE_TRACE` to avoid dropping tests spans by the tracer. |
 
-All [Datadog Tracer configuration][4] options can be used to during test phase.
+All [Datadog Tracer configuration][5] options can be used to during test phase.
 
 ### Recommended configuration
 
@@ -155,16 +159,13 @@ You can change the test integration from `JUnit` to `TestNG` modifying the corre
 
 **Important:** You may want to enable more integrations if you have integration tests. To enable all default integrations, leave the `DD_INTEGRATIONS_ENABLED` property unset.
 
-## Datadog Agent 
-
-The Datadog Agent must to be accessible by the environment you're using to run your tests on.
-
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://maven.apache.org/surefire/maven-surefire-plugin/
-[3]: https://maven.apache.org/surefire/maven-failsafe-plugin/
-[4]: /tracing/setup_overview/setup/java/?tab=containers#configuration
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[3]: https://maven.apache.org/surefire/maven-surefire-plugin/
+[4]: https://maven.apache.org/surefire/maven-failsafe-plugin/
+[5]: /tracing/setup_overview/setup/java/?tab=containers#configuration
