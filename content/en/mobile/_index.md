@@ -70,7 +70,14 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 ## Incidents 
 
-On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account right from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more.
+On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account right from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][17]. 
+
+### Create an Incident
+
+1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
+2. Click the “+” button in the top right corner.
+3. Give your incident a title, severity, and commander
+
 
 ## Quick actions
 
@@ -142,3 +149,4 @@ For help with troubleshooting, [contact Datadog support][5]. You can also send a
 [15]: https://chat.datadoghq.com/
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG
 [16]: https://docs.datadoghq.com/account_management/saml/mobile-idp-login/
+[17]: https://docs.datadoghq.com/monitors/incident_management
