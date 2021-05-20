@@ -48,7 +48,6 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 
 If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][16]
 
-**Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][5] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
 
 ## Monitors
 
@@ -67,6 +66,19 @@ For example, to filter on metric monitors related to the SRE team that is being 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. 
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
+
+## Incidents 
+
+{{< img src="mobile/incidents-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="incident page">}}
+
+On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][17]. 
+
+### Create an Incident
+
+1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
+2. Click the “+” button in the top right corner.
+3. Give your incident a title, severity, and commander.
+
 
 ## Quick actions
 
@@ -138,3 +150,4 @@ For help with troubleshooting, [contact Datadog support][5]. You can also send a
 [15]: https://chat.datadoghq.com/
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG
 [16]: https://docs.datadoghq.com/account_management/saml/mobile-idp-login/
+[17]: https://docs.datadoghq.com/monitors/incident_management
