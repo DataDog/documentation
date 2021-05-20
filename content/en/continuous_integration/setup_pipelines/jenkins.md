@@ -61,7 +61,7 @@ INFO    datadog.trace.core.StatusLogger#logStatus: DATADOG TRACER CONFIGURATION 
 
 Now you can use your Jenkins as you normally do.
 
-**Note**: Please notice that it is not possible to enable traces collection in the Jenkins Datadog plugin and have the `dd-java-agent` in the classpath (for example, as `-javaagent` in your Jenkins startup command) at the same time.
+**Note**: It is not possible to enable traces collection in the Jenkins Datadog plugin and have the `dd-java-agent` in the classpath (for example, as `-javaagent` in your Jenkins startup command) at the same time.
 
 ### Connecting Logs and Traces
 
