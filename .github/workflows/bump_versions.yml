@@ -38,7 +38,7 @@ jobs:
           git config user.email packages@datadoghq.com
           git add .
           git commit -m "Bump SDK"
-          git push origin HEAD:refs/heads/sdk-versions
+          git push -f origin HEAD:refs/heads/sdk-versions
       - uses: actions/github-script@v4
         name: Propose change with latest versions
         with:
