@@ -48,7 +48,6 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 
 If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][16]
 
-**Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][5] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
 
 ## Monitors
 
