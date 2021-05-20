@@ -61,7 +61,7 @@ From log usage metrics, an estimated usage Dashboard can also be built to monito
 
 **Reminder**: The metrics used in this dashboard are estimates and might differ from official billing numbers.
 
-To import this dashboard, copy the [estimated usage dashboard JSON definition][6] and past it in a new Dashboard. Alternatively use the `Import Dashboard JSON` option in the cog menu in the upper right corner of a new dashboard.
+To import this dashboard, copy the [estimated usage dashboard JSON definition][6] and paste it as a new Dashboard. Alternatively use the `Import Dashboard JSON` option in the settings cog menu in the upper right corner of a new dashboard.
 
 ## Monitor indexed logs with fixed threshold
 
