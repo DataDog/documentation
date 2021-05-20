@@ -31,6 +31,10 @@ further_reading:
 * Jenkins
 * TravisCI
 
+## Prerequisites
+
+The Datadog Agent must be accessible by the environment you're using to run your tests on. Get one-step installation commands from the [Datadog app][1].
+
 ## Installing tracing
 
 To install the `dd-trace` command globally on the machine, run:
@@ -74,7 +78,7 @@ The following table shows the default values for key configuration settings:
 | `--dd-version`                 | `DD_VERSION`                   | `(empty)`               | Version for the unified service tagging.                                |
 | `--agent-url`                  | `DD_TRACE_AGENT_URL`           | `http://localhost:8126` | Datadog trace agent url.                                                |
 
-Additionally, all [Datadog Tracer configuration][1] options can be used during test phase.
+Additionally, all [Datadog Tracer configuration][2] options can be used during test phase.
 
 ### Example
 
@@ -104,12 +108,10 @@ DD_TRACE_CALLTARGET_ENABLED=true
 
 This enables the new instrumentation format in the .NET tracer.
 
-## Datadog Agent 
-
-The Datadog Agent must be accessible by the environment you're using to run your tests on.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration

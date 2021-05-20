@@ -19,23 +19,27 @@ further_reading:
 * Jenkins
 * TravisCI
 
+## Prerequisites
+
+The Datadog Agent must be accessible by the environment you're using to run your tests on. Get one-step installation commands from the [Datadog app][1].
+
 ## Jest Instrumentation
 
 ### Compatibility
 
 * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported yet.
-* Only [`jest-circus`][1] is supported as a `testRunner`. 
+* Only [`jest-circus`][2] is supported as a `testRunner`. 
 
 ### Install dependencies
-* [`dd-trace`][2]: Datadog APM tracing client for Node.js.
-* [`jest-circus`][1]: Test runner for Jest.
+* [`dd-trace`][3]: Datadog APM tracing client for Node.js.
+* [`jest-circus`][2]: Test runner for Jest.
 
 ```bash
 yarn add --dev dd-trace jest-circus
 ```
 
 ### Configure Jest
-Configure a custom [testEnvironment][3] and [testRunner][4] in your `jest.config.js` or however you are configuring [jest][5]:
+Configure a custom [testEnvironment][4] and [testRunner][5] in your `jest.config.js` or however you are configuring [jest][6]:
 
 ```javascript
 // jest.config.js
@@ -108,18 +112,13 @@ You might use different test scripts for CI and local development:
 },
 ```
 
-
-## Datadog Agent 
-
-The Datadog Agent must be accessible by the environment you're using to run your tests on.
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/facebook/jest/tree/master/packages/jest-circus
-[2]: https://github.com/DataDog/dd-trace-js
-[3]: https://jestjs.io/docs/en/configuration#testenvironment-string
-[4]: https://jestjs.io/docs/en/configuration#testrunner-string
-[5]: https://jestjs.io/docs/en/configuration
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/facebook/jest/tree/master/packages/jest-circus
+[3]: https://github.com/DataDog/dd-trace-js
+[4]: https://jestjs.io/docs/en/configuration#testenvironment-string
+[5]: https://jestjs.io/docs/en/configuration#testrunner-string
+[6]: https://jestjs.io/docs/en/configuration

@@ -37,9 +37,13 @@ and the following languages:
 | Objective-C |  2.0+   |
 
 
+## Prerequisites
+
+The Datadog Agent must be accessible by the environment you're using to run your tests on. Get one-step installation commands from the [Datadog app][1].
+
 ## Installing using SPM
 
-1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
+1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][2].
 
 2. Link your test targets with the library `DatadogSDKTesting` from the package. 
 
@@ -53,7 +57,7 @@ and the following languages:
 
 3. If you run UITests, also link the app running the tests with this library.
 
-    Alternatively, you can build the XCFramework from source code. Download the project at [dd-sdk-swift-testing][1] and run `make release`. The resulting framework `DatadogSDKTesting.xcframework` can be found at `./build/xcframework`.
+    Alternatively, you can build the XCFramework from source code. Download the project at [dd-sdk-swift-testing][2] and run `make release`. The resulting framework `DatadogSDKTesting.xcframework` can be found at `./build/xcframework`.
 
 ## Enabling tracing instrumentation
 
@@ -369,4 +373,5 @@ You can also disable or enable specific auto-instrumentation in some of the test
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-swift-testing
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/dd-sdk-swift-testing
