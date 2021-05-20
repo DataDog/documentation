@@ -69,7 +69,9 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 ## Incidents 
 
+
 {{< img src="mobile/incidents-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="incident page">}}
+
 
 On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][17]. 
 
@@ -78,6 +80,62 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
 2. Click the “+” button in the top right corner.
 3. Give your incident a title, severity, and commander.
+
+
+## Widgets
+
+### Monitor Saved Views
+
+You can view your Monitor [Saved Views][18] from your home screen with Datadog widgets. Tap on any Saved View cell to open the “Monitor Search” screen in the app, with your Saved View already filled in.
+
+**Note**: If you do not have any Monitor Saved Views, the widget will default to show you all Monitors. 
+
+#### Create a widget
+**iOS**:
+Long press on the home screen.
+Tap the “+” button on the top left corner of the screen.
+Search for “Datadog” widgets.
+Select your prefered size (medium allows up to 3 and large up to 6)
+Place it where you want on your screen.
+
+**Android**:
+Open the Android Widget Picker. Either long press your home screen, or long press the Datadog app icon.
+Tap on “Widgets”. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble. 
+Drag the Monitor Saved Views widget on your home screen.
+
+#### Edit a widget
+**iOS**:
+Long press on the widget to configure.
+Tap on “Edit Widget”.
+Tap on the individual Saved View cell to select and deselect.
+You can reorder them by drag and dropping each cell.
+Tap out of the widget to validate your selection and exit the configuration screen.
+
+**Android**:
+Tap on the widget title to configure.
+Tap on “Saved views”.
+Tap on the individual Saved View cell to select and deselect.
+You can reorder them by drag and dropping each cell.
+Tap “Save” to validate your selection and exit the configuration screen.
+Also, you can scroll the widget to see more Saved Views. Long press and resize the widget to fit your preference.
+
+#### Switch organizations
+**iOS**:
+All organizations you’ve logged-in are displayed in the configuration screen
+
+**Android**:
+From the configuration screen, tap on “Organization”
+Select a new organisation. You might need to sign in.
+Tap “Saved Views”. Select Saved Views to display or leave it as is.
+Tap “Save”. The widget is now configured with Saved Views from a different organisation.
+
+#### Delete a widget
+**iOS**:
+You can delete a widget pressing the “-” button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting “Remove Widget”
+
+**Android**:
+You can delete a widget by long pressing, drag and dropping the Widget on the “Remove” button.
+
 
 
 ## Quick actions
@@ -151,3 +209,4 @@ For help with troubleshooting, [contact Datadog support][5]. You can also send a
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG
 [16]: https://docs.datadoghq.com/account_management/saml/mobile-idp-login/
 [17]: https://docs.datadoghq.com/monitors/incident_management
+[18]: https://docs.datadoghq.com/logs/explorer/saved_views/
