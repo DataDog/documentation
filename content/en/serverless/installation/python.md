@@ -155,6 +155,7 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 ### Update the Zappa settings
 
 1. Add the following settings to your `zappa_settings.json`:
+   {{< site-region region="us,us3,eu" >}}  
     ```json
     {
         "dev": {
@@ -169,6 +170,23 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
         }
     }
     ```
+  {{< /site-region >}}
+  {{< site-region region="gov" >}}
+      ```json
+    {
+        "dev": {
+            "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>", "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"],
+            "lambda_handler": "datadog_lambda.handler.handler",
+            "aws_environment_variables": {
+                "DD_LAMBDA_HANDLER": "handler.lambda_handler",
+                "DD_TRACE_ENABLED": "true",
+                "DD_FLUSH_TO_LOG": "true",
+                "DD_API_KEY": "<DATADOG_API_KEY>",
+            },
+        }
+    }
+    ```
+  {{< /site-region >}}
 2. Replace the following placeholders with appropriate values: 
 
 - Replace `<AWS_REGION>` with the AWS region to which your Lambda functions are deployed.
@@ -178,10 +196,19 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 - Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][3]. 
 
 For example:
+
+{{< site-region region="us,us3,eu" >}} 
     ```
     arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python38:36
     arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:7
     ```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+    ```
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python38:36
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension:7
+    ```
+{{< /site-region >}}
 
 
 [1]: https://github.com/DataDog/datadog-lambda-python/releases
@@ -193,6 +220,7 @@ For example:
 ### Update the Chalice project
 
 1. Add the [Datadog Lambda Extension][1] and the following environment variables in your `config.json`:
+    {{< site-region region="us,us3,eu" >}} 
     ```json
     {
       "version": "2.0",
@@ -210,6 +238,26 @@ For example:
       }
     }
     ```
+    {{< /site-region >}}
+    {{< site-region region="gov" >}}
+    ```json
+    {
+      "version": "2.0",
+      "app_name": "hello-chalice",
+      "stages": {
+        "dev": {
+          "api_gateway_stage": "api",
+          "environment_variables": {
+            "DD_TRACE_ENABLED": "true",
+            "DD_FLUSH_TO_LOG": "true",
+            "DD_API_KEY": "<DATADOG_API_KEY>",
+          },
+          "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<VERSION_NUMBER>"],
+        }
+      }
+    }
+    ```
+    {{< /site-region >}}
 2. Replace the following placeholders with appropriate values: 
 
 - Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][2]. 
@@ -266,9 +314,16 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 
 For example:
 
+{{< site-region region="us,us3,eu" >}}
 ```sh
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 19 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
 ```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```sh
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 19 --forwarder arn:aws-us-gov:lambda:us-gov-east-1:002406178527:function:datadog-forwarder
+```
+{{< /site-region >}}
 
 More information and additional parameters can be found in the [CLI documentation][4].
 
@@ -325,19 +380,29 @@ The minor version of the `datadog-lambda` package always matches the layer versi
 
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
+{{< site-region region="us,us3,eu" >}}
 ```
-# For regular regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
-
-# For us-gov regions
+```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
+{{< /site-region >}}
 
 The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the [latest release][2]. For example:
 
+{{< site-region region="us,us3,eu" >}} 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
 ```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:19
+```
+{{< /site-region >}}
 
 #### Using the package
 
@@ -353,9 +418,16 @@ See the [latest release][6].
 
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
+{{< site-region region="us,us3,eu" >}}
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
 ```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>
+```
+{{< /site-region >}}
 
 For `EXTENSION_VERSION`, see the [latest release][7].
 
