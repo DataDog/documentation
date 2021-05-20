@@ -66,23 +66,31 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 
 **Debian Flavored Systems**:
 
-1. Set up apt so it can download through https
+1. Set up apt so it can download through https and install `curl` and `gnupg`
 
     ```shell
     sudo apt-get update
-    sudo apt-get install apt-transport-https
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. Remove Beta Repo and Ensure the stable repo is present:
 
     ```shell
     sudo rm /etc/apt/sources.list.d/datadog-beta.list
-    [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
+    [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
-3. Update apt and downgrade the Agent:
+3. If running Ubuntu 14 or earlier or Debian 8 or earlier, copy the keyring to `/etc/apt/trusted.gpg.d`:
+
+   ```shell
+   sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
+   ```
+
+4. Update apt and downgrade the Agent:
 
     ```shell
     sudo apt-get update
@@ -90,13 +98,13 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     sudo apt-get install datadog-agent
     ```
 
-4. Back-sync configurations and AutoDiscovery templates (optional)
+5. Back-sync configurations and AutoDiscovery templates (optional)
 
     If you have made any changes to your configurations or templates, you might want to sync these back for agent 5.
 
     **Note**: if you have made any changes to your configurations to support new agent6-only options, these will not work anymore with Agent version 5.
 
-5. Back-sync custom checks (optional):
+6. Back-sync custom checks (optional):
 
     If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. Note that you only need to copy back    checks you changed.
 
@@ -104,7 +112,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
-6. Restart the agent
+7. Restart the agent
 
     ```shell
     # Systemd
@@ -113,7 +121,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     sudo /etc/init.d/datadog-agent restart
     ```
 
-7. Clean out `/etc/datadog-agent` (optional):
+8. Clean out `/etc/datadog-agent` (optional):
 
     ```shell
     sudo -u dd-agent -- rm -rf /etc/datadog-agent/
