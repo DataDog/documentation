@@ -103,7 +103,7 @@ Drag the Monitor Saved Views widget on your home screen.
 **iOS**:
 Long press on the widget to configure.
 Tap on “Edit Widget”.
-Tap on the individual Saved View cell to select and deselect.
+- Tap on the individual saved view cell to select and deselect.
 You can reorder them by drag and dropping each cell.
 Tap out of the widget to validate your selection and exit the configuration screen.
 
