@@ -321,7 +321,12 @@ For more details on custom instrumentation and custom tagging, see [.NET Custom 
 
     - `DD_AGENT_HOST`
     - `DD_TRACE_AGENT_PORT`
+    
+{{< site-region region="us3,eu,gov" >}} 
 
+4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
+
+{{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}

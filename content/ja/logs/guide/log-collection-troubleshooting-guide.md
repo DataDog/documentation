@@ -138,7 +138,7 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 [1]: /ja/logs/
 [2]: /ja/help/
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
-[4]: /ja/agent/logs/#send-logs-over-https
+[4]: /ja/agent/logs/log_transport?tab=https#enforce-a-specific-transport
 [5]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
 [7]: /ja/integrations/journald/

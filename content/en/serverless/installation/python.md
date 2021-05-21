@@ -66,7 +66,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to add the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
-### Install the Datadog CloudFormation macro
+### Install
 
 Run the following command with your [AWS credentials][3] to deploy a CloudFormation stack that installs the macro AWS resource. You only need to install the macro **once** for a given region in your account. Replace `create-stack` with `update-stack` to update the macro to the latest version.
 
@@ -79,9 +79,9 @@ aws cloudformation create-stack \
 
 The macro is now deployed and ready to use.
 
-### Instrument the function
+### Instrument
 
-In your `template.yml`, add the following under the `Transform` section, **after** the `AWS::Serverless` transform for SAM.
+To instrument your function, add the following to `template.yml` under the `Transform` section, **after** the `AWS::Serverless` transform for SAM.
 
 ```yaml
 Transform:
@@ -154,7 +154,7 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 {{% /tab %}}
 {{% tab "Zappa" %}}
 
-### Update the Zappa settings
+### Update settings
 
 1. Add the following settings to your `zappa_settings.json`:
    {{< site-region region="us,us3,eu" >}}  
@@ -219,7 +219,7 @@ For example:
 {{% /tab %}}
 {{% tab "Chalice" %}}
 
-### Update the Chalice project
+### Update the project
 
 1. Add the [Datadog Lambda Extension][1] and the following environment variables in your `config.json`:
     {{< site-region region="us,us3,eu" >}} 
@@ -281,8 +281,6 @@ For example:
         return {'hello': 'world'}
     ```
 
-
-
 [1]: /serverless/libraries_integrations/extension/
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://gallery.ecr.aws/datadog/lambda-extension
@@ -294,7 +292,7 @@ For example:
 
 Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines. The CLI command automatically adds the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog.
 
-### Install the Datadog CLI
+### Install
 
 Install the Datadog CLI with NPM or Yarn:
 
@@ -306,9 +304,9 @@ npm install -g @datadog/datadog-ci
 yarn global add @datadog/datadog-ci
 ```
 
-### Instrument the function
+### Instrument
 
-Run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the desired version of the Datadog Lambda layer (see [latest releases][2]) and `<forwarder_arn>` with Forwarder ARN (see the [Forwarder documentation][3]).
+To instrument the function, run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the desired version of the Datadog Lambda layer (see [latest releases][2]) and `<forwarder_arn>` with Forwarder ARN (see the [Forwarder documentation][3]).
 
 ```sh
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> --forwarder	<forwarder_arn>
@@ -336,7 +334,7 @@ More information and additional parameters can be found in the [CLI documentatio
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
-### Install the Datadog Lambda Library
+### Install
 
 If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda Library as a Lambda Layer. Instead, you must install the Datadog Lambda library as a dependency of your function within the image.
 
@@ -366,15 +364,14 @@ Replace `<TAG>` with either a specific version number (for example, `7`) or with
   - Set `DD_API_KEY` with your Datadog API key on the [API Management page][2]. 
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
-
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install the Datadog Lambda Library
+### Install
 
-You can either install the Datadog Lambda library as a layer (recommended) or as a Python package.
+You can either install the Datadog Lambda library as a layer (recommended) or Python package.
 
 The minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
 
@@ -433,7 +430,9 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSI
 
 For `EXTENSION_VERSION`, see the [latest release][7].
 
-### Configure the function
+### Configure
+
+Follow these steps to configure the function:
 
 1. Set your function's handler to `datadog_lambda.handler.handler`.
 2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.

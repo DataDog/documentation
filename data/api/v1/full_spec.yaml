@@ -1315,6 +1315,8 @@ components:
           example: true
           readOnly: true
           type: boolean
+        active_child:
+          $ref: '#/components/schemas/DowntimeChild'
         canceled:
           description: If a scheduled downtime is canceled.
           example: 1412799983
@@ -1431,6 +1433,136 @@ components:
           nullable: true
           readOnly: true
           type: integer
+      type: object
+    DowntimeChild:
+      description: 'The downtime object definition of the active child for the original
+        parent recurring downtime. This
+
+        field will only exist on recurring downtimes.'
+      nullable: true
+      properties:
+        active:
+          description: If a scheduled downtime currently exists.
+          example: true
+          readOnly: true
+          type: boolean
+        canceled:
+          description: If a scheduled downtime is canceled.
+          example: 1412799983
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        creator_id:
+          description: User ID of the downtime creator.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        disabled:
+          description: If a downtime has been disabled.
+          example: false
+          type: boolean
+        downtime_type:
+          description: '`0` for a downtime applied on `*` or all,
+
+            `1` when the downtime is only scoped to hosts,
+
+            or `2` when the downtime is scoped to anything but hosts.'
+          example: 2
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        end:
+          description: 'POSIX timestamp to end the downtime. If not provided,
+
+            the downtime is in effect indefinitely until you cancel it.'
+          example: 1412793983
+          format: int64
+          nullable: true
+          type: integer
+        id:
+          description: The downtime ID.
+          example: 1626
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          description: 'A message to include with notifications for this downtime.
+
+            Email notifications can be sent to specific users by using the same `@username`
+            notation as events.'
+          example: Message on the downtime
+          type: string
+        monitor_id:
+          description: 'A single monitor to which the downtime applies.
+
+            If not provided, the downtime applies to all monitors.'
+          example: 123456
+          format: int64
+          nullable: true
+          type: integer
+        monitor_tags:
+          description: 'A comma-separated list of monitor tags. For example, tags
+            that are applied directly to monitors,
+
+            not tags that are used in monitor queries (which are filtered by the scope
+            parameter), to which the downtime applies.
+
+            The resulting downtime applies to monitors that match ALL provided monitor
+            tags.
+
+            For example, `service:postgres` **AND** `team:frontend`.'
+          example:
+          - '*'
+          items:
+            description: A monitor tag.
+            type: string
+          type: array
+        parent_id:
+          description: ID of the parent Downtime.
+          example: 123
+          format: int64
+          nullable: true
+          type: integer
+        recurrence:
+          $ref: '#/components/schemas/DowntimeRecurrence'
+        scope:
+          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+
+            Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
+
+            The resulting downtime applies to sources that matches ALL provided scopes
+            (`env:dev` **AND** `env:prod`).'
+          example:
+          - env:staging
+          items:
+            description: A scope. For example, `"env:staging"`.
+            type: string
+          type: array
+        start:
+          description: 'POSIX timestamp to start the downtime.
+
+            If not provided, the downtime starts the moment it is created.'
+          example: 1412792983
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone in which to display the downtime's start and end
+            times in Datadog applications.
+          example: America/New_York
+          type: string
+        updater_id:
+          description: ID of the last user that updated the downtime.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          readOnly: true
+          type: integer
+      readOnly: true
       type: object
     DowntimeRecurrence:
       description: An object defining the recurrence of the downtime.
@@ -3538,6 +3670,51 @@ components:
       type: string
       x-enum-varnames:
       - ATTRIBUTE_REMAPPER
+    LogsByRetention:
+      description: Object containing logs usage data broken down by retention period.
+      properties:
+        orgs:
+          description: Indexed logs usage summary for each organization for each retention
+            period with usage.
+          properties:
+            usage:
+              description: Indexed logs usage summary for each organization.
+              items:
+                $ref: '#/components/schemas/LogsByRetentionOrgUsage'
+              type: array
+          type: object
+        usage:
+          description: Aggregated index logs usage for each retention period with
+            usage.
+          items:
+            $ref: '#/components/schemas/LogsRetentionAggSumUsage'
+          type: array
+        usage_by_month:
+          $ref: '#/components/schemas/LogsByRetentionMonthlyUsage'
+      type: object
+    LogsByRetentionMonthlyUsage:
+      description: Object containing a summary of indexed logs usage by retention
+        period for a single month.
+      properties:
+        date:
+          description: The month for the usage.
+          format: datetime
+          type: string
+        usage:
+          description: Indexed logs usage for each active retention for the month.
+          items:
+            $ref: '#/components/schemas/LogsRetentionSumUsage'
+          type: array
+      type: object
+    LogsByRetentionOrgUsage:
+      description: Indexed logs usage by retention for a single organization.
+      properties:
+        usage:
+          description: Indexed logs usage for each active retention for the organization.
+          items:
+            $ref: '#/components/schemas/LogsRetentionSumUsage'
+          type: array
+      type: object
     LogsCategoryProcessor:
       description: "Use the Category Processor to add a new attribute (without spaces\
         \ or special characters in the new attribute name)\nto a log matching a provided\
@@ -4253,6 +4430,48 @@ components:
           type: integer
       required:
       - aggregation
+      type: object
+    LogsRetentionAggSumUsage:
+      description: Object containing indexed logs usage aggregated across organizations
+        and months for a retention period.
+      properties:
+        logs_indexed_logs_usage_agg_sum:
+          description: Total indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_live_indexed_logs_usage_agg_sum:
+          description: Live indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_logs_usage_agg_sum:
+          description: Rehydrated indexed logs for this retention period.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            periods.
+          type: string
+      type: object
+    LogsRetentionSumUsage:
+      description: Object containing indexed logs usage grouped by retention period
+        and summed.
+      properties:
+        logs_indexed_logs_usage_sum:
+          description: Total indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_live_indexed_logs_usage_sum:
+          description: Live indexed logs for this retention period.
+          format: int64
+          type: integer
+        logs_rehydrated_indexed_logs_usage_sum:
+          description: Rehydrated indexed logs for this retention period.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            periods.
+          type: string
       type: object
     LogsServiceRemapper:
       description: 'Use this processor if you want to assign one or more attributes
@@ -4973,8 +5192,12 @@ components:
           type: boolean
         escalation_message:
           default: none
-          description: 'A message to include with a re-notification. Supports the
-            `@username` notification we allow elsewhere.
+          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notifications/?tab=is_alert#renotify),
+
+            block in the original message instead.
+
+            A message to include with a re-notification. Supports the `@username`
+            notification we allow elsewhere.
 
             Not applicable if `renotify_interval` is `None`.'
           type: string
@@ -5606,6 +5829,719 @@ components:
       type: string
       x-enum-varnames:
       - NOTE
+    NotebookAbsoluteTime:
+      description: Absolute timeframe.
+      example:
+        end: '2021-02-24T20:18:28+00:00'
+        start: '2021-02-24T19:18:28+00:00'
+      properties:
+        end:
+          description: The end time.
+          example: '2021-02-24T20:18:28+00:00'
+          format: date-time
+          type: string
+        live:
+          description: Indicates whether the timeframe should be shifted to end at
+            the current time.
+          type: boolean
+        start:
+          description: The start time.
+          example: '2021-02-24T19:18:28+00:00'
+          format: date-time
+          type: string
+      required:
+      - start
+      - end
+      type: object
+    NotebookAuthor:
+      description: Attributes of user object returned by the API.
+      properties:
+        created_at:
+          description: Creation time of the user.
+          format: date-time
+          type: string
+        disabled:
+          description: Whether the user is disabled.
+          type: boolean
+        email:
+          description: Email of the user.
+          type: string
+        handle:
+          description: Handle of the user.
+          type: string
+        icon:
+          description: URL of the user's icon.
+          type: string
+        name:
+          description: Name of the user.
+          type: string
+        status:
+          description: Status of the user.
+          type: string
+        title:
+          description: Title of the user.
+          type: string
+        verified:
+          description: Whether the user is verified.
+          type: boolean
+      type: object
+    NotebookCellCreateRequest:
+      description: The description of a notebook cell create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    NotebookCellCreateRequestAttributes:
+      description: 'The attributes of a notebook cell in create cell request. Valid
+        cell types are `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCellResourceType:
+      default: notebook_cells
+      description: Type of the Notebook Cell resource.
+      enum:
+      - notebook_cells
+      example: notebook_cells
+      type: string
+      x-enum-varnames:
+      - NOTEBOOK_CELLS
+    NotebookCellResponse:
+      description: The description of a notebook cell response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellResponseAttributes'
+        id:
+          description: Notebook cell ID.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookCellResponseAttributes:
+      description: 'The attributes of a notebook cell response. Valid cell types are
+        `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCellTime:
+      description: Timeframe for the notebook cell. When 'null', the notebook global
+        time is used.
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/NotebookRelativeTime'
+      - $ref: '#/components/schemas/NotebookAbsoluteTime'
+      type: object
+    NotebookCellUpdateRequest:
+      description: The description of a notebook cell update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCellUpdateRequestAttributes'
+        id:
+          description: Notebook cell ID.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookCellResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookCellUpdateRequestAttributes:
+      description: 'The attributes of a notebook cell in update cell request. Valid
+        cell types are `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
+
+        `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
+      oneOf:
+      - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
+      - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
+      - $ref: '#/components/schemas/NotebookToplistCellAttributes'
+      - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
+      - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
+      - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
+      type: object
+    NotebookCreateData:
+      description: The data for a notebook create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookCreateDataAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    NotebookCreateDataAttributes:
+      description: The data attributes of a notebook.
+      properties:
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookCellCreateRequest'
+          type: array
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      - cells
+      - time
+      type: object
+    NotebookCreateRequest:
+      description: The description of a notebook create request.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookCreateData'
+      required:
+      - data
+      type: object
+    NotebookDistributionCellAttributes:
+      description: The attributes of a notebook `distribution` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/DistributionWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookGlobalTime:
+      description: Notebook global timeframe.
+      oneOf:
+      - $ref: '#/components/schemas/NotebookRelativeTime'
+      - $ref: '#/components/schemas/NotebookAbsoluteTime'
+      type: object
+    NotebookGraphSize:
+      description: The size of the graph.
+      enum:
+      - xs
+      - s
+      - m
+      - l
+      - xl
+      example: m
+      type: string
+      x-enum-varnames:
+      - EXTRA_SMALL
+      - SMALL
+      - MEDIUM
+      - LARGE
+      - EXTRA_LARGE
+    NotebookHeatMapCellAttributes:
+      description: The attributes of a notebook `heatmap` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/HeatMapWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookLogStreamCellAttributes:
+      description: The attributes of a notebook `log_stream` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/LogStreamWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookMarkdownCellAttributes:
+      description: The attributes of a notebook `markdown` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/NotebookMarkdownCellDefinition'
+      required:
+      - definition
+      type: object
+    NotebookMarkdownCellDefinition:
+      description: Text in a notebook is formatted with [Markdown](https://daringfireball.net/projects/markdown/),
+        which enables the use of headings, subheadings, links, images, lists, and
+        code blocks.
+      properties:
+        text:
+          description: The markdown content.
+          example: "# Example Header \nexample content"
+          type: string
+        type:
+          $ref: '#/components/schemas/NotebookMarkdownCellDefinitionType'
+      required:
+      - type
+      - text
+      type: object
+    NotebookMarkdownCellDefinitionType:
+      default: markdown
+      description: Type of the markdown cell.
+      enum:
+      - markdown
+      example: markdown
+      type: string
+      x-enum-varnames:
+      - MARKDOWN
+    NotebookRelativeTime:
+      description: Relative timeframe.
+      example:
+        live_span: 1h
+      properties:
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
+      required:
+      - live_span
+      type: object
+    NotebookResourceType:
+      default: notebooks
+      description: Type of the Notebook resource.
+      enum:
+      - notebooks
+      example: notebooks
+      type: string
+      x-enum-varnames:
+      - NOTEBOOKS
+    NotebookResponse:
+      description: The description of a notebook response.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookResponseData'
+      type: object
+    NotebookResponseData:
+      description: The data for a notebook.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookResponseDataAttributes'
+        id:
+          description: Unique notebook ID, assigned when you create the notebook.
+          example: 123456
+          format: int64
+          readOnly: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebookResponseDataAttributes:
+      description: The attributes of a notebook.
+      properties:
+        author:
+          $ref: '#/components/schemas/NotebookAuthor'
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            id: bzbycoya
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            id: 9k6bc6xc
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookCellResponse'
+          type: array
+        created:
+          description: UTC time stamp for when the notebook was created.
+          example: '2021-02-24T23:14:15.173964+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: UTC time stamp for when the notebook was last modified.
+          example: '2021-02-24T23:15:23.274966+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - cells
+      - time
+      - name
+      type: object
+    NotebookSplitBy:
+      description: Object describing how to split the graph to display multiple visualizations
+        per request.
+      example:
+        keys: []
+        tags: []
+      properties:
+        keys:
+          description: Keys to split on.
+          items:
+            description: A key to split on.
+            example: environment
+            type: string
+          type: array
+        tags:
+          description: Tags to split on.
+          items:
+            description: A tag to split on.
+            example: environment:staging
+            type: string
+          type: array
+      required:
+      - keys
+      - tags
+      type: object
+    NotebookStatus:
+      default: published
+      description: Publication status of the notebook. For now, always "published".
+      enum:
+      - published
+      example: published
+      type: string
+      x-enum-varnames:
+      - PUBLISHED
+    NotebookTimeseriesCellAttributes:
+      description: The attributes of a notebook `timeseries` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/TimeseriesWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookToplistCellAttributes:
+      description: The attributes of a notebook `toplist` cell.
+      properties:
+        definition:
+          $ref: '#/components/schemas/ToplistWidgetDefinition'
+        graph_size:
+          $ref: '#/components/schemas/NotebookGraphSize'
+        split_by:
+          $ref: '#/components/schemas/NotebookSplitBy'
+        time:
+          $ref: '#/components/schemas/NotebookCellTime'
+      required:
+      - definition
+      type: object
+    NotebookUpdateCell:
+      description: 'Updating a notebook can either insert new cell(s) or update existing
+        cell(s) by including the cell `id`.
+
+        To delete existing cell(s), simply omit it from the list of cells.'
+      oneOf:
+      - $ref: '#/components/schemas/NotebookCellCreateRequest'
+      - $ref: '#/components/schemas/NotebookCellUpdateRequest'
+      type: object
+    NotebookUpdateData:
+      description: The data for a notebook update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebookUpdateDataAttributes'
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    NotebookUpdateDataAttributes:
+      description: The data attributes of a notebook.
+      properties:
+        cells:
+          description: List of cells to display in the notebook.
+          example:
+          - attributes:
+              definition:
+                text: '## Some test markdown
+
+
+                  ```js
+
+                  var x, y;
+
+                  x = 5;
+
+                  y = 6;
+
+                  ```'
+                type: markdown
+            id: bzbycoya
+            type: notebook_cells
+          - attributes:
+              definition:
+                requests:
+                - display_type: line
+                  q: avg:system.load.1{*}
+                  style:
+                    line_type: solid
+                    line_width: normal
+                    palette: dog_classic
+                show_legend: true
+                type: timeseries
+                yaxis:
+                  scale: linear
+              graph_size: m
+              split_by:
+                keys: []
+                tags: []
+              time: null
+            id: 9k6bc6xc
+            type: notebook_cells
+          items:
+            $ref: '#/components/schemas/NotebookUpdateCell'
+          type: array
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      - cells
+      - time
+      type: object
+    NotebookUpdateRequest:
+      description: The description of a notebook update request.
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookUpdateData'
+      required:
+      - data
+      type: object
+    NotebooksResponse:
+      description: Notebooks get all response.
+      properties:
+        data:
+          description: List of notebook definitions.
+          items:
+            $ref: '#/components/schemas/NotebooksResponseData'
+          type: array
+        meta:
+          description: Metadata returned by the API.
+          properties:
+            page:
+              $ref: '#/components/schemas/NotebooksResponsePage'
+          type: object
+      type: object
+    NotebooksResponseData:
+      description: The data for a notebook in get all response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebooksResponseDataAttributes'
+        id:
+          description: Unique notebook ID, assigned when you create the notebook.
+          example: 123456
+          format: int64
+          readOnly: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebooksResponseDataAttributes:
+      description: The attributes of a notebook in get all response.
+      properties:
+        author:
+          $ref: '#/components/schemas/NotebookAuthor'
+        cells:
+          description: List of cells to display in the notebook.
+          items:
+            $ref: '#/components/schemas/NotebookCellResponse'
+          type: array
+        created:
+          description: UTC time stamp for when the notebook was created.
+          example: '2021-02-24T23:14:15.173964+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: UTC time stamp for when the notebook was last modified.
+          example: '2021-02-24T23:15:23.274966+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
+      type: object
+    NotebooksResponsePage:
+      description: Pagination metadata returned by the API.
+      properties:
+        total_count:
+          description: The total number of notebooks that would be returned if the
+            request was not filtered by `start` and `count` parameters.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: The total number of notebooks returned.
+          format: int64
+          type: integer
+      type: object
     Organization:
       description: Create, edit, and manage organizations.
       properties:
@@ -8007,6 +8943,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -8015,6 +8952,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID for the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -8345,6 +9283,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -8353,6 +9292,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID of the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -8944,8 +9884,6 @@ components:
             the value will not be present if the variable is secure.'
           example: example-value
           type: string
-      required:
-      - value
       type: object
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
@@ -9347,7 +10285,6 @@ components:
             $ref: '#/components/schemas/SyntheticsBrowserVariable'
           type: array
       required:
-      - request
       - assertions
       type: object
     SyntheticsTestDetails:
@@ -9367,6 +10304,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -9375,6 +10313,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The test public ID.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -9625,6 +10564,7 @@ components:
     SyntheticsTickInterval:
       description: The frequency at which to run the Synthetic test (in seconds).
       enum:
+      - 30
       - 60
       - 300
       - 900
@@ -9637,6 +10577,7 @@ components:
       format: int64
       type: integer
       x-enum-varnames:
+      - THIRTY_SECONDS
       - MINUTE
       - FIVE_MINUTES
       - FIFTEEN_MINUTES
@@ -10231,24 +11172,18 @@ components:
           $ref: '#/components/schemas/UsageAttributionPagination'
       type: object
     UsageAttributionPagination:
-      description: The page count for the current pagination.
+      description: The metadata for the current pagination.
       properties:
         limit:
           description: Maximum amount of records to be returned.
           format: int64
           type: integer
-        offset:
-          description: Records to be skipped before beginning to return.
-          format: int64
-          type: integer
-        sort_direction:
-          description: Direction to sort by.
-          type: string
-        sort_name:
-          description: Field to sort by.
+        next_record_id:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of this next_record_id.
           type: string
         total_number_of_records:
-          description: Total number of records.
+          description: Total number of records. (deprecated after May 1st, 2021)
           format: int64
           type: integer
       type: object
@@ -10313,6 +11248,70 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - LAMBDA_USAGE
       - LAMBDA_PERCENTAGE
+    UsageAttributionSupportedMetrics:
+      description: Supported fields for usage attribution requests (valid requests
+        contain one or more metrics, or `*` for all).
+      enum:
+      - custom_timeseries_usage
+      - container_usage
+      - snmp_percentage
+      - apm_host_usage
+      - browser_usage
+      - npm_host_percentage
+      - infra_host_usage
+      - custom_timeseries_percentage
+      - container_percentage
+      - lambda_usage
+      - api_usage
+      - apm_host_percentage
+      - infra_host_percentage
+      - snmp_usage
+      - browser_percentage
+      - api_percentage
+      - lambda_percentage
+      - npm_host_usage
+      - lambda_functions_usage
+      - lambda_functions_percentage
+      - lambda_invocations_usage
+      - lambda_invocations_percentage
+      - fargate_usage
+      - fargate_percentage
+      - profiled_host_usage
+      - profiled_host_percentage
+      - profiled_container_usage
+      - profiled_container_percentage
+      - '*'
+      type: string
+      x-enum-varnames:
+      - CUSTOM_TIMESERIES_USAGE
+      - CONTAINER_USAGE
+      - SNMP_PERCENTAGE
+      - APM_HOST_USAGE
+      - BROWSER_USAGE
+      - NPM_HOST_PERCENTAGE
+      - INFRA_HOST_USAGE
+      - CUSTOM_TIMESERIES_PERCENTAGE
+      - CONTAINER_PERCENTAGE
+      - LAMBDA_USAGE
+      - API_USAGE
+      - APM_HOST_PERCENTAGE
+      - INFRA_HOST_PERCENTAGE
+      - SNMP_USAGE
+      - BROWSER_PERCENTAGE
+      - API_PERCENTAGE
+      - LAMBDA_PERCENTAGE
+      - NPM_HOST_USAGE
+      - LAMBDA_FUNCTIONS_USAGE
+      - LAMBDA_FUNCTIONS_PERCENTAGE
+      - LAMBDA_INVOCATIONS_USAGE
+      - LAMBDA_INVOCATIONS_PERCENTAGE
+      - FARGATE_USAGE
+      - FARGATE_PERCENTAGE
+      - PROFILED_HOST_USAGE
+      - PROFILED_HOST_PERCENTAGE
+      - PROFILED_CONTAINER_USAGE
+      - PROFILED_CONTAINER_PERCENTAGE
+      - ALL
     UsageAttributionTagNames:
       additionalProperties:
         description: A list of tag values.
@@ -10913,6 +11912,40 @@ components:
             response.
           items:
             $ref: '#/components/schemas/UsageLogsByIndexHour'
+          type: array
+      type: object
+    UsageLogsByRetentionHour:
+      description: The number of indexed logs for each hour for a given organization
+        broken down by retention period.
+      properties:
+        indexed_events_count:
+          description: Total logs indexed with this retention period during a given
+            hour.
+          format: int64
+          type: integer
+        live_indexed_events_count:
+          description: Live logs indexed with this retention period during a given
+            hour.
+          format: int64
+          type: integer
+        rehydrated_indexed_events_count:
+          description: Rehydrated logs indexed with this retention period during a
+            given hour.
+          format: int64
+          type: integer
+        retention:
+          description: The retention period in days or "custom" for all custom retention
+            usage.
+          type: string
+      type: object
+    UsageLogsByRetentionResponse:
+      description: Response containing the indexed logs usage broken down by retention
+        period for an organization during a given hour.
+      properties:
+        usage:
+          description: Get hourly usage for indexed logs by retention period.
+          items:
+            $ref: '#/components/schemas/UsageLogsByRetentionHour'
           type: array
       type: object
     UsageLogsHour:
@@ -11729,6 +12762,8 @@ components:
             1, 2020).
           format: int64
           type: integer
+        logs_by_retention:
+          $ref: '#/components/schemas/LogsByRetention'
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current months for all organizations.
@@ -12345,6 +13380,9 @@ components:
       description: Custom links help you connect a data value to a URL, like a Datadog
         page or your AWS console.
       properties:
+        is_hidden:
+          description: The flag for toggling context menu link visibility.
+          type: boolean
         label:
           description: The label for the custom link URL. Keep the label short and
             descriptive. Use metrics and tags as variables.
@@ -12355,9 +13393,11 @@ components:
             A relative URL must start with `/`.
           example: https://app.datadoghq.com/logs?query={{host}}
           type: string
-      required:
-      - label
-      - link
+        override_label:
+          description: The label ID that refers to a context menu link. Can be `logs`,
+            `hosts`, `traces`, `profiles`, `processes`, `containers`, or `rum`.
+          example: logs
+          type: string
       type: object
     WidgetDefinition:
       description: '[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).'
@@ -12517,7 +13557,6 @@ components:
           minimum: 0
           type: integer
         is_column_break:
-          default: false
           description: 'Whether the widget should be the first one on the second column
             in high density or not.
 
@@ -18829,6 +19868,363 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/notebooks:
+    get:
+      description: 'Get all notebooks. This can also be used to search for notebooks
+        with a particular `query` in the notebook
+
+        `name` or author `handle`.'
+      operationId: ListNotebooks
+      parameters:
+      - description: Return notebooks created by the given `author_handle`.
+        in: query
+        name: author_handle
+        required: false
+        schema:
+          example: test@datadoghq.com
+          type: string
+        style: form
+      - description: Return notebooks not created by the given `author_handle`.
+        in: query
+        name: exclude_author_handle
+        required: false
+        schema:
+          example: test@datadoghq.com
+          type: string
+        style: form
+      - description: The index of the first notebook you want returned.
+        in: query
+        name: start
+        required: false
+        schema:
+          example: 0
+          format: int64
+          type: integer
+        style: form
+      - description: The number of notebooks to be returned.
+        in: query
+        name: count
+        required: false
+        schema:
+          example: 5
+          format: int64
+          type: integer
+        style: form
+      - description: Sort by field `modified` or `name`.
+        in: query
+        name: sort_field
+        required: false
+        schema:
+          default: modified
+          example: modified
+          type: string
+        style: form
+      - description: Sort by direction `asc` or `desc`.
+        in: query
+        name: sort_dir
+        required: false
+        schema:
+          default: desc
+          example: desc
+          type: string
+        style: form
+      - description: Return only notebooks with `query` string in notebook name or
+          author handle.
+        in: query
+        name: query
+        required: false
+        schema:
+          example: postmortem
+          type: string
+        style: form
+      - description: Value of `false` excludes the `cells` and global `time` for each
+          notebook.
+        in: query
+        name: include_cells
+        required: false
+        schema:
+          default: true
+          example: false
+          type: boolean
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebooksResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Get all notebooks
+      tags:
+      - Notebooks
+      x-undo:
+        type: safe
+    post:
+      description: Create a notebook using the specified options.
+      operationId: CreateNotebook
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                      - attributes:
+                          definition:
+                            text: '## Some test markdown
+
+
+                              With some example content.'
+                            type: markdown
+                        type: notebook_cells
+                      - attributes:
+                          definition:
+                            requests:
+                            - display_type: line
+                              q: avg:system.load.1{*}
+                              style:
+                                line_type: solid
+                                line_width: normal
+                                palette: dog_classic
+                            show_legend: true
+                            type: timeseries
+                            yaxis:
+                              scale: linear
+                          graph_size: m
+                          split_by:
+                            keys: []
+                            tags: []
+                          time: null
+                        type: notebook_cells
+                      name: Example Notebook
+                      time:
+                        live_span: 1h
+                    type: notebooks
+            schema:
+              $ref: '#/components/schemas/NotebookCreateRequest'
+        description: The JSON description of the notebook you want to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Create a notebook
+      tags:
+      - Notebooks
+      x-codegen-request-body-name: body
+      x-given:
+        notebook:
+          parameters:
+          - file: notebook_payload.json
+            name: body
+          step: there is a valid "notebook" in the system
+      x-undo:
+        operationId: DeleteNotebook
+        parameters:
+        - name: notebook_id
+          source: data.id
+        type: unsafe
+  /api/v1/notebooks/{notebook_id}:
+    delete:
+      description: Delete a notebook using the specified ID.
+      operationId: DeleteNotebook
+      parameters:
+      - description: Unique ID, assigned when you create the notebook.
+        in: path
+        name: notebook_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete a notebook
+      tags:
+      - Notebooks
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a notebook using the specified notebook ID.
+      operationId: GetNotebook
+      parameters:
+      - description: Unique ID, assigned when you create the notebook.
+        in: path
+        name: notebook_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get a notebook
+      tags:
+      - Notebooks
+      x-undo:
+        type: safe
+    put:
+      description: Update a notebook using the specified ID.
+      operationId: UpdateNotebook
+      parameters:
+      - description: Unique ID, assigned when you create the notebook.
+        in: path
+        name: notebook_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                      - attributes:
+                          definition:
+                            text: '## Some updated test markdown
+
+
+                              With some example content.'
+                            type: markdown
+                        type: notebook_cells
+                      - attributes:
+                          definition:
+                            requests:
+                            - display_type: bars
+                              q: avg:system.load.1{*}
+                              style:
+                                line_type: solid
+                                line_width: normal
+                                palette: warm
+                            show_legend: true
+                            type: timeseries
+                            yaxis:
+                              scale: linear
+                          graph_size: m
+                          split_by:
+                            keys: []
+                            tags: []
+                          time: null
+                        id: abcd1234
+                        type: notebook_cells
+                      name: Example Notebook
+                      time:
+                        live_span: 1h
+                    type: notebooks
+            schema:
+              $ref: '#/components/schemas/NotebookUpdateRequest'
+        description: Update notebook request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+      summary: Update a notebook
+      tags:
+      - Notebooks
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/org:
     get:
       description: List your managed organizations.
@@ -19607,6 +21003,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: SLO Not Found
       summary: Create an SLO correction
       tags:
       - Service Level Objective Corrections
@@ -21397,12 +22799,13 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: The specified field to search results for.
+      - description: Comma-separated list of usage types to return, or `*` for all
+          usage types.
         in: query
         name: fields
         required: true
         schema:
-          type: string
+          $ref: '#/components/schemas/UsageAttributionSupportedMetrics'
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for usage ending this month.'
         in: query
@@ -21903,6 +23306,53 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v1/usage/logs-by-retention:
+    get:
+      description: Get hourly usage for indexed logs by retention period.
+      operationId: GetUsageLogsByRetention
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageLogsByRetentionResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly logs usage by retention
+      tags:
+      - Usage Metering
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
@@ -22444,7 +23894,7 @@ paths:
         type: safe
   /api/v1/usage/top_avg_metrics:
     get:
-      description: Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
+      description: Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
         by hourly average. Use the month parameter to get a month-to-date data resolution
         or use the day parameter to get a daily resolution. One of the two is required,
         and only one of the two is allowed.
@@ -22485,6 +23935,13 @@ paths:
           maximum: 5000
           minimum: 1
           type: integer
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -22504,7 +23961,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get top custom metrics by hourly average
+      summary: Get all custom metrics by hourly average
       tags:
       - Usage Metering
       x-menu-order: 5
@@ -23333,6 +24790,17 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/
   name: Monitors
+- description: 'Interact with your notebooks through the API to make it easier to
+    organize, find, and
+
+    share all of your notebooks with your team and organization. For more information,
+    see the
+
+    [Notebooks documentation](https://docs.datadoghq.com/notebooks/).'
+  externalDocs:
+    description: For more information, see the Notebooks documentation.
+    url: https://docs.datadoghq.com/notebooks/
+  name: Notebooks
 - description: Create, edit, and manage your organizations. Read more about [multi-org
     accounts](https://docs.datadoghq.com/account_management/multi_organization).
   externalDocs:
@@ -23369,6 +24837,8 @@ tags:
 
     - [Read more about Custom Check monitors.][4]
 
+    - [Read more about Service Check and status codes.][5]
+
 
     [1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert
 
@@ -23376,7 +24846,9 @@ tags:
 
     [3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert
 
-    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert'
+    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert
+
+    [5]: https://docs.datadoghq.com/developers/service_checks/'
   name: Service Checks
 - description: 'APM Service Map API. For more information, visit
 

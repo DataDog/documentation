@@ -241,7 +241,8 @@
         "#en-apprendre-plus",
         "#further-reading",
         ".alert-info",
-        ".announcement_banner"
+        ".announcement_banner",
+        ".language-region-select-container"
     ],
     "conversation_id": ["620036890"],
     "custom_settings": {
@@ -254,7 +255,8 @@
             ["microsoft azure", "azure"],
             ["gcp", "google cloud platform"],
             ["aws", "amazon web service"],
-            ["RUM", "rum", "real user monitoring"]
+            ["RUM", "rum", "real user monitoring"],
+            ["Role Permissions", "permissions"]
         ]
     },
     "only_content_level": true,

@@ -623,6 +623,30 @@
     "description": "Get specified monthly custom reports.",
     "summary": "Get specified monthly custom reports"
   },
+  "ListNotebooks": {
+    "description": "Get all notebooks. This can also be used to search for notebooks with a particular `query` in the notebook\n`name` or author `handle`.",
+    "summary": "Get all notebooks"
+  },
+  "CreateNotebook": {
+    "description": "Create a notebook using the specified options.",
+    "summary": "Create a notebook",
+    "request_description": "The JSON description of the notebook you want to create.",
+    "request_schema_description": "The description of a notebook create request."
+  },
+  "DeleteNotebook": {
+    "description": "Delete a notebook using the specified ID.",
+    "summary": "Delete a notebook"
+  },
+  "GetNotebook": {
+    "description": "Get a notebook using the specified notebook ID.",
+    "summary": "Get a notebook"
+  },
+  "UpdateNotebook": {
+    "description": "Update a notebook using the specified ID.",
+    "summary": "Update a notebook",
+    "request_description": "Update notebook request body.",
+    "request_schema_description": "The description of a notebook update request."
+  },
   "ListOrgs": {
     "description": "List your managed organizations.",
     "summary": "List your managed organizations"
@@ -934,6 +958,10 @@
     "description": "Get hourly usage for logs.",
     "summary": "Get hourly usage for Logs"
   },
+  "GetUsageLogsByRetention": {
+    "description": "Get hourly usage for indexed logs by retention period.",
+    "summary": "Get hourly logs usage by retention"
+  },
   "GetUsageLogsByIndex": {
     "description": "Get hourly usage for logs by index.",
     "summary": "Get hourly usage for Logs by Index"
@@ -979,8 +1007,8 @@
     "summary": "Get hourly usage for custom metrics"
   },
   "GetUsageTopAvgMetrics": {
-    "description": "Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average. Use the month parameter to get a month-to-date data resolution or use the day parameter to get a daily resolution. One of the two is required, and only one of the two is allowed.",
-    "summary": "Get top custom metrics by hourly average"
+    "description": "Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average. Use the month parameter to get a month-to-date data resolution or use the day parameter to get a daily resolution. One of the two is required, and only one of the two is allowed.",
+    "summary": "Get all custom metrics by hourly average"
   },
   "GetUsageTrace": {
     "description": "Get hourly usage for trace search.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.",

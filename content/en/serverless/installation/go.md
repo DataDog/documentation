@@ -16,9 +16,9 @@ further_reading:
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
+{{< img src="serverless/go-lambda-tracing.png" alt="Monitor Go Lambda Functions with Datadog"  style="width:100%;">}}
 
-## Required Setup
+## Required setup
 
 If not already configured:
 
@@ -29,15 +29,17 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 
 ## Configuration
 
-### Install the Datadog Lambda Library
+### Install
 
-You can install the [Datadog Lambda Library][3] locally by running the following command:
+Install the [Datadog Lambda library][3] locally by running the following command:
 
 ```
 go get github.com/DataDog/datadog-lambda-go
 ```
 
-### Instrument the Function
+### Instrument
+
+Follow these steps to instrument the function:
 
 1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
 2. Import the required packages in the file declaring your Lambda function handler.
@@ -86,20 +88,20 @@ go get github.com/DataDog/datadog-lambda-go
     }
     ```
 
-### Subscribe the Datadog Forwarder to the log groups
+### Subscribe
 
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
 2. [Subscribe the Datadog Forwarder to your function's log groups][4].
 
-### Unified service tagging
+### Tag
 
 Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][5].
 
-## Explore Datadog serverless monitoring
+## Explore
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][6].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][6].
 
 ## Monitor custom business logic
 

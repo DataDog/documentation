@@ -237,22 +237,22 @@ EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 
 examples/go: examples/datadog-api-client-go clean-go-examples
 	echo $(EXAMPLES_DIR)
-	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Go code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 examples/java: examples/datadog-api-client-java clean-java-examples
-	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Java code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 examples/python: examples/datadog-api-client-python clean-python-examples
-	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
-	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Ruby code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 

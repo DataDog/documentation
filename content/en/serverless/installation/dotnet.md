@@ -39,7 +39,7 @@ For `EXTENSION_VERSION`, see the [latest release][3].
 
 After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless homepage][7].
 
-### Unified service tagging
+### Tag
 
 Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][8].
 
