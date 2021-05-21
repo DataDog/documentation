@@ -106,6 +106,8 @@ View your [monitor saved views][18] from your home screen with Datadog widgets. 
 - Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble. 
 - Drag the Monitor Saved Views widget on your home screen.
 
+{{% /tab %}}
+{{< /tabs >}}
 #### Edit a widget
 
 {{< tabs >}}
