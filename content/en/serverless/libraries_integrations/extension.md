@@ -5,6 +5,8 @@ further_reading:
     - link: 'serverless/custom_metrics'
       tag: 'Documentation'
       text: 'Submitting Custom Metrics from AWS Lambda'
+aliases:
+    - /serverless/datadog_lambda_library/extension/
 ---
 
 ## Overview

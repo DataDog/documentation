@@ -20,6 +20,8 @@ further_reading:
 - link: 'serverless/custom_metrics/'
   tag: "Documentation"
   text: 'Submitting Custom Metrics from Serverless Applications'
+aliases:
+    - /serverless/datadog_lambda_library/nodejs/
 ---
 
 These instructions are for using the Datadog recommended out-of-the-box Lambda functionality. If you set up Datadog Serverless using the Datadog Forwarder, see the [installtion instructions here][1].

@@ -219,6 +219,8 @@
           dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
           title: Datadog Serverless Plugin
           kind: documentation
+          aliases:
+            - /serverless/serverless_integrations/plugin/
 
   - repo_name: datadog-cloudformation-macro
     contents:
@@ -233,6 +235,8 @@
           dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md"]
           title: Datadog Serverless Macro
           kind: documentation
+          aliases:
+            - /serverless/serverless_integrations/macro/
 
   - repo_name: datadog-ci
     contents:
@@ -249,6 +253,7 @@
           kind: documentation
           aliases:
             - /serverless/datadog_lambda_library/
+            - /serverless/serverless_integrations/cli/
 
   - repo_name: dd-sdk-android
     contents:
