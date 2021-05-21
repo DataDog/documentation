@@ -121,7 +121,7 @@ import datadog
 {{< programming-lang lang="python-beta" >}}
 #### Installation
 ```console
-pip3 install datadog-api-client --pre
+pip3 install datadog-api-client
 ```
 #### Usage
 ```python
@@ -143,7 +143,7 @@ require 'dogapi'
 {{< programming-lang lang="ruby-beta" >}}
 #### Installation
 ```sh
-gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}} --pre
+gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}}
 ```
 #### Usage
 ```ruby

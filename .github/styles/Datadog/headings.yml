@@ -1,7 +1,7 @@
 extends: capitalization
 message: "'%s' should use sentence-style capitalization."
 link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#headers"
-level: warning
+level: suggestion
 scope: heading
 match: $sentence
 exceptions:
@@ -9,18 +9,25 @@ exceptions:
   - Agent
   - Agents
   - Amazon
+  - Amazon Web Services
   - APIs
   - APM & Distributed Tracing
   - AuthN
   - Autodiscovery
+  - AWS Step Functions
+  - AWS Systems Manager
   - Azure
+  - Azure App Service
   - Azure App Service Plan
+  - Azure Event Hub
   - CakePHP
   - Cassandra Nodetool
   - CentOS
   - Chef
   - Clipboard
+  - CloudFormation
   - CloudSQL
+  - CloudTrail
   - CloudWatch
   - Cluster Agent
   - Continuous Profiler
@@ -29,6 +36,7 @@ exceptions:
   - Datadog
   - Datadog Agent Manager
   - Datadog for Government
+  - Datadog Forwarder
   - Datadog Operator
   - Debian
   - Detection Rules
@@ -37,6 +45,7 @@ exceptions:
   - Dockerfile
   - DogStatsD
   - Fargate
+  - Fluentd
   - FreeBSD
   - FreeSwitch
   - Further Reading
@@ -56,11 +65,15 @@ exceptions:
   - IoT
   - IPs
   - Java
+  - JBoss
   - JMXFetch
   - Journald
+  - Kafka
   - Kubernetes
   - Kubernetes Pod
   - Lambda
+  - Lambda Layer
+  - Lambda@Edge
   - LaunchDarkly
   - Linux
   - Live Tail
@@ -73,9 +86,11 @@ exceptions:
   - Metrics without Limits
   - MongoDB
   - MySQL
+  - Network Address Translation
   - Network Device Monitoring
   - Network Performance Monitoring
   - NixOS
+  - Node
   - Notebook
   - Notebook List
   - npm
@@ -88,23 +103,24 @@ exceptions:
   - OpenVPN
   - OpsWorks
   - Phusion Passenger
-  - pre-NAT
   - Prometheus
   - Puppet
   - Python
-  - Python
+  - RabbitMQ
   - Rails
   - Real User Monitoring
   - Red Hat
   - Redis
   - RocketPants
   - Root Cause Analysis
+  - Route53
   - RumMonitor
   - SafeNet
   - Security Monitoring
   - Security Signal
   - Security Signals
   - SELinux
+  - Service Checks
   - Siri
   - Slack
   - SLIs
@@ -113,6 +129,7 @@ exceptions:
   - Social Security
   - SQLDelight
   - SQLite
+  - SQL Server
   - StackStorm
   - StatsD
   - sysOID
@@ -124,8 +141,10 @@ exceptions:
   - Unix Domain Socket
   - URLs
   - User Datagram Protocol
+  - VMWare
   - vSphere
   - Watchdog
   - Watchdog Insights
   - Webhook
+  - WildFly
   - Windows

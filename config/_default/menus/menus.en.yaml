@@ -1881,37 +1881,106 @@ main:
     url: security_platform/
     pre: nav_security_monitoring
     identifier: security_platform
-    weight: 170000
-  - name: Getting Started
-    url: security_platform/getting_started
+    weight: 160000
+  - name: Security Monitoring
+    url: security_platform/security_monitoring/
     parent: security_platform
-    identifier: security_monitoring_getting_started
+    identifier: security_monitoring
     weight: 1
+  - name: Getting Started
+    url: security_platform/security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: Security Home
+    url: security_platform/security_monitoring/security_home
+    parent: security_monitoring
+    identifier: security_monitoring_security_home
+    weight: 102
+  - name: Log Detection Rules
+    url: security_platform/security_monitoring/log_detection_rules
+    parent: security_monitoring
+    identifier: security_monitoring_log_detection_rules
+    weight: 103
+  - name: OOTB Rules
+    url: /security_platform/default_rules#cat-log-detection
+    parent: security_monitoring
+    identifier: security_monitoring_default_rules
+    weight: 104
+  - name: Signals Explorer
+    url: /security_platform/explorer
+    parent: security_monitoring
+    identifier: security_monitoring_signals_explorer
+    weight: 105
+  - name: Cloud Security Posture Management
+    url: security_platform/cspm/
+    parent: security_platform
+    identifier: cspm
+    weight: 2
+  - name: Getting Started
+    url: security_platform/cspm/getting_started
+    parent: cspm
+    identifier: cspm_getting_started
+    weight: 201
+  - name: Frameworks and Benchmarks
+    url: security_platform/cspm/frameworks_and_benchmarks
+    parent: cspm
+    weight: 202
+  - name: OOTB Rules
+    url: security_platform/cspm/configuration_rules
+    parent: cspm
+    identifier: cspm_default_rules
+    weight: 203
+  - name: Posture Findings
+    url: /security_platform/cspm/findings
+    parent: cspm
+    identifier: cspm_findings_explorer
+    weight: 204
+  - name: Cloud Workload Security
+    url: security_platform/cloud_workload_security/
+    parent: security_platform
+    identifier: cloud_workload_security
+    weight: 3
+  - name: Getting Started
+    url: security_platform/cloud_workload_security/getting_started
+    parent: cloud_workload_security
+    identifier: cws_getting_started
+    weight: 301
+  - name: Agent Expressions
+    url: security_platform/cloud_workload_security/agent_expressions
+    parent: cloud_workload_security
+    identifier: cws_agent_expressions
+    weight: 302
+  - name: Workload Security Rules
+    url: security_platform/cloud_workload_security/workload_security_rules
+    parent: cloud_workload_security
+    identifier: cws_workload_security_rules
+    weight: 303
+  - name: OOTB Rules
+    url: security_platform/default_rules#cat-runtime-agent
+    parent: cloud_workload_security
+    identifier: cws_workload_default_rules
+    weight: 304
+  - name: Signals Explorer
+    url: security_platform/explorer
+    parent: cloud_workload_security
+    identifier: cws_workload_signals_explorer
+    weight: 305
   - name: Security Rules
     url: security_platform/detection_rules/
     parent: security_platform
     identifier: security_rules
-    weight: 2
-  - name: Security Monitoring
-    url: security_platform/detection_rules/security_monitoring
-    parent: security_rules
-    identifier: security_monitoring_detection_rules
-    weight: 201
-  - name: Default Rules
-    url: security_platform/default_rules
-    parent: security_platform
-    identifier: default_rules
-    weight: 3
+    weight: 4
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
     identifier: signals_explorer
-    weight: 4
+    weight: 6
   - name: Guides
     url: security_platform/guide
     parent: security_platform
     identifier: security_platform_guides
-    weight: 5
+    weight: 7
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
@@ -5219,9 +5288,9 @@ api:
         - GetUsageTrace
       unstable: []
       order: 6
-  - name: Get top custom metrics by hourly average
-    url: '#get-top-custom-metrics-by-hourly-average'
-    identifier: get-top-custom-metrics-by-hourly-average
+  - name: Get all custom metrics by hourly average
+    url: '#get-all-custom-metrics-by-hourly-average'
+    identifier: get-all-custom-metrics-by-hourly-average
     parent: usage-metering
     generated: true
     params:
@@ -5789,6 +5858,23 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: Cloud Workload Security
+    url: /api/latest/cloud-workload-security/
+    identifier: cloud-workload-security
+    generated: true
+  - name: Get the latest Cloud Workload Security policy
+    url: '#get-the-latest-cloud-workload-security-policy'
+    identifier: get-the-latest-cloud-workload-security-policy
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DownloadCloudWorkloadPolicyFile
+      unstable:
+        - v2
+      order: 0
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services
@@ -6512,19 +6598,6 @@ api:
       unstable:
         - v2
       order: 7
-  - name: Get the latest Runtime Security policy
-    url: '#get-the-latest-runtime-security-policy'
-    identifier: get-the-latest-runtime-security-policy
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DowloadRuntimePolicyFile
-      unstable:
-        - v2
-      order: 0
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: update-an-existing-rule
@@ -6585,3 +6658,63 @@ api:
         - ListSecurityMonitoringRules
       unstable: []
       order: 1
+  - name: Update a security filter
+    url: '#update-a-security-filter'
+    identifier: update-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get a security filter
+    url: '#get-a-security-filter'
+    identifier: get-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityFilter
+      unstable: []
+      order: 0
+  - name: Delete a security filter
+    url: '#delete-a-security-filter'
+    identifier: delete-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityFilter
+      unstable: []
+      order: 0
+  - name: Create a security filter
+    url: '#create-a-security-filter'
+    identifier: create-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get all security filters
+    url: '#get-all-security-filters'
+    identifier: get-all-security-filters
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityFilters
+      unstable: []
+      order: 0

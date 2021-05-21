@@ -212,13 +212,13 @@ To enable percentile aggregations for your distribution metrics, consult the [Di
 
 The Datadog Lambda Library requires [access to the public internet][8] to submit custom metrics **synchronously**. If your Lambda function is associated with a VPC, ensure that it is instead submitting custom metrics **asynchronously** or that your function can reach the public internet.
 
-### Using third-party libraries
+### Third-party libraries
 
 There are a number of open source libraries that make it easy to submit custom metrics to Datadog. However, many have not been updated to use [Distribution metrics][3], which are optimized for Lambda. Distribution metrics allow for server-side aggregations independent of a host or locally-running [agent][9]. In a serverless environment where there is no agent, Distribution metrics give you flexible aggregations and tagging.
 
 When evaluating third-party metrics libraries for AWS Lambda, ensure they support Distribution metrics.
 
-### [DEPRECATED] Using CloudWatch logs
+### [DEPRECATED] CloudWatch logs
 
 **This method of submitting custom metrics is no longer supported, and is disabled for all new customers.** The recommended way to submit custom metrics from Lambda is with a [Datadog Lambda Library][6].
 

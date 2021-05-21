@@ -27,7 +27,7 @@ Datadog integrates with AWS CloudHSM via a Lambda function that ships CloudHSM l
 
 ### Log collection
 
-#### Enable CloudHSM logs
+#### Enable logs
 
 Audit logs are enabled by default for CloudHSM.
 

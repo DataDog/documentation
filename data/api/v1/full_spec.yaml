@@ -1315,6 +1315,8 @@ components:
           example: true
           readOnly: true
           type: boolean
+        active_child:
+          $ref: '#/components/schemas/DowntimeChild'
         canceled:
           description: If a scheduled downtime is canceled.
           example: 1412799983
@@ -1431,6 +1433,136 @@ components:
           nullable: true
           readOnly: true
           type: integer
+      type: object
+    DowntimeChild:
+      description: 'The downtime object definition of the active child for the original
+        parent recurring downtime. This
+
+        field will only exist on recurring downtimes.'
+      nullable: true
+      properties:
+        active:
+          description: If a scheduled downtime currently exists.
+          example: true
+          readOnly: true
+          type: boolean
+        canceled:
+          description: If a scheduled downtime is canceled.
+          example: 1412799983
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        creator_id:
+          description: User ID of the downtime creator.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        disabled:
+          description: If a downtime has been disabled.
+          example: false
+          type: boolean
+        downtime_type:
+          description: '`0` for a downtime applied on `*` or all,
+
+            `1` when the downtime is only scoped to hosts,
+
+            or `2` when the downtime is scoped to anything but hosts.'
+          example: 2
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        end:
+          description: 'POSIX timestamp to end the downtime. If not provided,
+
+            the downtime is in effect indefinitely until you cancel it.'
+          example: 1412793983
+          format: int64
+          nullable: true
+          type: integer
+        id:
+          description: The downtime ID.
+          example: 1626
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          description: 'A message to include with notifications for this downtime.
+
+            Email notifications can be sent to specific users by using the same `@username`
+            notation as events.'
+          example: Message on the downtime
+          type: string
+        monitor_id:
+          description: 'A single monitor to which the downtime applies.
+
+            If not provided, the downtime applies to all monitors.'
+          example: 123456
+          format: int64
+          nullable: true
+          type: integer
+        monitor_tags:
+          description: 'A comma-separated list of monitor tags. For example, tags
+            that are applied directly to monitors,
+
+            not tags that are used in monitor queries (which are filtered by the scope
+            parameter), to which the downtime applies.
+
+            The resulting downtime applies to monitors that match ALL provided monitor
+            tags.
+
+            For example, `service:postgres` **AND** `team:frontend`.'
+          example:
+          - '*'
+          items:
+            description: A monitor tag.
+            type: string
+          type: array
+        parent_id:
+          description: ID of the parent Downtime.
+          example: 123
+          format: int64
+          nullable: true
+          type: integer
+        recurrence:
+          $ref: '#/components/schemas/DowntimeRecurrence'
+        scope:
+          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+
+            Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
+
+            The resulting downtime applies to sources that matches ALL provided scopes
+            (`env:dev` **AND** `env:prod`).'
+          example:
+          - env:staging
+          items:
+            description: A scope. For example, `"env:staging"`.
+            type: string
+          type: array
+        start:
+          description: 'POSIX timestamp to start the downtime.
+
+            If not provided, the downtime starts the moment it is created.'
+          example: 1412792983
+          format: int64
+          type: integer
+        timezone:
+          description: The timezone in which to display the downtime's start and end
+            times in Datadog applications.
+          example: America/New_York
+          type: string
+        updater_id:
+          description: ID of the last user that updated the downtime.
+          example: 123456
+          format: int32
+          maximum: 2147483647
+          nullable: true
+          readOnly: true
+          type: integer
+      readOnly: true
       type: object
     DowntimeRecurrence:
       description: An object defining the recurrence of the downtime.
@@ -4896,6 +5028,7 @@ components:
           type: integer
         query:
           description: The monitor query.
+          example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
           type: string
         restricted_roles:
           description: A list of role identifiers that can be pulled from the Roles
@@ -4914,6 +5047,9 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/MonitorType'
+      required:
+      - type
+      - query
       type: object
     MonitorDeviceID:
       description: ID of the device the Synthetics monitor is running on. Same as
@@ -5060,8 +5196,12 @@ components:
           type: boolean
         escalation_message:
           default: none
-          description: 'A message to include with a re-notification. Supports the
-            `@username` notification we allow elsewhere.
+          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notifications/?tab=is_alert#renotify),
+
+            block in the original message instead.
+
+            A message to include with a re-notification. Supports the `@username`
+            notification we allow elsewhere.
 
             Not applicable if `renotify_interval` is `None`.'
           type: string
@@ -5567,6 +5707,7 @@ components:
       - trace-analytics alert
       - slo alert
       - event-v2 alert
+      example: metric alert
       type: string
       x-enum-varnames:
       - COMPOSITE
@@ -5716,6 +5857,7 @@ components:
       required:
       - start
       - end
+      type: object
     NotebookAuthor:
       description: Attributes of user object returned by the API.
       properties:
@@ -5939,7 +6081,7 @@ components:
             $ref: '#/components/schemas/NotebookCellCreateRequest'
           type: array
         name:
-          description: Notebook name.
+          description: The name of the notebook.
           example: Example Notebook
           maxLength: 80
           minLength: 0
@@ -5962,7 +6104,7 @@ components:
       - data
       type: object
     NotebookDistributionCellAttributes:
-      description: The attributes of a notebook distribution cell.
+      description: The attributes of a notebook `distribution` cell.
       properties:
         definition:
           $ref: '#/components/schemas/DistributionWidgetDefinition'
@@ -5989,6 +6131,7 @@ components:
       - m
       - l
       - xl
+      example: m
       type: string
       x-enum-varnames:
       - EXTRA_SMALL
@@ -5997,7 +6140,7 @@ components:
       - LARGE
       - EXTRA_LARGE
     NotebookHeatMapCellAttributes:
-      description: The attributes of a notebook heat map cell.
+      description: The attributes of a notebook `heatmap` cell.
       properties:
         definition:
           $ref: '#/components/schemas/HeatMapWidgetDefinition'
@@ -6011,7 +6154,7 @@ components:
       - definition
       type: object
     NotebookLogStreamCellAttributes:
-      description: The attributes of a notebook log stream cell.
+      description: The attributes of a notebook `log_stream` cell.
       properties:
         definition:
           $ref: '#/components/schemas/LogStreamWidgetDefinition'
@@ -6023,7 +6166,7 @@ components:
       - definition
       type: object
     NotebookMarkdownCellAttributes:
-      description: The attributes of a notebooks markdown cell.
+      description: The attributes of a notebook `markdown` cell.
       properties:
         definition:
           $ref: '#/components/schemas/NotebookMarkdownCellDefinition'
@@ -6146,19 +6289,19 @@ components:
             $ref: '#/components/schemas/NotebookCellResponse'
           type: array
         created:
-          description: UTC time stamp.
+          description: UTC time stamp for when the notebook was created.
           example: '2021-02-24T23:14:15.173964+00:00'
           format: date-time
           readOnly: true
           type: string
         modified:
-          description: UTC time stamp.
+          description: UTC time stamp for when the notebook was last modified.
           example: '2021-02-24T23:15:23.274966+00:00'
           format: date-time
           readOnly: true
           type: string
         name:
-          description: Notebook name.
+          description: The name of the notebook.
           example: Example Notebook
           maxLength: 80
           minLength: 0
@@ -6175,6 +6318,9 @@ components:
     NotebookSplitBy:
       description: Object describing how to split the graph to display multiple visualizations
         per request.
+      example:
+        keys: []
+        tags: []
       properties:
         keys:
           description: Keys to split on.
@@ -6204,7 +6350,7 @@ components:
       x-enum-varnames:
       - PUBLISHED
     NotebookTimeseriesCellAttributes:
-      description: The attributes of a notebook timeseries cell.
+      description: The attributes of a notebook `timeseries` cell.
       properties:
         definition:
           $ref: '#/components/schemas/TimeseriesWidgetDefinition'
@@ -6218,7 +6364,7 @@ components:
       - definition
       type: object
     NotebookToplistCellAttributes:
-      description: The attributes of a notebook toplist cell.
+      description: The attributes of a notebook `toplist` cell.
       properties:
         definition:
           $ref: '#/components/schemas/ToplistWidgetDefinition'
@@ -6298,7 +6444,7 @@ components:
             $ref: '#/components/schemas/NotebookUpdateCell'
           type: array
         name:
-          description: Notebook name.
+          description: The name of the notebook.
           example: Example Notebook
           maxLength: 80
           minLength: 0
@@ -6326,7 +6472,7 @@ components:
         data:
           description: List of notebook definitions.
           items:
-            $ref: '#/components/schemas/NotebookResponseData'
+            $ref: '#/components/schemas/NotebooksResponseData'
           type: array
         meta:
           description: Metadata returned by the API.
@@ -6334,6 +6480,59 @@ components:
             page:
               $ref: '#/components/schemas/NotebooksResponsePage'
           type: object
+      type: object
+    NotebooksResponseData:
+      description: The data for a notebook in get all response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebooksResponseDataAttributes'
+        id:
+          description: Unique notebook ID, assigned when you create the notebook.
+          example: 123456
+          format: int64
+          readOnly: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebooksResponseDataAttributes:
+      description: The attributes of a notebook in get all response.
+      properties:
+        author:
+          $ref: '#/components/schemas/NotebookAuthor'
+        cells:
+          description: List of cells to display in the notebook.
+          items:
+            $ref: '#/components/schemas/NotebookCellResponse'
+          type: array
+        created:
+          description: UTC time stamp for when the notebook was created.
+          example: '2021-02-24T23:14:15.173964+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: UTC time stamp for when the notebook was last modified.
+          example: '2021-02-24T23:15:23.274966+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
       type: object
     NotebooksResponsePage:
       description: Pagination metadata returned by the API.
@@ -8749,6 +8948,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -8757,6 +8957,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID for the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -9087,6 +9288,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -9095,6 +9297,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The public ID of the test.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -9686,8 +9889,6 @@ components:
             the value will not be present if the variable is secure.'
           example: example-value
           type: string
-      required:
-      - value
       type: object
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
@@ -10108,6 +10309,7 @@ components:
         monitor_id:
           description: The associated monitor ID.
           format: int64
+          readOnly: true
           type: integer
         name:
           description: Name of the test.
@@ -10116,6 +10318,7 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptions'
         public_id:
           description: The test public ID.
+          readOnly: true
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
@@ -10974,24 +11177,18 @@ components:
           $ref: '#/components/schemas/UsageAttributionPagination'
       type: object
     UsageAttributionPagination:
-      description: The page count for the current pagination.
+      description: The metadata for the current pagination.
       properties:
         limit:
           description: Maximum amount of records to be returned.
           format: int64
           type: integer
-        offset:
-          description: Records to be skipped before beginning to return.
-          format: int64
-          type: integer
-        sort_direction:
-          description: Direction to sort by.
-          type: string
-        sort_name:
-          description: Field to sort by.
+        next_record_id:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of this next_record_id.
           type: string
         total_number_of_records:
-          description: Total number of records.
+          description: Total number of records. (deprecated after May 1st, 2021)
           format: int64
           type: integer
       type: object
@@ -13188,6 +13385,9 @@ components:
       description: Custom links help you connect a data value to a URL, like a Datadog
         page or your AWS console.
       properties:
+        is_hidden:
+          description: The flag for toggling context menu link visibility.
+          type: boolean
         label:
           description: The label for the custom link URL. Keep the label short and
             descriptive. Use metrics and tags as variables.
@@ -13198,9 +13398,11 @@ components:
             A relative URL must start with `/`.
           example: https://app.datadoghq.com/logs?query={{host}}
           type: string
-      required:
-      - label
-      - link
+        override_label:
+          description: The label ID that refers to a context menu link. Can be `logs`,
+            `hosts`, `traces`, `profiles`, `processes`, `containers`, or `rum`.
+          example: logs
+          type: string
       type: object
     WidgetDefinition:
       description: '[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).'
@@ -18625,6 +18827,7 @@ paths:
         name: group_states
         required: false
         schema:
+          example: alert
           type: string
       - description: A string to filter monitors by name.
         in: query
@@ -18640,6 +18843,7 @@ paths:
         name: tags
         required: false
         schema:
+          example: host:host0
           type: string
       - description: 'A comma separated list indicating what service and/or custom
           tags, if any, should be used to filter the list of monitors.
@@ -18650,6 +18854,7 @@ paths:
         name: monitor_tags
         required: false
         schema:
+          example: service:my-app
           type: string
       - description: If this argument is set to true, then the returned data includes
           all current downtimes for each monitor.
@@ -18671,6 +18876,7 @@ paths:
         name: page
         required: false
         schema:
+          example: 0
           format: int64
           type: integer
       - description: The number of monitors to return per page. If the page argument
@@ -18681,6 +18887,7 @@ paths:
         name: page_size
         required: false
         schema:
+          example: 20
           format: int32
           maximum: 1000
           type: integer
@@ -18977,6 +19184,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              json-request-body:
+                value:
+                  message: You may need to add web hosts if this is consistently high.
+                  name: Bytes received on host0
+                  options:
+                    no_data_timeframe: 20
+                    notify_no_data: true
+                  query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+                  tags:
+                  - app:webserver
+                  - frontend
+                  type: metric alert
             schema:
               $ref: '#/components/schemas/Monitor'
         description: Create a monitor request body.
@@ -19236,7 +19456,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Monitor'
+                example: {}
+                type: object
           description: OK
         '400':
           content:
@@ -19275,6 +19496,7 @@ paths:
         name: force
         required: false
         schema:
+          example: 'false'
           type: string
       responses:
         '200':
@@ -19780,6 +20002,43 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                      - attributes:
+                          definition:
+                            text: '## Some test markdown
+
+
+                              With some example content.'
+                            type: markdown
+                        type: notebook_cells
+                      - attributes:
+                          definition:
+                            requests:
+                            - display_type: line
+                              q: avg:system.load.1{*}
+                              style:
+                                line_type: solid
+                                line_width: normal
+                                palette: dog_classic
+                            show_legend: true
+                            type: timeseries
+                            yaxis:
+                              scale: linear
+                          graph_size: m
+                          split_by:
+                            keys: []
+                            tags: []
+                          time: null
+                        type: notebook_cells
+                      name: Example Notebook
+                      time:
+                        live_span: 1h
+                    type: notebooks
             schema:
               $ref: '#/components/schemas/NotebookCreateRequest'
         description: The JSON description of the notebook you want to create.
@@ -19912,6 +20171,44 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                      - attributes:
+                          definition:
+                            text: '## Some updated test markdown
+
+
+                              With some example content.'
+                            type: markdown
+                        type: notebook_cells
+                      - attributes:
+                          definition:
+                            requests:
+                            - display_type: bars
+                              q: avg:system.load.1{*}
+                              style:
+                                line_type: solid
+                                line_width: normal
+                                palette: warm
+                            show_legend: true
+                            type: timeseries
+                            yaxis:
+                              scale: linear
+                          graph_size: m
+                          split_by:
+                            keys: []
+                            tags: []
+                          time: null
+                        id: abcd1234
+                        type: notebook_cells
+                      name: Example Notebook
+                      time:
+                        live_span: 1h
+                    type: notebooks
             schema:
               $ref: '#/components/schemas/NotebookUpdateRequest'
         description: Update notebook request body.
@@ -20259,13 +20556,13 @@ paths:
     post:
       description: "The metrics end-point allows you to post time-series data that\
         \ can be graphed on Datadog\u2019s dashboards.\nThe maximum payload size is\
-        \ 3.2 megabytes (3200000). Compressed payloads must have a decompressed size\
-        \ of up to 62 megabytes (62914560).\n\nIf you\u2019re submitting metrics directly\
-        \ to the Datadog API without using DogStatsD, expect\n\n- 64 bits for the\
-        \ timestamp\n- 32 bits for the value\n- 20 bytes for the metric names\n- 50\
-        \ bytes for the timeseries\n- The full payload is approximately ~ 100 bytes.\
-        \ However, with the DogStatsD API,\ncompression is applied, which reduces\
-        \ the payload size."
+        \ 3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed\
+        \ size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting\
+        \ metrics directly to the Datadog API without using DogStatsD, expect:\n\n\
+        - 64 bits for the timestamp\n- 32 bits for the value\n- 20 bytes for the metric\
+        \ names\n- 50 bytes for the timeseries\n- The full payload is approximately\
+        \ 100 bytes. However, with the DogStatsD API,\ncompression is applied, which\
+        \ reduces the payload size."
       operationId: SubmitMetrics
       requestBody:
         content:
@@ -23622,7 +23919,7 @@ paths:
         type: safe
   /api/v1/usage/top_avg_metrics:
     get:
-      description: Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
+      description: Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
         by hourly average. Use the month parameter to get a month-to-date data resolution
         or use the day parameter to get a daily resolution. One of the two is required,
         and only one of the two is allowed.
@@ -23663,6 +23960,13 @@ paths:
           maximum: 5000
           minimum: 1
           type: integer
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -23682,7 +23986,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get top custom metrics by hourly average
+      summary: Get all custom metrics by hourly average
       tags:
       - Usage Metering
       x-menu-order: 5
@@ -24558,6 +24862,8 @@ tags:
 
     - [Read more about Custom Check monitors.][4]
 
+    - [Read more about Service Check and status codes.][5]
+
 
     [1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert
 
@@ -24565,7 +24871,9 @@ tags:
 
     [3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert
 
-    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert'
+    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert
+
+    [5]: https://docs.datadoghq.com/developers/service_checks/'
   name: Service Checks
 - description: 'APM Service Map API. For more information, visit
 

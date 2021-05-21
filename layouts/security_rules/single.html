@@ -6,7 +6,7 @@
 	{{ partial "translate_status_banner/translate_status_banner.html" . }}
 
 	<div class="rule-specification row align-items-center mb-3">
-    {{ $basename := (.Params.scope | default .Params.source) }}
+    {{ $basename := .Params.integration_id | default .Params.source }}
     {{ if in .Params.scope "." }}
         <!-- e.g gcp.project use source -->
         {{ $basename = .Params.source }}

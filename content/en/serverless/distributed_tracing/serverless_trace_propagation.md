@@ -16,7 +16,7 @@ further_reading:
 
 {{< img src="serverless/lambda-non-http-trace.png" alt="Serverless Distributed Non-HTTP Trace"  style="width:100%;" >}}
 
-## Required Setup
+## Required setup
 
 Additional instrumentation is sometimes required to see a single, connected trace in Node and Python serverless applications asynchronously triggering Lambda functions. If you are just getting started with monitoring serverless applications in Datadog, [follow our main installation steps][1] and [read this page on choosing your tracing library][2]. Once you are sending traces from your Lambda functions to Datadog using the [Datadog Lambda Library][3], you may want to follow these steps to connect traces between two Lambda functions in cases such as:
 - Asynchronously triggering Lambda functions via SNS, Kinesis or EventBridge
@@ -28,7 +28,7 @@ To successfully connect trace context between resources sending traces, you need
 - Include Datadog trace context in outgoing events. The outgoing event can originate from a host or Lambda function with `dd-trace` installed.
 - Extract the trace context in the consumer Lambda function.
 
-## Passing Trace Context to Outgoing Events
+## Passing trace context
 
 The following code samples outline how to pass trace context in outgoing events to some technologies in Node and Python:
 
@@ -128,7 +128,7 @@ module.exports.handler = async event => {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Passing Trace Context to Outgoing Events from Hosts
+### From hosts
 
 If you aren't passing trace context from your Lambda functions, you can use the following code template in place of the `getTraceHeaders` and `get_dd_trace_context` helper functions to get the current span context. Instructions on how to do this in every runtime are outlined [here][5].
 
@@ -143,11 +143,11 @@ exports.handler = async event => {
   // ...
 ```
 
-## Extracting Trace Context from Consumer Lambda Functions
+## Extracting trace context
 
 To extract the above trace context from the consumer Lambda function, you need to define an extractor function that runs captures trace context before the execution of your Lambda function handler. To do this, configure the `DD_TRACE_EXTRACTOR` environment variable to point to the location of your extractor function (format is `<FILE NAME>.<FUNCTION NAME>`, for example, `extractors.sns` if the `sns` extract method is in the `extractors.js` file). We recommend you place your extractor methods all in one file, as extractors can be re-used across multiple Lambda functions. These extractors are completely customizable to fit any use case, and we included some sample extractors for common use cases in the next section.
 
-### Sample Extractors
+### Sample extractors
 
 The following code samples outline sample extractors you might use for propagating trace context across managed resources such as SNS, Kinesis or EventBridge.
 
