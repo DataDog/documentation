@@ -113,7 +113,7 @@ Tap on “Saved views”.
 - Tap on the individual saved view cell to select and deselect.
 You can reorder them by drag and dropping each cell.
 Tap “Save” to validate your selection and exit the configuration screen.
-Also, you can scroll the widget to see more Saved Views. Long press and resize the widget to fit your preference.
+- Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
 
 #### Switch organizations
 **iOS**:
