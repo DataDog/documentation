@@ -5028,6 +5028,7 @@ components:
           type: integer
         query:
           description: The monitor query.
+          example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
           type: string
         restricted_roles:
           description: A list of role identifiers that can be pulled from the Roles
@@ -5046,6 +5047,9 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/MonitorType'
+      required:
+      - type
+      - query
       type: object
     MonitorDeviceID:
       description: ID of the device the Synthetics monitor is running on. Same as
@@ -5703,6 +5707,7 @@ components:
       - trace-analytics alert
       - slo alert
       - event-v2 alert
+      example: metric alert
       type: string
       x-enum-varnames:
       - COMPOSITE
@@ -18822,6 +18827,7 @@ paths:
         name: group_states
         required: false
         schema:
+          example: alert
           type: string
       - description: A string to filter monitors by name.
         in: query
@@ -18837,6 +18843,7 @@ paths:
         name: tags
         required: false
         schema:
+          example: host:host0
           type: string
       - description: 'A comma separated list indicating what service and/or custom
           tags, if any, should be used to filter the list of monitors.
@@ -18847,6 +18854,7 @@ paths:
         name: monitor_tags
         required: false
         schema:
+          example: service:my-app
           type: string
       - description: If this argument is set to true, then the returned data includes
           all current downtimes for each monitor.
@@ -18868,6 +18876,7 @@ paths:
         name: page
         required: false
         schema:
+          example: 0
           format: int64
           type: integer
       - description: The number of monitors to return per page. If the page argument
@@ -18878,6 +18887,7 @@ paths:
         name: page_size
         required: false
         schema:
+          example: 20
           format: int32
           maximum: 1000
           type: integer
@@ -19174,6 +19184,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              json-request-body:
+                value:
+                  message: You may need to add web hosts if this is consistently high.
+                  name: Bytes received on host0
+                  options:
+                    no_data_timeframe: 20
+                    notify_no_data: true
+                  query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+                  tags:
+                  - app:webserver
+                  - frontend
+                  type: metric alert
             schema:
               $ref: '#/components/schemas/Monitor'
         description: Create a monitor request body.
@@ -19433,7 +19456,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Monitor'
+                example: {}
+                type: object
           description: OK
         '400':
           content:
@@ -19472,6 +19496,7 @@ paths:
         name: force
         required: false
         schema:
+          example: 'false'
           type: string
       responses:
         '200':
@@ -20531,13 +20556,13 @@ paths:
     post:
       description: "The metrics end-point allows you to post time-series data that\
         \ can be graphed on Datadog\u2019s dashboards.\nThe maximum payload size is\
-        \ 3.2 megabytes (3200000). Compressed payloads must have a decompressed size\
-        \ of up to 62 megabytes (62914560).\n\nIf you\u2019re submitting metrics directly\
-        \ to the Datadog API without using DogStatsD, expect\n\n- 64 bits for the\
-        \ timestamp\n- 32 bits for the value\n- 20 bytes for the metric names\n- 50\
-        \ bytes for the timeseries\n- The full payload is approximately ~ 100 bytes.\
-        \ However, with the DogStatsD API,\ncompression is applied, which reduces\
-        \ the payload size."
+        \ 3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed\
+        \ size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting\
+        \ metrics directly to the Datadog API without using DogStatsD, expect:\n\n\
+        - 64 bits for the timestamp\n- 32 bits for the value\n- 20 bytes for the metric\
+        \ names\n- 50 bytes for the timeseries\n- The full payload is approximately\
+        \ 100 bytes. However, with the DogStatsD API,\ncompression is applied, which\
+        \ reduces the payload size."
       operationId: SubmitMetrics
       requestBody:
         content:
