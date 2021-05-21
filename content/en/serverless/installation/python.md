@@ -116,7 +116,7 @@ The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to 
 
 ### Install the Datadog CDK Construct Library
 
-Run the following Yarn or NPM command in your CDK project:
+Run the following command in your CDK project:
 
 ```sh
 #PyPI
