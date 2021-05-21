@@ -39,11 +39,12 @@ const commonConfig = env => {
             'region-redirects': './scripts/region-redirects.js',
             'api-redirect': './scripts/api-redirect.js',
             'main-dd-css': './styles/style.scss',
-            'dd-browser-logs-rum': './scripts/components/dd-browser-logs-rum.js'
+            'dd-browser-logs-rum': './scripts/components/dd-browser-logs-rum.js',
+            'search': './scripts/search.js'
         },
         output: {
             path: path.join(__dirname, 'public', 'static'),
-            publicPath: 'static',
+            publicPath: 'static/',
             chunkFilename:
                   process.env.NODE_ENV === 'preview' || process.env.NODE_ENV === 'production'
                       ? '[name].[chunkhash].js'
