@@ -169,7 +169,46 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 ## Say What's Happening
 
-The notification box has the same Markdown and preview features as those of [monitor notifications][1].
+The notification box has the same Markdown and preview features as those of [monitor notifications][1]. In addition to the features, you can reference the tags associated with the signal and the event attributes. The attributes can be seen on a signal in the “event attributes” tab and you can access the attributes with the following syntax: {{@attribute}}. You can access inner keys of the event attributes by using JSON dot notation (e.g. {{@attribute.inner_key}}).
+
+This JSON object is an example of event attributes which may be associated with a security signal:
+
+```json
+{
+  "network": {
+    "client": {
+      "ip": "1.2.3.4"
+    }
+  },
+  "usr": {
+    "id": "user@domain.com"
+  },
+  "evt": {
+    "category": "authentication",
+    "outcome": "success"
+  },
+  "used_mfa": "false"
+}
+
+```
+
+You could use the following in the “say what’s happening” section
+
+```
+{{@usr.id}} just logged in without MFA from {@network.client.ip}.
+```
+
+And this would be rendered as the following
+
+```
+user@domain.com just logged in without MFA from 1.2.3.4.
+```
+
+You can use if-else logic to see if an attribute exists with the notation `{{#if @network.client.ip}}The attribute IP attribute exists.{{/if}}`.
+
+You can use if-else logic to see if an attribute matches a value. `{{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}`
+
+You can read more about template variables [here][1].
 
 The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the Security Signal.
 
