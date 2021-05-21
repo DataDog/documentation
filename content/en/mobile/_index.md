@@ -129,6 +129,8 @@ View your [monitor saved views][18] from your home screen with Datadog widgets. 
 - Tap "Save" to validate your selection and exit the configuration screen.
 - Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
 
+{{% /tab %}}
+{{< /tabs >}}
 #### Switch organizations
 
 {{< tabs >}}
