@@ -40,7 +40,7 @@ const commonConfig = env => {
             'api-redirect': './scripts/api-redirect.js',
             'main-dd-css': './styles/style.scss',
             'dd-browser-logs-rum': './scripts/components/dd-browser-logs-rum.js',
-            'search': './scripts/search.js'
+            'search': './scripts/components/search.js'
         },
         output: {
             path: path.join(__dirname, 'public', 'static'),

@@ -1,13 +1,11 @@
 /* eslint-disable */
 import algoliasearch from 'algoliasearch';
-import configDocs from './config/config-docs';
+import configDocs from '../config/config-docs';
 
 const siteEnv = document.querySelector('html').dataset.env;
 let indexName = '';
 
 if (window.location.href.indexOf('/search/') > -1) {
-  console.log("in search js");
-  
   if (siteEnv === 'preview' || siteEnv === 'development') {
     indexName = 'docsearch_docs_preview';
   } else if (siteEnv === 'live') {
