@@ -10,7 +10,7 @@ further_reading:
       text: "Start exploring tests data to find and fix problem tests"
 ---
 
-With Datadog Continuous Integration (CI) Visibility helps you troubleshoot failures and performance issues on tests and CI pipelines. You can trace your development workflow from the time a commit is pushed to your repository to when the pipeline is ready to be deployed.
+Datadog Continuous Integration (CI) Visibility helps you troubleshoot failures and performance issues on tests and CI pipelines. You can trace your development workflow from the time a commit is pushed to your repository to when the pipeline is ready to be deployed.
 
 Find tests and pipelines that run slowly, or are unreliable, so you know where to focus your efforts to improve your CI environment.
 
