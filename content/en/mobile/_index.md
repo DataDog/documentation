@@ -120,7 +120,7 @@ Tap “Save” to validate your selection and exit the configuration screen.
 All organizations you’ve logged-in are displayed in the configuration screen.
 
 **Android**:
-From the configuration screen, tap on “Organization”
+- From the configuration screen, tap on "Organization".
 - Select a new organization (you might need to sign in).
 - Tap "Saved Views". Select saved views to display or leave it as is.
 - Tap "Save". The widget is now configured with saved views from a different organization.
