@@ -87,27 +87,38 @@ View your [monitor saved views][18] from your home screen with Datadog widgets. 
 **Note**: If you do not have any monitor saved views, the widget shows you all monitors by default. 
 
 #### Create a widget
-**iOS**:
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
 Long press on the home screen.
 Tap the “+” button on the top left corner of the screen.
 Search for "Datadog" widgets.
 - Select your prefered size (medium allows up to 3 and large up to 6).
 - Place the widget in your desired, onscreen location.
 
-**Android**:
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
 Open the Android Widget Picker. Either long press your home screen, or long press the Datadog app icon.
 Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble. 
 Drag the Monitor Saved Views widget on your home screen.
 
 #### Edit a widget
-**iOS**:
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
 Long press on the widget to configure.
 Tap on "Edit Widget".
 - Tap on the individual saved view cell to select and deselect.
 - Reorder the views by dragging and dropping each cell.
 Tap out of the widget to validate your selection and exit the configuration screen.
 
-**Android**:
+{{% /tab %}}
+{{% tab "Android" %}}
+
 Tap on the widget title to configure.
 Tap on "Saved views".
 - Tap on the individual saved view cell to select and deselect.
@@ -116,7 +127,10 @@ Tap "Save" to validate your selection and exit the configuration screen.
 - Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
 
 #### Switch organizations
-**iOS**:
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
 All organizations you’ve logged-in are displayed in the configuration screen.
 
 **Android**:
@@ -126,10 +140,16 @@ All organizations you’ve logged-in are displayed in the configuration screen.
 - Tap "Save". The widget is now configured with saved views from a different organization.
 
 #### Delete a widget
-**iOS**:
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
 Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
 
-**Android**:
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
 Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
 
 
