@@ -72,7 +72,7 @@ Setting the value without a secret results in the token being readable in the `P
 
     `kubectl create -f Dockerfiles/manifests/cluster-agent/agent-secret.yaml`
 
-3. Refer to this secret with the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN` in the manifests of the Cluster Agent. See [Create the Cluster Agent and its service][2] and [Configure the Datadog Cluster Agent](#configure-the-datadog-agent).
+3. Refer to this secret with the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN` in the manifests of the Cluster Agent. See [Create the Cluster Agent and its service][2] and [Configure the Datadog Cluster Agent][3].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/agent-secret.yaml
 [2]: /agent/cluster_agent/setup/?tab=secret#create-the-cluster-agent-and-its-service
