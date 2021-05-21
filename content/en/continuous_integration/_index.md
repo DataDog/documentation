@@ -15,9 +15,11 @@ Find tests and pipelines that run slowly, or are unreliable, so you know where t
 
 ## Setting up tests and pipelines with Datadog tracing
 
-Datadog CI Monitoring uses the Datadog tracing libraries that are part of Datadog APM.
+Datadog CI Monitoring uses the Agent and tracing libraries that are part of Datadog.
 
 ## Gain insights into your tests
+
+{{< img src="ci/ci-test-runs.png" alt="Test Runs page"  style="width:100%;">}}
 
 Go to the *Tests* and *Test Runs* sections under the Datadog *CI* menu to see visualizations of test tracing data, such as:
 
@@ -28,6 +30,8 @@ Go to the *Tests* and *Test Runs* sections under the Datadog *CI* menu to see vi
 * Avg delta duration change between commits.
 
 ## Gain insights into your pipelines
+
+{{< img src="ci/ci-single-pipeline.png" alt="Details for a single pipeline"  style="width:100%;">}}
 
 Go to the *Pipelines* and *Pipelines Executions* sections under the Datadog *CI* menu to see visualizations of pipelines tracing data, such as:
 
