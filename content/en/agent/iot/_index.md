@@ -62,36 +62,45 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGE
 
 To manually install the IoT Agent on Debian-based operating systems, run the following commands:
 
-1. Update `apt` and install `apt-transport-https` to download through HTTPS:
+1. Update `apt` and install `apt-transport-https` to download through HTTPS and `curl` and `gnupg` to obtain the signing keys:
     ```bash
     sudo apt-get update
-    sudo apt-get install apt-transport-https
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. Set up the Datadog deb repo on your system and import Datadog's apt keys:
     ```bash
-    sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
-3. Update `apt` and install the IoT Agent:
+3. If running Ubuntu 14 or earlier or Debian 8 or earlier, copy the keyring to `/etc/apt/trusted.gpg.d`:
+
+   ```shell
+   sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
+   ```
+
+4. Update `apt` and install the IoT Agent:
     ```bash
     sudo apt-get update
     sudo apt-get install datadog-iot-agent
     ```
 
-4. Copy the example config and plug in your API key:
+5. Copy the example config and plug in your API key:
     ```bash
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
+6. Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
     ```bash
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
-6. Start the IoT Agent:
+7. Start the IoT Agent:
     ```bash
     sudo systemctl restart datadog-agent.service
     ```

@@ -681,7 +681,7 @@
     "summary": "Search metrics"
   },
   "SubmitMetrics": {
-    "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 3.2 megabytes (3200000). Compressed payloads must have a decompressed size of up to 62 megabytes (62914560).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect\n\n- 64 bits for the timestamp\n- 32 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately ~ 100 bytes. However, with the DogStatsD API,\ncompression is applied, which reduces the payload size.",
+    "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed size of less than 62 megabytes (62914560 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 32 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes. However, with the DogStatsD API,\ncompression is applied, which reduces the payload size.",
     "summary": "Submit metrics",
     "request_description": "",
     "request_schema_description": "The metrics' payload."
@@ -1007,8 +1007,8 @@
     "summary": "Get hourly usage for custom metrics"
   },
   "GetUsageTopAvgMetrics": {
-    "description": "Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average. Use the month parameter to get a month-to-date data resolution or use the day parameter to get a daily resolution. One of the two is required, and only one of the two is allowed.",
-    "summary": "Get top custom metrics by hourly average"
+    "description": "Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average. Use the month parameter to get a month-to-date data resolution or use the day parameter to get a daily resolution. One of the two is required, and only one of the two is allowed.",
+    "summary": "Get all custom metrics by hourly average"
   },
   "GetUsageTrace": {
     "description": "Get hourly usage for trace search.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.",

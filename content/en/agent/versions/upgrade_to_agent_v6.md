@@ -173,38 +173,45 @@ Find below the manual upgrade instructions for:
 
 ### Debian
 
-1. Enable HTTPS support for APT:
+1. Enable HTTPS support for APT, install `curl` and `gnupg`:
     ```
     sudo apt-get update
-    sudo apt-get install apt-transport-https
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. Set up the Datadog API repo on your system and import Datadog's APT keys:
     ```shell
-    sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
-    Note: You might need to install `dirmngr` to import Datadog's APT keys.
+3. If running Debian 8 or earlier, copy the keyring to `/etc/apt/trusted.gpg.d`:
 
-3. Update your local APT cache and install the Agent:
+   ```shell
+   sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
+   ```
+
+4. Update your local APT cache and install the Agent:
     ```
     sudo apt-get update
     sudo apt-get install datadog-agent
     ```
 
-4. Copy the example configuration into place and plug in your API key:
+5. Copy the example configuration into place and plug in your API key:
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+6. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
     ```
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
-6. Start the Agent:
+7. Start the Agent:
     ```
     sudo service datadog-agent start
     ```
@@ -296,38 +303,45 @@ Find below the manual upgrade instructions for:
 
 ### Ubuntu
 
-1. Enable HTTPS support for APT:
+1. Enable HTTPS support for APT, install `curl` and `gnupg`:
     ```
     sudo apt-get update
-    sudo apt-get install apt-transport-https
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. Set up the Datadog API repo on your system and import Datadog's APT keys:
     ```shell
-    sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
-    Note: You might need to install `dirmngr` to import Datadog's APT keys.
+3. If running Ubuntu 14 or earlier, copy the keyring to `/etc/apt/trusted.gpg.d`:
 
-3. Update your local APT cache and install the Agent:
+   ```shell
+   sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
+   ```
+
+4. Update your local APT cache and install the Agent:
     ```
     sudo apt-get update
     sudo apt-get install datadog-agent
     ```
 
-4. Copy the example configuration into place and plug in your API key:
+5. Copy the example configuration into place and plug in your API key:
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.:
+6. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.:
     ```
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
-6. Start the Agent:
+7. Start the Agent:
 
     * Ubuntu 16.04 or higher:
     ```

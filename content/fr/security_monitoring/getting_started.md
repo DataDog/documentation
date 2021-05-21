@@ -11,9 +11,9 @@ Pour commencer à utiliser la solution Security Monitoring de Datadog, suivez ce
 
 ## Ingérer des logs
 
-La [documentation relative à la collecte de logs][1] de Datadog décrit en détail comment recueillir des logs à partir de nombreuses sources différentes pour les envoyer à Datadog. Dans un premier temps, tous les logs ingérés sont parsés et enrichis. Les règles de détection sont appliquées en temps réel à tous les logs traités, ceci afin d'optimiser la couverture de détection tout en éliminant les problèmes de performance ou de coût habituels liés à l'indexation de l'intégralité des données de log. [En savoir plus sur la fonctionnalité Logging without Limits™ de Datadog][2]. 
+La [documentation relative à la collecte de logs][1] de Datadog décrit en détail comment recueillir des logs à partir de nombreuses sources différentes pour les envoyer à Datadog. Dans un premier temps, tous les logs ingérés sont parsés et enrichis. Les règles de détection sont appliquées en temps réel à tous les logs traités, ceci afin d'optimiser la couverture de détection tout en éliminant les problèmes de performance ou de coût habituels liés à l'indexation de l'intégralité des données de log. [En savoir plus sur la fonctionnalité Logging without Limits™ de Datadog][2].
 
-{{< img src="security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingérer des logs" >}}
+{{< img src="security_platform/security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingérer des logs" >}}
 
 ## Examiner les règles de détection
 
@@ -21,7 +21,7 @@ Datadog propose des [règles de détection][3] par défaut, vous permettant ains
 
 ## Explorer les signaux de sécurité
 
-Lorsqu'une menace est détectée par une règle de détection, un signal de sécurité est généré. Les signaux de sécurité peuvent être mis en corrélation et triés dans le [Security Signals Explorer][5]. Consultez la documentation relative au [Security Signals Explorer][6] pour en savoir plus. 
+Lorsqu'une menace est détectée par une règle de détection, un signal de sécurité est généré. Les signaux de sécurité peuvent être mis en corrélation et triés dans le [Security Signals Explorer][5]. Consultez la documentation relative au [Security Signals Explorer][6] pour en savoir plus.
 
 [1]: /fr/logs/log_collection/
 [2]: https://www.datadoghq.com/blog/logging-without-limits/

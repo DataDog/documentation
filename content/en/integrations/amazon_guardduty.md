@@ -28,7 +28,7 @@ Datadog integrates with AWS GuardDuty via a Lambda function that ships GuardDuty
 
 ### Log collection
 
-#### Enable GuardDuty logging
+#### Enable logging
 
 1. Create a new rule in Cloudwatch with the **GuardDuty Finding** Event type:
 
