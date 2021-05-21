@@ -91,9 +91,9 @@ View your [monitor saved views][18] from your home screen with Datadog widgets. 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-Long press on the home screen.
-Tap the “+” button on the top left corner of the screen.
-Search for "Datadog" widgets.
+- Long press on the home screen.
+- Tap the “+” button on the top left corner of the screen.
+- Search for "Datadog" widgets.
 - Select your prefered size (medium allows up to 3 and large up to 6).
 - Place the widget in your desired, onscreen location.
 
@@ -101,29 +101,30 @@ Search for "Datadog" widgets.
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Open the Android Widget Picker. Either long press your home screen, or long press the Datadog app icon.
-Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble. 
-Drag the Monitor Saved Views widget on your home screen.
+- Open the Android Widget Picker. 
+- Either long press your home screen, or long press the Datadog app icon.
+- Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble. 
+- Drag the Monitor Saved Views widget on your home screen.
 
 #### Edit a widget
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-Long press on the widget to configure.
-Tap on "Edit Widget".
+- Long press on the widget to configure.
+- Tap on "Edit Widget".
 - Tap on the individual saved view cell to select and deselect.
 - Reorder the views by dragging and dropping each cell.
-Tap out of the widget to validate your selection and exit the configuration screen.
+- Tap out of the widget to validate your selection and exit the configuration screen.
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Tap on the widget title to configure.
-Tap on "Saved views".
+- Tap on the widget title to configure.
+- Tap on "Saved views".
 - Tap on the individual saved view cell to select and deselect.
-Reorder the views by dragging and dropping each cell.
-Tap "Save" to validate your selection and exit the configuration screen.
+- Reorder the views by dragging and dropping each cell.
+- Tap "Save" to validate your selection and exit the configuration screen.
 - Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
 
 #### Switch organizations
