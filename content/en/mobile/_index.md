@@ -91,7 +91,7 @@ View your [monitor saved views][18] from your home screen with Datadog widgets. 
 Long press on the home screen.
 Tap the “+” button on the top left corner of the screen.
 Search for “Datadog” widgets.
-Select your prefered size (medium allows up to 3 and large up to 6)
+- Select your prefered size (medium allows up to 3 and large up to 6).
 Place it where you want on your screen.
 
 **Android**:
