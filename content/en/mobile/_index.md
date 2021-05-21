@@ -92,7 +92,7 @@ Long press on the home screen.
 Tap the “+” button on the top left corner of the screen.
 Search for “Datadog” widgets.
 - Select your prefered size (medium allows up to 3 and large up to 6).
-Place it where you want on your screen.
+- Place the widget in your desired, onscreen location.
 
 **Android**:
 Open the Android Widget Picker. Either long press your home screen, or long press the Datadog app icon.
