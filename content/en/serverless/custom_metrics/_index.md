@@ -33,7 +33,7 @@ The Datadog Lambda Library supports submitting custom metrics in Lambda, both sy
 
 #### With the Datadog Lambda Extension
 
-This is the recommended approach if your you are using Node.js or Python Lambda runtimes.
+Datadog recommends using the Datadog Lambda Extension if your you are using Node.js or Python Lambda runtimes.
 
 1. Set the environment variable `DD_FLUSH_TO_LOG` to `True` on your Lambda function.
 2. Add the [Datadog Lambda Extension][4] to your function either as a Lambda Layer or as a container image.
