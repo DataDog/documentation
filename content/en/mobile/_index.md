@@ -80,7 +80,7 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 ## Widgets
 
-### Monitor Saved Views
+### Monitor saved views
 
 You can view your Monitor [Saved Views][18] from your home screen with Datadog widgets. Tap on any Saved View cell to open the “Monitor Search” screen in the app, with your Saved View already filled in.
 
