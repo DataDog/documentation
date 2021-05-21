@@ -117,7 +117,7 @@ Tap “Save” to validate your selection and exit the configuration screen.
 
 #### Switch organizations
 **iOS**:
-All organizations you’ve logged-in are displayed in the configuration screen
+All organizations you’ve logged-in are displayed in the configuration screen.
 
 **Android**:
 From the configuration screen, tap on “Organization”
