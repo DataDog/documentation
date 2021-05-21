@@ -127,7 +127,7 @@ Select a new organisation. You might need to sign in.
 
 #### Delete a widget
 **iOS**:
-You can delete a widget pressing the “-” button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting “Remove Widget”
+Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
 
 **Android**:
 You can delete a widget by long pressing, drag and dropping the Widget on the “Remove” button.
