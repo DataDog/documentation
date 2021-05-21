@@ -16,6 +16,7 @@ further_reading:
   text: "Detect unauthorized third parties in your AWS account"
 aliases:
     - /security_monitoring/detection_rules/security_monitoring/
+    - /security_platform/detection_rules/security_monitoring/
 ---
 
 ## Overview
