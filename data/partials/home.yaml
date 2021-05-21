@@ -83,7 +83,7 @@ nav_sections:
       - title: Continuous Integration
         link: continuous_integration/
         icon: ci.svg
-        desc: Monitor the performance and reliability of your CI tests and pipelines
+        desc: Get visibility into the performance and reliability of your CI tests and pipelines
   - nav_section:
     - name: 'Configuration'
     - navtiles:
