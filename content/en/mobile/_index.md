@@ -160,7 +160,8 @@ Delete a widget pressing the "-" button at the top left of the widget when editi
 
 Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
 
-
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Quick actions
 
