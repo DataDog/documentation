@@ -111,7 +111,7 @@ Tap out of the widget to validate your selection and exit the configuration scre
 Tap on the widget title to configure.
 Tap on "Saved views".
 - Tap on the individual saved view cell to select and deselect.
-You can reorder them by drag and dropping each cell.
+Reorder the views by dragging and dropping each cell.
 Tap "Save" to validate your selection and exit the configuration screen.
 - Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
 
