@@ -169,7 +169,7 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 ## Say What's Happening
 
-The notification box has the same Markdown and preview features as those of [monitor notifications][1]. In addition to the features, you can reference the tags associated with the signal and the event attributes. The attributes can be seen on a signal in the “event attributes” tab, and you can access the attributes with the following syntax: {{@attribute}}. You can access inner keys of the event attributes by using JSON dot notation (for example, {{@attribute.inner_key}}).
+The notification box has the same Markdown and preview features as those of [monitor notifications][1]. In addition to the features, you can reference the tags associated with the signal and the event attributes. The attributes can be seen on a signal in the “event attributes” tab, and you can access the attributes with the following syntax: `{{@attribute}}`. You can access inner keys of the event attributes by using JSON dot notation (for example, `{{@attribute.inner_key}}`).
 
 This JSON object is an example of event attributes which may be associated with a security signal:
 
