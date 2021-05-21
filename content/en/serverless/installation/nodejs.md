@@ -217,7 +217,7 @@ More information and additional parameters can be found in the [CLI documentatio
 
 ### Install
 
-If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda Library as a layer. Instead, you must install the Datadog Lambda Library as a dependy of your function within the image. If you are using Datadog tracing, you must also install `dd-trace`.
+If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda Library as a layer. Instead, you must install the Datadog Lambda Library as a dependency of your function within the image. If you are using Datadog tracing, you must also install `dd-trace`.
 
 **NPM**:
 
