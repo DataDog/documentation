@@ -130,7 +130,7 @@ Select a new organisation. You might need to sign in.
 Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
 
 **Android**:
-You can delete a widget by long pressing, drag and dropping the Widget on the “Remove” button.
+Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
 
 
 
