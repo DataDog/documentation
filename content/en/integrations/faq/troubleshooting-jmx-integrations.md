@@ -202,7 +202,7 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
 
 * [Restart the Agent][4].
 
-**Note**: If you run into warning message like ``Unable to instantiate or initialize instance <instance_name> for an unknown reason.Parameter 'name' may not be null``, it is likely that you need to set a wildfly user with `$WILDFLY_HOME/bin/add-user.sh -a -u <user> -p <password>` and specify `user` and `password` in the `instances` section of your configuration:
+**Note**: If you run into warning message like `Unable to instantiate or initialize instance <instance_name> for an unknown reason.Parameter 'name' may not be null`, you may need to set a wildfly user with `$WILDFLY_HOME/bin/add-user.sh -a -u <user> -p <password>` and specify `user` and `password` in the `instances` section of your configuration:
 ```yaml
 instances:
   - jmx_url: <jmx_url>
