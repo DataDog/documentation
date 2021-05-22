@@ -168,7 +168,7 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 
 <div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
 
-Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines. The CLI command automatically adds the Datadog Lambda library to your functions using layers, and configures your functions to send metrics, traces, and logs to Datadog.
+Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines. The CLI command automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog.
 
 ### Install
 
@@ -184,10 +184,10 @@ yarn global add @datadog/datadog-ci
 
 ### Instrument
 
-To instrument the function, run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the desired version of the Datadog Lambda layer (see [latest releases][2]) and `<forwarder_arn>` with Forwarder ARN (see the [Forwarder documentation][3]).
+To instrument the function, run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the [desired version][2] of the Datadog Lambda Library and `<extension_version>` with the [desired version][3] of the Datadog Lambda Extension.
 
 ```sh
-datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> --forwarder	<forwarder_arn>
+datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> -e <extension_version>
 ```
 
 For example:
@@ -195,14 +195,14 @@ For example:
 {{< site-region region="us,us3,eu" >}}
 
 ```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 -e 8
 ```
 
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 
 ```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws-us-gov:lambda:us-gov-east-1:002406178527:function:datadog-forwarder
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 -e 8
 ```
 {{< /site-region >}}
 
@@ -210,7 +210,7 @@ More information and additional parameters can be found in the [CLI documentatio
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://docs.datadoghq.com/serverless/forwarder/
+[3]: https://gallery.ecr.aws/datadog/lambda-extension
 [4]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Container Image" %}}
