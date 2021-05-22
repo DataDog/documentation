@@ -13,7 +13,7 @@ You can also generate metrics from 100% of ingested spans, regardless of whether
 
 ## Sending custom metrics from the Datadog Lambda library
 
-{{< img src="serverless/serverless_custom_metrics.png" alt="Ingesting Custom Metrics from AWS Lambda" >}}
+{{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Custom Metrics from AWS Lambda" >}}
 
 Install the Datadog Lambda Library to collect and send custom metrics. Metrics sent from the Datadog Lambda Library are automatically aggregated into [distributions][3], so you can graph the `avg`, `sum`, `max`, `min`, and `count`. You can also calculate aggregations over a set of tags for the 50th, 75th, 95th, and 99th percentile values on the [Distribution Metrics][3] page.
 
