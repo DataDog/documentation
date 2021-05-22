@@ -11,6 +11,8 @@ further_reading:
 - link: "/serverless/serverless_integrations/cli/"
   tag: "Documentation"
   text: "Datadog Serverless CLI"
+aliases:
+- /serverless/serverless_integrations
 ---
 
 {{< whatsnext desc="Serverless Libraries & Integrations:" >}}

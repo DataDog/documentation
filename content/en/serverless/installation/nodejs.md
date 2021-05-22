@@ -25,13 +25,13 @@ aliases:
     - /serverless/guide/nodejs/
 ---
 
-These instructions are for using the Datadog recommended out-of-the-box Lambda functionality. If you set up Datadog Serverless using the Datadog Forwarder, see the [installtion instructions here][1].
-
 ## Required setup
 
-If not already configured, install the [AWS integration][2]. This allows Datadog to ingest Lambda metrics from AWS. After you have installed the [AWS integration][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
+If not already configured, install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. After you have installed the [AWS integration][1], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
+
+If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2].
 
 ## Configuration
 
@@ -432,8 +432,8 @@ For more information on custom metric submission, see [here][6]. For additional 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /serverless/guide/datadog_forwarder_node
-[2]: /integrations/amazon_web_services/
+[1]: /integrations/amazon_web_services/
+[2]: /serverless/guide/datadog_forwarder_node
 [3]: https://app.datadoghq.com/functions
 [4]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [5]: /serverless/libraries_integrations/forwarder

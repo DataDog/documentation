@@ -5,6 +5,8 @@ further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/#aws-lambda-functions"
   tag: "Documentation"
   text: "Unified Service Tagging"
+aliases:
+    - /serverless/serverless_tagging/
 ---
 
 {{< img src="serverless/serverless_tagging.mp4" video="true" alt="Unified Serverless Tagging" >}}

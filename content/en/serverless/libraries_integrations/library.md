@@ -20,6 +20,8 @@ further_reading:
 - link: "https://github.com/DataDog/datadog-lambda-java/blob/master/README.md"
   tag: "Github"
   text: "Datadog Lambda Library for Java"
+aliases:
+    - /serverless/datadog_lambda_library/
 ---
 
 {{< img src="serverless/datadog_lambda_library.png" alt="Datadog Lambda Library"  style="width:100%;">}}
