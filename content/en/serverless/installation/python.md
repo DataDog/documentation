@@ -31,7 +31,7 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
 
-If your Python Lambda functions are written in [Python 3.6 or earlier][2] or you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][3].
+If your Python Lambda functions are written in [Python 3.6 or less][2], or you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][3].
 
 ## Configuration
 
