@@ -9,6 +9,7 @@ content/en/api/**/*.go
 content/en/api/**/*.java
 content/en/api/**/*.pybeta
 content/en/api/**/*.rbbeta
+content/en/api/**/*.ts
 
 # Ignoring all automated content
 # Developers/integrations
