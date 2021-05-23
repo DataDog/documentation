@@ -262,7 +262,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 Datadog Ruby Profiler is currently in public beta. We strongly advise evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Profiler requires MRI Ruby 2.1+ and CPU-time profiles are only available on Linux platforms. To begin profiling applications:
+The Datadog Profiler requires MRI Ruby 2.1+ and **CPU-time profiles are only available on Linux platforms**. To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.
 
@@ -280,7 +280,10 @@ The Datadog Profiler requires MRI Ruby 2.1+ and CPU-time profiles are only avail
 3. You can auto-enable the profiler by setting the `DD_PROFILING_ENABLED` environment variable to `true`:
 
     ```shell
-    DD_PROFILING_ENABLED=true
+    DD_PROFILING_ENABLED=true \
+    DD_ENV=prod \
+    DD_SERVICE=my-web-app \
+    DD_VERSION=1.0.3
     ```
 
     **Note**
@@ -299,6 +302,12 @@ The Datadog Profiler requires MRI Ruby 2.1+ and CPU-time profiles are only avail
 
     ```shell
     bundle exec ddtracerb exec ruby myapp.rb
+    ```
+
+    Rails example:
+
+    ```shell
+    bundle exec ddtracerb exec bin/rails s
     ```
 
     **Note**
