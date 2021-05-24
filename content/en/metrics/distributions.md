@@ -49,7 +49,7 @@ To customize tagging:
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution"  style="width:80%;">}}
 
 ## Audit Events
-Any tag configuration or percentile aggregation changes will create an event in the [event stream][3]. This event explains the change and displays the user that made the change.
+Any tag configuration or percentile aggregation changes create an event in the [event stream][3]. This event explains the change and displays the user that made the change.
 
 If you created, updated, or removed a tag configuration on a distribution metric, you can see examples with the following event search:
 ```text
