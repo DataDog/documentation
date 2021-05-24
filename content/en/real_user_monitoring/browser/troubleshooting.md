@@ -23,9 +23,9 @@ If you can't see any RUM data or if data is missing for some users:
 
 Read the [Content Security Policy guidelines][6] and ensure your website grants access to the Browser RUM SDK CDN and the intake endpoint.
 
-### Check that the Browser RUM SDK is initialized
+### Browser RUM SDK initialized
 
-Run the `window.DD_RUM.getInternalContext()` command in your browser console and check that an `application_id`, `session_id`, and view object are returned:
+Check if the Browser RUM SDK is initialized by running `window.DD_RUM.getInternalContext()` in your browser console and verify an `application_id`, `session_id`, and view object are returned:
 
 {{< img src="real_user_monitoring/browser/troubleshooting/success_rum_internal_context.png" alt="Successful get internal context command">}}
 
@@ -35,13 +35,13 @@ If the SDK is not installed, or if it is not successfully initialized, you may s
 
 You can also check your browser developer tools console or network tab if you notice any errors related to the loading of the Browser RUM SDK.
 
-### Check that data is sent to the Datadog intake
+### Data to the Datadog intake
 
-The Browser RUM SDK sends batches of data periodically to the Datadog intake. You should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
+The Browser RUM SDK sends batches of data periodically to the Datadog intake. If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
 
 {{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="RUM requests to Datadog intake">}}
 
-## RUM Cookies
+## RUM cookies
 
 The Browser RUM SDK relies on cookies to store session information and follow a [user session][6] across different pages. The cookies are first-party (they are set on your domain) and are not used for cross-site tracking. Here are the cookies set by the Browser RUM SDK:
 
