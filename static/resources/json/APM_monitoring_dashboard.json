@@ -1,1 +1,1390 @@
-{"title":"APM monitoring","description":"## APM Monitoring\n\nThis dashboard includes telemetry about your Indexed Spans and all telemetry sent by the Datadog Agent.\n\n[APM metrics sent by the Datadog Agent documentation](https://docs.datadoghq.com/tracing/troubleshooting/agent_apm_metrics/)\n\nClick on any graph to scope the dashboard to a specific:\n\n* Environment\n* Hostname\n* Service","widgets":[{"id":0,"definition":{"type":"toplist","requests":[{"apm_query":{"index":"trace-search","compute":{"aggregation":"count"},"search":{"query":"$env $service $host"},"group_by":[{"facet":"env","limit":50,"sort":{"aggregation":"count","order":"desc"}}]}}],"custom_links":[],"title":"Top envs in term of Indexed Spans count","title_size":"16","title_align":"left"},"layout":{"x":88,"y":6,"width":32,"height":22}},{"id":1,"definition":{"type":"toplist","requests":[{"apm_query":{"index":"trace-search","compute":{"aggregation":"count"},"search":{"query":"$env $service $host"},"group_by":[{"facet":"service","limit":50,"sort":{"aggregation":"count","order":"desc"}}]},"conditional_formats":[{"comparator":">=","value":100000000,"palette":"white_on_red"},{"comparator":"<","value":100000000,"palette":"white_on_green"}]}],"custom_links":[],"title":"Top services in term of Indexed Spans count","title_size":"16","title_align":"left"},"layout":{"x":0,"y":28,"width":34,"height":35}},{"id":2,"definition":{"type":"timeseries","requests":[{"apm_query":{"index":"trace-search","compute":{"aggregation":"count"},"search":{"query":"$env $service $host"},"group_by":[{"facet":"service","limit":100,"sort":{"aggregation":"count","order":"desc"}}]},"display_type":"area","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Indexed span Count by Service","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":34,"y":28,"width":86,"height":35}},{"id":3,"definition":{"type":"note","content":"Estimated Daily/Weekly Indexed span Target\n","background_color":"purple","font_size":"24","text_align":"center","show_tick":true,"tick_pos":"50%","tick_edge":"bottom"},"layout":{"x":0,"y":0,"width":120,"height":5}},{"id":4,"definition":{"type":"note","content":"\n**Note: These graphs are not the source of truth for Indexed span billing as they have some limitations.**\n\nRather they're meant to be visual indicators that your daily/weekly Indexed span count is within a reasonable range, given your current APM host count. \n\n* 1 Million Indexed Spans are included per APM host; APM host count is measured as the 99th percentile of all distinct APM hosts over the past month\n\n* The graphs however calculate the threshold using current APM host count and consider a month to be 30 days","background_color":"white","font_size":"14","text_align":"left","show_tick":false,"tick_pos":"50%","tick_edge":"left"},"layout":{"x":0,"y":6,"width":88,"height":22}},{"id":5,"definition":{"type":"note","content":"Metrics from the agent about all the Indexed Spans it sends. These represent values before in-app filtering and not the number of spans actually retained.\n\nStill, they can give you a good sense of anomalous changes in traffic.","background_color":"blue","font_size":"14","text_align":"left","show_tick":true,"tick_pos":"50%","tick_edge":"right"},"layout":{"x":0,"y":64,"width":23,"height":16}},{"id":6,"definition":{"type":"timeseries","requests":[{"q":"forecast(sum:datadog.trace_agent.receiver.events_extracted{$env,$service,$host} by {env}.as_count(), 'seasonal', 2)","display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Indexed span Volume Forecast (pre-filtering) by environment","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":25,"y":64,"width":48,"height":16}},{"id":7,"definition":{"type":"timeseries","requests":[{"q":"anomalies(sum:datadog.trace_agent.receiver.events_extracted{$env,$service,$host}.as_count(), 'basic', 2)","display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Indexed span Volume Anomalies (pre-filtering)","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":73,"y":64,"width":47,"height":16}},{"id":8,"definition":{"type":"servicemap","filters":["$env","datacenter:*"],"service":"$service","custom_links":[],"title":"Service map","title_size":"16","title_align":"left"},"layout":{"x":122,"y":6,"width":81,"height":50}},{"id":9,"definition":{"type":"query_value","requests":[{"q":"sum:datadog.apm.host_instance{$env,$service,$host}","aggregator":"avg"}],"custom_links":[],"title":"Average Total of APM hosts","title_size":"16","title_align":"left","autoscale":false,"custom_unit":"host","precision":0},"layout":{"x":0,"y":88,"width":23,"height":15}},{"id":10,"definition":{"type":"note","content":"APM Environments, hosts & services overview","background_color":"purple","font_size":"24","text_align":"center","show_tick":true,"tick_pos":"50%","tick_edge":"bottom"},"layout":{"x":0,"y":81,"width":120,"height":6}},{"id":11,"definition":{"type":"toplist","requests":[{"q":"top(sum:datadog.apm.host_instance{$env,$service,$host} by {env}, 10, 'mean', 'desc')"}],"custom_links":[],"title":"Total APM Hosts per env","title_size":"16","title_align":"left"},"layout":{"x":23,"y":88,"width":47,"height":15}},{"id":12,"definition":{"type":"hostmap","requests":{"fill":{"q":"avg:datadog.apm.host_instance{$env,$service,$host} by {host}"}},"custom_links":[],"title":"APM hosts map per environment","title_size":"16","title_align":"left","node_type":"host","no_metric_hosts":true,"no_group_hosts":false,"group":["env"],"scope":["$env","$hostname"],"style":{"palette":"hostmap_blues","palette_flip":false}},"layout":{"x":70,"y":88,"width":82,"height":43}},{"id":13,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.apm.host_instance{$env,$service,$host} by {env}","display_type":"bars","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Total APM Hosts per env","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":0,"y":103,"width":70,"height":28}},{"id":14,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.trace_writer.payloads{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.trace_writer.payloads{$env,$hostname,$service} by {env,host,service}.as_count()","alias_name":"Number of payloads processed"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of payloads processed.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":0,"y":133,"width":60,"height":18}},{"id":15,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.trace_writer.traces{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.trace_writer.traces{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of traces processed"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of traces processed.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":60,"y":133,"width":60,"height":18}},{"id":16,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.trace_writer.events{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.trace_writer.events{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of events processed"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of events processed.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":0,"y":151,"width":60,"height":18}},{"id":17,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.trace_writer.spans{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.trace_writer.spans{$env,$hostname,$service} by {env,host,service}.as_count()","alias_name":"Number of spans processed"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of spans processed.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":60,"y":151,"width":60,"height":18}},{"id":18,"definition":{"type":"note","content":"Traces & Agents telemetry","background_color":"purple","font_size":"18","text_align":"center","show_tick":true,"tick_pos":"50%","tick_edge":"bottom"},"layout":{"x":0,"y":171,"width":120,"height":5}},{"id":19,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.cpu_percent{$env,$service,$host} by {host,env}","metadata":[{"expression":"avg:datadog.trace_agent.cpu_percent{$env ,$hostname ,$service} by {host,env}","alias_name":"CPU usage"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"CPU usage (in cores), e.g. 50 (half a core), 200 (two cores), 250 (2.5 cores)","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":0,"y":178,"width":60,"height":18}},{"id":20,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.heap_alloc{$env,$service,$host} by {host,env}","metadata":[{"expression":"avg:datadog.trace_agent.heap_alloc{$env,$hostname,$service} by {host,env}","alias_name":"Heap Allocation"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Heap allocations as reported by the Go runtime.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":60,"y":178,"width":60,"height":18}},{"id":21,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.trace{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.trace{$env,$hostname,$service} by {env,host,service}.as_count()","alias_name":"# of traces received and accepted"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of traces received and accepted.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":60,"y":196,"width":60,"height":18}},{"id":22,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.events.max_eps.current_rate{$env,$service,$host} by {env,host}","metadata":[{"expression":"avg:datadog.trace_agent.events.max_eps.current_rate{$env,$hostname,$service} by {env,host}","alias_name":"Count of APM Events per second received by the Agent"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Count of APM Events per second received by the Agent.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":0,"y":196,"width":60,"height":18}},{"id":23,"definition":{"type":"note","content":"Sampling, Filtering & Obfuscation","background_color":"green","font_size":"14","text_align":"center","show_tick":true,"tick_pos":"50%","tick_edge":"right"},"layout":{"x":0,"y":215,"width":12,"height":37}},{"id":24,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.events_sampled{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.events_sampled{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Total APM events sampled by the max_events_per_second parameter sampler"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Total APM events sampled by the max_events_per_second parameter sampler.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":13,"y":216,"width":45,"height":18}},{"id":25,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.events.max_eps.sample_rate{$env,$service,$host} by {env,host,service}","metadata":[{"expression":"avg:datadog.trace_agent.events.max_eps.sample_rate{$env ,$hostname ,$service} by {env,host,service}","alias_name":"Sample rate applied by the Agent to Events it received"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Sample rate applied by the Agent to Events it received.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":101,"y":216,"width":34,"height":18}},{"id":26,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.receiver.traces_priority{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"avg:datadog.trace_agent.receiver.traces_priority{$env ,$hostname  ,$service} by {env,host,service}.as_count()","alias_name":"Traces processed by priority sampler"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Traces processed by priority sampler that have the `priority` tag.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":13,"y":235,"width":45,"height":17}},{"id":27,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.obfuscations{$env,$service,$host} by {service,env,host}.as_count()","metadata":[{"expression":"avg:datadog.trace_agent.obfuscations{$env,$hostname,$service} by {service,env,host}.as_count()","alias_name":"SQL obfuscation"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Increment by one every time an SQL obfuscation happens.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":58,"y":235,"width":43,"height":17}},{"id":28,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.traces_filtered{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.traces_filtered{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Trace filtered by ignored resources"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Traces filtered by ignored resources (as defined in datadog.yaml file).","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":101,"y":235,"width":34,"height":17}},{"id":29,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.events_extracted{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.events_extracted{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Total APM events sampled"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Total APM events sampled.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":58,"y":216,"width":43,"height":18}},{"id":30,"definition":{"type":"note","content":"Connections","background_color":"blue","font_size":"14","text_align":"center","show_tick":true,"tick_pos":"50%","tick_edge":"right"},"layout":{"x":0,"y":253,"width":12,"height":31}},{"id":31,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.trace_writer.bytes_uncompressed{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.trace_writer.bytes_uncompressed{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of bytes sent (calculated before Gzip)"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of bytes sent (calculated before Gzip).","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":13,"y":253,"width":53,"height":15}},{"id":32,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.stats_writer.bytes{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.stats_writer.bytes{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of bytes sent (calculated after Gzip)"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of bytes sent (calculated after Gzip).","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":67,"y":253,"width":53,"height":15}},{"id":33,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.tcp_connections{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.tcp_connections{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of TCP connections coming in Datadog Agents"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of TCP connections coming in Datadog Agents.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":13,"y":269,"width":36,"height":15}},{"id":34,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.stats_writer.queue_fill.avg{$env,$service,$host} by {env,host,service}","metadata":[{"expression":"avg:datadog.trace_agent.stats_writer.queue_fill.avg{$env ,$hostname ,$service} by {env,host,service}","alias_name":"Percentage of queue filled"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Percentage of queue filled.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":85,"y":269,"width":35,"height":15}},{"id":35,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.stats_writer.connection_fill.avg{$env,$service,$host} by {env,host,service}","metadata":[{"expression":"avg:datadog.trace_agent.stats_writer.connection_fill.avg{$env ,$hostname ,$service} by {env,host,service}","alias_name":"Percentage of outgoing connections used"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Percentage of outgoing connections used.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":49,"y":269,"width":36,"height":15}},{"id":36,"definition":{"type":"note","content":"Errors Analysis","background_color":"orange","font_size":"14","text_align":"center","show_tick":true,"tick_pos":"50%","tick_edge":"right"},"layout":{"x":0,"y":286,"width":12,"height":38}},{"id":37,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.normalizer.spans_malformed{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.normalizer.spans_malformed{$env,$hostname,$service} by {env,host,service}.as_count()","alias_name":"Number of spans with malformed fields"}],"display_type":"bars","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of spans having malformed fields that had to be altered in order for the system to accept them","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":13,"y":286,"width":53,"height":19}},{"id":38,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.traces_dropped{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.traces_dropped{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Traces dropped due to normalization errors"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Traces dropped due to normalization errors.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":67,"y":286,"width":53,"height":19}},{"id":39,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.trace_writer.retries{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.trace_writer.retries{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of retries on failures to the Datadog API"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of retries on failures to the Datadog API.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":67,"y":307,"width":53,"height":17}},{"id":40,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.trace_writer.errors{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.trace_writer.errors{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Errors that could not be retried"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Errors that could not be retried.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":13,"y":307,"width":53,"height":17}},{"id":41,"definition":{"type":"note","content":"Payloads Statistics","background_color":"purple","font_size":"24","text_align":"center","show_tick":true,"tick_pos":"50%","tick_edge":"bottom"},"layout":{"x":0,"y":325,"width":120,"height":5}},{"id":42,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.payload_accepted{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.payload_accepted{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of payloads accepted by Datadog Agents"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of payloads accepted by Datadog Agents.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":0,"y":332,"width":60,"height":29}},{"id":43,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.receiver.spans_received{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"avg:datadog.trace_agent.receiver.spans_received{$env,$hostname,$service} by {env,host,service}.as_count()","alias_name":"Total span received by Datadog Agents"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Total bytes of payloads received by Agents.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":61,"y":346,"width":59,"height":15}},{"id":44,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.traces_bytes{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.traces_bytes{$env,$hostname,$service} by {env,host,service}.as_count()","alias_name":"Total bytes of payloads accepted by Agents"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Total bytes of payloads accepted by Agents.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":61,"y":331,"width":59,"height":15}},{"id":45,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.spans_filtered{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.spans_filtered{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Total bytes of payloads filtered by Datadog Agents"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Total bytes of payloads filtered by Datadog Agents.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":85,"y":362,"width":35,"height":15}},{"id":46,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.payload_refused{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.payload_refused{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of payloads rejected by the receiver because of sampling"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of payloads rejected by the receiver because of sampling.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":0,"y":362,"width":42,"height":15}},{"id":47,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.spans_dropped{$env,$service,$host} by {env,host,service}.as_count()","display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Total bytes of payloads dropped by the Agent.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":42,"y":362,"width":43,"height":15}},{"id":48,"definition":{"type":"note","content":"Performances","background_color":"blue","font_size":"14","text_align":"center","show_tick":true,"tick_pos":"50%","tick_edge":"right"},"layout":{"x":0,"y":379,"width":12,"height":15}},{"id":49,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.trace_writer.encode_ms.avg{$env,$service,$host} by {env,host,service}","metadata":[{"expression":"avg:datadog.trace_agent.trace_writer.encode_ms.avg{$env ,$hostname ,$service} by {env,host,service}","alias_name":"Average number of miliseconds it took to encode a trace payload"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Average number of miliseconds it took to encode a trace payload.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":13,"y":379,"width":39,"height":15}},{"id":50,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.trace_writer.compress_ms.avg{$env,$service,$host} by {env,host,service}","metadata":[{"expression":"avg:datadog.trace_agent.trace_writer.compress_ms.avg{$env ,$hostname ,$service} by {env,host,service}","alias_name":"Number of miliseconds it took to compress an encoded trace payload"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of miliseconds it took to compress an encoded trace payload.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":53,"y":379,"width":42,"height":15}},{"id":51,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.stats_writer.splits{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.stats_writer.splits{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of times a payload was split into multiple ones"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of times a payload was split into multiple ones.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":96,"y":379,"width":47,"height":15}},{"id":52,"definition":{"type":"note","content":"API statistics","background_color":"purple","font_size":"14","text_align":"center","show_tick":true,"tick_pos":"50%","tick_edge":"right"},"layout":{"x":0,"y":395,"width":12,"height":32}},{"id":53,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.trace_writer.flush_duration.avg{$env,$service,$host} by {env,host,service}","metadata":[{"expression":"avg:datadog.trace_agent.trace_writer.flush_duration.avg{$env ,$hostname ,$service} by {env,host,service}","alias_name":"Average time it took to flush a payload to the Datadog API"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Average time it took to flush a payload to the Datadog API.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":13,"y":395,"width":54,"height":15}},{"id":54,"definition":{"type":"timeseries","requests":[{"q":"avg:datadog.trace_agent.trace_writer.queue_fill.avg{$env,$service,$host} by {env,host,service}","metadata":[{"expression":"avg:datadog.trace_agent.trace_writer.queue_fill.avg{$env ,$hostname ,$service} by {env,host,service}","alias_name":"% of outgoing payload queue fill"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Percentage of outgoing payload queue fill.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":69,"y":395,"width":47,"height":15}},{"id":55,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.service_writer.services{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.service_writer.services{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of services flushed"}],"display_type":"bars","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of services flushed.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":69,"y":412,"width":47,"height":15}},{"id":56,"definition":{"type":"timeseries","requests":[{"q":"sum:datadog.trace_agent.receiver.error{$env,$service,$host} by {env,host,service}.as_count()","metadata":[{"expression":"sum:datadog.trace_agent.receiver.error{$env ,$hostname ,$service} by {env,host,service}.as_count()","alias_name":"Number of times that the API rejected a payload due to an error in either decoding, formatting or other"}],"display_type":"line","style":{"palette":"dog_classic","line_type":"solid","line_width":"normal"}}],"custom_links":[],"yaxis":{"label":"","scale":"linear","min":"auto","max":"auto","include_zero":true},"title":"Number of times that the API rejected a payload due to an error in either decoding, formatting or other.","title_size":"16","title_align":"left","show_legend":false,"legend_size":"0"},"layout":{"x":13,"y":412,"width":54,"height":15}}],"template_variables":[{"name":"host","default":"*","prefix":"host"},{"name":"service","default":"*","prefix":"service"},{"name":"env","default":"*","prefix":"env"}],"layout_type":"free","is_read_only":false,"notify_list":[],"restricted_roles":[],"id":"8ca-y6f-79b"}
+{
+    "title": "APM Monitoring",
+    "description": "## APM Monitoring\n\nThis dashboard includes telemetry about your Indexed Spans and all telemetry sent by the Datadog Agent.\n\n[APM metrics sent by the Datadog Agent documentation](https://docs.datadoghq.com/tracing/troubleshooting/agent_apm_metrics/)\n\nClick on any graph to scope the dashboard to a specific:\n\n* Environment\n* Hostname\n* Service",
+    "widgets": [
+        {
+            "id": 2864720828142358,
+            "definition": {
+                "title": "Currently reporting APM hosts",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "sum:datadog.apm.host_instance{$env,$hostname,$service}",
+                        "aggregator": "last"
+                    }
+                ],
+                "autoscale": false,
+                "custom_unit": "host",
+                "precision": 0
+            },
+            "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 2,
+                "height": 1
+            }
+        },
+        {
+            "id": 2851070005020238,
+            "definition": {
+                "title": "Sum Volume of span ingested",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service}.as_count()",
+                        "aggregator": "sum"
+                    }
+                ],
+                "autoscale": true,
+                "custom_unit": "",
+                "precision": 0
+            },
+            "layout": {
+                "x": 2,
+                "y": 0,
+                "width": 2,
+                "height": 1
+            }
+        },
+        {
+            "id": 3949856721030506,
+            "definition": {
+                "title": "Number of span ingested",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()",
+                        "aggregator": "sum"
+                    }
+                ],
+                "autoscale": true,
+                "custom_unit": "",
+                "precision": 0
+            },
+            "layout": {
+                "x": 4,
+                "y": 0,
+                "width": 2,
+                "height": 1
+            }
+        },
+        {
+            "id": 3787738064937930,
+            "definition": {
+                "title": "% of spans ingested that are indexed",
+                "show_legend": false,
+                "legend_size": "0",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()*100",
+                        "on_right_yaxis": false,
+                        "metadata": [
+                            {
+                                "expression": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()*100",
+                                "alias_name": "% of span indexed"
+                            }
+                        ],
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        },
+                        "display_type": "line"
+                    }
+                ],
+                "yaxis": {
+                    "scale": "linear",
+                    "label": "",
+                    "include_zero": true,
+                    "min": "auto",
+                    "max": "auto"
+                },
+                "markers": []
+            },
+            "layout": {
+                "x": 6,
+                "y": 0,
+                "width": 4,
+                "height": 2
+            }
+        },
+        {
+            "id": 8411737725717918,
+            "definition": {
+                "title": "Number of span indexed",
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()",
+                        "aggregator": "sum"
+                    }
+                ],
+                "autoscale": true,
+                "custom_unit": "",
+                "precision": 0
+            },
+            "layout": {
+                "x": 10,
+                "y": 0,
+                "width": 2,
+                "height": 1
+            }
+        },
+        {
+            "id": 5602355571046238,
+            "definition": {
+                "title": "Currently reporting APM Hosts per env",
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:datadog.apm.host_instance{$env,$hostname,$service} by {env}, 50, 'last', 'desc')"
+                    }
+                ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 1,
+                "width": 2,
+                "height": 3
+            }
+        },
+        {
+            "id": 5733495518644738,
+            "definition": {
+                "title": "Volume of ingested spans per env",
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service} by {env}.as_count(), 10, 'sum', 'desc')"
+                    }
+                ]
+            },
+            "layout": {
+                "x": 2,
+                "y": 1,
+                "width": 2,
+                "height": 3
+            }
+        },
+        {
+            "id": 4678996839588422,
+            "definition": {
+                "title": "# ingested span per env",
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env}.as_count(), 10, 'sum', 'desc')"
+                    }
+                ]
+            },
+            "layout": {
+                "x": 4,
+                "y": 1,
+                "width": 2,
+                "height": 3
+            }
+        },
+        {
+            "id": 3583405495730638,
+            "definition": {
+                "title": "# indexed spans per env",
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env}.as_count(), 10, 'sum', 'desc')"
+                    }
+                ]
+            },
+            "layout": {
+                "x": 10,
+                "y": 1,
+                "width": 2,
+                "height": 3
+            }
+        },
+        {
+            "id": 892761816819110,
+            "definition": {
+                "title": "% of spans ingested that are indexed per env",
+                "show_legend": false,
+                "legend_size": "0",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env}.as_count()*100",
+                        "on_right_yaxis": false,
+                        "metadata": [
+                            {
+                                "expression": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env}.as_count()*100",
+                                "alias_name": "% of span indexed"
+                            }
+                        ],
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        },
+                        "display_type": "line"
+                    }
+                ],
+                "yaxis": {
+                    "scale": "linear",
+                    "label": "",
+                    "include_zero": true,
+                    "min": "auto",
+                    "max": "auto"
+                },
+                "markers": []
+            },
+            "layout": {
+                "x": 6,
+                "y": 2,
+                "width": 4,
+                "height": 2
+            }
+        },
+        {
+            "id": 2214645506882,
+            "definition": {
+                "title": "APM hosts overview",
+                "type": "group",
+                "background_color": "blue",
+                "show_title": true,
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 571343677503716,
+                        "definition": {
+                            "title": "Average Total of APM hosts",
+                            "type": "query_value",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.apm.host_instance{$env,$hostname,$service}",
+                                    "aggregator": "last"
+                                }
+                            ],
+                            "autoscale": false,
+                            "custom_unit": "host",
+                            "precision": 0
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 2,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 6029003517728540,
+                        "definition": {
+                            "title": "Average APM Hosts per env",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.apm.host_instance{$env,$hostname,$service} by {env}, 10, 'last', 'desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 2,
+                            "y": 0,
+                            "width": 4,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 4915314586451142,
+                        "definition": {
+                            "title": "APM hosts map per environment",
+                            "type": "hostmap",
+                            "requests": {
+                                "fill": {
+                                    "q": "avg:datadog.apm.host_instance{$env,$hostname,$service} by {host}"
+                                }
+                            },
+                            "node_type": "host",
+                            "no_metric_hosts": false,
+                            "no_group_hosts": false,
+                            "group": [
+                                "env"
+                            ],
+                            "scope": [
+                                "$env",
+                                "$hostname"
+                            ],
+                            "style": {
+                                "palette": "hostmap_blues",
+                                "palette_flip": false
+                            }
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 0,
+                            "width": 6,
+                            "height": 5
+                        }
+                    },
+                    {
+                        "id": 7497242298181676,
+                        "definition": {
+                            "title": "Total APM Hosts per env",
+                            "show_legend": false,
+                            "legend_size": "0",
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.apm.host_instance{$env,$hostname,$service} by {env}",
+                                    "metadata": [
+                                        {
+                                            "expression": "sum:datadog.apm.host_instance{$env,$hostname,$service} by {env}",
+                                            "alias_name": "# of hosts"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "bars"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 2,
+                            "width": 6,
+                            "height": 3
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3818621843967336,
+            "definition": {
+                "title": "Ingestion overview: Ingested bytes",
+                "type": "group",
+                "background_color": "purple",
+                "show_title": true,
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 6517451416979910,
+                        "definition": {
+                            "title": "Number of bytes ingested",
+                            "type": "query_value",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service}.as_count()",
+                                    "aggregator": "sum"
+                                }
+                            ],
+                            "autoscale": true,
+                            "custom_unit": "",
+                            "precision": 0
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 2,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 173913627968032,
+                        "definition": {
+                            "title": "Number of bytes ingested",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "forecast(sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service}.as_count(), 'seasonal', 1)",
+                                    "metadata": [
+                                        {
+                                            "expression": "forecast(sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service}.as_count(), 'seasonal', 1)",
+                                            "alias_name": "# of bytes ingested"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 2,
+                            "y": 0,
+                            "width": 10,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 226449836371660,
+                        "definition": {
+                            "title": "Number of bytes ingested per env",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service} by {env}.as_count(), 10, 'sum', 'desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 2,
+                            "width": 3,
+                            "height": 3
+                        }
+                    },
+                    {
+                        "id": 1688636750156784,
+                        "definition": {
+                            "title": "Number of bytes ingested per env",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service} by {env}.as_count()",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service} by {env}.as_count()",
+                                            "alias_name": "# of bytes ingested"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "purple",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 3,
+                            "y": 2,
+                            "width": 9,
+                            "height": 3
+                        }
+                    },
+                    {
+                        "id": 3139423997690104,
+                        "definition": {
+                            "title": "Contribution % of env to the total amount of ingested bytes",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service} by {env}.as_count()/sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service}.as_count()*100,10,'mean','desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 5,
+                            "width": 3,
+                            "height": 3
+                        }
+                    },
+                    {
+                        "id": 829566385213646,
+                        "definition": {
+                            "title": "Contribution % of env to the total amount of ingested bytes",
+                            "show_legend": false,
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service} by {env}.as_count()/sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service}.as_count()*100",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service} by {env}.as_count()/sum:datadog.estimated_usage.apm.ingested_bytes{$hostname,$env,$service}.as_count()*100",
+                                            "alias_name": "% of bytes ingested"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "purple",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "area"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 3,
+                            "y": 5,
+                            "width": 9,
+                            "height": 3
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7854591607695874,
+            "definition": {
+                "title": "Ingestion: Ingested spans",
+                "type": "group",
+                "background_color": "blue",
+                "show_title": true,
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 5607511433601228,
+                        "definition": {
+                            "title": "Number of span ingested",
+                            "type": "query_value",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()",
+                                    "aggregator": "sum"
+                                }
+                            ],
+                            "autoscale": true,
+                            "custom_unit": "",
+                            "precision": 0
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 2,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 8454226144893688,
+                        "definition": {
+                            "title": "# Ingested spans",
+                            "show_legend": false,
+                            "legend_size": "0",
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "forecast(sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count(), 'seasonal', 1)",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "forecast(sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count(), 'seasonal', 1)",
+                                            "alias_name": "# Ingested spans"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "cool",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 2,
+                            "y": 0,
+                            "width": 10,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 3929586050215408,
+                        "definition": {
+                            "title": "# ingested span per env",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env}.as_count(), 10, 'sum', 'desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 2,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 974745880733886,
+                        "definition": {
+                            "title": "Number of ingested spans per service",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {service}.as_count(), 50, 'sum', 'desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 3,
+                            "y": 2,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 4091479672775764,
+                        "definition": {
+                            "title": "Number of ingested spans per env and service",
+                            "show_legend": false,
+                            "legend_size": "0",
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env,service}.as_count()",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env,service}.as_count()",
+                                            "alias_name": "# ingested spans"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "cool",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 2,
+                            "width": 6,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 5622474284661674,
+                        "definition": {
+                            "title": "Contribution % of env to the total amount of ingested span",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top((sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count())*100,10,'mean','desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 6,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 3437135407987876,
+                        "definition": {
+                            "title": "Contribution % of services to the total amount of ingested span",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()*100,50,'mean','desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 3,
+                            "y": 6,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 7277910134970678,
+                        "definition": {
+                            "title": "Contribution % of env and service combination to the total amount of ingested span",
+                            "show_legend": false,
+                            "legend_size": "0",
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()*100",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()*100",
+                                            "alias_name": "% ingested spans"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "cool",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "area"
+                                }
+                            ],
+                            "yaxis": {
+                                "min": "0",
+                                "max": "100"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 6,
+                            "width": 6,
+                            "height": 4
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2167208681106014,
+            "definition": {
+                "title": "Indexing overview",
+                "type": "group",
+                "background_color": "green",
+                "show_title": true,
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 5736296328843618,
+                        "definition": {
+                            "title": "Number of span indexed",
+                            "type": "query_value",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()",
+                                    "aggregator": "sum"
+                                }
+                            ],
+                            "autoscale": true,
+                            "custom_unit": "",
+                            "precision": 0
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 2,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 3777454080860020,
+                        "definition": {
+                            "title": "Number of indexed spans per env and service",
+                            "show_legend": false,
+                            "legend_size": "0",
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "forecast(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count(), 'linear', 1)",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "forecast(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count(), 'linear', 1)",
+                                            "alias_name": "# of indexed spans"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "green",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 2,
+                            "y": 0,
+                            "width": 10,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 6924786499257500,
+                        "definition": {
+                            "title": "# indexed spans per env",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env}.as_count(), 10, 'sum', 'desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 2,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 101819691183954,
+                        "definition": {
+                            "title": "Number of indexed spans per service",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {service}.as_count(), 50, 'sum', 'desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 3,
+                            "y": 2,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 2324595047541738,
+                        "definition": {
+                            "title": "Number of indexed spans per env and service",
+                            "show_legend": false,
+                            "legend_size": "0",
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env,service}.as_count()",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env,service}.as_count()",
+                                            "alias_name": "# of indexed spans"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "green",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 2,
+                            "width": 6,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 1473133444733824,
+                        "definition": {
+                            "title": "Contribution % of env to the total amount of indexed span",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env}.as_count()/sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()*100,10,'mean','desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 6,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 6187343325636532,
+                        "definition": {
+                            "title": "Contribution % of services to the total amount of indexed span",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {service}.as_count()/sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()*100,50,'mean','desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 3,
+                            "y": 6,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 8869811510141626,
+                        "definition": {
+                            "title": "Contribution % of env and service to the total amount of indexed span",
+                            "show_legend": false,
+                            "legend_size": "0",
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env,service}.as_count()/sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()*100",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env,service}.as_count()/sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()*100",
+                                            "alias_name": "% of indexed spans"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "green",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "area"
+                                }
+                            ],
+                            "yaxis": {
+                                "min": "0",
+                                "max": "100"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 6,
+                            "width": 6,
+                            "height": 4
+                        }
+                    }
+                ]
+            },
+            "layout": {
+                "is_column_break": true
+            }
+        },
+        {
+            "id": 7514225496117800,
+            "definition": {
+                "title": "Sampling overview",
+                "type": "group",
+                "background_color": "orange",
+                "show_title": true,
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 3982900256121654,
+                        "definition": {
+                            "title": "% of spans ingested that are indexed",
+                            "type": "query_value",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()*100,10,'mean','desc')",
+                                    "aggregator": "avg"
+                                }
+                            ],
+                            "custom_unit": "%",
+                            "precision": 2
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 2,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 8921388268667548,
+                        "definition": {
+                            "title": "Sampling rate over time",
+                            "show_legend": false,
+                            "legend_size": "0",
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()*100",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service}.as_count()*100",
+                                            "alias_name": "% of span indexed"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "scale": "linear",
+                                "label": "",
+                                "include_zero": true,
+                                "min": "auto",
+                                "max": "auto"
+                            },
+                            "markers": []
+                        },
+                        "layout": {
+                            "x": 2,
+                            "y": 0,
+                            "width": 10,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 1680264086998492,
+                        "definition": {
+                            "title": "% of spans ingested that are indexed per env",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env}.as_count()*100,10,'mean','desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 2,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 8710422889593376,
+                        "definition": {
+                            "title": "% of spans ingested that are indexed per service",
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "q": "top(sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {service,env}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {service,env}.as_count()*100,50,'mean','desc')"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 3,
+                            "y": 2,
+                            "width": 3,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 4553912578695040,
+                        "definition": {
+                            "title": "% of spans ingested that are indexed",
+                            "show_legend": false,
+                            "legend_size": "0",
+                            "type": "timeseries",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env,service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env,service}.as_count()*100",
+                                    "on_right_yaxis": false,
+                                    "metadata": [
+                                        {
+                                            "expression": "sum:datadog.estimated_usage.apm.indexed_spans{$hostname,$env,$service} by {env,service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$hostname,$env,$service} by {env,service}.as_count()*100",
+                                            "alias_name": "% of span indexed"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "dog_classic",
+                                        "line_type": "solid",
+                                        "line_width": "normal"
+                                    },
+                                    "display_type": "line"
+                                }
+                            ],
+                            "yaxis": {
+                                "min": "0",
+                                "max": "100"
+                            },
+                            "markers": [
+                                {
+                                    "label": " 50% ",
+                                    "value": "y = 50",
+                                    "display_type": "info dashed"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 2,
+                            "width": 6,
+                            "height": 4
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5935988253235334,
+            "definition": {
+                "title": "APM indexed span management",
+                "type": "group",
+                "background_color": "gray",
+                "show_title": true,
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 5596056065733240,
+                        "definition": {
+                            "type": "note",
+                            "content": "This scatter plot displays the ratio of spans indexed vs the overall amount of spans ingested per service\n\nThe more a service is in the upper right corner the more it might impact your indexation costs as it means it's indexing  a high % of spans from an elevated amount of spans ingested",
+                            "background_color": "pink",
+                            "font_size": "14",
+                            "text_align": "left",
+                            "show_tick": true,
+                            "tick_pos": "50%",
+                            "tick_edge": "right"
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 2,
+                            "height": 5
+                        }
+                    },
+                    {
+                        "id": 7266493927142998,
+                        "definition": {
+                            "title": "% of spans being indexed vs # of ingested spans per service",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "type": "scatterplot",
+                            "requests": {
+                                "x": {
+                                    "q": "sum:datadog.estimated_usage.apm.ingested_spans{$env,$service} by {service}.as_count()",
+                                    "aggregator": "sum"
+                                },
+                                "y": {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$env,$service} by {service}.as_count()/sum:datadog.estimated_usage.apm.ingested_spans{$env,$service} by {service}.as_count()*100",
+                                    "aggregator": "avg"
+                                }
+                            },
+                            "xaxis": {
+                                "scale": "log",
+                                "include_zero": false
+                            },
+                            "yaxis": {
+                                "include_zero": false,
+                                "min": "0",
+                                "max": "100"
+                            },
+                            "color_by_groups": [
+                                "service"
+                            ]
+                        },
+                        "layout": {
+                            "x": 2,
+                            "y": 0,
+                            "width": 10,
+                            "height": 5
+                        }
+                    },
+                    {
+                        "id": 3431229316928074,
+                        "definition": {
+                            "type": "note",
+                            "content": "Relative and absolute change of the amount of indexed spans per service compared to last week.  \n.     \n   \n----------------------------------------------------------------------     \n   \n.   \nRelative and absolute change of the amount of indexed spans per service compared to last month.",
+                            "background_color": "green",
+                            "font_size": "14",
+                            "text_align": "left",
+                            "show_tick": true,
+                            "tick_pos": "50%",
+                            "tick_edge": "right"
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 5,
+                            "width": 2,
+                            "height": 4
+                        }
+                    },
+                    {
+                        "id": 2542178149388024,
+                        "definition": {
+                            "title": "% of indexing volume change compared to last week",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "time": {
+                                "live_span": "1w"
+                            },
+                            "type": "change",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$env,$service} by {service}",
+                                    "order_by": "change",
+                                    "order_dir": "desc",
+                                    "compare_to": "week_before",
+                                    "increase_good": false,
+                                    "change_type": "relative"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 2,
+                            "y": 5,
+                            "width": 5,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 8225198001360214,
+                        "definition": {
+                            "title": "# of indexing volume change compared to last week",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "time": {
+                                "live_span": "1w"
+                            },
+                            "type": "change",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$env,$service} by {service}",
+                                    "order_by": "change",
+                                    "order_dir": "desc",
+                                    "compare_to": "week_before",
+                                    "increase_good": false,
+                                    "change_type": "absolute"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 7,
+                            "y": 5,
+                            "width": 5,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 1073065026024604,
+                        "definition": {
+                            "title": "% of indexing volume change compared to last month",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "time": {
+                                "live_span": "1mo"
+                            },
+                            "type": "change",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$env,$service} by {service}",
+                                    "order_by": "change",
+                                    "order_dir": "desc",
+                                    "compare_to": "month_before",
+                                    "increase_good": false,
+                                    "change_type": "relative"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 2,
+                            "y": 7,
+                            "width": 5,
+                            "height": 2
+                        }
+                    },
+                    {
+                        "id": 855057046871308,
+                        "definition": {
+                            "title": "# of indexing volume change compared to last month",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "time": {
+                                "live_span": "1mo"
+                            },
+                            "type": "change",
+                            "requests": [
+                                {
+                                    "q": "sum:datadog.estimated_usage.apm.indexed_spans{$env,$service} by {service}",
+                                    "order_by": "change",
+                                    "order_dir": "desc",
+                                    "compare_to": "month_before",
+                                    "increase_good": false,
+                                    "change_type": "absolute"
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 7,
+                            "y": 7,
+                            "width": 5,
+                            "height": 2
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "template_variables": [
+        {
+            "name": "hostname",
+            "default": "*",
+            "prefix": "host"
+        },
+        {
+            "name": "env",
+            "default": "*",
+            "prefix": "env"
+        },
+        {
+            "name": "service",
+            "default": "*",
+            "prefix": "service"
+        }
+    ],
+    "layout_type": "ordered",
+    "is_read_only": false,
+    "notify_list": [],
+    "reflow_type": "fixed"
+}

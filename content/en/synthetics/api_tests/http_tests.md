@@ -77,8 +77,8 @@ After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`T
 
   * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. Read more about security recommendations [here][1].
   
-[1]: /security/synthetics
 
+[1]: /security/synthetics
   {{% /tab %}}
 
   {{< /tabs >}}

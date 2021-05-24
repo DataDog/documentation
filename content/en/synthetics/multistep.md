@@ -96,8 +96,8 @@ Hit **Create Your First Request** to start designing your test's requests.
 
   * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This is helpful to ensure no sensitive data gets featured in your test results. Used mindfully as it can make failure troubleshooting more difficult. Read more about security recommendations [here][1].
   
-[1]: /security/synthetics
 
+[1]: /security/synthetics
   {{% /tab %}}
 
   {{< /tabs >}}
@@ -110,8 +110,8 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8] | _String_ <br> _[Regex][9]_ <br> _String_, _[Regex][9]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][9]                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -138,8 +138,8 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][10].
-    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][10] or a [JSONPath][8].
+    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][9].
+    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][9] or a [JSONPath][8].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
@@ -169,7 +169,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][9].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][10].
 
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
@@ -261,8 +261,8 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 [6]: /synthetics/api_tests/
 [7]: /synthetics/search/#search
 [8]: https://restfulapi.net/json-jsonpath/
-[9]: /api/v1/synthetics/#create-a-test
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[10]: /api/v1/synthetics/#create-a-test
 [11]: /monitors/notifications/?tab=is_alert#notification
 [12]: http://daringfireball.net/projects/markdown/syntax
 [13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables

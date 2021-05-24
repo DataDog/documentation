@@ -14,6 +14,8 @@ further_reading:
 - link: 'serverless/custom_metrics/'
   tag: "Documentation"
   text: 'Submitting Custom Metrics from Serverless Applications'
+aliases:
+    - /serverless/datadog_lambda_library/go/
 ---
 
 {{< img src="serverless/go-lambda-tracing.png" alt="Monitor Go Lambda Functions with Datadog"  style="width:100%;">}}
