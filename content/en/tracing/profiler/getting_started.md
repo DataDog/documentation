@@ -259,7 +259,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 {{< programming-lang lang="ruby" >}}
 
 <div class="alert alert-warning">
-Datadog Ruby Profiler is currently in public beta. We strongly advise evaluating the profiler in a non-sensitive environment before deploying in production.
+Datadog Ruby Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
 The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available for users on every platform (including macOS and Windows), but CPU time profiles are currently only available on Linux platforms**. To begin profiling applications:
@@ -275,7 +275,7 @@ The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available 
 
     **Note**: Profiler is available in the `ddtrace` library for versions 0.49+.
 
-2. Install the gems with `bundle install`
+2. Install the gems with `bundle install`.
 
 3. You can auto-enable the profiler with environment variables:
 
