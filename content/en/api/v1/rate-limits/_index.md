@@ -14,7 +14,6 @@ Rate limits can be increased from the defaults by [contacting the Datadog suppor
 Regarding the API rate limit policy:
 
 - Datadog **does not rate limit** on data point/metric submission (see [metrics section][2] for more info on how the metric submission rate is handled). Limits encounter is dependent on the quantity of [custom metrics][3] based on your agreement.
-- The rate limit for a single IP is `12000` per hour.
 - The rate limit for metric **retrieval** is `100` per hour per organization.
 - The rate limit for event submission is `1000` per aggregate per day per organization. An aggregate is a group of similar events.
 - The rate limit for the [Query a Timeseries API][4] call is `1600` per hour per organization. This can be extended on demand.
