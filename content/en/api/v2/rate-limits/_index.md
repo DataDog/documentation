@@ -5,7 +5,7 @@ type: api
 
 {{< h2 >}}Rate Limits{{< /h2 >}}
 
-Some of the API endpoints are rate limited. Once you exceed a certain number of requests in a specific period, Datadog returns an error.
+All of the API endpoints are rate limited. Once you exceed a certain number of requests in a specific period, Datadog returns an error.
 
 For rate-limited API endpoints, Datadog returns headers to show how close you are to your limit. If you exceed your limit, review these headers to determine when you can try again.
 
