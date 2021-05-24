@@ -20,9 +20,9 @@ further_reading:
 
 Profiler is shipped within the following tracing libraries. Select your language below to learn how to enable profiler for your application:
 
-To get notified when a private beta is available for the **Node**, **Ruby**, **PHP**, or **.NET** Profiler, [sign up here][1].
+To get notified when a private beta is available for the **Node**, **PHP**, or **.NET** Profiler, [sign up here][1].
 
-{{< programming-lang-wrapper langs="java,python,go" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
 {{< programming-lang lang="java" >}}
 
 The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 (version 8u262+)][2] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
@@ -255,6 +255,78 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
 [6]: /tracing/visualization/#services
 [7]: /tracing/guide/setting_primary_tags_to_scope/#environment
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+<div class="alert alert-warning">
+Datadog Ruby Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+</div>
+
+The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available for users on every platform (including macOS and Windows), but CPU time profiles are currently only available on Linux platforms**. To begin profiling applications:
+
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.
+
+2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
+
+    ```ruby
+    gem 'ddtrace'
+    gem 'google-protobuf', '~> 3.0'
+    ```
+
+    **Note**: Profiler is available in the `ddtrace` library for versions 0.49+.
+
+2. Install the gems with `bundle install`.
+
+3. You can auto-enable the profiler with environment variables:
+
+    ```shell
+    DD_PROFILING_ENABLED=true
+    DD_ENV=prod
+    DD_SERVICE=my-web-app
+    DD_VERSION=1.0.3
+    ```
+
+    or in code:
+
+    ```ruby
+    Datadog.configure do |c|
+      # This will enable the profiler
+      c.profiling.enabled = true
+      c.env = 'prod'
+      c.service = 'my-web-app'
+      c.version = '1.0.3'
+    end
+    ```
+
+    **Note**
+    For Rails applications you can create a `config/initializers/datadog.rb` file with the code configuration above.
+
+
+4. Add the `ddtracerb exec` command to your Ruby application start command:
+
+    ```shell
+    bundle exec ddtracerb exec ruby myapp.rb
+    ```
+
+    Rails example:
+
+    ```shell
+    bundle exec ddtracerb exec bin/rails s
+    ```
+
+    **Note**
+
+    If starting the application via `ddtracerb exec` is not an option (eg. when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point such as `config.ru` for a web application:
+
+    ```ruby
+    require 'ddtrace/profiling/preload'
+    ```
+
+
+4. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][2].
+
+[1]: https://app.datadoghq.com/account/settings#agent/overview
+[2]: https://app.datadoghq.com/profiling
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
