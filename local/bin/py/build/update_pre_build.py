@@ -67,7 +67,8 @@ class Build:
                     Int.process_integrations(content, marketplace=True)
                 elif (content["action"] == "pull-and-push-folder"):
                     pull_and_push_folder(content, self.content_dir)
-
+                elif content["action"] == "npm-integrations":
+                    Int.process_integrations(content)
                 elif content["action"] == "pull-and-push-file":
                     pull_and_push_file(content, self.content_dir)
                 elif content["action"] in ("security-rules", "compliance-rules"):
@@ -81,6 +82,7 @@ class Build:
                         "\x1b[31mERROR\x1b[0m: Action {} unknown for {}".format(content["action"], content))
                     raise ValueError
             except Exception as e:
+                print('Exception in update_pre_build.py')
                 print(e)
                 if getenv("LOCAL") == 'True':
                     print(
