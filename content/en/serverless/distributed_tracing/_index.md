@@ -21,7 +21,7 @@ The Datadog Python, Node.js, Ruby, Go and Java tracing libraries support distrib
 
 ## Choose your tracing library
 
-{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="architecture diagram for tracing AWS Lambda with Datadog" >}}
+{{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
 
 <div class="alert alert-info"> New to serverless monitoring? Follow the installation steps <a href="/serverless/installation/">here</a> to get started.</div>
 

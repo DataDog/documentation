@@ -30,9 +30,7 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 ## Getting started
 
 1. Install the [AWS integration][2]. This allows Datadog to ingest Lambda metrics from AWS CloudWatch. 
-2. Install the [Datadog Forwarder Lambda function][3], which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics, and logs.
-   **Note**: Skip this step if you already have the forwarder function installed as part of the [AWS integration][2] CloudFormation stack.
-3. Instrument your application. Select the Lambda runtime below for instructions to instrument your serverless application.
+2. Instrument your application. Select the Lambda runtime below for instructions to instrument your serverless application.
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
@@ -40,11 +38,11 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 
 ### Azure App Service
 
-The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Service Extension documentation][4].
+The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Service Extension documentation][3].
 
 ### Google Cloud Functions
 
-Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][5].
+Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][4].
 
 ## Further Reading
 
@@ -52,6 +50,5 @@ Google Cloud Functions is a lightweight, event-based, asynchronous compute solut
 
 [1]: http://app.datadoghq.com/functions
 [2]: /integrations/amazon_web_services/
-[3]: /serverless/forwarder
-[4]: /infrastructure/serverless/azure_app_services/#overview
-[5]: /integrations/google_cloud_platform/
+[3]: /infrastructure/serverless/azure_app_services/#overview
+[4]: /integrations/google_cloud_platform/
