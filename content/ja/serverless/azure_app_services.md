@@ -13,7 +13,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/azure-app-service-extension/'
     tag: ブログ
     text: Azure App Service の Datadog 拡張機能で Monitor .NET ウェブアプリを監視
-  - link: 'https://www.datadoghq.com/pricing/?product=apm#apm-what-is-considered-as-a-host-for-azure-app-services'
+  - link: 'https://www.datadoghq.com/pricing/?product=apm--continuous-profiler#apm--continuous-profiler-what-is-considered-as-a-host-for-azure-app-services'
     tag: 料金
     text: Azure App Service APM 価格設定
 ---
@@ -40,7 +40,11 @@ Datadog の Azure App Service 向け拡張機能は、[Azure Web Apps][6] の追
 
 1. [Microsoft Azure インテグレーション][8]をまだセットアップしていない場合は、最初にセットアップします。
 
-2. Datadog .NET APM 拡張機能は、Windows インスタンス上で稼働する x64 と x86 アーキテクチャの双方で以下の .NET ランタイムをサポートします (AAS は Linux での拡張機能をサポートしていません) 。自動的にインスツルメントされたライブラリの詳細については、[トレーサーのドキュメント][9]を参照してください。
+2. 拡張機能では、Azure App Service Web Apps のみがサポートされます。**Function Apps はサポートされません**。
+
+<div class="alert alert-warning">Function Apps または追加のランタイム用の非公開ベータ版が利用可能になったときに通知を受け取るには、<a href="https://forms.gle/n4nQcxEyLqDBMCDA7">こちらでサインアップ</a>してください。</div>
+
+3. Datadog .NET APM 拡張機能は、Windows インスタンス上で稼働する x64 と x86 アーキテクチャの双方で以下の .NET ランタイムをサポートします (AAS は Linux での拡張機能をサポートしていません) 。自動的にインスツルメントされたライブラリの詳細については、[トレーサーのドキュメント][9]を参照してください。
 
     - .NET フレームワーク 4.5 以降
     - .NET Core 2.1
@@ -49,7 +53,7 @@ Datadog の Azure App Service 向け拡張機能は、[Azure Web Apps][6] の追
     - .NET Core 3.1
     - .NET 5
 
-3. Datadog では、機能の最適なパフォーマンス、安定性、そして可用性を確保するため、拡張機能の最新バージョンへの定期的な更新を推奨しています。初期インストールおよびその後の更新には、ウェブアプリの再起動が必要です。。
+4. Datadog では、機能の最適なパフォーマンス、安定性、そして可用性を確保するため、拡張機能の最新バージョンへの定期的な更新を推奨しています。初期インストールおよびその後の更新を正常に完了するには、ウェブアプリを一度完全に停止する必要があります。
 
 **注**: Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです（たとえば APM）。可視性を最大限に向上するため、アプリケーション環境内で 1 つの APM ソリューションのみを実行してください。
 
@@ -70,12 +74,12 @@ Datadog の Azure App Service 向け拡張機能は、[Azure Web Apps][6] の追
     - ウェブアプリからのアプリケーションログと相関するよう `DD_LOGS_INJECTION:true` を設定します。
     - [任意のコンフィギュレーション変数][12]の全リストをご参照ください。
 6. **Save** をクリック（アプリケーションが再起動します）。
-7. **Stop** をクリックしてアプリケーションを停止します。このステップは必須です。実行しないと、インストールが完了しません。
+7. <div class="alert alert-warning">[必須] <u>Stop</u> をクリックしてアプリケーションを停止します。</div>
 8. Azure 拡張機能ページで Datadog APM 拡張機能を選択します。
     {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Datadog 拡張機能" >}}
 9. 法的事項を承諾し、**OK** をクリックしてインストールの完了を待機します。**注**: このステップを正常に完了するには、ウェブアプリが停止した状態である必要があります。
-10. **Restart** をクリックして、メインアプリケーションを起動します。
-    {{< img src="infrastructure/serverless/azure_app_services/restart.png" alt="停止および再起動のページ" >}}
+10. **Start** をクリックして、メインアプリケーションを起動します。
+    {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="起動" >}}
 
 ### Azure Web Apps からアプリケーションのログを記録
 
