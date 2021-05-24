@@ -10,11 +10,11 @@ further_reading:
   text: "View JMX data in jConsole and set up your jmx.yaml to collect them"
 ---
 
-Datadog supports regexes to match JMX Mbean names and domain names to configure your `include` and `exclude` filters. The regexes must conform to [Java’s regular expression format][2]. Note that these filters were added in version 5.5.0.
+Datadog supports regexes to match JMX Mbean names and domain names to configure your `include` and `exclude` filters. The regexes must conform to [Java’s regular expression format][1]. Note that these filters were added in version 5.5.0.
 
 Capture groups from the provided regex can be used to supply additional tag values for your metrics.
 
-This article provides one example of how to use the `bean_regex` from the [Java integration][3], and how to reference such capture groups to set additional tags.
+This article provides one example of how to use the `bean_regex` from the [Java integration][2], and how to reference such capture groups to set additional tags.
 
 Suppose you have the following Mbean name: `domain.example.com:name=my.metric.name.env.dev.region.eu-central-1.method.GET.status.200`. There is some information we could use as tags once the Agent has collected the metric. For instance, we could export such metric with the following tags:
 
@@ -60,12 +60,12 @@ For the provided example in `bean_regex`, the capture groups are:
 * `$3`: `GET`
 * `$4`: `200`
 
-Using the [Metrics Explorer][1], you will be able to query your metrics and filter them by the tags you have just created.
+Using the [Metrics Explorer][3], you will be able to query your metrics and filter them by the tags you have just created.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/explorer/
-[2]: https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-[3]: /integrations/java/
+[1]: https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+[2]: /integrations/java/
+[3]: /metrics/explorer/
