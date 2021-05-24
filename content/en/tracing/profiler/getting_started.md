@@ -319,7 +319,7 @@ The Datadog Profiler requires MRI Ruby 2.1+ and **CPU-time profiles are only ava
     ```
 
 
-4. After a minute or two of starting your Ruby application, visualize your profiles in the [Datadog APM > Profiler page][2].
+4. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][2].
 
 **Note**:
 
