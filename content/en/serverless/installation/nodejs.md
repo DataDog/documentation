@@ -31,7 +31,7 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
 
-If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2].
+If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2]. Currently, Lambda only supports sending data to Datadog in the `us-east-1`, `eu-west-1`, and `eu-south-1` regions.
 
 ## Configuration
 
