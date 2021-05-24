@@ -262,7 +262,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 Datadog Ruby Profiler is currently in public beta. We strongly advise evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Profiler requires MRI Ruby 2.1+ and **CPU-time profiles are only available on Linux platforms**. To begin profiling applications:
+The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available for users on every platform (including macOS and Windows), but CPU time profiles are currently only available on Linux platforms**. To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.
 
@@ -277,26 +277,32 @@ The Datadog Profiler requires MRI Ruby 2.1+ and **CPU-time profiles are only ava
 
 2. Install the gems with `bundle install`
 
-3. You can auto-enable the profiler by setting the `DD_PROFILING_ENABLED` environment variable to `true`:
+3. You can auto-enable the profiler with environment variables:
 
     ```shell
-    DD_PROFILING_ENABLED=true \
-    DD_ENV=prod \
-    DD_SERVICE=my-web-app \
+    DD_PROFILING_ENABLED=true
+    DD_ENV=prod
+    DD_SERVICE=my-web-app
     DD_VERSION=1.0.3
     ```
 
-    **Note**
-
-    You can also configure the profiler via code. Rails applications you can create a `config/initializers/datadog.rb` file with Profiling enabled:
+    or in code:
 
     ```ruby
     Datadog.configure do |c|
 
       # This will enable the profiler
       c.profiling.enabled = true
+      c.profiling.enabled = true
+      c.env = 'prod'
+      c.service = 'my-web-app'
+      c.version = '1.0.3'
     end
     ```
+
+    **Note**
+    For Rails applications you can create a `config/initializers/datadog.rb` file with the code configuration above.
+
 
 4. Add the `ddtracerb exec` command to your Ruby application start command:
 
@@ -321,22 +327,8 @@ The Datadog Profiler requires MRI Ruby 2.1+ and **CPU-time profiles are only ava
 
 4. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][2].
 
-**Note**:
-
-- It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use environment variables to set the parameters:
-
-| Environment variable                             | Type          | Description                                                                                      |
-| ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracer version 0.48+.              |
-| `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
-| `DD_VERSION`                                     | String        | The version of your application.                             |
-
-
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/profiling
-[3]: /tracing/visualization/#services
-[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
