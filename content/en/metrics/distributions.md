@@ -51,7 +51,7 @@ To customize tagging:
 ## Audit Events
 Any tag configuration or percentile aggregation changes will create an event in the [event stream][3]. This event explains the change and displays the user that made the change.
 
-If you created/updated/removed a tag configuration on a distribution metric, you can see examples with the following event search:
+If you created, updated, or removed a tag configuration on a distribution metric, you can see examples with the following event search:
 ```text
 https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20tag%20configuration
 ```
