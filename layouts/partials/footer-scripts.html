@@ -1,4 +1,4 @@
-{{ if eq File.BaseFileName "search" }}
+{{ if eq .File.BaseFileName "search" }}
     <script src="{{ (index $.Site.Data.manifest "search.js") | relURL}}"></script>
 {{ end }}
 
