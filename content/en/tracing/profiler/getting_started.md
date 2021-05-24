@@ -290,9 +290,7 @@ The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available 
 
     ```ruby
     Datadog.configure do |c|
-
       # This will enable the profiler
-      c.profiling.enabled = true
       c.profiling.enabled = true
       c.env = 'prod'
       c.service = 'my-web-app'
