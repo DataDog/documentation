@@ -28,6 +28,18 @@
             - "configuration & deployment"
           doc_link: https://docs.datadoghq.com/integrations/jenkins/
 
+- org_name: aws
+
+  repos:
+  - repo_name: aws-sdk-go
+
+    contents:
+
+    - action: npm-integrations
+      branch: main
+      globs:
+      - aws/endpoints/defaults.go
+
 - org_name: DataDog
 
   repos:

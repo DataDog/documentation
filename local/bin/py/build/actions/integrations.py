@@ -45,6 +45,9 @@ class Integrations:
         self.data_service_checks_dir = (
             join(self.data_dir, "service_checks") + sep
         )
+        self.data_npm_dir = (
+            join(self.data_dir, "npm") + sep
+        )
         self.content_integrations_dir = (
             join(self.content_dir, "integrations") + sep
         )
@@ -231,6 +234,9 @@ class Integrations:
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
 
+            elif file_name.endswith("defaults.go"):
+                self.process_npm_integrations(file_name)
+
     def merge_integrations(self):
         """ Merges integrations that come under one """
         for (
@@ -407,6 +413,32 @@ class Integrations:
             file_name,
             self.data_service_checks_dir + new_file_name,
         )
+
+    def process_npm_integrations(self, file_name):
+        """
+        Save the defaults.go file from AWS as a json file
+        /data/npm/defaults.json
+        """
+
+        with open(file_name) as fh:
+
+            line_list = filter(None, fh.read().splitlines())
+
+            for line in line_list:
+                if line.endswith("service{"):
+                    l = line.split('"')
+                    print(l[1])
+
+        # new_file_name = basename + dirname + normpath + file_name + ".json"
+
+        # out_file = open(new_file_name, "w")
+        # json.dump(dict_npm, out_file, indent = 4, sort_keys = False)
+        # out_file.close()
+
+        # shutil.copy(
+        #     file_name,
+        #     self.data_npm_dir + new_file_name,
+        # )
 
     # file_name should be an extracted image file
     # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png
