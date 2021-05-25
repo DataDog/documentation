@@ -64,8 +64,8 @@ further_reading:
 
 **Profiles** タブでは、特定の言語で使用できるすべてのプロファイルタイプを確認できます。言語によって、プロファイルについて収集される情報は異なります。
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,go" >}}
+{{< programming-lang lang="java" >}}
 
 {{< img src="tracing/profiling/profile.png" alt="特定のプロファイル">}}
 
@@ -81,9 +81,8 @@ further_reading:
 | File I/O                 | 各メソッドがファイルの読み取りと書き込みに費やした時間を示します。                                                                                                                                                                                                                                        |
 | Lock                     | 各メソッドがロックの待機に費やした時間を示します。                                                                                                                                                                                                                                                                                                                           |
 | Socket I/O               | 各メソッドがソケット I/O の読み取りと書き込みに費やした時間を示します。                                                                                                                                                                                                                                              |
-{{% /tab %}}
-
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 
 有効にすると、次のプロファイルタイプが収集されます。
 
@@ -98,9 +97,8 @@ further_reading:
 | キャッチされない例外      | try/except ブロックでキャッチされなかった例外を示します。 |
 | 例外              | プログラムの実行中に発生した例外を示します。 |
 
-{{% /tab %}}
-
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 
 有効にすると、次のプロファイルタイプが収集されます。
 
@@ -112,9 +110,9 @@ further_reading:
 | ヒープ                     | 各関数によって割り当てられ、アプリケーションの開始以降に割り当てられたまま残り、最後のガベージコレクション以降存在するヒープメモリの量を示します。Go ではこれを `inuse_space` と呼びます。これは、サービスの全体的なメモリ使用量を調査する際に役立ちます。               |
 | ヒープ数               | 各関数によってヒープメモリに割り当てられたオブジェクトの数と、アプリケーションの開始以降に割り当てられたまま残り、最後のガベージコレクション以降存在するオブジェクトの数を示します。これは、サービスの全体的なメモリ使用量を調査する際に役立ちます。                              |
 
-{{% /tab %}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
-{{< /tabs >}}
 
 ## その他の参考資料
 

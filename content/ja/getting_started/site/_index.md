@@ -5,11 +5,12 @@ kind: documentation
 
 Datadog では、世界中でさまざまなサイトを提供しています。各サイトは完全に独立しており、サイト間でデータを共有することはできません。各サイトを使用する利点があり（政府のセキュリティ規定など）、世界中の特定した場所にデータを保存することが可能になります。
 
-| サイト    | サイト URL                   | 場所 |
-|---------|----------------------------|----------|
-| US1     | https://app.datadoghq.com/ | US       |
-| EU1     | https://app.datadoghq.eu/  | EU       |
-| US1-FED | https://app.ddog-gov.com   | US       |
+| サイト    | サイト URL                  | 場所 |
+|---------|---------------------------|----------|
+| US1     | https://app.datadoghq.com | US       |
+| US3     | https://us3.datadoghq.com | US       |
+| EU1     | https://app.datadoghq.eu  | EU       |
+| US1-FED | https://app.ddog-gov.com  | US       |
 
 ## 使用している Datadog サイトを知る方法
 

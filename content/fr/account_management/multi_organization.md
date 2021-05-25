@@ -19,7 +19,7 @@ further_reading:
 ---
 Il est possible de gérer plusieurs organisations enfant à partir d'un compte d'organisation parent. Cette fonctionnalité sert généralement aux prestataires de services gérés qui possèdent des clients qui ne doivent pas accéder aux données des autres clients. Les utilisateurs peuvent être ajoutés à l'organisation parent ou à plusieurs organisations enfant et passer d'une organisation à une autre depuis le [menu des paramètres du compte utilisateur][1]. L'organisation parent peut consulter l'utilisation de chaque organisation enfant, ce qui lui permet de suivre les tendances d'utilisation.
 
-Les paramètres du compte, telles que les adresses IP autorisées, ne sont pas transmis de l'organisation parent à l'organisation enfant.
+Les paramètres du compte, tels que les adresses IP autorisées, ne sont pas transmis par l'organisation parent à l'organisation enfant.
 
 La fonctionnalité de compte multi-organisations n'est pas activée par défaut. Contactez l'[assistance Datadog][2] pour l'activer.
 
@@ -49,9 +49,13 @@ Si vous faites partie de plusieurs organisations, les sous-domaines personnalis�
 
 Par exemple, l'URL `https://app.datadoghq.com/event/event?id=1` est associée à un événement dans l'organisation A. Si un utilisateur fait partie de l'organisation A et de l'organisation B, mais qu'il consulte Datadog dans le contexte de l'organisation B, alors cette URL renvoie une erreur `404 Not Found`. L'utilisateur doit revenir sur l'organisation A à l'aide du [menu des paramètres du compte utilisateur][1] et consulter de nouveau l'URL. À l'inverse, avec des sous-domaines personnalisés, l'utilisateur peut consulter l'URL `https://org-a.datadoghq.com/event/event?id=1`, car le contexte de l'utilisateur sera automatiquement basculé vers l'organisation A afin d'afficher la page appropriée.
 
-## Configuration de SAML
+Remarque : lorsque vous utilisez un sous-domaine personnalisé, vous devez modifier manuellement les liens de la documentation Datadog en indiquant le nom de votre sous-domaine. Par exemple, remplacez un lien redirigeant vers `https://**app**.datadoghq.com/account/settings` par `https://**<nom_sous-domaine_personnalisé>**.datadoghq.com/account/settings`.
 
-Pour configurer SAML pour plusieurs organisations, suivez la procédure suivante :
+## Configuration SAML
+
+La configuration SAML n'est pas _pas_ transmise de l'organisation parent aux organisations enfant. Le protocole SAML doit être configuré pour chaque organisation enfant.
+
+Pour configurer le protocole SAML pour plusieurs organisations :
 
 1. Créez une organisation en tant qu'utilisateur distinct, avec un mot de passe et un nom d'utilisateur différents.
 2. Invitez des utilisateurs SAML.
@@ -66,7 +70,7 @@ L'onglet Multi-Org Usage indique l'utilisation globale de l'organisation parent 
 * Month-to-date Usage
 * Long-Term Trends
 
-### Month-to-Date Usage
+### Month-to-date Usage
 
 Cette vue comprend une section Overall Usage et une section Individual Organization Usage.
 
@@ -107,8 +111,8 @@ La fonction d'attribution de l'utilisation peut également être activée au niv
 Remarque : les types d'utilisations suivants ne sont pas pris en charge par cet outil.
 
 * Événements de log indexés
-* Logs ingérés
-* Spans indexées
+* Ingested Logs
+* Indexed Spans
 
 **Remarque :** les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.
 

@@ -5,12 +5,12 @@ kind: documentation
 
 Datadog offers different sites throughout the world. Each site is completely independent, and you cannot share data across sites. Each site gives you benefits (for example, government security regulations) or allows you to store your data in specific locations around the world.
 
-| Site    | Site URL                  | Location |
-|---------|---------------------------|----------|
-| US1     | https://app.datadoghq.com | US       |
-| US3     | https://us3.datadoghq.com | US       |
-| EU1     | https://app.datadoghq.eu  | EU       |
-| US1-FED | https://app.ddog-gov.com  | US       |
+| Site    | Site URL                   | Location |
+|---------|----------------------------|----------|
+| US1     | `https://app.datadoghq.com`| US       |
+| US3     | `https://us3.datadoghq.com`| US       |
+| EU1     | `https://app.datadoghq.eu` | EU       |
+| US1-FED | `https://app.ddog-gov.com` | US       |
 
 ## How do I tell which Datadog site I am on?
 

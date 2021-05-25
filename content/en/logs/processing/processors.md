@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="logs/processing/processors/processors_overview.png" alt="original log" >}}
+{{< img src="logs/processing/processors/processing_overview.png" alt="Processors" >}}
 
 A [Processor][1] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
 
@@ -267,7 +267,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tag to another target attribute or tag. It can transforms this log:
+The remapper processor remaps any source attribute(s) or tag to another target attribute or tag. It transforms this log:
 
 {{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="attribute pre remapping "  style="width:40%;">}}
 
@@ -625,9 +625,6 @@ Find below an example of the GeoIP Parser that extracts gelocation from the `net
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example"  style="width:60%;">}}
 
-**Note**: This processor uses GeoLite2 data created by [MaxMind][1].
-
-[1]: https://www.maxmind.com
 {{% /tab %}}
 {{% tab "API" %}}
 

@@ -1,5 +1,5 @@
 ---
-title: Writing a custom OpenMetrics Check
+title: Custom OpenMetrics Check
 kind: documentation
 further_reading:
 - link: "/agent/prometheus/"
@@ -224,24 +224,19 @@ To read more about Prometheus and OpenMetrics base integrations, see the integra
 
 You can improve your OpenMetrics check by including default values for additional configuration options:
 
-### `ignore_metrics`
+`ignore_metrics`
+: Some metrics are ignored because they are duplicates or introduce a very high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
 
-Some metrics are ignored because they are duplicates or introduce a very high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
+`labels_mapper`
+: If the `labels_mapper` dictionary is provided, the metrics labels in `labels_mapper` use the corresponding value as tag name when sending the gauges.
 
-### `labels_mapper`
+`exclude_labels`
+: `exclude_labels` is an array of labels to exclude. Those labels will not be added as tags when submitting the metric.
 
-If the `labels_mapper` dictionary is provided, the metrics labels in `labels_mapper` use the corresponding value as tag name when sending the gauges.
-
-### `exclude_labels`
-
-`exclude_labels` is an array of labels to exclude. Those labels will not be added as tags when submitting the metric.
-
-### `type_overrides`
-
-`type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names, and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.
+`type_overrides`
+: `type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names, and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.
 Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
-
-**Note**: This value is empty in the base class, but needs to be overloaded/hardcoded in the final check to not be counted as a custom metric.
+: **Note**: This value is empty in the base class, but needs to be overloaded/hardcoded in the final check to not be counted as a custom metric.
 
 ## Further Reading
 

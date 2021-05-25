@@ -10,8 +10,6 @@ source: azure
 title: Azure ユーザーが外部ユーザーを招待
 type: security_rules
 ---
-## 概要
-
 ## 目標
 
 外部ユーザーへ招待が送信されたことを検出します。

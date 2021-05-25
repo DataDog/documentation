@@ -21,7 +21,7 @@ display_name: TCP
 draft: false
 git_integration_title: tcp_check
 guid: c514029e-0ed8-4c9f-abe5-2fd4096726ba
-integration_id: システム
+integration_id: system
 integration_title: TCP チェック
 is_public: true
 kind: インテグレーション

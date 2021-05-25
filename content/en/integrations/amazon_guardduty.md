@@ -17,6 +17,7 @@ name: amazon_guardduty
 public_title: Datadog-AWS GuardDuty Integration
 short_description: Gather your AWS GuardDuty logs.
 version: '1.0'
+integration_id: "amazon-guardduty"
 ---
 
 ## Overview
@@ -27,7 +28,7 @@ Datadog integrates with AWS GuardDuty via a Lambda function that ships GuardDuty
 
 ### Log collection
 
-#### Enable GuardDuty logging
+#### Enable logging
 
 1. Create a new rule in Cloudwatch with the **GuardDuty Finding** Event type:
 

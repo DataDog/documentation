@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: 'Affichez, recherchez et échangez sur des mises à jour Redmine dans votre flux d''événements Datadog.'
 doc_link: 'https://docs.datadoghq.com/integrations/redmine/'
+draft: false
 git_integration_title: redmine
 has_logo: true
 integration_title: Redmine
@@ -27,7 +28,7 @@ Enregistrez votre activité Redmine dans Datadog pour :
 
 La configuration Redmine nécessite seulement une URL complète vers le flux d'activités souhaité. Vous pouvez ajouter plusieurs URL.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

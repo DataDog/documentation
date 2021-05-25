@@ -21,7 +21,7 @@ further_reading:
     tag: Utilisation avancée
     text: Utilisation avancée
 ---
-**Remarque** : le C++ ne fournit pas d'intégrations pour une instrumentation par défaut, mais il est utilisé pour le tracing en passant par un proxy comme [Envoy][1] et [Nginx][2]. Pour en savoir plus sur les exigences de compatibilité du traceur C++, consultez la [page dédiée][3]. 
+**Remarque** : le C++ ne fournit pas d'intégrations pour une instrumentation par défaut, mais il est utilisé pour le tracing en passant par un proxy comme [Envoy][1] et [Nginx][2]. Pour en savoir plus sur les exigences de compatibilité du traceur C++, consultez la [page dédiée][3].
 
 ## Prise en main
 
@@ -240,6 +240,6 @@ Pour les autres environnements, veuillez consulter la documentation relative aux
 [1]: /fr/tracing/setup/envoy/
 [2]: /fr/tracing/setup/nginx/
 [3]: /fr/tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/install
+[4]: https://app.datadoghq.com/apm/docs
 [5]: /fr/tracing/send_traces/
 [6]: https://github.com/opentracing/opentracing-cpp

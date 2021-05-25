@@ -156,13 +156,13 @@ Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Recurring Downtime on the Nth weekday of the month
+### Recurring downtime on the nth weekday of the month
 
 To plan more advanced maintenance schedules, you can use RRULE.
 
 RRULE - or recurrence rule - is a property name from [iCalendar RFC][4], which is the standard for defining recurring events.
 
-Any RRULE listed in the [RFC][4] is supported. You can use [this tool][5] to generate RRULEs and paste them into your API call.
+Attributes specifying the duration in `RRULE` are not supported (for example, `DTSTART`, `DTEND`, `DURATION`), see the [RFC][4] for the possible attributes. You can use [this tool][5] to generate RRULEs and paste them into your API call.
 
 **Example**: The ERP app is updated every 2nd Tuesday of the month to apply patches and fixes between 8AM and 10AM. Monitors for this are scoped with `app:erp`, so we use this in the downtime scope.
 

@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
   text: "Incorporate Datadog Synthetic tests into your CI/CD pipeline"
+- link: "https://learn.datadoghq.com/course/view.php?id=37"
+  tag: "Learning Center"
+  text: "Learn how to run Synthetic tests in CI/CD pipelines"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
@@ -16,6 +19,7 @@ further_reading:
 ---
 
 In addition to running tests at predefined intervals, you can also run Datadog Synthetic tests on-demand using API endpoints. You can run Datadog Synthetic tests in your continuous integration (CI) pipelines, letting you block the deployment of branches that would break your product.
+
 Synthetic CI/CD testing can also be used to **run tests as part of your CD process**, evaluating the state of your production application immediately after a deployment finishes. This lets you detect potential regressions that could impact your users—and automatically trigger a rollback whenever a critical test fails.
 
 This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
@@ -387,52 +391,67 @@ To setup your client, Datadog API and application keys need to be configured. Th
 
 3. Or defined in a global configuration file:
 
-     You can also create a JSON configuration file to specify more advanced options. The path to this global configuration file can be set using the flag `--config` [when launching your tests](#running-tests). If the name of your global configuration file is set to `datadog-ci.json`, it defaults to it.
+     The global JSON configuration file can specify additional advanced options. Specify the path to this file using the flag `--config` [when launching your tests](#running-tests). If the name of your global configuration file is set to `datadog-ci.json`, it defaults to it.
 
-    * **apiKey**: The API key used to query the Datadog API.
-    * **appKey**: The application key used to query the Datadog API.
-    * **datadogSite**: The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
-    * **files**: Glob pattern to detect synthetic tests config files.
-    * **global**: Overrides of synthetic tests applied to all tests ([see below for description of each field](#configure-tests)).
-    * **proxy**: The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is [proxy-agent][3] library.
-    * **subdomain**: The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com` the `subdomain` value then needs to be set to `myorg`.
+In the global configuration file, you can configure the following options: 
 
-    **Example global configuration file**:
+`apiKey`
+: The API key used to query the Datadog API.
 
-    ```json
-    {
-        "apiKey": "<DATADOG_API_KEY>",
-        "appKey": "<DATADOG_APPLICATION_KEY>",
-        "datadogSite": "datadoghq.com",
-        "files": "{,!(node_modules)/**/}*.synthetics.json",
-        "global": {
-            "allowInsecureCertificates": true,
-            "basicAuth": { "username": "test", "password": "test" },
-            "body": "{\"fakeContent\":true}",
-            "bodyType": "application/json",
-            "cookies": "name1=value1;name2=value2;",
-            "deviceIds": ["laptop_large"],
-            "followRedirects": true,
-            "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
-                "locations": ["aws:us-west-1"],
-            "retry": { "count": 2, "interval": 300 },
-            "executionRule": "skipped",
-            "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-            "variables": { "titleVariable": "new value" },
-            "pollingTimeout": 180000
-        },
-        "proxy": {
-          "auth": {
-            "username": "login",
-            "password": "pwd"
-          },
-          "host": "127.0.0.1",
-          "port": 3128,
-          "protocol": "http"
-        },
-        "subdomain": "subdomainname"
-    }
-    ```
+`appKey`
+: The application key used to query the Datadog API.
+
+`datadogSite`
+: The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
+
+`files`
+: Glob pattern to detect synthetic tests config files.
+
+`global`
+: Overrides of synthetic tests applied to all tests ([see below for description of each field](#configure-tests)).
+
+`proxy`
+: The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is [proxy-agent][3] library.
+
+`subdomain`
+: The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com` the `subdomain` value then needs to be set to `myorg`.
+
+**Example global configuration file**:
+
+```json
+{
+    "apiKey": "<DATADOG_API_KEY>",
+    "appKey": "<DATADOG_APPLICATION_KEY>",
+    "datadogSite": "datadoghq.com",
+    "files": "{,!(node_modules)/**/}*.synthetics.json",
+    "global": {
+        "allowInsecureCertificates": true,
+        "basicAuth": { "username": "test", "password": "test" },
+        "body": "{\"fakeContent\":true}",
+        "bodyType": "application/json",
+        "cookies": "name1=value1;name2=value2;",
+        "deviceIds": ["laptop_large"],
+        "followRedirects": true,
+        "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
+            "locations": ["aws:us-west-1"],
+        "retry": { "count": 2, "interval": 300 },
+        "executionRule": "skipped",
+        "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
+        "variables": { "titleVariable": "new value" },
+        "pollingTimeout": 180000
+    },
+    "proxy": {
+      "auth": {
+        "username": "login",
+        "password": "pwd"
+      },
+      "host": "127.0.0.1",
+      "port": 3128,
+      "protocol": "http"
+    },
+    "subdomain": "subdomainname"
+}
+```
 
 ### Configure tests
 
@@ -459,27 +478,69 @@ The default configurations used for the tests are the original tests' configurat
 
 However, in the context of your CI deployment, you can optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file](#setup-the-client) level.
 
-* **allowInsecureCertificates**: (_boolean_) Disable certificate checks in HTTP tests.
-* **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered in HTTP or browser tests.
-     * **username**: (_string_) Username to use in basic authentication.
-     * **password**: (_string_) Password to use in basic authentication.
-* **body**: (_string_) Data to send in HTTP tests.
-* **bodyType**: (_string_) Type of the data sent in HTTP tests.
-* **cookies**: (_string_) Use provided string as cookie header in HTTP or browser tests.
-* **deviceIds**: (_array_) List of devices on which to run the browser test.
-* **followRedirects**: (_boolean_) Indicates whether to follow redirections in HTTP tests.
-* **headers**: (_object_) Headers to replace in the HTTP or browser test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
-* **locations**: (_array_) List of locations from which the test should be run.
-* **retry**: (_object_) Retry policy for the test:
-     * **count**: (_integer_) Number of attempts to perform in case of test failure.
-     * **interval**: (_integer_) Interval between the attempts (in milliseconds).
-* **executionRule**: (_string_) Execution rule of the test: defines the behavior of the CLI in case of a failing test:
-     * **blocking**: The CLI returns an error if the test fails.
-     * **non_blocking**: The CLI only prints a warning if the test fails.
-     * **skipped**: The test is not executed at all.
-* **startUrl**: (_string_) New start URL to provide to the HTTP or browser test.
-* **variables**: (_object_) Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
-* **pollingTimeout**: (_integer_) Duration after which synthetic tests are considered failed (in milliseconds).
+
+`allowInsecureCertificates`
+: **Type**: boolean<br>
+Disable certificate checks in HTTP tests.
+
+`basicAuth`
+: **Type**: object<br>
+Credentials to provide in case a basic authentication is encountered in HTTP or browser tests.
+  - `username`: string. Username to use in basic authentication.
+  - `password`: string. Password to use in basic authentication.
+
+`body`
+: **Type**: string<br>
+Data to send in HTTP tests.
+
+`bodyType`
+: **Type**: string<br>
+Type of the data sent in HTTP tests.
+
+`cookies`
+: **Type**: string<br>
+Use provided string as cookie header in HTTP or browser tests.
+
+`deviceIds`
+: **Type**: array<br>
+List of devices on which to run the browser test.
+
+`followRedirects`
+: **Type**: boolean<br>
+Indicates whether to follow redirections in HTTP tests.
+
+`headers`
+: **Type**: object<br>
+Headers to replace in the HTTP or browser test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
+
+`locations`
+: **Type**: array<br>
+List of locations from which the test should be run.
+
+`retry`
+: **Type**: object<br>
+Retry policy for the test:
+  - `count`: integer. Number of attempts to perform in case of test failure.
+  - `interval`: integer. Interval between the attempts (in milliseconds).
+
+`executionRule`
+: **Type**: string<br>
+Execution rule of the test: defines the behavior of the CLI in case of a failing test:
+  - `blocking`: The CLI returns an error if the test fails.
+  - `non_blocking`: The CLI only prints a warning if the test fails.
+  - `skipped`: The test is not executed at all.
+
+`startUrl`
+: **Type**: string<br>
+New start URL to provide to the HTTP or browser test.
+
+`variables`
+: **Type**: object<br>
+Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
+
+`pollingTimeout`
+: **Type**: integer<br>
+Duration after which synthetic tests are considered failed (in milliseconds).
 
 **Note**: Tests' overrides take precedence over global overrides.
 
@@ -523,23 +584,55 @@ The execution rule associated with the test is always the most restrictive one t
 
 You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting URL using any part of your test's original starting URL and the following environment variables:
 
-| Environment variable | Description                  | Example                                                |
-|----------------------|------------------------------|--------------------------------------------------------|
-| `URL`                | Test's original starting URL | `https://www.example.org:81/path/to/something?abc=123` |
-| `DOMAIN`             | Test's domain name           | `example.org`                                          |
-| `HOST`               | Test's host                  | `www.example.org:81`                                   |
-| `HOSTNAME`           | Test's hostname              | `www.example.org`                                      |
-| `ORIGIN`             | Test's origin                | `https://www.example.org:81`                           |
-| `PARAMS`             | Test's query parameters      | `?abc=123`                                             |
-| `PATHNAME`           | Test's URl path              | `/path/to/something`                                   |
-| `PORT`               | Test's host port             | `81`                                                   |
-| `PROTOCOL`           | Test's protocol              | `https:`                                               |
-| `SUBDOMAIN`          | Test's sub domain            | `www`                                                  |
 
-For instance, if your test's starting URL is `https://www.example.org:81/path/to/something?abc=123`, it can be written as:
+`URL`
+: Test's original starting URL <br>
+**Example**: `https://www.example.org:81/path/to/something?abc=123#target`
 
-* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}`
-* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}`
+`DOMAIN`
+: Test's domain name<br>
+**Example**: `example.org`
+
+`HASH`
+: Test's hash<br>
+**Example**: `#target`
+
+`HOST`
+: Test's host<br>
+**Example**: `www.example.org:81`
+
+`HOSTNAME`
+: Test's hostname<br>
+**Example**: `www.example.org`
+
+`ORIGIN`
+: Test's origin<br>
+**Example**: `https://www.example.org:81`
+
+`PARAMS`
+: Test's query parameters<br>
+**Example**: `?abc=123`
+
+`PATHNAME`
+: Test's URl path<br>
+**Example**: `/path/to/something`
+
+`PORT`
+: Test's host port<br>
+**Example**: `81`
+
+`PROTOCOL`
+: Test's protocol<br>
+**Example**: `https:`
+
+`SUBDOMAIN`
+: Test's sub domain<br>
+**Example**: `www`
+
+For instance, if your test's starting URL is `https://www.example.org:81/path/to/something?abc=123#target`, it can be written as:
+
+* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
+* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
 
 ### Running tests

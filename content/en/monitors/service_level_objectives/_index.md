@@ -24,13 +24,18 @@ Service Level Objectives, or SLOs, are a key part of the site reliability engine
 framework for defining clear targets around application performance, which ultimately help teams provide a consistent customer experience, balance feature development with platform stability, and improve communication with internal and external users.
 
 ## Key terminology
-*Service Level Indicator (SLI)* - a quantitative measurement of a service’s performance or reliability (in Datadog SLOs an SLI is a metric or an aggregation of one or more monitors)
 
-*Service Level Objective (SLO)* - a target percentage for an SLI over a specific period of time
+Service Level Indicator (SLI)
+: A quantitative measurement of a service’s performance or reliability. In Datadog SLOs an SLI is a metric or an aggregation of one or more monitors.
 
-*Service Level Agreement (SLA)* - an explicit or implicit agreement between a client and service provider stipulating the client’s reliability expectations and service provider’s consequences for not meeting them
+Service Level Objective (SLO)
+: A target percentage for an SLI over a specific period of time.
 
-*Error Budget* - the allowed amount of unreliability derived from an SLO’s target percentage (100% - target percentage) that is meant to be invested into product development
+Service Level Agreement (SLA)
+: An explicit or implicit agreement between a client and service provider stipulating the client’s reliability expectations and service provider’s consequences for not meeting them.
+
+Error Budget
+: The allowed amount of unreliability derived from an SLO’s target percentage (100% - target percentage) that is meant to be invested into product development.
 
 ## Setup
 
@@ -43,7 +48,12 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipluated in your SLAs.
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
-Once you have an SLO set up, on the [Service Level Objectives status page][1] you can select an SLO from the list view to open its details side panel. The side panel will display the overall status percentage and remaining error budget for each of that SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you have created a grouped monitor-based SLO using one [multi alert monitor][5] or a grouped metric-based SLO using the [`sum by` clause][6], in addition to the overall status percentage and remaining error budget you will also be presented with the status percentage and remaining error budget for each individual group.
+**Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
+
+[Monitor-based SLOs][5]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
+[Metric-based SLOs][6]: Up to three decimal places are allowed for all targets.
+
+Once you have an SLO set up, on the [Service Level Objectives status page][1] you can select an SLO from the list view to open its details side panel. The side panel will display the overall status percentage and remaining error budget for each of that SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you have created a grouped monitor-based SLO using one [multi alert monitor][7] or a grouped metric-based SLO using the [`sum by` clause][8], in addition to the overall status percentage and remaining error budget you will also be presented with the status percentage and remaining error budget for each individual group.
 
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, you will see status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking.
 
@@ -69,7 +79,7 @@ To edit an individual SLO, hover over it and use the buttons that appear at the 
 
 ### SLO tags
 
-When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][7].
+When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][9].
 
 ### SLO default view
 
@@ -129,13 +139,13 @@ Three types of SLO audit events appear in the Event Stream:
 
 To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
 
-You can also query the Event Stream programmatically using the [Datadog Events API][8].
+You can also query the Event Stream programmatically using the [Datadog Events API][10].
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Stream to a longer period, for example, the past 7 days.
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
 
-To proactively manage the configurations of your SLOs, set an [Event Monitor][9] to notify you when events corresponding to certain tags occur.
+To proactively manage the configurations of your SLOs, set an [Event Monitor][11] to notify you when events corresponding to certain tags occur.
 
 For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
@@ -153,8 +163,10 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 [2]: /dashboards/widgets/slo/
 [3]: /monitors/service_level_objectives/metric/
 [4]: /monitors/service_level_objectives/monitor/
-[5]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
-[6]: /monitors/service_level_objectives/metric/#define-queries
-[7]: /monitors/service_level_objectives/#saved-views
-[8]: /api/v1/events/#query-the-event-stream
-[9]: /monitors/monitor_types/event/
+[5]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
+[6]: /monitors/service_level_objectives/metric/#set-your-slo-targets
+[7]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
+[8]: /monitors/service_level_objectives/metric/#define-queries
+[9]: /monitors/service_level_objectives/#saved-views
+[10]: /api/v1/events/#query-the-event-stream
+[11]: /monitors/monitor_types/event/

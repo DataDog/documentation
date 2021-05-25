@@ -16,21 +16,35 @@ further_reading:
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
 ---
-## トレースおよびスパン ID を自動的に挿入します
+トレースとスパンの ID がアプリケーションログに挿入されるようロギングライブラリおよび .NET トレーシングのコンフィギュレーションを設定し、ログデータと相関したアプリケーションのパフォーマンスモニタリングデータを取得することができます。
 
-.NET トレーサーはトレース ID、スパン ID、`env`、`service`、`version` をアプリケーションログに自動的に挿入できます。まだこれを行っていない場合は、.NET トレーサーを `DD_ENV`, `DD_SERVICE`、および `DD_VERSION` で構成することが推奨されます。`env`、`service`、`version` を追加する際に違いを感じられるはずです（詳細は、[統合サービスタグ付け][3]を参照してください）。
+<div class="alert alert-info"><strong>注:</strong> 自動挿入は、JSON でフォーマット化されたログのみに機能します。その他の場合は手動で挿入を行ってください。</div>
 
-.NET トレーサー は [Serilog][4]、[NLog][5] (バージョン 4.0+)、[log4net][6] に対応しており、[LibLog][2] ライブラリを使用してトレース ID をアプリケーションログに自動的に挿入します。自動挿入は、`Serilog` ロガーで `LogContext` 強化を有効化した後、あるいは、`NLog` ロガーまたは `log4net` ロガーで `Mapped Diagnostics Context` を有効化した後でのみ、アプリケーションログに表示されます。
+.NET トレーサーを[統合サービスタグ付け][1]で構成し、アプリケーションのトレースとログの相関付けに最高の使用体験と有用なコンテキストを確保します。
 
-**注**: 自動挿入が機能するのは JSON 形式のログのみです。
+.NET トレーサーは、以下のロギングライブラリをサポートします。
+- [Serilog][2]
+- [log4net][3]
+- [NLog][4] (バージョン 4.0 以降)
 
-**有効にするには、以下の 2 つの手順に従います。**
+## はじめに
 
-1. 環境変数またはコンフィギュレーションファイルを通じて `DD_LOGS_INJECTION=true` を設定することで、.NET トレーサーの[コンフィギュレーション][1]の挿入を有効にします。
-2. ログライブラリに基づいてログコンフィギュレーションを更新します。
+自動または手動のトレース挿入は、以下の手順でセットアップできます。
+
+1. 以下のトレーサー設定で .NET トレーサーを構成します。
+    - `DD_ENV`
+    - `DD_SERVICE`
+    - `DD_VERSION`
+
+2. Tail を実行するよう指定されたファイルの[ログ Agent コンフィギュレーション][5]で、ログパイプラインがログファイルをパースできるよう `source: csharp` を設定します。
+
+3. ログライブラリに基づいてログコンフィギュレーションを更新します。
+
+例:
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
+トレースおよびスパン ID は、ログコンテキストの補完を有効にした後にのみアプリケーションログに挿入されます。以下のコード例を参照してください。
 
 ```csharp
 var log = new LoggerConfiguration()
@@ -39,9 +53,13 @@ var log = new LoggerConfiguration()
     .WriteTo.File(new JsonFormatter(), "log.json")
     .CreateLogger();
 ```
+その他の例については、GitHub の [Serilog トレース ID 自動挿入プロジェクト][1]を参照してください。
 
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/SerilogExample/Program.cs
 {{% /tab %}}
 {{% tab "log4net" %}}
+トレースおよびスパン ID は、マップされた診断コンテキスト (MDC) を有効にした後にのみアプリケーションログに挿入されます。以下のコード例を参照してください。
 
 ```xml
   <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
@@ -49,23 +67,25 @@ var log = new LoggerConfiguration()
     <default />
     <!--明示的なデフォルトメンバー-->
     <remove value="ndc" />
-    <remove value="message" />
     <!--書式設定済みのデフォルトメッセージメンバーを削除-->
-    <member value="message:messageobject" />
+    <remove value="message" />
     <!--未加工のメッセージを追加-->
-
-    <!-- value='properties' を追加して MDC プロパティを表示 -->
+    <member value="message:messageobject" />
+    <!-- value='properties' を追加して Datadog プロパティを表示 -->
     <member value='properties'/>
   </layout>
 ```
+その他の例については、GitHub の [log4net トレース ID 自動挿入プロジェクト][1]を参照してください。
 
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-NLog バージョン 4.6 以降 の場合
+トレースおよびスパン ID は、マップされた診断コンテキスト (MDC) を有効にした後にのみアプリケーションログに挿入されます。NLog バージョン 4.6 以降の場合は、以下のコード例を参照してください。
 
 ```xml
-  <!--includeMdlc="true" を追加して Datadog プロパティを表示-->
+ <!-- includeMdlc="true" を追加して MDC プロパティを表示 -->
   <layout xsi:type="JsonLayout" includeMdlc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -74,60 +94,60 @@ NLog バージョン 4.6 以降 の場合
   </layout>
 ```
 
-NLog バージョン 4.0 - 4.5 の場合:
+NLog バージョン 4.5 の場合
 
 ```xml
-  <!--バージョン 4.4.10+ を使用している場合は、includeMdc="true" を抽出して Datadog プロパティを表示-->
+ <!-- includeMdc="true" を追加して MDC プロパティを表示 -->
   <layout xsi:type="JsonLayout" includeMdc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
     <attribute name="message" layout="${message}" />
     <attribute name="exception" layout="${exception:format=ToString}" />
   </layout>
-
-  <!--バージョン4.4.10以下を使用している場合は、<attribute> ノードを追加することでDatadog プロパティを個別に抽出-->
-  <layout xsi:type="JsonLayout">
-    <attribute name="date" layout="${longdate}" />
-    <attribute name="level" layout="${level:upperCase=true}"/>
-    <attribute name="message" layout="${message}" />
-    <attribute name="exception" layout="${exception:format=ToString}" />
-
-    <attribute name="dd.env" layout="${mdc:item=dd.env}"/>
-    <attribute name="dd.service" layout="${mdc:item=dd.service}"/>
-    <attribute name="dd.version" layout="${mdc:item=dd.version}"/>
-    <attribute name="dd.trace_id" layout="${mdc:item=dd.trace_id}"/>
-    <attribute name="dd.span_id" layout="${mdc:item=dd.span_id}"/>
-  </layout>
 ```
+その他の例については、GitHub で [NLog 4.0][1]、[NLog 4.5][2]、[NLog 4.6][3] を使用したトレース ID 自動挿入プロジェクトを参照してください。
 
-NLog バージョン 4.0 以下の場合、JSON レイアウトは内蔵されていません。
 
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
+[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
+[3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
 {{% /tab %}}
 {{< /tabs >}}
 
+次に、自動または手動挿入のセットアップを完了します。
 
-## トレースおよびスパン ID を手動で挿入する
+## トレースおよびスパン ID を自動的に挿入
 
-手動で[トレース][7]とログを相関付け、サービスのデータを結合する場合は、Datadog API を使用して相関識別子を取得します。
+アプリケーションログが JSON 形式の場合、トレース ID の自動挿入のセットアップの最後に以下を実行します。
 
-- `CorrelationIdentifier.<FIELD>` API メソッドを使用して、ログの各[スパン][8]の先頭と末尾に識別子を挿入します (下記の例を参照してください)。
-- MDC を構成して挿入キーを使用します。
+4. .NET トレーサーの環境変数で、`DD_LOGS_INJECTION=true` を有効にします。.NET トレーサーを構成するその他の方法については、[.NET トレーサーの構成][6]をご参照ください。
 
-    - `dd.env` トレーサー用にグローバルに構成された `env`  (設定されていない場合はデフォルトの `""` )
-    - `dd.service` グローバルに構成されたルートサービス名（設定されていない場合のデフォルトはアプリケーション名または IIS サイト名）
-    - `dd.version` サービス用にグローバルに構成された `version`（設定されていない場合はデフォルトの `""`）
-    - `dd.trace_id` ログステートメント中のアクティブなトレース ID (トレースがない場合はデフォルトの `0`)
-    - `dd.span_id` ログステートメント中のアクティブなスパン ID (トレースがない場合はデフォルトの `0`)
+## トレースおよびスパン ID を手動で挿入
+
+アプリケーションログが JSON 形式でない場合は、APM データを使用して手動でログを加工します。
+  | 必要なキー   | 説明                                  |
+  | -------------- | -------------------------------------------- |
+  | `dd.env`       | グローバルにトレーサーに `env` を構成します。設定されていない場合、デフォルトは `""`。 |
+  | `dd.service`   | ルートサービス名をグローバルに構成します。設定されていない場合、デフォルトはアプリケーション名または IIS サイト名。  |
+  | `dd.version`   | グローバルにサービスに `version` を構成します。設定されていない場合、デフォルトは `""`。  |
+  | `dd.trace_id`  | ログステートメント中のアクティブなトレース ID。トレースがない場合、デフォルトは `0`。  |
+  | `dd.span_id`   | ログステートメント中のアクティブなスパン ID。トレースがない場合、デフォルトは `0`。 |
+
+
+**注:** [Datadog ログインテグレーション][7]を使ってログをパースしていない場合、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされる必要があります。詳細は、[このトピックに関してよくあるご質問][8] をご覧ください。
+
+手動のログ加工設定を終了するには、[上記](#getting-started)の 3 つのステップを実行してから、以下を行います。
+
+4. プロジェクトの [`Datadog.Trace` NuGet パッケージ][9]を参照します。
+
+5. `CorrelationIdentifier` API を使用して相関識別子を取得し、スパンがアクティブな間にログのコンテキストに追加します。
+
+例:
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-**注**: Serilog ライブラリでは、メッセージプロパティ名が有効な C# 識別子である必要があるため、プロパティ名は次のようにする必要があります。
-- `dd_env`
-- `dd_service`
-- `dd_version`
-- `dd_trace_id`
-- `dd_span_id`
+**注**: Serilog ライブラリでは、メッセージプロパティ名が有効な C# 識別子である必要があります。要求されるプロパティ名は、`dd_env`、`dd_service`、`dd_version`、`dd_trace_id`、`dd_span_id` です。
 
 ```csharp
 using Datadog.Trace;
@@ -145,7 +165,7 @@ using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToStri
 ```
 
 {{% /tab %}}
-{{% tab "Log4net" %}}
+{{% tab "log4net" %}}
 
 ```csharp
 using Datadog.Trace;
@@ -194,19 +214,17 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: [Datadog ログインテグレーション][9]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされていることを確実にする必要があります。詳しくは、[このトピックの FAQ][10] を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/setup/dotnet/#configuration
-[2]: https://github.com/damianh/LibLog
-[3]: /ja/getting_started/tagging/unified_service_tagging
-[4]: http://serilog.net
-[5]: http://nlog-project.org
-[6]: https://logging.apache.org/log4net
-[7]: /ja/tracing/visualization/#trace
-[8]: /ja/tracing/visualization/#spans
-[9]: /ja/logs/log_collection/csharp/#configure-your-logger
-[10]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[1]: /ja/getting_started/tagging/unified_service_tagging
+[2]: http://serilog.net
+[3]: https://logging.apache.org/log4net
+[4]: http://nlog-project.org
+[5]: /ja/logs/log_collection/csharp/?tab=serilog#configure-your-datadog-agent
+[6]: /ja/tracing/setup_overview/setup/dotnet-core/?tab=windows#configuring-the-net-tracer
+[7]: /ja/logs/log_collection/csharp/#configure-your-logger
+[8]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[9]: https://www.nuget.org/packages/Datadog.Trace/

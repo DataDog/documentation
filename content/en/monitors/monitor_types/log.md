@@ -30,20 +30,29 @@ As you define the search query, the graph above the search fields updates.
     * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet**: If a [facet][4] is selected, the monitor alerts over the `Unique value count` of the facet.
     * **Monitor over measure**: If a [measure][4] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-3. Configure the alerting grouping strategy (optional):
+3. Group logs by multiple dimensions (optional):
+
+   All logs matching the query are aggregated into groups based on the value of up to four log facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
+   * **1 facet**: 1000 top values
+   * **2 facets**: 30 top values per facet (at most 900 groups)
+   * **3 facets**: 10 top values per facet (at most 1000 groups)
+   * **4 facets**: 5 top values per facet (at most 625 groups)
+4. Configure the alerting grouping strategy (optional):
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
-    * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 100 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
+    * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
 ### Set alert conditions
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 48 hours.
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between `1 minute` and `2 days`.
 * Alert threshold `<NUMBER>`
 * Warning threshold `<NUMBER>`
 
 #### No data and below alerts
 
-To receive a notification when all groups in a service have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
+`NO DATA` is a state given when no logs match the monitor query during the timeframe.
+
+To receive a notification when all groups matching a specific query have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
 
 When splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.
 
@@ -58,14 +67,14 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
-#### Log samples
+#### Log samples and breaching values toplist
 
-By default, when a logs monitor is triggered, samples or values are added to the notification message.
+When a logs monitor is triggered, samples or values can be added to the notification message.
 
-| Monitor over     | Added to notification message                                                                            |
+| Monitor over     | Can be added to notification message                                                                     |
 |------------------|----------------------------------------------------------------------------------------------------------|
 | Log count        | Grouped: The top 10 breaching values and their corresponding counts.<br>Ungrouped: Up to 10 log samples. |
-| Facet or measure | The top 10 facet or measure values.                                                                      |
+| Facet or measure | Grouped: The top 10 facet or measure values.<br>Ungrouped: The top 10 facet or measure values.           |
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 

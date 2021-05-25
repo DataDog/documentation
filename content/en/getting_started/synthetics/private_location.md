@@ -5,6 +5,9 @@ further_reading:
     - link: '/getting_started/synthetics/api_test'
       tag: 'Documentation'
       text: 'Create your first API test'
+    - link: '/getting_started/synthetics/browser_test'
+      tag: 'Documentation'
+      text: 'Create your first Browser test'
     - link: '/synthetics/private_locations'
       tag: 'Documentation'
       text: 'Learn more about Private Locations'
@@ -74,11 +77,9 @@ You are now able to use your new private location as any other Datadog managed l
 
 3. Go ahead with your test creation!
 
-{{< whatsnext desc="After you set up your private location:">}}
-{{< nextlink href="/getting_started/synthetics/api_test" tag="Documentation" >}}Create your first API test{{< /nextlink >}}
-{{< nextlink href="/getting_started/synthetics/browser_test" tag="Documentation" >}}Create your first Browser test{{< /nextlink >}}
-{{< nextlink href="/synthetics/private_locations" tag="Documentation" >}}Learn more about Private Locations{{< /nextlink >}}
-{{< /whatsnext >}}
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/synthetics/api_test/
 [2]: https://app.vagrantup.com/ubuntu/boxes/xenial64

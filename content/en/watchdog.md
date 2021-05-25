@@ -52,7 +52,7 @@ Watchdog can group related data together, draw connections between groups, and p
 
 Watchdog considers the relationships between the following types of signals:
 
-* APM error rate latency and hit rate increases 
+* APM error rate, latency, and hit rate increases 
 * New deployments with APM service version changes
 * APM error traces
 * Introduction of new APM resources 
@@ -88,10 +88,6 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 When an anomaly appears in one service, there’s often a corresponding anomaly in a related service. For example, if one service’s database queries get throttled, any downstream service will experience elevated latency. You need to troubleshoot this not as two separate issues, but rather as one issue stemming from a single root cause.
 
 Watchdog automatically groups related APM anomalies into a single story whenever it detects an issue that affects multiple services. The story will include a dependency map that shows the service where the issue originated and the downstream dependencies that were affected. This gives you visibility on  the impact of the issue and a quick path to the source of the issue and to move on resolution.
-
-The screenshot below shows a Watchdog story, starting with a summary of the issue and a graph highlighting the anomaly. Below that, a dependency map illustrates the full scope of the problem: the issue is rooted in the `ad-server-http-client` service, and it also affects the downstream services `web-store` and `web-store-mongo`. Clicking on a service node in the map will open a bottom panel where you will be able to explore the different evidences, side effects and root causes that Watchdog identified for that service.
-
-(screenshot tk)
 
 ##### Related dashboards
 

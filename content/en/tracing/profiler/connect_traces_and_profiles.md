@@ -19,7 +19,7 @@ If your application is showing performance problems in production, it's helpful 
 
 ## Prerequisites
 
-{{< programming-lang-wrapper langs="java,python" >}}
+{{< programming-lang-wrapper langs="java,python,ruby" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -34,7 +34,9 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 ```
 
-Requires tracing library version 0.65.0 or greater.
+Requires:
+- tracing library version 0.65.0 or greater
+- OpenJDK 8u282 or greater
 
 
 [1]: /tracing/profiler/getting_started
@@ -44,6 +46,15 @@ Requires tracing library version 0.65.0 or greater.
 Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
 
 Requires tracing library version 0.44.0 or greater.
+
+
+[1]: /tracing/profiler/getting_started
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+Code Hotspots identification is enabled by default when you [turn on profiling for your service][1].
+
+Requires tracing library version 0.49.0 or greater.
 
 
 [1]: /tracing/profiler/getting_started
@@ -67,6 +78,8 @@ The breakdown view on the left side is a list of types of time spent executing t
 - **Other** shows the time taken to execute the span that cannot be explained by profiling data.
 
 Click on one of these types to see a corresponding list, ordered by time, of the methods that are taking time. Clicking on the plus `+` will expand the stack trace to that method **in reverse order**.
+
+### What does time spent in the 'Other' category mean?
 
 It is not uncommon to have a small amount of **Other** unexplained time (less than 10%). Potential reasons for Other time include:
 

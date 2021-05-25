@@ -1,72 +1,15 @@
 import Stickyfill from 'stickyfilljs';
 import algoliasearch from 'algoliasearch';
-import Choices from 'choices.js';
-
 import { initializeIntegrations } from './components/integrations';
 import { initializeSecurityRules } from './components/security-rules';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import codeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
-import {loadPage} from './components/async-loading';
-import {updateMainContentAnchors, gtag} from './helpers/helpers';
+import { loadPage } from './components/async-loading';
+import { updateMainContentAnchors, gtag } from './helpers/helpers';
 
 const { env } = document.documentElement.dataset;
-const { imgUrl, gaTag } = configDocs[env];
-
-// custom region and API version selector dropdown
-const versionSelect = document.querySelector('.js-api-version-select');
-const regionSelect = document.querySelector('.js-region-selector');
-
-const regionChoiceOptions = {
-    searchEnabled: false,
-    placeholder: false,
-    shouldSort: false,
-    itemSelectText: '',
-    renderSelectedChoices: false,
-    callbackOnCreateTemplates (template){
-        return {
-            item: (classNames, data) => template(`
-                <div class="${classNames.item} ${
-                data.highlighted
-                  ? classNames.highlightedState
-                  : classNames.itemSelectable
-              } ${
-                data.placeholder ? classNames.placeholder : ''
-              }" data-item data-id="${data.id}" data-value="${data.value}" ${
-                data.active ? 'aria-selected="true"' : ''
-              } ${data.disabled ? 'aria-disabled="true"' : ''}>
-                   ${data.label}<img alt="${data.value} region selector icon" src="${imgUrl}images/icons/region-flag-${data.value}.png">
-                </div>
-              `),
-            choice: (classNames, data) => template(`
-                <div class="${classNames.item} ${classNames.itemChoice} ${
-                data.disabled ? classNames.itemDisabled : classNames.itemSelectable
-              }" data-select-text="${this.config.itemSelectText}" data-choice ${
-                data.disabled
-                  ? 'data-choice-disabled aria-disabled="true"'
-                  : 'data-choice-selectable'
-              } data-id="${data.id}" data-value="${data.value}" ${
-                data.groupId > 0 ? 'role="treeitem"' : 'role="option"'
-              }>
-                   ${data.label}
-                </div>
-              `)
-          };
-    }
-}
-
-const versionChoiceOptions = {
-    searchEnabled: false,
-    placeholder: false,
-    itemSelectText: '',
-    renderSelectedChoices: false
-}
-if (versionSelect) {
-    const choices = new Choices(versionSelect, versionChoiceOptions);
-}
-if (regionSelect) {
-    const regionChoices = new Choices(regionSelect, regionChoiceOptions);
-}
+const { gaTag } = configDocs[env];
 
 // Setup for large screen ToC
 
@@ -87,7 +30,6 @@ gtag('config', gaTag);
 
 $(document).ready(function () {
     window.history.replaceState({}, '', window.location.href);
-
 
     // ie
     document.createElement('picture');
@@ -589,8 +531,14 @@ $(document).ready(function () {
     onScroll();
 
     // TODO: move integrations code to own file after webpack update
-    initializeIntegrations();
-    initializeSecurityRules();
+
+    if (document.body.classList.value.includes('security_platform')) {
+        initializeSecurityRules();
+    }
+
+    if (document.body.classList.value.includes('integrations')) {
+        initializeIntegrations();
+    }
 });
 
 

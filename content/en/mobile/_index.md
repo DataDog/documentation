@@ -22,7 +22,7 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 #### Enabling SAML
 
-SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the note at the end of this section. To authenticate SAML:
+SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
 
 1. Press the “Using Single Sign-On (SAML)?” button.
 2. Enter your company email and send the email.
@@ -44,7 +44,10 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 
 By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
 
-**Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][5] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
+##### SAML IdP-Initiated Login
+
+If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][16]
+
 
 ## Monitors
 
@@ -63,6 +66,102 @@ For example, to filter on metric monitors related to the SRE team that is being 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. 
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
+
+## Incidents 
+
+On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][17]. 
+
+### Create an Incident
+
+1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
+2. Click the “+” button in the top right corner.
+3. Give your incident a title, severity, and commander.
+
+
+## Widgets
+
+### Monitor saved views
+
+View your [monitor saved views][18] from your home screen with Datadog widgets. Tap on any saved view cell to open the "Monitor Search" screen in the app, with your saved view already filled in.
+
+**Note**: If you do not have any monitor saved views, the widget shows you all monitors by default. 
+
+#### Create a widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Long press on the home screen.
+- Tap the “+” button on the top left corner of the screen.
+- Search for "Datadog" widgets.
+- Select your prefered size (medium allows up to 3 and large up to 6).
+- Place the widget in your desired, onscreen location.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Open the Android Widget Picker. 
+- Either long press your home screen, or long press the Datadog app icon.
+- Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble. 
+- Drag the Monitor Saved Views widget on your home screen.
+
+{{% /tab %}}
+{{< /tabs >}}
+#### Edit a widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Long press on the widget to configure.
+- Tap on "Edit Widget".
+- Tap on the individual saved view cell to select and deselect.
+- Reorder the views by dragging and dropping each cell.
+- Tap out of the widget to validate your selection and exit the configuration screen.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Tap on the widget title to configure.
+- Tap on "Saved views".
+- Tap on the individual saved view cell to select and deselect.
+- Reorder the views by dragging and dropping each cell.
+- Tap "Save" to validate your selection and exit the configuration screen.
+- Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
+
+{{% /tab %}}
+{{< /tabs >}}
+#### Switch organizations
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+All organizations you’ve logged-in are displayed in the configuration screen.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- From the configuration screen, tap on "Organization".
+- Select a new organization (you might need to sign in).
+- Tap "Saved Views". Select saved views to display or leave it as is.
+- Tap "Save". The widget is now configured with saved views from a different organization.
+{{% /tab %}}
+{{< /tabs >}}
+#### Delete a widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Quick actions
 
@@ -133,3 +232,6 @@ For help with troubleshooting, [contact Datadog support][5]. You can also send a
 [14]: https://support.apple.com/en-us/HT209455
 [15]: https://chat.datadoghq.com/
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[16]: https://docs.datadoghq.com/account_management/saml/mobile-idp-login/
+[17]: https://docs.datadoghq.com/monitors/incident_management
+[18]: https://docs.datadoghq.com/logs/explorer/saved_views/

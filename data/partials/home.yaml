@@ -7,7 +7,7 @@ guides:
     link_text: View Guides
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Learn how to collect metrics, traces and logs with more than 400 integrations.
+    desc: Learn how to collect metrics, traces and logs with more than 450 integrations.
     link_text: View Guides
     link: getting_started/integrations/
   - title: Get Started in App
@@ -52,8 +52,8 @@ nav_sections:
         link: logs/
         icon: logs.svg
         desc: Collect, process, explore, monitor, & archive your logs
-      - title: Security & Compliance
-        link: security_monitoring/
+      - title: Security Platform
+        link: security_platform/
         icon: siem.svg
         desc: Detect threats and misconfigurations across applications and infrastructure
       - title: Synthetic Monitoring
@@ -95,7 +95,7 @@ nav_sections:
         link: security/
         icon: lock.svg
         desc: Learn how Datadog protects your data
-      - title: Developer Tools
+      - title: Developers
         link: developers/
         icon: wrench.svg
         desc: Develop for the Datadog platform

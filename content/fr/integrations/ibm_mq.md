@@ -2,9 +2,11 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    IBM MQ: assets/dashboards/overview.json
   logs:
     source: ibm_mq
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -17,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md'
 display_name: "IBM\_MQ"
+draft: false
 git_integration_title: ibm_mq
 guid: 873153b6-5184-438a-8a32-1e2d2e490dde
 integration_id: ibm-mq
@@ -43,7 +46,7 @@ Ce check surveille [IBM MQ][1], versions 5 à 9.0.
 
 ### Installation
 
-Le check IBM MQ est inclus avec le paquet de l'[Agent Datadog][2].
+Le check IBM MQ est inclus avec le package de l'[Agent Datadog][2].
 
 Pour utiliser le check IBM MQ, vous devez :
 
@@ -152,7 +155,7 @@ Exemple de configuration pour `launchd` :
 
 À chaque mise à jour de l'Agent, ces fichiers sont effacés et doivent à nouveau être modifiés.
 
-Si vous utilisez Linux, une fois le client MQ installé, vérifiez que l'éditeur de liens à l'exécution parvient à trouver les bibliothèques. Par exemple, avec ldconfig :
+Si vous utilisez Linux, une fois le client MQ installé, vérifiez que l'éditeur de liens du runtime parvient à trouver les bibliothèques. Par exemple, avec ldconfig :
 
 Précisez l'emplacement de la bibliothèque dans un fichier de configuration ld.
 

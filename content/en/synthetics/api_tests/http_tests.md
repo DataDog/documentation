@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
+- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
 - link: "/getting_started/synthetics/api_test"
   tag: "Documentation"
   text: "Get started with HTTP tests"
@@ -20,11 +23,11 @@ further_reading:
 
 HTTP tests allow you to **send HTTP requests to your applications' API endpoints** in order to verify that they are responding to requests, as well as that they meet any conditions you define-such as overall response time, status code, and header or body content.
 
-HTTP tests can be run from [**managed**][1] and [**private locations**][2] depending on whether you are willing to monitor your endpoints from outside or inside your network. HTTP tests can run **on a schedule**, **on-demand**, or directly **within your [CI/CD pipelines][3]**.
+HTTP tests can be run from [**managed**][1] and [**private locations**][2] depending on whether you want to monitor your endpoints from outside or inside your network. HTTP tests can run **on a schedule**, **on-demand**, or directly **within your [CI/CD pipelines][3]**.
 
 ## Configuration
 
-After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], or [`DNS` test][7]), you can define your test's request.
+After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][7], or [`ICMP` test][8]), you can define your test's request.
 
 ### Define request
 
@@ -55,9 +58,9 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 
   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
-  
+
   ```
-  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts 
+  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
   ```
 
@@ -69,11 +72,19 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
 
   {{% /tab %}}
+  
+  {{% tab "Privacy" %}}
+
+  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. Read more about security recommendations [here][1].
+  
+
+[1]: /security/synthetics
+  {{% /tab %}}
 
   {{< /tabs >}}
 
 3. **Name** your HTTP test.
-4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
+4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
 6. Select the **Locations** to run your HTTP test from: HTTP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor your endpoints from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
@@ -95,14 +106,14 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][11]                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
 **Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your HTTP test" style="width:90%;" >}}
 
@@ -119,7 +130,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][11].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][12].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -127,9 +138,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][13], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][14] and supports the following [conditional variables][15]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -153,17 +164,25 @@ Click on **Save** to save your test and have Datadog start executing it.
 
 You can create local variables by defining their values from one of the below available builtins:
 
-| Pattern                    | Description                                                                                                 |
-|----------------------------|-------------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`         | Generates a numeric string with `n` digits.                                                                 |
-| `{{ alphabetic(n) }}`      | Generates an alphabetic string with `n` letters.                                                            |
-| `{{ alphanumeric(n) }}`    | Generates an alphanumeric string with `n` characters.                                                       |
-| `{{ date(n, format) }}`    | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.        |
-| `{{ timestamp(n, unit) }}` | Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit. |
+
+`{{ numeric(n) }}`
+: Generates a numeric string with `n` digits.
+
+`{{ alphabetic(n) }}`
+: Generates an alphabetic string with `n` letters.
+
+`{{ alphanumeric(n) }}`
+: Generates an alphanumeric string with `n` characters.
+
+`{{ date(n, format) }}`
+: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+
+`{{ timestamp(n, unit) }}` 
+: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][16] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -172,13 +191,24 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
-| Error             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.                                                                                                                                                                                                                                                         |
-| DNS               | DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
-| `INVALID_REQUEST` | The configuration of the test is invalid (for example, a typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][16].                                                                                                                                                                                                                                                                                                                                                      |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. <br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. <br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
+
+
+`CONNRESET`
+: The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
+
+`DNS`
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+
+`INVALID_REQUEST` 
+: The configuration of the test is invalid (for example, a typo in the URL).
+
+`SSL`
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][17].
+
+`TIMEOUT`
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. 
+  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
 
 ## Further Reading
 
@@ -191,12 +221,13 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [5]: /synthetics/api_tests/ssl_tests
 [6]: /synthetics/api_tests/tcp_tests
 [7]: /synthetics/api_tests/dns_tests
-[8]: /synthetics/search/#search
-[9]: https://restfulapi.net/json-jsonpath/
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /api/v1/synthetics/#create-a-test
-[12]: /monitors/notifications/?tab=is_alert#notification
-[13]: https://www.markdownguide.org/basic-syntax/
-[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[15]: /synthetics/settings/#global-variables
-[16]: /synthetics/api_tests/errors/#ssl-errors
+[8]: /synthetics/api_tests/icmp_tests
+[9]: /synthetics/search/#search
+[10]: https://restfulapi.net/json-jsonpath/
+[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[12]: /api/v1/synthetics/#create-a-test
+[13]: /monitors/notifications/?tab=is_alert#notification
+[14]: https://www.markdownguide.org/basic-syntax/
+[15]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[16]: /synthetics/settings/#global-variables
+[17]: /synthetics/api_tests/errors/#ssl-errors

@@ -3,9 +3,12 @@ title: Multistep API Tests
 kind: documentation
 description: Chain requests to monitor sophisticated transactions on your key services
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+- link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetic Monitoring"
+  text: "Monitor your workflows with Datadog multistep API tests"
+- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  tag: 'Learning Center'
+  text: 'Introduction to Synthetic Tests'
 - link: "/getting_started/synthetics/api_test"
   tag: "Documentation"
   text: "Get started with API tests"
@@ -47,6 +50,8 @@ Hit **Create Your First Request** to start designing your test's requests.
 
 {{< img src="synthetics/api_tests/create_request.png" alt="Create your Multistep API test requests"  style="width:90%;" >}}
 
+**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase it.
+
 #### Define the request
 
 {{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
@@ -86,6 +91,14 @@ Hit **Create Your First Request** to start designing your test's requests.
   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
 
   {{% /tab %}}
+  
+  {{% tab "Privacy" %}}
+
+  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This is helpful to ensure no sensitive data gets featured in your test results. Used mindfully as it can make failure troubleshooting more difficult. Read more about security recommendations [here][1].
+  
+
+[1]: /security/synthetics
+  {{% /tab %}}
 
   {{< /tabs >}}
 
@@ -98,15 +111,23 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8] | _String_ <br> _[Regex][9]_ <br> _String_, _[Regex][9]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]                                      |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][9]                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
 **Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 10 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
+
+##### Failure behavior
+
+The `Continue with test if this step fails` setting allows Multistep API tests to move on with subsequent steps even in case of step failure. This is particularly useful to ensure your tests are able to clean up after themselves. For instance, a test might first create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fails, you still want the resource to be deleted at the end of the test to avoid generating false positives. This can be done using the `Continue with test if this step fails` on every intermediary step.
+
+You should also activate the `Consider entire test as failed if this step fails` setting on your intermediary steps to ensure your overall test still generates an alert in case one of the endpoints does not answer as expected.
+
+Similarly, if your Multistep API test runs on a variety of endpoints, the two failure behavior settings can help ensure your test performs all requests even in case of issue with one or several of the API endpoints.
 
 #### Extract variables from the response
 
@@ -117,8 +138,8 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][10].
-    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][10] or a [JSONPath][8].
+    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][9].
+    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][9] or a [JSONPath][8].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
@@ -148,7 +169,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][9].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][10].
 
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
@@ -157,7 +178,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
 
@@ -169,11 +190,6 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-
-Email notifications include the message defined in this section as well as a summary of failed assertions.
-Notifications example:
-
-{{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications"  style="width:90%;" >}}
 
 Click on **Save** to save your test and have Datadog start executing it.
 
@@ -189,13 +205,20 @@ You can [extract variables from any step of your Multistep API test](#extract-va
 
 You can create local variables by defining their values from one of the below available builtins:
 
-| Pattern                    | Description                                                                                                 |
-|----------------------------|-------------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`         | Generates a numeric string with `n` digits.                                                                 |
-| `{{ alphabetic(n) }}`      | Generates an alphabetic string with `n` letters.                                                            |
-| `{{ alphanumeric(n) }}`    | Generates an alphanumeric string with `n` characters.                                                       |
-| `{{ date(n, format) }}`    | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.        |
-| `{{ timestamp(n, unit) }}` | Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit. |
+`{{ numeric(n) }}`
+: Generates a numeric string with `n` digits.
+
+`{{ alphabetic(n) }}`
+: Generates an alphabetic string with `n` letters.
+
+`{{ alphanumeric(n) }}`
+: Generates an alphanumeric string with `n` characters.
+
+`{{ date(n, format) }}`
+: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+
+`{{ timestamp(n, unit) }}` 
+: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
 
 ### Use variables
 
@@ -208,13 +231,23 @@ To display your list of variables, type `{{` in your desired field.
 
 A test is considered `FAILED` if a step does not satisfy one or several assertions or if a step's request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
-| Error             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.                                                                                                                                                                                                                                                         |
-| DNS               | DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
-| `INVALID_REQUEST` | The configuration of the test is invalid (for example, a typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][15].                                                                                                                                                                                                                                                                                                                                                      |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. <br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. <br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
+
+`CONNRESET`
+: The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
+
+`DNS`
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+
+`INVALID_REQUEST` 
+: The configuration of the test is invalid (for example, a typo in the URL).
+
+`SSL`
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][15].
+
+`TIMEOUT`
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
+  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
 
 ## Further Reading
 
@@ -228,8 +261,8 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 [6]: /synthetics/api_tests/
 [7]: /synthetics/search/#search
 [8]: https://restfulapi.net/json-jsonpath/
-[9]: /api/v1/synthetics/#create-a-test
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[10]: /api/v1/synthetics/#create-a-test
 [11]: /monitors/notifications/?tab=is_alert#notification
 [12]: http://daringfireball.net/projects/markdown/syntax
 [13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables

@@ -15,13 +15,16 @@ variables:
   DATADOG_SUBDOMAIN: 'dd-corpsite'
   FORCE_COLOR: '1'
   GIT_DEPTH: 50
+  # gitlab checkout
+  DOCS_REPO_NAME: documentation
+  REPO_URL: "https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.ddbuild.io/DataDog/${DOCS_REPO_NAME}.git"
 
 # ================== copy scripts =============== #
 before_script:
   - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
-
+  - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
 
 cache: &cache
   key:
@@ -35,7 +38,7 @@ cache: &cache
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
-    - "size:large"
+    - "size:2xlarge"
   except:
     - tags
   only:
@@ -47,11 +50,23 @@ install_dependencies:
   stage: bootstrap
   cache:
     <<: *cache
+  variables:
+    GIT_STRATEGY: none
   script:
-    - yarn install --frozen-lockfile
+    - git version
+    - git clone --branch $CI_COMMIT_REF_NAME --depth 1 --filter=blob:none --no-checkout $REPO_URL sparse-docs
+    - cd sparse-docs && git sparse-checkout init --cone && git sparse-checkout set local && git checkout $CI_COMMIT_REF_NAME && cd ..
+    - mkdir -p ./local/bin/sh && cp --remove-destination ./sparse-docs/local/bin/sh/preinstall.sh ./local/bin/sh/preinstall.sh
+    - cp --remove-destination ./sparse-docs/package.json ./package.json
+    - cp --remove-destination ./sparse-docs/yarn.lock ./yarn.lock
+    - yarn install --link-duplicates --frozen-lockfile --cache-folder .yarn
+    - rm -rf ./sparse-docs # cleanup runner
   only:
     changes:
       - yarn.lock
+  except:
+    # skip on automated translation prs
+    - /^guacbot\/translation-[0-9]+$/i
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
@@ -81,11 +96,15 @@ build_preview:
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - in-isolation deploy_preview
+    # remove static images so we can skip from artifact passed in gitlab
+    - remove_static_from_repo
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
+      - .github/
+      - .vale.ini
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
@@ -145,7 +164,10 @@ link_checks_preview:
   interruptible: true
 
 missing_tms_preview:
-  <<: *base_template
+  image:
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
+    entrypoint: [ "" ]
+  tags: ["runner:main", "size:2xlarge"]
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -154,7 +176,9 @@ missing_tms_preview:
   dependencies:
     - build_preview
   script:
-    - check_missing_tms
+    # remove dirs we don't need to scan
+    - rm -rf ./public/fr ./public/ja ./public/api/v1/ ./public/api/v2/
+    - GOMAXPROCS=$(nproc --all) vale --glob='*.{html}' ./public
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
@@ -163,7 +187,7 @@ index_algolia_preview:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: [ "runner:main","size:large" ]
+  tags: [ "runner:main","size:2xlarge" ]
   stage: post-deploy
   cache:
     <<: *cache
@@ -176,6 +200,22 @@ index_algolia_preview:
         export DISPLAY=:99
         Xvfb :99 -ac &
         echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
+  dependencies:
+    - build_preview
+  when: manual
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+  interruptible: true
+
+replica_algolia_preview:
+  <<: *base_template
+  stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
+  environment: "preview"
+  script:
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_preview
   when: manual
@@ -211,7 +251,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup_overview/setup/android.md,content/en/tracing/setup_overview/setup/ruby.md,content/en/security_monitoring/default_rules,content/en/serverless/forwarder.md,content/en/serverless/datadog_lambda_library/python.md,content/en/serverless/datadog_lambda_library/nodejs.md,content/en/serverless/datadog_lambda_library/ruby.md,content/en/serverless/datadog_lambda_library/go.md,content/en/serverless/datadog_lambda_library/java.md,content/en/real_user_monitoring/android.md,content/en/real_user_monitoring/browser/_index.md,content/en/real_user_monitoring/ios.md,content/en/serverless/serverless_integrations/plugin.md,content/en/serverless/serverless_integrations/macro.md,content/en/serverless/serverless_integrations/cli.md,content/en/logs/log_collection/javascript.md"
+    UNTRACKED_EXTRAS: "data"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
@@ -238,42 +278,6 @@ build_live:
     - master
 
 
-# build_live_legacy:
-#   <<: *base_template
-#   stage: build
-#   environment: "live"
-#   variables:
-#     CONFIG: ${LIVE_CONFIG}
-#     URL: ${LIVE_DOMAIN}
-#     UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup_overview/setup/android.md,content/en/tracing/setup_overview/setup/ruby.md,content/en/security_monitoring/default_rules"
-#     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
-#     LOCAL: "False"
-#   script:
-#     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-#     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
-#     - version_static_assets
-#     - touch Makefile.config
-#     - make examples
-#     - sync_integration_descriptions
-#     - sync_integration_metrics
-#     - placehold_translations
-#     - build_hugo_site_new
-#     - in-isolation deploy_live
-#     - collect_static_assets
-#     - push_site_to_s3
-#     - create_artifact
-#     - create_artifact_untracked
-#   artifacts:
-#     when: on_success
-#     paths:
-#       - ${ARTIFACT_RESOURCE}
-#       - ./integrations_data
-#       - content/en
-#     expire_in: 1 week
-#   only:
-#     - master
-
-
 index_internal_doc:
   stage: post-deploy
   cache: {}
@@ -284,7 +288,7 @@ index_internal_doc:
   only:
     - master
   except: [ tags, schedules ]
-  tags: [ "runner:docker", "size:large" ]
+  tags: [ "runner:main", "size:2xlarge" ]
   script:
     - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
 
@@ -308,7 +312,7 @@ index_algolia:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["runner:main","size:large"]
+  tags: ["runner:main","size:2xlarge"]
   stage: post-deploy
   cache:
     <<: *cache
@@ -321,6 +325,20 @@ index_algolia:
       export DISPLAY=:99
       Xvfb :99 -ac &
       echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
+  dependencies:
+    - build_live
+  only:
+    - schedules
+
+replica_algolia:
+  <<: *base_template
+  stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
+  environment: "live"
+  script:
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
   only:

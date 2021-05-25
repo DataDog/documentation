@@ -152,9 +152,8 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 ### OpenTelemetry Links
 
-- See [github][2], [opentelemetry examples][3], or [readthedocs][4] for more OpenTelemetry Python Datadog Exporter usage.
+- See [OpenTelemetry examples][2], or [Readthedocs][3] for more OpenTelemetry Python Datadog Exporter usage.
 
 [1]: https://opentracing.io/guides/python/
-[2]: https://github.com/open-telemetry/opentelemetry-python/tree/main/ext/opentelemetry-ext-datadog
-[3]: https://github.com/open-telemetry/opentelemetry-python/tree/main/docs/examples/datadog_exporter
-[4]: https://opentelemetry-python.readthedocs.io/en/stable/ext/datadog/datadog.html
+[2]: https://github.com/open-telemetry/opentelemetry-python/tree/main/docs/examples/datadog_exporter
+[3]: https://opentelemetry-python.readthedocs.io/en/latest/examples/datadog_exporter/README.html
