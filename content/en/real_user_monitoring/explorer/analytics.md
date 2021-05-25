@@ -119,6 +119,18 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 [2]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
 {{% /tab %}}
 
+{{% tab "Geomap" %}}
+
+Visualize a single [measure][1] (or a [facet][2] unique count of values) on the world map.
+
+The following RUM analytics geomap shows the 75th percentile of **Largest Contentful Paint** over the past day:
+
+{{< img src="real_user_monitoring/explorer/analytics/rum_geomap_example.png" alt="RUM geomap example" style="width:90%;">}}
+
+[1]: /real_user_monitoring/rum_explorer/?tab=facets#facets-measures
+[2]: /real_user_monitoring/rum_explorer/?tab=measures#facets-measures
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Related events
