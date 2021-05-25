@@ -357,6 +357,7 @@ class Integrations:
         new_file_name = "{}{}.yaml".format(
             self.data_integrations_dir, key_name
         )
+        print(new_file_name)
         self.metric_csv_to_yaml(key_name, file_name, new_file_name)
 
     def process_integration_manifest(self, file_name):
@@ -427,17 +428,21 @@ class Integrations:
 
             for line in line_list:
                 if line.endswith("service{"):
-                    l = line.split('"')
-                    integration = l[1]
+                    integration = line.split('"')[1]
                     dict_npm[integration] = {"name": integration}
 
         new_file_name = "{}aws.json".format(self.data_npm_dir)
 
         print(new_file_name)
 
-        out_file = open(new_file_name, "w")
-        json.dump(dict_npm, out_file, indent = 2, sort_keys = True)
-        out_file.close()
+        with open(
+                file=new_file_name,
+                mode="w",
+                encoding="utf-8",
+            ) as f:
+                json.dump(
+                    dict_npm, f, indent = 2, sort_keys = True
+                )
 
     # file_name should be an extracted image file
     # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png
