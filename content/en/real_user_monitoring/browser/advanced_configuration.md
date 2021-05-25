@@ -85,7 +85,9 @@ You can update the following event properties:
 |   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
 |   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
+|   `error.resource.status_code`  |   String  |   The HTTP status code for failed resources.                                                       |
 |   `resource.url`        |   String  |   The resource URL.                                                                                 |
+|   `resource.status_code`|   String  |   The resource HTTP status code.                                                                                 |
 
 **Note**: The RUM SDK will ignore modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][1].
 
