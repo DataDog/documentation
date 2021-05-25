@@ -1,7 +1,6 @@
 # Hugo
 public/
 data/service_checks/
-data/npm/*.json
 integrations_data
 
 # Ignore generated examples
