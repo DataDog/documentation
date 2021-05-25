@@ -431,12 +431,12 @@ class Integrations:
                     integration = l[1]
                     dict_npm[integration] = {"name": integration}
 
-        new_file_name = self.data_npm_dir + "aws.json"
+        new_file_name = "{}aws.json".format(self.data_npm_dir)
 
         print(new_file_name)
 
         out_file = open(new_file_name, "w")
-        json.dump(dict_npm, out_file, indent = 4, sort_keys = True)
+        json.dump(dict_npm, out_file, indent = 2, sort_keys = True)
         out_file.close()
 
     # file_name should be an extracted image file
