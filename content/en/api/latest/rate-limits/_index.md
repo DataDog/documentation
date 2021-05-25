@@ -7,8 +7,6 @@ type: api
 
 All of the API endpoints are rate limited. Once you exceed a certain number of requests in a specific period, Datadog returns an error.
 
-For rate-limited API endpoints, Datadog returns headers to show how close you are to your limit. If you exceed your limit, review these headers to determine when you can try again.
-
 If you are rate limited, you will see a 429 in the response code. Datadog recommends to either wait the time designated by the `X-RateLimit-Limit` before making calls again, or you should switch to making calls at a frequency slightly longer than the `X-RateLimit-Limit` / `X-RateLimit-Period`.
 
 Rate limits can be increased from the defaults by [contacting the Datadog support team][1].
