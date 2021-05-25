@@ -19,7 +19,7 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/security_monitoring/getting_started">}}Get started with Security Monitoring{{< /nextlink >}}
-  {{< nextlink href="/security_platform/default_rules">}}Implement default detection rules{{< /nextlink >}}
+  {{< nextlink href="/security_platform/default_rules">}}Start using out-of-the-box security rules in your environment{{< /nextlink >}}
   {{< nextlink href="/security_platform/detection_rules">}}Learn about creating custom detection rules{{< /nextlink >}}
 {{< /whatsnext >}}
 
