@@ -271,12 +271,58 @@ For trace and log correlation in PHP, modify the [Datadog SDK PHP examples][1] t
 
 {{< programming-lang lang="go" >}}
 
-For trace and log correlation in Go, modify the [Datadog SDK Go examples][1] to include the additional steps discussed above.
+To manually correlate your traces with your logs, patch the logging module you are using with a function that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses the [logrus Library][1]
+
+```go
+package main
+
+import (
+	"context"
+	log "github.com/sirupsen/logrus"
+	"go.opentelemetry.io/otel"
+	"strconv"
+)
+
+func main() {
+	ctx := context.Background()
+	tracer := otel.Tracer("example/main")
+	ctx, span := tracer.Start(ctx, "example")
+	defer span.End()
+
+	log.SetFormatter(&log.JSONFormatter{})
+
+	standardFields := log.Fields{
+		"dd.trace_id": convertTraceID(span.SpanContext().TraceID().String()),
+		"dd.span_id":  convertTraceID(span.SpanContext().SpanID().String()),
+		"dd.service":  "serviceName",
+		"dd.env":      "serviceEnv",
+		"dd.version":  "serviceVersion",
+	}
+
+	log.WithFields(standardFields).WithContext(ctx).Info("hello world")
+}
+
+func convertTraceID(id string) string {
+	if len(id) < 16 {
+		return ""
+	}
+	if len(id) > 16 {
+		id = id[16:]
+	}
+	intValue, err := strconv.ParseUint(id, 16, 64)
+	if err != nil {
+		return ""
+	}
+	return strconv.FormatUint(intValue, 10)
+}
+
+
+```
 
 [Contact Datadog support][2] with any questions.
 
 
-[1]: /tracing/connect_logs_and_traces/go/
+[1]: https://github.com/sirupsen/logrus
 [2]: /help/
 {{< /programming-lang >}}
 

@@ -25,6 +25,9 @@ You have:
 ## Setup
 
 ### Import the Datadog collection into Postman
+
+Start by [logging into Postman][7]. Datadog reccomends [downloading the Postman application][8].
+
 </br>
 <div class="postman-run-button"
 data-postman-action="collection/import"
@@ -52,13 +55,11 @@ The collection includes a [Postman environment][4] called `Datadog Authenticatio
 
 Follow these steps to set up your environment:
 
-1. Click the **Manage Environments** gear icon in the upper right corner of Postman.
+1. Click the **Environments** drop down in the upper right corner of Postman.
 
 2. Select **Datadog Authentication**
 
-3. Click **Edit**.
-
-4. Add in your Datadog [API key][2] as the initial value and current value for the `api_key` variable, and add your Datadog [Application key][2] as the initial value and current value for the `application_key` variable.
+3. Edit the **Datadog Authentication** environment to add in your Datadog [API key][2] as the initial value and current value for the `api_key` variable, and add your Datadog [Application key][2] as the initial value and current value for the `application_key` variable.
 
 {{< site-region region="eu" >}}
 
@@ -115,3 +116,5 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 [4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
 [5]: /api/v1/organizations/
 [6]: /api/
+[7]: https://identity.getpostman.com/login
+[8]: https://www.postman.com/downloads/
