@@ -30,11 +30,11 @@ Suppose you want to monitor an error rate over 5 minutes using the metrics, `req
 ```text
 | Timestamp           | Value |
 |:--------------------|:------|
-| 2018-03-13 11:00:30 | 5     |
-| 2018-03-13 11:01:30 | 5     |
-| 2018-03-13 11:02:40 | 5     |
-| 2018-03-13 11:03:30 | 5     |
-| 2018-03-13 11:04:40 | 5     |
+| 2018-03-13 11:00:30 | 10    |
+| 2018-03-13 11:01:30 | 10    |
+| 2018-03-13 11:02:40 | 10    |
+| 2018-03-13 11:03:30 | 10    |
+| 2018-03-13 11:04:40 | 10    |
 ```
 
 ### 2 ways to calculate
@@ -53,10 +53,10 @@ sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count(
 
 Compare the result of the evaluation depending on the path:
 
-| Path                     | Behavior                                       | Expanded expression         | Result  |
-|:-------------------------|:-----------------------------------------------|:----------------------------|:--------|
-| **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/5 + 2/5 + ... + 5/5)** | **3**   |
-| **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1+2+...+5)/(5+5+...+5)** | **0.6** |
+| Path                     | Behavior                                       | Expanded expression                    | Result  |
+|:-------------------------|:-----------------------------------------------|:---------------------------------------|:--------|
+| **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/10 + 2/10 + 3/10 + 4/10 + 5/10)** | **1.5** |
+| **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1+2+3+4+5) / (10+10+10+10+10)**     | **0.3** |
 
 _Note that both evaluations above are mathematically correct. Choose a method that suits your intentions._
 
