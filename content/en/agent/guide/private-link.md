@@ -40,14 +40,14 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 | Datadog Metric Service Name                                |
 | ---------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca`  |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0d560852f6f1e27ac`  |
 
 {{% /tab %}}
 {{% tab "Logs" %}}
 
 | Forwarder | Datadog Logs Service Name |
 | --------- | ------------------------- |
-| Datadog Agent | `com.amazonaws.vpce.us-east-1.vpce-svc-0a2aef8496ee043bf` |
+| Datadog Agent | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
 | Lambda or custom forwarder | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
 
 {{% /tab %}}
@@ -55,28 +55,28 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 | Datadog API Service Name                                  |
 | --------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0` |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` |
 
 {{% /tab %}}
 {{% tab "Processes" %}}
 
 | Datadog Process Monitoring Service Name                   |
 | --------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-05316fe237f6d8ddd` |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
 
 {{% /tab %}}
 {{% tab "Traces" %}}
 
 | Datadog Trace Service Name                                |
 | --------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-07672d13af0033c24` |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` |
 
 {{% /tab %}}
 {{% tab "Kubernetes Resources" %}}
 
 | Datadog Kubernetes Explorer Service Name                  |
 | --------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-0b03d6756bf6c2ec3` |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` |
 
 {{% /tab %}}
 {{< /tabs >}}
