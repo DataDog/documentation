@@ -82,7 +82,6 @@ class Build:
                         "\x1b[31mERROR\x1b[0m: Action {} unknown for {}".format(content["action"], content))
                     raise ValueError
             except Exception as e:
-                print('Exception in update_pre_build.py')
                 print(e)
                 if getenv("LOCAL") == 'True':
                     print(
