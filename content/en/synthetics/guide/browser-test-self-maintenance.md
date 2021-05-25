@@ -14,7 +14,7 @@ further_reading:
 
 ---
 
-Flakiness is one of the biggest pain points associated with end-to-end testing. Typically, oftentimes, end-to-end tests would fail, not because of an actual application issue, but because the frontend team performed some changes causing the identifier used by your test not to work anymore.
+Flakiness is one of the biggest pain points associated with end-to-end testing. Oftentimes end-to-end tests fail not because of an actual application issue, but because a frontend team performed changes that cause an identifier used by your test not to work anymore.
 
 ## How do browser tests target elements?
 
