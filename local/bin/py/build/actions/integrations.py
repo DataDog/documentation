@@ -417,9 +417,10 @@ class Integrations:
     def process_npm_integrations(self, file_name):
         """
         Save the defaults.go file from AWS as a json file
-        /data/npm/defaults.json
+        /data/npm/aws.json
         """
 
+        dict_npm = {}
         with open(file_name) as fh:
 
             line_list = filter(None, fh.read().splitlines())
@@ -427,18 +428,16 @@ class Integrations:
             for line in line_list:
                 if line.endswith("service{"):
                     l = line.split('"')
-                    print(l[1])
+                    integration = l[1]
+                    dict_npm[integration] = {"name": integration}
 
-        # new_file_name = basename + dirname + normpath + file_name + ".json"
+        new_file_name = self.data_npm_dir + "aws.json"
 
-        # out_file = open(new_file_name, "w")
-        # json.dump(dict_npm, out_file, indent = 4, sort_keys = False)
-        # out_file.close()
+        print(new_file_name)
 
-        # shutil.copy(
-        #     file_name,
-        #     self.data_npm_dir + new_file_name,
-        # )
+        out_file = open(new_file_name, "w")
+        json.dump(dict_npm, out_file, indent = 4, sort_keys = True)
+        out_file.close()
 
     # file_name should be an extracted image file
     # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png

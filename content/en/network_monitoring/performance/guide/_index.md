@@ -10,4 +10,5 @@ disable_sidebar: true
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="network_monitoring/performance/guide/manage_traffic_costs_with_npm" >}}Manage traffic costs with NPM{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/guide/detecting_a_network_outage" >}}Detecting a Network Outage{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/guide/aws_supported_services/" >}}NPM AWS Supported Services{{< /nextlink >}}
 {{< /whatsnext >}}
