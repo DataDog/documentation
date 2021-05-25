@@ -116,7 +116,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
+[4]: https://github.com/kubernetes/kube-state-metrics/tree/master/charts/kube-state-metrics
 [5]: /agent/kubernetes/apm?tab=helm
 [6]: /agent/kubernetes/log?tab=helm
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
@@ -146,27 +146,29 @@ To install the Datadog Agent on your Kubernetes cluster:
 2. **Create a secret that contains your Datadog API Key**. Replace the `<DATADOG_API_KEY>` below with [the API key for your organization][2]. This secret is used in the manifest to deploy the Datadog Agent.
 
     ```shell
-    kubectl create secret generic datadog-agent --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
+    kubectl create secret generic datadog-agent --from-literal='api-key=<DATADOG_API_KEY>' --namespace="default"
     ```
 
-     **Note**: This create a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.
+     **Note**: This creates a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.
 
-3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates
+3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
-    | Metrics | Logs | APM | Process | NPM | Linux                  | Windows                 |
-    |---------|------|-----|---------|-----|------------------------|-------------------------|
-    | X       | X    | X   | X       |     | [Manifest template][3] | [Manifest template][4] |
-    | X       | X    | X   |         |     | [Manifest template][5] | [Manifest template][6] |
-    | X       | X    |     |         |     | [Manifest template][7] | [Manifest template][8] |
-    | X       |      | X   |         |     | [Manifest template][9] | [Manifest template][10] |
-    |         |      |     |         | X   | [Manifest template][11] | no template             |
-    | X       |      |     |         |     | [Manifest template][12] | [Manifest template][13] |
+    | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Linux                   | Windows                 |
+    |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | [Manifest template][3]  | [Manifest template][4]  |
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
+    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           | [Manifest template][9]  | [Manifest template][10] |
+    |                           |                           |                           |                           | <i class="icon-tick"></i> | [Manifest template][11] | no template             |
+    | <i class="icon-tick"></i> |                           |                           |                           |                           | [Manifest template][12] | [Manifest template][13] |
 
      To enable trace collection completely, [extra steps are required on your application Pod configuration][14]. Refer also to the [logs][15], [APM][16], [processes][17], and [Network Performance Monitoring][18] documentation pages to learn how to enable each feature individually.
 
      **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
 4. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
+    
+    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadog.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][19] to see documentation appropriate for the site you're using.
 
 5. **Deploy the DaemonSet** with the command:
 
@@ -187,7 +189,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][19] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][20]:
+7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][20] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][21]:
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -225,8 +227,9 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [16]: /agent/kubernetes/apm/
 [17]: /infrastructure/process/?tab=kubernetes#installation
 [18]: /network_monitoring/performance/setup/
-[19]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[20]: /agent/kubernetes/data_collected/#kube-state-metrics
+[19]: /getting_started/site/
+[20]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[21]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Operator" %}}
 
@@ -244,31 +247,48 @@ Using the Datadog Operator requires the following prerequisites:
 
 ## Deploy an Agent with the Operator
 
-To deploy a Datadog Agent with the Operator in the minimum number of steps, use the [`datadog-agent-with-operator`][4] Helm chart.
-Here are the steps:
+To deploy the Datadog Agent with the operator in the minimum number of steps, see the [`datadog-operator`][4] helm chart. Here are the steps:
 
-1. [Download the chart][5]:
+1. Install the [Datadog Operator][5]:
 
    ```shell
-   curl -Lo datadog-agent-with-operator.tar.gz https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+   helm repo add datadog https://helm.datadoghq.com
+   helm install my-datadog-operator datadog/datadog-operator
    ```
 
-2. Create a file with the spec of your Agent. The simplest configuration is:
+2. Create a Kubernetes secret with your API and app keys
+
+   ```shell
+   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
+   ```
+   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][6]
+
+2. Create a file with the spec of your Datadog Agent deployment configuration. The simplest configuration is:
 
    ```yaml
-   credentials:
-     apiKey: <DATADOG_API_KEY>
-     appKey: <DATADOG_APP_KEY>
-   agent:
-     image:
-       name: "gcr.io/datadoghq/agent:latest"
+   apiVersion: datadoghq.com/v1alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     credentials:
+       apiSecret:
+         secretName: datadog-secret
+         keyName: api-key
+       appSecret:
+         secretName: datadog-secret
+         keyName: app-key
+     agent:
+       image:
+         name: "gcr.io/datadoghq/agent:latest"
+     clusterAgent:
+       image:
+         name: "gcr.io/datadoghq/cluster-agent:latest"
    ```
-
-   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][6]
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
-   helm install --set-file agent_spec=/path/to/your/datadog-agent.yaml datadog datadog-agent-with-operator.tar.gz
+   kubectl apply -f agent_spec=/path/to/your/datadog-agent.yaml
    ```
 
 ## Cleanup
@@ -277,7 +297,7 @@ The following command deletes all the Kubernetes resources created by the above 
 
 ```shell
 kubectl delete datadogagent datadog
-helm delete datadog
+helm delete my-datadog-operator
 ```
 
 For further details on setting up Operator, including information about using tolerations, refer to the [Datadog Operator advanced setup guide][7].
@@ -300,11 +320,11 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[4]: https://github.com/DataDog/datadog-operator/tree/master/chart/datadog-agent-with-operator
-[5]: https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
+[5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: /agent/guide/operator-advanced
-[8]: https://github.com/DataDog/datadog-operator/blob/master/docs/configuration.md
+[8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -403,7 +423,7 @@ Send custom metrics with [the StatsD protocol][9]:
 | `DD_HISTOGRAM_AGGREGATES`        | The histogram aggregates to compute (separated by spaces). The default is "max median avg count".                                                          |
 | `DD_DOGSTATSD_SOCKET`            | Path to the Unix socket to listen to. Must be in a `rw` mounted volume.                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
-| `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `["env:golden", "group:retrievers"]`. |
+| `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
 
 Learn more about [DogStatsD over Unix Domain Sockets][10].
 
@@ -426,16 +446,16 @@ Integration credentials can be stored in Docker or Kubernetes secrets and used i
 
 Exclude containers from logs collection, metrics collection, and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. These allowlists and blocklists apply to Autodiscovery only; traces and DogStatsD are not affected. The value for these environment variables support regular expressions.
 
-| Env Variable    | Description                                                                                                                                                                                                        |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_CONTAINER_INCLUDE` | Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |
-| `DD_CONTAINER_EXCLUDE` | Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"`, `image:.*` |
-| `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics you wish to include.  |
-| `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics you wish to exclude. |
-| `DD_CONTAINER_INCLUDE_LOGS` | Allowlist of containers whose logs you wish to include.  |
-| `DD_CONTAINER_EXCLUDE_LOGS` | Blocklist of containers whose logs you wish to exclude. |
-| `DD_AC_INCLUDE` | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |
-| `DD_AC_EXCLUDE` | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
+| Env Variable                   | Description                                                                                                                                                                                                                        |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_CONTAINER_INCLUDE`         | Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                                              |
+| `DD_CONTAINER_EXCLUDE`         | Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"`, `image:.*`                                                                              |
+| `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics you wish to include.                                                                                                                                                                         |
+| `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics you wish to exclude.                                                                                                                                                                         |
+| `DD_CONTAINER_INCLUDE_LOGS`    | Allowlist of containers whose logs you wish to include.                                                                                                                                                                            |
+| `DD_CONTAINER_EXCLUDE_LOGS`    | Blocklist of containers whose logs you wish to exclude.                                                                                                                                                                            |
+| `DD_AC_INCLUDE`                | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
+| `DD_AC_EXCLUDE`                | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
 Additional examples are available on the [Container Discover Management][13] page.
 

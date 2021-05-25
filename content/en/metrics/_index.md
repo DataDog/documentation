@@ -11,8 +11,8 @@ aliases:
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explore all of your metrics and perform Analytics.{{< /nextlink >}}
     {{< nextlink href="/developers/metrics/types" >}}<u>Metrics Types</u> - Types of metrics that can be submitted to Datadog.{{< /nextlink >}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
-    {{< nextlink href="metrics/explorer/" >}}<u>Metrics Explorer</u> - Examine your metrics with this simple interface.{{< /nextlink >}}
     {{< nextlink href="metrics/distributions/" >}}<u>Distribution Metrics</u> - Learn about Distribution Metrics and globally accurate percentiles.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -24,7 +24,7 @@ Metrics are numerical values that can track anything about your environment over
 
 Metrics provide an overall picture of your system. You can use them to assess the health of your environment at a glance—how quickly users are loading your website or the average memory consumption of your servers, for instance. Once you identify a problem, you can use [logs][1] and [tracing][2] to further troubleshoot.
 
-Metrics that track system health come automatically through Datadog's integrations with 400+ services. However, you can also track metrics that are specific to your business—also known as custom metrics—from the number of user logins to user cart sizes to the frequency of your team’s code commits.
+Metrics that track system health come automatically through Datadog's integrations with more than {{< translate key="integration_count" >}} services. However, you can also track metrics that are specific to your business—also known as custom metrics—from the number of user logins to user cart sizes to the frequency of your team’s code commits.
 
 In addition, metrics can help you adjust the scale of your environment to meet the demand from your customers. Knowing exactly how much you need to consume in resources can help you save money or improve performance.
 

@@ -86,10 +86,6 @@ documentation][2]. But if they are missing, ensure they are added (after
             resources:
             - deployments
             - replicasets
-            # Below are in case RBAC was not setup from the above linked "Cluster Agent Setup documentation"
-            - pods 
-            - nodes
-            - services
             verbs:
             - list
             - get
@@ -120,6 +116,50 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 
 [1]: /agent/cluster_agent/
 [2]: /agent/cluster_agent/setup/
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add custom tags to resources
+
+You can add custom tags to Kubernetes resources to ease filtering inside the Kubernetes resources view.
+
+Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable.
+
+**Note**: These tags only show up in the Kubernetes resources view.
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+If you are using the official Helm chart, add the environment variable on both the Process Agent and the Cluster Agent by setting `agents.containers.processAgent.env` and `clusterAgent.env` respectively in [values.yaml][1].
+
+```yaml
+  agents:
+    containers:
+      processAgent:
+        env:
+          - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+            value: "tag1:value1 tag2:value2"
+  clusterAgent:
+    env:
+      - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+        value: "tag1:value1 tag2:value2"
+```
+
+
+Then deploy a new release.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+Set the environment variable on both the Process Agent and Cluster Agent containers:
+
+```yaml
+- name: DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS
+  value: "tag1:value1 tag2:value2"
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -171,12 +211,14 @@ If you've enabled Kubernetes Resources, strings such as `pod`, `deployment`, `Re
 
 To combine multiple string searches into a complex query, you can use any of the following Boolean operators:
 
-|              |                                                                                                                                  |                                                                 |
-|:-------------|:---------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
-| **Operator** | **Description**                                                                                                                  | **Example**                                                     |
-| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)                           | java AND elasticsearch                                          |
-| `OR`         | **Union**: either term is contained in the selected events                                                                       | java OR python                                                  |
-| `NOT` / `!`  | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
+`AND`
+: **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)<br> **Example**: `java AND elasticsearch`
+
+`OR`
+: **Union**: either term is contained in the selected events <br> **Example**: `java OR python`
+
+`NOT` / `!`
+: **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation<br> **Example**: `java NOT elasticsearch` or `java !elasticsearch`
 
 Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python`.
 

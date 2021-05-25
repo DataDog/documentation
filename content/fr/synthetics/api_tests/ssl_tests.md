@@ -32,7 +32,12 @@ Après avoir sélectionné le type de test que vous souhaitez créer ([`HTTP`][3
 1. Indiquez le **Host** et le **Port** sur lesquels vous souhaitez exécuter votre test. Par défaut, le port est défini sur _`443`_.
 2. Définissez dans la section **Advanced Options** des options avancées pour votre test (facultatif) : 
     * **Accept self-signed certificates** : ignorez toute erreur de serveur liée à un certificat auto-signé.
-    * **Client certificate** : authentifiez-vous via mTLS en important votre certificat client et la clé privée associée.
+    * **Client certificate** : authentifiez-vous via mTLS en important votre certificat client (`.crt`) et la clé privée associée (`.key`) au format `PEM`. **Remarque** : vous pouvez utiliser la bibliothèque `openssl` pour convertir vos certificats. Par exemple, il est possible de convertir un certificat `PKCS12` en des certificats et des clés privées au format `PEM`.
+
+  ```
+  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts 
+  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+  ```
 
 3. **Donnez un nom** à votre test SSL.
 4. Ajoutez des **tags** `env` et tout autre tag de votre choix à votre test SSL. Vous pourrez ensuite utiliser ces tags pour filtrer rapidement vos tests Synthetic depuis la [page d'accueil de la surveillance Synthetic][7].
@@ -55,12 +60,14 @@ Les tests SSL peuvent être exécutés :
 
 Les assertions définissent un résultat de test escompté. Lorsque vous cliquez sur `Test URL`, les assertions de base pour la validité du certificat, les données d'expiration, la version TLS et `response time` sont ajoutées en fonction de la réponse obtenue. Vous devez définir au moins une assertion à surveiller pour votre test.
 
-| Type          | Opérateur                                                                               | Type de valeur                 |
-|---------------|----------------------------------------------------------------------------------------|----------------------------|
-| certificate   | `expires in more than`, `expires in less than`                                         | _Nombre entier (nombre de jours)_ |
-| property      | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | _Chaîne_ <br> _[Regex][9]_ |
-| response time | `is less than`                                                                         | _Nombre entier (ms)_             |
-| TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Nombre décimal_                  |
+| Type                  | Opérateur                                                                               | Type de valeur                 |
+|-----------------------|----------------------------------------------------------------------------------------|----------------------------|
+| certificat           | `expires in more than`, `expires in less than`                                         | _Nombre entier (nombre de jours)_ |
+| propriété              | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | _Chaîne_ <br> _[Regex][9]_ |
+| temps de réponse         | `is less than`                                                                         | _Nombre entier (ms)_             |
+| version TLS maximale   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Nombre décimal_                  |
+| version TLS minimale   | `is more than`, `is more than or equal`                                                | _Nombre décimal_                  |
+
 
 Vous pouvez créer jusqu'à 10 assertions par test API en cliquant sur **New assertion** ou directement sur l'aperçu de la réponse :
 

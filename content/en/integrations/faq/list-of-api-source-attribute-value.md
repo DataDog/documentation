@@ -6,6 +6,7 @@ private: true
 
 | Integration name              | API source attribute       |
 |-------------------------------|----------------------------|
+| Dotnet                        | DOTNET                     |
 | Activemq                      | ACTIVEMQ                   |
 | Airbrake                      | AIRBRAKE                   |
 | Akamai Datastream             | AKAMAIDATASTREAM           |
@@ -47,6 +48,7 @@ private: true
 | Amazon Es                     | ES                         |
 | Amazon Eventbridge            | AWSEVENTHUB                |
 | Amazon Firehose               | FIREHOSE                   |
+| Amazon Fsx                    | AWSFSX                     |
 | Amazon Gamelift               | GAMELIFT                   |
 | Amazon Glue                   | GLUE                       |
 | Amazon Health                 | HEALTH                     |
@@ -80,6 +82,7 @@ private: true
 | Amazon Translate              | TRANSLATE                  |
 | Amazon Trusted Advisor        | TRUSTEDADVISOR             |
 | Amazon Waf                    | WAF                        |
+| Amazon Network Firewall       | NETWORKFIREWALL            |
 | Amazon Vpn                    | AWSVPN                     |
 | Amazon Web Services           | CLOUDWATCH                 |
 | Amazon Workspaces             | WORKSPACES                 |
@@ -168,6 +171,7 @@ private: true
 | Go Expvar                     | GOEXPVAR                   |
 | Google App Engine             | GAE                        |
 | Google Cloud Apis             | GCPAPIS                    |
+| Google Cloud Audit Logs       | GCPAUDITLOGS               |
 | Google Cloud Big Query        | GCPBIGQUERY                |
 | Google Cloud Bigtable         | GCPBIGTABLE                |
 | Google Cloud Composer         | GCPCOMPOSER                |
@@ -219,6 +223,7 @@ private: true
 | Memcached                     | MEMCACHED                  |
 | Meraki                        | MERAKI                     |
 | Mesos                         | MESOS                      |
+| Microsoft 365                 | MICROSOFT365               |
 | Microsoft Teams               | MICROSOFTTEAMS             |
 | Mongodb                       | MONGODB                    |
 | Mongodb Atlas                 | MONGODBATLAS               |
@@ -229,12 +234,11 @@ private: true
 | New Relic                     | NEWRELIC                   |
 | Nginx                         | NGINX                      |
 | Node                          | NODE                       |
-| Office 365 Groups             | OFFICE365GROUPS            |
 | Okta                          | OKTA                       |
 | Openstack                     | OPENSTACK                  |
 | Opsgenie                      | OPSGENIE                   |
 | Opsmatic                      | OPSMATIC                   |
-| Oracle Cloud                  | ORACLECLOUD                |
+| Oracle Cloud Infrastructure   | ORACLECLOUDINFRASTRUCTURE  |
 | Pagerduty                     | PAGERDUTY                  |
 | Papertrail                    | PAPERTRAIL                 |
 | Pgbouncer                     | PGBOUNCER                  |
@@ -260,6 +264,8 @@ private: true
 | Servicenow                    | SERVICENOW                 |
 | Slack                         | SLACK                      |
 | Snmp                          | SNMP                       |
+| Snyk                          | SNYK                       |
+| Solarwinds                    | SOLARWINDS                 |
 | Solr                          | SOLR                       |
 | Spark                         | SPARK                      |
 | Splunk                        | SPLUNK                     |
@@ -273,6 +279,7 @@ private: true
 | Tokumx                        | TOKUMX                     |
 | Tomcat                        | TOMCAT                     |
 | Travis Ci                     | TRAVISCI                   |
+| User                          | DOGWEBPUBLISHER            |
 | Varnish                       | VARNISH                    |
 | Victorops                     | VICTOROPS                  |
 | Vsphere                       | VSPHERE                    |
@@ -281,5 +288,6 @@ private: true
 | Wmi                           | WMI                        |
 | Xmatters                      | XMATTERS                   |
 | Yarn                          | YARN                       |
+| Zabbix                        | ZABBIX                     |
 | Zendesk                       | ZENDESK                    |
 | Zookeeper                     | ZOOKEEPER                  |

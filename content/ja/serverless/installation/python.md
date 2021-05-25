@@ -201,6 +201,55 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [3]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
+{{% tab "Chalice" %}}
+
+### Chalice プロジェクトを更新する
+
+1. `config.json` で環境変数 `DD_TRACE_ENABLED` と `DD_FLUSH_TO_LOG` を `"true"` に設定します。
+    ```json
+    {
+      "version": "2.0",
+      "app_name": "hello-chalice",
+      "stages": {
+        "dev": {
+          "api_gateway_stage": "api",
+          "environment_variables": {
+            "DD_TRACE_ENABLED": "true",
+            "DD_FLUSH_TO_LOG": "true"
+          }
+        }
+      }
+    }
+    ```
+1. `requirements.txt` に `datadog_lambda` を追加します。
+1. `app.py` の[ミドルウェア][1]として `datadog_lambda_wrapper` を登録します。
+    ```python
+    from chalice import Chalice, ConvertToMiddleware
+    from datadog_lambda.wrapper import datadog_lambda_wrapper
+
+    app = Chalice(app_name='hello-chalice')
+
+    app.register_middleware(ConvertToMiddleware(datadog_lambda_wrapper))
+
+    @app.route('/')
+    def index():
+        return {'hello': 'world'}
+    ```
+1. Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][2]に追加します。
+
+### Datadog Forwarder をロググループにサブスクライブ
+
+メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに対して Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
+
+1. [まだの場合は、Datadog Forwarder をインストールします][3]。
+2. [Datadog Forwarder を関数のロググループにサブスクライブします][4]。
+
+
+[1]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+{{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
 <div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>

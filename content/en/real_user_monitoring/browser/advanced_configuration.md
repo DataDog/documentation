@@ -18,14 +18,12 @@ further_reading:
       text: 'Tracking custom user actions'
 ---
 
-## Initialization
-
-Find below the different initialization options available with the [Datadog Browser SDK][1].
-
-### Scrub sensitive data from your RUM data
-If your RUM data contains sensitive information that need redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize RUM.
+## Control sensitive RUM data
+If your RUM data contains sensitive information that need redacting, configure the Browser SDK to redact sensitive sequences, or to discard selected RUM events, by using the `beforeSend` callback when you initialize RUM.
 
 This callback function gives you access to every event collected by the RUM SDK before they get sent to Datadog.
+
+### Modify the content of a RUM event
 
 For example, redact email addresses from your web application URLs:
 
@@ -89,9 +87,67 @@ You can update the following event properties:
 |   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
 |   `resource.url`        |   String  |   The resource URL.                                                                                 |
 
-**Note**: The RUM SDK will ignore modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][2].
+**Note**: The RUM SDK will ignore modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][1].
 
-### Identify user sessions
+### Discard a RUM event
+
+With the `beforeSend` API, discard a RUM event by returning `false`:
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    beforeSend: (event) => {
+        if (shouldDiscard(event)) {
+            return false
+        }
+        ...
+    },
+    ...
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            if (shouldDiscard(event)) {
+                return false
+            },
+            ...
+        },
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+        ...,
+        beforeSend: (event) => {
+            if (shouldDiscard(event)) {
+                return false
+            }
+            ...
+        },
+        ...
+    });
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Identify user sessions
 Adding user information to your RUM sessions makes it easy to:
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
@@ -107,6 +163,8 @@ The following attributes are **optional** but it is recommended to provide **at 
 | usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | usr.email | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
+**Note**: Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
+
 To identify user sessions, use the `setUser` API:
 
 {{< tabs >}}
@@ -115,7 +173,9 @@ To identify user sessions, use the `setUser` API:
 datadogRum.setUser({
     id: '1234',
     name: 'John Doe',
-    email: 'john@doe.com'
+    email: 'john@doe.com',
+    plan: 'premium',
+    ...
 })
 ```
 
@@ -126,7 +186,9 @@ DD_RUM.onReady(function() {
     DD_RUM.setUser({
         id: '1234',
         name: 'John Doe',
-        email: 'john@doe.com'
+        email: 'john@doe.com',
+        plan: 'premium',
+        ...
     })
 })
 ```
@@ -137,14 +199,43 @@ DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.setUser({
     id: '1234',
     name: 'John Doe',
-    email: 'john@doe.com'
+    email: 'john@doe.com',
+    plan: 'premium',
+    ...
 })
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Sampling
+### Remove the user identification
+
+Clear a previously set user with the `removeUser` API. All RUM events collected afterwards will not contain user information.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.removeUser()
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.removeUser()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.removeUser()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Sampling
 
 By default, no sampling is applied on the number of collected sessions. To apply a relative sampling (in percent) to the number of sessions collected, use the `sampleRate` parameter when initializing RUM. The following example collects only 90% of all sessions on a given RUM application:
 
@@ -197,10 +288,9 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: For a sampled out session, all page views and associated telemetry for that session aren't collected.
+**Note**: For a sampled out session, all page views and associated telemetry for that session are not collected.
 
-## API available
-
+## Global context
 ### Add global context
 
 Once Real User Monitoring (RUM) is initialized, add extra context to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
@@ -251,7 +341,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][3] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
 
 ### Replace global context
 
@@ -302,7 +392,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][3] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
 
 ### Read global context
 
@@ -341,6 +431,5 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/browser-sdk
-[2]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum-core/src/rumEvent.types.ts
-[3]: /logs/processing/attributes_naming_convention/#user-related-attributes
+[1]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
+[2]: /logs/processing/attributes_naming_convention/#user-related-attributes

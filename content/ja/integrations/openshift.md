@@ -70,7 +70,6 @@ agents:
 {{% /tab %}}
 {{% tab "Daemonset" %}}
 
-
 ニーズとクラスターの[セキュリティ制約][1]に応じて、次の 3 つのデプロイシナリオがサポートされます。
 
 - [制限付き SCC オペレーション](#restricted-scc-operations)
@@ -78,21 +77,22 @@ agents:
 - [すべての機能に使用できるカスタム Datadog SCC](#custom-datadog-scc-for-all-features)
 
 | Security Context Constraints   | [制限付き](#restricted-scc-operations) | [ホストネットワーク](#host) | [カスタム](#custom-datadog-scc-for-all-features) |
-| ------------------------------ | ---------------------------------------- | -------------------------------------------- | ---------------------------------------------- |
-| Kubernetes レイヤーの監視    | ✅                                       | ✅                                           | ✅                                             |
-| Kubernetes ベースのオートディスカバリー | ✅                                       | ✅                                           | ✅                                             |
-| DogStatsD インテーク               | 🔶                                       | ✅                                           | ✅                                             |
-| APM トレースインテーク               | 🔶                                       | ✅                                           | ✅                                             |
-| ログネットワークインテーク            | 🔶                                       | ✅                                           | ✅                                             |
-| ホストネットワークのメトリクス           | ❌                                       | ❌                                           | ✅                                             |
-| Docker レイヤーの監視        | ❌                                       | ❌                                           | ✅                                             |
-| コンテナログの収集      | ❌                                       | ❌                                           | ✅                                             |
-| ライブコンテナモニタリング      | ❌                                       | ❌                                           | ✅                                             |
-| ライブプロセスモニタリング        | ❌                                       | ❌                                           | ✅                                             |
+|--------------------------------|------------------------------------------|-----------------------|------------------------------------------------|
+| Kubernetes レイヤーの監視    | サポート                                | サポート             | サポート                                             |
+| Kubernetes ベースのオートディスカバリー | サポート                                | サポート             | サポート                                             |
+| DogStatsD インテーク               | サポート対象外                            | サポート             | サポート                                             |
+| APM トレースインテーク               | サポート対象外                            | サポート             | サポート                                             |
+| ログネットワークインテーク            | サポート対象外                            | サポート             | サポート                                             |
+| ホストネットワークのメトリクス           | サポート対象外                            | サポート             | サポート                                             |
+| Docker レイヤーの監視        | サポート対象外                            | サポート対象外         | サポート                                             |
+| コンテナログの収集      | サポート対象外                            | サポート対象外         | サポート                                             |
+| ライブコンテナモニタリング      | サポート対象外                            | サポート対象外         | サポート                                             |
+| ライブプロセスモニタリング        | サポート対象外                            | サポート対象外         | サポート                                             |
 
 <div class="alert alert-warning">
 <bold>OpenShift 4.0+</bold>: OpenShift インストーラーを、サポート対象のクラウドプロバイダーで使用した場合は、ホストタグとエイリアスを取得するために、<code>datadog.yaml</code>コンフィギュレーションファイルに <code>hostNetwork: true</code> を定義して Agent をデプロイする必要があります。定義しないと、ポッドのネットワークからメタデータサーバーへのアクセスが制限されます。
 </div>
+
 [1]: https://docs.openshift.com/enterprise/3.0/admin_guide/manage_scc.html
 {{% /tab %}}
 {{< /tabs >}} 
@@ -125,7 +125,7 @@ ports:
 
 #### すべての機能に使用できるカスタム Datadog SCC
 
-SELinux が permissive モードか、無効になっている場合、すべての機能を使用するには `hostaccess` SCC を有効にする必要があります。 
+SELinux が permissive モードか、無効になっている場合、すべての機能を使用するには `hostaccess` SCC を有効にする必要があります。
 SELinux が enforcing モードの場合は、datadog-agent ポッドに [`spc_t` タイプ][7]を付与することをお勧めします。[こちらの datadog-agent SCC][8] を使用して Agent をデプロイしてください。[datadog-agent サービスアカウントを作成][5]した後でも、この SCC を適用できます。これにより、以下のアクセス許可が付与されます。
 
 - `allowHostPorts: true`: Dogstatsd / APM / ログインテークの、ノード IP へのバインドを許可します。
@@ -173,7 +173,7 @@ OpenShift チェックには、サービスのチェック機能は含まれま�
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/kubernetes_apiserver.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
 [6]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/agent-kubelet-only.yaml

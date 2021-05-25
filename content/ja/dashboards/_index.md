@@ -14,11 +14,14 @@ further_reading:
   - link: /dashboards/template_variables/
     tag: ドキュメント
     text: テンプレート変数を使用してダッシュボードを強化
+  - link: 'https://www.datadoghq.com/blog/template-variable-associated-values/'
+    tag: ブログ
+    text: 関連するテンプレート変数を使用してダッシュボードを調整
   - link: /dashboards/sharing/
     tag: ドキュメント
     text: Datadogの外部でグラフを共有
   - link: /dashboards/widgets/
-    tag: ドキュメント
+    tag: Documentation
     text: ダッシュボードで利用可能なすべてのウィジェット
   - link: '/mobile/#dashboards'
     tag: Documentation

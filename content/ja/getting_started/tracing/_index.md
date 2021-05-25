@@ -36,9 +36,37 @@ vagrant ssh
 
 [Datadog API キー][7]を付加した [1 行のインストールコマンド][6]を使用して、Datadog Host Agent をインストールします。
 
+{{< site-region region="us" >}}
+
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="ddog-gov.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="us3.datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
 
 ### 検証
 

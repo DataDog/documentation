@@ -12,6 +12,12 @@ Pour des raisons de sécurité, vous devez avoir une session valide pour chaque 
 
 2. **SAML Strict** : si votre organisation a activé le mode [SAML Strict][1], vous devez vous connecter via l'authentification SAML. Vous devez vous réauthentifier à chaque fois que vous changez d'organisation. Comme les sessions des fournisseurs d'identité restent actives, il s'agit souvent d'une redirection.
 
+## Réinitialisation des mots de passe pour les utilisateurs multi-org
+
+Les organisations partagent un mot de passe pour chaque utilisateur multi-org. Si vous réinitialisez votre mot de passe, le changement s'applique à toutes les organisations auxquelles vous appartenez.
+
+Veuillez noter qu'il n'est pas possible d'utiliser deux fois le même mot de passe.
+
 ## Dépannage
 
 Si vous rencontrez un problème qui vous empêche de vous connecter, procédez comme suit :

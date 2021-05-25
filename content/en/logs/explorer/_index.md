@@ -32,12 +32,12 @@ further_reading:
 The **Log Explorer** is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][1], or land here from any other context like monitor notifications or dashboard widgets, the Log Explorer is designed to iteratively:
 
 1. [**Filter**](#filters-logs) logs; to narrow down, broaden, or shift your focus on the subset of logs of current interest.
-2. [**Aggregate**](#aggregations-and-measures) queried logs into higher-level entities in order to derive or consolidate information.
-3. [**Visualize**](#visualizations) the outcome of filters and aggregations to put your logs into the right perspective and bubble up decisive information.
+2. [**Aggregate**](#aggregate-and-measure) queried logs into higher-level entities in order to derive or consolidate information.
+3. [**Visualize**](#visualize) the outcome of filters and aggregations to put your logs into the right perspective and bubble up decisive information.
 
 At any moment, [**Export**](#export) your Log Explorer view to reuse it later or in different contexts.
 
-## Filters Logs
+## Filters logs
 
 The search filter consists of a timerange and a search query mixing `key:value` and full-text search. Refer to our [log search syntax][2] and [timerange][3] documentation for details on advanced use cases. For example, the search query `service:payment status:error rejected` over a `Past 5 minutes` timerange:
 
@@ -57,7 +57,7 @@ Logs can be valuable as individual events, but sometimes valuable information li
 
 ### Fields
 
-With the field aggregation, all logs matching the query filter are aggregated into groups based on the value of a log facet. On top of these aggregates, you can extract the following measures:
+With fields aggregation, all logs matching the query filter are aggregated into groups based on the value of one or multiple log facets. On top of these aggregates, you can extract the following measures:
 
 - **count of logs** per group
 - **unique count** of coded values for a facet per group
@@ -65,7 +65,7 @@ With the field aggregation, all logs matching the query filter are aggregated in
 
 **Note**: Individual logs having multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-Groups support the [Timeseries](#timeseries), [Toplist](#toplist) and [Table](#table) visualizations.
+Fields aggregation supports one dimension for the [Table](#table) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Toplist](#toplist) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension. 
 
 ### Patterns
 
@@ -159,7 +159,6 @@ For example, the following Toplist shows the **top 15 Customers** on a merchant 
 
 Visualize the top values from a [facet][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update a search query or drill through logs corresponding to either dimension.
 
-- When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 - When there are multiple measures, the top or bottom list is determined according to the first measure.
 - The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
@@ -196,4 +195,3 @@ At any moment, and depending on your current aggregation, **export** your explor
 [8]: /dashboards/
 [9]: /monitors/monitor_types/log/
 [10]: /integrations/#cat-notification
-[11]: /logs/explorer/watchdog-insights

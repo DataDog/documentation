@@ -27,53 +27,148 @@ API を実行するには[![Postmanで実行][3]](https://app.getpostman.com/run
 
 デフォルトでは、Datadog API Docs には cURL で例が示されています。各エンドポイントの公式[クライアントライブラリ][3]言語から 1 つを選択すると、選択したライブラリのコード例を閲覧できます。各ライブラリをインストールするには、
 
-{{< programming-lang-wrapper langs="java,python,ruby,go" >}}
+{{< programming-lang-wrapper langs="java,python,python-beta,ruby,ruby-beta,go" >}}
 
 {{< programming-lang lang="java" >}}
+#### インストール
 Maven - この依存関係をプロジェクトの POM に追加します。
- ```java
+```xml
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-api-client</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
- ```
+```
 
- Gradle - この依存関係をプロジェクトのビルドファイルに追加します。
- ```java
+Gradle - この依存関係をプロジェクトのビルドファイルに追加します。
+```gradle
 compile "com.datadoghq:datadog-api-client:1.0.0"
- ```
+```
+
+#### 使用方法
+
+```java
+import com.datadog.api.<VERSION>.client.ApiClient;
+import com.datadog.api.<VERSION>.client.ApiException;
+import com.datadog.api.<VERSION>.client.Configuration;
+import com.datadog.api.v2.client.auth.*;
+import com.datadog.api.v2.client.model.*;
+import com.datadog.api.<VERSION>.client.api.*;
+```
+**注**: 使用するエンドポイントに応じて、`<VERSION>` を v1 または v2 に置き換えてください。
+
+#### 例
+
+例を実行するための Maven `pom.xml`:
+```xml
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>example</artifactId>
+  <version>1</version>
+  <dependencies>
+    <dependency>
+      <groupId>com.datadoghq</groupId>
+      <artifactId>datadog-api-client</artifactId>
+      <version>1.0.0-beta.9</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
+```
+`CLASSPATH` 変数がすべての依存関係を含むことを確認してください。
+
+```sh
+export CLASSPATH=$(mvn -q exec:exec -Dexec.executable=echo -Dexec.args="%classpath")
+```
+
+例を実行するための Gradle `build.gradle`:
+```gradle
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.datadoghq:datadog-api-client:1.0.0-beta.9'
+}
+
+application {
+    mainClassName = 'Example.java'
+}
+```
+`gradle run` コマンドで例を実行します。
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
- ```python
+#### インストール
+```sh
 pip install datadog
- ```
+```
+#### 使用方法
+```python
+import datadog
+```
+{{< /programming-lang >}}
 
+{{< programming-lang lang="python-beta" >}}
+#### インストール
+```console
+pip3 install datadog-api-client --pre
+```
+#### 使用方法
+```python
+import datadog_api_client
+```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
- ```ruby
+#### インストール
+```sh
 gem install dogapi
- ```
+```
+#### 使用方法
+```ruby
+require 'dogapi'
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby-beta" >}}
+#### インストール
+```sh
+gem install datadog_api_client -v 1.0.0.beta.2 --pre
+```
+#### 使用方法
+```ruby
+require 'datadog_api_client'
+```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
- ```go
+#### インストール
+```sh
+go get github.com/DataDog/datadog-api-client-go
+```
+#### 使用方法
+```go
 import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
- ```
- **注**: 使用されるエンドポイントに応じて、`<VERSION>` を v1 または v2 に置き換えてください。
+```
+ **注**: 使用するエンドポイントに応じて、`<VERSION>` を v1 または v2 に置き換えてください。
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
 または、ライブラリディテクトリを参照します。
 
-{{< partial name="api/sdk-languages.html" >}} 
+{{< partial name="api/sdk-languages.html" >}}
 </br>
-代わりにアプリケーションの使用をご希望の場合は、一般向けの [「はじめに」ドキュメント][7]をご確認ください。
+アプリケーションを使用して開始する場合は、一般向けの[「はじめに」ドキュメント][7]をご覧ください。
 
 ## その他の参考資料
 

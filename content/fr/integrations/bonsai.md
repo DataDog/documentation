@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md'
 display_name: Bonsai
+draft: false
 git_integration_title: bonsai
 guid: 3c3a1e28-7fd3-443e-a3e1-0c223326a572
 integration_id: bonsai
@@ -38,7 +40,7 @@ Suivez les métriques associées aux requêtes de vos clusters Bonsai pour :
 
 ![snapshot][1]
 
-## Implémentation
+## Configuration
 
 Pour intégrer votre cluster à Datadog, vous devez envoyer votre clé d'API à l'application Bonsai.
 

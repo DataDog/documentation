@@ -79,9 +79,9 @@ For more information, see the [Secrets Management][20] documentation.
 [3]: /api/
 [4]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=d1402d39517b9f8888abfc98d6936dab
 [5]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=3e8510ce571008616b42bd67916e83f8
-[6]: https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
-[7]: https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-[8]: https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+[6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+[7]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+[8]: https://keys.datadoghq.com/DATADOG_RPM_KEY.public
 [9]: /agent/faq/network/
 [10]: /agent/proxy/
 [11]: /agent/troubleshooting/

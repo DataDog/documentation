@@ -10,51 +10,61 @@ further_reading:
 
 <div class="alert alert-warning"> L'extension AWS Lambda Datadog est disponible sous forme de préversion publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
 
-Les extensions AWS Lambda sont des processus complémentaires qui permettent d'enrichir vos fonctions Lambda. Elles s'exécutent dans l'environnement d'exécution Lambda, avec le code de votre fonction Lambda. L'extension Datadog est une version plus légère de l'Agent Datadog, conçue pour s'exécuter en même temps que votre code avec un impact minimal sur les performances.
+Les extensions AWS Lambda sont des processus complémentaires qui permettent d'enrichir vos fonctions Lambda. Elles s'exécutent dans l'environnement d'exécution Lambda, avec le code de votre fonction Lambda. L'extension Datadog est une version plus légère de l'Agent Datadog, conçue pour s'exécuter en même temps que votre code avec un impact minimal sur les performances.
 
 L'extension Datadog prend en charge l'envoi de métriques custom et de logs [de manière synchrone][1] pendant l'exécution de votre fonction AWS Lambda. Cela signifie que vous pouvez envoyer une partie de vos données de télémétrie sans passer par le [Forwarder Datadog][2]. **Remarque** : le Forwarder Datadog reste nécessaire pour envoyer des traces à Datadog.
 
 ## Configuration
 
-L'extension Datadog est distribuée sous forme de couche Lambda autonome (distincte de la [bibliothèque Lambda Datadog][3]) et prend en charge les runtimes Node.js et Python.
+L'extension Datadog prend actuellement en charge les runtimes Node.js et Python.
 
-1. Instrumentez votre application [Python][4] ou [Node.js][5].
+### En tant que couche Lambda
 
-2. Ajoutez la couche Lambda pour l'extension Datadog à votre fonction AWS Lambda :
+L'extension Lambda Datadog est distribuée sous forme de couche Lambda autonome (distincte de la [bibliothèque Lambda Datadog][3]).
 
-    ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:5
-    ```
+1. Instrumentez votre application [Python][4] ou [Node.js][5] en installant la bibliothèque Lambda Datadog.
 
-    Remplacez le paramètre fictif `AWS_REGION` dans l'ARN de la couche Lambda par les valeurs adéquates.
-
-3. Si vous utilisez Node.js ou Python, ajoutez la couche Lambda pour la [bibliothèque Datadog][7] à votre fonction AWS Lambda :
+2. Ajoutez la couche Lambda pour l'extension Datadog à votre fonction Lambda AWS avec l'ARN suivant :
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<VERSION_NUMBER>
     ```
 
-    Les options de `RUNTIME` disponibles sont `Node10-x`, `Node12-x`, `Python37` et `Python38`. Pour `VERSION`, consultez la dernière version de [Node.js][8] ou [Python][9].
+    Remplacez les valeurs fictives de l'ARN comme suit :
+    - Remplacez `<AWS_REGION>` par la même région AWS que votre fonction Lambda, par exemple `us-east-1`.
+    - Remplacez `<VERSION_NUMBER>` par la version de l'extension Lambda Datadog que vous souhaitez utiliser `7`. Pour vérifier la version actuellement utilisée, consultez les derniers tags d'image du [référentiel Amazon ECR][6].
 
-4. Reportez-vous à l'[exemple de code][10] pour envoyer une métrique custom.
+    **Remarque** : cette couche fonctionne indépendamment de la couche Lambda Datadog. Si vous avez installé la bibliothèque Lambda Datadog en tant que couche Lambda,
+    deux couches Lambda sont désormais associées à votre fonction.
 
-### Collecte de logs
+3. Consultez l'[exemple de code][7] pour découvrir comment envoyer une métrique custom.
 
-Pour envoyer vos logs Lambda AWS à Datadog à l'aide de l'extension, définissez la variable d'environnement `DD_LOGS_ENABLED` sur `true` dans votre fonction. Cela générera en outre des [métriques Datadog optimisées][11].
+### En tant qu'image de conteneur
+
+Si votre fonction est déployée en tant qu'image de conteneur, vous ne pouvez pas ajouter de couche Lambda à votre fonction. Vous devez à la place installer directement la bibliothèque Lambda Datadog et l'extension Lambda Datadog dans l'image de votre fonction.
+
+Commencez par suivre les instructions d'installation pour [Node.js][5] or [Python][4] afin d'installer la bibliothèque Lambda Datadog. Référez-vous aux instructions concernant les fonctions déployées en tant qu'images de conteneur.
+
+Ajoutez ensuite l'extension Lambda Datadog à l'image de votre conteneur en indiquant ce qui suit dans votre Dockerfile :
+
+```
+COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+```
+
+Remplacez `<TAG>` par un numéro de version spécifique (par exemple, `7`) ou par `latest`. Accédez au [référentiel Amazon ECR][6] pour consulter la liste complète des tags disponibles.
+
+## Collecte de logs
+
+Pour envoyer vos logs AWS Lambda à Datadog à l'aide de l'extension, définissez la variable d'environnement `DD_LOGS_ENABLED` sur `true` dans votre fonction.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /fr/serverless/custom_metrics?tab=python#synchronous-vs-asynchronous-custom-metrics
 [2]: /fr/serverless/forwarder
 [3]: /fr/serverless/datadog_lambda_library
 [4]: /fr/serverless/installation/python
 [5]: /fr/serverless/installation/nodejs
-[6]: /fr/serverless/installation/go
-[7]: https://docs.datadoghq.com/fr/serverless/datadog_lambda_library
-[8]: https://github.com/DataDog/datadog-lambda-js/releases
-[9]: https://github.com/DataDog/datadog-lambda-python/releases
-[10]: /fr/serverless/custom_metrics#custom-metrics-sample-code
-[11]: /fr/serverless/enhanced_lambda_metrics
+[6]: https://gallery.ecr.aws/datadog/lambda-extension
+[7]: /fr/serverless/custom_metrics#custom-metrics-sample-code

@@ -16,7 +16,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: /logs/explorer/analytics/
+  - link: '/logs/explorer/#visualiser-les-donnees'
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -409,7 +409,7 @@ Dans la matrice `Serilog.WriteTo`, ajoutez une entrée pour `DatadogLogs`. Voici
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /fr/logs/#reserved-attributes
+[3]: /fr/logs/processing/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 

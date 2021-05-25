@@ -25,7 +25,7 @@ Pour configurer l'Agent de cluster Datadog sur votre cluster Kubernetes, suivez 
 
 ## Configurer l'Agent de cluster Datadog
 
-### Étape 1 : Configurer les autorisations RBAC
+### Configurer les autorisations RBAC
 
 L'Agent de cluster Datadog a besoin des autorisations RBAC adéquates pour fonctionner :
 
@@ -42,7 +42,7 @@ L'Agent de cluster Datadog a besoin des autorisations RBAC adéquates pour fonct
 
 Si vous utilisez Azure Kubernetes Service (AKS), vous aurez besoin de permissions supplémentaires. Consultez la FAQ dédiée pour les [RBAC sur AKS][3] pour le DCA.
 
-### Étape 2 : Sécuriser les communications entre l'Agent de cluster et l'Agent
+### Sécuriser les communications entre l'Agent de cluster et l'Agent
 
 Utilisez l'une des options suivantes pour sécuriser les communications entre l'Agent Datadog et l'Agent de cluster Datadog.
 
@@ -55,7 +55,7 @@ Si vous définissez la valeur sans utiliser de secret, le token est alors lisibl
 {{< tabs >}}
 {{% tab "Secret" %}}
 
-1. Exécutez la commande suivante pour créer un token de secret :
+1. Exécutez la commande suivante pour créer un token de secret. Votre token doit comporter au moins 32 caractères.
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -77,7 +77,7 @@ Si vous définissez la valeur sans utiliser de secret, le token est alors lisibl
 {{% /tab %}}
 {{% tab "Variable d'environnement" %}}
 
-1. Exécutez la commande suivante pour créer un token de secret :
+1. Exécutez la commande suivante pour créer un token de secret. Votre token doit comporter au moins 32 caractères.
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -93,7 +93,7 @@ Si vous définissez la valeur sans utiliser de secret, le token est alors lisibl
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-1. Exécutez la commande suivante pour créer un token de secret :
+1. Exécutez la commande suivante pour créer un token de secret. Votre token doit comporter au moins 32 caractères.
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -110,7 +110,7 @@ Si vous définissez la valeur sans utiliser de secret, le token est alors lisibl
 
 **Remarque** : cela doit être défini dans le manifeste de l'Agent de cluster **et** celui de l'Agent de nœud.
 
-### Étape 3 : Créer l'Agent de cluster et son service
+### Créer l'Agent de cluster et son service
 
 1. Téléchargez les manifestes suivants :
 
@@ -131,7 +131,9 @@ Si vous définissez la valeur sans utiliser de secret, le token est alors lisibl
 6. Exécutez : `kubectl apply -f install_info-configmap.yaml`
 6. Enfin, déployez l'Agent de cluster Datadog : `kubectl apply -f cluster-agent-deployment.yaml`
 
-### Étape 4 : Vérification
+**Remarque** : dans votre Agent de cluster Datadog, définissez `<DD_SITE>` sur votre site Datadog : {{< region-param key="dd_site" code="true" >}}. Valeur par défaut : `datadoghq.com`.
+
+### Vérification
 
 À ce stade, vous devriez voir ce qui suit :
 
@@ -156,7 +158,7 @@ NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-**Remarque** : si l'Agent Datadog s'exécute déjà, vous devrez peut-être appliquer le [manifeste agent-rbac.yaml](#etape-1-configurer-les-autorisations-rbac-des-agents-de-nœud) pour que l'Agent de cluster puisse s'exécuter.
+**Remarque** : si l'Agent Datadog est déjà exécuté, vous devrez peut-être appliquer le [manifeste agent-rbac.yaml](#etape-1-configurer-les-autorisations-rbac) pour que l'Agent de cluster puisse s'exécuter.
 
 ## Configurer l'Agent Datadog
 
@@ -164,17 +166,17 @@ Une fois l'Agent de cluster Datadog configuré, configurez votre Agent Datadog d
 
 ### Configuration
 
-#### Étape 1 : Configurer les autorisations RBAC des Agents de nœud
+#### Configurer les autorisations RBAC des Agents basés sur des nœuds
 
 1. Téléchargez le [manifeste agent-rbac.yaml][9]. **Remarque** : lorsque vous utilisez l'Agent de cluster, vos Agents de nœud ne peuvent pas interagir avec le serveur d'API Kubernetes ; seul l'Agent de cluster peut le faire.
 
 2. Exécutez : `kubectl apply -f agent-rbac.yaml`
 
-#### Étape 2 : Activer l'Agent Datadog
+#### Activer l'Agent Datadog
 
 1. Téléchargez le [manifeste daemonset.yaml][10].
 
-3. Dans le manifeste `daemonset.yaml`, remplacez `<DD_SITE>` par le site Datadog que vous utilisez, p. ex. `datadoghq.com` ou `datadoghq.eu`. Cette valeur correspond par défaut à `datadoghq.com`.
+3. Dans le manifeste `daemonset.yaml`, remplacez `<DD_SITE>` par votre site Datadog : `{{< region-param key="dd_site">}}`. Valeur par défaut : `datadoghq.com`.
 
 4. Dans le manifeste `daemonset.yaml`, définissez le token conformément à la section [Étape 2 : Sécuriser les communications entre l'Agent de cluster et l'Agent](#etape-2-securiser-les-communications-entre-l-agent-de-cluster-et-l-agent). Le format dépend de la façon dont vous configurez votre secret ; les instructions se trouvent directement dans le manifeste.
 
@@ -207,6 +209,30 @@ datadog-cluster-agent-8568545574-x9tc9   1/1       Running   0          2h
 ```
 
 La transmission des événements Kubernetes à votre compte Datadog commence alors. Les métriques pertinentes recueillies par vos Agents se voient assignées le tag correspondant dans les métadonnées de cluster.
+
+#### Surveillance des services AWS gérés
+
+Pour surveiller un service AWS géré comme MSK, ElastiCache ou RDS, créez un pod avec un rôle IAM attribué via la serviceAccountAnnotation dans le chart Helm.
+
+{{< code-block lang="yaml" >}}
+clusterChecksRunner:
+  enabled: true
+  rbac:
+    # clusterChecksRunner.rbac.create -- Si true, créer et utiliser des ressources RBAC
+    create: true
+    dedicated: true
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::***************:role/ROLE-NAME-WITH-MSK-READONLY-POLICY
+clusterAgent:
+  confd:
+    amazon_msk.yaml: |-
+      cluster_check: true
+      instances:
+        - cluster_arn: arn:aws:kafka:us-west-2:*************:cluster/gen-kafka/*******-8e12-4fde-a5ce-******-3
+          region_name: us-west-2
+{{< /code-block >}}
+
+
 
 ## Pour aller plus loin
 

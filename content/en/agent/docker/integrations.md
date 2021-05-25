@@ -226,8 +226,8 @@ This looks like a minimal [Redis integration configuration][1], but notice the `
 
 If your Redis requires an additional `password` when accessing its stats endpoint:
 
-1. Create the folders `conf.d/` and `conf.d/redis.d` on your host.
-2. Add the custom auto-configuration below to `conf.d/redis.d/conf.yaml` on your host.
+1. Create the folders `conf.d/` and `conf.d/redisdb.d` on your host.
+2. Add the custom auto-configuration below to `conf.d/redisdb.d/conf.yaml` on your host.
 3. Mount the host `conf.d/` folder to the containerized Agent `conf.d/` folder.
 
 ```yaml

@@ -228,7 +228,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [20]: /integrations/python/
 [21]: /logs/processing/processors/?tab=ui#arithmetic-processor
 [22]: /logs/explorer/saved_views/
-[23]: /logs/processing/#reserved-attributes
+[23]: /logs/processing/attributes_naming_convention/#reserved-attributes
 [24]: /logs/processing/attributes_naming_convention/
 [25]: /logs/indexes/#indexes
 [26]: /logs/archives/rehydrating/

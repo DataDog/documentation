@@ -1,11 +1,12 @@
 {{ $announce := .Site.Params.announcement_banner }}
 {{ if not (in (slice "dg" "landing-page" "tshirt" "apm" "legal" "event" "webinar" "summit") .Type) }}
-<div class="announcement_banner text-center">
-    <a href="{{$announce.link}}">
-        <span class="d-none d-md-block">
+<div class="announcement_banner open text-center">
+<!-- default announcement banner -->
+    <a class="font-weight-semibold text-nowrap" href="{{$announce.link}}">
+        <span class="d-none d-md-block banner-title-desktop">
             {{ $announce.desktop_message | safeHTML }}
         </span>
-        <span class="d-block d-md-none">
+        <span class="d-block d-md-none banner-title-mobile">
             {{ if $announce.mobile_message }}
                 {{ $announce.mobile_message | safeHTML }}
             {{ else }}
@@ -13,15 +14,5 @@
             {{ end}}
         </span>
     </a>
-    <i class="icon icon-small-x pull-right"></i>
-</div>
-<script>
-    var announcement_banner;
-    announcement_banner = sessionStorage.getItem('announcement_banner');
-    if (announcement_banner !== 'closed') {
-        document.getElementsByClassName('announcement_banner')[0].classList.add('open');
-    } else {
-        document.querySelector('html').classList.remove('banner');
-    }
-</script>
+ </div>
 {{ end }}

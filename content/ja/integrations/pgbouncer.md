@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    pgbouncer: assets/dashboards/pgbouncer_dashboard.json
   logs:
     source: pgbouncer
   metrics_metadata: metadata.csv
@@ -10,6 +11,7 @@ assets:
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     instance_overview: assets/saved_views/instance_overview.json
+    pgbouncer_processes: assets/saved_views/pgbouncer_processes.json
     user_overview: assets/saved_views/user_overview.json
   service_checks: assets/service_checks.json
 categories:
@@ -89,7 +91,9 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
      - database_url: "postgresql://datadog:<PASSWORD>@<HOSTNAME>:<PORT>/<DATABASE_URL>?sslmode=require"
    ```
 
-2. [Agent を再起動します][3]。
+  **注**: PgBouncer のインスタンスに SSL サポートがない場合は、`sslmode=require` を `sslmode=allow` と置換してサーバーエラーを防ぎます。SSL サポートに関する詳細は、[Postgres ドキュメント][3]を参照してください。
+
+2. [Agent を再起動します][4]。
 
 ##### ログの収集
 
@@ -113,12 +117,13 @@ _Agent バージョン 6.0 以降で利用可能_
 
     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル pgbouncer.d/conf.yaml][2] を参照してください。
 
-3. [Agent を再起動します][4]。
+3. [Agent を再起動します][5]。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/datadog_checks/pgbouncer/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://www.postgresql.org/docs/9.1/libpq-ssl.html
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
 {{% tab "Containerized" %}}
 

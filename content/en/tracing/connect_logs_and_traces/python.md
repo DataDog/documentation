@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/request-log-correlation/"
   tag: "Blog"
   text: "Correlate request logs with traces automatically"
+- link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+  tag: 'Guide'
+  text: 'Ease troubleshooting with cross product correlation.'
 ---
 
 ## Automatically Inject Trace and Span IDs
@@ -92,7 +95,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 ```text
 >>> traced_func()
-{"event": "In tracer context", "dd": {"trace_id": 9982398928418628468, "span_id": 10130028953923355146, "env": "dev", "service": "hello", "version": "abc123"}}
+{"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
 ```
 
 **Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][4].

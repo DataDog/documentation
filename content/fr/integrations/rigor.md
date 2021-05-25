@@ -1,20 +1,22 @@
 ---
 "assets":
   "dashboards": {}
+  "metrics_metadata": metadata.csv
   "monitors": {}
   "service_checks": assets/service_checks.json
 "categories":
 - monitoring
-"creates_events": !!bool "true"
-"ddtype": "check"
+"creates_events": true
+"ddtype": "crawler"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md"
 "display_name": "Rigor"
+"draft": false
 "git_integration_title": "rigor"
 "guid": "f51704ed-a327-4132-9f04-a25a47791693"
 "integration_id": "rigor"
 "integration_title": "Rigor"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "integration"
 "maintainer": "support@rigor.com"
 "manifest_version": "1.0.0"
@@ -37,7 +39,7 @@ Rigor fournit des informations pour l'optimisation et la surveillance synthétiq
 
 Grâce à Rigor, vous pouvez collecter des métriques de performance synthétique frontales et les transmettre à Datadog. Vous pouvez également transmettre des alertes à Datadog sous forme d'événements.
 
-## Implémentation
+## Configuration
 
 Rigor propose deux intégrations différentes avec Datadog : une intégration pour les métriques et une pour les événements.
 

@@ -2,6 +2,9 @@
 title: Getting Started with Synthetic Monitoring
 kind: documentation
 further_reading:
+    - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+      tag: 'Learning Center'
+      text: 'Introduction to Synthetic Tests'
     - link: '/synthetics/browser_tests'
       tag: 'Documentation'
       text: 'Learn more about browser tests'
@@ -14,6 +17,7 @@ further_reading:
     - link: '/synthetics/settings/'
       tag: 'Documentation'
       text: 'Configure advanced Synthetic Monitoring settings'
+      
 ---
 
 ## Overview
@@ -36,14 +40,9 @@ If you haven't already, create a [Datadog account][2].
 - [Create a browser test][4]
 - [Create an API test][5]
 
-## Next steps
+## Further Reading
 
-{{< whatsnext desc="After you set up your first Synthetic test:">}}
-{{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}Learn more about browser tests{{< /nextlink >}}
-{{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}Learn more about API tests{{< /nextlink >}}
-{{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Create a browser subtest{{< /nextlink >}}
-{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetic Monitoring settings{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: https://www.datadoghq.com/

@@ -129,7 +129,7 @@ Using `version` tags within Datadog allows you to compare error rates, traces, a
 
 For example, you can see in the following image that a canary version was deployed, had a few errors, and was removed, with traces corresponding to that version available for investigation without any further impact.
 
-{{< img src="tracing/deployment_tracking/CanaryDeploy.png" alt="Canary Deployment"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/canarydeployment.png" alt="Canary Deployment"  style="width:100%;">}}
 
 ### Shadow deploys
 

@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     IBM Db2 Overview: assets/dashboards/overview.json
   logs:

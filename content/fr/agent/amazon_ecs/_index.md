@@ -87,9 +87,9 @@ Configurez la tâche à l'aide des [outils del 'interface de ligne de commande A
 aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs.json>
 ```
 
-[1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
-[2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
-[3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
+[1]: /resources/json/datadog-agent-ecs.json
+[2]: /resources/json/datadog-agent-ecs1.json
+[3]: /resources/json/datadog-agent-ecs-win.json
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: /fr/agent/amazon_ecs/logs/
 [6]: /fr/agent/amazon_ecs/apm/
@@ -109,6 +109,7 @@ aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs
 11. Pour le champ **Image**, saisissez `gcr.io/datadoghq/agent:latest`.
 12. Pour **Maximum memory**, indiquez `256`. **Remarque** : en cas d'utilisation intense des ressources, il se peut que vous ayez besoin de rehausser la limite de mémoire.
 13. Faites défiler jusqu'à atteindre la section **Advanced container configuration**, puis saisissez `10` pour **CPU units**.
+**Remarque** : pour Windows, pour **CPU units**, saisissez au moins `512`, afin d'éviter l'erreur `Timeout while starting the service`.
 14. Pour **Env Variables**, ajoutez la **clé** `DD_API_KEY` et indiquez votre clé d'API Datadog en valeur. *Si vous préférez stocker ce type de secrets dans S3, consultez [le guide de configuration d'ECS][1].*
 15. Ajoutez une variable d'environnement supplémentaire pour chaque tag à ajouter en utilisant la clé `DD_TAGS`.
 16. Faites défiler jusqu'à atteindre la section **Storage and Logging**.

@@ -3,7 +3,7 @@ title: Connect OpenTelemetry Traces and Logs
 kind: documentation
 description: 'Connect your application logs and OpenTelemetry traces to correlate them in Datadog'
 further_reading:
-- link: "/tracing/setup_overview/openstandards/"
+- link: "/tracing/setup_overview/open_standards/"
   tag: "Documentation"
   text: "Send OpenTelemetry Traces to Datadog"
 - link: "https://opentelemetry.io/docs/collector/"
@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
   text: "Datadog's partnership with OpenTelemetry"
+- link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+  tag: 'Guide'
+  text: 'Ease troubleshooting with cross product correlation.'
 ---
 
 Connecting OpenTelemetry language SDK logs and traces within Datadog is similar to connecting [Datadog SDK logs and traces][1], with a few additional steps:
@@ -236,12 +239,17 @@ logger.info("Example log line with trace correlation info")
 To manually correlate your traces with your logs, first enable the [openTelemetry-java-instrumentation Logger MDC Instrumentation][1]. Then, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses [Spring Boot and Logback][2]. For other logging libraries, it may be more appropriate to [modify the Datadog SDK examples][3]. 
 
 ```java
-String traceIdValue = Span.current().getSpanContext().getTraceIdAsHexString()
+String traceIdValue = Span.current().getSpanContext().getTraceId();
 String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
 long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
-String datadogTraceIdString = Long.toUnsignedString(datadogTraceId)
+String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
 
-logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{spanId} %n
+String spanIdValue = Span.current().getSpanContext().getSpanId();
+String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
+long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
+String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
+
+logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{datadogSpanIdString} %n
 ```
 
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
@@ -263,12 +271,58 @@ For trace and log correlation in PHP, modify the [Datadog SDK PHP examples][1] t
 
 {{< programming-lang lang="go" >}}
 
-For trace and log correlation in Go, modify the [Datadog SDK Go examples][1] to include the additional steps discussed above.
+To manually correlate your traces with your logs, patch the logging module you are using with a function that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses the [logrus Library][1]
+
+```go
+package main
+
+import (
+	"context"
+	log "github.com/sirupsen/logrus"
+	"go.opentelemetry.io/otel"
+	"strconv"
+)
+
+func main() {
+	ctx := context.Background()
+	tracer := otel.Tracer("example/main")
+	ctx, span := tracer.Start(ctx, "example")
+	defer span.End()
+
+	log.SetFormatter(&log.JSONFormatter{})
+
+	standardFields := log.Fields{
+		"dd.trace_id": convertTraceID(span.SpanContext().TraceID().String()),
+		"dd.span_id":  convertTraceID(span.SpanContext().SpanID().String()),
+		"dd.service":  "serviceName",
+		"dd.env":      "serviceEnv",
+		"dd.version":  "serviceVersion",
+	}
+
+	log.WithFields(standardFields).WithContext(ctx).Info("hello world")
+}
+
+func convertTraceID(id string) string {
+	if len(id) < 16 {
+		return ""
+	}
+	if len(id) > 16 {
+		id = id[16:]
+	}
+	intValue, err := strconv.ParseUint(id, 16, 64)
+	if err != nil {
+		return ""
+	}
+	return strconv.FormatUint(intValue, 10)
+}
+
+
+```
 
 [Contact Datadog support][2] with any questions.
 
 
-[1]: /tracing/connect_logs_and_traces/go/
+[1]: https://github.com/sirupsen/logrus
 [2]: /help/
 {{< /programming-lang >}}
 

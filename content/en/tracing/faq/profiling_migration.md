@@ -20,12 +20,12 @@ Benefits of switching to agent mode:
 
 Perform the following steps to migrate your service to send profiles directly through the Datadog Agent:
 
-1. Upgrade your Agent to version [7.20.2][1]+ or [6.20.2][1]+.
+1. Upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
-2. Upgrade the tracing library to [version 0.55][2]+ or run the following command to get the latest tracer version:
+2. Upgrade the tracing library to [version 0.55][3]+ or run the following command to get the latest tracer version:
 
     ```shell
-    wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
+    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
     ```
 
 3. Clear the `DD_PROFILING_API_KEY_FILE`, `DD_PROFILING_API_KEY`, `DD_API_KEY_FILE` or `DD_API_KEY` environment variables or equivalent system property flags. The API key files are deprecated as of version 0.55.
@@ -65,15 +65,16 @@ The following arguments and environment variables have been deprecated:
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[3]: https://app.datadoghq.com/apm/docs
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
 Perform the following steps to migrate your service to send profiles directly through the Datadog Agent:
 
-1. Upgrade your Agent to version [7.20.2][1]+ or [6.20.2][1]+.
+1. Upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
-2. Upgrade the tracing library to [version 0.39][2]+ or run the following command to get the latest tracer version:
+2. Upgrade the tracing library to [version 0.39][3]+ or run the following command to get the latest tracer version:
 
     ```shell
     pip install ddtrace
@@ -114,13 +115,14 @@ The following arguments and environment variables have been deprecated:
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[3]: https://app.datadoghq.com/apm/docs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
 Perform the following steps to migrate your service to send profiles directly through the Datadog Agent:
 
-1. Upgrade your Agent to version [7.20.2][1]+ or [6.20.2][1]+.
+1. Upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+.
 
 3. Clear the `DD_API_KEY` or `DD_PROFILING_API_KEY` environment variable. The API key files are deprecated as of version 0.55:
 
@@ -132,7 +134,7 @@ Perform the following steps to migrate your service to send profiles directly th
     unset DD_API_KEY
     ```
 
-2. Upgrade the tracing library to [version 1.25.0][2]+:
+2. Upgrade the tracing library to [version 1.25.0][3]+:
 
     ```shell
     go get gopkg.in/DataDog/dd-trace-go.v1
@@ -183,12 +185,13 @@ Deprecated code level Profiler configuration:
 
 | Method | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
-|  WithAPIKey      | String        | Deprecated in version 0.39. The Datadog [Datadog API key][2].                                                                             |
+|  WithAPIKey      | String        | Deprecated in version 0.39. The Datadog [Datadog API key][3].                                                                             |
 
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[3]: https://app.datadoghq.com/apm/docs
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

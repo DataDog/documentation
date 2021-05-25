@@ -2,17 +2,20 @@
 title: Synthetic モニタリングの概要
 kind: documentation
 further_reading:
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+    tag: ラーニングセンター
+    text: Synthetic テストの紹介
   - link: /synthetics/browser_tests
     tag: ドキュメント
     text: ブラウザテストについて
   - link: /synthetics/api_tests
     tag: ドキュメント
-    text: API テストについてより詳しく学ぶ
+    text: API テストについて
   - link: '/synthetics/browser_tests/#subtests'
     tag: ドキュメント
     text: ブラウザサブセットを作成
   - link: /synthetics/settings/
-    tag: ドキュメント
+    tag: Documentation
     text: 高度な Synthetic モニタリング設定を構成する
 ---
 ## 概要
@@ -35,14 +38,9 @@ Synthetic モニタリングをメトリクス、トレース、ログと紐付�
 - [ブラウザテストを作成][4]
 - [API テストを作成][5]
 
-## 次のステップ
+## その他の参考資料
 
-{{< whatsnext desc="Synthetic テストを作成した後は、以下のページを参照してください。">}}
-{{< nextlink href="/synthetics/browser_tests" tag="ドキュメント" >}}ブラウザテストの詳細はこちら{{< /nextlink >}}
-{{< nextlink href="/synthetics/api_tests" tag="ドキュメント" >}}API テストの詳細はこちら{{< /nextlink >}}
-{{< nextlink href="/synthetics/browser_tests/#subtests" tag="ドキュメント" >}}ブラウザのサブテストを作成する{{< /nextlink >}}
-{{< nextlink href="/synthetics/settings/" tag="ドキュメント" >}}高度な Synthetic 設定を構成する{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: https://www.datadoghq.com/

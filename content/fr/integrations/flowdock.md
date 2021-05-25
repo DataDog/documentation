@@ -1,6 +1,7 @@
 ---
 categories:
-  - Collaboration
+  - collaboration
+  - notification
 ddtype: crawler
 dependencies: []
 description: Envoyez des alertes et graphiques Datadog sur les flux de votre équipe.

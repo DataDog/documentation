@@ -9,8 +9,6 @@ source: okta
 title: Okta ユーザーが未承認アプリへのアクセスを試行
 type: security_rules
 ---
-## 概要
-
 ### 目標
 ユーザーのアプリへのアクセスが拒否されたことを検出します。
 

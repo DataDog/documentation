@@ -12,8 +12,6 @@ technique: T1110-brute-force
 title: Azure へのクレデンシャルスタッフィング攻撃
 type: security_rules
 ---
-## 概要
-
 ## 目標
 
 複数のユーザーアカウントにログイン試行アクティビティが記録されたときに、ネットワーク IP アドレスを検出し特定します。

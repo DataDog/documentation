@@ -84,7 +84,7 @@ import `dd-trace/init`;
 
 ### Adding the tracer via command line arguments
 
-Use the `--require` option to Node.js to load and initialize the tracer in once
+Use the `--require` option to Node.js to load and initialize the tracer in one
 step.
 
 ```sh
@@ -110,18 +110,23 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
 
-`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-```sh
-DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
-```
+    ```sh
+    DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+    ```
 
-To use a different protocol such as UDS, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
+    To use a different protocol such as UDS, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
 
-```sh
-DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
-```
+    ```sh
+    DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
+    ```
+    
+{{< site-region region="us3,eu,gov" >}} 
 
+4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
+
+{{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
@@ -152,38 +157,98 @@ See the [tracer settings][3] for the list of initialization options.
 
 ## Configuration
 
-Tracer settings can be configured as a parameter to the `init()` method or as environment variables.
+Tracer settings can be configured as the following parameters to the `init()` method, or as environment variables.
 
 ### Tagging
 
-| Config         | Environment Variable         | Default     | Description                                                                                                                                                                                                                                                                |
-| -------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| env            | `DD_ENV`                     | `null`      | Set an application's environment e.g. `prod`, `pre-prod`, `stage`, etc. Available for versions 0.20+                                                                                                                                                                                                     |
-| service        | `DD_SERVICE`            | `null`      | The service name to be used for this program. Available for versions 0.20+                                                                                                                                                                                                                              |
-| version        | `DD_VERSION`            | `null`      | The version number of the application. Defaults to value of the version field in package.json. Available for versions 0.20+
-| tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically: `tracer.init({ tags: { foo: 'bar' } })` Available for versions 0.20+                                                                                                                            |
+
+`env`
+: **Environment variable**: `DD_ENV`<br>
+**Default**: `null`<br>
+Set an application's environment e.g. `prod`, `pre-prod`, `stage`, etc. Available for versions 0.20+
+
+`service`
+: **Environment variable**: `DD_SERVICE`<br>
+**Default**: `null`<br>
+The service name to be used for this program. Available for versions 0.20+
+
+`version`
+: **Environment variable**: `DD_VERSION`<br>
+**Default**: `null`<br>
+The version number of the application. Defaults to value of the version field in package.json. Available for versions 0.20+
+
+`tags`
+: **Environment variable**: `DD_TAGS`<br>
+**Default**: `{}`<br>
+Set global tags that should be applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically: `tracer.init({ tags: { foo: 'bar' } })` Available for versions 0.20+
 
 It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][2] documentation for recommendations on how to configure these environment variables.
 
 ### Instrumentation
 
-| Config         | Environment Variable         | Default     | Description                                                                                                                                                                                                                                                                |
-| -------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| enabled        | `DD_TRACE_ENABLED`           | `true`      | Whether to enable the tracer.                                                                                                                                                                                                                                              |
-| debug          | `DD_TRACE_DEBUG`             | `false`     | Enable debug logging in the tracer.                                                                                                                                                                                                                                        |
-| url            | `DD_TRACE_AGENT_URL`         | `null`      | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable. |
-| hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | The address of the Agent that the tracer submits to.                                                                                                                                                                                                                       |
-| port           | `DD_TRACE_AGENT_PORT`        | `8126`      | The port of the Trace Agent that the tracer submits to.                                                                                                                                                                                                                    |
-| dogstatsd.port | `DD_DOGSTATSD_PORT`          | `8125`      | The port of the DogStatsD Agent that metrics are submitted to.                                                                                                                                                                                                             |
-| logInjection   | `DD_LOGS_INJECTION`          | `false`     | Enable automatic injection of trace IDs in logs for supported logging libraries.                                                                                                                                                                                           |
-| sampleRate     | -                            | `1`         | Percentage of spans to sample as a float between `0` and `1`.                                                                                                                                                                                                              |
-| flushInterval  | -                            | `2000`      | Interval (in milliseconds) at which the tracer submits traces to the Agent.                                                                                                                                                                                                |
-| runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.                                                                                                                                        |
-| experimental   | -                            | `{}`        | Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][4] to learn more about the available experimental features.                                                                                   |
-| plugins        | -                            | `true`      | Whether or not to enable automatic instrumentation of external libraries using the built-in plugins.                                                                                                                                                                       |
-| - | `DD_TRACE_DISABLED_PLUGINS` | - | A comma-separated string of integration names automatically disabled when tracer is initialized. Environment variable only e.g. `DD_TRACE_DISABLED_PLUGINS=express,dns`. |
-| clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Client token for browser tracing. Can be generated in Datadog in **Integrations** -> **APIs**.                                                                                                                                                                             |
-| logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | A string for the minimum log level for the tracer to use when debug logging is enabled, e.g. `error`, `debug`.                                                                                                                                                             |
+`enabled`
+: **Environment variable**: `DD_TRACE_ENABLED`<br>
+**Default**: `true`<br>
+Whether to enable the tracer.
+
+`debug`
+: **Environment variable**: `DD_TRACE_DEBUG`<br>
+**Default**: `false`<br>
+Enable debug logging in the tracer.
+
+`url`
+: **Environment variable**: `DD_TRACE_AGENT_URL`<br>
+**Default**: `null`<br>
+The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
+
+`hostname`
+: **Environment variable**: `DD_TRACE_AGENT_HOSTNAME`<br>
+**Default**: `localhost`<br>
+The address of the Agent that the tracer submits to.
+
+`port`
+: **Environment variable**: `DD_TRACE_AGENT_PORT`<br>
+**Default**: `8126`<br>
+The port of the Trace Agent that the tracer submits to.
+
+`dogstatsd.port` 
+: **Environment variable**: `DD_DOGSTATSD_PORT`<br>
+**Default**: `8125`<br>
+The port of the DogStatsD Agent that metrics are submitted to.
+
+`logInjection`
+: **Environment variable**: `DD_LOGS_INJECTION`<br>
+**Default**: `false`<br>
+Enable automatic injection of trace IDs in logs for supported logging libraries.
+
+`sampleRate`
+: **Default**: `1`<br>
+Percentage of spans to sample as a float between `0` and `1`.
+
+`flushInterval`
+: **Default**: `2000`<br>
+Interval (in milliseconds) at which the tracer submits traces to the Agent.
+
+`runtimeMetrics` 
+: **Environment variable**: `DD_RUNTIME_METRICS_ENABLED`<br>
+**Default**:  `false`<br>
+Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.
+
+`experimental`
+: **Default**: `{}`<br>
+Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][4] to learn more about the available experimental features.
+
+`plugins`
+: **Default**: `true`<br>
+Whether or not to enable automatic instrumentation of external libraries using the built-in plugins.
+
+`DD_TRACE_DISABLED_PLUGINS`
+: A comma-separated string of integration names automatically disabled when tracer is initialized. Environment variable only e.g. `DD_TRACE_DISABLED_PLUGINS=express,dns`.
+
+`logLevel`
+: **Environment variable**: `DD_TRACE_LOG_LEVEL`<br>
+**Default**: `debug`<br>
+A string for the minimum log level for the tracer to use when debug logging is enabled, e.g. `error`, `debug`.
 
 ## Further Reading
 

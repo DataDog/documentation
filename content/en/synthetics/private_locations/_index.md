@@ -46,8 +46,8 @@ To pull test configurations and push test results, the private location worker n
 
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.datadoghq.com` for version 0.1.6+, `api.datadoghq.com` for versions <0.1.5   | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-| 443  | `intake-v2.synthetics.datadoghq.com` for versions >0.2.0                                             | Used by the private location to push browser test artifacts (screenshots, errors, resources)                                                                         |
+| 443  | `intake.synthetics.datadoghq.com` for version >=0.1.6, `api.datadoghq.com` for versions <=0.1.5   | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+| 443  | `intake-v2.synthetics.datadoghq.com` for versions >=0.2.0 and <=1.4.0                                            | Used by the private location to push browser test artifacts (screenshots, errors, resources).                                                                         |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -58,9 +58,29 @@ To pull test configurations and push test results, the private location worker n
 | Port | Endpoint                                               | Description                                                                                   |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | 443  | `api.datadoghq.eu`                                | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-| 443  | `intake-v2.synthetics.datadoghq.eu` for versions >0.2.0| Used by the private location to push browser test artifacts (screenshots, errors, resources)                                                                            |
+| 443  | `intake-v2.synthetics.datadoghq.eu` for versions >=0.2.0 and <=1.5.0 | Used by the private location to push browser test artifacts (screenshots, errors, resources).                                                                            |
 
 **Note**: These domains are pointing to a set of static IP addresses. These addresses can be found at https://ip-ranges.datadoghq.eu, specifically at https://ip-ranges.datadoghq.eu/api.json for `api.datadoghq.eu` and at https://ip-ranges.datadoghq.eu/synthetics-private-locations.json for `intake-v2.synthetics.datadoghq.eu`.
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+| Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.us3.datadoghq.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+| Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.ddog-gov.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -381,7 +401,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 #### Set up healthchecks
 
-Add a healthcheck mechanism so your orchestrator can ensure the workers are running correctly.
+Add a [healthcheck][10] mechanism so your orchestrator can ensure the workers are running correctly.
 
 The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (2s by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
 
@@ -509,14 +529,14 @@ You can then go to any of your API or Browser test creation form, and tick your 
 
 {{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assign Synthetic test to private location"  style="width:80%;">}}
 
-Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][10], etc.
+Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][11], etc.
 
 
 ## Scale your private locations
 
 You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
-You can also **vertically scale** your private locations using the [`concurrency` parameter][11] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel. Whenever updating the [`concurrency` parameter][11] of your private location, make sure to also update [the resources allocated to your workers](#hardware-requirements).
+You can also **vertically scale** your private locations using the [`concurrency` parameter][12] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel. Whenever updating the [`concurrency` parameter][12] of your private location, make sure to also update [the resources allocated to your workers](#hardware-requirements).
 
 ### Hardware Requirements
 
@@ -524,7 +544,7 @@ You can also **vertically scale** your private locations using the [`concurrency
 
 * Base requirement: 150mCores/150MiB
 
-* Additional equirement per slot:
+* Additional requirement per slot:
 
 | Private location test type                          | Recommended concurrency range | CPU/Memory recommendation |
 | --------------------------------------------------- | ----------------------------- | ------------------------- |
@@ -532,7 +552,7 @@ You can also **vertically scale** your private locations using the [`concurrency
 | Private location running API tests only             | From 1 to 200                 | 20mCores/5MiB per slot    |
 | Private location running Browser tests only         | From 1 to 50                  | 150mCores/1GiB per slot   |
 
-**Example:** For a private location running both API and Browser tests, and with a [`concurrency`][11] set to the default `10`, recommendation for a safe usage is ~ 1.5 core `(150mCores + (150mCores*10 slots))` and ~ 10GiB memory `(150M + (1G*10 slots))`.
+**Example:** For a private location running both API and Browser tests, and with a [`concurrency`][12] set to the default `10`, recommendation for a safe usage is ~ 1.5 core `(150mCores + (150mCores*10 slots))` and ~ 10GiB memory `(150M + (1G*10 slots))`.
 
 #### Disk
 
@@ -551,5 +571,6 @@ The recommendation for disk size is to allocate ~ 10MiB/slot (1MiB/slot for API-
 [7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
 [8]: /synthetics/private_locations/configuration/#reserved-ips-configuration
 [9]: /synthetics/private_locations/configuration/
-[10]: /synthetics/metrics
-[11]: /synthetics/private_locations/configuration#advanced-configuration
+[10]: https://docs.docker.com/engine/reference/builder/#healthcheck
+[11]: /synthetics/metrics
+[12]: /synthetics/private_locations/configuration#advanced-configuration

@@ -32,33 +32,25 @@ Le traceur NodeJS prend officiellement en charge les versions `>=8`. Seules les 
 
 ## Installation et démarrage
 
-### Suivre la documentation intégrée à l'application (conseillé)
+Pour ajouter la bibliothèque de tracing Datadog à vos applications Node.js, suivez les étapes suivantes :
 
-Suivez les [instructions de démarrage rapide][2] fournies dans l'application Datadog pour profiter d'une expérience optimale, et notamment :
-
-- Obtenir des instructions détaillées en fonction de la configuration de votre déploiement (hosts, Docker, Kubernetes ou Amazon ECS) ;
-- Définir les tags `service`, `env` et `version` de façon dynamique ;
-- Activez l'ingestion de 100 % des traces et l'injection des ID de trace dans les logs durant la configuration.
-
-Pour connaître la définition des termes utilisés dans l'APM, consultez la [documentation officielle][3].
-
-Pour en savoir plus sur la configuration et l'utilisation de l'API, consultez la [documentation relative à l'API][4] de Datadog.
-
-Pour en savoir plus sur les contributions, consultez le [guide de développement][5].
-
-### Prise en main
-
-<div class="alert alert-warning">
-Cette bibliothèque <strong>DOIT</strong> être importée et initialisée avant tous les autres modules instrumentés. Lors de l'utilisation d'un transcompilateur, vous <strong>DEVEZ</strong> importer et initialiser la bibliothèque de tracing dans un fichier externe, puis importer ce fichier en entier pendant la compilation de votre application. Cela empêche l'accès aux variables avant leur définition et garantit que la bibliothèque de tracing est importée et initialisée avant l'importation des autres modules instrumentés.
-</div>
-
-Pour commencer le tracing d'applications Node.js, installez la bibliothèque de tracing Datadog avec npm :
+1. Installez la bibliothèque de tracing Datadog avec npm :
 
 ```sh
-npm install --save dd-trace
+npm install dd-trace --save 
 ```
 
-Importez et initialisez ensuite le traceur :
+2. Importez et initialisez le traceur dans le code ou via des arguments de ligne de commande. La bibliothèque de tracing Node.js doit être importée et initialisée **avant** tous les autres modules.
+
+   Une fois la bibliothèque configurée, si vous ne recevez pas de traces complètes, par exemple s'il manque les itinéraires des URL ou des spans, ou si des spans sont incomplètes, **vérifiez que vous avez bien suivi les instructions de l'étape 2**. La bibliothèque de tracing doit s'initialiser en premier pour que le traceur patche correctement l'ensemble des bibliothèques requises pour l'instrumentation automatique.
+
+   Lorsque vous utilisez un transpileur comme TypeScript, Webpack ou encore Babel, importez et initialisez la bibliothèque du traceur dans un fichier externe, puis importez tout le contenu du fichier pendant la conception de l'application.
+
+3. [Configurer l'Agent Datadog pour l'APM](#configure-the-datadog-agent-for-apm)
+
+4. Ajoutez la [configuration](#configuration) de votre choix au traceur, par exemple les tags `service`, `env` et `version` pour bénéficier du [tagging de service unifié][2].
+
+### Ajout du traceur dans le code
 
 ##### JavaScript
 
@@ -67,7 +59,9 @@ Importez et initialisez ensuite le traceur :
 const tracer = require('dd-trace').init();
 ```
 
-##### TypeScript
+#### TypeScript et bundlers
+
+Pour TypeScript et les bundlers qui prennent en charge la syntaxe ECMAScript Module, initialisez le traceur dans un fichier distinct, afin de veiller à ce que les ressources se chargent dans le bon ordre.
 
 ```typescript
 // server.ts
@@ -78,6 +72,22 @@ import tracer from 'dd-trace';
 tracer.init(); // initialisé dans un fichier différent pour empêcher l'accès aux variables avant leur définition.
 export default tracer;
 ```
+
+Si la configuration par défaut vous suffit, ou si toutes les configurations sont réalisées à l'aide de variables d'environnement, vous pouvez également utiliser `dd-trace/init` afin d'effectuer le chargement et l'initialisation durant une seule étape.
+
+```typescript
+import `dd-trace/init`;
+```
+
+### Ajout du traceur via des arguments de ligne de commande
+
+Utilisez l'option `--require` à Node.js pour charger et initialiser le traceur en une seule étape.
+
+```sh
+node --require dd-trace/init app.js
+```
+
+**Remarque :** pour procéder ainsi, vous devez utiliser des variables d'environnement pour toutes les configurations du traceur.
 
 ### Configurer l'Agent Datadog pour l'APM
 
@@ -133,7 +143,7 @@ Pour les autres environnements, veuillez consulter la documentation relative aux
 {{< /tabs >}}
 
 
-Consultez les [paramètres du traceur][6] pour obtenir la liste des options d'initialisation.
+Consultez les [paramètres du traceur][3] pour obtenir la liste des options d'initialisation.
 
 ## Configuration
 
@@ -148,7 +158,7 @@ Les réglages du traceur peuvent être configurés en tant que paramètre de la 
 | version        | `DD_VERSION`            | `null`      | Le numéro de version de l'application. Par défaut, correspond à la valeur du champ version dans package.json. Disponible à partir de la version 0.20.
 | tags           | `DD_TAGS`                    | `{}`        | Définit des tags globaux qui doivent être appliqués à l'ensemble des spans et métriques runtime. Lorsque ce paramètre est passé en tant que variable d'environnement, son format correspond à `key:value,key:value`. Lorsqu'il est défini dans le code : `tracer.init({ tags: { foo: 'bar' } })`. Disponible à partir de la version 0.20.                                                                                                                            |
 
-Nous vous conseillons d'utiliser `DD_ENV`, `DD_SERVICE` et `DD_VERSION` afin de définir les paramètres `env`, `service` et `version` pour vos services. Consultez la documentation sur le [tagging de service unifié][7] pour en savoir plus sur la configuration de ces variables d'environnement.
+Nous vous conseillons d'utiliser `DD_ENV`, `DD_SERVICE` et `DD_VERSION` afin de définir les tags `env`, `service` et `version` pour vos services. Consultez la documentation sur le [tagging de service unifié][2] pour en savoir plus sur la configuration de ces variables d'environnement.
 
 ### Instrumentation
 
@@ -164,7 +174,7 @@ Nous vous conseillons d'utiliser `DD_ENV`, `DD_SERVICE` et `DD_VERSION` afin de 
 | sampleRate     | -                            | `1`         | Pourcentage de spans à échantillonner. Valeur flottante comprise entre `0` et `1`.                                                                                                                                                                                                              |
 | flushInterval  | -                            | `2000`      | Intervalle (en millisecondes) de transmission par le traceur des traces à l'Agent.                                                                                                                                                                                                |
 | runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Indique si l'enregistrement des métriques runtime doit être activé. Le port `8125` (ou le port configuré avec `dogstatsd.port`) doit être ouvert sur l'Agent pour le transport UDP.                                                                                                                                        |
-| experimental   | -                            | `{}`        | Les fonctionnalités expérimentales peuvent toutes être activées simultanément à l'aide de la valeur booléenne « true », ou individuellement à l'aide de paires key/value. [Contactez l'assistance][8] pour en savoir plus sur les fonctionnalités expérimentales disponibles.                                                                                   |
+| experimental   | -                            | `{}`        | Les fonctionnalités expérimentales peuvent toutes être activées simultanément à l'aide de la valeur booléenne « true », ou individuellement à l'aide de paires key/value. [Contactez l'assistance][4] pour en savoir plus sur les fonctionnalités expérimentales disponibles.                                                                                   |
 | plugins        | -                            | `true`      | Indique si l'instrumentation automatique des bibliothèques externes à l'aide des plug-ins intégrés doit être activée.                                                                                                                                                                       |
 | - | `DD_TRACE_DISABLED_PLUGINS` | - | Une chaîne de noms d'intégration, séparés par des virgules, désactivées automatiquement à l'initialisation du traceur. Variable d'environnement uniquement. Exemple : `DD_TRACE_DISABLED_PLUGINS=express,dns`. |
 | clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Token client pour le tracing sur navigateur. Peut être généré dans Datadog en accédant à **Integrations** -> **APIs**.                                                                                                                                                                             |
@@ -175,10 +185,6 @@ Nous vous conseillons d'utiliser `DD_ENV`, `DD_SERVICE` et `DD_VERSION` afin de 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/compatibility_requirements/nodejs
-[2]: https://app.datadoghq.com/apm/docs
-[3]: /fr/tracing/visualization/
-[4]: https://datadog.github.io/dd-trace-js
-[5]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
-[6]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[7]: /fr/getting_started/tagging/unified_service_tagging/
-[8]: /fr/help/
+[2]: /fr/getting_started/tagging/unified_service_tagging/
+[3]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[4]: /fr/help/

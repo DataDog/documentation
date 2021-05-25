@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     oracle: assets/dashboards/oracle_overview.json
   logs: {}
@@ -14,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/oracle/README.md'
 display_name: "Oracle\_Database"
+draft: false
 git_integration_title: oracle
 guid: 6c4ddc46-2763-4c56-8b71-c838b7f82d7b
 integration_id: oracle
@@ -47,17 +50,11 @@ Recueillez des métriques de serveurs d'Oracle Database en temps réel pour vis
 
 Pour utiliser l'intégration Oracle, installez les bibliothèques Oracle Instant Client ou téléchargez le pilote JDBC d'Oracle. En raison des restrictions de licence, ces bibliothèques ne sont pas intégrées à l'Agent Datadog, mais peuvent être téléchargées directement sur le site d'Oracle.
 
-**Remarque** : les runtimes suivants doivent être présents sur votre système pour JPype, l'une des bibliothèques utilisées par l'Agent lors de l'utilisation du pilote JDBC.
-
-- Java 8 ou version ultérieure 
-- [Microsoft Visual C++ Runtime 2015][2]
-
-
 ##### Oracle Instant Client
 
 Le check Oracle nécessite un accès au module Python `cx_Oracle` ou au pilote JDBC d'Oracle :
 
-1. Accédez à la [page de téléchargement][3] et installez les paquets SDK et Basic d'Instant Client.
+1. Accédez à la [page de téléchargement][2] et installez les packages SDK et Basic d'Instant Client.
 
     Si vous utilisez Linux, une fois les bibliothèques Instant Client installées, vérifiez que l'éditeur de liens du runtime parvient à trouver les bibliothèques. Par exemple, avec `ldconfig` :
 
@@ -82,8 +79,15 @@ Le check Oracle nécessite un accès au module Python `cx_Oracle` ou au pilote J
 
 ##### Pilote JDBC
 
-- [Téléchargez le fichier jar du pilote JDBC][4].
-- Ajoutez le chemin vers le fichier téléchargé dans votre `$CLASSPATH` ou le fichier de configuration du check sous `jdbc_driver_path` (consultez le [fichier d'exemple oracle.yaml][5]).
+Pour JPype, l'une des bibliothèques utilisées par l'Agent lors de l'utilisation du pilote JDBC, les runtimes suivants doivent être présents sur votre système :
+
+- Java 8 ou version ultérieure 
+- [Microsoft Visual C++ Runtime 2015][3] sous Windows
+
+Une fois ces runtimes installés, suivez les étapes ci-dessous :
+
+1. [Téléchargez le fichier jar du pilote JDBC][4].
+2. Ajoutez le chemin vers le fichier téléchargé dans votre `$CLASSPATH` ou le fichier de configuration du check sous `jdbc_driver_path` (consultez le [fichier d'exemple oracle.yaml][5]).
 
 #### Création d'un utilisateur Datadog
 
@@ -352,7 +356,7 @@ Le check Oracle Database n'inclut aucun événement.
 
 ### Checks de service
 
-**oracle.can_connect**
+**oracle.can_connect** :<br>
 Permet de vérifier que la base de données est disponible et accepte les connexions.
 
 ## Dépannage
@@ -361,8 +365,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
-[2]: https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
-[3]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
+[2]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
+[3]: https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 [4]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
