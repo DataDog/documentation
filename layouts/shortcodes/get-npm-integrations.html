@@ -1,92 +1,39 @@
 {{ $params := .Params }}
 
-{{ $integration_name := .Page.Params.git_integration_title }}
+{{ $npm_provider := .Page.Params.npm_provider }}
 
 {{ if (.Get 0 ) }}
 
-  {{ $.Scratch.Set "integration" (.Get 0) }}
+  {{ $.Scratch.Set "npm" (.Get 0) }}
 
 {{ else }}
 
-  {{ $.Scratch.Set "integration" $integration_name }}
+  {{ $.Scratch.Set "npm" $npm_provider }}
 
 {{ end }}
 
-{{ $integration := $.Scratch.Get "integration" }}
+{{ $npm := $.Scratch.Get "npm" }}
 
-{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.integrations) }}
+{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.npm) }}
 
   <!-- get lang specific data file -->
   {{ $.Scratch.Set "data" "" }}
   {{ if ne $.Page.Lang "en"}}
-      {{ if (fileExists (print "data/integrations/" $integration "." $.Page.Lang ".yaml")) }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations (print $integration "." $.Page.Lang)) }}
+      {{ if (fileExists (print "data/npm/" $npm "." $.Page.Lang ".json")) }}
+        {{ $.Scratch.Set "data" (index $.Page.Site.Data.npm (print $npm "." $.Page.Lang)) }}
       {{ else }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
+        {{ $.Scratch.Set "data" (index $.Page.Site.Data.npm $npm) }}
       {{ end }}
   {{ else }}
-      {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
+      {{ $.Scratch.Set "data" (index $.Page.Site.Data.npm $npm) }}
   {{ end }}
   {{ $data := ($.Scratch.Get "data") }}
 
-  {{ if $data }}
-
-    {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
-
-        {{ $name_space := (index $params 1) }}
-
-        {{ $data_metrics := (index $data $integration) }}
-
-        {{ $metric_namespaces := (split $name_space " ") }}
-
-<table class="table table-vertical-mobile table-metrics">
-  <tbody>
-
-    {{ range $i, $m := $metric_namespaces }}
-
-      {{ range $v := $data_metrics }}
-
-        {{ if (hasPrefix $v.metric_name $m) }}
-
-          {{ if not (hasPrefix $v.metric_name "aws.stream") }}
-          <tr>
-            <td>
-            <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-            <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
-            </td>
-          </tr>
-          {{ end }}
-
-        {{ end }}
-
-      {{ end }}
-
+  <ul>
+    {{ range $data }}
+        <li>{{ .name }}</li>
     {{ end }}
-  </tbody>
-</table>
+  </ul>
 
-    {{ else }} {{/* No param set load default integration from front matter */}}
-
-      {{ if $integration }}
-
-<table class="table table-vertical-mobile table-metrics">
-  <tbody>
-  {{ range $k, $v := (index $data $integration) }}
-    {{ if not (hasPrefix $v.metric_name "aws.stream") }}
-      <tr>
-        <td>
-        <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-        <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
-        </td>
-      </tr>
-    {{ end }}
-  {{ end }}
-  </tbody>
-</table>
-      {{ end }}
-
-    {{ end }}
-
-  {{ end }}
 
 {{ end }}
