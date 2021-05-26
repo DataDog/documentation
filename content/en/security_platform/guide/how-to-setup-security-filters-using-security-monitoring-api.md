@@ -205,6 +205,8 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 If you aim to only analyze explicitly specified categories of logs, be cautious not to exclude logs that contain valuable security-relevant users and entities, or key sources of security logs. The tables below provide useful examples.
 
+**Note**: The logs emitted by our `compliance-agent` and `runtime-security-agent` are always bypassing the security filters. You do not need to write custom filters for them.
+
 **Key users and entities**
 
 | Name                  | Query                                            |
