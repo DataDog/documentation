@@ -22,12 +22,13 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| Platform                             | Command                       |
-|--------------------------------------|-------------------------------|
-| Linux                                | `/var/log/datadog/`           |
-| macOS                                | `/var/log/datadog/`           |
-| Windows Server 2008, Vista and newer | `C:\ProgramData\Datadog\logs` |
-| Windows Server 2003, XP or older     | *unsupported Platform*        |
+| Platform                              | Command                       |
+|---------------------------------------|-------------------------------|
+| Linux                                 | `/var/log/datadog/`           |
+| macOS, Agent v7.28+ and v6.28+        | `/opt/datadog-agent/log`      |
+| macOS, Agent older than 6.28.0/7.28.0 | `/var/log/datadog`            |
+| Windows Server 2008, Vista and newer  | `C:\ProgramData\Datadog\logs` |
+| Windows Server 2003, XP or older      | *unsupported Platform*        |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -35,16 +36,11 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 | Platform                             | Command                                                              |
 |--------------------------------------|----------------------------------------------------------------------|
 | Linux                                | `/var/log/datadog/`                                                  |
-| CentOS                               | `/var/log/datadog/`                                                  |
-| Debian                               | `/var/log/datadog/`                                                  |
-| Fedora                               | `/var/log/datadog/`                                                  |
 | macOS                                | `/var/log/datadog/`                                                  |
-| RedHat                               | `/var/log/datadog/`                                                  |
-| Source                               | `~/.datadog-agent/supervisord/logs/`                                 |
-| SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
-| Ubuntu                               | `/var/log/datadog/`                                                  |
 | Windows Server 2008, Vista and newer | `C:\ProgramData\Datadog\logs\`                                       |
 | Windows Server 2003, XP or older     | `C:\Documents and Settings\All Users\Application Data\Datadog\logs\` |
+| SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
+| Source build                         | `~/.datadog-agent/supervisord/logs/`                                 |
 
 {{% /tab %}}
 {{< /tabs >}}
