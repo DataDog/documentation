@@ -435,8 +435,6 @@ class Integrations:
 
         new_file_name = "{}aws.json".format(self.data_npm_dir)
 
-        print(new_file_name)
-
         with open(
                 file=new_file_name,
                 mode="w",
