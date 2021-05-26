@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Kong Overview: assets/dashboards/kong_overview.json
+    kong: assets/dashboards/kong_dashboard.json
   logs:
     source: kong
   metrics_metadata: metadata.csv
@@ -12,6 +13,7 @@ assets:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
+    kong_processes: assets/saved_views/kong_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
@@ -76,6 +78,18 @@ Kong チェックは [Datadog Agent][1] パッケージに含まれています�
      ## URL where Kong exposes its status.
      #
      - kong_status_url: http://localhost:8001/status/
+   ```
+
+   または、Agent 7+ ではよりモダンな実装を使用できます。
+
+   ```yaml
+   init_config:
+
+   instances:
+     ## @param openmetrics_endpoint - string - required
+     ## The URL exposing metrics in the OpenMetrics format.
+     #
+     - openmetrics_endpoint: http://localhost:8001/metrics
    ```
 
 2. [Agent を再起動します][3]。
@@ -162,6 +176,17 @@ Kong チェックには、イベントは含まれません。
 
 **kong.can_connect**:<br>
 Agent が Kong に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+
+`openmetrics_endpoint` を設定し、Agent 7+ の実装を使用する場合:
+
+**kong.openmetrics.health**:<br>
+OpenMetrics エンドポイントに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
+
+**kong.datastore.reachable**:<br>
+Kong がデータストアに接続できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
+
+**kong.upstream.target.health**:<br>
+ターゲットが正常でない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 
