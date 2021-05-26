@@ -25,7 +25,7 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 | Platform                              | Command                       |
 |---------------------------------------|-------------------------------|
 | Linux                                 | `/var/log/datadog/`           |
-| macOS, Agent v7.28+ and 6.28+         | `/opt/datadog-agent/log`      |
+| macOS, Agent v7.28+ and v6.28+        | `/opt/datadog-agent/log`      |
 | macOS, Agent older than 6.28.0/7.28.0 | `/var/log/datadog`            |
 | Windows Server 2008, Vista and newer  | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003, XP or older      | *unsupported Platform*        |
