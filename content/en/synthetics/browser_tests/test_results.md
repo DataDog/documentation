@@ -13,11 +13,11 @@ further_reading:
 
 Test results and performance data are accessed from the **Step Results** section on your browser test's status page.
 
-## Page Performance
+## Page performance
 
 Each step where a full URL is loaded will contain page performance information.
 
-### Core Web Vitals
+### User experience
 
 [Google's Core Web Vitals][1] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to a good user experience.
 
@@ -63,7 +63,6 @@ The maximum number of errors that can be displayed is 8, for example 2 `network`
 
 A resource corresponds to the combination of requests and assets. The Resources panel shows:
 
-
 Resource
 : The URL of the resource
 
@@ -81,7 +80,7 @@ Size
 
 The maximum number of resources that can be displayed is 50. Resources are ordered by the time when they start and then are displayed in Datadog by the first 50.
 
-### Filter and Search
+### Filter and search
 
 Resources can be filtered by resource type. Also, a search can be performed over the displayed URLs.
 

@@ -16,7 +16,7 @@ further_reading:
 
 If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact Datadog's support team][1].
 
-## Browser Tests
+## Browser tests
 
 ### Recording
 
@@ -56,9 +56,9 @@ To be able to record your steps without logging out from your application, just 
 
 The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are consequently automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
-### Test Results
+### Test results
 
-#### My Mobile Small or Tablet browser test results keep failing
+#### My mobile small or tablet browser test results keep failing
 
 If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a very different architecture when running from a `Tablet` or a `Mobile Small`.  
 This means that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
@@ -83,7 +83,7 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true"  width="100%" >}}
 
-## API & Browser Tests
+## API and browser tests
 
 ### Unauthorized errors
 
