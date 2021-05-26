@@ -123,7 +123,7 @@ For more information about configuring specific IdP's, refer to the following do
 
 ## Additional features
 
-The following features can be enabled through the [SAML Configuration dialog][4].
+The following features can be enabled through the [SAML Configuration dialog][4] (You must have Admin permissions to see the SAML Configuration dialog).
 
 ### Just in time (JIT) provisioning
 
