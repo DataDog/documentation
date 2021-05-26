@@ -105,6 +105,9 @@ class Integrations:
             self.data_service_checks_dir, exist_ok=True
         )
         makedirs(
+            self.data_npm_dir, exist_ok=True
+        )
+        makedirs(
             self.content_integrations_dir, exist_ok=True
         )
 
