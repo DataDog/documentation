@@ -43,7 +43,7 @@ To link browser test results, allow the URLs you want the APM integration header
 https://*.datadoghq.com/*
 ```
 
-## Supported Libraries
+## Supported libraries
 
 The following Datadog tracing libraries are supported:
 
