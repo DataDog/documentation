@@ -108,6 +108,20 @@ Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ran
 
 Synthetic tests by default do not [renotify][10]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
 
+## Private Locations
+
+### My private location containers sometimes get killed `OOM`.
+
+Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+
+### My browser test results sometimes show `Page crashed` errors
+
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+
+### My tests are sometimes slower to execute 
+
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][11].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -122,3 +136,4 @@ Synthetic tests by default do not [renotify][10]. This means that if you add you
 [8]: /synthetics/browser_tests/#use-global-variables
 [9]: https://ip-ranges.datadoghq.com/synthetics.json
 [10]: /synthetics/api_tests/?tab=httptest#notify-your-team
+[11]: /synthetics/private_locations#private-location-total-hardware-requirements
