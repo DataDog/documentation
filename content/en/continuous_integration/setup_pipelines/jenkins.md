@@ -6,114 +6,76 @@ further_reading:
       tag: "Documentation"
       text: "linktext"
 ---
-## Installation
 
-Follow the official installation [guide][1].
+## Prerequisite
 
-To enable the APM traces collection for Jenkins builds and pipelines:
+Install the [Datadog Agent][1] on the Jenkins master instance.
 
-* Installed the Jenkins plugin v2.1.1+ (available in the Jenkins marketplace).
-* Configure the Jenkins plugin to use the `Datadog Agent` mode.
+## Install the Datadog Jenkins plugin
 
-APM Traces feature is only available if the `Datadog Agent` mode is selected.
+Install and enable the [Datadog Jenkins plugin][2] v2.1.1 or newer:
 
-### Manual installation from your local machine
-During the beta phase, you might need to install a release candidate artifact from your local machine manually. 
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
+2. In the [Update Center][3] on the **Available** tab, search for `Datadog Plugin`.
+3. Select the checkbox next to the plugin, and install using one of the two install buttons at the bottom of the screen.
+4. To configure the plugin, go to **Manage Jenkins > Configure System**, and find the Datadog Plugin section.
+5. In the Datadog section, select the `Datadog Agent` mode.
+6. Restart Jenkins to enable the plugin.
 
-To do that, you can follow the next steps:
-* Access to `$JENKINS_URL/pluginManager/advanced`
-* In the `Upload Plugin` section, upload the `datadog.hpi` artifact from your local machine.
-* Restart the Jenkins instance.
-
-You don't have to remove the previous version explicitly. After these steps, the new uploaded version will override it.
-
-## Enabling
-
-Traces collection UI configuration is hidden for the general public.
-
-To enable this feature, you need to activate it manually following the next steps:
-
-*  Open a Terminal in the Jenkins instance
-*  Navigate to `$JENKINS_HOME` folder
-*  Open `org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration.xml` file
-*  Add or modify the following XML nodes:
-
-    ```
-    <reportWith>DSD</reportWith>
-    <targetApiKey>*******</targetApiKey>
-    <targetHost>(use your datadog agent host)</targetHost>
-    <targetPort>8125</targetPort>
-    <targetLogCollectionPort>8125</targetLogCollectionPort>
-    <targetTraceCollectionPort>8126</targetTraceCollectionPort>
-    <traceServiceName>my-jenkins-instance</traceServiceName>
-    <collectBuildTraces>true</collectBuildTraces>
-    ```
-
-*  Save and close.
-*  Restart Jenkins.
-
-If everything has been well configured, you should be able to see the following lines in the Jenkins log after restarting it:
+When the configuration is correct, the Jenkins log shows lines similar to this after the restart:
 
 ```
 INFO    datadog.trace.core.CoreTracer#<init>: New instance: DDTracer-62fcf62{ ... }
 INFO    datadog.trace.core.StatusLogger#logStatus: DATADOG TRACER CONFIGURATION { ... }
-``` 
-
-Now you can use your Jenkins as you normally do.
-
-**Note**: It is not possible to enable traces collection in the Jenkins Datadog plugin and have the `dd-java-agent` in the classpath (for example, as `-javaagent` in your Jenkins startup command) at the same time.
-
-### Connecting Logs and Traces
-
-If you are already collecting logs in your Jenkins before enabling the traces collection, you don't need to perform additional actions.
-
-If you are not collecting logs in your Jenkins yet, you need to enable the logs collection modifying the same file we used to enable the traces collection.
-
-*  Add or modify the following XML nodes:
-
-```
-  <collectBuildLogs>true</collectBuildLogs>
 ```
 
-*  Save and close.
-*  Restart Jenkins.
+**Note**: Enabling the collection of traces using the Jenkins plugin is incompatible with running the Java APM tracer as a Java agent when launching Jenkins.
 
-**Important**: It's not recommended using the Jenkins UI interface to activate the logs collection if you want to connect Logs and Traces. The Traces feature is hidden in the UI and may cause the trace collection to be disabled if the UI is used directly. The best approach is to modify the XML file.
 
-Finally, you need to enable logs collection in the [Datadog Agent][2]:
+## Enable job log collection on the Agent
 
-* Collecting logs is disabled by default in the Agent. Enable it in your `datadog.yaml` file:
-```
-logs_enabled: true
-```
-*  To collect Jenkins logs, create a custom log source file for your Agent by creating a `conf.yaml` inside `conf.d/jenkins.d` with the following:
+Enable log collection in the Agent:
+
+1. Add `logs_enabled: true` to your Agent configuration file `datadog.yaml`, or set the `DD_LOGS_ENABLED=true` environment variable.
+
+2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` (for Linux; [check here for other operating systems][4]) with the following contents. Make sure that `service` matches the `traceServiceName` provided earlier:
+
 ```yaml
 logs:
-  - type: tcp 
-    port: <PORT> 
-    service: <SERVICE>
+  - type: tcp
+    port: 10518
+    service: my-jenkins-instance
     source: jenkins
 ```
-*  Restart the Agent.
 
-The Jenkins plugin is configured to use the `8125` port by default. 
+3. [Restart the Agent][5] for the changes to take effect.
 
-If you set a different one, you need to configure the same port you specified above as the Log Collection Port in the `org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration.xml` file:
+With this setup, the Agent listens in port `10518` for logs.
+
+## Enable job log collection in the plugin
+
+Configure the Jenkins plugin to send job logs to the Agent:
+
+1. Open the file: `$JENKINS_HOME\org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration.xml`
+
+2.  Add or modify the following lines:
+
 ```xml
-  <targetPort><PORT></targetPort>
-  <targetLogCollectionPort><PORT></targetLogCollectionPort>
+<targetLogCollectionPort>10518</targetLogCollectionPort>
+<collectBuildLogs>true</collectBuildLogs>
 ```
-and restart the Jenkins instance.
 
-### Manual configuration of the default branch
+3. Restart Jenkins for the changes to take effect.
 
-The pipeline reported to Datadog needs to have the tag `git.default_branch`. 
+**Note**: Do not use the Jenkins UI interface to activate logs collection, as trace collection might be disabled when saving settings using the UI.
 
-In some occasions, the plugin cannot extract this information automatically because Jenkins is very selective on checking out only the minimum information required to execute the build.
 
-You can set the default branch manually using the `DD_GIT_DEFAULT_BRANCH` environment variable in your build. 
+## Set the default branch name
 
-Example:
+To report pipeline results, attach the default branch name (for example, `main`) to pipeline spans in an attribute called `git.default_branch`. This is usually done automatically, but in some cases the plugin cannot extract this information because it might not be provided by Jenkins.
+
+If this happens, set the default branch manually using the `DD_GIT_DEFAULT_BRANCH` environment variable in your build. For example:
+
 ```groovy
 pipeline {
     agent any
@@ -127,13 +89,22 @@ pipeline {
 }
 ```
 
-## Datadog Agent
 
-The [Datadog Agent][2] needs to be accessible by the Jenkins instance you are using.
+## Visualize pipeline data in Datadog
+
+Once the integration is successfully configured, both [Pipelines][6] and [Pipeline Executions][7] pages will start populating with data after pipelines finish.
+
+Note that the Pipelines page shows data for only the default branch of each repository.
+
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
-[2]: /agent/
+[1]: /agent/
+[2]: https://plugins.jenkins.io/datadog/
+[3]: https://wiki.jenkins-ci.org/display/JENKINS/Plugins#Plugins-Howtoinstallplugins
+[4]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: https://app.datadoghq.com/ci/pipelines
+[7]: https://app.datadoghq.com/ci/pipeline-executions

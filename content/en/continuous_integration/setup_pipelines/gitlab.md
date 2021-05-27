@@ -8,9 +8,9 @@ further_reading:
 ---
 
 
-To enable traces for your GitLab CI pipelines a [native integration][1] has been merged into GitLab and is hidden under a [feature flag][2] since release `13.7.0`.
+To enable traces for your GitLab CI pipelines a [native integration][1] is available and hidden under a [feature flag][2] since release `13.7.0`.
 
-If you are a GitLab.com user and you want to early-adopt this integration, [contact Support][3] and we'll enable it for your Gitlab account.
+If you are a GitLab.com user and you want to early-adopt this integration, [open a support ticket][8] with GitLab requesting that the Datadog integration be enabled in your account.
 
 If you manage your own GitLab installation and your version is recent enough, you can enable the feature flag yourself by executing the following commands that use GitLab's [Rails Runner][4] depending on your installation type:
 
@@ -27,42 +27,47 @@ For [Kubernetes deployments][5]:
 kubectl exec -it <task-runner-pod-name> -- /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
 ```
 
-Once the feature is enabled, configuring the integration is as easy as going to the page for the Datadog integration at any level:
-- On a per project basis, by going to the *Settings > Integrations > Datadog* section of each project.
-- For all the projects in your GitLab installation, by going to *Settings > Integrations > Datadog* section of the Admin area.
-
-Mark it as active and paste a valid API key. If you do not have an API key you can create one [here][6].
+Once the feature flag is enabled, configure the integration on a per project basis by going to **Settings > Integrations > Datadog** for each project you want to instrument. Mark it as active and paste a valid [API key][6].
 
 __Note:__ Only `datadoghq.com` is currently supported.
 
 There are a couple of optional parameters:
-- __service__: Sets the service name for all traces for this GitLab instance. Defaults to `gitlab-ci`. Only useful if there are more than one GitLab instance.
-- __env__: Sets the environment tag for all traces for this GitLab instance. Only useful in advanced setups where grouping GitLab instances per environment is required.
+- _service_: Sets the service name for all traces for this GitLab instance. Defaults to `gitlab-ci`. Useful if you're using more than one GitLab instance.
+- _env_: Sets the environment tag for all traces for this GitLab instance. Useful in advanced setups where grouping GitLab instances per environment is required.
 
-The integration can be tested with the *Test settings* button. After it's successful, click *Save changes* to finish the integration set up.
-
+Test the integration with the *Test settings* button. After it's successful, click *Save changes* to finish the integration set up.
 
 ## Integrating through webhooks
 
-If you are not using a version of GitLab that is recent enough to make the native integration available, you can still have traces for your pipelines by configuring the webhooks yourself. You need to configure the following webhooks in your GitLab site or repository:
-- Job Events
-- Pipeline Events
+As an alternative to using the native Datadog integration, you can use [webhooks][9] to send pipeline data to Datadog.
 
-Use the following webhooks URL:
-```
-https://webhooks-http-intake.logs.datadoghq.com/v1/input/<API_KEY>
-```
-You can create an API key [here][6].
+**Note**: The native Datadog integration is the recommended approach and the one that will have active development. Use webhooks only if the native Datadog integration option is not available to you (for example, having an older GitLab version and you're not able to upgrade).
 
-You can make use of the same optional parameters that the native integration has, if you include them as query parameters in the webhook URL: `?env=(your-env)&service=(your-service-name)`
+Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
+* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v1/input/<API_KEY>` where `<API_KEY>` is available [here][6].
+* **Secret Token**: leave blank
+* **Trigger**: Select `Job events` and `Pipeline events`.
+
+To set custom `env` or `service` parameters, use query parameters in the webhooks URL: `?env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
+
+## Visualize pipeline data in Datadog
+
+After the integration is successfully configured, both [Pipelines][7] and [Pipeline Executions][8] pages will start populating with data after pipelines finish.
+
+Note that the Pipelines page shows data for only the default branch of each repository.
+
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/46564
+[1]: https://docs.gitlab.com/ee/integration/
 [2]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [3]: /help/
 [4]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
 [5]: https://docs.gitlab.com/ee/administration/troubleshooting/kubernetes_cheat_sheet.html#gitlab-specific-kubernetes-information
 [6]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/ci/pipelines
+[7]: https://app.datadoghq.com/ci/pipeline-executions
+[8]: https://support.gitlab.com/
+[9]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html

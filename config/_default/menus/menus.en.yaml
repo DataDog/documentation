@@ -1699,11 +1699,6 @@ main:
     parent: setup_pipelines
     identifier: ci_jenkins
     weight: 202
-  - name: Custom
-    url: continuous_integration/setup_pipelines/custom/
-    parent: setup_pipelines
-    identifier: ci_custom
-    weight: 203
   - name: Test-First View
     url: continuous_integration/explore_tests/
     parent: ci
