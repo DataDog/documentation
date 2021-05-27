@@ -368,9 +368,8 @@ For other environments, please refer to the [Integrations][4] documentation for 
 
 The .NET Tracer has configuration settings that can be set by any of these methods:
 
-* Environment variables.
-* In the .NET application code.
-* Using a `datadog.json` file.
+![image](https://user-images.githubusercontent.com/7599081/119894396-67a20800-bef1-11eb-9c4e-9f405af64583.png)
+
 
 {{< tabs >}}
 
