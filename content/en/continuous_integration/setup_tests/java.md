@@ -29,7 +29,7 @@ Additionally, we support the test frameworks which are based on JUnit, such as S
 
 ## Prerequisites
 
-The Datadog Agent must be accessible by the environment you're using to run your tests on. Get one-step installation commands from the [Datadog app][1].
+[Install the Datadog Agent to collect tests data][1].
 
 ## Installing tracing with Maven
 
@@ -164,7 +164,7 @@ You can change the test integration from `JUnit` to `TestNG` modifying the corre
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: /continuous_integration/setup_tests/agent/
 [2]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
 [3]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [4]: https://maven.apache.org/surefire/maven-failsafe-plugin/

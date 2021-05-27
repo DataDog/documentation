@@ -21,7 +21,7 @@ further_reading:
 
 ## Prerequisites
 
-The Datadog Agent must be accessible by the environment you're using to run your tests on. Get one-step installation commands from the [Datadog app][1].
+[Install the Datadog Agent to collect tests data][1].
 
 ## Installing tracing
 
@@ -117,7 +117,7 @@ See also the [Ruby trace library documentation for RSpec][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: /continuous_integration/setup_tests/agent/
 [2]: /tracing/setup_overview/setup/ruby/#installation
 [3]: /tracing/setup_overview/setup/ruby/#cucumber
 [4]: /tracing/setup_overview/setup/ruby/#rspec

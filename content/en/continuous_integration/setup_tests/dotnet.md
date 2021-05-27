@@ -33,7 +33,7 @@ further_reading:
 
 ## Prerequisites
 
-The Datadog Agent must be accessible by the environment you're using to run your tests on. Get one-step installation commands from the [Datadog app][1].
+[Install the Datadog Agent to collect tests data][1].
 
 ## Installing tracing
 
@@ -113,5 +113,5 @@ This enables the new instrumentation format in the .NET tracer.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: /continuous_integration/setup_tests/agent/
 [2]: /tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration

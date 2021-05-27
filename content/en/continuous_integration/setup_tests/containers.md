@@ -1,17 +1,15 @@
 ---
-title: Tests in a Container
+title: Tests in Containers
 kind: documentation
-further_reading:
-    - link: "/ci/filename/"
-      tag: "Documentation"
-      text: "linktext"
 ---
 
-If you are running your tests inside a container, forward the following environment variables depending on your CI provider, so the Datadog Tracer can autodetect the build information.
+If you run your tests inside a container that you launch yourself within the build (for example, from a Docker Compose file), forward the following environment variables depending on your CI provider, so the Datadog tracer can autodetect the build information.
 
-Additionally, forward all Datadog environment variables used to configure the Datadog Tracer. 
+Additionally, forward all environment variables used to configure the Datadog tracer (such as `DD_SERVICE` or `DD_AGENT_HOST`). 
 
-### [Appveyor][1]
+Forwarding environment variables is not required if the CI provider itself launches the container, because in that case all environment variables are set and available to the tracer.
+
+## [Appveyor][1]
 
 - APPVEYOR
 - APPVEYOR_BUILD_ID
@@ -24,7 +22,7 @@ Additionally, forward all Datadog environment variables used to configure the Da
 - APPVEYOR_REPO_TAG_NAME
 - APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH
 
-### [Azure Pipelines][2]
+## [Azure Pipelines][2]
 
 - TF_BUILD
 - BUILD_DEFINITIONNAME
@@ -43,7 +41,7 @@ Additionally, forward all Datadog environment variables used to configure the Da
 - SYSTEM_PULLREQUEST_SOURCEBRANCH
 - SYSTEM_PULLREQUEST_SOURCECOMMITID
 
-### [BitBucket][3]
+## [BitBucket][3]
 
 - BITBUCKET_PIPELINE_UUID
 - BITBUCKET_BUILD_NUMBER
@@ -54,7 +52,7 @@ Additionally, forward all Datadog environment variables used to configure the Da
 - BITBUCKET_BRANCH
 - BITBUCKET_TAG
 
-### [BuildKite][4]
+## [BuildKite][4]
 
 - BUILDKITE
 - BUILDKITE_PIPELINE_SLUG
@@ -68,7 +66,7 @@ Additionally, forward all Datadog environment variables used to configure the Da
 - BUILDKITE_BRANCH
 - BUILDKITE_TAG
 
-### [CircleCI][5]
+## [CircleCI][5]
 
 - CIRCLECI
 - CIRCLE_PROJECT_REPONAME
@@ -81,7 +79,7 @@ Additionally, forward all Datadog environment variables used to configure the Da
 - CIRCLE_BRANCH
 - CIRCLE_TAG
 
-### [GitHub Actions][6]
+## [GitHub Actions][6]
 
 - GITHUB_ACTION
 - GITHUB_RUN_ID
@@ -93,7 +91,7 @@ Additionally, forward all Datadog environment variables used to configure the Da
 - GITHUB_HEAD_REF
 - GITHUB_REF
 
-### [GitLab][7]
+## [GitLab][7]
 
 - GITLAB_CI
 - CI_PIPELINE_ID
@@ -107,7 +105,7 @@ Additionally, forward all Datadog environment variables used to configure the Da
 - CI_COMMIT_BRANCH
 - CI_COMMIT_TAG
 
-### [Jenkins][8]
+## [Jenkins][8]
 
 - JENKINS_URL
 - BUILD_TAG
@@ -120,7 +118,7 @@ Additionally, forward all Datadog environment variables used to configure the Da
 - GIT_COMMIT
 - GIT_BRANCH
 
-### [TravisCI][9]
+## [TravisCI][9]
 
 - TRAVIS
 - TRAVIS_BUILD_ID
@@ -135,9 +133,6 @@ Additionally, forward all Datadog environment variables used to configure the Da
 - TRAVIS_PULL_REQUEST_SLUG
 - TRAVIS_PULL_REQUEST_BRANCH
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.appveyor.com/docs/environment-variables/
 [2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
