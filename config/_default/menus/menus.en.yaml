@@ -1848,7 +1848,7 @@ main:
     identifier: cws_workload_security_rules
     weight: 303
   - name: OOTB Rules
-    url: security_platform/default_rules#cat-runtime-agent
+    url: security_platform/default_rules#cat-workload-security
     parent: cloud_workload_security
     identifier: cws_workload_default_rules
     weight: 304
