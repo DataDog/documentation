@@ -581,6 +581,7 @@ Once you know about the [**total** requirements for your private location](#priv
 #### Queueing mechanism
 
 When there are several workers associated with a private location, each worker requests a number of tests to run that depends on its [`concurrency` parameter][15] and on the number of additional test runs that can be assigned to it: when worker 1 is processing tests, worker 2 requests the following tests, etc. Thanks to that mechanism, there is no impact on how test runs are executed.
+
 ## Scale your private location
 
 Because you can run several containers for one single private location with a single configuration file, you can **horizontally scale** your private locations by adding or removing workers to them. When doing so, make sure to set a `concurrency` parameter and allocate worker resources that are consistent with the types and the number of tests you want your private location to execute.
