@@ -52,9 +52,10 @@ Beta integrations are disabled by default but can be enabled individually:
 | Spark Java              | 2.3+       | [Beta][2]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
+| Tomcat                  | 5.5+       | Fully Supported | `tomcat`                                       |
 | Vert.x                  | 3.4-3.9.x  | Fully Supported | `vertx`, `vertx-3.4`                           |
 
-**Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, and JBoss.
+**Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
 
 **Integrations Disabled By Default**
