@@ -160,6 +160,20 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+### Dealing with "Script error."
+
+{{< img src="real_user_monitoring/browser/script-error.png" alt="Real User Monitoring script error example" style="width:75%;" >}}
+
+For security reasons, browsers hide details from errors triggered by cross-origin scripts. Some of the reasons why you are seeing this error are:
+- Your JavaScript files are hosted on a different hostname (e.g. `example.com` includes assets from `static.example.com`)
+- Your website includes JavaScript libraries hosted on a CDN
+- Your website includes 3rd-party JavaScript libraries hosted on the provider's servers
+
+You can get visibility into cross-origin scripts by following these two steps:
+1. Call JavaScript libraries with crossorigin="anonymous"
+2. Configure the Access-Control-Allow-Origin HTTP header
 
 ## Further Reading
 
