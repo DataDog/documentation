@@ -16,35 +16,31 @@ Find tests and pipelines that run slowly, or are unreliable, so you know where t
 
 <div class="alert alert-info"><p>CI Monitoring is in private beta. If you want to be added to the beta or have feedback about the features, <a href="/help/">contact the Datadog Support team</a>.</p><p>CI Monitoring is available only on <a href="/getting_started/site/">the US Datadog site</a> at this time.</p></div>
 
-## Enabling CI pipeline and test monitoring in Datadog
-
-Ensure the Datadog Agent is installed and configured for your particular CI provider and its architecture. See [Setup Pipelines][1] and [Setup Tests][2] for information about supported CI products and step-by-step configuration.
-
 ## Gain insights into your pipelines
 
-Your pipelines appear in the [Pipelines][3] section under the CI menu.
+Your pipelines appear in the [Pipelines][1] section under the CI menu.
 
-Each pipeline execution is reported as a trace, which includes stage and job information. You can list, filter, and get individual pipeline execution traces on the [Pipeline Executions][4] page. Interactively plot graphs and top lists using the [Analytics][5] section.
+Each pipeline execution is reported as a trace, which includes stage and job information. You can list, filter, and get individual pipeline execution traces on the [Pipeline Executions][2] page. Interactively plot graphs and top lists using the [Analytics][3] section.
 
-The [Pipelines][3] page shows aggregate stats for the default branch of each pipeline, as well as the status of the latest pipeline execution. Selecting a pipeline takes you to a dashboard where for insights such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for both stages and jobs to quickly rank them in terms of duration, percentage of overall execution time, or failure rate.
+The [Pipelines][1] page shows aggregate stats for the default branch of each pipeline, as well as the status of the latest pipeline execution. Selecting a pipeline takes you to a dashboard for insights such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for both stages and jobs to quickly rank them in terms of duration, percentage of overall execution time, or failure rate.
 
 {{< img src="ci/ci-single-pipeline.png" alt="Details for a single pipeline"  style="width:100%;">}}
 
-CI pipeline data is available in [Dashboards][6] and [Notebooks][7].
+CI pipeline data is available in [Dashboards][4] and [Notebooks][5].
 
 ## Gain insights into your tests
 
-Your tests appear in the [Tests][8] page under the CI menu in Datadog.
+Your tests appear in the [Tests][6] page under the CI menu in Datadog.
 
-Each test execution is reported as a trace, which in the case of integration tests includes calls made to datastores or third party services using regular [APM instrumentation][9]. You can list, filter, and get individual test execution traces in the [Test Runs][10] tab. You can also interactively plot graphs and top lists using the [Analytics][11] tab.
+Each test execution is reported as a trace, which in the case of integration tests includes calls made to datastores or third party services using regular [APM instrumentation][7]. You can list, filter, and get individual test execution traces in the [Test Runs][8] tab. You can also interactively plot graphs and top lists using the [Analytics][9] tab.
 
 {{< img src="ci/ci-test-runs.png" alt="Test Runs page"  style="width:100%;">}}
 
-The [Tests][8] page shows the _Branches_ list and the _Test Services_ list.
+Test execution data is also available in [Dashboards][4] and [Notebooks][5]. The Tests page shows the _Branches_ list and the _Test Services_ list.
 
 ### Branches list
 
-The [Branches][12] tab lists all branches from all Test Services that have reported test results. This tab is useful for individual developers to quickly see the status of their branches and troubleshoot test failures.
+The [Branches][10] tab lists all branches from all Test Services that have reported test results. This tab is useful for individual developers to quickly see the status of their branches and troubleshoot test failures.
 
 In this page, filter the list to show only your branches (branches that contain at least one commit authored by you) by enabling clicking **My branches** and adding the email addresses you use in your Git configuration.
 
@@ -54,31 +50,33 @@ Click on a branch to see a branch dashboard showing detailed information about f
 
 ### Test Services list
 
-The [Test Services][13] shows the default branch of each test service. This tab is useful for teams to understand the overall health of the service over time.
+The [Test Services][11] shows the default branch of each test service. This tab is useful for teams to understand the overall health of the service over time.
 
 This page shows the same information as the Branches list, but applied to the default branch. Click on a branch to see the default branch dashboard.
 
-Test execution data is also available in [Dashboards][6] and [Notebooks][7].
-
 ### How third-party services data is shown
 
-Spans generated by third party services that are instrumented with APM and that are involved in integration tests appear in [APM][14]. You can filter spans that were generated as part of an integration test using the `Origin Service` facet and selecting the test service name used by the integration test.
+Spans generated by third party services that are instrumented with APM and that are involved in integration tests appear in [APM][12]. You can filter spans that were generated as part of an integration test using the `Origin Service` facet and selecting the test service name used by the integration test.
+
+## Ready to start?
+
+Ensure the Datadog Agent is installed and configured for your particular CI provider and its architecture. See [Setup Pipelines][13] and [Setup Tests][14] for information about supported CI products and step-by-step configuration. Then start exploring Datadog CI Visibility.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/setup_pipelines/
-[2]: /continuous_integration/setup_tests
-[3]: https://app.datadoghq.com/ci/pipelines
-[4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
-[6]: https://app.datadoghq.com/dashboard/lists
-[7]: https://app.datadoghq.com/notebook/list
-[8]: https://app.datadoghq.com/ci/test-services
-[9]: https://www.datadoghq.com/auto-instrumentation/
-[10]: https://app.datadoghq.com/ci/test-runs
-[11]: https://app.datadoghq.com/ci/test-runs?viz=timeseries
-[12]: https://app.datadoghq.com/ci/test-services?viz=branches
-[13]: https://app.datadoghq.com/ci/test-services?viz=test-services
-[14]: https://app.datadoghq.com/apm/home
+[1]: https://app.datadoghq.com/ci/pipelines
+[2]: https://app.datadoghq.com/ci/pipeline-executions
+[3]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
+[4]: https://app.datadoghq.com/dashboard/lists
+[5]: https://app.datadoghq.com/notebook/list
+[6]: https://app.datadoghq.com/ci/test-services
+[7]: https://www.datadoghq.com/auto-instrumentation/
+[8]: https://app.datadoghq.com/ci/test-runs
+[9]: https://app.datadoghq.com/ci/test-runs?viz=timeseries
+[10]: https://app.datadoghq.com/ci/test-services?viz=branches
+[11]: https://app.datadoghq.com/ci/test-services?viz=test-services
+[12]: https://app.datadoghq.com/apm/home
+[13]: /continuous_integration/setup_pipelines/
+[14]: /continuous_integration/setup_tests

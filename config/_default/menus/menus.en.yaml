@@ -1634,7 +1634,7 @@ main:
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
     weight: 1605
-  - name: Continuous Integration
+  - name: CI Visibility
     url: continuous_integration/
     pre: nav_ci
     identifier: ci
@@ -1644,15 +1644,15 @@ main:
     parent: ci
     identifier: setup_tests
     weight: 1
-  - name: Containers
-    url: continuous_integration/setup_tests/container/
+  - name: Installing the Agent
+    url: continuous_integration/setup_tests/agent/
     parent: setup_tests
-    identifier: ci_container
+    identifier: ci_agent
     weight: 101
-  - name: SaaS CI
-    url: continuous_integration/setup_tests/saas/
+  - name: Tests in Containers
+    url: continuous_integration/setup_tests/containers/
     parent: setup_tests
-    identifier: ci_saas
+    identifier: ci_containers
     weight: 102
   - name: .NET
     url: continuous_integration/setup_tests/dotnet/
@@ -1667,7 +1667,7 @@ main:
   - name: JavaScript
     url: continuous_integration/setup_tests/javascript/
     parent: setup_tests
-    identifier: ci_javascro[t]
+    identifier: ci_javascript
     weight: 105
   - name: Python
     url: continuous_integration/setup_tests/python/

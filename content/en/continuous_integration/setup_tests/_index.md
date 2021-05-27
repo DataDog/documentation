@@ -8,8 +8,8 @@ further_reading:
 ---
 
 {{< whatsnext desc="Setting up and configuring the Agent:" >}}
-    {{< nextlink href="continuous_integration/setup_tests/container" >}}Container{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/setup_tests/saas" >}}SaaS CI{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/agent" >}}Installing the Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/containers" >}}Forwarding Environment Variables for Tests in Containers{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="CI tests providers:" >}}
     {{< nextlink href="continuous_integration/setup_tests/dotnet" >}}.NET{{< /nextlink >}}
