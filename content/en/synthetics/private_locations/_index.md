@@ -580,7 +580,8 @@ Once you know about the [**total** requirements for your private location](#priv
 
 #### Queueing mechanism
 
-When there are several workers associated with a private location, each worker requests a number of tests to run that depends on its [`concurrency` parameter][15] and on the number of additional test runs that can be assigned to it: when worker 1 is processing tests, worker 2 requests the following tests, etc. Thanks to that mechanism, there is no impact on how test runs are executed.
+When there are several workers associated with a private location, each worker requests a number of tests to run that depends on its [`concurrency` parameter][15] and on the number of additional test runs that can be assigned to it.   
+** Example:** 10 tests are scheduled to run simultaneously on a private location that has 2 workers running. If worker 1 is currently running 2 tests, it can request 3 additional tests to run. If at this time, worker 2 is not running any tests, it will then request the 5 following tests. The remaining 2 tests can be requested by which ever worker has finished running its test first, ie which ever worker has available slots.
 
 ## Scale your private location
 
