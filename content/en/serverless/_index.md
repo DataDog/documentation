@@ -9,11 +9,14 @@ aliases:
   - /tracing/serverless_functions/datadog_apm
   - /integrations/amazon_lambda/docs.datadoghq.com/serverless/
 further_reading:
+- link: "https://www.datadoghq.com/state-of-serverless"
+  tag: "Blog"
+  text: "The State of Serverless"
 - link: "/integrations/amazon_xray/"
-  tag: "X-Ray Integration"
+  tag: "Documentation"
   text: "AWS X-Ray Integration"
 - link: "/integrations/amazon_lambda/"
-  tag: "AWS Lambda Integration"
+  tag: "Documentation"
   text: "AWS Lambda Integration"
 - link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
   tag: "Blog"
