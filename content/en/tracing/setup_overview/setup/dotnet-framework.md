@@ -147,10 +147,7 @@ For additional details on custom instrumentation and custom tagging, see [.NET C
 
 The .NET Tracer has configuration settings which you can set by any of these methods:
 
-- Environment variables
-- In the .NET application code
-- In the application's `app.config` or `web.config` file (.NET Framework only)
-- Using a `datadog.json` file
+![image](https://user-images.githubusercontent.com/7599081/119893905-cca92e00-bef0-11eb-9642-f3402a9e1809.png)
 
 {{< tabs >}}
 
