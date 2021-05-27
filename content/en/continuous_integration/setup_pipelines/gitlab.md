@@ -10,7 +10,7 @@ further_reading:
 
 To enable traces for your GitLab CI pipelines a [native integration][1] is available and hidden under a [feature flag][2] since release `13.7.0`.
 
-If you are a GitLab.com user and you want to early-adopt this integration, [open a support ticket][8] with GitLab requesting that the Datadog integration be enabled in your account.
+If you are a GitLab.com user and you want to early-adopt this integration, [open a support ticket][3] with GitLab requesting that the Datadog integration be enabled in your account.
 
 If you manage your own GitLab installation and your version is recent enough, you can enable the feature flag yourself by executing the following commands that use GitLab's [Rails Runner][4] depending on your installation type:
 
@@ -39,7 +39,7 @@ Test the integration with the *Test settings* button. After it's successful, cli
 
 ## Integrating through webhooks
 
-As an alternative to using the native Datadog integration, you can use [webhooks][9] to send pipeline data to Datadog.
+As an alternative to using the native Datadog integration, you can use [webhooks][7] to send pipeline data to Datadog.
 
 **Note**: The native Datadog integration is the recommended approach and the one that will have active development. Use webhooks only if the native Datadog integration option is not available to you (for example, having an older GitLab version and you're not able to upgrade).
 
@@ -52,7 +52,7 @@ To set custom `env` or `service` parameters, use query parameters in the webhook
 
 ## Visualize pipeline data in Datadog
 
-After the integration is successfully configured, both [Pipelines][7] and [Pipeline Executions][8] pages will start populating with data after pipelines finish.
+After the integration is successfully configured, both [Pipelines][8] and [Pipeline Executions][9] pages will start populating with data after pipelines finish.
 
 Note that the Pipelines page shows data for only the default branch of each repository.
 
@@ -63,11 +63,10 @@ Note that the Pipelines page shows data for only the default branch of each repo
 
 [1]: https://docs.gitlab.com/ee/integration/
 [2]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[3]: /help/
+[3]: https://support.gitlab.com/
 [4]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
 [5]: https://docs.gitlab.com/ee/administration/troubleshooting/kubernetes_cheat_sheet.html#gitlab-specific-kubernetes-information
 [6]: https://app.datadoghq.com/account/settings#api
-[6]: https://app.datadoghq.com/ci/pipelines
-[7]: https://app.datadoghq.com/ci/pipeline-executions
-[8]: https://support.gitlab.com/
-[9]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
+[7]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
+[8]: https://app.datadoghq.com/ci/pipelines
+[9]: https://app.datadoghq.com/ci/pipeline-executions
