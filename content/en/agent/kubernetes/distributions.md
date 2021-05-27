@@ -26,7 +26,14 @@ further_reading:
 
 This section aims to document specificites and to provide good base configuration for all major Kubernetes distributions.
 These configuration can then be customized to add any Datadog feature.
-## AWS Elastic Kubernetes Service (EKS)
+
+* [AWS Elastic Kubernetes Service (EKS)](#EKS)
+* [Azure Kubernetes Service (AKS)](#AKS)
+* [Google Kubernetes Engine (GKE)](#GKE)
+* [Red Hat OpenShift](#Openshift)
+* [Rancher](#Rancher)
+
+## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
 No specific configuration is required.
 
@@ -92,7 +99,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Azure Kubernetes Service (AKS)
+## Azure Kubernetes Service (AKS) {#AKS}
 
 AKS requires specific configuration for the `Kubelet` integration due to AKS certificates setup.
 
@@ -171,13 +178,58 @@ spec:
 This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes.
 In this case, using `tlsVerify: false` is required.
 
-## Google Kubernetes Engine (GKE)
+## Google Kubernetes Engine (GKE) {#GKE}
+
+GKE can be configured in two different mode of operation:
+
+- **Standard**: You manage the cluster's underlying infrastructure, giving you node configuration flexibility.
+- **Autopilot**: GKE provisions and manages the cluster's underlying infrastructure, including nodes and node pools, giving you an optimized cluster with a hands-off experience.
+
+Depending of your cluster the operation mode, the Datadog agent needs to be configured differently.
+
+### Standard
 
 Since Agent 7.26, no specific configuration is required for GKE anymore (whether you run `Docker` and/or `containerd`).
 
 **Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are not supported due to missing Kernel headers.
 
-## Red Hat OpenShift
+### Autopilot
+
+GKE Autopilot comes with hardened security and limited Nodes access. Thus requiring some specific configuration.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Custom `values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+
+  # Enable the new `kubernetes_state_core` check.
+  kubeStateMetricsCore:
+    enabled: true
+  # Avoid deploying kube-state-metrics chart.
+  # The new `kubernetes_state_core` doesn't require to deploy the kube-state-metrics anymore.
+  kubeStateMetricsEnabled: false
+
+providers:
+  gke:
+    autopilot: true
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Not supported yet. Will be available with the Datadog Operator v0.7.0.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Red Hat OpenShift {#Openshift}
 
 OpenShift comes with hardened security by default (SELinux, SecurityContextConstraints), thus requiring some specific configuration:
 - Create SCC for Node Agent and Cluster Agent
@@ -286,7 +338,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Rancher
+## Rancher {#Rancher}
 
 Rancher installations are close to vanilla Kubernetes, requiring only some minor configuration:
 - Tolerations are required to schedule the Node Agent on `controlplane` and `etcd` nodes
