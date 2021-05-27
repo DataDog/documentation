@@ -1,7 +1,7 @@
 extends: capitalization
 message: "'%s' should use sentence-style capitalization."
 link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#headers"
-level: suggestion
+level: warning
 scope: heading
 match: $sentence
 exceptions:
@@ -65,6 +65,7 @@ exceptions:
   - IoT
   - IPs
   - Java
+  - JavaScript
   - JBoss
   - JMXFetch
   - Journald

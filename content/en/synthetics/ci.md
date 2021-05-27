@@ -540,7 +540,7 @@ Variables to replace in the test. This object should contain, as keys, the name 
 
 `pollingTimeout`
 : **Type**: integer<br>
-Duration after which synthetic tests are considered failed (in milliseconds).
+Duration after which `datadog-ci` should stop polling for test results (in milliseconds). Test results finishing after this duration are considered failed test results at the CI level.
 
 **Note**: Tests' overrides take precedence over global overrides.
 

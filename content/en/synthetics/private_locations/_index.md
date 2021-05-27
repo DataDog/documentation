@@ -38,7 +38,7 @@ Your private location worker pulls your test configurations from Datadog’s ser
 
 The private location worker is shipped as a Docker container. The official [Docker image][3] is available on Docker Hub. It can run on a Linux based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
 
-### Datadog Private Locations Endpoints
+### Datadog private locations endpoints
 
 To pull test configurations and push test results, the private location worker needs access to the below Datadog API endpoints.
 
@@ -112,7 +112,7 @@ Then click **Save Location and Generate Configuration File** to create your priv
 
 Configure your private location by customizing the generated configuration file. Initial configuration parameters like [proxy](#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) are added in **Step 2** and are automatically reflected in the **Step 3** configuration file. Depending on your internal network setup, you may want to configure your private location with [advanced options](#advanced-configuration).
 
-#### Proxy Configuration
+#### Proxy configuration
 
 If the traffic between your private location and Datadog has to go through a proxy, specify your proxy URL with the following format: `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` to add the associated `proxyDatadog` parameter to your generated configuration file.
 
@@ -120,7 +120,7 @@ If the traffic between your private location and Datadog has to go through a pro
 
 [Advanced proxy configuration options][5] are available.
 
-#### Blocking Reserved IPs
+#### Blocking reserved IPs
 
 By default, Synthetic users can create Synthetic tests on endpoints using any IP. If you want to prevent users from creating tests on sensitive internal IPs in your network, toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]) and set the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file.
 
@@ -130,7 +130,7 @@ If some of the endpoints you are willing to test are located within one or sever
 
 [Advanced reserved IPs configuration options][8] are available.
 
-#### Advanced Configuration
+#### Advanced configuration
 
 [Advanced configuration options][9] are available and can be found by running the below `help` command:
 
