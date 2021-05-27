@@ -17,7 +17,7 @@ further_reading:
 
 * xUnit 2.2+
 * NUnit 3.0+
-* MsTest V2 14+
+* MsTest V2 14+ (experimental)
 
 ## Supported CI providers
 
@@ -59,7 +59,7 @@ dd-trace dotnet test
 
 All tests will be instrumented automatically.
 
-## CLI configuration settings
+### Configuration settings
 
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
 
@@ -73,22 +73,20 @@ The following table shows the default values for key configuration settings:
 | CLI option                     | Environment variable          | Default value            | Description                                                             |
 |--------------------------------|--------------------------------|-------------------------|-------------------------------------------------------------------------|
 | `--set-ci`                     |                                | `false`                 | Sets up the clr profiler environment variables for all the CI pipeline. |
-| `--dd-env`                     | `DD_ENV`                       | `(empty)`               | Environment name for the unified service tagging.                       |
-| `--dd-service`                 | `DD_SERVICE`                   | `(ProcessName)`         | Service name for the unified service tagging.                           |
-| `--dd-version`                 | `DD_VERSION`                   | `(empty)`               | Version for the unified service tagging.                                |
-| `--agent-url`                  | `DD_TRACE_AGENT_URL`           | `http://localhost:8126` | Datadog trace agent url.                                                |
+| `--dd-env`                     | `DD_ENV`                       | `(empty)`               | Environment name for unified service tagging.                       |
+| `--dd-service`                 | `DD_SERVICE`                   | `(ProcessName)`         | Service name for unified service tagging.                           |
+| `--dd-version`                 | `DD_VERSION`                   | `(empty)`               | Version for unified service tagging.                                |
+| `--agent-url`                  | `DD_TRACE_AGENT_URL`           | `http://localhost:8126` | Datadog trace agent URL.                                                |
 
-Additionally, all [Datadog Tracer configuration][2] options can be used during test phase.
+Additionally, all [Datadog Tracer configuration][2] options can be used during test phase. 
 
-### Example
-
-To run a test suite with a custom agent URL and environment name:
+For example, to run a test suite with a custom agent URL and a custom service name:
 
 ```
-dd-trace --agent-url=http://agent:8126 --dd-env=ci dotnet test
+dd-trace --agent-url=http://agent:8126 --dd-service=my-app dotnet test
 ```
 
-## Passing parameters to the application
+### Passing parameters to the application
 
 If the application expects command line arguments, use a `--` separator before the target application to avoid parameter collision.
 
@@ -98,15 +96,13 @@ The following example shows how to instrument the command `dotnet test --framewo
 dd-trace --dd-env=ci -- dotnet test --framework netcoreapp3.1
 ```
 
-## Instrumenting MsTest V2 framework
+### Instrumenting MsTest V2 framework
 
-MsTest V2 framework is disabled by default. To enable it, set the following environment variable before running the `dd-trace dotnet test` command:
+Support for MsTest V2 framework is disabled by default, as it relies on an experimental method of instrumentation (some third-party libraries' instrumentation might be missing). To enable it, set the following environment variable before running the `dd-trace dotnet test` command:
 
 ```
 DD_TRACE_CALLTARGET_ENABLED=true
 ```
-
-This enables the new instrumentation format in the .NET tracer.
 
 ## Further reading
 

@@ -13,7 +13,7 @@ further_reading:
 * JUnit 5.3+
 * TestNG 6.4+
 
-Additionally, we support the test frameworks which are based on JUnit, such as Spock Framework and Cucumber-Junit.
+Additionally, we support the test frameworks that are based on JUnit, such as Spock Framework and Cucumber-Junit.
 
 ## Supported CI providers
 
@@ -31,7 +31,9 @@ Additionally, we support the test frameworks which are based on JUnit, such as S
 
 [Install the Datadog Agent to collect tests data][1].
 
-## Installing tracing with Maven
+## Installing the Java tracer
+
+### Using Maven
 
 Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible via [Maven Repository][2]: 
 
@@ -57,16 +59,32 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 </profile>
 ```
 
-### Instrumenting your tests
+### Using Gradle
 
-Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] to use Datadog Java agent:
+Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][2].
+
+```groovy
+configurations {
+    ddTracerAgent
+}
+
+dependencies {
+    ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
+}
+```
+
+## Instrumenting your tests
+
+### Using Maven
+
+Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] to use Datadog Java agent (use `-Ddd.integration.testng.enabled=true` if your testing framework is TestNG rather than JUnit):
 
 ```xml
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-surefire-plugin</artifactId>
   <configuration>
-    <argLine>${dd.java.agent.arg}</argLine>
+    <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.integration.junit.enabled=true</argLine>
   </configuration>
 </plugin>
 
@@ -74,7 +92,7 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-failsafe-plugin</artifactId>
   <configuration>
-     <argLine>${dd.java.agent.arg}</argLine>
+     <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.integration.junit.enabled=true</argLine>
   </configuration>
   <executions>
       <execution>
@@ -87,32 +105,17 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
 </plugin>
 ```
 
-ARun your tests using the `ci-app` profile, for example:
+Run your tests using the `ci-app` profile, for example:
 ```
 mvn clean verify -Pci-app
 ```
+### Using Gradle
 
-## Installing tracing with Gradle
-
-Add the `ddTracerAgent` entry to the `configurations` task block and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer accessible via [Maven Repository][2]:
-
-```groovy
-configurations {
-    ddTracerAgent
-}
-
-dependencies {
-    ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
-}
-```
-
-### Instrumenting your tests
-
-Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property:
+Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property (use `-Ddd.integration.testng.enabled=true` if your testing framework is TestNG rather than JUnit):
 
 ```groovy
 test {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}"]
+    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.integration.junit.enabled=true"]
 }
 ```
 
@@ -124,7 +127,7 @@ Run your tests as you normally do, for example:
 
 **Important:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
 
-## Enabling
+## Configuration options
 
 All configuration options below have system property and environment variable equivalents. If the same key type is set for both, the system property configuration takes priority. System properties can be set as JVM flags.
 
@@ -139,7 +142,7 @@ Additionally, set the tracer prioritization type to `EnsureTrace` to avoid dropp
 |--------------------------|--------------------------|------------|-------------------------------------------------------------------|
 | `dd.prioritization.type` | `DD_PRIORITIZATION_TYPE` | `FAST_LANE` | Set to `ENSURE_TRACE` to avoid dropping tests spans by the tracer. |
 
-All [Datadog Tracer configuration][5] options can be used to during test phase.
+All [Datadog tracer configuration][5] options can be used to during test phase.
 
 ### Recommended configuration
 
@@ -147,7 +150,7 @@ To improve the Datadog Java Agent startup, follow these recommended configuratio
 
 | System property          | Environment variable            | Default | Recommendation                                                         |
 |--------------------------------|--------------------------------|--------------------|------------------------------------------------------------------------|
-| `dd.service`                   | `DD_SERVICE`                   | `unnamed-java-app` | The name of the Test Service that will appear in the CI/CD Tests tab.  |
+| `dd.service`                   | `DD_SERVICE`                   | `unnamed-java-app` | The name of the Test Service that will appear in the CI Tests tab.  |
 | `dd.agent.host`                | `DD_AGENT_HOST`                | `localhost`        | Make sure this property targets the Datadog Agent host.                |
 | `dd.trace.agent.port`          | `DD_TRACE_AGENT_PORT`          | `8126`             | Make sure this property targets the Datadog Agent port.                |
 | `dd.integrations.enabled`      | `DD_INTEGRATIONS_ENABLED`      | `true`             | `false`                                                                |
@@ -155,7 +158,7 @@ To improve the Datadog Java Agent startup, follow these recommended configuratio
 | `dd.prioritization.type`       | `DD_PRIORITIZATION_TYPE`       | `FAST_LANE`        | `ENSURE_TRACE`                                                         |
 | `dd.jmxfetch.enabled`          | `DD_JMXFETCH_ENABLED`          | `true`             | `false`                                                                |
 
-You can change the test integration from `JUnit` to `TestNG` modifying the corresponding option.
+Change the `dd.integration` property or variable from `junit` to `testng` to correspond to your test integration.
 
 **Important:** You may want to enable more integrations if you have integration tests. To enable all default integrations, leave the `DD_INTEGRATIONS_ENABLED` property unset.
 

@@ -7,6 +7,13 @@ further_reading:
       text: "linktext"
 ---
 
+## Supported test frameworks
+
+* Jest >=24.8.0
+  * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
+  * Only [`jest-circus`][1] is supported as a `testRunner`. 
+* Mocha >=5.2.0
+
 ## Supported CI providers
 
 * Appveyor
@@ -21,46 +28,52 @@ further_reading:
 
 ## Prerequisites
 
-[Install the Datadog Agent to collect tests data][1].
+[Install the Datadog Agent to collect tests data][2].
 
-## Jest Instrumentation
+## Installing the JavaScript tracer
 
-### Compatibility
-
-* Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported yet.
-* Only [`jest-circus`][1] is supported as a `testRunner`. 
-
-### Install dependencies
-* [`dd-trace`][2]: Datadog APM tracing client for Node.js.
-* [`jest-circus`][1]: Test runner for Jest.
+To install the [JavaScript tracer][3], run:
 
 ```bash
-yarn add --dev dd-trace jest-circus
+yarn add --dev dd-trace
 ```
 
-### Configure Jest
-Configure a custom [testEnvironment][3] and [testRunner][4] in your `jest.config.js` or however you are configuring [jest][5]:
+For more information, see the [JavaScript tracer installation docs][4].
 
-```javascript
-// jest.config.js
-module.exports = {
-  // ...
-  testRunner: 'jest-circus/runner',
-  // It may be another route. It refers to the file below.
-  testEnvironment: '<rootDir>/testEnvironment.js',
-  // ...
-}
-```
+## Instrument your tests
 
-And in `testEnvironment.js`:
+### Jest instrumentation
 
-```javascript
-require('dd-trace').init()
-// jest-environment-jsdom is an option too
-module.exports = require('jest-environment-node') 
-```
+1. Install the `jest-circus` test runner:
 
-The default configuration should work for most cases, but depending on the volume and speed of your tests, the tracer or the Agent might drop some of the spans. Alleviate this by increasing the `flushInterval` when initializing the tracer:
+    ```bash
+    yarn add --dev jest-circus
+    ```
+
+2. Configure a custom [testEnvironment][5] and [testRunner][6] in your `jest.config.js` or however you are configuring [jest][7]:
+
+    ```javascript
+    // jest.config.js
+    module.exports = {
+      // ...
+      testRunner: 'jest-circus/runner',
+      // It may be another route. It refers to the file below.
+      testEnvironment: '<rootDir>/testEnvironment.js',
+      // ...
+    }
+    ```
+
+    And in `testEnvironment.js`:
+
+    ```javascript
+    require('dd-trace').init({
+      service: 'ui-tests' // The name of the Test Service that will appear in the CI Tests tab.
+    })
+    // jest-environment-jsdom is an option too
+    module.exports = require('jest-environment-node') 
+    ``` 
+
+**Note**: The default configuration should work for most cases, but depending on the volume and speed of your tests, the tracer or the Agent might drop some of the spans. Alleviate this by increasing the `flushInterval` when initializing the tracer:
 
 ```javascript
 require('dd-trace').init({
@@ -68,16 +81,9 @@ require('dd-trace').init({
 })
 ```
 
-## Mocha instrumentation
+### Mocha instrumentation
 
-### Install dependencies
-
-```bash
-yarn add --dev dd-trace
-```
-
-### Configure Mocha
-Add `--require dd-trace/init` to however you normally run your `mocha` tests, e.g. update your `package.json`:
+Add `--require dd-trace/init` to however you normally run your `mocha` tests, for example in your your `package.json`:
 
 ```javascript
 // package.json
@@ -86,13 +92,13 @@ Add `--require dd-trace/init` to however you normally run your `mocha` tests, e.
 },
 ```
 
-## Disable for local development
+## Disabling instrumentation in local development
 
 If you want to disable the testing instrumentation for local development (where you might not be running the Datadog Agent), these are some options:
 
 ### Jest
 
-When initializing the tracer, you might check whether you are in CI:
+When initializing the tracer, check whether you are in CI:
 
 ```javascript
 require('dd-trace').init({
@@ -102,7 +108,7 @@ require('dd-trace').init({
 
 ### Mocha
 
-You might use different test scripts for CI and local development:
+Use different test scripts for CI and local development:
 
 ```javascript
 // package.json
@@ -112,13 +118,20 @@ You might use different test scripts for CI and local development:
 },
 ```
 
+## Configuration settings
+
+| Environment variable           | Recommendation                                                         |
+|--------------------------------|------------------------------------------------------------------------|
+| `DD_SERVICE`                   | The name of the Test Service that appears in the Tests tab.     |
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[[1]: /continuous_integration/setup_tests/agent/
 [1]: https://github.com/facebook/jest/tree/master/packages/jest-circus
-[2]: https://github.com/DataDog/dd-trace-js
-[3]: https://jestjs.io/docs/en/configuration#testenvironment-string
-[4]: https://jestjs.io/docs/en/configuration#testrunner-string
-[5]: https://jestjs.io/docs/en/configuration
+[2]: /continuous_integration/setup_tests/agent/
+[3]: https://github.com/DataDog/dd-trace-js
+[4]: /tracing/setup_overview/setup/nodejs
+[5]: https://jestjs.io/docs/en/configuration#testenvironment-string
+[6]: https://jestjs.io/docs/en/configuration#testrunner-string
+[7]: https://jestjs.io/docs/en/configuration
