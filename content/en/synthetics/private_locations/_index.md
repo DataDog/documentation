@@ -535,7 +535,7 @@ Your private locations can be used just like any other Datadog managed locations
 
 ### Types of test run
 
-Private locations can run [API][12], [Multistep API][13] and [Browser tests][14]. A same private location can run several types of tests. However, for dimensioning reasons, it can prove helpful to split test assignments based on test types and for instance have some private locations run only API and Multistep API tests and others run only Browser tests, which are heavier than other test types. 
+Private locations can run [API][12], [Multistep API][13] and [Browser tests][14]. A same private location can run several types of tests. However, for dimensioning reasons, it can prove helpful to split test assignments based on test types and for instance have some private locations run only API and Multistep API tests and others run only Browser tests, which are more resource intensive than other test types. 
 
 ### Maximum number of test runs
 
