@@ -551,7 +551,7 @@ Once you know the [type of tests](#types-of-test-runs) you want your private loc
   * CPU: 150mCores
   * Memory: 150MiB
 
-* Additional requirements based on the type of tests run by the private location:
+* Additional requirements are based on the type of tests run by the private location:
 
 | Test type                                     | CPU/Memory/Disk recommendation    |
 | --------------------------------------------- | --------------------------------- |
