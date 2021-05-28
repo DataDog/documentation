@@ -569,7 +569,7 @@ Once you know the [type of tests](#types-of-test-runs) you want your private loc
 
 Once you know about the [**total** requirements for your private location](#private-location-total-hardware-requirements), you can decide how you want these resources to be distributed:
 
-* You can assign all resources to a single worker (ie. to a single container). In this case:
+* You can assign all resources to a single worker. In this case:
   * Set the [`concurrency` parameter][15] to `maximum number of test runs that can be executed in parallel on your private location`.
   * Assign your [total private location resource requirements](#private-location-total-hardware-requirements) to your unique worker.
 * You can distribute resources across several workers by running several containers for one private location with a single configuration file in order to spread the load. In this case:
