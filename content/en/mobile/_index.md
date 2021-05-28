@@ -135,12 +135,14 @@ View your [monitor saved views][18] from your home screen with Datadog widgets. 
 
 {{% /tab %}}
 {{< /tabs >}}
-#### Switch organizations
+#### Multiple organizations
+
+You can display Saved Views from multiple organizations within the same widget. 
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you’ve logged-in are displayed in the configuration screen.
+All organizations you’ve logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
 
 {{% /tab %}}
 {{% tab "Android" %}}
