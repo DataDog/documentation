@@ -589,7 +589,7 @@ Because you can run several containers for one single private location with a si
 
 You can also **vertically scale** your private locations by increasing the load your current private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers can run and update the resources allocated to your workers.
 
-Read more about dimensioning private location [here](#dimension-your-private-location).
+Read more about [dimensioning private locations](#dimension-your-private-location).
 
 ## Further Reading
 
