@@ -563,7 +563,7 @@ Once you know the [type of tests](#types-of-test-runs) you want your private loc
 
 **Note:** Resources requirements may vary based on the application being tested (size and number of assets to be loaded, etc.).
 
-**Note:** When running both API/Multistep API tests and Browser tests on a single private location, the recommendation is to perform computation using Browser tests resource requirements.
+**Note:** When running both API or Multistep API tests and Browser tests on a single private location, the recommendation is to perform computation using Browser tests resource requirements.
 
 ### Assign resources to your private location
 
