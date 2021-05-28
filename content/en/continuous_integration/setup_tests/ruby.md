@@ -37,7 +37,7 @@ To install the Ruby tracer:
 
 See the [Ruby tracer installation docs][2] for more details.
 
-### Configuring Cucumber instrumentation
+## Instrumenting your Cucumber tests
 
 Cucumber integration traces executions of scenarios and steps when using the `cucumber` framework.
 
@@ -76,7 +76,7 @@ Where `options` is an optional `Hash` that accepts the following parameters:
 See also the [Ruby trace library documentation for Cucumber][3].
 
 
-## Configuring RSpec instrumentation
+## Instrumenting your RSpec tests
 
 RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
 
