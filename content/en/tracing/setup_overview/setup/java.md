@@ -18,15 +18,15 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
 ---
-## Compatibility Requirements
+## Compatibility requirements
 
 The Java Tracing Library supports all JVMs on all platforms version 7 and higher. To utilize tracing with the [Continuous Profiler][1], OpenJDK 11+, Oracle Java 11+, OpenJDK 8 for most vendors (version 8u262+) and Zulu Java 8+ (minor version 1.8.0_212+) are supported. Starting in version 8u272+, all vendors will be supported for the Profiler.
 
 All JVM-based languages, such as Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure are supported in the Java tracer and profiler. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
 
-## Installation and Getting Started
+## Installation and getting started
 
-### Follow the in-app Documentation (Recommended)
+### Follow the in-app documentation (recommended)
 
 Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
 
@@ -34,7 +34,7 @@ Follow the [Quickstart instructions][3] within the Datadog app for the best expe
 - Dynamically set `service`, `env` and `version` tags.
 - Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
 
-### Java Installation Steps
+### Java installation
 
 Otherwise, to begin tracing your applications:
 
@@ -212,7 +212,7 @@ For additional details and options, see the [WebSphere docs][1].
 
 - Never add `dd-java-agent` to your classpath. It can cause unexpected behavior.
 
-## Automatic Instrumentation
+## Automatic instrumentation
 
 Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][6]. When a `java-agent` is registered, it has the ability to modify class files at load time.
 
@@ -575,7 +575,7 @@ Would produce the following result:
 
 See the [Java integration documentation][15] to learn more about Java metrics collection with JMX fetch.
 
-### B3 Headers Extraction and Injection
+### B3 headers extraction and injection
 
 Datadog APM tracer supports [B3 headers extraction][16] and injection for distributed tracing.
 
@@ -600,7 +600,7 @@ The value of the property or environment variable is a comma (or space) separate
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-## Trace Reporting
+## Trace reporting
 
 To report a trace to Datadog the following happens:
 
@@ -614,7 +614,7 @@ To report a trace to Datadog the following happens:
 
 To see the actual code, documentation, and usage examples for any of the libraries and frameworks that Datadog supports, check the full list of auto-instrumented components for Java applications in the [Integrations](#integrations) section.
 
-### Trace Annotation
+### Trace annotation
 
 Add the `dd-trace-api` dependency to your project. For Maven, add this to `pom.xml`:
 

@@ -103,7 +103,7 @@ try (final Scope scope = tracer.activateSpan(span)) {
 }
 ```
 
-### Inject & Extract context for Distributed Tracing
+### Inject and extract context for distributed tracing
 
 Create a distributed trace using manual instrumentation with OpenTracing:
 
