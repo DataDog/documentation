@@ -14,7 +14,8 @@ Datadog Continuous Integration (CI) Visibility helps you troubleshoot failures a
 
 Find tests and pipelines that run slowly, or are unreliable, so you know where to focus your efforts to improve your CI environment.
 
-<div class="alert alert-info"><p>CI Monitoring is in private beta. If you want to be added to the beta or have feedback about the features, <a href="/help/">contact the Datadog Support team</a>.</p><p>CI Monitoring is available only on <a href="/getting_started/site/">the US Datadog site</a> at this time.</p></div>
+<div class="alert alert-info"><p>CI Visibility is in private beta. There are no billing implications for tracing pipelines and tests during this period. If you want to be added to the private beta, <a href="http://dtdg.co/ci-visibility-beta-request">fill out this form</a>.</p><p>CI Visibility is available only on <a href="/getting_started/site/">the US Datadog site</a> at this time.</p>
+</div>
 
 ## Gain insights into your pipelines
 

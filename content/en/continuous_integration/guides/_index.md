@@ -1,5 +1,5 @@
 ---
-title: CI Monitoring Guides
+title: CI Visibility Guides
 kind: guide
 private: true
 disable_sidebar: true
