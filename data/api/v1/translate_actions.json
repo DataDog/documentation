@@ -866,6 +866,10 @@
     "request_description": "Status to set the given Synthetic test to.",
     "request_schema_description": "Object to start or pause an existing Synthetic test."
   },
+  "ListGlobalVariables": {
+    "description": "Get the list of all Synthetics global variables.",
+    "summary": "Get all global variables"
+  },
   "CreateGlobalVariable": {
     "description": "Create a Synthetics global variable.",
     "summary": "Create a global variable",
