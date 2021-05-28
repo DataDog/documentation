@@ -18,6 +18,7 @@ further_reading:
     {{< nextlink href="continuous_integration/setup_tests/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="continuous_integration/setup_tests/ruby" >}}Ruby{{< /nextlink >}}
     {{< nextlink href="continuous_integration/setup_tests/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
