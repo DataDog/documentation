@@ -108,6 +108,26 @@ Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ran
 
 Synthetic tests by default do not [renotify][10]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
 
+## Private locations
+
+### My private location containers sometimes get killed `OOM`.
+
+Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+
+### My browser test results sometimes show `Page crashed` errors
+
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+
+### My tests are sometimes slower to execute 
+
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][11].
+
+### I'm seeing `TIMEOUT` errors on API tests executed from my private location
+
+This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
+
+{{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:100%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -122,3 +142,4 @@ Synthetic tests by default do not [renotify][10]. This means that if you add you
 [8]: /synthetics/browser_tests/#use-global-variables
 [9]: https://ip-ranges.datadoghq.com/synthetics.json
 [10]: /synthetics/api_tests/?tab=httptest#notify-your-team
+[11]: /synthetics/private_locations#private-location-total-hardware-requirements
