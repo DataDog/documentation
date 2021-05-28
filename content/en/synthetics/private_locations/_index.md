@@ -571,7 +571,7 @@ Once you know about the [**total** requirements for your private location](#priv
 
 * You can assign all resources to a single worker. In this case:
   * Set the [`concurrency` parameter][15] to `maximum number of test runs that can be executed in parallel on your private location`.
-  * Assign your [total private location resource requirements](#private-location-total-hardware-requirements) to your unique worker.
+  * Assign your [total private location resource requirements](#private-location-total-hardware-requirements) to your unique container.
 * You can distribute resources across several workers by running several containers for one private location with a single configuration file in order to spread the load. In this case:
   * Set the [`concurrency` parameter][15] to `maximum number of test runs that can be executed on your private location / number of workers associated with your private location`.
   * Assign `total private location resource requirements / number of workers` resources to each private location worker.
