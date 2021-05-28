@@ -545,7 +545,7 @@ That maximum number of test runs allows you to later on define the [`concurrency
 
 ### Private location total hardware requirements
 
-Once you know the [type of tests](#types-of-test-run) you want your private location to execute and the [maximum number of test runs](#maximum-number-of-test-runs) that needs to be executed in parallel, you can define the **total** hardware requirements for your private location. 
+Once you know the [type of tests](#types-of-test-runs) you want your private location to execute and the [maximum number of test runs](#maximum-number-of-test-runs) that needs to be executed in parallel, you can define the **total** hardware requirements for your private location. 
 
 * Base requirements: 
   * CPU: 150mCores
