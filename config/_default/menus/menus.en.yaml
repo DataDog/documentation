@@ -4766,7 +4766,7 @@ api:
       operationids:
         - EditGlobalVariable
       unstable: []
-      order: 16
+      order: 17
   - name: Get a global variable
     url: '#get-a-global-variable'
     identifier: get-a-global-variable
@@ -4778,7 +4778,7 @@ api:
       operationids:
         - GetGlobalVariable
       unstable: []
-      order: 17
+      order: 18
   - name: Delete a global variable
     url: '#delete-a-global-variable'
     identifier: delete-a-global-variable
@@ -4790,7 +4790,7 @@ api:
       operationids:
         - DeleteGlobalVariable
       unstable: []
-      order: 18
+      order: 19
   - name: Create a global variable
     url: '#create-a-global-variable'
     identifier: create-a-global-variable
@@ -4801,6 +4801,18 @@ api:
         - v1
       operationids:
         - CreateGlobalVariable
+      unstable: []
+      order: 16
+  - name: Get all global variables
+    url: '#get-all-global-variables'
+    identifier: get-all-global-variables
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListGlobalVariables
       unstable: []
       order: 15
   - name: Pause or start a test
@@ -4850,7 +4862,7 @@ api:
       operationids:
         - UpdateTest
       unstable: []
-      order: 25
+      order: 26
   - name: Get a test configuration
     url: '#get-a-test-configuration'
     identifier: get-a-test-configuration
@@ -4862,7 +4874,7 @@ api:
       operationids:
         - GetTest
       unstable: []
-      order: 24
+      order: 25
   - name: Trigger tests from CI/CD pipelines
     url: '#trigger-tests-from-ci/cd-pipelines'
     identifier: trigger-tests-from-ci/cd-pipelines
@@ -4994,7 +5006,7 @@ api:
       operationids:
         - CreateTest
       unstable: []
-      order: 26
+      order: 27
   - name: Get the list of all tests
     url: '#get-the-list-of-all-tests'
     identifier: get-the-list-of-all-tests
@@ -5018,7 +5030,7 @@ api:
       operationids:
         - UpdatePrivateLocation
       unstable: []
-      order: 20
+      order: 22
   - name: Get a private location
     url: '#get-a-private-location'
     identifier: get-a-private-location
@@ -5042,7 +5054,7 @@ api:
       operationids:
         - DeletePrivateLocation
       unstable: []
-      order: 23
+      order: 24
   - name: Create a private location
     url: '#create-a-private-location'
     identifier: create-a-private-location
@@ -5054,7 +5066,7 @@ api:
       operationids:
         - CreatePrivateLocation
       unstable: []
-      order: 19
+      order: 20
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
     identifier: get-all-locations-public-and-private
@@ -5066,7 +5078,7 @@ api:
       operationids:
         - ListLocations
       unstable: []
-      order: 22
+      order: 23
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
