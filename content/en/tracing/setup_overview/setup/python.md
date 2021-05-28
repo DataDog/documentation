@@ -24,13 +24,13 @@ further_reading:
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
 ---
-## Compatibility Requirements
+## Compatibility requirements
 
 Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
-### Follow the in-app documentation (Recommended)
+### Follow the in-app documentation (recommended)
 
 Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
