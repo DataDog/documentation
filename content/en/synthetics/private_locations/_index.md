@@ -561,7 +561,7 @@ Once you know the [type of tests](#types-of-test-runs) you want your private loc
 **Example:** For a private location running only Browser tests, with a maximum number of concurrent test runs of `10`, the recommendation for a safe usage is 
 ~ 1.5Core CPU `(150mCores + (150mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 100MiB disk `(10MiB*10 test runs)`.
 
-**Note:** Resources requirements may vary based on the application being tested (size/number of assets to be loaded, etc.).
+**Note:** Resources requirements may vary based on the application being tested (size and number of assets to be loaded, etc.).
 
 **Note:** When running both API/Multistep API tests and Browser tests on a single private location, the recommendation is to perform computation using Browser tests resource requirements.
 
