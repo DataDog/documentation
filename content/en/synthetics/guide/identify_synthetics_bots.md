@@ -33,7 +33,7 @@ https://ip-ranges.{{< region-param key="dd_site" >}}/synthetics.json
 
 **Note:** IPs listed use the CIDR notation and may require conversion to IPv4 address ranges before use.
 
-**Note:** You can create an API test on the above endpoint with a JSONPath assertion like `$.synthetics['prefixes_ipv4_by_location']['aws:ap-northeast-1'].length` to be alerted in case of modification.
+**Note:** Apart from addition of new managed locations IPs, the listed IPs rarely change. That being said, if you want to be alerted in case of modification, you can create an API test on the above endpoint with a JSONPath assertion like `$.synthetics['prefixes_ipv4_by_location']['aws:ap-northeast-1'].length`.
 
 ## Default headers
 
