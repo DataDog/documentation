@@ -1,4 +1,3 @@
-import Stickyfill from 'stickyfilljs';
 import { initializeIntegrations } from './components/integrations';
 import { initializeSecurityRules } from './components/security-rules';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
@@ -67,13 +66,7 @@ $(document).ready(function () {
         });
     }
     
-
     updateMainContentAnchors();
-
-
-    // sticky polyfill trigger
-    const elements = document.querySelectorAll('.sticky');
-    Stickyfill.add(elements);
 
     // add targer-blank to external links
     const newLinks = document.getElementsByTagName('a');

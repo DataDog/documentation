@@ -13,7 +13,7 @@ La version 7.27.0 de l'Agent Datadog prend en charge une nouvelle version des c
 
 ### Nouveautés de l'Agent v7.27.0
 
-- Autodiscovery est désormais un processus de base de l'Agent. Il doit être chargé dans le principal check de l'intégration SNMP avec `loader:core`, sous `init_config`, et configuré dans le fichier principal `datadog.yaml` de l'Agent Datadog.
+- Autodiscovery est désormais un processus de base de l'Agent. Il doit être chargé dans le check de l'intégration SNMP principale avec `loader:core`, sous `init_config`, et configuré dans le fichier principal `datadog.yaml` de l'Agent Datadog.
 
 - Il n'est désormais plus possible de faire référence à une MIB en indiquant son nom lisible uniquement. Ainsi, toutes les références aux OID doivent inclure leur adresse numérique, ainsi que leur nom lisible. Tous les profils fournis par Datadog ont été mis à jour. Toutefois, vous devez modifier les profils personnalisés. Des exemples de migration sont fournis ci-dessous.
 
@@ -25,7 +25,7 @@ La version 7.27.0 de l'Agent Datadog prend en charge une nouvelle version des c
 
 ## Instructions
 
-### Pour les environnements avec un Agent de cluster Datadog ou sans Kubernetes
+### Pour les environnements sans Agent de cluster Datadog ni Kubernetes
 
 1. Mettez à jour l'Agent Datadog en installant la version 7.27+ pour la plate-forme correspondante.
 
