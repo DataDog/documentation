@@ -58,18 +58,18 @@ hello()
 
 ### Without Standard Library Logging
 
-If you are not using the standard library `logging` module, you can use the `ddtrace.helpers.get_correlation_ids()` to inject tracer information into your logs.
+If you are not using the standard library `logging` module, you can use the helper method `ddtrace.tracer.get_correlation_ids()` to inject tracer information into your logs.
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
 ``` python
 import ddtrace
-from ddtrace.helpers import get_correlation_ids
+from ddtrace import tracer
 
 import structlog
 
 def tracer_injection(logger, log_method, event_dict):
     # get correlation ids from current tracer context
-    trace_id, span_id = get_correlation_ids()
+    trace_id, span_id = tracer.get_correlation_ids()
 
     # add ids to structlog event dictionary
     event_dict['dd.trace_id'] = trace_id or 0
