@@ -26,6 +26,11 @@ The notes and links widget is similar to [free text widget][1], but allows for m
 2. Choose the text size and the note background color.
 3. Select the pointer position.
 
+This widget supports template variables; use `$<VARIABLE_NAME>.value` syntax to dynamically update the widget content. For example, `$env.value` will update the value of a link to the selected environment.
+
+{{< img src="dashboards/widgets/note/template_var.jpeg" alt="Notes and links widget template variables" style="width:100%;" >}}
+
+
 ## API
 
 This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
