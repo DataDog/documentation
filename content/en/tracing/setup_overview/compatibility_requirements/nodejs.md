@@ -36,6 +36,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [hapi][10]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
 | [koa][11]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][12] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][13] CLI requires static patching using [@datadog/cli][14]. |
+| [next][57]              | `>=9.5`  | Fully supported | CLI usage requires `NODE_OPTIONS='-r dd-trace/init'`. |
 | [paperplane][15]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][16]     |
 | [restify][17]           | `>=3`    | Fully supported |                                            |
 
@@ -63,6 +64,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [mongodb-core][30]     | `>=2`    | Fully supported | Supports Mongoose                                |
 | [mysql][31]            | `>=2`    | Fully supported |                                                  |
 | [mysql2][32]           | `>=1`    | Fully supported |                                                  |
+| [oracledb][58]         | `>=5`    | Fully supported |                                                  |
 | [pg][33]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
 | [redis][34]            | `>=0.12` | Fully supported |                                                  |
 | [tedious][35]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
@@ -173,3 +175,5 @@ For additional information or to discuss [leave a comment on this github issue][
 [54]: https://nodejs.org/api/async_hooks.html
 [55]: https://www.meteor.com/
 [56]: https://github.com/DataDog/dd-trace-js/issues/1229
+[57]: https://nextjs.org/
+[58]: https://oracle.github.io/node-oracledb/

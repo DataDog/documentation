@@ -366,11 +366,9 @@ For other environments, please refer to the [Integrations][4] documentation for 
 
 ## Configure the Tracer
 
-The .NET Tracer has configuration settings that can be set by any of these methods:
+{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET Tracer configuration setting precedence"  >}}
 
-* Environment variables.
-* In the .NET application code.
-* Using a `datadog.json` file.
+The .NET Tracer has configuration settings that can be set by any of these methods:
 
 {{< tabs >}}
 
