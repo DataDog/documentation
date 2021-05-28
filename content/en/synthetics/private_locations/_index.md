@@ -539,7 +539,7 @@ Private locations can run [API][12], [Multistep API][13], and [Browser tests][14
 
 ### Maximum number of test runs
 
-Resources requirements depend on the maximum number of test runs your private location might have to execute in parallel. When defining that number, make sure to take into account spikes that might happen when performing on demand testing (for example, when running tests as part of your [CI/CD pipelines][1]).
+Resource requirements depend on the maximum number of test runs your private location might have to execute in parallel. When defining that number, make sure to take into account spikes that might happen when performing on demand testing (for example, when running tests as part of your [CI/CD pipelines][1]).
 
 That maximum number of test runs allows you to later on define the [`concurrency` parameter][15] of your private location (it defaults to `10`). This parameter allows you to adjust the number of test runs your private location workers can run concurrently.
 
