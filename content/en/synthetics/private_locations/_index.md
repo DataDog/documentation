@@ -587,7 +587,7 @@ When there are several workers associated with a private location, each worker r
 
 Because you can run several containers for one single private location with a single configuration file, you can **horizontally scale** your private locations by adding or removing workers to them. When doing so, make sure to set a `concurrency` parameter and allocate worker resources that are consistent with the types and the number of tests you want your private location to execute.
 
-You can also **vertically scale** your private locations by increasing the load your current private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers can run and update the resources allocated to your workers.
+You can also **vertically scale** your private locations by increasing the load your private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
 
 Read more about [dimensioning private locations](#dimension-your-private-location).
 
