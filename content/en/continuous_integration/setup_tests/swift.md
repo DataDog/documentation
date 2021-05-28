@@ -6,6 +6,18 @@ further_reading:
       tag: "Documentation"
       text: "linktext"
 ---
+
+## Supported languages
+
+* Swift 5.3+
+* Objective-C 2.0+
+
+## Supported platforms
+
+* iOS 11.0+
+* macOS 10.13+
+* tvOS 11.0+
+
 ## Supported CI providers
 
 * Appveyor
@@ -19,29 +31,11 @@ further_reading:
 * TravisCI
 * Bitrise
 
-## Supported versions
-
-The Swift test instrumentation is compatible with the following platforms:
-
-| PLATFORM    | VERSION |
-| ----------- | ----- |
-| iOS         |  11.0+  |
-| macOS       |  10.13+ |
-| tvOS        |  11.0+  |
-
-and the following languages:
-
-| PLATFORM    | VERSION |
-| ----------- | ----- |
-| Swift       |  5.3+   |
-| Objective-C |  2.0+   |
-
-
 ## Prerequisites
 
 [Install the Datadog Agent to collect tests data][1].
 
-## Installing using SPM
+## Installing the Swift testing SDK using SPM
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][2].
 
@@ -59,7 +53,7 @@ and the following languages:
 
     Alternatively, you can build the XCFramework from source code. Download the project at [dd-sdk-swift-testing][2] and run `make release`. The resulting framework `DatadogSDKTesting.xcframework` can be found at `./build/xcframework`.
 
-## Enabling tracing instrumentation
+## Instrumenting your tests
 
 ### Configuring Datadog
 

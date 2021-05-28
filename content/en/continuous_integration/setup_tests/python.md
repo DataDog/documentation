@@ -24,29 +24,35 @@ further_reading:
 
 ## Installing tracing
 
-Follow the [installation instructions][2] for `dd-trace-py`, the Datadog trace library for Python.
+Install the Python tracer by running:
 
-## Enabling and configuring Pytest instrumentation
-
-The `pytest` integration traces test executions.
-
-Enable traced execution of tests using `pytest` runner by running `pytest --ddtrace` or by modifying any configuration file read by pytest (such as `pytest.ini` or `setup.cfg`) as follows:
-
+```bash
+pip install ddtrace
 ```
+
+For more information, see the [Python tracer installation documentation][2].
+
+## Instrumenting your Pytest tests
+
+To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`:
+
+```bash
+pytest --ddtrace
+```
+
+You can also add the following configuration to any file used to configure `pytest` (such as `pytest.ini` or `setup.cfg`):
+
+```ini
 [pytest]
 ddtrace = 1
 ```
-Set the following configuration settings:
 
-`ddtrace.config.pytest["service"]`
-: The service name reported by default for pytest traces. This option can also be set with the `DD_PYTEST_SERVICE` environment variable. 
-: Default: `"pytest"`
+## Configuration parameters
 
-`ddtrace.config.pytest["operation_name"]`
-: The operation name reported by default for pytest traces. This option can also be set with the `DD_PYTEST_OPERATION_NAME` environment variable. 
-: Default: `"pytest.test"`
-
-
+| Parameter  | Environment variable  | Default | Description       |
+|------------|-----------------------|---------|-------------------|
+| `ddtrace.config.pytest["service"]` | `DD_PYTEST_SERVICE` | `"pytest"` | The service name reported by default for pytest traces. |
+| `ddtrace.config.pytest["operation_name"]` | `DD_PYTEST_OPERATION_NAME` | `"pytest.test"` | The operation name reported by default for pytest traces. |
 
 ## Further reading
 
