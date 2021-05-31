@@ -576,6 +576,7 @@ Once you know about the [**total** requirements for your private location](#priv
   * Set the [`concurrency` parameter][15] to `maximum number of test runs that can be executed on your private location / number of workers associated with your private location`.
   * Assign `total private location resource requirements / number of workers` resources to each private location container.
 
+
 **Example:** For a private location running only Browser tests, with a maximum number of concurrent test runs of `10`, your private location requires ~ 1.5 core CPU, ~ 10GiB memory, and ~ 100MiB disk. If you want to distribute these resources across two workers, the [`concurrency` parameter][15] should be set to `5`, and each worker should be allocated ~ 750mCores CPU, ~ 5GiB memory, and ~ 50MiB disk.
 
 #### Queueing mechanism
