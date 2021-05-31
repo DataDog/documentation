@@ -88,7 +88,7 @@ L'intégration Azure de Datadog est conçue pour recueillir <a href="https://doc
 | [Utilisation et quotas][43]          | Surveillance de votre utilisation d'Azure.                                                                                  |
 | [Machine virtuelle][44]           | Service de gestion de machines virtuelles                                                                        |
 | [Virtual Machine Scale Sets][45] | Déploiement, gestion et mise à l'échelle automatique d'un groupe de machines virtuelles identiques                                                      |
-| [Réseau virtuel[45]           | Permet aux ressources Azure de communiquer entre elles, avec Internet et avec les réseaux sur site en toute sécurité.    |
+| [Réseau virtuel][45]           | Permet aux ressources Azure de communiquer entre elles, avec Internet et avec les réseaux sur site en toute sécurité.    |
 
 ## Configuration
 
@@ -130,7 +130,8 @@ az ad sp create-for-rbac --role "Monitoring Reader" --scopes /subscriptions/{id_
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{< tabs >}}
+
+{{% /tab %}}
 {{% tab "CLI Azure v1.0" %}}
 
 Commencez par vous connecter au compte Azure que vous souhaitez intégrer à Datadog :
@@ -169,7 +170,8 @@ azure role assignment create --objectId <ID_OBJET> -o "Monitoring Reader" -c /su
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{< tabs >}}
+
+{{% /tab %}}
 {{% tab "CLI Azure antérieures à la v1.0" %}}
 
 Commencez par vous connecter au compte Azure que vous souhaitez intégrer à Datadog :
@@ -223,6 +225,7 @@ azure role assignment create --objectId <ID_OBJET> --roleName "Monitoring Reader
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
+
 {{% /tab %}}
 {{< /tabs >}}
 
