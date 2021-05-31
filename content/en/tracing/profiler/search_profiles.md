@@ -133,20 +133,20 @@ Exceptions
 Once enabled, the following profile types are collected:
 
 
-CPU
+CPU Time
 : Shows the time each function spent running on the CPU.
 
-Allocation
+Allocations
 : Shows the amount of heap memory allocated by each function since the start of the application, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.
 
-Allocation Count
+Allocated Memory
 : Shows the number of objects allocated in heap memory by each function since the start of the application, including allocations which were subsequently freed. This is useful for investigating garbage collection load.
 
-Heap
-: Shows the amount of heap memory allocated by each function that remained allocated since the start of the application and lived since the last garbage collection. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.
-
-Heap Count
+Heap Live Objects
 : Shows the number of objects allocated in heap memory by each function, and which objects remained allocated since the start of the application and lived since the last garbage collection. This is useful for investigating the overall memory usage of your service.
+
+Heap Live Size
+: Shows the amount of heap memory allocated by each function that remained allocated since the start of the application and lived since the last garbage collection. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
