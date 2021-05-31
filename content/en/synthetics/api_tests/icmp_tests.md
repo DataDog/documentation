@@ -115,7 +115,7 @@ Click **Save** to save your test and have Datadog start executing it.
 
 ### Create local variables
 
-You can create local variables by defining their values from one of the below available built-ins:
+You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
