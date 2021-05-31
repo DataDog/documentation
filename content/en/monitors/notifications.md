@@ -138,15 +138,15 @@ Template variables that return numerical values support operations and functions
 
 #### Local time
 
-Use the `local_time` function to transform a date into its local time:`{{local_time 'time_variable' 'timezone'}}`.
-For example, to show the last triggered time of the monitor in the Tokyo timezone in your notification, include the following in the notification message:
+Use the `local_time` function to transform a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
+For example, to show the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
 
 ```
 {{local_time 'last_triggered_at' 'Asia/Tokyo'}}
 ```
 
-The result are displayed in the ISO8601 format: yyyy-MM-dd HH:mm:ss±HH:mm. Example `2021-05-31 23:43:27+09:00`. 
-Check the [TZ database name][15] column to see the list of available timezones values.
+The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`. 
+Refer to the [list of tz database time zones][15], particularly the TZ database name column, to see the list of available time zone values.
 
 ### Tag variables
 
