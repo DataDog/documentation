@@ -88,7 +88,7 @@ L'intégration Azure de Datadog est conçue pour recueillir <a href="https://doc
 | [Utilisation et quotas][43]          | Surveillance de votre utilisation d'Azure.                                                                                  |
 | [Machine virtuelle][44]           | Service de gestion de machines virtuelles                                                                        |
 | [Virtual Machine Scale Sets][45] | Déploiement, gestion et mise à l'échelle automatique d'un groupe de machines virtuelles identiques                                                      |
-| [Réseau virtuel][45]           | Permet aux ressources Azure de communiquer entre elles, avec Internet et avec les réseaux sur site en toute sécurité.    |
+| [Réseau virtuel][46]           | Permet aux ressources Azure de communiquer entre elles, avec Internet et avec les réseaux sur site en toute sécurité.    |
 
 ## Configuration
 
