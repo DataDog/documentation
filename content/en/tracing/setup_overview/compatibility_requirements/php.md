@@ -42,7 +42,7 @@ PHP APM supports the following SAPI's:
 
 ### Integrations
 
-#### Web Framework Compatibility
+#### Web framework compatibility
 
 By default, Datadog **supports all PHP web frameworks** out of the box, with either framework-level instrumentation, or generic web tracing.
 
@@ -80,7 +80,7 @@ Note that even if you don't see your web framework in this list, it is supported
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks.  To request support for additional span metadata and framework internals, contact our awesome [support team][2].
 
-#### CLI Library Compatibility
+#### CLI library compatibility
 
 Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=true`.
 
@@ -92,7 +92,7 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 
 To request support for additional CLI libraries, contact our awesome [support team][2].
 
-#### Datastore Compatibility
+#### Datastore compatibility
 
 | Module                                                                  | Versions                   | Support Type    |
 |-------------------------------------------------------------------------|----------------------------|-----------------|
@@ -115,7 +115,7 @@ To request support for additional CLI libraries, contact our awesome [support te
 
 To request support for additional datastores, contact our awesome [support team][2].
 
-#### Library Compatibility
+#### Library compatibility
 
 | Module     | Versions              | Support Type    |
 |:-----------|:----------------------|:----------------|
@@ -135,9 +135,9 @@ The call stack is limited on PHP 5. See the [deep call stack troubleshooting pag
 
 Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
-### PCNTL (Process control)
+### PCNTL
 
-We currently do not offer support for [pcntl][7]. Tracing applications that use functions such as `pcntl_fork` may result in unpredictable results.
+We currently do not offer support for [PCNTL][7] (Process control). Tracing applications that use functions such as `pcntl_fork` may result in unpredictable results.
 
 ## Further Reading
 

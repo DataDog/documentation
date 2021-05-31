@@ -23,7 +23,7 @@ If you have not yet read the instructions for auto-instrumentation and setup, pl
 
 This page details common use cases for adding and customizing observability with Datadog APM.
 
-## Adding Tags
+## Adding tags
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
@@ -92,7 +92,7 @@ end
 
 You can also use the `DD_TAGS` environment variable to set tags on all spans for an application. For more information on Ruby environment variables, refer to the [setup documentation][3].
 
-### Setting Errors on a Span
+### Setting errors on a span
 
 There are two ways to set an error on a span
 
@@ -163,8 +163,7 @@ Datadog.tracer.trace('example.trace', on_error: custom_error_handler) do |span|
 end
 ```
 
-
-## Adding Spans
+## Adding spans
 
 If you aren't using supported library instrumentation (see [library compatibility][4]), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code:
 
@@ -220,7 +219,6 @@ Handler invoked when a block is provided to trace, and it raises an error. Provi
 
 It's highly recommended you set both `service` and `resource` at a minimum. Spans without a `service` or `resource` as `nil` will be discarded by the Datadog agent.
 
-
 ### Manually creating a new span
 
 Programmatically create spans around any block of code.  Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
@@ -248,8 +246,7 @@ get '/posts' do
 end
 ```
 
-
-### Post-Processing Traces
+### Post-processing traces
 
 Some applications might require that traces be altered or filtered out before they are sent upstream. The processing pipeline allows users to create *processors* to define such behavior.
 
@@ -312,12 +309,11 @@ Datadog::Pipeline.before_flush(
 )
 ```
 
-## Trace Client & Agent Configuration
+## Trace client and Agent configuration
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
-
-### B3 Headers Extraction and Injection
+### B3 headers extraction and injection
 
 Datadog APM tracer supports [B3 headers extraction][5] and injection for distributed tracing.
 
@@ -340,7 +336,7 @@ The value of the environment variable is a comma separated list of header styles
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-### Resource Filtering
+### Resource filtering
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][6] page.
 

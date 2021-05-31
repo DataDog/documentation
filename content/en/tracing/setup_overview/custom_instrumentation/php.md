@@ -180,7 +180,7 @@ if ($scope) {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adding Tags
+## Adding tags
 
 {{< tabs >}}
 {{% tab "Locally" %}}
@@ -260,11 +260,11 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Resource Filtering
+## Resource filtering
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][5] page.
 
-## API Reference
+## API reference
 
 ### Parameters of the tracing closure
 
@@ -483,7 +483,7 @@ use DDTrace\SpanData;
 );
 ```
 
-## Advanced Configurations
+## Advanced configurations
 
 ### Tracing internal functions and methods
 
@@ -538,9 +538,9 @@ Done.
 */
 ```
 
-### Zend Framework 1 manual instrumentation
+### Zend framework 1 manual instrumentation
 
-Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
+Zend framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
 
 First, [download the latest source code from the releases page][8]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
 
