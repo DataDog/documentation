@@ -115,6 +115,19 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 {{% /tab %}}
 {{< /tabs >}}
 
+### Resource collection compatibility matrix
+
+The following table presents the list of collected resources and the minimal Agent, Cluster Agent and helm chart versions for each.
+
+| Resource | Minimal Agent version | Minimal Cluster Agent version | Minimal Helm chart version |
+|---|---|---|---|
+| Clusters | - | 1.12.0 | 2.10.0 |
+| Deployments | - | 1.11.0 | 2.10.0 |
+| Nodes | - | 1.11.0 | 2.10.0 |
+| Pods | 7.27.0 | 1.11.0 | 2.10.0 |
+| ReplicaSets | - | 1.11.0 | 2.10.0 |
+| Services | - | 1.11.0 | 2.10.0 |
+
 ### Instructions for previous Agent and Cluster Agent versions.
 
 The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][6] and [Cluster Agent version >= 1.9.0][7] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and instructions are retained here for reference.
@@ -369,7 +382,7 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ### Kubernetes resources view
 
-If you have enabled Kubernetes Resources for Live Containers, toggle between the **Pods**, **Deployments**, **ReplicaSets**, **Services** and **Nodes** views in the **View** dropdown menu in the top left corner of the page. Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
+If you have enabled Kubernetes Resources for Live Containers, toggle between the **Pods**, **Deployments**, **ReplicaSets**, **Services**, **Nodes** and **Clusters** views in the **View** dropdown menu in the top left corner of the page. Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
 #### Cluster map
 
