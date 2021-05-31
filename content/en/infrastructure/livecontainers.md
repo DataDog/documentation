@@ -130,9 +130,23 @@ The following table presents the list of collected resources and the minimal Age
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
-The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][6] and [Cluster Agent version >= 1.9.0][7] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and instructions are retained here for reference.
+The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][6] and [Cluster Agent version >= 1.9.0][7] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and full instructions are retained here for reference.
 
 {{< tabs >}}
+{{% tab "Helm" %}
+
+If you are using the official [Datadog Helm Chart][1]:
+
+- Use chart version above 2.4.5 and before 2.10.0. Starting from chart version 2.10.0 onwards, refer to the [latest configuration instructions][18] instead.
+  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your helm chart [values.yaml][2] file.
+- Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][2]
+- Deploy a new release.
+
+In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
+
+[1]: https://github.com/DataDog/helm-charts
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
 {{% tab "DaemonSet" %}
 
 The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][1] for configuration.
