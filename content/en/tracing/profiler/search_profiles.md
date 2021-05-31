@@ -137,10 +137,10 @@ CPU Time
 : Shows the time each function spent running on the CPU. Off-CPU time such as waiting for Networking, Channels, Mutexes and Sleep is not captured in this profile, see Mutex and Block profile.
 
 Allocations
-: Shows the amount of heap memory allocated by each function since the start of the application, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.
+: Shows the number of objects allocated in heap memory by each function since the start of the application, including allocations which were subsequently freed. This is useful for investigating garbage collection load.
 
 Allocated Memory
-: Shows the number of objects allocated in heap memory by each function since the start of the application, including allocations which were subsequently freed. This is useful for investigating garbage collection load.
+: Shows the amount of heap memory allocated by each function since the start of the application, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.
 
 Heap Live Objects
 : Shows the number of objects allocated in heap memory by each function, and which objects remained allocated since the start of the application and lived since the last garbage collection. This is useful for investigating the overall memory usage of your service.
