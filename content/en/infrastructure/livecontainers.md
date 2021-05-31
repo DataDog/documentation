@@ -121,12 +121,12 @@ The following table presents the list of collected resources and the minimal Age
 
 | Resource | Minimal Agent version | Minimal Cluster Agent version | Minimal Helm chart version |
 |---|---|---|---|
-| Clusters | - | 1.12.0 | 2.10.0 |
-| Deployments | - | 1.11.0 | 2.10.0 |
-| Nodes | - | 1.11.0 | 2.10.0 |
+| Clusters | 7.27.0 | 1.12.0 | 2.10.0 |
+| Deployments | 7.27.0 | 1.11.0 | 2.10.0 |
+| Nodes | 7.27.0 | 1.11.0 | 2.10.0 |
 | Pods | 7.27.0 | 1.11.0 | 2.10.0 |
-| ReplicaSets | - | 1.11.0 | 2.10.0 |
-| Services | - | 1.11.0 | 2.10.0 |
+| ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 |
+| Services | 7.27.0 | 1.11.0 | 2.10.0 |
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
@@ -167,7 +167,7 @@ The Cluster Agent must be running, and the Agent must be able to communicate wit
 
         ```yaml
           ClusterRole:
-          - apiGroups:  # To create the datadog-cluster-id CM
+          - apiGroups:  # To create the datadog-cluster-id ConfigMap
             - ""
             resources:
             - configmaps
