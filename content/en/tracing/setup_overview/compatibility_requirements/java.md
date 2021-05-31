@@ -25,7 +25,7 @@ Beta integrations are disabled by default but can be enabled individually:
 - System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
 - Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
-### Web Framework Compatibility
+### Web framework compatibility
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
@@ -70,7 +70,7 @@ The following instrumentations are disabled by default and can be enabled with t
 
 Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
-### Networking Framework Compatibility
+### Networking framework compatibility
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
@@ -80,7 +80,6 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 - tags for the request (e.g. response code)
 - error and stacktrace capturing
 - distributed tracing
-
 
 | Framework                | Versions    | Support Type    | Instrumentation Names (used for configuration) |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
@@ -110,7 +109,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
-### Data Store Compatibility
+### Data store compatibility
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
@@ -188,7 +187,7 @@ To improve visibility into applications using unsupported frameworks, consider:
 - [Submitting a pull request][5] with instrumentation for inclusion in a future release.
 - Contacting [Datadog support][2] and submitting a feature request.
 
-### Disabling Integrations
+### Disabling integrations
 
 Most integrations are enabled by default. The following setting can change the default to disabled.
 
@@ -204,8 +203,7 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 ### Known issues
 
-Running the Java tracer in Bitbucket is not supported. 
-
+Running the Java tracer in Bitbucket is not supported.
 
 ## Further Reading
 

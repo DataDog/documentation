@@ -21,13 +21,14 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-## Services in APM
+## APM services
 
-APM Services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Service List, and the Service Map.
+APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Service List, and the Service Map.
 
 **Note**: Trace Metrics can be queried based on their `trace.*` [namespace][1].
 
-## Defining a Primary Operation for a Service
+## Primary operations
+### Definition
 
 The primary operation name of a service determines how that service is represented in the UI. The Datadog backend automatically selects an operation name that is deemed the entry-point into the service based on the throughput of requests.
 
@@ -39,7 +40,7 @@ As an example, a `web-store` service can have multiple endpoints which are instr
 | db                     | `postgres.query`, `db.query`                      |
 | custom-instrumentation | `trace.annotation`, `method.call`                 |
 
-### Configuring the Primary Operation
+### Configuration
 
 When there are multiple primary operations defined for a service, the highest request throughput determines the operation automatically selected to be the entry-point for the service. An admin user can set this setting manually:
 
@@ -52,13 +53,13 @@ When there are multiple primary operations defined for a service, the highest re
 
 {{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save"  >}}
 
-## Viewing Stats for Additional Span Names
+## Viewing stats for additional span names
 
 To ensure that all traces are being sent to Datadog correctly outside of any instrumentation, you can view your resources by additional span names that are considered a secondary operation with a drop-down menu. However, these are not used to calculate service-level statistics.
 
 {{< img src="tracing/guide/primary_operation/dropdown.gif" alt="APM save"  >}}
 
-## Configuring the Primary Operation in Manual Instrumentation
+## Manual instrumentation
 
 When manually instrumenting your code, statically set the span name to ensure that your resources are grouped with the same primary operation (for example, `web.request`). If the span is being named dynamically, set it as the resource.
 
@@ -79,7 +80,7 @@ Also note that the resource name is set manually, `MainHandler.do_something`.
 
 By default, the resource name would be set to this as it’s the name of the function and the class for which it lives under in Tornado.
 
-## OpenTracing Primary Operations
+## OpenTracing
 
 When using Datadog, the Opentracing operation name is a resource and the Opentracing "component" tag is Datadog's span name. To define (in Opentracing terms) a span that has the resource "/user/profile", and the span name "http.request", use this Go example:
 

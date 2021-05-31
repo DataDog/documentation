@@ -31,7 +31,7 @@ Consult on this page:
 * [Out of the box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 
-## Service Monitor
+## Service monitor
 
 Datadog proposes a list of monitors depending on your service type:
 
@@ -63,7 +63,7 @@ Datadog provides out of the box graphs for any given Service:
 
 {{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs"  style="width:90%;">}}
 
-### Export to Timeboard
+### Export to timeboard
 
 On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][5]:
 
