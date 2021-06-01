@@ -5,6 +5,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-insights/"
   tag: "Blog"
   text: "Read more about serverless insights"
+aliases:
+    - /serverless/insights/
 ---
 
 {{< img src="serverless/serverless_actionable_insights_detail.png" alt="Auto-generated insights for your serverless applications" >}}

@@ -50,7 +50,7 @@ After you [install DogStatsD][1], the following functions are available for subm
 
 Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the `COUNT` type in the [metric types][2] documentation.
 
-Run the following code to submit a DogStatsD `COUNT` metric to Datadog:
+Run the following code to submit a DogStatsD `COUNT` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -218,7 +218,7 @@ Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To g
 
 Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `GAUGE` type in the [metric types][5] documentation.
 
-Run the following code to submit a DogStatsD `GAUGE` metric to Datadog:
+Run the following code to submit a DogStatsD `GAUGE` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -377,7 +377,7 @@ After running the code above, your metric data is available to graph in Datadog:
 
 Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog.
 
-Run the following code to submit a DogStatsD `SET` metric to Datadog:
+Run the following code to submit a DogStatsD `SET` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -519,7 +519,7 @@ After running the code above, your metrics data is available to graph in Datadog
 The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 
-Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
+Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -686,7 +686,7 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 ##### Code examples
 
-Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
+Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,PHP" >}}
 
@@ -787,7 +787,7 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 
 The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][9] documentation.
 
-Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
+Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 

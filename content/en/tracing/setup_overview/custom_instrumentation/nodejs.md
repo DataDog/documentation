@@ -123,7 +123,7 @@ When using `tracer.trace()` or `tracer.wrap()` this is done automatically when a
 {{% /tab %}}
 {{< /tabs >}}
 
-## Creating Spans
+## Creating spans
 
 The `dd-trace` library creates [spans][2] automatically with `tracer.init()` for [many libraries and frameworks][1]. However, you may want to gain visibility into your own code and this is achieved using spans.
 

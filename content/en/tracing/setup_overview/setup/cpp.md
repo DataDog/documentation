@@ -23,7 +23,7 @@ further_reading:
 ---
 **Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2]. For compatibility requirements for the C++ Tracer, visit the [Compatibility Requirements][3] page.
 
-## Getting Started
+## Getting started
 
 If you already have a Datadog account you can find [step-by-step instructions][4] in our in-app guides for either host-based or container-based set ups.
 
@@ -92,7 +92,7 @@ g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentraci
 ./tracer_example
 ```
 
-### Dynamic Loading
+### Dynamic loading
 
 ```bash
 get_latest_release() {
@@ -216,8 +216,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Environment Variables
-
+### Environment variables
 
 `DD_AGENT_HOST` 
 : **Version**: v0.3.6 <br>

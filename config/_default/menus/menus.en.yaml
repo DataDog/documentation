@@ -949,111 +949,92 @@ main:
     parent: serverless_installation
     identifier: serverless_installation_dotnet
     weight: 106
-  - name: Datadog Lambda Library
-    url: serverless/datadog_lambda_library
+  - name: Libraries & Integrations
+    url: serverless/libraries_integrations
     parent: serverless
-    identifier: serverless_datadog_lambda_library
+    identifier: libraries_integrations
     weight: 2
-  - name: Python
-    url: serverless/datadog_lambda_library/python
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_python
-    weight: 201
-  - name: Node.js
-    url: serverless/datadog_lambda_library/nodejs
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_nodejs
-    weight: 202
-  - name: Ruby
-    url: serverless/datadog_lambda_library/ruby
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_ruby
-    weight: 203
-  - name: Go
-    url: serverless/datadog_lambda_library/go
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_go
-    weight: 204
-  - name: Java
-    url: serverless/datadog_lambda_library/java
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_java
-    weight: 205
   - name: Datadog Lambda Extension
-    url: serverless/datadog_lambda_library/extension
-    parent: serverless_datadog_lambda_library
-    weight: 206
+    url: serverless/libraries_integrations/extension/
+    parent: libraries_integrations
+    weight: 201
+  - name: Datadog Lambda Library
+    url: serverless/libraries_integrations/library/
+    parent: libraries_integrations
+    weight: 202
   - name: Datadog Forwarder
-    url: serverless/forwarder
-    parent: serverless
-    weight: 3
-  - name: Enhanced Lambda Metrics
-    url: serverless/enhanced_lambda_metrics
-    parent: serverless
-    weight: 4
+    url: serverless/libraries_integrations/forwarder/
+    parent: libraries_integrations
+    weight: 203
+  - name: Datadog Serverless Plugin
+    url: serverless/libraries_integrations/plugin/
+    parent: libraries_integrations
+    weight: 204
+  - name: Datadog Serverless Macro
+    url: serverless/libraries_integrations/macro/
+    parent: libraries_integrations
+    weight: 205
+  - name: Datadog Serverless CLI
+    url: serverless/libraries_integrations/cli/
+    parent: libraries_integrations
+    weight: 206
+  - name: Lambda Code Signing
+    url: serverless/libraries_integrations/lambda_code_signing/
+    parent: libraries_integrations
+    weight: 207
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless
-    weight: 5
+    weight: 3
   - name: Trace Merging (Advanced)
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
-    weight: 501
+    weight: 301
   - name: Trace Propagation (Advanced)
     url: serverless/distributed_tracing/serverless_trace_propagation
     parent: serverless_distributed_tracing
-    weight: 502
+    weight: 302
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
-    weight: 6
-  - name: Insights
-    url: serverless/insights
+    identifier: custom_metrics
+    weight: 4
+  - name: Enhanced Lambda Metrics
+    url: serverless/enhanced_lambda_metrics
     parent: serverless
-    weight: 7
+    weight: 5
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless
-    weight: 8
-  - name: Serverless Integrations
-    url: serverless/serverless_integrations
-    identifier: serverless_integrations
-    parent: serverless
-    weight: 9
-  - name: Datadog Serverless Plugin
-    url: serverless/serverless_integrations/plugin
-    parent: serverless_integrations
-    identifier: serverless_integrations_plugin
-    weight: 901
-  - name: Datadog Serverless Macro
-    url: serverless/serverless_integrations/macro
-    parent: serverless_integrations
-    identifier: serverless_integrations_macro
-    weight: 902
-  - name: Datadog Serverless CLI
-    url: serverless/serverless_integrations/cli
-    parent: serverless_integrations
-    identifier: serverless_integrations_cli
-    weight: 903
-  - name: Serverless Tagging
-    url: serverless/serverless_tagging
-    parent: serverless
-    weight: 10
+    weight: 6
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 11
+    weight: 7
+  - name: Insights
+    url: serverless/troubleshooting/insights
+    parent: serverless_troubleshooting
+    weight: 701
+  - name: Serverless Tagging
+    url: serverless/troubleshooting/serverless_tagging
+    parent: serverless_troubleshooting
+    weight: 702
   - name: Webpack Compatibility
     url: serverless/troubleshooting/serverless_tracing_and_webpack
     parent: serverless_troubleshooting
-    weight: 1101
+    weight: 703
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 12
+    weight: 8
+  - name: Guides
+    url: serverless/guide/
+    identifier: serverless_guides
+    parent: serverless
+    weight: 9
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1872,7 +1853,7 @@ main:
     identifier: cws_workload_security_rules
     weight: 303
   - name: OOTB Rules
-    url: security_platform/default_rules#cat-runtime-agent
+    url: security_platform/default_rules#cat-workload-security
     parent: cloud_workload_security
     identifier: cws_workload_default_rules
     weight: 304
@@ -4790,7 +4771,7 @@ api:
       operationids:
         - EditGlobalVariable
       unstable: []
-      order: 16
+      order: 17
   - name: Get a global variable
     url: '#get-a-global-variable'
     identifier: get-a-global-variable
@@ -4802,7 +4783,7 @@ api:
       operationids:
         - GetGlobalVariable
       unstable: []
-      order: 17
+      order: 18
   - name: Delete a global variable
     url: '#delete-a-global-variable'
     identifier: delete-a-global-variable
@@ -4814,7 +4795,7 @@ api:
       operationids:
         - DeleteGlobalVariable
       unstable: []
-      order: 18
+      order: 19
   - name: Create a global variable
     url: '#create-a-global-variable'
     identifier: create-a-global-variable
@@ -4825,6 +4806,18 @@ api:
         - v1
       operationids:
         - CreateGlobalVariable
+      unstable: []
+      order: 16
+  - name: Get all global variables
+    url: '#get-all-global-variables'
+    identifier: get-all-global-variables
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListGlobalVariables
       unstable: []
       order: 15
   - name: Pause or start a test
@@ -4874,7 +4867,7 @@ api:
       operationids:
         - UpdateTest
       unstable: []
-      order: 25
+      order: 26
   - name: Get a test configuration
     url: '#get-a-test-configuration'
     identifier: get-a-test-configuration
@@ -4886,7 +4879,7 @@ api:
       operationids:
         - GetTest
       unstable: []
-      order: 24
+      order: 25
   - name: Trigger tests from CI/CD pipelines
     url: '#trigger-tests-from-ci/cd-pipelines'
     identifier: trigger-tests-from-ci/cd-pipelines
@@ -5018,7 +5011,7 @@ api:
       operationids:
         - CreateTest
       unstable: []
-      order: 26
+      order: 27
   - name: Get the list of all tests
     url: '#get-the-list-of-all-tests'
     identifier: get-the-list-of-all-tests
@@ -5042,7 +5035,7 @@ api:
       operationids:
         - UpdatePrivateLocation
       unstable: []
-      order: 20
+      order: 22
   - name: Get a private location
     url: '#get-a-private-location'
     identifier: get-a-private-location
@@ -5066,7 +5059,7 @@ api:
       operationids:
         - DeletePrivateLocation
       unstable: []
-      order: 23
+      order: 24
   - name: Create a private location
     url: '#create-a-private-location'
     identifier: create-a-private-location
@@ -5078,7 +5071,7 @@ api:
       operationids:
         - CreatePrivateLocation
       unstable: []
-      order: 19
+      order: 20
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
     identifier: get-all-locations-public-and-private
@@ -5090,7 +5083,7 @@ api:
       operationids:
         - ListLocations
       unstable: []
-      order: 22
+      order: 23
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
@@ -5773,6 +5766,23 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: Cloud Workload Security
+    url: /api/latest/cloud-workload-security/
+    identifier: cloud-workload-security
+    generated: true
+  - name: Get the latest Cloud Workload Security policy
+    url: '#get-the-latest-cloud-workload-security-policy'
+    identifier: get-the-latest-cloud-workload-security-policy
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DownloadCloudWorkloadPolicyFile
+      unstable:
+        - v2
+      order: 0
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services
@@ -6496,19 +6506,6 @@ api:
       unstable:
         - v2
       order: 7
-  - name: Get the latest Runtime Security policy
-    url: '#get-the-latest-runtime-security-policy'
-    identifier: get-the-latest-runtime-security-policy
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DowloadRuntimePolicyFile
-      unstable:
-        - v2
-      order: 0
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: update-an-existing-rule

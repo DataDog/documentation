@@ -13,6 +13,9 @@ further_reading:
 - link: "/agent/amazon_ecs/data_collected/#metrics"
   tag: "Documentation"
   text: "Collect ECS metrics"
+- link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
+  tag: "Blog"
+  text: "Announcing support for Amazon ECS Anywhere"
 ---
 
 ## Overview

@@ -9,7 +9,7 @@ description: "Trace Search and Analytics"
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-## Search and Analytics Overview
+## Overview
 
 [Trace Search and Analytics][1] gives you the ability to search all ingested or Indexed Spans using any tag on any span.  The spans searched by your query will change depending on whether you are searching Live (all spans ingested in the last 15 minutes, rolling) or Indexed Spans (spans retained for 15 days by your custom filters).
 
@@ -29,7 +29,7 @@ The Datadog app shows a 'Retained traces' indicator beside the time selector whe
 
 You can customize settings for both [Retention and Ingestion][6] to send and keep exactly what data is most relevant to you.
 
-### (Recommended) Enable Tracing Without Limits
+### Tracing Without Limits (recommended)
 
 Fine-grained ingestion controls can be set per service instrumented with Datadog APM. See the [Ingestion Controls][2] documentation for details. Services that send up to 50 traces per second will send all traces by default. To configure all services to send all of their traffic, set the following environment variable:
 
@@ -40,7 +40,6 @@ DD_TRACE_SAMPLE_RATE=1.0
 After you have instrumented your services and ingested traces, set tag-based [Retention filters][3] within the Datadog app so that Datadog retains spans that are relevant to you.
 
 **Note:** Both ingested and indexed spans may impact your bill. For more information, see the [APM Billing][7] page.
-
 
 ## Live Search for 15 minutes
 
@@ -67,7 +66,7 @@ Live Search is the default view on the Traces page, and when you're viewing reta
 
 **Note**: Selecting any span pauses the stream and displays more details about the selected span in the trace side panel.
 
-### Filtering the Trace Stream and Search Query
+### Filtering
 {{< img src="tracing/live_search/toplevelspan2.gif" alt="Live Search query" >}}
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across any span and any tag, and not just the indexed ones.

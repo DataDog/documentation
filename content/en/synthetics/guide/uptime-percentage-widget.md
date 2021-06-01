@@ -35,7 +35,7 @@ Create a new [Synthetic API test][3] upon `http://example.com/`:
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_message.png" alt="Synthetic test message" >}}
 
-## Slo Widget configuration
+## SLO widget configuration
 
 ### Create your SLO
 

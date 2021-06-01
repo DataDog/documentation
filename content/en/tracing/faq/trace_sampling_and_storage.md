@@ -36,7 +36,7 @@ Trace Sampling is applicable for high-volume web-scale applications, where a sam
 
 Statistics (requests, errors, latency, etc.), are calculated based on the full volume of traces at the Agent level, and are therefore always accurate.
 
-### Statistics (Requests, Errors, Latencies etc.)
+### Statistics
 
 Datadog APM computes following aggregate statistics over all the traces instrumented, regardless of sampling:
 
@@ -48,7 +48,7 @@ Datadog APM computes following aggregate statistics over all the traces instrume
 
 {{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data."  style="width:90%;">}}
 
-### Goal of Sampling
+### Goal of sampling
 
 The goal of sampling is to *keep* the traces that matter the most:
 
@@ -58,7 +58,7 @@ The goal of sampling is to *keep* the traces that matter the most:
 
 {{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level."  style="width:90%;">}}
 
-### Sampling Rules
+### Sampling rules
 
 For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and Backend level in the following order.
 
@@ -90,7 +90,7 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
 
 3. DD Backend/Server - The server receives traces from various Agents running on hosts and applies sampling to ensure representation from every reporting Agent. It does so by keeping traces on the basis of the signature marked by Agent.
 
-## Manually Control Trace Priority
+## Manually control trace priority
 
 APM enables distributed tracing by default to allow trace propagation between tracing headers across multiple services/hosts. Tracing headers include a priority tag to ensure complete traces between upstream and downstream services during trace propagation. You can override this tag to manually keep a trace (critical transaction, debug mode, etc.) or drop a trace (health checks, static assets, etc).
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}

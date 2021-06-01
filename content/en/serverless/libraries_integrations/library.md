@@ -2,24 +2,26 @@
 title: Datadog Lambda Library
 kind: documentation
 further_reading:
-- link: "/serverless/datadog_lambda_library/extension"
+- link: "/serverless/libraries_integrations/extension/"
   tag: "Documentation"
   text: "Datadog Lambda Extension (Preview)"
-- link: "/serverless/datadog_lambda_library/python"
-  tag: "Documentation"
+- link: "https://github.com/DataDog/datadog-lambda-python/blob/master/README.md"
+  tag: "Github"
   text: "Datadog Lambda Library for Python"
-- link: "/serverless/datadog_lambda_library/nodejs"
-  tag: "Documentation"
+- link: "https://github.com/DataDog/datadog-lambda-js/blob/master/README.md"
+  tag: "Github"
   text: "Datadog Lambda Library for Node.js"
-- link: "/serverless/datadog_lambda_library/ruby"
-  tag: "Documentation"
+- link: "https://github.com/DataDog/datadog-lambda-rb/blob/master/README.md"
+  tag: "Github"
   text: "Datadog Lambda Library for Ruby"
-- link: "/serverless/datadog_lambda_library/go"
-  tag: "Documentation"
+- link: "https://github.com/DataDog/datadog-lambda-go/blob/master/README.md"
+  tag: "Github"
   text: "Datadog Lambda Library for Go"
-- link: "/serverless/datadog_lambda_library/java"
-  tag: "Documentation"
+- link: "https://github.com/DataDog/datadog-lambda-java/blob/master/README.md"
+  tag: "Github"
   text: "Datadog Lambda Library for Java"
+aliases:
+    - /serverless/datadog_lambda_library/
 ---
 
 {{< img src="serverless/datadog_lambda_library.png" alt="Datadog Lambda Library"  style="width:100%;">}}

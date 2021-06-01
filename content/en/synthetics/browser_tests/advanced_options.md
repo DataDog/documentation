@@ -10,7 +10,7 @@ further_reading:
 
 ## User specified locator
 
-By default, [browser tests][1] use the Datadog locator system. It is recommended to only use custom selectors in edge cases as the Datadog locator system is what allows tests to be self-maintaining.
+By default, browser tests use the [Datadog locator system][1]. It is recommended to only use custom selectors in edge cases as the Datadog locator system is what allows tests to be self-maintaining.
 
 Custom selectors are created by performing a step of interest in the recorder (**click**, **hover**, **assert**, etc.) on any element of your page. This specifies the kind of step that needs to be performed.
 
@@ -67,7 +67,7 @@ Opening your subtest in the main tab means that your subtest is the continuation
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/
+[1]: /synthetics/guide/browser-test-self-maintenance
 [2]: /synthetics/browser_tests/actions/
 [3]: /security/synthetics/
 [4]: /synthetics/browser_tests/?tab=privacy#test-configuration

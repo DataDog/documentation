@@ -7,5 +7,6 @@
   "main-dd-css.js": "static/main-dd-css.js",
   "main-dd-js.js": "static/main-dd-js.js",
   "region-redirects.js": "static/region-redirects.js",
+  "search.js": "static/search.js",
   "vendor.js": "static/vendor.js"
 }
