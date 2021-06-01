@@ -31,7 +31,7 @@ To get the most out of the AWS X-Ray integration:
 - Enable it on your Lambda functions and API Gateways, either using the Serverless Framework plugin or manually; and
 - Install the tracing libraries in your Lambda functions.
 
-#### Recommended: Using the Serverless Framework plugin
+#### [Recommended] Datadog Serverless Framework plugin
 
 The [Datadog Serverless Framework plugin][3] automatically enables X-Ray for your Lambda functions and API Gateway instances. The plugin also automatically adds the [Datadog Lambda Layer][4] to all of your Node.js and Python functions.
 

@@ -15,7 +15,7 @@ Use [the download button at the top of the graph][5] to save those Metrics to an
 
 **Note**: To build Monitors over resources, use the resource tag that contains a hash of the resource Name. Find this by saving the metric to a Timeboard and utilizing the same query in a Metric Monitor:
 
-## Creating a Monitor from this
+## Creating a monitor
 
 While the current APM monitor has the ability to set up Alerts on a per [service basis][6], use the metric query taken from above to setup a Metric or even Anomaly monitor over a specific service or resource.
 

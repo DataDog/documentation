@@ -4,7 +4,7 @@ kind: faq
 ---
 
 <div class="alert alert-warning">
-<b>Agentless profiling will no longer be supported from August 15th, 2020.</b>
+<b>Agentless profiling is no longer be supported as of August 15th, 2020.</b>
 </div>
 
 Benefits of switching to agent mode:
@@ -14,7 +14,7 @@ Benefits of switching to agent mode:
 - Added support to send profiles directly through the agent.
 - Added support for including container-id header during profile collection so you can automatically get container tags.
 
-## Migrating from Agentless to the Agent Setup
+## Migrating from Agentless to the Agent
 {{< programming-lang-wrapper langs="java,python,go" >}}
 {{< programming-lang lang="java" >}}
 

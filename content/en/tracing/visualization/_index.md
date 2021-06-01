@@ -86,7 +86,7 @@ For the example below, the span `rack.request` is the entry-point span of the tr
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
 
-## Top Level Span
+## Top level span
 
 A span is a top level span when it is the entrypoint method for a request to a service.  You can visualize this within Datadog APM when the color of the immediate parent on a flamegraph is a different color.  Services are also listed on the right when viewing a flamegraph.
 
@@ -98,8 +98,7 @@ For the example below, the top level spans are:
 
 {{< img src="tracing/visualization/toplevelspans.png" alt="span" >}}
 
-
-## Trace Metrics
+## Trace metrics
 
 [Trace metrics][15] are automatically collected and kept at a 15-month retention policy similar to any other [Datadog metric][2]. They can be used to identify and alert on hits, errors, or latency. Trace metrics are tagged by the host receiving traces along with the service or resource. For example, after instrumenting a web service trace metrics are collected for the entry-point span `web.request` in the [Metric Summary][16].
 
@@ -117,7 +116,7 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="trace metrics monitor" >}}
 
-## Trace Search and Analytics
+## Trace search and analytics
 
 [Search and perform analytics][14] on 100% of ingested traces for 15 minutes and all [indexed spans](#indexed-span) for 15 days.
 
@@ -143,19 +142,19 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:50%;">}}
 
-## Retention Filters
+## Retention filters
 
 [Set tag-based filters][19] in the Datadog UI to index spans for 15 days for use with [Trace Search and Analytics](#trace-search-and-analytics)
 
-## Ingestion Controls
+## Ingestion controls
 
 [Send 100% of traces][20] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
 
-## Sublayer Metric
+## Sublayer metric
 
 Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution duration for individual services within a trace.
 
-## Execution Duration
+## Execution duration
 
 The active spans for a given time, for a given trace, are all of the leaf spans (spans without children).
 
