@@ -164,9 +164,11 @@ try {
 
 ### Fix "Script error."
 
+For security reasons, browsers hide details from errors triggered by cross-origin scripts. When this happens, the Error Details tab shows:
+
 {{< img src="real_user_monitoring/browser/script-error.png" alt="Real User Monitoring script error example" style="width:75%;" >}}
 
-For security reasons, browsers hide details from errors triggered by cross-origin scripts. When this happens, the Error Details tab shows:
+For more information about cross-origin scripts and why details are hidden, see [CORS][6] and [this Note on Global Event Handlers][7]. Some possible reasons for this error include:
 - Your JavaScript files are hosted on a different hostname (for instance, `example.com` includes assets from `static.example.com`).
 - Your website includes JavaScript libraries hosted on a CDN.
 - Your website includes third-party JavaScript libraries hosted on the provider's servers.
