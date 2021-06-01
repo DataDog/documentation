@@ -12,11 +12,12 @@ private: true
 {{< whatsnext desc="Browser Tests:" >}}
     {{< nextlink href="synthetics/guide/browser-test-self-maintenance/" >}}Why are browser tests self-maintaining?{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Reusing browser tests journeys across your test suite{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation" >}}Email validation with browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Test file upload and download{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/popup/" >}}Handling popups in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-switch-tabs/" >}}Can browser tests switch tabs?{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
 {{< /whatsnext >}}
 
