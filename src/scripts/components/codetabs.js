@@ -2,7 +2,6 @@ import { getQueryParameterByName } from '../helpers/browser';
 
 function codeTabs() {
     const tab = getQueryParameterByName('tab');
-    const firstNavTab = document.querySelector('.code-tabs .nav-tabs li a');
     
     if ($('.code-tabs').length > 0) {
         // page load set code tab titles
@@ -72,10 +71,10 @@ function codeTabs() {
             if (selectedLanguageTab) {
                 selectedLanguageTab.click();
             } else {
-                firstNavTab.click();
+                document.querySelector('.code-tabs .nav-tabs li a').click();
             }
         } else {
-            firstNavTab.click();
+            document.querySelector('.code-tabs .nav-tabs li a').click();
         }
     }
 }
