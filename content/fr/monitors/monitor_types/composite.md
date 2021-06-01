@@ -135,19 +135,6 @@ Le nombre d'alertes reçues dépend du type d'alerte du monitor individuel. Si t
 
 Si un ou plusieurs des monitors sont caractérisés par des alertes multiples, le monitor composite est également à alertes multiples. Le _nombre_ d'alertes envoyées simultanément dépend du nombre de monitors individuels à alertes multiples du monitor composite.
 
-#### Un monitor à alertes multiples
-
-Mettons que le monitor `A` soit caractérisé par des alertes multiples et regroupé selon `host`. Si le monitor possède quatre sources de transmission (les hosts `web01` à `web04`), chaque fois que Datadog évalue le monitor composite, vous pouvez recevoir jusqu'à quatre alertes. En d'autres termes, pour chaque cycle d'évaluation, Datadog considère quatre situations. Pour chaque situation, le statut du monitor `A` peut varier selon ses sources, mais les statuts des monitors `B` et `C` (à alertes simples) n'évoluent pas.
-
-Le tableau ci-dessous indique le statut de chaque scénario d'alertes multiples à un moment « t » pour le monitor composite `A && B && C` :
-
-| Source | Monitor A | Monitor B | Monitor C | Statut du monitor composite | Alerte déclenchée ? |
-|--------|-----------|-----------|-----------|------------------|------------------|
-| web01  | Alert     | Warn      | Alert     | Alert            | {{< X >}}        |
-| web02  | Ok        | Warn      | Alert     | Ok               |                  |
-| web03  | Warn      | Warn      | Alert     | Alert            | {{< X >}}        |
-| web04  | Skipped   | Warn      | Alert     | Skipped          |                  |
-
 #### Plusieurs monitors à alertes multiples
 
 Imaginons maintenant que les monitors `A` et `B` soient à alertes multiples et regroupés par host. Chaque cycle peut entraîner l'envoi d'un nombre d'alertes pouvant atteindre le nombre de sources de transmission communes entre les monitors `A` et `B`. Si les sources `web01` à `web05` transmettent des données pour le monitor `A`, et les sources `web04` à `web09` pour le monitor `B`, le monitor composite prend _uniquement_ en compte les sources communes, à savoir `web04` et `web05`. Chaque cycle d'évaluation peut donc générer un maximum de deux alertes.

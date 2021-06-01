@@ -19,6 +19,7 @@ further_reading:
     text: Rails アプリケーションログを収集、カスタマイズ、管理する方法
 git_integration_title: ruby
 has_logo: true
+integration_id: ruby
 integration_title: Ruby
 is_public: true
 kind: インテグレーション

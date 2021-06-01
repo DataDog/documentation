@@ -2,7 +2,7 @@
 aliases:
   - /ja/real_user_monitoring/setup
 dependencies:
-  - 'https://github.com/DataDog/browser-sdk/blob/master/packages/rum/README.md'
+  - 'https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md'
 kind: ドキュメント
 title: RUM ブラウザモニタリング
 ---
@@ -26,11 +26,14 @@ Datadog RUM ブラウザモニタリングを設定するには
 
 ### 適切なインストール方法の選択
 
-| インストール方法        | 使用例                                                                                                                                                                                                                                                                                                                                                           |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| npm (node package manager) | 最新の Web アプリケーションには、この方法が推奨されます。RUM SDK は、残りのフロントエンド JavaScript コードとともにパッケージ化されます。ページの読み込みパフォーマンスに影響は出ませんが、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。**注:** 使用する場合、ログ SDK と一致するバージョンの使用が推奨されます。 |
-| CDN 非同期                  | この方法は、パフォーマンス目標のある Web アプリケーションに推奨されます。RUM SDK は、CDN から非同期的に読み込まれます。この方法を使用すると、SDK のダウンロードによるページの読み込みパフォーマンスへの影響を回避できます。ただし、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。                                                   |
-| CDN 同期                   | この方法は、すべての RUM イベントを収集する場合に推奨されます。RUM SDK は、CDN から同期的に読み込まれます。この方法を使用すると、最初に SDK を読み込み、すべてのエラー、リソース、ユーザーアクションを収集することができます。この方法は、ページの読み込みパフォーマンスに影響を与える可能性があります。                                                                                                       |
+npm (node package manager)
+: 最新の Web アプリケーションには、この方法が推奨されます。RUM SDK は、残りのフロントエンド JavaScript コードとともにパッケージ化されます。ページの読み込みパフォーマンスに影響は出ませんが、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。**注:** 使用する場合、ログ SDK と一致するバージョンの使用が推奨されます。
+
+CDN 非同期
+: この方法は、パフォーマンス目標のある Web アプリケーションに推奨されます。RUM SDK は、CDN から非同期的に読み込まれます。この方法を使用すると、SDK のダウンロードによるページの読み込みパフォーマンスへの影響を回避できます。ただし、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。
+
+CDN 同期
+: この方法は、すべての RUM イベントを収集する場合に推奨されます。RUM SDK は、CDN から同期的に読み込まれます。この方法を使用すると、最初に SDK を読み込み、すべてのエラー、リソース、ユーザーアクションを収集することができます。この方法は、ページの読み込みパフォーマンスに影響を与える可能性があります。
 
 ### npm
 
@@ -132,27 +135,84 @@ window.DD_RUM.init({
 
 次のパラメーターを使用できます。
 
-| パラメーター               | タイプ    | 必須 | デフォルト         | 説明                                                                                              |
-| ----------------------- | ------- | -------- | --------------- | -------------------------------------------------------------------------------------------------------- |
-| `applicationId`         | 文字列  | 〇      |                 | RUM アプリケーションの ID。                                                                                  |
-| `clientToken`           | 文字列  | 〇      |                 | [Datadog クライアントトークン][5]。                                                                             |
-| `site`                  | 文字列  | 〇      | `datadoghq.com` | 組織の Datadog サイト。US: `datadoghq.com`、EU: `datadoghq.eu`                           |
-| `service`               | 文字列  | ✕       |                 | アプリケーションのサービス名。                                                                   |
-| `env`                   | 文字列  | ✕       |                 | アプリケーションの環境 (例: prod、pre-prod、staging)                                |
-| `version`               | 文字列  | ✕       |                 | アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)                                |
-| `trackInteractions`     | Boolean | ✕       | `false`         | [ユーザーアクションの自動収集][6]を有効にします。                                                      |
-| `sampleRate`            | 数値  | ✕       | `100`           | 追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみが rum イベントを送信します。 |
-| `silentMultipleInit`    | Boolean | ✕       | `false`         | Datadog の RUM がページ上ですでに初期化されている場合、初期化が暗黙に失敗します。                       |
-| `proxyHost`             | 文字列  | ✕       |                 | オプションのプロキシホスト (例: www.proxy.com)。詳細については、完全な[プロキシ設定ガイド][7]を参照してください。       |
-| `allowedTracingOrigins` | リスト    | ✕       |                 | トレースヘッダーを挿入するために使用されるリクエスト元のリスト。                                                |
+`applicationId`
+: 必須<br/>
+**種類**: 文字列<br/>
+RUM アプリケーションの ID。
+
+`clientToken`
+: 必須<br/>
+**種類**: 文字列<br/>
+[Datadog クライアントトークン][5]。
+
+`site`
+: 必須<br/>
+**種類**: 文字列<br/>
+**デフォルト**: `datadoghq.com`<br/>
+組織の Datadog サイト。US: `datadoghq.com`、EU: `datadoghq.eu`
+
+`service`
+: 任意<br/>
+**種類**: 文字列<br/>
+アプリケーションのサービス名。
+
+`env`
+: 任意<br/>
+**種類**: 文字列<br/>
+アプリケーションの環境 (例: prod、pre-prod、staging)。
+
+`version`
+: 任意<br/>
+**種類**: 文字列<br/>
+アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)。
+
+`trackInteractions`
+: 任意<br/>
+**種類**: Boolean<br/>
+**デフォルト**: `false` <br/>
+[ユーザーアクションの自動収集][6]を有効にします。
+
+`sampleRate`
+: 任意<br/>
+**種類**: 数字<br/>
+**デフォルト**: `100`<br/>
+追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみが RUM イベントを送信します。
+
+`silentMultipleInit`
+: 任意<br/>
+**種類**: ブール値 <br/>
+**デフォルト**: `false`<br/>
+Datadog の RUM がページ上ですでに初期化されている場合、初期化が暗黙に失敗します。
+
+`proxyHost`
+: 任意<br/>
+**種類**: 文字列<br/>
+オプションのプロキシホスト (例: www.proxy.com)。詳細については、完全な[プロキシ設定ガイド][7]を参照してください。
+
+`allowedTracingOrigins`
+: 任意<br/>
+**種類**: リスト<br/>
+トレースヘッダーを挿入するために使用されるリクエスト元のリスト。
 
 `logs` SDK も使用する場合、一致するコンフィギュレーションが必要なオプション:
 
-| パラメーター                      | タイプ    | 必須 | デフォルト | 説明                                                                                                                                                 |
-| ------------------------------ | ------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `trackSessionAcrossSubdomains` | Boolean | ✕       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                   |
-| `useSecureSessionCookie`       | Boolean | ✕       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信される RUM イベントが無効になります。                                                             |
-| `useCrossSiteSessionCookie`    | Boolean | ✕       | `false` | 安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、RUM SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。 |
+`trackSessionAcrossSubdomains`
+: 任意<br/>
+**種類**: ブール値<br/>
+**デフォルト**: `false`<br/>
+同じサイトのサブドメイン間でセッションを保持します。　
+
+`useSecureSessionCookie`
+: 任意<br/>
+**種類**: ブール値<br/>
+**デフォルト**: `false`<br/>
+安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信される RUM イベントが無効になります。
+
+`useCrossSiteSessionCookie`
+: 任意<br/>
+**種類**: ブール値<br/>
+**デフォルト**: `false`<br/>
+安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、RUM SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。
 
 #### 例
 
@@ -183,4 +243,4 @@ init(configuration: {
 [5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
 [6]: https://docs.datadoghq.com/ja/real_user_monitoring/data_collected/user_action/#automatic-collection-of-user-actions
 [7]: https://docs.datadoghq.com/ja/real_user_monitoring/faq/proxy_rum_data/
-[8]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum/BROWSER_SUPPORT.md
+[8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md

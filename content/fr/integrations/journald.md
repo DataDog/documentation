@@ -1,53 +1,70 @@
 ---
-integration_title: Journald
-kind: integration
-public_title: Intégration Datadog/Journald
+assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
+  monitors: {}
+  saved_views: {}
+  service_checks: assets/service_checks.json
 categories:
   - log collection
-description: Transférer vos logs du journal à Datadog
-short_description: Transférer vos logs du journal à Datadog
-has_logo: true
-is_public: true
-dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/journald.md'
-name: journald
+creates_events: false
 ddtype: check
+dependencies:
+  - 'https://github.com/DataDog/integrations-core/blob/master/journald/README.md'
+display_name: journald
+draft: false
+git_integration_title: journald
+guid: 845431ef-9092-4254-a188-138fc9273fa5
+integration_id: journald
+integration_title: journald
+is_public: true
+kind: integration
+maintainer: help@datadoghq.com
+manifest_version: 1.0.0
+metric_prefix: journald.
+metric_to_check: ''
+name: journald
+public_title: journald
+short_description: Surveillez vos logs systemd-journald avec Datadog.
+support: core
 supported_os:
   - linux
-further_reading:
-  - link: logs/guide/docker-logs-collection-troubleshooting-guide
-    tag: Documentation
-    text: Collecte de logs avec Docker
+  - mac_os
+  - windows
 ---
 ## Présentation
 
-Systemd-journald est un service système qui recueille et stocke des données de journalisation. Il crée et entretient des journaux structurés et indexés à partir d'informations de journalisation envoyées par différentes sources.
+Systemd-journald est un service système qui recueille et stocke des données de journalisation.
+Il crée et entretient des journaux structurés et indexés à partir d'informations de journalisation provenant de différentes sources.
 
 ## Configuration
 
 ### Installation
 
-Par défaut, les fichiers journal appartiennent au groupe système `systemd-journal`, qui peut également les lire. Pour commencer à recueillir vos logs journal, vous devez :
-
-1. [Installer l'Agent][1] sur l'instance qui exécute le journal
-2. Ajouter l'utilisateur `dd-agent` au groupe `systemd-journal` en exécutant la commande :
-
-```text
-usermod -a -G systemd-journal dd-agent
-```
+Le check journalid est inclus avec le package de l'[Agent Datadog][1].
+Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
+
+Par défaut, les fichiers journal appartiennent au groupe système systemd-journal, qui peut également les lire. Pour commencer à recueillir vos logs journal, suivez les étapes suivantes :
+
+1. [Installez l'Agent][2] sur l'instance qui exécute le journal.
+2. Ajoutez l'utilisateur `dd-agent` au groupe `systemd-journal` en exécutant la commande :
+    ```text
+     usermod -a -G systemd-journal dd-agent
+    ```
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-Modifiez le fichier `journald.d/conf.yaml` dans le dossier `conf.d/` de l'Agent à la racine du répertoire de votre Agent.
+Modifiez le fichier `journald.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos logs.
 
 #### Collecte de logs
-
-_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` avec la commande :
 
@@ -63,33 +80,29 @@ logs:
       container_mode: true
 ```
 
-Pour renseigner les attributs `source` et `service`, l'Agent recueille `SYSLOG_IDENTIFIER` , `_SYSTEMD_UNIT` et `_COMM` puis les définit sur la première valeur non vide. Pour tirer parti des pipelines d'intégration, Datadog recommande de définir le paramètre `SyslogIdentifier` directement dans le fichier du service `systemd` ou dans un fichier de remplacement du service `systemd`. Le fichier du service `systemd` dépend de votre distribution, mais vous pouvez le localiser avec la commande `systemctl show -p FragmentPath <nom_unité>`.
+Pour renseigner les attributs `source` et `service`, l'Agent recueille `SYSLOG_IDENTIFIER`, `_SYSTEMD_UNIT` et `_COMM`, puis les définit sur la première valeur non vide. Pour tirer parti des pipelines d'intégration, Datadog recommande de définir le paramètre `SyslogIdentifier` directement dans le fichier du service `systemd` ou dans un fichier de remplacement du service `systemd`. Leur emplacement dépend de votre distribution. Toutefois, vous pouvez localiser le fichier du service `systemd` avec la commande `systemctl show -p FragmentPath <nom_unité>`.
 
-**Remarque** : pour l'Agent 7.17+, si `container_mode` est défini sur `true`, le comportement par défaut change pour les logs provenant de conteneurs Docker. L'attribut `source` de vos logs est automatiquement défini sur le nom raccourci de l'image correspondante du conteneur au lieu de simplement prendre pour valeur `docker`.
+**Remarque** : pour l'Agent 7.17+, si `container_mode` est défini sur `true`, le comportement par défaut change pour les logs provenant de conteneurs Docker. L'attribut `source` de vos logs est automatiquement défini sur le nom raccourci de l'image correspondante du conteneur, au lieu de simplement prendre pour valeur `docker`.
 
-Pour terminer, [redémarrez l'Agent][1].
+[Redémarrez l'Agent][2].
 
-[1]: /fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][5] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][6].
 
 | Paramètre      | Valeur                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<CONFIG_LOG>` | `{"source": "journald", "service": "<NOM_VOTRE_APPLICATION>"}` |
 
-[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
 {{% /tab %}}
 {{< /tabs >}}
-
 
 
 #### Fonctions avancées
@@ -99,7 +112,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Par défaut, l'Agent recherche le journal aux emplacements suivants :
 
 - `/var/log/journal`
-- `/var/run/journal`
+- `/run/log/journal`
 
 Si votre journal est situé ailleurs, ajoutez un paramètre `path` en indiquant le chemin du journal correspondant.
 
@@ -129,14 +142,29 @@ Cette collecte est automatique lorsque l'Agent est exécuté à partir du host. 
 
 - `/etc/machine-id` : cette commande permet à l'Agent d'interroger le journal stocké sur le host.
 
+### Validation
+
+Lancez la [sous-commande status][3] de l'Agent et cherchez `journald` dans la section Logs Agent.
+
+## Données collectées
+
+### Métriques
+
+journald n'inclut aucune métrique.
+
+### Checks de service
+
+journald n'inclut aucun check de service.
+
+### Événements
+
+journald n'inclut aucun événement.
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][2].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: /fr/help/
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/fr/help/

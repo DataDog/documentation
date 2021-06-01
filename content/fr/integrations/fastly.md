@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/fastly/'
 draft: false
 git_integration_title: fastly
 has_logo: true
+integration_id: fastly
 integration_title: Fastly
 is_public: true
 kind: integration

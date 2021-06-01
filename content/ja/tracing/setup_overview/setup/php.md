@@ -58,9 +58,14 @@ PHP トレーサーのオープンソースに対する貢献に関しては、[
 
 3. アプリケーションをインスツルメント化した後、トレースクライアントはデフォルトでトレースを `localhost:8126` に送信します。これが正しいホストとポートでない場合は、以下の環境変数を設定して変更します。
 
-`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT`
+   `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT`
 
-変数の設定方法については、[環境変数のコンフィギュレーション](#environment-variable-configuration) を参照してください。
+    変数の設定方法については、[環境変数のコンフィギュレーション](#environment-variable-configuration) を参照してください。
+{{< site-region region="us3,eu,gov" >}} 
+
+4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
+
+{{< /site-region >}}
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
@@ -181,46 +186,145 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 
 ### 環境変数コンフィギュレーション
 
-| 環境変数                              | デフォルト     | 注                                                                                                                                           |
-|-------------------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_AGENT_HOST`                           | `localhost` | Agent のホスト名                                                                                                                            |
-| `DD_AUTOFINISH_SPANS`                     | `false`     | トレーサーがフラッシュされた時点でスパンを自動終了させるかどうか                                                                            |
-| `DD_DISTRIBUTED_TRACING`                  | `true`      | 分散型トレーシングの有効にするかどうか                                                                                                          |
-| `DD_ENV`                                  | `null`      | アプリケーションの環境 (例: `prod`、`pre-prod`、`stage`) を設定します。バージョン `0.47.0` で追加されました。                                         |
-| `DD_PRIORITY_SAMPLING`                    | `true`      | 優先度付きサンプリングを有効にするかどうか                                                                                                            |
-| `DD_SERVICE`                              | `null`      | デフォルトのアプリ名。バージョン 0.47.0 以降では、`DD_SERVICE_NAME` になります。                                                                          |
-| `DD_SERVICE_MAPPING`                      | `null`      | APM インテグレーションのデフォルトの名前を変更します。一度に 1 つ以上のインテグレーションの名前を変更できます。例: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` ([インテグレーション名](#インテグレーション名)を参照してください) |
-| `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC ベースの構成可能なサーキットブレーカーの再試行時間（ミリ秒）                                                                            |
-| `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Agent の接続設定に使える最大時間（ミリ秒）                                                                          |
-| `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Agent の接続タイムアウト（ミリ秒）                                                                                                 |
-| `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` | `3`         | IPC ベースの構成可能なサーキットブレーカーの連続エラー最大数                                                                                |
-| `DD_TRACE_AGENT_PORT`                     | `8126`      | Agent ポート番号                                                                                                                          |
-| `DD_TRACE_AGENT_TIMEOUT`                  | `500`       | Agent リクエストの転送タイムアウト（ミリ秒）                                                                                           |
-| `DD_TRACE_AGENT_URL`                      | `null`      | Agent の URL。`DD_AGENT_HOST` および `DD_TRACE_AGENT_PORT` よりも優先されます。例: `https://localhost:8126`。バージョン `0.47.1` で追加されました。 |
-| `DD_TRACE_AUTO_FLUSH_ENABLED`             | `false`     | すべてのスパンが終了されたタイミングでトレーサーを自動でフラッシュします。長時間実行されるプロセスをトレースするために、`DD_TRACE_GENERATE_ROOT_SPAN=0` と併せて `true` に設定されます。 |
-| `DD_TRACE_CLI_ENABLED`                    | `false`     | CLI から PHP スクリプトのトレースを有効にする                                                                                                     |
-| `DD_TRACE_DEBUG`                          | `false`     | トレーサーの[デバッグモード](#カスタム URL からリソースへのマッピング)を有効にする                                                                            |
-| `DD_TRACE_ENABLED`                        | `true`      | トレーサーをグローバルに有効にする                                                                                                                     |
-| `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | トップレベルのスパンを自動生成します。長時間実行されるプロセスをトレースするために、`DD_TRACE_AUTO_FLUSH_ENABLED=1` と併せて `false` に設定されます    |
-| `DD_TAGS`                                 | `null`      | すべてのスパンに設定されるタグ。例、`key1:value1,key2:value2`。バージョン `0.47.0` で追加されました。                                                 |
-| `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | HTTP リクエストのサービス名を `host-<ホスト名>` に設定します。例: `https://datadoghq.com` に対する `curl_exec()` コールのサービス名は、デフォルトのサービス名 `curl` ではなく `host-datadoghq.com` となります。 |
-| `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`     | `false`     | Redis クライアントオペレーションのサービス名を `redis-<hostname>` に設定します。バージョン `0.51.0` に追加されています                            |
-| `DD_TRACE_<INTEGRATION>_ENABLED`          | `true`      | インテグレーションを有効または無効にします。すべてのインテグレーションはデフォルトで有効になっています ([インテグレーション名](#integration-names)を参照してください)。バージョン < `0.47.1` の場合、このパラメーターは無効にするインテグレーションの CSV リストを取得する `DD_INTEGRATIONS_DISABLED` です (例: `curl,mysqli`)。 |
-| `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | リクエストのコンパイル時間 (ミリ秒) をトップレベルのスパン上に記録します。                                                               |
-| `DD_TRACE_NO_AUTOLOADER`                  | `false`     | オートローダーを使用しないアプリケーションには、`true` に設定して自動インスツルメンテーションを有効にします。                                                    |
-| `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`    | `null`      | ID に対応するパスフラグメントを特定する正規表現のCSV（[リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri) を参照してください）。 |
-| `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`  | `null`      | 受信リクエストのリソース名を正規化するための URI マッピングの CSV（[リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri) を参照してください）。 |
-| `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`  | `null`      | 発信リクエストのリソース名を正規化するための URI マッピングの CSV（[リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri) を参照してください）。 |
-| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | トレースのサンプリングレート (デフォルトは `0.0` および `1.0`)。 バージョン < `0.36.0` の場合、このパラメーターは `DD_SAMPLING_RATE` となります。           |
-| `DD_TRACE_SAMPLING_RULES`                 | `null`      | JSON でエンコードされた文字列で、サンプリングレートを構成します。例: サンプルレートを 20% に設定する場合は `[{"sample_rate": 0.2}]` となります。'a' ではじまる、スパン名が 'b' のサービスのサンプルレートを 10% に、その他のサービスのサンプルレートを 20% に設定する場合は `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]` のようになります ([インテグレーション名](#integration-names) を参照してください) 。 |
-| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `true`      | リソース名として URL を有効にします。([リソース名を正規化された URI にマッピング](#リソース名を正規化された URI にマッピング)を参照してください) 。                            |
-| `DD_VERSION`                              | `null`      | トレースとログで、アプリケーションのバージョン（例: `1.2.3`, `6c44da20`, `2020.02.13`）を設定します。バージョン `0.47.0` で追加されました。                    |
+
+
+`DD_AGENT_HOST`
+: **デフォルト**: `localhost` <br>
+Agent ホスト名
+
+`DD_AUTOFINISH_SPANS`
+: **デフォルト**: `false`<br>
+トレーサーがフラッシュした際にスパンが自動的に終了するかどうか
+
+`DD_DISTRIBUTED_TRACING`
+: **デフォルト**: `true`<br>
+分散型トレーシングを有効にするかどうか
+
+`DD_ENV`
+: **デフォルト**: `null`<br>
+`prod`、`pre-prod`、`stage` など、アプリケーションの環境を設定します。バージョン `0.47.0` に追加されています
+
+`DD_PRIORITY_SAMPLING`
+: **デフォルト**: `true`<br>
+優先度付きサンプリングを有効にするかどうか
+
+`DD_SERVICE`
+: **デフォルト**: `null`<br>
+デフォルトのアプリ名。バージョン 0.47.0 以前では `DD_SERVICE_NAME` に相当します。
+
+`DD_SERVICE_MAPPING`
+: **デフォルト**: `null`<br>
+APM インテグレーションのデフォルト名を変更します。1 つ以上のインテグレーションの名前変更を同時に行うことができます。例: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` ([インテグレーション名](#integration-names)を参照してください)
+
+`DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
+: **デフォルト**: `5000`<br>
+IPC ベースの構成可能なサーキットブレーカーの再試行時間 (ミリ秒)
+
+`DD_TRACE_AGENT_CONNECT_TIMEOUT`
+: **デフォルト**: `100`<br>
+Agent の接続設定に許可される最大時間 (ミリ秒)
+
+`DD_TRACE_AGENT_CONNECT_TIMEOUT`
+: **デフォルト**: `100`<br>
+Agent 接続のタイムアウト (ミリ秒)
+
+`DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` 
+: **デフォルト**: `3`<br>
+IPC ベースの構成可能なサーキットブレーカーの連続エラー最大数
+
+`DD_TRACE_AGENT_PORT`
+: **デフォルト**: `8126`<br>
+Agent ポート番号
+
+`DD_TRACE_AGENT_TIMEOUT`
+: **デフォルト**: `500`<br>
+Agent リクエストの転送タイムアウト (ミリ秒)
+
+`DD_TRACE_AGENT_URL`
+: **デフォルト**: `null`<br>
+Agent の URL で、`DD_AGENT_HOST` および `DD_TRACE_AGENT_PORT` よりも優先されます。例: `https://localhost:8126`。バージョン `0.47.1` に追加されています
+
+`DD_TRACE_AUTO_FLUSH_ENABLED`
+: **デフォルト**: `false`<br>
+すべてのスパンが終了されたタイミングでトレーサーを自動的にフラッシュします。長時間実行されるプロセスをトレースするために、`DD_TRACE_GENERATE_ROOT_SPAN=0` と併せて `true` に設定されます
+
+`DD_TRACE_CLI_ENABLED`
+: **デフォルト**: `false`<br>
+CLI から送られた PHP スクリプトのトレーシングを有効にします
+
+`DD_TRACE_DEBUG`
+: **デフォルト**: `false`<br>
+トレーサーの[デバッグモード](#custom-url-to-resource-mapping)を有効にします
+
+`DD_TRACE_ENABLED`
+: **デフォルト**: `true`<br>
+トレーサーをグローバルに有効化します
+
+`DD_TRACE_GENERATE_ROOT_SPAN`
+: **デフォルト**: `true`<br>
+トップレベルのスパンを自動生成します。長時間実行されるプロセスをトレースするために、`DD_TRACE_AUTO_FLUSH_ENABLED=1` と併せて `false` に設定されます
+
+`DD_TAGS`
+: **デフォルト**: `null`<br>
+`key1:value1,key2:value2` など、すべてのスパンに設定されるタグ。バージョン `0.47.0` に追加されています
+
+`DD_TRACE_HEADER_TAGS`
+: **デフォルト**: `null`<br>
+ルートスパンでタグとして報告されたヘッダー名の CSV。
+
+`DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
+: **デフォルト**: `false`<br>
+HTTP リクエストのサービス名を `host-<hostname>` に設定します。例: `https://datadoghq.com` に対する `curl_exec()` コールのサービス名は、デフォルトのサービス名 `curl` ではなく `host-datadoghq.com` となります。
+
+`DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
+: **デフォルト**: `false`<br>
+Redis クライアントオペレーションのサービス名を `redis-<hostname>` に設定します。バージョン `0.51.0` に追加されています　
+
+`DD_TRACE_<INTEGRATION>_ENABLED`
+: **デフォルト**: `true`<br>
+インテグレーションを有効または無効にします。すべてのインテグレーションはデフォルトで有効になっています ([インテグレーション名](#integration-names)を参照してください)。バージョン `0.47.1` 以前の場合、このパラメーターは `DD_INTEGRATIONS_DISABLED` に相当し、無効にするインテグレーションの CSV リストを取得します (例: `curl,mysqli`)。
+
+`DD_TRACE_MEASURE_COMPILE_TIME`
+: **デフォルト**: `true`<br>
+リクエストのコンパイル時間 (ミリ秒) をトップレベルのスパン上に記録します。
+
+`DD_TRACE_NO_AUTOLOADER`
+: **デフォルト**: `false`<br>
+オートローダーを使用しないアプリケーションには、`true` に設定して自動インスツルメンテーションを有効にします。
+
+`DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
+: **デフォルト**: `null`<br>
+ID に対応するパスフラグメントを特定する正規表現のCSV ([リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri) を参照してください)。
+
+`DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`
+: **デフォルト**: `null`<br>
+受信リクエストのリソース名を正規化するための URI マッピングの CSV ([リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri) を参照してください)。
+
+`DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
+: **デフォルト**: `null`<br>
+発信リクエストのリソース名を正規化するための URI マッピングの CSV ([リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri) を参照してください)。
+
+`DD_TRACE_SAMPLE_RATE`
+: **デフォルト**: `1.0`<br>
+トレースのサンプリングレート (デフォルトは `0.0` および `1.0`)。`0.36.0` 以前では、このパラメーターは `DD_SAMPLING_RATE` となります。
+
+`DD_TRACE_SAMPLING_RULES`
+: **デフォルト**: `null`<br>
+JSON でエンコードされた文字列で、サンプリングレートを構成します。例: サンプルレートを 20% に設定する場合は `'[{"sample_rate": 0.2}]'` となります。'a' ではじまる、スパン名が 'b' のサービスのサンプルレートを 10% に、その他のサービスのサンプルレートを 20% に設定する場合は `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`  のようになります ([インテグレーション名](#integration-names) を参照してください) 。二重引用符 (`"`) のエスケープ処理による問題を防ぐため、JSON オブジェクトは**必ず**単一引用符 (`'`) で囲むようにしてください。
+
+`DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
+: **デフォルト**: `true`<br>
+リソース名として URL を有効にします ([リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri)を参照してください)。
+
+`DD_VERSION`
+: **デフォルト**: `null`<br>
+トレースとログで、アプリケーションのバージョン (例:  `1.2.3`、`6c44da20`、`2020.02.13`) を設定します。バージョン `0.47.0` で追加されています
 
 #### インテグレーション名
 
 以下の表は、各インテグレーションに紐付くデフォルトのサービス名をまとめたものです。サービス名は `DD_SERVICE_MAPPING` に変更してください。
 
-インテグレーション固有のコンフィギュレーションを設定する場合は、`DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED` の形式で名前をつけてください。例: Laravel の場合、`DD_TRACE_LARAVEL_ANALYTICS_ENABLED`
+インテグレーション固有のコンフィギュレーションを設定する場合は、`DD_TRACE_<INTEGRATION>_ENABLED` 形式で名前を付けてください。例: Laravel の場合、 `DD_TRACE_LARAVEL_ENABLED`。
 
 | インテグレーション       | サービス名      |
 |-------------------|-------------------|

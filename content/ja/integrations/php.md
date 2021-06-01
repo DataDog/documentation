@@ -16,6 +16,7 @@ further_reading:
     text: PHP ログを収集、カスタマイズ、分析する方法。
 git_integration_title: php
 has_logo: true
+integration_id: php
 integration_title: PHP
 is_public: true
 kind: インテグレーション

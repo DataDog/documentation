@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md'
 display_name: Unbound
+draft: false
 git_integration_title: unbound
 guid: 2b31e667-1fd9-440f-9e96-c72bea3cf3ca
 integration_id: unbound
@@ -19,7 +21,7 @@ kind: integration
 maintainer: david.byron@avast.com
 manifest_version: 1.0.0
 metric_prefix: unbound.
-metric_to_check: ''
+metric_to_check: unbound.time.up
 name: unbound
 public_title: Intégration Datadog/Unbound
 short_description: Une intégration Datadog pour recueillir les métriques Unbound
@@ -37,30 +39,31 @@ Recueillez des métriques du service Unbound en temps réel pour :
 
 - Visualiser et surveiller les états de Unbound
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check Unbound n'est **PAS** inclus avec le paquet de l'[Agent Datadog][2].
+Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Unbound sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
 
-Pour installer le check Unbound sur votre host :
+1. [Téléchargez et lancez l'Agent Datadog][5].
+2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
-1. Installez le [kit de développement][3] sur n'importe quelle machine.
-2. Exécutez `ddev release build unbound` pour générer le paquet.
-3. [Installez l'Agent Datadog][4].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w path/to/unbound/dist/<ARTIFACT_NAshellME>.whl`.
+   ```shell
+   datadog-agent integration install -t datadog-unbound==<INTEGRATION_VERSION>
+   ```
+3. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
 
 ### Configuration
 
 1. Modifiez le fichier `unbound.d/conf.yaml` dans le dossier `conf.d/` à la racine du
    répertoire de configuration de votre Agent pour commencer à recueillir les métriques Unbound. Consultez
-   le [fichier d'exemple unbound.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+   le [fichier d'exemple unbound.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][6].
+2. [Redémarrez l'Agent][8].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `unbound` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][9] et cherchez `unbound` dans la section Checks.
 
 ## Données collectées
 
@@ -79,14 +82,16 @@ Le check Unbound n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 [1]: https://nlnetlabs.nl/documentation/unbound/unbound-control/
-[2]: https://docs.datadoghq.com/fr/agent/
-[3]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/integrations-extras/blob/master/unbound/datadog_checks/unbound/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/unbound/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
+[3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[7]: https://github.com/DataDog/integrations-extras/blob/master/unbound/datadog_checks/unbound/data/conf.yaml.example
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://github.com/DataDog/integrations-extras/blob/master/unbound/metadata.csv
+[11]: https://docs.datadoghq.com/fr/help/

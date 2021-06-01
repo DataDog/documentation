@@ -14,12 +14,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/puma/README.md'
 display_name: Puma
-draft: true
+draft: false
 git_integration_title: puma
 guid: 93264c0f-a4d1-447d-81b6-bee3eb891df3
 integration_id: puma
 integration_title: Puma
-is_public: false
+is_public: true
 kind: integration
 maintainer: justin.morris@ferocia.com.au
 manifest_version: 1.0.0
@@ -44,22 +44,28 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ### Installation
 
-Pour installer le check Puma sur votre host :
+Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Puma sur votre host. Consultez le guide relatif à l'[installation d'intégrations développées par la communauté][4] pour installer des checks avec une [version < 6.8 de l'Agent][5] ou avec l'[Agent Docker][6] :
 
-1. Installez le [kit de développement][4] sur n'importe quelle machine.
-2. Exécutez `ddev release build puma` pour générer le package.
-3. [Téléchargez l'Agent Datadog][5].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w path/to/puma/dist/<NOM_ARTEFACT>.whl`.
+1. [Téléchargez l'Agent Datadog][7].
+
+2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
+
+   ```shell
+      datadog-agent integration install -t datadog-puma==<INTEGRATION_VERSION>
+   ```
+
+3. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][8].
+
 
 ### Configuration
 
-1. Modifiez le fichier `puma.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Puma. Consultez le [fichier d'exemple puma.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `puma.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Puma. Consultez le [fichier d'exemple puma.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][7].
+2. [Redémarrez l'Agent][10].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][8] et cherchez `puma` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][11] et cherchez `puma` dans la section Checks.
 
 ## Données collectées
 
@@ -77,15 +83,18 @@ Puma n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 [1]: https://puma.io/
 [2]: https://github.com/puma/puma#controlstatus-server
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[4]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://github.com/DataDog/integrations-extras/blob/master/puma/datadog_checks/puma/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-extras/blob/master/puma/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
+[5]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
+[6]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
+[7]: https://app.datadoghq.com/account/settings#agent
+[8]: https://docs.datadoghq.com/fr/getting_started/integrations/
+[9]: https://github.com/DataDog/integrations-extras/blob/master/puma/datadog_checks/puma/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://github.com/DataDog/integrations-extras/blob/master/puma/metadata.csv
+[13]: https://docs.datadoghq.com/fr/help/

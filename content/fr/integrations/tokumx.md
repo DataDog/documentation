@@ -2,10 +2,13 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    tokumx: assets/dashboards/tokumx_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    tokumx_processes: assets/saved_views/tokumx_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -15,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md'
 display_name: TokuMX
+draft: false
 git_integration_title: tokumx
 guid: 7785939b-bfb6-4d3e-acc2-94c1f5fb33e7
 integration_id: tokumx
@@ -26,8 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: tokumx.
 metric_to_check: tokumx.uptime
 name: tokumx
-process_signatures:
-  - mongod --config /etc/tokumx.conf
+process_signatures: []
 public_title: Intégration Datadog/TokuMX
 short_description: 'Surveillez des métriques sur le nombre d''opérations effectuées, le délai de réplication, la taille d''une table de cache, et plus encore.'
 support: core
@@ -48,7 +51,7 @@ Ce check recueille des métriques TokuMX comme :
 
 ### Installation
 
-Le check TokuMX est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs TokuMX.
+Le check TokuMX est inclus avec le paquet de l'[Agent Datadog][1] pour les versions <=6.x de l'Agent : vous n'avez donc rien d'autre à installer sur vos serveurs TokuMX.
 
 ### Configuration
 
@@ -146,9 +149,8 @@ Ce check émet un événement à chaque fois que l'état de réplication d'un n�
 
 ### Checks de service
 
-`tokumx.can_connect` :
-
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à TokuMX pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+**tokumx.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à TokuMX pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

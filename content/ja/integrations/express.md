@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/express/'
 draft: false
 git_integration_title: express
 has_logo: true
+integration_id: express
 integration_title: ExpressJS
 is_public: true
 kind: インテグレーション
