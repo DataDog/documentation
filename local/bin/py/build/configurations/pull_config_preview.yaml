@@ -140,7 +140,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - README.md
       options:
@@ -149,7 +149,7 @@
         front_matters:
           title: Puppet
           kind: documentation
-          dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/master/README.md"]
+          dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md"]
 
   - repo_name: datadog-formula
     contents:
