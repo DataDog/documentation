@@ -36,7 +36,7 @@ Pour créer un [monitor RUM][2] dans Datadog, utilisez la navigation principale�
 ### Définir vos conditions d'alerte
 
 * Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieur ou égale à, inférieure ou égale à)
-* au seuil durant les `5 minutes`, `15 minutes` ou encore `1 hour` précédentes.
+* au seuil sur un intervalle de `5 minutes`, `15 minutes` ou `1 hour` ou sur un intervalle `custom` (entre 5 minutes et 48 heures).
 * Seuil d'alerte `<NOMBRE>`
 * Seuil d'avertissement `<NOMBRE>`
 

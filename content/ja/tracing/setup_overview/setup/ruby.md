@@ -83,7 +83,9 @@ type: multi-code-lang
      - [トレーサー設定](#tracer-settings)
      - [カスタムロギング](#custom-logging)
      - [環境とタグ](#environment-and-tags)
+     - [環境変数](#environment-variables)
      - [サンプリング](#sampling)
+         - [アプリケーション側サンプリング](#application-side-sampling)
          - [優先度サンプリング](#priority-sampling)
      - [分散型トレーシング](#distributed-tracing)
      - [HTTP リクエストのキューイング](#http-request-queuing)
@@ -110,7 +112,7 @@ type: multi-code-lang
 |       |                            | 2.3     | フル                                 | 最新              |
 |       |                            | 2.2     | フル                                 | 最新              |
 |       |                            | 2.1     | フル                                 | 最新              |
-|       |                            | 2.0     | フル                                 | 最新              |
+|       |                            | 2.0     | 非推奨                           | < 0.50.0            |
 |       |                            | 1.9.3   | 2020 年 8 月 6 日以降 EOL           | < 0.27.0            |
 |       |                            | 1.9.1   | 2020 年 8 月 6 日以降 EOL           | < 0.27.0            |
 | JRuby | https://www.jruby.org      | 9.2     | フル                                 | 最新              |
@@ -413,6 +415,7 @@ end
 | httpclient                | `httpclient`              | `>= 2.2`                 | `>= 2.2`                  | *[リンク](#httpclient)*               | *[リンク](https://github.com/nahi/httpclient)*                                     |
 | httpx                     | `httpx`                   | `>= 0.11`                | `>= 0.11`                 | *[リンク](#httpx)*                    | *[リンク](https://gitlab.com/honeyryderchuck/httpx)*                             |
 | Kafka                    | `ruby-kafka`               | `>= 0.7.10`              | `>= 0.7.10`               | *[リンク](#kafka)*                    | *[Link](https://github.com/zendesk/ruby-kafka)*                                |
+| Makara (Active Record 経由) | `makara`             | `>= 0.3.5`               | `>= 0.3.5`                | *[リンク](#active-record)*            | *[リンク](https://github.com/instacart/makara)*                                  |
 | MongoDB                  | `mongo`                    | `>= 2.1`                 | `>= 2.1`                  | *[リンク](#mongodb)*                  | *[リンク](https://github.com/mongodb/mongo-ruby-driver)*                         |
 | MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *gem の利用不可*       | *[リンク](#mysql2)*                   | *[リンク](https://github.com/brianmario/mysql2)*                                 |
 | Net/HTTP                 | `http`                     | *（サポートされているすべての Ruby）*   | *（サポートされているすべての Ruby）*    | *[リンク](#nethttp)*                  | *[リンク](https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html)* |
@@ -452,7 +455,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `action_cable` インスツルメンテーションに使用されるサービス名 | `'action_cable'` |
 
 ### Action View
@@ -472,7 +474,6 @@ end
 
 | キー | 説明 | デフォルト |
 | ---| --- | --- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | インスツルメンテーションのレンダリングに使用されるサービス名。 | `action_view` |
 | `template_base_path` | テンプレート名がパースされるときに使用されます。テンプレートを `views/` フォルダーに保存しない場合、この値を変更する必要があるかもしれません | `'views/'` |
 
@@ -494,7 +495,6 @@ ActiveModelSerializers::SerializableResource.new(test_obj).serializable_hash
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `active_model_serializers` インスツルメンテーションに使用されるサービス名。 | `'active_model_serializers'` |
 
 ### Action Pack
@@ -514,7 +514,6 @@ end
 
 | キー | 説明 | デフォルト |
 | ---| --- | --- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | インスツルメンテーションのレンダリングに使用されるサービス名。 | `action_pack` |
 
 ### Active Record
@@ -542,7 +541,6 @@ end
 
 | キー | 説明 | デフォルト |
 | ---| --- | --- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `orm_service_name` | クエリ結果の ActiveRecord オブジェクトへのマッピング部分に使用されるサービス名。デフォルトでは、親からサービス名を継承します。 | _parent.service_name_ (例: `'mysql2'`) |
 | `service_name` | `active_record` インスツルメンテーションのデータベース部分に使用されるサービス名。 | データベースアダプターの名前（例: `'mysql2'`） |
 
@@ -582,6 +580,10 @@ Datadog.configure do |c|
       username: 'root'
     },
     service_name: 'secondary-db'
+
+  # `makara` gem を使用している場合、接続 `role` で一致することも可能:
+  c.use :active_record, describes: { makara_role: 'primary' }, service_name: 'primary-db'
+  c.use :active_record, describes: { makara_role: 'replica' }, service_name: 'secondary-db'
 end
 ```
 
@@ -628,7 +630,6 @@ cache.read('city')
 
 | キー | 説明 | デフォルト |
 | ---| --- | --- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `cache_service` | `active_support` インスツルメンテーションでのキャッシュに使用されるサービス名。 | `active_support-cache` |
 
 ### AWS
@@ -651,7 +652,6 @@ Aws::S3::Client.new.list_buckets
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `aws` インスツルメンテーションに使用されるサービス名 | `'aws'` |
 
 ### Concurrent Ruby
@@ -737,7 +737,6 @@ client.set('abc', 123)
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `dalli` インスツルメンテーションに使用されるサービス名 | `'memcached'` |
 
 ### DelayedJob
@@ -758,7 +757,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `DelayedJob` インスツルメンテーションに使用されるサービス名 | `'delayed_job'` |
 | `client_service_name` | クライアントサイドの `DelayedJob` インスツルメンテーションに使用されるサービス名 | `'delayed_job-client'` |
 | `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
@@ -784,7 +782,6 @@ response = client.perform_request 'GET', '_cluster/health'
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `quantize` | 量子化のオプションを含むハッシュ。量子化しないキーの配列を含む `:show`（または量子化をスキップする場合は `:all`）、または完全に除外するキーの配列を含む `:exclude` を含めることができます。 | `{}` |
 | `service_name` | `elasticsearch` インスツルメンテーションに使用されるサービス名 | `'elasticsearch'` |
 
@@ -810,7 +807,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `ethon` インスツルメンテーションのサービス名。 | `'ethon'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
@@ -842,7 +838,6 @@ connection.get
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `error_handler` | `response` パラメーターを受け入れる `Proc`。*truthy* 値に評価される場合、トレーススパンはエラーとしてマークされます。デフォルトでは、5XX 応答のみをエラーとして設定します。 | `nil` |
 | `service_name` | Excon インスツルメンテーションのサービス名。特定の接続のミドルウェアに指定される場合、その接続オブジェクトにのみ適用されます。 | `'excon'` |
@@ -905,7 +900,6 @@ connection.get('/foo')
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `error_handler` | `response` パラメーターを受け入れる `Proc`。*truthy* 値に評価される場合、トレーススパンはエラーとしてマークされます。デフォルトでは、5XX 応答のみをエラーとして設定します。 | `nil` |
 | `service_name` | Faraday インスツルメンテーションのサービス名。特定の接続のミドルウェアに指定される場合、その接続オブジェクトにのみ適用されます。 | `'faraday'` |
@@ -939,7 +933,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `nil` |
 | `enabled` | Grape をトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
 | `service_name` | `grape` インスツルメンテーションに使用されるサービス名 | `'grape'` |
 | `エラー_ステータス`| エラーとしてマークする必要がある、ステータスコードもしくはステータスコードの範囲を定義します。`'404,405,500-599'` または `[404,405,'500-599']` | `nil` |
@@ -964,7 +957,6 @@ YourSchema.execute(query, variables: {}, context: {}, operation_name: nil)
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `nil` |
 | `service_name` | `graphql` インスツルメンテーションに使用されるサービス名 | `'ruby-graphql'` |
 | `schemas` | 必須。トレースする `GraphQL::Schema` オブジェクトの配列。このコンフィギュレーションに指定されるオプションを使用して、リストされているすべてのスキーマにトレースが追加されます。何も指定しない場合、トレースはアクティブ化されません。 | `[]` |
 
@@ -1043,7 +1035,6 @@ client.my_endpoint(DemoMessage.new(contents: 'hello!'))
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `grpc` インスツルメンテーションに使用されるサービス名 | `'grpc'` |
 
 **クライアントを構成してさまざまな設定を使用する**
@@ -1085,7 +1076,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `httprb` インスツルメンテーションのサービス名。 | `'httprb'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
@@ -1111,7 +1101,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `httpclient` インスツルメンテーションのサービス名。 | `'httpclient'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
@@ -1155,7 +1144,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `kafka` インスツルメンテーションに使用されるサービス名 | `'kafka'` |
 | `tracer` | インスツルメンテーションの実行に使用される `Datadog::Tracer`。通常、これを設定する必要はありません。 | `Datadog.tracer` |
 
@@ -1184,7 +1172,6 @@ Datadog.configure(client, options)
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `quantize` | 量子化のオプションを含むハッシュ。量子化しないキーの配列を含む `:show`（または量子化をスキップする場合は `:all`）、または完全に除外するキーの配列を含む `:exclude` を含めることができます。 | `{ show: [:collection, :database, :operation] }` |
 | `service_name` | `mongo` インスツルメンテーションに使用されるサービス名 | `'mongodb'` |
 
@@ -1208,7 +1195,6 @@ client.query("SELECT * FROM users WHERE group='x'")
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `mysql2` インスツルメンテーションに使用されるサービス名 | `'mysql2'` |
 
 ### Net/HTTP
@@ -1241,7 +1227,6 @@ content = Net::HTTP.get(URI('http://127.0.0.1/index.html'))
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `http` インスツルメンテーションに使用されるサービス名 | `'net/http'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
@@ -1282,7 +1267,6 @@ client.run("select * from system.nodes")
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `presto` インスツルメンテーションに使用されるサービス名 | `'presto'` |
 
 ### Qless
@@ -1303,7 +1287,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `qless` インスツルメンテーションに使用されるサービス名 | `'qless'` |
 | `tag_job_data` | ジョブ引数のタグ付けを有効にします。オンの場合は true、オフの場合は false です。 | `false` |
 | `tag_job_tags` | ジョブタグのタグ付けを有効にします。オンの場合は true、オフの場合は false です。 | `false` |
@@ -1326,7 +1309,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `enabled` | Que をトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
 | `service_name` | `que` インスツルメンテーションに使用されるサービス名 | `'que'` |
 | `tag_args` | ジョブの引数フィールドのタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
@@ -1351,7 +1333,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `racecar` インスツルメンテーションに使用されるサービス名 | `'racecar'` |
 
 ### Rack
@@ -1381,7 +1362,6 @@ run app
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `nil` |
 | `application` | Rack アプリケーション。`middleware_names` に対して必須です。 | `nil` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にして、トレースヘッダーを受信した場合にこのサービストレースが別のサービスのトレースに接続されるようにします | `true` |
 | `headers` | タグとして `rack.request` に追加する HTTP リクエストまたは応答ヘッダーのハッシュ。配列の値を持つ `request` と `response` キーを受け入れます（例: `['Last-Modified']`）。`http.request.headers.*` タグと `http.response.headers.*` タグをそれぞれ追加します。 | `{ response: ['Content-Type', 'X-Request-ID'] }` |
@@ -1444,7 +1424,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `nil` |
 | `cache_service` | キャッシュアクティビティをトレースするときに使用されるキャッシュサービス名 | `'<アプリ名>-cache'` |
 | `controller_service` | Rails アクションコントローラーをトレースするときに使用されるサービス名 | `'<アプリ名>'` |
 | `database_service` | データベースアクティビティをトレースするときに使用されるデータベースサービス名 | `'<アプリ名>-<アダプター名>'` |
@@ -1494,7 +1473,6 @@ Rake::Task['my_task'].invoke
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `enabled` | Rake タスクをトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
 | `quantize` | タスク引数の量子化のオプションを含むハッシュ。詳細と例については、以下を参照してください。 | `{}` |
 | `service_name` | `rake` インスツルメンテーションに使用されるサービス名 | `'rake'` |
@@ -1554,7 +1532,6 @@ redis.set 'foo', 'bar'
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `redis` インスツルメンテーションに使用されるサービス名 | `'redis'` |
 | `command_args` | コマンド引数 (例: `GET key` の `key`) をリソース名とタグとして表示します | true |
 
@@ -1621,16 +1598,11 @@ Resque インテグレーションは、`perform` メソッドをラップする
 Resque ジョブにトレースを追加するには
 
 ```ruby
+require 'resque'
 require 'ddtrace'
 
-class MyJob
-  def self.perform(*args)
-    # do_something
-  end
-end
-
 Datadog.configure do |c|
-  c.use :resque, options
+  c.use :resque, **options
 end
 ```
 
@@ -1638,10 +1610,9 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `resque` インスツルメンテーションに使用されるサービス名 | `'resque'` |
-| `workers` | トレースするすべてのワーカークラスを含む配列（例: `[MyJob]`） | `[]` |
 | `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
+| `workers` | **[非推奨]** インスツルメント済みのワーカークラスは、配列で指定されたもののみ（たとえば `[MyJob]`）に制限します。提供されていない場合、すべてのワーカーをインスツルメントします。 | `nil` |
 
 ### Rest Client
 
@@ -1660,7 +1631,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にします | `true` |
 | `service_name` | `rest_client` インスツルメンテーションのサービス名。 | `'rest_client'` |
 
@@ -1718,7 +1688,6 @@ articles.all
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `sequel` インスツルメンテーションのサービス名 | データベースアダプターの名前（例: `'mysql2'`） |
 
 Ruby 2.0 以降のみがサポートされています。
@@ -1754,8 +1723,8 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `shoryuken` インスツルメンテーションに使用されるサービス名 | `'shoryuken'` |
+| `tag_body` | スパンに SQS メッセージの本文 `true` または `false` をタグ付け | `false` |
 | `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
 ### Sidekiq
@@ -1776,7 +1745,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `client_service_name` | クライアント側の `sidekiq` インスツルメンテーションに使用されるサービス名 | `'sidekiq-client'` |
 | `service_name` | サーバー側の `sidekiq` インスツルメンテーションに使用されるサービス名 | `'sidekiq'` |
 | `tag_args` | ジョブ引数のタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
@@ -1840,7 +1808,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `nil` |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にして、トレースヘッダーを受信した場合にこのサービストレースが別のサービスのトレースに接続されるようにします | `true` |
 | `headers` | タグとして `sinatra.request` に追加する HTTP リクエストまたは応答ヘッダーのハッシュ。配列の値を持つ `request` と `response` キーを受け入れます（例: `['Last-Modified']`）。`http.request.headers.*` タグと `http.response.headers.*` タグをそれぞれ追加します。 | `{ response: ['Content-Type', 'X-Request-ID'] }` |
 | `resource_script_names` | リソース名にスクリプト名を付加します | `false` |
@@ -1864,7 +1831,6 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `enabled` | Sneakers をトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
 | `service_name` | `sneakers` インスツルメンテーションに使用されるサービス名 | `'sneakers'` |
 | `tag_body` | ジョブメッセージのタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
@@ -1889,7 +1855,6 @@ LogJob.perform_async('login')
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
-| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `sucker_punch` インスツルメンテーションに使用されるサービス名 | `'sucker_punch'` |
 
 ## 高度なコンフィギュレーション
@@ -1905,10 +1870,17 @@ Datadog.configure do |c|
   c.tracer.enabled = true
   c.tracer.hostname = 'my-agent'
   c.tracer.port = 8126
-  c.tracer.partial_flush.enabled = false
+
+  # すべてのトレースを Datadog により取り込み 
+  c.sampling.default_rate = 1.0 # Recommended
+  c.sampling.rate_limit = 200
+  # またはカスタマイズ実装を提供（c.sampling 設定を上書き）
   c.tracer.sampler = Datadog::AllSampler.new
 
-  # または、高度なユースケースでは、独自のトレーサーを指定できます。
+  # 非常に大きいトレースを小さく分割
+  c.tracer.partial_flush.enabled = false
+
+  # 独自のトレーサーを指定可能
   c.tracer.instance = Datadog::Tracer.new
 
   # デバッグモードを有効にするには
@@ -1923,6 +1895,8 @@ end
  - `instance`: カスタム `Datadog::Tracer` インスタンスに設定します。指定した場合、他のトレース設定は無視されます（手動で構成する必要があります）。
  - `partial_flush.enabled`: トレースの部分的なフラッシュを有効にするには、`true` に設定します（長時間実行されるトレースの場合）。デフォルトでは無効になっています。*試験機能。*
  - `port`: トレース Agent がリッスンするポートを設定します。
+ - `sampling.default_rate`: デフォルトのトレーサーサンプリングレートで、`0.0` (0%)～ `1.0` (100%、こちらを推奨)。すべてのトラフィックおよび保持を送信できる `1.0`、または Tracing without Limits™ は、[Datadog アプリ内で構成](https://docs.datadoghq.com/tracing/trace_retention_and_ingestion/)できます。このコンフィギュレーションが設定されていない場合、Datadog Agent でインテリジェントによるさまざまなトレースが保持されます。
+ - `sampling.rate_limit`: サンプリングする 1 秒あたりの最大トレース数。デフォルトは 1 秒あたり 100。
  - `sampler`: カスタム `Datadog::Sampler` インスタンスに設定します。指定した場合、トレーサーはこのサンプラーを使用してサンプリング動作を決定します。
  - `diagnostics.startup_logs.enabled`: スタートアップコンフィギュレーションと診断ログ。デフォルトは `true` です。`DD_TRACE_STARTUP_LOGS` 環境変数を介して設定できます。
  - `diagnostics.debug`: デバッグログを有効にするには、true に設定します。`DD_TRACE_DEBUG` 環境変数を使用して構成できます。デフォルトは `false` です。
@@ -1980,13 +1954,22 @@ end
 
 - `DD_TRACE_AGENT_URL`: トレースが送信される URL エンドポイントを設定します。設定されている場合、`DD_AGENT_HOST` および `DD_TRACE_AGENT_PORT` よりも優先されます。例: `DD_TRACE_AGENT_URL=http://localhost:8126`
 - `DD_TRACE_<INTEGRATION>_ENABLED`: **アクティブ化された**インテグレーションを有効または無効にします。デフォルトは `true` です。例: `DD_TRACE_RAILS_ENABLED=false`。このオプションは、コードで明示的にアクティブ化されていないインテグレーション (例: `Datadog.configure{ |c| c.use :integration }`) には影響しません。この環境変数は、インテグレーションを無効にするためにのみ使用できます。
-- `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED`: 特定のインテグレーションに対して App Analytics を有効または無効にします。有効な値は、true または false (デフォルト) です。例: `DD_TRACE_ACTION_CABLE_ANALYTICS_ENABLED=true`
-- `DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`: 特定のインテグレーションの App Analytics サンプリングレートを設定します。0.0〜1.0 (デフォルト) の浮動小数点数。例: `DD_TRACE_ACTION_CABLE_ANALYTICS_SAMPLE_RATE=0.5`
+- `DD_TRACE_SAMPLE_RATE`: トレースのサンプリングレートを `0.0` (0%)～ `1.0` (100%、こちらを推奨) に設定します。すべてのトラフィックおよび保持を送信できる `1.0`、または Tracing without Limits™ は、[Datadog アプリ内で構成](https://docs.datadoghq.com/tracing/trace_retention_and_ingestion/)できます。このコンフィギュレーションが設定されていない場合、Datadog Agent でインテリジェントによるさまざまなトレースが保持されます。
 - `DD_LOGS_INJECTION`: `dd.trace_id` などのインジェクションの[トレース相関](#トレース相関)情報を Rails ログに自動的に有効化します。デフォルトのロガー (`ActiveSupport::TaggedLogging`) および `Lograge` をサポートします。トレース相関情報のフォーマットに関する詳細は、[トレース相関](#トレース相関)セクションを参照してください。有効な値は `true` または `false`(default) です（例: `DD_LOGS_INJECTION=true`）。
 
 ### サンプリング
 
-`ddtrace` はトレースサンプリングを実行できます。トレース Agent はすでにトレースをサンプリングして帯域幅の使用量を減らしていますが、クライアントサンプリングはパフォーマンスのオーバーヘッドを減らします。
+Datadog の Tracing without Limits™ を使用すると、すべてのトラフィックを送信し、[Datadog アプリ内で保持を構成](https://docs.datadoghq.com/tracing/trace_retention_and_ingestion/)できます。
+
+`ddtrace` を使用するすべての新しいアプリケーションで環境変数 `DD_TRACE_SAMPLE_RATE=1.0` iを設定することをおすすめします。
+
+`analytics_enabled` 設定で以前構成された App Analytics は、非推奨となり、現在は Tracing without Limits™ となっています。この[非推奨コンフィギュレーション用のドキュメント](https://docs.datadoghq.com/tracing/legacy_app_analytics/)は、依然として参照可能です。
+
+#### アプリケーション側サンプリング
+
+トレース Agent はトレースをサンプリングして帯域幅の使用量を減らしていますが、アプリケーション側サンプリングはパフォーマンスのオーバーヘッドを減らします。
+
+これにより**可視性が軽減されるため、推奨されません**。サンプリングの推奨アプローチについては、[DD_TRACE_SAMPLE_RATE](#environment-variables) を参照してください。
 
 `Datadog::RateSampler` はトレースの比率をサンプリングします。例:
 
@@ -2144,7 +2127,7 @@ Service C:
 
 - [Excon](#excon)
 - [Faraday](#faraday)
-- [Rest Client](#restclient)
+- [Rest Client](#rest-client)
 - [Net/HTTP](#nethttp)
 - [Rack](#rack)
 - [Rails](#rails)
@@ -2438,7 +2421,7 @@ end
 
 メトリクスの収集のためにアプリケーションを構成するには
 
-1. [Datadog Agent を StatsD 用に構成します](https://docs.datadoghq.com/developers/dogstatsd/#setup)
+1. [StatsD 用 Datadog Agent を構成](https://docs.datadoghq.com/developers/dogstatsd/#setup)
 2. `gem 'dogstatsd-ruby'` を Gemfile に追加します
 
 #### アプリケーションランタイムの場合

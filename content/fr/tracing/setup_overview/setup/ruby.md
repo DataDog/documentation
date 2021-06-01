@@ -31,13 +31,13 @@ Pour contribuer au code, consultez les [règles de contribution][contribution do
 
 ## Table des matières
 
- - [Compatibilité](#compatibility)
+ - [Compatibilité](#compatibilite)
  - [Installation](#installation)
-     - [Démarrage rapide pour les applications Rails](#quickstart-for-rails-applications)
-     - [Démarrage rapide pour les applications Ruby](#quickstart-for-ruby-applications)
-     - [Démarrage rapide pour OpenTracing](#quickstart-for-opentracing)
- - [Instrumentation manuelle](#manual-instrumentation)
- - [Instrumenter des intégrations](#integration-instrumentation)
+     - [Démarrage rapide pour les applications Rails](#demarrage-rapide-pour-les-applications-rails)
+     - [Démarrage rapide pour les applications Ruby](#demarrage-rapide-pour-les-applications-ruby)
+     - [Démarrage rapide pour OpenTracing](#demarrage-rapide-pour-opentracing)
+ - [Instrumentation manuelle](#instrumentation-manuelle)
+ - [Instrumenter des intégrations](#instrumenter-des-integrations)
      - [Action Cable](#action-cable)
      - [Action View](#action-view)
      - [Active Model Serializers](#active-model-serializers)
@@ -58,6 +58,7 @@ Pour contribuer au code, consultez les [règles de contribution][contribution do
      - [gRPC](#grpc)
      - [http.rb](#http-rb)
      - [httpclient](#httpclient)
+     - [httpx](#httpx)
      - [MongoDB](#mongodb)
      - [MySQL2](#mysql2)
      - [Net/HTTP](#net-http)
@@ -69,7 +70,7 @@ Pour contribuer au code, consultez les [règles de contribution][contribution do
      - [Rails](#rails)
      - [Rake](#rake)
      - [Redis](#redis)
-     - [Client Rest](#rest-client)
+     - [Rest Client](#rest-client)
      - [Resque](#resque)
      - [RSpec](#rspec)
      - [Shoryuken](#shoryuken)
@@ -78,21 +79,23 @@ Pour contribuer au code, consultez les [règles de contribution][contribution do
      - [Sinatra](#sinatra)
      - [Sneakers](#sneakers)
      - [Sucker Punch](#sucker-punch)
- - [Configuration avancée](#advanced-configuration)
-     - [Paramètres du traceur](#tracer-settings)
-     - [Logging personnalisé](#custom-logging)
-     - [Environnement et tags](#environment-and-tags)
-     - [Échantillonnage](#sampling)
-         - [Échantillonnage prioritaire](#priority-sampling)
-     - [Tracing distribué](#distributed-tracing)
-     - [Mise en file d'attente des requêtes HTTP](#http-request-queuing)
-     - [Pipeline de processing](#processing-pipeline)
-         - [Filtrage](#filtering)
-         - [Processing](#processing)
-     - [Mise en corrélation des traces](#trace-correlation)
-     - [Configurer la couche de transport](#configuring-the-transport-layer)
-     - [Métriques](#metrics)
-         - [Métriques runtime d'application](#for-application-runtime)
+ - [Configuration avancée](#configuration-avancee)
+     - [Paramètres du traceur](#parametres-du-traceur)
+     - [Logging personnalisé](#logging-personnalise)
+     - [Environnement et tags](#environnement-et-tags)
+     - [Variables d'environnement](#variables-d-environnement)
+     - [Échantillonnage](#echantillonnage)
+         - [Échantillonnage côté application](#echantilonnage-cote-application)
+         - [Échantillonnage prioritaire](#echantillonnage-prioritaire)
+     - [Tracing distribué](#tracing-distribue)
+     - [Mise en file d'attente des requêtes HTTP](#mise-en-file-d-attente-des-requetes-http)
+     - [Pipeline de traitement](#pipeline-de-traitement)
+         - [Filtrage](#filtrage)
+         - [Traitement](#traitement)
+     - [Mise en corrélation des traces](#mise-en-correlation-des-traces)
+     - [Configurer la couche de transport](#configurer-la-couche-de-transport)
+     - [Métriques](#metriques)
+         - [Métriques runtime d'application](#metriques-((runtime-d-application)
      - [OpenTracing](#opentracing)
 
 ## Compatibilité
@@ -109,7 +112,7 @@ Pour contribuer au code, consultez les [règles de contribution][contribution do
 |       |                            | 2.3     | Complète                                 | Dernière              |
 |       |                            | 2.2     | Complète                                 | Dernière              |
 |       |                            | 2.1     | Complète                                 | Dernière              |
-|       |                            | 2.0     | Complète                                 | Dernière              |
+|       |                            | 2.0     | Obsolète                           | < 0.50.0            |
 |       |                            | 1.9.3   | Fin de vie depuis le 6 août 2020           | < 0.27.0            |
 |       |                            | 1.9.1   | Fin de vie depuis le 6 août 2020           | < 0.27.0            |
 | JRuby | https://www.jruby.org      | 9.2     | Complète                                 | Dernière              |
@@ -410,7 +413,9 @@ Vous trouverez ci-dessous la liste des intégrations disponibles ainsi que leurs
 | gRPC                     | `grpc`                     | `>= 1.7`                 | *Gem non disponible*       | *[Lien](#grpc)*                     | *[Lien](https://github.com/grpc/grpc/tree/master/src/rubyc)*                   |
 | http.rb                  | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[Lien](#http-rb)*                  | *[Lien](https://github.com/httprb/http)*                                       |
 | httpclient                | `httpclient`              | `>= 2.2`                 | `>= 2.2`                  | *[Lien](#httpclient)*               | *[Lien](https://github.com/nahi/httpclient)*                                     |
+| httpx                     | `httpx`                   | `>= 0.11`                | `>= 0.11`                 | *[Lien](#httpx)*                    | *[Lien](https://gitlab.com/honeyryderchuck/httpx)*                             |
 | Kafka                    | `ruby-kafka`               | `>= 0.7.10`              | `>= 0.7.10`               | *[Lien](#kafka)*                    | *[Lien](https://github.com/zendesk/ruby-kafka)*                                |
+| Makara (via Active Record) | `makara`             | `>= 0.3.5`               | `>= 0.3.5`                | *[Lien](#active-record)*            | *[Lien](https://github.com/instacart/makara)*                                  |
 | MongoDB                  | `mongo`                    | `>= 2.1`                 | `>= 2.1`                  | *[Lien](#mongodb)*                  | *[Lien](https://github.com/mongodb/mongo-ruby-driver)*                         |
 | MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *Gem non disponible*       | *[Lien](#mysql2)*                   | *[Lien](https://github.com/brianmario/mysql2)*                                 |
 | Net/HTTP                 | `http`                     | *(Toute version de Ruby prise en charge)*   | *(Toute version de Ruby prise en charge)*    | *[Lien](#nethttp)*                  | *[Lien](https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html)* |
@@ -423,7 +428,7 @@ Vous trouverez ci-dessous la liste des intégrations disponibles ainsi que leurs
 | Rake                     | `rake`                     | `>= 12.0`                | `>= 12.0`                 | *[Lien](#rake)*                     | *[Lien](https://github.com/ruby/rake)*                                         |
 | Redis                    | `redis`                    | `>= 3.2`                 | `>= 3.2`                  | *[Lien](#redis)*                    | *[Lien](https://github.com/redis/redis-rb)*                                    |
 | Resque                   | `resque`                   | `>= 1.0`                 | `>= 1.0`                  | *[Lien](#resque)*                   | *[Lien](https://github.com/resque/resque)*                                     |
-| Client Rest              | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[Lien](#rest-client)*              | *[Lien](https://github.com/rest-client/rest-client)*                           |
+| Rest Client              | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[Lien](#rest-client)*              | *[Lien](https://github.com/rest-client/rest-client)*                           |
 | RSpec                    | `rspec`.                   | `>= 3.0.0`               | `>= 3.0.0`                | *[Lien](#rspec)*.                   | *[Lien](https://github.com/rspec/rspec)*                                       |
 | Sequel                   | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[Lien](#sequel)*                   | *[Lien](https://github.com/jeremyevans/sequel)*                                |
 | Shoryuken                | `shoryuken`                | `>= 3.2`                 | `>= 3.2`                  | *[Lien](#shoryuken)*                | *[Lien](https://github.com/phstc/shoryuken)*                                   |
@@ -450,7 +455,6 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
 | Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `action_cable` | `'action_cable'` |
 
 ### Action View
@@ -470,7 +474,6 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
 | Clé | Description | Valeur par défaut |
 | ---| --- | --- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation des rendus. | `action_view` |
 | `template_base_path` | Utilisé pour le parsing du nom du modèle. Si vous ne stockez pas vos modèles dans le dossier `views/`, vous devrez peut-être modifier cette valeur. | `'views/'` |
 
@@ -492,7 +495,6 @@ ActiveModelSerializers::SerializableResource.new(test_obj).serializable_hash
 
 | Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `active_model_serializers`. | `'active_model_serializers'` |
 
 ### Action Pack
@@ -512,7 +514,6 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
 | Clé | Description | Valeur par défaut |
 | ---| --- | --- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation des rendus. | `action_pack` |
 
 ### Active Record
@@ -540,7 +541,6 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
 | Clé | Description | Valeur par défaut |
 | ---| --- | --- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `orm_service_name` | Nom de service utilisé pour la partie mappage des résultats de requête liés à des objets ActiveRecord. Hérite du nom de service parent par défaut. | _parent.service_name_ (p. ex. `'mysql2'`) |
 | `service_name` | Nom de service utilisé pour la partie base de données de l'instrumentation de `active_record`. | Nom de l'adaptateur de base de données (p. ex. `'mysql2'`) |
 
@@ -551,24 +551,27 @@ Il est possible de configurer les paramètres de tracing par connexion de base d
 ```ruby
 # Ajouter une option `:describes` avec une clé de connexion.
 # Toutes les clés suivantes sont acceptées et équivalentes.
-# Si un bloc est spécifié, cela renvoie un objet Settings qui
-# accepte toutes les options de configuration énumérées ci-dessus.
+# Si un bloc est spécifié, cela renvoie un objet Settings
+# qui accepte toutes les options de configuration énumérées ci-dessus.
 
 Datadog.configure do |c|
   # Symbole correspondant à votre connexion de base de données dans config/database.yml
-  # Uniquement disponible si vous utilisez Rails avec ActiveRecord.
+  # Uniquement disponible si vous utilisez Rails avec Active Record.
   c.use :active_record, describes: :secondary_database, service_name: 'secondary-db'
 
+  # Modèle de configuration du bloc.
   c.use :active_record, describes: :secondary_database do |second_db|
     second_db.service_name = 'secondary-db'
   end
 
   # Chaîne de connexion avec les paramètres de connexion suivants :
-  # Adaptateur, utilisateur, host, port, base de données
+  # adaptateur, utilisateur, host, port, base de données.
+  # Les autres champs sont ignorés.
   c.use :active_record, describes: 'mysql2://root@127.0.0.1:3306/mysql', service_name: 'secondary-db'
 
   # Hash avec les paramètres de connexion suivants :
-  # Adaptateur, utilisateur, host, port, base de données
+  # adaptateur, utilisateur, host, port, base de données.
+  # Les autres champs sont ignorés.
   c.use :active_record, describes: {
       adapter:  'mysql2',
       host:     '127.0.0.1',
@@ -577,8 +580,33 @@ Datadog.configure do |c|
       username: 'root'
     },
     service_name: 'secondary-db'
+
+  # Si vous utilisez le gem `makara`, il est possible de faire correspondre la connexion `role` :
+  c.use :active_record, describes: { makara_role: 'primary' }, service_name: 'primary-db'
+  c.use :active_record, describes: { makara_role: 'replica' }, service_name: 'secondary-db'
 end
 ```
+
+Vous pouvez également créer des configurations basées sur les correspondances partielles de champs de connexion de base de données :
+
+```ruby
+Datadog.configure do |c|
+  # Correspond à n'importe quelle connexion sur le host `127.0.0.1`.
+  c.use :active_record, describes: { host:  '127.0.0.1' }, service_name: 'local-db'
+
+  # Correspond à n'importe quelle connexion `mysql2`.
+  c.use :active_record, describes: { adapter: 'mysql2'}, service_name: 'mysql-db'
+
+  # Correspond à n'importe quelle connexion `mysql2` à la base de données `reports`.
+  #
+  # Si plusieurs configurations `describe` correspondent, seule la dernière s'applique.
+  # Ici, une connexion avec l'adaptateur `mysql` et la base de données `reports`
+  # sera configurée ; `service_name: 'reports-db'`, et non `service_name: 'mysql-db'`.
+  c.use :active_record, describes: { adapter: 'mysql2', database:  'reports'}, service_name: 'reports-db'
+end
+```
+
+Lorsque plusieurs configurations `describes` correspondent à une connexion, la dernière règle configurée qui correspond est appliquée.
 
 Si Active Record trace un événement qui utilise une connexion qui correspond à une clé définie par `describes`, les paramètres de tracing associés à cette connexion sont utilisés. Si la connexion ne correspond à aucune des connexions décrites, les paramètres par défaut définis par `c.use :active_record` sont utilisés à la place.
 
@@ -602,7 +630,6 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
 | Clé | Description | Valeur par défaut |
 | ---| --- | --- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `cache_service` | Nom de service utilisé pour la mise en cache avec l'instrumentation de `active_support`. | `active_support-cache` |
 
 ### AWS
@@ -625,7 +652,6 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
 | Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `aws` | `'aws'` |
 
 ### Concurrent Ruby
@@ -709,9 +735,8 @@ client.set('abc', 123)
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `dalli` | `'memcached'` |
 
 ### DelayedJob
@@ -730,9 +755,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `DelayedJob` | `'delayed_job'` |
 | `client_service_name` | Nom de service utilisé pour l'instrumentation de `DelayedJob` côté client | `'delayed_job-client'` |
 | `error_handler` | Gestionnaire d'erreurs personnalisé appelé lorsqu'une tâche renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit une erreur sur la span par défaut. Utile pour ignorer les erreurs temporaires. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
@@ -756,9 +780,8 @@ response = client.perform_request 'GET', '_cluster/health'
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `quantize` | Hash contenant les options de quantification. Possibilité d'utiliser `:show` avec un tableau de clés à ne pas quantifier (ou `:all` pour ignorer la quantification), ou `:exclude` avec un tableau de clés à exclure entièrement. | `{}` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `elasticsearch` | `'elasticsearch'` |
 
@@ -782,9 +805,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `ethon` | `'ethon'` |
 | `split_by_domain` | Définir sur `true` pour utiliser le domaine de requête comme nom de service. | `false` |
@@ -814,9 +836,8 @@ connection.get
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) | `true` |
 | `error_handler` | Un `Proc` qui accepte un paramètre `response`. S'il renvoie une valeur *truthy*, la span de la trace est définie comme une erreur. Par défaut, seules les réponses 5XX sont définies comme des erreurs. | `nil` |
 | `service_name` | Nom de service pour l'instrumentation d'Excon. Lorsque spécifié à un middleware pour une connexion spécifique, s'applique uniquement à cet objet de connexion. | `'excon'` |
@@ -877,9 +898,8 @@ connection.get('/foo')
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) | `true` |
 | `error_handler` | Un `Proc` qui accepte un paramètre `response`. S'il renvoie une valeur *truthy*, la span de la trace est définie comme une erreur. Par défaut, seules les réponses 5XX sont définies comme des erreurs. | `nil` |
 | `service_name` | Nom du service pour l'instrumentation de Faraday. Lorsque spécifié à un middleware pour une connexion spécifique, s'applique uniquement à cet objet de connexion. | `'faraday'` |
@@ -911,9 +931,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `nil` |
 | `enabled` | Définit si Grape doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `grape` | `'grape'` |
 | `error_statuses`| Définit un code de statut ou une plage de codes de statut qui doivent être considérés comme des erreurs. `'404,405,500-599'` ou `[404,405,'500-599']`. | `nil` |
@@ -936,9 +955,8 @@ YourSchema.execute(query, variables: {}, context: {}, operation_name: nil)
 
 La méthode `use :graphql` accepte les paramètres suivants. Des options supplémentaires peuvent être spécifiées avec `options` :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `nil` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `graphql` | `'ruby-graphql'` |
 | `schemas` | Obligatoire. Tableau d'objets `GraphQL::Schema` à tracer. Le tracing sera activé pour tous les schémas énumérés, en utilisant les options spécifiées dans cette configuration. Si aucun schéma n'est spécifié, le tracing ne sera pas activé. | `[]` |
 
@@ -1015,9 +1033,8 @@ client.my_endpoint(DemoMessage.new(contents: 'hello!'))
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `grpc` | `'grpc'` |
 
 **Configurer des paramètres différents pour chaque client**
@@ -1057,9 +1074,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `httprb`. | `'httprb'` |
 | `split_by_domain` | Définir sur `true` pour utiliser le domaine de requête comme nom de service. | `false` |
@@ -1083,12 +1099,30 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) | `true` |
 | `service_name` | Nom de service pour l'instrumentation de `httpclient`. | `'httpclient'` |
 | `split_by_domain` | Définir sur `true` pour utiliser le domaine de requête comme nom de service. | `false` |
+
+### httpx
+
+`httpx` gère sa [propre intégration avec `ddtrace`](https://honeyryderchuck.gitlab.io/httpx/wiki/Datadog-Adapter) :
+
+```ruby
+require "ddtrace"
+require "httpx/adapters/datadog"
+
+Datadog.configure do |c|
+  c.use :httpx
+
+  # si nécessaire, spécifier un nom de service différent pour les hostnames correspondant à une expression régulière
+  c.use :httpx, describes: /user-[^.]+\.example\.com/ do |http|
+    http.service_name = 'user.example.com'
+    http.split_by_domain = false # Uniquement nécessaire si split_by_domain est true par défaut
+  end
+end
+```
 
 ### Kafka
 
@@ -1108,9 +1142,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `kafka` | `'kafka'` |
 | `tracer` | `Datadog::Tracer` utilisé pour effectuer l'instrumentation. Ce paramètre n'a généralement pas besoin d'être défini. | `Datadog.tracer` |
 
@@ -1137,9 +1170,8 @@ Datadog.configure(client, options)
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `quantize` | Hash contenant les options de quantification. Possibilité d'utiliser `:show` avec un tableau de clés à ne pas quantifier (ou `:all` pour ignorer la quantification), ou `:exclude` avec un tableau de clés à exclure entièrement. | `{ show: [:collection, :database, :operation] }` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `mongo` | `'mongodb'` |
 
@@ -1161,9 +1193,8 @@ client.query("SELECT * FROM users WHERE group='x'")
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `mysql2` | `'mysql2'` |
 
 ### Net/HTTP
@@ -1194,9 +1225,8 @@ content = Net::HTTP.get(URI('http://127.0.0.1/index.html'))
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `http` | `'net/http'` |
 | `split_by_domain` | Définir sur `true` pour utiliser le domaine de requête comme nom de service. | `false` |
@@ -1235,9 +1265,8 @@ client.run("select * from system.nodes")
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `presto` | `'presto'` |
 
 ### Qless
@@ -1256,9 +1285,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `qless` | `'qless'` |
 | `tag_job_data` | Activer le tagging avec des arguments de tâches. true pour l'activer, false pour le désactiver. | `false` |
 | `tag_job_tags` | Activer le tagging avec des tags de tâches. true pour l'activer, false pour le désactiver. | `false` |
@@ -1279,9 +1307,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `enabled` | Définit si Que doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `que` | `'que'` |
 | `tag_args` | Activer le tagging du champ d'arguments d'une tâche. `true` pour l'activer, `false` pour le désactiver. | `false` |
@@ -1304,9 +1331,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `racecar` | `'racecar'` |
 
 ### Rack
@@ -1334,9 +1360,8 @@ run app
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `nil` |
 | `application` | Votre application Rack. Obligatoire pour `middleware_names`. | `nil` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) de façon à associer les traces de ce service aux traces d'autres services si des en-têtes de tracing sont reçus. | `true` |
 | `headers` | Hash d'en-têtes de requête ou de réponse HTTP à ajouter en tant que tags à `rack.request`. Accepte les clés `request` et `response` des valeurs sous forme de tableau, par exemple `['Last-Modified']`. Ajoute les tags `http.request.headers.*` et `http.response.headers.*` respectivement. | `{ response: ['Content-Type', 'X-Request-ID'] }` |
@@ -1397,9 +1422,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `nil` |
 | `cache_service` | Nom du service de cache utilisé lors du tracing des activités de cache | `'<nom_app>-cache'` |
 | `controller_service` | Nom de service utilisé lors du tracing d'un contrôleur d'action Rails | `'<nom_app>'` |
 | `database_service` | Nom du service de base de données utilisé lors du tracing des activités de base de données | `'<nom_app>-<nom_adaptateur>'` |
@@ -1447,9 +1471,8 @@ Rake::Task['my_task'].invoke
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `enabled` | Définit si les tâches Rake doivent être tracées ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
 | `quantize` | Hash contenant les options de quantification des arguments de tâche. Des détails supplémentaires et des exemples sont disponibles plus bas. | `{}` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `rake` | `'rake'` |
@@ -1507,9 +1530,8 @@ redis.set 'foo', 'bar'
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `redis` | `'redis'` |
 | `command_args` | Affiche les arguments de la commande (p. ex., `key` pour `GET key`) en tant que nom de ressource et tag. | true |
 
@@ -1542,25 +1564,32 @@ Il est possible de configurer les paramètres de tracing par connexion via l'opt
 ```ruby
 # Ajouter une option `:describes` avec une clé de connexion.
 # Toutes les clés suivantes sont acceptées et équivalentes.
-# Si un bloc est spécifié, cela renvoie un objet Settings qui
-# accepte toutes les options de configuration énumérées ci-dessus.
+# Si un bloc est spécifié, cela renvoie un objet Settings
+# qui accepte toutes les options de configuration énumérées ci-dessus.
 
 Datadog.configure do |c|
-  # La configuration par défaut pour tous les clients redis
+  # La configuration par défaut pour les clients redis
   c.use :redis, service_name: 'redis-default'
 
-  # Le configuration correspondant à un socket unix donné
-  c.use :redis, describes: { url: 'unix://path/to/file' }, service_name: 'redis-unix'
+  # La configuration correspondant à un socket unix donné.
+  c.use :redis, describes: { url: 'unix://chemin/vers/fichier' }, service_name: 'redis-unix'
 
-  # Chaîne de connexion
-  c.use :redis, describes: { url: 'redis://127.0.0.1:6379/0' }, service_name: 'redis-connection-string'
-  # Host, port, bdd, schéma client
+  # Pour les connexions réseau, la recherche de correspondance tient uniquement compte des champs suivants :
+  # scheme, host, port, db
+  # Tous les autres champs sont ignorés.
+
+  # Chaîne de connexion réseau
+  c.use :redis, describes: 'redis://127.0.0.1:6379/0', service_name: 'redis-connection-string'
+  c.use :redis, describes: { url: 'redis://127.0.0.1:6379/1' }, service_name: 'redis-connection-url'
+  # Hash client réseau
   c.use :redis, describes: { host: 'my-host.com', port: 6379, db: 1, scheme: 'redis' }, service_name: 'redis-connection-hash'
   # Sous-ensemble du hash de connexion uniquement
   c.use :redis, describes: { host: ENV['APP_CACHE_HOST'], port: ENV['APP_CACHE_PORT'] }, service_name: 'redis-cache'
   c.use :redis, describes: { host: ENV['SIDEKIQ_CACHE_HOST'] }, service_name: 'redis-sidekiq'
 end
 ```
+
+Lorsque plusieurs configurations `describes` correspondent à une connexion, la dernière règle configurée qui correspond est appliquée.
 
 ### Resque
 
@@ -1569,29 +1598,23 @@ L'intégration Resque utilise des hooks Resque qui viennent entourer la méthode
 Pour tracer une tâche Resque :
 
 ```ruby
+require 'resque'
 require 'ddtrace'
 
-class MyJob
-  def self.perform(*args)
-    # do_something
-  end
-end
-
 Datadog.configure do |c|
-  c.use :resque, options
+  c.use :resque, **options
 end
 ```
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `resque` | `'resque'` |
-| `workers` | Un tableau comprenant toutes les classes worker que vous souhaitez tracer (ex. : `[MyJob]`) | `[]` |
 | `error_handler` | Gestionnaire d'erreurs personnalisé appelé lorsqu'une tâche renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit une erreur sur la span par défaut. Utile pour ignorer les erreurs temporaires. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
+| `workers` | **[OBSOLÈTE]** Restreint l'instrumentation des classes de workers aux workers spécifiés dans un tableau (p. ex., `[MyJob]`). Si cette clé n'est pas fournie, tous les workers sont instrumentés. | `nil` |
 
-### Client Rest
+### Rest Client
 
 L'intégration `rest-client` est disponible via le middleware `ddtrace` :
 
@@ -1606,9 +1629,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `rest_client`. | `'rest_client'` |
 
@@ -1630,7 +1652,7 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
 | `enabled` | Définit si les tests RSpec doivent être tracés ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `rspec`. | `'rspec'` |
@@ -1664,9 +1686,8 @@ articles.all
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `sequel` | Nom de l'adaptateur de base de données (p. ex. `'mysql2'`) |
 
 Seules les versions 2.0+ de Ruby sont prises en charge.
@@ -1700,10 +1721,10 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `shoryuken` | `'shoryuken'` |
+| `tag_body` | Spans de tag avec le corps de message SQS `true` ou `false` | `false` |
 | `error_handler` | Gestionnaire d'erreurs personnalisé appelé lorsqu'une tâche renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit une erreur sur la span par défaut. Utile pour ignorer les erreurs temporaires. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
 
 ### Sidekiq
@@ -1724,7 +1745,6 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
 | Clé | Rôle | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `client_service_name` | Nom de service utilisé pour l'instrumentation de `sidekiq` côté client | `'sidekiq-client'` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `sidekiq` côté serveur | `'sidekiq'` |
 | `tag_args` | Activer le tagging des arguments des tâches. `true` pour l'activer, `false` pour le désactiver. | `false` |
@@ -1786,9 +1806,8 @@ Assurez-vous d'enregistrer `Datadog::Contrib::Sinatra::Tracer` en tant que middl
 
 `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `nil` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) de façon à associer les traces de ce service aux traces d'autres services si des en-têtes de tracing sont reçus. | `true` |
 | `headers` | Hash d'en-têtes de requête ou de réponse HTTP à ajouter en tant que tags à `sinatra.request`. Accepte les clés `request` et `response` des valeurs sous forme de tableau, par exemple `['Last-Modified']`. Ajoute les tags `http.request.headers.*` et `http.response.headers.*` respectivement. | `{ response: ['Content-Type', 'X-Request-ID'] }` |
 | `resource_script_names` | Ajouter le nom du script devant les noms des ressources | `false` |
@@ -1810,9 +1829,8 @@ end
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `enabled` | Définit si Sneakers doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `sneakers`. | `'sneakers'` |
 | `tag_body` | Activer le tagging des messages des tâches. `true` pour l'activer, `false` pour le désactiver. | `false` |
@@ -1835,9 +1853,8 @@ LogJob.perform_async('login')
 
 Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 
-| Clé | Rôle | Valeur par défaut |
+| Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
-| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `sucker_punch` | `'sucker_punch'` |
 
 ## Configuration avancée
@@ -1853,13 +1870,20 @@ Datadog.configure do |c|
   c.tracer.enabled = true
   c.tracer.hostname = 'my-agent'
   c.tracer.port = 8126
-  c.tracer.partial_flush.enabled = false
+
+  # Vérifier que toutes les traces sont ingérées par Datadog
+  c.sampling.default_rate = 1.0 # Recommandé
+  c.sampling.rate_limit = 200
+  # ou fournir une implémentation personnalisée (remplaçant les paramètres c.sampling)
   c.tracer.sampler = Datadog::AllSampler.new
 
-  # Pour les cas d'utilisation avancés, vous pouvez spécifier votre propre traceur :
+  # Diviser les traces volumineuses en de plus petits lots
+  c.tracer.partial_flush.enabled = false
+
+  # Vous pouvez spécifier votre propre traceur
   c.tracer.instance = Datadog::Tracer.new
 
-  # Pour activer le mode debugging :
+  # Pour activer le mode debugging
   c.diagnostics.debug = true
 end
 ```
@@ -1871,6 +1895,8 @@ Les options disponibles sont :
  - `instance` : définir une instance de `Datadog::Tracer` personnalisée. Si cette option est définie, les autres paramètres de tracing sont ignorés (le traceur doit être configuré manuellement).
  - `partial_flush.enabled` : définir sur `true` pour vider les traces partielles (lorsque leur temps d'exécution est trop long). Désactivé par défaut. *Option expérimentale*.
  - `port` : définir le port d'écoute utilisé par l'Agent de trace.
+ - `sampling.default_rate` : taux d'échantillonnage par défaut du traceur, compris entre `0.0` (0 %) et `1.0` (100 %, recommandé). Avec la valeur `1.0`, ou la solution Tracing without Limits™, vous pouvez envoyer tout votre trafic. La rétention peut être [configurée dans l'app Datadog](https://docs.datadoghq.com/tracing/trace_retention_and_ingestion/). Lorsque cette configuration n'est pas définie, l'Agent Datadog conserve un assortiment intelligent composé de différentes traces.
+ - `sampling.rate_limit` : nombre maximum de traces par seconde à échantillonner. Valeur par défaut : 100 par seconde.
  - `sampler` : définir une instance de `Datadog::Sampler` personnalisée. Si cette option est définie, le traceur utilisera cette instance pour déterminer le comportement d'échantillonnage.
  - `diagnostics.startup_logs.enabled` : logs de configuration de lancement et de diagnostic. Valeur par défaut : `true`. Cette option peut être configurée via la variable d'environnement `DD_TRACE_STARTUP_LOGS`.
  - `diagnostics.debug` : définir sur true pour activer les logs de debugging. Cette option peut être configurée via la variable d'environnement `DD_TRACE_DEBUG`. Valeur par défaut : `false`.
@@ -1922,19 +1948,28 @@ Cela vous permet de définir une valeur différente pour chaque application. De 
 
 Il est également possible d'appliquer directement des tags à des spans spécifiques. En cas de conflit avec les tags définis au niveau de l'application, ces derniers seront remplacés.
 
-### Avec des variables d'environnement
+### Variables d'environnement
 
 Autres variables d'environnement :
 
 - `DD_TRACE_AGENT_URL` : définit l'URL d'endpoint où les traces sont envoyées. Prioritaire par rapport à `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` si défini. Ex : `DD_TRACE_AGENT_URL=http://localhost:8126`.
 - `DD_TRACE_<INTÉGRATION>_ENABLED` : permet d'activer ou de désactiver une intégration **activée**. Valeur par défaut : `true`. Ex : `DD_TRACE_RAILS_ENABLED=false`. Cette option n'a aucun effet sur les intégrations qui n'ont pas été explicitement activées dans le code (p. ex. `Datadog.configure{ |c| c.use :integration }`). Cette variable d'environnement peut uniquement être utilisée pour désactiver une intégration.
-- `DD_TRACE_<INTÉGRATION>_ANALYTICS_ENABLED` : active ou désactive App Analytics pour une intégration spécifique. Valeurs acceptées : true ou false (par défaut). Ex : `DD_TRACE_ACTION_CABLE_ANALYTICS_ENABLED=true`.
-- `DD_TRACE_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE` : définit le taux d'échantillonnage App Analytics pour une intégration spécifique. Doit être un nombre flottant entre 0.0 et 1.0 (par défaut). Ex : `DD_TRACE_ACTION_CABLE_ANALYTICS_SAMPLE_RATE=0.5`.
+- `DD_TRACE_SAMPLE_RATE` : définit le taux d'échantillonnage des traces, compris entre `0.0` (0 %) et `1.0` (100 %, recommandé). Avec la valeur `1.0`, ou la fonctionnalité Tracing without Limits™, vous pouvez envoyer tout votre trafic. La rétention peut être [configurée dans l'app Datadog](https://docs.datadoghq.com/tracing/trace_retention_and_ingestion/). Lorsque cette configuration n'est pas définie, l'Agent Datadog conserve un assortiment intelligent composé de différentes traces.
 - `DD_LOGS_INJECTION` : activer automatiquement l'injection des informations de [mise en corrélation des traces](#mise-en-correlation-des-traces), telles que `dd.trace_id`, dans les logs Rails. Prend en charge le logger par défaut (`ActiveSupport::TaggedLogging`) et `Lograge`. Pour en savoir plus sur le format des informations de mise en corrélation des traces, consultez la [section dédiée](#mise-en-correlation-des-traces). Valeurs acceptées : `true` ou `false` (par défaut). Ex. : `DD_LOGS_INJECTION=true`.
 
 ### Échantillonnage
 
-`ddtrace` est capable d'échantillonner vos traces. Si l'Agent de trace procède déjà à un échantillonnage pour réduire la bande passante utilisée, l'échantillonnage effectué côté client permet quant à lui d'améliorer les performances.
+La solution Tracing without Limits™ de Datadog vous permet d'envoyer tout votre trafic et de [configurer la rétention dans l'app Datadog](https://docs.datadoghq.com/tracing/trace_retention_and_ingestion/).
+
+Il est recommandé de définir la variable d'environnement `DD_TRACE_SAMPLE_RATE=1.0` dans toutes les nouvelles applications avec `ddtrace`.
+
+Le service App Analytics, qui était configuré via le paramètre `analytics_enabled`, a été remplacé par Tracing without LImits™. La documentation sur cette [configuration obsolète est toujours disponible](https://docs.datadoghq.com/tracing/legacy_app_analytics/).
+
+#### Échantillonnage côté application
+
+Bien que l'Agent de trace puisse échantillonner les traces pour réduire la bande passante utilisée, l'échantillonnage côté client permet quant à lui d'améliorer les performances.
+
+Cet échantillonnage **réduit la visibilité et n'est pas recommandé**. Consultez la [variable d'environnement DD_TRACE_SAMPLE_RATE](#variables-d'environnement) pour découvrir la stratégie d'échantillonnage conseillée.
 
 `Datadog::RateSampler` effectue l'échantillonnage de vos traces selon le taux que vous avez défini. Par exemple :
 
@@ -1984,7 +2019,7 @@ Le tracing distribué permet à vos traces d'être propagées sur plusieurs appl
 
 Pour tracer des requêtes sur plusieurs applications différentes, les données suivantes doivent se propager d'une application à l'autre :
 
-| Propriété              | Type    | Rôle                                                                                                                 |
+| Propriété              | Type    | Description                                                                                                                 |
 | --------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------- |
 | **Trace ID**          | Nombre entier | ID de la trace. Cette valeur doit être identique pour toutes les requêtes appartenant à la même trace.                           |
 | **Parent Span ID**    | Nombre entier | ID de la span dans le service à l'origine de la requête. Cette valeur est toujours différente pour chaque requête dans une trace. |
@@ -2092,13 +2127,14 @@ Pour découvrir comment activer le tracing distribué pour ces intégrations, co
 
 - [Excon](#excon)
 - [Faraday](#faraday)
-- [Client Rest](#restclient)
-- [Net/HTTP](#nethttp)
+- [Rest Client](#rest-client)
+- [Net/HTTP](#net-http)
 - [Rack](#rack)
 - [Rails](#rails)
 - [Sinatra](#sinatra)
 - [http.rb](#http-rb)
 - [httpclient](#httpclient)
+- [httpx](#httpx)
 
 **Utiliser le propagateur HTTP**
 
@@ -2143,9 +2179,9 @@ server {
 
 Vous devez alors activer la fonctionnalité de mise en file d'attente des requêtes, en définissant `request-queuing: true` dans l'intégration qui gère la requête. Pour les applications basées sur Rack, consultez la [section dédiée](#rack) pour en savoir plus.
 
-### Pipeline de processing
+### Pipeline de traitement
 
-Certaines applications nécessitent que les traces soient modifiées ou filtrées avant d'être envoyées en amont. Le pipeline de processing permet aux utilisateurs de créer des *processeurs* servant à mettre en place un tel comportement.
+Certaines applications nécessitent que les traces soient modifiées ou filtrées avant d'être envoyées en amont. Le pipeline de traitement permet aux utilisateurs de créer des *processeurs* servant à mettre en place un tel comportement.
 
 Un processeur peut être n'importe quel objet répondant à un `#call` et acceptant `trace` comme argument (qui est un `array` de `Datadog::Span`s).
 
@@ -2153,13 +2189,13 @@ Par exemple :
 
 ```ruby
 lambda_processor = ->(trace) do
-  # Logique de processing…
+  # Logique de traitement…
   trace
 end
 
 class MyCustomProcessor
   def call(trace)
-    # Logique de processing…
+    # Logique de traitement…
     trace
   end
 end
@@ -2195,7 +2231,7 @@ Datadog::Pipeline.before_flush(
 )
 ```
 
-#### Processing
+#### Traitement
 
 Vous pouvez utiliser le processeur `Datadog::Pipeline::SpanProcessor` pour modifier des spans :
 
@@ -2385,8 +2421,8 @@ Le traceur et ses intégrations peuvent produire des métriques supplémentaires
 
 Pour configurer la collecte de métriques pour votre application :
 
-1. [Configurez votre Agent Datadog pour StatsD](https://docs.datadoghq.com/developers/dogstatsd/#setup)
-2. Ajoutez `gem 'dogstatsd-ruby'` à votre Gemfile
+1. [Configurer votre Agent Datadog pour StatsD](https://docs.datadoghq.com/developers/dogstatsd/#configuration)
+2. Ajoutez `gem 'dogstatsd-ruby'` à votre Gemfile.
 
 #### Métriques runtime d'application
 
@@ -2415,7 +2451,7 @@ Consultez la [documentation sur Dogstatsd](https://www.rubydoc.info/github/DataD
 
 Les statistiques sont spécifiques à la VM et comprennent ce qui suit :
 
-| Nom                        | Type    | Rôle                                              |
+| Nom                        | Type    | Description                                              |
 | --------------------------  | ------- | -------------------------------------------------------- |
 | `runtime.ruby.class_count`  | `gauge` | Nombre de classes dans l'espace mémoire.                       |
 | `runtime.ruby.thread_count` | `gauge` | Nombre de threads.                                       |
@@ -2423,7 +2459,7 @@ Les statistiques sont spécifiques à la VM et comprennent ce qui suit :
 
 En outre, toutes les métriques comprennent les tags suivants :
 
-| Nom         | Rôle                                             |
+| Nom         | Description                                             |
 | ------------ | ------------------------------------------------------- |
 | `language`   | Langage de programmation tracé. (Ex. : `ruby`)              |
 | `service`    | Liste des services associés à cette métrique.      |

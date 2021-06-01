@@ -15,6 +15,7 @@ further_reading:
     text: Docker ロギングのベストプラクティス
 git_integration_title: docker
 has_logo: true
+integration_id: docker
 integration_title: Docker
 is_public: true
 kind: integration

@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/github/'
 draft: false
 git_integration_title: github
 has_logo: true
+integration_id: github
 integration_title: GitHub
 is_public: true
 kind: integration

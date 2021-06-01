@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/rollbar/'
 draft: false
 git_integration_title: rollbar
 has_logo: true
+integration_id: rollbar
 integration_title: Rollbar
 is_public: true
 kind: インテグレーション

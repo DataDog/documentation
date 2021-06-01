@@ -26,8 +26,8 @@ Lorsque vous sélectionnez un service sur la page Services, vous accédez aux d�
 
 Cette page vous permet de consulter :
 
-* [Les états du Service Monitor](#service-monitor)
-* [Les graphiques par défaut](#out-of-the-box-graphs)
+* [Monitor de service](#monitor-de-service)
+* [Graphiques par défaut](#graphiques-par-defaut)
 * [Les ressources associées à ce service][2]
 
 ## Service Monitor

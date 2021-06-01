@@ -234,7 +234,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][5].
 
-Ensuite, définissez des [intégrations de logs][6] en tant qu'annotations de pod. Cette configuration peut également être réalisée avec [un fichier, une configmap ou un stockage clé/valeur][7]. 
+Ensuite, définissez des [intégrations de logs][6] en tant qu'annotations de pod. Cette configuration peut également être réalisée avec [un fichier, une configmap ou un stockage key/value][7]. 
 
 ```yaml
 apiVersion: v1

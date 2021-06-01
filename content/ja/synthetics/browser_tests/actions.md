@@ -124,6 +124,8 @@ await promise
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
+**注**: ブラウザテストは、外部 JavaScript をページに追加することでロードするため、ウェブサイトが許可する場合のみ実行可能です。
+
 ### ダウンロードされたファイルのテスト
 
 前のステップでダウンロードしたファイルに対して検証を実行します。ファイルが正しくダウンロードされたことを確認し、ファイル名、サイズ、MD5 値をアサートできます。
@@ -195,19 +197,26 @@ return jQuery().jquery.startsWith('3.5.1')
 
 {{< img src="synthetics/browser_tests/variables.png" alt="ブラウザテスト変数"  style="width:60%;">}}
 
-変数を作成するには、最初に変数に名前を付け、次に値を定義します。
+変数を作成するには、最初に変数に名前を付け、次に以下のいずれかの値を定義します。
 
 #### パターン
 
 以下の利用可能な組み込みの 1 つから値を定義して変数を作成します。
 
-| パターン                    | 説明                                                                                                 |
-|----------------------------|-------------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`         | `n` 桁の数字列を生成します。                                                                 |
-| `{{ alphabetic(n) }}`      | `n` 文字のアルファベット文字列を生成します。                                                            |
-| `{{ alphanumeric(n) }}`    | `n` 文字の英数字文字列を生成します。                                                       |
-| `{{ date(n, format) }}`    | テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。        |
-| `{{ timestamp(n, unit) }}` | テストが +/- `n` 選択単位で開始されたタイムスタンプの値を使用して、許容される単位のいずれかでタイムスタンプを生成します。 |
+`{{ numeric(n) }}`
+: `n` 桁の数字列を生成します。
+
+`{{ alphabetic(n) }}`
+: `n` 文字のアルファベット文字列を生成します。
+
+`{{ alphanumeric(n) }}`
+: `n` 文字の英数字文字列を生成します。
+
+`{{ date(n, format) }}`
+: テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。
+
+`{{ timestamp(n, unit) }}` 
+: テストが +/- `n` 選択単位で開始されたタイムスタンプの値を使用して、許容される単位のいずれかでタイムスタンプを生成します。
 
 #### 要素
 
@@ -245,11 +254,13 @@ await promise
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
+**注**: ブラウザテストは、外部 JavaScript をページに追加することでロードするため、ウェブサイトが許可する場合のみ実行可能です。
+
 #### グローバル変数
 
 [Synthetic Monitoring Settings][7] で定義されたグローバル変数を選択します。
 
-#### メール
+#### Email
 
 テストステップで使用できるランダムな Synthetic メールアドレスを生成して、[メールが正しく送信されたかどうかをアサート][8]したり、[メールに含まれるリンクに移動][9] (たとえば、確認用のリンクをクリック) したりします。テスト実行間の競合を回避するために、テスト実行ごとに一意のメールボックスが生成されます。
 
@@ -266,10 +277,9 @@ return jQuery().jquery.startsWith('3.5.1')
 記録時に、これは、Web サイトの入力に挿入される変数の実際の値に変換され (その結果、残りのステップに進むことができます)、`{{ <YOUR_VARIABLE_NAME> }}` を特徴とする関連する `Type text` ステップが作成されます。
 テストの実行時に、`{{ <YOUR_VARIABLE_NAME> }}` は体系的に変数に関連付けられた値に置き換えられます。
 
-**注**: 場合によっては、変数値は実行時にのみ計算されます (HTTP リクエストから変数を作成するとき、JavaScript ステップから変数を抽出するときなど)。次のステップの記録に進むには、結果として、`{{ <YOUR_VARIABLE_NAME> }}` を Web サイトに直接入力するか、実際の値を使用する必要がある場合があります。
-2 番目のオプションを使用する場合は、テストを保存する前に、ステップで実際の値を `{{ <YOUR_VARIABLE_NAME> }}` に置き換えて、ブラウザテストが、前のステップで生成された変数値でステップを自動的に実行するようにします。
+変数の中には、ランタイム時にのみ計算されるものもあります (たとえば、HTTP リクエストや JavaScript ステップから渡される変数など)。これらの変数のひとつを使用してステップを記録するには、実際の変数値でステップを記録し、テストを保存する前にステップ定義で実際の値を `{{ <YOUR_VARIABLE_NAME> }}` で置き換えます。
 
-{{< img src="synthetics/browser_tests/variables_auto.mp4" alt="変数のオートコンプリートの例" video="true"  width="100%" >}}
+**注:** ブラウザのテストステップで変数に異なる値が割り当てられる場合 (サブテストなど)、変数は最初に割り当てられた値を体系的に使用します。
 
 ## 待機
 
@@ -281,7 +291,9 @@ return jQuery().jquery.startsWith('3.5.1')
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="ブラウザテストサブテスト"  style="width:60%;">}}
 
-既存のワークフローを再利用するために、他のブラウザテスト内でブラウザテストを実行できます。これは、テストスイート間のメンテナンスポイントの数を減らすのに特に役立ちます。ブラウザテストは、最大 2 レベルのネストをサポートします。[高度なオプション][10]では、サブテストを再生するタブを選択することもできます。
+既存のワークフローを再利用するために、他のブラウザテスト内でブラウザテストを実行できます（最大 2 レベルのネスト）。サブテストを使用する理由と例については、[専用ガイド][10]をご参照ください。
+
+親テストのレベルで作成された変数が、サブテストで表示される変数と同じ名前である場合、サブテストの変数を親テストで上書きできます。デフォルトで、サブテストは親テストの前の手順に続いて実行されますが、[**Subtest Advanced オプション**][11]を使用すると、これを変更できます。
 
 **注**: サブテストを個別に実行しても意味がない場合は、一時停止できます。メインテストの一部として引き続き呼び出されますが、個別に実行されることはありません。
 
@@ -313,8 +325,8 @@ HTTP リクエストを定義するには、
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_、_[Regex][10]_ |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][10]                                      |
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][13]                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
 | ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
@@ -333,8 +345,8 @@ HTTP リクエストを定義するには、
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。また、3 文字以上にする必要があります。
 2. 変数を応答ヘッダーから抽出するか、本文から抽出するか決定します。
 
-    * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[正規表現][11]によりパースします。
-    * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[正規表現][11]または [JSONPath][12] によりパースします。
+    * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[正規表現][13]によりパースします。
+    * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[正規表現][13]または [JSONPath][12] によりパースします。
 
 {{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="ブラウザテストで HTTP リクエストから変数を作成する" video="true"  width="80%" >}}
 
@@ -353,6 +365,7 @@ HTTP リクエストを定義するには、
 [7]: /ja/synthetics/settings/
 [8]: /ja/synthetics/browser_tests/actions#test-that-an-email-was-received
 [9]: /ja/synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
-[10]: /ja/synthetics/browser_tests/advanced_options/#subtests
-[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[10]: /ja/synthetics/guide/reusing-browser-test-journeys
+[11]: /ja/synthetics/browser_tests/advanced_options/#subtests
 [12]: https://restfulapi.net/json-jsonpath/
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
