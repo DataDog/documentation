@@ -4,12 +4,11 @@ kind: documentation
 description: "Learn how to monitor your Tracing without Limits usage."
 ---
 
-
 If, when you monitor your APM and indexed span usage, the numbers are not in line with your expectations, or you want to change your ingestion or retention rates, see the [retention filters][1] or [ingestion control][2] documentation.
 
 This document details the available metrics and default dashboard for monitoring ingested and indexed span consumption.  Datadog APM plans come with included indexed and ingested spans.  For more information, refer to our [pricing documentation][3], or view some [example pricing scenarios][4].
 
-### Trace Analytics Usage Dashboard
+## Trace analytics usage dashboard
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview.png" style="width:100%;" alt="Tracing without Limits Usage Dashboard" >}}
 
@@ -27,7 +26,7 @@ The default [Trace Analytics Dashboard][5] has several groups of widgets to see 
 
  **Note:** Billing is based on bytes, but both bytes and span breakdowns are available on the dashboard.
 
-### Indexed Spans
+## Indexed spans
 
 {{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Span Indexing" >}}
 

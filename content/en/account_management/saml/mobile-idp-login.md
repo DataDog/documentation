@@ -30,6 +30,9 @@ In order to use the Datadog mobile app with Identity Provider (IdP) Initiated SA
 {{< img src="account_management/saml/datadog-mobile-idp-saml-landing-page.png" alt="Datadog Mobile SAML Interstitial" >}}
 
 ## Providers
+
+**Note:** Datadog IdP Initiated SAML works with most identity providers. If you run into trouble while configuring your identity provider with the Datadog Mobile App, please contact [Support][1]. 
+
 ### OneLogin
 
 When configuring your OneLogin app, set the Relay State value on the **Application Details** page to `dd_m_idp`.

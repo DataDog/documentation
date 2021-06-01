@@ -84,7 +84,7 @@ def security_rules(content, content_dir):
                         if 'compliance' in relative_path:
                             page_data['rule_category'].append('Infrastructure Configuration')
                         else:
-                            page_data['rule_category'].append('Runtime Agent')
+                            page_data['rule_category'].append('Workload Security')
 
                     tags = data.get('tags', [])
                     if tags:

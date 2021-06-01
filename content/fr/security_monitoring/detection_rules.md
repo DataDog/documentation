@@ -16,7 +16,7 @@ Pour créer une règle de détection dans Datadog, utilisez la navigation princi
 
 ### Définir la requête de recherche
 
-{{< img src="security_monitoring/detection_rules/define_search_query.png" alt="Définir la requête de recherche" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/define_search_query.png" alt="Définir la requête de recherche" >}}
 
 Créez une requête de recherche en appliquant la même logique que pour les [recherches dans le Log Explorer][2]. Chaque requête possède un libellé, qui correspond à une lettre minuscule ASCII. Vous pouvez modifier le nom d'une requête en cliquant sur l'icône en forme de crayon.
 
@@ -30,7 +30,7 @@ Ajoutez des requêtes supplémentaires à l'aide du bouton Add Query.
 
 ### Définir les scénarios de la règle
 
-{{< img src="security_monitoring/detection_rules/define_rule_case.png" alt="Définir les scénarios de la règle" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/define_rule_case.png" alt="Définir les scénarios de la règle" >}}
 
 #### Nom et déclencheur des scénarios de la règle
 
@@ -58,7 +58,7 @@ Un signal se ferme dès lors que sa durée dépasse la valeur spécifiée pour `
 
 Vous pouvez ajouter des scénarios supplémentaires en cliquant sur le bouton **Add Case**.
 
-**Remarque** : l'intervalle `evaluation window` doit être inférieur ou égal aux intervalles `keep alive` et `maximum signal duration`. 
+**Remarque** : l'intervalle `evaluation window` doit être inférieur ou égal aux intervalles `keep alive` et `maximum signal duration`.
 
 ### Message du signal de sécurité
 
@@ -74,19 +74,19 @@ Vous pouvez appliquer différents tags à vos signaux, comme `security:attack` o
 
 Lorsque vous rassemblez plusieurs logs au sein d'un intervalle donné, vous pouvez renforcer la fiabilité ou la gravité d'un signal de sécurité. Par exemple, pour détecter une attaque par force brute réussie, vous devez corréler les logs des échecs et des réussites d'authentification d'un utilisateur.
 
-{{< img src="security_monitoring/detection_rules/joining_queries_define.png" alt="Définir des requêtes de recherche"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/joining_queries_define.png" alt="Définir des requêtes de recherche"  >}}
 
 Les règles de détection se basent sur une valeur de regroupement pour rassembler des logs. Cette valeur correspond généralement à une entité (p. ex., une adresse IP, un utilisateur, etc.), mais peut également être définie sur l'attribut de votre choix.
 
-{{< img src="security_monitoring/detection_rules/group_by.png" alt="Regroupement"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/group_by.png" alt="Regroupement"  >}}
 
 Les scénarios de règle de détection rassemblent ces requêtes en se basant sur leur valeur de regroupement. L'attribut de regroupement est généralement commun, car la réalisation du scénario se base sur une valeur unique. Si la valeur de regroupement n'existe pas, le scénario ne peut pas se réaliser. Lorsqu'un scénario se réalise, un signal de sécurité est généré pour chaque valeur de regroupement unique.
 
-{{< img src="security_monitoring/detection_rules/set_rule_cases2.png" alt="Définir des scénarios de règle"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/set_rule_cases2.png" alt="Définir des scénarios de règle"  >}}
 
 Dans l'exemple ci-dessus, dès que l'utilisateur `@usr.name` enregistre cinq tentatives échouées de connexion, puis parvient à se connecter, le premier scénario se réalise et un signal de sécurité est généré.
 
-{{< img src="security_monitoring/detection_rules/gbv2.png" alt="Définir des scénarios de règle" >}}
+{{< img src="security_platform/security_monitoring/detection_rules/gbv2.png" alt="Définir des scénarios de règle" >}}
 
 ## Gérer les règles de détection
 
@@ -98,7 +98,7 @@ La recherche en texte libre filtre les règles de détection en fonction du text
 
 ### Tableau des règles de détection
 
-{{< img src="security_monitoring/detection_rules/rules_table2.png" alt="Tableau des règles de détection"  >}}
+{{< img src="security_platform/security_monitoring/detection_rules/rules_table2.png" alt="Tableau des règles de détection"  >}}
 
 Les règles de détection s'affichent dans ce tableau.
 

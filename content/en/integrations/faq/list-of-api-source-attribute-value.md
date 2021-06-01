@@ -171,6 +171,7 @@ private: true
 | Go Expvar                     | GOEXPVAR                   |
 | Google App Engine             | GAE                        |
 | Google Cloud Apis             | GCPAPIS                    |
+| Google Cloud Audit Logs       | GCPAUDITLOGS               |
 | Google Cloud Big Query        | GCPBIGQUERY                |
 | Google Cloud Bigtable         | GCPBIGTABLE                |
 | Google Cloud Composer         | GCPCOMPOSER                |
@@ -278,6 +279,7 @@ private: true
 | Tokumx                        | TOKUMX                     |
 | Tomcat                        | TOMCAT                     |
 | Travis Ci                     | TRAVISCI                   |
+| User                          | DOGWEBPUBLISHER            |
 | Varnish                       | VARNISH                    |
 | Victorops                     | VICTOROPS                  |
 | Vsphere                       | VSPHERE                    |

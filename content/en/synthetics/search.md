@@ -25,7 +25,7 @@ Search, access, and manage all of your tests on one page with the [Synthetic Tes
 
 ## Search
 
-### Facets and Tags
+### Facets and tags
 
 The **Synthetics Filters** panel on the left side of the page lists several default facets you can use to search through your tests. Default facets include:
 

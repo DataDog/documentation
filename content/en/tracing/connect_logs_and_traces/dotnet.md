@@ -120,13 +120,13 @@ For additional examples, see the automatic trace ID injection projects using [NL
 
 Next, complete the setup for either automatic or manual injection.
 
-## Automatically inject trace and span IDs
+## Automatic injection
 
 If your application logs are in JSON, the last step in setting up automatic trace ID injections is: 
 
 4. In the .NET Tracer’s environment variables, enable  `DD_LOGS_INJECTION=true`. For alternative ways to configure the .NET Tracer, see [Configuring the .NET Tracer][6].
 
-## Manually inject trace and span IDs
+## Manual injection
 
 If your application logs aren't in JSON, you can manually enrich the logs with APM data:
   | Required key   | Description                                  |

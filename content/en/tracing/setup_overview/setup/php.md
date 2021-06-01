@@ -24,13 +24,13 @@ further_reading:
   tag: "Documentation"
   text: "Advanced Usage"
 ---
-## Compatibility Requirements
+## Compatibility requirements
 
 For a full list of supported libraries and language versions, visit the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
-### Follow the in-app documentation (Recommended)
+### Follow the in-app documentation (recommended)
 
 Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
@@ -58,9 +58,14 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
 
-`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
+    See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
+{{< site-region region="us3,eu,gov" >}} 
+
+4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
+
+{{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
@@ -116,7 +121,7 @@ Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoi
 
 If you can't find your distribution, you can [manually install][8] the PHP extension.
 
-## Automatic Instrumentation
+## Automatic instrumentation
 
 Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
@@ -179,9 +184,7 @@ Set in the command line to start the server.
 DD_TRACE_DEBUG=true php -S localhost:8888
 ```
 
-### Environment Variable Configuration
-
-
+### Environment variable configuration
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
