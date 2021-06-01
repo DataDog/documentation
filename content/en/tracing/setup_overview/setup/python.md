@@ -24,13 +24,13 @@ further_reading:
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
 ---
-## Compatibility Requirements
+## Compatibility requirements
 
 Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
-### Follow the in-app documentation (Recommended)
+### Follow the in-app documentation (recommended)
 
 Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
@@ -74,20 +74,24 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
 
-`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-You can also set the hostname and port in code:
+    You can also set the hostname and port in code:
 
-```python
-import os
-from ddtrace import tracer
+    ```python
+    import os
+    from ddtrace import tracer
 
-tracer.configure(
-    hostname="custom-hostname",
-    port="1234",
-)
-```
+    tracer.configure(
+        hostname="custom-hostname",
+        port="1234",
+    )
+    ```
+{{< site-region region="us3,eu,gov" >}} 
 
+4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
+
+{{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}

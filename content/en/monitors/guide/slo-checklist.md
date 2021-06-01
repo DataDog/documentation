@@ -25,7 +25,7 @@ Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> t
     * Which parts of your infrastructure do these journeys interact with?
     * What are they expecting from your systems and what are they hoping to accomplish?
 
-## Select the relevant SLI(s)
+## Select the relevant SLI
 
 ### STEP 1
 

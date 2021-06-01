@@ -21,7 +21,7 @@ Python versions `2.7+` and `3.5+` are supported in the latest version of the tra
 
 To request support for additional libraries, contact our awesome [support team][2].
 
-### Web Framework Compatibility
+### Web framework compatibility
 
 The `ddtrace` library includes support for a number of web frameworks, including:
 
@@ -44,8 +44,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Starlette][16]           | >= 0.13.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
 | [Tornado][17]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
-
-### Datastore Compatibility
+### Datastore compatibility
 
 The `ddtrace` library includes support for the following data stores:
 
@@ -72,8 +71,7 @@ The `ddtrace` library includes support for the following data stores:
 | [SQLite3][40]                      | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][41]                      | >= 0.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
 
-
-### Library Compatibility
+### Library compatibility
 
 The `ddtrace` library includes support for the following libraries:
 

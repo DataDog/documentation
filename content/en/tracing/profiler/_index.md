@@ -32,23 +32,21 @@ Find CPU, memory, and IO bottlenecks, broken down by method name, class name, an
 
 Continuous profiler is designed to run in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
 
-## Getting Started
+## Getting started
 
 Profiling your service to visualize all your stack traces in one place takes just minutes.
 
-### Instrument Your Application
-
-Add a profiler library to your application to start sending profiles to the Datadog Agent.
-
-To get notified when a private beta is available for the **Node**, **Ruby**, **PHP**, or **.NET** Profiler, [sign up here][1].
+### Instrument your application
 
 {{< partial name="profiling/profiling-languages.html" >}}
+
+To get notified when a private beta is available for the **Node**, **PHP**, or **.NET** Profiler, [sign up here][1].
 
 ## Guide to using the profiler
 
 The [Intro to Profiling][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-## Explore Datadog Profiler
+## Explore Datadog profiler
 
 After you've configured your application to send profiles to Datadog, start getting insights into your code performance:
 

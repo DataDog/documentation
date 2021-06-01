@@ -15,9 +15,9 @@ further_reading:
 
 In many cases, such as logging, it may be useful to correlate trace IDs to other events or data streams, for easier cross-referencing.
 
-### For logging in Rails applications
+### Logging in Rails applications
 
-#### Automatic
+#### Automatic injection
 
 For Rails applications using the default logger (`ActiveSupport::TaggedLogging`) or `lograge`, you can automatically enable trace correlation injection by setting the `rails` instrumentation configuration option `log_injection` to `true` or by setting environment variable `DD_LOGS_INJECTION=true`:
 
@@ -32,7 +32,8 @@ end
 
 **Note:** For `lograge` users who have also defined `lograge.custom_options` in an `initializers/lograge.rb` configuration file, because Rails loads initializers in alphabetical order, automatic trace correlation may not take effect, since `initializers/datadog.rb` would be overwritten by the `initializers/lograge.rb` initializer. To support automatic trace correlation with _existing_ `lograge.custom_options`, use the [Manual (Lograge)](#manual-lograge) configuration below.
 
-#### Manual (Lograge)
+#### Manual injection
+##### Lograge
 
 After [setting up Lograge in a Rails application][1], manually modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs.
 
@@ -57,7 +58,7 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-#### Manual (ActiveSupport::TaggedLogging)
+##### `ActiveSupport::TaggedLogging`
 
 Rails applications that are configured with the default `ActiveSupport::TaggedLogging` logger can append correlation IDs as tags to log output. To enable Trace Correlation with `ActiveSupport::TaggedLogging`, in your Rails environment configuration file, add the following:
 
@@ -78,7 +79,7 @@ end
 # [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-### For logging in Ruby applications
+### Logging in Ruby applications
 
 To add correlation IDs to your logger, add a log formatter which retrieves the correlation IDs with `Datadog.tracer.active_correlation`, then add them to the message.
 

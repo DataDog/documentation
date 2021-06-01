@@ -171,7 +171,7 @@ Here is an example of a slow query execution plan from a slow trace:
 
 #### Why?
 
-[Browser logs][9] inside a RUM event give context and insight into an issue. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
+[Browser logs][5] inside a RUM event give context and insight into an issue. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:80%;" >}}
 
@@ -179,7 +179,7 @@ Correlating your browser logs with RUM also eases [aggressive sampling strategy 
 
 #### How?
 
-Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][10]. [Matching configuration between RUM and logs SDK][11] is required.
+Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][6]. [Matching configuration between RUM and logs SDK][7] is required.
 
 ## Correlate user experience with server behavior
 
@@ -203,7 +203,7 @@ Use the RUM correlation to:
 
 #### How?
 
-Follow the [connect RUM and Traces][6] documentation. RUM view information is available in the [Trace view][7] and trace information is available in the [Session view][8].
+Follow the [connect RUM and Traces][8] documentation. RUM view information is available in the [Trace view][9] and trace information is available in the [Session view][10].
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:80%;" >}}
 
@@ -219,21 +219,21 @@ The APM integration with Synthetic Monitoring allows you to go from a test run t
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/synthetic-trace-root-cause.png" alt="Root cause of a synthetic test fail" style="width:80%;" >}}
 
-Having network-related specifics, thanks to your test, as well as backend, infrastructure, log information (thanks to your trace), and RUM events (for [browser tests][12] only) allows you to access a new level of detail about the way your application is behaving and how it is experienced by your users.
+Having network-related specifics, thanks to your test, as well as backend, infrastructure, log information (thanks to your trace), and RUM events (for [browser tests][11] only) allows you to access a new level of detail about the way your application is behaving and how it is experienced by your users.
 
 #### How?
 
-For this feature, follow the [enable APM integration on Synthetic settings][5] documentation.
+For this feature, follow the [enable APM integration on Synthetic settings][12] documentation.
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
 [3]: /tracing/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-[5]: /synthetics/apm
-[6]: /real_user_monitoring/connect_rum_and_traces
-[7]: https://app.datadoghq.com/apm/traces
-[8]: https://app.datadoghq.com/rum/explorer
-[9]: /logs/log_collection/javascript/
-[10]: /account_management/billing/rum/#can-i-view-logs-from-the-browser-collector-in-rum
-[11]: /real_user_monitoring/browser/#initialization-parameters
-[12]: /synthetics/browser_tests/
+[5]: /logs/log_collection/javascript/
+[6]: /account_management/billing/rum/#can-i-view-logs-from-the-browser-collector-in-rum
+[7]: /real_user_monitoring/browser/#initialization-parameters
+[8]: /real_user_monitoring/connect_rum_and_traces
+[9]: https://app.datadoghq.com/apm/traces
+[10]: https://app.datadoghq.com/rum/explorer
+[11]: /synthetics/browser_tests/
+[12]: /synthetics/apm

@@ -82,7 +82,7 @@ Use this section to send notifications to your team through email, Slack, PagerD
 Disk space is low @ops-team@company.com
 ```
 
-### @notification
+### Notifications
 
 `@notifications` can be sent to:
 
@@ -136,16 +136,36 @@ Use template variables to customize your monitor notifications. The built-in var
 
 Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][13].
 
+#### Local time
+
+Use the `local_time` function to transform a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
+For example, to show the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
+
+```
+{{local_time 'last_triggered_at' 'Asia/Tokyo'}}
+```
+
+The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`. 
+Refer to the [list of tz database time zones][15], particularly the TZ database name column, to see the list of available time zone values.
+
 ### Tag variables
 
 Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
+For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
-For example, if your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+**Notes**: Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
-**Notes**:
+#### Multi-alert group by host
 
-* Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
-* Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. 
+To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+Some specific host metadata are available as well:
+
+- Agent Version : {{host.metadata_agent_version}}
+- Machine       : {{host.metadata_machine}}
+- Platform      : {{host.metadata_platform}}
+- Processor     : {{host.metadata_processor}}
+
 
 #### Tag key with period
 
@@ -389,6 +409,8 @@ Test notifications are supported for the [monitor types][1]: host, metric, anoma
 
 Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
 
+Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
+
 ### Variables {#variables-test-notification}
 
 Message variables auto-populate with a randomly selected group based on the scope of your monitor's definition, for example:
@@ -514,3 +536,4 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [12]: /events/
 [13]: /monitors/guide/template-variable-evaluation/
 [14]: /monitors/faq/what-are-recovery-thresholds/
+[15]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

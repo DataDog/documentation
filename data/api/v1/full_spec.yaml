@@ -5028,6 +5028,7 @@ components:
           type: integer
         query:
           description: The monitor query.
+          example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
           type: string
         restricted_roles:
           description: A list of role identifiers that can be pulled from the Roles
@@ -5046,6 +5047,9 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/MonitorType'
+      required:
+      - type
+      - query
       type: object
     MonitorDeviceID:
       description: ID of the device the Synthetics monitor is running on. Same as
@@ -5072,7 +5076,7 @@ components:
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
     MonitorGroupSearchResponse:
-      description: ''
+      description: The response of a monitor group search.
       example:
         counts:
           status:
@@ -5105,7 +5109,7 @@ components:
           total_count: 2
       properties:
         counts:
-          description: ''
+          description: The counts of monitor groups per different criteria.
           properties:
             status:
               $ref: '#/components/schemas/MonitorSearchCount'
@@ -5114,7 +5118,7 @@ components:
           readOnly: true
           type: object
         groups:
-          description: ''
+          description: The list of found monitor groups.
           items:
             $ref: '#/components/schemas/MonitorGroupSearchResult'
           readOnly: true
@@ -5123,22 +5127,22 @@ components:
           $ref: '#/components/schemas/MonitorSearchResponseMetadata'
       type: object
     MonitorGroupSearchResult:
-      description: ''
+      description: A single monitor group search result.
       properties:
         group:
-          description: ''
+          description: The name of the group.
           readOnly: true
           type: string
         group_tags:
-          description: ''
+          description: The list of tags of the monitor group.
           items:
-            description: ''
+            description: One monitor group tag.
             readOnly: true
             type: string
           readOnly: true
           type: array
         last_nodata_ts:
-          description: ''
+          description: Latest timestamp the monitor group was in NO_DATA state.
           format: int64
           readOnly: true
           type: integer
@@ -5192,8 +5196,12 @@ components:
           type: boolean
         escalation_message:
           default: none
-          description: 'A message to include with a re-notification. Supports the
-            `@username` notification we allow elsewhere.
+          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notifications/?tab=is_alert#renotify),
+
+            block in the original message instead.
+
+            A message to include with a re-notification. Supports the `@username`
+            notification we allow elsewhere.
 
             Not applicable if `renotify_interval` is `None`.'
           type: string
@@ -5358,7 +5366,7 @@ components:
         type: object
       type: array
     MonitorSearchResponse:
-      description: ''
+      description: The response form a monitor search.
       example:
         counts:
           muted:
@@ -5385,19 +5393,15 @@ components:
         monitors:
         - classification: metric
           creator:
-            handle: xxxx@datadoghq.com
-            id:
-              handle: xxxx@datadoghq.com
-              id: 1234
-              name: xxxx@datadoghq.com
-            name: xxxx@datadoghq.com
+            handle: john@datadoghq.com
+            name: John Doe
           id: 2699850
           last_triggered_ts: null
           metrics:
           - system.cpu.user
           name: Cassandra CPU is high on {{host.name}} in {{availability-zone.name}}
           notifications:
-          - handle: xxxx@datadoghq.com
+          - handle: jane@datadoghq.com
             name: Jane Doe
           org_id: 1234
           scopes:
@@ -5409,7 +5413,7 @@ components:
           type: metric alert
       properties:
         counts:
-          description: ''
+          description: The counts of monitors per different criteria.
           properties:
             muted:
               $ref: '#/components/schemas/MonitorSearchCount'
@@ -5424,14 +5428,14 @@ components:
         metadata:
           $ref: '#/components/schemas/MonitorSearchResponseMetadata'
         monitors:
-          description: ''
+          description: The list of found monitors.
           items:
             $ref: '#/components/schemas/MonitorSearchResult'
           readOnly: true
           type: array
       type: object
     MonitorSearchResponseMetadata:
-      description: ''
+      description: Metadata about the response.
       properties:
         page:
           description: The page to start paginating from.
@@ -5458,26 +5462,26 @@ components:
       description: Holds search results.
       properties:
         classification:
-          description: ''
+          description: Classification of the monitor.
           readOnly: true
           type: string
         creator:
           $ref: '#/components/schemas/Creator'
         id:
-          description: ID of this monitor.
+          description: ID of the monitor.
           format: int64
           readOnly: true
           type: integer
         last_triggered_ts:
-          description: Latest timestamp the monitor group triggered.
+          description: Latest timestamp the monitor triggered.
           format: int64
           nullable: true
           readOnly: true
           type: integer
         metrics:
-          description: ''
+          description: Metrics used by the monitor.
           items:
-            description: ''
+            description: A metric used by the monitor.
             readOnly: true
             type: string
           readOnly: true
@@ -5493,7 +5497,7 @@ components:
           readOnly: true
           type: array
         org_id:
-          description: ''
+          description: The ID of the organization.
           format: int64
           readOnly: true
           type: integer
@@ -5516,9 +5520,9 @@ components:
         status:
           $ref: '#/components/schemas/MonitorOverallStates'
         tags:
-          description: Tags associated to your monitor.
+          description: Tags associated with the monitor.
           items:
-            description: ''
+            description: A tag associated with the monitor.
             readOnly: true
             type: string
           readOnly: true
@@ -5527,7 +5531,7 @@ components:
           $ref: '#/components/schemas/MonitorType'
       type: object
     MonitorSearchResultNotification:
-      description: ''
+      description: A notification triggered by the monitor.
       properties:
         handle:
           description: The email address that received the notification.
@@ -5699,6 +5703,7 @@ components:
       - trace-analytics alert
       - slo alert
       - event-v2 alert
+      example: metric alert
       type: string
       x-enum-varnames:
       - COMPOSITE
@@ -5848,6 +5853,7 @@ components:
       required:
       - start
       - end
+      type: object
     NotebookAuthor:
       description: Attributes of user object returned by the API.
       properties:
@@ -6071,7 +6077,7 @@ components:
             $ref: '#/components/schemas/NotebookCellCreateRequest'
           type: array
         name:
-          description: Notebook name.
+          description: The name of the notebook.
           example: Example Notebook
           maxLength: 80
           minLength: 0
@@ -6094,7 +6100,7 @@ components:
       - data
       type: object
     NotebookDistributionCellAttributes:
-      description: The attributes of a notebook distribution cell.
+      description: The attributes of a notebook `distribution` cell.
       properties:
         definition:
           $ref: '#/components/schemas/DistributionWidgetDefinition'
@@ -6121,6 +6127,7 @@ components:
       - m
       - l
       - xl
+      example: m
       type: string
       x-enum-varnames:
       - EXTRA_SMALL
@@ -6129,7 +6136,7 @@ components:
       - LARGE
       - EXTRA_LARGE
     NotebookHeatMapCellAttributes:
-      description: The attributes of a notebook heat map cell.
+      description: The attributes of a notebook `heatmap` cell.
       properties:
         definition:
           $ref: '#/components/schemas/HeatMapWidgetDefinition'
@@ -6143,7 +6150,7 @@ components:
       - definition
       type: object
     NotebookLogStreamCellAttributes:
-      description: The attributes of a notebook log stream cell.
+      description: The attributes of a notebook `log_stream` cell.
       properties:
         definition:
           $ref: '#/components/schemas/LogStreamWidgetDefinition'
@@ -6155,7 +6162,7 @@ components:
       - definition
       type: object
     NotebookMarkdownCellAttributes:
-      description: The attributes of a notebooks markdown cell.
+      description: The attributes of a notebook `markdown` cell.
       properties:
         definition:
           $ref: '#/components/schemas/NotebookMarkdownCellDefinition'
@@ -6278,19 +6285,19 @@ components:
             $ref: '#/components/schemas/NotebookCellResponse'
           type: array
         created:
-          description: UTC time stamp.
+          description: UTC time stamp for when the notebook was created.
           example: '2021-02-24T23:14:15.173964+00:00'
           format: date-time
           readOnly: true
           type: string
         modified:
-          description: UTC time stamp.
+          description: UTC time stamp for when the notebook was last modified.
           example: '2021-02-24T23:15:23.274966+00:00'
           format: date-time
           readOnly: true
           type: string
         name:
-          description: Notebook name.
+          description: The name of the notebook.
           example: Example Notebook
           maxLength: 80
           minLength: 0
@@ -6307,6 +6314,9 @@ components:
     NotebookSplitBy:
       description: Object describing how to split the graph to display multiple visualizations
         per request.
+      example:
+        keys: []
+        tags: []
       properties:
         keys:
           description: Keys to split on.
@@ -6336,7 +6346,7 @@ components:
       x-enum-varnames:
       - PUBLISHED
     NotebookTimeseriesCellAttributes:
-      description: The attributes of a notebook timeseries cell.
+      description: The attributes of a notebook `timeseries` cell.
       properties:
         definition:
           $ref: '#/components/schemas/TimeseriesWidgetDefinition'
@@ -6350,7 +6360,7 @@ components:
       - definition
       type: object
     NotebookToplistCellAttributes:
-      description: The attributes of a notebook toplist cell.
+      description: The attributes of a notebook `toplist` cell.
       properties:
         definition:
           $ref: '#/components/schemas/ToplistWidgetDefinition'
@@ -6430,7 +6440,7 @@ components:
             $ref: '#/components/schemas/NotebookUpdateCell'
           type: array
         name:
-          description: Notebook name.
+          description: The name of the notebook.
           example: Example Notebook
           maxLength: 80
           minLength: 0
@@ -6458,7 +6468,7 @@ components:
         data:
           description: List of notebook definitions.
           items:
-            $ref: '#/components/schemas/NotebookResponseData'
+            $ref: '#/components/schemas/NotebooksResponseData'
           type: array
         meta:
           description: Metadata returned by the API.
@@ -6466,6 +6476,59 @@ components:
             page:
               $ref: '#/components/schemas/NotebooksResponsePage'
           type: object
+      type: object
+    NotebooksResponseData:
+      description: The data for a notebook in get all response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotebooksResponseDataAttributes'
+        id:
+          description: Unique notebook ID, assigned when you create the notebook.
+          example: 123456
+          format: int64
+          readOnly: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    NotebooksResponseDataAttributes:
+      description: The attributes of a notebook in get all response.
+      properties:
+        author:
+          $ref: '#/components/schemas/NotebookAuthor'
+        cells:
+          description: List of cells to display in the notebook.
+          items:
+            $ref: '#/components/schemas/NotebookCellResponse'
+          type: array
+        created:
+          description: UTC time stamp for when the notebook was created.
+          example: '2021-02-24T23:14:15.173964+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: UTC time stamp for when the notebook was last modified.
+          example: '2021-02-24T23:15:23.274966+00:00'
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: The name of the notebook.
+          example: Example Notebook
+          maxLength: 80
+          minLength: 0
+          type: string
+        status:
+          $ref: '#/components/schemas/NotebookStatus'
+        time:
+          $ref: '#/components/schemas/NotebookGlobalTime'
+      required:
+      - name
       type: object
     NotebooksResponsePage:
       description: Pagination metadata returned by the API.
@@ -8927,8 +8990,6 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAPIStep'
           type: array
-      required:
-      - assertions
       type: object
     SyntheticsAPITestResultData:
       description: Object containing results for your Synthetic API test.
@@ -9561,6 +9622,9 @@ components:
         example:
           description: Example for the variable.
           type: string
+        id:
+          description: ID of the variable for global variables.
+          type: string
         name:
           description: Name of the variable.
           example: VARIABLE_NAME
@@ -9571,16 +9635,17 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsConfigVariableType'
       required:
-      - example
       - type
       - name
       type: object
     SyntheticsConfigVariableType:
       description: Type of the configuration variable.
       enum:
+      - global
       - text
       type: string
       x-enum-varnames:
+      - GLOBAL
       - TEXT
     SyntheticsCoreWebVitals:
       description: Core Web Vitals attached to a browser test step.
@@ -9822,6 +9887,15 @@ components:
             the value will not be present if the variable is secure.'
           example: example-value
           type: string
+      type: object
+    SyntheticsListGlobalVariablesResponse:
+      description: Object containing an array of Synthetic global variables.
+      properties:
+        variables:
+          description: Array of Synthetic global variables.
+          items:
+            $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          type: array
       type: object
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
@@ -10222,8 +10296,6 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsBrowserVariable'
           type: array
-      required:
-      - assertions
       type: object
     SyntheticsTestDetails:
       description: Object containing details about your Synthetic test.
@@ -11091,6 +11163,11 @@ components:
           type: string
         public_id:
           description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the usage attribution tag configuration and the
+            selected tags in the format `<source_org_name>:<selected tag 1>-<selected
+            tag 2>-<selected tag 3>`.
           type: string
         tags:
           $ref: '#/components/schemas/UsageAttributionTagNames'
@@ -18760,6 +18837,7 @@ paths:
         name: group_states
         required: false
         schema:
+          example: alert
           type: string
       - description: A string to filter monitors by name.
         in: query
@@ -18775,6 +18853,7 @@ paths:
         name: tags
         required: false
         schema:
+          example: host:host0
           type: string
       - description: 'A comma separated list indicating what service and/or custom
           tags, if any, should be used to filter the list of monitors.
@@ -18785,6 +18864,7 @@ paths:
         name: monitor_tags
         required: false
         schema:
+          example: service:my-app
           type: string
       - description: If this argument is set to true, then the returned data includes
           all current downtimes for each monitor.
@@ -18806,6 +18886,7 @@ paths:
         name: page
         required: false
         schema:
+          example: 0
           format: int64
           type: integer
       - description: The number of monitors to return per page. If the page argument
@@ -18816,6 +18897,7 @@ paths:
         name: page_size
         required: false
         schema:
+          example: 20
           format: int32
           maximum: 1000
           type: integer
@@ -19112,6 +19194,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              json-request-body:
+                value:
+                  message: You may need to add web hosts if this is consistently high.
+                  name: Bytes received on host0
+                  options:
+                    no_data_timeframe: 20
+                    notify_no_data: true
+                  query: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
+                  tags:
+                  - app:webserver
+                  - frontend
+                  type: metric alert
             schema:
               $ref: '#/components/schemas/Monitor'
         description: Create a monitor request body.
@@ -19371,7 +19466,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Monitor'
+                example: {}
+                type: object
           description: OK
         '400':
           content:
@@ -19410,6 +19506,7 @@ paths:
         name: force
         required: false
         schema:
+          example: 'false'
           type: string
       responses:
         '200':
@@ -19915,6 +20012,43 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                      - attributes:
+                          definition:
+                            text: '## Some test markdown
+
+
+                              With some example content.'
+                            type: markdown
+                        type: notebook_cells
+                      - attributes:
+                          definition:
+                            requests:
+                            - display_type: line
+                              q: avg:system.load.1{*}
+                              style:
+                                line_type: solid
+                                line_width: normal
+                                palette: dog_classic
+                            show_legend: true
+                            type: timeseries
+                            yaxis:
+                              scale: linear
+                          graph_size: m
+                          split_by:
+                            keys: []
+                            tags: []
+                          time: null
+                        type: notebook_cells
+                      name: Example Notebook
+                      time:
+                        live_span: 1h
+                    type: notebooks
             schema:
               $ref: '#/components/schemas/NotebookCreateRequest'
         description: The JSON description of the notebook you want to create.
@@ -20047,6 +20181,44 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                      - attributes:
+                          definition:
+                            text: '## Some updated test markdown
+
+
+                              With some example content.'
+                            type: markdown
+                        type: notebook_cells
+                      - attributes:
+                          definition:
+                            requests:
+                            - display_type: bars
+                              q: avg:system.load.1{*}
+                              style:
+                                line_type: solid
+                                line_width: normal
+                                palette: warm
+                            show_legend: true
+                            type: timeseries
+                            yaxis:
+                              scale: linear
+                          graph_size: m
+                          split_by:
+                            keys: []
+                            tags: []
+                          time: null
+                        id: abcd1234
+                        type: notebook_cells
+                      name: Example Notebook
+                      time:
+                        live_span: 1h
+                    type: notebooks
             schema:
               $ref: '#/components/schemas/NotebookUpdateRequest'
         description: Update notebook request body.
@@ -20394,13 +20566,13 @@ paths:
     post:
       description: "The metrics end-point allows you to post time-series data that\
         \ can be graphed on Datadog\u2019s dashboards.\nThe maximum payload size is\
-        \ 3.2 megabytes (3200000). Compressed payloads must have a decompressed size\
-        \ of up to 62 megabytes (62914560).\n\nIf you\u2019re submitting metrics directly\
-        \ to the Datadog API without using DogStatsD, expect\n\n- 64 bits for the\
-        \ timestamp\n- 32 bits for the value\n- 20 bytes for the metric names\n- 50\
-        \ bytes for the timeseries\n- The full payload is approximately ~ 100 bytes.\
-        \ However, with the DogStatsD API,\ncompression is applied, which reduces\
-        \ the payload size."
+        \ 3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed\
+        \ size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting\
+        \ metrics directly to the Datadog API without using DogStatsD, expect:\n\n\
+        - 64 bits for the timestamp\n- 32 bits for the value\n- 20 bytes for the metric\
+        \ names\n- 50 bytes for the timeseries\n- The full payload is approximately\
+        \ 100 bytes. However, with the DogStatsD API,\ncompression is applied, which\
+        \ reduces the payload size."
       operationId: SubmitMetrics
       requestBody:
         content:
@@ -21257,7 +21429,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -21294,7 +21466,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 19
+      x-menu-order: 20
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -21326,7 +21498,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: idempotent
     get:
@@ -21396,7 +21568,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 22
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests:
@@ -21472,7 +21644,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         operationId: TODO
         parameters: []
@@ -21987,7 +22159,7 @@ paths:
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: safe
     put:
@@ -22044,7 +22216,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -22206,6 +22378,28 @@ paths:
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
+    get:
+      description: Get the list of all Synthetics global variables.
+      operationId: ListGlobalVariables
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsListGlobalVariablesResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get all global variables
+      tags:
+      - Synthetics
+      x-menu-order: 15
+      x-undo:
+        type: safe
     post:
       description: Create a Synthetics global variable.
       operationId: CreateGlobalVariable
@@ -22239,7 +22433,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -22281,7 +22475,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
-      x-menu-order: 18
+      x-menu-order: 19
       x-undo:
         type: idempotent
     get:
@@ -22316,7 +22510,7 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         type: safe
     put:
@@ -22359,7 +22553,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:

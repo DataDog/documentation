@@ -23,13 +23,13 @@ further_reading:
 
 Ensure log collection is configured.  See [Java Log Collection][1] for Log4j, Log4j 2, or Logback instructions.
 
-## Automatically inject trace and span IDs
+## Automatic injection
 
 Starting in version 0.74.0, the Java tracer automatically injects trace correlation identifiers into logs.  For earlier versions, enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property, or through the environment variable `DD_LOGS_INJECTION=true`.  Full configuration details can be found on the [Java tracer configuration][2] page.
 
 **Note**: If the `attribute.path` for your trace ID is *not* `dd.trace_id`, ensure that your trace ID reserved attribute settings account for the `attribute.path`. For more information, see the [FAQ on this topic][3].
 
-## Manually inject trace and span IDs
+## Manual injection
 
 If you prefer to manually correlate your traces with your logs, use the Java tracer's API to retrieve correlation identifiers. Use `CorrelationIdentifier.getTraceId` and `CorrelationIdentifier.getSpanId` methods to inject identifiers at the beginning of the span being logged, and remove the identifiers when the span is complete.
 
