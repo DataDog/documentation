@@ -36,7 +36,7 @@ In the *Notification Rules* section of your [Incident Settings][1], you can perf
 - *Copy* - Hover over any individual Notification Rule and click the **Copy** icon button next to the Rule's toggle
 - *Delete* - Hover over any individual Notification Rule and click the **Delete** icon button next to the Rule's toggle
 
-{{< img src="monitors/incidents/notification_rules_list.png" alt="Notification Rules List"  style="width:80%;">}}
+{{< img src="monitors/incidents/notification_rules_list.jpeg" alt="Notification Rules List"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/incidents/settings
 [2]: /monitors/notifications/?tab=is_alert#notify-your-team
