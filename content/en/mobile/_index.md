@@ -63,13 +63,15 @@ For example, to filter on metric monitors related to the SRE team that is being 
 
 {{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. 
+On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it.
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
 
-## Incidents 
+## Incidents
 
-On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][17]. 
+{{< img src="mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][17].
 
 ### Create an Incident
 
@@ -82,9 +84,11 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 ### Monitor saved views
 
+{{< img src="mobile/widgets.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
 View your [monitor saved views][18] from your home screen with Datadog widgets. Tap on any saved view cell to open the "Monitor Search" screen in the app, with your saved view already filled in.
 
-**Note**: If you do not have any monitor saved views, the widget shows you all monitors by default. 
+**Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
 
 #### Create a widget
 
@@ -101,9 +105,9 @@ View your [monitor saved views][18] from your home screen with Datadog widgets. 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Open the Android Widget Picker. 
+- Open the Android Widget Picker.
 - Either long press your home screen, or long press the Datadog app icon.
-- Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble. 
+- Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
 - Drag the Monitor Saved Views widget on your home screen.
 
 {{% /tab %}}
@@ -131,12 +135,14 @@ View your [monitor saved views][18] from your home screen with Datadog widgets. 
 
 {{% /tab %}}
 {{< /tabs >}}
-#### Switch organizations
+#### Multiple organizations
+
+You can display Saved Views from multiple organizations within the same widget. 
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you’ve logged-in are displayed in the configuration screen.
+All organizations you’ve logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
 
 {{% /tab %}}
 {{% tab "Android" %}}

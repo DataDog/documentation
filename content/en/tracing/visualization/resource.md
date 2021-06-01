@@ -45,7 +45,7 @@ Datadog provides out of the box graphs for any given resource:
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs"  style="width:90%;">}}
 
-### Export to Timeboard
+### Export to timeboard
 
 On the upper-right corner of each graph, click on the up arrow in order to export your graph into a pre-existing [Timeboard][4].
 
@@ -59,14 +59,13 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 {{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector"  style="width:50%;">}}
 
-## Span Summary
+## Span summary
 
 For a given resource, Datadog provides you a [span][5] analysis breakdown of all matching traces:
 
 {{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics"  style="width:80%;">}}
 
 The displayed metrics represent, per span:
-
 
 `Avg Spans/trace`
 : Average number of occurrences of the span, for traces including the current resource, where the span is present at least once.

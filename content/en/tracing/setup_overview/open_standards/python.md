@@ -106,7 +106,7 @@ with tracer.start_as_current_span("foo"):
             print("Hello world from OpenTelemetry Python!")
 ```
 
-### Configuration Options
+### Configuration options
 
 The Datadog Agent URL and span tag values can be configured if necessary or desired based upon your environment and Agent location.
 
@@ -150,7 +150,7 @@ exporter = DatadogSpanExporter(
 
 Tags that are set directly on individual spans supersede conflicting tags defined at the application level.
 
-### OpenTelemetry Links
+### OpenTelemetry links
 
 - See [OpenTelemetry examples][2], or [Readthedocs][3] for more OpenTelemetry Python Datadog Exporter usage.
 

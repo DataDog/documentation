@@ -188,7 +188,7 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
 
 * Specify a custom URL that JMXFetch connects to, in the `instances` section of your configuration:
 
-  ```yaml
+```yaml
   # Datadog Agent >= 5.6.0
 
   # The jmx_url may be different depending on the version of JBoss/WildFly you're using
@@ -198,9 +198,18 @@ JBoss/WildFly applications expose JMX over a specific protocol (Remoting JMX) th
     - jmx_url: "service:jmx:remote://localhost:4447"
       name: jboss-application  # Mandatory, but can be set to any value,
                                # is used to tag the metrics pulled from that instance
-  ```
+ ```
 
 * [Restart the Agent][4].
+
+**Note**: If you run into warning message like `Unable to instantiate or initialize instance <instance_name> for an unknown reason.Parameter 'name' may not be null`, you may need to set a wildfly user with `$WILDFLY_HOME/bin/add-user.sh -a -u <user> -p <password>` and specify `user` and `password` in the `instances` section of your configuration:
+```yaml
+instances:
+  - jmx_url: <jmx_url>
+    name: <instance_name>
+    user: <username>
+    password: <password>
+```
 
 ### Monitoring Tomcat with JMX remote lifecycle listener enabled
 
