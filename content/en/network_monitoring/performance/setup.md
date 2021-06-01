@@ -25,9 +25,9 @@ Datadog Network Performance Monitoring (NPM) gives you visibility into your netw
 
 Network performance monitoring requires [Datadog Agent v6.14+][1].
 
-## Supported Platforms
+## Supported platforms
 
-### Operating Systems
+### Operating systems
 
 #### Linux OS
 
@@ -51,11 +51,11 @@ Data collection is done using a device driver, and support is available as of Da
 
 Datadog Network Performance Monitoring does not currently support macOS platforms.
 
-### Container Setups
+### Containers
 
 NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies. Datadog’s container integrations enable you to aggregate traffic by meaningful entities -- such as containers, tasks, pods, clusters, and deployments -- with out-of-the -box tags (such as `container_name`, `task_name`, `kube_service`).
 
-### Network Routing Tools
+### Network routing tools
 
 #### Istio
 
@@ -77,7 +77,7 @@ Network Performance Monitoring is compatible with **Cilium** installations, prov
 1) Cilium version 1.6 and above, and
 2) Kernel version 5.1.16 and above, or 4.19.57 and above for 4.19.x kernels
 
-### Provisioning Systems
+### Provisioning systems
 
 Network Performance Monitoring supports use of the following provisioning systems:
 
@@ -199,9 +199,9 @@ To enable network performance monitoring for Windows hosts:
     ```
 **Note**: NPM currently monitors Windows hosts only, and not Windows containers. DNS metric collection is not supported for Windows systems.
 
+
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 [2]: /agent/guide/agent-commands/#restart-the-agent
-
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 

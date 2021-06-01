@@ -20,7 +20,7 @@ You may have heard that profiling can make your services faster, cheaper, and mo
 
 In this guide, we'll explain profiling, then profile a sample service that has a performance problem and see how we can use Continuous Profiler to understand and fix the problem!
 
-## What is Profiling?
+## What is profiling?
 
 A profiler shows how much "work" each function is doing by collecting data about the program as it's running. For example, infrastructure monitoring might show that your app servers are using 80% of their CPU but you may not know why. Profiling could then show you that function `doSomeWork` is using 48% of the CPU, function `renderGraph` is using another 19%, and so on. This is important when working on performance problems because many programs spend a lot of time in very few places and it's often not obvious which places those are. Guessing at which parts of a program to optimize can often cause engineers to spend a lot of time and not get much in the way of results. By using a profiler, we find exactly which parts of the code we should optimize to get the most bang for our buck.
 
@@ -36,7 +36,7 @@ You'll need:
 1. [docker-compose][2]
 2. A Datadog account and [API key][3] (you don't need an application key). If you don't already have a Datadog account, [sign up for a free trial][4].
 
-## Run the Example
+## Run the example
 
 Get the example service up and running with:
 ```
@@ -58,7 +58,7 @@ curl -s http://movies-api-java:8080/movies?q=wars | jq
 
 There's also a Python version of the example service, called `movies-api-py`. If that's more your style, you can adjust the commands throughout the tutorial accordingly.
 
-## Benchmark It
+## Benchmark it
 
 Let's generate more traffic using the ApacheBench tool, [ab][5]. We'll have it run 10 concurrent HTTP clients sending requests for 20 seconds. Still inside the toolbox container:
 ```
@@ -77,7 +77,7 @@ Percentage of the requests served within a certain time (ms)
  100%    867 (longest request)
 ```
 
-## How to Read a Profile
+## How to read a profile
 
 Head on over to [Profile Search][6] and look for a profile covering the period in which we were generating traffic. It may take a minute or so. You'll be able to tell which profile includes the load test because the CPU usage will be higher:
 
@@ -117,7 +117,7 @@ We also see a part of the CPU profile that looks like this:
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_gc.png" alt="Flame graph showing GC (garbage collection)" style="width:60%;">}}
 
-## Profile Types
+## Profile types
 
 The fact that it spent almost 6% of CPU time in garbage collection suggests that we may be producing a lot of garbage. So hop over to the Allocated Memory profile type:
 
@@ -127,7 +127,7 @@ On an Allocated Memory profile, the size of the boxes shows how much memory each
 
 {{< img src="tracing/profiling/intro_to_profiling/alloc_flame_graph_replyjson_arrows.png" alt="Flame graph of allocation profile with arrows pointing at stack traces below replyJSON()">}}
 
-## Fixing the Problem
+## Fixing the problem
 
 Time to look at the code and see what's going on! Looking again at the CPU flame graph, we can see that these expensive code paths go through a lambda on line 66, which calls `LocalDate.parse()`:
 
@@ -185,11 +185,11 @@ When you're done exploring, you can clean up with:
 docker-compose down
 ```
 
-## Saving Money
+## Saving money
 
 Improving CPU usage like this can easily translate into saving money. If this had been a real service, this small improvement might have enabled us to scale down to half the servers, potentially saving thousands of dollars a year. Not bad for about 10 minutes of work!
 
-## Improve Your Service
+## Improve your service
 
 We've only skimmed the surface here but this should give you a sense of how to get started. **[Give it a shot on your services][8]**!
 

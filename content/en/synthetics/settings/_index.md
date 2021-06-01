@@ -26,7 +26,7 @@ On the [Synthetic Monitoring settings page][1], you can adjust the following set
 
 Only [Admin and Standard users][3] can access Synthetic Monitoring `Settings` page.
 
-## Global Variables
+## Global variables
 
 Variables are global and can be used by multiple [API tests][4] and [browser tests][5]. To create a new global variable, go to the [Global Variables][6] tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
 Choose the type of variable you want to create:
@@ -68,13 +68,13 @@ Note: Variable values are updated whenever the test they are extracted from runs
 
 {{< /tabs >}}
 
-## Default Settings
+## Default settings
 
-### Default Locations
+### Default locations
 
 Choose the default locations for your browser and API tests details. Options include all of the available managed locations Datadog offers and the private locations that you set up for your account.
 
-### APM integration for Browser Tests
+### APM integration for browser tests
 
 Allow URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section.
 

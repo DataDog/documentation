@@ -303,6 +303,7 @@
         "required": false,
         "schema": {
           "default": 0,
+          "example": 0,
           "format": "int64",
           "type": "integer"
         }
@@ -314,6 +315,7 @@
         "required": false,
         "schema": {
           "default": 0,
+          "example": 0,
           "format": "int64",
           "type": "integer"
         }
@@ -325,6 +327,7 @@
         "required": false,
         "schema": {
           "default": 10,
+          "example": 10,
           "format": "int64",
           "type": "integer"
         }
@@ -389,6 +392,7 @@
         "name": "user_id",
         "required": true,
         "schema": {
+          "example": "00000000-0000-0000-0000-000000000000",
           "type": "string"
         }
       }
@@ -4676,15 +4680,15 @@
         ]
       },
       "IncidentIntegrationMetadataType": {
-        "default": "incident_integration_metadata",
+        "default": "incident_integrations",
         "description": "Integration metadata resource type.",
         "enum": [
-          "incident_integration_metadata"
+          "incident_integrations"
         ],
-        "example": "incident_integration_metadata",
+        "example": "incident_integrations",
         "type": "string",
         "x-enum-varnames": [
-          "INCIDENT_INTEGRATION_METADATA"
+          "INCIDENT_INTEGRATIONS"
         ]
       },
       "IncidentPostmortemType": {
@@ -4993,11 +4997,11 @@
                       "data": [
                         {
                           "id": "00000000-0000-0000-0000-000000000000",
-                          "type": "incident_integration_metadata"
+                          "type": "incident_integrations"
                         },
                         {
                           "id": "00000000-0000-0000-0000-000000000000",
-                          "type": "incident_integration_metadata"
+                          "type": "incident_integrations"
                         }
                       ]
                     },
@@ -5007,18 +5011,18 @@
                         "example": [
                           {
                             "id": "00000000-0000-0000-0000-000000000000",
-                            "type": "incident_integration_metadata"
+                            "type": "incident_integrations"
                           },
                           {
                             "id": "00000000-0000-0000-0000-000000000000",
-                            "type": "incident_integration_metadata"
+                            "type": "incident_integrations"
                           }
                         ],
                         "items": {
                           "description": "A relationship reference for an integration metadata object.",
                           "example": {
                             "id": "00000000-0000-0000-0000-000000000000",
-                            "type": "incident_integration_metadata"
+                            "type": "incident_integrations"
                           },
                           "properties": {
                             "id": {
@@ -5027,15 +5031,15 @@
                               "type": "string"
                             },
                             "type": {
-                              "default": "incident_integration_metadata",
+                              "default": "incident_integrations",
                               "description": "Integration metadata resource type.",
                               "enum": [
-                                "incident_integration_metadata"
+                                "incident_integrations"
                               ],
-                              "example": "incident_integration_metadata",
+                              "example": "incident_integrations",
                               "type": "string",
                               "x-enum-varnames": [
-                                "INCIDENT_INTEGRATION_METADATA"
+                                "INCIDENT_INTEGRATIONS"
                               ]
                             }
                           },
@@ -5874,11 +5878,11 @@
                   "data": [
                     {
                       "id": "00000000-0000-0000-0000-000000000000",
-                      "type": "incident_integration_metadata"
+                      "type": "incident_integrations"
                     },
                     {
                       "id": "00000000-0000-0000-0000-000000000000",
-                      "type": "incident_integration_metadata"
+                      "type": "incident_integrations"
                     }
                   ]
                 },
@@ -5888,18 +5892,18 @@
                     "example": [
                       {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       },
                       {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       }
                     ],
                     "items": {
                       "description": "A relationship reference for an integration metadata object.",
                       "example": {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       },
                       "properties": {
                         "id": {
@@ -5908,15 +5912,15 @@
                           "type": "string"
                         },
                         "type": {
-                          "default": "incident_integration_metadata",
+                          "default": "incident_integrations",
                           "description": "Integration metadata resource type.",
                           "enum": [
-                            "incident_integration_metadata"
+                            "incident_integrations"
                           ],
-                          "example": "incident_integration_metadata",
+                          "example": "incident_integrations",
                           "type": "string",
                           "x-enum-varnames": [
-                            "INCIDENT_INTEGRATION_METADATA"
+                            "INCIDENT_INTEGRATIONS"
                           ]
                         }
                       },
@@ -6352,11 +6356,11 @@
               "data": [
                 {
                   "id": "00000000-0000-0000-0000-000000000000",
-                  "type": "incident_integration_metadata"
+                  "type": "incident_integrations"
                 },
                 {
                   "id": "00000000-0000-0000-0000-000000000000",
-                  "type": "incident_integration_metadata"
+                  "type": "incident_integrations"
                 }
               ]
             },
@@ -6366,18 +6370,18 @@
                 "example": [
                   {
                     "id": "00000000-0000-0000-0000-000000000000",
-                    "type": "incident_integration_metadata"
+                    "type": "incident_integrations"
                   },
                   {
                     "id": "00000000-0000-0000-0000-000000000000",
-                    "type": "incident_integration_metadata"
+                    "type": "incident_integrations"
                   }
                 ],
                 "items": {
                   "description": "A relationship reference for an integration metadata object.",
                   "example": {
                     "id": "00000000-0000-0000-0000-000000000000",
-                    "type": "incident_integration_metadata"
+                    "type": "incident_integrations"
                   },
                   "properties": {
                     "id": {
@@ -6386,15 +6390,15 @@
                       "type": "string"
                     },
                     "type": {
-                      "default": "incident_integration_metadata",
+                      "default": "incident_integrations",
                       "description": "Integration metadata resource type.",
                       "enum": [
-                        "incident_integration_metadata"
+                        "incident_integrations"
                       ],
-                      "example": "incident_integration_metadata",
+                      "example": "incident_integrations",
                       "type": "string",
                       "x-enum-varnames": [
-                        "INCIDENT_INTEGRATION_METADATA"
+                        "INCIDENT_INTEGRATIONS"
                       ]
                     }
                   },
@@ -10519,11 +10523,11 @@
                   "data": [
                     {
                       "id": "00000000-0000-0000-0000-000000000000",
-                      "type": "incident_integration_metadata"
+                      "type": "incident_integrations"
                     },
                     {
                       "id": "00000000-0000-0000-0000-000000000000",
-                      "type": "incident_integration_metadata"
+                      "type": "incident_integrations"
                     }
                   ]
                 },
@@ -10533,18 +10537,18 @@
                     "example": [
                       {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       },
                       {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       }
                     ],
                     "items": {
                       "description": "A relationship reference for an integration metadata object.",
                       "example": {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       },
                       "properties": {
                         "id": {
@@ -10553,15 +10557,15 @@
                           "type": "string"
                         },
                         "type": {
-                          "default": "incident_integration_metadata",
+                          "default": "incident_integrations",
                           "description": "Integration metadata resource type.",
                           "enum": [
-                            "incident_integration_metadata"
+                            "incident_integrations"
                           ],
-                          "example": "incident_integration_metadata",
+                          "example": "incident_integrations",
                           "type": "string",
                           "x-enum-varnames": [
-                            "INCIDENT_INTEGRATION_METADATA"
+                            "INCIDENT_INTEGRATIONS"
                           ]
                         }
                       },
@@ -10764,11 +10768,11 @@
               "data": [
                 {
                   "id": "00000000-0000-0000-0000-000000000000",
-                  "type": "incident_integration_metadata"
+                  "type": "incident_integrations"
                 },
                 {
                   "id": "00000000-0000-0000-0000-000000000000",
-                  "type": "incident_integration_metadata"
+                  "type": "incident_integrations"
                 }
               ]
             },
@@ -10778,18 +10782,18 @@
                 "example": [
                   {
                     "id": "00000000-0000-0000-0000-000000000000",
-                    "type": "incident_integration_metadata"
+                    "type": "incident_integrations"
                   },
                   {
                     "id": "00000000-0000-0000-0000-000000000000",
-                    "type": "incident_integration_metadata"
+                    "type": "incident_integrations"
                   }
                 ],
                 "items": {
                   "description": "A relationship reference for an integration metadata object.",
                   "example": {
                     "id": "00000000-0000-0000-0000-000000000000",
-                    "type": "incident_integration_metadata"
+                    "type": "incident_integrations"
                   },
                   "properties": {
                     "id": {
@@ -10798,15 +10802,15 @@
                       "type": "string"
                     },
                     "type": {
-                      "default": "incident_integration_metadata",
+                      "default": "incident_integrations",
                       "description": "Integration metadata resource type.",
                       "enum": [
-                        "incident_integration_metadata"
+                        "incident_integrations"
                       ],
-                      "example": "incident_integration_metadata",
+                      "example": "incident_integrations",
                       "type": "string",
                       "x-enum-varnames": [
-                        "INCIDENT_INTEGRATION_METADATA"
+                        "INCIDENT_INTEGRATIONS"
                       ]
                     }
                   },
@@ -11136,11 +11140,11 @@
                       "data": [
                         {
                           "id": "00000000-0000-0000-0000-000000000000",
-                          "type": "incident_integration_metadata"
+                          "type": "incident_integrations"
                         },
                         {
                           "id": "00000000-0000-0000-0000-000000000000",
-                          "type": "incident_integration_metadata"
+                          "type": "incident_integrations"
                         }
                       ]
                     },
@@ -11150,18 +11154,18 @@
                         "example": [
                           {
                             "id": "00000000-0000-0000-0000-000000000000",
-                            "type": "incident_integration_metadata"
+                            "type": "incident_integrations"
                           },
                           {
                             "id": "00000000-0000-0000-0000-000000000000",
-                            "type": "incident_integration_metadata"
+                            "type": "incident_integrations"
                           }
                         ],
                         "items": {
                           "description": "A relationship reference for an integration metadata object.",
                           "example": {
                             "id": "00000000-0000-0000-0000-000000000000",
-                            "type": "incident_integration_metadata"
+                            "type": "incident_integrations"
                           },
                           "properties": {
                             "id": {
@@ -11170,15 +11174,15 @@
                               "type": "string"
                             },
                             "type": {
-                              "default": "incident_integration_metadata",
+                              "default": "incident_integrations",
                               "description": "Integration metadata resource type.",
                               "enum": [
-                                "incident_integration_metadata"
+                                "incident_integrations"
                               ],
-                              "example": "incident_integration_metadata",
+                              "example": "incident_integrations",
                               "type": "string",
                               "x-enum-varnames": [
-                                "INCIDENT_INTEGRATION_METADATA"
+                                "INCIDENT_INTEGRATIONS"
                               ]
                             }
                           },
@@ -11351,11 +11355,11 @@
                     "data": [
                       {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       },
                       {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       }
                     ]
                   },
@@ -11413,11 +11417,11 @@
                     "data": [
                       {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       },
                       {
                         "id": "00000000-0000-0000-0000-000000000000",
-                        "type": "incident_integration_metadata"
+                        "type": "incident_integrations"
                       }
                     ]
                   },
@@ -11718,11 +11722,11 @@
                         "data": [
                           {
                             "id": "00000000-0000-0000-0000-000000000000",
-                            "type": "incident_integration_metadata"
+                            "type": "incident_integrations"
                           },
                           {
                             "id": "00000000-0000-0000-0000-000000000000",
-                            "type": "incident_integration_metadata"
+                            "type": "incident_integrations"
                           }
                         ]
                       },
@@ -11732,18 +11736,18 @@
                           "example": [
                             {
                               "id": "00000000-0000-0000-0000-000000000000",
-                              "type": "incident_integration_metadata"
+                              "type": "incident_integrations"
                             },
                             {
                               "id": "00000000-0000-0000-0000-000000000000",
-                              "type": "incident_integration_metadata"
+                              "type": "incident_integrations"
                             }
                           ],
                           "items": {
                             "description": "A relationship reference for an integration metadata object.",
                             "example": {
                               "id": "00000000-0000-0000-0000-000000000000",
-                              "type": "incident_integration_metadata"
+                              "type": "incident_integrations"
                             },
                             "properties": {
                               "id": {
@@ -11752,15 +11756,15 @@
                                 "type": "string"
                               },
                               "type": {
-                                "default": "incident_integration_metadata",
+                                "default": "incident_integrations",
                                 "description": "Integration metadata resource type.",
                                 "enum": [
-                                  "incident_integration_metadata"
+                                  "incident_integrations"
                                 ],
-                                "example": "incident_integration_metadata",
+                                "example": "incident_integrations",
                                 "type": "string",
                                 "x-enum-varnames": [
-                                  "INCIDENT_INTEGRATION_METADATA"
+                                  "INCIDENT_INTEGRATIONS"
                                 ]
                               }
                             },
@@ -19707,7 +19711,7 @@
         "description": "A relationship reference for an integration metadata object.",
         "example": {
           "id": "00000000-0000-0000-0000-000000000000",
-          "type": "incident_integration_metadata"
+          "type": "incident_integrations"
         },
         "properties": {
           "id": {
@@ -19716,15 +19720,15 @@
             "type": "string"
           },
           "type": {
-            "default": "incident_integration_metadata",
+            "default": "incident_integrations",
             "description": "Integration metadata resource type.",
             "enum": [
-              "incident_integration_metadata"
+              "incident_integrations"
             ],
-            "example": "incident_integration_metadata",
+            "example": "incident_integrations",
             "type": "string",
             "x-enum-varnames": [
-              "INCIDENT_INTEGRATION_METADATA"
+              "INCIDENT_INTEGRATIONS"
             ]
           }
         },
@@ -19740,11 +19744,11 @@
           "data": [
             {
               "id": "00000000-0000-0000-0000-000000000000",
-              "type": "incident_integration_metadata"
+              "type": "incident_integrations"
             },
             {
               "id": "00000000-0000-0000-0000-000000000000",
-              "type": "incident_integration_metadata"
+              "type": "incident_integrations"
             }
           ]
         },
@@ -19754,18 +19758,18 @@
             "example": [
               {
                 "id": "00000000-0000-0000-0000-000000000000",
-                "type": "incident_integration_metadata"
+                "type": "incident_integrations"
               },
               {
                 "id": "00000000-0000-0000-0000-000000000000",
-                "type": "incident_integration_metadata"
+                "type": "incident_integrations"
               }
             ],
             "items": {
               "description": "A relationship reference for an integration metadata object.",
               "example": {
                 "id": "00000000-0000-0000-0000-000000000000",
-                "type": "incident_integration_metadata"
+                "type": "incident_integrations"
               },
               "properties": {
                 "id": {
@@ -19774,15 +19778,15 @@
                   "type": "string"
                 },
                 "type": {
-                  "default": "incident_integration_metadata",
+                  "default": "incident_integrations",
                   "description": "Integration metadata resource type.",
                   "enum": [
-                    "incident_integration_metadata"
+                    "incident_integrations"
                   ],
-                  "example": "incident_integration_metadata",
+                  "example": "incident_integrations",
                   "type": "string",
                   "x-enum-varnames": [
-                    "INCIDENT_INTEGRATION_METADATA"
+                    "INCIDENT_INTEGRATIONS"
                   ]
                 }
               },
@@ -27714,6 +27718,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -27725,6 +27730,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -29891,6 +29897,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -29902,6 +29909,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -31168,6 +31176,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -31179,6 +31188,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -34366,6 +34376,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -34377,6 +34388,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -34431,11 +34443,11 @@
                               "data": [
                                 {
                                   "id": "00000000-0000-0000-0000-000000000000",
-                                  "type": "incident_integration_metadata"
+                                  "type": "incident_integrations"
                                 },
                                 {
                                   "id": "00000000-0000-0000-0000-000000000000",
-                                  "type": "incident_integration_metadata"
+                                  "type": "incident_integrations"
                                 }
                               ]
                             },
@@ -34493,11 +34505,11 @@
                               "data": [
                                 {
                                   "id": "00000000-0000-0000-0000-000000000000",
-                                  "type": "incident_integration_metadata"
+                                  "type": "incident_integrations"
                                 },
                                 {
                                   "id": "00000000-0000-0000-0000-000000000000",
-                                  "type": "incident_integration_metadata"
+                                  "type": "incident_integrations"
                                 }
                               ]
                             },
@@ -34798,11 +34810,11 @@
                                   "data": [
                                     {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     },
                                     {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     }
                                   ]
                                 },
@@ -34812,18 +34824,18 @@
                                     "example": [
                                       {
                                         "id": "00000000-0000-0000-0000-000000000000",
-                                        "type": "incident_integration_metadata"
+                                        "type": "incident_integrations"
                                       },
                                       {
                                         "id": "00000000-0000-0000-0000-000000000000",
-                                        "type": "incident_integration_metadata"
+                                        "type": "incident_integrations"
                                       }
                                     ],
                                     "items": {
                                       "description": "A relationship reference for an integration metadata object.",
                                       "example": {
                                         "id": "00000000-0000-0000-0000-000000000000",
-                                        "type": "incident_integration_metadata"
+                                        "type": "incident_integrations"
                                       },
                                       "properties": {
                                         "id": {
@@ -34832,15 +34844,15 @@
                                           "type": "string"
                                         },
                                         "type": {
-                                          "default": "incident_integration_metadata",
+                                          "default": "incident_integrations",
                                           "description": "Integration metadata resource type.",
                                           "enum": [
-                                            "incident_integration_metadata"
+                                            "incident_integrations"
                                           ],
-                                          "example": "incident_integration_metadata",
+                                          "example": "incident_integrations",
                                           "type": "string",
                                           "x-enum-varnames": [
-                                            "INCIDENT_INTEGRATION_METADATA"
+                                            "INCIDENT_INTEGRATIONS"
                                           ]
                                         }
                                       },
@@ -35888,11 +35900,11 @@
                                 "data": [
                                   {
                                     "id": "00000000-0000-0000-0000-000000000000",
-                                    "type": "incident_integration_metadata"
+                                    "type": "incident_integrations"
                                   },
                                   {
                                     "id": "00000000-0000-0000-0000-000000000000",
-                                    "type": "incident_integration_metadata"
+                                    "type": "incident_integrations"
                                   }
                                 ]
                               },
@@ -35902,18 +35914,18 @@
                                   "example": [
                                     {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     },
                                     {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     }
                                   ],
                                   "items": {
                                     "description": "A relationship reference for an integration metadata object.",
                                     "example": {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     },
                                     "properties": {
                                       "id": {
@@ -35922,15 +35934,15 @@
                                         "type": "string"
                                       },
                                       "type": {
-                                        "default": "incident_integration_metadata",
+                                        "default": "incident_integrations",
                                         "description": "Integration metadata resource type.",
                                         "enum": [
-                                          "incident_integration_metadata"
+                                          "incident_integrations"
                                         ],
-                                        "example": "incident_integration_metadata",
+                                        "example": "incident_integrations",
                                         "type": "string",
                                         "x-enum-varnames": [
-                                          "INCIDENT_INTEGRATION_METADATA"
+                                          "INCIDENT_INTEGRATIONS"
                                         ]
                                       }
                                     },
@@ -36881,11 +36893,11 @@
                                 "data": [
                                   {
                                     "id": "00000000-0000-0000-0000-000000000000",
-                                    "type": "incident_integration_metadata"
+                                    "type": "incident_integrations"
                                   },
                                   {
                                     "id": "00000000-0000-0000-0000-000000000000",
-                                    "type": "incident_integration_metadata"
+                                    "type": "incident_integrations"
                                   }
                                 ]
                               },
@@ -36895,18 +36907,18 @@
                                   "example": [
                                     {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     },
                                     {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     }
                                   ],
                                   "items": {
                                     "description": "A relationship reference for an integration metadata object.",
                                     "example": {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     },
                                     "properties": {
                                       "id": {
@@ -36915,15 +36927,15 @@
                                         "type": "string"
                                       },
                                       "type": {
-                                        "default": "incident_integration_metadata",
+                                        "default": "incident_integrations",
                                         "description": "Integration metadata resource type.",
                                         "enum": [
-                                          "incident_integration_metadata"
+                                          "incident_integrations"
                                         ],
-                                        "example": "incident_integration_metadata",
+                                        "example": "incident_integrations",
                                         "type": "string",
                                         "x-enum-varnames": [
-                                          "INCIDENT_INTEGRATION_METADATA"
+                                          "INCIDENT_INTEGRATIONS"
                                         ]
                                       }
                                     },
@@ -37647,11 +37659,11 @@
                               "data": [
                                 {
                                   "id": "00000000-0000-0000-0000-000000000000",
-                                  "type": "incident_integration_metadata"
+                                  "type": "incident_integrations"
                                 },
                                 {
                                   "id": "00000000-0000-0000-0000-000000000000",
-                                  "type": "incident_integration_metadata"
+                                  "type": "incident_integrations"
                                 }
                               ]
                             },
@@ -37661,18 +37673,18 @@
                                 "example": [
                                   {
                                     "id": "00000000-0000-0000-0000-000000000000",
-                                    "type": "incident_integration_metadata"
+                                    "type": "incident_integrations"
                                   },
                                   {
                                     "id": "00000000-0000-0000-0000-000000000000",
-                                    "type": "incident_integration_metadata"
+                                    "type": "incident_integrations"
                                   }
                                 ],
                                 "items": {
                                   "description": "A relationship reference for an integration metadata object.",
                                   "example": {
                                     "id": "00000000-0000-0000-0000-000000000000",
-                                    "type": "incident_integration_metadata"
+                                    "type": "incident_integrations"
                                   },
                                   "properties": {
                                     "id": {
@@ -37681,15 +37693,15 @@
                                       "type": "string"
                                     },
                                     "type": {
-                                      "default": "incident_integration_metadata",
+                                      "default": "incident_integrations",
                                       "description": "Integration metadata resource type.",
                                       "enum": [
-                                        "incident_integration_metadata"
+                                        "incident_integrations"
                                       ],
-                                      "example": "incident_integration_metadata",
+                                      "example": "incident_integrations",
                                       "type": "string",
                                       "x-enum-varnames": [
-                                        "INCIDENT_INTEGRATION_METADATA"
+                                        "INCIDENT_INTEGRATIONS"
                                       ]
                                     }
                                   },
@@ -38110,11 +38122,11 @@
                                 "data": [
                                   {
                                     "id": "00000000-0000-0000-0000-000000000000",
-                                    "type": "incident_integration_metadata"
+                                    "type": "incident_integrations"
                                   },
                                   {
                                     "id": "00000000-0000-0000-0000-000000000000",
-                                    "type": "incident_integration_metadata"
+                                    "type": "incident_integrations"
                                   }
                                 ]
                               },
@@ -38124,18 +38136,18 @@
                                   "example": [
                                     {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     },
                                     {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     }
                                   ],
                                   "items": {
                                     "description": "A relationship reference for an integration metadata object.",
                                     "example": {
                                       "id": "00000000-0000-0000-0000-000000000000",
-                                      "type": "incident_integration_metadata"
+                                      "type": "incident_integrations"
                                     },
                                     "properties": {
                                       "id": {
@@ -38144,15 +38156,15 @@
                                         "type": "string"
                                       },
                                       "type": {
-                                        "default": "incident_integration_metadata",
+                                        "default": "incident_integrations",
                                         "description": "Integration metadata resource type.",
                                         "enum": [
-                                          "incident_integration_metadata"
+                                          "incident_integrations"
                                         ],
-                                        "example": "incident_integration_metadata",
+                                        "example": "incident_integrations",
                                         "type": "string",
                                         "x-enum-varnames": [
-                                          "INCIDENT_INTEGRATION_METADATA"
+                                          "INCIDENT_INTEGRATIONS"
                                         ]
                                       }
                                     },
@@ -43082,6 +43094,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -43093,6 +43106,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -44359,6 +44373,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -44370,6 +44385,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -47399,6 +47415,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -47410,6 +47427,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -49750,6 +49768,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -49761,6 +49780,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -50990,6 +51010,58 @@
         "x-undo": {
           "type": "safe"
         }
+      }
+    },
+    "/api/v2/security/cloud_workload/policy/download": {
+      "get": {
+        "description": "The download endpoint generates a Cloud Workload Security policy file from your currently active\nCloud Workload Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
+        "operationId": "DownloadCloudWorkloadPolicyFile",
+        "responses": {
+          "200": {
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Authorized"
+          }
+        },
+        "summary": "Get the latest Cloud Workload Security policy",
+        "tags": [
+          "Cloud Workload Security"
+        ],
+        "x-undo": {
+          "type": "safe"
+        },
+        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
     "/api/v2/security_monitoring/configuration/security_filters": {
@@ -52245,6 +52317,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -52256,6 +52329,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -54735,58 +54809,6 @@
         }
       }
     },
-    "/api/v2/security_monitoring/runtime/policy/download": {
-      "get": {
-        "description": "The download endpoint generates a Runtime Security policy file from your currently active\nRuntime Security rules, and downloads them as a .policy file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
-        "operationId": "DowloadRuntimePolicyFile",
-        "responses": {
-          "200": {
-            "content": {
-              "application/yaml": {
-                "schema": {
-                  "format": "binary",
-                  "type": "string"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Not Authorized"
-          }
-        },
-        "summary": "Get the latest Runtime Security policy",
-        "tags": [
-          "Security Monitoring"
-        ],
-        "x-undo": {
-          "type": "safe"
-        },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
-      }
-    },
     "/api/v2/security_monitoring/signals": {
       "get": {
         "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
@@ -55318,6 +55340,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -55329,6 +55352,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -57854,6 +57878,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -57865,6 +57890,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -60590,6 +60616,7 @@
             "name": "user_invitation_uuid",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -60728,6 +60755,7 @@
             "required": false,
             "schema": {
               "default": 10,
+              "example": 10,
               "format": "int64",
               "type": "integer"
             }
@@ -60739,6 +60767,7 @@
             "required": false,
             "schema": {
               "default": 0,
+              "example": 0,
               "format": "int64",
               "type": "integer"
             }
@@ -60750,6 +60779,7 @@
             "required": false,
             "schema": {
               "default": "name",
+              "example": "name",
               "type": "string"
             }
           },
@@ -60787,6 +60817,7 @@
             "name": "filter[status]",
             "required": false,
             "schema": {
+              "example": "Active",
               "type": "string"
             }
           }
@@ -62006,6 +62037,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -62085,6 +62117,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -62627,6 +62660,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -63283,6 +63317,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -63827,6 +63862,7 @@
             "name": "user_id",
             "required": true,
             "schema": {
+              "example": "00000000-0000-0000-0000-000000000000",
               "type": "string"
             }
           }
@@ -64026,6 +64062,10 @@
     }
   ],
   "tags": [
+    {
+      "description": "Security signals generated based file and process activity in workloads.",
+      "name": "Cloud Workload Security"
+    },
     {
       "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization.",
       "name": "Dashboard Lists"

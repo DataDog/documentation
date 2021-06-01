@@ -156,7 +156,7 @@ Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Recurring Downtime on the Nth weekday of the month
+### Recurring downtime on the nth weekday of the month
 
 To plan more advanced maintenance schedules, you can use RRULE.
 
