@@ -102,7 +102,7 @@ tracer.in_span('foo') do |span|
 end
 ```
 
-### Configuration Options
+### Configuration options
 
 The Datadog Agent URL and span tag values can be configured if necessary or desired based upon your environment and Agent location.
 
@@ -160,7 +160,7 @@ end
 
 Tags that are set directly on individual spans supersede conflicting tags defined at the application level.
 
-### OpenTelemetry Links
+### OpenTelemetry links
 
 - See [rubygems][7] or [github][8] for more OpenTelemetry Ruby Datadog Exporter usage.
 
