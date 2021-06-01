@@ -5,6 +5,7 @@ import codeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
+import { getQueryParameterByName } from './helpers/browser';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -50,7 +51,7 @@ $(document).ready(function () {
     // algolia
     $('.ds-hint').css('background', 'transparent');
 
-    const searchParam = getParameterByName('s');
+    const searchParam = getQueryParameterByName('s');
     if (searchParam) {
         $('.sidenav-search input[name="s"]').val(searchParam);
     }
@@ -79,15 +80,9 @@ $(document).ready(function () {
         }
     }
 
-    codeTabs();
-
-    // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
-
     updateTOC();
     buildTOCMap();
     onScroll();
-
-    // TODO: move integrations code to own file after webpack update
 
     if (document.body.classList.value.includes('security_platform')) {
         initializeSecurityRules();
@@ -96,19 +91,11 @@ $(document).ready(function () {
     if (document.body.classList.value.includes('integrations')) {
         initializeIntegrations();
     }
+
+    if (document.querySelector('.code-tabs')) {
+        codeTabs();
+    }
 });
-
-
-
-function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
-    const results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
 
 // Get sidebar
 function hasParentLi(el) {
