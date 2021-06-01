@@ -24366,47 +24366,6 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-  /monitor/bulk_resolve:
-    post:
-      deprecated: true
-      description: Resolve monitor.
-      operationId: ResolveMonitor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                type: object
-              type: array
-        description: 'Array of group(s) to resolve for a given monitor_id, e.g.:
-
-          `{"monitor_id": "group_to_resolve"}`.
-
-
-          It supports multiple groups per monitor, e.g.:
-
-          `resolve: [{"monitor_id": "group_1"}, {"monitor_id": "group_2"}]`.
-
-
-          It can also resolve all triggered groups with the pseudo-group `ALL_GROUPS`:
-
-          `resolve: [{"monitor_id": "ALL_GROUPS"}]`.'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  type: object
-                type: array
-          description: OK
-      summary: Resolve Monitor
-      tags:
-      - Monitors
-      x-codegen-request-body-name: body
-      x-undo:
-        type: safe
   /v0.3/traces:
     put:
       description: "Datadog\u2019s APM allows you to collect performance metrics by\
