@@ -203,7 +203,7 @@ You can [extract variables from any step of your Multistep API test](#extract-va
 
 #### Variables from pattern
 
-You can create local variables by defining their values from one of the below available builtins:
+You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.

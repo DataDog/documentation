@@ -42,7 +42,7 @@ With the following definitions:
 `<TAGS>`
 : Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag). **Note:** Tags set on spans do not count and will not be available as tags for your traces metrics.
 
-## Metric Suffix
+## Metric suffix
 
 ### Hits
 

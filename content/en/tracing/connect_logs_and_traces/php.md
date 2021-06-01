@@ -20,12 +20,12 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-## Automatically Inject Trace and Span IDs
+## Automatic injection
 
 Given the many different ways to implement logging in PHP<span class="x x-first x-last">,</span> with some completely circumventing PHP's built-in error-logging API, the Datadog PHP tracing library cannot reliably inject trace and span <span class="x x-first x-last">IDs</span> into logs automatically.
 See the section below to learn how to connect your PHP Logs and traces manually.
 
-## Manually Inject Trace and Span IDs
+## Manual injection
 
 <div class="alert alert-warning">
 Note that the function <code>\DDTrace\trace_id()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
