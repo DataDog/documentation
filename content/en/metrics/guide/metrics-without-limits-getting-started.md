@@ -59,6 +59,8 @@ Here is a simplified example of how indexed > ingested can occur when you start 
 
 
 
-[4]:/metrics/#time-and-space-aggregation[1]: /metrics/faq/metrics-without-limits/
-[2]: TODO
+
+[1]: /metrics/faq/metrics-without-limits/
+[2]: /TODO
 [3]: /account_management/rbac/permissions/?tab=ui#metrics
+[4]: /metrics/#time-and-space-aggregation
