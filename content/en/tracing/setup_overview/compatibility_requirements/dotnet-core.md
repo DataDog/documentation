@@ -25,6 +25,8 @@ further_reading:
   - .NET Core 3.1
   - .NET Core 2.1
 
+- ARM64 processors are supported for .NET 5 on Linux only
+
 - The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][1].
 
 <div class="alert alert-warning">
@@ -41,9 +43,11 @@ The .NET Tracer can instrument the following libraries automatically:
 | ADO.NET                         | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                   | `AdoNet`             |
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                  | `HttpMessageHandler` |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                              | `WebRequest`         |
+| Microsoft Message Queuing (MSMQ)| `System.Messaging` 4.0+                                                 | `Msmq`               |
 | Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                          | `StackExchangeRedis` |
 | Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                            | `ServiceStackRedis`  |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
+| Kafka                           | `Confluent.Kafka`   1.4.0+                                              | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
 | PostgreSQL                      | `Npgsql` 4.0+                                                           | `AdoNet`             |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                | `RabbitMQ`           |
