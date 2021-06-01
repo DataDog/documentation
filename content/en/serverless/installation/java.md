@@ -11,6 +11,8 @@ further_reading:
 - link: 'serverless/custom_metrics/'
   tag: "Documentation"
   text: 'Submitting Custom Metrics from Serverless Applications'
+aliases:
+    - /serverless/datadog_lambda_library/java/
 ---
 
 {{< img src="serverless/java-lambda-tracing.png" alt="Monitor Java Lambda Functions with Datadog"  style="width:100%;">}}

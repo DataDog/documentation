@@ -325,7 +325,7 @@ To combine multiple terms into a complex query, use the following Boolean operat
 : **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. 
 : **Example**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
 
-[6]: logs/search_syntax/
+[6]: /logs/search_syntax/
 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
@@ -347,7 +347,7 @@ To combine multiple terms into a complex query, use the following Boolean operat
 : **Exclusion**: the following term is NOT in the event. This operator works for strings only—use `-` in front of tags. 
 : **Example**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
 
-[7]: logs/search_syntax/
+[7]: /logs/search_syntax/
 
 {{< /site-region >}}
 
@@ -399,6 +399,6 @@ Datadog supports `@notifications`, for example:
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://app.datadoghq.eu/event/stream
 [4]: https://gov.datadoghq.com/event/stream
-[5]: logs/explorer/saved_views/
-[6]: logs/search_syntax/
+[5]: /logs/explorer/saved_views/
+[6]: /logs/search_syntax/
 [7]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

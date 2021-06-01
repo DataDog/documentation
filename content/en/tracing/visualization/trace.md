@@ -35,7 +35,7 @@ The List view aggregates [resources][4] by [service][3] and sorts them according
 
 {{< img src="tracing/visualization/trace/trace_list.png" alt="Trace list"  style="width:90%;">}}
 
-### More Information
+### More information
 
 {{< tabs >}}
 {{% tab "Span tags" %}}

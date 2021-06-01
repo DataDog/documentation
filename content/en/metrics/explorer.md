@@ -59,7 +59,7 @@ Export all graphs to a new or existing timeboard with the buttons at the bottom 
 
 ### Snapshot
 
-Create a snapshot of an individual graph by clicking the camera icon on the top right of a graph.
+Create a snapshot of an individual graph by using the share icon in the upper right. Clicking on the icon displays a dropdown menu with the **Send snaphot...** option.
 
 ## Further reading
 

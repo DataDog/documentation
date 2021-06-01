@@ -11,6 +11,8 @@ further_reading:
 - link: 'serverless/custom_metrics/'
   tag: 'Documentation'
   text: 'Submitting Custom Metrics from Serverless Applications'
+aliases:
+    - /serverless/datadog_lambda_library/ruby/
 ---
 
 ## Required setup

@@ -5076,7 +5076,7 @@ components:
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
     MonitorGroupSearchResponse:
-      description: ''
+      description: The response of a monitor group search.
       example:
         counts:
           status:
@@ -5109,7 +5109,7 @@ components:
           total_count: 2
       properties:
         counts:
-          description: ''
+          description: The counts of monitor groups per different criteria.
           properties:
             status:
               $ref: '#/components/schemas/MonitorSearchCount'
@@ -5118,7 +5118,7 @@ components:
           readOnly: true
           type: object
         groups:
-          description: ''
+          description: The list of found monitor groups.
           items:
             $ref: '#/components/schemas/MonitorGroupSearchResult'
           readOnly: true
@@ -5127,22 +5127,22 @@ components:
           $ref: '#/components/schemas/MonitorSearchResponseMetadata'
       type: object
     MonitorGroupSearchResult:
-      description: ''
+      description: A single monitor group search result.
       properties:
         group:
-          description: ''
+          description: The name of the group.
           readOnly: true
           type: string
         group_tags:
-          description: ''
+          description: The list of tags of the monitor group.
           items:
-            description: ''
+            description: One monitor group tag.
             readOnly: true
             type: string
           readOnly: true
           type: array
         last_nodata_ts:
-          description: ''
+          description: Latest timestamp the monitor group was in NO_DATA state.
           format: int64
           readOnly: true
           type: integer
@@ -5366,7 +5366,7 @@ components:
         type: object
       type: array
     MonitorSearchResponse:
-      description: ''
+      description: The response form a monitor search.
       example:
         counts:
           muted:
@@ -5393,19 +5393,15 @@ components:
         monitors:
         - classification: metric
           creator:
-            handle: xxxx@datadoghq.com
-            id:
-              handle: xxxx@datadoghq.com
-              id: 1234
-              name: xxxx@datadoghq.com
-            name: xxxx@datadoghq.com
+            handle: john@datadoghq.com
+            name: John Doe
           id: 2699850
           last_triggered_ts: null
           metrics:
           - system.cpu.user
           name: Cassandra CPU is high on {{host.name}} in {{availability-zone.name}}
           notifications:
-          - handle: xxxx@datadoghq.com
+          - handle: jane@datadoghq.com
             name: Jane Doe
           org_id: 1234
           scopes:
@@ -5417,7 +5413,7 @@ components:
           type: metric alert
       properties:
         counts:
-          description: ''
+          description: The counts of monitors per different criteria.
           properties:
             muted:
               $ref: '#/components/schemas/MonitorSearchCount'
@@ -5432,14 +5428,14 @@ components:
         metadata:
           $ref: '#/components/schemas/MonitorSearchResponseMetadata'
         monitors:
-          description: ''
+          description: The list of found monitors.
           items:
             $ref: '#/components/schemas/MonitorSearchResult'
           readOnly: true
           type: array
       type: object
     MonitorSearchResponseMetadata:
-      description: ''
+      description: Metadata about the response.
       properties:
         page:
           description: The page to start paginating from.
@@ -5466,26 +5462,26 @@ components:
       description: Holds search results.
       properties:
         classification:
-          description: ''
+          description: Classification of the monitor.
           readOnly: true
           type: string
         creator:
           $ref: '#/components/schemas/Creator'
         id:
-          description: ID of this monitor.
+          description: ID of the monitor.
           format: int64
           readOnly: true
           type: integer
         last_triggered_ts:
-          description: Latest timestamp the monitor group triggered.
+          description: Latest timestamp the monitor triggered.
           format: int64
           nullable: true
           readOnly: true
           type: integer
         metrics:
-          description: ''
+          description: Metrics used by the monitor.
           items:
-            description: ''
+            description: A metric used by the monitor.
             readOnly: true
             type: string
           readOnly: true
@@ -5501,7 +5497,7 @@ components:
           readOnly: true
           type: array
         org_id:
-          description: ''
+          description: The ID of the organization.
           format: int64
           readOnly: true
           type: integer
@@ -5524,9 +5520,9 @@ components:
         status:
           $ref: '#/components/schemas/MonitorOverallStates'
         tags:
-          description: Tags associated to your monitor.
+          description: Tags associated with the monitor.
           items:
-            description: ''
+            description: A tag associated with the monitor.
             readOnly: true
             type: string
           readOnly: true
@@ -5535,7 +5531,7 @@ components:
           $ref: '#/components/schemas/MonitorType'
       type: object
     MonitorSearchResultNotification:
-      description: ''
+      description: A notification triggered by the monitor.
       properties:
         handle:
           description: The email address that received the notification.
@@ -8994,8 +8990,6 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAPIStep'
           type: array
-      required:
-      - assertions
       type: object
     SyntheticsAPITestResultData:
       description: Object containing results for your Synthetic API test.
@@ -9628,6 +9622,9 @@ components:
         example:
           description: Example for the variable.
           type: string
+        id:
+          description: ID of the variable for global variables.
+          type: string
         name:
           description: Name of the variable.
           example: VARIABLE_NAME
@@ -9638,16 +9635,17 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsConfigVariableType'
       required:
-      - example
       - type
       - name
       type: object
     SyntheticsConfigVariableType:
       description: Type of the configuration variable.
       enum:
+      - global
       - text
       type: string
       x-enum-varnames:
+      - GLOBAL
       - TEXT
     SyntheticsCoreWebVitals:
       description: Core Web Vitals attached to a browser test step.
@@ -9889,6 +9887,15 @@ components:
             the value will not be present if the variable is secure.'
           example: example-value
           type: string
+      type: object
+    SyntheticsListGlobalVariablesResponse:
+      description: Object containing an array of Synthetic global variables.
+      properties:
+        variables:
+          description: Array of Synthetic global variables.
+          items:
+            $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          type: array
       type: object
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
@@ -10289,8 +10296,6 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsBrowserVariable'
           type: array
-      required:
-      - assertions
       type: object
     SyntheticsTestDetails:
       description: Object containing details about your Synthetic test.
@@ -11158,6 +11163,11 @@ components:
           type: string
         public_id:
           description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the usage attribution tag configuration and the
+            selected tags in the format `<source_org_name>:<selected tag 1>-<selected
+            tag 2>-<selected tag 3>`.
           type: string
         tags:
           $ref: '#/components/schemas/UsageAttributionTagNames'
@@ -21419,7 +21429,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -21456,7 +21466,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 19
+      x-menu-order: 20
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -21488,7 +21498,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: idempotent
     get:
@@ -21558,7 +21568,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 22
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests:
@@ -21634,7 +21644,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         operationId: TODO
         parameters: []
@@ -22149,7 +22159,7 @@ paths:
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: safe
     put:
@@ -22206,7 +22216,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -22368,6 +22378,28 @@ paths:
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
+    get:
+      description: Get the list of all Synthetics global variables.
+      operationId: ListGlobalVariables
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsListGlobalVariablesResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get all global variables
+      tags:
+      - Synthetics
+      x-menu-order: 15
+      x-undo:
+        type: safe
     post:
       description: Create a Synthetics global variable.
       operationId: CreateGlobalVariable
@@ -22401,7 +22433,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -22443,7 +22475,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
-      x-menu-order: 18
+      x-menu-order: 19
       x-undo:
         type: idempotent
     get:
@@ -22478,7 +22510,7 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         type: safe
     put:
@@ -22521,7 +22553,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:

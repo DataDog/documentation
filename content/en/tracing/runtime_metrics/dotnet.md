@@ -20,13 +20,13 @@ further_reading:
       text: 'Monitor .NET runtime metrics with Datadog'
 ---
 
-## Runtime Metrics Compatibility
+## Runtime metrics compatibility
 
 - .NET Framework 4.5+ 
 - .NET Core 3.1
 - .NET 5
  
-## Automatic Configuration
+## Automatic configuration
 
 Enable runtime metrics collection in the .NET Tracer 1.23.0+ with the `DD_RUNTIME_METRICS_ENABLED=true` environment variable.
 
@@ -47,7 +47,7 @@ The following metrics are collected by default after enabling .NET metrics.
 
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default .NET Runtime Dashboard][6] with the `service` and `runtime-id` tags that are applied to these metrics.
 
-##  Additional permissions for IIS
+## Additional permissions for IIS
 
 On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the **Performance Monitoring Users** group to access counter data.
 

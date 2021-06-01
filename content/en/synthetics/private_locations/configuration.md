@@ -27,20 +27,18 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 **Note:** Arguments set in the launch command have precedence over the configuration file. However, these options are not stored and are consequently only prevalent for a given launch.
 
-## Configuration Options
+## Configuration options
 
-### Datadog Site Configuration
-
+### Datadog site configuration
 
 `site`
 : **Type**: String <br>
 **Default**: `datadoghq.com`<br>
 Datadog site from which the private location pulls the test configuration and pushes the test results. Your `site` is {{< region-param key="dd_site" code="true" >}}.
 
-### DNS Configuration 
+### DNS configuration
 
 The two below parameters can be used to customize DNS resolution on your **API tests**:
-
 
 `dnsUseHost`
 : **Type**: Boolean <br>
@@ -54,8 +52,7 @@ DNS servers IPs to use in given order (e.g., `--dnsServer="8.8.4.4" --dnsServer=
 
 On **browser tests**, the DNS resolution is done directly by the browser, which usually reads DNS servers from the host. Alternatively, you can configure it at the container level (e.g., using the `--dns` flag on [Docker][1], or `dnsConfig.nameservers` on [Kubernetes][2]).
 
-### Reserved IPs Configuration
-
+### Reserved IPs configuration
 
 `enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
@@ -74,8 +71,7 @@ Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges b
 
 **Note:** The `whitelistedRange` and `blacklistedRange` parameters are now deprecated and should be replaced by the above listed ones.
 
-### Proxy Configuration
-
+### Proxy configuration
 
 `proxyDatadog`
 : **Type**: String <br>
@@ -94,8 +90,7 @@ Discard SSL errors when private location is using a proxy to send requests to Da
 
 **Note:** The `proxy` parameter is now deprecated and should be replaced by `proxyDatadog`.
 
-### Advanced Configuration
-
+### Advanced configuration
 
 `concurrency`
 : **Type**: Number <br>
@@ -107,14 +102,13 @@ Maximum number of tests executed in parallel.
 **Default**: `60000`<br>
 Maximum test execution duration for API tests (in milliseconds).
 
-## Private Root Certificates
+## Private root certificates
 
 You can upload custom root certificates to your private locations to have your API and Browser tests perform SSL handshake using your own `.pem` files. When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs`, the same way your private location configuration file is mounted. These certificates are then considered trusted CA and used as such at test runtime.
 
 **Note**: This feature is supported for versions 1.5.3+ of the private location Docker image.
 
-## Private Locations Admin
-
+## Private locations admin
 
 `config`
 : **Type**: String <br>

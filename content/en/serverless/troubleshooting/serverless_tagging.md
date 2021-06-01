@@ -5,6 +5,8 @@ further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/#aws-lambda-functions"
   tag: "Documentation"
   text: "Unified Service Tagging"
+aliases:
+    - /serverless/serverless_tagging/
 ---
 
 {{< img src="serverless/serverless_tagging.mp4" video="true" alt="Unified Serverless Tagging" >}}
@@ -24,7 +26,7 @@ With these tags, you can:
 
 To tag your serverless application with `env`, `service` and `version`, see the [unified service tagging documentation][1].
 
-**Note**: Lambda function names should adhere to [Datadog's tagging convention][4]. This ties all of your function's traces, logs and metrics together seamlessly.
+**Note**: Lambda function names should adhere to [Datadog's tagging convention][2]. This ties all of your function's traces, logs and metrics together seamlessly.
 
 ### The env tag
 
@@ -42,11 +44,11 @@ The default behavior for new Datadog customers is for all Lambda functions to be
 
 ### The version tag
 
-Add the `version` tag to enable [Deployment Tracking][2].
+Add the `version` tag to enable [Deployment Tracking][3].
 
 ## Organize your service map
 
-The [Service Map][3] groups services into maps by the `env` tag, and uses the `service` tag to show relationships between services and the health of their monitors. Services are represented as individual nodes on the Service Map. The color of the nodes represents the health of the associated monitors. Tag any monitor with the same `service` tag to associate.
+The [Service Map][4] groups services into maps by the `env` tag, and uses the `service` tag to show relationships between services and the health of their monitors. Services are represented as individual nodes on the Service Map. The color of the nodes represents the health of the associated monitors. Tag any monitor with the same `service` tag to associate.
 
 {{< img src="serverless/serverless_service_map.png" alt="Service Map" >}}
 
@@ -56,6 +58,6 @@ The [Service Map][3] groups services into maps by the `env` tag, and uses the `s
 
 
 [1]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[2]: /tracing/deployment_tracking/
-[3]: /tracing/visualization/services_map/
-[4]: /developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
+[2]: /developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
+[3]: /tracing/deployment_tracking/
+[4]: /tracing/visualization/services_map/
