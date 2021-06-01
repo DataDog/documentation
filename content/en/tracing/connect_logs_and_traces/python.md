@@ -20,16 +20,16 @@ further_reading:
   text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-## Automatically Inject Trace and Span IDs
+## Automatic injection
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 If you have configured your tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then `env`, `service`, and `version` will also be added automatically. Learn more about [unified service tagging][1].
 
 **Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
 
-## Manually Inject Trace and Span IDs
+## Manual injection
 
-### With Standard Library Logging
+### Standard library logging
 
 If you prefer to manually correlate your [traces][2] with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
@@ -56,7 +56,7 @@ def hello():
 hello()
 ```
 
-### Without Standard Library Logging
+### No standard library logging
 
 If you are not using the standard library `logging` module, you can use the `ddtrace.helpers.get_correlation_ids()` to inject tracer information into your logs.
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:

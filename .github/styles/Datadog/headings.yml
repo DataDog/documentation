@@ -7,11 +7,13 @@ match: $sentence
 exceptions:
   - ACLs
   - Agent
+  - Agentless
   - Agents
   - Amazon
   - Amazon Web Services
   - APIs
   - APM & Distributed Tracing
+  - App Analytics
   - AuthN
   - Autodiscovery
   - AWS Step Functions
@@ -44,7 +46,9 @@ exceptions:
   - Docker Swarm
   - Dockerfile
   - DogStatsD
+  - Envoy
   - Fargate
+  - FastCGI
   - Fluentd
   - FreeBSD
   - FreeSwitch
@@ -62,6 +66,8 @@ exceptions:
   - IdP
   - IDs
   - Incident Management
+  - Ingress Controller
+  - Internet Information Services
   - IoT
   - IPs
   - Java
@@ -77,6 +83,8 @@ exceptions:
   - Lambda@Edge
   - LaunchDarkly
   - Linux
+  - Live Analytics
+  - Live Search
   - Live Tail
   - Log Explorer
   - Log Management
@@ -115,12 +123,14 @@ exceptions:
   - RocketPants
   - Root Cause Analysis
   - Route53
+  - Ruby
   - RumMonitor
   - SafeNet
   - Security Monitoring
   - Security Signal
   - Security Signals
   - SELinux
+  - Serverless Framework
   - Service Checks
   - Siri
   - Slack
@@ -135,9 +145,11 @@ exceptions:
   - StatsD
   - sysOID
   - Terraform
+  - Tracing Without Limits
   - Trello
   - TypeScript
   - Ubuntu
+  - Unified Service Tagging
   - Unix
   - Unix Domain Socket
   - URLs
