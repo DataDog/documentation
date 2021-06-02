@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -38,7 +38,6 @@ const commonConfig = env => {
             'lang-redirects': './scripts/lang-redirects.js',
             'region-redirects': './scripts/region-redirects.js',
             'api-redirect': './scripts/api-redirect.js',
-            'main-dd-css': './styles/style.scss',
             'dd-browser-logs-rum': './scripts/components/dd-browser-logs-rum.js',
             'search': './scripts/components/search.js'
         },
@@ -91,41 +90,41 @@ const commonConfig = env => {
                             options: '$'
                         }
                     ]
-                },
-                {
-                    test: /\.(sa|sc|c)ss$/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: 'style-loader',
-                            options: {
-                                sourceMap: true
-                            }
-                        },
-                        {
-                            loader: MiniCssExtractPlugin.loader
-                        },
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                sourceMap: true,
-                                url: false
-                            }
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true
-                            }
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true
-                            }
-                        }
-                    ]
                 }
+                // {
+                //     test: /\.(sa|sc|c)ss$/,
+                //     exclude: /node_modules/,
+                //     use: [
+                //         {
+                //             loader: 'style-loader',
+                //             options: {
+                //                 sourceMap: true
+                //             }
+                //         },
+                //         {
+                //             loader: MiniCssExtractPlugin.loader
+                //         },
+                //         {
+                //             loader: 'css-loader',
+                //             options: {
+                //                 sourceMap: true,
+                //                 url: false
+                //             }
+                //         },
+                //         {
+                //             loader: 'postcss-loader',
+                //             options: {
+                //                 sourceMap: true
+                //             }
+                //         },
+                //         {
+                //             loader: 'sass-loader',
+                //             options: {
+                //                 sourceMap: true
+                //             }
+                //         }
+                //     ]
+                // }
             ]
         },
 

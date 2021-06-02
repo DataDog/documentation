@@ -2,14 +2,12 @@
   font-size: 16px;
 }
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins/breakpoints";
-@import "~bootstrap/scss/mixins/grid";
-@import "~bootstrap/scss/utilities/display";
-@import "~bootstrap/scss/utilities/spacing";
-
-
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/mixins/breakpoints';
+@import '../../node_modules/bootstrap/scss/mixins/grid';
+@import '../../node_modules/bootstrap/scss/utilities/display';
+@import '../../node_modules/bootstrap/scss/utilities/spacing';
 
 /* Bootstrap variable customization here */
 $ddpurple:    #632CA6;
@@ -73,7 +71,6 @@ $h6-font-size: 1rem;
 $headings-font-weight:600;
 
 $container-max-widths: (
-  // sm: 540px,
   md: 750px,
   lg: 970px,
   xl: 1170px
@@ -110,11 +107,6 @@ h2{
   &:focus,
   &.focus {
     box-shadow: none;
-  }
-
-  &.disabled,
-  &:disabled {
-
   }
 
   &:not([disabled]):not(.disabled):active,

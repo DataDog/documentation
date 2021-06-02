@@ -1,0 +1,12 @@
+{{ $options := (dict "enableSourceMap" true) }}
+{{ $isLocalServer := .Site.IsServer }}
+{{ $inputStyleFile := "styles/style.scss" }}
+{{ $outputStyles := "" }}
+
+{{ if $isLocalServer }}
+    {{ $outputStyles = resources.Get "styles/style.scss" | toCSS $options }}
+{{ else }}
+    {{ $outputStyles = resources.Get "styles/style.scss" | toCSS $options | postCSS | minify | fingerprint | resources.PostProcess }}
+{{ end }}
+
+<link rel="stylesheet" href="{{ $outputStyles.Permalink }}">
