@@ -4084,18 +4084,6 @@ api:
         - MuteAllMonitors
       unstable: []
       order: 0
-  - name: Resolve Monitor
-    url: '#resolve-monitor'
-    identifier: resolve-monitor
-    parent: monitors
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - ResolveMonitor
-      unstable: []
-      order: 0
   - name: Unmute a monitor
     url: '#unmute-a-monitor'
     identifier: unmute-a-monitor
