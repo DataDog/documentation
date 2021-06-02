@@ -43,11 +43,9 @@ The .NET Tracer can instrument the following libraries automatically:
 | ADO.NET                         | built-in                       | `AdoNet`             |
 | HttpClient / HttpMessageHandler | built-in                       | `HttpMessageHandler` |
 | WebClient / WebRequest          | built-in                       | `WebRequest`         |
-| Microsoft Message Queuing (MSMQ)| `System.Messaging` 4.0+        | `Msmq`               |
 | Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+ | `StackExchangeRedis` |
 | Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+   | `ServiceStackRedis`  |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+     | `ElasticsearchNet`   |
-| Kafka                           | `Confluent.Kafka`   1.4.0+     | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+   | `MongoDb`            |
 | PostgreSQL                      | `Npgsql` 4.0+                  | `AdoNet`             |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+       | `RabbitMQ`           |
