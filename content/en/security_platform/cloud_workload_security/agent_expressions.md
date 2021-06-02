@@ -47,9 +47,6 @@ Triggers are events that correspond to types of activity seen by the system. The
 | `mount`              | File             | Mount a filesystem                    | 7.27          |
 | `unmount`            | File             | Unmount a filesystem                  | 7.27          |
 
-## Attributes
-Attributes can be used to specify exact data and behavior for a rule. Attributes are based on [CWS event attributes][1].
-
 ## Operators
 SECL operators are used to combine event attributes together into a full expression. The following operators are available:
 
