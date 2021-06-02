@@ -29,6 +29,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
   tag: "Blog"
   text: "Add Dashboard widgets to your clipboard"
+- link: "https://www.datadoghq.com/blog/datadog-dashboards/"
+  tag: "Blog"
+  text: "The new Datadog dashboards experience"
 ---
 
 ## Overview
@@ -96,19 +99,37 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 ## New dashboard
 
-To create a dashboard, click on the **New Dashboard +** button in the upper right. Enter a dashboard name and choose between creating a [timeboard][3] or a [screenboard][4].
+<div class="alert alert-warning">The new dashboard functionality is in public beta.</div>
 
-### Screenboard vs. timeboard
+To create a dashboard, click on the **New Dashboard +** button in the upper right. Enter a dashboard name and choose a layout option.
 
-Datadog offers two types of dashboards: [screenboards][4] and [timeboards][3]. To more clearly understand the differences between the two, consider the following:
+{{< img src="dashboards/create-dashboard.jpeg" alt="Adding a new dashboard"  style="width:70%;">}}
 
-|                            | Timeboards                            | Screenboards                              |
-|----------------------------|---------------------------------------|-------------------------------------------|
-| Time scope                 | All graphs share the same time scope. | Graphs can have individual time scopes.   |
-| Layout                     | Graphs are displayed in a fixed grid. | Graphs are placed anywhere on the canvas. |
-| Share graphs individually  | Yes                                   | No                                        |
-| Share the entire dashboard | Yes                                   | Yes                                       |
-| Sharing can be read-only   | Yes                                   | Yes                                       |
+### Dashboard layout
+
+<div class="alert alert-warning">The dashboard layout functionality is in public beta.</div>
+
+The Dashboard layout uses a flexible, grid-based system that combines the simplicity of Timeboards and the control of Screenboards. To understand the difference between layout options, consider the following:
+
+#### Dashboards, Timeboards, and Screenboards
+ 
+|                                                                   | Dashboards | Timeboards                                            | Screenboards |
+|-------------------------------------------------------------------|------------|-------------------------------------------------------|--------------|
+| Widgets maintain position and can be flexibly sized               | Yes        | No                                                    | Yes          |
+| Widgets scale depending on screen-size                            | Yes        | Yes                                                   | No           |
+| Group actions (copy, move, delete) available on multiple widgets  | Yes        | No                                                    | Yes          |
+| “Group” supported                                                 | Yes        | Yes                                                   | No           |
+| All widget types supported                                        | Yes        | No                                                    | Yes          |
+| Graphs can have individual time scopes                            | Yes        | No                                                    | Yes          |
+| TV mode fits the entire dashboard on-screen                       | Yes        | No (dashboard scrolls in TV mode)                     | Yes          |
+| Legends are optional                                              | Yes        | No (legends appear automatically based on graph size) | Yes          |
+
+
+#### High-Density Mode
+
+High-Density Mode displays the top and bottom halves of a dashboard side-by-side for increased widget density. This mode turns on by default for large screens.
+
+{{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:70%;">}}
 
 ### Copy / import / export
 
@@ -133,7 +154,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 <div class="alert alert-warning">
 RBAC restrict access to dashboards is currently in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 
-Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][5] documentation.
+Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][3] documentation.
 
 ## Further Reading
 
@@ -141,6 +162,4 @@ Click the settings modal for the whole dashboard, and select *Permissions*. Use 
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: /help/
-[3]: /dashboards/timeboard/
-[4]: /dashboards/screenboard/
-[5]: /account_management/rbac/
+[3]: /account_management/rbac/
