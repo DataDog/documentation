@@ -5424,16 +5424,16 @@ api:
         - GetUsageFargate
       unstable: []
       order: 11
-  - name: Get hourly usage for Compliance Monitoring
-    url: '#get-hourly-usage-for-compliance-monitoring'
-    identifier: get-hourly-usage-for-compliance-monitoring
+  - name: Get hourly usage for CSPM
+    url: '#get-hourly-usage-for-cspm'
+    identifier: get-hourly-usage-for-cspm
     parent: usage-metering
     generated: true
     params:
       versions:
         - v1
       operationids:
-        - GetUsageComplianceMonitoring
+        - GetUsageCloudSecurityPostureManagement
       unstable: []
       order: 30
   - name: Get billable usage across your account
@@ -5460,6 +5460,18 @@ api:
         - GetUsageLambda
       unstable: []
       order: 12
+  - name: Get hourly usage for audit logs
+    url: '#get-hourly-usage-for-audit-logs'
+    identifier: get-hourly-usage-for-audit-logs
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageAuditLogs
+      unstable: []
+      order: 31
   - name: Get Usage Attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution

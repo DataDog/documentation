@@ -11451,6 +11451,29 @@ components:
           format: double
           type: number
       type: object
+    UsageAuditLogsHour:
+      description: Audit logs usage for a given organization for a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        lines_indexed:
+          description: The total number of audit logs lines indexed during a given
+            hour.
+          format: int64
+          type: integer
+      type: object
+    UsageAuditLogsResponse:
+      description: Response containing the audit logs usage for each hour for a given
+        organization.
+      properties:
+        usage:
+          description: Get hourly usage for audit logs.
+          items:
+            $ref: '#/components/schemas/UsageAuditLogsHour'
+          type: array
+      type: object
     UsageBillableSummaryBody:
       description: Response with properties for each aggregated usage type.
       properties:
@@ -11564,18 +11587,18 @@ components:
             $ref: '#/components/schemas/UsageBillableSummaryHour'
           type: array
       type: object
-    UsageComplianceHour:
-      description: Compliance Monitoring usage for a given organization for a given
-        hour.
+    UsageCloudSecurityPostureManagementHour:
+      description: Cloud Security Posture Management usage for a given organization
+        for a given hour.
       properties:
-        compliance_container_count:
-          description: The total number of compliance container hours from the start
-            of the given hour's month until the given hour.
+        container_count:
+          description: The total number of Cloud Security Posture Management containers
+            during a given hour.
           format: int64
           type: integer
-        compliance_host_count:
-          description: The total number of compliance hosts hours from the start of
-            the given hour's month until the given hour.
+        host_count:
+          description: The total number of Cloud Security Posture Management hosts
+            during a given hour.
           format: int64
           type: integer
         hour:
@@ -11583,14 +11606,14 @@ components:
           format: date-time
           type: string
       type: object
-    UsageComplianceResponse:
-      description: The response containing the Compliance Monitoring usage for each
-        hour for a given organization.
+    UsageCloudSecurityPostureManagementResponse:
+      description: The response containing the Cloud Security Posture Management usage
+        for each hour for a given organization.
       properties:
         usage:
-          description: Get hourly usage for Compliance Monitoring.
+          description: Get hourly usage for Cloud Security Posture Management.
           items:
-            $ref: '#/components/schemas/UsageComplianceHour'
+            $ref: '#/components/schemas/UsageCloudSecurityPostureManagementHour'
           type: array
       type: object
     UsageCustomReportsAttributes:
@@ -12258,6 +12281,11 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        audit_logs_lines_indexed_sum:
+          description: Shows the sum of audit logs lines indexed over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for all organizations.
@@ -12283,14 +12311,6 @@ components:
             current date for all organizations.
           format: int64
           type: integer
-        compliance_container_count_sum:
-          description: Shows the sum of compliance containers over all hours in the
-            current date for all organizations.
-        compliance_host_count_sum:
-          description: Shows the sum of compliance hosts over all hours in the current
-            date for all organizations.
-          format: int64
-          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -12299,6 +12319,21 @@ components:
         container_hwm:
           description: Shows the high-water mark of all distinct containers over all
             hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_container_avg:
+          description: Shows the average number of Cloud Security Posture Management
+            containers over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_container_hwm:
+          description: Shows the high-water mark of Cloud Security Posture Management
+            containers over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         custom_ts_avg:
@@ -12456,6 +12491,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        audit_logs_lines_indexed_sum:
+          description: Shows the sum of all audit logs lines indexed over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for the given org.
@@ -12481,14 +12521,6 @@ components:
             current date for the given org.
           format: int64
           type: integer
-        compliance_container_agg_sum:
-          description: Shows the sum of all compliance containers over all hours in
-            the current date for the given org.
-        compliance_host_agg_sum:
-          description: Shows the sum of all compliance hosts over all hours in the
-            current date for the given org.
-          format: int64
-          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for the given org.
@@ -12497,6 +12529,21 @@ components:
         container_hwm:
           description: Shows the high-water mark of all distinct containers over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_container_avg:
+          description: Shows the average number of Cloud Security Posture Management
+            containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_container_hwm:
+          description: Shows the high-water mark of Cloud Security Posture Management
+            containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         custom_ts_avg:
@@ -12652,6 +12699,11 @@ components:
             hours in the current months for all organizations.
           format: int64
           type: integer
+        audit_logs_lines_indexed_agg_sum:
+          description: Shows the sum of all audit logs lines indexed over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
         aws_host_top99p_sum:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current months for all organizations.
@@ -12682,14 +12734,6 @@ components:
             current months for all organizations.
           format: int64
           type: integer
-        compliance_container_agg_sum:
-          description: Shows the sum of all compliance containers over all hours in
-            the current months for all organizations.
-        compliance_host_agg_sum:
-          description: Shows the sum of all compliance hosts over all hours in the
-            current months for all organizations.
-          format: int64
-          type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
             in the current months for all organizations.
@@ -12698,6 +12742,22 @@ components:
         container_hwm_sum:
           description: Shows the sum of the high-water marks of all distinct containers
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_container_avg_sum:
+          description: Shows the average number of Cloud Security Posture Management
+            containers over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_container_hwm_sum:
+          description: Shows the sum of the the high-water marks of Cloud Security
+            Posture Management containers over all hours in the current months for
+            all organizations.
+          format: int64
+          type: integer
+        cspm_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
@@ -22905,6 +22965,54 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/usage/audit_logs:
+    get:
+      description: Get hourly usage for audit logs.
+      operationId: GetUsageAuditLogs
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageAuditLogsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for audit logs
+      tags:
+      - Usage Metering
+      x-menu-order: 31
+      x-undo:
+        type: safe
   /api/v1/usage/aws_lambda:
     get:
       description: Get hourly usage for lambda.
@@ -22989,10 +23097,10 @@ paths:
       x-menu-order: 19
       x-undo:
         type: safe
-  /api/v1/usage/compliance-monitoring:
+  /api/v1/usage/cspm:
     get:
-      description: Get hourly usage for Compliance Monitoring.
-      operationId: GetUsageComplianceMonitoring
+      description: Get hourly usage for Cloud Security Posture Management (CSPM).
+      operationId: GetUsageCloudSecurityPostureManagement
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
           for usage beginning at this hour.'
@@ -23017,7 +23125,7 @@ paths:
           content:
             application/json;datetime-format=rfc3339:
               schema:
-                $ref: '#/components/schemas/UsageComplianceResponse'
+                $ref: '#/components/schemas/UsageCloudSecurityPostureManagementResponse'
           description: OK
         '400':
           content:
@@ -23031,7 +23139,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get hourly usage for Compliance Monitoring
+      summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
       x-menu-order: 30
