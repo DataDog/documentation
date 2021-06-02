@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /tracing/serverless_functions
   - /tracing/setup_overview/serverless_functions/
+  - /serverless/troubleshooting/serverless_apm_metrics/
 further_reading:
 - link: "/tracing/"
   tag: "Documentation"
