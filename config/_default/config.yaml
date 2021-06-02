@@ -32,9 +32,6 @@ markup:
   highlight:
     guessSyntax: true
 
-# so we can access images as resources
-# assetDir: "static"
-
 module:
   mounts:
     # default mounts
@@ -54,6 +51,8 @@ module:
     - source: data
       target: data
     - source: static
+      target: assets
+    - source: assets
       target: assets
     - source: i18n
       target: i18n
