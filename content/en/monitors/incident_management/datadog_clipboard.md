@@ -46,7 +46,9 @@ The Clipboard holds a maximum of 20 signals. Remove signals by deleting them ind
 
 ## Exporting
 
-Items on the Clipboard can be exported to dashboards, notebooks, or incidents. `Shift + Click` to select multiple items. In the export menu, choose a new export destination, or search through existing dashboards, notebooks, and incidents. Only [supported graphs][1] can be exported to Notebooks.
+Items on the Clipboard can be exported to Dashboards, Notebooks, or Incidents using keyboard shortcuts or the export menu. To copy an individual signal, hover over it and use `Cmd/Ctrl + C` to copy, and paste it into a dashboard or notebook with `Cmd/Ctrl + V`. To copy multiple signals, use  `Shift + Click` to select graphs and links, and use `Cmd/Ctrl + C` to copy them.
+
+Alternatively, export your selection to a new or existing dashboard, notebook, or incident using the export menu. Only [supported graphs][1] can be exported to Notebooks.
 
 {{< img src="monitors/incidents/exporting.png" alt="Export from the Clipboard"  style="width:80%;">}}
 
