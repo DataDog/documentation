@@ -76,7 +76,7 @@ Set up the [GCP integration][1] for the project that holds your GCS storage buck
 
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to. Be careful not to make your bucket publicly readable.
 
-**Note:** Do not set [Object Lock][3]: in some rare cases (typically a timeout), the last data needs to be rewritten.
+**Note:** Do not set [Object Lock][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
@@ -88,7 +88,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 * Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** access tier.
 * Create a **container** service into that storage account. Please take a note of the container name as you will need to add this in Datadog Archive Page.
 
-**Note:** Do not set [immutability policies][3]: in some rare cases (typically a timeout), the last data needs to be rewritten.
+**Note:** Do not set [immutability policies][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 [2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
@@ -99,7 +99,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives to. Under "Choose how to control access to objects", select "Set object-level and bucket-level permissions."
 
-**Note:** Do not add [retention policy][3]: in some rare cases (typically a timeout), the last data needs to be rewritten.
+**Note:** Do not add [retention policy][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
