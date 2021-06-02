@@ -2,21 +2,23 @@
 title: Java Tests
 kind: documentation
 further_reading:
-    - link: "/ci/filename/"
+    - link: "/continuous_integration/explore_tests"
       tag: "Documentation"
-      text: "linktext"
+      text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting CI"
 ---
 
-## Supported Test frameworks
+## Compatibility
 
+Supported Test frameworks:
 * JUnit 4.10+
 * JUnit 5.3+
 * TestNG 6.4+
+* Frameworks that are based on JUnit, such as Spock Framework and Cucumber-Junit
 
-Additionally, we support the test frameworks that are based on JUnit, such as Spock Framework and Cucumber-Junit.
-
-## Supported CI providers
-
+Supported CI providers:
 * Appveyor
 * Azure Pipelines
 * BitBucket

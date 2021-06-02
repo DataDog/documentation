@@ -2,20 +2,23 @@
 title: JavaScript Tests
 kind: documentation
 further_reading:
-    - link: "/ci/filename/"
+    - link: "/continuous_integration/explore_tests"
       tag: "Documentation"
-      text: "linktext"
+      text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting CI"
 ---
 
-## Supported test frameworks
+## Compatibility
 
+Supported test frameworks:
 * Jest >=24.8.0
   * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
   * Only [`jest-circus`][1] is supported as a `testRunner`. 
 * Mocha >=5.2.0
 
-## Supported CI providers
-
+Supported CI providers:
 * Appveyor
 * Azure Pipelines
 * BitBucket

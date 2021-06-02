@@ -1,10 +1,18 @@
 ---
 title: Continuous Integration Visibility
 kind: documentation
+further_reading:
+    - link: "/continuous_integration/explore_tests"
+      tag: "Documentation"
+      text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting CI"
 ---
 
-## Supported CI providers
+## Compatibility
 
+Supported CI providers:
 * Appveyor
 * Azure Pipelines
 * BitBucket
@@ -80,5 +88,9 @@ Configure the `junit` command with following environment variables:
 ## Optional dependencies
 
 - [`git`][1] is used for extracting repository metadata.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://git-scm.com/downloads

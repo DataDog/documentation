@@ -2,25 +2,27 @@
 title: .NET Tests
 kind: documentation
 further_reading:
-    - link: "/ci/filename/"
+    - link: "/continuous_integration/explore_tests"
       tag: "Documentation"
-      text: "linktext"
+      text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting CI"
 ---
 
-## Supported .NET versions
+## Compatibility
 
+Supported .NET versions:
 * .NET Core 2.1+
 * .NET Core 3.0+
 * .NET 5.0+
 
-## Supported Test frameworks
-
+Supported test frameworks:
 * xUnit 2.2+
 * NUnit 3.0+
 * MsTest V2 14+ (experimental)
 
-## Supported CI providers
-
+Supported CI providers:
 * Appveyor
 * Azure Pipelines
 * BitBucket
