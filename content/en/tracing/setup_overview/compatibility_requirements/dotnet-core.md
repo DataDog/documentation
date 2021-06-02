@@ -25,7 +25,12 @@ further_reading:
   - .NET Core 3.1
   - .NET Core 2.1
 
-- ARM64 processors are supported for .NET 5 on Linux only.
+- .NET Tracer supports the above runtimes on the following processor architectures
+  - Windows x86 (`win-x86`)
+  - Windows x64 (`win-x64`)
+  - Linux x64 (`linux-x64`)
+  - Alpine Linux x64 (`linux-musl-x64`)
+  - Linux ARM64 (`linux-arm64`) Added in version 1.27.0, automatic instrumentation only supported on .NET 5.
 
 - The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][1].
 
