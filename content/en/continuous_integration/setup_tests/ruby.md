@@ -30,8 +30,9 @@ To install the Ruby tracer:
 1. Add the `ddtrace` gem to your `Gemfile` using the specified branch:
 
     ```ruby
-    source 'https://rubygems.org'
-    gem 'ddtrace'
+    gem 'ddtrace', 
+        :git => "git://github.com/DataDog/dd-trace-rb.git", 
+        :branch => "feature/test_mode"
     ```
 2. Install the gem by running `bundle install`
 
@@ -45,10 +46,11 @@ To activate your integration:
 
 ```ruby
 require 'cucumber'
-require 'ddtrace'
+require 'datadog/ci'
 
 # Configure default Cucumber integration
 Datadog.configure do |c|
+  c.ci_mode.enabled = true
   c.use :cucumber, options
 end
 
@@ -84,21 +86,12 @@ To activate your integration, add this to the `spec_helper.rb` file:
 
 ```ruby
 require 'rspec'
-require 'ddtrace'
+require 'datadog/ci'
 
 # Configure default RSpec integration
 Datadog.configure do |c|
+  c.ci_mode.enabled = true
   c.use :rspec, options
-  c.tracer writer_options: { buffer_size: 5000, flush_interval: 0.5 }
-end
-```
-
-If you have many fast unit tests, you will need to adjust flushing settings. Enable `health_metrics` to send a metric called `datadog.tracer.queue.dropped.traces`.
-
-```ruby
-Datadog.configure do |c|
-  c.use :rspec, options
-  c.diagnostics.health_metrics.enabled = true
 end
 ```
 
