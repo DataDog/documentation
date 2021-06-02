@@ -25,7 +25,7 @@ further_reading:
   - .NET Core 3.1
   - .NET Core 2.1
 
-- .NET Tracer supports the above runtimes on the following processor architectures
+- .NET Tracer supports the following processor architectures
   - Windows x86 (`win-x86`)
   - Windows x64 (`win-x64`)
   - Linux x64 (`linux-x64`)
