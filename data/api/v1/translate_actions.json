@@ -1050,12 +1050,6 @@
     "description": "Check if the API key (not the APP key) is valid. If invalid, a 403 is returned.",
     "summary": "Validate API key"
   },
-  "ResolveMonitor": {
-    "description": "Resolve monitor.",
-    "summary": "Resolve Monitor",
-    "request_description": "Array of group(s) to resolve for a given monitor_id, e.g.:\n`{\"monitor_id\": \"group_to_resolve\"}`.\n\nIt supports multiple groups per monitor, e.g.:\n`resolve: [{\"monitor_id\": \"group_1\"}, {\"monitor_id\": \"group_2\"}]`.\n\nIt can also resolve all triggered groups with the pseudo-group `ALL_GROUPS`:\n`resolve: [{\"monitor_id\": \"ALL_GROUPS\"}]`.",
-    "request_schema_description": ""
-  },
   "SubmitTraces": {
     "description": "Datadog’s APM allows you to collect performance metrics by tracing your code\nto determine which parts of your application are slow or inefficient.\n\nTracing data is sent to the Datadog Agent via an HTTP API.\nWe provide some [official libraries](https://docs.datadoghq.com/tracing/#instrument-your-application)\nthat simplify sending metrics to the Datadog Agent, however you may want to\ninteract directly with the API to instrument applications that cannot use\nthe libraries or are written in languages that don’t yet have an official\nDatadog Tracing library.",
     "summary": "Send traces",
