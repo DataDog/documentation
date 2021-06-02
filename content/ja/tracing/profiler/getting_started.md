@@ -21,7 +21,7 @@ Profiler は、次のトレースライブラリに同梱されています。�
 
 **Node**、**Ruby**、**PHP**、**.NET** プロファイラーの非公開ベータ版が利用可能になった場合に通知するには、[こちらから新規登録][1]してください。
 
-{{< programming-lang-wrapper langs="java,python,go" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
 {{< programming-lang lang="java" >}}
 
 Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profiler ライブラリは、OpenJDK 11 以降、Oracle Java 11以降、[OpenJDK 8 (バージョン 8u262以降)][2]、Zulu Java 8 以降 (マイナーバージョン 1.8.0_212 以降)でサポートされています。Scala、Groovy、Kotlin、Clojure など、JVM ベースのすべての言語がサポートされています。アプリケーションのプロファイリングを開始するには、
@@ -249,6 +249,79 @@ Datadog Profiler には Go 1.12 以降が必要です。アプリケーション
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
 [6]: /ja/tracing/visualization/#services
 [7]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+<div class="alert alert-warning">
+Datadog Ruby Profiler は現在はベータ版です。本番環境にデプロイする前に、安全な環境でprofilerの確認をすることを推奨します。
+</div>
+
+Datadog Profiler には MRI Ruby 2.1 以降が必要です。**Wall time profiling はすべての環境（macOS と Windows も含む）で使用できます。 ただし、 CPU time profiles は現在はLinux環境のみ使用可能です**. アプリケーションのプロファイリングを開始するには、
+
+1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][1] 以降または [6.20.2][1] 以降にアップグレードしてください。
+
+2.  `ddtrace` と `google-protobuf` を `Gemfile` 又は `gems.rb` に追加します。
+
+    ```ruby
+    gem 'ddtrace'
+    gem 'google-protobuf', '~> 3.0'
+    ```
+
+    **注**: `ddtrace` のバージョン 0.49 以降で Profiler を使用できます.
+
+2. `bundle install` で gem をインストールします.
+
+3. 環境変数を設定して profiler を有効にできます:
+
+    ```shell
+    DD_PROFILING_ENABLED=true
+    DD_ENV=prod
+    DD_SERVICE=my-web-app
+    DD_VERSION=1.0.3
+    ```
+
+    または、以下のように configuration ブロックでも有効にできます:
+
+    ```ruby
+    Datadog.configure do |c|
+      # This will enable the profiler
+      c.profiling.enabled = true
+      c.env = 'prod'
+      c.service = 'my-web-app'
+      c.version = '1.0.3'
+    end
+    ```
+
+    **注**
+    Rails applications の場合、 `config/initializers/datadog.rb` に上記の configuration ブロックを追加することもできます.
+
+
+4.  Ruby application の起動コマンドに `ddtracerb exec` を追加します:
+
+    ```shell
+    bundle exec ddtracerb exec ruby myapp.rb
+    ```
+
+    Rails の場合:
+
+    ```shell
+    bundle exec ddtracerb exec bin/rails s
+    ```
+
+    **注**
+
+    `ddtracerb exec` でアプリケーションを起動できない場合 (例えば Phusion Passenger web serverを使っているなどの理由で),  `config.ru` のような entry point に 以下のコードを追加することで profiler を起動できます。
+
+    ```ruby
+    require 'ddtrace/profiling/preload'
+    ```
+
+
+4. アプリケーションを起動してから 1,2 分後に profiles が [Datadog APM > Profiler page][3] に表示されます.
+
+[1]: https://app.datadoghq.com/account/settings#agent/overview
+[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[3]: https://app.datadoghq.com/profiling
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
