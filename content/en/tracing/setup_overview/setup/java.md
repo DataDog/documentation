@@ -155,7 +155,7 @@ CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
 Or on Windows, `setenv.bat`:
 
 ```text
-set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
 If a `setenv` file does not exist, create it in the `./bin` directory of the Tomcat project folder.
 
