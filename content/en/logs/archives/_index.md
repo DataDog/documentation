@@ -86,7 +86,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 {{% tab "Azure Storage" %}}
 
 * Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** access tier.
-* Create a **container** service into that storage account. Please take a note of the container name as you will need to add this in Datadog Archive Page.
+* Create a **container** service into that storage account. Take note of the container name as you will need to add this in the Datadog Archive Page.
 
 **Note:** Do not set [immutability policies][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
