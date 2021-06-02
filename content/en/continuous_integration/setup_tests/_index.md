@@ -3,7 +3,7 @@ title: Setup Tracing on CI Tests
 kind: documentation
 ---
 
-To gather test suite performance and reliability data, first set up the Agent, and then instrument your tests:
+To gather test suite results, performance, and reliability data, first set up the Agent, and then instrument your tests:
 
 {{< whatsnext desc="1. Setting up and configuring the Agent:" >}}
     {{< nextlink href="continuous_integration/setup_tests/agent" >}}Installing the Datadog Agent{{< /nextlink >}}
