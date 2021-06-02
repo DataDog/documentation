@@ -2,11 +2,10 @@
 title: Pipeline Performance
 kind: documentation
 further_reading:
-    - link: "/ci/filename/"
+    - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "linktext"
+      text: "Troubleshooting CI"
 ---
-
 
 ## Further reading
 

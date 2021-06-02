@@ -2,9 +2,13 @@
 title: Installing the Datadog Agent to Collect Tests Data
 kind: documentation
 further_reading:
-    - link: "/ci/setup_tests/containers/"
+    - link: "/continuous_integration/setup_tests/containers/"
       tag: "Documentation"
       text: "Forwarding Environment Variables for Tests in Containers"
+    - link: "/continuous_integration/setup_tests/"
+      tag: "Next step"
+      text: "Instrumenting tests in your language"
+
 ---
 
 To report test results to Datadog, the [Datadog Agent][1] is required.

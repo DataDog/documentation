@@ -2,13 +2,17 @@
 title: Ruby Tests
 kind: documentation
 further_reading:
-    - link: "/ci/filename/"
+    - link: "/continuous_integration/explore_tests"
       tag: "Documentation"
-      text: "linktext"
+      text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting CI"
 ---
 
-## Supported CI providers
+## Compatibility
 
+Supported CI providers:
 * Appveyor
 * Azure Pipelines
 * BitBucket

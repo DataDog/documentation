@@ -2,24 +2,26 @@
 title: Swift Tests
 kind: documentation
 further_reading:
-    - link: "/ci/filename/"
+    - link: "/continuous_integration/explore_tests"
       tag: "Documentation"
-      text: "linktext"
+      text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting CI"
 ---
 
-## Supported languages
+## Compatibility
 
+Supported languages:
 * Swift 5.3+
 * Objective-C 2.0+
 
-## Supported platforms
-
+Supported platforms:
 * iOS 11.0+
 * macOS 10.13+
 * tvOS 11.0+
 
-## Supported CI providers
-
+Supported CI providers:
 * Appveyor
 * Azure Pipelines
 * BitBucket
@@ -323,7 +325,8 @@ In some *very rare cases*. such as testing your own crash handler, you may want 
 
 ## Additional optional configuration
 
- - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES` or `NO` 
+For the following configuration settings:
+ - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO` 
  - `String` list variables accept a list of elements separated by `,` or `;`
 
 ### Disabling auto-instrumentation

@@ -1,10 +1,6 @@
 ---
 title: Finding Flaky Tests
 kind: guide
-further_reading:
-    - link: "/ci/filename/"
-      tag: "Documentation"
-      text: "linktext"
 ---
 
 _Flaky tests_ are tests that exhibit both a passing and failing status across multiple test runs for the same commit. If you commit some code and run it through CI, and a test fails, and you run it through CI again and the test passes, that test is unreliable as proof of quality code. 
@@ -37,7 +33,4 @@ If a flaky test has not failed in the past 30 days, it is automatically removed 
 
 3. Look at the **New Flaky** column to see the number of new flaky tests that were introduced by the latest commit. These are tests that exhibit flaky behavior and didn’t previously exist in the Flaky Tests table. 
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 

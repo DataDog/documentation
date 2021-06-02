@@ -1,10 +1,6 @@
 ---
 title: Troubleshooting CI Visibility
 kind: documentation
-further_reading:
-    - link: "/ci/filename/"
-      tag: "Documentation"
-      text: "linktext"
 ---
 
 ### I instrumented my CI provider but I don't see any data in Datadog
@@ -22,13 +18,10 @@ further_reading:
 3. For all languages except Swift, make sure the Datadog Agent is running in the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname and/or port, make sure you run your tests with the appropriate hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_AGENT_PORT` environment variables.
 4. If you still don't see any results, [contact Support][3] and we'll help you troubleshoot.
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipeline-executions
 [2]: https://app.datadoghq.com/ci/pipelines
 [3]: /help/
 [4]: https://app.datadoghq.com/ci/test-runs
 [5]: https://app.datadoghq.com/ci/test-services
-[6]: /continuous_integration/setup_tests/container/
+[6]: /continuous_integration/setup_tests/containers/

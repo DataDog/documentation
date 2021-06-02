@@ -2,9 +2,12 @@
 title: Test-First View
 kind: documentation
 further_reading:
-    - link: "/ci/filename/"
+    - link: "/continuous_integration/guides/find_flaky_tests/"
+      tag: "Guide"
+      text: "Finding Flaky Tests"
+    - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "linktext"
+      text: "Troubleshooting CI"
 ---
 
 

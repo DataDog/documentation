@@ -2,9 +2,12 @@
 title: Setup Tracing on a Jenkins Pipeline
 kind: documentation
 further_reading:
-    - link: "/ci/filename/"
+    - link: "/continuous_integration/explore_pipelines"
       tag: "Documentation"
-      text: "linktext"
+      text: "Explore Pipeline Execution Results and Performance"
+    - link: "/continuous_integration/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting CI"
 ---
 
 ## Prerequisite
