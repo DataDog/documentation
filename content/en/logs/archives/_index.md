@@ -76,25 +76,34 @@ Set up the [GCP integration][1] for the project that holds your GCS storage buck
 
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to. Be careful not to make your bucket publicly readable.
 
+**Note:** Do not set [Object Lock][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
+
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
+[3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
 
 * Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** access tier.
-* Create a **container** service into that storage account. Please take a note of the container name as you will need to add this in Datadog Archive Page. 
+* Create a **container** service into that storage account. Take note of the container name as you will need to add this in the Datadog Archive Page.
+
+**Note:** Do not set [immutability policies][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 [2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
+[3]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-immutability-policies-manage
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
 
 Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives to. Under "Choose how to control access to objects", select "Set object-level and bucket-level permissions."
 
+**Note:** Do not add [retention policy][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
+
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
+[3]: https://cloud.google.com/storage/docs/bucket-lock
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -157,9 +166,9 @@ Grant your Datadog GCP service account sufficient permissions to write your arch
 * If you’re creating a new Service Account, this can be done from the [GCP Credentials page][1].
 * If you’re updating an existing Service Account, this can be done from the [GCP IAM Admin page][2]).
 
-Add the roles under **Storage** called **Storage Object Creator** (for generating archives) and **Storage Object Viewer** (for rehydrating from archives).
+Add the role under **Storage** called **Storage Object Admin**.
 
-  {{< img src="logs/archives/gcp_role_storage_object_creator.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account." style="width:75%;">}}
+  {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Add the Storage Object Admin role to your Datadog GCP Service Account." style="width:75%;">}}
 
 
 [1]: https://console.cloud.google.com/apis/credentials
@@ -226,7 +235,7 @@ Use this optional configuration step to assign roles on that archive and restric
 
 Use this configuration optional step to:
 
-* Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.  
+* Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
 * Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
@@ -330,7 +339,7 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all the logs that Datadog ingests. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **you should check back on your storage bucket in 15 minutes** maximum to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, you may want to check your inclusion filters to make sure the query is valid and matches log events in [live tail][10]. 
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **you should check back on your storage bucket in 15 minutes** maximum to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, you may want to check your inclusion filters to make sure the query is valid and matches log events in [live tail][10].
 
 In case Datadog detects some broken configuration, the corresponding archive is highlighted in the configuration page. Check on the error icon what actions to take in order to fix it.
 
