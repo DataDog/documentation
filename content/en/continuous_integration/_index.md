@@ -10,76 +10,36 @@ further_reading:
       text: "Start exploring tests data to find and fix problem tests"
 ---
 
-Datadog Continuous Integration (CI) Visibility helps you troubleshoot failures and performance issues on tests and CI pipelines. You can trace your development workflow from the time a commit is pushed to your repository to when the pipeline is ready to be deployed.
-
-Find tests and pipelines that run slowly, or are unreliable, so you know where to focus your efforts to improve your CI environment.
-
 <div class="alert alert-info"><p>CI Visibility is in private beta. There are no billing implications for tracing pipelines and tests during this period. If you want to be added to the private beta, <a href="http://dtdg.co/ci-visibility-beta-request">fill out this form</a>.</p><p>CI Visibility is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
 </div>
 
+Datadog Continuous Integration (CI) Visibility brings together information about CI test and pipeline results _plus_ data about CI performance, trends, and reliability, all into one place. Not only does it provide developers with the ability to dig into the reasons for a test or pipeline failure, or to predict the effect a given commit will have on production CI, it also gives build engineers visibility into trends in test executions times and pipeline performance over time. 
+
+CI Visibility brings to bear the power of all your favorite Datadog tools like dashboards, alerts, and Watchdog, to communicate the health of your CI environment and to focus your efforts in improving your team's ability to deliver quality code every time.
+
+CI Visibility helps you troubleshoot test failures and broken builds, connecting the most pressing stoppages to production to the commits that caused them. With the same libraries you use to trace application performance with APM, you can instrument your development workflow code---integration tests and build pipelines---generating traces from the time a commit is pushed to your repository to when the pipeline is ready to be deployed, and similarly use the data aggregated over time to track trends in performance of tests and builds and to identify what's most important to fix.
+
 ## Gain insights into your pipelines
 
-Your pipelines appear in the [Pipelines][1] section under the CI menu.
-
-Each pipeline execution is reported as a trace, which includes stage and job information. You can list, filter, and get individual pipeline execution traces on the [Pipeline Executions][2] page. Interactively plot graphs and top lists using the [Analytics][3] section.
-
-The [Pipelines][1] page shows aggregate stats for the default branch of each pipeline, as well as the status of the latest pipeline execution. Selecting a pipeline takes you to a page with insights such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for both stages and jobs to quickly rank them in terms of duration, percentage of overall execution time, or failure rate.
-
-{{< img src="ci/ci-single-pipeline.png" alt="Details for a single pipeline"  style="width:100%;">}}
-
-CI pipeline data is available in [Dashboards][4] and [Notebooks][5].
+CI pipeline data is available in [Dashboards][1] and [Notebooks][2].
 
 ## Gain insights into your tests
 
-Your tests appear in the [Tests][6] page under the CI menu in Datadog.
+Test execution data is also available in [Dashboards][1] and [Notebooks][2]. 
 
-Each test execution is reported as a trace, which in the case of integration tests includes calls made to datastores or third party services using regular [APM instrumentation][7]. You can list, filter, and get individual test execution traces in the [Test Runs][8] tab. You can also interactively plot graphs and top lists using the [Analytics][9] tab.
 
-{{< img src="ci/ci-test-runs.png" alt="Test Runs page"  style="width:100%;">}}
-
-Test execution data is also available in [Dashboards][4] and [Notebooks][5]. The Tests page shows the _Branches_ list and the _Test Services_ list.
-
-### Branches list
-
-The [Branches][10] tab lists all branches from all Test Services that have reported test results. This tab is useful for individual developers to quickly see the status of their branches and troubleshoot test failures.
-
-In this page, filter the list to show only your branches (branches that contain at least one commit authored by you) by enabling clicking **My branches** and adding the email addresses you use in your Git configuration.
-
-Each branch and for its latest commit shows a consolidated number of tests broken down by status (which takes into account retries) and the number of new flaky tests introduced by the commit (a flaky test is defined as a test that both passes and fails on the same commit). There's also information about the wall time of the last execution, and a comparison to the average wall time of the default branch. Hovering over the commit author avatar shows detailed information about the commit.
-
-Click on a branch to see a branch dashboard showing detailed information about failing, flaky, and slow tests.
-
-### Test Services list
-
-The [Test Services][11] shows the default branch of each test service. This tab is useful for teams to understand the overall health of the service over time.
-
-This page shows the same information as the Branches list, but applied to the default branch. Click on a branch to see the default branch dashboard.
-
-### How third-party services data is shown
-
-Spans generated by third party services that are instrumented with APM and that are involved in integration tests appear in [APM][12]. You can filter spans that were generated as part of an integration test using the `Origin Service` facet and selecting the test service name used by the integration test.
 
 ## Ready to start?
 
-See [Setup Pipelines][13] and [Setup Tests][14] for instructions on setting up Datadog Agent for your CI provider and its architecture, information about CI product compatibility, and steps for instrumenting and configuring for CI data collection. Then start exploring Datadog CI Visibility views of the data with [Exploring Pipelines][15] and [Exploring Tests][16].
+See [Setup Pipelines][3] and [Setup Tests][4] for instructions on setting up Datadog Agent for your CI provider and its architecture, information about CI product compatibility, and steps for instrumenting and configuring for CI data collection. Then start exploring Datadog CI Visibility views of the data with [Exploring Pipelines][5] and [Exploring Tests][6].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/pipelines
-[2]: https://app.datadoghq.com/ci/pipeline-executions
-[3]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
-[4]: https://app.datadoghq.com/dashboard/lists
-[5]: https://app.datadoghq.com/notebook/list
-[6]: https://app.datadoghq.com/ci/test-services
-[7]: https://www.datadoghq.com/auto-instrumentation/
-[8]: https://app.datadoghq.com/ci/test-runs
-[9]: https://app.datadoghq.com/ci/test-runs?viz=timeseries
-[10]: https://app.datadoghq.com/ci/test-services?viz=branches
-[11]: https://app.datadoghq.com/ci/test-services?viz=test-services
-[12]: https://app.datadoghq.com/apm/home
-[13]: /continuous_integration/setup_pipelines/
-[14]: /continuous_integration/setup_tests/
-[15]: /continuous_integration/explore_pipelines/
-[16]: /continuous_integration/explore_tests/
+[1]: https://app.datadoghq.com/dashboard/lists
+[2]: https://app.datadoghq.com/notebook/list
+[3]: /continuous_integration/setup_pipelines/
+[4]: /continuous_integration/setup_tests/
+[5]: /continuous_integration/explore_pipelines/
+[6]: /continuous_integration/explore_tests/

@@ -91,7 +91,64 @@ pipeline {
     }
 }
 ```
+## Customization
 
+### Setting custom tags for your pipelines
+
+The Datadog plugin adds a `datadog` step that allows adding custom tags to your pipeline-based jobs.
+
+In declarative pipelines, add the step to a top-level option block:
+
+```groovy
+def DD_TEST = "bar"
+pipeline {
+    agent any
+    options {
+        datadog(tags: ["foo:bar", "bar:${DD_TEST}", "${DD_TEST}:value"])
+    }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello world."
+            }
+        }
+    }
+}
+```
+
+In scripted pipelines, wrap the relevant section with the `datadog` step:
+
+```groovy
+datadog(tags: ["foo:bar", "bar:baz"]){
+    node {
+        stage('Example') {
+            echo "Hello world."
+        }
+    }
+}
+```
+
+### Setting global custom tags
+
+You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
+
+1. Open the file `$JENKINS_HOME\org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration.xml`.
+2. Add or modify the following lines:
+
+    ```xml
+    <globalTags>global_tag:global_value,global_tag2:${SOME_ENVVAR},${OTHER_ENVVAR}:global_tagvalue</globalTags>
+    <globalJobTags>(.*?)_job_(*?)_release:someValue</globalJobTags>
+    ```
+
+    Global tags (`globalTags`)
+    : A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the master Jenkins instance.
+
+    Global job tags (`globalJobTags`)
+    : A comma-separated list of regex to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the master Jenkins instance. Tags can reference match groups in the regex using the `$` symbol.
+
+3. Restart Jenkins for the changes to take effect.
+
+**Note**: Do not use the Jenkins UI interface to configure global tags, as trace collection might be disabled when saving settings using the UI.
 
 ## Visualize pipeline data in Datadog
 

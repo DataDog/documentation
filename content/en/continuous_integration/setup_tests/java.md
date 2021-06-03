@@ -86,7 +86,7 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-surefire-plugin</artifactId>
   <configuration>
-    <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.integration.junit.enabled=true</argLine>
+    <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
   </configuration>
 </plugin>
 
@@ -94,7 +94,7 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-failsafe-plugin</artifactId>
   <configuration>
-     <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.integration.junit.enabled=true</argLine>
+     <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
   </configuration>
   <executions>
       <execution>
@@ -117,7 +117,7 @@ Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-java
 
 ```groovy
 test {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.integration.junit.enabled=true"]
+    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true"]
 }
 ```
 
@@ -162,7 +162,9 @@ To improve the Datadog Java Agent startup, follow these recommended configuratio
 
 Change the `dd.integration` property or variable from `junit` to `testng` to correspond to your test integration.
 
-**Important:** You may want to enable more integrations if you have integration tests. To enable all default integrations, leave the `DD_INTEGRATIONS_ENABLED` property unset.
+**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][6] table to create your custom setup for your integration tests.
+
+For example, to enable `OkHttp3` client request integration, add `-Ddd.integration.okhttp-3.enabled=true` to your setup.
 
 
 ## Further reading
@@ -174,3 +176,4 @@ Change the `dd.integration` property or variable from `junit` to `testng` to cor
 [3]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [4]: https://maven.apache.org/surefire/maven-failsafe-plugin/
 [5]: /tracing/setup_overview/setup/java/?tab=containers#configuration
+[6]: /tracing/setup_overview/compatibility_requirements/java
