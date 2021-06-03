@@ -17,17 +17,39 @@ Datadog Continuous Integration (CI) Visibility brings together information about
 
 CI Visibility brings to bear the power of all your favorite Datadog tools like dashboards, alerts, and Watchdog, to communicate the health of your CI environment and to focus your efforts in improving your team's ability to deliver quality code every time.
 
-CI Visibility helps you troubleshoot test failures and broken builds, connecting the most pressing stoppages to production to the commits that caused them. With the same libraries you use to trace application performance with APM, you can instrument your development workflow code---integration tests and build pipelines---generating traces from the time a commit is pushed to your repository to when the pipeline is ready to be deployed, and similarly use the data aggregated over time to track trends in performance of tests and builds and to identify what's most important to fix.
+CI Visibility helps you troubleshoot test failures and broken builds, connecting the most pressing stoppages to production to the commits that caused them. With the same libraries you use to trace application performance with APM, you can instrument your development workflow code---integration tests and build pipelines---generating traces from the time a commit is pushed to your repository to when the pipeline is ready to be deployed, and use the data aggregated over time to track trends in performance of tests and builds and to identify what's most important to fix.
 
 ## Gain insights into your pipelines
 
-CI pipeline data is available in [Dashboards][1] and [Notebooks][2].
+The Datadog Pipelines page is useful for developers who keep an eye on the build pipeline for their service. It answers questions such as:
+- Is the pipeline for your service succeeding, especially on the production branch? 
+- If not, where does the problem originate?
+
+For build engineers, the Pipelines page provides:
+- An overview of the health of the whole build system, with aggregated stats for pipeline runs and branches. 
+- A window to quickly spotting and fixing immediate, urgent issues like broken pipelines to production. 
+- How each pipeline has run, over time, and with what results and trends. 
+- The breakdown of where time is spent in each build stage, over time, so you can focus your improvement efforts where it will make the biggest difference.
+
+CI pipeline data is available in [Dashboards][1] and [Notebooks][2], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 
 ## Gain insights into your tests
 
+If you're a developer, the Tests and Test Runs pages provide you with two kinds of information about your work: 
+
+- Low-level and immediate: 
+    - What tests are failing and why, with an emphasis on production test failures. 
+    - What your last commit's test results were. 
+    - The effect a branch will have on the time it takes to run your test suite, if you merge it to production. 
+    - The reliability of the results for a test run, or whether this test has a history of both passing and failing on the same commit.
+    - What tests you should update a test because they're flaky.
+
+- High-level accumulation and trends: 
+    - The effects that changed code, added tests, and increased complexity have on your test suite performance over time. 
+    - Which commits or branches introduced test suite slow-downs. 
+    - Whether tests are becoming more or less flaky and unreliable over time.
+
 Test execution data is also available in [Dashboards][1] and [Notebooks][2]. 
-
-
 
 ## Ready to start?
 
