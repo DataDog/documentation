@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/opsmatic/'
 draft: false
 git_integration_title: opsmatic
 has_logo: true
+integration_id: opsmatic
 integration_title: Opsmatic
 is_public: true
 kind: integration

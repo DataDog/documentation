@@ -6,6 +6,7 @@ aliases:
 control: 1.2.1
 disable_edit: true
 framework: cis-docker
+integration_id: docker
 kind: documentation
 rule_category:
   - インフラストラクチャーコンフィギュレーション

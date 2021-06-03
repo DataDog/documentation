@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/airbrake/'
 draft: false
 git_integration_title: airbrake
 has_logo: true
+integration_id: ''
 integration_title: Airbrake
 is_public: true
 kind: integration

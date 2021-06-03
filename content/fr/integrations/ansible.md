@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/ansible/'
 draft: false
 git_integration_title: ansible
 has_logo: true
+integration_id: ansible
 integration_title: Ansible
 is_public: true
 kind: integration

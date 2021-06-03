@@ -16,6 +16,7 @@ further_reading:
     text: 'Comment recueillir, personnaliser et centraliser des logs Python'
 git_integration_title: python
 has_logo: true
+integration_id: python
 integration_title: Python
 is_public: true
 kind: integration
