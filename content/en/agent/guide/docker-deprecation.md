@@ -21,6 +21,12 @@ Note that you may need to update your existing monitors, dashboards and SLOs bec
 {{% tab "Helm" %}}
 Set the path to your container runtime socket with the `criSocketPath` parameter in the [Helm chart][1].
 
+For example:
+
+```
+criSocketPath:  /var/run/containerd/containerd.sock
+```
+
 [1]: https://github.com/DataDog/helm-charts/blob/d8817b4401b75b1a064481da989c451633249ea9/charts/datadog/values.yaml#L262-L263
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
