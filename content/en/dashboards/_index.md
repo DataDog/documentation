@@ -99,7 +99,6 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 ## New dashboard
 
-<div class="alert alert-warning">The new dashboard functionality is in public beta.</div>
 
 To create a dashboard, click on the **New Dashboard +** button in the upper right. Enter a dashboard name and choose a layout option.
 
@@ -107,7 +106,7 @@ To create a dashboard, click on the **New Dashboard +** button in the upper righ
 
 ### Dashboard layout
 
-<div class="alert alert-warning">The dashboard layout functionality is in public beta.</div>
+<div class="alert alert-warning">The Dashboard layout is in public beta. Screenboards and Timeboards remain the same.</div>
 
 The Dashboard layout uses a flexible, grid-based system that combines the simplicity of Timeboards and the control of Screenboards. To understand the difference between layout options, consider the following:
 
@@ -125,9 +124,9 @@ The Dashboard layout uses a flexible, grid-based system that combines the simpli
 | Legends are optional                                              | Yes        | No (legends appear automatically based on graph size) | Yes          |
 
 
-#### High-Density Mode
+#### High-density mode
 
-High-Density Mode displays the top and bottom halves of a dashboard side-by-side for increased widget density. This mode turns on by default for large screens.
+High-density mode displays the top and bottom halves of a dashboard side-by-side for increased widget density. This mode turns on by default for large screens.
 
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:70%;">}}
 
