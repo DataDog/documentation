@@ -47,6 +47,8 @@ If you choose to silence monitors constrained by scope, click **Preview affected
 
 Set a one time downtime by entering the start date, time, and time zone. Optionally, set an end date and time.
 
+{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="downtime on alert"  style="width:80%;">}}
+
 {{% /tab %}}
 {{% tab "Recurring" %}}
 
@@ -55,6 +57,19 @@ Recurring downtimes are useful for recurring maintenance windows.
 Set a recurring downtime by entering the start date, time, time zone, repeat, and duration. Optionally, specify an end date or number of occurrences.
 
 When a single downtime of a recurring downtime ends, the single downtime is cancelled and a new downtime is created with the same constraints and updated start and end times. **Note**: The original creator is associated to all the newly created downtimes.
+
+{{< img src="monitors/downtimes/downtime_recurring.jpg" alt="downtime on alert"  style="width:80%;">}}
+
+RRULEs - or [recurrence rules][1] - are also available to define Downtimes schedule. [This official RRULE generator][2] might be helpful to generate such recurring rules.
+
+Use them to define downtimes on specific days of the month. For instance, on the third Monday of each month:
+
+{{< img src="monitors/downtimes/downtime_rrule.png" alt="downtime on alert"  style="width:80%;">}}
+
+**Note**: Attributes specifying the duration in RRULE are not supported (for example, `DTSTART`, `DTEND`, `DURATION`), see the RFC for the possible attributes. 
+
+[1]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[2]: https://icalendar.org/rrule-tool.html
 
 {{% /tab %}}
 {{< /tabs >}}
