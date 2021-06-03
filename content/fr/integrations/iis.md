@@ -8,7 +8,10 @@ assets:
   logs:
     source: iis
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[IIS] Anomalous amount of requests for site: {{site.name}}': assets/monitors/req.json
+    '[IIS] Increase of locked error per second for site: {{site.name}}': assets/monitors/lock.json
+    '[IIS] Increase of not found error per second for site: {{site.name}}': assets/monitors/err.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -55,18 +58,15 @@ Recueillez les métriques IIS agrégées par site ou sur l'ensemble vos sites. L
 
 Le check IIS est fourni avec l'Agent. Pour commencer à recueillir vos logs et métriques IIS, [installez l'Agent][2] sur vos serveurs IIS.
 
-{{< tabs >}}    
-{{% tab "Host" %}}  
-
 #### Host
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `iis.d/conf.yaml` dans le [dossier `conf.d` de l'Agent][1] à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir les données de vos sites IIS. Consultez le [fichier d'exemple iis.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `iis.d/conf.yaml` dans le [dossier `conf.d` de l'Agent][3] à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos données de site IIS. Consultez le [fichier d'exemple iis.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][4] pour commencer à envoyer vos métriques IIS à Datadog.
+2. [Redémarrez l'Agent][6] pour commencer à envoyer vos métriques IIS à Datadog.
 
 ##### Collecte de logs
 
@@ -86,45 +86,13 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
        source: iis
    ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple iis.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple iis.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][4].
-
-[1]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/windows/#agent-check-directory-structure
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
-
-#### Environnement conteneurisé
-
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
-
-##### Collecte de métriques
-
-| Paramètre            | Valeur                  |
-| -------------------- | ---------------------- |
-| `<NOM_INTÉGRATION>` | `iis`                  |
-| `<CONFIG_INIT>`      | vide ou `{}`          |
-| `<CONFIG_INSTANCE>`  | `{"host": "%%host%%"}` |
-
-##### Collecte de logs
-
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
-
-| Paramètre      | Valeur                                            |
-| -------------- | ------------------------------------------------ |
-| `<CONFIG_LOG>` | `{"source": "iis", "service": "<NOM_SERVICE>"}` |
-
-[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{% /tab %}}
-{{< /tabs >}}
+3. [Redémarrez l'Agent][6].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][3] et cherchez `iis` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][7] et cherchez `iis` dans la section Checks.
 
 ## Données collectées
 
@@ -143,10 +111,14 @@ L'Agent envoie ce check de service pour chaque site configuré dans `iis.yaml`. 
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
-
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/iis/images/iisgraph.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/fr/help/
+[3]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/windows/#agent-check-directory-structure
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/iis/metadata.csv
+[9]: https://docs.datadoghq.com/fr/help/

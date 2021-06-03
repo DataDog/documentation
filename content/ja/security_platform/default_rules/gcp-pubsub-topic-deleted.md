@@ -4,6 +4,7 @@ aliases:
   - /ja/security_monitoring/default_rules/f68-e1e-db8
   - /ja/security_monitoring/default_rules/gcp-pubsub-topic-deleted
 disable_edit: true
+integration_id: gcp.pubsub.topic
 kind: documentation
 rule_category:
   - ログの検出

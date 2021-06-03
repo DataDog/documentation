@@ -16,6 +16,7 @@ further_reading:
     text: 'Comment recueillir, personnaliser et analyser des logs PHP'
 git_integration_title: php
 has_logo: true
+integration_id: php
 integration_title: PHP
 is_public: true
 kind: integration

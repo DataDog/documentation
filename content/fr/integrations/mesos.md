@@ -49,31 +49,34 @@ Toutefois, vos métriques ne seront pas recueillies si l'API de votre master uti
 
 #### Collecte de logs
 
-L'Agent Datadog >6.0 recueille des logs à partir de vos conteneurs. Vous avez la possibilité de recueillir tous les logs de tous vos conteneurs ou de choisir les logs à recueillir en les filtrant par image de conteneur, étiquette de conteneur ou nom.
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-Ajoutez ces variables supplémentaires à la commande de lancement de l'Agent Datadog pour activer la collecte de logs :
+    ```yaml
+    logs_enabled: true
+    ```
 
-- `-e DD_LOGS_ENABLED=true` : l'ajout de cette variable avec la valeur `true` active la collecte de logs. L'Agent recherche alors les instructions relatives aux logs dans les fichiers de configuration ou les étiquettes de conteneur.
-- `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` : active la collecte de logs pour tous les conteneurs.
-- `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` : monte le répertoire utilisé par l'Agent pour stocker les pointeurs de chaque log de conteneur, lui permettant ainsi de déterminer ce qui a été envoyé à Datadog ou non.
+2. Ajoutez ce bloc de configuration à votre fichier `mesos_master.d/conf.yaml` pour commencer à recueillir vos logs Mesos :
 
-On obtient la commande suivante :
+    ```yaml
+    logs:
+      - type: file
+        path: /var/log/mesos/*
+        source: mesos
+    ```
 
-```shell
-docker run -d --name datadog-agent \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
-  -e DD_API_KEY= \
-  -e MESOS_MASTER=true \
-  -e MARATHON_URL=http://leader.mesos:8080 \
-  -e DD_LOGS_ENABLED=true \
-  -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-  datadog/agent:latest
-```
+    Modifiez la valeur du paramètre `path` en fonction de votre environnement, ou utilisez le stdout Docker standard :
 
-Utilisez la [fonction Autodiscovery][4] pour faire en sorte que les logs remplacent les attributs `service` et `source` : vous pourrez ainsi bénéficier de la configuration automatique de l'intégration.
+    ```yaml
+    logs:
+      - type: docker
+        source: mesos
+    ```
+
+    Consultez le [fichier d'exemple mesos_master.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][4].
+
+Consultez la [documentation de Datadog][5] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Kubernetes.
 
 ### Validation
 
@@ -96,18 +99,18 @@ Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API Master Me
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
-- [Installation de Datadog sur Mesos avec DC/OS][6]
+- [Installation de Datadog sur Mesos avec DC/OS][7]
 
 
 
 
 ## Intégration Mesos_slave
 
-![Dashboard Slave Mesos][7]
+![Dashboard Slave Mesos][8]
 
 ## Présentation
 
@@ -125,7 +128,7 @@ Ce check crée également un check de service pour chaque tâche d'exécuteur.
 
 ### Installation
 
-Suivez les instructions décrites dans notre [article de blog][6] pour installer l'Agent Datadog sur chaque nœud d'Agent Mesos via l'interface Web DC/OS.
+Suivez les instructions décrites dans notre [article de blog][7] (en anglais) pour installer l'Agent Datadog sur chaque nœud d'Agent Mesos via l'interface Web DC/OS.
 
 ### Configuration
 
@@ -139,7 +142,7 @@ Suivez les instructions décrites dans notre [article de blog][6] pour installer
 
 #### Marathon
 
-Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'interface Web Marathon ou en transmettant le JSON ci-dessous à l'URL de l'API. Vous devrez remplacer `<VOTRE_CLÉ_API_DATADOG>` par votre clé d'API, et le nombre d'instances par le nombre de nœuds slave sur votre cluster. De plus, vous devrez peut-être mettre à jour l'image Docker pour la faire correspondre à un tag plus récent. Pour obtenir la dernière version de l'image, accédez au [Docker Hub][8].
+Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'interface Web Marathon ou en transmettant le JSON ci-dessous à l'URL de l'API. Vous devrez remplacer `<VOTRE_CLÉ_API_DATADOG>` par votre clé d'API, et le nombre d'instances par le nombre de nœuds slave sur votre cluster. De plus, vous devrez peut-être mettre à jour l'image Docker pour la faire correspondre à un tag plus récent. Pour obtenir la dernière version de l'image, accédez au [Docker Hub][9].
 
 ```json
 {
@@ -184,7 +187,7 @@ Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'inte
       "privileged": false,
       "parameters": [
         { "key": "name", "value": "datadog-agent" },
-        { "key": "env", "value": "DD_API_KEY=" },
+        { "key": "env", "value": "DD_API_KEY=<VOTRE_CLÉ_API_DATADOG>" },
         { "key": "env", "value": "MESOS_SLAVE=true" }
       ],
       "forcePullImage": false
@@ -209,6 +212,37 @@ Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'inte
 
 Vous n'avez rien d'autre à faire après avoir installé l'Agent, sauf si vous souhaitez modifier la configuration du fichier `mesos_slave.d/conf.yaml` (pour ajouter le paramètre `disable_ssl_validation: true`, par exemple).
 
+#### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `mesos_slave.d/conf.yaml` pour commencer à recueillir vos logs Mesos :
+
+    ```yaml
+    logs:
+      - type: file
+        path: /var/log/mesos/*
+        source: mesos
+    ```
+
+     Modifiez la valeur du paramètre `path` en fonction de votre environnement, ou utilisez le stdout Docker standard :
+
+    ```yaml
+    logs:
+      - type: docker
+        source: mesos
+    ```
+
+    Consultez le [fichier d'exemple mesos_slave.d/conf.yaml][10] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][4].
+
+Consultez la [documentation de Datadog][5] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Kubernetes.
+
 ### Validation
 
 #### DC/OS
@@ -231,12 +265,10 @@ Le check Mesos-slave n'inclut aucun événement.
 
 ### Check de service
 
-`mesos_slave.can_connect` :
+**mesos_slave.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoint de métriques de slave Mesos. Si ce n'est pas le cas, renvoie `OK`.
 
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à l'endpoint des métriques de slave Mesos. Si ce n'est pas le cas, renvoie OK.
-
-`<nom_tâche_exécuteur>.ok` :
-
+**<executor_task_name>.ok** :<br>
 Le check mesos_slave crée un check de service pour chaque tâche d'exécuteur, en lui attribuant l'un des statuts suivants :
 
 |               |                                |
@@ -253,18 +285,20 @@ Le check mesos_slave crée un check de service pour chaque tâche d'exécuteur, 
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
-- [Installation de Datadog sur Mesos avec DC/OS][6]
+- [Installation de Datadog sur Mesos avec DC/OS][7]
 
 
 [1]: https://docs.datadoghq.com/fr/integrations/mesos/#mesos-slave-integration
 [2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_master/images/mesos_dashboard.png
 [3]: https://github.com/DataDog/integrations-core/blob/master/mesos_master/datadog_checks/mesos_master/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/logs/log_collection/docker/#option-2-autodiscovery
-[5]: https://docs.datadoghq.com/fr/help/
-[6]: https://www.datadoghq.com/blog/deploy-datadog-dcos
-[7]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_slave/images/mesos_dashboard.png
-[8]: https://hub.docker.com/r/datadog/agent/tags
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[6]: https://docs.datadoghq.com/fr/help/
+[7]: https://www.datadoghq.com/blog/deploy-datadog-dcos
+[8]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_slave/images/mesos_dashboard.png
+[9]: https://hub.docker.com/r/datadog/agent/tags
+[10]: https://github.com/DataDog/integrations-core/blob/master/mesos_slave/datadog_checks/mesos_slave/data/conf.yaml.example

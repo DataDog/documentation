@@ -19,6 +19,7 @@ further_reading:
     text: 'Comment recueillir, personnaliser et gérer les logs d''applications Rails'
 git_integration_title: ruby
 has_logo: true
+integration_id: ruby
 integration_title: Ruby
 is_public: true
 kind: integration

@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/fabric/'
 draft: false
 git_integration_title: fabric
 has_logo: true
+integration_id: fabric
 integration_title: Fabric
 is_public: true
 kind: integration

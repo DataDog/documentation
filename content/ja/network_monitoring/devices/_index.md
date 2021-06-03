@@ -18,21 +18,63 @@ further_reading:
 ---
 ## 概要
 
-Datadog ネットワークデバイスモニタリングは、SNMP プロトコルを使用して、ルーター、スイッチ、サーバー、ファイアウォールなどのネットワーク接続デバイスを可視化するように設計されています。
-
-任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、スループット、デバイスのアップ/ダウンなどのメトリクスを収集するように Datadog Agent を構成します。Datadog [ダッシュボード][1]でメトリクスをグラフ化するか、[モニター][2]を作成して、問題が発生したときにアラートを送信します。
-
 {{< img src="network_performance_monitoring/devices/datacenter_dashboard.jpg" alt="データセンター概要ダッシュボード" responsive="true" style="width:100%;">}}
 
-{{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
-    {{< nextlink href="network_performance_monitoring/devices/setup" >}}<u>セットアップ</u>: ネットワークデバイスデータを収集するように Agent を構成します。{{< /nextlink >}}
-    {{< nextlink href="network_performance_monitoring/devices/profiles" >}}<u>プロファイル</u>: デバイスで使用するプロファイルを設定します。{{< /nextlink >}}
-    {{< nextlink href="network_performance_monitoring/devices/data" >}}<u>データ収集</u>: 収集されたメトリクス、イベント、サービスチェックを表示します。{{< /nextlink >}}
-{{< /whatsnext >}}
+ネットワークデバイスモニタリングは、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよびバーチャルのネットワークデバイスを可視化するように設計されています。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数、デバイスのアップ/ダウンなどのメトリクスを迅速に収集します。
+
+## はじめに
+
+1. Datadog Agent をインストールします。
+2. [個々のデバイスの監視][1]または[デバイスのオートディスカバリー][2]のいずれかで、SNMP インテグレーションを構成します。
+3. Datadog のすぐに使えるダッシュボードで収集されたメトリクスを表示します。
+    - [監視対象のデバイス一覧][3]
+    - [すべてのインターフェイスのパフォーマンス全体][4]
+4. [SNMP メトリクス][5]の積極的な監視で問題が発生する前に把握します。
+
+## サポートされるデバイス
+
+### 一般的なプロファイル
+
+一般的なプロファイルはベンダープロファイルでサポートされないデバイスのメトリクスを収集します。メトリクスには、TCP、UDP、IP の他、帯域幅使用率や送受信量などのインターフェイスメトリクスが含まれます。
+
+### ベンダープロファイル
+
+以下のベンダーのデバイスは、専用のプロファイルでサポートされます。ベンダー/デバイスの種類がサポートされながら、特定のモデルがサポートされていない場合は、[よくあるご質問][6]を参照してください。
+
+- Cisco Catalyst
+- Cisco ASA
+- Cisco CSR 1000v
+- Cisco ISR 4431
+- Cisco Nexus
+- Cisco ICM
+- Cisco UC Virtual Machines 
+- Arista
+- Aruba
+- Checkpoint Firewall
+- Chatsworth PDU
+- APC UPS
+- F5 Big IP
+- Fortinet FortiGate 
+- HP iLO
+- HP Proliant
+- Dell iDRAC
+- EMC Isilon
+- Juniper EX シリーズ
+- Juniper MX シリーズ
+- Juniper SRX
+- Meraki Cloud
+- Meraki On-Prem
+- NetApp
+- Palo Alto
+
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards
-[2]: /ja/monitors/monitor_types
+[1]: /ja/network_monitoring/devices/setup/#monitoring-individual-devices
+[2]: /ja/network_monitoring/devices/setup/#autodiscovery
+[3]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
+[4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
+[5]: /ja/monitors/monitor_types/metric/
+[6]: /ja/network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported

@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/opsgenie/'
 draft: false
 git_integration_title: opsgenie
 has_logo: true
+integration_id: opsgenie
 integration_title: OpsGenie
 is_public: true
 kind: インテグレーション
