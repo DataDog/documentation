@@ -54,7 +54,7 @@ To get a flare from each container, run the following commands:
 ### Agent
 
 ```bash
-kubectl exec -it <agent-pod-name> -c agent -- agent flare <case-id>
+kubectl exec -it <AGENT_POD_NAME> -c agent -- agent flare <CASE_ID>
 ```
 
 ### Process Agent
@@ -81,6 +81,7 @@ kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
 [2]: /agent/basic_agent_usage/windows/#agent-v6
 [3]: /agent/faq/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
+[5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -111,6 +112,20 @@ kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## ECS Fargate
+
+When using ECS Fargate platform v1.4.0, ECS tasks and services can be configured to allow access to running Linux containers by enabling [Amazon ECS Exec][5]. Once configured, run the following command to send a flare:
+
+```bash
+aws ecs execute-command --cluster <CLUSTER_NAME> \
+    --task <TASK_ID> \
+    --container datadog-agent \
+    --interactive \
+    --command "agent flare <CASE_ID>"
+```
+
+**Note:** ECS Exec can only be enabled for new tasks. Existing tasks need to be recreated in order to use ECS Exec.
 
 ## Manual submission
 
