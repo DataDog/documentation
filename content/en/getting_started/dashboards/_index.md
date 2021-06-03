@@ -36,7 +36,7 @@ If you haven't already, create a [Datadog account][1]. Install the Agent on a ho
 
 ## Plan
 
-Decide if your dashboard will be a timeboard (all graphs on the same time scale) or screenboard (wider variety of widgets, different time scales). Read more about [timeboards and screenboards][2] if you're not sure.
+Determine the purpose of the dashboard you’re creating. A dashboard can help you and your teammates focus on the right work. A team dashboard reminds you what’s high priority, what needs attention now, and what you’re succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need that they often have to dig for. SLO and SLI details make for an excellent team dashboard.
 
 Also, determine the purpose of the dashboard you're creating. A dashboard can help you and your teammates focus on the right work. A _team dashboard_ reminds you what's high priority, what needs attention now, and what you're succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details make for an excellent team dashboard.
 
@@ -66,19 +66,19 @@ A common way to start a dashboard is by encountering a similar dashboard already
 
 ## Learn more about metrics
 
-Through integrations, Datadog collects [metrics][3] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][4] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs. 
+Through integrations, Datadog collects [metrics][2] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][3] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs. 
 
-For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][5] section of the AWS S3 integration README to see its description: `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
+For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][4] section of the AWS S3 integration README to see its description: `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
 
 ## Add widgets and refine what they show
 
-After you've selected a few metrics to add to your dashboard, experiment with various [widget types][6], [queries][7], [functions][8], and [aggregation approaches][9], to display the data in ways that best answer the questions you have. 
+After you've selected a few metrics to add to your dashboard, experiment with various [widget types][5], [queries][6], [functions][7], and [aggregation approaches][8], to display the data in ways that best answer the questions you have. 
 
-By specifying Template variables, you can make one dashboard answer questions for a selection of scenarios. For example, you can create a time graph that shows latency metrics for whichever data center geography the user selects from the dashboard's variables drop-down, or for all of them together. For more information, see [Template Variables][10].
+By specifying Template variables, you can make one dashboard answer questions for a selection of scenarios. For example, you can create a time graph that shows latency metrics for whichever data center geography the user selects from the dashboard's variables drop-down, or for all of them together. For more information, see [Template Variables][9].
 
-You can make graphs easier to read by adjusting Y-axis ranges, colors, or legends, or by adding markers and event overlays. See the [Dashboards documentation][11] for all the ways you can customize and refine [timeseries][12] and [other widgets][6].
+You can make graphs easier to read by adjusting Y-axis ranges, colors, or legends, or by adding markers and event overlays. See the [Dashboards documentation][10] for all the ways you can customize and refine [timeseries][11] and [other widgets][5].
 
-For more details and examples of these techniques, sign up for the online learning course [Building Better Dashboards][13].
+For more details and examples of these techniques, sign up for the online learning course [Building Better Dashboards][12].
 
 ## Try out other widgets
 
@@ -94,7 +94,7 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
  - **Service Level Objectives (SLO)**: Show team performance against goals with an SLO summary widget, and group it additional widgets that show details for SLI metrics.
  - **Distributions**: Show, for example, a histogram of number of different types of events in a containerized environment, the number of critical errors in each service, website flow (number of users getting to page 2, page 3, page 4), or latency percentile buckets.
 
-See the [Widgets documentation][6] for more information and examples of setting up these graphs.
+See the [Widgets documentation][5] for more information and examples of setting up these graphs.
 
 ## Organize, link, and drill down
 
@@ -112,30 +112,29 @@ There are two ways to create links from a dashboard to any target URL:
 
 Click **Generate Public URL** in a dashboard's Settings (gear) menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account.
 
-Integrate with your team communications by using the [Slack integration][14] to import dashboards and other Datadog features, such as monitors and incidents, into a Slack channel.
+Integrate with your team communications by using the [Slack integration][13] to import dashboards and other Datadog features, such as monitors and incidents, into a Slack channel.
 
 ### Create multiple dashboards quickly
 
 Every dashboard has a JSON representation that you can copy or export from the Settings menu. Each widget on the dashboard also has a JSON definition, which you can see and edit by opening the widget editor (pencil icon) and clicking the JSON tab under **Graph your data**.
 
-Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][15], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
+Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][14], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/
-[2]: /dashboards/#screenboard-vs-timeboard
-[3]: /metrics/introduction/
-[4]: /metrics/explorer/
-[5]: /integrations/amazon_s3/#data-collected
-[6]: /dashboards/widgets/
-[7]: /dashboards/querying/
-[8]: /dashboards/functions/
-[9]: /metrics/distributions/
-[10]: /dashboards/template_variables/
-[11]: /dashboards/
-[12]: /dashboards/widgets/timeseries/
-[13]: https://learn.datadoghq.com/enrol/index.php?id=8
-[14]: /integrations/slack/
-[15]: /api/v1/dashboards/
+[2]: /metrics/introduction/
+[3]: /metrics/explorer/
+[4]: /integrations/amazon_s3/#data-collected
+[5]: /dashboards/widgets/
+[6]: /dashboards/querying/
+[7]: /dashboards/functions/
+[8]: /metrics/distributions/
+[9]: /dashboards/template_variables/
+[10]: /dashboards/
+[11]: /dashboards/widgets/timeseries/
+[12]: https://learn.datadoghq.com/enrol/index.php?id=8
+[13]: /integrations/slack/
+[14]: /api/v1/dashboards/
