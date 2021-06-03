@@ -19,6 +19,8 @@ With version 7.27+ of the Datadog Agent, the Agent automatically detects the env
 
 **If you are using Agent < v7.26, then you will need to specify your container runtime socket path:**
 
+Note that you may need to update your existing monitors, dashboards and SLOs because metrics names will change—for example, from `docker.*` to `containerd.*`.
+
 {{< tabs >}}
 {{% tab "Helm" %}}
 Set the path to your container runtime socket with the `criSocketPath` parameter in the [Helm chart][1].
