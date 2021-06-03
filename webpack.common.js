@@ -90,40 +90,6 @@ const commonConfig = env => {
                         }
                     ]
                 }
-                // {
-                //     test: /\.(sa|sc|c)ss$/,
-                //     exclude: /node_modules/,
-                //     use: [
-                //         {
-                //             loader: 'style-loader',
-                //             options: {
-                //                 sourceMap: true
-                //             }
-                //         },
-                //         {
-                //             loader: MiniCssExtractPlugin.loader
-                //         },
-                //         {
-                //             loader: 'css-loader',
-                //             options: {
-                //                 sourceMap: true,
-                //                 url: false
-                //             }
-                //         },
-                //         {
-                //             loader: 'postcss-loader',
-                //             options: {
-                //                 sourceMap: true
-                //             }
-                //         },
-                //         {
-                //             loader: 'sass-loader',
-                //             options: {
-                //                 sourceMap: true
-                //             }
-                //         }
-                //     ]
-                // }
             ]
         },
 
