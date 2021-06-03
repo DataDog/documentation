@@ -168,7 +168,7 @@ body > header {
                 // product menu
                 &.product-menu {
                     column-count: 2;
-                    height: 330px;
+                    height: 370px;
                     column-fill: auto;
 
                     img.menu-icon {
@@ -182,7 +182,7 @@ body > header {
 
                     @include media-breakpoint-up(lg) {
                         width: 850px;
-                        
+
                         &:lang(ja) {
                             width: 800px;
                         }
