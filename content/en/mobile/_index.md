@@ -48,7 +48,6 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 
 If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][3]
 
-
 ## Monitors
 
 {{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
