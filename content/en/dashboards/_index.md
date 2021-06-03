@@ -110,7 +110,7 @@ To create a dashboard, click on the **New Dashboard +** button in the upper righ
 
 The Dashboard layout uses a flexible, grid-based system that combines the simplicity of Timeboards and the control of Screenboards. To understand the difference between layout options, consider the following:
 
-#### Dashboards, Timeboards, and Screenboards
+#### Dashboards, timeboards, and screenboards
  
 |                                                                   | Dashboards | Timeboards                                            | Screenboards |
 |-------------------------------------------------------------------|------------|-------------------------------------------------------|--------------|
