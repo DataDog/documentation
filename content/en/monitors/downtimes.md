@@ -64,7 +64,7 @@ RRULEs - or [recurrence rules][1] - are also available to define Downtimes sched
 
 Use them to define downtimes on specific days of the month. For instance, on the third Monday of each month:
 
-{{< img src="monitors/downtimes/downtime_rrule.png" alt="downtime on alert"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_rrule.jpg" alt="downtime on alert"  style="width:80%;">}}
 
 **Note**: Attributes specifying the duration in RRULE are not supported (for example, `DTSTART`, `DTEND`, `DURATION`), see the RFC for the possible attributes. 
 
