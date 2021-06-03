@@ -1,6 +1,7 @@
 ---
 categories:
-  - Collaboration
+  - collaboration
+  - notification
 ddtype: crawler
 dependencies: []
 description: "Soyez informé des événements et des alertes Datadog dans Microsoft\_Teams."
@@ -8,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/microsoft_teams/'
 draft: false
 git_integration_title: microsoft_teams
 has_logo: true
+integration_id: ''
 integration_title: "Microsoft\_Teams"
 is_public: true
 kind: integration
@@ -24,7 +26,7 @@ Intégrez Microsoft Teams pour :
 - Soyez informé des événements et des alertes Datadog dans Microsoft Teams.
 - Partager des messages et des graphiques avec votre équipe Microsoft Teams
 
-## Implémentation
+## Configuration
 
 Pour intégrer Datadog à un canal Microsoft Teams :
 

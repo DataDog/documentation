@@ -32,7 +32,11 @@ supported_os:
 ---
 ## Présentation
 
-Configurez l'extraction de métriques custom à partir de n'importe quel endpoint Prometheus. **Remarque** : Datadog vous conseille d'utiliser le [check OpenMetrics][1] du fait de son efficacité accrue et de sa prise en charge complète du format texte Prometheus. N'utilisez le check Prometheus que lorsque l'endpoint de métriques ne prend pas en charge le format texte.
+Connectez-vous à Prometheus pour :
+- Extraire des métriques custom depuis des endpoints Prometheus
+- Consulter des alertes Prometheus Alertmanager dans votre flux d'événements Datadog
+
+**Remarque :** nous vous conseillons d'utiliser le [check OpenMetrics][1] du fait de son efficacité accrue et de sa prise en charge complète du format texte Prometheus. N'utilisez le check Prometheus que lorsque l'endpoint de métriques ne prend pas en charge un format texte.
 
 <div class="alert alert-warning">
 Toutes les métriques récupérées par cette intégration sont considérées comme étant des <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métriques custom</a>.
@@ -54,7 +58,7 @@ Modifiez le fichier `prometheus.d/conf.yaml` pour récupérer des métriques à 
 
 Chaque instance est au minimum composée des paramètres suivants :
 
-| Paramètre          | Description                                                                                                         |
+| Paramètre          | Rôle                                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `prometheus_url` | Une URL qui indique l'itinéraire des métriques (**remarque :** doit être unique)                                                    |
 | `namespace`      | Cet espace de nommage est ajouté en préfixe à toutes les métriques (pour éviter les conflits entre les noms de métriques)                                        |
@@ -82,11 +86,28 @@ Remarque : les données de compartiment d'une métrique histogram Prometheus `<
 
 ### Événements
 
-Le check Prometheus n'inclut aucun événement.
+Les alertes Prometheus Alertmanager sont automatiquement envoyées à votre flux d'événements Datadog en tenant compte de la configuration des webhooks.
 
 ### Checks de service
 
 Le check Prometheus n'inclut aucun check de service.
+
+## Prometheus Alertmanager
+Envoyez des alertes Prometheus Alertmanager dans le flux d'événements.
+
+### Configuration
+1. Ajoutez ce qui suit au fichier de configuration Alertmanager `alertmanager.yml` :
+```
+receivers:
+- name: datadog
+  webhook_configs: 
+  - send_resolved: true
+    url: https://app.datadoghq.com/intake/webhook/prometheus?api_key=<CLÉ_API_DATADOG>
+```
+2. Redémarrez les services Prometheus et Alertmanager.
+```
+sudo systemctl restart prometheus.service alertmanager.service
+```
 
 ## Dépannage
 
@@ -97,6 +118,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 - [Prometheus rejoint la liste des services pris en charge par l'Agent Datadog 6][7]
 - [Configurer un check Prometheus][8]
 - [Écrire un check Prometheus personnalisé][9]
+- [Documentation sur Prometheus Alertmanager] [11]
 
 [1]: https://docs.datadoghq.com/fr/integrations/openmetrics/
 [2]: https://docs.datadoghq.com/fr/getting_started/integrations/prometheus/

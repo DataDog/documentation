@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/campfire/'
 draft: false
 git_integration_title: campfire
 has_logo: true
+integration_id: campfire
 integration_title: Campfire
 is_public: true
 kind: インテグレーション

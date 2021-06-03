@@ -23,7 +23,7 @@
 "maintainer": "integrations@rapdev.io"
 "manifest_version": "1.0.0"
 "metric_prefix": "rapdev.solaris_agent."
-"metric_to_check": ""
+"metric_to_check": "datadog.marketplace.rapdev.solaris_agent"
 "name": "rapdev_solaris_agent"
 "pricing":
 - "billing_type": tag_count

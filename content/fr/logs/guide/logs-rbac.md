@@ -4,18 +4,18 @@ aliases:
   - /fr/logs/guide/restrict-access-to-log-events-with-restriction-queries
 kind: guide
 further_reading:
+  - link: /logs/guide/logs-rbac-permissions/
+    tag: Documentation
+    text: En savoir plus sur les autorisations RBAC pour les logs
   - link: /logs/explorer/
     tag: Documentation
     text: "En savoir plus sur la vue Log\_Explorer"
-  - link: /logs/explorer/patterns/
+  - link: '/logs/explorer/#patterns'
     tag: Documentation
     text: Se familiariser avec la vue Log Pattern
   - link: /logs/live_tail/
     tag: Documentation
     text: Explorer la fonctionnalité Live Tail
-  - link: /logs/logs_to_metrics/
-    tag: Documentation
-    text: Découvrir comment générer des métriques à partir de logs ingérés
 ---
 ## Présentation
 
@@ -27,7 +27,7 @@ Ce guide fournit une méthodologie pour le développement de rôles Datadog pers
 La création et la modification de rôles personnalisés sont des fonctionnalités que vous devez activer. <a href="/help">Contactez l'assistance Datadog</a> pour activer ces fonctionnalités sur votre compte.
 </div>
 
-### L'équipe « ACME »
+### Plusieurs équipes
 
 Supposons que votre organisation se compose de plusieurs équipes. L'une d'entre elles est l'équipe **ACME** (Applicative Component Making Errors), dont les membres traitent les logs ACME à des fins de dépannage et d'audit.
 
@@ -40,7 +40,7 @@ Ce guide suppose également que l'équipe ACME comprend deux catégories d'utili
 
 Bien que ce guide se concentre sur l'équipe ACME, cette configuration peut être appliquée à toutes les autres équipes de votre organisation. Les membres de l'équipe ACME **peuvent** également faire partie d'autres équipes au sein de votre organisation. Les autorisations sont cumulatives dans Datadog, et les utilisateurs qui font partie de plusieurs équipes bénéficient de l'ensemble des autorisations octroyées par chacune des équipes dont ils sont membres.
 
-### Rôle admin Datadog
+### Le rôle d'administrateur Datadog
 
 Ce guide vous explique comment vous pouvez, en tant qu'administrateur Datadog, mettre en place un environnement sécurisé pour que les membres de l'équipe ACME puissent interagir avec leurs logs (sans interférer avec les logs des autres équipes) tout en limitant l'accès à ces logs aux utilisateurs ACME.
 
@@ -193,14 +193,12 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ID_RÔLE>/permissions" -
 
 ```
 
-
 [1]: /fr/api/v2/roles/#create-role
 [2]: /fr/api/v2/roles/#list-roles
 [3]: /fr/api/v2/roles/#grant-permission-to-a-role
 [4]: /fr/api/v2/roles/#revoke-permission
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ### Associer un utilisateur à un rôle
 
@@ -213,7 +211,6 @@ Depuis la [section Team][1] de Datadog, accédez à l'onglet User. Choisissez un
 
 {{< img src="logs/guide/rbac/assign_user.png" alt="Supprimer une invitation dans la vue sous forme de tableau"  style="width:60%;">}}
 {{< img src="logs/guide/rbac/assign_user2.png" alt="Supprimer une invitation dans la vue sous forme de tableau"  style="width:60%;">}}
-
 
 [1]: https://app.datadoghq.com/access/users
 [2]: /fr/account_management/users/
@@ -254,13 +251,10 @@ Vérifiez si l'utilisateur dispose déjà de rôles et notez les identifiants de
 curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ID_RÔLE>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" -d '{"data": {"type":"users","id":"<ID_UTILISATEUR>"}}'
 ```
 
-
-
 [1]: /fr/api/v2/users/#list-all-users
 [2]: /fr/api/v2/roles/#add-a-user-to-a-role
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Restreindre l'accès aux logs
 
@@ -274,7 +268,6 @@ Cette section explique comment :
 2. Associer cette requête de restriction aux rôles ACME
 
 **Remarque** : **seule une** requête de restriction peut être associée à un rôle. Si vous associez une requête de restriction à un rôle, toute requête de restriction déjà associée à ce rôle sera supprimée.
-
 
 {{< tabs >}}
 {{% tab "Interface utilisateur" %}}
@@ -366,7 +359,7 @@ Créez un ou plusieurs [index][15] pour les logs `team:acme`. La création de pl
 
 {{< img src="logs/guide/rbac/indexes.png" alt="Index ACME"  style="width:60%;">}}
 
-### Archives de Logs
+### Archives de logs
 
 #### Lire les archives
 

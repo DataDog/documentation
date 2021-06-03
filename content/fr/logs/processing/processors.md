@@ -624,9 +624,6 @@ Un exemple de parser GeoIP se trouve ci-dessous. Il extrait la géolocalisation 
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="Exemple de GeoIP" style="width:60%;">}}
 
-**Remarque** : ce processeur utilise la base de données GeoLite2 créée par [MaxMind][1].
-
-[1]: https://www.maxmind.com
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -661,7 +658,7 @@ Ce processeur peut par exemple servir à mapper un ID de service interne à un n
 Il peut également vérifier si une adresse MAC qui vient d'essayer de se connecter à votre environnement de production fait partie d'une liste de machines volées.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "Interface utilisateur" %}}
 
 {{< img src="logs/processing/processors/lookup_processor.png" alt="Processeur de correspondances"  style="width:80%;">}}
 
@@ -716,7 +713,7 @@ Il existe deux façons d'améliorer la corrélation entre les traces et les logs
 2. Utilisez le processeur de remappage de traces pour définir un attribut de log comme son ID de trace associé.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{% tab "Interface utilisateur" %}}
 
 Définissez le processeur de remappage de traces depuis la [page de configuration des logs Datadog][1]. Entrez le chemin de l'attribut ID de trace dans le carré du processeur, comme suit :
 
