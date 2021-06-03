@@ -60,9 +60,9 @@ When a single downtime of a recurring downtime ends, the single downtime is canc
 
 {{< img src="monitors/downtimes/downtime_recurring.jpg" alt="downtime on alert"  style="width:80%;">}}
 
-RRULEs - or [recurrence rules][1] - are also available to define Downtimes schedule. [This official RRULE generator][2] might be helpful to generate such recurring rules.
+Use RRULEs - or [recurrence rules][1] - to define downtimes schedules. Use the official [RRULE generator][2] as a tool to generate recurring rules.
 
-Use them to define downtimes on specific days of the month. For instance, on the third Monday of each month:
+A common use case is to use RRULES to define downtimes on specific days of the month. For example, on the third Monday of each month:
 
 {{< img src="monitors/downtimes/downtime_rrule.jpg" alt="downtime on alert"  style="width:80%;">}}
 
