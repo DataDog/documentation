@@ -87,12 +87,6 @@ To view only the usage that will count toward your bill, you can switch to the "
 
 The individual usage can be downloaded as a CSV file.
 
-### Long-term trends
-
-This tab shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill.
-
-This information can be downloaded as a CSV file.
-
 ## Usage attribution
 
 The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
