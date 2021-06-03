@@ -97,7 +97,7 @@ View your [monitor saved views][13] from your home screen with Datadog widgets. 
 - Long press on the home screen.
 - Tap the “+” button on the top left corner of the screen.
 - Search for "Datadog" widgets.
-- Select your prefered size (medium allows up to 3 and large up to 6).
+- Select your prefered size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
 - Place the widget in your desired, onscreen location.
 
 
