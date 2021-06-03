@@ -1,10 +1,6 @@
 ---
-title: Docker Deprecation
+title: Docker Deprecation in Kubernetes
 kind: documentation
-further_reading:
-- link: "/agent/autodiscovery/"
-  tag: "Documentation"
-  text: "Autodiscovery"
 ---
 
 Kubernetes is deprecating Docker as a runtime starting after version 1.20, and some cloud providers have deprecated Docker in their images. 
