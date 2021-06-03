@@ -4,9 +4,9 @@
 {{ $outputStyles := "" }}
 
 {{ if $isLocalServer }}
-    {{ $outputStyles = resources.Get "styles/style.scss" | toCSS $options }}
+    {{ $outputStyles = resources.Get $inputStyleFile | toCSS $options }}
 {{ else }}
-    {{ $outputStyles = resources.Get "styles/style.scss" | toCSS $options | minify | fingerprint }}
+    {{ $outputStyles = resources.Get $inputStyleFile | toCSS $options | minify | fingerprint }}
 {{ end }}
 
 <link rel="stylesheet" href="{{ $outputStyles.Permalink }}">
