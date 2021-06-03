@@ -1042,10 +1042,6 @@
     "description": "Vérifiez si la clé d'API (et non la clé d'application) est valide. Si elle n'est pas valide, un message d’erreur 403 est renvoyé.",
     "summary": "Valider la clé d'API"
   },
-  "ResolveMonitor": {
-    "description": "Résolvez un monitor.",
-    "summary": "Résoudre un monitor",
-    "request_description": "Tableau des groupes à résoudre pour un ID de monitor donné, p. ex. : `{\"id_monitor\": \"groupe_à_résoudre\"}`.\nIl est possible de spécifier plusieurs groupes par monitor, p. ex. : `resolve: [{\"id_monitor\": \"groupe_1\"}, {\"id_monitor\": \"groupe_2\"}]`.\nIl est également possible de résoudre tous les groupes déclenchés à l'aide du pseudo-groupe `ALL_GROUPS` :`resolve: [{\"id_monitor\": \"ALL_GROUPS\"}]`."},
   "SubmitTraces": {
     "description": "L'APM de Datadog vous permet de recueillir des métriques de performance en traçant votre code pour identifier les éléments lents ou inefficaces de votre application.\n\nLes données de tracing sont envoyées à l'Agent Datadog via une API HTTP. Nous proposons plusieurs [bibliothèques officielles](https://docs.datadoghq.com/tracing/#instrumenter-votre-application) afin de simplifier l'envoi de métriques à l'Agent Datadog. Toutefois, vous pouvez interagir directement avec l'API pour instrumenter les applications qui ne peuvent pas utiliser les bibliothèques ou qui sont écrites dans des langages qui ne possèdent pas encore de bibliothèque de tracing officielle.",
     "summary": "Envoyer des traces",
