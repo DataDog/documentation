@@ -24,7 +24,7 @@ main_left:
   - identifier: infrastructure
     name: Infrastructure Monitoring
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/host-map-2.svg' alt='infra icon'>"
-    url: "product/infrastructure-monitoring/"
+    url: "https://www.datadoghq.com/product/infrastructure-monitoring/"
     weight: 4
     parent: product
   - identifier: logs
