@@ -17,7 +17,6 @@ Certain product tabs also contain additional tools:
 
 * Custom Metrics Tab: Top Custom Metrics
 * Log Management Tab: Logs Usage by Index
-hi
 
 ## Month-to-date summary
 
@@ -59,7 +58,7 @@ Month-to-date usage of each product is calculated as follows:
 | Synthetic Browser Tests  | Shows the sum of all Synthetic browser tests over all hours in the current month.                                           |
 | RUM Sessions             | Shows the sum of all distinct RUM sessions over all hours in the current month.                                             |
 | Incident Management      | Shows number of unique active users to date in the selected month who interacted with incident lifecycle and timelines.     |
-| IOT Devices              | Shows the 99th percentile of all distinct IoT devices over all hours in the current month.                                  |
+| IoT Devices              | Shows the 99th percentile of all distinct IoT devices over all hours in the current month.                                  |
 
 ## Overall usage
 
@@ -89,7 +88,7 @@ In the Custom Metrics tab, this table lists the following information about your
 * Max custom metrics per hour
 * The metric's contribution percentage to the overall custom metrics usage
 
-If you are looking for more details on your metrics, you can access a metric summary. This can be viewed by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
+If you are looking for more details on your metrics, you can access the [Metric Summary](https://docs.datadoghq.com/metrics/summary/#overview). This can be viewed by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
 
 This data can be downloaded as a CSV file.
 
@@ -97,7 +96,7 @@ This data can be downloaded as a CSV file.
 
 ## Logs usage by index
 
-In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. The following information is provided:
+In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs](https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview). The following information is provided:
 
 * Index name
 * Retention period in days
